@@ -19,6 +19,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <NuGetPackageImportStamp>8376a9c9</NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +40,64 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.Owin.3.1.0\lib\net45\Autofac.Integration.Mvc.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.3.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.0.0.29988, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -48,6 +107,38 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -55,8 +146,199 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\govuk\images\apple-touch-icon-120x120.png" />
+    <Content Include="Content\govuk\images\apple-touch-icon-152x152.png" />
+    <Content Include="Content\govuk\images\apple-touch-icon-60x60.png" />
+    <Content Include="Content\govuk\images\apple-touch-icon-76x76.png" />
+    <Content Include="Content\govuk\images\favicon.ico" />
+    <Content Include="Content\govuk\images\gov.uk_logotype_crown.png" />
+    <Content Include="Content\govuk\images\gov.uk_logotype_crown_invert.png" />
+    <Content Include="Content\govuk\images\gov.uk_logotype_crown_invert_trans.png" />
+    <Content Include="Content\govuk\images\opengraph-image.png" />
+    <Content Include="Content\govuk\stylesheets\external-links\external-link-24x24.png" />
+    <Content Include="Content\govuk\stylesheets\external-links\external-link-black-12x12.png" />
+    <Content Include="Content\govuk\stylesheets\external-links\external-link-black-24x24.png" />
+    <Content Include="Content\govuk\stylesheets\external-links\external-link.png" />
+    <Content Include="Content\govuk\stylesheets\fonts-ie8.css" />
+    <Content Include="Content\govuk\stylesheets\fonts.css" />
+    <Content Include="Content\govuk\stylesheets\govuk-template-ie6.css" />
+    <Content Include="Content\govuk\stylesheets\govuk-template-ie7.css" />
+    <Content Include="Content\govuk\stylesheets\govuk-template-ie8.css" />
+    <Content Include="Content\govuk\stylesheets\govuk-template-print.css" />
+    <Content Include="Content\govuk\stylesheets\govuk-template.css" />
+    <Content Include="Content\govuk\stylesheets\images\close.png" />
+    <Content Include="Content\govuk\stylesheets\images\govuk-crest-2x.png" />
+    <Content Include="Content\govuk\stylesheets\images\govuk-crest-ie.png" />
+    <Content Include="Content\govuk\stylesheets\images\govuk-crest.png" />
+    <Content Include="Content\govuk\stylesheets\images\open-government-licence.png" />
+    <Content Include="Content\govuk\stylesheets\images\open-government-licence_2x.png" />
+    <Content Include="Content\govuk_toolkit\images\accordian-arrow-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\accordian-arrow.png" />
+    <Content Include="Content\govuk_toolkit\images\arrow-sprite.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\coastguard_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\coastguard_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\coastguard_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\coastguard_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\coastguard_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\coastguard_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\org_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\org_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\org_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\org_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\org_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\org_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\portcullis_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\portcullis_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\portcullis_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\portcullis_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\portcullis_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\portcullis_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\so_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\so_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\so_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\so_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\so_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\so_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukho_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukho_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukho_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukho_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukho_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\ukho_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_13px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_13px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_18px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_18px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_27px.png" />
+    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_27px_x2.png" />
+    <Content Include="Content\govuk_toolkit\images\external-links\external-link-24x24.png" />
+    <Content Include="Content\govuk_toolkit\images\external-links\external-link-black-12x12.png" />
+    <Content Include="Content\govuk_toolkit\images\external-links\external-link-black-24x24.png" />
+    <Content Include="Content\govuk_toolkit\images\external-links\external-link.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-calendar-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-calendar.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-file-download-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-file-download.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-important-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-important.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-information-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-information.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-locator-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-locator.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-pointer-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-pointer-black-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-pointer-black.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-pointer-indexed.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-pointer.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-search-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-search.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-1-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-1.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-10-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-10.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-11-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-11.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-12-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-12.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-13-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-13.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-14-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-14.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-2-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-2.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-3-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-3.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-4-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-4.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-5-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-5.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-6-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-6.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-7-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-7.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-8-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-8.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-9-2x.png" />
+    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-9.png" />
+    <Content Include="Content\govuk_toolkit\images\player-icon-forward.png" />
+    <Content Include="Content\govuk_toolkit\images\player-icon-pause.png" />
+    <Content Include="Content\govuk_toolkit\images\player-icon-play.png" />
+    <Content Include="Content\govuk_toolkit\images\player-icon-rewind.png" />
+    <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
+    <Content Include="packages.config" />
+    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_media-player.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_buttons.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_url-helpers.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_typography.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_shims.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_measurements.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_grid_layout.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_font_stack.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_device-pixels.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_css3.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_conditionals.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\.gitkeep" />
+    <Content Include="Scripts\govuk\govuk-template.js" />
+    <Content Include="Scripts\govuk\ie.js" />
+    <Content Include="Scripts\govuk\vendor\goog\webfont-debug.js" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTATabularNumbers-Light.woff" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTATabularNumbers-Light.eot" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTATabularNumbers-Bold.woff" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTATabularNumbers-Bold.eot" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTA-Light-20130221.woff" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTA-Light-20130221.eot" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTA-Bold-20130221.woff" />
+    <Content Include="Content\govuk\stylesheets\fonts\NTA-Bold-20130221.eot" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -65,6 +347,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\govuk_toolkit\govuk\multivariate-test.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\primary-links.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\selection-buttons.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\stick-at-top-when-scrolling.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\stop-scrolling-at-footer.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk_toolkit.js" />
+    <Content Include="Scripts\govuk_toolkit\stageprompt.js" />
+    <Content Include="Scripts\govuk_toolkit\vendor\jquery\jquery.player.min.js" />
+    <Content Include="Scripts\govuk_toolkit\vendor\polyfills\bind.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +386,15 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
