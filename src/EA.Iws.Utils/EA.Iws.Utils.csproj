@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionHelper.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="Identity\GuidCombGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
