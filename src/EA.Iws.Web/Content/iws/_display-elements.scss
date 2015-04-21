@@ -1,0 +1,63 @@
+﻿@import "colours";
+@import "iws-typography";
+
+.gov-border {
+    margin-top: em(8, 3);
+    border-top: 10px solid $link-colour;
+
+    h2 {
+        margin-top: em(3, 5);
+        margin-bottom: em(3, 5);
+    }
+
+    .heading-small {
+        margin-top: 0;
+        margin-bottom: em(3, 5);
+    }
+
+    h6 {
+        color: $secondary-text-colour;
+    }
+
+    h6:first-child {
+        margin-top: em(4,5);
+    }
+}
+
+.record-action-section {
+    margin-top: em(8, 3);
+
+    h3 {
+        margin-top: em(4, 5);
+        margin-bottom: em(3, 5);
+    }
+
+    ul li {
+        margin-top: em(3, 7);
+    }
+}
+
+.large-space-top {
+    margin-top: 2.5em;
+}
+
+.toggle {
+    font-weight: bold;
+}
+
+.toggle-cell {
+    cursor: pointer;
+}
+
+.toggle-row {
+    background-color: #EEE;
+}
+
+.toggle-row:hover {
+    background-color: #AAA;
+}
+
+.accessibly-hidden {
+    position: absolute;
+    left: -999em;
+}
