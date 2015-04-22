@@ -53,6 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationModule.cs" />
+    <Compile Include="AutofacDeferredEventDispatcher.cs" />
+    <Compile Include="CommandDecoratorModule.cs" />
+    <Compile Include="CustomRegistrationExtensions.cs" />
+    <Compile Include="EntityFrameworkModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
