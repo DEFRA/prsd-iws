@@ -1,0 +1,45 @@
+﻿<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+
+<div class="header-proposition">
+    <div class="content">
+        <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+        <nav id="proposition-menu">
+            <a href="/" id="proposition-name">International Waste Shipments</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.AntiForgeryToken()
+                <ul id="proposition-links">
+                    <li>@Html.ActionLink(linkText: "Your account", actionName: "", controllerName: "")</li>
+                    <li>@Html.ActionLink(linkText: "Your business", actionName: "Index", controllerName: "Company", routeValues: new { id = 52 }, htmlAttributes: new { })</li>
+                    <li>
+                        @Ajax.ActionLink("Sign out", "ConfirmSignOut", "Account", new { returnUrl = Request.RawUrl },
+                                new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divConfirmDelete" }, new { @class = "deleteLink" })
+                    </li>
+                </ul>
+                <div id="divConfirmDelete" class="clearfix"></div>
+            }
+            else
+            {
+                <ul id="proposition-links">
+                    <li>@Html.ActionLink(linkText: "Register", actionName: "Register", controllerName: "Account")</li>
+                    <li>@Html.ActionLink(linkText: "Sign in", actionName: "Login", controllerName: "Account")</li>
+                </ul>
+            }
+        </nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#divConfirmDelete").click(function (e) {
+            if (e.target === this && $(this).hasClass("fadeBackground")) {
+                $(this).removeClass("fadeBackground");
+                $(this).empty();
+            }
+        });
+
+        $(".deleteLink").click(function () {
+            $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
+        });
+    })
+</script>

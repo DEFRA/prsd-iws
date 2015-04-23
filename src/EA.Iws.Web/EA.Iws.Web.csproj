@@ -385,6 +385,20 @@
     <Content Include="Content\govuk\stylesheets\fonts\NTA-Bold-20130221.woff" />
     <Content Include="Content\govuk\stylesheets\fonts\NTA-Bold-20130221.eot" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_Layout.GovUK.Sections.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_FeedbackBanner.cshtml" />
+    <Content Include="Views\Shared\_IwsBreadcrumb.cshtml" />
+    <Content Include="Views\Shared\_IwsHead.cshtml" />
+    <Content Include="Views\Shared\_IwsHeader.cshtml" />
+    <Content Include="Views\Shared\_IwsNavigation.cshtml" />
+    <Content Include="Views\Shared\_IwsTracking.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PersonName.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RadioButtonStringCollectionBase.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -408,8 +422,10 @@
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Modules\ConfigModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -419,7 +435,16 @@
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Shared\Address.cs" />
+    <Compile Include="ViewModels\Shared\PersonName.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonCollection.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonStringCollection.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBase.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptional.cs" />
+    <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

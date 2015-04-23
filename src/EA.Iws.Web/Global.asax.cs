@@ -5,7 +5,7 @@
     using System.Web.Optimization;
     using System.Web.Routing;
 
-    public class MvcApplication : HttpApplication
+    public class Global : HttpApplication
     {
         protected void Application_Start()
         {
