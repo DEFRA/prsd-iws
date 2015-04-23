@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
+    <Compile Include="Mappings\CompetentAuthorityMappings.cs" />
     <Compile Include="Mappings\CountryMapping.cs" />
     <Compile Include="Mappings\OrganisationMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

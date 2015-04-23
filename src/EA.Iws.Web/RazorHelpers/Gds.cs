@@ -24,7 +24,7 @@ namespace EA.Iws.Web.RazorHelpers
         public MvcHtmlString ValidationSummary()
         {
             ModelStateDictionary modelStateDictionary = htmlHelper.ViewData.ModelState;
-            
+
             IEnumerable<ModelErrorWithFieldId> modelErrors = GetErrorsForModel(modelStateDictionary);
 
             if (modelStateDictionary == null || modelStateDictionary.Count == 0 || !modelErrors.Any())
@@ -142,20 +142,34 @@ namespace EA.Iws.Web.RazorHelpers
         public string FormGroupClass<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
             var memberExpression = expression.Body as MemberExpression;
+            string nameToCheck;
 
             if (memberExpression == null)
             {
                 return string.Empty;
             }
 
-            var property = memberExpression.Member as PropertyInfo;
-
-            if (property == null)
+            // We are accessing a sub property, the model state records the fully qualified name.
+            // For the expression m.Class.Property:
+            // Class.Property rather than Property
+            if (memberExpression.ToString().Count(me => me == '.') == 2)
             {
-                return string.Empty;
+                var memberExpressionAsString = memberExpression.ToString();
+                nameToCheck = memberExpressionAsString.Substring(memberExpressionAsString.IndexOf('.') + 1);
+            }
+            else
+            {
+                var property = memberExpression.Member as PropertyInfo;
+
+                if (property == null)
+                {
+                    return string.Empty;
+                }
+
+                nameToCheck = property.Name;
             }
 
-            var modelState = htmlHelper.ViewData.ModelState[property.Name];
+            var modelState = htmlHelper.ViewData.ModelState[nameToCheck];
 
             if (modelState == null)
             {

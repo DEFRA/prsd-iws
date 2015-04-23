@@ -82,7 +82,7 @@
                 context.SaveChanges();
                 CleanUp(org, address);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (Debugger.IsAttached)
                 {

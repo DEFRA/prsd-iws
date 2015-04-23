@@ -87,7 +87,7 @@ CREATE TABLE [Lookup].[CompetentAuthority] (
     [Id]           UNIQUEIDENTIFIER NOT NULL,
     [Name]         NVARCHAR (1023)  NOT NULL,
     [Abbreviation] NVARCHAR (63)    NULL,
-    [UsesSystem]   BIT              NOT NULL,
+    [IsSystemUser]   BIT              NOT NULL,
     [RowVersion]   ROWVERSION       NOT NULL,
     CONSTRAINT [PK_CompetentAuthority_Id] PRIMARY KEY CLUSTERED ([Id] ASC)
 );

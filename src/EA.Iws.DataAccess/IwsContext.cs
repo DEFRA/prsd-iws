@@ -13,6 +13,7 @@
         private readonly IUserContext userContext;
 
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
+        public virtual DbSet<CompetentAuthority> CompetentAuthorities { get; set; }
 
         public virtual DbSet<Country> Countries { get; set; }
 

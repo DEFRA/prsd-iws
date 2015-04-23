@@ -437,6 +437,7 @@
     <Content Include="Views\Shared\EditorTemplates\PersonName.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RadioButtonStringCollectionBase.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\NotificationApplication\CompetentAuthority.cshtml" />
     <Content Include="Views\Registration\ApplicantRegistration.cshtml" />
     <Content Include="Views\Registration\SelectOrganisation.cshtml" />
     <Content Include="Views\Registration\_OrganisationGrid.cshtml" />
@@ -470,6 +471,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\NotificationApplicationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -494,6 +496,8 @@
     <Compile Include="ViewModels\Shared\RadioButtonStringCollection.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBase.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptional.cs" />
+    <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoice.cs" />
+    <Compile Include="ViewModels\NotificationApplication\UKCompetentAuthorities.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
