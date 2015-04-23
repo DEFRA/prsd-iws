@@ -1,1 +1,0 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="EA.Iws.Api.WebApiApplication" Language="C#" %>
