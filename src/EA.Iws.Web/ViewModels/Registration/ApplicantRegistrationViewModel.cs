@@ -43,5 +43,8 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Please confirm that you have read the terms and conditions")]
+        public bool TermsAndConditions { get; set; }
     }
 }

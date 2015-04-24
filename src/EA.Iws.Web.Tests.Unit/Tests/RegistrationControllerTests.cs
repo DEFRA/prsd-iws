@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Tests.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -15,13 +14,13 @@
         [Fact]
         public async Task ApplicantRegister_NameNotProvided_ValidationError()
         {
-            var validRegisterViewModel = GetValidRegisterViewModel();
+            var registerViewModel = GetValidRegisterViewModel();
 
-            validRegisterViewModel.Name = string.Empty;
+            registerViewModel.Name = string.Empty;
 
-            var accountController = GetMockAccountController(validRegisterViewModel);
+            var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(validRegisterViewModel) as ViewResult;
+            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -29,13 +28,13 @@
         [Fact]
         public async Task ApplicantRegister_SurnameNotProvided_ValidationError()
         {
-            var validRegisterViewModel = GetValidRegisterViewModel();
+            var registerViewModel = GetValidRegisterViewModel();
 
-            validRegisterViewModel.Surname = string.Empty;
+            registerViewModel.Surname = string.Empty;
 
-            var accountController = GetMockAccountController(validRegisterViewModel);
+            var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(validRegisterViewModel) as ViewResult;
+            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -43,13 +42,13 @@
         [Fact]
         public async Task ApplicantRegister_OrganistionNotProvided_ValidationError()
         {
-            var validRegisterViewModel = GetValidRegisterViewModel();
+            var registerViewModel = GetValidRegisterViewModel();
 
-            validRegisterViewModel.OrganisationName = string.Empty;
+            registerViewModel.OrganisationName = string.Empty;
 
-            var accountController = GetMockAccountController(validRegisterViewModel);
+            var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(validRegisterViewModel) as ViewResult;
+            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -61,13 +60,13 @@
         [InlineData("test.com")]
         public async Task ApplicantRegister_EmailInvalidOrNotProvided_ValidationError()
         {
-            var validRegisterViewModel = GetValidRegisterViewModel();
+            var registerViewModel = GetValidRegisterViewModel();
 
-            validRegisterViewModel.Email = string.Empty;
+            registerViewModel.Email = string.Empty;
 
-            var accountController = GetMockAccountController(validRegisterViewModel);
+            var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(validRegisterViewModel) as ViewResult;
+            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -78,25 +77,38 @@
         [InlineData("text")]
         public async Task ApplicantRegister_PhoneInvalidOrNotProvided_ValidationError()
         {
-            var validRegisterViewModel = GetValidRegisterViewModel();
+            var registerViewModel = GetValidRegisterViewModel();
 
-            validRegisterViewModel.PhoneNumber = string.Empty;
+            registerViewModel.PhoneNumber = string.Empty; ;
 
-            var accountController = GetMockAccountController(validRegisterViewModel);
+            var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(validRegisterViewModel) as ViewResult;
+            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
 
         [Fact]
-        public void ApplicantRegister_PasswordsDoNotMatch_ValidationError()
+        public async Task ApplicantRegister_TermsAndConditionsNotChecked_ValidationError()
         {
-            const String nonMatchingPassword = "NonMatchingPassword";
-
             var registerViewModel = GetValidRegisterViewModel();
 
-            registerViewModel.ConfirmPassword = nonMatchingPassword;
+            registerViewModel.TermsAndConditions = false;
+
+            var accountController = GetMockAccountController(registerViewModel);
+
+            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
+
+            Assert.False(result.ViewData.ModelState.IsValid);
+        }
+
+
+        [Fact]
+        public void ApplicantRegister_PasswordsDoNotMatch_ValidationError()
+        {
+            var registerViewModel = GetValidRegisterViewModel();
+
+            registerViewModel.TermsAndConditions = false;
 
             var validationContext = new ValidationContext(registerViewModel, null, null);
             var validationResults = new List<ValidationResult>();
@@ -137,7 +149,8 @@
                 OrganisationName = ValidOrganisationName,
                 PhoneNumber = ValidPhoneNumber,
                 Name = ValidName,
-                Surname = ValidSurname
+                Surname = ValidSurname,
+                TermsAndConditions = true
             };
 
             return validRegisterViewModel;
