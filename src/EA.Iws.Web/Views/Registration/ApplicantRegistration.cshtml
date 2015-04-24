@@ -3,10 +3,6 @@
     ViewBag.Title = "Register";
     var signin = Request.QueryString["signin"];
 }
-
-<main id="page-container" role="main">
-    @Html.Partial("_FeedbackBanner")
-
     <h1 class="heading-large">
         User Details
     </h1>
@@ -62,8 +58,6 @@
             <input type="submit" class="button" value="Register" />
         </div>
     }
-
-</main>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
