@@ -4,46 +4,43 @@
     ViewBag.Title = "Index";
 }
 
-<main id="page-container" role="main">
-    @Html.Partial("_FeedbackBanner")
-    <div class="grid-row">
-        <section class="column-two-thirds">
-            <header class="hgroup">
-                <h1 class="heading-large">Apply for an international waste shipments notification number</h1>
-            </header>
+<div class="grid-row">
+    <section class="column-two-thirds">
+        <header class="hgroup">
+            <h1 class="heading-large">Apply for an international waste shipments notification number</h1>
+        </header>
 
-            <div>
-                <p>You must apply for an international waste shipments (IWS) notification number if you ship waste overseas as part of your business.</p>
-            </div>
+        <div>
+            <p>You must apply for an international waste shipments (IWS) notification number if you ship waste overseas as part of your business.</p>
+        </div>
 
-            <div>
-                <p>Use this service to:</p>
-                <ul class="list-bullet">
-                    <li>Apply for an International Waste Shipment Notification Number.</li>
-                    <li>Download the International Waste Shipment Notification application form and supporting documents.</li>
-                </ul>
-            </div>
+        <div>
+            <p>Use this service to:</p>
+            <ul class="list-bullet">
+                <li>Apply for an International Waste Shipment Notification Number.</li>
+                <li>Download the International Waste Shipment Notification application form and supporting documents.</li>
+            </ul>
+        </div>
 
-            <p id="get-started" class="get-started group">
-                @Html.ActionLink("Start now", "login", "Action", null, new {@class = "button-get-started button"})
+        <p id="get-started" class="get-started group">
+            @Html.ActionLink("Start now", "login", "Action", null, new { @class = "button-get-started button" })
+        </p>
+
+        <div>
+            <p>
+                <h2 class="heading-medium">Before you start</h2>
             </p>
+            <p>
+                It takes around 10 minutes to apply.
+            </p>
+            <p>You will need:</p>
+            <ul class="list-bullet">
+                <li>Your complany registration Number.</li>
+                <li>Mea at justo malis scripserit, eam epicuri insolens complectitur id.</li>
+            </ul>
 
-            <div>
-                <p>
-                    <h2 class="heading-medium">Before you start</h2>
-                </p>
-                <p>
-                    It takes around 10 minutes to apply.
-                </p>
-                <p>You will need:</p>
-                <ul class="list-bullet">
-                    <li>Your complany registration Number.</li>
-                    <li>Mea at justo malis scripserit, eam epicuri insolens complectitur id.</li>
-                </ul>
+        </div>
 
-            </div>
+    </section>
 
-        </section>
-
-    </div>
-</main>
+</div>
