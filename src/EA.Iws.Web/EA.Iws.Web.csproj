@@ -438,6 +438,8 @@
     <Content Include="Views\Shared\EditorTemplates\RadioButtonStringCollectionBase.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Registration\ApplicantRegistration.cshtml" />
+    <Content Include="Views\Registration\SelectOrganisation.cshtml" />
+    <Content Include="Views\Registration\_OrganisationGrid.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -482,6 +484,8 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
+    <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Shared\Address.cs" />
     <Compile Include="ViewModels\Shared\PersonName.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonCollection.cs" />

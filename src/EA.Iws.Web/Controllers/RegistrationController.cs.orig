@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
+<<<<<<< HEAD
+    using System.Threading.Tasks;
+=======
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
+>>>>>>> Create select organisation page
     using System.Web.Mvc;
     using ViewModels.Registration;
 

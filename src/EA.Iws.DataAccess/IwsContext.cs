@@ -6,12 +6,19 @@
     using Core.DataAccess.Extensions;
     using Core.Domain;
     using Core.Domain.Auditing;
-    
+    using Domain;
+
     public class IwsContext : DbContext
     {
         private readonly IUserContext userContext;
 
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
+
+        public virtual DbSet<Country> Countries { get; set; }
+
+        public virtual DbSet<Address> Addresses { get; set; }
+
+        public virtual DbSet<Organisation> Organisations { get; set; }
 
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")

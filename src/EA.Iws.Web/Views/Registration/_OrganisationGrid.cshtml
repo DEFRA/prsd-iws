@@ -1,0 +1,47 @@
+﻿@model IList<EA.Iws.Web.ViewModels.Registration.OrganisationViewModel>
+
+@using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <table>
+
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Postcode</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.RadioButton("Selected", Model[i].Id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => m[i].Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => m[i].TownOrCity)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => m[i].Postcode)
+                    </td>
+                </tr>
+            }
+            </tbody>
+
+        </table>
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">Use selected</button>
+    </div>
+}

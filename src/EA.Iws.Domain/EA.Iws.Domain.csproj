@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="Organisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +53,10 @@
     <ProjectReference Include="..\EA.Iws.Core.Domain\EA.Iws.Core.Domain.csproj">
       <Project>{ffc5dae6-5d7e-42eb-8e16-ff9a78c898f1}</Project>
       <Name>EA.Iws.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Utils\EA.Iws.Utils.csproj">
+      <Project>{abe7729f-bc65-4766-9d89-959e4edf5f2b}</Project>
+      <Name>EA.Iws.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

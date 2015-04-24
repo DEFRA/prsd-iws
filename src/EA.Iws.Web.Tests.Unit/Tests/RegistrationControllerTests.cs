@@ -58,28 +58,11 @@
         [InlineData("test")]
         [InlineData("test@")]
         [InlineData("test.com")]
-        public async Task ApplicantRegister_EmailInvalidOrNotProvided_ValidationError()
+        public async Task ApplicantRegister_EmailInvalidOrNotProvided_ValidationError(string expected)
         {
             var registerViewModel = GetValidRegisterViewModel();
 
-            registerViewModel.Email = string.Empty;
-
-            var accountController = GetMockAccountController(registerViewModel);
-
-            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
-
-            Assert.False(result.ViewData.ModelState.IsValid);
-        }
-
-        [Theory]
-        [InlineData("")]
-        [InlineData("01233xcx2332")]
-        [InlineData("text")]
-        public async Task ApplicantRegister_PhoneInvalidOrNotProvided_ValidationError()
-        {
-            var registerViewModel = GetValidRegisterViewModel();
-
-            registerViewModel.PhoneNumber = string.Empty; ;
+            registerViewModel.Email = expected;
 
             var accountController = GetMockAccountController(registerViewModel);
 
@@ -102,7 +85,6 @@
             Assert.False(result.ViewData.ModelState.IsValid);
         }
 
-
         [Fact]
         public void ApplicantRegister_PasswordsDoNotMatch_ValidationError()
         {
@@ -114,7 +96,7 @@
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateObject(registerViewModel, validationContext, validationResults, true);
 
-            Assert.Equal("The password and confirmation password do not match.", validationResults[0].ErrorMessage);
+            Assert.True(validationResults.Any(vr => vr.ErrorMessage.Equals("Please confirm that you have read the terms and conditions")));
         }
 
         private static RegistrationController GetMockAccountController(object viewModel)

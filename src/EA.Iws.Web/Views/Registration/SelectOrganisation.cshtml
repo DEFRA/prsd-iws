@@ -1,0 +1,61 @@
+﻿@model EA.Iws.Web.ViewModels.Registration.SelectOrganisationViewModel
+@{
+    ViewBag.Title = "Select your company";
+}
+
+<h1 class="heading-large">Select your company</h1>
+<p>Select your company from the list or, if it's not there, register a new company.</p>
+
+@using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationMessageFor(m => m.Selected)
+    @Html.HiddenFor(m => m.Name)
+    
+    <div class="form-group">
+        <table>
+
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Postcode</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @for (int i = 0; i < Model.Organisations.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.RadioButtonFor(m => m.Selected, Model.Organisations[i].Id)
+                        @Html.HiddenFor(m => m.Organisations[i].Id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => m.Organisations[i].Name)
+                        @Html.HiddenFor(m => m.Organisations[i].Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => m.Organisations[i].TownOrCity)
+                        @Html.HiddenFor(m => m.Organisations[i].TownOrCity)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => m.Organisations[i].Postcode)
+                        @Html.HiddenFor(m => m.Organisations[i].Postcode)
+                    </td>
+                </tr>
+            }
+            </tbody>
+
+        </table>
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">Use selected</button>
+    </div>
+    
+    @Html.ActionLink(linkText: "Create new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { n = Model.Name }, htmlAttributes: new { })<br />
+}
