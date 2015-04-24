@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.Core.DataAccess", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.Api.Client", "EA.Iws.Api.Client\EA.Iws.Api.Client.csproj", "{B772429D-709E-4978-B105-A54606ACC29A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.DataAccess.Tests.Integration", "EA.Iws.DataAccess.Tests.Integration\EA.Iws.DataAccess.Tests.Integration.csproj", "{CD836184-27A3-4696-8AC7-1FC8AF06493C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,13 +199,10 @@ Global
 		{B772429D-709E-4978-B105-A54606ACC29A}.Release|x64.Build.0 = Release|Any CPU
 		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Debug|x64.Build.0 = Debug|Any CPU
 		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CD836184-27A3-4696-8AC7-1FC8AF06493C}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
@@ -227,5 +226,6 @@ Global
 		{C412684B-4659-4F79-8509-751F57D2CFFD} = {B0BDB106-1731-401B-826B-EAC6CBFC8473}
 		{C5EF212B-402C-4586-992B-D051626E3747} = {0BCA0408-225D-49B4-878D-F9F0C052E82D}
 		{B772429D-709E-4978-B105-A54606ACC29A} = {689E7303-44CF-4FD8-9F5F-922FE18EC35D}
+		{CD836184-27A3-4696-8AC7-1FC8AF06493C} = {B0BDB106-1731-401B-826B-EAC6CBFC8473}
 	EndGlobalSection
 EndGlobal
