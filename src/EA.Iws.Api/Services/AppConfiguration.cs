@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Services
+﻿namespace EA.Iws.Api.Services
 {
     using System.ComponentModel;
 
@@ -7,12 +7,9 @@
         [DefaultValue("Development")]
         public string Environment { get; set; }
 
-        public string GoogleAnalyticsAccountId { get; set; }
+        [DisplayName("DefaultConnection")]
+        public string ConnectionString { get; set; }
 
         public string SiteRoot { get; set; }
-
-        public string ApiUrl { get; set; }
-
-        public string ApiSecret { get; set; }
     }
 }

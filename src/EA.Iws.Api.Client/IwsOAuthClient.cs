@@ -12,7 +12,7 @@
         {
             var baseUri = new Uri(baseUrl);
 
-            oauth2Client = new OAuth2Client(new Uri(baseUri, "/connect/token/"), "carbon", clientSecret);
+            oauth2Client = new OAuth2Client(new Uri(baseUri, "/connect/token/"), "iws", clientSecret);
         }
 
         public async Task<string> GetAccessTokenAsync(string username, string password)

@@ -15,9 +15,13 @@ namespace EA.Iws.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            var containerBuilder = new ContainerBuilder();
+            var configuration = new ConfigurationService();
 
-            var container = AutofacBootstrapper.Initialize(containerBuilder);
+            var builder = new ContainerBuilder();
+            builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
+            builder.Register(c => configuration.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
+
+            var container = AutofacBootstrapper.Initialize(builder);
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
@@ -25,11 +29,7 @@ namespace EA.Iws.Web
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
 
-            using (var context = container.BeginLifetimeScope())
-            {
-                var config = context.Resolve<AppConfiguration>();
-                ConfigureAuth(app, config);
-            }
+            ConfigureAuth(app, configuration.CurrentConfiguration);
         }
     }
 }

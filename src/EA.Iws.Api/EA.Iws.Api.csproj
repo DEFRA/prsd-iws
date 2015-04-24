@@ -163,6 +163,8 @@
     <Compile Include="IdSrv\Scopes.cs" />
     <Compile Include="IdSrv\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AppConfiguration.cs" />
+    <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@ namespace EA.Iws.Api
     using Autofac.Integration.WebApi;
     using IdSrv;
     using Owin;
+    using Services;
     using Thinktecture.IdentityServer.AccessTokenValidation;
     using Thinktecture.IdentityServer.Core.Configuration;
 
@@ -34,14 +35,18 @@ namespace EA.Iws.Api
 
             // Web API configuration and services
             var config = new HttpConfiguration();
+            var configuration = new ConfigurationService();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
 
             // Autofac
-            var containerBuilder = new ContainerBuilder();
-            var container = AutofacBootstrapper.Initialize(containerBuilder, config);
+            var builder = new ContainerBuilder();
+            builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
+            builder.Register(c => configuration.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
+
+            var container = AutofacBootstrapper.Initialize(builder, config);
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             app.UseAutofacMiddleware(container);
