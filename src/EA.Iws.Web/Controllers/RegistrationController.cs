@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Registration;
 
@@ -13,7 +14,7 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult SubmitApplicantRegistration(ApplicantRegistrationViewModel model)
+        public async Task<ActionResult> SubmitApplicantRegistration(ApplicantRegistrationViewModel model)
         {
             if (!ModelState.IsValid)
             {
