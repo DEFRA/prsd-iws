@@ -443,6 +443,7 @@
     <Content Include="Views\Registration\CreateNewOrganisation.cshtml" />
     <Content Include="Views\NotificationApplication\WasteActionQuestion.cshtml" />
     <Content Include="Views\NotificationApplication\GenerateNumber.cshtml" />
+    <Content Include="Views\Applicant\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -471,6 +472,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\NotificationApplicationController.cs" />

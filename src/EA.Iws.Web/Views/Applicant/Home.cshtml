@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Applicant - Home Page";
+}
+<div class="form-group">
+    <header class="hgroup">
+        <h1 class="heading-large">Manage your notifications and account</h1>
+        <div class="form-group">
+            <label>
+                Start new notifications or manage your account.
+            </label>
+        </div>
+    </header>
+</div>
+<div class="form-group">
+    <header class="hgroup">
+        <h2 class="subtitle">What would you like to do?</h2>
+        <div id="global-header-bar"></div>
+    </header>
+    <div class="form-group">
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink(linkText: "Start a new notification", actionName: "CompetentAuthority", controllerName: "NotificationApplication")
+        }
+    </div>
+</div>
