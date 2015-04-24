@@ -6,6 +6,8 @@ using Microsoft.Owin;
 namespace EA.Iws.Api
 {
     using System.Web.Http;
+    using Autofac;
+    using Autofac.Integration.WebApi;
     using IdSrv;
     using Owin;
     using Thinktecture.IdentityServer.AccessTokenValidation;
@@ -35,9 +37,15 @@ namespace EA.Iws.Api
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
 
+            // Autofac
+            var containerBuilder = new ContainerBuilder();
+            var container = AutofacBootstrapper.Initialize(containerBuilder, config);
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            app.UseAutofacMiddleware(container);
+            app.UseAutofacWebApi(config);
             app.UseWebApi(config);
         }
     }
