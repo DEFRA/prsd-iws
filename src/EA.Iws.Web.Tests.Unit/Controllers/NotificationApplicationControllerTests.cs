@@ -44,7 +44,7 @@
 
             var result = controller.CompetentAuthority(competentAuthorityChoice) as RedirectToRouteResult;
 
-            Assert.Equal("WasteOperation", result.RouteValues["action"]);
+            Assert.Equal("WasteActionQuestion", result.RouteValues["action"]);
         }
 
         [Fact]
@@ -60,6 +60,39 @@
 
             Assert.Equal("CompetentAuthority", result.ViewName);
             Assert.IsType<CompetentAuthorityChoice>(result.Model);
+        }
+    
+        [Fact]
+        public void WasteActionQuestion_Get_ReturnsCorrectView()
+        {
+            var controller = new NotificationApplicationController();
+            var result = controller.WasteActionQuestion(null, null) as ViewResult;
+
+            Assert.Empty(result.ViewName);
+            Assert.IsType<InitialQuestions>(result.Model);
+        }
+
+        [Fact]
+        public void WasteActionQuestion_Post_RedirectsToCorrectAction()
+        {
+            var controller = new NotificationApplicationController();
+            var model = new InitialQuestions();
+            model.SelectedWasteAction = WasteAction.Recovery.ToString();
+            var result = controller.WasteActionQuestion(model) as RedirectToRouteResult;
+
+            Assert.Equal("GenerateNumber", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public void WasteActionQuestion_PostInvalidModel_ReturnsToCorrectView()
+        {
+            var controller = new NotificationApplicationController();
+            controller.ModelState.AddModelError("Error", "Test Error");
+            var model = new InitialQuestions();
+            var result = controller.WasteActionQuestion(model) as ViewResult;
+
+            Assert.Empty(result.ViewName);
+            Assert.IsType<InitialQuestions>(result.Model);
         }
     }
 }

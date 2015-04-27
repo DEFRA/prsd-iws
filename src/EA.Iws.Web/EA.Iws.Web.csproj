@@ -441,6 +441,8 @@
     <Content Include="Views\Registration\ApplicantRegistration.cshtml" />
     <Content Include="Views\Registration\SelectOrganisation.cshtml" />
     <Content Include="Views\Registration\CreateNewOrganisation.cshtml" />
+    <Content Include="Views\NotificationApplication\WasteActionQuestion.cshtml" />
+    <Content Include="Views\NotificationApplication\GenerateNumber.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -491,6 +493,8 @@
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\WasteAction.cs" />
+    <Compile Include="ViewModels\NotificationApplication\InitialQuestions.cs" />
     <Compile Include="ViewModels\Shared\Address.cs" />
     <Compile Include="ViewModels\Shared\PersonName.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonCollection.cs" />

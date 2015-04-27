@@ -1,0 +1,54 @@
+﻿@model EA.Iws.Web.ViewModels.NotificationApplication.InitialQuestions
+
+@{
+    ViewBag.Title = "Recovery or Disposal Question";
+}
+
+@using (Html.BeginForm("WasteActionQuestion", "NotificationApplication", FormMethod.Post))
+{
+    <header class="hgroup">
+        <h1 class="heading-medium">Notification Type</h1>
+        <h1 class="heading-medium">What type of waste shipment notification are you applying for?</h1>
+    </header>
+    <div class="text-danger">@Html.Gds().ValidationSummary()</div>
+    if (Model != null)
+    {
+        <div class="form-group">
+            <fieldset>
+                @foreach (var wasteAction in Model.NotificationTypeAction)
+                {
+                    var labelFor = "rdo" + wasteAction;
+                    <label class="block-label" for="@labelFor">
+                        @Html.RadioButtonFor(m => m.SelectedWasteAction, wasteAction, new {@id = "rdo" + wasteAction})@wasteAction
+                    </label>
+                }
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <div class="panel-indent" id="disposal-message">
+                If you are shipping for disposal then we advise you to contact your relevant compenent authority before completing your notification application.
+
+                <p>@Model.CompetentAuthorityContactInfo</p>
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}
+@section scripts
+{
+    <script>
+        $(function() {
+            $("#disposal-message").hide();
+
+            $("#rdoDisposal").click(function () {
+                $("#disposal-message").show("fast");
+            });
+
+            $("#rdoRecovery").click(function () {
+                $("#disposal-message").hide("fast");
+            });
+        });
+    </script>
+}
