@@ -14,8 +14,6 @@
             factory.ScopeStore = new Registration<IScopeStore>(scopeStore);
             var clientStore = new InMemoryClientStore(Clients.Get());
             factory.ClientStore = new Registration<IClientStore>(clientStore);
-            var users = new InMemoryUserService(Users.Get());
-            factory.UserService = new Registration<IUserService>(users);
 
             return factory;
         }

@@ -12,19 +12,22 @@ namespace EA.Iws.Api
     using Identity;
     using IdSrv;
     using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.DataProtection;
     using Owin;
     using Services;
     using Thinktecture.IdentityServer.AccessTokenValidation;
     using Thinktecture.IdentityServer.Core.Configuration;
+    using Thinktecture.IdentityServer.Core.Logging;
 
     public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
+#if DEBUG
+            LogProvider.SetCurrentLogProvider(new DebugLogger());
+#endif
             var factory = Factory.Configure();
+            factory.ConfigureUserService(app);
 
             var options = new IdentityServerOptions
             {
@@ -36,7 +39,7 @@ namespace EA.Iws.Api
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
                 Authority = "https://localhost:44301",
-                RequiredScopes = new[] { "api1" }
+                RequiredScopes = new[] {"api1"}
             });
 
             // Web API configuration and services
@@ -45,7 +48,7 @@ namespace EA.Iws.Api
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
 
             // Autofac
             var builder = new ContainerBuilder();
@@ -56,9 +59,8 @@ namespace EA.Iws.Api
             builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
-            //builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
-            builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
-            builder.Register<IDataProtectionProvider>(c => app.GetDataProtectionProvider()).InstancePerRequest();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
+            builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
             var container = AutofacBootstrapper.Initialize(builder, config);
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
