@@ -197,6 +197,7 @@
     <Compile Include="Identity\EmailService.cs" />
     <Compile Include="Identity\IwsIdentityContext.cs" />
     <Compile Include="Identity\SmsService.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="IdSrv\Clients.cs" />
     <Compile Include="IdSrv\DebugLog.cs" />
     <Compile Include="IdSrv\DebugLogger.cs" />
@@ -222,6 +223,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_Start\Modules\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">

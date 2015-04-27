@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Api.Client.Extensions
 {
     using System.Net.Http;
+    using System.Net.Http.Formatting;
     using System.Threading.Tasks;
 
     internal static class HttpClientExtensions
@@ -15,6 +16,12 @@
         {
             client.SetBearerToken(accessToken);
             return await client.GetAsync<T>(requestUri);
+        }
+
+        public static async Task<HttpResponseMessage> PostProtectedAsync<T>(this HttpClient client, string accessToken, string requestUri, T data)
+        {
+            client.SetBearerToken(accessToken);
+            return await client.PostAsync<T>(requestUri, data, new JsonMediaTypeFormatter());
         }
     }
 }

@@ -2,10 +2,12 @@
 {
     using System;
     using System.Net.Http;
+    using Actions;
 
     public class IwsClient : IDisposable
     {
         private readonly HttpClient httpClient;
+        private IApplicantRegistration applicantRegistration;
 
         public IwsClient(string baseUrl)
         {
@@ -15,6 +17,11 @@
             {
                 BaseAddress = new Uri(baseUri, "/api/")
             };
+        }
+
+        public IApplicantRegistration ApplicantRegistration
+        {
+            get { return applicantRegistration ?? (applicantRegistration = new ApplicantRegistration(httpClient)); }
         }
 
         public void Dispose()

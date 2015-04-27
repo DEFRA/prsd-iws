@@ -63,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\TokenResponse.cs" />
+    <Compile Include="Actions\ApplicantRegistration.cs" />
+    <Compile Include="Actions\IApplicantRegistration.cs" />
+    <Compile Include="Entities\ApplicantRegistrationData.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="IwsClient.cs" />
     <Compile Include="IwsOAuthClient.cs" />

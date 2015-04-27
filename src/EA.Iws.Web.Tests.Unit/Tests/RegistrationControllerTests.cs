@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Services;
     using ViewModels.Registration;
     using Web.Controllers;
     using Xunit;
@@ -101,17 +102,17 @@
 
         private static RegistrationController GetMockAccountController(object viewModel)
         {
-            var accountController = new RegistrationController();
+            var registrationController = new RegistrationController(new AppConfiguration());
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateObject(viewModel, validationContext, validationResults, true);
             foreach (var validationResult in validationResults)
             {
-                accountController.ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
+                registrationController.ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
             }
 
-            return accountController;
+            return registrationController;
         }
 
         private static ApplicantRegistrationViewModel GetValidRegisterViewModel()

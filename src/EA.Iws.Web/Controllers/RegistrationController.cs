@@ -2,12 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
+    using Api.Client.Entities;
+    using Services;
     using ViewModels.Registration;
 
     public class RegistrationController : Controller
     {
+        private readonly AppConfiguration config;
+
+        public RegistrationController(AppConfiguration config)
+        {
+            this.config = config;
+        }
+
         public ActionResult ApplicantRegistration()
         {
             return View(new ApplicantRegistrationViewModel());
@@ -18,11 +29,28 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SubmitApplicantRegistration(ApplicantRegistrationViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View("ApplicantRegistration", model);
-            }
+                HttpResponseMessage response;
+                using (var client = new IwsClient(config.ApiUrl))
+                {
+                    var userDetails = new ApplicantRegistrationData
+                    {
+                        Email = model.Email,
+                        FirstName = model.Name,
+                        Surname = model.Surname,
+                        Phone = model.PhoneNumber,
+                        Password = model.Password
+                    };
 
+                    response = await client.ApplicantRegistration.RegisterApplicantAsync("Test", userDetails);
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return View("ApplicantRegistration", model);
+                }
+            }
             return View("ApplicantRegistration", model);
         }
 
