@@ -5,10 +5,16 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Api
 {
+    using System.Web;
     using System.Web.Http;
     using Autofac;
     using Autofac.Integration.WebApi;
+    using Identity;
     using IdSrv;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.Owin.Security;
+    using Microsoft.Owin.Security.DataProtection;
     using Owin;
     using Services;
     using Thinktecture.IdentityServer.AccessTokenValidation;
@@ -45,6 +51,14 @@ namespace EA.Iws.Api
             var builder = new ContainerBuilder();
             builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
             builder.Register(c => configuration.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
+
+            // http://www.talksharp.com/configuring-autofac-to-work-with-the-aspnet-identity-framework-in-mvc-5
+            builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            //builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
+            builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
+            builder.Register<IDataProtectionProvider>(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
             var container = AutofacBootstrapper.Initialize(builder, config);
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
