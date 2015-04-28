@@ -4,30 +4,17 @@
     using System.Web.Http;
     using Identity;
     using Microsoft.AspNet.Identity;
-    using Microsoft.Owin.Security;
-    using Microsoft.Owin.Security.Cookies;
     using Models.Account;
 
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private readonly IAuthenticationManager authManager;
         private readonly ApplicationUserManager userManager;
 
-        public AccountController(ApplicationUserManager userManager,
-            IAuthenticationManager authManager)
+        public AccountController(ApplicationUserManager userManager)
         {
             this.userManager = userManager;
-            this.authManager = authManager;
-        }
-
-        // POST api/Account/Logout
-        [Route("Logout")]
-        public IHttpActionResult Logout()
-        {
-            authManager.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            return Ok();
         }
 
         // POST api/Account/Register
@@ -40,9 +27,9 @@
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 
-            IdentityResult result = await userManager.CreateAsync(user, model.Password);
+            var result = await userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
@@ -63,7 +50,7 @@
             {
                 if (result.Errors != null)
                 {
-                    foreach (string error in result.Errors)
+                    foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error);
                     }

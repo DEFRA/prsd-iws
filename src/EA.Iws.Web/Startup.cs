@@ -5,11 +5,14 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Web
 {
+    using System.Web;
+    using System.Web.Helpers;
     using System.Web.Mvc;
     using Autofac;
     using Autofac.Integration.Mvc;
     using Owin;
     using Services;
+    using Thinktecture.IdentityModel.Client;
 
     public partial class Startup
     {
@@ -20,6 +23,7 @@ namespace EA.Iws.Web
             var builder = new ContainerBuilder();
             builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
             builder.Register(c => configuration.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
 
             var container = AutofacBootstrapper.Initialize(builder);
 
@@ -30,6 +34,8 @@ namespace EA.Iws.Web
             app.UseAutofacMvc();
 
             ConfigureAuth(app, configuration.CurrentConfiguration);
+
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = JwtClaimTypes.Subject;
         }
     }
 }

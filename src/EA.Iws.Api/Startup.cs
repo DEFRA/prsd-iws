@@ -5,7 +5,6 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Api
 {
-    using System.Web;
     using System.Web.Http;
     using Autofac;
     using Autofac.Integration.WebApi;
@@ -23,6 +22,7 @@ namespace EA.Iws.Api
     {
         public void Configuration(IAppBuilder app)
         {
+            var configuration = new ConfigurationService();
 #if DEBUG
             LogProvider.SetCurrentLogProvider(new DebugLogger());
 #endif
@@ -38,17 +38,16 @@ namespace EA.Iws.Api
 
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
-                Authority = "https://localhost:44301",
-                RequiredScopes = new[] {"api1"}
+                Authority = configuration.CurrentConfiguration.SiteRoot,
+                RequiredScopes = new[] { "api1" }
             });
 
             // Web API configuration and services
             var config = new HttpConfiguration();
-            var configuration = new ConfigurationService();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
 
             // Autofac
             var builder = new ContainerBuilder();
@@ -59,7 +58,6 @@ namespace EA.Iws.Api
             builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
-            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
             var container = AutofacBootstrapper.Initialize(builder, config);

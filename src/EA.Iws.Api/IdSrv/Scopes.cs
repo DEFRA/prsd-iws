@@ -7,13 +7,18 @@
     {
         public static List<Scope> Get()
         {
-            return new List<Scope>
+            var scopes = new List<Scope>
             {
                 new Scope
                 {
                     Name = "api1"
                 }
             };
+
+            scopes.Add(StandardScopes.AllClaims);
+            scopes.AddRange(StandardScopes.All);
+
+            return scopes;
         }
     }
 }
