@@ -21,7 +21,7 @@
 
         public async Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData)
         {
-            return await httpClient.PostProtectedAsync<OrganisationRegistrationData>(accessToken, "Registration/Register", organisationRegistrationData);
+            return await httpClient.PostAsJsonAsync<OrganisationRegistrationData>(accessToken, "Registration/Register", organisationRegistrationData);
         }
     }
 }
