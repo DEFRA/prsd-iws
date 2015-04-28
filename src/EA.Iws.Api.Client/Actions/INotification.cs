@@ -9,5 +9,7 @@
         Task<Response<Guid>> CreateNotificationApplicationAsync(string accessToken, CreateNotificationData notificationData);
 
         Task<NotificationInformation> GetNotificationInformationAsync(string accessToken, Guid id);
+
+        Task<byte[]> GenerateNotificationDocumentAsync(string accessToken, Guid id);
     }
 }

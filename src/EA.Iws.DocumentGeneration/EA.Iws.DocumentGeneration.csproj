@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</ProjectGuid>
+    <ProjectGuid>{4E8F11AB-ABC4-4B67-BBDE-0A50E51580DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EA.Iws.Domain</RootNamespace>
-    <AssemblyName>EA.Iws.Domain</AssemblyName>
+    <RootNamespace>EA.Iws.DocumentGeneration</RootNamespace>
+    <AssemblyName>EA.Iws.DocumentGeneration</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>fc4cc4c3</NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,50 +31,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="CompetentAuthority.cs" />
-    <Compile Include="Country.cs" />
-    <Compile Include="Notification\NotificationApplication.cs" />
-    <Compile Include="Notification\WasteAction.cs" />
-    <Compile Include="Organisation.cs" />
-    <Compile Include="IDocumentGenerator.cs" />
+    <Compile Include="DocumentGenerator\DocumentGenerator.cs" />
+    <Compile Include="DocumentHelper.cs" />
+    <Compile Include="Mapper\INotificationMergeMapper.cs" />
+    <Compile Include="Mapper\NotificationMergeMapper.cs" />
+    <Compile Include="MergeField.cs" />
+    <Compile Include="MergeFieldLocator.cs" />
+    <Compile Include="MergeFieldName.cs" />
+    <Compile Include="MergeFieldType.cs" />
+    <Compile Include="NotificationDocumentMerger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UKCompetentAuthority.cs" />
-    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
+      <Project>{17bc546d-9ce6-452d-bbfb-a722583478f4}</Project>
+      <Name>EA.Iws.Core.Cqrs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Core.Domain\EA.Iws.Core.Domain.csproj">
       <Project>{ffc5dae6-5d7e-42eb-8e16-ff9a78c898f1}</Project>
       <Name>EA.Iws.Core.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Utils\EA.Iws.Utils.csproj">
-      <Project>{abe7729f-bc65-4766-9d89-959e4edf5f2b}</Project>
-      <Name>EA.Iws.Utils</Name>
+    <ProjectReference Include="..\EA.Iws.Cqrs\EA.Iws.Cqrs.csproj">
+      <Project>{30697c44-f282-4c41-9b93-e337c80f2d83}</Project>
+      <Name>EA.Iws.Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
+      <Name>EA.Iws.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets'))" />
-    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
-  </Target>
-  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

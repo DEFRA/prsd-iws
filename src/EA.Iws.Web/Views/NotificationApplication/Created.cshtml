@@ -22,5 +22,11 @@
             You can return to this saved notification at any time.
         </p>
     </div>
+
+    <div>
+        <p>Please @Html.ActionLink("download your application document", "GenerateNotificationDocument", new { id = Model.NotificationId }) and complete it.</p>
+        <br/>
+    </div>
+
     <button class="button" type="submit">Continue</button>
 }

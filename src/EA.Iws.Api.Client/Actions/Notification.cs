@@ -24,7 +24,17 @@
 
         public async Task<NotificationInformation> GetNotificationInformationAsync(string accessToken, Guid id)
         {
-            return await client.GetAsync<NotificationInformation>(accessToken, string.Format("NotificationInformation/{0}", id));
+            return
+                await
+                    client.GetAsync<NotificationInformation>(accessToken,
+                        string.Format("NotificationInformation/{0}", id));
+        }
+
+        public async Task<byte[]> GenerateNotificationDocumentAsync(string accessToken, Guid id)
+        {
+            client.SetBearerToken(accessToken);
+            var response = await client.GetAsync(string.Format("DocumentGeneration/{0}", id));
+            return await response.Content.ReadAsByteArrayAsync();
         }
     }
 }

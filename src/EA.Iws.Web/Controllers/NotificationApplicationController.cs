@@ -109,5 +109,19 @@
         {
             return RedirectToAction(actionName: "Home", controllerName: "Applicant");
         }
+
+        public async Task<FileContentResult> GenerateNotificationDocument(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var documentByteArray =
+                    await client.Notification.GenerateNotificationDocumentAsync(User.GetAccessToken(), id);
+
+                var contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                var downloadName = "IwsNotification" + DateTime.Now + ".docx";
+
+                return File(documentByteArray, contentType, downloadName);
+            }
+        }
     }
 }

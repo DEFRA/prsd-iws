@@ -192,9 +192,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
+    <Compile Include="App_Start\Modules\DocumentGeneratorModule.cs" />
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\NotificationApplicationController.cs" />
+    <Compile Include="Controllers\DocumentGenerationController.cs" />
     <Compile Include="Controllers\NotificationInformationController.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -219,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Documents\NotificationMergeTemplate.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -249,6 +252,10 @@
     <ProjectReference Include="..\EA.Iws.Cqrs\EA.Iws.Cqrs.csproj">
       <Project>{30697c44-f282-4c41-9b93-e337c80f2d83}</Project>
       <Name>EA.Iws.Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DocumentGeneration\EA.Iws.DocumentGeneration.csproj">
+      <Project>{4e8f11ab-abc4-4b67-bbde-0a50e51580de}</Project>
+      <Name>EA.Iws.DocumentGeneration</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
