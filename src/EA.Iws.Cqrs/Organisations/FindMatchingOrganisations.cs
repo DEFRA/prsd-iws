@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using Core.Cqrs;
+    using Domain;
 
-    public class FindMatchingCompanies : IQuery<IList<KeyValuePair<string, Guid>>>
+    public class FindMatchingOrganisations : IQuery<IList<Organisation>>
     {
         public readonly string CompanyName;
 
-        public FindMatchingCompanies(string companyName)
+        public FindMatchingOrganisations(string companyName)
         {
             if (companyName == null)
             {

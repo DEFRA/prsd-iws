@@ -1,26 +1,41 @@
 ﻿namespace EA.Iws.Api.Controllers
 {
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Client.Entities;
     using Core.Cqrs;
+    using Cqrs;
     using Cqrs.Organisations;
+    using Cqrs.Registration;
     using Domain;
     using Identity;
     using Microsoft.AspNet.Identity;
+    using Microsoft.Owin.Security;
 
     [RoutePrefix("api/Registration")]
     public class RegistrationController : ApiController
     {
         private readonly ApplicationUserManager userManager;
-        private readonly IQueryBus queryBus;
+<<<<<<< HEAD
         
+        public RegistrationController(ApplicationUserManager userManager)
+        {
+            this.userManager = userManager;
+=======
+
+        private readonly IQueryBus queryBus;
+
         public RegistrationController(ApplicationUserManager userManager,
             IQueryBus queryBus)
         {
             this.userManager = userManager;
+            this.authManager = authManager;
+            this.queryBus = queryBus;
+>>>>>>> Register autofac modules for CQRS
         }
 
         // POST api/Registration/Register

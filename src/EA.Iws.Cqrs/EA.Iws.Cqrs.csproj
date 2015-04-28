@@ -53,8 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Organisations\FindMatchingCompanies.cs" />
-    <Compile Include="Organisations\FindMatchingCompaniesHandler.cs" />
+    <Compile Include="Organisations\FindMatchingOrganisations.cs" />
+    <Compile Include="Organisations\FindMatchingOrganisationsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\CreateOrganisation.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />

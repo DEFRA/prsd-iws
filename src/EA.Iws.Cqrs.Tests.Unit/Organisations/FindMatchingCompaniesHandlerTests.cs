@@ -63,7 +63,7 @@
         }
 
         [Fact]
-        public async Task FindMatchingCompaniesHandler_WithLtdCompany_OneMatches()
+        public async Task FindMatchingOrganisationsHandler_WithLtdCompany_OneMatches()
         {
             var organisations = helper.GetAsyncEnabledDbSet(new[]
             {
@@ -79,15 +79,15 @@
 
             A.CallTo(() => context.Organisations).Returns(organisations);
 
-            var handler = new FindMatchingCompaniesHandler(context);
+            var handler = new FindMatchingOrganisationsHandler(context);
 
-            var strings = await handler.ExecuteAsync(new FindMatchingCompanies("sfw"));
+            var strings = await handler.ExecuteAsync(new FindMatchingOrganisations("sfw"));
 
             Assert.Equal(1, strings.Count);
         }
 
         [Fact]
-        public async Task FindMatchingCompaniesHandler_WithLtdAndLimitedCompany_TwoMatches()
+        public async Task FindMatchingOrganisationsHandler_WithLtdAndLimitedCompany_TwoMatches()
         {
             var organisations = helper.GetAsyncEnabledDbSet(new[]
             {
@@ -99,15 +99,15 @@
 
             A.CallTo(() => context.Organisations).Returns(organisations);
 
-            var handler = new FindMatchingCompaniesHandler(context);
+            var handler = new FindMatchingOrganisationsHandler(context);
 
-            var strings = await handler.ExecuteAsync(new FindMatchingCompanies("sfw"));
+            var strings = await handler.ExecuteAsync(new FindMatchingOrganisations("sfw"));
 
             Assert.Equal(2, strings.Count);
         }
 
         [Fact]
-        public async Task FindMatchingCompaniesHandler_SearchTermContainsThe_ReturnsMatchingResults()
+        public async Task FindMatchingOrganisationsHandler_SearchTermContainsThe_ReturnsMatchingResults()
         {
             var organisations = helper.GetAsyncEnabledDbSet(new[]
             {
@@ -119,20 +119,20 @@
 
             A.CallTo(() => context.Organisations).Returns(organisations);
 
-            var handler = new FindMatchingCompaniesHandler(context);
+            var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingCompanies("THe environment agency"));
+            var results = await handler.ExecuteAsync(new FindMatchingOrganisations("THe environment agency"));
 
             Assert.Equal(2, results.Count);
         }
 
         [Fact]
-        public async Task FindMatchingCompaniesHanlder_DataContainsThe_ReturnsMatchingResults()
+        public async Task FindMatchingOrganisationsHandler_DataContainsThe_ReturnsMatchingResults()
         {
             var data = new[]
             {
                 GetOrganisationWithName("THE  Environemnt Agency"),
-                GetOrganisationWithName("The Environemnt Agency"),
+                GetOrganisationWithName("THE Environemnt Agency"),
                 GetOrganisationWithName("Environment Agency")
             };
 
@@ -142,15 +142,15 @@
 
             A.CallTo(() => context.Organisations).Returns(organisations);
 
-            var handler = new FindMatchingCompaniesHandler(context);
+            var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingCompanies("Environment Agency"));
+            var results = await handler.ExecuteAsync(new FindMatchingOrganisations("Environment Agency"));
 
             Assert.Equal(data.Length, results.Count);
         }
 
         [Fact]
-        public async Task FindMatchingCompaniesHanlder_AllDataMatches_ReturnedStringsMatchInputDataWithCase()
+        public async Task FindMatchingOrganisationsHandler_AllDataMatches_ReturnedStringsMatchInputDataWithCase()
         {
             var names = new[] { "Environment Agency", "Environemnt Agincy" };
 
@@ -162,22 +162,22 @@
 
             A.CallTo(() => context.Organisations).Returns(organisations);
 
-            var handler = new FindMatchingCompaniesHandler(context);
+            var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingCompanies("Environment Agency"));
+            var results = await handler.ExecuteAsync(new FindMatchingOrganisations("Environment Agency"));
 
-            Assert.Equal(names, results.Select(r => r.Key));
+            Assert.Equal(names, results.Select(r => r.Name));
         }
 
         [Fact]
-        public async Task FindMatchingCompaniesHandler_AllDataMatches_ReturnsDataOrderedByEditDistance()
+        public async Task FindMatchingOrganisationsHandler_AllDataMatches_ReturnsDataOrderedByEditDistance()
         {
             string searchTerm = "bee keepers";
 
             var namesWithDistances = new[]
             {
+                new KeyValuePair<string, int>("THE Bee Keepers Limited", 0),
                 new KeyValuePair<string, int>("Bee Keeperes", 1),
-                new KeyValuePair<string, int>("The Bee Keepers Limited", 0),
                 new KeyValuePair<string, int>("BeeKeeprs", 2) 
             };
 
@@ -188,11 +188,11 @@
 
             A.CallTo(() => context.Organisations).Returns(organisations);
 
-            var handler = new FindMatchingCompaniesHandler(context);
+            var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingCompanies(searchTerm));
+            var results = await handler.ExecuteAsync(new FindMatchingOrganisations(searchTerm));
 
-            Assert.Equal(namesWithDistances.OrderBy(n => n.Value).Select(n => n.Key), results.Select(r => r.Key));
+            Assert.Equal(namesWithDistances.OrderBy(n => n.Value).Select(n => n.Key), results.Select(r => r.Name));
         }
     }
 }

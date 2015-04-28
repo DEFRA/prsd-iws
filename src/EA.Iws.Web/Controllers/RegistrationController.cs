@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Security.Claims;
@@ -82,7 +83,7 @@
             var model = new SelectOrganisationViewModel
             {
                 Name = organisationName,
-                Organisations = GetTestOrganisations()
+                Organisations = null
             };
 
             return View("SelectOrganisation", model);

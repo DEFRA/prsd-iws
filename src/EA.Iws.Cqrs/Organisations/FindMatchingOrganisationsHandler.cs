@@ -10,7 +10,7 @@
     using Domain;
     using Utils;
 
-    internal class FindMatchingCompaniesHandler : IQueryHandler<FindMatchingCompanies, IList<KeyValuePair<string, Guid>>>
+    internal class FindMatchingOrganisationsHandler : IQueryHandler<FindMatchingOrganisations, IList<Organisation>>
     {
         private readonly IwsContext context;
         private readonly SpecialBusinessSearchCase[] specialCases =
@@ -21,25 +21,25 @@
             new SpecialBusinessSearchCase(new[] { "COMPANY", "CO" }, Position.End)
         };
 
-        public FindMatchingCompaniesHandler(IwsContext context)
+        public FindMatchingOrganisationsHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<IList<KeyValuePair<string, Guid>>> ExecuteAsync(FindMatchingCompanies query)
+        public async Task<IList<Organisation>> ExecuteAsync(FindMatchingOrganisations query)
         {
             string searchTerm = PrepareQuery(query);
 
             // This search uses the Levenshtein edit distance as a search algorithm.
             int permittedDistance = CalculateMaximumLevenshteinDistance(searchTerm);
 
-            var possibleOrganisationNames = await GetPossibleOrganisationNames(searchTerm);
+            var possibleOrganisations = await GetPossibleOrganisationNames(searchTerm);
 
             var uppercaseOrganisationNames =
-                possibleOrganisationNames.Select(o => new KeyValuePair<string, Guid>(o.Name.ToUpperInvariant(), o.Id)).ToArray();
+                possibleOrganisations.Select(o => new KeyValuePair<string, Guid>(o.Name.ToUpperInvariant(), o.Id)).ToArray();
 
             // Special cases should be ignored when counting the distance. This loop replaces special cases with string.Empty.
-            for (int i = 0; i < possibleOrganisationNames.Length; i++)
+            for (int i = 0; i < possibleOrganisations.Length; i++)
             {
                 foreach (var specialCase in specialCases)
                 {
@@ -49,7 +49,7 @@
 
             var matchingIdsWithDistance = new List<KeyValuePair<Guid, int>>();
 
-            for (int i = 0; i < possibleOrganisationNames.Length; i++)
+            for (int i = 0; i < possibleOrganisations.Length; i++)
             {
                 int distance = StringSearch.CalculateLevenshteinDistance(searchTerm, uppercaseOrganisationNames[i].Key);
 
@@ -63,13 +63,12 @@
 
             var matchingOrganisations =
                 matchingIdsWithDistance.Select(
-                    m =>
-                        new KeyValuePair<string, Guid>(possibleOrganisationNames.Single(o => o.Id == m.Key).Name, m.Key)).ToArray();
+                    m => possibleOrganisations.Single(o => o.Id == m.Key)).ToArray();
 
             return matchingOrganisations;
         }
 
-        private string PrepareQuery(FindMatchingCompanies query)
+        private string PrepareQuery(FindMatchingOrganisations query)
         {
             var returnString = query.CompanyName.Trim().ToUpperInvariant();
 
@@ -103,9 +102,11 @@
         
         private async Task<Organisation[]> GetPossibleOrganisationNames(string searchTerm)
         {
+            var firstLetterOfSearchTerm = searchTerm[0].ToString();
+
             return await context.Organisations
-                .Where(o => o.Name.StartsWith(searchTerm[0].ToString(), StringComparison.InvariantCultureIgnoreCase)
-                || o.Name.StartsWith("THE ", StringComparison.InvariantCultureIgnoreCase))
+                .Where(o => o.Name.StartsWith(firstLetterOfSearchTerm)
+                || o.Name.StartsWith("THE "))
                 .ToArrayAsync();
         }
 

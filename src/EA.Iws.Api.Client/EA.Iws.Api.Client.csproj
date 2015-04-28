@@ -70,7 +70,9 @@
     <Compile Include="Entities\TokenResponse.cs" />
     <Compile Include="Actions\Registration.cs" />
     <Compile Include="Actions\IRegistration.cs" />
+    <Compile Include="Entities\AddressData.cs" />
     <Compile Include="Entities\ApplicantRegistrationData.cs" />
+    <Compile Include="Entities\OrganisationData.cs" />
     <Compile Include="Entities\OrganisationRegistrationData.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="IwsClient.cs" />

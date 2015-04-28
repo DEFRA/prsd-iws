@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
+    <Compile Include="App_Start\Modules\UserContextModule.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Identity\IwsIdentityContext.cs" />
     <Compile Include="Identity\SmsService.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Identity\UserContext.cs" />
     <Compile Include="IdSrv\Clients.cs" />
     <Compile Include="IdSrv\DebugLog.cs" />
     <Compile Include="IdSrv\DebugLogger.cs" />
@@ -223,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="App_Start\Modules\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">
@@ -238,6 +239,10 @@
       <Project>{FFC5DAE6-5D7E-42EB-8E16-FF9A78C898F1}</Project>
       <Name>EA.Iws.Core.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Cqrs.Autofac\EA.Iws.Cqrs.Autofac.csproj">
+      <Project>{084fe45b-1a2b-45fc-b8d1-7915b0935263}</Project>
+      <Name>EA.Iws.Cqrs.Autofac</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Cqrs\EA.Iws.Cqrs.csproj">
       <Project>{30697c44-f282-4c41-9b93-e337c80f2d83}</Project>
       <Name>EA.Iws.Cqrs</Name>
@@ -245,6 +250,10 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.IoC\EA.Iws.IoC.csproj">
+      <Project>{6ee83347-c928-4ccc-b878-376f6144f6a4}</Project>
+      <Name>EA.Iws.IoC</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
