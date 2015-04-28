@@ -15,9 +15,9 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<HttpResponseMessage> RegisterApplicantAsync(string accessToken, ApplicantRegistrationData applicantRegistrationData)
+        public async Task<HttpResponseMessage> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData)
         {
-            return await httpClient.PostProtectedAsync<ApplicantRegistrationData>(accessToken, "Registration/Register", applicantRegistrationData);
+            return await httpClient.PostAsJsonAsync<ApplicantRegistrationData>("Registration/Register", applicantRegistrationData);
         }
 
         public async Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData)

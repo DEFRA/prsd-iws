@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
+    using Infrastructure;
     using Services;
     using ViewModels.Registration;
 
@@ -45,7 +46,7 @@
                     };
 
                     response =
-                        await client.Registration.RegisterApplicantAsync("Test", applicantRegistrationData);
+                        await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
                 }
 
                 if (response.IsSuccessStatusCode)
@@ -122,7 +123,7 @@
 
             using (var client = new IwsClient(config.ApiUrl))
             {
-                response = await client.Registration.RegisterOrganisationAsync("Test", organisationRegistrationData);
+                response = await client.Registration.RegisterOrganisationAsync(User.GetAccessToken(), organisationRegistrationData);
             }
 
             if (response.IsSuccessStatusCode)

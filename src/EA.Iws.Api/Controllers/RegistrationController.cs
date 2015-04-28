@@ -14,23 +14,11 @@
     [RoutePrefix("api/Registration")]
     public class RegistrationController : ApiController
     {
-        private readonly IAuthenticationManager authManager;
         private readonly ApplicationUserManager userManager;
-
-        private readonly IQueryBus queryBus;
-        private readonly ICommandBus commandBus;
-
-        public RegistrationController(ApplicationUserManager userManager,
-            IAuthenticationManager authManager)
+        
+        public RegistrationController(ApplicationUserManager userManager)
         {
             this.userManager = userManager;
-            this.authManager = authManager;
-        }
-
-        public RegistrationController(IQueryBus queryBus, ICommandBus commandBus)
-        {
-            this.queryBus = queryBus;
-            this.commandBus = commandBus;
         }
 
         // POST api/Registration/Register
@@ -68,7 +56,7 @@
             var address = new Address(orgRegData.Address1, orgRegData.TownOrCity, orgRegData.Postcode, new Country());
             var organisation = new Organisation(orgRegData.Name, address, orgRegData.EntityType);
 
-            await commandBus.SendAsync(new CreateOrganisation(organisation));
+            //await commandBus.SendAsync(new CreateOrganisation(organisation));
 
             return Ok();
         }
