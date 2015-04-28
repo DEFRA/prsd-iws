@@ -21,6 +21,7 @@
             IQueryBus queryBus)
         {
             this.userManager = userManager;
+            this.queryBus = queryBus;
         }
 
         // POST api/Registration/Register
