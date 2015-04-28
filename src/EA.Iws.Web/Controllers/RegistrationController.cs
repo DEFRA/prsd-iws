@@ -52,7 +52,7 @@
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("SelectOrganisation", new { model = model.Name});
+                    return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                 }
             }
             return View("ApplicantRegistration", model);
@@ -65,11 +65,11 @@
         }
 
         [System.Web.Mvc.HttpGet]
-        public ActionResult SelectOrganisation(string name)
+        public ActionResult SelectOrganisation(string organisationName)
         {
             var model = new SelectOrganisationViewModel
             {
-                Name = name,
+                Name = organisationName,
                 Organisations = GetTestOrganisations()
             };
 
@@ -106,6 +106,20 @@
                     Name = "SWF Plumbing"
                 }
             };
+        }
+
+        [System.Web.Mvc.HttpGet]
+        public ActionResult CreateNewOrganisation(string organisationName)
+        {
+            var model = new CreateNewOrganisationViewModel { Name = organisationName };
+
+            return View("CreateNewOrganisation", model);
+        }
+
+        [System.Web.Mvc.HttpPost]
+        public ActionResult CreateNewOrganisation(CreateNewOrganisationViewModel model)
+        {
+            return View("CreateNewOrganisation", model);
         }
     }
 }

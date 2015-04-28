@@ -1,0 +1,68 @@
+﻿@model EA.Iws.Web.ViewModels.Registration.CreateNewOrganisationViewModel
+
+@{
+    ViewBag.Title = "Organisation Details";
+}
+<h1 class="heading-large">
+    Organisation details
+</h1>
+
+@using (Html.BeginForm("CreateNewOrganisation", "Registration"))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+        @Html.ValidationMessageFor(m => m.Name)
+        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Address1)">
+        @Html.ValidationMessageFor(m => m.Address1)
+        @Html.LabelFor(m => m.Address1, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Address2)">
+        @Html.ValidationMessageFor(m => m.Address2)
+        @Html.LabelFor(m => m.Address2, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
+        @Html.ValidationMessageFor(m => m.TownOrCity)
+        @Html.LabelFor(m => m.TownOrCity, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.TownOrCity, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Postcode)">
+        @Html.ValidationMessageFor(m => m.Postcode)
+        @Html.LabelFor(m => m.Postcode, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Country)">
+        @Html.ValidationMessageFor(m => m.Country)
+        @Html.LabelFor(m => m.Country, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label class="form-label">Organisation Type</label>
+        <label class="block-label">
+            @Html.RadioButtonFor(m => m.EntityType, "Sole Trader") Sole Trader
+        </label>
+        <label class="block-label">
+            @Html.RadioButtonFor(m => m.EntityType, "Partnership") Partnership
+        </label>
+        <label class="block-label" data-target="companies-house-number">
+            @Html.RadioButtonFor(m => m.EntityType, "Company") Company
+        </label>
+        <div class="panel-indent js-hidden" id="companies-house-number">
+            @Html.LabelFor(m => m.CompaniesHouseReference, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.CompaniesHouseReference, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="button" value="Register" />
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

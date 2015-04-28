@@ -440,6 +440,7 @@
     <Content Include="Views\Registration\ApplicantRegistration.cshtml" />
     <Content Include="Views\Registration\SelectOrganisation.cshtml" />
     <Content Include="Views\Registration\_OrganisationGrid.cshtml" />
+    <Content Include="Views\Registration\CreateNewOrganisation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -484,6 +485,7 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Shared\Address.cs" />

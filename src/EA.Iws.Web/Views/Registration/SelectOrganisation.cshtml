@@ -57,5 +57,5 @@
         <button class="button" type="submit">Use selected</button>
     </div>
     
-    @Html.ActionLink(linkText: "Create new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { n = Model.Name }, htmlAttributes: new { })<br />
+    @Html.ActionLink(linkText: "Create new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { })<br />
 }
