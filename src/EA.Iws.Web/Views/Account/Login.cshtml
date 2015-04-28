@@ -5,47 +5,30 @@
 </h1>
 <p class="heading-large"></p>
 
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" }))
+@using (Html.BeginForm("Login", "Account"))
 {
     @Html.AntiForgeryToken()
-    if (!ViewData.ModelState.IsValid)
-    {
-        <div class="validation-summary">
-            <h1 class="heading-small">
-                Please Check The Following:
-                @Html.ValidationSummary()
-            </h1>
-        </div>
-    }
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-        </div>
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+        @Html.ValidationMessageFor(m => m.Email)
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
+        @Html.ValidationMessageFor(m => m.Password)
+        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-        </div>
+        @Html.CheckBoxFor(m => m.RememberMe)
+        @Html.LabelFor(m => m.RememberMe)
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div class="checkbox">
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Log in" class="button" />
-        </div>
     </div>
     <p>
-        @Html.ActionLink("Register as a new user", "Register")
+        @Html.ActionLink("Register as a new user", "ApplicantRegistration", "Registration")
     </p>
 }
 
