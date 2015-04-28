@@ -230,6 +230,22 @@
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
+      <Project>{17bc546d-9ce6-452d-bbfb-a722583478f4}</Project>
+      <Name>EA.Iws.Core.Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Core.Domain\EA.Iws.Core.Domain.csproj">
+      <Project>{FFC5DAE6-5D7E-42EB-8E16-FF9A78C898F1}</Project>
+      <Name>EA.Iws.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Cqrs\EA.Iws.Cqrs.csproj">
+      <Project>{30697c44-f282-4c41-9b93-e337c80f2d83}</Project>
+      <Name>EA.Iws.Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
+      <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

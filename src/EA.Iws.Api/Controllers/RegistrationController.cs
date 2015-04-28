@@ -3,6 +3,10 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Client.Entities;
+    using Core.Cqrs;
+    using Cqrs;
+    using Cqrs.Registration;
+    using Domain;
     using Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.Owin.Security;
@@ -13,11 +17,20 @@
         private readonly IAuthenticationManager authManager;
         private readonly ApplicationUserManager userManager;
 
+        private readonly IQueryBus queryBus;
+        private readonly ICommandBus commandBus;
+
         public RegistrationController(ApplicationUserManager userManager,
             IAuthenticationManager authManager)
         {
             this.userManager = userManager;
             this.authManager = authManager;
+        }
+
+        public RegistrationController(IQueryBus queryBus, ICommandBus commandBus)
+        {
+            this.queryBus = queryBus;
+            this.commandBus = commandBus;
         }
 
         // POST api/Registration/Register
@@ -38,6 +51,21 @@
             {
                 return GetErrorResult(result);
             }
+
+            return Ok();
+        }
+
+        // POST api/Registration/Register
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<IHttpActionResult> RegisterOrganisation(OrganisationRegistrationData organisation)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //await commandBus.SendAsync();
 
             return Ok();
         }

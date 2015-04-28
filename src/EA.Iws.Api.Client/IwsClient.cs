@@ -7,7 +7,7 @@
     public class IwsClient : IDisposable
     {
         private readonly HttpClient httpClient;
-        private IApplicantRegistration applicantRegistration;
+        private IRegistration registration;
 
         public IwsClient(string baseUrl)
         {
@@ -19,9 +19,9 @@
             };
         }
 
-        public IApplicantRegistration ApplicantRegistration
+        public IRegistration Registration
         {
-            get { return applicantRegistration ?? (applicantRegistration = new ApplicantRegistration(httpClient)); }
+            get { return registration ?? (registration = new Registration(httpClient)); }
         }
 
         public void Dispose()

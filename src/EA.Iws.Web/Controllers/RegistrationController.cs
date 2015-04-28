@@ -4,10 +4,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System.Web.Http;
-    using System.Web.Http.Results;
     using System.Web.Mvc;
-    using System.Web.Routing;
     using Api.Client;
     using Api.Client.Entities;
     using Services;
@@ -27,8 +24,8 @@
             return View(new ApplicantRegistrationViewModel());
         }
 
-        [System.Web.Mvc.HttpPost]
-        [System.Web.Mvc.AllowAnonymous]
+        [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SubmitApplicantRegistration(ApplicantRegistrationViewModel model)
         {
@@ -47,7 +44,8 @@
                         ConfirmPassword = model.ConfirmPassword
                     };
 
-                    response = await client.ApplicantRegistration.RegisterApplicantAsync("Test", applicantRegistrationData);
+                    response =
+                        await client.Registration.RegisterApplicantAsync("Test", applicantRegistrationData);
                 }
 
                 if (response.IsSuccessStatusCode)
@@ -58,13 +56,13 @@
             return View("ApplicantRegistration", model);
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public ActionResult OrganisationGrid(IList<OrganisationViewModel> model)
         {
             return PartialView("_OrganisationGrid", model);
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public ActionResult SelectOrganisation(string organisationName)
         {
             var model = new SelectOrganisationViewModel
@@ -76,7 +74,7 @@
             return View("SelectOrganisation", model);
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public ActionResult SelectOrganisation(SelectOrganisationViewModel model)
         {
             if (!ModelState.IsValid)
@@ -108,7 +106,7 @@
             };
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public ActionResult CreateNewOrganisation(string organisationName)
         {
             var model = new CreateNewOrganisationViewModel { Name = organisationName };
@@ -116,9 +114,22 @@
             return View("CreateNewOrganisation", model);
         }
 
-        [System.Web.Mvc.HttpPost]
-        public ActionResult CreateNewOrganisation(CreateNewOrganisationViewModel model)
+        [HttpPost]
+        public async Task<ActionResult> CreateNewOrganisation(CreateNewOrganisationViewModel model)
         {
+            HttpResponseMessage response;
+            var organisationRegistrationData = new OrganisationRegistrationData();
+
+            using (var client = new IwsClient(config.ApiUrl))
+            {
+                response = await client.Registration.RegisterOrganisationAsync("Test", organisationRegistrationData);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("SelectOrganisation");
+            }
+
             return View("CreateNewOrganisation", model);
         }
     }

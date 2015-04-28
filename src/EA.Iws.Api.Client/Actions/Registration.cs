@@ -6,11 +6,11 @@
     using Entities;
     using Extensions;
 
-    internal class ApplicantRegistration : IApplicantRegistration
+    internal class Registration : IRegistration
     {
         private readonly HttpClient httpClient;
 
-        public ApplicantRegistration(HttpClient httpClient)
+        public Registration(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
@@ -18,6 +18,11 @@
         public async Task<HttpResponseMessage> RegisterApplicantAsync(string accessToken, ApplicantRegistrationData applicantRegistrationData)
         {
             return await httpClient.PostProtectedAsync<ApplicantRegistrationData>(accessToken, "Registration/Register", applicantRegistrationData);
+        }
+
+        public async Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData)
+        {
+            return await httpClient.PostProtectedAsync<OrganisationRegistrationData>(accessToken, "Registration/Register", organisationRegistrationData);
         }
     }
 }
