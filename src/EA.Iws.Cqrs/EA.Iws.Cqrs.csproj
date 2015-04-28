@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Organisations\FindMatchingCompanies.cs" />
+    <Compile Include="Organisations\FindMatchingCompaniesHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +65,26 @@
     <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
       <Project>{17bc546d-9ce6-452d-bbfb-a722583478f4}</Project>
       <Name>EA.Iws.Core.Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Core.DataAccess\EA.Iws.Core.DataAccess.csproj">
+      <Project>{c5ef212b-402c-4586-992b-d051626e3747}</Project>
+      <Name>EA.Iws.Core.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Core.Domain\EA.Iws.Core.Domain.csproj">
+      <Project>{ffc5dae6-5d7e-42eb-8e16-ff9a78c898f1}</Project>
+      <Name>EA.Iws.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
+      <Project>{46300373-d7ae-40aa-bf96-3fc3889825a4}</Project>
+      <Name>EA.Iws.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
+      <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Utils\EA.Iws.Utils.csproj">
+      <Project>{abe7729f-bc65-4766-9d89-959e4edf5f2b}</Project>
+      <Name>EA.Iws.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
