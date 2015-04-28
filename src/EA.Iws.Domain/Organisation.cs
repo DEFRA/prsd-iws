@@ -3,7 +3,7 @@
     using Core.Domain;
     using Utils;
 
-    public class Organisation : Entity, ICommand
+    public class Organisation : Entity
     {
         public string Name { get; private set; }
 

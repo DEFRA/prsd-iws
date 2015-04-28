@@ -67,14 +67,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Entities\TokenResponse.cs" />
-    <Compile Include="Actions\ApplicantRegistration.cs" />
-    <Compile Include="Actions\IApplicantRegistration.cs" />
-=======
     <Compile Include="Actions\Registration.cs" />
     <Compile Include="Actions\IRegistration.cs" />
->>>>>>> Added org registration cqrs
     <Compile Include="Entities\ApplicantRegistrationData.cs" />
     <Compile Include="Entities\OrganisationRegistrationData.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
