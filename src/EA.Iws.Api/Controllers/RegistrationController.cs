@@ -57,15 +57,18 @@
 
         // POST api/Registration/Register
         [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> RegisterOrganisation(OrganisationRegistrationData organisation)
+        [Route("RegisterOrganisation")]
+        public async Task<IHttpActionResult> RegisterOrganisation(OrganisationRegistrationData orgRegData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            //await commandBus.SendAsync();
+            var address = new Address(orgRegData.Address1, orgRegData.TownOrCity, orgRegData.Postcode, new Country());
+            var organisation = new Organisation(orgRegData.Name, address, orgRegData.EntityType);
+
+            await commandBus.SendAsync(new CreateOrganisation(organisation));
 
             return Ok();
         }

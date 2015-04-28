@@ -10,7 +10,7 @@
 
         public bool IsEuropeanUnionMember { get; private set; }
 
-        private Country()
+        public Country()
         {
         }
     }
