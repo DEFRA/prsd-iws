@@ -2,9 +2,12 @@
 {
     using System.Threading.Tasks;
     using System.Web.Http;
+    using Client.Entities;
     using Identity;
     using Microsoft.AspNet.Identity;
     using Models.Account;
+    using Microsoft.Owin.Security;
+    using Microsoft.Owin.Security.Cookies;
 
     [Authorize]
     [RoutePrefix("api/Account")]
