@@ -3,59 +3,85 @@
     ViewBag.Title = "Select your company";
 }
 
-<h1 class="heading-large">Select your company</h1>
-<p>Select your company from the list or, if it's not there, register a new company.</p>
-
-@using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
+<h1 class="heading-large">Organisation address</h1>
+@if (Model.Organisations != null && Model.Organisations.Count > 0)
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationMessageFor(m => m.Selected)
-    @Html.HiddenFor(m => m.Name)
-    
-    <div class="form-group">
-        <table>
 
-            <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Postcode</th>
-            </tr>
-            </thead>
+    <p>Please confirm the address of your place of business.</p>
 
-            <tbody>
-            @for (int i = 0; i < Model.Organisations.Count; i++)
-            {
-                <tr>
-                    <td>
-                        @Html.RadioButtonFor(m => m.Selected, Model.Organisations[i].Id)
-                        @Html.HiddenFor(m => m.Organisations[i].Id)
-                    </td>
+    using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
+     {
+        @Html.AntiForgeryToken()
+        @Html.ValidationMessageFor(m => m.Selected)
+        @Html.HiddenFor(m => m.Name)
 
-                    <td>
-                        @Html.DisplayFor(m => m.Organisations[i].Name)
+         for (int i = 0; i < Model.Organisations.Count; i++)
+         {
+             bool shouldBeANewRow = i%2 == 0;
+
+             if (shouldBeANewRow)
+             {
+                 @:<div class="grid-row">
+             }
+
+            <div class="column-half">
+                <h3 class="heading-small">Address @(i + 1)</h3>
+                <div class="colored-header-bar"></div>
+                @Html.HiddenFor(m => m.Organisations[i].Id)
+                <ul>
+                    <li>
                         @Html.HiddenFor(m => m.Organisations[i].Name)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(m => m.Organisations[i].Address.TownOrCity)
+                        <span class="bold-small">@Html.DisplayFor(m => m.Organisations[i].Name)</span>
+                    </li>
+                    <li>
+                        @Html.HiddenFor(m => m.Organisations[i].Address.Building)
+                        @Html.DisplayFor(m => m.Organisations[i].Address.Building),
+                    </li>
+                    <li>
                         @Html.HiddenFor(m => m.Organisations[i].Address.TownOrCity)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(m => m.Organisations[i].Address.PostalCode)
+                        @Html.DisplayFor(m => m.Organisations[i].Address.TownOrCity),
+                    </li>
+                    <li>
                         @Html.HiddenFor(m => m.Organisations[i].Address.PostalCode)
-                    </td>
-                </tr>
-            }
-            </tbody>
+                        @Html.DisplayFor(m => m.Organisations[i].Address.PostalCode)
+                    </li>
+                </ul>
+                <button type="submit" name="submitButton" value="@Html.Raw(Model.Organisations[i].Id)" class="link-submit">Use this address</button>
+            </div>
 
-        </table>
-    </div>
-    <div class="form-group">
-        <button class="button" type="submit">Use selected</button>
-    </div>
-    
-    @Html.ActionLink(linkText: "Create new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { })<br />
+            if (!shouldBeANewRow || i == Model.Organisations.Count - 1)
+            {
+            @:</div>
+            }
+         }
+     }
 }
+else
+{
+    <p>No organisations matching your organisation name have been registered. Please register your organisation details.</p>
+}
+<div class="form-group">
+</div>
+<hr />
+<h2 class="heading-medium">Address not listed?</h2>
+<p>If your organisation's address is not listed add a new address.</p>
+@Html.ActionLink(linkText: "Add new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { @class = "button" })<br />
+
+
+<style>
+    .link-submit {
+        margin-top: 10px;
+        background: none;
+        border: none;
+        padding: 0;
+        color: #005ea5;
+        font-family: "nta", Arial, sans-serif;
+        cursor: pointer;
+        font-size: 19px;
+        text-decoration: underline;
+    }
+
+        .link-submit:hover {
+            color: #2E8ACA;
+        }
+</style>

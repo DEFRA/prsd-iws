@@ -107,6 +107,7 @@
             return await context.Organisations
                 .Where(o => o.Name.StartsWith(firstLetterOfSearchTerm)
                 || o.Name.StartsWith("THE "))
+                .Include(o => o.Address.Country)
                 .ToArrayAsync();
         }
 

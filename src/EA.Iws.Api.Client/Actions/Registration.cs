@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Api.Client.Actions
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Web;
     using Entities;
     using Extensions;
 
@@ -25,11 +27,19 @@
             return await httpClient.PostAsJsonAsync(accessToken, controller + "Register", organisationRegistrationData);
         }
 
-        public async Task<OrganisationData[]> SearchOrganisationAsync(string organisationName)
+        public async Task<OrganisationData[]> SearchOrganisationAsync(string accessToken, string organisationName)
         {
-            OrganisationData[] organisations = await httpClient.GetAsync<OrganisationData[]>(controller + "OrganisationSearch/" + organisationName);
+            // The period character breaks the api call.
+            organisationName = HttpUtility.UrlEncode(organisationName).Replace(".", string.Empty);
+
+            OrganisationData[] organisations = await httpClient.GetAsync<OrganisationData[]>(accessToken, controller + "OrganisationSearch/" + organisationName);
 
             return organisations;
+        }
+
+        public async Task<HttpResponseMessage> LinkUserToOrganisationAsync(string accessToken, Guid organisationId)
+        {
+            return await httpClient.PostAsJsonAsync(accessToken, controller + "OrganisationSelect", new OrganisationLinkData{ OrganisationId = organisationId});
         }
     }
 }

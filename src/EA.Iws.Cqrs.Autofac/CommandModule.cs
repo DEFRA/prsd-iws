@@ -16,6 +16,10 @@
                 .Where(t => typeof(ICommand).IsAssignableFrom(t))
                 .As<ICommand>();
 
+            builder.RegisterAssemblyTypes(cqrsAssembly)
+                .AsClosedTypesOf(typeof(ICommandHandler<>))
+                .AsImplementedInterfaces();
+
             // Register our implementation of the command bus.
             builder.RegisterType<AutofacCommandBus>().As<ICommandBus>();
         }

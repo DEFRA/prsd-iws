@@ -1,29 +1,36 @@
 ﻿namespace EA.Iws.Api.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
     using Client.Entities;
     using Core.Cqrs;
+    using Core.Domain;
     using Cqrs.Organisations;
+    using Cqrs.Registration;
+    using Cqrs.Users;
     using Domain;
     using Identity;
     using Microsoft.AspNet.Identity;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
 
     [RoutePrefix("api/Registration")]
     public class RegistrationController : ApiController
     {
         private readonly ApplicationUserManager userManager;
         private readonly IQueryBus queryBus;
-        
+        private readonly ICommandBus commandBus;
+        private readonly IUserContext userContext;
+
         public RegistrationController(ApplicationUserManager userManager,
-            IQueryBus queryBus)
+            IQueryBus queryBus,
+            ICommandBus commandBus,
+            IUserContext userContext)
         {
             this.userManager = userManager;
             this.queryBus = queryBus;
+            this.commandBus = commandBus;
+            this.userContext = userContext;
         }
 
         // POST api/Registration/Register
@@ -74,11 +81,19 @@
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         [Route("OrganisationSearch/{organisationName}")]
         public async Task<OrganisationData[]> OrganisationSearch(string organisationName)
         {
-            if (organisationName == null)
+            if (string.IsNullOrEmpty(organisationName))
+            {
+                return null;
+            }
+
+            var user = await queryBus.QueryAsync(new UserById(userContext.UserId));
+
+            // Users which have already been through the search should not be permitted to run another search.
+            if (user.Organisation != null)
             {
                 return null;
             }
@@ -101,6 +116,23 @@
             }).ToArray();
 
             return apiOrganisatons;
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("OrganisationSelect")]
+        public async Task<IHttpActionResult> OrganisationSelect(OrganisationLinkData organisationLink)
+        {
+            var organisation = await queryBus.QueryAsync(new OrganisationById(organisationLink.OrganisationId));
+
+            if (organisation == null)
+            {
+                return BadRequest();
+            }
+
+            await commandBus.SendAsync(new LinkUserToOrganisation(userContext.UserId.ToString(), organisation));
+
+            return Ok();
         }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)

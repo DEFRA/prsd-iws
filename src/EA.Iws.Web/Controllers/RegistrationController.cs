@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -67,12 +67,7 @@
         }
 
         [HttpGet]
-        public ActionResult OrganisationGrid(IList<OrganisationData> model)
-        {
-            return PartialView("_OrganisationGrid", model);
-        }
-
-        [HttpGet]
+        [Authorize]
         public async Task<ActionResult> SelectOrganisation(string organisationName)
         {
             var model = new SelectOrganisationViewModel
@@ -82,21 +77,42 @@
 
             using (var client = new IwsClient(config.ApiUrl))
             {
-                model.Organisations = await client.Registration.SearchOrganisationAsync(organisationName);
+                if (string.IsNullOrEmpty(organisationName))
+                {
+                    model.Organisations = null;
+                }
+                else
+                {
+                    model.Organisations = await client.Registration.SearchOrganisationAsync(User.GetAccessToken(), organisationName);
+                }
             }
 
             return View("SelectOrganisation", model);
         }
 
         [HttpPost]
-        public ActionResult SelectOrganisation(SelectOrganisationViewModel model)
+        [Authorize]
+        public async Task<ActionResult> SelectOrganisation(SelectOrganisationViewModel model, string submitButton)
         {
-            if (!ModelState.IsValid)
+            Guid selectedGuid;
+            if (!Guid.TryParse(submitButton, out selectedGuid) || model.Organisations.SingleOrDefault(o => o.Id == selectedGuid) == null)
             {
-                return View("SelectOrganisation", model);
+                return RedirectToAction("SelectOrganisation", routeValues: new { organisationName = model.Name });
             }
 
-            return RedirectToAction("SelectOrganisation");
+            using (var client = new IwsClient(config.ApiUrl))
+            {
+                try
+                {
+                    await client.Registration.LinkUserToOrganisationAsync(User.GetAccessToken(), selectedGuid);
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("SelectOrganisation", routeValues: new { organisationName = model.Name });
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

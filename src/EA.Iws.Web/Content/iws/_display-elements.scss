@@ -61,3 +61,11 @@
     position: absolute;
     left: -999em;
 }
+
+.colored-header-bar{
+    width:100%;
+    margin:0 0;
+    height:10px;
+    background-color: $govuk_blue;
+    margin-bottom: 16px;
+}

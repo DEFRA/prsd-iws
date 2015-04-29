@@ -60,6 +60,7 @@
     <Compile Include="Mappings\CompetentAuthorityMappings.cs" />
     <Compile Include="Mappings\CountryMapping.cs" />
     <Compile Include="Mappings\OrganisationMapping.cs" />
+    <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

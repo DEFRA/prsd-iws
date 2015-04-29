@@ -21,6 +21,8 @@
 
         public virtual DbSet<Organisation> Organisations { get; set; }
 
+        public virtual DbSet<User> Users { get; set; }
+
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")
         {

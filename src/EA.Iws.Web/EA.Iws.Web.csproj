@@ -440,7 +440,6 @@
     <Content Include="Views\NotificationApplication\CompetentAuthority.cshtml" />
     <Content Include="Views\Registration\ApplicantRegistration.cshtml" />
     <Content Include="Views\Registration\SelectOrganisation.cshtml" />
-    <Content Include="Views\Registration\_OrganisationGrid.cshtml" />
     <Content Include="Views\Registration\CreateNewOrganisation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
