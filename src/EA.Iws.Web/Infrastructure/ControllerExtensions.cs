@@ -12,6 +12,7 @@
             var errorResponse = response.Content.ReadAsAsync<HttpError>().Result;
             if (errorResponse != null)
             {
+                if (!errorResponse.ContainsKey("ModelState")) return;
                 var modelStateErrors = errorResponse["ModelState"] as JObject;
                 if (modelStateErrors != null)
                 {

@@ -39,9 +39,13 @@
             }
 
             var response = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
-            authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe }, response.GenerateUserIdentity());
-
-            return RedirectToLocal(returnUrl);
+            if (response.AccessToken != null)
+            {
+                authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe }, response.GenerateUserIdentity());
+                return RedirectToLocal(returnUrl);
+            }
+            ModelState.AddModelError(string.Empty, "The username or password is incorrect");
+            return View(model);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
