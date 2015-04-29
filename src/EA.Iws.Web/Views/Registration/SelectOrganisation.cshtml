@@ -39,13 +39,13 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(m => m.Organisations[i].TownOrCity)
-                        @Html.HiddenFor(m => m.Organisations[i].TownOrCity)
+                        @Html.DisplayFor(m => m.Organisations[i].Address.TownOrCity)
+                        @Html.HiddenFor(m => m.Organisations[i].Address.TownOrCity)
                     </td>
 
                     <td>
-                        @Html.DisplayFor(m => m.Organisations[i].Postcode)
-                        @Html.HiddenFor(m => m.Organisations[i].Postcode)
+                        @Html.DisplayFor(m => m.Organisations[i].Address.PostalCode)
+                        @Html.HiddenFor(m => m.Organisations[i].Address.PostalCode)
                     </td>
                 </tr>
             }

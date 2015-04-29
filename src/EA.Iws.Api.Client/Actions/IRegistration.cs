@@ -8,5 +8,6 @@
     {
         Task<HttpResponseMessage> RegisterApplicantAsync(ApplicantRegistrationData applicatRegistrationData);
         Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData);
+        Task<OrganisationData[]> SearchOrganisationAsync(string organisationName);
     }
 }

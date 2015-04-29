@@ -67,19 +67,23 @@
         }
 
         [HttpGet]
-        public ActionResult OrganisationGrid(IList<OrganisationViewModel> model)
+        public ActionResult OrganisationGrid(IList<OrganisationData> model)
         {
             return PartialView("_OrganisationGrid", model);
         }
 
         [HttpGet]
-        public ActionResult SelectOrganisation(string organisationName)
+        public async Task<ActionResult> SelectOrganisation(string organisationName)
         {
             var model = new SelectOrganisationViewModel
             {
-                Name = organisationName,
-                Organisations = null
+                Name = organisationName
             };
+
+            using (var client = new IwsClient(config.ApiUrl))
+            {
+                model.Organisations = await client.Registration.SearchOrganisationAsync(organisationName);
+            }
 
             return View("SelectOrganisation", model);
         }
@@ -93,27 +97,6 @@
             }
 
             return RedirectToAction("SelectOrganisation");
-        }
-
-        private IList<OrganisationViewModel> GetTestOrganisations()
-        {
-            return new[]
-            {
-                new OrganisationViewModel
-                {
-                    Id = Guid.NewGuid(),
-                    Postcode = "GU22 7mx",
-                    TownOrCity = "Woking",
-                    Name = "SFW Ltd"
-                },
-                new OrganisationViewModel
-                {
-                    Id = Guid.NewGuid(),
-                    Postcode = "GU22 7UY",
-                    TownOrCity = "Woking",
-                    Name = "SWF Plumbing"
-                }
-            };
         }
 
         [HttpGet]

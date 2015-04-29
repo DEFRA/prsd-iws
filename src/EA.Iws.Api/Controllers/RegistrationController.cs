@@ -89,7 +89,15 @@
             {
                 Name = o.Name,
                 Id = o.Id,
-                Address = new AddressData()
+                Address = new AddressData
+                {
+                    Building = o.Address.Building,
+                    StreetOrSuburb = o.Address.StreetOrSuburb,
+                    TownOrCity = o.Address.TownOrCity,
+                    Region = o.Address.Region,
+                    Country = o.Address.Country.Name,
+                    PostalCode = o.Address.PostalCode
+                }
             }).ToArray();
 
             return apiOrganisatons;

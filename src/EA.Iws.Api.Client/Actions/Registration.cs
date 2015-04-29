@@ -8,6 +8,7 @@
     internal class Registration : IRegistration
     {
         private readonly HttpClient httpClient;
+        private readonly string controller = "Registration/";
 
         public Registration(HttpClient httpClient)
         {
@@ -16,12 +17,19 @@
 
         public async Task<HttpResponseMessage> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData)
         {
-            return await httpClient.PostAsJsonAsync<ApplicantRegistrationData>("Registration/Register", applicantRegistrationData);
+            return await httpClient.PostAsJsonAsync(controller + "Register", applicantRegistrationData);
         }
 
         public async Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData)
         {
-            return await httpClient.PostAsJsonAsync<OrganisationRegistrationData>(accessToken, "Registration/Register", organisationRegistrationData);
+            return await httpClient.PostAsJsonAsync(accessToken, controller + "Register", organisationRegistrationData);
+        }
+
+        public async Task<OrganisationData[]> SearchOrganisationAsync(string organisationName)
+        {
+            OrganisationData[] organisations = await httpClient.GetAsync<OrganisationData[]>(controller + "OrganisationSearch/" + organisationName);
+
+            return organisations;
         }
     }
 }
