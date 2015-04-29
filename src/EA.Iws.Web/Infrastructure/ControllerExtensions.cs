@@ -1,13 +1,13 @@
-﻿namespace EA.Iws.Web.ControllerHelpers
+﻿namespace EA.Iws.Web.Infrastructure
 {
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Mvc;
     using Newtonsoft.Json.Linq;
 
-    public static class ValidationHelper
+    public static class ControllerExtensions
     {
-        public static void AddValidationErrorsToModelState(Controller controller, HttpResponseMessage response)
+        public static void AddValidationErrorsToModelState(this Controller controller, HttpResponseMessage response)
         {
             var errorResponse = response.Content.ReadAsAsync<HttpError>().Result;
             if (errorResponse != null)

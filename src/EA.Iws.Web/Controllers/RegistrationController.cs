@@ -61,7 +61,7 @@
 
                     return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                 }
-                ValidationHelper.AddValidationErrorsToModelState(this, response);
+                this.AddValidationErrorsToModelState(response);
             }
             return View("ApplicantRegistration", model);
         }
