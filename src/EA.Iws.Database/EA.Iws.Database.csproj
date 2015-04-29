@@ -53,6 +53,7 @@
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />
     <Content Include="scripts\Update\20150424-152702-EA.Iws.sql" />
+    <None Include="scripts\Update\20150429-150715-EA.Iws.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />

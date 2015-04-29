@@ -3,61 +3,63 @@
     ViewBag.Title = "Register";
     var signin = Request.QueryString["signin"];
 }
-    <h1 class="heading-large">
-        User Details
-    </h1>
-    <p class="heading-large"></p>
+<h1 class="heading-large">
+    About you and your organisation
+</h1>
+<p>
+    Use this sevice to tell us more about your organisation and your contact details
+</p>
+<h1 class="heading-large"></h1>
 
-    @using (Html.BeginForm("SubmitApplicantRegistration", "Registration"))
-    {
-        @Html.AntiForgeryToken()
-        @Html.Gds().ValidationSummary()
+@using (Html.BeginForm("SubmitApplicantRegistration", "Registration"))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
-            @Html.ValidationMessageFor(m => m.Name)
-            @Html.LabelFor(m => m.Name, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Surname)">
-            @Html.ValidationMessageFor(m => m.Surname)
-            @Html.LabelFor(m => m.Surname, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
-        </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.OrganisationName)">
-            @Html.ValidationMessageFor(m => m.OrganisationName)
-            @Html.LabelFor(m => m.OrganisationName, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.OrganisationName, new { @class = "form-control" })
-        </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
-            @Html.ValidationMessageFor(m => m.Email)
-            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.PhoneNumber)">
-            @Html.ValidationMessageFor(m => m.PhoneNumber)
-            @Html.LabelFor(m => m.PhoneNumber, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-        </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
-            @Html.ValidationMessageFor(m => m.Password)
-            @Html.LabelFor(m => m.Password, new { @class = "form-label" })
-            <span class="form-hint">Use at least one capital letter, one digit and one non letter or digit character</span>
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
-            @Html.ValidationMessageFor(m => m.ConfirmPassword)
-            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
-            <div class="form-group">@Html.ValidationMessageFor(m => m.TermsAndConditions)</div>
-            @Html.CheckBoxFor(m => m.TermsAndConditions)
-            Please confirm that you have read the <a href="http://www.gov.uk">terms and conditions</a>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="button" value="Register" />
-        </div>
-    }
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+        @Html.ValidationMessageFor(m => m.Name)
+        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Surname)">
+        @Html.ValidationMessageFor(m => m.Surname)
+        @Html.LabelFor(m => m.Surname, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.OrganisationName)">
+        @Html.ValidationMessageFor(m => m.OrganisationName)
+        @Html.LabelFor(m => m.OrganisationName, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.OrganisationName, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.PhoneNumber)">
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+        @Html.ValidationMessageFor(m => m.Email)
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
+        @Html.ValidationMessageFor(m => m.Password)
+        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
+        <div class="form-group">@Html.ValidationMessageFor(m => m.TermsAndConditions)</div>
+        @Html.CheckBoxFor(m => m.TermsAndConditions)
+        Please confirm that you have read the <a href="http://www.gov.uk">terms and conditions</a>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="button" value="Register" />
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

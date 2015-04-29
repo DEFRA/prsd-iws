@@ -1,28 +1,26 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Net.Http;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
+    using ControllerHelpers;
     using Infrastructure;
     using Microsoft.Owin.Security;
     using Services;
-    using Thinktecture.IdentityModel.Client;
     using ViewModels.Registration;
-    using TokenResponse = Api.Client.Entities.TokenResponse;
 
     public class RegistrationController : Controller
     {
-        private readonly AppConfiguration config;
         private readonly IAuthenticationManager authenticationManager;
+        private readonly AppConfiguration config;
         private readonly Func<IwsOAuthClient> oauthClient;
 
-        public RegistrationController(AppConfiguration config, Func<IwsOAuthClient> oauthClient, IAuthenticationManager authenticationManager)
+        public RegistrationController(AppConfiguration config, Func<IwsOAuthClient> oauthClient,
+            IAuthenticationManager authenticationManager)
         {
             this.config = config;
             this.oauthClient = oauthClient;
@@ -59,14 +57,11 @@
 
                 if (response.IsSuccessStatusCode)
                 {
-                    //Registration is successful so sign the user in
-                    var client = oauthClient();
-                    var signInResponse = await client.GetAccessTokenAsync(model.Email, model.Password);
-                    var identity = GenerateUserIdentity(signInResponse);
-                    authenticationManager.SignIn(new AuthenticationProperties(), identity);
+                    await LoginHelper.LogIn(model.Email, model.Password, oauthClient, authenticationManager);
 
                     return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                 }
+                ValidationHelper.AddValidationErrorsToModelState(this, response);
             }
             return View("ApplicantRegistration", model);
         }
@@ -137,7 +132,10 @@
 
             using (var client = new IwsClient(config.ApiUrl))
             {
-                response = await client.Registration.RegisterOrganisationAsync(User.GetAccessToken(), organisationRegistrationData);
+                response =
+                    await
+                        client.Registration.RegisterOrganisationAsync(User.GetAccessToken(),
+                            organisationRegistrationData);
             }
 
             if (response.IsSuccessStatusCode)
@@ -146,19 +144,6 @@
             }
 
             return View("CreateNewOrganisation", model);
-        }
-
-        private static ClaimsIdentity GenerateUserIdentity(TokenResponse response)
-        {
-            var identity = new ClaimsIdentity(Constants.IwsAuthType);
-            identity.AddClaim(new Claim(OAuth2Constants.AccessToken, response.AccessToken));
-            if (response.IdentityToken != null)
-            {
-                identity.AddClaim(new Claim(OAuth2Constants.IdentityToken, response.IdentityToken));
-            }
-            identity.AddClaim(new Claim(IwsClaimTypes.ExpiresAt,
-                DateTimeOffset.Now.AddSeconds(response.ExpiresIn).ToString()));
-            return identity;
         }
     }
 }
