@@ -7,7 +7,6 @@
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
-    using ControllerHelpers;
     using Infrastructure;
     using Microsoft.Owin.Security;
     using Services;
@@ -57,7 +56,8 @@
 
                 if (response.IsSuccessStatusCode)
                 {
-                    await LoginHelper.LogIn(model.Email, model.Password, oauthClient, authenticationManager);
+                    var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
+                    authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
                     return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                 }

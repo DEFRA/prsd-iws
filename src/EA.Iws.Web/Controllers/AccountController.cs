@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using ControllerHelpers;
+    using Infrastructure;
     using Microsoft.Owin.Security;
     using ViewModels.Account;
 
@@ -38,7 +38,8 @@
                 return View(model);
             }
 
-            await LoginHelper.LogIn(model.Email, model.Password, oauthClient, authenticationManager, model.RememberMe);
+            var response = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
+            authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe }, response.GenerateUserIdentity());
 
             return RedirectToLocal(returnUrl);
         }
