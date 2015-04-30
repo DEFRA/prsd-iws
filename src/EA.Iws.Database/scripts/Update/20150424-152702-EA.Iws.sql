@@ -109,12 +109,12 @@ CREATE TABLE [Lookup].[Country] (
 
 
 GO
-PRINT N'Creating DF_CompetentAuthority_UsesSystem...';
+PRINT N'Creating DF_CompetentAuthority_IsSystemUser...';
 
 
 GO
 ALTER TABLE [Lookup].[CompetentAuthority]
-    ADD CONSTRAINT [DF_CompetentAuthority_UsesSystem] DEFAULT ((0)) FOR [UsesSystem];
+    ADD CONSTRAINT [DF_CompetentAuthority_IsSystemUser] DEFAULT ((0)) FOR [IsSystemUser];
 
 
 GO
