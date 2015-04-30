@@ -26,6 +26,28 @@
             {
                 return this.value;
             }
+            protected set
+            {
+                this.value = value;
+
+                // Get the static fields on the inheriting type.
+                foreach (var field in GetType().GetFields(BindingFlags.Public | BindingFlags.Static))
+                {
+                    // If the static field is an Enumeration type.
+                    var enumeration = field.GetValue(this) as Enumeration;
+                    if (enumeration == null)
+                    {
+                        continue;
+                    }
+
+                    // Set the value of this instance to the value of the corresponding static type.
+                    if (enumeration.Value == value)
+                    {
+                        this.displayName = enumeration.DisplayName;
+                        break;
+                    }
+                }
+            }
         }
 
         public string DisplayName

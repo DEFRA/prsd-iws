@@ -13,6 +13,7 @@
     <div class="text-danger">@Html.Gds().ValidationSummary()</div>
     if (Model != null)
     {
+        @Html.HiddenFor(m => m.CompetentAuthority)
         <div class="form-group">
             <fieldset>
                 @foreach (var wasteAction in Model.NotificationTypeAction)

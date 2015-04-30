@@ -8,6 +8,7 @@
     {
         private readonly HttpClient httpClient;
         private IRegistration registration;
+        private INotification notification;
 
         public IwsClient(string baseUrl)
         {
@@ -22,6 +23,11 @@
         public IRegistration Registration
         {
             get { return registration ?? (registration = new Registration(httpClient)); }
+        }
+
+        public INotification Notification
+        {
+            get { return notification ?? (notification = new Notification(httpClient)); }
         }
 
         public void Dispose()

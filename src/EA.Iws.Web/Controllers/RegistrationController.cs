@@ -12,6 +12,7 @@
     using Services;
     using ViewModels.Registration;
 
+    [Authorize]
     public class RegistrationController : Controller
     {
         private readonly IAuthenticationManager authenticationManager;

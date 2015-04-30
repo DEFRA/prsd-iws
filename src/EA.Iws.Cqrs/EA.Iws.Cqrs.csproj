@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notification\CreateNotificationApplication.cs" />
+    <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
+    <Compile Include="Notification\GetNextNotificationNumber.cs" />
+    <Compile Include="Notification\GetNextNotificationNumberHandler.cs" />
+    <Compile Include="Notification\GetNotificationNumber.cs" />
+    <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Organisations\FindMatchingOrganisations.cs" />
     <Compile Include="Organisations\FindMatchingOrganisationsHandler.cs" />
     <Compile Include="CompetentAuthorities\GetAllCompetentAuthorities.cs" />

@@ -7,7 +7,7 @@
 
     public interface IRegistration
     {
-        Task<HttpResponseMessage> RegisterApplicantAsync(ApplicantRegistrationData applicatRegistrationData);
+        Task<HttpResponseMessage> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData);
         Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData);
         Task<OrganisationData[]> SearchOrganisationAsync(string accessToken, string organisationName);
         Task<HttpResponseMessage> LinkUserToOrganisationAsync(string accessToken, Guid organisationId);

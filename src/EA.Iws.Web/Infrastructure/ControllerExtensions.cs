@@ -3,6 +3,7 @@
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Mvc;
+    using Api.Client;
     using Newtonsoft.Json.Linq;
 
     public static class ControllerExtensions
@@ -27,6 +28,14 @@
                         }
                     }
                 }
+            }
+        }
+
+        public static void AddValidationErrorsToModelState(this Controller controller, Response response)
+        {
+            foreach (var error in response.Errors)
+            {
+                controller.ModelState.AddModelError(string.Empty, error);
             }
         }
     }

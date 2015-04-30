@@ -194,6 +194,8 @@
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\NotificationApplicationController.cs" />
+    <Compile Include="Controllers\NotificationInformationController.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Identity\ApplicationUserStore.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\DebugExceptionLogger.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

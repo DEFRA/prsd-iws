@@ -6,6 +6,7 @@ using Microsoft.Owin;
 namespace EA.Iws.Api
 {
     using System.Web.Http;
+    using System.Web.Http.ExceptionHandling;
     using Autofac;
     using Autofac.Integration.WebApi;
     using Identity;
@@ -22,9 +23,12 @@ namespace EA.Iws.Api
     {
         public void Configuration(IAppBuilder app)
         {
+            // Web API configuration and services
+            var config = new HttpConfiguration();
             var configuration = new ConfigurationService();
 #if DEBUG
             LogProvider.SetCurrentLogProvider(new DebugLogger());
+            config.Services.Add(typeof(IExceptionLogger), new DebugExceptionLogger());
 #endif
             var factory = Factory.Configure();
             factory.ConfigureUserService(app);
@@ -41,9 +45,6 @@ namespace EA.Iws.Api
                 Authority = configuration.CurrentConfiguration.SiteRoot,
                 RequiredScopes = new[] { "api1" }
             });
-
-            // Web API configuration and services
-            var config = new HttpConfiguration();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

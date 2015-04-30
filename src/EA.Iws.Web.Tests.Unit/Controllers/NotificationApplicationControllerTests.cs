@@ -1,6 +1,9 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
+    using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
+    using Api.Client.Entities;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Web.Controllers;
@@ -17,17 +20,22 @@
                     CompetentAuthorities = new RadioButtonStringCollection
                     {
                         SelectedValue = "Test",
-                        PossibleValues = new[] {"Test", "String", "Value"}
+                        PossibleValues = new[] { "Test", "String", "Value" }
                     }
                 };
                 return competentAuthorityChoice;
             }
         }
 
+        private static NotificationApplicationController CreateNotificationApplicationController()
+        {
+            return new NotificationApplicationController(() => new IwsClient("http://api"));
+        }
+
         [Fact]
         public void CompetentAuthority_Get_ReturnsCorrectView()
         {
-            var controller = new NotificationApplicationController();
+            var controller = CreateNotificationApplicationController();
 
             var result = controller.CompetentAuthority() as ViewResult;
 
@@ -38,7 +46,7 @@
         [Fact]
         public void CompetentAuthority_Post_RedirectsToCorrectAction()
         {
-            var controller = new NotificationApplicationController();
+            var controller = CreateNotificationApplicationController();
 
             var competentAuthorityChoice = CompetentAuthorityChoice;
 
@@ -50,7 +58,7 @@
         [Fact]
         public void CompetentAuthority_PostInvalidModel_ReturnsToCorrectView()
         {
-            var controller = new NotificationApplicationController();
+            var controller = CreateNotificationApplicationController();
 
             controller.ModelState.AddModelError("Error", "A Test Error");
 
@@ -61,11 +69,11 @@
             Assert.Equal("CompetentAuthority", result.ViewName);
             Assert.IsType<CompetentAuthorityChoice>(result.Model);
         }
-    
+
         [Fact]
         public void WasteActionQuestion_Get_ReturnsCorrectView()
         {
-            var controller = new NotificationApplicationController();
+            var controller = CreateNotificationApplicationController();
             var result = controller.WasteActionQuestion(null, null) as ViewResult;
 
             Assert.Empty(result.ViewName);
@@ -73,23 +81,23 @@
         }
 
         [Fact]
-        public void WasteActionQuestion_Post_RedirectsToCorrectAction()
+        public async Task WasteActionQuestion_Post_RedirectsToCorrectAction()
         {
-            var controller = new NotificationApplicationController();
+            var controller = CreateNotificationApplicationController();
             var model = new InitialQuestions();
-            model.SelectedWasteAction = WasteAction.Recovery.ToString();
-            var result = controller.WasteActionQuestion(model) as RedirectToRouteResult;
+            model.SelectedWasteAction = WasteAction.Recovery;
+            var result = await controller.WasteActionQuestion(model) as RedirectToRouteResult;
 
             Assert.Equal("GenerateNumber", result.RouteValues["action"]);
         }
 
         [Fact]
-        public void WasteActionQuestion_PostInvalidModel_ReturnsToCorrectView()
+        public async Task WasteActionQuestion_PostInvalidModel_ReturnsToCorrectView()
         {
-            var controller = new NotificationApplicationController();
+            var controller = CreateNotificationApplicationController();
             controller.ModelState.AddModelError("Error", "Test Error");
             var model = new InitialQuestions();
-            var result = controller.WasteActionQuestion(model) as ViewResult;
+            var result = await controller.WasteActionQuestion(model) as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<InitialQuestions>(result.Model);

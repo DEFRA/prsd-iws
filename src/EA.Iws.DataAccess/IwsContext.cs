@@ -7,12 +7,14 @@
     using Core.Domain;
     using Core.Domain.Auditing;
     using Domain;
+    using Domain.Notification;
 
     public class IwsContext : DbContext
     {
         private readonly IUserContext userContext;
 
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
+
         public virtual DbSet<CompetentAuthority> CompetentAuthorities { get; set; }
 
         public virtual DbSet<Country> Countries { get; set; }
@@ -20,6 +22,8 @@
         public virtual DbSet<Address> Addresses { get; set; }
 
         public virtual DbSet<Organisation> Organisations { get; set; }
+
+        public virtual DbSet<NotificationApplication> NotificationApplications { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
 

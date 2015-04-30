@@ -442,7 +442,7 @@
     <Content Include="Views\Registration\SelectOrganisation.cshtml" />
     <Content Include="Views\Registration\CreateNewOrganisation.cshtml" />
     <Content Include="Views\NotificationApplication\WasteActionQuestion.cshtml" />
-    <Content Include="Views\NotificationApplication\GenerateNumber.cshtml" />
+    <Content Include="Views\NotificationApplication\Created.cshtml" />
     <Content Include="Views\Applicant\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -470,6 +470,7 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Infrastructure\EnumExtensions.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
@@ -491,11 +492,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\Created.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\WasteAction.cs" />
     <Compile Include="ViewModels\NotificationApplication\InitialQuestions.cs" />
     <Compile Include="ViewModels\Shared\Address.cs" />
     <Compile Include="ViewModels\Shared\PersonName.cs" />
@@ -504,7 +505,6 @@
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBase.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptional.cs" />
     <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoice.cs" />
-    <Compile Include="ViewModels\NotificationApplication\UKCompetentAuthorities.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>

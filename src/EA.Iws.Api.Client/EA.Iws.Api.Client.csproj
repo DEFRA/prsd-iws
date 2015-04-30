@@ -68,7 +68,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\NotificationInformation.cs" />
     <Compile Include="Entities\OrganisationLinkData.cs" />
+    <Compile Include="Actions\INotification.cs" />
+    <Compile Include="Actions\Notification.cs" />
+    <Compile Include="Entities\CreateNotificationData.cs" />
     <Compile Include="Entities\TokenResponse.cs" />
     <Compile Include="Actions\Registration.cs" />
     <Compile Include="Actions\IRegistration.cs" />
@@ -76,10 +80,14 @@
     <Compile Include="Entities\ApplicantRegistrationData.cs" />
     <Compile Include="Entities\OrganisationData.cs" />
     <Compile Include="Entities\OrganisationRegistrationData.cs" />
+    <Compile Include="Entities\CompetentAuthority.cs" />
+    <Compile Include="Entities\WasteAction.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
+    <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="IwsClient.cs" />
     <Compile Include="IwsOAuthClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

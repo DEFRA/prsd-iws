@@ -1,24 +1,37 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
+    using Api.Client.Entities;
+    using Infrastructure;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
 
+    [Authorize]
     public class NotificationApplicationController : Controller
     {
+        private readonly Func<IwsClient> apiClient;
+
+        public NotificationApplicationController(Func<IwsClient> apiClient)
+        {
+            this.apiClient = apiClient;
+        }
+
         [HttpGet]
         public ActionResult CompetentAuthority()
         {
             var model = new CompetentAuthorityChoice
             {
                 CompetentAuthorities =
-                    RadioButtonStringCollection.CreateFromEnum<UKCompetentAuthorities>()
+                    RadioButtonStringCollection.CreateFromEnum<CompetentAuthority>()
             };
 
             return View("CompetentAuthority", model);
         }
 
+        [HttpPost]
         public ActionResult CompetentAuthority(CompetentAuthorityChoice model)
         {
             if (!ModelState.IsValid)
@@ -30,82 +43,65 @@
                 new { ca = model.CompetentAuthorities.SelectedValue });
         }
 
+        [HttpGet]
         public ActionResult WasteActionQuestion(string ca, string nt)
         {
             InitialQuestions model = new InitialQuestions
             {
-                SelectedWasteAction = WasteAction.Recovery.ToString(),
-                CompetentAuthority = ca,
-                CompetentAuthorityContactInfo = GetCompetentAuthorityContactInfo(ca)
+                SelectedWasteAction = WasteAction.Recovery,
+                CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
             };
-
+            
             if (!string.IsNullOrWhiteSpace(nt))
             {
-                model.SelectedWasteAction =
-                    (nt.Equals(WasteAction.Disposal.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                        ? WasteAction.Disposal.ToString()
-                        : WasteAction.Recovery.ToString();
+                model.SelectedWasteAction = nt.GetValueFromDisplayName<WasteAction>();
             }
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult WasteActionQuestion(InitialQuestions model)
+        public async Task<ActionResult> WasteActionQuestion(InitialQuestions model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            if (string.IsNullOrWhiteSpace(model.SelectedWasteAction))
+            using (var client = apiClient())
             {
-                ModelState.AddModelError(string.Empty, "Please select notification type");
+                var response = await client.Notification.CreateNotificationApplicationAsync(User.GetAccessToken(),
+                    model.ToNotificationData());
+
+                if (!response.HasErrors)
+                {
+                    return RedirectToAction("Created",
+                        new
+                        {
+                            id = response.Result
+                        });
+                }
+                else
+                {
+                    this.AddValidationErrorsToModelState(response);
+                    return View(model);
+                }
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Created(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var notification = await client.Notification.GetNotificationInformationAsync(User.GetAccessToken(), id);
+                var model = new Created()
+                {
+                    NotificationId = notification.Id,
+                    NotificationNumber = notification.NotificationNumber
+                };
                 return View(model);
             }
-
-            return RedirectToAction("GenerateNumber",
-                new
-                {
-                    ca = model.CompetentAuthority,
-                    nt = model.SelectedWasteAction
-                });
-        }
-
-        private string GetCompetentAuthorityContactInfo(string ca)
-        {
-            if (ca == null)
-            {
-                return string.Empty;
-            }
-
-            if (ca.Equals("Environment Agency"))
-            {
-                return "Environment Agency - Tel: 01253 876934";
-            }
-
-            if (ca.Equals("Scottish Environment Protection Agency"))
-            {
-                return "Scottish Environment Protection Agency - Tel: 01253 876934";
-            }
-
-            if (ca.Equals("Northern Ireland Environment Agency"))
-            {
-                return "Northern Ireland Environment Agency - Tel: 01253 876934";
-            }
-
-            if (ca.Equals("Natural Resources Wales"))
-            {
-                return "Natural Resources Wales - Tel: 01253 876934";
-            }
-
-            return string.Empty;
-        }
-
-        public ActionResult GenerateNumber(int? ca, string nt)
-        {
-            ViewBag.nt = nt;
-            return View();
         }
     }
 }
