@@ -1,8 +1,9 @@
 ﻿@model EA.Iws.Web.ViewModels.Account.LoginViewModel
 
 <h1 class="heading-large">
-    Log in
+    Login to access your shipments
 </h1>
+<p>Enter your email address and password and click continue</p>
 <p class="heading-large"></p>
 
 @using (Html.BeginForm("Login", "Account"))
@@ -25,11 +26,10 @@
         @Html.LabelFor(m => m.RememberMe)
     </div>
     <div class="form-group">
-            <input type="submit" value="Log in" class="button" />
+            <input type="submit" value="Continue" class="button" />
     </div>
-    <p>
-        @Html.ActionLink("Register as a new user", "ApplicantRegistration", "Registration")
-    </p>
+    <p>@Html.ActionLink("Forgot your username", "Login", "Account")</p>
+    <p>@Html.ActionLink("Reset your password", "Login", "Account")</p>
 }
 
 @section Scripts {

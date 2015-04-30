@@ -3,7 +3,7 @@
     using Core.Domain;
     using Utils;
 
-    internal class User : Entity
+    public class User : Entity
     {
         public string FirstName { get; private set; }
 
