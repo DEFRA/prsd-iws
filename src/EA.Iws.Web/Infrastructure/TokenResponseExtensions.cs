@@ -15,6 +15,10 @@
             {
                 identity.AddClaim(new Claim(OAuth2Constants.IdentityToken, response.IdentityToken));
             }
+            if (response.RefreshToken != null)
+            {
+                identity.AddClaim(new Claim(OAuth2Constants.RefreshToken, response.RefreshToken));
+            }
             identity.AddClaim(new Claim(IwsClaimTypes.ExpiresAt,
                 DateTimeOffset.Now.AddSeconds(response.ExpiresIn).ToString()));
             return identity;

@@ -16,6 +16,7 @@
             };
 
             scopes.Add(StandardScopes.AllClaims);
+            scopes.Add(StandardScopes.OfflineAccess);
             scopes.AddRange(StandardScopes.All);
 
             return scopes;
