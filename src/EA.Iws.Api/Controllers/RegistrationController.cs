@@ -108,7 +108,11 @@
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError(string.Empty, error);
+                        //We are using the email address as the username so this avoids duplicate validation error message
+                        if (!error.StartsWith("Name"))
+                        {
+                            ModelState.AddModelError(string.Empty, error);
+                        }
                     }
                 }
 

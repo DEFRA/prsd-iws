@@ -19,7 +19,7 @@
         [Required]
         [StringLength(80)]
         [DataType(DataType.Text)]
-        [Display(Name = "Organisation name")]
+        [Display(Name = "Organisation")]
         public string OrganisationName { get; set; }
 
         [Required]

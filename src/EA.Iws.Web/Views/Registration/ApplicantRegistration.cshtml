@@ -51,14 +51,46 @@
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
-        <div class="form-group">@Html.ValidationMessageFor(m => m.TermsAndConditions)</div>
-        @Html.CheckBoxFor(m => m.TermsAndConditions)
-        Please confirm that you have read the <a href="http://www.gov.uk">terms and conditions</a>
-    </div>
-    <div class="form-group">
-        <input type="submit" class="button" value="Register" />
-    </div>
+    <div class="grid-row">
+        <div class="column-half">
+            <div class="form-group" @Html.Gds().FormGroupClass(m => m.TermsAndConditions)>
+                <fieldset>
+                    <div>@Html.ValidationMessageFor(m => m.TermsAndConditions)</div>
+                    <label class="block-label" for="checkbox-1">
+                        @Html.CheckBoxFor(m => m.TermsAndConditions, new { @id = "checkbox-1" })
+                        Accept terms and conditions for use
+                    </label>
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="button" value="Continue" />
+            </div>
+        </div>
+        <div class="column-half">
+            <details>
+                <summary><span class="summary">Read full terms and conditions for use</span></summary>
+                <div class="panel-indent">
+                    <p>
+                        Placeholder text. If you’re not sure about your nationality, try to find out from an official document like a passport or national ID card.
+                    </p>
+                    <p>
+                        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+                    </p>
+                </div>
+            </details>
+            <details>
+                <summary><span class="summary">Read standard data notice</span></summary>
+                <div class="panel-indent">
+                    <p>
+                        Placeholder text. If you’re not sure about your nationality, try to find out from an official document like a passport or national ID card.
+                    </p>
+                    <p>
+                        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+                    </p>
+                </div>
+            </details>
+        </div>
+        </div>
 }
 
 @section Scripts {
