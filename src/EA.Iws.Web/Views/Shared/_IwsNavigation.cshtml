@@ -9,21 +9,13 @@
             {
                 @Html.AntiForgeryToken()
                 <ul id="proposition-links">
-                    <li>@Html.ActionLink(linkText: "Your account", actionName: "", controllerName: "")</li>
-                    <li>@Html.ActionLink(linkText: "Your business", actionName: "Index", controllerName: "Company", routeValues: new { id = 52 }, htmlAttributes: new { })</li>
+                    <li>@Html.ActionLink(linkText: "Manage account", actionName: "", controllerName: "")</li>
                     <li>
                         @Ajax.ActionLink("Sign out", "ConfirmSignOut", "Account", new { returnUrl = Request.RawUrl },
                                 new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divConfirmDelete" }, new { @class = "deleteLink" })
                     </li>
                 </ul>
                 <div id="divConfirmDelete" class="clearfix"></div>
-            }
-            else
-            {
-                <ul id="proposition-links">
-                    <li>@Html.ActionLink(linkText: "Register", actionName: "ApplicantRegistration", controllerName: "Registration")</li>
-                    <li>@Html.ActionLink(linkText: "Sign in", actionName: "Login", controllerName: "Account")</li>
-                </ul>
             }
         </nav>
     </div>

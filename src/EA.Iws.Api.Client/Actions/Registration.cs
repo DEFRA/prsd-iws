@@ -3,7 +3,6 @@
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System.Web;
     using Entities;
     using Extensions;
 
@@ -29,8 +28,7 @@
 
         public async Task<OrganisationData[]> SearchOrganisationAsync(string accessToken, string organisationName)
         {
-            // The period character breaks the api call.
-            organisationName = HttpUtility.UrlEncode(organisationName).Replace(".", string.Empty);
+            organisationName = organisationName.Replace(".", string.Empty);
 
             OrganisationData[] organisations = await httpClient.GetAsync<OrganisationData[]>(accessToken, controller + "OrganisationSearch/" + organisationName);
 
