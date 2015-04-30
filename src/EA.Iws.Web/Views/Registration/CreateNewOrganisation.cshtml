@@ -4,7 +4,7 @@
     ViewBag.Title = "Organisation Details";
 }
 <h1 class="heading-large">
-    Organisation details
+    Add a new organisation
 </h1>
 
 @using (Html.BeginForm("CreateNewOrganisation", "Registration"))
@@ -27,10 +27,10 @@
         @Html.LabelFor(m => m.Address2, new { @class = "form-label" })
         @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
-        @Html.ValidationMessageFor(m => m.TownOrCity)
-        @Html.LabelFor(m => m.TownOrCity, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.TownOrCity, new { @class = "form-control" })
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Address3)">
+        @Html.ValidationMessageFor(m => m.Address3)
+        @Html.LabelFor(m => m.Address3, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Address3, new { @class = "form-control" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Postcode)">
         @Html.ValidationMessageFor(m => m.Postcode)
@@ -51,15 +51,30 @@
             @Html.RadioButtonFor(m => m.EntityType, "Partnership") Partnership
         </label>
         <label class="block-label" data-target="companies-house-number">
-            @Html.RadioButtonFor(m => m.EntityType, "Company") Company
+            @Html.RadioButtonFor(m => m.EntityType, "Limited Company") Limited Company
         </label>
         <div class="panel-indent js-hidden" id="companies-house-number">
-            @Html.LabelFor(m => m.CompaniesHouseReference, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.CompaniesHouseReference, new { @class = "form-control" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.CompaniesHouseReference, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.CompaniesHouseReference, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <details>
+                    <summary><span class="summary">Where can I find my company number</span></summary>
+                    <div class="panel-indent">
+                        <p>
+                            Placeholder text. If you’re not sure about your nationality, try to find out from an official document like a passport or national ID card.
+                        </p>
+                        <p>
+                            We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+                        </p>
+                    </div>
+                </details>
+            </div>
         </div>
     </div>
     <div class="form-group">
-        <input type="submit" class="button" value="Register" />
+        <input type="submit" class="button" value="Continue" />
     </div>
 }
 

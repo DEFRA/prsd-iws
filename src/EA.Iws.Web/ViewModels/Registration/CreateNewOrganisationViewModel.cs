@@ -9,22 +9,23 @@
         public int OrganisationId { get; set; }
 
         [Required]
+        [Display(Name = "Organisation name")]
         public string Name { get; set; }
 
         [Display(Name = "Companies House Number")]
         public string CompaniesHouseReference { get; set; }
 
         [Required]
-        [Display(Name = "Town or city")]
-        public string TownOrCity { get; set; }
+        [Display(Name = "Address line 3")]
+        public string Address3 { get; set; }
 
         public string CountyOrProvince { get; set; }
 
         [Required]
-        [Display(Name = "Address 1")]
+        [Display(Name = "Address line 1")]
         public string Address1 { get; set; }
 
-        [Display(Name = "Address 2")]
+        [Display(Name = "Address line 2")]
         public string Address2 { get; set; }
 
         [Required]
