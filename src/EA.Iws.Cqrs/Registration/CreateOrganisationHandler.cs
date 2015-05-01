@@ -19,8 +19,8 @@
         public async Task HandleAsync(CreateOrganisation command)
         {
             var country = await db.Countries.SingleAsync(c => c.Id == new Guid(command.Organisation.Country));
-            var address = new Address(command.Organisation.Address1, command.Organisation.TownOrCity, command.Organisation.Postcode, country);
-            var org = new Organisation(command.Organisation.Name, address, command.Organisation.EntityType);
+            var address = new Address(command.Organisation.Address1, command.Organisation.TownOrCity, command.Organisation.Postcode, country, null, command.Organisation.Address2);
+            var org = new Organisation(command.Organisation.Name, address, command.Organisation.EntityType, command.Organisation.CompaniesHouseNumber);
 
             using (var transaction = db.Database.BeginTransaction())
             {

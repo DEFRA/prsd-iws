@@ -4,7 +4,7 @@
     {
         public int OrganisationId { get; set; }
         public string Name { get; set; }
-        public string CompaniesHouseReference { get; set; }
+        public string CompaniesHouseNumber { get; set; }
         public string TownOrCity { get; set; }
         public string CountyOrProvince { get; set; }
         public string Address1 { get; set; }

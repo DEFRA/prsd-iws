@@ -142,7 +142,8 @@
                 TownOrCity = model.Address3,
                 Postcode = model.Postcode,
                 Country = model.Country,
-                EntityType = model.EntityType
+                EntityType = model.EntityType,
+                CompaniesHouseNumber = model.CompaniesHouseReference
             };
 
             using (var client = new IwsClient(config.ApiUrl))
