@@ -56,6 +56,7 @@
     <None Include="scripts\Update\20150429-150715-EA.Iws.sql" />
     <None Include="scripts\Update\20150430-115148-EA.Iws.sql" />
     <None Include="scripts\Update\20150430-104718-EA.Iws.sql" />
+    <None Include="scripts\Update\20150501-154209-EA.Iws.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />
