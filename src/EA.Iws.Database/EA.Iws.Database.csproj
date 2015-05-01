@@ -65,6 +65,7 @@
     <Content Include="scripts\Everytime\placeholder.txt" />
     <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\20150424-164300-AspNetIdentity.sql" />
+    <Content Include="scripts\Update\20150501-112343-CountryData.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
