@@ -1,13 +1,11 @@
 ﻿namespace EA.Iws.Cqrs.Registration
 {
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using Api.Client.Entities;
     using Core.Cqrs;
     using DataAccess;
-    using Domain;
 
     internal class GetCountriesHandler : IQueryHandler<GetCountries, CountryData[]>
     {

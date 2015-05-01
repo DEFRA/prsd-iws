@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Cqrs.Registration
 {
-    using System.Collections.Generic;
     using Api.Client.Entities;
     using Core.Cqrs;
 

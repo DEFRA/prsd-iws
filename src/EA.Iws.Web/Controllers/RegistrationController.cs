@@ -152,7 +152,7 @@
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("SelectOrganisation");
+                return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("CreateNewOrganisation", "Registration", new { organisationName = model.Name });
         }
