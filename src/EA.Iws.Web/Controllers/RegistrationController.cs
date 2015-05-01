@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -119,19 +120,19 @@
         [HttpGet]
         public async Task<ActionResult> CreateNewOrganisation(string organisationName)
         {
-            var model = new CreateNewOrganisationViewModel { Name = organisationName };
-
-            using (var client = new IwsClient(config.ApiUrl))
-            {
-                model.Countries = await client.Registration.GetCountriesAsync();
-            }
-
+            var model = new CreateNewOrganisationViewModel { Name = organisationName, Countries = await GetCountries() };
             return View("CreateNewOrganisation", model);
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateNewOrganisation(CreateNewOrganisationViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.Countries = await GetCountries();
+                return View("CreateNewOrganisation", model);
+            }
+
             HttpResponseMessage response;
             var organisationRegistrationData = new OrganisationRegistrationData
             {
@@ -146,18 +147,22 @@
 
             using (var client = new IwsClient(config.ApiUrl))
             {
-                response =
-                    await
-                        client.Registration.RegisterOrganisationAsync(User.GetAccessToken(),
-                            organisationRegistrationData);
+                response = await client.Registration.RegisterOrganisationAsync(User.GetAccessToken(), organisationRegistrationData);
             }
 
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("SelectOrganisation");
             }
+            return RedirectToAction("CreateNewOrganisation", "Registration", new { organisationName = model.Name });
+        }
 
-            return View("CreateNewOrganisation", model);
+        private async Task<IEnumerable<CountryData>> GetCountries()
+        {
+            using (var client = new IwsClient(config.ApiUrl))
+            {
+                return await client.Registration.GetCountriesAsync();
+            }
         }
     }
 }

@@ -8,10 +8,9 @@
     {
         public CreateOrganisation(OrganisationRegistrationData organisation)
         {
-            var address = new Address(organisation.Address1, organisation.TownOrCity, organisation.Postcode, new Country());
-            Organisation = new Organisation(organisation.Name, address, organisation.EntityType);
+            Organisation = organisation;
         }
 
-        public Organisation Organisation { get; set; }
+        public OrganisationRegistrationData Organisation { get; set; }
     }
 }

@@ -40,14 +40,10 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Country)">
         @Html.ValidationMessageFor(m => m.Country)
         @Html.LabelFor(m => m.Country, new { @class = "form-label" })
-        <select class="form-control">
-            @foreach (var country in Model.Countries)
-            {
-                <option value=@country.Id>@country.Name</option>
-            }
-        </select>
+        @Html.DropDownListFor(m => m.Country, new SelectList(Model.Countries, "Id", "Name", Model.DefaultCountry.Id), new { @class = "form-control" })
     </div>
-    <div class="form-group">
+    <div class="form-group" @Html.Gds().FormGroupClass(m => m.EntityType)>
+        @Html.ValidationMessageFor(m => m.EntityType)
         <label class="form-label">Organisation Type</label>
         <label class="block-label">
             @Html.RadioButtonFor(m => m.EntityType, "Sole Trader") Sole Trader

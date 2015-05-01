@@ -26,7 +26,7 @@
 
         public async Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData)
         {
-            return await httpClient.PostAsJsonAsync(accessToken, controller + "Register", organisationRegistrationData);
+            return await httpClient.PostAsJsonAsync(accessToken, controller + "RegisterOrganisation", organisationRegistrationData);
         }
 
         public async Task<OrganisationData[]> SearchOrganisationAsync(string accessToken, string organisationName)
@@ -42,12 +42,12 @@
         {
             return await httpClient.PostAsJsonAsync(accessToken, controller + "OrganisationSelect", new OrganisationLinkData{ OrganisationId = organisationId});
         }
+
         public async Task<IEnumerable<CountryData>> GetCountriesAsync()
         {
             var task = await httpClient.GetAsync("Registration/GetCountries");
             var jsonString = await task.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<CountryData[]>(jsonString).ToList();
         }
-
     }
 }
