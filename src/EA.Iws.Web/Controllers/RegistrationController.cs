@@ -42,7 +42,6 @@
         {
             if (ModelState.IsValid)
             {
-                HttpResponseMessage response;
                 using (var client = new IwsClient(config.ApiUrl))
                 {
                     var applicantRegistrationData = new ApplicantRegistrationData
@@ -55,17 +54,21 @@
                         ConfirmPassword = model.ConfirmPassword
                     };
 
-                    response = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
-                }
+                    var response = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
-                    authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
+                    if (!response.HasErrors)
+                    {
+                        var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
+                        authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
-                    return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
+                        return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
+                    }
+                    else
+                    {
+                        this.AddValidationErrorsToModelState(response);
+                        return View("ApplicantRegistration", model);
+                    }
                 }
-                this.AddValidationErrorsToModelState(response);
             }
             return View("ApplicantRegistration", model);
         }
@@ -135,7 +138,6 @@
                 return View("CreateNewOrganisation", model);
             }
 
-            HttpResponseMessage response;
             var organisationRegistrationData = new OrganisationRegistrationData
             {
                 Name = model.Name,
@@ -150,14 +152,18 @@
 
             using (var client = new IwsClient(config.ApiUrl))
             {
-                response = await client.Registration.RegisterOrganisationAsync(User.GetAccessToken(), organisationRegistrationData);
-            }
+                var response = await client.Registration.RegisterOrganisationAsync(User.GetAccessToken(), organisationRegistrationData);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Home", "Applicant");
+                if (!response.HasErrors)
+                {
+                    return RedirectToAction("Home", "Applicant");
+                }
+                else
+                {
+                    this.AddValidationErrorsToModelState(response);
+                    return View("CreateNewOrganisation", "Registration", model);
+                }
             }
-            return RedirectToAction("CreateNewOrganisation", "Registration", new { organisationName = model.Name });
         }
 
         private async Task<IEnumerable<CountryData>> GetCountries()

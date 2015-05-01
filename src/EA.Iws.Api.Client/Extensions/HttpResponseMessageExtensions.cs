@@ -26,8 +26,14 @@
                         var errors = errorResponse["ModelState"] as JObject;
                         if (errors != null)
                         {
-                            var listOfErrors =
-                                errors.Values<KeyValuePair<string, JToken>>().SelectMany(p => p.Value.Values<string>());
+                            var listOfErrors = new List<string>();
+                            foreach (var error in errors)
+                            {
+                                foreach (var message in error.Value.Values<string>())
+                                {
+                                    listOfErrors.Add(message);
+                                }
+                            }
                             return new Response<T>(listOfErrors.ToArray());
                         }
                     }

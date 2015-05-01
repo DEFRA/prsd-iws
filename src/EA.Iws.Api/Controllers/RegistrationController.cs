@@ -59,7 +59,7 @@
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok(model.Email);
         }
 
         // POST api/Registration/Register
@@ -74,7 +74,7 @@
 
             await commandBus.SendAsync(new CreateOrganisation(orgRegData));
 
-            return Ok();
+            return Ok(orgRegData.Name);
         }
 
         [HttpGet]

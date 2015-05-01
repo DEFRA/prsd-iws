@@ -16,14 +16,16 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<HttpResponseMessage> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData)
+        public async Task<Response<string>> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData)
         {
-            return await httpClient.PostAsJsonAsync(controller + "Register", applicantRegistrationData);
+            var response = await httpClient.PostAsJsonAsync(controller + "Register", applicantRegistrationData);
+            return await response.CreateResponseAsync<string>();
         }
 
-        public async Task<HttpResponseMessage> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData)
+        public async Task<Response<string>> RegisterOrganisationAsync(string accessToken, OrganisationRegistrationData organisationRegistrationData)
         {
-            return await httpClient.PostAsJsonAsync(accessToken, controller + "RegisterOrganisation", organisationRegistrationData);
+            var response = await httpClient.PostAsJsonAsync(accessToken, controller + "RegisterOrganisation", organisationRegistrationData);
+            return await response.CreateResponseAsync<string>();
         }
 
         public async Task<OrganisationData[]> SearchOrganisationAsync(string accessToken, string organisationName)
