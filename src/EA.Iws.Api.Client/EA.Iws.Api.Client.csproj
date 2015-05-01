@@ -71,6 +71,7 @@
     <Compile Include="Entities\NotificationInformation.cs" />
     <Compile Include="Entities\OrganisationLinkData.cs" />
     <Compile Include="Actions\INotification.cs" />
+    <Compile Include="Entities\CountryData.cs" />
     <Compile Include="Actions\Notification.cs" />
     <Compile Include="Entities\CreateNotificationData.cs" />
     <Compile Include="Entities\TokenResponse.cs" />

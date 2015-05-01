@@ -72,10 +72,7 @@
                 return BadRequest(ModelState);
             }
 
-            var address = new Address(orgRegData.Address1, orgRegData.TownOrCity, orgRegData.Postcode, new Country());
-            var organisation = new Organisation(orgRegData.Name, address, orgRegData.EntityType);
-
-            //await commandBus.SendAsync(new CreateOrganisation(organisation));
+            await commandBus.SendAsync(new CreateOrganisation(orgRegData));
 
             return Ok();
         }
@@ -118,6 +115,7 @@
             return apiOrganisatons;
         }
 
+        
         [HttpPost]
         [Authorize]
         [Route("OrganisationSelect")]
@@ -133,6 +131,14 @@
             await commandBus.SendAsync(new LinkUserToOrganisation(userContext.UserId.ToString(), organisation));
 
             return Ok();
+        }
+        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetCountries")]
+        public async Task<CountryData[]> GetCountries()
+        {
+            return await queryBus.QueryAsync(new GetCountries());
         }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)

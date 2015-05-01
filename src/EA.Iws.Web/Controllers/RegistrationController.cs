@@ -117,9 +117,14 @@
         }
 
         [HttpGet]
-        public ActionResult CreateNewOrganisation(string organisationName)
+        public async Task<ActionResult> CreateNewOrganisation(string organisationName)
         {
             var model = new CreateNewOrganisationViewModel { Name = organisationName };
+
+            using (var client = new IwsClient(config.ApiUrl))
+            {
+                model.Countries = await client.Registration.GetCountriesAsync();
+            }
 
             return View("CreateNewOrganisation", model);
         }
@@ -128,7 +133,16 @@
         public async Task<ActionResult> CreateNewOrganisation(CreateNewOrganisationViewModel model)
         {
             HttpResponseMessage response;
-            var organisationRegistrationData = new OrganisationRegistrationData();
+            var organisationRegistrationData = new OrganisationRegistrationData
+            {
+                Name = model.Name,
+                Address1 = model.Address1,
+                Address2 = model.Address2,
+                TownOrCity = model.Address3,
+                Postcode = model.Postcode,
+                Country = model.Country,
+                EntityType = model.EntityType
+            };
 
             using (var client = new IwsClient(config.ApiUrl))
             {

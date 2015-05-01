@@ -70,6 +70,8 @@
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisation.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
+    <Compile Include="Registration\GetCountries.cs" />
+    <Compile Include="Registration\GetCountriesHandler.cs" />
     <Compile Include="Users\UserById.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
   </ItemGroup>
@@ -78,6 +80,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">
+      <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
+      <Name>EA.Iws.Api.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
       <Project>{17bc546d-9ce6-452d-bbfb-a722583478f4}</Project>
       <Name>EA.Iws.Core.Cqrs</Name>

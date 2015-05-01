@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Api.Client.Actions
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Entities;
     using Extensions;
+    using Newtonsoft.Json;
 
     internal class Registration : IRegistration
     {
@@ -39,5 +42,12 @@
         {
             return await httpClient.PostAsJsonAsync(accessToken, controller + "OrganisationSelect", new OrganisationLinkData{ OrganisationId = organisationId});
         }
+        public async Task<IEnumerable<CountryData>> GetCountriesAsync()
+        {
+            var task = await httpClient.GetAsync("Registration/GetCountries");
+            var jsonString = await task.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<CountryData[]>(jsonString).ToList();
+        }
+
     }
 }
