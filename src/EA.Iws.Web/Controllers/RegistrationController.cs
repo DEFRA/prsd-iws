@@ -28,6 +28,8 @@
             this.authenticationManager = authenticationManager;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult ApplicantRegistration()
         {
             return View(new ApplicantRegistrationViewModel());
@@ -153,7 +155,7 @@
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Applicant");
             }
             return RedirectToAction("CreateNewOrganisation", "Registration", new { organisationName = model.Name });
         }

@@ -68,8 +68,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\CreateOrganisation.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
-    <Compile Include="Registration\GetCountryByCountryId.cs" />
-    <Compile Include="Registration\GetCountryByCountryIdHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisation.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="Registration\GetCountries.cs" />
