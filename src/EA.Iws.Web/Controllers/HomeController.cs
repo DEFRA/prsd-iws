@@ -4,10 +4,16 @@
 
     public class HomeController : Controller
     {
-        // GET: Home
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(actionName: "Home", controllerName: "Applicant");
+            }
+
+            return View("Index");
         }
     }
 }

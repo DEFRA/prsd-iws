@@ -30,14 +30,6 @@
         }
 
         [Fact]
-        public void CanFindCountryByEUMemberStatus()
-        {
-            var country = context.Countries.First(c => c.IsEuropeanUnionMember);
-
-            Assert.True(country.IsEuropeanUnionMember);
-        }
-
-        [Fact]
         public void CanCreateAddress()
         {
             var country = context.Countries.Single(c => c.IsoAlpha2Code.Equals("GB"));

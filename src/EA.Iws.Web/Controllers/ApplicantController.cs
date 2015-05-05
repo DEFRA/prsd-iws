@@ -5,7 +5,7 @@
     [Authorize]
     public class ApplicantController : Controller
     {
-        // GET: Applicant
+        [HttpGet]
         public ActionResult Home()
         {
             return View();
