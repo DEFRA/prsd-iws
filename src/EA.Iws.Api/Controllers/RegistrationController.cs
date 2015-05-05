@@ -104,9 +104,8 @@
                 Address = new AddressData
                 {
                     Building = o.Address.Building,
-                    StreetOrSuburb = o.Address.StreetOrSuburb,
+                    StreetOrSuburb = o.Address.Address1,
                     TownOrCity = o.Address.TownOrCity,
-                    Region = o.Address.Region,
                     Country = o.Address.Country.Name,
                     PostalCode = o.Address.PostalCode
                 }

@@ -24,10 +24,8 @@
         public string CompaniesHouseReference { get; set; }
 
         [Required]
-        [Display(Name = "Town or city")]
-        public string TownOrCity { get; set; }
-
-        public string CountyOrProvince { get; set; }
+        [Display(Name = "Building name or number")]
+        public string Building { get; set; }
 
         [Required]
         [Display(Name = "Address line 1")]
@@ -35,6 +33,10 @@
 
         [Display(Name = "Address line 2")]
         public string Address2 { get; set; }
+
+        [Required]
+        [Display(Name = "Town or city")]
+        public string TownOrCity { get; set; }
 
         [Required]
         public string Postcode { get; set; }

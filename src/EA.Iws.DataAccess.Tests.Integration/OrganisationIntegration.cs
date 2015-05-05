@@ -86,7 +86,7 @@
 
         private static Address TestAddress(Country country)
         {
-            return new Address("1 Test Street", "Woking", "GU22 7UM", country);
+            return new Address("1", "test street","Woking", "GU22 7UM", country);
         }
 
         private void CleanUp(Organisation organisation, Address address)

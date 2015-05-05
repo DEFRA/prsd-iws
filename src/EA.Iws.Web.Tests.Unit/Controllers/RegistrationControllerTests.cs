@@ -22,7 +22,7 @@
 
             var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
+            var result = await accountController.ApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -36,7 +36,7 @@
 
             var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
+            var result = await accountController.ApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -50,7 +50,7 @@
 
             var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
+            var result = await accountController.ApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -68,7 +68,7 @@
 
             var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
+            var result = await accountController.ApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -82,7 +82,7 @@
 
             var accountController = GetMockAccountController(registerViewModel);
 
-            var result = await accountController.SubmitApplicantRegistration(registerViewModel) as ViewResult;
+            var result = await accountController.ApplicantRegistration(registerViewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }

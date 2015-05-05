@@ -8,13 +8,13 @@
     {
         public string Building { get; private set; }
 
-        public string StreetOrSuburb { get; private set; }
+        public string Address1 { get; private set; }
+
+        public virtual string Address2 { get; private set; }
 
         public string TownOrCity { get; private set; }
 
         public virtual string PostalCode { get; private set; }
-
-        public virtual string Region { get; private set; }
 
         public Country Country { get; private set; }
 
@@ -33,24 +33,25 @@
             }
         }
 
-        public Address(string building, 
+        public Address(string building,
+            string address1,
             string townOrCity, 
             string postalCode,
             Country country,
-            string region = null,
-            string streetOrSuburb = null)
+            string address2 = null)
         {
             Guard.ArgumentNotNull(building);
             Guard.ArgumentNotNull(townOrCity);
             Guard.ArgumentNotNull(postalCode);
             Guard.ArgumentNotNull(country);
+            Guard.ArgumentNotNull(address1);
 
             this.Building = building;
             this.TownOrCity = townOrCity;
             this.PostalCode = postalCode;
             this.Country = country;
-            this.Region = region;
-            this.StreetOrSuburb = streetOrSuburb;
+            this.Address2 = address2;
+            this.Address1 = address1;
         }
 
         private Address()

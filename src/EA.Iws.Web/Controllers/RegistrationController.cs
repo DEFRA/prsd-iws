@@ -37,7 +37,7 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SubmitApplicantRegistration(ApplicantRegistrationViewModel model)
+        public async Task<ActionResult> ApplicantRegistration(ApplicantRegistrationViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -139,6 +139,7 @@
             var organisationRegistrationData = new OrganisationRegistrationData
             {
                 Name = model.Name,
+                Building = model.Building,
                 Address1 = model.Address1,
                 Address2 = model.Address2,
                 TownOrCity = model.TownOrCity,
