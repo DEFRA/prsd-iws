@@ -24,8 +24,8 @@
         public string CompaniesHouseReference { get; set; }
 
         [Required]
-        [Display(Name = "Address line 3")]
-        public string Address3 { get; set; }
+        [Display(Name = "Town or city")]
+        public string TownOrCity { get; set; }
 
         public string CountyOrProvince { get; set; }
 

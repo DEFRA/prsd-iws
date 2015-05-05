@@ -141,7 +141,7 @@
                 Name = model.Name,
                 Address1 = model.Address1,
                 Address2 = model.Address2,
-                TownOrCity = model.Address3,
+                TownOrCity = model.TownOrCity,
                 Postcode = model.Postcode,
                 Country = model.Country,
                 EntityType = model.EntityType,
