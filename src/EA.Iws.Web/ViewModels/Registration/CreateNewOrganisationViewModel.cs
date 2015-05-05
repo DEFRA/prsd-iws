@@ -40,6 +40,8 @@
 
         [Required]
         public string Postcode { get; set; }
+
+        [Required]
         public string Country { get; set; }
 
         [Required]

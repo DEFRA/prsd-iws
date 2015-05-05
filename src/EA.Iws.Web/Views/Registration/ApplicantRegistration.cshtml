@@ -18,37 +18,37 @@
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
         @Html.ValidationMessageFor(m => m.Name)
-        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.Name, new { @class = "form-label" })
         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Surname)">
         @Html.ValidationMessageFor(m => m.Surname)
-        @Html.LabelFor(m => m.Surname, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.Surname, new { @class = "form-label" })
         @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.OrganisationName)">
         @Html.ValidationMessageFor(m => m.OrganisationName)
-        @Html.LabelFor(m => m.OrganisationName, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.OrganisationName, new { @class = "form-label" })
         @Html.TextBoxFor(m => m.OrganisationName, new { @class = "form-control" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.PhoneNumber)">
         @Html.ValidationMessageFor(m => m.PhoneNumber)
-        @Html.LabelFor(m => m.PhoneNumber, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.PhoneNumber, new { @class = "form-label" })
         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
         @Html.ValidationMessageFor(m => m.Email)
-        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.Email, new { @class = "form-label" })
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.ValidationMessageFor(m => m.Password)
-        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.Password, new { @class = "form-label" })
         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
         @Html.ValidationMessageFor(m => m.ConfirmPassword)
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
     </div>
     <div class="grid-row">
