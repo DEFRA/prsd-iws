@@ -23,10 +23,54 @@
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = Constants.IwsAuthType,
-                LoginPath = new PathString("/Account/Login")
+                LoginPath = new PathString("/Account/Login"),
+                Provider = new CookieAuthenticationProvider
+                {
+                    OnValidateIdentity = context => OnValidateIdentity(context, config)
+                }
             });
 
             app.UseClaimsTransformation(incoming => TransformClaims(incoming, config));
+        }
+
+        private async Task OnValidateIdentity(CookieValidateIdentityContext context, AppConfiguration config)
+        {
+            if (context.Identity == null || !context.Identity.IsAuthenticated)
+            {
+                return;
+            }
+
+            var expiresAt = context.Identity.FindFirst(IwsClaimTypes.ExpiresAt);
+            if (expiresAt != null && DateTime.Parse(expiresAt.Value) < DateTime.UtcNow)
+            {
+                var refreshTokenClaim = context.Identity.FindFirst(OAuth2Constants.RefreshToken);
+                if (refreshTokenClaim != null)
+                {
+                    var oauthClient = new IwsOAuthClient(config.ApiUrl, config.ApiSecret);
+                    var response = await oauthClient.GetRefreshTokenAsync(refreshTokenClaim.Value);
+                    var auth = HttpContext.Current.GetOwinContext().Authentication;
+
+                    if (response.IsError)
+                    {
+                        auth.SignOut(Constants.IwsAuthType);
+                    }
+                    else
+                    {
+                        bool isPersistent = false;
+
+                        // TODO - get previous value for IsPersistent
+                        //var authContext = await auth.AuthenticateAsync(Constants.IwsAuthType);
+                        //if (authContext != null)
+                        //{
+                        //    var properties = authContext.Properties;
+                        //    isPersistent = properties.IsPersistent;
+                        //}
+
+                        auth.SignOut(Constants.IwsAuthType);
+                        auth.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, response.GenerateUserIdentity());
+                    }
+                }
+            }
         }
 
         private async Task<ClaimsPrincipal> TransformClaims(ClaimsPrincipal incoming, AppConfiguration config)
@@ -38,43 +82,17 @@
 
             // parse incoming claims - create new principal with app claims
             var claims = new List<Claim>();
-            string accessToken;
-            string refreshToken;
-
-            var refreshTokenClaim = incoming.FindFirst(OAuth2Constants.RefreshToken);
-            if (refreshTokenClaim != null)
-            {
-                var oauthClient = new IwsOAuthClient(config.ApiUrl, config.ApiSecret);
-                var response = await oauthClient.GetRefreshTokenAsync(refreshTokenClaim.Value);
-                accessToken = response.AccessToken;
-                refreshToken = response.RefreshToken;
-            }
-            else
-            {
-                accessToken = incoming.FindFirst(OAuth2Constants.AccessToken).Value;
-                refreshToken = null;
-            }
 
             var userInfoClient = new UserInfoClient(
                 new Uri(config.ApiUrl + "/connect/userinfo"),
-                accessToken);
+                incoming.FindFirst(OAuth2Constants.AccessToken).Value);
 
             var userInfo = await userInfoClient.GetAsync();
             userInfo.Claims.ToList().ForEach(ui => claims.Add(new Claim(ui.Item1, ui.Item2)));
 
-            // keep the id_token for logout
-            var idToken = incoming.FindFirst(OAuth2Constants.IdentityToken);
-            if (idToken != null)
-            {
-                claims.Add(new Claim(OAuth2Constants.IdentityToken, idToken.Value));
-            }
-
             // add access token for sample API
-            claims.Add(new Claim(OAuth2Constants.AccessToken, accessToken));
-            if (refreshToken != null)
-            {
-                claims.Add(new Claim(OAuth2Constants.RefreshToken, refreshToken));
-            }
+            claims.Add(incoming.FindFirst(OAuth2Constants.AccessToken));
+            claims.Add(incoming.FindFirst(OAuth2Constants.RefreshToken));
 
             // keep track of access token expiration
             claims.Add(incoming.FindFirst(IwsClaimTypes.ExpiresAt));
@@ -85,26 +103,8 @@
                 claims.Add(nameId);
             }
 
-            var thumbprint = incoming.FindFirst(ClaimTypes.Thumbprint);
-            if (thumbprint != null)
-            {
-                claims.Add(thumbprint);
-            }
-
             var id = new ClaimsIdentity(Constants.IwsAuthType);
             id.AddClaims(claims);
-
-            bool isPersistent = false;
-            var auth = HttpContext.Current.GetOwinContext().Authentication;
-            var authContext = await auth.AuthenticateAsync(Constants.IwsAuthType);
-            if (authContext != null)
-            {
-                var properties = authContext.Properties;
-                isPersistent = properties.IsPersistent;
-            }
-
-            auth.SignOut(Constants.IwsAuthType);
-            auth.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, id);
 
             return new ClaimsPrincipal(id);
         }

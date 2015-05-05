@@ -3,7 +3,6 @@
     using System;
     using System.Security.Claims;
     using Thinktecture.IdentityModel.Client;
-    using TokenResponse = Api.Client.Entities.TokenResponse;
 
     public static class TokenResponseExtensions
     {
@@ -11,16 +10,15 @@
         {
             var identity = new ClaimsIdentity(Constants.IwsAuthType);
             identity.AddClaim(new Claim(OAuth2Constants.AccessToken, response.AccessToken));
-            if (response.IdentityToken != null)
-            {
-                identity.AddClaim(new Claim(OAuth2Constants.IdentityToken, response.IdentityToken));
-            }
+
             if (response.RefreshToken != null)
             {
                 identity.AddClaim(new Claim(OAuth2Constants.RefreshToken, response.RefreshToken));
             }
+
             identity.AddClaim(new Claim(IwsClaimTypes.ExpiresAt,
                 DateTimeOffset.Now.AddSeconds(response.ExpiresIn).ToString()));
+
             return identity;
         }
     }

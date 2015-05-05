@@ -74,7 +74,6 @@
     <Compile Include="Entities\CountryData.cs" />
     <Compile Include="Actions\Notification.cs" />
     <Compile Include="Entities\CreateNotificationData.cs" />
-    <Compile Include="Entities\TokenResponse.cs" />
     <Compile Include="Actions\Registration.cs" />
     <Compile Include="Actions\IRegistration.cs" />
     <Compile Include="Entities\AddressData.cs" />
