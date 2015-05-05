@@ -4,7 +4,7 @@
     using System.Net.Http;
     using Actions;
 
-    public class IwsClient : IDisposable
+    public class IwsClient : IDisposable, IIwsClient
     {
         private readonly HttpClient httpClient;
         private IRegistration registration;

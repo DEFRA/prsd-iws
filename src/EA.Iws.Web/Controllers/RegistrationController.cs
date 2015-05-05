@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -18,9 +17,9 @@
     {
         private readonly IAuthenticationManager authenticationManager;
         private readonly AppConfiguration config;
-        private readonly Func<IwsOAuthClient> oauthClient;
+        private readonly Func<IIwsOAuthClient> oauthClient;
 
-        public RegistrationController(AppConfiguration config, Func<IwsOAuthClient> oauthClient,
+        public RegistrationController(AppConfiguration config, Func<IIwsOAuthClient> oauthClient,
             IAuthenticationManager authenticationManager)
         {
             this.config = config;
@@ -63,11 +62,8 @@
 
                         return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                     }
-                    else
-                    {
-                        this.AddValidationErrorsToModelState(response);
-                        return View("ApplicantRegistration", model);
-                    }
+                    this.AddValidationErrorsToModelState(response);
+                    return View("ApplicantRegistration", model);
                 }
             }
             return View("ApplicantRegistration", model);
@@ -90,7 +86,8 @@
                 }
                 else
                 {
-                    model.Organisations = await client.Registration.SearchOrganisationAsync(User.GetAccessToken(), organisationName);
+                    model.Organisations =
+                        await client.Registration.SearchOrganisationAsync(User.GetAccessToken(), organisationName);
                 }
             }
 
@@ -102,9 +99,10 @@
         public async Task<ActionResult> SelectOrganisation(SelectOrganisationViewModel model, string submitButton)
         {
             Guid selectedGuid;
-            if (!Guid.TryParse(submitButton, out selectedGuid) || model.Organisations.SingleOrDefault(o => o.Id == selectedGuid) == null)
+            if (!Guid.TryParse(submitButton, out selectedGuid) ||
+                model.Organisations.SingleOrDefault(o => o.Id == selectedGuid) == null)
             {
-                return RedirectToAction("SelectOrganisation", routeValues: new { organisationName = model.Name });
+                return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
             }
 
             using (var client = new IwsClient(config.ApiUrl))
@@ -115,7 +113,7 @@
                 }
                 catch (Exception)
                 {
-                    return RedirectToAction("SelectOrganisation", routeValues: new { organisationName = model.Name });
+                    return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
                 }
             }
 
@@ -152,17 +150,17 @@
 
             using (var client = new IwsClient(config.ApiUrl))
             {
-                var response = await client.Registration.RegisterOrganisationAsync(User.GetAccessToken(), organisationRegistrationData);
+                var response =
+                    await
+                        client.Registration.RegisterOrganisationAsync(User.GetAccessToken(),
+                            organisationRegistrationData);
 
                 if (!response.HasErrors)
                 {
                     return RedirectToAction("Home", "Applicant");
                 }
-                else
-                {
-                    this.AddValidationErrorsToModelState(response);
-                    return View("CreateNewOrganisation", "Registration", model);
-                }
+                this.AddValidationErrorsToModelState(response);
+                return View("CreateNewOrganisation", "Registration", model);
             }
         }
 

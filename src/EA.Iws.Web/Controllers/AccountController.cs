@@ -12,9 +12,9 @@
     public class AccountController : Controller
     {
         private readonly IAuthenticationManager authenticationManager;
-        private readonly Func<IwsOAuthClient> oauthClient;
+        private readonly Func<IIwsOAuthClient> oauthClient;
 
-        public AccountController(Func<IwsOAuthClient> oauthClient, IAuthenticationManager authenticationManager)
+        public AccountController(Func<IIwsOAuthClient> oauthClient, IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
             this.authenticationManager = authenticationManager;

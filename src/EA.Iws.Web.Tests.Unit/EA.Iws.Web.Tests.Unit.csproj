@@ -132,7 +132,7 @@
     <Compile Include="TestHelpers\Factories\MessageBusFactory.cs" />
     <Compile Include="TestHelpers\HttpContextMocker.cs" />
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
-    <Compile Include="Tests\RegistrationControllerTests.cs" />
+    <Compile Include="Controllers\RegistrationControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

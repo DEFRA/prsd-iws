@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
+    using FakeItEasy;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Web.Controllers;
@@ -29,7 +30,8 @@
 
         private static NotificationApplicationController CreateNotificationApplicationController()
         {
-            return new NotificationApplicationController(() => new IwsClient("http://api"));
+            var client = A.Fake<IIwsClient>();
+            return new NotificationApplicationController(() => client);
         }
 
         [Fact]
@@ -74,7 +76,7 @@
         public void WasteActionQuestion_Get_ReturnsCorrectView()
         {
             var controller = CreateNotificationApplicationController();
-            var result = controller.WasteActionQuestion(null, null) as ViewResult;
+            var result = controller.WasteActionQuestion("Environment Agency", "Recovery") as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<InitialQuestions>(result.Model);
@@ -88,7 +90,7 @@
             model.SelectedWasteAction = WasteAction.Recovery;
             var result = await controller.WasteActionQuestion(model) as RedirectToRouteResult;
 
-            Assert.Equal("GenerateNumber", result.RouteValues["action"]);
+            Assert.Equal("Created", result.RouteValues["action"]);
         }
 
         [Fact]

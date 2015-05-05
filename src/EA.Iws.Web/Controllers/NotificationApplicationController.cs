@@ -12,9 +12,9 @@
     [Authorize]
     public class NotificationApplicationController : Controller
     {
-        private readonly Func<IwsClient> apiClient;
+        private readonly Func<IIwsClient> apiClient;
 
-        public NotificationApplicationController(Func<IwsClient> apiClient)
+        public NotificationApplicationController(Func<IIwsClient> apiClient)
         {
             this.apiClient = apiClient;
         }

@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Thinktecture.IdentityModel.Client;
 
-    public class IwsOAuthClient
+    public class IwsOAuthClient : IIwsOAuthClient
     {
         private readonly OAuth2Client oauth2Client;
 

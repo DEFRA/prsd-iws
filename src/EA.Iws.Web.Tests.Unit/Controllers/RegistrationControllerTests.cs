@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Tests.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using FakeItEasy;
     using Services;
     using ViewModels.Registration;
     using Web.Controllers;

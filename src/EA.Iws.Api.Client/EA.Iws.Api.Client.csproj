@@ -85,6 +85,8 @@
     <Compile Include="Entities\WasteAction.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
+    <Compile Include="IIwsClient.cs" />
+    <Compile Include="IIwsOAuthClient.cs" />
     <Compile Include="IwsClient.cs" />
     <Compile Include="IwsOAuthClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
