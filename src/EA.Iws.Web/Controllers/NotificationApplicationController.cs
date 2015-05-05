@@ -51,7 +51,7 @@
                 SelectedWasteAction = WasteAction.Recovery,
                 CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
             };
-            
+
             if (!string.IsNullOrWhiteSpace(nt))
             {
                 model.SelectedWasteAction = nt.GetValueFromDisplayName<WasteAction>();
@@ -102,6 +102,12 @@
                 };
                 return View(model);
             }
+        }
+
+        [HttpPost]
+        public ActionResult Created()
+        {
+            return RedirectToAction(actionName: "Home", controllerName: "Applicant");
         }
     }
 }
