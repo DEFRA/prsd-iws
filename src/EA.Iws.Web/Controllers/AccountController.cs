@@ -48,6 +48,15 @@
             return View(model);
         }
 
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            authenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

@@ -5,17 +5,18 @@
         <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
         <nav id="proposition-menu">
             <a href="/" id="proposition-name">International Waste Shipments</a>
-            @if (User.Identity.IsAuthenticated)
+            @if (Request.IsAuthenticated)
             {
-                @Html.AntiForgeryToken()
-                <ul id="proposition-links">
-                    <li>@Html.ActionLink(linkText: "Manage account", actionName: "", controllerName: "")</li>
-                    <li>
-                        @Ajax.ActionLink("Sign out", "ConfirmSignOut", "Account", new { returnUrl = Request.RawUrl },
-                                new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divConfirmDelete" }, new { @class = "deleteLink" })
-                    </li>
-                </ul>
-                <div id="divConfirmDelete" class="clearfix"></div>
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <ul id="proposition-links">
+                        <li>@Html.ActionLink(linkText: "Manage account", actionName: "", controllerName: "")</li>
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                        </li>
+                    </ul>
+                }
             }
         </nav>
     </div>
