@@ -487,7 +487,9 @@
     <Compile Include="Infrastructure\IwsClaimTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazorHelpers\Gds.cs" />
-    <Compile Include="RazorHelpers\RazorExtensions.cs" />
+    <Compile Include="RazorHelpers\Gds.Label.cs" />
+    <Compile Include="RazorHelpers\Gds.Validation.cs" />
+    <Compile Include="RazorHelpers\GdsExtensions.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Startup.cs" />
