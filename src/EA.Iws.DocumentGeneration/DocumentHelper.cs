@@ -15,7 +15,7 @@
         {
             byte[] fileBytes;
 
-            using (var fileStream = new FileStream(fileNameWithPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (var fileStream = new FileStream(fileNameWithPath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 int bytesToRead = (int)fileStream.Length;
 

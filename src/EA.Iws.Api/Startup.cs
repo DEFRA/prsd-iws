@@ -9,6 +9,7 @@ namespace EA.Iws.Api
     using System.Web.Http.ExceptionHandling;
     using Autofac;
     using Autofac.Integration.WebApi;
+    using Elmah.Contrib.WebApi;
     using Identity;
     using IdSrv;
     using Microsoft.AspNet.Identity;
@@ -49,6 +50,9 @@ namespace EA.Iws.Api
             // Web API routes
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+
+            // Elmah
+            config.Filters.Add(new ElmahHandleErrorApiAttribute());
 
             // Autofac
             var builder = new ContainerBuilder();

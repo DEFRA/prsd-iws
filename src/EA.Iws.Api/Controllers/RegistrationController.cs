@@ -78,7 +78,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         [Route("OrganisationSearch/{organisationName}")]
         public async Task<OrganisationData[]> OrganisationSearch(string organisationName)
         {
