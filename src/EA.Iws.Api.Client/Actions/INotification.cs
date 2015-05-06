@@ -10,6 +10,6 @@
 
         Task<NotificationInformation> GetNotificationInformationAsync(string accessToken, Guid id);
 
-        Task<byte[]> GenerateNotificationDocumentAsync(string accessToken, Guid id);
+        Task<Response<byte[]>> GenerateNotificationDocumentAsync(string accessToken, Guid id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Api.Client.Extensions
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
@@ -39,6 +40,21 @@
                     }
                 }
                 return new Response<T>("Unknown error!");
+            }
+        }
+
+        public static async Task<Response<byte[]>> CreateResponseByteArrayAsync(
+            this HttpResponseMessage httpResponseMessage)
+        {
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                var bytes = await httpResponseMessage.Content.ReadAsByteArrayAsync();
+
+                return new Response<byte[]>(bytes);
+            }
+            else
+            {
+                return new Response<byte[]>("Failed to generate the requested document.");
             }
         }
     }

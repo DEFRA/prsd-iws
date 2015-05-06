@@ -9,6 +9,7 @@
     using System.Web.Http;
     using Core.Cqrs;
     using Cqrs.Notification;
+    using Infrastructure;
 
     public class DocumentGenerationController : ApiController
     {
@@ -21,13 +22,13 @@
 
         public async Task<HttpResponseMessage> Get(Guid id)
         {
-            var query = new GenerateNotificationDocument(id, HttpRuntime.AppDomainAppPath + "Documents\\");
+            var query = new GenerateNotificationDocument(id, HttpContext.Current.Server.MapPath(@"~\Documents\"));
 
             var documentByteArray = await queryBus.QueryAsync(query);
 
             var result = new HttpResponseMessage(HttpStatusCode.OK);
             result.Content = new ByteArrayContent(documentByteArray);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue(Constants.ByteArrayResponseContentType);
 
             return result;
         }

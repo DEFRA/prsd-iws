@@ -1,11 +1,13 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
     using Infrastructure;
+    using Utils;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
 
@@ -110,17 +112,21 @@
             return RedirectToAction(actionName: "Home", controllerName: "Applicant");
         }
 
-        public async Task<FileContentResult> GenerateNotificationDocument(Guid id)
+        public async Task<ActionResult> GenerateNotificationDocument(Guid id)
         {
             using (var client = apiClient())
             {
-                var documentByteArray =
+                Response<byte[]> response =
                     await client.Notification.GenerateNotificationDocumentAsync(User.GetAccessToken(), id);
 
-                var contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-                var downloadName = "IwsNotification" + DateTime.Now + ".docx";
+                if (response.HasErrors)
+                {
+                    return HttpNotFound(response.Errors.FirstOrDefault());
+                }
 
-                return File(documentByteArray, contentType, downloadName);
+                var downloadName = "IwsNotification" + SystemTime.UtcNow + ".docx";
+
+                return File(response.Result, Constants.MicrosoftWordContentType, downloadName);
             }
         }
     }

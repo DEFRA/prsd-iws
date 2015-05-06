@@ -213,6 +213,7 @@
     <Compile Include="IdSrv\Scopes.cs" />
     <Compile Include="IdSrv\UserService.cs" />
     <Compile Include="IdSrv\UserServiceExtensions.cs" />
+    <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />

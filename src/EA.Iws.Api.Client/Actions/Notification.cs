@@ -30,11 +30,12 @@
                         string.Format("NotificationInformation/{0}", id));
         }
 
-        public async Task<byte[]> GenerateNotificationDocumentAsync(string accessToken, Guid id)
+        public async Task<Response<byte[]>> GenerateNotificationDocumentAsync(string accessToken, Guid id)
         {
             client.SetBearerToken(accessToken);
             var response = await client.GetAsync(string.Format("DocumentGeneration/{0}", id));
-            return await response.Content.ReadAsByteArrayAsync();
+
+            return await response.CreateResponseByteArrayAsync();
         }
     }
 }

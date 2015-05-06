@@ -515,6 +515,10 @@
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Utils\EA.Iws.Utils.csproj">
+      <Project>{ABE7729F-BC65-4766-9D89-959E4EDF5F2B}</Project>
+      <Name>EA.Iws.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
