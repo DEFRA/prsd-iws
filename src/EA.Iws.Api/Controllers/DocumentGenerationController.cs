@@ -5,6 +5,7 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
+    using System.Web;
     using System.Web.Http;
     using Core.Cqrs;
     using Cqrs.Notification;
@@ -20,7 +21,7 @@
 
         public async Task<HttpResponseMessage> Get(Guid id)
         {
-            var query = new GenerateNotificationDocument(id);
+            var query = new GenerateNotificationDocument(id, HttpRuntime.AppDomainAppPath + "Documents\\");
 
             var documentByteArray = await queryBus.QueryAsync(query);
 

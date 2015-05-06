@@ -6,10 +6,13 @@
     public class GenerateNotificationDocument : IQuery<byte[]>
     {
         public Guid NotificationId { get; private set; }
-        
-        public GenerateNotificationDocument(Guid notificationId)
+
+        public string ApplicationDirectory { get; private set; }
+
+        public GenerateNotificationDocument(Guid notificationId, string applicationDirectory)
         {
             NotificationId = notificationId;
+            ApplicationDirectory = applicationDirectory;
         }
     }
 }

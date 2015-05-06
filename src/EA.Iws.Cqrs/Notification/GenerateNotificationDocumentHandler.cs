@@ -22,7 +22,7 @@
             // TODO - check if user has access to this notification
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
 
-            return documentGenerator.GenerateNotificationDocument(notification);
+            return documentGenerator.GenerateNotificationDocument(notification, query.ApplicationDirectory);
         }
     }
 }

@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Reflection;
 
     internal static class DocumentHelper
     {
