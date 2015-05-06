@@ -129,5 +129,27 @@
                 return File(response.Result, Constants.MicrosoftWordContentType, downloadName);
             }
         }
+
+        [HttpGet]
+        public ActionResult _GetUserNotifications()
+        {
+            NotificationApplicationSummaryData[] model = null;
+
+            using (var client = apiClient())
+            {
+                // Child actions (partial views) cannot be async and we must therefore get the result of the task.
+                // The called code must use ConfigureAwait(false) on async tasks to prevent deadlock.
+                Response<NotificationApplicationSummaryData[]> response =
+                    client.Notification.GetUserNotifications(User.GetAccessToken()).Result;
+
+                if (response.HasErrors)
+                {
+                    ViewBag.Errors = response.Errors;
+                    return PartialView(model);
+                }
+
+                return PartialView(response.Result);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Mappings
 {
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
     using Domain.Notification;
 
@@ -21,6 +22,8 @@
             Property(x => x.NotificationNumber)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            Property(x => x.CreatedDate).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
         }
     }
 }

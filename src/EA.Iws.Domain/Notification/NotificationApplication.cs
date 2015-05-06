@@ -31,5 +31,7 @@
         public UKCompetentAuthority CompetentAuthority { get; private set; }
         
         public string NotificationNumber { get; private set; }
+
+        public DateTime CreatedDate { get; private set; }
     }
 }

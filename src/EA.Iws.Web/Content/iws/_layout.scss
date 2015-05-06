@@ -66,3 +66,9 @@
 .column-two-thirds {
   @include grid-column( 2/3 );
 }
+
+.spacer{
+    margin: 0;
+    width: 100%;
+    height: 25px;
+}

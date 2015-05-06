@@ -446,6 +446,7 @@
     <Content Include="Views\NotificationApplication\Created.cshtml" />
     <Content Include="Views\Applicant\Home.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\NotificationApplication\_GetUserNotifications.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

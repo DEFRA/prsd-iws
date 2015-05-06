@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\NotificationApplicationSummaryData.cs" />
     <Compile Include="Entities\NotificationInformation.cs" />
     <Compile Include="Entities\OrganisationLinkData.cs" />
     <Compile Include="Actions\INotification.cs" />
