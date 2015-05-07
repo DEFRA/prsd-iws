@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.ViewModels.Registration
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -43,7 +44,7 @@
         public string Postcode { get; set; }
 
         [Required]
-        public string Country { get; set; }
+        public Guid CountryId { get; set; }
 
         [Required]
         [Display(Name = "Organisation Type")]

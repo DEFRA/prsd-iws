@@ -20,7 +20,7 @@
 
         public async Task<Guid> HandleAsync(CreateProducer command)
         {
-            var country = await db.Countries.SingleAsync(c => c.Id == new Guid(command.Address.Country));
+            var country = await db.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
 
             var notificationId = command.NotificationId;
 

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Api.Client.Extensions
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
 

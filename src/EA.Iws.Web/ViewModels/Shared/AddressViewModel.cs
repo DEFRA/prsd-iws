@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.ViewModels.Shared
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -33,7 +34,7 @@
         public string Postcode { get; set; }
 
         [Required]
-        public string Country { get; set; }
+        public Guid CountryId { get; set; }
 
         public CountryData DefaultCountry
         {

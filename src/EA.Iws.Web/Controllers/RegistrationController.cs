@@ -155,7 +155,7 @@
                 Address2 = model.Address2,
                 TownOrCity = model.TownOrCity,
                 Postcode = model.Postcode,
-                Country = model.Country,
+                CountryId = model.CountryId,
                 EntityType = model.EntityType,
                 CompaniesHouseNumber = model.CompaniesHouseReference
             };

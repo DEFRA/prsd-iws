@@ -26,9 +26,16 @@
 
         public UKCompetentAuthority CompetentAuthority { get; private set; }
 
+        public Exporter Exporter { get; private set; }
+
         public string NotificationNumber { get; private set; }
 
         public DateTime CreatedDate { get; private set; }
+
+        public void AddExporter(Exporter exporter)
+        {
+            Exporter = exporter;
+        }
 
         private string CreateNotificationNumber(int notificationNumber)
         {

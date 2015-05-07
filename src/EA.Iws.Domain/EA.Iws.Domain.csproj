@@ -44,6 +44,7 @@
     <Compile Include="Address.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="Notification\Exporter.cs" />
     <Compile Include="Notification\NotificationApplication.cs" />
     <Compile Include="Notification\WasteAction.cs" />
     <Compile Include="Organisation.cs" />

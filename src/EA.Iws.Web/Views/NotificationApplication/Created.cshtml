@@ -3,7 +3,7 @@
     ViewBag.Title = "Notification Application Created";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Created", "NotificationApplication", FormMethod.Post))
 {
     <header class="hgroup">
         <h1 class="heading-medium">Your notification number</h1>
@@ -14,6 +14,7 @@
             @Html.DisplayFor(m => m.NotificationNumber)
         </h2>
     </div>
+    @Html.HiddenFor(m => m.NotificationId)
     <div class="form-group">
         <p>
             Your unique notification number has been automatically saved.
@@ -25,8 +26,9 @@
 
     <div>
         <p>Please @Html.ActionLink("download your application document", "GenerateNotificationDocument", new { id = Model.NotificationId }) and complete it.</p>
-        <br/>
+        <br />
     </div>
-
-    <button class="button" type="submit">Continue</button>
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
 }

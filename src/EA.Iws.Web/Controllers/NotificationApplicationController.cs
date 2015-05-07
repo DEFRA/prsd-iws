@@ -119,9 +119,9 @@
         }
 
         [HttpPost]
-        public ActionResult Created()
+        public ActionResult Created(CreatedViewModel model)
         {
-            return RedirectToAction("Home", "Applicant");
+            return RedirectToAction(actionName: "ExporterNotifier", controllerName: "NotificationApplication", routeValues: new { id = model.NotificationId });
         }
 
         public async Task<ActionResult> GenerateNotificationDocument(Guid id)
@@ -185,7 +185,7 @@
                 TownOrCity = model.AddressDetails.TownOrCity,
                 Region = model.AddressDetails.County,
                 PostalCode = model.AddressDetails.Postcode,
-                Country = model.AddressDetails.Country
+                CountryId = model.AddressDetails.CountryId
             };
 
             var contact = new ContactData
@@ -222,6 +222,54 @@
             }
 
             return RedirectToAction("Index", "Home");
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult> ExporterNotifier(Guid id)
+        {
+            ExporterNotifier model = new ExporterNotifier();
+            model.NotificationId = id;
+            var address = new AddressViewModel { Countries = await GetCountries() };
+            model.AddressDetails = address;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExporterNotifier(ExporterNotifier model)
+        {
+            using (var client = apiClient())
+            {
+                var response = await client.SendAsync(User.GetAccessToken(), new CreateExporter()
+                {
+                    Name = model.Name,
+                    Type = model.EntityType,
+                    CompanyHouseNumber = model.CompaniesHouseReference,
+                    RegistrationNumber1 = model.SoleTraderRegistrationNumber ?? model.PartnershipRegistrationNumber,
+                    RegistrationNumber2 = model.RegistrationNumber2,
+                    NotificationId = model.NotificationId,
+                    Building = model.AddressDetails.Building,
+                    Address1 = model.AddressDetails.Address1,
+                    Address2 = model.AddressDetails.Address2,
+                    City = model.AddressDetails.TownOrCity,
+                    County = model.AddressDetails.County,
+                    PostCode = model.AddressDetails.Postcode,
+                    CountryId = model.AddressDetails.CountryId,
+                    FirstName = model.ContactDetails.FirstName,
+                    LastName = model.ContactDetails.LastName,
+                    Phone = model.ContactDetails.Telephone,
+                    Email = model.ContactDetails.Email,
+                    Fax = model.ContactDetails.Fax
+                });
+
+                if (response.HasErrors)
+                {
+                    this.AddValidationErrorsToModelState(response);
+                    model.AddressDetails.Countries = await GetCountries();
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction(actionName: "ProducerInformation", controllerName: "NotificationApplication", routeValues: new { id = model.NotificationId });
         }
 
         public ActionResult _GetUserNotifications()

@@ -1,5 +1,7 @@
 ﻿namespace EA.Iws.Requests.Organisations
 {
+    using System;
+
     public class AddressData
     {
         public string Building { get; set; }
@@ -15,5 +17,7 @@
         public string Region { get; set; }
 
         public string Country { get; set; }
+
+        public Guid CountryId { get; set; }
     }
 }

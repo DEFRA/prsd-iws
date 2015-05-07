@@ -59,7 +59,8 @@
     <None Include="scripts\Update\20150501-154209-EA.Iws.sql" />
     <None Include="scripts\Update\20150505-095059-EA.Iws.sql" />
     <None Include="scripts\Update\20150505-144700-EA.Iws.sql" />
-    <None Include="scripts\Update\20150508-095646-EA.Iws.sql" />
+    <None Include="scripts\Update\20150512-121114-EA.Iws.sql" />
+    <Content Include="scripts\Update\20150508-095646-EA.Iws.sql" />
     <Content Include="scripts\Update\20150508-214414-EA.Iws.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,7 @@
     <Content Include="scripts\Update\20150501-112343-CountryData.sql" />
     <Content Include="scripts\Update\20150508-161516-EA.Iws.sql" />
     <Content Include="scripts\Update\20150511-091545-EA.Iws.sql" />
+    <Content Include="scripts\Update\20150513-152000-Notification-ExporterId.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
