@@ -52,7 +52,7 @@ namespace EA.Iws.Api
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
 
             // Elmah
-            config.Filters.Add(new ElmahHandleErrorApiAttribute());
+            config.Services.Add(typeof(IExceptionLogger), new ElmahExceptionLogger());
 
             // Autofac
             var builder = new ContainerBuilder();
