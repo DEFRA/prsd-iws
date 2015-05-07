@@ -58,9 +58,11 @@
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityMappings.cs" />
+    <Compile Include="Mappings\ContactMapping.cs" />
     <Compile Include="Mappings\CountryMapping.cs" />
     <Compile Include="Mappings\NotificationApplicationMapping.cs" />
     <Compile Include="Mappings\OrganisationMapping.cs" />
+    <Compile Include="Mappings\ProducerMapping.cs" />
     <Compile Include="Mappings\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\WasteActionMapping.cs" />

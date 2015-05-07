@@ -7,6 +7,7 @@
     using Api.Client;
     using Api.Client.Entities;
     using Infrastructure;
+    using Services;
     using Utils;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
@@ -15,9 +16,11 @@
     public class NotificationApplicationController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
+        private readonly AppConfiguration config;
 
-        public NotificationApplicationController(Func<IIwsClient> apiClient)
+        public NotificationApplicationController(AppConfiguration config, Func<IIwsClient> apiClient)
         {
+            this.config = config;
             this.apiClient = apiClient;
         }
 
@@ -131,6 +134,63 @@
         }
 
         [HttpGet]
+        public ActionResult ProducerInformation(Guid id)
+        {
+            var model = new ProducerInformationViewModel();
+
+            model.NotificationId = id;
+        
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ProducerInformation(ProducerInformationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var address = new AddressData();
+            address.Building = model.AddressDetails.Building;
+            address.StreetOrSuburb = model.AddressDetails.Address1;
+            address.Address2 = model.AddressDetails.Address2;
+            address.TownOrCity = model.AddressDetails.TownOrCity;
+            address.Region = model.AddressDetails.County;
+            address.PostalCode = model.AddressDetails.Postcode;
+
+            var contact = new ContactData();
+            contact.FirstName = model.ContactDetails.FirstName;
+            contact.LastName = model.ContactDetails.LastName;
+            contact.Telephone = model.ContactDetails.Telephone;
+            contact.Fax = model.ContactDetails.Fax;
+            contact.Email = model.ContactDetails.Email;
+
+            var producerData = new ProducerData();
+            producerData.Name = model.Name;
+            producerData.IsSiteOfExport = model.IsSiteOfExport;
+            producerData.Type = model.EntityType;
+            producerData.CompaniesHouseNumber = model.CompaniesHouseReference;
+            producerData.RegistrationNumber1 = model.SoleTraderRegistrationNumber ?? model.PartnershipRegistrationNumber;
+            producerData.RegistrationNumber2 = model.RegistrationNumber2;
+            producerData.Address = address;
+            producerData.Contact = contact;
+            producerData.NotificationId = model.NotificationId;
+
+            using (var client = apiClient())
+            {
+                var response = await client.Producer.CreateProducer(User.GetAccessToken(), producerData);
+
+                if (response.HasErrors)
+                {
+                    this.AddValidationErrorsToModelState(response);
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("Index", "Home");  // Change to point to correct view
+        }
+
         public ActionResult _GetUserNotifications()
         {
             NotificationApplicationSummaryData[] model = null;

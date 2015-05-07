@@ -8,5 +8,7 @@
         IRegistration Registration { get; }
 
         INotification Notification { get; }
+
+        IProducer Producer { get; }
     }
 }

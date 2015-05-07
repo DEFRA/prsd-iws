@@ -43,11 +43,13 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="CompetentAuthority.cs" />
+    <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Notification\NotificationApplication.cs" />
     <Compile Include="Notification\WasteAction.cs" />
     <Compile Include="Organisation.cs" />
     <Compile Include="IDocumentGenerator.cs" />
+    <Compile Include="Notification\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UKCompetentAuthority.cs" />
     <Compile Include="User.cs" />

@@ -217,6 +217,7 @@
     <Compile Include="Controllers\NotificationApplicationController.cs" />
     <Compile Include="Controllers\DocumentGenerationController.cs" />
     <Compile Include="Controllers\NotificationInformationController.cs" />
+    <Compile Include="Controllers\ProducerController.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Identity\ApplicationUserStore.cs" />

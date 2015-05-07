@@ -446,6 +446,8 @@
     <Content Include="Views\Applicant\Home.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\NotificationApplication\_GetUserNotifications.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ContactPersonViewModel.cshtml" />
+    <Content Include="Views\NotificationApplication\ProducerInformation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -502,6 +504,7 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\ProducerInformationViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
@@ -514,6 +517,7 @@
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptionalViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ContactPersonViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>

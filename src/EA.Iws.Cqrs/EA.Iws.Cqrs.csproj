@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Notification\CreateNotificationApplication.cs" />
     <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
+    <Compile Include="Notification\CreateProducer.cs" />
+    <Compile Include="Notification\CreateProducerHandler.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
     <Compile Include="Notification\GenerateNotificationDocumentHandler.cs" />
     <Compile Include="Notification\GetNextNotificationNumber.cs" />

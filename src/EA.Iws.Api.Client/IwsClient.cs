@@ -9,6 +9,7 @@
         private readonly HttpClient httpClient;
         private IRegistration registration;
         private INotification notification;
+        private IProducer producer;
 
         public IwsClient(string baseUrl)
         {
@@ -28,6 +29,11 @@
         public INotification Notification
         {
             get { return notification ?? (notification = new Notification(httpClient)); }
+        }
+
+        public IProducer Producer
+        {
+            get { return producer ?? (producer = new Producer(httpClient)); }
         }
 
         public void Dispose()

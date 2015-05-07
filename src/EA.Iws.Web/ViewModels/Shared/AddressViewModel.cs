@@ -5,21 +5,24 @@
     public class AddressViewModel
     {
         [Required]
-        [StringLength(50)]
+        [Display(Name = "Building name or number")]
         public string Building { get; set; }
 
-        [StringLength(50)]
-        public string Street { get; set; }
+        [Required]
+        [Display(Name = "Address line 1")]
+        public string Address1 { get; set; }
+
+        [Display(Name = "Address line 2")]
+        public string Address2 { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string City { get; set; }
+        [Display(Name = "Town or city")]
+        public string TownOrCity { get; set; }
 
-        [StringLength(50)]
+        [Display(Name = "County")]
         public string County { get; set; }
 
         [Required]
-        [StringLength(10)]
         public string Postcode { get; set; }
     }
 }

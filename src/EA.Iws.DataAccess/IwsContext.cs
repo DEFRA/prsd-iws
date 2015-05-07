@@ -27,6 +27,10 @@
 
         public virtual DbSet<User> Users { get; set; }
 
+        public virtual DbSet<Producer> Producers { get; set; }
+
+        public virtual DbSet<Contact> Contacts { get; set; }
+
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")
         {
