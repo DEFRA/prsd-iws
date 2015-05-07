@@ -30,6 +30,8 @@ namespace EA.Iws.Api
 #if DEBUG
             LogProvider.SetCurrentLogProvider(new DebugLogger());
             config.Services.Add(typeof(IExceptionLogger), new DebugExceptionLogger());
+#else
+            LogProvider.SetCurrentLogProvider(new ElmahLogger());
 #endif
             var factory = Factory.Configure();
             factory.ConfigureUserService(app);
@@ -53,6 +55,7 @@ namespace EA.Iws.Api
 
             // Elmah
             config.Services.Add(typeof(IExceptionLogger), new ElmahExceptionLogger());
+            config.Filters.Add(new ElmahHandleErrorApiAttribute());
 
             // Autofac
             var builder = new ContainerBuilder();
