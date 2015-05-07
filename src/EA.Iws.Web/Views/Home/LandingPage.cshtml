@@ -1,0 +1,31 @@
+﻿@model EA.Iws.Web.ViewModels.Home.YesNoChoice
+
+@{
+    ViewBag.Title = "Landing Page";
+}
+
+@using (Html.BeginForm(actionName: "LandingPage", controllerName: "Home", method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="grid-row">
+        
+            <header class="hgroup">
+                <h1 class="heading-large">Apply for an international waste shipments notification number</h1>
+            </header>
+
+            <div>
+                <p>Have you previously registered with the on-line International Waste Shipment service?</p>
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
+                @Html.EditorFor(m => m.Choices)
+            </div>
+
+            <div class="form-group">
+                <button class="button" type="submit">Continue</button>
+            </div>
+
+        
+    </div>
+}

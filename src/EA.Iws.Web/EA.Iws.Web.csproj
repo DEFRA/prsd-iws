@@ -445,6 +445,7 @@
     <Content Include="Views\NotificationApplication\WasteActionQuestion.cshtml" />
     <Content Include="Views\NotificationApplication\Created.cshtml" />
     <Content Include="Views\Applicant\Home.cshtml" />
+    <Content Include="Views\Home\LandingPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -495,6 +496,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Home\YesNoChoice.cs" />
     <Compile Include="ViewModels\NotificationApplication\Created.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
