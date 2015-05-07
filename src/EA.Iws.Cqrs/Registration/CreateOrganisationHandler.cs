@@ -3,9 +3,9 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.Cqrs;
+    using DataAccess;
     using Domain;
-    using Iws.Core.Cqrs;
-    using Iws.DataAccess;
 
     internal class CreateOrganisationHandler : ICommandHandler<CreateOrganisation>
     {
@@ -20,24 +20,15 @@
         {
             var orgData = command.Organisation;
             var country = await db.Countries.SingleAsync(c => c.Id == new Guid(command.Organisation.Country));
-            
-            var address = new Address(orgData.Building, orgData.Address1, orgData.TownOrCity, orgData.Postcode, country, orgData.Address2);
-            var organisation = new Organisation(command.Organisation.Name, address, command.Organisation.EntityType, command.Organisation.CompaniesHouseNumber);
 
-            using (var transaction = db.Database.BeginTransaction())
-            {
-                db.Organisations.Add(organisation);
+            var address = new Address(orgData.Building, orgData.Address1, orgData.TownOrCity, orgData.Postcode, country,
+                orgData.Address2);
+            var organisation = new Organisation(command.Organisation.Name, address, command.Organisation.EntityType,
+                command.Organisation.CompaniesHouseNumber);
 
-                try
-                {
-                    await db.SaveChangesAsync();
-                    transaction.Commit();
-                }
-                catch
-                {
-                    transaction.Rollback();
-                }
-            }
+            db.Organisations.Add(organisation);
+
+            await db.SaveChangesAsync();
         }
     }
 }
