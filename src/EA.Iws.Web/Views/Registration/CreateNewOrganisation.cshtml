@@ -50,7 +50,7 @@
     </div>
     <div class="form-group" @Html.Gds().FormGroupClass(m => m.EntityType)>
         @Html.ValidationMessageFor(m => m.EntityType)
-        <label class="form-label">Organisation Type</label>
+        <label class="form-label">Organisation type</label>
         <label class="block-label">
             @Html.RadioButtonFor(m => m.EntityType, "Sole Trader") Sole Trader
         </label>
@@ -60,9 +60,10 @@
         <label class="block-label" data-target="companies-house-number">
             @Html.RadioButtonFor(m => m.EntityType, "Limited Company") Limited Company
         </label>
-        <div class="panel-indent js-hidden" id="companies-house-number">
-            <div class="form-group">
-                @Html.Gds().LabelFor(m => m.CompaniesHouseReference, new { @class = "form-label" })
+        <div class="panel-indent @(Model.EntityType != null && Model.EntityType.Equals("Limited Company") ? "" : "js-hidden")" id="companies-house-number">
+            <div class="form-group" @Html.Gds().FormGroupClass(m => m.CompaniesHouseReference)>
+                @Html.ValidationMessageFor(m => m.CompaniesHouseReference)
+                @Html.LabelFor(m => m.CompaniesHouseReference, new { @class = "form-label" })
                 @Html.TextBoxFor(m => m.CompaniesHouseReference, new { @class = "form-control" })
             </div>
             <div class="form-group">

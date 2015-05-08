@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Api.Client.Entities;
+    using Infrastructure;
 
     public class CreateNewOrganisationViewModel
     {
@@ -20,7 +21,8 @@
         [Display(Name = "Organisation name")]
         public string Name { get; set; }
 
-        [Display(Name = "Companies House Number")]
+        [RequiredIf("EntityType", "Limited Company", "Companies house number is required")]
+        [Display(Name = "Companies house number")]
         public string CompaniesHouseReference { get; set; }
 
         [Required]
