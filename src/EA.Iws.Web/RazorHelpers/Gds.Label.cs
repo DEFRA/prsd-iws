@@ -55,7 +55,7 @@
 
         private bool ContainsAttribute<T>(ModelMetadata modelMetadata, string propertyName)
         {
-            var property = modelMetadata.ContainerType.GetProperties().First(p => p.Name.Equals(propertyName));
+            var property = modelMetadata.ContainerType.GetProperties().Single(p => p.Name.Equals(propertyName));
 
             var attribute = Attribute.GetCustomAttribute(property, typeof(T));
             return attribute != null;
