@@ -13,17 +13,17 @@
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
         @Html.ValidationMessageFor(m => m.Email)
-        @Html.Gds().LabelFor(m => m.Email, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.Email)
+        @Html.Gds().TextBoxFor(m => m.Email)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.ValidationMessageFor(m => m.Password)
-        @Html.Gds().LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.Gds().LabelFor(m => m.Password)
         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.CheckBoxFor(m => m.RememberMe)
-        @Html.Gds().LabelFor(m => m.RememberMe)
+        @Html.Gds().CheckBoxLabelFor(m => m.RememberMe)
     </div>
     <div class="form-group">
             <input type="submit" value="Continue" class="button" />
