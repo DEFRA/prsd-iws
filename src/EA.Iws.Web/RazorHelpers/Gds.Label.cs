@@ -6,6 +6,7 @@
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Infrastructure;
 
     public partial class Gds<TModel>
     {
@@ -25,7 +26,9 @@
         {
             var modelMetadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
 
-            var appendOptional = modelMetadata.IsRequired ? string.Empty : " (optional)";
+            var containsRequiredIfAttribute = ContainsAttribute<RequiredIfAttribute>(modelMetadata, modelMetadata.PropertyName);
+
+            var appendOptional = modelMetadata.IsRequired || containsRequiredIfAttribute ? string.Empty : " (optional)";
 
             var htmlFieldName = ExpressionHelper.GetExpressionText(expression);
 
@@ -48,6 +51,14 @@
             labelTag.InnerHtml = labelText + appendOptional;
 
             return MvcHtmlString.Create(labelTag.ToString(TagRenderMode.Normal));
+        }
+
+        private bool ContainsAttribute<T>(ModelMetadata modelMetadata, string propertyName)
+        {
+            var property = modelMetadata.ContainerType.GetProperties().First(p => p.Name.Equals(propertyName));
+
+            var attribute = Attribute.GetCustomAttribute(property, typeof(T));
+            return attribute != null;
         }
     }
 }
