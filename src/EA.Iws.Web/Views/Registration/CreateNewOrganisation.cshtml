@@ -15,38 +15,38 @@
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
         @Html.ValidationMessageFor(m => m.Name)
-        @Html.Gds().LabelFor(m => m.Name, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.Name)
+        @Html.Gds().TextBoxFor(m => m.Name)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Building)">
         @Html.ValidationMessageFor(m => m.Building)
-        @Html.Gds().LabelFor(m => m.Building, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Building, new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.Building)
+        @Html.Gds().TextBoxFor(m => m.Building)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Address1)">
         @Html.ValidationMessageFor(m => m.Address1)
-        @Html.Gds().LabelFor(m => m.Address1, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.Address1)
+        @Html.Gds().TextBoxFor(m => m.Address1)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Address2)">
         @Html.ValidationMessageFor(m => m.Address2)
-        @Html.Gds().LabelFor(m => m.Address2, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.Address2)
+        @Html.Gds().TextBoxFor(m => m.Address2)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
         @Html.ValidationMessageFor(m => m.TownOrCity)
-        @Html.Gds().LabelFor(m => m.TownOrCity, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.TownOrCity, new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.TownOrCity)
+        @Html.Gds().TextBoxFor(m => m.TownOrCity)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Postcode)">
         @Html.ValidationMessageFor(m => m.Postcode)
-        @Html.Gds().LabelFor(m => m.Postcode, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.Postcode)
+        @Html.Gds().TextBoxFor(m => m.Postcode)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Country)">
         @Html.ValidationMessageFor(m => m.Country)
-        @Html.Gds().LabelFor(m => m.Country, new { @class = "form-label" })
-        @Html.DropDownListFor(m => m.Country, new SelectList(Model.Countries, "Id", "Name", Model.DefaultCountry.Id), new { @class = "form-control" })
+        @Html.Gds().LabelFor(m => m.Country)
+        @Html.Gds().DropDownListFor(m => m.Country, new SelectList(Model.Countries, "Id", "Name", Model.DefaultCountry.Id))
     </div>
     <div class="form-group" @Html.Gds().FormGroupClass(m => m.EntityType)>
         @Html.ValidationMessageFor(m => m.EntityType)
@@ -63,8 +63,8 @@
         <div class="panel-indent @(Model.EntityType != null && Model.EntityType.Equals("Limited Company") ? "" : "js-hidden")" id="companies-house-number">
             <div class="form-group" @Html.Gds().FormGroupClass(m => m.CompaniesHouseReference)>
                 @Html.ValidationMessageFor(m => m.CompaniesHouseReference)
-                @Html.Gds().LabelFor(m => m.CompaniesHouseReference, new { @class = "form-label" })
-                @Html.TextBoxFor(m => m.CompaniesHouseReference, new { @class = "form-control" })
+                @Html.Gds().LabelFor(m => m.CompaniesHouseReference)
+                @Html.Gds().TextBoxFor(m => m.CompaniesHouseReference)
             </div>
             <div class="form-group">
                 <details>
@@ -81,8 +81,4 @@
     <div class="form-group">
         <input type="submit" class="button" value="Continue" />
     </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

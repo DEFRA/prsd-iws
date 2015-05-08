@@ -435,7 +435,6 @@
     <Content Include="Views\Shared\_IwsNavigation.cshtml" />
     <Content Include="Views\Shared\_IwsTracking.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\PersonName.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RadioButtonStringCollectionBase.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\NotificationApplication\CompetentAuthority.cshtml" />
@@ -489,8 +488,11 @@
     <Compile Include="Infrastructure\PrincipalExtensions.cs" />
     <Compile Include="Infrastructure\IwsClaimTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorHelpers\Gds.CheckBox.cs" />
     <Compile Include="RazorHelpers\Gds.cs" />
+    <Compile Include="RazorHelpers\Gds.DropDownList.cs" />
     <Compile Include="RazorHelpers\Gds.Label.cs" />
+    <Compile Include="RazorHelpers\Gds.Password.cs" />
     <Compile Include="RazorHelpers\Gds.TextBox.cs" />
     <Compile Include="RazorHelpers\Gds.Validation.cs" />
     <Compile Include="RazorHelpers\GdsExtensions.cs" />
@@ -507,7 +509,6 @@
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\InitialQuestions.cs" />
     <Compile Include="ViewModels\Shared\Address.cs" />
-    <Compile Include="ViewModels\Shared\PersonName.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonCollection.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollection.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBase.cs" />

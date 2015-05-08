@@ -19,19 +19,14 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.ValidationMessageFor(m => m.Password)
         @Html.Gds().LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        @Html.Gds().PasswordFor(m => m.Password)
     </div>
     <div class="form-group">
-        @Html.CheckBoxFor(m => m.RememberMe)
-        @Html.Gds().CheckBoxLabelFor(m => m.RememberMe)
+        @Html.Gds().CheckBoxFor(m => m.RememberMe)
     </div>
     <div class="form-group">
             <input type="submit" value="Continue" class="button" />
     </div>
     <p>@Html.ActionLink("Forgot your username", "Login", "Account")</p>
     <p>@Html.ActionLink("Reset your password", "Login", "Account")</p>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

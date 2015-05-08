@@ -27,40 +27,6 @@
             return LabelFor(expression, htmlAttributes, "form-label");
         }
 
-        public MvcHtmlString CheckBoxLabelFor<TValue>(Expression<Func<TModel, TValue>> expression)
-        {
-            return CheckBoxLabelFor(expression, new RouteValueDictionary());
-        }
-
-        public MvcHtmlString CheckBoxLabelFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            object htmlAttributes)
-        {
-            return CheckBoxLabelFor(expression, new RouteValueDictionary(htmlAttributes));
-        }
-
-        public MvcHtmlString CheckBoxLabelFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            IDictionary<string, object> htmlAttributes)
-        {
-            return LabelFor(expression, htmlAttributes, "form-checkbox");
-        }
-
-        public MvcHtmlString BlockLabelFor<TValue>(Expression<Func<TModel, TValue>> expression)
-        {
-            return BlockLabelFor(expression, new RouteValueDictionary());
-        }
-
-        public MvcHtmlString BlockLabelFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            object htmlAttributes)
-        {
-            return BlockLabelFor(expression, new RouteValueDictionary(htmlAttributes));
-        }
-
-        public MvcHtmlString BlockLabelFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            IDictionary<string, object> htmlAttributes)
-        {
-            return LabelFor(expression, htmlAttributes, "block-label");
-        }
-
         private MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression, IDictionary<string, object> htmlAttributes, string cssClass)
         {
             var modelMetadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);

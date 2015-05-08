@@ -9,22 +9,22 @@
 
     public partial class Gds<TModel>
     {
-        public MvcHtmlString TextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        public MvcHtmlString PasswordFor<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            return TextBoxFor(expression, new RouteValueDictionary());
+            return PasswordFor(expression, new RouteValueDictionary());
         }
 
-        public MvcHtmlString TextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression, object htmlAttributes)
+        public MvcHtmlString PasswordFor<TValue>(Expression<Func<TModel, TValue>> expression, object htmlAttributes)
         {
             var routeValueDictionary = System.Web.Mvc.HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
-            return TextBoxFor(expression, routeValueDictionary);
+            return PasswordFor(expression, routeValueDictionary);
         }
 
-        public MvcHtmlString TextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression,
+        public MvcHtmlString PasswordFor<TValue>(Expression<Func<TModel, TValue>> expression,
             IDictionary<string, object> htmlAttributes)
         {
             AddFormControlCssClass(htmlAttributes);
-            return HtmlHelper.TextBoxFor(expression, htmlAttributes);
+            return HtmlHelper.PasswordFor(expression, htmlAttributes);
         }
     }
 }
