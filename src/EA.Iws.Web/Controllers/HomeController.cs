@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using ViewModels.Home;
+    using ViewModels.Shared;
 
     public class HomeController : Controller
     {
@@ -21,13 +22,13 @@
         [AllowAnonymous]
         public ActionResult LandingPage()
         {
-            var model = new YesNoChoice();
+            var model = new YesNoChoiceViewModel();
             return View(model);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult LandingPage(YesNoChoice model)
+        public ActionResult LandingPage(YesNoChoiceViewModel model)
         {
             if (!ModelState.IsValid)
             {

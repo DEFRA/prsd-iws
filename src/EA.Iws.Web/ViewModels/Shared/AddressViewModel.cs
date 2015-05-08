@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Address
+    public class AddressViewModel
     {
         [Required]
         [StringLength(50)]

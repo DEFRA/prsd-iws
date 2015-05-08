@@ -6,9 +6,9 @@
     using System.Linq;
     using Api.Client.Entities;
 
-    public class InitialQuestions
+    public class InitialQuestionsViewModel
     {
-        public InitialQuestions()
+        public InitialQuestionsViewModel()
         {
             NotificationTypeAction = Enum.GetNames(typeof(WasteAction)).ToList();
         }

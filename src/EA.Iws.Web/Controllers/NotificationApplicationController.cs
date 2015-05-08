@@ -24,17 +24,17 @@
         [HttpGet]
         public ActionResult CompetentAuthority()
         {
-            var model = new CompetentAuthorityChoice
+            var model = new CompetentAuthorityChoiceViewModel
             {
                 CompetentAuthorities =
-                    RadioButtonStringCollection.CreateFromEnum<CompetentAuthority>()
+                    RadioButtonStringCollectionViewModel.CreateFromEnum<CompetentAuthority>()
             };
 
             return View("CompetentAuthority", model);
         }
 
         [HttpPost]
-        public ActionResult CompetentAuthority(CompetentAuthorityChoice model)
+        public ActionResult CompetentAuthority(CompetentAuthorityChoiceViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -48,7 +48,7 @@
         [HttpGet]
         public ActionResult WasteActionQuestion(string ca, string nt)
         {
-            InitialQuestions model = new InitialQuestions
+            InitialQuestionsViewModel model = new InitialQuestionsViewModel
             {
                 SelectedWasteAction = WasteAction.Recovery,
                 CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
@@ -63,7 +63,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> WasteActionQuestion(InitialQuestions model)
+        public async Task<ActionResult> WasteActionQuestion(InitialQuestionsViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +97,7 @@
             using (var client = apiClient())
             {
                 var notification = await client.Notification.GetNotificationInformationAsync(User.GetAccessToken(), id);
-                var model = new Created()
+                var model = new CreatedViewModel()
                 {
                     NotificationId = notification.Id,
                     NotificationNumber = notification.NotificationNumber

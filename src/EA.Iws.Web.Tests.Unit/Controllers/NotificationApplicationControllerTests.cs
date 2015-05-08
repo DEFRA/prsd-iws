@@ -12,13 +12,13 @@
 
     public class NotificationApplicationControllerTests
     {
-        private static CompetentAuthorityChoice CompetentAuthorityChoice
+        private static CompetentAuthorityChoiceViewModel CompetentAuthorityChoice
         {
             get
             {
-                var competentAuthorityChoice = new CompetentAuthorityChoice
+                var competentAuthorityChoice = new CompetentAuthorityChoiceViewModel
                 {
-                    CompetentAuthorities = new RadioButtonStringCollection
+                    CompetentAuthorities = new RadioButtonStringCollectionViewModel
                     {
                         SelectedValue = "Test",
                         PossibleValues = new[] { "Test", "String", "Value" }
@@ -42,7 +42,7 @@
             var result = controller.CompetentAuthority() as ViewResult;
 
             Assert.Equal("CompetentAuthority", result.ViewName);
-            Assert.IsType<CompetentAuthorityChoice>(result.Model);
+            Assert.IsType<CompetentAuthorityChoiceViewModel>(result.Model);
         }
 
         [Fact]
@@ -69,7 +69,7 @@
             var result = controller.CompetentAuthority(competentAuthorityChoice) as ViewResult;
 
             Assert.Equal("CompetentAuthority", result.ViewName);
-            Assert.IsType<CompetentAuthorityChoice>(result.Model);
+            Assert.IsType<CompetentAuthorityChoiceViewModel>(result.Model);
         }
 
         [Fact]
@@ -79,14 +79,14 @@
             var result = controller.WasteActionQuestion("Environment Agency", "Recovery") as ViewResult;
 
             Assert.Empty(result.ViewName);
-            Assert.IsType<InitialQuestions>(result.Model);
+            Assert.IsType<InitialQuestionsViewModel>(result.Model);
         }
 
         [Fact]
         public async Task WasteActionQuestion_Post_RedirectsToCorrectAction()
         {
             var controller = CreateNotificationApplicationController();
-            var model = new InitialQuestions();
+            var model = new InitialQuestionsViewModel();
             model.SelectedWasteAction = WasteAction.Recovery;
             var result = await controller.WasteActionQuestion(model) as RedirectToRouteResult;
 
@@ -98,11 +98,11 @@
         {
             var controller = CreateNotificationApplicationController();
             controller.ModelState.AddModelError("Error", "Test Error");
-            var model = new InitialQuestions();
+            var model = new InitialQuestionsViewModel();
             var result = await controller.WasteActionQuestion(model) as ViewResult;
 
             Assert.Empty(result.ViewName);
-            Assert.IsType<InitialQuestions>(result.Model);
+            Assert.IsType<InitialQuestionsViewModel>(result.Model);
         }
     }
 }

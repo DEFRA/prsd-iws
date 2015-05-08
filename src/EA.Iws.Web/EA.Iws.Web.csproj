@@ -501,19 +501,19 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
-    <Compile Include="ViewModels\Home\YesNoChoice.cs" />
-    <Compile Include="ViewModels\NotificationApplication\Created.cs" />
+    <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\InitialQuestions.cs" />
-    <Compile Include="ViewModels\Shared\Address.cs" />
-    <Compile Include="ViewModels\Shared\RadioButtonCollection.cs" />
-    <Compile Include="ViewModels\Shared\RadioButtonStringCollection.cs" />
-    <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBase.cs" />
-    <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptional.cs" />
-    <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoice.cs" />
+    <Compile Include="ViewModels\NotificationApplication\InitialQuestionsViewModel.cs" />
+    <Compile Include="ViewModels\Shared\AddressViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonStringCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBaseViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptionalViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoiceViewModel.cs" />
+    <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>

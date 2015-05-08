@@ -7,18 +7,18 @@
     using System.Linq;
     using System.Reflection;
 
-    public sealed class RadioButtonStringCollection : RadioButtonStringCollectionBase
+    public sealed class RadioButtonStringCollectionViewModel : RadioButtonStringCollectionBaseViewModel
     {
         [Required(ErrorMessage = "This answer is required.")]
         public override string SelectedValue { get; set; }
 
         public override IList<string> PossibleValues { get; set; }
 
-        public RadioButtonStringCollection()
+        public RadioButtonStringCollectionViewModel()
         {
         }
 
-        public RadioButtonStringCollection(IEnumerable<string> stringsToUse)
+        public RadioButtonStringCollectionViewModel(IEnumerable<string> stringsToUse)
         {
             this.PossibleValues = stringsToUse.ToList();
         }
@@ -29,7 +29,7 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="selectedValue"></param>
         /// <returns></returns>
-        public static RadioButtonStringCollection CreateFromEnum<T>(string selectedValue = null)
+        public static RadioButtonStringCollectionViewModel CreateFromEnum<T>(string selectedValue = null)
         {
             if (!(typeof(Enum).IsAssignableFrom(typeof(T))))
             {
@@ -58,14 +58,14 @@
                 fieldNames.Add(name);
             }
 
-            return new RadioButtonStringCollection()
+            return new RadioButtonStringCollectionViewModel()
             {
                 PossibleValues = fieldNames,
                 SelectedValue = selectedValue
             };
         }
 
-        public static RadioButtonStringCollection CreateFromEnum<T>(T selectedValue)
+        public static RadioButtonStringCollectionViewModel CreateFromEnum<T>(T selectedValue)
         {
             if (!(selectedValue is Enum))
             {
