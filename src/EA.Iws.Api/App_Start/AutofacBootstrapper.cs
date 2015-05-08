@@ -4,7 +4,12 @@
     using Autofac;
     using Autofac.Integration.WebApi;
     using Cqrs.Autofac;
+    using Identity;
     using IoC;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.Owin.Security.DataProtection;
+    using Owin;
+    using Services;
 
     public class AutofacBootstrapper
     {
@@ -24,6 +29,11 @@
             builder.RegisterAssemblyModules(typeof(Startup).Assembly);
             builder.RegisterAssemblyModules(typeof(AutofacCommandBus).Assembly);
             builder.RegisterAssemblyModules(typeof(AuthorizationModule).Assembly);
+
+            // http://www.talksharp.com/configuring-autofac-to-work-with-the-aspnet-identity-framework-in-mvc-5
+            builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
 
             return builder.Build();
         }

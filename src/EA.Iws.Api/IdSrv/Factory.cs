@@ -3,6 +3,7 @@
     using Thinktecture.IdentityServer.Core.Configuration;
     using Thinktecture.IdentityServer.Core.Services;
     using Thinktecture.IdentityServer.Core.Services.InMemory;
+    using Thinktecture.IdentityServer.EntityFramework;
 
     internal static class Factory
     {
@@ -14,6 +15,17 @@
             factory.ScopeStore = new Registration<IScopeStore>(scopeStore);
             var clientStore = new InMemoryClientStore(Clients.Get());
             factory.ClientStore = new Registration<IClientStore>(clientStore);
+
+            var efConfig = new EntityFrameworkServiceOptions
+            {
+                ConnectionString = "Iws.DefaultConnection",
+                Schema = "Identity"
+            };
+
+            factory.RegisterOperationalServices(efConfig);
+
+            var cleanup = new TokenCleanup(efConfig);
+            cleanup.Start();
 
             return factory;
         }
