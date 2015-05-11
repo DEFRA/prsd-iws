@@ -51,6 +51,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />
+    <Content Include="scripts\TestData\20150511-092300-Sunil-test-user.sql" />
     <Content Include="scripts\Update\20150424-152702-EA.Iws.sql" />
     <None Include="scripts\Update\20150429-150715-EA.Iws.sql" />
     <None Include="scripts\Update\20150430-115148-EA.Iws.sql" />
