@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -134,13 +135,23 @@
         }
 
         [HttpGet]
-        public ActionResult ProducerInformation(Guid id)
+        public async Task<ActionResult> ProducerInformation(Guid id)
         {
             var model = new ProducerInformationViewModel();
+            var address = new AddressViewModel { Countries = await GetCountries() };
 
             model.NotificationId = id;
+            model.AddressDetails = address;
         
             return View(model);
+        }
+
+        private async Task<IEnumerable<CountryData>> GetCountries()
+        {
+            using (var client = new IwsClient(config.ApiUrl))
+            {
+                return await client.Registration.GetCountriesAsync();
+            }
         }
 
         [HttpPost]
@@ -158,6 +169,7 @@
             address.TownOrCity = model.AddressDetails.TownOrCity;
             address.Region = model.AddressDetails.County;
             address.PostalCode = model.AddressDetails.Postcode;
+            address.Country = model.AddressDetails.Country;
 
             var contact = new ContactData();
             contact.FirstName = model.ContactDetails.FirstName;

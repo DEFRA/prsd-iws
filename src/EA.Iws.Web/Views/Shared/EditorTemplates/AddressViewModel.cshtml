@@ -33,3 +33,8 @@
     @Html.Gds().LabelFor(m => m.Postcode)
     @Html.Gds().TextBoxFor(m => m.Postcode)
 </div>
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Country)">
+    @Html.ValidationMessageFor(m => m.Country)
+    @Html.Gds().LabelFor(m => m.Country)
+    @Html.Gds().DropDownListFor(m => m.Country, new SelectList(Model.Countries, "Id", "Name", Model.DefaultCountry.Id))
+</div>

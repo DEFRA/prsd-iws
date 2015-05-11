@@ -16,7 +16,7 @@
         [Display(Name = "Telephone Number")]
         public string Telephone { get; set; }
 
-        [Display(Name = "Fax")]
+        [Display(Name = "Fax Number")]
         public string Fax { get; set; }
 
         [Required]

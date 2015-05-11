@@ -1,7 +1,7 @@
 ﻿@model EA.Iws.Web.ViewModels.NotificationApplication.ProducerInformationViewModel
 
 @{
-    ViewBag.Title = "Waste Producer Information";
+    ViewBag.Title = "Waste Generator(s) - Producer(s)";
 }
 
 @using (Html.BeginForm("ProducerInformation", "NotificationApplication", FormMethod.Post))
@@ -10,7 +10,7 @@
     @Html.Gds().ValidationSummary()
 
     <header class="hgroup">
-        <h1 class="heading-medium">Waste Producer Details</h1>
+        <h1 class="heading-medium">Waste Generator(s) - Producer(s)</h1>
         <div class="colored-header-bar"></div>
     </header>
 

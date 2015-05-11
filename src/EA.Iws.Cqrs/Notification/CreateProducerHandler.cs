@@ -19,7 +19,7 @@
 
         public async System.Threading.Tasks.Task HandleAsync(CreateProducer command)
         {
-            var country = await db.Countries.SingleAsync(c => c.Name.Equals("United Kingdom"));
+            var country = await db.Countries.SingleAsync(c => c.Id == new Guid(command.Producer.Address.Country));
 
             var notificationId = command.Producer.NotificationId;
 
