@@ -5,6 +5,7 @@
     using Api.Client;
     using Api.Client.Entities;
     using FakeItEasy;
+    using Services;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Web.Controllers;
@@ -31,7 +32,7 @@
         private static NotificationApplicationController CreateNotificationApplicationController()
         {
             var client = A.Fake<IIwsClient>();
-            return new NotificationApplicationController(() => client);
+            return new NotificationApplicationController(new AppConfiguration(), () => client);
         }
 
         [Fact]
