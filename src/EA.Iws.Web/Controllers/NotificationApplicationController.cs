@@ -19,7 +19,7 @@
         private readonly Func<IIwsClient> apiClient;
         private readonly AppConfiguration config;
 
-        public NotificationApplicationController(AppConfiguration config, Func<IIwsClient> apiClient)
+        public NotificationApplicationController(Func<IIwsClient> apiClient)
         {
             this.config = config;
             this.apiClient = apiClient;
@@ -148,7 +148,7 @@
 
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
-            using (var client = new IwsClient(config.ApiUrl))
+            using (var client = apiClient())
             {
                 return await client.Registration.GetCountriesAsync();
             }

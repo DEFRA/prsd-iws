@@ -32,7 +32,7 @@
         private static NotificationApplicationController CreateNotificationApplicationController()
         {
             var client = A.Fake<IIwsClient>();
-            return new NotificationApplicationController(new AppConfiguration(), () => client);
+            return new NotificationApplicationController(() => client);
         }
 
         [Fact]
