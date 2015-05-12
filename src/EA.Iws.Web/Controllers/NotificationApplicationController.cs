@@ -17,11 +17,9 @@
     public class NotificationApplicationController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
-        private readonly AppConfiguration config;
 
         public NotificationApplicationController(Func<IIwsClient> apiClient)
         {
-            this.config = config;
             this.apiClient = apiClient;
         }
 
