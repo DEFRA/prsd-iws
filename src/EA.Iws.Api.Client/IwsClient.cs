@@ -2,14 +2,16 @@
 {
     using System;
     using System.Net.Http;
+    using System.Threading.Tasks;
     using Actions;
+    using Extensions;
+    using Newtonsoft.Json;
+    using Prsd.Core.Mediator;
 
-    public class IwsClient : IDisposable, IIwsClient
+    public class IwsClient : IIwsClient
     {
         private readonly HttpClient httpClient;
         private IRegistration registration;
-        private INotification notification;
-        private IProducer producer;
 
         public IwsClient(string baseUrl)
         {
@@ -26,19 +28,35 @@
             get { return registration ?? (registration = new Registration(httpClient)); }
         }
 
-        public INotification Notification
+        public async Task<ApiResponse<TResult>> SendAsync<TResult>(IRequest<TResult> request)
         {
-            get { return notification ?? (notification = new Notification(httpClient)); }
+            return await InternalSendAsync(request).ConfigureAwait(false);
         }
 
-        public IProducer Producer
+        public async Task<ApiResponse<TResult>> SendAsync<TResult>(string accessToken, IRequest<TResult> request)
         {
-            get { return producer ?? (producer = new Producer(httpClient)); }
+            httpClient.SetBearerToken(accessToken);
+            return await InternalSendAsync(request).ConfigureAwait(false);
         }
 
         public void Dispose()
         {
             httpClient.Dispose();
+        }
+
+        private async Task<ApiResponse<TResult>> InternalSendAsync<TResult>(IRequest<TResult> request)
+        {
+            var apiRequest = new ApiRequest
+            {
+                RequestJson = JsonConvert.SerializeObject(request),
+                TypeName = request.GetType().AssemblyQualifiedName
+            };
+
+            var response = await httpClient.PostAsJsonAsync("Send", apiRequest).ConfigureAwait(false);
+
+            var result = await response.CreateResponseAsync<TResult>().ConfigureAwait(false);
+
+            return result;
         }
     }
 }

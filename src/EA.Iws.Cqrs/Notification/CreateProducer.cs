@@ -1,16 +1,15 @@
 ﻿namespace EA.Iws.Cqrs.Notification
 {
     using System;
-    using Api.Client.Entities;
-    using Core.Cqrs;
+    using Prsd.Core.Mediator;
 
-    public class CreateProducer : ICommand
+    public class CreateProducer : IRequest<Guid>
     {
-        public ProducerData Producer { get; set; }
-        
         public CreateProducer(ProducerData producer)
         {
             Producer = producer;
         }
+
+        public ProducerData Producer { get; private set; }
     }
 }

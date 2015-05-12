@@ -53,10 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizationModule.cs" />
-    <Compile Include="AutofacDeferredEventDispatcher.cs" />
-    <Compile Include="CommandDecoratorModule.cs" />
-    <Compile Include="CustomRegistrationExtensions.cs" />
     <Compile Include="EntityFrameworkModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,22 +61,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
-      <Project>{17bc546d-9ce6-452d-bbfb-a722583478f4}</Project>
-      <Name>EA.Iws.Core.Cqrs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Core.Domain\EA.Iws.Core.Domain.csproj">
-      <Project>{ffc5dae6-5d7e-42eb-8e16-ff9a78c898f1}</Project>
-      <Name>EA.Iws.Core.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Cqrs.Autofac\EA.Iws.Cqrs.Autofac.csproj">
-      <Project>{084fe45b-1a2b-45fc-b8d1-7915b0935263}</Project>
-      <Name>EA.Iws.Cqrs.Autofac</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Cqrs\EA.Iws.Cqrs.csproj">
-      <Project>{30697c44-f282-4c41-9b93-e337c80f2d83}</Project>
-      <Name>EA.Iws.Cqrs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
       <Project>{46300373-d7ae-40aa-bf96-3fc3889825a4}</Project>
       <Name>EA.Iws.DataAccess</Name>
@@ -89,9 +69,13 @@
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Utils\EA.Iws.Utils.csproj">
-      <Project>{abe7729f-bc65-4766-9d89-959e4edf5f2b}</Project>
-      <Name>EA.Iws.Utils</Name>
+    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
+      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
+      <Name>EA.Iws.RequestHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
+      <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
+      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

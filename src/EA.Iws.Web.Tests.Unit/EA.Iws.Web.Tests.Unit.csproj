@@ -129,7 +129,6 @@
     <Compile Include="Controllers\NotificationApplicationControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\Factories\AutofacContainerFactory.cs" />
-    <Compile Include="TestHelpers\Factories\MessageBusFactory.cs" />
     <Compile Include="TestHelpers\HttpContextMocker.cs" />
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
@@ -143,13 +142,17 @@
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
-      <Project>{17BC546D-9CE6-452D-BBFB-A722583478F4}</Project>
-      <Name>EA.Iws.Core.Cqrs</Name>
+    <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
+      <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>
+      <Name>EA.Iws.Requests</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Web\EA.Iws.Web.csproj">
       <Project>{2e112d48-a841-4db7-b96f-4211c4da31c0}</Project>
       <Name>EA.Iws.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
+      <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
+      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

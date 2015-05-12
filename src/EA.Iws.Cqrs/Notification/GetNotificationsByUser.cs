@@ -1,17 +1,10 @@
 ﻿namespace EA.Iws.Cqrs.Notification
 {
-    using System;
     using System.Collections.Generic;
-    using Core.Cqrs;
     using Domain.Notification;
+    using Prsd.Core.Mediator;
 
-    public class GetNotificationsByUser : IQuery<IList<NotificationApplication>>
+    public class GetNotificationsByUser : IRequest<IList<NotificationApplicationSummaryData>>
     {
-        public Guid UserId { get; private set; }
-
-        public GetNotificationsByUser(Guid userId)
-        {
-            this.UserId = userId;
-        }
     }
 }

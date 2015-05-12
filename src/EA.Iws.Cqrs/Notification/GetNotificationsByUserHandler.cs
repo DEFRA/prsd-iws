@@ -4,24 +4,33 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Cqrs;
     using DataAccess;
-    using Domain.Notification;
+    using Prsd.Core.Domain;
+    using Prsd.Core.Mediator;
 
-    internal class GetNotificationsByUserHandler : IQueryHandler<GetNotificationsByUser, IList<NotificationApplication>>
+    internal class GetNotificationsByUserHandler :
+        IRequestHandler<GetNotificationsByUser, IList<NotificationApplicationSummaryData>>
     {
         private readonly IwsContext context;
+        private readonly IUserContext userContext;
 
-        public GetNotificationsByUserHandler(IwsContext context)
+        public GetNotificationsByUserHandler(IwsContext context, IUserContext userContext)
         {
             this.context = context;
+            this.userContext = userContext;
         }
 
-        public async Task<IList<NotificationApplication>> ExecuteAsync(GetNotificationsByUser query)
+        public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetNotificationsByUser query)
         {
-            var notificationApplications = await context.NotificationApplications.Where(na => na.UserId == query.UserId).ToArrayAsync();
-
-            return notificationApplications;
+            return
+                await
+                    context.NotificationApplications.Where(na => na.UserId == userContext.UserId)
+                        .Select(n => new NotificationApplicationSummaryData
+                        {
+                            Id = n.Id,
+                            NotificationNumber = n.NotificationNumber,
+                            CreatedDate = n.CreatedDate
+                        }).ToListAsync();
         }
     }
 }

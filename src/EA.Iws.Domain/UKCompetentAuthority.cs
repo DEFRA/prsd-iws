@@ -1,11 +1,9 @@
 ﻿namespace EA.Iws.Domain
 {
-    using Core.Domain;
+    using Prsd.Core.Domain;
 
     public class UKCompetentAuthority : Enumeration
     {
-        private readonly string shortName;
-
         public static readonly UKCompetentAuthority England = new UKCompetentAuthority(1, "Environment Agency", "EA");
 
         public static readonly UKCompetentAuthority Scotland = new UKCompetentAuthority(2,
@@ -15,6 +13,7 @@
             "Northern Ireland Environment Agency", "NIEA");
 
         public static readonly UKCompetentAuthority Wales = new UKCompetentAuthority(4, "Natural Resources Wales", "NRW");
+        private readonly string shortName;
 
         private UKCompetentAuthority()
         {

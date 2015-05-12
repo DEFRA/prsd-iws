@@ -3,9 +3,9 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
-    using Core.Domain;
     using Domain;
     using FakeItEasy;
+    using Prsd.Core.Domain;
     using Xunit;
 
     public class OrganisationIntegration
@@ -26,7 +26,7 @@
         {
             var countries = context.Countries.ToList();
 
-            int count = countries.Count;
+            var count = countries.Count;
         }
 
         [Fact]
@@ -86,7 +86,7 @@
 
         private static Address TestAddress(Country country)
         {
-            return new Address("1", "test street","Woking", "GU22 7UM", country);
+            return new Address("1", "test street", "Woking", "GU22 7UM", country);
         }
 
         private void CleanUp(Organisation organisation, Address address)

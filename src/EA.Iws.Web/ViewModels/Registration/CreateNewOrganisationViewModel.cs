@@ -4,9 +4,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using System.Web.Mvc;
-    using Api.Client.Entities;
     using Infrastructure;
+    using Requests.Registration;
 
     public class CreateNewOrganisationViewModel
     {

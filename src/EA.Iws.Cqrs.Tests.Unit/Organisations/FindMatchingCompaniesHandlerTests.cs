@@ -4,18 +4,19 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Cqrs.Organisations;
     using DataAccess;
     using Domain;
     using FakeItEasy;
     using Helpers;
-    using Utils;
+    using Prsd.Core;
+    using RequestHandlers.Organisations;
+    using Requests.Organisations;
     using Xunit;
 
     public class FindMatchingCompaniesHandlerTests
     {
-        private readonly DbContextHelper helper = new DbContextHelper();
         private readonly string anyType = "Company";
+        private readonly DbContextHelper helper = new DbContextHelper();
 
         [Theory]
         [InlineData("", "", 0)]
@@ -67,7 +68,7 @@
         {
             var organisations = helper.GetAsyncEnabledDbSet(new[]
             {
-                GetOrganisationWithName("SFW Ltd"), 
+                GetOrganisationWithName("SFW Ltd"),
                 GetOrganisationWithName("swf"),
                 GetOrganisationWithName("mfw"),
                 GetOrganisationWithName("mfi Kitchens and Showrooms Ltd"),
@@ -81,7 +82,7 @@
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
-            var strings = await handler.ExecuteAsync(new FindMatchingOrganisations("sfw"));
+            var strings = await handler.HandleAsync(new FindMatchingOrganisations("sfw"));
 
             Assert.Equal(1, strings.Count);
         }
@@ -92,7 +93,7 @@
             var organisations = helper.GetAsyncEnabledDbSet(new[]
             {
                 GetOrganisationWithName("SFW Ltd"),
-                GetOrganisationWithName("SFW  Limited") 
+                GetOrganisationWithName("SFW  Limited")
             });
 
             var context = A.Fake<IwsContext>();
@@ -101,7 +102,7 @@
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
-            var strings = await handler.ExecuteAsync(new FindMatchingOrganisations("sfw"));
+            var strings = await handler.HandleAsync(new FindMatchingOrganisations("sfw"));
 
             Assert.Equal(2, strings.Count);
         }
@@ -112,7 +113,7 @@
             var organisations = helper.GetAsyncEnabledDbSet(new[]
             {
                 GetOrganisationWithName("Environment Agency"),
-                GetOrganisationWithName("Enivronent Agency") 
+                GetOrganisationWithName("Enivronent Agency")
             });
 
             var context = A.Fake<IwsContext>();
@@ -121,7 +122,7 @@
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingOrganisations("THe environment agency"));
+            var results = await handler.HandleAsync(new FindMatchingOrganisations("THe environment agency"));
 
             Assert.Equal(2, results.Count);
         }
@@ -144,7 +145,7 @@
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingOrganisations("Environment Agency"));
+            var results = await handler.HandleAsync(new FindMatchingOrganisations("Environment Agency"));
 
             Assert.Equal(data.Length, results.Count);
         }
@@ -164,7 +165,7 @@
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingOrganisations("Environment Agency"));
+            var results = await handler.HandleAsync(new FindMatchingOrganisations("Environment Agency"));
 
             Assert.Equal(names, results.Select(r => r.Name));
         }
@@ -172,13 +173,13 @@
         [Fact]
         public async Task FindMatchingOrganisationsHandler_AllDataMatches_ReturnsDataOrderedByEditDistance()
         {
-            string searchTerm = "bee keepers";
+            var searchTerm = "bee keepers";
 
             var namesWithDistances = new[]
             {
                 new KeyValuePair<string, int>("THE Bee Keepers Limited", 0),
                 new KeyValuePair<string, int>("Bee Keeperes", 1),
-                new KeyValuePair<string, int>("BeeKeeprs", 2) 
+                new KeyValuePair<string, int>("BeeKeeprs", 2)
             };
 
             var organisations =
@@ -190,7 +191,7 @@
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
-            var results = await handler.ExecuteAsync(new FindMatchingOrganisations(searchTerm));
+            var results = await handler.HandleAsync(new FindMatchingOrganisations(searchTerm));
 
             Assert.Equal(namesWithDistances.OrderBy(n => n.Value).Select(n => n.Key), results.Select(r => r.Name));
         }

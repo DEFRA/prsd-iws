@@ -1,10 +1,9 @@
 ﻿namespace EA.Iws.Cqrs.Registration
 {
-    using Api.Client.Entities;
-    using Domain;
-    using Iws.Core.Cqrs;
+    using System;
+    using Prsd.Core.Mediator;
 
-    public class CreateOrganisation : ICommand
+    public class CreateOrganisation : IRequest<Guid>
     {
         public CreateOrganisation(OrganisationRegistrationData organisation)
         {

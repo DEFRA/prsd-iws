@@ -51,13 +51,10 @@
     <Compile Include="QueryModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
-      <Project>{17bc546d-9ce6-452d-bbfb-a722583478f4}</Project>
-      <Name>EA.Iws.Core.Cqrs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Cqrs\EA.Iws.Cqrs.csproj">
       <Project>{30697c44-f282-4c41-9b93-e337c80f2d83}</Project>
       <Name>EA.Iws.Cqrs</Name>

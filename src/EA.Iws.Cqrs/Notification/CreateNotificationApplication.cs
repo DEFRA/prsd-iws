@@ -1,16 +1,12 @@
 ﻿namespace EA.Iws.Cqrs.Notification
 {
     using System;
-    using Core.Cqrs;
-    using Domain;
-    using Domain.Notification;
+    using Prsd.Core.Mediator;
 
-    public class CreateNotificationApplication : ICommand
+    public class CreateNotificationApplication : IRequest<Guid>
     {
         public WasteAction WasteAction { get; set; }
 
-        public UKCompetentAuthority CompetentAuthority { get; set; }
-
-        public Guid NotificationId { get; set; }
+        public CompetentAuthority CompetentAuthority { get; set; }
     }
 }

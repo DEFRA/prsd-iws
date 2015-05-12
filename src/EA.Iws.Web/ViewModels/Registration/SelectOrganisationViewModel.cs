@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Api.Client.Entities;
+    using Requests.Organisations;
 
     public class SelectOrganisationViewModel
     {

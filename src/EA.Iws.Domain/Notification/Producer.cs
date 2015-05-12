@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
-    using Core.Domain;
-    using Utils;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
 
     public class Producer : Entity
     {
@@ -32,15 +32,15 @@
             Guard.ArgumentNotNull(type);
             Guard.ArgumentNotNull(contact);
 
-            this.Name = name;
-            this.Address = address;
-            this.Type = type;
-            this.Contact = contact;
-            this.NotificationId = notificationId;
-            this.CompaniesHouseNumber = companiesHouseNumber;
-            this.RegistrationNumber1 = registrationNumber1;
-            this.RegistrationNumber2 = registrationNumber2;
-            this.IsSiteOfExport = isSiteOfExport;
+            Name = name;
+            Address = address;
+            Type = type;
+            Contact = contact;
+            NotificationId = notificationId;
+            CompaniesHouseNumber = companiesHouseNumber;
+            RegistrationNumber1 = registrationNumber1;
+            RegistrationNumber2 = registrationNumber2;
+            IsSiteOfExport = isSiteOfExport;
         }
 
         private Producer()

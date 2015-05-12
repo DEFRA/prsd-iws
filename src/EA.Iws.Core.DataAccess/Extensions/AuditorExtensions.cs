@@ -8,11 +8,11 @@
     using System.Data.Entity.Core.Metadata.Edm;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
-    using Domain;
-    using Domain.Auditing;
     using Newtonsoft.Json;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
+    using Prsd.Core.Domain.Auditing;
     using Serialization;
-    using Utils;
 
     public static class AuditorExtensions
     {
@@ -62,7 +62,8 @@
 
         private static string SerializeObject(object value)
         {
-            return JsonConvert.SerializeObject(value, new JsonSerializerSettings { ContractResolver = new IgnoreEntityRelationsContractResolver(true) });
+            return JsonConvert.SerializeObject(value,
+                new JsonSerializerSettings { ContractResolver = new IgnoreEntityRelationsContractResolver(true) });
         }
 
         private static Type GetEntityType(Type entityType)

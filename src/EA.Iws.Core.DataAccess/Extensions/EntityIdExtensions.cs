@@ -2,8 +2,8 @@
 {
     using System.Data.Entity;
     using System.Linq;
-    using Domain;
-    using Utils.Identity;
+    using Prsd.Core.Domain;
+    using Prsd.Core.Identity;
 
     public static class EntityIdExtensions
     {

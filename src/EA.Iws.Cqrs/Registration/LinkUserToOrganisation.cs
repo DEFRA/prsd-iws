@@ -1,18 +1,20 @@
 ﻿namespace EA.Iws.Cqrs.Registration
 {
-    using Core.Cqrs;
-    using Domain;
+    using System;
+    using Prsd.Core.Mediator;
 
-    public class LinkUserToOrganisation : ICommand
+    public class LinkUserToOrganisation : IRequest<bool>
     {
-        public readonly string UserId;
+        private readonly Guid organisationId;
 
-        public readonly Organisation Organisation;
-
-        public LinkUserToOrganisation(string userId, Organisation organisation)
+        public LinkUserToOrganisation(Guid organisationId)
         {
-            this.UserId = userId;
-            this.Organisation = organisation;
+            this.organisationId = organisationId;
+        }
+
+        public Guid OrganisationId
+        {
+            get { return organisationId; }
         }
     }
 }

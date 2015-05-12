@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using Domain;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
+    using Prsd.Core.Domain;
 
     /// <summary>
     ///     A contract resolver which ignores properties that are of type Entity or IEnumerable&lt;Entity&gt;.

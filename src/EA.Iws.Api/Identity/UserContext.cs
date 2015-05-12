@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.Api.Identity
 {
-    using Core.Domain;
     using System;
     using System.Security.Claims;
     using System.Web;
+    using Prsd.Core.Domain;
 
     public class UserContext : IUserContext
     {

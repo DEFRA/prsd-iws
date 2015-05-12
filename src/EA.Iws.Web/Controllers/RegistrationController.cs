@@ -9,21 +9,21 @@
     using Api.Client.Entities;
     using Infrastructure;
     using Microsoft.Owin.Security;
-    using Services;
+    using Requests.Organisations;
+    using Requests.Registration;
     using ViewModels.Registration;
 
     [Authorize]
     public class RegistrationController : Controller
     {
         private readonly IAuthenticationManager authenticationManager;
-        private readonly AppConfiguration config;
         private readonly Func<IIwsOAuthClient> oauthClient;
+        private readonly Func<IIwsClient> apiClient;
 
-        public RegistrationController(AppConfiguration config, Func<IIwsOAuthClient> oauthClient,
-            IAuthenticationManager authenticationManager)
+        public RegistrationController(Func<IIwsOAuthClient> oauthClient, Func<IIwsClient> apiClient, IAuthenticationManager authenticationManager)
         {
-            this.config = config;
             this.oauthClient = oauthClient;
+            this.apiClient = apiClient;
             this.authenticationManager = authenticationManager;
         }
 
@@ -41,7 +41,7 @@
         {
             if (ModelState.IsValid)
             {
-                using (var client = new IwsClient(config.ApiUrl))
+                using (var client = apiClient())
                 {
                     var applicantRegistrationData = new ApplicantRegistrationData
                     {
@@ -78,16 +78,22 @@
                 Name = organisationName
             };
 
-            using (var client = new IwsClient(config.ApiUrl))
+            if (string.IsNullOrEmpty(organisationName))
             {
-                if (string.IsNullOrEmpty(organisationName))
+                model.Organisations = null;
+            }
+            else
+            {
+                using (var client = apiClient())
                 {
-                    model.Organisations = null;
-                }
-                else
-                {
-                    model.Organisations =
-                        await client.Registration.SearchOrganisationAsync(User.GetAccessToken(), organisationName);
+                    var response = await client.SendAsync(User.GetAccessToken(), new FindMatchingOrganisations(organisationName));
+
+                    if (response.HasErrors)
+                    {
+                        // TODO - error handling
+                    }
+
+                    model.Organisations = response.Result;
                 }
             }
 
@@ -105,19 +111,24 @@
                 return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
             }
 
-            using (var client = new IwsClient(config.ApiUrl))
+            using (var client = apiClient())
             {
-                try
+                var response = await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(selectedGuid));
+
+                if (response.HasErrors)
                 {
-                    await client.Registration.LinkUserToOrganisationAsync(User.GetAccessToken(), selectedGuid);
+                    // TODO - error handling
                 }
-                catch (Exception)
+
+                if (response.Result)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
                 {
                     return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
                 }
             }
-
-            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -149,27 +160,35 @@
                 CompaniesHouseNumber = model.CompaniesHouseReference
             };
 
-            using (var client = new IwsClient(config.ApiUrl))
+            using (var client = apiClient())
             {
                 var response =
                     await
-                        client.Registration.RegisterOrganisationAsync(User.GetAccessToken(),
-                            organisationRegistrationData);
+                        client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
 
                 if (!response.HasErrors)
                 {
                     return RedirectToAction("Home", "Applicant");
                 }
+
                 this.AddValidationErrorsToModelState(response);
                 return View("CreateNewOrganisation", "Registration", model);
             }
         }
 
+        // TODO - duplicated in NotificationApplicationController, need to refactor.
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
-            using (var client = new IwsClient(config.ApiUrl))
+            using (var client = apiClient())
             {
-                return await client.Registration.GetCountriesAsync();
+                var response = await client.SendAsync(new GetCountries());
+
+                if (response.HasErrors)
+                {
+                    // TODO - error handling
+                }
+
+                return response.Result;
             }
         }
     }

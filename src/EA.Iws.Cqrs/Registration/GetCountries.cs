@@ -1,9 +1,8 @@
 ﻿namespace EA.Iws.Cqrs.Registration
 {
-    using Api.Client.Entities;
-    using Core.Cqrs;
+    using Prsd.Core.Mediator;
 
-    public class GetCountries : IQuery<CountryData[]>
+    public class GetCountries : IRequest<CountryData[]>
     {
     }
 }

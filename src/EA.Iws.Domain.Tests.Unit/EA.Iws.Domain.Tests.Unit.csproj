@@ -65,13 +65,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EA.Iws.Core.Domain\EA.Iws.Core.Domain.csproj">
-      <Project>{ffc5dae6-5d7e-42eb-8e16-ff9a78c898f1}</Project>
-      <Name>EA.Iws.Core.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
+      <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
+      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

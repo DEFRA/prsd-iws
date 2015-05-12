@@ -3,6 +3,7 @@
 
 # Git specific files
 **.orig
+error**.xml
 
 # User-specific files
 *.suo

@@ -1,21 +1,21 @@
 ﻿namespace EA.Iws.Cqrs.Users
 {
     using System;
-    using Core.Cqrs;
     using Domain;
+    using Prsd.Core.Mediator;
 
-    public class UserById : IQuery<User>
+    public class UserById : IRequest<User>
     {
         public readonly string Id;
 
         public UserById(string id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public UserById(Guid id)
         {
-            this.Id = id.ToString();
+            Id = id.ToString();
         }
     }
 }

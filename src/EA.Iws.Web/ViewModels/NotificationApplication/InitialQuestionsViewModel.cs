@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Api.Client.Entities;
+    using Requests.Notification;
 
     public class InitialQuestionsViewModel
     {
@@ -40,10 +40,5 @@
         }
 
         public List<string> NotificationTypeAction { get; set; }
-
-        public CreateNotificationData ToNotificationData()
-        {
-            return new CreateNotificationData(CompetentAuthority, SelectedWasteAction);
-        }
     }
 }

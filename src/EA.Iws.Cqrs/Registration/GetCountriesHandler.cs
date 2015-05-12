@@ -3,11 +3,10 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
-    using Api.Client.Entities;
-    using Core.Cqrs;
     using DataAccess;
+    using Prsd.Core.Mediator;
 
-    internal class GetCountriesHandler : IQueryHandler<GetCountries, CountryData[]>
+    internal class GetCountriesHandler : IRequestHandler<GetCountries, CountryData[]>
     {
         private readonly IwsContext context;
 
@@ -16,13 +15,13 @@
             this.context = context;
         }
 
-        public async Task<CountryData[]> ExecuteAsync(GetCountries query)
+        public async Task<CountryData[]> HandleAsync(GetCountries query)
         {
             var result = await context.Countries.ToArrayAsync();
-            var countryData = result.Select(c => new CountryData()
+            var countryData = result.Select(c => new CountryData
             {
                 Name = c.Name,
-                Id = c.Id,
+                Id = c.Id
             }).OrderBy(c => c.Name).ToArray();
             return countryData;
         }

@@ -4,18 +4,16 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Core.DataAccess.Extensions;
-    using Core.Domain;
-    using Core.Domain.Auditing;
     using Domain;
     using Domain.Notification;
+    using Prsd.Core.Domain;
+    using Prsd.Core.Domain.Auditing;
 
     public class IwsContext : DbContext
     {
         private readonly IUserContext userContext;
 
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
-
-        public virtual DbSet<CompetentAuthority> CompetentAuthorities { get; set; }
 
         public virtual DbSet<Country> Countries { get; set; }
 

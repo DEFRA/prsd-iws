@@ -3,11 +3,11 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
-    using Core.Cqrs;
     using DataAccess;
     using Domain;
+    using Prsd.Core.Mediator;
 
-    internal class CreateOrganisationHandler : ICommandHandler<CreateOrganisation>
+    internal class CreateOrganisationHandler : IRequestHandler<CreateOrganisation, Guid>
     {
         private readonly IwsContext db;
 
@@ -16,7 +16,7 @@
             this.db = db;
         }
 
-        public async Task HandleAsync(CreateOrganisation command)
+        public async Task<Guid> HandleAsync(CreateOrganisation command)
         {
             var orgData = command.Organisation;
             var country = await db.Countries.SingleAsync(c => c.Id == new Guid(command.Organisation.Country));
@@ -29,6 +29,8 @@
             db.Organisations.Add(organisation);
 
             await db.SaveChangesAsync();
+
+            return organisation.Id;
         }
     }
 }

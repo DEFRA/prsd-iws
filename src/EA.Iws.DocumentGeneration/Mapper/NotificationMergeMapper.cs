@@ -3,7 +3,7 @@
     using System;
     using Domain.Notification;
 
-    class NotificationMergeMapper : INotificationMergeMapper
+    internal class NotificationMergeMapper : INotificationMergeMapper
     {
         public string GetValueForMergeField(MergeField mergeField, NotificationApplication notification)
         {
@@ -14,16 +14,28 @@
 
             if (notification.WasteAction == WasteAction.Disposal)
             {
-                if (mergeField.FieldName.InnerTypeName.Equals("IsDisposal")) return "☑";
+                if (mergeField.FieldName.InnerTypeName.Equals("IsDisposal"))
+                {
+                    return "☑";
+                }
 
-                if (mergeField.FieldName.InnerTypeName.Equals("IsRecovery")) return "☐";
+                if (mergeField.FieldName.InnerTypeName.Equals("IsRecovery"))
+                {
+                    return "☐";
+                }
             }
 
             if (notification.WasteAction == WasteAction.Recovery)
             {
-                if (mergeField.FieldName.InnerTypeName.Equals("IsRecovery")) return "☑";
+                if (mergeField.FieldName.InnerTypeName.Equals("IsRecovery"))
+                {
+                    return "☑";
+                }
 
-                if (mergeField.FieldName.InnerTypeName.Equals("IsDisposal")) return "☐";
+                if (mergeField.FieldName.InnerTypeName.Equals("IsDisposal"))
+                {
+                    return "☐";
+                }
             }
 
             return String.Empty;

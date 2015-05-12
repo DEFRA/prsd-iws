@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Api.Client.Entities;
+    using Requests.Registration;
 
     public class AddressViewModel
     {

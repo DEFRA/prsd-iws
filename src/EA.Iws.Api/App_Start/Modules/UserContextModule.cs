@@ -1,14 +1,17 @@
 ﻿namespace EA.Iws.Api.Modules
 {
+    using System.Security.Claims;
+    using System.Web;
     using Autofac;
-    using Core.Domain;
     using Identity;
+    using Prsd.Core.Domain;
 
     public class UserContextModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //TODO: Remove this and replace with an actual user context implementation.
+            builder.Register(c => HttpContext.Current.User as ClaimsPrincipal).As<ClaimsPrincipal>().InstancePerRequest();
+
             builder.RegisterType<UserContext>().As<IUserContext>().SingleInstance();
         }
     }

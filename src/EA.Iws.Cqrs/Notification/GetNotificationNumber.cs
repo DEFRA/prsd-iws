@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.Cqrs.Notification
 {
     using System;
-    using Core.Cqrs;
+    using Prsd.Core.Mediator;
 
-    public class GetNotificationNumber : IQuery<string>
+    public class GetNotificationNumber : IRequest<string>
     {
         public GetNotificationNumber(Guid notificationId)
         {

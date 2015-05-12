@@ -44,8 +44,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Linq" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,31 +57,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notification\CompetentAuthority.cs" />
+    <Compile Include="Notification\ContactData.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
     <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
     <Compile Include="Notification\CreateProducer.cs" />
     <Compile Include="Notification\CreateProducerHandler.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
     <Compile Include="Notification\GenerateNotificationDocumentHandler.cs" />
-    <Compile Include="Notification\GetNextNotificationNumber.cs" />
-    <Compile Include="Notification\GetNextNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationsByUser.cs" />
     <Compile Include="Notification\GetNotificationsByUserHandler.cs" />
+    <Compile Include="Notification\NotificationApplicationSummaryData.cs" />
+    <Compile Include="Notification\ProducerData.cs" />
+    <Compile Include="Notification\WasteAction.cs" />
+    <Compile Include="Organisations\AddressData.cs" />
     <Compile Include="Organisations\FindMatchingOrganisations.cs" />
     <Compile Include="Organisations\FindMatchingOrganisationsHandler.cs" />
     <Compile Include="CompetentAuthorities\GetAllCompetentAuthorities.cs" />
     <Compile Include="CompetentAuthorities\GetAllCompetentAuthoritiesHandler.cs" />
     <Compile Include="Organisations\OrganisationById.cs" />
     <Compile Include="Organisations\OrganisationByIdHandler.cs" />
+    <Compile Include="Organisations\OrganisationData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\CountryData.cs" />
     <Compile Include="Registration\CreateOrganisation.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisation.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="Registration\GetCountries.cs" />
     <Compile Include="Registration\GetCountriesHandler.cs" />
+    <Compile Include="Registration\OrganisationRegistrationData.cs" />
     <Compile Include="Users\UserById.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
   </ItemGroup>
@@ -86,21 +97,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">
-      <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
-      <Name>EA.Iws.Api.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Core.Cqrs\EA.Iws.Core.Cqrs.csproj">
-      <Project>{17bc546d-9ce6-452d-bbfb-a722583478f4}</Project>
-      <Name>EA.Iws.Core.Cqrs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Core.DataAccess\EA.Iws.Core.DataAccess.csproj">
       <Project>{c5ef212b-402c-4586-992b-d051626e3747}</Project>
       <Name>EA.Iws.Core.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Core.Domain\EA.Iws.Core.Domain.csproj">
-      <Project>{ffc5dae6-5d7e-42eb-8e16-ff9a78c898f1}</Project>
-      <Name>EA.Iws.Core.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
       <Project>{46300373-d7ae-40aa-bf96-3fc3889825a4}</Project>
@@ -110,9 +109,9 @@
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.Utils\EA.Iws.Utils.csproj">
-      <Project>{abe7729f-bc65-4766-9d89-959e4edf5f2b}</Project>
-      <Name>EA.Iws.Utils</Name>
+    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
+      <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
+      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

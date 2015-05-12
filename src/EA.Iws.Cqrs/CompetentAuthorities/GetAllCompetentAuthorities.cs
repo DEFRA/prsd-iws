@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Cqrs.CompetentAuthorities
 {
     using System.Collections.Generic;
-    using Core.Cqrs;
     using Domain;
+    using Prsd.Core.Mediator;
 
-    public class GetAllCompetentAuthorities : IQuery<IList<CompetentAuthority>>
+    public class GetAllCompetentAuthorities : IRequest<IList<CompetentAuthority>>
     {
     }
 }

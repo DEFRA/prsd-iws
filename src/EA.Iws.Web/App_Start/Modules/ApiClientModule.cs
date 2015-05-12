@@ -2,6 +2,7 @@
 {
     using Api.Client;
     using Autofac;
+    using Prsd.Core.Mediator;
     using Services;
 
     public class ApiClientModule : Module

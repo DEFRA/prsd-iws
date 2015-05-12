@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
-    using Core.Cqrs;
     using DataAccess;
     using Domain;
+    using Prsd.Core.Mediator;
 
-    public class GetAllCompetentAuthoritiesHandler : IQueryHandler<GetAllCompetentAuthorities, IList<CompetentAuthority>>
+    public class GetAllCompetentAuthoritiesHandler : IRequestHandler<GetAllCompetentAuthorities, IList<CompetentAuthority>>
     {
         private readonly IwsContext context;
 
@@ -16,7 +16,7 @@
             this.context = context;
         }
 
-        public async Task<IList<CompetentAuthority>> ExecuteAsync(GetAllCompetentAuthorities query)
+        public async Task<IList<CompetentAuthority>> HandleAsync(GetAllCompetentAuthorities query)
         {
             var competentAuthorities = await context.CompetentAuthorities.ToListAsync();
 

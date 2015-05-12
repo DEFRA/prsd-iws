@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using Core.Cqrs;
     using Domain;
+    using Prsd.Core.Mediator;
 
-    public class FindMatchingOrganisations : IQuery<IList<Organisation>>
+    public class FindMatchingOrganisations : IRequest<IList<OrganisationData>>
     {
         public readonly string CompanyName;
 

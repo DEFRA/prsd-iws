@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System.Web.Mvc;
-    using ViewModels.Home;
     using ViewModels.Shared;
 
     public class HomeController : Controller

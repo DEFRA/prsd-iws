@@ -31,9 +31,9 @@
             }
         }
 
-        public static void AddValidationErrorsToModelState(this Controller controller, Response response)
+        public static void AddValidationErrorsToModelState(this Controller controller, ApiResponse apiResponse)
         {
-            foreach (var error in response.Errors)
+            foreach (var error in apiResponse.Errors)
             {
                 controller.ModelState.AddModelError(string.Empty, error);
             }

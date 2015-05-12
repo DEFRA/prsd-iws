@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
-    using Core.Domain;
+    using Prsd.Core.Domain;
 
     public class WasteAction : Enumeration
     {

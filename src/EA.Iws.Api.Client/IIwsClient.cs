@@ -1,14 +1,14 @@
 ﻿namespace EA.Iws.Api.Client
 {
-    using Actions;
     using System;
+    using System.Threading.Tasks;
+    using Actions;
+    using Prsd.Core.Mediator;
 
     public interface IIwsClient : IDisposable
     {
         IRegistration Registration { get; }
-
-        INotification Notification { get; }
-
-        IProducer Producer { get; }
+        Task<ApiResponse<TResult>> SendAsync<TResult>(IRequest<TResult> request);
+        Task<ApiResponse<TResult>> SendAsync<TResult>(string accessToken, IRequest<TResult> request);
     }
 }

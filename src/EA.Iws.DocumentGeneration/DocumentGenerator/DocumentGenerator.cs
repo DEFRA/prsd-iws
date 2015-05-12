@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
     using System.IO;
-    using Core.Cqrs;
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
     using Domain.Notification;
@@ -9,12 +8,9 @@
     public class DocumentGenerator : IDocumentGenerator
     {
         private readonly NotificationDocumentMerger notificationDocumentMerger;
-        private readonly IQueryBus queryBus;
 
-        public DocumentGenerator(IQueryBus queryBus,
-            NotificationDocumentMerger notificationDocumentMerger)
+        public DocumentGenerator(NotificationDocumentMerger notificationDocumentMerger)
         {
-            this.queryBus = queryBus;
             this.notificationDocumentMerger = notificationDocumentMerger;
         }
 
@@ -25,7 +21,7 @@
 
         private byte[] GenerateMainDocument(NotificationApplication notification, string applicationDirectory)
         {
-            var pathToTemplate = applicationDirectory + "NotificationMergeTemplate.docx";
+            var pathToTemplate = Path.Combine(applicationDirectory, "NotificationMergeTemplate.docx");
 
             // Minimise time the process is using the template file to prevent contention between processes.
             var templateFile = DocumentHelper.ReadDocumentShared(pathToTemplate);

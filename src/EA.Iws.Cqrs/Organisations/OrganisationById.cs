@@ -1,16 +1,16 @@
 ﻿namespace EA.Iws.Cqrs.Organisations
 {
     using System;
-    using Core.Cqrs;
     using Domain;
+    using Prsd.Core.Mediator;
 
-    public class OrganisationById : IQuery<Organisation>
+    public class OrganisationById : IRequest<Organisation>
     {
         public readonly Guid Id;
 
         public OrganisationById(Guid id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

@@ -1,18 +1,15 @@
 ﻿namespace EA.Iws.Cqrs.Notification
 {
     using System;
-    using Core.Cqrs;
+    using Prsd.Core.Mediator;
 
-    public class GenerateNotificationDocument : IQuery<byte[]>
+    public class GenerateNotificationDocument : IRequest<byte[]>
     {
-        public Guid NotificationId { get; private set; }
-
-        public string ApplicationDirectory { get; private set; }
-
-        public GenerateNotificationDocument(Guid notificationId, string applicationDirectory)
+        public GenerateNotificationDocument(Guid notificationId)
         {
             NotificationId = notificationId;
-            ApplicationDirectory = applicationDirectory;
         }
+
+        public Guid NotificationId { get; private set; }
     }
 }

@@ -1,32 +1,80 @@
 ﻿namespace EA.Iws.Cqrs.Notification
 {
+    using System;
+    using System.Text;
     using System.Threading.Tasks;
-    using Core.Cqrs;
-    using Core.Domain;
     using DataAccess;
+    using Domain;
     using Domain.Notification;
+    using Prsd.Core.Domain;
+    using Prsd.Core.Mediator;
 
-    public class CreateNotificationApplicationHandler : ICommandHandler<CreateNotificationApplication>
+    public class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
     {
+        private const string NotificationNumberSequenceFormat = "[Notification].[{0}NotificationNumber]";
+
         private readonly IwsContext context;
         private readonly IUserContext userContext;
-        private readonly IQueryBus queryBus;
 
-        public CreateNotificationApplicationHandler(IwsContext context, IUserContext userContext, IQueryBus queryBus)
+        public CreateNotificationApplicationHandler(IwsContext context, IUserContext userContext)
         {
             this.context = context;
             this.userContext = userContext;
-            this.queryBus = queryBus;
         }
 
-        public async Task HandleAsync(CreateNotificationApplication command)
+        public async Task<Guid> HandleAsync(CreateNotificationApplication command)
         {
-            var notificationNumber =
-                await queryBus.QueryAsync(new GetNextNotificationNumber(command.CompetentAuthority));
-            var notification = new NotificationApplication(userContext.UserId, command.WasteAction, command.CompetentAuthority, notificationNumber);
+            UKCompetentAuthority authority;
+            Domain.Notification.WasteAction wasteAction;
+
+            switch (command.CompetentAuthority)
+            {
+                case CompetentAuthority.England:
+                    authority = UKCompetentAuthority.England;
+                    break;
+                case CompetentAuthority.NorthernIreland:
+                    authority = UKCompetentAuthority.NorthernIreland;
+                    break;
+                case CompetentAuthority.Scotland:
+                    authority = UKCompetentAuthority.Scotland;
+                    break;
+                case CompetentAuthority.Wales:
+                    authority = UKCompetentAuthority.Wales;
+                    break;
+                default:
+                    throw new InvalidOperationException(string.Format("Unknown competent authority: {0}", command.CompetentAuthority));
+            }
+
+            switch (command.WasteAction)
+            {
+                case WasteAction.Recovery:
+                    wasteAction = Domain.Notification.WasteAction.Recovery;
+                    break;
+                case WasteAction.Disposal:
+                    wasteAction = Domain.Notification.WasteAction.Disposal;
+                    break;
+                default:
+                    throw new InvalidOperationException(string.Format("Unknown waste action: {0}", command.WasteAction));
+            }
+
+            var notificationNumber = await GetNextNotificationNumberAsync(authority);
+            var notification = new NotificationApplication(userContext.UserId, wasteAction, authority, notificationNumber);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
-            command.NotificationId = notification.Id;
+            return notification.Id;
+        }
+
+        private async Task<int> GetNextNotificationNumberAsync(UKCompetentAuthority authority)
+        {
+            return await context.Database.SqlQuery<int>(CreateSqlQuery(authority)).SingleAsync();
+        }
+
+        private static string CreateSqlQuery(UKCompetentAuthority competentAuthority)
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("SELECT NEXT VALUE FOR ");
+            stringBuilder.AppendFormat(NotificationNumberSequenceFormat, competentAuthority.ShortName);
+            return stringBuilder.ToString();
         }
     }
 }

@@ -103,7 +103,7 @@
 
         private static RegistrationController GetMockAccountController(object viewModel)
         {
-            var registrationController = new RegistrationController(new AppConfiguration(), () => new IwsOAuthClient("test", "test"), null);
+            var registrationController = new RegistrationController(() => new IwsOAuthClient("test", "test"), () => new IwsClient("test"), null);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

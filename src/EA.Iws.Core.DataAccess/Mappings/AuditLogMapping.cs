@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
-    using Domain.Auditing;
+    using Prsd.Core.Domain.Auditing;
 
     public class AuditLogMapping : EntityTypeConfiguration<AuditLog>
     {

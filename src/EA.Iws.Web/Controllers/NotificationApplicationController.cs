@@ -6,10 +6,11 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Api.Client.Entities;
     using Infrastructure;
-    using Services;
-    using Utils;
+    using Prsd.Core;
+    using Requests.Notification;
+    using Requests.Organisations;
+    using Requests.Registration;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
 
@@ -50,7 +51,7 @@
         [HttpGet]
         public ActionResult WasteActionQuestion(string ca, string nt)
         {
-            InitialQuestionsViewModel model = new InitialQuestionsViewModel
+            var model = new InitialQuestionsViewModel
             {
                 SelectedWasteAction = WasteAction.Recovery,
                 CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
@@ -74,8 +75,14 @@
 
             using (var client = apiClient())
             {
-                var response = await client.Notification.CreateNotificationApplicationAsync(User.GetAccessToken(),
-                    model.ToNotificationData());
+                var response =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new CreateNotificationApplication
+                            {
+                                CompetentAuthority = model.CompetentAuthority,
+                                WasteAction = model.SelectedWasteAction
+                            });
 
                 if (!response.HasErrors)
                 {
@@ -85,11 +92,8 @@
                             id = response.Result
                         });
                 }
-                else
-                {
-                    this.AddValidationErrorsToModelState(response);
-                    return View(model);
-                }
+                this.AddValidationErrorsToModelState(response);
+                return View(model);
             }
         }
 
@@ -98,11 +102,17 @@
         {
             using (var client = apiClient())
             {
-                var notification = await client.Notification.GetNotificationInformationAsync(User.GetAccessToken(), id);
-                var model = new CreatedViewModel()
+                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationNumber(id));
+
+                if (response.HasErrors)
                 {
-                    NotificationId = notification.Id,
-                    NotificationNumber = notification.NotificationNumber
+                    // TODO - error handling
+                }
+
+                var model = new CreatedViewModel
+                {
+                    NotificationId = id,
+                    NotificationNumber = response.Result
                 };
                 return View(model);
             }
@@ -111,15 +121,15 @@
         [HttpPost]
         public ActionResult Created()
         {
-            return RedirectToAction(actionName: "Home", controllerName: "Applicant");
+            return RedirectToAction("Home", "Applicant");
         }
 
         public async Task<ActionResult> GenerateNotificationDocument(Guid id)
         {
             using (var client = apiClient())
             {
-                Response<byte[]> response =
-                    await client.Notification.GenerateNotificationDocumentAsync(User.GetAccessToken(), id);
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GenerateNotificationDocument(id));
 
                 if (response.HasErrors)
                 {
@@ -140,7 +150,7 @@
 
             model.NotificationId = id;
             model.AddressDetails = address;
-        
+
             return View(model);
         }
 
@@ -148,7 +158,14 @@
         {
             using (var client = apiClient())
             {
-                return await client.Registration.GetCountriesAsync();
+                var response = await client.SendAsync(new GetCountries());
+
+                if (response.HasErrors)
+                {
+                    // TODO - error handling
+                }
+
+                return response.Result;
             }
         }
 
@@ -160,36 +177,42 @@
                 return View(model);
             }
 
-            var address = new AddressData();
-            address.Building = model.AddressDetails.Building;
-            address.StreetOrSuburb = model.AddressDetails.Address1;
-            address.Address2 = model.AddressDetails.Address2;
-            address.TownOrCity = model.AddressDetails.TownOrCity;
-            address.Region = model.AddressDetails.County;
-            address.PostalCode = model.AddressDetails.Postcode;
-            address.Country = model.AddressDetails.Country;
+            var address = new AddressData
+            {
+                Building = model.AddressDetails.Building,
+                StreetOrSuburb = model.AddressDetails.Address1,
+                Address2 = model.AddressDetails.Address2,
+                TownOrCity = model.AddressDetails.TownOrCity,
+                Region = model.AddressDetails.County,
+                PostalCode = model.AddressDetails.Postcode,
+                Country = model.AddressDetails.Country
+            };
 
-            var contact = new ContactData();
-            contact.FirstName = model.ContactDetails.FirstName;
-            contact.LastName = model.ContactDetails.LastName;
-            contact.Telephone = model.ContactDetails.Telephone;
-            contact.Fax = model.ContactDetails.Fax;
-            contact.Email = model.ContactDetails.Email;
+            var contact = new ContactData
+            {
+                FirstName = model.ContactDetails.FirstName,
+                LastName = model.ContactDetails.LastName,
+                Telephone = model.ContactDetails.Telephone,
+                Fax = model.ContactDetails.Fax,
+                Email = model.ContactDetails.Email
+            };
 
-            var producerData = new ProducerData();
-            producerData.Name = model.Name;
-            producerData.IsSiteOfExport = model.IsSiteOfExport;
-            producerData.Type = model.EntityType;
-            producerData.CompaniesHouseNumber = model.CompaniesHouseReference;
-            producerData.RegistrationNumber1 = model.SoleTraderRegistrationNumber ?? model.PartnershipRegistrationNumber;
-            producerData.RegistrationNumber2 = model.RegistrationNumber2;
-            producerData.Address = address;
-            producerData.Contact = contact;
-            producerData.NotificationId = model.NotificationId;
+            var producerData = new CreateProducer
+            {
+                Name = model.Name,
+                IsSiteOfExport = model.IsSiteOfExport,
+                Type = model.EntityType,
+                CompaniesHouseNumber = model.CompaniesHouseReference,
+                RegistrationNumber1 = model.SoleTraderRegistrationNumber ?? model.PartnershipRegistrationNumber,
+                RegistrationNumber2 = model.RegistrationNumber2,
+                Address = address,
+                Contact = contact,
+                NotificationId = model.NotificationId
+            };
 
             using (var client = apiClient())
             {
-                var response = await client.Producer.CreateProducer(User.GetAccessToken(), producerData);
+                var response = await client.SendAsync(User.GetAccessToken(), producerData);
 
                 if (response.HasErrors)
                 {
@@ -198,24 +221,22 @@
                 }
             }
 
-            return RedirectToAction("Index", "Home");  // Change to point to correct view
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult _GetUserNotifications()
         {
-            NotificationApplicationSummaryData[] model = null;
-
             using (var client = apiClient())
             {
                 // Child actions (partial views) cannot be async and we must therefore get the result of the task.
                 // The called code must use ConfigureAwait(false) on async tasks to prevent deadlock.
-                Response<NotificationApplicationSummaryData[]> response =
-                    client.Notification.GetUserNotifications(User.GetAccessToken()).Result;
+                var response =
+                    client.SendAsync(User.GetAccessToken(), new GetNotificationsByUser()).Result;
 
                 if (response.HasErrors)
                 {
                     ViewBag.Errors = response.Errors;
-                    return PartialView(model);
+                    return PartialView(null);
                 }
 
                 return PartialView(response.Result);

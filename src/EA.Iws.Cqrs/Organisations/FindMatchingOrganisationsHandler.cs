@@ -5,14 +5,16 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Cqrs;
     using DataAccess;
     using Domain;
-    using Utils;
+    using Prsd.Core;
+    using Prsd.Core.Mediator;
 
-    internal class FindMatchingOrganisationsHandler : IQueryHandler<FindMatchingOrganisations, IList<Organisation>>
+    internal class FindMatchingOrganisationsHandler :
+        IRequestHandler<FindMatchingOrganisations, IList<OrganisationData>>
     {
         private readonly IwsContext context;
+
         private readonly SpecialBusinessSearchCase[] specialCases =
         {
             new SpecialBusinessSearchCase(new[] { "LTD", "LIMITED" }, Position.End),
@@ -26,20 +28,21 @@
             this.context = context;
         }
 
-        public async Task<IList<Organisation>> ExecuteAsync(FindMatchingOrganisations query)
+        public async Task<IList<OrganisationData>> HandleAsync(FindMatchingOrganisations query)
         {
-            string searchTerm = PrepareQuery(query);
+            var searchTerm = PrepareQuery(query);
 
             // This search uses the Levenshtein edit distance as a search algorithm.
-            int permittedDistance = CalculateMaximumLevenshteinDistance(searchTerm);
+            var permittedDistance = CalculateMaximumLevenshteinDistance(searchTerm);
 
             var possibleOrganisations = await GetPossibleOrganisationNames(searchTerm);
 
             var uppercaseOrganisationNames =
-                possibleOrganisations.Select(o => new KeyValuePair<string, Guid>(o.Name.ToUpperInvariant(), o.Id)).ToArray();
+                possibleOrganisations.Select(o => new KeyValuePair<string, Guid>(o.Name.ToUpperInvariant(), o.Id))
+                    .ToArray();
 
             // Special cases should be ignored when counting the distance. This loop replaces special cases with string.Empty.
-            for (int i = 0; i < possibleOrganisations.Length; i++)
+            for (var i = 0; i < possibleOrganisations.Length; i++)
             {
                 foreach (var specialCase in specialCases)
                 {
@@ -49,13 +52,14 @@
 
             var matchingIdsWithDistance = new List<KeyValuePair<Guid, int>>();
 
-            for (int i = 0; i < possibleOrganisations.Length; i++)
+            for (var i = 0; i < possibleOrganisations.Length; i++)
             {
-                int distance = StringSearch.CalculateLevenshteinDistance(searchTerm, uppercaseOrganisationNames[i].Key);
+                var distance = StringSearch.CalculateLevenshteinDistance(searchTerm, uppercaseOrganisationNames[i].Key);
 
                 if (distance <= permittedDistance)
                 {
-                    matchingIdsWithDistance.Add(new KeyValuePair<Guid, int>(uppercaseOrganisationNames[i].Value, distance));
+                    matchingIdsWithDistance.Add(new KeyValuePair<Guid, int>(uppercaseOrganisationNames[i].Value,
+                        distance));
                 }
             }
 
@@ -63,9 +67,9 @@
 
             var matchingOrganisations =
                 matchingIdsWithDistance.Select(
-                    m => possibleOrganisations.Single(o => o.Id == m.Key)).ToArray();
+                    m => possibleOrganisations.Single(o => o.Id == m.Key));
 
-            return matchingOrganisations;
+            return matchingOrganisations.Select(o => new OrganisationData() { Id = o.Id, Address = new AddressData(), Name = o.Name }).ToList();
         }
 
         private string PrepareQuery(FindMatchingOrganisations query)
@@ -82,7 +86,7 @@
 
         private int CalculateMaximumLevenshteinDistance(string searchTerm)
         {
-            int distance = 1;
+            var distance = 1;
 
             if (searchTerm.Length >= 5 && searchTerm.Length < 9)
             {
@@ -99,32 +103,31 @@
 
             return distance;
         }
-        
+
         private async Task<Organisation[]> GetPossibleOrganisationNames(string searchTerm)
         {
             var firstLetterOfSearchTerm = searchTerm[0].ToString();
 
             return await context.Organisations
                 .Where(o => o.Name.StartsWith(firstLetterOfSearchTerm)
-                || o.Name.StartsWith("THE "))
+                            || o.Name.StartsWith("THE "))
                 .Include(o => o.Address.Country)
                 .ToArrayAsync();
         }
 
         /// <summary>
-        /// Equivalent words will be treated as blank for the comparison.
+        ///     Equivalent words will be treated as blank for the comparison.
         /// </summary>
         private class SpecialBusinessSearchCase
         {
             private readonly string[] equivalentWords;
-
             private readonly Position position;
 
             public SpecialBusinessSearchCase(IList<string> equivalentWords, Position position)
             {
                 this.equivalentWords = new string[equivalentWords.Count];
 
-                for (int i = 0; i < equivalentWords.Count; i++)
+                for (var i = 0; i < equivalentWords.Count; i++)
                 {
                     this.equivalentWords[i] = equivalentWords[i].ToUpperInvariant().Replace(".", string.Empty);
 
@@ -151,14 +154,16 @@
                         case Position.Start:
                             if (name.Key.StartsWith(equivalentWord))
                             {
-                                name = new KeyValuePair<string, Guid>(name.Key.Replace(equivalentWord, string.Empty), name.Value);
+                                name = new KeyValuePair<string, Guid>(name.Key.Replace(equivalentWord, string.Empty),
+                                    name.Value);
                                 return;
                             }
                             break;
                         default:
                             if (name.Key.EndsWith(equivalentWord))
                             {
-                                name = new KeyValuePair<string, Guid>(name.Key.Replace(equivalentWord, string.Empty), name.Value);
+                                name = new KeyValuePair<string, Guid>(name.Key.Replace(equivalentWord, string.Empty),
+                                    name.Value);
                                 return;
                             }
                             break;

@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
+    using System;
+    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Api.Client.Entities;
     using FakeItEasy;
-    using Services;
+    using Requests.Notification;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Web.Controllers;
@@ -32,6 +33,8 @@
         private static NotificationApplicationController CreateNotificationApplicationController()
         {
             var client = A.Fake<IIwsClient>();
+            A.CallTo(() => client.SendAsync(A<string>._, A<CreateNotificationApplication>._))
+                .Returns(new ApiResponse<Guid>(HttpStatusCode.OK, Guid.Empty));
             return new NotificationApplicationController(() => client);
         }
 
