@@ -174,6 +174,8 @@
         {
             if (!ModelState.IsValid)
             {
+                var countries = await GetCountries();
+                model.AddressDetails.Countries = countries;
                 return View(model);
             }
 
