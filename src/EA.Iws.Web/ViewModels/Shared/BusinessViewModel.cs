@@ -15,7 +15,7 @@
 
         [RequiredIf("EntityType", "Limited Company", "Companies house number is required")]
         [Display(Name = "Companies House Number")]
-        public string CompaniesHouseReference { get; set; }
+        public string CompaniesHouseRegistrationNumber { get; set; }
 
         [RequiredIf("EntityType", "Sole Trader", "Sole Trader registration number is required")]
         [Display(Name = "Registration Number")]

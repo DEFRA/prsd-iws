@@ -219,7 +219,7 @@
                 Name = model.BusinessViewModel.Name,
                 IsSiteOfExport = model.IsSiteOfExport,
                 Type = model.BusinessViewModel.EntityType,
-                RegistrationNumber = model.BusinessViewModel.CompaniesHouseReference ?? 
+                RegistrationNumber = model.BusinessViewModel.CompaniesHouseRegistrationNumber ?? 
                     (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
                 AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
                 Address = address,
@@ -271,7 +271,7 @@
                 {
                     Name = model.BusinessViewModel.Name,
                     Type = model.BusinessViewModel.EntityType,
-                    RegistrationNumber = model.BusinessViewModel.CompaniesHouseReference ?? (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
+                    RegistrationNumber = model.BusinessViewModel.CompaniesHouseRegistrationNumber ?? (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
                     AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
                     NotificationId = model.NotificationId,
                     Building = model.AddressDetails.Building,

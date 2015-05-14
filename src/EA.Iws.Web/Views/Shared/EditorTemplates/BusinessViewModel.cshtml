@@ -38,10 +38,10 @@
         @Html.RadioButtonFor(m => m.EntityType, "Limited Company") Limited Company
     </label>
     <div class="panel-indent @(Model.EntityType != null && Model.EntityType.Equals("Limited Company") ? "" : "js-hidden")" id="companies-house-number">
-        <div class="form-group" @Html.Gds().FormGroupClass(m => m.CompaniesHouseReference)>
-            @Html.ValidationMessageFor(m => m.CompaniesHouseReference)
-            @Html.Gds().LabelFor(m => m.CompaniesHouseReference)
-            @Html.Gds().TextBoxFor(m => m.CompaniesHouseReference)
+        <div class="form-group" @Html.Gds().FormGroupClass(m => m.CompaniesHouseRegistrationNumber)>
+            @Html.ValidationMessageFor(m => m.CompaniesHouseRegistrationNumber)
+            @Html.Gds().LabelFor(m => m.CompaniesHouseRegistrationNumber)
+            @Html.Gds().TextBoxFor(m => m.CompaniesHouseRegistrationNumber)
         </div>
         <div class="form-group">
             <details>

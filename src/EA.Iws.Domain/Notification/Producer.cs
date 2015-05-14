@@ -6,7 +6,7 @@
 
     public class Producer : Entity
     {
-        public virtual bool IsSiteOfExport { get; private set; }
+        public bool IsSiteOfExport { get; private set; }
 
         public Business Business { get; private set; }
 
