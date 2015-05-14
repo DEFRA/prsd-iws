@@ -1,27 +1,24 @@
-﻿@model EA.Iws.Web.ViewModels.Shared.YesNoChoiceViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Landing Page";
 }
-
-@using (Html.BeginForm(actionName: "LandingPage", controllerName: "Home", method: FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="grid-row">
-        
-            <header class="hgroup">
-                <h1 class="heading-large">Have you already registered for international waste shipments?</h1>
-            </header>
-
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
-                @Html.EditorFor(m => m.Choices)
-            </div>
-
-            <div class="form-group">
-                <button class="button" type="submit">Continue</button>
-            </div>
-
-        
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <header class="hgroup">
+            <h1 class="heading-large">Register for international waste shipments</h1>
+            <p>Register or log in to apply for a notification to export waste outside of the UK</p>
+            <p class="heading-large"></p>
+        </header>
+        @Html.ActionLink("Register", "ApplicantRegistration", "Registration", null, new { @class = "button-get-started button" })
     </div>
-}
+    <div class="column-third">
+        <h1 class="heading-medium">Your account</h1>
+        <div class="colored-header-bar"></div>
+        Once logged into your account you can:
+        <ul class="list-bullet">
+            <li>Start a new notification</li>
+            <li>Edit a current notification</li>
+            <li>View a notification</li>
+        </ul>
+        @Html.ActionLink("Login to your account", "Login", "Account")
+    </div>
+</div>
