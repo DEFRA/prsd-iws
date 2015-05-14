@@ -8,19 +8,19 @@
     {
         public virtual bool IsSiteOfExport { get; private set; }
 
-        public BusinessNameAndType BusinessNameAndType { get; private set; }
+        public Business Business { get; private set; }
 
         public Address Address { get; private set; }
 
         public Contact Contact { get; private set; }
 
-        public Producer(BusinessNameAndType businessNameAndType, Address address, Contact contact, bool isSiteOfExport)
+        public Producer(Business business, Address address, Contact contact, bool isSiteOfExport)
         {
-            Guard.ArgumentNotNull(businessNameAndType);
+            Guard.ArgumentNotNull(business);
             Guard.ArgumentNotNull(address);
             Guard.ArgumentNotNull(contact);
 
-            BusinessNameAndType = businessNameAndType;
+            Business = business;
             Address = address;
             Contact = contact;
             IsSiteOfExport = isSiteOfExport;

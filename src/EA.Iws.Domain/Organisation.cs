@@ -5,7 +5,7 @@
 
     public class Organisation : Entity
     {
-        public Organisation(string name, Address address, string type, string companiesHouseNumber = null)
+        public Organisation(string name, Address address, string type, string registrationNumber = null)
         {
             Guard.ArgumentNotNull(name);
             Guard.ArgumentNotNull(address);
@@ -14,7 +14,7 @@
             Name = name;
             Address = address;
             Type = type;
-            CompaniesHouseNumber = companiesHouseNumber;
+            RegistrationNumber = registrationNumber;
         }
 
         private Organisation()
@@ -27,6 +27,6 @@
 
         public string Type { get; private set; }
 
-        public string CompaniesHouseNumber { get; private set; }
+        public string RegistrationNumber { get; private set; }
     }
 }

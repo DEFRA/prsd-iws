@@ -66,6 +66,7 @@
     <Content Include="scripts\Update\20150514-110531-Remove-NotificationId-from-Producer.sql" />
     <None Include="scripts\Update\20150514-115543-Rename-CompanyHouseNumber-in-Exporter.sql" />
     <Content Include="scripts\Update\20150514-122432-Add-Columns-to-flatten-database.sql" />
+    <None Include="scripts\Update\20150514-145256-Change-Registration-column-names.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />

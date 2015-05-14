@@ -1,4 +1,4 @@
-﻿@model EA.Iws.Web.ViewModels.Shared.BusinessNameAndTypeViewModel
+﻿@model EA.Iws.Web.ViewModels.Shared.BusinessViewModel
 @{
     ViewBag.Title = "Business Name and Type";
 }
@@ -57,7 +57,7 @@
 </div>
 
 <div class="form-group">
-    @Html.ValidationMessageFor(model => model.RegistrationNumber2, "", new { @class = "text-danger" })
-    @Html.Gds().LabelFor(m => m.RegistrationNumber2, new { @class = "form-label" })
-    @Html.TextBoxFor(m => m.RegistrationNumber2, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.AdditionalRegistrationNumber, "", new { @class = "text-danger" })
+    @Html.Gds().LabelFor(m => m.AdditionalRegistrationNumber, new { @class = "form-label" })
+    @Html.TextBoxFor(m => m.AdditionalRegistrationNumber, new { @class = "form-control" })
 </div>

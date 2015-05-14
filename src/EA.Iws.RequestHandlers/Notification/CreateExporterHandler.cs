@@ -22,15 +22,13 @@
         {
             var country = await context.Countries.SingleAsync(c => c.Id == command.CountryId);
 
-            var address = new Address(command.Building, command.Address1, command.City, command.PostCode,
-                country, command.Address2);
+            var address = new Address(command.Building, command.Address1, command.City, command.PostCode, country, command.Address2);
 
             var contact = new Contact(command.FirstName, command.LastName, command.Phone, command.Email, command.Fax);
 
-            var businessNameAndType = new BusinessNameAndType(command.Name, command.Type, command.CompaniesHouseNumber,
-                command.RegistrationNumber1, command.RegistrationNumber2);
+            var business = new Business(command.Name, command.Type, command.RegistrationNumber, command.AdditionalRegistrationNumber);
 
-            var exporter = new Exporter(businessNameAndType, address, contact);
+            var exporter = new Exporter(business, address, contact);
 
             var notification = await context.NotificationApplications.FindAsync(command.NotificationId);
             notification.AddExporter(exporter);

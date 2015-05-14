@@ -9,9 +9,8 @@
         public string Name { get; set; }
         public bool IsSiteOfExport { get; set; }
         public string Type { get; set; }
-        public string CompaniesHouseNumber { get; set; }
-        public string RegistrationNumber1 { get; set; }
-        public string RegistrationNumber2 { get; set; }
+        public string RegistrationNumber { get; set; }
+        public string AdditionalRegistrationNumber { get; set; }
         public AddressData Address { get; set; }
         public ContactData Contact { get; set; }
         public Guid NotificationId { get; set; }

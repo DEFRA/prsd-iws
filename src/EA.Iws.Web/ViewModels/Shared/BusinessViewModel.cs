@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using Prsd.Core.Web;
 
-    public class BusinessNameAndTypeViewModel
+    public class BusinessViewModel
     {
         [Required]
         [Display(Name = "Organisation Name")]
@@ -25,7 +25,7 @@
         [Display(Name = "Registration Number")]
         public string PartnershipRegistrationNumber { get; set; }
 
-        [Display(Name = "Registration Number")]
-        public string RegistrationNumber2 { get; set; }
+        [Display(Name = "Additional Registration Number")]
+        public string AdditionalRegistrationNumber { get; set; }
     }
 }

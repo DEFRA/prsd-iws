@@ -3,15 +3,14 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain;
 
-    internal class BusinessNameAndTypeMapping : ComplexTypeConfiguration<BusinessNameAndType>
+    internal class BusinessNameAndTypeMapping : ComplexTypeConfiguration<Business>
     {
         public BusinessNameAndTypeMapping()
         {
             Property(x => x.Name).HasColumnName("Name");
             Property(x => x.Type).HasColumnName("Type");
-            Property(x => x.CompaniesHouseNumber).HasColumnName("CompaniesHouseNumber");
-            Property(x => x.RegistrationNumber1).HasColumnName("RegistrationNumber1");
-            Property(x => x.RegistrationNumber2).HasColumnName("RegistrationNumber2");
+            Property(x => x.RegistrationNumber).HasColumnName("RegistrationNumber");
+            Property(x => x.AdditionalRegistrationNumber).HasColumnName("AdditionalRegistrationNumber");
         }
     }
 }

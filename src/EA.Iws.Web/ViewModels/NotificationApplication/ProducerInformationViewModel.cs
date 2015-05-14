@@ -9,7 +9,7 @@
     {
         public Guid NotificationId { get; set; }
 
-        public BusinessNameAndTypeViewModel BusinessNameAndTypeViewModel { get; set; }
+        public BusinessViewModel BusinessViewModel { get; set; }
 
         public AddressViewModel AddressDetails { get; set; }
 

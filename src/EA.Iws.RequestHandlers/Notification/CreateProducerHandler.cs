@@ -35,13 +35,12 @@
                 command.Contact.Email,
                 command.Contact.Fax);
 
-            var businessNameAndType = new BusinessNameAndType(command.Name,
+            var business = new Business(command.Name,
                 command.Type,
-                command.CompaniesHouseNumber,
-                command.RegistrationNumber1,
-                command.RegistrationNumber2);
+                command.RegistrationNumber,
+                command.AdditionalRegistrationNumber);
 
-            var producer = new Producer(businessNameAndType,
+            var producer = new Producer(business,
                 address,
                 contact,
                 command.IsSiteOfExport);

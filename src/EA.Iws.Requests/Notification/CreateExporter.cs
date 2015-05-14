@@ -9,11 +9,9 @@
 
         public string Type { get; set; }
 
-        public string CompaniesHouseNumber { get; set; }
+        public string RegistrationNumber { get; set; }
 
-        public string RegistrationNumber1 { get; set; }
-
-        public string RegistrationNumber2 { get; set; }
+        public string AdditionalRegistrationNumber { get; set; }
 
         public string Name { get; set; }
 

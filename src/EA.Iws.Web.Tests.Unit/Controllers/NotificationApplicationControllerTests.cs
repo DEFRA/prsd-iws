@@ -115,10 +115,14 @@
             get
             {
                 ExporterNotifier exporter = new ExporterNotifier();
-                exporter.Name = "test exporter";
-                exporter.EntityType = "Sole Trader";
-                exporter.SoleTraderRegistrationNumber = "ST101";
-                exporter.RegistrationNumber2 = "00001";
+
+                exporter.BusinessViewModel = new BusinessViewModel()
+                {
+                    Name = "test exporter",
+                    EntityType = "Sole Trader",
+                    SoleTraderRegistrationNumber = "ST101",
+                    AdditionalRegistrationNumber = "00001"
+                };
 
                 exporter.AddressDetails = new AddressViewModel()
                 {

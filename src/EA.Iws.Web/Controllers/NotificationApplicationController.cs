@@ -149,11 +149,11 @@
         {
             var model = new ProducerInformationViewModel();
             var address = new AddressViewModel { Countries = await GetCountries() };
-            var business = new BusinessNameAndTypeViewModel();
+            var business = new BusinessViewModel();
 
             model.NotificationId = id;
             model.AddressDetails = address;
-            model.BusinessNameAndTypeViewModel = business;
+            model.BusinessViewModel = business;
 
             return View(model);
         }
@@ -216,12 +216,12 @@
 
             var producerData = new CreateProducer
             {
-                Name = model.BusinessNameAndTypeViewModel.Name,
+                Name = model.BusinessViewModel.Name,
                 IsSiteOfExport = model.IsSiteOfExport,
-                Type = model.BusinessNameAndTypeViewModel.EntityType,
-                CompaniesHouseNumber = model.BusinessNameAndTypeViewModel.CompaniesHouseReference,
-                RegistrationNumber1 = model.BusinessNameAndTypeViewModel.SoleTraderRegistrationNumber ?? model.BusinessNameAndTypeViewModel.PartnershipRegistrationNumber,
-                RegistrationNumber2 = model.BusinessNameAndTypeViewModel.RegistrationNumber2,
+                Type = model.BusinessViewModel.EntityType,
+                RegistrationNumber = model.BusinessViewModel.CompaniesHouseReference ?? 
+                    (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
+                AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
                 Address = address,
                 Contact = contact,
                 NotificationId = model.NotificationId
@@ -247,11 +247,11 @@
         {
             ExporterNotifier model = new ExporterNotifier();
             var address = new AddressViewModel { Countries = await GetCountries() };
-            var business = new BusinessNameAndTypeViewModel();
+            var business = new BusinessViewModel();
 
             model.NotificationId = id;
             model.AddressDetails = address;
-            model.BusinessNameAndTypeViewModel = business;
+            model.BusinessViewModel = business;
 
             return View(model);
         }
@@ -269,11 +269,10 @@
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new CreateExporter()
                 {
-                    Name = model.BusinessNameAndTypeViewModel.Name,
-                    Type = model.BusinessNameAndTypeViewModel.EntityType,
-                    CompaniesHouseNumber = model.BusinessNameAndTypeViewModel.CompaniesHouseReference,
-                    RegistrationNumber1 = model.BusinessNameAndTypeViewModel.SoleTraderRegistrationNumber ?? model.BusinessNameAndTypeViewModel.PartnershipRegistrationNumber,
-                    RegistrationNumber2 = model.BusinessNameAndTypeViewModel.RegistrationNumber2,
+                    Name = model.BusinessViewModel.Name,
+                    Type = model.BusinessViewModel.EntityType,
+                    RegistrationNumber = model.BusinessViewModel.CompaniesHouseReference ?? (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
+                    AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
                     NotificationId = model.NotificationId,
                     Building = model.AddressDetails.Building,
                     Address1 = model.AddressDetails.Address1,

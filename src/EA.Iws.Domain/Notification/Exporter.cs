@@ -6,19 +6,19 @@
 
     public class Exporter : Entity
     {
-        public BusinessNameAndType BusinessNameAndType { get; private set; }
+        public Business Business { get; private set; }
 
         public Address Address { get; private set; }
 
         public Contact Contact { get; private set; }
 
-        public Exporter(BusinessNameAndType businessNameAndType, Address address, Contact contact)
+        public Exporter(Business business, Address address, Contact contact)
         {
-            Guard.ArgumentNotNull(businessNameAndType);
+            Guard.ArgumentNotNull(business);
             Guard.ArgumentNotNull(address);
             Guard.ArgumentNotNull(contact);
 
-            BusinessNameAndType = businessNameAndType;
+            Business = business;
             Address = address;
             Contact = contact;
         }
