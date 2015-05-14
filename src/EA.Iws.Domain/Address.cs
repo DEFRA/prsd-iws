@@ -4,13 +4,13 @@
     using Prsd.Core;
     using Prsd.Core.Domain;
 
-    public class Address : Entity
+    public class Address
     {
         public Address(string building,
             string address1,
             string townOrCity,
             string postalCode,
-            Country country,
+            string country,
             string address2 = null)
         {
             Guard.ArgumentNotNull(building);
@@ -41,14 +41,14 @@
 
         public virtual string PostalCode { get; private set; }
 
-        public Country Country { get; private set; }
+        public string Country { get; private set; }
 
         public bool IsUkAddress
         {
             get
             {
                 if (Country == null
-                    || !Country.IsoAlpha2Code.Equals("GB",
+                    || !Country.Equals("United Kingdom",
                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     return false;

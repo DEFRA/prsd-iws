@@ -22,7 +22,7 @@
             var orgData = command.Organisation;
             var country = await db.Countries.SingleAsync(c => c.Id == command.Organisation.CountryId);
 
-            var address = new Address(orgData.Building, orgData.Address1, orgData.TownOrCity, orgData.Postcode, country,
+            var address = new Address(orgData.Building, orgData.Address1, orgData.TownOrCity, orgData.Postcode, country.Name,
                 orgData.Address2);
             var organisation = new Organisation(command.Organisation.Name, address, command.Organisation.EntityType,
                 command.Organisation.CompaniesHouseNumber);

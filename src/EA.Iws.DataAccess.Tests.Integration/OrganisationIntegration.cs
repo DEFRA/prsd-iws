@@ -30,20 +30,6 @@
         }
 
         [Fact]
-        public void CanCreateAddress()
-        {
-            var country = context.Countries.Single(c => c.IsoAlpha2Code.Equals("GB"));
-
-            var address = TestAddress(country);
-
-            context.Addresses.Add(address);
-
-            context.SaveChanges();
-
-            CleanUp(address);
-        }
-
-        [Fact]
         public void IsUkAddress()
         {
             var countryNonUk = context.Countries.First(c => !c.IsoAlpha2Code.Equals("gb"));
@@ -86,21 +72,12 @@
 
         private static Address TestAddress(Country country)
         {
-            return new Address("1", "test street", "Woking", "GU22 7UM", country);
+            return new Address("1", "test street", "Woking", "GU22 7UM", country.Name);
         }
 
         private void CleanUp(Organisation organisation, Address address)
         {
             context.Organisations.Remove(organisation);
-
-            context.SaveChanges();
-
-            CleanUp(address);
-        }
-
-        private void CleanUp(Address address)
-        {
-            context.Addresses.Remove(address);
 
             context.SaveChanges();
         }

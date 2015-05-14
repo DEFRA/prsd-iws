@@ -194,37 +194,31 @@
                 return View(model);
             }
 
-            var address = new AddressData
-            {
-                Building = model.AddressDetails.Building,
-                StreetOrSuburb = model.AddressDetails.Address1,
-                Address2 = model.AddressDetails.Address2,
-                TownOrCity = model.AddressDetails.TownOrCity,
-                Region = model.AddressDetails.County,
-                PostalCode = model.AddressDetails.Postcode,
-                CountryId = model.AddressDetails.CountryId
-            };
-
-            var contact = new ContactData
-            {
-                FirstName = model.ContactDetails.FirstName,
-                LastName = model.ContactDetails.LastName,
-                Telephone = model.ContactDetails.Telephone,
-                Fax = model.ContactDetails.Fax,
-                Email = model.ContactDetails.Email
-            };
-
             var producerData = new CreateProducer
             {
-                Name = model.BusinessViewModel.Name,
+                NotificationId = model.NotificationId,
+
                 IsSiteOfExport = model.IsSiteOfExport,
+
+                Name = model.BusinessViewModel.Name,
                 Type = model.BusinessViewModel.EntityType,
                 RegistrationNumber = model.BusinessViewModel.CompaniesHouseRegistrationNumber ?? 
                     (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
                 AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
-                Address = address,
-                Contact = contact,
-                NotificationId = model.NotificationId
+
+               Building = model.AddressDetails.Building,
+               Address1 = model.AddressDetails.Address1,
+               Address2 = model.AddressDetails.Address2,
+               TownOrCity = model.AddressDetails.TownOrCity,
+               County = model.AddressDetails.County,
+               PostalCode = model.AddressDetails.Postcode,
+               CountryId = model.AddressDetails.CountryId,
+
+               FirstName = model.ContactDetails.FirstName,
+               LastName = model.ContactDetails.LastName,
+               Phone = model.ContactDetails.Telephone,
+               Fax = model.ContactDetails.Fax,
+               Email = model.ContactDetails.Email,
             };
 
             using (var client = apiClient())

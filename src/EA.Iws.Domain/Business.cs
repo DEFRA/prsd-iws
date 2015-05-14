@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain
 {
     using Prsd.Core;
-    using Prsd.Core.Domain;
 
     public class Business
     {

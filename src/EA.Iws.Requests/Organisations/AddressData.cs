@@ -18,6 +18,6 @@
 
         public string Country { get; set; }
 
-        public Guid CountryId { get; set; }
+        //public Guid CountryId { get; set; } @SCL
     }
 }

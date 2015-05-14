@@ -20,20 +20,20 @@
 
         public async Task<Guid> HandleAsync(CreateProducer command)
         {
-            var country = await context.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
+            var country = await context.Countries.SingleAsync(c => c.Id == command.CountryId);
 
-            var address = new Address(command.Address.Building,
-                command.Address.StreetOrSuburb,
-                command.Address.TownOrCity,
-                command.Address.PostalCode,
-                country,
-                command.Address.Address2);
+            var address = new Address(command.Building,
+                command.Address1,
+                command.TownOrCity,
+                command.PostalCode,
+                country.Name,
+                command.Address2);
 
-            var contact = new Contact(command.Contact.FirstName,
-                command.Contact.LastName,
-                command.Contact.Telephone,
-                command.Contact.Email,
-                command.Contact.Fax);
+            var contact = new Contact(command.FirstName,
+                command.LastName,
+                command.Phone,
+                command.Email,
+                command.Fax);
 
             var business = new Business(command.Name,
                 command.Type,

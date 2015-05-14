@@ -26,7 +26,7 @@
                     {
                         Address2 = o.Address.Address2,
                         Building = o.Address.Building,
-                        Country = o.Address.Country.Name,
+                        Country = o.Address.Country,
                         PostalCode = o.Address.PostalCode,
                         StreetOrSuburb = o.Address.Address1,
                         TownOrCity = o.Address.TownOrCity

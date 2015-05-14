@@ -8,8 +8,6 @@
         public OrganisationMapping()
         {
             this.ToTable("Organisation", "Business");
-
-            HasRequired(o => o.Address);
         }
     }
 }

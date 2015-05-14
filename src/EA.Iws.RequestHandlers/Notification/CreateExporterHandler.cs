@@ -22,7 +22,7 @@
         {
             var country = await context.Countries.SingleAsync(c => c.Id == command.CountryId);
 
-            var address = new Address(command.Building, command.Address1, command.City, command.PostCode, country, command.Address2);
+            var address = new Address(command.Building, command.Address1, command.City, command.PostCode, country.Name, command.Address2);
 
             var contact = new Contact(command.FirstName, command.LastName, command.Phone, command.Email, command.Fax);
 

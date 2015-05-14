@@ -19,10 +19,6 @@
 
         public virtual DbSet<Exporter> Exporters { get; set; }
 
-        public virtual DbSet<Address> Addresses { get; set; }
-
-        public virtual DbSet<Contact> Contacts { get; set; }
-
         public virtual DbSet<Organisation> Organisations { get; set; }
 
         public virtual DbSet<NotificationApplication> NotificationApplications { get; set; }

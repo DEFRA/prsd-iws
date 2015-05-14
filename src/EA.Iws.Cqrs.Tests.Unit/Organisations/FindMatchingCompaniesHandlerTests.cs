@@ -60,7 +60,7 @@
 
         private Address GetAddress()
         {
-            return new Address("1", "street", "Woking", "GU21 5EE", ObjectInstantiator<Country>.CreateNew());
+            return new Address("1", "street", "Woking", "GU21 5EE", "United Kingdom");
         }
 
         [Fact]

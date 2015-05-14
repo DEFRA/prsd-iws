@@ -79,9 +79,9 @@
                         Building = o.Address.Building,
                         StreetOrSuburb = o.Address.Address1,
                         Address2 = o.Address.Address2,
-                        Country = o.Address.Country.Name,
+                        Country = o.Address.Country,
                         TownOrCity = o.Address.TownOrCity,
-                        CountryId = o.Address.Country.Id,
+                        //CountryId = o.Address.Country.Id,   @SCL
                         PostalCode = o.Address.PostalCode
                     }, 
                     Name = o.Name

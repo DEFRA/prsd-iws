@@ -3,9 +3,9 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain;
 
-    internal class BusinessNameAndTypeMapping : ComplexTypeConfiguration<Business>
+    internal class BusinessMapping : ComplexTypeConfiguration<Business>
     {
-        public BusinessNameAndTypeMapping()
+        public BusinessMapping()
         {
             Property(x => x.Name).HasColumnName("Name");
             Property(x => x.Type).HasColumnName("Type");
