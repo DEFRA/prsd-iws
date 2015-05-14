@@ -58,7 +58,17 @@
                 {
                     return null;
                 }
+
                 var country = Countries.SingleOrDefault(c => c.Name.Equals(DefaultCountryName));
+
+                if (this.CountryId == Guid.Empty)
+                {
+                    if (country != null)
+                    {
+                        this.CountryId = country.Id;
+                    }
+                }
+
                 return country ?? Countries.First();
             }
         }

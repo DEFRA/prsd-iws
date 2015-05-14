@@ -70,7 +70,22 @@
                 matchingIdsWithDistance.Select(
                     m => possibleOrganisations.Single(o => o.Id == m.Key));
 
-            return matchingOrganisations.Select(o => new OrganisationData() { Id = o.Id, Address = new AddressData(), Name = o.Name }).ToList();
+            return matchingOrganisations.Select(o => 
+                new OrganisationData
+                {
+                    Id = o.Id, 
+                    Address = new AddressData
+                    {
+                        Building = o.Address.Building,
+                        StreetOrSuburb = o.Address.Address1,
+                        Address2 = o.Address.Address2,
+                        Country = o.Address.Country.Name,
+                        TownOrCity = o.Address.TownOrCity,
+                        CountryId = o.Address.Country.Id,
+                        PostalCode = o.Address.PostalCode
+                    }, 
+                    Name = o.Name
+                }).ToList();
         }
 
         private string PrepareQuery(FindMatchingOrganisations query)

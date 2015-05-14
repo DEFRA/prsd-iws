@@ -19,7 +19,7 @@
 
         public async Task<bool> HandleAsync(LinkUserToOrganisation command)
         {
-            var user = await context.Users.FindAsync(userContext.UserId);
+            var user = await context.Users.FindAsync(userContext.UserId.ToString());
             var organisation = await context.Organisations.FindAsync(command.OrganisationId);
 
             user.LinkToOrganisation(organisation);

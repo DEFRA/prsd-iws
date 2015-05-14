@@ -34,6 +34,7 @@
         public string Postcode { get; set; }
 
         [Required]
+        [Display(Name = "Country")]
         public Guid CountryId { get; set; }
 
         public CountryData DefaultCountry
@@ -45,6 +46,15 @@
                     return null;
                 }
                 var country = Countries.SingleOrDefault(c => c.Name.Equals(DefaultCountryName));
+                
+                if (this.CountryId == Guid.Empty)
+                {
+                    if (country != null)
+                    {
+                        this.CountryId = country.Id;
+                    }
+                }
+
                 return country ?? Countries.First();
             }
         }
