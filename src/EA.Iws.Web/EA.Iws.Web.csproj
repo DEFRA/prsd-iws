@@ -454,6 +454,7 @@
     <Content Include="Views\NotificationApplication\ExporterNotifier.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AddressViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContactPersonViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BusinessNameAndTypeViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -505,6 +506,7 @@
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\InitialQuestionsViewModel.cs" />
+    <Compile Include="ViewModels\Shared\BusinessNameAndTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBaseViewModel.cs" />

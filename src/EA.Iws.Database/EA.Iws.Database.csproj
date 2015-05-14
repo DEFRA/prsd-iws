@@ -62,6 +62,10 @@
     <None Include="scripts\Update\20150512-121114-EA.Iws.sql" />
     <Content Include="scripts\Update\20150508-095646-EA.Iws.sql" />
     <Content Include="scripts\Update\20150508-214414-EA.Iws.sql" />
+    <Content Include="scripts\Update\20150514-093139-NotificationProducer-table.sql" />
+    <Content Include="scripts\Update\20150514-110531-Remove-NotificationId-from-Producer.sql" />
+    <None Include="scripts\Update\20150514-115543-Rename-CompanyHouseNumber-in-Exporter.sql" />
+    <Content Include="scripts\Update\20150514-122432-Add-Columns-to-flatten-database.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />

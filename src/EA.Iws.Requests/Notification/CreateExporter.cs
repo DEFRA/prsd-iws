@@ -9,7 +9,7 @@
 
         public string Type { get; set; }
 
-        public string CompanyHouseNumber { get; set; }
+        public string CompaniesHouseNumber { get; set; }
 
         public string RegistrationNumber1 { get; set; }
 

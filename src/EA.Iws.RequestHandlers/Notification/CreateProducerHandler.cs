@@ -11,18 +11,16 @@
 
     internal class CreateProducerHandler : IRequestHandler<CreateProducer, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
 
-        public CreateProducerHandler(IwsContext db)
+        public CreateProducerHandler(IwsContext context)
         {
-            this.db = db;
+            this.context = context;
         }
 
         public async Task<Guid> HandleAsync(CreateProducer command)
         {
-            var country = await db.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
-
-            var notificationId = command.NotificationId;
+            var country = await context.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
 
             var address = new Address(command.Address.Building,
                 command.Address.StreetOrSuburb,
@@ -37,18 +35,21 @@
                 command.Contact.Email,
                 command.Contact.Fax);
 
-            var producer = new Producer(command.Name,
-                address,
-                contact,
-                notificationId,
-                command.IsSiteOfExport,
+            var businessNameAndType = new BusinessNameAndType(command.Name,
                 command.Type,
                 command.CompaniesHouseNumber,
                 command.RegistrationNumber1,
                 command.RegistrationNumber2);
 
-            db.Producers.Add(producer);
-            await db.SaveChangesAsync();
+            var producer = new Producer(businessNameAndType,
+                address,
+                contact,
+                command.IsSiteOfExport);
+
+            var notification = await context.NotificationApplications.FindAsync(command.NotificationId);
+            notification.AddProducer(producer);
+
+            await context.SaveChangesAsync();
 
             return producer.Id;
         }

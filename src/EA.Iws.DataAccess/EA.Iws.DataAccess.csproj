@@ -62,6 +62,7 @@
     <Compile Include="EntityFrameworkModule.cs" />
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
+    <Compile Include="Mappings\BusinessNameAndTypeMapping.cs" />
     <Compile Include="Mappings\ContactMapping.cs" />
     <Compile Include="Mappings\CountryMapping.cs" />
     <Compile Include="Mappings\ExporterMapping.cs" />

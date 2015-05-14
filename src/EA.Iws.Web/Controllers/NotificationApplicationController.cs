@@ -149,9 +149,11 @@
         {
             var model = new ProducerInformationViewModel();
             var address = new AddressViewModel { Countries = await GetCountries() };
+            var business = new BusinessNameAndTypeViewModel();
 
             model.NotificationId = id;
             model.AddressDetails = address;
+            model.BusinessNameAndTypeViewModel = business;
 
             return View(model);
         }
@@ -171,13 +173,24 @@
             }
         }
 
+        private async Task<IEnumerable<CountryData>> GetCountries(IIwsClient iwsClient)
+        {
+            var response = await iwsClient.SendAsync(new GetCountries());
+
+            if (response.HasErrors)
+            {
+                // TODO - error handling
+            }
+
+            return response.Result;
+        }
+
         [HttpPost]
         public async Task<ActionResult> ProducerInformation(ProducerInformationViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                var countries = await GetCountries();
-                model.AddressDetails.Countries = countries;
+                model.AddressDetails.Countries = await GetCountries();
                 return View(model);
             }
 
@@ -203,12 +216,12 @@
 
             var producerData = new CreateProducer
             {
-                Name = model.Name,
+                Name = model.BusinessNameAndTypeViewModel.Name,
                 IsSiteOfExport = model.IsSiteOfExport,
-                Type = model.EntityType,
-                CompaniesHouseNumber = model.CompaniesHouseReference,
-                RegistrationNumber1 = model.SoleTraderRegistrationNumber ?? model.PartnershipRegistrationNumber,
-                RegistrationNumber2 = model.RegistrationNumber2,
+                Type = model.BusinessNameAndTypeViewModel.EntityType,
+                CompaniesHouseNumber = model.BusinessNameAndTypeViewModel.CompaniesHouseReference,
+                RegistrationNumber1 = model.BusinessNameAndTypeViewModel.SoleTraderRegistrationNumber ?? model.BusinessNameAndTypeViewModel.PartnershipRegistrationNumber,
+                RegistrationNumber2 = model.BusinessNameAndTypeViewModel.RegistrationNumber2,
                 Address = address,
                 Contact = contact,
                 NotificationId = model.NotificationId
@@ -221,6 +234,7 @@
                 if (response.HasErrors)
                 {
                     this.AddValidationErrorsToModelState(response);
+                    model.AddressDetails.Countries = await GetCountries(client);
                     return View(model);
                 }
             }
@@ -232,24 +246,34 @@
         public async Task<ActionResult> ExporterNotifier(Guid id)
         {
             ExporterNotifier model = new ExporterNotifier();
-            model.NotificationId = id;
             var address = new AddressViewModel { Countries = await GetCountries() };
+            var business = new BusinessNameAndTypeViewModel();
+
+            model.NotificationId = id;
             model.AddressDetails = address;
+            model.BusinessNameAndTypeViewModel = business;
+
             return View(model);
         }
 
         [HttpPost]
         public async Task<ActionResult> ExporterNotifier(ExporterNotifier model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.AddressDetails.Countries = await GetCountries();
+                return View(model);
+            }
+
             using (var client = apiClient())
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new CreateExporter()
                 {
-                    Name = model.Name,
-                    Type = model.EntityType,
-                    CompanyHouseNumber = model.CompaniesHouseReference,
-                    RegistrationNumber1 = model.SoleTraderRegistrationNumber ?? model.PartnershipRegistrationNumber,
-                    RegistrationNumber2 = model.RegistrationNumber2,
+                    Name = model.BusinessNameAndTypeViewModel.Name,
+                    Type = model.BusinessNameAndTypeViewModel.EntityType,
+                    CompaniesHouseNumber = model.BusinessNameAndTypeViewModel.CompaniesHouseReference,
+                    RegistrationNumber1 = model.BusinessNameAndTypeViewModel.SoleTraderRegistrationNumber ?? model.BusinessNameAndTypeViewModel.PartnershipRegistrationNumber,
+                    RegistrationNumber2 = model.BusinessNameAndTypeViewModel.RegistrationNumber2,
                     NotificationId = model.NotificationId,
                     Building = model.AddressDetails.Building,
                     Address1 = model.AddressDetails.Address1,
@@ -268,7 +292,7 @@
                 if (response.HasErrors)
                 {
                     this.AddValidationErrorsToModelState(response);
-                    model.AddressDetails.Countries = await GetCountries();
+                    model.AddressDetails.Countries = await GetCountries(client);
                     return View(model);
                 }
             }

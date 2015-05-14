@@ -27,8 +27,10 @@
 
             var contact = new Contact(command.FirstName, command.LastName, command.Phone, command.Email, command.Fax);
 
-            var exporter = new Exporter(command.Name, command.Type, address, contact, command.CompanyHouseNumber,
+            var businessNameAndType = new BusinessNameAndType(command.Name, command.Type, command.CompaniesHouseNumber,
                 command.RegistrationNumber1, command.RegistrationNumber2);
+
+            var exporter = new Exporter(businessNameAndType, address, contact);
 
             var notification = await context.NotificationApplications.FindAsync(command.NotificationId);
             notification.AddExporter(exporter);
