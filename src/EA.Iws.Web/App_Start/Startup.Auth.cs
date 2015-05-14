@@ -51,6 +51,7 @@
                     if (response.IsError)
                     {
                         // If the refresh token doesn't work (e.g. it is expired) then sign the user out.
+                        context.RejectIdentity();
                         auth.SignOut(context.Options.AuthenticationType);
                     }
                     else
