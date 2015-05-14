@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.ViewModels.Shared
 {
     using System.ComponentModel.DataAnnotations;
-    using Infrastructure;
+    using Prsd.Core.Web;
 
     public class BusinessNameAndTypeViewModel
     {
