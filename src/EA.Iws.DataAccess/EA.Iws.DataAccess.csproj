@@ -33,6 +33,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -55,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFrameworkModule.cs" />
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\ContactMapping.cs" />
@@ -73,13 +78,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EA.Iws.Core.DataAccess\EA.Iws.Core.DataAccess.csproj">
-      <Project>{c5ef212b-402c-4586-992b-d051626e3747}</Project>
-      <Name>EA.Iws.Core.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core.DataAccess\EA.Prsd.Core.DataAccess.csproj">
+      <Project>{C5EF212B-402C-4586-992B-D051626E3747}</Project>
+      <Name>EA.Prsd.Core.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
       <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>

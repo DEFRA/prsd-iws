@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Actions;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Web.ApiClient;
 
     public interface IIwsClient : IDisposable
     {

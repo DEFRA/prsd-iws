@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using Entities;
+    using Prsd.Core.Web.ApiClient;
 
     public interface IRegistration
     {

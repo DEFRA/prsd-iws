@@ -3,10 +3,9 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using System.Threading.Tasks;
-    using Domain;
     using global::Autofac;
+    using Domain;
 
     public class AutofacDeferredEventDispatcher : IDeferredEventDispatcher
     {
@@ -39,10 +38,10 @@
             var handlerType = typeof(IEventHandler<>).MakeGenericType(e.GetType());
             var collectionType = typeof(IEnumerable<>).MakeGenericType(handlerType);
             var handlers = ((IEnumerable<object>)context.Resolve(collectionType)).ToList();
-            
+
             foreach (var handler in handlers)
             {
-                MethodInfo handleMethod = handlerType.GetMethod("HandleAsync");
+                var handleMethod = handlerType.GetMethod("HandleAsync");
 
                 var resultTask = (Task)handleMethod.Invoke(handler, new object[] { e });
 

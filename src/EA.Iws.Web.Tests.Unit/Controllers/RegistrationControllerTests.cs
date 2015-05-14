@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Prsd.Core.Web.OAuth;
     using Services;
     using ViewModels.Registration;
     using Web.Controllers;
@@ -103,7 +104,7 @@
 
         private static RegistrationController GetMockAccountController(object viewModel)
         {
-            var registrationController = new RegistrationController(() => new IwsOAuthClient("test", "test"), () => new IwsClient("test"), null);
+            var registrationController = new RegistrationController(() => new OAuthClient("test", "test"), () => new IwsClient("test"), null);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

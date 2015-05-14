@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Organisations
 {
     using System.Data.Entity;
-    using System.Threading.Tasks;
     using System.Linq;
+    using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.Organisations;

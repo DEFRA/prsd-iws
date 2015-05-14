@@ -1,6 +1,7 @@
 ﻿namespace EA.Prsd.Core.Autofac
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
     using global::Autofac;
     using Mediator;
@@ -24,6 +25,8 @@
             return await SendAsync<object>(request, request.GetType(), responseType);
         }
 
+        [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1008:OpeningParenthesisMustBeSpacedCorrectly",
+            Justification = "Spacing around dynamic cast for readability.")]
         private async Task<TResponse> SendAsync<TResponse>(object request, Type requestType, Type responseType)
         {
             var handler = GetHandler(requestType, responseType);

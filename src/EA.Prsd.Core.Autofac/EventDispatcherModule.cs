@@ -1,7 +1,7 @@
 ﻿namespace EA.Prsd.Core.Autofac
 {
-    using Domain;
     using global::Autofac;
+    using Domain;
 
     public class EventDispatcherModule : Module
     {

@@ -6,6 +6,7 @@
     using Client;
     using Newtonsoft.Json;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Web.ApiClient;
 
     [RoutePrefix("api")]
     public class MediatorController : ApiController

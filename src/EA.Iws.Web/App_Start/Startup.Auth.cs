@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
-    using Api.Client;
     using Infrastructure;
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
     using Owin;
+    using Prsd.Core.Web.OAuth;
     using Services;
     using Thinktecture.IdentityModel.Client;
 
@@ -38,13 +38,13 @@
                 return;
             }
 
-            var expiresAt = context.Identity.FindFirst(IwsClaimTypes.ExpiresAt);
+            var expiresAt = context.Identity.FindFirst(Prsd.Core.Web.ClaimTypes.ExpiresAt);
             if (expiresAt != null && DateTime.Parse(expiresAt.Value) < DateTime.UtcNow)
             {
                 var refreshTokenClaim = context.Identity.FindFirst(OAuth2Constants.RefreshToken);
                 if (refreshTokenClaim != null)
                 {
-                    var oauthClient = new IwsOAuthClient(config.ApiUrl, config.ApiSecret);
+                    var oauthClient = new OAuthClient(config.ApiUrl, config.ApiSecret);
                     var response = await oauthClient.GetRefreshTokenAsync(refreshTokenClaim.Value);
                     var auth = context.OwinContext.Authentication;
 
@@ -81,7 +81,7 @@
 
             claims.Add(incoming.FindFirst(OAuth2Constants.AccessToken));
             claims.Add(incoming.FindFirst(OAuth2Constants.RefreshToken));
-            claims.Add(incoming.FindFirst(IwsClaimTypes.ExpiresAt));
+            claims.Add(incoming.FindFirst(Prsd.Core.Web.ClaimTypes.ExpiresAt));
 
             var nameId = incoming.FindFirst(ClaimTypes.NameIdentifier);
             if (nameId != null)

@@ -191,8 +191,8 @@
       <HintPath>..\packages\Thinktecture.IdentityModel.Core.1.4.0\lib\net45\Thinktecture.IdentityModel.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Thinktecture.IdentityServer3, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Thinktecture.IdentityServer3.1.5.5\lib\net45\Thinktecture.IdentityServer3.dll</HintPath>
+    <Reference Include="Thinktecture.IdentityServer3, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Thinktecture.IdentityServer3.1.6.1\lib\net45\Thinktecture.IdentityServer3.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Thinktecture.IdentityServer3.AccessTokenValidation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -216,7 +216,6 @@
   <ItemGroup>
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
     <Compile Include="App_Start\Modules\DocumentGeneratorModule.cs" />
-    <Compile Include="App_Start\Modules\MediatrModule.cs" />
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
     <Compile Include="Controllers\MediatorController.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
@@ -234,7 +233,6 @@
     <Compile Include="IdSrv\Scopes.cs" />
     <Compile Include="IdSrv\UserService.cs" />
     <Compile Include="IdSrv\UserServiceExtensions.cs" />
-    <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
@@ -262,6 +260,10 @@
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
+      <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
+      <Name>EA.Iws.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DocumentGeneration\EA.Iws.DocumentGeneration.csproj">
       <Project>{4e8f11ab-abc4-4b67-bbde-0a50e51580de}</Project>
       <Name>EA.Iws.DocumentGeneration</Name>
@@ -269,10 +271,6 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.IoC\EA.Iws.IoC.csproj">
-      <Project>{6ee83347-c928-4ccc-b878-376f6144f6a4}</Project>
-      <Name>EA.Iws.IoC</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
       <Project>{575a5355-b008-422a-b9b6-535ca2b5cc26}</Project>
@@ -285,6 +283,10 @@
     <ProjectReference Include="..\EA.Prsd.Core.Autofac\EA.Prsd.Core.Autofac.csproj">
       <Project>{333C65B9-EBB6-4D04-921E-89094F80E2E3}</Project>
       <Name>EA.Prsd.Core.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core.Web\EA.Prsd.Core.Web.csproj">
+      <Project>{67EB0694-6149-4A6F-89DE-144F24802C7F}</Project>
+      <Name>EA.Prsd.Core.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
       <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>

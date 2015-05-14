@@ -3,8 +3,8 @@
     using System.Web.Http;
     using Autofac;
     using Autofac.Integration.WebApi;
+    using DataAccess;
     using Identity;
-    using IoC;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Autofac;
     using RequestHandlers;

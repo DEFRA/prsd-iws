@@ -4,9 +4,10 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using Actions;
-    using Extensions;
     using Newtonsoft.Json;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Extensions;
 
     public class IwsClient : IIwsClient
     {

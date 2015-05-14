@@ -3,9 +3,9 @@
     using System.Data.Entity;
     using System.Threading;
     using System.Threading.Tasks;
-    using Core.DataAccess.Extensions;
     using Domain;
     using Domain.Notification;
+    using Prsd.Core.DataAccess.Extensions;
     using Prsd.Core.Domain;
     using Prsd.Core.Domain.Auditing;
 

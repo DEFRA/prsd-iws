@@ -53,6 +53,7 @@ namespace EA.Iws.Api
                 RequiredScopes = new[] { "api1" }
             });
 
+            app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
         }

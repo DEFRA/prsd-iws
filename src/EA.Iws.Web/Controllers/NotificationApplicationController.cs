@@ -8,6 +8,8 @@
     using Api.Client;
     using Infrastructure;
     using Prsd.Core;
+    using Prsd.Core.Extensions;
+    using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
     using Requests.Organisations;
     using Requests.Registration;
@@ -138,7 +140,7 @@
 
                 var downloadName = "IwsNotification" + SystemTime.UtcNow + ".docx";
 
-                return File(response.Result, Constants.MicrosoftWordContentType, downloadName);
+                return File(response.Result, Prsd.Core.Web.Constants.MicrosoftWordContentType, downloadName);
             }
         }
 

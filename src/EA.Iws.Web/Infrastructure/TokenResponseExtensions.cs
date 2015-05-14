@@ -16,7 +16,7 @@
                 identity.AddClaim(new Claim(OAuth2Constants.RefreshToken, response.RefreshToken));
             }
 
-            identity.AddClaim(new Claim(IwsClaimTypes.ExpiresAt,
+            identity.AddClaim(new Claim(Prsd.Core.Web.ClaimTypes.ExpiresAt,
                 DateTimeOffset.Now.AddSeconds(response.ExpiresIn).ToString()));
 
             return identity;

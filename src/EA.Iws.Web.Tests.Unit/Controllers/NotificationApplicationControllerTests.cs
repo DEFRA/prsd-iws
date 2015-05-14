@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using FakeItEasy;
+    using Prsd.Core.Web.ApiClient;
     using Requests.Notification;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;

@@ -150,6 +150,10 @@
       <Project>{2e112d48-a841-4db7-b96f-4211c4da31c0}</Project>
       <Name>EA.Iws.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core.Web\EA.Prsd.Core.Web.csproj">
+      <Project>{67EB0694-6149-4A6F-89DE-144F24802C7F}</Project>
+      <Name>EA.Prsd.Core.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
       <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
       <Name>EA.Prsd.Core</Name>

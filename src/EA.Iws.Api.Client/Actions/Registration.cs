@@ -4,7 +4,8 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using Entities;
-    using Extensions;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Extensions;
 
     internal class Registration : IRegistration
     {

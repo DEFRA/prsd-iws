@@ -2,7 +2,7 @@
 {
     using Api.Client;
     using Autofac;
-    using Prsd.Core.Mediator;
+    using Prsd.Core.Web.OAuth;
     using Services;
 
     public class ApiClientModule : Module
@@ -20,8 +20,8 @@
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
-                return new IwsOAuthClient(config.ApiUrl, config.ApiSecret);
-            }).As<IIwsOAuthClient>();
+                return new OAuthClient(config.ApiUrl, config.ApiSecret);
+            }).As<IOAuthClient>();
         }
     }
 }

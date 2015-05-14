@@ -9,6 +9,8 @@
     using Api.Client.Entities;
     using Infrastructure;
     using Microsoft.Owin.Security;
+    using Prsd.Core.Web.Mvc.Extensions;
+    using Prsd.Core.Web.OAuth;
     using Requests.Organisations;
     using Requests.Registration;
     using ViewModels.Registration;
@@ -17,10 +19,10 @@
     public class RegistrationController : Controller
     {
         private readonly IAuthenticationManager authenticationManager;
-        private readonly Func<IIwsOAuthClient> oauthClient;
+        private readonly Func<IOAuthClient> oauthClient;
         private readonly Func<IIwsClient> apiClient;
 
-        public RegistrationController(Func<IIwsOAuthClient> oauthClient, Func<IIwsClient> apiClient, IAuthenticationManager authenticationManager)
+        public RegistrationController(Func<IOAuthClient> oauthClient, Func<IIwsClient> apiClient, IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
             this.apiClient = apiClient;

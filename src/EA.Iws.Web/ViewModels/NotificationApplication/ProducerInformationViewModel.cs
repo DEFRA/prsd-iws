@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Infrastructure;
+    using Prsd.Core.Web;
     using Shared;
 
     public class ProducerInformationViewModel

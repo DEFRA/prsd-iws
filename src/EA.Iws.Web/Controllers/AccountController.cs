@@ -6,15 +6,16 @@
     using Api.Client;
     using Infrastructure;
     using Microsoft.Owin.Security;
+    using Prsd.Core.Web.OAuth;
     using ViewModels.Account;
 
     [Authorize]
     public class AccountController : Controller
     {
         private readonly IAuthenticationManager authenticationManager;
-        private readonly Func<IIwsOAuthClient> oauthClient;
+        private readonly Func<IOAuthClient> oauthClient;
 
-        public AccountController(Func<IIwsOAuthClient> oauthClient, IAuthenticationManager authenticationManager)
+        public AccountController(Func<IOAuthClient> oauthClient, IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
             this.authenticationManager = authenticationManager;
