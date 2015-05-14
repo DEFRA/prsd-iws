@@ -17,7 +17,7 @@
             }
 
             identity.AddClaim(new Claim(Prsd.Core.Web.ClaimTypes.ExpiresAt,
-                DateTimeOffset.Now.AddSeconds(response.ExpiresIn).ToString()));
+                DateTimeOffset.UtcNow.AddSeconds(response.ExpiresIn).ToString()));
 
             return identity;
         }

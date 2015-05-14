@@ -7,7 +7,7 @@
 @if (Model.Organisations != null && Model.Organisations.Count > 0)
 {
 
-    <p>Please confirm the address of your place of business.</p>
+    <p>Select an organisation address from the options below or add a new address.</p>
 
     using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
      {
@@ -63,8 +63,7 @@ else
 <div class="form-group">
 </div>
 <hr />
-<h2 class="heading-medium">Address not listed?</h2>
-<p>If your organisation's address is not listed add a new address.</p>
+<h2 class="heading-medium">I want to add an address myself</h2>
 @Html.ActionLink(linkText: "Add new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { @class = "button" })<br />
 
 
