@@ -27,6 +27,8 @@
 
         public virtual DbSet<Producer> Producers { get; set; }
 
+        public virtual DbSet<Facility> Facilities { get; set; }
+
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")
         {

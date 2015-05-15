@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Organisations;
+    using Shared;
 
     public class ProducerData
     {

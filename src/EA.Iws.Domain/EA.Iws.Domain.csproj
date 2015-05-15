@@ -45,10 +45,11 @@
     <Compile Include="Business.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="Facility.cs" />
     <Compile Include="Notification\Exporter.cs" />
     <Compile Include="Notification\Importer.cs" />
     <Compile Include="Notification\NotificationApplication.cs" />
-    <Compile Include="Notification\WasteAction.cs" />
+    <Compile Include="Notification\NotificationType.cs" />
     <Compile Include="Organisation.cs" />
     <Compile Include="IDocumentGenerator.cs" />
     <Compile Include="Notification\Producer.cs" />

@@ -6,7 +6,8 @@
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.Organisations;
-    using Requests.Users;
+    using Requests.Registration.Users;
+    using Requests.Shared;
 
     internal class UserByIdHandler : IRequestHandler<UserById, User>
     {
@@ -34,7 +35,7 @@
                     {
                         Address2 = u.Organisation.Address.Address2,
                         Building = u.Organisation.Address.Building,
-                        Country = u.Organisation.Address.Country,
+                        CountryName = u.Organisation.Address.Country,
                         PostalCode = u.Organisation.Address.PostalCode,
                         StreetOrSuburb = u.Organisation.Address.Address1,
                         TownOrCity = u.Organisation.Address.TownOrCity

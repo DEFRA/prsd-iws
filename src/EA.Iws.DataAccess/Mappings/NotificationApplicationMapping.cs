@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
+    using Domain;
     using Domain.Notification;
     using Prsd.Core;
 
@@ -20,10 +21,18 @@
                     "Business");
             });
 
+            HasMany(ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<Facility>>("FacilitiesCollection")).WithMany().Map(m =>
+            {
+                m.MapLeftKey("NotificationId");
+                m.MapRightKey("FacilityId");
+                m.ToTable("NotificationFacility",
+                    "Notification");
+            });
+
             Property(x => x.CompetentAuthority.Value)
                 .IsRequired();
 
-            Property(x => x.WasteAction.Value)
+            Property(x => x.NotificationType.Value)
                 .IsRequired();
 
             Property(x => x.UserId)

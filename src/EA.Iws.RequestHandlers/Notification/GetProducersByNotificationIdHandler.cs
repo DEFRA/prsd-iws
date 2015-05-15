@@ -8,6 +8,7 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.Organisations;
+    using Requests.Shared;
 
     public class GetProducersByNotificationIdHandler : IRequestHandler<GetProducersByNotificationId, IList<ProducerData>>
     {
@@ -30,7 +31,7 @@
                     new AddressData
                     {
                         Address2 = p.Address.Address2,
-                        Country = p.Address.Country,
+                        CountryName = p.Address.Country,
                         Building = p.Address.Building,
                         PostalCode = p.Address.PostalCode,
                         StreetOrSuburb = p.Address.Address1,

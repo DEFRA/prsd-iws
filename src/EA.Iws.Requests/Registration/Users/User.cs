@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Users
+﻿namespace EA.Iws.Requests.Registration.Users
 {
     using Organisations;
 

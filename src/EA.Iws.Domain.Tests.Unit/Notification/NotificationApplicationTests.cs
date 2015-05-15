@@ -21,7 +21,7 @@
         public void NotificationNumberFormat(string expected, string country, int notificationNumber)
         {
             var userId = new Guid("{FCCC2E8A-2464-4C10-8521-09F16F2C550C}");
-            var notification = new NotificationApplication(userId, WasteAction.Disposal, GetCompetentAuthority(country),
+            var notification = new NotificationApplication(userId, NotificationType.Disposal, GetCompetentAuthority(country),
                 notificationNumber);
             Assert.Equal(expected, notification.NotificationNumber);
         }

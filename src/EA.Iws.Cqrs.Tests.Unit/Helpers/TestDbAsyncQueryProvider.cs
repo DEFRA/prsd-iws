@@ -1,4 +1,4 @@
-﻿namespace EA.IwsTest.Cqrs.Tests.Unit.Helpers
+﻿namespace EA.Iws.Cqrs.Tests.Unit.Helpers
 {
     using System.Data.Entity.Infrastructure;
     using System.Linq;

@@ -66,13 +66,14 @@
     <Compile Include="Mappings\ContactMapping.cs" />
     <Compile Include="Mappings\CountryMapping.cs" />
     <Compile Include="Mappings\ExporterMapping.cs" />
+    <Compile Include="Mappings\FacilityMapping.cs" />
     <Compile Include="Mappings\ImporterMapping.cs" />
     <Compile Include="Mappings\NotificationApplicationMapping.cs" />
     <Compile Include="Mappings\OrganisationMapping.cs" />
     <Compile Include="Mappings\ProducerMapping.cs" />
     <Compile Include="Mappings\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
-    <Compile Include="Mappings\WasteActionMapping.cs" />
+    <Compile Include="Mappings\NotificationTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

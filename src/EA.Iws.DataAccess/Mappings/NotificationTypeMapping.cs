@@ -3,13 +3,13 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.Notification;
 
-    internal class WasteActionMapping : ComplexTypeConfiguration<WasteAction>
+    internal class NotificationTypeMapping : ComplexTypeConfiguration<NotificationType>
     {
-        public WasteActionMapping()
+        public NotificationTypeMapping()
         {
             Ignore(x => x.DisplayName);
             Property(x => x.Value)
-                .HasColumnName("WasteAction");
+                .HasColumnName("NotificationType");
         }
     }
 }

@@ -9,6 +9,7 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using NotificationType = Requests.Shared.NotificationType;
 
     public class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
     {
@@ -26,7 +27,7 @@
         public async Task<Guid> HandleAsync(CreateNotificationApplication command)
         {
             UKCompetentAuthority authority;
-            Domain.Notification.WasteAction wasteAction;
+            Domain.Notification.NotificationType notificationType;
 
             switch (command.CompetentAuthority)
             {
@@ -46,20 +47,20 @@
                     throw new InvalidOperationException(string.Format("Unknown competent authority: {0}", command.CompetentAuthority));
             }
 
-            switch (command.WasteAction)
+            switch (command.NotificationType)
             {
-                case Requests.Notification.WasteAction.Recovery:
-                    wasteAction = Domain.Notification.WasteAction.Recovery;
+                case NotificationType.Recovery:
+                    notificationType = Domain.Notification.NotificationType.Recovery;
                     break;
-                case Requests.Notification.WasteAction.Disposal:
-                    wasteAction = Domain.Notification.WasteAction.Disposal;
+                case NotificationType.Disposal:
+                    notificationType = Domain.Notification.NotificationType.Disposal;
                     break;
                 default:
-                    throw new InvalidOperationException(string.Format("Unknown waste action: {0}", command.WasteAction));
+                    throw new InvalidOperationException(string.Format("Unknown notification type: {0}", command.NotificationType));
             }
 
             var notificationNumber = await GetNextNotificationNumberAsync(authority);
-            var notification = new NotificationApplication(userContext.UserId, wasteAction, authority, notificationNumber);
+            var notification = new NotificationApplication(userContext.UserId, notificationType, authority, notificationNumber);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
             return notification.Id;

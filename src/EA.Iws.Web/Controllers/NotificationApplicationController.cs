@@ -13,6 +13,7 @@
     using Requests.Notification;
     using Requests.Organisations;
     using Requests.Registration;
+    using Requests.Shared;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
 
@@ -46,29 +47,29 @@
                 return View("CompetentAuthority", model);
             }
 
-            return RedirectToAction("WasteActionQuestion",
+            return RedirectToAction("NotificationTypeQuestion",
                 new { ca = model.CompetentAuthorities.SelectedValue });
         }
 
         [HttpGet]
-        public ActionResult WasteActionQuestion(string ca, string nt)
+        public ActionResult NotificationTypeQuestion(string ca, string nt)
         {
             var model = new InitialQuestionsViewModel
             {
-                SelectedWasteAction = WasteAction.Recovery,
+                SelectedNotificationType = NotificationType.Recovery,
                 CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
             };
 
             if (!string.IsNullOrWhiteSpace(nt))
             {
-                model.SelectedWasteAction = nt.GetValueFromDisplayName<WasteAction>();
+                model.SelectedNotificationType = nt.GetValueFromDisplayName<NotificationType>();
             }
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> WasteActionQuestion(InitialQuestionsViewModel model)
+        public async Task<ActionResult> NotificationTypeQuestion(InitialQuestionsViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -83,7 +84,7 @@
                             new CreateNotificationApplication
                             {
                                 CompetentAuthority = model.CompetentAuthority,
-                                WasteAction = model.SelectedWasteAction
+                                NotificationType = model.SelectedNotificationType
                             });
 
                 if (!response.HasErrors)

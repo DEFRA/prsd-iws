@@ -5,7 +5,6 @@
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using FakeItEasy;
-    using IwsTest.Cqrs.Tests.Unit.Helpers;
 
     internal class DbContextHelper
     {

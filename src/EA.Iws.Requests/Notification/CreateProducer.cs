@@ -3,6 +3,7 @@
     using System;
     using Organisations;
     using Prsd.Core.Mediator;
+    using Shared;
 
     public class CreateProducer : IRequest<Guid>
     {

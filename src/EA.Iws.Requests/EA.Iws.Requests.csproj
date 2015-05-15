@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Facilities\AddFacilityToNotification.cs" />
+    <Compile Include="Facilities\FacilityData.cs" />
+    <Compile Include="Facilities\NotificationTypeById.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
-    <Compile Include="Notification\ContactData.cs" />
+    <Compile Include="Shared\BusinessData.cs" />
+    <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Notification\CreateExporter.cs" />
     <Compile Include="Notification\CreateImporter.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
@@ -54,8 +58,8 @@
     <Compile Include="Notification\GetProducersByNotificationId.cs" />
     <Compile Include="Notification\NotificationApplicationSummaryData.cs" />
     <Compile Include="Notification\ProducerData.cs" />
-    <Compile Include="Notification\WasteAction.cs" />
-    <Compile Include="Organisations\AddressData.cs" />
+    <Compile Include="Shared\NotificationType.cs" />
+    <Compile Include="Shared\AddressData.cs" />
     <Compile Include="Organisations\FindMatchingOrganisations.cs" />
     <Compile Include="Organisations\OrganisationById.cs" />
     <Compile Include="Organisations\OrganisationData.cs" />
@@ -69,6 +73,10 @@
     <Compile Include="Registration\Users\UserById.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EA.Prsd.Core.Web\EA.Prsd.Core.Web.csproj">
+      <Project>{67EB0694-6149-4A6F-89DE-144F24802C7F}</Project>
+      <Name>EA.Prsd.Core.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
       <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
       <Name>EA.Prsd.Core</Name>

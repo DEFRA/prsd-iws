@@ -14,19 +14,20 @@
         {
         }
 
-        public NotificationApplication(Guid userId, WasteAction wasteAction, UKCompetentAuthority competentAuthority,
+        public NotificationApplication(Guid userId, NotificationType notificationType, UKCompetentAuthority competentAuthority,
             int notificationNumber)
         {
             UserId = userId;
-            WasteAction = wasteAction;
+            NotificationType = notificationType;
             CompetentAuthority = competentAuthority;
             NotificationNumber = CreateNotificationNumber(notificationNumber);
             ProducersCollection = new List<Producer>();
+            FacilitiesCollection = new List<Facility>();
         }
 
         public Guid UserId { get; private set; }
 
-        public WasteAction WasteAction { get; private set; }
+        public NotificationType NotificationType { get; private set; }
 
         public UKCompetentAuthority CompetentAuthority { get; private set; }
 
@@ -58,6 +59,16 @@
             }
         }
 
+        protected virtual ICollection<Facility> FacilitiesCollection { get; set; }
+
+        public IEnumerable<Facility> Facilities
+        {
+            get
+            {
+                return FacilitiesCollection == null ? new Facility[] { } : FacilitiesCollection.Skip(0);
+            }
+        }
+
         public void AddProducer(Producer producer)
         {
             if (ProducersCollection == null)
@@ -66,6 +77,16 @@
             }
 
             ProducersCollection.Add(producer);
+        }
+
+        public void AddFacility(Facility facility)
+        {
+            if (FacilitiesCollection == null)
+            {
+                FacilitiesCollection = new List<Facility>();
+            }
+
+            FacilitiesCollection.Add(facility);
         }
 
         public Importer Importer { get; private set; }

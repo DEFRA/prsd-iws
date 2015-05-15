@@ -5,16 +5,17 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Requests.Notification;
+    using Requests.Shared;
 
     public class InitialQuestionsViewModel
     {
         public InitialQuestionsViewModel()
         {
-            NotificationTypeAction = Enum.GetNames(typeof(WasteAction)).ToList();
+            NotificationTypes = Enum.GetNames(typeof(NotificationType)).ToList();
         }
 
         [Required(ErrorMessage = "Please select a notification type")]
-        public WasteAction SelectedWasteAction { get; set; }
+        public NotificationType SelectedNotificationType { get; set; }
 
         [Required(ErrorMessage = "Please select your competent authority")]
         public CompetentAuthority CompetentAuthority { get; set; }
@@ -39,6 +40,6 @@
             }
         }
 
-        public List<string> NotificationTypeAction { get; set; }
+        public List<string> NotificationTypes { get; set; }
     }
 }

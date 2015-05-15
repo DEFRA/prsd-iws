@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.Organisations
 {
     using System;
+    using Shared;
 
     public class OrganisationData
     {

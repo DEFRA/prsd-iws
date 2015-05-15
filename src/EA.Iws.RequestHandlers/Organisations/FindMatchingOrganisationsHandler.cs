@@ -10,6 +10,7 @@
     using Prsd.Core;
     using Prsd.Core.Mediator;
     using Requests.Organisations;
+    using Requests.Shared;
 
     internal class FindMatchingOrganisationsHandler :
         IRequestHandler<FindMatchingOrganisations, IList<OrganisationData>>
@@ -79,7 +80,7 @@
                         Building = o.Address.Building,
                         StreetOrSuburb = o.Address.Address1,
                         Address2 = o.Address.Address2,
-                        Country = o.Address.Country,
+                        CountryName = o.Address.Country,
                         TownOrCity = o.Address.TownOrCity,
                         PostalCode = o.Address.PostalCode
                     }, 

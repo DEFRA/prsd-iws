@@ -1,8 +1,8 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Shared
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum WasteAction
+    public enum NotificationType
     {
         [Display(Name = "Recovery")]
         Recovery = 1,

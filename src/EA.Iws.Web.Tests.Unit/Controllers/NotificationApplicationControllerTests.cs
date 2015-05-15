@@ -8,6 +8,7 @@
     using FakeItEasy;
     using Prsd.Core.Web.ApiClient;
     using Requests.Notification;
+    using Requests.Shared;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Web.Controllers;
@@ -59,7 +60,7 @@
 
             var result = controller.CompetentAuthority(competentAuthorityChoice) as RedirectToRouteResult;
 
-            Assert.Equal("WasteActionQuestion", result.RouteValues["action"]);
+            Assert.Equal("NotificationTypeQuestion", result.RouteValues["action"]);
         }
 
         [Fact]
@@ -78,33 +79,33 @@
         }
 
         [Fact]
-        public void WasteActionQuestion_Get_ReturnsCorrectView()
+        public void NotificationTypeQuestion_Get_ReturnsCorrectView()
         {
             var controller = CreateNotificationApplicationController();
-            var result = controller.WasteActionQuestion("Environment Agency", "Recovery") as ViewResult;
+            var result = controller.NotificationTypeQuestion("Environment Agency", "Recovery") as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<InitialQuestionsViewModel>(result.Model);
         }
 
         [Fact]
-        public async Task WasteActionQuestion_Post_RedirectsToCorrectAction()
+        public async Task NotificationTypeQuestion_Post_RedirectsToCorrectAction()
         {
             var controller = CreateNotificationApplicationController();
             var model = new InitialQuestionsViewModel();
-            model.SelectedWasteAction = WasteAction.Recovery;
-            var result = await controller.WasteActionQuestion(model) as RedirectToRouteResult;
+            model.SelectedNotificationType = NotificationType.Recovery;
+            var result = await controller.NotificationTypeQuestion(model) as RedirectToRouteResult;
 
             Assert.Equal("Created", result.RouteValues["action"]);
         }
 
         [Fact]
-        public async Task WasteActionQuestion_PostInvalidModel_ReturnsToCorrectView()
+        public async Task NotificationTypeQuestion_PostInvalidModel_ReturnsToCorrectView()
         {
             var controller = CreateNotificationApplicationController();
             controller.ModelState.AddModelError("Error", "Test Error");
             var model = new InitialQuestionsViewModel();
-            var result = await controller.WasteActionQuestion(model) as ViewResult;
+            var result = await controller.NotificationTypeQuestion(model) as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<InitialQuestionsViewModel>(result.Model);

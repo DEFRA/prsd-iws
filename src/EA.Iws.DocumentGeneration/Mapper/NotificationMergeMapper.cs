@@ -12,7 +12,7 @@
                 return notification.NotificationNumber;
             }
 
-            if (notification.WasteAction == WasteAction.Disposal)
+            if (notification.NotificationType == NotificationType.Disposal)
             {
                 if (mergeField.FieldName.InnerTypeName.Equals("IsDisposal"))
                 {
@@ -25,7 +25,7 @@
                 }
             }
 
-            if (notification.WasteAction == WasteAction.Recovery)
+            if (notification.NotificationType == NotificationType.Recovery)
             {
                 if (mergeField.FieldName.InnerTypeName.Equals("IsRecovery"))
                 {

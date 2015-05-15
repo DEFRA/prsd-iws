@@ -458,7 +458,7 @@
     <Content Include="Views\Registration\ApplicantRegistration.cshtml" />
     <Content Include="Views\Registration\SelectOrganisation.cshtml" />
     <Content Include="Views\Registration\CreateNewOrganisation.cshtml" />
-    <Content Include="Views\NotificationApplication\WasteActionQuestion.cshtml" />
+    <Content Include="Views\NotificationApplication\NotificationTypeQuestion.cshtml" />
     <Content Include="Views\NotificationApplication\Created.cshtml" />
     <Content Include="Views\Applicant\Home.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
@@ -471,7 +471,11 @@
     <Content Include="Views\Shared\EditorTemplates\BusinessViewModel.cshtml" />
     <Content Include="Views\Importer\Add.cshtml" />
     <Content Include="Views\NotificationApplication\MultipleProducers.cshtml" />
+    <Content Include="Views\Facility\Add.cshtml" />
     <Content Include="Views\NotificationApplication\ConfirmDeleteProducer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AddressData.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BusinessData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -480,6 +484,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\govuk_toolkit\govuk\multivariate-test.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\primary-links.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\selection-buttons.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\stick-at-top-when-scrolling.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\stop-scrolling-at-footer.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk_toolkit.js" />
+    <Content Include="Scripts\govuk_toolkit\stageprompt.js" />
+    <Content Include="Scripts\govuk_toolkit\vendor\jquery\jquery.player.min.js" />
+    <Content Include="Scripts\govuk_toolkit\vendor\polyfills\bind.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -490,6 +503,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ImporterController.cs" />
+    <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />

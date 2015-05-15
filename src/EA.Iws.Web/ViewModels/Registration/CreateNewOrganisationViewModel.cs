@@ -44,6 +44,7 @@
         public string Postcode { get; set; }
 
         [Required]
+        [Display(Name = "Country")]
         public Guid CountryId { get; set; }
 
         [Required]
