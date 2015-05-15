@@ -25,7 +25,34 @@
                     db.NotificationApplications.Where(n => n.Id == message.NotificationId)
                         .Include("ProducersCollection").SingleAsync();
 
-            return new List<ProducerData>();
+            var producers = result.Producers.Select(p => new ProducerData
+            {
+                Name = p.Business.Name,
+                Address =
+                    new AddressData
+                    {
+                        Address2 = p.Address.Address2,
+                        Country = p.Address.Country,
+                        Building = p.Address.Building,
+                        PostalCode = p.Address.PostalCode,
+                        StreetOrSuburb = p.Address.Address1,
+                        TownOrCity = p.Address.TownOrCity
+                    },
+                CompaniesHouseNumber = p.Business.RegistrationNumber,
+                IsSiteOfExport = p.IsSiteOfExport,
+                Contact = new ContactData
+                {
+                    Email = p.Contact.Email,
+                    FirstName = p.Contact.FirstName,
+                    LastName = p.Contact.LastName,
+                    Fax = p.Contact.Fax,
+                    Telephone = p.Contact.Telephone
+                },
+                AdditionalRegistrationNumber = p.Business.AdditionalRegistrationNumber,
+                NotificationId = p.Id
+            }).ToList();
+
+            return producers;
         }
     }
 }

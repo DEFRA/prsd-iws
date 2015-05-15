@@ -233,7 +233,7 @@
                 }
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MultipleProducers", "NotificationApplication", new {notificationId = model.NotificationId});
         }
         
         [HttpGet]

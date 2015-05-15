@@ -471,6 +471,7 @@
     <Content Include="Views\Shared\EditorTemplates\BusinessViewModel.cshtml" />
     <Content Include="Views\Importer\Add.cshtml" />
     <Content Include="Views\NotificationApplication\MultipleProducers.cshtml" />
+    <Content Include="Views\NotificationApplication\ConfirmDeleteProducer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -82,6 +82,7 @@
     <Content Include="scripts\Update\20150508-161516-EA.Iws.sql" />
     <Content Include="scripts\Update\20150511-091545-EA.Iws.sql" />
     <Content Include="scripts\Update\20150513-152000-Notification-ExporterId.sql" />
+    <Content Include="scripts\Update\20150515-093436-Flatten-DB.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
