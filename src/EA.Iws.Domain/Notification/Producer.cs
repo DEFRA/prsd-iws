@@ -26,7 +26,7 @@
             IsSiteOfExport = isSiteOfExport;
         }
 
-        private Producer()
+        protected Producer()
         {
         }
     }

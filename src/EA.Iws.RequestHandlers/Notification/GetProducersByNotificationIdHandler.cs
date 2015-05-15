@@ -20,11 +20,8 @@
 
         public async Task<IList<ProducerData>> HandleAsync(GetProducersByNotificationId message)
         {
-            var result =
-                await
-                    db.NotificationApplications.Where(n => n.Id == message.NotificationId)
-                        .Include("ProducersCollection").SingleAsync();
-
+            var result = await db.NotificationApplications.Where(n => n.Id == message.NotificationId).SingleAsync();
+                        
             var producers = result.Producers.Select(p => new ProducerData
             {
                 ProducerId = p.Id,

@@ -19,7 +19,7 @@
 
         public async Task<User> HandleAsync(UserById query)
         {
-            return await context.Users.Include(u => u.Organisation).Select(u => new User
+            return await context.Users.Select(u => new User
             {
                 Email = u.Email,
                 FirstName = u.FirstName,

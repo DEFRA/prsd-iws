@@ -22,7 +22,7 @@
             Address1 = address1;
         }
 
-        private Address()
+        protected Address()
         {
         }
 

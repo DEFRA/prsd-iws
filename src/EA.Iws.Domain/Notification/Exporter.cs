@@ -23,7 +23,7 @@
             Contact = contact;
         }
 
-        private Exporter()
+        protected Exporter()
         {
         }
     }

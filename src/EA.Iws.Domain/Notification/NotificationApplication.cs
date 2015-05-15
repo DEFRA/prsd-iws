@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
+    using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using Prsd.Core.Domain;
@@ -9,7 +10,7 @@
     {
         private const string NotificationNumberFormat = "GB 000{0} {1}";
 
-        private NotificationApplication()
+        protected NotificationApplication()
         {
         }
 
@@ -73,11 +74,12 @@
         {
             Importer = importer;
         }
+
         public void RemoveProducer(Producer producer)
         {
-            if (ProducersCollection == null)
+            if (ProducersCollection == null || !ProducersCollection.Contains(producer))
             {
-                ProducersCollection = new List<Producer>();
+                throw new InvalidOperationException(String.Format("Unable to remove producer with id {0}", producer.Id));
             }
 
             ProducersCollection.Remove(producer);

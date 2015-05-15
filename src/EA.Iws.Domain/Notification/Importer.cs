@@ -22,7 +22,7 @@
             Contact = contact;
         }
 
-        private Importer()
+        protected Importer()
         {
         }
     }
