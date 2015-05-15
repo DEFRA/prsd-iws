@@ -7,7 +7,7 @@
     About you and your organisation
 </h1>
 <p>
-    Use this service to tell us more about your organisation and your contact details
+    Enter your contact details and the name of your organisation
 </p>
 <h1 class="heading-large"></h1>
 
@@ -44,6 +44,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.ValidationMessageFor(m => m.Password)
         @Html.Gds().LabelFor(m => m.Password)
+        <p class="form-hint text">Password must be at least 6 characters and contain at least 1 uppercase letter, 1 lowercase letter and 1 number</p>
         @Html.Gds().PasswordFor(m => m.Password)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
@@ -90,5 +91,5 @@
                 </div>
             </details>
         </div>
-        </div>
+    </div>
 }
