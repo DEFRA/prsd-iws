@@ -27,6 +27,7 @@
 
             var producers = result.Producers.Select(p => new ProducerData
             {
+                ProducerId = p.Id,
                 Name = p.Business.Name,
                 Address =
                     new AddressData
@@ -49,7 +50,7 @@
                     Telephone = p.Contact.Telephone
                 },
                 AdditionalRegistrationNumber = p.Business.AdditionalRegistrationNumber,
-                NotificationId = p.Id
+                NotificationId = message.NotificationId
             }).ToList();
 
             return producers;

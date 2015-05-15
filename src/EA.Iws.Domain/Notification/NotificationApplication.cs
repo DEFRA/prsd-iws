@@ -73,5 +73,14 @@
         {
             Importer = importer;
         }
+        public void RemoveProducer(Producer producer)
+        {
+            if (ProducersCollection == null)
+            {
+                ProducersCollection = new List<Producer>();
+            }
+
+            ProducersCollection.Remove(producer);
+        }
     }
 }

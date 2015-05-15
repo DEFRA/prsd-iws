@@ -43,9 +43,7 @@
                                         Site of export:
                                         @Html.DisplayFor(m => m.ProducerData[i].IsSiteOfExport)
                                     </div>
-                                    @Html.ActionLink("Edit Details", "AddEditProducer", "Producer", new { producerId = Model.ProducerData[i].ProducerId, id = Model.ProducerData[i].NotificationId, uid = Model.ProducerData[i].NotificationId.ToString() }, null)
-                                    <span class="table-divider">|</span>
-                                    @Ajax.ActionLink("Delete", "ShowConfirmDelete", "NotificationApplication", new { producerId = Model.ProducerData[i].ProducerId, notificationId = Model.ProducerData[i].NotificationId, isSiteOfExport = Model.ProducerData[i].IsSiteOfExport },
+                                    @Ajax.ActionLink("Delete", "ShowConfirmDelete", "NotificationApplication", new { producerId = Model.ProducerData[i].ProducerId, notificationId = Model.NotificationId, isSiteOfExport = Model.ProducerData[i].IsSiteOfExport },
                                         new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divConfirmDelete" }, new { @class = "deleteLink" })
                                 </div>
                             </div>

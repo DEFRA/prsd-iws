@@ -144,20 +144,6 @@
             }
         }
 
-        [HttpGet]
-        public async Task<ActionResult> ProducerInformation(Guid id)
-        {
-            var model = new ProducerInformationViewModel();
-            var address = new AddressViewModel { Countries = await GetCountries() };
-            var business = new BusinessViewModel();
-
-            model.NotificationId = id;
-            model.AddressDetails = address;
-            model.BusinessViewModel = business;
-
-            return View(model);
-        }
-
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
             using (var client = apiClient())
@@ -183,6 +169,20 @@
             }
 
             return response.Result;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ProducerInformation(Guid id)
+        {
+            var model = new ProducerInformationViewModel();
+            var address = new AddressViewModel { Countries = await GetCountries() };
+            var business = new BusinessViewModel();
+
+            model.NotificationId = id;
+            model.AddressDetails = address;
+            model.BusinessViewModel = business;
+
+            return View(model);
         }
 
         [HttpPost]
@@ -366,8 +366,10 @@
                         errorMessage = "Please make another producer the site of export before you delete this producer"
                     });
             }
-
-            //await commandBus.SendAsync(new DeleteProducerByProducerId(model.ProducerId, model.NotificationId, model.NotificationId));
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), new DeleteProducer(model.ProducerId, model.NotificationId));
+            }
             return RedirectToAction("MultipleProducers", "NotificationApplication", new { notificationId = model.NotificationId });
         }
     }

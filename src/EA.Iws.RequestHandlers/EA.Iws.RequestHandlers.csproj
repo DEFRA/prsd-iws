@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notification\DeleteProducerHandler.cs" />
     <Compile Include="Notification\GetProducersByNotificationIdHandler.cs" />
     <Compile Include="Notification\CreateExporterHandler.cs" />
     <Compile Include="Notification\CreateImporterHandler.cs" />

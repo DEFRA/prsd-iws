@@ -47,6 +47,7 @@
     <Compile Include="Notification\CreateImporter.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
     <Compile Include="Notification\CreateProducer.cs" />
+    <Compile Include="Notification\DeleteProducer.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationsByUser.cs" />
