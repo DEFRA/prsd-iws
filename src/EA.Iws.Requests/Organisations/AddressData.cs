@@ -17,7 +17,5 @@
         public string Region { get; set; }
 
         public string Country { get; set; }
-
-        //public Guid CountryId { get; set; } @SCL
     }
 }
