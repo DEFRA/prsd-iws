@@ -60,7 +60,7 @@
 
         private Address GetAddress()
         {
-            return new Address("1", "street", "Woking", "GU21 5EE", "United Kingdom");
+            return new Address("1", "street", null, "Woking", "GU21 5EE", "United Kingdom");
         }
 
         [Fact]

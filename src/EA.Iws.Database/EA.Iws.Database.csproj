@@ -67,6 +67,7 @@
     <None Include="scripts\Update\20150514-115543-Rename-CompanyHouseNumber-in-Exporter.sql" />
     <Content Include="scripts\Update\20150514-122432-Add-Columns-to-flatten-database.sql" />
     <None Include="scripts\Update\20150514-145256-Change-Registration-column-names.sql" />
+    <None Include="scripts\Update\20150515-093436-Flatten-DB.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />

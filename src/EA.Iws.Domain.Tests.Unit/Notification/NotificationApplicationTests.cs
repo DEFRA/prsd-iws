@@ -46,5 +46,16 @@
             }
             throw new ArgumentException("Unknown competent authority", "country");
         }
+
+        [Fact]
+        public void IsUkAddress()
+        {
+            var addressNonUk = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, "Thailand");
+
+            var addressUk = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, "United Kingdom");
+
+            Assert.True(addressUk.IsUkAddress);
+            Assert.False(addressNonUk.IsUkAddress);
+        }
     }
 }

@@ -6,12 +6,7 @@
 
     public class Address
     {
-        public Address(string building,
-            string address1,
-            string townOrCity,
-            string postalCode,
-            string country,
-            string address2 = null)
+        public Address(string building, string address1, string address2, string townOrCity, string postalCode, string country)
         {
             Guard.ArgumentNotNull(building);
             Guard.ArgumentNotNull(townOrCity);
