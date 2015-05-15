@@ -1,10 +1,7 @@
 ﻿namespace EA.Iws.Domain
 {
-    using System.ComponentModel.DataAnnotations.Schema;
     using Prsd.Core;
-    using Prsd.Core.Domain;
 
-    [ComplexType]
     public class Contact
     {
         public string FirstName { get; private set; }
