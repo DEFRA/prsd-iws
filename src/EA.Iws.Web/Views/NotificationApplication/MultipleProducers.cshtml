@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "List Producers";
 }
-<h2 class="heading-large">Waste generator(s) and producer(s) sites of export</h2>
+<h2 class="heading-large">Waste generator - producer <br/>Select site of export</h2>
+
 @Html.AntiForgeryToken()
 @Html.Gds().ValidationSummary()
 
@@ -16,7 +17,7 @@
                 <tr>
                     <td>
                         <details>
-                            <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Name) (Reg No: @Html.DisplayFor(m => m.ProducerData[i].CompaniesHouseNumber) )</span></summary>
+                            <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Name)</span></summary>
                             <div class="grid-row">
                                 <div class="column-third">
                                     @Html.DisplayFor(m => m.ProducerData[i].Contact.FirstName) @Html.DisplayFor(m => m.ProducerData[i].Contact.LastName)<br />
@@ -57,6 +58,9 @@
 
 <div class="form-group"></div>
 <div class="form-group">
+    @Html.ActionLink("Add more", "ProducerInformation", "NotificationApplication", new { id = Model.NotificationId }, null)
+</div>
+<div class="form-group">
     @using (Html.BeginForm("Add", "Facility", new { id = @Model.NotificationId }, FormMethod.Get))
     {
         <button class="button" type="submit">Continue</button>
@@ -64,7 +68,7 @@
     
 </div>
 <div class="form-group">
-    @Html.ActionLink("Add producer", "ProducerInformation", "NotificationApplication", new { id = Model.NotificationId }, null)
+    <input type="submit" class="button" value="Continue" />
 </div>
 <div id="divConfirmDelete" class="clearfix"></div>
 
