@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Notification\CreateExporterHandler.cs" />
+    <Compile Include="Notification\CreateImporterHandler.cs" />
     <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
     <Compile Include="Notification\CreateProducerHandler.cs" />
     <Compile Include="Notification\GenerateNotificationDocumentHandler.cs" />

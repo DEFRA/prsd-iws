@@ -1,0 +1,32 @@
+﻿@model EA.Iws.Web.ViewModels.NotificationApplication.ImporterViewModel
+
+@{
+    ViewBag.Title = "Importer - consignee";
+}
+
+@using (Html.BeginForm("Add", "Importer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <header class="hgroup">
+        <h1 class="heading-medium">Importer - consignee</h1>
+        <div class="colored-header-bar"></div>
+    </header>
+
+    <div class="form-group">
+        @Html.HiddenFor(m => m.NotificationId)
+    </div>
+
+    @Html.EditorFor(m => m.BusinessViewModel)
+
+    <h1 class="heading-medium">Address</h1>
+
+    @Html.EditorFor(m => m.AddressDetails)
+
+    <h1 class="heading-medium">Contact Person</h1>
+
+    @Html.EditorFor(m => m.ContactDetails)
+
+    <button class="button" type="submit">Continue</button>
+}

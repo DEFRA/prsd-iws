@@ -44,6 +44,7 @@
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\ContactData.cs" />
     <Compile Include="Notification\CreateExporter.cs" />
+    <Compile Include="Notification\CreateImporter.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
     <Compile Include="Notification\CreateProducer.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />

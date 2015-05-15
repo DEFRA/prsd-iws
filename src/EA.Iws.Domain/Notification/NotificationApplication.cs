@@ -66,5 +66,12 @@
 
             ProducersCollection.Add(producer);
         }
+
+        public Importer Importer { get; set; }
+
+        public void AddImporter(Importer importer)
+        {
+            Importer = importer;
+        }
     }
 }

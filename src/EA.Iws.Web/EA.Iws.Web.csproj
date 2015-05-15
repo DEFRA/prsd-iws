@@ -469,6 +469,7 @@
     <Content Include="Views\Shared\EditorTemplates\AddressViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContactPersonViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BusinessViewModel.cshtml" />
+    <Content Include="Views\Importer\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -486,6 +487,7 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ImporterController.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
@@ -504,6 +506,7 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\ImporterViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\ProducerInformationViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\ExporterNotifier.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
