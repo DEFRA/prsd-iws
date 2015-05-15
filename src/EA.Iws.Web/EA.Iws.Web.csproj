@@ -470,6 +470,7 @@
     <Content Include="Views\Shared\EditorTemplates\ContactPersonViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BusinessViewModel.cshtml" />
     <Content Include="Views\Importer\Add.cshtml" />
+    <Content Include="Views\NotificationApplication\MultipleProducers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -507,6 +508,7 @@
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\ImporterViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\MultipleProducersViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\ProducerInformationViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\ExporterNotifier.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />

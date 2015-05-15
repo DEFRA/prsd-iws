@@ -311,5 +311,64 @@
                 return PartialView(response.Result);
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> MultipleProducers(Guid notificationId, string errorMessage = "")
+        {
+            var model = new MultipleProducersViewModel();
+
+            if (!String.IsNullOrEmpty(errorMessage))
+            {
+                ModelState.AddModelError(string.Empty, errorMessage);
+            }
+
+            using (var client = apiClient())
+            {
+                var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(notificationId));
+
+                if (response.HasErrors)
+                {
+                    this.AddValidationErrorsToModelState(response);
+                    return View(model);
+                }
+                model.NotificationId = notificationId;
+                model.ProducerData = response.Result.ToList();
+            }
+            return View("MultipleProducers", model);
+        }
+
+        [HttpGet]
+        public ActionResult ShowConfirmDelete(Guid producerId, Guid notificationId, bool isSiteOfExport)
+        {
+            var model = new ProducerData
+            {
+                ProducerId = producerId,
+                NotificationId = notificationId,
+                IsSiteOfExport = isSiteOfExport
+            };
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("ConfirmDeleteProducer", model);
+            }
+            return View("ConfirmDeleteProducer", model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteProducer(ProducerData model)
+        {
+            if (model.IsSiteOfExport)
+            {
+                return RedirectToAction("MultipleProducers", "NotificationApplication",
+                    new
+                    {
+                        notificationId = model.NotificationId,
+                        errorMessage = "Please make another producer the site of export before you delete this producer"
+                    });
+            }
+
+            //await commandBus.SendAsync(new DeleteProducerByProducerId(model.ProducerId, model.NotificationId, model.NotificationId));
+            return RedirectToAction("MultipleProducers", "NotificationApplication", new { notificationId = model.NotificationId });
+        }
     }
 }

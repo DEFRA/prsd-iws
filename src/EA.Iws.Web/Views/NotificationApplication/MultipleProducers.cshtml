@@ -1,0 +1,89 @@
+﻿@model EA.Iws.Web.ViewModels.NotificationApplication.MultipleProducersViewModel
+@{
+    ViewBag.Title = "List Producers";
+}
+<h2 class="heading-large">Waste generator(s) and producer(s) sites of export</h2>
+@Html.AntiForgeryToken()
+@Html.Gds().ValidationSummary()
+
+@if (Model != null && Model.ProducerData.Any())
+{
+    <div class="colored-header-bar"></div>
+    <table>
+        <tbody>
+            @for (var i = 0; i < Model.ProducerData.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <details>
+                            <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Name) (Reg No: @Html.DisplayFor(m => m.ProducerData[i].CompaniesHouseNumber) )</span></summary>
+                            <div class="grid-row">
+                                <div class="column-third">
+                                    @Html.DisplayFor(m => m.ProducerData[i].Contact.FirstName) @Html.DisplayFor(m => m.ProducerData[i].Contact.LastName)<br />
+                                    <a href="mailto:@Model.ProducerData[i].Contact.Email">@Model.ProducerData[i].Contact.Email</a><br />
+                                    Tel: @Html.DisplayFor(m => m.ProducerData[i].Contact.Telephone)<br />
+                                    @if (Model.ProducerData[i].Contact.Fax != null)
+                                    {
+                                        <label>Fax: </label>
+                                        @Html.DisplayFor(model => model.ProducerData[i].Contact.Fax);
+                                    }
+                                </div>
+                                <div class="column-third">
+                                    @Html.DisplayFor(m => m.ProducerData[i].Address.Building),<br />
+                                    @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),<br />
+                                    @if (Model.ProducerData[i].Address.Address2 != null)
+                                    {
+                                        @Html.DisplayFor(model => model.ProducerData[i].Address.Address2)
+                                        @Html.Raw(",<br/>")
+                                    }
+                                    @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity) @Html.DisplayFor(m => m.ProducerData[i].Address.PostalCode)
+                                </div>
+                                <div class="column-third">
+                                    <div class="form-group">
+                                        Site of export:
+                                        @Html.DisplayFor(m => m.ProducerData[i].IsSiteOfExport)
+                                    </div>
+                                    @Html.ActionLink("Edit Details", "AddEditProducer", "Producer", new { producerId = Model.ProducerData[i].ProducerId, id = Model.ProducerData[i].NotificationId, uid = Model.ProducerData[i].NotificationId.ToString() }, null)
+                                    <span class="table-divider">|</span>
+                                    @Ajax.ActionLink("Delete", "ShowConfirmDelete", "NotificationApplication", new { producerId = Model.ProducerData[i].ProducerId, notificationId = Model.ProducerData[i].NotificationId, isSiteOfExport = Model.ProducerData[i].IsSiteOfExport },
+                                        new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divConfirmDelete" }, new { @class = "deleteLink" })
+                                </div>
+                            </div>
+                        </details>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div class="form-group"></div>
+<div class="form-group">
+    <input type="submit" class="button" value="Continue" />
+</div>
+<div class="form-group">
+    @Html.ActionLink("Add producer", "ProducerInformation", "NotificationApplication", new { id = Model.NotificationId }, null)
+</div>
+<div id="divConfirmDelete" class="clearfix"></div>
+
+@section scripts
+{
+    <script type="text/javascript">
+                $(function () {
+                    // When the background is clicked, hide the background
+                    $("#btnYes").click(function (e) {
+                    });
+
+                    $("#divConfirmDelete").click(function (e) {
+                        if (e.target === this && $(this).hasClass("fadeBackground")) {
+                            $(this).removeClass("fadeBackground");
+                            $(this).empty();
+                        }
+                    });
+
+                    $(".deleteLink").click(function () {
+                        $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
+                    });
+                })
+    </script>
+}

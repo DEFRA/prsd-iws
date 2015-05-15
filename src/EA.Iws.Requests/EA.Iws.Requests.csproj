@@ -50,7 +50,9 @@
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationsByUser.cs" />
+    <Compile Include="Notification\GetProducersByNotificationId.cs" />
     <Compile Include="Notification\NotificationApplicationSummaryData.cs" />
+    <Compile Include="Notification\ProducerData.cs" />
     <Compile Include="Notification\WasteAction.cs" />
     <Compile Include="Organisations\AddressData.cs" />
     <Compile Include="Organisations\FindMatchingOrganisations.cs" />
