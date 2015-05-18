@@ -35,5 +35,21 @@
 
         [Display(Name = "Additional registration number")]
         public string AdditionalRegistrationNumber { get; set; }
+
+        public void BindRegistrationNumber(string registrationNumber)
+        {
+            switch (this.EntityType)
+            {
+                case ("Sole Trader"):
+                    this.SoleTraderRegistrationNumber = registrationNumber;
+                    break;
+                case ("Partnership"):
+                    this.PartnershipRegistrationNumber = registrationNumber;
+                    break;
+                default:
+                    this.CompaniesHouseRegistrationNumber = registrationNumber;
+                    break;
+            }
+        }
     }
 }

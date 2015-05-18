@@ -54,14 +54,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
-    <Compile Include="Notification\DeleteProducerHandler.cs" />
+    <Compile Include="Producers\DeleteProducerHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
+    <Compile Include="Notification\GetExporterByNotificationIdHandler.cs" />
     <Compile Include="Facilities\NotificationTypeByNotificationIdHandler.cs" />
-    <Compile Include="Notification\GetProducersByNotificationIdHandler.cs" />
+    <Compile Include="Producers\GetProducersByNotificationIdHandler.cs" />
     <Compile Include="Notification\CreateExporterHandler.cs" />
     <Compile Include="Notification\CreateImporterHandler.cs" />
     <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
-    <Compile Include="Notification\CreateProducerHandler.cs" />
+    <Compile Include="Producers\AddProducerToNotificationHandler.cs" />
     <Compile Include="Notification\GenerateNotificationDocumentHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationsByUserHandler.cs" />

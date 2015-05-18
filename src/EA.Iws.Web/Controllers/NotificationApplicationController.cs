@@ -11,7 +11,6 @@
     using Prsd.Core.Extensions;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
-    using Requests.Organisations;
     using Requests.Registration;
     using Requests.Shared;
     using ViewModels.NotificationApplication;
@@ -124,7 +123,8 @@
         [HttpPost]
         public ActionResult Created(CreatedViewModel model)
         {
-            return RedirectToAction(actionName: "ExporterNotifier", controllerName: "NotificationApplication", routeValues: new { id = model.NotificationId });
+            return RedirectToAction(actionName: "ExporterNotifier", controllerName: "NotificationApplication",
+                routeValues: new { id = model.NotificationId });
         }
 
         public async Task<ActionResult> GenerateNotificationDocument(Guid id)
@@ -173,71 +173,6 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProducerInformation(Guid id)
-        {
-            var model = new ProducerInformationViewModel();
-            var address = new AddressViewModel { Countries = await GetCountries() };
-            var business = new BusinessViewModel();
-
-            model.NotificationId = id;
-            model.AddressDetails = address;
-            model.BusinessViewModel = business;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> ProducerInformation(ProducerInformationViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                model.AddressDetails.Countries = await GetCountries();
-                return View(model);
-            }
-
-            var producerData = new CreateProducer
-            {
-                NotificationId = model.NotificationId,
-
-                IsSiteOfExport = model.IsSiteOfExport,
-
-                Name = model.BusinessViewModel.Name,
-                Type = model.BusinessViewModel.EntityType,
-                RegistrationNumber = model.BusinessViewModel.CompaniesHouseRegistrationNumber ??
-                    (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
-                AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
-
-                Building = model.AddressDetails.Building,
-                Address1 = model.AddressDetails.Address1,
-                Address2 = model.AddressDetails.Address2,
-                TownOrCity = model.AddressDetails.TownOrCity,
-                County = model.AddressDetails.County,
-                PostalCode = model.AddressDetails.Postcode,
-                CountryId = model.AddressDetails.CountryId,
-
-                FirstName = model.ContactDetails.FirstName,
-                LastName = model.ContactDetails.LastName,
-                Phone = model.ContactDetails.Telephone,
-                Fax = model.ContactDetails.Fax,
-                Email = model.ContactDetails.Email,
-            };
-
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), producerData);
-
-                if (response.HasErrors)
-                {
-                    this.AddValidationErrorsToModelState(response);
-                    model.AddressDetails.Countries = await GetCountries(client);
-                    return View(model);
-                }
-            }
-
-            return RedirectToAction("MultipleProducers", "NotificationApplication", new { notificationId = model.NotificationId });
-        }
-
-        [HttpGet]
         public async Task<ActionResult> ExporterNotifier(Guid id)
         {
             ExporterNotifier model = new ExporterNotifier();
@@ -266,7 +201,10 @@
                 {
                     Name = model.BusinessViewModel.Name,
                     Type = model.BusinessViewModel.EntityType,
-                    RegistrationNumber = model.BusinessViewModel.CompaniesHouseRegistrationNumber ?? (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
+                    RegistrationNumber =
+                        model.BusinessViewModel.CompaniesHouseRegistrationNumber ??
+                        (model.BusinessViewModel.SoleTraderRegistrationNumber ??
+                         model.BusinessViewModel.PartnershipRegistrationNumber),
                     AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
                     NotificationId = model.NotificationId,
                     Building = model.AddressDetails.Building,
@@ -291,7 +229,8 @@
                 }
             }
 
-            return RedirectToAction(actionName: "ProducerInformation", controllerName: "NotificationApplication", routeValues: new { id = model.NotificationId });
+            return RedirectToAction(actionName: "CopyFromExporter", controllerName: "Producer",
+                routeValues: new { id = model.NotificationId });
         }
 
         public ActionResult _GetUserNotifications()
@@ -311,83 +250,6 @@
 
                 return PartialView(response.Result);
             }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> MultipleProducers(Guid notificationId, string errorMessage = "")
-        {
-            var model = new MultipleProducersViewModel();
-
-            if (!String.IsNullOrEmpty(errorMessage))
-            {
-                ModelState.AddModelError(string.Empty, errorMessage);
-            }
-
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(notificationId));
-
-                if (response.HasErrors)
-                {
-                    this.AddValidationErrorsToModelState(response);
-                    return View(model);
-                }
-                model.NotificationId = notificationId;
-                model.ProducerData = response.Result.ToList();
-                model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
-            }
-            return View("MultipleProducers", model);
-        }
-
-        [HttpPost]
-        public ActionResult MultipleProducers(MultipleProducersViewModel model)
-        {
-            if (!model.HasSiteOfExport)
-            {
-                return RedirectToAction("MultipleProducers", "NotificationApplication",
-                    new
-                    {
-                        notificationId = model.NotificationId,
-                        errorMessage = "Please select a site of export"
-                    });
-            }
-            return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
-        }
-
-        [HttpGet]
-        public ActionResult ShowConfirmDelete(Guid producerId, Guid notificationId, bool isSiteOfExport)
-        {
-            var model = new ProducerData
-            {
-                ProducerId = producerId,
-                NotificationId = notificationId,
-                IsSiteOfExport = isSiteOfExport
-            };
-
-            if (Request.IsAjaxRequest())
-            {
-                return PartialView("ConfirmDeleteProducer", model);
-            }
-            return View("ConfirmDeleteProducer", model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> DeleteProducer(ProducerData model)
-        {
-            if (model.IsSiteOfExport)
-            {
-                return RedirectToAction("MultipleProducers", "NotificationApplication",
-                    new
-                    {
-                        notificationId = model.NotificationId,
-                        errorMessage = "Please make another producer the site of export before you delete this producer"
-                    });
-            }
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new DeleteProducer(model.ProducerId, model.NotificationId));
-            }
-            return RedirectToAction("MultipleProducers", "NotificationApplication", new { notificationId = model.NotificationId });
         }
     }
 }

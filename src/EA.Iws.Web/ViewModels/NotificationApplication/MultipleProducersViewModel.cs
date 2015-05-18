@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Requests.Notification;
+    using Requests.Producers;
 
     public class MultipleProducersViewModel
     {

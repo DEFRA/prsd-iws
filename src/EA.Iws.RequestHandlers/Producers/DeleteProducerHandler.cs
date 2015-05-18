@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.RequestHandlers.Notification
+﻿namespace EA.Iws.RequestHandlers.Producers
 {
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
-    using Requests.Notification;
+    using Requests.Producers;
 
     internal class DeleteProducerHandler : IRequestHandler<DeleteProducer, bool>
     {

@@ -170,7 +170,7 @@
             var result = await controller.ExporterNotifier(exporter) as RedirectToRouteResult;
 
             Assert.True(result != null);
-            Assert.Equal("ProducerInformation", result.RouteValues["action"]);
+            Assert.Equal("CopyFromExporter", result.RouteValues["action"]);
         }
 
         [Fact]

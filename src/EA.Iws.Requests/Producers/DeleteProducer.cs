@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Producers
 {
     using System;
     using Prsd.Core.Mediator;

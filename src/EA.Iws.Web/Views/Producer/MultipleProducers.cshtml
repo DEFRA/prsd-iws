@@ -17,7 +17,7 @@
                 <tr>
                     <td>
                         <details>
-                            <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Name)</span></summary>
+                            <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Business.Name)</span></summary>
                             <div class="grid-row">
                                 <div class="column-third">
                                     @Html.DisplayFor(m => m.ProducerData[i].Contact.FirstName) @Html.DisplayFor(m => m.ProducerData[i].Contact.LastName)<br />
@@ -44,7 +44,7 @@
                                         Site of export:
                                         @Html.DisplayFor(m => m.ProducerData[i].IsSiteOfExport)
                                     </div>
-                                    @Ajax.ActionLink("Delete", "ShowConfirmDelete", "NotificationApplication", new { producerId = Model.ProducerData[i].ProducerId, notificationId = Model.NotificationId, isSiteOfExport = Model.ProducerData[i].IsSiteOfExport },
+                                    @Ajax.ActionLink("Delete", "ShowConfirmDelete", "Producer", new { producerId = Model.ProducerData[i].Id, notificationId = Model.NotificationId, isSiteOfExport = Model.ProducerData[i].IsSiteOfExport },
                                         new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divConfirmDelete" }, new { @class = "deleteLink" })
                                 </div>
                             </div>
@@ -58,9 +58,9 @@
 
 <div class="form-group"></div>
 <div class="form-group">
-    @Html.ActionLink("Add more", "ProducerInformation", "NotificationApplication", new { id = Model.NotificationId }, null)
+    @Html.ActionLink("Add more", "Add", "Producer", new { id = Model.NotificationId }, null)
 </div>
-@using (Html.BeginForm("MultipleProducers", "NotificationApplication"))
+@using (Html.BeginForm("MultipleProducers", "Producer"))
 {
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.HasSiteOfExport)
