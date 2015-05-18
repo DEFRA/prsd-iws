@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers
+﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -7,7 +7,6 @@
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.Notification;
-    using Requests.Organisations;
     using Requests.Shared;
 
     public class GetProducersByNotificationIdHandler : IRequestHandler<GetProducersByNotificationId, IList<ProducerData>>

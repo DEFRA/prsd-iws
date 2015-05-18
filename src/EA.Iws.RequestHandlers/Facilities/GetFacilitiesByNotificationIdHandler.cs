@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers
+﻿namespace EA.Iws.RequestHandlers.Facilities
 {
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -7,7 +7,6 @@
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.Facilities;
-    using Requests.Notification;
     using Requests.Shared;
 
     public class GetFacilitiesByNotificationIdHandler : IRequestHandler<GetFacilitiesByNotificationId, IList<FacilityData>>
