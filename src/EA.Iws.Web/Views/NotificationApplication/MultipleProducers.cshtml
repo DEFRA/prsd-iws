@@ -60,16 +60,14 @@
 <div class="form-group">
     @Html.ActionLink("Add more", "ProducerInformation", "NotificationApplication", new { id = Model.NotificationId }, null)
 </div>
-<div class="form-group">
-    @using (Html.BeginForm("Add", "Facility", new { id = @Model.NotificationId }, FormMethod.Get))
-    {
-        <button class="button" type="submit">Continue</button>
-    }
-    
-</div>
-<div class="form-group">
-    <input type="submit" class="button" value="Continue" />
-</div>
+@using (Html.BeginForm("MultipleProducers", "NotificationApplication"))
+{
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.IsSiteOfExportSet)
+    <div class="form-group">
+        <input type="submit" class="button" value="Continue"/>
+    </div>
+}
 <div id="divConfirmDelete" class="clearfix"></div>
 
 @section scripts

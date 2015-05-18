@@ -203,23 +203,23 @@
 
                 Name = model.BusinessViewModel.Name,
                 Type = model.BusinessViewModel.EntityType,
-                RegistrationNumber = model.BusinessViewModel.CompaniesHouseRegistrationNumber ?? 
+                RegistrationNumber = model.BusinessViewModel.CompaniesHouseRegistrationNumber ??
                     (model.BusinessViewModel.SoleTraderRegistrationNumber ?? model.BusinessViewModel.PartnershipRegistrationNumber),
                 AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
 
-               Building = model.AddressDetails.Building,
-               Address1 = model.AddressDetails.Address1,
-               Address2 = model.AddressDetails.Address2,
-               TownOrCity = model.AddressDetails.TownOrCity,
-               County = model.AddressDetails.County,
-               PostalCode = model.AddressDetails.Postcode,
-               CountryId = model.AddressDetails.CountryId,
+                Building = model.AddressDetails.Building,
+                Address1 = model.AddressDetails.Address1,
+                Address2 = model.AddressDetails.Address2,
+                TownOrCity = model.AddressDetails.TownOrCity,
+                County = model.AddressDetails.County,
+                PostalCode = model.AddressDetails.Postcode,
+                CountryId = model.AddressDetails.CountryId,
 
-               FirstName = model.ContactDetails.FirstName,
-               LastName = model.ContactDetails.LastName,
-               Phone = model.ContactDetails.Telephone,
-               Fax = model.ContactDetails.Fax,
-               Email = model.ContactDetails.Email,
+                FirstName = model.ContactDetails.FirstName,
+                LastName = model.ContactDetails.LastName,
+                Phone = model.ContactDetails.Telephone,
+                Fax = model.ContactDetails.Fax,
+                Email = model.ContactDetails.Email,
             };
 
             using (var client = apiClient())
@@ -234,9 +234,9 @@
                 }
             }
 
-            return RedirectToAction("MultipleProducers", "NotificationApplication", new {notificationId = model.NotificationId});
+            return RedirectToAction("MultipleProducers", "NotificationApplication", new { notificationId = model.NotificationId });
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> ExporterNotifier(Guid id)
         {
@@ -334,8 +334,24 @@
                 }
                 model.NotificationId = notificationId;
                 model.ProducerData = response.Result.ToList();
+                model.IsSiteOfExportSet = model.ProducerData.Exists(p => p.IsSiteOfExport);
             }
             return View("MultipleProducers", model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> MultipleProducers(MultipleProducersViewModel model)
+        {
+            if (!model.IsSiteOfExportSet)
+            {
+                return RedirectToAction("MultipleProducers", "NotificationApplication",
+                    new
+                    {
+                        notificationId = model.NotificationId,
+                        errorMessage = "Please select a site of export"
+                    });
+            }
+            return RedirectToAction("ExporterNotifier", "NotificationApplication", new { id = model.NotificationId });
         }
 
         [HttpGet]

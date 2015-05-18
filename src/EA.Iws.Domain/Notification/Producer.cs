@@ -29,5 +29,10 @@
         protected Producer()
         {
         }
+
+        public void ModifySiteOfExport(bool isSiteOfExport)
+        {
+            IsSiteOfExport = isSiteOfExport;
+        }
     }
 }

@@ -76,6 +76,14 @@
                 ProducersCollection = new List<Producer>();
             }
 
+            if (producer.IsSiteOfExport)
+            {
+                foreach (var prod in ProducersCollection)
+                {
+                    prod.ModifySiteOfExport(false);
+                }    
+            }
+
             ProducersCollection.Add(producer);
         }
 
@@ -104,6 +112,14 @@
             }
 
             ProducersCollection.Remove(producer);
+        }
+
+        public void SetSiteOfExport(Producer producer)
+        {
+            if (ProducersCollection == null || !ProducersCollection.Contains(producer))
+            {
+                throw new InvalidOperationException(String.Format("Unable to remove producer with id {0}", producer.Id));
+            }
         }
     }
 }

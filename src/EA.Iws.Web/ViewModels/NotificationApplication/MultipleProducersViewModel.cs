@@ -14,5 +14,7 @@
         public Guid NotificationId { get; set; }
 
         public List<ProducerData> ProducerData { get; set; }
+
+        public bool IsSiteOfExportSet { get; set; }
     }
 }
