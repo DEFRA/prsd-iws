@@ -49,7 +49,7 @@
         }
 
         [Fact]
-        public void AddProducer()
+        public void ProducersCanOnlyHaveOneSiteOfExport()
         {
             var address = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
                 "United Kingdom");
