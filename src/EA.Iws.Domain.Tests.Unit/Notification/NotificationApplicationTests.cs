@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Notification
 {
     using System;
+    using System.Linq;
     using Domain.Notification;
     using Xunit;
 
@@ -45,6 +46,26 @@
                 return UKCompetentAuthority.Wales;
             }
             throw new ArgumentException("Unknown competent authority", "country");
+        }
+
+        [Fact]
+        public void AddProducer()
+        {
+            var address = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                "United Kingdom");
+
+            var business = new Business(string.Empty, String.Empty, String.Empty, string.Empty);
+
+            var contact = new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
+
+            var notification = new NotificationApplication(Guid.NewGuid(), WasteAction.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddProducer(new Producer(business, address, contact, true));
+            notification.AddProducer(new Producer(business, address, contact, true));
+
+            var siteOfExportCount = notification.Producers.Count(p => p.IsSiteOfExport);
+            Assert.Equal(1, siteOfExportCount);
         }
     }
 }

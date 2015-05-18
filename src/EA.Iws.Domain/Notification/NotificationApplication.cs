@@ -76,15 +76,12 @@
                 ProducersCollection = new List<Producer>();
             }
 
+            ProducersCollection.Add(producer);
+
             if (producer.IsSiteOfExport)
             {
-                foreach (var prod in ProducersCollection)
-                {
-                    prod.ModifySiteOfExport(false);
-                }    
+                SetSiteOfExport(producer);
             }
-
-            ProducersCollection.Add(producer);
         }
 
         public void AddFacility(Facility facility)
@@ -114,11 +111,21 @@
             ProducersCollection.Remove(producer);
         }
 
-        public void SetSiteOfExport(Producer producer)
+        private void SetSiteOfExport(Producer producer)
         {
             if (ProducersCollection == null || !ProducersCollection.Contains(producer))
             {
-                throw new InvalidOperationException(String.Format("Unable to remove producer with id {0}", producer.Id));
+                throw new InvalidOperationException(String.Format("Unable to make producer with id {0} the site of export", producer.Id));
+            }
+
+            if (!producer.IsSiteOfExport)
+            {
+                throw new InvalidOperationException(String.Format("The producer with id {0} is not a site of export", producer.Id));
+            }
+
+            foreach (var prod in ProducersCollection.Where(p => !p.Equals(producer)))
+            {
+                prod.SetSiteOfExport(false);
             }
         }
     }

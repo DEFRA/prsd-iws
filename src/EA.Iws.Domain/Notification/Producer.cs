@@ -30,7 +30,7 @@
         {
         }
 
-        public void ModifySiteOfExport(bool isSiteOfExport)
+        public void SetSiteOfExport(bool isSiteOfExport)
         {
             IsSiteOfExport = isSiteOfExport;
         }

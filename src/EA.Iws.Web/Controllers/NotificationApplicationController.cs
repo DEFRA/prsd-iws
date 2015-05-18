@@ -334,7 +334,7 @@
                 }
                 model.NotificationId = notificationId;
                 model.ProducerData = response.Result.ToList();
-                model.IsSiteOfExportSet = model.ProducerData.Exists(p => p.IsSiteOfExport);
+                model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
             }
             return View("MultipleProducers", model);
         }
@@ -342,7 +342,7 @@
         [HttpPost]
         public async Task<ActionResult> MultipleProducers(MultipleProducersViewModel model)
         {
-            if (!model.IsSiteOfExportSet)
+            if (!model.HasSiteOfExport)
             {
                 return RedirectToAction("MultipleProducers", "NotificationApplication",
                     new
@@ -351,7 +351,7 @@
                         errorMessage = "Please select a site of export"
                     });
             }
-            return RedirectToAction("ExporterNotifier", "NotificationApplication", new { id = model.NotificationId });
+            return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
         }
 
         [HttpGet]

@@ -15,6 +15,6 @@
 
         public List<ProducerData> ProducerData { get; set; }
 
-        public bool IsSiteOfExportSet { get; set; }
+        public bool HasSiteOfExport { get; set; }
     }
 }
