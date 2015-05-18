@@ -10,6 +10,9 @@
                     @Html.AntiForgeryToken()
                     <ul id="proposition-links">
                         <li>
+                            @Html.ActionLink(linkText: "Home", actionName: "Home", controllerName: "Applicant")
+                        </li>
+                        <li>
                             <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
                         </li>
                     </ul>
