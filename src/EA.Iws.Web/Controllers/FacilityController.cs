@@ -6,9 +6,12 @@
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Facilities;
+    using Requests.Notification;
     using Requests.Registration;
     using Requests.Shared;
+    using ViewModels.NotificationApplication;
 
     [Authorize]
     public class FacilityController : Controller
@@ -62,7 +65,7 @@
                     return View(model);
                 }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("MultipleFacilities", "Facility", new { notificationID = model.NotificationId});
             }
         }
 
@@ -85,6 +88,37 @@
 
             ViewBag.Countries = new SelectList(response.Result, "Id", "Name", 
                 response.Result.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> MultipleFacilities(Guid notificationId, string errorMessage = "")
+        {
+            var model = new MultipleFacilitiesViewModel();
+
+            if (!String.IsNullOrEmpty(errorMessage))
+            {
+                ModelState.AddModelError(string.Empty, errorMessage);
+            }
+
+            using (var client = apiClient())
+            {
+                var response = await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(notificationId));
+
+                if (response.HasErrors)
+                {
+                    this.AddValidationErrorsToModelState(response);
+                    return View(model);
+                }
+                model.NotificationId = notificationId;
+                model.FacilityData = response.Result.ToList();
+            }
+            return View("MultipleFacilities", model);
+        }
+
+        [HttpPost]
+        public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
+        {
+            return RedirectToAction("Index", "Home");
         }
     }
 }

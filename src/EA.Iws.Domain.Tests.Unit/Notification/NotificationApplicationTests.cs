@@ -58,7 +58,7 @@
 
             var contact = new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
 
-            var notification = new NotificationApplication(Guid.NewGuid(), WasteAction.Recovery,
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, 
                 UKCompetentAuthority.England, 0);
 
             notification.AddProducer(new Producer(business, address, contact, true));

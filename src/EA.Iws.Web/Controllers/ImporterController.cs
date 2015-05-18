@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -82,7 +83,7 @@
                 }
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Add", "Facility", new {id = model.NotificationId });
         }
 
         private async Task<IEnumerable<CountryData>> GetCountries()

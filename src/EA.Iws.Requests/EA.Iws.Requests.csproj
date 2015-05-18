@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Facilities\AddFacilityToNotification.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
+    <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />
     <Compile Include="Facilities\NotificationTypeById.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Shared\BusinessData.cs" />

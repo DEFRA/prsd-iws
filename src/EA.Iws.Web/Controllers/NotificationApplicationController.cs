@@ -340,7 +340,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> MultipleProducers(MultipleProducersViewModel model)
+        public ActionResult MultipleProducers(MultipleProducersViewModel model)
         {
             if (!model.HasSiteOfExport)
             {
