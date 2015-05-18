@@ -2,17 +2,11 @@
     ViewBag.Title = "Applicant - Home Page";
 }
 <h1 class="heading-large">Manage your notifications</h1>
-<p>
-    Start new notifications.
+
+<h2 class="heading-medium">Start a new notification?</h2>
+<p id="get-started" class="get-started group">
+    @Html.ActionLink("Start", "CompetentAuthority", "NotificationApplication", null, new { @class = "button-get-started button" })
 </p>
-
-
-<h2 class="heading-medium">What would you like to do?</h2>
-<div class="colored-header-bar" id="orange"></div>
-<div class="grid-row">
-    <div class="column-third">@Html.ActionLink(linkText: "Start a new notification", actionName: "CompetentAuthority", controllerName: "NotificationApplication")</div>
-</div>
-<hr class="section-bottom"/>
 
 <div class="spacer"></div>
 
