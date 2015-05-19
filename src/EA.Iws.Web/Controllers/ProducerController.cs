@@ -33,7 +33,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> CopyFromExporter(Guid id, YesNoChoiceViewModel inputModel)
+        public ActionResult CopyFromExporter(Guid id, YesNoChoiceViewModel inputModel)
         {
             var model = new ExporterNotifier();
 
@@ -54,7 +54,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id, bool copy)
+        public async Task<ActionResult> Add(Guid id, bool? copy)
         {
             var model = new ProducerData
             {
@@ -62,9 +62,8 @@
                 Business = new BusinessData()
             };
 
-            if (copy)
+            if (copy.HasValue && copy.Value)
             {
-                // TODO: copy from previous
                 using (var client = apiClient())
                 {
                     var response = await client.SendAsync(new GetExporterByNotificationId(id));
@@ -146,7 +145,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> MultipleProducers(MultipleProducersViewModel model)
+        public ActionResult MultipleProducers(MultipleProducersViewModel model)
         {
             if (!model.HasSiteOfExport)
             {
