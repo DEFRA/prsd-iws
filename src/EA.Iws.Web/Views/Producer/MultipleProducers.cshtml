@@ -40,12 +40,6 @@
                                     @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity) @Html.DisplayFor(m => m.ProducerData[i].Address.PostalCode)
                                 </div>
                                 <div class="column-third">
-                                    <div class="form-group">
-                                        Site of export:
-                                        @Html.DisplayFor(m => m.ProducerData[i].IsSiteOfExport)
-                                    </div>
-                                    @Ajax.ActionLink("Delete", "ShowConfirmDelete", "Producer", new { producerId = Model.ProducerData[i].Id, notificationId = Model.NotificationId, isSiteOfExport = Model.ProducerData[i].IsSiteOfExport },
-                                        new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divConfirmDelete" }, new { @class = "deleteLink" })
                                 </div>
                             </div>
                         </details>
@@ -60,14 +54,8 @@
 <div class="form-group">
     @Html.ActionLink("Add more", "Add", "Producer", new { id = Model.NotificationId }, null)
 </div>
-@using (Html.BeginForm("MultipleProducers", "Producer"))
-{
-    @Html.HiddenFor(m => m.NotificationId)
-    @Html.HiddenFor(m => m.HasSiteOfExport)
-    <div class="form-group">
-        <input type="submit" class="button" value="Continue"/>
-    </div>
-}
+@Html.ActionLink("Register", "Add", "Importer", new { id = Model.NotificationId }, new { @class = "button-get-started button" })
+
 <div id="divConfirmDelete" class="clearfix"></div>
 
 @section scripts

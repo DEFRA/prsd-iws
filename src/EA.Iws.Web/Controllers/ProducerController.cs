@@ -144,21 +144,6 @@
             return View("MultipleProducers", model);
         }
 
-        [HttpPost]
-        public ActionResult MultipleProducers(MultipleProducersViewModel model)
-        {
-            if (!model.HasSiteOfExport)
-            {
-                return RedirectToAction("MultipleProducers", "Producer",
-                    new
-                    {
-                        notificationId = model.NotificationId,
-                        errorMessage = "Please select a site of export"
-                    });
-            }
-            return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
-        }
-
         [HttpGet]
         public ActionResult ShowConfirmDelete(Guid producerId, Guid notificationId, bool isSiteOfExport)
         {
