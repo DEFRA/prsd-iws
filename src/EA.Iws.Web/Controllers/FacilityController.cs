@@ -6,9 +6,9 @@
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Facilities;
-    using Requests.Notification;
     using Requests.Registration;
     using Requests.Shared;
     using ViewModels.NotificationApplication;
@@ -30,16 +30,9 @@
 
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(new NotificationTypeByNotificationId(id));
-
                 await BindCountrySelectList(client);
 
-                if (response.HasErrors)
-                {
-                    // TODO: Error handling
-                }
-
-                notificationType = response.Result;
+                notificationType = await client.SendAsync(new NotificationTypeByNotificationId(id));
             }
 
             var facility = new FacilityData
@@ -54,40 +47,27 @@
         [HttpPost]
         public async Task<ActionResult> Add(FacilityData model)
         {
-            using (var client = apiClient())
+            try
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new AddFacilityToNotification(model));
-
-                if (response.HasErrors)
+                using (var client = apiClient())
                 {
-                    await BindCountrySelectList(client);
+                    var response = await client.SendAsync(User.GetAccessToken(), new AddFacilityToNotification(model));
 
-                    return View(model);
+                    return RedirectToAction("MultipleFacilities", "Facility",
+                        new { notificationID = model.NotificationId });
                 }
-
-                return RedirectToAction("MultipleFacilities", "Facility", new { notificationID = model.NotificationId});
             }
-        }
-
-        private async Task BindCountrySelectList()
-        {
-            using (var client = apiClient())
+            catch (ApiBadRequestException ex)
             {
-                await BindCountrySelectList(client);
-            }
-        }
+                this.HandleBadRequest(ex);
 
-        private async Task BindCountrySelectList(IIwsClient client)
-        {
-            var response = await client.SendAsync(new GetCountries());
-
-            if (response.HasErrors)
-            {
-                // TODO: Error handling
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
             }
 
-            ViewBag.Countries = new SelectList(response.Result, "Id", "Name", 
-                response.Result.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
+            return View(model);
         }
 
         [HttpGet]
@@ -102,16 +82,13 @@
 
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(notificationId));
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(notificationId));
 
-                if (response.HasErrors)
-                {
-                    this.AddValidationErrorsToModelState(response);
-                    return View(model);
-                }
                 model.NotificationId = notificationId;
-                model.FacilityData = response.Result.ToList();
+                model.FacilityData = response.ToList();
             }
+
             return View("MultipleFacilities", model);
         }
 
@@ -119,6 +96,14 @@
         public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
         {
             return RedirectToAction("Index", "Home");
+        }
+
+        private async Task BindCountrySelectList(IIwsClient client)
+        {
+            var response = await client.SendAsync(new GetCountries());
+
+            ViewBag.Countries = new SelectList(response, "Id", "Name",
+                response.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
         }
     }
 }

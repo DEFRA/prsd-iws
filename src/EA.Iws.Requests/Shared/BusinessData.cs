@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Requests.Shared
 {
     using System.ComponentModel.DataAnnotations;
-    using Prsd.Core.Web;
+    using Prsd.Core.Validation;
 
     public class BusinessData
     {

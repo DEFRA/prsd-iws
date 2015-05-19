@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
     using Microsoft.Owin.Security;
     using Prsd.Core.Web.OAuth;
@@ -42,7 +41,8 @@
             var response = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
             if (response.AccessToken != null)
             {
-                authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe }, response.GenerateUserIdentity());
+                authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe },
+                    response.GenerateUserIdentity());
                 return RedirectToLocal(returnUrl);
             }
             ModelState.AddModelError(string.Empty, "The username or password is incorrect");

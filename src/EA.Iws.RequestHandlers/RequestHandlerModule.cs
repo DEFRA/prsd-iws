@@ -14,8 +14,9 @@
 
             // Order matters here
             builder.RegisterGenericDecorators(this.GetType().Assembly, typeof(IRequestHandler<,>), "request_handler",
-                typeof(EventDispatcherCommandHandlerDecorator<,>), // <-- inner most decorator
-                typeof(AuthorizationCommandHandlerDecorator<,>)); // <-- outer most decorator
+                typeof(EventDispatcherRequestHandlerDecorator<,>), // <-- inner most decorator
+                typeof(AuthorizationRequestHandlerDecorator<,>),
+                typeof(AuthenticationRequestHandlerDecorator<,>)); // <-- outer most decorator
 
             builder.RegisterAssemblyTypes()
                 .AsClosedTypesOf(typeof(IRequest<>))

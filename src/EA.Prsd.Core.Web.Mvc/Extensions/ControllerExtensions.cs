@@ -5,11 +5,22 @@
 
     public static class ControllerExtensions
     {
-        public static void AddValidationErrorsToModelState(this Controller controller, ApiResponse apiResponse)
+        public static void HandleBadRequest(this Controller controller, ApiBadRequestException apiBadRequestException)
         {
-            foreach (var error in apiResponse.Errors)
+            if (apiBadRequestException.BadRequestData.ModelState != null)
             {
-                controller.ModelState.AddModelError(string.Empty, error);
+                foreach (var modelStateItem in apiBadRequestException.BadRequestData.ModelState)
+                {
+                    foreach (var message in modelStateItem.Value)
+                    {
+                        controller.ModelState.AddModelError(modelStateItem.Key, message);
+                    }
+                }
+            }
+
+            if (string.Equals(apiBadRequestException.BadRequestData.Error, "invalid_grant"))
+            {
+                controller.ModelState.AddModelError(string.Empty, apiBadRequestException.BadRequestData.ErrorDescription);
             }
         }
     }

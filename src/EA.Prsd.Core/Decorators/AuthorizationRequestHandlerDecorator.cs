@@ -6,22 +6,23 @@
     using System.Security;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using Domain;
     using Mediator;
     using Security;
 
-    public class AuthorizationCommandHandlerDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public class AuthorizationRequestHandlerDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly IRequestHandler<TRequest, TResponse> inner;
         private readonly IResourceAuthorizationManager manager;
-        private readonly ClaimsPrincipal principal;
+        private readonly IUserContext userContext;
 
-        public AuthorizationCommandHandlerDecorator(IRequestHandler<TRequest, TResponse> inner,
-            IResourceAuthorizationManager manager, ClaimsPrincipal principal)
+        public AuthorizationRequestHandlerDecorator(IRequestHandler<TRequest, TResponse> inner,
+            IResourceAuthorizationManager manager, IUserContext userContext)
         {
             this.inner = inner;
             this.manager = manager;
-            this.principal = principal;
+            this.userContext = userContext;
         }
 
         public async Task<TResponse> HandleAsync(TRequest message)
@@ -36,7 +37,7 @@
             }
             else
             {
-                var context = new ResourceAuthorizationContext(principal,
+                var context = new ResourceAuthorizationContext(userContext.Principal,
                     new[] { ActionFromAttribute(permissionAttribute) }, ResourcesFromAttribute(permissionAttribute));
                 hasAccess = await manager.CheckAccessAsync(context);
             }

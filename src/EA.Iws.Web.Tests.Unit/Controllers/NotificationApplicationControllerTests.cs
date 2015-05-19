@@ -35,8 +35,8 @@
         private static NotificationApplicationController CreateNotificationApplicationController()
         {
             var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<string>._, A<CreateNotificationApplication>._))
-                .Returns(new ApiResponse<Guid>(HttpStatusCode.OK, Guid.Empty));
+            A.CallTo(() => client.SendAsync<Guid>(A<string>._, A<CreateNotificationApplication>._))
+                .Returns(Guid.Empty);
             return new NotificationApplicationController(() => client);
         }
 

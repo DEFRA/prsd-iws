@@ -217,6 +217,7 @@
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
     <Compile Include="App_Start\Modules\DocumentGeneratorModule.cs" />
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
+    <Compile Include="Infrastructure\HttpStatusCodeResult.cs" />
     <Compile Include="Controllers\MediatorController.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="IdSrv\Scopes.cs" />
     <Compile Include="IdSrv\UserService.cs" />
     <Compile Include="IdSrv\UserServiceExtensions.cs" />
+    <Compile Include="Infrastructure\ApiControllerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />

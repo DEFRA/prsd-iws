@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
     using Requests.Producers;
@@ -14,6 +15,7 @@
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
 
+    [Authorize]
     public class ProducerController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
@@ -47,10 +49,10 @@
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id = id, copy = "false" });
+                return RedirectToAction("Add", new { id, copy = false });
             }
 
-            return RedirectToAction("Add", new { id = id, copy = "true" });
+            return RedirectToAction("Add", new { id, copy = true });
         }
 
         [HttpGet]
@@ -66,14 +68,8 @@
             {
                 using (var client = apiClient())
                 {
-                    var response = await client.SendAsync(new GetExporterByNotificationId(id));
+                    var exporter = await client.SendAsync(new GetExporterByNotificationId(id));
 
-                    if (response.HasErrors)
-                    {
-                        // TODO: Error handling
-                    }
-
-                    var exporter = response.Result;
                     model.Address = exporter.Address;
                     model.Contact = exporter.Contact;
                     model.Business = new BusinessData
@@ -89,7 +85,7 @@
             model.NotificationId = id;
 
             await BindCountrySelectList();
-            
+
             return View(model);
         }
 
@@ -105,17 +101,26 @@
 
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new AddProducerToNotification(model));
-
-                if (response.HasErrors)
+                try
                 {
-                    this.AddValidationErrorsToModelState(response);
-                    await BindCountrySelectList(client);
-                    return View(model);
-                }
-            }
+                    var response = await client.SendAsync(User.GetAccessToken(), new AddProducerToNotification(model));
 
-            return RedirectToAction("MultipleProducers", "Producer", new { notificationId = model.NotificationId });
+                    return RedirectToAction("MultipleProducers", "Producer",
+                        new { notificationId = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                await BindCountrySelectList(client);
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -125,18 +130,28 @@
 
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(notificationId));
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(notificationId));
 
-                if (response.HasErrors)
+                try
                 {
-                    this.AddValidationErrorsToModelState(response);
-                    return View(model);
+                    model.NotificationId = notificationId;
+                    model.ProducerData = response.ToList();
+                    model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
+                    return View("MultipleProducers", model);
                 }
-                model.NotificationId = notificationId;
-                model.ProducerData = response.Result.ToList();
-                model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                return View(model);
             }
-            return View("MultipleProducers", model);
         }
 
         private async Task BindCountrySelectList()
@@ -151,13 +166,8 @@
         {
             var response = await client.SendAsync(new GetCountries());
 
-            if (response.HasErrors)
-            {
-                // TODO: Error handling
-            }
-
-            ViewBag.Countries = new SelectList(response.Result, "Id", "Name",
-                response.Result.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
+            ViewBag.Countries = new SelectList(response, "Id", "Name",
+                response.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
         }
     }
 }

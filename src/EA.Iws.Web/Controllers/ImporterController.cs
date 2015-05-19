@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
     using Requests.Registration;
@@ -73,44 +73,38 @@
 
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), importerData);
-
-                if (response.HasErrors)
+                try
                 {
-                    this.AddValidationErrorsToModelState(response);
-                    model.AddressDetails.Countries = await GetCountries(client);
-                    return View(model);
-                }
-            }
+                    var response = await client.SendAsync(User.GetAccessToken(), importerData);
 
-            return RedirectToAction("Add", "Facility", new {id = model.NotificationId });
+                    return RedirectToAction("Add", "Facility", new { id = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                model.AddressDetails.Countries = await GetCountries(client);
+                return View(model);
+            }
         }
 
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(new GetCountries());
-
-                if (response.HasErrors)
-                {
-                    // TODO - error handling
-                }
-
-                return response.Result;
+                return await client.SendAsync(new GetCountries());
             }
         }
 
         private async Task<IEnumerable<CountryData>> GetCountries(IIwsClient iwsClient)
         {
-            var response = await iwsClient.SendAsync(new GetCountries());
-
-            if (response.HasErrors)
-            {
-                // TODO - error handling
-            }
-
-            return response.Result;
+            return await iwsClient.SendAsync(new GetCountries());
         }
     }
 }

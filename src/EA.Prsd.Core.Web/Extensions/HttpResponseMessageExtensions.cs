@@ -1,7 +1,7 @@
 ﻿namespace EA.Prsd.Core.Web.Extensions
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using System;
+    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using ApiClient;
@@ -9,50 +9,39 @@
 
     public static class HttpResponseMessageExtensions
     {
-        public static async Task<ApiResponse<T>> CreateResponseAsync<T>(this HttpResponseMessage httpResponseMessage)
+        public static async Task<T> CreateResponseAsync<T>(this HttpResponseMessage httpResponseMessage)
         {
             if (httpResponseMessage.IsSuccessStatusCode)
             {
-                var result = new ApiResponse<T>(httpResponseMessage.StatusCode,
-                    await httpResponseMessage.Content.ReadAsAsync<T>().ConfigureAwait(false));
-                return result;
-            }
-            var httpErrorObject = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            var anonymousErrorObject = new { Message = string.Empty, ModelState = new Dictionary<string, string[]>() };
-
-            var deserializedErrorObject = JsonConvert.DeserializeAnonymousType(httpErrorObject, anonymousErrorObject);
-
-            var listOfErrors = new List<string>();
-
-            if (deserializedErrorObject.ModelState != null)
-            {
-                listOfErrors.AddRange(
-                    deserializedErrorObject.ModelState
-                        .Select(kvp => string.Join(". ", kvp.Value)));
-            }
-            else
-            {
-                var error =
-                    JsonConvert.DeserializeObject<Dictionary<string, string>>(httpErrorObject);
-
-                listOfErrors.AddRange(error.Select(kvp => kvp.Value));
+                return await httpResponseMessage.Content.ReadAsAsync<T>().ConfigureAwait(false);
             }
 
-            return new ApiResponse<T>(httpResponseMessage.StatusCode, listOfErrors);
+            var ex = await CreateApiException(httpResponseMessage);
+            throw ex;
         }
 
-        public static async Task<ApiResponse<byte[]>> CreateResponseByteArrayAsync(
+        public static async Task<byte[]> CreateResponseByteArrayAsync(
             this HttpResponseMessage httpResponseMessage)
         {
             if (httpResponseMessage.IsSuccessStatusCode)
             {
-                var bytes = await httpResponseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-
-                return new ApiResponse<byte[]>(httpResponseMessage.StatusCode, bytes);
+                return await httpResponseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             }
-            return new ApiResponse<byte[]>(httpResponseMessage.StatusCode,
-                new[] { "Failed to generate the requested document." });
+
+            var ex = await CreateApiException(httpResponseMessage);
+            throw ex;
+        }
+
+        private static async Task<Exception> CreateApiException(HttpResponseMessage httpResponseMessage)
+        {
+            var response = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (httpResponseMessage.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return new ApiBadRequestException(httpResponseMessage.StatusCode, JsonConvert.DeserializeObject<ApiBadRequest>(response));
+            }
+
+            return new ApiException(httpResponseMessage.StatusCode, JsonConvert.DeserializeObject<ApiError>(response));
         }
     }
 }

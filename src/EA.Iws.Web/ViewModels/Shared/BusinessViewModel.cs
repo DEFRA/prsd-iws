@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.ViewModels.Shared
 {
     using System.ComponentModel.DataAnnotations;
+    using Prsd.Core.Validation;
     using Prsd.Core.Web;
 
     public class BusinessViewModel

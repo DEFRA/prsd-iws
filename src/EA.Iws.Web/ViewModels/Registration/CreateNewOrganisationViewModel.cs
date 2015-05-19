@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using Prsd.Core.Validation;
     using Prsd.Core.Web;
     using Requests.Registration;
 

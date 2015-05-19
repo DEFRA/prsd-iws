@@ -29,12 +29,12 @@
             get { return registration ?? (registration = new Registration(httpClient)); }
         }
 
-        public async Task<ApiResponse<TResult>> SendAsync<TResult>(IRequest<TResult> request)
+        public async Task<TResult> SendAsync<TResult>(IRequest<TResult> request)
         {
             return await InternalSendAsync(request).ConfigureAwait(false);
         }
 
-        public async Task<ApiResponse<TResult>> SendAsync<TResult>(string accessToken, IRequest<TResult> request)
+        public async Task<TResult> SendAsync<TResult>(string accessToken, IRequest<TResult> request)
         {
             httpClient.SetBearerToken(accessToken);
             return await InternalSendAsync(request).ConfigureAwait(false);
@@ -45,7 +45,7 @@
             httpClient.Dispose();
         }
 
-        private async Task<ApiResponse<TResult>> InternalSendAsync<TResult>(IRequest<TResult> request)
+        private async Task<TResult> InternalSendAsync<TResult>(IRequest<TResult> request)
         {
             var apiRequest = new ApiRequest
             {

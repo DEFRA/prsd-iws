@@ -2,19 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
     using Prsd.Core;
     using Prsd.Core.Extensions;
+    using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
     using Requests.Registration;
     using Requests.Shared;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
+    using Constants = Prsd.Core.Web.Constants;
 
     [Authorize]
     public class NotificationApplicationController : Controller
@@ -77,24 +78,33 @@
 
             using (var client = apiClient())
             {
-                var response =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new CreateNotificationApplication
-                            {
-                                CompetentAuthority = model.CompetentAuthority,
-                                NotificationType = model.SelectedNotificationType
-                            });
-
-                if (!response.HasErrors)
+                try
                 {
+                    var response =
+                        await
+                            client.SendAsync(User.GetAccessToken(),
+                                new CreateNotificationApplication
+                                {
+                                    CompetentAuthority = model.CompetentAuthority,
+                                    NotificationType = model.SelectedNotificationType
+                                });
+
                     return RedirectToAction("Created",
                         new
                         {
-                            id = response.Result
+                            id = response
                         });
                 }
-                this.AddValidationErrorsToModelState(response);
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
                 return View(model);
             }
         }
@@ -106,15 +116,10 @@
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationNumber(id));
 
-                if (response.HasErrors)
-                {
-                    // TODO - error handling
-                }
-
                 var model = new CreatedViewModel
                 {
                     NotificationId = id,
-                    NotificationNumber = response.Result
+                    NotificationNumber = response
                 };
                 return View(model);
             }
@@ -123,25 +128,34 @@
         [HttpPost]
         public ActionResult Created(CreatedViewModel model)
         {
-            return RedirectToAction(actionName: "ExporterNotifier", controllerName: "NotificationApplication",
-                routeValues: new { id = model.NotificationId });
+            return RedirectToAction("ExporterNotifier", "NotificationApplication", new { id = model.NotificationId });
         }
 
+        [HttpGet]
         public async Task<ActionResult> GenerateNotificationDocument(Guid id)
         {
             using (var client = apiClient())
             {
-                var response =
-                    await client.SendAsync(User.GetAccessToken(), new GenerateNotificationDocument(id));
-
-                if (response.HasErrors)
+                try
                 {
-                    return HttpNotFound(response.Errors.FirstOrDefault());
+                    var response =
+                        await client.SendAsync(User.GetAccessToken(), new GenerateNotificationDocument(id));
+
+                    var downloadName = "IwsNotification" + SystemTime.UtcNow + ".docx";
+
+                    return File(response, Constants.MicrosoftWordContentType, downloadName);
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
                 }
 
-                var downloadName = "IwsNotification" + SystemTime.UtcNow + ".docx";
-
-                return File(response.Result, Prsd.Core.Web.Constants.MicrosoftWordContentType, downloadName);
+                return HttpNotFound();
             }
         }
 
@@ -149,33 +163,19 @@
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(new GetCountries());
-
-                if (response.HasErrors)
-                {
-                    // TODO - error handling
-                }
-
-                return response.Result;
+                return await client.SendAsync(new GetCountries());
             }
         }
 
         private async Task<IEnumerable<CountryData>> GetCountries(IIwsClient iwsClient)
         {
-            var response = await iwsClient.SendAsync(new GetCountries());
-
-            if (response.HasErrors)
-            {
-                // TODO - error handling
-            }
-
-            return response.Result;
+            return await iwsClient.SendAsync(new GetCountries());
         }
 
         [HttpGet]
         public async Task<ActionResult> ExporterNotifier(Guid id)
         {
-            ExporterNotifier model = new ExporterNotifier();
+            var model = new ExporterNotifier();
             var address = new AddressViewModel { Countries = await GetCountries() };
             var business = new BusinessViewModel();
 
@@ -197,40 +197,47 @@
 
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new CreateExporter()
+                try
                 {
-                    Name = model.BusinessViewModel.Name,
-                    Type = model.BusinessViewModel.EntityType,
-                    RegistrationNumber =
-                        model.BusinessViewModel.CompaniesHouseRegistrationNumber ??
-                        (model.BusinessViewModel.SoleTraderRegistrationNumber ??
-                         model.BusinessViewModel.PartnershipRegistrationNumber),
-                    AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
-                    NotificationId = model.NotificationId,
-                    Building = model.AddressDetails.Building,
-                    Address1 = model.AddressDetails.Address1,
-                    Address2 = model.AddressDetails.Address2,
-                    City = model.AddressDetails.TownOrCity,
-                    County = model.AddressDetails.County,
-                    PostCode = model.AddressDetails.Postcode,
-                    CountryId = model.AddressDetails.CountryId,
-                    FirstName = model.ContactDetails.FirstName,
-                    LastName = model.ContactDetails.LastName,
-                    Phone = model.ContactDetails.Telephone,
-                    Email = model.ContactDetails.Email,
-                    Fax = model.ContactDetails.Fax
-                });
+                    var response = await client.SendAsync(User.GetAccessToken(), new CreateExporter
+                    {
+                        Name = model.BusinessViewModel.Name,
+                        Type = model.BusinessViewModel.EntityType,
+                        RegistrationNumber =
+                            model.BusinessViewModel.CompaniesHouseRegistrationNumber ??
+                            (model.BusinessViewModel.SoleTraderRegistrationNumber ??
+                             model.BusinessViewModel.PartnershipRegistrationNumber),
+                        AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
+                        NotificationId = model.NotificationId,
+                        Building = model.AddressDetails.Building,
+                        Address1 = model.AddressDetails.Address1,
+                        Address2 = model.AddressDetails.Address2,
+                        City = model.AddressDetails.TownOrCity,
+                        County = model.AddressDetails.County,
+                        PostCode = model.AddressDetails.Postcode,
+                        CountryId = model.AddressDetails.CountryId,
+                        FirstName = model.ContactDetails.FirstName,
+                        LastName = model.ContactDetails.LastName,
+                        Phone = model.ContactDetails.Telephone,
+                        Email = model.ContactDetails.Email,
+                        Fax = model.ContactDetails.Fax
+                    });
 
-                if (response.HasErrors)
-                {
-                    this.AddValidationErrorsToModelState(response);
-                    model.AddressDetails.Countries = await GetCountries(client);
-                    return View(model);
+                    return RedirectToAction("CopyFromExporter", "Producer", new { id = model.NotificationId });
                 }
-            }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
 
-            return RedirectToAction(actionName: "CopyFromExporter", controllerName: "Producer",
-                routeValues: new { id = model.NotificationId });
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                model.AddressDetails.Countries = await GetCountries(client);
+                return View(model);
+            }
         }
 
         public ActionResult _GetUserNotifications()
@@ -242,13 +249,7 @@
                 var response =
                     client.SendAsync(User.GetAccessToken(), new GetNotificationsByUser()).Result;
 
-                if (response.HasErrors)
-                {
-                    ViewBag.Errors = response.Errors;
-                    return PartialView(null);
-                }
-
-                return PartialView(response.Result);
+                return PartialView(response);
             }
         }
     }

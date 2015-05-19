@@ -9,6 +9,7 @@
     using Api.Client.Entities;
     using Infrastructure;
     using Microsoft.Owin.Security;
+    using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Prsd.Core.Web.OAuth;
     using Requests.Organisations;
@@ -18,11 +19,12 @@
     [Authorize]
     public class RegistrationController : Controller
     {
+        private readonly Func<IIwsClient> apiClient;
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
-        private readonly Func<IIwsClient> apiClient;
 
-        public RegistrationController(Func<IOAuthClient> oauthClient, Func<IIwsClient> apiClient, IAuthenticationManager authenticationManager)
+        public RegistrationController(Func<IOAuthClient> oauthClient, Func<IIwsClient> apiClient,
+            IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
             this.apiClient = apiClient;
@@ -55,19 +57,29 @@
                         ConfirmPassword = model.ConfirmPassword
                     };
 
-                    var response = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
-
-                    if (!response.HasErrors)
+                    try
                     {
+                        var response = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
+
                         var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                         authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
                         return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                     }
-                    this.AddValidationErrorsToModelState(response);
+                    catch (ApiBadRequestException ex)
+                    {
+                        this.HandleBadRequest(ex);
+
+                        if (ModelState.IsValid)
+                        {
+                            throw;
+                        }
+                    }
+
                     return View("ApplicantRegistration", model);
                 }
             }
+
             return View("ApplicantRegistration", model);
         }
 
@@ -88,14 +100,10 @@
             {
                 using (var client = apiClient())
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), new FindMatchingOrganisations(organisationName));
+                    var response =
+                        await client.SendAsync(User.GetAccessToken(), new FindMatchingOrganisations(organisationName));
 
-                    if (response.HasErrors)
-                    {
-                        // TODO - error handling
-                    }
-
-                    model.Organisations = response.Result;
+                    model.Organisations = response;
                 }
             }
 
@@ -115,21 +123,27 @@
 
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(selectedGuid));
+                try
+                {
+                    var response =
+                        await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(selectedGuid));
 
-                if (response.HasErrors)
+                    if (response)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                catch (ApiBadRequestException ex)
                 {
-                    // TODO - error handling
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
                 }
 
-                if (response.Result)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
-                }
+                return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
             }
         }
 
@@ -164,16 +178,24 @@
 
             using (var client = apiClient())
             {
-                var response =
-                    await
-                        client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
-
-                if (!response.HasErrors)
+                try
                 {
+                    var response =
+                        await
+                            client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
+
                     return RedirectToAction("Home", "Applicant");
                 }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
 
-                this.AddValidationErrorsToModelState(response);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
                 return View("CreateNewOrganisation", "Registration", model);
             }
         }
@@ -183,14 +205,7 @@
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(new GetCountries());
-
-                if (response.HasErrors)
-                {
-                    // TODO - error handling
-                }
-
-                return response.Result;
+                return await client.SendAsync(new GetCountries());
             }
         }
     }

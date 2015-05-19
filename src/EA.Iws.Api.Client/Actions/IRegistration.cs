@@ -6,6 +6,6 @@
 
     public interface IRegistration
     {
-        Task<ApiResponse<string>> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData);
+        Task<string> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData);
     }
 }

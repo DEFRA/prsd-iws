@@ -2,6 +2,7 @@
 {
     using System;
 
+    [AttributeUsage(AttributeTargets.Class)]
     public class ResourceAuthorizeAttribute : Attribute
     {
         public ResourceAuthorizeAttribute()

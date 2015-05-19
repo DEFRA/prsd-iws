@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
-    using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using Prsd.Core.Domain;
@@ -71,11 +70,6 @@
 
         public void AddProducer(Producer producer)
         {
-            if (ProducersCollection == null)
-            {
-                ProducersCollection = new List<Producer>();
-            }
-
             ProducersCollection.Add(producer);
 
             if (producer.IsSiteOfExport)
@@ -86,11 +80,6 @@
 
         public void AddFacility(Facility facility)
         {
-            if (FacilitiesCollection == null)
-            {
-                FacilitiesCollection = new List<Facility>();
-            }
-
             FacilitiesCollection.Add(facility);
         }
 
@@ -103,7 +92,7 @@
 
         public void RemoveProducer(Producer producer)
         {
-            if (ProducersCollection == null || !ProducersCollection.Contains(producer))
+            if (!ProducersCollection.Contains(producer))
             {
                 throw new InvalidOperationException(String.Format("Unable to remove producer with id {0}", producer.Id));
             }
@@ -113,7 +102,7 @@
 
         private void SetSiteOfExport(Producer producer)
         {
-            if (ProducersCollection == null || !ProducersCollection.Contains(producer))
+            if (!ProducersCollection.Contains(producer))
             {
                 throw new InvalidOperationException(String.Format("Unable to make producer with id {0} the site of export", producer.Id));
             }

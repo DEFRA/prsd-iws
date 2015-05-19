@@ -4,13 +4,13 @@
     using Domain;
     using Mediator;
 
-    public class EventDispatcherCommandHandlerDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public class EventDispatcherRequestHandlerDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly IDeferredEventDispatcher eventDispatcher;
         private readonly IRequestHandler<TRequest, TResponse> inner;
 
-        public EventDispatcherCommandHandlerDecorator(IRequestHandler<TRequest, TResponse> inner,
+        public EventDispatcherRequestHandlerDecorator(IRequestHandler<TRequest, TResponse> inner,
             IDeferredEventDispatcher eventDispatcher)
         {
             this.inner = inner;

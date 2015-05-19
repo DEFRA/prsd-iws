@@ -32,5 +32,10 @@
                 return Guid.Empty;
             }
         }
+
+        public ClaimsPrincipal Principal
+        {
+            get { return HttpContext.Current.User as ClaimsPrincipal; }
+        }
     }
 }

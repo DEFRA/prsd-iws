@@ -4,12 +4,12 @@
     using System.Transactions;
     using Mediator;
 
-    public class TransactionCommandHandlerDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public class TransactionRequestHandlerDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly IRequestHandler<TRequest, TResponse> inner;
 
-        public TransactionCommandHandlerDecorator(IRequestHandler<TRequest, TResponse> inner)
+        public TransactionRequestHandlerDecorator(IRequestHandler<TRequest, TResponse> inner)
         {
             this.inner = inner;
         }

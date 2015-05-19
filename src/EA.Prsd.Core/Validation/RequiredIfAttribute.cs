@@ -1,4 +1,4 @@
-﻿namespace EA.Prsd.Core.Web
+﻿namespace EA.Prsd.Core.Validation
 {
     using System;
     using System.ComponentModel.DataAnnotations;
