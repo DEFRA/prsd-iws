@@ -181,8 +181,21 @@ ALTER TABLE [Identity].[AspNetUserRoles] WITH CHECK CHECK CONSTRAINT [FK_User.As
 
 ALTER TABLE [Identity].[AspNetUserRoles] WITH CHECK CHECK CONSTRAINT [FK_User.AspNetUserRoles_User.AspNetRoles_RoleId];
 
+GO
+PRINT N'Creating [dbo].[__MigrationHistory]...';
+
+
+GO
+CREATE TABLE [dbo].[__MigrationHistory] (
+    [MigrationId]    NVARCHAR (150)  NOT NULL,
+    [ContextKey]     NVARCHAR (300)  NOT NULL,
+    [Model]          VARBINARY (MAX) NOT NULL,
+    [ProductVersion] NVARCHAR (32)   NOT NULL,
+    CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED ([MigrationId] ASC, [ContextKey] ASC)
+);
+
+GO
+
 
 GO
 PRINT N'Update complete.';
-
-GO
