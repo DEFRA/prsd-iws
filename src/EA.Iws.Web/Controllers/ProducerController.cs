@@ -119,14 +119,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MultipleProducers(Guid notificationId, string errorMessage = "")
+        public async Task<ActionResult> MultipleProducers(Guid notificationId)
         {
             var model = new MultipleProducersViewModel();
-
-            if (!String.IsNullOrEmpty(errorMessage))
-            {
-                ModelState.AddModelError(string.Empty, errorMessage);
-            }
 
             using (var client = apiClient())
             {
@@ -142,42 +137,6 @@
                 model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
             }
             return View("MultipleProducers", model);
-        }
-
-        [HttpGet]
-        public ActionResult ShowConfirmDelete(Guid producerId, Guid notificationId, bool isSiteOfExport)
-        {
-            var model = new ProducerData
-            {
-                Id = producerId,
-                NotificationId = notificationId,
-                IsSiteOfExport = isSiteOfExport
-            };
-
-            if (Request.IsAjaxRequest())
-            {
-                return PartialView("ConfirmDeleteProducer", model);
-            }
-            return View("ConfirmDeleteProducer", model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> DeleteProducer(ProducerData model)
-        {
-            if (model.IsSiteOfExport)
-            {
-                return RedirectToAction("MultipleProducers", "Producer",
-                    new
-                    {
-                        notificationId = model.NotificationId,
-                        errorMessage = "Please make another producer the site of export before you delete this producer"
-                    });
-            }
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new DeleteProducer(model.Id, model.NotificationId));
-            }
-            return RedirectToAction("MultipleProducers", "Producer", new { notificationId = model.NotificationId });
         }
 
         private async Task BindCountrySelectList()
