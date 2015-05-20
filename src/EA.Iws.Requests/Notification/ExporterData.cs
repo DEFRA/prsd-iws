@@ -6,15 +6,15 @@
 
     public class ExporterData
     {
-        [Display(Name = "Company Name")]
+        [Display(Name = "Company name")]
         public string Name { get; set; }
 
         public string Type { get; set; }
 
-        [Display(Name = "Registration Number")]
+        [Display(Name = "Registration number")]
         public string RegistrationNumber { get; set; }
 
-        [Display(Name = "Additional Registration Number")]
+        [Display(Name = "Additional registration number")]
         public string AdditionalRegistrationNumber { get; set; }
 
         public AddressData Address { get; set; }

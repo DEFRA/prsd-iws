@@ -21,8 +21,8 @@
         [Display(Name = "Organisation name")]
         public string Name { get; set; }
 
-        [RequiredIf("EntityType", "Limited Company", "Companies house number is required")]
-        [Display(Name = "Companies house number")]
+        [RequiredIf("EntityType", "Limited Company", "Companies House number is required")]
+        [Display(Name = "Companies House number")]
         public string CompaniesHouseReference { get; set; }
 
         [Required]
@@ -48,7 +48,7 @@
         public Guid CountryId { get; set; }
 
         [Required]
-        [Display(Name = "Organisation Type")]
+        [Display(Name = "Organisation type")]
         public string EntityType { get; set; }
 
         public CountryData DefaultCountry

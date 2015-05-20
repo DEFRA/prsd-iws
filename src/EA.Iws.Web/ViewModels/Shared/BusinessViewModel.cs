@@ -6,26 +6,26 @@
     public class BusinessViewModel
     {
         [Required]
-        [Display(Name = "Organisation Name")]
+        [Display(Name = "Organisation name")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Organisation Type")]
+        [Display(Name = "Organisation type")]
         public string EntityType { get; set; }
 
-        [RequiredIf("EntityType", "Limited Company", "Companies house number is required")]
-        [Display(Name = "Companies House Number")]
+        [RequiredIf("EntityType", "Limited Company", "Companies House number is required")]
+        [Display(Name = "Companies House number")]
         public string CompaniesHouseRegistrationNumber { get; set; }
 
-        [RequiredIf("EntityType", "Sole Trader", "Sole Trader registration number is required")]
-        [Display(Name = "Registration Number")]
+        [RequiredIf("EntityType", "Sole Trader", "Sole trader registration number is required")]
+        [Display(Name = "Registration number")]
         public string SoleTraderRegistrationNumber { get; set; }
 
         [RequiredIf("EntityType", "Partnership", "Partnership registration number is required")]
-        [Display(Name = "Registration Number")]
+        [Display(Name = "Registration number")]
         public string PartnershipRegistrationNumber { get; set; }
 
-        [Display(Name = "Additional Registration Number")]
+        [Display(Name = "Additional registration number")]
         public string AdditionalRegistrationNumber { get; set; }
     }
 }

@@ -5,24 +5,24 @@
     public class ContactData
     {
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "First name")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Telephone Number")]
+        [Display(Name = "Telephone number")]
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
 
-        [Display(Name = "Fax")]
+        [Display(Name = "Fax number")]
         public string Fax { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email Address")]
+        [Display(Name = "Email address")]
         public string Email { get; set; }
     }
 }
