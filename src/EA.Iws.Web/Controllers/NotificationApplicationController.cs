@@ -128,7 +128,8 @@
         [HttpPost]
         public ActionResult Created(CreatedViewModel model)
         {
-            return RedirectToAction("ExporterNotifier", "NotificationApplication", new { id = model.NotificationId });
+            return RedirectToAction(actionName: "DownloadInstructions", controllerName: "NotificationApplication",
+                routeValues: new { id = model.NotificationId });
         }
 
         [HttpGet]
@@ -250,6 +251,48 @@
                     client.SendAsync(User.GetAccessToken(), new GetNotificationsByUser()).Result;
 
                 return PartialView(response);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> DownloadInstructions(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var response = await client.SendAsync(User.GetAccessToken(), new GetCompetentAuthorityByNotificationId(id));
+
+                var model = new CompetentAuthorityData
+                {
+                    CompetentAuthority = response.Result.CompetentAuthority,
+                    NotificationId = id,
+                    NotificationNumber = response.Result.NotificationNumber
+                };
+
+                var name = string.Empty;
+
+                if (response.Result.CompetentAuthority == 1)
+                {
+                    name = "the Environment Agency (England)";
+                }
+
+                if (response.Result.CompetentAuthority == 2)
+                {
+                    name = "the Scottish Environment Protection Agency";
+                }
+
+                if (response.Result.CompetentAuthority == 3)
+                {
+                    name = "the Northern Ireland Environment Agency";
+                }
+
+                if (response.Result.CompetentAuthority == 4)
+                {
+                    name = "Natural Resources Wales";
+                }
+
+                model.CompetentAuthorityName = name;
+
+                return View(model);
             }
         }
     }

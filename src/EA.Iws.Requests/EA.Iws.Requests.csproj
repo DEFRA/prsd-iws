@@ -47,6 +47,8 @@
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />
     <Compile Include="Facilities\NotificationTypeById.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
+    <Compile Include="Notification\CompetentAuthorityData.cs" />
+    <Compile Include="Notification\GetCompetentAuthorityByNotificationId.cs" />
     <Compile Include="Shared\BusinessData.cs" />
     <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Notification\CreateExporter.cs" />

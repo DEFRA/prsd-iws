@@ -478,6 +478,7 @@
     <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
     <Content Include="Views\Producer\CopyFromExporter.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BusinessData.cshtml" />
+    <Content Include="Views\NotificationApplication\DownloadInstructions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
