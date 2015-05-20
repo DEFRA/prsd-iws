@@ -7,7 +7,7 @@
 @using (Html.BeginForm("NotificationTypeQuestion", "NotificationApplication", FormMethod.Post))
 {
     <header class="hgroup">
-        <h1 class="heading-medium">What type of waste shipment notification are you applying for?</h1>
+        <h2 class="heading-large">What type of waste shipment notification are you applying for?</h2>
     </header>
     <div class="text-danger">@Html.Gds().ValidationSummary()</div>
     if (Model != null)
