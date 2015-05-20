@@ -5,9 +5,9 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
+    using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Facilities;
-    using Requests.Shared;
 
     public class AddFacilityToNotificationHandler : IRequestHandler<AddFacilityToNotification, Guid>
     {
@@ -29,11 +29,11 @@
 
             var country = await context.Countries.SingleAsync(c => c.Id == message.Facility.Address.CountryId);
 
-            var address = CreateAddress(message.Facility.Address, country.Name);
+            var address = ValueObjectInitializer.CreateAddress(message.Facility.Address, country.Name);
 
-            var contact = CreateContact(message.Facility.Contact);
+            var contact = ValueObjectInitializer.CreateContact(message.Facility.Contact);
 
-            var business = CreateBusiness(message.Facility.Business);
+            var business = ValueObjectInitializer.CreateBusiness(message.Facility.Business);
 
             var facility = new Facility(business, address, contact, country, message.Facility.IsActualSiteOfTreatment);
 
@@ -44,25 +44,5 @@
             return facility.Id;
         }
 
-        private Business CreateBusiness(BusinessData business)
-        {
-            return new Business(business.Name, business.EntityType, business.RegistrationNumber, business.AdditionalRegistrationNumber);
-        }
-
-        private Contact CreateContact(ContactData contact)
-        {
-            return new Contact(contact.FirstName, contact.LastName, contact.Telephone, contact.Email, contact.Fax);
-        }
-
-        private Address CreateAddress(AddressData address, string countryName)
-        {
-            return new Address(address.Building, 
-                address.StreetOrSuburb, 
-                address.Address2, 
-                address.TownOrCity,
-                address.Region,
-                address.PostalCode,
-                address.CountryName ?? countryName);
-        }
     }
 }

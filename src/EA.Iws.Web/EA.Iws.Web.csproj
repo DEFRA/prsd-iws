@@ -195,6 +195,10 @@
       <HintPath>..\packages\Thinktecture.IdentityModel.Client.4.0.1\lib\net45\Thinktecture.IdentityModel.Client.Net45.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Thinktecture.IdentityModel.Owin.ClaimsTransformation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Thinktecture.IdentityModel.Owin.ClaimsTransformation.1.0.1\lib\net45\Thinktecture.IdentityModel.Owin.ClaimsTransformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -460,10 +464,7 @@
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\NotificationApplication\_GetUserNotifications.cshtml" />
     <Content Include="Views\Producer\Add.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ContactPerson.cshtml" />
-    <Content Include="Views\NotificationApplication\ExporterNotifier.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\AddressViewModel.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ContactPersonViewModel.cshtml" />
+    <Content Include="Views\Exporter\Add.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BusinessViewModel.cshtml" />
     <Content Include="Views\Importer\Add.cshtml" />
     <Content Include="Views\Producer\MultipleProducers.cshtml" />
@@ -473,7 +474,6 @@
     <Content Include="Views\Facility\MultipleFacilities.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
     <Content Include="Views\Producer\CopyFromExporter.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\BusinessData.cshtml" />
     <Content Include="Views\NotificationApplication\DownloadInstructions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -501,10 +501,12 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ExporterController.cs" />
     <Compile Include="Controllers\ImporterController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\ProducerController.cs" />
     <Compile Include="Infrastructure\OrganisationRequiredAttribute.cs" />
+    <Compile Include="Infrastructure\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
@@ -521,12 +523,14 @@
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Exporter\ExporterViewModel.cs" />
+    <Compile Include="ViewModels\Facility\FacilityViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\ImporterViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\MultipleFacilitiesViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\MultipleProducersViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\ExporterNotifier.cs" />
+    <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
+    <Compile Include="ViewModels\Producer\MultipleProducersViewModel.cs" />
+    <Compile Include="ViewModels\Producer\ProducerViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
@@ -536,9 +540,6 @@
     <Compile Include="ViewModels\Shared\RadioButtonCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBaseViewModel.cs" />
-    <Compile Include="ViewModels\Shared\AddressViewModel.cs" />
-    <Compile Include="ViewModels\Shared\ContactPerson.cs" />
-    <Compile Include="ViewModels\Shared\ContactPersonViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptionalViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />

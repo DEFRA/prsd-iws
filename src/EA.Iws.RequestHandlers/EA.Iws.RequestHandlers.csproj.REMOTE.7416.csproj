@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
-    <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
     <Compile Include="Producers\DeleteProducerHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />

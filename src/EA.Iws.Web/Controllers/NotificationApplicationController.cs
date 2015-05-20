@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -11,12 +10,11 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
-    using Requests.Registration;
     using Requests.Shared;
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Constants = Prsd.Core.Web.Constants;
-
+    
     [Authorize]
     public class NotificationApplicationController : Controller
     {
@@ -149,95 +147,20 @@
                 catch (ApiBadRequestException ex)
                 {
                     this.HandleBadRequest(ex);
-
                     if (ModelState.IsValid)
                     {
                         throw;
                     }
-                }
-
                 return HttpNotFound();
             }
-        }
-
-        private async Task<IEnumerable<CountryData>> GetCountries()
-        {
-            using (var client = apiClient())
-            {
-                return await client.SendAsync(new GetCountries());
-            }
-        }
-
-        private async Task<IEnumerable<CountryData>> GetCountries(IIwsClient iwsClient)
         {
             return await iwsClient.SendAsync(new GetCountries());
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> ExporterNotifier(Guid id)
-        {
-            var model = new ExporterNotifier();
-            var address = new AddressViewModel { Countries = await GetCountries() };
-            var business = new BusinessViewModel();
-
-            model.NotificationId = id;
-            model.AddressDetails = address;
-            model.BusinessViewModel = business;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> ExporterNotifier(ExporterNotifier model)
-        {
-            if (!ModelState.IsValid)
-            {
-                model.AddressDetails.Countries = await GetCountries();
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                try
                 {
                     var response = await client.SendAsync(User.GetAccessToken(), new CreateExporter
-                    {
-                        Name = model.BusinessViewModel.Name,
-                        Type = model.BusinessViewModel.EntityType,
-                        RegistrationNumber =
-                            model.BusinessViewModel.CompaniesHouseRegistrationNumber ??
-                            (model.BusinessViewModel.SoleTraderRegistrationNumber ??
-                             model.BusinessViewModel.PartnershipRegistrationNumber),
-                        AdditionalRegistrationNumber = model.BusinessViewModel.AdditionalRegistrationNumber,
-                        NotificationId = model.NotificationId,
-                        Building = model.AddressDetails.Building,
-                        Address1 = model.AddressDetails.Address1,
-                        Address2 = model.AddressDetails.Address2,
-                        City = model.AddressDetails.TownOrCity,
-                        County = model.AddressDetails.County,
-                        PostCode = model.AddressDetails.Postcode,
-                        CountryId = model.AddressDetails.CountryId,
-                        FirstName = model.ContactDetails.FirstName,
-                        LastName = model.ContactDetails.LastName,
-                        Phone = model.ContactDetails.Telephone,
-                        Email = model.ContactDetails.Email,
-                        Fax = model.ContactDetails.Fax
-                    });
-
-                    return RedirectToAction("CopyFromExporter", "Producer", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
                     {
                         throw;
-                    }
-                }
-
-                model.AddressDetails.Countries = await GetCountries(client);
-                return View(model);
             }
         }
 

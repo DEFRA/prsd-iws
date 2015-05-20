@@ -62,8 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
+<<<<<<< HEAD
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
+=======
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
+>>>>>>> Refactored all add 'exporter/importer/producer/facility' actions
     <Compile Include="Producers\DeleteProducerHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
     <Compile Include="Exporters\GetExporterByNotificationIdHandler.cs" />

@@ -1,8 +1,7 @@
-﻿namespace EA.Iws.Web.ViewModels.NotificationApplication
+﻿namespace EA.Iws.Web.ViewModels.Producer
 {
     using System;
     using System.Collections.Generic;
-    using Requests.Notification;
     using Requests.Producers;
 
     public class MultipleProducersViewModel

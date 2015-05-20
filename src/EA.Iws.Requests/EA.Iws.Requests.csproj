@@ -42,23 +42,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClaimTypes.cs" />
+    <Compile Include="Exporters\AddExporterToNotification.cs" />
     <Compile Include="Facilities\AddFacilityToNotification.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />
     <Compile Include="Facilities\NotificationTypeById.cs" />
+    <Compile Include="Importer\AddImporterToNotification.cs" />
+    <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\CompetentAuthorityData.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
     <Compile Include="Shared\BusinessData.cs" />
     <Compile Include="Shared\ContactData.cs" />
-    <Compile Include="Notification\CreateExporter.cs" />
-    <Compile Include="Notification\CreateImporter.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
     <Compile Include="Producers\AddProducerToNotification.cs" />
     <Compile Include="Producers\DeleteProducer.cs" />
-    <Compile Include="Notification\ExporterData.cs" />
+    <Compile Include="Exporters\ExporterData.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
-    <Compile Include="Notification\GetExporterByNotificationId.cs" />
+    <Compile Include="Exporters\GetExporterByNotificationId.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationsByUser.cs" />
     <Compile Include="Producers\GetProducersByNotificationId.cs" />

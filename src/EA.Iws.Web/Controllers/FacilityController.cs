@@ -11,7 +11,7 @@
     using Requests.Facilities;
     using Requests.Registration;
     using Requests.Shared;
-    using ViewModels.NotificationApplication;
+    using ViewModels.Facility;
 
     [Authorize]
     public class FacilityController : Controller
@@ -30,12 +30,12 @@
 
             using (var client = apiClient())
             {
-                await BindCountrySelectList(client);
+                await this.BindCountryList(client);
 
                 notificationType = await client.SendAsync(new NotificationTypeByNotificationId(id));
             }
 
-            var facility = new FacilityData
+            var facility = new FacilityViewModel
             {
                 NotificationId = id,
                 NotificationType = notificationType
@@ -45,13 +45,23 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(FacilityData model)
+        public async Task<ActionResult> Add(FacilityViewModel model)
         {
             try
             {
                 using (var client = apiClient())
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), new AddFacilityToNotification(model));
+                var facility = new FacilityData
+                {
+                    NotificationType = model.NotificationType,
+                    NotificationId = model.NotificationId,
+                    IsActualSiteOfTreatment = model.IsActualSiteOfTreatment,
+                    Address = model.Address,
+                    Contact = model.Contact,
+                    Business = (BusinessData)model.Business
+                };
+
+                var response = await client.SendAsync(User.GetAccessToken(), new AddFacilityToNotification(facility));
 
                     return RedirectToAction("MultipleFacilities", "Facility",
                         new { notificationID = model.NotificationId });
@@ -60,13 +70,10 @@
             catch (ApiBadRequestException ex)
             {
                 this.HandleBadRequest(ex);
-
                 if (ModelState.IsValid)
                 {
                     throw;
                 }
-            }
-
             return View(model);
         }
 

@@ -6,9 +6,9 @@
     using DataAccess;
     using Domain;
     using Domain.Notification;
+    using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Producers;
-    using Requests.Shared;
 
     internal class AddProducerToNotificationHandler : IRequestHandler<AddProducerToNotification, Guid>
     {
@@ -23,11 +23,11 @@
         {
             var country = await context.Countries.SingleAsync(c => c.Id == command.ProducerData.Address.CountryId);
 
-            var address = CreateAddress(command.ProducerData.Address, country.Name);
+            var address = ValueObjectInitializer.CreateAddress(command.ProducerData.Address, country.Name);
 
-            var contact = CreateContact(command.ProducerData.Contact);
+            var contact = ValueObjectInitializer.CreateContact(command.ProducerData.Contact);
 
-            var business = CreateBusiness(command.ProducerData.Business);
+            var business = ValueObjectInitializer.CreateBusiness(command.ProducerData.Business);
 
             var producer = new Producer(business,
                 address,
@@ -42,25 +42,5 @@
             return producer.Id;
         }
 
-        private Business CreateBusiness(BusinessData business)
-        {
-            return new Business(business.Name, business.EntityType, business.RegistrationNumber, business.AdditionalRegistrationNumber);
-        }
-
-        private Contact CreateContact(ContactData contact)
-        {
-            return new Contact(contact.FirstName, contact.LastName, contact.Telephone, contact.Email, contact.Fax);
-        }
-
-        private Address CreateAddress(AddressData address, string countryName)
-        {
-            return new Address(address.Building,
-                address.StreetOrSuburb,
-                address.Address2,
-                address.TownOrCity,
-                address.Region,
-                address.PostalCode,
-                address.CountryName ?? countryName);
-        }
     }
 }

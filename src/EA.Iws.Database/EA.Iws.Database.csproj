@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\Update\Sprint7\20150515-145639-Add-Facility-Rename-Waste-Action.sql" />
+    <Content Include="scripts\Update\Sprint7\20150520-164530-Move-Table-Schemas.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

@@ -8,11 +8,11 @@
     using Infrastructure;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
-    using Requests.Notification;
+    using Requests.Exporters;
     using Requests.Producers;
     using Requests.Registration;
     using Requests.Shared;
-    using ViewModels.NotificationApplication;
+    using ViewModels.Producer;
     using ViewModels.Shared;
 
     [Authorize]
@@ -37,10 +37,6 @@
         [HttpPost]
         public ActionResult CopyFromExporter(Guid id, YesNoChoiceViewModel inputModel)
         {
-            var model = new ExporterNotifier();
-
-            model.NotificationId = id;
-
             if (!ModelState.IsValid)
             {
                 ViewBag.NotificationId = id;
@@ -49,7 +45,7 @@
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id, copy = false });
+                return RedirectToAction("Add", new { id = id });
             }
 
             return RedirectToAction("Add", new { id, copy = true });
@@ -58,10 +54,11 @@
         [HttpGet]
         public async Task<ActionResult> Add(Guid id, bool? copy)
         {
-            var model = new ProducerData
+            var model = new ProducerViewModel
             {
                 Address = new AddressData(),
-                Business = new BusinessData()
+                Contact = new ContactData(),
+                Business = new BusinessViewModel()
             };
 
             if (copy.HasValue && copy.Value)
@@ -72,30 +69,24 @@
 
                     model.Address = exporter.Address;
                     model.Contact = exporter.Contact;
-                    model.Business = new BusinessData
-                    {
-                        Name = exporter.Name,
-                        EntityType = exporter.Type,
-                        AdditionalRegistrationNumber = exporter.AdditionalRegistrationNumber
-                    };
-                    model.Business.BindRegistrationNumber(exporter.RegistrationNumber);
+                    model.Business = (BusinessViewModel)exporter.Business;
                 }
             }
 
             model.NotificationId = id;
 
-            await BindCountrySelectList();
+            await this.BindCountryList(apiClient);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(ProducerData model)
+        public async Task<ActionResult> Add(ProducerViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                await BindCountrySelectList();
+                await this.BindCountryList(apiClient);
                 return View(model);
             }
 
@@ -103,7 +94,14 @@
             {
                 try
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), new AddProducerToNotification(model));
+                    NotificationId = model.NotificationId,
+                    Address = model.Address,
+                    Business = (BusinessData)model.Business,
+                    Contact = model.Contact,
+                    IsSiteOfExport = model.IsSiteOfExport
+                };
+
+                var response = await client.SendAsync(User.GetAccessToken(), new AddProducerToNotification(producer));
 
                     return RedirectToAction("MultipleProducers", "Producer",
                         new { notificationId = model.NotificationId });
@@ -154,20 +152,50 @@
             }
         }
 
-        private async Task BindCountrySelectList()
+        [HttpPost]
+        public ActionResult MultipleProducers(MultipleProducersViewModel model)
         {
-            using (var client = apiClient())
+            if (!model.HasSiteOfExport)
             {
-                await BindCountrySelectList(client);
+                return RedirectToAction("MultipleProducers", "Producer",
+                    new
+                    {
+                        notificationId = model.NotificationId,
+                        errorMessage = "Please select a site of export"
+                    });
             }
+            return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
         }
 
-        private async Task BindCountrySelectList(IIwsClient client)
+        [HttpGet]
+        public ActionResult ShowConfirmDelete(Guid producerId, Guid notificationId, bool isSiteOfExport)
         {
-            var response = await client.SendAsync(new GetCountries());
+            var model = new ProducerData
+            {
+                Id = producerId,
+                NotificationId = notificationId,
+                IsSiteOfExport = isSiteOfExport
+            };
 
             ViewBag.Countries = new SelectList(response, "Id", "Name",
                 response.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
+            }
+            return View("ConfirmDeleteProducer", model);
+        {
+            if (model.IsSiteOfExport)
+            {
+                return RedirectToAction("MultipleProducers", "Producer",
+                    new
+                    {
+                        notificationId = model.NotificationId,
+                        errorMessage = "Please make another producer the site of export before you delete this producer"
+                    });
+            }
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), new DeleteProducer(model.Id, model.NotificationId));
+            }
+            return RedirectToAction("MultipleProducers", "Producer", new { notificationId = model.NotificationId });
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.ViewModels.NotificationApplication
+﻿namespace EA.Iws.Web.ViewModels.Facility
 {
     using System;
     using System.Collections.Generic;

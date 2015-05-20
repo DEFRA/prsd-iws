@@ -18,7 +18,7 @@
                 m.MapLeftKey("NotificationId");
                 m.MapRightKey("ProducerId");
                 m.ToTable("NotificationProducer",
-                    "Business");
+                    "Notification");
             });
 
             HasMany(ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<Facility>>("FacilitiesCollection")).WithMany().Map(m =>
