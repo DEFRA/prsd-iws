@@ -192,8 +192,9 @@
                     {
                         throw;
                     }
-                    return View(model);
                 }
+                model.Countries = await GetCountries();
+                return View(model);
             }
         }
 
