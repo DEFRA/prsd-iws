@@ -43,6 +43,5 @@
 
             return facility.Id;
         }
-
     }
 }

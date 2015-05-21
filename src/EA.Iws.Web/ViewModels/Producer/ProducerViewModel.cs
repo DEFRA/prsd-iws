@@ -20,20 +20,11 @@
 
         public ProducerViewModel()
         {
-            if (Address == null)
-            {
-                Address = new AddressData();
-            }
+            Address = new AddressData();
 
-            if (Contact == null)
-            {
-                Contact = new ContactData();
-            }
+            Contact = new ContactData();
 
-            if (Business == null)
-            {
-                Business = new BusinessViewModel();
-            }
+            Business = new BusinessViewModel();
         }
     }
 }

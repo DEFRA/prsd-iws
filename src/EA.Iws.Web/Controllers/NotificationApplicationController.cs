@@ -151,16 +151,8 @@
                     {
                         throw;
                     }
-                return HttpNotFound();
-            }
-        {
-            return await iwsClient.SendAsync(new GetCountries());
-                {
-                    var response = await client.SendAsync(User.GetAccessToken(), new CreateExporter
+                    return HttpNotFound();
                 }
-                catch (ApiBadRequestException ex)
-                    {
-                        throw;
             }
         }
 

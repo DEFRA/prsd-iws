@@ -10,7 +10,6 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Exporters;
     using Requests.Producers;
-    using Requests.Registration;
     using Requests.Shared;
     using ViewModels.Producer;
     using ViewModels.Shared;
@@ -45,7 +44,7 @@
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id = id });
+                return RedirectToAction("Add", new { id });
             }
 
             return RedirectToAction("Add", new { id, copy = true });
@@ -54,12 +53,7 @@
         [HttpGet]
         public async Task<ActionResult> Add(Guid id, bool? copy)
         {
-            var model = new ProducerViewModel
-            {
-                Address = new AddressData(),
-                Contact = new ContactData(),
-                Business = new BusinessViewModel()
-            };
+            var model = new ProducerViewModel();
 
             if (copy.HasValue && copy.Value)
             {
@@ -94,14 +88,17 @@
             {
                 try
                 {
-                    NotificationId = model.NotificationId,
-                    Address = model.Address,
-                    Business = (BusinessData)model.Business,
-                    Contact = model.Contact,
-                    IsSiteOfExport = model.IsSiteOfExport
-                };
+                    var producer = new ProducerData
+                    {
+                        NotificationId = model.NotificationId,
+                        Address = model.Address,
+                        Business = (BusinessData)model.Business,
+                        Contact = model.Contact,
+                        IsSiteOfExport = model.IsSiteOfExport
+                    };
 
-                var response = await client.SendAsync(User.GetAccessToken(), new AddProducerToNotification(producer));
+                    var response =
+                        await client.SendAsync(User.GetAccessToken(), new AddProducerToNotification(producer));
 
                     return RedirectToAction("MultipleProducers", "Producer",
                         new { notificationId = model.NotificationId });
@@ -115,8 +112,7 @@
                         throw;
                     }
                 }
-
-                await BindCountrySelectList(client);
+                await this.BindCountryList(client);
                 return View(model);
             }
         }
@@ -150,52 +146,6 @@
 
                 return View(model);
             }
-        }
-
-        [HttpPost]
-        public ActionResult MultipleProducers(MultipleProducersViewModel model)
-        {
-            if (!model.HasSiteOfExport)
-            {
-                return RedirectToAction("MultipleProducers", "Producer",
-                    new
-                    {
-                        notificationId = model.NotificationId,
-                        errorMessage = "Please select a site of export"
-                    });
-            }
-            return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
-        }
-
-        [HttpGet]
-        public ActionResult ShowConfirmDelete(Guid producerId, Guid notificationId, bool isSiteOfExport)
-        {
-            var model = new ProducerData
-            {
-                Id = producerId,
-                NotificationId = notificationId,
-                IsSiteOfExport = isSiteOfExport
-            };
-
-            ViewBag.Countries = new SelectList(response, "Id", "Name",
-                response.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
-            }
-            return View("ConfirmDeleteProducer", model);
-        {
-            if (model.IsSiteOfExport)
-            {
-                return RedirectToAction("MultipleProducers", "Producer",
-                    new
-                    {
-                        notificationId = model.NotificationId,
-                        errorMessage = "Please make another producer the site of export before you delete this producer"
-                    });
-            }
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new DeleteProducer(model.Id, model.NotificationId));
-            }
-            return RedirectToAction("MultipleProducers", "Producer", new { notificationId = model.NotificationId });
         }
     }
 }

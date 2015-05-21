@@ -32,7 +32,7 @@
             {
                 await this.BindCountryList(client);
 
-                notificationType = await client.SendAsync(new NotificationTypeByNotificationId(id));
+                notificationType = await client.SendAsync(User.GetAccessToken(), new NotificationTypeByNotificationId(id));
             }
 
             var facility = new FacilityViewModel
@@ -47,34 +47,37 @@
         [HttpPost]
         public async Task<ActionResult> Add(FacilityViewModel model)
         {
-            try
-            {
-                using (var client = apiClient())
-                {
-                var facility = new FacilityData
-                {
-                    NotificationType = model.NotificationType,
-                    NotificationId = model.NotificationId,
-                    IsActualSiteOfTreatment = model.IsActualSiteOfTreatment,
-                    Address = model.Address,
-                    Contact = model.Contact,
-                    Business = (BusinessData)model.Business
-                };
+            var facility = new FacilityData
+                    {
+                        NotificationType = model.NotificationType,
+                        NotificationId = model.NotificationId,
+                        IsActualSiteOfTreatment = model.IsActualSiteOfTreatment,
+                        Address = model.Address,
+                        Contact = model.Contact,
+                        Business = (BusinessData)model.Business
+                    };
 
-                var response = await client.SendAsync(User.GetAccessToken(), new AddFacilityToNotification(facility));
+            using (var client = apiClient())
+            {
+                try
+                {
+                    var response =
+                        await client.SendAsync(User.GetAccessToken(), new AddFacilityToNotification(facility));
 
                     return RedirectToAction("MultipleFacilities", "Facility",
                         new { notificationID = model.NotificationId });
                 }
-            }
-            catch (ApiBadRequestException ex)
-            {
-                this.HandleBadRequest(ex);
-                if (ModelState.IsValid)
+                catch (ApiBadRequestException ex)
                 {
-                    throw;
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
                 }
-            return View(model);
+                await this.BindCountryList(client);
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -103,14 +106,6 @@
         public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
         {
             return RedirectToAction("Index", "Home");
-        }
-
-        private async Task BindCountrySelectList(IIwsClient client)
-        {
-            var response = await client.SendAsync(new GetCountries());
-
-            ViewBag.Countries = new SelectList(response, "Id", "Name",
-                response.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
         }
     }
 }

@@ -21,8 +21,8 @@
         {
             var response = await client.SendAsync(new GetCountries());
 
-            controller.ViewBag.Countries = new SelectList(response.Result, "Id", "Name",
-                response.Result.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
+            controller.ViewBag.Countries = new SelectList(response, "Id", "Name",
+                response.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id);
         }
     }
 }

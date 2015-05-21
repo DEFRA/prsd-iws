@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -9,7 +8,6 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Importer;
-    using Requests.Registration;
     using Requests.Shared;
     using ViewModels.Importer;
 
@@ -42,21 +40,19 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            var importer = new ImporterData
             {
-                var importer = new ImporterData
-                {
-                    NotificationId = model.NotificationId,
-                    Address = model.Address,
-                    Business = (BusinessData)model.Business,
-                    Contact = model.Contact
-                };
+                NotificationId = model.NotificationId,
+                Address = model.Address,
+                Business = (BusinessData)model.Business,
+                Contact = model.Contact
+            };
 
             using (var client = apiClient())
             {
                 try
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), importerData);
+                    var response = await client.SendAsync(User.GetAccessToken(), new AddImporterToNotification(importer));
 
                     return RedirectToAction("Add", "Facility", new { id = model.NotificationId });
                 }
@@ -69,8 +65,7 @@
                         throw;
                     }
                 }
-
-                model.AddressDetails.Countries = await GetCountries(client);
+                await this.BindCountryList(client);
                 return View(model);
             }
         }
