@@ -268,8 +268,6 @@
                     NotificationNumber = response.NotificationNumber
                 };
 
-                var name = string.Empty;
-
                 switch (response.CompetentAuthority)
                 {
                     case Requests.Notification.CompetentAuthority.England:
@@ -285,6 +283,12 @@
                         model.CompetentAuthorityName = "Natural Resources Wales";
                         break;
                     default:
-                        throw new InvalidOperationException(string.Format("Unknown competent authority: {0}", response.CompetentAuthority));
+                        throw new InvalidOperationException(string.Format("Unknown competent authority: {0}",
+                            response.CompetentAuthority));
+                }
+
+                return View(model);
+            }
+        }
     }
 }
