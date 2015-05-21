@@ -195,7 +195,36 @@ CREATE TABLE [dbo].[__MigrationHistory] (
 );
 
 GO
+PRINT N'Creating [Identity].[Consents]...';
 
 
 GO
+CREATE TABLE [Identity].[Consents] (
+    [Subject]  NVARCHAR (200)  NOT NULL,
+    [ClientId] NVARCHAR (200)  NOT NULL,
+    [Scopes]   NVARCHAR (2000) NOT NULL,
+    CONSTRAINT [PK_Identity.Consents] PRIMARY KEY CLUSTERED ([Subject] ASC, [ClientId] ASC)
+);
+
+
+GO
+PRINT N'Creating [Identity].[Tokens]...';
+
+
+GO
+CREATE TABLE [Identity].[Tokens] (
+    [Key]       NVARCHAR (128)     NOT NULL,
+    [TokenType] SMALLINT           NOT NULL,
+    [SubjectId] NVARCHAR (200)     NULL,
+    [ClientId]  NVARCHAR (200)     NOT NULL,
+    [JsonCode]  NVARCHAR (MAX)     NOT NULL,
+    [Expiry]    DATETIMEOFFSET (7) NOT NULL,
+    CONSTRAINT [PK_Identity.Tokens] PRIMARY KEY CLUSTERED ([Key] ASC, [TokenType] ASC)
+);
+
+
+GO
+
+
 PRINT N'Update complete.';
+GO
