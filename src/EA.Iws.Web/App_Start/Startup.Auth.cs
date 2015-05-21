@@ -12,6 +12,7 @@
     using Prsd.Core.Web.OAuth;
     using Services;
     using Thinktecture.IdentityModel.Client;
+    using ClaimTypes = Prsd.Core.Web.ClaimTypes;
 
     public partial class Startup
     {
@@ -27,8 +28,6 @@
                     OnValidateIdentity = context => OnValidateIdentity(context, config)
                 }
             });
-
-            app.UseClaimsTransformation(incoming => TransformClaims(incoming, config));
         }
 
         private static async Task OnValidateIdentity(CookieValidateIdentityContext context, AppConfiguration config)
@@ -38,7 +37,19 @@
                 return;
             }
 
-            var expiresAt = context.Identity.FindFirst(Prsd.Core.Web.ClaimTypes.ExpiresAt);
+            await UpdateAccessToken(context, config);
+
+            var id = await TransformClaims(context, config);
+
+            if (id != null)
+            {
+                context.ReplaceIdentity(id);
+            }
+        }
+
+        private static async Task UpdateAccessToken(CookieValidateIdentityContext context, AppConfiguration config)
+        {
+            var expiresAt = context.Identity.FindFirst(ClaimTypes.ExpiresAt);
             if (expiresAt != null && DateTime.Parse(expiresAt.Value) < DateTime.UtcNow)
             {
                 var refreshTokenClaim = context.Identity.FindFirst(OAuth2Constants.RefreshToken);
@@ -57,43 +68,48 @@
                     else
                     {
                         // Create a new cookie from the token response by signing out and in.
+                        var identity = response.GenerateUserIdentity();
                         auth.SignOut(context.Options.AuthenticationType);
-                        auth.SignIn(context.Properties, response.GenerateUserIdentity());
+                        auth.SignIn(context.Properties, identity);
+                        context.ReplaceIdentity(identity);
                     }
                 }
             }
         }
 
-        private static async Task<ClaimsPrincipal> TransformClaims(ClaimsPrincipal incoming, AppConfiguration config)
+        private static async Task<ClaimsIdentity> TransformClaims(CookieValidateIdentityContext context,
+            AppConfiguration config)
         {
-            if (!incoming.Identity.IsAuthenticated)
-            {
-                return incoming;
-            }
-
             var claims = new List<Claim>();
 
             var userInfoClient = new UserInfoClient(
                 new Uri(config.ApiUrl + "/connect/userinfo"),
-                incoming.FindFirst(OAuth2Constants.AccessToken).Value);
+                context.Identity.FindFirst(OAuth2Constants.AccessToken).Value);
 
             var userInfo = await userInfoClient.GetAsync();
+
+            if (userInfo.IsError || userInfo.IsHttpError)
+            {
+                context.RejectIdentity();
+                context.OwinContext.Authentication.SignOut(context.Options.AuthenticationType);
+                return null;
+            }
+
             userInfo.Claims.ToList().ForEach(ui => claims.Add(new Claim(ui.Item1, ui.Item2)));
 
-            claims.Add(incoming.FindFirst(OAuth2Constants.AccessToken));
-            claims.Add(incoming.FindFirst(OAuth2Constants.RefreshToken));
-            claims.Add(incoming.FindFirst(Prsd.Core.Web.ClaimTypes.ExpiresAt));
+            claims.Add(context.Identity.FindFirst(OAuth2Constants.AccessToken));
+            claims.Add(context.Identity.FindFirst(OAuth2Constants.RefreshToken));
+            claims.Add(context.Identity.FindFirst(ClaimTypes.ExpiresAt));
 
-            var nameId = incoming.FindFirst(ClaimTypes.NameIdentifier);
+            var nameId = context.Identity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             if (nameId != null)
             {
                 claims.Add(nameId);
             }
 
-            var id = new ClaimsIdentity(Constants.IwsAuthType);
+            var id = new ClaimsIdentity(context.Options.AuthenticationType);
             id.AddClaims(claims);
-
-            return new ClaimsPrincipal(id);
+            return id;
         }
     }
 }
