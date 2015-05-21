@@ -2,28 +2,28 @@
 {
     using System;
     using System.Data.Entity;
-    using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using DataAccess;
     using DataAccess.Identity;
     using Domain;
-    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
-    using Requests;
     using Requests.Registration;
+    using ClaimTypes = Requests.ClaimTypes;
 
     internal class CreateOrganisationHandler : IRequestHandler<CreateOrganisation, Guid>
     {
         private readonly IwsContext db;
         private readonly IUserContext userContext;
-        private readonly IwsIdentityContext identityContext;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public CreateOrganisationHandler(IwsContext db, IUserContext userContext, IwsIdentityContext identityContext)
+        public CreateOrganisationHandler(IwsContext db, IUserContext userContext, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
             this.userContext = userContext;
-            this.identityContext = identityContext;
+            this.userManager = userManager;
         }
 
         public async Task<Guid> HandleAsync(CreateOrganisation command)
@@ -40,11 +40,8 @@
 
             await db.SaveChangesAsync();
 
-            var user = await identityContext.Users.SingleAsync(u => u.Id.Equals(userContext.UserId.ToString()));
-            user.Claims.Add(new IdentityUserClaim() { ClaimType = ClaimTypes.OrganisationId, ClaimValue = organisation.Id.ToString() });
-
-            await identityContext.SaveChangesAsync();
-
+            await userManager.AddClaimAsync(userContext.UserId.ToString(), new Claim(ClaimTypes.OrganisationId, organisation.Id.ToString()));
+            
             return organisation.Id;
         }
     }

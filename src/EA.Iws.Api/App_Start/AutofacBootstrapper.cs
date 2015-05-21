@@ -34,6 +34,7 @@
             builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().As<UserManager<ApplicationUser>>().InstancePerRequest();
 
             return builder.Build();
         }

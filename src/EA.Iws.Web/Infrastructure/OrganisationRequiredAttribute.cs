@@ -2,11 +2,10 @@
     {
         using System.Linq;
         using System.Security.Claims;
-        using System.Threading;
         using System.Web.Mvc;
         using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
 
-        public class OrganisationRegAuthorizeAttribute : AuthorizeAttribute
+        public class OrganisationRequiredAttribute : AuthorizeAttribute
         {
             public override void OnAuthorization(AuthorizationContext filterContext)
             {
@@ -20,8 +19,8 @@
                     return;
                 }
 
-                var identity = (ClaimsIdentity)Thread.CurrentPrincipal.Identity;
-                var organisationRegistered = identity.Claims.Any(c => c.Type.Equals(Requests.ClaimTypes.OrganisationId));
+                var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
+                var organisationRegistered = identity.HasClaim(c => c.Type.Equals(Requests.ClaimTypes.OrganisationId));
 
                 if (!organisationRegistered)
                 {

@@ -507,7 +507,7 @@
     <Compile Include="Controllers\ImporterController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\ProducerController.cs" />
-    <Compile Include="Infrastructure\OrganisationRegAuthorizeAttribute.cs" />
+    <Compile Include="Infrastructure\OrganisationRequiredAttribute.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />

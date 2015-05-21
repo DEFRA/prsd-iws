@@ -9,7 +9,7 @@
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleApiErrorAttribute());
-            filters.Add(new OrganisationRegAuthorizeAttribute());
+            filters.Add(new OrganisationRequiredAttribute());
         }
     }
 }
