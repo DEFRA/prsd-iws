@@ -180,12 +180,8 @@
             {
                 try
                 {
-                    var response =
-                        await
-                            client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
-
-                    this.AddValidationErrorsToModelState(createOrganisationResponse);
-                    return View("CreateNewOrganisation", "Registration", model);
+                    var organisationId = await client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
+                    await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(organisationId));
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -195,14 +191,6 @@
                     {
                         throw;
                     }
-                }
-
-                var linkUserToOrganisationResponse = await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(createOrganisationResponse.Result));
-
-                if (linkUserToOrganisationResponse.HasErrors)
-                {
-                    this.AddValidationErrorsToModelState(createOrganisationResponse);
-                    return View("CreateNewOrganisation", "Registration", model);
                 }
                 return RedirectToAction("Home", "Applicant");
             }
