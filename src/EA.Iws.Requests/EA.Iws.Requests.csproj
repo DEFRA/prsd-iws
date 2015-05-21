@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClaimTypes.cs" />
     <Compile Include="Facilities\AddFacilityToNotification.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />

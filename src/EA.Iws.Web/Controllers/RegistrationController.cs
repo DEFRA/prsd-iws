@@ -184,7 +184,8 @@
                         await
                             client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
 
-                    return RedirectToAction("Home", "Applicant");
+                    this.AddValidationErrorsToModelState(createOrganisationResponse);
+                    return View("CreateNewOrganisation", "Registration", model);
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -196,11 +197,18 @@
                     }
                 }
 
-                return View("CreateNewOrganisation", "Registration", model);
+                var linkUserToOrganisationResponse = await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(createOrganisationResponse.Result));
+
+                if (linkUserToOrganisationResponse.HasErrors)
+                {
+                    this.AddValidationErrorsToModelState(createOrganisationResponse);
+                    return View("CreateNewOrganisation", "Registration", model);
+                }
+                return RedirectToAction("Home", "Applicant");
             }
         }
 
-        // TODO - duplicated in NotificationApplicationController, need to refactor.
+    // TODO - duplicated in NotificationApplicationController, need to refactor.
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
             using (var client = apiClient())

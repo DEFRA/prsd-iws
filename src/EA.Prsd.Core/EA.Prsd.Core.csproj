@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decorators\AuthenticationRequestHandlerDecorator.cs" />
+    <Compile Include="ClaimTypes.cs" />
     <Compile Include="Decorators\AuthorizationRequestHandlerDecorator.cs" />
     <Compile Include="Decorators\EventDispatcherRequestHandlerDecorator.cs" />
     <Compile Include="Decorators\TransactionRequestHandlerDecorator.cs" />
