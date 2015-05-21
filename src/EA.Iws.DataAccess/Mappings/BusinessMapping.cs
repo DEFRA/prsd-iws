@@ -7,10 +7,10 @@
     {
         public BusinessMapping()
         {
-            Property(x => x.Name).HasColumnName("Name");
-            Property(x => x.Type).HasColumnName("Type");
-            Property(x => x.RegistrationNumber).HasColumnName("RegistrationNumber");
-            Property(x => x.AdditionalRegistrationNumber).HasColumnName("AdditionalRegistrationNumber");
+            Property(x => x.Name).HasColumnName("Name").IsRequired().HasMaxLength(100);
+            Property(x => x.Type).HasColumnName("Type").IsRequired().HasMaxLength(64);
+            Property(x => x.RegistrationNumber).HasColumnName("RegistrationNumber").IsRequired().HasMaxLength(64);
+            Property(x => x.AdditionalRegistrationNumber).HasColumnName("AdditionalRegistrationNumber").HasMaxLength(64);
         }
     }
 }

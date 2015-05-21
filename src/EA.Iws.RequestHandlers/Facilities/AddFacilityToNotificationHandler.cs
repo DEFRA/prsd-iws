@@ -59,8 +59,9 @@
             return new Address(address.Building, 
                 address.StreetOrSuburb, 
                 address.Address2, 
-                address.TownOrCity, 
-                address.PostalCode, 
+                address.TownOrCity,
+                address.Region,
+                address.PostalCode,
                 address.CountryName ?? countryName);
         }
     }

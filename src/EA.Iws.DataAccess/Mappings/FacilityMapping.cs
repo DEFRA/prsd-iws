@@ -8,6 +8,8 @@
         public FacilityMapping()
         {
             ToTable("Facility", "Business");
+
+            Property(x => x.IsActualSiteOfTreatment).IsRequired();
         }
     }
 }

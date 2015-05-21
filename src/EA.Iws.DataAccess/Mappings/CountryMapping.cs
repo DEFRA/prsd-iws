@@ -8,6 +8,10 @@
         public CountryMapping()
         {
             this.ToTable("Country", "Lookup");
+
+            Property(x => x.Name).IsRequired().HasMaxLength(2048);
+            Property(x => x.IsEuropeanUnionMember).IsRequired();
+            Property(x => x.IsoAlpha2Code).IsRequired().HasMaxLength(2);
         }
     }
 }

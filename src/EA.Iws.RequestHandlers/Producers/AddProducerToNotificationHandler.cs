@@ -58,6 +58,7 @@
                 address.StreetOrSuburb,
                 address.Address2,
                 address.TownOrCity,
+                address.Region,
                 address.PostalCode,
                 address.CountryName ?? countryName);
         }

@@ -6,7 +6,7 @@
 
     public class Address
     {
-        public Address(string building, string address1, string address2, string townOrCity, string postalCode, string country)
+        public Address(string building, string address1, string address2, string townOrCity, string region, string postalCode, string country)
         {
             Guard.ArgumentNotNull(building);
             Guard.ArgumentNotNull(townOrCity);
@@ -20,6 +20,7 @@
             Country = country;
             Address2 = address2;
             Address1 = address1;
+            Region = region;
         }
 
         protected Address()
@@ -33,6 +34,8 @@
         public string Address2 { get; private set; }
 
         public string TownOrCity { get; private set; }
+
+        public string Region { get; private set; }
 
         public string PostalCode { get; private set; }
 

@@ -7,11 +7,11 @@
     {
         public ContactMapping()
         {
-            Property(x => x.FirstName).HasColumnName("FirstName");
-            Property(x => x.LastName).HasColumnName("LastName");
-            Property(x => x.Telephone).HasColumnName("Telephone");
-            Property(x => x.Fax).HasColumnName("Fax");
-            Property(x => x.Email).HasColumnName("Email");
+            Property(x => x.FirstName).HasColumnName("FirstName").IsRequired().HasMaxLength(1024);
+            Property(x => x.LastName).HasColumnName("LastName").IsRequired().HasMaxLength(1024);
+            Property(x => x.Telephone).HasColumnName("Telephone").IsRequired().HasMaxLength(150);
+            Property(x => x.Fax).HasColumnName("Fax").HasMaxLength(150);
+            Property(x => x.Email).HasColumnName("Email").IsRequired().HasMaxLength(256);
         }
     }
 }

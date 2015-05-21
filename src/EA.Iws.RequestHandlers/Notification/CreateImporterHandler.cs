@@ -24,7 +24,7 @@
 
             var address = new Address(command.Building,
                 command.Address1,
-                command.Address2, command.TownOrCity, command.PostalCode, country.Name);
+                command.Address2, command.TownOrCity, command.County, command.PostalCode, country.Name);
 
             var contact = new Contact(command.FirstName,
                 command.LastName,

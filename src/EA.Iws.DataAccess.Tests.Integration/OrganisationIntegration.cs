@@ -72,7 +72,7 @@
 
         private static Address TestAddress(Country country)
         {
-            return new Address("1", "test street", null, "Woking", "GU22 7UM", country.Name);
+            return new Address("1", "test street", null, "Woking", null, "GU22 7UM", country.Name);
         }
 
         private void CleanUp(Organisation organisation, Address address)

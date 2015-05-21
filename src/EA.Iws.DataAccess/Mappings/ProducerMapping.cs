@@ -8,6 +8,8 @@
         public ProducerMapping()
         {
             this.ToTable("Producer", "Business");
+
+            Property(x => x.IsSiteOfExport).IsRequired();
         }
     }
 }
