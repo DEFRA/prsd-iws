@@ -36,7 +36,7 @@
                     RadioButtonStringCollectionViewModel.CreateFromEnum<CompetentAuthority>()
             };
 
-            return View("CompetentAuthority", model);
+            return View(model);
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return View("CompetentAuthority", model);
+                return View(model);
             }
 
             return RedirectToAction("NotificationTypeQuestion",

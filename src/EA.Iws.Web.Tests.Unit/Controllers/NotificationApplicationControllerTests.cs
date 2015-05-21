@@ -47,7 +47,7 @@
 
             var result = controller.CompetentAuthority() as ViewResult;
 
-            Assert.Equal("CompetentAuthority", result.ViewName);
+            Assert.Empty(result.ViewName);
             Assert.IsType<CompetentAuthorityChoiceViewModel>(result.Model);
         }
 
@@ -74,7 +74,7 @@
 
             var result = controller.CompetentAuthority(competentAuthorityChoice) as ViewResult;
 
-            Assert.Equal("CompetentAuthority", result.ViewName);
+            Assert.Empty(result.ViewName);
             Assert.IsType<CompetentAuthorityChoiceViewModel>(result.Model);
         }
 

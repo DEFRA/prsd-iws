@@ -89,7 +89,7 @@
                 model.FacilityData = response.ToList();
             }
 
-            return View("MultipleFacilities", model);
+            return View(model);
         }
 
         [HttpPost]

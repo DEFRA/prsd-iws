@@ -13,7 +13,7 @@
                 return RedirectToAction(actionName: "Home", controllerName: "Applicant");
             }
 
-            return View("Index");
+            return View();
         }
 
         [HttpGet]
