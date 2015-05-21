@@ -76,11 +76,11 @@
                         }
                     }
 
-                    return View("ApplicantRegistration", model);
+                    return View(model);
                 }
             }
 
-            return View("ApplicantRegistration", model);
+            return View(model);
         }
 
         [HttpGet]
@@ -107,7 +107,7 @@
                 }
             }
 
-            return View("SelectOrganisation", model);
+            return View(model);
         }
 
         [HttpPost]
@@ -151,7 +151,7 @@
         public async Task<ActionResult> CreateNewOrganisation(string organisationName)
         {
             var model = new CreateNewOrganisationViewModel { Name = organisationName, Countries = await GetCountries() };
-            return View("CreateNewOrganisation", model);
+            return View(model);
         }
 
         [HttpPost]
@@ -160,7 +160,7 @@
             if (!ModelState.IsValid)
             {
                 model.Countries = await GetCountries();
-                return View("CreateNewOrganisation", model);
+                return View(model);
             }
 
             var organisationRegistrationData = new OrganisationRegistrationData
@@ -182,6 +182,7 @@
                 {
                     var organisationId = await client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
                     await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(organisationId));
+                    return RedirectToAction("Home", "Applicant");
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -191,8 +192,8 @@
                     {
                         throw;
                     }
+                    return View(model);
                 }
-                return RedirectToAction("Home", "Applicant");
             }
         }
 
