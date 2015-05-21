@@ -7,22 +7,22 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    public class GetCompetentAuthorityByNotificationIdHandler : IRequestHandler<GetCompetentAuthorityByNotificationId, CompetentAuthorityData>
+    public class GetNotificationInfoHandler : IRequestHandler<GetNotificationInfo, CompetentAuthorityData>
     {
         private readonly IwsContext db;
 
-        public GetCompetentAuthorityByNotificationIdHandler(IwsContext db)
+        public GetNotificationInfoHandler(IwsContext db)
         {
             this.db = db;
         }
 
-        public async Task<CompetentAuthorityData> HandleAsync(GetCompetentAuthorityByNotificationId message)
+        public async Task<CompetentAuthorityData> HandleAsync(GetNotificationInfo message)
         {
             return await db.NotificationApplications.Where(n => n.Id == message.NotificationId).Select(n =>
                 new CompetentAuthorityData
                 {
                     NotificationId = message.NotificationId,
-                    CompetentAuthority = n.CompetentAuthority.Value,
+                    CompetentAuthority = (CompetentAuthority)n.CompetentAuthority.Value,
                     NotificationNumber = n.NotificationNumber
                 }).SingleAsync();
         }

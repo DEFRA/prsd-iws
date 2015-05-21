@@ -3,11 +3,11 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class GetCompetentAuthorityByNotificationId : IRequest<CompetentAuthorityData>
+    public class GetNotificationInfo : IRequest<CompetentAuthorityData>
     {
         public Guid NotificationId { get; set; }
 
-        public GetCompetentAuthorityByNotificationId(Guid notificationId)
+        public GetNotificationInfo(Guid notificationId)
         {
             NotificationId = notificationId;
         }

@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
-    <Compile Include="Notification\GetCompetentAuthorityByNotificationIdHandler.cs" />
+    <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Producers\DeleteProducerHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
     <Compile Include="Notification\GetExporterByNotificationIdHandler.cs" />

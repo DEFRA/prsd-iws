@@ -259,41 +259,32 @@
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetCompetentAuthorityByNotificationId(id));
+                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
 
                 var model = new CompetentAuthorityData
                 {
-                    CompetentAuthority = response.Result.CompetentAuthority,
+                    CompetentAuthority = response.CompetentAuthority,
                     NotificationId = id,
-                    NotificationNumber = response.Result.NotificationNumber
+                    NotificationNumber = response.NotificationNumber
                 };
 
                 var name = string.Empty;
 
-                if (response.Result.CompetentAuthority == 1)
+                switch (response.CompetentAuthority)
                 {
-                    name = "the Environment Agency (England)";
-                }
-
-                if (response.Result.CompetentAuthority == 2)
-                {
-                    name = "the Scottish Environment Protection Agency";
-                }
-
-                if (response.Result.CompetentAuthority == 3)
-                {
-                    name = "the Northern Ireland Environment Agency";
-                }
-
-                if (response.Result.CompetentAuthority == 4)
-                {
-                    name = "Natural Resources Wales";
-                }
-
-                model.CompetentAuthorityName = name;
-
-                return View(model);
-            }
-        }
+                    case Requests.Notification.CompetentAuthority.England:
+                        model.CompetentAuthorityName = "the Environment Agency (England)";
+                        break;
+                    case Requests.Notification.CompetentAuthority.Scotland:
+                        model.CompetentAuthorityName = "the Scottish Environment Protection Agency";
+                        break;
+                    case Requests.Notification.CompetentAuthority.NorthernIreland:
+                        model.CompetentAuthorityName = "the Northern Ireland Environment Agency";
+                        break;
+                    case Requests.Notification.CompetentAuthority.Wales:
+                        model.CompetentAuthorityName = "Natural Resources Wales";
+                        break;
+                    default:
+                        throw new InvalidOperationException(string.Format("Unknown competent authority: {0}", response.CompetentAuthority));
     }
 }
