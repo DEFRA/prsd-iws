@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Api.Identity
+﻿namespace EA.Iws.DataAccess.Identity
 {
     using System.Security.Claims;
     using System.Threading.Tasks;

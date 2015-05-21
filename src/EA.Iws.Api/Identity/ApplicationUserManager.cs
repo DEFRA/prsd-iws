@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Api.Identity
 {
     using System;
+    using DataAccess.Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security.DataProtection;

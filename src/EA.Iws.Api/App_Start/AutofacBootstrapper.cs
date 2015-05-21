@@ -4,6 +4,7 @@
     using Autofac;
     using Autofac.Integration.WebApi;
     using DataAccess;
+    using DataAccess.Identity;
     using Identity;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Autofac;

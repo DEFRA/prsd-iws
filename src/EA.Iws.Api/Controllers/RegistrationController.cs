@@ -5,6 +5,7 @@
     using System.Web.Http;
     using Client;
     using Client.Entities;
+    using DataAccess.Identity;
     using Identity;
     using Microsoft.AspNet.Identity;
 

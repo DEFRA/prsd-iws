@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Api.IdSrv
 {
+    using DataAccess.Identity;
     using Identity;
     using Thinktecture.IdentityServer.AspNetIdentity;
 

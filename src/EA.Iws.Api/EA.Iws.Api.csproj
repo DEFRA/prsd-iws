@@ -219,11 +219,8 @@
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
     <Compile Include="Infrastructure\HttpStatusCodeResult.cs" />
     <Compile Include="Controllers\MediatorController.cs" />
-    <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
-    <Compile Include="Identity\ApplicationUserStore.cs" />
     <Compile Include="Identity\EmailService.cs" />
-    <Compile Include="Identity\IwsIdentityContext.cs" />
     <Compile Include="Identity\SmsService.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Identity\UserContext.cs" />
