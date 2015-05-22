@@ -114,7 +114,7 @@
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationNumber(id));
 
-                var model = new NotificationSummaryViewModel
+                var model = new CreatedViewModel
                 {
                     NotificationId = id,
                     NotificationNumber = response
@@ -124,7 +124,7 @@
         }
 
         [HttpPost]
-        public ActionResult Created(NotificationSummaryViewModel model)
+        public ActionResult Created(CreatedViewModel model)
         {
             return RedirectToAction(actionName: "DownloadInstructions", controllerName: "NotificationApplication",
                 routeValues: new { id = model.NotificationId });
@@ -213,7 +213,7 @@
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationNumber(id));
 
-                var model = new NotificationSummaryViewModel
+                var model = new NotificationOverviewViewModel
                 {
                     NotificationId = id,
                     NotificationNumber = response

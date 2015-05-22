@@ -1,4 +1,4 @@
-﻿@model EA.Iws.Web.ViewModels.NotificationApplication.NotificationSummaryViewModel
+﻿@model EA.Iws.Web.ViewModels.NotificationApplication.NotificationOverviewViewModel
 
 @{
     ViewBag.Title = "Notification overview";
@@ -20,7 +20,7 @@
                 <div>Exporter - notifier</div>
             </td>
             <td>
-                <div>@Html.ActionLink("Edit", "ExporterNotifier", new { id = Model.NotificationId }, null)</div>
+                <div>@Html.ActionLink("Edit", "Add", "Exporter", new { id = Model.NotificationId }, null)</div>
             </td>
         </tr>
         <tr>
