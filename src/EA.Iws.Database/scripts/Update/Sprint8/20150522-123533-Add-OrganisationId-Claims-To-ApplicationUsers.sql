@@ -24,7 +24,7 @@ BEGIN
     INSERT INTO [Identity].[AspNetUserClaims] ([UserId]
     , [ClaimType]
     , [ClaimValue])
-      VALUES (@id, 'organisation_id', convert(nvarchar(50), @orgid))
+      VALUES (LOWER(convert(nvarchar(50), @id)), 'organisation_id', LOWER(convert(nvarchar(50), @orgid)))
   FETCH NEXT
   FROM @getid INTO @id, @orgid
 
