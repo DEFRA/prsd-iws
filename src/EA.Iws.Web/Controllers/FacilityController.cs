@@ -111,7 +111,7 @@
         [HttpPost]
         public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
         }
     }
 }

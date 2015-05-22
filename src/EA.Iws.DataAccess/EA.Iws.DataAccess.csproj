@@ -79,6 +79,7 @@
     <Compile Include="Mappings\ImporterMapping.cs" />
     <Compile Include="Mappings\NotificationApplicationMapping.cs" />
     <Compile Include="Mappings\OrganisationMapping.cs" />
+    <Compile Include="Mappings\CarrierMapping.cs" />
     <Compile Include="Mappings\ProducerMapping.cs" />
     <Compile Include="Mappings\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />

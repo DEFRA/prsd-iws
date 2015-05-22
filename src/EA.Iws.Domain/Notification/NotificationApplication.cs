@@ -24,6 +24,7 @@
             NotificationNumber = CreateNotificationNumber(notificationNumber);
             ProducersCollection = new List<Producer>();
             FacilitiesCollection = new List<Facility>();
+            CarriersCollection = new List<Carrier>();
         }
 
         public Guid UserId { get; private set; }
@@ -62,6 +63,16 @@
         private string CreateNotificationNumber(int notificationNumber)
         {
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
+        }
+
+        protected virtual ICollection<Carrier> CarriersCollection { get; set; }
+
+        public IEnumerable<Carrier> Carriers
+        {
+            get
+            {
+                return CarriersCollection.ToSafeIEnumerable();
+            }
         }
 
         public void AddExporter(Business business, Address address, Contact contact)
@@ -117,6 +128,11 @@
             {
                 prod.IsSiteOfExport = prod.Id == producerId;
             }
+        }
+
+        public void AddCarrier(Carrier carrier)
+        {
+            CarriersCollection.Add(carrier);
         }
     }
 }

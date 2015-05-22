@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exporters\NotificationHasExporterHandler.cs" />
+    <Compile Include="Carrier\AddCarrierToNotificationHandler.cs" />
     <Compile Include="Exporters\UpdateExporterForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />

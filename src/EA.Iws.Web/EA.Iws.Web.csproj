@@ -473,6 +473,7 @@
     <Content Include="Views\NotificationApplication\DownloadInstructions.cshtml" />
     <Content Include="Views\NotificationApplication\NotificationOverview.cshtml" />
     <Content Include="Views\Exporter\Edit.cshtml" />
+    <Content Include="Views\Carrier\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -500,6 +501,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ExporterController.cs" />
+    <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\ImporterController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\ProducerController.cs" />
@@ -521,6 +523,7 @@
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Carrier\CarrierViewModel.cs" />
     <Compile Include="ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\FacilityViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
