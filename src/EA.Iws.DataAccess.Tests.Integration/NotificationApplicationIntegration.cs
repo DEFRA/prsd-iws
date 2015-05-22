@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Tests.Integration
 {
     using System;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Domain;
@@ -53,6 +54,17 @@
 
             // TODO - no way to update Producer yet so using reflection to change values
             typeof(Producer).GetProperty("Address").SetValue(updateProducer, newAddress);
+
+            await context.SaveChangesAsync();
+
+            var newBuildingName =
+                await context.Database.SqlQuery<string>("SELECT Building FROM [Business].[Producer] WHERE Id = @id",
+                    new SqlParameter("id", producer.Id)).SingleAsync();
+
+            Assert.Equal("new building", newBuildingName);
+
+            context.DeleteOnCommit(producer);
+            context.DeleteOnCommit(notification);
 
             await context.SaveChangesAsync();
         }
