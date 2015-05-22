@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
     <Content Include="scripts\Update\Sprint7\20150515-145639-Add-Facility-Rename-Waste-Action.sql" />
     <Content Include="scripts\Update\Sprint7\20150520-164530-Move-Table-Schemas.sql" />
     <Content Include="scripts\Update\Sprint8\20150522-082922-Mapping-Constraints-rationalisations.sql" />
