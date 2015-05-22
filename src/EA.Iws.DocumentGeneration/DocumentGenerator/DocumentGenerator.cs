@@ -1,46 +1,56 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
-    using System.IO;
+    using System.Collections.Generic;
+    using System.Linq;
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
     using Domain.Notification;
+    using NotificationBlocks;
 
     public class DocumentGenerator : IDocumentGenerator
     {
-        private readonly NotificationDocumentMerger notificationDocumentMerger;
-
-        public DocumentGenerator(NotificationDocumentMerger notificationDocumentMerger)
+        public byte[] GenerateNotificationDocument(NotificationApplication notification)
         {
-            this.notificationDocumentMerger = notificationDocumentMerger;
-        }
-
-        public byte[] GenerateNotificationDocument(NotificationApplication notification, string applicationDirectory)
-        {
-            return GenerateMainDocument(notification, applicationDirectory);
-        }
-
-        private byte[] GenerateMainDocument(NotificationApplication notification, string applicationDirectory)
-        {
-            var pathToTemplate = Path.Combine(applicationDirectory, "NotificationMergeTemplate.docx");
-
-            // Minimise time the process is using the template file to prevent contention between processes.
-            var templateFile = DocumentHelper.ReadDocumentShared(pathToTemplate);
-
-            using (var memoryStream = new MemoryStream())
+            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("NotificationMergeTemplate.docx"))
             {
-                memoryStream.Write(templateFile, 0, templateFile.Length);
-
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
+                    // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 
-                    notificationDocumentMerger.MergeDataIntoDocument(mergeFields, notification);
+                    var blocks = GetBlocks(notification, mergeFields);
+
+                    foreach (var block in blocks)
+                    {
+                        block.Merge();
+                    }
+
+                    int annexNumber = 1;
+                    foreach (var block in blocks.OrderBy(b => b.OrdinalPosition))
+                    {
+                        var annexBlock = block as IAnnexedBlock;
+                        if (annexBlock != null && annexBlock.HasAnnex)
+                        {
+                            annexBlock.GenerateAnnex(annexNumber);
+                            annexNumber++;
+                        }
+                    }
 
                     MergeFieldLocator.RemoveDataSourceSettingFromMergedDocument(document);
                 }
 
                 return memoryStream.ToArray();
             }
+        }
+
+        private static IList<INotificationBlock> GetBlocks(NotificationApplication notification, IList<MergeField> mergeFields)
+        {
+            return new List<INotificationBlock>
+            {
+                new GeneralBlock(mergeFields, notification),
+                new ExporterBlock(mergeFields, notification),
+                new ProducerBlock(mergeFields, notification)
+            };
         }
     }
 }

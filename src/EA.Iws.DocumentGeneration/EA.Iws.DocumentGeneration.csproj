@@ -48,14 +48,23 @@
   <ItemGroup>
     <Compile Include="DocumentGenerator\DocumentGenerator.cs" />
     <Compile Include="DocumentHelper.cs" />
-    <Compile Include="Mapper\INotificationMergeMapper.cs" />
-    <Compile Include="Mapper\NotificationMergeMapper.cs" />
+    <Compile Include="Mapper\MergeFieldDataMapper.cs" />
     <Compile Include="MergeField.cs" />
     <Compile Include="MergeFieldLocator.cs" />
     <Compile Include="MergeFieldName.cs" />
     <Compile Include="MergeFieldType.cs" />
-    <Compile Include="NotificationDocumentMerger.cs" />
+    <Compile Include="NotificationBlocks\IAnnexedBlock.cs" />
+    <Compile Include="NotificationBlocks\ProducerBlock.cs" />
+    <Compile Include="NotificationBlocks\ExporterBlock.cs" />
+    <Compile Include="NotificationBlocks\GeneralBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddressLines.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\GeneralViewModel.cs" />
+    <Compile Include="ViewModels\ProducerViewModel.cs" />
+    <Compile Include="ViewModels\ExporterViewModel.cs" />
+    <Compile Include="NotificationBlocks\INotificationBlock.cs" />
+    <Compile Include="ViewModels\PropertyHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">

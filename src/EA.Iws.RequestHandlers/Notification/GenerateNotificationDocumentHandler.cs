@@ -2,7 +2,6 @@
 {
     using System;
     using System.Data.Entity;
-    using System.IO;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
@@ -34,7 +33,7 @@
                 .SingleAsync(n => n.Id == query.NotificationId 
                     && n.UserId == userId);
 
-            return documentGenerator.GenerateNotificationDocument(notification, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Documents"));
+            return documentGenerator.GenerateNotificationDocument(notification);
         }
     }
 }

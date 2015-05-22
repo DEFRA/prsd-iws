@@ -5,26 +5,29 @@
 
     public class MergeField
     {
+        public static readonly char StartMergeField = '«';
+        public static readonly char EndMergeField = '»';
+
+        public MergeField(Run run, string fieldName)
+        {
+            Run = run;
+            FieldName = new MergeFieldName(fieldName);
+
+            if (FieldName.InnerTypeName.StartsWith("Is"))
+            {
+                FieldType = MergeFieldType.Checkbox;
+            }
+            else
+            {
+                FieldType = MergeFieldType.Text;
+            }
+        }
+
         public Run Run { get; private set; }
 
         public MergeFieldName FieldName { get; private set; }
 
-        public MergeFieldType FieldType { get; set; }
-
-        public MergeField(Run run, string fieldName)
-        {
-            this.Run = run;
-            this.FieldName = new MergeFieldName(fieldName);
-
-            if (this.FieldName.InnerTypeName.StartsWith("Is"))
-            {
-                this.FieldType = MergeFieldType.Checkbox;
-            }
-            else
-            {
-                this.FieldType = MergeFieldType.Text;
-            }
-        }
+        public MergeFieldType FieldType { get; private set; }
 
         public void SetText(string text, int numberOfLineBreaks = 1)
         {
@@ -36,27 +39,24 @@
                     StringSplitOptions.RemoveEmptyEntries);
             }
 
-            for (int i = 0; i < lines.Length; i++)
+            for (var i = 0; i < lines.Length; i++)
             {
-                this.Run.AppendChild(new Text(lines[i]));
+                Run.AppendChild(new Text(lines[i]));
 
                 if (i < lines.Length - 1)
                 {
-                    for (int j = 0; j < numberOfLineBreaks; j++)
+                    for (var j = 0; j < numberOfLineBreaks; j++)
                     {
-                        this.Run.Append(new Break());
+                        Run.Append(new Break());
                     }
                 }
             }
         }
 
-        public static readonly char StartMergeField = '«';
-        public static readonly char EndMergeField = '»';
-
         public void RemoveCurrentContents()
         {
-            this.Run.RemoveAllChildren<Text>();
-            this.Run.RemoveAllChildren<MailMerge>();
+            Run.RemoveAllChildren<Text>();
+            Run.RemoveAllChildren<MailMerge>();
         }
     }
 }

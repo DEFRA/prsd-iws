@@ -4,6 +4,6 @@
 
     public interface IDocumentGenerator
     {
-        byte[] GenerateNotificationDocument(NotificationApplication notification, string applicationDirectory);
+        byte[] GenerateNotificationDocument(NotificationApplication notification);
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DocumentGeneration
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using DocumentFormat.OpenXml;
     using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
 
@@ -22,6 +24,19 @@
             }
 
             return matchingRuns;
+        }
+
+        public static IEnumerable<MergeField> GetMergeRuns(OpenXmlElement element)
+        {
+            // Gets each element under the element with text representing a merge field.
+            foreach (var run in element.Descendants<Run>())
+            {
+                if (run.InnerText.StartsWith(MergeField.StartMergeField.ToString())
+                    && run.InnerText.EndsWith(MergeField.EndMergeField.ToString()))
+                {
+                    yield return ConvertRunToMergeField(run);
+                }
+            }
         }
 
         public static MergeField ConvertRunToMergeField(Run run)
@@ -51,7 +66,7 @@
                 .Where(r => r.InnerText.StartsWith(MergeField.StartMergeField.ToString())
                             && r.InnerText.EndsWith(MergeField.EndMergeField.ToString())
                             && r.InnerText.Contains(namedField))
-                .Select(MergeFieldLocator.ConvertRunToMergeField);
+                .Select(ConvertRunToMergeField);
 
             foreach (var mergeField in matchingFields)
             {
@@ -60,15 +75,27 @@
             }
         }
 
-        public static IEnumerable<MergeField> GetMergeRunsforTableRow(TableRow tableRow)
+        public static IList<MergeField> GetCorrespondingFieldsForBlock(IList<MergeField> allMergeFields, string blockName)
         {
-            return tableRow
-                .Descendants<TableCell>()
-                .Last()
-                .Descendants<Run>()
-                .Where(r => r.InnerText.StartsWith(MergeField.StartMergeField.ToString())
-                            && r.InnerText.EndsWith(MergeField.EndMergeField.ToString()))
-                .Select(MergeFieldLocator.ConvertRunToMergeField);
+            return allMergeFields.Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
+                && mf.FieldName.OuterTypeName.Equals(blockName, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
+
+        public static List<MergeField> GetAnnexMergeFields(IList<MergeField> allMergeFields, string blockName)
+        {
+            // Gets annex fields and changes them to act like normal merge fields where the field name no longer has "Annex" in.
+            var annexFields = allMergeFields.Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
+                && mf.FieldName.OuterTypeName.Equals("Annex", StringComparison.InvariantCultureIgnoreCase))
+                .Select(ConvertAnnexMergeFieldToRegularMergeField)
+                .Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
+                && mf.FieldName.OuterTypeName.Equals(blockName, StringComparison.InvariantCultureIgnoreCase));
+
+            return annexFields.ToList();
+        }
+
+        public static MergeField ConvertAnnexMergeFieldToRegularMergeField(MergeField annexMergeField)
+        {
+            return new MergeField(annexMergeField.Run, annexMergeField.FieldName.InnerTypeName);
         }
     }
 }
