@@ -474,6 +474,7 @@
     <Content Include="Views\NotificationApplication\NotificationOverview.cshtml" />
     <Content Include="Views\Exporter\Edit.cshtml" />
     <Content Include="Views\Carrier\Add.cshtml" />
+    <Content Include="Views\Shipment\Info.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -505,6 +506,7 @@
     <Compile Include="Controllers\ImporterController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\ProducerController.cs" />
+    <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Infrastructure\OrganisationRequiredAttribute.cs" />
     <Compile Include="Infrastructure\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
@@ -545,6 +547,7 @@
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptionalViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />
+    <Compile Include="ViewModels\Shipment\ShipmentInfoViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,120 @@
+﻿@model EA.Iws.Web.ViewModels.Shipment.ShipmentInfoViewModel
+@{
+    ViewBag.Title = "Shipment Information";
+}
+
+@using (Html.BeginForm("Info", "Shipment", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <header class="hgroup">
+        <h2 class="heading-large">What is the total intended number of shipments?</h2>
+    </header>
+    <div class="form-group">
+        @Html.ValidationMessageFor(m => m.NumberOfShipments)
+        @Html.Gds().LabelFor(m => m.NumberOfShipments)
+        @Html.Gds().TextBoxFor(m => m.NumberOfShipments, new { @class = "numberInput", type = "number", min = "1", max = "99999", pattern = "[0-9]*", width = "50px" })
+    </div>
+
+    <hr>
+    <header class="hgroup">
+        <h2 class="heading-large">What is the total intended quantity?</h2>
+    </header>
+    
+    <div class="grid-row">
+        <div class="form-group">
+            <div class="column-third">
+            @Html.ValidationMessageFor(m => m.Quantity)
+            @Html.Gds().LabelFor(m => m.Quantity)
+            @Html.Gds().TextBoxFor(m => m.Quantity, new { @class = "numberInput", type = "number", min = "0.0001", max = "99999" })
+        </div>
+            @Html.ValidationMessageFor(m => m.Units)
+            @Html.Gds().LabelFor(m => m.Units)
+            @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList, new { @class = "unitsInput" })
+        </div>
+    </div>
+    
+    <hr>
+    <header class="hgroup">
+        <h2 class="heading-large">What is the intended date of the first and last departure?</h2>
+    </header>
+
+    <div class="grid-row">
+
+        <div class="column-half">
+            <div class="form-group">
+                <div>@Html.ValidationMessageFor(m => m.StartDay)</div>
+                <div>@Html.ValidationMessageFor(m => m.StartMonth)</div>
+                <div>@Html.ValidationMessageFor(m => m.StartYear)</div>
+            </div>
+
+            <h2 class="form-label-bold">First departure</h2>
+
+            <div class="form-date">
+                <p class="form-hint">For example, 31 3 2015</p>
+                <div class="form-group form-group-day">
+                    @Html.Gds().LabelFor(m => m.StartDay)
+                    @Html.Gds().TextBoxFor(m => m.StartDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+                </div>
+            </div>
+
+            <div class="form-date">
+                <div class="form-group form-group-month">
+                    @Html.Gds().LabelFor(m => m.StartMonth)
+                    @Html.Gds().TextBoxFor(m => m.StartMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+                </div>
+            </div>
+
+            <div class="form-date">
+                <div class="form-group form-group-year">
+                    @Html.Gds().LabelFor(m => m.StartYear)
+                    @Html.Gds().TextBoxFor(m => m.StartYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
+                </div>
+            </div>
+        </div>
+
+        <div class="column-half">
+            <div class="form-group">
+                <div>@Html.ValidationMessageFor(m => m.EndDay)</div>
+                <div>@Html.ValidationMessageFor(m => m.EndMonth)</div>
+                <div>@Html.ValidationMessageFor(m => m.EndYear)</div>
+            </div>
+
+            <h2 class="form-label-bold">Last departure</h2>
+
+            <div class="form-date">
+                <p class="form-hint">For example, 27 11 2015</p>
+                <div class="form-group form-group-day">
+                    @Html.Gds().LabelFor(m => m.EndDay)
+                    @Html.Gds().TextBoxFor(m => m.EndDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+                </div>
+            </div>
+
+            <div class="form-date">
+                <div class="form-group form-group-month">
+                    @Html.Gds().LabelFor(m => m.EndMonth)
+                    @Html.Gds().TextBoxFor(m => m.EndMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+                </div>
+            </div>
+
+            <div class="form-date">
+                <div class="form-group form-group-year">
+                    @Html.Gds().LabelFor(m => m.EndYear)
+                    @Html.Gds().TextBoxFor(m => m.EndYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    
+    
+    
+    <br/>
+    <br/>
+    <div class="form-group">
+        <p> <button class="button" type="submit">Continue</button></p>
+    </div>
+}
+

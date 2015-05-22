@@ -56,6 +56,7 @@
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\CompetentAuthorityData.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
+    <Compile Include="Notification\ShipmentQuantityUnits.cs" />
     <Compile Include="Shared\BusinessData.cs" />
     <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
