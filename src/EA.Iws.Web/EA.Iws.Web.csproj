@@ -195,10 +195,6 @@
       <HintPath>..\packages\Thinktecture.IdentityModel.Client.4.0.1\lib\net45\Thinktecture.IdentityModel.Client.Net45.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Thinktecture.IdentityModel.Owin.ClaimsTransformation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Thinktecture.IdentityModel.Owin.ClaimsTransformation.1.0.1\lib\net45\Thinktecture.IdentityModel.Owin.ClaimsTransformation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>

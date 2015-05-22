@@ -17,20 +17,11 @@
 
         public ExporterData()
         {
-            if (Address == null)
-            {
-                Address = new AddressData();
-            }
+            Address = new AddressData();
 
-            if (Contact == null)
-            {
-                Contact = new ContactData();
-            }
+            Contact = new ContactData();
 
-            if (Business == null)
-            {
-                Business = new BusinessData();
-            }
+            Business = new BusinessData();
         }
     }
 }
