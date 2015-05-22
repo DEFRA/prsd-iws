@@ -45,7 +45,7 @@
     <Compile Include="Business.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="Facility.cs" />
+    <Compile Include="Notification\Facility.cs" />
     <Compile Include="Notification\Exporter.cs" />
     <Compile Include="Notification\Importer.cs" />
     <Compile Include="Notification\NotificationApplication.cs" />

@@ -17,7 +17,7 @@
             RegistrationNumber = registrationNumber;
         }
 
-        private Organisation()
+        protected Organisation()
         {
         }
 

@@ -31,8 +31,7 @@
 
             var producer = new Producer(business,
                 address,
-                contact,
-                command.ProducerData.IsSiteOfExport);
+                contact);
 
             var notification = await context.NotificationApplications.FindAsync(command.ProducerData.NotificationId);
             notification.AddProducer(producer);

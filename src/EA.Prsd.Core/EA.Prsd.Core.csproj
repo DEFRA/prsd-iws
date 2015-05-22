@@ -56,6 +56,7 @@
     <Compile Include="Domain\IEventHandler.cs" />
     <Compile Include="Domain\IUserContext.cs" />
     <Compile Include="ExpressionHelper.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="Identity\GuidCombGenerator.cs" />

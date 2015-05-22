@@ -4,7 +4,7 @@
 
     public class Country : Entity
     {
-        private Country()
+        protected Country()
         {
         }
 

@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
+    using Domain.Notification;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Facilities;

@@ -5,12 +5,6 @@
 
     public class Importer : Entity
     {
-        public Business Business { get; private set; }
-
-        public Address Address { get; private set; }
-
-        public Contact Contact { get; private set; }
-
         public Importer(Business business, Address address, Contact contact)
         {
             Guard.ArgumentNotNull(business);
@@ -25,5 +19,11 @@
         protected Importer()
         {
         }
+
+        public Business Business { get; private set; }
+
+        public Address Address { get; private set; }
+
+        public Contact Contact { get; private set; }
     }
 }

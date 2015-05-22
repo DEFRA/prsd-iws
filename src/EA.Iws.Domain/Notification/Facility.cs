@@ -3,29 +3,35 @@
     using Prsd.Core;
     using Prsd.Core.Domain;
 
-    public class Producer : Entity
+    public class Facility : Entity
     {
-        public Producer(Business business, Address address, Contact contact)
+        protected Facility()
+        {
+        }
+
+        public Facility(Business business, Address address, Contact contact, Country country,
+            bool isActualSiteOfTreatment)
         {
             Guard.ArgumentNotNull(business);
             Guard.ArgumentNotNull(address);
             Guard.ArgumentNotNull(contact);
+            Guard.ArgumentNotNull(country);
 
             Business = business;
             Address = address;
             Contact = contact;
+            IsActualSiteOfTreatment = isActualSiteOfTreatment;
+            Country = country;
         }
-
-        protected Producer()
-        {
-        }
-
-        public bool IsSiteOfExport { get; internal set; }
 
         public Business Business { get; private set; }
+
+        public bool IsActualSiteOfTreatment { get; private set; }
 
         public Address Address { get; private set; }
 
         public Contact Contact { get; private set; }
+
+        public Country Country { get; private set; }
     }
 }

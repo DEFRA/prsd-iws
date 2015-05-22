@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Prsd.Core.Domain;
+    using Prsd.Core.Extensions;
 
     public class NotificationApplication : Entity
     {
@@ -13,7 +14,8 @@
         {
         }
 
-        public NotificationApplication(Guid userId, NotificationType notificationType, UKCompetentAuthority competentAuthority,
+        public NotificationApplication(Guid userId, NotificationType notificationType,
+            UKCompetentAuthority competentAuthority,
             int notificationNumber)
         {
             UserId = userId;
@@ -30,11 +32,27 @@
 
         public UKCompetentAuthority CompetentAuthority { get; private set; }
 
-        public Exporter Exporter { get; private set; }
+        public virtual Exporter Exporter { get; private set; }
 
         public string NotificationNumber { get; private set; }
 
         public DateTime CreatedDate { get; private set; }
+
+        protected virtual ICollection<Producer> ProducersCollection { get; set; }
+
+        public IEnumerable<Producer> Producers
+        {
+            get { return ProducersCollection.ToSafeIEnumerable(); }
+        }
+
+        protected virtual ICollection<Facility> FacilitiesCollection { get; set; }
+
+        public IEnumerable<Facility> Facilities
+        {
+            get { return FacilitiesCollection.ToSafeIEnumerable(); }
+        }
+
+        public virtual Importer Importer { get; private set; }
 
         public void AddExporter(Exporter exporter)
         {
@@ -46,48 +64,9 @@
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
         }
 
-        protected virtual ICollection<Producer> ProducersCollection { get; set; }
-
-        public IEnumerable<Producer> Producers
-        {
-            get
-            {
-                // Hack to make it return an IEnumerable otherwise could
-                // be cast back to ICollection!
-                return ProducersCollection == null ? new Producer[] { } : ProducersCollection.Skip(0);
-            }
-        }
-
-        protected virtual ICollection<Facility> FacilitiesCollection { get; set; }
-
-        public IEnumerable<Facility> Facilities
-        {
-            get
-            {
-                return FacilitiesCollection == null ? new Facility[] { } : FacilitiesCollection.Skip(0);
-            }
-        }
-
         public void AddProducer(Producer producer)
         {
             ProducersCollection.Add(producer);
-
-            if (producer.IsSiteOfExport)
-            {
-                SetSiteOfExport(producer);
-            }
-        }
-
-        public void AddFacility(Facility facility)
-        {
-            FacilitiesCollection.Add(facility);
-        }
-
-        public Importer Importer { get; private set; }
-
-        public void AddImporter(Importer importer)
-        {
-            Importer = importer;
         }
 
         public void RemoveProducer(Producer producer)
@@ -100,21 +79,27 @@
             ProducersCollection.Remove(producer);
         }
 
-        private void SetSiteOfExport(Producer producer)
+        public void AddFacility(Facility facility)
         {
-            if (!ProducersCollection.Contains(producer))
+            FacilitiesCollection.Add(facility);
+        }
+
+        public void AddImporter(Importer importer)
+        {
+            Importer = importer;
+        }
+
+        public void SetAsSiteOfExport(Guid producerId)
+        {
+            if (ProducersCollection.All(p => p.Id != producerId))
             {
-                throw new InvalidOperationException(String.Format("Unable to make producer with id {0} the site of export", producer.Id));
+                throw new InvalidOperationException(
+                    String.Format("Unable to make producer with id {0} the site of export", producerId));
             }
 
-            if (!producer.IsSiteOfExport)
+            foreach (var prod in ProducersCollection)
             {
-                throw new InvalidOperationException(String.Format("The producer with id {0} is not a site of export", producer.Id));
-            }
-
-            foreach (var prod in ProducersCollection.Where(p => !p.Equals(producer)))
-            {
-                prod.SetSiteOfExport(false);
+                prod.IsSiteOfExport = prod.Id == producerId;
             }
         }
     }

@@ -93,8 +93,7 @@
                         NotificationId = model.NotificationId,
                         Address = model.Address,
                         Business = (BusinessData)model.Business,
-                        Contact = model.Contact,
-                        IsSiteOfExport = model.IsSiteOfExport
+                        Contact = model.Contact
                     };
 
                     var response =

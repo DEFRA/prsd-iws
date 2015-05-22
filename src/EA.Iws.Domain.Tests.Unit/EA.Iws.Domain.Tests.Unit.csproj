@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Notification\NotificationApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

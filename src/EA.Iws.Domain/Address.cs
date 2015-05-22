@@ -2,11 +2,11 @@
 {
     using System;
     using Prsd.Core;
-    using Prsd.Core.Domain;
 
     public class Address
     {
-        public Address(string building, string address1, string address2, string townOrCity, string region, string postalCode, string country)
+        public Address(string building, string address1, string address2, string townOrCity, string region,
+            string postalCode, string country)
         {
             Guard.ArgumentNotNull(building);
             Guard.ArgumentNotNull(townOrCity);

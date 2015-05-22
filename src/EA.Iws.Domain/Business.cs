@@ -4,14 +4,6 @@
 
     public class Business
     {
-        public string Name { get; private set; }
-
-        public string Type { get; private set; }
-
-        public string RegistrationNumber { get; private set; }
-
-        public string AdditionalRegistrationNumber { get; private set; }
-
         public Business(string name, string type, string registrationNumber, string additionalRegistrationNumber)
         {
             Guard.ArgumentNotNull(name);
@@ -23,8 +15,16 @@
             AdditionalRegistrationNumber = additionalRegistrationNumber;
         }
 
-        private Business()
+        protected Business()
         {
         }
+
+        public string Name { get; private set; }
+
+        public string Type { get; private set; }
+
+        public string RegistrationNumber { get; private set; }
+
+        public string AdditionalRegistrationNumber { get; private set; }
     }
 }
