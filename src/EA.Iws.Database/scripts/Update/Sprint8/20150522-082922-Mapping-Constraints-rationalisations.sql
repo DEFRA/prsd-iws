@@ -37,7 +37,7 @@ PRINT N'Dropping FK_NotificationProducer_Producer...';
 
 
 GO
-ALTER TABLE [Business].[NotificationProducer] DROP CONSTRAINT [FK_NotificationProducer_Producer];
+ALTER TABLE [Notification].[NotificationProducer] DROP CONSTRAINT [FK_NotificationProducer_Producer];
 
 
 GO
@@ -389,7 +389,7 @@ SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
 SET XACT_ABORT ON;
 
-CREATE TABLE [Notification].[tmp_ms_xx_Exporter] (
+CREATE TABLE [Business].[tmp_ms_xx_Exporter] (
     [Id]                           UNIQUEIDENTIFIER NOT NULL,
     [Name]                         NVARCHAR (20)    NOT NULL,
     [Type]                         NVARCHAR (64)    NOT NULL,
@@ -413,9 +413,9 @@ CREATE TABLE [Notification].[tmp_ms_xx_Exporter] (
 );
 
 IF EXISTS (SELECT TOP 1 1 
-           FROM   [Notification].[Exporter])
+           FROM   [Business].[Exporter])
     BEGIN
-        INSERT INTO [Notification].[tmp_ms_xx_Exporter] ([Id], [Name], [Type], [RegistrationNumber], [AdditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [Country], [FirstName], [LastName], [Telephone], [Fax], [Email])
+        INSERT INTO [Business].[tmp_ms_xx_Exporter] ([Id], [Name], [Type], [RegistrationNumber], [AdditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [Country], [FirstName], [LastName], [Telephone], [Fax], [Email])
         SELECT   [Id],
                  [Name],
                  [Type],
@@ -432,15 +432,15 @@ IF EXISTS (SELECT TOP 1 1
                  [Telephone],
                  [Fax],
                  [Email]
-        FROM     [Notification].[Exporter]
+        FROM     [Business].[Exporter]
         ORDER BY [Id] ASC;
     END
 
-DROP TABLE [Notification].[Exporter];
+DROP TABLE [Business].[Exporter];
 
-EXECUTE sp_rename N'[Notification].[tmp_ms_xx_Exporter]', N'Exporter';
+EXECUTE sp_rename N'[Business].[tmp_ms_xx_Exporter]', N'Exporter';
 
-EXECUTE sp_rename N'[Notification].[tmp_ms_xx_constraint_PK_Exporter]', N'PK_Exporter', N'OBJECT';
+EXECUTE sp_rename N'[Business].[tmp_ms_xx_constraint_PK_Exporter]', N'PK_Exporter', N'OBJECT';
 
 COMMIT TRANSACTION;
 
@@ -488,7 +488,7 @@ PRINT N'Creating FK_NotificationProducer_Producer...';
 
 
 GO
-ALTER TABLE [Business].[NotificationProducer] WITH NOCHECK
+ALTER TABLE [Notification].[NotificationProducer] WITH NOCHECK
     ADD CONSTRAINT [FK_NotificationProducer_Producer] FOREIGN KEY ([ProducerId]) REFERENCES [Business].[Producer] ([Id]);
 
 
@@ -498,7 +498,7 @@ PRINT N'Creating FK_Notification_Exporter...';
 
 GO
 ALTER TABLE [Notification].[Notification] WITH NOCHECK
-    ADD CONSTRAINT [FK_Notification_Exporter] FOREIGN KEY ([ExporterId]) REFERENCES [Notification].[Exporter] ([Id]);
+    ADD CONSTRAINT [FK_Notification_Exporter] FOREIGN KEY ([ExporterId]) REFERENCES [Business].[Exporter] ([Id]);
 
 
 GO
@@ -517,7 +517,7 @@ ALTER TABLE [Notification].[Notification] WITH CHECK CHECK CONSTRAINT [FK_Notifi
 
 ALTER TABLE [Identity].[AspNetUsers] WITH CHECK CHECK CONSTRAINT [FK_AspNetUsers_Organisation];
 
-ALTER TABLE [Business].[NotificationProducer] WITH CHECK CHECK CONSTRAINT [FK_NotificationProducer_Producer];
+ALTER TABLE [Notification].[NotificationProducer] WITH CHECK CHECK CONSTRAINT [FK_NotificationProducer_Producer];
 
 ALTER TABLE [Notification].[Notification] WITH CHECK CHECK CONSTRAINT [FK_Notification_Exporter];
 
