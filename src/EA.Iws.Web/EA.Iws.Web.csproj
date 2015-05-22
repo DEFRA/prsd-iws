@@ -471,6 +471,7 @@
     <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
     <Content Include="Views\Producer\CopyFromExporter.cshtml" />
     <Content Include="Views\NotificationApplication\DownloadInstructions.cshtml" />
+    <Content Include="Views\NotificationApplication\NotificationOverview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -522,8 +523,8 @@
     <Compile Include="ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\FacilityViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\NotificationSummaryViewModel.cs" />
     <Compile Include="ViewModels\Importer\ImporterViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
     <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
     <Compile Include="ViewModels\Producer\MultipleProducersViewModel.cs" />
     <Compile Include="ViewModels\Producer\ProducerViewModel.cs" />

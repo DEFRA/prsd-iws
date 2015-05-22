@@ -1,0 +1,56 @@
+﻿@model EA.Iws.Web.ViewModels.NotificationApplication.NotificationSummaryViewModel
+
+@{
+    ViewBag.Title = "Notification overview";
+}
+
+<h1 class="heading-large">Notification overview</h1>
+<p>@Model.NotificationNumber</p>
+<div class="form-group">
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div>Exporter - notifier</div>
+            </td>
+            <td>
+                <div>@Html.ActionLink("Edit", "ExporterNotifier", new { id = Model.NotificationId }, null)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>Waste generator - producer</div>
+            </td>
+            <td>
+                <div>@Html.ActionLink("Edit", "MultipleProducers", "Producer", new { notificationId = Model.NotificationId }, null)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>Importer - consignee</div>
+            </td>
+            <td>
+                <div>@Html.ActionLink("Edit", "Add", "Importer", new { id = Model.NotificationId }, null)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>Recovery/Disposal facility</div>
+            </td>
+            <td>
+                <div>@Html.ActionLink("Edit", "MultipleFacilities", "Facility", new { notificationId = Model.NotificationId }, null)</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+    <div class="form-group">
+        @Html.ActionLink("Continue", "Home", "Applicant", new { id = Model.NotificationId }, new { @class = "button" })
+    </div>

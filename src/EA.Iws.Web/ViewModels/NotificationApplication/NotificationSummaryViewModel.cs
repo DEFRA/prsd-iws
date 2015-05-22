@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class CreatedViewModel
+    public class NotificationSummaryViewModel
     {
         public string NotificationNumber { get; set; }
 
