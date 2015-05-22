@@ -1,31 +1,32 @@
-﻿    namespace EA.Iws.Web.Infrastructure
+﻿namespace EA.Iws.Web.Infrastructure
+{
+    using System.Security.Claims;
+    using System.Web.Mvc;
+    using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
+    using ClaimTypes = Requests.ClaimTypes;
+
+    public class OrganisationRequiredAttribute : AuthorizeAttribute
     {
-        using System.Linq;
-        using System.Security.Claims;
-        using System.Web.Mvc;
-        using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
-
-        public class OrganisationRequiredAttribute : AuthorizeAttribute
+        public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            public override void OnAuthorization(AuthorizationContext filterContext)
+            var skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+                                    || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+                                    || filterContext.ActionDescriptor.ActionName.Equals("CreateNewOrganisation")
+                                    || filterContext.ActionDescriptor.ActionName.Equals("SelectOrganisation")
+                                    || filterContext.ActionDescriptor.ActionName.Equals("LogOff");
+
+            if (skipAuthorization)
             {
-                var skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-                                     || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-                                     || filterContext.ActionDescriptor.ActionName.Equals("CreateNewOrganisation")
-                                     || filterContext.ActionDescriptor.ActionName.Equals("SelectOrganisation");
+                return;
+            }
 
-                if (skipAuthorization)
-                {
-                    return;
-                }
+            var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
+            var organisationRegistered = identity.HasClaim(c => c.Type.Equals(ClaimTypes.OrganisationId));
 
-                var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
-                var organisationRegistered = identity.HasClaim(c => c.Type.Equals(Requests.ClaimTypes.OrganisationId));
-
-                if (!organisationRegistered)
-                {
-                    filterContext.Result = new RedirectResult("/Registration/CreateNewOrganisation");
-                }
+            if (!organisationRegistered)
+            {
+                filterContext.Result = new RedirectResult("/Registration/CreateNewOrganisation");
             }
         }
     }
+}
