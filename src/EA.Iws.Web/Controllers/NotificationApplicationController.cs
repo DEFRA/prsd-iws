@@ -14,7 +14,7 @@
     using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Constants = Prsd.Core.Web.Constants;
-    
+
     [Authorize]
     public class NotificationApplicationController : Controller
     {
@@ -205,8 +205,6 @@
                 return View(model);
             }
         }
-            }
-        }
 
         [HttpGet]
         public async Task<ActionResult> NotificationOverview(Guid id)
@@ -221,5 +219,7 @@
                     NotificationNumber = response
                 };
                 return View(model);
+            }
+        }
     }
 }
