@@ -4,7 +4,7 @@
 
     public class SpecialHandlingViewModel
     {
-        public bool SpecialHandling { get; set; }
+        public bool IsSpecialHandling { get; set; }
 
         public Guid NotificationId { get; set; }
     }

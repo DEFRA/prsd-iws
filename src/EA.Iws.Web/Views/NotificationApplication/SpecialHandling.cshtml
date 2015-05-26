@@ -9,25 +9,27 @@
     <h2 class="heading-large">Are there any special handling requirements?</h2>
 </header>
 
-@using (Html.BeginForm("NotificationTypeQuestion", "NotificationApplication", FormMethod.Post))
+@using (Html.BeginForm())
 {
 
 <div class="form-group">
     <fieldset>
-        <label class="block-label" for="rdoDisposal">
-            @Html.RadioButtonFor(m => m.SpecialHandling, "Yes", new {@id = "rdoDisposal"})Yes
-        </label>
         <label class="block-label">
-            @Html.RadioButtonFor(m => m.SpecialHandling, "No", new {@id = "rdo", Checked = "checked"})No
+            @Html.RadioButtonFor(m => m.IsSpecialHandling, false, new { @id = "rdoNotSpecialHandling", Checked = "checked" })No
+            
+        </label>
+        <label class="block-label" for="rdoSpecialHandling">
+            @Html.RadioButtonFor(m => m.IsSpecialHandling, true, new { @id = "rdoSpecialHandling" })Yes
         </label>
     </fieldset>
 </div>
 <div class="form-group">
-    <div class="panel-indent" id="disposal-message">
+    <div class="panel-indent" id="information-message">
         Provide details of the special handling requirements in a separate document with this submission.
     </div>
 </div>
  
+@Html.HiddenFor(m => m.NotificationId)
 <div class="form-group">
     <button class="button" type="submit">Continue</button>
 </div>
@@ -38,14 +40,14 @@
 {
 <script>
         $(function() {
-            $("#disposal-message").hide();
+            $("#information-message").hide();
 
-            $("#rdoDisposal").click(function () {
-                $("#disposal-message").show("fast");
+            $("#rdoSpecialHandling").click(function () {
+                $("#information-message").show("fast");
             });
 
-            $("#rdo").click(function () {
-                $("#disposal-message").hide("fast");
+            $("#rdoNotSpecialHandling").click(function () {
+                $("#information-message").hide("fast");
             });
         });
 </script>

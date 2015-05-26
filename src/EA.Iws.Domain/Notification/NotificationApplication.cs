@@ -51,6 +51,8 @@
 
         public DateTime CreatedDate { get; private set; }
 
+        public bool IsSpecialHandling { get; set; }
+
         protected virtual ICollection<Producer> ProducersCollection { get; set; }
 
         public IEnumerable<Producer> Producers

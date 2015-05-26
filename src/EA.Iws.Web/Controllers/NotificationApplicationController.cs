@@ -223,14 +223,21 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> SpecialHandling()
+        public ActionResult SpecialHandling(Guid id)
         {
-            return View(new SpecialHandlingViewModel());
+            return View(new SpecialHandlingViewModel{NotificationId = id});
         }
 
         [HttpPost]
         public async Task<ActionResult> SpecialHandling(SpecialHandlingViewModel model)
         {
+            using (var client = apiClient())
+            {
+                if (model.IsSpecialHandling)
+                {
+                    await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling));
+                }
+            }
             return View(new SpecialHandlingViewModel());
         }
     }

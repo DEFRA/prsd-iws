@@ -70,6 +70,7 @@
     <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
+    <Compile Include="Notification\SetSpecialHandlingHandler.cs" />
     <Compile Include="Producers\DeleteProducerHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
     <Compile Include="Exporters\GetExporterByNotificationIdHandler.cs" />
