@@ -53,6 +53,7 @@
     <Content Include="scripts\Update\Sprint7\20150520-164530-Move-Table-Schemas.sql" />
     <Content Include="scripts\Update\Sprint8\20150522-082922-Mapping-Constraints-rationalisations.sql" />
     <Content Include="scripts\Update\Sprint8\20150522-123533-Add-OrganisationId-Claims-To-ApplicationUsers.sql" />
+    <Content Include="scripts\Update\Sprint8\20150526-141010-Resize-Name-Columns.sql" />
     <Content Include="scripts\Update\Sprint8\20150522-162200-move-foreign-keys-for-notification.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
