@@ -6,8 +6,6 @@
 
     public class ExporterViewModel
     {
-        public Guid Id { get; set; }
-
         public Guid NotificationId { get; set; }
 
         public AddressData Address { get; set; }

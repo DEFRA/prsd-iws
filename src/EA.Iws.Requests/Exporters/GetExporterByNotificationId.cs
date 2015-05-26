@@ -5,7 +5,7 @@
 
     public class GetExporterByNotificationId : IRequest<ExporterData>
     {
-        public Guid NotificationId { get; set; }
+        public Guid NotificationId { get; private set; }
 
         public GetExporterByNotificationId(Guid notificationId)
         {

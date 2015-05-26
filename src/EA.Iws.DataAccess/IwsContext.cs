@@ -17,17 +17,11 @@
 
         public virtual DbSet<Country> Countries { get; set; }
 
-        public virtual DbSet<Exporter> Exporters { get; set; }
-
         public virtual DbSet<Organisation> Organisations { get; set; }
 
         public virtual DbSet<NotificationApplication> NotificationApplications { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
-
-        public virtual DbSet<Producer> Producers { get; set; }
-
-        public virtual DbSet<Facility> Facilities { get; set; }
 
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")

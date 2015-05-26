@@ -9,7 +9,7 @@
     using Requests.Facilities;
     using Requests.Shared;
 
-    public class GetFacilitiesByNotificationIdHandler : IRequestHandler<GetFacilitiesByNotificationId, IList<FacilityData>>
+    internal class GetFacilitiesByNotificationIdHandler : IRequestHandler<GetFacilitiesByNotificationId, IList<FacilityData>>
     {
         private readonly IwsContext db;
 

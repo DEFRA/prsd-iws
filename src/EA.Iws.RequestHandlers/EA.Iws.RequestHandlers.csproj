@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exporters\NotificationHasExporterHandler.cs" />
+    <Compile Include="Exporters\UpdateExporterForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />

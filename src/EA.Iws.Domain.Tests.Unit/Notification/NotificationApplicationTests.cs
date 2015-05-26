@@ -52,14 +52,29 @@
 
         private Producer CreateEmptyProducer()
         {
-            var address = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                "United Kingdom");
+            var address = CreateEmptyAddress();
 
-            var business = new Business(string.Empty, String.Empty, String.Empty, string.Empty);
+            var business = CreateEmptyBusiness();
 
-            var contact = new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
+            var contact = CreateEmptyContact();
 
             return new Producer(business, address, contact);
+        }
+
+        private static Contact CreateEmptyContact()
+        {
+            return new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
+        }
+
+        private static Business CreateEmptyBusiness()
+        {
+            return new Business(string.Empty, String.Empty, String.Empty, string.Empty);
+        }
+
+        private static Address CreateEmptyAddress()
+        {
+            return new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                "United Kingdom");
         }
 
         [Fact]
@@ -104,9 +119,8 @@
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
-            var producer = CreateEmptyProducer();
 
-            Action removeProducer = () => notification.RemoveProducer(producer);
+            Action removeProducer = () => notification.RemoveProducer(new Guid("{BD49EF90-C9B2-4E84-B0D3-964BC2A592D5}"));
 
             Assert.Throws<InvalidOperationException>(removeProducer);
         }
@@ -131,6 +145,64 @@
             typeof(Producer).GetProperty("Address").SetValue(updateProducer, newAddress);
 
             Assert.Equal("new building", notification.Producers.Single(p => p.Id == producerId).Address.Building);
+        }
+
+        [Fact]
+        public void CanAddExporter()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var business = CreateEmptyBusiness();
+            var address = CreateEmptyAddress();
+            var contact = CreateEmptyContact();
+
+            notification.AddExporter(business, address, contact);
+
+            Assert.True(notification.HasExporter);
+        }
+
+        [Fact]
+        public void CantAddMultipleExporters()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var business = CreateEmptyBusiness();
+            var address = CreateEmptyAddress();
+            var contact = CreateEmptyContact();
+
+            notification.AddExporter(business, address, contact);
+
+            Action addSecondExporter = () => notification.AddExporter(business, address, contact);
+
+            Assert.Throws<InvalidOperationException>(addSecondExporter);
+        }
+
+        [Fact]
+        public void HasExporterDefaultToFalse()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            Assert.False(notification.HasExporter);
+        }
+
+        [Fact]
+        public void RemoveExporterSetsToNull()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var business = CreateEmptyBusiness();
+            var address = CreateEmptyAddress();
+            var contact = CreateEmptyContact();
+
+            notification.AddExporter(business, address, contact);
+
+            notification.RemoveExporter();
+
+            Assert.Null(notification.Exporter);
         }
     }
 }

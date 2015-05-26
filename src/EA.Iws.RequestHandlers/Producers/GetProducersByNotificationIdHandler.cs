@@ -9,7 +9,7 @@
     using Requests.Producers;
     using Requests.Shared;
 
-    public class GetProducersByNotificationIdHandler :
+    internal class GetProducersByNotificationIdHandler :
         IRequestHandler<GetProducersByNotificationId, IList<ProducerData>>
     {
         private readonly IwsContext db;

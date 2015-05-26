@@ -8,25 +8,23 @@
     using Prsd.Core.Mediator;
     using Requests.Exporters;
 
-    internal class AddExporterToNotificationHandler : IRequestHandler<AddExporterToNotification, Guid>
+    internal class UpdateExporterForNotificationHandler : IRequestHandler<UpdateExporterForNotification, Guid>
     {
         private readonly IwsContext context;
 
-        public AddExporterToNotificationHandler(IwsContext context)
+        public UpdateExporterForNotificationHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(AddExporterToNotification message)
+        public async Task<Guid> HandleAsync(UpdateExporterForNotification message)
         {
             var country = await context.Countries.SingleAsync(c => c.Id == message.Address.CountryId);
             var notification = await context.NotificationApplications.FindAsync(message.NotificationId);
-
-            var address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
-            var contact = ValueObjectInitializer.CreateContact(message.Contact);
-            var business = ValueObjectInitializer.CreateBusiness(message.Business);
-
-            notification.AddExporter(business, address, contact);
+            
+            notification.Exporter.Address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
+            notification.Exporter.Contact = ValueObjectInitializer.CreateContact(message.Contact);
+            notification.Exporter.Business = ValueObjectInitializer.CreateBusiness(message.Business);
 
             await context.SaveChangesAsync();
 

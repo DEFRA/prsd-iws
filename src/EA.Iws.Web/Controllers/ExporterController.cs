@@ -10,6 +10,7 @@
     using Requests.Exporters;
     using Requests.Shared;
     using ViewModels.Exporter;
+    using ViewModels.Shared;
 
     [Authorize]
     public class ExporterController : Controller
@@ -24,14 +25,23 @@
         [HttpGet]
         public async Task<ActionResult> Add(Guid id)
         {
-            var facility = new ExporterViewModel
+            using (var client = apiClient())
+            {
+                bool hasExporter = await client.SendAsync(User.GetAccessToken(), new NotificationHasExporter(id));
+                if (hasExporter)
+                {
+                    return RedirectToAction("Edit", "Exporter", new { id = id });
+                }
+            }
+
+            var model = new ExporterViewModel
             {
                 NotificationId = id
             };
 
             await this.BindCountryList(apiClient);
 
-            return View(facility);
+            return View(model);
         }
 
         [HttpPost]
@@ -47,7 +57,7 @@
             {
                 using (var client = apiClient())
                 {
-                    var exporter = new ExporterData
+                    var exporter = new AddExporterToNotification
                     {
                         NotificationId = model.NotificationId,
                         Address = model.Address,
@@ -55,8 +65,7 @@
                         Contact = model.Contact
                     };
 
-                    var response =
-                        await client.SendAsync(User.GetAccessToken(), new AddExporterToNotification(exporter));
+                    await client.SendAsync(User.GetAccessToken(), exporter);
 
                     return RedirectToAction("Add", "Producer", new { id = model.NotificationId });
                 }
@@ -68,8 +77,67 @@
                 {
                     throw;
                 }
+            }
+
+            await this.BindCountryList(apiClient);
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var model = new ExporterViewModel();
+                var exporter = await client.SendAsync(User.GetAccessToken(), new GetExporterByNotificationId(id));
+
+                model.NotificationId = id;
+                model.Address = exporter.Address;
+                model.Contact = exporter.Contact;
+                model.Business = (BusinessViewModel)exporter.Business;
+
+                await this.BindCountryList(apiClient);
                 return View(model);
             }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(ExporterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                await this.BindCountryList(apiClient);
+                return View(model);
+            }
+
+            try
+            {
+                using (var client = apiClient())
+                {
+                    var exporter = new UpdateExporterForNotification
+                    {
+                        NotificationId = model.NotificationId,
+                        Address = model.Address,
+                        Business = (BusinessData)model.Business,
+                        Contact = model.Contact
+                    };
+
+                    await client.SendAsync(User.GetAccessToken(), exporter);
+
+                    return RedirectToAction("NotificationOverview", "NotificationApplication", new { id = model.NotificationId });
+                }
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            await this.BindCountryList(apiClient);
+            return View(model);
         }
     }
 }

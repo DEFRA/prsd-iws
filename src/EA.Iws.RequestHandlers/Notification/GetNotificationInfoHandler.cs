@@ -7,7 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    public class GetNotificationInfoHandler : IRequestHandler<GetNotificationInfo, CompetentAuthorityData>
+    internal class GetNotificationInfoHandler : IRequestHandler<GetNotificationInfo, CompetentAuthorityData>
     {
         private readonly IwsContext db;
 

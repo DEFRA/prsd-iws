@@ -4,13 +4,12 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain;
     using Domain.Notification;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Facilities;
 
-    public class AddFacilityToNotificationHandler : IRequestHandler<AddFacilityToNotification, Guid>
+    internal class AddFacilityToNotificationHandler : IRequestHandler<AddFacilityToNotification, Guid>
     {
         private readonly IwsContext context;
 

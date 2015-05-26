@@ -7,7 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    public class GetNotificationNumberHandler : IRequestHandler<GetNotificationNumber, string>
+    internal class GetNotificationNumberHandler : IRequestHandler<GetNotificationNumber, string>
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;

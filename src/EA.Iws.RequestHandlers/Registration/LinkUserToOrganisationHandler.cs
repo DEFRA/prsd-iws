@@ -10,7 +10,7 @@
     using Requests.Registration;
     using ClaimTypes = Requests.ClaimTypes;
 
-    public class LinkUserToOrganisationHandler : IRequestHandler<LinkUserToOrganisation, bool>
+    internal class LinkUserToOrganisationHandler : IRequestHandler<LinkUserToOrganisation, bool>
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;

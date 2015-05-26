@@ -10,7 +10,7 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    public class GenerateNotificationDocumentHandler : IRequestHandler<GenerateNotificationDocument, byte[]>
+    internal class GenerateNotificationDocumentHandler : IRequestHandler<GenerateNotificationDocument, byte[]>
     {
         private readonly IwsContext context;
         private readonly IDocumentGenerator documentGenerator;

@@ -472,6 +472,7 @@
     <Content Include="Views\Producer\CopyFromExporter.cshtml" />
     <Content Include="Views\NotificationApplication\DownloadInstructions.cshtml" />
     <Content Include="Views\NotificationApplication\NotificationOverview.cshtml" />
+    <Content Include="Views\Exporter\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

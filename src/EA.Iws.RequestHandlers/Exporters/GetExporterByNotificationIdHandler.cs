@@ -8,7 +8,7 @@
     using Requests.Exporters;
     using Requests.Shared;
 
-    public class GetExporterByNotificationIdHandler : IRequestHandler<GetExporterByNotificationId, ExporterData>
+    internal class GetExporterByNotificationIdHandler : IRequestHandler<GetExporterByNotificationId, ExporterData>
     {
         private readonly IwsContext context;
 

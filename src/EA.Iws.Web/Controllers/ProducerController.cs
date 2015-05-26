@@ -59,7 +59,7 @@
             {
                 using (var client = apiClient())
                 {
-                    var exporter = await client.SendAsync(new GetExporterByNotificationId(id));
+                    var exporter = await client.SendAsync(User.GetAccessToken(), new GetExporterByNotificationId(id));
 
                     model.Address = exporter.Address;
                     model.Contact = exporter.Contact;

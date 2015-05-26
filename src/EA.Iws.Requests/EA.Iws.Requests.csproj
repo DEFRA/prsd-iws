@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="ClaimTypes.cs" />
     <Compile Include="Exporters\AddExporterToNotification.cs" />
+    <Compile Include="Exporters\NotificationHasExporter.cs" />
+    <Compile Include="Exporters\UpdateExporterForNotification.cs" />
     <Compile Include="Facilities\AddFacilityToNotification.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />

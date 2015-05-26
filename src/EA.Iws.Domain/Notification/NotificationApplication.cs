@@ -34,6 +34,11 @@
 
         public virtual Exporter Exporter { get; private set; }
 
+        public bool HasExporter
+        {
+            get { return Exporter != null; }
+        }
+
         public string NotificationNumber { get; private set; }
 
         public DateTime CreatedDate { get; private set; }
@@ -54,14 +59,24 @@
 
         public virtual Importer Importer { get; private set; }
 
-        public void AddExporter(Exporter exporter)
-        {
-            Exporter = exporter;
-        }
-
         private string CreateNotificationNumber(int notificationNumber)
         {
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
+        }
+
+        public void AddExporter(Business business, Address address, Contact contact)
+        {
+            if (Exporter != null)
+            {
+                throw new InvalidOperationException("Exporter already exists, can't add another.");
+            }
+
+            Exporter = new Exporter(business, address, contact);
+        }
+
+        public void RemoveExporter()
+        {
+            Exporter = null;
         }
 
         public void AddProducer(Producer producer)
@@ -69,11 +84,12 @@
             ProducersCollection.Add(producer);
         }
 
-        public void RemoveProducer(Producer producer)
+        public void RemoveProducer(Guid producerId)
         {
-            if (!ProducersCollection.Contains(producer))
+            var producer = ProducersCollection.SingleOrDefault(p => p.Id == producerId);
+            if (producer == null)
             {
-                throw new InvalidOperationException(String.Format("Unable to remove producer with id {0}", producer.Id));
+                throw new InvalidOperationException(string.Format("Unable to remove producer with id {0}", producerId));
             }
 
             ProducersCollection.Remove(producer);
@@ -94,7 +110,7 @@
             if (ProducersCollection.All(p => p.Id != producerId))
             {
                 throw new InvalidOperationException(
-                    String.Format("Unable to make producer with id {0} the site of export", producerId));
+                    string.Format("Unable to make producer with id {0} the site of export", producerId));
             }
 
             foreach (var prod in ProducersCollection)

@@ -18,9 +18,8 @@
 
         public async Task<bool> HandleAsync(DeleteProducer query)
         {
-            var producer = await context.Producers.SingleAsync(p => p.Id == query.ProducerId);
             var notification = await context.NotificationApplications.Where(n => n.Id == query.NotificationId).SingleAsync();
-            notification.RemoveProducer(producer);
+            notification.RemoveProducer(query.ProducerId);
             await context.SaveChangesAsync();
             return true;
         }

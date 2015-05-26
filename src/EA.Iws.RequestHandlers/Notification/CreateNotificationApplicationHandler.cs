@@ -11,7 +11,7 @@
     using Requests.Notification;
     using NotificationType = Requests.Shared.NotificationType;
 
-    public class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
+    internal class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
     {
         private const string NotificationNumberSequenceFormat = "[Notification].[{0}NotificationNumber]";
 
