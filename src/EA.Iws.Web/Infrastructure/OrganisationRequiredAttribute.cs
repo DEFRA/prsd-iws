@@ -14,8 +14,6 @@
                                     || filterContext.ActionDescriptor.ActionName.Equals("CreateNewOrganisation")
                                     || filterContext.ActionDescriptor.ActionName.Equals("SelectOrganisation")
                                     || filterContext.ActionDescriptor.ActionName.Equals("LogOff")
-                                    || filterContext.ActionDescriptor.ActionName.Equals("Home")
-                                    || filterContext.ActionDescriptor.ActionName.Equals("_GetUserNotifications")
                                     || filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.Equals("Elmah");
 
             if (skipAuthorization)
