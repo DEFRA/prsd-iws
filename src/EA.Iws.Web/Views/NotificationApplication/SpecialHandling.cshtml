@@ -1,0 +1,52 @@
+﻿@model EA.Iws.Web.ViewModels.NotificationApplication.SpecialHandlingViewModel
+
+@{
+    ViewBag.Title = "Special Handling";
+}
+
+
+<header class="hgroup">
+    <h2 class="heading-large">Are there any special handling requirements?</h2>
+</header>
+
+@using (Html.BeginForm("NotificationTypeQuestion", "NotificationApplication", FormMethod.Post))
+{
+
+<div class="form-group">
+    <fieldset>
+        <label class="block-label" for="rdoDisposal">
+            @Html.RadioButtonFor(m => m.SpecialHandling, "Yes", new {@id = "rdoDisposal"})Yes
+        </label>
+        <label class="block-label">
+            @Html.RadioButtonFor(m => m.SpecialHandling, "No", new {@id = "rdo", Checked = "checked"})No
+        </label>
+    </fieldset>
+</div>
+<div class="form-group">
+    <div class="panel-indent" id="disposal-message">
+        Provide details of the special handling requirements in a separate document with this submission.
+    </div>
+</div>
+ 
+<div class="form-group">
+    <button class="button" type="submit">Continue</button>
+</div>
+}
+
+
+@section scripts
+{
+<script>
+        $(function() {
+            $("#disposal-message").hide();
+
+            $("#rdoDisposal").click(function () {
+                $("#disposal-message").show("fast");
+            });
+
+            $("#rdo").click(function () {
+                $("#disposal-message").hide("fast");
+            });
+        });
+</script>
+}

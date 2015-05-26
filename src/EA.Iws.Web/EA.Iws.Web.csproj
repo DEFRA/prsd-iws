@@ -473,6 +473,7 @@
     <Content Include="Views\NotificationApplication\DownloadInstructions.cshtml" />
     <Content Include="Views\NotificationApplication\NotificationOverview.cshtml" />
     <Content Include="Views\Exporter\Edit.cshtml" />
+    <Content Include="Views\NotificationApplication\SpecialHandling.cshtml" />
     <Content Include="Views\Carrier\Add.cshtml" />
     <Content Include="Views\Shipment\Info.cshtml" />
     <Content Include="Views\Importer\Edit.cshtml" />
@@ -534,6 +535,7 @@
     <Compile Include="ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\NotificationOverviewViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\SpecialHandlingViewModel.cs" />
     <Compile Include="ViewModels\Producer\MultipleProducersViewModel.cs" />
     <Compile Include="ViewModels\Producer\ProducerViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />

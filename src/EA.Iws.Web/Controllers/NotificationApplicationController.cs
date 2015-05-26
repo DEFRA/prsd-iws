@@ -221,5 +221,17 @@
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> SpecialHandling()
+        {
+            return View(new SpecialHandlingViewModel());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SpecialHandling(SpecialHandlingViewModel model)
+        {
+            return View(new SpecialHandlingViewModel());
+        }
     }
 }
