@@ -37,6 +37,12 @@
         [HttpPost]
         public async Task<ActionResult> Add(ExporterViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                await this.BindCountryList(apiClient);
+                return View(model);
+            }
+
             try
             {
                 using (var client = apiClient())

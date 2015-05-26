@@ -47,6 +47,12 @@
         [HttpPost]
         public async Task<ActionResult> Add(FacilityViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                await this.BindCountryList(apiClient);
+                return View(model);
+            }
+
             var facility = new FacilityData
                     {
                         NotificationType = model.NotificationType,
