@@ -5,13 +5,27 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Reflection;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
+    using Infrastructure;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
+    using Requests.Registration;
+    using Requests.Shipment;
     using ViewModels.Shipment;
 
     [Authorize]
     public class ShipmentController : Controller
     {
+        private readonly Func<IIwsClient> apiClient;
+
+        public ShipmentController(Func<IIwsClient> apiClient)
+        {
+            this.apiClient = apiClient;
+        }
+
         [HttpGet]
         public ActionResult Info(Guid id)
         {
@@ -50,9 +64,34 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Info(ShipmentInfoViewModel model)
+        public async Task<ActionResult> Info(ShipmentInfoViewModel model)
         {
-            return View(model);
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), 
+                        new CreateShipmentInfo(
+                                model.NotificationId,
+                                model.NumberOfShipments,
+                                model.Quantity,
+                                model.Units,
+                                new DateTime(model.StartYear, model.StartMonth, model.StartDay),
+                                new DateTime(model.EndYear, model.EndMonth, model.EndDay)));
+
+                    return RedirectToAction("Home", "Applicant");
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                return View(model);
+            }
         }
     }
 }

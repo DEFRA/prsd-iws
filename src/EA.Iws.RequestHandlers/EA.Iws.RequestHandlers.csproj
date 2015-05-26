@@ -86,6 +86,7 @@
     <Compile Include="Registration\GetCountriesHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />
+    <Compile Include="Shipment\CreateShipmentInfoHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
   </ItemGroup>
   <ItemGroup>

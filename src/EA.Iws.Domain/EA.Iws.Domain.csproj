@@ -51,10 +51,12 @@
     <Compile Include="Notification\Importer.cs" />
     <Compile Include="Notification\NotificationApplication.cs" />
     <Compile Include="Notification\NotificationType.cs" />
+    <Compile Include="Notification\ShipmentInfo.cs" />
     <Compile Include="Organisation.cs" />
     <Compile Include="IDocumentGenerator.cs" />
     <Compile Include="Notification\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShipmentQuantityUnits.cs" />
     <Compile Include="UKCompetentAuthority.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

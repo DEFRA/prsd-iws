@@ -37,6 +37,8 @@
 
         public bool HasExporter
         {
+        public virtual ShipmentInfo ShipmentInfo { get; private set; }
+
             get { return Exporter != null; }
         }
 
@@ -129,12 +131,29 @@
                 prod.IsSiteOfExport = prod.Id == producerId;
             }
         }
-
         public Carrier AddCarrier(Business business, Address address, Contact contact)
         {
             var carrier = new Carrier(business, address, contact);
             CarriersCollection.Add(carrier);
             return carrier;
+        }
+        
+        public void AddShippingInfo(DateTime startDate, DateTime endDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
+        {
+            if (ShipmentInfo != null)
+            {
+                throw new InvalidOperationException(
+                    String.Format("Cannot add shipment info to notification: {0} if it already exists", Id));
+            }
+
+            ShipmentInfo = new ShipmentInfo
+            {
+                FirstDate = startDate,
+                LastDate = endDate,
+                NumberOfShipments = numberOfShipments,
+                Quantity = quantity,
+                Units = unit
+            };
         }
     }
 }

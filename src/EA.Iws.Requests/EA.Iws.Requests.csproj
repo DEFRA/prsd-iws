@@ -83,6 +83,7 @@
     <Compile Include="Registration\OrganisationRegistrationData.cs" />
     <Compile Include="Registration\Users\User.cs" />
     <Compile Include="Registration\Users\UserById.cs" />
+    <Compile Include="Shipment\CreateShipmentInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
