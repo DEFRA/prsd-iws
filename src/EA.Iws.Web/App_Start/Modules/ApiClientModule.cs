@@ -14,14 +14,14 @@
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
                 return new IwsClient(config.ApiUrl);
-            }).As<IIwsClient>().InstancePerRequest();
+            }).As<IIwsClient>();
 
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
                 return new OAuthClient(config.ApiUrl, config.ApiSecret);
-            }).As<IOAuthClient>().InstancePerRequest();
+            }).As<IOAuthClient>();
         }
     }
 }
