@@ -37,7 +37,7 @@
                 return View(model);
             }
 
-            var carrier = new CarrierData
+            var carrier = new AddCarrierToNotification
             {
                 NotificationId = model.NotificationId,
                 Address = model.Address,
@@ -48,9 +48,9 @@
             {
                 try
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), new AddCarrierToNotification(carrier));
+                    await client.SendAsync(User.GetAccessToken(), carrier);
 
-                    //TODO: Chirag: Change to proper navigation
+                    // TODO: navigate to multiple carriers screen once implemented
                     return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)

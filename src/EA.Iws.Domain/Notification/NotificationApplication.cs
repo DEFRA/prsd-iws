@@ -130,9 +130,11 @@
             }
         }
 
-        public void AddCarrier(Carrier carrier)
+        public Carrier AddCarrier(Business business, Address address, Contact contact)
         {
+            var carrier = new Carrier(business, address, contact);
             CarriersCollection.Add(carrier);
+            return carrier;
         }
     }
 }

@@ -11,7 +11,7 @@
 
         public Contact Contact { get; private set; }
 
-        public Carrier(Business business, Address address, Contact contact)
+        internal Carrier(Business business, Address address, Contact contact)
         {
             Guard.ArgumentNotNull(business);
             Guard.ArgumentNotNull(address);
