@@ -51,8 +51,6 @@
 
         public DateTime CreatedDate { get; private set; }
 
-        public bool IsSpecialHandling { get; set; }
-
         protected virtual ICollection<Producer> ProducersCollection { get; set; }
 
         public IEnumerable<Producer> Producers
@@ -169,6 +167,15 @@
             }
 
             ShipmentInfo = new ShipmentInfo(numberOfShipments, quantity, unit, startDate, endDate);
+        }
+
+        public void SetSpecialHandling(bool isSpecialHandling)
+        {
+            if (ShipmentInfo == null)
+            {
+                throw new InvalidOperationException("Shiping info does not exist for this notification");
+            }
+            ShipmentInfo.IsSpecialHandling = isSpecialHandling;
         }
     }
 }

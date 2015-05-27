@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DataAccess
 {
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
     using System.Threading;
     using System.Threading.Tasks;
     using Domain;
@@ -34,6 +35,8 @@
         {
             var assembly = typeof(IwsContext).Assembly;
             var coreAssembly = typeof(AuditorExtensions).Assembly;
+
+            modelBuilder.Properties<decimal>().Configure(config => config.HasPrecision(18, 4));
 
             modelBuilder.Conventions.AddFromAssembly(assembly);
             modelBuilder.Configurations.AddFromAssembly(assembly);

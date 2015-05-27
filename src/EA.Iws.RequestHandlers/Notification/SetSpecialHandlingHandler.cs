@@ -18,7 +18,7 @@
         public async Task<string> HandleAsync(SetSpecialHandling query)
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
-            notification.IsSpecialHandling = query.IsSpecialHandling;
+            notification.SetSpecialHandling(query.IsSpecialHandling);
 
             await context.SaveChangesAsync();
 

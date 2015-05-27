@@ -84,5 +84,7 @@
                 quantity = value;
             }
         }
+
+        public bool IsSpecialHandling { get; set; }
     }
 }

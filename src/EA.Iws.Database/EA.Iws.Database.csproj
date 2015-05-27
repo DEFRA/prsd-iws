@@ -56,7 +56,7 @@
     <Content Include="scripts\Update\Sprint8\20150522-160905-Add-ShipmentInfo-Table.sql" />
     <Content Include="scripts\Update\Sprint8\20150526-141010-Resize-Name-Columns.sql" />
     <Content Include="scripts\Update\Sprint8\20150522-162200-move-foreign-keys-for-notification.sql" />
-    <Content Include="scripts\Update\Sprint8\20150526-110946-Add-IsSpecialHandling-To-Notification.sql" />
+    <Content Include="scripts\Update\Sprint8\20150526-110946-Add-IsSpecialHandling-To-ShipmentInfo.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

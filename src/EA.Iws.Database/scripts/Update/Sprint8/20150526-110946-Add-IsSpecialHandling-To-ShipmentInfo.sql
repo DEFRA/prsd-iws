@@ -5,7 +5,7 @@ PRINT N'Altering [Notification].[Notification]...';
 
 
 GO
-ALTER TABLE [Notification].[Notification]
+ALTER TABLE [Business].[ShipmentInfo]
     ADD [IsSpecialHandling] BIT NOT NULL DEFAULT 0;
 
 
