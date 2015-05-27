@@ -2,14 +2,16 @@
 {
     using System;
     using Prsd.Core.Mediator;
+    using Shared;
 
     public class AddImporterToNotification : IRequest<Guid>
     {
-        public ImporterData Importer { get; private set; }
+        public BusinessData Business { get; set; }
 
-        public AddImporterToNotification(ImporterData importer)
-        {
-            Importer = importer;
-        }
+        public AddressData Address { get; set; }
+
+        public ContactData Contact { get; set; }
+
+        public Guid NotificationId { get; set; }
     }
 }

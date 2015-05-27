@@ -1,7 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Exporters
 {
-    using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -19,35 +17,36 @@
 
         public async Task<ExporterData> HandleAsync(GetExporterByNotificationId message)
         {
-            return await context.NotificationApplications.Where(n => n.Id == message.NotificationId).Select(n =>
-                new ExporterData
+            var notification = await context.NotificationApplications.FindAsync(message.NotificationId);
+
+            return new ExporterData
+            {
+                NotificationId = message.NotificationId,
+                Business = new BusinessData
                 {
-                    NotificationId = message.NotificationId,
-                    Business = new BusinessData
-                    {
-                        Name = n.Exporter.Business.Name,
-                        EntityType = n.Exporter.Business.Type,
-                        AdditionalRegistrationNumber = n.Exporter.Business.AdditionalRegistrationNumber,
-                        RegistrationNumber = n.Exporter.Business.RegistrationNumber
-                    },
-                    Address = new AddressData
-                    {
-                        Building = n.Exporter.Address.Building,
-                        StreetOrSuburb = n.Exporter.Address.Address1,
-                        Address2 = n.Exporter.Address.Address2,
-                        TownOrCity = n.Exporter.Address.TownOrCity,
-                        PostalCode = n.Exporter.Address.PostalCode,
-                        CountryName = n.Exporter.Address.Country
-                    },
-                    Contact = new ContactData
-                    {
-                        FirstName = n.Exporter.Contact.FirstName,
-                        LastName = n.Exporter.Contact.LastName,
-                        Telephone = n.Exporter.Contact.Telephone,
-                        Fax = n.Exporter.Contact.Fax,
-                        Email = n.Exporter.Contact.Email
-                    }
-                }).SingleAsync();
+                    Name = notification.Exporter.Business.Name,
+                    EntityType = notification.Exporter.Business.Type,
+                    AdditionalRegistrationNumber = notification.Exporter.Business.AdditionalRegistrationNumber,
+                    RegistrationNumber = notification.Exporter.Business.RegistrationNumber
+                },
+                Address = new AddressData
+                {
+                    Building = notification.Exporter.Address.Building,
+                    StreetOrSuburb = notification.Exporter.Address.Address1,
+                    Address2 = notification.Exporter.Address.Address2,
+                    TownOrCity = notification.Exporter.Address.TownOrCity,
+                    PostalCode = notification.Exporter.Address.PostalCode,
+                    CountryName = notification.Exporter.Address.Country
+                },
+                Contact = new ContactData
+                {
+                    FirstName = notification.Exporter.Contact.FirstName,
+                    LastName = notification.Exporter.Contact.LastName,
+                    Telephone = notification.Exporter.Contact.Telephone,
+                    Fax = notification.Exporter.Contact.Fax,
+                    Email = notification.Exporter.Contact.Email
+                }
+            };
         }
     }
 }

@@ -29,7 +29,7 @@
             Assert.Equal(expected, notification.NotificationNumber);
         }
 
-        private UKCompetentAuthority GetCompetentAuthority(string country)
+        private static UKCompetentAuthority GetCompetentAuthority(string country)
         {
             if (country == England)
             {
@@ -50,7 +50,7 @@
             throw new ArgumentException("Unknown competent authority", "country");
         }
 
-        private Producer CreateEmptyProducer()
+        private static Producer CreateEmptyProducer()
         {
             var address = CreateEmptyAddress();
 
@@ -203,6 +203,64 @@
             notification.RemoveExporter();
 
             Assert.Null(notification.Exporter);
+        }
+
+        [Fact]
+        public void CanAddImporter()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var business = CreateEmptyBusiness();
+            var address = CreateEmptyAddress();
+            var contact = CreateEmptyContact();
+
+            notification.AddImporter(business, address, contact);
+
+            Assert.True(notification.HasImporter);
+        }
+
+        [Fact]
+        public void CantAddMultipleImporters()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var business = CreateEmptyBusiness();
+            var address = CreateEmptyAddress();
+            var contact = CreateEmptyContact();
+
+            notification.AddImporter(business, address, contact);
+
+            Action addSecondImporter = () => notification.AddImporter(business, address, contact);
+
+            Assert.Throws<InvalidOperationException>(addSecondImporter);
+        }
+
+        [Fact]
+        public void HasImporterDefaultToFalse()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            Assert.False(notification.HasImporter);
+        }
+
+        [Fact]
+        public void RemoveImporterSetsToNull()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var business = CreateEmptyBusiness();
+            var address = CreateEmptyAddress();
+            var contact = CreateEmptyContact();
+
+            notification.AddImporter(business, address, contact);
+
+            notification.RemoveImporter();
+
+            Assert.Null(notification.Importer);
         }
 
         [Theory]

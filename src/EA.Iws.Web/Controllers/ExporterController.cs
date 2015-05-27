@@ -22,16 +22,20 @@
             this.apiClient = apiClient;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        private async Task<bool> HasExporter(Guid notificationId)
         {
             using (var client = apiClient())
             {
-                bool hasExporter = await client.SendAsync(User.GetAccessToken(), new NotificationHasExporter(id));
-                if (hasExporter)
-                {
-                    return RedirectToAction("Edit", "Exporter", new { id = id });
-                }
+                return await client.SendAsync(User.GetAccessToken(), new NotificationHasExporter(notificationId));
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Add(Guid id)
+        {
+            if (await HasExporter(id))
+            {
+                return RedirectToAction("Edit", "Exporter", new { id = id });
             }
 
             var model = new ExporterViewModel
@@ -86,6 +90,11 @@
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
+            if (!await HasExporter(id))
+            {
+                return RedirectToAction("Add", "Exporter", new { id = id });
+            }
+
             using (var client = apiClient())
             {
                 var model = new ExporterViewModel();

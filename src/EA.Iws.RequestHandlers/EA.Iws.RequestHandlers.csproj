@@ -65,6 +65,9 @@
     <Compile Include="Carrier\AddCarrierToNotificationHandler.cs" />
     <Compile Include="Exporters\UpdateExporterForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
+    <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
+    <Compile Include="Importers\NotificationHasImporterHandler.cs" />
+    <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
     <Compile Include="Producers\DeleteProducerHandler.cs" />

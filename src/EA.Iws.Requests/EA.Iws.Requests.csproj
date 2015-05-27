@@ -52,7 +52,10 @@
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />
     <Compile Include="Facilities\NotificationTypeById.cs" />
     <Compile Include="Importer\AddImporterToNotification.cs" />
+    <Compile Include="Importer\GetImporterByNotificationId.cs" />
     <Compile Include="Importer\ImporterData.cs" />
+    <Compile Include="Importer\NotificationHasImporter.cs" />
+    <Compile Include="Importer\UpdateImporterForNotification.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\CompetentAuthorityData.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />

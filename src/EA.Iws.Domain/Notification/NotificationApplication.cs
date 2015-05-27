@@ -67,6 +67,11 @@
 
         public virtual Importer Importer { get; private set; }
 
+        public bool HasImporter
+        {
+            get { return Importer != null; }
+        }
+
         private string CreateNotificationNumber(int notificationNumber)
         {
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
@@ -118,9 +123,19 @@
             FacilitiesCollection.Add(facility);
         }
 
-        public void AddImporter(Importer importer)
+        public void AddImporter(Business business, Address address, Contact contact)
         {
-            Importer = importer;
+            if (Importer != null)
+            {
+                throw new InvalidOperationException("Importer already exists, can't add another.");
+            }
+
+            Importer = new Importer(business, address, contact);
+        }
+
+        public void RemoveImporter()
+        {
+            Importer = null;
         }
 
         public void SetAsSiteOfExport(Guid producerId)
