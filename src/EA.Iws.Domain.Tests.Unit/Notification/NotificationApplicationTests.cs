@@ -204,5 +204,60 @@
 
             Assert.Null(notification.Exporter);
         }
+
+        [Theory]
+        [InlineData(-1, 0.0001)]
+        [InlineData(1, -0.0001)]
+        public void CreateShipmentInfo_WithInvalidQuantityAndNumberOfShipments_ThrowsException(int numberOfShipments, decimal quantity)
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var startDate = DateTime.Now;
+            var endDate = DateTime.Now.AddDays(1);
+
+            Action addShipmentInfo = () => notification.AddShippingInfo(startDate, endDate, numberOfShipments, quantity, ShipmentQuantityUnits.Tonnes);
+
+            Assert.Throws<InvalidOperationException>(addShipmentInfo);
+        }
+
+        [Fact]
+        public void CreateShipmentInfo_WithInvalidEndDate_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var startDate = DateTime.Now;
+            var endDate = DateTime.Now.AddDays(-1); //Invalid end date
+
+            Action addShipmentInfo = () => notification.AddShippingInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+
+            Assert.Throws<InvalidOperationException>(addShipmentInfo);
+        }
+
+        [Fact]
+        public void CreateShipmentInfo_WithInvalidStartDate_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var startDate = DateTime.Now.AddDays(1); //Invalid start date
+            var endDate = DateTime.Now; 
+
+            Action addShipmentInfo = () => notification.AddShippingInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+
+            Assert.Throws<InvalidOperationException>(addShipmentInfo);
+        }
+
+        [Fact]
+        public void CreateShipmentInfo_WithValidData_AddsShipmentInfo()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddShippingInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+
+            Assert.True(notification.HasShipmentInfo);
+        }
     }
 }

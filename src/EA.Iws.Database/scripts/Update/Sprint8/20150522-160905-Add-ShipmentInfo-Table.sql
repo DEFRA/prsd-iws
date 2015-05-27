@@ -2,7 +2,7 @@
 CREATE TABLE [Business].[ShipmentInfo] (
     [Id]                UNIQUEIDENTIFIER NOT NULL,
     [NumberOfShipments] INT              NOT NULL,
-    [Quantity]          DECIMAL (18)     NOT NULL,
+    [Quantity]          DECIMAL (18, 4)  NOT NULL,
     [Units]             INT				 NOT NULL,
     [FirstDate]         DATE             NOT NULL,
     [LastDate]          DATE             NOT NULL,

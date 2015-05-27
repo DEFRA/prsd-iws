@@ -37,10 +37,15 @@
 
         public bool HasExporter
         {
-        public virtual ShipmentInfo ShipmentInfo { get; private set; }
-
             get { return Exporter != null; }
         }
+
+        public bool HasShipmentInfo
+        {
+            get { return ShipmentInfo != null; }
+        }
+
+        public virtual ShipmentInfo ShipmentInfo { get; private set; }
 
         public string NotificationNumber { get; private set; }
 
@@ -146,14 +151,7 @@
                     String.Format("Cannot add shipment info to notification: {0} if it already exists", Id));
             }
 
-            ShipmentInfo = new ShipmentInfo
-            {
-                FirstDate = startDate,
-                LastDate = endDate,
-                NumberOfShipments = numberOfShipments,
-                Quantity = quantity,
-                Units = unit
-            };
+            ShipmentInfo = new ShipmentInfo(numberOfShipments, quantity, unit, startDate, endDate);
         }
     }
 }
