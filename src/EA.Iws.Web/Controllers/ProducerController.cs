@@ -10,7 +10,6 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Exporters;
     using Requests.Producers;
-    using Requests.Shared;
     using ViewModels.Producer;
     using ViewModels.Shared;
 
@@ -53,7 +52,7 @@
         [HttpGet]
         public async Task<ActionResult> Add(Guid id, bool? copy)
         {
-            var model = new ProducerViewModel();
+            AddProducerViewModel model;
 
             if (copy.HasValue && copy.Value)
             {
@@ -61,13 +60,13 @@
                 {
                     var exporter = await client.SendAsync(User.GetAccessToken(), new GetExporterByNotificationId(id));
 
-                    model.Address = exporter.Address;
-                    model.Contact = exporter.Contact;
-                    model.Business = (BusinessViewModel)exporter.Business;
+                    model = new AddProducerViewModel(exporter);
                 }
             }
-
-            model.NotificationId = id;
+            else
+            {
+                model = new AddProducerViewModel { NotificationId = id };
+            }
 
             await this.BindCountryList(apiClient);
 
@@ -76,7 +75,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(ProducerViewModel model)
+        public async Task<ActionResult> Add(AddProducerViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -88,16 +87,58 @@
             {
                 try
                 {
-                    var producer = new ProducerData
-                    {
-                        NotificationId = model.NotificationId,
-                        Address = model.Address,
-                        Business = (BusinessData)model.Business,
-                        Contact = model.Contact
-                    };
+                    AddProducerToNotification request = model.ToRequest();
 
-                    var response =
-                        await client.SendAsync(User.GetAccessToken(), new AddProducerToNotification(producer));
+                    await client.SendAsync(User.GetAccessToken(), request);
+
+                    return RedirectToAction("MultipleProducers", "Producer",
+                        new { notificationId = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                await this.BindCountryList(client);
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid notificationId, Guid producerId)
+        {
+            using (var client = apiClient())
+            {
+                var producer = await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(notificationId, producerId));
+
+                var model = new EditProducerViewModel(producer);
+
+                await this.BindCountryList(client);
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditProducerViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                await this.BindCountryList(apiClient);
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    UpdateProducerForNotification request = model.ToRequest();
+
+                    await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("MultipleProducers", "Producer",
                         new { notificationId = model.NotificationId });

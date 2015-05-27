@@ -30,6 +30,7 @@
                 {
                     Name = p.Business.Name,
                     EntityType = p.Business.Type,
+                    RegistrationNumber = p.Business.RegistrationNumber,
                     AdditionalRegistrationNumber = p.Business.AdditionalRegistrationNumber
                 },
                 Address =

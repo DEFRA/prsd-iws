@@ -50,17 +50,6 @@
             throw new ArgumentException("Unknown competent authority", "country");
         }
 
-        private static Producer CreateEmptyProducer()
-        {
-            var address = CreateEmptyAddress();
-
-            var business = CreateEmptyBusiness();
-
-            var contact = CreateEmptyContact();
-
-            return new Producer(business, address, contact);
-        }
-
         private static Contact CreateEmptyContact()
         {
             return new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
@@ -83,13 +72,10 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            var producer1 = CreateEmptyProducer();
-            var producer2 = CreateEmptyProducer();
+            var producer1 = notification.AddProducer(CreateEmptyBusiness(), CreateEmptyAddress(), CreateEmptyContact());
+            var producer2 = notification.AddProducer(CreateEmptyBusiness(), CreateEmptyAddress(), CreateEmptyContact());
 
             EntityHelper.SetEntityIds(producer1, producer2);
-
-            notification.AddProducer(producer1);
-            notification.AddProducer(producer2);
 
             notification.SetAsSiteOfExport(producer1.Id);
 
@@ -102,10 +88,9 @@
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
-            var producer = CreateEmptyProducer();
-            EntityHelper.SetEntityId(producer, new Guid("{D65D91BA-FA77-47F6-ACF5-B1A405DEE187}"));
 
-            notification.AddProducer(producer);
+            var producer = notification.AddProducer(CreateEmptyBusiness(), CreateEmptyAddress(), CreateEmptyContact());
+            EntityHelper.SetEntityId(producer, new Guid("{D65D91BA-FA77-47F6-ACF5-B1A405DEE187}"));
 
             var badId = new Guid("{5DF206F6-4116-4EEC-949A-0FC71FE609C1}");
 
@@ -130,11 +115,10 @@
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
-            var producer = CreateEmptyProducer();
             var producerId = new Guid("{D65D91BA-FA77-47F6-ACF5-B1A405DEE187}");
-            EntityHelper.SetEntityId(producer, producerId);
 
-            notification.AddProducer(producer);
+            var producer = notification.AddProducer(CreateEmptyBusiness(), CreateEmptyAddress(), CreateEmptyContact());
+            EntityHelper.SetEntityId(producer, producerId);
 
             var updateProducer = notification.Producers.Single(p => p.Id == producerId);
             var newAddress = new Address("new building", string.Empty, string.Empty, string.Empty, string.Empty,

@@ -5,12 +5,12 @@
 
     public class Producer : Entity
     {
-        public Producer(Business business, Address address, Contact contact)
-        {
-            Guard.ArgumentNotNull(business);
-            Guard.ArgumentNotNull(address);
-            Guard.ArgumentNotNull(contact);
+        private Business business;
+        private Address address;
+        private Contact contact;
 
+        internal Producer(Business business, Address address, Contact contact)
+        {
             Business = business;
             Address = address;
             Contact = contact;
@@ -22,10 +22,34 @@
 
         public bool IsSiteOfExport { get; internal set; }
 
-        public Business Business { get; private set; }
+        public Business Business
+        {
+            get { return business; }
+            set
+            {
+                Guard.ArgumentNotNull(value);
+                business = value;
+            }
+        }
 
-        public Address Address { get; private set; }
+        public Address Address
+        {
+            get { return address; }
+            set
+            {
+                Guard.ArgumentNotNull(value);
+                address = value;
+            }
+        }
 
-        public Contact Contact { get; private set; }
+        public Contact Contact
+        {
+            get { return contact; }
+            set
+            {
+                Guard.ArgumentNotNull(value);
+                contact = value;
+            }
+        }
     }
 }

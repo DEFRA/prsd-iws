@@ -478,6 +478,7 @@
     <Content Include="Views\Shipment\Info.cshtml" />
     <Content Include="Views\Importer\Edit.cshtml" />
     <Content Include="Views\Facility\CopyFromImporter.cshtml" />
+    <Content Include="Views\Producer\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -537,8 +538,9 @@
     <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\NotificationOverviewViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\SpecialHandlingViewModel.cs" />
+    <Compile Include="ViewModels\Producer\EditProducerViewModel.cs" />
     <Compile Include="ViewModels\Producer\MultipleProducersViewModel.cs" />
-    <Compile Include="ViewModels\Producer\ProducerViewModel.cs" />
+    <Compile Include="ViewModels\Producer\AddProducerViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />

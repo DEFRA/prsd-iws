@@ -4,7 +4,6 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain.Notification;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Producers;
@@ -20,20 +19,14 @@
 
         public async Task<Guid> HandleAsync(AddProducerToNotification command)
         {
-            var country = await context.Countries.SingleAsync(c => c.Id == command.ProducerData.Address.CountryId);
+            var country = await context.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
 
-            var address = ValueObjectInitializer.CreateAddress(command.ProducerData.Address, country.Name);
+            var business = ValueObjectInitializer.CreateBusiness(command.Business);
+            var address = ValueObjectInitializer.CreateAddress(command.Address, country.Name);
+            var contact = ValueObjectInitializer.CreateContact(command.Contact);
 
-            var contact = ValueObjectInitializer.CreateContact(command.ProducerData.Contact);
-
-            var business = ValueObjectInitializer.CreateBusiness(command.ProducerData.Business);
-
-            var producer = new Producer(business,
-                address,
-                contact);
-
-            var notification = await context.NotificationApplications.FindAsync(command.ProducerData.NotificationId);
-            notification.AddProducer(producer);
+            var notification = await context.NotificationApplications.FindAsync(command.NotificationId);
+            var producer = notification.AddProducer(business, address, contact);
 
             await context.SaveChangesAsync();
 

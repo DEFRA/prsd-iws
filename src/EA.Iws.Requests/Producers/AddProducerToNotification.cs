@@ -2,14 +2,16 @@
 {
     using System;
     using Prsd.Core.Mediator;
+    using Shared;
 
     public class AddProducerToNotification : IRequest<Guid>
     {
-        public ProducerData ProducerData { get; private set; }
+        public BusinessData Business { get; set; }
 
-        public AddProducerToNotification(ProducerData producerData)
-        {
-            ProducerData = producerData;
-        }
+        public AddressData Address { get; set; }
+
+        public ContactData Contact { get; set; }
+
+        public Guid NotificationId { get; set; }
     }
 }

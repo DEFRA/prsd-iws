@@ -23,8 +23,12 @@
             context = new IwsContext(userContext);
         }
 
-        private Producer CreateEmptyProducer()
+        [Fact]
+        public async Task CanModifyProducer()
         {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
             var address = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
                 "United Kingdom");
 
@@ -32,17 +36,7 @@
 
             var contact = new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
 
-            return new Producer(business, address, contact);
-        }
-
-        [Fact]
-        public async Task CanModifyProducer()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-            var producer = CreateEmptyProducer();
-
-            notification.AddProducer(producer);
+            var producer = notification.AddProducer(business, address, contact);
 
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
@@ -52,8 +46,7 @@
                 string.Empty,
                 "United Kingdom");
 
-            // TODO - no way to update Producer yet so using reflection to change values
-            typeof(Producer).GetProperty("Address").SetValue(updateProducer, newAddress);
+            updateProducer.Address = newAddress;
 
             await context.SaveChangesAsync();
 

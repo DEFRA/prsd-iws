@@ -102,9 +102,21 @@
             Exporter = null;
         }
 
-        public void AddProducer(Producer producer)
+        public Producer AddProducer(Business business, Address address, Contact contact)
         {
+            var producer = new Producer(business, address, contact);
             ProducersCollection.Add(producer);
+            return producer;
+        }
+
+        public Producer GetProducer(Guid producerId)
+        {
+            var producer = ProducersCollection.SingleOrDefault(p => p.Id == producerId);
+            if (producer == null)
+            {
+                throw new InvalidOperationException(string.Format("Producer with id {0} does not exist on this notification", producerId));
+            }
+            return producer;
         }
 
         public void RemoveProducer(Guid producerId)
