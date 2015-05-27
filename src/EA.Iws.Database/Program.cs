@@ -83,7 +83,7 @@ namespace EA.Iws.Database
 
             if (string.IsNullOrEmpty(servername))
             {
-                servername = "BIGMAC\\MSSQLSERVER2014";
+                servername = ".\\sqlexpress";
             }
             return servername;
         }
