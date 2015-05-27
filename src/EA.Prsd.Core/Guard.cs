@@ -21,6 +21,14 @@
             }
         }
 
+        public static void ArgumentNotZeroOrNegative(Expression<Func<decimal>> reference, decimal value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(GetParameterName(reference), "Parameter cannot be less than or equal to zero.");
+            }
+        }
+
         public static void ArgumentNotDefaultValue<T>(Expression<Func<T>> reference, T value)
         {
             if (!IsValueDefined<T>(value))

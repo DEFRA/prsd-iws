@@ -218,7 +218,7 @@
 
             Action addShipmentInfo = () => notification.AddShippingInfo(startDate, endDate, numberOfShipments, quantity, ShipmentQuantityUnits.Tonnes);
 
-            Assert.Throws<InvalidOperationException>(addShipmentInfo);
+            Assert.Throws<ArgumentOutOfRangeException>(addShipmentInfo);
         }
 
         [Fact]

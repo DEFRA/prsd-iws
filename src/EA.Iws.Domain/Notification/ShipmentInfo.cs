@@ -34,10 +34,7 @@
             get { return numberOfShipments; }
             set
             {
-                if (value < 0)
-                {
-                    throw new InvalidOperationException("The number of shipments must be greater than zero.");
-                }
+                Guard.ArgumentNotZeroOrNegative(() => value, value);
                 numberOfShipments = value;
             }
         }
@@ -83,10 +80,7 @@
             get { return quantity; }
             set
             {
-                if (value < 0)
-                {
-                    throw new InvalidOperationException("The quantity entered must be greater than zero.");
-                }
+                Guard.ArgumentNotZeroOrNegative(() => value, value);
                 quantity = value;
             }
         }
