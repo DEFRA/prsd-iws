@@ -81,6 +81,8 @@
     <Compile Include="Mappings\OrganisationMapping.cs" />
     <Compile Include="Mappings\CarrierMapping.cs" />
     <Compile Include="Mappings\ProducerMapping.cs" />
+    <Compile Include="Mappings\ShipmentInfoMapping.cs" />
+    <Compile Include="Mappings\ShipmentQuantityUnitsMapping.cs" />
     <Compile Include="Mappings\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\NotificationTypeMapping.cs" />

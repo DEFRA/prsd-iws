@@ -3,7 +3,17 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.Notification;
 
-    class ShipmentInfoMapping : EntityTypeConfiguration<ShipmentInfo>
+    public class ShipmentInfoMapping : EntityTypeConfiguration<ShipmentInfo>
     {
+        public ShipmentInfoMapping()
+        {
+            this.ToTable("ShipmentInfo", "Business");
+
+            Property(x => x.NumberOfShipments).IsRequired();
+            Property(x => x.Quantity).IsRequired();
+            Property(x => x.FirstDate).IsRequired();
+            Property(x => x.LastDate).IsRequired();
+            Property(x => x.Units.Value).IsRequired();
+        }
     }
 }

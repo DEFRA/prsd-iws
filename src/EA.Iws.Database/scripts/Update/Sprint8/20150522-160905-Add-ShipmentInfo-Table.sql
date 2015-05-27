@@ -1,9 +1,9 @@
 
 CREATE TABLE [Business].[ShipmentInfo] (
-    [Id]                INT              NOT NULL,
+    [Id]                UNIQUEIDENTIFIER NOT NULL,
     [NumberOfShipments] INT              NOT NULL,
-    [Quanity]           DECIMAL (18)     NOT NULL,
-    [Units]             NVARCHAR (50)    NOT NULL,
+    [Quantity]          DECIMAL (18)     NOT NULL,
+    [Units]             INT				 NOT NULL,
     [FirstDate]         DATE             NOT NULL,
     [LastDate]          DATE             NOT NULL,
     [NotificationId]    UNIQUEIDENTIFIER NOT NULL,
