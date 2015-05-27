@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\DecimalPrecision.cs" />
     <Compile Include="Conventions\ForeignKeyNaming.cs" />
     <Compile Include="Conventions\IdIsPrimaryKey.cs" />
     <Compile Include="Conventions\RowVersion.cs" />

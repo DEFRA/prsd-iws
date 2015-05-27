@@ -36,8 +36,6 @@
             var assembly = typeof(IwsContext).Assembly;
             var coreAssembly = typeof(AuditorExtensions).Assembly;
 
-            modelBuilder.Properties<decimal>().Configure(config => config.HasPrecision(18, 4));
-
             modelBuilder.Conventions.AddFromAssembly(assembly);
             modelBuilder.Configurations.AddFromAssembly(assembly);
 

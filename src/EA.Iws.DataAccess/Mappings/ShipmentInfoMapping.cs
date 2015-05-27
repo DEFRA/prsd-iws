@@ -14,6 +14,7 @@
             Property(x => x.FirstDate).IsRequired();
             Property(x => x.LastDate).IsRequired();
             Property(x => x.Units.Value).IsRequired();
+            Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
         }
     }
 }

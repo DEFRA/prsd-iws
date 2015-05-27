@@ -233,7 +233,7 @@
         {
             using (var client = apiClient())
             {
-                await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling));
+                await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling, model.SpecialHandlingDetails));
             }
             return View(new SpecialHandlingViewModel());
         }

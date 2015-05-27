@@ -169,13 +169,15 @@
             ShipmentInfo = new ShipmentInfo(numberOfShipments, quantity, unit, startDate, endDate);
         }
 
-        public void SetSpecialHandling(bool isSpecialHandling)
+        public void SetSpecialHandling(bool isSpecialHandling, string specialHandlingDetails)
         {
             if (ShipmentInfo == null)
             {
                 throw new InvalidOperationException("Shiping info does not exist for this notification");
             }
+
             ShipmentInfo.IsSpecialHandling = isSpecialHandling;
+            ShipmentInfo.SpecialHandlingDetails = specialHandlingDetails;
         }
     }
 }

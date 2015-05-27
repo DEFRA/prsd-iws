@@ -7,5 +7,7 @@
         public bool IsSpecialHandling { get; set; }
 
         public Guid NotificationId { get; set; }
+
+        public string SpecialHandlingDetails { get; set; }
     }
 }

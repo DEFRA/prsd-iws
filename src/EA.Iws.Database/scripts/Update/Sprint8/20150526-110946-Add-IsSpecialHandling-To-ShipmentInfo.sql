@@ -10,6 +10,11 @@ ALTER TABLE [Business].[ShipmentInfo]
 
 
 GO
+ALTER TABLE [Business].[ShipmentInfo]
+    ADD [SpecialHandlingDetails] NVARCHAR (2048) NULL;
+
+
+GO
 PRINT N'Update complete.';
 
 

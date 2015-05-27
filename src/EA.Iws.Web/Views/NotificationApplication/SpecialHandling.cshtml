@@ -25,7 +25,10 @@
 </div>
 <div class="form-group">
     <div class="panel-indent" id="information-message">
-        Provide details of the special handling requirements in a separate document with this submission.
+        Provide details of the special handling requirements
+        <div class="form-group">
+            @Html.TextAreaFor(m => m.SpecialHandlingDetails)
+        </div>
     </div>
 </div>
  
