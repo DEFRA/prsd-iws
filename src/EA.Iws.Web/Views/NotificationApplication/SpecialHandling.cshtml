@@ -25,9 +25,11 @@
 </div>
 <div class="form-group">
     <div class="panel-indent" id="information-message">
-        Provide details of the special handling requirements
-        <div class="form-group">
-            @Html.TextAreaFor(m => m.SpecialHandlingDetails)
+        <h2 class="heading-small">Provide details of the special handling requirements</h2>
+        <div class="form-group grid-row">
+            <div class="column-two-thirds">
+                @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @style = "width: 100%" })
+            </div>
         </div>
     </div>
 </div>
@@ -55,3 +57,4 @@
         });
 </script>
 }
+

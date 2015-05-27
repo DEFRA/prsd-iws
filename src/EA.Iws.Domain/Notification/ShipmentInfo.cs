@@ -85,7 +85,7 @@
             }
         }
 
-        public bool IsSpecialHandling { get; set; }
+        internal bool IsSpecialHandling { get; set; }
 
         public string SpecialHandlingDetails { get; set; }
     }
