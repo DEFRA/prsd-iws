@@ -12,8 +12,8 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
-    using Requests.Registration;
     using Requests.Shipment;
+    using ViewModels.Shared;
     using ViewModels.Shipment;
 
     [Authorize]
@@ -78,6 +78,50 @@
                                 model.Units,
                                 new DateTime(model.StartYear, model.StartMonth, model.StartDay),
                                 new DateTime(model.EndYear, model.EndMonth, model.EndDay)));
+
+                    return RedirectToAction("Home", "Applicant");
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult PackagingTypes(Guid id)
+        {
+            var model = new PackagingTypesViewModel
+            {
+                PackagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>(),
+                NotificationId = id
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> PackagingTypes(PackagingTypesViewModel model)
+        {
+            using (var client = apiClient())
+            {
+                try
+                {
+                    var selectedPackagingTypes =
+                        model.PackagingTypes.PossibleValues.Where(p => p.Selected)
+                            .Select(p => (PackagingType)(Convert.ToInt32(p.Value)))
+                            .ToList();
+
+                    await client.SendAsync(User.GetAccessToken(),
+                        new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId));
 
                     return RedirectToAction("Home", "Applicant");
                 }

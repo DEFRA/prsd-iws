@@ -90,6 +90,8 @@
     <Compile Include="Registration\Users\User.cs" />
     <Compile Include="Registration\Users\UserById.cs" />
     <Compile Include="Shipment\CreateShipmentInfo.cs" />
+    <Compile Include="Shipment\PackagingType.cs" />
+    <Compile Include="Shipment\SetPackagingTypeOnShipmentInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">

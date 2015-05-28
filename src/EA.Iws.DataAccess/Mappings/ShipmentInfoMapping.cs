@@ -9,6 +9,10 @@
         {
             this.ToTable("ShipmentInfo", "Business");
 
+            HasMany(x => x.PackagingTypes)
+                .WithRequired()
+                .Map(m => m.MapKey("ShippingInfoId"));
+
             Property(x => x.NumberOfShipments).IsRequired();
             Property(x => x.Quantity).IsRequired();
             Property(x => x.FirstDate).IsRequired();

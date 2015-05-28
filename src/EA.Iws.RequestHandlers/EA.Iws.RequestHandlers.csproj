@@ -93,6 +93,7 @@
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />
     <Compile Include="Shipment\CreateShipmentInfoHandler.cs" />
+    <Compile Include="Shipment\SetPackagingTypeOnShipmentInfoHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
   </ItemGroup>
   <ItemGroup>

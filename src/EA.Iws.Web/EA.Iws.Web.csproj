@@ -488,6 +488,8 @@
     <Content Include="Views\Facility\CopyFromImporter.cshtml" />
     <Content Include="Views\Producer\Edit.cshtml" />
     <Content Include="Views\Emails\VerifyEmailAddress.cshtml" />
+    <Content Include="Views\Shipment\PackagingTypes.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CheckBoxCollectionViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -564,12 +566,14 @@
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\InitialQuestionsViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessViewModel.cs" />
+    <Compile Include="ViewModels\Shared\CheckBoxCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBaseViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptionalViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />
+    <Compile Include="ViewModels\Shipment\PackagingTypesViewModel.cs" />
     <Compile Include="ViewModels\Shipment\ShipmentInfoViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>

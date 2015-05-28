@@ -80,6 +80,7 @@
     <Compile Include="Mappings\NotificationApplicationMapping.cs" />
     <Compile Include="Mappings\OrganisationMapping.cs" />
     <Compile Include="Mappings\CarrierMapping.cs" />
+    <Compile Include="Mappings\PackagingTypeMapping.cs" />
     <Compile Include="Mappings\ProducerMapping.cs" />
     <Compile Include="Mappings\ShipmentInfoMapping.cs" />
     <Compile Include="Mappings\ShipmentQuantityUnitsMapping.cs" />

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
+    using System.Collections.Generic;
     using Prsd.Core;
     using Prsd.Core.Domain;
 
@@ -11,6 +12,8 @@
         private ShipmentQuantityUnits units;
         private DateTime firstDate;
         private DateTime lastDate;
+
+        public virtual List<PackagingType> PackagingTypes { get; set; }
 
         protected ShipmentInfo()
         {
