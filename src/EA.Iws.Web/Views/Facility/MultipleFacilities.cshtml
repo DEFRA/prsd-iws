@@ -59,6 +59,7 @@
 </div>
 @using (Html.BeginForm("MultipleFacilities", "Facility"))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.NotificationId)
     <div class="form-group">
         <input type="submit" class="button" value="Continue" />

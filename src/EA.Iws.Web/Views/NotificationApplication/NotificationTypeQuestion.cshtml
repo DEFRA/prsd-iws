@@ -6,6 +6,7 @@
 
 @using (Html.BeginForm("NotificationTypeQuestion", "NotificationApplication", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     <header class="hgroup">
         <h2 class="heading-large">What type of waste shipment notification are you applying for?</h2>
     </header>

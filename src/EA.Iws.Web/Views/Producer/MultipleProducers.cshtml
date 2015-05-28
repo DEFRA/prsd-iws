@@ -40,6 +40,7 @@
                                     @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity) @Html.DisplayFor(m => m.ProducerData[i].Address.PostalCode)
                                 </div>
                                 <div class="column-third">
+                                    @Html.ActionLink("Edit", "Edit", "Producer", new { notificationId = Model.ProducerData[i].NotificationId, producerId = Model.ProducerData[i].Id }, null)
                                 </div>
                             </div>
                         </details>

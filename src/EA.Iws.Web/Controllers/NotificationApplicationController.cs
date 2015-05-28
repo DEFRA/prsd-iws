@@ -38,6 +38,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CompetentAuthority(CompetentAuthorityChoiceViewModel model)
         {
             if (!ModelState.IsValid)
@@ -67,6 +68,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> NotificationTypeQuestion(InitialQuestionsViewModel model)
         {
             if (!ModelState.IsValid)
@@ -124,6 +126,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Created(CreatedViewModel model)
         {
             return RedirectToAction(actionName: "DownloadInstructions", controllerName: "NotificationApplication",
@@ -229,6 +232,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> SpecialHandling(SpecialHandlingViewModel model)
         {
             using (var client = apiClient())

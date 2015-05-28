@@ -11,40 +11,40 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <fieldset>
+            <label class="block-label">
+                @Html.RadioButtonFor(m => m.IsSpecialHandling, false, new { @id = "rdoNotSpecialHandling", Checked = "checked" })No
 
-<div class="form-group">
-    <fieldset>
-        <label class="block-label">
-            @Html.RadioButtonFor(m => m.IsSpecialHandling, false, new { @id = "rdoNotSpecialHandling", Checked = "checked" })No
-            
-        </label>
-        <label class="block-label" for="rdoSpecialHandling">
-            @Html.RadioButtonFor(m => m.IsSpecialHandling, true, new { @id = "rdoSpecialHandling" })Yes
-        </label>
-    </fieldset>
-</div>
-<div class="form-group">
-    <div class="panel-indent" id="information-message">
-        <h2 class="heading-small">Provide details of the special handling requirements</h2>
-        <div class="form-group grid-row">
-            <div class="column-two-thirds">
-                @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @style = "width: 100%" })
+            </label>
+            <label class="block-label" for="rdoSpecialHandling">
+                @Html.RadioButtonFor(m => m.IsSpecialHandling, true, new { @id = "rdoSpecialHandling" })Yes
+            </label>
+        </fieldset>
+    </div>
+    <div class="form-group">
+        <div class="panel-indent" id="information-message">
+            <h2 class="heading-small">Provide details of the special handling requirements</h2>
+            <div class="form-group grid-row">
+                <div class="column-two-thirds">
+                    @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @style = "width: 100%" })
+                </div>
             </div>
         </div>
     </div>
-</div>
- 
-@Html.HiddenFor(m => m.NotificationId)
-<div class="form-group">
-    <button class="button" type="submit">Continue</button>
-</div>
+
+    @Html.HiddenFor(m => m.NotificationId)
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
 }
 
 
 @section scripts
 {
-<script>
-        $(function() {
+    <script>
+        $(function () {
             $("#information-message").hide();
 
             $("#rdoSpecialHandling").click(function () {
@@ -55,6 +55,6 @@
                 $("#information-message").hide("fast");
             });
         });
-</script>
+    </script>
 }
 

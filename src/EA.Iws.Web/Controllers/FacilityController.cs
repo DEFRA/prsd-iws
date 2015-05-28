@@ -56,6 +56,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(FacilityViewModel model)
         {
             if (!ModelState.IsValid)
@@ -120,6 +121,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
         {
             return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
@@ -135,6 +137,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CopyFromImporter(Guid id, YesNoChoiceViewModel inputModel)
         {
             if (!ModelState.IsValid)

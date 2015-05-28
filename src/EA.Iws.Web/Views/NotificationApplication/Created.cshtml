@@ -5,6 +5,7 @@
 
 @using (Html.BeginForm("Created", "NotificationApplication", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     <header class="hgroup">
         <h2 class="heading-large">Your notification number</h2>
         <p>Here is your notification number:</p>

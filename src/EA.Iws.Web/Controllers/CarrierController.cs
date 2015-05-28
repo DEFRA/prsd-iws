@@ -29,6 +29,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(CarrierViewModel model)
         {
             if (!ModelState.IsValid)

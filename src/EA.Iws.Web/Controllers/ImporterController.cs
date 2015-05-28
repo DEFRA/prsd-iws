@@ -46,6 +46,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(ImporterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -108,6 +109,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ImporterViewModel model)
         {
             if (!ModelState.IsValid)
