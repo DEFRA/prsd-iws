@@ -1,5 +1,3 @@
-
-
 GO
 PRINT N'Dropping FK_AspNetUsers_Organisation...';
 
@@ -64,12 +62,7 @@ GO
 ALTER TABLE [Notification].[Exporter] DROP CONSTRAINT [FK_Exporter_Contact];
 
 
-GO
-/*
-The column [Business].[Organisation].[AddressId] is being dropped, data loss could occur.
 
-The column [Business].[Organisation].[CountryId] is being dropped, data loss could occur.
-*/
 GO
 PRINT N'Starting rebuilding table [Business].[Organisation]...';
 
@@ -105,24 +98,27 @@ CREATE TABLE [Business].[tmp_ms_xx_Organisation] (
 IF EXISTS (SELECT TOP 1 1 
            FROM   [Business].[Organisation])
     BEGIN
-        INSERT INTO [Business].[tmp_ms_xx_Organisation] ([Id], [Name], [Type], [RegistrationNumber], [AditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [FirstName], [LastName], [Telephone], [Fax], [Email])
-        SELECT   [Id],
-                 [Name],
-                 [Type],
-                 [RegistrationNumber],
-                 [AditionalRegistrationNumber],
-                 [Building],
-                 [Address1],
-                 [TownOrCity],
-                 [Address2],
-                 [PostalCode],
-                 [FirstName],
-                 [LastName],
-                 [Telephone],
-                 [Fax],
-                 [Email]
-        FROM     [Business].[Organisation]
-        ORDER BY [Id] ASC;
+        INSERT INTO [Business].[tmp_ms_xx_Organisation] ([Id], [Name], [Type], [RegistrationNumber], [AditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [Country], [FirstName], [LastName], [Telephone], [Fax], [Email])
+        SELECT   o.[Id],
+                 o.[Name],
+                 o.[Type],
+                 o.[RegistrationNumber],
+                 o.[AditionalRegistrationNumber],
+                 a.[Building],
+                 a.[Address1],
+                 a.[TownOrCity],
+                 a.[Address2],
+                 a.[PostalCode],
+                 c.[Name],
+                 o.[FirstName],
+                 o.[LastName],
+                 o.[Telephone],
+                 o.[Fax],
+                 o.[Email]
+        FROM     [Business].[Organisation] o
+        INNER JOIN [Business].[Address] a on o.AddressId = a.Id
+        INNER JOIN [Lookup].[Country] c on a.CountryId = c.Id
+        ORDER BY o.[Id] ASC;
     END
 
 DROP TABLE [Business].[Organisation];
@@ -136,14 +132,7 @@ COMMIT TRANSACTION;
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 
-GO
-/*
-The column [Business].[Producer].[AddressId] is being dropped, data loss could occur.
 
-The column [Business].[Producer].[ContactId] is being dropped, data loss could occur.
-
-The column [Business].[Producer].[CountryId] is being dropped, data loss could occur.
-*/
 GO
 PRINT N'Starting rebuilding table [Business].[Producer]...';
 
@@ -180,25 +169,29 @@ CREATE TABLE [Business].[tmp_ms_xx_Producer] (
 IF EXISTS (SELECT TOP 1 1 
            FROM   [Business].[Producer])
     BEGIN
-        INSERT INTO [Business].[tmp_ms_xx_Producer] ([Id], [Name], [IsSiteOfExport], [Type], [RegistrationNumber], [AdditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [FirstName], [LastName], [Telephone], [Fax], [Email])
-        SELECT   [Id],
-                 [Name],
-                 [IsSiteOfExport],
-                 [Type],
-                 [RegistrationNumber],
-                 [AdditionalRegistrationNumber],
-                 [Building],
-                 [Address1],
-                 [TownOrCity],
-                 [Address2],
-                 [PostalCode],
-                 [FirstName],
-                 [LastName],
-                 [Telephone],
-                 [Fax],
-                 [Email]
-        FROM     [Business].[Producer]
-        ORDER BY [Id] ASC;
+        INSERT INTO [Business].[tmp_ms_xx_Producer] ([Id], [Name], [IsSiteOfExport], [Type], [RegistrationNumber], [AdditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [Country], [FirstName], [LastName], [Telephone], [Fax], [Email])
+        SELECT   p.[Id],
+                 p.[Name],
+                 p.[IsSiteOfExport],
+                 p.[Type],
+                 p.[RegistrationNumber],
+                 p.[AdditionalRegistrationNumber],
+                 a.[Building],
+                 a.[Address1],
+                 a.[TownOrCity],
+                 a.[Address2],
+                 a.[PostalCode],
+                 c.[Name],
+                 co.[FirstName],
+                 co.[LastName],
+                 co.[Telephone],
+                 co.[Fax],
+                 co.[Email]
+        FROM     [Business].[Producer] p
+        INNER JOIN [Business].[Address] a on p.AddressId = a.Id
+        INNER JOIN [Lookup].[Country] c on a.CountryId = c.Id
+        INNER JOIN [Business].[Contact] co on p.ContactId = co.Id
+        ORDER BY p.[Id] ASC;
     END
 
 DROP TABLE [Business].[Producer];
@@ -210,14 +203,7 @@ COMMIT TRANSACTION;
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 
-GO
-/*
-The column [Notification].[Exporter].[AddressId] is being dropped, data loss could occur.
 
-The column [Notification].[Exporter].[ContactId] is being dropped, data loss could occur.
-
-The column [Notification].[Exporter].[CountryId] is being dropped, data loss could occur.
-*/
 GO
 PRINT N'Starting rebuilding table [Notification].[Exporter]...';
 
@@ -253,23 +239,27 @@ CREATE TABLE [Notification].[tmp_ms_xx_Exporter] (
 IF EXISTS (SELECT TOP 1 1 
            FROM   [Notification].[Exporter])
     BEGIN
-        INSERT INTO [Notification].[tmp_ms_xx_Exporter] ([Id], [Name], [Type], [RegistrationNumber], [AdditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [FirstName], [LastName], [Telephone], [Fax], [Email])
-        SELECT   [Id],
-                 [Name],
-                 [Type],
-                 [RegistrationNumber],
-                 [AdditionalRegistrationNumber],
-                 [Building],
-                 [Address1],
-                 [TownOrCity],
-                 [Address2],
-                 [PostalCode],
-                 [FirstName],
-                 [LastName],
-                 [Telephone],
-                 [Fax],
-                 [Email]
-        FROM     [Notification].[Exporter]
+        INSERT INTO [Notification].[tmp_ms_xx_Exporter] ([Id], [Name], [Type], [RegistrationNumber], [AdditionalRegistrationNumber], [Building], [Address1], [TownOrCity], [Address2], [PostalCode], [Country], [FirstName], [LastName], [Telephone], [Fax], [Email])
+        SELECT   e.[Id],
+                 e.[Name],
+                 e.[Type],
+                 e.[RegistrationNumber],
+                 e.[AdditionalRegistrationNumber],
+                 a.[Building],
+                 a.[Address1],
+                 a.[TownOrCity],
+                 a.[Address2],
+                 a.[PostalCode],
+                 c.[Name],
+                 co.[FirstName],
+                 co.[LastName],
+                 co.[Telephone],
+                 co.[Fax],
+                 co.[Email]
+        FROM     [Notification].[Exporter] e
+        INNER JOIN [Business].[Address] a on e.AddressId = a.Id
+        INNER JOIN [Lookup].[Country] c on a.CountryId = c.Id
+        INNER JOIN [Business].[Contact] co on e.ContactId = co.Id
         ORDER BY [Id] ASC;
     END
 
