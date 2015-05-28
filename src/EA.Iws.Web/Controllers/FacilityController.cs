@@ -26,14 +26,12 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id, bool? copy)
+        public async Task<ActionResult> Add(Guid id, string facilityType, bool? copy)
         {
             var facility = new FacilityViewModel();
-            NotificationType notificationType;
-
-            if (copy.HasValue && copy.Value)
+            using (var client = apiClient())
             {
-                using (var client = apiClient())
+                if (copy.HasValue && copy.Value)
                 {
                     var importer = await client.SendAsync(User.GetAccessToken(), new GetImporterByNotificationId(id));
 
@@ -41,16 +39,12 @@
                     facility.Contact = importer.Contact;
                     facility.Business = (BusinessViewModel)importer.Business;
                 }
-            }
 
-            using (var client = apiClient())
-            {
                 await this.BindCountryList(client);
-                notificationType = await client.SendAsync(User.GetAccessToken(), new NotificationTypeByNotificationId(id));
             }
 
             facility.NotificationId = id;
-            facility.NotificationType = notificationType;
+            facility.NotificationType = (NotificationType)Enum.Parse(typeof(NotificationType), facilityType, true);
 
             return View(facility);
         }
@@ -128,17 +122,23 @@
         }
 
         [HttpGet]
-        public ActionResult CopyFromImporter(Guid id)
+        public async Task<ActionResult> CopyFromImporter(Guid id)
         {
             var model = new YesNoChoiceViewModel();
             ViewBag.NotificationId = id;
+
+            using (var client = apiClient())
+            {
+                NotificationType notificationType = await client.SendAsync(User.GetAccessToken(), new NotificationTypeByNotificationId(id));
+                ViewBag.NotificationType = notificationType.ToString().ToLowerInvariant();
+            }
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CopyFromImporter(Guid id, YesNoChoiceViewModel inputModel)
+        public ActionResult CopyFromImporter(Guid id, string facilityType, YesNoChoiceViewModel inputModel)
         {
             if (!ModelState.IsValid)
             {
@@ -148,10 +148,10 @@
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id });
+                return RedirectToAction("Add", new { id, facilityType });
             }
 
-            return RedirectToAction("Add", new { id, copy = true });
+            return RedirectToAction("Add", new { id, facilityType, copy = true });
         }
     }
 }
