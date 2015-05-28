@@ -1,0 +1,26 @@
+﻿@using System.Activities.Expressions
+
+@model EA.Iws.Web.ViewModels.Shared.YesNoChoiceViewModel
+
+@{
+    ViewBag.Title = "Is the importer one of the facility?";
+}
+
+@using (Html.BeginForm(actionName: "CopyFromImporter", controllerName: "Facility", routeValues: new { id = ViewBag.NotificationId }, method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <header class="hgroup">
+        <h2 class="heading-large">Add facility</h2>
+        <div class="colored-header-bar"></div>
+        <h2 class="heading-medium">Is the importer one of the facility?</h2>
+    </header>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
+        @Html.EditorFor(m => m.Choices)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

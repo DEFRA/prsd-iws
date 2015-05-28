@@ -68,7 +68,7 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), importer);
 
-                    return RedirectToAction("Add", "Facility", new { id = model.NotificationId });
+                    return RedirectToAction("CopyFromImporter", "Facility", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

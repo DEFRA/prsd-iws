@@ -477,6 +477,7 @@
     <Content Include="Views\Carrier\Add.cshtml" />
     <Content Include="Views\Shipment\Info.cshtml" />
     <Content Include="Views\Importer\Edit.cshtml" />
+    <Content Include="Views\Facility\CopyFromImporter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

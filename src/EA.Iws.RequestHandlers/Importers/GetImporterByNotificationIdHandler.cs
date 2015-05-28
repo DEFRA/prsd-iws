@@ -35,6 +35,7 @@
                     StreetOrSuburb = notification.Importer.Address.Address1,
                     Address2 = notification.Importer.Address.Address2,
                     TownOrCity = notification.Importer.Address.TownOrCity,
+                    Region = notification.Importer.Address.Region,
                     PostalCode = notification.Importer.Address.PostalCode,
                     CountryName = notification.Importer.Address.Country
                 },
