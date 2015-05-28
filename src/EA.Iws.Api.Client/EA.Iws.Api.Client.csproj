@@ -75,6 +75,8 @@
     <Compile Include="Actions\Registration.cs" />
     <Compile Include="Actions\IRegistration.cs" />
     <Compile Include="Entities\ApplicantRegistrationData.cs" />
+    <Compile Include="Entities\EmailVerificationData.cs" />
+    <Compile Include="Entities\VerifiedEmailData.cs" />
     <Compile Include="IIwsClient.cs" />
     <Compile Include="IwsClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

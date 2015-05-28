@@ -50,6 +50,16 @@
             return null;
         }
 
+        public static string GetEmailAddress(this IPrincipal principal)
+        {
+            var claimsPrincipal = principal as ClaimsPrincipal;
+            if (claimsPrincipal != null)
+            {
+                return GetClaimValue(claimsPrincipal, JwtClaimTypes.Email);
+            }
+            return null;
+        }
+
         public static string GetClaimValue(this ClaimsPrincipal principal, string type)
         {
             Claim claim = principal.FindFirst(type);

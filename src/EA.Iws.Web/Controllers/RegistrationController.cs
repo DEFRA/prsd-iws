@@ -14,6 +14,7 @@
     using Prsd.Core.Web.OAuth;
     using Requests.Organisations;
     using Requests.Registration;
+    using Services;
     using ViewModels.Registration;
 
     [Authorize]
@@ -22,13 +23,17 @@
         private readonly Func<IIwsClient> apiClient;
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
+        private readonly IEmailService emailService;
 
-        public RegistrationController(Func<IOAuthClient> oauthClient, Func<IIwsClient> apiClient,
-            IAuthenticationManager authenticationManager)
+        public RegistrationController(Func<IOAuthClient> oauthClient, 
+            Func<IIwsClient> apiClient,
+            IAuthenticationManager authenticationManager,
+            IEmailService emailService)
         {
             this.oauthClient = oauthClient;
             this.apiClient = apiClient;
             this.authenticationManager = authenticationManager;
+            this.emailService = emailService;
         }
 
         [HttpGet]
@@ -59,10 +64,15 @@
 
                     try
                     {
-                        var response = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
-
+                        var userId = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
                         var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                         authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
+
+                        var verificationCode = await
+                            client.Registration.GetUserEmailVerificationTokenAsync(signInResponse.AccessToken);
+                        var verificationEmail = emailService.GenerateEmailVerificationMessage(Url.Action("VerifyEmail", "Account", null,
+                            Request.Url.Scheme), verificationCode, userId, model.Email);
+                        await emailService.SendAsync(verificationEmail);
 
                         return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                     }
@@ -198,7 +208,7 @@
             }
         }
 
-    // TODO - duplicated in NotificationApplicationController, need to refactor.
+        // TODO - duplicated in NotificationApplicationController, need to refactor.
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
             using (var client = apiClient())

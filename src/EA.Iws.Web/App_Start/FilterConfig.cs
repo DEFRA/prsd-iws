@@ -10,6 +10,7 @@
         {
             filters.Add(new HandleApiErrorAttribute());
             filters.Add(new OrganisationRequiredAttribute());
+            filters.Add(new EmailVerificationRequiredAttribute());
         }
     }
 }

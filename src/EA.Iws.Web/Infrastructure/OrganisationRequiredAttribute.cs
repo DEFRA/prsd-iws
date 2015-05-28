@@ -9,14 +9,7 @@
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            var skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-                                    || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
-                                    || filterContext.ActionDescriptor.ActionName.Equals("CreateNewOrganisation")
-                                    || filterContext.ActionDescriptor.ActionName.Equals("SelectOrganisation")
-                                    || filterContext.ActionDescriptor.ActionName.Equals("LogOff")
-                                    || filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.Equals("Elmah");
-
-            if (skipAuthorization)
+            if (filterContext.SkipAuthorisation())
             {
                 return;
             }

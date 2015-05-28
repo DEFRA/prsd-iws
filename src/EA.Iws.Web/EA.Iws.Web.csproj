@@ -120,6 +120,10 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorEngine, Version=3.7.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RazorEngine.3.7.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System.Collections" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20511.1437, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -427,6 +431,7 @@
     <Content Include="Scripts\vendor\jquery-1.11.0.min.js" />
     <Content Include="Scripts\vendor\modernizr.custom.77028.js" />
     <Content Include="Scripts\vendor\prism.js" />
+    <Content Include="Views\Emails\VerifyEmailAddress.txt" />
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
     <Content Include="Content\govuk\stylesheets\fonts\NTATabularNumbers-Light.woff" />
     <Content Include="Content\govuk\stylesheets\fonts\NTATabularNumbers-Light.eot" />
@@ -476,9 +481,13 @@
     <Content Include="Views\NotificationApplication\SpecialHandling.cshtml" />
     <Content Include="Views\Carrier\Add.cshtml" />
     <Content Include="Views\Shipment\Info.cshtml" />
+    <Content Include="Views\Account\EmailVerificationRequired.cshtml" />
+    <Content Include="Views\Account\VerifyEmail.cshtml" />
+    <Content Include="Views\Account\VerificationEmailSent.cshtml" />
     <Content Include="Views\Importer\Edit.cshtml" />
     <Content Include="Views\Facility\CopyFromImporter.cshtml" />
     <Content Include="Views\Producer\Edit.cshtml" />
+    <Content Include="Views\Emails\VerifyEmailAddress.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -502,15 +511,22 @@
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Modules\EmailModule.cs" />
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\EmailTemplate.cs" />
+    <Compile Include="Services\EmailTemplateService.cs" />
+    <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Controllers\ExporterController.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\ImporterController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\ProducerController.cs" />
     <Compile Include="Controllers\ShipmentController.cs" />
+    <Compile Include="Infrastructure\AuthorizationContextExtensions.cs" />
+    <Compile Include="Infrastructure\EmailVerificationRequiredAttribute.cs" />
     <Compile Include="Infrastructure\OrganisationRequiredAttribute.cs" />
     <Compile Include="Infrastructure\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\TokenResponseExtensions.cs" />
@@ -527,6 +543,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\IEmailTemplateService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Carrier\CarrierViewModel.cs" />

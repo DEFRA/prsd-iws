@@ -7,7 +7,7 @@
 
     internal class Registration : IRegistration
     {
-        private const string controller = "Registration/";
+        private const string Controller = "Registration/";
         private readonly HttpClient httpClient;
 
         public Registration(HttpClient httpClient)
@@ -17,7 +17,23 @@
 
         public async Task<string> RegisterApplicantAsync(ApplicantRegistrationData applicantRegistrationData)
         {
-            var response = await httpClient.PostAsJsonAsync(controller + "Register", applicantRegistrationData);
+            var response = await httpClient.PostAsJsonAsync(Controller + "Register", applicantRegistrationData);
+            return await response.CreateResponseAsync<string>();
+        }
+
+        public async Task<bool> VerifyEmailAsync(VerifiedEmailData verifiedEmailData)
+        {
+            var response = await httpClient.PostAsJsonAsync(Controller + "VerifyEmail", verifiedEmailData);
+
+            return await response.CreateResponseAsync<bool>();
+        }
+
+        public async Task<string> GetUserEmailVerificationTokenAsync(string accessToken)
+        {
+            httpClient.SetBearerToken(accessToken);
+
+            var response = await httpClient.GetAsync(Controller + "GetUserEmailVerificationToken");
+
             return await response.CreateResponseAsync<string>();
         }
     }

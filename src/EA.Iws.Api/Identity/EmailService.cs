@@ -7,7 +7,7 @@ namespace EA.Iws.Api.Identity
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            // Connect your email provider.
             return Task.FromResult(0);
         }
     }

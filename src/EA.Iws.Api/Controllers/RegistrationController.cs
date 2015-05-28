@@ -2,24 +2,26 @@
 {
     using System;
     using System.Threading.Tasks;
+    using System.Web;
     using System.Web.Http;
-    using Client;
     using Client.Entities;
     using DataAccess.Identity;
     using Identity;
     using Microsoft.AspNet.Identity;
+    using Prsd.Core.Domain;
 
     [RoutePrefix("api/Registration")]
     public class RegistrationController : ApiController
     {
         private readonly ApplicationUserManager userManager;
+        private readonly IUserContext userContext;
 
-        public RegistrationController(ApplicationUserManager userManager)
+        public RegistrationController(ApplicationUserManager userManager, IUserContext userContext)
         {
+            this.userContext = userContext;
             this.userManager = userManager;
         }
 
-        // POST api/Registration/Register
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(ApplicantRegistrationData model)
@@ -45,7 +47,25 @@
                 return GetErrorResult(result);
             }
 
-            return Ok(model.Email);
+            return Ok(user.Id);
+        }
+
+        [HttpGet]
+        [Route("GetUserEmailVerificationToken")]
+        public async Task<string> GetUserEmailVerificationToken()
+        {
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(userContext.UserId.ToString());
+
+            return token;
+        }
+
+        [HttpPost]
+        [Route("VerifyEmail")]
+        public async Task<IHttpActionResult> VerifyEmail(VerifiedEmailData model)
+        {
+            var result = await userManager.ConfirmEmailAsync(model.Id.ToString(), model.Code);
+
+            return Ok(result.Succeeded);
         }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
@@ -79,6 +99,6 @@
             }
 
             return null;
-        }
+        }  
     }
 }

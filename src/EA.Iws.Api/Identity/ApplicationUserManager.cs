@@ -28,7 +28,7 @@
             };
 
             // Configure user lockout defaults
-            UserLockoutEnabledByDefault = false;
+            UserLockoutEnabledByDefault = true;
             DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             MaxFailedAccessAttemptsBeforeLockout = 5;
 

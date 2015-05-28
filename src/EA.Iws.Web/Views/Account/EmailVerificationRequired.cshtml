@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Email Confirmation Required";
+}
+
+@if (ViewBag.Errors != null && ((string[])ViewBag.Errors).Length > 0)
+{
+    <div class="validation-summary" style="margin-top: 25px">
+        <h2 class="heading-small">An error occurred.</h2>
+        <ul>
+            @foreach (var error in (string[])ViewBag.Errors)
+            {
+                <li>@Html.Raw(error)</li>
+            }
+        </ul>
+    </div>
+}
+
+<h2 class="heading-large">Confirm your email</h2>
+
+<p class="lede">In order to continue using this service you must confirm your email address</p>
+<p>You should have received an email after registering to use the International Waste Shipments system. Check your email inbox or junk mail folder for the account you registered with.</p>
+<p>If you have still not received an email, click below to send another email:</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button class="button" type="submit">Send email</button>
+}
