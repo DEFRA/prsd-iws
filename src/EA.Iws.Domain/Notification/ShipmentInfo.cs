@@ -99,8 +99,13 @@
 
         public string SpecialHandlingDetails { get; set; }
 
-        public void AddPackagingInfo(PackagingInfo packagingInfo)
+        public void AddPackagingInfo(PackagingType packagingType, string otherDescription = null)
         {
+            var packagingInfo = new PackagingInfo(packagingType);
+            if (!string.IsNullOrEmpty(otherDescription))
+            {
+                packagingInfo.OtherDescription = otherDescription;
+            }
             PackagingInfosCollection.Add(packagingInfo);
         }
     }

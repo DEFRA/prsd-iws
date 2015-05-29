@@ -1,20 +1,40 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
+    using System;
     using Prsd.Core.Domain;
 
     public class PackagingInfo : Entity
     {
-        public PackagingType PackagingType { get; set; }
+        public PackagingType PackagingType { get; private set; }
 
-        public string OtherDescription { get; set; }
+        private string otherDescription;
 
-        public PackagingInfo()
+        protected PackagingInfo()
         {
         }
 
-        public PackagingInfo(PackagingType packagingType)
+        internal PackagingInfo(PackagingType packagingType)
         {
             PackagingType = packagingType;
+        }
+
+        public string OtherDescription
+        {
+            get
+            {
+                return otherDescription;
+            }
+            internal set
+            {
+                if (PackagingType == PackagingType.Other)
+                {
+                    otherDescription = value;
+                }
+                else if (!string.IsNullOrEmpty(value))
+                {
+                    throw new InvalidOperationException("Cannot set other description when packaging type is not 'other'");
+                }
+            }
         }
     }
 }
