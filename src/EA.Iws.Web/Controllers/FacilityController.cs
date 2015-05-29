@@ -143,6 +143,7 @@
             if (!ModelState.IsValid)
             {
                 ViewBag.NotificationId = id;
+                ViewBag.NotificationType = facilityType;
                 return View(inputModel);
             }
 

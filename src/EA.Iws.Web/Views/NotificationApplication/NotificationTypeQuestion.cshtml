@@ -20,7 +20,7 @@
                 {
                     var labelFor = "rdo" + notificationType;
                     <label class="block-label" for="@labelFor">
-                        @Html.RadioButtonFor(m => m.SelectedNotificationType, notificationType, new {@id = "rdo" + notificationType})@notificationType
+                        @Html.RadioButtonFor(m => m.SelectedNotificationType, notificationType, new { @id = "rdo" + notificationType })@notificationType
                     </label>
                 }
             </fieldset>
@@ -40,8 +40,12 @@
 @section scripts
 {
     <script>
-        $(function() {
-            $("#disposal-message").hide();
+        $(function () {
+            if ($("#rdoDisposal").is(':checked')) {
+                $("#disposal-message").show();
+            } else {
+                $("#disposal-message").hide();
+            }
 
             $("#rdoDisposal").click(function () {
                 $("#disposal-message").show("fast");
