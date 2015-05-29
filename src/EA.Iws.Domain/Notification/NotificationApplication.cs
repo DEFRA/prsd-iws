@@ -14,13 +14,13 @@
         }
 
         public NotificationApplication(Guid userId, NotificationType notificationType,
-            UKCompetentAuthority competentAuthority,
-            int notificationNumber)
+            UKCompetentAuthority competentAuthority, int notificationNumber)
         {
             UserId = userId;
             NotificationType = notificationType;
             CompetentAuthority = competentAuthority;
             NotificationNumber = CreateNotificationNumber(notificationNumber);
+
             ProducersCollection = new List<Producer>();
             FacilitiesCollection = new List<Facility>();
             CarriersCollection = new List<Carrier>();
@@ -37,6 +37,25 @@
         public NotificationType NotificationType { get; private set; }
 
         public UKCompetentAuthority CompetentAuthority { get; private set; }
+
+        private bool? isPreconsented;
+        public bool? IsPreconsentedRecoveryFacility
+        {
+            get
+            {
+                return isPreconsented;
+            }
+            set
+            {
+                if (NotificationType != NotificationType.Recovery)
+                {
+                    throw new InvalidOperationException(String.Format(
+                        "Facility type is not recovery for notification: {0}", Id));
+                }
+
+                isPreconsented = value;
+            }
+        }
 
         public virtual Exporter Exporter { get; private set; }
 
@@ -66,6 +85,11 @@
         private string CreateNotificationNumber(int notificationNumber)
         {
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
+        }
+
+        public void SetPreconsentedRecoveryFacility(bool? isPreconsentedRecoveryFacility)
+        {
+            IsPreconsentedRecoveryFacility = isPreconsentedRecoveryFacility;
         }
     }
 }

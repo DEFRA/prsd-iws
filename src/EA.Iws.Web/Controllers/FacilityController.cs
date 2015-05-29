@@ -11,6 +11,7 @@
     using Requests.Facilities;
     using Requests.Importer;
     using Requests.Notification;
+    using Requests.Shared;
     using ViewModels.Facility;
     using ViewModels.Shared;
 
@@ -46,7 +47,6 @@
 
                 await this.BindCountryList(client);
             }
-
             return View(facility);
         }
 
@@ -156,6 +156,49 @@
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
+        {
+            if (String.Equals(model.NotificationType.ToString(), NotificationType.Recovery.ToString(), StringComparison.InvariantCulture))
+            {
+                return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
+            }
+
+            //TODO: redirect to TechnologyEmployed screen
+            return RedirectToAction("Add", new { id = model.NotificationId });
+        }
+
+        [HttpGet]
+        public ActionResult RecoveryPreconsent(Guid id)
+        {
+            var model = new YesNoChoiceViewModel();
+            ViewBag.NotificationId = id;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RecoveryPreconsent(Guid id, YesNoChoiceViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.NotificationId = id;
+                return View(model);
+            }
+
+            bool isPreconsented = !string.IsNullOrWhiteSpace(model.Choices.SelectedValue) &&
+                                  ("Yes".Equals(model.Choices.SelectedValue, StringComparison.InvariantCultureIgnoreCase) ||
+                                   "True".Equals(model.Choices.SelectedValue, StringComparison.InvariantCultureIgnoreCase));
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), new SetPreconsentedRecoveryFacility(id, isPreconsented));
+            }
+            //TODO: redirect to TechnologyEmployed screen
+            return RedirectToAction("Add", new { id });
         }
 
         [HttpGet]

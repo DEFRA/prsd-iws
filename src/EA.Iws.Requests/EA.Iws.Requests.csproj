@@ -61,6 +61,7 @@
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\NotificationInfo.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
+    <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="Producers\GetProducerForNotification.cs" />

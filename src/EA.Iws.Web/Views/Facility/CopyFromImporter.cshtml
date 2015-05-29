@@ -6,7 +6,7 @@
     ViewBag.Title = "Is the importer one of the facility?";
 }
 
-@using (Html.BeginForm(actionName: "CopyFromImporter", controllerName: "Facility", routeValues: new { id = ViewBag.NotificationId, facilityType = ViewBag.NotificationType }, method: FormMethod.Post))
+@using (Html.BeginForm(actionName: "CopyFromImporter", controllerName: "Facility", routeValues: new { id = ViewBag.NotificationId }, method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

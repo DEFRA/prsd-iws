@@ -491,6 +491,7 @@
     <Content Include="Views\Facility\Edit.cshtml" />
     <Content Include="Views\Shipment\PackagingTypes.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxCollectionViewModel.cshtml" />
+    <Content Include="Views\Facility\RecoveryPreconsent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

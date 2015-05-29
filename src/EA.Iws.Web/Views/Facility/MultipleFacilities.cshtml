@@ -2,83 +2,93 @@
 @{
     ViewBag.Title = "List Facilities";
 }
-<h2 class="heading-large">@Model.NotificationType.ToString() Facility</h2>
 
-@if (Model != null && Model.FacilityData.Any())
+@using (Html.BeginForm(actionName: "MultipleFacilities", controllerName: "Facility", method: FormMethod.Post))
 {
-    <div class="colored-header-bar"></div>
-    <table>
-        <tbody>
-            @for (var i = 0; i < Model.FacilityData.Count; i++)
-            {
-                <tr>
-                    <td>
-                        <details>
-                            <summary><span class="summary">@Html.DisplayFor(m => m.FacilityData[i].Business.Name)</span></summary>
-                            <div class="grid-row">
-                                <div class="column-third">
-                                    @Html.DisplayFor(m => m.FacilityData[i].Contact.FirstName) @Html.DisplayFor(m => m.FacilityData[i].Contact.LastName)<br />
-                                    <a href="mailto:@Model.FacilityData[i].Contact.Email">@Model.FacilityData[i].Contact.Email</a><br />
-                                    Tel: @Html.DisplayFor(m => m.FacilityData[i].Contact.Telephone)<br />
-                                    @if (Model.FacilityData[i].Contact.Fax != null)
-                                    {
-                                        <label>Fax: </label>
-                                        @Html.DisplayFor(model => model.FacilityData[i].Contact.Fax);
-                                    }
-                                </div>
-                                <div class="column-third">
-                                    @Html.DisplayFor(m => m.FacilityData[i].Address.Building),<br />
-                                    @Html.DisplayFor(m => m.FacilityData[i].Address.StreetOrSuburb),<br />
-                                    @if (Model.FacilityData[i].Address.Address2 != null)
-                                    {
-                                        @Html.DisplayFor(model => model.FacilityData[i].Address.Address2)
-                                        @Html.Raw(",<br/>")
-                                    }
-                                    @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity) @Html.DisplayFor(m => m.FacilityData[i].Address.PostalCode)
-                                </div>
-                                <div class="column-third">
-                                    <div class="form-group">
-                                        Actual site of @Model.NotificationType.ToString().ToLowerInvariant():
-                                        @Html.DisplayFor(m => m.FacilityData[i].IsActualSiteOfTreatment)
+    @Html.AntiForgeryToken()
+    
+    <h2 class="heading-large">@Model.NotificationType.ToString() facilities</h2>
+
+    if (Model != null && Model.FacilityData.Any())
+    {
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.NotificationType)
+        <div class="colored-header-bar"></div>
+        <table>
+            <tbody>
+                @for (var i = 0; i < Model.FacilityData.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <details>
+                                <summary><span class="summary">@Html.DisplayFor(m => m.FacilityData[i].Business.Name)</span></summary>
+                                <div class="grid-row">
+                                    <div class="column-third">
+                                        @Html.DisplayFor(m => m.FacilityData[i].Contact.FirstName) @Html.DisplayFor(m => m.FacilityData[i].Contact.LastName)<br />
+                                        <a href="mailto:@Model.FacilityData[i].Contact.Email">@Model.FacilityData[i].Contact.Email</a><br />
+                                        Tel: @Html.DisplayFor(m => m.FacilityData[i].Contact.Telephone)<br />
+                                        @if (Model.FacilityData[i].Contact.Fax != null)
+                                        {
+                                            <label>Fax: </label>
+                                            @Html.DisplayFor(model => model.FacilityData[i].Contact.Fax);
+                                        }
+                                    </div>
+                                    <div class="column-third">
+                                        @Html.DisplayFor(m => m.FacilityData[i].Address.Building),<br />
+                                        @Html.DisplayFor(m => m.FacilityData[i].Address.StreetOrSuburb),<br />
+                                        @if (Model.FacilityData[i].Address.Address2 != null)
+                                        {
+                                            @Html.DisplayFor(model => model.FacilityData[i].Address.Address2)
+                                            @Html.Raw(",<br/>")
+                                        }
+                                        @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity) @Html.DisplayFor(m => m.FacilityData[i].Address.PostalCode)
+                                    </div>
+                                    <div class="column-third">
+                                        <div class="form-group">
+                                            Actual site of @Model.NotificationType.ToString().ToLowerInvariant():
+                                            @Html.DisplayFor(m => m.FacilityData[i].IsActualSiteOfTreatment)
+                                        </div>
+                                    </div>
+                                    <div class="column-third">
+                                        @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, facilityId = Model.FacilityData[i].Id }, null)
                                     </div>
                                 </div>
-                                <div class="column-third">
-                                    @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, facilityId = Model.FacilityData[i].Id }, null)
-                                </div>
-                            </div>
-                        </details>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+                            </details>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
-<div class="form-group"></div>
-<div class="form-group">
-    @Html.ActionLink("Add more", "Add", "Facility", new { id = Model.NotificationId }, null)
-</div>
-@Html.ActionLink("Continue", "Add", "Carrier", new { id = Model.NotificationId }, new { @class = "button" })
+    <div class="form-group"></div>
+    <div class="form-group">
+        @Html.ActionLink("Add more", "Add", "Facility", new { id = Model.NotificationId }, null)
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}
 <div id="divConfirmDelete" class="clearfix"></div>
 
 @section scripts
 {
     <script type="text/javascript">
-                $(function () {
-                    // When the background is clicked, hide the background
-                    $("#btnYes").click(function (e) {
-                    });
+        $(function () {
+            // When the background is clicked, hide the background
+            $("#btnYes").click(function (e) {
+            });
 
-                    $("#divConfirmDelete").click(function (e) {
-                        if (e.target === this && $(this).hasClass("fadeBackground")) {
-                            $(this).removeClass("fadeBackground");
-                            $(this).empty();
-                        }
-                    });
+            $("#divConfirmDelete").click(function (e) {
+                if (e.target === this && $(this).hasClass("fadeBackground")) {
+                    $(this).removeClass("fadeBackground");
+                    $(this).empty();
+                }
+            });
 
-                    $(".deleteLink").click(function () {
-                        $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
-                    });
-                })
+            $(".deleteLink").click(function () {
+                $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
+            });
+        })
     </script>
 }

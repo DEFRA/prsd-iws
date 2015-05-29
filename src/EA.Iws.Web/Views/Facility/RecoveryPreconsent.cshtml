@@ -1,0 +1,62 @@
+﻿@model EA.Iws.Web.ViewModels.Shared.YesNoChoiceViewModel
+@{
+    ViewBag.Title = "Is Recovery Facility Preconsented?";
+}
+
+@using (Html.BeginForm(actionName: "RecoveryPreconsent", controllerName: "Facility", routeValues: new { id = ViewBag.NotificationId }, method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <header class="hgroup">
+        <h2 class="heading-large">Pre-consented recovery facilities</h2>
+        <div class="colored-header-bar"></div>
+        <h2 class="heading-medium">Are all the recovery facilities pre-consented?</h2>
+    </header>
+
+    <p class="form-hint">Select ‘Yes’ if all the recovery facilities have a pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006 that covers this notification.</p>
+    <p class="form-hint">Evidence of the pre-consent status must be provided with this submission. This may be the pre-consent status certificate issue by the relevant competent authority.</p>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
+        @Html.EditorFor(m => m.Choices)
+    </div>
+
+    <div class="form-group">
+        <div class="panel-indent" id="messageYes">
+            <span class="form-hint">This notification will allow the intended shipment dates to cover a 3 year period</span>
+        </div>
+        <div class="panel-indent" id="messageNo">
+            <span class="form-hint">This notification will allow the intended shipment dates to cover a 12 month period</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}
+@section scripts
+{
+    <script>
+        $(function () {
+            $("#messageYes").hide("fast");
+            $("#messageNo").hide("fast");
+
+            if ($("#Choices\\.PossibleValues\\[0\\]").is(':checked')) {
+                $("#messageYes").show("fast");
+                $("#messageNo").hide("fast");
+            } else if ($("#Choices\\.PossibleValues\\[1\\]").is(':checked')) {
+                $("#messageYes").hide("fast");
+                $("#messageNo").show("fast");
+            }
+
+            $("#Choices\\.PossibleValues\\[0\\]").click(function () {
+                $("#messageYes").show("fast");
+                $("#messageNo").hide("fast");
+            });
+
+            $("#Choices\\.PossibleValues\\[1\\]").click(function () {
+                $("#messageYes").hide("fast");
+                $("#messageNo").show("fast");
+            });
+        });
+    </script>
+}

@@ -84,6 +84,7 @@
     <None Include="scripts\Update\Sprint7\20150515-134647-Add-Importer.sql" />
     <None Include="scripts\Update\Sprint8\20150522-191333-Carrier.sql" />
     <None Include="scripts\Update\Sprint8\20150528-134949-Add-PackagingInfo-Table.sql" />
+    <None Include="scripts\Update\Sprint8\20150529-174001-Add-IsPreconsented-To-Notification.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />
