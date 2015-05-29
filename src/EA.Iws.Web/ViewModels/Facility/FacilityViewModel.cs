@@ -1,16 +1,20 @@
 ﻿namespace EA.Iws.Web.ViewModels.Facility
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
+    using Requests.Facilities;
     using Requests.Shared;
     using Shared;
 
     public class FacilityViewModel
     {
-        public Guid Id { get; set; }
+        public FacilityViewModel()
+        {
+            Address = new AddressData();
 
-        [Display(Name = "Actual site of disposal/recovery")]
-        public bool IsActualSiteOfTreatment { get; set; }
+            Contact = new ContactData();
+
+            Business = new BusinessViewModel();
+        }
 
         public NotificationType NotificationType { get; set; }
 
@@ -22,13 +26,15 @@
 
         public BusinessViewModel Business { get; set; }
 
-        public FacilityViewModel()
+        public AddFacilityToNotification ToRequest()
         {
-            Address = new AddressData();
-
-            Contact = new ContactData();
-
-            Business = new BusinessViewModel();
+            return new AddFacilityToNotification
+            {
+                Address = Address,
+                Business = (BusinessData)Business,
+                Contact = Contact,
+                NotificationId = NotificationId
+            };
         }
     }
 }

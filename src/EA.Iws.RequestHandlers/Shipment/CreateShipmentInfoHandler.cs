@@ -40,7 +40,7 @@
             }
 
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
-            notification.AddShippingInfo(command.StartDate, command.EndDate, command.NumberOfShipments, command.Quantity, unit);
+            notification.AddShipmentInfo(command.StartDate, command.EndDate, command.NumberOfShipments, command.Quantity, unit);
 
             await db.SaveChangesAsync();
 

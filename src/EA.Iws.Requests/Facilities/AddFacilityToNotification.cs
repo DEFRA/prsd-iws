@@ -2,14 +2,16 @@
 {
     using System;
     using Prsd.Core.Mediator;
+    using Shared;
 
     public class AddFacilityToNotification : IRequest<Guid>
     {
-        public FacilityData Facility { get; private set; }
+        public BusinessData Business { get; set; }
 
-        public AddFacilityToNotification(FacilityData facility)
-        {
-            this.Facility = facility;
-        }
+        public AddressData Address { get; set; }
+
+        public ContactData Contact { get; set; }
+
+        public Guid NotificationId { get; set; }
     }
 }

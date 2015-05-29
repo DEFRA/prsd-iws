@@ -48,9 +48,12 @@
     <Compile Include="Exporters\NotificationHasExporter.cs" />
     <Compile Include="Exporters\UpdateExporterForNotification.cs" />
     <Compile Include="Facilities\AddFacilityToNotification.cs" />
+    <Compile Include="Facilities\DeleteFacilityForNotification.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />
+    <Compile Include="Facilities\GetFacilityForNotification.cs" />
     <Compile Include="Facilities\NotificationTypeById.cs" />
+    <Compile Include="Facilities\UpdateFacilityForNotification.cs" />
     <Compile Include="Importer\AddImporterToNotification.cs" />
     <Compile Include="Importer\GetImporterByNotificationId.cs" />
     <Compile Include="Importer\ImporterData.cs" />
@@ -67,7 +70,7 @@
     <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
     <Compile Include="Producers\AddProducerToNotification.cs" />
-    <Compile Include="Producers\DeleteProducer.cs" />
+    <Compile Include="Producers\DeleteProducerForNotification.cs" />
     <Compile Include="Exporters\ExporterData.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
     <Compile Include="Exporters\GetExporterByNotificationId.cs" />

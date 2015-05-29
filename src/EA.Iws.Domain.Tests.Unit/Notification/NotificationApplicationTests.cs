@@ -77,7 +77,7 @@
 
             EntityHelper.SetEntityIds(producer1, producer2);
 
-            notification.SetAsSiteOfExport(producer1.Id);
+            notification.SetProducerAsSiteOfExport(producer1.Id);
 
             var siteOfExportCount = notification.Producers.Count(p => p.IsSiteOfExport);
             Assert.Equal(1, siteOfExportCount);
@@ -94,7 +94,7 @@
 
             var badId = new Guid("{5DF206F6-4116-4EEC-949A-0FC71FE609C1}");
 
-            Action setAsSiteOfExport = () => notification.SetAsSiteOfExport(badId);
+            Action setAsSiteOfExport = () => notification.SetProducerAsSiteOfExport(badId);
 
             Assert.Throws<InvalidOperationException>(setAsSiteOfExport);
         }
@@ -258,7 +258,7 @@
             var startDate = DateTime.Now;
             var endDate = DateTime.Now.AddDays(1);
 
-            Action addShipmentInfo = () => notification.AddShippingInfo(startDate, endDate, numberOfShipments, quantity, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddShipmentInfo(startDate, endDate, numberOfShipments, quantity, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<ArgumentOutOfRangeException>(addShipmentInfo);
         }
@@ -272,7 +272,7 @@
             var startDate = DateTime.Now;
             var endDate = DateTime.Now.AddDays(-1); //Invalid end date
 
-            Action addShipmentInfo = () => notification.AddShippingInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddShipmentInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<InvalidOperationException>(addShipmentInfo);
         }
@@ -286,7 +286,7 @@
             var startDate = DateTime.Now.AddDays(1); //Invalid start date
             var endDate = DateTime.Now; 
 
-            Action addShipmentInfo = () => notification.AddShippingInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddShipmentInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<InvalidOperationException>(addShipmentInfo);
         }
@@ -297,7 +297,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShippingInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.True(notification.HasShipmentInfo);
         }

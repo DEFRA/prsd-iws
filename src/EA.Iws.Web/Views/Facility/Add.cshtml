@@ -16,13 +16,6 @@
         <div class="colored-header-bar"></div>
     </header>
 
-    <div class="form-group">
-        <label class="block-label">
-            @Html.CheckBoxFor(m => m.IsActualSiteOfTreatment)
-            This facility is the actual site of @Model.NotificationType.ToString().ToLowerInvariant()
-        </label>
-    </div>
-
     @Html.EditorFor(m => m.Business)
 
     <h2 class="heading-medium">Address</h2>

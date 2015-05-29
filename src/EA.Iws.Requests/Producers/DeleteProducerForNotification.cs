@@ -3,9 +3,9 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class DeleteProducer : IRequest<bool>
+    public class DeleteProducerForNotification : IRequest<bool>
     {
-        public DeleteProducer(Guid producerId, Guid notificationId)
+        public DeleteProducerForNotification(Guid producerId, Guid notificationId)
         {
             ProducerId = producerId;
             NotificationId = notificationId;

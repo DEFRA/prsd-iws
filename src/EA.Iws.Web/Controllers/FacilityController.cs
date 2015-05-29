@@ -59,22 +59,11 @@
                 return View(model);
             }
 
-            var facility = new FacilityData
-                    {
-                        NotificationType = model.NotificationType,
-                        NotificationId = model.NotificationId,
-                        IsActualSiteOfTreatment = model.IsActualSiteOfTreatment,
-                        Address = model.Address,
-                        Contact = model.Contact,
-                        Business = (BusinessData)model.Business
-                    };
-
             using (var client = apiClient())
             {
                 try
                 {
-                    var response =
-                        await client.SendAsync(User.GetAccessToken(), new AddFacilityToNotification(facility));
+                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
                     return RedirectToAction("MultipleFacilities", "Facility",
                         new { notificationID = model.NotificationId });

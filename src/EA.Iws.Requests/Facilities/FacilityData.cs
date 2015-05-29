@@ -19,8 +19,6 @@
         [Display(Name = "Actual site of disposal/recovery")]
         public bool IsActualSiteOfTreatment { get; set; }
 
-        public NotificationType NotificationType { get; set; }
-
         public FacilityData()
         {
             if (Address == null)

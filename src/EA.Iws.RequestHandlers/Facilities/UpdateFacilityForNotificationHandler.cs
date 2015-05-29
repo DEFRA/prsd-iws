@@ -8,27 +8,31 @@
     using Prsd.Core.Mediator;
     using Requests.Facilities;
 
-    internal class AddFacilityToNotificationHandler : IRequestHandler<AddFacilityToNotification, Guid>
+    internal class UpdateFacilityForNotificationHandler : IRequestHandler<UpdateFacilityForNotification, Guid>
     {
         private readonly IwsContext context;
 
-        public AddFacilityToNotificationHandler(IwsContext context)
+        public UpdateFacilityForNotificationHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(AddFacilityToNotification message)
+        public async Task<Guid> HandleAsync(UpdateFacilityForNotification message)
         {
             var country = await context.Countries.SingleAsync(c => c.Id == message.Address.CountryId);
+
+            var notification =
+                await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 
             var business = ValueObjectInitializer.CreateBusiness(message.Business);
             var address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
             var contact = ValueObjectInitializer.CreateContact(message.Contact);
 
-            var notification =
-                await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var facility = notification.GetFacility(message.FacilityId);
 
-            var facility = notification.AddFacility(business, address, contact);
+            facility.Address = address;
+            facility.Business = business;
+            facility.Contact = contact;
 
             await context.SaveChangesAsync();
 

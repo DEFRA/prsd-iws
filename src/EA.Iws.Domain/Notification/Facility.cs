@@ -5,33 +5,51 @@
 
     public class Facility : Entity
     {
+        private Business business;
+        private Address address;
+        private Contact contact;
+
         protected Facility()
         {
         }
 
-        public Facility(Business business, Address address, Contact contact, Country country,
-            bool isActualSiteOfTreatment)
+        internal Facility(Business business, Address address, Contact contact)
         {
-            Guard.ArgumentNotNull(business);
-            Guard.ArgumentNotNull(address);
-            Guard.ArgumentNotNull(contact);
-            Guard.ArgumentNotNull(country);
-
             Business = business;
             Address = address;
             Contact = contact;
-            IsActualSiteOfTreatment = isActualSiteOfTreatment;
-            Country = country;
         }
 
-        public Business Business { get; private set; }
+        public Business Business
+        {
+            get { return business; }
+            set
+            {
+                Guard.ArgumentNotNull(value);
+                business = value;
+            }
+        }
 
-        public bool IsActualSiteOfTreatment { get; private set; }
+        public Address Address
+        {
+            get { return address; }
+            set
+            {
+                Guard.ArgumentNotNull(value);
+                address = value;
+            }
+        }
 
-        public Address Address { get; private set; }
+        public Contact Contact
+        {
+            get { return contact; }
+            set
+            {
+                Guard.ArgumentNotNull(value);
+                contact = value;
+            }
+        }
 
-        public Contact Contact { get; private set; }
-
-        public Country Country { get; private set; }
+        public bool IsActualSiteOfTreatment { get; internal set; }
     }
 }

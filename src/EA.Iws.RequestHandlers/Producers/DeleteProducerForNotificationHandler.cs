@@ -7,16 +7,16 @@
     using Prsd.Core.Mediator;
     using Requests.Producers;
 
-    internal class DeleteProducerHandler : IRequestHandler<DeleteProducer, bool>
+    internal class DeleteProducerForNotificationHandler : IRequestHandler<DeleteProducerForNotification, bool>
     {
         private readonly IwsContext context;
 
-        public DeleteProducerHandler(IwsContext context)
+        public DeleteProducerForNotificationHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(DeleteProducer query)
+        public async Task<bool> HandleAsync(DeleteProducerForNotification query)
         {
             var notification = await context.NotificationApplications.Where(n => n.Id == query.NotificationId).SingleAsync();
             notification.RemoveProducer(query.ProducerId);
