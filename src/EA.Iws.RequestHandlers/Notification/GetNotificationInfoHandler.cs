@@ -1,13 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Notification;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    internal class GetNotificationInfoHandler : IRequestHandler<GetNotificationInfo, CompetentAuthorityData>
+    internal class GetNotificationInfoHandler : IRequestHandler<GetNotificationInfo, NotificationInfo>
     {
         private readonly IwsContext db;
 
@@ -16,15 +16,19 @@
             this.db = db;
         }
 
-        public async Task<CompetentAuthorityData> HandleAsync(GetNotificationInfo message)
+        public async Task<NotificationInfo> HandleAsync(GetNotificationInfo message)
         {
-            return await db.NotificationApplications.Where(n => n.Id == message.NotificationId).Select(n =>
-                new CompetentAuthorityData
-                {
-                    NotificationId = message.NotificationId,
-                    CompetentAuthority = (CompetentAuthority)n.CompetentAuthority.Value,
-                    NotificationNumber = n.NotificationNumber
-                }).SingleAsync();
+            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            return new NotificationInfo
+            {
+                NotificationId = message.NotificationId,
+                CompetentAuthority = (CompetentAuthority)notification.CompetentAuthority.Value,
+                NotificationNumber = notification.NotificationNumber,
+                NotificationType =
+                    notification.NotificationType == NotificationType.Disposal
+                        ? Requests.Shared.NotificationType.Disposal
+                        : Requests.Shared.NotificationType.Recovery
+            };
         }
     }
 }

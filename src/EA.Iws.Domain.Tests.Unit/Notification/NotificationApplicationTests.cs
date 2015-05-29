@@ -308,7 +308,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShippingInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Action addPackagingInfo = () => notification.ShipmentInfo.AddPackagingInfo(PackagingType.Bag, "Limited Company");
 
@@ -321,7 +321,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShippingInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             notification.ShipmentInfo.AddPackagingInfo(PackagingType.Other, "Limited Company");
 

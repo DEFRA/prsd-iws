@@ -6,7 +6,7 @@
 
     public class FacilityData
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         public BusinessData Business { get; set; }
 

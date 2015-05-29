@@ -10,8 +10,7 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Facilities;
     using Requests.Importer;
-    using Requests.Registration;
-    using Requests.Shared;
+    using Requests.Notification;
     using ViewModels.Facility;
     using ViewModels.Shared;
 
@@ -26,9 +25,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id, string facilityType, bool? copy)
+        public async Task<ActionResult> Add(Guid id, bool? copy)
         {
-            var facility = new FacilityViewModel();
+            var facility = new AddFacilityViewModel();
             using (var client = apiClient())
             {
                 if (copy.HasValue && copy.Value)
@@ -40,18 +39,20 @@
                     facility.Business = (BusinessViewModel)importer.Business;
                 }
 
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                facility.NotificationType = response.NotificationType;
+                facility.NotificationId = id;
+
                 await this.BindCountryList(client);
             }
-
-            facility.NotificationId = id;
-            facility.NotificationType = (NotificationType)Enum.Parse(typeof(NotificationType), facilityType, true);
 
             return View(facility);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(FacilityViewModel model)
+        public async Task<ActionResult> Add(AddFacilityViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -66,7 +67,7 @@
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
                     return RedirectToAction("MultipleFacilities", "Facility",
-                        new { notificationID = model.NotificationId });
+                        new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -82,32 +83,79 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MultipleFacilities(Guid notificationId, string errorMessage = "")
+        public async Task<ActionResult> Edit(Guid id, Guid facilityId)
         {
-            var model = new MultipleFacilitiesViewModel();
-
-            if (!String.IsNullOrEmpty(errorMessage))
-            {
-                ModelState.AddModelError(string.Empty, errorMessage);
-            }
-
             using (var client = apiClient())
             {
+                var facility =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new GetFacilityForNotification(id, facilityId));
+
                 var response =
-                    await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(notificationId));
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
 
-                model.NotificationId = notificationId;
-                model.FacilityData = response.ToList();
+                var model = new EditFacilityViewModel(facility) { NotificationType = response.NotificationType };
+
+                await this.BindCountryList(client);
+                return View(model);
             }
-
-            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
+        public async Task<ActionResult> Edit(EditFacilityViewModel model)
         {
-            return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
+            if (!ModelState.IsValid)
+            {
+                await this.BindCountryList(apiClient);
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    var request = model.ToRequest();
+
+                    await client.SendAsync(User.GetAccessToken(), request);
+
+                    return RedirectToAction("MultipleFacilities", "Facility",
+                        new { id = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                await this.BindCountryList(client);
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> MultipleFacilities(Guid id)
+        {
+            var model = new MultipleFacilitiesViewModel();
+
+            using (var client = apiClient())
+            {
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
+
+                var notificationInfo =
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+
+                model.NotificationId = id;
+                model.FacilityData = response.ToList();
+                model.NotificationType = notificationInfo.NotificationType;
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -118,8 +166,9 @@
 
             using (var client = apiClient())
             {
-                NotificationType notificationType = await client.SendAsync(User.GetAccessToken(), new NotificationTypeByNotificationId(id));
-                ViewBag.NotificationType = notificationType.ToString().ToLowerInvariant();
+                var notificationInfo =
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                ViewBag.NotificationType = notificationInfo.NotificationType.ToString().ToLowerInvariant();
             }
 
             return View(model);
@@ -127,21 +176,28 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CopyFromImporter(Guid id, string facilityType, YesNoChoiceViewModel inputModel)
+        public async Task<ActionResult> CopyFromImporter(Guid id, YesNoChoiceViewModel inputModel)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.NotificationId = id;
-                ViewBag.NotificationType = facilityType;
+
+                using (var client = apiClient())
+                {
+                    var notificationInfo =
+                        await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                    ViewBag.NotificationType = notificationInfo.NotificationType.ToString().ToLowerInvariant();
+                }
+
                 return View(inputModel);
             }
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id, facilityType });
+                return RedirectToAction("Add", new { id });
             }
 
-            return RedirectToAction("Add", new { id, facilityType, copy = true });
+            return RedirectToAction("Add", new { id, copy = true });
         }
     }
 }

@@ -5,9 +5,9 @@
     using Requests.Shared;
     using Shared;
 
-    public class FacilityViewModel
+    public class AddFacilityViewModel
     {
-        public FacilityViewModel()
+        public AddFacilityViewModel()
         {
             Address = new AddressData();
 

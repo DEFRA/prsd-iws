@@ -2,9 +2,7 @@
 @{
     ViewBag.Title = "List Facilities";
 }
-<h2 class="heading-large">Recovery Facility</h2>
-@Html.AntiForgeryToken()
-@Html.Gds().ValidationSummary()
+<h2 class="heading-large">@Model.NotificationType.ToString() Facility</h2>
 
 @if (Model != null && Model.FacilityData.Any())
 {
@@ -40,9 +38,12 @@
                                 </div>
                                 <div class="column-third">
                                     <div class="form-group">
-                                        Actual site of recovery:
+                                        Actual site of @Model.NotificationType.ToString().ToLowerInvariant():
                                         @Html.DisplayFor(m => m.FacilityData[i].IsActualSiteOfTreatment)
                                     </div>
+                                </div>
+                                <div class="column-third">
+                                    @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, facilityId = Model.FacilityData[i].Id }, null)
                                 </div>
                             </div>
                         </details>
@@ -57,14 +58,7 @@
 <div class="form-group">
     @Html.ActionLink("Add more", "Add", "Facility", new { id = Model.NotificationId }, null)
 </div>
-@using (Html.BeginForm("MultipleFacilities", "Facility"))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.NotificationId)
-    <div class="form-group">
-        <input type="submit" class="button" value="Continue" />
-    </div>
-}
+@Html.ActionLink("Continue", "Add", "Carrier", new { id = Model.NotificationId }, new { @class = "button" })
 <div id="divConfirmDelete" class="clearfix"></div>
 
 @section scripts

@@ -488,6 +488,7 @@
     <Content Include="Views\Facility\CopyFromImporter.cshtml" />
     <Content Include="Views\Producer\Edit.cshtml" />
     <Content Include="Views\Emails\VerifyEmailAddress.cshtml" />
+    <Content Include="Views\Facility\Edit.cshtml" />
     <Content Include="Views\Shipment\PackagingTypes.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxCollectionViewModel.cshtml" />
     <None Include="Web.Debug.config">
@@ -550,7 +551,8 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Carrier\CarrierViewModel.cs" />
     <Compile Include="ViewModels\Exporter\ExporterViewModel.cs" />
-    <Compile Include="ViewModels\Facility\FacilityViewModel.cs" />
+    <Compile Include="ViewModels\Facility\AddFacilityViewModel.cs" />
+    <Compile Include="ViewModels\Facility\EditFacilityViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
     <Compile Include="ViewModels\Importer\ImporterViewModel.cs" />

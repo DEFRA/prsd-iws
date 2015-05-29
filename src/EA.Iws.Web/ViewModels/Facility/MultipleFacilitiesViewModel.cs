@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Requests.Facilities;
+    using Requests.Shared;
 
     public class MultipleFacilitiesViewModel
     {
@@ -14,5 +15,7 @@
         public Guid NotificationId { get; set; }
 
         public List<FacilityData> FacilityData { get; set; }
+
+        public NotificationType NotificationType { get; set; }
     }
 }

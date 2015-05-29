@@ -92,7 +92,7 @@
                     await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("MultipleProducers", "Producer",
-                        new { notificationId = model.NotificationId });
+                        new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -109,11 +109,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(Guid notificationId, Guid producerId)
+        public async Task<ActionResult> Edit(Guid id, Guid producerId)
         {
             using (var client = apiClient())
             {
-                var producer = await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(notificationId, producerId));
+                var producer = await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(id, producerId));
 
                 var model = new EditProducerViewModel(producer);
 
@@ -141,7 +141,7 @@
                     await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("MultipleProducers", "Producer",
-                        new { notificationId = model.NotificationId });
+                        new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -158,18 +158,18 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MultipleProducers(Guid notificationId)
+        public async Task<ActionResult> MultipleProducers(Guid id)
         {
             var model = new MultipleProducersViewModel();
 
             using (var client = apiClient())
             {
                 var response =
-                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(notificationId));
+                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
 
                 try
                 {
-                    model.NotificationId = notificationId;
+                    model.NotificationId = id;
                     model.ProducerData = response.ToList();
                     model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
                     return View("MultipleProducers", model);

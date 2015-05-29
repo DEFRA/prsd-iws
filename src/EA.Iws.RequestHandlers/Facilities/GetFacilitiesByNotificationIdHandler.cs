@@ -24,6 +24,7 @@
 
             return result.Facilities.Select(p => new FacilityData
                     {
+                        Id = p.Id,
                         Business =
                             new BusinessData
                             {

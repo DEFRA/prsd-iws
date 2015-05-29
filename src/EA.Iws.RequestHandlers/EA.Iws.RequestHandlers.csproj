@@ -77,7 +77,6 @@
     <Compile Include="Producers\DeleteProducerForNotificationHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
     <Compile Include="Exporters\GetExporterByNotificationIdHandler.cs" />
-    <Compile Include="Facilities\NotificationTypeByNotificationIdHandler.cs" />
     <Compile Include="Producers\GetProducerForNotificationHandler.cs" />
     <Compile Include="Producers\GetProducersByNotificationIdHandler.cs" />
     <Compile Include="Exporters\AddExporterToNotificationHandler.cs" />
@@ -85,7 +84,6 @@
     <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
     <Compile Include="Producers\AddProducerToNotificationHandler.cs" />
     <Compile Include="Notification\GenerateNotificationDocumentHandler.cs" />
-    <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationsByUserHandler.cs" />
     <Compile Include="Organisations\FindMatchingOrganisationsHandler.cs" />
     <Compile Include="Organisations\OrganisationByIdHandler.cs" />

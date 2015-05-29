@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.IdentityModel.Protocols.WSTrust;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -114,12 +115,12 @@
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationNumber(id));
+                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
 
                 var model = new CreatedViewModel
                 {
-                    NotificationId = id,
-                    NotificationNumber = response
+                    NotificationId = response.NotificationId,
+                    NotificationNumber = response.NotificationNumber
                 };
                 return View(model);
             }
@@ -179,7 +180,7 @@
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
 
-                var model = new CompetentAuthorityData
+                var model = new NotificationInfo
                 {
                     CompetentAuthority = response.CompetentAuthority,
                     NotificationId = id,
@@ -214,12 +215,13 @@
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationNumber(id));
+                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
 
                 var model = new NotificationOverviewViewModel
                 {
-                    NotificationId = id,
-                    NotificationNumber = response
+                    NotificationId = response.NotificationId,
+                    NotificationNumber = response.NotificationNumber,
+                    NotificationType = response.NotificationType                    
                 };
                 return View(model);
             }

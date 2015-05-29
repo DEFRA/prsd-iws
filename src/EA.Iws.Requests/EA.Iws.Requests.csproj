@@ -52,7 +52,6 @@
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />
     <Compile Include="Facilities\GetFacilityForNotification.cs" />
-    <Compile Include="Facilities\NotificationTypeById.cs" />
     <Compile Include="Facilities\UpdateFacilityForNotification.cs" />
     <Compile Include="Importer\AddImporterToNotification.cs" />
     <Compile Include="Importer\GetImporterByNotificationId.cs" />
@@ -60,7 +59,7 @@
     <Compile Include="Importer\NotificationHasImporter.cs" />
     <Compile Include="Importer\UpdateImporterForNotification.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
-    <Compile Include="Notification\CompetentAuthorityData.cs" />
+    <Compile Include="Notification\NotificationInfo.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
     <Compile Include="Notification\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="Exporters\ExporterData.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
     <Compile Include="Exporters\GetExporterByNotificationId.cs" />
-    <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationsByUser.cs" />
     <Compile Include="Producers\GetProducersByNotificationId.cs" />
     <Compile Include="Notification\NotificationApplicationSummaryData.cs" />

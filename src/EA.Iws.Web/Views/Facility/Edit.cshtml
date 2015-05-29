@@ -1,6 +1,6 @@
-﻿@model EA.Iws.Web.ViewModels.Facility.AddFacilityViewModel
+﻿@model EA.Iws.Web.ViewModels.Facility.EditFacilityViewModel
 @{
-    ViewBag.Title = "Add a facility";
+    ViewBag.Title = "Edit a facility";
 }
 
 @using (Html.BeginForm())
@@ -10,6 +10,7 @@
     @Html.Gds().ValidationSummary()
     
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.FacilityId)
 
     <header class="hgroup">
         <h2 class="heading-large">Add @Model.NotificationType.ToString().ToLowerInvariant() facility</h2>

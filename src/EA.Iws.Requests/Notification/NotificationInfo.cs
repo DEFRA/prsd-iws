@@ -1,8 +1,9 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
+    using Shared;
 
-    public class CompetentAuthorityData
+    public class NotificationInfo
     {
         public Guid NotificationId { get; set; }
 
@@ -11,5 +12,7 @@
         public string NotificationNumber { get; set; }
 
         public string CompetentAuthorityName { get; set; }
+
+        public NotificationType NotificationType { get; set; }
     }
 }

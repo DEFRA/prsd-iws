@@ -1,0 +1,6 @@
+﻿ALTER TABLE [Business].[Facility]
+DROP CONSTRAINT FK_Facility_Country
+GO
+ALTER TABLE [Business].[Facility]
+ALTER COLUMN [CountryId] UNIQUEIDENTIFIER NULL
+GO

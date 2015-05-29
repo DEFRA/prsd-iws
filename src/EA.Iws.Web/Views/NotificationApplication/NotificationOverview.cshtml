@@ -28,7 +28,7 @@
                 <div>Waste generator - producer</div>
             </td>
             <td>
-                <div>@Html.ActionLink("Edit", "MultipleProducers", "Producer", new { notificationId = Model.NotificationId }, null)</div>
+                <div>@Html.ActionLink("Edit", "MultipleProducers", "Producer", new { id = Model.NotificationId }, null)</div>
             </td>
         </tr>
         <tr>
@@ -41,10 +41,10 @@
         </tr>
         <tr>
             <td>
-                <div>Recovery/Disposal facility</div>
+                <div>@Model.NotificationType.ToString() facility</div>
             </td>
             <td>
-                <div>@Html.ActionLink("Edit", "MultipleFacilities", "Facility", new { notificationId = Model.NotificationId }, null)</div>
+                <div>@Html.ActionLink("Edit", "MultipleFacilities", "Facility", new { id = Model.NotificationId }, null)</div>
             </td>
         </tr>
         </tbody>
