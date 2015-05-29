@@ -5,8 +5,7 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain;
-    using Prsd.Core.Identity;
+    using Domain.Notification;
     using Prsd.Core.Mediator;
     using Requests.Shipment;
     using PackagingType = Requests.Shipment.PackagingType;
@@ -24,51 +23,53 @@
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
 
-            var packagingTypes = new List<Domain.PackagingType>();
+            var packagingInfos = new List<PackagingInfo>();
 
             foreach (var packagingType in command.PackagingTypes)
             {
+                var packagingInfo = new PackagingInfo();
+
                 switch (packagingType)
                 {
                     case PackagingType.Drum:
-                        packagingTypes.Add(Domain.PackagingType.Drum);
+                        packagingInfo.PackagingType = Domain.PackagingType.Drum;
                         break;
                     case PackagingType.WoodenBarrel:
-                        packagingTypes.Add(Domain.PackagingType.WoodenBarrel);
+                        packagingInfo.PackagingType = Domain.PackagingType.WoodenBarrel;
                         break;
                     case PackagingType.Jerrican:
-                        packagingTypes.Add(Domain.PackagingType.Jerrican);
+                        packagingInfo.PackagingType = Domain.PackagingType.Jerrican;
                         break;
                     case PackagingType.Box:
-                        packagingTypes.Add(Domain.PackagingType.Box);
+                        packagingInfo.PackagingType = Domain.PackagingType.Box;
                         break;
                     case PackagingType.Bag:
-                        packagingTypes.Add(Domain.PackagingType.Bag);
+                        packagingInfo.PackagingType = Domain.PackagingType.Bag;
                         break;
                     case PackagingType.CompositePackaging:
-                        packagingTypes.Add(Domain.PackagingType.CompositePackaging);
+                        packagingInfo.PackagingType = Domain.PackagingType.CompositePackaging;
                         break;
                     case PackagingType.PressureReceptacle:
-                        packagingTypes.Add(Domain.PackagingType.PressureReceptacle);
+                        packagingInfo.PackagingType = Domain.PackagingType.PressureReceptacle;
                         break;
                     case PackagingType.Bulk:
-                        packagingTypes.Add(Domain.PackagingType.Bulk);
+                        packagingInfo.PackagingType = Domain.PackagingType.Bulk;
                         break;
                     case PackagingType.Other:
-                        packagingTypes.Add(Domain.PackagingType.Other);
+                        packagingInfo.PackagingType = Domain.PackagingType.Other;
+                        packagingInfo.OtherDescription = command.OtherDescription;
                         break;
                     default:
                         throw new InvalidOperationException("Unknown unit type");
                 }
+                packagingInfos.Add(packagingInfo);
             }
 
-            notification.ShipmentInfo.PackagingTypes = packagingTypes;
-
-            foreach (var packagingType in packagingTypes)
+            foreach (var packagingInfo in packagingInfos)
             {
-                packagingType.Id = GuidCombGenerator.GenerateComb();
+                notification.ShipmentInfo.AddPackagingInfo(packagingInfo);
             }
-
+            
             await db.SaveChangesAsync();
 
             return notification.Id;

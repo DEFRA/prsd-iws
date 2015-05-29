@@ -121,7 +121,7 @@
                             .ToList();
 
                     await client.SendAsync(User.GetAccessToken(),
-                        new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId));
+                        new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId, model.OtherDescription));
 
                     return RedirectToAction("Home", "Applicant");
                 }

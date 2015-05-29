@@ -8,5 +8,7 @@
         public CheckBoxCollectionViewModel PackagingTypes { get; set; }
 
         public Guid NotificationId { get; set; }
+
+        public string OtherDescription { get; set; }
     }
 }

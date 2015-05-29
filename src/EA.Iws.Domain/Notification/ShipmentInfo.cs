@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Prsd.Core;
     using Prsd.Core.Domain;
+    using Prsd.Core.Extensions;
 
     public class ShipmentInfo : Entity
     {
@@ -12,8 +13,6 @@
         private ShipmentQuantityUnits units;
         private DateTime firstDate;
         private DateTime lastDate;
-
-        public virtual List<PackagingType> PackagingTypes { get; set; }
 
         protected ShipmentInfo()
         {
@@ -30,6 +29,14 @@
             Units = units;
             FirstDate = firstDate;
             LastDate = lastDate;
+            PackagingInfosCollection = new List<PackagingInfo>();
+        }
+
+        protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
+
+        public IEnumerable<PackagingInfo> PackagingInfos
+        {
+            get { return PackagingInfosCollection.ToSafeIEnumerable(); }
         }
 
         public int NumberOfShipments
@@ -91,5 +98,10 @@
         public bool IsSpecialHandling { get; internal set; }
 
         public string SpecialHandlingDetails { get; set; }
+
+        public void AddPackagingInfo(PackagingInfo packagingInfo)
+        {
+            PackagingInfosCollection.Add(packagingInfo);
+        }
     }
 }

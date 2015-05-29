@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Domain
 {
-    using System;
     using Prsd.Core.Domain;
 
     public class PackagingType : Enumeration
@@ -23,7 +22,7 @@
 
         public static readonly PackagingType Other = new PackagingType(9, "Other (please specify)");
 
-        private PackagingType()
+        protected PackagingType()
         {
         }
 
@@ -31,7 +30,5 @@
             : base(value, displayName)
         {
         }
-
-        public Guid Id { get; set; }
     }
 }
