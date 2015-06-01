@@ -27,7 +27,12 @@ param
 
 # Find SMTP and network settings using XPath.
 $smtpSettings = $doc.SelectSingleNode("//smtp")
-$networkSettings = $smtpSettings.FirstChild
+$networkSettings = $smtpSettings.SelectSingleNode("//network")
+
+# Remove the local drop folder settings
+$smtpSettings.RemoveChild($smtpSettings.SelectSingleNode("//specifiedPickupDirectory"))
+$smtpSettings.RemoveAttribute("deliveryMethod")
+
 
 # Set the values
 if($networkSettings.Attributes["host"] -ne $null)

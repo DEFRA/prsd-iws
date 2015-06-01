@@ -1,16 +1,26 @@
 ﻿namespace EA.Iws.Api.Identity
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using DataAccess.Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security.DataProtection;
+    using Services;
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store, IDataProtectionProvider dataProtectionProvider)
+        private readonly ConfigurationService configurationService;
+
+        public ApplicationUserManager(IUserStore<ApplicationUser> store, 
+            IDataProtectionProvider dataProtectionProvider,
+            ConfigurationService configurationService)
             : base(store)
         {
+            this.configurationService = configurationService;
+
             UserValidator = new UserValidator<ApplicationUser>(this)
             {
                 AllowOnlyAlphanumericUserNames = false,
@@ -50,6 +60,43 @@
 
             UserTokenProvider =
                 new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+        }
+
+        public override async Task<IdentityResult> CreateAsync(ApplicationUser user)
+        {
+            SetEmailConfirmedIfRequired(user);
+
+            return await base.CreateAsync(user);
+        }
+
+        private void SetEmailConfirmedIfRequired(ApplicationUser user)
+        {
+            // We only auto-verify email where the environment is set to development and the user email is valid.
+            if (string.IsNullOrWhiteSpace(configurationService.CurrentConfiguration.Environment)
+                || !configurationService.CurrentConfiguration.Environment.Equals("Development", StringComparison.InvariantCultureIgnoreCase)
+                || string.IsNullOrWhiteSpace(user.Email)
+                || !user.Email.Contains('@'))
+            {
+                return;
+            }
+
+            List<string> excludedDomains = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(configurationService.CurrentConfiguration.VerificationEmailTestDomains))
+            {
+                // Get the domains for which email verification is still required.
+                excludedDomains =
+                    configurationService.CurrentConfiguration.VerificationEmailTestDomains.Split(new[] { ',' },
+                        StringSplitOptions.RemoveEmptyEntries).ToList();
+            }
+
+            int domainStarts = user.Email.LastIndexOf("@");
+            var excludeThisEmail = excludedDomains.Any(d => user.Email.Substring(domainStarts).Contains(d));
+
+            if (!excludeThisEmail)
+            {
+                user.EmailConfirmed = true;
+            }
         }
     }
 }

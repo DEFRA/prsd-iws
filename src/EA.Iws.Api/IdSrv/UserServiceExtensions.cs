@@ -5,6 +5,7 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.Owin.Security.DataProtection;
     using Owin;
+    using Services;
     using Thinktecture.IdentityServer.Core.Configuration;
     using Thinktecture.IdentityServer.Core.Services;
 
@@ -17,6 +18,7 @@
             factory.Register(new Registration<IUserStore<ApplicationUser>, ApplicationUserStore>() { Mode = RegistrationMode.InstancePerHttpRequest });
             factory.Register(new Registration<IwsIdentityContext>() { Mode = RegistrationMode.InstancePerHttpRequest });
             factory.Register(new Registration<IDataProtectionProvider>(f => app.GetDataProtectionProvider()) { Mode = RegistrationMode.InstancePerHttpRequest });
+            factory.Register(new Registration<ConfigurationService>() { Mode = RegistrationMode.InstancePerHttpRequest });
         }
     }
 }

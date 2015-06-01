@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.Api.Controllers
 {
-    using System;
     using System.Threading.Tasks;
-    using System.Web;
     using System.Web.Http;
     using Client.Entities;
     using DataAccess.Identity;
@@ -16,7 +14,8 @@
         private readonly ApplicationUserManager userManager;
         private readonly IUserContext userContext;
 
-        public RegistrationController(ApplicationUserManager userManager, IUserContext userContext)
+        public RegistrationController(ApplicationUserManager userManager, 
+            IUserContext userContext)
         {
             this.userContext = userContext;
             this.userManager = userManager;
@@ -99,6 +98,6 @@
             }
 
             return null;
-        }  
+        }
     }
 }

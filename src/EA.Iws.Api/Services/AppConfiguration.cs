@@ -11,5 +11,7 @@
         public string ConnectionString { get; set; }
 
         public string SiteRoot { get; set; }
+
+        public string VerificationEmailTestDomains { get; set; }
     }
 }
