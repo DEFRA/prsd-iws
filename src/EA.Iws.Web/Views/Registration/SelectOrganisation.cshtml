@@ -58,12 +58,12 @@
 }
 else
 {
-    <p>No organisations matching your organisation name have been registered. Please register your organisation details.</p>
+    <p>There are no matches for the organisation you have entered.</p>
 }
 <div class="form-group">
 </div>
 <hr />
-<h2 class="heading-medium">I want to add an address myself</h2>
+<h2 class="heading-medium">Add a new organisation</h2>
 @Html.ActionLink(linkText: "Add new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { @class = "button" })<br />
 
 

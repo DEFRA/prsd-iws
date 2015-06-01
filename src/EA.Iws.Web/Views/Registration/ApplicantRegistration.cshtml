@@ -44,7 +44,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.ValidationMessageFor(m => m.Password)
         @Html.Gds().LabelFor(m => m.Password)
-        <p class="form-hint text">Password must be at least 6 characters and contain at least 1 uppercase letter, 1 lowercase letter and 1 number</p>
+        <p class="form-hint text">Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter and one number</p>
         @Html.Gds().PasswordFor(m => m.Password)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
@@ -59,7 +59,7 @@
                     <div>@Html.ValidationMessageFor(m => m.TermsAndConditions)</div>
                     <label class="block-label" for="checkbox-1">
                         @Html.CheckBoxFor(m => m.TermsAndConditions, new { @id = "checkbox-1" })
-                        Accept terms and conditions for use
+                        Accept terms and conditions of use
                     </label>
                 </fieldset>
             </div>
@@ -69,7 +69,7 @@
         </div>
         <div class="column-half">
             <details>
-                <summary><span class="summary">Read full terms and conditions for use</span></summary>
+                <summary><span class="summary">Read full terms and conditions of use</span></summary>
                 <div class="panel-indent">
                     <b>Terms and conditions of use</b>
                     <p>
