@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.ViewModels.NotificationApplication
 {
     using System;
+    using Prsd.Core.Validation;
 
     public class SpecialHandlingViewModel
     {
@@ -8,6 +9,7 @@
 
         public Guid NotificationId { get; set; }
 
+        [RequiredIf("IsSpecialHandling", true, "Please enter special handling details")]
         public string SpecialHandlingDetails { get; set; }
     }
 }

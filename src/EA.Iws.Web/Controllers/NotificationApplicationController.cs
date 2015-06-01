@@ -237,6 +237,11 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SpecialHandling(SpecialHandlingViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling, model.SpecialHandlingDetails));
