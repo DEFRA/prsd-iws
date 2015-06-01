@@ -95,12 +95,16 @@
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult PackagingTypes(Guid id)
         {
+            var packagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>();
+
+            //We need to exclude 'other' as this will be handled separately
+            packagingTypes.PossibleValues = packagingTypes.PossibleValues.Where(p => (PackagingType)Convert.ToInt32(p.Value) != PackagingType.Other).ToList();
+
             var model = new PackagingTypesViewModel
             {
-                PackagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>(),
+                PackagingTypes = packagingTypes,
                 NotificationId = id
             };
 
@@ -108,9 +112,14 @@
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> PackagingTypes(PackagingTypesViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             using (var client = apiClient())
             {
                 try
@@ -119,6 +128,17 @@
                         model.PackagingTypes.PossibleValues.Where(p => p.Selected)
                             .Select(p => (PackagingType)(Convert.ToInt32(p.Value)))
                             .ToList();
+
+                    if (model.OtherSelected)
+                    {
+                        selectedPackagingTypes.Add(PackagingType.Other);
+                    }
+
+                    if (!selectedPackagingTypes.Any())
+                    {
+                        ModelState.AddModelError(string.Empty, "Please select at least one option");
+                        return View(model);
+                    }
 
                     await client.SendAsync(User.GetAccessToken(),
                         new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId, model.OtherDescription));

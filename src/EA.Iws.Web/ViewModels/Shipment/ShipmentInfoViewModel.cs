@@ -15,6 +15,7 @@
         [Range(1, 99999, ErrorMessage = "The number of shipments must be at least 1 and cannot be greater than 99999")]
         public int NumberOfShipments { get; set; }
 
+        [Range(0.0001, 99999, ErrorMessage = "The quantity must be between 0.0001 and 99999")]
         public decimal Quantity { get; set; }
 
         public ShipmentQuantityUnits Units { get; set; }

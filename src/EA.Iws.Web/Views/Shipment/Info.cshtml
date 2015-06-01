@@ -27,7 +27,7 @@
             <div class="column-third">
             @Html.ValidationMessageFor(m => m.Quantity)
             @Html.Gds().LabelFor(m => m.Quantity)
-            @Html.Gds().TextBoxFor(m => m.Quantity, new { @class = "numberInput", type = "number", min = "0.0001", max = "99999" })
+            @Html.Gds().TextBoxFor(m => m.Quantity)
         </div>
             @Html.ValidationMessageFor(m => m.Units)
             @Html.Gds().LabelFor(m => m.Units)

@@ -3,24 +3,39 @@
     ViewBag.Title = "Which Competent Authority";
 }
 
-@using (Html.BeginForm(actionName: "PackagingTypes", controllerName: "Shipment", method: FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.NotificationId)
-
 <header class="hgroup">
     <h2 class="heading-large">Which packaging types will be used?</h2>
     <p>Select all that apply</p>
 </header>
 
+@using (Html.BeginForm(actionName: "PackagingTypes", controllerName: "Shipment", method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
     <div class="form-group">
         @Html.EditorFor(m => m.PackagingTypes)
-        @Html.EditorFor(m => m.OtherDescription)
+        <fieldset>
+            <div class="form-group form-group-compound">
+                <label class="block-label" for="other-option-check" data-target="other-option">
+                    @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
+                    Other
+                </label>
+            </div>
+            <div class="panel-indent @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
+                <label class="form-label" for="other-label">Please specify</label>
+            <div class="form-group" @Html.Gds().FormGroupClass(m => m.OtherDescription)>
+                @Html.ValidationMessageFor(m => m.OtherDescription)<br/>
+                @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
+            </div>
+            </div>
+        </fieldset>
     </div>
 
-<div class="form-group">
-    <button class="button" type="submit">Continue</button>
-</div>
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
 }
 
 
