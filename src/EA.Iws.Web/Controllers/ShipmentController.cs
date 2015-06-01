@@ -29,24 +29,18 @@
         [HttpGet]
         public ActionResult Info(Guid id)
         {
-            var model = new ShipmentInfoViewModel();
-            model.NotificationId = id;
+            var model = new ShipmentInfoViewModel { NotificationId = id, UnitsSelectList = GetUnits() };
+            return View(model);
+        }
 
-            IEnumerable<ShipmentQuantityUnits> shipmentQuantityUnits =
-                Enum.GetValues(typeof(ShipmentQuantityUnits)).Cast<ShipmentQuantityUnits>();
-            model.UnitsSelectList = from units in shipmentQuantityUnits
-                select new SelectListItem
-                {
-                    Text = units.ToString(),
-                    Value = ((int)units).ToString()
-                };
-
+        private IEnumerable<SelectListItem> GetUnits()
+        {
             // Get the enum fields if present.
             var fields = typeof(ShipmentQuantityUnits).GetFields(BindingFlags.Public | BindingFlags.Static);
             var fieldNames = new Dictionary<string, int>();
 
             foreach (var field in fields)
-            { 
+            {
                 // Get the display attributes for the enum.
                 var displayAttribute = (DisplayAttribute)field.GetCustomAttributes(typeof(DisplayAttribute)).SingleOrDefault();
 
@@ -56,16 +50,22 @@
                 fieldNames.Add(name, (int)field.GetValue(ShipmentQuantityUnits.Tonnes));
             }
 
-            var selectList = new SelectList(fieldNames, "Value", "Key");
-            model.UnitsSelectList = selectList;
-
-            return View(model);
+            return new SelectList(fieldNames, "Value", "Key");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Info(ShipmentInfoViewModel model)
         {
+            var startDate = new DateTime(model.StartYear, model.StartMonth, model.StartDay);
+            var endDate = new DateTime(model.EndYear, model.EndMonth, model.EndDay);
+            if (endDate <= startDate)
+            {
+                ModelState.AddModelError(string.Empty, "The start date must be before the end date");
+                model.UnitsSelectList = GetUnits();
+                return View(model);
+            }
+
             using (var client = apiClient())
             {
                 try
@@ -76,8 +76,8 @@
                                 model.NumberOfShipments,
                                 model.Quantity,
                                 model.Units,
-                                new DateTime(model.StartYear, model.StartMonth, model.StartDay),
-                                new DateTime(model.EndYear, model.EndMonth, model.EndDay)));
+                                startDate,
+                                endDate));
 
                     return RedirectToAction("Home", "Applicant");
                 }
@@ -90,6 +90,7 @@
                         throw;
                     }
                 }
+                model.UnitsSelectList = GetUnits();
                 return View(model);
             }
         }
