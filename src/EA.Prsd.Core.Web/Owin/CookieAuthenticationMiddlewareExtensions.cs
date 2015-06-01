@@ -37,12 +37,7 @@
 
             await UpdateAccessToken(context, options);
 
-            var id = await TransformClaims(context, options);
-
-            if (id != null)
-            {
-                context.ReplaceIdentity(id);
-            }
+            await TransformClaims(context, options);
         }
 
         private static async Task UpdateAccessToken(CookieValidateIdentityContext context,
@@ -76,14 +71,23 @@
             }
         }
 
-        private static async Task<ClaimsIdentity> TransformClaims(CookieValidateIdentityContext context,
+        private static async Task TransformClaims(CookieValidateIdentityContext context,
             PrsdCookieAuthenticationOptions options)
         {
             var claims = new List<Claim>();
 
+            var accessTokenClaim = context.Identity.FindFirst(OAuth2Constants.AccessToken);
+
+            if (accessTokenClaim == null)
+            {
+                context.RejectIdentity();
+                context.OwinContext.Authentication.SignOut(context.Options.AuthenticationType);
+                return;
+            }
+
             var userInfoClient = new UserInfoClient(
                 new Uri(options.ApiUrl + "/connect/userinfo"),
-                context.Identity.FindFirst(OAuth2Constants.AccessToken).Value);
+                accessTokenClaim.Value);
 
             var userInfo = await userInfoClient.GetAsync();
 
@@ -91,12 +95,12 @@
             {
                 context.RejectIdentity();
                 context.OwinContext.Authentication.SignOut(context.Options.AuthenticationType);
-                return null;
+                return;
             }
 
             userInfo.Claims.ToList().ForEach(ui => claims.Add(new Claim(ui.Item1, ui.Item2)));
 
-            claims.Add(context.Identity.FindFirst(OAuth2Constants.AccessToken));
+            claims.Add(accessTokenClaim);
             claims.Add(context.Identity.FindFirst(OAuth2Constants.RefreshToken));
             claims.Add(context.Identity.FindFirst(ClaimTypes.ExpiresAt));
 
@@ -108,7 +112,8 @@
 
             var id = new ClaimsIdentity(context.Options.AuthenticationType);
             id.AddClaims(claims);
-            return id;
+
+            context.ReplaceIdentity(id);
         }
     }
 }
