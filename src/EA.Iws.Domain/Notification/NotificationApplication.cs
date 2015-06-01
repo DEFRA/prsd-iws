@@ -86,10 +86,5 @@
         {
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
         }
-
-        public void SetPreconsentedRecoveryFacility(bool? isPreconsentedRecoveryFacility)
-        {
-            IsPreconsentedRecoveryFacility = isPreconsentedRecoveryFacility;
-        }
     }
 }
