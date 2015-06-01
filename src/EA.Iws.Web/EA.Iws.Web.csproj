@@ -492,6 +492,7 @@
     <Content Include="Views\Shipment\PackagingTypes.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxCollectionViewModel.cshtml" />
     <Content Include="Views\Facility\RecoveryPreconsent.cshtml" />
+    <Content Include="Views\Carrier\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -550,7 +551,8 @@
     <Compile Include="Services\IEmailTemplateService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Carrier\CarrierViewModel.cs" />
+    <Compile Include="ViewModels\Carrier\AddCarrierViewModel.cs" />
+    <Compile Include="ViewModels\Carrier\EditCarrierViewModel.cs" />
     <Compile Include="ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\AddFacilityViewModel.cs" />
     <Compile Include="ViewModels\Facility\EditFacilityViewModel.cs" />

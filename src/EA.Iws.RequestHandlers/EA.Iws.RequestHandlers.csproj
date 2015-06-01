@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
+    <Compile Include="Carrier\UpdateCarrierForNotificationHandler.cs" />
     <Compile Include="Exporters\NotificationHasExporterHandler.cs" />
     <Compile Include="Carrier\AddCarrierToNotificationHandler.cs" />
     <Compile Include="Exporters\UpdateExporterForNotificationHandler.cs" />

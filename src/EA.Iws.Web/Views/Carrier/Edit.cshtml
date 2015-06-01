@@ -1,22 +1,22 @@
-﻿@model EA.Iws.Web.ViewModels.Carrier.AddCarrierViewModel
+﻿@model EA.Iws.Web.ViewModels.Carrier.EditCarrierViewModel
 
 @{
     ViewBag.Title = "Intended carrier(s)";
 }
 
-@using (Html.BeginForm("Add", "Carrier", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Carrier", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.CarrierId)
+
     @Html.Gds().ValidationSummary()
 
     <header class="hgroup">
         <h2 class="heading-large">Add intended carrier</h2>
         <div class="colored-header-bar"></div>
     </header>
-
-    <div class="form-group">
-        @Html.HiddenFor(m => m.NotificationId)
-    </div>
 
     @Html.EditorFor(m => m.Business)
 
