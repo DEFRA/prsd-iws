@@ -17,11 +17,10 @@
                 .WithRequired()
                 .Map(m => m.MapKey("ShipmentInfoId"));
 
-            Property(x => x.NumberOfShipments).IsRequired();
-            Property(x => x.Quantity).IsRequired();
-            Property(x => x.FirstDate).IsRequired();
-            Property(x => x.LastDate).IsRequired();
-            Property(x => x.Units.Value).IsRequired();
+            HasOptional(x => x.NumberOfShipmentsInfo)
+                .WithRequired()
+                .Map(m => m.MapKey("ShipmentInfoId"));
+
             Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
         }
     }

@@ -241,7 +241,7 @@
             {
                 await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling, model.SpecialHandlingDetails));
             }
-            return View(new SpecialHandlingViewModel());
+            return RedirectToAction("Info", "Shipment", new { id = model.NotificationId });
         }
     }
 }

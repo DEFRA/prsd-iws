@@ -27,6 +27,8 @@
             var contact = ValueObjectInitializer.CreateContact(command.Contact);
             var carrier = notification.AddCarrier(business, address, contact);
 
+            notification.AddShipmentInfo();
+
             await context.SaveChangesAsync();
 
             return carrier.Id;

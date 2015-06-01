@@ -71,7 +71,7 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), 
-                        new CreateShipmentInfo(
+                        new CreateNumberOfShipmentsInfo(
                                 model.NotificationId,
                                 model.NumberOfShipments,
                                 model.Quantity,
@@ -144,7 +144,7 @@
                     await client.SendAsync(User.GetAccessToken(),
                         new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId, model.OtherDescription));
 
-                    return RedirectToAction("Home", "Applicant");
+                    return RedirectToAction("SpecialHandling", "NotificationApplication", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

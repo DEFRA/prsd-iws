@@ -8,16 +8,16 @@
     using Prsd.Core.Mediator;
     using Requests.Shipment;
 
-    internal class CreateShipmentInfoHandler : IRequestHandler<CreateShipmentInfo, Guid>
+    internal class CreateNumberOfShipmentsInfoHandler : IRequestHandler<CreateNumberOfShipmentsInfo, Guid>
     {
         private readonly IwsContext db;
 
-        public CreateShipmentInfoHandler(IwsContext db)
+        public CreateNumberOfShipmentsInfoHandler(IwsContext db)
         {
             this.db = db;
         }
 
-        public async Task<Guid> HandleAsync(CreateShipmentInfo command)
+        public async Task<Guid> HandleAsync(CreateNumberOfShipmentsInfo command)
         {
             ShipmentQuantityUnits unit;
 
@@ -39,8 +39,8 @@
                     throw new InvalidOperationException(string.Format("Unknown unit: {0}", command.Units));
             }
 
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
-            notification.AddShipmentInfo(command.StartDate, command.EndDate, command.NumberOfShipments, command.Quantity, unit);
+            var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
+            notification.AddNumberofShipmentsInfo(command.StartDate, command.EndDate, command.NumberOfShipments, command.Quantity, unit);
 
             await db.SaveChangesAsync();
 

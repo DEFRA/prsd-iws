@@ -44,7 +44,7 @@
 
         public string NotificationNumber { get; private set; }
 
-        public virtual ShipmentInfo ShipmentInfo { get; private set; }
+        public ShipmentInfo ShipmentInfo { get; private set; }
 
         public DateTime CreatedDate { get; private set; }
 

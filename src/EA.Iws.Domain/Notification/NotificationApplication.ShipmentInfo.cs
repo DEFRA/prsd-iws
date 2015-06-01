@@ -9,8 +9,13 @@
             get { return ShipmentInfo != null; }
         }
 
-        public void AddShipmentInfo(DateTime startDate, DateTime endDate, int numberOfShipments, decimal quantity,
+        public void AddNumberofShipmentsInfo(DateTime startDate, DateTime endDate, int numberOfShipments, decimal quantity,
             ShipmentQuantityUnits unit)
+        {
+            ShipmentInfo.NumberOfShipmentsInfo = new NumberOfShipmentsInfo(numberOfShipments, quantity, unit, startDate, endDate);
+        }
+
+        public void AddShipmentInfo()
         {
             if (ShipmentInfo != null)
             {
@@ -18,7 +23,7 @@
                     String.Format("Cannot add shipment info to notification: {0} if it already exists", Id));
             }
 
-            ShipmentInfo = new ShipmentInfo(numberOfShipments, quantity, unit, startDate, endDate);
+            ShipmentInfo = new ShipmentInfo(false);
         }
 
         public void SetSpecialHandling(bool isSpecialHandling, string specialHandlingDetails)

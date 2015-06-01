@@ -257,7 +257,7 @@
             var startDate = DateTime.Now;
             var endDate = DateTime.Now.AddDays(1);
 
-            Action addShipmentInfo = () => notification.AddShipmentInfo(startDate, endDate, numberOfShipments, quantity, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddNumberofShipmentsInfo(startDate, endDate, numberOfShipments, quantity, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<ArgumentOutOfRangeException>(addShipmentInfo);
         }
@@ -271,7 +271,7 @@
             var startDate = DateTime.Now;
             var endDate = DateTime.Now.AddDays(-1); //Invalid end date
 
-            Action addShipmentInfo = () => notification.AddShipmentInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddNumberofShipmentsInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<InvalidOperationException>(addShipmentInfo);
         }
@@ -285,7 +285,7 @@
             var startDate = DateTime.Now.AddDays(1); //Invalid start date
             var endDate = DateTime.Now; 
 
-            Action addShipmentInfo = () => notification.AddShipmentInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddNumberofShipmentsInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<InvalidOperationException>(addShipmentInfo);
         }
@@ -296,7 +296,9 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShipmentInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentInfo();
+
+            notification.AddNumberofShipmentsInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.True(notification.HasShipmentInfo);
         }
@@ -307,7 +309,9 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShipmentInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentInfo();
+
+            notification.AddNumberofShipmentsInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Action addPackagingInfo = () => notification.ShipmentInfo.AddPackagingInfo(PackagingType.Bag, "Limited Company");
 
@@ -320,7 +324,9 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShipmentInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentInfo();
+
+            notification.AddNumberofShipmentsInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             notification.ShipmentInfo.AddPackagingInfo(PackagingType.Other, "Limited Company");
 

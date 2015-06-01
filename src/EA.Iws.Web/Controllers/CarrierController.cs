@@ -8,6 +8,7 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Carriers;
+    using Requests.Shipment;
     using ViewModels.Carrier;
 
     public class CarrierController : Controller
@@ -41,9 +42,8 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-
                     // TODO: navigate to multiple carriers screen once implemented
-                    return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+                    return RedirectToAction("PackagingTypes", "Shipment", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
