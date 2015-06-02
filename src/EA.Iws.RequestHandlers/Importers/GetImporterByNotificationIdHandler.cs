@@ -3,52 +3,28 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Notification;
+    using Mappings;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Importer;
-    using Requests.Shared;
 
     internal class GetImporterByNotificationIdHandler : IRequestHandler<GetImporterByNotificationId, ImporterData>
     {
         private readonly IwsContext context;
+        private readonly IMap<NotificationApplication, ImporterData> mapper;
 
-        public GetImporterByNotificationIdHandler(IwsContext context)
+        public GetImporterByNotificationIdHandler(IwsContext context, IMap<NotificationApplication, ImporterData> mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public async Task<ImporterData> HandleAsync(GetImporterByNotificationId message)
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 
-            return new ImporterData
-            {
-                NotificationId = message.NotificationId,
-                Business = new BusinessData
-                {
-                    Name = notification.Importer.Business.Name,
-                    EntityType = notification.Importer.Business.Type,
-                    AdditionalRegistrationNumber = notification.Importer.Business.AdditionalRegistrationNumber,
-                    RegistrationNumber = notification.Importer.Business.RegistrationNumber
-                },
-                Address = new AddressData
-                {
-                    Building = notification.Importer.Address.Building,
-                    StreetOrSuburb = notification.Importer.Address.Address1,
-                    Address2 = notification.Importer.Address.Address2,
-                    TownOrCity = notification.Importer.Address.TownOrCity,
-                    Region = notification.Importer.Address.Region,
-                    PostalCode = notification.Importer.Address.PostalCode,
-                    CountryName = notification.Importer.Address.Country
-                },
-                Contact = new ContactData
-                {
-                    FirstName = notification.Importer.Contact.FirstName,
-                    LastName = notification.Importer.Contact.LastName,
-                    Telephone = notification.Importer.Contact.Telephone,
-                    Fax = notification.Importer.Contact.Fax,
-                    Email = notification.Importer.Contact.Email
-                }
-            };
+            return mapper.Map(notification);
         }
     }
 }

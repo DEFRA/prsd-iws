@@ -2,57 +2,30 @@
 {
     using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Notification;
+    using Mappings;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Facilities;
-    using Requests.Shared;
 
     internal class GetFacilitiesByNotificationIdHandler : IRequestHandler<GetFacilitiesByNotificationId, IList<FacilityData>>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
+        private readonly IMap<NotificationApplication, IList<FacilityData>> mapper;
 
-        public GetFacilitiesByNotificationIdHandler(IwsContext db)
+        public GetFacilitiesByNotificationIdHandler(IwsContext context, IMap<NotificationApplication, IList<FacilityData>> mapper)
         {
-            this.db = db;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         public async Task<IList<FacilityData>> HandleAsync(GetFacilitiesByNotificationId message)
         {
-            var result = await db.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 
-            return result.Facilities.Select(p => new FacilityData
-                    {
-                        Id = p.Id,
-                        Business =
-                            new BusinessData
-                            {
-                                Name = p.Business.Name,
-                                EntityType = p.Business.Type,
-                                AdditionalRegistrationNumber = p.Business.AdditionalRegistrationNumber
-                            },
-                        Address =
-                            new AddressData
-                            {
-                                Address2 = p.Address.Address2,
-                                CountryName = p.Address.Country,
-                                Building = p.Address.Building,
-                                PostalCode = p.Address.PostalCode,
-                                StreetOrSuburb = p.Address.Address1,
-                                TownOrCity = p.Address.TownOrCity
-                            },
-                        Contact = new ContactData
-                        {
-                            Email = p.Contact.Email,
-                            FirstName = p.Contact.FirstName,
-                            LastName = p.Contact.LastName,
-                            Fax = p.Contact.Fax,
-                            Telephone = p.Contact.Telephone
-                        },
-                        IsActualSiteOfTreatment = p.IsActualSiteOfTreatment,
-                        NotificationId = message.NotificationId
-                }).ToArray();
+            return mapper.Map(notification);
         }
     }
 }

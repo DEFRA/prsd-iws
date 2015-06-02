@@ -5,55 +5,29 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Notification;
+    using Mappings;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Producers;
-    using Requests.Shared;
 
     internal class GetProducersByNotificationIdHandler :
         IRequestHandler<GetProducersByNotificationId, IList<ProducerData>>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
+        private readonly IMap<NotificationApplication, IList<ProducerData>> mapper;
 
-        public GetProducersByNotificationIdHandler(IwsContext db)
+        public GetProducersByNotificationIdHandler(IwsContext context, IMap<NotificationApplication, IList<ProducerData>> mapper)
         {
-            this.db = db;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         public async Task<IList<ProducerData>> HandleAsync(GetProducersByNotificationId message)
         {
-            var result = await db.NotificationApplications.Where(n => n.Id == message.NotificationId).SingleAsync();
+            var notification = await context.NotificationApplications.Where(n => n.Id == message.NotificationId).SingleAsync();
 
-            return result.Producers.Select(p => new ProducerData
-            {
-                Id = p.Id,
-                Business = new BusinessData
-                {
-                    Name = p.Business.Name,
-                    EntityType = p.Business.Type,
-                    RegistrationNumber = p.Business.RegistrationNumber,
-                    AdditionalRegistrationNumber = p.Business.AdditionalRegistrationNumber
-                },
-                Address =
-                    new AddressData
-                    {
-                        Address2 = p.Address.Address2,
-                        CountryName = p.Address.Country,
-                        Building = p.Address.Building,
-                        PostalCode = p.Address.PostalCode,
-                        StreetOrSuburb = p.Address.Address1,
-                        TownOrCity = p.Address.TownOrCity
-                    },
-                Contact = new ContactData
-                {
-                    Email = p.Contact.Email,
-                    FirstName = p.Contact.FirstName,
-                    LastName = p.Contact.LastName,
-                    Fax = p.Contact.Fax,
-                    Telephone = p.Contact.Telephone
-                },
-                NotificationId = message.NotificationId,
-                IsSiteOfExport = p.IsSiteOfExport
-            }).ToArray();
+            return mapper.Map(notification);
         }
     }
 }

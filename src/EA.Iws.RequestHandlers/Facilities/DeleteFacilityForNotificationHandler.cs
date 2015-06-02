@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Facilities
 {
     using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;

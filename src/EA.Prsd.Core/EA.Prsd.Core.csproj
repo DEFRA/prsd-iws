@@ -60,6 +60,8 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="Identity\GuidCombGenerator.cs" />
+    <Compile Include="Mapper\IMap.cs" />
+    <Compile Include="Mapper\IMapWithParentObjectId.cs" />
     <Compile Include="Mediator\IRequest.cs" />
     <Compile Include="Mediator\IRequestHandler.cs" />
     <Compile Include="Mediator\IMediator.cs" />
