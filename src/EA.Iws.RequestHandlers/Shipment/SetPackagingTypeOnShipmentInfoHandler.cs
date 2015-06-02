@@ -5,7 +5,6 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain.Notification;
     using Prsd.Core.Mediator;
     using Requests.Shipment;
     using PackagingType = Requests.Shipment.PackagingType;

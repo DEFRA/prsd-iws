@@ -96,6 +96,8 @@
     <Compile Include="Mappings\CarrierMapping.cs" />
     <Compile Include="Mappings\PackagingTypeMapping.cs" />
     <Compile Include="Mappings\ProducerMapping.cs" />
+    <Compile Include="Mappings\OperationCodesEntityMapping.cs" />
+    <Compile Include="Mappings\OperationCodesMapping.cs" />
     <Compile Include="Mappings\ShipmentInfoMapping.cs" />
     <Compile Include="Mappings\ChemicalCompositionTypeMapping.cs" />
     <Compile Include="Mappings\ShipmentQuantityUnitsMapping.cs" />

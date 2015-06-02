@@ -73,6 +73,7 @@
     <Content Include="scripts\TestData\20150511-092300-Sunil-test-user.sql" />
     <Content Include="scripts\TestData\20150511-164100-SFW-test-organisation.sql" />
     <Content Include="scripts\Update\Sprint6\20150424-152702-EA.Iws.sql" />
+    <None Include="scripts\Update\Sprint9\20150602-162611-Add-operation-codes-table.sql" />
     <None Include="scripts\Update\Sprint6\20150429-150715-EA.Iws.sql" />
     <None Include="scripts\Update\Sprint6\20150430-115148-EA.Iws.sql" />
     <None Include="scripts\Update\Sprint6\20150430-104718-EA.Iws.sql" />

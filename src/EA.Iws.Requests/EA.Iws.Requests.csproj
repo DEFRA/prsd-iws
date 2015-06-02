@@ -72,10 +72,14 @@
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
+    <Compile Include="OperationCodes\AddDisposalCodes.cs" />
+    <Compile Include="OperationCodes\DisposalCode.cs" />
     <Compile Include="Producers\GetProducerForNotification.cs" />
     <Compile Include="Producers\SetSiteOfExport.cs" />
     <Compile Include="Producers\UpdateProducerForNotification.cs" />
     <Compile Include="Shared\BusinessInfoData.cs" />
+    <Compile Include="OperationCodes\AddRecoveryCodes.cs" />
+    <Compile Include="OperationCodes\RecoveryCode.cs" />
     <Compile Include="Shared\BusinessData.cs" />
     <Compile Include="Shared\BusinessType.cs" />
     <Compile Include="Shared\ContactData.cs" />

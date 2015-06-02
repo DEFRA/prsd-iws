@@ -77,5 +77,42 @@
 
             Assert.True(notification.HasShipmentInfo);
         }
+
+        [Fact]
+        public async Task CanUpdateOperationCodes()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var codes = new List<OperationCode>
+            {
+                OperationCode.R1,
+                OperationCode.R2
+            };
+
+            var newCodes = new List<OperationCode>
+            {
+                OperationCode.R3,
+                OperationCode.R4
+            };
+
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            notification.UpdateOperationCodes(codes);
+
+            await context.SaveChangesAsync();
+
+            notification.UpdateOperationCodes(newCodes);
+
+            await context.SaveChangesAsync();
+
+            Assert.Collection(notification.OperationInfos,
+                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R3),
+                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.R4));
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
     }
 }

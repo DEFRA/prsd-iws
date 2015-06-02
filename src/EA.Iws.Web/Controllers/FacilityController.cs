@@ -217,7 +217,7 @@
                 await client.SendAsync(User.GetAccessToken(), new SetPreconsentedRecoveryFacility(id, isPreconsented));
             }
 
-            return RedirectToAction("Add", "Carrier", new { id });
+            return RedirectToAction("OperationCodes", "WasteOperations", new { id });
         }
 
         [HttpGet]

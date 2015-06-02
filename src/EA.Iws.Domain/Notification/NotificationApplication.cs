@@ -26,6 +26,7 @@
             FacilitiesCollection = new List<Facility>();
             CarriersCollection = new List<Carrier>();
             TransitStatesCollection = new List<TransitState>();
+            OperationInfosCollection = new List<OperationInfo>();
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }
@@ -35,6 +36,7 @@
         protected virtual ICollection<Carrier> CarriersCollection { get; set; }
 
         protected virtual ICollection<TransitState> TransitStatesCollection { get; set; }
+        protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
 
         public Guid UserId { get; private set; }
 
@@ -76,6 +78,11 @@
         public IEnumerable<TransitState> TransitStates
         {
             get { return TransitStatesCollection.ToSafeIEnumerable(); }
+        }
+        
+        public IEnumerable<OperationInfo> OperationInfos
+        {
+            get { return OperationInfosCollection.ToSafeIEnumerable(); }
         }
 
         private string CreateNotificationNumber(int notificationNumber)

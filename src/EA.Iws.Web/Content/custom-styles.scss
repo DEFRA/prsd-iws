@@ -1,0 +1,23 @@
+﻿.grid-view:last-child{
+    float: none;
+    margin-bottom: 10px;
+}
+
+// Turn off when Javascript is off
+.nojs-hide
+{
+  display: none;
+}
+.js .nojs-hide
+{
+  display: block;
+}
+// Turn on when Javascript is off
+.nojs-show
+{
+  display: block;
+}
+.js .nojs-show
+{
+  display: none;
+}

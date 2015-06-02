@@ -5,7 +5,6 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.Notification;
     using Domain.TransportRoute;
-    using Prsd.Core;
     using Prsd.Core.Helpers;
 
     internal class NotificationApplicationMapping : EntityTypeConfiguration<NotificationApplication>
@@ -23,6 +22,12 @@
             HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<Facility>>(
                     "FacilitiesCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
+
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<OperationInfo>>(
+                    "OperationInfosCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 

@@ -217,6 +217,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\custom-styles.css">
+      <DependentUpon>custom-styles.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\custom-styles.min.css">
+      <DependentUpon>custom-styles.css</DependentUpon>
+    </Content>
     <Content Include="Content\govuk\images\apple-touch-icon-120x120.png" />
     <Content Include="Content\govuk\images\apple-touch-icon-152x152.png" />
     <Content Include="Content\govuk\images\apple-touch-icon-60x60.png" />
@@ -366,6 +372,10 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-play.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-rewind.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
+    <Content Include="Content\custom-styles.css.map">
+      <DependentUpon>custom-styles.css</DependentUpon>
+    </Content>
+    <None Include="Content\custom-styles.scss" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\application.js" />
@@ -505,6 +515,10 @@
     <Content Include="Views\TransportRoute\StateOfExport.cshtml" />
     <Content Include="Views\WasteType\ChemicalComposition.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringGuidRadioButtons.cshtml" />
+    <Content Include="Views\WasteOperations\AddDisposalCodes.cshtml" />
+    <Content Include="Views\WasteOperations\AddRecoveryCodes.cshtml" />
+    <Content Include="Views\Shared\_OperationCodes.cshtml" />
+    <Content Include="Views\Shared\_SelectAllCheckBoxScript.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -531,6 +545,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\TransportRouteController.cs" />
     <Compile Include="Controllers\WasteTypeController.cs" />
+    <Compile Include="Controllers\WasteOperationsController.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\EmailTemplate.cs" />
     <Compile Include="Services\EmailTemplateService.cs" />
@@ -574,6 +589,7 @@
     <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\NotificationOverviewViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
+    <Compile Include="ViewModels\WasteOperations\OperationCodesViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />

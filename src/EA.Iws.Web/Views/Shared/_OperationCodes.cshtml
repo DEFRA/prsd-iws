@@ -1,0 +1,51 @@
+﻿@model EA.Iws.Web.ViewModels.WasteOperations.OperationCodesViewModel
+
+<details role="group">
+    <summary>
+        <span class="summary">View description of codes</span>
+    </summary>
+    <div class="panel-indent">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <table>
+                    @{
+                        foreach (var rce in Model.Codes.PossibleValues)
+                        {
+                            <tr><td>@rce.Text</td><td>@Model.CodeInformation[rce.Text]</td></tr>
+                        }
+                    }
+                </table>
+
+            </div>
+        </div>
+    </div>
+</details>
+
+<div class="grid-row">
+    <div>
+        <div class="form-group">
+            <fieldset>
+                <div class="column-quarter">
+                    <label class="block-label grid-view" for="selectAllCheckbox" id="selectAllCheckboxLabel" style="display:none">
+                        @Html.CheckBox("Select all codes", new { @id = "selectAllCheckbox" })
+                        Select all codes
+                    </label>
+                </div>
+
+                @for (int i = 0; i < Model.Codes.PossibleValues.Count; i++)
+                {
+                    MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.Codes.PossibleValues[i]);
+
+                    <div class="column-quarter">
+                        <label for="@idForThisCheckBox" class="block-label grid-view">
+                            @Html.CheckBoxFor(m => m.Codes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
+                            @Html.HiddenFor(m => m.Codes.PossibleValues[i].Text)
+                            @Html.HiddenFor(m => m.Codes.PossibleValues[i].Value)
+                            @Html.DisplayFor(m => m.Codes.PossibleValues[i].Text)
+                        </label>
+                    </div>
+                }
+            </fieldset>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Notification
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Domain.Notification;
     using Helpers;
@@ -363,6 +364,104 @@
             Action removeFacility = () => notification.RemoveFacility(new Guid("{BD49EF90-C9B2-4E84-B0D3-964BC2A592D5}"));
 
             Assert.Throws<InvalidOperationException>(removeFacility);
+        }
+
+        [Fact]
+        public void CanAddRecoveryCodesToRecoveryNotification()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var codes = new List<OperationCode>
+            {
+                OperationCode.R1,
+                OperationCode.R2
+            };
+
+            notification.UpdateOperationCodes(codes);
+
+            Assert.Collection(notification.OperationInfos, 
+                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R1),
+                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.R2));
+        }
+
+        [Fact]
+        public void CanAddDisposalCodesToDisposalNotification()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal,
+                UKCompetentAuthority.England, 0);
+
+            var codes = new List<OperationCode>
+            {
+                OperationCode.D1,
+                OperationCode.D2
+            };
+
+            notification.UpdateOperationCodes(codes);
+
+            Assert.Collection(notification.OperationInfos,
+                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.D1),
+                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.D2));
+        }
+
+        [Fact]
+        public void CantAddDisposalCodesToRecoveryNotification()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var codes = new List<OperationCode>
+            {
+                OperationCode.D1,
+                OperationCode.D2
+            };
+
+            Action updateCodes = () => notification.UpdateOperationCodes(codes);
+
+            Assert.Throws<InvalidOperationException>(updateCodes);
+        }
+
+        [Fact]
+        public void CantAddRecoveryCodesToDisposalNotification()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal,
+                UKCompetentAuthority.England, 0);
+
+            var codes = new List<OperationCode>
+            {
+                OperationCode.R1,
+                OperationCode.R2
+            };
+
+            Action updateCodes = () => notification.UpdateOperationCodes(codes);
+
+            Assert.Throws<InvalidOperationException>(updateCodes);
+        }
+
+        [Fact]
+        public void UpdateCodesReplacesItems()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var codes = new List<OperationCode>
+            {
+                OperationCode.R1,
+                OperationCode.R2
+            };
+
+            var newCodes = new List<OperationCode>
+            {
+                OperationCode.R3,
+                OperationCode.R4
+            };
+
+            notification.UpdateOperationCodes(codes);
+            notification.UpdateOperationCodes(newCodes);
+
+            Assert.Collection(notification.OperationInfos,
+                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R3),
+                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.R4));
         }
     }
 }
