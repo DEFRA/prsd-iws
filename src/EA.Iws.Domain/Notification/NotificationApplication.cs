@@ -38,25 +38,6 @@
 
         public UKCompetentAuthority CompetentAuthority { get; private set; }
 
-        private bool? isPreconsented;
-        public bool? IsPreconsentedRecoveryFacility
-        {
-            get
-            {
-                return isPreconsented;
-            }
-            set
-            {
-                if (NotificationType != NotificationType.Recovery)
-                {
-                    throw new InvalidOperationException(String.Format(
-                        "Facility type is not recovery for notification: {0}", Id));
-                }
-
-                isPreconsented = value;
-            }
-        }
-
         public virtual Exporter Exporter { get; private set; }
 
         public virtual Importer Importer { get; private set; }

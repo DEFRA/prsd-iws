@@ -5,6 +5,8 @@
 
     public partial class NotificationApplication
     {
+        public bool? IsPreconsentedRecoveryFacility { get; private set; }
+
         public Facility AddFacility(Business business, Address address, Contact contact)
         {
             var facility = new Facility(business, address, contact);
@@ -18,7 +20,7 @@
             if (facility == null)
             {
                 throw new InvalidOperationException(
-                    string.Format("Facility with id {0} does not exist on this notification", facilityId));
+                    string.Format("Facility with id {0} does not exist on this notification {1}", facilityId, Id));
             }
             return facility;
         }
@@ -35,13 +37,24 @@
             if (FacilitiesCollection.All(p => p.Id != facilityId))
             {
                 throw new InvalidOperationException(
-                    string.Format("Unable to make facility with id {0} the site of treatment", facilityId));
+                    string.Format("Unable to make facility with id {0} the site of treatment on this notification {1}", facilityId, Id));
             }
 
             foreach (var facility in FacilitiesCollection)
             {
                 facility.IsActualSiteOfTreatment = facility.Id == facilityId;
             }
+        }
+
+        public void SetPreconsentedRecoveryFacility(bool isPreconsentedRecoveryFacility)
+        {
+            if (NotificationType != NotificationType.Recovery)
+            {
+                throw new InvalidOperationException(String.Format(
+                    "Can't set pre-consented recovery facility as notification type is not Recovery for notification: {0}", Id));
+            }
+
+            IsPreconsentedRecoveryFacility = isPreconsentedRecoveryFacility;
         }
     }
 }

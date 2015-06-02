@@ -18,7 +18,7 @@
         public async Task<string> HandleAsync(SetPreconsentedRecoveryFacility query)
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
-            notification.IsPreconsentedRecoveryFacility = query.IsPreconsentedRecoveryFacility;
+            notification.SetPreconsentedRecoveryFacility(query.IsPreconsentedRecoveryFacility);
 
             await context.SaveChangesAsync();
 

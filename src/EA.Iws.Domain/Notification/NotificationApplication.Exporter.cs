@@ -13,7 +13,7 @@
         {
             if (Exporter != null)
             {
-                throw new InvalidOperationException("Exporter already exists, can't add another.");
+                throw new InvalidOperationException(string.Format("Exporter already exists, can't add another to this notification: {0}", Id));
             }
 
             Exporter = new Exporter(business, address, contact);

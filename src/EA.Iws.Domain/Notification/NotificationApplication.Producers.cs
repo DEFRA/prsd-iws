@@ -18,7 +18,7 @@
             if (producer == null)
             {
                 throw new InvalidOperationException(
-                    string.Format("Producer with id {0} does not exist on this notification", producerId));
+                    string.Format("Producer with id {0} does not exist on this notification {1}", producerId, Id));
             }
             return producer;
         }
@@ -35,7 +35,7 @@
             if (ProducersCollection.All(p => p.Id != producerId))
             {
                 throw new InvalidOperationException(
-                    string.Format("Unable to make producer with id {0} the site of export", producerId));
+                    string.Format("Unable to make producer with id {0} the site of export on this notification {1}", producerId, Id));
             }
 
             foreach (var prod in ProducersCollection)

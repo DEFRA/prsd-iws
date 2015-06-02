@@ -167,8 +167,7 @@
                 return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
             }
 
-            //TODO: redirect to TechnologyEmployed screen
-            return RedirectToAction("Add", new { id = model.NotificationId });
+            return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
         }
 
         [HttpGet]
@@ -197,8 +196,8 @@
             {
                 await client.SendAsync(User.GetAccessToken(), new SetPreconsentedRecoveryFacility(id, isPreconsented));
             }
-            //TODO: redirect to TechnologyEmployed screen
-            return RedirectToAction("Add", new { id });
+
+            return RedirectToAction("Add", "Carrier", new { id });
         }
 
         [HttpGet]

@@ -18,7 +18,7 @@
             if (carrier == null)
             {
                 throw new InvalidOperationException(
-                    string.Format("Carrier with id {0} does not exist on this notification", carrierId));
+                    string.Format("Carrier with id {0} does not exist on this notification {1}", carrierId, Id));
             }
             return carrier;
         }

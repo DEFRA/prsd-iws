@@ -13,7 +13,7 @@
         {
             if (Importer != null)
             {
-                throw new InvalidOperationException("Importer already exists, can't add another.");
+                throw new InvalidOperationException(string.Format("Importer already exists, can't add another to this notification: {0}", Id));
             }
 
             Importer = new Importer(business, address, contact);
