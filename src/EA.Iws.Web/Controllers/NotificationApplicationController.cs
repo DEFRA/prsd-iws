@@ -226,27 +226,5 @@
                 return View(model);
             }
         }
-
-        [HttpGet]
-        public ActionResult SpecialHandling(Guid id)
-        {
-            return View(new SpecialHandlingViewModel{NotificationId = id});
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SpecialHandling(SpecialHandlingViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling, model.SpecialHandlingDetails));
-            }
-            return RedirectToAction("Info", "Shipment", new { id = model.NotificationId });
-        }
     }
 }

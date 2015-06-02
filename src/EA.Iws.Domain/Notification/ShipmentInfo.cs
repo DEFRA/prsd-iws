@@ -13,7 +13,7 @@
         internal ShipmentInfo()
         {
             PackagingInfosCollection = new List<PackagingInfo>();
-            Units = ShipmentQuantityUnits.Tonnes;
+            Units = ShipmentQuantityUnits.NotSet;
         }
 
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }

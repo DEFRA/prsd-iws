@@ -27,6 +27,28 @@
         }
 
         [HttpGet]
+        public ActionResult SpecialHandling(Guid id)
+        {
+            return View(new SpecialHandlingViewModel { NotificationId = id });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SpecialHandling(SpecialHandlingViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling, model.SpecialHandlingDetails));
+            }
+            return RedirectToAction("Info", new { id = model.NotificationId });
+        }
+
+        [HttpGet]
         public ActionResult Info(Guid id)
         {
             var model = new ShipmentInfoViewModel { NotificationId = id, UnitsSelectList = GetUnits() };
@@ -144,7 +166,7 @@
                     await client.SendAsync(User.GetAccessToken(),
                         new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId, model.OtherDescription));
 
-                    return RedirectToAction("SpecialHandling", "NotificationApplication", new { id = model.NotificationId });
+                    return RedirectToAction("SpecialHandling", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Tests.Integration
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
@@ -60,6 +61,21 @@
             context.DeleteOnCommit(notification);
 
             await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanAddPackagingInfo()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            context.NotificationApplications.Add(notification);
+            
+            notification.AddPackagingInfo(PackagingType.Bag);
+
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.HasShipmentInfo);
         }
     }
 }

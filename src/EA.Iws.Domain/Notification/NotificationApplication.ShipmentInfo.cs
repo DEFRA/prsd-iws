@@ -37,7 +37,7 @@
         {
             if (ShipmentInfo == null)
             {
-                throw new InvalidOperationException("Shipment info does not exist for this notification");
+                ShipmentInfo = new ShipmentInfo();
             }
             ShipmentInfo.AddPackagingInfo(packagingType, otherDescription);
         }

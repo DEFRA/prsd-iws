@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.ViewModels.NotificationApplication
+﻿namespace EA.Iws.Web.ViewModels.Shipment
 {
     using System;
     using Prsd.Core.Validation;
