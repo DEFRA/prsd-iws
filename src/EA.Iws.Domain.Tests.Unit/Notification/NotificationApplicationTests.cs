@@ -280,6 +280,8 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
+            notification.AddPackagingInfo(PackagingType.Bulk);
+
             notification.SetSpecialHandling(false, string.Empty);
 
             notification.AddShipmentDatesAndQuantityInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
@@ -292,6 +294,8 @@
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
+
+            notification.AddPackagingInfo(PackagingType.Bulk);
 
             notification.SetSpecialHandling(false, string.Empty);
 
@@ -308,11 +312,11 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
+            notification.AddPackagingInfo(PackagingType.Other, "Limited Company");
+
             notification.SetSpecialHandling(false, string.Empty);
 
             notification.AddShipmentDatesAndQuantityInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
-
-            notification.ShipmentInfo.AddPackagingInfo(PackagingType.Other, "Limited Company");
 
             Assert.Equal(1, notification.ShipmentInfo.PackagingInfos.Count());
         }
