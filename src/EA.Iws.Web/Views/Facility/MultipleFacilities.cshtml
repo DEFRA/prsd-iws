@@ -23,7 +23,7 @@
                             <details>
                                 <summary><span class="summary">@Html.DisplayFor(m => m.FacilityData[i].Business.Name)</span></summary>
                                 <div class="grid-row">
-                                    <div class="column-third">
+                                    <div class="column-quarter">
                                         @Html.DisplayFor(m => m.FacilityData[i].Contact.FirstName) @Html.DisplayFor(m => m.FacilityData[i].Contact.LastName)<br />
                                         <a href="mailto:@Model.FacilityData[i].Contact.Email">@Model.FacilityData[i].Contact.Email</a><br />
                                         Tel: @Html.DisplayFor(m => m.FacilityData[i].Contact.Telephone)<br />
@@ -33,7 +33,7 @@
                                             @Html.DisplayFor(model => model.FacilityData[i].Contact.Fax);
                                         }
                                     </div>
-                                    <div class="column-third">
+                                    <div class="column-quarter">
                                         @Html.DisplayFor(m => m.FacilityData[i].Address.Building),<br />
                                         @Html.DisplayFor(m => m.FacilityData[i].Address.StreetOrSuburb),<br />
                                         @if (Model.FacilityData[i].Address.Address2 != null)
@@ -43,14 +43,17 @@
                                         }
                                         @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity) @Html.DisplayFor(m => m.FacilityData[i].Address.PostalCode)
                                     </div>
-                                    <div class="column-third">
-                                        <div class="form-group">
-                                            Actual site of @Model.NotificationType.ToString().ToLowerInvariant():
-                                            @Html.DisplayFor(m => m.FacilityData[i].IsActualSiteOfTreatment)
-                                        </div>
-                                    </div>
-                                    <div class="column-third">
+                                    <div class="column-quarter">
                                         @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, facilityId = Model.FacilityData[i].Id }, null)
+                                    </div>
+                                    <div class="column-quarter">
+                                        Actual site:
+                                        @{
+                                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.FacilityData[i].Id) } };
+                                        if (@Model.FacilityData[i].IsActualSiteOfTreatment) { htmlAttr.Add("checked", "checked"); }
+                                        @Html.RadioButtonFor(m => m.SelectedValue, Model.FacilityData[i].Id, htmlAttr)
+                                        }
+
                                     </div>
                                 </div>
                             </details>
@@ -61,9 +64,10 @@
         </table>
     }
 
+    @Html.HiddenFor(m => m.NotificationId)
     <div class="form-group"></div>
     <div class="form-group">
-        @Html.ActionLink("Add more", "Add", "Facility", new { id = Model.NotificationId }, null)
+        @Html.ActionLink("Add more", "Add", "Facility", new { id = Model.NotificationId, isDefaultActualSiteOfTreatment = false }, null)
     </div>
     <div class="form-group">
         <button class="button" type="submit">Continue</button>

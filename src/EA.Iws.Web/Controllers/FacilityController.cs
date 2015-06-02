@@ -26,7 +26,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id, bool? copy)
+        public async Task<ActionResult> Add(Guid id, bool isDefaultActualSiteOfTreatment, bool? copy)
         {
             var facility = new AddFacilityViewModel();
             using (var client = apiClient())
@@ -44,6 +44,7 @@
                     await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
                 facility.NotificationType = response.NotificationType;
                 facility.NotificationId = id;
+                facility.IsDefaultActualSiteOfTreatment = isDefaultActualSiteOfTreatment;
 
                 await this.BindCountryList(client);
             }
@@ -64,7 +65,12 @@
             {
                 try
                 {
-                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
+                    var facilityId = await client.SendAsync(User.GetAccessToken(), model.ToRequest());
+
+                    if (model.IsDefaultActualSiteOfTreatment)
+                    {
+                        await client.SendAsync(User.GetAccessToken(), new SetActualSiteOfTreatment(facilityId, model.NotificationId));
+                    }
 
                     return RedirectToAction("MultipleFacilities", "Facility",
                         new { id = model.NotificationId });
@@ -160,8 +166,25 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MultipleFacilities(MultipleFacilitiesViewModel model)
+        public async Task<ActionResult> MultipleFacilities(MultipleFacilitiesViewModel model)
         {
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), new SetActualSiteOfTreatment(new Guid(model.SelectedValue), model.NotificationId));
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+            }
+
             if (String.Equals(model.NotificationType.ToString(), NotificationType.Recovery.ToString(), StringComparison.InvariantCulture))
             {
                 return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
@@ -236,10 +259,10 @@
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id });
+                return RedirectToAction("Add", new { id, isDefaultActualSiteOfTreatment = true });
             }
 
-            return RedirectToAction("Add", new { id, copy = true });
+            return RedirectToAction("Add", new { id, isDefaultActualSiteOfTreatment = true, copy = true });
         }
     }
 }

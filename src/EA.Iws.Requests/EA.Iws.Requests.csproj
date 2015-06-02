@@ -55,6 +55,7 @@
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationId.cs" />
     <Compile Include="Facilities\GetFacilityForNotification.cs" />
+    <Compile Include="Facilities\SetActualSiteOfTreatment.cs" />
     <Compile Include="Facilities\UpdateFacilityForNotification.cs" />
     <Compile Include="Importer\AddImporterToNotification.cs" />
     <Compile Include="Importer\GetImporterByNotificationId.cs" />

@@ -17,5 +17,7 @@
         public List<FacilityData> FacilityData { get; set; }
 
         public NotificationType NotificationType { get; set; }
+
+        public string SelectedValue { get; set; }
     }
 }

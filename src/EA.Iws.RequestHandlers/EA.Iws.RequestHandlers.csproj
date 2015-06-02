@@ -70,6 +70,7 @@
     <Compile Include="Facilities\DeleteFacilityForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
     <Compile Include="Facilities\GetFacilityForNotificationHandler.cs" />
+    <Compile Include="Facilities\SetActualSiteOfTreatmentHandler.cs" />
     <Compile Include="Facilities\UpdateFacilityForNotificationHandler.cs" />
     <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
     <Compile Include="Importers\NotificationHasImporterHandler.cs" />
