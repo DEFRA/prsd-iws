@@ -16,5 +16,7 @@
         public List<ProducerData> ProducerData { get; set; }
 
         public bool HasSiteOfExport { get; set; }
+
+        public string SelectedValue { get; set; }
     }
 }

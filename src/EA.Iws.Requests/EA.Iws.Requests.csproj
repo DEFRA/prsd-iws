@@ -68,6 +68,7 @@
     <Compile Include="Notification\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="Producers\GetProducerForNotification.cs" />
+    <Compile Include="Producers\SetSiteOfExport.cs" />
     <Compile Include="Producers\UpdateProducerForNotification.cs" />
     <Compile Include="Shared\BusinessData.cs" />
     <Compile Include="Shared\ContactData.cs" />

@@ -43,5 +43,7 @@
         public ContactData Contact { get; set; }
 
         public BusinessViewModel Business { get; set; }
+
+        public bool IsDefaultSiteOfExport { get; set; }
     }
 }

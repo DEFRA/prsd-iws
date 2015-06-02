@@ -43,14 +43,14 @@
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id });
+                return RedirectToAction("Add", new { id, isDefaultSiteOfExport = true });
             }
 
-            return RedirectToAction("Add", new { id, copy = true });
+            return RedirectToAction("Add", new { id, isDefaultSiteOfExport = true, copy = true });
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id, bool? copy)
+        public async Task<ActionResult> Add(Guid id, bool isDefaultSiteOfExport, bool? copy)
         {
             AddProducerViewModel model;
 
@@ -68,6 +68,7 @@
                 model = new AddProducerViewModel { NotificationId = id };
             }
 
+            model.IsDefaultSiteOfExport = isDefaultSiteOfExport;
             await this.BindCountryList(apiClient);
 
             return View(model);
@@ -89,7 +90,12 @@
                 {
                     AddProducerToNotification request = model.ToRequest();
 
-                    await client.SendAsync(User.GetAccessToken(), request);
+                    var producerId = await client.SendAsync(User.GetAccessToken(), request);
+
+                    if (model.IsDefaultSiteOfExport)
+                    {
+                        await client.SendAsync(User.GetAccessToken(), new SetSiteOfExport(producerId, model.NotificationId));
+                    }
 
                     return RedirectToAction("MultipleProducers", "Producer",
                         new { id = model.NotificationId });
@@ -186,6 +192,29 @@
 
                 return View(model);
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SetSiteOfExport(MultipleProducersViewModel model)
+        {
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), new SetSiteOfExport(new Guid(model.SelectedValue), model.NotificationId));
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+            }
+            return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
         }
     }
 }

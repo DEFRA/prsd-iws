@@ -91,6 +91,7 @@
     <Compile Include="Notification\GetNotificationsByUserHandler.cs" />
     <Compile Include="Organisations\FindMatchingOrganisationsHandler.cs" />
     <Compile Include="Organisations\OrganisationByIdHandler.cs" />
+    <Compile Include="Producers\SetSiteOfExportHandler.cs" />
     <Compile Include="Producers\UpdateProducerForNotificationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
