@@ -43,14 +43,14 @@
 
             if (inputModel.Choices.SelectedValue.Equals("No"))
             {
-                return RedirectToAction("Add", new { id, isDefaultSiteOfExport = true });
+                return RedirectToAction("Add", new { id });
             }
 
-            return RedirectToAction("Add", new { id, isDefaultSiteOfExport = true, copy = true });
+            return RedirectToAction("Add", new { id, copy = true });
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id, bool isDefaultSiteOfExport, bool? copy)
+        public async Task<ActionResult> Add(Guid id, bool? copy)
         {
             AddProducerViewModel model;
 
@@ -68,7 +68,6 @@
                 model = new AddProducerViewModel { NotificationId = id };
             }
 
-            model.IsDefaultSiteOfExport = isDefaultSiteOfExport;
             await this.BindCountryList(apiClient);
 
             return View(model);
@@ -90,12 +89,7 @@
                 {
                     AddProducerToNotification request = model.ToRequest();
 
-                    var producerId = await client.SendAsync(User.GetAccessToken(), request);
-
-                    if (model.IsDefaultSiteOfExport)
-                    {
-                        await client.SendAsync(User.GetAccessToken(), new SetSiteOfExport(producerId, model.NotificationId));
-                    }
+                    await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("MultipleProducers", "Producer",
                         new { id = model.NotificationId });

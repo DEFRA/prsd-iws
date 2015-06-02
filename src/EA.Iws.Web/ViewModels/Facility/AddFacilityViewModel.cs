@@ -26,8 +26,6 @@
 
         public BusinessViewModel Business { get; set; }
 
-        public bool IsDefaultActualSiteOfTreatment { get; set; }
-
         public AddFacilityToNotification ToRequest()
         {
             return new AddFacilityToNotification

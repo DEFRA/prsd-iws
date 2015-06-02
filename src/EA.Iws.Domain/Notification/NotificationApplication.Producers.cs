@@ -8,6 +8,12 @@
         public Producer AddProducer(Business business, Address address, Contact contact)
         {
             var producer = new Producer(business, address, contact);
+
+            if (!ProducersCollection.Any())
+            {
+                producer.IsSiteOfExport = true;
+            }
+
             ProducersCollection.Add(producer);
             return producer;
         }
