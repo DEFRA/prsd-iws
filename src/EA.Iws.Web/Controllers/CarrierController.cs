@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -8,7 +9,6 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Carriers;
-    using Requests.Shipment;
     using ViewModels.Carrier;
 
     public class CarrierController : Controller
@@ -42,8 +42,8 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-                    // TODO: navigate to multiple carriers screen once implemented
-                    return RedirectToAction("PackagingTypes", "Shipment", new { id = model.NotificationId });
+                    
+                    return RedirectToAction("List", "Carrier", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -91,8 +91,7 @@
 
                     await client.SendAsync(User.GetAccessToken(), request);
 
-                    // TODO - redirect to carrier list page when implemented
-                    return RedirectToAction("NotificationOverview", "NotificationApplication",
+                    return RedirectToAction("List", "Carrier",
                         new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
@@ -107,6 +106,23 @@
                 await this.BindCountryList(client);
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> List(Guid id)
+        {
+            var model = new CarrierListViewModel();
+
+            using (var client = apiClient())
+            {
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetCarriersByNotificationId(id));
+
+                model.NotificationId = id;
+                model.Carriers = new List<CarrierData>(response);
+            }
+
+            return View(model);
         }
     }
 }

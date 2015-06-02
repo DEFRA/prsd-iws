@@ -19,7 +19,7 @@
         public async Task<bool> HandleAsync(DeleteFacilityForNotification query)
         {
             var notification =
-                await context.NotificationApplications.Where(n => n.Id == query.NotificationId).SingleAsync();
+                await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
             notification.RemoveFacility(query.FacilityId);
             await context.SaveChangesAsync();
             return true;

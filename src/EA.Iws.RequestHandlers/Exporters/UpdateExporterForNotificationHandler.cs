@@ -20,7 +20,7 @@
         public async Task<Guid> HandleAsync(UpdateExporterForNotification message)
         {
             var country = await context.Countries.SingleAsync(c => c.Id == message.Address.CountryId);
-            var notification = await context.NotificationApplications.FindAsync(message.NotificationId);
+            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
             
             notification.Exporter.Address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
             notification.Exporter.Contact = ValueObjectInitializer.CreateContact(message.Contact);

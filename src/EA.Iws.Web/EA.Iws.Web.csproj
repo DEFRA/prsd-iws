@@ -485,6 +485,7 @@
     <Content Include="Views\Shared\EditorTemplates\CheckBoxCollectionViewModel.cshtml" />
     <Content Include="Views\Facility\RecoveryPreconsent.cshtml" />
     <Content Include="Views\Carrier\Edit.cshtml" />
+    <Content Include="Views\Carrier\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -541,6 +542,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Carrier\AddCarrierViewModel.cs" />
+    <Compile Include="ViewModels\Carrier\CarrierListViewModel.cs" />
     <Compile Include="ViewModels\Carrier\EditCarrierViewModel.cs" />
     <Compile Include="ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\AddFacilityViewModel.cs" />

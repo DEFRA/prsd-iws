@@ -20,7 +20,7 @@
 
         public async Task<IList<FacilityData>> HandleAsync(GetFacilitiesByNotificationId message)
         {
-            var result = await db.NotificationApplications.Where(n => n.Id == message.NotificationId).SingleAsync();
+            var result = await db.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 
             return result.Facilities.Select(p => new FacilityData
                     {

@@ -44,6 +44,7 @@
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
     <Compile Include="Carriers\CarrierData.cs" />
     <Compile Include="Carriers\GetCarrierForNotification.cs" />
+    <Compile Include="Carriers\GetCarriersByNotificationId.cs" />
     <Compile Include="Carriers\UpdateCarrierForNotification.cs" />
     <Compile Include="ClaimTypes.cs" />
     <Compile Include="Exporters\AddExporterToNotification.cs" />

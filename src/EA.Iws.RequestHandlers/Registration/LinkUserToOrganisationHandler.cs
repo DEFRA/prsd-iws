@@ -1,5 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Registration
 {
+    using System.Data.Entity;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using DataAccess;
@@ -25,8 +27,8 @@
 
         public async Task<bool> HandleAsync(LinkUserToOrganisation command)
         {
-            var user = await context.Users.FindAsync(userContext.UserId.ToString());
-            var organisation = await context.Organisations.FindAsync(command.OrganisationId);
+            var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
+            var organisation = await context.Organisations.SingleAsync(o => o.Id == command.OrganisationId);
 
             user.LinkToOrganisation(organisation);
 

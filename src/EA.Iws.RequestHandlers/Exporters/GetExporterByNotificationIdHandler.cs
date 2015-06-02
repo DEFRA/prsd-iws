@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Exporters
 {
+    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -17,7 +18,7 @@
 
         public async Task<ExporterData> HandleAsync(GetExporterByNotificationId message)
         {
-            var notification = await context.NotificationApplications.FindAsync(message.NotificationId);
+            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 
             return new ExporterData
             {
