@@ -24,6 +24,7 @@
             ProducersCollection = new List<Producer>();
             FacilitiesCollection = new List<Facility>();
             CarriersCollection = new List<Carrier>();
+            ShipmentInfo = new ShipmentInfo();
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }

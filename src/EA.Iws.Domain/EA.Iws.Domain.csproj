@@ -59,7 +59,6 @@
     <Compile Include="Notification\NotificationType.cs" />
     <Compile Include="Notification\PackagingInfo.cs" />
     <Compile Include="Notification\PackagingType.cs" />
-    <Compile Include="Notification\NumberOfShipmentsInfo.cs" />
     <Compile Include="Organisation.cs" />
     <Compile Include="IDocumentGenerator.cs" />
     <Compile Include="Notification\Producer.cs" />

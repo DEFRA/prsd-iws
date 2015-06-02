@@ -246,22 +246,6 @@
             Assert.Null(notification.Importer);
         }
 
-        [Theory]
-        [InlineData(-1, 0.0001)]
-        [InlineData(1, -0.0001)]
-        public void CreateShipmentInfo_WithInvalidQuantityAndNumberOfShipments_ThrowsException(int numberOfShipments, decimal quantity)
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            var startDate = DateTime.Now;
-            var endDate = DateTime.Now.AddDays(1);
-
-            Action addShipmentInfo = () => notification.AddNumberofShipmentsInfo(startDate, endDate, numberOfShipments, quantity, ShipmentQuantityUnits.Tonnes);
-
-            Assert.Throws<ArgumentOutOfRangeException>(addShipmentInfo);
-        }
-
         [Fact]
         public void CreateShipmentInfo_WithInvalidEndDate_ThrowsException()
         {
@@ -271,7 +255,7 @@
             var startDate = DateTime.Now;
             var endDate = DateTime.Now.AddDays(-1); //Invalid end date
 
-            Action addShipmentInfo = () => notification.AddNumberofShipmentsInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddShipmentDatesAndQuantityInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<InvalidOperationException>(addShipmentInfo);
         }
@@ -285,7 +269,7 @@
             var startDate = DateTime.Now.AddDays(1); //Invalid start date
             var endDate = DateTime.Now; 
 
-            Action addShipmentInfo = () => notification.AddNumberofShipmentsInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            Action addShipmentInfo = () => notification.AddShipmentDatesAndQuantityInfo(startDate, endDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.Throws<InvalidOperationException>(addShipmentInfo);
         }
@@ -296,9 +280,9 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShipmentInfo();
+            notification.SetSpecialHandling(false, string.Empty);
 
-            notification.AddNumberofShipmentsInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentDatesAndQuantityInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Assert.True(notification.HasShipmentInfo);
         }
@@ -309,9 +293,9 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShipmentInfo();
+            notification.SetSpecialHandling(false, string.Empty);
 
-            notification.AddNumberofShipmentsInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentDatesAndQuantityInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Action addPackagingInfo = () => notification.ShipmentInfo.AddPackagingInfo(PackagingType.Bag, "Limited Company");
 
@@ -324,9 +308,9 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddShipmentInfo();
+            notification.SetSpecialHandling(false, string.Empty);
 
-            notification.AddNumberofShipmentsInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.AddShipmentDatesAndQuantityInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
 
             notification.ShipmentInfo.AddPackagingInfo(PackagingType.Other, "Limited Company");
 

@@ -65,11 +65,11 @@
             {
                 if (packagingType == Domain.PackagingType.Other)
                 {
-                    notification.ShipmentInfo.AddPackagingInfo(packagingType, command.OtherDescription);
+                    notification.AddPackagingInfo(packagingType, command.OtherDescription);
                 }
                 else
                 {
-                    notification.ShipmentInfo.AddPackagingInfo(packagingType);
+                    notification.AddPackagingInfo(packagingType);
                 }
             }
             

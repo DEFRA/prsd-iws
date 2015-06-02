@@ -72,7 +72,6 @@
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\BusinessMapping.cs" />
-    <Compile Include="Mappings\NumberOfShipmentsInfoMapping.cs" />
     <Compile Include="Mappings\PackagingInfoMapping.cs" />
     <Compile Include="Mappings\ContactMapping.cs" />
     <Compile Include="Mappings\CountryMapping.cs" />
