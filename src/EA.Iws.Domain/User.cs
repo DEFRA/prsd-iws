@@ -43,8 +43,7 @@
             if (Organisation != null)
             {
                 throw new InvalidOperationException(
-                    "User is already linked to an organisation and may not be linked to another. This user is linked to organisation: " +
-                    Organisation.Id);
+                    string.Format("User {0} is already linked to an organisation and may not be linked to another. This user is linked to organisation: {1}", Id, Organisation.Id));
             }
 
             Organisation = organisation;

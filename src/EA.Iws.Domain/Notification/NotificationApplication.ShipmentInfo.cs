@@ -13,7 +13,7 @@
         {
             if (ShipmentInfo == null)
             {
-                throw new InvalidOperationException("Shipment info does not exist for this notification");
+                throw new InvalidOperationException(string.Format("Shipment info does not exist for this notification: {0}", Id));
             }
             ShipmentInfo.IsSpecialHandling = isSpecialHandling;
             ShipmentInfo.SpecialHandlingDetails = specialHandlingDetails;
@@ -23,7 +23,7 @@
         {
             if (ShipmentInfo == null)
             {
-                throw new InvalidOperationException("Shipment info does not exist for this notification");
+                throw new InvalidOperationException(string.Format("Shipment info does not exist for this notification: {0}", Id));
             }
 
             ShipmentInfo.FirstDate = startDate;
