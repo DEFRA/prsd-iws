@@ -30,11 +30,6 @@
         private static async Task OnValidateIdentity(CookieValidateIdentityContext context,
             PrsdCookieAuthenticationOptions options)
         {
-            if (context.Identity == null || !context.Identity.IsAuthenticated)
-            {
-                return;
-            }
-
             await UpdateAccessToken(context, options);
 
             await TransformClaims(context, options);
@@ -43,6 +38,11 @@
         private static async Task UpdateAccessToken(CookieValidateIdentityContext context,
             PrsdCookieAuthenticationOptions options)
         {
+            if (context.Identity == null || !context.Identity.IsAuthenticated)
+            {
+                return;
+            }
+
             var expiresAt = context.Identity.FindFirst(ClaimTypes.ExpiresAt);
             if (expiresAt != null && DateTime.Parse(expiresAt.Value) < DateTime.UtcNow)
             {
@@ -74,6 +74,11 @@
         private static async Task TransformClaims(CookieValidateIdentityContext context,
             PrsdCookieAuthenticationOptions options)
         {
+            if (context.Identity == null || !context.Identity.IsAuthenticated)
+            {
+                return;
+            }
+
             var claims = new List<Claim>();
 
             var accessTokenClaim = context.Identity.FindFirst(OAuth2Constants.AccessToken);
