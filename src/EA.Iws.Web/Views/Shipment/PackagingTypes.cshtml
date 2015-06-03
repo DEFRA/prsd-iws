@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.ViewModels.Shipment.PackagingTypesViewModel
+﻿@using EA.Iws.Requests.Shipment
+@model EA.Iws.Web.ViewModels.Shipment.PackagingTypesViewModel
 @{
     ViewBag.Title = "Which Competent Authority";
 }
@@ -20,7 +21,7 @@
             <div class="form-group form-group-compound">
                 <label class="block-label" for="other-option-check" data-target="other-option">
                     @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
-                    Other
+                    @((int)PackagingType.Other) - Other
                 </label>
             </div>
             <div class="panel-indent @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
