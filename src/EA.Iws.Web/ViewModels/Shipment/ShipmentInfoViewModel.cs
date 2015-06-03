@@ -16,6 +16,7 @@
         public int NumberOfShipments { get; set; }
 
         [Range(0.0001, 99999, ErrorMessage = "The quantity must be between 0.0001 and 99999")]
+        [RegularExpression(@"\d+(\.\d{1,4})?", ErrorMessage = "The quantity must be a number with a maximum of 4 decimal places.")]
         public decimal Quantity { get; set; }
 
         public ShipmentQuantityUnits Units { get; set; }

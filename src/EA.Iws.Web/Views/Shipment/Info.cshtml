@@ -14,7 +14,7 @@
     <div class="form-group">
         @Html.ValidationMessageFor(m => m.NumberOfShipments)
         @Html.Gds().LabelFor(m => m.NumberOfShipments)
-        @Html.Gds().TextBoxFor(m => m.NumberOfShipments, new { @class = "numberInput", type = "number", min = "1", max = "99999", pattern = "[0-9]*", width = "50px" })
+        @Html.Gds().TextBoxFor(m => m.NumberOfShipments, new { @class = "numberInput", width = "50px" })
     </div>
 
     <hr>

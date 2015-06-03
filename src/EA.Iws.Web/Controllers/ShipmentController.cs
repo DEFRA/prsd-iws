@@ -79,6 +79,12 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Info(ShipmentInfoViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.UnitsSelectList = GetUnits();
+                return View(model);
+            }
+
             var startDate = new DateTime(model.StartYear, model.StartMonth, model.StartDay);
             var endDate = new DateTime(model.EndYear, model.EndMonth, model.EndDay);
             if (endDate <= startDate)
@@ -92,6 +98,8 @@
             {
                 try
                 {
+                    model.Quantity = decimal.Round(model.Quantity, 4, MidpointRounding.AwayFromZero);
+
                     await client.SendAsync(User.GetAccessToken(), 
                         new CreateNumberOfShipmentsInfo(
                                 model.NotificationId,
