@@ -11,7 +11,11 @@
                 @Html.CheckBoxFor(m => m.PossibleValues[i].Selected, new { id = idForThisCheckBox })
                 @Html.HiddenFor(m => m.PossibleValues[i].Text)
                 @Html.HiddenFor(m => m.PossibleValues[i].Value)
-                @Html.DisplayFor(m => m.PossibleValues[i].Value) - @Html.DisplayFor(m => m.PossibleValues[i].Text)
+                @if (Model.ShowEnumValue)
+                { 
+                   @Html.DisplayFor(m => m.PossibleValues[i].Value) @Html.Raw(" - ")
+                }
+                @Html.DisplayFor(m => m.PossibleValues[i].Text)
             </label>
         }
     </fieldset>

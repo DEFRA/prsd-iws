@@ -121,6 +121,7 @@
         public ActionResult PackagingTypes(Guid id)
         {
             var packagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>();
+            packagingTypes.ShowEnumValue = true;
 
             //We need to exclude 'other' as this will be handled separately
             packagingTypes.PossibleValues = packagingTypes.PossibleValues.Where(p => (PackagingType)Convert.ToInt32(p.Value) != PackagingType.Other).ToList();

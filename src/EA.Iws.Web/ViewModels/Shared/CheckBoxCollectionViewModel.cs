@@ -12,6 +12,8 @@
     {
         public IList<SelectListItem> PossibleValues { get; set; }
 
+        public bool ShowEnumValue { get; set; }
+
         /// <summary>
         /// Creates SelectListItem collection based on values in an enum.
         /// </summary>
