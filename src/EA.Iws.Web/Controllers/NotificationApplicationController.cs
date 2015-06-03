@@ -130,7 +130,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Created(CreatedViewModel model)
         {
-            return RedirectToAction(actionName: "DownloadInstructions", controllerName: "NotificationApplication",
+            return RedirectToAction(actionName: "Add", controllerName: "Exporter",
                 routeValues: new { id = model.NotificationId });
         }
 
@@ -170,43 +170,6 @@
                     client.SendAsync(User.GetAccessToken(), new GetNotificationsByUser()).Result;
 
                 return PartialView(response);
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> DownloadInstructions(Guid id)
-        {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
-
-                var model = new NotificationInfo
-                {
-                    CompetentAuthority = response.CompetentAuthority,
-                    NotificationId = id,
-                    NotificationNumber = response.NotificationNumber
-                };
-
-                switch (response.CompetentAuthority)
-                {
-                    case Requests.Notification.CompetentAuthority.England:
-                        model.CompetentAuthorityName = "the Environment Agency (England)";
-                        break;
-                    case Requests.Notification.CompetentAuthority.Scotland:
-                        model.CompetentAuthorityName = "the Scottish Environment Protection Agency";
-                        break;
-                    case Requests.Notification.CompetentAuthority.NorthernIreland:
-                        model.CompetentAuthorityName = "the Northern Ireland Environment Agency";
-                        break;
-                    case Requests.Notification.CompetentAuthority.Wales:
-                        model.CompetentAuthorityName = "Natural Resources Wales";
-                        break;
-                    default:
-                        throw new InvalidOperationException(string.Format("Unknown competent authority: {0}",
-                            response.CompetentAuthority));
-                }
-
-                return View(model);
             }
         }
 

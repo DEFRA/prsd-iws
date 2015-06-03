@@ -27,13 +27,13 @@
                 switch (CompetentAuthority)
                 {
                     case CompetentAuthority.England:
-                        return "Environment Agency - Tel: 01253 876934";
+                        return "Environment Agency - Tel: 01925 542265";
                     case CompetentAuthority.Scotland:
-                        return "Scottish Environment Protection Agency - Tel: 01253 876934";
+                        return "Scottish Environment Protection Agency - Tel: 01786 457700";
                     case CompetentAuthority.NorthernIreland:
-                        return "Northern Ireland Environment Agency - Tel: 01253 876934";
+                        return "Northern Ireland Environment Agency - Tel: 028 9056 9742";
                     case CompetentAuthority.Wales:
-                        return "Natural Resources Wales - Tel: 01253 876934";
+                        return "Natural Resources Wales - Tel: 03000 65 3000";
                     default:
                         return string.Empty;
                 }

@@ -8,7 +8,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    @Html.ActionLink("Return to your homepage", "Index", "Home")
+    @Html.ActionLink("Continue", "Index", "Home", null ,new {@class = "button"})
 }
 else
 {

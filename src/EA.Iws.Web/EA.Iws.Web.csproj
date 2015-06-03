@@ -467,7 +467,6 @@
     <Content Include="Views\Facility\MultipleFacilities.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
     <Content Include="Views\Producer\CopyFromExporter.cshtml" />
-    <Content Include="Views\NotificationApplication\DownloadInstructions.cshtml" />
     <Content Include="Views\NotificationApplication\NotificationOverview.cshtml" />
     <Content Include="Views\Exporter\Edit.cshtml" />
     <Content Include="Views\Shipment\SpecialHandling.cshtml" />
