@@ -21,7 +21,7 @@
 
             if (hasEmailVerifiedClaim && identity.Claims.Single(c => c.Type.Equals(JwtClaimTypes.EmailVerified)).Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
             {
-                filterContext.Result = new RedirectResult("/Account/EmailVerificationRequired");
+                filterContext.Result = new RedirectResult("~/Account/EmailVerificationRequired");
             }
         }
     }
