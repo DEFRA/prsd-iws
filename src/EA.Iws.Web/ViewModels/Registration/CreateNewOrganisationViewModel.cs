@@ -41,12 +41,14 @@
         [Display(Name = "Town or city")]
         public string TownOrCity { get; set; }
 
-        [Required]
+        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", "Please enter a postcode")]
         public string Postcode { get; set; }
 
         [Required]
         [Display(Name = "Country")]
         public Guid CountryId { get; set; }
+
+        public Guid DefaultCountryId { get; set; }
 
         [Required]
         [Display(Name = "Organisation type")]
@@ -68,6 +70,7 @@
                     if (country != null)
                     {
                         this.CountryId = country.Id;
+                        DefaultCountryId = country.Id;
                     }
                 }
 

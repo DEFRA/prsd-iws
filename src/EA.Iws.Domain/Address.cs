@@ -10,7 +10,6 @@
         {
             Guard.ArgumentNotNull(building);
             Guard.ArgumentNotNull(townOrCity);
-            Guard.ArgumentNotNull(postalCode);
             Guard.ArgumentNotNull(country);
             Guard.ArgumentNotNull(address1);
 

@@ -10,30 +10,28 @@
 
     public partial class Gds<TModel>
     {
-        public MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        public MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression, string optionalMessage = "")
         {
-            return LabelFor(expression, new RouteValueDictionary());
+            return LabelFor(expression, new RouteValueDictionary(), optionalMessage);
         }
 
-        public MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            object htmlAttributes)
+        public MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression, object htmlAttributes, string optionalMessage = "")
         {
-            return LabelFor(expression, new RouteValueDictionary(htmlAttributes));
+            return LabelFor(expression, new RouteValueDictionary(htmlAttributes), optionalMessage);
         }
 
-        public MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            IDictionary<string, object> htmlAttributes)
+        public MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression, IDictionary<string, object> htmlAttributes, string optionalMessage = "")
         {
-            return LabelFor(expression, htmlAttributes, "form-label");
+            return LabelFor(expression, htmlAttributes, "form-label", optionalMessage);
         }
 
-        private MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression, IDictionary<string, object> htmlAttributes, string cssClass)
+        private MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression, IDictionary<string, object> htmlAttributes, string cssClass, string optionalMessage = "")
         {
             var modelMetadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
 
             var containsRequiredIfAttribute = ContainsAttribute<RequiredIfAttribute>(modelMetadata, modelMetadata.PropertyName);
 
-            var appendOptional = modelMetadata.IsRequired || containsRequiredIfAttribute ? string.Empty : " (optional)";
+            var appendOptional = modelMetadata.IsRequired || containsRequiredIfAttribute ? string.Empty : "(optional)";
 
             var htmlFieldName = ExpressionHelper.GetExpressionText(expression);
 
@@ -53,7 +51,7 @@
             labelTag.Attributes.Add("for",
                 HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(htmlFieldName));
 
-            labelTag.InnerHtml = labelText + appendOptional;
+            labelTag.InnerHtml = labelText + " " + (string.IsNullOrEmpty(optionalMessage) ? appendOptional : optionalMessage);
 
             labelTag.AddCssClass(cssClass);
 

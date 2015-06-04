@@ -75,6 +75,7 @@
     <Compile Include="StringSearch.cs" />
     <Compile Include="SystemTime.cs" />
     <Compile Include="Validation\RequiredIfAttribute.cs" />
+    <Compile Include="Validation\RequiredIfPropertiesEqualAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
