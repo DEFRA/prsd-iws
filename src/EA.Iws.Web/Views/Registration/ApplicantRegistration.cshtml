@@ -17,46 +17,46 @@
     @Html.Gds().ValidationSummary()
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
-        @Html.ValidationMessageFor(m => m.Name)
         @Html.Gds().LabelFor(m => m.Name)
+        @Html.Gds().ValidationMessageFor(m => m.Name)
         @Html.Gds().TextBoxFor(m => m.Name)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Surname)">
-        @Html.ValidationMessageFor(m => m.Surname)
         @Html.Gds().LabelFor(m => m.Surname)
+        @Html.Gds().ValidationMessageFor(m => m.Surname)
         @Html.Gds().TextBoxFor(m => m.Surname)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.OrganisationName)">
-        @Html.ValidationMessageFor(m => m.OrganisationName)
         @Html.Gds().LabelFor(m => m.OrganisationName)
+        @Html.Gds().ValidationMessageFor(m => m.OrganisationName)
         @Html.Gds().TextBoxFor(m => m.OrganisationName)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.PhoneNumber)">
-        @Html.ValidationMessageFor(m => m.PhoneNumber)
         @Html.Gds().LabelFor(m => m.PhoneNumber)
+        @Html.Gds().ValidationMessageFor(m => m.PhoneNumber)
         @Html.Gds().TextBoxFor(m => m.PhoneNumber)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
-        @Html.ValidationMessageFor(m => m.Email)
         @Html.Gds().LabelFor(m => m.Email)
+        @Html.Gds().ValidationMessageFor(m => m.Email)
         @Html.Gds().TextBoxFor(m => m.Email)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
-        @Html.ValidationMessageFor(m => m.Password)
         @Html.Gds().LabelFor(m => m.Password)
+        @Html.Gds().ValidationMessageFor(m => m.Password)
         <p class="form-hint text">Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter and one number</p>
         @Html.Gds().PasswordFor(m => m.Password)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
-        @Html.ValidationMessageFor(m => m.ConfirmPassword)
         @Html.Gds().LabelFor(m => m.ConfirmPassword)
+        @Html.Gds().ValidationMessageFor(m => m.ConfirmPassword)
         @Html.Gds().PasswordFor(m => m.ConfirmPassword)
     </div>
     <div class="grid-row">
         <div class="column-half">
-            <div class="form-group" @Html.Gds().FormGroupClass(m => m.TermsAndConditions)>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
                 <fieldset>
-                    <div>@Html.ValidationMessageFor(m => m.TermsAndConditions)</div>
+                    <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
                     <label class="block-label" for="checkbox-1">
                         @Html.CheckBoxFor(m => m.TermsAndConditions, new { @id = "checkbox-1" })
                         Accept terms and conditions of use

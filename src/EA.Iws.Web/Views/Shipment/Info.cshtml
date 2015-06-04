@@ -11,9 +11,9 @@
     <header class="hgroup">
         <h2 class="heading-large">What is the total intended number of shipments?</h2>
     </header>
-    <div class="form-group">
-        @Html.ValidationMessageFor(m => m.NumberOfShipments)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberOfShipments)">
         @Html.Gds().LabelFor(m => m.NumberOfShipments)
+        @Html.Gds().ValidationMessageFor(m => m.NumberOfShipments)
         @Html.Gds().TextBoxFor(m => m.NumberOfShipments, new { @class = "numberInput", width = "50px" })
     </div>
 
@@ -21,20 +21,20 @@
     <header class="hgroup">
         <h2 class="heading-large">What is the total intended quantity?</h2>
     </header>
-    
+
     <div class="grid-row">
-        <div class="form-group">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity) @Html.Gds().FormGroupClass(m => m.Units)">
             <div class="column-third">
-            @Html.ValidationMessageFor(m => m.Quantity)
-            @Html.Gds().LabelFor(m => m.Quantity)
-            @Html.Gds().TextBoxFor(m => m.Quantity)
-        </div>
-            @Html.ValidationMessageFor(m => m.Units)
+                @Html.Gds().LabelFor(m => m.Quantity)
+                @Html.Gds().ValidationMessageFor(m => m.Quantity)
+                @Html.Gds().TextBoxFor(m => m.Quantity)
+            </div>
             @Html.Gds().LabelFor(m => m.Units)
+            @Html.Gds().ValidationMessageFor(m => m.Units)
             @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList, new { @class = "unitsInput" })
         </div>
     </div>
-    
+
     <hr>
     <header class="hgroup">
         <h2 class="heading-large">What are the intended dates of the first and last departure?</h2>
@@ -43,10 +43,10 @@
     <div class="grid-row">
 
         <div class="column-half">
-            <div class="form-group">
-                <div>@Html.ValidationMessageFor(m => m.StartDay)</div>
-                <div>@Html.ValidationMessageFor(m => m.StartMonth)</div>
-                <div>@Html.ValidationMessageFor(m => m.StartYear)</div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
+                <div>@Html.Gds().ValidationMessageFor(m => m.StartDay)</div>
+                <div>@Html.Gds().ValidationMessageFor(m => m.StartMonth)</div>
+                <div>@Html.Gds().ValidationMessageFor(m => m.StartYear)</div>
             </div>
 
             <h2 class="form-label-bold">First departure</h2>
@@ -75,10 +75,10 @@
         </div>
 
         <div class="column-half">
-            <div class="form-group">
-                <div>@Html.ValidationMessageFor(m => m.EndDay)</div>
-                <div>@Html.ValidationMessageFor(m => m.EndMonth)</div>
-                <div>@Html.ValidationMessageFor(m => m.EndYear)</div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
+                <div>@Html.Gds().ValidationMessageFor(m => m.EndDay)</div>
+                <div>@Html.Gds().ValidationMessageFor(m => m.EndMonth)</div>
+                <div>@Html.Gds().ValidationMessageFor(m => m.EndYear)</div>
             </div>
 
             <h2 class="form-label-bold">Last departure</h2>
@@ -107,7 +107,7 @@
         </div>
 
     </div>
-    
+
     @Html.HiddenFor(m => m.NotificationId)
     <div class="form-group">
         <p> <button class="button" type="submit">Continue</button></p>

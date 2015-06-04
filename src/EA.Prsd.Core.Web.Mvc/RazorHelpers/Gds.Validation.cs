@@ -7,6 +7,8 @@
     using System.Reflection;
     using System.Text;
     using System.Web.Mvc;
+    using System.Web.Mvc.Html;
+    using System.Web.Routing;
 
     public partial class Gds<TModel>
     {
@@ -38,32 +40,11 @@
         /// <returns></returns>
         public string FormGroupClass<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
-            var memberExpression = expression.Body as MemberExpression;
-            string nameToCheck;
+            var nameToCheck = GetPropertyName(HtmlHelper, expression);
 
-            if (memberExpression == null)
+            if (string.IsNullOrWhiteSpace(nameToCheck))
             {
                 return string.Empty;
-            }
-
-            // We are accessing a sub property, the model state records the fully qualified name.
-            // For the expression m.Class.Property:
-            // Class.Property rather than Property
-            if (memberExpression.ToString().Count(me => me == '.') == 2)
-            {
-                var memberExpressionAsString = memberExpression.ToString();
-                nameToCheck = memberExpressionAsString.Substring(memberExpressionAsString.IndexOf('.') + 1);
-            }
-            else
-            {
-                var property = memberExpression.Member as PropertyInfo;
-
-                if (property == null)
-                {
-                    return string.Empty;
-                }
-
-                nameToCheck = property.Name;
             }
 
             var modelState = HtmlHelper.ViewData.ModelState[nameToCheck];
@@ -73,15 +54,25 @@
                 return string.Empty;
             }
 
-            var cssClass = (modelState.Errors.Count > 0) ? "form-group-error" : string.Empty;
+            var cssClass = (modelState.Errors.Count > 0) ? "error" : string.Empty;
 
             return cssClass;
         }
 
+        public MvcHtmlString ValidationMessageFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            return HtmlHelper.ValidationMessageFor(expression, validationMessage: null, htmlAttributes: new { @class = "error-message" }, tag: "span");
+        }
+
+        public MvcHtmlString ValidationMessageFor<TValue>(Expression<Func<TModel, TValue>> expression, string validationMessage)
+        {
+            return HtmlHelper.ValidationMessageFor(expression, validationMessage, htmlAttributes: new { @class = "error-message" }, tag: "span");
+        }
+
         private string GetJavascriptEnabledBlankSummary()
         {
-            return @"<div class='validation-summary-valid' data-valmsg-summary='true'>
-                        <ul>
+            return @"<div class='error-summary-valid' data-valmsg-summary='true'>
+                        <ul class='error-summary-list'>
                             <li style='display:none'></li>
                         </ul>
                     </div>";
@@ -89,7 +80,7 @@
 
         private string GetJavascriptDisabledErrorSummary(IEnumerable<ModelErrorWithFieldId> modelErrors)
         {
-            var startErrorRegion = @"<div class='validation-summary' id='error_explanation'>";
+            var startErrorRegion = @"<div class='error-summary' id='error_explanation'>";
 
             var errorTitle = GetErrorSummaryHeading(modelErrors);
 
@@ -111,12 +102,12 @@
         {
             var errorListBuilder = new StringBuilder();
 
-            errorListBuilder.AppendLine("<ul>");
+            errorListBuilder.AppendLine("<ul class='error-summary-list'>");
 
             foreach (var modelError in modelErrors)
             {
                 errorListBuilder.AppendLine("<li>");
-                errorListBuilder.AppendFormat("<a class=\"error-text\" href=\"#{0}\">{1}</a>", modelError.FieldId,
+                errorListBuilder.AppendFormat("<a href=\"#{0}\">{1}</a>", modelError.FieldId,
                     modelError.ModelError.ErrorMessage);
                 errorListBuilder.AppendLine("</li>");
             }
@@ -132,7 +123,8 @@
 
             var tagBuilder = new TagBuilder("h2");
 
-            tagBuilder.AddCssClass("heading-small");
+            tagBuilder.AddCssClass("heading-medium");
+            tagBuilder.AddCssClass("error-summary-heading");
 
             var modelErrorsCountString = string.Empty;
             if (modelErrorsCount > 1)
@@ -147,17 +139,6 @@
             tagBuilder.SetInnerText(string.Format("You have {0} on this page", modelErrorsCountString));
 
             return tagBuilder.ToString();
-        }
-
-        private TagBuilder GetErrorSummaryDiv()
-        {
-            var tagBuilder = new TagBuilder("div");
-
-            tagBuilder.AddCssClass("validation-summary");
-
-            tagBuilder.GenerateId("error_explanation");
-
-            return tagBuilder;
         }
 
         private IEnumerable<ModelErrorWithFieldId> GetErrorsForModel(ModelStateDictionary modelStateDictionary)

@@ -28,7 +28,7 @@
             <h2 class="heading-small">Provide details of the special handling requirements</h2>
             <div class="form-group grid-row">
                 <div class="column-two-thirds">
-                    @Html.ValidationMessageFor(m => m.SpecialHandlingDetails)
+                    @Html.Gds().ValidationMessageFor(m => m.SpecialHandlingDetails)
                     @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @style = "width: 100%" })
                 </div>
             </div>

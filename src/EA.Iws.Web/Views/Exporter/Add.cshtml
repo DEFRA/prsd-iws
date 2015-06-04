@@ -7,15 +7,12 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
         <h2 class="heading-large">Add exporter - notifier</h2>
         <div class="colored-header-bar"></div>
     </header>
-
-    <div class="form-group">
-        @Html.HiddenFor(m => m.NotificationId)
-    </div>
 
     @Html.EditorFor(m => m.Business)
 

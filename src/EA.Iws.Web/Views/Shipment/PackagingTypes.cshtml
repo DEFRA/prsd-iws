@@ -26,8 +26,8 @@
             </div>
             <div class="panel-indent @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
                 <label class="form-label" for="other-label">Please specify</label>
-            <div class="form-group" @Html.Gds().FormGroupClass(m => m.OtherDescription)>
-                @Html.ValidationMessageFor(m => m.OtherDescription)<br/>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+                @Html.Gds().ValidationMessageFor(m => m.OtherDescription)<br/>
                 @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
             </div>
             </div>

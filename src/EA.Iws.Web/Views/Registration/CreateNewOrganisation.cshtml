@@ -14,43 +14,43 @@
     @Html.Gds().ValidationSummary()
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
-        @Html.ValidationMessageFor(m => m.Name)
         @Html.Gds().LabelFor(m => m.Name)
+        @Html.Gds().ValidationMessageFor(m => m.Name)
         @Html.Gds().TextBoxFor(m => m.Name)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Building)">
-        @Html.ValidationMessageFor(m => m.Building)
         @Html.Gds().LabelFor(m => m.Building)
+        @Html.Gds().ValidationMessageFor(m => m.Building)
         @Html.Gds().TextBoxFor(m => m.Building)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Address1)">
-        @Html.ValidationMessageFor(m => m.Address1)
         @Html.Gds().LabelFor(m => m.Address1)
+        @Html.Gds().ValidationMessageFor(m => m.Address1)
         @Html.Gds().TextBoxFor(m => m.Address1)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Address2)">
-        @Html.ValidationMessageFor(m => m.Address2)
         @Html.Gds().LabelFor(m => m.Address2)
+        @Html.Gds().ValidationMessageFor(m => m.Address2)
         @Html.Gds().TextBoxFor(m => m.Address2)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
-        @Html.ValidationMessageFor(m => m.TownOrCity)
         @Html.Gds().LabelFor(m => m.TownOrCity)
+        @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
         @Html.Gds().TextBoxFor(m => m.TownOrCity)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Postcode)">
-        @Html.ValidationMessageFor(m => m.Postcode)
         @Html.Gds().LabelFor(m => m.Postcode, "(optional for non-UK address)")
+        @Html.Gds().ValidationMessageFor(m => m.Postcode)
         @Html.Gds().TextBoxFor(m => m.Postcode)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
-        @Html.ValidationMessageFor(m => m.CountryId)
         @Html.Gds().LabelFor(m => m.CountryId)
+        @Html.Gds().ValidationMessageFor(m => m.CountryId)
         @Html.Gds().DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "Id", "Name", Model.DefaultCountry.Id))
     </div>
-    <div class="form-group" @Html.Gds().FormGroupClass(m => m.EntityType)>
-        @Html.ValidationMessageFor(m => m.EntityType)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.EntityType)">
         <label class="form-label">Organisation type</label>
+        @Html.Gds().ValidationMessageFor(m => m.EntityType)
         <label class="block-label">
             @Html.RadioButtonFor(m => m.EntityType, "Sole Trader") Sole trader
         </label>
@@ -61,9 +61,9 @@
             @Html.RadioButtonFor(m => m.EntityType, "Limited Company") Limited company
         </label>
         <div class="panel-indent @(Model.EntityType != null && Model.EntityType.Equals("Limited Company") ? "" : "js-hidden")" id="companies-house-number">
-            <div class="form-group" @Html.Gds().FormGroupClass(m => m.CompaniesHouseReference)>
-                @Html.ValidationMessageFor(m => m.CompaniesHouseReference)
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.CompaniesHouseReference)">
                 @Html.Gds().LabelFor(m => m.CompaniesHouseReference)
+                @Html.Gds().ValidationMessageFor(m => m.CompaniesHouseReference)
                 @Html.Gds().TextBoxFor(m => m.CompaniesHouseReference)
             </div>
             <div class="form-group">

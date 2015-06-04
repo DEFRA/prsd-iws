@@ -3,22 +3,22 @@
     ViewBag.Title = "Business Name and Type";
 }
 
-<div class="form-group">
-    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-    @Html.Gds().LabelFor(m => m.Name, new { @class = "form-label" })
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+    @Html.Gds().LabelFor(m => m.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Name)
     @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
 </div>
 
-<div class="form-group" @Html.Gds().FormGroupClass(m => m.EntityType)>
-    @Html.ValidationMessageFor(m => m.EntityType)
-    <label class="form-label">Organisation type</label>
+<div class="form-group @Html.Gds().FormGroupClass(m => m.EntityType)">
+    @Html.Gds().LabelFor(m => m.EntityType)
+    @Html.Gds().ValidationMessageFor(m => m.EntityType)
     <label class="block-label" data-target="sole-trader-number">
         @Html.RadioButtonFor(m => m.EntityType, "Sole trader") Sole trader
     </label>
     <div class="panel-indent @(Model.EntityType != null && Model.EntityType.Equals("Sole trader") ? "" : "js-hidden")" id="sole-trader-number">
-        <div class="form-group" @Html.Gds().FormGroupClass(m => m.SoleTraderRegistrationNumber)>
-            @Html.ValidationMessageFor(m => m.SoleTraderRegistrationNumber)
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.SoleTraderRegistrationNumber)">
             @Html.Gds().LabelFor(m => m.SoleTraderRegistrationNumber)
+            @Html.Gds().ValidationMessageFor(m => m.SoleTraderRegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.SoleTraderRegistrationNumber)
         </div>
     </div>
@@ -27,9 +27,9 @@
         @Html.RadioButtonFor(m => m.EntityType, "Partnership") Partnership
     </label>
     <div class="panel-indent @(Model.EntityType != null && Model.EntityType.Equals("Partnership") ? "" : "js-hidden")" id="partnership-number">
-        <div class="form-group" @Html.Gds().FormGroupClass(m => m.SoleTraderRegistrationNumber)>
-            @Html.ValidationMessageFor(m => m.PartnershipRegistrationNumber)
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.PartnershipRegistrationNumber)">
             @Html.Gds().LabelFor(m => m.PartnershipRegistrationNumber)
+            @Html.Gds().ValidationMessageFor(m => m.PartnershipRegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.PartnershipRegistrationNumber)
         </div>
     </div>
@@ -38,9 +38,9 @@
         @Html.RadioButtonFor(m => m.EntityType, "Limited company") Limited company
     </label>
     <div class="panel-indent @(Model.EntityType != null && Model.EntityType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
-        <div class="form-group" @Html.Gds().FormGroupClass(m => m.CompaniesHouseRegistrationNumber)>
-            @Html.ValidationMessageFor(m => m.CompaniesHouseRegistrationNumber)
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.CompaniesHouseRegistrationNumber)">
             @Html.Gds().LabelFor(m => m.CompaniesHouseRegistrationNumber)
+            @Html.Gds().ValidationMessageFor(m => m.CompaniesHouseRegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.CompaniesHouseRegistrationNumber)
         </div>
         <div class="form-group">
@@ -58,8 +58,8 @@
     </div>
 </div>
 
-<div class="form-group">
-    @Html.ValidationMessageFor(model => model.AdditionalRegistrationNumber, "", new { @class = "text-danger" })
+<div class="form-group @Html.Gds().FormGroupClass(m => m.AdditionalRegistrationNumber)">
     @Html.Gds().LabelFor(m => m.AdditionalRegistrationNumber, new { @class = "form-label" })
+    @Html.Gds().ValidationMessageFor(model => model.AdditionalRegistrationNumber)
     @Html.TextBoxFor(m => m.AdditionalRegistrationNumber, new { @class = "form-control" })
 </div>
