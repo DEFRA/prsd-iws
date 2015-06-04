@@ -53,14 +53,6 @@
 
             labelTag.InnerHtml = labelText + " " + (string.IsNullOrEmpty(optionalMessage) ? appendOptional : optionalMessage);
 
-            var nameToCheck = GetPropertyName(HtmlHelper, expression);
-            var modelState = HtmlHelper.ViewData.ModelState[nameToCheck];
-
-            if (modelState != null && modelState.Errors.Any())
-            {
-                cssClass += "-bold";
-            }
-
             labelTag.AddCssClass(cssClass);
 
             return MvcHtmlString.Create(labelTag.ToString(TagRenderMode.Normal));
