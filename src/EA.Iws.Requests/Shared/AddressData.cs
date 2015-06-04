@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Prsd.Core.Validation;
 
     public class AddressData
     {
@@ -22,8 +23,9 @@
         [Display(Name = "Town or city")]
         public string TownOrCity { get; set; }
 
-        [Required]
         [Display(Name = "Postcode")]
+        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", "The postcode field is required")]
+
         public string PostalCode { get; set; }
 
         [Display(Name = "County")]
@@ -32,6 +34,8 @@
         [Required]
         [Display(Name = "Country")]
         public Guid? CountryId { get; set; }
+
+        public Guid DefaultCountryId { get; set; }
 
         [Display(Name = "Country")]
         public string CountryName { get; set; }

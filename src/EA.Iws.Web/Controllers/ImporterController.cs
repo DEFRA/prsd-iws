@@ -40,7 +40,7 @@
 
             var model = new ImporterViewModel { NotificationId = id };
 
-            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
 
             return View(model);
         }
@@ -103,7 +103,7 @@
                 model.Contact = importer.Contact;
                 model.Business = (BusinessViewModel)importer.Business;
 
-                await this.BindCountryList(apiClient);
+                model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
                 return View(model);
             }
         }

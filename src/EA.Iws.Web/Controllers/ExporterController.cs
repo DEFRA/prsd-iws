@@ -43,7 +43,7 @@
                 NotificationId = id
             };
 
-            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
 
             return View(model);
         }
@@ -147,7 +147,7 @@
                 }
             }
 
-            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
             return View(model);
         }
     }
