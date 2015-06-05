@@ -25,7 +25,7 @@
             for (error in errorList) {
                 summary += '<li><a href="#' + errorList[error].element.id + '">' + errorList[error].message + '</a></li>';
 
-                $(errorList[error].element).parents(".form-group").addClass("error");
+                $(errorList[error].element).parents(".form-group").last().addClass("error");
             }
 
             // Toggle classes on validation summary
