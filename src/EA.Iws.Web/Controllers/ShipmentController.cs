@@ -93,7 +93,7 @@
                                 startDate,
                                 endDate));
 
-                    return RedirectToAction("StateOfExport", "TransportRoute", new { id = model.NotificationId });
+                    return RedirectToAction("ChemicalComposition", "WasteType");
                 }
                 catch (ApiBadRequestException ex)
                 {

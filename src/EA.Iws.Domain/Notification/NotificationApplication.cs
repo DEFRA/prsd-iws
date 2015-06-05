@@ -50,6 +50,8 @@
 
         public ShipmentInfo ShipmentInfo { get; private set; }
 
+        public virtual WasteType WasteType { get; private set; }
+
         public virtual StateOfExport StateOfExport { get; private set; }
 
         public virtual StateOfImport StateOfImport { get; private set; }

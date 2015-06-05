@@ -83,6 +83,7 @@
     <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
     <Compile Include="Importers\NotificationHasImporterHandler.cs" />
     <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
+    <Compile Include="Mappings\WasteTypeMap.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\BusinessInfoMap.cs" />
     <Compile Include="Mappings\BusinessMap.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="TransportRoute\AddStateOfExportToNotificatioHandler.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountryHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
+    <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">

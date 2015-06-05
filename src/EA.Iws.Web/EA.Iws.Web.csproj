@@ -503,6 +503,7 @@
     <Content Include="Views\Carrier\List.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BusinessTypeViewModel.cshtml" />
     <Content Include="Views\TransportRoute\StateOfExport.cshtml" />
+    <Content Include="Views\WasteType\ChemicalComposition.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringGuidRadioButtons.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -529,6 +530,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\TransportRouteController.cs" />
+    <Compile Include="Controllers\WasteTypeController.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\EmailTemplate.cs" />
     <Compile Include="Services\EmailTemplateService.cs" />
@@ -594,6 +596,7 @@
     <Compile Include="ViewModels\Shipment\PackagingTypesViewModel.cs" />
     <Compile Include="ViewModels\Shipment\ShipmentInfoViewModel.cs" />
     <Compile Include="ViewModels\TransportRoute\StateOfExportViewModel.cs" />
+    <Compile Include="ViewModels\WasteType\ChemicalCompositionViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>

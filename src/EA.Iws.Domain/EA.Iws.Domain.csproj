@@ -52,6 +52,9 @@
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="TransportRoute\EntryOrExitPoint.cs" />
+    <Compile Include="Notification\NotificationApplication.WasteType.cs" />
+    <Compile Include="Notification\WasteComposition.cs" />
+    <Compile Include="Notification\WasteType.cs" />
     <Compile Include="Notification\Facility.cs" />
     <Compile Include="Notification\Carrier.cs" />
     <Compile Include="Notification\Exporter.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="Notification\NotificationApplication.ShipmentInfo.cs" />
     <Compile Include="Notification\NotificationType.cs" />
     <Compile Include="Notification\PackagingInfo.cs" />
+    <Compile Include="Notification\ChemicalComposition.cs" />
     <Compile Include="Notification\PackagingType.cs" />
     <Compile Include="TransportRoute\IEnter.cs" />
     <Compile Include="TransportRoute\IExit.cs" />

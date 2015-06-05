@@ -64,6 +64,7 @@
     <Content Include="scripts\Update\Sprint8\20150522-162200-move-foreign-keys-for-notification.sql" />
     <Content Include="scripts\Update\Sprint8\20150526-110946-Add-IsSpecialHandling-To-ShipmentInfo.sql" />
     <Content Include="scripts\Update\Sprint8\29052015-143800-Drop-fk-countryid-from-facility.sql" />
+    <Content Include="scripts\Update\Sprint9\04062015-1100-Add-Competent-Authority-partial-data.sql" />
     <Content Include="scripts\Update\Sprint9\20150605-110500-Add-other-description-column.sql" />
     <Content Include="scripts\Update\Sprint9\04062015-1000-Add-entryorexitpoint-Change-Competent-Authority.sql" />
     <None Include="App.config" />
@@ -93,6 +94,7 @@
     <None Include="scripts\Update\Sprint8\20150529-174001-Add-IsPreconsented-To-Notification.sql" />
     <None Include="scripts\Update\Sprint8\20150601-111845-Modify-ShipmentInfo-Table.sql" />
     <None Include="scripts\Update\Sprint8\20150604-120543-postcode-optional.sql" />
+    <None Include="scripts\Update\Sprint9\20150609-123118-Table-WasteType-WasteComposition.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />

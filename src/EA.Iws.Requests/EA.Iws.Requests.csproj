@@ -110,6 +110,10 @@
     <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
     <Compile Include="TransportRoute\AddStateOfExportToNotification.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
+    <Compile Include="WasteType\ChemicalCompositionType.cs" />
+    <Compile Include="WasteType\CreateWasteType.cs" />
+    <Compile Include="WasteType\WasteCompositionData.cs" />
+    <Compile Include="WasteType\WasteTypeData.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountry.cs" />
     <Compile Include="TransportRoute\GetTransportRouteSummaryForNotification.cs" />
     <Compile Include="TransportRoute\StateOfExportData.cs" />

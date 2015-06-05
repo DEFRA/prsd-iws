@@ -97,14 +97,19 @@
     <Compile Include="Mappings\PackagingTypeMapping.cs" />
     <Compile Include="Mappings\ProducerMapping.cs" />
     <Compile Include="Mappings\ShipmentInfoMapping.cs" />
+    <Compile Include="Mappings\ChemicalCompositionTypeMapping.cs" />
     <Compile Include="Mappings\ShipmentQuantityUnitsMapping.cs" />
     <Compile Include="Mappings\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\NotificationTypeMapping.cs" />
+    <Compile Include="Mappings\WasteComposition.cs" />
+    <Compile Include="Mappings\WasteTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
