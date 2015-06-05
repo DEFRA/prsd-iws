@@ -64,22 +64,3 @@ else
 <hr />
 <h2 class="heading-medium">Add a new organisation</h2>
 @Html.ActionLink(linkText: "Add new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { @class = "button" })<br />
-
-
-<style>
-    .link-submit {
-        margin-top: 10px;
-        background: none;
-        border: none;
-        padding: 0;
-        color: #005ea5;
-        font-family: "nta", Arial, sans-serif;
-        cursor: pointer;
-        font-size: 19px;
-        text-decoration: underline;
-    }
-
-        .link-submit:hover {
-            color: #2E8ACA;
-        }
-</style>

@@ -44,8 +44,10 @@
     <Compile Include="Address.cs" />
     <Compile Include="Business.cs" />
     <Compile Include="BusinessType.cs" />
+    <Compile Include="CompetentAuthority.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="TransportRoute\EntryOrExitPoint.cs" />
     <Compile Include="Notification\Facility.cs" />
     <Compile Include="Notification\Carrier.cs" />
     <Compile Include="Notification\Exporter.cs" />
@@ -60,6 +62,13 @@
     <Compile Include="Notification\NotificationType.cs" />
     <Compile Include="Notification\PackagingInfo.cs" />
     <Compile Include="Notification\PackagingType.cs" />
+    <Compile Include="TransportRoute\IEnter.cs" />
+    <Compile Include="TransportRoute\IExit.cs" />
+    <Compile Include="TransportRoute\IState.cs" />
+    <Compile Include="TransportRoute\StateOfExport.cs" />
+    <Compile Include="TransportRoute\StateOfImport.cs" />
+    <Compile Include="TransportRoute\TransitState.cs" />
+    <Compile Include="TransportRoute\TransportRoute.cs" />
     <Compile Include="Organisation.cs" />
     <Compile Include="IDocumentGenerator.cs" />
     <Compile Include="Notification\Producer.cs" />
@@ -70,6 +79,7 @@
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notification\NotificationApplication.TransportRoute.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +88,7 @@
       <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

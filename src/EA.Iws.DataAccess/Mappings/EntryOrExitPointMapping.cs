@@ -1,0 +1,18 @@
+﻿namespace EA.Iws.DataAccess.Mappings
+{
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.ModelConfiguration;
+    using Domain.TransportRoute;
+
+    internal class EntryOrExitPointMapping : EntityTypeConfiguration<EntryOrExitPoint>
+    {
+        public EntryOrExitPointMapping()
+        {
+            this.ToTable("EntryOrExitPoint", "Lookup");
+
+            this.Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            this.Property(p => p.Name).HasMaxLength(2048);
+        }
+    }
+}

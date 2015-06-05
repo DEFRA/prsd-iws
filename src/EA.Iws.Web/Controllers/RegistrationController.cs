@@ -14,6 +14,7 @@
     using Prsd.Core.Web.OAuth;
     using Requests.Organisations;
     using Requests.Registration;
+    using Requests.Shared;
     using Services;
     using ViewModels.Registration;
 

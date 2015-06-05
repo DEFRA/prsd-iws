@@ -6,6 +6,7 @@
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.Registration;
+    using Requests.Shared;
 
     internal class GetCountriesHandler : IRequestHandler<GetCountries, CountryData[]>
     {

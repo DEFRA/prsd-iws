@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Requests.Registration;
+    using Requests.Shared;
 
     public static class ControllerExtensions
     {

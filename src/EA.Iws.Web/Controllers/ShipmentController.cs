@@ -84,8 +84,6 @@
             {
                 try
                 {
-                    model.Quantity = decimal.Round(model.Quantity, 4, MidpointRounding.AwayFromZero);
-
                     await client.SendAsync(User.GetAccessToken(), 
                         new CreateNumberOfShipmentsInfo(
                                 model.NotificationId,
@@ -95,7 +93,7 @@
                                 startDate,
                                 endDate));
 
-                    return RedirectToAction("Home", "Applicant");
+                    return RedirectToAction("StateOfExport", "TransportRoute", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

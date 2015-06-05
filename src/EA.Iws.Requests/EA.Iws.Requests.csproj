@@ -85,6 +85,7 @@
     <Compile Include="Producers\GetProducersByNotificationId.cs" />
     <Compile Include="Notification\NotificationApplicationSummaryData.cs" />
     <Compile Include="Producers\ProducerData.cs" />
+    <Compile Include="Shared\GetCompetentAuthoritiesByCountry.cs" />
     <Compile Include="Shared\NotificationType.cs" />
     <Compile Include="Shared\AddressData.cs" />
     <Compile Include="Organisations\FindMatchingOrganisations.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\CountryData.cs" />
     <Compile Include="Registration\CreateOrganisation.cs" />
-    <Compile Include="Registration\GetCountries.cs" />
+    <Compile Include="Shared\GetCountries.cs" />
     <Compile Include="Registration\LinkUserToOrganisation.cs" />
     <Compile Include="Registration\OrganisationRegistrationData.cs" />
     <Compile Include="Registration\Users\User.cs" />
@@ -101,6 +102,16 @@
     <Compile Include="Shipment\CreateNumberOfShipmentsInfo.cs" />
     <Compile Include="Shipment\PackagingType.cs" />
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfo.cs" />
+    <Compile Include="Shared\CompetentAuthorityData.cs" />
+    <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
+    <Compile Include="TransportRoute\AddStateOfExportToNotification.cs" />
+    <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
+    <Compile Include="TransportRoute\GetEntryOrExitPointsByCountry.cs" />
+    <Compile Include="TransportRoute\GetTransportRouteSummaryForNotification.cs" />
+    <Compile Include="TransportRoute\StateOfExportData.cs" />
+    <Compile Include="TransportRoute\StateOfImportData.cs" />
+    <Compile Include="TransportRoute\TransitStateData.cs" />
+    <Compile Include="TransportRoute\TransportRouteData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">

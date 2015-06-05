@@ -57,7 +57,16 @@
 
         public ShipmentQuantityUnits Units { get; internal set; }
 
-        public decimal Quantity { get; internal set; }
+        private decimal quantity;
+
+        public decimal Quantity
+        {
+            get { return quantity; }
+            internal set
+            {
+                quantity = decimal.Round(value, 4, MidpointRounding.AwayFromZero);
+            }
+        }
 
         public void AddPackagingInfo(PackagingType packagingType, string otherDescription = null)
         {

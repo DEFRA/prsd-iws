@@ -78,6 +78,8 @@
     <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\BusinessInfoMap.cs" />
     <Compile Include="Mappings\BusinessMap.cs" />
+    <Compile Include="Mappings\EntryOrExitPointMap.cs" />
+    <Compile Include="Mappings\CompetentAuthorityMap.cs" />
     <Compile Include="Mappings\FacilityDataMap.cs" />
     <Compile Include="Mappings\ContactMap.cs" />
     <Compile Include="Mappings\ImporterDataMap.cs" />
@@ -108,8 +110,12 @@
     <Compile Include="Registration\GetCountriesHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />
+    <Compile Include="Shared\GetCompetentAuthoritiesByCountryHandler.cs" />
     <Compile Include="Shipment\CreateNumberOfShipmentsInfoHandler.cs" />
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfoHandler.cs" />
+    <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
+    <Compile Include="TransportRoute\AddStateOfExportToNotificatioHandler.cs" />
+    <Compile Include="TransportRoute\GetEntryOrExitPointsByCountryHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
   </ItemGroup>
   <ItemGroup>

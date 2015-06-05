@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Domain;
     using Domain.Notification;
+    using Domain.TransportRoute;
     using Prsd.Core.DataAccess.Extensions;
     using Prsd.Core.Domain;
     using Prsd.Core.Domain.Auditing;
@@ -22,6 +23,10 @@
         public virtual DbSet<NotificationApplication> NotificationApplications { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
+
+        public virtual DbSet<CompetentAuthority> CompetentAuthorities { get; set; }
+
+        public virtual DbSet<EntryOrExitPoint> EntryOrExitPoints { get; set; }
 
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")

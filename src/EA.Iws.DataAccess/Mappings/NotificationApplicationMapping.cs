@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
     using Domain.Notification;
+    using Domain.TransportRoute;
     using Prsd.Core;
     using Prsd.Core.Helpers;
 
@@ -57,6 +58,20 @@
                 .HasMaxLength(50);
 
             Property(x => x.CreatedDate).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<TransitState>>(
+                    "TransitStatesCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
+
+            HasOptional(x => x.StateOfExport)
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
+
+            HasOptional(x => x.StateOfImport)
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
         }
     }
 }

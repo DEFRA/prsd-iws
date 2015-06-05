@@ -16,6 +16,15 @@
         }
 
         public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
+            IEnumerable<SelectListItem> selectList,
+            string optionLabel)
+        {
+            var routeValues = new RouteValueDictionary();
+            AddFormControlCssClass(routeValues);
+            return HtmlHelper.DropDownListFor(expression, selectList, optionLabel: optionLabel, htmlAttributes: routeValues);
+        }
+
+        public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
             IEnumerable<SelectListItem> selectList, object htmlAttributes)
         {
             var routeValueDictionary = System.Web.Mvc.HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);

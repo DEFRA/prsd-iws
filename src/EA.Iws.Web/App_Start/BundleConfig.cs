@@ -12,6 +12,10 @@
                       "~/Scripts/jquery-{version}.js",
                       "~/Scripts/jquery.unobtrusive-ajax.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
+                "~/Scripts/jquery-ui-{version}.js",
+                "~/Scripts/jquery.select-to-autocomplete.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/custom-validation.js"));
