@@ -9,7 +9,7 @@
         {
             ToTable("PackagingInfo", "Business");
 
-            Property(x => x.OtherDescription).HasColumnName("OtherDescription");
+            Property(x => x.OtherDescription).HasColumnName("OtherDescription").HasMaxLength(100);
         }
     }
 }

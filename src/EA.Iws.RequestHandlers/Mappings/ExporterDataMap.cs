@@ -13,11 +13,11 @@
         IMapWithParentObjectId<Exporter, ExporterData>
     {
         private readonly IMap<Address, AddressData> addressMap;
-        private readonly IMap<Business, BusinessData> businessMap;
+        private readonly IMap<Business, BusinessInfoData> businessMap;
         private readonly IMap<Contact, ContactData> contactMap;
 
         public ExporterDataMap(IMap<Address, AddressData> addressMap, 
-            IMap<Business, BusinessData> businessMap,
+            IMap<Business, BusinessInfoData> businessMap,
             IMap<Contact, ContactData> contactMap)
         {
             this.addressMap = addressMap;

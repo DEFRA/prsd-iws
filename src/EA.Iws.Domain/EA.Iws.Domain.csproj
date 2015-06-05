@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="Business.cs" />
+    <Compile Include="BusinessType.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Notification\Facility.cs" />

@@ -90,6 +90,7 @@
     <Compile Include="RazorHelpers\Gds.CheckBox.cs" />
     <Compile Include="RazorHelpers\Gds.cs" />
     <Compile Include="RazorHelpers\Gds.DropDownList.cs" />
+    <Compile Include="RazorHelpers\Gds.Hint.cs" />
     <Compile Include="RazorHelpers\Gds.Label.cs" />
     <Compile Include="RazorHelpers\Gds.Password.cs" />
     <Compile Include="RazorHelpers\Gds.TextBox.cs" />

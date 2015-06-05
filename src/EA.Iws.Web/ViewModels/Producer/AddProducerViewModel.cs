@@ -22,7 +22,7 @@
             NotificationId = exporter.NotificationId;
             Address = exporter.Address;
             Contact = exporter.Contact;
-            Business = (BusinessViewModel)exporter.Business;
+            Business = new BusinessViewModel(exporter.Business);
         }
 
         public AddProducerToNotification ToRequest()

@@ -71,7 +71,9 @@
     <Compile Include="Producers\GetProducerForNotification.cs" />
     <Compile Include="Producers\SetSiteOfExport.cs" />
     <Compile Include="Producers\UpdateProducerForNotification.cs" />
+    <Compile Include="Shared\BusinessInfoData.cs" />
     <Compile Include="Shared\BusinessData.cs" />
+    <Compile Include="Shared\BusinessType.cs" />
     <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Notification\CreateNotificationApplication.cs" />
     <Compile Include="Producers\AddProducerToNotification.cs" />

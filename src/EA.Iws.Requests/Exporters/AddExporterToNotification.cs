@@ -6,7 +6,7 @@
 
     public class AddExporterToNotification : IRequest<Guid>
     {
-        public BusinessData Business { get; set; }
+        public BusinessInfoData Business { get; set; }
 
         public AddressData Address { get; set; }
 

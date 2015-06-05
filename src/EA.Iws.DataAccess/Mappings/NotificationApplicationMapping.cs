@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.Notification;
     using Prsd.Core;
+    using Prsd.Core.Helpers;
 
     internal class NotificationApplicationMapping : EntityTypeConfiguration<NotificationApplication>
     {

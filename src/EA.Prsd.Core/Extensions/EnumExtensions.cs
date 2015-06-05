@@ -5,9 +5,9 @@
 
     public static class EnumExtensions
     {
-        public static T GetValueFromDisplayName<T>(this string displayName)
+        public static TEnum GetValueFromDisplayName<TEnum>(this string displayName)
         {
-            var type = typeof(T);
+            var type = typeof(TEnum);
             if (!type.IsEnum)
             {
                 throw new InvalidOperationException();
@@ -20,14 +20,14 @@
                 {
                     if (attribute.Name == displayName)
                     {
-                        return (T)field.GetValue(null);
+                        return (TEnum)field.GetValue(null);
                     }
                 }
                 else
                 {
                     if (field.Name == displayName)
                     {
-                        return (T)field.GetValue(null);
+                        return (TEnum)field.GetValue(null);
                     }
                 }
             }

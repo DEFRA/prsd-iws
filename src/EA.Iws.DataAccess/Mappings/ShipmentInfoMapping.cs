@@ -4,6 +4,7 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.Notification;
     using Prsd.Core;
+    using Prsd.Core.Helpers;
 
     public class ShipmentInfoMapping : EntityTypeConfiguration<ShipmentInfo>
     {

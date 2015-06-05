@@ -1,4 +1,4 @@
-﻿namespace EA.Prsd.Core
+﻿namespace EA.Prsd.Core.Helpers
 {
     using System;
     using System.Linq.Expressions;

@@ -63,15 +63,7 @@
             {
                 using (var client = apiClient())
                 {
-                    var exporter = new AddExporterToNotification
-                    {
-                        NotificationId = model.NotificationId,
-                        Address = model.Address,
-                        Business = (BusinessData)model.Business,
-                        Contact = model.Contact
-                    };
-
-                    await client.SendAsync(User.GetAccessToken(), exporter);
+                    await client.SendAsync(User.GetAccessToken(), model.ToAddRequest());
 
                     return RedirectToAction("CopyFromExporter", "Producer", new { id = model.NotificationId });
                 }
@@ -99,13 +91,8 @@
 
             using (var client = apiClient())
             {
-                var model = new ExporterViewModel();
                 var exporter = await client.SendAsync(User.GetAccessToken(), new GetExporterByNotificationId(id));
-
-                model.NotificationId = id;
-                model.Address = exporter.Address;
-                model.Contact = exporter.Contact;
-                model.Business = (BusinessViewModel)exporter.Business;
+                var model = new ExporterViewModel(exporter);
 
                 await this.BindCountryList(apiClient);
                 model.Address.DefaultCountryId = this.GetDefaultCountryId();
@@ -127,15 +114,7 @@
             {
                 using (var client = apiClient())
                 {
-                    var exporter = new UpdateExporterForNotification
-                    {
-                        NotificationId = model.NotificationId,
-                        Address = model.Address,
-                        Business = (BusinessData)model.Business,
-                        Contact = model.Contact
-                    };
-
-                    await client.SendAsync(User.GetAccessToken(), exporter);
+                    await client.SendAsync(User.GetAccessToken(), model.ToUpdateRequest());
 
                     return RedirectToAction("NotificationOverview", "NotificationApplication", new { id = model.NotificationId });
                 }

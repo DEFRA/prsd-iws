@@ -10,7 +10,7 @@
         public static readonly ShipmentQuantityUnits Kilogram = new ShipmentQuantityUnits(3, "Kgs");
         public static readonly ShipmentQuantityUnits Litres = new ShipmentQuantityUnits(4, "Ltrs");
 
-        private ShipmentQuantityUnits()
+        protected ShipmentQuantityUnits()
         {
         }
 

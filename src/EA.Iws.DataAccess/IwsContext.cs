@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.DataAccess
 {
     using System.Data.Entity;
-    using System.Data.Entity.ModelConfiguration.Conventions;
     using System.Threading;
     using System.Threading.Tasks;
     using Domain;

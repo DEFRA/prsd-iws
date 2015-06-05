@@ -485,6 +485,7 @@
     <Content Include="Views\Facility\RecoveryPreconsent.cshtml" />
     <Content Include="Views\Carrier\Edit.cshtml" />
     <Content Include="Views\Carrier\List.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BusinessTypeViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -551,6 +552,7 @@
     <Compile Include="ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\NotificationOverviewViewModel.cs" />
+    <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
     <Compile Include="ViewModels\Shipment\SpecialHandlingViewModel.cs" />
     <Compile Include="ViewModels\Producer\EditProducerViewModel.cs" />
     <Compile Include="ViewModels\Producer\MultipleProducersViewModel.cs" />

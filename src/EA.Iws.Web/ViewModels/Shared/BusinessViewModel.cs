@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Web.ViewModels.Shared
 {
     using System.ComponentModel.DataAnnotations;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Validation;
-    using Prsd.Core.Web;
     using Requests.Shared;
 
     public class BusinessViewModel
@@ -10,6 +10,30 @@
         private const string SoleTrader = "Sole trader";
         private const string Partnership = "Partnership";
         private const string LimitedCompany = "Limited company";
+
+        public BusinessViewModel()
+        {
+        }
+
+        public BusinessViewModel(BusinessInfoData business)
+        {
+            Name = business.Name;
+            EntityType = EnumHelper.GetDisplayName(business.BusinessType);
+            AdditionalRegistrationNumber = business.AdditionalRegistrationNumber;
+
+            switch (EntityType)
+            {
+                case (SoleTrader):
+                    SoleTraderRegistrationNumber = business.RegistrationNumber;
+                    break;
+                case (Partnership):
+                    PartnershipRegistrationNumber = business.RegistrationNumber;
+                    break;
+                default:
+                    CompaniesHouseRegistrationNumber = business.RegistrationNumber;
+                    break;
+            }
+        }
 
         [Required]
         [Display(Name = "Organisation name")]
@@ -61,7 +85,7 @@
 
         public static explicit operator BusinessViewModel(BusinessData business)
         {
-            var businessViewModel = new BusinessViewModel()
+            var businessViewModel = new BusinessViewModel
             {
                 Name = business.Name,
                 EntityType = business.EntityType,

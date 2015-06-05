@@ -9,6 +9,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
@@ -57,22 +58,7 @@
 
         private IEnumerable<SelectListItem> GetUnits()
         {
-            // Get the enum fields if present.
-            var fields = typeof(ShipmentQuantityUnits).GetFields(BindingFlags.Public | BindingFlags.Static);
-            var fieldNames = new Dictionary<string, int>();
-
-            foreach (var field in fields)
-            {
-                // Get the display attributes for the enum.
-                var displayAttribute = (DisplayAttribute)field.GetCustomAttributes(typeof(DisplayAttribute)).SingleOrDefault();
-
-                // Set field name to either the enum name or the display name.
-                var name = (displayAttribute == null) ? field.Name : displayAttribute.Name;
-
-                fieldNames.Add(name, (int)field.GetValue(ShipmentQuantityUnits.Tonnes));
-            }
-
-            return new SelectList(fieldNames, "Value", "Key");
+            return new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
         }
 
         [HttpPost]

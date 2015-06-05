@@ -6,7 +6,7 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
     @Html.Gds().LabelFor(m => m.Name)
     @Html.Gds().ValidationMessageFor(m => m.Name)
-    @Html.TextBoxFor(m => m.Name)
+    @Html.Gds().TextBoxFor(m => m.Name)
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.EntityType)">
@@ -59,7 +59,7 @@
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.AdditionalRegistrationNumber)">
-    @Html.Gds().LabelFor(m => m.AdditionalRegistrationNumber, new { @class = "form-label" })
+    @Html.Gds().LabelFor(m => m.AdditionalRegistrationNumber)
     @Html.Gds().ValidationMessageFor(model => model.AdditionalRegistrationNumber)
-    @Html.TextBoxFor(m => m.AdditionalRegistrationNumber)
+    @Html.Gds().TextBoxFor(m => m.AdditionalRegistrationNumber)
 </div>
