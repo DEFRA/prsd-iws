@@ -28,7 +28,7 @@
                 <label class="form-label" for="other-label">Please specify</label>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
                 @Html.Gds().ValidationMessageFor(m => m.OtherDescription)<br/>
-                @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
+                @Html.Gds().TextBoxFor(m => m.OtherDescription, new { @id = "other-label" })
             </div>
             </div>
         </fieldset>
@@ -38,5 +38,3 @@
         <button class="button" type="submit">Continue</button>
     </div>
 }
-
-
