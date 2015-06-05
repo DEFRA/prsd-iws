@@ -22,6 +22,9 @@ ALTER TABLE [Business].[Facility] ALTER COLUMN PostalCode nvarchar(64) NULL;
 GO
 ALTER TABLE [Business].[Producer] ALTER COLUMN PostalCode nvarchar(64) NULL;
 
+GO
+ALTER TABLE [Business].[Importer] ALTER COLUMN PostalCode nvarchar(64) NULL;
+
 
 GO
 PRINT N'Update complete.';

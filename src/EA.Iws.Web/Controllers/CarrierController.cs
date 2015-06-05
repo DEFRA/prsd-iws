@@ -24,7 +24,8 @@
         public async Task<ActionResult> Add(Guid id)
         {
             var model = new AddCarrierViewModel { NotificationId = id };
-            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
+            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
             return View(model);
         }
 
@@ -68,7 +69,8 @@
 
                 var model = new EditCarrierViewModel(carrier);
 
-                model.Address.DefaultCountryId = await this.BindCountryList(client);
+                await this.BindCountryList(client);
+                model.Address.DefaultCountryId = this.GetDefaultCountryId();
                 return View(model);
             }
         }

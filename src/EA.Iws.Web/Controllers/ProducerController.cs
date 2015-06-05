@@ -68,7 +68,8 @@
                 model = new AddProducerViewModel { NotificationId = id };
             }
 
-            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
+            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
 
             return View(model);
         }
@@ -117,7 +118,8 @@
 
                 var model = new EditProducerViewModel(producer);
 
-                model.Address.DefaultCountryId = await this.BindCountryList(client);
+                await this.BindCountryList(client);
+                model.Address.DefaultCountryId = this.GetDefaultCountryId();
                 return View(model);
             }
         }

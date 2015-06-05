@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -26,6 +27,15 @@
             controller.ViewBag.Countries = new SelectList(response, "Id", "Name", defaultId);
 
             return defaultId;
+        }
+
+        public static Guid GetDefaultCountryId(this Controller controller)
+        {
+            var countries = (SelectList)controller.ViewBag.Countries;
+
+            var defaultId = countries.Single(c => c.Text.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Value;
+
+            return new Guid(defaultId);
         }
     }
 }

@@ -43,7 +43,8 @@
                 NotificationId = id
             };
 
-            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
+            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
 
             return View(model);
         }
@@ -107,6 +108,7 @@
                 model.Business = (BusinessViewModel)exporter.Business;
 
                 await this.BindCountryList(apiClient);
+                model.Address.DefaultCountryId = this.GetDefaultCountryId();
                 return View(model);
             }
         }
@@ -147,7 +149,7 @@
                 }
             }
 
-            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
+            await this.BindCountryList(apiClient);
             return View(model);
         }
     }

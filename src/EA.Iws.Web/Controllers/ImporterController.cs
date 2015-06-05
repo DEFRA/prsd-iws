@@ -40,7 +40,8 @@
 
             var model = new ImporterViewModel { NotificationId = id };
 
-            model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
+            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
 
             return View(model);
         }
@@ -103,7 +104,8 @@
                 model.Contact = importer.Contact;
                 model.Business = (BusinessViewModel)importer.Business;
 
-                model.Address.DefaultCountryId = await this.BindCountryList(apiClient);
+                await this.BindCountryList(apiClient);
+                model.Address.DefaultCountryId = this.GetDefaultCountryId();
                 return View(model);
             }
         }

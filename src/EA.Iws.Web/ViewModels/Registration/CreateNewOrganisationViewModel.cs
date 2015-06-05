@@ -41,7 +41,7 @@
         [Display(Name = "Town or city")]
         public string TownOrCity { get; set; }
 
-        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", "The postcode field is required")]
+        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", "The Postcode field is required")]
         public string Postcode { get; set; }
 
         [Required]
