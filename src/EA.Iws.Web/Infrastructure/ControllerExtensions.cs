@@ -10,23 +10,21 @@
 
     public static class ControllerExtensions
     {
-        public static async Task<Guid> BindCountryList(this Controller controller, Func<IIwsClient> apiClient)
+        public static async Task BindCountryList(this Controller controller, Func<IIwsClient> apiClient)
         {
             using (var client = apiClient())
             {
-                return await controller.BindCountryList(client);
+                await controller.BindCountryList(client);
             }
         }
 
-        public static async Task<Guid> BindCountryList(this Controller controller, IIwsClient client)
+        public static async Task BindCountryList(this Controller controller, IIwsClient client)
         {
             var response = await client.SendAsync(new GetCountries());
 
             var defaultId = response.Single(c => c.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)).Id;
 
             controller.ViewBag.Countries = new SelectList(response, "Id", "Name", defaultId);
-
-            return defaultId;
         }
 
         public static Guid GetDefaultCountryId(this Controller controller)

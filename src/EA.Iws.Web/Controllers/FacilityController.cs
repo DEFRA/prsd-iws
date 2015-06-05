@@ -45,7 +45,8 @@
                 facility.NotificationType = response.NotificationType;
                 facility.NotificationId = id;
 
-                facility.Address.DefaultCountryId = await this.BindCountryList(client);
+                await this.BindCountryList(client);
+                facility.Address.DefaultCountryId = this.GetDefaultCountryId();
             }
             return View(facility);
         }
@@ -97,7 +98,9 @@
 
                 var model = new EditFacilityViewModel(facility) { NotificationType = response.NotificationType };
 
-                facility.Address.DefaultCountryId = await this.BindCountryList(client);
+                await this.BindCountryList(client);
+                facility.Address.DefaultCountryId = this.GetDefaultCountryId();
+
                 return View(model);
             }
         }
