@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.ViewModels.Registration
 {
     using System.ComponentModel.DataAnnotations;
+    using Prsd.Core.Validation;
 
     public class ApplicantRegistrationViewModel
     {
@@ -44,7 +45,7 @@
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Range(typeof(bool), "true", "true", ErrorMessage = "Please confirm that you have read the terms and conditions")]
+        [MustBeTrue(ErrorMessage = "Please confirm that you have read the terms and conditions")]
         public bool TermsAndConditions { get; set; }
     }
 }

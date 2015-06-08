@@ -74,6 +74,7 @@
     <Compile Include="Security\ResourceAuthorizeAttribute.cs" />
     <Compile Include="StringSearch.cs" />
     <Compile Include="SystemTime.cs" />
+    <Compile Include="Validation\MustBeTrueAttribute.cs" />
     <Compile Include="Validation\RequiredIfAttribute.cs" />
     <Compile Include="Validation\RequiredIfPropertiesEqualAttribute.cs" />
   </ItemGroup>
