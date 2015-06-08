@@ -13,8 +13,8 @@
         <h2 class="heading-medium">Are all the recovery facilities pre-consented?</h2>
     </header>
 
-    <p class="form-hint">Select ‘Yes’ if all the recovery facilities have a pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006 that covers this notification.</p>
-    <p class="form-hint">Evidence of the pre-consent status must be provided with this submission. This may be the pre-consent status certificate issue by the relevant competent authority.</p>
+    @Html.Gds().HintParagraph("Select ‘Yes’ if all the recovery facilities have a pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006 that covers this notification.")
+    @Html.Gds().HintParagraph("Evidence of the pre-consent status must be provided with this submission. This may be the pre-consent status certificate issue by the relevant competent authority.")
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
         @Html.EditorFor(m => m.Choices)
@@ -22,10 +22,10 @@
 
     <div class="form-group">
         <div class="panel-indent" id="messageYes">
-            <span class="form-hint">This notification will allow the intended shipment dates to cover a 3 year period</span>
+            @Html.Gds().HintSpan("This notification will allow the intended shipment dates to cover a 3 year period")
         </div>
         <div class="panel-indent" id="messageNo">
-            <span class="form-hint">This notification will allow the intended shipment dates to cover a 12 month period</span>
+            @Html.Gds().HintSpan("This notification will allow the intended shipment dates to cover a 12 month period")
         </div>
     </div>
 

@@ -44,7 +44,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.Gds().LabelFor(m => m.Password)
         @Html.Gds().ValidationMessageFor(m => m.Password)
-        <p class="form-hint text">Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter and one number</p>
+        @Html.Gds().HintParagraph("Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter and one number")
         @Html.Gds().PasswordFor(m => m.Password)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">

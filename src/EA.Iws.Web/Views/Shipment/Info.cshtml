@@ -54,7 +54,7 @@
                     </legend>
 
                     <div class="form-date">
-                        <p class="form-hint">For example, 31 3 2015</p>
+                        @Html.Gds().HintParagraph("For example, 31 3 2015")
                         @Html.Gds().ValidationMessageFor(m => m.StartDay)
                         @Html.Gds().ValidationMessageFor(m => m.StartMonth)
                         @Html.Gds().ValidationMessageFor(m => m.StartYear)
@@ -83,7 +83,7 @@
                     </legend>
 
                     <div class="form-date">
-                        <p class="form-hint">For example, 27 11 2015</p>
+                        @Html.Gds().HintParagraph("For example, 27 11 2015")
                         @Html.Gds().ValidationMessageFor(m => m.EndDay)
                         @Html.Gds().ValidationMessageFor(m => m.EndMonth)
                         @Html.Gds().ValidationMessageFor(m => m.EndYear)

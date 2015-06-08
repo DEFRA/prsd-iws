@@ -4,24 +4,27 @@
 
     public partial class Gds<TModel>
     {
-        public MvcHtmlString Hint(string hintText)
+        public MvcHtmlString HintSpan(string hintText, string id = null)
         {
-            var hint = CreateHintTag(hintText);
+            var hint = CreateHintTag(hintText, id, "span");
             return MvcHtmlString.Create(hint.ToString());
         }
 
-        public MvcHtmlString Hint(string hintText, string id)
+        public MvcHtmlString HintParagraph(string hintText, string id = null)
         {
-            var hint = CreateHintTag(hintText);
-            hint.GenerateId(id);
+            var hint = CreateHintTag(hintText, id, "p");
             return MvcHtmlString.Create(hint.ToString());
         }
 
-        private static TagBuilder CreateHintTag(string hintText)
+        private static TagBuilder CreateHintTag(string hintText, string id, string tagName)
         {
-            var hint = new TagBuilder("span");
+            var hint = new TagBuilder(tagName);
             hint.AddCssClass("form-hint");
             hint.SetInnerText(hintText);
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                hint.GenerateId(id);
+            }
             return hint;
         }
     }

@@ -36,7 +36,7 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.RegistrationNumber)">
     @Html.Gds().LabelFor(m => m.RegistrationNumber)
-    @Html.Gds().Hint("If you are a limited company this should be your Companies House number. If you are acting on behalf of the waste generator-producer, this will be your waste broker license number.", "registration-number-hint")
+    @Html.Gds().HintSpan("If you are a limited company this should be your Companies House number. If you are acting on behalf of the waste generator-producer, this will be your waste broker license number.", "registration-number-hint")
     @Html.Gds().ValidationMessageFor(m => m.RegistrationNumber)
     @Html.Gds().TextBoxFor(m => m.RegistrationNumber)
 </div>
