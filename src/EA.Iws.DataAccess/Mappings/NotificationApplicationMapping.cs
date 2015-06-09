@@ -53,6 +53,10 @@
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 
+            HasOptional(x => x.TechnologyEmployed)
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
+
             HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<Carrier>>(
                     "CarriersCollection"))

@@ -477,3 +477,20 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 .full-width{
     width: $full-width;
 }
+
+.grid-view:last-child{
+    float: none;
+    margin-bottom: 10px;
+}
+
+// Display the operation codes
+.operation-code-list
+{
+    display:inline-block;
+    background-color:#2b8cc4;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    padding: 15px;
+    color:white;
+    font-weight:bold;
+}

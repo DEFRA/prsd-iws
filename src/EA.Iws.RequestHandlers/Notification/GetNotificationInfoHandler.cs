@@ -19,6 +19,7 @@
         public async Task<NotificationInfo> HandleAsync(GetNotificationInfo message)
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+
             return new NotificationInfo
             {
                 NotificationId = message.NotificationId,

@@ -72,6 +72,7 @@
     <Content Include="scripts\Update\Sprint9\20150609-174000-Ordinal-Position-Column.sql" />
     <Content Include="scripts\Update\Sprint9\20150609-152127-Add-WasteGenerationProcess-To-WasteType-Table.sql" />
     <Content Include="scripts\Update\Sprint9\20150611-160000-Add-Competent-Authorities-And-EntryExitPoints.sql" />
+    <Content Include="scripts\Update\Sprint9\20150610-15875-Add-Technology-Employed-Table.sql" />
     <Content Include="scripts\Update\Sprint9\20150611-165300-add-notification-id-to-packaging-info.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />

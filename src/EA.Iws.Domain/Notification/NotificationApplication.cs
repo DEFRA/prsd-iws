@@ -62,6 +62,8 @@
 
         public virtual StateOfImport StateOfImport { get; private set; }
 
+        public virtual TechnologyEmployed TechnologyEmployed { get; private set; }
+
         public DateTime CreatedDate { get; private set; }
 
         public IEnumerable<Producer> Producers

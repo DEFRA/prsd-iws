@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.WebPages;
     using Api.Client;
     using Infrastructure;
     using Prsd.Core.Helpers;
@@ -13,6 +16,7 @@
     using Requests.Notification;
     using Requests.OperationCodes;
     using Requests.Shared;
+    using Requests.TechnologyEmployed;
     using ViewModels.Shared;
     using ViewModels.WasteOperations;
 
@@ -107,7 +111,7 @@
                         client.SendAsync(User.GetAccessToken(),
                             new AddRecoveryCodes(selectedRecoveryCodes, model.NotificationId));
 
-                    return RedirectToAction("ReasonForExport", "NotificationApplication", new { id = model.NotificationId });
+                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId});
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -172,7 +176,79 @@
                         client.SendAsync(User.GetAccessToken(),
                             new AddDisposalCodes(selectedDisposalCodes, model.NotificationId));
 
-                    return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
+                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> TechnologyEmployed(Guid id)
+        {
+            var model = new TechnologyEmployedViewModel();
+            model.NotificationId = id;
+            model.OperationCodes = await GetOperationCodes(id);
+
+            return View(model);
+        }
+
+        private async Task<List<string>> GetOperationCodes(Guid id)
+        {
+            var operationCodes = new List<string>();
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    IList<OperationCodeData> codeDatas =
+                        await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+
+                    var orderedCodeDatas = codeDatas.OrderBy(c => c.Value);
+
+                    foreach (var c in orderedCodeDatas)
+                    {
+                        operationCodes.Add(c.Code);
+                    }
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                }
+            }
+
+            return operationCodes;
+        }
+            
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> TechnologyEmployed(TechnologyEmployedViewModel model)
+        {
+            model.OperationCodes = await GetOperationCodes(model.NotificationId);
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new UpdateTechnologyEmployed(model.NotificationId, model.AnnexPorvided, model.Details));
+
+                    return RedirectToAction("ReasonForExport", "NotificationApplication", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

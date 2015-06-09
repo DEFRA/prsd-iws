@@ -76,6 +76,8 @@
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="OperationCodes\AddDisposalCodes.cs" />
     <Compile Include="OperationCodes\DisposalCode.cs" />
+    <Compile Include="OperationCodes\GetOperationCodesByNotificationId.cs" />
+    <Compile Include="OperationCodes\OperationCodeData.cs" />
     <Compile Include="Producers\GetProducerForNotification.cs" />
     <Compile Include="Producers\SetSiteOfExport.cs" />
     <Compile Include="Producers\UpdateProducerForNotification.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="StateOfExport\GetStateOfExportForNotification.cs" />
     <Compile Include="StateOfImport\AddStateOfImportToNotification.cs" />
     <Compile Include="TransitState\AddTransitStateToNotification.cs" />
+    <Compile Include="TechnologyEmployed\UpdateTechnologyEmployed.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
     <Compile Include="WasteType\ChemicalCompositionType.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />

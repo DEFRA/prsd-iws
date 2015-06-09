@@ -111,6 +111,7 @@
     <Compile Include="Notification\SetReasonForExportHandler.cs" />
     <Compile Include="Notification\SetSpecialHandlingHandler.cs" />
     <Compile Include="OperationCodes\AddDisposalCodesHandler.cs" />
+    <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />
     <Compile Include="Producers\DeleteProducerForNotificationHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
     <Compile Include="Exporters\GetExporterByNotificationIdHandler.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="StateOfImport\AddStateOfImportToNotificationHandler.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotificationHandler.cs" />
     <Compile Include="TransitState\AddStateOfImportToNotificationHandler.cs" />
+    <Compile Include="TechnologyEmployed\UpdateTechnologyEmployedHandler.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountryHandler.cs" />
     <Compile Include="TransportRoute\GetTransportRouteSummaryForNotificationHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />

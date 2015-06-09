@@ -83,6 +83,7 @@
     <Compile Include="Mappings\CompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsInfoMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMapping.cs" />
+    <Compile Include="Mappings\TechnologyEmployedMapping.cs" />
     <Compile Include="Mappings\TransitStateMapping.cs" />
     <Compile Include="Mappings\StateOfImportMapping.cs" />
     <Compile Include="Mappings\StateOfExportMapping.cs" />

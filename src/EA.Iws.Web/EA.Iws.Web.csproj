@@ -217,12 +217,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\custom-styles.css">
-      <DependentUpon>custom-styles.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\custom-styles.min.css">
-      <DependentUpon>custom-styles.css</DependentUpon>
-    </Content>
     <Content Include="Content\govuk\images\apple-touch-icon-120x120.png" />
     <Content Include="Content\govuk\images\apple-touch-icon-152x152.png" />
     <Content Include="Content\govuk\images\apple-touch-icon-60x60.png" />
@@ -372,10 +366,6 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-play.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-rewind.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
-    <Content Include="Content\custom-styles.css.map">
-      <DependentUpon>custom-styles.css</DependentUpon>
-    </Content>
-    <Content Include="Content\custom-styles.scss" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\application.js" />
@@ -522,6 +512,7 @@
     <Content Include="Views\Shared\_OperationCodes.cshtml" />
     <Content Include="Views\Shared\_SelectAllCheckBoxScript.cshtml" />
     <Content Include="Views\TransportRoute\Summary.cshtml" />
+    <Content Include="Views\WasteOperations\TechnologyEmployed.cshtml" />
     <Content Include="Views\TransportRoute\StateOfExportSummary.cshtml" />
     <Content Include="Views\TransportRoute\StateOfImportSummary.cshtml" />
     <Content Include="Views\TransportRoute\TransitStatesSummary.cshtml" />
@@ -631,6 +622,7 @@
     <Compile Include="ViewModels\Shipment\PackagingTypesViewModel.cs" />
     <Compile Include="ViewModels\Shipment\ShipmentInfoViewModel.cs" />
     <Compile Include="ViewModels\StateOfImport\StateOfImportViewModel.cs" />
+    <Compile Include="ViewModels\WasteOperations\TechnologyEmployedViewModel.cs" />
     <Compile Include="ViewModels\WasteType\ChemicalCompositionViewModel.cs" />
     <Compile Include="ViewModels\StateOfExport\StateOfExportViewModel.cs" />
     <Compile Include="ViewModels\WasteType\PhysicalCharacteristicsViewModel.cs" />
