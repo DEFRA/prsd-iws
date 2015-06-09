@@ -7,6 +7,9 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
+    
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
 
     <header class="hgroup">
         <h2 class="heading-large">What is the total intended number of shipments?</h2>
@@ -105,7 +108,6 @@
         </div>
     </div>
 
-    @Html.HiddenFor(m => m.NotificationId)
     <div class="form-group">
         <p> <button class="button" type="submit">Continue</button></p>
     </div>

@@ -26,8 +26,13 @@
                 throw new InvalidOperationException(string.Format("Shipment info does not exist for this notification: {0}", Id));
             }
 
-            ShipmentInfo.FirstDate = startDate;
-            ShipmentInfo.LastDate = endDate;
+            int monthPeriodLength = (IsPreconsentedRecoveryFacility.HasValue && IsPreconsentedRecoveryFacility.Value) ? 36 : 12;
+            if (endDate > startDate.AddMonths(monthPeriodLength))
+            {
+                throw new InvalidOperationException(string.Format("The start date and end date must be within a {0} month period for this notification {1}", monthPeriodLength, Id));
+            }
+
+            ShipmentInfo.UpdateShipmentDates(startDate, endDate);
             ShipmentInfo.Quantity = quantity;
             ShipmentInfo.Units = unit;
             ShipmentInfo.NumberOfShipments = numberOfShipments;

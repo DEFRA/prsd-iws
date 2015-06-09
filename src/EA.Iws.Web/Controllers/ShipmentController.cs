@@ -42,16 +42,31 @@
 
             using (var client = apiClient())
             {
-                await client.SendAsync(User.GetAccessToken(), new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling, model.SpecialHandlingDetails));
+                await
+                    client.SendAsync(User.GetAccessToken(),
+                        new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling,
+                            model.SpecialHandlingDetails));
             }
             return RedirectToAction("Info", new { id = model.NotificationId });
         }
 
         [HttpGet]
-        public ActionResult Info(Guid id)
+        public async Task<ActionResult> Info(Guid id)
         {
-            var model = new ShipmentInfoViewModel { NotificationId = id, UnitsSelectList = GetUnits() };
-            return View(model);
+            using (var client = apiClient())
+            {
+                var isPreconsented =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new GetIsPreconsentedRecoveryFacility { NotificationId = id });
+                var model = new ShipmentInfoViewModel
+                {
+                    NotificationId = id,
+                    UnitsSelectList = GetUnits(),
+                    IsPreconsentedRecoveryFacility = isPreconsented
+                };
+                return View(model);
+            }
         }
 
         private IEnumerable<SelectListItem> GetUnits()
@@ -69,27 +84,18 @@
                 return View(model);
             }
 
-            var startDate = new DateTime(model.StartYear, model.StartMonth, model.StartDay);
-            var endDate = new DateTime(model.EndYear, model.EndMonth, model.EndDay);
-            if (endDate <= startDate)
-            {
-                ModelState.AddModelError(string.Empty, "The start date must be before the end date");
-                model.UnitsSelectList = GetUnits();
-                return View(model);
-            }
-
             using (var client = apiClient())
             {
                 try
                 {
-                    await client.SendAsync(User.GetAccessToken(), 
+                    await client.SendAsync(User.GetAccessToken(),
                         new CreateNumberOfShipmentsInfo(
-                                model.NotificationId,
-                                model.NumberOfShipments,
-                                model.Quantity,
-                                model.Units,
-                                startDate,
-                                endDate));
+                            model.NotificationId,
+                            model.NumberOfShipments,
+                            model.Quantity,
+                            model.Units,
+                            model.StartDate,
+                            model.EndDate));
 
                     return RedirectToAction("ChemicalComposition", "WasteType");
                 }
@@ -114,7 +120,9 @@
             packagingTypes.ShowEnumValue = true;
 
             //We need to exclude 'other' as this will be handled separately
-            packagingTypes.PossibleValues = packagingTypes.PossibleValues.Where(p => (PackagingType)Convert.ToInt32(p.Value) != PackagingType.Other).ToList();
+            packagingTypes.PossibleValues =
+                packagingTypes.PossibleValues.Where(p => (PackagingType)Convert.ToInt32(p.Value) != PackagingType.Other)
+                    .ToList();
 
             var model = new PackagingTypesViewModel
             {
@@ -155,7 +163,8 @@
                     }
 
                     await client.SendAsync(User.GetAccessToken(),
-                        new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId, model.OtherDescription));
+                        new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId,
+                            model.OtherDescription));
 
                     return RedirectToAction("SpecialHandling", new { id = model.NotificationId });
                 }

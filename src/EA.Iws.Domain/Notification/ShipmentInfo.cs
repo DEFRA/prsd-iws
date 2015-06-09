@@ -2,13 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
 
     public class ShipmentInfo : Entity
     {
-        private DateTime firstDate;
-        private DateTime lastDate;
+        private int? numberOfShipments;
+        private decimal? quantity;
 
         internal ShipmentInfo()
         {
@@ -27,44 +28,39 @@
 
         public string SpecialHandlingDetails { get; internal set; }
 
-        public int NumberOfShipments { get; internal set; }
-
-        public DateTime FirstDate
+        public int? NumberOfShipments
         {
-            get { return firstDate; }
-            set
+            get { return numberOfShipments; }
+            internal set
             {
-                if (value >= LastDate && LastDate != DateTime.MinValue)
+                if (value.HasValue)
                 {
-                    throw new InvalidOperationException("The start date must be before the end date");
+                    Guard.ArgumentNotZeroOrNegative(() => value.Value, value.Value);
                 }
-                firstDate = value;
+                numberOfShipments = value;
             }
         }
 
-        public DateTime LastDate
-        {
-            get { return lastDate; }
-            set
-            {
-                if (value <= FirstDate && FirstDate != DateTime.MinValue)
-                {
-                    throw new InvalidOperationException("The end date must be after the start date");
-                }
-                lastDate = value;
-            }
-        }
+        public DateTime FirstDate { get; private set; }
+
+        public DateTime LastDate { get; private set; }
 
         public ShipmentQuantityUnits Units { get; internal set; }
 
-        private decimal quantity;
-
-        public decimal Quantity
+        public decimal? Quantity
         {
             get { return quantity; }
             internal set
             {
-                quantity = decimal.Round(value, 4, MidpointRounding.AwayFromZero);
+                if (value.HasValue)
+                {
+                    Guard.ArgumentNotZeroOrNegative(() => value.Value, value.Value);
+                    quantity = decimal.Round(value.Value, 4, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    quantity = null;
+                }
             }
         }
 
@@ -76,6 +72,21 @@
                 packagingInfo.OtherDescription = otherDescription;
             }
             PackagingInfosCollection.Add(packagingInfo);
+        }
+
+        internal void UpdateShipmentDates(DateTime firstDate, DateTime lastDate)
+        {
+            Guard.ArgumentNotDefaultValue(() => firstDate, firstDate);
+            Guard.ArgumentNotDefaultValue(() => lastDate, lastDate);
+
+            if (firstDate > lastDate)
+            {
+                throw new InvalidOperationException(
+                    string.Format("The start date must be before the end date on shipment info {0}", Id));
+            }
+
+            FirstDate = firstDate;
+            LastDate = lastDate;
         }
     }
 }

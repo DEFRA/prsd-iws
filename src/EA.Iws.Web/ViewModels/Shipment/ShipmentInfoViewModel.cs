@@ -6,9 +6,11 @@
     using System.Web.Mvc;
     using Requests.Notification;
 
-    public class ShipmentInfoViewModel
+    public class ShipmentInfoViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
+
+        public bool IsPreconsentedRecoveryFacility { get; set; }
 
         [Required(ErrorMessage = "Please enter the total number of intended shipments")]
         [Display(Name = "Number of shipments")]
@@ -53,9 +55,33 @@
         [Range(2015, 3000, ErrorMessage = "Please enter a valid number in the 'Year' field")]
         public int EndYear { get; set; }
 
+        public DateTime StartDate
+        {
+            get { return new DateTime(StartYear, StartMonth, StartDay); }
+        }
+
+        public DateTime EndDate
+        {
+            get { return new DateTime(EndYear, EndMonth, EndDay); }
+        }
+
         public ShipmentInfoViewModel()
         {
             UnitsSelectList = new List<SelectListItem>();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (StartDate > EndDate)
+            {
+                yield return new ValidationResult("The start date must be before the end date", new[] { "StartYear" });
+            }
+
+            int monthPeriodLength = IsPreconsentedRecoveryFacility ? 36 : 12;
+            if (EndDate > StartDate.AddMonths(monthPeriodLength))
+            {
+                yield return new ValidationResult(string.Format("The start date and end date must be within a {0} month period.", monthPeriodLength), new[] { "EndYear" });
+            }
         }
     }
 }
