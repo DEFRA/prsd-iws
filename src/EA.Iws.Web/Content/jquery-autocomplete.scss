@@ -130,6 +130,10 @@
     list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
 
+.ui-menu .ui-menu-item:hover{
+    text-decoration: underline;
+}
+
 .ui-menu .ui-menu-divider {
     margin: 5px 0;
     height: 0;

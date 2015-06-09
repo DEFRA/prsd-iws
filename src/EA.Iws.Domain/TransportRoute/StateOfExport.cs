@@ -4,13 +4,13 @@ namespace EA.Iws.Domain.TransportRoute
     using Prsd.Core;
     using Prsd.Core.Domain;
 
-    public class StateOfExport : Entity, IState, IExit
+    public class StateOfExport : Entity, IState, IExitPoint
     {
-        public Country Country { get; protected set; }
+        public virtual Country Country { get; protected set; }
 
-        public CompetentAuthority CompetentAuthority { get; protected set; }
+        public virtual CompetentAuthority CompetentAuthority { get; protected set; }
 
-        public EntryOrExitPoint ExitPoint { get; protected set; }
+        public virtual EntryOrExitPoint ExitPoint { get; protected set; }
 
         protected StateOfExport()
         {

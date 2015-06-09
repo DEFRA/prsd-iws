@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Requests.TransportRoute
 {
     using System.Collections.Generic;
+    using StateOfExport;
+    using StateOfImport;
 
     public class TransportRouteData
     {

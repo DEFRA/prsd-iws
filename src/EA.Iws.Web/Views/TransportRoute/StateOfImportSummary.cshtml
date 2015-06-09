@@ -1,0 +1,30 @@
+﻿@model EA.Iws.Requests.StateOfImport.StateOfImportData
+           
+<h3 class="heading-medium">State of import</h3>
+<div class="colored-header-bar"></div>
+@if (Model == null)
+{
+    <p>No state of import has been added.</p>
+    <p>@Html.ActionLink("Add state of import", "StateOfImport", new { id = Guid.Empty })</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Competent authority</th>
+                <th>Port or border crossing</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(m => m.Country.Name)</td>
+                <td>@Html.DisplayFor(m => m.CompetentAuthority.Code) - @Html.DisplayFor(m => m.CompetentAuthority.Name)</td>
+                <td>@Html.DisplayFor(m => m.EntryPoint.Name)</td>
+                <th>@Html.ActionLink("Edit state of import", "EditStateOfImport", new { id = Guid.Empty })</th>
+            </tr>
+        </tbody>
+    </table>
+}

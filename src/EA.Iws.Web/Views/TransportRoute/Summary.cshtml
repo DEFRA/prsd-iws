@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Requests.TransportRoute.TransportRouteData
+@{
+    ViewBag.Title = "Transport Route Summary";
+}
+
+<h2 class="heading-large">Transport route</h2>
+
+@Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary())
+
+@Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary())
+
+@Html.Partial("StateOfImportSummary", Model.StateOfImportData, new ViewDataDictionary())
+
+<div class="form-group" style="margin-top: 25px;"><button class="button" type="submit">Continue</button></div>

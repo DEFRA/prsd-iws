@@ -1,0 +1,36 @@
+﻿@model IList<EA.Iws.Requests.TransportRoute.TransitStateData>
+
+<h3 class="heading-medium">Transit states</h3>
+<div class="colored-header-bar"></div>
+@if (Model == null || Model.Count == 0)
+{
+    <p>No transit states have been added.</p>
+    <p>@Html.ActionLink("Add a transit state", "StateOfImport", new { id = Guid.Empty })</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Competent authority</th>
+                <th>Entry port or border crossing</th>
+                <th>Exit port or border crossing</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Html.Display(Model[i].Country.Name)</td>
+                    <td>@Html.Display(Model[i].CompetentAuthority.Name)</td>
+                    <td>@Html.Display(Model[i].EntryPoint.Name)</td>
+                    <td>@Html.Display(Model[i].ExitPoint.Name)</td>
+                    <td></td>
+                    <th>@Html.ActionLink("Edit transit state", "EditStateOfExport", new { id = Guid.Empty })</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

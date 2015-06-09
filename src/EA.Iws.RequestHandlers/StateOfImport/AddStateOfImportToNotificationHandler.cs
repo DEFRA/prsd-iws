@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.TransportRoute
+﻿namespace EA.Iws.RequestHandlers.StateOfImport
 {
     using System;
     using System.Data.Entity;
@@ -6,33 +6,33 @@
     using DataAccess;
     using Domain.TransportRoute;
     using Prsd.Core.Mediator;
-    using Requests.TransportRoute;
+    using Requests.StateOfImport;
 
-    internal class AddStateOfExportToNotificationHandler : IRequestHandler<AddStateOfExportToNotification, Guid>
+    internal class AddStateOfImportToNotificationHandler : IRequestHandler<AddStateOfImportToNotification, Guid>
     {
         private readonly IwsContext context;
 
-        public AddStateOfExportToNotificationHandler(IwsContext context)
+        public AddStateOfImportToNotificationHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(AddStateOfExportToNotification message)
+        public async Task<Guid> HandleAsync(AddStateOfImportToNotification message)
         {
             var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.NotificationId);
 
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
             var competentAuthority =
                 await context.CompetentAuthorities.SingleAsync(ca => ca.Id == message.CompetentAuthorityId);
-            var exitPoint = await context.EntryOrExitPoints.SingleAsync(ep => ep.Id == message.EntryOrExitPointId);
+            var entryPoint = await context.EntryOrExitPoints.SingleAsync(ep => ep.Id == message.EntryOrExitPointId);
 
-            var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
+            var stateOfImport = new StateOfImport(country, competentAuthority, entryPoint);
 
-            notification.AddStateOfExportToNotification(stateOfExport);
+            notification.AddStateOfImportToNotification(stateOfImport);
 
             await context.SaveChangesAsync();
 
-            return stateOfExport.Id;
+            return stateOfImport.Id;
         }
     }
 }

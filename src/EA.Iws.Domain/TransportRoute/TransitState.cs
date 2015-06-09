@@ -2,7 +2,7 @@ namespace EA.Iws.Domain.TransportRoute
 {
     using Prsd.Core.Domain;
 
-    public class TransitState : Entity, IState, IExit, IEnter
+    public class TransitState : Entity, IState, IExitPoint, IEntryPoint
     {
         public Country Country { get; protected set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Domain.TransportRoute
 {
-    public interface IEnter
+    public interface IEntryPoint
     {
         EntryOrExitPoint EntryPoint { get; }
     }

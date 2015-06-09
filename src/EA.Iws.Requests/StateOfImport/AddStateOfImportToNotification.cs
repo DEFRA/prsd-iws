@@ -1,9 +1,9 @@
-﻿namespace EA.Iws.Requests.TransportRoute
+﻿namespace EA.Iws.Requests.StateOfImport
 {
     using System;
     using Prsd.Core.Mediator;
 
-    public class AddStateOfExportToNotification : IRequest<Guid>
+    public class AddStateOfImportToNotification : IRequest<Guid>
     {
         public Guid NotificationId { get; private set; }
 
@@ -13,7 +13,7 @@
 
         public Guid CompetentAuthorityId { get; private set; }
 
-        public AddStateOfExportToNotification(Guid notificationId, Guid countryId, Guid entryOrExitPointId, Guid competentAuthorityId)
+        public AddStateOfImportToNotification(Guid notificationId, Guid countryId, Guid entryOrExitPointId, Guid competentAuthorityId)
         {
             NotificationId = notificationId;
             CountryId = countryId;

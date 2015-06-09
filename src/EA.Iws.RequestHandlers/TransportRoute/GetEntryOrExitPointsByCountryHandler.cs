@@ -10,7 +10,7 @@
     using Prsd.Core.Mediator;
     using Requests.TransportRoute;
 
-    public class GetEntryOrExitPointsByCountryHandler : IRequestHandler<GetEntryOrExitPointsByCountry, IList<EntryOrExitPointData>>
+    internal class GetEntryOrExitPointsByCountryHandler : IRequestHandler<GetEntryOrExitPointsByCountry, IList<EntryOrExitPointData>>
     {
         private readonly IwsContext context;
         private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> mapper;

@@ -512,13 +512,18 @@
     <Content Include="Views\Carrier\Edit.cshtml" />
     <Content Include="Views\Carrier\List.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BusinessTypeViewModel.cshtml" />
-    <Content Include="Views\TransportRoute\StateOfExport.cshtml" />
+    <Content Include="Views\StateOfExport\Add.cshtml" />
     <Content Include="Views\WasteType\ChemicalComposition.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringGuidRadioButtons.cshtml" />
     <Content Include="Views\WasteOperations\AddDisposalCodes.cshtml" />
     <Content Include="Views\WasteOperations\AddRecoveryCodes.cshtml" />
     <Content Include="Views\Shared\_OperationCodes.cshtml" />
     <Content Include="Views\Shared\_SelectAllCheckBoxScript.cshtml" />
+    <Content Include="Views\TransportRoute\Summary.cshtml" />
+    <Content Include="Views\TransportRoute\StateOfExportSummary.cshtml" />
+    <Content Include="Views\TransportRoute\StateOfImportSummary.cshtml" />
+    <Content Include="Views\TransportRoute\TransitStatesSummary.cshtml" />
+    <Content Include="Views\StateOfImport\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -543,6 +548,8 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\StateOfImportController.cs" />
+    <Compile Include="Controllers\StateOfExportController.cs" />
     <Compile Include="Controllers\TransportRouteController.cs" />
     <Compile Include="Controllers\WasteTypeController.cs" />
     <Compile Include="Controllers\WasteOperationsController.cs" />
@@ -611,8 +618,9 @@
     <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />
     <Compile Include="ViewModels\Shipment\PackagingTypesViewModel.cs" />
     <Compile Include="ViewModels\Shipment\ShipmentInfoViewModel.cs" />
-    <Compile Include="ViewModels\TransportRoute\StateOfExportViewModel.cs" />
+    <Compile Include="ViewModels\StateOfImport\StateOfImportViewModel.cs" />
     <Compile Include="ViewModels\WasteType\ChemicalCompositionViewModel.cs" />
+    <Compile Include="ViewModels\StateOfExport\StateOfExportViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -625,7 +633,9 @@
       <Name>EA.Iws.Requests</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\TransportRoute\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

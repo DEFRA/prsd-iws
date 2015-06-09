@@ -87,6 +87,7 @@
     <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\BusinessInfoMap.cs" />
     <Compile Include="Mappings\BusinessMap.cs" />
+    <Compile Include="Mappings\CountryMap.cs" />
     <Compile Include="Mappings\EntryOrExitPointMap.cs" />
     <Compile Include="Mappings\DisposalCodesMap.cs" />
     <Compile Include="Mappings\CompetentAuthorityMap.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="Mappings\ProducerDataMap.cs" />
     <Compile Include="Mappings\ExporterDataMap.cs" />
     <Compile Include="Mappings\RecoveryCodesMap.cs" />
+    <Compile Include="Mappings\StateOfImportMap.cs" />
+    <Compile Include="Mappings\StateOfExportMap.cs" />
+    <Compile Include="Mappings\TransitStateMap.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
@@ -127,8 +131,10 @@
     <Compile Include="Shipment\CreateNumberOfShipmentsInfoHandler.cs" />
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfoHandler.cs" />
     <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
-    <Compile Include="TransportRoute\AddStateOfExportToNotificatioHandler.cs" />
+    <Compile Include="StateOfImport\AddStateOfImportToNotificationHandler.cs" />
+    <Compile Include="StateOfExport\AddStateOfExportToNotificationHandler.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountryHandler.cs" />
+    <Compile Include="TransportRoute\GetTransportRouteSummaryForNotificationHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
   </ItemGroup>

@@ -71,8 +71,8 @@
     <Compile Include="Notification\PackagingInfo.cs" />
     <Compile Include="Notification\ChemicalComposition.cs" />
     <Compile Include="Notification\PackagingType.cs" />
-    <Compile Include="TransportRoute\IEnter.cs" />
-    <Compile Include="TransportRoute\IExit.cs" />
+    <Compile Include="TransportRoute\IEntryPoint.cs" />
+    <Compile Include="TransportRoute\IExitPoint.cs" />
     <Compile Include="Notification\OperationInfo.cs" />
     <Compile Include="Notification\OperationCode.cs" />
     <Compile Include="TransportRoute\IState.cs" />

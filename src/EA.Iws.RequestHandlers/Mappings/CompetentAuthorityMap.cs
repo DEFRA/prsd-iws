@@ -15,7 +15,7 @@
                 Abbreviation = source.Abbreviation,
                 Code = source.Code,
                 IsSystemUser = source.IsSystemUser,
-                Name = source.Name
+                Name = source.Name,
             };
         }
     }

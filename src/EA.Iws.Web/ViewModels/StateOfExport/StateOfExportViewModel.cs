@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.ViewModels.TransportRoute
+﻿namespace EA.Iws.Web.ViewModels.StateOfExport
 {
     using System;
     using System.ComponentModel.DataAnnotations;
