@@ -4,13 +4,13 @@
 
     public enum BusinessType
     {
-        [Display(Name = "Limited Company")]
+        [Display(Name = "Limited company")]
         LimitedCompany = 1,
 
-        [Display(Name = "Sole Trader")]
+        [Display(Name = "Sole trader")]
         SoleTrader = 2,
 
-        [Display(Name = "Parthership")]
+        [Display(Name = "Partnership")]
         Partnership = 3,
 
         [Display(Name = "Other")]

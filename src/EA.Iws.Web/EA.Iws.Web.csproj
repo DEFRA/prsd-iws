@@ -569,7 +569,6 @@
     <Compile Include="ViewModels\Producer\AddProducerViewModel.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
-    <Compile Include="ViewModels\Registration\OrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\InitialQuestionsViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessViewModel.cs" />
