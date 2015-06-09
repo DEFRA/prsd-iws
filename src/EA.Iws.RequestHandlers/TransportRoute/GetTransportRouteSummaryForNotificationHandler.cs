@@ -9,6 +9,7 @@
     using Prsd.Core.Mediator;
     using Requests.StateOfExport;
     using Requests.StateOfImport;
+    using Requests.TransitState;
     using Requests.TransportRoute;
 
     internal class GetTransportRouteSummaryForNotificationHandler : IRequestHandler<GetTransportRouteSummaryForNotification, TransportRouteData>

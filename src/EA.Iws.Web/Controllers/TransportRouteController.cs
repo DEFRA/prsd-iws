@@ -20,12 +20,20 @@
         [HttpGet]
         public async Task<ActionResult> Summary(Guid id)
         {
+            ViewBag.NotificationId = id;
+
             using (var client = apiClient())
             {
                 var summary = await client.SendAsync(User.GetAccessToken(), new GetTransportRouteSummaryForNotification(id));
 
                 return View(summary);
             }
-        } 
+        }
+
+        [HttpPost]
+        public ActionResult Summary(Guid id, FormCollection model)
+        {
+            return RedirectToAction("Info", "Shipment", new { id });
+        }
     }
 }

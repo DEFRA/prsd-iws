@@ -31,9 +31,7 @@
                 await this.BindCountryList(client);
             }
 
-            return View(new StateOfImportViewModel
-            {
-            });
+            return View(new StateOfImportViewModel());
         }
 
         [HttpPost]

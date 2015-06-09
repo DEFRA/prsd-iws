@@ -2,21 +2,29 @@
            
 <h3 class="heading-medium">State of export</h3>
 <div class="colored-header-bar"></div>
-<table>
-    <thead>
-        <tr>
-            <th>Country</th>
-            <th>Competent authority</th>
-            <th>Port or border crossing</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Html.DisplayFor(m => m.Country.Name)</td>
-            <td>@Html.DisplayFor(m => m.CompetentAuthority.Code) - @Html.DisplayFor(m => m.CompetentAuthority.Name)</td>
-            <td>@Html.DisplayFor(m => m.ExitPoint.Name)</td>
-            <th>@Html.ActionLink("Edit state of export", "EditStateOfExport", new { id = Guid.Empty })</th>
-        </tr>
-    </tbody>
-</table>
+@if (Model == null)
+{
+    <p>No state of import has been added.</p>
+    <p>@Html.ActionLink("Add state of export", "Add", "StateOfExport", new { id = ViewData["Id"] }, null)</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Competent authority</th>
+                <th>Port or border crossing</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(m => m.Country.Name)</td>
+                <td>@Html.DisplayFor(m => m.CompetentAuthority.Code) - @Html.DisplayFor(m => m.CompetentAuthority.Name)</td>
+                <td>@Html.DisplayFor(m => m.ExitPoint.Name)</td>
+                <th>@Html.ActionLink("Edit state of export", "Edit", "StateOfExport", new { id = ViewData["Id"] }, null)</th>
+            </tr>
+        </tbody>
+    </table>
+}

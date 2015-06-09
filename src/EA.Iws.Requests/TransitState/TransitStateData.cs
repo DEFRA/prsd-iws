@@ -1,7 +1,8 @@
-﻿namespace EA.Iws.Requests.TransportRoute
+﻿namespace EA.Iws.Requests.TransitState
 {
     using Registration;
     using Shared;
+    using TransportRoute;
 
     public class TransitStateData
     {

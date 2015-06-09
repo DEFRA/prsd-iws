@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using StateOfExport;
     using StateOfImport;
+    using TransitState;
 
     public class TransportRouteData
     {

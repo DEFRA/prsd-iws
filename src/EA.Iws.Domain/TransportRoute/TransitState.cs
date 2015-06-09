@@ -1,19 +1,54 @@
 namespace EA.Iws.Domain.TransportRoute
 {
+    using System;
+    using Prsd.Core;
     using Prsd.Core.Domain;
 
     public class TransitState : Entity, IState, IExitPoint, IEntryPoint
     {
-        public Country Country { get; protected set; }
+        public virtual Country Country { get; protected set; }
 
-        public CompetentAuthority CompetentAuthority { get; protected set; }
+        public virtual CompetentAuthority CompetentAuthority { get; protected set; }
 
-        public EntryOrExitPoint ExitPoint {get; protected set; }
+        public virtual EntryOrExitPoint ExitPoint {get; protected set; }
 
-        public EntryOrExitPoint EntryPoint { get; protected set; }
+        public virtual EntryOrExitPoint EntryPoint { get; protected set; }
+
+        public int OrdinalPosition { get; protected set; }
 
         protected TransitState()
         {
+        }
+
+        public TransitState(Country country, CompetentAuthority competentAuthority, EntryOrExitPoint entryPoint, EntryOrExitPoint exitPoint, int ordinalPosition)
+        {
+            Guard.ArgumentNotNull(country);
+            Guard.ArgumentNotNull(competentAuthority);
+            Guard.ArgumentNotNull(entryPoint);
+            Guard.ArgumentNotNull(exitPoint);
+            Guard.ArgumentNotZeroOrNegative(() => OrdinalPosition, ordinalPosition);
+
+            if (country.Id != competentAuthority.Country.Id 
+                || country.Id != entryPoint.Country.Id
+                || country.Id != exitPoint.Country.Id)
+            {
+                throw new InvalidOperationException(string.Format("Transit State Competent Authority, Entry and Exit Point must all have the same country. Competent Authority: {0}. Entry: {1}. Exit: {2}. Country: {3}",
+                    competentAuthority.Id,
+                    entryPoint.Id,
+                    exitPoint.Id,
+                    country.Name));
+            }
+
+            if (entryPoint.Id == exitPoint.Id)
+            {
+                throw new InvalidOperationException(string.Format("Transit State cannot have same Entry and Exit Point. Entry: {0} Exit: {1}.", entryPoint.Id, exitPoint.Id));
+            }
+
+            Country = country;
+            CompetentAuthority = competentAuthority;
+            ExitPoint = exitPoint;
+            EntryPoint = entryPoint;
+            OrdinalPosition = ordinalPosition;
         }
     }
 }

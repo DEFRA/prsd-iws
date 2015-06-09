@@ -1,0 +1,34 @@
+﻿@model EA.Iws.Web.ViewModels.TransitState.TransitStateViewModel
+
+@Html.HiddenFor(m => m.LoadNextSection)
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+    @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph("This is the country or state the waste travels through")
+    @Html.HiddenFor(m => m.CountryId)
+    @Html.Gds().DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries, new { id = "country-list", disabled = "true" })
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
+    @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph("Select the competent authority for the region of transit")
+    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
+    @Html.EditorFor(m => m.CompetentAuthorities)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.EntryPointId)">
+    @Html.Gds().LabelFor(m => m.EntryPointId, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph("Enter the specific port or border crossing the waste will enter the country or state through")
+    @Html.ValidationMessageFor(m => m.EntryPointId)
+    @Html.Gds().DropDownListFor(m => m.EntryPointId, (SelectList)ViewBag.EntryOrExitPoints, string.Empty)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
+    @Html.Gds().LabelFor(m => m.ExitPointId, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph("Enter the specific port or border crossing the waste will leave the country or state from")
+    @Html.ValidationMessageFor(m => m.ExitPointId)
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, (SelectList)ViewBag.EntryOrExitPoints, string.Empty)
+</div>
+
+<div class="form-group">
+    <button class="button" type="submit" value="submit" name="submit">Continue</button>
+</div>

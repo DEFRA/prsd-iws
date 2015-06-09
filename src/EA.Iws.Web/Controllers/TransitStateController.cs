@@ -9,16 +9,16 @@
     using Infrastructure;
     using Prsd.Core.Web.ApiClient;
     using Requests.Shared;
-    using Requests.StateOfExport;
+    using Requests.TransitState;
     using Requests.TransportRoute;
     using ViewModels.Shared;
-    using ViewModels.StateOfExport;
+    using ViewModels.TransitState;
 
-    public class StateOfExportController : Controller
+    public class TransitStateController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
 
-        public StateOfExportController(Func<IIwsClient> apiClient)
+        public TransitStateController(Func<IIwsClient> apiClient)
         {
             this.apiClient = apiClient;
         }
@@ -28,38 +28,52 @@
         {
             using (var client = apiClient())
             {
-                await this.BindCountryList(client);
+                await this.BindCountryList(client, false);
             }
 
-            return View(new StateOfExportViewModel
-            {
-                CountryId = Guid.Parse(((SelectList)ViewBag.Countries).SelectedValue.ToString())
-            });
-        }
+            return View(new TransitStateViewModel());
+        } 
 
         [HttpPost]
-        public async Task<ActionResult> Add(Guid id, StateOfExportViewModel model, string selectCountry, string submit)
+        public async Task<ActionResult> Add(Guid id, TransitStateViewModel model, string selectCountry, string submit)
         {
-            await this.BindCountryList(apiClient);
+            await this.BindCountryList(apiClient, false);
 
-            if (!ModelState.IsValid && !string.IsNullOrWhiteSpace(submit))
+            if (!ModelState.IsValid)
             {
-                await BindExitOrEntryPointSelectList(apiClient, model.CountryId);
-                return View(model);
+                if (model.CountryId == null)
+                {
+                    return View(model);
+                }
+                
+                if (!string.IsNullOrWhiteSpace(submit))
+                {
+                    await BindExitOrEntryPointSelectList(apiClient, (Guid)model.CountryId);
+                    return View(model);
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(selectCountry))
             {
-                return await StateOfExportCountrySelectedPostback(id, model);
+                return await CountrySelectedPostback(id, model);
+            }
+
+            if (!model.CountryId.HasValue || !model.EntryPointId.HasValue || !model.ExitPointId.HasValue)
+            {
+                return View(model);
             }
 
             try
             {
                 using (var client = apiClient())
                 {
-                    await this.BindExitOrEntryPointSelectList(apiClient, model.CountryId);
+                    await this.BindExitOrEntryPointSelectList(apiClient, model.CountryId.Value);
                     await client.SendAsync(User.GetAccessToken(),
-                        new AddStateOfExportToNotification(id, model.CountryId, (Guid)model.EntryOrExitPointId, model.CompetentAuthorities.SelectedValue));
+                       new AddTransitStateToNotification(id, 
+                           model.CountryId.Value, 
+                           model.EntryPointId.Value, 
+                           model.ExitPointId.Value, 
+                           model.CompetentAuthorities.SelectedValue));
                 }
             }
             catch (ApiException)
@@ -68,20 +82,27 @@
                 return View(model);
             }
 
-            return RedirectToAction("Add", "StateOfImport", new { id });
+            return RedirectToAction("Summary", "TransportRoute", new { id });
         }
 
-        private async Task<ActionResult> StateOfExportCountrySelectedPostback(Guid id, StateOfExportViewModel model)
+        private async Task<ActionResult> CountrySelectedPostback(Guid id, TransitStateViewModel model)
         {
             RemoveModelStateErrors();
+
+            if (!model.CountryId.HasValue)
+            {
+                ModelState.AddModelError("CountryId", "Please select a country.");
+                return View(model);
+            }
+
             using (var client = apiClient())
             {
-                var competentAuthorities = await client.SendAsync(new GetCompetentAuthoritiesByCountry(model.CountryId));
+                var competentAuthorities = await client.SendAsync(new GetCompetentAuthoritiesByCountry(model.CountryId.Value));
                 var radioButtons = competentAuthorities.Select(ca => new KeyValuePair<string, Guid>(string.Format("{0} - {1}", ca.Code, ca.Name), ca.Id));
                 model.CompetentAuthorities = new StringGuidRadioButtons(radioButtons);
                 model.LoadNextSection = true;
 
-                await BindExitOrEntryPointSelectList(client, model.CountryId);
+                await BindExitOrEntryPointSelectList(client, (Guid)model.CountryId);
             }
 
             return View(model);

@@ -115,6 +115,7 @@
     <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotification.cs" />
     <Compile Include="StateOfImport\AddStateOfImportToNotification.cs" />
+    <Compile Include="TransitState\AddTransitStateToNotification.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
     <Compile Include="WasteType\ChemicalCompositionType.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
@@ -127,7 +128,7 @@
     <Compile Include="TransportRoute\GetTransportRouteSummaryForNotification.cs" />
     <Compile Include="StateOfExport\StateOfExportData.cs" />
     <Compile Include="StateOfImport\StateOfImportData.cs" />
-    <Compile Include="TransportRoute\TransitStateData.cs" />
+    <Compile Include="TransitState\TransitStateData.cs" />
     <Compile Include="TransportRoute\TransportRouteData.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,39 @@
+﻿@model EA.Iws.Web.ViewModels.TransitState.TransitStateViewModel
+@{
+    ViewBag.Title = "Transit State";
+}
+<h2 class="heading-large">Where is the waste traveling through?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    if (!Model.LoadNextSection)
+    {
+        @Html.Partial("CountrySelector", Model)
+        @section scripts{
+            <script>
+                (function ($) {
+                    $(function () {
+                        $('#CountryId').selectToAutocomplete();
+                    });
+                })(jQuery);
+            </script>
+        }
+    }
+    else
+    {
+        @Html.Partial("OtherDetailsSelector", Model)
+        @section scripts{
+            <script>
+                (function ($) {
+                    $(function () {
+                        $('#EntryPointId').selectToAutocomplete();
+                        $('#ExitPointId').selectToAutocomplete();
+                    });
+                })(jQuery);
+            </script>
+        }
+    }
+}

@@ -1,36 +1,38 @@
-﻿@model IList<EA.Iws.Requests.TransportRoute.TransitStateData>
+﻿@model IList<EA.Iws.Requests.TransitState.TransitStateData>
 
 <h3 class="heading-medium">Transit states</h3>
 <div class="colored-header-bar"></div>
 @if (Model == null || Model.Count == 0)
 {
     <p>No transit states have been added.</p>
-    <p>@Html.ActionLink("Add a transit state", "StateOfImport", new { id = Guid.Empty })</p>
+    <p>@Html.ActionLink("Add a transit state", "Add", "TransitState", new { id = ViewData["Id"] }, null)</p>
 }
 else
 {
     <table>
         <thead>
-            <tr>
-                <th>Country</th>
-                <th>Competent authority</th>
-                <th>Entry port or border crossing</th>
-                <th>Exit port or border crossing</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Order</th>
+            <th>Country</th>
+            <th>Competent authority</th>
+            <th>Entry port or border crossing</th>
+            <th>Exit port or border crossing</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <td>@Html.Display(Model[i].Country.Name)</td>
-                    <td>@Html.Display(Model[i].CompetentAuthority.Name)</td>
-                    <td>@Html.Display(Model[i].EntryPoint.Name)</td>
-                    <td>@Html.Display(Model[i].ExitPoint.Name)</td>
-                    <td></td>
-                    <th>@Html.ActionLink("Edit transit state", "EditStateOfExport", new { id = Guid.Empty })</th>
-                </tr>
-            }
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Html.Raw(Model[i].OrdinalPosition)</td>
+                <td>@Html.Raw(Model[i].Country.Name)</td>
+                <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
+                <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
+                <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
+                <th>@Html.ActionLink("Edit transit state", "Edit", "TransitState", new { id = ViewData["Id"] }, null)</th>
+            </tr>
+        }
         </tbody>
     </table>
+    <p style="margin-top: 10px;">@Html.ActionLink("Add another transit state", "Add", "TransitState", new { id = ViewData["Id"] }, null)</p>
 }

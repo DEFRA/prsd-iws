@@ -47,7 +47,7 @@
                         new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling,
                             model.SpecialHandlingDetails));
             }
-            return RedirectToAction("Info", new { id = model.NotificationId });
+            return RedirectToAction("Add", "StateOfExport", new { id = model.NotificationId });
         }
 
         [HttpGet]

@@ -5,10 +5,15 @@
 
 <h2 class="heading-large">Transport route</h2>
 
-@Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary())
+@Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary { { "Id", ViewBag.NotificationId } })
 
-@Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary())
+@Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary { { "Id", ViewBag.NotificationId } })
 
-@Html.Partial("StateOfImportSummary", Model.StateOfImportData, new ViewDataDictionary())
+@Html.Partial("StateOfImportSummary", Model.StateOfImportData, new ViewDataDictionary{{"Id", ViewBag.NotificationId}})
 
-<div class="form-group" style="margin-top: 25px;"><button class="button" type="submit">Continue</button></div>
+@using (Html.BeginForm())
+{
+    <div class="form-group" style="margin-top: 25px;">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

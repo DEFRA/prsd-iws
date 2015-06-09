@@ -7,6 +7,7 @@
     using Prsd.Core.Mapper;
     using Requests.Registration;
     using Requests.Shared;
+    using Requests.TransitState;
     using Requests.TransportRoute;
 
     internal class TransitStateMap : IMap<TransitState, TransitStateData>,
@@ -38,7 +39,7 @@
                 Country = countryMap.Map(source.Country),
                 EntryPoint = entryOrExitPointMap.Map(source.EntryPoint),
                 ExitPoint = entryOrExitPointMap.Map(source.ExitPoint),
-                OrdinalPosition = 0
+                OrdinalPosition = source.OrdinalPosition
             };
         }
 
