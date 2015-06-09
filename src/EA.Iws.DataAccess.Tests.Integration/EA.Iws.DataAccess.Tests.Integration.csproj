@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15160.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15160-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -77,10 +81,6 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
-      <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
-      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

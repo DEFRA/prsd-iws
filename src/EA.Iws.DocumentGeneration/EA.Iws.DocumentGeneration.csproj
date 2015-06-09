@@ -36,6 +36,10 @@
       <Private>True</Private>
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15160.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15160-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -70,10 +74,6 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
-      <Project>{d38ea5ef-f9f5-480c-ae0a-214122559426}</Project>
-      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

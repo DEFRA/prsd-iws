@@ -63,6 +63,18 @@
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15160.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Autofac.1.0.15160-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EA.Prsd.Core.Autofac, Version=1.0.15160.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Autofac.1.0.15160-develop2\lib\net452\EA.Prsd.Core.Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EA.Prsd.Core.Web, Version=1.0.15160.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Web.1.0.15160-develop2\lib\net452\EA.Prsd.Core.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
@@ -187,6 +199,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Thinktecture.IdentityModel.Client.Net45, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Thinktecture.IdentityModel.Client.4.0.1\lib\net45\Thinktecture.IdentityModel.Client.Net45.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Thinktecture.IdentityModel.Core, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Thinktecture.IdentityModel.Core.1.4.0\lib\net45\Thinktecture.IdentityModel.Core.dll</HintPath>
       <Private>True</Private>
@@ -278,18 +294,6 @@
     <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
       <Project>{87fbb5cc-a732-4363-a158-39dbf3707407}</Project>
       <Name>EA.Iws.Requests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Prsd.Core.Autofac\EA.Prsd.Core.Autofac.csproj">
-      <Project>{333C65B9-EBB6-4D04-921E-89094F80E2E3}</Project>
-      <Name>EA.Prsd.Core.Autofac</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Prsd.Core.Web\EA.Prsd.Core.Web.csproj">
-      <Project>{67EB0694-6149-4A6F-89DE-144F24802C7F}</Project>
-      <Name>EA.Prsd.Core.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
-      <Project>{D38EA5EF-F9F5-480C-AE0A-214122559426}</Project>
-      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

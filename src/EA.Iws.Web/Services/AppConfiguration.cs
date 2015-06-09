@@ -19,5 +19,7 @@
         public string ApiUrl { get; set; }
 
         public string ApiSecret { get; set; }
+
+        public string ApiClientId { get; set; }
     }
 }

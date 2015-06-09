@@ -3,7 +3,7 @@
     using Infrastructure;
     using Microsoft.Owin;
     using Owin;
-    using Prsd.Core.Web.Owin;
+    using Prsd.Core.Web.Mvc.Owin;
     using Services;
 
     public partial class Startup

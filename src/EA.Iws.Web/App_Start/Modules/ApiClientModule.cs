@@ -20,7 +20,7 @@
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
-                return new OAuthClient(config.ApiUrl, config.ApiSecret);
+                return new OAuthClient(config.ApiUrl, config.ApiClientId, config.ApiSecret);
             }).As<IOAuthClient>();
         }
     }
