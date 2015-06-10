@@ -89,5 +89,22 @@
         {
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
         }
+
+        private string reasonForExport;
+        public string ReasonForExport
+        {
+            get
+            {
+                return reasonForExport;
+            }
+            set
+            {
+                if (value != null && value.Length > 70)
+                {
+                    throw new InvalidOperationException(string.Format("Reason for export cannot be greater than 70 characters for notification {0}", Id));
+                }
+                reasonForExport = value;
+            }
+        }
     }
 }

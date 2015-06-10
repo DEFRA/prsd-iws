@@ -15,7 +15,7 @@
         <fieldset>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.ProcessDescription)">
                 @Html.Gds().ValidationMessageFor(m => m.ProcessDescription)<br />
-                @Html.TextAreaFor(m => m.ProcessDescription, new { @id = "other-label", @class = "text-area" })
+                @Html.TextAreaFor(m => m.ProcessDescription, new { @id = "other-label", @class = "text-area full-width" })
             </div>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.IsDocumentAttached)">
                 <fieldset>

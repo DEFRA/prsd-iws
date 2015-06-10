@@ -471,6 +471,9 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 }
 
 .text-area{
-    width: $full-width;
     height: 200px;
+}
+
+.full-width{
+    width: $full-width;
 }

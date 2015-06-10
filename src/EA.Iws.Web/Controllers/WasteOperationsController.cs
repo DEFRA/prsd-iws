@@ -100,7 +100,7 @@
                         client.SendAsync(User.GetAccessToken(),
                             new AddRecoveryCodes(selectedRecoveryCodes, model.NotificationId));
 
-                    return RedirectToAction("Add", "Carrier", new { id = model.NotificationId});
+                    return RedirectToAction("ReasonForExport", "NotificationApplication", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

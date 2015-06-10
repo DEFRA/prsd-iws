@@ -527,6 +527,7 @@
     <Content Include="Views\TransportRoute\TransitStatesSummary.cshtml" />
     <Content Include="Views\StateOfImport\Add.cshtml" />
     <Content Include="Views\TransitState\Add.cshtml" />
+    <Content Include="Views\NotificationApplication\ReasonForExport.cshtml" />
     <Content Include="Views\TransitState\CountrySelector.cshtml" />
     <Content Include="Views\TransitState\OtherDetailsSelector.cshtml" />
     <None Include="Web.Debug.config">
@@ -601,6 +602,7 @@
     <Compile Include="ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\NotificationOverviewViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\ReasonForExportViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="ViewModels\WasteOperations\OperationCodesViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />

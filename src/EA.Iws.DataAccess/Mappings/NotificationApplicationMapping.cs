@@ -66,6 +66,9 @@
                 .IsRequired()
                 .HasMaxLength(50);
 
+            Property(x => x.ReasonForExport)
+            .HasMaxLength(70);
+
             Property(x => x.CreatedDate).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
 
             HasMany(

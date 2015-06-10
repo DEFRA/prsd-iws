@@ -29,6 +29,19 @@
             Assert.Equal(expected, notification.NotificationNumber);
         }
 
+        [Fact]
+        public void SetReasonForExport_ExceedMaxCharacters_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            const string longString = "abcdefghijklmnopqrstuvwxyxabcdefghijklmnopqrstuvwxyxabcdefghijklmnopqrs";
+
+            Action setReasonForExport = () => notification.ReasonForExport = longString;
+
+            Assert.Throws<InvalidOperationException>(setReasonForExport);
+        }
+
         private static UKCompetentAuthority GetCompetentAuthority(string country)
         {
             if (country == England)
