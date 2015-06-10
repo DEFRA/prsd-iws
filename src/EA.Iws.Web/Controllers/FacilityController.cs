@@ -187,7 +187,7 @@
                 return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
             }
 
-            return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
+            return RedirectToAction("OperationCodes", "WasteOperations", new { id = model.NotificationId });
         }
 
         [HttpGet]
