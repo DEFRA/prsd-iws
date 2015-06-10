@@ -75,6 +75,7 @@
     <Compile Include="Notification\NotificationProducerTests.cs" />
     <Compile Include="Notification\NotificationShipmentTests.cs" />
     <Compile Include="Notification\NotificationTransportRouteTests.cs" />
+    <Compile Include="Notification\NotificationWasteTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateOfExportTests.cs" />
   </ItemGroup>

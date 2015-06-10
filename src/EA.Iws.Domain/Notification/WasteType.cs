@@ -87,7 +87,7 @@
             }
 
             var physicalCharacteristicInfo = new PhysicalCharacteristicsInfo(physicalCharacteristic);
-            if (!string.IsNullOrEmpty(otherDescription))
+            if (!string.IsNullOrEmpty(otherDescription) && physicalCharacteristic == PhysicalCharacteristicType.Other)
             {
                 physicalCharacteristicInfo.OtherDescription = otherDescription;
             }
