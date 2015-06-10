@@ -15,9 +15,9 @@
                 UKCompetentAuthority.England, 0);
 
             var producer1 = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateEmptyAddress(), ObjectFactory.CreateEmptyContact());
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
             var producer2 = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateEmptyAddress(), ObjectFactory.CreateEmptyContact());
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
 
             EntityHelper.SetEntityIds(producer1, producer2);
 
@@ -34,7 +34,7 @@
                 UKCompetentAuthority.England, 0);
 
             var producer = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateEmptyAddress(), ObjectFactory.CreateEmptyContact());
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
             EntityHelper.SetEntityId(producer, new Guid("{D65D91BA-FA77-47F6-ACF5-B1A405DEE187}"));
 
             var badId = new Guid("{5DF206F6-4116-4EEC-949A-0FC71FE609C1}");
@@ -64,13 +64,13 @@
             var producerId = new Guid("{D65D91BA-FA77-47F6-ACF5-B1A405DEE187}");
 
             var producer = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateEmptyAddress(), ObjectFactory.CreateEmptyContact());
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
             EntityHelper.SetEntityId(producer, producerId);
 
             var updateProducer = notification.Producers.Single(p => p.Id == producerId);
-            var newAddress = new Address("new building", string.Empty, string.Empty, string.Empty, string.Empty,
+            var newAddress = new Address("new building", "address1", string.Empty, "town", string.Empty,
                 string.Empty,
-                string.Empty);
+                "country");
 
             updateProducer.Address = newAddress;
 

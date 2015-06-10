@@ -18,9 +18,9 @@ namespace EA.Iws.Domain.TransportRoute
 
         public StateOfExport(Country country, CompetentAuthority competentAuthority, EntryOrExitPoint exitPoint)
         {
-            Guard.ArgumentNotNull(country);
-            Guard.ArgumentNotNull(competentAuthority);
-            Guard.ArgumentNotNull(exitPoint);
+            Guard.ArgumentNotNull(() => country, country);
+            Guard.ArgumentNotNull(() => competentAuthority, competentAuthority);
+            Guard.ArgumentNotNull(() => exitPoint, exitPoint);
 
             if (country.Id != competentAuthority.Country.Id ||
                 country.Id != exitPoint.Country.Id)

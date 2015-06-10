@@ -10,10 +10,10 @@
             string email,
             string fax = null)
         {
-            Guard.ArgumentNotNull(firstName);
-            Guard.ArgumentNotNull(lastName);
-            Guard.ArgumentNotNull(telephone);
-            Guard.ArgumentNotNull(email);
+            Guard.ArgumentNotNull(() => firstName, firstName);
+            Guard.ArgumentNotNull(() => lastName, lastName);
+            Guard.ArgumentNotNull(() => telephone, telephone);
+            Guard.ArgumentNotNull(() => email, email);
 
             FirstName = firstName;
             LastName = lastName;

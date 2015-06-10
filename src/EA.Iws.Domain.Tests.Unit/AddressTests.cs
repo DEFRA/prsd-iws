@@ -8,7 +8,8 @@
         [Fact]
         public void IsUkAddress()
         {
-            var addressUk = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, "postcode", "United Kingdom");
+            var addressUk = new Address("building", "address1", string.Empty, "town", string.Empty, "postcode",
+                "United Kingdom");
 
             Assert.True(addressUk.IsUkAddress);
         }
@@ -16,7 +17,7 @@
         [Fact]
         public void IsNotUkAddress()
         {
-            var addressNonUk = new Address(string.Empty, string.Empty, string.Empty, String.Empty, string.Empty, string.Empty, "Thailand");
+            var addressNonUk = new Address("building", "address1", string.Empty, "town", string.Empty, string.Empty, "Thailand");
 
             Assert.False(addressNonUk.IsUkAddress);
         }

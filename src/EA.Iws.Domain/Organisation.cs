@@ -7,9 +7,9 @@
     {
         public Organisation(string name, Address address, string type, string registrationNumber = null)
         {
-            Guard.ArgumentNotNull(name);
-            Guard.ArgumentNotNull(address);
-            Guard.ArgumentNotNull(type);
+            Guard.ArgumentNotNull(() => name, name);
+            Guard.ArgumentNotNull(() => address, address);
+            Guard.ArgumentNotNull(() => type, type);
 
             Name = name;
             Address = address;

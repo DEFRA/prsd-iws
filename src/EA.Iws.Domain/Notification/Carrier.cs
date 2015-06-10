@@ -25,7 +25,7 @@
             get { return business; }
             set
             {
-                Guard.ArgumentNotNull(value);
+                Guard.ArgumentNotNull(() => value, value);
                 business = value;
             }
         }
@@ -35,7 +35,7 @@
             get { return address; }
             set
             {
-                Guard.ArgumentNotNull(value);
+                Guard.ArgumentNotNull(() => value, value);
                 address = value;
             }
         }
@@ -45,7 +45,7 @@
             get { return contact; }
             set
             {
-                Guard.ArgumentNotNull(value);
+                Guard.ArgumentNotNull(() => value, value);
                 contact = value;
             }
         }

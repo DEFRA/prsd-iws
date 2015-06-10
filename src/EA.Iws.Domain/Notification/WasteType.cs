@@ -17,11 +17,11 @@
         {
             ChemicalCompositionType = chemicalComposition;
 
-            Guard.ArgumentNotNull(chemicalCompositionDescription);
+            Guard.ArgumentNotNull(() => chemicalCompositionDescription, chemicalCompositionDescription);
 
             if (chemicalComposition == ChemicalComposition.Other)
             {
-                Guard.ArgumentNotNull(chemicalCompositionName);
+                Guard.ArgumentNotNull(() => chemicalCompositionName, chemicalCompositionName);
                 ChemicalCompositionName = chemicalCompositionName;
             }
 
@@ -76,7 +76,7 @@
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other || ChemicalCompositionType == ChemicalComposition.Wood)
                 {
-                    Guard.ArgumentNotNull(value);
+                    Guard.ArgumentNotNull(() => value, value);
                     chemicalCompositionDescription = value;
                 }
                 else if (!string.IsNullOrWhiteSpace(value))
@@ -97,7 +97,7 @@
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other)
                 {
-                    Guard.ArgumentNotNull(value);
+                    Guard.ArgumentNotNull(() => value, value);
                     chemicalCompositionName = value;
                 }
                 else if (!string.IsNullOrWhiteSpace(value))

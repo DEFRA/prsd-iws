@@ -22,10 +22,10 @@ namespace EA.Iws.Domain.TransportRoute
 
         public TransitState(Country country, CompetentAuthority competentAuthority, EntryOrExitPoint entryPoint, EntryOrExitPoint exitPoint, int ordinalPosition)
         {
-            Guard.ArgumentNotNull(country);
-            Guard.ArgumentNotNull(competentAuthority);
-            Guard.ArgumentNotNull(entryPoint);
-            Guard.ArgumentNotNull(exitPoint);
+            Guard.ArgumentNotNull(() => country, country);
+            Guard.ArgumentNotNull(() => competentAuthority, competentAuthority);
+            Guard.ArgumentNotNull(() => entryPoint, entryPoint);
+            Guard.ArgumentNotNull(() => exitPoint, exitPoint);
             Guard.ArgumentNotZeroOrNegative(() => OrdinalPosition, ordinalPosition);
 
             if (country.Id != competentAuthority.Country.Id 

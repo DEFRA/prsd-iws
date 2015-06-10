@@ -8,10 +8,10 @@
         public Address(string building, string address1, string address2, string townOrCity, string region,
             string postalCode, string country)
         {
-            Guard.ArgumentNotNull(building);
-            Guard.ArgumentNotNull(townOrCity);
-            Guard.ArgumentNotNull(country);
-            Guard.ArgumentNotNull(address1);
+            Guard.ArgumentNotNullOrEmpty(() => building, building);
+            Guard.ArgumentNotNullOrEmpty(() => townOrCity, townOrCity);
+            Guard.ArgumentNotNullOrEmpty(() => country, country);
+            Guard.ArgumentNotNullOrEmpty(() => address1, address1);
 
             Country = country;
 

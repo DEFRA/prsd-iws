@@ -9,7 +9,7 @@
     {
         public void AddStateOfExportToNotification(StateOfExport stateOfExport)
         {
-            Guard.ArgumentNotNull(stateOfExport);
+            Guard.ArgumentNotNull(() => stateOfExport, stateOfExport);
 
             if (this.StateOfExport != null)
             {
@@ -23,7 +23,7 @@
 
         public void AddStateOfImportToNotification(StateOfImport stateOfImport)
         {
-            Guard.ArgumentNotNull(stateOfImport);
+            Guard.ArgumentNotNull(() => stateOfImport, stateOfImport);
 
             if (this.StateOfImport != null)
             {
@@ -44,7 +44,7 @@
 
         public void AddTransitStateToNotification(TransitState transitState)
         {
-            Guard.ArgumentNotNull(transitState);
+            Guard.ArgumentNotNull(() => transitState, transitState);
 
             if (TransitStatesCollection.Any(ts => ts.CompetentAuthority == transitState.CompetentAuthority))
             {

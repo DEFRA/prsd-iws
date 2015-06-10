@@ -9,8 +9,8 @@
 
         public Business(string name, string type, string registrationNumber, string additionalRegistrationNumber)
         {
-            Guard.ArgumentNotNull(name);
-            Guard.ArgumentNotNull(type);
+            Guard.ArgumentNotNull(() => name, name);
+            Guard.ArgumentNotNull(() => type, type);
 
             Name = name;
             Type = type;
@@ -20,7 +20,7 @@
 
         private Business(string name, BusinessType type, string registrationNumber, string additionalRegistrationNumber, string otherDescription)
         {
-            Guard.ArgumentNotNull(name);
+            Guard.ArgumentNotNull(() => name, name);
 
             Name = name;
             Type = type.DisplayName;

@@ -14,7 +14,7 @@
                 UKCompetentAuthority.England, 0);
 
             var business = ObjectFactory.CreateEmptyBusiness();
-            var address = ObjectFactory.CreateEmptyAddress();
+            var address = ObjectFactory.CreateDefaultAddress();
             var contact = ObjectFactory.CreateEmptyContact();
 
             notification.AddExporter(business, address, contact);
@@ -29,7 +29,7 @@
                 UKCompetentAuthority.England, 0);
 
             var business = ObjectFactory.CreateEmptyBusiness();
-            var address = ObjectFactory.CreateEmptyAddress();
+            var address = ObjectFactory.CreateDefaultAddress();
             var contact = ObjectFactory.CreateEmptyContact();
 
             notification.AddExporter(business, address, contact);
@@ -55,7 +55,7 @@
                 UKCompetentAuthority.England, 0);
 
             var business = ObjectFactory.CreateEmptyBusiness();
-            var address = ObjectFactory.CreateEmptyAddress();
+            var address = ObjectFactory.CreateDefaultAddress();
             var contact = ObjectFactory.CreateEmptyContact();
 
             notification.AddExporter(business, address, contact);

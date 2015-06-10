@@ -11,11 +11,11 @@
 
         public User(string id, string firstName, string surname, string phoneNumber, string email)
         {
-            Guard.ArgumentNotNull(firstName);
-            Guard.ArgumentNotNull(surname);
-            Guard.ArgumentNotNull(phoneNumber);
-            Guard.ArgumentNotNull(email);
-            Guard.ArgumentNotNull(id);
+            Guard.ArgumentNotNull(() => firstName, firstName);
+            Guard.ArgumentNotNull(() => surname, surname);
+            Guard.ArgumentNotNull(() => phoneNumber, phoneNumber);
+            Guard.ArgumentNotNull(() => email, email);
+            Guard.ArgumentNotNull(() => id, id);
 
             FirstName = firstName;
             Surname = surname;
@@ -38,7 +38,7 @@
 
         public void LinkToOrganisation(Organisation organisation)
         {
-            Guard.ArgumentNotNull(organisation);
+            Guard.ArgumentNotNull(() => organisation, organisation);
 
             if (Organisation != null)
             {

@@ -30,8 +30,8 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            var address = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                string.Empty);
+            var address = new Address("building", "address1", string.Empty, "town", string.Empty, string.Empty,
+                "country");
 
             var business = new Business(string.Empty, String.Empty, String.Empty, string.Empty);
 
@@ -43,9 +43,9 @@
             await context.SaveChangesAsync();
 
             var updateProducer = notification.Producers.Single(p => p.Id == producer.Id);
-            var newAddress = new Address("new building", string.Empty, string.Empty, string.Empty, string.Empty,
+            var newAddress = new Address("new building", "address1", string.Empty, "town", string.Empty,
                 string.Empty,
-                string.Empty);
+                "country");
 
             updateProducer.Address = newAddress;
 

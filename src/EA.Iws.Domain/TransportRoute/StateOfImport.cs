@@ -18,9 +18,9 @@
 
         public StateOfImport(Country country, CompetentAuthority competentAuthority, EntryOrExitPoint entryPoint)
         {
-            Guard.ArgumentNotNull(country);
-            Guard.ArgumentNotNull(competentAuthority);
-            Guard.ArgumentNotNull(entryPoint);
+            Guard.ArgumentNotNull(() => country, country);
+            Guard.ArgumentNotNull(() => competentAuthority, competentAuthority);
+            Guard.ArgumentNotNull(() => entryPoint, entryPoint);
 
             if (country.Id != competentAuthority.Country.Id ||
                 country.Id != entryPoint.Country.Id)
