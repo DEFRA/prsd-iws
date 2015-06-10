@@ -17,6 +17,14 @@
             ChemicalCompositionType = chemicalComposition;
 
             WasteCompositionCollection = new List<WasteComposition>();
+            PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
+        }
+
+        protected virtual ICollection<PhysicalCharacteristicsInfo> PhysicalCharacteristicsCollection { get; set; }
+
+        public IEnumerable<PhysicalCharacteristicsInfo> PhysicalCharacteristics
+        {
+            get { return PhysicalCharacteristicsCollection.ToSafeIEnumerable(); }
         }
 
         public ChemicalComposition ChemicalCompositionType { get; internal set; }
@@ -70,5 +78,24 @@
             }
             WasteCompositionCollection.Add(wasteComposition);
         }
+
+        public void AddPhysicalCharacteristic(PhysicalCharacteristicType physicalCharacteristic, string otherDescription = null)
+        {
+            if (PhysicalCharacteristicsCollection == null)
+            {
+                throw new InvalidOperationException("Physical characteristics collection can not be null");
+            }
+
+            var physicalCharacteristicInfo = new PhysicalCharacteristicsInfo(physicalCharacteristic);
+            if (!string.IsNullOrEmpty(otherDescription))
+            {
+                physicalCharacteristicInfo.OtherDescription = otherDescription;
+            }
+            PhysicalCharacteristicsCollection.Add(physicalCharacteristicInfo);
+        }
+
+        public string WasteGenerationProcess { get; internal set; }
+
+        public bool IsDocumentAttached { get; internal set; }
     }
 }

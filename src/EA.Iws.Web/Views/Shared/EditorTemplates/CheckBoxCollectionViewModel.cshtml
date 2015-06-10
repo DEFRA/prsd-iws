@@ -2,21 +2,20 @@
 
 @if (Model != null)
 {
-    <fieldset>
-        @for (int i = 0; i < Model.PossibleValues.Count; i++)
-        {
-            MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleValues[i]);
+    for (int i = 0; i < Model.PossibleValues.Count; i++)
+     {
+         MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleValues[i]);
 
-            <label for="@idForThisCheckBox" class="block-label">
-                @Html.CheckBoxFor(m => m.PossibleValues[i].Selected, new { id = idForThisCheckBox })
-                @Html.HiddenFor(m => m.PossibleValues[i].Text)
-                @Html.HiddenFor(m => m.PossibleValues[i].Value)
-                @if (Model.ShowEnumValue)
-                { 
-                   @Html.DisplayFor(m => m.PossibleValues[i].Value) @Html.Raw(" - ")
-                }
-                @Html.DisplayFor(m => m.PossibleValues[i].Text)
-            </label>
-        }
-    </fieldset>
+         <label for="@idForThisCheckBox" class="block-label">
+             @Html.CheckBoxFor(m => m.PossibleValues[i].Selected, new { id = idForThisCheckBox })
+             @Html.HiddenFor(m => m.PossibleValues[i].Text)
+             @Html.HiddenFor(m => m.PossibleValues[i].Value)
+             @if (Model.ShowEnumValue)
+             {
+                 @Html.DisplayFor(m => m.PossibleValues[i].Value)
+                 @Html.Raw(" - ")
+             }
+             @Html.DisplayFor(m => m.PossibleValues[i].Text)
+         </label>
+     }
 }

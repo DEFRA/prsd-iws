@@ -466,3 +466,8 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 .link-submit:hover {
     color: #2E8ACA;
 }
+
+.text-area{
+    width: $full-width;
+    height: 200px;
+}

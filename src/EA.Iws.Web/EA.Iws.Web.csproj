@@ -517,6 +517,8 @@
     <Content Include="Views\Shared\EditorTemplates\StringGuidRadioButtons.cshtml" />
     <Content Include="Views\WasteOperations\AddDisposalCodes.cshtml" />
     <Content Include="Views\WasteOperations\AddRecoveryCodes.cshtml" />
+    <Content Include="Views\WasteType\PhysicalCharacteristics.cshtml" />
+    <Content Include="Views\WasteType\WasteGenerationProcess.cshtml" />
     <Content Include="Views\Shared\_OperationCodes.cshtml" />
     <Content Include="Views\Shared\_SelectAllCheckBoxScript.cshtml" />
     <Content Include="Views\TransportRoute\Summary.cshtml" />
@@ -621,6 +623,8 @@
     <Compile Include="ViewModels\StateOfImport\StateOfImportViewModel.cs" />
     <Compile Include="ViewModels\WasteType\ChemicalCompositionViewModel.cs" />
     <Compile Include="ViewModels\StateOfExport\StateOfExportViewModel.cs" />
+    <Compile Include="ViewModels\WasteType\PhysicalCharacteristicsViewModel.cs" />
+    <Compile Include="ViewModels\WasteType\WasteGenerationProcessViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>

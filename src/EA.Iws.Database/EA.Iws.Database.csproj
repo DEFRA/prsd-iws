@@ -67,6 +67,8 @@
     <Content Include="scripts\Update\Sprint9\04062015-1100-Add-Competent-Authority-partial-data.sql" />
     <Content Include="scripts\Update\Sprint9\20150605-110500-Add-other-description-column.sql" />
     <Content Include="scripts\Update\Sprint9\04062015-1000-Add-entryorexitpoint-Change-Competent-Authority.sql" />
+    <Content Include="scripts\Update\Sprint9\20150609-152223-Add-PhysicalCharacteristicsInfo-Table.sql" />
+    <Content Include="scripts\Update\Sprint9\20150609-152127-Add-WasteGenerationProcess-To-WasteType-Table.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

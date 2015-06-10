@@ -15,9 +15,16 @@
             Property(x => x.ChemicalCompositionDescription).IsOptional().HasMaxLength(1024);
 
             HasMany(
-               ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<WasteComposition>>("WasteCompositionCollection"))
-               .WithRequired()
-               .Map(m => m.MapKey("WasteTypeId"));
+                ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<WasteComposition>>(
+                    "WasteCompositionCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("WasteTypeId"));
+
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<PhysicalCharacteristicsInfo>>(
+                    "PhysicalCharacteristicsCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("WasteTypeId"));
         }
     }
 }

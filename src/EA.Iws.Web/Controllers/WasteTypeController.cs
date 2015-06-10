@@ -2,11 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
     using Prsd.Core.Extensions;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Mvc.Extensions;
     using Requests.WasteType;
     using ViewModels.Shared;
     using ViewModels.WasteType;
@@ -114,9 +117,7 @@
                         new CreateWasteType(model.NotificationId, chemicalCompositionType, model.OtherCompositionName, model.Description,
                             model.WasteCompositions));
             }
-
-            //TODO: Redirect to Process of Generation
-            return View(model);
+            return RedirectToAction("WasteGenerationProcess", new { id = model.NotificationId });
         }
 
         private bool ValidateWasteComposition(List<WasteCompositionData> wasteCompositions)
@@ -150,6 +151,96 @@
                 }
             }
             return true;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult WasteGenerationProcess(Guid id)
+        {
+            var model = new WasteGenerationProcessViewModel
+            {
+                NotificationId = id,
+                ProcessDescription = string.Empty
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WasteGenerationProcess(WasteGenerationProcessViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), new SetWasteGenerationProcess(model.ProcessDescription, model.NotificationId, model.IsDocumentAttached));
+                    return RedirectToAction("PhysicalCharacteristics", new { id = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult PhysicalCharacteristics(Guid id)
+        {
+            var physicalCharacteristics = CheckBoxCollectionViewModel.CreateFromEnum<PhysicalCharacteristicType>();
+            physicalCharacteristics.ShowEnumValue = true;
+
+            //We need to exclude 'other' as this will be handled separately
+            physicalCharacteristics.PossibleValues = physicalCharacteristics.PossibleValues.Where(p => (PhysicalCharacteristicType)Convert.ToInt32(p.Value) != PhysicalCharacteristicType.Other).ToList();
+
+            var model = new PhysicalCharacteristicsViewModel
+            {
+                PhysicalCharacteristics = physicalCharacteristics,
+                NotificationId = id
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> PhysicalCharacteristics(PhysicalCharacteristicsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    var selectedPackagingTypes = model.PhysicalCharacteristics.PossibleValues.Where(p => p.Selected).Select(p => (PhysicalCharacteristicType)(Convert.ToInt32(p.Value))).ToList();
+                    
+                    if (model.OtherSelected)
+                    {
+                        selectedPackagingTypes.Add(PhysicalCharacteristicType.Other);
+                    }
+
+                    await client.SendAsync(User.GetAccessToken(), new SetPhysicalCharacteristics(selectedPackagingTypes, model.NotificationId, model.OtherDescription));
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                return View(model);
+            }
         }
     }
 }

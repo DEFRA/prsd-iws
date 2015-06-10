@@ -97,7 +97,7 @@
                             model.StartDate,
                             model.EndDate));
 
-                    return RedirectToAction("ChemicalComposition", "WasteType");
+                    return RedirectToAction("ChemicalComposition", "WasteType", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
