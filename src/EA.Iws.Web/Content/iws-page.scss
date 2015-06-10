@@ -336,7 +336,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 // ==========================================================================
 
 .progress-indicator {
-    font-family: "nta",Arial,sans-serif;
+    font-family: $NTA-Light;
     font-size: 16px;
     line-height: 1.25;
     font-weight: 400;
@@ -456,10 +456,13 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     background: none;
     border: none;
     padding: 0;
-    color: #005ea5;
-    font-family: "nta", Arial, sans-serif;
+    color: $govuk-blue;
+    font-family: $NTA-Light;
     cursor: pointer;
-    font-size: 19px;
+    @include core-19()
+    {
+        font-size: $font-size;
+    }
     text-decoration: underline;
 }
 
