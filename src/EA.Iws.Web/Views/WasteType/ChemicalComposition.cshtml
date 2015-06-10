@@ -46,7 +46,7 @@
             </table>
         }
         <div class="form-group">
-            <button class="button" type="submit" name="submitButton" value="AddMore">Add more</button>
+            <button class="button-as-link" style="color: rgb(0, 94, 165);font-family: nta,Arial,sans-serif;font-size: 19px;" type="submit" name="submitButton" value="AddMore">Add more</button>
         </div>
     </div>
 
@@ -78,7 +78,6 @@
 {
     <script>
         $(function () {
-
             ShowHide();
 
             function ShowHide(compositionType) {
@@ -137,12 +136,6 @@
 
             $("#ChemicalCompositionType\\.PossibleValues\\[3\\]").click(function () {
                 ShowHide("other");
-            });
-
-            $("#lnkAddMore").click(function () {
-                var dynamicDiv = "<p>dynamic</p>";
-
-                $("#rdf").append(dynamicDiv);
             });
         });
     </script>

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
@@ -40,15 +41,17 @@
             }
 
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
-            notification.AddWasteType(chemicalComposition, command.ChemicalCompositionName, command.ChemicalCompositionDescription);
 
+            List<WasteComposition> wasteCompositions = null;
             if (command.ChemicalCompositionType == ChemicalCompositionType.RDF || command.ChemicalCompositionType == ChemicalCompositionType.SRF)
             {
+                wasteCompositions = new List<WasteComposition>();
                 foreach (var item in command.WasteCompositions)
                 {
-                    notification.AddWasteComposition(item.Constituent, item.MinConcentration, item.MaxConcentration);
+                    wasteCompositions.Add(WasteComposition.CreateWasteComposition(item.Constituent, item.MinConcentration, item.MaxConcentration));
                 }
             }
+            notification.AddWasteType(chemicalComposition, command.ChemicalCompositionName, command.ChemicalCompositionDescription, wasteCompositions);
 
             await db.SaveChangesAsync();
 

@@ -20,5 +20,10 @@
         public decimal MinConcentration { get; internal set; }
 
         public decimal MaxConcentration { get; internal set; }
+
+        public static WasteComposition CreateWasteComposition(string constituent, decimal minConcentration, decimal maxConcentration)
+        {
+            return new WasteComposition(constituent, minConcentration, maxConcentration);
+        }
     }
 }

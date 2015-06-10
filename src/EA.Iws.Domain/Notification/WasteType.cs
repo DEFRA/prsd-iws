@@ -70,7 +70,7 @@
             get { return WasteCompositionCollection.ToSafeIEnumerable(); }
         }
 
-        internal void AddWasteCompositions(WasteComposition wasteComposition)
+        internal void AddWasteComposition(WasteComposition wasteComposition)
         {
             if (WasteCompositionCollection == null)
             {
