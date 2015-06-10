@@ -6,8 +6,10 @@
     {
         public Guid NotificationId { get; set; }
 
+        [RequiredIf("IsDocumentAttached", false, "Please enter a description or check the box")]
         public string ProcessDescription { get; set; }
 
+        [RequiredIf("ProcessDescription", "", "Please enter a description or check the box")]
         public bool IsDocumentAttached { get; set; }
     }
 }

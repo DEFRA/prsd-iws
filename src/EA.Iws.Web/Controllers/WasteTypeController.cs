@@ -164,6 +164,7 @@
             };
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> WasteGenerationProcess(WasteGenerationProcessViewModel model)
