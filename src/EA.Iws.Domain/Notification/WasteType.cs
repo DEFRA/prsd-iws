@@ -12,11 +12,47 @@
         {
         }
 
-        internal WasteType(ChemicalComposition chemicalComposition)
+        private WasteType(ChemicalComposition chemicalComposition, string chemicalCompositionName,
+            string chemicalCompositionDescription)
         {
             ChemicalCompositionType = chemicalComposition;
 
-            WasteCompositionCollection = new List<WasteComposition>();
+            Guard.ArgumentNotNull(chemicalCompositionDescription);
+
+            if (chemicalComposition == ChemicalComposition.Other)
+            {
+                Guard.ArgumentNotNull(chemicalCompositionName);
+                ChemicalCompositionName = chemicalCompositionName;
+            }
+
+            ChemicalCompositionDescription = chemicalCompositionDescription;
+
+            PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
+        }
+
+        private WasteType(ChemicalComposition chemicalComposition,
+            IList<WasteComposition> wasteCompositions)
+        {
+            ChemicalCompositionType = chemicalComposition;
+
+            if (chemicalComposition == ChemicalComposition.RDF ||
+                chemicalComposition == ChemicalComposition.SRF)
+            {
+                if (wasteCompositions == null || wasteCompositions.Count == 0)
+                {
+                    throw new ArgumentException("Waste composition is required when waste type is either RDF or SRF", "wasteCompositions");
+                }
+            }
+
+            if (wasteCompositions == null)
+            {
+                WasteCompositionCollection = new List<WasteComposition>();
+            }
+            else
+            {
+                WasteCompositionCollection = new List<WasteComposition>(wasteCompositions);
+            }
+
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
         }
 
@@ -36,12 +72,16 @@
             {
                 return chemicalCompositionDescription;
             }
-            internal set
+            protected set
             {
-                if (false == (ChemicalCompositionType == ChemicalComposition.RDF || ChemicalCompositionType == ChemicalComposition.SRF))
+                if (ChemicalCompositionType == ChemicalComposition.Other || ChemicalCompositionType == ChemicalComposition.Wood)
                 {
                     Guard.ArgumentNotNull(value);
                     chemicalCompositionDescription = value;
+                }
+                else if (!string.IsNullOrWhiteSpace(value))
+                {
+                    throw new InvalidOperationException("Chemical composition description can only be set for chemical composition of wood or other.");
                 }
             }
         }
@@ -53,12 +93,16 @@
             {
                 return chemicalCompositionName;
             }
-            internal set
+            protected set
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other)
                 {
                     Guard.ArgumentNotNull(value);
                     chemicalCompositionName = value;
+                }
+                else if (!string.IsNullOrWhiteSpace(value))
+                {
+                    throw new InvalidOperationException("Chemical composition name can only be set for chemical composition of other");
                 }
             }
         }
@@ -101,5 +145,25 @@
         public string WasteGenerationProcess { get; internal set; }
 
         public bool IsDocumentAttached { get; internal set; }
+
+        public static WasteType CreateOtherWasteType(string chemicalCompositionName, string chemicalCompositionDescription)
+        {
+            return new WasteType(ChemicalComposition.Other, chemicalCompositionName, chemicalCompositionDescription);
+        }
+
+        public static WasteType CreateWoodWasteType(string chemicalCompositionDescription)
+        {
+            return new WasteType(ChemicalComposition.Wood, null, chemicalCompositionDescription);
+        }
+
+        public static WasteType CreateRdfWasteType(IList<WasteComposition> wasteCompositions)
+        {
+            return new WasteType(ChemicalComposition.RDF, wasteCompositions);
+        }
+
+        public static WasteType CreateSrfWasteType(IList<WasteComposition> wasteCompositions)
+        {
+            return new WasteType(ChemicalComposition.SRF, wasteCompositions);
+        }
     }
 }

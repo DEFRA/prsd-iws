@@ -84,6 +84,7 @@
     <Compile Include="Importers\NotificationHasImporterHandler.cs" />
     <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
+    <Compile Include="Mappings\WasteCompositionMap.cs" />
     <Compile Include="Mappings\WasteTypeMap.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\BusinessInfoMap.cs" />

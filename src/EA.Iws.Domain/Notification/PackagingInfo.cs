@@ -30,7 +30,7 @@
                 {
                     otherDescription = value;
                 }
-                else if (!string.IsNullOrEmpty(value))
+                else if (!string.IsNullOrWhiteSpace(value))
                 {
                     throw new InvalidOperationException("Cannot set other description when packaging type is not 'other'");
                 }

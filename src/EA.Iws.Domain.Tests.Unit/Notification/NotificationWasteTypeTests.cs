@@ -14,8 +14,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddWasteType(ChemicalComposition.Wood, string.Empty,
-                "This waste type is of wood type. I am writing some description here.", null);
+            notification.AddWasteType(WasteType.CreateWoodWasteType("This waste type is of wood type. I am writing some description here."));
 
             Assert.True(notification.HasWasteType);
         }
@@ -26,8 +25,8 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddWasteType(ChemicalComposition.Other, "some other name",
-                "This waste type is of any other type. I am writing some description here.", null);
+            notification.AddWasteType(WasteType.CreateOtherWasteType("some other name",
+                "This waste type is of any other type. I am writing some description here."));
 
             Assert.True(notification.HasWasteType);
         }
@@ -45,7 +44,7 @@
             wasteCompositions.Add(WasteComposition.CreateWasteComposition("Fourth Constituent", 4, 100));
             wasteCompositions.Add(WasteComposition.CreateWasteComposition("Fifth Constituent", 5, 100));
 
-            notification.AddWasteType(ChemicalComposition.RDF, string.Empty, string.Empty, wasteCompositions);
+            notification.AddWasteType(WasteType.CreateRdfWasteType(wasteCompositions));
 
             Assert.True(notification.HasWasteType);
             Assert.True(5 == notification.WasteType.WasteCompositions.Count());
@@ -65,7 +64,7 @@
             wasteCompositions.Add(WasteComposition.CreateWasteComposition("Fifth Constituent", 5, 100));
             wasteCompositions.Add(WasteComposition.CreateWasteComposition("Sixth Constituent", 6, 100));
 
-            notification.AddWasteType(ChemicalComposition.SRF, string.Empty, string.Empty, wasteCompositions);
+            notification.AddWasteType(WasteType.CreateSrfWasteType(wasteCompositions));
 
             Assert.True(notification.HasWasteType);
             Assert.True(6 == notification.WasteType.WasteCompositions.Count());
@@ -77,9 +76,9 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddWasteType(ChemicalComposition.Wood, string.Empty, "some description", null);
+            notification.AddWasteType(WasteType.CreateWoodWasteType("some description"));
 
-            Action addSecondWasteType = () => notification.AddWasteType(ChemicalComposition.RDF, string.Empty, string.Empty, null);
+            Action addSecondWasteType = () => notification.AddWasteType(WasteType.CreateOtherWasteType("name", "description"));
 
             Assert.Throws<InvalidOperationException>(addSecondWasteType);
         }
@@ -90,7 +89,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            Action addWoodWasteTypeWithoutDescription = () => notification.AddWasteType(ChemicalComposition.Wood, "name", null, null);
+            Action addWoodWasteTypeWithoutDescription = () => notification.AddWasteType(WasteType.CreateWoodWasteType(null));
             Assert.Throws<ArgumentNullException>(addWoodWasteTypeWithoutDescription);
         }
 
@@ -100,7 +99,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            Action addOtherWasteTypeWithoutName = () => notification.AddWasteType(ChemicalComposition.Other, null, "description", null);
+            Action addOtherWasteTypeWithoutName = () => notification.AddWasteType(WasteType.CreateOtherWasteType(null, "description"));
             Assert.Throws<ArgumentNullException>(addOtherWasteTypeWithoutName);
             var a = notification.WasteType == null;
         }
@@ -111,7 +110,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            Action addOtherWasteTypeWithoutDescription = () => notification.AddWasteType(ChemicalComposition.Other, "name", null, null);
+            Action addOtherWasteTypeWithoutDescription = () => notification.AddWasteType(WasteType.CreateOtherWasteType("name", null));
             Assert.Throws<ArgumentNullException>(addOtherWasteTypeWithoutDescription);
         }
 
@@ -121,7 +120,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            Action addOtherWasteTypeWithoutDescription = () => notification.AddWasteType(ChemicalComposition.RDF, string.Empty, null, null);
+            Action addOtherWasteTypeWithoutDescription = () => notification.AddWasteType(WasteType.CreateRdfWasteType(null));
             Assert.Throws<ArgumentException>(addOtherWasteTypeWithoutDescription);
         }
 
@@ -131,7 +130,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddWasteType(ChemicalComposition.Wood, "Name", "Description", null);
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
             notification.AddPhysicalCharacteristic(PhysicalCharacteristicType.Powdery);
 
@@ -144,7 +143,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddWasteType(ChemicalComposition.Wood, "Name", "Description", null);
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
             notification.AddPhysicalCharacteristic(PhysicalCharacteristicType.Other, "Other description");
 
@@ -190,7 +189,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddWasteType(ChemicalComposition.Wood, "Name", "Description", null);
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
             notification.AddWasteGenerationProcess("Process description", true);
 

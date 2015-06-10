@@ -114,5 +114,25 @@
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
+
+        [Fact]
+        public async Task CanAddWasteType()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            notification.AddWasteType(WasteType.CreateWoodWasteType("This waste type is of wood type. I am writing some description here."));
+
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.HasWasteType);
+
+            context.DeleteOnCommit(notification.WasteType);
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
     }
 }
