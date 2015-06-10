@@ -70,7 +70,7 @@
             var updateProducer = notification.Producers.Single(p => p.Id == producerId);
             var newAddress = new Address("new building", string.Empty, string.Empty, string.Empty, string.Empty,
                 string.Empty,
-                "United Kingdom");
+                string.Empty);
 
             updateProducer.Address = newAddress;
 

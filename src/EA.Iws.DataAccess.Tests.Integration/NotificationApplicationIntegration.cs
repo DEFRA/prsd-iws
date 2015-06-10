@@ -31,7 +31,7 @@
                 UKCompetentAuthority.England, 0);
 
             var address = new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                "United Kingdom");
+                string.Empty);
 
             var business = new Business(string.Empty, String.Empty, String.Empty, string.Empty);
 
@@ -45,7 +45,7 @@
             var updateProducer = notification.Producers.Single(p => p.Id == producer.Id);
             var newAddress = new Address("new building", string.Empty, string.Empty, string.Empty, string.Empty,
                 string.Empty,
-                "United Kingdom");
+                string.Empty);
 
             updateProducer.Address = newAddress;
 

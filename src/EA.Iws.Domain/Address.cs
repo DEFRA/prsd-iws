@@ -13,10 +13,16 @@
             Guard.ArgumentNotNull(country);
             Guard.ArgumentNotNull(address1);
 
+            Country = country;
+
+            if (IsUkAddress && string.IsNullOrWhiteSpace(postalCode))
+            {
+                throw new InvalidOperationException("Postal code cannot be null for UK addresses.");
+            }
+
             Building = building;
             TownOrCity = townOrCity;
             PostalCode = postalCode;
-            Country = country;
             Address2 = address2;
             Address1 = address1;
             Region = region;
@@ -44,8 +50,7 @@
         {
             get
             {
-                if (Country == null
-                    || !Country.Equals("United Kingdom",
+                if (!Country.Equals("United Kingdom",
                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     return false;

@@ -17,7 +17,7 @@
         public static Address CreateEmptyAddress()
         {
             return new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                "United Kingdom");
+                string.Empty);
         }
     }
 }
