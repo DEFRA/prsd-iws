@@ -2,6 +2,7 @@
 {
     using System.Data.Entity.ModelConfiguration;
     using Domain;
+    using Domain.Notification;
 
     internal class ChemicalCompositionTypeMapping : ComplexTypeConfiguration<ChemicalComposition>
     {

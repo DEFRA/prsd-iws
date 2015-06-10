@@ -70,25 +70,29 @@
             get { return WasteCompositionCollection.ToSafeIEnumerable(); }
         }
 
-        public void AddWasteCompositions(WasteComposition wasteComposition)
+        internal void AddWasteCompositions(WasteComposition wasteComposition)
         {
             if (WasteCompositionCollection == null)
             {
-                throw new InvalidOperationException("Waste Composition can not be null");
+                throw new InvalidOperationException("Waste Composition cannot be null");
             }
             WasteCompositionCollection.Add(wasteComposition);
         }
 
-        public void AddPhysicalCharacteristic(PhysicalCharacteristicType physicalCharacteristic, string otherDescription = null)
+        internal void AddPhysicalCharacteristic(PhysicalCharacteristicType physicalCharacteristic, string otherDescription = null)
         {
             if (PhysicalCharacteristicsCollection == null)
             {
-                throw new InvalidOperationException("Physical characteristics collection can not be null");
+                throw new InvalidOperationException("Physical characteristics collection cannot be null");
             }
 
             var physicalCharacteristicInfo = new PhysicalCharacteristicsInfo(physicalCharacteristic);
-            if (!string.IsNullOrEmpty(otherDescription) && physicalCharacteristic == PhysicalCharacteristicType.Other)
+            if (!string.IsNullOrEmpty(otherDescription))
             {
+                if (physicalCharacteristic != PhysicalCharacteristicType.Other)
+                {
+                    throw new InvalidOperationException(string.Format("Other description cannot be set when the physical characteristic type is not other for waste type {0}", Id));
+                }
                 physicalCharacteristicInfo.OtherDescription = otherDescription;
             }
             PhysicalCharacteristicsCollection.Add(physicalCharacteristicInfo);

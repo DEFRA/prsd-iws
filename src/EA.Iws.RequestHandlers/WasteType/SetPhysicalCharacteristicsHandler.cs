@@ -12,9 +12,9 @@
     internal class SetPhysicalCharacteristicsHandler : IRequestHandler<SetPhysicalCharacteristics, Guid>
     {
         private readonly IwsContext db;
-        private readonly IMap<IList<PhysicalCharacteristicType>, IList<Domain.PhysicalCharacteristicType>> mapper;
+        private readonly IMap<IList<PhysicalCharacteristicType>, IList<Domain.Notification.PhysicalCharacteristicType>> mapper;
 
-        public SetPhysicalCharacteristicsHandler(IwsContext db, IMap<IList<PhysicalCharacteristicType>, IList<Domain.PhysicalCharacteristicType>> mapper)
+        public SetPhysicalCharacteristicsHandler(IwsContext db, IMap<IList<PhysicalCharacteristicType>, IList<Domain.Notification.PhysicalCharacteristicType>> mapper)
         {
             this.db = db;
             this.mapper = mapper;
@@ -27,7 +27,7 @@
 
             foreach (var physicalCharacteristic in physicalCharacteristics)
             {
-                if (physicalCharacteristic == Domain.PhysicalCharacteristicType.Other)
+                if (physicalCharacteristic == Domain.Notification.PhysicalCharacteristicType.Other)
                 {
                     notification.AddPhysicalCharacteristic(physicalCharacteristic, command.OtherDescription);
                 }

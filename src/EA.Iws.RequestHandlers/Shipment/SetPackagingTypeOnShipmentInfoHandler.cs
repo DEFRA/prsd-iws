@@ -22,38 +22,38 @@
         {
             var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
 
-            var packagingTypes = new List<Domain.PackagingType>();
+            var packagingTypes = new List<Domain.Notification.PackagingType>();
 
             foreach (var selectedPackagingType in command.PackagingTypes)
             {
                 switch (selectedPackagingType)
                 {
                     case PackagingType.Drum:
-                        packagingTypes.Add(Domain.PackagingType.Drum);
+                        packagingTypes.Add(Domain.Notification.PackagingType.Drum);
                         break;
                     case PackagingType.WoodenBarrel:
-                        packagingTypes.Add(Domain.PackagingType.WoodenBarrel);
+                        packagingTypes.Add(Domain.Notification.PackagingType.WoodenBarrel);
                         break;
                     case PackagingType.Jerrican:
-                        packagingTypes.Add(Domain.PackagingType.Jerrican);
+                        packagingTypes.Add(Domain.Notification.PackagingType.Jerrican);
                         break;
                     case PackagingType.Box:
-                        packagingTypes.Add(Domain.PackagingType.Box);
+                        packagingTypes.Add(Domain.Notification.PackagingType.Box);
                         break;
                     case PackagingType.Bag:
-                        packagingTypes.Add(Domain.PackagingType.Bag);
+                        packagingTypes.Add(Domain.Notification.PackagingType.Bag);
                         break;
                     case PackagingType.CompositePackaging:
-                        packagingTypes.Add(Domain.PackagingType.CompositePackaging);
+                        packagingTypes.Add(Domain.Notification.PackagingType.CompositePackaging);
                         break;
                     case PackagingType.PressureReceptacle:
-                        packagingTypes.Add(Domain.PackagingType.PressureReceptacle);
+                        packagingTypes.Add(Domain.Notification.PackagingType.PressureReceptacle);
                         break;
                     case PackagingType.Bulk:
-                        packagingTypes.Add(Domain.PackagingType.Bulk);
+                        packagingTypes.Add(Domain.Notification.PackagingType.Bulk);
                         break;
                     case PackagingType.Other:
-                        packagingTypes.Add(Domain.PackagingType.Other);
+                        packagingTypes.Add(Domain.Notification.PackagingType.Other);
                         break;
                     default:
                         throw new InvalidOperationException("Unknown unit type");
@@ -62,7 +62,7 @@
 
             foreach (var packagingType in packagingTypes)
             {
-                if (packagingType == Domain.PackagingType.Other)
+                if (packagingType == Domain.Notification.PackagingType.Other)
                 {
                     notification.AddPackagingInfo(packagingType, command.OtherDescription);
                 }
