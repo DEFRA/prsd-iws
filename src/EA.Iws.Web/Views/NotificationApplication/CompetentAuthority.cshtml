@@ -3,14 +3,15 @@
     ViewBag.Title = "Which Competent Authority";
 }
 
+<header class="hgroup">
+    <h2 class="heading-large">Which competent authority are you applying to?</h2>
+    <p>Select the competent authority for the country you are exporting waste from:</p>
+</header>
+
 @using (Html.BeginForm(actionName: "CompetentAuthority", controllerName: "NotificationApplication", method: FormMethod.Post))
 {
+    @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
-    
-    <header class="hgroup">
-        <h2 class="heading-large">Which competent authority are you applying to?</h2>
-        <p>Select the competent authority for the country you are exporting waste from:</p>
-    </header>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.SelectedValue)">
         @Html.Gds().ValidationMessageFor(model => model.CompetentAuthorities.SelectedValue)
@@ -21,5 +22,3 @@
         <button class="button" type="submit">Continue</button>
     </div>
 }
-
-

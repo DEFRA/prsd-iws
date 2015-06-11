@@ -85,14 +85,14 @@
             var result = controller.NotificationTypeQuestion("Environment Agency", "Recovery") as ViewResult;
 
             Assert.Empty(result.ViewName);
-            Assert.IsType<InitialQuestionsViewModel>(result.Model);
+            Assert.IsType<NotificationTypeViewModel>(result.Model);
         }
 
         [Fact]
         public async Task NotificationTypeQuestion_Post_RedirectsToCorrectAction()
         {
             var controller = CreateNotificationApplicationController();
-            var model = new InitialQuestionsViewModel();
+            var model = new NotificationTypeViewModel();
             model.SelectedNotificationType = NotificationType.Recovery;
             var result = await controller.NotificationTypeQuestion(model) as RedirectToRouteResult;
 
@@ -104,11 +104,11 @@
         {
             var controller = CreateNotificationApplicationController();
             controller.ModelState.AddModelError("Error", "Test Error");
-            var model = new InitialQuestionsViewModel();
+            var model = new NotificationTypeViewModel();
             var result = await controller.NotificationTypeQuestion(model) as ViewResult;
 
             Assert.Empty(result.ViewName);
-            Assert.IsType<InitialQuestionsViewModel>(result.Model);
+            Assert.IsType<NotificationTypeViewModel>(result.Model);
         }
     }
 }

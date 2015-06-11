@@ -615,7 +615,7 @@
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
-    <Compile Include="ViewModels\NotificationApplication\InitialQuestionsViewModel.cs" />
+    <Compile Include="ViewModels\NotificationApplication\NotificationTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessViewModel.cs" />
     <Compile Include="ViewModels\Shared\CheckBoxCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonCollectionViewModel.cs" />

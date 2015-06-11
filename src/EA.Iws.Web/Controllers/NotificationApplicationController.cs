@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.IdentityModel.Protocols.WSTrust;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -13,7 +12,6 @@
     using Requests.Notification;
     using Requests.Shared;
     using ViewModels.NotificationApplication;
-    using ViewModels.Shared;
     using Constants = Prsd.Core.Web.Constants;
 
     [Authorize]
@@ -29,11 +27,7 @@
         [HttpGet]
         public ActionResult CompetentAuthority()
         {
-            var model = new CompetentAuthorityChoiceViewModel
-            {
-                CompetentAuthorities =
-                    RadioButtonStringCollectionViewModel.CreateFromEnum<CompetentAuthority>()
-            };
+            var model = new CompetentAuthorityChoiceViewModel();
 
             return View(model);
         }
@@ -54,9 +48,8 @@
         [HttpGet]
         public ActionResult NotificationTypeQuestion(string ca, string nt)
         {
-            var model = new InitialQuestionsViewModel
+            var model = new NotificationTypeViewModel
             {
-                SelectedNotificationType = NotificationType.Recovery,
                 CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
             };
 
@@ -70,7 +63,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NotificationTypeQuestion(InitialQuestionsViewModel model)
+        public async Task<ActionResult> NotificationTypeQuestion(NotificationTypeViewModel model)
         {
             if (!ModelState.IsValid)
             {

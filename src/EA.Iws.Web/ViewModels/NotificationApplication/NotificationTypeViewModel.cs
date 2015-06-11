@@ -7,17 +7,16 @@
     using Requests.Notification;
     using Requests.Shared;
 
-    public class InitialQuestionsViewModel
+    public class NotificationTypeViewModel
     {
-        public InitialQuestionsViewModel()
+        public NotificationTypeViewModel()
         {
             NotificationTypes = Enum.GetNames(typeof(NotificationType)).ToList();
         }
 
-        [Required(ErrorMessage = "Please select a notification type")]
+        [Required(ErrorMessage = "Please answer this question.")]
         public NotificationType SelectedNotificationType { get; set; }
 
-        [Required(ErrorMessage = "Please select your competent authority")]
         public CompetentAuthority CompetentAuthority { get; set; }
 
         public string CompetentAuthorityContactInfo

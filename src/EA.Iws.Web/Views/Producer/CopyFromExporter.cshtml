@@ -1,21 +1,22 @@
-﻿@using System.Activities.Expressions
-@model EA.Iws.Web.ViewModels.Shared.YesNoChoiceViewModel
+﻿@model EA.Iws.Web.ViewModels.Shared.YesNoChoiceViewModel
 
 @{
     ViewBag.Title = "Is the exporter one of the waste generators?";
 }
 
+<header class="hgroup">
+    <h2 class="heading-large">Add waste generator - producer</h2>
+    <div class="colored-header-bar"></div>
+    <h2 class="heading-medium">Is the exporter one of the waste generators?</h2>
+</header>
+
 @using (Html.BeginForm(actionName: "CopyFromExporter", controllerName: "Producer", routeValues: new { id = ViewBag.NotificationId }, method: FormMethod.Post))
 {
+    @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <header class="hgroup">
-        <h2 class="heading-large">Add waste generator - producer</h2>
-        <div class="colored-header-bar"></div>
-        <h2 class="heading-medium">Is the exporter one of the waste generators?</h2>
-    </header>
-
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
+        @Html.Gds().ValidationMessageFor(model => model.Choices.SelectedValue)
         @Html.EditorFor(m => m.Choices)
     </div>
 
