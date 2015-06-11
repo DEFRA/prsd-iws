@@ -75,7 +75,7 @@
 
             await context.SaveChangesAsync();
 
-            Assert.True(notification.HasShipmentInfo);
+            Assert.Equal(1, notification.PackagingInfos.Count());
         }
 
         [Fact]

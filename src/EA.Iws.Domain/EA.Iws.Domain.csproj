@@ -51,6 +51,7 @@
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="Notification\NotificationApplication.PackagingInfo.cs" />
     <Compile Include="Notification\PhysicalCharacteristicsInfo.cs" />
     <Compile Include="Notification\PhysicalCharacteristicType.cs" />
     <Compile Include="TransportRoute\EntryOrExitPoint.cs" />

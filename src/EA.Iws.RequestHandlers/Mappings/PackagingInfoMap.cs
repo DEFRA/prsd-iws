@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Domain.Notification;
     using Prsd.Core.Mapper;
     using Requests.Shipment;
     using PackagingType = Requests.Shipment.PackagingType;
 
-    internal class PackagingInfoMap : IMap<SetPackagingTypeOnShipmentInfo, IEnumerable<PackagingInfo>>
+    internal class PackagingInfoMap : IMap<SetPackagingTypeOnShipmentInfo, IEnumerable<PackagingInfo>>,
+        IMap<NotificationApplication, PackagingData>
     {
         public IEnumerable<PackagingInfo> Map(SetPackagingTypeOnShipmentInfo source)
         {
@@ -52,6 +54,35 @@
                 }
             }
             return packagingInfos;
+        }
+
+        public PackagingData Map(NotificationApplication source)
+        {
+            var packagingData = new PackagingData();
+
+            foreach (var packagingInfo in source.PackagingInfos)
+            {
+                packagingData.PackagingTypes.Add(GetPackagingType(packagingInfo.PackagingType));
+            }
+
+            var otherPackaging =
+                source.PackagingInfos.FirstOrDefault(p => p.PackagingType == Domain.Notification.PackagingType.Other);
+            if (otherPackaging != null)
+            {
+                packagingData.OtherDescription = otherPackaging.OtherDescription;
+            }
+
+            return packagingData;
+        }
+
+        private PackagingType GetPackagingType(Domain.Notification.PackagingType packagingType)
+        {
+            PackagingType type;
+            if (Enum.TryParse(packagingType.Value.ToString(), out type))
+            {
+                return type;
+            }
+            throw new ArgumentException(string.Format("Unknown PackagingType {0}", packagingType.Value), "packagingType");
         }
     }
 }

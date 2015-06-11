@@ -134,6 +134,7 @@
     <Compile Include="RequestHandlerModule.cs" />
     <Compile Include="Shared\GetCompetentAuthoritiesByCountryHandler.cs" />
     <Compile Include="Shipment\CreateNumberOfShipmentsInfoHandler.cs" />
+    <Compile Include="Shipment\GetPackagingTypesForNotificationHandler.cs" />
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfoHandler.cs" />
     <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
     <Compile Include="StateOfExport\EditStateOfExportForNotificationHandler.cs" />

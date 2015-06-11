@@ -31,6 +31,12 @@
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<PackagingInfo>>(
+                    "PackagingInfosCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
+
             HasOptional(x => x.Exporter)
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));

@@ -27,6 +27,7 @@
             CarriersCollection = new List<Carrier>();
             TransitStatesCollection = new List<TransitState>();
             OperationInfosCollection = new List<OperationInfo>();
+            PackagingInfosCollection = new List<PackagingInfo>();
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }
@@ -36,7 +37,10 @@
         protected virtual ICollection<Carrier> CarriersCollection { get; set; }
 
         protected virtual ICollection<TransitState> TransitStatesCollection { get; set; }
+
         protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
+
+        protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
 
         public Guid UserId { get; private set; }
 
@@ -50,7 +54,7 @@
 
         public string NotificationNumber { get; private set; }
 
-        public ShipmentInfo ShipmentInfo { get; private set; }
+        public virtual ShipmentInfo ShipmentInfo { get; private set; }
 
         public virtual WasteType WasteType { get; private set; }
 
@@ -83,6 +87,11 @@
         public IEnumerable<OperationInfo> OperationInfos
         {
             get { return OperationInfosCollection.ToSafeIEnumerable(); }
+        }
+
+        public IEnumerable<PackagingInfo> PackagingInfos
+        {
+            get { return PackagingInfosCollection.ToSafeIEnumerable(); }
         }
 
         private string CreateNotificationNumber(int notificationNumber)

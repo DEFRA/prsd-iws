@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
-    using System.Collections.Generic;
 
     public partial class NotificationApplication
     {
@@ -14,8 +13,9 @@
         {
             if (ShipmentInfo == null)
             {
-                throw new InvalidOperationException(string.Format("Shipment info does not exist for this notification: {0}", Id));
+                ShipmentInfo = new ShipmentInfo();
             }
+
             ShipmentInfo.IsSpecialHandling = isSpecialHandling;
             ShipmentInfo.SpecialHandlingDetails = specialHandlingDetails;
         }
@@ -37,16 +37,6 @@
             ShipmentInfo.Quantity = quantity;
             ShipmentInfo.Units = unit;
             ShipmentInfo.NumberOfShipments = numberOfShipments;
-        }
-
-        public void UpdatePackagingInfo(IEnumerable<PackagingInfo> packagingInfos)
-        {
-            if (ShipmentInfo == null)
-            {
-                ShipmentInfo = new ShipmentInfo();
-            }
-
-            ShipmentInfo.UpdatePackagingInfo(packagingInfos);
         }
     }
 }

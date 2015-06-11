@@ -1,10 +1,8 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
-    using System.Collections.Generic;
     using Prsd.Core;
     using Prsd.Core.Domain;
-    using Prsd.Core.Extensions;
 
     public class ShipmentInfo : Entity
     {
@@ -13,15 +11,7 @@
 
         internal ShipmentInfo()
         {
-            PackagingInfosCollection = new List<PackagingInfo>();
             Units = ShipmentQuantityUnits.NotSet;
-        }
-
-        protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
-
-        public IEnumerable<PackagingInfo> PackagingInfos
-        {
-            get { return PackagingInfosCollection.ToSafeIEnumerable(); }
         }
 
         public bool IsSpecialHandling { get; internal set; }
@@ -61,16 +51,6 @@
                 {
                     quantity = null;
                 }
-            }
-        }
-
-        internal void UpdatePackagingInfo(IEnumerable<PackagingInfo> packagingInfos)
-        {
-            PackagingInfosCollection.Clear();
-
-            foreach (var packagingInfo in packagingInfos)
-            {
-                PackagingInfosCollection.Add(packagingInfo);
             }
         }
 

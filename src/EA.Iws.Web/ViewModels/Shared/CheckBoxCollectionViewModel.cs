@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
-    using Prsd.Core.Domain;
 
     public class CheckBoxCollectionViewModel 
     {
@@ -14,10 +13,19 @@
 
         public bool ShowEnumValue { get; set; }
 
+        public void SetSelectedValues<TEnum>(IEnumerable<TEnum> selectedValues)
+        {
+            var enumerable = selectedValues as TEnum[] ?? selectedValues.ToArray();
+            foreach (var item in PossibleValues)
+            {
+                item.Selected = enumerable.Any(p => (Convert.ToInt32(p)).ToString() == item.Value);
+            }
+        }
+
         /// <summary>
         /// Creates SelectListItem collection based on values in an enum.
         /// </summary>
-        public static CheckBoxCollectionViewModel CreateFromEnum<T>(string selectedValue = null)
+        public static CheckBoxCollectionViewModel CreateFromEnum<T>()
         {
             if (!(typeof(Enum).IsAssignableFrom(typeof(T))))
             {

@@ -114,7 +114,7 @@
         }
 
         [HttpGet]
-        public ActionResult PackagingTypes(Guid id)
+        public async Task<ActionResult> PackagingTypes(Guid id)
         {
             var packagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>();
             packagingTypes.ShowEnumValue = true;
@@ -129,6 +129,19 @@
                 PackagingTypes = packagingTypes,
                 NotificationId = id
             };
+
+            using (var client = apiClient())
+            {
+                var packagingData =
+                    await client.SendAsync(User.GetAccessToken(), new GetPackagingTypesForNotification(id));
+
+                model.PackagingTypes.SetSelectedValues(packagingData.PackagingTypes);
+                if (!string.IsNullOrWhiteSpace(packagingData.OtherDescription))
+                {
+                    model.OtherSelected = true;
+                    model.OtherDescription = packagingData.OtherDescription;
+                }
+            }
 
             return View(model);
         }
