@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
+    using System.Collections.Generic;
 
     public partial class NotificationApplication
     {
@@ -38,13 +39,14 @@
             ShipmentInfo.NumberOfShipments = numberOfShipments;
         }
 
-        public void AddPackagingInfo(PackagingType packagingType, string otherDescription = null)
+        public void UpdatePackagingInfo(IEnumerable<PackagingInfo> packagingInfos)
         {
             if (ShipmentInfo == null)
             {
                 ShipmentInfo = new ShipmentInfo();
             }
-            ShipmentInfo.AddPackagingInfo(packagingType, otherDescription);
+
+            ShipmentInfo.UpdatePackagingInfo(packagingInfos);
         }
     }
 }

@@ -11,7 +11,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddPackagingInfo(PackagingType.Bulk);
+            notification.UpdatePackagingInfo(new[] { PackagingInfo.CreatePackagingInfo(PackagingType.Bulk) });
 
             return notification;
         }

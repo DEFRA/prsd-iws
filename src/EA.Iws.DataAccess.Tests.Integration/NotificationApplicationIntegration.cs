@@ -71,7 +71,7 @@
 
             context.NotificationApplications.Add(notification);
             
-            notification.AddPackagingInfo(PackagingType.Bag);
+            notification.UpdatePackagingInfo(new[] { PackagingInfo.CreatePackagingInfo(PackagingType.Bag) });
 
             await context.SaveChangesAsync();
 

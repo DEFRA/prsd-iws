@@ -64,14 +64,14 @@
             }
         }
 
-        public void AddPackagingInfo(PackagingType packagingType, string otherDescription = null)
+        internal void UpdatePackagingInfo(IEnumerable<PackagingInfo> packagingInfos)
         {
-            var packagingInfo = new PackagingInfo(packagingType);
-            if (!string.IsNullOrEmpty(otherDescription))
+            PackagingInfosCollection.Clear();
+
+            foreach (var packagingInfo in packagingInfos)
             {
-                packagingInfo.OtherDescription = otherDescription;
+                PackagingInfosCollection.Add(packagingInfo);
             }
-            PackagingInfosCollection.Add(packagingInfo);
         }
 
         internal void UpdateShipmentDates(DateTime firstDate, DateTime lastDate)

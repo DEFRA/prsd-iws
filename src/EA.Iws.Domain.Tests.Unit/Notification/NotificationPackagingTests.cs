@@ -1,45 +1,77 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Notification
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using Domain.Notification;
     using Xunit;
 
     public class NotificationPackagingTests
     {
         [Fact]
-        public void CreatePackagingInfo_WithInvalidData_ThrowsException()
+        public void CantCreateOtherWithoutDescription()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+            Action createPackagingInfo =
+                () => PackagingInfo.CreatePackagingInfo(PackagingType.Other);
 
-            notification.AddPackagingInfo(PackagingType.Bulk);
-
-            notification.SetSpecialHandling(false, string.Empty);
-
-            notification.AddShipmentDatesAndQuantityInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M,
-                ShipmentQuantityUnits.Tonnes);
-
-            Action addPackagingInfo =
-                () => notification.ShipmentInfo.AddPackagingInfo(PackagingType.Bag, "Limited Company");
-
-            Assert.Throws<InvalidOperationException>(addPackagingInfo);
+            Assert.Throws<InvalidOperationException>(createPackagingInfo);
         }
 
         [Fact]
-        public void CreatePackagingInfo_WithValidData_PackagingInfoAdded()
+        public void CantSetOtherDescriptionToNull()
+        {
+            Action createPackagingInfo =
+                () => PackagingInfo.CreateOtherPackagingInfo(null);
+
+            Assert.Throws<ArgumentNullException>(createPackagingInfo);
+        }
+
+        [Fact]
+        public void CantSetOtherDescriptionToEmptyString()
+        {
+            Action createPackagingInfo =
+                () => PackagingInfo.CreateOtherPackagingInfo(string.Empty);
+
+            Assert.Throws<ArgumentException>(createPackagingInfo);
+        }
+
+        [Fact]
+        public void CanAddPackagingInfo()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.AddPackagingInfo(PackagingType.Other, "Limited Company");
-
-            notification.SetSpecialHandling(false, string.Empty);
-
-            notification.AddShipmentDatesAndQuantityInfo(DateTime.Now, DateTime.Now.AddDays(1), 10, 0.0001M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.UpdatePackagingInfo(new[] { PackagingInfo.CreateOtherPackagingInfo("package description") });
 
             Assert.Equal(1, notification.ShipmentInfo.PackagingInfos.Count());
+        }
+
+        [Fact]
+        public void UpdatePackagingInfoReplacesItems()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var packagingInfos = new List<PackagingInfo>
+            {
+                PackagingInfo.CreateOtherPackagingInfo("package description"),
+                PackagingInfo.CreatePackagingInfo(PackagingType.Bag)
+            };
+
+            var newPackagingInfos = new List<PackagingInfo>
+            {
+                PackagingInfo.CreatePackagingInfo(PackagingType.Box),
+                PackagingInfo.CreatePackagingInfo(PackagingType.Bulk)
+            };
+
+            notification.UpdatePackagingInfo(packagingInfos);
+
+            notification.UpdatePackagingInfo(newPackagingInfos);
+
+            Assert.Collection(notification.ShipmentInfo.PackagingInfos,
+                item => Assert.Equal(notification.ShipmentInfo.PackagingInfos.ElementAt(0).PackagingType, PackagingType.Box),
+                item => Assert.Equal(notification.ShipmentInfo.PackagingInfos.ElementAt(1).PackagingType, PackagingType.Bulk));
         }
     }
 }
