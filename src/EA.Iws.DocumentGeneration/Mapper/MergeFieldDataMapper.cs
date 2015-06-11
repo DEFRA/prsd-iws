@@ -5,8 +5,8 @@
 
     internal class MergeFieldDataMapper
     {
-        private const string CheckboxChecked = "\u2610";
-        private const string CheckboxUnchecked = "\u2611";
+        private const string CheckboxChecked = "\u2611";
+        private const string CheckboxUnchecked = "\u2610";
 
         public static void BindCorrespondingField(MergeField mergeField, object model, PropertyInfo[] properties)
         {

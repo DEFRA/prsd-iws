@@ -1,12 +1,14 @@
 ﻿namespace EA.Iws.Domain
 {
-    using Prsd.Core.Domain;
+    using System;
 
-    public class Country : Entity
+    public class Country
     {
         protected Country()
         {
         }
+
+        public Guid Id { get; protected set; }
 
         public string Name { get; private set; }
 

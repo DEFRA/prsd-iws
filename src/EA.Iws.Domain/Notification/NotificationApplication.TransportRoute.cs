@@ -34,8 +34,8 @@
 
             if (this.StateOfExport != null && this.StateOfExport.Country.Id == stateOfImport.Country.Id)
             {
-                throw new InvalidOperationException(string.Format("Cannot add a State of Import in the same country as the State of Export for Notification {0}. Country: {1}", 
-                    this.Id, 
+                throw new InvalidOperationException(string.Format("Cannot add a State of Import in the same country as the State of Export for Notification {0}. Country: {1}",
+                    this.Id,
                     this.StateOfExport.Country.Name));
             }
 
@@ -108,6 +108,36 @@
                     .ToArray();
 
             return validPositions;
+        }
+
+        public void UpdateStateOfExport(Country country, CompetentAuthority competentAuthority,
+            EntryOrExitPoint exitPoint)
+        {
+            Guard.ArgumentNotNull(() => country, country);
+            Guard.ArgumentNotNull(() => competentAuthority, competentAuthority);
+            Guard.ArgumentNotNull(() => exitPoint, exitPoint);
+
+            if (this.StateOfExport == null)
+            {
+                this.AddStateOfExportToNotification(new StateOfExport(country, competentAuthority, exitPoint));
+                return;
+            }
+
+            if (this.StateOfImport != null && this.StateOfImport.Country.Id == country.Id)
+            {
+                throw new InvalidOperationException(string.Format("Attempted to edit the State of Export for Notification {0}. Cannot have a State of Export in the same country as the State of Import: {1}",
+                    this.Id,
+                    country.Name));
+            }
+
+            if (this.TransitStates.Any(ts => ts.Country.Id == country.Id))
+            {
+                throw new InvalidOperationException(string.Format("Attempted to edit the State of Export for Notification {0}. Cannot have a State of Export in the same country as a Transit State: {1}",
+                    this.Id,
+                    country.Name));
+            }
+
+            this.StateOfExport.Update(country, competentAuthority, exitPoint);
         }
     }
 }

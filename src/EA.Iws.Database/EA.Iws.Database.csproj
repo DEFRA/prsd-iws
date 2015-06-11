@@ -71,6 +71,7 @@
     <Content Include="scripts\Update\Sprint9\20150609-152223-Add-PhysicalCharacteristicsInfo-Table.sql" />
     <Content Include="scripts\Update\Sprint9\20150609-174000-Ordinal-Position-Column.sql" />
     <Content Include="scripts\Update\Sprint9\20150609-152127-Add-WasteGenerationProcess-To-WasteType-Table.sql" />
+    <Content Include="scripts\Update\Sprint9\20150611-160000-Add-Competent-Authorities-And-EntryExitPoints.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

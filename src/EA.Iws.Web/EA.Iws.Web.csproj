@@ -530,6 +530,9 @@
     <Content Include="Views\NotificationApplication\ReasonForExport.cshtml" />
     <Content Include="Views\TransitState\CountrySelector.cshtml" />
     <Content Include="Views\TransitState\OtherDetailsSelector.cshtml" />
+    <Content Include="Views\StateOfExport\Edit.cshtml" />
+    <Content Include="Views\StateOfExport\EditFullDetails.cshtml" />
+    <Content Include="Views\StateOfExport\EditCountryOnly.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -604,6 +607,7 @@
     <Compile Include="ViewModels\NotificationApplication\NotificationOverviewViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\ReasonForExportViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
+    <Compile Include="ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
     <Compile Include="ViewModels\WasteOperations\OperationCodesViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />

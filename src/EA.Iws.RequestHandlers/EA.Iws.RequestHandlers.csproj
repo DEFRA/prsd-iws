@@ -135,6 +135,8 @@
     <Compile Include="Shipment\CreateNumberOfShipmentsInfoHandler.cs" />
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfoHandler.cs" />
     <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
+    <Compile Include="StateOfExport\EditStateOfExportForNotificationHandler.cs" />
+    <Compile Include="StateOfExport\GetStateOfExportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\AddStateOfImportToNotificationHandler.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotificationHandler.cs" />
     <Compile Include="TransitState\AddStateOfImportToNotificationHandler.cs" />

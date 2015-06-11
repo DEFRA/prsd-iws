@@ -114,7 +114,9 @@
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfo.cs" />
     <Compile Include="Shared\CompetentAuthorityData.cs" />
     <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
+    <Compile Include="StateOfExport\EditStateOfExportForNotification.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotification.cs" />
+    <Compile Include="StateOfExport\GetStateOfExportForNotification.cs" />
     <Compile Include="StateOfImport\AddStateOfImportToNotification.cs" />
     <Compile Include="TransitState\AddTransitStateToNotification.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
