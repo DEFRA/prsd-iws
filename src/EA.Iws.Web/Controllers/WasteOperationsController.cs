@@ -77,6 +77,13 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddRecoveryCodes(OperationCodesViewModel model)
         {
+            model.CodeInformation = new Dictionary<string, string>();
+
+            foreach (RecoveryCode code in Enum.GetValues(typeof(RecoveryCode)))
+            {
+                model.CodeInformation.Add(code.ToString(), EnumHelper.GetDescription(code));
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -135,6 +142,13 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddDisposalCodes(OperationCodesViewModel model)
         {
+            model.CodeInformation = new Dictionary<string, string>();
+
+            foreach (DisposalCode code in Enum.GetValues(typeof(DisposalCode)))
+            {
+                model.CodeInformation.Add(code.ToString(), EnumHelper.GetDescription(code));
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
