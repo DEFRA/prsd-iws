@@ -11,11 +11,11 @@
 
         public User(string id, string firstName, string surname, string phoneNumber, string email)
         {
-            Guard.ArgumentNotNull(() => firstName, firstName);
-            Guard.ArgumentNotNull(() => surname, surname);
-            Guard.ArgumentNotNull(() => phoneNumber, phoneNumber);
-            Guard.ArgumentNotNull(() => email, email);
-            Guard.ArgumentNotNull(() => id, id);
+            Guard.ArgumentNotNullOrEmpty(() => firstName, firstName);
+            Guard.ArgumentNotNullOrEmpty(() => surname, surname);
+            Guard.ArgumentNotNullOrEmpty(() => phoneNumber, phoneNumber);
+            Guard.ArgumentNotNullOrEmpty(() => email, email);
+            Guard.ArgumentNotNullOrEmpty(() => id, id);
 
             FirstName = firstName;
             Surname = surname;
