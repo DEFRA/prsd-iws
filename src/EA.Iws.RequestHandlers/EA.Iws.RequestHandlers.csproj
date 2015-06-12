@@ -85,6 +85,7 @@
     <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
+    <Compile Include="Mappings\SpecialHandlingMap.cs" />
     <Compile Include="Mappings\WasteCompositionMap.cs" />
     <Compile Include="Mappings\WasteTypeMap.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Mappings\TransitStateMap.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
+    <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Notification\SetReasonForExportHandler.cs" />
     <Compile Include="Notification\SetSpecialHandlingHandler.cs" />

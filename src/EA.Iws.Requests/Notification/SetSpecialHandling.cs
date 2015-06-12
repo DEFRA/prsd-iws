@@ -5,14 +5,14 @@
 
     public class SetSpecialHandling : IRequest<string>
     {
-        public SetSpecialHandling(Guid notificationId, bool isSpecialHandling, string specialHandlingDetails)
+        public SetSpecialHandling(Guid notificationId, bool hasSpecialHandlingRequirements, string specialHandlingDetails)
         {
             NotificationId = notificationId;
-            IsSpecialHandling = isSpecialHandling;
+            HasSpecialHandlingRequirements = hasSpecialHandlingRequirements;
             SpecialHandlingDetails = specialHandlingDetails;
         }
 
-        public bool IsSpecialHandling { get; set; }
+        public bool HasSpecialHandlingRequirements { get; set; }
 
         public Guid NotificationId { get; private set; }
 

@@ -9,22 +9,11 @@
             get { return ShipmentInfo != null; }
         }
 
-        public void SetSpecialHandling(bool isSpecialHandling, string specialHandlingDetails)
-        {
-            if (ShipmentInfo == null)
-            {
-                ShipmentInfo = new ShipmentInfo();
-            }
-
-            ShipmentInfo.IsSpecialHandling = isSpecialHandling;
-            ShipmentInfo.SpecialHandlingDetails = specialHandlingDetails;
-        }
-
         public void AddShipmentDatesAndQuantityInfo(DateTime startDate, DateTime endDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
         {
             if (ShipmentInfo == null)
             {
-                throw new InvalidOperationException(string.Format("Shipment info does not exist for this notification: {0}", Id));
+                ShipmentInfo = new ShipmentInfo();
             }
 
             int monthPeriodLength = (IsPreconsentedRecoveryFacility.HasValue && IsPreconsentedRecoveryFacility.Value) ? 36 : 12;

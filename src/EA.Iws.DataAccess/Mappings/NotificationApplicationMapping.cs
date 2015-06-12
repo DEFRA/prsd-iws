@@ -94,6 +94,8 @@
             HasOptional(x => x.StateOfImport)
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
+
+            Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
         }
     }
 }

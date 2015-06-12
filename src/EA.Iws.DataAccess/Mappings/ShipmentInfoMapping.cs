@@ -8,8 +8,6 @@
         public ShipmentInfoMapping()
         {
             ToTable("ShipmentInfo", "Business");
-
-            Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
         }
     }
 }

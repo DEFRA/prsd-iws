@@ -470,17 +470,21 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     color: #2E8ACA;
 }
 
-.text-area{
+.text-area {
     height: 200px;
 }
 
-.full-width{
+.full-width {
     width: $full-width;
 }
 
-.grid-view:last-child{
+.grid-view:last-child {
     float: none;
     margin-bottom: 10px;
+}
+
+.two-thirds {
+    width: $two-thirds;
 }
 
 // Display the operation codes

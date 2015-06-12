@@ -53,6 +53,7 @@
     <Compile Include="Country.cs" />
     <Compile Include="Notification\NotificationApplication.PackagingInfo.cs" />
     <Compile Include="Notification\NotificationApplication.TechnologyEmployed.cs" />
+    <Compile Include="Notification\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="Notification\PhysicalCharacteristicsInfo.cs" />
     <Compile Include="Notification\PhysicalCharacteristicType.cs" />
     <Compile Include="Notification\TechnologyEmployed.cs" />

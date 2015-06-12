@@ -68,12 +68,14 @@
     <Compile Include="Importer\UpdateImporterForNotification.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\GetIsPreconsentedRecoveryFacility.cs" />
+    <Compile Include="Notification\GetSpecialHandingForNotification.cs" />
     <Compile Include="Notification\NotificationInfo.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
     <Compile Include="Notification\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
+    <Compile Include="Notification\SpecialHandlingData.cs" />
     <Compile Include="OperationCodes\AddDisposalCodes.cs" />
     <Compile Include="OperationCodes\DisposalCode.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationId.cs" />

@@ -151,5 +151,23 @@
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
+        
+        [Fact]
+        public async Task CanAddSpecialHandlingDetails()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+            UKCompetentAuthority.England, 0);
+
+            notification.SetSpecialHandlingRequirements("keep upright");
+
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.HasSpecialHandlingRequirements);
+            Assert.Equal("keep upright", notification.SpecialHandlingDetails);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
     }
 }

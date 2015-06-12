@@ -6,12 +6,10 @@
 
     public class NotificationShipmentTests
     {
-        private static NotificationApplication CreateNotificationApplicationWithShipmentInfo()
+        private static NotificationApplication CreateNotificationApplication()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
-
-            notification.SetSpecialHandling(false, null);
 
             return notification;
         }
@@ -19,7 +17,7 @@
         [Fact]
         public void LastDateCantBeBeforeFirstDate()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             var firstDate = new DateTime(2015, 01, 02);
             var lastDate = new DateTime(2015, 01, 01);
@@ -35,7 +33,7 @@
         [Fact]
         public void CanAddsShipmentInfo()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
@@ -49,7 +47,7 @@
         [Fact]
         public void NumberOfShipmentsCantBeZero()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(true);
 
@@ -64,7 +62,7 @@
         [Fact]
         public void QuantityCantBeZero()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(true);
 
@@ -79,7 +77,7 @@
         [Fact]
         public void NumberOfShipmentsCantBeNegative()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(true);
 
@@ -94,7 +92,7 @@
         [Fact]
         public void QuantityCantBeNegative()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(true);
 
@@ -109,7 +107,7 @@
         [Fact]
         public void NonPreconsentedNotificationDatesCantBeOutside12Months()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(false);
 
@@ -124,7 +122,7 @@
         [Fact]
         public void NonPreconsentedNotificationDatesCanBeInside12Months()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(false);
 
@@ -139,7 +137,7 @@
         [Fact]
         public void PreconsentedNotificationDatesCantBeOutside36Months()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(true);
 
@@ -154,7 +152,7 @@
         [Fact]
         public void PreconsentedNotificationDatesCanBeInside36Months()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             notification.SetPreconsentedRecoveryFacility(true);
 
@@ -169,7 +167,7 @@
         [Fact]
         public void QuantityRoundedUpTo4DecimalPlaces()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
@@ -183,7 +181,7 @@
         [Fact]
         public void QuantityRoundedDownTo4DecimalPlaces()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
@@ -197,7 +195,7 @@
         [Fact]
         public void FirstDateCantBeDateTimeMinValue()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             var firstDate = DateTime.MinValue;
             var lastDate = DateTime.MinValue.AddDays(1);
@@ -210,7 +208,7 @@
         [Fact]
         public void LastDateCantBeDateTimeMinValue()
         {
-            var notification = CreateNotificationApplicationWithShipmentInfo();
+            var notification = CreateNotificationApplication();
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = DateTime.MinValue;

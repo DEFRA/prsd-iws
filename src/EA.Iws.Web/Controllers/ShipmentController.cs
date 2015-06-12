@@ -26,31 +26,6 @@
         }
 
         [HttpGet]
-        public ActionResult SpecialHandling(Guid id)
-        {
-            return View(new SpecialHandlingViewModel { NotificationId = id });
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SpecialHandling(SpecialHandlingViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetSpecialHandling(model.NotificationId, model.IsSpecialHandling,
-                            model.SpecialHandlingDetails));
-            }
-            return RedirectToAction("Add", "StateOfExport", new { id = model.NotificationId });
-        }
-
-        [HttpGet]
         public async Task<ActionResult> Info(Guid id)
         {
             using (var client = apiClient())
@@ -179,7 +154,7 @@
                         new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId,
                             model.OtherDescription));
 
-                    return RedirectToAction("SpecialHandling", new { id = model.NotificationId });
+                    return RedirectToAction("Index", "SpecialHandling", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

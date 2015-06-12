@@ -14,10 +14,6 @@
             Units = ShipmentQuantityUnits.NotSet;
         }
 
-        public bool IsSpecialHandling { get; internal set; }
-
-        public string SpecialHandlingDetails { get; internal set; }
-
         public int? NumberOfShipments
         {
             get { return numberOfShipments; }
