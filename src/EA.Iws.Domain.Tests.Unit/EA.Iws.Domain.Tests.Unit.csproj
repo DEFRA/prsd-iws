@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
+    <Compile Include="BusinessTests.cs" />
     <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\ObjectFactory.cs" />
     <Compile Include="Helpers\ObjectInstantiator.cs" />

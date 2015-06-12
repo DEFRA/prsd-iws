@@ -35,7 +35,7 @@
             {
                 if (PackagingType == PackagingType.Other)
                 {
-                    Guard.ArgumentNotNullOrEmpty(() => OtherDescription, value);
+                    Guard.ArgumentNotNullOrEmpty(() => value, value);
                     otherDescription = value;
                 }
                 else if (!string.IsNullOrWhiteSpace(value))

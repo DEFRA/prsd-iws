@@ -20,7 +20,8 @@
 
         private Business(string name, BusinessType type, string registrationNumber, string additionalRegistrationNumber, string otherDescription)
         {
-            Guard.ArgumentNotNull(() => name, name);
+            Guard.ArgumentNotNullOrEmpty(() => name, name);
+            Guard.ArgumentNotNullOrEmpty(() => registrationNumber, registrationNumber);
 
             Name = name;
             Type = type.DisplayName;
@@ -51,6 +52,7 @@
             {
                 if (Type == BusinessType.Other.DisplayName)
                 {
+                    Guard.ArgumentNotNullOrEmpty(() => value, value);
                     otherDescription = value;
                 }
                 else if (!string.IsNullOrEmpty(value))
