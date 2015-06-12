@@ -65,6 +65,7 @@
     <Content Include="scripts\Update\Sprint8\20150526-110946-Add-IsSpecialHandling-To-ShipmentInfo.sql" />
     <Content Include="scripts\Update\Sprint8\29052015-143800-Drop-fk-countryid-from-facility.sql" />
     <Content Include="scripts\Update\Sprint9\04062015-1100-Add-Competent-Authority-partial-data.sql" />
+    <Content Include="scripts\Update\Sprint9\20150611-112342-Add-WasteCode-Table.sql" />
     <Content Include="scripts\Update\Sprint9\20150605-110500-Add-other-description-column.sql" />
     <Content Include="scripts\Update\Sprint9\04062015-1000-Add-entryorexitpoint-Change-Competent-Authority.sql" />
     <Content Include="scripts\Update\Sprint9\20150609-161233-Add-ReasonForExport-To-Notification-Table.sql" />
@@ -74,6 +75,8 @@
     <Content Include="scripts\Update\Sprint9\20150611-160000-Add-Competent-Authorities-And-EntryExitPoints.sql" />
     <Content Include="scripts\Update\Sprint9\20150610-15875-Add-Technology-Employed-Table.sql" />
     <Content Include="scripts\Update\Sprint9\20150612-103300-move-special-handling-to-notification.sql" />
+    <Content Include="scripts\Update\Sprint9\20150612-103423-Add-Waste-Codes.sql" />
+    <Content Include="scripts\Update\Sprint9\20150612-112054-Add-WasteCode-To-WasteType-Table.sql" />
     <Content Include="scripts\Update\Sprint9\20150611-165300-add-notification-id-to-packaging-info.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />

@@ -57,6 +57,7 @@
     <Compile Include="Notification\PhysicalCharacteristicsInfo.cs" />
     <Compile Include="Notification\PhysicalCharacteristicType.cs" />
     <Compile Include="Notification\TechnologyEmployed.cs" />
+    <Compile Include="Notification\WasteCode.cs" />
     <Compile Include="TransportRoute\EntryOrExitPoint.cs" />
     <Compile Include="Notification\NotificationApplication.WasteType.cs" />
     <Compile Include="Notification\WasteComposition.cs" />

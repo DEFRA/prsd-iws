@@ -28,6 +28,8 @@
 
         public virtual DbSet<EntryOrExitPoint> EntryOrExitPoints { get; set; }
 
+        public virtual DbSet<WasteCode> WasteCodes { get; set; }
+
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")
         {

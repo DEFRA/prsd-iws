@@ -129,9 +129,12 @@
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
     <Compile Include="WasteType\ChemicalCompositionType.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
+    <Compile Include="WasteType\GetWasteCodes.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicType.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristics.cs" />
+    <Compile Include="WasteType\SetWasteCode.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcess.cs" />
+    <Compile Include="WasteType\WasteCodeData.cs" />
     <Compile Include="WasteType\WasteCompositionData.cs" />
     <Compile Include="WasteType\WasteTypeData.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountry.cs" />

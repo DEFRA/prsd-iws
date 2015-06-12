@@ -37,5 +37,14 @@
             }
             WasteType.AddPhysicalCharacteristic(physicalCharacteristic, otherDescription);
         }
+
+        public void AddWasteCode(WasteCode wasteCode)
+        {
+            if (WasteType == null)
+            {
+                throw new InvalidOperationException(String.Format("Waste Type can not be null for notification: {0}", Id));
+            }
+            WasteType.AddWasteCode(wasteCode);
+        }
     }
 }

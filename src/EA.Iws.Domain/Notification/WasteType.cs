@@ -146,6 +146,8 @@
 
         public bool IsDocumentAttached { get; internal set; }
 
+        public virtual WasteCode WasteCode { get; set; }
+
         public static WasteType CreateOtherWasteType(string chemicalCompositionName, string chemicalCompositionDescription)
         {
             return new WasteType(ChemicalComposition.Other, chemicalCompositionName, chemicalCompositionDescription);
@@ -164,6 +166,15 @@
         public static WasteType CreateSrfWasteType(IList<WasteComposition> wasteCompositions)
         {
             return new WasteType(ChemicalComposition.SRF, wasteCompositions);
+        }
+
+        public void AddWasteCode(WasteCode wasteCode)
+        {
+            if (WasteCode != null)
+            {
+                throw new InvalidOperationException(string.Format("Waste code has already been set for notification {0}", Id));
+            }
+            WasteCode = wasteCode;
         }
     }
 }

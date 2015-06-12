@@ -243,5 +243,57 @@
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> WasteCode(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var model = new WasteCodeViewModel
+                {
+                    NotificationId = id,
+                    WasteCodes = await GetWasteCodes()
+                };
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WasteCode(WasteCodeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.WasteCodes = await GetWasteCodes();
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), new SetWasteCode(new Guid(model.SelectedWasteCode), model.NotificationId));
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                return View(model);
+            }
+        }
+
+        private async Task<IEnumerable<WasteCodeData>> GetWasteCodes()
+        {
+            using (var client = apiClient())
+            {
+                return await client.SendAsync(User.GetAccessToken(), new GetWasteCodes());
+            }
+        }
     }
 }

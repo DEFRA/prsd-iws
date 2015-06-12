@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.Notification;
+    using Helpers;
     using Xunit;
 
     public class NotificationWasteTypeTests
@@ -194,6 +195,56 @@
             notification.AddWasteGenerationProcess("Process description", true);
 
             Assert.Equal("Process description", notification.WasteType.WasteGenerationProcess);
+        }
+
+        [Fact]
+        public void AddWasteCode_WithValidData_WasteCodeAdded()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
+
+            var wasteCodeId = Guid.NewGuid();
+
+            notification.AddWasteCode(GetTestWasteCode(wasteCodeId));
+
+            Assert.Equal(wasteCodeId, notification.WasteType.WasteCode.Id);
+        }
+
+        [Fact]
+        public void AddWasteCode_WithoutWasteType_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var wasteCodeId = Guid.NewGuid();
+
+            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(wasteCodeId));
+
+            Assert.Throws<InvalidOperationException>(addWasteCode);
+        }
+
+        [Fact]
+        public void AddWasteCode_WhenAlreadySet_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
+
+            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid()));
+
+            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid()));
+
+            Assert.Throws<InvalidOperationException>(addWasteCode);
+        }
+
+        private static WasteCode GetTestWasteCode(Guid id)
+        {
+            var wasteCode = ObjectInstantiator<WasteCode>.CreateNew();
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, id, wasteCode);
+            return wasteCode;
         }
     }
 }

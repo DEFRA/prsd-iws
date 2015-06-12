@@ -86,6 +86,7 @@
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
     <Compile Include="Mappings\SpecialHandlingMap.cs" />
+    <Compile Include="Mappings\WasteCodeMap.cs" />
     <Compile Include="Mappings\WasteCompositionMap.cs" />
     <Compile Include="Mappings\WasteTypeMap.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
@@ -150,7 +151,9 @@
     <Compile Include="TransportRoute\GetTransportRouteSummaryForNotificationHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
+    <Compile Include="WasteType\GetWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristicsHandler.cs" />
+    <Compile Include="WasteType\SetWasteCodeHandler.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcessHandler.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -521,6 +521,7 @@
     <Content Include="Views\TransitState\CountrySelector.cshtml" />
     <Content Include="Views\TransitState\OtherDetailsSelector.cshtml" />
     <Content Include="Views\StateOfExport\Edit.cshtml" />
+    <Content Include="Views\WasteType\WasteCode.cshtml" />
     <Content Include="Views\StateOfExport\EditFullDetails.cshtml" />
     <Content Include="Views\StateOfExport\EditCountryOnly.cshtml" />
     <None Include="Web.Debug.config">
@@ -627,6 +628,7 @@
     <Compile Include="ViewModels\StateOfExport\StateOfExportViewModel.cs" />
     <Compile Include="ViewModels\WasteType\PhysicalCharacteristicsViewModel.cs" />
     <Compile Include="ViewModels\TransitState\TransitStateViewModel.cs" />
+    <Compile Include="ViewModels\WasteType\WasteCodeViewModel.cs" />
     <Compile Include="ViewModels\WasteType\WasteGenerationProcessViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
