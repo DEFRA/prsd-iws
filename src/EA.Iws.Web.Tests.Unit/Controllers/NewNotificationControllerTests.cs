@@ -7,9 +7,9 @@
     using FakeItEasy;
     using Requests.Notification;
     using Requests.Shared;
-    using ViewModels.NewNotification;
-    using ViewModels.Shared;
     using Web.Controllers;
+    using Web.ViewModels.NewNotification;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class NewNotificationControllerTests

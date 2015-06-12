@@ -116,6 +116,9 @@
     <Content Include="scripts\Update\Sprint10\20150617-161000-add-means-of-transport-column.sql" />
     <Content Include="scripts\Update\Sprint10\20150623-090511-Add-Optional-Waste-Codes.sql" />
     <Content Include="scripts\Update\Sprint10\20150623-090512-Add-UN-Waste-Codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150615-347600-add-y-codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150615-746500-add-un-classes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150615-987300-add-h-codes.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

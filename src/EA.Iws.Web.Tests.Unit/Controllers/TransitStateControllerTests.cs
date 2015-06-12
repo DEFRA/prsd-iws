@@ -1,10 +1,5 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.TransitState;
@@ -14,8 +9,11 @@
     using Requests.StateOfExport;
     using Requests.TransitState;
     using Requests.TransportRoute;
-    using ViewModels.Shared;
-    using Web.Controllers;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class TransitStateControllerTests

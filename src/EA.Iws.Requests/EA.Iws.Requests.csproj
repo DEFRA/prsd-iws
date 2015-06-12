@@ -136,7 +136,7 @@
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetWasteCodes.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicType.cs" />
-    <Compile Include="WasteType\SetEwcCodes.cs" />
+    <Compile Include="WasteType\SetWasteCodes.cs" />
     <Compile Include="WasteType\SetOptionalWasteCodes.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristics.cs" />
     <Compile Include="WasteType\SetBaselOrOecdWasteCode.cs" />

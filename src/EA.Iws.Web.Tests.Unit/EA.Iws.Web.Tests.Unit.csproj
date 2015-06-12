@@ -153,6 +153,7 @@
     <Compile Include="TestHelpers\HttpContextMocker.cs" />
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
+    <Compile Include="ViewModels\YcodeHcodeUnClassViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

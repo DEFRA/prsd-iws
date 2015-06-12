@@ -534,6 +534,9 @@
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\EditFullDetails.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\EditCountryOnly.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\_ShipmentForm.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteType\AddYcodeHcodeAndUnClass.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Areas\NotificationApplication\Views\Shipment\Edit.cshtml" />
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Edit.cshtml" />
@@ -631,6 +634,7 @@
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\OperationCodesViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\YcodeHcodeAndUnClassViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />

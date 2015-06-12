@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using Prsd.Core.Mediator;
 
-    public class SetEwcCodes : IRequest<Guid>
+    public class SetWasteCodes : IRequest<Guid>
     {
-        public SetEwcCodes(IEnumerable<WasteCodeData> ewcWasteCodes, Guid notificationId)
+        public SetWasteCodes(IEnumerable<WasteCodeData> ewcWasteCodes, Guid notificationId)
         {
             NotificationId = notificationId;
             EwcWasteCodes = ewcWasteCodes;

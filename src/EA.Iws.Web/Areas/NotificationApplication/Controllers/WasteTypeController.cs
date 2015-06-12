@@ -283,7 +283,7 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), new SetBaselOrOecdWasteCode(new Guid(model.SelectedWasteCode), model.NotificationId));
-                    await client.SendAsync(User.GetAccessToken(), new SetEwcCodes(model.SelectedEwcCodes, model.NotificationId));
+                    await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedEwcCodes, model.NotificationId));
                     return RedirectToAction("OtherWasteCodes", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
@@ -406,7 +406,7 @@
                         }
                         await client.SendAsync(User.GetAccessToken(), new SetOptionalWasteCodes(model.NotificationId, wasteCodeData));
                     }
-                    await client.SendAsync(User.GetAccessToken(), new SetEwcCodes(model.SelectedUnCodes, model.NotificationId));
+                    await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedUnCodes, model.NotificationId));
                     return RedirectToAction("Index", "Home");
                 }
                 catch (ApiBadRequestException ex)
@@ -457,6 +457,113 @@
             {
                 return await client.SendAsync(User.GetAccessToken(), new GetWasteCodes());
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> AddYcodeHcodeAndUnClass(Guid id)
+        {
+            var model = new YcodeHcodeAndUnClassViewModel();
+            await InitializeYcodeHcodeAndUnClassViewModel(model);
+            model.NotificationId = id;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddYcodeHcodeAndUnClass(YcodeHcodeAndUnClassViewModel model, string command)
+        {
+            //Y codes - non js
+            if (command.Equals("addYcode"))
+            {
+                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                var codeToAdd = model.Ycodes.Single(c => c.Id.ToString() == model.SelectedYcode);
+                if (model.SelectedYcodesList.All(c => c.Id != codeToAdd.Id))
+                {
+                    model.SelectedYcodesList.Add(codeToAdd);
+                }
+                return View(model);
+            }
+
+            //H codes - non js
+            if (command.Equals("addHcode"))
+            {
+                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                var codeToAdd = model.Hcodes.Single(c => c.Id.ToString() == model.SelectedHcode);
+                if (model.SelectedHcodesList.All(c => c.Id != codeToAdd.Id))
+                {
+                    model.SelectedHcodesList.Add(codeToAdd);
+                }
+                return View(model);
+            }
+
+            //UN classes - non js
+            if (command.Equals("addUnClass"))
+            {
+                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                var codeToAdd = model.UnClasses.Single(c => c.Id.ToString() == model.SelectedUnClass);
+                if (model.SelectedUnClassesList.All(c => c.Id != codeToAdd.Id))
+                {
+                    model.SelectedUnClassesList.Add(codeToAdd);
+                }
+                return View(model);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                return View(model);
+            }
+
+            if (command == "continue")
+            {
+                using (var client = apiClient())
+                {
+                    try
+                    {
+                        await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedYcodesList, model.NotificationId));
+                        await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedHcodesList, model.NotificationId));
+                        await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedUnClassesList, model.NotificationId));
+                        return RedirectToAction("Index", "Home", new { area = string.Empty });
+                    }
+                    catch (ApiBadRequestException ex)
+                    {
+                        this.HandleBadRequest(ex);
+                        if (ModelState.IsValid)
+                        {
+                            throw;
+                        }
+                    }
+                }
+            }
+
+            await InitializeYcodeHcodeAndUnClassViewModel(model);
+            return View(model);
+        }
+
+        private async Task<YcodeHcodeAndUnClassViewModel> InitializeYcodeHcodeAndUnClassViewModel(YcodeHcodeAndUnClassViewModel model)
+        {
+            var wasteCodes = await GetWasteCodes();
+            model.Ycodes = wasteCodes.Where(c => c.CodeType == CodeType.Y);
+            model.Hcodes = wasteCodes.Where(c => c.CodeType == CodeType.H);
+            model.UnClasses = wasteCodes.Where(c => c.CodeType == CodeType.Un);
+
+            if (model.SelectedYcodesList == null)
+            {
+                model.SelectedYcodesList = new List<WasteCodeData>();
+            }
+
+            if (model.SelectedHcodesList == null)
+            {
+                model.SelectedHcodesList = new List<WasteCodeData>();
+            }
+
+            if (model.SelectedUnClassesList == null)
+            {
+                model.SelectedUnClassesList = new List<WasteCodeData>();
+            }
+
+            return model;
         }
     }
 }

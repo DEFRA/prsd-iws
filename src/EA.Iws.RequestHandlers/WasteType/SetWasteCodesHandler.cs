@@ -8,16 +8,16 @@
     using Prsd.Core.Mediator;
     using Requests.WasteType;
 
-    internal class SetEwcCodesHandler : IRequestHandler<SetEwcCodes, Guid>
+    internal class SetWasteCodesHandler : IRequestHandler<SetWasteCodes, Guid>
     {
         private readonly IwsContext db;
 
-        public SetEwcCodesHandler(IwsContext db)
+        public SetWasteCodesHandler(IwsContext db)
         {
             this.db = db;
         }
 
-        public async Task<Guid> HandleAsync(SetEwcCodes command)
+        public async Task<Guid> HandleAsync(SetWasteCodes command)
         {
             var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
 

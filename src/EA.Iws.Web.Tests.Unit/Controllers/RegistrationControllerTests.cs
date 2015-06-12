@@ -1,15 +1,14 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
+    using Api.Client;
+    using Prsd.Core.Web.OAuth;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Prsd.Core.Web.OAuth;
-    using Services;
-    using ViewModels.Registration;
     using Web.Controllers;
+    using Web.ViewModels.Registration;
     using Xunit;
 
     public class RegistrationControllerTests

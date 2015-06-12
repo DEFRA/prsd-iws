@@ -1,0 +1,381 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.YcodeHcodeAndUnClassViewModel
+           
+@{
+    ViewBag.Title = "Y codes, H codes and UN class";
+}
+
+<div class="grid-row">
+    <header class="hgroup">
+        <div class="form-group">
+            @Html.Gds().HintParagraph("Step 3 of 4")
+        </div>
+        <h2 class="heading-large">Waste Identification</h2>
+    </header>
+
+    @using (Html.BeginForm("AddYcodeHcodeAndUnClass", "WasteType", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+
+        //Y codes
+        <hr/>
+        <div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedYcode)">
+                @Html.Gds().LabelFor(m => m.SelectedYcode, optionalMessage:"(Please enter at least one code or not applicable)")
+                <select data-val="true" data-val-required="The SelectedYcode field is required." id="ycode-list" name="SelectedYcode">
+                    <option description="" selected="selected" value=""></option>
+                    @foreach (var wasteCode in Model.Ycodes)
+                    {
+                        <option ycodedescription="@wasteCode.Description" ycode="@wasteCode.Code" value="@wasteCode.Id">@wasteCode.Code</option>
+                    }
+                </select>
+                <a onclick="addYcodeDescriptionTable()" href="#" class="no-js-hidden" id="YcodeAdd">Add</a>
+            </div>
+
+            <div class="form-group js-hidden" id="ycodeAddMore">
+                <button class="link-submit" type="submit" name="command" value="addYcode">Add</button>
+            </div>
+
+            <div class="js-hidden">
+                <table class="column-two-thirds" id="nonjsYcodeDescriptionTable">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.SelectedYcodesList.Count; i++)
+                    {
+                        <tr>
+                            <td><input name="SelectedYCodesList[@i].Code" type="hidden" value="@Model.SelectedYcodesList[i].Code"/>@Model.SelectedYcodesList[i].Code</td>
+                            <td><input name="SelectedYCodesList[@i].Description" type="hidden" value="@Model.SelectedYcodesList[i].Description"/>@Model.SelectedYcodesList[i].Description</td>
+                            <td><input name="SelectedYCodesList[@i].Id" type="hidden" value="@Model.SelectedYcodesList[i].Id"/></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div class="form-group" id="selectedYcodeTable" style="display: none">
+                <h4 class="heading-small">Selected Y codes</h4>
+                <table id="YcodeDescriptionTable">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+
+        //H codes
+        <hr />
+        <div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedHcode)">
+                @Html.Gds().LabelFor(m => m.SelectedHcode, optionalMessage: "(Please enter at least one code or not applicable)")
+                <select data-val="true" data-val-required="The SelectedHcode field is required." id="hcode-list" name="SelectedHcode">
+                    <option description="" selected="selected" value=""></option>
+                    @foreach (var wasteCode in Model.Hcodes)
+                    {
+                        <option hcodedescription="@wasteCode.Description" hcode="@wasteCode.Code" value="@wasteCode.Id">@wasteCode.Code</option>
+                    }
+                </select>
+                <a onclick="addHcodeDescriptionTable()" href="#" class="no-js-hidden" id="HcodeAdd">Add</a>
+            </div>
+
+            <div class="form-group js-hidden" id="hcodeAddMore">
+                <button class="link-submit" type="submit" name="command" value="addHcode">Add</button>
+            </div>
+
+            <div class="js-hidden">
+                <table class="column-two-thirds" id="nonjsHcodeDescriptionTable">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.SelectedHcodesList.Count; i++)
+                    {
+                        <tr>
+                            <td><input name="SelectedHCodesList[@i].Code" type="hidden" value="@Model.SelectedHcodesList[i].Code"/>@Model.SelectedHcodesList[i].Code</td>
+                            <td><input name="SelectedHCodesList[@i].Description" type="hidden" value="@Model.SelectedHcodesList[i].Description"/>@Model.SelectedHcodesList[i].Description</td>
+                            <td><input name="SelectedHCodesList[@i].Id" type="hidden" value="@Model.SelectedHcodesList[i].Id"/></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div class="form-group" id="selectedHcodeTable" style="display: none">
+                <h4 class="heading-small">Selected H codes</h4>
+                <table id="HcodeDescriptionTable">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+
+
+        //UN classes
+        <hr/>
+
+        <div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
+                @Html.Gds().LabelFor(m => m.SelectedUnClass, optionalMessage: "(Please enter at least one class or not applicable)")
+                <select data-val="true" data-val-required="The SelectedUnClass field is required." id="unclass-list" name="SelectedUnClass">
+                    <option description="" selected="selected" value=""></option>
+                    @foreach (var wasteCode in Model.UnClasses)
+                    {
+                        <option unclassdescription="@wasteCode.Description" hcode="@wasteCode.Code" value="@wasteCode.Id">@wasteCode.Code</option>
+                    }
+                </select>
+                <a onclick="addUnClassDescriptionTable()" href="#" class="no-js-hidden" id="UnClassAdd">Add</a>
+            </div>
+
+            <div class="form-group js-hidden" id="unclassAddMore">
+                <button class="link-submit" type="submit" name="command" value="addUnClass">Add</button>
+            </div>
+
+            <div class="js-hidden">
+                <table class="column-two-thirds" id="nonjsUnClassDescriptionTable">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.SelectedUnClassesList.Count; i++)
+                    {
+                        <tr>
+                            <td><input name="SelectedUnClassesList[@i].Code" type="hidden" value="@Model.SelectedUnClassesList[i].Code"/>@Model.SelectedUnClassesList[i].Code</td>
+                            <td><input name="SelectedUnClassesList[@i].Description" type="hidden" value="@Model.SelectedUnClassesList[i].Description"/>@Model.SelectedUnClassesList[i].Description</td>
+                            <td><input name="SelectedUnClassesList[@i].Id" type="hidden" value="@Model.SelectedUnClassesList[i].Id"/></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div class="form-group" id="selectedUnClassTable" style="display: none">
+                <h4 class="heading-small">Selected UN classes</h4>
+                <table id="UnClassDescriptionTable">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <button class="button" type="submit" name="command" value="continue">Continue</button>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        (function($) {
+            $(function() {
+                $('#ycode-list').selectToAutocomplete();
+                $('#hcode-list').selectToAutocomplete();
+                $('#unclass-list').selectToAutocomplete();
+            });
+        })(jQuery);
+
+        $(function() {
+            $('#YcodeAdd').css('display', 'inline-block');
+        });
+
+        $(function () {
+            $('#HcodeAdd').css('display', 'inline-block');
+        });
+
+        $(function () {
+            $('#UnClassAdd').css('display', 'inline-block');
+        });
+
+        var previouslyEnteredYCodes = [];
+        var previouslyEnteredHCodes = [];
+        var previouslyEnteredUnClasses = [];
+
+        function addYcodeDescriptionTable() {
+
+            $('#selectedYcodeTable').css('display', 'block');
+
+            var sel = document.getElementById("ycode-list");
+            var table = document.getElementById("YcodeDescriptionTable");
+
+            var found = $.inArray(sel.options[sel.selectedIndex].innerText, previouslyEnteredYCodes) > -1;
+            if (found) {
+                $('#YcodeAdd').prev('.ui-autocomplete-input').focus().val('');
+                return;
+            }
+
+            if (sel.options[sel.selectedIndex].innerText == "Not applicable") {
+                previouslyEnteredYCodes = [];
+                $('#YcodeDescriptionTable tr').remove();
+            }
+
+            previouslyEnteredYCodes.push(sel.options[sel.selectedIndex].innerText);
+
+            var row = table.insertRow();
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = sel.options[sel.selectedIndex].text;
+            cell2.innerHTML = sel.options[sel.selectedIndex].getAttribute('ycodedescription');
+            cell3.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteYcodeRow(this)\">Delete</a>";
+            cell4.innerHTML = " <input type=\"hidden\" name=\"SelectedYCodesList.Index\" value=\"" + sel.selectedIndex + "\" /><input name=\"SelectedYCodesList[" + sel.selectedIndex + "].Id\" type=\"hidden\" value = \"" + sel.options[sel.selectedIndex].value + " \"/>";
+
+            //give text box the focus and clear its content
+            $('#YcodeAdd').prev('.ui-autocomplete-input').focus().val('');
+        }
+
+        function addHcodeDescriptionTable() {
+
+            $('#selectedHcodeTable').css('display', 'block');
+
+            var sel = document.getElementById("hcode-list");
+            var table = document.getElementById("HcodeDescriptionTable");
+
+            var found = $.inArray(sel.options[sel.selectedIndex].innerText, previouslyEnteredHCodes) > -1;
+            if (found) {
+                $('#HcodeAdd').prev('.ui-autocomplete-input').focus().val('');
+                return;
+            }
+
+            if (sel.options[sel.selectedIndex].innerText == "Not applicable") {
+                previouslyEnteredHCodes = [];
+                $('#HcodeDescriptionTable tr').remove();
+            }
+
+            previouslyEnteredHCodes.push(sel.options[sel.selectedIndex].innerText);
+
+            var row = table.insertRow();
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = sel.options[sel.selectedIndex].text;
+            cell2.innerHTML = sel.options[sel.selectedIndex].getAttribute('hcodedescription');
+            cell3.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteHcodeRow(this)\">Delete</a>";
+            cell4.innerHTML = " <input type=\"hidden\" name=\"SelectedHCodesList.Index\" value=\"" + sel.selectedIndex + "\" /><input name=\"SelectedHCodesList[" + sel.selectedIndex + "].Id\" type=\"hidden\" value = \"" + sel.options[sel.selectedIndex].value + " \"/>";
+
+            //give text box the focus and clear its content
+            $('#HcodeAdd').prev('.ui-autocomplete-input').focus().val('');
+        }
+
+        function addUnClassDescriptionTable() {
+
+            $('#selectedUnClassTable').css('display', 'block');
+
+            var sel = document.getElementById("unclass-list");
+            var table = document.getElementById("UnClassDescriptionTable");
+
+            var found = $.inArray(sel.options[sel.selectedIndex].innerText, previouslyEnteredUnClasses) > -1;
+            if (found) {
+                $('#UnClassAdd').prev('.ui-autocomplete-input').focus().val('');
+                return;
+            }
+
+            if (sel.options[sel.selectedIndex].innerText == "Not applicable") {
+                previouslyEnteredUnClasses = [];
+                $('#UnClassDescriptionTable tr').remove();
+            }
+
+            previouslyEnteredUnClasses.push(sel.options[sel.selectedIndex].innerText);
+
+            var row = table.insertRow();
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = sel.options[sel.selectedIndex].text;
+            cell2.innerHTML = sel.options[sel.selectedIndex].getAttribute('unclassdescription');
+            cell3.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteUnClassRow(this)\">Delete</a>";
+            cell4.innerHTML = " <input type=\"hidden\" name=\"SelectedUnClassesList.Index\" value=\"" + sel.selectedIndex + "\" /><input name=\"SelectedUnClassesList[" + sel.selectedIndex + "].Id\" type=\"hidden\" value = \"" + sel.options[sel.selectedIndex].value + " \"/>";
+
+            //give text box the focus and clear its content
+            $('#UnClassAdd').prev('.ui-autocomplete-input').focus().val('');
+        }
+
+        function deleteYcodeRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            var table = document.getElementById("YcodeDescriptionTable");
+
+            var row = table.rows[i];
+            var cells = row.getElementsByTagName("td");
+
+            var wasteCode = cells[0].innerText;
+
+            var index = previouslyEnteredYCodes.indexOf(wasteCode);
+            delete previouslyEnteredYCodes[index];
+
+            table.deleteRow(i);
+        }
+
+        function deleteHcodeRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            var table = document.getElementById("HcodeDescriptionTable");
+
+            var row = table.rows[i];
+            var cells = row.getElementsByTagName("td");
+
+            var wasteCode = cells[0].innerText;
+
+            var index = previouslyEnteredHCodes.indexOf(wasteCode);
+            delete previouslyEnteredHCodes[index];
+
+            table.deleteRow(i);
+        }
+
+        function deleteUnClassRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            var table = document.getElementById("UnClassDescriptionTable");
+
+            var row = table.rows[i];
+            var cells = row.getElementsByTagName("td");
+
+            var wasteCode = cells[0].innerText;
+
+            var index = previouslyEnteredUnClasses.indexOf(wasteCode);
+            delete previouslyEnteredUnClasses[index];
+
+            table.deleteRow(i);
+        }
+
+
+
+    </script>
+}
