@@ -10,7 +10,7 @@
 
         public IEnumerable OperationCodes { get; set; }
 
-        [Display(Name = "I will provide this detail in a separate annex with my submission")]
+        [Display(Name = "I will provide these details in an annex when I submit my notification")]
         public bool AnnexPorvided { get; set; }
 
         [Display(Name = "Display name for details")]

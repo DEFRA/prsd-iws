@@ -9,7 +9,7 @@
     <div class="column-two-thirds">
         <header class="hgroup">
             <h2 class="heading-medium">
-                You have selected operation codes:
+                You have chosen the following operation codes:
             </h2>
         </header>
 
@@ -20,13 +20,13 @@
 
         <header class="hgroup">
             <h2 class="heading-medium">
-                For these operation codes, describe the technology employed
+                Describe the technologies and processes used for these operation codes:
             </h2>
         </header>
 
         <div>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
-                @Html.Gds().HintSpan("Enter details below of the technology and process being carried out on the waste at the facilities.  This can be provided as a separate annex with this submission.")
+                @Html.Gds().HintSpan("Enter details about the technologies and processes used to treat the waste on site, or send the details in a separate annex.")
                 @Html.Gds().ValidationMessageFor(m => m.Details)
                 @Html.TextAreaFor(m => m.Details, new { @style = "width: 100%; height: 200px" })
             </div>
