@@ -490,7 +490,6 @@
     <Content Include="Views\Shipment\Info.cshtml" />
     <Content Include="Views\Account\EmailVerificationRequired.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
-    <Content Include="Views\Account\VerificationEmailSent.cshtml" />
     <Content Include="Views\Importer\Edit.cshtml" />
     <Content Include="Views\Facility\CopyFromImporter.cshtml" />
     <Content Include="Views\Producer\Edit.cshtml" />

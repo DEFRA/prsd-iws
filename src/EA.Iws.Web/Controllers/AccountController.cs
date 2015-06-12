@@ -111,13 +111,7 @@
                 return View();
             }
 
-            return RedirectToAction("VerificationEmailSent");
-        }
-
-        [HttpGet]
-        public ActionResult VerificationEmailSent()
-        {
-            return View();
+            return RedirectToAction("EmailVerificationRequired");
         }
 
         [HttpGet]

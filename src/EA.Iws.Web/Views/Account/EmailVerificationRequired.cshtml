@@ -19,9 +19,12 @@
 
 <p class="lede">In order to continue using this service you must confirm your email address</p>
 <p>You should have received an email after registering to use the International Waste Shipments system. Check your email inbox or junk mail folder for the account you registered with.</p>
-<p>If you have still not received an email, click below to send another email:</p>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <button class="button" type="submit">Send email</button>
+    <p>
+        If you have not received the email you can
+        <button class="link-submit" type="submit">request another email</button>.
+    </p>
 }
