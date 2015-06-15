@@ -32,6 +32,22 @@
             <label id="descriptionTextArea"></label>
         </div>
 
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedEcwCode)">
+            @Html.Gds().LabelFor(m => m.SelectedEcwCode)
+
+            <select onchange=" getComboDescription(this) " data-val="true" data-val-required="The SelectedWasteCode field is required." id="ecw-code-list" name="SelectedEcwCode">
+                <option description="" selected="selected" value=""></option>
+                @foreach (var ecwCode in Model.EcwCodes)
+                {
+                    <option description="@ecwCode.Description" value="@ecwCode.Id">@ecwCode.Code</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label id="descriptionTextArea"></label>
+        </div>
+
     </div>
     <div class="form-group">
         <button class="button" type="submit">Continue</button>

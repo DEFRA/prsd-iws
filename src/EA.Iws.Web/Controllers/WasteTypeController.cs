@@ -250,7 +250,8 @@
             var model = new WasteCodeViewModel
             {
                 NotificationId = id,
-                WasteCodes = await GetWasteCodes()
+                WasteCodes = await GetWasteCodes(),
+                EcwCodes = await GetWasteCodes()
             };
 
             return View(model);

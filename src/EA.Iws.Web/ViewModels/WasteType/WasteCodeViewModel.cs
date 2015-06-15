@@ -14,5 +14,11 @@
         public string SelectedWasteCode { get; set; }
 
         public Guid NotificationId { get; set; }
+
+        public IEnumerable<WasteCodeData> EcwCodes { get; set; }
+
+        [Required]
+        [Display(Name = "ECW Code")]
+        public string SelectedEcwCode { get; set; }
     }
 }
