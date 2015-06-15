@@ -6,8 +6,12 @@
 @using (Html.BeginForm(actionName: "MultipleFacilities", controllerName: "Facility", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-    <h2 class="heading-large">@Model.NotificationType.ToString() facilities</h2>
+
+    <h2 class="heading-large">@Model.NotificationType.ToString() facilities<br />Actual site of @Model.NotificationType.ToString().ToLower()</h2>
+    <h3 class="heading-medium">
+        Select the site where the waste will be finally
+        @(Model.NotificationType.ToString().Equals("Disposal", StringComparison.InvariantCultureIgnoreCase) ? "disposed of" : "recovered")
+    </h3>
 
     if (Model != null && Model.FacilityData.Any())
     {
