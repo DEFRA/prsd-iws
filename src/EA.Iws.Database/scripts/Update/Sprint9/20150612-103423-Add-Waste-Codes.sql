@@ -120,8 +120,6 @@ insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (n
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'B4010','Wastes consisting mainly of water-based/latex paints, inks and hardened varnishes not containing organic solvents, heavy metals or biocides to an extent to render them hazardous (note the related entry on list A, A4070)',1)
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'B4020','Wastes from production, formulation and use of resins, latex, plasticisers, glues/adhesives, not listed on list A, free of solvents and other contaminants to an extent that they do not exhibit Annex III characteristics, e.g. water based, or glues based on casein starch, dextrin, cellulose ethers, polyvinyl alcohols (note the related entry on list A, A3050)',1)
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'B4030','Used single use cameras, with batteries not included on list A',1)
-insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'Y46','Waste collected from households',1)
-insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'Y47','Residues arising from the incineration of household wastes',1)
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'GB040','Slags from precious metals and copper processing for further refining',2)
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'GC010','Electrical assemblies consisting only of metals or alloys.',2)
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'GC020','Electronic scrap (e.g. printed circuit boards, electronic components, wire, etc.) and reclaimed electronic components suitable for base and precious metal recovery.',2)
@@ -157,8 +155,6 @@ insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (n
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'AD100','Wastes from non-cyanide based systems, which arise from surface treatment of plastics',2)
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'AD120','Ion exchange resins',2)
 insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'AD150','Naturally occurring organic material used as a filter medium (such as bio-filters)',2)
-insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'Y46','Waste collected from households',1)
-insert into [Lookup].[WasteCode]([Id],[Code],[Description],[CodeType]) VALUES (newid(),'Y47','Residues arising from the incineration of household wastes',1)
 
 
 GO
