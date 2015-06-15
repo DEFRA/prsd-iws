@@ -36,8 +36,8 @@
                 {
                     <tr>
                         <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].Constituent)</td>
-                        <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].MaxConcentration, new { type = "number", min = "0", max = "100", @class = "numberInput" })</td>
-                        <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].MinConcentration, new { type = "number", min = "0", max = "100", @class = "numberInput" })</td>
+                        <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].MaxConcentration, new { type = "number", min = "0", max = "100" })</td>
+                        <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].MinConcentration, new { type = "number", min = "0", max = "100" })</td>
                     </tr>
                 }
             </table>

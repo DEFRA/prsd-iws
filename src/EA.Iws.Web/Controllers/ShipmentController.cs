@@ -1,16 +1,13 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
-    using Prsd.Core.Helpers;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
-    using Requests.Notification;
     using Requests.Shipment;
     using ViewModels.Shared;
     using ViewModels.Shipment;
@@ -30,23 +27,14 @@
         {
             using (var client = apiClient())
             {
-                var isPreconsented =
+                var shipmentData =
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new GetIsPreconsentedRecoveryFacility { NotificationId = id });
-                var model = new ShipmentInfoViewModel
-                {
-                    NotificationId = id,
-                    UnitsSelectList = GetUnits(),
-                    IsPreconsentedRecoveryFacility = isPreconsented
-                };
+                            new GetShipmentInfoForNotification(id));
+
+                var model = new ShipmentInfoViewModel(shipmentData);
                 return View(model);
             }
-        }
-
-        private IEnumerable<SelectListItem> GetUnits()
-        {
-            return new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
         }
 
         [HttpPost]
@@ -55,7 +43,6 @@
         {
             if (!ModelState.IsValid)
             {
-                model.UnitsSelectList = GetUnits();
                 return View(model);
             }
 
@@ -64,13 +51,7 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(),
-                        new CreateOrUpdateShipmentInfo(
-                            model.NotificationId,
-                            model.NumberOfShipments,
-                            model.Quantity,
-                            model.Units,
-                            model.StartDate,
-                            model.EndDate));
+                        model.ToRequest());
 
                     return RedirectToAction("ChemicalComposition", "WasteType", new { id = model.NotificationId });
                 }
@@ -83,7 +64,7 @@
                         throw;
                     }
                 }
-                model.UnitsSelectList = GetUnits();
+
                 return View(model);
             }
         }

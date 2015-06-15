@@ -2,9 +2,10 @@
 {
     using System;
     using Prsd.Core.Mapper;
-    using Requests.Notification;
+    using Requests.Shipment;
 
-    internal class ShipmentQuantityUnitsMap : IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits>
+    internal class ShipmentQuantityUnitsMap : IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits>,
+        IMap<Domain.ShipmentQuantityUnits, ShipmentQuantityUnits>
     {
         public Domain.ShipmentQuantityUnits Map(ShipmentQuantityUnits source)
         {
@@ -29,6 +30,16 @@
             }
 
             return unit;
+        }
+
+        public ShipmentQuantityUnits Map(Domain.ShipmentQuantityUnits source)
+        {
+            ShipmentQuantityUnits unit;
+            if (Enum.TryParse(source.Value.ToString(), out unit))
+            {
+                return unit;
+            }
+            throw new ArgumentException(string.Format("Unknown ShipmentQuantityUnits {0}", source.Value), "source");
         }
     }
 }

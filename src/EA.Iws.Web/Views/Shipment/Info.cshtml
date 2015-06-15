@@ -7,17 +7,21 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-    
+
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
 
     <header class="hgroup">
         <h2 class="heading-large">What is the total intended number of shipments?</h2>
     </header>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberOfShipments)">
-        @Html.Gds().LabelFor(m => m.NumberOfShipments)
-        @Html.Gds().ValidationMessageFor(m => m.NumberOfShipments)
-        @Html.Gds().TextBoxFor(m => m.NumberOfShipments, new { @class = "numberInput", width = "50px" })
+    <div class="grid-row">
+        <div class="column-half">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberOfShipments)">
+                @Html.Gds().LabelFor(m => m.NumberOfShipments)
+                @Html.Gds().ValidationMessageFor(m => m.NumberOfShipments)
+                @Html.Gds().TextBoxFor(m => m.NumberOfShipments)
+            </div>
+        </div>
     </div>
 
     <hr>
@@ -37,7 +41,7 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.Units)">
                 @Html.Gds().LabelFor(m => m.Units)
                 @Html.Gds().ValidationMessageFor(m => m.Units)
-                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList, new { @class = "unitsInput" })
+                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList, "--- select an option ---")
             </div>
         </div>
     </div>

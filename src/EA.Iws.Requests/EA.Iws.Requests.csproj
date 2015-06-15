@@ -73,7 +73,7 @@
     <Compile Include="Notification\GetNotificationInfo.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
-    <Compile Include="Notification\ShipmentQuantityUnits.cs" />
+    <Compile Include="Shipment\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
     <Compile Include="OperationCodes\AddDisposalCodes.cs" />
@@ -115,11 +115,13 @@
     <Compile Include="Registration\Users\UserById.cs" />
     <Compile Include="Shipment\CreateOrUpdateShipmentInfo.cs" />
     <Compile Include="Shipment\GetPackagingTypesForNotification.cs" />
+    <Compile Include="Shipment\GetShipmentInfoForNotification.cs" />
     <Compile Include="Shipment\PackagingData.cs" />
     <Compile Include="Shipment\PackagingType.cs" />
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfo.cs" />
     <Compile Include="Shared\CompetentAuthorityData.cs" />
     <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
+    <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="StateOfExport\EditStateOfExportForNotification.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotification.cs" />
     <Compile Include="StateOfExport\GetStateOfExportForNotification.cs" />
