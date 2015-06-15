@@ -6,26 +6,22 @@
 @using (Html.BeginForm(actionName: "RecoveryPreconsent", controllerName: "Facility", routeValues: new { id = ViewBag.NotificationId }, method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
 
     <header class="hgroup">
-        <h2 class="heading-large">Pre-consented recovery facilities</h2>
-        <div class="colored-header-bar"></div>
-        <h2 class="heading-medium">Are all the recovery facilities pre-consented?</h2>
+        <h2 class="heading-large">Are all the recovery facilities pre-consented?</h2>
     </header>
-
-    @Html.Gds().HintParagraph("Select ‘Yes’ if all the recovery facilities have a pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006 that covers this notification.")
-    @Html.Gds().HintParagraph("Evidence of the pre-consent status must be provided with this submission. This may be the pre-consent status certificate issue by the relevant competent authority.")
-
+    <p>Select ‘Yes’ if all the recovery facilities have a pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006 that covers this notification.</p>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
         @Html.EditorFor(m => m.Choices)
     </div>
 
     <div class="form-group">
         <div class="panel-indent" id="messageYes">
-            @Html.Gds().HintSpan("This notification will allow the intended shipment dates to cover a 3 year period")
+            <p>This notification will allow the intended shipment dates to cover a 3 year period. You must send evidence of the pre-consent status with your notification submission. This may be the pre-consent certificate or letter issued by the relevant competent authority to the recovery facility.</p>
         </div>
         <div class="panel-indent" id="messageNo">
-            @Html.Gds().HintSpan("This notification will allow the intended shipment dates to cover a 12 month period")
+            <p>This notification will allow the intended shipment dates to cover a 12 month period.</p>
         </div>
     </div>
 
