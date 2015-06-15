@@ -230,7 +230,7 @@
                     }
 
                     await client.SendAsync(User.GetAccessToken(), new SetPhysicalCharacteristics(selectedPackagingTypes, model.NotificationId, model.OtherDescription));
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("WasteCode", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
