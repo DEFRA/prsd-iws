@@ -8,6 +8,8 @@
     {
         private int numberOfShipments;
         private decimal quantity;
+        private DateTime firstDate;
+        private DateTime lastDate;
 
         protected ShipmentInfo()
         {
@@ -15,11 +17,10 @@
 
         internal ShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
         {
-            FirstDate = firstDate;
-            LastDate = lastDate;
+            UpdateShipmentPeriod(firstDate, lastDate);
+            UpdateQuantity(quantity, unit);
+
             NumberOfShipments = numberOfShipments;
-            Quantity = quantity;
-            Units = unit;
         }
 
         public int NumberOfShipments
@@ -32,23 +33,39 @@
             }
         }
 
-        public DateTime FirstDate { get; private set; }
+        public DateTime FirstDate
+        {
+            get { return firstDate; }
+            private set
+            {
+                Guard.ArgumentNotDefaultValue(() => value, value);
+                firstDate = value;
+            }
+        }
 
-        public DateTime LastDate { get; private set; }
+        public DateTime LastDate
+        {
+            get { return lastDate; }
+            private set
+            {
+                Guard.ArgumentNotDefaultValue(() => value, value);
+                lastDate = value;
+            }
+        }
 
-        public ShipmentQuantityUnits Units { get; internal set; }
+        public ShipmentQuantityUnits Units { get; private set; }
 
         public decimal Quantity
         {
             get { return quantity; }
-            internal set
+            private set
             {
                 Guard.ArgumentNotZeroOrNegative(() => value, value);
                 quantity = decimal.Round(value, 4, MidpointRounding.AwayFromZero);
             }
         }
 
-        internal void UpdateShipmentDates(DateTime firstDate, DateTime lastDate)
+        internal void UpdateShipmentPeriod(DateTime firstDate, DateTime lastDate)
         {
             Guard.ArgumentNotDefaultValue(() => firstDate, firstDate);
             Guard.ArgumentNotDefaultValue(() => lastDate, lastDate);
@@ -59,8 +76,14 @@
                     string.Format("The start date must be before the end date on shipment info {0}", Id));
             }
 
-            FirstDate = firstDate;
-            LastDate = lastDate;
+            this.firstDate = firstDate;
+            this.lastDate = lastDate;
+        }
+
+        internal void UpdateQuantity(decimal quantity, ShipmentQuantityUnits units)
+        {
+            Quantity = quantity;
+            Units = units;
         }
     }
 }

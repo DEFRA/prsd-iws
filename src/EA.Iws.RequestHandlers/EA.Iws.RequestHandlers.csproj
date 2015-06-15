@@ -85,6 +85,7 @@
     <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
+    <Compile Include="Mappings\ShipmentQuantityUnitsMap.cs" />
     <Compile Include="Mappings\SpecialHandlingMap.cs" />
     <Compile Include="Mappings\WasteCodeMap.cs" />
     <Compile Include="Mappings\WasteCompositionMap.cs" />
@@ -137,7 +138,7 @@
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />
     <Compile Include="Shared\GetCompetentAuthoritiesByCountryHandler.cs" />
-    <Compile Include="Shipment\CreateNumberOfShipmentsInfoHandler.cs" />
+    <Compile Include="Shipment\CreateOrUpdateShipmentInfoHandler.cs" />
     <Compile Include="Shipment\GetPackagingTypesForNotificationHandler.cs" />
     <Compile Include="Shipment\SetPackagingTypeOnShipmentInfoHandler.cs" />
     <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />

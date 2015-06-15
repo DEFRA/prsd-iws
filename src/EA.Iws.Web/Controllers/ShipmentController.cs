@@ -64,7 +64,7 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(),
-                        new CreateNumberOfShipmentsInfo(
+                        new CreateOrUpdateShipmentInfo(
                             model.NotificationId,
                             model.NumberOfShipments,
                             model.Quantity,

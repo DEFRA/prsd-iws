@@ -4,9 +4,9 @@
     using Notification;
     using Prsd.Core.Mediator;
 
-    public class CreateNumberOfShipmentsInfo : IRequest<Guid>
+    public class CreateOrUpdateShipmentInfo : IRequest<Guid>
     {
-        public CreateNumberOfShipmentsInfo(Guid notificationId, int numberOfShipments,  decimal quantity, ShipmentQuantityUnits units, DateTime startDate, DateTime endDate)
+        public CreateOrUpdateShipmentInfo(Guid notificationId, int numberOfShipments,  decimal quantity, ShipmentQuantityUnits units, DateTime startDate, DateTime endDate)
         {
             NotificationId = notificationId;
             NumberOfShipments = numberOfShipments;
