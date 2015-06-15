@@ -78,6 +78,7 @@
     <Content Include="scripts\Update\Sprint9\20150612-103423-Add-Waste-Codes.sql" />
     <Content Include="scripts\Update\Sprint9\20150612-112054-Add-WasteCode-To-WasteType-Table.sql" />
     <Content Include="scripts\Update\Sprint9\20150611-165300-add-notification-id-to-packaging-info.sql" />
+    <Content Include="scripts\Update\Sprint9\20150615-102500-shipment-info-columns-not-null.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

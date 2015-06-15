@@ -6,23 +6,28 @@
 
     public class ShipmentInfo : Entity
     {
-        private int? numberOfShipments;
-        private decimal? quantity;
+        private int numberOfShipments;
+        private decimal quantity;
 
-        internal ShipmentInfo()
+        protected ShipmentInfo()
         {
-            Units = ShipmentQuantityUnits.NotSet;
         }
 
-        public int? NumberOfShipments
+        internal ShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
+        {
+            FirstDate = firstDate;
+            LastDate = lastDate;
+            NumberOfShipments = numberOfShipments;
+            Quantity = quantity;
+            Units = unit;
+        }
+
+        public int NumberOfShipments
         {
             get { return numberOfShipments; }
             internal set
             {
-                if (value.HasValue)
-                {
-                    Guard.ArgumentNotZeroOrNegative(() => value.Value, value.Value);
-                }
+                Guard.ArgumentNotZeroOrNegative(() => value, value);
                 numberOfShipments = value;
             }
         }
@@ -33,20 +38,13 @@
 
         public ShipmentQuantityUnits Units { get; internal set; }
 
-        public decimal? Quantity
+        public decimal Quantity
         {
             get { return quantity; }
             internal set
             {
-                if (value.HasValue)
-                {
-                    Guard.ArgumentNotZeroOrNegative(() => value.Value, value.Value);
-                    quantity = decimal.Round(value.Value, 4, MidpointRounding.AwayFromZero);
-                }
-                else
-                {
-                    quantity = null;
-                }
+                Guard.ArgumentNotZeroOrNegative(() => value, value);
+                quantity = decimal.Round(value, 4, MidpointRounding.AwayFromZero);
             }
         }
 
