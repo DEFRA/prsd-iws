@@ -10,7 +10,7 @@
 
         public string Description { get; set; }
 
-        public bool IsOecdCode { get; set; }
+        public CodeType CodeType { get; set; }
 
         public Guid NotificationId { get; set; }
     }

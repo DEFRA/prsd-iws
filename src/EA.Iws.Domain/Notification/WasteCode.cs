@@ -1,17 +1,19 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
-    using Prsd.Core.Domain;
+    using System;
 
-    public class WasteCode : Entity
+    public class WasteCode
     {
         protected WasteCode()
         {
         }
 
+        public Guid Id { get; private set; }
+
         public string Description { get; private set; }
 
         public string Code { get; private set; }
 
-        public bool IsOecdCode { get; private set; }
+        public CodeType CodeType { get; private set; }
     }
 }

@@ -6,8 +6,7 @@ CREATE TABLE [Lookup].[WasteCode](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Code] [varchar](50) NOT NULL,
 	[Description] [varchar](max) NULL,
-	[IsOecdCode] [bit] NOT NULL CONSTRAINT [DF_WasteCode_IsOecdCode]  DEFAULT ((0)),
-	[RowVersion] [timestamp] NOT NULL,
+	[CodeType] [int] NOT NULL
  CONSTRAINT [PK_WasteCode] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

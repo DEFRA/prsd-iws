@@ -247,16 +247,13 @@
         [HttpGet]
         public async Task<ActionResult> WasteCode(Guid id)
         {
-            using (var client = apiClient())
+            var model = new WasteCodeViewModel
             {
-                var model = new WasteCodeViewModel
-                {
-                    NotificationId = id,
-                    WasteCodes = await GetWasteCodes()
-                };
+                NotificationId = id,
+                WasteCodes = await GetWasteCodes()
+            };
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]

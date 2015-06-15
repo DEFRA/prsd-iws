@@ -9,7 +9,7 @@
         {
             this.ToTable("WasteCode", "Lookup");
 
-            Property(x => x.Code).IsRequired();
+            Property(x => x.Code).HasMaxLength(50).IsRequired();
             Property(x => x.Description).IsRequired();
         }
     }

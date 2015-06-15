@@ -146,7 +146,7 @@
 
         public bool IsDocumentAttached { get; internal set; }
 
-        public virtual WasteCode WasteCode { get; set; }
+        public virtual WasteCode WasteCode { get; private set; }
 
         public static WasteType CreateOtherWasteType(string chemicalCompositionName, string chemicalCompositionDescription)
         {
