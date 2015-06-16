@@ -21,7 +21,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Info(Guid id)
+        public async Task<ActionResult> Add(Guid id)
         {
             using (var client = apiClient())
             {
@@ -30,6 +30,11 @@
                         client.SendAsync(User.GetAccessToken(),
                             new GetShipmentInfoForNotification(id));
 
+                if (shipmentData.HasShipmentData)
+                {
+                    return RedirectToAction("Edit", new { id });
+                }
+
                 var model = new ShipmentInfoViewModel(shipmentData);
                 return View(model);
             }
@@ -37,7 +42,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Info(ShipmentInfoViewModel model)
+        public async Task<ActionResult> Add(ShipmentInfoViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -52,6 +57,58 @@
                         model.ToRequest());
 
                     return RedirectToAction("ChemicalComposition", "WasteType", new { id = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var shipmentData =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new GetShipmentInfoForNotification(id));
+
+                if (!shipmentData.HasShipmentData)
+                {
+                    return RedirectToAction("Add", new { id });
+                }
+
+                var model = new ShipmentInfoViewModel(shipmentData);
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(ShipmentInfoViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(),
+                        model.ToRequest());
+
+                    return RedirectToAction("NotificationOverview", "NotificationApplication", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

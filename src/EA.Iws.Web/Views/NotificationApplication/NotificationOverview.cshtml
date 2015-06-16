@@ -57,7 +57,7 @@
             </tr>
             <tr>
                 <td>
-                    <div>Packaging Types</div>
+                    <div>Packaging types</div>
                 </td>
                 <td>
                     <div>@Html.ActionLink("Edit", "Index", "PackagingTypes", new { id = Model.NotificationId }, null)</div>
@@ -65,10 +65,18 @@
             </tr>
             <tr>
                 <td>
-                    <div>Special Handling</div>
+                    <div>Special handling</div>
                 </td>
                 <td>
                     <div>@Html.ActionLink("Edit", "Index", "SpecialHandling", new { id = Model.NotificationId }, null)</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>Intended shipments</div>
+                </td>
+                <td>
+                    <div>@Html.ActionLink("Edit", "Edit", "Shipment", new { id = Model.NotificationId }, null)</div>
                 </td>
             </tr>
         </tbody>

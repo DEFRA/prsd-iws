@@ -33,7 +33,7 @@
         [HttpPost]
         public ActionResult Summary(Guid id, FormCollection model)
         {
-            return RedirectToAction("Info", "Shipment", new { id });
+            return RedirectToAction("Add", "Shipment", new { id });
         }
     }
 }
