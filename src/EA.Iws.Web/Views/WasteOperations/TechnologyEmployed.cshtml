@@ -20,13 +20,13 @@
 
         <header class="hgroup">
             <h2 class="heading-medium">
-                Describe the technologies and processes used for these operation codes:
+                Describe the technologies and processes used for these operation codes
             </h2>
         </header>
 
         <div>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
-                @Html.Gds().HintSpan("Enter details about the technologies and processes used to treat the waste on site, or send the details in a separate annex.")
+                @Html.Gds().HintSpan("Enter details about the technologies and processes used to treat the waste on site.")
                 @Html.Gds().ValidationMessageFor(m => m.Details)
                 @Html.TextAreaFor(m => m.Details, new { @style = "width: 100%; height: 200px" })
             </div>
