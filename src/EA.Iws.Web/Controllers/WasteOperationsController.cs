@@ -1,13 +1,10 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using System.Web.Optimization;
-    using System.Web.WebPages;
     using Api.Client;
     using Infrastructure;
     using Prsd.Core.Helpers;
@@ -20,6 +17,7 @@
     using ViewModels.Shared;
     using ViewModels.WasteOperations;
 
+    [Authorize]
     public class WasteOperationsController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
@@ -35,9 +33,9 @@
             using (var client = apiClient())
             {
                 try
-                { 
+                {
                     var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
-                    
+
                     if (response.NotificationType == NotificationType.Disposal)
                     {
                         return RedirectToAction("AddDisposalCodes", "WasteOperations", new { id });
@@ -58,14 +56,15 @@
                     }
                 }
             }
-            
-            throw new InvalidOperationException("Invalid Notification Type. The Notification must be marked as for 'Recovery' or 'Disposal'");
+
+            throw new InvalidOperationException(
+                "Invalid Notification Type. The Notification must be marked as for 'Recovery' or 'Disposal'");
         }
 
         [HttpGet]
         public ActionResult AddRecoveryCodes(Guid id)
         {
-            var model = new OperationCodesViewModel {NotificationId = id};
+            var model = new OperationCodesViewModel { NotificationId = id };
             model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>();
             model.CodeInformation = new Dictionary<string, string>();
 
@@ -111,7 +110,7 @@
                         client.SendAsync(User.GetAccessToken(),
                             new AddRecoveryCodes(selectedRecoveryCodes, model.NotificationId));
 
-                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId});
+                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -210,7 +209,7 @@
             {
                 try
                 {
-                    IList<OperationCodeData> codeDatas =
+                    var codeDatas =
                         await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
 
                     var orderedCodeDatas = codeDatas.OrderBy(c => c.Value);
@@ -228,7 +227,7 @@
 
             return operationCodes;
         }
-            
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> TechnologyEmployed(TechnologyEmployedViewModel model)
@@ -248,7 +247,8 @@
                         client.SendAsync(User.GetAccessToken(),
                             new UpdateTechnologyEmployed(model.NotificationId, model.AnnexPorvided, model.Details));
 
-                    return RedirectToAction("ReasonForExport", "NotificationApplication", new { id = model.NotificationId });
+                    return RedirectToAction("ReasonForExport", "NotificationApplication",
+                        new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

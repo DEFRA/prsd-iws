@@ -14,6 +14,7 @@
     using ViewModels.Shared;
     using ViewModels.TransitState;
 
+    [Authorize]
     public class TransitStateController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

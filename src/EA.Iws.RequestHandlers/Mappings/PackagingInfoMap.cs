@@ -5,8 +5,9 @@
     using System.Linq;
     using Domain.Notification;
     using Prsd.Core.Mapper;
+    using Requests.PackagingType;
     using Requests.Shipment;
-    using PackagingType = Requests.Shipment.PackagingType;
+    using PackagingType = Requests.PackagingType.PackagingType;
 
     internal class PackagingInfoMap : IMap<SetPackagingTypeOnShipmentInfo, IEnumerable<PackagingInfo>>,
         IMap<NotificationApplication, PackagingData>

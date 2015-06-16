@@ -495,7 +495,6 @@
     <Content Include="Views\Producer\Edit.cshtml" />
     <Content Include="Views\Emails\VerifyEmailAddress.cshtml" />
     <Content Include="Views\Facility\Edit.cshtml" />
-    <Content Include="Views\Shipment\PackagingTypes.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxCollectionViewModel.cshtml" />
     <Content Include="Views\Facility\RecoveryPreconsent.cshtml" />
     <Content Include="Views\Carrier\Edit.cshtml" />
@@ -524,6 +523,7 @@
     <Content Include="Views\WasteType\WasteCode.cshtml" />
     <Content Include="Views\StateOfExport\EditFullDetails.cshtml" />
     <Content Include="Views\StateOfExport\EditCountryOnly.cshtml" />
+    <Content Include="Views\PackagingTypes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -548,6 +548,7 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\PackagingTypesController.cs" />
     <Compile Include="Controllers\SpecialHandlingController.cs" />
     <Compile Include="Controllers\StateOfImportController.cs" />
     <Compile Include="Controllers\StateOfExportController.cs" />
@@ -620,7 +621,7 @@
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptionalViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />
-    <Compile Include="ViewModels\Shipment\PackagingTypesViewModel.cs" />
+    <Compile Include="ViewModels\PackagingTypes\PackagingTypesViewModel.cs" />
     <Compile Include="ViewModels\Shipment\ShipmentInfoViewModel.cs" />
     <Compile Include="ViewModels\StateOfImport\StateOfImportViewModel.cs" />
     <Compile Include="ViewModels\WasteOperations\TechnologyEmployedViewModel.cs" />

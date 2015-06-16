@@ -8,6 +8,7 @@
     using Requests.Notification;
     using ViewModels.SpecialHandling;
 
+    [Authorize]
     public class SpecialHandlingController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Shipment
+﻿namespace EA.Iws.RequestHandlers.PackagingType
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using Domain.Notification;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Shipment;
+    using Requests.PackagingType;
 
     internal class SetPackagingTypeOnShipmentInfoHandler : IRequestHandler<SetPackagingTypeOnShipmentInfo, Guid>
     {

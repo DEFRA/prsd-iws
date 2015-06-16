@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Shipment
+﻿namespace EA.Iws.Requests.PackagingType
 {
     using System.Collections.Generic;
 

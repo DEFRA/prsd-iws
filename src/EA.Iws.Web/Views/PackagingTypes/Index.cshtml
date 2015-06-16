@@ -1,5 +1,5 @@
-﻿@using EA.Iws.Requests.Shipment
-@model EA.Iws.Web.ViewModels.Shipment.PackagingTypesViewModel
+﻿@using EA.Iws.Requests.PackagingType
+@model EA.Iws.Web.ViewModels.PackagingTypes.PackagingTypesViewModel
 @{
     ViewBag.Title = "Which Packaging Type";
 }
@@ -9,7 +9,7 @@
     <p>Select all that apply</p>
 </header>
 
-@using (Html.BeginForm(actionName: "PackagingTypes", controllerName: "Shipment", method: FormMethod.Post))
+@using (Html.BeginForm(actionName: "Index", controllerName: "PackagingTypes", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

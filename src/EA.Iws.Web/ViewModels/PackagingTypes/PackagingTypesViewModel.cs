@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.ViewModels.Shipment
+﻿namespace EA.Iws.Web.ViewModels.PackagingTypes
 {
     using System;
     using Prsd.Core.Validation;

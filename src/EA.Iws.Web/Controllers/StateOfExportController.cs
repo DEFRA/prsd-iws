@@ -14,6 +14,7 @@
     using ViewModels.Shared;
     using ViewModels.StateOfExport;
 
+    [Authorize]
     public class StateOfExportController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

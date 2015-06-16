@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Shipment
+﻿namespace EA.Iws.RequestHandlers.PackagingType
 {
     using System.Data.Entity;
     using System.Threading.Tasks;
@@ -6,7 +6,7 @@
     using Domain.Notification;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Shipment;
+    using Requests.PackagingType;
 
     internal class GetPackagingTypesForNotificationHandler :
         IRequestHandler<GetPackagingTypesForNotification, PackagingData>

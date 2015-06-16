@@ -14,6 +14,7 @@
     using ViewModels.Shared;
     using ViewModels.StateOfImport;
 
+    [Authorize]
     public class StateOfImportController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
