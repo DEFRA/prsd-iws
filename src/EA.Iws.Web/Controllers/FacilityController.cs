@@ -165,29 +165,37 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> MultipleFacilities(MultipleFacilitiesViewModel model)
         {
-            using (var client = apiClient())
+            if (!string.IsNullOrWhiteSpace(model.SelectedValue))
             {
-                try
+                using (var client = apiClient())
                 {
-                    await client.SendAsync(User.GetAccessToken(), new SetActualSiteOfTreatment(new Guid(model.SelectedValue), model.NotificationId));
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
+                    try
                     {
-                        throw;
+                        await
+                            client.SendAsync(User.GetAccessToken(),
+                                new SetActualSiteOfTreatment(new Guid(model.SelectedValue), model.NotificationId));
+                    }
+                    catch (ApiBadRequestException ex)
+                    {
+                        this.HandleBadRequest(ex);
+
+                        if (ModelState.IsValid)
+                        {
+                            throw;
+                        }
                     }
                 }
             }
 
-            if (String.Equals(model.NotificationType.ToString(), NotificationType.Recovery.ToString(), StringComparison.InvariantCulture))
+            if (String.Equals(model.NotificationType.ToString(), NotificationType.Recovery.ToString(),
+                StringComparison.InvariantCulture))
             {
                 return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
             }
-
-            return RedirectToAction("OperationCodes", "WasteOperations", new { id = model.NotificationId });
+            else
+            {
+                return RedirectToAction("OperationCodes", "WasteOperations", new { id = model.NotificationId });
+            }
         }
 
         [HttpGet]

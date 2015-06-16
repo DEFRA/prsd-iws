@@ -8,9 +8,7 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Exporters;
-    using Requests.Shared;
     using ViewModels.Exporter;
-    using ViewModels.Shared;
 
     [Authorize]
     public class ExporterController : Controller
@@ -35,7 +33,7 @@
         {
             if (await HasExporter(id))
             {
-                return RedirectToAction("Edit", "Exporter", new { id = id });
+                return RedirectToAction("Edit", "Exporter", new { id });
             }
 
             var model = new ExporterViewModel
@@ -86,7 +84,7 @@
         {
             if (!await HasExporter(id))
             {
-                return RedirectToAction("Add", "Exporter", new { id = id });
+                return RedirectToAction("Add", "Exporter", new { id });
             }
 
             using (var client = apiClient())
@@ -116,7 +114,8 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToUpdateRequest());
 
-                    return RedirectToAction("NotificationOverview", "NotificationApplication", new { id = model.NotificationId });
+                    return RedirectToAction("NotificationOverview", "NotificationApplication",
+                        new { id = model.NotificationId });
                 }
             }
             catch (ApiBadRequestException ex)

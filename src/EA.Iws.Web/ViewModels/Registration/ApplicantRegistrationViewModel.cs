@@ -24,8 +24,8 @@
         public string OrganisationName { get; set; }
 
         [Required]
-        [RegularExpression("^[0-9+\\(\\)#\\.\\s\\/ext-]+$", ErrorMessage = "The entered phone number is invalid")]
-        [Display(Name = "Phone number")]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Telephone number")]
         public string PhoneNumber { get; set; }
 
         [Required]

@@ -194,22 +194,28 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetSiteOfExport(MultipleProducersViewModel model)
         {
-            using (var client = apiClient())
+            if (!string.IsNullOrWhiteSpace(model.SelectedValue))
             {
-                try
+                using (var client = apiClient())
                 {
-                    await client.SendAsync(User.GetAccessToken(), new SetSiteOfExport(new Guid(model.SelectedValue), model.NotificationId));
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
+                    try
                     {
-                        throw;
+                        await
+                            client.SendAsync(User.GetAccessToken(),
+                                new SetSiteOfExport(new Guid(model.SelectedValue), model.NotificationId));
+                    }
+                    catch (ApiBadRequestException ex)
+                    {
+                        this.HandleBadRequest(ex);
+
+                        if (ModelState.IsValid)
+                        {
+                            throw;
+                        }
                     }
                 }
             }
+
             return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
         }
     }
