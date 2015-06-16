@@ -30,65 +30,94 @@
             using (var client = apiClient())
             {
                 await this.BindCountryList(client, false);
-            }
 
-            return View(new TransitStateViewModel());
-        } 
+                TransitStateViewModel model = await PrepareViewModel(id, client);
 
-        [HttpPost]
-        public async Task<ActionResult> Add(Guid id, TransitStateViewModel model, string selectCountry, string submit)
-        {
-            await this.BindCountryList(apiClient, false);
-
-            if (!ModelState.IsValid)
-            {
-                if (model.CountryId == null)
-                {
-                    return View(model);
-                }
-                
-                if (!string.IsNullOrWhiteSpace(submit))
-                {
-                    await BindExitOrEntryPointSelectList(apiClient, (Guid)model.CountryId);
-                    return View(model);
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(selectCountry))
-            {
-                return await CountrySelectedPostback(id, model);
-            }
-
-            if (!model.CountryId.HasValue || !model.EntryPointId.HasValue || !model.ExitPointId.HasValue)
-            {
                 return View(model);
             }
-
-            try
-            {
-                using (var client = apiClient())
-                {
-                    await this.BindExitOrEntryPointSelectList(apiClient, model.CountryId.Value);
-                    await client.SendAsync(User.GetAccessToken(),
-                       new AddTransitStateToNotification(id, 
-                           model.CountryId.Value, 
-                           model.EntryPointId.Value, 
-                           model.ExitPointId.Value, 
-                           model.CompetentAuthorities.SelectedValue));
-                }
-            }
-            catch (ApiException)
-            {
-                ModelState.AddModelError(string.Empty, "Error saving this record.");
-                return View(model);
-            }
-
-            return RedirectToAction("Summary", "TransportRoute", new { id });
         }
 
-        private async Task<ActionResult> CountrySelectedPostback(Guid id, TransitStateViewModel model)
+        [HttpPost]
+        public async Task<ActionResult> Add(Guid id,
+            TransitStateViewModel model)
         {
-            RemoveModelStateErrors();
+            using (var client = apiClient())
+            {
+                await this.BindCountryList(client);
+
+                if (!ModelState.IsValid)
+                {
+                    if (model.IsCountrySelected)
+                    {
+                        await BindExitOrEntryPointSelectList(client, model.CountryId.Value);
+                    }
+
+                    return View(model);
+                }
+
+                if (model.IsCountrySelected)
+                {
+                    try
+                    {
+                        await BindExitOrEntryPointSelectList(client, model.CountryId.Value);
+
+                        var request = new AddTransitStateToNotification(id,
+                            model.CountryId.Value,
+                            model.EntryPointId.Value,
+                            model.ExitPointId.Value,
+                            model.CompetentAuthorities.SelectedValue);
+
+                        await client.SendAsync(User.GetAccessToken(), request);
+                    }
+                    catch (ApiException)
+                    {
+                        ModelState.AddModelError(string.Empty, "Error saving this record.");
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    return await CountrySelectedPostback(model);
+                }
+
+                return RedirectToAction("Summary", "TransportRoute", new { id });
+            }
+        }
+
+        private async Task<TransitStateViewModel> PrepareViewModel(Guid id, IIwsClient client)
+        {
+            TransportRouteData transportRoute = await client.SendAsync(User.GetAccessToken(),
+                    new GetTransportRouteSummaryForNotification(id));
+
+            var model = new TransitStateViewModel
+            {
+                IsCountrySelected = false,
+                Countries = ViewBag.Countries as SelectList
+            };
+
+            // To help with validation get all the transport route data to store it in the view
+            if (transportRoute.StateOfExportData != null && transportRoute.StateOfExportData.Country != null)
+            {
+                model.StateOfExportCountryId = transportRoute.StateOfExportData.Country.Id;
+            }
+
+            if (transportRoute.StateOfImportData != null && transportRoute.StateOfImportData.Country != null)
+            {
+                model.StateOfImportCountryId = transportRoute.StateOfImportData.Country.Id;
+            }
+
+            if (transportRoute.TransitStatesData != null)
+            {
+                model.TransitStateCountryIds =
+                    transportRoute.TransitStatesData.Select(ts => ts.Country.Id).ToArray();
+            }
+
+            return model;
+        }
+
+        private async Task<ActionResult> CountrySelectedPostback(TransitStateViewModel model)
+        {
+            this.RemoveModelStateErrors();
 
             if (!model.CountryId.HasValue)
             {
@@ -101,28 +130,12 @@
                 var competentAuthorities = await client.SendAsync(new GetCompetentAuthoritiesByCountry(model.CountryId.Value));
                 var radioButtons = competentAuthorities.Select(ca => new KeyValuePair<string, Guid>(string.Format("{0} - {1}", ca.Code, ca.Name), ca.Id));
                 model.CompetentAuthorities = new StringGuidRadioButtons(radioButtons);
-                model.LoadNextSection = true;
+                model.IsCountrySelected = true;
 
                 await BindExitOrEntryPointSelectList(client, (Guid)model.CountryId);
             }
 
             return View(model);
-        }
-
-        private void RemoveModelStateErrors()
-        {
-            foreach (var modelValue in ModelState.Values)
-            {
-                modelValue.Errors.Clear();
-            }
-        }
-
-        private async Task BindExitOrEntryPointSelectList(Func<IIwsClient> apiClient, Guid countryId)
-        {
-            using (var client = apiClient())
-            {
-                await BindExitOrEntryPointSelectList(client, countryId);
-            }
         }
 
         private async Task BindExitOrEntryPointSelectList(IIwsClient client, Guid countryId)

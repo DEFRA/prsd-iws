@@ -71,7 +71,7 @@
 
         private async Task<ActionResult> StateOfImportCountrySelectedPostback(Guid id, StateOfImportViewModel model)
         {
-            RemoveModelStateErrors();
+            this.RemoveModelStateErrors();
             using (var client = apiClient())
             {
                 var competentAuthorities = await client.SendAsync(new GetCompetentAuthoritiesByCountry(model.CountryId));
@@ -83,14 +83,6 @@
             }
 
             return View(model);
-        }
-
-        private void RemoveModelStateErrors()
-        {
-            foreach (var modelValue in ModelState.Values)
-            {
-                modelValue.Errors.Clear();
-            }
         }
 
         private async Task BindExitOrEntryPointSelectList(Func<IIwsClient> apiClient, Guid countryId)

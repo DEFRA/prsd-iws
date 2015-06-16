@@ -41,5 +41,13 @@
 
             return new Guid(defaultId);
         }
+
+        public static void RemoveModelStateErrors(this Controller controller)
+        {
+            foreach (var modelValue in controller.ModelState.Values)
+            {
+                modelValue.Errors.Clear();
+            }
+        }
     }
 }
