@@ -4,9 +4,8 @@
     ViewBag.Title = "Special Handling";
 }
 
-<header class="hgroup">
-    <h2 class="heading-large">Are there any special handling requirements?</h2>
-</header>
+<h2 class="heading-large">Are there any special handling requirements?</h2>
+<h3 class="heading-medium">Special handling requirements may be those prescribed by the producers’ handling instructions for employees, health and safety information or transport emergency cards.</h3>
 
 @using (Html.BeginForm())
 {
@@ -29,9 +28,9 @@
 
         <div class="panel-indent @(Model.HasSpecialHandlingRequirements.GetValueOrDefault() ? "" : "js-hidden")" id="information-message">
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SpecialHandlingDetails)">
-                    @Html.LabelFor(m => m.SpecialHandlingDetails)
-                    @Html.Gds().ValidationMessageFor(m => m.SpecialHandlingDetails)
-                    @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @class = "text-area two-thirds" })
+                @Html.LabelFor(m => m.SpecialHandlingDetails)
+                @Html.Gds().ValidationMessageFor(m => m.SpecialHandlingDetails)
+                @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @class = "text-area two-thirds" })
             </div>
         </div>
     </div>
