@@ -70,6 +70,11 @@
             Guard.ArgumentNotDefaultValue(() => firstDate, firstDate);
             Guard.ArgumentNotDefaultValue(() => lastDate, lastDate);
 
+            if (firstDate < SystemTime.Now.Date)
+            {
+                throw new InvalidOperationException(string.Format("The start date cannot be in the past on shipment info {0}", Id));
+            }
+
             if (firstDate > lastDate)
             {
                 throw new InvalidOperationException(

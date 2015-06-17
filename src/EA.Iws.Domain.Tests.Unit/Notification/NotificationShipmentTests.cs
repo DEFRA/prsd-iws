@@ -2,9 +2,10 @@
 {
     using System;
     using Domain.Notification;
+    using Prsd.Core;
     using Xunit;
 
-    public class NotificationShipmentTests
+    public class NotificationShipmentTests : IDisposable
     {
         private static NotificationApplication CreateNotificationApplication()
         {
@@ -12,6 +13,17 @@
                 UKCompetentAuthority.England, 0);
 
             return notification;
+        }
+
+        public NotificationShipmentTests()
+        {
+            // Set "today" at 2014/01/01
+            SystemTime.Freeze(new DateTime(2014, 01, 01));
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
 
         [Fact]
@@ -270,6 +282,27 @@
                 ShipmentQuantityUnits.Tonnes);
 
             Assert.Equal(50, notification.ShipmentInfo.NumberOfShipments);
+        }
+
+        [Fact]
+        public void FirstDateCannotBeInThePast()
+        {
+            // Set "today" at 2015/06/01
+            SystemTime.Freeze(new DateTime(2015, 06, 01));
+
+            var notification = CreateNotificationApplication();
+
+            var firstDate = new DateTime(2015, 01, 02);
+            var lastDate = new DateTime(2015, 01, 12);
+
+            Action updateShipmentInfo =
+                () =>
+                    notification.UpdateShipmentInfo(firstDate, lastDate, 10, 0.0001M,
+                        ShipmentQuantityUnits.Tonnes);
+
+            Assert.Throws<InvalidOperationException>(updateShipmentInfo);
+
+            SystemTime.Unfreeze();
         }
     }
 }

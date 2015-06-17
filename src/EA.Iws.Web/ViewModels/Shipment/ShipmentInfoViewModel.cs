@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Prsd.Core;
     using Prsd.Core.Helpers;
     using Requests.Shipment;
 
@@ -97,9 +98,9 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (StartDate < DateTime.Today)
+            if (StartDate < SystemTime.Now.Date)
             {
-                yield return new ValidationResult("The start date must be equal or greater than today");
+                yield return new ValidationResult("The start date cannot be in the past");
             }
 
             if (StartDate > EndDate)
