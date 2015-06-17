@@ -16,23 +16,22 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.HasSpecialHandlingRequirements)">
         @Html.Gds().ValidationMessageFor(model => model.HasSpecialHandlingRequirements)
         <fieldset>
-            <label class="block-label" for="rdoNo">
-                @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, false, new { id = "rdoNo" })
-                No
-            </label>
             <label class="block-label" for="rdoYes" data-target="information-message">
                 @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, true, new { id = "rdoYes" })
                 Yes
             </label>
-        </fieldset>
-
-        <div class="panel-indent @(Model.HasSpecialHandlingRequirements.GetValueOrDefault() ? "" : "js-hidden")" id="information-message">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.SpecialHandlingDetails)">
-                @Html.LabelFor(m => m.SpecialHandlingDetails)
-                @Html.Gds().ValidationMessageFor(m => m.SpecialHandlingDetails)
-                @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @class = "text-area two-thirds" })
+            <div class="panel-indent @(Model.HasSpecialHandlingRequirements.GetValueOrDefault() ? "" : "js-hidden")" id="information-message">
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.SpecialHandlingDetails)">
+                    @Html.LabelFor(m => m.SpecialHandlingDetails)
+                    @Html.Gds().ValidationMessageFor(m => m.SpecialHandlingDetails)
+                    @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @class = "text-area two-thirds" })
+                </div>
             </div>
-        </div>
+            <label class="block-label" for="rdoNo">
+                @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, false, new { id = "rdoNo" })
+                No
+            </label>
+        </fieldset>
     </div>
 
     <div class="form-group">

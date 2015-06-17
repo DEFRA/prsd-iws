@@ -1,6 +1,6 @@
-﻿@model EA.Iws.Web.ViewModels.Shared.YesNoChoiceViewModel
+﻿@model EA.Iws.Web.ViewModels.Shared.TrueFalseViewModel
 @{
-    ViewBag.Title = "Is Recovery Facility Preconsented?";
+    ViewBag.Title = "Is Recovery Facility Pre-consented?";
 }
 
 @using (Html.BeginForm(actionName: "RecoveryPreconsent", controllerName: "Facility", routeValues: new { id = ViewBag.NotificationId }, method: FormMethod.Post))
@@ -12,47 +12,28 @@
         <h2 class="heading-large">Are all the recovery facilities pre-consented?</h2>
     </header>
     <p>Select ‘Yes’ if all the recovery facilities have a pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006 that covers this notification.</p>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
-        @Html.EditorFor(m => m.Choices)
-    </div>
 
-    <div class="form-group">
-        <div class="panel-indent" id="messageYes">
-            <p>This notification will allow the intended shipment dates to cover a 3 year period. You must send evidence of the pre-consent status with your notification submission. This may be the pre-consent certificate or letter issued by the relevant competent authority to the recovery facility.</p>
-        </div>
-        <div class="panel-indent" id="messageNo">
-            <p>This notification will allow the intended shipment dates to cover a 12 month period.</p>
-        </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Value)">
+        @Html.Gds().ValidationMessageFor(model => model.Value)
+        <fieldset>
+            <label class="block-label" for="rdoYes" data-target="yes-message">
+                @Html.RadioButtonFor(m => m.Value, true, new { id = "rdoYes" })
+                Yes
+            </label>
+            <div class="panel-indent @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="yes-message">
+                <p>This notification will allow the intended shipment dates to cover a 3 year period. You must send evidence of the pre-consent status with your notification submission. This may be the pre-consent certificate or letter issued by the relevant competent authority to the recovery facility.</p>
+            </div>
+            <label class="block-label" for="rdoNo" data-target="no-message">
+                @Html.RadioButtonFor(m => m.Value, false, new { id = "rdoNo" })
+                No
+            </label>
+            <div class="panel-indent @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="no-message">
+                <p>This notification will allow the intended shipment dates to cover a 12 month period.</p>
+            </div>
+        </fieldset>
     </div>
 
     <div class="form-group">
         <button class="button" type="submit">Continue</button>
     </div>
-}
-@section scripts
-{
-    <script>
-        $(function () {
-            $("#messageYes").hide("fast");
-            $("#messageNo").hide("fast");
-
-            if ($("#Choices\\.PossibleValues\\[0\\]").is(':checked')) {
-                $("#messageYes").show("fast");
-                $("#messageNo").hide("fast");
-            } else if ($("#Choices\\.PossibleValues\\[1\\]").is(':checked')) {
-                $("#messageYes").hide("fast");
-                $("#messageNo").show("fast");
-            }
-
-            $("#Choices\\.PossibleValues\\[0\\]").click(function () {
-                $("#messageYes").show("fast");
-                $("#messageNo").hide("fast");
-            });
-
-            $("#Choices\\.PossibleValues\\[1\\]").click(function () {
-                $("#messageYes").hide("fast");
-                $("#messageNo").show("fast");
-            });
-        });
-    </script>
 }

@@ -201,7 +201,7 @@
         [HttpGet]
         public ActionResult RecoveryPreconsent(Guid id)
         {
-            var model = new YesNoChoiceViewModel();
+            var model = new TrueFalseViewModel();
             ViewBag.NotificationId = id;
 
             return View(model);
@@ -209,17 +209,16 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RecoveryPreconsent(Guid id, YesNoChoiceViewModel model)
+        public async Task<ActionResult> RecoveryPreconsent(Guid id, TrueFalseViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !model.Value.HasValue)
             {
                 ViewBag.NotificationId = id;
                 return View(model);
             }
 
-            bool isPreconsented = !string.IsNullOrWhiteSpace(model.Choices.SelectedValue) &&
-                                  ("Yes".Equals(model.Choices.SelectedValue, StringComparison.InvariantCultureIgnoreCase) ||
-                                   "True".Equals(model.Choices.SelectedValue, StringComparison.InvariantCultureIgnoreCase));
+            bool isPreconsented = model.Value.Value;
+
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new SetPreconsentedRecoveryFacility(id, isPreconsented));

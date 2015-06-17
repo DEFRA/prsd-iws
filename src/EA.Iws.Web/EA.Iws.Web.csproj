@@ -633,6 +633,7 @@
     <Compile Include="ViewModels\TransitState\TransitStateViewModel.cs" />
     <Compile Include="ViewModels\WasteType\WasteCodeViewModel.cs" />
     <Compile Include="ViewModels\WasteType\WasteGenerationProcessViewModel.cs" />
+    <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
