@@ -41,6 +41,7 @@
         [Required(ErrorMessage = "Please enter the total number of intended shipments")]
         [Display(Name = "Number of shipments")]
         [Range(1, 99999, ErrorMessage = "The number of shipments must be at least 1 and cannot be greater than 99999")]
+        [RegularExpression("[0-9]*", ErrorMessage = "The number of shipments must be a whole number")]
         public int? NumberOfShipments { get; set; }
 
         [Required(ErrorMessage = "Please enter the total intended quantity")]
@@ -96,6 +97,11 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (StartDate < DateTime.Today)
+            {
+                yield return new ValidationResult("The start date must be equal or greater than today");
+            }
+
             if (StartDate > EndDate)
             {
                 yield return new ValidationResult("The start date must be before the end date", new[] { "StartYear" });

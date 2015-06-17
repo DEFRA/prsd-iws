@@ -36,7 +36,7 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Units)">
             @Html.Gds().LabelFor(m => m.Units)
             @Html.Gds().ValidationMessageFor(m => m.Units)
-            @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList, "--- select an option ---")
+            @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList)
         </div>
     </div>
 </div>
