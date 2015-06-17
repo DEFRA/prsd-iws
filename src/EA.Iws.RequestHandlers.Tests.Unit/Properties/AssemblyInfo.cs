@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("EA.Iws.Cqrs.Tests.Unit")]
+[assembly: AssemblyTitle("EA.Iws.RequestHandlers.Tests.Unit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EA.Iws.Cqrs.Tests.Unit")]
+[assembly: AssemblyProduct("EA.Iws.RequestHandlers.Tests.Unit")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -9,8 +9,8 @@
     <ProjectGuid>{BD4A4188-DE05-44EB-A470-42AC15D61CD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EA.Iws.Cqrs.Tests.Unit</RootNamespace>
-    <AssemblyName>EA.Iws.Cqrs.Tests.Unit</AssemblyName>
+    <RootNamespace>EA.Iws.RequestHandlers.Tests.Unit</RootNamespace>
+    <AssemblyName>EA.Iws.RequestHandlers.Tests.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>0ee4c157</NuGetPackageImportStamp>
