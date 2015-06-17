@@ -1,14 +1,13 @@
 ﻿@model EA.Iws.Web.ViewModels.WasteOperations.OperationCodesViewModel
 
+<header class="hgroup">
+    <h2 class="heading-large">Which recovery operation codes apply to this notification?</h2>
+</header>
+
 @using (Html.BeginForm("AddRecoveryCodes", "WasteOperations", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-
-    <header class="hgroup">
-        <h2 class="heading-large">Which recovery operation codes apply to this notification?</h2>
-        
-    </header>
 
     <div class="form-group">
         @Html.HiddenFor(m => m.NotificationId)
@@ -19,7 +18,6 @@
     <div class="form-group">
         <input type="submit" class="button" value="Continue">
     </div>
-
 }
 
 @section scripts
