@@ -480,7 +480,7 @@
     <Content Include="Views\Producer\CopyFromExporter.cshtml" />
     <Content Include="Views\NotificationApplication\NotificationOverview.cshtml" />
     <Content Include="Views\Exporter\Edit.cshtml" />
-    <Content Include="Views\SpecialHandling\Index.cshtml" />
+    <Content Include="Views\SpecialHandling\_SpecialHandling.cshtml" />
     <Content Include="Views\Carrier\Add.cshtml" />
     <Content Include="Views\Shipment\Add.cshtml" />
     <Content Include="Views\Account\EmailVerificationRequired.cshtml" />
@@ -522,6 +522,12 @@
     <Content Include="Views\Shipment\_ShipmentForm.cshtml" />
     <Content Include="Views\Shipment\Edit.cshtml" />
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
+    <Content Include="Views\SpecialHandling\add.cshtml" />
+    <Content Include="Views\SpecialHandling\Edit.cshtml" />
+    <Content Include="Views\PackagingTypes\View.cshtml" />
+    <Content Include="Views\PackagingTypes\_PackagingTypes.cshtml" />
+    <Content Include="Views\PackagingTypes\Add.cshtml" />
+    <Content Include="Views\PackagingTypes\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

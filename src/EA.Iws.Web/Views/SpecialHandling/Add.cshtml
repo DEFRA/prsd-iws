@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Web.ViewModels.SpecialHandling.SpecialHandlingViewModel
+
+@{
+    ViewBag.Title = "Special Handling";
+}
+
+@using (Html.BeginForm("Add", "SpecialHandling", FormMethod.Post))
+{
+    @Html.Partial("_SpecialHandling")
+}

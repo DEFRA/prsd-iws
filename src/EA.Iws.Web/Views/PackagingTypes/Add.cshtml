@@ -1,0 +1,9 @@
+﻿@model EA.Iws.Web.ViewModels.PackagingTypes.PackagingTypesViewModel
+@{
+    ViewBag.Title = "Which Packaging Type";
+}
+@using (Html.BeginForm(actionName: "Add", controllerName: "PackagingTypes", method: FormMethod.Post))
+{
+    @Html.Partial("_PackagingTypes")
+}
+

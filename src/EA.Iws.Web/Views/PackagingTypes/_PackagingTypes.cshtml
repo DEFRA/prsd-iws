@@ -1,16 +1,12 @@
 ﻿@using EA.Iws.Requests.PackagingType
 @model EA.Iws.Web.ViewModels.PackagingTypes.PackagingTypesViewModel
-@{
-    ViewBag.Title = "Which Packaging Type";
-}
+
 
 <header class="hgroup">
     <h2 class="heading-large">Which packaging types will be used?</h2>
     <p>Select all that apply</p>
 </header>
 
-@using (Html.BeginForm(actionName: "Index", controllerName: "PackagingTypes", method: FormMethod.Post))
-{
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
@@ -51,4 +47,3 @@
     <div class="form-group">
         <button class="button" type="submit">Continue</button>
     </div>
-}
