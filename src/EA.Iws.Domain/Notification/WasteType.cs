@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -28,6 +29,8 @@
             ChemicalCompositionDescription = chemicalCompositionDescription;
 
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
+
+            WasteCodeInfoCollection = new List<WasteCodeInfo>();
         }
 
         private WasteType(ChemicalComposition chemicalComposition,
@@ -142,11 +145,16 @@
             PhysicalCharacteristicsCollection.Add(physicalCharacteristicInfo);
         }
 
+        protected virtual ICollection<WasteCodeInfo> WasteCodeInfoCollection { get; set; }
+
+        public IEnumerable<WasteCodeInfo> WasteCodeInfo
+        {
+            get { return WasteCodeInfoCollection.ToSafeIEnumerable(); }
+        }
+
         public string WasteGenerationProcess { get; internal set; }
 
         public bool IsDocumentAttached { get; internal set; }
-
-        public virtual WasteCode WasteCode { get; private set; }
 
         public static WasteType CreateOtherWasteType(string chemicalCompositionName, string chemicalCompositionDescription)
         {
@@ -170,11 +178,39 @@
 
         public void AddWasteCode(WasteCode wasteCode)
         {
-            if (WasteCode != null)
+            if (WasteCodeInfoCollection == null)
             {
-                throw new InvalidOperationException(string.Format("Waste code has already been set for notification {0}", Id));
+                throw new InvalidOperationException(string.Format("WasteCodeInfoCollection cannot be null for notification {0}", Id));
             }
-            WasteCode = wasteCode;
+
+            var wasteCodeInfo = new WasteCodeInfo(wasteCode);
+            WasteCodeInfoCollection.Add(wasteCodeInfo);
+        }
+
+        public void AddBaselOrOecdWasteCode(WasteCode wasteCode)
+        {
+            if (WasteCodeInfoCollection == null)
+            {
+                throw new InvalidOperationException(string.Format("WasteCodeInfoCollection cannot be null for notification {0}", Id));
+            }
+
+            if (wasteCode.CodeType == CodeType.Basel && WasteCodeInfoCollection.Any(c => c.WasteCode.CodeType == CodeType.Basel))
+            {
+                throw new InvalidOperationException(string.Format("A Basel code already exists for notification {0}", Id));
+            }
+
+            if (wasteCode.CodeType == CodeType.Oecd && WasteCodeInfoCollection.Any(c => c.WasteCode.CodeType == CodeType.Oecd))
+            {
+                throw new InvalidOperationException(string.Format("A Oecd code already exists for notification {0}", Id));
+            }
+
+            if (WasteCodeInfoCollection.Any(c => c.WasteCode.Code == wasteCode.Code))
+            {
+                throw new InvalidOperationException(string.Format("The same code cannot be entered twice for notification {0}", Id));
+            }
+
+            var wasteCodeInfo = new WasteCodeInfo(wasteCode);
+            WasteCodeInfoCollection.Add(wasteCodeInfo);
         }
     }
 }

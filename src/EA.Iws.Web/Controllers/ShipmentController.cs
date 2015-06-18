@@ -98,6 +98,7 @@
         {
             if (!ModelState.IsValid)
             {
+                model.PackagingTypes.ShowEnumValue = true;
                 return View(model);
             }
 

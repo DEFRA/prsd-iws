@@ -46,5 +46,14 @@
             }
             WasteType.AddWasteCode(wasteCode);
         }
+
+        public void AddBaselOrOecdWasteCode(WasteCode wasteCode)
+        {
+            if (WasteType == null)
+            {
+                throw new InvalidOperationException(String.Format("Waste Type can not be null for notification: {0}", Id));
+            }
+            WasteType.AddBaselOrOecdWasteCode(wasteCode);
+        }
     }
 }

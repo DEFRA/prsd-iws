@@ -109,6 +109,7 @@
     <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\NotificationTypeMapping.cs" />
     <Compile Include="Mappings\WasteCodeMapping.cs" />
+    <Compile Include="Mappings\WasteCodeInfoMapping.cs" />
     <Compile Include="Mappings\WasteComposition.cs" />
     <Compile Include="Mappings\WasteTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

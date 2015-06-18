@@ -155,8 +155,9 @@
     <Compile Include="Users\UserByIdHandler.cs" />
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
     <Compile Include="WasteType\GetWasteCodesHandler.cs" />
+    <Compile Include="WasteType\SetEwcCodesHandler.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristicsHandler.cs" />
-    <Compile Include="WasteType\SetWasteCodeHandler.cs" />
+    <Compile Include="WasteType\SetBaselOrOecdWasteCodeHandler.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcessHandler.cs" />
   </ItemGroup>
   <ItemGroup>

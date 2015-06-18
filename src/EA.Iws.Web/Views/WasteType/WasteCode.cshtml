@@ -7,14 +7,18 @@
         @Html.Gds().HintParagraph("Step 1 of 4")
     </div>
     <h2 class="heading-large">Waste Identification</h2>
-    <p>Select the appropriate basel code or OECD code to identify your waste <br/>
-    If there is no suitable code then select not listed</p>
+    <p>
+        Select the appropriate basel code or OECD code to identify your waste <br />
+        If there is no suitable code then select not listed
+    </p>
 </header>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
+
+
     <div>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedWasteCode)">
             @Html.Gds().LabelFor(m => m.SelectedWasteCode)
@@ -23,7 +27,8 @@
                 <option description="" selected="selected" value=""></option>
                 @foreach (var wasteCode in Model.WasteCodes)
                 {
-                    <option description="@wasteCode.Description" value="@wasteCode.Id">@wasteCode.Code</option>
+                    var selected = wasteCode.Id.ToString() == Model.SelectedWasteCode ? "Selected" : "";
+                    <option description="@wasteCode.Description" value="@wasteCode.Id" @selected>@wasteCode.Code</option>
                 }
             </select>
         </div>
@@ -32,25 +37,47 @@
             <label id="descriptionTextArea"></label>
         </div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedEcwCode)">
-            @Html.Gds().LabelFor(m => m.SelectedEcwCode)
+        <div class="form-group">
+            @Html.Gds().LabelFor(m => m.SelectedEwcCodes, "(Please enter at least one)")
 
-            <select onchange=" getComboDescription(this) " data-val="true" data-val-required="The SelectedWasteCode field is required." id="ecw-code-list" name="SelectedEcwCode">
+            <select data-val="true" data-val-required="The SelectedWasteCode field is required." id="ewc-code-list" name="SelectedEwcCode">
                 <option description="" selected="selected" value=""></option>
-                @foreach (var ecwCode in Model.EcwCodes)
+                @foreach (var ewcCode in Model.EwcCodes)
                 {
-                    <option description="@ecwCode.Description" value="@ecwCode.Id">@ecwCode.Code</option>
+                    <option description="@ewcCode.Description" value="@ewcCode.Id">@ewcCode.Code</option>
                 }
             </select>
         </div>
 
+        <div id="js-link" style="display: none">
+            <a onclick=" getEwcDescription() " href="#">Add</a>
+        </div>
+        <div class="js-hidden">
+            <button class="link-submit" type="submit" name="command" value="add">Add</button>
+        </div>
+
+
         <div class="form-group">
-            <label id="descriptionTextArea"></label>
+            <table id="nonjsTable">
+                @for (int i = 0; i < Model.SelectedEwcCodes.Count; i++)
+                {
+                    <tr>
+                        <td><input name="SelectedEwcCodes[@i].Code" type="hidden" value="@Model.SelectedEwcCodes[i].Code" />@Model.SelectedEwcCodes[i].Code</td>
+                        <td><input name="SelectedEwcCodes[@i].Description" type="hidden" value="@Model.SelectedEwcCodes[i].Description" />@Model.SelectedEwcCodes[i].Description</td>
+                        <td><input name="SelectedEwcCodes[@i].Id" type="hidden" value="@Model.SelectedEwcCodes[i].Id" /></td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="form-group">
+            <table id="ewcTable"></table>
         </div>
 
     </div>
+
     <div class="form-group">
-        <button class="button" type="submit">Continue</button>
+        <button class="button" type="submit" name="command" value="save">Continue</button>
     </div>
 }
 
@@ -59,6 +86,7 @@
         (function($) {
             $(function() {
                 $('#code-list').selectToAutocomplete();
+                $('#ewc-code-list').selectToAutocomplete();
             });
         })(jQuery);
 
@@ -67,5 +95,39 @@
                 document.getElementById("descriptionTextArea").innerHTML = sel.options[sel.selectedIndex].getAttribute('description');
             }
         }
+
+        document.getElementById("js-link").style.display = 'block';
+        var previouslyEnteredCodes = [];
+
+        function getEwcDescription() {
+
+            var sel = document.getElementById("ewc-code-list");
+            var table = document.getElementById("ewcTable");
+
+            var found = $.inArray(sel.options[sel.selectedIndex].value, previouslyEnteredCodes) > -1;
+            if (found) {
+                return;
+            }
+
+            previouslyEnteredCodes.push(sel.options[sel.selectedIndex].value);
+
+            var row = table.insertRow(0);
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = sel.options[sel.selectedIndex].text;
+            cell2.innerHTML = sel.options[sel.selectedIndex].getAttribute('description');
+            cell3.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">Delete</a>";
+            cell4.innerHTML = " <input type=\"hidden\" name=\"SelectedEwcCodes.Index\" value=\"" + sel.selectedIndex + "\" /><input name=\"SelectedEwcCodes[" + sel.selectedIndex + "].Id\" type=\"hidden\" value = \"" + sel.options[sel.selectedIndex].value + " \"/>";
+        }
+
+        function deleteRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("ewcTable").deleteRow(i);
+        }
+
     </script>
 }

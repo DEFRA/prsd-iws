@@ -198,18 +198,31 @@
         }
 
         [Fact]
-        public void AddWasteCode_WithValidData_WasteCodeAdded()
+        public void AddOecdCode_WithValidData_WasteCodeAdded()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
             notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
-            var wasteCodeId = Guid.NewGuid();
+            notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Oecd));
 
-            notification.AddWasteCode(GetTestWasteCode(wasteCodeId));
+            Assert.Equal(1, notification.WasteType.WasteCodeInfo.Count());
+        }
 
-            Assert.Equal(wasteCodeId, notification.WasteType.WasteCode.Id);
+        [Fact]
+        public void AddBaselCode_UsingAddWasteCodeMethod_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
+
+            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
+
+            Action addWasteCode = () => notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
+
+            Assert.Throws<InvalidOperationException>(addWasteCode);
         }
 
         [Fact]
@@ -220,30 +233,61 @@
 
             var wasteCodeId = Guid.NewGuid();
 
-            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(wasteCodeId));
+            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(wasteCodeId,  CodeType.Oecd));
 
             Assert.Throws<InvalidOperationException>(addWasteCode);
         }
 
         [Fact]
-        public void AddWasteCode_WhenAlreadySet_ThrowsException()
+        public void AddBaselCode_WhenAlreadySet_ThrowsException()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
             notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
-            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid()));
+            notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
 
-            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid()));
+            Action addWasteCode = () => notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
 
             Assert.Throws<InvalidOperationException>(addWasteCode);
         }
 
-        private static WasteCode GetTestWasteCode(Guid id)
+        [Fact]
+        public void AddEwcCode_WhithValidData_EwcCodeAdded()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
+
+            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Ecw));
+
+            Assert.True(notification.WasteType.WasteCodeInfo.Any());
+        }
+
+        [Fact]
+        public void AddBaselCode_WhenSameCodeExists_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
+
+            var codeId = Guid.NewGuid();
+
+            notification.AddBaselOrOecdWasteCode(GetTestWasteCode(codeId, CodeType.Basel));
+
+            Action addWasteCode = () => notification.AddBaselOrOecdWasteCode(GetTestWasteCode(codeId, CodeType.Basel));
+
+            Assert.Throws<InvalidOperationException>(addWasteCode);
+        }
+
+        private static WasteCode GetTestWasteCode(Guid id, CodeType codeType)
         {
             var wasteCode = ObjectInstantiator<WasteCode>.CreateNew();
             ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, id, wasteCode);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.CodeType, codeType, wasteCode);
             return wasteCode;
         }
     }

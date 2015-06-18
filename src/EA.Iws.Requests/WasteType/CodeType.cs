@@ -7,6 +7,8 @@
         [Display(Name = "Basel")]
         Basel = 1,
         [Display(Name = "OECD")]
-        Oecd = 2
+        Oecd = 2,
+       [Display(Name = "EWC")]
+        Ewc = 3
     }
 }

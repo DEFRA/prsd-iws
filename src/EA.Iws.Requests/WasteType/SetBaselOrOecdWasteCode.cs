@@ -3,9 +3,9 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class SetWasteCode : IRequest<Guid>
+    public class SetBaselOrOecdWasteCode : IRequest<Guid>
     {
-        public SetWasteCode(Guid wasteCodeId, Guid notificationId)
+        public SetBaselOrOecdWasteCode(Guid wasteCodeId, Guid notificationId)
         {
             NotificationId = notificationId;
             WasteCodeId = wasteCodeId;

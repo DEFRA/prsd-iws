@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
+    using Microsoft.Ajax.Utilities;
     using Prsd.Core.Extensions;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
@@ -250,20 +251,31 @@
             var model = new WasteCodeViewModel
             {
                 NotificationId = id,
-                WasteCodes = await GetWasteCodes(),
-                EcwCodes = await GetWasteCodes()
             };
+
+            await InitializeWasteCodeViewModel(model);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> WasteCode(WasteCodeViewModel model)
+        public async Task<ActionResult> WasteCode(WasteCodeViewModel model, string command)
         {
             if (!ModelState.IsValid)
             {
-                model.WasteCodes = await GetWasteCodes();
+                await InitializeWasteCodeViewModel(model);
+                return View(model);
+            }
+
+            if (command.Equals("add"))
+            {
+                await InitializeWasteCodeViewModel(model);
+                var codeToAdd = model.EwcCodes.Single(c => c.Id.ToString() == model.SelectedEwcCode);
+                if (model.SelectedEwcCodes.All(c => c.Id != codeToAdd.Id))
+                {
+                   model.SelectedEwcCodes.Add(codeToAdd); 
+                }
                 return View(model);
             }
 
@@ -271,7 +283,8 @@
             {
                 try
                 {
-                    await client.SendAsync(User.GetAccessToken(), new SetWasteCode(new Guid(model.SelectedWasteCode), model.NotificationId));
+                    await client.SendAsync(User.GetAccessToken(), new SetBaselOrOecdWasteCode(new Guid(model.SelectedWasteCode), model.NotificationId));
+                    await client.SendAsync(User.GetAccessToken(), new SetEwcCodes(model.SelectedEwcCodes, model.NotificationId));
                     return RedirectToAction("Index", "Home");
                 }
                 catch (ApiBadRequestException ex)
@@ -282,8 +295,23 @@
                         throw;
                     }
                 }
+                await InitializeWasteCodeViewModel(model);
                 return View(model);
             }
+        }
+
+        private async Task<WasteCodeViewModel> InitializeWasteCodeViewModel(WasteCodeViewModel model)
+        {
+            var codes = await GetWasteCodes();
+            model.EwcCodes = codes.Where(c => c.CodeType == CodeType.Ewc);
+            model.WasteCodes = codes.Where(c => c.CodeType == CodeType.Basel || c.CodeType == CodeType.Oecd);
+
+            if (model.SelectedEwcCodes == null)
+            {
+                model.SelectedEwcCodes = new List<WasteCodeData>();
+            }
+
+            return model;
         }
 
         private async Task<IEnumerable<WasteCodeData>> GetWasteCodes()

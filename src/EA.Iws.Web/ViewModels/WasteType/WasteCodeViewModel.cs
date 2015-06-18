@@ -3,9 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Requests.WasteType;
+    using System.Web.Mvc;
 
-    public class WasteCodeViewModel
+    public class WasteCodeViewModel : IValidatableObject
     {
         public IEnumerable<WasteCodeData> WasteCodes { get; set; }
 
@@ -15,10 +17,19 @@
 
         public Guid NotificationId { get; set; }
 
-        public IEnumerable<WasteCodeData> EcwCodes { get; set; }
+        public IEnumerable<WasteCodeData> EwcCodes { get; set; }
 
-        [Required]
-        [Display(Name = "ECW Code")]
-        public string SelectedEcwCode { get; set; }
+        [Display(Name = "EWC Code")]
+        public List<WasteCodeData> SelectedEwcCodes { get; set; }
+
+        public string SelectedEwcCode { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (SelectedEwcCodes == null || !SelectedEwcCodes.Any())
+            {
+                yield return new ValidationResult("Please enter a EWC code");
+            }
+        }
     }
 }
