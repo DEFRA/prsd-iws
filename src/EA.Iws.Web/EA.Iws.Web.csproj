@@ -518,16 +518,14 @@
     <Content Include="Views\WasteType\WasteCode.cshtml" />
     <Content Include="Views\StateOfExport\EditFullDetails.cshtml" />
     <Content Include="Views\StateOfExport\EditCountryOnly.cshtml" />
-    <Content Include="Views\PackagingTypes\Index.cshtml" />
     <Content Include="Views\Shipment\_ShipmentForm.cshtml" />
     <Content Include="Views\Shipment\Edit.cshtml" />
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
-    <Content Include="Views\SpecialHandling\add.cshtml" />
     <Content Include="Views\SpecialHandling\Edit.cshtml" />
-    <Content Include="Views\PackagingTypes\View.cshtml" />
     <Content Include="Views\PackagingTypes\_PackagingTypes.cshtml" />
     <Content Include="Views\PackagingTypes\Add.cshtml" />
     <Content Include="Views\PackagingTypes\Edit.cshtml" />
+    <Content Include="Views\SpecialHandling\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
