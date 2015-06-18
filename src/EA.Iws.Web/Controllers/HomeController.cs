@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
+    using System;
     using System.Web.Mvc;
+    using ViewModels.Shared;
 
     public class HomeController : Controller
     {
@@ -20,7 +22,25 @@
         [AllowAnonymous]
         public ActionResult LandingPage()
         {
-           return View();
+            var model = new YesNoChoiceViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult LandingPage(YesNoChoiceViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.Choices.SelectedValue.Equals("Yes", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return RedirectToAction("ApplicantRegistration", "Registration");
         }
     }
 }

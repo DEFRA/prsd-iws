@@ -1,24 +1,22 @@
-﻿@{
+﻿@model EA.Iws.Web.ViewModels.Shared.YesNoChoiceViewModel
+@{
     ViewBag.Title = "Landing Page";
 }
-<div class="grid-row">
-    <div class="column-two-thirds">
-        <header class="hgroup">
-            <h1 class="heading-large">Register for international waste shipments</h1>
-            <p>Register or sign in to apply for a notification to export waste outside of the UK</p>
-            <p class="heading-large"></p>
-        </header>
-        @Html.ActionLink("Register", "ApplicantRegistration", "Registration", null, new { @class = "button" })
+<header class="hgroup">
+    <h2 class="heading-large">Have you used the IWS online service before?</h2>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Choices.SelectedValue)">
+        @Html.Gds().ValidationMessageFor(model => model.Choices.SelectedValue)
+        @Html.EditorFor(m => m.Choices)
     </div>
-    <div class="column-third">
-        <h1 class="heading-medium">Your account</h1>
-        <div class="colored-header-bar"></div>
-        Once signed into your account you can:
-        <ul class="list-bullet">
-            <li>Start a new notification</li>
-            <li>Edit a current notification</li>
-            <li>View a notification</li>
-        </ul>
-        @Html.ActionLink("Sign in to your account", "Login", "Account")
+
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
     </div>
-</div>
+}
