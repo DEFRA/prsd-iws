@@ -106,6 +106,8 @@
             Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
 
             Ignore(x => x.MeansOfTransport);
+            
+            Property(x => x.IsProvidedByImporter).HasColumnName("IsRecoveryPercentageDataProvidedByImporter");
 
             Property(ExpressionHelper
                 .GetPrivatePropertyExpression<NotificationApplication, string>("MeansOfTransportInternal"))

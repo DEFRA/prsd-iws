@@ -169,5 +169,38 @@
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
+
+        [Fact]
+        public async Task CanAddRecoveryPercentageData()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+            UKCompetentAuthority.England, 0);
+
+            notification.SetRecoveryPercentageData(56, "Some text");
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+ 
+            Assert.Equal(56, notification.PercentageRecoverable);
+            Assert.Equal("Some text", notification.MethodOfDisposal);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanAddRecoveryPercentageDataProvidedByImporter()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+            UKCompetentAuthority.England, 0);
+
+            notification.SetRecoveryPercentageDataProvidedByImporter();
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.IsProvidedByImporter);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
     }
 }

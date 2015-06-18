@@ -88,6 +88,7 @@
     <Compile Include="Mappings\CustomsOfficeMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
+    <Compile Include="Mappings\RecoveryPercentageMap.cs" />
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
     <Compile Include="Mappings\ShipmentQuantityUnitsMap.cs" />
     <Compile Include="Mappings\SpecialHandlingMap.cs" />
@@ -117,10 +118,12 @@
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
     <Compile Include="Notification\GetReasonForExportHandler.cs" />
+    <Compile Include="Notification\GetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Notification\SetReasonForExportHandler.cs" />
     <Compile Include="Notification\SetSpecialHandlingHandler.cs" />
+    <Compile Include="Notification\SetRecoveryPercentageDataHandler.cs" />
     <Compile Include="OperationCodes\AddDisposalCodesHandler.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />
     <Compile Include="Producers\DeleteProducerForNotificationHandler.cs" />

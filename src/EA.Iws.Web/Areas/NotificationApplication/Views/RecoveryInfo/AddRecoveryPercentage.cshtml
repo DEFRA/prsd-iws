@@ -1,0 +1,9 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo.RecoveryPercentageViewModel
+@{
+    ViewBag.Title = "Percentage Recoverable Material Information";
+}
+
+@using (Html.BeginForm("AddRecoveryPercentage", "RecoveryInfo", FormMethod.Post))
+{
+    @Html.Partial("_RecoveryPercentage")
+}

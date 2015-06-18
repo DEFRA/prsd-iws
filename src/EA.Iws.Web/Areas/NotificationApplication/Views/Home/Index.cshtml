@@ -79,6 +79,14 @@
                     <div>@Html.ActionLink("Edit", "Index", "Shipment", new { id = Model.NotificationId }, null)</div>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div>Percentage Recoverable</div>
+                </td>
+                <td>
+                    <div>@Html.ActionLink("Edit", "EditRecoveryPercentage", "RecoveryInfo", new { id = Model.NotificationId }, null)</div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -75,12 +75,15 @@
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\GetIsPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\GetReasonForExport.cs" />
+    <Compile Include="Notification\GetRecoveryPercentageData.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotification.cs" />
     <Compile Include="Notification\NotificationInfo.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
+    <Compile Include="Notification\RecoveryPercentageData.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
+    <Compile Include="Notification\SetRecoveryPercentageData.cs" />
     <Compile Include="Shipment\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />

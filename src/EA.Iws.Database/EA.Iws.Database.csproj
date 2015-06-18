@@ -84,6 +84,7 @@
     <Content Include="scripts\Update\Sprint08\20150522-123533-Add-OrganisationId-Claims-To-ApplicationUsers.sql" />
     <Content Include="scripts\Update\Sprint08\20150522-160905-Add-ShipmentInfo-Table.sql" />
     <Content Include="scripts\Update\Sprint08\20150522-162200-move-foreign-keys-for-notification.sql" />
+    <Content Include="scripts\Update\Sprint10\20150619-1987374-Add-columns-to-notification-for-recovery-percentage.sql" />
     <Content Include="scripts\Update\Sprint08\20150522-191333-Carrier.sql" />
     <Content Include="scripts\Update\Sprint08\20150526-110946-Add-IsSpecialHandling-To-ShipmentInfo.sql" />
     <Content Include="scripts\Update\Sprint08\20150526-141010-Resize-Name-Columns.sql" />
