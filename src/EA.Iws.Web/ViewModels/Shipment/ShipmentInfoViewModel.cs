@@ -86,47 +86,63 @@
         [Range(2015, 3000, ErrorMessage = "Please enter a valid number in the 'Year' field")]
         public int? EndYear { get; set; }
 
-        public DateTime StartDate
-        {
-            get { return new DateTime(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault()); }
-        }
-
-        public DateTime EndDate
-        {
-            get { return new DateTime(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault()); }
-        }
-
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (StartDate < SystemTime.Now.Date)
+            DateTime startDate;
+            bool isValidStartDate = SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
+            if (!isValidStartDate)
             {
-                yield return new ValidationResult("The start date cannot be in the past");
+                yield return new ValidationResult("Please enter a valid first departure date");
             }
 
-            if (StartDate > EndDate)
+            DateTime endDate;
+            bool isValidEndDate = SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
+            if (!isValidEndDate)
             {
-                yield return new ValidationResult("The start date must be before the end date", new[] { "StartYear" });
+                yield return new ValidationResult("Please enter a valid last departure date");
+            }
+
+            if (!(isValidStartDate && isValidEndDate))
+            {
+                // Stop further validation if either date is not a valid date
+                yield break;
+            }
+
+            if (startDate < SystemTime.Now.Date)
+            {
+                yield return new ValidationResult("The first departure date cannot be in the past");
+            }
+
+            if (startDate > endDate)
+            {
+                yield return new ValidationResult("The first departure date must be before the last departure date", new[] { "StartYear" });
             }
 
             var monthPeriodLength = IsPreconsentedRecoveryFacility ? 36 : 12;
-            if (EndDate > StartDate.AddMonths(monthPeriodLength))
+            if (endDate > startDate.AddMonths(monthPeriodLength))
             {
                 yield return
                     new ValidationResult(
-                        string.Format("The start date and end date must be within a {0} month period.",
+                        string.Format("The first departure date and last departure date must be within a {0} month period.",
                             monthPeriodLength), new[] { "EndYear" });
             }
         }
 
         public CreateOrUpdateShipmentInfo ToRequest()
         {
+            DateTime startDate;
+            SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
+
+            DateTime endDate;
+            SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
+
             return new CreateOrUpdateShipmentInfo(
                 NotificationId,
                 NumberOfShipments.GetValueOrDefault(),
                 Quantity.GetValueOrDefault(),
                 Units.GetValueOrDefault(),
-                StartDate,
-                EndDate);
+                startDate,
+                endDate);
         }
     }
 }
