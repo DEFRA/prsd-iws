@@ -11,6 +11,7 @@
     using Newtonsoft.Json;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Converters;
 
     [RoutePrefix("api")]
     public class MediatorController : ApiController
@@ -33,7 +34,7 @@
         {
             var typeInformation = new RequestTypeInformation(apiRequest);
 
-            var result = JsonConvert.DeserializeObject(apiRequest.RequestJson, typeInformation.RequestType);
+            var result = JsonConvert.DeserializeObject(apiRequest.RequestJson, typeInformation.RequestType, new EnumerationConverter());
 
             try
             {

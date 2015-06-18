@@ -63,16 +63,16 @@
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15169.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15169-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15170.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15170-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core.Web, Version=1.0.15169.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15169-develop1\lib\net452\EA.Prsd.Core.Web.dll</HintPath>
+    <Reference Include="EA.Prsd.Core.Web, Version=1.0.15170.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15170-develop1\lib\net452\EA.Prsd.Core.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core.Web.Mvc, Version=1.0.15169.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15169-develop1\lib\net452\EA.Prsd.Core.Web.Mvc.dll</HintPath>
+    <Reference Include="EA.Prsd.Core.Web.Mvc">
+      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15170-develop1\lib\net452\EA.Prsd.Core.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
@@ -524,6 +524,9 @@
     <Content Include="Views\SpecialHandling\Edit.cshtml" />
     <Content Include="Views\PackagingTypes\_PackagingTypes.cshtml" />
     <Content Include="Views\PackagingTypes\Add.cshtml" />
+    <Content Include="Views\MeansOfTransport\Add.cshtml" />
+    <Content Include="Views\MeansOfTransport\_CurrentMeansEditor.cshtml" />
+    <Content Include="Views\MeansOfTransport\_PreviousMeansEditor.cshtml" />
     <Content Include="Views\PackagingTypes\Edit.cshtml" />
     <Content Include="Views\SpecialHandling\Add.cshtml" />
     <None Include="Web.Debug.config">
@@ -550,6 +553,7 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\MeansOfTransportController.cs" />
     <Compile Include="Controllers\PackagingTypesController.cs" />
     <Compile Include="Controllers\SpecialHandlingController.cs" />
     <Compile Include="Controllers\StateOfImportController.cs" />
@@ -587,6 +591,7 @@
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\IEmailTemplateService.cs" />
+    <Compile Include="Services\ViewService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Carrier\AddCarrierViewModel.cs" />
@@ -596,6 +601,7 @@
     <Compile Include="ViewModels\Facility\AddFacilityViewModel.cs" />
     <Compile Include="ViewModels\Facility\EditFacilityViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\MeansOfTransport\MeansOfTransportViewModel.cs" />
     <Compile Include="ViewModels\NotificationApplication\CreatedViewModel.cs" />
     <Compile Include="ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
@@ -640,6 +646,10 @@
     <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
       <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>

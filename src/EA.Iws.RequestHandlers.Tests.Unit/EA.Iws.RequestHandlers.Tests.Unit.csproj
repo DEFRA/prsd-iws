@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15169.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.15169-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15170.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15170-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -67,10 +67,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\DbContextHelper.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\ObjectInstantiator.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerator.cs" />
     <Compile Include="Helpers\TestDbAsyncQueryProvider.cs" />
+    <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationIdHandlerTests.cs" />
+    <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Organisations\FindMatchingCompaniesHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +82,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
       <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
       <Name>EA.Iws.DataAccess</Name>

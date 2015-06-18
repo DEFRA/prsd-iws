@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15169.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.15169-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15170.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15170-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FakeItEasy, Version=1.25.2.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
@@ -71,6 +71,7 @@
     <Compile Include="Notification\NotificationExporterTests.cs" />
     <Compile Include="Notification\NotificationFacilityTests.cs" />
     <Compile Include="Notification\NotificationImporterTests.cs" />
+    <Compile Include="Notification\NotificationMeansOfTransportTests.cs" />
     <Compile Include="Notification\NotificationOperationCodesTests.cs" />
     <Compile Include="Notification\NotificationPackagingTests.cs" />
     <Compile Include="Notification\NotificationProducerTests.cs" />
@@ -87,6 +88,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>

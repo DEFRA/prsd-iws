@@ -96,6 +96,12 @@
                 .Map(m => m.MapKey("NotificationId"));
 
             Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
+
+            Ignore(x => x.MeansOfTransport);
+
+            Property(ExpressionHelper
+                .GetPrivatePropertyExpression<NotificationApplication, string>("MeansOfTransportInternal"))
+                .HasColumnName("MeansOfTransport");
         }
     }
 }

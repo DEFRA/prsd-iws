@@ -35,12 +35,12 @@
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15169.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Autofac.1.0.15169-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15170.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Autofac.1.0.15170-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core.Autofac, Version=1.0.15169.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Autofac.1.0.15169-develop1\lib\net452\EA.Prsd.Core.Autofac.dll</HintPath>
+    <Reference Include="EA.Prsd.Core.Autofac, Version=1.0.15170.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Autofac.1.0.15170-develop1\lib\net452\EA.Prsd.Core.Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -106,6 +106,8 @@
     <Compile Include="Mappings\ExporterDataMap.cs" />
     <Compile Include="Mappings\RecoveryCodesMap.cs" />
     <Compile Include="Mappings\StateOfImportMap.cs" />
+    <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationIdHandler.cs" />
+    <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Notification\GetIsPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Mappings\StateOfExportMap.cs" />
     <Compile Include="Mappings\TransitStateMap.cs" />
@@ -161,6 +163,10 @@
     <Compile Include="WasteType\SetWasteGenerationProcessHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
       <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
       <Name>EA.Iws.DataAccess</Name>

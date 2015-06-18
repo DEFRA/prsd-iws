@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using Core.MeansOfTransport;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using TransportRoute;
@@ -64,6 +66,24 @@
 
         public virtual TechnologyEmployed TechnologyEmployed { get; private set; }
 
+        protected string MeansOfTransportInternal { get; set; }
+
+        public IOrderedEnumerable<MeansOfTransport> MeansOfTransport
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(MeansOfTransportInternal))
+                {
+                    return new MeansOfTransport[] { }.OrderBy(m => m);
+                }
+
+                // OrderBy with a key of 0 returns the elements in their original order.
+                return MeansOfTransportInternal
+                    .Split(new[] { Core.MeansOfTransport.MeansOfTransport.Separator }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(Core.MeansOfTransport.MeansOfTransport.GetFromToken).OrderBy(transport => 0);
+            }
+        }
+
         public DateTime CreatedDate { get; private set; }
 
         public IEnumerable<Producer> Producers
@@ -85,7 +105,7 @@
         {
             get { return TransitStatesCollection.ToSafeIEnumerable(); }
         }
-        
+
         public IEnumerable<OperationInfo> OperationInfos
         {
             get { return OperationInfosCollection.ToSafeIEnumerable(); }

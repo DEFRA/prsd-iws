@@ -7,6 +7,7 @@
     using Newtonsoft.Json;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Converters;
     using Prsd.Core.Web.Extensions;
 
     public class IwsClient : IIwsClient
@@ -55,7 +56,7 @@
 
             var response = await httpClient.PostAsJsonAsync("Send", apiRequest).ConfigureAwait(false);
 
-            var result = await response.CreateResponseAsync<TResult>().ConfigureAwait(false);
+            var result = await response.CreateResponseAsync<TResult>(new EnumerationConverter()).ConfigureAwait(false);
 
             return result;
         }

@@ -1,0 +1,25 @@
+﻿@using EA.Iws.Web.Services
+@model EA.Iws.Web.ViewModels.MeansOfTransport.MeansOfTransportViewModel
+
+@if (Model.SelectedMeans != null && Model.SelectedMeans.Count > 0)
+{
+    for (int j = 0; j < Model.SelectedMeans.Count; j++)
+    {
+        <h3 class="heading-small">@ViewService.WordForNumber(j + 1) method</h3>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedMeans[j])">
+            @Html.Gds().ValidationMessageFor(m => m.SelectedMeans[j])
+            <fieldset>
+                @for (int i = 0; i < Model.PossibleMeans.Count; i++)
+                {
+                    MvcHtmlString nameForThisValue = new MvcHtmlString("means" + j + "-" + i);
+
+                    <label for="@nameForThisValue" class="block-label inline-block-label">
+                        @Html.RadioButtonFor(m => m.SelectedMeans[j], Model.PossibleMeans[i].Value, new { id = nameForThisValue })
+                        @Html.DisplayFor(m => m.PossibleMeans[i].Key)
+                    </label>
+                }
+            </fieldset>
+        </div>
+    }
+    <hr />
+}

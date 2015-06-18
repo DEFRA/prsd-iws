@@ -1,7 +1,8 @@
-﻿namespace EA.Iws.Cqrs.Tests.Unit.Helpers
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Helpers
 {
     using System;
     using System.Linq.Expressions;
+    using System.Reflection;
     using System.Runtime.Serialization;
 
     internal class ObjectInstantiator<T>
@@ -24,6 +25,26 @@
             {
                 return () => (T)FormatterServices.GetUninitializedObject(type);
             }
+        }
+
+        public static void SetProperty<TProperty>(Expression<Func<T, TProperty>> expression, TProperty value,
+            T instance)
+        {
+            var memberExpression = (MemberExpression)expression.Body;
+            var property = (PropertyInfo)memberExpression.Member;
+            var setMethod = property.GetSetMethod(true);
+
+            var parameterT = Expression.Parameter(typeof(T), "x");
+            var parameterTProperty = Expression.Parameter(typeof(TProperty), "y");
+
+            var newExpression =
+                Expression.Lambda<Action<T, TProperty>>(
+                    Expression.Call(parameterT, setMethod, parameterTProperty),
+                    parameterT,
+                    parameterTProperty);
+
+            var setter = newExpression.Compile();
+            setter.Invoke(instance, value);
         }
     }
 }

@@ -10,7 +10,7 @@
 
         public List<TransitState> TransitStates { get; protected set; }
 
-        public TransportRoute()
+        protected TransportRoute()
         {
         }
     }
