@@ -13,6 +13,6 @@
             WasteCode = wasteCode;
         }
 
-        public WasteCode WasteCode { get; private set; }
+        public virtual WasteCode WasteCode { get; private set; }
     }
 }

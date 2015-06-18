@@ -205,7 +205,7 @@
 
             notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
-            notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Oecd));
+            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Oecd));
 
             Assert.Equal(1, notification.WasteType.WasteCodeInfo.Count());
         }
@@ -220,7 +220,7 @@
 
             notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
 
-            Action addWasteCode = () => notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
+            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
 
             Assert.Throws<InvalidOperationException>(addWasteCode);
         }
@@ -246,9 +246,9 @@
 
             notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
-            notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
+            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
 
-            Action addWasteCode = () => notification.AddBaselOrOecdWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
+            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Basel));
 
             Assert.Throws<InvalidOperationException>(addWasteCode);
         }
@@ -261,7 +261,7 @@
 
             notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
 
-            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Ecw));
+            notification.AddWasteCode(GetTestWasteCode(Guid.NewGuid(), CodeType.Ewc));
 
             Assert.True(notification.WasteType.WasteCodeInfo.Any());
         }
@@ -276,9 +276,9 @@
 
             var codeId = Guid.NewGuid();
 
-            notification.AddBaselOrOecdWasteCode(GetTestWasteCode(codeId, CodeType.Basel));
+            notification.AddWasteCode(GetTestWasteCode(codeId, CodeType.Basel));
 
-            Action addWasteCode = () => notification.AddBaselOrOecdWasteCode(GetTestWasteCode(codeId, CodeType.Basel));
+            Action addWasteCode = () => notification.AddWasteCode(GetTestWasteCode(codeId, CodeType.Basel));
 
             Assert.Throws<InvalidOperationException>(addWasteCode);
         }

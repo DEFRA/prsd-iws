@@ -176,18 +176,7 @@
             return new WasteType(ChemicalComposition.SRF, wasteCompositions);
         }
 
-        public void AddWasteCode(WasteCode wasteCode)
-        {
-            if (WasteCodeInfoCollection == null)
-            {
-                throw new InvalidOperationException(string.Format("WasteCodeInfoCollection cannot be null for notification {0}", Id));
-            }
-
-            var wasteCodeInfo = new WasteCodeInfo(wasteCode);
-            WasteCodeInfoCollection.Add(wasteCodeInfo);
-        }
-
-        public void AddBaselOrOecdWasteCode(WasteCode wasteCode)
+        internal void AddWasteCode(WasteCode wasteCode)
         {
             if (WasteCodeInfoCollection == null)
             {

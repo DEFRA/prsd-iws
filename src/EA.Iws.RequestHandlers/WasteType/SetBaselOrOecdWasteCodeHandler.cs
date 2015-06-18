@@ -12,12 +12,10 @@
     internal class SetBaselOrOecdWasteCodeHandler : IRequestHandler<SetBaselOrOecdWasteCode, Guid>
     {
         private readonly IwsContext db;
-        private readonly IMap<IList<PhysicalCharacteristicType>, IList<Domain.Notification.PhysicalCharacteristicType>> mapper;
 
-        public SetBaselOrOecdWasteCodeHandler(IwsContext db, IMap<IList<PhysicalCharacteristicType>, IList<Domain.Notification.PhysicalCharacteristicType>> mapper)
+        public SetBaselOrOecdWasteCodeHandler(IwsContext db)
         {
             this.db = db;
-            this.mapper = mapper;
         }
 
         public async Task<Guid> HandleAsync(SetBaselOrOecdWasteCode command)
@@ -25,7 +23,7 @@
             var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
             var wasteCode = await db.WasteCodes.SingleAsync(w => w.Id == command.WasteCodeId);
 
-            notification.AddBaselOrOecdWasteCode(wasteCode);
+            notification.AddWasteCode(wasteCode);
 
             await db.SaveChangesAsync();
 
