@@ -26,7 +26,7 @@
         private readonly Func<IOAuthClient> oauthClient;
         private readonly IEmailService emailService;
 
-        public RegistrationController(Func<IOAuthClient> oauthClient, 
+        public RegistrationController(Func<IOAuthClient> oauthClient,
             Func<IIwsClient> apiClient,
             IAuthenticationManager authenticationManager,
             IEmailService emailService)
@@ -113,6 +113,11 @@
                 {
                     var response =
                         await client.SendAsync(User.GetAccessToken(), new FindMatchingOrganisations(organisationName));
+
+                    if (response == null || response.Count <= 0)
+                    {
+                        return RedirectToAction("CreateNewOrganisation", new { organisationName = model.Name });
+                    }
 
                     model.Organisations = response;
                 }

@@ -6,22 +6,21 @@
 <h1 class="heading-large">Organisation address</h1>
 @if (Model.Organisations != null && Model.Organisations.Count > 0)
 {
-
     <p>Select an organisation address from the options below or add a new address.</p>
 
     using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
-     {
+    {
         @Html.AntiForgeryToken()
         @Html.Gds().ValidationMessageFor(m => m.Selected)
         @Html.HiddenFor(m => m.Name)
 
-         for (int i = 0; i < Model.Organisations.Count; i++)
-         {
-             bool shouldBeANewRow = i%2 == 0;
+        for (int i = 0; i < Model.Organisations.Count; i++)
+        {
+            bool shouldBeANewRow = i % 2 == 0;
 
-             if (shouldBeANewRow)
-             {
-                 @:<div class="grid-row">
+            if (shouldBeANewRow)
+            {
+                @:<div class="grid-row">
              }
 
             <div class="column-half">
@@ -51,16 +50,11 @@
 
             if (!shouldBeANewRow || i == Model.Organisations.Count - 1)
             {
-            @:</div>
+                @:</div>
             }
-         }
-     }
+        }
+    }
 }
-else
-{
-    <p>There are no matches for the organisation you have entered.</p>
-}
-
 <hr />
 <h2 class="heading-medium">Add a new organisation</h2>
 @Html.ActionLink(linkText: "Add new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { @class = "button" })<br />
