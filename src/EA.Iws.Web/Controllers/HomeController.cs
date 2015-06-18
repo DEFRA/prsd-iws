@@ -28,6 +28,7 @@
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult LandingPage(YesNoChoiceViewModel model)
         {
             if (!ModelState.IsValid)
