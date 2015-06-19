@@ -92,14 +92,14 @@
             bool isValidStartDate = SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
             if (!isValidStartDate)
             {
-                yield return new ValidationResult("Please enter a valid first departure date");
+                yield return new ValidationResult("Please enter a valid first departure date", new[] { "StartDay" });
             }
 
             DateTime endDate;
             bool isValidEndDate = SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
             if (!isValidEndDate)
             {
-                yield return new ValidationResult("Please enter a valid last departure date");
+                yield return new ValidationResult("Please enter a valid last departure date", new[] { "EndDay" });
             }
 
             if (!(isValidStartDate && isValidEndDate))
