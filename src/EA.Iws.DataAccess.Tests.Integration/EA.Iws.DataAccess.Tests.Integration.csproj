@@ -75,6 +75,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{dd2a73a4-a652-4ecc-87ee-24239ce45ad4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
       <Project>{46300373-d7ae-40aa-bf96-3fc3889825a4}</Project>
       <Name>EA.Iws.DataAccess</Name>

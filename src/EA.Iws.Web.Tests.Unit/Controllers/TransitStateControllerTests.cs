@@ -6,6 +6,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.TransitState;
     using FakeItEasy;
     using Requests.Registration;
     using Requests.Shared;
@@ -13,7 +15,6 @@
     using Requests.TransitState;
     using Requests.TransportRoute;
     using ViewModels.Shared;
-    using ViewModels.TransitState;
     using Web.Controllers;
     using Xunit;
 

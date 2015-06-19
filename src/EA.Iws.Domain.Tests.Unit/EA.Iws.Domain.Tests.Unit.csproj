@@ -71,7 +71,6 @@
     <Compile Include="Notification\NotificationExporterTests.cs" />
     <Compile Include="Notification\NotificationFacilityTests.cs" />
     <Compile Include="Notification\NotificationImporterTests.cs" />
-    <Compile Include="Notification\NotificationMeansOfTransportTests.cs" />
     <Compile Include="Notification\NotificationOperationCodesTests.cs" />
     <Compile Include="Notification\NotificationPackagingTests.cs" />
     <Compile Include="Notification\NotificationProducerTests.cs" />
@@ -89,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
-      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Project>{dd2a73a4-a652-4ecc-87ee-24239ce45ad4}</Project>
       <Name>EA.Iws.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">

@@ -1,9 +1,0 @@
-﻿@model EA.Iws.Web.ViewModels.Shipment.ShipmentInfoViewModel
-@{
-    ViewBag.Title = "Shipment Information";
-}
-
-@using (Html.BeginForm("Add", "Shipment", FormMethod.Post))
-{
-    @Html.Partial("_ShipmentForm")
-}

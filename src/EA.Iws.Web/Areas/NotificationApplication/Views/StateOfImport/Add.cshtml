@@ -1,0 +1,77 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
+@{
+    ViewBag.Title = "State Of Import";
+}
+<h2 class="heading-large">Where is the waste being imported into?</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    if (!Model.LoadNextSection)
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+            @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
+            @Html.Gds().HintParagraph("Enter the country or state where the waste ends its journey")
+            @Html.Gds().DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries, string.Empty)
+        </div>
+    
+        <button class="button" type="submit" value="country" name="selectCountry">Continue</button>
+
+        @section scripts{
+            <script>
+                (function ($) {
+                    $(function () {
+                        $('#CountryId').selectToAutocomplete();
+                    });
+                })(jQuery);
+            </script>
+        }
+    }
+    else
+    {
+        @Html.HiddenFor(m => m.LoadNextSection)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+        @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
+        @Html.Gds().HintParagraph("This is the country or state where the waste ends its journey")
+        @Html.HiddenFor(m => m.CountryId)
+        @Html.Gds().DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries, new { id = "country-list", disabled="true" })
+    </div>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
+            @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
+            @Html.Gds().HintParagraph("Select the competent authority for the region of import")
+            @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
+            @Html.EditorFor(m => m.CompetentAuthorities)
+        </div>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
+            @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
+            @Html.Gds().HintParagraph("Enter the specific port or border crossing the waste will enter the country from")
+            @Html.ValidationMessageFor(m => m.EntryOrExitPointId)
+            @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, (SelectList)ViewBag.EntryOrExitPoints, string.Empty)
+        </div>
+
+        <div class="form-group">
+            <button class="button" type="submit" value="submit" name="submit">Continue</button>
+        </div>
+
+        @section scripts{
+            <script>
+                (function ($) {
+                    $(function () {
+                        $('#country-list').selectToAutocomplete();
+                    });
+                })(jQuery);
+
+                (function ($) {
+                    $(function () {
+                        $('#EntryOrExitPointId').selectToAutocomplete();
+                    });
+                })(jQuery);
+            </script>
+        }
+    }
+}

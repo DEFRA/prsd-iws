@@ -1,0 +1,39 @@
+﻿@using EA.Iws.Requests.Shipment
+@using EA.Iws.Requests.WasteType
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.PhysicalCharacteristicsViewModel
+@{
+    ViewBag.Title = "Which Packaging Type";
+}
+<header class="hgroup">
+    <h2 class="heading-large">What are the physical characteristics of the waste?</h2>
+    <p>This is what the waste looks like at normal temperatures and pressures</p>
+    <p>Select all that apply</p>
+</header>
+@using (Html.BeginForm(actionName: "PhysicalCharacteristics", controllerName: "WasteType", method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.PhysicalCharacteristics.ShowEnumValue)
+    <div class="form-group">
+        @Html.EditorFor(m => m.PhysicalCharacteristics)
+        <fieldset>
+            <div class="form-group form-group-compound">
+                <label class="block-label" for="other-option-check" data-target="other-option">
+                    @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
+                    @((int)PhysicalCharacteristicType.Other) - Other
+                </label>
+            </div>
+            <div class="panel-indent @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+                    <label class="form-label" for="other-label">Please specify</label>
+                    @Html.Gds().ValidationMessageFor(m => m.OtherDescription)<br />
+                    @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

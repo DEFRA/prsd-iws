@@ -83,6 +83,10 @@
       <Project>{f7f7e99c-659a-427f-ac04-52e0c1760480}</Project>
       <Name>EA.Iws.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{dd2a73a4-a652-4ecc-87ee-24239ce45ad4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

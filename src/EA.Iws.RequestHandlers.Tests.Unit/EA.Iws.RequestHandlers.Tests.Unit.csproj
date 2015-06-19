@@ -67,13 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\DbContextHelper.cs" />
-    <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\ObjectInstantiator.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerator.cs" />
     <Compile Include="Helpers\TestDbAsyncQueryProvider.cs" />
-    <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationIdHandlerTests.cs" />
-    <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Organisations\FindMatchingCompaniesHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
-      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Project>{dd2a73a4-a652-4ecc-87ee-24239ce45ad4}</Project>
       <Name>EA.Iws.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">

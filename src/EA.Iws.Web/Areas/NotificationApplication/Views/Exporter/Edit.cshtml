@@ -1,0 +1,28 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter.ExporterViewModel
+@{
+    ViewBag.Title = "Edit exporter - notifier";
+}
+
+@using (Html.BeginForm("Edit", "Exporter", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <header class="hgroup">
+        <h2 class="heading-large">Edit exporter - notifier</h2>
+        <div class="colored-header-bar"></div>
+    </header>
+
+    @Html.EditorFor(m => m.Business)
+
+    <h2 class="heading-medium">Address</h2>
+    <hr />
+    @Html.EditorFor(m => m.Address)
+
+    <h2 class="heading-medium">Contact person</h2>
+    <hr />
+    @Html.EditorFor(m => m.Contact)
+
+    <button class="button" type="submit">Continue</button>
+}

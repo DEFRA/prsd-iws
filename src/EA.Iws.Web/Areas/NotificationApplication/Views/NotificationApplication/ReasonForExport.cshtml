@@ -1,0 +1,27 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ReasonForExportViewModel
+
+@{
+    ViewBag.Title = "Reason For Export";
+}
+
+<header class="hgroup">
+    <h2 class="heading-large">What is the reason for export?</h2>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForExport)">
+        @Html.Gds().HintParagraph("Please limit your answer to 70 characters or less")
+        @Html.Gds().ValidationMessageFor(m => m.ReasonForExport)
+        @Html.TextBoxFor(m => m.ReasonForExport, new { @class = "full-width" })
+    </div>
+    
+    @Html.HiddenFor(m => m.NotificationId)
+    
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

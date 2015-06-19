@@ -5,11 +5,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Web.ApiClient;
     using Requests.Notification;
     using Requests.Shared;
-    using ViewModels.NotificationApplication;
     using ViewModels.Shared;
     using Web.Controllers;
     using Xunit;

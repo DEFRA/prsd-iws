@@ -1,0 +1,102 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.MultipleFacilitiesViewModel
+@{
+    ViewBag.Title = "List Facilities";
+}
+
+@using (Html.BeginForm(actionName: "MultipleFacilities", controllerName: "Facility", method: FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <h2 class="heading-large">@Model.NotificationType.ToString() facilities<br />Actual site of @Model.NotificationType.ToString().ToLower()</h2>
+    <h3 class="heading-medium">
+        Select the site where the waste will be finally
+        @(Model.NotificationType.ToString().Equals("Disposal", StringComparison.InvariantCultureIgnoreCase) ? "disposed of" : "recovered")
+    </h3>
+
+    if (Model != null && Model.FacilityData.Any())
+    {
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.NotificationType)
+        <div class="colored-header-bar"></div>
+        <table>
+            <tbody>
+                @for (var i = 0; i < Model.FacilityData.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <details>
+                                <summary><span class="summary">@Html.DisplayFor(m => m.FacilityData[i].Business.Name)</span></summary>
+                                <div class="grid-row">
+                                    <div class="column-quarter">
+                                        @Html.DisplayFor(m => m.FacilityData[i].Contact.FirstName) @Html.DisplayFor(m => m.FacilityData[i].Contact.LastName)<br />
+                                        <a href="mailto:@Model.FacilityData[i].Contact.Email">@Model.FacilityData[i].Contact.Email</a><br />
+                                        Tel: @Html.DisplayFor(m => m.FacilityData[i].Contact.Telephone)<br />
+                                        @if (Model.FacilityData[i].Contact.Fax != null)
+                                        {
+                                            <label>Fax: </label>
+                                            @Html.DisplayFor(model => model.FacilityData[i].Contact.Fax);
+                                        }
+                                    </div>
+                                    <div class="column-quarter">
+                                        @Html.DisplayFor(m => m.FacilityData[i].Address.Building),<br />
+                                        @Html.DisplayFor(m => m.FacilityData[i].Address.StreetOrSuburb),<br />
+                                        @if (Model.FacilityData[i].Address.Address2 != null)
+                                        {
+                                            @Html.DisplayFor(model => model.FacilityData[i].Address.Address2)
+                                            @Html.Raw(",<br/>")
+                                        }
+                                        @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity) @Html.DisplayFor(m => m.FacilityData[i].Address.PostalCode)
+                                    </div>
+                                    <div class="column-quarter">
+                                        @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, facilityId = Model.FacilityData[i].Id }, null)
+                                    </div>
+                                    <div class="column-quarter">
+                                        Actual site:
+                                        @{
+                                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.FacilityData[i].Id) } };
+                                        if (@Model.FacilityData[i].IsActualSiteOfTreatment) { htmlAttr.Add("checked", "checked"); }
+                                        @Html.RadioButtonFor(m => m.SelectedValue, Model.FacilityData[i].Id, htmlAttr)
+                                        }
+
+                                    </div>
+                                </div>
+                            </details>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="form-group">
+        @Html.ActionLink("Add more", "Add", "Facility", new { id = Model.NotificationId }, null)
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}
+<div id="divConfirmDelete" class="clearfix"></div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            // When the background is clicked, hide the background
+            $("#btnYes").click(function (e) {
+            });
+
+            $("#divConfirmDelete").click(function (e) {
+                if (e.target === this && $(this).hasClass("fadeBackground")) {
+                    $(this).removeClass("fadeBackground");
+                    $(this).empty();
+                }
+            });
+
+            $(".deleteLink").click(function () {
+                $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
+            });
+        })
+    </script>
+}
