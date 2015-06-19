@@ -1,8 +1,9 @@
 ﻿@model EA.Iws.Web.ViewModels.SpecialHandling.SpecialHandlingViewModel
 
-<h2 class="heading-large">Are there any special handling requirements?</h2>
-<h3 class="heading-medium">Special handling requirements may be those prescribed by the producers’ handling instructions for employees, health and safety information or transport emergency cards.</h3>
-
+<header class="hgroup">
+    <h2 class="heading-large">Are there any special handling requirements?</h2>
+    <p>Special handling requirements may be those prescribed by the producers’ handling instructions for employees, health and safety information or transport emergency cards.</p>
+</header>
 
 @Html.AntiForgeryToken()
 @Html.Gds().ValidationSummary()
