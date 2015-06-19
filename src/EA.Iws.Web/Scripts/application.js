@@ -131,4 +131,8 @@ $(document).ready(function () {
     toggleContent.showHideRadioToggledContent();
     toggleContent.showHideCheckboxToggledContent();
 
+    //Unhide if javascript is enabled
+    $('.no-js-hidden').css('display', 'block');
 });
+
+

@@ -49,7 +49,7 @@
             </select>
         </div>
 
-        <div id="js-link" class="no-js-hidden">
+        <div class="no-js-hidden">
             <a onclick=" getEwcDescription() " href="#">Add</a>
         </div>
         <div class="js-hidden">
@@ -96,7 +96,6 @@
             }
         }
 
-        document.getElementById("js-link").style.display = 'block';
         var previouslyEnteredCodes = [];
 
         function getEwcDescription() {
@@ -104,12 +103,12 @@
             var sel = document.getElementById("ewc-code-list");
             var table = document.getElementById("ewcTable");
 
-            var found = $.inArray(sel.options[sel.selectedIndex].value, previouslyEnteredCodes) > -1;
+            var found = $.inArray(sel.options[sel.selectedIndex].innerText, previouslyEnteredCodes) > -1;
             if (found) {
                 return;
             }
 
-            previouslyEnteredCodes.push(sel.options[sel.selectedIndex].value);
+            previouslyEnteredCodes.push(sel.options[sel.selectedIndex].innerText);
 
             var row = table.insertRow(0);
 
@@ -126,8 +125,18 @@
 
         function deleteRow(r) {
             var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("ewcTable").deleteRow(i);
-        }
+            var table = document.getElementById("ewcTable");
+
+            var row = table.rows[i];
+            var cells = row.getElementsByTagName("td");
+
+            var wasteCode = cells[0].innerText;
+            
+            var index = previouslyEnteredCodes.indexOf(wasteCode);
+            delete previouslyEnteredCodes[index];
+
+            table.deleteRow(i);
+        } 
 
     </script>
 }

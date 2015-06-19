@@ -26,7 +26,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (SelectedEwcCodes == null || !SelectedEwcCodes.Any())
+            if (string.IsNullOrEmpty(SelectedEwcCode) && (SelectedEwcCodes == null || !SelectedEwcCodes.Any()))
             {
                 yield return new ValidationResult("Please enter a EWC code");
             }
