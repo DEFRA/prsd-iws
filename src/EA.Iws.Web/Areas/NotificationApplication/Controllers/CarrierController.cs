@@ -61,11 +61,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(Guid id, Guid carrierId)
+        public async Task<ActionResult> Edit(Guid id, Guid entityId)
         {
             using (var client = apiClient())
             {
-                var carrier = await client.SendAsync(User.GetAccessToken(), new GetCarrierForNotification(id, carrierId));
+                var carrier = await client.SendAsync(User.GetAccessToken(), new GetCarrierForNotification(id, entityId));
 
                 var model = new EditCarrierViewModel(carrier);
 

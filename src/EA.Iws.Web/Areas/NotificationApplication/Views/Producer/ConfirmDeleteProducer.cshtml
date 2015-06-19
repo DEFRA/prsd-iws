@@ -11,7 +11,7 @@
         @Html.HiddenFor(m => m.IsSiteOfExport)
         <div>
             <input type="submit" id="btnYes" class="button" value="Yes" />
-            @Html.ActionLink("No", "MultipleProducers", "Producer", new { uid = Model.NotificationId }, null)
+            @Html.ActionLink("No", "List", "Producer", new { id = Model.NotificationId }, null)
         </div>
     </div>
 }

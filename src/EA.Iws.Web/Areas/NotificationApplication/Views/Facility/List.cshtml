@@ -3,7 +3,7 @@
     ViewBag.Title = "List Facilities";
 }
 
-@using (Html.BeginForm(actionName: "MultipleFacilities", controllerName: "Facility", method: FormMethod.Post))
+@using (Html.BeginForm(actionName: "List", controllerName: "Facility", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -48,7 +48,7 @@
                                         @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity) @Html.DisplayFor(m => m.FacilityData[i].Address.PostalCode)
                                     </div>
                                     <div class="column-quarter">
-                                        @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, facilityId = Model.FacilityData[i].Id }, null)
+                                        @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id }, null)
                                     </div>
                                     <div class="column-quarter">
                                         Actual site:

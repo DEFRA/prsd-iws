@@ -47,6 +47,9 @@
             bundles.Add(new SassBundle("~/Content/prism", "~/Content/govuk_toolkit/stylesheets").Include(
                       "~/Content/prism.scss"));
 
+            bundles.Add(new StyleBundle("~/Content/css/font-awesome")
+                .Include("~/Content/css/font-awesome.css"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;

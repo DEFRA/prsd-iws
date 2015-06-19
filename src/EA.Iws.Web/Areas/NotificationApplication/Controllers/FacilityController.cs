@@ -67,7 +67,7 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
-                    return RedirectToAction("MultipleFacilities", "Facility",
+                    return RedirectToAction("List", "Facility",
                         new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
@@ -84,14 +84,14 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(Guid id, Guid facilityId)
+        public async Task<ActionResult> Edit(Guid id, Guid entityId)
         {
             using (var client = apiClient())
             {
                 var facility =
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new GetFacilityForNotification(id, facilityId));
+                            new GetFacilityForNotification(id, entityId));
 
                 var response =
                     await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
@@ -123,7 +123,7 @@
 
                     await client.SendAsync(User.GetAccessToken(), request);
 
-                    return RedirectToAction("MultipleFacilities", "Facility",
+                    return RedirectToAction("List", "Facility",
                         new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
@@ -141,7 +141,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MultipleFacilities(Guid id)
+        public async Task<ActionResult> List(Guid id)
         {
             var model = new MultipleFacilitiesViewModel();
 
@@ -163,7 +163,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MultipleFacilities(MultipleFacilitiesViewModel model)
+        public async Task<ActionResult> List(MultipleFacilitiesViewModel model)
         {
             if (!string.IsNullOrWhiteSpace(model.SelectedValue))
             {

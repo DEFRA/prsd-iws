@@ -92,7 +92,7 @@
 
                     await client.SendAsync(User.GetAccessToken(), request);
 
-                    return RedirectToAction("MultipleProducers", "Producer",
+                    return RedirectToAction("List", "Producer",
                         new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
@@ -110,11 +110,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(Guid id, Guid producerId)
+        public async Task<ActionResult> Edit(Guid id, Guid entityId)
         {
             using (var client = apiClient())
             {
-                var producer = await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(id, producerId));
+                var producer = await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(id, entityId));
 
                 var model = new EditProducerViewModel(producer);
 
@@ -142,7 +142,7 @@
 
                     await client.SendAsync(User.GetAccessToken(), request);
 
-                    return RedirectToAction("MultipleProducers", "Producer",
+                    return RedirectToAction("List", "Producer",
                         new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
@@ -160,7 +160,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MultipleProducers(Guid id)
+        public async Task<ActionResult> List(Guid id)
         {
             var model = new MultipleProducersViewModel();
 
@@ -174,7 +174,7 @@
                     model.NotificationId = id;
                     model.ProducerData = response.ToList();
                     model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
-                    return View("MultipleProducers", model);
+                    return View(model);
                 }
                 catch (ApiBadRequestException ex)
                 {

@@ -15,9 +15,9 @@
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "NotificationApplication_default",
-                "NotificationApplication/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional });
+                name: "NotificationApplication_default",
+                url: "NotificationApplication/{id}/{controller}/{action}/{entityId}",
+                defaults: new { action = "NotificationOverview", controller = "NotificationApplication", entityId = UrlParameter.Optional });
         }
     }
 }

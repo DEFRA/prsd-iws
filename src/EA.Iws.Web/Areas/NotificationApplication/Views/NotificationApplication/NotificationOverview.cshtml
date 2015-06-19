@@ -5,7 +5,7 @@
 }
 
 <h1 class="heading-large">Notification overview</h1>
-<p>@Model.NotificationNumber</p>
+
 <div class="form-group">
     <table>
         <thead>
@@ -28,7 +28,7 @@
                     <div>Waste generator - producer</div>
                 </td>
                 <td>
-                    <div>@Html.ActionLink("Edit", "MultipleProducers", "Producer", new { id = Model.NotificationId }, null)</div>
+                    <div>@Html.ActionLink("Edit", "List", "Producer", new { id = Model.NotificationId }, null)</div>
                 </td>
             </tr>
             <tr>
@@ -44,7 +44,7 @@
                     <div>@Model.NotificationType.ToString() facility</div>
                 </td>
                 <td>
-                    <div>@Html.ActionLink("Edit", "MultipleFacilities", "Facility", new { id = Model.NotificationId }, null)</div>
+                    <div>@Html.ActionLink("Edit", "List", "Facility", new { id = Model.NotificationId }, null)</div>
                 </td>
             </tr>
             <tr>

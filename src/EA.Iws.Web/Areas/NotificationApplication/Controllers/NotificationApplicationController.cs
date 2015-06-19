@@ -153,19 +153,6 @@
             }
         }
 
-        public ActionResult _GetUserNotifications()
-        {
-            using (var client = apiClient())
-            {
-                // Child actions (partial views) cannot be async and we must therefore get the result of the task.
-                // The called code must use ConfigureAwait(false) on async tasks to prevent deadlock.
-                var response =
-                    client.SendAsync(User.GetAccessToken(), new GetNotificationsByUser()).Result;
-
-                return PartialView(response);
-            }
-        }
-
         [HttpGet]
         public async Task<ActionResult> NotificationOverview(Guid id)
         {
@@ -215,6 +202,23 @@
                     }
                 }
                 return View(model);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult _Navigation(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var response = client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id)).GetAwaiter().GetResult();
+
+                var model = new NotificationOverviewViewModel
+                {
+                    NotificationId = response.NotificationId,
+                    NotificationNumber = response.NotificationNumber,
+                    NotificationType = response.NotificationType
+                };
+                return PartialView(model);
             }
         }
     }

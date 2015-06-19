@@ -37,7 +37,7 @@
                                     @Html.DisplayFor(m => m.Carriers[i].Address.TownOrCity) @Html.DisplayFor(m => m.Carriers[i].Address.PostalCode)
                                 </div>
                                 <div class="column-third">
-                                    @Html.ActionLink("Edit", "Edit", "Carrier", new { id = Model.Carriers[i].NotificationId, carrierId = Model.Carriers[i].Id }, null)
+                                    @Html.ActionLink("Edit", "Edit", "Carrier", new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id }, null)
                                 </div>
                             </div>
                         </details>

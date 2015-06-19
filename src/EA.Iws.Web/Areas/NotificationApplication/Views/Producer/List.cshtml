@@ -43,7 +43,7 @@
                                  @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity) @Html.DisplayFor(m => m.ProducerData[i].Address.PostalCode)
                              </div>
                              <div class="column-quarter">
-                                 @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, producerId = Model.ProducerData[i].Id }, null)
+                                 @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
                              </div>
                              <div class="column-quarter">
                                  Site of Export:

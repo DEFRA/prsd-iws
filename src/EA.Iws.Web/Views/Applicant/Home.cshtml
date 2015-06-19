@@ -5,12 +5,12 @@
 
 <h2 class="heading-medium">Do you want to start a new notification?</h2>
 <p id="get-started" class="get-started group">
-    @Html.ActionLink("Continue", "CompetentAuthority", "NotificationApplication", new { area = "NotificationApplication" }, new { @class = "button" })
+    @Html.ActionLink("Continue", "CompetentAuthority", "NotificationApplication", new { area = "NotificationApplication", id = Guid.Empty }, new { @class = "button" })
 </p>
 
 <div class="spacer"></div>
 
 <h2 class="heading-medium">Manage your notifications</h2>
 <div class="colored-header-bar" id="turquoise"></div>
-@Html.Action(actionName: "_GetUserNotifications", controllerName: "NotificationApplication", routeValues: new { area = "NotificationApplication" })
+@Html.Action("_GetUserNotifications")
 <hr class="section-bottom" />
