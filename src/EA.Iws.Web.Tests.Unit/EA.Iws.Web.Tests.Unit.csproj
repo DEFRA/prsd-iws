@@ -146,7 +146,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\NotificationApplicationControllerTests.cs" />
+    <Compile Include="Controllers\NewNotificationControllerTests.cs" />
     <Compile Include="Controllers\TransitStateControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\Factories\AutofacContainerFactory.cs" />

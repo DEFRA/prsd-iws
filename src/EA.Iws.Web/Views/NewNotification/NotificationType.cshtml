@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Requests.Shared
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationTypeViewModel
+@model EA.Iws.Web.ViewModels.NewNotification.NotificationTypeViewModel
 
 @{
     ViewBag.Title = "Recovery or Disposal Question";
@@ -9,7 +9,7 @@
     <h2 class="heading-large">What type of waste shipment notification are you applying for?</h2>
 </header>
 
-@using (Html.BeginForm("NotificationTypeQuestion", "NotificationApplication", FormMethod.Post))
+@using (Html.BeginForm("NotificationType", "NewNotification", FormMethod.Post))
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()

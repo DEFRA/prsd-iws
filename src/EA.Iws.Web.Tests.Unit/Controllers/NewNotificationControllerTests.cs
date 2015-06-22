@@ -1,21 +1,18 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
     using System;
-    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Areas.NotificationApplication.Controllers;
-    using Areas.NotificationApplication.ViewModels.NotificationApplication;
     using FakeItEasy;
-    using Prsd.Core.Web.ApiClient;
     using Requests.Notification;
     using Requests.Shared;
+    using ViewModels.NewNotification;
     using ViewModels.Shared;
     using Web.Controllers;
     using Xunit;
 
-    public class NotificationApplicationControllerTests
+    public class NewNotificationControllerTests
     {
         private static CompetentAuthorityChoiceViewModel CompetentAuthorityChoice
         {
@@ -33,18 +30,18 @@
             }
         }
 
-        private static NotificationApplicationController CreateNotificationApplicationController()
+        private static NewNotificationController CreateNewNotificationController()
         {
             var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync<Guid>(A<string>._, A<CreateNotificationApplication>._))
+            A.CallTo(() => client.SendAsync(A<string>._, A<CreateNotificationApplication>._))
                 .Returns(Guid.Empty);
-            return new NotificationApplicationController(() => client);
+            return new NewNotificationController(() => client);
         }
 
         [Fact]
         public void CompetentAuthority_Get_ReturnsCorrectView()
         {
-            var controller = CreateNotificationApplicationController();
+            var controller = CreateNewNotificationController();
 
             var result = controller.CompetentAuthority() as ViewResult;
 
@@ -55,19 +52,19 @@
         [Fact]
         public void CompetentAuthority_Post_RedirectsToCorrectAction()
         {
-            var controller = CreateNotificationApplicationController();
+            var controller = CreateNewNotificationController();
 
             var competentAuthorityChoice = CompetentAuthorityChoice;
 
             var result = controller.CompetentAuthority(competentAuthorityChoice) as RedirectToRouteResult;
 
-            Assert.Equal("NotificationTypeQuestion", result.RouteValues["action"]);
+            Assert.Equal("NotificationType", result.RouteValues["action"]);
         }
 
         [Fact]
         public void CompetentAuthority_PostInvalidModel_ReturnsToCorrectView()
         {
-            var controller = CreateNotificationApplicationController();
+            var controller = CreateNewNotificationController();
 
             controller.ModelState.AddModelError("Error", "A Test Error");
 
@@ -82,8 +79,8 @@
         [Fact]
         public void NotificationTypeQuestion_Get_ReturnsCorrectView()
         {
-            var controller = CreateNotificationApplicationController();
-            var result = controller.NotificationTypeQuestion("Environment Agency", "Recovery") as ViewResult;
+            var controller = CreateNewNotificationController();
+            var result = controller.NotificationType("Environment Agency", "Recovery") as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<NotificationTypeViewModel>(result.Model);
@@ -92,10 +89,10 @@
         [Fact]
         public async Task NotificationTypeQuestion_Post_RedirectsToCorrectAction()
         {
-            var controller = CreateNotificationApplicationController();
+            var controller = CreateNewNotificationController();
             var model = new NotificationTypeViewModel();
             model.SelectedNotificationType = NotificationType.Recovery;
-            var result = await controller.NotificationTypeQuestion(model) as RedirectToRouteResult;
+            var result = await controller.NotificationType(model) as RedirectToRouteResult;
 
             Assert.Equal("Created", result.RouteValues["action"]);
         }
@@ -103,10 +100,10 @@
         [Fact]
         public async Task NotificationTypeQuestion_PostInvalidModel_ReturnsToCorrectView()
         {
-            var controller = CreateNotificationApplicationController();
+            var controller = CreateNewNotificationController();
             controller.ModelState.AddModelError("Error", "Test Error");
             var model = new NotificationTypeViewModel();
-            var result = await controller.NotificationTypeQuestion(model) as ViewResult;
+            var result = await controller.NotificationType(model) as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<NotificationTypeViewModel>(result.Model);

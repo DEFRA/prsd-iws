@@ -1,7 +1,7 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
+﻿namespace EA.Iws.Web.ViewModels.NewNotification
 {
     using Requests.Notification;
-    using Web.ViewModels.Shared;
+    using Shared;
 
     public class CompetentAuthorityChoiceViewModel
     {

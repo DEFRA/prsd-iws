@@ -25,109 +25,6 @@
         }
 
         [HttpGet]
-        public ActionResult CompetentAuthority()
-        {
-            var model = new CompetentAuthorityChoiceViewModel();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CompetentAuthority(CompetentAuthorityChoiceViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            return RedirectToAction("NotificationTypeQuestion",
-                new { ca = model.CompetentAuthorities.SelectedValue });
-        }
-
-        [HttpGet]
-        public ActionResult NotificationTypeQuestion(string ca, string nt)
-        {
-            var model = new NotificationTypeViewModel
-            {
-                CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
-            };
-
-            if (!string.IsNullOrWhiteSpace(nt))
-            {
-                model.SelectedNotificationType = nt.GetValueFromDisplayName<NotificationType>();
-            }
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NotificationTypeQuestion(NotificationTypeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                try
-                {
-                    var response =
-                        await
-                            client.SendAsync(User.GetAccessToken(),
-                                new CreateNotificationApplication
-                                {
-                                    CompetentAuthority = model.CompetentAuthority,
-                                    NotificationType = model.SelectedNotificationType
-                                });
-
-                    return RedirectToAction("Created",
-                        new
-                        {
-                            id = response
-                        });
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-
-                return View(model);
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Created(Guid id)
-        {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
-
-                var model = new CreatedViewModel
-                {
-                    NotificationId = response.NotificationId,
-                    NotificationNumber = response.NotificationNumber
-                };
-                return View(model);
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Created(CreatedViewModel model)
-        {
-            return RedirectToAction(actionName: "Add", controllerName: "Exporter",
-                routeValues: new { id = model.NotificationId });
-        }
-
-        [HttpGet]
         public async Task<ActionResult> GenerateNotificationDocument(Guid id)
         {
             using (var client = apiClient())
@@ -205,7 +102,7 @@
             }
         }
 
-        [HttpGet]
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult _Navigation(Guid id)
         {
             if (id == Guid.Empty)

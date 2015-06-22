@@ -1,9 +1,9 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.CreatedViewModel
+﻿@model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
 @{
     ViewBag.Title = "Notification Application Created";
 }
 
-@using (Html.BeginForm("Created", "NotificationApplication", FormMethod.Post))
+@using (Html.BeginForm("Created", "NewNotification", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <header class="hgroup">

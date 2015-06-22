@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
+﻿namespace EA.Iws.Web.ViewModels.NewNotification
 {
     using System;
 
