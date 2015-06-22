@@ -208,6 +208,11 @@
         [HttpGet]
         public ActionResult _Navigation(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                return PartialView(new NotificationOverviewViewModel());
+            }
+
             using (var client = apiClient())
             {
                 var response = client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id)).GetAwaiter().GetResult();
