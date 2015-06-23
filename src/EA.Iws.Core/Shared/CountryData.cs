@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Registration
+﻿namespace EA.Iws.Core.Shared
 {
     using System;
 

@@ -1,6 +1,6 @@
 namespace EA.Iws.Requests.StateOfImport
 {
-    using Registration;
+    using Core.Shared;
     using Shared;
     using TransportRoute;
 

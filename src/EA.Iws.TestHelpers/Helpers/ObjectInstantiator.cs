@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.Domain.Tests.Unit.Helpers
+﻿namespace EA.Iws.TestHelpers.Helpers
 {
     using System;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.Serialization;
 
-    internal class ObjectInstantiator<T>
+    public class ObjectInstantiator<T>
     {
         public static readonly Func<T> CreateNew = Creator();
 

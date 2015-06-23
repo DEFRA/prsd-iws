@@ -2,6 +2,7 @@
 {
     using System;
     using Prsd.Core.Mediator;
+
     public class SetWasteGenerationProcess : IRequest<Guid>
     {
         public SetWasteGenerationProcess(string process, Guid notificationId, bool isDocumentAttached)

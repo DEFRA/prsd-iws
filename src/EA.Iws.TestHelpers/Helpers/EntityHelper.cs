@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Helpers
+﻿namespace EA.Iws.TestHelpers.Helpers
 {
     using System;
     using Prsd.Core.Domain;

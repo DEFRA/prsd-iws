@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.MeansOfTransport;
     using Prsd.Core.Mediator;
 
-    public class GetMeansOfTransportByNotificationId : IRequest<IList<Core.MeansOfTransport.MeansOfTransport>>
+    public class GetMeansOfTransportByNotificationId : IRequest<IList<MeansOfTransport>>
     {
         public Guid Id { get; private set; }
 

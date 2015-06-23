@@ -72,6 +72,11 @@
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarriersByNotificationIdHandler.cs" />
     <Compile Include="Carrier\UpdateCarrierForNotificationHandler.cs" />
+    <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandler.cs" />
+    <Compile Include="CustomsOffice\GetEntryCustomsOfficeAddDataByNotificationIdHandler.cs" />
+    <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdHandler.cs" />
+    <Compile Include="CustomsOffice\SetEntryCustomsOfficeForNotificationByIdHandler.cs" />
+    <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandler.cs" />
     <Compile Include="Carrier\AddCarrierToNotificationHandler.cs" />
     <Compile Include="Facilities\DeleteFacilityForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
@@ -80,6 +85,7 @@
     <Compile Include="Facilities\UpdateFacilityForNotificationHandler.cs" />
     <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
     <Compile Include="Mappings\CodeTypeMap.cs" />
+    <Compile Include="Mappings\CustomsOfficeMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
@@ -134,11 +140,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OperationCodes\AddRecoveryCodesHandler.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
-    <Compile Include="Registration\GetCountriesHandler.cs" />
+    <Compile Include="Shared\GetCountriesHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />
     <Compile Include="Shared\GetCompetentAuthoritiesByCountryHandler.cs" />
     <Compile Include="Shipment\SetShipmentInfoForNotificationHandler.cs" />
+    <Compile Include="Shared\GetEuropeanUnionCountriesHandler.cs" />
     <Compile Include="PackagingType\GetPackagingInfoForNotificationHandler.cs" />
     <Compile Include="Shipment\GetShipmentInfoForNotificationHandler.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotificationHandler.cs" />

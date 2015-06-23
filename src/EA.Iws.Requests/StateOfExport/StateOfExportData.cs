@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Requests.StateOfExport
 {
-    using Registration;
+    using Core.Shared;
     using Shared;
     using TransportRoute;
 

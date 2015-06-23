@@ -82,6 +82,8 @@
     <Compile Include="Mappings\BusinessMapping.cs" />
     <Compile Include="Mappings\CodeTypeMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityMapping.cs" />
+    <Compile Include="Mappings\ExitCustomsOfficeMapping.cs" />
+    <Compile Include="Mappings\EntryCustomsOfficeMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsInfoMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMapping.cs" />
     <Compile Include="Mappings\TechnologyEmployedMapping.cs" />

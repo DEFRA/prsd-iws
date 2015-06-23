@@ -1,5 +1,7 @@
-﻿namespace EA.Iws.Domain.Tests.Unit.Helpers
+﻿namespace EA.Iws.TestHelpers.Helpers
 {
+    using Domain;
+
     public static class ObjectFactory
     {
         public static Contact CreateEmptyContact()

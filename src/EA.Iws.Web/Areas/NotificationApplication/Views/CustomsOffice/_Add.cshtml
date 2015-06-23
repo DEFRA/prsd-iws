@@ -1,0 +1,19 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomsOffice.CustomsOfficeViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+    @Html.Gds().LabelFor(m => m.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Name)
+    @Html.Gds().TextBoxFor(m => m.Name)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Address)">
+    @Html.Gds().LabelFor(m => m.Address)
+    @Html.Gds().ValidationMessageFor(m => m.Address)
+    @Html.Gds().TextBoxFor(m => m.Address)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedCountry)">
+    @Html.Gds().LabelFor(m => m.SelectedCountry)
+    @Html.Gds().ValidationMessageFor(m => m.SelectedCountry)
+    @Html.Gds().DropDownListFor(m => m.SelectedCountry, Model.Countries, string.Empty)
+</div>

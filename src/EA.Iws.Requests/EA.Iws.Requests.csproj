@@ -52,6 +52,14 @@
     <Compile Include="Carriers\UpdateCarrierForNotification.cs" />
     <Compile Include="ClaimTypes.cs" />
     <Compile Include="Exporters\SetExporterForNotification.cs" />
+    <Compile Include="CustomsOffice\CustomsOfficeCompletionStatus.cs" />
+    <Compile Include="CustomsOffice\EntryCustomsOfficeAddData.cs" />
+    <Compile Include="CustomsOffice\ExitCustomsOfficeAddData.cs" />
+    <Compile Include="CustomsOffice\GetCustomsCompletionStatusByNotificationId.cs" />
+    <Compile Include="CustomsOffice\GetEntryCustomsOfficeAddDataByNotificationId.cs" />
+    <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationId.cs" />
+    <Compile Include="CustomsOffice\SetEntryCustomsOfficeForNotificationById.cs" />
+    <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationById.cs" />
     <Compile Include="Facilities\AddFacilityToNotification.cs" />
     <Compile Include="Facilities\DeleteFacilityForNotification.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
@@ -71,6 +79,7 @@
     <Compile Include="Notification\GetNotificationInfo.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
+    <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
     <Compile Include="Shipment\ShipmentQuantityUnits.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
@@ -104,7 +113,6 @@
     <Compile Include="Organisations\OrganisationById.cs" />
     <Compile Include="Organisations\OrganisationData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration\CountryData.cs" />
     <Compile Include="Registration\CreateOrganisation.cs" />
     <Compile Include="Shared\GetCountries.cs" />
     <Compile Include="Registration\LinkUserToOrganisation.cs" />

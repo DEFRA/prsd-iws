@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomsOffice.CustomsOfficeViewModel
+
+<h2 class="heading-large">What is the name and address for the entry customs office?</h2>
+
+<p>This is the customs office through which the waste enters the European Economic Area (EEA)</p>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.Partial("~/Areas/NotificationApplication/Views/CustomsOffice/_Add.cshtml", Model)
+    <button class="button" type="submit">Continue</button>
+}
+

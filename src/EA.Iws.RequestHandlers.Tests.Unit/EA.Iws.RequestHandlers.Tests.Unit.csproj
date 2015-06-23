@@ -66,9 +66,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />
+    <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />
+    <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandlerTests.cs" />
     <Compile Include="Helpers\DbContextHelper.cs" />
-    <Compile Include="Helpers\EntityHelper.cs" />
-    <Compile Include="Helpers\ObjectInstantiator.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerator.cs" />
     <Compile Include="Helpers\TestDbAsyncQueryProvider.cs" />
@@ -101,6 +102,10 @@
     <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
       <Project>{87fbb5cc-a732-4363-a158-39dbf3707407}</Project>
       <Name>EA.Iws.Requests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
+      <Project>{dec3021a-32cf-4b84-a59c-77503378ed67}</Project>
+      <Name>EA.Iws.TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

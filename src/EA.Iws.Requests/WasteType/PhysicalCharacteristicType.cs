@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.WasteType
 {
     using System.ComponentModel.DataAnnotations;
+
     public enum PhysicalCharacteristicType
     {
         [Display(Name = "Powdery/powder")]

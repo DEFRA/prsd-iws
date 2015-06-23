@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit
 {
     using System;
-    using Helpers;
+    using TestHelpers.Helpers;
     using TransportRoute;
     using Xunit;
 

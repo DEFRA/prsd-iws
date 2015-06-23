@@ -1,12 +1,12 @@
-﻿namespace EA.Iws.RequestHandlers.Registration
+﻿namespace EA.Iws.RequestHandlers.Shared
 {
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Shared;
     using DataAccess;
     using Prsd.Core.Mediator;
-    using Requests.Registration;
     using Requests.Shared;
 
     internal class GetCountriesHandler : IRequestHandler<GetCountries, List<CountryData>>

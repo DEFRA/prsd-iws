@@ -2,7 +2,7 @@
 {
     using System;
     using Domain.Notification;
-    using Helpers;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class NotificationImporterTests

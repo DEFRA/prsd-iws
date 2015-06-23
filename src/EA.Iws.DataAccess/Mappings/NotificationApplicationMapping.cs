@@ -95,6 +95,14 @@
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 
+            HasOptional(x => x.ExitCustomsOffice)
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
+
+            HasOptional(x => x.EntryCustomsOffice)
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
+
             Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
 
             Ignore(x => x.MeansOfTransport);

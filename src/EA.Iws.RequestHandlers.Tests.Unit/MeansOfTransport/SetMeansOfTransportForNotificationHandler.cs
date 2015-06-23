@@ -11,9 +11,9 @@
     using Domain;
     using Domain.Notification;
     using FakeItEasy;
-    using Helpers;
     using RequestHandlers.MeansOfTransport;
     using Requests.MeansOfTransport;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class SetMeansOfTransportForNotificationHandlerTests

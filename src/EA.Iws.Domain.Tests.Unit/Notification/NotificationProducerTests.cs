@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using Domain.Notification;
-    using Helpers;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class NotificationProducerTests

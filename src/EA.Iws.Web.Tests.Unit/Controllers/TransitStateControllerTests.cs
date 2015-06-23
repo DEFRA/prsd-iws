@@ -3,8 +3,8 @@
     using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.TransitState;
+    using Core.Shared;
     using FakeItEasy;
-    using Requests.Registration;
     using Requests.Shared;
     using Requests.StateOfExport;
     using Requests.TransitState;

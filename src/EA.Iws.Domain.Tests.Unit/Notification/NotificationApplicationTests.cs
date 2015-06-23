@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using Domain.Notification;
-    using Helpers;
     using Xunit;
 
     public class NotificationApplicationTests

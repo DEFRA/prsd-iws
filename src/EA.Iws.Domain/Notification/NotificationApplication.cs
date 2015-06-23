@@ -116,6 +116,10 @@
             get { return PackagingInfosCollection.ToSafeIEnumerable(); }
         }
 
+        public virtual ExitCustomsOffice ExitCustomsOffice { get; private set; }
+
+        public virtual EntryCustomsOffice EntryCustomsOffice { get; private set; }
+
         private string CreateNotificationNumber(int notificationNumber)
         {
             return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));

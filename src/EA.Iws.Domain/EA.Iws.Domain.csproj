@@ -52,6 +52,9 @@
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Notification\CodeType.cs" />
+    <Compile Include="TransportRoute\CustomsOffice.cs" />
+    <Compile Include="TransportRoute\ExitCustomsOffice.cs" />
+    <Compile Include="TransportRoute\EntryCustomsOffice.cs" />
     <Compile Include="Notification\NotificationApplication.MeansOfTransport.cs" />
     <Compile Include="Notification\NotificationApplication.PackagingInfo.cs" />
     <Compile Include="Notification\NotificationApplication.TechnologyEmployed.cs" />
@@ -101,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Notification\NotificationApplication.TransportRoute.cs" />
+    <Compile Include="Notification\NotificationApplication.CustomsOffice.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

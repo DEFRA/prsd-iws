@@ -3,16 +3,16 @@
     using System;
     using System.Reflection;
     using System.Threading.Tasks;
+    using Core.MeansOfTransport;
     using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
     using Domain.Notification;
     using FakeItEasy;
-    using Helpers;
     using RequestHandlers.MeansOfTransport;
     using Requests.MeansOfTransport;
+    using TestHelpers.Helpers;
     using Xunit;
-    using MeansOfTransport = Core.MeansOfTransport.MeansOfTransport;
 
     public class GetMeansOfTransportByNotificationIdHandlerTests
     {

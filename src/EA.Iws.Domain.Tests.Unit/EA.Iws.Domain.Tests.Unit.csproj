@@ -64,10 +64,9 @@
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
     <Compile Include="BusinessTests.cs" />
-    <Compile Include="Helpers\EntityHelper.cs" />
-    <Compile Include="Helpers\ObjectFactory.cs" />
-    <Compile Include="Helpers\ObjectInstantiator.cs" />
+    <Compile Include="Notification\CustomsOfficeTests.cs" />
     <Compile Include="Notification\NotificationApplicationTests.cs" />
+    <Compile Include="Notification\NotificationCustomsOfficeTests.cs" />
     <Compile Include="Notification\NotificationExporterTests.cs" />
     <Compile Include="Notification\NotificationFacilityTests.cs" />
     <Compile Include="Notification\NotificationImporterTests.cs" />
@@ -94,6 +93,10 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
+      <Project>{dec3021a-32cf-4b84-a59c-77503378ed67}</Project>
+      <Name>EA.Iws.TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
