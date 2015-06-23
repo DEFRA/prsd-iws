@@ -100,7 +100,7 @@
         {
             if (!ModelState.IsValid || submit == null || !model.SelectedValue.HasValue)
             {
-                return View(model);
+                return View("Add", model);
             }
 
             switch (submit.ToUpperInvariant())
