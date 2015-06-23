@@ -584,6 +584,8 @@
     <Compile Include="Controllers\NewNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\UnNumberViewModel.cs" />
+    <Compile Include="Infrastructure\Navigation.cs" />
+    <Compile Include="Infrastructure\NavigationExtensions.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\EmailTemplate.cs" />
     <Compile Include="Services\EmailTemplateService.cs" />
