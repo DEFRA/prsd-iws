@@ -2,6 +2,7 @@
 {
     using System;
     using Domain.Notification;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Requests.WasteType;
     using CodeType = Requests.WasteType.CodeType;
@@ -17,6 +18,11 @@
                 Code = source.Code,
                 CodeType = GetCodeType(source.CodeType)
             };
+        }
+
+        public Domain.Notification.CodeType Map(CodeType source)
+        {
+            return Enumeration.FromValue<Domain.Notification.CodeType>((int)source);
         }
 
         private CodeType GetCodeType(Domain.Notification.CodeType codeType)

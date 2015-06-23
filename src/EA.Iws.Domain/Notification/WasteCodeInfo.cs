@@ -13,6 +13,10 @@
             WasteCode = wasteCode;
         }
 
-        public virtual WasteCode WasteCode { get; private set; }
+        public virtual WasteCode WasteCode { get; internal set; }
+
+        public string OptionalDescription { get; internal set; }
+
+        public string OptionalCode { get; internal set; }
     }
 }

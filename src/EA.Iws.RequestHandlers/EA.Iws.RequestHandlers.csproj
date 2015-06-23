@@ -83,6 +83,7 @@
     <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
     <Compile Include="Importers\NotificationHasImporterHandler.cs" />
     <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
+    <Compile Include="Mappings\CodeTypeMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
     <Compile Include="WasteType\GetWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetEwcCodesHandler.cs" />
+    <Compile Include="WasteType\SetOptionalWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristicsHandler.cs" />
     <Compile Include="WasteType\SetBaselOrOecdWasteCodeHandler.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcessHandler.cs" />

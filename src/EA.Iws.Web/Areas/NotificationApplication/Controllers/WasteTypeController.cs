@@ -284,7 +284,7 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), new SetBaselOrOecdWasteCode(new Guid(model.SelectedWasteCode), model.NotificationId));
                     await client.SendAsync(User.GetAccessToken(), new SetEwcCodes(model.SelectedEwcCodes, model.NotificationId));
-                    return RedirectToAction("Index", "Home", new { area = string.Empty });
+                    return RedirectToAction("OtherWasteCodes", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -295,6 +295,122 @@
                     }
                 }
                 await InitializeWasteCodeViewModel(model);
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult OtherWasteCodes(Guid id)
+        {
+            var model = new OtherWasteCodesViewModel
+            {
+                NotificationId = id,
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> OtherWasteCodes(OtherWasteCodesViewModel model, string command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            using (var client = apiClient())
+            {
+                try
+                {
+                    List<WasteCodeData> wasteCodeData = new List<WasteCodeData>();
+                    if (!string.IsNullOrEmpty(model.ExportNationalCode))
+                    {
+                        wasteCodeData.Add(new WasteCodeData { OptionalCode = model.ExportNationalCode, CodeType = CodeType.ExportCode, OptionalDescription = "National code in country of export" });
+                    }
+                    if (!string.IsNullOrEmpty(model.ImportNationalCode))
+                    {
+                        wasteCodeData.Add(new WasteCodeData { OptionalCode = model.ImportNationalCode, CodeType = CodeType.ImportCode, OptionalDescription = "National code in country of import" });
+                    }
+                    if (!string.IsNullOrEmpty(model.OtherCode))
+                    {
+                        wasteCodeData.Add(new WasteCodeData { OptionalCode = model.OtherCode, CodeType = CodeType.OtherCode, OptionalDescription = "Other code" });
+                    }
+                    await client.SendAsync(User.GetAccessToken(), new SetOptionalWasteCodes(model.NotificationId, wasteCodeData));
+                    return RedirectToAction("UnNumber", new { id = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                return View(model);
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult> UnNumber(Guid id)
+        {
+            var model = new UnNumberViewModel
+            {
+                NotificationId = id,
+            };
+            await InitializeUnNumberViewModel(model);
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UnNumber(UnNumberViewModel model, string command)
+        {
+            if (!ModelState.IsValid)
+            {
+                await InitializeUnNumberViewModel(model);
+                return View(model);
+            }
+            if (command.Equals("add"))
+            {
+                await InitializeUnNumberViewModel(model);
+                var codeToAdd = model.UnCodes.Single(c => c.Id.ToString() == model.SelectedUnCode);
+                if (model.SelectedUnCodes.All(c => c.Id != codeToAdd.Id))
+                {
+                    model.SelectedUnCodes.Add(codeToAdd);
+                }
+                return View(model);
+            }
+            if (command.Equals("addCustomCode"))
+            {
+                await InitializeUnNumberViewModel(model);
+                if (model.CustomCodes == null)
+                {
+                    model.CustomCodes = new List<string>();
+                }
+                model.CustomCodes.Add(model.SelectedCustomCode);
+                return View(model);
+            }
+            using (var client = apiClient())
+            {
+                try
+                {
+                    if (model.CustomCodes != null)
+                    {
+                        List<WasteCodeData> wasteCodeData = new List<WasteCodeData>();
+                        foreach (var customCode in model.CustomCodes)
+                        {
+                            wasteCodeData.Add(new WasteCodeData { OptionalCode = customCode, CodeType = CodeType.CustomCode, OptionalDescription = "Custom Code" });
+                        }
+                        await client.SendAsync(User.GetAccessToken(), new SetOptionalWasteCodes(model.NotificationId, wasteCodeData));
+                    }
+                    await client.SendAsync(User.GetAccessToken(), new SetEwcCodes(model.SelectedUnCodes, model.NotificationId));
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                await InitializeUnNumberViewModel(model);
                 return View(model);
             }
         }
@@ -310,6 +426,21 @@
                 model.SelectedEwcCodes = new List<WasteCodeData>();
             }
 
+            return model;
+        }
+
+        private async Task<UnNumberViewModel> InitializeUnNumberViewModel(UnNumberViewModel model)
+        {
+            var codes = await GetWasteCodes();
+            model.UnCodes = codes.Where(c => c.CodeType == CodeType.UnNumber);
+            if (model.SelectedUnCodes == null)
+            {
+                model.SelectedUnCodes = new List<WasteCodeData>();
+            }
+            if (model.CustomCodes == null)
+            {
+                model.CustomCodes = new List<string>();
+            }
             return model;
         }
 

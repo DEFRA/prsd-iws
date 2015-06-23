@@ -13,5 +13,9 @@
         public CodeType CodeType { get; set; }
 
         public Guid NotificationId { get; set; }
+
+        public string OptionalCode { get; set; }
+
+        public string OptionalDescription { get; set; }
     }
 }

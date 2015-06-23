@@ -113,6 +113,8 @@
     <Content Include="scripts\Update\Sprint09\20150616-090425-Add-EWC-Codes-To-WasteCode.sql" />
     <Content Include="scripts\Update\Sprint09\20150616-143000-add-netherlands-data-to-lookup.sql" />
     <Content Include="scripts\Update\Sprint10\20150617-161000-add-means-of-transport-column.sql" />
+    <Content Include="scripts\Update\Sprint10\20150623-090511-Add-Optional-Waste-Codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150656-090511-Add-UN-Waste-Codes.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

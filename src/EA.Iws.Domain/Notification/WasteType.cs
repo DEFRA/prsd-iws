@@ -176,7 +176,7 @@
             return new WasteType(ChemicalComposition.SRF, wasteCompositions);
         }
 
-        internal void AddWasteCode(WasteCode wasteCode)
+        internal void AddWasteCode(WasteCode wasteCode, string optionalCode = "", string optionalDescription = "")
         {
             if (WasteCodeInfoCollection == null)
             {
@@ -193,13 +193,28 @@
                 throw new InvalidOperationException(string.Format("A Oecd code already exists for notification {0}", Id));
             }
 
-            if (WasteCodeInfoCollection.Any(c => c.WasteCode.Code == wasteCode.Code))
+            if (WasteCodeInfoCollection.Any(c => c.WasteCode.Code == wasteCode.Code && !CodeIsOptional(c.WasteCode.CodeType)))
             {
                 throw new InvalidOperationException(string.Format("The same code cannot be entered twice for notification {0}", Id));
             }
 
             var wasteCodeInfo = new WasteCodeInfo(wasteCode);
+            if (!string.IsNullOrEmpty(optionalCode) && !string.IsNullOrEmpty(optionalDescription))
+            {
+                if (!CodeIsOptional(wasteCode.CodeType))
+                {
+                    throw new InvalidOperationException(string.Format("Cannot set optional values for non optional code type for notification {0}", Id));
+                }
+                wasteCodeInfo.OptionalDescription = optionalDescription;
+                wasteCodeInfo.OptionalCode = optionalCode;
+                wasteCodeInfo.WasteCode = wasteCode;
+            }
             WasteCodeInfoCollection.Add(wasteCodeInfo);
+        }
+
+        private bool CodeIsOptional(CodeType codeType)
+        {
+            return codeType == CodeType.CustomCode || codeType == CodeType.ExportCode || codeType == CodeType.ImportCode || codeType == CodeType.OtherCode;
         }
     }
 }

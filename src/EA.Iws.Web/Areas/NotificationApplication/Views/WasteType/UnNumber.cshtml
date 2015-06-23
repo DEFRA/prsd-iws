@@ -1,0 +1,145 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.UnNumberViewModel
+@{
+    ViewBag.Title = "Waste Code";
+}
+<header class="hgroup">
+    <div class="form-group">
+        @Html.Gds().HintParagraph("Step 4 of 4")
+    </div>
+    <h2 class="heading-large">Waste Identification</h2>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div>
+        <div class="form-group">
+            @Html.Gds().LabelFor(m => m.UnCode, "(Please enter at least one)")
+            <select data-val="true" data-val-required="The SelectedWasteCode field is required." id="ewc-code-list" name="SelectedUnCode">
+                <option description="" selected="selected" value=""></option>
+                @foreach (var unCode in Model.UnCodes)
+                {
+                    <option description="@unCode.Description" value="@unCode.Id">@unCode.Code</option>
+                }
+            </select>
+        </div>
+        <div class="no-js-hidden">
+            <a onclick=" AddUnCode() " href="#">Add</a>
+        </div>
+        <div class="js-hidden">
+            <button class="link-submit" type="submit" name="command" value="add">Add</button>
+        </div>
+        <div class="form-group">
+            <table id="nonjsTable">
+                @for (int i = 0; i < Model.SelectedUnCodes.Count; i++)
+                {
+                    <tr>
+                        <td><input name="SelectedUnCodes[@i].Code" type="hidden" value="@Model.SelectedUnCodes[i].Code" />@Model.SelectedUnCodes[i].Code</td>
+                        <td><input name="SelectedUnCodes[@i].Description" type="hidden" value="@Model.SelectedUnCodes[i].Description" />@Model.SelectedUnCodes[i].Description</td>
+                        <td><input name="SelectedUnCodes[@i].Id" type="hidden" value="@Model.SelectedUnCodes[i].Id" /></td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="form-group">
+            <table id="ewcTable"></table>
+        </div>
+        <div class="form-group">
+            @Html.Gds().LabelFor(m => m.CustomCodes)
+            <input id="custom-code-box" type="text" name="SelectedCustomCode" />
+        </div>
+        <div class="no-js-hidden">
+            <a onclick=" AddCustomCode() " href="#">Add</a>
+        </div>
+        <div class="js-hidden">
+            <button class="link-submit" type="submit" name="command" value="addCustomCode">Add</button>
+        </div>
+        <div class="form-group">
+            <table id="nonjsTable">
+                @for (int i = 0; i < Model.CustomCodes.Count; i++)
+                {
+                    <tr>
+                        <td><input name="CustomCodes" type="hidden" value="@Model.CustomCodes[i]" />@Model.CustomCodes[i]</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="form-group">
+            <table id="customCodeTable"></table>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit" name="command" value="save">Continue</button>
+    </div>
+}
+@section scripts{
+    <script>
+        (function($) {
+            $(function() {
+                $('#code-list').selectToAutocomplete();
+                $('#ewc-code-list').selectToAutocomplete();
+            });
+        })(jQuery);
+
+        function getComboDescription(sel) {
+            if (sel.selectedIndex > 0) {
+                document.getElementById("descriptionTextArea").innerHTML = sel.options[sel.selectedIndex].getAttribute('description');
+            }
+        }
+
+        var previouslyEnteredCodes = [];
+
+        function AddUnCode() {
+
+            var sel = document.getElementById("ewc-code-list");
+            var table = document.getElementById("ewcTable");
+            var found = $.inArray(sel.options[sel.selectedIndex].innerText, previouslyEnteredCodes) > -1;
+            if (found) {
+                return;
+            }
+            previouslyEnteredCodes.push(sel.options[sel.selectedIndex].innerText);
+            var row = table.insertRow(0);
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = sel.options[sel.selectedIndex].text;
+            cell2.innerHTML = sel.options[sel.selectedIndex].getAttribute('description');
+            cell3.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteRow(this, 'ewcTable')\">Delete</a>";
+            cell4.innerHTML = "<input type=\"hidden\" name=\"SelectedUnCodes.Index\" value=\"" + sel.selectedIndex + "\" /><input name=\"SelectedUnCodes[" + sel.selectedIndex + "].Id\" type=\"hidden\" value = \"" + sel.options[sel.selectedIndex].value + "\"/>";
+        }
+        function AddCustomCode() {
+
+            var sel = document.getElementById("custom-code-box");
+            var table = document.getElementById("customCodeTable");
+
+            var row = table.insertRow(0);
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            cell1.innerHTML = sel.value;
+            cell2.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteRow(this, 'customCodeTable')\">Delete</a>";
+            cell3.innerHTML = "<input name=\"CustomCodes\" type=\"hidden\" value = \"" + sel.value + " \"/>";
+        }
+        function deleteRow(r, tableName) {
+
+            var i = r.parentNode.parentNode.rowIndex;
+
+            var table = document.getElementById(tableName);
+            var row = table.rows[i];
+            var cells = row.getElementsByTagName("td");
+            var wasteCode = cells[0].innerText;
+            var index = previouslyEnteredCodes.indexOf(wasteCode);
+
+            delete previouslyEnteredCodes[index];
+
+            table.deleteRow(i);
+        }
+    </script>
+}

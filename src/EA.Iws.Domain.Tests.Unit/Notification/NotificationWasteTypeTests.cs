@@ -283,6 +283,35 @@
             Assert.Throws<InvalidOperationException>(addWasteCode);
         }
 
+        [Fact]
+        public void AddOptionalWasteCode_WithWrongWasteType_ThrowsException()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
+
+            var wasteCode = GetTestWasteCode(Guid.NewGuid(), CodeType.Basel);
+
+            Action addWasteCode = () => notification.AddWasteCode(wasteCode, "Optional Code", "Optional Description");
+
+            Assert.Throws<InvalidOperationException>(addWasteCode);
+        }
+        [Fact]
+        public void AddOptionalWasteCode_WithCorrectWasteType_WasteCodeAdded()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
+
+            var wasteCode = GetTestWasteCode(Guid.NewGuid(), CodeType.OtherCode);
+
+            notification.AddWasteCode(wasteCode, "Optional Code", "Optional Description");
+
+            Assert.Equal(1, notification.WasteType.WasteCodeInfo.Count());
+        }
+
         private static WasteCode GetTestWasteCode(Guid id, CodeType codeType)
         {
             var wasteCode = ObjectInstantiator<WasteCode>.CreateNew();
