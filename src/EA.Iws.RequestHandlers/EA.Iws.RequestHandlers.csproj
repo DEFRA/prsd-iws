@@ -106,6 +106,8 @@
     <Compile Include="Mappings\ExporterDataMap.cs" />
     <Compile Include="Mappings\RecoveryCodesMap.cs" />
     <Compile Include="Mappings\StateOfImportMap.cs" />
+    <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationIdHandler.cs" />
+    <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Notification\GetIsPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Mappings\StateOfExportMap.cs" />
     <Compile Include="Mappings\TransitStateMap.cs" />

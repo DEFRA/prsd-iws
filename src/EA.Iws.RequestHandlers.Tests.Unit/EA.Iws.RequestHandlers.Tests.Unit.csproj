@@ -67,10 +67,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\DbContextHelper.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\ObjectInstantiator.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerator.cs" />
     <Compile Include="Helpers\TestDbAsyncQueryProvider.cs" />
+    <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationIdHandlerTests.cs" />
+    <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Organisations\FindMatchingCompaniesHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
