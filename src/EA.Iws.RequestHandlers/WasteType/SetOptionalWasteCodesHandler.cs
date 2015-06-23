@@ -1,13 +1,15 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
-    using System;
-    using System.Data.Entity;
-    using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Notification;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
+    using System;
+    using System.Data.Entity;
+    using System.Threading.Tasks;
     using CodeType = Domain.Notification.CodeType;
+
     internal class SetOptionalWasteCodesHandler : IRequestHandler<SetOptionalWasteCodes, Guid>
     {
         private readonly IwsContext db;
@@ -25,7 +27,7 @@
                 var code = mapper.Map(optionalWasteCode.CodeType);
                 var wasteCode = await db.WasteCodes.SingleAsync(w => w.CodeType.Value == code.Value);
 
-                notification.AddWasteCode(wasteCode, optionalWasteCode.OptionalCode, optionalWasteCode.OptionalDescription);
+                notification.AddWasteCode(WasteCodeInfo.CreateOptionalWasteCodeInfo(wasteCode, optionalWasteCode.OptionalCode, optionalWasteCode.OptionalDescription));
             }
             await db.SaveChangesAsync();
             return notification.WasteType.Id;

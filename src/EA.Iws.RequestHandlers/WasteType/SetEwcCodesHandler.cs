@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Notification;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
 
@@ -24,7 +25,7 @@
             {
                 var id = ewcWasteCode.Id;
                 var wasteCode = await db.WasteCodes.SingleAsync(w => w.Id == id);
-                notification.AddWasteCode(wasteCode);
+                notification.AddWasteCode(WasteCodeInfo.CreateWasteCodeInfo(wasteCode));
             }
 
             await db.SaveChangesAsync();

@@ -308,14 +308,16 @@
             };
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> OtherWasteCodes(OtherWasteCodesViewModel model, string command)
+        public async Task<ActionResult> OtherWasteCodes(OtherWasteCodesViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+
             using (var client = apiClient())
             {
                 try
@@ -347,6 +349,7 @@
                 return View(model);
             }
         }
+
         [HttpGet]
         public async Task<ActionResult> UnNumber(Guid id)
         {
@@ -357,6 +360,7 @@
             await InitializeUnNumberViewModel(model);
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UnNumber(UnNumberViewModel model, string command)
@@ -366,6 +370,7 @@
                 await InitializeUnNumberViewModel(model);
                 return View(model);
             }
+
             if (command.Equals("add"))
             {
                 await InitializeUnNumberViewModel(model);
@@ -376,6 +381,7 @@
                 }
                 return View(model);
             }
+
             if (command.Equals("addCustomCode"))
             {
                 await InitializeUnNumberViewModel(model);
@@ -386,6 +392,7 @@
                 model.CustomCodes.Add(model.SelectedCustomCode);
                 return View(model);
             }
+
             using (var client = apiClient())
             {
                 try

@@ -1,13 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Threading.Tasks;
     using DataAccess;
-    using Prsd.Core.Mapper;
+    using Domain.Notification;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
+    using System;
+    using System.Data.Entity;
+    using System.Threading.Tasks;
 
     internal class SetBaselOrOecdWasteCodeHandler : IRequestHandler<SetBaselOrOecdWasteCode, Guid>
     {
@@ -23,7 +22,7 @@
             var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
             var wasteCode = await db.WasteCodes.SingleAsync(w => w.Id == command.WasteCodeId);
 
-            notification.AddWasteCode(wasteCode);
+            notification.AddWasteCode(WasteCodeInfo.CreateWasteCodeInfo(wasteCode));
 
             await db.SaveChangesAsync();
 

@@ -176,45 +176,29 @@
             return new WasteType(ChemicalComposition.SRF, wasteCompositions);
         }
 
-        internal void AddWasteCode(WasteCode wasteCode, string optionalCode = "", string optionalDescription = "")
+        internal void AddWasteCode(WasteCodeInfo wasteCodeInfo)
         {
             if (WasteCodeInfoCollection == null)
             {
                 throw new InvalidOperationException(string.Format("WasteCodeInfoCollection cannot be null for notification {0}", Id));
             }
 
-            if (wasteCode.CodeType == CodeType.Basel && WasteCodeInfoCollection.Any(c => c.WasteCode.CodeType == CodeType.Basel))
+            if (wasteCodeInfo.WasteCode.CodeType == CodeType.Basel && WasteCodeInfoCollection.Any(c => c.WasteCode.CodeType == CodeType.Basel))
             {
                 throw new InvalidOperationException(string.Format("A Basel code already exists for notification {0}", Id));
             }
 
-            if (wasteCode.CodeType == CodeType.Oecd && WasteCodeInfoCollection.Any(c => c.WasteCode.CodeType == CodeType.Oecd))
+            if (wasteCodeInfo.WasteCode.CodeType == CodeType.Oecd && WasteCodeInfoCollection.Any(c => c.WasteCode.CodeType == CodeType.Oecd))
             {
                 throw new InvalidOperationException(string.Format("A Oecd code already exists for notification {0}", Id));
             }
 
-            if (WasteCodeInfoCollection.Any(c => c.WasteCode.Code == wasteCode.Code && !CodeIsOptional(c.WasteCode.CodeType)))
+            if (WasteCodeInfoCollection.Any(c => c.WasteCode.Code == wasteCodeInfo.WasteCode.Code && !wasteCodeInfo.IsOptional(c.WasteCode.CodeType)))
             {
                 throw new InvalidOperationException(string.Format("The same code cannot be entered twice for notification {0}", Id));
             }
 
-            var wasteCodeInfo = new WasteCodeInfo(wasteCode);
-            if (!string.IsNullOrEmpty(optionalCode) && !string.IsNullOrEmpty(optionalDescription))
-            {
-                if (!CodeIsOptional(wasteCode.CodeType))
-                {
-                    throw new InvalidOperationException(string.Format("Cannot set optional values for non optional code type for notification {0}", Id));
-                }
-                wasteCodeInfo.OptionalDescription = optionalDescription;
-                wasteCodeInfo.OptionalCode = optionalCode;
-                wasteCodeInfo.WasteCode = wasteCode;
-            }
             WasteCodeInfoCollection.Add(wasteCodeInfo);
-        }
-
-        private bool CodeIsOptional(CodeType codeType)
-        {
-            return codeType == CodeType.CustomCode || codeType == CodeType.ExportCode || codeType == CodeType.ImportCode || codeType == CodeType.OtherCode;
         }
     }
 }

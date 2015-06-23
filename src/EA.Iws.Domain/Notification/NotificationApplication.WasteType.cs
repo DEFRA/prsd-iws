@@ -38,13 +38,13 @@
             WasteType.AddPhysicalCharacteristic(physicalCharacteristic, otherDescription);
         }
 
-        public void AddWasteCode(WasteCode wasteCode, string optionalCode = "", string optionalDescription = "")
+        public void AddWasteCode(WasteCodeInfo wasteCodeInfo)
         {
             if (WasteType == null)
             {
                 throw new InvalidOperationException(String.Format("Waste Type can not be null for notification: {0}", Id));
             }
-            WasteType.AddWasteCode(wasteCode, optionalCode, optionalDescription);
+            WasteType.AddWasteCode(wasteCodeInfo);
         }
     }
 }
