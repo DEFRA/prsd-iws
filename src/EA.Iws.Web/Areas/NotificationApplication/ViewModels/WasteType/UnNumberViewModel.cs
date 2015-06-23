@@ -25,9 +25,11 @@
 
         public string SelectedUnCode { get; set; }
 
+        public string Command { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(SelectedUnCode) && (SelectedUnCodes == null || !SelectedUnCodes.Any()))
+            if (Command.Equals("save") && (SelectedUnCodes == null || !SelectedUnCodes.Any()))
             {
                 yield return new ValidationResult("Please enter a UN code");
             }

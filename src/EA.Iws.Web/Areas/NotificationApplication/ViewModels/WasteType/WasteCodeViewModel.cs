@@ -23,9 +23,11 @@
 
         public string SelectedEwcCode { get; set; }
 
+        public string Command { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(SelectedEwcCode) && (SelectedEwcCodes == null || !SelectedEwcCodes.Any()))
+            if (Command.Equals("save") && (SelectedEwcCodes == null || !SelectedEwcCodes.Any()))
             {
                 yield return new ValidationResult("Please enter a EWC code");
             }

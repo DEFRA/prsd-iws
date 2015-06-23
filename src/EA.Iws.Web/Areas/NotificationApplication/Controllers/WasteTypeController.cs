@@ -259,7 +259,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> WasteCode(WasteCodeViewModel model, string command)
+        public async Task<ActionResult> WasteCode(WasteCodeViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -267,7 +267,7 @@
                 return View(model);
             }
 
-            if (command.Equals("add"))
+            if (model.Command.Equals("add"))
             {
                 await InitializeWasteCodeViewModel(model);
                 var codeToAdd = model.EwcCodes.Single(c => c.Id.ToString() == model.SelectedEwcCode);
@@ -363,7 +363,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UnNumber(UnNumberViewModel model, string command)
+        public async Task<ActionResult> UnNumber(UnNumberViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -371,7 +371,7 @@
                 return View(model);
             }
 
-            if (command.Equals("add"))
+            if (model.Command.Equals("add"))
             {
                 await InitializeUnNumberViewModel(model);
                 var codeToAdd = model.UnCodes.Single(c => c.Id.ToString() == model.SelectedUnCode);
@@ -382,7 +382,7 @@
                 return View(model);
             }
 
-            if (command.Equals("addCustomCode"))
+            if (model.Command.Equals("addCustomCode"))
             {
                 await InitializeUnNumberViewModel(model);
                 if (model.CustomCodes == null)

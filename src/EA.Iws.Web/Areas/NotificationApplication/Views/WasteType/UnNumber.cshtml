@@ -29,7 +29,7 @@
             <a onclick=" AddUnCode() " href="#">Add</a>
         </div>
         <div class="js-hidden">
-            <button class="link-submit" type="submit" name="command" value="add">Add</button>
+            <button class="link-submit" type="submit" name="Command" value="add">Add</button>
         </div>
         <div class="form-group">
             <table id="nonjsTable">
@@ -54,7 +54,7 @@
             <a onclick=" AddCustomCode() " href="#">Add</a>
         </div>
         <div class="js-hidden">
-            <button class="link-submit" type="submit" name="command" value="addCustomCode">Add</button>
+            <button class="link-submit" type="submit" name="Command" value="addCustomCode">Add</button>
         </div>
         <div class="form-group">
             <table id="nonjsTable">
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="form-group">
-        <button class="button" type="submit" name="command" value="save">Continue</button>
+        <button class="button" type="submit" name="Command" value="save">Continue</button>
     </div>
 }
 @section scripts{
@@ -95,8 +95,11 @@
 
             var sel = document.getElementById("ewc-code-list");
             var table = document.getElementById("ewcTable");
-            var found = $.inArray(sel.options[sel.selectedIndex].innerText, previouslyEnteredCodes) > -1;
-            if (found) {
+
+            var enteredValue = sel.options[sel.selectedIndex].innerText;
+
+            var found = $.inArray(enteredValue, previouslyEnteredCodes) > -1;
+            if (found || enteredValue === '') {
                 return;
             }
             previouslyEnteredCodes.push(sel.options[sel.selectedIndex].innerText);
@@ -112,10 +115,15 @@
             cell3.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteRow(this, 'ewcTable')\">Delete</a>";
             cell4.innerHTML = "<input type=\"hidden\" name=\"SelectedUnCodes.Index\" value=\"" + sel.selectedIndex + "\" /><input name=\"SelectedUnCodes[" + sel.selectedIndex + "].Id\" type=\"hidden\" value = \"" + sel.options[sel.selectedIndex].value + "\"/>";
         }
+
         function AddCustomCode() {
 
             var sel = document.getElementById("custom-code-box");
             var table = document.getElementById("customCodeTable");
+
+            if (sel.value === '') {
+                return;
+            }
 
             var row = table.insertRow(0);
 
@@ -127,6 +135,7 @@
             cell2.innerHTML = "<a href=\"#\" type=\"button\" value=\"Delete\" onclick=\"deleteRow(this, 'customCodeTable')\">Delete</a>";
             cell3.innerHTML = "<input name=\"CustomCodes\" type=\"hidden\" value = \"" + sel.value + " \"/>";
         }
+
         function deleteRow(r, tableName) {
 
             var i = r.parentNode.parentNode.rowIndex;
