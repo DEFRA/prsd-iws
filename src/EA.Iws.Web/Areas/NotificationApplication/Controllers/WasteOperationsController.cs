@@ -247,7 +247,7 @@
                         client.SendAsync(User.GetAccessToken(),
                             new UpdateTechnologyEmployed(model.NotificationId, model.AnnexPorvided, model.Details));
 
-                    return RedirectToAction("ReasonForExport", "NotificationApplication",
+                    return RedirectToAction("ReasonForExport", "Home",
                         new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)

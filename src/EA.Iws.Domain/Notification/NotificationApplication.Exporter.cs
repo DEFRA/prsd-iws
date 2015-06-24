@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
-    using System;
+    using Prsd.Core;
 
     public partial class NotificationApplication
     {
@@ -9,12 +9,11 @@
             get { return Exporter != null; }
         }
 
-        public void AddExporter(Business business, Address address, Contact contact)
+        public void SetExporter(Business business, Address address, Contact contact)
         {
-            if (Exporter != null)
-            {
-                throw new InvalidOperationException(string.Format("Exporter already exists, can't add another to this notification: {0}", Id));
-            }
+            Guard.ArgumentNotNull(() => business, business);
+            Guard.ArgumentNotNull(() => address, address);
+            Guard.ArgumentNotNull(() => contact, contact);
 
             Exporter = new Exporter(business, address, contact);
         }

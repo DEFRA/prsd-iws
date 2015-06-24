@@ -4,7 +4,7 @@
     using Prsd.Core.Mediator;
     using Shared;
 
-    public class AddExporterToNotification : IRequest<Guid>
+    public class SetExporterForNotification : IRequest<Guid>
     {
         public BusinessInfoData Business { get; set; }
 

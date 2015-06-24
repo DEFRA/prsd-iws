@@ -112,7 +112,7 @@
                         new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
                             model.SpecialHandlingDetails));
 
-                    return RedirectToAction("NotificationOverview", "NotificationApplication", new { id = model.NotificationId });
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

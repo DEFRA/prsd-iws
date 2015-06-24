@@ -5,12 +5,12 @@
 
     public class Exporter : Entity
     {
-        private Business business;
-        private Address address;
-        private Contact contact;
-
         internal Exporter(Business business, Address address, Contact contact)
         {
+            Guard.ArgumentNotNull(() => business, business);
+            Guard.ArgumentNotNull(() => address, address);
+            Guard.ArgumentNotNull(() => contact, contact);
+
             Business = business;
             Address = address;
             Contact = contact;
@@ -20,34 +20,10 @@
         {
         }
 
-        public Business Business
-        {
-            get { return business; }
-            set
-            {
-                Guard.ArgumentNotNull(() => value, value);
-                business = value;
-            }
-        }
+        public Business Business { get; private set; }
 
-        public Address Address
-        {
-            get { return address; }
-            set
-            {
-                Guard.ArgumentNotNull(() => value, value);
-                address = value;
-            }
-        }
+        public Address Address { get; private set; }
 
-        public Contact Contact
-        {
-            get { return contact; }
-            set
-            {
-                Guard.ArgumentNotNull(() => value, value);
-                contact = value;
-            }
-        }
+        public Contact Contact { get; private set; }
     }
 }

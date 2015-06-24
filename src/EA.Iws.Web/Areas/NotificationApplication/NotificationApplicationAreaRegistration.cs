@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication
 {
     using System.Web.Mvc;
+    using Controllers;
 
     public class NotificationApplicationAreaRegistration : AreaRegistration 
     {
@@ -17,7 +18,8 @@
             context.MapRoute(
                 name: "NotificationApplication_default",
                 url: "NotificationApplication/{id}/{controller}/{action}/{entityId}",
-                defaults: new { action = "NotificationOverview", controller = "NotificationApplication", entityId = UrlParameter.Optional });
+                defaults: new { action = "Index", controller = "Home", entityId = UrlParameter.Optional },
+                namespaces: new[] { typeof(HomeController).Namespace });
         }
     }
 }

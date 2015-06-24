@@ -120,7 +120,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Created(CreatedViewModel model)
         {
-            return RedirectToAction("Add", "Exporter", new { id = model.NotificationId, area = "NotificationApplication" });
+            return RedirectToAction("Index", "Exporter", new { id = model.NotificationId, area = "NotificationApplication" });
         }
     }
 }

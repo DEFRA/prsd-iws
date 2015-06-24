@@ -423,7 +423,7 @@
     <Content Include="Areas\NotificationApplication\Views\_ViewStart.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\_Layout.cshtml" />
     <Content Include="Content\iws\_navigation.scss" />
-    <Content Include="Areas\NotificationApplication\Views\NotificationApplication\_Navigation.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_Navigation.cshtml" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
@@ -483,7 +483,7 @@
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\Applicant\_GetUserNotifications.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Add.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Exporter\Add.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Exporter\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BusinessViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Importer\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\List.cshtml" />
@@ -493,8 +493,7 @@
     <Content Include="Areas\NotificationApplication\Views\Facility\List.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\CopyFromExporter.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\NotificationApplication\NotificationOverview.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Exporter\Edit.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\_SpecialHandling.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\Add.cshtml" />
@@ -526,7 +525,7 @@
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\Add.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\NotificationApplication\ReasonForExport.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\ReasonForExport.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\CountrySelector.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\OtherDetailsSelector.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\Edit.cshtml" />
@@ -605,7 +604,7 @@
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-    <Compile Include="Areas\NotificationApplication\Controllers\NotificationApplicationController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

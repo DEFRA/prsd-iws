@@ -42,10 +42,10 @@ else
                     </td>
                     <td>
                         <div class="formatted-block-table-cell">
-                            @Html.ActionLink(linkText: "Print document", actionName: "GenerateNotificationDocument", controllerName: "NotificationApplication",
+                            @Html.ActionLink(linkText: "Print document", actionName: "GenerateNotificationDocument", controllerName: "Home",
                                 routeValues: new { id = Model[i].Id, area = "NotificationApplication" }, htmlAttributes: null)
                             <span class="table-divider">|</span>
-                            @Html.ActionLink(linkText: "View", actionName: "NotificationOverview", controllerName: "NotificationApplication",
+                            @Html.ActionLink(linkText: "View", actionName: "Index", controllerName: "Home",
                                 routeValues: new { id = Model[i].Id, area = "NotificationApplication" }, htmlAttributes: null)
                         </div>
                     </td>

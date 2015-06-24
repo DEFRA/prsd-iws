@@ -172,7 +172,7 @@
                         new SetPackagingTypeOnShipmentInfo(selectedPackagingTypes, model.NotificationId,
                             model.OtherDescription));
 
-                    return RedirectToAction("NotificationOverview", "NotificationApplication", new { id = model.NotificationId });
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

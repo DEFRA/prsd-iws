@@ -108,7 +108,7 @@
                     await client.SendAsync(User.GetAccessToken(),
                         model.ToRequest());
 
-                    return RedirectToAction("NotificationOverview", "NotificationApplication", new { id = model.NotificationId });
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

@@ -17,26 +17,30 @@
             var address = ObjectFactory.CreateDefaultAddress();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            notification.AddExporter(business, address, contact);
+            notification.SetExporter(business, address, contact);
 
             Assert.True(notification.HasExporter);
         }
 
         [Fact]
-        public void CantAddMultipleExporters()
+        public void AddSecondExporterReplacesFirst()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            var business = ObjectFactory.CreateEmptyBusiness();
+            var business = new Business("first", "type", "123", "456");
             var address = ObjectFactory.CreateDefaultAddress();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            notification.AddExporter(business, address, contact);
+            notification.SetExporter(business, address, contact);
 
-            Action addSecondExporter = () => notification.AddExporter(business, address, contact);
+            var newBusiness = new Business("second", "type", "123", "456");
+            var newAddress = ObjectFactory.CreateDefaultAddress();
+            var newContact = ObjectFactory.CreateEmptyContact();
 
-            Assert.Throws<InvalidOperationException>(addSecondExporter);
+            notification.SetExporter(newBusiness, newAddress, newContact);
+
+            Assert.Equal("second", notification.Exporter.Business.Name);
         }
 
         [Fact]
@@ -58,11 +62,53 @@
             var address = ObjectFactory.CreateDefaultAddress();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            notification.AddExporter(business, address, contact);
+            notification.SetExporter(business, address, contact);
 
             notification.RemoveExporter();
 
             Assert.Null(notification.Exporter);
+        }
+
+        [Fact]
+        public void BusinessCantBeNull()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            Action setExporter =
+                () =>
+                    notification.SetExporter(null, ObjectFactory.CreateDefaultAddress(),
+                        ObjectFactory.CreateEmptyContact());
+
+            Assert.Throws<ArgumentNullException>("business", setExporter);
+        }
+
+        [Fact]
+        public void AddressCantBeNull()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            Action setExporter =
+                () =>
+                    notification.SetExporter(ObjectFactory.CreateEmptyBusiness(), null,
+                        ObjectFactory.CreateEmptyContact());
+
+            Assert.Throws<ArgumentNullException>("address", setExporter);
+        }
+
+        [Fact]
+        public void ContactCantBeNull()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            Action setExporter =
+                () =>
+                    notification.SetExporter(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
+                        null);
+
+            Assert.Throws<ArgumentNullException>("contact", setExporter);
         }
     }
 }

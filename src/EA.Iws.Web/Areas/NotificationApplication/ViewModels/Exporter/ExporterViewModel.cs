@@ -32,20 +32,9 @@
             Business = new BusinessTypeViewModel(exporter.Business);
         }
 
-        public AddExporterToNotification ToAddRequest()
+        public SetExporterForNotification ToRequest()
         {
-            return new AddExporterToNotification
-            {
-                NotificationId = NotificationId,
-                Address = Address,
-                Business = Business.ToBusinessInfoData(),
-                Contact = Contact
-            };
-        }
-
-        public UpdateExporterForNotification ToUpdateRequest()
-        {
-            return new UpdateExporterForNotification
+            return new SetExporterForNotification
             {
                 NotificationId = NotificationId,
                 Address = Address,

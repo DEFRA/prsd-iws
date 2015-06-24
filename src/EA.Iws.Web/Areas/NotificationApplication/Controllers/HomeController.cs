@@ -6,20 +6,18 @@
     using Api.Client;
     using Infrastructure;
     using Prsd.Core;
-    using Prsd.Core.Extensions;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
-    using Requests.Shared;
     using ViewModels.NotificationApplication;
     using Constants = Prsd.Core.Web.Constants;
 
     [Authorize]
-    public class NotificationApplicationController : Controller
+    public class HomeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
 
-        public NotificationApplicationController(Func<IIwsClient> apiClient)
+        public HomeController(Func<IIwsClient> apiClient)
         {
             this.apiClient = apiClient;
         }
@@ -51,7 +49,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> NotificationOverview(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
@@ -61,7 +59,7 @@
                 {
                     NotificationId = response.NotificationId,
                     NotificationNumber = response.NotificationNumber,
-                    NotificationType = response.NotificationType                    
+                    NotificationType = response.NotificationType
                 };
                 return View(model);
             }
@@ -87,8 +85,10 @@
             {
                 try
                 {
-                    await client.SendAsync(User.GetAccessToken(), new SetReasonForExport(model.NotificationId, model.ReasonForExport));
-                    return RedirectToAction("Add", "Carrier", new { id = model.NotificationId});
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new SetReasonForExport(model.NotificationId, model.ReasonForExport));
+                    return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -112,7 +112,8 @@
 
             using (var client = apiClient())
             {
-                var response = client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id)).GetAwaiter().GetResult();
+                var response =
+                    client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id)).GetAwaiter().GetResult();
 
                 var model = new NotificationOverviewViewModel
                 {
