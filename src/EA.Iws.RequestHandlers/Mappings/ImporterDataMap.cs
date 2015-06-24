@@ -26,14 +26,26 @@
 
         public ImporterData Map(Notification source)
         {
-            return new ImporterData
+            if (source.HasImporter)
             {
-                Address = addressMap.Map(source.Importer.Address),
-                Business = businessMap.Map(source.Importer.Business),
-                Contact = contactMap.Map(source.Importer.Contact),
-                Id = source.Importer.Id,
-                NotificationId = source.Id
-            };
+                return new ImporterData
+                {
+                    Address = addressMap.Map(source.Importer.Address),
+                    Business = businessMap.Map(source.Importer.Business),
+                    Contact = contactMap.Map(source.Importer.Contact),
+                    Id = source.Importer.Id,
+                    NotificationId = source.Id,
+                    HasImporter = true
+                };
+            }
+            else
+            {
+                return new ImporterData
+                {
+                    NotificationId = source.Id,
+                    HasImporter = true
+                };
+            }
         }
 
         public ImporterData Map(Importer source, Guid parentId)
@@ -44,7 +56,8 @@
                 Business = businessMap.Map(source.Business),
                 Contact = contactMap.Map(source.Contact),
                 Id = source.Id,
-                NotificationId = parentId
+                NotificationId = parentId,
+                HasImporter = true
             };
         }
     }

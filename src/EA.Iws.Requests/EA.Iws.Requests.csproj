@@ -59,11 +59,9 @@
     <Compile Include="Facilities\GetFacilityForNotification.cs" />
     <Compile Include="Facilities\SetActualSiteOfTreatment.cs" />
     <Compile Include="Facilities\UpdateFacilityForNotification.cs" />
-    <Compile Include="Importer\AddImporterToNotification.cs" />
+    <Compile Include="Importer\SetImporterForNotification.cs" />
     <Compile Include="Importer\GetImporterByNotificationId.cs" />
     <Compile Include="Importer\ImporterData.cs" />
-    <Compile Include="Importer\NotificationHasImporter.cs" />
-    <Compile Include="Importer\UpdateImporterForNotification.cs" />
     <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationId.cs" />
     <Compile Include="MeansOfTransport\SetMeansOfTransportForNotification.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />

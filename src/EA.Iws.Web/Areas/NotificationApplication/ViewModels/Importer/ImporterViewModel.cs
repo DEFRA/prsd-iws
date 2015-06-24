@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Importer
 {
     using System;
+    using Requests.Importer;
     using Requests.Shared;
     using Web.ViewModels.Shared;
 
@@ -23,6 +24,25 @@
             Contact = new ContactData();
 
             Business = new BusinessViewModel();
+        }
+
+        public ImporterViewModel(ImporterData importer)
+        {
+            NotificationId = importer.NotificationId;
+            Address = importer.Address;
+            Contact = importer.Contact;
+            Business = (BusinessViewModel)importer.Business;
+        }
+
+        public SetImporterForNotification ToRequest()
+        {
+            return new SetImporterForNotification
+            {
+                NotificationId = NotificationId,
+                Address = Address,
+                Business = (BusinessData)Business,
+                Contact = Contact
+            };
         }
     }
 }

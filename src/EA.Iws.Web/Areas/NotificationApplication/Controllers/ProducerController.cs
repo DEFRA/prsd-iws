@@ -216,7 +216,7 @@
                 }
             }
 
-            return RedirectToAction("Add", "Importer", new { id = model.NotificationId });
+            return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
         }
     }
 }

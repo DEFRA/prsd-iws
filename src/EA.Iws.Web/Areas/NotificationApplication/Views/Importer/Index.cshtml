@@ -1,17 +1,18 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Importer.ImporterViewModel
 
 @{
-    ViewBag.Title = "Add importer - consignee";
+    ViewBag.Title = "Importer - consignee";
 }
 
-@using (Html.BeginForm("Add", "Importer", FormMethod.Post))
+@using (Html.BeginForm("Index", "Importer", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h2 class="heading-large">Add importer - consignee</h2>
+        <h2 class="heading-large">Importer - consignee
+        </h2>
         <div class="colored-header-bar"></div>
     </header>
 

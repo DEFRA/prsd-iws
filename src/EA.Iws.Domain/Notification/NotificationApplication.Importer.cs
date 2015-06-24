@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
-    using System;
+    using Prsd.Core;
 
     public partial class NotificationApplication
     {
@@ -9,12 +9,11 @@
             get { return Importer != null; }
         }
 
-        public void AddImporter(Business business, Address address, Contact contact)
+        public void SetImporter(Business business, Address address, Contact contact)
         {
-            if (Importer != null)
-            {
-                throw new InvalidOperationException(string.Format("Importer already exists, can't add another to this notification: {0}", Id));
-            }
+            Guard.ArgumentNotNull(() => business, business);
+            Guard.ArgumentNotNull(() => address, address);
+            Guard.ArgumentNotNull(() => contact, contact);
 
             Importer = new Importer(business, address, contact);
         }

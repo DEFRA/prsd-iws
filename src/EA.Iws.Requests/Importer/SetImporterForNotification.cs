@@ -4,7 +4,7 @@
     using Prsd.Core.Mediator;
     using Shared;
 
-    public class AddImporterToNotification : IRequest<Guid>
+    public class SetImporterForNotification : IRequest<Guid>
     {
         public BusinessData Business { get; set; }
 

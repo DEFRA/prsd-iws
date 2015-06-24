@@ -5,7 +5,9 @@
 
     public class ImporterData
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
+
+        public bool HasImporter { get; set; }
 
         public BusinessData Business { get; set; }
 

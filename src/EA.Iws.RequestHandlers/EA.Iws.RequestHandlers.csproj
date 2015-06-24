@@ -79,8 +79,6 @@
     <Compile Include="Facilities\SetActualSiteOfTreatmentHandler.cs" />
     <Compile Include="Facilities\UpdateFacilityForNotificationHandler.cs" />
     <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
-    <Compile Include="Importers\NotificationHasImporterHandler.cs" />
-    <Compile Include="Importers\UpdateImporterForNotificationHandler.cs" />
     <Compile Include="Mappings\CodeTypeMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
@@ -124,7 +122,7 @@
     <Compile Include="Producers\GetProducerForNotificationHandler.cs" />
     <Compile Include="Producers\GetProducersByNotificationIdHandler.cs" />
     <Compile Include="Exporters\SetExporterForNotificationHandler.cs" />
-    <Compile Include="Importers\AddImporterToNotificationHandler.cs" />
+    <Compile Include="Importers\SetImporterForNotificationHandler.cs" />
     <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
     <Compile Include="Producers\AddProducerToNotificationHandler.cs" />
     <Compile Include="Notification\GenerateNotificationDocumentHandler.cs" />

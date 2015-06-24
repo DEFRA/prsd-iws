@@ -8,16 +8,16 @@
     using Prsd.Core.Mediator;
     using Requests.Importer;
 
-    internal class AddImporterToNotificationHandler : IRequestHandler<AddImporterToNotification, Guid>
+    internal class SetImporterForNotificationHandler : IRequestHandler<SetImporterForNotification, Guid>
     {
         private readonly IwsContext context;
 
-        public AddImporterToNotificationHandler(IwsContext context)
+        public SetImporterForNotificationHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(AddImporterToNotification message)
+        public async Task<Guid> HandleAsync(SetImporterForNotification message)
         {
             var country = await context.Countries.SingleAsync(c => c.Id == message.Address.CountryId);
 
@@ -26,7 +26,7 @@
             var contact = ValueObjectInitializer.CreateContact(message.Contact);
 
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
-            notification.AddImporter(business, address, contact);
+            notification.SetImporter(business, address, contact);
 
             await context.SaveChangesAsync();
 
