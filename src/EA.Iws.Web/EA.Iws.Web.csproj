@@ -496,7 +496,7 @@
     <Content Include="Areas\NotificationApplication\Views\Home\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\_SpecialHandling.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\Add.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Shipment\Add.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Shipment\Index.cshtml" />
     <Content Include="Views\Account\EmailVerificationRequired.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\CopyFromImporter.cshtml" />
@@ -535,7 +535,6 @@
     <Content Include="Areas\NotificationApplication\Views\WasteType\AddYcodeHcodeAndUnClass.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\NotificationApplication\Views\Shipment\Edit.cshtml" />
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Edit.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\_PackagingTypes.cshtml" />

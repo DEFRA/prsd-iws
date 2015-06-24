@@ -138,7 +138,7 @@
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />
     <Compile Include="Shared\GetCompetentAuthoritiesByCountryHandler.cs" />
-    <Compile Include="Shipment\CreateOrUpdateShipmentInfoHandler.cs" />
+    <Compile Include="Shipment\SetShipmentInfoForNotificationHandler.cs" />
     <Compile Include="PackagingType\GetPackagingInfoForNotificationHandler.cs" />
     <Compile Include="Shipment\GetShipmentInfoForNotificationHandler.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotificationHandler.cs" />

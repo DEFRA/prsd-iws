@@ -128,7 +128,7 @@
             }
         }
 
-        public CreateOrUpdateShipmentInfo ToRequest()
+        public SetShipmentInfoForNotification ToRequest()
         {
             DateTime startDate;
             SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
@@ -136,7 +136,7 @@
             DateTime endDate;
             SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
 
-            return new CreateOrUpdateShipmentInfo(
+            return new SetShipmentInfoForNotification(
                 NotificationId,
                 NumberOfShipments.GetValueOrDefault(),
                 Quantity.GetValueOrDefault(),

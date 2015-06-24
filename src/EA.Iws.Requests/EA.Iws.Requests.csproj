@@ -111,7 +111,7 @@
     <Compile Include="Registration\OrganisationRegistrationData.cs" />
     <Compile Include="Registration\Users\User.cs" />
     <Compile Include="Registration\Users\UserById.cs" />
-    <Compile Include="Shipment\CreateOrUpdateShipmentInfo.cs" />
+    <Compile Include="Shipment\SetShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\GetPackagingInfoForNotification.cs" />
     <Compile Include="Shipment\GetShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\PackagingData.cs" />

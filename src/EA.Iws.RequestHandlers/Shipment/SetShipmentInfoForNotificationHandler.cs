@@ -6,22 +6,21 @@
     using DataAccess;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Notification;
     using Requests.Shipment;
 
-    internal class CreateOrUpdateShipmentInfoHandler : IRequestHandler<CreateOrUpdateShipmentInfo, Guid>
+    internal class SetShipmentInfoForNotificationHandler : IRequestHandler<SetShipmentInfoForNotification, Guid>
     {
         private readonly IwsContext db;
         private readonly IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits> shipmentQuantityUnitsMapper;
 
-        public CreateOrUpdateShipmentInfoHandler(IwsContext db,
+        public SetShipmentInfoForNotificationHandler(IwsContext db,
             IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits> shipmentQuantityUnitsMapper)
         {
             this.db = db;
             this.shipmentQuantityUnitsMapper = shipmentQuantityUnitsMapper;
         }
 
-        public async Task<Guid> HandleAsync(CreateOrUpdateShipmentInfo command)
+        public async Task<Guid> HandleAsync(SetShipmentInfoForNotification command)
         {
             var notification =
                 await
