@@ -27,18 +27,34 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            bool hasExistingRecords = await NotificationHasSetMeans(id);
+            IList<MeansOfTransport> currentMeans;
+            MeansOfTransportViewModel model;
 
-            if (hasExistingRecords)
+            using (var client = apiClient())
             {
-                return RedirectToAction("Edit", new { id });
+                currentMeans = await client.SendAsync(User.GetAccessToken(), new GetMeansOfTransportByNotificationId(id));
+
+                if (currentMeans.Count == 0)
+                {
+                    model = new MeansOfTransportViewModel
+                    {
+                        PossibleMeans = GetPossibleMeans()
+                    };
+
+                    return View(model);
+                }
             }
-            
-            var model = new MeansOfTransportViewModel
+
+            var selectedItem = currentMeans[currentMeans.Count - 1];
+            currentMeans.RemoveAt(currentMeans.Count - 1);
+
+            model = new MeansOfTransportViewModel
             {
-                PossibleMeans = GetPossibleMeans()
+                PossibleMeans = GetPossibleMeans(),
+                SelectedMeans = currentMeans.Select(m => m.Value).ToList(),
+                SelectedValue = selectedItem.Value
             };
 
             return View(model);
@@ -46,7 +62,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(Guid id, MeansOfTransportViewModel model, string submit)
+        public async Task<ActionResult> Index(Guid id, MeansOfTransportViewModel model, string submit)
         {
             if (!ModelState.IsValid || submit == null || !model.SelectedValue.HasValue)
             {
@@ -66,56 +82,6 @@
             }
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Edit(Guid id)
-        {
-            IList<MeansOfTransport> currentMeans;
-
-            using (var client = apiClient())
-            {
-                currentMeans = await client.SendAsync(User.GetAccessToken(), new GetMeansOfTransportByNotificationId(id));
-
-                if (currentMeans.Count == 0)
-                {
-                    return RedirectToAction("Add", new { id });
-                }
-            }
-
-            var selectedItem = currentMeans[currentMeans.Count - 1];
-            currentMeans.RemoveAt(currentMeans.Count - 1);
-
-            var model = new MeansOfTransportViewModel
-            {
-                PossibleMeans = GetPossibleMeans(),
-                SelectedMeans = currentMeans.Select(m => m.Value).ToList(),
-                SelectedValue = selectedItem.Value
-            };
-
-            return View("Add", model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Guid id, MeansOfTransportViewModel model, string submit)
-        {
-            if (!ModelState.IsValid || submit == null || !model.SelectedValue.HasValue)
-            {
-                return View("Add", model);
-            }
-
-            switch (submit.ToUpperInvariant())
-            {
-                case AddAction:
-                    model.SelectedMeans.Add(model.SelectedValue.Value);
-                    model.SelectedValue = null;
-                    return View("Add", model);
-                case SubmitAction:
-                    return await SubmitControllerAction(id, model);
-                default:
-                    return View("Add", model);
-            }
-        }
-
         public ActionResult _CurrentMeansEditor(MeansOfTransportViewModel model)
         {
             this.RemoveModelStateErrors();
@@ -125,16 +91,6 @@
         public ActionResult _PreviousMeansEditor(MeansOfTransportViewModel model)
         {
             return PartialView(model);
-        }
-
-        private async Task<bool> NotificationHasSetMeans(Guid id)
-        {
-            using (var client = apiClient())
-            {
-                var currentMeans = await client.SendAsync(User.GetAccessToken(), new GetMeansOfTransportByNotificationId(id));
-
-                return currentMeans.Count > 0;
-            }
         }
 
         private IList<RadioButtonPair<string, int>> GetPossibleMeans()
