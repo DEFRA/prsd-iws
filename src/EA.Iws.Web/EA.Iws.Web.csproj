@@ -432,6 +432,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\OtherWasteCodes.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryValues.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\UnNumber.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Exporter\_BusinessEditor.cshtml" />
@@ -577,8 +578,8 @@
     <Compile Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\MeansOfTransportController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReasonForExportController.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\CustomsOffice\CustomsOfficeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\RecoveryInfoController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\CustomsOffice\CustomsOfficeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\NotificationApplicationAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\RecoveryPercentageViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\PackagingTypesController.cs" />
@@ -589,6 +590,7 @@
     <Compile Include="Areas\NotificationApplication\Controllers\TransportRouteController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\WasteTypeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\WasteOperationsController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\RecoveryInfoValuesViewModel.cs" />
     <Compile Include="Controllers\NewNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\UnNumberViewModel.cs" />

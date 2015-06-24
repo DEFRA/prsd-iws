@@ -1,0 +1,57 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo.RecoveryInfoValuesViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<header class="hgroup">
+    <h2 class="heading-large">Add recovery info - values</h2>
+    <div class="colored-header-bar"></div>
+</header>
+
+@using (Html.BeginForm("RecoveryValues", "RecoveryInfo", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.IsDisposal)
+
+    <h2 class="heading-medium">What is the estimated value of the recoverable material?</h2>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.EstimatedUnit.SelectedValue)">
+        @Html.Gds().ValidationMessageFor(model => model.EstimatedUnit.SelectedValue)
+        @Html.EditorFor(m => m.EstimatedUnit)
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.EstimatedAmount)">
+        @Html.Gds().LabelFor(m => m.EstimatedAmount)
+        @Html.Gds().ValidationMessageFor(m => m.EstimatedAmount)
+        @Html.Gds().TextBoxFor(m => m.EstimatedAmount)
+    </div>
+
+    <h2 class="heading-medium">What is the cost of recovery?</h2>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CostUnit.SelectedValue)">
+        @Html.Gds().ValidationMessageFor(model => model.CostUnit.SelectedValue)
+        @Html.EditorFor(m => m.CostUnit)
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CostAmount)">
+        @Html.Gds().LabelFor(m => m.CostAmount)
+        @Html.Gds().ValidationMessageFor(m => m.CostAmount)
+        @Html.Gds().TextBoxFor(m => m.CostAmount)
+    </div>
+
+    <div class="form-group @( Model.IsDisposal ? "" : "js-hidden")">
+        <h2 class="heading-medium">What is the cost of disposal of the non-recoverable fraction?</h2>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalUnit.SelectedValue)">
+            @Html.Gds().ValidationMessageFor(model => model.DisposalUnit.SelectedValue)
+            @Html.EditorFor(m => m.DisposalUnit)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalAmount)">
+            @Html.Gds().LabelFor(m => m.DisposalAmount)
+            @Html.Gds().ValidationMessageFor(m => m.DisposalAmount)
+            @Html.Gds().TextBoxFor(m => m.DisposalAmount)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

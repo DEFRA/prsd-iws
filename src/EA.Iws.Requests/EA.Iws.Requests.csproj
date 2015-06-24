@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RecoveryInfo\AddRecoveryInfoToNotification.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
     <Compile Include="Carriers\GetCarrierForNotification.cs" />
     <Compile Include="Carriers\GetCarriersByNotificationId.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Notification\SetReasonForExport.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
     <Compile Include="Notification\SetRecoveryPercentageData.cs" />
+    <Compile Include="RecoveryInfo\RecoveryInfoData.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="OperationCodes\AddDisposalCodes.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationId.cs" />

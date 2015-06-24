@@ -18,7 +18,7 @@
         {
             this.apiClient = apiClient;
         }
-            
+
         [HttpGet]
         public async Task<ActionResult> RecoveryPercentage(Guid id)
         {
@@ -28,7 +28,7 @@
                     await client.SendAsync(User.GetAccessToken(), new GetRecoveryPercentageData(id));
 
                 var model = new RecoveryPercentageViewModel(recoveryPercentageData);
-                
+
                 return View(model);
             }
         }
@@ -49,7 +49,7 @@
                     await
                         client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = !model.IsHundredPercentRecoverable.GetValueOrDefault() });
                 }
                 catch (ApiBadRequestException e)
                 {
@@ -61,6 +61,45 @@
                 }
 
                 return View(model);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult RecoveryValues(Guid id, bool isDisposal)
+        {
+            var model = new RecoveryInfoValuesViewModel
+            {
+                NotificationId = id,
+                IsDisposal = isDisposal
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RecoveryValues(RecoveryInfoValuesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("RecoveryValues", model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+                return View("RecoveryValues", model);
             }
         }
     }

@@ -58,10 +58,12 @@
     <Compile Include="Notification\NotificationApplication.MeansOfTransport.cs" />
     <Compile Include="Notification\NotificationApplication.PackagingInfo.cs" />
     <Compile Include="Notification\NotificationApplication.RecoveryPercentage.cs" />
+    <Compile Include="Notification\NotificationApplication.RecoveryInfo.cs" />
     <Compile Include="Notification\NotificationApplication.TechnologyEmployed.cs" />
     <Compile Include="Notification\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="Notification\PhysicalCharacteristicsInfo.cs" />
     <Compile Include="Notification\PhysicalCharacteristicType.cs" />
+    <Compile Include="Notification\RecoveryInfo.cs" />
     <Compile Include="Notification\TechnologyEmployed.cs" />
     <Compile Include="Notification\WasteCode.cs" />
     <Compile Include="Notification\WasteCodeInfo.cs" />

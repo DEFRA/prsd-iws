@@ -5,6 +5,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.RecoveryInfo;
     using Domain;
     using Domain.Notification;
     using FakeItEasy;
@@ -70,7 +71,7 @@
                 UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
-            
+
             notification.SetPackagingInfo(new[] { PackagingInfo.CreatePackagingInfo(PackagingType.Bag) });
 
             await context.SaveChangesAsync();
@@ -141,7 +142,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
-            
+
             notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("text area contents"));
             await context.SaveChangesAsync();
 
@@ -151,7 +152,7 @@
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
-        
+
         [Fact]
         public async Task CanAddSpecialHandlingDetails()
         {
@@ -168,6 +169,34 @@
 
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanAddRecoveryInfo()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+
+            context.NotificationApplications.Add(notification);
+
+            notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Tonne, 20.25M, RecoveryInfoUnits.Kilogram, 30);
+
+            await context.SaveChangesAsync();
+
+            Assert.Equal(true, notification.HasRecoveryInfo);
+        }
+
+        [Fact]
+        public async Task CanAddRecoveryInfo_WithoutDisposal()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+
+            context.NotificationApplications.Add(notification);
+
+            notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Tonne, -20, null, null);
+
+            await context.SaveChangesAsync();
+
+            Assert.Equal(true, notification.HasRecoveryInfo);
         }
 
         [Fact]

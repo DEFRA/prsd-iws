@@ -86,6 +86,7 @@
     <Compile Include="Mappings\EntryCustomsOfficeMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsInfoMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMapping.cs" />
+    <Compile Include="Mappings\RecoveryInfoMapping.cs" />
     <Compile Include="Mappings\TechnologyEmployedMapping.cs" />
     <Compile Include="Mappings\TransitStateMapping.cs" />
     <Compile Include="Mappings\StateOfImportMapping.cs" />

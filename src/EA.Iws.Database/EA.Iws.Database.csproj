@@ -127,6 +127,7 @@
     <None Include="schema_compare.ps1" />
     <Content Include="scripts\TestData\20150511-092300-Sunil-test-user.sql" />
     <Content Include="scripts\TestData\20150511-164100-SFW-test-organisation.sql" />
+    <None Include="scripts\Update\Sprint10\20150624-141556-add-table-recovery-info.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />
