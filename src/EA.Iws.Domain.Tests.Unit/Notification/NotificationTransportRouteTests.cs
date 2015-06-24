@@ -38,11 +38,11 @@
         public void AddStateOfImport_WithNullState_Throws()
         {
             var notification = GetTestNotification();
-            Assert.Throws<ArgumentNullException>(() => notification.AddStateOfImportToNotification(null));
+            Assert.Throws<ArgumentNullException>(() => notification.SetStateOfImportForNotification(null));
         }
 
         [Fact]
-        public void AddStateOfImport_NotificationAlreadyHasStateOfImport_Throws()
+        public void SetStateOfImport_NotificationAlreadyHasStateOfImport_ReplacesStateOfImport()
         {
             var notification = GetTestNotification();
 
@@ -53,13 +53,15 @@
                 competentAuthority,
                 entryPoint);
 
-            notification.AddStateOfImportToNotification(stateOfImport);
+            notification.SetStateOfImportForNotification(stateOfImport);
 
-            Assert.Throws<InvalidOperationException>(() => notification.AddStateOfImportToNotification(stateOfImport));
+            notification.SetStateOfImportForNotification(stateOfImport);
+
+            Assert.Equal(stateOfImport.CompetentAuthority.Id, notification.StateOfImport.CompetentAuthority.Id);
         }
 
         [Fact]
-        public void AddStateOfImport_SameCountryToStateOfExport_Throws()
+        public void SetStateOfImport_SameCountryToStateOfExport_Throws()
         {
             // Arrange
             var notification = GetTestNotification();
@@ -84,11 +86,11 @@
             notification.AddStateOfExportToNotification(stateOfExport);
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => notification.AddStateOfImportToNotification(stateOfImport));
+            Assert.Throws<InvalidOperationException>(() => notification.SetStateOfImportForNotification(stateOfImport));
         }
 
         [Fact]
-        public void AddStateOfImport_DifferentCountryToStateOfExport_Throws()
+        public void SetStateOfImport_DifferentCountryToStateOfExport_Throws()
         {
             // Arrange
             var notification = GetTestNotification();
@@ -113,7 +115,7 @@
 
             // Act
             notification.AddStateOfExportToNotification(stateOfExport);
-            notification.AddStateOfImportToNotification(stateOfImport);
+            notification.SetStateOfImportForNotification(stateOfImport);
 
             // Assert
             Assert.Equal(notification.StateOfImport.Country.Id, importCountryId);

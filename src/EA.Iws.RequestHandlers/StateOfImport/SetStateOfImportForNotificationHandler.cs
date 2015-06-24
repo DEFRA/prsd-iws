@@ -8,16 +8,16 @@
     using Prsd.Core.Mediator;
     using Requests.StateOfImport;
 
-    internal class AddStateOfImportToNotificationHandler : IRequestHandler<AddStateOfImportToNotification, Guid>
+    internal class SetStateOfImportForNotificationHandler : IRequestHandler<SetStateOfImportForNotification, Guid>
     {
         private readonly IwsContext context;
 
-        public AddStateOfImportToNotificationHandler(IwsContext context)
+        public SetStateOfImportForNotificationHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(AddStateOfImportToNotification message)
+        public async Task<Guid> HandleAsync(SetStateOfImportForNotification message)
         {
             var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.NotificationId);
 
@@ -28,7 +28,7 @@
 
             var stateOfImport = new StateOfImport(country, competentAuthority, entryPoint);
 
-            notification.AddStateOfImportToNotification(stateOfImport);
+            notification.SetStateOfImportForNotification(stateOfImport);
 
             await context.SaveChangesAsync();
 

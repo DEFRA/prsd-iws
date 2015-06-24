@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+    @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph("Enter the country or state where the waste ends its journey")
+    @if (Model.CountryId != null)
+    {
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries)
+    }
+    else
+    {
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty)
+    }
+    
+</div>
+
+<button class="button" type="submit" value="country" name="submit">Continue</button>

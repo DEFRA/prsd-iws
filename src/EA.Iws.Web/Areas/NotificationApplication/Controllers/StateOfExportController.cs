@@ -71,7 +71,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Add", "StateOfImport", new { id });
+            return RedirectToAction("Index", "StateOfImport", new { id });
         }
 
         private async Task<ActionResult> StateOfExportCountrySelectedPostback(Guid id, StateOfExportViewModel model)

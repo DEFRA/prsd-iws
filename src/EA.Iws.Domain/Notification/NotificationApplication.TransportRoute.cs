@@ -21,16 +21,9 @@
             this.StateOfExport = stateOfExport;
         }
 
-        public void AddStateOfImportToNotification(StateOfImport stateOfImport)
+        public void SetStateOfImportForNotification(StateOfImport stateOfImport)
         {
             Guard.ArgumentNotNull(() => stateOfImport, stateOfImport);
-
-            if (this.StateOfImport != null)
-            {
-                throw new InvalidOperationException(string.Format("Cannot add a State of Import to Notification {0}. This Notification already has a State of Import {1}.",
-                    this.Id,
-                    this.StateOfImport.Id));
-            }
 
             if (this.StateOfExport != null && this.StateOfExport.Country.Id == stateOfImport.Country.Id)
             {

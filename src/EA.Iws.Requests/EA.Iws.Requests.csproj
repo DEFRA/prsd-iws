@@ -113,10 +113,14 @@
     <Compile Include="StateOfExport\EditStateOfExportForNotification.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotification.cs" />
     <Compile Include="StateOfExport\GetStateOfExportForNotification.cs" />
-    <Compile Include="StateOfImport\AddStateOfImportToNotification.cs" />
+    <Compile Include="StateOfImport\SetStateOfImportForNotification.cs" />
     <Compile Include="TechnologyEmployed\GetTechnologyEmployed.cs" />
+    <Compile Include="StateOfImport\GetStateOfImportSetDataByNotificationId.cs" />
+    <Compile Include="StateOfImport\StateOfImportSetData.cs" />
     <Compile Include="TransitState\AddTransitStateToNotification.cs" />
     <Compile Include="TechnologyEmployed\SetTechnologyEmployed.cs" />
+    <Compile Include="TransportRoute\CompententAuthorityAndEntryOrExitPointData.cs" />
+    <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetWasteCodes.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcess.cs" />

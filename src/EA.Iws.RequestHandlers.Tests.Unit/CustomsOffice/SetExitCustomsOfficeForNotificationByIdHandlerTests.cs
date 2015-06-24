@@ -3,8 +3,6 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.CustomsOffice;
-    using Core.Shared;
     using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
@@ -87,7 +85,7 @@
         public async Task NotificationExistsAndRequiresExitCustomsOffice_SetsExitOffice()
         {
             anyNotification.AddStateOfExportToNotification(stateOfExport);
-            anyNotification.AddStateOfImportToNotification(stateOfImportNonEu);
+            anyNotification.SetStateOfImportForNotification(stateOfImportNonEu);
 
             var notifications = dbContextHelper.GetAsyncEnabledDbSet(new[] { anyNotification });
             A.CallTo(() => context.NotificationApplications).Returns(notifications);
