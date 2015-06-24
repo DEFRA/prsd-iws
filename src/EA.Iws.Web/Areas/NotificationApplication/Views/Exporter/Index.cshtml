@@ -15,7 +15,7 @@
         <div class="colored-header-bar"></div>
     </header>
 
-    @Html.EditorFor(m => m.Business)
+    @Html.Partial("_BusinessEditor", Model)
 
     <h2 class="heading-medium">Address</h2>
     <hr />
@@ -26,4 +26,61 @@
     @Html.EditorFor(m => m.Contact)
 
     <button class="button" type="submit">Continue</button>
+}
+@section scripts{
+    <script>
+        $(function () {
+
+            $(".panel-indent").removeClass(".hide-for-initial-load");
+
+            var businessTypeSelected = $(".business-type-radio-button").filter(':checked');
+            if (businessTypeSelected.length) {
+                businessTypeSelected.triggerHandler("click");
+            }
+        });
+
+        $(".business-type-radio-button").click(function () {
+
+            var panelIndentClass = ".panel-indent";
+            var formGroupClass = ".form-group";
+
+            // Find the div containing the registration number input and the form group inputs.
+            var registrationBlock = $('#registration-block');
+            var registrationblockRegistrationNumber = registrationBlock.children(formGroupClass).first();
+            var registrationblockAdditionalRegistrationNumber = registrationBlock.children(formGroupClass).last();
+
+            // Find the panel underneath the radio button label.
+            var hiddenPanel = $(this).parent().next(panelIndentClass);
+
+            // Work out if the registration block has previously been moved.
+            var isRegistrationBlockCurrentlyNested = registrationBlock.parent(panelIndentClass).length;
+            if (isRegistrationBlockCurrentlyNested) {
+                registrationblockAdditionalRegistrationNumber.removeClass('margin-bottom-30');
+                // Move the hint texts currently in the registration block back to their proper position.
+                var hintSpan = registrationBlock.find('.form-hint');
+                hintSpan.prependTo(registrationBlock.parent(panelIndentClass));
+            }
+
+            // Move the currently hidden registration number input to the correct location.
+            $(registrationBlock).prependTo(hiddenPanel);
+
+            // Move the span to the correct location.
+            $(hiddenPanel).children('.form-hint').first()
+                .insertAfter(registrationblockRegistrationNumber.children('.form-label').first());
+
+            var additionalInputHint = hiddenPanel.children(".form-hint").filter("span[data-name='additional-hint']");
+            if (additionalInputHint.length) {
+                additionalInputHint.insertAfter(registrationblockAdditionalRegistrationNumber.children('.form-label').first());
+            }
+
+            // If the form group isn't going to be the only element in the panel add a margin class.
+            var registrationInputHasNeighbourFormGroup = registrationBlock.next().length;
+            if (registrationInputHasNeighbourFormGroup) {
+                registrationblockAdditionalRegistrationNumber.addClass('margin-bottom-30');
+            }
+
+            // Show the registration number input.
+            registrationBlock.removeClass('js-hidden');
+        });
+    </script>
 }

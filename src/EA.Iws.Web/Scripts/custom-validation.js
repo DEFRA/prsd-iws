@@ -25,7 +25,12 @@
             for (error in errorList) {
                 summary += '<li><a href="#' + errorList[error].element.id + '">' + errorList[error].message + '</a></li>';
 
-                $(errorList[error].element).parents(".form-group").last().addClass("error");
+                // Allow form groups to opt-out of their parent being the one highlighted.
+                if ($(errorList[error].element).parents(".form-group").filter("div [data-validation-behaviour='ignore-parent']").length) {
+                    $(errorList[error].element).parents(".form-group").first().addClass("error");
+                } else {
+                    $(errorList[error].element).parents(".form-group").last().addClass("error");
+                }
             }
 
             // Toggle classes on validation summary

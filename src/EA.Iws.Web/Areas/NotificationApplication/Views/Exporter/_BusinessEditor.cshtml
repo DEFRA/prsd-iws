@@ -1,0 +1,72 @@
+﻿@using EA.Iws.Requests.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter.ExporterViewModel
+    
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+    @Html.Gds().LabelFor(m => m.Business.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+    @Html.Gds().TextBoxFor(m => m.Business.Name)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+    @Html.Gds().LabelFor(m => m.Business.BusinessType)
+    @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
+    <label class="block-label" data-target="sole-trader-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "business-type-radio-button" }) Sole trader
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Sole trader") ? "" : "js-hidden")" id="sole-trader-number">
+        <span class="form-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span>
+    </div>
+
+    <label class="block-label" data-target="partnership-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "business-type-radio-button" }) Partnership
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Partnership") ? "" : "js-hidden")" id="partnership-number">
+        <span class="form-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span>
+    </div>
+
+    <label class="block-label" data-target="companies-house-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "business-type-radio-button" }) Limited company
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
+        <span class="form-hint">This should be your Companies House number.</span>
+        <span class="form-hint" data-name="additional-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number.</span>
+    </div>
+
+    <label class="block-label" data-target="other-description">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+        <span class="form-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
+            @Html.Gds().LabelFor(m => m.Business.OtherDescription)
+            @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)
+            @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)
+        </div>
+    </div>
+</div>
+
+<div class="js-hidden" id="registration-block">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+        @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
+        <span class="form-hint js-hidden">For Limited Company this should be your Companies House number. 
+        For sole trader, partnership or any other organisation type this will be your waste broker license number.</span>
+        @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+    </div>
+    
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.AdditionalRegistrationNumber)">
+    @Html.Gds().LabelFor(m => m.Business.AdditionalRegistrationNumber)
+    @Html.Gds().ValidationMessageFor(model => model.Business.AdditionalRegistrationNumber)
+    @Html.Gds().TextBoxFor(m => m.Business.AdditionalRegistrationNumber)
+</div>
+</div>
+
+<style>
+    .margin-bottom-30 {
+        margin-bottom: 30px !important;
+    }
+    .hide-for-initial-load {
+        display: none;
+    }
+</style>
