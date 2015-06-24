@@ -21,7 +21,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             var model = new SpecialHandlingViewModel { NotificationId = id };
             using (var client = apiClient())
@@ -33,7 +33,6 @@
                 {
                     model.HasSpecialHandlingRequirements = specialHandlingData.HasSpecialHandlingRequirements;
                     model.SpecialHandlingDetails = specialHandlingData.SpecialHandlingDetails;
-                    return RedirectToAction("Edit", new { id });
                 }
             }
             return View(model);
@@ -41,7 +40,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(SpecialHandlingViewModel model)
+        public async Task<ActionResult> Index(SpecialHandlingViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -58,61 +57,6 @@
                             model.SpecialHandlingDetails));
 
                     return RedirectToAction("Add", "StateOfExport", new { id = model.NotificationId });
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-
-                return View(model);
-            }
-        }
-
-         [HttpGet]
-        public async Task<ActionResult> Edit(Guid id)
-        {
-            var model = new SpecialHandlingViewModel { NotificationId = id };
-            using (var client = apiClient())
-            {
-                var specialHandlingData =
-                    await client.SendAsync(User.GetAccessToken(), new GetSpecialHandingForNotification(id));
-
-                if (!specialHandlingData.HasSpecialHandlingRequirements.HasValue)
-                {
-                    return RedirectToAction("Add", new { id });
-                }
-
-                model.HasSpecialHandlingRequirements = specialHandlingData.HasSpecialHandlingRequirements;
-                model.SpecialHandlingDetails = specialHandlingData.SpecialHandlingDetails;
-            }
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(SpecialHandlingViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                try
-                {
-                    await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
-                            model.SpecialHandlingDetails));
-
-                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

@@ -540,12 +540,11 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Edit.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\_PackagingTypes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\_CurrentMeansEditor.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Add.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\_PreviousMeansEditor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

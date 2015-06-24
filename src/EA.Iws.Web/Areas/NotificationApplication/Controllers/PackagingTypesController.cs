@@ -91,7 +91,7 @@
                         new SetPackagingInfoForNotification(selectedPackagingTypes, model.NotificationId,
                             model.OtherDescription));
 
-                    return RedirectToAction("Add", "SpecialHandling", new { id = model.NotificationId });
+                    return RedirectToAction("Index", "SpecialHandling", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
