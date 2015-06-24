@@ -22,7 +22,9 @@
         <hr/>
         <div>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedYcode)">
-                @Html.Gds().LabelFor(m => m.SelectedYcode, optionalMessage:"(Please enter at least one code or not applicable)")
+                @Html.Gds().LabelFor(m => m.SelectedYcode, showOptionalLabel:false)
+                @Html.Gds().HintSpan("Enter at least one code or not applicable")
+                @Html.Gds().ValidationMessageFor(m => m.SelectedYcode)
                 <select data-val="true" data-val-required="The SelectedYcode field is required." id="ycode-list" name="SelectedYcode">
                     <option description="" selected="selected" value=""></option>
                     @foreach (var wasteCode in Model.Ycodes)
@@ -78,7 +80,9 @@
         <hr />
         <div>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedHcode)">
-                @Html.Gds().LabelFor(m => m.SelectedHcode, optionalMessage: "(Please enter at least one code or not applicable)")
+                @Html.Gds().LabelFor(m => m.SelectedHcode, showOptionalLabel: false)
+                @Html.Gds().HintSpan("Enter at least one code or not applicable")
+                @Html.Gds().ValidationMessageFor(m => m.SelectedHcode)
                 <select data-val="true" data-val-required="The SelectedHcode field is required." id="hcode-list" name="SelectedHcode">
                     <option description="" selected="selected" value=""></option>
                     @foreach (var wasteCode in Model.Hcodes)
@@ -136,7 +140,9 @@
 
         <div>
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
-                @Html.Gds().LabelFor(m => m.SelectedUnClass, optionalMessage: "(Please enter at least one class or not applicable)")
+                @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
+                @Html.Gds().HintSpan("Enter at least one code or not applicable")
+                @Html.Gds().ValidationMessageFor(m => m.SelectedUnClass)
                 <select data-val="true" data-val-required="The SelectedUnClass field is required." id="unclass-list" name="SelectedUnClass">
                     <option description="" selected="selected" value=""></option>
                     @foreach (var wasteCode in Model.UnClasses)

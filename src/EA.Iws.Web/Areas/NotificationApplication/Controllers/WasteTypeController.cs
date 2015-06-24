@@ -336,7 +336,7 @@
                         wasteCodeData.Add(new WasteCodeData { OptionalCode = model.OtherCode, CodeType = CodeType.OtherCode, OptionalDescription = "Other code" });
                     }
                     await client.SendAsync(User.GetAccessToken(), new SetOptionalWasteCodes(model.NotificationId, wasteCodeData));
-                    return RedirectToAction("UnNumber", new { id = model.NotificationId });
+                    return RedirectToAction("AddYcodeHcodeAndUnClass", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -524,7 +524,7 @@
                         await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedYcodesList, model.NotificationId));
                         await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedHcodesList, model.NotificationId));
                         await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedUnClassesList, model.NotificationId));
-                        return RedirectToAction("Index", "Home", new { area = string.Empty });
+                        return RedirectToAction("UnNumber", new { id = model.NotificationId });
                     }
                     catch (ApiBadRequestException ex)
                     {
