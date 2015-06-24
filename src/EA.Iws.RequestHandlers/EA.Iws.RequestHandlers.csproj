@@ -72,7 +72,6 @@
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarriersByNotificationIdHandler.cs" />
     <Compile Include="Carrier\UpdateCarrierForNotificationHandler.cs" />
-    <Compile Include="Exporters\NotificationHasExporterHandler.cs" />
     <Compile Include="Carrier\AddCarrierToNotificationHandler.cs" />
     <Compile Include="Facilities\DeleteFacilityForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />

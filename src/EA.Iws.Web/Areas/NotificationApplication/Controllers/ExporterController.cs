@@ -26,10 +26,9 @@
             using (var client = apiClient())
             {
                 ExporterViewModel model;
-                bool hasExporter = await client.SendAsync(User.GetAccessToken(), new NotificationHasExporter(id));
-                if (hasExporter)
+                var exporter = await client.SendAsync(User.GetAccessToken(), new GetExporterByNotificationId(id));
+                if (exporter.HasExporter)
                 {
-                    var exporter = await client.SendAsync(User.GetAccessToken(), new GetExporterByNotificationId(id));
                     model = new ExporterViewModel(exporter);
                 }
                 else

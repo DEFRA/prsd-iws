@@ -52,7 +52,6 @@
     <Compile Include="Carriers\UpdateCarrierForNotification.cs" />
     <Compile Include="ClaimTypes.cs" />
     <Compile Include="Exporters\SetExporterForNotification.cs" />
-    <Compile Include="Exporters\NotificationHasExporter.cs" />
     <Compile Include="Facilities\AddFacilityToNotification.cs" />
     <Compile Include="Facilities\DeleteFacilityForNotification.cs" />
     <Compile Include="Facilities\FacilityData.cs" />

@@ -32,20 +32,33 @@
                 Address = addressMap.Map(source.Address),
                 Business = businessMap.Map(source.Business),
                 Contact = contactMap.Map(source.Contact),
-                Id = source.Id
+                Id = source.Id,
+                HasExporter = true
             };
         }
 
         public ExporterData Map(NotificationApplication source)
         {
-            return new ExporterData
+            if (source.HasExporter)
             {
-                Address = addressMap.Map(source.Exporter.Address),
-                Business = businessMap.Map(source.Exporter.Business),
-                Contact = contactMap.Map(source.Exporter.Contact),
-                Id = source.Exporter.Id,
-                NotificationId = source.Id
-            };
+                return new ExporterData
+                {
+                    Address = addressMap.Map(source.Exporter.Address),
+                    Business = businessMap.Map(source.Exporter.Business),
+                    Contact = contactMap.Map(source.Exporter.Contact),
+                    Id = source.Exporter.Id,
+                    NotificationId = source.Id,
+                    HasExporter = true
+                };
+            }
+            else
+            {
+                return new ExporterData
+                {
+                    NotificationId = source.Id,
+                    HasExporter = false
+                };
+            }
         }
 
         public ExporterData Map(Exporter source, Guid parentId)

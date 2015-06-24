@@ -7,6 +7,8 @@
     {
         public Guid Id { get; set; }
 
+        public bool HasExporter { get; set; }
+
         public BusinessInfoData Business { get; set; }
 
         public AddressData Address { get; set; }
