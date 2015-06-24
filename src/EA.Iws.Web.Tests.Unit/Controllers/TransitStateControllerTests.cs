@@ -10,6 +10,7 @@
     using Requests.TransitState;
     using Requests.TransportRoute;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -217,7 +218,7 @@
             Assert.Equal(europoort.Id, model.EntryPointId);
         }
 
-        private CountryData[] GetCountryData()
+        private List<CountryData> GetCountryData()
         {
             return new[]
             {
@@ -226,7 +227,7 @@
                 new CountryData { Id = JerseyGuid, Name = "Jersey" },
                 new CountryData { Id = GuernseyGuid, Name = "Guernsey" },
                 new CountryData { Id = IsleOfManGuid, Name = "Isle of Man" }
-            };
+            }.ToList();
         }
     }
 }
