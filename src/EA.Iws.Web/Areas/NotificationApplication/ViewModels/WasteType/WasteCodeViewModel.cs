@@ -18,7 +18,7 @@
 
         public IEnumerable<WasteCodeData> EwcCodes { get; set; }
 
-        [Display(Name = "EWC Code")]
+        [Display(Name = "European waste catalogue (EWC) Codes")]
         public List<WasteCodeData> SelectedEwcCodes { get; set; }
 
         public string SelectedEwcCode { get; set; }

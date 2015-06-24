@@ -16,7 +16,8 @@
 
     <div>
         <div class="form-group">
-            @Html.Gds().LabelFor(m => m.UnCode, "(Please enter at least one)")
+            @Html.Gds().LabelFor(m => m.UnCode, false)
+            @Html.Gds().HintParagraph("Enter at least one")
             <select data-val="true" data-val-required="The SelectedWasteCode field is required." id="ewc-code-list" name="SelectedUnCode">
                 <option description="" selected="selected" value=""></option>
                 @foreach (var unCode in Model.UnCodes)
