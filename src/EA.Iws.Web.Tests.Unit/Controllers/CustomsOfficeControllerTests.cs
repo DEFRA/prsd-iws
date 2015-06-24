@@ -16,7 +16,7 @@
         private readonly IIwsClient client;
         private readonly CustomsOfficeController controller;
         private readonly Guid guid = Guid.Empty;
-        private const string IntendedShipmentsAction = "Add";
+        private const string IntendedShipmentsAction = "Index";
         private const string IntendedShipmentsController = "Shipment";
 
         public CustomsOfficeControllerTests()
@@ -62,7 +62,7 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Add", "EntryCustomsOffice");
+            result.AssertControllerReturn("Index", "EntryCustomsOffice");
         }
 
         [Fact]
@@ -77,7 +77,7 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Add", "ExitCustomsOffice");
+            result.AssertControllerReturn("Index", "ExitCustomsOffice");
         }
 
         [Fact]
@@ -92,11 +92,11 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Add", "ExitCustomsOffice");
+            result.AssertControllerReturn("Index", "ExitCustomsOffice");
         }
 
         [Fact]
-        public async Task Index_CustomOfficesExitAlreadyCompleted_RedirectsToIntendedShipments()
+        public async Task Index_CustomOfficesExitAlreadyCompleted_RedirectsToExit()
         {
             A.CallTo(
                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
@@ -107,12 +107,12 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
-            result.AssertControllerReturn(IntendedShipmentsAction, IntendedShipmentsController);
+            result.AssertControllerReturn("Index", "ExitCustomsOffice");
             Assert.Equal(guid, result.RouteValues["id"]);
         }
 
         [Fact]
-        public async Task Index_CustomOfficesEntryAndExitWithExitAlreadyCompleted_RedirectsToEntryCustomsOfficePage()
+        public async Task Index_CustomOfficesEntryAndExitWithExitAlreadyCompleted_RedirectsToExit()
         {
             A.CallTo(
                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
@@ -123,7 +123,7 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Add", "EntryCustomsOffice");
+            result.AssertControllerReturn("Index", "ExitCustomsOffice");
             Assert.Equal(guid, result.RouteValues["id"]);
         }
     }

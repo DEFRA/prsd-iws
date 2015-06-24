@@ -21,7 +21,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
@@ -57,7 +57,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(Guid id, CustomsOfficeViewModel model)
+        public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model)
         {
             using (var client = apiClient())
             {
@@ -77,7 +77,7 @@
                     model.Address,
                     model.SelectedCountry.Value));
 
-                return RedirectToAction("Index", "CustomsOffice", new { id });
+                return RedirectToAction("Index", "Shipment", new { id });
             }
         }
     }

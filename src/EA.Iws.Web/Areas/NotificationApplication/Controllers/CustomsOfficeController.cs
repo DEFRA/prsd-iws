@@ -20,10 +20,10 @@
         {
             this.apiClient = apiClient;
 
-            intendedShipments = id => this.RedirectToAction("Add", "Shipment", new { id });
+            intendedShipments = id => this.RedirectToAction("Index", "Shipment", new { id });
             transportRouteSummary = id => this.RedirectToAction("Summary", "TransportRoute", new { id });
-            addExitCustomsOffice = id => this.RedirectToAction("Add", "ExitCustomsOffice", new { id });
-            addEntryCustomsOffice = id => this.RedirectToAction("Add", "EntryCustomsOffice", new { id });
+            addExitCustomsOffice = id => this.RedirectToAction("Index", "ExitCustomsOffice", new { id });
+            addEntryCustomsOffice = id => this.RedirectToAction("Index", "EntryCustomsOffice", new { id });
         }
 
         public async Task<ActionResult> Index(Guid id)
@@ -38,32 +38,12 @@
             {
                 case CustomsOffices.None:
                     return intendedShipments(id);
-
                 case CustomsOffices.EntryAndExit:
-                    if (customsOffice.CustomsOfficesCompleted == CustomsOffices.Exit)
-                    {
-                        return addEntryCustomsOffice(id);
-                    }
-                    if (customsOffice.CustomsOfficesCompleted == CustomsOffices.EntryAndExit)
-                    {
-                        return intendedShipments(id);
-                    }
                     return addExitCustomsOffice(id);
-
                 case CustomsOffices.Entry:
-                    if (customsOffice.CustomsOfficesCompleted != CustomsOffices.None)
-                    {
-                        return intendedShipments(id);
-                    }
                     return addEntryCustomsOffice(id);
-
                 case CustomsOffices.Exit:
-                    if (customsOffice.CustomsOfficesCompleted != CustomsOffices.None)
-                    {
-                        return intendedShipments(id);
-                    }
                     return addExitCustomsOffice(id);
-
                 default:
                     return transportRouteSummary(id);
             }

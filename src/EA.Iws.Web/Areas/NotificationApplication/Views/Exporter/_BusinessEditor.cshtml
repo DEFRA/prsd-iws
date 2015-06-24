@@ -30,19 +30,19 @@
     </label>
     <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
         <span class="form-hint">This should be your Companies House number.</span>
-        <span class="form-hint" data-name="additional-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number.</span>
+        <span class="form-hint" data-name="additional-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span>
     </div>
 
     <label class="block-label" data-target="other-description">
         @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
     </label>
     <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
-        <span class="form-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
             @Html.Gds().LabelFor(m => m.Business.OtherDescription)
             @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)
             @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)
         </div>
+        <span class="form-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span> 
     </div>
 </div>
 

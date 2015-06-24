@@ -3,7 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class SetExitCustomsOfficeForNotificationById : IRequest<Guid>
+    public class SetExitCustomsOfficeForNotificationById : IRequest<CustomsOfficeCompletionStatus>
     {
         public Guid Id { get; private set; }
         public Guid CountryId { get; private set; }

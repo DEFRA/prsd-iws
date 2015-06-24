@@ -31,7 +31,7 @@
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
 
-            var countries = await context.Countries.Where(c => c.IsEuropeanUnionMember).ToArrayAsync();
+            var countries = await context.Countries.Where(c => c.IsEuropeanUnionMember).OrderBy(c => c.Name).ToArrayAsync();
 
             return new EntryCustomsOfficeAddData
             {

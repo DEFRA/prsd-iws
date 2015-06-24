@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.CustomsOffice
 {
-    using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
@@ -8,7 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
 
-    internal class SetEntryCustomsOfficeForNotificationByIdHandler : IRequestHandler<SetEntryCustomsOfficeForNotificationById, Guid>
+    internal class SetEntryCustomsOfficeForNotificationByIdHandler : IRequestHandler<SetEntryCustomsOfficeForNotificationById, CustomsOfficeCompletionStatus>
     {
         private readonly IwsContext context;
 
@@ -17,7 +16,7 @@
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(SetEntryCustomsOfficeForNotificationById message)
+        public async Task<CustomsOfficeCompletionStatus> HandleAsync(SetEntryCustomsOfficeForNotificationById message)
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
@@ -28,7 +27,11 @@
 
             await context.SaveChangesAsync();
 
-            return notification.EntryCustomsOffice.Id;
+            return new CustomsOfficeCompletionStatus
+            {
+                CustomsOfficesCompleted = notification.GetCustomsOfficesCompleted(),
+                CustomsOfficesRequired = notification.GetCustomsOfficesRequired()
+            };
         }
     }
 }

@@ -24,7 +24,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
@@ -60,7 +60,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(Guid id, CustomsOfficeViewModel model)
+        public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model)
         {
             using (var client = apiClient())
             {
@@ -75,12 +75,19 @@
                     return View(model);
                 }
 
-                await client.SendAsync(User.GetAccessToken(), new SetExitCustomsOfficeForNotificationById(id,
+                CustomsOfficeCompletionStatus result = await client.SendAsync(User.GetAccessToken(), 
+                    new SetExitCustomsOfficeForNotificationById(id,
                     model.Name,
                     model.Address,
                     model.SelectedCountry.Value));
 
-                return RedirectToAction("Index", "CustomsOffice", new { id });
+                switch (result.CustomsOfficesRequired)
+                {
+                        case CustomsOffices.EntryAndExit:
+                        return RedirectToAction("Index", "EntryCustomsOffice", new { id });
+                    default:
+                        return RedirectToAction("Index", "Shipment", new { id });
+                }
             }
         }
     }

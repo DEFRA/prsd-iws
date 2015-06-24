@@ -9,7 +9,7 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Address)">
     @Html.Gds().LabelFor(m => m.Address)
     @Html.Gds().ValidationMessageFor(m => m.Address)
-    @Html.Gds().TextBoxFor(m => m.Address)
+    @Html.TextAreaFor(m => m.Address, new { @class="form-control", style="height:120px;"})
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedCountry)">
