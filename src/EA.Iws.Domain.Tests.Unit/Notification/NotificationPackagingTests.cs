@@ -42,7 +42,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.UpdatePackagingInfo(new[] { PackagingInfo.CreateOtherPackagingInfo("package description") });
+            notification.SetPackagingInfo(new[] { PackagingInfo.CreateOtherPackagingInfo("package description") });
 
             Assert.Equal(1, notification.PackagingInfos.Count());
         }
@@ -65,9 +65,9 @@
                 PackagingInfo.CreatePackagingInfo(PackagingType.Bulk)
             };
 
-            notification.UpdatePackagingInfo(packagingInfos);
+            notification.SetPackagingInfo(packagingInfos);
 
-            notification.UpdatePackagingInfo(newPackagingInfos);
+            notification.SetPackagingInfo(newPackagingInfos);
 
             Assert.Collection(notification.PackagingInfos,
                 item => Assert.Equal(notification.PackagingInfos.ElementAt(0).PackagingType, PackagingType.Box),

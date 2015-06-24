@@ -164,7 +164,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Add", "PackagingTypes", new { id });
+            return RedirectToAction("Index", "PackagingTypes", new { id });
         }
     }
 }

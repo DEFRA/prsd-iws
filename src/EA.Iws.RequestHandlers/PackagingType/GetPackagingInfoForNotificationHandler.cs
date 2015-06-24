@@ -8,19 +8,19 @@
     using Prsd.Core.Mediator;
     using Requests.PackagingType;
 
-    internal class GetPackagingTypesForNotificationHandler :
-        IRequestHandler<GetPackagingTypesForNotification, PackagingData>
+    internal class GetPackagingInfoForNotificationHandler :
+        IRequestHandler<GetPackagingInfoForNotification, PackagingData>
     {
         private readonly IwsContext context;
         private readonly IMap<NotificationApplication, PackagingData> packagingMapper;
 
-        public GetPackagingTypesForNotificationHandler(IwsContext context, IMap<NotificationApplication, PackagingData> packagingMapper)
+        public GetPackagingInfoForNotificationHandler(IwsContext context, IMap<NotificationApplication, PackagingData> packagingMapper)
         {
             this.context = context;
             this.packagingMapper = packagingMapper;
         }
 
-        public async Task<PackagingData> HandleAsync(GetPackagingTypesForNotification message)
+        public async Task<PackagingData> HandleAsync(GetPackagingInfoForNotification message)
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 

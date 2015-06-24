@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using Prsd.Core.Mediator;
 
-    public class SetPackagingTypeOnShipmentInfo : IRequest<Guid>
+    public class SetPackagingInfoForNotification : IRequest<Guid>
     {
-        public SetPackagingTypeOnShipmentInfo(List<PackagingType> packagingTypes, Guid notificationId, string otherDescription)
+        public SetPackagingInfoForNotification(List<PackagingType> packagingTypes, Guid notificationId, string otherDescription)
         {
             PackagingTypes = packagingTypes;
 

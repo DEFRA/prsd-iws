@@ -9,10 +9,10 @@
     using Requests.Shipment;
     using PackagingType = Requests.PackagingType.PackagingType;
 
-    internal class PackagingInfoMap : IMap<SetPackagingTypeOnShipmentInfo, IEnumerable<PackagingInfo>>,
+    internal class PackagingInfoMap : IMap<SetPackagingInfoForNotification, IEnumerable<PackagingInfo>>,
         IMap<NotificationApplication, PackagingData>
     {
-        public IEnumerable<PackagingInfo> Map(SetPackagingTypeOnShipmentInfo source)
+        public IEnumerable<PackagingInfo> Map(SetPackagingInfoForNotification source)
         {
             var packagingInfos = new List<PackagingInfo>();
 

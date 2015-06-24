@@ -3,9 +3,9 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class GetPackagingTypesForNotification : IRequest<PackagingData>
+    public class GetPackagingInfoForNotification : IRequest<PackagingData>
     {
-        public GetPackagingTypesForNotification(Guid notificationId)
+        public GetPackagingInfoForNotification(Guid notificationId)
         {
             NotificationId = notificationId;
         }

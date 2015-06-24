@@ -112,11 +112,11 @@
     <Compile Include="Registration\Users\User.cs" />
     <Compile Include="Registration\Users\UserById.cs" />
     <Compile Include="Shipment\CreateOrUpdateShipmentInfo.cs" />
-    <Compile Include="PackagingType\GetPackagingTypesForNotification.cs" />
+    <Compile Include="PackagingType\GetPackagingInfoForNotification.cs" />
     <Compile Include="Shipment\GetShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\PackagingData.cs" />
     <Compile Include="PackagingType\PackagingType.cs" />
-    <Compile Include="PackagingType\SetPackagingTypeOnShipmentInfo.cs" />
+    <Compile Include="PackagingType\SetPackagingInfoForNotification.cs" />
     <Compile Include="Shared\CompetentAuthorityData.cs" />
     <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />

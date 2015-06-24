@@ -4,7 +4,7 @@
 
     public partial class NotificationApplication
     {
-        public void UpdatePackagingInfo(IEnumerable<PackagingInfo> packagingInfos)
+        public void SetPackagingInfo(IEnumerable<PackagingInfo> packagingInfos)
         {
             PackagingInfosCollection.Clear();
 
