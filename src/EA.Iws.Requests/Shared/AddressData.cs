@@ -42,7 +42,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (CountryId == new Guid())
+            if (CountryId == Guid.Empty)
             {
                 yield return new ValidationResult("Please select a country");
             }

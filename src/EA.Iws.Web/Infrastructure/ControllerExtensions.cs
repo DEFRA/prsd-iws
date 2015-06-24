@@ -30,8 +30,8 @@
             }
             else
             {
-                response.Insert(0, new CountryData { Id = new Guid(), Name = string.Empty});
-                controller.ViewBag.Countries = new SelectList(response, "Id", "Name", new Guid());
+                response.Insert(0, new CountryData { Id = Guid.Empty, Name = string.Empty });
+                controller.ViewBag.Countries = new SelectList(response, "Id", "Name", Guid.Empty);
             }
         }
 
