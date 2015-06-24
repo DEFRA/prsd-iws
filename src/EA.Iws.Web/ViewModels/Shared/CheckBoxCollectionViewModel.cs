@@ -22,6 +22,15 @@
             }
         }
 
+        public void SetSelectedValues(IEnumerable<int> selectedValues)
+        {
+            var enumerable = selectedValues as int[] ?? selectedValues.ToArray();
+            foreach (var item in PossibleValues)
+            {
+                item.Selected = enumerable.Any(p => p.ToString() == item.Value);
+            }
+        }
+
         /// <summary>
         /// Creates SelectListItem collection based on values in an enum.
         /// </summary>

@@ -62,7 +62,7 @@
         }
 
         [HttpGet]
-        public ActionResult AddRecoveryCodes(Guid id)
+        public async Task<ActionResult> AddRecoveryCodes(Guid id)
         {
             var model = new OperationCodesViewModel { NotificationId = id };
             model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>();
@@ -71,6 +71,14 @@
             foreach (RecoveryCode code in Enum.GetValues(typeof(RecoveryCode)))
             {
                 model.CodeInformation.Add(code.ToString(), EnumHelper.GetDescription(code));
+            }
+
+            using (var client = apiClient())
+            {
+                var selectedCodes =
+                        await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+
+                model.Codes.SetSelectedValues(selectedCodes.Select(s => s.Value));
             }
 
             return View(model);
@@ -127,7 +135,7 @@
         }
 
         [HttpGet]
-        public ActionResult AddDisposalCodes(Guid id)
+        public async Task<ActionResult> AddDisposalCodes(Guid id)
         {
             var model = new OperationCodesViewModel { NotificationId = id };
             model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<DisposalCode>();
@@ -136,6 +144,14 @@
             foreach (DisposalCode code in Enum.GetValues(typeof(DisposalCode)))
             {
                 model.CodeInformation.Add(code.ToString(), EnumHelper.GetDescription(code));
+            }
+
+            using (var client = apiClient())
+            {
+                var selectedCodes =
+                        await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+
+                model.Codes.SetSelectedValues(selectedCodes.Select(s => s.Value));
             }
 
             return View(model);
