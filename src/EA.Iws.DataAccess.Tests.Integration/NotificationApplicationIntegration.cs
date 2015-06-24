@@ -99,11 +99,11 @@
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            notification.UpdateOperationCodes(codes);
+            notification.SetOperationCodes(codes);
 
             await context.SaveChangesAsync();
 
-            notification.UpdateOperationCodes(newCodes);
+            notification.SetOperationCodes(newCodes);
 
             await context.SaveChangesAsync();
 
@@ -142,7 +142,7 @@
 
             context.NotificationApplications.Add(notification);
             
-            notification.UpdateTechnologyEmployed(false, "text area contents");
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("text area contents"));
             await context.SaveChangesAsync();
 
             Assert.True(notification.HasTechnologyEmployed);

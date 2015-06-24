@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
     using System;
+    using Prsd.Core;
     using Prsd.Core.Domain;
 
     public class TechnologyEmployed : Entity
     {
-        internal TechnologyEmployed(bool annexProvided, string details)
+        private TechnologyEmployed(bool annexProvided, string details)
         {
             if (annexProvided && !string.IsNullOrEmpty(details))
             {
@@ -25,7 +26,18 @@
         {
         }
 
-        public bool AnnexProvided { get; internal set; }
-        public string Details { get; internal set; }
+        public bool AnnexProvided { get; private set; }
+        public string Details { get; private set; }
+
+        public static TechnologyEmployed CreateTechnologyEmployedInAnnex()
+        {
+            return new TechnologyEmployed(true, null);
+        }
+
+        public static TechnologyEmployed CreateTechnologyEmployedDetails(string details)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => details, details);
+            return new TechnologyEmployed(false, details);
+        }
     }
 }

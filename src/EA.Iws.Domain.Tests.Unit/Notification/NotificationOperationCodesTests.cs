@@ -20,7 +20,7 @@
                 OperationCode.R2
             };
 
-            notification.UpdateOperationCodes(codes);
+            notification.SetOperationCodes(codes);
 
             Assert.Collection(notification.OperationInfos,
                 item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R1),
@@ -39,7 +39,7 @@
                 OperationCode.D2
             };
 
-            notification.UpdateOperationCodes(codes);
+            notification.SetOperationCodes(codes);
 
             Assert.Collection(notification.OperationInfos,
                 item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.D1),
@@ -58,7 +58,7 @@
                 OperationCode.D2
             };
 
-            Action updateCodes = () => notification.UpdateOperationCodes(codes);
+            Action updateCodes = () => notification.SetOperationCodes(codes);
 
             Assert.Throws<InvalidOperationException>(updateCodes);
         }
@@ -75,7 +75,7 @@
                 OperationCode.R2
             };
 
-            Action updateCodes = () => notification.UpdateOperationCodes(codes);
+            Action updateCodes = () => notification.SetOperationCodes(codes);
 
             Assert.Throws<InvalidOperationException>(updateCodes);
         }
@@ -98,8 +98,8 @@
                 OperationCode.R4
             };
 
-            notification.UpdateOperationCodes(codes);
-            notification.UpdateOperationCodes(newCodes);
+            notification.SetOperationCodes(codes);
+            notification.SetOperationCodes(newCodes);
 
             Assert.Collection(notification.OperationInfos,
                 item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R3),

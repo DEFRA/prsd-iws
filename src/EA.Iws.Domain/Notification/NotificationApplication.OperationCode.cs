@@ -6,7 +6,7 @@
 
     public partial class NotificationApplication
     {
-        public void UpdateOperationCodes(IEnumerable<OperationCode> operationCodes)
+        public void SetOperationCodes(IEnumerable<OperationCode> operationCodes)
         {
             var operationCodesList = operationCodes as IList<OperationCode> ?? operationCodes.ToList();
             if (operationCodesList.Any(p => p.NotificationType != NotificationType))

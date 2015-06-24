@@ -27,7 +27,7 @@
 
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
 
-            notification.UpdateOperationCodes(disposalCodes);
+            notification.SetOperationCodes(disposalCodes);
 
             await db.SaveChangesAsync();
 

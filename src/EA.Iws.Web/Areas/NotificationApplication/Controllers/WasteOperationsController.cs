@@ -245,9 +245,9 @@
                 {
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new UpdateTechnologyEmployed(model.NotificationId, model.AnnexPorvided, model.Details));
+                            new SetTechnologyEmployed(model.NotificationId, model.AnnexPorvided, model.Details));
 
-                    return RedirectToAction("ReasonForExport", "Home",
+                    return RedirectToAction("Index", "ReasonForExport",
                         new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)

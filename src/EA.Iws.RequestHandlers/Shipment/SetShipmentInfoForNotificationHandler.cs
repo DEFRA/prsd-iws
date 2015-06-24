@@ -27,7 +27,7 @@
                     db.NotificationApplications.Include(n => n.ShipmentInfo)
                         .SingleAsync(n => n.Id == command.NotificationId);
 
-            notification.UpdateShipmentInfo(command.StartDate, command.EndDate, command.NumberOfShipments,
+            notification.SetShipmentInfo(command.StartDate, command.EndDate, command.NumberOfShipments,
                 command.Quantity, shipmentQuantityUnitsMapper.Map(command.Units));
 
             await db.SaveChangesAsync();

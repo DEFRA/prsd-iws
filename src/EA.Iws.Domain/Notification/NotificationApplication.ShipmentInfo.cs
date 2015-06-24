@@ -9,7 +9,7 @@
             get { return ShipmentInfo != null; }
         }
 
-        public void UpdateShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
+        public void SetShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
         {
             int monthPeriodLength = IsPreconsentedRecoveryFacility.GetValueOrDefault() ? 36 : 12;
             if (lastDate > firstDate.AddMonths(monthPeriodLength))

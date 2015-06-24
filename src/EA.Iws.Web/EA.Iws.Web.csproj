@@ -528,7 +528,7 @@
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\Add.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\ReasonForExport.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ReasonForExport\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\CountrySelector.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\OtherDetailsSelector.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\Edit.cshtml" />
@@ -574,6 +574,7 @@
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\MeansOfTransportController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\ReasonForExportController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\CustomsOffice\CustomsOfficeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\NotificationApplicationAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\PackagingTypesController.cs" />

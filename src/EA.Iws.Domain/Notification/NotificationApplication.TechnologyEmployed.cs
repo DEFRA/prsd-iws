@@ -1,7 +1,5 @@
 ﻿namespace EA.Iws.Domain.Notification
 {
-    using System;
-
     public partial class NotificationApplication
     {
         public bool HasTechnologyEmployed
@@ -9,12 +7,9 @@
             get { return TechnologyEmployed != null; }
         }
 
-        public void UpdateTechnologyEmployed(bool annexProvided, string details)
+        public void SetTechnologyEmployed(TechnologyEmployed technologyEmployed)
         {
-            if (TechnologyEmployed == null)
-            {
-                TechnologyEmployed = new TechnologyEmployed(annexProvided, details);
-            }
+            TechnologyEmployed = technologyEmployed;
         }
     }
 }

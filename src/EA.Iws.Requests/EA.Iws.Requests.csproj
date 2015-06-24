@@ -133,7 +133,7 @@
     <Compile Include="StateOfExport\GetStateOfExportForNotification.cs" />
     <Compile Include="StateOfImport\AddStateOfImportToNotification.cs" />
     <Compile Include="TransitState\AddTransitStateToNotification.cs" />
-    <Compile Include="TechnologyEmployed\UpdateTechnologyEmployed.cs" />
+    <Compile Include="TechnologyEmployed\SetTechnologyEmployed.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
     <Compile Include="WasteType\ChemicalCompositionType.cs" />
     <Compile Include="WasteType\CodeType.cs" />

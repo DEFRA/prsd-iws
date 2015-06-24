@@ -4,22 +4,26 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Notification;
     using Prsd.Core.Mediator;
     using Requests.TechnologyEmployed;
 
-    public class UpdateTechnologyEmployedHandler : IRequestHandler<UpdateTechnologyEmployed, Guid>
+    public class SetTechnologyEmployedHandler : IRequestHandler<SetTechnologyEmployed, Guid>
     {
         private readonly IwsContext context;
 
-        public UpdateTechnologyEmployedHandler(IwsContext context)
+        public SetTechnologyEmployedHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(UpdateTechnologyEmployed command)
+        public async Task<Guid> HandleAsync(SetTechnologyEmployed command)
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
-            notification.UpdateTechnologyEmployed(command.AnnexProvided, command.Details);
+
+            var technologyEmployed = command.AnnexProvided ? TechnologyEmployed.CreateTechnologyEmployedInAnnex() : TechnologyEmployed.CreateTechnologyEmployedDetails(command.Details);
+
+            notification.SetTechnologyEmployed(technologyEmployed);
 
             await context.SaveChangesAsync();
 
