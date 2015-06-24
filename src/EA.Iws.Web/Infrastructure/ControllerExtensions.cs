@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Requests.Registration;
     using Requests.Shared;
 
     public static class ControllerExtensions
@@ -29,7 +30,8 @@
             }
             else
             {
-                controller.ViewBag.Countries = new SelectList(response, "Id", "Name");
+                response.Insert(0, new CountryData { Id = new Guid(), Name = string.Empty});
+                controller.ViewBag.Countries = new SelectList(response, "Id", "Name", new Guid());
             }
         }
 

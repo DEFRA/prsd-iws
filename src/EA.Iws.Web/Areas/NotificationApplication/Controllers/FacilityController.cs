@@ -45,7 +45,7 @@
                 facility.NotificationType = response.NotificationType;
                 facility.NotificationId = id;
 
-                await this.BindCountryList(client);
+                await this.BindCountryList(client, false);
                 facility.Address.DefaultCountryId = this.GetDefaultCountryId();
             }
             return View(facility);
@@ -57,7 +57,7 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(apiClient);
+                await this.BindCountryList(apiClient, false);
                 return View(model);
             }
 
@@ -78,7 +78,7 @@
                         throw;
                     }
                 }
-                await this.BindCountryList(client);
+                await this.BindCountryList(client, false);
                 return View(model);
             }
         }
@@ -98,7 +98,7 @@
 
                 var model = new EditFacilityViewModel(facility) { NotificationType = response.NotificationType };
 
-                await this.BindCountryList(client);
+                await this.BindCountryList(client, false);
                 facility.Address.DefaultCountryId = this.GetDefaultCountryId();
 
                 return View(model);
@@ -111,7 +111,7 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(apiClient);
+                await this.BindCountryList(apiClient, false);
                 return View(model);
             }
 
@@ -135,7 +135,7 @@
                         throw;
                     }
                 }
-                await this.BindCountryList(client);
+                await this.BindCountryList(client, false);
                 return View(model);
             }
         }

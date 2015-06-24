@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Registration
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,7 +9,7 @@
     using Requests.Registration;
     using Requests.Shared;
 
-    internal class GetCountriesHandler : IRequestHandler<GetCountries, CountryData[]>
+    internal class GetCountriesHandler : IRequestHandler<GetCountries, List<CountryData>>
     {
         private readonly IwsContext context;
 
@@ -17,7 +18,7 @@
             this.context = context;
         }
 
-        public async Task<CountryData[]> HandleAsync(GetCountries query)
+        public async Task<List<CountryData>> HandleAsync(GetCountries query)
         {
             var result = await context.Countries.ToArrayAsync();
             var countryData = result.Select(c => new CountryData
@@ -25,7 +26,7 @@
                 Name = c.Name,
                 Id = c.Id
             }).OrderBy(c => c.Name).ToArray();
-            return countryData;
+            return countryData.ToList();
         }
     }
 }

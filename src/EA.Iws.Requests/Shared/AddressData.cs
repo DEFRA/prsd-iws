@@ -1,10 +1,11 @@
 ﻿namespace EA.Iws.Requests.Shared
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Prsd.Core.Validation;
 
-    public class AddressData
+    public class AddressData : IValidatableObject
     {
         private const string DefaultCountryName = "United Kingdom";
 
@@ -38,5 +39,13 @@
 
         [Display(Name = "Country")]
         public string CountryName { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (CountryId == new Guid())
+            {
+                yield return new ValidationResult("Please select a country");
+            }
+        }
     }
 }
