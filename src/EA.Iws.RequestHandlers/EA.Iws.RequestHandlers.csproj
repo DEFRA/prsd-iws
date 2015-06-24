@@ -116,6 +116,7 @@
     <Compile Include="Mappings\TransitStateMap.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
+    <Compile Include="Notification\GetReasonForExportHandler.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Notification\SetReasonForExportHandler.cs" />

@@ -20,10 +20,19 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            var model = new ReasonForExportViewModel { NotificationId = id };
-            return View(model);
+            using (var client = apiClient())
+            {
+                var reasonForExport = await client.SendAsync(User.GetAccessToken(), new GetReasonForExport(id));
+
+                var model = new ReasonForExportViewModel
+                {
+                    NotificationId = id,
+                    ReasonForExport = reasonForExport
+                };
+                return View(model);
+            }
         }
 
         [HttpPost]

@@ -74,6 +74,7 @@
     <Compile Include="MeansOfTransport\SetMeansOfTransportForNotification.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\GetIsPreconsentedRecoveryFacility.cs" />
+    <Compile Include="Notification\GetReasonForExport.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotification.cs" />
     <Compile Include="Notification\NotificationInfo.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
