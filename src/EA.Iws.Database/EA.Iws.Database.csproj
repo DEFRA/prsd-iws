@@ -113,6 +113,7 @@
     <Content Include="scripts\Update\Sprint09\20150616-090122-Add-WasteCodeInfo-Table.sql" />
     <Content Include="scripts\Update\Sprint09\20150616-090425-Add-EWC-Codes-To-WasteCode.sql" />
     <Content Include="scripts\Update\Sprint09\20150616-143000-add-netherlands-data-to-lookup.sql" />
+    <Content Include="scripts\Update\Sprint10\20150622-140000-add-customs-office-tables.sql" />
     <Content Include="scripts\Update\Sprint10\20150623-113600-drop-unused-tables-and-columns.sql" />
     <Content Include="scripts\Update\Sprint10\20150617-161000-add-means-of-transport-column.sql" />
     <Content Include="scripts\Update\Sprint10\20150623-090511-Add-Optional-Waste-Codes.sql" />
@@ -120,6 +121,7 @@
     <Content Include="scripts\Update\Sprint10\20150615-347600-add-y-codes.sql" />
     <Content Include="scripts\Update\Sprint10\20150615-746500-add-un-classes.sql" />
     <Content Include="scripts\Update\Sprint10\20150615-987300-add-h-codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150623-120000-set-eu-members.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />
