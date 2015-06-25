@@ -4,7 +4,7 @@
 
     public class TrueFalseViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please answer this question")]
         public bool? Value { get; set; }
     }
 }
