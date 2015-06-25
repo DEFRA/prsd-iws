@@ -88,6 +88,7 @@
     <Compile Include="Mappings\CustomsOfficeMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMap.cs" />
+    <Compile Include="Mappings\PreconsentedFacilityMap.cs" />
     <Compile Include="Mappings\RecoveryPercentageMap.cs" />
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
     <Compile Include="Mappings\ShipmentQuantityUnitsMap.cs" />

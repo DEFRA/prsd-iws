@@ -187,8 +187,7 @@
                 }
             }
 
-            if (String.Equals(model.NotificationType.ToString(), NotificationType.Recovery.ToString(),
-                StringComparison.InvariantCulture))
+            if (model.NotificationType == NotificationType.Recovery)
             {
                 return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
             }
@@ -199,12 +198,22 @@
         }
 
         [HttpGet]
-        public ActionResult RecoveryPreconsent(Guid id)
+        public async Task<ActionResult> RecoveryPreconsent(Guid id)
         {
-            var model = new TrueFalseViewModel();
-            ViewBag.NotificationId = id;
+            using (var client = apiClient())
+            {
+                var preconsentedFacilityData =
+                    await client.SendAsync(User.GetAccessToken(), new GetIsPreconsentedRecoveryFacility(id));
 
-            return View(model);
+                if (preconsentedFacilityData.NotificationType == NotificationType.Disposal)
+                {
+                    return RedirectToAction("OperationCodes", "WasteOperations", new { id });
+                }
+
+                var model = new TrueFalseViewModel { Value = preconsentedFacilityData.IsPreconsentedRecoveryFacility };
+
+                return View(model);
+            }
         }
 
         [HttpPost]

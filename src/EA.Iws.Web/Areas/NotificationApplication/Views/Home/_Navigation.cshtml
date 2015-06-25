@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Web.Infrastructure
+﻿@using EA.Iws.Requests.Shared
+@using EA.Iws.Web.Infrastructure
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
 
 <p>
@@ -12,7 +13,10 @@
 @Html.Navigation().Link(Model.NotificationType + " facility", false, "List", "Facility", "NotificationApplication")
 
 <h4>Recovery operation</h4>
-@Html.Navigation().Link("Pre-consent facility", false, "RecoveryPreconsent", "Facility", "NotificationApplication")
+@if (Model.NotificationType == NotificationType.Recovery)
+{
+    @Html.Navigation().Link("Pre-consent facility", false, "RecoveryPreconsent", "Facility", "NotificationApplication")
+}
 @Html.Navigation().Link(Model.NotificationType + " codes", false, "OperationCodes", "WasteOperations", "NotificationApplication", additionalActiveActionNames: new[] { "AddRecoveryCodes", "AddDisposalCodes" })
 @Html.Navigation().Link("Technology employed", false, "TechnologyEmployed", "WasteOperations", "NotificationApplication")
 @Html.Navigation().Link("Reason for export", false, "Index", "ReasonForExport", "NotificationApplication")

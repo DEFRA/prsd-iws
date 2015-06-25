@@ -22,7 +22,7 @@
             viewModel.IsHundredPercentRecoverable = null;
 
             var controller = GetMockRecoveryInfoController(viewModel);
-            var result = await controller.AddRecoveryPercentage(viewModel) as ViewResult;
+            var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -35,7 +35,7 @@
             viewModel.PercentageRecoverable = null;
 
             var controller = GetMockRecoveryInfoController(viewModel);
-            var result = await controller.AddRecoveryPercentage(viewModel) as ViewResult;
+            var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -48,7 +48,7 @@
             viewModel.MethodOfDisposal = null;
 
             var controller = GetMockRecoveryInfoController(viewModel);
-            var result = await controller.AddRecoveryPercentage(viewModel) as ViewResult;
+            var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -61,7 +61,7 @@
             viewModel.MethodOfDisposal = string.Empty;
 
             var controller = GetMockRecoveryInfoController(viewModel);
-            var result = await controller.AddRecoveryPercentage(viewModel) as ViewResult;
+            var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }

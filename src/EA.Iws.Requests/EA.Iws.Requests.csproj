@@ -79,6 +79,7 @@
     <Compile Include="Notification\GetSpecialHandingForNotification.cs" />
     <Compile Include="Notification\NotificationInfo.cs" />
     <Compile Include="Notification\GetNotificationInfo.cs" />
+    <Compile Include="Notification\PreconsentedFacilityData.cs" />
     <Compile Include="Notification\RecoveryPercentageData.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />

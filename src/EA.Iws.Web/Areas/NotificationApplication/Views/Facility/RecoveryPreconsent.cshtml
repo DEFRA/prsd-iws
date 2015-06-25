@@ -3,7 +3,7 @@
     ViewBag.Title = "Is Recovery Facility Pre-consented?";
 }
 
-@using (Html.BeginForm(actionName: "RecoveryPreconsent", controllerName: "Facility", routeValues: new { id = ViewBag.NotificationId }, method: FormMethod.Post))
+@using (Html.BeginForm(actionName: "RecoveryPreconsent", controllerName: "Facility", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -27,7 +27,7 @@
                 @Html.RadioButtonFor(m => m.Value, false, new { id = "rdoNo" })
                 No
             </label>
-            <div class="panel-indent @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="no-message">
+            <div class="panel-indent @(!Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="no-message">
                 <p>This notification will allow the intended shipment dates to cover a 12 month period.</p>
             </div>
         </fieldset>

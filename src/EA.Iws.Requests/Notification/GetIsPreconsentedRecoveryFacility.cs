@@ -3,8 +3,13 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class GetIsPreconsentedRecoveryFacility : IRequest<bool>
+    public class GetIsPreconsentedRecoveryFacility : IRequest<PreconsentedFacilityData>
     {
-        public Guid NotificationId { get; set; }
+        public GetIsPreconsentedRecoveryFacility(Guid notificationId)
+        {
+            NotificationId = notificationId;
+        }
+
+        public Guid NotificationId { get; private set; }
     }
 }
