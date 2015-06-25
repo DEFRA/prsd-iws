@@ -10,6 +10,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.WasteType;
     using Xunit;
 
     public class YcodeHcodeUnClassViewModelTests

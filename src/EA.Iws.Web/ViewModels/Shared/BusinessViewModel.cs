@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.ViewModels.Shared
 {
     using System.ComponentModel.DataAnnotations;
+    using Core.Shared;
     using Prsd.Core.Helpers;
     using Prsd.Core.Validation;
     using Requests.Shared;

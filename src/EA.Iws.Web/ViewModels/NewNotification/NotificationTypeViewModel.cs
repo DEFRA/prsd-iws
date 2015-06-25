@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Core.Notification;
+    using Core.Shared;
     using Requests.Notification;
     using Requests.Shared;
 

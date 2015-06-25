@@ -3,6 +3,8 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Organisations;
+    using Core.Shared;
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.Organisations;

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using Core.Shipment;
     using Domain.Notification;
     using Prsd.Core.Mapper;
     using Requests.Shipment;

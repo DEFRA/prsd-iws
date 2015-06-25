@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility
 {
     using System;
+    using Core.Shared;
     using Requests.Facilities;
     using Requests.Shared;
     using Web.ViewModels.Shared;

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Domain.Notification;
     using Prsd.Core.Mapper;
-    using DisposalCode = Requests.OperationCodes.DisposalCode;
+    using DisposalCode = Core.OperationCodes.DisposalCode;
 
     internal class DisposalCodesMap : IMap<IList<DisposalCode>, IList<OperationCode>>
     {

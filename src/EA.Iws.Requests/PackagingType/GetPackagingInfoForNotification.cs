@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.PackagingType
 {
     using System;
+    using Core.PackagingType;
     using Prsd.Core.Mediator;
 
     public class GetPackagingInfoForNotification : IRequest<PackagingData>

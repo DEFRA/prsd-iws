@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Producers;
+    using Core.Shared;
     using Domain;
     using Domain.Notification;
     using Prsd.Core.Mapper;

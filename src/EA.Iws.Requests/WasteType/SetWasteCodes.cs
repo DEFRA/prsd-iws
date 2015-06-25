@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.WasteType;
     using Prsd.Core.Mediator;
 
     public class SetWasteCodes : IRequest<Guid>

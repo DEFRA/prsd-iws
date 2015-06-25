@@ -17,9 +17,9 @@
             };
         }
 
-        private static Requests.Shared.NotificationType GetNotificationType(NotificationType type)
+        private static Core.Shared.NotificationType GetNotificationType(NotificationType type)
         {
-            Requests.Shared.NotificationType notificationType;
+            Core.Shared.NotificationType notificationType;
             if (Enum.TryParse(type.Value.ToString(), out notificationType))
             {
                 return notificationType;

@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer
 {
     using System;
+    using Core.Exporters;
+    using Core.Shared;
     using Requests.Exporters;
     using Requests.Producers;
     using Requests.Shared;

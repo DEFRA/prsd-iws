@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
+    using Core.Registration;
     using Core.Shared;
     using Infrastructure;
     using Microsoft.Owin.Security;

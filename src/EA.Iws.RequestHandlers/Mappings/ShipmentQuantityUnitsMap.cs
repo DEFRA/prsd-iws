@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
+    using Core.Shipment;
     using Prsd.Core.Mapper;
     using Requests.Shipment;
 

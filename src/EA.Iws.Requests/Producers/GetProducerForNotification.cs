@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.Producers
 {
     using System;
+    using Core.Producers;
     using Prsd.Core.Mediator;
 
     public class GetProducerForNotification : IRequest<ProducerData>

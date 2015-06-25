@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.Facilities
 {
     using System;
+    using Core.Shared;
     using Prsd.Core.Mediator;
     using Shared;
 

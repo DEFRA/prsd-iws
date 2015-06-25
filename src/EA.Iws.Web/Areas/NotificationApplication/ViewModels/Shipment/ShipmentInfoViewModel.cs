@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Core.Shipment;
     using Prsd.Core;
     using Prsd.Core.Helpers;
     using Requests.Shipment;

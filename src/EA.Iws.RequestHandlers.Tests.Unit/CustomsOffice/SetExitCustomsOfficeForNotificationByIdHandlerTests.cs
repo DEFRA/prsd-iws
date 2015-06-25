@@ -14,6 +14,7 @@
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationType = Domain.Notification.NotificationType;
     using StateOfExport = Domain.TransportRoute.StateOfExport;
     using StateOfImport = Domain.TransportRoute.StateOfImport;
 

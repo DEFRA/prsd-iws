@@ -3,6 +3,10 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.StateOfExport;
+    using Core.StateOfImport;
+    using Core.TransitState;
+    using Core.TransportRoute;
     using DataAccess;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;

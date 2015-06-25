@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.WasteType;
     using DataAccess;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;

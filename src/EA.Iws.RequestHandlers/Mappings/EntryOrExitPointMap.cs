@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using Core.TransportRoute;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Requests.TransportRoute;

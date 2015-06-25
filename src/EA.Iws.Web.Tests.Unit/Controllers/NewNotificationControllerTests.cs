@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.Shared;
     using FakeItEasy;
     using Requests.Notification;
     using Requests.Shared;

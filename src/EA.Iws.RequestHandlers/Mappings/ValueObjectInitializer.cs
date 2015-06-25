@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
+    using Core.Shared;
     using Domain;
     using Requests.Shared;
-    using BusinessType = Requests.Shared.BusinessType;
+    using BusinessType = Core.Shared.BusinessType;
 
     internal class ValueObjectInitializer
     {

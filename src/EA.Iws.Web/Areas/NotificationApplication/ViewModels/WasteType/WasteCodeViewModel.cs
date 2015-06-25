@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Requests.WasteType;
+    using Core.WasteType;
 
     public class WasteCodeViewModel : IValidatableObject
     {

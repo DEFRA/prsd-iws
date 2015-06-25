@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Carriers;
     using Prsd.Core.Mediator;
 
     public class GetCarriersByNotificationId : IRequest<IEnumerable<CarrierData>>

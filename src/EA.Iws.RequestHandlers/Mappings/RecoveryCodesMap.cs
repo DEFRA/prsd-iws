@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Domain.Notification;
     using Prsd.Core.Mapper;
-    using RecoveryCode = Requests.OperationCodes.RecoveryCode;
+    using RecoveryCode = Core.OperationCodes.RecoveryCode;
 
     internal class RecoveryCodesMap : IMap<IList<RecoveryCode>, IList<OperationCode>>
     {

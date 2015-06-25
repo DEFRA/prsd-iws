@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter
 {
     using System;
+    using Core.Exporters;
+    using Core.Shared;
     using Requests.Exporters;
     using Requests.Shared;
     using Web.ViewModels.Shared;

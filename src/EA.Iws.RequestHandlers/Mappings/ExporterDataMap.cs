@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
+    using Core.Exporters;
+    using Core.Shared;
     using Domain;
     using Domain.Notification;
     using Prsd.Core.Mapper;

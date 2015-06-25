@@ -14,6 +14,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.StateOfExport;
+    using Core.TransportRoute;
     using Web.ViewModels.Shared;
     using Xunit;
 

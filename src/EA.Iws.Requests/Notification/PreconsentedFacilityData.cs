@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
-    using Shared;
+    using Core.Shared;
 
     public class PreconsentedFacilityData
     {

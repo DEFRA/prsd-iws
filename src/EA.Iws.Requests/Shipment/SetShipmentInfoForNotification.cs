@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.Shipment
 {
     using System;
+    using Core.Shipment;
     using Prsd.Core.Mediator;
 
     public class SetShipmentInfoForNotification : IRequest<Guid>

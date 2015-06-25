@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using Core.WasteType;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Requests.WasteType;

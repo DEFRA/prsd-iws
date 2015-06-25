@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.Carriers
 {
     using System;
+    using Core.Carriers;
     using Prsd.Core.Mediator;
 
     public class GetCarrierForNotification : IRequest<CarrierData>

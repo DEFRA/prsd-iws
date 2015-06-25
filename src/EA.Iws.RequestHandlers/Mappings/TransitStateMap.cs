@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.Shared;
+    using Core.TransitState;
+    using Core.TransportRoute;
     using Domain;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;

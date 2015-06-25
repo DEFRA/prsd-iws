@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
+    using Core.WasteType;
     using Domain.Notification;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Requests.WasteType;
-    using CodeType = Requests.WasteType.CodeType;
+    using CodeType = Core.WasteType.CodeType;
 
     internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>
     {

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Requests.WasteType;
+    using Core.WasteType;
     using Web.ViewModels.Shared;
 
     public class ChemicalCompositionViewModel : IValidatableObject
@@ -24,14 +24,14 @@
         {
             var results = new List<ValidationResult>();
 
-            if (ChemicalCompositionType.SelectedValue == Requests.WasteType.ChemicalCompositionType.Wood.ToString())
+            if (ChemicalCompositionType.SelectedValue == Core.WasteType.ChemicalCompositionType.Wood.ToString())
             {
                 if (String.IsNullOrWhiteSpace(Description))
                 {
                     results.Add(new ValidationResult("The chemical composition of the waste is required."));
                 }
             }
-            else if (ChemicalCompositionType.SelectedValue == Requests.WasteType.ChemicalCompositionType.Other.ToString())
+            else if (ChemicalCompositionType.SelectedValue == Core.WasteType.ChemicalCompositionType.Other.ToString())
             {
                 if (String.IsNullOrWhiteSpace(OtherCompositionName))
                 {

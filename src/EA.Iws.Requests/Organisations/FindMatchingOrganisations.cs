@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Organisations;
     using Prsd.Core.Mediator;
 
     public class FindMatchingOrganisations : IRequest<IList<OrganisationData>>

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.OperationCodes;
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.OperationCodes;

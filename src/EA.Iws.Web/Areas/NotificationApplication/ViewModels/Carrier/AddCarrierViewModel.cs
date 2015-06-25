@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier
 {
     using System;
+    using Core.Shared;
     using Requests.Carriers;
     using Requests.Shared;
     using Web.ViewModels.Shared;

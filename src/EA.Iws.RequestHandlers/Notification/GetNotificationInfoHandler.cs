@@ -2,6 +2,7 @@
 {
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.Notification;
     using DataAccess;
     using Domain.Notification;
     using Prsd.Core.Mediator;
@@ -27,8 +28,8 @@
                 NotificationNumber = notification.NotificationNumber,
                 NotificationType =
                     notification.NotificationType == NotificationType.Disposal
-                        ? Requests.Shared.NotificationType.Disposal
-                        : Requests.Shared.NotificationType.Recovery
+                        ? Core.Shared.NotificationType.Disposal
+                        : Core.Shared.NotificationType.Recovery
             };
         }
     }

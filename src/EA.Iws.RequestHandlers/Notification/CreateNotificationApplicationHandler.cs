@@ -9,7 +9,8 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Notification;
-    using NotificationType = Requests.Shared.NotificationType;
+    using CompetentAuthority = Core.Notification.CompetentAuthority;
+    using NotificationType = Core.Shared.NotificationType;
 
     internal class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
     {
@@ -31,16 +32,16 @@
 
             switch (command.CompetentAuthority)
             {
-                case Requests.Notification.CompetentAuthority.England:
+                case CompetentAuthority.England:
                     authority = UKCompetentAuthority.England;
                     break;
-                case Requests.Notification.CompetentAuthority.NorthernIreland:
+                case CompetentAuthority.NorthernIreland:
                     authority = UKCompetentAuthority.NorthernIreland;
                     break;
-                case Requests.Notification.CompetentAuthority.Scotland:
+                case CompetentAuthority.Scotland:
                     authority = UKCompetentAuthority.Scotland;
                     break;
-                case Requests.Notification.CompetentAuthority.Wales:
+                case CompetentAuthority.Wales:
                     authority = UKCompetentAuthority.Wales;
                     break;
                 default:

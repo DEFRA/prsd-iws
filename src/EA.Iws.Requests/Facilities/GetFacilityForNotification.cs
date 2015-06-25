@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.Facilities
 {
     using System;
+    using Core.Facilities;
     using Prsd.Core.Mediator;
 
     public class GetFacilityForNotification : IRequest<FacilityData>

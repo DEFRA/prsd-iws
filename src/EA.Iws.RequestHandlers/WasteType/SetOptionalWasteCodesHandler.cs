@@ -13,8 +13,8 @@
     internal class SetOptionalWasteCodesHandler : IRequestHandler<SetOptionalWasteCodes, Guid>
     {
         private readonly IwsContext db;
-        private readonly IMap<Requests.WasteType.CodeType, CodeType> mapper;
-        public SetOptionalWasteCodesHandler(IwsContext db, IMap<Requests.WasteType.CodeType, CodeType> mapper)
+        private readonly IMap<Core.WasteType.CodeType, CodeType> mapper;
+        public SetOptionalWasteCodesHandler(IwsContext db, IMap<Core.WasteType.CodeType, CodeType> mapper)
         {
             this.db = db;
             this.mapper = mapper;

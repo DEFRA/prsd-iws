@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.OperationCodes;
     using Prsd.Core.Mediator;
 
     public class AddRecoveryCodes : IRequest<Guid>

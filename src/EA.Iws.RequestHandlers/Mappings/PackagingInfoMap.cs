@@ -3,11 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.PackagingType;
     using Domain.Notification;
     using Prsd.Core.Mapper;
     using Requests.PackagingType;
     using Requests.Shipment;
-    using PackagingType = Requests.PackagingType.PackagingType;
+    using PackagingType = Core.PackagingType.PackagingType;
 
     internal class PackagingInfoMap : IMap<SetPackagingInfoForNotification, IEnumerable<PackagingInfo>>,
         IMap<NotificationApplication, PackagingData>

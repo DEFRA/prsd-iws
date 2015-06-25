@@ -2,6 +2,7 @@
 {
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.Producers;
     using DataAccess;
     using Domain.Notification;
     using Mappings;

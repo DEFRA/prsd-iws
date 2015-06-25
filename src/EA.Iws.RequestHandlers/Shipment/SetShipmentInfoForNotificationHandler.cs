@@ -3,6 +3,7 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.Shipment;
     using DataAccess;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;

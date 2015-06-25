@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Core.WasteType;
     using Requests.WasteType;
 
     public class UnNumberViewModel : IValidatableObject

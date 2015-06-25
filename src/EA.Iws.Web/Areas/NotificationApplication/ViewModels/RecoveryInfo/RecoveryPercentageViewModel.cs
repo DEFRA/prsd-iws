@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Core.Notification;
     using Requests.Notification;
 
     public class RecoveryPercentageViewModel : IValidatableObject

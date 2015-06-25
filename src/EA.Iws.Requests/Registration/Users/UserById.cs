@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.Registration.Users
 {
     using System;
+    using Core.Registration.Users;
     using Prsd.Core.Mediator;
 
     public class UserById : IRequest<User>

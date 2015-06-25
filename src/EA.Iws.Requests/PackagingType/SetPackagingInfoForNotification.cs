@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.PackagingType;
     using Prsd.Core.Mediator;
 
     public class SetPackagingInfoForNotification : IRequest<Guid>

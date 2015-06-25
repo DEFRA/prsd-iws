@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Facilities;
+    using Core.Shared;
     using Requests.Facilities;
     using Requests.Shared;
 

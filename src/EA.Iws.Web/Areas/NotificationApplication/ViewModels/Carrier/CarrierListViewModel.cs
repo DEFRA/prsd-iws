@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Requests.Carriers;
+    using Core.Carriers;
 
     public class CarrierListViewModel
     {

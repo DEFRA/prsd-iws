@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Importer
 {
     using System;
+    using Core.Importer;
+    using Core.Shared;
     using Requests.Importer;
     using Requests.Shared;
     using Web.ViewModels.Shared;
