@@ -11,19 +11,19 @@
         public IEnumerable OperationCodes { get; set; }
 
         [Display(Name = "I will provide these details in an annex when I submit my notification")]
-        public bool AnnexPorvided { get; set; }
+        public bool AnnexProvided { get; set; }
 
         [Display(Name = "Display name for details")]
         public string Details { get; set; }
 
         public System.Collections.Generic.IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!AnnexPorvided && string.IsNullOrEmpty(Details))
+            if (!AnnexProvided && string.IsNullOrEmpty(Details))
             {
                 yield return new ValidationResult("Please enter details or indicate that you will be providing them in a separate annex.");
             }
 
-            if (AnnexPorvided && !(string.IsNullOrEmpty(Details)))
+            if (AnnexProvided && !(string.IsNullOrEmpty(Details)))
             {
                 yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here.");
             }

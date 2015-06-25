@@ -72,6 +72,7 @@
     <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Shared\CountryData.cs" />
     <Compile Include="Shared\NotificationType.cs" />
+    <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="Shipment\ShipmentQuantityUnits.cs" />
     <Compile Include="StateOfExport\StateOfExportData.cs" />

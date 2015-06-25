@@ -93,6 +93,7 @@
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
     <Compile Include="Mappings\ShipmentQuantityUnitsMap.cs" />
     <Compile Include="Mappings\SpecialHandlingMap.cs" />
+    <Compile Include="Mappings\TechnologyEmployedMap.cs" />
     <Compile Include="Mappings\WasteCodeMap.cs" />
     <Compile Include="Mappings\WasteCompositionMap.cs" />
     <Compile Include="Mappings\WasteTypeMap.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="StateOfExport\GetStateOfExportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\AddStateOfImportToNotificationHandler.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotificationHandler.cs" />
+    <Compile Include="TechnologyEmployed\GetTechnologyEmployedHandler.cs" />
     <Compile Include="TransitState\AddStateOfImportToNotificationHandler.cs" />
     <Compile Include="TechnologyEmployed\SetTechnologyEmployedHandler.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountryHandler.cs" />

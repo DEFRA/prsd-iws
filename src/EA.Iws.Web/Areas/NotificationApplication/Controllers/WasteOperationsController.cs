@@ -212,58 +212,41 @@
         [HttpGet]
         public async Task<ActionResult> TechnologyEmployed(Guid id)
         {
-            var model = new TechnologyEmployedViewModel();
-            model.NotificationId = id;
-            model.OperationCodes = await GetOperationCodes(id);
-
-            return View(model);
-        }
-
-        private async Task<List<string>> GetOperationCodes(Guid id)
-        {
-            var operationCodes = new List<string>();
-
             using (var client = apiClient())
             {
-                try
-                {
-                    var codeDatas =
-                        await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+                var model = new TechnologyEmployedViewModel();
+                model.NotificationId = id;
+                model.OperationCodes = await GetOperationCodes(id, client);
 
-                    var orderedCodeDatas = codeDatas.OrderBy(c => c.Value);
+                var technologyEmployedData =
+                    await client.SendAsync(User.GetAccessToken(), new GetTechnologyEmployed(id));
 
-                    foreach (var c in orderedCodeDatas)
-                    {
-                        operationCodes.Add(c.Code);
-                    }
-                }
-                catch (ApiBadRequestException ex)
+                if (technologyEmployedData.HasTechnologyEmployed)
                 {
-                    this.HandleBadRequest(ex);
+                    model.AnnexProvided = technologyEmployedData.AnnexProvided;
+                    model.Details = technologyEmployedData.Details;
                 }
+
+                return View(model);
             }
-
-            return operationCodes;
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> TechnologyEmployed(TechnologyEmployedViewModel model)
         {
-            model.OperationCodes = await GetOperationCodes(model.NotificationId);
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             using (var client = apiClient())
             {
+                if (!ModelState.IsValid)
+                {
+                    model.OperationCodes = await GetOperationCodes(model.NotificationId, client);
+                    return View(model);
+                }
                 try
                 {
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new SetTechnologyEmployed(model.NotificationId, model.AnnexPorvided, model.Details));
+                            new SetTechnologyEmployed(model.NotificationId, model.AnnexProvided, model.Details));
 
                     return RedirectToAction("Index", "ReasonForExport",
                         new { id = model.NotificationId });
@@ -280,6 +263,16 @@
 
                 return View(model);
             }
+        }
+
+        private async Task<List<string>> GetOperationCodes(Guid id, IIwsClient client)
+        {
+            var codeDatas =
+                await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+
+            var orderedCodeDatas = codeDatas.OrderBy(c => c.Value);
+
+            return orderedCodeDatas.Select(c => c.Code).ToList();
         }
     }
 }

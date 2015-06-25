@@ -112,6 +112,7 @@
     <Compile Include="StateOfExport\AddStateOfExportToNotification.cs" />
     <Compile Include="StateOfExport\GetStateOfExportForNotification.cs" />
     <Compile Include="StateOfImport\AddStateOfImportToNotification.cs" />
+    <Compile Include="TechnologyEmployed\GetTechnologyEmployed.cs" />
     <Compile Include="TransitState\AddTransitStateToNotification.cs" />
     <Compile Include="TechnologyEmployed\SetTechnologyEmployed.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
