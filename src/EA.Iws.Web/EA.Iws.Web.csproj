@@ -435,8 +435,7 @@
     <Content Include="Areas\NotificationApplication\Views\WasteType\UnNumber.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Exporter\_BusinessEditor.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\AddRecoveryPercentage.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\EditRecoveryPercentage.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryPercentage.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\_RecoveryPercentage.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />

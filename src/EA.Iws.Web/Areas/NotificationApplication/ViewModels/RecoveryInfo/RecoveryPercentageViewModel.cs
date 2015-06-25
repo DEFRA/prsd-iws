@@ -3,10 +3,52 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Prsd.Core.Validation;
+    using Requests.Notification;
 
     public class RecoveryPercentageViewModel : IValidatableObject
     {
+        public RecoveryPercentageViewModel()
+        {
+        }
+
+        public RecoveryPercentageViewModel(RecoveryPercentageData recoveryPercentageData)
+        {
+            NotificationId = recoveryPercentageData.NotificationId;
+            IsProvidedByImporter = recoveryPercentageData.IsProvidedByImporter.GetValueOrDefault();
+
+            if (recoveryPercentageData.PercentageRecoverable != null)
+            {
+                PercentageRecoverable = recoveryPercentageData.PercentageRecoverable;
+                MethodOfDisposal = recoveryPercentageData.MethodOfDisposal;
+                IsHundredPercentRecoverable = recoveryPercentageData.PercentageRecoverable == Convert.ToDecimal(100.00);
+            }
+        }
+
+        public SetRecoveryPercentageData ToRequest()
+        {
+            var percentage = PercentageRecoverable;
+            var isHundredPercentRecoverable = IsHundredPercentRecoverable;
+
+            if (!isHundredPercentRecoverable.HasValue)
+            {
+                isHundredPercentRecoverable = false;
+            }
+
+            if ((bool)isHundredPercentRecoverable)
+            {
+                percentage = Convert.ToDecimal(100.00);
+            }
+
+            if (IsProvidedByImporter)
+            {
+                percentage = null;
+                MethodOfDisposal = null;
+            }
+
+            return new SetRecoveryPercentageData(NotificationId, IsProvidedByImporter,
+                MethodOfDisposal, percentage);
+        }
+
         public Guid NotificationId { get; set; }
 
         [Display(Name = "Recovery information will be provided by the importer-consignee")]

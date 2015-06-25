@@ -407,7 +407,7 @@
                         await client.SendAsync(User.GetAccessToken(), new SetOptionalWasteCodes(model.NotificationId, wasteCodeData));
                     }
                     await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedUnCodes, model.NotificationId));
-                    return RedirectToAction("AddRecoveryPercentage", "RecoveryInfo");
+                    return RedirectToAction("RecoveryPercentage", "RecoveryInfo");
                 }
                 catch (ApiBadRequestException ex)
                 {
