@@ -1,10 +1,10 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.OperationCodesViewModel
 
 <header class="hgroup">
-    <h2 class="heading-large">Which disposal operation codes apply to this notification?</h2>
+    <h2 class="heading-large">Which recovery operation codes apply to this notification?</h2>
 </header>
 
-@using (Html.BeginForm("AddDisposalCodes", "WasteOperations", FormMethod.Post))
+@using (Html.BeginForm("RecoveryCodes", "WasteOperations", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

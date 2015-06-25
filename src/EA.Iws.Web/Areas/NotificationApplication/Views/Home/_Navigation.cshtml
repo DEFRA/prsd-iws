@@ -17,7 +17,7 @@
 {
     @Html.Navigation().Link("Pre-consent facility", false, "RecoveryPreconsent", "Facility", "NotificationApplication")
 }
-@Html.Navigation().Link(Model.NotificationType + " codes", false, "OperationCodes", "WasteOperations", "NotificationApplication", additionalActiveActionNames: new[] { "AddRecoveryCodes", "AddDisposalCodes" })
+@Html.Navigation().Link(Model.NotificationType + " codes", false, "OperationCodes", "WasteOperations", "NotificationApplication", additionalActiveActionNames: new[] { "RecoveryCodes", "DisposalCodes" })
 @Html.Navigation().Link("Technology employed", false, "TechnologyEmployed", "WasteOperations", "NotificationApplication")
 @Html.Navigation().Link("Reason for export", false, "Index", "ReasonForExport", "NotificationApplication")
 

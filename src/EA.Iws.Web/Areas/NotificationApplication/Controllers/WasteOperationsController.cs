@@ -40,12 +40,12 @@
 
                     if (response.NotificationType == NotificationType.Disposal)
                     {
-                        return RedirectToAction("AddDisposalCodes", "WasteOperations", new { id });
+                        return RedirectToAction("DisposalCodes", "WasteOperations", new { id });
                     }
 
                     if (response.NotificationType == NotificationType.Recovery)
                     {
-                        return RedirectToAction("AddRecoveryCodes", "WasteOperations", new { id });
+                        return RedirectToAction("RecoveryCodes", "WasteOperations", new { id });
                     }
                 }
                 catch (ApiBadRequestException ex)
@@ -64,7 +64,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> AddRecoveryCodes(Guid id)
+        public async Task<ActionResult> RecoveryCodes(Guid id)
         {
             var model = new OperationCodesViewModel { NotificationId = id };
             model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>();
@@ -88,7 +88,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddRecoveryCodes(OperationCodesViewModel model)
+        public async Task<ActionResult> RecoveryCodes(OperationCodesViewModel model)
         {
             model.CodeInformation = new Dictionary<string, string>();
 
@@ -137,7 +137,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> AddDisposalCodes(Guid id)
+        public async Task<ActionResult> DisposalCodes(Guid id)
         {
             var model = new OperationCodesViewModel { NotificationId = id };
             model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<DisposalCode>();
@@ -161,7 +161,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddDisposalCodes(OperationCodesViewModel model)
+        public async Task<ActionResult> DisposalCodes(OperationCodesViewModel model)
         {
             model.CodeInformation = new Dictionary<string, string>();
 

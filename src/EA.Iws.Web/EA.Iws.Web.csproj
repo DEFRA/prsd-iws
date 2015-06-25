@@ -517,8 +517,8 @@
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\ChemicalComposition.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringGuidRadioButtons.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteOperations\AddDisposalCodes.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteOperations\AddRecoveryCodes.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodes.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteOperations\RecoveryCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\PhysicalCharacteristics.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\WasteGenerationProcess.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteOperations\_OperationCodes.cshtml" />
