@@ -8,9 +8,9 @@
 
 <h4>Organisations involved</h4>
 @Html.Navigation().Link("Exporter notifier", Model.Progress.IsExporterCompleted, "Index", "Exporter", "NotificationApplication")
-@Html.Navigation().Link("Waste generator producer", Model.Progress.IsProducerCompleted, "List", "Producer", "NotificationApplication")
+@Html.Navigation().Link("Waste generator producer", Model.Progress.IsProducerCompleted, "List", "Producer", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
 @Html.Navigation().Link("Importer consignee", Model.Progress.IsImporterCompleted, "Index", "Importer", "NotificationApplication")
-@Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.IsFacilityCompleted, "List", "Facility", "NotificationApplication")
+@Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.IsFacilityCompleted, "List", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
 
 <h4>Recovery operation</h4>
 @if (Model.NotificationType == NotificationType.Recovery)
@@ -22,7 +22,7 @@
 @Html.Navigation().Link("Reason for export", Model.Progress.IsReasonForExportCompleted, "Index", "ReasonForExport", "NotificationApplication")
 
 <h4>The transportation</h4>
-@Html.Navigation().Link("Intended carrier", Model.Progress.IsCarrierCompleted, "List", "Carrier", "NotificationApplication")
+@Html.Navigation().Link("Intended carrier", Model.Progress.IsCarrierCompleted, "List", "Carrier", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
 @Html.Navigation().Link("Means of transport", Model.Progress.IsMeansOfTransportCompleted, "Index", "MeansOfTransport", "NotificationApplication")
 @Html.Navigation().Link("Packaging types", Model.Progress.IsPackagingTypesCompleted, "Index", "PackagingTypes", "NotificationApplication")
 @Html.Navigation().Link("Special handling", Model.Progress.IsSpecialHandlingCompleted, "Index", "SpecialHandling", "NotificationApplication")
