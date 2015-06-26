@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Core.WasteType;
-    using Requests.WasteType;
 
     public class UnNumberViewModel : IValidatableObject
     {
@@ -13,7 +12,6 @@
 
         public IEnumerable<WasteCodeData> UnCodes { get; set; }
 
-        [Display(Name = "UN Number")]
         public List<WasteCodeData> SelectedUnCodes { get; set; }
 
         [Display(Name = "UN Number")]
@@ -32,7 +30,7 @@
         {
             if (Command.Equals("save") && (SelectedUnCodes == null || !SelectedUnCodes.Any()))
             {
-                yield return new ValidationResult("Please enter a UN code");
+                yield return new ValidationResult("Enter the relevant UN number(s) or not applicable");
             }
         }
     }

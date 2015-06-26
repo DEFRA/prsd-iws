@@ -16,6 +16,7 @@
     <div class="form-group">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.ExportNationalCode)">
             @Html.Gds().LabelFor(m => m.ExportNationalCode)
+            @Html.Gds().HintSpan("Enter the relevant code or not applicable")
             @Html.Gds().ValidationMessageFor(m => m.ExportNationalCode)
             @Html.Gds().TextBoxFor(m => m.ExportNationalCode)
         </div>
@@ -23,6 +24,7 @@
     <div class="form-group">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.ImportNationalCode)">
             @Html.Gds().LabelFor(m => m.ImportNationalCode)
+            @Html.Gds().HintSpan("Enter the relevant code or not applicable")
             @Html.Gds().ValidationMessageFor(m => m.ImportNationalCode)
             @Html.Gds().TextBoxFor(m => m.ImportNationalCode)
         </div>
@@ -31,7 +33,7 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCode)">
             @Html.Gds().LabelFor(m => m.OtherCode)
             @Html.Gds().ValidationMessageFor(m => m.OtherCode)
-            @Html.Gds().HintParagraph("If useful or required by the relevant competant autority add any other code to help identify the waste")
+            @Html.Gds().HintParagraph("If useful or required by the relevant competent authority add any other code to help identify the waste")
             @Html.Gds().TextBoxFor(m => m.OtherCode)
         </div>
     </div>

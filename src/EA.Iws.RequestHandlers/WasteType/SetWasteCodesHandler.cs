@@ -21,9 +21,9 @@
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
 
-            foreach (var ewcWasteCode in command.EwcWasteCodes)
+            foreach (var code in command.WasteCodes)
             {
-                var id = ewcWasteCode.Id;
+                var id = code.Id;
                 var wasteCode = await db.WasteCodes.SingleAsync(w => w.Id == id);
                 notification.AddWasteCode(WasteCodeInfo.CreateWasteCodeInfo(wasteCode));
             }

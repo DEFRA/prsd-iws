@@ -538,7 +538,58 @@
             {
                 using (var client = apiClient())
                 {
-                    try
+                    if (model.SelectedYcode != null)
+                    {
+                        var selectedYWasteCode = new WasteCodeData { Id = new Guid(model.SelectedYcode) };
+                        if (model.SelectedYcodesList == null)
+                        {
+                            model.SelectedYcodesList = new List<WasteCodeData>();
+                            model.SelectedYcodesList.Add(selectedYWasteCode);
+                        }
+                        else
+                        {
+                            if (!model.SelectedYcodesList.Any(x => x.Id == selectedYWasteCode.Id))
+                            {
+                                model.SelectedYcodesList.Add(selectedYWasteCode);
+                            }
+                        }
+                    }
+
+                    if (model.SelectedHcode != null)
+                    {
+                        var selectedHWasteCode = new WasteCodeData { Id = new Guid(model.SelectedHcode) };
+                        if (model.SelectedHcodesList == null)
+                        {
+                            model.SelectedHcodesList = new List<WasteCodeData>();
+                            model.SelectedHcodesList.Add(selectedHWasteCode);
+                        }
+                        else
+                        {
+                            if (!model.SelectedHcodesList.Any(x => x.Id == selectedHWasteCode.Id))
+                            {
+                                model.SelectedHcodesList.Add(selectedHWasteCode);
+                            }
+                        }
+                    }
+
+                    if (model.SelectedUnClass != null)
+                    {
+                        var selectedUnWasteCode = new WasteCodeData { Id = new Guid(model.SelectedUnClass) };
+                        if (model.SelectedYcodesList == null)
+                        {
+                            model.SelectedUnClassesList = new List<WasteCodeData>();
+                            model.SelectedUnClassesList.Add(selectedUnWasteCode);
+                        }
+                        else
+                        {
+                            if (!model.SelectedUnClassesList.Any(x => x.Id == selectedUnWasteCode.Id))
+                            {
+                                model.SelectedUnClassesList.Add(selectedUnWasteCode);
+                            }
+                        }
+                    }
+
+                try
                     {
                         await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedYcodesList, model.NotificationId));
                         await client.SendAsync(User.GetAccessToken(), new SetWasteCodes(model.SelectedHcodesList, model.NotificationId));

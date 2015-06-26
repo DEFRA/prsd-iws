@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Core.WasteType;
-    using Requests.WasteType;
 
     public class YcodeHcodeAndUnClassViewModel : IValidatableObject
     {

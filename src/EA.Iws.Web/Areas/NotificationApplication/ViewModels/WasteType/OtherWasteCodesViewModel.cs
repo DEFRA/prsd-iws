@@ -7,9 +7,11 @@
     {
         public Guid NotificationId { get; set; }
 
+        [Required(ErrorMessage = "Enter the relevant code or not applicable")]
         [Display(Name = "National code in country of import")]
         public string ImportNationalCode { get; set; }
 
+        [Required(ErrorMessage = "Enter the relevant code or not applicable")]
         [Display(Name = "National code in country of export")]
         public string ExportNationalCode { get; set; }
 

@@ -7,14 +7,14 @@
 
     public class SetWasteCodes : IRequest<Guid>
     {
-        public SetWasteCodes(IEnumerable<WasteCodeData> ewcWasteCodes, Guid notificationId)
+        public SetWasteCodes(IEnumerable<WasteCodeData> wasteCodes, Guid notificationId)
         {
             NotificationId = notificationId;
-            EwcWasteCodes = ewcWasteCodes;
+            WasteCodes = wasteCodes;
         }
 
         public Guid NotificationId { get; private set; }
 
-        public IEnumerable<WasteCodeData> EwcWasteCodes { get; private set; }
+        public IEnumerable<WasteCodeData> WasteCodes { get; private set; }
     }
 }
