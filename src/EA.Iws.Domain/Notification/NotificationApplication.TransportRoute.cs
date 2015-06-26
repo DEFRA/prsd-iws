@@ -7,15 +7,22 @@
 
     public partial class NotificationApplication
     {
-        public void AddStateOfExportToNotification(StateOfExport stateOfExport)
+        public void SetStateOfExportForNotification(StateOfExport stateOfExport)
         {
             Guard.ArgumentNotNull(() => stateOfExport, stateOfExport);
 
-            if (this.StateOfExport != null)
+            if (this.StateOfImport != null && this.StateOfImport.Country.Id == stateOfExport.Country.Id)
             {
-                throw new InvalidOperationException(string.Format("Cannot add a State of Export to Notification {0}. This Notification already has a State of Export {1}.",
+                throw new InvalidOperationException(string.Format("Cannot add a State of Export in the same country as the State of Import for Notification {0}. Country: {1}",
                     this.Id,
-                    this.StateOfExport.Id));
+                    this.StateOfExport.Country.Name));
+            }
+
+            if (this.TransitStatesCollection != null && this.TransitStatesCollection.Select(ts => ts.Country.Id).Contains(stateOfExport.Country.Id))
+            {
+                throw new InvalidOperationException(string.Format("Cannot add a State of Export in the same country as a Transit State for Notification {0}. Country: {1}",
+                    this.Id,
+                    stateOfExport.Country.Name));
             }
 
             this.StateOfExport = stateOfExport;
@@ -145,7 +152,7 @@
 
             if (this.StateOfExport == null)
             {
-                this.AddStateOfExportToNotification(new StateOfExport(country, competentAuthority, exitPoint));
+                this.SetStateOfExportForNotification(new StateOfExport(country, competentAuthority, exitPoint));
                 return;
             }
 

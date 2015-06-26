@@ -4,19 +4,20 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.TransportRoute;
     using Prsd.Core.Mediator;
     using Requests.StateOfExport;
 
-    internal class EditStateOfExportForNotificationHandler : IRequestHandler<EditStateOfExportForNotification, Guid>
+    internal class SetStateOfExportForNotificationHandler : IRequestHandler<SetStateOfExportForNotification, Guid>
     {
         private readonly IwsContext context;
 
-        public EditStateOfExportForNotificationHandler(IwsContext context)
+        public SetStateOfExportForNotificationHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(EditStateOfExportForNotification message)
+        public async Task<Guid> HandleAsync(SetStateOfExportForNotification message)
         {
             var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.NotificationId);
 
@@ -25,11 +26,13 @@
                 await context.CompetentAuthorities.SingleAsync(ca => ca.Id == message.CompetentAuthorityId);
             var exitPoint = await context.EntryOrExitPoints.SingleAsync(ep => ep.Id == message.EntryOrExitPointId);
 
-            notification.UpdateStateOfExport(country, competentAuthority, exitPoint);
+            var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
+
+            notification.SetStateOfExportForNotification(stateOfExport);
 
             await context.SaveChangesAsync();
 
-            return notification.StateOfExport.Id;
+            return stateOfExport.Id;
         }
     }
 }

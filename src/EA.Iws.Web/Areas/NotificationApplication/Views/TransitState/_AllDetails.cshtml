@@ -2,7 +2,7 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
-    @Html.Gds().HintParagraph("This is the country or state where the waste ends its journey")
+    @Html.Gds().HintParagraph("This is the country or state the waste travels through")
     @Html.HiddenFor(m => m.CountryId)
     @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { id = "country-list", disabled = "true" })
     <button class="link-submit force-newline" type="submit" value="changeCountry" name="submit">Change country</button>
@@ -10,7 +10,7 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
     @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
-    @Html.Gds().HintParagraph("Select the competent authority for the region of import")
+    @Html.Gds().HintParagraph("Select the competent authority for the region of transit")
     @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
     @Html.EditorFor(m => m.CompetentAuthorities)
 </div>

@@ -110,9 +110,9 @@
     <Compile Include="Shipment\GetShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotification.cs" />
     <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
-    <Compile Include="StateOfExport\EditStateOfExportForNotification.cs" />
-    <Compile Include="StateOfExport\AddStateOfExportToNotification.cs" />
-    <Compile Include="StateOfExport\GetStateOfExportForNotification.cs" />
+    <Compile Include="StateOfExport\GetStateOfExportWithTransportRouteDataByNotificationId.cs" />
+    <Compile Include="StateOfExport\SetStateOfExportForNotification.cs" />
+    <Compile Include="StateOfExport\StateOfImportWithTransportRouteData.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotification.cs" />
     <Compile Include="TechnologyEmployed\GetTechnologyEmployed.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationId.cs" />

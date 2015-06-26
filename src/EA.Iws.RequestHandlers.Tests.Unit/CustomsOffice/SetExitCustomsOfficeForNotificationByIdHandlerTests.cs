@@ -84,7 +84,7 @@
         [Fact]
         public async Task NotificationExistsAndRequiresExitCustomsOffice_SetsExitOffice()
         {
-            anyNotification.AddStateOfExportToNotification(stateOfExport);
+            anyNotification.SetStateOfExportForNotification(stateOfExport);
             anyNotification.SetStateOfImportForNotification(stateOfImportNonEu);
 
             var notifications = dbContextHelper.GetAsyncEnabledDbSet(new[] { anyNotification });

@@ -49,13 +49,13 @@
         }
 
         [Fact]
-        public void AddStateOfExport_WithNullState_Throws()
+        public void SetStateOfExport_WithNullState_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => notification.AddStateOfExportToNotification(null));
+            Assert.Throws<ArgumentNullException>(() => notification.SetStateOfExportForNotification(null));
         }
 
         [Fact]
-        public void AddStateOfExport_NotificationAlreadyHasStateOfExport_Throws()
+        public void SetStateOfExport_NotificationAlreadyHasStateOfExport_Overwrites()
         {
             var competentAuthority = GetTestCompetentAuthority(countries[0]);
             var exitPoint = GetTestEntryOrExitPoint(countries[0]);
@@ -64,9 +64,11 @@
                 competentAuthority,
                 exitPoint);
 
-            notification.AddStateOfExportToNotification(stateOfExport);
+            notification.SetStateOfExportForNotification(stateOfExport);
 
-            Assert.Throws<InvalidOperationException>(() => notification.AddStateOfExportToNotification(stateOfExport));
+            notification.SetStateOfExportForNotification(stateOfExport);
+
+            Assert.Equal(stateOfExport.Country.Id, notification.StateOfExport.Country.Id);
         }
 
         [Fact]
@@ -113,7 +115,7 @@
                 importExitPoint);
 
             // Act
-            notification.AddStateOfExportToNotification(stateOfExport);
+            notification.SetStateOfExportForNotification(stateOfExport);
 
             // Assert
             Assert.Throws<InvalidOperationException>(() => notification.SetStateOfImportForNotification(stateOfImport));
@@ -140,7 +142,7 @@
                 importExitPoint);
 
             // Act
-            notification.AddStateOfExportToNotification(stateOfExport);
+            notification.SetStateOfExportForNotification(stateOfExport);
             notification.SetStateOfImportForNotification(stateOfImport);
 
             // Assert

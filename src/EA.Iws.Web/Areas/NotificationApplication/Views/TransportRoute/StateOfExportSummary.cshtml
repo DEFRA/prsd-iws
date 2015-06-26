@@ -5,7 +5,7 @@
 @if (Model == null)
 {
     <p>No state of export has been added.</p>
-    <p>@Html.ActionLink("Add state of export", "Add", "StateOfExport", new { id = ViewData["Id"] }, null)</p>
+    <p>@Html.ActionLink("Add state of export", "Index", "StateOfExport", new { id = ViewData["Id"] }, null)</p>
 }
 else
 {
@@ -23,7 +23,7 @@ else
                 <td>@Html.DisplayFor(m => m.Country.Name)</td>
                 <td>@Html.DisplayFor(m => m.CompetentAuthority.Code) - @Html.DisplayFor(m => m.CompetentAuthority.Name)</td>
                 <td>@Html.DisplayFor(m => m.ExitPoint.Name)</td>
-                <th>@Html.ActionLink("Edit state of export", "Edit", "StateOfExport", new { id = ViewData["Id"] }, null)</th>
+                <th>@Html.ActionLink("Edit state of export", "Index", "StateOfExport", new { id = ViewData["Id"] }, null)</th>
             </tr>
         </tbody>
     </table>

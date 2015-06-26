@@ -159,10 +159,9 @@
     <Compile Include="Shipment\GetShipmentInfoForNotificationHandler.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotificationHandler.cs" />
     <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
-    <Compile Include="StateOfExport\EditStateOfExportForNotificationHandler.cs" />
-    <Compile Include="StateOfExport\GetStateOfExportForNotificationHandler.cs" />
+    <Compile Include="StateOfExport\GetStateOfExportWithTransportRouteDataByNotificationIdHandler.cs" />
+    <Compile Include="StateOfExport\SetStateOfImportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotificationHandler.cs" />
-    <Compile Include="StateOfExport\AddStateOfExportToNotificationHandler.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandler.cs" />
     <Compile Include="TechnologyEmployed\GetTechnologyEmployedHandler.cs" />
     <Compile Include="TransitState\SetTransitStateForNotificationHandler.cs" />

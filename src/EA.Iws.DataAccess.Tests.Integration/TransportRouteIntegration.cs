@@ -41,7 +41,7 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            notification.AddStateOfExportToNotification(stateOfExport);
+            notification.SetStateOfExportForNotification(stateOfExport);
 
             await context.SaveChangesAsync();
 
@@ -71,7 +71,7 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            notification.AddStateOfExportToNotification(stateOfExport);
+            notification.SetStateOfExportForNotification(stateOfExport);
 
             var nextExitPoint = context.EntryOrExitPoints.First(ep => ep.Id != exitPoint.Id);
 

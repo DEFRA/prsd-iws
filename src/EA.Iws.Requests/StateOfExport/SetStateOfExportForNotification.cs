@@ -3,7 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class AddStateOfExportToNotification : IRequest<Guid>
+    public class SetStateOfExportForNotification : IRequest<Guid>
     {
         public Guid NotificationId { get; private set; }
 
@@ -13,7 +13,7 @@
 
         public Guid CompetentAuthorityId { get; private set; }
 
-        public AddStateOfExportToNotification(Guid notificationId, Guid countryId, Guid entryOrExitPointId, Guid competentAuthorityId)
+        public SetStateOfExportForNotification(Guid notificationId, Guid countryId, Guid entryOrExitPointId, Guid competentAuthorityId)
         {
             NotificationId = notificationId;
             CountryId = countryId;
