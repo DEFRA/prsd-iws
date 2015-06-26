@@ -38,6 +38,13 @@ DEALLOCATE @cursor
 GO
 
 -----------
+-- Make column not null
+-----------
+ALTER TABLE [Business].[PhysicalCharacteristicsInfo]
+ALTER COLUMN NotificationId UNIQUEIDENTIFIER NOT NULL
+GO
+
+-----------
 -- Drop unused columns
 -----------
 ALTER TABLE [Business].[PhysicalCharacteristicsInfo] DROP CONSTRAINT [FK_PhysicalCharacteristicsInfo_WasteType]
