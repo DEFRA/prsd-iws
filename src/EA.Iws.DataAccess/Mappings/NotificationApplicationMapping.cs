@@ -122,6 +122,12 @@
                     "PhysicalCharacteristicsCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
+
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<WasteCodeInfo>>(
+                    "WasteCodeInfoCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
         }
     }
 }

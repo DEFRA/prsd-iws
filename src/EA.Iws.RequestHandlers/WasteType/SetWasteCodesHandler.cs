@@ -30,7 +30,7 @@
 
             await db.SaveChangesAsync();
 
-            return notification.WasteType.Id;
+            return notification.Id;
         }
     }
 }

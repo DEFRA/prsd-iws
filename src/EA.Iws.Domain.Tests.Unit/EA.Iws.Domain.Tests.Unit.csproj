@@ -81,6 +81,7 @@
     <Compile Include="Notification\NotificationTechnologyEmployedTests.cs" />
     <Compile Include="Notification\NotificationSpecialHandlingTests.cs" />
     <Compile Include="Notification\NotificationTransportRouteTests.cs" />
+    <Compile Include="Notification\NotificationWasteCodeTests.cs" />
     <Compile Include="Notification\NotificationWasteGenerationProcessTests.cs" />
     <Compile Include="Notification\NotificationWasteTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

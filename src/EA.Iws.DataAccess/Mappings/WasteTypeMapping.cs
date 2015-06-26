@@ -19,12 +19,6 @@
                     "WasteCompositionCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("WasteTypeId"));
-
-            HasMany(
-                ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<WasteCodeInfo>>(
-                    "WasteCodeInfoCollection"))
-                .WithRequired()
-                .Map(m => m.MapKey("WasteTypeId"));
         }
     }
 }

@@ -30,7 +30,7 @@
                 notification.AddWasteCode(WasteCodeInfo.CreateOptionalWasteCodeInfo(wasteCode, optionalWasteCode.OptionalCode, optionalWasteCode.OptionalDescription));
             }
             await db.SaveChangesAsync();
-            return notification.WasteType.Id;
+            return notification.Id;
         }
     }
 }
