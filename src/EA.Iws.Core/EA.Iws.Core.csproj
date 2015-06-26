@@ -83,6 +83,7 @@
     <Compile Include="TransportRoute\TransportRouteData.cs" />
     <Compile Include="WasteType\ChemicalCompositionType.cs" />
     <Compile Include="WasteType\CodeType.cs" />
+    <Compile Include="WasteType\PhysicalCharacteristicsData.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicType.cs" />
     <Compile Include="WasteType\WasteCodeData.cs" />
     <Compile Include="WasteType\WasteCompositionData.cs" />

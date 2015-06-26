@@ -30,6 +30,7 @@
             TransitStatesCollection = new List<TransitState>();
             OperationInfosCollection = new List<OperationInfo>();
             PackagingInfosCollection = new List<PackagingInfo>();
+            PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }
@@ -43,6 +44,8 @@
         protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
 
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
+
+        protected virtual ICollection<PhysicalCharacteristicsInfo> PhysicalCharacteristicsCollection { get; set; }
 
         public Guid UserId { get; private set; }
 
@@ -116,6 +119,11 @@
         public IEnumerable<PackagingInfo> PackagingInfos
         {
             get { return PackagingInfosCollection.ToSafeIEnumerable(); }
+        }
+
+        public IEnumerable<PhysicalCharacteristicsInfo> PhysicalCharacteristics
+        {
+            get { return PhysicalCharacteristicsCollection.ToSafeIEnumerable(); }
         }
 
         public virtual ExitCustomsOffice ExitCustomsOffice { get; private set; }

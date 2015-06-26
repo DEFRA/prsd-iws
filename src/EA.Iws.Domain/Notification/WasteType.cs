@@ -28,8 +28,6 @@
 
             ChemicalCompositionDescription = chemicalCompositionDescription;
 
-            PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
-
             WasteCodeInfoCollection = new List<WasteCodeInfo>();
         }
 
@@ -55,15 +53,6 @@
             {
                 WasteCompositionCollection = new List<WasteComposition>(wasteCompositions);
             }
-
-            PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
-        }
-
-        protected virtual ICollection<PhysicalCharacteristicsInfo> PhysicalCharacteristicsCollection { get; set; }
-
-        public IEnumerable<PhysicalCharacteristicsInfo> PhysicalCharacteristics
-        {
-            get { return PhysicalCharacteristicsCollection.ToSafeIEnumerable(); }
         }
 
         public ChemicalComposition ChemicalCompositionType { get; internal set; }
@@ -124,25 +113,6 @@
                 throw new InvalidOperationException("Waste Composition cannot be null");
             }
             WasteCompositionCollection.Add(wasteComposition);
-        }
-
-        internal void AddPhysicalCharacteristic(PhysicalCharacteristicType physicalCharacteristic, string otherDescription = null)
-        {
-            if (PhysicalCharacteristicsCollection == null)
-            {
-                throw new InvalidOperationException("Physical characteristics collection cannot be null");
-            }
-
-            var physicalCharacteristicInfo = new PhysicalCharacteristicsInfo(physicalCharacteristic);
-            if (!string.IsNullOrEmpty(otherDescription))
-            {
-                if (physicalCharacteristic != PhysicalCharacteristicType.Other)
-                {
-                    throw new InvalidOperationException(string.Format("Other description cannot be set when the physical characteristic type is not other for waste type {0}", Id));
-                }
-                physicalCharacteristicInfo.OtherDescription = otherDescription;
-            }
-            PhysicalCharacteristicsCollection.Add(physicalCharacteristicInfo);
         }
 
         protected virtual ICollection<WasteCodeInfo> WasteCodeInfoCollection { get; set; }

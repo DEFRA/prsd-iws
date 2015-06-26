@@ -126,54 +126,6 @@
         }
 
         [Fact]
-        public void AddPhysicalCharacteristics_WithValidData_PhysicalCharacteristicsAdded()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
-
-            notification.AddPhysicalCharacteristic(PhysicalCharacteristicType.Powdery);
-
-            Assert.Equal(1, notification.WasteType.PhysicalCharacteristics.Count());
-        }
-
-        [Fact]
-        public void AddPhysicalCharacteristics_WithValidDescription_PhysicalCharacteristicsAdded()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            notification.AddWasteType(WasteType.CreateOtherWasteType("Name", "Description"));
-
-            notification.AddPhysicalCharacteristic(PhysicalCharacteristicType.Other, "Other description");
-
-            Assert.Equal(1, notification.WasteType.PhysicalCharacteristics.Count());
-        }
-
-        [Fact]
-        public void AddPhysicalCharacteristics_WithoutWasteType_ThrowsException()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            Action addPhysicalInfo = () => notification.AddPhysicalCharacteristic(PhysicalCharacteristicType.Powdery);
-
-            Assert.Throws<InvalidOperationException>(addPhysicalInfo);
-        }
-
-        [Fact]
-        public void AddPhysicalCharacteristics_WithDescriptionWhenNotOther_ThrowsException()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            Action addPhysicalInfo = () => notification.AddPhysicalCharacteristic(PhysicalCharacteristicType.Powdery, "other description");
-
-            Assert.Throws<InvalidOperationException>(addPhysicalInfo);
-        }
-
-        [Fact]
         public void AddOecdCode_WithValidData_WasteCodeAdded()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,

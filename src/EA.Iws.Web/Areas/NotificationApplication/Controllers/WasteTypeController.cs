@@ -196,7 +196,7 @@
         }
 
         [HttpGet]
-        public ActionResult PhysicalCharacteristics(Guid id)
+        public async Task<ActionResult> PhysicalCharacteristics(Guid id)
         {
             var physicalCharacteristics = CheckBoxCollectionViewModel.CreateFromEnum<PhysicalCharacteristicType>();
             physicalCharacteristics.ShowEnumValue = true;
@@ -209,6 +209,22 @@
                 PhysicalCharacteristics = physicalCharacteristics,
                 NotificationId = id
             };
+
+            using (var client = apiClient())
+            {
+                var physicalCharacteristicsData =
+                    await client.SendAsync(User.GetAccessToken(), new GetPhysicalCharacteristics(id));
+
+                if (physicalCharacteristicsData != null)
+                {
+                    model.PhysicalCharacteristics.SetSelectedValues(physicalCharacteristicsData.PhysicalCharacteristics);
+                    if (!string.IsNullOrWhiteSpace(physicalCharacteristicsData.OtherDescription))
+                    {
+                        model.OtherSelected = true;
+                        model.OtherDescription = physicalCharacteristicsData.OtherDescription;
+                    }
+                }
+            }
             return View(model);
         }
 

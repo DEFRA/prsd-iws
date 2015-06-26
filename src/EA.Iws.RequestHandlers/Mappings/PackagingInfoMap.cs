@@ -77,7 +77,7 @@
             return packagingData;
         }
 
-        private PackagingType GetPackagingType(Domain.Notification.PackagingType packagingType)
+        private static PackagingType GetPackagingType(Domain.Notification.PackagingType packagingType)
         {
             PackagingType type;
             if (Enum.TryParse(packagingType.Value.ToString(), out type))

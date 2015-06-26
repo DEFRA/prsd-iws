@@ -116,6 +116,12 @@
             Property(ExpressionHelper
                 .GetPrivatePropertyExpression<NotificationApplication, string>("MeansOfTransportInternal"))
                 .HasColumnName("MeansOfTransport");
+
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<PhysicalCharacteristicsInfo>>(
+                    "PhysicalCharacteristicsCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationId"));
         }
     }
 }

@@ -21,12 +21,6 @@
                 .Map(m => m.MapKey("WasteTypeId"));
 
             HasMany(
-                ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<PhysicalCharacteristicsInfo>>(
-                    "PhysicalCharacteristicsCollection"))
-                .WithRequired()
-                .Map(m => m.MapKey("WasteTypeId"));
-
-            HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<WasteCodeInfo>>(
                     "WasteCodeInfoCollection"))
                 .WithRequired()

@@ -72,6 +72,7 @@
     <Compile Include="Notification\NotificationImporterTests.cs" />
     <Compile Include="Notification\NotificationOperationCodesTests.cs" />
     <Compile Include="Notification\NotificationPackagingTests.cs" />
+    <Compile Include="Notification\NotificationPhysicalCharacteristicsTests.cs" />
     <Compile Include="Notification\NotificationProducerTests.cs" />
     <Compile Include="Notification\NotificationReasonForExportTests.cs" />
     <Compile Include="Notification\NotificationRecoveryPercentageTests.cs" />

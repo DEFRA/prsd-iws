@@ -52,6 +52,7 @@
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Notification\CodeType.cs" />
+    <Compile Include="Notification\NotificationApplication.PhysicalCharacteristics.cs" />
     <Compile Include="Notification\NotificationApplication.WasteGenerationProcess.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\ExitCustomsOffice.cs" />

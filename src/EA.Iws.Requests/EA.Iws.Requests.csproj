@@ -122,6 +122,7 @@
     <Compile Include="TransportRoute\CompententAuthorityAndEntryOrExitPointData.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
+    <Compile Include="WasteType\GetPhysicalCharacteristics.cs" />
     <Compile Include="WasteType\GetWasteCodes.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcess.cs" />
     <Compile Include="WasteType\SetWasteCodes.cs" />
