@@ -11,7 +11,7 @@
     <header class="hgroup">
         <h2 class="heading-large">Are all the recovery facilities pre-consented?</h2>
     </header>
-    <p>Select ‘Yes’ if all the recovery facilities have a pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006 that covers this notification.</p>
+    <p>Select 'Yes' if the recovery facility has pre-consent status that will apply to this notification. A recovery facility may be issued with pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006.</p>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Value)">
         @Html.Gds().ValidationMessageFor(model => model.Value)
@@ -21,14 +21,14 @@
                 Yes
             </label>
             <div class="panel-indent @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="yes-message">
-                <p>This notification will allow the intended shipment dates to cover a 3 year period. You must send evidence of the pre-consent status with your notification submission. This may be the pre-consent certificate or letter issued by the relevant competent authority to the recovery facility.</p>
+                <p>This notification may benefit from having intended shipment dates to cover up to a 3 year period. For the one or more recovery facilities entered, you must send evidence of the pre-consent status with your notification submission. This may be the pre-consent certificate or letter issued by the relevant competent authority to the recovery facility.</p>
             </div>
             <label class="block-label" for="rdoNo" data-target="no-message">
                 @Html.RadioButtonFor(m => m.Value, false, new { id = "rdoNo" })
                 No
             </label>
-            <div class="panel-indent @(!Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="no-message">
-                <p>This notification will allow the intended shipment dates to cover a 12 month period.</p>
+            <div class="panel-indent @((Model.Value.HasValue && !Model.Value.Value) ? "" : "js-hidden")" id="no-message" id="no-message">
+                <p>This notification will allow intended shipment dates to cover up to a 12 month period.</p>
             </div>
         </fieldset>
     </div>
