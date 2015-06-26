@@ -26,8 +26,7 @@
         {
             var notification =
                 await
-                    db.NotificationApplications.Include(n => n.ShipmentInfo)
-                        .SingleAsync(n => n.Id == command.NotificationId);
+                    db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
 
             notification.SetPackagingInfo(packagingInfoMapper.Map(command));
 

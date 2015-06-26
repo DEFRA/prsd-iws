@@ -119,6 +119,7 @@
     <Compile Include="TechnologyEmployed\SetTechnologyEmployed.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetWasteCodes.cs" />
+    <Compile Include="WasteType\GetWasteGenerationProcess.cs" />
     <Compile Include="WasteType\SetWasteCodes.cs" />
     <Compile Include="WasteType\SetOptionalWasteCodes.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristics.cs" />

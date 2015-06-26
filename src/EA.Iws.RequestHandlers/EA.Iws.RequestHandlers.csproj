@@ -97,6 +97,7 @@
     <Compile Include="Mappings\TechnologyEmployedMap.cs" />
     <Compile Include="Mappings\WasteCodeMap.cs" />
     <Compile Include="Mappings\WasteCompositionMap.cs" />
+    <Compile Include="Mappings\WasteGenerationProcessMap.cs" />
     <Compile Include="Mappings\WasteTypeMap.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\BusinessInfoMap.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Users\UserByIdHandler.cs" />
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
     <Compile Include="WasteType\GetWasteCodesHandler.cs" />
+    <Compile Include="WasteType\GetWasteGenerationProcessHandler.cs" />
     <Compile Include="WasteType\SetWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetOptionalWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristicsHandler.cs" />

@@ -152,10 +152,6 @@
             get { return WasteCodeInfoCollection.ToSafeIEnumerable(); }
         }
 
-        public string WasteGenerationProcess { get; internal set; }
-
-        public bool IsDocumentAttached { get; internal set; }
-
         public static WasteType CreateOtherWasteType(string chemicalCompositionName, string chemicalCompositionDescription)
         {
             return new WasteType(ChemicalComposition.Other, chemicalCompositionName, chemicalCompositionDescription);

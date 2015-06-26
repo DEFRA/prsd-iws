@@ -19,7 +19,7 @@
 
         public async Task<Guid> HandleAsync(SetBaselOrOecdWasteCode command)
         {
-            var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
             var wasteCode = await db.WasteCodes.SingleAsync(w => w.Id == command.WasteCodeId);
 
             notification.AddWasteCode(WasteCodeInfo.CreateWasteCodeInfo(wasteCode));

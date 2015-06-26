@@ -122,6 +122,7 @@
     <Content Include="scripts\Update\Sprint10\20150615-746500-add-un-classes.sql" />
     <Content Include="scripts\Update\Sprint10\20150615-987300-add-h-codes.sql" />
     <Content Include="scripts\Update\Sprint10\20150623-120000-set-eu-members.sql" />
+    <Content Include="scripts\Update\Sprint10\20150626-112400-move-waste-generation-to-notification.sql" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />

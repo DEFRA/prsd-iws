@@ -18,13 +18,13 @@
 
         public async Task<Guid> HandleAsync(SetWasteGenerationProcess command)
         {
-            var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
 
             notification.AddWasteGenerationProcess(command.Process, command.IsDocumentAttached);
 
             await db.SaveChangesAsync();
 
-            return notification.WasteType.Id;
+            return notification.Id;
         }
     }
 }

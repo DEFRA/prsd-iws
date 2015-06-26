@@ -21,7 +21,7 @@
         }
         public async Task<Guid> HandleAsync(SetOptionalWasteCodes command)
         {
-            var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
             foreach (var optionalWasteCode in command.OptionalWasteCodes)
             {
                 var code = mapper.Map(optionalWasteCode.CodeType);

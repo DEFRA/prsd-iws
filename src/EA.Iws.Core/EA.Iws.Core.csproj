@@ -86,6 +86,7 @@
     <Compile Include="WasteType\PhysicalCharacteristicType.cs" />
     <Compile Include="WasteType\WasteCodeData.cs" />
     <Compile Include="WasteType\WasteCompositionData.cs" />
+    <Compile Include="WasteType\WasteGenerationProcessData.cs" />
     <Compile Include="WasteType\WasteTypeData.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -156,14 +156,16 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult WasteGenerationProcess(Guid id)
+        public async Task<ActionResult> WasteGenerationProcess(Guid id)
         {
-            var model = new WasteGenerationProcessViewModel
+            using (var client = apiClient())
             {
-                NotificationId = id,
-                ProcessDescription = string.Empty
-            };
-            return View(model);
+                var wasteGenerationProcessData =
+                    await client.SendAsync(User.GetAccessToken(), new GetWasteGenerationProcess(id));
+
+                var model = new WasteGenerationProcessViewModel(wasteGenerationProcessData);
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -178,7 +180,7 @@
             {
                 try
                 {
-                    await client.SendAsync(User.GetAccessToken(), new SetWasteGenerationProcess(model.ProcessDescription, model.NotificationId, model.IsDocumentAttached));
+                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
                     return RedirectToAction("PhysicalCharacteristics", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)

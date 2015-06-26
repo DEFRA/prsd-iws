@@ -23,7 +23,7 @@
 
         public async Task<Guid> HandleAsync(SetPhysicalCharacteristics command)
         {
-            var notification = await db.NotificationApplications.Include(n => n.ShipmentInfo).SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
             var physicalCharacteristics = mapper.Map(command.PhysicalCharacteristics);
 
             foreach (var physicalCharacteristic in physicalCharacteristics)
