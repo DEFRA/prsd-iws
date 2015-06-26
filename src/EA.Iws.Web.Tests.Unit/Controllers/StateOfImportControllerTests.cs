@@ -35,14 +35,14 @@
             };
 
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetStateOfImportSetDataByNotificationId>.That.Matches(s => s.Id == NullStateOfImportGuid)))
-                .Returns(new StateOfImportSetData
+                () => client.SendAsync(A<string>.Ignored, A<GetStateOfImportWithTransportRouteDataByNotificationId>.That.Matches(s => s.Id == NullStateOfImportGuid)))
+                .Returns(new StateOfImportWithTransportRouteData
                 {
                     Countries = countries
                 });
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetStateOfImportSetDataByNotificationId>.That.Matches(s => s.Id == ExistingStateOfImportGuid)))
-                .Returns(new StateOfImportSetData
+                () => client.SendAsync(A<string>.Ignored, A<GetStateOfImportWithTransportRouteDataByNotificationId>.That.Matches(s => s.Id == ExistingStateOfImportGuid)))
+                .Returns(new StateOfImportWithTransportRouteData
                 {
                     Countries = countries,
                     StateOfImport = new StateOfImportData
@@ -81,9 +81,9 @@
             Assert.False(model.ShowNextSection);
         }
 
-        private class TestMap : IMap<StateOfImportSetData, StateOfImportViewModel>
+        private class TestMap : IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel>
         {
-            public StateOfImportViewModel Map(StateOfImportSetData source)
+            public StateOfImportViewModel Map(StateOfImportWithTransportRouteData source)
             {
                 return new StateOfImportViewModel
                 {

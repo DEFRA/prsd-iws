@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.StateOfImport
 {
-    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
@@ -18,7 +17,7 @@
     using Requests.StateOfImport;
     using StateOfImport = Domain.TransportRoute.StateOfImport;
 
-    internal class GetStateOfImportSetDataByNotificationIdHandler : IRequestHandler<GetStateOfImportSetDataByNotificationId, StateOfImportSetData>
+    internal class GetStateOfImportWithTransportRouteDataByNotificationIdHandler : IRequestHandler<GetStateOfImportWithTransportRouteDataByNotificationId, StateOfImportWithTransportRouteData>
     {
         private readonly IwsContext context;
         private readonly IMap<StateOfImport, StateOfImportData> stateOfImportMapper;
@@ -28,7 +27,7 @@
         private readonly IMap<Country, CountryData> countryMapper;
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
 
-        public GetStateOfImportSetDataByNotificationIdHandler(IwsContext context, 
+        public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context, 
             IMap<StateOfImport, StateOfImportData> stateOfImportMapper, 
             IMap<StateOfExport, StateOfExportData> stateOfExportMapper,
             IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper, 
@@ -45,12 +44,12 @@
             this.competentAuthorityMapper = competentAuthorityMapper;
         }
 
-        public async Task<StateOfImportSetData> HandleAsync(GetStateOfImportSetDataByNotificationId message)
+        public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
         {
             var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
             var countries = await context.Countries.OrderBy(c => c.Name).ToArrayAsync();
 
-            var data = new StateOfImportSetData
+            var data = new StateOfImportWithTransportRouteData
             {
                 StateOfImport = stateOfImportMapper.Map(notification.StateOfImport),
                 StateOfExport = stateOfExportMapper.Map(notification.StateOfExport),

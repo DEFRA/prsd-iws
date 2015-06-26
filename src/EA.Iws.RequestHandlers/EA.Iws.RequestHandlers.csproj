@@ -163,10 +163,11 @@
     <Compile Include="StateOfExport\GetStateOfExportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotificationHandler.cs" />
     <Compile Include="StateOfExport\AddStateOfExportToNotificationHandler.cs" />
-    <Compile Include="TechnologyEmployed\GetStateOfImportSetDataByNotificationIdHandler.cs" />
+    <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandler.cs" />
     <Compile Include="TechnologyEmployed\GetTechnologyEmployedHandler.cs" />
-    <Compile Include="TransitState\AddStateOfImportToNotificationHandler.cs" />
+    <Compile Include="TransitState\SetTransitStateForNotificationHandler.cs" />
     <Compile Include="TechnologyEmployed\SetTechnologyEmployedHandler.cs" />
+    <Compile Include="TransitState\GetTransitStateWithTransportRouteDataByNotificationIdHandler.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountryHandler.cs" />
     <Compile Include="TransportRoute\GetTransportRouteSummaryForNotificationHandler.cs" />

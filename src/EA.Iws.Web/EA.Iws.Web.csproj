@@ -441,6 +441,9 @@
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\_CountryOnly.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\_AllDetails.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\TransitState\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\TransitState\_AllDetails.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\TransitState\_CountryOnly.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -532,10 +535,7 @@
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\StateOfExportSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\StateOfImportSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummary.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\TransitState\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ReasonForExport\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\TransitState\CountrySelector.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\TransitState\OtherDetailsSelector.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\Edit.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\WasteCode.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\EditFullDetails.cshtml" />
@@ -599,7 +599,8 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\UnNumberViewModel.cs" />
     <Compile Include="Infrastructure\Navigation.cs" />
     <Compile Include="Infrastructure\NavigationExtensions.cs" />
-    <Compile Include="Mappings\StateOfImportSetDataMap.cs" />
+    <Compile Include="Mappings\TransitStateWithTransportRouteDataMap.cs" />
+    <Compile Include="Mappings\StateOfImportWithTransportRouteDataMap.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\EmailTemplate.cs" />
     <Compile Include="Services\EmailTemplateService.cs" />

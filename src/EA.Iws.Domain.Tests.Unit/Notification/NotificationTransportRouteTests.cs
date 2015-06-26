@@ -10,22 +10,57 @@
 
     public class NotificationTransportRouteTests
     {
+        private readonly IList<Guid> guids;
+
+        private readonly NotificationApplication notification;
+        private readonly IList<Country> countries;
+        private readonly IList<TransitState> transitStates; 
+
+        public NotificationTransportRouteTests()
+        {
+            this.notification = new NotificationApplication(Guid.Empty, NotificationType.Disposal,
+                UKCompetentAuthority.England, 650);
+
+            guids = new List<Guid>
+            {
+                new Guid("D8DB53F9-D3CB-498D-B044-7A67B94EE4E4"),
+                new Guid("1D3A7A18-F345-4201-81AA-8FC8A4029F4E"),
+                new Guid("596E6BE3-D0C1-4C17-AF75-BFCDBD972627"),
+                new Guid("208EA94D-638B-4724-9272-DF1383FF9452"),
+                new Guid("DEDAA6F6-CA6D-486E-B0B8-254A477E697F"),
+                new Guid("4C7EEA30-510E-45BD-8DBB-3EC1AF5E563A"),
+                new Guid("8B87B87D-43D0-4BBE-8E2C-8EC84C983A42"),
+                new Guid("40E44905-4CDE-4470-8E8B-527EE65C65DC"),
+                new Guid("58E18F1C-5A4A-4E2E-869F-72D9C1512FE8")
+            };
+
+            countries = guids.Select(g => CountryFactory.Create(g)).ToList();
+
+            transitStates = new List<TransitState>();
+            for (int i = 0; i < countries.Count - 1; i++)
+            {
+                var c = countries[i];
+                transitStates.Add(new TransitState(c,
+                CompetentAuthorityFactory.Create(guids[i], c),
+                EntryOrExitPointFactory.Create(guids[i], c),
+                EntryOrExitPointFactory.Create(guids[i + 1], c), i + 1));
+                ObjectInstantiator<TransitState>.SetProperty(x => x.Id, guids[i], transitStates[i]);
+            }
+        }
+
         [Fact]
         public void AddStateOfExport_WithNullState_Throws()
         {
-            var notification = GetTestNotification();
             Assert.Throws<ArgumentNullException>(() => notification.AddStateOfExportToNotification(null));
         }
 
         [Fact]
         public void AddStateOfExport_NotificationAlreadyHasStateOfExport_Throws()
         {
-            var notification = GetTestNotification();
+            var competentAuthority = GetTestCompetentAuthority(countries[0]);
+            var exitPoint = GetTestEntryOrExitPoint(countries[0]);
 
-            var competentAuthority = GetTestCompetentAuthority(GetTestCountry(Guid.Empty));
-            var exitPoint = GetTestEntryOrExitPoint(GetTestCountry(Guid.Empty));
-
-            var stateOfExport = new StateOfExport(ObjectInstantiator<Country>.CreateNew(),
+            var stateOfExport = new StateOfExport(countries[0],
                 competentAuthority,
                 exitPoint);
 
@@ -35,21 +70,18 @@
         }
 
         [Fact]
-        public void AddStateOfImport_WithNullState_Throws()
+        public void SetStateOfImport_WithNullState_Throws()
         {
-            var notification = GetTestNotification();
             Assert.Throws<ArgumentNullException>(() => notification.SetStateOfImportForNotification(null));
         }
 
         [Fact]
         public void SetStateOfImport_NotificationAlreadyHasStateOfImport_ReplacesStateOfImport()
         {
-            var notification = GetTestNotification();
+            var competentAuthority = GetTestCompetentAuthority(countries[0]);
+            var entryPoint = GetTestEntryOrExitPoint(countries[0]);
 
-            var competentAuthority = GetTestCompetentAuthority(GetTestCountry(Guid.Empty));
-            var entryPoint = GetTestEntryOrExitPoint(GetTestCountry(Guid.Empty));
-
-            var stateOfImport = new StateOfImport(ObjectInstantiator<Country>.CreateNew(),
+            var stateOfImport = new StateOfImport(countries[0],
                 competentAuthority,
                 entryPoint);
 
@@ -64,15 +96,13 @@
         public void SetStateOfImport_SameCountryToStateOfExport_Throws()
         {
             // Arrange
-            var notification = GetTestNotification();
+            var exportCountry = countries[0];
 
-            var exportCountry = GetTestCountry(new Guid("053443D4-EFDC-4DC5-8772-D8E5DA52226C"));
+            var exportCompetentAuthority = CompetentAuthorityFactory.Create(guids[0], exportCountry);
+            var exportExitPoint = EntryOrExitPointFactory.Create(guids[0], exportCountry);
 
-            var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
-            var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
-
-            var importCompetentAuthority = GetTestCompetentAuthority(exportCountry);
-            var importExitPoint = GetTestEntryOrExitPoint(exportCountry);
+            var importCompetentAuthority = CompetentAuthorityFactory.Create(guids[1], exportCountry);
+            var importExitPoint = EntryOrExitPointFactory.Create(guids[1], exportCountry);
 
             var stateOfExport = new StateOfExport(exportCountry,
                 exportCompetentAuthority,
@@ -90,14 +120,10 @@
         }
 
         [Fact]
-        public void SetStateOfImport_DifferentCountryToStateOfExport_Throws()
+        public void SetStateOfImport_DifferentCountryToStateOfExport_SetsSuccessfully()
         {
-            // Arrange
-            var notification = GetTestNotification();
-            var importCountryId = new Guid("98F1CEA6-5474-429C-AECC-45030C3B1463");
-
-            var exportCountry = GetTestCountry(new Guid("053443D4-EFDC-4DC5-8772-D8E5DA52226C"));
-            var importCountry = GetTestCountry(importCountryId);
+            var exportCountry = countries[0];
+            var importCountry = countries[1];
 
             var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
             var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
@@ -118,7 +144,7 @@
             notification.SetStateOfImportForNotification(stateOfImport);
 
             // Assert
-            Assert.Equal(notification.StateOfImport.Country.Id, importCountryId);
+            Assert.Equal(importCountry.Id, notification.StateOfImport.Country.Id);
         }
 
         [Theory]
@@ -127,7 +153,7 @@
         [InlineData(int.MinValue)]
         public void TransitState_OrdinalPositionZeroOrLess_Throws(int position)
         {
-            var country = GetTestCountry(new Guid("C4E8BFE2-473D-42CC-8AC1-5C499699B925"));
+            var country = countries[0];
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new TransitState(country,
                 GetTestCompetentAuthority(country),
@@ -139,7 +165,7 @@
         [Fact]
         public void TransitState_EntryAndExitPointTheSame_Throws()
         {
-            var country = GetTestCountry(Guid.Empty);
+            var country = countries[0];
 
             Assert.Throws<InvalidOperationException>(() => new TransitState(country,
                 GetTestCompetentAuthority(country),
@@ -156,10 +182,10 @@
         [InlineData("AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
         public void TransitState_ParametersNotInTheSameCountry_Throws(string countryId, string competentAuthorityId, string entryPointId, string exitPointId)
         {
-            var country = GetTestCountry(new Guid(countryId));
-            var competentAuthority = GetTestCompetentAuthority(GetTestCountry(new Guid(competentAuthorityId)));
-            var entryPoint = GetTestEntryOrExitPoint(GetTestCountry(new Guid(entryPointId)));
-            var exitPoint = GetTestEntryOrExitPoint(GetTestCountry(new Guid(exitPointId)));
+            var country = countries[0];
+            var competentAuthority = GetTestCompetentAuthority(countries[1]);
+            var entryPoint = GetTestEntryOrExitPoint(countries[1]);
+            var exitPoint = GetTestEntryOrExitPoint(countries[1]);
 
             Assert.Throws<InvalidOperationException>(
                 () => new TransitState(country, competentAuthority, entryPoint, exitPoint, 1));
@@ -168,8 +194,7 @@
         [Fact]
         public void AddTransitState_OnlyTransitState_AddedSuccessfully()
         {
-            var notification = GetTestNotification();
-            var country = GetTestCountry(new Guid("836BEFCC-A2DA-454C-B5B9-DD72AFDAC543"));
+            var country = countries[1];
 
             var transitState = new TransitState(country,
                 GetTestCompetentAuthority(country),
@@ -185,24 +210,18 @@
         [Fact]
         public void AddTransitState_ToAlreadyOccupiedPosition_Throws()
         {
-            var guids = GetGuids();
-
-            var notification = GetTestNotification();
-            var firstCountry = GetTestCountry(guids[0]);
-
-            var firstTransitState = new TransitState(firstCountry, 
-                GetTestCompetentAuthority(firstCountry),
-                GetTestEntryOrExitPoint(firstCountry, guids[1]),
-                GetTestEntryOrExitPoint(firstCountry, guids[2]), 
+            var firstTransitState = new TransitState(countries[0],
+                GetTestCompetentAuthority(countries[0]),
+                GetTestEntryOrExitPoint(countries[0], guids[1]),
+                GetTestEntryOrExitPoint(countries[0], guids[2]),
                 1);
 
             notification.AddTransitStateToNotification(firstTransitState);
 
-            var secondCountry = GetTestCountry(guids[1]);
-            var secondTransitState = new TransitState(secondCountry,
-                GetTestCompetentAuthority(secondCountry),
-                GetTestEntryOrExitPoint(secondCountry, guids[3]),
-                GetTestEntryOrExitPoint(secondCountry, guids[4]),
+            var secondTransitState = new TransitState(countries[1],
+                GetTestCompetentAuthority(countries[1]),
+                GetTestEntryOrExitPoint(countries[1], guids[3]),
+                GetTestEntryOrExitPoint(countries[1], guids[4]),
                 1);
 
             Assert.Throws<InvalidOperationException>(
@@ -212,24 +231,18 @@
         [Fact]
         public void AddTransitState_ToPositionOutOfRange_Throws()
         {
-            var guids = GetGuids();
-
-            var notification = GetTestNotification();
-            var firstCountry = GetTestCountry(guids[0]);
-
-            var firstTransitState = new TransitState(firstCountry,
-                GetTestCompetentAuthority(firstCountry),
-                GetTestEntryOrExitPoint(firstCountry, guids[1]),
-                GetTestEntryOrExitPoint(firstCountry, guids[2]),
+            var firstTransitState = new TransitState(countries[0],
+                GetTestCompetentAuthority(countries[0]),
+                GetTestEntryOrExitPoint(countries[0], guids[1]),
+                GetTestEntryOrExitPoint(countries[0], guids[2]),
                 1);
 
             notification.AddTransitStateToNotification(firstTransitState);
 
-            var thirdCountry = GetTestCountry(guids[1]);
-            var thirdTransitState = new TransitState(thirdCountry,
-                GetTestCompetentAuthority(thirdCountry),
-                GetTestEntryOrExitPoint(thirdCountry, guids[3]),
-                GetTestEntryOrExitPoint(thirdCountry, guids[4]),
+            var thirdTransitState = new TransitState(countries[1],
+                GetTestCompetentAuthority(countries[1]),
+                GetTestEntryOrExitPoint(countries[1], guids[3]),
+                GetTestEntryOrExitPoint(countries[1], guids[4]),
                 3);
 
             Assert.Throws<InvalidOperationException>(() => notification.AddTransitStateToNotification(thirdTransitState));
@@ -238,11 +251,8 @@
         [Fact]
         public void AddTransitState_ToAvailablePosition_AddsToNotification()
         {
-            var guids = GetGuids();
-
-            var notification = GetTestNotification();
-            var firstCountry = GetTestCountry(guids[0]);
-            var secondCountry = GetTestCountry(guids[1]);
+            var firstCountry = countries[0];
+            var secondCountry = countries[1];
 
             var firstTransitState = new TransitState(firstCountry,
                 GetTestCompetentAuthority(firstCountry),
@@ -266,12 +276,9 @@
         [Fact]
         public void AddTransitState_ToThirdPosition_AddsToNotification()
         {
-            var guids = GetGuids();
-
-            var notification = GetTestNotification();
-            var firstCountry = GetTestCountry(guids[0]);
-            var secondCountry = GetTestCountry(guids[1]);
-            var thirdCountry = GetTestCountry(guids[2]);
+            var firstCountry = countries[0];
+            var secondCountry = countries[1];
+            var thirdCountry = countries[2];
 
             var firstTransitState = new TransitState(firstCountry,
                 GetTestCompetentAuthority(firstCountry),
@@ -303,8 +310,6 @@
         [Fact]
         public void GetAvailableTransitStatePositions_WhereNotificationIsEmpty_ReturnsOne()
         {
-            var notification = GetTestNotification();
-
             int[] result = notification.GetAvailableTransitStatePositions();
 
             Assert.Equal(1, result[0]);
@@ -313,10 +318,7 @@
         [Fact]
         public void GetAvailableTransitStatePositions_WhereNotificationHasOneState_ReturnsTwo()
         {
-            var guids = GetGuids();
-
-            var notification = GetTestNotification();
-            var firstCountry = GetTestCountry(guids[0]);
+            var firstCountry = countries[0];
 
             var firstTransitState = new TransitState(firstCountry,
                 GetTestCompetentAuthority(firstCountry),
@@ -334,11 +336,8 @@
         [Fact]
         public void GetAvailableTransitStatePositions_WhereNotificationHasTwoStates_ReturnsThree()
         {
-            var guids = GetGuids();
-
-            var notification = GetTestNotification();
-            var firstCountry = GetTestCountry(guids[0]);
-            var secondCountry = GetTestCountry(guids[1]);
+            var firstCountry = countries[0];
+            var secondCountry = countries[1];
 
             var firstTransitState = new TransitState(firstCountry,
                 GetTestCompetentAuthority(firstCountry),
@@ -361,26 +360,45 @@
             Assert.Equal(3, result[0]);
         }
 
-        private IList<Guid> GetGuids()
+        [Fact]
+        public void UpdateTransitState_SetToSameCountryAsExisting_Throws()
         {
-            return new[]
-            {
-                new Guid("D8DB53F9-D3CB-498D-B044-7A67B94EE4E4"),
-                new Guid("1D3A7A18-F345-4201-81AA-8FC8A4029F4E"),
-                new Guid("596E6BE3-D0C1-4C17-AF75-BFCDBD972627"),
-                new Guid("208EA94D-638B-4724-9272-DF1383FF9452"),
-                new Guid("DEDAA6F6-CA6D-486E-B0B8-254A477E697F"),
-                new Guid("4C7EEA30-510E-45BD-8DBB-3EC1AF5E563A"),
-                new Guid("8B87B87D-43D0-4BBE-8E2C-8EC84C983A42"),
-                new Guid("40E44905-4CDE-4470-8E8B-527EE65C65DC"),
-                new Guid("58E18F1C-5A4A-4E2E-869F-72D9C1512FE8") 
-            };
+            notification.AddTransitStateToNotification(transitStates[0]);
+
+            notification.AddTransitStateToNotification(transitStates[1]);
+
+            Assert.Throws<InvalidOperationException>(() => notification.UpdateTransitStateForNotification(transitStates[1].Id, countries[0], 
+                CompetentAuthorityFactory.Create(guids[0], countries[0]),
+                EntryOrExitPointFactory.Create(guids[0], countries[0]),
+                EntryOrExitPointFactory.Create(guids[1], countries[0]), null));
         }
 
-        private NotificationApplication GetTestNotification()
+        [Fact]
+        public void UpdateTransitState_SetToSameOrdinalPositionAsExisting_Throws()
         {
-            return new NotificationApplication(Guid.Empty, NotificationType.Disposal,
-                UKCompetentAuthority.England, 650);
+            notification.AddTransitStateToNotification(transitStates[0]);
+
+            notification.AddTransitStateToNotification(transitStates[1]);
+
+            Assert.Throws<InvalidOperationException>(() => notification.UpdateTransitStateForNotification(transitStates[1].Id, countries[1],
+                CompetentAuthorityFactory.Create(guids[0], countries[1]),
+                EntryOrExitPointFactory.Create(guids[0], countries[1]),
+                EntryOrExitPointFactory.Create(guids[1], countries[1]), 1));
+        }
+
+        [Fact]
+        public void UpdateTransitState_ValidUpdate_SetsCorrectValue()
+        {
+            notification.AddTransitStateToNotification(transitStates[0]);
+
+            notification.AddTransitStateToNotification(transitStates[1]);
+
+            notification.UpdateTransitStateForNotification(transitStates[1].Id, countries[1],
+                CompetentAuthorityFactory.Create(guids[0], countries[1]),
+                EntryOrExitPointFactory.Create(guids[0], countries[1]),
+                EntryOrExitPointFactory.Create(guids[2], countries[1]), null);
+
+            Assert.Equal(guids[2], notification.TransitStates.Single(ts => ts.Id == transitStates[1].Id).ExitPoint.Id);
         }
 
         private EntryOrExitPoint GetTestEntryOrExitPoint(Country country, Guid? id = null)
@@ -394,13 +412,6 @@
             }
 
             return entryOrExitPoint;
-        }
-
-        private Country GetTestCountry(Guid id)
-        {
-            var country = ObjectInstantiator<Country>.CreateNew();
-            ObjectInstantiator<Country>.SetProperty(x => x.Id, id, country);
-            return country;
         }
 
         private CompetentAuthority GetTestCompetentAuthority(Country country)

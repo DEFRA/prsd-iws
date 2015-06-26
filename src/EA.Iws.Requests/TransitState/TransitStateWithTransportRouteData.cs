@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.StateOfImport
+﻿namespace EA.Iws.Requests.TransitState
 {
     using System.Collections.Generic;
     using Core.Shared;
@@ -7,9 +7,11 @@
     using Core.TransitState;
     using Core.TransportRoute;
 
-    public class StateOfImportSetData
+    public class TransitStateWithTransportRouteData
     {
         public StateOfExportData StateOfExport { get; set; }
+
+        public TransitStateData TransitState { get; set; }
 
         public IList<TransitStateData> TransitStates { get; set; }
 
@@ -17,11 +19,11 @@
 
         public CountryData[] Countries { get; set; }
 
-        public EntryOrExitPointData[] EntryPoints { get; set; }
+        public EntryOrExitPointData[] EntryOrExitPoints { get; set; }
 
         public CompetentAuthorityData[] CompetentAuthorities { get; set; }
 
-        public StateOfImportSetData()
+        public TransitStateWithTransportRouteData()
         {
             TransitStates = new List<TransitStateData>();
         }

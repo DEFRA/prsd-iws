@@ -5,7 +5,7 @@
 @if (Model == null || Model.Count == 0)
 {
     <p>No transit states have been added.</p>
-    <p>@Html.ActionLink("Add a transit state", "Add", "TransitState", new { id = ViewData["Id"] }, null)</p>
+    <p>@Html.ActionLink("Add a transit state", "Index", "TransitState", new { id = ViewData["Id"] }, null)</p>
 }
 else
 {
@@ -29,10 +29,10 @@ else
                 <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
                 <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
                 <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
-                <th>@Html.ActionLink("Edit transit state", "Edit", "TransitState", new { id = ViewData["Id"] }, null)</th>
+                <th>@Html.ActionLink("Edit transit state", "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id }, null)</th>
             </tr>
         }
         </tbody>
     </table>
-    <p style="margin-top: 10px;">@Html.ActionLink("Add another transit state", "Add", "TransitState", new { id = ViewData["Id"] }, null)</p>
+    <p style="margin-top: 10px;">@Html.ActionLink("Add another transit state", "Index", "TransitState", new { id = ViewData["Id"] }, null)</p>
 }

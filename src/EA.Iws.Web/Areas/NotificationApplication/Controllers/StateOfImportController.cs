@@ -18,13 +18,13 @@
     public class StateOfImportController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
-        private readonly IMap<StateOfImportSetData, StateOfImportViewModel> mapper;
+        private readonly IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper;
 
         private const string SelectCountry = "country";
         private const string Submit = "submit";
         private const string ChangeCountry = "changeCountry";
 
-        public StateOfImportController(Func<IIwsClient> apiClient, IMap<StateOfImportSetData, StateOfImportViewModel> mapper)
+        public StateOfImportController(Func<IIwsClient> apiClient, IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper)
         {
             this.apiClient = apiClient;
             this.mapper = mapper;
@@ -35,7 +35,7 @@
         {
             using (var client = apiClient())
             {
-                var stateOfImportSetData = await client.SendAsync(User.GetAccessToken(), new GetStateOfImportSetDataByNotificationId(id));
+                var stateOfImportSetData = await client.SendAsync(User.GetAccessToken(), new GetStateOfImportWithTransportRouteDataByNotificationId(id));
 
                 var model = mapper.Map(stateOfImportSetData);
 
@@ -50,6 +50,7 @@
             using (var client = apiClient())
             {
                 model.Countries = await GetCountrySelectListForModel(client, model);
+                await GetCompetentAuthoritiesAndEntryPoints(client, model);
 
                 if (!ModelState.IsValid && submit != ChangeCountry)
                 {
@@ -70,15 +71,6 @@
 
         private async Task<ActionResult> SelectCountryAction(Guid id, StateOfImportViewModel model, IIwsClient client)
         {
-            var entryPointsAndCompetentAuthorities =
-                await
-                    client.SendAsync(User.GetAccessToken(), new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
-
-            var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
-                new KeyValuePair<string, Guid>(ca.Name, ca.Id));
-
-            model.CompetentAuthorities = new StringGuidRadioButtons(competentAuthoritiesKeyValuePairs);
-            model.EntryPoints = new SelectList(entryPointsAndCompetentAuthorities.EntryOrExitPoints, "Id", "Name");
             model.ShowNextSection = true;
 
             return View("Index", model);
@@ -110,6 +102,30 @@
             return (model.CountryId.HasValue)
                 ? new SelectList(countries, "Id", "Name", model.CountryId.Value)
                 : new SelectList(countries, "Id", "Name");
+        }
+
+        private async Task GetCompetentAuthoritiesAndEntryPoints(IIwsClient client, StateOfImportViewModel model)
+        {
+            if (!model.CountryId.HasValue)
+            {
+                return;
+            }
+
+            var entryPointsAndCompetentAuthorities =
+                await
+                    client.SendAsync(User.GetAccessToken(), new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+
+            var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
+                new KeyValuePair<string, Guid>(ca.Name, ca.Id));
+            var competentAuthorityRadioButtons = new StringGuidRadioButtons(competentAuthoritiesKeyValuePairs);
+
+            if (model.CompetentAuthorities != null)
+            {
+                competentAuthorityRadioButtons.SelectedValue = model.CompetentAuthorities.SelectedValue;
+            }
+
+            model.CompetentAuthorities = competentAuthorityRadioButtons;
+            model.EntryPoints = new SelectList(entryPointsAndCompetentAuthorities.EntryOrExitPoints, "Id", "Name");
         }
     }
 }

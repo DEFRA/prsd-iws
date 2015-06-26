@@ -508,3 +508,8 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 .inline-block-label:last-child {
     margin-right: none;
 }
+
+.force-newline {
+    display: block;
+    margin-top: 15px;
+}

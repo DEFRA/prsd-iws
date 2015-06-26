@@ -8,10 +8,6 @@
     using Domain;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
-    using Requests.Registration;
-    using Requests.Shared;
-    using Requests.TransitState;
-    using Requests.TransportRoute;
 
     internal class TransitStateMap : IMap<TransitState, TransitStateData>,
         IMap<IEnumerable<TransitState>, IList<TransitStateData>>
@@ -38,6 +34,7 @@
 
             return new TransitStateData
             {
+                Id = source.Id,
                 CompetentAuthority = competentAuthorityMap.Map(source.CompetentAuthority),
                 Country = countryMap.Map(source.Country),
                 EntryPoint = entryOrExitPointMap.Map(source.EntryPoint),

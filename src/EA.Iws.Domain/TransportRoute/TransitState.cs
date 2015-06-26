@@ -50,5 +50,23 @@ namespace EA.Iws.Domain.TransportRoute
             EntryPoint = entryPoint;
             OrdinalPosition = ordinalPosition;
         }
+
+        public void UpdateTransitState(Country country, 
+            CompetentAuthority competentAuthority, 
+            EntryOrExitPoint entryPoint,
+            EntryOrExitPoint exitPoint, 
+            int? ordinalPosition)
+        {
+            Guard.ArgumentNotNull(() => country, country);
+            Guard.ArgumentNotNull(() => competentAuthority, competentAuthority);
+            Guard.ArgumentNotNull(() => entryPoint, entryPoint);
+            Guard.ArgumentNotNull(() => exitPoint, exitPoint);
+
+            this.CompetentAuthority = competentAuthority;
+            this.Country = country;
+            this.EntryPoint = entryPoint;
+            this.ExitPoint = exitPoint;
+            this.OrdinalPosition = ordinalPosition ?? this.OrdinalPosition;
+        }
     }
 }

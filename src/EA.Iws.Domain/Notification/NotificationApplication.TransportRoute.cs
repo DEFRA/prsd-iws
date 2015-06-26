@@ -82,6 +82,39 @@
             this.TransitStatesCollection.Add(transitState);
         }
 
+        public void UpdateTransitStateForNotification(Guid targetTransitStateId, Country country, 
+            CompetentAuthority competentAuthority, 
+            EntryOrExitPoint entryPoint,
+            EntryOrExitPoint exitPoint, 
+            int? ordinalPosition)
+        {
+            var targetTransitState = this.TransitStatesCollection.Single(ts => ts.Id == targetTransitStateId);
+
+            if (ordinalPosition.HasValue && ordinalPosition < 1)
+            {
+                ordinalPosition = null;
+            }
+
+            var allTransitStatesExceptTarget = this.TransitStatesCollection.Where(ts => ts.Id != targetTransitStateId).ToArray();
+
+            if (allTransitStatesExceptTarget.Any(ts => ts.Country.Id == country.Id))
+            {
+                throw new InvalidOperationException(string.Format("Cannot edit a Transit State to put it in the same Country as another in the collection. Notification {0}. Country {1}",
+                    this.Id,
+                    country.Name));
+            }
+
+            if (ordinalPosition.HasValue && allTransitStatesExceptTarget.Any(ts => ts.OrdinalPosition == ordinalPosition))
+            {
+                throw new InvalidOperationException(string.Format("Attempted to edit a Transit State {0} to position {1} for Notification {2}. The Notification already has another Transit State at this position.",
+                    targetTransitStateId,
+                    ordinalPosition.Value,
+                    this.Id));
+            }
+
+            targetTransitState.UpdateTransitState(country, competentAuthority, entryPoint, exitPoint, ordinalPosition);
+        }
+
         public int[] GetAvailableTransitStatePositions()
         {
             if (TransitStatesCollection.Count == 0)

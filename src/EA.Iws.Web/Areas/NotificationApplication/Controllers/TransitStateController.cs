@@ -6,8 +6,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Core.TransportRoute;
     using Infrastructure;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Web.ApiClient;
     using Requests.Shared;
     using Requests.TransitState;
@@ -19,130 +19,127 @@
     public class TransitStateController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
+        private readonly IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper;
 
-        public TransitStateController(Func<IIwsClient> apiClient)
+        private const string SelectCountry = "country";
+        private const string Submit = "submit";
+        private const string ChangeCountry = "changeCountry";
+
+        public TransitStateController(Func<IIwsClient> apiClient, IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper)
         {
             this.apiClient = apiClient;
+            this.transitStateMapper = transitStateMapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Index(Guid id, Guid? entityId)
         {
             using (var client = apiClient())
             {
-                await this.BindCountryList(client, false);
+                TransitStateWithTransportRouteData result =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new GetTransitStateWithTransportRouteDataByNotificationId(id, entityId));
 
-                TransitStateViewModel model = await PrepareViewModel(id, client);
+                var model = transitStateMapper.Map(result);
 
                 return View(model);
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Add(Guid id,
-            TransitStateViewModel model)
+        public async Task<ActionResult> Index(Guid id, Guid? entityId, TransitStateViewModel model, string submit)
         {
             using (var client = apiClient())
             {
-                await this.BindCountryList(client);
+                model.Countries = await GetCountrySelectListForModel(client, model);
+                await GetCompetentAuthoritiesAndCountriesForModel(client, model);
 
-                if (!ModelState.IsValid)
+                if (!ModelState.IsValid && submit != ChangeCountry)
                 {
-                    if (model.IsCountrySelected)
-                    {
-                        await BindExitOrEntryPointSelectList(client, model.CountryId.Value);
-                    }
-
                     return View(model);
                 }
 
-                if (model.IsCountrySelected)
+                switch (submit)
                 {
-                    try
-                    {
-                        await BindExitOrEntryPointSelectList(client, model.CountryId.Value);
-
-                        var request = new AddTransitStateToNotification(id,
-                            model.CountryId.Value,
-                            model.EntryPointId.Value,
-                            model.ExitPointId.Value,
-                            model.CompetentAuthorities.SelectedValue);
-
-                        await client.SendAsync(User.GetAccessToken(), request);
-                    }
-                    catch (ApiException)
-                    {
-                        ModelState.AddModelError(string.Empty, "Error saving this record.");
-                        return View(model);
-                    }
+                    case SelectCountry:
+                        return await SelectCountryAction(id, model, client);
+                    case ChangeCountry:
+                        return ChangeCountryAction(id, model, client);
+                    default:
+                        return await SubmitAction(id, entityId, model, client);
                 }
-                else
-                {
-                    return await CountrySelectedPostback(model);
-                }
+            }
+        }
+
+        private async Task<ActionResult> SelectCountryAction(Guid id, TransitStateViewModel model, IIwsClient client)
+        {
+            model.ShowNextSection = true;
+
+            return View("Index", model);
+        }
+
+        private ActionResult ChangeCountryAction(Guid id, TransitStateViewModel model, IIwsClient client)
+        {
+            ModelState.Clear();
+            model.ShowNextSection = false;
+
+            return View("Index", model);
+        }
+
+        private async Task<ActionResult> SubmitAction(Guid id, Guid? transitStateId, TransitStateViewModel model, IIwsClient client)
+        {
+            try
+            {
+                var request = new SetTransitStateForNotification(id,
+                    model.CountryId.Value,
+                    model.EntryPointId.Value,
+                    model.ExitPointId.Value,
+                    model.CompetentAuthorities.SelectedValue,
+                    transitStateId,
+                    model.OrdinalPosition);
+                
+                await client.SendAsync(User.GetAccessToken(), request);
 
                 return RedirectToAction("Summary", "TransportRoute", new { id });
             }
-        }
-
-        private async Task<TransitStateViewModel> PrepareViewModel(Guid id, IIwsClient client)
-        {
-            TransportRouteData transportRoute = await client.SendAsync(User.GetAccessToken(),
-                    new GetTransportRouteSummaryForNotification(id));
-
-            var model = new TransitStateViewModel
+            catch (ApiException)
             {
-                IsCountrySelected = false,
-                Countries = ViewBag.Countries as SelectList
-            };
-
-            // To help with validation get all the transport route data to store it in the view
-            if (transportRoute.StateOfExportData != null && transportRoute.StateOfExportData.Country != null)
-            {
-                model.StateOfExportCountryId = transportRoute.StateOfExportData.Country.Id;
+                ModelState.AddModelError(string.Empty, "Error saving this record. You may already have saved this record, return to the summary to edit this record.");
             }
-
-            if (transportRoute.StateOfImportData != null && transportRoute.StateOfImportData.Country != null)
-            {
-                model.StateOfImportCountryId = transportRoute.StateOfImportData.Country.Id;
-            }
-
-            if (transportRoute.TransitStatesData != null)
-            {
-                model.TransitStateCountryIds =
-                    transportRoute.TransitStatesData.Select(ts => ts.Country.Id).ToArray();
-            }
-
-            return model;
-        }
-
-        private async Task<ActionResult> CountrySelectedPostback(TransitStateViewModel model)
-        {
-            this.RemoveModelStateErrors();
-
-            if (!model.CountryId.HasValue)
-            {
-                ModelState.AddModelError("CountryId", "Please select a country.");
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                var competentAuthorities = await client.SendAsync(new GetCompetentAuthoritiesByCountry(model.CountryId.Value));
-                var radioButtons = competentAuthorities.Select(ca => new KeyValuePair<string, Guid>(string.Format("{0} - {1}", ca.Code, ca.Name), ca.Id));
-                model.CompetentAuthorities = new StringGuidRadioButtons(radioButtons);
-                model.IsCountrySelected = true;
-
-                await BindExitOrEntryPointSelectList(client, (Guid)model.CountryId);
-            }
-
             return View(model);
         }
 
-        private async Task BindExitOrEntryPointSelectList(IIwsClient client, Guid countryId)
+        private async Task GetCompetentAuthoritiesAndCountriesForModel(IIwsClient client, TransitStateViewModel model)
         {
-            var entryOrExitPoints = await client.SendAsync(new GetEntryOrExitPointsByCountry(countryId));
-            ViewBag.EntryOrExitPoints = new SelectList(entryOrExitPoints, "Id", "Name");
+            if (!model.CountryId.HasValue)
+            {
+                return;
+            }
+
+            var entryPointsAndCompetentAuthorities =
+                await
+                    client.SendAsync(User.GetAccessToken(), new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+
+            var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
+                new KeyValuePair<string, Guid>(ca.Name, ca.Id));
+            var competentAuthorityRadioButtons = new StringGuidRadioButtons(competentAuthoritiesKeyValuePairs);
+
+            if (model.CompetentAuthorities != null)
+            {
+                competentAuthorityRadioButtons.SelectedValue = model.CompetentAuthorities.SelectedValue;
+            }
+
+            model.CompetentAuthorities = competentAuthorityRadioButtons;
+            model.EntryOrExitPoints = new SelectList(entryPointsAndCompetentAuthorities.EntryOrExitPoints, "Id", "Name");
+        }
+
+        private async Task<SelectList> GetCountrySelectListForModel(IIwsClient client, TransitStateViewModel model)
+        {
+            var countries = await client.SendAsync(new GetCountries());
+
+            return (model.CountryId.HasValue)
+                ? new SelectList(countries, "Id", "Name", model.CountryId.Value)
+                : new SelectList(countries, "Id", "Name");
         }
     }
 }

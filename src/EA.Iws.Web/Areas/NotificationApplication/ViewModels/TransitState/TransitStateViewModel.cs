@@ -9,24 +9,28 @@
 
     public class TransitStateViewModel : IValidatableObject
     {
+        public int? OrdinalPosition { get; set; }
+
         [Required]
         [Display(Name = "Country")]
         public Guid? CountryId { get; set; }
 
-        public bool IsCountrySelected { get; set; }
+        public bool ShowNextSection { get; set; }
 
         public SelectList Countries { get; set; }
 
+        public SelectList EntryOrExitPoints { get; set; }
+
         [Display(Name = "Entry point")]
-        [RequiredIf("IsCountrySelected", true, "The entry point is required")]
+        [RequiredIf("ShowNextSection", true, "The entry point is required")]
         public Guid? EntryPointId { get; set; }
 
         [Display(Name = "Exit point")]
-        [RequiredIf("IsCountrySelected", true, "The exit point is required")]
+        [RequiredIf("ShowNextSection", true, "The exit point is required")]
         public Guid? ExitPointId { get; set; }
 
         [Display(Name = "Competent authority")]
-        [RequiredIf("IsCountrySelected", true, "The competent authority is required")]
+        [RequiredIf("ShowNextSection", true, "The competent authority is required")]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
 
         public Guid? StateOfImportCountryId { get; set; }
@@ -34,6 +38,11 @@
         public IList<Guid> TransitStateCountryIds { get; set; }
 
         public Guid? StateOfExportCountryId { get; set; }
+
+        public TransitStateViewModel()
+        {
+            TransitStateCountryIds = new List<Guid>();
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -52,7 +61,7 @@
                 yield return new ValidationResult("Transit country may not be the same as another transit country.", new[] { "CountryId" });
             }
 
-            if (ExitPointId == EntryPointId && IsCountrySelected)
+            if (ExitPointId == EntryPointId && CountryId.HasValue && ShowNextSection)
             {
                 yield return new ValidationResult("Exit and entry point must not be the same.", new[] { "ExitPointId" });
             }

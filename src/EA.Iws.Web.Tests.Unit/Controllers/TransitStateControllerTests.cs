@@ -1,23 +1,10 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
-    using Api.Client;
-    using Areas.NotificationApplication.Controllers;
-    using Areas.NotificationApplication.ViewModels.TransitState;
     using Core.Shared;
-    using FakeItEasy;
-    using Requests.Shared;
-    using Requests.StateOfExport;
-    using Requests.TransitState;
-    using Requests.TransportRoute;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using Core.StateOfExport;
     using Core.TransportRoute;
-    using Web.ViewModels.Shared;
-    using Xunit;
 
     public class TransitStateControllerTests
     {
@@ -75,150 +62,6 @@
             Id = new Guid("BE672385-02B9-48B6-A211-5F6A1610EA1F"),
             Name = "Hull"
         };
-
-        [Fact]
-        public async Task Add_HttpGet_ReturnsModel()
-        {
-            var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(GetCountryData());
-
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetTransportRouteSummaryForNotification>._))
-                .Returns(new TransportRouteData
-                {
-                    StateOfExportData = new StateOfExportData
-                    {
-                        ExitPoint = dover,
-                        Country = new CountryData
-                        {
-                            Id = UnitedKingdomGuid,
-                            Name = UnitedKingdom
-                        },
-                        CompetentAuthority = environmentAgency
-                    }
-                });
-
-            var controller = new TransitStateController(() => client);
-
-            var result = (await controller.Add(new Guid("F829E4B1-7F8B-44FC-9BBE-CEFB6A463B45"))) as ViewResult;
-
-            Assert.IsType<TransitStateViewModel>(result.Model);
-            var model = result.Model as TransitStateViewModel;
-
-            Assert.Equal(UnitedKingdomGuid, model.StateOfExportCountryId);
-            Assert.False(model.IsCountrySelected);
-        }
-
-        [Fact]
-        public async Task Add_HttpPost_SelectCountryPostbackToView()
-        {
-            var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(GetCountryData());
-            A.CallTo(() => client.SendAsync(A<GetCompetentAuthoritiesByCountry>._)).Returns(new[]
-            {
-                hollandAgency
-            });
-            A.CallTo(() => client.SendAsync(A<GetEntryOrExitPointsByCountry>._)).Returns(new[]            
-            {
-                europoort
-            });
-
-            var controller = new TransitStateController(() => client);
-
-            var result = (await controller.Add(Guid.Empty, new TransitStateViewModel
-            {
-                IsCountrySelected = false,
-                CountryId = HollandGuid,
-                StateOfExportCountryId = UnitedKingdomGuid
-            })) as ViewResult;
-            
-            Assert.IsType<TransitStateViewModel>(result.Model);
-
-            var model = result.Model as TransitStateViewModel;
-
-            Assert.True(model.IsCountrySelected);
-            Assert.Equal(hollandAgency.Id, model.CompetentAuthorities.PossibleValues.First().Value);
-        }
-
-        [Fact]
-        public async Task Add_HttpPost_SelectCountryWithErrorsPostbackToOriginalView()
-        {
-            var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(GetCountryData());
-
-            var controller = new TransitStateController(() => client);
-
-            controller.ModelState.AddModelError("CountryId", "A error occurred.");
-
-            var result = await controller.Add(Guid.Empty, new TransitStateViewModel
-            {
-                IsCountrySelected = false,
-                CountryId = UnitedKingdomGuid,
-                StateOfExportCountryId = UnitedKingdomGuid
-            }) as ViewResult;
-
-            Assert.IsType<TransitStateViewModel>(result.Model);
-            var model = result.Model as TransitStateViewModel;
-
-            Assert.False(model.IsCountrySelected);
-            Assert.Equal(UnitedKingdomGuid, model.CountryId);
-        }
-
-        [Fact]
-        public async Task Add_HttpPost_FullSubmitRedirectsToSummary()
-        {
-            var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(GetCountryData());
-
-            A.CallTo(() => client.SendAsync(A<GetEntryOrExitPointsByCountry>._)).Returns(new[]
-            {
-                europoort
-            });
-
-            A.CallTo(() => client.SendAsync(A<AddTransitStateToNotification>._)).Returns(Guid.Empty);
-
-            var controller = new TransitStateController(() => client);
-
-            var result = await controller.Add(Guid.Empty, new TransitStateViewModel
-            {
-                CountryId = HollandGuid,
-                ExitPointId = europoort.Id,
-                EntryPointId = harlingen.Id,
-                IsCountrySelected = true,
-                CompetentAuthorities = new StringGuidRadioButtons()
-            }) as RedirectToRouteResult;
-
-            Assert.Equal("Summary", result.RouteValues["action"]);
-        }
-
-        [Fact]
-        public async Task Add_HttpPost_ErrorOnFullSubmit()
-        {
-            var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(GetCountryData());
-            A.CallTo(() => client.SendAsync(A<GetEntryOrExitPointsByCountry>._)).Returns(new[]
-            {
-                europoort,
-                harlingen
-            });
-
-            var controller = new TransitStateController(() => client);
-
-            controller.ModelState.AddModelError("ExitPointId", "An error occurred.");
-
-            var result = await controller.Add(Guid.Empty, new TransitStateViewModel
-            {
-                CountryId = HollandGuid,
-                CompetentAuthorities = new StringGuidRadioButtons(),
-                EntryPointId = europoort.Id,
-                ExitPointId = harlingen.Id,
-                IsCountrySelected = true
-            }) as ViewResult;
-
-            Assert.IsType<TransitStateViewModel>(result.Model);
-            var model = result.Model as TransitStateViewModel;
-            Assert.Equal(HollandGuid, model.CountryId);
-            Assert.Equal(europoort.Id, model.EntryPointId);
-        }
 
         private List<CountryData> GetCountryData()
         {

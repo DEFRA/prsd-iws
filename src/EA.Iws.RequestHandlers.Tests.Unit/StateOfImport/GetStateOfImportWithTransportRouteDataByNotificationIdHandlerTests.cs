@@ -15,15 +15,15 @@
     using Xunit;
     using StateOfImport = Domain.TransportRoute.StateOfImport;
 
-    public class GetStateOfImportSetDataByNotificationIdHandlerTests
+    public class GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests
     {
         private readonly IwsContext context;
-        private readonly GetStateOfImportSetDataByNotificationIdHandler handler;
+        private readonly GetStateOfImportWithTransportRouteDataByNotificationIdHandler handler;
         private readonly Guid stateOfImportCountryId = new Guid("012F9664-5286-433A-8628-AAE13FD1C2F5");
         private static readonly Guid NotificationNoStateOfImportId = new Guid("5243D3E5-CA81-4A3E-B589-4D22D6676B28");
         private static readonly Guid NotificationWithStateOfImportId = new Guid("6A28C99A-AF06-402D-BF6C-54A9A78D66A1");
 
-        public GetStateOfImportSetDataByNotificationIdHandlerTests()
+        public GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests()
         {
             context = A.Fake<IwsContext>();
 
@@ -70,7 +70,7 @@
             var countryMap = new CountryMap();
             var entryOrExitPointMap = new EntryOrExitPointMap();
             var competentAuthorityMap = new CompetentAuthorityMap();
-            handler = new GetStateOfImportSetDataByNotificationIdHandler(context, 
+            handler = new GetStateOfImportWithTransportRouteDataByNotificationIdHandler(context, 
                 new StateOfImportMap(countryMap, competentAuthorityMap, entryOrExitPointMap),
                 new StateOfExportMap(countryMap, competentAuthorityMap, entryOrExitPointMap),
                 new TransitStateMap(countryMap, competentAuthorityMap, entryOrExitPointMap), 
@@ -84,13 +84,13 @@
         {
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
-                    () => handler.HandleAsync(new GetStateOfImportSetDataByNotificationId(Guid.Empty)));
+                    () => handler.HandleAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(Guid.Empty)));
         }
 
         [Fact]
         public async Task Handle_NotificationExistsNullStateOfImport_ReturnsNull()
         {
-            var result = await handler.HandleAsync(new GetStateOfImportSetDataByNotificationId(NotificationNoStateOfImportId));
+            var result = await handler.HandleAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(NotificationNoStateOfImportId));
 
             Assert.Null(result.StateOfImport);
         }
@@ -98,7 +98,7 @@
         [Fact]
         public async Task Handle_NotificationExistsWithStateOfImport_ReturnsStateOfImport()
         {
-            var result = await handler.HandleAsync(new GetStateOfImportSetDataByNotificationId(NotificationWithStateOfImportId));
+            var result = await handler.HandleAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(NotificationWithStateOfImportId));
 
             Assert.NotNull(result);
             Assert.Equal(stateOfImportCountryId, result.StateOfImport.Country.Id);
@@ -107,7 +107,7 @@
         [Fact]
         public async Task Handle_NotificationExistsWithStateOfImport_ReturnsStateOfImportEntryPointsInCorrectCountry()
         {
-            var result = await handler.HandleAsync(new GetStateOfImportSetDataByNotificationId(NotificationWithStateOfImportId));
+            var result = await handler.HandleAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(NotificationWithStateOfImportId));
 
             Assert.NotNull(result);
             Assert.True(result.EntryPoints.All(ep => ep.CountryId == stateOfImportCountryId));
@@ -116,7 +116,7 @@
         [Fact]
         public async Task Handle_NotificationExistsWithStateOfImport_ReturnsStateOfImportCompetentAuthoritiesInCorrectCountry()
         {
-            var result = await handler.HandleAsync(new GetStateOfImportSetDataByNotificationId(NotificationWithStateOfImportId));
+            var result = await handler.HandleAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(NotificationWithStateOfImportId));
 
             Assert.NotNull(result);
             Assert.True(result.CompetentAuthorities.All(ca => ca.CountryId == stateOfImportCountryId));
@@ -126,7 +126,7 @@
         public async Task Handle_ReturnsCountryData()
         {
             var result =
-                await handler.HandleAsync(new GetStateOfImportSetDataByNotificationId(NotificationNoStateOfImportId));
+                await handler.HandleAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(NotificationNoStateOfImportId));
 
             Assert.Equal(3, result.Countries.Length);
         }

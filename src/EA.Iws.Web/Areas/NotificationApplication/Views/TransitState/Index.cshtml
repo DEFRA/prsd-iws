@@ -8,21 +8,11 @@
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
-    
-    @Html.HiddenFor(m => m.StateOfExportCountryId)
-    @Html.HiddenFor(m => m.StateOfImportCountryId)
 
-    if (Model.TransitStateCountryIds != null)
+    if (!Model.ShowNextSection)
     {
-        for (int i = 0; i < Model.TransitStateCountryIds.Count; i++)
-        {
-            @Html.HiddenFor(m => m.TransitStateCountryIds[i])
-        }
-    }
-    
-    if (!Model.IsCountrySelected)
-    {
-        @Html.Partial("CountrySelector", Model)
+        @Html.Partial("_CountryOnly", Model)
+
         @section scripts{
             <script>
                 (function ($) {
@@ -35,7 +25,10 @@
     }
     else
     {
-        @Html.Partial("OtherDetailsSelector", Model)
+        @Html.HiddenFor(m => m.ShowNextSection)
+
+        @Html.Partial("_AllDetails", Model)
+
         @section scripts{
             <script>
                 (function ($) {
@@ -46,5 +39,18 @@
                 })(jQuery);
             </script>
         }
+    }
+
+    for (int i = 0; i < Model.TransitStateCountryIds.Count; i++)
+    {
+        @Html.HiddenFor(m => m.TransitStateCountryIds[i])
+    }
+    if (Model.StateOfExportCountryId.HasValue)
+    {
+        @Html.HiddenFor(m => m.StateOfExportCountryId)
+    }
+    if (Model.StateOfImportCountryId.HasValue)
+    {
+        @Html.HiddenFor(m => m.StateOfImportCountryId)
     }
 }

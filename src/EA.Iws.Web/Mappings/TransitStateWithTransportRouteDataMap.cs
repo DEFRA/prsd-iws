@@ -4,35 +4,35 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Areas.NotificationApplication.ViewModels.StateOfImport;
+    using Areas.NotificationApplication.ViewModels.TransitState;
     using Prsd.Core.Mapper;
-    using Requests.StateOfImport;
+    using Requests.TransitState;
     using ViewModels.Shared;
 
-    public class StateOfImportSetDataMap : IMap<StateOfImportSetData, StateOfImportViewModel>
+    public class TransitStateWithTransportRouteDataMap : IMap<TransitStateWithTransportRouteData, TransitStateViewModel>
     {
-        public StateOfImportViewModel Map(StateOfImportSetData source)
+        public TransitStateViewModel Map(TransitStateWithTransportRouteData source)
         {
-            var model = new StateOfImportViewModel
+            var model = new TransitStateViewModel
             {
-                ShowNextSection = source.StateOfImport != null,
+                ShowNextSection = source.TransitState != null,
                 TransitStateCountryIds = source.TransitStates.Select(ts => ts.Country.Id).ToArray()
             };
 
             if (model.ShowNextSection)
             {
-                model.CountryId = source.StateOfImport.Country.Id;
-
+                model.CountryId = source.TransitState.Country.Id;
                 model.Countries = new SelectList(source.Countries, "Id", "Name", model.CountryId);
 
-                model.EntryOrExitPointId = source.StateOfImport.EntryPoint.Id;
+                model.EntryPointId = source.TransitState.EntryPoint.Id;
+                model.ExitPointId = source.TransitState.ExitPoint.Id;
+
+                model.EntryOrExitPoints = new SelectList(source.EntryOrExitPoints, "Id", "Name");
 
                 model.CompetentAuthorities = new StringGuidRadioButtons(source.CompetentAuthorities
                     .Select(ca => new KeyValuePair<string, Guid>(ca.Name, ca.Id)));
 
-                model.CompetentAuthorities.SelectedValue = source.StateOfImport.CompetentAuthority.Id;
-
-                model.EntryPoints = new SelectList(source.EntryPoints, "Id", "Name", model.EntryOrExitPointId);
+                model.CompetentAuthorities.SelectedValue = source.TransitState.CompetentAuthority.Id;
             }
             else
             {
@@ -42,6 +42,11 @@
             if (source.StateOfExport != null)
             {
                 model.StateOfExportCountryId = source.StateOfExport.Country.Id;
+            }
+
+            if (source.StateOfImport != null)
+            {
+                model.StateOfImportCountryId = source.StateOfImport.Country.Id;
             }
 
             return model;
