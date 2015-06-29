@@ -17,13 +17,10 @@
 
         public bool IsDisposal { get; set; }
 
-        [Required]
         public RadioButtonStringCollectionViewModel EstimatedUnit { get; set; }
 
-        [Required]
         public RadioButtonStringCollectionViewModel CostUnit { get; set; }
 
-        [RequiredIf("IsDisposal", true, "Please answer this question.")]
         public RadioButtonStringCollectionOptionalViewModel DisposalUnit { get; set; }
 
         [DataType(DataType.Currency)]
@@ -39,7 +36,6 @@
         public decimal? CostAmount { get; set; }
 
         [DataType(DataType.Currency)]
-        [RequiredIf("IsDisposal", true, "Please enter the amount in GBP(£) for cost of disposal of the non-recoverable fraction.")]
         [RegularExpression(@"^[-]?\d+(\.\d{1,2})?", ErrorMessage = "The cost of disposal amount must be a number with a maximum of 2 decimal places.")]
         [Display(Name = "Enter the amount in GBP(£)")]
         public decimal? DisposalAmount { get; set; }
@@ -82,12 +78,12 @@
             {
                 if (String.IsNullOrWhiteSpace(DisposalUnit.SelectedValue))
                 {
-                    results.Add(new ValidationResult("Please answer this question."));
+                    results.Add(new ValidationResult("Please answer this question.", new[] { "DisposalUnit.SelectedValue" }));
                 }
 
                 if (!DisposalAmount.HasValue)
                 {
-                    results.Add(new ValidationResult("Please enter the amount in GBP(£) for cost of disposal of the non-recoverable fraction."));
+                    results.Add(new ValidationResult("Please enter the amount in GBP(£) for cost of disposal of the non-recoverable fraction.", new[] { "DisposalAmount" }));
                 }
             }
             return results;

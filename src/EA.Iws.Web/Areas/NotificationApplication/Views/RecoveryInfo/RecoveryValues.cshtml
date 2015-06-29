@@ -41,7 +41,7 @@
     <div class="form-group @( Model.IsDisposal ? "" : "js-hidden")">
         <h2 class="heading-medium">What is the cost of disposal of the non-recoverable fraction?</h2>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalUnit.SelectedValue)">
-            @Html.Gds().ValidationMessageFor(model => model.DisposalUnit.SelectedValue)
+            @Html.Gds().ValidationMessageFor(m => m.DisposalUnit.SelectedValue)
             @Html.EditorFor(m => m.DisposalUnit)
         </div>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalAmount)">
