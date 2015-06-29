@@ -38,9 +38,9 @@
 
 <h4>Classify your waste</h4>
 @Html.Navigation().Link("Chemical composition", Model.Progress.IsChemicalCompositionCompleted, "ChemicalComposition", "WasteType", "NotificationApplication")
-@Html.Navigation().Link("Process of generation", Model.Progress.IsProcessOfGenerationCompleted, "WasteGenerationProcess", "WasteType", "NotificationApplication")
-@Html.Navigation().Link("Physical characteristics", Model.Progress.ArePhysicalCharacteristicsCompleted, "PhysicalCharacteristics", "WasteType", "NotificationApplication")
-@Html.Navigation().Link("Waste codes", Model.Progress.AreWasteCodesCompleted, "WasteCode", "WasteType", "NotificationApplication")
+@Html.Navigation().Link("Process of generation", Model.Progress.IsProcessOfGenerationCompleted, "Index", "WasteGenerationProcess", "NotificationApplication")
+@Html.Navigation().Link("Physical characteristics", Model.Progress.ArePhysicalCharacteristicsCompleted, "Index", "PhysicalCharacteristics", "NotificationApplication")
+@Html.Navigation().Link("Waste codes", Model.Progress.AreWasteCodesCompleted, "WasteCode", "WasteCodes", "NotificationApplication")
 
 <h4>Waste Recovery</h4>
 @Html.Navigation().Link("Recovery information", Model.Progress.IsWasteRecoveryInformationCompleted, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication")

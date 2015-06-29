@@ -1,14 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
-    using Core.WasteType;
+    using System.Collections.Generic;
+    using Core.WasteCodes;
     using Domain.Notification;
-    using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
-    using Requests.WasteType;
-    using CodeType = Core.WasteType.CodeType;
 
-    internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>
+    internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>, IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]>,
+        IMap<WasteCodeInfo, WasteCodeData[]>
     {
         public WasteCodeData Map(WasteCode source)
         {
@@ -17,23 +15,35 @@
                 Id = source.Id,
                 Description = source.Description,
                 Code = source.Code,
-                CodeType = GetCodeType(source.CodeType)
+                CodeType = source.CodeType
             };
         }
 
-        public Domain.Notification.CodeType Map(CodeType source)
+        public WasteCodeData[] Map(IEnumerable<WasteCodeInfo> source)
         {
-            return Enumeration.FromValue<Domain.Notification.CodeType>((int)source);
+            var wasteCodes = new List<WasteCodeData>();
+            foreach (var wasteCode in source)
+            {
+                var wasteCodeData = Map(wasteCode.WasteCode);
+                wasteCodeData.CustomCode = wasteCode.CustomCode;
+                wasteCodes.Add(wasteCodeData);
+            }
+            return wasteCodes.ToArray();
         }
 
-        private CodeType GetCodeType(Domain.Notification.CodeType codeType)
+        public WasteCodeData[] Map(WasteCodeInfo source)
         {
-            CodeType type;
-            if (Enum.TryParse(codeType.Value.ToString(), out type))
+            if (source == null)
             {
-                return type;
+                return new WasteCodeData[] { };
             }
-            throw new ArgumentException(string.Format("Unknown CodeType {0}", codeType.Value), "codeType");
+
+            var wasteCodeData = Map(source.WasteCode);
+            wasteCodeData.CustomCode = source.CustomCode;
+            return new[]
+            {
+                wasteCodeData
+            };
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.WasteGenerationProcessViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteGenerationProcess.WasteGenerationProcessViewModel
 @{
     ViewBag.Title = "Waste generation process";
 }
 <header class="hgroup">
     <h2 class="heading-large">Describe the process by which the waste was produced</h2>
 </header>
-@using (Html.BeginForm(actionName: "WasteGenerationProcess", controllerName: "WasteType", method: FormMethod.Post))
+@using (Html.BeginForm(actionName: "Index", controllerName: "WasteGenerationProcess", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

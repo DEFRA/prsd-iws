@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Core.WasteType
+﻿namespace EA.Iws.Core.WasteCodes
 {
     using System;
 
@@ -12,10 +12,6 @@
 
         public CodeType CodeType { get; set; }
 
-        public Guid NotificationId { get; set; }
-
-        public string OptionalCode { get; set; }
-
-        public string OptionalDescription { get; set; }
+        public string CustomCode { get; set; }
     }
 }

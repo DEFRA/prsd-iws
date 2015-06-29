@@ -1,13 +1,19 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Core.WasteCodes;
     using Core.WasteType;
 
     public class WasteCodeViewModel : IValidatableObject
     {
+        public WasteCodeViewModel()
+        {
+            SelectedEwcCodes = new List<WasteCodeData>();
+        }
+
         public IEnumerable<WasteCodeData> WasteCodes { get; set; }
 
         [Required]

@@ -1,13 +1,21 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Core.WasteCodes;
     using Core.WasteType;
 
     public class YcodeHcodeAndUnClassViewModel : IValidatableObject
     {
+        public YcodeHcodeAndUnClassViewModel()
+        {
+            SelectedHcodesList = new List<WasteCodeData>();
+            SelectedYcodesList = new List<WasteCodeData>();
+            SelectedUnClassesList = new List<WasteCodeData>();
+        }
+
         public IEnumerable<WasteCodeData> Ycodes { get; set; }
         public IEnumerable<WasteCodeData> Hcodes { get; set; }
         public IEnumerable<WasteCodeData> UnClasses { get; set; }

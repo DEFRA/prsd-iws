@@ -431,9 +431,9 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Areas\NotificationApplication\Views\WasteType\OtherWasteCodes.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteCodes\OtherWasteCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryValues.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteType\UnNumber.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteCodes\UnNumber.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Exporter\_BusinessEditor.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryPercentage.cshtml" />
@@ -534,8 +534,8 @@
     <Content Include="Views\Shared\EditorTemplates\StringGuidRadioButtons.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteOperations\RecoveryCodes.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteType\PhysicalCharacteristics.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteType\WasteGenerationProcess.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\PhysicalCharacteristics\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteGenerationProcess\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteOperations\_OperationCodes.cshtml" />
     <Content Include="Views\Shared\_SelectAllCheckBoxScript.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\Summary.cshtml" />
@@ -544,9 +544,9 @@
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\StateOfImportSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ReasonForExport\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteType\WasteCode.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteCodes\WasteCode.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\_ShipmentForm.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteType\AddYcodeHcodeAndUnClass.cshtml">
+    <Content Include="Areas\NotificationApplication\Views\WasteCodes\AddYcodeHcodeAndUnClass.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
@@ -585,8 +585,11 @@
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\MeansOfTransportController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\PhysicalCharacteristicsController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReasonForExportController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\RecoveryInfoController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\WasteCodesController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\WasteGenerationProcessController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\CustomsOffice\CustomsOfficeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\NotificationApplicationAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\RecoveryPercentageViewModel.cs" />
@@ -604,8 +607,8 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteAdditionalInformationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteViewModel.cs" />
     <Compile Include="Controllers\NewNotificationController.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteCodesViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\UnNumberViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\OtherWasteCodesViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\UnNumberViewModel.cs" />
     <Compile Include="Infrastructure\Navigation.cs" />
     <Compile Include="Infrastructure\NavigationExtensions.cs" />
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
@@ -661,7 +664,7 @@
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\OperationCodesViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\YcodeHcodeAndUnClassViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\YcodeHcodeAndUnClassViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />
@@ -685,10 +688,10 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\TechnologyEmployedViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\ChemicalCompositionViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\StateOfExportViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\PhysicalCharacteristicsViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\PhysicalCharacteristics\PhysicalCharacteristicsViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\TransitState\TransitStateViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\WasteCodeViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\WasteGenerationProcessViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\WasteCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteGenerationProcess\WasteGenerationProcessViewModel.cs" />
     <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>

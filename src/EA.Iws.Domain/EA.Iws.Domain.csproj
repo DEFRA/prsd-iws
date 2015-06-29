@@ -51,7 +51,6 @@
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="Notification\CodeType.cs" />
     <Compile Include="Notification\NotificationApplication.PhysicalCharacteristics.cs" />
     <Compile Include="Notification\NotificationApplication.Progress.cs" />
     <Compile Include="Notification\NotificationApplication.WasteCodes.cs" />

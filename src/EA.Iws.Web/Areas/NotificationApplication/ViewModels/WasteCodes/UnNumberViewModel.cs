@@ -1,13 +1,20 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Core.WasteCodes;
     using Core.WasteType;
 
     public class UnNumberViewModel : IValidatableObject
     {
+        public UnNumberViewModel()
+        {
+            SelectedUnCodes = new List<WasteCodeData>();
+            CustomCodes = new List<string>();
+        }
+
         public Guid NotificationId { get; set; }
 
         public IEnumerable<WasteCodeData> UnCodes { get; set; }

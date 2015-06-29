@@ -1,4 +1,4 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.YcodeHcodeAndUnClassViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.YcodeHcodeAndUnClassViewModel
            
 @{
     ViewBag.Title = "Y codes, H codes and UN class";
@@ -12,7 +12,7 @@
         <h2 class="heading-large">Waste Identification</h2>
     </header>
 
-    @using (Html.BeginForm("AddYcodeHcodeAndUnClass", "WasteType", FormMethod.Post))
+    @using (Html.BeginForm("AddYcodeHcodeAndUnClass", "WasteCodes", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.Gds().ValidationSummary()
@@ -39,8 +39,8 @@
                 <button class="link-submit" type="submit" name="command" value="addYcode">Add</button>
             </div>
 
-            <div class="js-hidden">
-                <table class="column-two-thirds" id="nonjsYcodeDescriptionTable">
+            <div class="form-group">
+                <table id="nonjsYcodeDescriptionTable">
                     <thead>
                         <tr>
                             <th>Code</th>
@@ -96,8 +96,8 @@
                 <button class="link-submit" type="submit" name="command" value="addHcode">Add</button>
             </div>
 
-            <div class="js-hidden">
-                <table class="column-two-thirds" id="nonjsHcodeDescriptionTable">
+            <div class="form-group">
+                <table id="nonjsHcodeDescriptionTable">
                     <thead>
                         <tr>
                             <th>Code</th>
@@ -156,8 +156,8 @@
                 <button class="link-submit" type="submit" name="command" value="addUnClass">Add</button>
             </div>
 
-            <div class="js-hidden">
-                <table class="column-two-thirds" id="nonjsUnClassDescriptionTable">
+            <div class="form-group">
+                <table id="nonjsUnClassDescriptionTable">
                     <thead>
                         <tr>
                             <th>Code</th>

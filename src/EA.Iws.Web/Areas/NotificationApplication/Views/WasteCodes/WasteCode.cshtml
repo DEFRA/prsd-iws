@@ -1,6 +1,6 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.WasteCodeViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.WasteCodeViewModel
 @{
-    ViewBag.Title = "Waste Code";
+    ViewBag.Title = "Waste Identification";
 }
 <header class="hgroup">
     <div class="form-group">
@@ -23,7 +23,7 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedWasteCode)">
             @Html.Gds().LabelFor(m => m.SelectedWasteCode)
 
-            <select onchange=" getComboDescription(this) " data-val="true" data-val-required="The SelectedWasteCode field is required." id="code-list" name="SelectedWasteCode">
+            <select data-val="true" data-val-required="The SelectedWasteCode field is required." id="code-list" name="SelectedWasteCode">
                 <option description="" selected="selected" value=""></option>
                 @foreach (var wasteCode in Model.WasteCodes)
                 {
@@ -87,13 +87,17 @@
             $(function() {
                 $('#code-list').selectToAutocomplete();
                 $('#ewc-code-list').selectToAutocomplete();
+
+                $('#code-list').change(function() {
+                    getComboDescription($(this));
+                });
+
+                getComboDescription($('#code-list'));
             });
         })(jQuery);
 
         function getComboDescription(sel) {
-            if (sel.selectedIndex > 0) {
-                document.getElementById("descriptionTextArea").innerHTML = sel.options[sel.selectedIndex].getAttribute('description');
-            }
+            $("#descriptionTextArea").text(sel.find(":selected").attr('description'));
         }
 
         var previouslyEnteredCodes = [];
