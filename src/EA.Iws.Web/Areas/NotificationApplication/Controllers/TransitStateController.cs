@@ -62,7 +62,7 @@
                 switch (submit)
                 {
                     case SelectCountry:
-                        return await SelectCountryAction(id, model, client);
+                        return SelectCountryAction(id, model, client);
                     case ChangeCountry:
                         return ChangeCountryAction(id, model, client);
                     default:
@@ -71,7 +71,7 @@
             }
         }
 
-        private async Task<ActionResult> SelectCountryAction(Guid id, TransitStateViewModel model, IIwsClient client)
+        private ActionResult SelectCountryAction(Guid id, TransitStateViewModel model, IIwsClient client)
         {
             model.ShowNextSection = true;
 
