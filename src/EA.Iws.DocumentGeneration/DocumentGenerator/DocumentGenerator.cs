@@ -49,7 +49,8 @@
             {
                 new GeneralBlock(mergeFields, notification),
                 new ExporterBlock(mergeFields, notification),
-                new ProducerBlock(mergeFields, notification)
+                new ProducerBlock(mergeFields, notification),
+                new ImporterBlock(mergeFields, notification)
             };
         }
     }
