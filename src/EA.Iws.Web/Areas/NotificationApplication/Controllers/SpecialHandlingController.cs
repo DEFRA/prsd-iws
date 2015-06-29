@@ -56,7 +56,7 @@
                         new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
                             model.SpecialHandlingDetails));
 
-                    return RedirectToAction("Add", "StateOfExport", new { id = model.NotificationId });
+                    return RedirectToAction("Index", "StateOfExport", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

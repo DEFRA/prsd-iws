@@ -86,6 +86,7 @@
     <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
     <Compile Include="Mappings\CodeTypeMap.cs" />
     <Compile Include="Mappings\CustomsOfficeMap.cs" />
+    <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsMap.cs" />
     <Compile Include="Mappings\PreconsentedFacilityMap.cs" />

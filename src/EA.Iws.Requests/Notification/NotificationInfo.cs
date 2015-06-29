@@ -3,7 +3,6 @@
     using System;
     using Core.Notification;
     using Core.Shared;
-    using Shared;
 
     public class NotificationInfo
     {
@@ -16,5 +15,7 @@
         public string CompetentAuthorityName { get; set; }
 
         public NotificationType NotificationType { get; set; }
+
+        public NotificationApplicationCompletionProgress Progress { get; set; }
     }
 }

@@ -82,7 +82,8 @@
                 {
                     NotificationId = response.NotificationId,
                     NotificationNumber = response.NotificationNumber,
-                    NotificationType = response.NotificationType
+                    NotificationType = response.NotificationType,
+                    Progress = response.Progress
                 };
                 return PartialView(model);
             }

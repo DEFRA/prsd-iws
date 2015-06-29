@@ -52,6 +52,7 @@
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
+    <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />
     <Compile Include="Notification\RecoveryPercentageData.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
     <Compile Include="OperationCodes\DisposalCode.cs" />

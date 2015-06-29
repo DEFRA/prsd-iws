@@ -7,42 +7,42 @@
 </p>
 
 <h4>Organisations involved</h4>
-@Html.Navigation().Link("Exporter notifier", false, "Index", "Exporter", "NotificationApplication")
-@Html.Navigation().Link("Waste generator producer", false, "List", "Producer", "NotificationApplication")
-@Html.Navigation().Link("Importer consignee", false, "Index", "Importer", "NotificationApplication")
-@Html.Navigation().Link(Model.NotificationType + " facility", false, "List", "Facility", "NotificationApplication")
+@Html.Navigation().Link("Exporter notifier", Model.Progress.IsExporterCompleted, "Index", "Exporter", "NotificationApplication")
+@Html.Navigation().Link("Waste generator producer", Model.Progress.IsProducerCompleted, "List", "Producer", "NotificationApplication")
+@Html.Navigation().Link("Importer consignee", Model.Progress.IsImporterCompleted, "Index", "Importer", "NotificationApplication")
+@Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.IsFacilityCompleted, "List", "Facility", "NotificationApplication")
 
 <h4>Recovery operation</h4>
 @if (Model.NotificationType == NotificationType.Recovery)
 {
-    @Html.Navigation().Link("Pre-consent facility", false, "RecoveryPreconsent", "Facility", "NotificationApplication")
+    @Html.Navigation().Link("Pre-consent facility", Model.Progress.IsPreconsentStatusChosen, "RecoveryPreconsent", "Facility", "NotificationApplication")
 }
-@Html.Navigation().Link(Model.NotificationType + " codes", false, "OperationCodes", "WasteOperations", "NotificationApplication", additionalActiveActionNames: new[] { "RecoveryCodes", "DisposalCodes" })
-@Html.Navigation().Link("Technology employed", false, "TechnologyEmployed", "WasteOperations", "NotificationApplication")
-@Html.Navigation().Link("Reason for export", false, "Index", "ReasonForExport", "NotificationApplication")
+@Html.Navigation().Link(Model.NotificationType + " codes", Model.Progress.AreOperationCodesChosen, "OperationCodes", "WasteOperations", "NotificationApplication", additionalActiveActionNames: new[] { "RecoveryCodes", "DisposalCodes" })
+@Html.Navigation().Link("Technology employed", Model.Progress.IsTechnologyEmployedCompleted, "TechnologyEmployed", "WasteOperations", "NotificationApplication")
+@Html.Navigation().Link("Reason for export", Model.Progress.IsReasonForExportCompleted, "Index", "ReasonForExport", "NotificationApplication")
 
 <h4>The transportation</h4>
-@Html.Navigation().Link("Intended carrier", false, "List", "Carrier", "NotificationApplication")
-@Html.Navigation().Link("Means of transport", false, "Index", "MeansOfTransport", "NotificationApplication")
-@Html.Navigation().Link("Packaging types", false, "Index", "PackagingTypes", "NotificationApplication")
-@Html.Navigation().Link("Special handling", false, "Index", "SpecialHandling", "NotificationApplication")
+@Html.Navigation().Link("Intended carrier", Model.Progress.IsCarrierCompleted, "List", "Carrier", "NotificationApplication")
+@Html.Navigation().Link("Means of transport", Model.Progress.IsMeansOfTransportCompleted, "Index", "MeansOfTransport", "NotificationApplication")
+@Html.Navigation().Link("Packaging types", Model.Progress.IsPackagingTypesCompleted, "Index", "PackagingTypes", "NotificationApplication")
+@Html.Navigation().Link("Special handling", Model.Progress.IsSpecialHandlingCompleted, "Index", "SpecialHandling", "NotificationApplication")
 
 <h4>The journey</h4>
-@Html.Navigation().Link("Transport route export", false, "Index", "StateOfExport", "NotificationApplication")
-@Html.Navigation().Link("Transport route transits", false, "Summary", "TransportRoute", "NotificationApplication")
-@Html.Navigation().Link("Transport route import", false, "Index", "StateOfImport", "NotificationApplication")
-@Html.Navigation().Link("Customs office", false, "Add", "ExitCustomsOffice", "NotificationApplication")
+@Html.Navigation().Link("Transport route export", Model.Progress.IsStateOfExportCompleted, "Index", "StateOfExport", "NotificationApplication")
+@Html.Navigation().Link("Transport route transits", Model.Progress.AreTransitStatesCompleted, "Summary", "TransportRoute", "NotificationApplication")
+@Html.Navigation().Link("Transport route import", Model.Progress.IsStateOfImportCompleted, "Index", "StateOfImport", "NotificationApplication")
+@Html.Navigation().Link("Customs office", Model.Progress.IsCustomsOfficeCompleted, "Index", "CustomsOffice", "NotificationApplication")
 
 <h4>Amounts and dates</h4>
-@Html.Navigation().Link("Intended shipments", false, "Index", "Shipment", "NotificationApplication")
+@Html.Navigation().Link("Intended shipments", Model.Progress.IsIntendedShipmentsCompleted, "Index", "Shipment", "NotificationApplication")
 
 <h4>Classify your waste</h4>
-@Html.Navigation().Link("Chemical composition", false, "ChemicalComposition", "WasteType", "NotificationApplication")
-@Html.Navigation().Link("Process of generation", false, "WasteGenerationProcess", "WasteType", "NotificationApplication")
-@Html.Navigation().Link("Physical characteristics", false, "PhysicalCharacteristics", "WasteType", "NotificationApplication")
-@Html.Navigation().Link("Waste codes", false, "WasteCode", "WasteType", "NotificationApplication")
+@Html.Navigation().Link("Chemical composition", Model.Progress.IsChemicalCompositionCompleted, "ChemicalComposition", "WasteType", "NotificationApplication")
+@Html.Navigation().Link("Process of generation", Model.Progress.IsProcessOfGenerationCompleted, "WasteGenerationProcess", "WasteType", "NotificationApplication")
+@Html.Navigation().Link("Physical characteristics", Model.Progress.ArePhysicalCharacteristicsCompleted, "PhysicalCharacteristics", "WasteType", "NotificationApplication")
+@Html.Navigation().Link("Waste codes", Model.Progress.AreWasteCodesCompleted, "WasteCode", "WasteType", "NotificationApplication")
 
 <h4>Waste Recovery</h4>
-@Html.Navigation().Link("Recovery information", false, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication")
+@Html.Navigation().Link("Recovery information", Model.Progress.IsWasteRecoveryInformationCompleted, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication")
 
 <em></em>

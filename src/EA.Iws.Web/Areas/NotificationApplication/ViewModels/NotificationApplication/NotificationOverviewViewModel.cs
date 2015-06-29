@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
+    using Core.Notification;
     using Core.Shared;
-    using Requests.Shared;
 
     public class NotificationOverviewViewModel
     {
@@ -11,5 +11,7 @@
         public Guid NotificationId { get; set; }
 
         public NotificationType NotificationType { get; set; }
+
+        public NotificationApplicationCompletionProgress Progress { get; set; }
     }
 }

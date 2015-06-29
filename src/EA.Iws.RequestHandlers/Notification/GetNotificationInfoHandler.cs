@@ -5,16 +5,19 @@
     using Core.Notification;
     using DataAccess;
     using Domain.Notification;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
     internal class GetNotificationInfoHandler : IRequestHandler<GetNotificationInfo, NotificationInfo>
     {
         private readonly IwsContext db;
+        private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper;
 
-        public GetNotificationInfoHandler(IwsContext db)
+        public GetNotificationInfoHandler(IwsContext db, IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper)
         {
             this.db = db;
+            this.completionProgressMapper = completionProgressMapper;
         }
 
         public async Task<NotificationInfo> HandleAsync(GetNotificationInfo message)
@@ -29,7 +32,8 @@
                 NotificationType =
                     notification.NotificationType == NotificationType.Disposal
                         ? Core.Shared.NotificationType.Disposal
-                        : Core.Shared.NotificationType.Recovery
+                        : Core.Shared.NotificationType.Recovery,
+                Progress = completionProgressMapper.Map(notification)
             };
         }
     }
