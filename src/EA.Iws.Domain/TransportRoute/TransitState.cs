@@ -68,5 +68,12 @@ namespace EA.Iws.Domain.TransportRoute
             this.ExitPoint = exitPoint;
             this.OrdinalPosition = ordinalPosition ?? this.OrdinalPosition;
         }
+
+        public void UpdateOrdinalPosition(int ordinalPosition)
+        {
+            Guard.ArgumentNotZeroOrNegative(() => ordinalPosition, ordinalPosition);
+
+            this.OrdinalPosition = ordinalPosition;
+        }
     }
 }

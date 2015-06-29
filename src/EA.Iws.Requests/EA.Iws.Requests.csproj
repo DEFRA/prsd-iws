@@ -117,6 +117,7 @@
     <Compile Include="TechnologyEmployed\GetTechnologyEmployed.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationId.cs" />
     <Compile Include="StateOfImport\StateOfImportWithTransportRouteData.cs" />
+    <Compile Include="TransitState\RemoveTransitStateForNotification.cs" />
     <Compile Include="TransitState\SetTransitStateForNotification.cs" />
     <Compile Include="TechnologyEmployed\SetTechnologyEmployed.cs" />
     <Compile Include="TransitState\GetTransitStateWithTransportRouteDataByNotificationId.cs" />

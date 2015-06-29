@@ -9,30 +9,36 @@
 }
 else
 {
-    <table>
-        <thead>
-        <tr>
-            <th>Order</th>
-            <th>Country</th>
-            <th>Competent authority</th>
-            <th>Entry port or border crossing</th>
-            <th>Exit port or border crossing</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <tr>
-                <td>@Html.Raw(Model[i].OrdinalPosition)</td>
-                <td>@Html.Raw(Model[i].Country.Name)</td>
-                <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
-                <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
-                <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
-                <th>@Html.ActionLink("Edit transit state", "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id }, null)</th>
-            </tr>
-        }
-        </tbody>
-    </table>
+    using (Html.BeginForm("Delete", "TransitState"))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Country</th>
+                    <th>Competent authority</th>
+                    <th>Entry port or border crossing</th>
+                    <th>Exit port or border crossing</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.Raw(Model[i].OrdinalPosition)</td>
+                        <td>@Html.Raw(Model[i].Country.Name)</td>
+                        <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
+                        <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
+                        <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
+                        <th>@Html.ActionLink("Edit transit state", "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id }, null) |
+                        <button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">Delete</button></th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
     <p style="margin-top: 10px;">@Html.ActionLink("Add another transit state", "Index", "TransitState", new { id = ViewData["Id"] }, null)</p>
 }

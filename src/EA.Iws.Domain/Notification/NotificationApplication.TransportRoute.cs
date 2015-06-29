@@ -172,5 +172,20 @@
 
             this.StateOfExport.Update(country, competentAuthority, exitPoint);
         }
+
+        public void RemoveTransitState(Guid id)
+        {
+            var transitState = TransitStatesCollection.Single(ts => ts.Id == id);
+
+            int removedPosition = transitState.OrdinalPosition;
+
+            TransitStatesCollection.Remove(transitState);
+
+            // Down-shift all transit states above the removed item.
+            foreach (var state in TransitStatesCollection.Where(ts => ts.OrdinalPosition > removedPosition))
+            {
+                state.UpdateOrdinalPosition(state.OrdinalPosition - 1);
+            }
+        }
     }
 }

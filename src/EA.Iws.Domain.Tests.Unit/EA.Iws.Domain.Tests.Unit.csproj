@@ -80,6 +80,7 @@
     <Compile Include="Notification\NotificationShipmentTests.cs" />
     <Compile Include="Notification\NotificationTechnologyEmployedTests.cs" />
     <Compile Include="Notification\NotificationSpecialHandlingTests.cs" />
+    <Compile Include="Notification\NotificationTransitStateTests.cs" />
     <Compile Include="Notification\NotificationTransportRouteTests.cs" />
     <Compile Include="Notification\NotificationWasteCodeTests.cs" />
     <Compile Include="Notification\NotificationWasteGenerationProcessTests.cs" />

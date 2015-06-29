@@ -46,7 +46,9 @@
                 return View(model);
             }
         }
-
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, Guid? entityId, TransitStateViewModel model, string submit)
         {
             using (var client = apiClient())
@@ -107,6 +109,18 @@
                 ModelState.AddModelError(string.Empty, "Error saving this record. You may already have saved this record, return to the summary to edit this record.");
             }
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(Guid id, Guid delete)
+        {
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), new RemoveTransitStateForNotification(id, delete));
+
+                return RedirectToAction("Summary", "TransportRoute", new { id });
+            }
         }
 
         private async Task GetCompetentAuthoritiesAndCountriesForModel(IIwsClient client, TransitStateViewModel model)
