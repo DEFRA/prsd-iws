@@ -1,14 +1,18 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionViewModel
+﻿using EA.Iws.Requests.WasteType
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionViewModel
 @{
     ViewBag.Title = "Waste Type - Chemical Composition";
 }
 
 <header class="hgroup">
+    <div class="form-group">
+        @Html.Gds().HintParagraph("Step 1 of 3")
+    </div>
     <h2 class="heading-large">What type of waste it is?</h2>
-    <p>This is what the waste is commonly known as or the commercial name</p>
+    <p>This may be its commercial name</p>
 </header>
 
-@using (Html.BeginForm(actionName: "ChemicalComposition", controllerName: "WasteType", method: FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -17,122 +21,7 @@
     <div class="form-group">
         @Html.EditorFor(m => m.ChemicalCompositionType)
     </div>
-
-    <div id="rdf" class="form-group">
-        <hr />
-        <header class="hgroup">
-            <h2 class="heading-large">What is the chemical composition of the waste?</h2>
-        </header>
-        @if (Model.WasteCompositions != null && Model.WasteCompositions.Count > 0)
-        {
-            <table>
-                <tr>
-                    <th>Constituent</th>
-                    <th>Max concentration(%)</th>
-                    <th>Min concentration(%)</th>
-                </tr>
-                @for (int i = 0; i < Model.WasteCompositions.Count; i++)
-                {
-                    <tr>
-                        <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].Constituent)</td>
-                        <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].MaxConcentration, new { type = "number", min = "0", max = "100" })</td>
-                        <td>@Html.Gds().TextBoxFor(m => m.WasteCompositions[i].MinConcentration, new { type = "number", min = "0", max = "100" })</td>
-                    </tr>
-                }
-            </table>
-        }
-        <div class="form-group">
-            <button class="link-submit" type="submit" name="submitButton" value="AddMore">Add more</button>
-        </div>
-    </div>
-
-    <div id="others" class="form-group">
-        <hr />
-        <header class="hgroup">
-            <h2 class="heading-large">What is the name of the waste?</h2>
-        </header>
-        @Html.ValidationMessageFor(m => m.OtherCompositionName)
-        @Html.TextBoxFor(m => m.OtherCompositionName)
-    </div>
-
-    <div id="wood" class="form-group">
-        <hr />
-        <header class="hgroup">
-            <h2 class="heading-large">What is the chemical composition of the waste?</h2>
-            <p>Provide a description and an example</p>
-        </header>
-        @Html.ValidationMessageFor(m => m.Description)
-        @Html.TextAreaFor(m => m.Description, new { @style = "width: 100%" })
-    </div>
-
     <div class="form-group">
         <button class="button" type="submit" name="submitButton" value="Continue">Continue</button>
     </div>
-}
-
-@section scripts
-{
-    <script>
-        $(function () {
-            ShowHide();
-
-            function ShowHide(compositionType) {
-                switch (compositionType) {
-                    case "RDF":
-                    case "SRF":
-                        $("#rdf").show("fast");
-                        $("#wood").hide("fast");
-                        $("#others").hide("fast");
-                        break;
-                    case "wood":
-                        $("#rdf").hide("fast");
-                        $("#wood").show("fast");
-                        $("#others").hide("fast");
-                        break;
-                    case "other":
-                        $("#rdf").hide("fast");
-                        $("#others").show("fast");
-                        $("#wood").show("fast");
-                        break;
-                    default:
-                        $("#rdf").hide("fast");
-                        $("#wood").hide("fast");
-                        $("#others").hide("fast");
-                        break;
-                }
-            }
-
-            if ($("#ChemicalCompositionType\\.PossibleValues\\[0\\]").is(':checked')) {
-                ShowHide("RDF");
-            };
-
-            $("#ChemicalCompositionType\\.PossibleValues\\[0\\]").click(function () {
-                ShowHide("RDF");
-            });
-
-            if ($("#ChemicalCompositionType\\.PossibleValues\\[1\\]").is(':checked')) {
-                ShowHide("SRF");
-            };
-
-            $("#ChemicalCompositionType\\.PossibleValues\\[1\\]").click(function () {
-                ShowHide("SRF");
-            });
-
-            if ($("#ChemicalCompositionType\\.PossibleValues\\[2\\]").is(':checked')) {
-                ShowHide("wood");
-            };
-
-            $("#ChemicalCompositionType\\.PossibleValues\\[2\\]").click(function () {
-                ShowHide("wood");
-            });
-
-            if ($("#ChemicalCompositionType\\.PossibleValues\\[3\\]").is(':checked')) {
-                ShowHide("other");
-            };
-
-            $("#ChemicalCompositionType\\.PossibleValues\\[3\\]").click(function () {
-                ShowHide("other");
-            });
-        });
-    </script>
 }

@@ -13,24 +13,19 @@
         {
         }
 
-        private WasteType(ChemicalComposition chemicalComposition, string chemicalCompositionName,
-            string chemicalCompositionDescription)
+        private WasteType(ChemicalComposition chemicalComposition, string chemicalCompositionName)
         {
             ChemicalCompositionType = chemicalComposition;
-
-            Guard.ArgumentNotNull(() => chemicalCompositionDescription, chemicalCompositionDescription);
 
             if (chemicalComposition == ChemicalComposition.Other)
             {
                 Guard.ArgumentNotNull(() => chemicalCompositionName, chemicalCompositionName);
                 ChemicalCompositionName = chemicalCompositionName;
             }
-
-            ChemicalCompositionDescription = chemicalCompositionDescription;
         }
 
         private WasteType(ChemicalComposition chemicalComposition,
-            IList<WasteComposition> wasteCompositions)
+            IList<WasteComposition> wasteCompositions, string chemicalCompositionDescription = "")
         {
             ChemicalCompositionType = chemicalComposition;
 
@@ -41,6 +36,11 @@
                 {
                     throw new ArgumentException("Waste composition is required when waste type is either RDF or SRF", "wasteCompositions");
                 }
+            }
+
+            if (!string.IsNullOrEmpty(chemicalCompositionDescription))
+            {
+                ChemicalCompositionDescription = chemicalCompositionDescription;
             }
 
             if (wasteCompositions == null)
@@ -66,7 +66,6 @@
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other || ChemicalCompositionType == ChemicalComposition.Wood)
                 {
-                    Guard.ArgumentNotNull(() => value, value);
                     chemicalCompositionDescription = value;
                 }
                 else if (!string.IsNullOrWhiteSpace(value))
@@ -113,14 +112,120 @@
             WasteCompositionCollection.Add(wasteComposition);
         }
 
-        public static WasteType CreateOtherWasteType(string chemicalCompositionName, string chemicalCompositionDescription)
+        private string otherWasteTypeDescription;
+        public string OtherWasteTypeDescription
         {
-            return new WasteType(ChemicalComposition.Other, chemicalCompositionName, chemicalCompositionDescription);
+            get
+            {
+                return otherWasteTypeDescription;
+            }
+            internal set
+            {
+                if (ChemicalCompositionType == ChemicalComposition.Other)
+                {
+                    otherWasteTypeDescription = value;
+                }
+                else if (!string.IsNullOrWhiteSpace(value))
+                {
+                    throw new InvalidOperationException("Other Waste Type description can only be set for chemical composition of other");
+                }
+            }
         }
 
-        public static WasteType CreateWoodWasteType(string chemicalCompositionDescription)
+        private string woodTypeDescription;
+        public string WoodTypeDescription
         {
-            return new WasteType(ChemicalComposition.Wood, null, chemicalCompositionDescription);
+            get
+            {
+                return woodTypeDescription;
+            }
+            internal set
+            {
+                if (ChemicalCompositionType == ChemicalComposition.Wood)
+                {
+                    woodTypeDescription = value;
+                }
+                else if (!string.IsNullOrWhiteSpace(value))
+                {
+                    throw new InvalidOperationException("Wood type description can only be set for chemical composition of wood");
+                }
+            }
+        }
+
+        private string energyInformation;
+        public string EnergyInformation
+        {
+            get
+            {
+                return energyInformation;
+            }
+            internal set
+            {
+                if (ChemicalCompositionType != ChemicalComposition.RDF || ChemicalCompositionType != ChemicalComposition.SRF || ChemicalCompositionType != ChemicalComposition.Wood)
+                {
+                    energyInformation = value;
+                }
+                else if (!string.IsNullOrWhiteSpace(value))
+                {
+                    throw new InvalidOperationException("energy information can only be set for chemical composition of Wood, RDF or SRF");
+                }
+            }
+        }
+
+        private string optionalInformation;
+        public string OptionalInformation
+        {
+            get
+            {
+                return optionalInformation;
+            }
+            internal set
+            {
+                if (ChemicalCompositionType != ChemicalComposition.RDF || ChemicalCompositionType != ChemicalComposition.SRF || ChemicalCompositionType != ChemicalComposition.Wood)
+                {
+                    optionalInformation = value;
+                }
+                else if (!string.IsNullOrWhiteSpace(value))
+                {
+                    throw new InvalidOperationException("optional information can only be set for chemical composition of Wood, RDF or SRF");
+                }
+            }
+        }
+
+        private bool hasAnnex;
+        public bool HasAnnex
+        {
+            get
+            {
+                return hasAnnex;
+            }
+            internal set { hasAnnex = value; }
+        }
+
+        protected virtual ICollection<WasteAdditionalInformation> WasteAdditionalInformationCollection { get; set; }
+
+        public IEnumerable<WasteAdditionalInformation> WasteAdditionalInformation
+        {
+            get { return WasteAdditionalInformationCollection.ToSafeIEnumerable(); }
+        }
+
+        internal void AddWasteAdditionalInformation(IList<WasteAdditionalInformation> wasteComposition)
+        {
+            if (WasteAdditionalInformationCollection == null)
+            {
+                throw new InvalidOperationException("Waste Composition cannot be null");
+            }
+            WasteAdditionalInformationCollection = wasteComposition;
+        }
+
+        public static WasteType CreateOtherWasteType(string chemicalCompositionName)
+        {
+            return new WasteType(ChemicalComposition.Other, chemicalCompositionName);
+        }
+
+        public static WasteType CreateWoodWasteType(string chemicalCompositionDescription, IList<WasteComposition> wasteCompositions)
+        {
+            return new WasteType(ChemicalComposition.Wood, wasteCompositions, chemicalCompositionDescription);
         }
 
         public static WasteType CreateRdfWasteType(IList<WasteComposition> wasteCompositions)

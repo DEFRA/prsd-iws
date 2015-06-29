@@ -124,10 +124,13 @@
     <Compile Include="TransitState\TransitStateWithTransportRouteData.cs" />
     <Compile Include="TransportRoute\CompententAuthorityAndEntryOrExitPointData.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
+    <Compile Include="WasteType\ChemicalCompositionData.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristics.cs" />
     <Compile Include="WasteType\GetWasteCodes.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcess.cs" />
+    <Compile Include="WasteType\SetEnergyAndOptionalInformation.cs" />
+    <Compile Include="WasteType\SetOtherWasteAdditionalInformation.cs" />
     <Compile Include="WasteType\SetWasteCodes.cs" />
     <Compile Include="WasteType\SetOptionalWasteCodes.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristics.cs" />
@@ -135,6 +138,10 @@
     <Compile Include="WasteType\SetWasteGenerationProcess.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountry.cs" />
     <Compile Include="TransportRoute\GetTransportRouteSummaryForNotification.cs" />
+    <Compile Include="WasteType\SetWoodTypeDescription.cs" />
+    <Compile Include="WasteType\UpdateWasteType.cs" />
+    <Compile Include="WasteType\WasteTypeCompositionData.cs" />
+    <Compile Include="WasteType\WoodInformationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

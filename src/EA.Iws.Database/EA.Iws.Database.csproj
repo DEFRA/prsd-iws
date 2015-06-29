@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="scripts\Update\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
     <Content Include="scripts\Update\Sprint10\20150626-764539-add-not-applicable-to-un-waste-codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150629-091012-Add-WasteAdditionalInformation-Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

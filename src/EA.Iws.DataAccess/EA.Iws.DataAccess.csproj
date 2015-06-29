@@ -111,6 +111,7 @@
     <Compile Include="Mappings\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\NotificationTypeMapping.cs" />
+    <Compile Include="Mappings\WasteAdditionalInformationMapping.cs" />
     <Compile Include="Mappings\WasteCodeMapping.cs" />
     <Compile Include="Mappings\WasteCodeInfoMapping.cs" />
     <Compile Include="Mappings\WasteComposition.cs" />

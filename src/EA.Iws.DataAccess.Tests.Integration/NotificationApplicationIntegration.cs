@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.RecoveryInfo;
+    using Core.WasteType;
     using Domain;
     using Domain.Notification;
     using FakeItEasy;
@@ -125,7 +126,12 @@
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            notification.AddWasteType(WasteType.CreateWoodWasteType("This waste type is of wood type. I am writing some description here."));
+            List<WasteComposition> wasteCompositions = new List<WasteComposition>
+            {
+                WasteComposition.CreateWasteComposition("First Constituent", 1, 100, ChemicalCompositionCategory.Metals),
+                WasteComposition.CreateWasteComposition("Second Constituent", 2, 100, ChemicalCompositionCategory.Wood)
+            };
+            notification.AddWasteType(WasteType.CreateWoodWasteType("This waste type is of wood type. I am writing some description here.", wasteCompositions));
 
             await context.SaveChangesAsync();
 

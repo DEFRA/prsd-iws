@@ -9,9 +9,11 @@
         public Guid WasteTypeId { get; set; }
 
         public string Constituent { get; set; }
-        
-        public decimal MinConcentration { get; set; }
 
-        public decimal MaxConcentration { get; set; }
+        public decimal? MinConcentration { get; set; }
+
+        public decimal? MaxConcentration { get; set; }
+
+        public ChemicalCompositionCategory ChemicalCompositionCategory { get; set; }
     }
 }

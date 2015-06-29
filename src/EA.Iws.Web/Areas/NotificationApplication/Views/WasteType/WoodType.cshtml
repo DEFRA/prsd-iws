@@ -1,0 +1,89 @@
+﻿@using System.Web.UI.WebControls
+@using EA.Iws.Core.Shared
+@using EA.Iws.Requests.WasteType
+@using EA.Iws.Web.Infrastructure
+@using EA.Prsd.Core.Helpers
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionConcentrationLevelsViewModel
+@{
+    ViewBag.Title = "Waste Code";
+}
+<header class="hgroup">
+    <div class="form-group">
+        @Html.Gds().HintParagraph("Step 2 of 3")
+    </div>
+    <h2 class="heading-large">What type of wood?</h2>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.ChemicalCompositionType)
+    <div>
+        Brief description of the type of wood
+    </div>
+    <div class="form-group">
+        @Html.Gds().TextBoxFor(m => m.Description)
+    </div>
+    <h2 class="heading-small">What is the chemical composition of the waste?</h2>
+    <p>
+        Concentration levels of the constituents present in the waste.
+        Enter minimum and maximum as a weight by weight percentage (%), you can enter NA where not applicable
+        you can enter NA where not applicable.
+    </p>
+    <div class="grid-row">
+        <div class="column-half">
+            @for (var i = 0; i < Model.WasteComposition.Count; i++)
+            {
+                <div class="form-group">
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
+                        </div>
+                    </div>
+                    <div class="grid-row">
+                        <div class="column-half">
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].ChemicalCompositionCategory, new { type = "hidden" })
+                        </div>
+                        <div class="column-half">
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value =  @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
+)
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="form-group">
+                Other
+                <div class="form-hint">Please specifiy other significant componants</div>
+                @for (int i = 0; i < Model.OtherCodes.Count; i++)
+                {
+                    <div class="form-group">
+                        <div class="grid-row">
+                            <div class="column-two-thirds form-group">
+                                <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" />
+                            </div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="column-half">
+                                <input name="OtherCodes[@i].MinConcentration" style="width:65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" />
+                            </div>
+                            <div class="column-half">
+                                <input name="OtherCodes[@i].MaxConcentration" style="width:65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" />
+                                <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="column-half"></div>
+    <div class="form-group">
+        <button class="link-submit" type="submit" name="Command" value="add">Add</button>
+    </div>
+    <div class="form-group">
+        <button class="button" name="Command" value="continue" type="submit">Continue</button>
+    </div>
+}

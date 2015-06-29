@@ -176,11 +176,16 @@
     <Compile Include="WasteType\GetPhysicalCharacteristicsHandler.cs" />
     <Compile Include="WasteType\GetWasteCodesHandler.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcessHandler.cs" />
+    <Compile Include="WasteType\SetEnergyAndOptionalInformationHandler.cs" />
+    <Compile Include="WasteType\SetOtherWasteAdditionalInformationHandler.cs" />
     <Compile Include="WasteType\SetWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetOptionalWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristicsHandler.cs" />
     <Compile Include="WasteType\SetBaselOrOecdWasteCodeHandler.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcessHandler.cs" />
+    <Compile Include="WasteType\SetWoodTypeDescriptionHandler.cs" />
+    <Compile Include="WasteType\UpdateWasteTypeHandler.cs" />
+    <Compile Include="WasteType\WasteAdditionalInformationMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">

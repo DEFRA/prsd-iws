@@ -1,0 +1,74 @@
+﻿@using System.Web.UI.WebControls
+@using EA.Iws.Requests.WasteType
+@using EA.Iws.Web.Infrastructure
+@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionInformationViewModel
+@{
+    ViewBag.Title = "Waste Code";
+}
+<header class="hgroup">
+    <div class="form-group">
+        @Html.Gds().HintParagraph("Step 3 of 3")
+    </div>
+    <h2 class="heading-large">Additional Information required</h2>
+    <p>
+        Concentration levels of the constituents present in the waste
+        Enter minimum and maximum as a weight by weight percentage (%),
+        unless otherwise stated or you can enter NA where not applicable.
+    </p>
+</header>
+@using (Html.BeginForm("SubmitAdditionalInformation", "WasteType", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.ChemicalCompositionType)
+    <div class="grid-row">
+        <div class="column-half">
+            @for (var i = 0; i < Model.WasteComposition.Count; i++)
+            {
+                <div class="form-group">
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].WasteInformationType)
+                        </div>
+                    </div>
+                    <div class="grid-row">
+                        <div class="column-half">
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
+                        </div>
+                        <div class="column-half">
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].WasteInformationType) })
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="form-group">
+                Energy
+                <details>
+                    <summary><span class="summary">Guidance notes</span></summary>
+                    <div class="panel-indent">
+                        <b>Terms and conditions of use</b>
+                        <p>
+                            Some of the services available on this website require registration.
+                        </p>
+                    </div>
+                </details>
+                @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds" })
+            </div>
+        </div>
+    </div>
+    <div class="column-half"></div>
+    <div class="form-group">
+        Any other relevant information (optional)
+        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds" })
+    </div>
+    <div class="form-group">
+        Further analysis of the waste can be provided in separate annex with your submission
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

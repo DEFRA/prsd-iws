@@ -1,0 +1,34 @@
+﻿@using System.Web.UI.WebControls
+@using EA.Iws.Core.Shared
+@using EA.Iws.Requests.WasteType
+@using EA.Iws.Web.Infrastructure
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.OtherWasteAdditionalInformationViewModel
+@{
+    ViewBag.Title = "Waste Code";
+}
+<header class="hgroup">
+    <div class="form-group">
+        @Html.Gds().HintParagraph("Step 3 of 3")
+    </div>
+    <h2 class="heading-large">What is the chemical composition of the waste?</h2>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    <div>
+        This may be the names of its major constituents and their relative concentrations expressed as a percentage
+    </div>
+    <div class="form-group">
+        @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds" })
+    </div>
+    <div class="form-group">
+        @Html.CheckBoxFor(m => m.HasAttachement)
+        I will provide this detail in a separate annex with my notification submission
+    </div>
+    <div class="form-group">
+        <button class="button" name="Command" value="continue" type="submit">Continue</button>
+    </div>
+}
