@@ -33,11 +33,21 @@
 
             $(".panel-indent").removeClass(".hide-for-initial-load");
 
+            placeDetailsElementsInCorrectLocation();
+
             var businessTypeSelected = $(".business-type-radio-button").filter(':checked');
             if (businessTypeSelected.length) {
                 businessTypeSelected.triggerHandler("click");
             }
         });
+
+        function placeDetailsElementsInCorrectLocation() {
+            // The details elements are placed by the input for non-JavaScript users.
+            // Once the page loads for JavaScript users we need to move the details to the correct location.
+            var registrationBlock = $("#registration-block");
+            var detailsElements = registrationBlock.find("details");
+            detailsElements.appendTo($("#" + detailsElements.attr("data-target")));
+        }
 
         $(".business-type-radio-button").click(function () {
 
@@ -56,9 +66,14 @@
             var isRegistrationBlockCurrentlyNested = registrationBlock.parent(panelIndentClass).length;
             if (isRegistrationBlockCurrentlyNested) {
                 registrationblockAdditionalRegistrationNumber.removeClass('margin-bottom-30');
+
                 // Move the hint texts currently in the registration block back to their proper position.
-                var hintSpan = registrationBlock.find('.form-hint');
-                hintSpan.prependTo(registrationBlock.parent(panelIndentClass));
+                // This moves both of the form hints back to the parent panel since find returns an array of elements.
+                var hintSpans = registrationBlock.find('.form-hint');
+                hintSpans.prependTo(registrationBlock.parent(panelIndentClass));
+
+                // Move any details sections back to the parent.
+                registrationBlock.find("details").appendTo(registrationBlock.parent(panelIndentClass));
             }
 
             // Move the currently hidden registration number input to the correct location.
@@ -68,6 +83,12 @@
             $(hiddenPanel).children('.form-hint').first()
                 .insertAfter(registrationblockRegistrationNumber.children('.form-label').first());
 
+            var detailsSection = hiddenPanel.children("details");
+            if (detailsSection.length) {
+                detailsSection.appendTo(registrationblockRegistrationNumber);
+            }
+
+            // Move any additional registration input hint text.
             var additionalInputHint = hiddenPanel.children(".form-hint").filter("span[data-name='additional-hint']");
             if (additionalInputHint.length) {
                 additionalInputHint.insertAfter(registrationblockAdditionalRegistrationNumber.children('.form-label').first());
@@ -80,6 +101,7 @@
             }
 
             // Show the registration number input.
+            // This comes last so users don't get any screen flicker.
             registrationBlock.removeClass('js-hidden');
         });
     </script>

@@ -1,6 +1,6 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter.ExporterViewModel
-    
+
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
     @Html.Gds().LabelFor(m => m.Business.Name)
@@ -30,6 +30,7 @@
     </label>
     <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
         <span class="form-hint">This should be your Companies House number.</span>
+
         <span class="form-hint" data-name="additional-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span>
     </div>
 
@@ -42,31 +43,35 @@
             @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)
             @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)
         </div>
-        <span class="form-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span> 
+        <span class="form-hint">If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</span>
     </div>
 </div>
 
 <div class="js-hidden" id="registration-block">
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
         @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
-        <span class="form-hint js-hidden">For Limited Company this should be your Companies House number. 
-        For sole trader, partnership or any other organisation type this will be your waste broker license number.</span>
+        <span class="form-hint js-hidden">
+            For Limited company, this should be your Companies House number.
+            For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number.
+        </span>
         @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
         @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
-    </div>
-    
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.AdditionalRegistrationNumber)">
-    @Html.Gds().LabelFor(m => m.Business.AdditionalRegistrationNumber)
-    @Html.Gds().ValidationMessageFor(model => model.Business.AdditionalRegistrationNumber)
-    @Html.Gds().TextBoxFor(m => m.Business.AdditionalRegistrationNumber)
-</div>
-</div>
 
-<style>
-    .margin-bottom-30 {
-        margin-bottom: 30px !important;
-    }
-    .hide-for-initial-load {
-        display: none;
-    }
-</style>
+        <details data-target="companies-house-number" class="margin-top-15">
+            <summary><span class="summary">Where can I find my Companies House number?</span></summary>
+            <div class="panel-indent">
+                <p>
+                    Your Companies House number is on your organisation's certificate of incorporation.
+                    You can also get the number from your organisation's accountant or accounts department, or
+                    <a href="http://wck2.companieshouse.gov.uk">search the Companies House online services</a>
+                </p>
+            </div>
+        </details>
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.AdditionalRegistrationNumber)">
+        @Html.Gds().LabelFor(m => m.Business.AdditionalRegistrationNumber)
+        @Html.Gds().ValidationMessageFor(model => model.Business.AdditionalRegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.Business.AdditionalRegistrationNumber)
+    </div>
+</div>

@@ -513,3 +513,23 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     display: block;
     margin-top: 15px;
 }
+
+.margin-bottom-30 {
+    margin-bottom: 30px !important;
+}
+
+.margin-top-30 {
+    margin-top: 30px !important;
+}
+
+.margin-bottom-15{
+    margin-bottom: 15px !important;
+}
+
+.margin-top-15{
+    margin-top: 15px !important;
+}
+
+.hide-for-initial-load {
+    display: none;
+}
