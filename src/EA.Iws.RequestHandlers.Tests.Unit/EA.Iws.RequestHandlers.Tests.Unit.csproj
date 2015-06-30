@@ -78,6 +78,7 @@
     <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerator.cs" />
     <Compile Include="Helpers\TestDbAsyncQueryProvider.cs" />
+    <Compile Include="Admin\GetBasicSearchResultsHandlerTests.cs" />
     <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationIdHandlerTests.cs" />
     <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Notification\GetNotificationChargeHandlerTests.cs" />

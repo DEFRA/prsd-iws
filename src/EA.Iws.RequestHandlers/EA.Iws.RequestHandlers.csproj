@@ -230,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="Admin\Search\GetBasicSearchResultsHandler.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

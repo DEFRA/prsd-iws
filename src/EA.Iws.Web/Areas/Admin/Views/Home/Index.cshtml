@@ -1,0 +1,66 @@
+﻿@using EA.Prsd.Core.Web.Mvc.RazorHelpers
+@model EA.Iws.Web.Areas.Admin.ViewModels.BasicSearchViewModel
+
+@{
+    ViewBag.Title = "Admin Users - Basic Search";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <h2 class="heading-large">Search</h2>
+    <p>Enter notification number, exporter company name or waste type</p>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @Html.Gds().HintParagraph("If you enter part of the notification number or exporter name the search will return all the notifications with a notification number or exporter name that contains what you have entered.  To search on waste type enter RDF, SDF, wood or other.")
+            @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
+        
+            &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go" />
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="form-group">
+        @if (Model != null && Model.SearchResults != null && Model.SearchResults.Count > 0)
+        {
+            <h2 class="heading-medium">Your search returned @Model.SearchResults.Count results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Notification No.</th>
+                        <th>Exporter notifier</th>
+                        <th>Waste type</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.SearchResults.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => m.SearchResults[i].NotificationNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.SearchResults[i].ExporterName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.SearchResults[i].WasteType)
+                            </td>
+                            <td>
+                                @Html.ActionLink(linkText: "View", actionName: "Index", controllerName: "Home",
+                                    routeValues: new { id = Model.SearchResults[i].Id, area = "NotificationApplication" }, htmlAttributes: null)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h2 class="heading-medium">No matching results found</h2>
+        }
+    </div>
+}

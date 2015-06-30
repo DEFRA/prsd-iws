@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Carriers\DeleteCarrierForNotification.cs" />
+    <Compile Include="Admin\GetBasicSearchResults.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
     <Compile Include="Copy\CopyToNotification.cs" />

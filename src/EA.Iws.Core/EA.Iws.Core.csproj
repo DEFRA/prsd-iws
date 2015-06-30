@@ -50,6 +50,7 @@
     <Compile Include="Exporters\ExporterData.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="Importer\ImporterData.cs" />
+    <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />
