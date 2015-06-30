@@ -47,11 +47,9 @@
                     <option description="@ewcCode.Description" value="@ewcCode.Id">@ewcCode.Code</option>
                 }
             </select>
+            <a onclick=" getEwcDescription() " class="no-js-hidden" id="EwcClassAdd" href="#">Add</a>
         </div>
 
-        <div class="no-js-hidden">
-            <a onclick=" getEwcDescription() " href="#">Add</a>
-        </div>
         <div class="js-hidden">
             <button class="link-submit" type="submit" name="Command" value="add">Add</button>
         </div>
@@ -93,6 +91,7 @@
                 });
 
                 getComboDescription($('#code-list'));
+                $('#EwcClassAdd').css('display', 'inline-block');
             });
         })(jQuery);
 
