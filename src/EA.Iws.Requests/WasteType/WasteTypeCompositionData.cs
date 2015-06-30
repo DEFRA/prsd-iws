@@ -21,7 +21,7 @@
                 }
                 if (string.IsNullOrEmpty(Constituent) && (!string.IsNullOrEmpty(MinConcentration) || !string.IsNullOrEmpty(MaxConcentration)))
                 {
-                    yield return new ValidationResult("Please enter a name for the 'Other' componant " + EnumHelper.GetDescription(ChemicalCompositionCategory));
+                    yield return new ValidationResult("Please enter a name for the 'Other' component " + EnumHelper.GetDescription(ChemicalCompositionCategory));
                 }
             }
             else
