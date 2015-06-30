@@ -51,7 +51,7 @@
 
             var address = TestAddress(country);
 
-            var org = new Organisation("SFW Ltd", address, "Company");
+            var org = new Organisation("SFW Ltd", address, BusinessType.LimitedCompany);
 
             context.Organisations.Add(org);
 

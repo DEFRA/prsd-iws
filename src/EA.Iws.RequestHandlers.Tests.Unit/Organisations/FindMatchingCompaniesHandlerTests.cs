@@ -15,7 +15,7 @@
 
     public class FindMatchingCompaniesHandlerTests
     {
-        private readonly string anyType = "Company";
+        private readonly BusinessType anyType = BusinessType.LimitedCompany;
         private readonly DbContextHelper helper = new DbContextHelper();
 
         [Theory]

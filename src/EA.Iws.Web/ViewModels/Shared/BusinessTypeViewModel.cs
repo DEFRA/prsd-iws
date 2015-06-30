@@ -3,7 +3,6 @@
     using System.ComponentModel.DataAnnotations;
     using Core.Shared;
     using Prsd.Core.Validation;
-    using Requests.Shared;
 
     public class BusinessTypeViewModel
     {

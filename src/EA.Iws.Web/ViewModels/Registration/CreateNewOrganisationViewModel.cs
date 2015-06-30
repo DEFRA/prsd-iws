@@ -7,8 +7,6 @@
     using System.Linq;
     using Core.Shared;
     using Prsd.Core.Validation;
-    using Prsd.Core.Web;
-    using Requests.Registration;
 
     public class CreateNewOrganisationViewModel
     {
@@ -22,10 +20,6 @@
         [Required]
         [Display(Name = "Organisation name")]
         public string Name { get; set; }
-
-        [RequiredIf("EntityType", "Limited Company", "Companies House number is required")]
-        [Display(Name = "Companies House number")]
-        public string CompaniesHouseReference { get; set; }
 
         [Required]
         [Display(Name = "Building name or number")]
@@ -53,7 +47,11 @@
 
         [Required]
         [Display(Name = "Organisation type")]
-        public string EntityType { get; set; }
+        public BusinessType BusinessType { get; set; }
+
+        [RequiredIf("BusinessType", BusinessType.Other, "Description is required")]
+        [Display(Name = "Organisation type")]
+        public string OtherDescription { get; set; }
 
         public CountryData DefaultCountry
         {

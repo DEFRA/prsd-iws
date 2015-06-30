@@ -5,6 +5,8 @@
 
     public class UserTests
     {
+        private static readonly BusinessType AnyType = BusinessType.LimitedCompany;
+
         [Fact]
         public void CanCreateUser()
         {
@@ -98,7 +100,7 @@
         {
             var user = new User("id", "first", "last", "123", "email@address.com");
             var address = new Address("building", "address1", "address2", "town", "region", "postcode", "country");
-            var org = new Organisation("name", address, "type", "123");
+            var org = new Organisation("name", address, AnyType, "123");
 
             user.LinkToOrganisation(org);
 
@@ -110,12 +112,12 @@
         {
             var user = new User("id", "first", "last", "123", "email@address.com");
             var address = new Address("building", "address1", "address2", "town", "region", "postcode", "country");
-            var org = new Organisation("name", address, "type", "123");
+            var org = new Organisation("name", address, AnyType, "123");
 
             user.LinkToOrganisation(org);
 
             var secondAddress = new Address("building2", "address12", "address22", "town2", "region2", "postcode2", "country2");
-            var secondOrg = new Organisation("name2", secondAddress, "type2", "1232");
+            var secondOrg = new Organisation("name2", secondAddress, AnyType, "1232");
 
             Action linkToOrganisation = () => user.LinkToOrganisation(secondOrg);
 

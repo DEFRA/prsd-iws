@@ -33,8 +33,7 @@
 
             var address = new Address(orgData.Building, orgData.Address1,
                 orgData.Address2, orgData.TownOrCity, null, orgData.Postcode, country.Name);
-            var organisation = new Organisation(command.Organisation.Name, address, command.Organisation.EntityType,
-                command.Organisation.CompaniesHouseNumber);
+            var organisation = new Organisation(command.Organisation.Name, address, BusinessType.FromBusinessType(command.Organisation.BusinessType), command.Organisation.OtherDescription);
 
             db.Organisations.Add(organisation);
 

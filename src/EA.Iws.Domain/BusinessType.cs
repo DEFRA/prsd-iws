@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain
 {
+    using System;
     using Prsd.Core.Domain;
 
     public class BusinessType : Enumeration
@@ -16,6 +17,23 @@
         private BusinessType(int value, string displayName)
             : base(value, displayName)
         {
+        }
+
+        public static BusinessType FromBusinessType(Core.Shared.BusinessType businessType)
+        {
+            switch (businessType)
+            {
+                case Core.Shared.BusinessType.Other:
+                    return Other;
+                case Core.Shared.BusinessType.Partnership:
+                    return Partnership;
+                case Core.Shared.BusinessType.SoleTrader:
+                    return SoleTrader;
+                case Core.Shared.BusinessType.LimitedCompany:
+                    return LimitedCompany;
+                default:
+                    throw new ArgumentException(string.Format("Unknown business type: {0}", businessType), "businessType");
+            }
         }
     }
 }

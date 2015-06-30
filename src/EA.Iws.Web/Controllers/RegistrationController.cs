@@ -190,8 +190,8 @@
                 TownOrCity = model.TownOrCity,
                 Postcode = model.Postcode,
                 CountryId = model.CountryId,
-                EntityType = model.EntityType,
-                CompaniesHouseNumber = model.CompaniesHouseReference
+                BusinessType = model.BusinessType,
+                OtherDescription = model.OtherDescription
             };
 
             using (var client = apiClient())
@@ -216,7 +216,6 @@
             }
         }
 
-        // TODO - duplicated in NotificationApplicationController, need to refactor.
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
             using (var client = apiClient())

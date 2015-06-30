@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
     using Core.Shared;
     using Domain;
-    using Requests.Shared;
     using BusinessType = Core.Shared.BusinessType;
 
     internal class ValueObjectInitializer
@@ -21,25 +19,8 @@
                     business.AdditionalRegistrationNumber, business.OtherDescription);
             }
 
-            return Business.CreateBusiness(business.Name, GetBusinessType(business.BusinessType),
+            return Business.CreateBusiness(business.Name, Domain.BusinessType.FromBusinessType(business.BusinessType), 
                 business.RegistrationNumber, business.AdditionalRegistrationNumber);
-        }
-
-        private static Domain.BusinessType GetBusinessType(BusinessType businessType)
-        {
-            switch (businessType)
-            {
-                case BusinessType.LimitedCompany:
-                    return Domain.BusinessType.LimitedCompany;
-                case BusinessType.SoleTrader:
-                    return Domain.BusinessType.SoleTrader;
-                case BusinessType.Partnership:
-                    return Domain.BusinessType.Partnership;
-                case BusinessType.Other:
-                    return Domain.BusinessType.Other;
-                default:
-                    throw new ArgumentException(string.Format("Unknown business type: {0}", businessType), "businessType");
-            }
         }
 
         public static Contact CreateContact(ContactData contact)
