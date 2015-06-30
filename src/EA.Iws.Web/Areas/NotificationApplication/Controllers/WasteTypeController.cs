@@ -280,7 +280,7 @@
             //Remove NA values
             var filteredWasteCompositions = model.WasteComposition.Where(
                     c => !(c.MinConcentration.ToUpper().Equals("NA") || c.MaxConcentration.ToUpper().Equals("NA") || c.Constituent.ToUpper().Equals("NA"))).ToList();
-
+        
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, model.Energy, filteredWasteCompositions));

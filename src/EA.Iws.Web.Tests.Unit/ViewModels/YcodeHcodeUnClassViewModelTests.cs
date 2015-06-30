@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -30,7 +31,7 @@
             viewModel.SelectedYcodesList = null;
 
             ValidateViewModel(viewModel);
-            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue") as ViewResult;
+            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue", null) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -43,7 +44,7 @@
             viewModel.SelectedYcodesList = new List<WasteCodeData>();
 
             ValidateViewModel(viewModel);
-            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue") as ViewResult;
+            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue", null) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -56,7 +57,7 @@
             viewModel.SelectedHcodesList = null;
 
             ValidateViewModel(viewModel);
-            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue") as ViewResult;
+            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue", null) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -69,7 +70,7 @@
             viewModel.SelectedHcodesList = new List<WasteCodeData>();
 
             ValidateViewModel(viewModel);
-            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue") as ViewResult;
+            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue", null) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -82,7 +83,7 @@
             viewModel.SelectedUnClassesList = null;
 
             ValidateViewModel(viewModel);
-            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue") as ViewResult;
+            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue", null) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }
@@ -95,7 +96,7 @@
             viewModel.SelectedUnClassesList = new List<WasteCodeData>();
 
             ValidateViewModel(viewModel);
-            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue") as ViewResult;
+            var result = await controller.AddYcodeHcodeAndUnClass(viewModel, "continue", null) as ViewResult;
 
             Assert.False(result.ViewData.ModelState.IsValid);
         }

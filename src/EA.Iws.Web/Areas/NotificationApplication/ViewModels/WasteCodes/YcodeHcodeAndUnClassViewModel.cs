@@ -35,6 +35,8 @@
         public List<WasteCodeData> SelectedHcodesList { get; set; }
         public List<WasteCodeData> SelectedUnClassesList { get; set; }
 
+        public string TypeOfCodeAdded { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (string.IsNullOrEmpty(SelectedYcode) && (SelectedYcodesList == null || !SelectedYcodesList.Any()))

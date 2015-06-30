@@ -228,41 +228,142 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddYcodeHcodeAndUnClass(YcodeHcodeAndUnClassViewModel model, string command)
+        public async Task<ActionResult> AddYcodeHcodeAndUnClass(YcodeHcodeAndUnClassViewModel model, string command, string remove)
         {
-            //Y codes - non js
+            if (remove != null)
+            {
+                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                ModelState.Clear();
+
+                if (model.SelectedYcodesList.Any(c => c.Id.ToString() == remove))
+                {
+                    model.SelectedYcodesList.RemoveAll(c => c.Id.ToString() == remove);
+                }
+
+                if (model.SelectedHcodesList.Any(c => c.Id.ToString() == remove))
+                {
+                    model.SelectedHcodesList.RemoveAll(c => c.Id.ToString() == remove);
+                }
+
+                if (model.SelectedUnClassesList.Any(c => c.Id.ToString() == remove))
+                {
+                    model.SelectedUnClassesList.RemoveAll(c => c.Id.ToString() == remove);
+                }
+
+                return View(model);
+            }
+
+            //Y codes
             if (command.Equals("addYcode"))
             {
                 await InitializeYcodeHcodeAndUnClassViewModel(model);
-                var codeToAdd = model.Ycodes.Single(c => c.Id.ToString() == model.SelectedYcode);
+                ModelState.Remove("TypeOfCodeAdded");
+                ModelState.Clear();
+                model.TypeOfCodeAdded = "Y";
+                WasteCodeData codeToAdd;
+
+                try
+                {
+                    codeToAdd = model.Ycodes.Single(c => c.Id.ToString() == model.SelectedYcode);
+                }
+                catch (Exception)
+                {
+                    return View(model);
+                }
+
+                if (codeToAdd.Code.Equals("Not applicable"))
+                {
+                    model.SelectedYcodesList.Clear();
+                    model.SelectedYcodesList.Add(codeToAdd);
+                    return View(model);
+                }
+
                 if (model.SelectedYcodesList.All(c => c.Id != codeToAdd.Id))
                 {
+                    if (model.SelectedYcodesList.Any(c => c.Code == "Not applicable"))
+                    {
+                        model.SelectedYcodesList.RemoveAll(c => c.Code.Equals("Not applicable"));
+                    }
+
                     model.SelectedYcodesList.Add(codeToAdd);
                 }
+
                 return View(model);
             }
 
-            //H codes - non js
+            //H codes
             if (command.Equals("addHcode"))
             {
                 await InitializeYcodeHcodeAndUnClassViewModel(model);
-                var codeToAdd = model.Hcodes.Single(c => c.Id.ToString() == model.SelectedHcode);
+                ModelState.Remove("TypeOfCodeAdded");
+                ModelState.Clear();
+                model.TypeOfCodeAdded = "H";
+                WasteCodeData codeToAdd;
+
+                try
+                {
+                    codeToAdd = model.Hcodes.Single(c => c.Id.ToString() == model.SelectedHcode);
+                }
+                catch (Exception)
+                {
+                    return View(model);
+                }
+
+                if (codeToAdd.Code.Equals("Not applicable"))
+                {
+                    model.SelectedHcodesList.Clear();
+                    model.SelectedHcodesList.Add(codeToAdd);
+                    return View(model);
+                }
+
                 if (model.SelectedHcodesList.All(c => c.Id != codeToAdd.Id))
                 {
+                    if (model.SelectedHcodesList.Any(c => c.Code == "Not applicable"))
+                    {
+                        model.SelectedHcodesList.RemoveAll(c => c.Code.Equals("Not applicable"));
+                    }
+
                     model.SelectedHcodesList.Add(codeToAdd);
                 }
+
                 return View(model);
             }
 
-            //UN classes - non js
+            //UN classes
             if (command.Equals("addUnClass"))
             {
                 await InitializeYcodeHcodeAndUnClassViewModel(model);
-                var codeToAdd = model.UnClasses.Single(c => c.Id.ToString() == model.SelectedUnClass);
+                ModelState.Remove("TypeOfCodeAdded");
+                ModelState.Clear();
+                model.TypeOfCodeAdded = "UN";
+                WasteCodeData codeToAdd;
+
+                try
+                {
+                    codeToAdd = model.UnClasses.Single(c => c.Id.ToString() == model.SelectedUnClass);
+                }
+                catch (Exception)
+                {
+                    return View(model);
+                }
+
+                if (codeToAdd.Code.Equals("Not applicable"))
+                {
+                    model.SelectedUnClassesList.Clear();
+                    model.SelectedUnClassesList.Add(codeToAdd);
+                    return View(model);
+                }
+
                 if (model.SelectedUnClassesList.All(c => c.Id != codeToAdd.Id))
                 {
+                    if (model.SelectedUnClassesList.Any(c => c.Code == "Not applicable"))
+                    {
+                        model.SelectedUnClassesList.RemoveAll(c => c.Code.Equals("Not applicable"));
+                    }
+
                     model.SelectedUnClassesList.Add(codeToAdd);
                 }
+
                 return View(model);
             }
 

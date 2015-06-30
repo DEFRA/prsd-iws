@@ -538,3 +538,14 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 .hide-for-initial-load {
     display: none;
 }
+
+.top-blue-line {
+    margin-top: 10px;
+    border-top: 10px;
+    border-top: solid;
+    border-top-color: #005ea5;
+}
+
+.wastecode-block{
+    margin-bottom: 50px;
+}
