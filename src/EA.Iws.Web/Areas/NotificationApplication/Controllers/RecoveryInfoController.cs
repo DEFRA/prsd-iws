@@ -49,6 +49,11 @@
                     await
                         client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
+                    if (model.IsProvidedByImporter)
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId});
+                    }
+
                     return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = !model.IsHundredPercentRecoverable.GetValueOrDefault() });
                 }
                 catch (ApiBadRequestException e)
