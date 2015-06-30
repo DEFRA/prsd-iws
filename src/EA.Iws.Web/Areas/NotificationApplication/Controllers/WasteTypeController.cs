@@ -40,6 +40,11 @@
         [ValidateAntiForgeryToken]
         public ActionResult ChemicalComposition(ChemicalCompositionViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             switch (model.ChemicalCompositionType.SelectedValue)
             {
                 case "Solid recovered fuel (SRF)":
@@ -234,7 +239,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SubmitAdditionalInformation(ChemicalCompositionInformationViewModel model)
+        public async Task<ActionResult> WoodAdditionalInformation(ChemicalCompositionInformationViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -264,6 +269,27 @@
                 WasteComposition = categories
             };
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RdfAdditionalInformation(ChemicalCompositionInformationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            //Remove NA values
+            var filteredWasteCompositions = model.WasteComposition.Where(
+                    c => !(c.MinConcentration.ToUpper().Equals("NA") || c.MaxConcentration.ToUpper().Equals("NA") || c.Constituent.ToUpper().Equals("NA"))).ToList();
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, model.Energy, filteredWasteCompositions));
+                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.NotificationId));
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

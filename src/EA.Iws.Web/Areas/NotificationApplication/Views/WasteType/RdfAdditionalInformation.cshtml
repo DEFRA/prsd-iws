@@ -17,7 +17,7 @@
         unless otherwise stated or you can enter NA where not applicable.
     </p>
 </header>
-@using (Html.BeginForm("SubmitAdditionalInformation", "WasteType", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

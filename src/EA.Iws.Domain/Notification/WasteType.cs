@@ -29,15 +29,6 @@
         {
             ChemicalCompositionType = chemicalComposition;
 
-            if (chemicalComposition == ChemicalComposition.RDF ||
-                chemicalComposition == ChemicalComposition.SRF)
-            {
-                if (wasteCompositions == null || wasteCompositions.Count == 0)
-                {
-                    throw new ArgumentException("Waste composition is required when waste type is either RDF or SRF", "wasteCompositions");
-                }
-            }
-
             if (!string.IsNullOrEmpty(chemicalCompositionDescription))
             {
                 ChemicalCompositionDescription = chemicalCompositionDescription;

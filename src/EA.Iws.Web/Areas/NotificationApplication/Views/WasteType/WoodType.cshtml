@@ -28,8 +28,7 @@
     <h2 class="heading-small">What is the chemical composition of the waste?</h2>
     <p>
         Concentration levels of the constituents present in the waste.
-        Enter minimum and maximum as a weight by weight percentage (%), you can enter NA where not applicable
-        you can enter NA where not applicable.
+        Enter minimum and maximum as a weight by weight percentage (%), you can enter NA where not applicable.
     </p>
     <div class="grid-row">
         <div class="column-half">
@@ -48,8 +47,7 @@
                         </div>
                         <div class="column-half">
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %" })
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value =  @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
-)
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value =  @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory) })
                         </div>
                     </div>
                 </div>

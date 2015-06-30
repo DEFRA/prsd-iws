@@ -81,13 +81,13 @@
         }
 
         [Fact]
-        public void CantAddWasteTypeForRdfWithoutComposition()
+        public void CanAddWasteTypeForRdfWithoutComposition()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            Action addOtherWasteTypeWithoutDescription = () => notification.AddWasteType(WasteType.CreateRdfWasteType(null));
-            Assert.Throws<ArgumentException>(addOtherWasteTypeWithoutDescription);
+            notification.AddWasteType(WasteType.CreateRdfWasteType(null));
+            Assert.NotNull(notification.WasteType);
         }
 
         private List<WasteComposition> GetWasteTypeCollection()
