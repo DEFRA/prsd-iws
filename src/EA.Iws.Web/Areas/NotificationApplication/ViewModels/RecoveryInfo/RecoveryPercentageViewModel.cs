@@ -91,6 +91,10 @@
                     }
                 }
             }
+            else if (!string.IsNullOrEmpty(MethodOfDisposal) || PercentageRecoverable.HasValue)
+            {
+                yield return new ValidationResult("If you select that recovery information will be provided by the importer-consignee then please do not enter any information in the text boxes below");
+            }
         }
     }
 }

@@ -7,3 +7,35 @@
 {
     @Html.Partial("_RecoveryPercentage")
 }
+
+@section scripts
+{
+    <script>
+        $('#IsProvidedByImporter').click(function () {
+            if ($('#IsProvidedByImporter').is(':checked')) {
+                $('#MethodOfDisposal').attr('readonly', true);
+                $('#MethodOfDisposal').css('background-color', '#DEDEDE');
+                $('#MethodOfDisposal').css('color', 'gray');
+
+                $('#PercentageRecoverable').attr('readonly', true);
+                $('#PercentageRecoverable').css('background-color', '#DEDEDE');
+                $('#PercentageRecoverable').css('color', 'gray');
+
+                $('#rdoYes').attr('disabled', 'disabled');
+                $('#rdoNo').attr('disabled', 'disabled');
+
+            } else {
+                $('#MethodOfDisposal').attr('readonly', false);
+                $('#MethodOfDisposal').css('background-color', 'white');
+                $('#MethodOfDisposal').css('color', 'black');
+
+                $('#PercentageRecoverable').attr('readonly', false);
+                $('#PercentageRecoverable').css('background-color', 'white');
+                $('#PercentageRecoverable').css('color', 'black');
+
+                $('#rdoYes').prop('disabled', null);
+                $('#rdoNo').prop('disabled', null);
+            }
+        });
+    </script>
+}
