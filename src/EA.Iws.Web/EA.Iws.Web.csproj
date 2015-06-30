@@ -372,6 +372,7 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\application.js" />
+    <Content Include="Scripts\business-type-radio-buttons.js" />
     <Content Include="Scripts\custom-validation.js" />
     <Content Include="Content\iws-page-ie6.scss" />
     <Content Include="Content\iws-page-ie7.scss" />
@@ -435,7 +436,6 @@
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryValues.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteCodes\UnNumber.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Exporter\_BusinessEditor.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryPercentage.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\_RecoveryPercentage.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\Index.cshtml" />

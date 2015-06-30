@@ -27,7 +27,8 @@
             bundles.Add(new ScriptBundle("~/bundles/govuk_iws").Include(
                       "~/Scripts/vendor/modernizr.custom.77028.js",
                       "~/Scripts/vendor/details.polyfill.js",
-                      "~/Scripts/application.js"));
+                      "~/Scripts/application.js",
+                      "~/Scripts/business-type-radio-buttons.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/prism").Include(
                       "~/Scripts/vendor/prism.js"));
