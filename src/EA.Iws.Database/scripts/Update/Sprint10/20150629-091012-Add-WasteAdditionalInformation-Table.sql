@@ -23,13 +23,10 @@ GO
 ALTER TABLE [Business].[WasteComposition] ADD ChemicalCompositionType int
 GO
 
-ALTER TABLE [Business].[WasteType] ADD HasAnnex bit NOT Null
+ALTER TABLE [Business].[WasteType] ADD HasAnnex bit NOT Null  DEFAULT ((0))
 GO
 
 ALTER TABLE [Business].[WasteType] ADD OtherWasteTypeDescription nvarchar(256) NULL
-GO
-
-ALTER TABLE [Business].[WasteType] ADD  CONSTRAINT [DF_WasteType_HasAnnex]  DEFAULT ((0)) FOR [HasAnnex]
 GO
 
 ALTER TABLE [Business].[WasteType] ADD EnergyInformation nvarchar(256) NULL
