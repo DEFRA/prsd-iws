@@ -13,7 +13,7 @@
         [Display(Name = "Country")]
         public Guid? CountryId { get; set; }
 
-        [Display(Name = "Entry point")]
+        [Display(Name = "Exit point")]
         [RequiredIf("ShowNextSection", true, "The entry point is required")]
         public Guid? EntryOrExitPointId { get; set; }
 
