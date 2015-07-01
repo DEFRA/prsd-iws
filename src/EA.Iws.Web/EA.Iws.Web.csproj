@@ -544,7 +544,7 @@
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\StateOfImportSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ReasonForExport\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteCodes\WasteCode.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteCodes\BaselEwcCode.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\_ShipmentForm.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteCodes\AddYcodeHcodeAndUnClass.cshtml">
       <SubType>Code</SubType>
@@ -690,7 +690,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\StateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\PhysicalCharacteristics\PhysicalCharacteristicsViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\TransitState\TransitStateViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\WasteCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaselEwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteGenerationProcess\WasteGenerationProcessViewModel.cs" />
     <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />

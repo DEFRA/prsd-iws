@@ -86,7 +86,7 @@
                         client.SendAsync(User.GetAccessToken(),
                             new SetPhysicalCharacteristics(selectedPackagingTypes, model.NotificationId,
                                 model.OtherDescription));
-                    return RedirectToAction("WasteCode", "WasteCodes", new { id = model.NotificationId });
+                    return RedirectToAction("BaselEwcCode", "WasteCodes", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {

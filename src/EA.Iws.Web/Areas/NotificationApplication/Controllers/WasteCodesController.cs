@@ -23,20 +23,20 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> WasteCode(Guid id)
+        public async Task<ActionResult> BaselEwcCode(Guid id)
         {
-            var model = new WasteCodeViewModel
+            var model = new BaselEwcCodeViewModel
             {
                 NotificationId = id
             };
 
-            await InitializeWasteCodeViewModel(model);
+            await InitializeBaselEwcCodeViewModel(model);
 
             using (var client = apiClient())
             {
                 model.SelectedEwcCodes = new List<WasteCodeData>(await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.Ewc)));
                 var baselOecdCode = (await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.Basel))).SingleOrDefault();
-                model.SelectedWasteCode = baselOecdCode == null ? null : baselOecdCode.Id.ToString();
+                model.SelectedBaselCode = baselOecdCode == null ? null : baselOecdCode.Id.ToString();
             }
 
             return View(model);
@@ -44,46 +44,93 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> WasteCode(WasteCodeViewModel model)
+        public async Task<ActionResult> BaselEwcCode(BaselEwcCodeViewModel model, string command, string remove)
         {
-            if (!ModelState.IsValid)
+            if (remove != null)
             {
-                await InitializeWasteCodeViewModel(model);
+                await InitializeBaselEwcCodeViewModel(model);
+                ModelState.Clear();
+
+                if (model.SelectedEwcCodes.Any(c => c.Id.ToString() == remove))
+                {
+                    model.SelectedEwcCodes.RemoveAll(c => c.Id.ToString() == remove);
+                }
+
                 return View(model);
             }
 
-            if (model.Command.Equals("add"))
+            if (command.Equals("addEwcCode"))
             {
-                await InitializeWasteCodeViewModel(model);
-                var codeToAdd = model.EwcCodes.Single(c => c.Id.ToString() == model.SelectedEwcCode);
+                await InitializeBaselEwcCodeViewModel(model);
+                ModelState.Clear();
+                model.TypeOfCodeAdded = "EWC";
+                WasteCodeData codeToAdd;
+
+                try
+                {
+                    codeToAdd = model.EwcCodes.Single(c => c.Id.ToString() == model.SelectedEwcCode);
+                }
+                catch (Exception)
+                {
+                    return View(model);
+                }
+                
                 if (model.SelectedEwcCodes.All(c => c.Id != codeToAdd.Id))
                 {
                     model.SelectedEwcCodes.Add(codeToAdd);
                 }
+
                 return View(model);
             }
 
-            using (var client = apiClient())
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new SetWasteCodes(model.NotificationId, new Guid(model.SelectedWasteCode), model.SelectedEwcCodes.Select(p => p.Id)));
+                await InitializeBaselEwcCodeViewModel(model);
+                return View(model);
+            }
 
-                    return RedirectToAction("OtherWasteCodes", new { id = model.NotificationId });
-                }
-                catch (ApiBadRequestException ex)
+            if (command.Equals("continue"))
+            {
+                using (var client = apiClient())
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
+                    if (model.SelectedEwcCode != null)
                     {
-                        throw;
+                        var selectedEwcWasteCode = new WasteCodeData { Id = new Guid(model.SelectedEwcCode) };
+                        if (model.SelectedEwcCodes == null)
+                        {
+                            model.SelectedEwcCodes = new List<WasteCodeData>();
+                            model.SelectedEwcCodes.Add(selectedEwcWasteCode);
+                        }
+                        else
+                        {
+                            if (model.SelectedEwcCodes.All(x => x.Id != selectedEwcWasteCode.Id))
+                            {
+                                model.SelectedEwcCodes.Add(selectedEwcWasteCode);
+                            }
+                        }
+                    }
+
+                    try
+                    {
+                        await
+                            client.SendAsync(User.GetAccessToken(),
+                                new SetWasteCodes(model.NotificationId, new Guid(model.SelectedBaselCode), model.SelectedEwcCodes.Select(p => p.Id)));
+
+                        return RedirectToAction("OtherWasteCodes", new { id = model.NotificationId });
+                    }
+                    catch (ApiBadRequestException ex)
+                    {
+                        this.HandleBadRequest(ex);
+                        if (ModelState.IsValid)
+                        {
+                            throw;
+                        }
                     }
                 }
-                await InitializeWasteCodeViewModel(model);
-                return View(model);
             }
+
+            await InitializeBaselEwcCodeViewModel(model);
+            return View(model);
         }
 
         [HttpGet]
@@ -148,48 +195,152 @@
                 NotificationId = id
             };
             await InitializeUnNumberViewModel(model);
+
+            using (var client = apiClient())
+            {
+                model.SelectedUnNumbers =
+                    new List<WasteCodeData>(
+                        await
+                            client.SendAsync(User.GetAccessToken(),
+                                new GetWasteCodesForNotification(model.NotificationId, CodeType.UnNumber)));
+                model.SelectedCustomCodes =
+                    new List<string>(
+                        (await
+                            client.SendAsync(User.GetAccessToken(),
+                                new GetWasteCodesForNotification(model.NotificationId, CodeType.CustomsCode))).Select(
+                                    p => p.CustomCode));
+            }
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UnNumber(UnNumberViewModel model)
+        public async Task<ActionResult> UnNumber(UnNumberViewModel model, string command, string remove)
         {
+            if (remove != null)
+            {
+                await InitializeUnNumberViewModel(model);
+                ModelState.Clear();
+
+                if (model.SelectedUnNumbers.Any(c => c.Id.ToString() == remove))
+                {
+                    model.SelectedUnNumbers.RemoveAll(c => c.Id.ToString() == remove);
+                }
+
+                if (model.SelectedCustomCodes.Any(c => c == remove))
+                {
+                    model.SelectedCustomCodes.RemoveAll(c => c == remove);
+                }
+
+                return View(model);
+            }
+
+            if (command.Equals("addUnNumber"))
+            {
+                await InitializeUnNumberViewModel(model);
+                ModelState.Clear();
+                model.TypeOfCodeAdded = "UN";
+                WasteCodeData codeToAdd;
+
+                try
+                {
+                    codeToAdd = model.UnNumbers.Single(c => c.Id.ToString() == model.SelectedUnNumber);
+                }
+                catch (Exception)
+                {
+                    return View(model);
+                }
+
+                if (model.SelectedUnNumbers.All(c => c.Id != codeToAdd.Id))
+                {
+                    model.SelectedUnNumbers.Add(codeToAdd);
+                }
+
+                if (codeToAdd.Code.Equals("Not applicable"))
+                {
+                    model.SelectedUnNumbers.Clear();
+                    model.SelectedUnNumbers.Add(codeToAdd);
+                    return View(model);
+                }
+
+                if (model.SelectedUnNumbers.All(c => c.Id != codeToAdd.Id))
+                {
+                    if (model.SelectedUnNumbers.Any(c => c.Code == "Not applicable"))
+                    {
+                        model.SelectedUnNumbers.RemoveAll(c => c.Code.Equals("Not applicable"));
+                    }
+
+                    model.SelectedUnNumbers.Add(codeToAdd);
+                }
+
+                return View(model);
+            }
+
+            if (command.Equals("addCustomCode"))
+            {
+                await InitializeUnNumberViewModel(model);
+                ModelState.Clear();
+                model.TypeOfCodeAdded = "Custom";
+
+                if (model.SelectedCustomCodes == null)
+                {
+                    model.SelectedCustomCodes = new List<string>();
+                }
+
+                if (!model.SelectedCustomCodes.Contains(model.SelectedCustomCode))
+                {
+                    model.SelectedCustomCodes.Add(model.SelectedCustomCode);
+                }
+
+                return View(model);
+            }
+
             if (!ModelState.IsValid)
             {
                 await InitializeUnNumberViewModel(model);
                 return View(model);
             }
 
-            if (model.Command.Equals("add"))
-            {
-                await InitializeUnNumberViewModel(model);
-                var codeToAdd = model.UnCodes.Single(c => c.Id.ToString() == model.SelectedUnCode);
-                if (model.SelectedUnCodes.All(c => c.Id != codeToAdd.Id))
-                {
-                    model.SelectedUnCodes.Add(codeToAdd);
-                }
-                return View(model);
-            }
-
-            if (model.Command.Equals("addCustomCode"))
-            {
-                await InitializeUnNumberViewModel(model);
-                if (model.CustomCodes == null)
-                {
-                    model.CustomCodes = new List<string>();
-                }
-                model.CustomCodes.Add(model.SelectedCustomCode);
-                return View(model);
-            }
-
             using (var client = apiClient())
             {
+                if (model.SelectedUnNumber != null)
+                {
+                    var selectedUnNumber = new WasteCodeData { Id = new Guid(model.SelectedUnNumber) };
+                    if (model.SelectedUnNumbers == null)
+                    {
+                        model.SelectedUnNumbers = new List<WasteCodeData>();
+                        model.SelectedUnNumbers.Add(selectedUnNumber);
+                    }
+                    else
+                    {
+                        if (model.SelectedUnNumbers.All(x => x.Id != selectedUnNumber.Id))
+                        {
+                            model.SelectedUnNumbers.Add(selectedUnNumber);
+                        }
+                    }
+                }
+
+                if (model.SelectedCustomCode != null)
+                {
+                    if (model.SelectedCustomCodes == null)
+                    {
+                        model.SelectedCustomCodes = new List<string>();
+                        model.SelectedCustomCodes.Add(model.SelectedCustomCode);
+                    }
+                    else
+                    {
+                        if (!model.SelectedCustomCodes.Contains(model.SelectedCustomCode))
+                        {
+                            model.SelectedCustomCodes.Add(model.SelectedCustomCode);
+                        }
+                    }
+                }
+
                 try
                 {
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new SetUnNumberWasteCodes(model.NotificationId, model.SelectedUnCodes.Select(p => p.Id), model.CustomCodes));
+                            new SetUnNumberWasteCodes(model.NotificationId, model.SelectedUnNumbers.Select(p => p.Id), model.SelectedCustomCodes));
 
                     return RedirectToAction("RecoveryPercentage", "RecoveryInfo");
                 }
@@ -201,6 +352,7 @@
                         throw;
                     }
                 }
+
                 await InitializeUnNumberViewModel(model);
                 return View(model);
             }
@@ -452,7 +604,7 @@
             return View(model);
         }
 
-        private async Task<WasteCodeViewModel> InitializeWasteCodeViewModel(WasteCodeViewModel model)
+        private async Task<BaselEwcCodeViewModel> InitializeBaselEwcCodeViewModel(BaselEwcCodeViewModel model)
         {
             using (var client = apiClient())
             {
@@ -460,7 +612,7 @@
                 var baselCodes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Basel));
                 var oecdCodes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Oecd));
 
-                model.WasteCodes = baselCodes.Union(oecdCodes);
+                model.BaselOecdCodes = baselCodes.Union(oecdCodes);
 
                 return model;
             }
@@ -470,10 +622,10 @@
         {
             using (var client = apiClient())
             {
-                model.UnCodes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.UnNumber));
+                model.UnNumbers = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.UnNumber));
 
-                model.SelectedUnCodes = new List<WasteCodeData>(await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.UnNumber)));
-                model.CustomCodes = new List<string>((await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.CustomsCode))).Select(p => p.CustomCode));
+                //model.SelectedUnNumbers = new List<WasteCodeData>(await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.UnNumber)));
+                //model.SelectedCustomCodes = new List<string>((await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.CustomsCode))).Select(p => p.CustomCode));
 
                 return model;
             }

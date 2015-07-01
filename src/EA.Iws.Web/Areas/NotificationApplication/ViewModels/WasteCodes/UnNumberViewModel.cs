@@ -5,39 +5,36 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Core.WasteCodes;
-    using Core.WasteType;
 
     public class UnNumberViewModel : IValidatableObject
     {
         public UnNumberViewModel()
         {
-            SelectedUnCodes = new List<WasteCodeData>();
-            CustomCodes = new List<string>();
+            SelectedUnNumbers = new List<WasteCodeData>();
+            SelectedCustomCodes = new List<string>();
         }
 
         public Guid NotificationId { get; set; }
 
-        public IEnumerable<WasteCodeData> UnCodes { get; set; }
+        public IEnumerable<WasteCodeData> UnNumbers { get; set; }
 
-        public List<WasteCodeData> SelectedUnCodes { get; set; }
+        public List<WasteCodeData> SelectedUnNumbers { get; set; }
 
         [Display(Name = "UN Number")]
-        public CodeType UnCode { get; set; }
+        public string SelectedUnNumber { get; set; }
 
         [Display(Name = "Custom codes")]
-        public List<string> CustomCodes { get; set; }
-
         public string SelectedCustomCode { get; set; }
+        
+        public List<string> SelectedCustomCodes { get; set; }
 
-        public string SelectedUnCode { get; set; }
-
-        public string Command { get; set; }
+        public string TypeOfCodeAdded { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Command.Equals("save") && (SelectedUnCodes == null || !SelectedUnCodes.Any()))
+            if (string.IsNullOrEmpty(SelectedUnNumber) && (SelectedUnNumbers == null || !SelectedUnNumbers.Any()))
             {
-                yield return new ValidationResult("Enter the relevant UN number(s) or not applicable");
+                yield return new ValidationResult("Please enter a UN number or select not applicable", new[] { "SelectedUnNumber" });
             }
         }
     }

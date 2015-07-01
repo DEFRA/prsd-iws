@@ -1,0 +1,125 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.BaselEwcCodeViewModel
+@{
+    ViewBag.Title = "Waste Identification";
+}
+<header class="hgroup">
+    <div class="form-group">
+        @Html.Gds().HintParagraph("Step 1 of 4")
+    </div>
+    <h2 class="heading-large">Waste Identification</h2>
+    <p>
+        Select the appropriate Basel code or OECD code to identify your waste <br />
+        If there is no suitable code then select not listed
+    </p>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.TypeOfCodeAdded, new { id = "typeOfCodeAdded" })
+
+    <div>
+
+
+        <div class="wastecode-block">
+            <div class="form-group top-blue-line @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
+                <div class="heading-medium">Basel annex VIII/IX or OECD code</div>
+                @Html.Gds().ValidationMessageFor(m => m.SelectedBaselCode)
+                <select data-val="true" data-val-required="The SelectedWasteCode field is required." id="code-list" name="SelectedBaselCode">
+                    <option description="" selected="selected" value=""></option>
+                    @foreach (var wasteCode in Model.BaselOecdCodes)
+                    {
+                        var selected = wasteCode.Id.ToString() == Model.SelectedBaselCode ? "Selected" : "";
+                        <option description="@wasteCode.Description" value="@wasteCode.Id" @selected>@wasteCode.Code</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label id="descriptionTextArea"></label>
+            </div>
+        </div>
+
+
+
+        <div class="wastecode-block">
+            <div class="form-group top-blue-line @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
+                <div class="heading-medium">European waste catalogue (EWC) codes</div>
+                @Html.Gds().HintParagraph("Enter at least one")
+                @Html.Gds().ValidationMessageFor(m => m.SelectedEwcCode)
+                <select data-val="true" data-val-required="The SelectedBaselCode field is required." id="ewc-code-list" name="SelectedEwcCode">
+                    <option description="" selected="selected" value=""></option>
+                    @foreach (var ewcCode in Model.EwcCodes)
+                    {
+                        <option description="@ewcCode.Description" value="@ewcCode.Id">@ewcCode.Code</option>
+                    }
+                </select>
+                @*<a onclick=" getEwcDescription() " class="no-js-hidden" id="EwcClassAdd" href="#">Add</a>*@
+                <button class="link-submit" id="EwcCodeAdd" type="submit" name="command" value="addEwcCode">Add</button>
+            </div>
+
+            
+                @if (Model.SelectedEwcCodes.Count > 0)
+                {
+                    <table id="nonjsTable">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @for (int i = 0; i < Model.SelectedEwcCodes.Count; i++)
+                        {
+                            <tr>
+                                <td><input name="SelectedEwcCodes[@i].Code" type="hidden" value="@Model.SelectedEwcCodes[i].Code"/>@Model.SelectedEwcCodes[i].Code</td>
+                                <td><input name="SelectedEwcCodes[@i].Description" type="hidden" value="@Model.SelectedEwcCodes[i].Description"/>@Model.SelectedEwcCodes[i].Description</td>
+                                <td><input name="SelectedEwcCodes[@i].Id" type="hidden" value="@Model.SelectedEwcCodes[i].Id"/></td>
+                                <td><button class="link-submit" type="submit" name="remove" value="@Model.SelectedEwcCodes[i].Id">Remove</button></td>
+                            </tr>
+                        }
+                    </table>
+                }
+
+            <div class="form-group">
+                <table id="ewcTable"></table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit" name="command" value="continue">Continue</button>
+    </div>
+}
+
+@section scripts{
+    <script>
+        (function ($) {
+            $(function () {
+                $('#code-list').selectToAutocomplete();
+                $('#ewc-code-list').selectToAutocomplete();
+
+                $('#code-list').change(function () {
+                    getComboDescription($(this));
+                });
+
+                getComboDescription($('#code-list'));
+                $('#EwcClassAdd').css('display', 'inline-block');
+
+                var codeAdded = $('#typeOfCodeAdded').val();
+                if (codeAdded == "EWC") {
+                    $('#EwcCodeAdd').prev('.ui-autocomplete-input').focus().val('');
+                }
+            });
+        })(jQuery);
+
+        function getComboDescription(sel) {
+            $("#descriptionTextArea").text(sel.find(":selected").attr('description'));
+        }
+
+
+    </script>
+}
