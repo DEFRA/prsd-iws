@@ -51,7 +51,7 @@
                 }
                 if (minConcentrationValue > maxConcentrationValue)
                 {
-                    yield return new ValidationResult("Min concentration should lower than the Max concentration  " + EnumHelper.GetDescription(ChemicalCompositionCategory));
+                    yield return new ValidationResult("Min concentration should be lower than the Max concentration  " + EnumHelper.GetDescription(ChemicalCompositionCategory));
                 }
             }
         }

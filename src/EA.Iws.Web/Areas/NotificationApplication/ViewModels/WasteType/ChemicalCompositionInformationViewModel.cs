@@ -6,7 +6,7 @@
     using Core.WasteType;
     using Requests.WasteType;
 
-    public class ChemicalCompositionInformationViewModel
+    public class ChemicalCompositionInformationViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
@@ -14,9 +14,16 @@
 
         public string FurtherInformation { get; set; }
 
-        [Required]
         public string Energy { get; set; }
 
         public ChemicalCompositionType ChemicalCompositionType { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrEmpty(Energy))
+            {
+                yield return new ValidationResult("Please enter a value for Energy");
+            }
+        }
     }
 }
