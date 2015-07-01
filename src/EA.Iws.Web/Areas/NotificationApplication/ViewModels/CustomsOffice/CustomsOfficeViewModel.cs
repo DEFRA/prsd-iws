@@ -20,5 +20,7 @@
         [Required]
         [Display(Name = "Country")]
         public Guid? SelectedCountry { get; set; }
+
+        public int Steps { get; set; }
     }
 }

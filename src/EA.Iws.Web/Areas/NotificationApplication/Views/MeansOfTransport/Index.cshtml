@@ -12,11 +12,11 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     
-    @Html.Action("_PreviousMeansEditor", Model)
+    @Html.Partial("_PreviousMeansEditor", Model)
 
     <h3 class="heading-small">@ViewService.WordForNumber(Model.SelectedMeans.Count + 1) method</h3>
     
-    @Html.Action("_CurrentMeansEditor", Model)
+    @Html.Partial("_CurrentMeansEditor", Model)
 
     <div class="form-group">
         <button type="submit" class="link-submit" value="Add" name="submit">Add more</button>

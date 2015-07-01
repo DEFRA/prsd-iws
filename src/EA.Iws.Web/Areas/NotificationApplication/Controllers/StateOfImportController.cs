@@ -116,7 +116,7 @@
                     client.SendAsync(User.GetAccessToken(), new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
 
             var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
-                new KeyValuePair<string, Guid>(ca.Name, ca.Id));
+                new KeyValuePair<string, Guid>(ca.Code + " -" + ca.Name, ca.Id));
             var competentAuthorityRadioButtons = new StringGuidRadioButtons(competentAuthoritiesKeyValuePairs);
 
             if (model.CompetentAuthorities != null)

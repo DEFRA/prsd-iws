@@ -44,14 +44,16 @@
                         Address = data.CustomsOfficeData.Address,
                         Name = data.CustomsOfficeData.Name,
                         SelectedCountry = data.CustomsOfficeData.Country.Id,
-                        Countries = new SelectList(data.Countries, "Id", "Name", data.CustomsOfficeData.Country.Id)
+                        Countries = new SelectList(data.Countries, "Id", "Name", data.CustomsOfficeData.Country.Id),
+                        Steps = (data.CustomsOffices == CustomsOffices.EntryAndExit) ? 2 : 1
                     };
                 }
                 else
                 {
                     model = new CustomsOfficeViewModel
                     {
-                        Countries = new SelectList(data.Countries, "Id", "Name")
+                        Countries = new SelectList(data.Countries, "Id", "Name"),
+                        Steps = (data.CustomsOffices == CustomsOffices.EntryAndExit) ? 2 : 1
                     };
                 }
 

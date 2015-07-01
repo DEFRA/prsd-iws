@@ -28,7 +28,7 @@
                 model.EntryOrExitPointId = source.StateOfExport.ExitPoint.Id;
 
                 model.CompetentAuthorities = new StringGuidRadioButtons(source.CompetentAuthorities
-                    .Select(ca => new KeyValuePair<string, Guid>(ca.Name, ca.Id)));
+                    .Select(ca => new KeyValuePair<string, Guid>(ca.Code + " - " + ca.Name, ca.Id)));
 
                 model.ExitPoints = new SelectList(source.ExitPoints, "Id", "Name");
 

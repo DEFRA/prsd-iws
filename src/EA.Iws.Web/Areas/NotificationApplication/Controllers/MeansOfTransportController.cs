@@ -62,10 +62,16 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, MeansOfTransportViewModel model, string submit)
+        public async Task<ActionResult> Index(Guid id, MeansOfTransportViewModel model, string submit, int? delete)
         {
-            if (!ModelState.IsValid || submit == null || !model.SelectedValue.HasValue)
+            if (!ModelState.IsValid || !model.SelectedValue.HasValue)
             {
+                return View(model);
+            }
+
+            if (delete.HasValue)
+            {
+                model.SelectedMeans.RemoveAt(delete.Value);
                 return View(model);
             }
 
@@ -73,6 +79,7 @@
             {
                 case AddAction:
                     model.SelectedMeans.Add(model.SelectedValue.Value);
+                    ModelState.Remove("SelectedValue");
                     model.SelectedValue = null;
                     return View(model);
                 case SubmitAction:
@@ -80,17 +87,6 @@
                 default:
                     return View(model);
             }
-        }
-
-        public ActionResult _CurrentMeansEditor(MeansOfTransportViewModel model)
-        {
-            this.RemoveModelStateErrors();
-            return PartialView(model);
-        }
-
-        public ActionResult _PreviousMeansEditor(MeansOfTransportViewModel model)
-        {
-            return PartialView(model);
         }
 
         private IList<RadioButtonPair<string, int>> GetPossibleMeans()

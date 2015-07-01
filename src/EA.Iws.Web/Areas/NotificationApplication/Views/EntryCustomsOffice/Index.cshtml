@@ -3,10 +3,16 @@
 @{
     ViewBag.Title = "Entry Customs Office";
 }
-
-<h2 class="heading-large">What is the name and address for the entry customs office?</h2>
-
-<p>This is the customs office through which the waste enters the European Economic Area (EEA)</p>
+<header class="hgroup">
+    @if (Model.Steps > 1)
+    {
+        <div class="form-group">
+            @Html.Gds().HintParagraph("Step 2 of " + @Model.Steps)
+        </div>
+    }
+    <h2 class="heading-large">What is the name and address for the entry customs office?</h2>
+    <p>This is the customs office through which the waste enters the European Economic Area (EEA)</p>
+</header>
 
 @using (Html.BeginForm())
 {

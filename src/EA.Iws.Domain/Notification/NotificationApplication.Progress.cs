@@ -111,12 +111,7 @@
 
         public bool AreTransitStatesCompleted()
         {
-            if (TransitStates.Any())
-            {
-                return true;
-            }
-
-            return IsStateOfExportCompleted() && IsStateOfImportCompleted() && IsCustomsOfficeCompleted();
+            return TransitStates.Any();
         }
 
         public bool IsIntendedShipmentsCompleted()
