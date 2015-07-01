@@ -20,7 +20,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(Energy))
+            if (string.IsNullOrEmpty(Energy) && ChemicalCompositionType != ChemicalCompositionType.Wood)
             {
                 yield return new ValidationResult("Please enter a value for Energy");
             }
