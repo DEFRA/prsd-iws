@@ -129,7 +129,7 @@
             get { return PhysicalCharacteristicsCollection.ToSafeIEnumerable(); }
         }
 
-        public IEnumerable<WasteCodeInfo> WasteCodeInfo
+        public IEnumerable<WasteCodeInfo> WasteCodes
         {
             get { return WasteCodeInfoCollection.ToSafeIEnumerable(); }
         }

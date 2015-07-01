@@ -142,7 +142,9 @@
 
         public bool AreWasteCodesCompleted()
         {
-            return WasteCodeInfo.Any();
+            return BaselOecdCode != null && ExportCode != null && ImportCode != null
+                   && EwcCodes.Any() && YCodes.Any() && HCodes.Any() && UnClasses.Any()
+                   && UnNumbers.Any();
         }
 
         public bool IsWasteRecoveryInformationCompleted()

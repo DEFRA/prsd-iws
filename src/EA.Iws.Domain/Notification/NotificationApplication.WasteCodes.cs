@@ -5,7 +5,6 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Core.WasteCodes;
-    using Core.WasteType;
 
     public partial class NotificationApplication
     {
