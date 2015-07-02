@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15175.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.15175-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15189.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15189-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -85,7 +85,6 @@
     <Compile Include="Notification\SetReasonForExport.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
     <Compile Include="Notification\SetRecoveryPercentageData.cs" />
-    <Compile Include="RecoveryInfo\RecoveryInfoData.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="OperationCodes\AddDisposalCodes.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationId.cs" />

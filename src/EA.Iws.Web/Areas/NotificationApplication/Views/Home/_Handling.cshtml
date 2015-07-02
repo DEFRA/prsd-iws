@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsSpecialHandlingCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">Special handling</span>
+        </summary>
+
+        <div class="expanded-details">
+            @Model.SpecialHandlingDetails<br />
+        </div>
+    </details>
+}

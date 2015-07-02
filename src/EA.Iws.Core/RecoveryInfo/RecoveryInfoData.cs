@@ -1,7 +1,6 @@
-﻿namespace EA.Iws.Requests.RecoveryInfo
+﻿namespace EA.Iws.Core.RecoveryInfo
 {
     using System;
-    using Core.RecoveryInfo;
 
     public class RecoveryInfoData
     {

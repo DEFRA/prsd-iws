@@ -1,9 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.CustomsOffice;
+    using Core.Shipment;
     using Infrastructure;
     using Prsd.Core;
     using Prsd.Core.Web.ApiClient;
@@ -55,12 +59,8 @@
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
 
-                var model = new NotificationOverviewViewModel
-                {
-                    NotificationId = response.NotificationId,
-                    NotificationNumber = response.NotificationNumber,
-                    NotificationType = response.NotificationType
-                };
+                var model = new NotificationOverviewViewModel(response);
+               
                 return View(model);
             }
         }
@@ -70,7 +70,7 @@
         {
             if (id == Guid.Empty)
             {
-                return PartialView(new NotificationOverviewViewModel());
+                return PartialView(new NavigationViewModel());
             }
 
             using (var client = apiClient())
@@ -78,7 +78,7 @@
                 var response =
                     client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id)).GetAwaiter().GetResult();
 
-                var model = new NotificationOverviewViewModel
+                var model = new NavigationViewModel
                 {
                     NotificationId = response.NotificationId,
                     NotificationNumber = response.NotificationNumber,

@@ -1,0 +1,12 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.NotificationType == NotificationType.Recovery && Model.Progress.IsPreconsentStatusChosen)
+{
+    <div>
+        <div class="list-heading-no-detail column-third">Pre-consent facility</div>
+        <div>
+            @Model.PreconstedAnswer<br />
+        </div>
+    </div>
+}

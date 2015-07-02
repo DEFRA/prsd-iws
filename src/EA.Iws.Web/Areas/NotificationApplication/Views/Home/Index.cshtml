@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
 
 @{
     ViewBag.Title = "Notification overview";
@@ -6,91 +7,100 @@
 
 <h1 class="heading-large">Notification overview</h1>
 
-<div class="form-group">
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div>Exporter - notifier</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "Index", "Exporter", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>Waste generator - producer</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "List", "Producer", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>Importer - consignee</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "Index", "Importer", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>@Model.NotificationType.ToString() facility</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "List", "Facility", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>Intended carriers</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "List", "Carrier", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>Packaging types</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "Index", "PackagingTypes", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>Special handling</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "Index", "SpecialHandling", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>Intended shipments</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "Index", "Shipment", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>Percentage Recoverable</div>
-                </td>
-                <td>
-                    <div>@Html.ActionLink("Edit", "RecoveryPercentage", "RecoveryInfo", new { id = Model.NotificationId }, null)</div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<section class="notification-overview">
+<div>
+
+<h2 class="heading-medium">Organisations involved</h2>
+
+<!-- //////////// Exporter notifier /////////////// -->
+@Html.Partial("_Exporter")
+
+<!-- //////////// Waste generator producer /////////////// -->
+@Html.Partial("_Producer")
+
+<!-- //////////// Importer consignee /////////////// -->
+@Html.Partial("_Importer")
+
+<!-- //////////// Recovery facility /////////////// -->
+@Html.Partial("_Facility")
+
+
+<h2 class="heading-medium">@( Model.NotificationType + " operation")</h2>
+
+<!-- //////////// Pre-consent facility /////////////// -->
+@Html.Partial("_PreConsented")
+
+<!-- //////////// Recovery / Disposal codes /////////////// -->
+@Html.Partial("_RecoveryDisposal")
+
+<!-- //////////// Technology employed /////////////// -->
+@Html.Partial("_Technology")
+
+<!-- //////////// Reason for export /////////////// -->
+@Html.Partial("_ReasonForExport")
+
+
+<h2 class="heading-medium">Transportation</h2>
+
+<!-- //////////// Intended carrier /////////////// -->
+@Html.Partial("_Carrier")
+
+<!-- //////////// Means of transport /////////////// -->
+@Html.Partial("_MeansOfTransport")
+
+<!-- //////////// Packaging types /////////////// -->
+@Html.Partial("_Packaging")
+
+<!-- //////////// Special handling /////////////// -->
+@Html.Partial("_Handling")
+
+
+<h2 class="heading-medium">The journey</h2>
+
+<!-- //////////// State of export /////////////// -->
+@Html.Partial("_StateOfExport")
+
+<!-- //////////// Transit states /////////////// -->
+@Html.Partial("_TransitStates")
+
+<!-- //////////// State of import /////////////// -->
+@Html.Partial("_StateOfImport")
+
+<!-- //////////// Customs office /////////////// -->
+@Html.Partial("_Customs")
+
+
+<h2 class="heading-medium">Amounts and dates</h2>
+
+<!-- //////////// Intended shipments /////////////// -->
+@Html.Partial("_IntendedShipments")
+
+<h2 class="heading-medium">Classify your waste</h2>
+
+<!-- //////////// Chemical composition /////////////// //////////////////////////////////////////////////////////////////////////////////////-->
+@Html.Partial("_ChemicalComposition")
+
+<!-- //////////// Process of generation /////////////// -->
+@Html.Partial("_ProcessOfGeneration")
+
+<!-- //////////// Physical characteristics /////////////// -->
+@Html.Partial("_PhysicalCharacteristics")
+
+<!-- //////////// Waste codes /////////////// -->
+@Html.Partial("_WasteCodes")
+
+
+<h2 class="heading-medium">Waste recovery</h2>
+
+<!-- //////////// Recovery information /////////////// -->
+@Html.Partial("_RecoveryInfo")
+
 </div>
 
+
+</section>
+<br/>
+<br/>
 <div class="form-group">
     @Html.ActionLink("Continue", "Disclaimer", "Home", new { id = Model.NotificationId }, new { @class = "button" })
 </div>

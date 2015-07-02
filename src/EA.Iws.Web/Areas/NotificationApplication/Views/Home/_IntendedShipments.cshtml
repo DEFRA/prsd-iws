@@ -1,0 +1,31 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsIntendedShipmentsCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">Intended shipments</span>
+        </summary>
+
+        <div class="expanded-details">
+            <table>
+                <tr>
+                    <td>Number of shipments</td>
+                    <td>@Model.ShipmentData.NumberOfShipments</td>
+                </tr>
+                <tr>
+                    <td>Quantity</td>
+                    <td>@(Model.ShipmentData.Quantity.ToString("0.00") + " " + Model.ShipmentData.Units)</td>
+                </tr>
+                <tr>
+                    <td>First departure date</td>
+                    <td>@Model.ShipmentData.FirstDate.ToString("dd/MM/yyyy")</td>
+                </tr>
+                <tr>
+                    <td>Last departure date</td>
+                    <td>@Model.ShipmentData.LastDate.ToString("dd/MM/yyyy")</td>
+                </tr>
+            </table>
+        </div>
+    </details>
+}

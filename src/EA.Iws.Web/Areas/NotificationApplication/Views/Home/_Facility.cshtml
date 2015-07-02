@@ -1,0 +1,27 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsFacilityCompleted)
+{
+    if (Model.FacilitiesCompanyNames.Count > 1)
+    {
+        <details>
+            <summary>
+                <span class="summary">@(Model.NotificationType + " facilities")</span>
+            </summary>
+
+            <div class="expanded-details">
+                @foreach (var pn in Model.FacilitiesCompanyNames)
+                {
+                    @pn<br />
+                }
+            </div>
+        </details>
+    }
+    else
+    {
+        <div class="list-heading-no-detail column-third">@(Model.NotificationType + " facility")</div>
+        <div>
+            @Model.FacilitiesCompanyNames[0]<br />
+        </div>
+    }
+}

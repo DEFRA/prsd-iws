@@ -1,0 +1,9 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsExporterCompleted)
+{
+    <div class="list-heading-no-detail column-third">Exporter notifier</div>
+    <div>
+        @Model.ExporterCompanyName<br />
+    </div>
+}

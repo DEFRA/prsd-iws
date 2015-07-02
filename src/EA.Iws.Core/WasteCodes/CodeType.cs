@@ -14,6 +14,6 @@
         [Display(Name = "Import Code")] ImportCode = 8,
         [Display(Name = "Other Code")] OtherCode = 9,
         [Display(Name = "Customs Code")] CustomsCode = 10,
-        [Display(Name = "UN Number Code")] UnNumber = 11
+        [Display(Name = "UN Number")] UnNumber = 11
     }
 }

@@ -1,0 +1,16 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsTechnologyEmployedCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">Technology employed</span>
+        </summary>
+
+        <div class="expanded-details">
+            <span>
+                @Model.TechnologyEmployed
+            </span>
+        </div>
+    </details>
+}

@@ -28,8 +28,9 @@
         {
             context = A.Fake<IwsContext>();
             handler = new GetExitCustomsOfficeAddDataByNotificationIdHandler(context, 
-                new CountryMap(), 
-                new CustomsOfficeMap(new CountryMap()));
+                new CustomsOfficeExitMap(context,
+                                            new CountryMap(), 
+                                            new CustomsOfficeMap(new CountryMap())));
 
             helper = new DbContextHelper();
 

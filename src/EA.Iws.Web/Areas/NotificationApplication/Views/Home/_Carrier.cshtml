@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsCarrierCompleted)
+{
+    if (Model.CariersCompanyNames.Count > 1)
+    {
+        <details>
+            <summary>
+                <span class="summary">Intended carriers</span>
+            </summary>
+
+            <div class="expanded-details">
+                @foreach (var pn in Model.CariersCompanyNames)
+                {
+                    @pn<br />
+                }
+            </div>
+        </details>
+    }
+    else
+    {
+        <div class="list-heading-no-detail column-third">Intended carrier</div>
+        <div> @Model.CariersCompanyNames[0]<br /></div>
+    }
+}

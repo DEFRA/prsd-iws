@@ -1,0 +1,24 @@
+﻿@using Microsoft.Ajax.Utilities
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsChemicalCompositionCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">Chemical composition</span>
+        </summary>
+
+        <div class="expanded-details">
+            @Model.ChemicalComposition.ChemicalCompositionType <br/>
+            @if (!Model.ChemicalComposition.ChemicalCompositionName.IsNullOrWhiteSpace())
+            {
+                @Model.ChemicalComposition.ChemicalCompositionName <br />
+            }
+            @if (!Model.ChemicalComposition.ChemicalCompositionDescription.IsNullOrWhiteSpace())
+            {
+                @Model.ChemicalComposition.ChemicalCompositionDescription <br />
+            }
+           
+        </div>
+    </details>
+}

@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.ArePhysicalCharacteristicsCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">Physical characteristics</span>
+        </summary>
+
+        <div class="expanded-details">
+            @foreach (var c in Model.PhysicalCharacteristics)
+            {
+                @c<br />
+            }
+        </div>
+    </details>
+}

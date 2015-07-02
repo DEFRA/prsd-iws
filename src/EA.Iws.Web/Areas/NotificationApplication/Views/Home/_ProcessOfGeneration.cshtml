@@ -1,0 +1,16 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsProcessOfGenerationCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">Process of generation</span>
+        </summary>
+
+        <div class="expanded-details">
+            <span>
+                @Model.ProcessOfGeneration
+            </span>
+        </div>
+    </details>
+}

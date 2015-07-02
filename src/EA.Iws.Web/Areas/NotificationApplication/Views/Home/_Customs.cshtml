@@ -1,0 +1,48 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsCustomsOfficeCompleted)
+{
+    if (Model.EntryCustomsOffice.Country != null)
+    {
+        <details>
+            <summary>
+                <span class="summary">Customs office where shipment enters the EU</span>
+            </summary>
+
+            <div class="expanded-details">
+                <table>
+                    <thead>
+                    <th>Name</th>
+                    <th>Country</th>
+                    </thead>
+                    <tr>
+                        <td>@Model.EntryCustomsOffice.Name</td>
+                        <td>@Model.EntryCustomsOffice.Country.Name</td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+    }
+
+    if (Model.ExitCustomsOffice.Country != null)
+    {
+        <details>
+            <summary>
+                <span class="summary">Customs office where shipment leaves the EU</span>
+            </summary>
+
+            <div class="expanded-details">
+                <table>
+                    <thead>
+                    <th>Name</th>
+                    <th>Country</th>
+                    </thead>
+                    <tr>
+                        <td>@Model.ExitCustomsOffice.Name</td>
+                        <td>@Model.ExitCustomsOffice.Country.Name</td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+    }
+}

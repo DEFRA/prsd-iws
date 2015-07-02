@@ -1,0 +1,47 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsWasteRecoveryInformationCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">Recovery information</span>
+        </summary>
+
+        <div class="expanded-details">
+            <table>
+                @if (Model.RecoveryPercentageData.IsProvidedByImporter.HasValue)
+                {
+                    if (Model.RecoveryPercentageData.IsProvidedByImporter.Value)
+                    {
+                        @("The details will be provided by the importer consignee")
+                    }
+                }
+                else
+                {
+                    <tr><td>@("Percentage recoverable material is " + Model.RecoveryPercentageData.PercentageRecoverable + "%")</td></tr>
+
+                    if (Model.RecoveryPercentageData.PercentageRecoverable < Convert.ToDecimal(100))
+                    {
+                        <tr>
+                            <td>
+                                @("The planned method of disposal of the non-recoverable waste after recovery is:")
+                                <br /><br />
+                                @Model.RecoveryPercentageData.MethodOfDisposal
+                            </td>
+                        </tr>
+                    }
+
+                    <tr><td>@("The estimated value of the recoverable material is £" + @Model.RecoveryInfoData.EstimatedAmount + " per " + @Model.RecoveryInfoData.EstimatedUnit)</td></tr>
+
+                    <tr><td>@("The cost of recovery is  £" + @Model.RecoveryInfoData.CostAmount + " per " + @Model.RecoveryInfoData.CostUnit)</td></tr>
+
+                    if (@Model.RecoveryInfoData.DisposalAmount != null)
+                    {
+                        <tr><td>@("The cost of disposal of the non-recoverable fraction is £" + @Model.RecoveryInfoData.DisposalAmount + " per " + @Model.RecoveryInfoData.DisposalUnit)</td></tr>
+                    }
+                }
+            </table>
+
+        </div>
+    </details>
+}

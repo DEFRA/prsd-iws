@@ -1,0 +1,9 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsImporterCompleted)
+{
+    <div class="list-heading-no-detail column-third">Importer consignee</div>
+    <div>
+        @Model.ImporterCompanyName<br />
+    </div>
+}

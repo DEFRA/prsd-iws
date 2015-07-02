@@ -1,9 +1,14 @@
 ﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.NotificationApplication
 @using EA.Iws.Web.Infrastructure
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NavigationViewModel
 
 <p>
     <span>@Model.NotificationNumber</span>
+</p>
+
+<p>
+    @Html.Navigation().Link("Overview", false, "Index", "Home", "NotificationApplication")
 </p>
 
 <h4>Organisations involved</h4>

@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+
+@if (Model.Progress.IsStateOfImportCompleted)
+{
+    <details>
+        <summary>
+            <span class="summary">State of import</span>
+        </summary>
+
+        <div class="expanded-details">
+            <table>
+                <thead>
+                <th>Country</th>
+                <th>Competent Authority</th>
+                <th>Entry point</th>
+                </thead>
+                <tr>
+                    <td>@Model.StateOfImportData.Country.Name</td>
+                    <td>@Model.StateOfImportData.CompetentAuthority.Name</td>
+                    <td>@Model.StateOfImportData.EntryPoint.Name</td>
+                </tr>
+            </table>
+        </div>
+    </details>
+}
