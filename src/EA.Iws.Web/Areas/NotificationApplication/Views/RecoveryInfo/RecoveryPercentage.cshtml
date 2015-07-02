@@ -11,31 +11,44 @@
 @section scripts
 {
     <script>
-        $('#IsProvidedByImporter').click(function () {
+        function DisableOptions() {
+            $('#MethodOfDisposal').attr('readonly', true);
+            $('#MethodOfDisposal').css('background-color', '#DEDEDE');
+            $('#MethodOfDisposal').css('color', 'gray');
+
+            $('#PercentageRecoverable').attr('readonly', true);
+            $('#PercentageRecoverable').css('background-color', '#DEDEDE');
+            $('#PercentageRecoverable').css('color', 'gray');
+
+            $('#rdoYes').attr('disabled', 'disabled');
+            $('#rdoNo').attr('disabled', 'disabled');
+        }
+
+        function EnableOptions() {
+            $('#MethodOfDisposal').attr('readonly', false);
+            $('#MethodOfDisposal').css('background-color', 'white');
+            $('#MethodOfDisposal').css('color', 'black');
+
+            $('#PercentageRecoverable').attr('readonly', false);
+            $('#PercentageRecoverable').css('background-color', 'white');
+            $('#PercentageRecoverable').css('color', 'black');
+
+            $('#rdoYes').prop('disabled', null);
+            $('#rdoNo').prop('disabled', null);
+        }
+
+        function ManageOptions() {
             if ($('#IsProvidedByImporter').is(':checked')) {
-                $('#MethodOfDisposal').attr('readonly', true);
-                $('#MethodOfDisposal').css('background-color', '#DEDEDE');
-                $('#MethodOfDisposal').css('color', 'gray');
-
-                $('#PercentageRecoverable').attr('readonly', true);
-                $('#PercentageRecoverable').css('background-color', '#DEDEDE');
-                $('#PercentageRecoverable').css('color', 'gray');
-
-                $('#rdoYes').attr('disabled', 'disabled');
-                $('#rdoNo').attr('disabled', 'disabled');
-
+                DisableOptions();
             } else {
-                $('#MethodOfDisposal').attr('readonly', false);
-                $('#MethodOfDisposal').css('background-color', 'white');
-                $('#MethodOfDisposal').css('color', 'black');
-
-                $('#PercentageRecoverable').attr('readonly', false);
-                $('#PercentageRecoverable').css('background-color', 'white');
-                $('#PercentageRecoverable').css('color', 'black');
-
-                $('#rdoYes').prop('disabled', null);
-                $('#rdoNo').prop('disabled', null);
+                EnableOptions();
             }
+        }
+
+        $('#IsProvidedByImporter').click(function () {
+            ManageOptions();
         });
+
+        ManageOptions();
     </script>
 }

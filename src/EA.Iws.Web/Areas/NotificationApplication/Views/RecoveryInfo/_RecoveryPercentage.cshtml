@@ -1,9 +1,7 @@
-﻿@using Antlr.Runtime.Tree
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo.RecoveryPercentageViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo.RecoveryPercentageViewModel
 
 @Html.AntiForgeryToken()
 @Html.Gds().ValidationSummary()
-
 @Html.HiddenFor(m => m.NotificationId)
 
 <header class="hgroup">
@@ -22,7 +20,6 @@
             <br /><br /><br />
             @Html.Gds().HintSpan("It is the responsibility of the exporter-notifier to ensure the recovery information is provided directly to the competent authority by the importer-consignee")
         </div>
-
 
         <h2 class="heading-small">Is the waste 100% recoverable?</h2>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.IsHundredPercentRecoverable)">
@@ -56,7 +53,7 @@
                     result = "js-hidden";
                 }
             }
-            <div class="panel-indent @result" id="on-no-display" >
+            <div class="panel-indent @result" id="on-no-display">
 
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.PercentageRecoverable)">
                     @Html.Gds().LabelFor(m => m.PercentageRecoverable, false)
@@ -78,7 +75,7 @@
 
 <div class="form-group">
     <p>
-         <button class="button" type="submit">Continue</button>
+        <button class="button" type="submit">Continue</button>
     </p>
 </div>
 
@@ -86,4 +83,4 @@
     <script>
 
     </script>
-    }
+}

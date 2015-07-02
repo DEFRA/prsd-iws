@@ -58,12 +58,16 @@
         public bool? IsHundredPercentRecoverable { get; set; }
 
         [Display(Name = "Enter the percentage (%) of recoverable material")]
-        [Range(0, 100)]
+        [Range(0, 99.99)]
+        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places.")]
         public decimal? PercentageRecoverable { get; set; }
 
         public decimal? PercentageNonRecoverable
         {
-            get { return 100 - this.PercentageRecoverable; }
+            get
+            {
+                return Decimal.Round(100 - (PercentageRecoverable ?? 0), 2, MidpointRounding.AwayFromZero);
+            }
         }
 
         [Display(Name = "Planned method of disposal of the non-recoverable waste after recovery")]
