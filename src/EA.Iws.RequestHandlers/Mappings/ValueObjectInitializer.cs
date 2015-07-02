@@ -6,11 +6,6 @@
 
     internal class ValueObjectInitializer
     {
-        public static Business CreateBusiness(BusinessData business)
-        {
-            return new Business(business.Name, business.EntityType, business.RegistrationNumber, business.AdditionalRegistrationNumber);
-        }
-
         public static Business CreateBusiness(BusinessInfoData business)
         {
             if (business.BusinessType == BusinessType.Other)

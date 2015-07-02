@@ -8,38 +8,39 @@
 
     public class NotificationProducerTests
     {
+        private readonly NotificationApplication notification;
+        private readonly Producer anyProducer1;
+        private readonly Producer anyProducer2;
+        private static readonly Guid NonExistentProducerId = new Guid("94C2EF67-B445-41E6-B806-BE30CBBEAF36");
+
+        public NotificationProducerTests()
+        {
+            notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+            
+            anyProducer1 = notification.AddProducer(ObjectFactory.CreateEmptyProducerBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+            anyProducer2 = notification.AddProducer(ObjectFactory.CreateEmptyProducerBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+            
+            EntityHelper.SetEntityId(anyProducer1, new Guid("18C7F135-AE7F-4F1E-B6F9-076C12224292"));
+            EntityHelper.SetEntityId(anyProducer2, new Guid("58318441-922C-4453-8A96-D5AA2E3D9B5A"));
+        }
+
         [Fact]
         public void ProducersCanOnlyHaveOneSiteOfExport()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            var producer1 = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
-            var producer2 = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
-
-            EntityHelper.SetEntityIds(producer1, producer2);
-
-            notification.SetProducerAsSiteOfExport(producer1.Id);
+            notification.SetProducerAsSiteOfExport(anyProducer1.Id);
 
             var siteOfExportCount = notification.Producers.Count(p => p.IsSiteOfExport);
+
             Assert.Equal(1, siteOfExportCount);
         }
 
         [Fact]
         public void CantSetNonExistentProducerAsSiteOfExport()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            var producer = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
-            EntityHelper.SetEntityId(producer, new Guid("{D65D91BA-FA77-47F6-ACF5-B1A405DEE187}"));
-
-            var badId = new Guid("{5DF206F6-4116-4EEC-949A-0FC71FE609C1}");
-
-            Action setAsSiteOfExport = () => notification.SetProducerAsSiteOfExport(badId);
+            Action setAsSiteOfExport = () => notification.SetProducerAsSiteOfExport(NonExistentProducerId);
 
             Assert.Throws<InvalidOperationException>(setAsSiteOfExport);
         }
@@ -47,11 +48,8 @@
         [Fact]
         public void CantRemoveNonExistentProducer()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
             Action removeProducer =
-                () => notification.RemoveProducer(new Guid("{BD49EF90-C9B2-4E84-B0D3-964BC2A592D5}"));
+                () => notification.RemoveProducer(NonExistentProducerId);
 
             Assert.Throws<InvalidOperationException>(removeProducer);
         }
@@ -59,22 +57,17 @@
         [Fact]
         public void UpdateProducerModifiesCollection()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-            var producerId = new Guid("{D65D91BA-FA77-47F6-ACF5-B1A405DEE187}");
+            var updateProducer = notification.Producers.Single(p => p.Id == anyProducer1.Id);
 
-            var producer = notification.AddProducer(ObjectFactory.CreateEmptyBusiness(),
-                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
-            EntityHelper.SetEntityId(producer, producerId);
+            var newBuilding = "new building";
 
-            var updateProducer = notification.Producers.Single(p => p.Id == producerId);
-            var newAddress = new Address("new building", "address1", string.Empty, "town", string.Empty,
+            var newAddress = new Address(newBuilding, "address1", string.Empty, "town", string.Empty,
                 string.Empty,
                 "country");
 
             updateProducer.Address = newAddress;
 
-            Assert.Equal("new building", notification.Producers.Single(p => p.Id == producerId).Address.Building);
+            Assert.Equal(newBuilding, notification.Producers.Single(p => p.Id == anyProducer1.Id).Address.Building);
         }
     }
 }

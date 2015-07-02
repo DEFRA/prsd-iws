@@ -51,6 +51,11 @@ $(".business-type-radio-button").click(function () {
 
     // Find the div containing the registration number input and the form group inputs.
     var registrationBlock = $('#registration-block');
+
+    if (!registrationBlock.length) {
+        return;
+    }
+
     var registrationblockRegistrationNumber = registrationBlock.children(formGroupClass).first();
     var registrationblockAdditionalRegistrationNumber = registrationBlock.children(formGroupClass).last();
 

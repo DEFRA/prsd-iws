@@ -8,8 +8,6 @@
     using Domain;
     using Domain.Notification;
     using Prsd.Core.Mapper;
-    using Requests.Facilities;
-    using Requests.Shared;
     using Notification = Domain.Notification.NotificationApplication;
 
     internal class FacilityDataMap : IMap<Notification, IList<FacilityData>>,
@@ -17,11 +15,11 @@
         IMapWithParentObjectId<Facility, FacilityData>
     {
         private readonly IMap<Address, AddressData> addressMap;
-        private readonly IMap<Business, BusinessData> businessMap;
+        private readonly IMap<Business, BusinessInfoData> businessMap;
         private readonly IMap<Contact, ContactData> contactMap;
 
         public FacilityDataMap(IMap<Address, AddressData> addressMap,
-            IMap<Business, BusinessData> businessMap,
+            IMap<Business, BusinessInfoData> businessMap,
             IMap<Contact, ContactData> contactMap)
         {
             this.addressMap = addressMap;

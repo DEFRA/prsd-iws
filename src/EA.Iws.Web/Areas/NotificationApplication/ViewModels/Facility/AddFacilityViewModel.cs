@@ -3,7 +3,6 @@
     using System;
     using Core.Shared;
     using Requests.Facilities;
-    using Requests.Shared;
     using Web.ViewModels.Shared;
 
     public class AddFacilityViewModel
@@ -14,7 +13,7 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessViewModel();
+            Business = new BusinessTypeViewModel();
         }
 
         public NotificationType NotificationType { get; set; }
@@ -25,14 +24,14 @@
 
         public ContactData Contact { get; set; }
 
-        public BusinessViewModel Business { get; set; }
+        public BusinessTypeViewModel Business { get; set; }
 
         public AddFacilityToNotification ToRequest()
         {
             return new AddFacilityToNotification
             {
                 Address = Address,
-                Business = (BusinessData)Business,
+                Business = Business.ToBusinessInfoData(),
                 Contact = Contact,
                 NotificationId = NotificationId
             };

@@ -3,11 +3,10 @@
     using System;
     using Core.Shared;
     using Prsd.Core.Mediator;
-    using Shared;
 
     public class AddProducerToNotification : IRequest<Guid>
     {
-        public BusinessData Business { get; set; }
+        public BusinessInfoData Business { get; set; }
 
         public AddressData Address { get; set; }
 

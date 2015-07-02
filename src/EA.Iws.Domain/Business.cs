@@ -7,18 +7,7 @@
     {
         private string otherDescription;
 
-        public Business(string name, string type, string registrationNumber, string additionalRegistrationNumber)
-        {
-            Guard.ArgumentNotNull(() => name, name);
-            Guard.ArgumentNotNull(() => type, type);
-
-            Name = name;
-            Type = type;
-            RegistrationNumber = registrationNumber;
-            AdditionalRegistrationNumber = additionalRegistrationNumber;
-        }
-
-        private Business(string name, BusinessType type, string registrationNumber, string additionalRegistrationNumber, string otherDescription)
+        protected Business(string name, BusinessType type, string registrationNumber, string additionalRegistrationNumber, string otherDescription)
         {
             Guard.ArgumentNotNullOrEmpty(() => name, name);
             Guard.ArgumentNotNullOrEmpty(() => registrationNumber, registrationNumber);

@@ -56,6 +56,7 @@
     <Compile Include="Notification\NotificationApplication.WasteCodes.cs" />
     <Compile Include="Notification\NotificationApplication.WasteGenerationProcess.cs" />
     <Compile Include="Notification\WasteAdditionalInformation.cs" />
+    <Compile Include="ProducerBusiness.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\ExitCustomsOffice.cs" />
     <Compile Include="TransportRoute\EntryCustomsOffice.cs" />

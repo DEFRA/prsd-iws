@@ -79,6 +79,7 @@
     <Compile Include="Identity\IwsIdentityContext.cs" />
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
+    <Compile Include="Mappings\ProducerBusinessMapping.cs" />
     <Compile Include="Mappings\BusinessMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\ExitCustomsOfficeMapping.cs" />

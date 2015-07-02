@@ -8,7 +8,7 @@
     {
         public Guid Id { get; set; }
 
-        public BusinessData Business { get; set; }
+        public BusinessInfoData Business { get; set; }
 
         public AddressData Address { get; set; }
 
@@ -21,20 +21,9 @@
 
         public FacilityData()
         {
-            if (Address == null)
-            {
                 Address = new AddressData();
-            }
-
-            if (Contact == null)
-            {
                 Contact = new ContactData();
-            }
-
-            if (Business == null)
-            {
-                Business = new BusinessData();
-            }
+                Business = new BusinessInfoData();
         }
     }
 }

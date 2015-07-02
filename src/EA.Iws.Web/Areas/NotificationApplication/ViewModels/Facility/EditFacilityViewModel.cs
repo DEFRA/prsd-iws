@@ -4,7 +4,6 @@
     using Core.Facilities;
     using Core.Shared;
     using Requests.Facilities;
-    using Requests.Shared;
     using Web.ViewModels.Shared;
 
     public class EditFacilityViewModel : AddFacilityViewModel
@@ -15,13 +14,13 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessViewModel();
+            Business = new BusinessTypeViewModel();
         }
 
         public EditFacilityViewModel(FacilityData facility)
         {
             Address = facility.Address;
-            Business = (BusinessViewModel)facility.Business;
+            Business = new BusinessTypeViewModel(facility.Business);
             Contact = facility.Contact;
             FacilityId = facility.Id;
             NotificationId = facility.NotificationId;
@@ -34,7 +33,7 @@
             return new UpdateFacilityForNotification
             {
                 Address = Address,
-                Business = (BusinessData)Business,
+                Business = Business.ToBusinessInfoData(),
                 Contact = Contact,
                 FacilityId = FacilityId,
                 NotificationId = NotificationId

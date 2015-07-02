@@ -11,6 +11,7 @@
     using Domain.Notification;
     using FakeItEasy;
     using Prsd.Core.Domain;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class NotificationApplicationIntegration
@@ -35,7 +36,7 @@
             var address = new Address("building", "address1", string.Empty, "town", string.Empty, string.Empty,
                 "country");
 
-            var business = new Business(string.Empty, String.Empty, String.Empty, string.Empty);
+            var business = ObjectFactory.CreateEmptyProducerBusiness();
 
             var contact = new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
 

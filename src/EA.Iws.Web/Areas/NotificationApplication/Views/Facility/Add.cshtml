@@ -1,6 +1,15 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.AddFacilityViewModel
 @{
     ViewBag.Title = "Add a facility";
+
+    var message = "This information may be obtained from your " + Model.NotificationType.ToString().ToLowerInvariant() + " facility. Enter \"Not applicable\" when no relevant registration number applies";
+
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.PartnershipRegistrationNumber = message;
+    ViewBag.CompanyRegistrationNumber = message;
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.OtherRegistrationNumber = message;
+    ViewBag.NonJavascriptMessage = message;
 }
 
 @using (Html.BeginForm())

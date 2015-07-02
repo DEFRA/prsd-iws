@@ -28,13 +28,13 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            var business = new Business("first", "type", "123", "456");
+            var business = Business.CreateBusiness("first", BusinessType.SoleTrader, "123", "456");
             var address = ObjectFactory.CreateDefaultAddress();
             var contact = ObjectFactory.CreateEmptyContact();
 
             notification.SetExporter(business, address, contact);
 
-            var newBusiness = new Business("second", "type", "123", "456");
+            var newBusiness = Business.CreateBusiness("second", BusinessType.SoleTrader, "123", "456");
             var newAddress = ObjectFactory.CreateDefaultAddress();
             var newContact = ObjectFactory.CreateEmptyContact();
 

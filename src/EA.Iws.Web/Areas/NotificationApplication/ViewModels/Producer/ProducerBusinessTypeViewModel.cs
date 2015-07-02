@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Web.ViewModels.Shared
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer
 {
     using System.ComponentModel.DataAnnotations;
     using Core.Shared;
     using Prsd.Core.Validation;
 
-    public class BusinessTypeViewModel
+    public class ProducerBusinessTypeViewModel
     {
         [Required]
         [Display(Name = "Organisation name")]
@@ -14,7 +14,7 @@
         [Display(Name = "Organisation type")]
         public BusinessType? BusinessType { get; set; }
 
-        [Required]
+        [RequiredIf("BusinessType", Core.Shared.BusinessType.LimitedCompany, "The Registration number field is required")]
         [Display(Name = "Registration number")]
         public virtual string RegistrationNumber { get; set; }
 
@@ -29,11 +29,11 @@
 
         public bool DisplayCompaniesHouseHint { get; set; }
 
-        public BusinessTypeViewModel()
+        public ProducerBusinessTypeViewModel()
         {
         }
 
-        public BusinessTypeViewModel(BusinessInfoData business)
+        public ProducerBusinessTypeViewModel(BusinessInfoData business)
         {
             Name = business.Name;
             BusinessType = business.BusinessType;

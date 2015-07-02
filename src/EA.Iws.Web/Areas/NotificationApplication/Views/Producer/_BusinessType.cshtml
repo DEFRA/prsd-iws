@@ -1,0 +1,55 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.AddProducerViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+    @Html.Gds().LabelFor(m => m.Business.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+    @Html.Gds().TextBoxFor(m => m.Business.Name)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+    @Html.Gds().LabelFor(m => m.Business.BusinessType)
+    @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
+    <label class="block-label" data-target="sole-trader-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.SoleTrader)
+    </label>
+
+    <label class="block-label" data-target="partnership-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Partnership)
+    </label>
+
+    <label class="block-label" data-target="companies-house-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
+    </label>
+    <div class="panel-indent @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+            @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
+            <span class="form-hint">This should be your Companies House number</span>
+            @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+            @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+
+                <details data-target="companies-house-number" class="margin-top-15">
+                    <summary><span class="summary">Where can I find my Companies House number?</span></summary>
+                    <div class="panel-indent">
+                        <p>
+                            Your Companies House number is on your organisation's certificate of incorporation.
+                            You can also get the number from your organisation's accountant or accounts department, or
+                            <a href="http://wck2.companieshouse.gov.uk">search the Companies House online services</a>
+                        </p>
+                    </div>
+                </details>
+        </div>
+    </div>
+
+    <label class="block-label" data-target="other-description">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
+            @Html.Gds().LabelFor(m => m.Business.OtherDescription)
+            @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)
+            @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)
+        </div>
+    </div>
+
+</div>

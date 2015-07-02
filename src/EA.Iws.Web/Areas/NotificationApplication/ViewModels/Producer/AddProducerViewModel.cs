@@ -3,10 +3,7 @@
     using System;
     using Core.Exporters;
     using Core.Shared;
-    using Requests.Exporters;
     using Requests.Producers;
-    using Requests.Shared;
-    using Web.ViewModels.Shared;
 
     public class AddProducerViewModel
     {
@@ -16,7 +13,7 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessViewModel();
+            Business = new ProducerBusinessTypeViewModel();
         }
 
         public AddProducerViewModel(ExporterData exporter)
@@ -24,7 +21,7 @@
             NotificationId = exporter.NotificationId;
             Address = exporter.Address;
             Contact = exporter.Contact;
-            Business = new BusinessViewModel(exporter.Business);
+            Business = new ProducerBusinessTypeViewModel(exporter.Business);
         }
 
         public AddProducerToNotification ToRequest()
@@ -33,7 +30,7 @@
             {
                 NotificationId = NotificationId,
                 Address = Address,
-                Business = (BusinessData)Business,
+                Business = Business.ToBusinessInfoData(),
                 Contact = Contact
             };
         }
@@ -44,6 +41,6 @@
 
         public ContactData Contact { get; set; }
 
-        public BusinessViewModel Business { get; set; }
+        public ProducerBusinessTypeViewModel Business { get; set; }
     }
 }

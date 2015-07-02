@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Producers;
@@ -24,7 +25,10 @@
             var notification =
                 await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 
-            var business = ValueObjectInitializer.CreateBusiness(message.Business);
+            var business = ProducerBusiness.CreateProducerBusiness(message.Business.Name, 
+                BusinessType.FromBusinessType(message.Business.BusinessType), 
+                message.Business.RegistrationNumber, 
+                message.Business.OtherDescription);
             var address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
             var contact = ValueObjectInitializer.CreateContact(message.Contact);
 

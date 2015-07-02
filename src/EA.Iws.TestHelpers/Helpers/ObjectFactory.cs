@@ -11,7 +11,12 @@
 
         public static Business CreateEmptyBusiness()
         {
-            return new Business(string.Empty, string.Empty, string.Empty, string.Empty);
+            return Business.CreateBusiness("test", BusinessType.SoleTrader, "test", "test");
+        }
+
+        public static ProducerBusiness CreateEmptyProducerBusiness()
+        {
+            return ProducerBusiness.CreateProducerBusiness("test", BusinessType.SoleTrader, "test", null);
         }
 
         public static Address CreateDefaultAddress()

@@ -87,6 +87,10 @@
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
+      <Project>{DEC3021A-32CF-4B84-A59C-77503378ED67}</Project>
+      <Name>EA.Iws.TestHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

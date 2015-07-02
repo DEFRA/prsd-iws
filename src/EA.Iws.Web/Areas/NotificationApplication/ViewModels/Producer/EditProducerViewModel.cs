@@ -4,8 +4,6 @@
     using Core.Producers;
     using Core.Shared;
     using Requests.Producers;
-    using Requests.Shared;
-    using Web.ViewModels.Shared;
 
     public class EditProducerViewModel : AddProducerViewModel
     {
@@ -17,7 +15,7 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessViewModel();
+            Business = new ProducerBusinessTypeViewModel();
         }
 
         public EditProducerViewModel(ProducerData producer)
@@ -26,7 +24,7 @@
             ProducerId = producer.Id;
             Address = producer.Address;
             Contact = producer.Contact;
-            Business = (BusinessViewModel)producer.Business;   
+            Business = new ProducerBusinessTypeViewModel(producer.Business);   
         }
 
         public new UpdateProducerForNotification ToRequest()
@@ -36,7 +34,7 @@
                 ProducerId = ProducerId,
                 NotificationId = NotificationId,
                 Address = Address,
-                Business = (BusinessData)Business,
+                Business = Business.ToBusinessInfoData(),
                 Contact = Contact
             };
         }

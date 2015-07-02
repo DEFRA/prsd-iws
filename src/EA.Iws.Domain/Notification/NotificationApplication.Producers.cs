@@ -5,7 +5,7 @@
 
     public partial class NotificationApplication
     {
-        public Producer AddProducer(Business business, Address address, Contact contact)
+        public Producer AddProducer(ProducerBusiness business, Address address, Contact contact)
         {
             var producer = new Producer(business, address, contact);
 

@@ -5,11 +5,13 @@
 
     public class Producer : Entity
     {
-        private Business business;
+        public static readonly string NotApplicable = "Not applicable";
+
+        private ProducerBusiness business;
         private Address address;
         private Contact contact;
 
-        internal Producer(Business business, Address address, Contact contact)
+        internal Producer(ProducerBusiness business, Address address, Contact contact)
         {
             Business = business;
             Address = address;
@@ -22,7 +24,7 @@
 
         public bool IsSiteOfExport { get; internal set; }
 
-        public Business Business
+        public ProducerBusiness Business
         {
             get { return business; }
             set
