@@ -9,7 +9,7 @@
 
         public bool HasImporter { get; set; }
 
-        public BusinessData Business { get; set; }
+        public BusinessInfoData Business { get; set; }
 
         public AddressData Address { get; set; }
 
@@ -23,7 +23,7 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessData();
+            Business = new BusinessInfoData();
         }
     }
 }

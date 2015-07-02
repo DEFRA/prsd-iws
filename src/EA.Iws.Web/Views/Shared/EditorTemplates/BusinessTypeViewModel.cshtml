@@ -7,7 +7,7 @@
     string partnershipRegistrationNumber = ViewBag.PartnershipRegistrationNumber;
     string partnershipAdditionalRegistrationNumber = ViewBag.PartnershipAdditionalRegistrationNumber;
     string companyRegistrationNumber = ViewBag.CompanyRegistrationNumber;
-    string companyAdditionalRegistrationNumber = ViewBag.SoleTraderRegistrationNumber;
+    string companyAdditionalRegistrationNumber = ViewBag.CompanyAdditionalRegistrationNumber;
     string otherRegistrationNumber = ViewBag.OtherRegistrationNumber;
     string otherAdditionalRegistrationNumber = ViewBag.OtherAdditionalRegistrationNumber;
     string nonJavascriptMessage = ViewBag.NonJavascriptMessage;
@@ -94,21 +94,29 @@
         @Html.Gds().ValidationMessageFor(m => m.RegistrationNumber)
         @Html.Gds().TextBoxFor(m => m.RegistrationNumber)
 
-        <details data-target="companies-house-number" class="margin-top-15">
-            <summary><span class="summary">Where can I find my Companies House number?</span></summary>
-            <div class="panel-indent">
-                <p>
-                    Your Companies House number is on your organisation's certificate of incorporation.
-                    You can also get the number from your organisation's accountant or accounts department, or
-                    <a href="http://wck2.companieshouse.gov.uk">search the Companies House online services</a>
-                </p>
-            </div>
-        </details>
+        @if (Model.DisplayCompaniesHouseHint)
+        {
+            <details data-target="companies-house-number" class="margin-top-15">
+                <summary><span class="summary">Where can I find my Companies House number?</span></summary>
+                <div class="panel-indent">
+                    <p>
+                        Your Companies House number is on your organisation's certificate of incorporation.
+                        You can also get the number from your organisation's accountant or accounts department, or
+                        <a href="http://wck2.companieshouse.gov.uk">search the Companies House online services</a>
+                    </p>
+                </div>
+                @Html.HiddenFor(m => m.DisplayCompaniesHouseHint)
+            </details>
+        }
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.AdditionalRegistrationNumber)">
-        @Html.Gds().LabelFor(m => m.AdditionalRegistrationNumber)
-        @Html.Gds().ValidationMessageFor(model => model.AdditionalRegistrationNumber)
-        @Html.Gds().TextBoxFor(m => m.AdditionalRegistrationNumber)
-    </div>
+    @if (Model.DisplayAdditionalNumber)
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.AdditionalRegistrationNumber)">
+            @Html.Gds().LabelFor(m => m.AdditionalRegistrationNumber)
+            @Html.Gds().ValidationMessageFor(model => model.AdditionalRegistrationNumber)
+            @Html.Gds().TextBoxFor(m => m.AdditionalRegistrationNumber)
+            @Html.HiddenFor(m => m.DisplayAdditionalNumber)
+        </div>
+    }
 </div>

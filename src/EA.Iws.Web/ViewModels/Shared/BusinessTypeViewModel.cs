@@ -25,6 +25,10 @@
         [Display(Name = "Enter your organisation type")]
         public string OtherDescription { get; set; }
 
+        public bool DisplayAdditionalNumber { get; set; }
+
+        public bool DisplayCompaniesHouseHint { get; set; }
+
         public BusinessTypeViewModel()
         {
         }

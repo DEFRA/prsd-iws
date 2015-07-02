@@ -38,7 +38,7 @@
 
                     facility.Address = importer.Address;
                     facility.Contact = importer.Contact;
-                    facility.Business = (BusinessViewModel)importer.Business;
+                    facility.Business = new BusinessViewModel(importer.Business);
                 }
 
                 var response =

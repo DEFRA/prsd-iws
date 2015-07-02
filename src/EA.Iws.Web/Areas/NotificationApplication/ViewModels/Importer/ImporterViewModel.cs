@@ -4,7 +4,6 @@
     using Core.Importer;
     using Core.Shared;
     using Requests.Importer;
-    using Requests.Shared;
     using Web.ViewModels.Shared;
 
     public class ImporterViewModel
@@ -17,7 +16,7 @@
 
         public ContactData Contact { get; set; }
 
-        public BusinessViewModel Business { get; set; }
+        public BusinessTypeViewModel Business { get; set; }
 
         public ImporterViewModel()
         {
@@ -25,7 +24,7 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessViewModel();
+            Business = new BusinessTypeViewModel();
         }
 
         public ImporterViewModel(ImporterData importer)
@@ -33,7 +32,7 @@
             NotificationId = importer.NotificationId;
             Address = importer.Address;
             Contact = importer.Contact;
-            Business = (BusinessViewModel)importer.Business;
+            Business = new BusinessTypeViewModel(importer.Business);
         }
 
         public SetImporterForNotification ToRequest()
@@ -42,7 +41,7 @@
             {
                 NotificationId = NotificationId,
                 Address = Address,
-                Business = (BusinessData)Business,
+                Business = Business.ToBusinessInfoData(),
                 Contact = Contact
             };
         }

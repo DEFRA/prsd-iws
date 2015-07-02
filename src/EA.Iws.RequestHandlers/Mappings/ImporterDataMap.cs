@@ -6,19 +6,17 @@
     using Domain;
     using Domain.Notification;
     using Prsd.Core.Mapper;
-    using Requests.Importer;
-    using Requests.Shared;
     using Notification = Domain.Notification.NotificationApplication;
 
     internal class ImporterDataMap : IMap<Notification, ImporterData>, 
         IMapWithParentObjectId<Importer, ImporterData>
     {
         private readonly IMap<Address, AddressData> addressMap;
-        private readonly IMap<Business, BusinessData> businessMap;
+        private readonly IMap<Business, BusinessInfoData> businessMap;
         private readonly IMap<Contact, ContactData> contactMap;
 
         public ImporterDataMap(IMap<Address, AddressData> addressMap,
-            IMap<Business, BusinessData> businessMap,
+            IMap<Business, BusinessInfoData> businessMap,
             IMap<Contact, ContactData> contactMap)
         {
             this.addressMap = addressMap;

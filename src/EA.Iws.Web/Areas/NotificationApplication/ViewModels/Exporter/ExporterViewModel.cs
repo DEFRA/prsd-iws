@@ -4,7 +4,6 @@
     using Core.Exporters;
     using Core.Shared;
     using Requests.Exporters;
-    using Requests.Shared;
     using Web.ViewModels.Shared;
 
     public class ExporterViewModel
@@ -24,6 +23,8 @@
             Contact = new ContactData();
 
             Business = new BusinessTypeViewModel();
+            Business.DisplayAdditionalNumber = true;
+            Business.DisplayCompaniesHouseHint = true;
         }
 
         public ExporterViewModel(ExporterData exporter)
@@ -32,6 +33,8 @@
             Address = exporter.Address;
             Contact = exporter.Contact;
             Business = new BusinessTypeViewModel(exporter.Business);
+            Business.DisplayAdditionalNumber = true;
+            Business.DisplayCompaniesHouseHint = true;
         }
 
         public SetExporterForNotification ToRequest()

@@ -4,7 +4,6 @@
     using Core.Shared;
     using Prsd.Core.Helpers;
     using Prsd.Core.Validation;
-    using Requests.Shared;
 
     public class BusinessViewModel
     {

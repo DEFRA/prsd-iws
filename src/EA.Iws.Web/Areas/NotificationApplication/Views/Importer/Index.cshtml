@@ -2,7 +2,16 @@
 
 @{
     ViewBag.Title = "Importer - consignee";
-}
+
+    var message = "This information can be obtained from your importer – consignee. Enter \"Not applicable\" where no relevant registration number applies.";
+
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.PartnershipRegistrationNumber = message;
+    ViewBag.CompanyRegistrationNumber = message;
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.OtherRegistrationNumber = message;
+    ViewBag.NonJavascriptMessage = message;
+   }
 
 @using (Html.BeginForm("Index", "Importer", FormMethod.Post))
 {
