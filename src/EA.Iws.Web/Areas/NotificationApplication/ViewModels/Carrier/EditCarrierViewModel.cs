@@ -4,7 +4,6 @@
     using Core.Carriers;
     using Core.Shared;
     using Requests.Carriers;
-    using Requests.Shared;
     using Web.ViewModels.Shared;
 
     public class EditCarrierViewModel : AddCarrierViewModel
@@ -14,7 +13,7 @@
         public EditCarrierViewModel(CarrierData carrier)
         {
             Address = carrier.Address;
-            Business = (BusinessViewModel)carrier.Business;
+            Business = new BusinessTypeViewModel(carrier.Business);
             Contact = carrier.Contact;
             NotificationId = carrier.NotificationId;
             CarrierId = carrier.Id;
@@ -26,7 +25,7 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessViewModel();
+            Business = new BusinessTypeViewModel();
         }
 
         public new UpdateCarrierForNotification ToRequest()
@@ -34,7 +33,7 @@
             return new UpdateCarrierForNotification
             {
                 Address = Address,
-                Business = (BusinessData)Business,
+                Business = Business.ToBusinessInfoData(),
                 Contact = Contact,
                 NotificationId = NotificationId,
                 CarrierId = CarrierId

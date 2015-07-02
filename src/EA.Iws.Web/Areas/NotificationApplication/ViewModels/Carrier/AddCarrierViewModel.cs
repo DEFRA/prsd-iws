@@ -14,7 +14,7 @@
 
         public ContactData Contact { get; set; }
 
-        public BusinessViewModel Business { get; set; }
+        public BusinessTypeViewModel Business { get; set; }
 
         public AddCarrierViewModel()
         {
@@ -22,7 +22,7 @@
 
             Contact = new ContactData();
 
-            Business = new BusinessViewModel();
+            Business = new BusinessTypeViewModel();
         }
 
         public AddCarrierToNotification ToRequest()
@@ -31,7 +31,7 @@
             {
                 NotificationId = NotificationId,
                 Address = Address,
-                Business = (BusinessData)Business,
+                Business = Business.ToBusinessInfoData(),
                 Contact = Contact
             };
         }

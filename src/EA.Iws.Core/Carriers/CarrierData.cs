@@ -9,7 +9,7 @@
 
         public Guid NotificationId { get; set; }
 
-        public BusinessData Business { get; set; }
+        public BusinessInfoData Business { get; set; }
 
         public AddressData Address { get; set; }
 
