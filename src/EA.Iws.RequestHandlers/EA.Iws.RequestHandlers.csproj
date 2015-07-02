@@ -119,6 +119,7 @@
     <Compile Include="Notification\GetIsPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Mappings\StateOfExportMap.cs" />
     <Compile Include="Mappings\TransitStateMap.cs" />
+    <Compile Include="Notification\GetNotificationChargeHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
     <Compile Include="Notification\GetReasonForExportHandler.cs" />

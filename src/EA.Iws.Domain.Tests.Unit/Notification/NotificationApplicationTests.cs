@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Notification
 {
     using System;
-    using System.Linq;
     using Domain.Notification;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class NotificationApplicationTests
@@ -11,6 +11,13 @@
         private const string Scotland = "Scotland";
         private const string NorthernIreland = "Northern Ireland";
         private const string Wales = "Wales";
+        private readonly NotificationApplication notification;
+
+        public NotificationApplicationTests()
+        {
+            notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+        }
 
         [Theory]
         [InlineData("GB 0001 123456", England, 123456)]
@@ -22,23 +29,10 @@
         public void NotificationNumberFormat(string expected, string country, int notificationNumber)
         {
             var userId = new Guid("{FCCC2E8A-2464-4C10-8521-09F16F2C550C}");
-            var notification = new NotificationApplication(userId, NotificationType.Disposal,
+            var notificationApplication = new NotificationApplication(userId, NotificationType.Disposal,
                 GetCompetentAuthority(country),
                 notificationNumber);
-            Assert.Equal(expected, notification.NotificationNumber);
-        }
-
-        [Fact]
-        public void SetReasonForExport_ExceedMaxCharacters_ThrowsException()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            const string longString = "abcdefghijklmnopqrstuvwxyxabcdefghijklmnopqrstuvwxyxabcdefghijklmnopqrs";
-
-            Action setReasonForExport = () => notification.ReasonForExport = longString;
-
-            Assert.Throws<InvalidOperationException>(setReasonForExport);
+            Assert.Equal(expected, notificationApplication.NotificationNumber);
         }
 
         private static UKCompetentAuthority GetCompetentAuthority(string country)
@@ -60,6 +54,43 @@
                 return UKCompetentAuthority.Wales;
             }
             throw new ArgumentException("Unknown competent authority", "country");
+        }
+
+        [Fact]
+        public void SetReasonForExport_ExceedMaxCharacters_ThrowsException()
+        {
+            const string longString = "abcdefghijklmnopqrstuvwxyxabcdefghijklmnopqrstuvwxyxabcdefghijklmnopqrs";
+
+            Action setReasonForExport = () => notification.ReasonForExport = longString;
+
+            Assert.Throws<InvalidOperationException>(setReasonForExport);
+        }
+
+        [Fact]
+        public void MultipleFacilitiesIsInterim()
+        {
+            notification.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
+                ObjectFactory.CreateEmptyContact());
+
+            notification.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
+                ObjectFactory.CreateEmptyContact());
+
+            Assert.True(notification.IsInterim);
+        }
+
+        [Fact]
+        public void SingleFacilityIsNotInterim()
+        {
+            notification.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
+                ObjectFactory.CreateEmptyContact());
+
+            Assert.False(notification.IsInterim);
+        }
+
+        [Fact]
+        public void IsInterimFalseByDefault()
+        {
+            Assert.False(notification.IsInterim);
         }
     }
 }

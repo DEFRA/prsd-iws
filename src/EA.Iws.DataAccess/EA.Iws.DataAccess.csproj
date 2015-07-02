@@ -78,6 +78,7 @@
     <Compile Include="Identity\ApplicationUserStore.cs" />
     <Compile Include="Identity\IwsIdentityContext.cs" />
     <Compile Include="IwsContext.cs" />
+    <Compile Include="Mappings\ActivityMapping.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\ProducerBusinessMapping.cs" />
     <Compile Include="Mappings\BusinessMapping.cs" />
@@ -86,7 +87,9 @@
     <Compile Include="Mappings\EntryCustomsOfficeMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsInfoMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMapping.cs" />
+    <Compile Include="Mappings\PricingStructureMapping.cs" />
     <Compile Include="Mappings\RecoveryInfoMapping.cs" />
+    <Compile Include="Mappings\ShipmentQuantityRangeMapping.cs" />
     <Compile Include="Mappings\TechnologyEmployedMapping.cs" />
     <Compile Include="Mappings\TransitStateMapping.cs" />
     <Compile Include="Mappings\StateOfImportMapping.cs" />

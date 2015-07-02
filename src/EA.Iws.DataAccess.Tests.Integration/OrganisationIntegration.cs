@@ -8,6 +8,7 @@
     using Prsd.Core.Domain;
     using Xunit;
 
+    [Trait("Category", "Integration")]
     public class OrganisationIntegration
     {
         private readonly IwsContext context;

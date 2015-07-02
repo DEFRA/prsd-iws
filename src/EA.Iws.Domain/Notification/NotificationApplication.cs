@@ -159,5 +159,10 @@
                 reasonForExport = value;
             }
         }
+
+        public bool IsInterim
+        {
+            get { return FacilitiesCollection != null && FacilitiesCollection.Skip(1).Any(); }
+        }
     }
 }

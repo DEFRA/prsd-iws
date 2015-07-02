@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notification\GetNotificationCharge.cs" />
     <Compile Include="RecoveryInfo\AddRecoveryInfoToNotification.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
     <Compile Include="Carriers\GetCarrierForNotification.cs" />

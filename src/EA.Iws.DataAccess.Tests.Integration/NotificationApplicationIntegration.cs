@@ -14,6 +14,7 @@
     using TestHelpers.Helpers;
     using Xunit;
 
+    [Trait("Category", "Integration")]
     public class NotificationApplicationIntegration
     {
         private readonly IwsContext context;

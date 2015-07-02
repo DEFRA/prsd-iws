@@ -56,6 +56,7 @@
     <Content Include="scripts\Update\Sprint10\20150629-091012-Add-WasteAdditionalInformation-Table.sql" />
     <Content Include="scripts\Update\Sprint10\20150630-110000-Add-OtherDescription-Column.sql" />
     <Content Include="scripts\Update\Sprint10\20150630-094600-update-waste-code-info.sql" />
+    <Content Include="scripts\Update\Sprint11\20150702-171300-create-pricing-structure.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

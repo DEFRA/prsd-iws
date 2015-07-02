@@ -30,6 +30,8 @@
 
         public virtual DbSet<WasteCode> WasteCodes { get; set; }
 
+        public virtual DbSet<PricingStructure> PricingStructures { get; set; } 
+
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")
         {

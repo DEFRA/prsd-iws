@@ -51,10 +51,13 @@
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="Notification\Activity.cs" />
     <Compile Include="Notification\NotificationApplication.PhysicalCharacteristics.cs" />
     <Compile Include="Notification\NotificationApplication.Progress.cs" />
     <Compile Include="Notification\NotificationApplication.WasteCodes.cs" />
     <Compile Include="Notification\NotificationApplication.WasteGenerationProcess.cs" />
+    <Compile Include="Notification\PricingStructure.cs" />
+    <Compile Include="Notification\ShipmentQuantityRange.cs" />
     <Compile Include="Notification\WasteAdditionalInformation.cs" />
     <Compile Include="ProducerBusiness.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
