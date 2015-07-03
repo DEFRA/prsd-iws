@@ -51,6 +51,9 @@
     <Compile Include="Helpers\NotificationApplicationFactory.cs" />
     <Compile Include="Helpers\ObjectFactory.cs" />
     <Compile Include="Helpers\ObjectInstantiator.cs" />
+    <Compile Include="Helpers\ImporterFactory.cs" />
+    <Compile Include="Helpers\ExporterFactory.cs" />
+    <Compile Include="Helpers\ProducerFactory.cs" />
     <Compile Include="Helpers\TransitStateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
     <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />
     <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandlerTests.cs" />

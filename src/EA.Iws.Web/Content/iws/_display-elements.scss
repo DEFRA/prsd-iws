@@ -107,9 +107,6 @@
     border: none;
     font-size: 19px;
     width: 33%;
-}
-
-.formatted-block-table-body td {
     padding-right: 0;
 }
 
@@ -123,13 +120,33 @@
     font-weight: bold;
 }
 
+.formatted-block-table-body > tr.auto-width > td:last-child > .formatted-block-table-cell {
+    background: #C9E7E5;
+}
+
+.formatted-block-table-body .block-label {
+    float: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+.formatted-block-table-body > tr.auto-width > td {
+    width: auto;
+}
+
+.formatted-block-table-body label {
+    cursor: pointer;
+}
+
 @media all and (max-width: 700px) {
     .formatted-block-table-cell {
         line-height: 30px;
         font-size: 12px;
     }
 }
-h2 + hr{
+
+h2 + hr {
     margin-top: -10px;
     margin-bottom: 25px;
 }

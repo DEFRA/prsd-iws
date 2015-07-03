@@ -11,7 +11,6 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
-    using Requests.Shared;
     using ViewModels.NewNotification;
 
     public class NewNotificationController : Controller
@@ -33,7 +32,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CompetentAuthority(CompetentAuthorityChoiceViewModel model)
+        public ActionResult CompetentAuthority(CompetentAuthorityChoiceViewModel model, string cfp)
         {
             if (!ModelState.IsValid)
             {
@@ -41,7 +40,11 @@
             }
 
             return RedirectToAction("NotificationType",
-                new { ca = model.CompetentAuthorities.SelectedValue });
+                new
+                {
+                    ca = model.CompetentAuthorities.SelectedValue,
+                    cfp
+                });
         }
 
         [HttpGet]
@@ -62,7 +65,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NotificationType(NotificationTypeViewModel model)
+        public async Task<ActionResult> NotificationType(NotificationTypeViewModel model, string cfp)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +88,8 @@
                     return RedirectToAction("Created",
                         new
                         {
-                            id = response
+                            id = response,
+                            cfp
                         });
                 }
                 catch (ApiBadRequestException ex)
@@ -120,8 +124,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Created(CreatedViewModel model)
+        public ActionResult Created(CreatedViewModel model, string cfp)
         {
+            if (!string.IsNullOrWhiteSpace(cfp) && cfp.Equals("1"))
+            {
+                return RedirectToAction("Index", "CopyFromNotification",
+                    new { id = model.NotificationId });
+            }
+
             return RedirectToAction("Index", "Exporter", new { id = model.NotificationId, area = "NotificationApplication" });
         }
     }

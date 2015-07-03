@@ -7,7 +7,6 @@
     using Core.Shared;
     using FakeItEasy;
     using Requests.Notification;
-    using Requests.Shared;
     using Web.Controllers;
     using Web.ViewModels.NewNotification;
     using Web.ViewModels.Shared;
@@ -57,7 +56,7 @@
 
             var competentAuthorityChoice = CompetentAuthorityChoice;
 
-            var result = controller.CompetentAuthority(competentAuthorityChoice) as RedirectToRouteResult;
+            var result = controller.CompetentAuthority(competentAuthorityChoice, null) as RedirectToRouteResult;
 
             Assert.Equal("NotificationType", result.RouteValues["action"]);
         }
@@ -71,7 +70,7 @@
 
             var competentAuthorityChoice = CompetentAuthorityChoice;
 
-            var result = controller.CompetentAuthority(competentAuthorityChoice) as ViewResult;
+            var result = controller.CompetentAuthority(competentAuthorityChoice, null) as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<CompetentAuthorityChoiceViewModel>(result.Model);
@@ -93,7 +92,7 @@
             var controller = CreateNewNotificationController();
             var model = new NotificationTypeViewModel();
             model.SelectedNotificationType = NotificationType.Recovery;
-            var result = await controller.NotificationType(model) as RedirectToRouteResult;
+            var result = await controller.NotificationType(model, null) as RedirectToRouteResult;
 
             Assert.Equal("Created", result.RouteValues["action"]);
         }
@@ -104,7 +103,7 @@
             var controller = CreateNewNotificationController();
             controller.ModelState.AddModelError("Error", "Test Error");
             var model = new NotificationTypeViewModel();
-            var result = await controller.NotificationType(model) as ViewResult;
+            var result = await controller.NotificationType(model, null) as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<NotificationTypeViewModel>(result.Model);

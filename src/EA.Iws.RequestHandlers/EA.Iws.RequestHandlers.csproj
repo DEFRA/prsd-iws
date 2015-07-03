@@ -72,6 +72,7 @@
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarriersByNotificationIdHandler.cs" />
     <Compile Include="Carrier\UpdateCarrierForNotificationHandler.cs" />
+    <Compile Include="Copy\GetNotificationsToCopyForUserHandler.cs" />
     <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandler.cs" />
     <Compile Include="CustomsOffice\GetEntryCustomsOfficeAddDataByNotificationIdHandler.cs" />
     <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdHandler.cs" />

@@ -8,7 +8,7 @@
     <p>Select the competent authority for the country you are exporting waste from:</p>
 </header>
 
-@using (Html.BeginForm(actionName: "CompetentAuthority", controllerName: "NewNotification", method: FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()

@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Notification\GetNotificationCharge.cs" />
+    <Compile Include="Copy\CopyToNotification.cs" />
+    <Compile Include="Copy\GetNotificationsToCopyForUser.cs" />
+    <Compile Include="Copy\NotificationApplicationCopyData.cs" />
     <Compile Include="RecoveryInfo\AddRecoveryInfoToNotification.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
     <Compile Include="Carriers\GetCarrierForNotification.cs" />

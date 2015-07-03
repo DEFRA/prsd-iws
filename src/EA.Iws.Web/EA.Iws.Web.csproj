@@ -559,6 +559,7 @@
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\_PreviousMeansEditor.cshtml" />
     <Content Include="Views\Shared\_IwsStandardDataNotice.cshtml" />
+    <Content Include="Views\CopyFromNotification\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -584,6 +585,7 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeController.cs" />
@@ -657,6 +659,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\AddFacilityViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\EditFacilityViewModel.cs" />
+    <Compile Include="ViewModels\CopyFromNotification\CopyFromNotificationViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\MeansOfTransport\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Importer\ImporterViewModel.cs" />

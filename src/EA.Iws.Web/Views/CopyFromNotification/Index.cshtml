@@ -1,0 +1,91 @@
+﻿@model EA.Iws.Web.ViewModels.CopyFromNotification.CopyFromNotificationViewModel
+
+@{
+    ViewBag.Title = "Copy from previous";
+}
+
+<header class="hgroup">
+    <h2 class="heading-large">Which previous notification would you like to use?</h2>
+    <p>
+        Select a notification from your previous notifications to copy the data from.
+        You will have to set intended shipments information for this copied notification.
+    </p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
+        <table>
+            <thead>
+                <tr>
+                    <th class="formatted-block-table-header">
+                        Notification number
+                    </th>
+                    <th class="formatted-block-table-header">
+                        Exporter
+                    </th>
+                    <th class="formatted-block-table-header">
+                        Importer
+                    </th>
+                    <th class="formatted-block-table-header">
+                        Waste type
+                    </th>
+                    <th class="formatted-block-table-header">
+                        Select
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="formatted-block-table-body">
+                @for (int i = 0; i < Model.Notifications.Count; i++)
+                {
+                    var radioId = "radio" + i;
+                    <tr class="auto-width">
+                        <td>
+                            <div class="formatted-block-table-cell">
+
+                                @Html.DisplayFor(m => m.Notifications[i].Number)
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="formatted-block-table-cell">
+                                @Html.DisplayFor(m => m.Notifications[i].ExporterName)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="formatted-block-table-cell">
+                                @Html.DisplayFor(m => m.Notifications[i].ImporterName)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="formatted-block-table-cell">
+                                @Html.DisplayFor(m => m.Notifications[i].WasteName)
+                            </div>
+                        </td>
+                        <td>
+                            <label for="@radioId">
+                                @Html.RadioButtonFor(m => m.SelectedNotification, Model.Notifications[i].Id, new { id = radioId })
+                            </label>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    for (int i = 0; i < Model.Notifications.Count; i++)
+    {
+        @Html.HiddenFor(m => m.Notifications[i].Id)
+        @Html.HiddenFor(m => m.Notifications[i].ExporterName)
+        @Html.HiddenFor(m => m.Notifications[i].ImporterName)
+        @Html.HiddenFor(m => m.Notifications[i].Number)
+        @Html.HiddenFor(m => m.Notifications[i].WasteName)
+    }
+
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}
