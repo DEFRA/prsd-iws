@@ -26,7 +26,8 @@
         <div class="column-half">
             @for (var i = 0; i < Model.WasteComposition.Count; i++)
             {
-                <div class="form-group">
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
+                    @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                     <div class="grid-row">
                         <div class="column-two-thirds">
                             @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType)
