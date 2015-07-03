@@ -59,6 +59,7 @@
     <Compile Include="MergeFieldType.cs" />
     <Compile Include="NotificationBlocks\ImporterBlock.cs" />
     <Compile Include="NotificationBlocks\IAnnexedBlock.cs" />
+    <Compile Include="NotificationBlocks\OperationBlock.cs" />
     <Compile Include="NotificationBlocks\ProducerBlock.cs" />
     <Compile Include="NotificationBlocks\ExporterBlock.cs" />
     <Compile Include="NotificationBlocks\GeneralBlock.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\ImporterViewModel.cs" />
+    <Compile Include="ViewModels\OperationViewModel.cs" />
     <Compile Include="ViewModels\ProducerViewModel.cs" />
     <Compile Include="ViewModels\ExporterViewModel.cs" />
     <Compile Include="NotificationBlocks\INotificationBlock.cs" />

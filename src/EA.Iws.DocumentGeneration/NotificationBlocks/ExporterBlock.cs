@@ -11,7 +11,7 @@
 
         public ExporterBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
-            CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, "Exporter");
+            CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
             data = new ExporterViewModel(notification.Exporter);
         }
