@@ -59,6 +59,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model)
         {
             using (var client = apiClient())

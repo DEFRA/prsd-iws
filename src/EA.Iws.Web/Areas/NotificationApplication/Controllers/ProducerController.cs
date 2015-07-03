@@ -35,6 +35,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CopyFromExporter(Guid id, YesNoChoiceViewModel inputModel)
         {
             if (!ModelState.IsValid)

@@ -130,6 +130,7 @@
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> SelectOrganisation(SelectOrganisationViewModel model, string submitButton)
         {
             Guid selectedGuid;
@@ -173,6 +174,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateNewOrganisation(CreateNewOrganisationViewModel model)
         {
             if (!ModelState.IsValid)

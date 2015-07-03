@@ -11,7 +11,6 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.WasteType;
     using ViewModels.PhysicalCharacteristics;
-    using ViewModels.WasteType;
     using Web.ViewModels.Shared;
 
     public class PhysicalCharacteristicsController : Controller

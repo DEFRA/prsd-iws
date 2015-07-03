@@ -86,6 +86,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> OtherWaste(OtherWasteViewModel model)
         {
             if (!ModelState.IsValid)
@@ -123,6 +124,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> OtherWasteAdditionalInformation(OtherWasteAdditionalInformationViewModel model)
         {
             if (!ModelState.IsValid)

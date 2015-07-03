@@ -36,6 +36,8 @@ namespace EA.Iws.Web
             ConfigureAuth(app, configuration.CurrentConfiguration);
 
             AntiForgeryConfig.UniqueClaimTypeIdentifier = JwtClaimTypes.Subject;
+
+            MvcHandler.DisableMvcResponseHeader = true;
         }
     }
 }
