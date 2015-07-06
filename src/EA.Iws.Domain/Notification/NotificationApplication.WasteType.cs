@@ -29,6 +29,7 @@
             WasteType.OtherWasteTypeDescription = description;
             WasteType.HasAnnex = hasAnnex;
         }
+
         public void AddWasteAdditionalInformation(IList<WasteAdditionalInformation> wasteType)
         {
             if (WasteType == null)
@@ -46,6 +47,7 @@
             }
             WasteType.WoodTypeDescription = woodTypeDescription;
         }
+
         public void AddEnergyAndOptionalInformation(string energyInformation, string optionalInformation)
         {
             if (WasteType == null)

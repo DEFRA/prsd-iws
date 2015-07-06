@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -53,7 +52,7 @@
             {
                 return chemicalCompositionDescription;
             }
-            protected set
+            private set
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other || ChemicalCompositionType == ChemicalComposition.Wood)
                 {
@@ -73,7 +72,7 @@
             {
                 return chemicalCompositionName;
             }
-            protected set
+            private set
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other)
                 {
@@ -152,13 +151,13 @@
             }
             internal set
             {
-                if (ChemicalCompositionType != ChemicalComposition.RDF || ChemicalCompositionType != ChemicalComposition.SRF || ChemicalCompositionType != ChemicalComposition.Wood)
+                if (ChemicalCompositionType == ChemicalComposition.RDF || ChemicalCompositionType == ChemicalComposition.SRF)
                 {
                     energyInformation = value;
                 }
                 else if (!string.IsNullOrWhiteSpace(value))
                 {
-                    throw new InvalidOperationException("energy information can only be set for chemical composition of Wood, RDF or SRF");
+                    throw new InvalidOperationException("energy information can only be set for chemical composition RDF or SRF");
                 }
             }
         }
@@ -172,7 +171,7 @@
             }
             internal set
             {
-                if (ChemicalCompositionType != ChemicalComposition.RDF || ChemicalCompositionType != ChemicalComposition.SRF || ChemicalCompositionType != ChemicalComposition.Wood)
+                if (ChemicalCompositionType == ChemicalComposition.RDF || ChemicalCompositionType == ChemicalComposition.SRF || ChemicalCompositionType == ChemicalComposition.Wood)
                 {
                     optionalInformation = value;
                 }
@@ -183,15 +182,7 @@
             }
         }
 
-        private bool hasAnnex;
-        public bool HasAnnex
-        {
-            get
-            {
-                return hasAnnex;
-            }
-            internal set { hasAnnex = value; }
-        }
+        public bool HasAnnex { get; internal set; }
 
         protected virtual ICollection<WasteAdditionalInformation> WasteAdditionalInformationCollection { get; set; }
 

@@ -121,13 +121,28 @@
 
         public bool IsChemicalCompositionCompleted()
         {
-            return HasWasteType;
+            if (!HasWasteType)
+            {
+                return false;
+            }
+            return (WasteType.ChemicalCompositionType != ChemicalComposition.Other ||
+                    !string.IsNullOrWhiteSpace(WasteType.OtherWasteTypeDescription))
+                   &&
+                   (WasteType.ChemicalCompositionType == ChemicalComposition.Other ||
+                    WasteType.WasteAdditionalInformation.Any())
+                   &&
+                   (WasteType.ChemicalCompositionType != ChemicalComposition.Wood ||
+                    !string.IsNullOrWhiteSpace(WasteType.WoodTypeDescription))
+                   &&
+                   ((WasteType.ChemicalCompositionType != ChemicalComposition.RDF &&
+                     WasteType.ChemicalCompositionType != ChemicalComposition.SRF) ||
+                    !string.IsNullOrWhiteSpace(WasteType.EnergyInformation));
         }
 
         public bool IsProcessOfGenerationCompleted()
         {
-            return (IsWasteGenerationProcessAttached.HasValue && IsWasteGenerationProcessAttached.Value) 
-                || !string.IsNullOrWhiteSpace(WasteGenerationProcess);
+            return (IsWasteGenerationProcessAttached.HasValue && IsWasteGenerationProcessAttached.Value)
+                   || !string.IsNullOrWhiteSpace(WasteGenerationProcess);
         }
 
         public bool ArePhysicalCharacteristicsCompleted()

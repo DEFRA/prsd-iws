@@ -37,7 +37,7 @@
 @Html.Navigation().Link("Intended shipments", Model.Progress.IsIntendedShipmentsCompleted, "Index", "Shipment", "NotificationApplication")
 
 <h4>Classify your waste</h4>
-@Html.Navigation().Link("Chemical composition", Model.Progress.IsChemicalCompositionCompleted, "ChemicalComposition", "WasteType", "NotificationApplication")
+@Html.Navigation().Link("Chemical composition", Model.Progress.IsChemicalCompositionCompleted, "ChemicalComposition", "WasteType", "NotificationApplication", additionalActiveActionNames: new[] { "OtherWaste", "OtherWasteAdditionalInformation", "RdfAdditionalInformation", "RdfSrfType", "WoodAdditionalInformation", "WoodType" })
 @Html.Navigation().Link("Process of generation", Model.Progress.IsProcessOfGenerationCompleted, "Index", "WasteGenerationProcess", "NotificationApplication")
 @Html.Navigation().Link("Physical characteristics", Model.Progress.ArePhysicalCharacteristicsCompleted, "Index", "PhysicalCharacteristics", "NotificationApplication")
 @Html.Navigation().Link("Waste codes", Model.Progress.AreWasteCodesCompleted, "BaselEwcCode", "WasteCodes", "NotificationApplication")
