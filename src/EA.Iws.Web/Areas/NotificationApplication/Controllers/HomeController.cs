@@ -88,5 +88,23 @@
                 return PartialView(model);
             }
         }
+
+        [HttpGet]
+        public ActionResult Disclaimer(Guid id)
+        {
+            var model = new DisclaimerViewModel { Id = id };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Disclaimer(DisclaimerViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index", "Home", new {id = model.Id});
+        }
     }
 }
