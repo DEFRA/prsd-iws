@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,6 +66,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Copy\CopyToNotificationHandlerTests.cs" />
+    <Compile Include="DatabaseDataDeleter.cs" />
     <Compile Include="NotificationApplicationIntegration.cs" />
     <Compile Include="OrganisationIntegration.cs" />
     <Compile Include="PricingStructureIntegration.cs" />
@@ -87,6 +90,14 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
+      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
+      <Name>EA.Iws.RequestHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
+      <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>
+      <Name>EA.Iws.Requests</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
       <Project>{DEC3021A-32CF-4B84-A59C-77503378ED67}</Project>

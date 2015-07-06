@@ -14,17 +14,18 @@
 
             if (business == null)
             {
-                business = ObjectInstantiator<Business>.CreateNew();
+                business = ComplexTypeFactory.Create<Business>();
                 ObjectInstantiator<Business>.SetProperty(x => x.Name, name, business);
             }
 
             if (address == null)
             {
-                address = ObjectInstantiator<Address>.CreateNew();
+                address = ComplexTypeFactory.Create<Address>();
             }
 
             ObjectInstantiator<Exporter>.SetProperty(x => x.Business, business, exporter);
             ObjectInstantiator<Exporter>.SetProperty(x => x.Address, address, exporter);
+            ObjectInstantiator<Exporter>.SetProperty(x => x.Contact, ComplexTypeFactory.Create<Contact>(), exporter);
 
             return exporter;
         }

@@ -3,7 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class CopyToNotification : IRequest<bool>
+    public class CopyToNotification : IRequest<Guid>
     {
         public Guid SourceId { get; private set; }
 

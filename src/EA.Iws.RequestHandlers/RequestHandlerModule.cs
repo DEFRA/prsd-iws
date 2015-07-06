@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers
 {
     using Autofac;
+    using Copy;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
     using Prsd.Core.Mediator;
@@ -26,6 +27,8 @@
             builder.RegisterAssemblyTypes(this.GetType().Assembly)
                 .Where(t => t.Namespace.Contains("Mappings"))
                 .AsImplementedInterfaces();
+
+            builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
         }
     }
 }

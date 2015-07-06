@@ -14,8 +14,6 @@
 
             this.Property(ca => ca.Name).HasMaxLength(1023);
 
-            this.Property(ca => ca.Name).HasMaxLength(63);
-
             this.Property(ca => ca.Code).HasMaxLength(25);
         }
     }

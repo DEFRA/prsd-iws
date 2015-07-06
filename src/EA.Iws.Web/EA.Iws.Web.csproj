@@ -560,6 +560,7 @@
     <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\_PreviousMeansEditor.cshtml" />
     <Content Include="Views\Shared\_IwsStandardDataNotice.cshtml" />
     <Content Include="Views\CopyFromNotification\Index.cshtml" />
+    <Content Include="Views\CopyFromNotification\Result.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

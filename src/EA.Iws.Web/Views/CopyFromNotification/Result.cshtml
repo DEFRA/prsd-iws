@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Successfully copied";
+}
+
+<header class="hgroup">
+    <h2 class="heading-large">Your notification has been successfully copied.</h2>
+    <p>
+        You must supply updated intended shipments data for your new notification before submitting.
+        Please review all the data on this new notification to ensure it matches the data you intend to apply with.
+    </p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

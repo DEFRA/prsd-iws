@@ -10,7 +10,7 @@
 
         public string Address { get; private set; }
 
-        public Country Country { get; private set; }
+        public virtual Country Country { get; private set; }
 
         protected CustomsOffice()
         {
