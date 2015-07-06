@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.WasteType
+﻿namespace EA.Iws.Core.WasteType
 {
     public class ChemicalCompositionData
     {

@@ -1,7 +1,5 @@
-﻿namespace EA.Iws.Requests.WasteType
+﻿namespace EA.Iws.Core.WasteType
 {
-    using Core.WasteType;
-
     public class WoodInformationData : ChemicalCompositionData
     {
         public WasteInformationType WasteInformationType { get; set; }

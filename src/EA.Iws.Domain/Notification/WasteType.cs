@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -72,7 +73,7 @@
             {
                 return chemicalCompositionName;
             }
-            private set
+            internal set
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other)
                 {
@@ -91,15 +92,32 @@
         public IEnumerable<WasteComposition> WasteCompositions
         {
             get { return WasteCompositionCollection.ToSafeIEnumerable(); }
+            set { WasteCompositionCollection = value.ToList(); }
         }
 
-        internal void AddWasteComposition(WasteComposition wasteComposition)
+        internal void SetWasteComposition(WasteComposition wasteComposition)
         {
             if (WasteCompositionCollection == null)
             {
                 throw new InvalidOperationException("Waste Composition cannot be null");
             }
             WasteCompositionCollection.Add(wasteComposition);
+        }
+
+        internal void ClearWasteCompositions()
+        {
+            if (WasteCompositionCollection != null)
+            {
+                WasteCompositionCollection.Clear();
+            }
+        }
+
+        internal void ClearWasteAdditionalInformation()
+        {
+            if (WasteAdditionalInformationCollection != null)
+            {
+                WasteAdditionalInformationCollection.Clear();
+            }
         }
 
         private string otherWasteTypeDescription;
@@ -191,13 +209,9 @@
             get { return WasteAdditionalInformationCollection.ToSafeIEnumerable(); }
         }
 
-        internal void AddWasteAdditionalInformation(IList<WasteAdditionalInformation> wasteComposition)
+        internal void SetWasteAdditionalInformation(IList<WasteAdditionalInformation> wasteAdditionalInformation)
         {
-            if (WasteAdditionalInformationCollection == null)
-            {
-                throw new InvalidOperationException("Waste Composition cannot be null");
-            }
-            WasteAdditionalInformationCollection = wasteComposition;
+            WasteAdditionalInformationCollection = wasteAdditionalInformation;
         }
 
         public static WasteType CreateOtherWasteType(string chemicalCompositionName)

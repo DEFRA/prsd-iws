@@ -24,7 +24,7 @@
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
 
-            notification.AddWasteType(wasteTypeMap.Map(command));
+            notification.SetWasteType(wasteTypeMap.Map(command));
 
             await db.SaveChangesAsync();
 

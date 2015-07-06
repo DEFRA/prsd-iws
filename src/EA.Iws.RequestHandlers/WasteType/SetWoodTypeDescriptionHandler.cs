@@ -16,7 +16,7 @@
         public async Task<Guid> HandleAsync(SetWoodTypeDescription command)
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
-            notification.AddWoodTypeDescription(command.WoodTypeDescription);
+            notification.SetWoodTypeDescription(command.WoodTypeDescription);
             await db.SaveChangesAsync();
             return notification.WasteType.Id;
         }

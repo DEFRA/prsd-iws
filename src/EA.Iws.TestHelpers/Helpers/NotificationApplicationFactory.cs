@@ -63,7 +63,7 @@
             notification.SetStateOfExportForNotification(stateOfExport);
             notification.SetStateOfImportForNotification(stateOfImport);
 
-            notification.AddWasteType(WasteType.CreateOtherWasteType("boules"));
+            notification.SetWasteType(WasteType.CreateOtherWasteType("boules"));
             notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("something cheddar gorge"));
             notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Kilogram, 10, null,
                 null);

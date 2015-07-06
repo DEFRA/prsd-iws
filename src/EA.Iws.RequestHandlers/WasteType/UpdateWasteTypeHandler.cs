@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.WasteType;
     using DataAccess;
     using Domain.Notification;
     using Prsd.Core.Mapper;
@@ -21,7 +22,9 @@
         public async Task<Guid> HandleAsync(UpdateWasteType command)
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
-            notification.AddWasteAdditionalInformation(wasteTypeMap.Map(command.WasteCompositions));
+
+            notification.SetWasteAdditionalInformation(wasteTypeMap.Map(command.WasteCompositions));
+
             await db.SaveChangesAsync();
             return notification.WasteType.Id;
         }

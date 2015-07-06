@@ -132,11 +132,11 @@
     <Compile Include="WasteCodes\SetOtherWasteCodes.cs" />
     <Compile Include="WasteCodes\SetUnNumberWasteCodes.cs" />
     <Compile Include="WasteCodes\SetYHUnWasteCodes.cs" />
-    <Compile Include="WasteType\ChemicalCompositionData.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristics.cs" />
     <Compile Include="WasteCodes\GetWasteCodesByType.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcess.cs" />
+    <Compile Include="WasteType\GetWasteType.cs" />
     <Compile Include="WasteType\SetEnergyAndOptionalInformation.cs" />
     <Compile Include="WasteType\SetOtherWasteAdditionalInformation.cs" />
     <Compile Include="WasteCodes\SetWasteCodes.cs" />
@@ -147,7 +147,6 @@
     <Compile Include="WasteType\SetWoodTypeDescription.cs" />
     <Compile Include="WasteType\UpdateWasteType.cs" />
     <Compile Include="WasteType\WasteTypeCompositionData.cs" />
-    <Compile Include="WasteType\WoodInformationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -84,6 +84,7 @@
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
     <Compile Include="TransportRoute\TransportRouteData.cs" />
     <Compile Include="WasteType\ChemicalCompositionCategory.cs" />
+    <Compile Include="WasteType\ChemicalCompositionData.cs" />
     <Compile Include="WasteType\ChemicalCompositionType.cs" />
     <Compile Include="WasteCodes\CodeType.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicsData.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="WasteType\WasteGenerationProcessData.cs" />
     <Compile Include="WasteType\WasteInformationType.cs" />
     <Compile Include="WasteType\WasteTypeData.cs" />
+    <Compile Include="WasteType\WoodInformationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

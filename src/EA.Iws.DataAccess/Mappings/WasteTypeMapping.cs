@@ -16,6 +16,7 @@
             Property(x => x.WoodTypeDescription).IsOptional().HasMaxLength(256);
             Property(x => x.EnergyInformation).IsOptional().HasMaxLength(256);
             Property(x => x.OptionalInformation).IsOptional().HasMaxLength(256);
+            Property(x => x.HasAnnex).IsOptional();
 
             HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<WasteComposition>>(

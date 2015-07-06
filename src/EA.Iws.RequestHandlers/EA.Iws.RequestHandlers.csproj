@@ -183,6 +183,7 @@
     <Compile Include="WasteType\GetPhysicalCharacteristicsHandler.cs" />
     <Compile Include="WasteCodes\GetWasteCodesHandler.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcessHandler.cs" />
+    <Compile Include="WasteType\GetWasteTypeHandler.cs" />
     <Compile Include="WasteType\SetEnergyAndOptionalInformationHandler.cs" />
     <Compile Include="WasteType\SetOtherWasteAdditionalInformationHandler.cs" />
     <Compile Include="WasteCodes\SetWasteCodesHandler.cs" />

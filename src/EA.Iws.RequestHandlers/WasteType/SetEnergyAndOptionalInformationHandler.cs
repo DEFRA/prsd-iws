@@ -16,7 +16,7 @@
         public async Task<Guid> HandleAsync(SetEnergyAndOptionalInformation command)
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
-            notification.AddEnergyAndOptionalInformation(command.EnergyInformation, command.OptionalInformation);
+            notification.SetEnergyAndOptionalInformation(command.EnergyInformation, command.OptionalInformation);
             await db.SaveChangesAsync();
             return notification.WasteType.Id;
         }
