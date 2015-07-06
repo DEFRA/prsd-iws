@@ -83,15 +83,17 @@
         private void MergeAnnexNumber(int annexNumber)
         {
             // Set the annex number as the page title.
-            var annexNumberField = FindAnnexNumberMergeField();
-            annexNumberField.RemoveCurrentContents();
-            annexNumberField.SetText(annexNumber.ToString(), 0);
+            foreach (var annexNumberField in FindAnnexNumberMergeFields())
+            {
+                annexNumberField.RemoveCurrentContents();
+                annexNumberField.SetText(annexNumber.ToString(), 0);
+            }
         }
 
-        private MergeField FindAnnexNumberMergeField()
+        private IEnumerable<MergeField> FindAnnexNumberMergeFields()
         {
-            return AnnexMergeFields.FirstOrDefault(mf => mf.FieldName.InnerTypeName != null
-                    && mf.FieldName.OuterTypeName.Equals("Operation")
+            return AnnexMergeFields.Where(mf => mf.FieldName.InnerTypeName != null
+                    && mf.FieldName.OuterTypeName.Equals(TypeName)
                     && mf.FieldName.InnerTypeName.Equals("AnnexNumber"));
         }
     }
