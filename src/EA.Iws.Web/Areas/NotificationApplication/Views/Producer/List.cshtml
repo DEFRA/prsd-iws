@@ -2,66 +2,70 @@
 @{
     ViewBag.Title = "List Producers";
 }
-<h2 class="heading-large">Waste generator - producer <br/>Site of export</h2>
+<h2 class="heading-large">Waste generator - producer <br />Site of export</h2>
 <h3 class="heading-medium">Select the site the waste will be exported from</h3>
 
 @using (Html.BeginForm("SetSiteOfExport", "Producer"))
 {
     @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
 
     if (Model != null && Model.ProducerData.Any())
     {
-     <div class="colored-header-bar"></div>
-     <table>
-         <tbody>
-         @for (var i = 0; i < Model.ProducerData.Count; i++)
-         {
-             <tr>
-                 <td>
-                     <details>
-                         <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Business.Name)</span></summary>
-                         <div class="grid-row">
-                             <div class="column-quarter">
-                                 @Html.DisplayFor(m => m.ProducerData[i].Contact.FirstName) @Html.DisplayFor(m => m.ProducerData[i].Contact.LastName)<br/>
-                                 <a href="mailto:@Model.ProducerData[i].Contact.Email">@Model.ProducerData[i].Contact.Email</a><br/>
-                                 Tel: @Html.DisplayFor(m => m.ProducerData[i].Contact.Telephone)<br/>
-                                 @if (Model.ProducerData[i].Contact.Fax != null)
-                                 {
-                                     <label>Fax: </label>
-                                     @Html.DisplayFor(model => model.ProducerData[i].Contact.Fax)
-                                     ;
-                                 }
-                             </div>
-                             <div class="column-quarter">
-                                 @Html.DisplayFor(m => m.ProducerData[i].Address.Building),<br/>
-                                 @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),<br/>
-                                 @if (Model.ProducerData[i].Address.Address2 != null)
-                                 {
-                                     @Html.DisplayFor(model => model.ProducerData[i].Address.Address2)
-                                     @Html.Raw(",<br/>")
-                                 }
-                                 @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity) @Html.DisplayFor(m => m.ProducerData[i].Address.PostalCode)
-                             </div>
-                             <div class="column-quarter">
-                                 @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
-                             </div>
-                             <div class="column-quarter">
-                                 Site of Export:
-                                 @{
-                                     var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.ProducerData[i].Id) } };
-                                     if (@Model.ProducerData[i].IsSiteOfExport){htmlAttr.Add("checked", "checked");}
-                                     @Html.RadioButtonFor(m => m.SelectedValue, Model.ProducerData[i].Id, htmlAttr)
-                                 }
+        <div class="colored-header-bar"></div>
+        <table>
+            <tbody>
+                @for (var i = 0; i < Model.ProducerData.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <details>
+                                <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Business.Name)</span></summary>
+                                <div class="grid-row">
+                                    <div class="column-quarter">
+                                        @Html.DisplayFor(m => m.ProducerData[i].Contact.FirstName) @Html.DisplayFor(m => m.ProducerData[i].Contact.LastName)<br />
+                                        <a href="mailto:@Model.ProducerData[i].Contact.Email">@Model.ProducerData[i].Contact.Email</a><br />
+                                        Tel: @Html.DisplayFor(m => m.ProducerData[i].Contact.Telephone)<br />
+                                        @if (Model.ProducerData[i].Contact.Fax != null)
+                                        {
+                                            <label>Fax: </label>
+                                            @Html.DisplayFor(model => model.ProducerData[i].Contact.Fax)
+                                            ;
+                                        }
+                                    </div>
+                                    <div class="column-quarter">
+                                        @Html.DisplayFor(m => m.ProducerData[i].Address.Building),<br />
+                                        @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),<br />
+                                        @if (Model.ProducerData[i].Address.Address2 != null)
+                                        {
+                                            @Html.DisplayFor(model => model.ProducerData[i].Address.Address2)
+                                            @Html.Raw(",<br/>")
+                                        }
+                                        @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity) @Html.DisplayFor(m => m.ProducerData[i].Address.PostalCode)
+                                    </div>
+                                    <div class="column-quarter">
+                                        @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
+                                        <br />
+                                        @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, 
+                                                            isSiteOfExport = Model.ProducerData[i].IsSiteOfExport, producersCount = Model.ProducerData.Count }, null)
+                                    </div>
+                                    <div class="column-quarter">
+                                        Site of Export:
+                                        @{
+                                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.ProducerData[i].Id) } };
+                                        if (@Model.ProducerData[i].IsSiteOfExport) { htmlAttr.Add("checked", "checked"); }
+                                        @Html.RadioButtonFor(m => m.SelectedValue, Model.ProducerData[i].Id, htmlAttr)
+                                        }
 
-                             </div>
-                         </div>
-                     </details>
-                 </td>
-             </tr>
-         }
-         </tbody>
-     </table>
- }
+                                    </div>
+                                </div>
+                            </details>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
     @Html.HiddenFor(m => m.NotificationId)
 
@@ -76,21 +80,21 @@
 @section scripts
 {
     <script type="text/javascript">
-                $(function () {
-                    // When the background is clicked, hide the background
-                    $("#btnYes").click(function (e) {
-                    });
+        $(function () {
+            // When the background is clicked, hide the background
+            $("#btnYes").click(function (e) {
+            });
 
-                    $("#divConfirmDelete").click(function (e) {
-                        if (e.target === this && $(this).hasClass("fadeBackground")) {
-                            $(this).removeClass("fadeBackground");
-                            $(this).empty();
-                        }
-                    });
+            $("#divConfirmDelete").click(function (e) {
+                if (e.target === this && $(this).hasClass("fadeBackground")) {
+                    $(this).removeClass("fadeBackground");
+                    $(this).empty();
+                }
+            });
 
-                    $(".deleteLink").click(function () {
-                        $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
-                    });
-                })
+            $(".deleteLink").click(function () {
+                $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
+            });
+        })
     </script>
 }

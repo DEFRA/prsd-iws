@@ -29,6 +29,29 @@
         }
 
         [Fact]
+        public async Task CanAddMultipleProducers()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyProducerBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            for (int i = 0; i < 5; i++)
+            {
+                notification.AddProducer(business, address, contact);
+            }
+
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+            Assert.True(notification.Producers.Count() == 5);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
         public async Task CanModifyProducer()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
@@ -216,7 +239,7 @@
             notification.SetRecoveryPercentageData(56, "Some text");
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
- 
+
             Assert.Equal(56, notification.PercentageRecoverable);
             Assert.Equal("Some text", notification.MethodOfDisposal);
 
@@ -235,6 +258,87 @@
             await context.SaveChangesAsync();
 
             Assert.True(notification.IsProvidedByImporter);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanRemoveProducer()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyProducerBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            var producer = notification.AddProducer(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Producers.Any());
+
+            notification.RemoveProducer(producer.Id);
+            await context.SaveChangesAsync();
+
+            Assert.False(notification.Producers.Any());
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanNotRemoveSiteOfExportProducerForMoreThanOneProducers()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyProducerBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            var producer = notification.AddProducer(business, address, contact);
+            var anotherProducer = notification.AddProducer(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Producers.Count() == 2);
+
+            notification.SetProducerAsSiteOfExport(anotherProducer.Id);
+            await context.SaveChangesAsync();
+
+            Action removeProducer = () => notification.RemoveProducer(anotherProducer.Id);
+            Assert.Throws<InvalidOperationException>(removeProducer);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanRemoveProducerOtherThanSiteOfExporter()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyProducerBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            var producer = notification.AddProducer(business, address, contact);
+            var anotherProducer = notification.AddProducer(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Producers.Count() == 2);
+
+            notification.SetProducerAsSiteOfExport(producer.Id);
+            await context.SaveChangesAsync();
+
+            notification.RemoveProducer(anotherProducer.Id);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Producers.Count() == 1);
 
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();

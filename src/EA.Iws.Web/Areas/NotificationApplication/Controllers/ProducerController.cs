@@ -1,10 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.Producers;
     using Infrastructure;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
@@ -160,9 +162,40 @@
         }
 
         [HttpGet]
+        public async Task<ActionResult> Remove(Guid id, Guid entityId, bool isSiteOfExport, int producersCount)
+        {
+            using (var client = apiClient())
+            {
+                try
+                {
+                    if (isSiteOfExport && producersCount > 1)
+                    {
+                        TempData["errorRemoveProducer"] = "You have chosen to remove the site of export. You will need to select an alternative site of export before you can remove this producer.";
+                        return RedirectToAction("List", "Producer", new { id });
+                    }
+
+                    await client.SendAsync(User.GetAccessToken(), new DeleteProducerForNotification(entityId, id));
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+            }
+            return RedirectToAction("List", "Producer", new { id });
+        }
+
+        [HttpGet]
         public async Task<ActionResult> List(Guid id)
         {
             var model = new MultipleProducersViewModel();
+            if (TempData["errorRemoveProducer"] != null)
+            {
+                ModelState.AddModelError("RemoveProducer", TempData["errorRemoveProducer"].ToString());
+            }
 
             using (var client = apiClient())
             {

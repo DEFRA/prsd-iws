@@ -32,6 +32,11 @@
         public void RemoveProducer(Guid producerId)
         {
             var producer = GetProducer(producerId);
+            if (producer.IsSiteOfExport && ProducersCollection.Count > 1)
+            {
+                throw new InvalidOperationException(string.Format("Cannot remove producer with id {0} for notification {1} without making another producer as site of export",
+                    producerId, Id));
+            }
 
             ProducersCollection.Remove(producer);
         }

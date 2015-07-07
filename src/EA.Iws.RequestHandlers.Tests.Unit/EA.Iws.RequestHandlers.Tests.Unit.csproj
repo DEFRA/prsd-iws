@@ -46,6 +46,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -70,6 +71,7 @@
     <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandlerTests.cs" />
     <Compile Include="Helpers\DbContextHelper.cs" />
+    <Compile Include="Helpers\SharedObjectFactory.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerator.cs" />
     <Compile Include="Helpers\TestDbAsyncQueryProvider.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Notification\GetNotificationChargeHandlerTests.cs" />
     <Compile Include="Organisations\FindMatchingCompaniesHandlerTests.cs" />
+    <Compile Include="Producer\ProducerHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests.cs" />
     <Compile Include="TransitState\RemoveTransitStateForNotificationHandlerTests.cs" />
