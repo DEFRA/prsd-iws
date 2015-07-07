@@ -5,7 +5,7 @@
             <a href="/" id="proposition-name">International Waste Shipments</a>
             @if (Request.IsAuthenticated)
             {
-                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post,  htmlAttributes: new { id = "logoutForm" }))
                 {
                     @Html.AntiForgeryToken()
                     <ul id="proposition-links">
