@@ -13,6 +13,7 @@
     using TestHelpers.Helpers;
     using Xunit;
 
+    [Trait("Category", "Integration")]
     public class CopyToNotificationHandlerTests : IDisposable
     {
         private static readonly Guid UserId = new Guid("7A354C6D-BA5D-49F7-8870-73B2E74E2677");

@@ -5,11 +5,8 @@
 
     public class DatabaseDataDeleter
     {
-        private static string deleteCommand = @"BEGIN TRAN
-
+        private static string deleteCommand = @"
         DECLARE @NotificationId UNIQUEIDENTIFIER = '{0}'
-
-        BEGIN TRY
 
         DELETE FROM [Business].[Exporter]
         WHERE NotificationId = @NotificationId;
@@ -73,18 +70,12 @@
 
         DELETE FROM [Notification].[Notification] 
         WHERE Id = @NotificationId;
-
-        COMMIT TRAN
-
-        END TRY
-        BEGIN CATCH
-	        ROLLBACK TRAN
-        END CATCH";
+        
+        ";
 
         public static void DeleteDataForNotification(Guid notificationId, IwsContext context)
         {
-            context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
-                string.Format(deleteCommand, notificationId));
+            context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, string.Format(deleteCommand, notificationId));
         }
     }
 }

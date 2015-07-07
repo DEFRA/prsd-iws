@@ -58,7 +58,7 @@
                         throw new InvalidOperationException(string.Format("The copy operation from notification {0} to {1} failed because {2}",
                             message.SourceId,
                             destination.Id,
-                            " the operation would have deleted child entities."));
+                            "the operation would have deleted child entities."));
                     }
 
                     await context.SaveChangesAsync();
@@ -119,7 +119,7 @@
             return clone;
         }
 
-        private void SetCopyNotificationProperties(NotificationApplication clone, NotificationApplication destination)
+        private static void SetCopyNotificationProperties(NotificationApplication clone, NotificationApplication destination)
         {
             // We want to set all properties except a few decided by business logic.
             typeof(NotificationApplication).GetProperty("NotificationNumber").SetValue(clone, destination.NotificationNumber, null);
