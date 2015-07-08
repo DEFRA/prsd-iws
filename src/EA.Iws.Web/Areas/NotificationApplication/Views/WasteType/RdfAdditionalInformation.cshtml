@@ -2,6 +2,7 @@
 @using EA.Iws.Requests.WasteType
 @using EA.Iws.Web.Infrastructure
 @using EA.Iws.Core.Shared
+@using EA.Iws.Core.WasteType
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionInformationViewModel
 @{
     ViewBag.Title = "Waste Code";
@@ -34,12 +35,15 @@
                         </div>
                     </div>
                     <div class="grid-row">
+                        @{
+                            var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
+                        }
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min" + placeholderText })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
                         </div>
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max" + placeholderText })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
                         </div>
                     </div>
