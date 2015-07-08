@@ -68,6 +68,7 @@
     <Compile Include="Notification\NotificationApplicationTests.cs" />
     <Compile Include="Notification\NotificationCustomsOfficeTests.cs" />
     <Compile Include="Notification\NotificationExporterTests.cs" />
+    <Compile Include="Notification\NotificationCarrierTests.cs" />
     <Compile Include="Notification\NotificationFacilityTests.cs" />
     <Compile Include="Notification\NotificationImporterTests.cs" />
     <Compile Include="Notification\NotificationOperationCodesTests.cs" />

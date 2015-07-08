@@ -127,5 +127,26 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Remove(Guid id, Guid entityId)
+        {
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), new DeleteCarrierForNotification(id, entityId));
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+            }
+            return RedirectToAction("List", "Carrier", new { id });
+        }
     }
 }

@@ -444,5 +444,51 @@
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
+
+        [Fact]
+        public async Task CanAddMultipleCarriers()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyProducerBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            for (int i = 0; i < 5; i++)
+            {
+                notification.AddCarrier(business, address, contact);
+            }
+
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+            Assert.Equal(notification.Carriers.Count(), 5);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanRemoveCarrier()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyProducerBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            var carrier = notification.AddCarrier(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Carriers.Any());
+
+            notification.RemoveCarrier(carrier.Id);
+            await context.SaveChangesAsync();
+
+            Assert.False(notification.Carriers.Any());
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
     }
 }

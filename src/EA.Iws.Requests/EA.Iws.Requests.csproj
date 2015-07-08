@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carriers\DeleteCarrierForNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
     <Compile Include="Copy\CopyToNotification.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUser.cs" />

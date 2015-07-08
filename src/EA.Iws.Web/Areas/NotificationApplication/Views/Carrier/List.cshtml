@@ -38,6 +38,8 @@
                                 </div>
                                 <div class="column-third">
                                     @Html.ActionLink("Edit", "Edit", "Carrier", new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id }, null)
+                                    <br />
+                                    @Html.ActionLink("Remove", "Remove", "Carrier", new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id }, null)
                                 </div>
                             </div>
                         </details>

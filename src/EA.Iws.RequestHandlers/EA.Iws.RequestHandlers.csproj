@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarriersByNotificationIdHandler.cs" />
     <Compile Include="Carrier\UpdateCarrierForNotificationHandler.cs" />
