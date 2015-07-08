@@ -15,7 +15,7 @@
     <AssemblyName>EA.Iws.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44302</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -63,16 +63,16 @@
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15189.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15189-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15190.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15190-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core.Web, Version=1.0.15189.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15189-develop1\lib\net452\EA.Prsd.Core.Web.dll</HintPath>
+    <Reference Include="EA.Prsd.Core.Web, Version=1.0.15190.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15190-develop2\lib\net452\EA.Prsd.Core.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core.Web.Mvc, Version=1.0.15189.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15189-develop1\lib\net452\EA.Prsd.Core.Web.Mvc.dll</HintPath>
+    <Reference Include="EA.Prsd.Core.Web.Mvc, Version=1.0.15190.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15190-develop2\lib\net452\EA.Prsd.Core.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
@@ -511,7 +511,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Layout.GovUK.Sections.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_FeedbackBanner.cshtml" />
     <Content Include="Views\Shared\_IwsBreadcrumb.cshtml" />
     <Content Include="Views\Shared\_IwsHead.cshtml" />
@@ -584,6 +583,9 @@
     <Content Include="Views\Shared\_IwsStandardDataNotice.cshtml" />
     <Content Include="Views\CopyFromNotification\Index.cshtml" />
     <Content Include="Views\CopyFromNotification\Result.cshtml" />
+    <Content Include="Views\Errors\CookieError.cshtml" />
+    <Content Include="Views\Errors\InternalError.cshtml" />
+    <Content Include="Views\Errors\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -639,9 +641,11 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\ChemicalCompositionInformationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteAdditionalInformationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteViewModel.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\NewNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\OtherWasteCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\UnNumberViewModel.cs" />
+    <Compile Include="Infrastructure\AntiForgeryErrorFilter.cs" />
     <Compile Include="Infrastructure\Navigation.cs" />
     <Compile Include="Infrastructure\NavigationExtensions.cs" />
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
@@ -773,11 +777,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52657</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52657/</IISUrl>
+          <IISUrl>https://localhost:44302/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

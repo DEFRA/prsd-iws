@@ -10,6 +10,12 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("Error404", "errors/404",
+                new { controller = "Errors", action = "NotFound" });
+
+            routes.MapRoute("Error500", "errors/500",
+                new { controller = "Errors", action = "InternalError" });
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional},
                 namespaces: new[] { typeof(HomeController).Namespace });

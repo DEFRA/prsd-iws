@@ -31,6 +31,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Summary(Guid id, FormCollection model)
         {
             return RedirectToAction("Index", "CustomsOffice", new { id });

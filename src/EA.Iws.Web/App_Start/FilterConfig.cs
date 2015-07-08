@@ -8,9 +8,12 @@
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new RequireHttpsAttribute());
             filters.Add(new HandleApiErrorAttribute());
+            filters.Add(new HandleErrorAttribute() { View = "~/Views/Shared/Errors/InternalError.cshtml" });
             filters.Add(new OrganisationRequiredAttribute());
             filters.Add(new EmailVerificationRequiredAttribute());
+            filters.Add(new AntiForgeryErrorFilter());
         }
     }
 }
