@@ -194,7 +194,20 @@
                 copiedNotification.Carriers.Count());
             Assert.Equal(sourceNotification.Carriers.Select(c => c.Business.Name).OrderBy(s => s),
                 copiedNotification.Carriers.Select(c => c.Business.Name).OrderBy(s => s));
-        } 
+        }
+
+        [Fact]
+        public async Task AdditionalWasteInfosCopied()
+        {
+            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+
+            var copiedNotification = GetCopied();
+            var sourceNotification = GetSource();
+
+            Assert.Equal(sourceNotification.WasteType.WasteAdditionalInformation.Count(), 
+                copiedNotification.WasteType.WasteAdditionalInformation.Count());
+            Assert.True(sourceNotification.WasteType.WasteAdditionalInformation.Any());
+        }
 
         private NotificationApplication GetCopied()
         {
