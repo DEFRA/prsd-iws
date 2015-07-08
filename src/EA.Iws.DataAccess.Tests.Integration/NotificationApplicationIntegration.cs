@@ -298,7 +298,7 @@
             var business = ObjectFactory.CreateEmptyProducerBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            var producer = notification.AddProducer(business, address, contact);
+            notification.AddProducer(business, address, contact);
             var anotherProducer = notification.AddProducer(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
@@ -339,6 +339,107 @@
             await context.SaveChangesAsync();
 
             Assert.True(notification.Producers.Count() == 1);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanAddMultipleFacilities()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                                UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            for (int i = 0; i < 5; i++)
+            {
+                notification.AddFacility(business, address, contact);
+            }
+
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+            Assert.True(notification.Facilities.Count() == 5);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanRemoveFacility()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            var facility = notification.AddFacility(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Facilities.Any());
+
+            notification.RemoveFacility(facility.Id);
+            await context.SaveChangesAsync();
+
+            Assert.False(notification.Facilities.Any());
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanNotRemoveActualSiteOfTreatmentFacilityForMoreThanOneFacilities()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            notification.AddFacility(business, address, contact);
+            var anotherFacility = notification.AddFacility(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Facilities.Count() == 2);
+
+            notification.SetFacilityAsSiteOfTreatment(anotherFacility.Id);
+            await context.SaveChangesAsync();
+
+            Action removeFacility = () => notification.RemoveFacility(anotherFacility.Id);
+            Assert.Throws<InvalidOperationException>(removeFacility);
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
+        }
+
+        [Fact]
+        public async Task CanRemoveFacilityOtherThanActualSiteOfTreatment()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+
+            var address = ObjectFactory.CreateDefaultAddress();
+            var business = ObjectFactory.CreateEmptyBusiness();
+            var contact = ObjectFactory.CreateEmptyContact();
+
+            var facility = notification.AddFacility(business, address, contact);
+            var anotherFacility = notification.AddFacility(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Facilities.Count() == 2);
+
+            notification.SetFacilityAsSiteOfTreatment(facility.Id);
+            await context.SaveChangesAsync();
+
+            notification.RemoveProducer(anotherFacility.Id);
+            await context.SaveChangesAsync();
+
+            Assert.True(notification.Facilities.Count() == 1);
 
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();

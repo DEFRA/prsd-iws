@@ -145,6 +145,10 @@
         public async Task<ActionResult> List(Guid id)
         {
             var model = new MultipleFacilitiesViewModel();
+            if (TempData["errorRemoveFacility"] != null)
+            {
+                ModelState.AddModelError("RemoveFacility", TempData["errorRemoveFacility"].ToString());
+            }
 
             using (var client = apiClient())
             {
@@ -277,6 +281,34 @@
             }
 
             return RedirectToAction("Add", new { id, copy = true });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Remove(Guid id, Guid entityId, bool isActualSiteOfTreatment, int facilitiesCount, string facilityType)
+        {
+            using (var client = apiClient())
+            {
+                try
+                {
+                    if (isActualSiteOfTreatment && facilitiesCount > 1)
+                    {
+                        TempData["errorRemoveFacility"] = String.Format("You have chosen to remove the actual site. " +
+                        "You will need to select an alternative actual site of {0} before you can remove this facility.", facilityType.ToLowerInvariant());
+                        return RedirectToAction("List", "Facility", new { id });
+                    }
+
+                    await client.SendAsync(User.GetAccessToken(), new DeleteFacilityForNotification(id, entityId));
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+            }
+            return RedirectToAction("List", "Facility", new { id });
         }
     }
 }

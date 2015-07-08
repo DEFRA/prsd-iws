@@ -33,6 +33,11 @@
         public void RemoveFacility(Guid facilityId)
         {
             var facility = GetFacility(facilityId);
+            if (facility.IsActualSiteOfTreatment && FacilitiesCollection.Count > 1)
+            {
+                throw new InvalidOperationException(string.Format("Cannot remove facility with id {0} for notification {1} without making another facility as actual site of treatment",
+                   facilityId, Id));
+            }
 
             FacilitiesCollection.Remove(facility);
         }

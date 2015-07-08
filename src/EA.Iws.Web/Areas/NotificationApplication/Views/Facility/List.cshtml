@@ -6,6 +6,7 @@
 @using (Html.BeginForm(actionName: "List", controllerName: "Facility", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
 
     <h2 class="heading-large">@Model.NotificationType.ToString() facilities<br />Actual site of @Model.NotificationType.ToString().ToLower()</h2>
     <h3 class="heading-medium">
@@ -49,6 +50,10 @@
                                     </div>
                                     <div class="column-quarter">
                                         @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id }, null)
+                                        <br />
+                                        @Html.ActionLink("Remove", "Remove", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id,
+                                                         isActualSiteOfTreatment = Model.FacilityData[i].IsActualSiteOfTreatment, facilitiesCount = Model.FacilityData.Count,
+                                                         facilityType = Model.NotificationType }, null)
                                     </div>
                                     <div class="column-quarter">
                                         Actual site:

@@ -71,6 +71,7 @@
     <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />
     <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandlerTests.cs" />
+    <Compile Include="Facility\FacilityHandlerTests.cs" />
     <Compile Include="Helpers\DbContextHelper.cs" />
     <Compile Include="Helpers\SharedObjectFactory.cs" />
     <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
