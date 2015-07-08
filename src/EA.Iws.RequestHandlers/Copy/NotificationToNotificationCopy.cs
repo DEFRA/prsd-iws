@@ -1,11 +1,24 @@
 ﻿namespace EA.Iws.RequestHandlers.Copy
 {
+    using System;
     using System.Linq;
     using Domain.Notification;
     using Domain.TransportRoute;
+    using Prsd.Core.Domain;
 
     internal class NotificationToNotificationCopy
     {
+        public virtual void CopyNotificationProperties(NotificationApplication source, NotificationApplication destination)
+        {
+            // We want to set all properties except a few decided by business logic.
+            typeof(NotificationApplication).GetProperty("NotificationNumber").SetValue(source, destination.NotificationNumber, null);
+            typeof(NotificationApplication).GetProperty("CompetentAuthority").SetValue(source, destination.CompetentAuthority, null);
+            typeof(NotificationApplication).GetProperty("NotificationType").SetValue(source, destination.NotificationType, null);
+
+            // This should not be needed however is a precaution to prevent overwriting the source data.
+            typeof(Entity).GetProperty("Id").SetValue(source, Guid.Empty, null);
+        }
+
         public virtual void CopyLookupEntities(NotificationApplication source, NotificationApplication destination)
         {
             CopyStateOfExport(source, destination);

@@ -36,39 +36,19 @@
             {
                 try
                 {
-                    var destination = await context.NotificationApplications.SingleAsync(n => n.Id == message.DestinationId);
-
-                    var clone = await GetCopyOfSourceNotification(message.SourceId);
-
-                    SetCopyNotificationProperties(clone, destination);
-
-                    context.NotificationApplications.Add(clone);
-
-                    // Remove the destination.
-                    context.NotificationApplications.Remove(destination);
-
-                    // Save.
-                    await context.SaveChangesAsync();
-
-                    // Now change tracking is enabled clone the entities with lookup properties.
-                    await SetCopyChildObjects(clone, message.SourceId);
+                    var clone = await CloneNotification(message.SourceId, message.DestinationId);
 
                     if (GetChangedEntities(EntityState.Deleted).Any())
                     {
                         throw new InvalidOperationException(string.Format("The copy operation from notification {0} to {1} failed because {2}",
                             message.SourceId,
-                            destination.Id,
+                            message.DestinationId,
                             "the operation would have deleted child entities."));
                     }
 
                     await context.SaveChangesAsync();
 
-                    // Check we have not created a duplicate notification number.
-                    var notificationCount = await context.NotificationApplications
-                        .Select(n => n.NotificationNumber)
-                        .GroupBy(n => n).CountAsync();
-
-                    if (notificationCount != context.NotificationApplications.Count())
+                    if (await HasDuplicateNotifications())
                     {
                         transaction.Rollback();
                     }
@@ -86,6 +66,36 @@
             }
 
             return id;
+        }
+
+        /// <summary>
+        /// Create a clone of a notification excluding shipment info.
+        /// </summary>
+        /// <param name="sourceId">The notification id to copy from</param>
+        /// <param name="destinationId">The notification id to copy to</param>
+        /// <returns>the clone of the notification</returns>
+        private async Task<NotificationApplication> CloneNotification(Guid sourceId, Guid destinationId)
+        {
+            var destination = await context.NotificationApplications.SingleAsync(n => n.Id == destinationId);
+
+            var clone = await GetCopyOfSourceNotification(sourceId);
+
+            copier.CopyNotificationProperties(clone, destination);
+
+            context.NotificationApplications.Add(clone);
+
+            // Remove the destination.
+            context.NotificationApplications.Remove(destination);
+
+            // Save.
+            await context.SaveChangesAsync();
+
+            // Set child objects which have lookup properties. These can't be copied by the
+            // main copy process due to detaching the change tracker.
+            var source = await context.NotificationApplications.SingleAsync(n => n.Id == sourceId);
+            copier.CopyLookupEntities(source, clone);
+
+            return clone;
         }
 
         /// <summary>
@@ -119,28 +129,17 @@
             return clone;
         }
 
-        private static void SetCopyNotificationProperties(NotificationApplication clone, NotificationApplication destination)
-        {
-            // We want to set all properties except a few decided by business logic.
-            typeof(NotificationApplication).GetProperty("NotificationNumber").SetValue(clone, destination.NotificationNumber, null);
-            typeof(NotificationApplication).GetProperty("CompetentAuthority").SetValue(clone, destination.CompetentAuthority, null);
-            typeof(NotificationApplication).GetProperty("NotificationType").SetValue(clone, destination.NotificationType, null);
-
-            // This should not be needed however is a precaution to prevent overwriting the source data.
-            typeof(Entity).GetProperty("Id").SetValue(clone, Guid.Empty, null);
-        }
-
         /// <summary>
-        /// Set child objects which have nested child objects. These can't be copied by the
-        /// main copy process due to detaching the change tracker.
+        /// Checks if there are any duplicate notifications in the context.
         /// </summary>
-        /// <param name="clone"></param>
-        /// <param name="sourceId"></param>
-        /// <returns></returns>
-        private async Task SetCopyChildObjects(NotificationApplication clone, Guid sourceId)
+        /// <returns>true if there are any duplicate notifications; otherwise false.</returns>
+        private async Task<bool> HasDuplicateNotifications()
         {
-            var source = await context.NotificationApplications.SingleAsync(n => n.Id == sourceId);
-            copier.CopyLookupEntities(source, clone);
+            var notificationCount = await context.NotificationApplications
+                .Select(n => n.NotificationNumber)
+                .GroupBy(n => n).CountAsync();
+
+            return (notificationCount != context.NotificationApplications.Count());
         }
 
         protected virtual IEnumerable<DbEntityEntry> GetChangedEntities(params EntityState[] states)
