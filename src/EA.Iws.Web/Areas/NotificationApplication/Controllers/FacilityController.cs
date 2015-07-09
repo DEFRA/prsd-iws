@@ -41,7 +41,7 @@
                 }
 
                 var response =
-                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
                 facility.NotificationType = response.NotificationType;
                 facility.NotificationId = id;
 
@@ -94,7 +94,7 @@
                             new GetFacilityForNotification(id, entityId));
 
                 var response =
-                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
 
                 var model = new EditFacilityViewModel(facility) { NotificationType = response.NotificationType };
 
@@ -155,7 +155,7 @@
                     await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
 
                 var notificationInfo =
-                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
 
                 model.NotificationId = id;
                 model.FacilityData = response.ToList();
@@ -249,7 +249,7 @@
             using (var client = apiClient())
             {
                 var notificationInfo =
-                    await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
                 ViewBag.NotificationType = notificationInfo.NotificationType.ToString().ToLowerInvariant();
             }
 
@@ -267,7 +267,7 @@
                 using (var client = apiClient())
                 {
                     var notificationInfo =
-                        await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                        await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
                     ViewBag.NotificationType = notificationInfo.NotificationType.ToString().ToLowerInvariant();
                 }
 

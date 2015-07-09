@@ -1,6 +1,4 @@
-﻿@using EA.Iws.Core.Shared
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
-
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
 @{
     ViewBag.Title = "Notification overview";
 }
@@ -8,99 +6,57 @@
 <h1 class="heading-large">Notification overview</h1>
 
 <section class="notification-overview">
-<div>
+    <div>
 
-<h2 class="heading-medium">Organisations involved</h2>
+        <h2 class="heading-medium">Organisations involved</h2>
 
-<!-- //////////// Exporter notifier /////////////// -->
-@Html.Partial("_Exporter")
+        @Html.Partial("_Exporter")
+        @Html.Partial("_Producer")
+        @Html.Partial("_Importer")
+        @Html.Partial("_Facility")
 
-<!-- //////////// Waste generator producer /////////////// -->
-@Html.Partial("_Producer")
+        <h2 class="heading-medium">@( Model.NotificationType + " operation")</h2>
 
-<!-- //////////// Importer consignee /////////////// -->
-@Html.Partial("_Importer")
+        @Html.Partial("_PreConsented")
+        @Html.Partial("_RecoveryDisposal")
+        @Html.Partial("_Technology")
+        @Html.Partial("_ReasonForExport")
 
-<!-- //////////// Recovery facility /////////////// -->
-@Html.Partial("_Facility")
+        <h2 class="heading-medium">Transportation</h2>
 
+        @Html.Partial("_Carrier")
+        @Html.Partial("_MeansOfTransport")
+        @Html.Partial("_Packaging")
+        @Html.Partial("_Handling")
 
-<h2 class="heading-medium">@( Model.NotificationType + " operation")</h2>
+        <h2 class="heading-medium">The journey</h2>
 
-<!-- //////////// Pre-consent facility /////////////// -->
-@Html.Partial("_PreConsented")
+        @Html.Partial("_StateOfExport")
+        @Html.Partial("_TransitStates")
+        @Html.Partial("_StateOfImport")
+        @Html.Partial("_Customs")
 
-<!-- //////////// Recovery / Disposal codes /////////////// -->
-@Html.Partial("_RecoveryDisposal")
+        <h2 class="heading-medium">Amounts and dates</h2>
 
-<!-- //////////// Technology employed /////////////// -->
-@Html.Partial("_Technology")
+        @Html.Partial("_IntendedShipments")
 
-<!-- //////////// Reason for export /////////////// -->
-@Html.Partial("_ReasonForExport")
+        <h2 class="heading-medium">Classify your waste</h2>
 
+        @Html.Partial("_ChemicalComposition")
+        @Html.Partial("_ProcessOfGeneration")
+        @Html.Partial("_PhysicalCharacteristics")
+        @Html.Partial("_WasteCodes")
 
-<h2 class="heading-medium">Transportation</h2>
+        <h2 class="heading-medium">Waste recovery</h2>
 
-<!-- //////////// Intended carrier /////////////// -->
-@Html.Partial("_Carrier")
+        @Html.Partial("_RecoveryInfo")
 
-<!-- //////////// Means of transport /////////////// -->
-@Html.Partial("_MeansOfTransport")
-
-<!-- //////////// Packaging types /////////////// -->
-@Html.Partial("_Packaging")
-
-<!-- //////////// Special handling /////////////// -->
-@Html.Partial("_Handling")
-
-
-<h2 class="heading-medium">The journey</h2>
-
-<!-- //////////// State of export /////////////// -->
-@Html.Partial("_StateOfExport")
-
-<!-- //////////// Transit states /////////////// -->
-@Html.Partial("_TransitStates")
-
-<!-- //////////// State of import /////////////// -->
-@Html.Partial("_StateOfImport")
-
-<!-- //////////// Customs office /////////////// -->
-@Html.Partial("_Customs")
-
-
-<h2 class="heading-medium">Amounts and dates</h2>
-
-<!-- //////////// Intended shipments /////////////// -->
-@Html.Partial("_IntendedShipments")
-
-<h2 class="heading-medium">Classify your waste</h2>
-
-<!-- //////////// Chemical composition /////////////// //////////////////////////////////////////////////////////////////////////////////////-->
-@Html.Partial("_ChemicalComposition")
-
-<!-- //////////// Process of generation /////////////// -->
-@Html.Partial("_ProcessOfGeneration")
-
-<!-- //////////// Physical characteristics /////////////// -->
-@Html.Partial("_PhysicalCharacteristics")
-
-<!-- //////////// Waste codes /////////////// -->
-@Html.Partial("_WasteCodes")
-
-
-<h2 class="heading-medium">Waste recovery</h2>
-
-<!-- //////////// Recovery information /////////////// -->
-@Html.Partial("_RecoveryInfo")
-
-</div>
-
+        @Html.Partial("_NotificationCharge")
+    </div>
 
 </section>
-<br/>
-<br/>
+<br />
+<br />
 <div class="form-group">
     @Html.ActionLink("Continue", "Disclaimer", "Home", new { id = Model.NotificationId }, new { @class = "button" })
 </div>

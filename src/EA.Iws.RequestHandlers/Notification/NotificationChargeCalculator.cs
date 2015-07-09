@@ -29,9 +29,9 @@
 
             // TODO: hard coded to Export for now, need to read TradeDirection from Notification when implemented
             return (await context.PricingStructures.SingleAsync(
-                p => p.CompetentAuthority == notification.CompetentAuthority &&
+                p => p.CompetentAuthority.Value == notification.CompetentAuthority.Value &&
                      p.Activity.TradeDirection == TradeDirection.Export &&
-                     p.Activity.NotificationType == notification.NotificationType &&
+                     p.Activity.NotificationType.Value == notification.NotificationType.Value &&
                      p.Activity.IsInterim == notification.IsInterim &&
                      (p.ShipmentQuantityRange.RangeFrom <= numberOfShipments &&
                       (p.ShipmentQuantityRange.RangeTo == null ||

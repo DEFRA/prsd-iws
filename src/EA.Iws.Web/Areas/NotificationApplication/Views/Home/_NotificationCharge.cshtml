@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+    
+@if (Model.NotificationCharge != 0)
+{
+    <h2 class="heading-medium">Notification charge</h2>
+    
+    <p>
+        £@Model.NotificationCharge
+    </p>
+}

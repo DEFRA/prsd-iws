@@ -92,7 +92,9 @@
     <Compile Include="Mappings\CustomsOfficeEntryMap.cs" />
     <Compile Include="Mappings\CustomsOfficeMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
+    <Compile Include="Mappings\NotificationBasicInfoMap.cs" />
     <Compile Include="Mappings\NotificationInfoMap.cs" />
+    <Compile Include="Mappings\NotificationProgressInfoMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsMap.cs" />
     <Compile Include="Mappings\PreconsentedAnswerMap.cs" />
@@ -131,6 +133,8 @@
     <Compile Include="Notification\GetNotificationChargeHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
+    <Compile Include="Notification\GetNotificationProgressInfoHandler.cs" />
+    <Compile Include="Notification\GetNotificationTypeHandler.cs" />
     <Compile Include="Notification\GetReasonForExportHandler.cs" />
     <Compile Include="Notification\GetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />

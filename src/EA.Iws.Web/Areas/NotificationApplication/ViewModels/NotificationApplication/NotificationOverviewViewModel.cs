@@ -23,7 +23,7 @@
         public Guid NotificationId { get; set; }
 
         public NotificationType NotificationType { get; set; }
-
+        
         public NotificationApplicationCompletionProgress Progress { get; set; }
 
         public string ExporterCompanyName { get; set; }
@@ -82,6 +82,8 @@
         public RecoveryPercentageData RecoveryPercentageData { get; set; }
         public RecoveryInfoData RecoveryInfoData { get; set; }
 
+        public int NotificationCharge { get; set; }
+
         public NotificationOverviewViewModel()
         {
         }
@@ -125,6 +127,7 @@
             CustomCodes = notificationInfo.CustomCodes;
             RecoveryPercentageData = notificationInfo.RecoveryPercentageData;
             RecoveryInfoData = notificationInfo.RecoveryInfoData;
+            NotificationCharge = notificationInfo.NotificationCharge;
         }
     }
 }

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Core.CustomsOffice;
     using Core.MeansOfTransport;
     using Core.Notification;
     using Core.OperationCodes;
@@ -66,19 +65,31 @@
         public List<string> PhysicalCharacteristics { get; set; }
 
         public WasteCodeData[] BaselOecdCode { get; set; }
+
         public WasteCodeData[] EwcCodes { get; set; }
+
         public WasteCodeData[] NationExportCode { get; set; }
+
         public WasteCodeData[] NationImportCode { get; set; }
+
         public WasteCodeData[] OtherCodes { get; set; }
+
         public WasteCodeData[] YCodes { get; set; }
+
         public WasteCodeData[] HCodes { get; set; }
+
         public WasteCodeData[] UnClass { get; set; }
+
         public WasteCodeData[] UnNumber { get; set; }
+
         public WasteCodeData[] CustomCodes { get; set; }
 
         public RecoveryPercentageData RecoveryPercentageData { get; set; }
+
         public RecoveryInfoData RecoveryInfoData { get; set; }
 
         public WasteTypeData ChemicalComposition { get; set; }
+
+        public int NotificationCharge { get; set; }
     }
 }

@@ -36,14 +36,15 @@
             {
                 try
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                    var notificationInfo =
+                        await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
 
-                    if (response.NotificationType == NotificationType.Disposal)
+                    if (notificationInfo.NotificationType == NotificationType.Disposal)
                     {
                         return RedirectToAction("DisposalCodes", "WasteOperations", new { id });
                     }
 
-                    if (response.NotificationType == NotificationType.Recovery)
+                    if (notificationInfo.NotificationType == NotificationType.Recovery)
                     {
                         return RedirectToAction("RecoveryCodes", "WasteOperations", new { id });
                     }

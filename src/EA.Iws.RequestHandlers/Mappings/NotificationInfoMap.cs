@@ -9,7 +9,6 @@
     using Core.TechnologyEmployed;
     using Core.WasteCodes;
     using Core.WasteType;
-    using DataAccess;
     using Domain.Notification;
     using Prsd.Core.Mapper;
     using Requests.CustomsOffice;
@@ -19,7 +18,6 @@
 
     internal class NotificationInfoMap : IMap<NotificationApplication, NotificationInfo>
     {
-        private readonly IwsContext db;
         private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper;
         private readonly IMap<NotificationApplication, StateOfExportWithTransportRouteData> transportRouteMap;
         private readonly IMap<NotificationApplication, EntryCustomsOfficeAddData> customsOfficeEntryMap;
@@ -29,8 +27,7 @@
         private readonly IMap<WasteType, WasteTypeData> wasteTypeMapper;
         private readonly IMap<NotificationApplication, string> preconsentedAnswerMap;
 
-        public NotificationInfoMap(IwsContext db,
-            IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper,
+        public NotificationInfoMap(IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper,
             IMap<NotificationApplication, StateOfExportWithTransportRouteData> transportRouteMap,
             IMap<NotificationApplication, EntryCustomsOfficeAddData> customsOfficeEntryMap,
             IMap<NotificationApplication, ExitCustomsOfficeAddData> customsOfficeExitMap,
@@ -39,7 +36,6 @@
             IMap<WasteType, WasteTypeData> wasteTypeMapper,
             IMap<NotificationApplication, string> preconsentedAnswerMap)
         {
-            this.db = db;
             this.completionProgressMapper = completionProgressMapper;
             this.transportRouteMap = transportRouteMap;
             this.customsOfficeEntryMap = customsOfficeEntryMap;
@@ -56,58 +52,19 @@
             List<string> facilitiesCompanyNames = notification.Facilities.Select(f => f != null ? f.Business.Name : null).ToList();
             List<string> carriersCompanyNames = notification.Carriers.Select(c => c != null ? c.Business.Name : null).ToList();
 
-            var operationCodes = new List<OperationCodeData>();
-            foreach (var operationInfo in notification.OperationInfos)
-            {
-                var ocd = new OperationCodeData
-                {
-                    Code = operationInfo.OperationCode.DisplayName,
-                    Value = operationInfo.OperationCode.Value
-                };
-                operationCodes.Add(ocd);
-            }
-
-            var packagingData = new List<string>();
-            foreach (var packagingInfo in notification.PackagingInfos)
-            {
-                packagingData.Add(packagingInfo.PackagingType != PackagingType.Other ? packagingInfo.PackagingType.Value + " - " + packagingInfo.PackagingType.DisplayName : packagingInfo.OtherDescription);
-            }
-            packagingData.Sort();
-
-            var technologyEmployed = new TechnologyEmployedData
-            {
-                Details = notification.TechnologyEmployed != null ? notification.TechnologyEmployed.Details : string.Empty,
-                AnnexProvided = notification.TechnologyEmployed != null && notification.TechnologyEmployed.AnnexProvided
-            };
-
-            var specialHandlingAnswer = string.Empty;
-            if (notification.HasSpecialHandlingRequirements.HasValue)
-            {
-                specialHandlingAnswer = notification.HasSpecialHandlingRequirements.Value ? notification.SpecialHandlingDetails : "No special handling required";
-            }
+            var operationCodes = GetOperationCodes(notification);
+            var packagingData = GetPackagingData(notification);
+            var technologyEmployed = GetTechnologyEmployed(notification);
+            var specialHandlingAnswer = GetSpecialHandling(notification);
 
             var transportRouteData = transportRouteMap.Map(notification);
             var entryCustomsOfficeData = customsOfficeEntryMap.Map(notification);
             var exitCustomsOfficeData = customsOfficeExitMap.Map(notification);
             var shipmentData = shipmentMapper.Map(notification);
 
-            WasteTypeData chemicalComposition = null;
-            if (notification.WasteType != null)
-            {
-                chemicalComposition = wasteTypeMapper.Map(notification.WasteType);
-            }
-
-            var wasteGenerationData = new WasteGenerationProcessData
-            {
-                Process = notification.WasteGenerationProcess ?? string.Empty,
-                IsDocumentAttached = notification.IsWasteGenerationProcessAttached ?? false
-            };
-
-            var physicalCharacteristicsData = new List<string>();
-            foreach (var c in notification.PhysicalCharacteristics)
-            {
-                physicalCharacteristicsData.Add(c.PhysicalCharacteristic != PhysicalCharacteristicType.Other ? c.PhysicalCharacteristic.DisplayName : c.OtherDescription);
-            }
+            var chemicalComposition = GetWasteType(notification);
+            var wasteGenerationData = GetWasteGenerationProcess(notification);
+            var physicalCharacteristicsData = GetPhysicalCharacteristics(notification);
 
             var baselOecdCodeData = wasteCodesMapper.Map(notification, CodeType.Basel);
             var ewcCodesData = wasteCodesMapper.Map(notification, CodeType.Ewc);
@@ -120,23 +77,8 @@
             var unnumberData = wasteCodesMapper.Map(notification, CodeType.UnNumber);
             var customCodesData = wasteCodesMapper.Map(notification, CodeType.CustomsCode);
 
-            var recoveryPercentageData = new RecoveryPercentageData
-            {
-                IsProvidedByImporter = notification.IsProvidedByImporter ?? null,
-                PercentageRecoverable = notification.PercentageRecoverable ?? null,
-                MethodOfDisposal = notification.MethodOfDisposal ?? string.Empty
-            };
-
-            var recoveryInfoData = new RecoveryInfoData();
-            if (notification.RecoveryInfo != null)
-            {
-                recoveryInfoData.EstimatedAmount = notification.RecoveryInfo.EstimatedAmount;
-                recoveryInfoData.EstimatedUnit = notification.RecoveryInfo.EstimatedUnit;
-                recoveryInfoData.CostAmount = notification.RecoveryInfo.CostAmount;
-                recoveryInfoData.CostUnit = notification.RecoveryInfo.CostUnit;
-                recoveryInfoData.DisposalAmount = notification.RecoveryInfo.DisposalAmount;
-                recoveryInfoData.DisposalUnit = notification.RecoveryInfo.DisposalUnit;
-            }
+            var recoveryPercentageData = GetRecoveryPercentage(notification);
+            var recoveryInfoData = GetRecoveryInfo(notification);
 
             return new NotificationInfo
             {
@@ -178,8 +120,117 @@
                 UnNumber = unnumberData,
                 CustomCodes = customCodesData,
                 RecoveryPercentageData = recoveryPercentageData,
-                RecoveryInfoData = recoveryInfoData,
+                RecoveryInfoData = recoveryInfoData
             };
+        }
+
+        private static RecoveryInfoData GetRecoveryInfo(NotificationApplication notification)
+        {
+            var recoveryInfoData = new RecoveryInfoData();
+            if (notification.RecoveryInfo != null)
+            {
+                recoveryInfoData.EstimatedAmount = notification.RecoveryInfo.EstimatedAmount;
+                recoveryInfoData.EstimatedUnit = notification.RecoveryInfo.EstimatedUnit;
+                recoveryInfoData.CostAmount = notification.RecoveryInfo.CostAmount;
+                recoveryInfoData.CostUnit = notification.RecoveryInfo.CostUnit;
+                recoveryInfoData.DisposalAmount = notification.RecoveryInfo.DisposalAmount;
+                recoveryInfoData.DisposalUnit = notification.RecoveryInfo.DisposalUnit;
+            }
+            return recoveryInfoData;
+        }
+
+        private static RecoveryPercentageData GetRecoveryPercentage(NotificationApplication notification)
+        {
+            var recoveryPercentageData = new RecoveryPercentageData
+            {
+                IsProvidedByImporter = notification.IsProvidedByImporter,
+                PercentageRecoverable = notification.PercentageRecoverable,
+                MethodOfDisposal = notification.MethodOfDisposal ?? string.Empty
+            };
+            return recoveryPercentageData;
+        }
+
+        private static List<string> GetPhysicalCharacteristics(NotificationApplication notification)
+        {
+            var physicalCharacteristicsData = new List<string>();
+            foreach (var c in notification.PhysicalCharacteristics)
+            {
+                physicalCharacteristicsData.Add(c.PhysicalCharacteristic != PhysicalCharacteristicType.Other
+                    ? c.PhysicalCharacteristic.DisplayName
+                    : c.OtherDescription);
+            }
+            return physicalCharacteristicsData;
+        }
+
+        private static WasteGenerationProcessData GetWasteGenerationProcess(NotificationApplication notification)
+        {
+            var wasteGenerationData = new WasteGenerationProcessData
+            {
+                Process = notification.WasteGenerationProcess ?? string.Empty,
+                IsDocumentAttached = notification.IsWasteGenerationProcessAttached ?? false
+            };
+            return wasteGenerationData;
+        }
+
+        private WasteTypeData GetWasteType(NotificationApplication notification)
+        {
+            WasteTypeData chemicalComposition = null;
+            if (notification.WasteType != null)
+            {
+                chemicalComposition = wasteTypeMapper.Map(notification.WasteType);
+            }
+            return chemicalComposition;
+        }
+
+        private static string GetSpecialHandling(NotificationApplication notification)
+        {
+            var specialHandlingAnswer = string.Empty;
+            if (notification.HasSpecialHandlingRequirements.HasValue)
+            {
+                specialHandlingAnswer = notification.HasSpecialHandlingRequirements.Value
+                    ? notification.SpecialHandlingDetails
+                    : "No special handling required";
+            }
+            return specialHandlingAnswer;
+        }
+
+        private static TechnologyEmployedData GetTechnologyEmployed(NotificationApplication notification)
+        {
+            var technologyEmployed = new TechnologyEmployedData
+            {
+                Details = notification.TechnologyEmployed != null ? notification.TechnologyEmployed.Details : string.Empty,
+                AnnexProvided = notification.TechnologyEmployed != null && notification.TechnologyEmployed.AnnexProvided
+            };
+            return technologyEmployed;
+        }
+
+        private static List<string> GetPackagingData(NotificationApplication notification)
+        {
+            var packagingData = new List<string>();
+            foreach (var packagingInfo in notification.PackagingInfos)
+            {
+                packagingData.Add(packagingInfo.PackagingType != PackagingType.Other 
+                    ? packagingInfo.PackagingType.Value + " - " + packagingInfo.PackagingType.DisplayName 
+                    : packagingInfo.OtherDescription);
+            }
+            packagingData.Sort();
+
+            return packagingData;
+        }
+
+        private static List<OperationCodeData> GetOperationCodes(NotificationApplication notification)
+        {
+            var operationCodes = new List<OperationCodeData>();
+            foreach (var operationInfo in notification.OperationInfos)
+            {
+                var ocd = new OperationCodeData
+                {
+                    Code = operationInfo.OperationCode.DisplayName,
+                    Value = operationInfo.OperationCode.Value
+                };
+                operationCodes.Add(ocd);
+            }
+            return operationCodes;
         }
     }
 }

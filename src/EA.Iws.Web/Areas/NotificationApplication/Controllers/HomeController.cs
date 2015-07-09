@@ -1,14 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Core.CustomsOffice;
-    using Core.Notification;
-    using Core.Shipment;
     using Infrastructure;
     using Prsd.Core;
     using Prsd.Core.Web.ApiClient;
@@ -61,7 +56,7 @@
                 var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
 
                 var model = new NotificationOverviewViewModel(response);
-               
+
                 return View(model);
             }
         }
@@ -77,7 +72,7 @@
             using (var client = apiClient())
             {
                 var response =
-                    client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id)).GetAwaiter().GetResult();
+                    client.SendAsync(User.GetAccessToken(), new GetNotificationProgressInfo(id)).GetAwaiter().GetResult();
 
                 var model = new NavigationViewModel
                 {
@@ -113,8 +108,8 @@
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
-                var model = new SubmittedViewModel { CompetentAuthority = response.CompetentAuthority, Id = id};
+                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
+                var model = new SubmittedViewModel { CompetentAuthority = response.CompetentAuthority, Id = id };
                 return View(model);
             }
         }

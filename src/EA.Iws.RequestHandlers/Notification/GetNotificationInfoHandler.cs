@@ -12,19 +12,25 @@
     {
         private readonly IwsContext db;
         private readonly IMap<NotificationApplication, NotificationInfo> notificationInfoMap;
+        private readonly INotificationChargeCalculator notificationChargeCalculator;
 
         public GetNotificationInfoHandler(IwsContext db,
-            IMap<NotificationApplication, NotificationInfo> notificationInfoMap)
+            IMap<NotificationApplication, NotificationInfo> notificationInfoMap,
+            INotificationChargeCalculator notificationChargeCalculator)
         {
             this.db = db;
             this.notificationInfoMap = notificationInfoMap;
+            this.notificationChargeCalculator = notificationChargeCalculator;
         }
 
         public async Task<NotificationInfo> HandleAsync(GetNotificationInfo message)
         {
             var notification = await db.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
 
-            return notificationInfoMap.Map(notification);
+            var notificationInfo = notificationInfoMap.Map(notification);
+            notificationInfo.NotificationCharge = decimal.ToInt32(await notificationChargeCalculator.GetValue(message.NotificationId));
+
+            return notificationInfo;
         }
     }
 }
