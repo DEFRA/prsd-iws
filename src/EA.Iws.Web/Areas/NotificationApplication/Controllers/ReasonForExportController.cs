@@ -51,7 +51,7 @@
                     await
                         client.SendAsync(User.GetAccessToken(),
                             new SetReasonForExport(model.NotificationId, model.ReasonForExport));
-                    return RedirectToAction("Add", "Carrier", new { id = model.NotificationId });
+                    return RedirectToAction("List", "Carrier", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
