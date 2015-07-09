@@ -70,8 +70,9 @@
             var packagingData = new List<string>();
             foreach (var packagingInfo in notification.PackagingInfos)
             {
-                packagingData.Add(packagingInfo.PackagingType != PackagingType.Other ? packagingInfo.PackagingType.DisplayName : packagingInfo.OtherDescription);
+                packagingData.Add(packagingInfo.PackagingType != PackagingType.Other ? packagingInfo.PackagingType.Value + " - " + packagingInfo.PackagingType.DisplayName : packagingInfo.OtherDescription);
             }
+            packagingData.Sort();
 
             var technologyEmployed = new TechnologyEmployedData
             {

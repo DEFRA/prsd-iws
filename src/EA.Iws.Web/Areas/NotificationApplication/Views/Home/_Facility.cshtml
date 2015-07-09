@@ -2,11 +2,9 @@
 
 @if (Model.Progress.IsFacilityCompleted)
 {
-    if (Model.FacilitiesCompanyNames.Count > 1)
-    {
         <details>
             <summary>
-                <span class="summary">@(Model.NotificationType + " facilities")</span>
+                <span class="summary">@(Model.NotificationType + " facility")</span>
             </summary>
 
             <div class="expanded-details">
@@ -16,12 +14,4 @@
                 }
             </div>
         </details>
-    }
-    else
-    {
-        <div class="list-heading-no-detail column-third">@(Model.NotificationType + " facility")</div>
-        <div>
-            @Model.FacilitiesCompanyNames[0]<br />
-        </div>
-    }
 }

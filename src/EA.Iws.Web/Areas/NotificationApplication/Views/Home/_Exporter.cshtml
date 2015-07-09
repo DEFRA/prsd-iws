@@ -2,8 +2,13 @@
 
 @if (Model.Progress.IsExporterCompleted)
 {
-    <div class="list-heading-no-detail column-third">Exporter notifier</div>
-    <div>
-        @Model.ExporterCompanyName<br />
-    </div>
+    <details>
+        <summary>
+            <span class="summary">Exporter notifier</span>
+        </summary>
+
+        <div class="expanded-details">
+            @Model.ExporterCompanyName<br />
+        </div>
+    </details>
 }

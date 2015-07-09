@@ -2,8 +2,13 @@
 
 @if (Model.Progress.IsImporterCompleted)
 {
-    <div class="list-heading-no-detail column-third">Importer consignee</div>
-    <div>
-        @Model.ImporterCompanyName<br />
-    </div>
+    <details>
+        <summary>
+            <span class="summary">Importer consignee</span>
+        </summary>
+
+        <div class="expanded-details">
+            @Model.ImporterCompanyName<br />
+        </div>
+    </details>
 }

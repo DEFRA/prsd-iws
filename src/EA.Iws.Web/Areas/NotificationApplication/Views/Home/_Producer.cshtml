@@ -2,11 +2,9 @@
 
 @if (Model.Progress.IsProducerCompleted)
 {
-    if (Model.ProducersCompanyNames.Count > 1)
-    {
         <details>
             <summary>
-                <span class="summary">Generators producers</span>
+                <span class="summary">Waste generator producer</span>
             </summary>
 
             <div class="expanded-details">
@@ -16,12 +14,4 @@
                 }
             </div>
         </details>
-    }
-    else
-    {
-        <div class="list-heading-no-detail column-third">Generator producer</div>
-        <div>
-            @Model.ProducersCompanyNames[0]<br />
-        </div>
-    }
 }

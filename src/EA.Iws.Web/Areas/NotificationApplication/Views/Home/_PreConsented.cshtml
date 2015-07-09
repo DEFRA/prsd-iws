@@ -3,10 +3,13 @@
 
 @if (Model.NotificationType == NotificationType.Recovery && Model.Progress.IsPreconsentStatusChosen)
 {
-    <div>
-        <div class="list-heading-no-detail column-third">Pre-consent facility</div>
-        <div>
+    <details>
+        <summary>
+            <span class="summary">Pre-consent facility</span>
+        </summary>
+
+        <div class="expanded-details">
             @Model.PreconstedAnswer<br />
         </div>
-    </div>
+    </details>
 }
