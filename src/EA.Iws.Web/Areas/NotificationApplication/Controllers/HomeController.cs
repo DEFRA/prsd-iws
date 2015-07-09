@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Core.CustomsOffice;
+    using Core.Notification;
     using Core.Shipment;
     using Infrastructure;
     using Prsd.Core;
@@ -104,7 +105,29 @@
             {
                 return View(model);
             }
-            return RedirectToAction("Index", "Home", new {id = model.Id});
+            return RedirectToAction("Submitted", "Home", new { id = model.Id });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Submitted(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                var model = new SubmittedViewModel { CompetentAuthority = response.CompetentAuthority, Id = id};
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Submitted(SubmittedViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index", "Home", new { id = model.Id });
         }
     }
 }
