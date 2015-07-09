@@ -162,12 +162,17 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Remove(Guid id, Guid entityId, bool isSiteOfExport, int producersCount)
+        public async Task<ActionResult> Remove(Guid id, Guid entityId)
         {
             using (var client = apiClient())
             {
                 try
                 {
+                    var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
+                    var producers = response.ToList();
+                    int producersCount = producers.Count;
+                    bool isSiteOfExport = producers.Single(x => x.Id == entityId).IsSiteOfExport;
+
                     if (isSiteOfExport && producersCount > 1)
                     {
                         TempData["errorRemoveProducer"] = "You have chosen to remove the site of export. You will need to select an alternative site of export before you can remove this producer.";
@@ -233,8 +238,7 @@
                 {
                     try
                     {
-                        await
-                            client.SendAsync(User.GetAccessToken(),
+                        await client.SendAsync(User.GetAccessToken(),
                                 new SetSiteOfExport(new Guid(model.SelectedValue), model.NotificationId));
                     }
                     catch (ApiBadRequestException ex)

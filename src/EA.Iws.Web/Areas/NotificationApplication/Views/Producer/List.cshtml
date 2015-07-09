@@ -5,7 +5,7 @@
 <h2 class="heading-large">Waste generator - producer <br />Site of export</h2>
 <h3 class="heading-medium">Select the site the waste will be exported from</h3>
 
-@using (Html.BeginForm("SetSiteOfExport", "Producer"))
+@using (Html.BeginForm("SetSiteOfExport", "Producer", FormMethod.Post, new { @id = "frm" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -46,8 +46,7 @@
                                     <div class="column-quarter">
                                         @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
                                         <br />
-                                        @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, 
-                                                            isSiteOfExport = Model.ProducerData[i].IsSiteOfExport, producersCount = Model.ProducerData.Count }, null)
+                                        @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
                                     </div>
                                     <div class="column-quarter">
                                         Site of Export:
@@ -56,7 +55,6 @@
                                         if (@Model.ProducerData[i].IsSiteOfExport) { htmlAttr.Add("checked", "checked"); }
                                         @Html.RadioButtonFor(m => m.SelectedValue, Model.ProducerData[i].Id, htmlAttr)
                                         }
-
                                     </div>
                                 </div>
                             </details>
@@ -81,6 +79,13 @@
 {
     <script type="text/javascript">
         $(function () {
+            $("[name='SelectedValue']").change(function () {
+                var form = $("#frm");
+                var url = form.attr("action");
+                var formData = form.serialize();
+                $.post(url, formData, null);
+            });
+
             // When the background is clicked, hide the background
             $("#btnYes").click(function (e) {
             });

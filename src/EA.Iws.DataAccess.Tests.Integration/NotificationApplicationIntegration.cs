@@ -436,7 +436,7 @@
             notification.SetFacilityAsSiteOfTreatment(facility.Id);
             await context.SaveChangesAsync();
 
-            notification.RemoveProducer(anotherFacility.Id);
+            notification.RemoveFacility(anotherFacility.Id);
             await context.SaveChangesAsync();
 
             Assert.True(notification.Facilities.Count() == 1);
