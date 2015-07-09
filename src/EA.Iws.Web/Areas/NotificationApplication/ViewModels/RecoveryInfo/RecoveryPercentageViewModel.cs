@@ -23,6 +23,13 @@
                 MethodOfDisposal = recoveryPercentageData.MethodOfDisposal;
                 IsHundredPercentRecoverable = recoveryPercentageData.PercentageRecoverable == Convert.ToDecimal(100.00);
             }
+
+            if (IsProvidedByImporter)
+            {
+                PercentageRecoverable = null;
+                MethodOfDisposal = null;
+                IsHundredPercentRecoverable = null;
+            }
         }
 
         public SetRecoveryPercentageData ToRequest()
@@ -58,7 +65,7 @@
         public bool? IsHundredPercentRecoverable { get; set; }
 
         [Display(Name = "Enter the percentage (%) of recoverable material")]
-        [Range(0, 99.99)]
+        [Range(0, 100.00)]
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places.")]
         public decimal? PercentageRecoverable { get; set; }
 
@@ -75,7 +82,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (IsProvidedByImporter == false)
+            if (!IsProvidedByImporter)
             {
                 if (IsHundredPercentRecoverable == null)
                 {
@@ -94,10 +101,6 @@
                         yield return new ValidationResult("Please provide details of the method of disposal for the non recoverable waste", new[] { "MethodOfDisposal" });
                     }
                 }
-            }
-            else if (!string.IsNullOrEmpty(MethodOfDisposal) || PercentageRecoverable.HasValue)
-            {
-                yield return new ValidationResult("If you select that recovery information will be provided by the importer-consignee then please do not enter any information in the text boxes below");
             }
         }
     }

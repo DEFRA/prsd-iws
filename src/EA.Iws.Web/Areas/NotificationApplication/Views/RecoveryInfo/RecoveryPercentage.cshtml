@@ -5,7 +5,84 @@
 
 @using (Html.BeginForm("RecoveryPercentage", "RecoveryInfo", FormMethod.Post))
 {
-    @Html.Partial("_RecoveryPercentage")
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <header class="hgroup">
+        <h2 class="heading-large">Recovery information</h2>
+        <h2 class="heading-small">According to annex II of Regulations (EC) No 1013/2006 you are required to state the amount of recoverable material in relation to non-recoverable waste</h2>
+    </header>
+
+    <div>
+        <div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.IsProvidedByImporter)">
+                @Html.Gds().ValidationMessageFor(m => m.IsProvidedByImporter)
+                <label class="block-label" for="IsProvidedByImporter">
+                    @Html.CheckBoxFor(m => m.IsProvidedByImporter, new { @id = "IsProvidedByImporter" })
+                    @Html.DisplayNameFor(m => m.IsProvidedByImporter)
+                </label>
+                <br /><br /><br />
+                @Html.Gds().HintSpan("It is the responsibility of the exporter-notifier to ensure the recovery information is provided directly to the competent authority by the importer-consignee")
+            </div>
+
+            <h2 class="heading-small">Is the waste 100% recoverable?</h2>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.IsHundredPercentRecoverable)">
+                @Html.Gds().ValidationMessageFor(model => model.IsHundredPercentRecoverable)
+                <fieldset>
+                    <label class="block-label" for="rdoYes" data-target="yes-message">
+                        @Html.RadioButtonFor(m => m.IsHundredPercentRecoverable, true, new { id = "rdoYes" })
+                        Yes
+                    </label>
+                    <label class="block-label" for="rdoNo" data-target="on-no-display">
+                        @Html.RadioButtonFor(m => m.IsHundredPercentRecoverable, false, new { id = "rdoNo" })
+                        No
+                    </label>
+                </fieldset>
+                @{
+    string result;
+
+    if (Model.IsHundredPercentRecoverable.HasValue)
+    {
+        if (Model.IsHundredPercentRecoverable.Value)
+        {
+            result = "js-hidden";
+        }
+        else
+        {
+            result = String.Empty;
+        }
+    }
+    else
+    {
+        result = "js-hidden";
+    }
+                }
+                <div class="panel-indent @result" id="on-no-display">
+
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.PercentageRecoverable)">
+                        @Html.Gds().LabelFor(m => m.PercentageRecoverable, false)
+                        @Html.Gds().ValidationMessageFor(m => m.PercentageRecoverable)
+                        @Html.TextBoxFor(m => m.PercentageRecoverable)
+                    </div>
+
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.MethodOfDisposal)">
+                        @Html.Gds().LabelFor(m => m.MethodOfDisposal, false)
+                        @Html.Gds().ValidationMessageFor(m => m.MethodOfDisposal)
+                        @Html.TextAreaFor(m => m.MethodOfDisposal, new { @style = "width: 100%; height: 200px" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <p>
+            <button class="button" type="submit">Continue</button>
+        </p>
+    </div>
 }
 
 @section scripts

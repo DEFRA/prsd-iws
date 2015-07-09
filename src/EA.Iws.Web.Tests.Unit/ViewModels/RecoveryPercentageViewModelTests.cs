@@ -29,21 +29,6 @@
         }
 
         [Fact]
-        public async Task IsNotProvidedByImporter_IsHundredPercentRecoverableIsFalse_PercentageRecoverableIsHundred_ValidationError()
-        {
-            var viewModel = new RecoveryPercentageViewModel();
-            viewModel.IsProvidedByImporter = false;
-            viewModel.IsHundredPercentRecoverable = false;
-            viewModel.PercentageRecoverable = 100;
-            viewModel.MethodOfDisposal = MethodOfDisposal;
-
-            var controller = GetMockRecoveryInfoController(viewModel);
-            var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
-
-            Assert.False(result.ViewData.ModelState.IsValid);
-        }
-
-        [Fact]
         public async Task IsProvidedByImporter_IsHundredPercentRecoverableIsFalse_PercentageRecoverableIsNull_ValidationError()
         {
             var viewModel = new RecoveryPercentageViewModel();

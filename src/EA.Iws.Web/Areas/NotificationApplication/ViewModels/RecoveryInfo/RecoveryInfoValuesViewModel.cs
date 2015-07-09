@@ -71,6 +71,20 @@
             DisposalUnit = RadioButtonStringCollectionOptionalViewModel.CreateFromEnum<RecoveryInfoUnits>();
         }
 
+        public RecoveryInfoValuesViewModel(RecoveryInfoData recoveryInfoData)
+        {
+            EstimatedUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<RecoveryInfoUnits>();
+            CostUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<RecoveryInfoUnits>();
+            DisposalUnit = RadioButtonStringCollectionOptionalViewModel.CreateFromEnum<RecoveryInfoUnits>();
+
+            EstimatedAmount = recoveryInfoData.EstimatedAmount;
+            CostAmount = recoveryInfoData.CostAmount;
+            DisposalAmount = recoveryInfoData.DisposalAmount;
+            EstimatedUnit.SelectedValue = recoveryInfoData.EstimatedUnit != null ? EnumHelper.GetDisplayName(recoveryInfoData.EstimatedUnit) : null;
+            CostUnit.SelectedValue = recoveryInfoData.CostUnit != null ? EnumHelper.GetDisplayName(recoveryInfoData.CostUnit) : null;
+            DisposalUnit.SelectedValue = recoveryInfoData.DisposalUnit != null ? EnumHelper.GetDisplayName(recoveryInfoData.DisposalUnit) : null;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = new List<ValidationResult>();

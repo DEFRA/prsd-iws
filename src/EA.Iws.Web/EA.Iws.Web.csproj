@@ -437,7 +437,6 @@
     <Content Include="Areas\NotificationApplication\Views\WasteCodes\UnNumber.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryPercentage.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\_RecoveryPercentage.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\_CountryOnly.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\_AllDetails.cshtml" />

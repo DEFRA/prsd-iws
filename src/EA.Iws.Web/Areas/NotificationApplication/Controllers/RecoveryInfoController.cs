@@ -4,10 +4,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.RecoveryInfo;
     using Infrastructure;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
+    using Requests.RecoveryInfo;
     using ViewModels.RecoveryInfo;
 
     public class RecoveryInfoController : Controller
@@ -24,8 +26,7 @@
         {
             using (var client = apiClient())
             {
-                var recoveryPercentageData =
-                    await client.SendAsync(User.GetAccessToken(), new GetRecoveryPercentageData(id));
+                var recoveryPercentageData = await client.SendAsync(User.GetAccessToken(), new GetRecoveryPercentageData(id));
 
                 var model = new RecoveryPercentageViewModel(recoveryPercentageData);
 
@@ -46,8 +47,13 @@
             {
                 try
                 {
-                    await
-                        client.SendAsync(User.GetAccessToken(), model.ToRequest());
+                    if (model.IsHundredPercentRecoverable.GetValueOrDefault())
+                    {
+                        model.MethodOfDisposal = null;
+                        model.PercentageRecoverable = null;
+                    }
+
+                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
                     if (model.IsProvidedByImporter)
                     {
@@ -70,14 +76,19 @@
         }
 
         [HttpGet]
-        public ActionResult RecoveryValues(Guid id, bool isDisposal)
+        public async Task<ActionResult> RecoveryValues(Guid id, bool isDisposal)
         {
-            var model = new RecoveryInfoValuesViewModel
+            using (var client = apiClient())
             {
-                NotificationId = id,
-                IsDisposal = isDisposal
-            };
-            return View(model);
+                var recoveryValuesData = await client.SendAsync(User.GetAccessToken(), new GetRecoveryValuesData(id)) ?? new RecoveryInfoData();
+
+                var model = new RecoveryInfoValuesViewModel(recoveryValuesData);
+
+                model.NotificationId = id;
+                model.IsDisposal = isDisposal;
+
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -93,6 +104,12 @@
             {
                 try
                 {
+                    if (!model.IsDisposal)
+                    {
+                        model.DisposalAmount = null;
+                        model.DisposalUnit = null;
+                    }
+
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
                     return RedirectToAction("Index", "Home");
                 }
