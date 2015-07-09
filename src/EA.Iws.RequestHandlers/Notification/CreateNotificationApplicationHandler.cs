@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System;
-    using System.Text;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
@@ -10,27 +9,58 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using CompetentAuthority = Core.Notification.CompetentAuthority;
-    using NotificationType = Core.Shared.NotificationType;
 
     internal class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
     {
-        private const string NotificationNumberSequenceFormat = "[Notification].[{0}NotificationNumber]";
-
         private readonly IwsContext context;
+        private readonly INotificationNumberGenerator notificationNumberGenerator;
         private readonly IUserContext userContext;
 
-        public CreateNotificationApplicationHandler(IwsContext context, IUserContext userContext)
+        public CreateNotificationApplicationHandler(IwsContext context, IUserContext userContext,
+            INotificationNumberGenerator notificationNumberGenerator)
         {
             this.context = context;
             this.userContext = userContext;
+            this.notificationNumberGenerator = notificationNumberGenerator;
         }
 
         public async Task<Guid> HandleAsync(CreateNotificationApplication command)
         {
-            UKCompetentAuthority authority;
-            Domain.Notification.NotificationType notificationType;
+            var authority = GetUkCompetentAuthority(command.CompetentAuthority);
+            var notificationType = GetNotificationType(command.NotificationType);
 
-            switch (command.CompetentAuthority)
+            var notificationNumber = await notificationNumberGenerator.GetNextNotificationNumber(authority);
+            var notification = new NotificationApplication(userContext.UserId, notificationType, authority,
+                notificationNumber);
+
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            return notification.Id;
+        }
+
+        private static NotificationType GetNotificationType(Core.Shared.NotificationType notificationType)
+        {
+            NotificationType type;
+            switch (notificationType)
+            {
+                case Core.Shared.NotificationType.Recovery:
+                    type = NotificationType.Recovery;
+                    break;
+                case Core.Shared.NotificationType.Disposal:
+                    type = NotificationType.Disposal;
+                    break;
+                default:
+                    throw new InvalidOperationException(string.Format("Unknown notification type: {0}",
+                        notificationType));
+            }
+            return type;
+        }
+
+        private static UKCompetentAuthority GetUkCompetentAuthority(CompetentAuthority competentAuthority)
+        {
+            UKCompetentAuthority authority;
+            switch (competentAuthority)
             {
                 case CompetentAuthority.England:
                     authority = UKCompetentAuthority.England;
@@ -45,39 +75,10 @@
                     authority = UKCompetentAuthority.Wales;
                     break;
                 default:
-                    throw new InvalidOperationException(string.Format("Unknown competent authority: {0}", command.CompetentAuthority));
+                    throw new InvalidOperationException(string.Format("Unknown competent authority: {0}",
+                        competentAuthority));
             }
-
-            switch (command.NotificationType)
-            {
-                case NotificationType.Recovery:
-                    notificationType = Domain.Notification.NotificationType.Recovery;
-                    break;
-                case NotificationType.Disposal:
-                    notificationType = Domain.Notification.NotificationType.Disposal;
-                    break;
-                default:
-                    throw new InvalidOperationException(string.Format("Unknown notification type: {0}", command.NotificationType));
-            }
-
-            var notificationNumber = await GetNextNotificationNumberAsync(authority);
-            var notification = new NotificationApplication(userContext.UserId, notificationType, authority, notificationNumber);
-            context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
-            return notification.Id;
-        }
-
-        private async Task<int> GetNextNotificationNumberAsync(UKCompetentAuthority authority)
-        {
-            return await context.Database.SqlQuery<int>(CreateSqlQuery(authority)).SingleAsync();
-        }
-
-        private static string CreateSqlQuery(UKCompetentAuthority competentAuthority)
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("SELECT NEXT VALUE FOR ");
-            stringBuilder.AppendFormat(NotificationNumberSequenceFormat, competentAuthority.ShortName);
-            return stringBuilder.ToString();
+            return authority;
         }
     }
 }

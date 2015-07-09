@@ -33,7 +33,7 @@
                 NotificationWithShipmentInfo()
             });
 
-            var pricingStructures = dbSetHelper.GetAsyncEnabledDbSet(new PricingStructure[]
+            var pricingStructures = dbSetHelper.GetAsyncEnabledDbSet(new[]
             {
                 PricingStructureAll1000()
             });
@@ -41,7 +41,7 @@
             A.CallTo(() => context.PricingStructures).Returns(pricingStructures);
             A.CallTo(() => context.NotificationApplications).Returns(notifications);
 
-            handler = new GetNotificationChargeHandler(context);
+            handler = new GetNotificationChargeHandler(new NotificationChargeCalculator(context));
 
             SystemTime.Freeze(new DateTime(2015, 7, 1));
         }

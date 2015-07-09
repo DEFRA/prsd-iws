@@ -2,6 +2,8 @@
 {
     using Autofac;
     using Copy;
+    using Domain.Notification;
+    using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
     using Prsd.Core.Mediator;
@@ -29,6 +31,8 @@
                 .AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
+            builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
+            builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
         }
     }
 }

@@ -134,6 +134,8 @@
     <Compile Include="Notification\GetReasonForExportHandler.cs" />
     <Compile Include="Notification\GetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />
+    <Compile Include="Notification\NotificationChargeCalculator.cs" />
+    <Compile Include="Notification\NotificationNumberGenerator.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Notification\SetReasonForExportHandler.cs" />
     <Compile Include="Notification\SetSpecialHandlingHandler.cs" />
