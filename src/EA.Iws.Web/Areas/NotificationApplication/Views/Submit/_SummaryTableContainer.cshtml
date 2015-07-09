@@ -1,0 +1,42 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+<div class="column-two-thirds" id="submit-overview-area">
+    <header>
+        <hgroup>
+            <h1 class="heading-large">Notification overview</h1>
+        </hgroup>
+    </header>
+    <hr/>
+
+    <button class="link-submit js-visible" type="button" id="expand-contract" style="float: right;">Expand all +</button>
+
+    <div>
+        @Html.Partial("_OrganisationsInvolved", Model)
+    </div>
+
+    <div>
+        @Html.Partial("_RecoveryOperation", Model)
+    </div>
+
+    <div>
+        @Html.Partial("_Transportation", Model)
+    </div>
+
+    @if (Model.StateOfExportData != null && Model.StateOfImportData != null)
+    {
+        <div>
+            @Html.Partial("_Journey", Model)
+        </div>
+    }
+
+    <div>
+        @Html.Partial("_AmountsAndDates", Model)
+    </div>
+
+    <div>
+        @Html.Partial("_ClassifyYourWaste", Model)
+    </div>
+
+    <div>
+        @Html.Partial("_WasteRecovery", Model)
+    </div>
+</div>

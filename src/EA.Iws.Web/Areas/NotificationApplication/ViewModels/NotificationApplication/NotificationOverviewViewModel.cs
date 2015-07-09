@@ -42,7 +42,7 @@
 
         public string ReasonForExport { get; set; }
 
-        public List<string> CariersCompanyNames { get; set; }
+        public List<string> CarriersCompanyNames { get; set; }
 
         public List<MeansOfTransport> MeanOfTransport { get; set; }
 
@@ -102,7 +102,7 @@
             OperationCodes = notificationInfo.OperationCodes.OrderBy(c => c.Value).Select(c => c.Code).ToList();
             TechnologyEmployed = notificationInfo.TechnologyEmployed.AnnexProvided ? "The details will be provided in a separate document" : notificationInfo.TechnologyEmployed.Details;
             ReasonForExport = notificationInfo.ReasonForExport;
-            CariersCompanyNames = notificationInfo.CariersCompanyNames;
+            CarriersCompanyNames = notificationInfo.CariersCompanyNames;
             MeanOfTransport = notificationInfo.MeanOfTransport;
             PackagingData = notificationInfo.PackagingData;
             SpecialHandlingDetails = notificationInfo.SpecialHandlingDetails;

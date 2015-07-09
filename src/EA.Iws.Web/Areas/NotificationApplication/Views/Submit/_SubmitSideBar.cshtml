@@ -1,0 +1,28 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Submit.SubmitSideBarViewModel
+
+<div class="column-third" id="submit-side-bar">
+    
+    <h3 class="heading-medium">Summary</h3>
+
+    <p>@Html.DisplayFor(m => m.CompetentAuthorityName)</p>
+    <p class="lede" style="font-weight: 700;">@Html.DisplayFor(m => m.NotificationNumber)</p>
+    <p class="font-xsmall"><span class="text-fade">Created:</span> @Html.Raw(Model.CreatedDate.ToString("dd MMMM yyyy"))</p>
+
+    <h3 class="heading-medium squash-margin">Overall status</h3>
+    <span>@Html.DisplayFor(m => m.Status)</span>
+
+    <h3 class="heading-medium squash-margin">Notification charge</h3>
+    <p id="charge">£@Html.DisplayFor(m => m.Charge)</p>
+
+    @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", null, new { id = Model.NotificationId })
+
+    <p><span class="line">Portable document format (PDF)</span>
+    Approximate size (3356k)</p>
+    <p>If you do not have PDF viewer you can download it from adobe</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <button class="button" type="submit">Submit</button>
+    }
+</div>

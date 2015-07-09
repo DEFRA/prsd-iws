@@ -1,0 +1,185 @@
+﻿@using EA.Iws.Core.WasteCodes
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+@{
+    var id = Model.NotificationId;
+    var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
+        ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
+        EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd); 
+}
+
+<h2 class="heading-medium">Classify your waste</h2>
+<hr />
+<div>
+    <details>
+        <summary>
+            Chemical composition
+            <span class="edit-link-container">@Html.ActionLink("Edit", "ChemicalComposition", "WasteType", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                <dl>
+                    <dt>Type:</dt>
+                    <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</dd>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionName))
+                    {
+                        <dt>Name:</dt>
+                        <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionName)</dd>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription))
+                    {
+                        <dt>Description:</dt>
+                        <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionDescription)</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </details>
+    <details>
+        <summary>
+            Process of generation
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "WasteGenerationProcess", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                    <p>@Html.DisplayFor(m => m.ProcessOfGeneration)</p>
+            </div>
+        </div>
+    </details>
+    <details>
+        <summary>
+            Physical characteristics
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PhysicalCharacteristics", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                <ul>
+                    @for (int i = 0; i < Model.PhysicalCharacteristics.Count; i++)
+                    {
+                        <li>@Html.DisplayFor(m => m.PhysicalCharacteristics[i])</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </details>
+    <details>
+        <summary>
+            Waste codes
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code Type</th>
+                            <th>Codes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@baselOrOecdType</td>
+                            <td>
+                                @foreach (var c in Model.BaselOecdCode)
+                                {
+                                    @c.Code
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Ewc)</td>
+                            <td>
+                                @foreach (var c in Model.EwcCodes)
+                                {
+                                    @c.Code
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.ExportCode)</td>
+                            <td>
+                                @foreach (var c in Model.NationExportCode)
+                                {
+                                    @c.CustomCode
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.ImportCode)</td>
+                            <td>
+                                @foreach (var c in Model.NationImportCode)
+                                {
+                                    @c.CustomCode
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.OtherCode)</td>
+                            <td>
+                                @foreach (var c in Model.OtherCodes)
+                                {
+                                    @c.CustomCode
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Y)</td>
+                            <td>
+                                @foreach (var c in Model.YCodes)
+                                {
+                                    @c.Code
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.H)</td>
+                            <td>
+                                @foreach (var c in Model.HCodes)
+                                {
+                                    @c.Code
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Un)</td>
+                            <td>
+                                @foreach (var c in Model.UnClass)
+                                {
+                                    @c.Code
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.UnNumber)</td>
+                            <td>
+                                @foreach (var c in Model.UnNumber)
+                                {
+                                    @c.Code
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.CustomsCode)</td>
+                            <td>
+                                @foreach (var c in @Model.CustomCodes)
+                                {
+                                    @c.CustomCode
+                                    <br />
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+</div>

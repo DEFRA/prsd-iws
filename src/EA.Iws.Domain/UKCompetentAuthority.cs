@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain
 {
+    using System;
     using Prsd.Core.Domain;
 
     public class UKCompetentAuthority : Enumeration
@@ -28,6 +29,28 @@
         public string ShortName
         {
             get { return shortName; }
+        }
+
+        public Core.Notification.CompetentAuthority AsCompetentAuthority()
+        {
+            if (Value == England.Value)
+            {
+                return Core.Notification.CompetentAuthority.England;
+            }
+            if (Value == Scotland.Value)
+            {
+                return Core.Notification.CompetentAuthority.Scotland;
+            }
+            if (Value == NorthernIreland.Value)
+            {
+                return Core.Notification.CompetentAuthority.NorthernIreland;
+            }
+            if (Value == Wales.Value)
+            {
+                return Core.Notification.CompetentAuthority.Wales;
+            }
+
+            throw new InvalidOperationException(string.Format("Unknown competent authority {0}", this.DisplayName));
         }
     }
 }

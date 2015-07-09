@@ -180,6 +180,7 @@
     <Compile Include="StateOfExport\SetStateOfImportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandler.cs" />
+    <Compile Include="Submit\GetSubmitSummaryInformationHandlerForNotificationHandler.cs" />
     <Compile Include="TechnologyEmployed\GetTechnologyEmployedHandler.cs" />
     <Compile Include="TransitState\RemoveTransitStateForNotificationHandler.cs" />
     <Compile Include="TransitState\SetTransitStateForNotificationHandler.cs" />

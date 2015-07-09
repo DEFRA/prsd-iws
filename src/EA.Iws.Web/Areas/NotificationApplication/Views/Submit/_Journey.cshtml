@@ -1,0 +1,128 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+@{
+    var id = Model.NotificationId;
+}
+
+<h2 class="heading-medium">The journey</h2>
+<hr />
+<div>
+    <details>
+        <summary>
+            Transport route - export
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfExport", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th>Competent authority</th>
+                            <th>Entry point</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(m => m.StateOfExportData.Country.Name)</td>
+                            <td>@Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)</td>
+                            <td>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            Transport route - transits
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Summary", "TransportRoute", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th>Competent Authority</th>
+                            <th>Entry point</th>
+                            <th>Exit point</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ts in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
+                        {
+                            <tr>
+                                <td>@ts.Country.Name</td>
+                                <td>@ts.CompetentAuthority.Name</td>
+                                <td>@ts.EntryPoint.Name</td>
+                                <td>@ts.ExitPoint.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            Transport route - import
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfImport", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th>Competent authority</th>
+                            <th>Entry point</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</td>
+                            <td>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</td>
+                            <td>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name) || !string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+    {
+        <details>
+            <summary>
+                Custom office
+                <span class="edit-link-container">@Html.ActionLink("Edit", "List", "CustomsOffice", new { id }, null)</span>
+            </summary>
+            <div class="expanded-details">
+                <div class="panel-indent">
+                    <dl>
+                        @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name))
+                        {
+                            <dt>Exit customs office name:</dt>
+                            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Name)</dd>
+                            <dt>Exit customs office address:</dt>
+                            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Address)</dd>
+                            <dt>Exit customs office country:</dt>
+                            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Country.Name)</dd>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+                        {
+                            <dt>Entry customs office name:</dt>
+                            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Name)</dd>
+                            <dt>Entry customs office address:</dt>
+                            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Address)</dd>
+                            <dt>Entry customs office country:</dt>
+                            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Country.Name)</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </details>
+    }
+</div>

@@ -123,6 +123,7 @@
     <Compile Include="StateOfExport\SetStateOfExportForNotification.cs" />
     <Compile Include="StateOfExport\StateOfImportWithTransportRouteData.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotification.cs" />
+    <Compile Include="Submit\GetSubmitSummaryInformationForNotification.cs" />
     <Compile Include="TechnologyEmployed\GetTechnologyEmployed.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationId.cs" />
     <Compile Include="StateOfImport\StateOfImportWithTransportRouteData.cs" />

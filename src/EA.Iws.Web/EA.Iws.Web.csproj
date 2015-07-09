@@ -217,6 +217,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\NotificationApplication\Views\Submit\_RecoveryOperation.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_Journey.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_ClassifyYourWaste.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_WasteRecovery.cshtml" />
+    <None Include="Areas\NotificationApplication\Views\Submit\_OrganisationsInvolved.cshtml" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -458,6 +463,10 @@
     <Content Include="Areas\NotificationApplication\Views\Home\_Exporter.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_Producer.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_Importer.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_SubmitSideBar.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_Transportation.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_AmountsAndDates.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_Facility.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_PreConsented.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_RecoveryDisposal.cshtml" />
@@ -613,6 +622,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\NavigationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmittedViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\Submit\SubmitSideBarViewModel.cs" />
+    <None Include="Areas\NotificationApplication\Views\Submit\_SummaryTableContainer.cshtml" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />
@@ -649,6 +661,7 @@
     <Compile Include="Infrastructure\Navigation.cs" />
     <Compile Include="Infrastructure\NavigationExtensions.cs" />
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
+    <Compile Include="Mappings\SubmitSideBarMap.cs" />
     <Compile Include="Mappings\TransitStateWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\StateOfImportWithTransportRouteDataMap.cs" />
     <Compile Include="Services\EmailService.cs" />

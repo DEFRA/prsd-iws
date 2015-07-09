@@ -55,6 +55,7 @@
     <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />
     <Compile Include="Notification\RecoveryPercentageData.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
+    <Compile Include="Notification\Status.cs" />
     <Compile Include="OperationCodes\DisposalCode.cs" />
     <Compile Include="OperationCodes\OperationCodeData.cs" />
     <Compile Include="OperationCodes\RecoveryCode.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Shared\CountryData.cs" />
     <Compile Include="Shared\NotificationType.cs" />
+    <Compile Include="Notification\SubmitSummaryData.cs" />
     <Compile Include="Shared\TradeDirection.cs" />
     <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />

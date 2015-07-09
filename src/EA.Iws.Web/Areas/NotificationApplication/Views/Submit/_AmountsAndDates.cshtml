@@ -1,0 +1,40 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+@{
+    var id = Model.NotificationId;
+}
+
+<h2 class="heading-medium">Amount and dates</h2>
+<hr />
+<div>
+    <details>
+        <summary>
+            Intended shipments
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Shipment", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.ShipmentData.NumberOfShipments > 0)
+                {
+                    <table>
+                        <tr>
+                            <td>Number of shipments</td>
+                            <td>@Model.ShipmentData.NumberOfShipments</td>
+                        </tr>
+                        <tr>
+                            <td>Quantity</td>
+                            <td>@(Model.ShipmentData.Quantity.ToString("0.00") + " " + Model.ShipmentData.Units)</td>
+                        </tr>
+                        <tr>
+                            <td>First departure date</td>
+                            <td>@Html.Display(Model.ShipmentData.FirstDate.ToShortDateString())</td>
+                        </tr>
+                        <tr>
+                            <td>Last departure date</td>
+                            <td>@Html.Display(Model.ShipmentData.LastDate.ToShortDateString())</td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </div>
+    </details>
+</div>

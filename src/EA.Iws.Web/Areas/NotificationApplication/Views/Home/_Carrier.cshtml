@@ -2,7 +2,7 @@
 
 @if (Model.Progress.IsCarrierCompleted)
 {
-    if (Model.CariersCompanyNames.Count > 1)
+    if (Model.CarriersCompanyNames.Count > 1)
     {
         <details>
             <summary>
@@ -10,7 +10,7 @@
             </summary>
 
             <div class="expanded-details">
-                @foreach (var pn in Model.CariersCompanyNames)
+                @foreach (var pn in Model.CarriersCompanyNames)
                 {
                     @pn<br />
                 }
@@ -20,6 +20,6 @@
     else
     {
         <div class="list-heading-no-detail column-third">Intended carrier</div>
-        <div> @Model.CariersCompanyNames[0]<br /></div>
+        <div> @Model.CarriersCompanyNames[0]<br /></div>
     }
 }

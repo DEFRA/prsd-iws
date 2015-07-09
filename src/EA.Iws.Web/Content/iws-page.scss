@@ -464,9 +464,9 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
         font-size: $font-size;
     }
 
-    &.in-table{
-    font-weight: bold;
-    @include bold-16();
+    &.in-table {
+        font-weight: bold;
+        @include bold-16();
     }
 
     text-decoration: underline;
@@ -527,11 +527,11 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     margin-top: 30px !important;
 }
 
-.margin-bottom-15{
+.margin-bottom-15 {
     margin-bottom: 15px !important;
 }
 
-.margin-top-15{
+.margin-top-15 {
     margin-top: 15px !important;
 }
 
@@ -546,6 +546,83 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     border-top-color: #005ea5;
 }
 
-.wastecode-block{
+.wastecode-block {
     margin-bottom: 50px;
+}
+
+#submit-side-bar {
+    h3:first-of-type {
+        border-bottom: 10px solid $link-colour;
+    }
+
+    p {
+        margin-bottom: 0.3em;
+    }
+
+    .squash-margin {
+        margin-top: 1em;
+        margin-bottom: 0;
+    }
+
+    #charge {
+        font-size: 40px;
+        font-weight: 700;
+        margin-top: 0;
+    }
+
+    .line {
+        display: block;
+    }
+
+    .text-fade {
+        color: $secondary-text-colour;
+    }
+}
+
+#submit-overview-area {
+
+    details {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #BFC1C3;
+
+        .expanded-details{
+            padding-bottom: 10px;
+        }
+
+        .panel-indent {
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        dl dt {
+            margin: 15px 0 3px 0;
+            color: $secondary-text-colour;
+        }
+
+        .definition-indent {
+            margin-left: 10px;
+        }
+
+        dt.definition-indent {
+            margin-left: 10px;
+            margin-top: 7px;
+        }
+
+        > summary {
+            display: block;
+
+            > .edit-link-container {
+                float: right;
+            }
+        }
+    }
+
+    hr {
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        display: inline-block;
+    }
 }
