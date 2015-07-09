@@ -21,6 +21,8 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
     @Html.Gds().LabelFor(m => m.BusinessType)
+    @{if (ViewBag.Title != "Exporter - notifier")
+    {<span class="form-hint">If none of these options apply, please select other and add details.</span>}}
     @Html.Gds().ValidationMessageFor(m => m.BusinessType)
     <label class="block-label" data-target="sole-trader-number">
         @Html.RadioButtonFor(m => m.BusinessType, "SoleTrader", new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.SoleTrader)
