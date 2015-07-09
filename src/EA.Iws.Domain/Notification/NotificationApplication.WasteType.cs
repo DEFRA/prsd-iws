@@ -48,6 +48,8 @@
         {
             if (WasteType != null && WasteType.WasteCompositions != null)
             {
+                WasteType.OptionalInformation = null;
+                WasteType.EnergyInformation = null;
                 WasteType.WoodTypeDescription = null;
                 WasteType.ClearWasteCompositions();
             }
