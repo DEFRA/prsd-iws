@@ -12,7 +12,6 @@
     using Requests.Facilities;
     using Requests.Importer;
     using Requests.Notification;
-    using Requests.Shared;
     using ViewModels.Facility;
     using Web.ViewModels.Shared;
 
@@ -284,12 +283,17 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Remove(Guid id, Guid entityId, bool isActualSiteOfTreatment, int facilitiesCount, string facilityType)
+        public async Task<ActionResult> Remove(Guid id, Guid entityId, string facilityType)
         {
             using (var client = apiClient())
             {
                 try
                 {
+                    var response = await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
+                    var facilities = response.ToList();
+                    int facilitiesCount = facilities.Count;
+                    bool isActualSiteOfTreatment = facilities.Single(x => x.Id == entityId).IsActualSiteOfTreatment;
+
                     if (isActualSiteOfTreatment && facilitiesCount > 1)
                     {
                         TempData["errorRemoveFacility"] = String.Format("You have chosen to remove the actual site. " +

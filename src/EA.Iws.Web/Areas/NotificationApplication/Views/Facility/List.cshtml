@@ -3,7 +3,7 @@
     ViewBag.Title = "List Facilities";
 }
 
-@using (Html.BeginForm(actionName: "List", controllerName: "Facility", method: FormMethod.Post))
+@using (Html.BeginForm(actionName: "List", controllerName: "Facility", method: FormMethod.Post, htmlAttributes: new { id = "frm" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -51,9 +51,8 @@
                                     <div class="column-quarter">
                                         @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id }, null)
                                         <br />
-                                        @Html.ActionLink("Remove", "Remove", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id,
-                                                         isActualSiteOfTreatment = Model.FacilityData[i].IsActualSiteOfTreatment, facilitiesCount = Model.FacilityData.Count,
-                                                         facilityType = Model.NotificationType }, null)
+                                        @Html.ActionLink("Remove", "Remove", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, 
+                                                        facilityType = Model.NotificationType }, null)
                                     </div>
                                     <div class="column-quarter">
                                         Actual site:
@@ -88,6 +87,13 @@
 {
     <script type="text/javascript">
         $(function () {
+            $("[name='SelectedValue']").change(function () {
+                var form = $("#frm");
+                var url = form.attr("action");
+                var formData = form.serialize();
+                $.post(url, formData, null);
+            });
+
             // When the background is clicked, hide the background
             $("#btnYes").click(function (e) {
             });
