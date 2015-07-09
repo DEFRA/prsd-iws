@@ -609,6 +609,7 @@
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\NavigationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmittedViewModel.cs" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
