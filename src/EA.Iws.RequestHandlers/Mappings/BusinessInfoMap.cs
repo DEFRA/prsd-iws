@@ -23,22 +23,22 @@
 
         private BusinessType GetBusinessType(string type)
         {
-            if (type == Domain.BusinessType.LimitedCompany.DisplayName)
+            if (type.Equals(Domain.BusinessType.LimitedCompany.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.LimitedCompany;
             }
 
-            if (type == Domain.BusinessType.SoleTrader.DisplayName)
+            if (type.Equals(Domain.BusinessType.SoleTrader.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.SoleTrader;
             }
 
-            if (type == Domain.BusinessType.Partnership.DisplayName)
+            if (type.Equals(Domain.BusinessType.Partnership.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.Partnership;
             }
 
-            if (type == Domain.BusinessType.Other.DisplayName)
+            if (type.Equals(Domain.BusinessType.Other.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.Other;
             }

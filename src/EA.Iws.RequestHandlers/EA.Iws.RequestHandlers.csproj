@@ -87,6 +87,7 @@
     <Compile Include="Facilities\GetFacilityForNotificationHandler.cs" />
     <Compile Include="Facilities\SetActualSiteOfTreatmentHandler.cs" />
     <Compile Include="Facilities\UpdateFacilityForNotificationHandler.cs" />
+    <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocumentHandler.cs" />
     <Compile Include="Importers\GetImporterByNotificationIdHandler.cs" />
     <Compile Include="Mappings\CustomsOfficeExitMap.cs" />
     <Compile Include="Mappings\CustomsOfficeEntryMap.cs" />

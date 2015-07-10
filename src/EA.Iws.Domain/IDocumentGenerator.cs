@@ -5,5 +5,7 @@
     public interface IDocumentGenerator
     {
         byte[] GenerateNotificationDocument(NotificationApplication notification);
+
+        byte[] GenerateFinancialGuaranteeDocument();
     }
 }

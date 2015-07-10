@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using DocumentFormat.OpenXml.Packaging;
@@ -39,6 +40,14 @@
                     MergeFieldLocator.RemoveDataSourceSettingFromMergedDocument(document);
                 }
 
+                return memoryStream.ToArray();
+            }
+        }
+
+        public byte[] GenerateFinancialGuaranteeDocument()
+        {
+            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("FinancialGuaranteeForm.pdf"))
+            {
                 return memoryStream.ToArray();
             }
         }

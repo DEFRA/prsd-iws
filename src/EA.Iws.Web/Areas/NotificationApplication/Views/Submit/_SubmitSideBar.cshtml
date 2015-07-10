@@ -15,6 +15,7 @@
     <p id="charge">£@Html.DisplayFor(m => m.Charge)</p>
 
     @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", null, new { id = Model.NotificationId })
+    @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
 
     <p><span class="line">Portable document format (PDF)</span>
     Approximate size (3356k)</p>

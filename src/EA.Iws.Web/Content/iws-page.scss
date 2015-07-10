@@ -555,6 +555,11 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
         border-bottom: 10px solid $link-colour;
     }
 
+    a{
+        display: block;
+        margin-bottom: 5px;
+    }
+
     p {
         margin-bottom: 0.3em;
     }

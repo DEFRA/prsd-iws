@@ -26,32 +26,40 @@
 
     <div class="form-group">
         <h2 class="heading-small">Step 3: Pay the notification charge</h2>
-            <table>
-                @foreach (var bankInfo in Model.CompetentAuthorityBacsInfo)
-                {
-                    <tr>
-                        <td>@bankInfo.Key</td>
-                        <td>@bankInfo.Value</td>
-                    </tr>
-                }
-            </table>
-        </div>
+        <table>
+            @foreach (var bankInfo in Model.CompetentAuthorityBacsInfo)
+            {
+                <tr>
+                    <td>@bankInfo.Key</td>
+                    <td>@bankInfo.Value</td>
+                </tr>
+            }
+        </table>
+    </div>
+
     <div class="form-group">
-        <h2 class="heading-small">Step 4: Post the notification package to the UKCA</h2>
+        <h2 class="heading-small">Step 4: Complete the Financial Guarantee form</h2>
+        <p>Download and complete the Financial Guarantee template and send to the competent authority with the notification package.</p>
+        @Html.ActionLink("Print Financial Guarantee form", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
+        <p>An approved Financial Guarantee must be in place before any shipments can be made.</p>
+    </div>
+
+    <div class="form-group">
+        <h2 class="heading-small">Step 5: Post the notification package to the UKCA</h2>
         <p>The package must include the signed notification document, the movement document, any supplementary information that was declared in the notification application and proof of payment.</p>
         <div class="form-group">
             @foreach (var contactInfo in Model.CompetentAuthorityContactInfo)
             {
-                @contactInfo<br />
+                @contactInfo<br/>
             }
         </div>
 
         <p>
             Assessment of this notification will start when both the notification package and the correct charge have been received by the UK competent authority performing the assessment.
         </p>
-
     </div>
+    
     <div class="form-group">
-        @Html.ActionLink("Go to My account", "Home", "Applicant", new { id = Model.Id, area = string.Empty }, new {@class = "button"})
+        @Html.ActionLink("Go to My account", "Home", "Applicant", new { id = Model.Id, area = string.Empty }, new { @class = "button" })
     </div>
 }
