@@ -136,3 +136,26 @@
         }
     }
 }
+
+.charge-display {
+    background-color: $turquoise;
+    color: $white;
+    padding: em(10) em(15) em(5) em(15);
+    margin: $gutter*2 0 $gutter*2 0;
+
+    &:after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+
+    .price {
+        float: left;
+        width: 30%
+    }
+
+    .detail {
+        float: left;
+        width: 70%;
+    }
+}

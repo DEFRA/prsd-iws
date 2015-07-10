@@ -1,10 +1,17 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
-    
+
 @if (Model.NotificationCharge != 0)
 {
-    <h2 class="heading-medium">Notification charge</h2>
-    
-    <p>
-        £@Model.NotificationCharge
-    </p>
+    <div class="charge-display">
+        <p class="bold-medium">Predicted notification charge:</p>
+        <div class="price">
+            <p class="bold-xlarge">£@Model.NotificationCharge</p>
+        </div>
+
+        <div class="detail">
+            <p>
+                This is the predicted charge for your notification based on the information you have provided. This may change if you edit any information prior to submission.
+            </p>
+        </div>
+    </div>
 }
