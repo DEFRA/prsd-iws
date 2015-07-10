@@ -2,8 +2,6 @@
 
 @if (Model.Progress.IsPackagingTypesCompleted)
 {
-    if (Model.PackagingData.Count > 1)
-    {
         <details>
             <summary>
                 <span class="summary">Packaging types</span>
@@ -16,12 +14,4 @@
                 }
             </div>
         </details>
-    }
-    else
-    {
-        <div class="list-heading-no-detail column-third">Packaging type</div>
-        <div>
-            @Model.PackagingData[0]<br />
-        </div>
-    }
 }

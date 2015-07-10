@@ -8,7 +8,12 @@
         public decimal? PercentageRecoverable
         {
             get { return percentageRecoverable; }
-            private set { percentageRecoverable = decimal.Round(value ?? 0, 2, MidpointRounding.AwayFromZero); }
+            private set
+            {
+                percentageRecoverable = (value.HasValue) ? 
+                    decimal.Round(value.Value, 2, MidpointRounding.AwayFromZero)
+                    : value;
+            }
         }
         
         public bool? IsProvidedByImporter { get; private set; }
