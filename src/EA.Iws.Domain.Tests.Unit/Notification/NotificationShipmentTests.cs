@@ -304,5 +304,35 @@
 
             SystemTime.Unfreeze();
         }
+
+        [Fact]
+        public void NonPreconsentedNotificationDatesCantBeExactly12Months()
+        {
+            var notification = CreateNotificationApplication();
+
+            notification.SetPreconsentedRecoveryFacility(false);
+
+            var firstDate = new DateTime(2015, 01, 01);
+            var lastDate = new DateTime(2016, 01, 01);
+
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 0, ShipmentQuantityUnits.Kilogram);
+
+            Assert.Throws<InvalidOperationException>(addShipmentDates);
+        }
+
+        [Fact]
+        public void PreconsentedNotificationDatesCantBeExact36Months()
+        {
+            var notification = CreateNotificationApplication();
+
+            notification.SetPreconsentedRecoveryFacility(true);
+
+            var firstDate = new DateTime(2015, 01, 01);
+            var lastDate = new DateTime(2018, 01, 01);
+
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 1, ShipmentQuantityUnits.Kilogram);
+
+            Assert.Throws<InvalidOperationException>(addShipmentDates);
+        }
     }
 }

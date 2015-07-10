@@ -12,7 +12,7 @@
         public void SetShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
         {
             int monthPeriodLength = IsPreconsentedRecoveryFacility.GetValueOrDefault() ? 36 : 12;
-            if (lastDate > firstDate.AddMonths(monthPeriodLength))
+            if (lastDate >= firstDate.AddMonths(monthPeriodLength))
             {
                 throw new InvalidOperationException(
                     string.Format("The start date and end date must be within a {0} month period for this notification {1}",

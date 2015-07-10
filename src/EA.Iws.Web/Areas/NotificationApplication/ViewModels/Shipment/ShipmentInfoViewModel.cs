@@ -120,7 +120,7 @@
             }
 
             var monthPeriodLength = IsPreconsentedRecoveryFacility ? 36 : 12;
-            if (endDate > startDate.AddMonths(monthPeriodLength))
+            if (endDate >= startDate.AddMonths(monthPeriodLength))
             {
                 yield return
                     new ValidationResult(

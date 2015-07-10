@@ -159,6 +159,7 @@
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
     <Compile Include="ViewModels\RecoveryPercentageViewModelTests.cs" />
+    <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />
     <Compile Include="ViewModels\YcodeHcodeUnClassViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
