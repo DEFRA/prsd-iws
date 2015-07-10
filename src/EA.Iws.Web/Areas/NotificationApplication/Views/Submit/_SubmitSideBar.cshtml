@@ -20,7 +20,7 @@
     Approximate size (3356k)</p>
     <p>If you do not have PDF viewer you can download it from adobe</p>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Index", "Submit"))
     {
         @Html.AntiForgeryToken()
         <button class="button" type="submit">Submit</button>

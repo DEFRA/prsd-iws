@@ -12,6 +12,7 @@
     using ViewModels.NotificationApplication;
     using ViewModels.Submit;
 
+    [Authorize]
     public class SubmitController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
@@ -23,6 +24,7 @@
             this.mapper = mapper;
         }
 
+        [HttpGet]
         public ActionResult SubmitSideBar(Guid id, int charge)
         {
             using (var client = apiClient())
@@ -36,6 +38,7 @@
             }
         }
 
+        [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
@@ -48,6 +51,13 @@
                 
                 return View(model);
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Guid id, FormCollection formCollection)
+        {
+            return RedirectToAction("Disclaimer", "Home", new { id });
         }
     }
 }
