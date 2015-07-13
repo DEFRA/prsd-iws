@@ -20,7 +20,7 @@
                 {
                     <tr><td>@("Percentage recoverable material is " + Model.RecoveryPercentageData.PercentageRecoverable + "%")</td></tr>
 
-                    if (Model.RecoveryPercentageData.PercentageRecoverable < Convert.ToDecimal(100))
+                    if (Model.RecoveryPercentageData.PercentageRecoverable < 100M)
                     {
                         <tr>
                             <td>

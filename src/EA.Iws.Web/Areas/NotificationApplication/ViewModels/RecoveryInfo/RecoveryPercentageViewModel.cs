@@ -19,9 +19,18 @@
 
             if (recoveryPercentageData.PercentageRecoverable != null)
             {
-                PercentageRecoverable = recoveryPercentageData.PercentageRecoverable;
+                if (recoveryPercentageData.PercentageRecoverable == 100.00M)
+                {
+                    IsHundredPercentRecoverable = true;
+                    PercentageRecoverable = null;
+                }
+                else
+                {
+                    IsHundredPercentRecoverable = false;
+                    PercentageRecoverable = recoveryPercentageData.PercentageRecoverable;
+                }
+               
                 MethodOfDisposal = recoveryPercentageData.MethodOfDisposal;
-                IsHundredPercentRecoverable = recoveryPercentageData.PercentageRecoverable == Convert.ToDecimal(100.00);
             }
 
             if (IsProvidedByImporter)
@@ -44,7 +53,7 @@
 
             if ((bool)isHundredPercentRecoverable)
             {
-                percentage = Convert.ToDecimal(100.00);
+                percentage = 100.00M;
             }
 
             if (IsProvidedByImporter)
@@ -65,7 +74,6 @@
         public bool? IsHundredPercentRecoverable { get; set; }
 
         [Display(Name = "Enter the percentage (%) of recoverable material")]
-        [Range(0, 100.00)]
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places.")]
         public decimal? PercentageRecoverable { get; set; }
 
@@ -82,6 +90,15 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (IsHundredPercentRecoverable == false)
+            {
+                var percentageRecoverable = PercentageRecoverable.GetValueOrDefault();
+
+                if (PercentageRecoverable == null || percentageRecoverable > 99.99M || percentageRecoverable <= 0.00M)
+                {
+                    yield return new ValidationResult("The percentage (%) of recoverable material must be between 0 and 99.99", new[] { "PercentageRecoverable" });
+                }
+            }
             if (!IsProvidedByImporter)
             {
                 if (IsHundredPercentRecoverable == null)
