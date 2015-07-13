@@ -22,7 +22,7 @@
 
         public async Task<WasteTypeData> HandleAsync(GetWasteType message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
             if (notification.WasteType == null)
             {
                 return null;

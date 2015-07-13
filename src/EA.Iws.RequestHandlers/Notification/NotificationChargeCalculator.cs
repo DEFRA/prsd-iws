@@ -18,7 +18,7 @@
 
         public async Task<decimal> GetValue(Guid notificationId)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == notificationId);
+            var notification = await context.GetNotificationApplication(notificationId);
 
             if (!notification.HasShipmentInfo)
             {

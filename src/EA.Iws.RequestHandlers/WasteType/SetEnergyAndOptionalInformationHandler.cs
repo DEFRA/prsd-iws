@@ -1,23 +1,25 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
+
     internal class SetEnergyAndOptionalInformationHandler : IRequestHandler<SetEnergyAndOptionalInformation, Guid>
     {
-        private readonly IwsContext db;
-        public SetEnergyAndOptionalInformationHandler(IwsContext db)
+        private readonly IwsContext context;
+
+        public SetEnergyAndOptionalInformationHandler(IwsContext context)
         {
-            this.db = db;
+            this.context = context;
         }
+
         public async Task<Guid> HandleAsync(SetEnergyAndOptionalInformation command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
             notification.SetEnergyAndOptionalInformation(command.EnergyInformation, command.OptionalInformation);
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return notification.WasteType.Id;
         }
     }

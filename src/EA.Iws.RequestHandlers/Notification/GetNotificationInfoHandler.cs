@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Notification;
@@ -25,7 +24,7 @@
 
         public async Task<NotificationInfo> HandleAsync(GetNotificationInfo message)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await db.GetNotificationApplication(message.NotificationId);
 
             var notificationInfo = notificationInfoMap.Map(notification);
             notificationInfo.NotificationCharge = decimal.ToInt32(await notificationChargeCalculator.GetValue(message.NotificationId));

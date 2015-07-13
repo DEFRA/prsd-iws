@@ -11,20 +11,20 @@
 
     internal class SetOtherWasteCodesHandler : IRequestHandler<SetOtherWasteCodes, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
 
-        public SetOtherWasteCodesHandler(IwsContext db)
+        public SetOtherWasteCodesHandler(IwsContext context)
         {
-            this.db = db;
+            this.context = context;
         }
 
         public async Task<Guid> HandleAsync(SetOtherWasteCodes command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
             
-            var exportCode = await db.WasteCodes.SingleAsync(w => w.CodeType == CodeType.ExportCode);
-            var importCode = await db.WasteCodes.SingleAsync(w => w.CodeType == CodeType.ImportCode);
-            var otherCode = await db.WasteCodes.SingleAsync(w => w.CodeType == CodeType.OtherCode);
+            var exportCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.ExportCode);
+            var importCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.ImportCode);
+            var otherCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.OtherCode);
             
             notification.SetExportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(exportCode, command.ExportNationalCode));
             notification.SetImportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(importCode, command.ImportNationalCode));
@@ -38,7 +38,7 @@
                 notification.SetOtherCode(WasteCodeInfo.CreateCustomWasteCodeInfo(otherCode, command.OtherCode));
             }
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return notification.Id;
         }
     }

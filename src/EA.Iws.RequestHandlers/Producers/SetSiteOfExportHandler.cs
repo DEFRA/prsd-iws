@@ -17,7 +17,7 @@
 
         public async Task<Guid> HandleAsync(SetSiteOfExport command)
         {
-            var notification = await context.NotificationApplications.FindAsync(command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
             notification.SetProducerAsSiteOfExport(command.ProducerId);
 
             await context.SaveChangesAsync();

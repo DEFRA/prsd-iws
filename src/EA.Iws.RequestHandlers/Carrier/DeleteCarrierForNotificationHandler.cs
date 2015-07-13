@@ -1,7 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Carrier
 {
-    using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -18,7 +16,7 @@
 
         public async Task<bool> HandleAsync(DeleteCarrierForNotification query)
         {
-            var notification = await context.NotificationApplications.Where(n => n.Id == query.NotificationId).SingleAsync();
+            var notification = await context.GetNotificationApplication(query.NotificationId);
             notification.RemoveCarrier(query.CarrierId);
             await context.SaveChangesAsync();
             return true;

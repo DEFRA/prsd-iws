@@ -1,27 +1,27 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
+    using System;
+    using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
-    using System;
-    using System.Data.Entity;
-    using System.Threading.Tasks;
 
     internal class SetOtherWasteAdditionalInformationHandler : IRequestHandler<SetOtherWasteAdditionalInformation, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
 
-        public SetOtherWasteAdditionalInformationHandler(IwsContext db)
+        public SetOtherWasteAdditionalInformationHandler(IwsContext context)
         {
-            this.db = db;
+            this.context = context;
         }
+
         public async Task<Guid> HandleAsync(SetOtherWasteAdditionalInformation command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.AddOtherWasteTypeAdditionalInformation(command.Description, command.HasAnnex);
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return notification.WasteType.Id;
         }

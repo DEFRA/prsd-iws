@@ -19,7 +19,7 @@
 
         public async Task<Guid> HandleAsync(AddCarrierToNotification command)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             var country = await context.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
             var business = ValueObjectInitializer.CreateBusiness(command.Business);

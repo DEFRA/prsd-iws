@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Facilities
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -17,8 +16,7 @@
 
         public async Task<bool> HandleAsync(DeleteFacilityForNotification query)
         {
-            var notification =
-                await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
+            var notification = await context.GetNotificationApplication(query.NotificationId);
             notification.RemoveFacility(query.FacilityId);
             await context.SaveChangesAsync();
             return true;

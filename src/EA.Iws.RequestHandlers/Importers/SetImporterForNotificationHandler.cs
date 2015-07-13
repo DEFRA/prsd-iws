@@ -25,7 +25,7 @@
             var address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
             var contact = ValueObjectInitializer.CreateContact(message.Contact);
 
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
             notification.SetImporter(business, address, contact);
 
             await context.SaveChangesAsync();

@@ -19,7 +19,7 @@
 
         public async Task<Guid> HandleAsync(AddRecoveryInfoToNotification command)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
             RecoveryInfo recoveryInfo;
             if (command.IsDisposal)
             {

@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -17,7 +16,7 @@
 
         public async Task<string> HandleAsync(SetPreconsentedRecoveryFacility query)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
+            var notification = await context.GetNotificationApplication(query.NotificationId);
             notification.SetPreconsentedRecoveryFacility(query.IsPreconsentedRecoveryFacility);
 
             await context.SaveChangesAsync();

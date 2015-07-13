@@ -18,7 +18,7 @@
 
         public async Task<Guid> HandleAsync(SetMeansOfTransportForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
 
             notification.SetMeansOfTransport(message.MeansOfTransport);
 

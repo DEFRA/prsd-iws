@@ -11,31 +11,31 @@
 
     internal class SetWasteCodesHandler : IRequestHandler<SetWasteCodes, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
 
-        public SetWasteCodesHandler(IwsContext db)
+        public SetWasteCodesHandler(IwsContext context)
         {
-            this.db = db;
+            this.context = context;
         }
 
         public async Task<Guid> HandleAsync(SetWasteCodes command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
-            var baselOecdCode = await db.WasteCodes.SingleAsync(w => w.Id == command.BasedOecdCode);
+            var baselOecdCode = await context.WasteCodes.SingleAsync(w => w.Id == command.BasedOecdCode);
             notification.SetBaselOecdCode(WasteCodeInfo.CreateWasteCodeInfo(baselOecdCode));
 
             var ewcCodes = new List<WasteCodeInfo>();
             foreach (var ewcId in command.EwcCodes)
             {
                 var id = ewcId;
-                var wasteCode = await db.WasteCodes.SingleAsync(w => w.Id == id);
+                var wasteCode = await context.WasteCodes.SingleAsync(w => w.Id == id);
                 ewcCodes.Add(WasteCodeInfo.CreateWasteCodeInfo(wasteCode));
             }
 
             notification.SetEwcCodes(ewcCodes);
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return notification.Id;
         }

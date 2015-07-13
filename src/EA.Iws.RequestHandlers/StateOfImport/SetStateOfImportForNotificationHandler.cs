@@ -19,7 +19,7 @@
 
         public async Task<Guid> HandleAsync(SetStateOfImportForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
             var competentAuthority =

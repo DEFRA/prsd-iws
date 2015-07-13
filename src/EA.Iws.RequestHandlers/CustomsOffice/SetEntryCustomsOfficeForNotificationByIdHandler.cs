@@ -18,7 +18,7 @@
 
         public async Task<CustomsOfficeCompletionStatus> HandleAsync(SetEntryCustomsOfficeForNotificationById message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
 
             notification.SetEntryCustomsOffice(new EntryCustomsOffice(message.Name, 

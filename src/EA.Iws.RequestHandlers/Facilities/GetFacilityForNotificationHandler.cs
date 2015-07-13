@@ -23,7 +23,7 @@
 
         public async Task<FacilityData> HandleAsync(GetFacilityForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
             var facility = notification.GetFacility(message.FacilityId);
 
             return mapper.Map(facility, message.NotificationId);

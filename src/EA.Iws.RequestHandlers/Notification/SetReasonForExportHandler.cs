@@ -17,7 +17,7 @@
 
         public async Task<string> HandleAsync(SetReasonForExport query)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
+            var notification = await context.GetNotificationApplication(query.NotificationId);
             notification.ReasonForExport = query.ReasonForExport;
 
             await context.SaveChangesAsync();

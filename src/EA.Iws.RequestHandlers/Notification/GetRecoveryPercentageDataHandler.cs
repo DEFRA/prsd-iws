@@ -22,7 +22,7 @@
 
         public async Task<RecoveryPercentageData> HandleAsync(GetRecoveryPercentageData message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             return recoveryPercentageMapper.Map(notification);
         }

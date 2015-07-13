@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.OperationCodes;
     using DataAccess;
@@ -13,12 +12,12 @@
 
     internal class AddDisposalCodesHandler : IRequestHandler<AddDisposalCodes, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
         private readonly IMap<IList<DisposalCode>, IList<OperationCode>> mapper;
 
-        public AddDisposalCodesHandler(IwsContext db, IMap<IList<DisposalCode>, IList<OperationCode>> mapper)
+        public AddDisposalCodesHandler(IwsContext context, IMap<IList<DisposalCode>, IList<OperationCode>> mapper)
         {
-            this.db = db;
+            this.context = context;
             this.mapper = mapper;
         }
 
@@ -26,11 +25,11 @@
         {
             var disposalCodes = mapper.Map(command.DisposalCodes);
 
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.SetOperationCodes(disposalCodes);
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return command.NotificationId;
         }

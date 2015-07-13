@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -9,20 +8,20 @@
 
     internal class SetWasteGenerationProcessHandler : IRequestHandler<SetWasteGenerationProcess, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
 
-        public SetWasteGenerationProcessHandler(IwsContext db)
+        public SetWasteGenerationProcessHandler(IwsContext context)
         {
-            this.db = db;
+            this.context = context;
         }
 
         public async Task<Guid> HandleAsync(SetWasteGenerationProcess command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.AddWasteGenerationProcess(command.Process, command.IsDocumentAttached);
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return notification.Id;
         }

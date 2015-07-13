@@ -18,7 +18,7 @@
 
         public async Task<SubmitSummaryData> HandleAsync(GetSubmitSummaryInformationForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
 
             var competentAuthority = notification.CompetentAuthority.AsCompetentAuthority();
             

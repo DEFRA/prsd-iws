@@ -18,7 +18,7 @@
 
         public async Task<CustomsOfficeCompletionStatus> HandleAsync(SetExitCustomsOfficeForNotificationById message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
 
             notification.SetExitCustomsOffice(new ExitCustomsOffice(message.Name, 

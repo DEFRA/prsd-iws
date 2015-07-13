@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.WasteType;
     using DataAccess;
@@ -10,22 +9,26 @@
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
+
     public class UpdateWasteTypeHandler : IRequestHandler<UpdateWasteType, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
         private readonly IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>> wasteTypeMap;
-        public UpdateWasteTypeHandler(IwsContext db, IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>> wasteTypeMap)
+
+        public UpdateWasteTypeHandler(IwsContext context,
+            IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>> wasteTypeMap)
         {
-            this.db = db;
+            this.context = context;
             this.wasteTypeMap = wasteTypeMap;
         }
+
         public async Task<Guid> HandleAsync(UpdateWasteType command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.SetWasteAdditionalInformation(wasteTypeMap.Map(command.WasteCompositions));
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return notification.WasteType.Id;
         }
     }

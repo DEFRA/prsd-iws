@@ -23,7 +23,7 @@
 
         public async Task<SpecialHandlingData> HandleAsync(GetSpecialHandingForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             return specialHandlingMapper.Map(notification);
         }

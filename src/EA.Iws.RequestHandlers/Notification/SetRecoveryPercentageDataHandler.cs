@@ -18,7 +18,7 @@
 
         public async Task<Guid> HandleAsync(SetRecoveryPercentageData message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             if (message.IsProvidedByImporter)
             {

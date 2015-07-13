@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.CustomsOffice
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
-  
-    internal class GetCustomsCompletionStatusByNotificationIdHandler : IRequestHandler<GetCustomsCompletionStatusByNotificationId, CustomsOfficeCompletionStatus>
+
+    internal class GetCustomsCompletionStatusByNotificationIdHandler :
+        IRequestHandler<GetCustomsCompletionStatusByNotificationId, CustomsOfficeCompletionStatus>
     {
         private readonly IwsContext context;
 
@@ -17,7 +17,7 @@
 
         public async Task<CustomsOfficeCompletionStatus> HandleAsync(GetCustomsCompletionStatusByNotificationId message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
 
             return new CustomsOfficeCompletionStatus
             {

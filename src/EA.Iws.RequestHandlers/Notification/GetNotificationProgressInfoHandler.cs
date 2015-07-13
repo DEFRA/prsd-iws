@@ -23,7 +23,7 @@
 
         public async Task<NotificationProgressInfo> HandleAsync(GetNotificationProgressInfo message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             return mapper.Map(notification);
         }

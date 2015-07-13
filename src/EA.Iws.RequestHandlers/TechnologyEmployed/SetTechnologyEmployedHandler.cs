@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.TechnologyEmployed
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Notification;
@@ -19,9 +18,11 @@
 
         public async Task<Guid> HandleAsync(SetTechnologyEmployed command)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
-            var technologyEmployed = command.AnnexProvided ? TechnologyEmployed.CreateTechnologyEmployedInAnnex() : TechnologyEmployed.CreateTechnologyEmployedDetails(command.Details);
+            var technologyEmployed = command.AnnexProvided
+                ? TechnologyEmployed.CreateTechnologyEmployedInAnnex()
+                : TechnologyEmployed.CreateTechnologyEmployedDetails(command.Details);
 
             notification.SetTechnologyEmployed(technologyEmployed);
 

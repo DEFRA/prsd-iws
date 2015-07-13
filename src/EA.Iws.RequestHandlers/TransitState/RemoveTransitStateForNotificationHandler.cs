@@ -17,7 +17,7 @@
 
         public async Task<bool> HandleAsync(RemoveTransitStateForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             notification.RemoveTransitState(message.TransitStateId);
 

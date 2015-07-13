@@ -23,7 +23,7 @@
 
         public async Task<ProducerData> HandleAsync(GetProducerForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
             var producer = notification.GetProducer(message.ProducerId);
 
             return mapper.Map(producer, message.NotificationId);

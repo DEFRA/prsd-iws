@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Shipment
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Shipment;
     using DataAccess;
@@ -11,26 +10,24 @@
 
     internal class SetShipmentInfoForNotificationHandler : IRequestHandler<SetShipmentInfoForNotification, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
         private readonly IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits> shipmentQuantityUnitsMapper;
 
-        public SetShipmentInfoForNotificationHandler(IwsContext db,
+        public SetShipmentInfoForNotificationHandler(IwsContext context,
             IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits> shipmentQuantityUnitsMapper)
         {
-            this.db = db;
+            this.context = context;
             this.shipmentQuantityUnitsMapper = shipmentQuantityUnitsMapper;
         }
 
         public async Task<Guid> HandleAsync(SetShipmentInfoForNotification command)
         {
-            var notification =
-                await
-                    db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.SetShipmentInfo(command.StartDate, command.EndDate, command.NumberOfShipments,
                 command.Quantity, shipmentQuantityUnitsMapper.Map(command.Units));
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return notification.Id;
         }

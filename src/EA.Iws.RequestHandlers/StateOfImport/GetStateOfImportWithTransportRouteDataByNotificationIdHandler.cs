@@ -46,7 +46,7 @@
 
         public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
             var countries = await context.Countries.OrderBy(c => c.Name).ToArrayAsync();
 
             var data = new StateOfImportWithTransportRouteData

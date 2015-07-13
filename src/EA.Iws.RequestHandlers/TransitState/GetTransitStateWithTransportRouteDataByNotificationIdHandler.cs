@@ -45,7 +45,7 @@
         public async Task<TransitStateWithTransportRouteData> HandleAsync(GetTransitStateWithTransportRouteDataByNotificationId message)
         {
             var countries = await context.Countries.ToArrayAsync();
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
 
             var data = new TransitStateWithTransportRouteData
             {

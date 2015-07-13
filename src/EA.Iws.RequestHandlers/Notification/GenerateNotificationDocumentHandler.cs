@@ -1,11 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
-    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
@@ -13,25 +10,17 @@
     {
         private readonly IwsContext context;
         private readonly IDocumentGenerator documentGenerator;
-        private readonly IUserContext userContext;
 
-        public GenerateNotificationDocumentHandler(IwsContext context, 
-            IDocumentGenerator documentGenerator,
-            IUserContext userContext)
+        public GenerateNotificationDocumentHandler(IwsContext context,
+            IDocumentGenerator documentGenerator)
         {
             this.context = context;
             this.documentGenerator = documentGenerator;
-            this.userContext = userContext;
         }
 
         public async Task<byte[]> HandleAsync(GenerateNotificationDocument query)
         {
-            Guid userId = userContext.UserId;
-
-            var notification = await context
-                .NotificationApplications
-                .SingleAsync(n => n.Id == query.NotificationId 
-                    && n.UserId == userId);
+            var notification = await context.GetNotificationApplication(query.NotificationId);
 
             return documentGenerator.GenerateNotificationDocument(notification);
         }

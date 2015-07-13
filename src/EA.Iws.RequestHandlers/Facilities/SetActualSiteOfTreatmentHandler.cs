@@ -17,7 +17,7 @@
 
         public async Task<Guid> HandleAsync(SetActualSiteOfTreatment command)
         {
-            var notification = await context.NotificationApplications.FindAsync(command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
             notification.SetFacilityAsSiteOfTreatment(command.FacilityId);
 
             await context.SaveChangesAsync();

@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteCodes
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.WasteCodes;
     using DataAccess;
@@ -24,9 +23,7 @@
 
         public async Task<WasteCodeData[]> HandleAsync(GetWasteCodesForNotification message)
         {
-            var notification =
-                await
-                    context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             return mapper.Map(notification, message.CodeType);
         }

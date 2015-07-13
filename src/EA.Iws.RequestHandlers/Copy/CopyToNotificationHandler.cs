@@ -76,7 +76,7 @@
         /// <returns>the clone of the notification</returns>
         private async Task<NotificationApplication> CloneNotification(Guid sourceId, Guid destinationId)
         {
-            var destination = await context.NotificationApplications.SingleAsync(n => n.Id == destinationId);
+            var destination = await context.GetNotificationApplication(destinationId);
 
             var clone = await GetCopyOfSourceNotification(sourceId);
 
@@ -92,7 +92,7 @@
 
             // Set child objects which have lookup properties. These can't be copied by the
             // main copy process due to detaching the change tracker.
-            var source = await context.NotificationApplications.SingleAsync(n => n.Id == sourceId);
+            var source = await context.GetNotificationApplication(sourceId);
             copier.CopyLookupEntities(source, clone);
 
             return clone;

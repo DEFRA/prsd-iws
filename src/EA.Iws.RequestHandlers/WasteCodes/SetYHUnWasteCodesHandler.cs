@@ -23,7 +23,7 @@
 
         public async Task<Guid> HandleAsync(SetYHUnWasteCodes message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             var yCodes = new List<WasteCodeInfo>();
             foreach (var yCodeId in message.YCodes)

@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Notification;
@@ -11,22 +10,22 @@
 
     public class CreateWasteTypeHandler : IRequestHandler<CreateWasteType, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
         private readonly IMap<CreateWasteType, WasteType> wasteTypeMap;
 
-        public CreateWasteTypeHandler(IwsContext db, IMap<CreateWasteType, WasteType> wasteTypeMap)
+        public CreateWasteTypeHandler(IwsContext context, IMap<CreateWasteType, WasteType> wasteTypeMap)
         {
-            this.db = db;
+            this.context = context;
             this.wasteTypeMap = wasteTypeMap;
         }
 
         public async Task<Guid> HandleAsync(CreateWasteType command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.SetWasteType(wasteTypeMap.Map(command));
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return notification.WasteType.Id;
         }

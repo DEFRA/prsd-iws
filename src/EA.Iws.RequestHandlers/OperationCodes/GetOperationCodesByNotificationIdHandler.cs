@@ -19,7 +19,7 @@
 
         public async Task<IList<OperationCodeData>> HandleAsync(GetOperationCodesByNotificationId query)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == query.NotificationId);
+            var notification = await context.GetNotificationApplication(query.NotificationId);
             var codesList = new List<OperationCodeData>();
 
             foreach (var operationInfo in notification.OperationInfos)

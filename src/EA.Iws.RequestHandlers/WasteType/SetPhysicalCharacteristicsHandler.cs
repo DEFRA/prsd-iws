@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Notification;
@@ -12,23 +11,24 @@
 
     internal class SetPhysicalCharacteristicsHandler : IRequestHandler<SetPhysicalCharacteristics, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
         private readonly IMap<SetPhysicalCharacteristics, IList<PhysicalCharacteristicsInfo>> mapper;
 
-        public SetPhysicalCharacteristicsHandler(IwsContext db, IMap<SetPhysicalCharacteristics, IList<PhysicalCharacteristicsInfo>> mapper)
+        public SetPhysicalCharacteristicsHandler(IwsContext context,
+            IMap<SetPhysicalCharacteristics, IList<PhysicalCharacteristicsInfo>> mapper)
         {
-            this.db = db;
+            this.context = context;
             this.mapper = mapper;
         }
 
         public async Task<Guid> HandleAsync(SetPhysicalCharacteristics command)
         {
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
             var physicalCharacteristics = mapper.Map(command);
 
             notification.SetPhysicalCharacteristics(physicalCharacteristics);
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return notification.Id;
         }

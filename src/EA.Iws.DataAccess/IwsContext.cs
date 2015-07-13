@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.DataAccess
 {
+    using System;
     using System.Data.Entity;
+    using System.Security;
     using System.Threading;
     using System.Threading.Tasks;
     using Domain;
@@ -72,6 +74,16 @@
         public void DeleteOnCommit(Entity entity)
         {
             Entry(entity).State = EntityState.Deleted;
+        }
+
+        public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
+        {
+            var notification = await NotificationApplications.SingleAsync(n => n.Id == notificationId);
+            if (notification.UserId != userContext.UserId)
+            {
+                throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}", notificationId, userContext.UserId));
+            }
+            return notification;
         }
     }
 }

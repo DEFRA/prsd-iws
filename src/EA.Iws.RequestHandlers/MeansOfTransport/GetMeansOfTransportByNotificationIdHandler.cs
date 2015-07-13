@@ -20,7 +20,7 @@
 
         public async Task<IList<MeansOfTransport>> HandleAsync(GetMeansOfTransportByNotificationId message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
 
             return notification.MeansOfTransport.ToArray();
         }

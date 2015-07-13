@@ -36,7 +36,7 @@
 
         public async Task<TransportRouteData> HandleAsync(GetTransportRouteSummaryForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             return new TransportRouteData
             {

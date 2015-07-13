@@ -22,8 +22,7 @@
         {
             var country = await context.Countries.SingleAsync(c => c.Id == message.Address.CountryId);
 
-            var notification =
-                await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             var business = ProducerBusiness.CreateProducerBusiness(message.Business.Name, 
                 BusinessType.FromBusinessType(message.Business.BusinessType), 

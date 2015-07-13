@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Notification;
@@ -12,25 +11,23 @@
 
     internal class SetPackagingInfoForNotificationHandler : IRequestHandler<SetPackagingInfoForNotification, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
         private readonly IMap<SetPackagingInfoForNotification, IEnumerable<PackagingInfo>> packagingInfoMapper;
 
-        public SetPackagingInfoForNotificationHandler(IwsContext db,
+        public SetPackagingInfoForNotificationHandler(IwsContext context,
             IMap<SetPackagingInfoForNotification, IEnumerable<PackagingInfo>> packagingInfoMapper)
         {
-            this.db = db;
+            this.context = context;
             this.packagingInfoMapper = packagingInfoMapper;
         }
 
         public async Task<Guid> HandleAsync(SetPackagingInfoForNotification command)
         {
-            var notification =
-                await
-                    db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.SetPackagingInfo(packagingInfoMapper.Map(command));
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return notification.Id;
         }

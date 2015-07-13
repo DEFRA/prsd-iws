@@ -25,7 +25,7 @@
             Justification = "Variable relates to UN numbers")]
         public async Task<Guid> HandleAsync(SetUnNumberWasteCodes message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             var customsCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.CustomsCode);
 

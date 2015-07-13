@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.OperationCodes;
     using DataAccess;
@@ -13,12 +12,12 @@
 
     internal class AddRecoveryCodesHandler : IRequestHandler<AddRecoveryCodes, Guid>
     {
-        private readonly IwsContext db;
+        private readonly IwsContext context;
         private readonly IMap<IList<RecoveryCode>, IList<OperationCode>> mapper;
 
-        public AddRecoveryCodesHandler(IwsContext db, IMap<IList<RecoveryCode>, IList<OperationCode>> mapper)
+        public AddRecoveryCodesHandler(IwsContext context, IMap<IList<RecoveryCode>, IList<OperationCode>> mapper)
         {
-            this.db = db;
+            this.context = context;
             this.mapper = mapper;
         }
 
@@ -26,11 +25,11 @@
         {
             var recoveryCodes = mapper.Map(command.RecoveryCodes);
 
-            var notification = await db.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.SetOperationCodes(recoveryCodes);
 
-            await db.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return command.NotificationId;
         }

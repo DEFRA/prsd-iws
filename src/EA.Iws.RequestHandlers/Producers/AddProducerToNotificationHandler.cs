@@ -27,7 +27,7 @@
             var business = ProducerBusiness.CreateProducerBusiness(command.Business.Name, BusinessType.FromBusinessType(command.Business.BusinessType),
                 command.Business.RegistrationNumber, command.Business.OtherDescription);
 
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == command.NotificationId);
+            var notification = await context.GetNotificationApplication(command.NotificationId);
             var producer = notification.AddProducer(business, address, contact);
 
             await context.SaveChangesAsync();

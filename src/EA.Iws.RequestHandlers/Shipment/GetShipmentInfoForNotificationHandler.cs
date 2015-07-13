@@ -23,7 +23,7 @@
 
         public async Task<ShipmentData> HandleAsync(GetShipmentInfoForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
             return shipmentMapper.Map(notification);
         }
