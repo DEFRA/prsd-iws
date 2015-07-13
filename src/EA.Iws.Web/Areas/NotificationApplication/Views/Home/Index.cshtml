@@ -55,8 +55,9 @@
     </div>
 
 </section>
-<br />
-<br />
-<div class="form-group">
-    @Html.ActionLink("Continue", "Index", "Submit", new { id = Model.NotificationId }, new { @class = "button" })
-</div>
+@if (Model.Progress.IsAllComplete)
+{
+    <div class="form-group">
+        @Html.ActionLink("Continue", "Index", "Submit", new { id = Model.NotificationId }, new { @class = "button" })
+    </div>
+}

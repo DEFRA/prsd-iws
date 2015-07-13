@@ -47,6 +47,12 @@
                     new GetNotificationInfo(id));
 
                 var model = new NotificationOverviewViewModel(result);
+
+                if (!model.Progress.IsAllComplete)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
                 ViewBag.Charge = result.NotificationCharge;
                 
                 return View(model);
