@@ -159,7 +159,7 @@
 
         public bool IsWasteRecoveryInformationCompleted()
         {
-            return RecoveryInfo != null;
+            return IsProvidedByImporter.GetValueOrDefault() || (PercentageRecoverable != null && RecoveryInfo != null);
         }
     }
 }
