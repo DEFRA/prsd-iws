@@ -60,6 +60,7 @@
                 new ExporterBlock(mergeFields, notification),
                 new ProducerBlock(mergeFields, notification),
                 new ImporterBlock(mergeFields, notification),
+                new FacilityBlock(mergeFields, notification),
                 new OperationBlock(mergeFields, notification)
             };
         }

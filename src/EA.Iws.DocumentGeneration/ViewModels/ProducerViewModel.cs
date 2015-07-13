@@ -15,6 +15,8 @@
             Fax = producer.Contact.Fax ?? string.Empty;
             Email = producer.Contact.Email;
             RegistrationNumber = producer.Business.RegistrationNumber;
+            IsSiteOfGeneration = producer.IsSiteOfExport;
+
             SetSiteOfGeneration(countOfProducers);
         }
 
@@ -40,6 +42,8 @@
         public string Email { get; private set; }
 
         public string SiteOfGeneration { get; private set; }
+
+        public bool IsSiteOfGeneration { get; private set; }
 
         private void SetSiteOfGeneration(int countOfProducers)
         {

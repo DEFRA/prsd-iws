@@ -40,16 +40,14 @@
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(ProducerViewModel));
 
             // The main document should show "See Annex" for all data if there is an annex.
-            MergeProducerToMainDocument(ProducerViewModel.GetProducerViewModelShowingSeeAnnexInstruction(annexNumber),
-                properties);
+            MergeProducerToMainDocument(ProducerViewModel.GetProducerViewModelShowingSeeAnnexInstruction(annexNumber), properties);
 
             // Next merge the producer as the site of export.
-            // TODO: Once the site of export property is available, use the producer marked as site of export.
-            var siteOfExportProducer = data[0];
-            MergeSiteOfExportInAnnex(siteOfExportProducer, properties);
+            var indexOfSiteOfGeneration = data.Where(x => x.IsSiteOfGeneration).Select(data.IndexOf).Single();
+            MergeSiteOfExportInAnnex(data[indexOfSiteOfGeneration], properties);
 
             // Next remove the entry we have just merged so the multiple producers table doesn't contain this entry.
-            data.RemoveAt(0);
+            data.RemoveAt(indexOfSiteOfGeneration);
 
             // If we only need the site of export in the annex clear the remaining annex fields and exit at this point.
             if (data.Count == 0)
