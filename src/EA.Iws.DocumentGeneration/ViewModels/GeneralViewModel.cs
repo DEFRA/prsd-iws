@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Security.Policy;
     using DocumentFormat.OpenXml.Office.CustomUI;
+    using Domain;
     using Domain.Notification;
 
     internal class GeneralViewModel
@@ -39,6 +40,7 @@
             IntendedNumberOfShipments = notification.ShipmentInfo.NumberOfShipments.ToString();
             FirstDeparture = notification.ShipmentInfo.FirstDate.ToShortDateString();
             LastDeparture = notification.ShipmentInfo.LastDate.ToShortDateString();
+            SetIntendedQuantityFields(notification.ShipmentInfo);
 
             var hasSpecialHandlingRequirements = notification.HasSpecialHandlingRequirements;
             if (!hasSpecialHandlingRequirements.HasValue)
@@ -56,6 +58,30 @@
             foreach (var item in packagingInfo)
             {
                 PackagingTypes = PackagingTypes + "  " + item.PackagingType.Value;
+            }
+        }
+
+        private void SetIntendedQuantityFields(ShipmentInfo shipmentInfo)
+        {
+            IntendedQuantityTonnes = string.Empty;
+            IntendedQuantityKg = string.Empty;
+            IntendedQuantityM3 = string.Empty;
+            IntendedQuantityLtrs = string.Empty;
+            if (shipmentInfo.Units == ShipmentQuantityUnits.CubicMetres)
+            {
+                IntendedQuantityM3 = shipmentInfo.Quantity.ToString();
+            }
+            else if (shipmentInfo.Units == ShipmentQuantityUnits.Kilogram)
+            {
+                IntendedQuantityKg = shipmentInfo.Quantity + " kg";
+            }
+            else if (shipmentInfo.Units == ShipmentQuantityUnits.Tonnes)
+            {
+                IntendedQuantityTonnes = shipmentInfo.Quantity.ToString();
+            }
+            else if (shipmentInfo.Units == ShipmentQuantityUnits.Litres)
+            {
+                IntendedQuantityLtrs = shipmentInfo.Quantity + " Ltrs";
             }
         }
 
@@ -84,5 +110,13 @@
         public bool IsNotSpecialHandling { get; private set; }
 
         public string PackagingTypes { get; private set; }
+
+        public string IntendedQuantityTonnes { get; private set; }
+
+        public string IntendedQuantityKg { get; private set; }
+
+        public string IntendedQuantityM3 { get; private set; }
+
+        public string IntendedQuantityLtrs { get; private set; }
     }
 }

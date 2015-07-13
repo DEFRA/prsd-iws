@@ -16,6 +16,8 @@
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
+                    DocumentFormatter.ApplyFormatting(document, notification.ShipmentInfo.Units);
+
                     // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 

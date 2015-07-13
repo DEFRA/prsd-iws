@@ -50,6 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentFormatter.cs" />
     <Compile Include="DocumentGenerator\DocumentGenerator.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Mapper\MergeFieldDataMapper.cs" />
