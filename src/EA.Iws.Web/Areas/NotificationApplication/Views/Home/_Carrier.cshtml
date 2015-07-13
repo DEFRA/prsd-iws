@@ -2,24 +2,16 @@
 
 @if (Model.Progress.IsCarrierCompleted)
 {
-    if (Model.CarriersCompanyNames.Count > 1)
-    {
-        <details>
-            <summary>
-                <span class="summary">Intended carriers</span>
-            </summary>
+    <details>
+        <summary>
+            <span class="summary">Intended carriers</span>
+        </summary>
 
-            <div class="expanded-details">
-                @foreach (var pn in Model.CarriersCompanyNames)
-                {
-                    @pn<br />
-                }
-            </div>
-        </details>
-    }
-    else
-    {
-        <div class="list-heading-no-detail column-third">Intended carrier</div>
-        <div> @Model.CarriersCompanyNames[0]<br /></div>
-    }
+        <div class="expanded-details">
+            @foreach (var pn in Model.CarriersCompanyNames)
+            {
+                @pn<br />
+            }
+        </div>
+    </details>
 }
