@@ -28,28 +28,29 @@
 
         public void SetRecoveryPercentageData(decimal percentageRecoverableMaterial, string methodOfDisposal)
         {
-            if (percentageRecoverableMaterial > 100)
+            PercentageRecoverable = percentageRecoverableMaterial;
+
+            if (PercentageRecoverable > 100)
             {
                 throw new InvalidOperationException("The percentage recoverable cannot be greater than 100%");
             }
 
-            if (percentageRecoverableMaterial < 0)
+            if (PercentageRecoverable < 0)
             {
                 throw new InvalidOperationException("The percentage recoverable cannot be less than 0%");
             }
 
-            if (percentageRecoverableMaterial < 100 && methodOfDisposal == null)
+            if (PercentageRecoverable < 100 && methodOfDisposal == null)
             {
                 throw new InvalidOperationException("If the information is not being provided by the importer then the method of disposal is required");
             }
 
-            if (percentageRecoverableMaterial == 100 && methodOfDisposal != null)
+            if (PercentageRecoverable == 100 && methodOfDisposal != null)
             {
                 throw new InvalidOperationException("When the recovery percentage is 100% there cannot be any method of disposal text");
             }
 
             IsProvidedByImporter = null;
-            PercentageRecoverable = percentageRecoverableMaterial;
             MethodOfDisposal = methodOfDisposal;
         }
     }
