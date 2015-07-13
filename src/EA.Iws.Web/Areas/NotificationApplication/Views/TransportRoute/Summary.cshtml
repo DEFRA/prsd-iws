@@ -13,6 +13,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div class="form-group" style="margin-top: 25px;">
         <button class="button" type="submit">Continue</button>
     </div>
