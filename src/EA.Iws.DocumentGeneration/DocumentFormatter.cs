@@ -9,7 +9,7 @@
     {
         public static void ApplyFormatting(WordprocessingDocument document, ShipmentQuantityUnits shipmentQuantityUnits)
         {
-            // Gets each element in the document with text representing a merge field.
+            // Gets each element in the document and applies formatting (e.g strikethrough) if required
             foreach (var run in document.MainDocumentPart.Document.Descendants<Run>())
             {
                 if (run.InnerText.Contains("TonneFieldName"))
