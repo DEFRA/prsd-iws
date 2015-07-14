@@ -29,7 +29,7 @@
                     {
                         run.AppendChild(new RunProperties(new Strike() { Val = true }));
                     }
-                    var t = new Text(ReplaceText(run, "m³"));
+                    var t = new Text(ReplaceText(run, "m³:"));
                     run.RemoveAllChildren<Text>();
                     run.AppendChild(t);
                 }

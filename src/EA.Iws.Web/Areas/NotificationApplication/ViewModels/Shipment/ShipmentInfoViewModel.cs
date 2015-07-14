@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using Core.Shipment;
     using Prsd.Core;
@@ -27,7 +28,7 @@
                 EndDay = shipmentData.LastDate.Day;
                 EndMonth = shipmentData.LastDate.Month;
                 EndYear = shipmentData.LastDate.Year;
-                NumberOfShipments = shipmentData.NumberOfShipments;
+                NumberOfShipments = shipmentData.NumberOfShipments.ToString();
                 Quantity = shipmentData.Quantity;
                 StartDay = shipmentData.FirstDate.Day;
                 StartMonth = shipmentData.FirstDate.Month;
@@ -42,9 +43,7 @@
 
         [Required(ErrorMessage = "Please enter the total number of intended shipments")]
         [Display(Name = "Number of shipments")]
-        [Range(1, 99999, ErrorMessage = "The number of shipments must be at least 1 and cannot be greater than 99999")]
-        [RegularExpression("[0-9]*", ErrorMessage = "The number of shipments must be a whole number")]
-        public int? NumberOfShipments { get; set; }
+        public string NumberOfShipments { get; set; }
 
         [Required(ErrorMessage = "Please enter the total intended quantity")]
         [Range(0.0001, 99999, ErrorMessage = "The quantity must be between 0.0001 and 99999")]
@@ -89,6 +88,11 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (!IsNumberOfShipmentsValid())
+            {
+                yield return new ValidationResult("Please enter a valid number between 1 and 99999", new[] { "NumberOfShipments" });                
+            }
+
             DateTime startDate;
             bool isValidStartDate = SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
             if (!isValidStartDate)
@@ -129,6 +133,34 @@
             }
         }
 
+        private bool IsNumberOfShipmentsValid()
+        {
+            int numberOfShipments;
+            if (NumberOfShipments.Contains(","))
+            {
+                Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)?$");
+                if (rgx.IsMatch(NumberOfShipments))
+                {
+                    NumberOfShipments = NumberOfShipments.Replace(",", string.Empty);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (!Int32.TryParse(NumberOfShipments, out numberOfShipments))
+            {
+                return false;
+            }
+
+            if (numberOfShipments < 1 || numberOfShipments > 99999)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public SetShipmentInfoForNotification ToRequest()
         {
             DateTime startDate;
@@ -139,7 +171,7 @@
 
             return new SetShipmentInfoForNotification(
                 NotificationId,
-                NumberOfShipments.GetValueOrDefault(),
+                Convert.ToInt32(NumberOfShipments),
                 Quantity.GetValueOrDefault(),
                 Units.GetValueOrDefault(),
                 startDate,

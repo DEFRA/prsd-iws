@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
     using Core.RecoveryInfo;
     using Prsd.Core.Helpers;
     using Prsd.Core.Validation;
@@ -23,22 +24,16 @@
 
         public RadioButtonStringCollectionOptionalViewModel DisposalUnit { get; set; }
 
-        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Please enter the amount in GBP(£) for estimated value of the recoverable material.")]
-        [RegularExpression(@"^[-]?\d+(\.\d{1,2})?", ErrorMessage = "The estimated amount must be a number with a maximum of 2 decimal places.")]
         [Display(Name = "Enter the amount in GBP(£)")]
-        public decimal? EstimatedAmount { get; set; }
+        public string EstimatedAmount { get; set; }
 
-        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Please enter the amount in GBP(£) for cost of recovery.")]
-        [RegularExpression(@"^[-]?\d+(\.\d{1,2})?", ErrorMessage = "The cost amount must be a number with a maximum of 2 decimal places.")]
         [Display(Name = "Enter the amount in GBP(£)")]
-        public decimal? CostAmount { get; set; }
+        public string CostAmount { get; set; }
 
-        [DataType(DataType.Currency)]
-        [RegularExpression(@"^[-]?\d+(\.\d{1,2})?", ErrorMessage = "The cost of disposal amount must be a number with a maximum of 2 decimal places.")]
         [Display(Name = "Enter the amount in GBP(£)")]
-        public decimal? DisposalAmount { get; set; }
+        public string DisposalAmount { get; set; }
 
         public AddRecoveryInfoToNotification ToRequest()
         {
@@ -54,14 +49,14 @@
                                                     ? RecoveryInfoUnits.Kilogram : RecoveryInfoUnits.Tonne;
 
                 return new AddRecoveryInfoToNotification(NotificationId, IsDisposal,
-                            estimatedUnit, EstimatedAmount.GetValueOrDefault(),
-                            costUnit, CostAmount.GetValueOrDefault(),
-                            disposalUnit, DisposalAmount.GetValueOrDefault());
+                            estimatedUnit, Convert.ToDecimal(EstimatedAmount),
+                            costUnit, Convert.ToDecimal(CostAmount),
+                            disposalUnit, Convert.ToDecimal(DisposalAmount));
             }
 
             return new AddRecoveryInfoToNotification(NotificationId, IsDisposal,
-                        estimatedUnit, EstimatedAmount.GetValueOrDefault(),
-                        costUnit, CostAmount.GetValueOrDefault(), null, null);
+                        estimatedUnit, Convert.ToDecimal(EstimatedAmount),
+                        costUnit, Convert.ToDecimal(CostAmount), null, null);
         }
 
         public RecoveryInfoValuesViewModel()
@@ -77,9 +72,9 @@
             CostUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<RecoveryInfoUnits>();
             DisposalUnit = RadioButtonStringCollectionOptionalViewModel.CreateFromEnum<RecoveryInfoUnits>();
 
-            EstimatedAmount = recoveryInfoData.EstimatedAmount;
-            CostAmount = recoveryInfoData.CostAmount;
-            DisposalAmount = recoveryInfoData.DisposalAmount;
+            EstimatedAmount = recoveryInfoData.EstimatedAmount.ToString();
+            CostAmount = recoveryInfoData.CostAmount.ToString();
+            DisposalAmount = recoveryInfoData.DisposalAmount.ToString();
             EstimatedUnit.SelectedValue = recoveryInfoData.EstimatedUnit != null ? EnumHelper.GetDisplayName(recoveryInfoData.EstimatedUnit) : null;
             CostUnit.SelectedValue = recoveryInfoData.CostUnit != null ? EnumHelper.GetDisplayName(recoveryInfoData.CostUnit) : null;
             DisposalUnit.SelectedValue = recoveryInfoData.DisposalUnit != null ? EnumHelper.GetDisplayName(recoveryInfoData.DisposalUnit) : null;
@@ -95,12 +90,59 @@
                     results.Add(new ValidationResult("Please answer this question.", new[] { "DisposalUnit.SelectedValue" }));
                 }
 
-                if (!DisposalAmount.HasValue)
+                if (!IsCostValid(DisposalAmount))
                 {
-                    results.Add(new ValidationResult("Please enter the amount in GBP(£) for cost of disposal of the non-recoverable fraction.", new[] { "DisposalAmount" }));
+                    results.Add(new ValidationResult("Please enter a valid disposal amount in GBP(£) with a maximum of 2 decimal places.", new[] { "DisposalAmount" }));
                 }
             }
+
+            if (!IsCostValid(EstimatedAmount))
+            {
+                results.Add(new ValidationResult("Please enter a valid estimated amount in GBP(£) with a maximum of 2 decimal places", new[] { "EstimatedAmount" }));
+            }
+
+            if (!IsCostValid(CostAmount))
+            {
+                results.Add(new ValidationResult("Please enter a valid cost amount in GBP(£) with a maximum of 2 decimal places.", new[] { "CostAmount" }));
+            }
+
             return results;
+        }
+
+        private bool IsCostValid(string amount)
+        {
+            decimal cost;
+            if (amount.Contains(","))
+            {   
+                Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)(?:\.\d{1,2})?$");
+                if (rgx.IsMatch(amount))
+                {
+                    amount = amount.Replace(",", string.Empty);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Regex rgx = new Regex(@"^[-]?\d+(?:\.\d{1,2})?$");
+                if (!rgx.IsMatch(amount))
+                {
+                    return false;
+                }
+            }
+
+            if (!Decimal.TryParse(amount, out cost))
+            {
+                return false;
+            }
+
+            if (cost < 0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

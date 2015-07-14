@@ -25,7 +25,7 @@
 
             if (AnnexProvided && !(string.IsNullOrEmpty(Details)))
             {
-                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here.");
+                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here.", new[] { "Details" });
             }
         }
     }
