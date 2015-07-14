@@ -222,7 +222,7 @@
     <Content Include="Areas\NotificationApplication\Views\Submit\_ClassifyYourWaste.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\_WasteRecovery.cshtml" />
     <Content Include="Areas\FinancialGuarantee\Views\web.config" />
-    <None Include="Areas\NotificationApplication\Views\Submit\_OrganisationsInvolved.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_OrganisationsInvolved.cshtml" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -630,7 +630,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmittedViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Submit\SubmitSideBarViewModel.cs" />
-    <None Include="Areas\NotificationApplication\Views\Submit\_SummaryTableContainer.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\_SummaryTableContainer.cshtml" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />
