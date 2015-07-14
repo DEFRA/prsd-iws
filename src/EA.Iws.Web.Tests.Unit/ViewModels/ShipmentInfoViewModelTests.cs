@@ -17,7 +17,7 @@
             model = new ShipmentInfoViewModel
             {
                 Units = ShipmentQuantityUnits.Kilograms,
-                NumberOfShipments = 1,
+                NumberOfShipments = "1",
                 Quantity = 1
             };
             SystemTime.Freeze(new DateTime(2015, 5, 1));
