@@ -36,7 +36,7 @@
                     </div>
                     <div class="grid-row">
                         @{
-                            var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
+                var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
                         }
                         <div class="column-half">
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min" + placeholderText })
@@ -49,20 +49,47 @@
                     </div>
                 </div>
             }
-            <div class="form-group">
-                Energy
+        </div>
+
+            <div class="form-group column-two-thirds">
+                Energy Efficiency
                 <details>
                     <summary><span class="summary">Guidance notes</span></summary>
                     <div class="panel-indent">
-                        <b>Terms and conditions of use</b>
                         <p>
-                            Some of the services available on this website require registration.
+                            The energy efficiency is calculated using a formula taken from the Directive 2008/98/EC on waste (Waste Framework Directive).
+                            The formula used to calculate this value of energy efficiency, "the R1 Energy Efficiency Formula" is:
                         </p>
+                        <table class="fraction">
+                            <tr>
+                                <td rowspan="2" nowrap="nowrap">
+                                    Energy Efficiency =
+                                </td>
+                                <td nowrap="nowrap">
+                                    (E<sub>p</sub> - (E<sub>f</sub> + E<sub>i</sub>))
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="upper-line">
+                                    (0.97 x (E<sub>w</sub> + E<sub>f</sub>))
+                                </td>
+                            </tr>
+                        </table>
+                        In which:
+                        <table>
+                            <tr><td></td><td></td></tr>
+                            <tr><td>E<sub>p</sub></td><td>The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year)</td></tr>
+                            <tr><td>E<sub>f</sub></td><td>The annual energy input to the system from fuel contributions to the production of steam (GJ/year)</td></tr>
+                            <tr><td>E<sub>i</sub></td><td>The annual energy imported excluding E<sub>w</sub> and E<sub>f</sub> (GJ/year)</td></tr>
+                            <tr><td>E<sub>w</sub></td><td>The annual energy contained in the treated waste calculated using the net calorific value fo the waste (GJ/year)</td></tr>
+                            <tr><td>0.97</td><td>The factor accounting for energy losses due to bottom ask and radiation</td></tr>
+                        </table>
                     </div>
                 </details>
+                @Html.Gds().HintSpan("Enter the value or not applicable. If the waste is going to a cement kiln, this may not be applicable. This information may be obtained from the recovery facility.")
                 @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds" })
             </div>
-        </div>
+        
     </div>
     <div class="column-half"></div>
     <div class="form-group">

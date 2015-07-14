@@ -13,7 +13,7 @@
         HeavyMetals = 4,
         [Description("Chlorine")]
         Chlorine = 5,
-        [Description("Energy")]
+        [Description("Energy Efficiency")]
         Energy = 6
     }
 }
