@@ -15,6 +15,7 @@
                     AnnexProvided = source.TechnologyEmployed.AnnexProvided,
                     Details = source.TechnologyEmployed.Details,
                     NotificationId = source.Id,
+                    FurtherDetails = source.TechnologyEmployed.FurtherDetails,
                     HasTechnologyEmployed = true
                 };
             }

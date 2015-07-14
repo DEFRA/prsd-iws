@@ -174,7 +174,7 @@
 
             context.NotificationApplications.Add(notification);
 
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("text area contents"));
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("text area contents", "details"));
             await context.SaveChangesAsync();
 
             Assert.True(notification.HasTechnologyEmployed);

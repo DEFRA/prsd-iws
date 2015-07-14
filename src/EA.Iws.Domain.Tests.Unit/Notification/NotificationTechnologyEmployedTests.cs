@@ -23,7 +23,7 @@
         [Fact]
         public void CanAddTechnologyEmployedDetails()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("text area contents"));
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("text area contents", "further details"));
 
             Assert.Equal(notification.TechnologyEmployed.Details, "text area contents");
         }
@@ -31,14 +31,14 @@
         [Fact]
         public void AddTechnologyEmployedDetails_AnnexProvidedIsFalse()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("text area contents"));
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("text area contents", "further details"));
             Assert.False(notification.TechnologyEmployed.AnnexProvided);
         }
 
         [Fact]
         public void CanAddTechnologyDetailsInAnnex()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedInAnnex());
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithAnnex("details"));
 
             Assert.True(notification.TechnologyEmployed.AnnexProvided);
         }
@@ -46,7 +46,7 @@
         [Fact]
         public void TechnologyDetailsCannotBeNull()
         {
-            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedDetails(null);
+            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(null, null);
 
             Assert.Throws<ArgumentNullException>("details", createTechnologyEmployed);
         }
@@ -54,7 +54,7 @@
         [Fact]
         public void TechnologyDetailsCannotBeEmpty()
         {
-            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedDetails(string.Empty);
+            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(string.Empty, string.Empty);
 
             Assert.Throws<ArgumentException>("details", createTechnologyEmployed);
         }
@@ -62,8 +62,8 @@
         [Fact]
         public void CanUpdateTechnologyEmployedDetails()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("details"));
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("new details"));
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("details", "further details"));
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("new details", "further details"));
 
             Assert.Equal("new details", notification.TechnologyEmployed.Details);
         }
@@ -71,10 +71,19 @@
         [Fact]
         public void CanUpdateTechnologyEmployedAnnexProvided()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("details"));
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedInAnnex());
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("details", "further details"));
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithAnnex("details"));
 
             Assert.Equal(true, notification.TechnologyEmployed.AnnexProvided);
+        }
+
+        [Fact]
+        public void TechnologyDetailsCannotBeMoreThan70CharactersLong()
+        {
+            const string longString = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(longString, "Details");
+
+            Assert.Throws<InvalidOperationException>(createTechnologyEmployed);
         }
     }
 }

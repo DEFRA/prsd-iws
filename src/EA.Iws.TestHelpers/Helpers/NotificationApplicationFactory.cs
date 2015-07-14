@@ -112,7 +112,7 @@
                     WasteInformationType.AshContent)
             });
 
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedDetails("cheddar"));
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("cheddar", "cheese"));
 
             notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Kilogram, 10, null,
                 null);

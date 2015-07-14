@@ -10,7 +10,8 @@
             ToTable("TechnologyEmployed", "Notification");
 
             Property(x => x.AnnexProvided).HasColumnName("AnnexProvided").IsRequired();
-            Property(x => x.Details).HasColumnName("Details");
+            Property(x => x.Details).HasColumnName("Details").HasMaxLength(70);
+            Property(x => x.FurtherDetails).HasColumnName("FurtherDetails");
         }
     }
 }

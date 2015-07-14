@@ -7,6 +7,7 @@
         public Guid NotificationId { get; set; }
         public bool AnnexProvided { get; set; }
         public string Details { get; set; }
+        public string FurtherDetails { get; set; }
         public bool HasTechnologyEmployed { get; set; }
     }
 }

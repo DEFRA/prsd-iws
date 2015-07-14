@@ -21,8 +21,8 @@
             var notification = await context.GetNotificationApplication(command.NotificationId);
 
             var technologyEmployed = command.AnnexProvided
-                ? TechnologyEmployed.CreateTechnologyEmployedInAnnex()
-                : TechnologyEmployed.CreateTechnologyEmployedDetails(command.Details);
+                ? TechnologyEmployed.CreateTechnologyEmployedWithAnnex(command.Details)
+                : TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(command.Details, command.FurtherDetails);
 
             notification.SetTechnologyEmployed(technologyEmployed);
 

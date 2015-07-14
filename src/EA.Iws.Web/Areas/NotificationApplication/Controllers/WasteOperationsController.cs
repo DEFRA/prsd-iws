@@ -226,6 +226,7 @@
                 {
                     model.AnnexProvided = technologyEmployedData.AnnexProvided;
                     model.Details = technologyEmployedData.Details;
+                    model.FurtherDetails = technologyEmployedData.FurtherDetails;
                 }
 
                 return View(model);
@@ -247,7 +248,7 @@
                 {
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new SetTechnologyEmployed(model.NotificationId, model.AnnexProvided, model.Details));
+                            new SetTechnologyEmployed(model.NotificationId, model.AnnexProvided, model.Details, model.FurtherDetails));
 
                     return RedirectToAction("Index", "ReasonForExport",
                         new { id = model.NotificationId });

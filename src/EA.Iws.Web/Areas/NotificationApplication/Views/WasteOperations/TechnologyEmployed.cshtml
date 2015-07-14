@@ -24,17 +24,26 @@
 
         <header class="hgroup">
             <h2 class="heading-medium">
-                Describe the technologies and processes used for these operation codes
+                Give a brief description of the technologies and processes used to treat the waste on site.
+            </h2>
+        </header>
+        @Html.Gds().HintParagraph("Please limit your answer to 70 characters or less")
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
+            @Html.Gds().ValidationMessageFor(m => m.Details)
+            @Html.TextBoxFor(m => m.Details, new { @class = "full-width" })
+        </div>
+
+        <header class="hgroup">
+            <h2 class="heading-medium">
+                If you wish to provide further details, enter them below.
             </h2>
         </header>
 
-        <div>
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
-                @Html.Gds().HintSpan("Enter details about the technologies and processes used to treat the waste on site.")
-                @Html.Gds().ValidationMessageFor(m => m.Details)
-                @Html.TextAreaFor(m => m.Details, new { @style = "width: 100%; height: 200px" })
-            </div>
-        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherDetails)">
+                @Html.Gds().ValidationMessageFor(m => m.FurtherDetails)
+                @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px" })
+       </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.AnnexProvided)">
             <label class="block-label" for="AnnexProvided">
@@ -54,13 +63,13 @@
     <script>
         $('#AnnexProvided').click(function () {
             if ($('#AnnexProvided').is(':checked')) {
-                $('#Details').attr('readonly', true);
-                $('#Details').css('background-color', '#DEDEDE');
-                $('#Details').css('color', 'gray');
+                $('#FurtherDetails').attr('readonly', true);
+                $('#FurtherDetails').css('background-color', '#DEDEDE');
+                $('#FurtherDetails').css('color', 'gray');
             } else {
-                $('#Details').attr('readonly', false);
-                $('#Details').css('background-color', 'white');
-                $('#Details').css('color', 'black');
+                $('#FurtherDetails').attr('readonly', false);
+                $('#FurtherDetails').css('background-color', 'white');
+                $('#FurtherDetails').css('color', 'black');
             }
         });
     </script>
