@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Everytime\Permissions\0002-Permissions-Grants.sql" />
+    <Content Include="scripts\Everytime\Permissions\0001-Permissions-AppRole.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
     <Content Include="scripts\Update\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
