@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using DocumentFormat.OpenXml.Packaging;
@@ -65,7 +64,8 @@
                 new FacilityBlock(mergeFields, notification),
                 new OperationBlock(mergeFields, notification),
                 new CarrierBlock(mergeFields, notification),
-                new SpecialHandlingBlock(mergeFields, notification)
+                new SpecialHandlingBlock(mergeFields, notification),
+                new WasteCompositionBlock(mergeFields, notification)
             };
         }
     }
