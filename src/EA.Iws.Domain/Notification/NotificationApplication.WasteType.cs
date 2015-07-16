@@ -12,7 +12,7 @@
 
         public void SetWasteType(WasteType wasteType)
         {
-            if (WasteType != null)
+            if (WasteType != null && WasteType.ChemicalCompositionType != wasteType.ChemicalCompositionType)
             {
                 ClearExistingWasteCompositionInformation();
             }
