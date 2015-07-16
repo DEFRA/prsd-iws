@@ -4,22 +4,24 @@
     ViewBag.Title = "Copy from previous";
 }
 
-<header class="hgroup">
-    <h2 class="heading-large">Which previous notification would you like to use?</h2>
-    <p>
-        Select a notification from your previous notifications to copy the data from.
-        You will have to set intended shipments information for this copied notification.
-    </p>
-</header>
-
-@using (Html.BeginForm())
+@if (Model.Notifications.Any())
 {
-    @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
+    <header class="hgroup">
+        <h2 class="heading-large">Which previous notification would you like to use?</h2>
+        <p>
+            Select a notification from your previous notifications to copy the data from.
+            You will have to set intended shipments information for this copied notification.
+        </p>
+    </header>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
-        <table>
-            <thead>
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
+            <table>
+                <thead>
                 <tr>
                     <th class="formatted-block-table-header">
                         Notification number
@@ -37,8 +39,8 @@
                         Select
                     </th>
                 </tr>
-            </thead>
-            <tbody class="formatted-block-table-body">
+                </thead>
+                <tbody class="formatted-block-table-body">
                 @for (int i = 0; i < Model.Notifications.Count; i++)
                 {
                     var radioId = "radio" + i;
@@ -72,20 +74,32 @@
                         </td>
                     </tr>
                 }
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
 
-    for (int i = 0; i < Model.Notifications.Count; i++)
-    {
-        @Html.HiddenFor(m => m.Notifications[i].Id)
-        @Html.HiddenFor(m => m.Notifications[i].ExporterName)
-        @Html.HiddenFor(m => m.Notifications[i].ImporterName)
-        @Html.HiddenFor(m => m.Notifications[i].Number)
-        @Html.HiddenFor(m => m.Notifications[i].WasteName)
+        for (int i = 0; i < Model.Notifications.Count; i++)
+        {
+            @Html.HiddenFor(m => m.Notifications[i].Id)
+            @Html.HiddenFor(m => m.Notifications[i].ExporterName)
+            @Html.HiddenFor(m => m.Notifications[i].ImporterName)
+            @Html.HiddenFor(m => m.Notifications[i].Number)
+            @Html.HiddenFor(m => m.Notifications[i].WasteName)
+        }
+
+        <div class="form-group">
+            <button class="button" type="submit">Continue</button>
+        </div>
     }
-
-    <div class="form-group">
-        <button class="button" type="submit">Continue</button>
-    </div>
+}
+else
+{
+    <header class="hgroup">
+        <h2 class="heading-large">No notifications available</h2>
+        <p>
+            There are notifications available to copy from. Please continue with your application.
+        </p>
+    </header>
+    
+    @Html.ActionLink("Continue", "Index", "Exporter", new { area = "NotificationApplication" }, new { @class = "button" })
 }

@@ -24,7 +24,7 @@
         {
             using (var client = apiClient())
             {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetNotificationsToCopyForUser());
+                var result = await client.SendAsync(User.GetAccessToken(), new GetNotificationsToCopyForUser(id));
                 
                 return View(new CopyFromNotificationViewModel { Notifications = result });
             }
