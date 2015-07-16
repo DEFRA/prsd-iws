@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
     using Core.RecoveryInfo;
+    using Microsoft.Ajax.Utilities;
     using Prsd.Core.Helpers;
     using Prsd.Core.Validation;
     using Requests.RecoveryInfo;
@@ -92,18 +93,18 @@
 
                 if (!IsCostValid(DisposalAmount))
                 {
-                    results.Add(new ValidationResult("Please enter a valid disposal amount in GBP(£) with a maximum of 2 decimal places.", new[] { "DisposalAmount" }));
+                    results.Add(new ValidationResult("Please enter a valid disposal amount in GBP(£)", new[] { "DisposalAmount" }));
                 }
             }
 
             if (!IsCostValid(EstimatedAmount))
             {
-                results.Add(new ValidationResult("Please enter a valid estimated amount in GBP(£) with a maximum of 2 decimal places", new[] { "EstimatedAmount" }));
+                results.Add(new ValidationResult("Please enter a valid estimated amount in GBP(£)", new[] { "EstimatedAmount" }));
             }
 
             if (!IsCostValid(CostAmount))
             {
-                results.Add(new ValidationResult("Please enter a valid cost amount in GBP(£) with a maximum of 2 decimal places.", new[] { "CostAmount" }));
+                results.Add(new ValidationResult("Please enter a valid cost amount in GBP(£)", new[] { "CostAmount" }));
             }
 
             return results;
@@ -111,6 +112,11 @@
 
         private bool IsCostValid(string amount)
         {
+            if (string.IsNullOrWhiteSpace(amount))
+            {
+                return false;
+            }
+
             decimal cost;
             if (amount.Contains(","))
             {   
