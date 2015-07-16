@@ -5,9 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
     using Core.RecoveryInfo;
-    using Microsoft.Ajax.Utilities;
     using Prsd.Core.Helpers;
-    using Prsd.Core.Validation;
     using Requests.RecoveryInfo;
     using Web.ViewModels.Shared;
 
