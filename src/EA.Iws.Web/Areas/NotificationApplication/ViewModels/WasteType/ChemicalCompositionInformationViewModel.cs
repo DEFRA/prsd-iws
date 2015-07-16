@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
     using Core.WasteType;
     using Prsd.Core.Helpers;
-    using Requests.WasteType;
 
     public class ChemicalCompositionInformationViewModel : IValidatableObject
     {
@@ -14,6 +13,8 @@
         public List<WoodInformationData> WasteComposition { get; set; }
 
         public string FurtherInformation { get; set; }
+
+        public bool HasAnnex { get; set; }
 
         public string Energy { get; set; }
 
@@ -55,6 +56,11 @@
                         yield return new ValidationResult("Min concentration should be lower than the Max concentration  " + EnumHelper.GetDescription(WasteComposition[i].WasteInformationType), new[] { "WasteComposition[" + i + "]" });
                     }
                 }
+            }
+
+            if (HasAnnex && String.IsNullOrWhiteSpace(FurtherInformation))
+            {
+                yield return new ValidationResult("Please enter any other relevant information");
             }
         }
 

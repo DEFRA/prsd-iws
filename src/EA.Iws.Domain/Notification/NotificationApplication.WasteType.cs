@@ -40,7 +40,7 @@
             }
             else
             {
-                WasteType = wasteType; 
+                WasteType = wasteType;
             }
         }
 
@@ -92,7 +92,7 @@
             WasteType.WoodTypeDescription = woodTypeDescription;
         }
 
-        public void SetEnergyAndOptionalInformation(string energyInformation, string optionalInformation)
+        public void SetEnergyAndOptionalInformation(string energyInformation, string optionalInformation, bool hasAnnex)
         {
             if (WasteType == null)
             {
@@ -100,6 +100,7 @@
             }
             WasteType.EnergyInformation = energyInformation;
             WasteType.OptionalInformation = optionalInformation;
+            WasteType.HasAnnex = hasAnnex;
         }
     }
 }

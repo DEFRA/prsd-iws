@@ -285,7 +285,7 @@
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, model.Energy, filteredWasteCompositions));
-                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.NotificationId));
+                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, false, model.NotificationId));
             }
             return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
         }
@@ -322,7 +322,7 @@
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, model.Energy, filteredWasteCompositions));
-                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.NotificationId));
+                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.HasAnnex, model.NotificationId));
             }
             return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
         }
@@ -353,6 +353,7 @@
                     model.WasteComposition = wasteTypeData.WasteAdditionalInformarion;
                     model.Energy = wasteTypeData.EnergyInformation;
                     model.FurtherInformation = wasteTypeData.FurtherInformation;
+                    model.HasAnnex = wasteTypeData.HasAnnex;
                 }
             }
         }
