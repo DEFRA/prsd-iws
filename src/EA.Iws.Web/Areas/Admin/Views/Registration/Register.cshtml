@@ -1,15 +1,11 @@
 ﻿@using EA.Prsd.Core.Web.Mvc.RazorHelpers
-@model EA.Iws.Web.ViewModels.Registration.ApplicantRegistrationViewModel
+@model EA.Iws.Web.Areas.Admin.ViewModels.AdminRegistrationViewModel
 @{
     ViewBag.Title = "Register";
-    var signin = Request.QueryString["signin"];
 }
 <h1 class="heading-large">
-    About you and your organisation
+    Register for International Waste Shipments administration
 </h1>
-<p>
-    Enter your contact details and the name of your organisation
-</p>
 <h1 class="heading-large"></h1>
 
 @using (Html.BeginForm("ApplicantRegistration", "Registration"))
@@ -27,16 +23,6 @@
         @Html.Gds().ValidationMessageFor(m => m.Surname)
         @Html.Gds().TextBoxFor(m => m.Surname)
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.OrganisationName)">
-        @Html.Gds().LabelFor(m => m.OrganisationName)
-        @Html.Gds().ValidationMessageFor(m => m.OrganisationName)
-        @Html.Gds().TextBoxFor(m => m.OrganisationName)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.PhoneNumber)">
-        @Html.Gds().LabelFor(m => m.PhoneNumber)
-        @Html.Gds().ValidationMessageFor(m => m.PhoneNumber)
-        @Html.Gds().TextBoxFor(m => m.PhoneNumber)
-    </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
         @Html.Gds().LabelFor(m => m.Email)
         @Html.Gds().ValidationMessageFor(m => m.Email)
@@ -52,15 +38,6 @@
         @Html.Gds().LabelFor(m => m.ConfirmPassword)
         @Html.Gds().ValidationMessageFor(m => m.ConfirmPassword)
         @Html.Gds().PasswordFor(m => m.ConfirmPassword)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
-        <fieldset>
-            <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
-            <label class="block-label" for="checkbox-1">
-                @Html.CheckBoxFor(m => m.TermsAndConditions, new { @id = "checkbox-1" })
-                Accept terms and conditions of use
-            </label>
-        </fieldset>
     </div>
     <div class="form-group">
         <input type="submit" class="button" value="Continue" />
