@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
 @{
     ViewBag.Title = "Notification overview";
 }
@@ -15,7 +16,7 @@
         @Html.Partial("_Importer")
         @Html.Partial("_Facility")
 
-        <h2 class="heading-medium">@( Model.NotificationType + " operation")</h2>
+        <h2 class="heading-medium">@Model.NotificationType operation</h2>
 
         @Html.Partial("_PreConsented")
         @Html.Partial("_RecoveryDisposal")
@@ -47,9 +48,11 @@
         @Html.Partial("_PhysicalCharacteristics")
         @Html.Partial("_WasteCodes")
 
-        <h2 class="heading-medium">Waste recovery</h2>
-
-        @Html.Partial("_RecoveryInfo")
+        @if (Model.NotificationType == NotificationType.Recovery)
+        {
+            <h2 class="heading-medium">Waste recovery</h2>
+            @Html.Partial("_RecoveryInfo")
+        }
 
         @Html.Partial("_NotificationCharge")
     </div>

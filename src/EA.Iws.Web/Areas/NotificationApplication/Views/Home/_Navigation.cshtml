@@ -1,5 +1,4 @@
 ﻿@using EA.Iws.Core.Shared
-@using EA.Iws.Web.Areas.NotificationApplication
 @using EA.Iws.Web.Infrastructure
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NavigationViewModel
 
@@ -17,7 +16,7 @@
 @Html.Navigation().Link("Importer consignee", Model.Progress.IsImporterCompleted, "Index", "Importer", "NotificationApplication")
 @Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.IsFacilityCompleted, "List", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
 
-<h4>Recovery operation</h4>
+<h4>@Model.NotificationType operation</h4>
 @if (Model.NotificationType == NotificationType.Recovery)
 {
     @Html.Navigation().Link("Pre-consent facility", Model.Progress.IsPreconsentStatusChosen, "RecoveryPreconsent", "Facility", "NotificationApplication")
@@ -47,7 +46,9 @@
 @Html.Navigation().Link("Physical characteristics", Model.Progress.ArePhysicalCharacteristicsCompleted, "Index", "PhysicalCharacteristics", "NotificationApplication")
 @Html.Navigation().Link("Waste codes", Model.Progress.AreWasteCodesCompleted, "BaselEwcCode", "WasteCodes", "NotificationApplication")
 
-<h4>Waste Recovery</h4>
-@Html.Navigation().Link("Recovery information", Model.Progress.IsWasteRecoveryInformationCompleted, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication")
-
+@if (Model.NotificationType == NotificationType.Recovery)
+{
+    <h4>Waste Recovery</h4>
+    @Html.Navigation().Link("Recovery information", Model.Progress.IsWasteRecoveryInformationCompleted, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication")
+}
 <em></em>

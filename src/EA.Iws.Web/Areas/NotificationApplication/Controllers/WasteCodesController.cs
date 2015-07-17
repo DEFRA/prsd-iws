@@ -6,10 +6,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.Shared;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
+    using Requests.Notification;
     using Requests.WasteCodes;
     using ViewModels.WasteCodes;
 
@@ -74,7 +76,7 @@
                 {
                     return View(model);
                 }
-                
+
                 if (model.SelectedEwcCodes.All(c => c.Id != codeToAdd.Id))
                 {
                     model.SelectedEwcCodes.Add(codeToAdd);
@@ -342,7 +344,12 @@
                         client.SendAsync(User.GetAccessToken(),
                             new SetUnNumberWasteCodes(model.NotificationId, model.SelectedUnNumbers.Select(p => p.Id), model.SelectedCustomCodes));
 
-                    return RedirectToAction("RecoveryPercentage", "RecoveryInfo");
+                    var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(model.NotificationId));
+                    if (response.NotificationType == NotificationType.Recovery)
+                    {
+                        return RedirectToAction("RecoveryPercentage", "RecoveryInfo");
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (ApiBadRequestException ex)
                 {
