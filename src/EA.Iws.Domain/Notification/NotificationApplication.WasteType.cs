@@ -12,45 +12,62 @@
 
         public void SetWasteType(WasteType wasteType)
         {
-            if (WasteType != null && WasteType.ChemicalCompositionType != wasteType.ChemicalCompositionType)
+            if (WasteType == null)
             {
-                ClearExistingWasteCompositionInformation();
+                WasteType = wasteType;
+                return;
             }
 
-            if (WasteType != null && wasteType.ChemicalCompositionType != ChemicalComposition.Other)
+            if (WasteType.ChemicalCompositionType == wasteType.ChemicalCompositionType)
             {
-                if (wasteType.ChemicalCompositionType != WasteType.ChemicalCompositionType)
-                {
-                    WasteType.ClearWasteAdditionalInformation();
-                    WasteType.ClearWasteCompositions();
-                    WasteType = wasteType;
-                }
-                else
-                {
-                    WasteType.ChemicalCompositionType = wasteType.ChemicalCompositionType;
-                    WasteType.WasteCompositions = wasteType.WasteCompositions;
-                }
+                UpdateSameChemicalCompositionType(wasteType);
             }
-            else if (WasteType != null && wasteType.ChemicalCompositionType == ChemicalComposition.Other)
+            else 
             {
-                WasteType.ClearWasteAdditionalInformation();
-                ClearExistingWasteCompositionInformation();
-                WasteType.ChemicalCompositionType = wasteType.ChemicalCompositionType;
-                WasteType.ChemicalCompositionName = wasteType.ChemicalCompositionName;
-            }
-            else
-            {
+                ClearAllWasteData();
                 WasteType = wasteType;
             }
         }
 
-        private void ClearExistingWasteCompositionInformation()
+        private void UpdateSameChemicalCompositionType(WasteType wasteType)
         {
-            if (WasteType != null && WasteType.WasteCompositions != null)
+            if (wasteType.ChemicalCompositionType == ChemicalComposition.Other)
+            {
+                WasteType.ChemicalCompositionName = wasteType.ChemicalCompositionName;
+            }
+
+            if (wasteType.ChemicalCompositionType == ChemicalComposition.RDF || wasteType.ChemicalCompositionType == ChemicalComposition.SRF)
+            {
+                ClearWasteCompositions();
+                WasteType.WasteCompositions = wasteType.WasteCompositions;
+            }
+
+            if (wasteType.ChemicalCompositionType == ChemicalComposition.Wood)
+            {
+                ClearWasteCompositions();
+                WasteType.WasteCompositions = wasteType.WasteCompositions;
+                WasteType.WoodTypeDescription = wasteType.WoodTypeDescription;
+            }
+        }
+
+        private void ClearAllWasteData()
+        {
+            if (WasteType != null)
             {
                 WasteType.OptionalInformation = null;
                 WasteType.EnergyInformation = null;
                 WasteType.WoodTypeDescription = null;
+                WasteType.OtherWasteTypeDescription = null;
+                WasteType.HasAnnex = false;
+                ClearWasteCompositions();
+                ClearWasteAdditionalInformation();
+            }
+        }
+
+        private void ClearWasteCompositions()
+        {
+            if (WasteType != null && WasteType.WasteCompositions != null)
+            {
                 WasteType.ClearWasteCompositions();
             }
         }

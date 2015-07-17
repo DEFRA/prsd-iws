@@ -62,6 +62,18 @@
         }
 
         [Fact]
+        public void CanChangeChemicalCompositionTypeMultipleTimes()
+        {
+            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWasteTypeCollection()));
+
+            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
+
+            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWasteTypeCollection()));
+
+            Assert.Equal(ChemicalComposition.Wood, notification.WasteType.ChemicalCompositionType);
+        }
+
+        [Fact]
         public void CanEditChemicalCompositions()
         {
             notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));

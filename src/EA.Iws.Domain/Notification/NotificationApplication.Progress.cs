@@ -126,7 +126,8 @@
                 return false;
             }
             return (WasteType.ChemicalCompositionType != ChemicalComposition.Other ||
-                    !string.IsNullOrWhiteSpace(WasteType.OtherWasteTypeDescription))
+                    (!string.IsNullOrWhiteSpace(WasteType.OtherWasteTypeDescription)
+                    || WasteType.HasAnnex))
                    &&
                    (WasteType.ChemicalCompositionType == ChemicalComposition.Other ||
                     WasteType.WasteAdditionalInformation.Any())
