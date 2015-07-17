@@ -9,6 +9,9 @@
     {
         public string FirstName { get; set; }
         public string Surname { get; set; }
+        public string JobTitle { get; set; }
+        public string LocalArea { get; set; }
+        public string CompetentAuthority { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

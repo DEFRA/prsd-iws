@@ -61,6 +61,7 @@
     <Content Include="scripts\Update\Sprint10\20150630-094600-update-waste-code-info.sql" />
     <Content Include="scripts\Update\Sprint11\20150702-171300-create-pricing-structure.sql" />
     <Content Include="scripts\Update\Sprint11\20150714-122323-updated-technology-employed-table.sql" />
+    <Content Include="scripts\Update\Sprint12\20150716-153345-updated-asp-net-users-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
