@@ -1,16 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Core.Producers;
     using Infrastructure;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
-    using Requests.Exporters;
     using Requests.Producers;
     using ViewModels.Producer;
     using Web.ViewModels.Shared;
@@ -36,7 +33,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CopyFromExporter(Guid id, YesNoChoiceViewModel inputModel)
+        public async Task<ActionResult> CopyFromExporter(Guid id, YesNoChoiceViewModel inputModel)
         {
             if (!ModelState.IsValid)
             {
@@ -44,32 +41,21 @@
                 return View(inputModel);
             }
 
-            if (inputModel.Choices.SelectedValue.Equals("No"))
-            {
-                return RedirectToAction("Add", new { id });
-            }
-
-            return RedirectToAction("Add", new { id, copy = true });
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Add(Guid id, bool? copy)
-        {
-            AddProducerViewModel model;
-
-            if (copy.HasValue && copy.Value)
+            if (inputModel.Choices.SelectedValue.Equals("Yes"))
             {
                 using (var client = apiClient())
                 {
-                    var exporter = await client.SendAsync(User.GetAccessToken(), new GetExporterByNotificationId(id));
-
-                    model = new AddProducerViewModel(exporter);
+                    await client.SendAsync(User.GetAccessToken(), new CopyProducerFromExporter(id));
                 }
             }
-            else
-            {
-                model = new AddProducerViewModel { NotificationId = id };
-            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Add(Guid id)
+        {
+            var model = new AddProducerViewModel { NotificationId = id };
 
             await this.BindCountryList(apiClient);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
@@ -91,7 +77,7 @@
             {
                 try
                 {
-                    AddProducerToNotification request = model.ToRequest();
+                    var request = model.ToRequest();
 
                     await client.SendAsync(User.GetAccessToken(), request);
 
@@ -117,7 +103,8 @@
         {
             using (var client = apiClient())
             {
-                var producer = await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(id, entityId));
+                var producer =
+                    await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(id, entityId));
 
                 var model = new EditProducerViewModel(producer);
 
@@ -141,7 +128,7 @@
             {
                 try
                 {
-                    UpdateProducerForNotification request = model.ToRequest();
+                    var request = model.ToRequest();
 
                     await client.SendAsync(User.GetAccessToken(), request);
 
@@ -171,12 +158,13 @@
                 {
                     var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
                     var producers = response.ToList();
-                    int producersCount = producers.Count;
-                    bool isSiteOfExport = producers.Single(x => x.Id == entityId).IsSiteOfExport;
+                    var producersCount = producers.Count;
+                    var isSiteOfExport = producers.Single(x => x.Id == entityId).IsSiteOfExport;
 
                     if (isSiteOfExport && producersCount > 1)
                     {
-                        TempData["errorRemoveProducer"] = "You have chosen to remove the site of export. You will need to select an alternative site of export before you can remove this producer.";
+                        TempData["errorRemoveProducer"] =
+                            "You have chosen to remove the site of export. You will need to select an alternative site of export before you can remove this producer.";
                         return RedirectToAction("List", "Producer", new { id });
                     }
 
@@ -240,7 +228,7 @@
                     try
                     {
                         await client.SendAsync(User.GetAccessToken(),
-                                new SetSiteOfExport(new Guid(model.SelectedValue), model.NotificationId));
+                            new SetSiteOfExport(new Guid(model.SelectedValue), model.NotificationId));
                     }
                     catch (ApiBadRequestException ex)
                     {

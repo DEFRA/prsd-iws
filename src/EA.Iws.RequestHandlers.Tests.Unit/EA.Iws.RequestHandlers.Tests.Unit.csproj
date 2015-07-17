@@ -82,6 +82,7 @@
     <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
     <Compile Include="Notification\GetNotificationChargeHandlerTests.cs" />
     <Compile Include="Organisations\FindMatchingCompaniesHandlerTests.cs" />
+    <Compile Include="Producer\CopyProducerFromExporterHandlerTests.cs" />
     <Compile Include="Producer\ProducerHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests.cs" />

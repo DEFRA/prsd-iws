@@ -55,6 +55,7 @@
     <Compile Include="Notification\GetNotificationType.cs" />
     <Compile Include="Notification\NotificationBasicInfo.cs" />
     <Compile Include="Notification\NotificationProgressInfo.cs" />
+    <Compile Include="Producers\CopyProducerFromExporter.cs" />
     <Compile Include="RecoveryInfo\AddRecoveryInfoToNotification.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
     <Compile Include="Carriers\GetCarrierForNotification.cs" />

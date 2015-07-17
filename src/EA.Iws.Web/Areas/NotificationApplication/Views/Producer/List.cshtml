@@ -13,56 +13,46 @@
     if (Model != null && Model.ProducerData.Any())
     {
         <div class="colored-header-bar"></div>
-        <table>
-            <tbody>
-                @for (var i = 0; i < Model.ProducerData.Count; i++)
-                {
+        <div class="form-group">
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <details>
-                                <summary><span class="summary">@Html.DisplayFor(m => m.ProducerData[i].Business.Name)</span></summary>
-                                <div class="grid-row">
-                                    <div class="column-quarter">
-                                        @Html.DisplayFor(m => m.ProducerData[i].Contact.FirstName) @Html.DisplayFor(m => m.ProducerData[i].Contact.LastName)<br />
-                                        <a href="mailto:@Model.ProducerData[i].Contact.Email">@Model.ProducerData[i].Contact.Email</a><br />
-                                        Tel: @Html.DisplayFor(m => m.ProducerData[i].Contact.Telephone)<br />
-                                        @if (Model.ProducerData[i].Contact.Fax != null)
-                                        {
-                                            <label>Fax: </label>
-                                            @Html.DisplayFor(model => model.ProducerData[i].Contact.Fax)
-                                            ;
-                                        }
-                                    </div>
-                                    <div class="column-quarter">
-                                        @Html.DisplayFor(m => m.ProducerData[i].Address.Building),<br />
-                                        @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),<br />
-                                        @if (Model.ProducerData[i].Address.Address2 != null)
-                                        {
-                                            @Html.DisplayFor(model => model.ProducerData[i].Address.Address2)
-                                            @Html.Raw(",<br/>")
-                                        }
-                                        @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity) @Html.DisplayFor(m => m.ProducerData[i].Address.PostalCode)
-                                    </div>
-                                    <div class="column-quarter">
-                                        @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
-                                        <br />
-                                        @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
-                                    </div>
-                                    <div class="column-quarter">
-                                        Site of Export:
-                                        @{
-                                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.ProducerData[i].Id) } };
-                                        if (@Model.ProducerData[i].IsSiteOfExport) { htmlAttr.Add("checked", "checked"); }
-                                        @Html.RadioButtonFor(m => m.SelectedValue, Model.ProducerData[i].Id, htmlAttr)
-                                        }
-                                    </div>
-                                </div>
-                            </details>
-                        </td>
+                        <th>Organisation name</th>
+                        <th>Address</th>
+                        <th>Site of export?</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.ProducerData.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(Model.ProducerData[i].Business.Name, "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.ProducerData[i].Address.Building),
+                                @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),
+                                @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity)
+                            </td>
+                            <td>
+                                @{
+                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.ProducerData[i].Id) } };
+                        if (@Model.ProducerData[i].IsSiteOfExport)
+                        {
+                            htmlAttr.Add("checked", "checked");
+                        }
+                        @Html.RadioButtonFor(m => m.SelectedValue, Model.ProducerData[i].Id, htmlAttr)
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 
     @Html.HiddenFor(m => m.NotificationId)

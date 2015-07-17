@@ -147,6 +147,7 @@
     <Compile Include="Notification\SetRecoveryPercentageDataHandler.cs" />
     <Compile Include="OperationCodes\AddDisposalCodesHandler.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />
+    <Compile Include="Producers\CopyProducerFromExporterHandler.cs" />
     <Compile Include="Producers\DeleteProducerForNotificationHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
     <Compile Include="Exporters\GetExporterByNotificationIdHandler.cs" />
