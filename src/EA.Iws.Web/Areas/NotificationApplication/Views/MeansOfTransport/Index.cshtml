@@ -5,23 +5,39 @@
 }
 
 <h2 class="heading-large">Which means of transport will be used?</h2>
-<p>Select each of the transport methods that will be used for the whole journey in the order in which they will occur</p>
+<p>Select each of the transport methods that will be used for the whole journey in the order in which they will occur.</p>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-    
-    @Html.Partial("_PreviousMeansEditor", Model)
-
-    <h3 class="heading-small">@ViewService.WordForNumber(Model.SelectedMeans.Count + 1) method</h3>
-    
-    @Html.Partial("_CurrentMeansEditor", Model)
 
     <div class="form-group">
-        <button type="submit" class="link-submit" value="Add" name="submit">Add more</button>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Means of transport</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var means in Model.PossibleMeans)
+                {
+                    <tr>
+                        <td>@means.Symbol</td>
+                        <td>@means.DisplayName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedMeans)">
+        @Html.Gds().LabelFor(m => m.SelectedMeans)
+        @Html.Gds().HintSpan("If your journey is 'Road → Sea → Road' enter 'R-S-R'")
+        @Html.Gds().ValidationMessageFor(m => m.SelectedMeans)
+        @Html.Gds().TextBoxFor(m => m.SelectedMeans)
+    </div>
+
     <div class="form-group">
         <button type="submit" class="button" value="Submit" name="submit">Continue</button>
     </div>

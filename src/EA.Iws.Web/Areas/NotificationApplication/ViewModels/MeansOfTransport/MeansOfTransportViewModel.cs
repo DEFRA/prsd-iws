@@ -2,35 +2,39 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using Web.ViewModels.Shared;
+    using Core.MeansOfTransport;
+    using Prsd.Core.Domain;
 
     public class MeansOfTransportViewModel : IValidatableObject
     {
-        public IList<RadioButtonPair<string, int>> PossibleMeans { get; set; }
-
-        public IList<int> SelectedMeans { get; set; }
-
-        [Required(ErrorMessage = "Please answer this question")]
-        public int? SelectedValue { get; set; }
-
         public MeansOfTransportViewModel()
         {
-            SelectedMeans = new List<int>();
+            PossibleMeans = Enumeration.GetAll<MeansOfTransport>();
         }
+
+        public IEnumerable<MeansOfTransport> PossibleMeans { get; set; }
+
+        [Required(ErrorMessage = "Please answer this question")]
+        [RegularExpression(@"^([RTSWA]\-)*?[RTSWA]$",
+            ErrorMessage = "Means of transport is not in a valid format. Please enter a value such as 'R-S-R'")]
+        [Display(Name = "Means of transport")]
+        public string SelectedMeans { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (SelectedMeans.Count > 0 && SelectedValue.HasValue && SelectedMeans.Last() == SelectedValue)
+            if (SelectedMeans != null)
             {
-                yield return new ValidationResult("Cannot add a means of transport which is the same as the previous means of transport.", new[] { "SelectedValue" });
-            }
-
-            for (int i = 0; i < SelectedMeans.Count; i++)
-            {
-                if (i > 0 && SelectedMeans[i - 1] == SelectedMeans[i])
+                var means = SelectedMeans.Split('-');
+                for (var i = 1; i < means.Length; i++)
                 {
-                    yield return new ValidationResult("Cannot change a means of transport to be the same as a previous means of transport.", new[] { "SelectedMeans[" + i + "]" });
+                    if (means[i] == means[i - 1])
+                    {
+                        yield return
+                            new ValidationResult(
+                                "Cannot have a means of transport which is the same as the previous means of transport.",
+                                new[] { "SelectedMeans" });
+                        break;
+                    }
                 }
             }
         }

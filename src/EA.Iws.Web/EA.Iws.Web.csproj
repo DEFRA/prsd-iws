@@ -594,9 +594,7 @@
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\_PackagingTypes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\_CurrentMeansEditor.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\_PreviousMeansEditor.cshtml" />
     <Content Include="Views\Shared\_IwsStandardDataNotice.cshtml" />
     <Content Include="Views\CopyFromNotification\Index.cshtml" />
     <Content Include="Views\CopyFromNotification\Result.cshtml" />
