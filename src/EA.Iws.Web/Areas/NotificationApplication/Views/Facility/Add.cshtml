@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Add a facility";
 
-    var message = "This information may be obtained from your " + Model.NotificationType.ToString().ToLowerInvariant() + " facility. Enter \"Not applicable\" when no relevant registration number applies";
+    var facilityType = Model.NotificationType.ToString().ToLowerInvariant();
+    var message = "This information may be obtained from your " + facilityType + " facility. Enter \"Not applicable\" when no relevant registration number applies";
 
     ViewBag.SoleTraderRegistrationNumber = message;
     ViewBag.PartnershipRegistrationNumber = message;
@@ -15,13 +16,11 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
     @Html.Gds().ValidationSummary()
-    
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h2 class="heading-large">Add @Model.NotificationType.ToString().ToLowerInvariant() facility</h2>
+        <h2 class="heading-large">Add @facilityType facility</h2>
         <div class="colored-header-bar"></div>
     </header>
 
@@ -29,7 +28,7 @@
 
     <h2 class="heading-medium">Address</h2>
     <hr/>
-    
+    <p>This should be the site address for the @facilityType facility.</p>
     @Html.EditorFor(m => m.Address)
 
     <h2 class="heading-medium">Contact person</h2>
