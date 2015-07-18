@@ -31,6 +31,12 @@
         {
             switch (numberOfLines)
             {
+                case (AddressLines.Two):
+                    return Convert(new[]
+                    {
+                        MergeLines(addressLine1, addressLine2, townOrCity),
+                        MergeLines(region, postcode, country)
+                    });
                 case (AddressLines.Three):
                     return Convert(new[]
                     {

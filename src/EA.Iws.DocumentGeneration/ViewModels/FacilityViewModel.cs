@@ -16,7 +16,7 @@
             Email = facility.Contact.Email;
             RegistrationNumber = facility.Business.RegistrationNumber;
             IsActualSite = facility.IsActualSiteOfTreatment;
-
+            AnnexMessage = string.Empty;
             SetActualSiteOfTreatment(countOfFacilities);
         }
 
@@ -28,7 +28,7 @@
 
         public string Address
         {
-            get { return address.Address(AddressLines.Three); }
+            get { return address.Address(AddressLines.Two); }
         }
 
         public string RegistrationNumber { get; private set; }
@@ -45,6 +45,8 @@
 
         public bool IsActualSite { get; private set; }
 
+        public string AnnexMessage { get; private set; }
+
         private void SetActualSiteOfTreatment(int countOfFacilities)
         {
             ActualSite = (countOfFacilities == 1) ? "As Above" : "See annex.";
@@ -55,14 +57,15 @@
             var seeAnnexNotice = "See annex " + annexNumber;
             return new FacilityViewModel
             {
-                ContactPerson = seeAnnexNotice,
-                Name = seeAnnexNotice,
-                Email = seeAnnexNotice,
-                Telephone = seeAnnexNotice,
-                RegistrationNumber = seeAnnexNotice,
-                address = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(seeAnnexNotice),
-                Fax = seeAnnexNotice,
-                ActualSite = seeAnnexNotice
+                AnnexMessage = seeAnnexNotice,
+                ContactPerson = string.Empty,
+                Name = string.Empty,
+                Email = string.Empty,
+                Telephone = string.Empty,
+                RegistrationNumber = string.Empty,
+                address = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty),
+                Fax = string.Empty,
+                ActualSite = string.Empty
             };
         }
 

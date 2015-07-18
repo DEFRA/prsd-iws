@@ -16,7 +16,7 @@
             Email = producer.Contact.Email;
             RegistrationNumber = producer.Business.RegistrationNumber;
             IsSiteOfGeneration = producer.IsSiteOfExport;
-
+            AnnexMessage = string.Empty;
             SetSiteOfGeneration(countOfProducers);
         }
 
@@ -45,6 +45,8 @@
 
         public bool IsSiteOfGeneration { get; private set; }
 
+        public string AnnexMessage { get; private set; }
+
         private void SetSiteOfGeneration(int countOfProducers)
         {
             string siteOfGenerationInformation;
@@ -66,14 +68,15 @@
 
             return new ProducerViewModel
             {
-                ContactPerson = seeAnnexNotice,
-                Name = seeAnnexNotice,
-                Email = seeAnnexNotice,
-                Telephone = seeAnnexNotice,
-                RegistrationNumber = seeAnnexNotice,
-                address = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(seeAnnexNotice),
-                Fax = seeAnnexNotice,
-                SiteOfGeneration = seeAnnexNotice
+                AnnexMessage = seeAnnexNotice,
+                ContactPerson = string.Empty,
+                Name = string.Empty,
+                Email = string.Empty,
+                Telephone = string.Empty,
+                RegistrationNumber = string.Empty,
+                address = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty),
+                Fax = string.Empty,
+                SiteOfGeneration = string.Empty
             };
         }
     }

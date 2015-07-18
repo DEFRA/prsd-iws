@@ -17,8 +17,6 @@
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
-            var numberOfCarriers = notification.Carriers.Count();
-
             var motString = string.Empty;
             var mot = notification.MeansOfTransport.ToList();
 
