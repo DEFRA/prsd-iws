@@ -619,8 +619,7 @@
                 var baselCodes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Basel));
                 var oecdCodes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Oecd));
 
-                model.BaselOecdCodes = baselCodes.Union(oecdCodes);
-
+                model.BaselOecdCodes = baselCodes.Union(oecdCodes).OrderBy(m => m.Code);
                 return model;
             }
         }
@@ -630,10 +629,6 @@
             using (var client = apiClient())
             {
                 model.UnNumbers = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.UnNumber));
-
-                //model.SelectedUnNumbers = new List<WasteCodeData>(await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.UnNumber)));
-                //model.SelectedCustomCodes = new List<string>((await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.CustomsCode))).Select(p => p.CustomCode));
-
                 return model;
             }
         }

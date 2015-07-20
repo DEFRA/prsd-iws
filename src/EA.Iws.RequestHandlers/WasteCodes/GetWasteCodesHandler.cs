@@ -24,7 +24,7 @@
         public async Task<WasteCodeData[]> HandleAsync(GetWasteCodesByType message)
         {
             var result = await context.WasteCodes.Where(p => p.CodeType == message.CodeType).ToArrayAsync();
-            return result.Select(c => mapper.Map(c)).ToArray();
+            return result.Select(c => mapper.Map(c)).OrderBy(m => m.Code).ToArray();
         }
     }
 }
