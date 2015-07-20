@@ -160,6 +160,11 @@
 
         public bool IsWasteRecoveryInformationCompleted()
         {
+            if (NotificationType == NotificationType.Disposal)
+            {
+                return true;
+            }
+
             return IsProvidedByImporter.GetValueOrDefault() || (PercentageRecoverable != null && RecoveryInfo != null);
         }
     }
