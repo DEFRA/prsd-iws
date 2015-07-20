@@ -147,6 +147,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\ControllerTests.cs" />
     <Compile Include="Controllers\NewNotificationControllerTests.cs" />
     <Compile Include="Controllers\CustomsOfficeControllerTests.cs" />
