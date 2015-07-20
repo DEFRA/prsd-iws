@@ -1,11 +1,12 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
 <div class="column-two-thirds" id="submit-overview-area">
     <header>
         <hgroup>
             <h1 class="heading-large">Notification overview</h1>
         </hgroup>
     </header>
-    <hr/>
+    <hr />
 
     <button class="link-submit js-visible" type="button" id="expand-contract" style="float: right;">Expand all +</button>
 
@@ -36,7 +37,10 @@
         @Html.Partial("_ClassifyYourWaste", Model)
     </div>
 
-    <div>
-        @Html.Partial("_WasteRecovery", Model)
-    </div>
+    @if (Model.NotificationType == NotificationType.Recovery)
+    {
+        <div>
+            @Html.Partial("_WasteRecovery", Model)
+        </div>
+    }
 </div>
