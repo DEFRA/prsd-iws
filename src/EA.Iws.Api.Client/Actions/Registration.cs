@@ -21,6 +21,12 @@
             return await response.CreateResponseAsync<string>();
         }
 
+        public async Task<string> RegisterAdminAsync(AdminRegistrationData adminRegistrationData)
+        {
+            var response = await httpClient.PostAsJsonAsync(Controller + "RegisterAdmin", adminRegistrationData);
+            return await response.CreateResponseAsync<string>();
+        }
+
         public async Task<bool> VerifyEmailAsync(VerifiedEmailData verifiedEmailData)
         {
             var response = await httpClient.PostAsJsonAsync(Controller + "VerifyEmail", verifiedEmailData);

@@ -34,6 +34,16 @@
 
         public string Email { get; private set; }
 
+        public string JobTitle { get; private set; }
+
+        public string CompenentAuthority { get; private set; }
+
+        public string LocalArea { get; private set; }
+
+        public bool IsAdmin { get; private set; }
+
+        public bool IsApproved { get; private set; }
+
         public virtual Organisation Organisation { get; private set; }
 
         public void LinkToOrganisation(Organisation organisation)

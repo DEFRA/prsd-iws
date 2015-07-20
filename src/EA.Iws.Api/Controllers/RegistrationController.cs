@@ -49,6 +49,37 @@
             return Ok(user.Id);
         }
 
+        [AllowAnonymous]
+        [Route("RegisterAdmin")]
+        public async Task<IHttpActionResult> RegisterAdmin(AdminRegistrationData model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                Surname = model.Surname,
+                JobTitle = model.JobTitle,
+                LocalArea = model.LocalArea,
+                CompetentAuthority = model.CompetentAuthority,
+                IsAdmin = true
+            };
+
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok(user.Id);
+        }
+
         [HttpGet]
         [Route("GetUserEmailVerificationToken")]
         public async Task<string> GetUserEmailVerificationToken()

@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.ViewModels
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     using Prsd.Core.Validation;
 
     public class AdminRegistrationViewModel
@@ -49,7 +51,11 @@
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public SelectList Areas { get; set; }
+
+        public SelectList CompetentAuthorities { get; set; }
     }
 }

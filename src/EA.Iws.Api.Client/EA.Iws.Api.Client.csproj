@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Actions\Registration.cs" />
     <Compile Include="Actions\IRegistration.cs" />
+    <Compile Include="Entities\AdminRegistrationData.cs" />
     <Compile Include="Entities\ApplicantRegistrationData.cs" />
     <Compile Include="Entities\EmailVerificationData.cs" />
     <Compile Include="Entities\VerifiedEmailData.cs" />

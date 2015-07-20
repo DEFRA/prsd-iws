@@ -26,12 +26,12 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthority)">
         @Html.Gds().LabelFor(m => m.CompetentAuthority)
         @Html.Gds().ValidationMessageFor(m => m.CompetentAuthority)
-        @Html.Gds().TextBoxFor(m => m.CompetentAuthority)
+        @Html.Gds().DropDownListFor(m => m.CompetentAuthority, Model.CompetentAuthorities)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.LocalArea)">
         @Html.Gds().LabelFor(m => m.LocalArea)
         @Html.Gds().ValidationMessageFor(m => m.LocalArea)
-        @Html.Gds().TextBoxFor(m => m.LocalArea)
+        @Html.Gds().DropDownListFor(m => m.LocalArea, Model.Areas)
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.JobTitle)">
         @Html.Gds().LabelFor(m => m.JobTitle)

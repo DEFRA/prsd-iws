@@ -12,6 +12,8 @@
         public string JobTitle { get; set; }
         public string LocalArea { get; set; }
         public string CompetentAuthority { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool IsApproved { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
