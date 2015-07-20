@@ -219,8 +219,6 @@
   <ItemGroup>
     <Content Include="Areas\NotificationApplication\Views\Submit\_RecoveryOperation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\_Journey.cshtml" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Areas\NotificationApplication\Views\Submit\_ClassifyYourWaste.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\_WasteRecovery.cshtml" />
     <Content Include="Areas\FinancialGuarantee\Views\web.config" />
@@ -377,14 +375,10 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-play.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-rewind.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
-    <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\application.js" />
     <Content Include="Scripts\business-type-radio-buttons.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom-validation.js" />
     <Content Include="Content\iws-page-ie6.scss" />
     <Content Include="Content\iws-page-ie7.scss" />
@@ -451,12 +445,6 @@
     <Content Include="Areas\NotificationApplication\Views\WasteType\RdfSrfType.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\WoodAdditionalInformation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\WoodType.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Areas\InternalUser\Views\web.config" />
-    <Content Include="Areas\InternalUser\Views\Search\BasicSearch.cshtml" />
-    <Content Include="Areas\InternalUser\Views\_ViewStart.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\_BusinessType.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Disclaimer.cshtml" />
     <Content Include="Content\iws\_overview.scss" />
@@ -535,7 +523,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\vendor\details.polyfill.js" />
     <Content Include="Scripts\vendor\jquery-1.11.0.min.js" />
     <Content Include="Scripts\vendor\modernizr.custom.77028.js" />
@@ -648,9 +635,6 @@
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />
     <Compile Include="Areas\FinancialGuarantee\FinancialGuaranteeAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\NavigationViewModel.cs" />
-    <Compile Include="Areas\InternalUser\Controllers\SearchController.cs" />
-    <Compile Include="Areas\InternalUser\InternalUserAreaRegistration.cs" />
-    <Compile Include="Areas\InternalUser\ViewModels\Search\BasicSearchViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmittedViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Submit\SubmitSideBarViewModel.cs" />
@@ -793,7 +777,6 @@
   <ItemGroup>
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
-    <Folder Include="Areas\InternalUser\Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

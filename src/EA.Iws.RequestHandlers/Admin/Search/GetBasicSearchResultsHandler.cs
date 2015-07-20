@@ -23,26 +23,27 @@
 
         public async Task<IList<BasicSearchResult>> HandleAsync(GetBasicSearchResults query)
         {
-            int wasteTypeQueryTerm = EnumHelper.GetValues(typeof(ChemicalCompositionType)).Count + 1;
+            int wasteTypeQueryTerm;
 
             if (ChemicalCompositionType.RDF.ToString().Equals(query.SearchTerm, StringComparison.InvariantCultureIgnoreCase))
             {
                 wasteTypeQueryTerm = (int)ChemicalCompositionType.RDF;
             }
-
-            if (ChemicalCompositionType.SRF.ToString().Equals(query.SearchTerm, StringComparison.InvariantCultureIgnoreCase))
+            else if (ChemicalCompositionType.SRF.ToString().Equals(query.SearchTerm, StringComparison.InvariantCultureIgnoreCase))
             {
                 wasteTypeQueryTerm = (int)ChemicalCompositionType.SRF;
             }
-
-            if (ChemicalCompositionType.Wood.ToString().Equals(query.SearchTerm, StringComparison.InvariantCultureIgnoreCase))
+            else if (ChemicalCompositionType.Wood.ToString().Equals(query.SearchTerm, StringComparison.InvariantCultureIgnoreCase))
             {
                 wasteTypeQueryTerm = (int)ChemicalCompositionType.Wood;
             }
-
-            if (ChemicalCompositionType.Other.ToString().Equals(query.SearchTerm, StringComparison.InvariantCultureIgnoreCase))
+            else if (ChemicalCompositionType.Other.ToString().Equals(query.SearchTerm, StringComparison.InvariantCultureIgnoreCase))
             {
                 wasteTypeQueryTerm = (int)ChemicalCompositionType.Other;
+            }
+            else
+            {
+                wasteTypeQueryTerm = EnumHelper.GetValues(typeof(ChemicalCompositionType)).Count + 1;
             }
 
             var results = await(from n in context.NotificationApplications
