@@ -49,7 +49,7 @@
 
         public bool HasAnnex
         {
-            get { return data.TechnologyEmployed.Length > 200; }
+            get { return data.AreFurtherDetailsProvided; }
         }
 
         public void GenerateAnnex(int annexNumber)
