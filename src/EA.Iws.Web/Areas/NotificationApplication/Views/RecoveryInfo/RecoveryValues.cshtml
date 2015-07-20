@@ -23,6 +23,7 @@
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.EstimatedAmount)">
         @Html.Gds().LabelFor(m => m.EstimatedAmount)
+        @Html.Gds().HintSpan("The amount can be entered with or without commas as thousand separators. For example, 3,333.88 or 3333.88")
         @Html.Gds().ValidationMessageFor(m => m.EstimatedAmount)
         @Html.Gds().TextBoxFor(m => m.EstimatedAmount)
     </div>
@@ -34,6 +35,7 @@
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CostAmount)">
         @Html.Gds().LabelFor(m => m.CostAmount)
+        @Html.Gds().HintSpan("The amount can be entered with or without commas as thousand separators. For example, 3,333.88 or 3333.88")
         @Html.Gds().ValidationMessageFor(m => m.CostAmount)
         @Html.Gds().TextBoxFor(m => m.CostAmount)
     </div>
@@ -46,6 +48,7 @@
         </div>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalAmount)">
             @Html.Gds().LabelFor(m => m.DisposalAmount, showOptionalLabel:false)
+            @Html.Gds().HintSpan("The amount can be entered with or without commas as thousand separators. For example, 3,333.88 or 3333.88")
             @Html.Gds().ValidationMessageFor(m => m.DisposalAmount)
             @Html.Gds().TextBoxFor(m => m.DisposalAmount)
         </div>

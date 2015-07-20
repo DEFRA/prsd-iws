@@ -91,18 +91,18 @@
 
                 if (!IsCostValid(DisposalAmount))
                 {
-                    results.Add(new ValidationResult("Please enter a valid disposal amount in GBP(£)", new[] { "DisposalAmount" }));
+                    results.Add(new ValidationResult("The amount that you have entered does not seem to be valid, it needs to be a number with no more than two decimal places and can have a comma as a thousand separator, please see the examples.", new[] { "DisposalAmount" }));
                 }
             }
 
             if (!IsCostValid(EstimatedAmount))
             {
-                results.Add(new ValidationResult("Please enter a valid estimated amount in GBP(£)", new[] { "EstimatedAmount" }));
+                results.Add(new ValidationResult("The amount that you have entered does not seem to be valid, it needs to be a number with no more than two decimal places and can have a comma as a thousand separator, please see the examples.", new[] { "EstimatedAmount" }));
             }
 
             if (!IsCostValid(CostAmount))
             {
-                results.Add(new ValidationResult("Please enter a valid cost amount in GBP(£)", new[] { "CostAmount" }));
+                results.Add(new ValidationResult("The amount that you have entered does not seem to be valid, it needs to be a number with no more than two decimal places and can have a comma as a thousand separator, please see the examples.", new[] { "CostAmount" }));
             }
 
             return results;

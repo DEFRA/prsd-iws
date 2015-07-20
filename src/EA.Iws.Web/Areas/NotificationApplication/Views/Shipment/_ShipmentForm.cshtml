@@ -23,7 +23,8 @@
 <header class="hgroup">
     <h2 class="heading-large">What is the total intended quantity?</h2>
 </header>
-
+@Html.Gds().HintSpan("The quantity must be a number with a maximum of 4 decimal places and can be entered with or without a comma as a thousand separator.")
+@Html.Gds().HintSpan("For example, 2  or  2.3333  or  2,222.55  or  2222.55")
 <div class="grid-row">
     <div class="column-half">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
