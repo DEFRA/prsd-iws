@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Validation;
 
-    public class AdminRegistrationViewModel
+    public class AdminRegistrationViewModel : IValidatableObject
     {
         [Required]
         [Display(Name = "First name")]
@@ -57,5 +57,13 @@
         public SelectList Areas { get; set; }
 
         public SelectList CompetentAuthorities { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (CompetentAuthority.Equals("EA") && !Email.EndsWith("@environment-agency.gov.uk"))
+            {
+                yield return new ValidationResult("Email address must end in @environment-agency.gov.uk when applying to the EA", new[] { "Email" });                
+            }
+        }
     }
 }

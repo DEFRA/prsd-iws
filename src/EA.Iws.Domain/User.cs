@@ -36,7 +36,7 @@
 
         public string JobTitle { get; private set; }
 
-        public string CompenentAuthority { get; private set; }
+        public string CompetentAuthority { get; private set; }
 
         public string LocalArea { get; private set; }
 

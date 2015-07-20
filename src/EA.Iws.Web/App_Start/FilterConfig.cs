@@ -14,6 +14,7 @@
             filters.Add(new OrganisationRequiredAttribute());
             filters.Add(new EmailVerificationRequiredAttribute());
             filters.Add(new AntiForgeryErrorFilter());
+            filters.Add(new AdminApprovalRequired());
         }
     }
 }

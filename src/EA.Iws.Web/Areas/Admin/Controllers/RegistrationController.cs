@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Mail;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -89,11 +90,17 @@
 
                 try
                 {
-                    await client.Registration.RegisterAdminAsync(adminRegistrationData);
+                    var userId = await client.Registration.RegisterAdminAsync(adminRegistrationData);
                     var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                     authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
-                    return View(GetModelData(model));
+                    var verificationCode = await
+                        client.Registration.GetUserEmailVerificationTokenAsync(signInResponse.AccessToken);
+                    var verificationEmail = emailService.GenerateEmailVerificationMessage(Url.Action("AdminVerifyEmail", "Registration", null,
+                        Request.Url.Scheme), verificationCode, userId, model.Email);
+                    await emailService.SendAsync(verificationEmail);
+
+                    return RedirectToAction("AdminEmailVerificationRequired");
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -106,6 +113,66 @@
                 }
             }
             return View(GetModelData(model));
+        }
+
+        [HttpGet]
+        public ActionResult AdminEmailVerificationRequired()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminEmailVerificationRequired(FormCollection model)
+        {
+            try
+            {
+                using (var client = apiClient())
+                {
+                    var verificationToken = await client.Registration.GetUserEmailVerificationTokenAsync(User.GetAccessToken());
+                    var verificationEmail =
+                        emailService.GenerateEmailVerificationMessage(
+                            Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme),
+                            verificationToken, User.GetUserId(), User.GetEmailAddress());
+                    var emailSent = await emailService.SendAsync(verificationEmail);
+
+                    if (!emailSent)
+                    {
+                        ViewBag.Errors = new[] { "Email is currently unavailable at this time, please try again later." };
+                        return View();
+                    }
+                }
+            }
+            catch (SmtpException)
+            {
+                ViewBag.Errors = new[] { "The verification email was not sent, please try again later." };
+                return View();
+            }
+
+            return RedirectToAction("AdminEmailVerificationRequired");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> AdminVerifyEmail(Guid id, string code)
+        {
+            using (var client = apiClient())
+            {
+                bool result = await client.Registration.VerifyEmailAsync(new VerifiedEmailData { Id = id, Code = code });
+
+                if (!result)
+                {
+                    return RedirectToAction("AdminEmailVerificationRequired");
+                }
+            }
+
+            return View();
+        }
+        
+        [HttpGet]
+        public ActionResult AwaitApproval()
+        {
+            return View();
         }
     }
 }

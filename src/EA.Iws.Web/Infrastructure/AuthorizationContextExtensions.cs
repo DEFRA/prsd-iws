@@ -12,8 +12,11 @@
             "LogOff",
             "ConfirmEmail",
             "EmailVerificationRequired",
+            "AdminEmailVerificationRequired",
             "VerifyEmail",
-            "VerificationEmailSent"
+            "AdminVerifyEmail",
+            "VerificationEmailSent",
+            "AwaitApproval"
         };
 
         public static bool SkipAuthorisation(this AuthorizationContext authorizationContext)

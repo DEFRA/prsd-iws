@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Api.Controllers
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Client.Entities;
@@ -7,14 +8,15 @@
     using Identity;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Domain;
+    using ClaimTypes = Requests.ClaimTypes;
 
     [RoutePrefix("api/Registration")]
     public class RegistrationController : ApiController
     {
-        private readonly ApplicationUserManager userManager;
         private readonly IUserContext userContext;
+        private readonly ApplicationUserManager userManager;
 
-        public RegistrationController(ApplicationUserManager userManager, 
+        public RegistrationController(ApplicationUserManager userManager,
             IUserContext userContext)
         {
             this.userContext = userContext;
@@ -76,6 +78,8 @@
             {
                 return GetErrorResult(result);
             }
+
+            userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Role, "admin"));
 
             return Ok(user.Id);
         }
