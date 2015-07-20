@@ -68,7 +68,7 @@
 
         public Guid NotificationId { get; set; }
 
-        [Display(Name = "Recovery information will be provided by the importer-consignee")]
+        [Display(Name = "I confirm that the relevant information will be provided directly to the competent authorities involved by the importer-consignee.")]
         public bool IsProvidedByImporter { get; set; }
 
         public bool? IsHundredPercentRecoverable { get; set; }
