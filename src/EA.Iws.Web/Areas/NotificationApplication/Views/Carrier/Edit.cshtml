@@ -1,27 +1,25 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.EditCarrierViewModel
-
 @{
     ViewBag.Title = "Intended carrier(s)";
 
-    var message = @"This may be the waste carrier licence number that allows the intend carrier to transport waste across land. 
-State all waste carrier licence numbers that apply for the whole journey. State Not applicable where no relevant registration number applies.";
+    var message = @"This may be the waste carrier licence number that allows the intended carrier to transport waste across land.
+                    If this carrier has more than one license, for example, for different stages of the journey, enter each licence number separated by a comma.
+                    Enter Not applicable where no relevant registration number applies.";
 
     ViewBag.SoleTraderRegistrationNumber = message;
     ViewBag.PartnershipRegistrationNumber = message;
     ViewBag.CompanyRegistrationNumber = message;
     ViewBag.SoleTraderRegistrationNumber = message;
-    ViewBag.OtherRegistrationNumber = message;
+    ViewBag.OtherRegistrationNumber = string.Empty;
     ViewBag.NonJavascriptMessage = message;
 }
 
 @using (Html.BeginForm("Edit", "Carrier", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+    @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.CarrierId)
-
-    @Html.Gds().ValidationSummary()
 
     <header class="hgroup">
         <h2 class="heading-large">Add intended carrier</h2>
