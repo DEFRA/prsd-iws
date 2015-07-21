@@ -61,8 +61,10 @@
             MergeActualSiteOfTreatmentInAnnex(data[indexOfActualSite], properties);
             data.RemoveAt(indexOfActualSite);
 
+            MergeAnnexNumber(annexNumber);
+
             //If we only need actual site of treatment in the annex, clear the remaining annex fields and exit at this point.
-            if (data.Count == 0)
+            if (data.Count < 2)
             {
                 ClearMultipleFacilitiesTable();
                 return;
@@ -70,7 +72,6 @@
 
             //Finally merge the remaining facilities into the multiple facilities table and set the annex title.
             MergeMultipleFacilitiesTable(properties);
-            MergeAnnexNumber(annexNumber);
         }
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }

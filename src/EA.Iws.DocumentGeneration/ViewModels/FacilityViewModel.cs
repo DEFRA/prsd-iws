@@ -49,7 +49,7 @@
 
         private void SetActualSiteOfTreatment(int countOfFacilities)
         {
-            ActualSite = (countOfFacilities == 1) ? "As Above" : "See Annex.";
+            ActualSite = (countOfFacilities == 1) ? "As Above" : "See Annex";
         }
 
         public static FacilityViewModel GetSeeAnnexInstructionForFacility(int annexNumber)
@@ -65,7 +65,7 @@
                 RegistrationNumber = string.Empty,
                 address = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty),
                 Fax = string.Empty,
-                ActualSite = string.Empty
+                ActualSite = seeAnnexNotice
             };
         }
 
