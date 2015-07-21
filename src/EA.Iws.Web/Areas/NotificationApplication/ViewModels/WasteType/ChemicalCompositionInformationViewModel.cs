@@ -57,11 +57,6 @@
                     }
                 }
             }
-
-            if (HasAnnex && String.IsNullOrWhiteSpace(FurtherInformation))
-            {
-                yield return new ValidationResult("Please enter any other relevant information");
-            }
         }
 
         private static bool IsDecimal(string input)
