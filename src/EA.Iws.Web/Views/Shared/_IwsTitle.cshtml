@@ -3,9 +3,9 @@
         <div style="float: right; position: relative; padding: 5px">
             <ul>
                 <li>
-                    <div style="display: inline-block; color: #808080">Signed in as:&nbsp</div><div style="font-weight: bold; display: inline-block">@ViewBag.Name </div> </li>
+                    <div class=".text-secondary" style="display: inline-block;">Signed in as:&nbsp</div><div style="font-weight: bold; display: inline-block">@ViewBag.Name </div> </li>
                 <li style="float:right;">@Html.ActionLink("Sign out", "LogOff", "Account", new { area = string.Empty }, null)</li>
             </ul>
         </div>
-        <div style="border-bottom: 1px solid #BFC1C3; position: relative; clear: both; bottom: 0; width: 100%"></div>
+    <div class="account-link-banner" style="position: relative; clear: both; bottom: 0; width: 100%"></div>
 }
