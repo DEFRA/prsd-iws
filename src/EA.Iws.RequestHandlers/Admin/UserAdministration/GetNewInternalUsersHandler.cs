@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.UserAdministration
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
@@ -27,6 +28,13 @@
 
         public async Task<IList<InternalUser>> HandleAsync(GetNewInternalUsers message)
         {
+            var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
+
+            if (!user.IsAdmin || user.InternalUserStatus != InternalUserStatus.Approved)
+            {
+                throw new InvalidOperationException("A user who is not an administrator or not approved may not retrieve the pending user list. Id: " + user.Id);
+            }
+
             var users = await context.Users.Where(u => u.IsAdmin 
                 && u.InternalUserStatus == InternalUserStatus.Pending
                 && u.Id != userContext.UserId.ToString()).ToArrayAsync();

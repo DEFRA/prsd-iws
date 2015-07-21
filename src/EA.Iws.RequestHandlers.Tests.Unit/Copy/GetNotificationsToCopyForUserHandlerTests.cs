@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using Core.WasteType;
     using Cqrs.Tests.Unit.Helpers;
@@ -10,7 +9,6 @@
     using Domain;
     using Domain.Notification;
     using FakeItEasy;
-    using Prsd.Core.Domain;
     using RequestHandlers.Copy;
     using Requests.Copy;
     using TestHelpers.Helpers;
@@ -33,7 +31,7 @@
         public GetNotificationsToCopyForUserHandlerTests()
         {
             var helper = new DbContextHelper();
-            userContext = new TestUserContext();
+            userContext = new TestUserContext(UserWithNotificationsId);
 
             context = A.Fake<IwsContext>(options => options.WithArgumentsForConstructor(() => new IwsContext(userContext)));
 
@@ -101,21 +99,6 @@
             var result = await handler.HandleAsync(request);
 
             Assert.Equal(2, result.Count);
-        }
-
-        private class TestUserContext : IUserContext
-        {
-            public Guid ReturnsId = UserWithNotificationsId;
-
-            public Guid UserId
-            {
-                get { return ReturnsId; }
-            }
-
-            public ClaimsPrincipal Principal
-            {
-                get { throw new NotImplementedException(); }
-            }
         }
     }
 }

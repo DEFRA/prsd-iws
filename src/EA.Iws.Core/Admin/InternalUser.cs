@@ -10,7 +10,7 @@
 
         public string Surname { get; set; }
 
-        public bool IsApproved { get; set; }
+        public InternalUserStatus Status { get; set; }
 
         public string PhoneNumber { get; set; }
 
