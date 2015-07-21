@@ -65,7 +65,8 @@
                 new OperationBlock(mergeFields, notification),
                 new CarrierBlock(mergeFields, notification),
                 new SpecialHandlingBlock(mergeFields, notification),
-                new WasteCompositionBlock(mergeFields, notification)
+                new WasteCompositionBlock(mergeFields, notification),
+                new TransportBlock(mergeFields, notification)
             };
         }
     }

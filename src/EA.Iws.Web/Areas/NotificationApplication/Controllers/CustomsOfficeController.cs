@@ -39,11 +39,10 @@
                 case CustomsOffices.None:
                     return intendedShipments(id);
                 case CustomsOffices.EntryAndExit:
+                case CustomsOffices.Exit:
                     return addExitCustomsOffice(id);
                 case CustomsOffices.Entry:
                     return addEntryCustomsOffice(id);
-                case CustomsOffices.Exit:
-                    return addExitCustomsOffice(id);
                 default:
                     return transportRouteSummary(id);
             }

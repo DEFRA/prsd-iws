@@ -67,6 +67,7 @@
     <Compile Include="NotificationBlocks\ExporterBlock.cs" />
     <Compile Include="NotificationBlocks\GeneralBlock.cs" />
     <Compile Include="NotificationBlocks\SpecialHandlingBlock.cs" />
+    <Compile Include="NotificationBlocks\TransportBlock.cs" />
     <Compile Include="NotificationBlocks\WasteCompositionBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AddressLines.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="NotificationBlocks\INotificationBlock.cs" />
     <Compile Include="ViewModels\PropertyHelper.cs" />
     <Compile Include="ViewModels\SpecialHandlingViewModel.cs" />
+    <Compile Include="ViewModels\TransportViewModel.cs" />
     <Compile Include="ViewModels\WasteCompositionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
