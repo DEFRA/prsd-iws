@@ -1,9 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Policy;
-    using DocumentFormat.OpenXml.Office.CustomUI;
     using Domain;
     using Domain.Notification;
 
@@ -67,13 +64,11 @@
         private static string GetPhysicalCharacteristics(NotificationApplication notification)
         {
             var pcstring = string.Empty;
-            var pclist = notification.PhysicalCharacteristics.ToList();
+            var pclist = notification.PhysicalCharacteristics.OrderBy(c => c.PhysicalCharacteristic.Value).ToList();
 
             for (int i = 0; i < notification.PhysicalCharacteristics.Count(); i++)
             {
-                pcstring = pcstring + (pclist[i].PhysicalCharacteristic != PhysicalCharacteristicType.Other
-                    ? pclist[i].PhysicalCharacteristic.DisplayName
-                    : pclist[i].OtherDescription);
+                pcstring = pcstring + pclist[i].PhysicalCharacteristic.Value;
 
                 if (i < (notification.PhysicalCharacteristics.Count() - 1))
                 {
