@@ -47,7 +47,7 @@
 
         public static CarrierViewModel GetCarrierViewModelShowingSeeAnnexInstruction(int annexNumber, string meansOfTransport)
         {
-            var seeAnnexNotice = "See annex " + annexNumber;
+            var seeAnnexNotice = "See Annex " + annexNumber;
 
             return new CarrierViewModel
             {

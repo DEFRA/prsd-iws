@@ -22,7 +22,7 @@
 
             for (int i = 0; i < notification.MeansOfTransport.Count(); i++)
             {
-                motString = motString + mot[i];
+                motString = motString + mot[i].Symbol;
                 if (i != mot.Count - 1)
                 {
                     motString = motString + " → ";

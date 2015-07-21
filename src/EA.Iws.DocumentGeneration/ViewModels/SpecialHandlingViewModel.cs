@@ -12,14 +12,14 @@
         {
             if (notification.HasSpecialHandlingRequirements.GetValueOrDefault())
             {
-                Requirements = "See annex";
+                Requirements = "See Annex";
                 Details = notification.SpecialHandlingDetails;
             }
         }
 
         public static SpecialHandlingViewModel GetSpecialHandlingAnnexNotice(SpecialHandlingViewModel data, int annexNumber)
         {
-            data.Requirements = "See annex " + annexNumber;
+            data.Requirements = "See Annex " + annexNumber;
             return data;
         }
     }

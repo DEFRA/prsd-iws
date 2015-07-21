@@ -56,7 +56,7 @@
             }
             else
             {
-                siteOfGenerationInformation = "See annex.";
+                siteOfGenerationInformation = "See Annex";
             }
 
             SiteOfGeneration = siteOfGenerationInformation;
@@ -64,7 +64,7 @@
 
         public static ProducerViewModel GetProducerViewModelShowingSeeAnnexInstruction(int annexNumber)
         {
-            var seeAnnexNotice = "See annex " + annexNumber;
+            var seeAnnexNotice = "See Annex " + annexNumber;
 
             return new ProducerViewModel
             {

@@ -49,12 +49,12 @@
 
         private void SetActualSiteOfTreatment(int countOfFacilities)
         {
-            ActualSite = (countOfFacilities == 1) ? "As Above" : "See annex.";
+            ActualSite = (countOfFacilities == 1) ? "As Above" : "See Annex.";
         }
 
         public static FacilityViewModel GetSeeAnnexInstructionForFacility(int annexNumber)
         {
-            var seeAnnexNotice = "See annex " + annexNumber;
+            var seeAnnexNotice = "See Annex " + annexNumber;
             return new FacilityViewModel
             {
                 AnnexMessage = seeAnnexNotice,
@@ -71,7 +71,7 @@
 
         public static FacilityViewModel GetSeeAnnexInstructionForFacilityCaseTwoFacilities(FacilityViewModel facility, int annexNumber)
         {
-            var seeAnnexNotice = "See annex " + annexNumber;
+            var seeAnnexNotice = "See Annex " + annexNumber;
             facility.ActualSite = seeAnnexNotice;
             return facility;
         }
