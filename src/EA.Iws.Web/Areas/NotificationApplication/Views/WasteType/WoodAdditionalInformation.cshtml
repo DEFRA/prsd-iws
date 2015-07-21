@@ -1,8 +1,5 @@
-﻿@using System.Web.UI.WebControls
-@using EA.Iws.Requests.WasteType
-@using EA.Iws.Web.Infrastructure
-@using EA.Iws.Core.Shared
-@using EA.Iws.Core.WasteType
+﻿@using EA.Iws.Core.WasteType
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionInformationViewModel
 @{
     ViewBag.Title = "Waste Code";
@@ -32,7 +29,7 @@
                     @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                     <div class="grid-row">
                         <div class="column-two-thirds">
-                            @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].WasteInformationType)
+                            @EnumHelper.GetDescription(Model.WasteComposition[i].WasteInformationType)
                         </div>
                     </div>
                     <div class="grid-row">
@@ -46,7 +43,7 @@
                         </div>
                         <div class="column-half">
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max" + placeholderText })
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].WasteInformationType) })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(Model.WasteComposition[i].WasteInformationType) })
                         </div>
                     </div>
                 </div>
@@ -59,7 +56,12 @@
         @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds" })
     </div>
     <div class="form-group">
-        Further analysis of the waste can be provided in separate annex with your submission
+        <fieldset>
+            <label class="block-label" for="chkboxFurtherInfo">
+                @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo" })
+                I will provide further details in an annex when I submit my notification.
+            </label>
+        </fieldset>
     </div>
     <div class="form-group">
         <button class="button" type="submit">Continue</button>

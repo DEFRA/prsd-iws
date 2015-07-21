@@ -285,7 +285,7 @@
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, model.Energy, filteredWasteCompositions));
-                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, false, model.NotificationId));
+                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.HasAnnex, model.NotificationId));
             }
             return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
         }

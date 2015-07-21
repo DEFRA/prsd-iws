@@ -21,8 +21,12 @@
         @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds" })
     </div>
     <div class="form-group">
-        @Html.CheckBoxFor(m => m.HasAttachement)
-        I will provide this detail in a separate annex with my notification submission
+        <fieldset>
+            <label class="block-label" for="chkboxFurtherInfo">
+                @Html.CheckBoxFor(m => m.HasAttachement, new { @id = "chkboxFurtherInfo" })
+                I will provide this detail in a separate annex with my notification submission.
+            </label>
+        </fieldset>
     </div>
     <div class="form-group">
         <button class="button" name="Command" value="continue" type="submit">Continue</button>
