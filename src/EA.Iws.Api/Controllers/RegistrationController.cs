@@ -4,11 +4,11 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Client.Entities;
+    using Core.Admin;
     using DataAccess.Identity;
     using Identity;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Domain;
-    using ClaimTypes = Requests.ClaimTypes;
 
     [RoutePrefix("api/Registration")]
     public class RegistrationController : ApiController
@@ -71,7 +71,8 @@
                 JobTitle = model.JobTitle,
                 LocalArea = model.LocalArea,
                 CompetentAuthority = model.CompetentAuthority,
-                IsAdmin = true
+                IsAdmin = true,
+                InternalUserStatus = InternalUserStatus.Pending
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
@@ -81,7 +82,7 @@
                 return GetErrorResult(result);
             }
 
-            userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Role, "admin"));
+            userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, "admin"));
             userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", model.FirstName, model.Surname)));
 
             return Ok(user.Id);

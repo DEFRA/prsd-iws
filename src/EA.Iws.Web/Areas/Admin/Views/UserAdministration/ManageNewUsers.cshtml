@@ -1,0 +1,98 @@
+﻿@using EA.Iws.Core.Admin
+@using EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration
+@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.NewUsersListViewModel
+@{
+    ViewBag.Title = "Manage users";
+    var usersNoun = Model.Users.Count != 1 ? "users" : "user";
+}
+
+<h2 class="heading-large">Manage new users</h2>
+
+<p>Displaying @Model.Users.Count @usersNoun</p>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <table class="form-group">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.Users.Count; i++)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => m.Users[i].User.FullName)</td>
+                <td>@Html.DisplayFor(m => m.Users[i].User.Email)</td>
+                <td>
+                    @Html.HiddenFor(m => m.Users[i].User.Id)
+                    @Html.HiddenFor(m => m.Users[i].User.Email)
+                    @Html.HiddenFor(m => m.Users[i].User.FirstName)
+                    @Html.HiddenFor(m => m.Users[i].User.Surname)
+                    @Html.HiddenFor(m => m.Users[i].User.CompetentAuthority)
+                    @Html.HiddenFor(m => m.Users[i].User.JobTitle)
+                    @Html.HiddenFor(m => m.Users[i].User.PhoneNumber)
+                    @Html.HiddenFor(m => m.Users[i].User.IsApproved)
+                    @Html.Gds().DropDownListFor(m => m.Users[i].Action, Model.ApprovalActionsList, optionLabel: "Pending", htmlAttributes: new { @class = "action-dropdown" })
+                </td>
+                <td style="text-align: center;">
+                    @if (Model.Users[i].Action == ApprovalAction.Approve)
+                    {
+                        <i class="fa fa-check-circle status-circle" style="color:green"></i>
+                    }
+                    else if (Model.Users[i].Action == ApprovalAction.Reject)
+                    {
+                        <i class="fa fa-times-circle status-circle" style="color:red"></i>
+                    }
+                    else
+                    {
+                        <i class="fa fa-question-circle status-circle" style="color: grey"></i>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}
+
+<style>
+    .status-circle {
+        font-size: 21px;
+    }
+
+    .action-dropdown {
+        width: 100%;
+    }
+</style>
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".action-dropdown").change(function () {
+                var itemToAppend = "<i class='fa fa-question-circle status-circle' style='color:grey'></i>";
+
+                if (this.value === "0") {
+                    itemToAppend = "<i class='fa fa-times-circle status-circle' style='color:red'></i>";
+                }
+                else if (this.value === "1") {
+                    itemToAppend = "<i class='fa fa-check-circle status-circle' style='color:green'></i>";
+                }
+
+                var statusBox = $(this).parent().next();
+                statusBox.empty().append(itemToAppend);
+            });
+        });
+    </script>
+}

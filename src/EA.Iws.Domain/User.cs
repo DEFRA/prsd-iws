@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain
 {
     using System;
+    using Core.Admin;
     using Prsd.Core;
 
     public class User
@@ -42,7 +43,7 @@
 
         public bool IsAdmin { get; private set; }
 
-        public bool IsApproved { get; private set; }
+        public InternalUserStatus? InternalUserStatus { get; private set; }
 
         public virtual Organisation Organisation { get; private set; }
 
@@ -57,6 +58,26 @@
             }
 
             Organisation = organisation;
+        }
+
+        public void Approve()
+        {
+            if (!IsAdmin)
+            {
+                throw new InvalidOperationException(string.Format("Cannot set an internal user status of approved for an external user. Id: {0}", Id));
+            }
+
+            InternalUserStatus = Core.Admin.InternalUserStatus.Approved;
+        }
+
+        public void Reject()
+        {
+            if (!IsAdmin)
+            {
+                throw new InvalidOperationException(string.Format("Cannot set an internal user status of rejected for an external user. Id: {0}", Id));
+            }
+
+            InternalUserStatus = Core.Admin.InternalUserStatus.Rejected;
         }
     }
 }

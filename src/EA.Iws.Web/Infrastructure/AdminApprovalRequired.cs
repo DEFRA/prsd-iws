@@ -1,9 +1,8 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
-    using System;
-    using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
+    using Core.Admin;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
 
     public class AdminApprovalRequired : AuthorizeAttribute
@@ -16,11 +15,12 @@
             }
 
             var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
-            bool hasRoleClaim = identity.HasClaim(c => c.Type.Equals(ClaimTypes.Role));
-            bool isAdmin = hasRoleClaim && identity.Claims.Single(c => c.Type.Equals(ClaimTypes.Role)).Value.Equals("admin", StringComparison.InvariantCultureIgnoreCase);
+            bool isAdmin = identity.HasClaim(ClaimTypes.Role, "admin");
+            bool isPending = identity.HasClaim(Requests.ClaimTypes.InternalUserStatus,
+                InternalUserStatus.Pending.ToString());
 
             //TODO: add approval functionality
-            if (isAdmin)
+            if (isAdmin && isPending)
             {
                 filterContext.Result = new RedirectResult("~/Admin/Registration/AwaitApproval");
             }

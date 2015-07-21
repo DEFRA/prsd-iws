@@ -2,6 +2,7 @@
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using Core.Admin;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -13,7 +14,7 @@
         public string LocalArea { get; set; }
         public string CompetentAuthority { get; set; }
         public bool IsAdmin { get; set; }
-        public bool IsApproved { get; set; }
+        public InternalUserStatus? InternalUserStatus { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

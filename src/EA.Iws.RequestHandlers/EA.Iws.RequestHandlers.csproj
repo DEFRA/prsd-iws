@@ -69,6 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
+    <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarriersByNotificationIdHandler.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Mappings\CustomsOfficeExitMap.cs" />
     <Compile Include="Mappings\CustomsOfficeEntryMap.cs" />
     <Compile Include="Mappings\CustomsOfficeMap.cs" />
+    <Compile Include="Mappings\InternalUserMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="Mappings\NotificationBasicInfoMap.cs" />
     <Compile Include="Mappings\NotificationInfoMap.cs" />

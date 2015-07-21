@@ -276,6 +276,10 @@
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
       <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
       <Name>EA.Iws.DataAccess</Name>

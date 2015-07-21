@@ -494,6 +494,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\Register.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdministration\ManageNewUsers.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\AdminEmailVerificationRequired.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\AdminVerifyEmail.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\AwaitApproval.cshtml" />
@@ -635,8 +636,11 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegistrationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\AdminRegistrationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\BasicSearchViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserAdministration\NewUsersListViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />
     <Compile Include="Areas\FinancialGuarantee\FinancialGuaranteeAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\NavigationViewModel.cs" />
