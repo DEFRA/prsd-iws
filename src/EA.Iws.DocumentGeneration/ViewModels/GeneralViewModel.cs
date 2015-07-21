@@ -36,8 +36,8 @@
             }
 
             IntendedNumberOfShipments = notification.ShipmentInfo.NumberOfShipments.ToString();
-            FirstDeparture = notification.ShipmentInfo.FirstDate.ToShortDateString();
-            LastDeparture = notification.ShipmentInfo.LastDate.ToShortDateString();
+            FirstDeparture = notification.ShipmentInfo.FirstDate.ToString("dd.MM.yy");
+            LastDeparture = notification.ShipmentInfo.LastDate.ToString("dd.MM.yy");
             SetIntendedQuantityFields(notification.ShipmentInfo);
 
             var hasSpecialHandlingRequirements = notification.HasSpecialHandlingRequirements;
@@ -52,13 +52,29 @@
                 IsNotSpecialHandling = !hasSpecialHandlingRequirements.GetValueOrDefault();
             }
 
-            var packagingInfo = notification.PackagingInfos;
-            foreach (var item in packagingInfo)
-            {
-                PackagingTypes = PackagingTypes + "  " + item.PackagingType.Value;
-            }
+            PackagingTypes = GetPackagingInfo(notification);
 
             PhysicalCharacteristics = GetPhysicalCharacteristics(notification);
+        }
+
+        private static string GetPackagingInfo(NotificationApplication notification)
+        {
+            var pistring = string.Empty;
+            var packagingTypeList = notification.PackagingInfos.OrderBy(c => c.PackagingType.Value).ToList();
+
+            for (int i = 0; i < packagingTypeList.Count(); i++)
+            {
+                pistring = pistring + (packagingTypeList[i].PackagingType != PackagingType.Other
+                    ? packagingTypeList[i].PackagingType.Value.ToString()
+                    : packagingTypeList[i].PackagingType.Value + "(" + packagingTypeList[i].OtherDescription + ")");
+
+                if (i < (packagingTypeList.Count() - 1))
+                {
+                    pistring = pistring + ", ";
+                }
+            }
+
+            return pistring;
         }
 
         private static string GetPhysicalCharacteristics(NotificationApplication notification)
@@ -68,7 +84,9 @@
 
             for (int i = 0; i < notification.PhysicalCharacteristics.Count(); i++)
             {
-                pcstring = pcstring + pclist[i].PhysicalCharacteristic.Value;
+                pcstring = pcstring + (pclist[i].PhysicalCharacteristic != PhysicalCharacteristicType.Other
+                    ? pclist[i].PhysicalCharacteristic.Value.ToString()
+                    : pclist[i].PhysicalCharacteristic.Value + "(" + pclist[i].OtherDescription + ")");
 
                 if (i < (notification.PhysicalCharacteristics.Count() - 1))
                 {
