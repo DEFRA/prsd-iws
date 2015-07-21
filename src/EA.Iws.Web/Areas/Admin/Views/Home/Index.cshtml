@@ -30,10 +30,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Notification No.</th>
-                        <th>Exporter notifier</th>
+                        <th>Notification number</th>
+                        <th>Company name</th>
                         <th>Waste type</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,17 +40,17 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(m => m.SearchResults[i].NotificationNumber)
+                                @Html.ActionLink(linkText: @Html.DisplayFor(m => m.SearchResults[i].NotificationNumber).ToString(),
+                                                 actionName: "Index",
+                                                 controllerName: "Home",
+                                                 routeValues: new { id = Model.SearchResults[i].Id, area = "NotificationApplication" },
+                                                 htmlAttributes: null)
                             </td>
                             <td>
                                 @Html.DisplayFor(m => m.SearchResults[i].ExporterName)
                             </td>
                             <td>
                                 @Html.DisplayFor(m => m.SearchResults[i].WasteType)
-                            </td>
-                            <td>
-                                @Html.ActionLink(linkText: "View", actionName: "Index", controllerName: "Home",
-                                    routeValues: new { id = Model.SearchResults[i].Id, area = "NotificationApplication" }, htmlAttributes: null)
                             </td>
                         </tr>
                     }
