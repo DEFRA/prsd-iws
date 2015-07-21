@@ -5,18 +5,11 @@
             <a href="/" id="proposition-name">International Waste Shipments</a>
             @if (Request.IsAuthenticated)
             {
-                using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post,  htmlAttributes: new { id = "logoutForm" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <ul id="proposition-links">
-                        <li>
-                            @Html.ActionLink(linkText: "My account", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
-                        </li>
-                        <li style="float:right;">
-                            <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
-                        </li>
-                    </ul>
-                }
+                <ul id="proposition-links">
+                    <li>
+                        @Html.ActionLink(linkText: "My account", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
+                    </li>
+                </ul>
             }
         </nav>
     </div>

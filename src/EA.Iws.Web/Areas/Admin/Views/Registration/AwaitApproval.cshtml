@@ -6,10 +6,6 @@
 
 <p>At present your request is pending, please check back soon.</p>
 
-@using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post, htmlAttributes: new { id = "logoutForm" }))
-{
-    <button class="button" type="submit">Sign Out</button>
-}
-
+@Html.ActionLink("Sign out", "LogOff", "Account", new { area = string.Empty }, new {@Class = "button"})
 
 

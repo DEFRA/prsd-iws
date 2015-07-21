@@ -611,6 +611,7 @@
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="Views\Errors\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\_IwsTitle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

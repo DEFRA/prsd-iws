@@ -48,6 +48,8 @@
                 return GetErrorResult(result);
             }
 
+            userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", model.FirstName, model.Surname)));
+
             return Ok(user.Id);
         }
 
@@ -80,6 +82,7 @@
             }
 
             userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Role, "admin"));
+            userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", model.FirstName, model.Surname)));
 
             return Ok(user.Id);
         }

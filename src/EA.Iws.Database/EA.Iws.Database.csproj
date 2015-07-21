@@ -63,6 +63,7 @@
     <Content Include="scripts\Update\Sprint11\20150714-122323-updated-technology-employed-table.sql" />
     <Content Include="scripts\Update\Sprint12\20150716-153345-updated-asp-net-users-table.sql" />
     <Content Include="scripts\Update\Sprint12\20150720-090000-update-h-code-description.sql" />
+    <Content Include="scripts\Update\Sprint12\20150721-161745-add-name-claims-to-users-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

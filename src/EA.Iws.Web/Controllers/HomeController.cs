@@ -1,7 +1,12 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
     using System.Web.Mvc;
+    using RazorEngine.Compilation.ImpromptuInterface.InvokeExt;
+    using ViewModels.Home;
     using ViewModels.Shared;
 
     public class HomeController : Controller
@@ -42,6 +47,16 @@
             }
 
             return RedirectToAction("ApplicantRegistration", "Registration");
+        }
+
+        [AllowAnonymous]
+        public ActionResult _IwsTitle()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+
+            ViewBag.Name = identity.HasClaim(c => c.Type.Equals(ClaimTypes.Name)) ? identity.Claims.Single(c => c.Type.Equals(ClaimTypes.Name)).Value : string.Empty;
+
+            return PartialView();
         }
     }
 }

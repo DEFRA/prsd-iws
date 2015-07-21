@@ -47,5 +47,6 @@
 
 <main id="content" role="main">
     @Html.Partial("_FeedbackBanner")
+    @{ Html.RenderAction("_IwsTitle", "Home", new { area = string.Empty });}
     @RenderBody()
 </main>
