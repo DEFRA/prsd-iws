@@ -8,10 +8,10 @@
     {
         public const char Separator = ';';
         public static readonly MeansOfTransport Road = new MeansOfTransport(1, "Road", "R");
-        public static readonly MeansOfTransport Train = new MeansOfTransport(2, "Train", "T");
+        public static readonly MeansOfTransport Train = new MeansOfTransport(2, "Train / rail", "T");
         public static readonly MeansOfTransport Sea = new MeansOfTransport(3, "Sea", "S");
         public static readonly MeansOfTransport Air = new MeansOfTransport(4, "Air", "A");
-        public static readonly MeansOfTransport InlandWaterways = new MeansOfTransport(5, "Inland Waterways", "W");
+        public static readonly MeansOfTransport InlandWaterways = new MeansOfTransport(5, "Inland waterways", "W");
 
         public string Symbol { get; private set; }
 
