@@ -154,63 +154,23 @@
         {
             using (var client = apiClient())
             {
-                try
+                var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
+                var producer = response.Single(p => p.Id == entityId);
+
+                var model = new RemoveProducerViewModel
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
-                    var producers = response.ToList();
-                    var producersCount = producers.Count;
-                    var isSiteOfExport = producers.Single(x => x.Id == entityId).IsSiteOfExport;
+                    NotificationId = id,
+                    ProducerId = entityId,
+                    ProducerName = producer.Business.Name
+                };
 
-                    if (isSiteOfExport && producersCount > 1)
-                    {
-                        TempData["errorRemoveProducer"] =
-                            "You have chosen to remove the site of export. You will need to select an alternative site of export before you can remove this producer.";
-                        return RedirectToAction("List", "Producer", new { id });
-                    }
-
-                    await client.SendAsync(User.GetAccessToken(), new DeleteProducerForNotification(entityId, id));
-                }
-                catch (ApiBadRequestException ex)
+                if (producer.IsSiteOfExport && response.Count > 1)
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-            }
-            return RedirectToAction("List", "Producer", new { id });
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> List(Guid id)
-        {
-            var model = new MultipleProducersViewModel();
-            if (TempData["errorRemoveProducer"] != null)
-            {
-                ModelState.AddModelError("RemoveProducer", TempData["errorRemoveProducer"].ToString());
-            }
-
-            using (var client = apiClient())
-            {
-                var response =
-                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
-
-                try
-                {
-                    model.NotificationId = id;
-                    model.ProducerData = response.ToList();
-                    model.HasSiteOfExport = model.ProducerData.Exists(p => p.IsSiteOfExport);
+                    ViewBag.Error =
+                        string.Format("You have chosen to remove {0} which is the site of export. " +
+                                      "You will need to select an alternative site of export before you can remove this producer.", 
+                                      model.ProducerName);
                     return View(model);
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
                 }
 
                 return View(model);
@@ -219,30 +179,95 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetSiteOfExport(MultipleProducersViewModel model)
+        public async Task<ActionResult> Remove(RemoveProducerViewModel model)
         {
-            if (!string.IsNullOrWhiteSpace(model.SelectedValue))
+            using (var client = apiClient())
             {
-                using (var client = apiClient())
+                try
                 {
-                    try
+                    await client.SendAsync(User.GetAccessToken(), new DeleteProducerForNotification(model.ProducerId, model.NotificationId));
+                    return RedirectToAction("List", "Producer", new { id = model.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
                     {
-                        await client.SendAsync(User.GetAccessToken(),
-                            new SetSiteOfExport(new Guid(model.SelectedValue), model.NotificationId));
-                    }
-                    catch (ApiBadRequestException ex)
-                    {
-                        this.HandleBadRequest(ex);
-
-                        if (ModelState.IsValid)
-                        {
-                            throw;
-                        }
+                        throw;
                     }
                 }
             }
 
-            return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> List(Guid id)
+        {
+            var model = new MultipleProducersViewModel();
+
+            using (var client = apiClient())
+            {
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
+
+                model.NotificationId = id;
+                model.ProducerData = response.ToList();
+
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> SiteOfExport(Guid id, bool? backToList)
+        {
+            using (var client = apiClient())
+            {
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
+
+                var model = new SiteOfExportViewModel
+                {
+                    NotificationId = id,
+                    Producers = response
+                };
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SiteOfExport(SiteOfExportViewModel model, bool? backToList)
+        {
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(),
+                        new SetSiteOfExport(model.SelectedSiteOfExport, model.NotificationId));
+
+                    if (backToList.GetValueOrDefault())
+                    {
+                        return RedirectToAction("List", "Producer", new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
+                    }
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return View(model);
         }
     }
 }

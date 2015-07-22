@@ -1,0 +1,52 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.SiteOfExportViewModel
+@{
+    ViewBag.Title = "Site Of Export";
+}
+
+<h2 class="heading-large">Select the site the waste will be exported from</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="form-group">
+        <table>
+            <thead>
+            <tr>
+                <th>Organisation name</th>
+                <th>Address</th>
+                <th>Site of export?</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (var i = 0; i < Model.Producers.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => m.Producers[i].Business.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Producers[i].Address.Building),
+                        @Html.DisplayFor(m => m.Producers[i].Address.StreetOrSuburb),
+                        @Html.DisplayFor(m => m.Producers[i].Address.TownOrCity)
+                    </td>
+                    <td>
+                        @{
+                            var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
+                            if (@Model.Producers[i].IsSiteOfExport)
+                            {
+                                htmlAttr.Add("checked", "checked");
+                            }
+                            @Html.RadioButtonFor(m => m.SelectedSiteOfExport, Model.Producers[i].Id, htmlAttr)
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <button class="button" type="submit">Continue</button>
+}

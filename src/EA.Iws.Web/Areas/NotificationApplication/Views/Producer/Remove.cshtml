@@ -1,0 +1,28 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.RemoveProducerViewModel
+@{
+    ViewBag.Title = "Remove Producer";
+}
+
+<h2 class="heading-large">Remove waste generator - producer</h2>
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Error))
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.ProducerId)
+
+        <p>You are about to remove @Model.ProducerName as a producer from this notification.</p>
+
+        <button class="button" type="submit">Continue</button>
+    }
+}
+else
+{
+    <p>@ViewBag.Error</p>
+    <p>@Html.ActionLink("Change site of export", "SiteOfExport", "Producer", new { id = Model.NotificationId, backToList = true }, new { @class = "button" })</p>
+}
+
+<p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId }, null)</p>

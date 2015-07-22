@@ -3,93 +3,45 @@
     ViewBag.Title = "List Producers";
 }
 <h2 class="heading-large">Waste generator - producer <br />Site of export</h2>
-<h3 class="heading-medium">Select the site the waste will be exported from</h3>
 
-@using (Html.BeginForm("SetSiteOfExport", "Producer", FormMethod.Post, new { @id = "frm" }))
+@if (Model != null && Model.ProducerData.Any())
 {
-    @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
-
-    if (Model != null && Model.ProducerData.Any())
-    {
-        <div class="colored-header-bar"></div>
-        <div class="form-group">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Organisation name</th>
-                        <th>Address</th>
-                        <th>Site of export?</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (var i = 0; i < Model.ProducerData.Count; i++)
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(Model.ProducerData[i].Business.Name, "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.ProducerData[i].Address.Building),
-                                @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),
-                                @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity)
-                            </td>
-                            <td>
-                                @{
-                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.ProducerData[i].Id) } };
-                        if (@Model.ProducerData[i].IsSiteOfExport)
-                        {
-                            htmlAttr.Add("checked", "checked");
-                        }
-                        @Html.RadioButtonFor(m => m.SelectedValue, Model.ProducerData[i].Id, htmlAttr)
-                                }
-                            </td>
-                            <td>
-                                @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
-
-    @Html.HiddenFor(m => m.NotificationId)
-
+    <div class="colored-header-bar"></div>
     <div class="form-group">
-        @Html.ActionLink("Add more", "Add", "Producer", new { id = Model.NotificationId }, null)
-    </div>
-    <input type="submit" class="button" value="Continue" />
-}
-
-<div id="divConfirmDelete" class="clearfix"></div>
-
-@section scripts
-{
-    <script type="text/javascript">
-        $(function () {
-            $("[name='SelectedValue']").change(function () {
-                var form = $("#frm");
-                var url = form.attr("action");
-                var formData = form.serialize();
-                $.post(url, formData, null);
-            });
-
-            // When the background is clicked, hide the background
-            $("#btnYes").click(function (e) {
-            });
-
-            $("#divConfirmDelete").click(function (e) {
-                if (e.target === this && $(this).hasClass("fadeBackground")) {
-                    $(this).removeClass("fadeBackground");
-                    $(this).empty();
+        <table>
+            <thead>
+                <tr>
+                    <th>Organisation name</th>
+                    <th>Address</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.ProducerData.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.ProducerData[i].Business.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ProducerData[i].Address.Building),
+                            @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),
+                            @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
+                            <span class="table-divider">|</span>
+                            @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
+                        </td>
+                    </tr>
                 }
-            });
-
-            $(".deleteLink").click(function () {
-                $("#divConfirmDelete").addClass("fadeBackground").removeClass("clearfix");
-            });
-        })
-    </script>
+            </tbody>
+        </table>
+    </div>
 }
+
+<div class="form-group">
+    @Html.ActionLink("Add more", "Add", "Producer", new { id = Model.NotificationId }, null)
+</div>
+
+@Html.ActionLink("Continue", "SiteOfExport", "Producer", new { id = Model.NotificationId }, new { @class = "button" })
