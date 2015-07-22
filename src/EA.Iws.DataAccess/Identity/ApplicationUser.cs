@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Identity
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using Core.Admin;
@@ -13,8 +14,9 @@
         public string JobTitle { get; set; }
         public string LocalArea { get; set; }
         public string CompetentAuthority { get; set; }
-        public bool IsAdmin { get; set; }
+        public bool IsInternal { get; set; }
         public InternalUserStatus? InternalUserStatus { get; set; }
+        public Guid? OrganisationId { get; private set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -76,6 +76,7 @@
     <Compile Include="Shared\BusinessData.cs" />
     <Compile Include="Shared\BusinessInfoData.cs" />
     <Compile Include="Shared\BusinessType.cs" />
+    <Compile Include="Shared\ClaimTypes.cs" />
     <Compile Include="Shared\CompetentAuthorityData.cs" />
     <Compile Include="Shared\ContactData.cs" />
     <Compile Include="Shared\CountryData.cs" />

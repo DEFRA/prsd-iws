@@ -41,7 +41,7 @@
 
         public string LocalArea { get; private set; }
 
-        public bool IsAdmin { get; private set; }
+        public bool IsInternal { get; private set; }
 
         public InternalUserStatus? InternalUserStatus { get; private set; }
 
@@ -62,7 +62,7 @@
 
         public void Approve()
         {
-            if (!IsAdmin)
+            if (!IsInternal)
             {
                 throw new InvalidOperationException(string.Format("Cannot set an internal user status of approved for an external user. Id: {0}", Id));
             }
@@ -72,7 +72,7 @@
 
         public void Reject()
         {
-            if (!IsAdmin)
+            if (!IsInternal)
             {
                 throw new InvalidOperationException(string.Format("Cannot set an internal user status of rejected for an external user. Id: {0}", Id));
             }

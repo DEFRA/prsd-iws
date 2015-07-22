@@ -15,11 +15,10 @@
             }
 
             var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
-            bool isAdmin = identity.HasClaim(ClaimTypes.Role, "admin");
-            bool isPending = identity.HasClaim(Requests.ClaimTypes.InternalUserStatus,
+            bool isAdmin = identity.HasClaim(ClaimTypes.Role, "internal");
+            bool isPending = identity.HasClaim(Core.Shared.ClaimTypes.InternalUserStatus,
                 InternalUserStatus.Pending.ToString());
 
-            //TODO: add approval functionality
             if (isAdmin && isPending)
             {
                 filterContext.Result = new RedirectResult("~/Admin/Registration/AwaitApproval");

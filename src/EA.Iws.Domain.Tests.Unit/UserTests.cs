@@ -11,7 +11,7 @@
         private readonly User anyUser = new User("id", "first", "last", "123", "email@address.com");
 
         private static readonly Action<User, bool> SetIsAdminForUser =
-            (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsAdmin, isAdmin, user);
+            (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsInternal, isAdmin, user);
 
         private static readonly Action<User, InternalUserStatus> SetInternalUserStatus =
             (user, status) => ObjectInstantiator<User>.SetProperty(u => u.InternalUserStatus, status, user);

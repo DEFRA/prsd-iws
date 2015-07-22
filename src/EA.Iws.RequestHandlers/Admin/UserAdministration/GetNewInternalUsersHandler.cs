@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Security;
     using System.Threading.Tasks;
     using Core.Admin;
     using DataAccess;
@@ -30,12 +31,12 @@
         {
             var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
 
-            if (!user.IsAdmin || user.InternalUserStatus != InternalUserStatus.Approved)
+            if (!user.IsInternal || user.InternalUserStatus != InternalUserStatus.Approved)
             {
-                throw new InvalidOperationException("A user who is not an administrator or not approved may not retrieve the pending user list. Id: " + user.Id);
+                throw new SecurityException("A user who is not an administrator or not approved may not retrieve the pending user list. Id: " + user.Id);
             }
 
-            var users = await context.Users.Where(u => u.IsAdmin 
+            var users = await context.Users.Where(u => u.IsInternal 
                 && u.InternalUserStatus == InternalUserStatus.Pending
                 && u.Id != userContext.UserId.ToString()).ToArrayAsync();
             

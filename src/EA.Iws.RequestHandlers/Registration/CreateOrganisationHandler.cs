@@ -11,7 +11,7 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Registration;
-    using ClaimTypes = Requests.ClaimTypes;
+    using ClaimTypes = Core.Shared.ClaimTypes;
 
     internal class CreateOrganisationHandler : IRequestHandler<CreateOrganisation, Guid>
     {
@@ -38,8 +38,6 @@
             db.Organisations.Add(organisation);
 
             await db.SaveChangesAsync();
-
-            await userManager.AddClaimAsync(userContext.UserId.ToString(), new Claim(ClaimTypes.OrganisationId, organisation.Id.ToString()));
             
             return organisation.Id;
         }

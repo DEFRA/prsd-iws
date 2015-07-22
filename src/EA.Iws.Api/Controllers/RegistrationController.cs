@@ -48,8 +48,6 @@
                 return GetErrorResult(result);
             }
 
-            userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", model.FirstName, model.Surname)));
-
             return Ok(user.Id);
         }
 
@@ -71,7 +69,7 @@
                 JobTitle = model.JobTitle,
                 LocalArea = model.LocalArea,
                 CompetentAuthority = model.CompetentAuthority,
-                IsAdmin = true,
+                IsInternal = true,
                 InternalUserStatus = InternalUserStatus.Pending
             };
 
@@ -81,9 +79,6 @@
             {
                 return GetErrorResult(result);
             }
-
-            userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, "admin"));
-            userManager.AddClaim(user.Id, new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", model.FirstName, model.Surname)));
 
             return Ok(user.Id);
         }

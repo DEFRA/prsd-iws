@@ -18,7 +18,7 @@
         public static readonly Guid NonAdminUserId = new Guid("4573456B-605B-4629-9FA5-3CD4AA95C46B");
 
         private static readonly Action<User, bool> SetIsAdminForUser =
-            (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsAdmin, isAdmin, user);
+            (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsInternal, isAdmin, user);
         private static readonly Action<User, InternalUserStatus> SetInternalUserStatus =
             (user, status) => ObjectInstantiator<User>.SetProperty(u => u.InternalUserStatus, status, user);
 

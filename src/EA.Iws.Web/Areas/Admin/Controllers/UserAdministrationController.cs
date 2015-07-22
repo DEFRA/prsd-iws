@@ -11,7 +11,7 @@
     using Requests.Admin.UserAdministration;
     using ViewModels.UserAdministration;
 
-    [Authorize]
+    [Authorize(Roles = "internal")]
     public class UserAdministrationController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

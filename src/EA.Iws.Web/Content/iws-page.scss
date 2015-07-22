@@ -555,7 +555,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
         border-bottom: 10px solid $link-colour;
     }
 
-    a{
+    a {
         display: block;
         margin-bottom: 5px;
     }
@@ -590,7 +590,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
         margin-bottom: 15px;
         border-bottom: 1px solid #BFC1C3;
 
-        .expanded-details{
+        .expanded-details {
             padding-bottom: 10px;
         }
 
@@ -630,4 +630,24 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     h2 {
         display: inline-block;
     }
+}
+
+.green-text {
+    color: $button-colour;
+}
+
+.red-text {
+    color: $error-colour;
+}
+
+.grey-text {
+    color: $grey-1;
+}
+
+.status-circle {
+    font-size: 21px!important;
+}
+
+.action-dropdown {
+    width: 100%;
 }

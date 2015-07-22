@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests
+﻿namespace EA.Iws.Core.Shared
 {
     public static class ClaimTypes
     {

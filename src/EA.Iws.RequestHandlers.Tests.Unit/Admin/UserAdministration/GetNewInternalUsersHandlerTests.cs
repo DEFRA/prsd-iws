@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Security;
     using System.Threading.Tasks;
     using Core.Admin;
     using Cqrs.Tests.Unit.Helpers;
@@ -35,7 +36,7 @@
         {
             userContext.ReturnsId = InternalUserCollection.NonAdminUserId;
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(message));
+            await Assert.ThrowsAsync<SecurityException>(() => handler.HandleAsync(message));
         }
 
         [Fact]
@@ -43,7 +44,7 @@
         {
             userContext.ReturnsId = InternalUserCollection.ThisUserAdminPendingId;
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(message));
+            await Assert.ThrowsAsync<SecurityException>(() => handler.HandleAsync(message));
         }
 
         [Fact]

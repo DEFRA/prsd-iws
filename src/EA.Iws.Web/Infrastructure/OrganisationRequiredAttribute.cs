@@ -4,9 +4,8 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
-    using Thinktecture.IdentityModel.Client;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
-    using ClaimTypes = Requests.ClaimTypes;
+    using ClaimTypes = Core.Shared.ClaimTypes;
 
     public class OrganisationRequiredAttribute : AuthorizeAttribute
     {
@@ -21,7 +20,7 @@
             var organisationRegistered = identity.HasClaim(c => c.Type.Equals(ClaimTypes.OrganisationId));
 
             bool hasRoleClaim = identity.HasClaim(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role));
-            bool isAdmin = hasRoleClaim && identity.Claims.Single(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role)).Value.Equals("admin", StringComparison.InvariantCultureIgnoreCase);
+            bool isAdmin = hasRoleClaim && identity.Claims.Single(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role)).Value.Equals("internal", StringComparison.InvariantCultureIgnoreCase);
 
             if (isAdmin)
             {

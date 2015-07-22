@@ -8,7 +8,7 @@
     using System.Web.Mvc;
     using ViewModels;
 
-    [Authorize]
+    [Authorize(Roles = "internal")]
     public class HomeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

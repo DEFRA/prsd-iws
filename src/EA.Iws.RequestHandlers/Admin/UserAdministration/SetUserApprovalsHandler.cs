@@ -25,7 +25,7 @@
         {
             var requestUser = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
 
-            if (!requestUser.IsAdmin || requestUser.InternalUserStatus != InternalUserStatus.Approved)
+            if (!requestUser.IsInternal || requestUser.InternalUserStatus != InternalUserStatus.Approved)
             {
                 return false;
             }

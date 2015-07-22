@@ -14,7 +14,7 @@
                 return null;
             }
 
-            if (!source.IsAdmin)
+            if (!source.IsInternal)
             {
                 throw new InvalidOperationException("Cannot map an external user to an internal user! Id: " + source.Id);
             }

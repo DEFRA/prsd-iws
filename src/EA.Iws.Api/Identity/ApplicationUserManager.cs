@@ -3,12 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
+    using Core.Admin;
     using DataAccess.Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security.DataProtection;
     using Services;
+    using ClaimTypes = Core.Shared.ClaimTypes;
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
@@ -97,6 +100,41 @@
             {
                 user.EmailConfirmed = true;
             }
+        }
+
+        public override async Task<IList<Claim>> GetClaimsAsync(string userId)
+        {
+            var user = await Store.FindByIdAsync(userId);
+
+            var claims = await base.GetClaimsAsync(userId);
+
+            if (user == null)
+            {
+                return claims;
+            }
+
+            if (user.InternalUserStatus.HasValue)
+            {
+                claims.Add(new Claim(ClaimTypes.InternalUserStatus, user.InternalUserStatus.Value.ToString()));
+            }
+
+            if (user.OrganisationId.HasValue)
+            {
+                claims.Add(new Claim(ClaimTypes.OrganisationId, user.OrganisationId.Value.ToString()));
+            }
+
+            claims.Add(new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", user.FirstName, user.Surname)));
+
+            if (user.IsInternal)
+            {
+                claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "internal"));
+            }
+            else
+            {
+                claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "external"));
+            }
+
+            return claims;
         }
     }
 }
