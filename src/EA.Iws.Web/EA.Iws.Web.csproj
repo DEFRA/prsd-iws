@@ -612,6 +612,7 @@
     <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="Views\Errors\AccessDenied.cshtml" />
     <Content Include="Views\Shared\_IwsTitle.cshtml" />
+    <Content Include="Views\Registration\ChangeAccountDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -731,6 +732,7 @@
     <Compile Include="ViewModels\NewNotification\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="ViewModels\NewNotification\CreatedViewModel.cs" />
     <Compile Include="ViewModels\NewNotification\NotificationTypeViewModel.cs" />
+    <Compile Include="ViewModels\Registration\ChangeAccountDetailsViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\OperationCodesViewModel.cs" />

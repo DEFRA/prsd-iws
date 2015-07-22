@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.ViewModels.Registration.ChangeAccountDetailsViewModel
+@{
+    ViewBag.Title = "Change account details";
+}
+<h1 class="heading-large">
+    Which of your account details would you like to change?
+</h1>
+
+@using (Html.BeginForm("ChangeAccountDetails", "Registration"))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
+        <label class="block-label" for="rdoOrganisationDetails">
+            @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails" })Organisation details you initially registered with
+        </label>
+        <label class="block-label" for="rdoPersonalDetails">
+            @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails" })Your details
+        </label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="button" value="Continue" />
+    </div>
+}

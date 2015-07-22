@@ -218,6 +218,28 @@
             }
         }
 
+        [HttpGet]
+        public ActionResult ChangeAccountDetails()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeAccountDetails(ChangeAccountDetailsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.ChangeOptions.GetValueOrDefault())
+            {
+                return RedirectToAction("EditApplicantDetails", "Registration");
+            }
+            return RedirectToAction("EditOrganisationDetails", "Registration");
+        }
+
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
             using (var client = apiClient())
