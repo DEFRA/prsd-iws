@@ -5,8 +5,9 @@
     internal class ProducerViewModel
     {
         private AddressViewModel address;
+        private const int TextMaxLength = 100;
 
-        public ProducerViewModel(Producer producer, int countOfProducers)
+        public ProducerViewModel(Producer producer, int countOfProducers, string processText, bool? isIsProcessAnnexAttachedAttached)
         {
             Name = producer.Business.Name;
             address = new AddressViewModel(producer.Address);
@@ -18,6 +19,9 @@
             IsSiteOfGeneration = producer.IsSiteOfExport;
             AnnexMessage = string.Empty;
             SetSiteOfGeneration(countOfProducers);
+            CountOfProducers = countOfProducers;
+            ProcessOfGeneration = processText;
+            IsProcessAnnexAttached = isIsProcessAnnexAttachedAttached;
         }
 
         private ProducerViewModel()
@@ -47,6 +51,12 @@
 
         public string AnnexMessage { get; private set; }
 
+        public int CountOfProducers { get; private set; }
+
+        public string ProcessOfGeneration { get; private set; }
+
+        public bool? IsProcessAnnexAttached { get; private set; }
+
         private void SetSiteOfGeneration(int countOfProducers)
         {
             string siteOfGenerationInformation;
@@ -62,22 +72,88 @@
             SiteOfGeneration = siteOfGenerationInformation;
         }
 
-        public static ProducerViewModel GetProducerViewModelShowingSeeAnnexInstruction(int annexNumber)
+        private string GetSiteAndProcessText(int annexNumber)
+        {
+            string text = string.Empty;
+
+            bool isProcessAnnexAttached = false;
+
+            if (IsProcessAnnexAttached.HasValue)
+            {
+                isProcessAnnexAttached = IsProcessAnnexAttached.Value;
+            }
+
+            if (CountOfProducers == 1)
+            {
+                if (ProcessOfGeneration.Length > TextMaxLength)
+                {
+                    text = "Site as above. See Annex " + annexNumber;
+                }
+
+                if (isProcessAnnexAttached && ProcessOfGeneration.Length <= TextMaxLength)
+                {
+                    text = "Site as above.  See Annex " + annexNumber + ".  " + ProcessOfGeneration;
+                }
+
+                if (!isProcessAnnexAttached && ProcessOfGeneration.Length <= TextMaxLength)
+                {
+                    text = "Site as above.  " + ProcessOfGeneration;
+                }
+            }
+
+            if (CountOfProducers > 1)
+            {
+                if (ProcessOfGeneration.Length > TextMaxLength)
+                {
+                    text = "See Annex " + annexNumber;
+                }
+
+                if (ProcessOfGeneration.Length <= TextMaxLength)
+                {
+                    text = "See Annex " + annexNumber + ".  " + ProcessOfGeneration;
+                }
+            }
+
+            return text;
+        }
+
+        public ProducerViewModel GetProducerViewModelShowingAnnexMessages(int producerCount, ProducerViewModel pvm, int annexNumber)
+        {
+            if (producerCount > 2)
+            {
+                return GetProducerViewModelShowingAnnexMessagesForProducerCountGreaterThanTwo(pvm, annexNumber);
+            }
+
+            return GetProducerViewModelShowingAnnexMessagesForProducerCountNotGreaterThanTwo(pvm, annexNumber);
+        }
+
+        private ProducerViewModel GetProducerViewModelShowingAnnexMessagesForProducerCountGreaterThanTwo(ProducerViewModel pvm, int annexNumber)
         {
             var seeAnnexNotice = "See Annex " + annexNumber;
 
-            return new ProducerViewModel
-            {
-                AnnexMessage = seeAnnexNotice,
-                ContactPerson = string.Empty,
-                Name = string.Empty,
-                Email = string.Empty,
-                Telephone = string.Empty,
-                RegistrationNumber = string.Empty,
-                address = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty),
-                Fax = string.Empty,
-                SiteOfGeneration = string.Empty
-            };
+            pvm.AnnexMessage = seeAnnexNotice;
+            pvm.ContactPerson = string.Empty;
+            pvm.Name = string.Empty;
+            pvm.Email = string.Empty;
+            pvm.Telephone = string.Empty;
+            pvm.RegistrationNumber = string.Empty;
+            pvm.address = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty);
+            pvm.Fax = string.Empty;
+            pvm.SiteOfGeneration = GetSiteAndProcessText(annexNumber);
+
+            return pvm;
+        }
+
+        private ProducerViewModel GetProducerViewModelShowingAnnexMessagesForProducerCountNotGreaterThanTwo(ProducerViewModel pvm, int annexNumber)
+        {
+            pvm.SiteOfGeneration = GetSiteAndProcessText(annexNumber);
+
+            return pvm;
+        }
+
+        public static int ProcessOfGenerationMaxTextLength()
+        {
+            return TextMaxLength;
         }
     }
 }

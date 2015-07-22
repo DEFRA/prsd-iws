@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using Domain;
 
@@ -15,7 +16,7 @@
 
         public AddressViewModel(Address address)
         {
-            addressLine1 = address.Building + " " + address.Address1;
+            addressLine1 = address.Building + ", " + address.Address1;
             addressLine2 = address.Address2;
             townOrCity = address.TownOrCity;
             region = address.Region;
@@ -69,7 +70,7 @@
 
                 sb.Append(args[i]);
 
-                if (i < args.Length - 1 && !string.IsNullOrWhiteSpace(args[i + 1]))
+                if (i < args.Length - 1 && args.Any(s => !string.IsNullOrWhiteSpace(s) && s != args[i]))
                 {
                     sb.Append(", ");
                 }

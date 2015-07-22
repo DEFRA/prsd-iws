@@ -12,6 +12,7 @@
     internal class ProducerBlock : INotificationBlock, IAnnexedBlock
     {
         private const string SiteOfExport = "SiteOfExport";
+        private const string PoGtext = "PoGtext";
         private readonly IList<ProducerViewModel> data;
 
         public ProducerBlock(IList<MergeField> mergeFields, NotificationApplication notification)
@@ -19,46 +20,80 @@
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
             var numberOfProducers = notification.Producers.Count();
+            var processText = notification.WasteGenerationProcess;
+            var isProcessAnnexAttached = notification.IsWasteGenerationProcessAttached;
 
-            data = notification.Producers.Select(p => new ProducerViewModel(p, numberOfProducers)).ToList();
+            data = notification.Producers.Select(p => new ProducerViewModel(p, numberOfProducers, processText, isProcessAnnexAttached)).ToList();
 
             // The producers annex contains a set of different merge fields for producer marked as Site of Export.
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
             ((List<MergeField>)AnnexMergeFields).AddRange(MergeFieldLocator.GetAnnexMergeFields(mergeFields,
                 SiteOfExport));
+            ((List<MergeField>)AnnexMergeFields).AddRange(MergeFieldLocator.GetAnnexMergeFields(mergeFields,
+                PoGtext));
         }
 
         public IList<MergeField> AnnexMergeFields { get; private set; }
 
         public bool HasAnnex
         {
-            get { return data.Count > 1; }
+            get
+            {
+                bool isProcessAnnexAttached = data[0].IsProcessAnnexAttached.GetValueOrDefault();
+                return (data.Count > 1 || isProcessAnnexAttached || data[0].ProcessOfGeneration.Length <= ProducerViewModel.ProcessOfGenerationMaxTextLength());
+            }
         }
 
         public void GenerateAnnex(int annexNumber)
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(ProducerViewModel));
+            MergeAnnexNumber(annexNumber);
+            MergeProcessOfGenerationTextInAnnex(data[0], properties);
 
-            // The main document should show "See Annex" for all data if there is an annex.
-            MergeProducerToMainDocument(ProducerViewModel.GetProducerViewModelShowingSeeAnnexInstruction(annexNumber), properties);
-
-            // Next merge the producer as the site of export.
-            var indexOfSiteOfGeneration = data.Where(x => x.IsSiteOfGeneration).Select(data.IndexOf).Single();
-            MergeSiteOfExportInAnnex(data[indexOfSiteOfGeneration], properties);
-
-            // Next remove the entry we have just merged so the multiple producers table doesn't contain this entry.
-            data.RemoveAt(indexOfSiteOfGeneration);
-
-            // If we only need the site of export in the annex clear the remaining annex fields and exit at this point.
-            if (data.Count == 0)
+            //If there is only one producer but also an annex
+            if (data.Count == 1)
             {
+                MergeProducerToMainDocument(data[0].GetProducerViewModelShowingAnnexMessages(data.Count, data[0], annexNumber), properties);
+                ClearSiteOfExportFields();
                 ClearMultipleProducersTable();
-                return;
             }
 
-            // Finally merge the remaining producers into the multiple producers table and set the annex title.
-            MergeMultipleProducersTable(properties);
-            MergeAnnexNumber(annexNumber);
+            //If there are two producers the one that is the site of generation goes in the annex
+            //and the other goes on the notification document in block 9
+            if (data.Count > 1)
+            {
+                //Merge site of generation to annex
+                var indexOfSiteOfGeneration = data.Where(x => x.IsSiteOfGeneration).Select(data.IndexOf).Single();
+                MergeSiteOfExportInAnnex(data[indexOfSiteOfGeneration], properties);
+
+                // Next remove the entry we have just merged so the multiple producers table doesn't contain this entry.
+                data.RemoveAt(indexOfSiteOfGeneration);
+
+                // If we only need the site of generation in the annex clear the remaining annex fields and exit at this point.
+                if (data.Count < 2)
+                {
+                    ClearMultipleProducersTable();
+                }
+
+                // Merge the remaining producers into the multiple producers table and set the annex title.
+                MergeMultipleProducersTable(properties);
+
+                //If there is only one left put it on the form otherwise put them all in the annex
+                if (data.Count > 1)
+                {
+                    MergeProducerToMainDocument(data[0].GetProducerViewModelShowingAnnexMessages(data.Count, data[0], annexNumber), properties);
+                }
+                else
+                {
+                    MergeProducerToMainDocument(data[0].GetProducerViewModelShowingAnnexMessages(data.Count, data[0], annexNumber), properties);
+                }
+            }
+
+            //Clear the annex process of generation field if it contains no text
+            if (!(data[0].ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()))
+            {
+                ClearProcessOfGenerationTextFields();
+            }
         }
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
@@ -140,11 +175,21 @@
             ClearAnnexTitleAndSeeAnnexNotice();
 
             ClearSiteOfExportFields();
+
+            ClearProcessOfGenerationTextFields();
         }
 
         private void ClearSiteOfExportFields()
         {
             foreach (var mergeField in FindSiteOfExportMergeFields())
+            {
+                mergeField.RemoveCurrentContents();
+            }
+        }
+
+        private void ClearProcessOfGenerationTextFields()
+        {
+            foreach (var mergeField in FindProcessOfGenerationTextMergeFields())
             {
                 mergeField.RemoveCurrentContents();
             }
@@ -166,6 +211,17 @@
             foreach (var mergeField in FindSiteOfExportMergeFields())
             {
                 MergeFieldDataMapper.BindCorrespondingField(mergeField, siteOfExportProducer, properties);
+            }
+        }
+
+        private void MergeProcessOfGenerationTextInAnnex(ProducerViewModel pvm, PropertyInfo[] proerties)
+        {
+            if (pvm.ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength())
+            {
+                foreach (var mergeField in FindProcessOfGenerationTextMergeFields())
+                {
+                    MergeFieldDataMapper.BindCorrespondingField(mergeField, pvm, proerties);
+                }
             }
         }
 
@@ -201,6 +257,12 @@
         {
             return AnnexMergeFields.Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
                                                 && mf.FieldName.OuterTypeName.Equals(SiteOfExport));
+        }
+
+        private IEnumerable<MergeField> FindProcessOfGenerationTextMergeFields()
+        {
+            return AnnexMergeFields.Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
+                                                && mf.FieldName.OuterTypeName.Equals(PoGtext));
         }
     }
 }
