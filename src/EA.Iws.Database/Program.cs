@@ -8,6 +8,9 @@ namespace EA.Iws.Database
 
     internal class Program
     {
+        private static readonly string DatabaseName = GetDatabaseName();
+        private static readonly string DbServer = GetDatabaseServer();
+
         private static void Main()
         {
             Console.Title = "AliaSQL Database Migrations Visual Studio Runner";
@@ -114,8 +117,5 @@ namespace EA.Iws.Database
                     return string.Empty;
             }
         }
-
-        private static readonly string DatabaseName = GetDatabaseName();
-        private static readonly string DbServer = GetDatabaseServer();
     }
 }
