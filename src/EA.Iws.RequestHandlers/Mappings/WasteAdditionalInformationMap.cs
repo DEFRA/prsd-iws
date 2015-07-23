@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.WasteType
+﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
     using System.Collections.Generic;

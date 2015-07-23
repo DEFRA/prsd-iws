@@ -213,7 +213,7 @@
     <Compile Include="WasteType\SetWasteGenerationProcessHandler.cs" />
     <Compile Include="WasteType\SetWoodTypeDescriptionHandler.cs" />
     <Compile Include="WasteType\UpdateWasteTypeHandler.cs" />
-    <Compile Include="WasteType\WasteAdditionalInformationMap.cs" />
+    <Compile Include="Mappings\WasteAdditionalInformationMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
