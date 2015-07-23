@@ -42,5 +42,19 @@
 
             return await response.CreateResponseAsync<string>();
         }
+
+        public async Task<EditApplicantRegistrationData> GetApplicantDetailsAsync(string accessToken)
+        {
+            httpClient.SetBearerToken(accessToken);
+            var response = await httpClient.GetAsync(Controller + "GetApplicantDetails");
+            return await response.CreateResponseAsync<EditApplicantRegistrationData>();
+        }
+
+        public async Task<string> UpdateApplicantDetailsAsync(string accessToken, EditApplicantRegistrationData applicantRegistrationData)
+        {
+            httpClient.SetBearerToken(accessToken);
+            var response = await httpClient.PostAsJsonAsync(Controller + "UpdateApplicantDetails", applicantRegistrationData);
+            return await response.CreateResponseAsync<string>();
+        }
     }
 }

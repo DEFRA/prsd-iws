@@ -1,18 +1,27 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
-    using Api.Client;
-    using Prsd.Core.Web.OAuth;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
+    using Prsd.Core.Web.OAuth;
     using Web.Controllers;
     using Web.ViewModels.Registration;
     using Xunit;
 
     public class RegistrationControllerTests
     {
+        private const string ValidEmail = "test@test.com";
+        private const string ValidPassword = "P@ssword1";
+        private const string ValidOrganisationName = "OrgName";
+        private const string ValidPhoneNumber = "01243234567";
+        private const string ValidName = "ValidName";
+        private const string ValidSurname = "ValidSurname";
+        private static readonly Guid UserIdGuid = new Guid();
+
         [Fact]
         public async Task ApplicantRegister_NameNotProvided_ValidationError()
         {
@@ -101,6 +110,30 @@
             Assert.True(validationResults.Any(vr => vr.ErrorMessage.Equals("Please confirm that you have read the terms and conditions")));
         }
 
+        [Fact]
+        public async Task EditApplicantDetails_FirstName_Required_ValidationError()
+        {
+            var editApplicantDetails = GetEditApplicantDetailsViewModel();
+            editApplicantDetails.FirstName = string.Empty;
+
+            var registrationController = GetMockAccountController(editApplicantDetails);
+
+            var result = await registrationController.EditApplicantDetails(editApplicantDetails) as ViewResult;
+            Assert.False(result.ViewData.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task EditApplicantDetails_Surname_Required_ValidationError()
+        {
+            var editApplicantDetails = GetEditApplicantDetailsViewModel();
+            editApplicantDetails.Surname = string.Empty;
+
+            var registrationController = GetMockAccountController(editApplicantDetails);
+
+            var result = await registrationController.EditApplicantDetails(editApplicantDetails) as ViewResult;
+            Assert.False(result.ViewData.ModelState.IsValid);
+        }
+
         private static RegistrationController GetMockAccountController(object viewModel)
         {
             var registrationController = new RegistrationController(() => new OAuthClient("test", "test", "test"), () => new IwsClient("test"), null, null);
@@ -118,13 +151,6 @@
 
         private static ApplicantRegistrationViewModel GetValidRegisterViewModel()
         {
-            const string ValidEmail = "test@test.com";
-            const string ValidPassword = "P@ssword1";
-            const string ValidOrganisationName = "OrgName";
-            const string ValidPhoneNumber = "01243234567";
-            const string ValidName = "ValidName";
-            const string ValidSurname = "ValidSurname";
-
             var validRegisterViewModel = new ApplicantRegistrationViewModel
             {
                 Email = ValidEmail,
@@ -138,6 +164,19 @@
             };
 
             return validRegisterViewModel;
+        }
+
+        private static EditApplicantDetailsViewModel GetEditApplicantDetailsViewModel()
+        {
+            return new EditApplicantDetailsViewModel()
+            {
+                Id = UserIdGuid,
+                FirstName = ValidName,
+                Surname = ValidSurname,
+                Email = ValidEmail,
+                ExistingEmail = ValidEmail,
+                Password = ValidPassword
+            };
         }
     }
 }

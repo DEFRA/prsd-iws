@@ -235,9 +235,51 @@
 
             if (model.ChangeOptions.GetValueOrDefault())
             {
-                return RedirectToAction("EditApplicantDetails", "Registration");
+                return RedirectToAction("EditOrganisationDetails", "Registration");
             }
-            return RedirectToAction("EditOrganisationDetails", "Registration");
+            return RedirectToAction("EditApplicantDetails", "Registration");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditApplicantDetails()
+        {
+            EditApplicantDetailsViewModel model;
+            using (var client = apiClient())
+            {
+                var response = await client.Registration.GetApplicantDetailsAsync(User.GetAccessToken());
+                model = new EditApplicantDetailsViewModel(response);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditApplicantDetails(EditApplicantDetailsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                if (model.Email.Equals(model.ExistingEmail))
+                {
+                    //Update applicant details only
+                    await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
+                    return RedirectToAction("Home", "Applicant", new { id = model.Id, area = string.Empty });
+                }
+
+                //Update applicant details & Send verification email
+                await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
+                var verificationCode = await client.Registration.GetUserEmailVerificationTokenAsync(User.GetAccessToken());
+                var verificationEmail = emailService.GenerateEmailVerificationMessage(
+                                        Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme),
+                                        verificationCode, model.Id.ToString(), model.Email);
+                await emailService.SendAsync(verificationEmail);
+            }
+
+            return View(model);
         }
 
         private async Task<IEnumerable<CountryData>> GetCountries()

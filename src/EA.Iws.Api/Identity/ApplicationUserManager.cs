@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
-    using Core.Admin;
     using DataAccess.Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -17,7 +16,7 @@
     {
         private readonly ConfigurationService configurationService;
 
-        public ApplicationUserManager(IUserStore<ApplicationUser> store, 
+        public ApplicationUserManager(IUserStore<ApplicationUser> store,
             IDataProtectionProvider dataProtectionProvider,
             ConfigurationService configurationService)
             : base(store)

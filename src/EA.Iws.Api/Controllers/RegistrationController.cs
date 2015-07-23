@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Api.Controllers
 {
-    using System.Security.Claims;
+    using System;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Client.Entities;
@@ -99,6 +99,56 @@
             var result = await userManager.ConfirmEmailAsync(model.Id.ToString(), model.Code);
 
             return Ok(result.Succeeded);
+        }
+
+        [HttpGet]
+        [Route("GetApplicantDetails")]
+        public async Task<EditApplicantRegistrationData> GetApplicantDetails()
+        {
+            var result = await userManager.FindByIdAsync(userContext.UserId.ToString());
+            return new EditApplicantRegistrationData()
+            {
+                Id = new Guid(result.Id),
+                FirstName = result.FirstName,
+                Surname = result.Surname,
+                Email = result.Email
+            };
+        }
+
+        [HttpPost]
+        [Route("UpdateApplicantDetails")]
+        public async Task<IHttpActionResult> UpdateApplicantDetails(EditApplicantRegistrationData model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var userId = model.Id.ToString();
+            var user = await userManager.FindByIdAsync(userId);
+            user.FirstName = model.FirstName;
+            user.Surname = model.Surname;
+            user.PhoneNumber = model.Phone;
+
+            if (!user.Email.Equals(model.Email))
+            {
+                //Verify user password
+                var resultChangePassword = await userManager.CheckPasswordAsync(user, model.Password);
+                if (!resultChangePassword)
+                {
+                    return BadRequest("Wrong password");
+                }
+                user.Email = model.Email;
+                user.UserName = model.Email;
+            }
+
+            var result = await userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok(user.Id);
         }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
