@@ -182,6 +182,10 @@
       <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>
       <Name>EA.Iws.Requests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
+      <Project>{DEC3021A-32CF-4B84-A59C-77503378ED67}</Project>
+      <Name>EA.Iws.TestHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Web\EA.Iws.Web.csproj">
       <Project>{2e112d48-a841-4db7-b96f-4211c4da31c0}</Project>
       <Name>EA.Iws.Web</Name>
