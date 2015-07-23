@@ -49,7 +49,7 @@
 
         public bool HasAnnex
         {
-            get { return data.AreFurtherDetailsProvided; }
+            get { return (data.IsAnnexProvided || !string.IsNullOrEmpty(data.FurtherDetails)); }
         }
 
         public void GenerateAnnex(int annexNumber)
