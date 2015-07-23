@@ -3,9 +3,9 @@
         <div class="username-title-display">
             <ul>
                 <li>
-                    <div class="text-secondary inline">Signed in as:&nbsp</div><div class="username-format">@ViewBag.Name </div>
+                    <div class="text-secondary">Signed in as: <span class="username-format">@ViewBag.Name </span></div>
                 </li>
-                <li style="float: right;">
+                <li>
                     @using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post, htmlAttributes: new { id = "logoutForm" }))
                     {
                         <button class="link-submit" type="submit">Sign out</button>
@@ -13,5 +13,5 @@
                 </li>
             </ul>
         </div>
-    <div class="account-link-banner title-dividing-line"></div>
+    <div class="account-link-banner"></div>
 }
