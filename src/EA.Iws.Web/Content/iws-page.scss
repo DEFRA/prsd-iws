@@ -651,3 +651,25 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 .action-dropdown {
     width: 100%;
 }
+
+.title-dividing-line {
+    position: relative;
+    clear: both;
+    bottom: 0;
+    width: 100%
+}
+
+.username-title-display {
+    float: right;
+    position: relative;
+    padding: 5px
+}
+
+.inline {
+    display: inline-block;
+}
+
+.username-format {
+    font-weight: bold;
+    display: inline-block;
+}
