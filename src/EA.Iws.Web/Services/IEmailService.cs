@@ -10,5 +10,7 @@
         MailMessage GenerateEmailVerificationMessage(string verificationBaseUrl, string verificationToken, string userId, string mailTo);
 
         MailMessage GenerateMailMessageWithHtmlAndPlainTextParts(string from, string to, string subject, EmailTemplate emailTemplate);
+
+        string MailFrom { get; }
     }
 }

@@ -38,7 +38,8 @@
 
             var users = await context.Users.Where(u => u.IsInternal 
                 && u.InternalUserStatus == InternalUserStatus.Pending
-                && u.Id != userContext.UserId.ToString()).ToArrayAsync();
+                && u.Id != userContext.UserId.ToString()
+                && u.EmailConfirmed).ToArrayAsync();
             
             return users.Select(userMap.Map).ToArray();
         }

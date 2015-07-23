@@ -34,7 +34,8 @@
 
             var users =
                 context.Users.Where(u => userIds.Contains(u.Id)
-                    && u.InternalUserStatus == InternalUserStatus.Pending);
+                    && u.InternalUserStatus == InternalUserStatus.Pending
+                    && u.EmailConfirmed);
 
             if (users.Count() != message.UserActions.Count)
             {

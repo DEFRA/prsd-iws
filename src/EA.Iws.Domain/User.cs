@@ -43,6 +43,8 @@
 
         public bool IsInternal { get; private set; }
 
+        public bool EmailConfirmed { get; private set; }
+
         public InternalUserStatus? InternalUserStatus { get; private set; }
 
         public virtual Organisation Organisation { get; private set; }

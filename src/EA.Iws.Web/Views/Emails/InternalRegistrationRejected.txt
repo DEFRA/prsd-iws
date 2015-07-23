@@ -1,0 +1,5 @@
+﻿Registration rejected
+
+Your request for access to International Waste Shipments has been rejected.
+
+Please contact the IWS administrator.

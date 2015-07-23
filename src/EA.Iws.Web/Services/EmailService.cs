@@ -12,6 +12,11 @@
         private readonly ConfigurationService configurationService;
         private readonly IEmailTemplateService templateService;
 
+        public string MailFrom 
+        {
+            get { return configurationService.CurrentConfiguration.MailFrom; }
+        }
+
         public EmailService(ConfigurationService configurationService, IEmailTemplateService templateService)
         {
             this.templateService = templateService;

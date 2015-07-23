@@ -133,6 +133,8 @@
                 claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "external"));
             }
 
+            claims.Add(new Claim(System.Security.Claims.ClaimTypes.Email, user.Email));
+
             return claims;
         }
     }

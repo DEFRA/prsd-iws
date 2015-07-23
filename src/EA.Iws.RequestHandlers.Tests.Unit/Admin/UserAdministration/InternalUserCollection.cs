@@ -21,6 +21,8 @@
             (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsInternal, isAdmin, user);
         private static readonly Action<User, InternalUserStatus> SetInternalUserStatus =
             (user, status) => ObjectInstantiator<User>.SetProperty(u => u.InternalUserStatus, status, user);
+        private static readonly Action<User, bool> SetEmailConfirmed =
+            (user, b) => ObjectInstantiator<User>.SetProperty(u => u.EmailConfirmed, b, user);
 
         private readonly Func<Guid, IList<User>, int> getUserIndexById =
             (guid, users) => { return users.IndexOf(users.Single(u => u.Id == guid.ToString())); };
@@ -74,6 +76,11 @@
                 new User(NonAdminUserId.ToString(), AnyString, AnyString, AnyString,
                     AnyString)
             };
+
+            foreach (var user in Users)
+            {
+                SetEmailConfirmed(user, true);
+            }
 
             SetIsAdminForUser(Users[AdminPendingIndex], true);
             SetInternalUserStatus(Users[AdminPendingIndex], InternalUserStatus.Pending);

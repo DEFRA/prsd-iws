@@ -8,7 +8,7 @@
         {
             // Register the map classes
             builder.RegisterAssemblyTypes(this.GetType().Assembly)
-                .Where(t => t.Namespace.Contains("Mappings"))
+                .Where(t => t.Namespace != null && t.Namespace.Contains("Mappings"))
                 .AsImplementedInterfaces();
         }
     }

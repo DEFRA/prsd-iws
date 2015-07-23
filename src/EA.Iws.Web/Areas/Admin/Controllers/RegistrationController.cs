@@ -174,5 +174,11 @@
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ApprovalRejected()
+        {
+            return View();
+        }
     }
 }

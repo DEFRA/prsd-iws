@@ -34,7 +34,7 @@
         private static string RunTemplateWithDynamicModel(string templateKey, string templateName, object model, string fileExtension)
         {
             bool isTemplated = Engine.Razor.IsTemplateCached(templateKey, null);
-            string result = null;
+            string result;
 
             if (isTemplated)
             {
