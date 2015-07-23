@@ -61,6 +61,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             authenticationManager.SignOut();
