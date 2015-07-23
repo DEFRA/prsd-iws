@@ -63,7 +63,7 @@
 
             var controller = GetMockAssessmentController(model);
 
-            return controller.Continue(model);
+            return controller.DateInput(model);
         }
 
         private Areas.Admin.Controllers.AssessmentController GetMockAssessmentController(object viewModel)

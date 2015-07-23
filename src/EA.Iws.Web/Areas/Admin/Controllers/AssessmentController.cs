@@ -17,12 +17,14 @@
             this.apiClient = apiClient;
         }
 
+        [HttpGet]
         public ActionResult DateInput()
         {
             return View();
         }
 
-        public async Task<ViewResult> Continue(DateInputViewModel model)
+        [HttpPost]
+        public async Task<ViewResult> DateInput(DateInputViewModel model)
         {
             if (!ModelState.IsValid)
             {
