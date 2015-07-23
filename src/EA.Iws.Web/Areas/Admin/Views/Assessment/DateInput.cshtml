@@ -44,20 +44,20 @@
                             <fieldset>
                                 <div class="form-date">
                                     @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionDay)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionMonth)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionYear)
+                                    @Html.Gds().ValidationMessageFor(m => m.PaymentReceivedDay)
+                                    @Html.Gds().ValidationMessageFor(m => m.PaymentReceivedMonth)
+                                    @Html.Gds().ValidationMessageFor(m => m.PaymentReceivedYear)
                                     <div class="form-group form-group-day">
-                                        @Html.Gds().LabelFor(m => m.DecisionDay)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.PaymentReceivedDay)
+                                        @Html.Gds().TextBoxFor(m => m.PaymentReceivedDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-month">
-                                        @Html.Gds().LabelFor(m => m.DecisionMonth)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.PaymentReceivedMonth)
+                                        @Html.Gds().TextBoxFor(m => m.PaymentReceivedMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-year">
-                                        @Html.Gds().LabelFor(m => m.DecisionYear)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.PaymentReceivedYear)
+                                        @Html.Gds().TextBoxFor(m => m.PaymentReceivedYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
                                     </div>
                                 </div>
                             </fieldset>
@@ -73,20 +73,20 @@
                             <fieldset>
                                 <div class="form-date">
                                     @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionDay)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionMonth)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionYear)
+                                    @Html.Gds().ValidationMessageFor(m => m.CommencementDay)
+                                    @Html.Gds().ValidationMessageFor(m => m.CommencementMonth)
+                                    @Html.Gds().ValidationMessageFor(m => m.CommencementYear)
                                     <div class="form-group form-group-day">
-                                        @Html.Gds().LabelFor(m => m.DecisionDay)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.CommencementDay)
+                                        @Html.Gds().TextBoxFor(m => m.CommencementDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-month">
-                                        @Html.Gds().LabelFor(m => m.DecisionMonth)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.CommencementMonth)
+                                        @Html.Gds().TextBoxFor(m => m.CommencementMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-year">
-                                        @Html.Gds().LabelFor(m => m.DecisionYear)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.CommencementYear)
+                                        @Html.Gds().TextBoxFor(m => m.CommencementYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
                                     </div>
                                 </div>
                             </fieldset>
@@ -102,20 +102,20 @@
                             <fieldset>
                                 <div class="form-date">
                                     @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionDay)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionMonth)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionYear)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationCompleteDay)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationCompleteMonth)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationCompleteYear)
                                     <div class="form-group form-group-day">
-                                        @Html.Gds().LabelFor(m => m.DecisionDay)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationCompleteDay)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationCompleteDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-month">
-                                        @Html.Gds().LabelFor(m => m.DecisionMonth)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationCompleteMonth)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationCompleteMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-year">
-                                        @Html.Gds().LabelFor(m => m.DecisionYear)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationCompleteYear)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationCompleteYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
                                     </div>
                                 </div>
                             </fieldset>
@@ -131,20 +131,20 @@
                             <fieldset>
                                 <div class="form-date">
                                     @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionDay)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionMonth)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionYear)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationTransmittedDay)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationTransmittedMonth)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationTransmittedYear)
                                     <div class="form-group form-group-day">
-                                        @Html.Gds().LabelFor(m => m.DecisionDay)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationTransmittedDay)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationTransmittedDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-month">
-                                        @Html.Gds().LabelFor(m => m.DecisionMonth)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationTransmittedMonth)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationTransmittedMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-year">
-                                        @Html.Gds().LabelFor(m => m.DecisionYear)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationTransmittedYear)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationTransmittedYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
                                     </div>
                                 </div>
                             </fieldset>
@@ -160,20 +160,20 @@
                             <fieldset>
                                 <div class="form-date">
                                     @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionDay)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionMonth)
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionYear)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationAcknowledgedDay)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationAcknowledgedMonth)
+                                    @Html.Gds().ValidationMessageFor(m => m.NotificationAcknowledgedYear)
                                     <div class="form-group form-group-day">
-                                        @Html.Gds().LabelFor(m => m.DecisionDay)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationAcknowledgedDay)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationAcknowledgedDay, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-month">
-                                        @Html.Gds().LabelFor(m => m.DecisionMonth)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationAcknowledgedMonth)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationAcknowledgedMonth, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
                                     </div>
                                     <div class="form-group form-group-year">
-                                        @Html.Gds().LabelFor(m => m.DecisionYear)
-                                        @Html.Gds().TextBoxFor(m => m.DecisionYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
+                                        @Html.Gds().LabelFor(m => m.NotificationAcknowledgedYear)
+                                        @Html.Gds().TextBoxFor(m => m.NotificationAcknowledgedYear, new { type = "number", min = "2015", pattern = "[0-9]*" })
                                     </div>
                                 </div>
                             </fieldset>

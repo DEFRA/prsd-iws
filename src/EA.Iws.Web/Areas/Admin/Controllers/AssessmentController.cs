@@ -31,13 +31,25 @@
                 return View(model);
             }
 
-            var setDates = new SetDates { DecisionDate = new DateTime(Convert.ToInt32(model.DecisionYear), Convert.ToInt32(model.DecisionMonth), Convert.ToInt32(model.DecisionDay)) };
+            //var setDates = new SetDates { DecisionDate = new DateTime(Convert.ToInt32(model.DecisionYear), Convert.ToInt32(model.DecisionMonth), Convert.ToInt32(model.DecisionDay)) };
+
+            var setDates = new SetDates();
+            setDates.DecisionDate = GetDateFromUserInput(model.DecisionDay, model.DecisionMonth, model.DecisionYear);
 
             using (var client = apiClient())
             {
                 var result = await client.SendAsync(User.GetAccessToken(), setDates);
             }
             return View();
+        }
+
+        private DateTime? GetDateFromUserInput(int? day, int? month, int? year)
+        {
+            if (day.HasValue && month.HasValue && year.HasValue)
+            {
+                return new DateTime(year.Value, month.Value, day.Value);
+            }
+            return null;
         }
     }
 }
