@@ -500,6 +500,7 @@
     <Content Include="Areas\Admin\Views\Registration\AwaitApproval.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\ApprovalRejected.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\SiteOfExport.cshtml" />
+    <Content Include="Areas\Admin\Views\Assessment\DateInput.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Remove.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -637,12 +638,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AssessmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\AdminRegistrationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\BasicSearchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\NewUsersListViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DateInputViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />
     <Compile Include="Areas\FinancialGuarantee\FinancialGuaranteeAreaRegistration.cs" />
