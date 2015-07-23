@@ -10,7 +10,6 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Facilities;
-    using Requests.Importer;
     using Requests.Notification;
     using ViewModels.Facility;
     using Web.ViewModels.Shared;
@@ -26,20 +25,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id, bool? copy)
+        public async Task<ActionResult> Add(Guid id)
         {
             var facility = new AddFacilityViewModel();
             using (var client = apiClient())
             {
-                if (copy.HasValue && copy.Value)
-                {
-                    var importer = await client.SendAsync(User.GetAccessToken(), new GetImporterByNotificationId(id));
-
-                    facility.Address = importer.Address;
-                    facility.Contact = importer.Contact;
-                    facility.Business = new BusinessTypeViewModel(importer.Business);
-                }
-
                 var response =
                     await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
                 facility.NotificationType = response.NotificationType;
@@ -144,10 +134,6 @@
         public async Task<ActionResult> List(Guid id)
         {
             var model = new MultipleFacilitiesViewModel();
-            if (TempData["errorRemoveFacility"] != null)
-            {
-                ModelState.AddModelError("RemoveFacility", TempData["errorRemoveFacility"].ToString());
-            }
 
             using (var client = apiClient())
             {
@@ -158,47 +144,72 @@
                     await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
 
                 model.NotificationId = id;
-                model.FacilityData = response.ToList();
+                model.FacilityData = response;
                 model.NotificationType = notificationInfo.NotificationType;
             }
 
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> SiteOfTreatment(Guid id, bool? backToList)
+        {
+            using (var client = apiClient())
+            {
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
+
+                var notificationInfo =
+                    await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
+
+                var model = new SiteOfTreatmentViewModel
+                {
+                    NotificationId = id,
+                    Facilities = response,
+                    NotificationType = notificationInfo.NotificationType
+                };
+
+                return View(model);
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> List(MultipleFacilitiesViewModel model)
+        public async Task<ActionResult> SiteOfTreatment(SiteOfTreatmentViewModel model, bool? backToList)
         {
-            if (!string.IsNullOrWhiteSpace(model.SelectedValue))
+            using (var client = apiClient())
             {
-                using (var client = apiClient())
+                try
                 {
-                    try
-                    {
-                        await
-                            client.SendAsync(User.GetAccessToken(),
-                                new SetActualSiteOfTreatment(new Guid(model.SelectedValue), model.NotificationId));
-                    }
-                    catch (ApiBadRequestException ex)
-                    {
-                        this.HandleBadRequest(ex);
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new SetActualSiteOfTreatment(model.SelectedSiteOfTreatment.GetValueOrDefault(), model.NotificationId));
 
-                        if (ModelState.IsValid)
-                        {
-                            throw;
-                        }
+                    if (backToList.GetValueOrDefault())
+                    {
+                        return RedirectToAction("List", "Facility", new { id = model.NotificationId });
+                    }
+                    else if (model.NotificationType == NotificationType.Recovery)
+                    {
+                        return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("OperationCodes", "WasteOperations", new { id = model.NotificationId });
+                    }
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
                     }
                 }
             }
 
-            if (model.NotificationType == NotificationType.Recovery)
-            {
-                return RedirectToAction("RecoveryPreconsent", "Facility", new { id = model.NotificationId });
-            }
-            else
-            {
-                return RedirectToAction("OperationCodes", "WasteOperations", new { id = model.NotificationId });
-            }
+            return View(model);
         }
 
         [HttpGet]
@@ -274,34 +285,59 @@
                 return View(inputModel);
             }
 
-            if (inputModel.Choices.SelectedValue.Equals("No"))
+            if (inputModel.Choices.SelectedValue.Equals("Yes"))
             {
-                return RedirectToAction("Add", new { id });
+                using (var client = apiClient())
+                {
+                    await client.SendAsync(User.GetAccessToken(), new CopyFacilityFromImporter(id));
+                }
             }
 
-            return RedirectToAction("Add", new { id, copy = true });
+            return RedirectToAction("List");
         }
 
         [HttpGet]
-        public async Task<ActionResult> Remove(Guid id, Guid entityId, string facilityType)
+        public async Task<ActionResult> Remove(Guid id, Guid entityId)
+        {
+            using (var client = apiClient())
+            {
+                var notificationInfo =
+                        await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
+
+                var response = await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
+                var facility = response.Single(p => p.Id == entityId);
+
+                var model = new RemoveFacilityViewModel
+                {
+                    NotificationId = id,
+                    FacilityId = entityId,
+                    FacilityName = facility.Business.Name,
+                    NotificationType = notificationInfo.NotificationType
+                };
+
+                if (facility.IsActualSiteOfTreatment && response.Count > 1)
+                {
+                    ViewBag.Error =
+                        string.Format("You have chosen to remove {0} which is the site of {1}. " +
+                                      "You will need to select an alternative site of {1} before you can remove this facility.",
+                                      model.FacilityName, model.NotificationType.ToString().ToLowerInvariant());
+                    return View(model);
+                }
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Remove(RemoveFacilityViewModel model)
         {
             using (var client = apiClient())
             {
                 try
                 {
-                    var response = await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
-                    var facilities = response.ToList();
-                    int facilitiesCount = facilities.Count;
-                    bool isActualSiteOfTreatment = facilities.Single(x => x.Id == entityId).IsActualSiteOfTreatment;
-
-                    if (isActualSiteOfTreatment && facilitiesCount > 1)
-                    {
-                        TempData["errorRemoveFacility"] = String.Format("You have chosen to remove the actual site. " +
-                        "You will need to select an alternative actual site of {0} before you can remove this facility.", facilityType.ToLowerInvariant());
-                        return RedirectToAction("List", "Facility", new { id });
-                    }
-
-                    await client.SendAsync(User.GetAccessToken(), new DeleteFacilityForNotification(id, entityId));
+                    await client.SendAsync(User.GetAccessToken(), new DeleteFacilityForNotification(model.NotificationId, model.FacilityId));
+                    return RedirectToAction("List", "Facility", new { id = model.NotificationId });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -312,7 +348,8 @@
                     }
                 }
             }
-            return RedirectToAction("List", "Facility", new { id });
+
+            return View(model);
         }
     }
 }

@@ -11,7 +11,7 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
-    <div class="form-group">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfExport)">
         <table>
             <thead>
             <tr>

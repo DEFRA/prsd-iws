@@ -2,13 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using Core.Producers;
 
     public class SiteOfExportViewModel
     {
         public Guid NotificationId { get; set; }
 
-        public Guid SelectedSiteOfExport { get; set; }
+        [Required]
+        [Display(Name = "Site of export")]
+        public Guid? SelectedSiteOfExport { get; set; }
 
         public IList<ProducerData> Producers { get; set; }
 

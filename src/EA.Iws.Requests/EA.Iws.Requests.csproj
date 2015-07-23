@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="EA.Prsd.Core, Version=1.0.15204.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EA.Prsd.Core.1.0.15204-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
-	  <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -50,6 +50,7 @@
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
     <Compile Include="Carriers\DeleteCarrierForNotification.cs" />
     <Compile Include="Admin\GetBasicSearchResults.cs" />
+    <Compile Include="Facilities\CopyFacilityFromImporter.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
     <Compile Include="Copy\CopyToNotification.cs" />

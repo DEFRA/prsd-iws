@@ -212,7 +212,7 @@
                     await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
 
                 model.NotificationId = id;
-                model.ProducerData = response.ToList();
+                model.ProducerData = response;
 
                 return View(model);
             }
@@ -245,7 +245,7 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(),
-                        new SetSiteOfExport(model.SelectedSiteOfExport, model.NotificationId));
+                        new SetSiteOfExport(model.SelectedSiteOfExport.GetValueOrDefault(), model.NotificationId));
 
                     if (backToList.GetValueOrDefault())
                     {

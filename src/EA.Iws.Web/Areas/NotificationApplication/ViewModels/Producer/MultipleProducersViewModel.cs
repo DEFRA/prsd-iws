@@ -13,6 +13,6 @@
 
         public Guid NotificationId { get; set; }
 
-        public List<ProducerData> ProducerData { get; set; }
+        public IList<ProducerData> ProducerData { get; set; }
     }
 }

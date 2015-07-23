@@ -19,16 +19,16 @@
 
         public async Task<Guid> HandleAsync(CopyProducerFromExporter message)
         {
-            var notifiation = await context.GetNotificationApplication(message.NotificationId);
+            var notification = await context.GetNotificationApplication(message.NotificationId);
 
-            var exporterBusiness = notifiation.Exporter.Business;
+            var exporterBusiness = notification.Exporter.Business;
 
             var business = ProducerBusiness.CreateProducerBusiness(exporterBusiness.Name,
                 Enumeration.FromDisplayName<BusinessType>(exporterBusiness.Type), exporterBusiness.RegistrationNumber,
                 exporterBusiness.OtherDescription);
 
-            var producer = notifiation.AddProducer(business, notifiation.Exporter.Address,
-                notifiation.Exporter.Contact);
+            var producer = notification.AddProducer(business, notification.Exporter.Address,
+                notification.Exporter.Contact);
 
             await context.SaveChangesAsync();
 

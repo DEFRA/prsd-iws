@@ -1,0 +1,54 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.SiteOfTreatmentViewModel
+@{
+    ViewBag.Title = "Site Of Treatment";
+}
+
+<h2 class="heading-large">Select the site the waste will be finally @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed")</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.NotificationType)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfTreatment)">
+        <table>
+            <thead>
+                <tr>
+                    <th>Organisation name</th>
+                    <th>Address</th>
+                    <th>Site of @Model.NotificationType.ToString().ToLowerInvariant()?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Facilities.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.Facilities[i].Business.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.Facilities[i].Address.Building),
+                            @Html.DisplayFor(m => m.Facilities[i].Address.StreetOrSuburb),
+                            @Html.DisplayFor(m => m.Facilities[i].Address.TownOrCity)
+                        </td>
+                        <td>
+                            @{
+                                var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
+                                if (@Model.Facilities[i].IsActualSiteOfTreatment)
+                                {
+                                    htmlAttr.Add("checked", "checked");
+                                }
+                                @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <button class="button" type="submit">Continue</button>
+}

@@ -85,6 +85,7 @@
     <Compile Include="CustomsOffice\SetEntryCustomsOfficeForNotificationByIdHandler.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandler.cs" />
     <Compile Include="Carrier\AddCarrierToNotificationHandler.cs" />
+    <Compile Include="Facilities\CopyFacilityFromImporterHandler.cs" />
     <Compile Include="Facilities\DeleteFacilityForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
     <Compile Include="Facilities\GetFacilityForNotificationHandler.cs" />

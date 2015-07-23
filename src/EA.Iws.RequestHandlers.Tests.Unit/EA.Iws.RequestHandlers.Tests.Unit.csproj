@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="EA.Prsd.Core, Version=1.0.15204.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EA.Prsd.Core.1.0.15204-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
-	  <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,6 +73,7 @@
     <Compile Include="Admin\UserAdministration\InternalUserCollection.cs" />
     <Compile Include="Carrier\CarrierHandlerTests.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
+    <Compile Include="Facility\CopyFacilityFromImporterHandlerTests.cs" />
     <Compile Include="TestUserContext.cs" />
     <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />
     <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />
