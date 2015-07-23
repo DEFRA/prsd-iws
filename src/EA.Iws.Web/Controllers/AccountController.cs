@@ -60,7 +60,7 @@
             return View(model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult LogOff()
         {
             authenticationManager.SignOut();
