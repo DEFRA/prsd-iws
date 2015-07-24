@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Domain;
     using Domain.Notification;
+    using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using Prsd.Core.DataAccess.Extensions;
     using Prsd.Core.Domain;
@@ -32,7 +33,9 @@
 
         public virtual DbSet<WasteCode> WasteCodes { get; set; }
 
-        public virtual DbSet<PricingStructure> PricingStructures { get; set; } 
+        public virtual DbSet<PricingStructure> PricingStructures { get; set; }
+
+        public virtual DbSet<NotificationAssessment> NotificationAssessments { get; set; } 
 
         public IwsContext(IUserContext userContext)
             : base("name=Iws.DefaultConnection")

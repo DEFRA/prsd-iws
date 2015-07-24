@@ -18,9 +18,9 @@
         }
 
         [HttpGet]
-        public ActionResult DateInput()
+        public ActionResult DateInput(Guid id)
         {
-            return View();
+            return View(new DateInputViewModel{NotificationId = id});
         }
 
         [HttpPost]
@@ -31,16 +31,23 @@
                 return View(model);
             }
 
-            //var setDates = new SetDates { DecisionDate = new DateTime(Convert.ToInt32(model.DecisionYear), Convert.ToInt32(model.DecisionMonth), Convert.ToInt32(model.DecisionDay)) };
-
-            var setDates = new SetDates();
-            setDates.DecisionDate = GetDateFromUserInput(model.DecisionDay, model.DecisionMonth, model.DecisionYear);
+            var setDates = new SetDates
+            {
+                NotificationReceivedDate = GetDateFromUserInput(model.NotificationReceivedDay, model.NotificationReceivedMonth, model.NotificationReceivedYear),
+                PaymentRecievedDate = GetDateFromUserInput(model.PaymentReceivedDay, model.PaymentReceivedMonth, model.PaymentReceivedYear),
+                CommencementDate = GetDateFromUserInput(model.CommencementDay, model.CommencementMonth, model.CommencementYear),
+                CompleteDate = GetDateFromUserInput(model.NotificationCompleteDay, model.NotificationCompleteMonth, model.NotificationCompleteYear),
+                TransmittedDate = GetDateFromUserInput(model.NotificationTransmittedDay, model.NotificationTransmittedMonth, model.NotificationTransmittedYear),
+                AcknowledgedDate = GetDateFromUserInput(model.NotificationAcknowledgedDay, model.NotificationAcknowledgedMonth, model.NotificationAcknowledgedYear),
+                DecisionDate = GetDateFromUserInput(model.DecisionDay, model.DecisionMonth, model.DecisionYear),
+                NotificationApplicationId = model.NotificationId
+            };
 
             using (var client = apiClient())
             {
-                var result = await client.SendAsync(User.GetAccessToken(), setDates);
+                await client.SendAsync(User.GetAccessToken(), setDates);
             }
-            return View();
+            return View(model);
         }
 
         private DateTime? GetDateFromUserInput(int? day, int? month, int? year)

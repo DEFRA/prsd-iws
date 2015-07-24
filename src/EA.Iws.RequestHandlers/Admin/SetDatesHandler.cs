@@ -1,19 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Linq;
-    using System.Security;
     using System.Threading.Tasks;
-    using Core.Admin;
     using DataAccess;
-    using Domain;
-    using Prsd.Core.Domain;
-    using Prsd.Core.Mapper;
+    using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.Admin;
-    using Requests.Admin.UserAdministration;
 
     internal class SetDatesHandler : IRequestHandler<SetDates, Guid>
     {
@@ -26,7 +20,24 @@
 
         public async Task<Guid> HandleAsync(SetDates message)
         {
-            return new Guid();
+            var notification = context.NotificationAssessments.SingleOrDefault(a => a.NotificationApplicationId == message.NotificationApplicationId);
+            if (notification == null)
+            {
+                notification = new NotificationAssessment(message.NotificationApplicationId);
+                context.NotificationAssessments.Add(notification);
+            }
+
+            notification.NotificationReceivedDate = message.NotificationReceivedDate;
+            notification.PaymentRecievedDate = message.PaymentRecievedDate;
+            notification.CommencementDate = message.CommencementDate;
+            notification.CompleteDate = message.CompleteDate;
+            notification.TransmittedDate = message.TransmittedDate;
+            notification.AcknowledgedDate = message.AcknowledgedDate;
+            notification.DecisionDate = message.DecisionDate;
+
+            await context.SaveChangesAsync();
+
+            return notification.Id;
         }
     }
 }
