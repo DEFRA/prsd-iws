@@ -157,6 +157,7 @@
     <Compile Include="Controllers\StateOfImportControllerTests.cs" />
     <Compile Include="Controllers\TransitStateControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteAssert.cs" />
     <Compile Include="TestHelpers\Factories\AutofacContainerFactory.cs" />
     <Compile Include="TestHelpers\HttpContextMocker.cs" />
     <Compile Include="TestHelpers\TestExtensions.cs" />

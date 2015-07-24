@@ -366,8 +366,7 @@
 
             var result = await producerController.SiteOfExport(model, false) as RedirectToRouteResult;
 
-            Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("Importer", result.RouteValues["controller"]);
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "Importer");
         }
 
         private AddProducerViewModel CreateValidAddProducer()
