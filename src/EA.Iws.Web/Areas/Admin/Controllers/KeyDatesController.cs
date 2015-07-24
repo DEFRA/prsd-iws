@@ -8,11 +8,11 @@
     using Requests.Admin;
     using ViewModels;
 
-    public class AssessmentController : Controller
+    public class KeyDatesController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
 
-        public AssessmentController(Func<IIwsClient> apiClient)
+        public KeyDatesController(Func<IIwsClient> apiClient)
         {
             this.apiClient = apiClient;
         }

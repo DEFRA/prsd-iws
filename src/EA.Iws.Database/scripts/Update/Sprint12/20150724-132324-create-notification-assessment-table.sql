@@ -18,6 +18,9 @@ CREATE TABLE [Notification].[NotificationAssessment] (
     CONSTRAINT [PK_NotificationAssessment] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
+GO
+ALTER TABLE [Notification].[NotificationAssessment] WITH NOCHECK
+    ADD CONSTRAINT [FK_NotificationAssessment_NotificationApplication] FOREIGN KEY ([NotificationApplicationId]) REFERENCES [Notification].[Notification] ([Id]);
 
 GO
 PRINT N'Update complete.';

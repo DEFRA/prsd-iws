@@ -66,9 +66,9 @@
             return controller.DateInput(model);
         }
 
-        private Areas.Admin.Controllers.AssessmentController GetMockAssessmentController(object viewModel)
+        private Areas.Admin.Controllers.KeyDatesController GetMockAssessmentController(object viewModel)
         {
-            var assessmentController = new AssessmentController(() => client);
+            var assessmentController = new KeyDatesController(() => client);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();
