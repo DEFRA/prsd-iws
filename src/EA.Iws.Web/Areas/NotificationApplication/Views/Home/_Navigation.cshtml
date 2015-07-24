@@ -12,9 +12,9 @@
 
 <h4>Organisations involved</h4>
 @Html.Navigation().Link("Exporter notifier", Model.Progress.IsExporterCompleted, "Index", "Exporter", "NotificationApplication")
-@Html.Navigation().Link("Waste generator producer", Model.Progress.IsProducerCompleted, "List", "Producer", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
+@Html.Navigation().Link("Waste generator producer", Model.Progress.IsProducerCompleted, "List", "Producer", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromExporter", "Remove", "SiteOfExport" })
 @Html.Navigation().Link("Importer consignee", Model.Progress.IsImporterCompleted, "Index", "Importer", "NotificationApplication")
-@Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.IsFacilityCompleted, "List", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
+@Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.IsFacilityCompleted, "List", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromImporter", "Remove", "SiteOfTreatment" })
 
 <h4>@Model.NotificationType operation</h4>
 @if (Model.NotificationType == NotificationType.Recovery)
