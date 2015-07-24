@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using Core.Notification;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.Notification;
 

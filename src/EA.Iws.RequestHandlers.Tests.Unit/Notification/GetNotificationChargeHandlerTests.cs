@@ -3,17 +3,17 @@
     using System;
     using System.Threading.Tasks;
     using Core.Shared;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
+    using Helpers;
     using Prsd.Core;
     using RequestHandlers.Notification;
     using Requests.Notification;
     using TestHelpers.Helpers;
     using Xunit;
-    using NotificationType = Domain.Notification.NotificationType;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class GetNotificationChargeHandlerTests : IDisposable
     {

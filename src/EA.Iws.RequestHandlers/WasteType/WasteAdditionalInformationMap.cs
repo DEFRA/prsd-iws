@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.RequestHandlers.Mappings
+﻿namespace EA.Iws.RequestHandlers.WasteType
 {
     using System;
     using System.Collections.Generic;
     using Core.WasteType;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.WasteType;
+
     internal class WasteAdditionalInformationMap : IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>>
     {
         public IList<WasteAdditionalInformation> Map(IList<WoodInformationData> source)

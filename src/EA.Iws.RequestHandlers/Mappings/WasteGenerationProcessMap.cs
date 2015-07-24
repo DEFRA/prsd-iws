@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using Core.WasteType;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
     internal class WasteGenerationProcessMap : IMap<NotificationApplication, WasteGenerationProcessData>

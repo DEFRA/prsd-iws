@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Cqrs.Tests.Unit.Organisations
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Organisations
 {
     using System;
     using System.Collections.Generic;

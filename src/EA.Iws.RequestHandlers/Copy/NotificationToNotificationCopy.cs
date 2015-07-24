@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Prsd.Core.Domain;
 

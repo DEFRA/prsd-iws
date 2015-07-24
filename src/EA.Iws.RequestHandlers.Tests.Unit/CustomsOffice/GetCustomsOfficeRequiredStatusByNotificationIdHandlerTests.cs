@@ -5,11 +5,11 @@
     using System.Threading.Tasks;
     using Core;
     using Core.CustomsOffice;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
+    using Helpers;
     using RequestHandlers.CustomsOffice;
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;

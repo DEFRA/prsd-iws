@@ -6,7 +6,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using Prsd.Core.DataAccess.Extensions;

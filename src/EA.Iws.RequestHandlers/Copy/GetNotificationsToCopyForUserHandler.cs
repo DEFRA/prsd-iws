@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Copy;

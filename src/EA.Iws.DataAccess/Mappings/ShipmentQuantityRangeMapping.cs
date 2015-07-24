@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Mappings
 {
     using System.Data.Entity.ModelConfiguration;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
 
     internal class ShipmentQuantityRangeMapping : EntityTypeConfiguration<ShipmentQuantityRange>
     {

@@ -6,7 +6,7 @@
     using System.Linq;
     using Core.WasteCodes;
     using Core.WasteType;
-    using Domain.Notification;
+    using NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
 

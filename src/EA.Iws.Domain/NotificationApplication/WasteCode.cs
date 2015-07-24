@@ -1,8 +1,7 @@
-﻿namespace EA.Iws.Domain.Notification
+﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
     using Core.WasteCodes;
-    using Core.WasteType;
 
     public class WasteCode
     {

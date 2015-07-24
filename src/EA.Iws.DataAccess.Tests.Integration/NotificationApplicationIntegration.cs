@@ -8,7 +8,7 @@
     using Core.RecoveryInfo;
     using Core.WasteType;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;

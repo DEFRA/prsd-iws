@@ -9,12 +9,12 @@
     using Core.TechnologyEmployed;
     using Core.WasteCodes;
     using Core.WasteType;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.CustomsOffice;
     using Requests.Notification;
     using Requests.StateOfExport;
-    using PhysicalCharacteristicType = Domain.Notification.PhysicalCharacteristicType;
+    using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
     internal class NotificationInfoMap : IMap<NotificationApplication, NotificationInfo>
     {

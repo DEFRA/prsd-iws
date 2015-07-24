@@ -11,7 +11,7 @@
     using Core.TransportRoute;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Requests.StateOfExport;

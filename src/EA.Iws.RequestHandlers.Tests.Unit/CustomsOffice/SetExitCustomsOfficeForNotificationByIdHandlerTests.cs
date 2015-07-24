@@ -3,16 +3,16 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
+    using Helpers;
     using RequestHandlers.CustomsOffice;
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;
-    using NotificationType = Domain.Notification.NotificationType;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
     using StateOfExport = Domain.TransportRoute.StateOfExport;
     using StateOfImport = Domain.TransportRoute.StateOfImport;
 

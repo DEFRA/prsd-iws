@@ -6,9 +6,9 @@
     using Core.Facilities;
     using Core.Shared;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Notification = Domain.Notification.NotificationApplication;
+    using Notification = Domain.NotificationApplication.NotificationApplication;
 
     internal class FacilityDataMap : IMap<Notification, IList<FacilityData>>,
         IMap<Facility, FacilityData>,

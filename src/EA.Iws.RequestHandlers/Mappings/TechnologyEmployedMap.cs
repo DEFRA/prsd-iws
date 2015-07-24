@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using Core.TechnologyEmployed;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
     internal class TechnologyEmployedMap : IMap<NotificationApplication, TechnologyEmployedData>

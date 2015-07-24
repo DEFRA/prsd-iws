@@ -3,10 +3,9 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using Helpers;
     using Producers;

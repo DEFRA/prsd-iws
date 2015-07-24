@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Core.WasteCodes;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
     internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>, IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]>,

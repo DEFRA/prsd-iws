@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;

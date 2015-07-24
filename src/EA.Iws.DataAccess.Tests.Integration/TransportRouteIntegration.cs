@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Domain;

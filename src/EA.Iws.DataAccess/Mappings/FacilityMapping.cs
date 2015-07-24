@@ -2,7 +2,7 @@
 {
     using System.Data.Entity.ModelConfiguration;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
 
     internal class FacilityMapping : EntityTypeConfiguration<Facility>
     {

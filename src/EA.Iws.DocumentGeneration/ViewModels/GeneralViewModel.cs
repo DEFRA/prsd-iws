@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
 
     internal class GeneralViewModel
     {

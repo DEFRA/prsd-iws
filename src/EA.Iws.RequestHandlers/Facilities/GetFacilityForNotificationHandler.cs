@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Core.Facilities;
     using DataAccess;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Mappings;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;

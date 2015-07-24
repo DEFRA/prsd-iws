@@ -3,7 +3,7 @@
     using System;
     using Core;
     using Core.CustomsOffice;
-    using Domain.Notification;
+    using NotificationApplication;
     using TestHelpers.Helpers;
     using TransportRoute;
     using Xunit;

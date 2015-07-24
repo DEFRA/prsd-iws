@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.WasteType;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.WasteType;
 

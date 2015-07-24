@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
-    using Domain.Notification;
+    using Domain.NotificationApplication;
 
     internal class SpecialHandlingViewModel
     {

@@ -6,7 +6,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.WasteCodes;
 

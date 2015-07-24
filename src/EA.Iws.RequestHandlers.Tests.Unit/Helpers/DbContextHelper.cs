@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Cqrs.Tests.Unit.Helpers
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Helpers
 {
     using System.Collections.Generic;
     using System.Data.Entity;

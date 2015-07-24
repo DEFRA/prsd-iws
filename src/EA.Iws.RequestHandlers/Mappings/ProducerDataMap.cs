@@ -6,9 +6,9 @@
     using Core.Producers;
     using Core.Shared;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Notification = Domain.Notification.NotificationApplication;
+    using Notification = Domain.NotificationApplication.NotificationApplication;
 
     internal class ProducerDataMap : IMap<Notification, IList<ProducerData>>, 
         IMap<Producer, ProducerData>,

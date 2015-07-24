@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Notification
 {
     using System;
-    using Domain.Notification;
+    using NotificationApplication;
     using Xunit;
 
     public class NotificationReasonForExportTests

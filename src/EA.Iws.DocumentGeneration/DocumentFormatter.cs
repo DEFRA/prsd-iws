@@ -3,7 +3,6 @@
     using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain;
-    using Domain.Notification;
 
     internal static class DocumentFormatter
     {

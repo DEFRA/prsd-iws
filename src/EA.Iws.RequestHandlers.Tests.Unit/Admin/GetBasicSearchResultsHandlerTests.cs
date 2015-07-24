@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
+    using Helpers;
     using RequestHandlers.Admin.Search;
     using Requests.Admin;
     using TestHelpers.Helpers;

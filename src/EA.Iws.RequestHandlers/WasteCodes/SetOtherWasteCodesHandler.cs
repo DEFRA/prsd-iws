@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Core.WasteCodes;
     using DataAccess;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.WasteCodes;
 

@@ -1,7 +1,8 @@
 ﻿namespace EA.Iws.DataAccess.Mappings
 {
     using System.Data.Entity.ModelConfiguration;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
+
     internal class WasteAdditionalInformationMapping : EntityTypeConfiguration<WasteAdditionalInformation>
     {
         public WasteAdditionalInformationMapping()

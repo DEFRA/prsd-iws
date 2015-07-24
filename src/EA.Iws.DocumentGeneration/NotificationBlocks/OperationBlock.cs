@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Mapper;
     using ViewModels;
 

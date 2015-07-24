@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.WasteType;
-    using Domain.Notification;
+    using NotificationApplication;
     using Xunit;
 
     public class NotificationWasteTypeTests

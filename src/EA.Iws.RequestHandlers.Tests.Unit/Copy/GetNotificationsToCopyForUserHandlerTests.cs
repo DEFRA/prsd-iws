@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.WasteType;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
+    using Helpers;
     using RequestHandlers.Copy;
     using Requests.Copy;
     using TestHelpers.Helpers;

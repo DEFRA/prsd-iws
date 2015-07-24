@@ -4,11 +4,11 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using Core.MeansOfTransport;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using FakeItEasy;
+    using Helpers;
     using RequestHandlers.MeansOfTransport;
     using Requests.MeansOfTransport;
     using TestHelpers.Helpers;

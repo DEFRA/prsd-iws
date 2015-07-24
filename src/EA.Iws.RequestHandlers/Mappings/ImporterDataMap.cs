@@ -4,9 +4,9 @@
     using Core.Importer;
     using Core.Shared;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Notification = Domain.Notification.NotificationApplication;
+    using Notification = Domain.NotificationApplication.NotificationApplication;
 
     internal class ImporterDataMap : IMap<Notification, ImporterData>, 
         IMapWithParentObjectId<Importer, ImporterData>

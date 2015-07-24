@@ -2,12 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using FakeItEasy;
+    using Helpers;
     using Mappings;
     using RequestHandlers.CustomsOffice;
     using Requests.CustomsOffice;

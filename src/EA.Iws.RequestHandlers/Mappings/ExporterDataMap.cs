@@ -4,11 +4,11 @@
     using Core.Exporters;
     using Core.Shared;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.Exporters;
     using Requests.Shared;
-    using Notification = Domain.Notification.NotificationApplication;
+    using Notification = Domain.NotificationApplication.NotificationApplication;
 
     internal class ExporterDataMap : IMap<Notification, ExporterData>, 
         IMap<Exporter, ExporterData>,

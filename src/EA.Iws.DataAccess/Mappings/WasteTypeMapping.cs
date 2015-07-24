@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Data.Entity.ModelConfiguration;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Helpers;
 
     internal class WasteTypeMapping : EntityTypeConfiguration<WasteType>

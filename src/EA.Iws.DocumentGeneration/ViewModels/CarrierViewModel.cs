@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using System;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
 
     internal class CarrierViewModel
     {

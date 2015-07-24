@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Mapper;
     using ViewModels;
 

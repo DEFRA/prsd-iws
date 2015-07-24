@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
 
     internal class WasteCodeMapping : EntityTypeConfiguration<WasteCode>
     {

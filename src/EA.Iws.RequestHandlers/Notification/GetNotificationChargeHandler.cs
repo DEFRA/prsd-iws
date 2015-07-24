@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System.Threading.Tasks;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 

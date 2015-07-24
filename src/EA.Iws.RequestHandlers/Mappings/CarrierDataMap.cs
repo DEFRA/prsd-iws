@@ -6,11 +6,11 @@
     using Core.Carriers;
     using Core.Shared;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.Carriers;
     using Requests.Shared;
-    using Notification = Domain.Notification.NotificationApplication;
+    using Notification = Domain.NotificationApplication.NotificationApplication;
 
     internal class CarrierDataMap : IMap<Notification, IList<CarrierData>>,
         IMap<Carrier, CarrierData>,

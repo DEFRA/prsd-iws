@@ -5,9 +5,9 @@
     using System.Security;
     using System.Threading.Tasks;
     using Core.Admin;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using FakeItEasy;
+    using Helpers;
     using Mappings;
     using RequestHandlers.Admin.UserAdministration;
     using Requests.Admin.UserAdministration;

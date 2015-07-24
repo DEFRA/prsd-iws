@@ -4,7 +4,7 @@
     using System.Linq;
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using NotificationBlocks;
 
     public class DocumentGenerator : IDocumentGenerator

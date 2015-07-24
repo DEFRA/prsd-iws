@@ -9,10 +9,10 @@
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Domain.TransportRoute;
-    using OI = ObjectInstantiator<Domain.Notification.NotificationApplication>;
-    using PhysicalCharacteristicType = Domain.Notification.PhysicalCharacteristicType;
+    using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
+    using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
     public class NotificationApplicationFactory
     {

@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.WasteType;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.WasteType;
-    using PhysicalCharacteristicType = Domain.Notification.PhysicalCharacteristicType;
+    using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
     internal class PhysicalCharacteristicsMap : IMap<SetPhysicalCharacteristics, IList<PhysicalCharacteristicsInfo>>,
         IMap<NotificationApplication, PhysicalCharacteristicsData>

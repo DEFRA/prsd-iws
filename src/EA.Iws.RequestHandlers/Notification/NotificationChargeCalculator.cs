@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Core.Shared;
     using DataAccess;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
 
     internal class NotificationChargeCalculator : INotificationChargeCalculator
     {

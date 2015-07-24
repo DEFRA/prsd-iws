@@ -3,9 +3,9 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using FakeItEasy;
+    using Helpers;
     using RequestHandlers.TransitState;
     using Requests.TransitState;
     using TestHelpers.Helpers;

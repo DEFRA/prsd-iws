@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using Domain.Notification;
+    using NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
 

@@ -2,7 +2,7 @@
 {
     using System;
     using Core.RecoveryInfo;
-    using Domain.Notification;
+    using NotificationApplication;
     using Xunit;
 
     public class NotificationRecoveryInfoTests

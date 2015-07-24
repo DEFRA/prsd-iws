@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.NotificationBlocks
 {
     using System.Collections.Generic;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Mapper;
     using ViewModels;
 

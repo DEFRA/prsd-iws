@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.PackagingType;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.PackagingType;
     using Requests.Shipment;
@@ -22,31 +22,31 @@
                 switch (selectedPackagingType)
                 {
                     case PackagingType.Drum:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.Drum));
+                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Drum));
                         break;
                     case PackagingType.WoodenBarrel:
                         packagingInfos.Add(
-                            PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.WoodenBarrel));
+                            PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.WoodenBarrel));
                         break;
                     case PackagingType.Jerrican:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.Jerrican));
+                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Jerrican));
                         break;
                     case PackagingType.Box:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.Box));
+                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Box));
                         break;
                     case PackagingType.Bag:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.Bag));
+                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Bag));
                         break;
                     case PackagingType.CompositePackaging:
                         packagingInfos.Add(
-                            PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.CompositePackaging));
+                            PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.CompositePackaging));
                         break;
                     case PackagingType.PressureReceptacle:
                         packagingInfos.Add(
-                            PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.PressureReceptacle));
+                            PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.PressureReceptacle));
                         break;
                     case PackagingType.Bulk:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.Notification.PackagingType.Bulk));
+                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Bulk));
                         break;
                     case PackagingType.Other:
                         packagingInfos.Add(PackagingInfo.CreateOtherPackagingInfo(source.OtherDescription));
@@ -68,7 +68,7 @@
             }
 
             var otherPackaging =
-                source.PackagingInfos.FirstOrDefault(p => p.PackagingType == Domain.Notification.PackagingType.Other);
+                source.PackagingInfos.FirstOrDefault(p => p.PackagingType == Domain.NotificationApplication.PackagingType.Other);
             if (otherPackaging != null)
             {
                 packagingData.OtherDescription = otherPackaging.OtherDescription;
@@ -77,7 +77,7 @@
             return packagingData;
         }
 
-        private static PackagingType GetPackagingType(Domain.Notification.PackagingType packagingType)
+        private static PackagingType GetPackagingType(Domain.NotificationApplication.PackagingType packagingType)
         {
             PackagingType type;
             if (Enum.TryParse(packagingType.Value.ToString(), out type))

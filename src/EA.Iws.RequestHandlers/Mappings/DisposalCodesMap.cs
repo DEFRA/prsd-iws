@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using DisposalCode = Core.OperationCodes.DisposalCode;
 

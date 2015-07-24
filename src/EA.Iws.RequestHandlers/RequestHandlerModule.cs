@@ -2,7 +2,7 @@
 {
     using Autofac;
     using Copy;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
