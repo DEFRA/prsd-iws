@@ -24,6 +24,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ViewResult> DateInput(DateInputViewModel model)
         {
             if (!ModelState.IsValid)

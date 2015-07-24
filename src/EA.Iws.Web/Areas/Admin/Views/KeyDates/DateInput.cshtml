@@ -6,6 +6,8 @@
 {
 @Html.Gds().ValidationSummary()
 @Html.HiddenFor(m => m.NotificationId)
+@Html.AntiForgeryToken()
+    
     <div class="form-group">
         <table>
             <tr>
