@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.Core", "EA.Iws.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.TestHelpers", "EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj", "{DEC3021A-32CF-4B84-A59C-77503378ED67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.EmailMessaging", "EA.Iws.EmailMessaging\EA.Iws.EmailMessaging.csproj", "{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -183,6 +185,14 @@ Global
 		{DEC3021A-32CF-4B84-A59C-77503378ED67}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DEC3021A-32CF-4B84-A59C-77503378ED67}.Release|x64.ActiveCfg = Release|Any CPU
 		{DEC3021A-32CF-4B84-A59C-77503378ED67}.Release|x64.Build.0 = Release|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,11 +14,13 @@
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;
+        private readonly IMessageService messageService;
 
-        public SetUserApprovalsHandler(IwsContext context, IUserContext userContext)
+        public SetUserApprovalsHandler(IwsContext context, IUserContext userContext, IMessageService messageService)
         {
             this.context = context;
             this.userContext = userContext;
+            this.messageService = messageService;
         }
 
         public async Task<bool> HandleAsync(SetUserApprovals message)
@@ -42,14 +44,14 @@
                 return false;
             }
 
-            UpdateUsers(users, message);
+            await UpdateUsers(users, message);
             
             await context.SaveChangesAsync();
 
             return true;
         }
 
-        private void UpdateUsers(IQueryable<User> users, SetUserApprovals message)
+        private async Task UpdateUsers(IQueryable<User> users, SetUserApprovals message)
         {
             foreach (var user in users)
             {
@@ -58,10 +60,10 @@
                 switch (action.Value)
                 {
                     case ApprovalAction.Approve:
-                        user.Approve();
+                        await user.Approve(messageService);
                         break;
                     case ApprovalAction.Reject:
-                        user.Reject();
+                        await user.Reject(messageService);
                         break;
                     default:
                         break;

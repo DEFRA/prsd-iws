@@ -10,6 +10,7 @@
     using FakeItEasy;
     using RequestHandlers.Admin.UserAdministration;
     using Requests.Admin.UserAdministration;
+    using TestHelpers;
     using Xunit;
 
     public class SetUserApprovalsHandlerTests
@@ -20,17 +21,15 @@
         private readonly DbContextHelper contextHelper = new DbContextHelper();
         private readonly SetUserApprovals approvePendingAdminMessage;
         private readonly Func<Guid, IwsContext, InternalUserStatus?> getUserStatusFromContext;
-        private readonly InternalUserCollection internalUserCollection;
 
         public SetUserApprovalsHandlerTests()
         {
-            internalUserCollection = new InternalUserCollection();
             this.context = A.Fake<IwsContext>();
-            A.CallTo(() => context.Users).Returns(contextHelper.GetAsyncEnabledDbSet(internalUserCollection.Users));
+            A.CallTo(() => context.Users).Returns(contextHelper.GetAsyncEnabledDbSet(new InternalUserCollection().Users));
 
             this.userContext = new TestUserContext(Guid.Empty);
 
-            handler = new SetUserApprovalsHandler(context, userContext);
+            handler = new SetUserApprovalsHandler(context, userContext, new TestMessageService());
 
             approvePendingAdminMessage = new SetUserApprovals(new[]
             {

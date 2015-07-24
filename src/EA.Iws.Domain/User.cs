@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Domain
 {
     using System;
+    using System.Threading.Tasks;
     using Core.Admin;
+    using Messaging.Internal;
     using Prsd.Core;
 
     public class User
@@ -62,7 +64,7 @@
             Organisation = organisation;
         }
 
-        public void Approve()
+        public async Task Approve(IMessageService messageService)
         {
             if (!IsInternal)
             {
@@ -70,9 +72,11 @@
             }
 
             InternalUserStatus = Core.Admin.InternalUserStatus.Approved;
+
+            await messageService.SendAsync(new RegistrationApprovedMessage(Email));
         }
 
-        public void Reject()
+        public async Task Reject(IMessageService messageService)
         {
             if (!IsInternal)
             {
@@ -80,6 +84,8 @@
             }
 
             InternalUserStatus = Core.Admin.InternalUserStatus.Rejected;
+
+            await messageService.SendAsync(new RegistrationRejectedMessage(Email));
         }
     }
 }

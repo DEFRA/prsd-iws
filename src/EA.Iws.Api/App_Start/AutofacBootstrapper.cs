@@ -7,6 +7,7 @@
     using DataAccess.Identity;
     using Identity;
     using Microsoft.AspNet.Identity;
+    using Modules;
     using Prsd.Core.Autofac;
     using RequestHandlers;
 
@@ -27,8 +28,10 @@
             // Register all Autofac specific IModule implementations
             builder.RegisterAssemblyModules(typeof(Startup).Assembly);
             builder.RegisterAssemblyModules(typeof(AutofacMediator).Assembly);
+
             builder.RegisterModule(new RequestHandlerModule());
             builder.RegisterModule(new EntityFrameworkModule());
+            builder.RegisterModule(new EmailServiceModule());
 
             // http://www.talksharp.com/configuring-autofac-to-work-with-the-aspnet-identity-framework-in-mvc-5
             builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();

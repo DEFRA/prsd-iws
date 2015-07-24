@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit
 {
     using System;
+    using System.Threading.Tasks;
     using Core.Admin;
+    using TestHelpers;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -9,6 +11,7 @@
     {
         private static readonly BusinessType AnyType = BusinessType.LimitedCompany;
         private readonly User anyUser = new User("id", "first", "last", "123", "email@address.com");
+        private static readonly IMessageService MessageService = new TestMessageService();
 
         private static readonly Action<User, bool> SetIsAdminForUser =
             (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsInternal, isAdmin, user);
@@ -142,39 +145,39 @@
         }
 
         [Fact]
-        public void Approve_CannotApproveExternalUser()
+        public async Task Approve_CannotApproveExternalUser()
         {
             SetIsAdminForUser(anyUser, false);
 
-            Assert.Throws<InvalidOperationException>(() => anyUser.Approve());
+            await Assert.ThrowsAsync<InvalidOperationException>(() => anyUser.Approve(MessageService));
         }
 
         [Fact]
-        public void Approve_CannotRejectExternalUser()
+        public async Task Approve_CannotRejectExternalUser()
         {
             SetIsAdminForUser(anyUser, false);
 
-            Assert.Throws<InvalidOperationException>(() => anyUser.Reject());
+            await Assert.ThrowsAsync<InvalidOperationException>(() => anyUser.Reject(MessageService));
         }
 
         [Fact]
-        public void Approve_CanApproveInternalUser()
+        public async Task Approve_CanApproveInternalUser()
         {
             SetIsAdminForUser(anyUser, true);
             SetInternalUserStatus(anyUser, InternalUserStatus.Pending);
 
-            anyUser.Approve();
+            await anyUser.Approve(MessageService);
 
             Assert.Equal(InternalUserStatus.Approved, anyUser.InternalUserStatus);
         }
 
         [Fact]
-        public void Reject_CanRejectInternalUser()
+        public async Task Reject_CanRejectInternalUser()
         {
             SetIsAdminForUser(anyUser, true);
             SetInternalUserStatus(anyUser, InternalUserStatus.Pending);
 
-            anyUser.Reject();
+            await anyUser.Reject(MessageService);
 
             Assert.Equal(InternalUserStatus.Rejected, anyUser.InternalUserStatus);
         }

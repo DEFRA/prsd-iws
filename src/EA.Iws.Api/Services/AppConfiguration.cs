@@ -12,6 +12,10 @@
 
         public string SiteRoot { get; set; }
 
+        public string WebSiteRoot { get; set; }
+
+        public string SendEmail { get; set; }
+
         public string VerificationEmailTestDomains { get; set; }
     }
 }

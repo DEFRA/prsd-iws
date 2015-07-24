@@ -232,6 +232,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
     <Compile Include="App_Start\Modules\DocumentGeneratorModule.cs" />
+    <Compile Include="App_Start\Modules\EmailServiceModule.cs" />
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
     <Compile Include="Infrastructure\HttpStatusCodeResult.cs" />
     <Compile Include="Controllers\MediatorController.cs" />
@@ -291,6 +292,10 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.EmailMessaging\EA.Iws.EmailMessaging.csproj">
+      <Project>{ff9ed7b2-c556-4779-8c7e-25b4ef5087fe}</Project>
+      <Name>EA.Iws.EmailMessaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
       <Project>{575a5355-b008-422a-b9b6-535ca2b5cc26}</Project>

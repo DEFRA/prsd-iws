@@ -51,6 +51,9 @@
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="IMessageService.cs" />
+    <Compile Include="Messaging\Internal\RegistrationApprovedMessage.cs" />
+    <Compile Include="Messaging\Internal\RegistrationRejectedMessage.cs" />
     <Compile Include="Notification\Activity.cs" />
     <Compile Include="Notification\INotificationChargeCalculator.cs" />
     <Compile Include="Notification\INotificationNumberGenerator.cs" />
