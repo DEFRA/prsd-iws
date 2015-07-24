@@ -40,6 +40,7 @@
                 TransmittedDate = GetDateFromUserInput(model.NotificationTransmittedDay, model.NotificationTransmittedMonth, model.NotificationTransmittedYear),
                 AcknowledgedDate = GetDateFromUserInput(model.NotificationAcknowledgedDay, model.NotificationAcknowledgedMonth, model.NotificationAcknowledgedYear),
                 DecisionDate = GetDateFromUserInput(model.DecisionDay, model.DecisionMonth, model.DecisionYear),
+                NameOfOfficer = model.NameOfOfficer,
                 NotificationApplicationId = model.NotificationId
             };
 

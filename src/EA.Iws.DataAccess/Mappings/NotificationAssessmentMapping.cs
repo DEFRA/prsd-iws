@@ -7,7 +7,7 @@
     {
         public NotificationAssessmentMapping()
         {
-            ToTable("Notification", "NotificationAssessment");
+            ToTable("NotificationAssessment", "Notification");
         }
     }
 }

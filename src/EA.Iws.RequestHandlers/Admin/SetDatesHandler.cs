@@ -34,6 +34,7 @@
             notification.TransmittedDate = message.TransmittedDate;
             notification.AcknowledgedDate = message.AcknowledgedDate;
             notification.DecisionDate = message.DecisionDate;
+            notification.NameOfOfficer = message.NameOfOfficer;
 
             await context.SaveChangesAsync();
 

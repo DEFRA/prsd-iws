@@ -5,6 +5,7 @@
 @using (Html.BeginForm())
 {
 @Html.Gds().ValidationSummary()
+@Html.HiddenFor(m => m.NotificationId)
     <div class="form-group">
         <table>
             <tr>
