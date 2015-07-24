@@ -127,7 +127,7 @@
         {
             if (!ValidateDate(NotificationReceivedDay, NotificationReceivedMonth, NotificationReceivedYear))
             {
-                yield return new ValidationResult("Please provide a valid notification received date", new[] { "NotificationReceivedDay" });                
+                yield return new ValidationResult("Please provide a valid notification received date", new[] { "NotificationReceivedDay" });
             }
 
             if (!ValidateDate(PaymentReceivedDay, PaymentReceivedMonth, PaymentReceivedYear))

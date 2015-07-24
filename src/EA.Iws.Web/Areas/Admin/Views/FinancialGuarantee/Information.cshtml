@@ -1,0 +1,32 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.FinancialGuarantee.FinancialGuaranteeInformationViewModel
+@{
+    ViewBag.Title = "Financial Guarantee dates";
+}
+
+<h2 class="heading-large">Financial Guarantee assessment</h2>
+
+<span class="status">Status: @Html.DisplayFor(m => m.Status)</span>
+<hr/>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Received.Day) @Html.Gds().FormGroupClass(m => m.Received.Month) @Html.Gds().FormGroupClass(m => m.Received.Year)">
+        @Html.Gds().LabelFor(m => m.Received, new { @class = "form-label-bold" })
+        @Html.Gds().HintParagraph("For example, 20 3 2015")
+        @Html.EditorFor(m => m.Received)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Completed.Day) @Html.Gds().FormGroupClass(m => m.Completed.Month) @Html.Gds().FormGroupClass(m => m.Completed.Year)">
+        @Html.Gds().LabelFor(m => m.Completed, new { @class = "form-label-bold" })
+        @Html.EditorFor(m => m.Completed)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionRequired.Day) @Html.Gds().FormGroupClass(m => m.DecisionRequired.Month) @Html.Gds().FormGroupClass(m => m.DecisionRequired.Year)">
+        @Html.Gds().LabelFor(m => m.DecisionRequired, new { @class = "form-label-bold" })
+        @Html.EditorFor(m => m.DecisionRequired)
+    </div>
+
+    <button class="button" type="submit">Continue</button>
+}

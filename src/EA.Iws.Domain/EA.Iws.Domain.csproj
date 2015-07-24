@@ -51,6 +51,7 @@
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuarantee.cs" />
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessment.cs" />

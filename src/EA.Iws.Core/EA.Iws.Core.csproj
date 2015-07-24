@@ -53,6 +53,7 @@
     <Compile Include="CustomsOffice\CustomsOffices.cs" />
     <Compile Include="Exporters\ExporterData.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeStatus.cs" />
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
