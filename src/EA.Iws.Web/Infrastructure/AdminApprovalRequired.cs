@@ -24,7 +24,6 @@
 
             if (!isAdmin)
             {
-                filterContext.Result = new RedirectResult("~/");
                 return;
             }
 
