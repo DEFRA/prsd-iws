@@ -15,7 +15,7 @@
                 return new SiteInformation(config.SiteRoot, config.WebSiteRoot, config.SendEmail);
             }).SingleInstance();
 
-            builder.RegisterAssemblyModules(typeof(EmailService).Assembly);
+            builder.RegisterAssemblyModules(typeof(IEmailTemplateService).Assembly);
         }
     }
 }

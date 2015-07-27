@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="EA.Prsd.Core, Version=1.0.15204.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EA.Prsd.Core.1.0.15204-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
-	  <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -51,9 +51,8 @@
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="IMessageService.cs" />
-    <Compile Include="Messaging\Internal\RegistrationApprovedMessage.cs" />
-    <Compile Include="Messaging\Internal\RegistrationRejectedMessage.cs" />
+    <Compile Include="Events\RegistrationApprovedEvent.cs" />
+    <Compile Include="Events\RegistrationRejectedEvent.cs" />
     <Compile Include="Notification\Activity.cs" />
     <Compile Include="Notification\INotificationChargeCalculator.cs" />
     <Compile Include="Notification\INotificationNumberGenerator.cs" />

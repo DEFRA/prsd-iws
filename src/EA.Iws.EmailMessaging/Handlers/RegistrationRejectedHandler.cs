@@ -1,20 +1,22 @@
 ﻿namespace EA.Iws.EmailMessaging.Handlers
 {
     using System.Threading.Tasks;
-    using Domain.Messaging.Internal;
+    using Autofac;
+    using Domain.Events;
+    using Prsd.Core.Domain;
 
-    internal class RegistrationRejectedHandler : IMessageHandler<RegistrationRejectedMessage>
+    internal class RegistrationRejectedHandler : IEventHandler<RegistrationRejectedEvent>
     {
         private readonly IEmailTemplateService emailTemplateService;
         private readonly SiteInformation siteInformation;
 
-        public RegistrationRejectedHandler(IEmailTemplateService emailTemplateService, SiteInformation siteInformation)
+        public RegistrationRejectedHandler(IEmailTemplateService emailTemplateService, SiteInformation siteInformation, IComponentContext ctxt)
         {
             this.emailTemplateService = emailTemplateService;
             this.siteInformation = siteInformation;
         }
 
-        public async Task SendAsync(RegistrationRejectedMessage message)
+        public async Task HandleAsync(RegistrationRejectedEvent message)
         {
             var email = emailTemplateService.TemplateWithDynamicModel("InternalRegistrationRejected", null);
 

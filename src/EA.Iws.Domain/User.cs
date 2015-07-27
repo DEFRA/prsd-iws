@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Domain
 {
     using System;
-    using System.Threading.Tasks;
     using Core.Admin;
-    using Messaging.Internal;
+    using Events;
     using Prsd.Core;
+    using Prsd.Core.Domain;
 
     public class User
     {
@@ -64,7 +64,7 @@
             Organisation = organisation;
         }
 
-        public async Task Approve(IMessageService messageService)
+        public void Approve()
         {
             if (!IsInternal)
             {
@@ -73,10 +73,10 @@
 
             InternalUserStatus = Core.Admin.InternalUserStatus.Approved;
 
-            await messageService.SendAsync(new RegistrationApprovedMessage(Email));
+            DomainEvents.Raise(new RegistrationApprovedEvent(Email));
         }
 
-        public async Task Reject(IMessageService messageService)
+        public void Reject()
         {
             if (!IsInternal)
             {
@@ -85,7 +85,7 @@
 
             InternalUserStatus = Core.Admin.InternalUserStatus.Rejected;
 
-            await messageService.SendAsync(new RegistrationRejectedMessage(Email));
+            DomainEvents.Raise(new RegistrationRejectedEvent(Email));
         }
     }
 }

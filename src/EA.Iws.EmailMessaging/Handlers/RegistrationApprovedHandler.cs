@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.EmailMessaging.Handlers
 {
     using System.Threading.Tasks;
-    using Domain.Messaging.Internal;
+    using Domain.Events;
+    using Prsd.Core.Domain;
 
-    internal class RegistrationApprovedHandler : IMessageHandler<RegistrationApprovedMessage>
+    internal class RegistrationApprovedHandler : IEventHandler<RegistrationApprovedEvent>
     {
         private readonly IEmailTemplateService emailTemplateService;
         private readonly SiteInformation siteInformation;
@@ -14,7 +15,7 @@
             this.siteInformation = siteInformation;
         }
 
-        public async Task SendAsync(RegistrationApprovedMessage message)
+        public async Task HandleAsync(RegistrationApprovedEvent message)
         {
             var email = emailTemplateService.TemplateWithDynamicModel("InternalRegistrationApproved",
                 new { SignInLink = string.Format("{0}/Account/Login", siteInformation.WebUrl) });

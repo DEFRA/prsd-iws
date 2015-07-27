@@ -5,9 +5,8 @@
     using System.Text;
     using System.Threading.Tasks;
     using Autofac;
-    using Domain;
 
-    public class EmailService : IMessageService
+    internal class EmailService
     {
         private readonly IComponentContext context;
 
@@ -16,18 +15,7 @@
             this.context = context;
         }
 
-        public async Task SendAsync<T>(T message) where T : class
-        {
-            var messageHandlerType = typeof(IMessageHandler<>).MakeGenericType(typeof(T));
-
-            var messageHandler = context.Resolve(messageHandlerType);
-
-            var method = messageHandler.GetType().GetMethod("SendAsync");
-
-            await(dynamic)method.Invoke(messageHandler, new[] { message });
-        }
-
-        internal static MailMessage GenerateMailMessageWithHtmlAndPlainTextParts(string from, 
+        public static MailMessage GenerateMailMessageWithHtmlAndPlainTextParts(string from, 
             string to, 
             string subject,
             EmailTemplate emailTemplate)
@@ -46,7 +34,7 @@
             return mail;
         }
 
-        internal static async Task SendMailAsync(MailMessage message, SiteInformation siteInformation)
+        public static async Task SendMailAsync(MailMessage message, SiteInformation siteInformation)
         {
             var client = new SmtpClient();
 

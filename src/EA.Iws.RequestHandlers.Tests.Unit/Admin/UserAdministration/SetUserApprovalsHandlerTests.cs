@@ -10,7 +10,6 @@
     using FakeItEasy;
     using RequestHandlers.Admin.UserAdministration;
     using Requests.Admin.UserAdministration;
-    using TestHelpers;
     using Xunit;
 
     public class SetUserApprovalsHandlerTests
@@ -29,7 +28,7 @@
 
             this.userContext = new TestUserContext(Guid.Empty);
 
-            handler = new SetUserApprovalsHandler(context, userContext, new TestMessageService());
+            handler = new SetUserApprovalsHandler(context, userContext);
 
             approvePendingAdminMessage = new SetUserApprovals(new[]
             {

@@ -34,6 +34,10 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="EA.Prsd.Core">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15204-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.7.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
@@ -68,7 +72,6 @@
     <Compile Include="Handlers\RegistrationApprovedHandler.cs" />
     <Compile Include="Handlers\RegistrationRejectedHandler.cs" />
     <Compile Include="IEmailTemplateService.cs" />
-    <Compile Include="IMessageHandler.cs" />
     <Compile Include="MessageHandlerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteInformation.cs" />
@@ -77,6 +80,10 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
+      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
+      <Name>EA.Iws.RequestHandlers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

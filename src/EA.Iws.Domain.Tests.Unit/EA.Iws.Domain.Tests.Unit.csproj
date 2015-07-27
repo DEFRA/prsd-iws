@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="EA.Prsd.Core, Version=1.0.15204.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EA.Prsd.Core.1.0.15204-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
-	  <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FakeItEasy, Version=1.25.2.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\packages\FakeItEasy.1.25.2\lib\net40\FakeItEasy.dll</HintPath>
@@ -104,6 +104,10 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
+      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
+      <Name>EA.Iws.RequestHandlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
       <Project>{dec3021a-32cf-4b84-a59c-77503378ed67}</Project>
