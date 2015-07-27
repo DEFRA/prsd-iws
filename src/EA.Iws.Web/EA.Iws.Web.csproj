@@ -65,11 +65,11 @@
     </Reference>
     <Reference Include="EA.Prsd.Core, Version=1.0.15204.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EA.Prsd.Core.1.0.15204-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
-	  <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EA.Prsd.Core.Web, Version=1.0.15204.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EA.Prsd.Core.Web.1.0.15204-develop1\lib\net452\EA.Prsd.Core.Web.dll</HintPath>
-	  <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EA.Prsd.Core.Web.Mvc">
       <HintPath>..\packages\EA.Prsd.Core.Web.Mvc.1.0.15204-develop1\lib\net452\EA.Prsd.Core.Web.Mvc.dll</HintPath>
@@ -534,7 +534,6 @@
     <Content Include="Scripts\vendor\jquery-1.11.0.min.js" />
     <Content Include="Scripts\vendor\modernizr.custom.77028.js" />
     <Content Include="Scripts\vendor\prism.js" />
-    <Content Include="Views\Emails\InternalRegistrationRejected.txt" />
     <Content Include="Views\Emails\VerifyEmailAddress.txt" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -618,9 +617,6 @@
     <Content Include="Views\Shared\_IwsTitle.cshtml" />
     <Content Include="Views\Registration\ChangeAccountDetails.cshtml" />
     <Content Include="Views\Registration\EditApplicantDetails.cshtml" />
-    <Content Include="Views\Emails\InternalRegistrationApproved.cshtml" />
-    <Content Include="Views\Emails\InternalRegistrationApproved.txt" />
-    <Content Include="Views\Emails\InternalRegistrationRejected.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

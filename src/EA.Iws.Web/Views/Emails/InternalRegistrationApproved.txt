@@ -1,5 +1,0 @@
-﻿Registration approved
-
-Your request for access to IWS has been approved. 
-
-You can now access the online IWS service: @Model.SignInLink.
