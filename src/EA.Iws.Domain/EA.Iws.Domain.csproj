@@ -52,6 +52,7 @@
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
+    <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessment.cs" />
     <Compile Include="Events\RegistrationRejectedEvent.cs" />
     <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
