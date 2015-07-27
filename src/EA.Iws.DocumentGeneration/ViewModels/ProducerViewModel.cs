@@ -20,7 +20,7 @@
             AnnexMessage = string.Empty;
             SetSiteOfGeneration(countOfProducers);
             CountOfProducers = countOfProducers;
-            ProcessOfGeneration = processText;
+            ProcessOfGeneration = processText ?? string.Empty;
             IsProcessAnnexAttached = isIsProcessAnnexAttachedAttached;
         }
 
