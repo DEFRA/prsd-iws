@@ -622,6 +622,7 @@
     <Content Include="Views\Shared\_IwsTitle.cshtml" />
     <Content Include="Views\Registration\ChangeAccountDetails.cshtml" />
     <Content Include="Views\Registration\EditApplicantDetails.cshtml" />
+    <Content Include="Views\Registration\EditOrganisationDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -755,6 +756,7 @@
     <Compile Include="ViewModels\NewNotification\NotificationTypeViewModel.cs" />
     <Compile Include="ViewModels\Registration\EditApplicantDetailsViewModel.cs" />
     <Compile Include="ViewModels\Registration\ChangeAccountDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Registration\EditOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\OperationCodesViewModel.cs" />

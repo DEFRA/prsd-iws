@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain
 {
+    using System;
     using Prsd.Core;
     using Prsd.Core.Domain;
 
@@ -7,7 +8,7 @@
     {
         public Organisation(string name, Address address, BusinessType type, string otherDescription = null)
         {
-            Guard.ArgumentNotNull(() => name, name);
+            Guard.ArgumentNotNullOrEmpty(() => name, name);
             Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNull(() => type, type);
 
@@ -34,6 +35,22 @@
 
         public string RegistrationNumber { get; private set; }
 
-        public string OtherDescription { get; private set; }    
+        public string OtherDescription { get; private set; }
+
+        public void Update(string name, Address address, BusinessType type, string otherDescription = null)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => name, name);
+            Guard.ArgumentNotNull(() => address, address);
+            Guard.ArgumentNotNull(() => type, type);
+            if (type == BusinessType.Other)
+            {
+                Guard.ArgumentNotNullOrEmpty(() => otherDescription, otherDescription);
+            }
+
+            Name = name;
+            Address = address;
+            Type = type.DisplayName;
+            OtherDescription = otherDescription;
+        }
     }
 }

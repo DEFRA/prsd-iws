@@ -5,7 +5,7 @@
 
     public class OrganisationRegistrationData
     {
-        public int OrganisationId { get; set; }
+        public Guid OrganisationId { get; set; }
         public string Name { get; set; }
         public string TownOrCity { get; set; }
         public string CountyOrProvince { get; set; }
@@ -16,5 +16,6 @@
         public Guid CountryId { get; set; }
         public BusinessType BusinessType { get; set; }
         public string OtherDescription { get; set; }
+        public string RegistrationNumber { get; set; }
     }
 }

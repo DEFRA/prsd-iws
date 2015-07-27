@@ -152,6 +152,8 @@
     <Compile Include="Notification\SetRecoveryPercentageDataHandler.cs" />
     <Compile Include="OperationCodes\AddDisposalCodesHandler.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />
+    <Compile Include="Organisations\UpdateOrganisationDetailsHandler.cs" />
+    <Compile Include="Organisations\GetOrganisationDetailsByUserHandler.cs" />
     <Compile Include="Producers\CopyProducerFromExporterHandler.cs" />
     <Compile Include="Producers\DeleteProducerForNotificationHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="RecoveryInfo\GetRecoveryValuesDataHandler.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
     <Compile Include="Admin\SetDecisionHandler.cs" />
+    <Compile Include="Registration\UpdateOrganisationOfUserHandler.cs" />
     <Compile Include="Shared\GetCountriesHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />

@@ -61,6 +61,8 @@
     <Compile Include="Notification\GetNotificationType.cs" />
     <Compile Include="Notification\NotificationBasicInfo.cs" />
     <Compile Include="Notification\NotificationProgressInfo.cs" />
+    <Compile Include="Organisations\GetOrganisationDetailsByUser.cs" />
+    <Compile Include="Organisations\UpdateOrganisationDetails.cs" />
     <Compile Include="Producers\CopyProducerFromExporter.cs" />
     <Compile Include="RecoveryInfo\AddRecoveryInfoToNotification.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
     <Compile Include="RecoveryInfo\GetRecoveryValuesData.cs" />
+    <Compile Include="Registration\UpdateOrganisationOfUser.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
     <Compile Include="Notification\SetRecoveryPercentageData.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />

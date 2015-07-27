@@ -25,6 +25,7 @@
             PhoneNumber = phoneNumber;
             Email = email;
             Id = id;
+            UserName = email;
         }
 
         public string Id { get; private set; }
@@ -45,7 +46,17 @@
 
         public bool IsInternal { get; private set; }
 
+        public bool PhoneNumberConfirmed { get; private set; }
+
         public bool EmailConfirmed { get; private set; }
+
+        public bool TwoFactorEnabled { get; private set; }
+
+        public bool LockoutEnabled { get; private set; }
+
+        public int AccessFailedCount { get; private set; }
+
+        public string UserName { get; private set; }
 
         public InternalUserStatus? InternalUserStatus { get; private set; }
 
@@ -61,6 +72,12 @@
                     string.Format("User {0} is already linked to an organisation and may not be linked to another. This user is linked to organisation: {1}", Id, Organisation.Id));
             }
 
+            Organisation = organisation;
+        }
+
+        public void UpdateOrganisationOfUser(Organisation organisation)
+        {
+            Guard.ArgumentNotNull(() => organisation, organisation);
             Organisation = organisation;
         }
 

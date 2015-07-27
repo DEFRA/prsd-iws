@@ -281,6 +281,34 @@
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> EditOrganisationDetails()
+        {
+            using (var client = apiClient())
+            {
+                var response = await client.SendAsync(User.GetAccessToken(), new GetOrganisationDetailsByUser());
+                var model = new EditOrganisationViewModel(response);
+                await this.BindCountryList(apiClient);
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditOrganisationDetails(EditOrganisationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                await this.BindCountryList(apiClient);
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), new UpdateOrganisationDetails(model.ToRequest()));
+            }
+            return RedirectToAction("Home", "Applicant");
+        }
+
         private async Task<IEnumerable<CountryData>> GetCountries()
         {
             using (var client = apiClient())
