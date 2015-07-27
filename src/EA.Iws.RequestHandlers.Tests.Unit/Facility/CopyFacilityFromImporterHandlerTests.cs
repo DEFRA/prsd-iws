@@ -3,12 +3,12 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Cqrs.Tests.Unit.Helpers;
     using DataAccess;
     using Domain;
-    using Domain.Notification;
+    using Domain.NotificationApplication;
     using Facilities;
     using FakeItEasy;
+    using Helpers;
     using Requests.Facilities;
     using TestHelpers.Helpers;
     using Xunit;
