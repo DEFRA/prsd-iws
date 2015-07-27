@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdminRegistrationControllerTests.cs" />
+    <Compile Include="Controllers\CarrierControllerTests.cs" />
     <Compile Include="Controllers\KeyDatesControllerTests.cs" />
     <Compile Include="Controllers\ControllerTests.cs" />
     <Compile Include="Controllers\FacilityControllerTests.cs" />

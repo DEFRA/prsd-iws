@@ -133,9 +133,28 @@
         {
             using (var client = apiClient())
             {
+                var carrier = await client.SendAsync(User.GetAccessToken(), new GetCarrierForNotification(id, entityId));
+
+                var model = new RemoveCarrierViewModel
+                {
+                    CarrierId = carrier.Id,
+                    CarrierName = carrier.Business.Name,
+                    NotificationId = carrier.NotificationId
+                };
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Remove(RemoveCarrierViewModel model)
+        {
+            using (var client = apiClient())
+            {
                 try
                 {
-                    await client.SendAsync(User.GetAccessToken(), new DeleteCarrierForNotification(id, entityId));
+                    await client.SendAsync(User.GetAccessToken(), new DeleteCarrierForNotification(model.NotificationId, model.CarrierId));
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -146,7 +165,7 @@
                     }
                 }
             }
-            return RedirectToAction("List", "Carrier", new { id });
+            return RedirectToAction("List", "Carrier", new { id = model.NotificationId });
         }
     }
 }

@@ -10,10 +10,10 @@
             var actualAction = routeValues["action"];
             var actualController = routeValues["controller"];
             var actualArea = routeValues["area"];
-            bool isValid = actualAction == action
-                           && actualController == controller
+            bool isValid = (string)actualAction == action
+                           && (string)actualController == controller
                            && (area == null
-                               || actualArea == area);
+                               || (string)actualArea == area);
 
             Assert.True(isValid,
                 string.Format(

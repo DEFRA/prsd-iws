@@ -1,0 +1,21 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.RemoveCarrierViewModel
+
+@{
+    ViewBag.Title = "Remove Carrier";
+}
+
+<h2 class="heading-large">Remove carrier</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.CarrierId)
+    
+    <p>You are about to remove @Model.CarrierName as a carrier from this notification.</p>
+
+    <button class="button" type="submit">Continue</button>
+}
+
+<p>@Html.ActionLink("Back to carriers", "List", "Carrier", new { id = Model.NotificationId }, null)</p>
