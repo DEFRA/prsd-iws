@@ -96,7 +96,7 @@
         {
             var results = await ResultsWhenSearchingFor("SRF");
 
-            Assert.Equal(1, results.Count);
+            Assert.Equal(0, results.Count);
         }
 
         [Fact]
