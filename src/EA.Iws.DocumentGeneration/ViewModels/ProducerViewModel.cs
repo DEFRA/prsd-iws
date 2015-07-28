@@ -119,6 +119,7 @@
 
         public ProducerViewModel GetProducerViewModelShowingAnnexMessages(int producerCount, ProducerViewModel pvm, int annexNumber)
         {
+            //If there is only one left put it on the form otherwise put them all in the annex - one has been removed hence > 1 here
             if (producerCount > 1)
             {
                 return GetProducerViewModelShowingAnnexMessagesForProducerCountGreaterThanTwo(pvm, annexNumber);

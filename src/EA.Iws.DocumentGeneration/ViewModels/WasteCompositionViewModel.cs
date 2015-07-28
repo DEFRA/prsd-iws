@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using Core.WasteType;
     using Domain.NotificationApplication;
-    using Prsd.Core.Helpers;
 
     internal class WasteCompositionViewModel
     {
