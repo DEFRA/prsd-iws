@@ -11,10 +11,10 @@
     @Html.AntiForgeryToken()
 
     <h2 class="heading-large">Search</h2>
-    <p>Enter notification number, exporter company name or waste type</p>
+    <p>Enter notification number or exporter company name</p>
     <div class="grid-row">
         <div class="column-two-thirds">
-            @Html.Gds().HintParagraph("If you enter part of the notification number or exporter name the search will return all the notifications with a notification number or exporter name that contains what you have entered.  To search on waste type enter RDF, SDF, wood or other.")
+            @Html.Gds().HintParagraph("Part of either the notification number or the company name can be entered.")
             @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
         
             &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go" />
