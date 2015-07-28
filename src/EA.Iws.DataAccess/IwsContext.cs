@@ -17,6 +17,13 @@
     {
         private readonly IUserContext userContext;
 
+        public IwsContext(IUserContext userContext)
+            : base("name=Iws.DefaultConnection")
+        {
+            this.userContext = userContext;
+            Database.SetInitializer<IwsContext>(null);
+        }
+
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
 
         public virtual DbSet<Country> Countries { get; set; }
@@ -35,14 +42,7 @@
 
         public virtual DbSet<PricingStructure> PricingStructures { get; set; }
 
-        public virtual DbSet<NotificationAssessment> NotificationAssessments { get; set; } 
-
-        public IwsContext(IUserContext userContext)
-            : base("name=Iws.DefaultConnection")
-        {
-            this.userContext = userContext;
-            Database.SetInitializer<IwsContext>(null);
-        }
+        public virtual DbSet<NotificationAssessment> NotificationAssessments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -84,7 +84,8 @@
             var notification = await NotificationApplications.SingleAsync(n => n.Id == notificationId);
             if (notification.UserId != userContext.UserId)
             {
-                throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}", notificationId, userContext.UserId));
+                throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
+                    notificationId, userContext.UserId));
             }
             return notification;
         }

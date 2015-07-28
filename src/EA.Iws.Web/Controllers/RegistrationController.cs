@@ -294,6 +294,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditOrganisationDetails(EditOrganisationViewModel model)
         {
             if (!ModelState.IsValid)

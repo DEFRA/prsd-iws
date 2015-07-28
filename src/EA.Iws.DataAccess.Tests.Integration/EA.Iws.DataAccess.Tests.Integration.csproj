@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15209.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.15209-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15211.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15211-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework">
@@ -54,6 +54,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +78,7 @@
     <Compile Include="OrganisationIntegration.cs" />
     <Compile Include="PricingStructureIntegration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationshipDeletionIntegration.cs" />
     <Compile Include="TransportRouteIntegration.cs" />
   </ItemGroup>
   <ItemGroup>
