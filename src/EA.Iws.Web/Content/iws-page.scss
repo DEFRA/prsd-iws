@@ -472,6 +472,12 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     text-decoration: underline;
 }
 
+#link-sign-out{
+    @include core-16() {
+        font-size: $font-size;
+    }
+}
+
 .link-submit:hover {
     color: #2E8ACA;
 }
