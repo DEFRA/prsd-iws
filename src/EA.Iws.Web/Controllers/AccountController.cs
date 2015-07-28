@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Net.Mail;
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
@@ -9,6 +11,7 @@
     using Infrastructure;
     using Microsoft.Owin.Security;
     using Prsd.Core.Web.OAuth;
+    using Prsd.Core.Web.OpenId;
     using Services;
     using ViewModels.Account;
 
@@ -19,16 +22,19 @@
         private readonly Func<IOAuthClient> oauthClient;
         private readonly Func<IIwsClient> apiClient;
         private readonly IEmailService emailService;
+        private readonly Func<IUserInfoClient> userInfoClient;
 
         public AccountController(Func<IOAuthClient> oauthClient,
             IAuthenticationManager authenticationManager,
             Func<IIwsClient> apiClient,
-            IEmailService emailService)
+            IEmailService emailService,
+            Func<IUserInfoClient> userInfoClient)
         {
             this.oauthClient = oauthClient;
             this.apiClient = apiClient;
             this.authenticationManager = authenticationManager;
             this.emailService = emailService;
+            this.userInfoClient = userInfoClient;
         }
 
         [HttpGet]
@@ -52,12 +58,24 @@
             var response = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
             if (response.AccessToken != null)
             {
+                var identity = response.GenerateUserIdentity();
+
                 authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe },
-                    response.GenerateUserIdentity());
-                return RedirectToLocal(returnUrl);
+                    identity);
+
+                bool isInternal = await IsInternalUser(response.AccessToken);
+
+                return RedirectToLocal(returnUrl, isInternal);
             }
             ModelState.AddModelError(string.Empty, "The username or password is incorrect");
             return View(model);
+        }
+
+        private async Task<bool> IsInternalUser(string accessToken)
+        {
+            var userInfo = await userInfoClient().GetUserInfoAsync(accessToken);
+
+            return userInfo.Claims.Any(p => p.Item1 == ClaimTypes.Role && p.Item2 == "internal");
         }
 
         [HttpPost]
@@ -68,13 +86,14 @@
             return RedirectToAction("Index", "Home");
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        private ActionResult RedirectToLocal(string returnUrl, bool isInternal)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Home", "Applicant");
+
+            return isInternal ? RedirectToAction("Index", "Home", new { area = "Admin" }) : RedirectToAction("Home", "Applicant");
         }
 
         [HttpGet]

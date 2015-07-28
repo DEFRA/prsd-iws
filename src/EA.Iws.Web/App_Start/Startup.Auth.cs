@@ -11,9 +11,7 @@
         public void ConfigureAuth(IAppBuilder app, AppConfiguration config)
         {
             app.UseCookieAuthentication(new PrsdCookieAuthenticationOptions(
-                authenticationType: Constants.IwsAuthType,
-                apiUrl: config.ApiUrl,
-                apiSecret: config.ApiSecret)
+                authenticationType: Constants.IwsAuthType)
                 {
                     LoginPath = new PathString("/Account/Login")
                 });
