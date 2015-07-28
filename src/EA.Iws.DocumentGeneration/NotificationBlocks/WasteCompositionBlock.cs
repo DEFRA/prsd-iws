@@ -53,10 +53,18 @@
             {
                 MergeToTable(tableproperties, data.Compositions, Constituents);
             }
+            else
+            {
+                ClearAnnexFields("Constituents");
+            }
 
             if (data.AdditionalInfos.Count > 0)
             {
                 MergeToTable(tableproperties, data.AdditionalInfos, Parameters);
+            }
+            else
+            {
+                ClearAnnexFields("Parameters");
             }
         }
 
@@ -145,6 +153,15 @@
         private void ClearAnnexFields()
         {
             foreach (var annexMergeField in AnnexMergeFields)
+            {
+                annexMergeField.RemoveCurrentContents();
+            }
+        }
+
+        private void ClearAnnexFields(string type)
+        {
+            var annexFields = AnnexMergeFields.Where(c => c.FieldName.ToString().Contains(type));
+            foreach (var annexMergeField in annexFields)
             {
                 annexMergeField.RemoveCurrentContents();
             }
