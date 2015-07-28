@@ -6,6 +6,7 @@
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
 
     public class RequestHandlerModule : Module
@@ -29,6 +30,8 @@
             builder.RegisterAssemblyTypes(this.GetType().Assembly)
                 .Where(t => t.Namespace.Contains("Mappings"))
                 .AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(ThisAssembly).AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();

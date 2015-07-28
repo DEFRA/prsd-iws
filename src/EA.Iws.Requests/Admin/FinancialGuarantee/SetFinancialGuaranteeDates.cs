@@ -13,6 +13,11 @@
 
         public SetFinancialGuaranteeDates(Guid notificationId, DateTime? receivedDate, DateTime? completedDate)
         {
+            if (!receivedDate.HasValue && !completedDate.HasValue)
+            {
+                throw new ArgumentException("Either received date or completed date must be non-null");
+            }
+
             NotificationId = notificationId;
             ReceivedDate = receivedDate;
             CompletedDate = completedDate;

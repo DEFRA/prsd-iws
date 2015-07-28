@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Domain.NotificationAssessment;
     using FakeItEasy;
     using Helpers;
@@ -17,11 +18,12 @@
         private readonly SetDatesHandler handler;
         private readonly NotificationAssessment notificationAssessment;
         private readonly Guid notificationId = new Guid("5243D3E5-CA81-4A3E-B589-4D22D6676B28");
+        private const string AnyString = "test";
 
         public GetDatesHandlerTests()
         {
             context = A.Fake<IwsContext>();
-            handler = new SetDatesHandler(context);
+            handler = new SetDatesHandler(context, new TestUserContext(Guid.Empty));
             var dbSetHelper = new DbContextHelper();
             notificationAssessment = new NotificationAssessment(notificationId);
             EntityHelper.SetEntityId(notificationAssessment, notificationId);

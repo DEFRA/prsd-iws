@@ -1,9 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.FinancialGuarantee
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using Core.Admin;
+    using Prsd.Core.Helpers;
 
-    public class FinancialGuaranteeInformationViewModel
+    public class FinancialGuaranteeInformationViewModel : IValidatableObject
     {
         [Required]
         [DisplayName("Guarantee received")]
@@ -13,10 +17,39 @@
         [DisplayName("Guarantee complete")]
         public OptionalDateInputViewModel Completed { get; set; }
 
-        [Required]
         [DisplayName("Decision required by")]
-        public OptionalDateInputViewModel DecisionRequired { get; set; }
+        public DateTime? DecisionRequired { get; set; }
 
         public string Status { get; set; }
+
+        public bool IsRequiredEntryComplete { get; set; }
+
+        public FinancialGuaranteeInformationViewModel()
+        {
+            Received = new OptionalDateInputViewModel();
+            Completed = new OptionalDateInputViewModel();
+        }
+
+        public FinancialGuaranteeInformationViewModel(FinancialGuaranteeData financialGuaranteeData)
+        {
+            Status = EnumHelper.GetDisplayName(financialGuaranteeData.Status);
+            Received = new OptionalDateInputViewModel(financialGuaranteeData.ReceivedDate);
+            Completed = new OptionalDateInputViewModel(financialGuaranteeData.CompletedDate);
+            DecisionRequired = financialGuaranteeData.DecisionRequiredDate;
+            IsRequiredEntryComplete = financialGuaranteeData.ReceivedDate.HasValue;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!Received.IsCompleted && !Completed.IsCompleted)
+            {
+                yield return new ValidationResult("Received date is required.", new[] { "Received.Day" });
+            }
+
+            if (Received.IsCompleted && Completed.IsCompleted && Received.AsDateTime() > Completed.AsDateTime())
+            {
+                yield return new ValidationResult("Received date must be before completed date", new[] { "Received.Day", "Completed.Day" });
+            }
+        }
     }
 }

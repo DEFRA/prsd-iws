@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
     <Compile Include="BusinessTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
     <Compile Include="Notification\CustomsOfficeTests.cs" />
     <Compile Include="Notification\NotificationApplicationTests.cs" />
     <Compile Include="Notification\NotificationCustomsOfficeTests.cs" />

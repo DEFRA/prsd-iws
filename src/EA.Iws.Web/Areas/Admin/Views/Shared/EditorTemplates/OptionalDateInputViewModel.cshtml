@@ -1,20 +1,44 @@
 ﻿@model EA.Iws.Web.Areas.Admin.ViewModels.OptionalDateInputViewModel
 
+@{
+    var isDisabled = ViewData["IsInputDisabled"] == true.ToString().ToLower();
+}
+
 <div class="form-date">
     @Html.Gds().ValidationMessageFor(m => m.Day)
     @Html.Gds().ValidationMessageFor(m => m.Month)
     @Html.Gds().ValidationMessageFor(m => m.Year)
     <div class="form-group form-group-day">
         @Html.Gds().LabelFor(m => m.Day, false)
-        @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+        @if (isDisabled)
+        {
+            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", pattern = "[0-9]*", disabled = true })
+        }
+        else
+        {
+            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", pattern = "[0-9]*" })
+        }
     </div>
     <div class="form-group form-group-month">
         @Html.Gds().LabelFor(m => m.Month, false)
-        @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+        @if (isDisabled)
+        {
+            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", pattern = "[0-9]*", disabled = true })
+        }
+        else
+        {
+            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", pattern = "[0-9]*" })
+        }
     </div>
     <div class="form-group form-group-year">
         @Html.Gds().LabelFor(m => m.Year, false)
-        @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015", pattern = "[0-9]*" })
+        @if (isDisabled)
+        {
+            @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015", pattern = "[0-9]*", disabled = true })
+        }
+        else
+        {
+            @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015", pattern = "[0-9]*" })
+        }
     </div>
 </div>
-

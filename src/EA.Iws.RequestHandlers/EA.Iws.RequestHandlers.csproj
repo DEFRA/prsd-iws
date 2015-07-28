@@ -69,6 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandler.cs" />
     <Compile Include="Admin\SetDatesHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="Mappings\CustomsOfficeExitMap.cs" />
     <Compile Include="Mappings\CustomsOfficeEntryMap.cs" />
     <Compile Include="Mappings\CustomsOfficeMap.cs" />
+    <Compile Include="Mappings\FinancialGuaranteeMap.cs" />
     <Compile Include="Mappings\InternalUserMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="Mappings\NotificationBasicInfoMap.cs" />

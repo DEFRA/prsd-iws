@@ -15,6 +15,41 @@
         [Range(2010, int.MaxValue)]
         public int? Year { get; set; }
 
+        public bool IsCompleted
+        {
+            get 
+            { 
+                return Day.HasValue 
+                && Month.HasValue 
+                && Year.HasValue
+                && Day.Value <= DateTime.DaysInMonth(Year.Value, Month.Value); 
+            }
+        }
+
+        public OptionalDateInputViewModel()
+        {
+        }
+
+        public OptionalDateInputViewModel(DateTime? date)
+        {
+            if (date.HasValue)
+            {
+                Day = date.Value.Day;
+                Month = date.Value.Month;
+                Year = date.Value.Year;
+            }
+        }
+
+        public DateTime? AsDateTime()
+        {
+            if (Day.HasValue && Month.HasValue && Year.HasValue)
+            {
+                return new DateTime(Year.Value, Month.Value, Day.Value);
+            }
+
+            return null;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Day.HasValue || Month.HasValue || Year.HasValue)

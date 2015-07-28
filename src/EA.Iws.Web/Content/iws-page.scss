@@ -472,7 +472,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     text-decoration: underline;
 }
 
-#link-sign-out{
+#link-sign-out {
     @include core-16() {
         font-size: $font-size;
     }
@@ -651,7 +651,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 }
 
 .status-circle {
-    font-size: 21px!important;
+    font-size: 21px !important;
 }
 
 .action-dropdown {
@@ -668,7 +668,30 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     }
 }
 
-.green-tick{
-      color: $button-colour;
-      padding-left: 10px;
+.green-tick {
+    color: $button-colour;
+    padding-left: 10px;
+}
+
+dl.object-summary {
+    padding: 9px;
+    border: 1px solid $border-colour;
+    margin-bottom: 16px;
+
+    dd {
+        display: inline;
+        margin: 0;
     }
+
+    dd:after {
+        display: block;
+        content: '';
+    }
+
+    dt {
+        font-weight: bold;
+        margin-right: 16px;
+        display: inline-block;
+        min-width: 100px;
+    }
+}

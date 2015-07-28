@@ -8,6 +8,10 @@
         public NotificationAssessmentMapping()
         {
             ToTable("NotificationAssessment", "Notification");
+
+            HasOptional(x => x.FinancialGuarantee)
+                .WithRequired()
+                .Map(m => m.MapKey("NotificationAssessmentId"));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using FinancialGuarantee;
     using Prsd.Core.Domain;
 
     public class NotificationAssessment : Entity
@@ -33,6 +34,8 @@
 
         public Guid NotificationApplicationId { get; private set; }
 
+        public virtual FinancialGuarantee FinancialGuarantee { get; protected set; }
+
         protected NotificationAssessment()
         {
         }
@@ -40,6 +43,7 @@
         public NotificationAssessment(Guid notificationApplicationId)
         {
             this.NotificationApplicationId = notificationApplicationId;
+            this.FinancialGuarantee = FinancialGuarantee.Create();
         }
     }
 }
