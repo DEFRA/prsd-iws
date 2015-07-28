@@ -119,7 +119,7 @@
 
         public ProducerViewModel GetProducerViewModelShowingAnnexMessages(int producerCount, ProducerViewModel pvm, int annexNumber)
         {
-            if (producerCount > 2)
+            if (producerCount > 1)
             {
                 return GetProducerViewModelShowingAnnexMessagesForProducerCountGreaterThanTwo(pvm, annexNumber);
             }

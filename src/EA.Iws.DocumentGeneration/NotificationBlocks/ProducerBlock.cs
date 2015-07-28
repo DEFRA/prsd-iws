@@ -79,14 +79,7 @@
                 MergeMultipleProducersTable(properties);
 
                 //If there is only one left put it on the form otherwise put them all in the annex
-                if (data.Count > 1)
-                {
-                    MergeProducerToMainDocument(data[0].GetProducerViewModelShowingAnnexMessages(data.Count, data[0], annexNumber), properties);
-                }
-                else
-                {
-                    MergeProducerToMainDocument(data[0].GetProducerViewModelShowingAnnexMessages(data.Count, data[0], annexNumber), properties);
-                }
+                MergeProducerToMainDocument(data[0].GetProducerViewModelShowingAnnexMessages(data.Count, data[0], annexNumber), properties);
             }
 
             //Clear the annex process of generation field if it contains no text
