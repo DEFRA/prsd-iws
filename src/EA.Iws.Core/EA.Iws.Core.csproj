@@ -47,6 +47,7 @@
     <Compile Include="Admin\ApprovalAction.cs" />
     <Compile Include="Admin\InternalUser.cs" />
     <Compile Include="Admin\InternalUserStatus.cs" />
+    <Compile Include="Admin\DecisionType.cs" />
     <Compile Include="Carriers\CarrierData.cs" />
     <Compile Include="CustomsOffice\CustomsOfficeData.cs" />
     <Compile Include="CustomsOffice\CustomsOffices.cs" />

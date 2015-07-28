@@ -74,6 +74,7 @@
     <Compile Include="Carrier\CarrierHandlerTests.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
     <Compile Include="Facility\CopyFacilityFromImporterHandlerTests.cs" />
+    <Compile Include="Admin\SetDecisionHandlerTests.cs" />
     <Compile Include="TestUserContext.cs" />
     <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />
     <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />

@@ -19,6 +19,16 @@
 
         public DateTime? DecisionDate { get; set; }
 
+        public DateTime? DecisionMade { get; set; }
+
+        public DateTime? ConsentedFrom { get; set; }
+
+        public DateTime? ConsentedTo { get; set; }
+
+        public string ConditionsOfConsent { get; set; }
+
+        public int DecisionType { get; set; }
+
         public string NameOfOfficer { get; set; }
 
         public Guid NotificationApplicationId { get; private set; }

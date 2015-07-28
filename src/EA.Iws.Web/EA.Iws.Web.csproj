@@ -493,6 +493,7 @@
     <Content Include="Areas\NotificationApplication\Views\Facility\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\Remove.cshtml" />
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_media-player.scss" />
+    <Content Include="Areas\Admin\Views\Decision\Decision.cshtml" />
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_buttons.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\_url-helpers.scss" />
@@ -641,12 +642,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DecisionController.cs" />
     <Compile Include="Areas\Admin\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\AdminRegistrationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\BasicSearchViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DecisionViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\NewUsersListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DateInputViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />

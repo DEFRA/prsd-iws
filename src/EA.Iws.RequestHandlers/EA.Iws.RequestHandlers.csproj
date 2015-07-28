@@ -173,6 +173,7 @@
     <Compile Include="RecoveryInfo\AddRecoveryInfoToNotificationHandler.cs" />
     <Compile Include="RecoveryInfo\GetRecoveryValuesDataHandler.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
+    <Compile Include="Admin\SetDecisionHandler.cs" />
     <Compile Include="Shared\GetCountriesHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />

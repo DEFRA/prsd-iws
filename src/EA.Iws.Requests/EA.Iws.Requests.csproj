@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\SetDecision.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsers.cs" />
     <Compile Include="Admin\SetDates.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />

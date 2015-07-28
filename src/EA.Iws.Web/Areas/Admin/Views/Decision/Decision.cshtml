@@ -1,0 +1,102 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.DecisionViewModel
+
+<h2 class="heading-large">What key activities would you like to complete?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.AntiForgeryToken()
+
+    <h2 class="heading-medium">Decision made date</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionMadeDay)">
+        <fieldset>
+            <div class="form-date">
+                @Html.Gds().HintParagraph("For example, 31 3 2015")
+                @Html.Gds().ValidationMessageFor(m => m.DecisionMadeDay)
+                @Html.Gds().ValidationMessageFor(m => m.DecisionMadeMonth)
+                @Html.Gds().ValidationMessageFor(m => m.DecisionMadeYear)
+                <div class="form-group form-group-day">
+                    @Html.Gds().LabelFor(m => m.DecisionMadeDay, false)
+                    @Html.Gds().TextBoxFor(m => m.DecisionMadeDay, false)
+                </div>
+                <div class="form-group form-group-month">
+                    @Html.Gds().LabelFor(m => m.DecisionMadeMonth, false)
+                    @Html.Gds().TextBoxFor(m => m.DecisionMadeMonth, false)
+                </div>
+                <div class="form-group form-group-year">
+                    @Html.Gds().LabelFor(m => m.DecisionMadeYear, false)
+                    @Html.Gds().TextBoxFor(m => m.DecisionMadeYear, false)
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <h2 class="heading-medium">Decision</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionTypes)">
+        @Html.Gds().LabelFor(m => m.DecisionType, false)
+        @Html.Gds().ValidationMessageFor(m => m.DecisionType)
+        @Html.Gds().DropDownListFor(m => m.DecisionType, Model.DecisionTypes)
+    </div>
+
+    <h2 class="heading-medium">Consent valid from</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromDay)">
+    <fieldset>
+        <div class="form-date">
+            @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromDay)
+            @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromMonth)
+            @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromYear)
+            <div class="form-group form-group-day">
+                @Html.Gds().LabelFor(m => m.ConsentValidFromDay, false)
+                @Html.Gds().TextBoxFor(m => m.ConsentValidFromDay, false)
+            </div>
+            <div class="form-group form-group-month">
+                @Html.Gds().LabelFor(m => m.ConsentValidFromMonth, false)
+                @Html.Gds().TextBoxFor(m => m.ConsentValidFromMonth, false)
+            </div>
+            <div class="form-group form-group-year">
+                @Html.Gds().LabelFor(m => m.ConsentValidFromYear, false)
+                @Html.Gds().TextBoxFor(m => m.ConsentValidFromYear, false)
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+    <h2 class="heading-medium">Consent valid to</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToDay)">
+        <fieldset>
+            <div class="form-date">
+                @Html.Gds().ValidationMessageFor(m => m.ConsentValidToDay)
+                @Html.Gds().ValidationMessageFor(m => m.ConsentValidToMonth)
+                @Html.Gds().ValidationMessageFor(m => m.ConsentValidToYear)
+                <div class="form-group form-group-day">
+                    @Html.Gds().LabelFor(m => m.ConsentValidToDay, false)
+                    @Html.Gds().TextBoxFor(m => m.ConsentValidToDay, false)
+                </div>
+                <div class="form-group form-group-month">
+                    @Html.Gds().LabelFor(m => m.ConsentValidToMonth, false)
+                    @Html.Gds().TextBoxFor(m => m.ConsentValidToMonth, false)
+                </div>
+                <div class="form-group form-group-year">
+                    @Html.Gds().LabelFor(m => m.ConsentValidToYear, false)
+                    @Html.Gds().TextBoxFor(m => m.ConsentValidToYear, false)
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <h2 class="heading-medium">Conditions of consent</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m =>m.ConditionsOfConsent)">
+        @Html.Gds().ValidationMessageFor(m => m.ConditionsOfConsent)
+        @Html.TextAreaFor(m => m.ConditionsOfConsent, new { @class = "text-area two-thirds" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="button" value="Continue" />
+    </div>
+}

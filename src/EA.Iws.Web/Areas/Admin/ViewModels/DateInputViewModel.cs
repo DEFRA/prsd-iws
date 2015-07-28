@@ -169,7 +169,7 @@
                 {
                     return false;
                 }
-                return day.Value <= 31 && day.Value >= 1 && month.Value <= 12 && month.Value >= 1 && year.Value <= 99999 && year.Value >= 1900;
+                return day.Value <= 31 && day.Value >= 1 && month.Value <= 12 && month.Value >= 1 && year.Value <= 9000 && year.Value >= 1900;
             }
             return true;
         }
@@ -178,7 +178,7 @@
         {
             if ((day.HasValue || month.HasValue || year.HasValue) && (day.HasValue && month.HasValue && year.HasValue))
             {
-                return day.Value <= 31 && day.Value >= 1 && month.Value <= 12 && month.Value >= 1 && year.Value <= 99999 && year.Value >= 1900;
+                return day.Value <= 31 && day.Value >= 1 && month.Value <= 12 && month.Value >= 1 && year.Value <= 9000 && year.Value >= 1900;
             }
             return false;
         }
