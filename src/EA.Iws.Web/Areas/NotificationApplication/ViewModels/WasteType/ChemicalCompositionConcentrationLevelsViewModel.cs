@@ -33,7 +33,7 @@
 
             if (ChemicalCompositionType == ChemicalCompositionType.Wood && string.IsNullOrEmpty(Description))
             {
-                yield return new ValidationResult("Description is required");
+                yield return new ValidationResult("Description is required", new[] { "Description" });
             }
 
             for (var i = 0; i < OtherCodes.Count; i++)

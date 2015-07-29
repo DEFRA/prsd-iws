@@ -15,9 +15,11 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     <div>
-        This may be the names of its major constituents and their relative concentrations expressed as a percentage
+        
     </div>
-    <div class="form-group">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
+        @Html.Gds().ValidationMessageFor(m => m.Description)
+        @Html.Gds().HintParagraph("This may be the names of its major constituents and their relative concentrations expressed as a percentage")
         @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds" })
     </div>
     <div class="form-group">

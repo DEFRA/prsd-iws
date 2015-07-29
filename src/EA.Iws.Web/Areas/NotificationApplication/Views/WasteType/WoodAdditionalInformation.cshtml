@@ -51,7 +51,8 @@
         </div>
     </div>
     <div class="column-half"></div>
-    <div class="form-group">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
+        @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
         Any other relevant information (optional)
         @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds" })
     </div>

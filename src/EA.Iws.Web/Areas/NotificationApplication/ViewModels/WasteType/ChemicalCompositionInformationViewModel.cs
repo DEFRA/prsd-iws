@@ -24,7 +24,7 @@
         {
             if (string.IsNullOrEmpty(Energy) && ChemicalCompositionType != ChemicalCompositionType.Wood)
             {
-                yield return new ValidationResult("Please enter a value for Energy");
+                yield return new ValidationResult("Please enter a value for Energy", new[] { "Energy" });
             }
 
             for (var i = 0; i < WasteComposition.Count; i++)

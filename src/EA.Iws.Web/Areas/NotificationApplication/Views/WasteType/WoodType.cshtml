@@ -1,9 +1,4 @@
-﻿@using System.Web.UI.WebControls
-@using EA.Iws.Core.Shared
-@using EA.Iws.Requests.WasteType
-@using EA.Iws.Web.Infrastructure
-@using EA.Prsd.Core.Helpers
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionConcentrationLevelsViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionConcentrationLevelsViewModel
 @{
     ViewBag.Title = "Waste Code";
 }
@@ -19,10 +14,10 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.ChemicalCompositionType)
-    <div>
-        Brief description of the type of wood
-    </div>
-    <div class="form-group">
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
+        @Html.Gds().ValidationMessageFor(m => m.Description)
+        <p>Brief description of the type of wood</p>
         @Html.Gds().TextBoxFor(m => m.Description)
     </div>
     <h2 class="heading-small">What is the chemical composition of the waste?</h2>
