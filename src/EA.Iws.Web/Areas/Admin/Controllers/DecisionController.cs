@@ -10,6 +10,7 @@
     using Requests.Admin;
     using ViewModels;
 
+    [Authorize(Roles = "internal")]
     public class DecisionController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

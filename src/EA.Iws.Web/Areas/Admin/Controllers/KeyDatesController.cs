@@ -8,6 +8,7 @@
     using Requests.Admin;
     using ViewModels;
 
+    [Authorize(Roles = "internal")]
     public class KeyDatesController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
