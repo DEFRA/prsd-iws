@@ -36,7 +36,6 @@
     <h2 class="heading-medium">Decision</h2>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionTypes)">
-        @Html.Gds().LabelFor(m => m.DecisionType, false)
         @Html.Gds().ValidationMessageFor(m => m.DecisionType)
         @Html.Gds().DropDownListFor(m => m.DecisionType, Model.DecisionTypes)
     </div>
