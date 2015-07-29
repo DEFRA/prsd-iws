@@ -111,6 +111,7 @@
                 Id = new Guid(result.Id),
                 FirstName = result.FirstName,
                 Surname = result.Surname,
+                Phone = result.PhoneNumber,
                 Email = result.Email
             };
         }

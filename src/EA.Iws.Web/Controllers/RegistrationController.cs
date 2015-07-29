@@ -277,9 +277,8 @@
                                         Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme),
                                         verificationCode, model.Id.ToString(), model.Email);
                 await emailService.SendAsync(verificationEmail);
+                return RedirectToAction("EmailVerificationRequired", "Account");
             }
-
-            return View(model);
         }
 
         private async Task<IEnumerable<CountryData>> GetCountries()

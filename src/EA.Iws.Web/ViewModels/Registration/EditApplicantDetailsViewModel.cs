@@ -22,6 +22,11 @@
         public string Surname { get; set; }
 
         [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Telephone number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email address")]
         public string Email { get; set; }
@@ -48,6 +53,7 @@
             Id = data.Id;
             FirstName = data.FirstName;
             Surname = data.Surname;
+            PhoneNumber = data.Phone;
             Email = data.Email;
             ExistingEmail = data.Email;
         }
@@ -59,6 +65,7 @@
                 Id = Id,
                 FirstName = FirstName,
                 Surname = Surname,
+                Phone = PhoneNumber,
                 Email = Email,
                 Password = Password
             };
