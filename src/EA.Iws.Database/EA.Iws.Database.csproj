@@ -76,6 +76,7 @@
     <Content Include="scripts\Update\Sprint12\20150722-120000-rename-IsAdmin-column.sql" />
     <Content Include="scripts\Update\Sprint12\20150724-132324-create-notification-assessment-table.sql" />
     <Content Include="scripts\Update\Sprint12\20150728-100423-add-decision-columns-to-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint13\20150730-120000-insert-data-into-ca-entry-exit-point.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
