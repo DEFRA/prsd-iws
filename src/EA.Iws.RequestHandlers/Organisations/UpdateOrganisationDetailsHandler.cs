@@ -30,23 +30,14 @@
                                         null, orgData.Postcode, country.Name);
 
             BusinessType type = BusinessType.FromBusinessType(orgData.BusinessType);
-            if (org.Type.Equals(type.DisplayName))
-            {
-                // update
-                org.Update(orgData.Name, address, type, orgData.OtherDescription);
-                await context.SaveChangesAsync();
-            }
-            else
-            {
-                // add
-                org = new Organisation(orgData.Name, address, type, orgData.OtherDescription);
-                context.Organisations.Add(org);
-                await context.SaveChangesAsync();
+            
+            org = new Organisation(orgData.Name, address, type, orgData.OtherDescription);
+            context.Organisations.Add(org);
+            await context.SaveChangesAsync();
 
-                var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
-                user.UpdateOrganisationOfUser(org);
-                await context.SaveChangesAsync();
-            }
+            var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
+            user.UpdateOrganisationOfUser(org);
+            await context.SaveChangesAsync();
 
             return org.Id;
         }

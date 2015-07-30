@@ -92,16 +92,6 @@
         }
 
         [Fact]
-        public async Task UpdateOrgDetails_Should_Not_Change_OrgId()
-        {
-            var result = await handler.HandleAsync(message);
-            Assert.True(result == organisationId);
-
-            var user = await context.Users.SingleAsync(x => x.Id == userId.ToString());
-            Assert.True(user.Organisation.Id == organisationId);
-        }
-
-        [Fact]
         public async Task UpdateOrgDetails_BusinessType_Changes_OrgId()
         {
             var prefix = "updated";
@@ -118,10 +108,9 @@
                 BusinessType = Core.Shared.BusinessType.SoleTrader
             });
             var orgId = await handler.HandleAsync(request);
-            Assert.False(orgId == organisationId);
 
             var user = await context.Users.SingleAsync(x => x.Id == userId.ToString());
-            Assert.False(user.Organisation.Id == organisationId);
+            Assert.Equal(orgId, user.Organisation.Id);
         }
     }
 }
