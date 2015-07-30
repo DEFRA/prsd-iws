@@ -35,6 +35,8 @@
             context = A.Fake<IwsContext>();
             userContext = A.Fake<IUserContext>();
 
+            A.CallTo(() => userContext.UserId).Returns(userId);
+
             var dbContextHelper = new DbContextHelper();
 
             var country = CountryFactory.Create(new Guid("05C21C57-2F39-4A15-A09A-5F38CF139C05"));
