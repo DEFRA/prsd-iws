@@ -171,19 +171,19 @@
 
                 var count =
                     await context.Database.SqlQuery<int>(
-                        "select count(id) from business.Exporter where NotificationId = @id",
-                        new SqlParameter("id", notificationId)).SingleAsync();
+                        "select count(id) from business.Exporter where Id = @id",
+                        new SqlParameter("id", notification.Exporter.Id)).SingleAsync();
 
                 Assert.Equal(1, count);
 
-                notification.SetExporter(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+                notification.SetExporter(Business.CreateBusiness("updated", BusinessType.LimitedCompany, "123", "456"), ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
 
                 await context.SaveChangesAsync();
 
                 count =
                     await context.Database.SqlQuery<int>(
-                        "select count(id) from business.Exporter where NotificationId = @id",
-                        new SqlParameter("id", notificationId)).SingleAsync();
+                        "select count(id) from business.Exporter where Id = @id",
+                        new SqlParameter("id", notification.Exporter.Id)).SingleAsync();
 
                 Assert.Equal(1, count);
             }

@@ -74,6 +74,8 @@
 
             notification.SetStateOfExportForNotification(stateOfExport);
 
+            context.SaveChanges();
+
             var nextExitPoint = context.EntryOrExitPoints.First(ep => ep.Id != exitPoint.Id);
 
             if (nextExitPoint.Country.Id != country.Id)
@@ -82,13 +84,12 @@
                 competentAuthority = context.CompetentAuthorities.First(ca => ca.Country.Id == country.Id);
             }
 
-            notification.UpdateStateOfExport(country, competentAuthority, nextExitPoint);
+            var newStateOfExport = new StateOfExport(country, competentAuthority, nextExitPoint);
+            notification.SetStateOfExportForNotification(newStateOfExport);
 
             context.SaveChanges();
 
             Assert.Equal(nextExitPoint.Id, notification.StateOfExport.ExitPoint.Id);
-
-            context.DeleteOnCommit(stateOfExport);
 
             context.DeleteOnCommit(notification);
 
