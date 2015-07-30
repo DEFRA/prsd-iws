@@ -59,6 +59,7 @@
     <Compile Include="MergeFieldName.cs" />
     <Compile Include="MergeFieldType.cs" />
     <Compile Include="NotificationBlocks\CarrierBlock.cs" />
+    <Compile Include="NotificationBlocks\CustomsOfficeBlock.cs" />
     <Compile Include="NotificationBlocks\ImporterBlock.cs" />
     <Compile Include="NotificationBlocks\IAnnexedBlock.cs" />
     <Compile Include="NotificationBlocks\OperationBlock.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="ViewModels\AnnexTableWasteCodes.cs" />
     <Compile Include="ViewModels\CarrierViewModel.cs" />
     <Compile Include="ViewModels\ChemicalCompositionPercentages.cs" />
+    <Compile Include="ViewModels\CustomsOfficeViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\ImporterViewModel.cs" />
     <Compile Include="ViewModels\OperationViewModel.cs" />
