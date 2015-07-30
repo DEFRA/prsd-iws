@@ -12,13 +12,10 @@
 
     <h2 class="heading-large">Search</h2>
     <p>Enter notification number or exporter company name</p>
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            @Html.Gds().HintParagraph("Part of either the notification number or the company name can be entered.")
+    <div class="form-group">
             @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
         
             &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go" />
-        </div>
     </div>
 
     <hr />
@@ -57,7 +54,7 @@
                 </tbody>
             </table>
         }
-        else
+        else if (Model != null && Model.HasSearched)
         {
             <h2 class="heading-medium">No matching results found</h2>
         }

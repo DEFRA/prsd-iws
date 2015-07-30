@@ -1,13 +1,13 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.Admin
 {
-    using Api.Client;
-    using Prsd.Core.Web.OAuth;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
     using Areas.Admin.ViewModels;
+    using Prsd.Core.Web.OAuth;
     using Xunit;
 
     public class AdminRegistrationControllerTests

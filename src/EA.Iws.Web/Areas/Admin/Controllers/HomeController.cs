@@ -35,6 +35,7 @@
                 {
                     model.SearchResults = searchResults.ToList();
                 }
+                model.HasSearched = true;
             }
             return View(model);
         }

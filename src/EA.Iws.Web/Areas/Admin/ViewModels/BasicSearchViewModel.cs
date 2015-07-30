@@ -16,6 +16,8 @@
 
         public List<BasicSearchResult> SearchResults { get; set; }
 
+        public bool HasSearched { get; set; }
+
         public GetBasicSearchResults ToRequest()
         {
             return new GetBasicSearchResults(SearchTerm);
