@@ -95,6 +95,10 @@
       <HintPath>..\packages\libsassnet.Web.x64.2.1.3.1\lib\net40\libsassnet.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LowercaseDashedRouting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LowercaseDashedRoute.1.0.14\lib\LowercaseDashedRouting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -714,8 +718,10 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\UnNumberViewModel.cs" />
     <Compile Include="Infrastructure\AdminApprovalRequired.cs" />
     <Compile Include="Infrastructure\AntiForgeryErrorFilter.cs" />
+    <Compile Include="Infrastructure\AreaRegistrationContextExtensions.cs" />
     <Compile Include="Infrastructure\Navigation.cs" />
     <Compile Include="Infrastructure\NavigationExtensions.cs" />
+    <Compile Include="Infrastructure\RouteCollectionExtensions.cs" />
     <Compile Include="Mappings\FinancialGuaranteeDataMap.cs" />
     <Compile Include="Mappings\FinancialGuaranteeDataToDecisionMap.cs" />
     <Compile Include="Mappings\FinancialGuaranteeDecisionViewModelMap.cs" />

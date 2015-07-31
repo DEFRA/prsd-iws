@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using Controllers;
+    using Infrastructure;
 
     public class NotificationApplicationAreaRegistration : AreaRegistration 
     {
@@ -15,9 +16,9 @@
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
-            context.MapRoute(
+            context.MapLowercaseDashedRoute(
                 name: "NotificationApplication_default",
-                url: "NotificationApplication/{id}/{controller}/{action}/{entityId}",
+                url: "Notification-Application/{id}/{controller}/{action}/{entityId}",
                 defaults: new { action = "Index", controller = "Home", entityId = UrlParameter.Optional },
                 namespaces: new[] { typeof(HomeController).Namespace });
         }

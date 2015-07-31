@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.FinancialGuarantee
 {
     using System.Web.Mvc;
+    using Controllers;
+    using Infrastructure;
 
     public class FinancialGuaranteeAreaRegistration : AreaRegistration 
     {
@@ -14,10 +16,11 @@
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
-            context.MapRoute(
+            context.MapLowercaseDashedRoute(
                 "FinancialGuarantee_default",
-                "FinancialGuarantee/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional });
+                "Financial-Guarantee/{controller}/{action}/{id}",
+                new { action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { typeof(HomeController).Namespace });
         }
     }
 }

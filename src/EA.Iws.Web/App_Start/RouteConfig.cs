@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
     using Controllers;
+    using Infrastructure;
 
     public class RouteConfig
     {
@@ -19,7 +20,7 @@
             routes.MapRoute("Error500", "errors/500",
                 new { controller = "Errors", action = "InternalError" });
 
-            routes.MapRoute("Default", "{controller}/{action}/{id}",
+            routes.MapLowercaseDashedRoute("Default", "{controller}/{action}/{id}",
                 defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional},
                 namespaces: new[] { typeof(HomeController).Namespace });
         }
