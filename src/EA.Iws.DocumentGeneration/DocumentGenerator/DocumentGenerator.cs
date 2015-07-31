@@ -68,7 +68,8 @@
                 new WasteCompositionBlock(mergeFields, notification),
                 new TransportBlock(mergeFields, notification),
                 new WasteCodesBlock(mergeFields, notification),
-                new CustomsOfficeBlock(mergeFields, notification)
+                new CustomsOfficeBlock(mergeFields, notification),
+                new TransitStatesBlock(mergeFields, notification)
             };
         }
     }

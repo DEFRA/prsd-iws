@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.TestHelpers", "EA.Iw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.EmailMessaging", "EA.Iws.EmailMessaging\EA.Iws.EmailMessaging.csproj", "{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.DocumentGeneration.Tests.Unit", "EA.Iws.DocumentGeneration.Tests.Unit\EA.Iws.DocumentGeneration.Tests.Unit.csproj", "{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -263,6 +265,18 @@ Global
 		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Release|x64.ActiveCfg = Release|Any CPU
 		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE}.Release|x64.Build.0 = Release|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Debug|x64.Build.0 = Debug|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Release|x64.ActiveCfg = Release|Any CPU
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -285,5 +299,6 @@ Global
 		{DD2A73A4-A652-4ECC-87EE-24239CE45AD4} = {C9B436CF-3AF2-40E2-9577-1E8B35543953}
 		{DEC3021A-32CF-4B84-A59C-77503378ED67} = {B0BDB106-1731-401B-826B-EAC6CBFC8473}
 		{FF9ED7B2-C556-4779-8C7E-25B4EF5087FE} = {0BCA0408-225D-49B4-878D-F9F0C052E82D}
+		{E7FE7C98-0B4B-4F3D-AFF9-269BA6A622EF} = {B0BDB106-1731-401B-826B-EAC6CBFC8473}
 	EndGlobalSection
 EndGlobal

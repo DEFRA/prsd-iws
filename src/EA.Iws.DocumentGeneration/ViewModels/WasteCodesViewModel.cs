@@ -29,15 +29,15 @@
         public WasteCodesViewModel(NotificationApplication notification)
         {
             SetBaselAndOecdCode(notification);
-            Ewc = notification.EwcCodes != null ? MakeStringOfCodes(notification.EwcCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
+            Ewc = notification.EwcCodes.Count() != 0 ? MakeStringOfCodes(notification.EwcCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
             Nce = notification.ExportCode != null ? notification.ExportCode.CustomCode : string.Empty;
             Nci = notification.ImportCode != null ? notification.ImportCode.CustomCode : string.Empty;
             Other = notification.OtherCode != null ? notification.OtherCode.CustomCode : string.Empty;
-            Y = notification.YCodes != null ? MakeStringOfCodes(notification.YCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
-            H = notification.HCodes != null ? MakeStringOfCodes(notification.HCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
-            UnClass = notification.UnClasses != null ? MakeStringOfCodes(notification.UnClasses.OrderBy(c => c.WasteCode.Code)) : string.Empty;
+            Y = notification.YCodes.Count() != 0 ? MakeStringOfCodes(notification.YCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
+            H = notification.HCodes.Count() != 0 ? MakeStringOfCodes(notification.HCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
+            UnClass = notification.UnClasses.Count() != 0 ? MakeStringOfCodes(notification.UnClasses.OrderBy(c => c.WasteCode.Code)) : string.Empty;
             SetUnNumbersAndShippingNames(notification);
-            Customs = notification.CustomsCodes != null ? MakeStringOfCustomCodes(notification.CustomsCodes) : string.Empty;
+            Customs = notification.CustomsCodes.Count() != 0 ? MakeStringOfCustomCodes(notification.CustomsCodes) : string.Empty;
             SetIsAnnexNeeded();
         }
 
