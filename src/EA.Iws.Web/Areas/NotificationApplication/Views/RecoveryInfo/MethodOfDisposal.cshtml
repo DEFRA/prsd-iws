@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo.MethodOfDisposalViewModel
+@{
+    ViewBag.Title = "Method of Disposal for Recoverable Material";
+}
+
+@using (Html.BeginForm("MethodOfDisposal", "RecoveryInfo", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.PercentageRecoverable)
+
+    <header class="hgroup">
+        <h2 class="heading-large">Method of disposal</h2>
+    </header>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.MethodOfDisposal)">
+        <p>@Html.Gds().LabelFor(m => m.MethodOfDisposal)</p>
+        @Html.Gds().ValidationMessageFor(m => m.MethodOfDisposal)
+        @Html.TextAreaFor(m => m.MethodOfDisposal, new { @class = "text-area full-width" })
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

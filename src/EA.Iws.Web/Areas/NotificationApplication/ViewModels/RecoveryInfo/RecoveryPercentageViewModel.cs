@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Core.Notification;
+    using Prsd.Core.Validation;
     using Requests.Notification;
 
     public class RecoveryPercentageViewModel : IValidatableObject
@@ -17,106 +18,71 @@
             NotificationId = recoveryPercentageData.NotificationId;
             IsProvidedByImporter = recoveryPercentageData.IsProvidedByImporter.GetValueOrDefault();
 
-            if (recoveryPercentageData.PercentageRecoverable != null)
-            {
-                if (recoveryPercentageData.PercentageRecoverable == 100.00M)
-                {
-                    IsHundredPercentRecoverable = true;
-                    PercentageRecoverable = null;
-                }
-                else
-                {
-                    IsHundredPercentRecoverable = false;
-                    PercentageRecoverable = recoveryPercentageData.PercentageRecoverable;
-                }
-               
-                MethodOfDisposal = recoveryPercentageData.MethodOfDisposal;
-            }
-
             if (IsProvidedByImporter)
             {
                 PercentageRecoverable = null;
-                MethodOfDisposal = null;
-                IsHundredPercentRecoverable = null;
+            }
+
+            if (recoveryPercentageData.PercentageRecoverable != null)
+            {
+                PercentageRecoverable = recoveryPercentageData.PercentageRecoverable;
+                IsProvidedByImporter = false;
             }
         }
 
         public SetRecoveryPercentageData ToRequest()
         {
-            var percentage = PercentageRecoverable;
-            var isHundredPercentRecoverable = IsHundredPercentRecoverable;
-
-            if (!isHundredPercentRecoverable.HasValue)
-            {
-                isHundredPercentRecoverable = false;
-            }
-
-            if ((bool)isHundredPercentRecoverable)
-            {
-                percentage = 100.00M;
-            }
-
             if (IsProvidedByImporter)
             {
-                percentage = null;
-                MethodOfDisposal = null;
+                return new SetRecoveryPercentageData(NotificationId, true, null, null);
             }
 
-            return new SetRecoveryPercentageData(NotificationId, IsProvidedByImporter,
-                MethodOfDisposal, percentage);
+            if (PercentageRecoverable.HasValue && PercentageRecoverable.GetValueOrDefault() == 100.00M)
+            {
+                return new SetRecoveryPercentageData(NotificationId, IsProvidedByImporter, null, 100M);
+            }
+
+            throw new InvalidOperationException("Recovery percentage data cannot be set without method of disposal, when recovery percentage is less than 100.");
         }
 
         public Guid NotificationId { get; set; }
 
         [Display(Name = "I confirm that the relevant information will be provided directly to the competent authorities involved by the importer-consignee.")]
+        [RequiredIf("HasPercentageRecoverableValue", false, "Please enter a description or check the box")]
         public bool IsProvidedByImporter { get; set; }
 
-        public bool? IsHundredPercentRecoverable { get; set; }
-
+        [Range(0, 100, ErrorMessage = "The percentage (%) of recoverable material must be between 0 and 100")]
         [Display(Name = "Enter the percentage (%) of recoverable material")]
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places.")]
+        [RequiredIf("IsProvidedByImporter", false, "Please enter a description or check the box")]
         public decimal? PercentageRecoverable { get; set; }
 
-        public decimal? PercentageNonRecoverable
+        public bool HasPercentageRecoverableValue
         {
-            get
-            {
-                return Decimal.Round(100 - (PercentageRecoverable ?? 0), 2, MidpointRounding.AwayFromZero);
-            }
+            get { return PercentageRecoverable.HasValue; }
         }
-
-        [Display(Name = "Planned method of disposal of the non-recoverable waste after recovery")]
-        public string MethodOfDisposal { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (IsHundredPercentRecoverable == false)
-            {
-                var percentageRecoverable = PercentageRecoverable.GetValueOrDefault();
+            var percentageRecoverable = PercentageRecoverable.GetValueOrDefault();
 
-                if (PercentageRecoverable == null || percentageRecoverable > 99.99M || percentageRecoverable <= 0.00M)
-                {
-                    yield return new ValidationResult("The percentage (%) of recoverable material must be between 0 and 99.99", new[] { "PercentageRecoverable" });
-                }
-            }
             if (!IsProvidedByImporter)
             {
-                if (IsHundredPercentRecoverable == null)
+                if (PercentageRecoverable == null)
                 {
-                    yield return new ValidationResult("Please answer this question", new[] { "IsHundredPercentRecoverable" });
+                    yield return new ValidationResult("Please provide the percentage of the material that is recoverable", new[] { "PercentageRecoverable" });
                 }
 
-                if (IsHundredPercentRecoverable == false)
+                if (PercentageRecoverable == null || percentageRecoverable > 100M || percentageRecoverable < 0M)
                 {
-                    if (PercentageRecoverable == null)
-                    {
-                        yield return new ValidationResult("Please provide the percentage of the material that is recoverable", new[] { "PercentageRecoverable" });
-                    }
-
-                    if (string.IsNullOrEmpty(MethodOfDisposal))
-                    {
-                        yield return new ValidationResult("Please provide details of the method of disposal for the non recoverable waste", new[] { "MethodOfDisposal" });
-                    }
+                    yield return new ValidationResult("The percentage (%) of recoverable material must be from 0 to 100", new[] { "PercentageRecoverable" });
+                }
+            }
+            if (PercentageRecoverable != null)
+            {
+                if (IsProvidedByImporter)
+                {
+                    yield return new ValidationResult("Please enter either a description or check the box", new[] { "PercentageRecoverable", "IsProvidedByImporter" });
                 }
             }
         }

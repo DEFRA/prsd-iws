@@ -79,6 +79,7 @@
     <Compile Include="Admin\SetDecisionHandlerTests.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
+    <Compile Include="RecoveryInfo\SetRecoveryPercentageDataHandlerTests.cs" />
     <Compile Include="TestUserContext.cs" />
     <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />
     <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />

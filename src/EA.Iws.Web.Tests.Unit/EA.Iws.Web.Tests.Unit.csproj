@@ -157,6 +157,7 @@
     <Compile Include="Controllers\NewNotificationControllerTests.cs" />
     <Compile Include="Controllers\CustomsOfficeControllerTests.cs" />
     <Compile Include="Controllers\ProducerControllerTests.cs" />
+    <Compile Include="Controllers\RecoveryInfoControllerTests.cs" />
     <Compile Include="Controllers\StateOfImportControllerTests.cs" />
     <Compile Include="Controllers\TransitStateControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
+    <Compile Include="ViewModels\MethodOfDisposalViewModelTests.cs" />
     <Compile Include="ViewModels\RecoveryPercentageViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />
     <Compile Include="ViewModels\YcodeHcodeUnClassViewModelTests.cs" />

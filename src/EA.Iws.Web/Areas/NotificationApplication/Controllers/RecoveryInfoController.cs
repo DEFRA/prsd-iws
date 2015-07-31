@@ -47,20 +47,55 @@
             {
                 try
                 {
-                    if (model.IsHundredPercentRecoverable.GetValueOrDefault())
-                    {
-                        model.MethodOfDisposal = null;
-                        model.PercentageRecoverable = null;
-                    }
-
-                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-
                     if (model.IsProvidedByImporter)
                     {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId});
+                        await client.SendAsync(User.GetAccessToken(), new SetRecoveryPercentageData(model.NotificationId, true, null, null));
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                     }
 
-                    return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = !model.IsHundredPercentRecoverable.GetValueOrDefault() });
+                    if (model.PercentageRecoverable.HasValue && model.PercentageRecoverable.Value == 100.00M)
+                    {
+                        await client.SendAsync(User.GetAccessToken(), model.ToRequest());
+                        return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = false });
+                    }
+
+                    return RedirectToAction("MethodOfDisposal", "RecoveryInfo", new { id = model.NotificationId, recoveryPercentage = model.PercentageRecoverable.GetValueOrDefault() });
+                }
+                catch (ApiBadRequestException e)
+                {
+                    this.HandleBadRequest(e);
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult MethodOfDisposal(Guid id, decimal recoveryPercentage)
+        {
+            var model = new MethodOfDisposalViewModel(id, recoveryPercentage);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> MethodOfDisposal(MethodOfDisposalViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
+                {
+                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
+                    return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = true });
                 }
                 catch (ApiBadRequestException e)
                 {

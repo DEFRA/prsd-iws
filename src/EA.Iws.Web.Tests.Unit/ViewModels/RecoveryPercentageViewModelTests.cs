@@ -13,58 +13,82 @@
 
     public class RecoveryPercentageViewModelTests
     {
-        private const string MethodOfDisposal = "some disposal method description";
-
         [Fact]
-        public async Task IsNotProvidedByImporter_IsHundredPercentRecoverableIsNull_ValidationError()
+        public async Task IsProvidedByImporterIsFalse_PercentageRecoverableIsNull_ValidationError()
         {
             var viewModel = new RecoveryPercentageViewModel();
             viewModel.IsProvidedByImporter = false;
-            viewModel.IsHundredPercentRecoverable = null;
-
-            var controller = GetMockRecoveryInfoController(viewModel);
-            var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
-
-            Assert.False(result.ViewData.ModelState.IsValid);
-        }
-
-        [Fact]
-        public async Task IsProvidedByImporter_IsHundredPercentRecoverableIsFalse_PercentageRecoverableIsNull_ValidationError()
-        {
-            var viewModel = new RecoveryPercentageViewModel();
-            viewModel.IsHundredPercentRecoverable = false;
             viewModel.PercentageRecoverable = null;
 
             var controller = GetMockRecoveryInfoController(viewModel);
             var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
 
-            Assert.False(result.ViewData.ModelState.IsValid);
+            Assert.False(result != null && result.ViewData.ModelState.IsValid);
         }
 
         [Fact]
-        public async Task IsProvidedByImporter_IsHundredPercentRecoverableIsFalse_MethodOfDisposalIsNull_ValidationError()
+        public async Task IsProvidedByImporterIsProvided_PercentageRecoverableIsProvided_ValidationError()
         {
             var viewModel = new RecoveryPercentageViewModel();
-            viewModel.IsHundredPercentRecoverable = false;
-            viewModel.MethodOfDisposal = null;
+            viewModel.IsProvidedByImporter = true;
+            viewModel.PercentageRecoverable = 12.34M;
 
             var controller = GetMockRecoveryInfoController(viewModel);
             var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
 
-            Assert.False(result.ViewData.ModelState.IsValid);
+            Assert.False(result != null && result.ViewData.ModelState.IsValid);
         }
 
         [Fact]
-        public async Task IsProvidedByImporter_IsHundredPercentRecoverableIsFalse_MethodOfDisposalIsEmpty_ValidationError()
+        public async Task IsProvidedByImporterIsFalse_PercentRecoverableIsLessThanZero_ValidationError()
         {
             var viewModel = new RecoveryPercentageViewModel();
-            viewModel.IsHundredPercentRecoverable = false;
-            viewModel.MethodOfDisposal = string.Empty;
+            viewModel.IsProvidedByImporter = false;
+            viewModel.PercentageRecoverable = -10M;
 
             var controller = GetMockRecoveryInfoController(viewModel);
             var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
 
-            Assert.False(result.ViewData.ModelState.IsValid);
+            Assert.False(result != null && result.ViewData.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task IsProvidedByImporterIsFalse_PercentRecoverableIsGreaterThanHundred_ValidationError()
+        {
+            var viewModel = new RecoveryPercentageViewModel();
+            viewModel.IsProvidedByImporter = false;
+            viewModel.PercentageRecoverable = 200M;
+
+            var controller = GetMockRecoveryInfoController(viewModel);
+            var result = await controller.RecoveryPercentage(viewModel) as ViewResult;
+
+            Assert.False(result != null && result.ViewData.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task IsProvidedByImporterIsFalse_PercentRecoverableIsZero_IsValid()
+        {
+            var viewModel = new RecoveryPercentageViewModel();
+            viewModel.IsProvidedByImporter = false;
+            viewModel.PercentageRecoverable = 0M;
+
+            var controller = GetMockRecoveryInfoController(viewModel);
+            await controller.RecoveryPercentage(viewModel);
+
+            Assert.True(controller.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task IsProvidedByImporterIsFalse_PercentRecoverableIsHundred_IsValid()
+        {
+            var viewModel = new RecoveryPercentageViewModel();
+            viewModel.IsProvidedByImporter = false;
+            viewModel.PercentageRecoverable = 100M;
+
+            var controller = GetMockRecoveryInfoController(viewModel);
+            await controller.RecoveryPercentage(viewModel);
+
+            Assert.True(controller.ModelState.IsValid);
         }
 
         private static RecoveryInfoController GetMockRecoveryInfoController(object viewModel)
@@ -72,10 +96,9 @@
             var client = A.Fake<IIwsClient>();
 
             var controller = new RecoveryInfoController(() => client);
-            // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();
-            Validator.TryValidateObject(viewModel, validationContext, validationResults, true);
+            Validator.TryValidateObject(viewModel, validationContext, validationResults, false);
             foreach (var validationResult in validationResults)
             {
                 controller.ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
