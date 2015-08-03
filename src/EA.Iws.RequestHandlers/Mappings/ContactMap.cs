@@ -3,20 +3,40 @@
     using Core.Shared;
     using Domain;
     using Prsd.Core.Mapper;
-    using Requests.Shared;
 
     internal class ContactMap : IMap<Contact, ContactData>
     {
         public ContactData Map(Contact source)
         {
-            return new ContactData
+            var contactData = new ContactData
             {
                 FirstName = source.FirstName,
                 LastName = source.LastName,
-                Telephone = source.Telephone,
                 Fax = source.Fax,
                 Email = source.Email
             };
+
+            if (source.Telephone.Contains("-") && (source.Telephone.Split('-').Length > 0))
+            {
+                contactData.TelephonePrefix = source.Telephone.Split('-')[0];
+                contactData.Telephone = source.Telephone.Split('-')[1];
+            }
+            else
+            {
+                contactData.Telephone = source.Telephone;
+            }
+
+            if (!string.IsNullOrEmpty(source.Fax) && source.Fax.Contains("-") && (source.Fax.Split('-').Length > 0))
+            {
+                contactData.FaxPrefix = source.Fax.Split('-')[0];
+                contactData.Fax = source.Fax.Split('-')[1];
+            }
+            else
+            {
+                contactData.Fax = source.Fax;
+            }
+
+            return contactData;
         }
     }
 }

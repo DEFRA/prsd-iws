@@ -12,16 +12,44 @@
     @Html.Gds().TextBoxFor(model => model.LastName)
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone)">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
     @Html.Gds().LabelFor(model => model.Telephone)
     @Html.Gds().ValidationMessageFor(model => model.Telephone)
-    @Html.Gds().TextBoxFor(model => model.Telephone)
+    @Html.Gds().ValidationMessageFor(model => model.TelephonePrefix)
+    @Html.Gds().HintParagraph("Enter the full telephone number including the international dialling code for example +44  1709389201")
+    <fieldset>
+        <div class="international-number">
+            <div class="plus-label">
+                +
+            </div>
+            <div class="international-number-prefix">
+                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, false)
+            </div>
+            <div class="international-number-body">
+                @Html.Gds().TextBoxFor(m => m.Telephone, false)
+            </div>
+        </div>
+    </fieldset>
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Fax)">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Fax) @Html.Gds().FormGroupClass(m => m.FaxPrefix)">
     @Html.Gds().LabelFor(model => model.Fax)
     @Html.Gds().ValidationMessageFor(model => model.Fax)
-    @Html.Gds().TextBoxFor(model => model.Fax)
+    @Html.Gds().ValidationMessageFor(model => model.FaxPrefix)
+    @Html.Gds().HintParagraph("Enter the full fax number including the international dialling code for example +44  1709389201")
+    <fieldset>
+        <div class="international-number">
+            <div class="plus-label">
+                +
+            </div>
+            <div class="international-number-prefix">
+                @Html.Gds().TextBoxFor(m => m.FaxPrefix, false)
+            </div>
+            <div class="international-number-body">
+                @Html.Gds().TextBoxFor(m => m.Fax, false)
+            </div>
+        </div>
+    </fieldset>
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">

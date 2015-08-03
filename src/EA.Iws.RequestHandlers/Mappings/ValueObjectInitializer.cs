@@ -20,6 +20,11 @@
 
         public static Contact CreateContact(ContactData contact)
         {
+            contact.Telephone = contact.TelephonePrefix + "-" + contact.Telephone;
+            if (!string.IsNullOrWhiteSpace(contact.Fax))
+            {
+                contact.Fax = contact.FaxPrefix + "-" + contact.Fax;
+            }
             return new Contact(contact.FirstName, contact.LastName, contact.Telephone, contact.Email, contact.Fax);
         }
 

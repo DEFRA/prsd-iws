@@ -695,3 +695,20 @@ dl.object-summary {
         min-width: 100px;
     }
 }
+
+.international-number {
+
+  .international-number-body {
+    display: inline-block;
+    width: 65%;
+  }
+
+    .international-number-prefix {
+    display: inline-block;
+    width: 100px;
+  }
+
+   .plus-label {
+   display: inline-block;
+  }
+}
