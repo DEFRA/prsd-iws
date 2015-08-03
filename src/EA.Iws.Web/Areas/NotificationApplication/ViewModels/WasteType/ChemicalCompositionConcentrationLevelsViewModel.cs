@@ -12,7 +12,12 @@
     {
         public Guid NotificationId { get; set; }
 
-        public List<WasteTypeCompositionData> WasteComposition { get; set; }
+        private List<WasteTypeCompositionData> wasteComposition = new List<WasteTypeCompositionData>();
+        public List<WasteTypeCompositionData> WasteComposition
+        {
+            get { return wasteComposition.OrderBy(wc => wc.ChemicalCompositionCategory).ToList(); }
+            set { wasteComposition = value; }
+        }
 
         public List<WasteTypeCompositionData> OtherCodes { get; set; }
 

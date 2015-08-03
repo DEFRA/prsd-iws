@@ -15,6 +15,7 @@
     [Authorize]
     public class WasteTypeController : Controller
     {
+        private const string NotApplicable = "NA";
         private readonly Func<IIwsClient> apiClient;
 
         public WasteTypeController(Func<IIwsClient> apiClient)
@@ -42,6 +43,7 @@
 
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChemicalComposition(ChemicalCompositionViewModel model)
@@ -59,16 +61,15 @@
                     return RedirectToAction("RdfSrfType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.RDF });
                 case "Wood":
                     return RedirectToAction("WoodType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.Wood });
-                case "Other":
+                default:
                     return RedirectToAction("OtherWaste", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.Other });
             }
-            return View();
         }
 
         [HttpGet]
         public async Task<ActionResult> OtherWaste(Guid id, ChemicalCompositionType chemicalCompositionType)
         {
-            var model = new OtherWasteViewModel()
+            var model = new OtherWasteViewModel
             {
                 NotificationId = id
             };
@@ -76,13 +77,14 @@
             using (var client = apiClient())
             {
                 var wasteTypeData = await client.SendAsync(User.GetAccessToken(), new GetWasteType(id));
+
                 if (wasteTypeData != null && wasteTypeData.ChemicalCompositionName != null)
                 {
                     model.Description = wasteTypeData.ChemicalCompositionName;
                 }
-            }
 
-            return View(model);
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -96,16 +98,21 @@
 
             using (var client = apiClient())
             {
-                await client.SendAsync(User.GetAccessToken(), new CreateWasteType { NotificationId = model.NotificationId, WasteCompositionName = model.Description, ChemicalCompositionType = ChemicalCompositionType.Other });
-            }
+                await client.SendAsync(User.GetAccessToken(), new CreateWasteType
+                {
+                    NotificationId = model.NotificationId,
+                    WasteCompositionName = model.Description,
+                    ChemicalCompositionType = ChemicalCompositionType.Other
+                });
 
-            return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId });
+                return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId });
+            }
         }
 
         [HttpGet]
         public async Task<ActionResult> OtherWasteAdditionalInformation(Guid id)
         {
-            var model = new OtherWasteAdditionalInformationViewModel()
+            var model = new OtherWasteAdditionalInformationViewModel
             {
                 NotificationId = id
             };
@@ -118,9 +125,9 @@
                     model.Description = wasteTypeData.OtherWasteTypeDescription;
                     model.HasAttachement = wasteTypeData.HasAnnex;
                 }
-            }
 
-            return View(model);
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -143,13 +150,7 @@
         [HttpGet]
         public async Task<ActionResult> WoodType(Guid id, ChemicalCompositionType chemicalCompositionType)
         {
-            var model = new ChemicalCompositionConcentrationLevelsViewModel()
-            {
-                NotificationId = id,
-                WasteComposition = GetChemicalCompositionCategorys(),
-                OtherCodes = new List<WasteTypeCompositionData> { new WasteTypeCompositionData() },
-                ChemicalCompositionType = chemicalCompositionType
-            };
+            var model = GetBlankViewModel(id, chemicalCompositionType);
 
             await GetExistingCompositions(id, chemicalCompositionType, model);
 
@@ -175,17 +176,20 @@
                 return View(model);
             }
 
-            //Join optional and mandatory collections
+            // Join optional and mandatory collections
             model.WasteComposition.AddRange(model.OtherCodes);
 
-            //remove null values
             var blanksRemoved = model.WasteComposition.Where(c => !string.IsNullOrEmpty(c.Constituent));
 
-            //Remove NA values
-            var filteredWasteCompositions = blanksRemoved.Where(
-                    c => !(c.MinConcentration.ToUpper().Equals("NA") || c.MaxConcentration.ToUpper().Equals("NA") || c.Constituent.ToUpper().Equals("NA"))).ToList();
+            var filteredWasteCompositions = RemoveNotApplicableValues(blanksRemoved);
 
-            var createNewWasteType = new CreateWasteType { NotificationId = model.NotificationId, ChemicalCompositionType = model.ChemicalCompositionType, ChemicalCompositionDescription = model.Description, WasteCompositions = filteredWasteCompositions };
+            var createNewWasteType = new CreateWasteType
+            {
+                NotificationId = model.NotificationId,
+                ChemicalCompositionType = model.ChemicalCompositionType,
+                ChemicalCompositionDescription = model.Description,
+                WasteCompositions = filteredWasteCompositions
+            };
 
             using (var client = apiClient())
             {
@@ -199,13 +203,7 @@
         [HttpGet]
         public async Task<ActionResult> RdfSrfType(Guid id, ChemicalCompositionType chemicalCompositionType)
         {
-            var model = new ChemicalCompositionConcentrationLevelsViewModel()
-            {
-                NotificationId = id,
-                WasteComposition = GetChemicalCompositionCategorys(),
-                OtherCodes = new List<WasteTypeCompositionData> { new WasteTypeCompositionData() },
-                ChemicalCompositionType = chemicalCompositionType
-            };
+            var model = GetBlankViewModel(id, chemicalCompositionType);
 
             await GetExistingCompositions(id, chemicalCompositionType, model);
 
@@ -238,9 +236,15 @@
             var blanksRemoved = model.WasteComposition.Where(c => !string.IsNullOrEmpty(c.Constituent));
 
             //Remove NA values
-            var filteredWasteCompositions = blanksRemoved.Where(c => !(c.MinConcentration.ToUpper().Equals("NA") || c.MaxConcentration.ToUpper().Equals("NA") || c.Constituent.ToUpper().Equals("NA"))).ToList();
+            var filteredWasteCompositions = RemoveNotApplicableValues(blanksRemoved);
 
-            var createNewWasteType = new CreateWasteType { NotificationId = model.NotificationId, ChemicalCompositionType = model.ChemicalCompositionType, ChemicalCompositionDescription = model.Description, WasteCompositions = filteredWasteCompositions };
+            var createNewWasteType = new CreateWasteType
+            {
+                NotificationId = model.NotificationId,
+                ChemicalCompositionType = model.ChemicalCompositionType,
+                ChemicalCompositionDescription = model.Description,
+                WasteCompositions = filteredWasteCompositions
+            };
 
             using (var client = apiClient())
             {
@@ -278,14 +282,16 @@
                 return View(model);
             }
 
-            //Remove NA values
-            var filteredWasteCompositions = model.WasteComposition.Where(
-                    c => !(c.MinConcentration.ToUpper().Equals("NA") || c.MaxConcentration.ToUpper().Equals("NA") || c.Constituent.ToUpper().Equals("NA"))).ToList();
-
             using (var client = apiClient())
             {
-                await client.SendAsync(User.GetAccessToken(), new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, model.Energy, filteredWasteCompositions));
-                await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.HasAnnex, model.NotificationId));
+                await
+                    client.SendAsync(User.GetAccessToken(),
+                        new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType,
+                            model.FurtherInformation, model.Energy, RemoveNotApplicableValues(model.WasteComposition)));
+                await
+                    client.SendAsync(User.GetAccessToken(),
+                        new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.HasAnnex,
+                            model.NotificationId));
             }
             return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
         }
@@ -295,7 +301,7 @@
         {
             var categories = GetWasteInformationType();
 
-            var model = new ChemicalCompositionInformationViewModel()
+            var model = new ChemicalCompositionInformationViewModel
             {
                 NotificationId = id,
                 WasteComposition = categories
@@ -315,19 +321,18 @@
                 return View(model);
             }
 
-            //Remove NA values
-            var filteredWasteCompositions = model.WasteComposition.Where(
-                    c => !(c.MinConcentration.ToUpper().Equals("NA") || c.MaxConcentration.ToUpper().Equals("NA") || c.Constituent.ToUpper().Equals("NA"))).ToList();
-        
+            var filteredWasteCompositions = RemoveNotApplicableValues(model.WasteComposition);
+
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, model.Energy, filteredWasteCompositions));
                 await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.HasAnnex, model.NotificationId));
             }
+
             return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
         }
 
-        private List<WasteTypeCompositionData> GetChemicalCompositionCategorys()
+        private List<WasteTypeCompositionData> GetChemicalCompositionCategories()
         {
             return Enum.GetValues(typeof(ChemicalCompositionCategory)).Cast<int>()
                 .Select(c => new WasteTypeCompositionData { ChemicalCompositionCategory = (ChemicalCompositionCategory)c })
@@ -358,14 +363,28 @@
             }
         }
 
+        private List<T> RemoveNotApplicableValues<T>(IEnumerable<T> data) where T : ChemicalCompositionData
+        {
+            return data.Where(
+                c =>
+                    !(c.MinConcentration.ToUpper().Equals(NotApplicable) ||
+                      c.MaxConcentration.ToUpper().Equals(NotApplicable) ||
+                      c.Constituent.ToUpper().Equals(NotApplicable))).ToList();
+        }
+
         private async Task GetExistingCompositions(Guid id, ChemicalCompositionType chemicalCompositionType, ChemicalCompositionConcentrationLevelsViewModel model)
         {
             using (var client = apiClient())
             {
                 var wasteTypeData = await client.SendAsync(User.GetAccessToken(), new GetWasteType(id));
-                if (wasteTypeData != null && wasteTypeData.WasteCompositionData != null && wasteTypeData.WasteCompositionData.Count > 0 && wasteTypeData.ChemicalCompositionType == chemicalCompositionType)
+
+                // If the old data does not exist or corresponds to a different waste type data.
+                if (!ContainsData(wasteTypeData) || wasteTypeData.ChemicalCompositionType != chemicalCompositionType)
                 {
-                    var compositions = wasteTypeData.WasteCompositionData.Select(c => new WasteTypeCompositionData
+                    return;
+                }
+
+                var compositions = wasteTypeData.WasteCompositionData.Select(c => new WasteTypeCompositionData
                     {
                         ChemicalCompositionCategory = c.ChemicalCompositionCategory,
                         Constituent = c.Constituent,
@@ -373,20 +392,51 @@
                         MaxConcentration = c.MaxConcentration.ToString()
                     }).ToList();
 
-                    model.WasteComposition = compositions.Where(c => c.ChemicalCompositionCategory != ChemicalCompositionCategory.Other).ToList();
-                    model.OtherCodes = compositions.Where(c => c.ChemicalCompositionCategory == ChemicalCompositionCategory.Other).ToList();
+                // Where the waste concentration is not applicable it is not stored.
+                var notApplicableCompositions =
+                    model.WasteComposition.Where(
+                        wc =>
+                            compositions.All(c => c.ChemicalCompositionCategory != wc.ChemicalCompositionCategory)).Select(wc => new WasteTypeCompositionData
+                            {
+                                ChemicalCompositionCategory = wc.ChemicalCompositionCategory,
+                                Constituent = wc.Constituent,
+                                MinConcentration = NotApplicable,
+                                MaxConcentration = NotApplicable
+                            });
 
-                    if (model.OtherCodes.Count == 0)
-                    {
-                        model.OtherCodes.Add(new WasteTypeCompositionData());
-                    }
+                compositions.AddRange(notApplicableCompositions);
 
-                    if (chemicalCompositionType == ChemicalCompositionType.Wood)
-                    {
-                        model.Description = wasteTypeData.WoodTypeDescription;
-                    }
+                model.WasteComposition = compositions.Where(c => c.ChemicalCompositionCategory != ChemicalCompositionCategory.Other).ToList();
+                model.OtherCodes = compositions.Where(c => c.ChemicalCompositionCategory == ChemicalCompositionCategory.Other).ToList();
+
+                if (model.OtherCodes.Count == 0)
+                {
+                    model.OtherCodes.Add(new WasteTypeCompositionData());
+                }
+
+                if (chemicalCompositionType == ChemicalCompositionType.Wood)
+                {
+                    model.Description = wasteTypeData.WoodTypeDescription;
                 }
             }
+        }
+
+        private bool ContainsData(WasteTypeData wasteTypeData)
+        {
+            return wasteTypeData != null
+                   && wasteTypeData.WasteCompositionData != null
+                   && wasteTypeData.WasteCompositionData.Count > 0;
+        }
+
+        private ChemicalCompositionConcentrationLevelsViewModel GetBlankViewModel(Guid id, ChemicalCompositionType chemicalCompositionType)
+        {
+            return new ChemicalCompositionConcentrationLevelsViewModel
+            {
+                NotificationId = id,
+                WasteComposition = GetChemicalCompositionCategories(),
+                OtherCodes = new List<WasteTypeCompositionData> { new WasteTypeCompositionData() },
+                ChemicalCompositionType = chemicalCompositionType
+            };
         }
     }
 }
