@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Infrastructure
 @model EA.Iws.Web.ViewModels.Registration.EditOrganisationViewModel
 
 @{
@@ -48,7 +49,6 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
         @Html.Gds().LabelFor(m => m.CountryId)
         @Html.Gds().ValidationMessageFor(m => m.CountryId)
-        @*@Html.Gds().DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "Id", "Name", Model.DefaultCountry.Id))*@
         @Html.Gds().DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries)
         @Html.HiddenFor(m => m.DefaultCountryId)
     </div>
@@ -78,6 +78,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" class="button" value="Update" />
+        <input type="submit" class="button" value="Update"/>
     </div>
+    <p>@Html.ActionLink("Go back to My account", "Home", "Applicant", new { id = User.GetUserId(), area = string.Empty }, null)</p>
 }
