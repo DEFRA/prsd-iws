@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Organisations
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Registration;
@@ -45,7 +46,7 @@
 
             address = new Address(building, address1, address2, town, null, postcode, country.Name);
 
-            A.CallTo(() => context.Organisations).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { GetOrganisation() }));
+            A.CallTo(() => context.Organisations).Returns(dbContextHelper.GetAsyncEnabledDbSet(new List<Organisation> { GetOrganisation() }));
 
             A.CallTo(() => context.Users).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { GetUser() }));
             A.CallTo(() => userContext.UserId).Returns(userId);

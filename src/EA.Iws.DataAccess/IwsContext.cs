@@ -12,6 +12,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Domain;
+    using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
@@ -49,6 +50,12 @@
         public virtual DbSet<PricingStructure> PricingStructures { get; set; }
 
         public virtual DbSet<NotificationAssessment> NotificationAssessments { get; set; }
+
+        public virtual DbSet<NotificationDecision> NotificationDecisions { get; set; }
+
+        public virtual DbSet<NotificationDates> NotificationDates { get; set; }
+
+        public virtual DbSet<FinancialGuarantee> FinancialGuarantees { get; set; }
 
         public virtual DbSet<BankHoliday> BankHolidays { get; set; }
 

@@ -8,30 +8,33 @@
     {
         public NotificationApplicationCompletionProgress Map(NotificationApplication source)
         {
+            var progress = new NotificationProgress(source);
+
             return new NotificationApplicationCompletionProgress
             {
-                AreOperationCodesChosen = source.AreOperationCodesChosen(),
-                ArePhysicalCharacteristicsCompleted = source.ArePhysicalCharacteristicsCompleted(),
-                AreTransitStatesCompleted = source.AreTransitStatesCompleted(),
-                AreWasteCodesCompleted = source.AreWasteCodesCompleted(),
-                IsCarrierCompleted = source.IsCarrierCompleted(),
-                IsChemicalCompositionCompleted = source.IsChemicalCompositionCompleted(),
-                IsCustomsOfficeCompleted = source.IsCustomsOfficeCompleted(),
-                IsExporterCompleted = source.IsExporterCompleted(),
-                IsFacilityCompleted = source.IsFacilityCompleted(),
-                IsImporterCompleted = source.IsImporterCompleted(),
-                IsIntendedShipmentsCompleted = source.IsIntendedShipmentsCompleted(),
-                IsMeansOfTransportCompleted = source.IsMeansOfTransportCompleted(),
-                IsPackagingTypesCompleted = source.IsPackagingTypesCompleted(),
-                IsPreconsentStatusChosen = source.IsPreconsentStatusChosen(),
-                IsProcessOfGenerationCompleted = source.IsProcessOfGenerationCompleted(),
-                IsProducerCompleted = source.IsProducerCompleted(),
-                IsReasonForExportCompleted = source.IsReasonForExportCompleted(),
-                IsSpecialHandlingCompleted = source.IsSpecialHandlingCompleted(),
-                IsStateOfExportCompleted = source.IsStateOfExportCompleted(),
-                IsStateOfImportCompleted = source.IsStateOfImportCompleted(),
-                IsTechnologyEmployedCompleted = source.IsTechnologyEmployedCompleted(),
-                IsWasteRecoveryInformationCompleted = source.IsWasteRecoveryInformationCompleted()
+                AreOperationCodesChosen = progress.AreOperationCodesChosen(),
+                ArePhysicalCharacteristicsCompleted = progress.ArePhysicalCharacteristicsCompleted(),
+                AreTransitStatesCompleted = progress.AreTransitStatesCompleted(),
+                AreWasteCodesCompleted = progress.AreWasteCodesCompleted(),
+                IsCarrierCompleted = progress.IsCarrierCompleted(),
+                IsChemicalCompositionCompleted = progress.IsChemicalCompositionCompleted(),
+                IsCustomsOfficeCompleted = progress.IsCustomsOfficeCompleted(),
+                IsExporterCompleted = progress.IsExporterCompleted(),
+                IsFacilityCompleted = progress.IsFacilityCompleted(),
+                IsImporterCompleted = progress.IsImporterCompleted(),
+                IsIntendedShipmentsCompleted = progress.IsIntendedShipmentsCompleted(),
+                IsMeansOfTransportCompleted = progress.IsMeansOfTransportCompleted(),
+                IsPackagingTypesCompleted = progress.IsPackagingTypesCompleted(),
+                IsPreconsentStatusChosen = progress.IsPreconsentStatusChosen(),
+                IsProcessOfGenerationCompleted = progress.IsProcessOfGenerationCompleted(),
+                IsProducerCompleted = progress.IsProducerCompleted(),
+                IsReasonForExportCompleted = progress.IsReasonForExportCompleted(),
+                IsSpecialHandlingCompleted = progress.IsSpecialHandlingCompleted(),
+                IsStateOfExportCompleted = progress.IsStateOfExportCompleted(),
+                IsStateOfImportCompleted = progress.IsStateOfImportCompleted(),
+                IsTechnologyEmployedCompleted = progress.IsTechnologyEmployedCompleted(),
+                IsWasteRecoveryInformationCompleted = progress.IsWasteRecoveryInformationCompleted(),
+                IsAllComplete = progress.IsAllCompleted()
             };
         }
     }

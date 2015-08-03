@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using Core.Admin;
+    using Core.FinancialGuarantee;
     using Domain;
     using Domain.FinancialGuarantee;
     using Prsd.Core.Mapper;
@@ -16,6 +17,14 @@
 
         public FinancialGuaranteeData Map(FinancialGuarantee source, UKCompetentAuthority parameter)
         {
+            if (source == null)
+            {
+                return new FinancialGuaranteeData
+                {
+                    Status = FinancialGuaranteeStatus.AwaitingApplication
+                };
+            }
+
             return new FinancialGuaranteeData
             {
                 Status = source.Status,

@@ -4,7 +4,6 @@
 
     public enum FinancialGuaranteeStatus
     {
-        NotApplicable = 0,
         [Display(Name = "Awaiting application")]
         AwaitingApplication = 1,
         [Display(Name = "Application received")]

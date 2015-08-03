@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DataAccess.Mappings
 {
+    using System.Collections.Generic;
     using System.Data.Entity.ModelConfiguration;
     using Domain.NotificationAssessment;
+    using Prsd.Core.Helpers;
 
     internal class NotificationAssessmentMapping : EntityTypeConfiguration<NotificationAssessment>
     {
@@ -9,7 +11,9 @@
         {
             ToTable("NotificationAssessment", "Notification");
 
-            HasOptional(x => x.FinancialGuarantee)
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<NotificationAssessment, ICollection<NotificationStatusChange>>(
+                    "StatusChangeCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationAssessmentId"));
         }

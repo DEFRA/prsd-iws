@@ -35,8 +35,9 @@
       <HintPath>..\packages\EA.Prsd.Core.1.0.15211-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stateless">
+    <Reference Include="Stateless, Version=2.5.21.0, Culture=neutral, PublicKeyToken=93038f0927583c9a, processorArchitecture=MSIL">
       <HintPath>..\packages\Stateless.2.5.21.0\lib\portable-net40+sl50+win+wp80\Stateless.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -61,17 +62,24 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
+    <Compile Include="NotificationApplication\INotificationProgressCalculator.cs" />
+    <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
+    <Compile Include="NotificationAssessment\NotificationDates.cs" />
+    <Compile Include="NotificationAssessment\NotificationDecision.cs" />
+    <Compile Include="NotificationAssessment\NotificationStatusChange.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessment.cs" />
     <Compile Include="Events\RegistrationRejectedEvent.cs" />
     <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\INotificationNumberGenerator.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.PhysicalCharacteristics.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.Progress.cs" />
+    <Compile Include="NotificationApplication\NotificationProgress.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.WasteCodes.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.WasteGenerationProcess.cs" />
     <Compile Include="NotificationApplication\PricingStructure.cs" />
     <Compile Include="NotificationApplication\ShipmentQuantityRange.cs" />
     <Compile Include="NotificationApplication\WasteAdditionalInformation.cs" />
+    <Compile Include="NotificationAssessment\NotificationStatusChangeEvent.cs" />
+    <Compile Include="NotificationAssessment\NotificationSubmittedEvent.cs" />
     <Compile Include="ProducerBusiness.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\ExitCustomsOffice.cs" />

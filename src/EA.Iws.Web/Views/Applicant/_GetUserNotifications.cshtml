@@ -19,7 +19,10 @@ else
                     Notification number
                 </th>
                 <th class="formatted-block-table-header">
-                    Created
+                    Last updated
+                </th>
+                <th class="formatted-block-table-header">
+                    Status
                 </th>
                 <th class="formatted-block-table-header">
 
@@ -32,12 +35,17 @@ else
                 <tr>
                     <td>
                         <div class="formatted-block-table-cell">
-                        @Html.DisplayFor(m => m[i].NotificationNumber)
-                            </div>
+                            @Html.DisplayFor(m => m[i].NotificationNumber)
+                        </div>
                     </td>
                     <td>
                         <div class="formatted-block-table-cell">
-                            @Html.Raw(Model[i].CreatedDate.ToString("d MMMM yyyy"))
+                            @Html.Raw(Model[i].LastUpdated.ToString("d MMMM yyyy"))
+                        </div>
+                    </td>
+                    <td>
+                        <div class="formatted-block-table-cell">
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model[i].Status)
                         </div>
                     </td>
                     <td>

@@ -31,18 +31,6 @@
 
         public bool IsWasteRecoveryInformationCompleted { get; set; }
 
-        public bool IsAllComplete
-        {
-            get
-            {
-                return IsExporterCompleted && IsProducerCompleted && IsImporterCompleted && IsFacilityCompleted
-                       && IsPreconsentStatusChosen && AreOperationCodesChosen && IsTechnologyEmployedCompleted && IsReasonForExportCompleted 
-                       && IsCarrierCompleted && IsMeansOfTransportCompleted && IsPackagingTypesCompleted && IsSpecialHandlingCompleted 
-                       && IsStateOfExportCompleted && IsStateOfImportCompleted && IsCustomsOfficeCompleted 
-                       && IsIntendedShipmentsCompleted 
-                       && IsChemicalCompositionCompleted && IsProcessOfGenerationCompleted && ArePhysicalCharacteristicsCompleted && AreWasteCodesCompleted 
-                       && IsWasteRecoveryInformationCompleted;
-            }
-        }
+        public bool IsAllComplete { get; set; }
     }
 }

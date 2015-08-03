@@ -23,11 +23,11 @@
 
         public async Task<FinancialGuaranteeData> HandleAsync(GetFinancialGuaranteeDataByNotificationApplicationId message)
         {
-            var assessment =
-                await context.NotificationAssessments.SingleAsync(na => na.NotificationApplicationId == message.Id);
+            var financialGuarantee =
+                await context.FinancialGuarantees.SingleOrDefaultAsync(na => na.NotificationApplicationId == message.Id);
             var authority = (await context.NotificationApplications.SingleAsync(na => na.Id == message.Id)).CompetentAuthority;
 
-            return financialGuaranteeMap.Map(assessment.FinancialGuarantee, authority);
+            return financialGuaranteeMap.Map(financialGuarantee, authority);
         }
     }
 }

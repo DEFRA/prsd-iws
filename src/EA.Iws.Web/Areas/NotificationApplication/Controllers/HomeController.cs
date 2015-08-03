@@ -94,13 +94,19 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Disclaimer(DisclaimerViewModel model)
+        public async Task<ActionResult> Disclaimer(DisclaimerViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            return RedirectToAction("Submitted", "Home", new { id = model.Id });
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(),
+                    new SubmitNotification(model.Id));
+                return RedirectToAction("Submitted", "Home", new { id = model.Id });
+            }
         }
 
         [HttpGet]

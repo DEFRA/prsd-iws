@@ -11,6 +11,8 @@
     public class FinancialGuarantee : Entity
     {
         private const int WorkingDaysUntilDecisionRequired = 20;
+        
+        public Guid NotificationApplicationId { get; private set; }
 
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> completedTrigger;
@@ -18,9 +20,16 @@
 
         protected FinancialGuarantee()
         {
+            stateMachine = CreateStateMachine();
+        }
+
+        protected FinancialGuarantee(Guid notificationApplicationId)
+        {
+            CreatedDate = SystemTime.UtcNow;
+            NotificationApplicationId = notificationApplicationId;
             StatusChangeCollection = new List<FinancialGuaranteeStatusChange>();
             stateMachine = CreateStateMachine();
-            Status = FinancialGuaranteeStatus.NotApplicable;
+            Status = FinancialGuaranteeStatus.AwaitingApplication;
         }
 
         public DateTime? ReceivedDate { get; private set; }
@@ -67,14 +76,9 @@
             StatusChangeCollection.Add(statusChange);
         }
 
-        public static FinancialGuarantee Create()
+        public static FinancialGuarantee Create(Guid notificationApplicationId)
         {
-            var financialGuarantee = new FinancialGuarantee
-            {
-                CreatedDate = SystemTime.UtcNow
-            };
-
-            financialGuarantee.stateMachine.Fire(Trigger.Created);
+            var financialGuarantee = new FinancialGuarantee(notificationApplicationId);
 
             return financialGuarantee;
         }
@@ -102,9 +106,6 @@
             receivedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Received);
             completedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Completed);
 
-            stateMachine.Configure(FinancialGuaranteeStatus.NotApplicable)
-                .Permit(Trigger.Created, FinancialGuaranteeStatus.AwaitingApplication);
-
             stateMachine.Configure(FinancialGuaranteeStatus.AwaitingApplication)
                 .Permit(Trigger.Received, FinancialGuaranteeStatus.ApplicationReceived);
 
@@ -128,8 +129,7 @@
         private enum Trigger
         {
             Received,
-            Completed,
-            Created
+            Completed
         }
 
         public void UpdateReceivedDate(DateTime value)

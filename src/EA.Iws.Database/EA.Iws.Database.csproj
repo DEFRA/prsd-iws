@@ -75,11 +75,16 @@
     <Content Include="scripts\Update\Sprint12\20150722-113000-delete-existing-claims.sql" />
     <Content Include="scripts\Update\Sprint12\20150722-120000-rename-IsAdmin-column.sql" />
     <Content Include="scripts\Update\Sprint12\20150724-132324-create-notification-assessment-table.sql" />
+    <Content Include="scripts\Update\Sprint12\20150727-120000-create-financial-guarantee-table.sql" />
     <Content Include="scripts\Update\Sprint12\20150728-100423-add-decision-columns-to-notification-assessment.sql" />
     <Content Include="scripts\Update\Sprint13\20150730-120000-insert-data-into-ca-entry-exit-point.sql" />
     <Content Include="scripts\Update\Sprint13\20150730-160300-remove-gb-transit-authority.sql" />
     <Content Include="scripts\Update\Sprint13\20150803-162300-rename-database-column.sql" />
+    <Content Include="scripts\Update\Sprint13\20150803-163300-create-notification-status-table.sql" />
     <Content Include="scripts\Update\Sprint13\20150803-152000-bank-holidays.sql" />
+    <Content Include="scripts\Update\Sprint13\20150804-154400-split-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint13\20150804-170200-update-financial-guarantee-fk.sql" />
+    <Content Include="scripts\Update\Sprint13\20150805-141800-create-notification-assessment-records.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

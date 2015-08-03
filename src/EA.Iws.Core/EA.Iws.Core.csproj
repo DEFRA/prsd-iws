@@ -58,11 +58,11 @@
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
+    <Compile Include="NotificationAssessment\NotificationStatus.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />
     <Compile Include="Notification\RecoveryPercentageData.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
-    <Compile Include="Notification\Status.cs" />
     <Compile Include="OperationCodes\DisposalCode.cs" />
     <Compile Include="OperationCodes\OperationCodeData.cs" />
     <Compile Include="OperationCodes\RecoveryCode.cs" />

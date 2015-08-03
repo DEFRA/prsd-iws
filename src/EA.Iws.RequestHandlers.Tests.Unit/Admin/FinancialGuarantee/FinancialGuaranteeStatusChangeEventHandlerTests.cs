@@ -37,7 +37,7 @@
                 new User(UserId.ToString(), AnyString, AnyString, AnyString, AnyString)
             }));
 
-            financialGuarantee = FinancialGuarantee.Create();
+            financialGuarantee = FinancialGuarantee.Create(new Guid("68787AC6-7CF5-4862-8E7E-77E20172AECC"));
 
             receivedEvent = new FinancialGuaranteeStatusChangeEvent(financialGuarantee,
                 FinancialGuaranteeStatus.ApplicationReceived);

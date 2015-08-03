@@ -13,7 +13,7 @@
     <AssemblyName>EA.Iws.Domain.Tests.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>ccc8e219</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>ed05547d</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,28 +65,30 @@
     <Compile Include="AddressTests.cs" />
     <Compile Include="BusinessTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
-    <Compile Include="Notification\CustomsOfficeTests.cs" />
-    <Compile Include="Notification\NotificationApplicationTests.cs" />
-    <Compile Include="Notification\NotificationCustomsOfficeTests.cs" />
-    <Compile Include="Notification\NotificationExporterTests.cs" />
-    <Compile Include="Notification\NotificationCarrierTests.cs" />
-    <Compile Include="Notification\NotificationFacilityTests.cs" />
-    <Compile Include="Notification\NotificationImporterTests.cs" />
-    <Compile Include="Notification\NotificationOperationCodesTests.cs" />
-    <Compile Include="Notification\NotificationPackagingTests.cs" />
-    <Compile Include="Notification\NotificationPhysicalCharacteristicsTests.cs" />
-    <Compile Include="Notification\NotificationProducerTests.cs" />
-    <Compile Include="Notification\NotificationReasonForExportTests.cs" />
-    <Compile Include="Notification\NotificationRecoveryPercentageTests.cs" />
-    <Compile Include="Notification\NotificationRecoveryInfoTests.cs" />
-    <Compile Include="Notification\NotificationShipmentTests.cs" />
-    <Compile Include="Notification\NotificationTechnologyEmployedTests.cs" />
-    <Compile Include="Notification\NotificationSpecialHandlingTests.cs" />
-    <Compile Include="Notification\NotificationTransitStateTests.cs" />
-    <Compile Include="Notification\NotificationTransportRouteTests.cs" />
-    <Compile Include="Notification\NotificationWasteCodeTests.cs" />
-    <Compile Include="Notification\NotificationWasteGenerationProcessTests.cs" />
-    <Compile Include="Notification\NotificationWasteTypeTests.cs" />
+    <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
+    <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />
+    <Compile Include="NotificationApplication\NotificationApplicationTests.cs" />
+    <Compile Include="NotificationApplication\NotificationCustomsOfficeTests.cs" />
+    <Compile Include="NotificationApplication\NotificationExporterTests.cs" />
+    <Compile Include="NotificationApplication\NotificationCarrierTests.cs" />
+    <Compile Include="NotificationApplication\NotificationFacilityTests.cs" />
+    <Compile Include="NotificationApplication\NotificationImporterTests.cs" />
+    <Compile Include="NotificationApplication\NotificationOperationCodesTests.cs" />
+    <Compile Include="NotificationApplication\NotificationPackagingTests.cs" />
+    <Compile Include="NotificationApplication\NotificationPhysicalCharacteristicsTests.cs" />
+    <Compile Include="NotificationApplication\NotificationProducerTests.cs" />
+    <Compile Include="NotificationApplication\NotificationReasonForExportTests.cs" />
+    <Compile Include="NotificationApplication\NotificationRecoveryPercentageTests.cs" />
+    <Compile Include="NotificationApplication\NotificationRecoveryInfoTests.cs" />
+    <Compile Include="NotificationApplication\NotificationShipmentTests.cs" />
+    <Compile Include="NotificationApplication\NotificationTechnologyEmployedTests.cs" />
+    <Compile Include="NotificationApplication\NotificationSpecialHandlingTests.cs" />
+    <Compile Include="NotificationApplication\NotificationTransitStateTests.cs" />
+    <Compile Include="NotificationApplication\NotificationTransportRouteTests.cs" />
+    <Compile Include="NotificationApplication\NotificationWasteCodeTests.cs" />
+    <Compile Include="NotificationApplication\NotificationWasteGenerationProcessTests.cs" />
+    <Compile Include="NotificationApplication\NotificationWasteTypeTests.cs" />
+    <Compile Include="NotificationAssessment\NotificationAssessmentStatusTests.cs" />
     <Compile Include="OrganisationTests.cs" />
     <Compile Include="ProducerBusinessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,14 +24,24 @@
         public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetNotificationsByUser query)
         {
             return
-                await
+                (await
                     context.NotificationApplications.Where(na => na.UserId == userContext.UserId)
+                        .Join(context.NotificationAssessments, application => application.Id,
+                            assessment => assessment.NotificationApplicationId,
+                            (application, assessment) => new 
+                            { 
+                                Notification = application, 
+                                Assessment = assessment
+                            })
+                            .OrderBy(p => p.Notification.NotificationNumber)
+                            .ToListAsync())
                         .Select(n => new NotificationApplicationSummaryData
                         {
-                            Id = n.Id,
-                            NotificationNumber = n.NotificationNumber,
-                            CreatedDate = n.CreatedDate
-                        }).ToListAsync();
+                            Id = n.Notification.Id,
+                            NotificationNumber = n.Notification.NotificationNumber,
+                            LastUpdated = n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault() == null ? n.Notification.CreatedDate : n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault().ChangeDate,
+                            Status = n.Assessment.Status
+                        }).ToList();
         }
     }
 }

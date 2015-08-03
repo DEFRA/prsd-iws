@@ -22,7 +22,7 @@
             return dbSet;
         }
 
-        public DbSet<T> GetAsyncEnabledDbSet<T>(IEnumerable<T> data) where T : class
+        public DbSet<T> GetAsyncEnabledDbSet<T>(IList<T> data) where T : class
         {
             var queryable = data.AsQueryable();
 
@@ -38,6 +38,17 @@
             A.CallTo(() => ((IQueryable<T>)dbSet).Expression).Returns(queryable.Expression);
             A.CallTo(() => ((IQueryable<T>)dbSet).ElementType).Returns(queryable.ElementType);
             A.CallTo(() => ((IQueryable<T>)dbSet).GetEnumerator()).Returns(queryable.GetEnumerator());
+
+            A.CallTo(() => dbSet.Add(A<T>.Ignored))
+                .Invokes((T item) =>
+                {
+                    // Add is a no-op if the entity is already in the context in the Added state.
+                    if (!data.Contains(item))
+                    {
+                        data.Add(item);
+                    }
+                })
+                .ReturnsLazily((T item) => item);
 
             return dbSet;
         }

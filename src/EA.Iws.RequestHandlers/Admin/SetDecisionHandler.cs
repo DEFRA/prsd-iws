@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
@@ -19,22 +20,27 @@
 
         public async Task<Guid> HandleAsync(SetDecision message)
         {
-            var notification = context.NotificationAssessments.SingleOrDefault(a => a.NotificationApplicationId == message.NotificationApplicationId);
-            if (notification == null)
+            if (!await context.NotificationApplications.AnyAsync(p => p.Id == message.NotificationApplicationId))
             {
-                notification = new NotificationAssessment(message.NotificationApplicationId);
-                context.NotificationAssessments.Add(notification);
+                throw new InvalidOperationException(string.Format("Notification {0} does not exist.", message.NotificationApplicationId));
             }
 
-            notification.DecisionMade = message.DecisionMade;
-            notification.ConsentedFrom = message.ConsentedFrom;
-            notification.ConsentedTo = message.ConsentedTo;
-            notification.DecisionType = message.DecisionType;
-            notification.ConditionsOfConsent = message.ConditionsOfConsent;
+            var notificationDecision = context.NotificationDecisions.SingleOrDefault(a => a.NotificationApplicationId == message.NotificationApplicationId);
+            if (notificationDecision == null)
+            {
+                notificationDecision = new NotificationDecision(message.NotificationApplicationId);
+                context.NotificationDecisions.Add(notificationDecision);
+            }
+
+            notificationDecision.DecisionMade = message.DecisionMade;
+            notificationDecision.ConsentedFrom = message.ConsentedFrom;
+            notificationDecision.ConsentedTo = message.ConsentedTo;
+            notificationDecision.DecisionType = message.DecisionType;
+            notificationDecision.ConditionsOfConsent = message.ConditionsOfConsent;
 
             await context.SaveChangesAsync();
 
-            return notification.Id;
+            return notificationDecision.Id;
         }
     }
 }

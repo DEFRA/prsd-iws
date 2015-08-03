@@ -1,49 +1,88 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
-    using FinancialGuarantee;
+    using System.Collections.Generic;
+    using Core.NotificationAssessment;
+    using NotificationApplication;
+    using Prsd.Core;
     using Prsd.Core.Domain;
+    using Prsd.Core.Extensions;
+    using Stateless;
 
     public class NotificationAssessment : Entity
     {
-        public DateTime? NotificationReceivedDate { get; set; }
+        private enum Trigger
+        {
+            Submit
+        }
 
-        public DateTime? PaymentReceivedDate { get; set; }
-
-        public DateTime? CommencementDate { get; set; }
-
-        public DateTime? CompleteDate { get; set; }
-
-        public DateTime? TransmittedDate { get; set; }
-
-        public DateTime? AcknowledgedDate { get; set; }
-
-        public DateTime? DecisionDate { get; set; }
-
-        public DateTime? DecisionMade { get; set; }
-
-        public DateTime? ConsentedFrom { get; set; }
-
-        public DateTime? ConsentedTo { get; set; }
-
-        public string ConditionsOfConsent { get; set; }
-
-        public int DecisionType { get; set; }
-
-        public string NameOfOfficer { get; set; }
+        private readonly StateMachine<NotificationStatus, Trigger> stateMachine;
 
         public Guid NotificationApplicationId { get; private set; }
+        
+        public NotificationStatus Status { get; private set; }
 
-        public virtual FinancialGuarantee FinancialGuarantee { get; protected set; }
+        protected virtual ICollection<NotificationStatusChange> StatusChangeCollection { get; set; }
+
+        public IEnumerable<NotificationStatusChange> StatusChanges
+        {
+            get { return StatusChangeCollection.ToSafeIEnumerable(); }
+        }
 
         protected NotificationAssessment()
         {
+            stateMachine = CreateStateMachine();
         }
 
         public NotificationAssessment(Guid notificationApplicationId)
         {
-            this.NotificationApplicationId = notificationApplicationId;
-            this.FinancialGuarantee = FinancialGuarantee.Create();
+            NotificationApplicationId = notificationApplicationId;
+            Status = NotificationStatus.NotSubmitted;
+            StatusChangeCollection = new List<NotificationStatusChange>();
+            stateMachine = CreateStateMachine();
+        }
+
+        private StateMachine<NotificationStatus, Trigger> CreateStateMachine()
+        {
+            var stateMachine = new StateMachine<NotificationStatus, Trigger>(() => Status, s => Status = s);
+
+            stateMachine.OnTransitioned(OnTransitionAction);
+
+            stateMachine.Configure(NotificationStatus.NotSubmitted)
+                .Permit(Trigger.Submit, NotificationStatus.Submitted);
+
+            stateMachine.Configure(NotificationStatus.Submitted)
+                .OnEntryFrom(Trigger.Submit, OnSubmit)
+                .PermitReentry(Trigger.Submit);
+
+            return stateMachine;
+        }
+
+        private void OnSubmit()
+        {
+            DomainEvents.Raise(new NotificationSubmittedEvent(NotificationApplicationId));
+        }
+
+        private void OnTransitionAction(StateMachine<NotificationStatus, Trigger>.Transition transition)
+        {
+            DomainEvents.Raise(new NotificationStatusChangeEvent(this, transition.Destination));
+        }
+
+        public void Submit(INotificationProgressCalculator progressCalculator)
+        {
+            if (!progressCalculator.IsComplete(NotificationApplicationId))
+            {
+                throw new InvalidOperationException(string.Format("Cannot submit an incomplete notification: {0}", NotificationApplicationId));
+            }
+
+            stateMachine.Fire(Trigger.Submit);
+        }
+
+        public void AddStatusChangeRecord(NotificationStatusChange statusChange)
+        {
+            Guard.ArgumentNotNull(() => statusChange, statusChange);
+
+            StatusChangeCollection.Add(statusChange);
         }
     }
 }

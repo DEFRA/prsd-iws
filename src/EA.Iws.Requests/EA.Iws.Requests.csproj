@@ -63,6 +63,7 @@
     <Compile Include="Notification\GetNotificationType.cs" />
     <Compile Include="Notification\NotificationBasicInfo.cs" />
     <Compile Include="Notification\NotificationProgressInfo.cs" />
+    <Compile Include="Notification\SubmitNotification.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUser.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetails.cs" />
     <Compile Include="Producers\CopyProducerFromExporter.cs" />

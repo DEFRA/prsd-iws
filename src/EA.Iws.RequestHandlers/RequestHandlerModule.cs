@@ -14,11 +14,11 @@
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(this.GetType().Assembly)
+            builder.RegisterAssemblyTypes(ThisAssembly)
                 .AsNamedClosedTypesOf(typeof(IRequestHandler<,>), t => "request_handler");
 
             // Order matters here
-            builder.RegisterGenericDecorators(this.GetType().Assembly, typeof(IRequestHandler<,>), "request_handler",
+            builder.RegisterGenericDecorators(ThisAssembly, typeof(IRequestHandler<,>), "request_handler",
                 typeof(EventDispatcherRequestHandlerDecorator<,>), // <-- inner most decorator
                 typeof(AuthorizationRequestHandlerDecorator<,>),
                 typeof(AuthenticationRequestHandlerDecorator<,>)); // <-- outer most decorator
@@ -28,17 +28,18 @@
                 .AsImplementedInterfaces();
 
             // Register the map classes
-            builder.RegisterAssemblyTypes(this.GetType().Assembly)
+            builder.RegisterAssemblyTypes(ThisAssembly)
                 .Where(t => t.Namespace.Contains("Mappings"))
                 .AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(ThisAssembly).AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
+
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
-
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
+            builder.RegisterType<NotificationProgressCalculator>().As<INotificationProgressCalculator>();
         }
     }
 }

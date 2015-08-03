@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Submit
 {
     using System;
-    using Core.Notification;
+    using Core.NotificationAssessment;
 
     public class SubmitSideBarViewModel
     {
@@ -15,6 +15,6 @@
 
         public int Charge { get; set; }
 
-        public Status Status { get; set; }
+        public NotificationStatus Status { get; set; }
     }
 }

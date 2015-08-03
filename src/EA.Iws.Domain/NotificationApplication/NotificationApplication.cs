@@ -32,6 +32,8 @@
             PackagingInfosCollection = new List<PackagingInfo>();
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
             WasteCodeInfoCollection = new List<WasteCodeInfo>();
+
+            DomainEvents.Raise(new NotificationCreatedEvent(this));
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }

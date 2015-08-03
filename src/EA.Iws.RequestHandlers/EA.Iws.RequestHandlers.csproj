@@ -71,10 +71,13 @@
   <ItemGroup>
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />
     <Compile Include="Admin\SetDatesHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
+    <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
+    <Compile Include="Notification\NotificationProgressCalculator.cs" />
     <Compile Include="WorkingDayCalculator.cs" />
     <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
@@ -155,6 +158,7 @@
     <Compile Include="Notification\SetReasonForExportHandler.cs" />
     <Compile Include="Notification\SetSpecialHandlingHandler.cs" />
     <Compile Include="Notification\SetRecoveryPercentageDataHandler.cs" />
+    <Compile Include="Notification\SubmitNotificationHandler.cs" />
     <Compile Include="OperationCodes\AddDisposalCodesHandler.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandler.cs" />

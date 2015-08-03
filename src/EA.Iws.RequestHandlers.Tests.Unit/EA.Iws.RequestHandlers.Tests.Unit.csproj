@@ -73,6 +73,7 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandlerTests.cs" />
     <Compile Include="Admin\GetDatesHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\InternalUserCollection.cs" />
@@ -80,6 +81,8 @@
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
     <Compile Include="Facility\CopyFacilityFromImporterHandlerTests.cs" />
     <Compile Include="Admin\SetDecisionHandlerTests.cs" />
+    <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
+    <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
     <Compile Include="RecoveryInfo\SetRecoveryPercentageDataHandlerTests.cs" />

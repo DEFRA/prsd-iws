@@ -1,9 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
+    using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
     using Helpers;
@@ -16,24 +18,31 @@
     {
         private readonly IwsContext context;
         private readonly SetDatesHandler handler;
-        private readonly NotificationAssessment notificationAssessment;
+        private readonly NotificationDates notificationDates;
         private readonly Guid notificationId = new Guid("5243D3E5-CA81-4A3E-B589-4D22D6676B28");
-        private const string AnyString = "test";
 
         public GetDatesHandlerTests()
         {
             context = A.Fake<IwsContext>();
-            handler = new SetDatesHandler(context, new TestUserContext(Guid.Empty));
+            handler = new SetDatesHandler(context);
             var dbSetHelper = new DbContextHelper();
-            notificationAssessment = new NotificationAssessment(notificationId);
-            EntityHelper.SetEntityId(notificationAssessment, notificationId);
+            notificationDates = new NotificationDates(notificationId);
+            EntityHelper.SetEntityId(notificationDates, notificationId);
 
-            var dbSet = dbSetHelper.GetAsyncEnabledDbSet(new NotificationAssessment[]
+            var dbSet = dbSetHelper.GetAsyncEnabledDbSet(new List<NotificationDates>
             {
-                notificationAssessment
+                notificationDates
             });
 
-            A.CallTo(() => context.NotificationAssessments).Returns(dbSet);
+            var notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            EntityHelper.SetEntityId(notification, notificationId);
+            var notificationAssessments = dbSetHelper.GetAsyncEnabledDbSet(new List<NotificationApplication>
+            {
+                notification
+            });
+
+            A.CallTo(() => context.NotificationDates).Returns(dbSet);
+            A.CallTo(() => context.NotificationApplications).Returns(notificationAssessments);
         }
 
         [Fact]
@@ -61,10 +70,10 @@
 
             await handler.HandleAsync(request);
 
-            Assert.True(notificationAssessment.AcknowledgedDate == acknowledgedDate
-                        && notificationAssessment.CommencementDate == commencementDate && notificationAssessment.DecisionDate == decisionDate &&
-                        notificationAssessment.CompleteDate == completeDate && notificationAssessment.PaymentReceivedDate == receivedDate &&
-                        notificationAssessment.TransmittedDate == transmittedDate && notificationAssessment.NameOfOfficer == nameOfOfficer);
+            Assert.True(notificationDates.AcknowledgedDate == acknowledgedDate
+                        && notificationDates.CommencementDate == commencementDate && notificationDates.DecisionDate == decisionDate &&
+                        notificationDates.CompleteDate == completeDate && notificationDates.PaymentReceivedDate == receivedDate &&
+                        notificationDates.TransmittedDate == transmittedDate && notificationDates.NameOfOfficer == nameOfOfficer);
         }
     }
 }

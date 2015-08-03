@@ -9,6 +9,7 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.NotificationApplication;
+    using Domain.NotificationAssessment;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
@@ -77,23 +78,30 @@
         private async Task<NotificationApplication> CloneNotification(Guid sourceId, Guid destinationId)
         {
             var destination = await context.GetNotificationApplication(destinationId);
+            var destinationAssessment = await context.NotificationAssessments.SingleAsync(p => p.NotificationApplicationId == destinationId);
 
             var clone = await GetCopyOfSourceNotification(sourceId);
+            var clonedAssessment = await GetCopyOfNotificationAssessment(destinationId);
 
             copier.CopyNotificationProperties(clone, destination);
 
             context.NotificationApplications.Add(clone);
 
             // Remove the destination.
-            context.NotificationApplications.Remove(destination);
+            context.DeleteOnCommit(destinationAssessment);
+            await context.SaveChangesAsync();
 
-            // Save.
+            context.DeleteOnCommit(destination);
             await context.SaveChangesAsync();
 
             // Set child objects which have lookup properties. These can't be copied by the
             // main copy process due to detaching the change tracker.
             var source = await context.GetNotificationApplication(sourceId);
             copier.CopyLookupEntities(source, clone);
+
+            // Update foreign key on assessment object
+            SetNotificationApplicationIdOnAssessment(clonedAssessment, clone.Id);
+            context.NotificationAssessments.Add(clonedAssessment);
 
             return clone;
         }
@@ -127,6 +135,21 @@
                         .SingleAsync(n => n.Id == id);
 
             return clone;
+        }
+
+        /// <summary>
+        /// Create a detached copy of a notification assessment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private async Task<NotificationAssessment> GetCopyOfNotificationAssessment(Guid id)
+        {
+            return await context.NotificationAssessments.AsNoTracking().SingleAsync(p => p.NotificationApplicationId == id);
+        }
+
+        private static void SetNotificationApplicationIdOnAssessment(NotificationAssessment assessment, Guid notificationId)
+        {
+            typeof(NotificationAssessment).GetProperty("NotificationApplicationId").SetValue(assessment, notificationId, null);
         }
 
         /// <summary>

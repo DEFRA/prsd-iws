@@ -8,7 +8,6 @@
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
-    using Domain.NotificationAssessment;
     using FakeItEasy;
     using Helpers;
     using Mappings;
@@ -30,7 +29,7 @@
         {
             var context = A.Fake<IwsContext>();
 
-            A.CallTo(() => context.NotificationAssessments).Returns(GenerateFinancialGuaranteesDbSet());
+            A.CallTo(() => context.FinancialGuarantees).Returns(GenerateFinancialGuaranteesDbSet());
             A.CallTo(() => context.BankHolidays).Returns(new DbContextHelper().GetAsyncEnabledDbSet(new BankHoliday[] { }));
             A.CallTo(() => context.NotificationApplications).Returns(GenerateApplications());
 
@@ -53,16 +52,16 @@
             Assert.Equal(FinancialGuaranteeStatus.AwaitingApplication, result.Status);
         }
 
-        public DbSet<NotificationAssessment> GenerateFinancialGuaranteesDbSet()
+        public DbSet<FinancialGuarantee> GenerateFinancialGuaranteesDbSet()
         {
             var helper = new DbContextHelper();
 
             return helper.GetAsyncEnabledDbSet(new[]
             {
-                CreateAssessmentWithFinancialGuarantee(PendingId, FinancialGuaranteeStatus.AwaitingApplication,
+                CreateFinancialGuarantee(PendingId, FinancialGuaranteeStatus.AwaitingApplication,
                     null, null),
-                CreateAssessmentWithFinancialGuarantee(ReceivedId, FinancialGuaranteeStatus.ApplicationReceived, AnyDate, null),
-                CreateAssessmentWithFinancialGuarantee(CompletedId, FinancialGuaranteeStatus.ApplicationComplete, AnyDate,
+                CreateFinancialGuarantee(ReceivedId, FinancialGuaranteeStatus.ApplicationReceived, AnyDate, null),
+                CreateFinancialGuarantee(CompletedId, FinancialGuaranteeStatus.ApplicationComplete, AnyDate,
                     AnyDate.AddDays(1))
             });
         }
@@ -79,10 +78,9 @@
             });
         } 
 
-        public NotificationAssessment CreateAssessmentWithFinancialGuarantee(Guid notificationId, FinancialGuaranteeStatus status, DateTime? receivedDate, DateTime? completedDate)
+        public FinancialGuarantee CreateFinancialGuarantee(Guid notificationId, FinancialGuaranteeStatus status, DateTime? receivedDate, DateTime? completedDate)
         {
-            var assessment = new NotificationAssessment(notificationId);
-            var financialGuarantee = FinancialGuarantee.Create();
+            var financialGuarantee = FinancialGuarantee.Create(notificationId);
 
             if (receivedDate.HasValue)
             {
@@ -95,9 +93,8 @@
             }
 
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, status, financialGuarantee);
-            ObjectInstantiator<NotificationAssessment>.SetProperty(na => na.FinancialGuarantee, financialGuarantee, assessment);
 
-            return assessment;
+            return financialGuarantee;
         }
     }
 }

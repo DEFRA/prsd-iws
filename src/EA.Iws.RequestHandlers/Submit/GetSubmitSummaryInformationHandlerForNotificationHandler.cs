@@ -20,6 +20,9 @@
         {
             var notification = await context.GetNotificationApplication(message.Id);
 
+            var assessment =
+                await context.NotificationAssessments.SingleAsync(p => p.NotificationApplicationId == notification.Id);
+
             var competentAuthority = notification.CompetentAuthority.AsCompetentAuthority();
             
             return new SubmitSummaryData
@@ -27,7 +30,7 @@
                 CompetentAuthority = competentAuthority,
                 CreatedDate = notification.CreatedDate,
                 NotificationNumber = notification.NotificationNumber,
-                Status = Status.New
+                Status = assessment.Status
             };
         }
     }

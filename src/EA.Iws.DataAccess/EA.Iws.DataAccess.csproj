@@ -84,6 +84,9 @@
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />
     <Compile Include="Mappings\NotificationAssessmentMapping.cs" />
+    <Compile Include="Mappings\NotificationDatesMapping.cs" />
+    <Compile Include="Mappings\NotificationDecisionMapping.cs" />
+    <Compile Include="Mappings\NotificationStatusChangeMapping.cs" />
     <Compile Include="Mappings\ProducerBusinessMapping.cs" />
     <Compile Include="Mappings\BusinessMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityMapping.cs" />

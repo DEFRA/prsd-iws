@@ -3,14 +3,16 @@
     using Core.FinancialGuarantee;
     using DataAccess;
     using Domain.FinancialGuarantee;
-    using Domain.NotificationAssessment;
     using FakeItEasy;
     using Helpers;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Domain;
+    using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -28,21 +30,31 @@
             context = A.Fake<IwsContext>();
             var dbHelper = new DbContextHelper();
 
-            var receivedNotificationAssessment = new NotificationAssessment(ReceivedNotificationId);
-            var receivedFinancialGuarantee = FinancialGuarantee.Create();
+            var receivedFinancialGuarantee = FinancialGuarantee.Create(ReceivedNotificationId);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationReceived,
                 receivedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate,
                 receivedFinancialGuarantee);
-            ObjectInstantiator<NotificationAssessment>.SetProperty(na => na.FinancialGuarantee, receivedFinancialGuarantee, receivedNotificationAssessment);
 
-            var notificationAssessments = dbHelper.GetAsyncEnabledDbSet(new[]
+            var pendingNotification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            EntityHelper.SetEntityId(pendingNotification, PendingNotificationId);
+            var receivedNotification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            EntityHelper.SetEntityId(receivedNotification, ReceivedNotificationId);
+            
+            var financialGuarantees = dbHelper.GetAsyncEnabledDbSet(new[]
             {
-                new NotificationAssessment(PendingNotificationId),
-                receivedNotificationAssessment
+                FinancialGuarantee.Create(PendingNotificationId),
+                receivedFinancialGuarantee
             });
 
-            A.CallTo(() => context.NotificationAssessments).Returns(notificationAssessments);
+            var notificationApplications = dbHelper.GetAsyncEnabledDbSet(new List<NotificationApplication>()
+            {
+                pendingNotification,
+                receivedNotification
+            });
+
+            A.CallTo(() => context.FinancialGuarantees).Returns(financialGuarantees);
+            A.CallTo(() => context.NotificationApplications).Returns(notificationApplications);
 
             handler = new SetFinancialGuaranteeDatesHandler(context);
         }
@@ -83,8 +95,7 @@
             await handler.HandleAsync(new SetFinancialGuaranteeDates(PendingNotificationId, AnyDate, null));
 
             var financialGuarantee =
-                context.NotificationAssessments.Single(na => na.NotificationApplicationId == PendingNotificationId)
-                    .FinancialGuarantee;
+                context.FinancialGuarantees.Single(na => na.NotificationApplicationId == PendingNotificationId);
 
             Assert.Equal(AnyDate, financialGuarantee.ReceivedDate);
             Assert.Equal(FinancialGuaranteeStatus.ApplicationReceived, financialGuarantee.Status);
@@ -106,8 +117,7 @@
                     AnyDate.AddDays(1)));
 
             var financialGuarantee =
-                context.NotificationAssessments.Single(na => na.NotificationApplicationId == ReceivedNotificationId)
-                    .FinancialGuarantee;
+                context.FinancialGuarantees.Single(na => na.NotificationApplicationId == ReceivedNotificationId);
 
             Assert.Equal(AnyDate.AddDays(1), financialGuarantee.CompletedDate);
             Assert.Equal(FinancialGuaranteeStatus.ApplicationComplete, financialGuarantee.Status);

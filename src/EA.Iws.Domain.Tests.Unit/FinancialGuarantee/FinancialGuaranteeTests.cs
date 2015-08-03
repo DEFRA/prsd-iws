@@ -16,14 +16,14 @@
 
         public FinancialGuaranteeTests()
         {
-            financialGuarantee = FinancialGuarantee.Create();
+            financialGuarantee = FinancialGuarantee.Create(new Guid("C91DA02A-114A-44C3-8B12-3FF24950D6E4"));
 
-            completedFinancialGuarantee = FinancialGuarantee.Create();
+            completedFinancialGuarantee = FinancialGuarantee.Create(new Guid("5DC6DB46-89DF-4F3D-BE47-4290EEE890D3"));
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationComplete, completedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, completedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, AnyDate.AddDays(1), completedFinancialGuarantee);
 
-            receivedFinancialGuarantee = FinancialGuarantee.Create();
+            receivedFinancialGuarantee = FinancialGuarantee.Create(new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD9"));
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationReceived, receivedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, receivedFinancialGuarantee);
         }
@@ -87,7 +87,7 @@
         {
             SystemTime.Freeze();
 
-            var fg = FinancialGuarantee.Create();
+            var fg = FinancialGuarantee.Create(new Guid("03A3DC05-7144-483A-BF99-3AF02D3DEF72"));
 
             Assert.Equal(SystemTime.UtcNow, fg.CreatedDate);
             Assert.Equal(FinancialGuaranteeStatus.AwaitingApplication, fg.Status);
