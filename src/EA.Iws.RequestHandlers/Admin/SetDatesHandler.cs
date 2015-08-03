@@ -33,7 +33,7 @@
             }
 
             notification.NotificationReceivedDate = message.NotificationReceivedDate;
-            notification.PaymentRecievedDate = message.PaymentRecievedDate;
+            notification.PaymentReceivedDate = message.PaymentReceivedDate;
             notification.CommencementDate = message.CommencementDate;
             notification.CompleteDate = message.CompleteDate;
             notification.TransmittedDate = message.TransmittedDate;

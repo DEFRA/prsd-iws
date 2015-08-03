@@ -36,7 +36,7 @@
             var setDates = new SetDates
             {
                 NotificationReceivedDate = GetDateFromUserInput(model.NotificationReceivedDay, model.NotificationReceivedMonth, model.NotificationReceivedYear),
-                PaymentRecievedDate = GetDateFromUserInput(model.PaymentReceivedDay, model.PaymentReceivedMonth, model.PaymentReceivedYear),
+                PaymentReceivedDate = GetDateFromUserInput(model.PaymentReceivedDay, model.PaymentReceivedMonth, model.PaymentReceivedYear),
                 CommencementDate = GetDateFromUserInput(model.CommencementDay, model.CommencementMonth, model.CommencementYear),
                 CompleteDate = GetDateFromUserInput(model.NotificationCompleteDay, model.NotificationCompleteMonth, model.NotificationCompleteYear),
                 TransmittedDate = GetDateFromUserInput(model.NotificationTransmittedDay, model.NotificationTransmittedMonth, model.NotificationTransmittedYear),

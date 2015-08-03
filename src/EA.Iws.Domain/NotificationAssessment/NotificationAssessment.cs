@@ -8,7 +8,7 @@
     {
         public DateTime? NotificationReceivedDate { get; set; }
 
-        public DateTime? PaymentRecievedDate { get; set; }
+        public DateTime? PaymentReceivedDate { get; set; }
 
         public DateTime? CommencementDate { get; set; }
 

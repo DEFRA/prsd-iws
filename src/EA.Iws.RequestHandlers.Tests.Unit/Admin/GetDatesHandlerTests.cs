@@ -55,7 +55,7 @@
                 CommencementDate = commencementDate,
                 DecisionDate = decisionDate,
                 CompleteDate = completeDate,
-                PaymentRecievedDate = receivedDate,
+                PaymentReceivedDate = receivedDate,
                 TransmittedDate = transmittedDate
             };
 
@@ -63,7 +63,7 @@
 
             Assert.True(notificationAssessment.AcknowledgedDate == acknowledgedDate
                         && notificationAssessment.CommencementDate == commencementDate && notificationAssessment.DecisionDate == decisionDate &&
-                        notificationAssessment.CompleteDate == completeDate && notificationAssessment.PaymentRecievedDate == receivedDate &&
+                        notificationAssessment.CompleteDate == completeDate && notificationAssessment.PaymentReceivedDate == receivedDate &&
                         notificationAssessment.TransmittedDate == transmittedDate && notificationAssessment.NameOfOfficer == nameOfOfficer);
         }
     }
