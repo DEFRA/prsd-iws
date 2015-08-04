@@ -165,7 +165,17 @@
                 return true;
             }
 
-            return IsProvidedByImporter.GetValueOrDefault() || (PercentageRecoverable != null && RecoveryInfo != null);
+            if (IsProvidedByImporter.GetValueOrDefault())
+            {
+                return true;
+            }
+
+            if (PercentageRecoverable.GetValueOrDefault() == 100.00M)
+            {
+                return true;
+            }
+            
+            return (PercentageRecoverable != null && MethodOfDisposal != null);
         }
     }
 }

@@ -48,13 +48,13 @@
         public Guid NotificationId { get; set; }
 
         [Display(Name = "I confirm that the relevant information will be provided directly to the competent authorities involved by the importer-consignee.")]
-        [RequiredIf("HasPercentageRecoverableValue", false, "Please enter a description or check the box")]
+        [RequiredIf("HasPercentageRecoverableValue", false, "Please enter the percentage (%) of recoverable material or check the box")]
         public bool IsProvidedByImporter { get; set; }
 
         [Range(0, 100, ErrorMessage = "The percentage (%) of recoverable material must be between 0 and 100")]
         [Display(Name = "Enter the percentage (%) of recoverable material")]
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places.")]
-        [RequiredIf("IsProvidedByImporter", false, "Please enter a description or check the box")]
+        [RequiredIf("IsProvidedByImporter", false, "Please enter the percentage (%) of recoverable material or check the box")]
         public decimal? PercentageRecoverable { get; set; }
 
         public bool HasPercentageRecoverableValue
@@ -82,7 +82,7 @@
             {
                 if (IsProvidedByImporter)
                 {
-                    yield return new ValidationResult("Please enter either a description or check the box", new[] { "PercentageRecoverable", "IsProvidedByImporter" });
+                    yield return new ValidationResult("Please enter either the percentage (%) of recoverable material or check the box", new[] { "PercentageRecoverable" });
                 }
             }
         }

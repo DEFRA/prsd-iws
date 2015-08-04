@@ -75,10 +75,16 @@
         }
 
         [HttpGet]
-        public ActionResult MethodOfDisposal(Guid id, decimal recoveryPercentage)
+        public async Task<ActionResult> MethodOfDisposal(Guid id, decimal recoveryPercentage)
         {
-            var model = new MethodOfDisposalViewModel(id, recoveryPercentage);
-            return View(model);
+            using (var client = apiClient())
+            {
+                var recoveryPercentageData = await client.SendAsync(User.GetAccessToken(), new GetRecoveryPercentageData(id));
+                var model = new MethodOfDisposalViewModel(id, recoveryPercentage);
+                model.MethodOfDisposal = recoveryPercentageData.MethodOfDisposal;
+
+                return View(model);
+            }
         }
 
         [HttpPost]
