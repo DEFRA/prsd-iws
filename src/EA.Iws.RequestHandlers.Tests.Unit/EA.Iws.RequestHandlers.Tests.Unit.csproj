@@ -104,6 +104,7 @@
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests.cs" />
     <Compile Include="TransitState\RemoveTransitStateForNotificationHandlerTests.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandlerTests.cs" />
+    <Compile Include="WorkingDayCalculatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

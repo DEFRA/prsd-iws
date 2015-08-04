@@ -10,6 +10,8 @@
 
     public class FinancialGuarantee : Entity
     {
+        private const int WorkingDaysUntilDecisionRequired = 20;
+
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> completedTrigger;
         private readonly StateMachine<FinancialGuaranteeStatus, Trigger> stateMachine;
@@ -25,16 +27,16 @@
 
         public DateTime? CompletedDate { get; private set; }
 
-        public DateTime? DecisionRequiredDate
+        public DateTime? GetDecisionRequiredDate(IWorkingDayCalculator workingDayCalculator, UKCompetentAuthority competentAuthority)
         {
-            get
+            DateTime? returnDate = null;
+
+            if (CompletedDate.HasValue)
             {
-                if (CompletedDate.HasValue)
-                {
-                    return CompletedDate.Value.AddDays(20);
-                }
-                return null;
+                returnDate = workingDayCalculator.AddWorkingDays(CompletedDate.Value, WorkingDaysUntilDecisionRequired, false);
             }
+
+            return returnDate;
         }
 
         public DateTime CreatedDate { get; private set; }

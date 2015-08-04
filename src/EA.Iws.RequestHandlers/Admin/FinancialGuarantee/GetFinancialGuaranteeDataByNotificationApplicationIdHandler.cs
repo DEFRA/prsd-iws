@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Core.Admin;
     using DataAccess;
+    using Domain;
     using Domain.FinancialGuarantee;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -12,9 +13,9 @@
     public class GetFinancialGuaranteeDataByNotificationApplicationIdHandler : IRequestHandler<GetFinancialGuaranteeDataByNotificationApplicationId, FinancialGuaranteeData>
     {
         private readonly IwsContext context;
-        private readonly IMap<FinancialGuarantee, FinancialGuaranteeData> financialGuaranteeMap;
+        private readonly IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap;
 
-        public GetFinancialGuaranteeDataByNotificationApplicationIdHandler(IwsContext context, IMap<FinancialGuarantee, FinancialGuaranteeData> financialGuaranteeMap)
+        public GetFinancialGuaranteeDataByNotificationApplicationIdHandler(IwsContext context, IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap)
         {
             this.context = context;
             this.financialGuaranteeMap = financialGuaranteeMap;
@@ -24,8 +25,9 @@
         {
             var assessment =
                 await context.NotificationAssessments.SingleAsync(na => na.NotificationApplicationId == message.Id);
+            var authority = (await context.NotificationApplications.SingleAsync(na => na.Id == message.Id)).CompetentAuthority;
 
-            return financialGuaranteeMap.Map(assessment.FinancialGuarantee);
+            return financialGuaranteeMap.Map(assessment.FinancialGuarantee, authority);
         }
     }
 }

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="BankHoliday.cs" />
     <Compile Include="Business.cs" />
     <Compile Include="BusinessType.cs" />
     <Compile Include="CompetentAuthority.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChange.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
+    <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessment.cs" />
     <Compile Include="Events\RegistrationRejectedEvent.cs" />

@@ -75,6 +75,7 @@
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
+    <Compile Include="WorkingDayCalculator.cs" />
     <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarriersByNotificationIdHandler.cs" />

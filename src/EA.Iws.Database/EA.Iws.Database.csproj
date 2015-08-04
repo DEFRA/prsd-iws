@@ -79,6 +79,7 @@
     <Content Include="scripts\Update\Sprint13\20150730-120000-insert-data-into-ca-entry-exit-point.sql" />
     <Content Include="scripts\Update\Sprint13\20150730-160300-remove-gb-transit-authority.sql" />
     <Content Include="scripts\Update\Sprint13\20150803-162300-rename-database-column.sql" />
+    <Content Include="scripts\Update\Sprint13\20150803-152000-bank-holidays.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

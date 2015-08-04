@@ -80,6 +80,7 @@
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\ActivityMapping.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
+    <Compile Include="Mappings\BankHolidayMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />
     <Compile Include="Mappings\NotificationAssessmentMapping.cs" />

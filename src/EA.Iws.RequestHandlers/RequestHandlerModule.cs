@@ -2,6 +2,7 @@
 {
     using Autofac;
     using Copy;
+    using Domain;
     using Domain.NotificationApplication;
     using Notification;
     using Prsd.Core.Autofac;
@@ -36,6 +37,8 @@
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
+
+            builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
         }
     }
 }

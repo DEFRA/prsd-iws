@@ -5,7 +5,9 @@
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
     using DataAccess;
+    using Domain;
     using Domain.FinancialGuarantee;
+    using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
     using Helpers;
@@ -29,8 +31,10 @@
             var context = A.Fake<IwsContext>();
 
             A.CallTo(() => context.NotificationAssessments).Returns(GenerateFinancialGuaranteesDbSet());
+            A.CallTo(() => context.BankHolidays).Returns(new DbContextHelper().GetAsyncEnabledDbSet(new BankHoliday[] { }));
+            A.CallTo(() => context.NotificationApplications).Returns(GenerateApplications());
 
-            handler = new GetFinancialGuaranteeDataByNotificationApplicationIdHandler(context, new FinancialGuaranteeMap());
+            handler = new GetFinancialGuaranteeDataByNotificationApplicationIdHandler(context, new FinancialGuaranteeMap(new WorkingDayCalculator(context)));
         }
 
         [Fact]
@@ -62,6 +66,18 @@
                     AnyDate.AddDays(1))
             });
         }
+
+        public DbSet<NotificationApplication> GenerateApplications()
+        {
+            var helper = new DbContextHelper();
+
+            return helper.GetAsyncEnabledDbSet(new[]
+            {
+                NotificationApplicationFactory.Create(PendingId),
+                NotificationApplicationFactory.Create(ReceivedId),
+                NotificationApplicationFactory.Create(CompletedId)
+            });
+        } 
 
         public NotificationAssessment CreateAssessmentWithFinancialGuarantee(Guid notificationId, FinancialGuaranteeStatus status, DateTime? receivedDate, DateTime? completedDate)
         {
