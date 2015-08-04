@@ -12,8 +12,9 @@
         [Range(1, 12)]
         public int? Month { get; set; }
 
-        [Range(2010, int.MaxValue)]
         public int? Year { get; set; }
+
+        public bool AllowPastDates { get; set; }
 
         public bool IsCompleted
         {
@@ -22,12 +23,14 @@
                 return Day.HasValue 
                 && Month.HasValue 
                 && Year.HasValue
+                && Year.Value > 1 && Year.Value < 9999
                 && Day.Value <= DateTime.DaysInMonth(Year.Value, Month.Value); 
             }
         }
 
-        public OptionalDateInputViewModel()
+        public OptionalDateInputViewModel(bool allowPastDates = false)
         {
+            AllowPastDates = allowPastDates;
         }
 
         public OptionalDateInputViewModel(DateTime? date)
@@ -44,9 +47,12 @@
         {
             if (Day.HasValue && Month.HasValue && Year.HasValue)
             {
+                if ((Year > 9999) || (AllowPastDates && Year < 2000) || (!AllowPastDates && Year < 2010) || Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
+                {
+                    return null;
+                }
                 return new DateTime(Year.Value, Month.Value, Day.Value);
             }
-
             return null;
         }
 
@@ -71,6 +77,17 @@
 
                 if (Day.HasValue && Month.HasValue && Year.HasValue)
                 {
+                    if ((Year > 9999) || (AllowPastDates && Year < 2000))
+                    {
+                        yield return new ValidationResult("The year must be between 2000 and 99999", new[] { "Year" });
+                        yield break;
+                    }
+
+                    if (!AllowPastDates && Year < 2010)
+                    {
+                        yield return new ValidationResult("The year must be between 2010 and 99999", new[] { "Year" });
+                    }
+
                     if (Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
                     {
                         yield return new ValidationResult("The Day does not exist in the given month", new[] { "Day" });

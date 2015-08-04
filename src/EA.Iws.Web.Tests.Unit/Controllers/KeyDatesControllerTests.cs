@@ -34,16 +34,6 @@
             Assert.True(result.ViewData.ModelState.IsValid);
         }
 
-        [Theory]
-        [InlineData(40, 13, 2015)]
-        [InlineData(-25, -2, -2015)]
-        public async Task DecisionDate_InvalidInput_ValidationError(int day, int month, int year)
-        {
-            var result = await SetDecisionRequiredDate(day, month, year) as ViewResult;
-
-            Assert.False(result.ViewData.ModelState.IsValid);
-        }
-
         [Fact]
         public async Task DecisionDate_ValidInput_DecisionDateSetCorrectly()
         {
@@ -57,9 +47,11 @@
         private Task<ViewResult> SetDecisionRequiredDate(int day, int month, int year)
         {
             DateInputViewModel model = new DateInputViewModel();
-            model.DecisionDay = day;
-            model.DecisionMonth = month;
-            model.DecisionYear = year;
+            model.DecisionDate = new OptionalDateInputViewModel();
+
+            model.DecisionDate.Day = day;
+            model.DecisionDate.Month = month;
+            model.DecisionDate.Year = year;
 
             var controller = GetMockAssessmentController(model);
 

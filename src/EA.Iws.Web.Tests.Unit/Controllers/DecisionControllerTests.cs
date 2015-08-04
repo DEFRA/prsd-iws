@@ -56,16 +56,6 @@
             Assert.False(result.ViewData.ModelState.IsValid);
         }
 
-        [Theory]
-        [InlineData(40, 13, 2015)]
-        [InlineData(-25, -2, -2015)]
-        public async Task DecisionDate_InvalidInput_ValidationError(int day, int month, int year)
-        {
-            var result = await SetDecisionDate(day, month, year, new DecisionViewModel());
-
-            Assert.False(result.ViewData.ModelState.IsValid);
-        }
-
         [Fact]
         public async Task DecisionDate_ValidInput_DecisionDateSetCorrectly()
         {
@@ -78,9 +68,7 @@
 
         private Task<ViewResult> SetDecisionDate(int day, int month, int year, DecisionViewModel model)
         {
-            model.DecisionMadeDay = day;
-            model.DecisionMadeMonth = month;
-            model.DecisionMadeYear = year;
+            model.DecisionMadeDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
 
             var controller = GetMockAssessmentController(model);
 
@@ -89,9 +77,7 @@
 
         private Task<ViewResult> SetConsentedFromDate(int day, int month, int year, DecisionViewModel model)
         {
-            model.ConsentValidFromDay = day;
-            model.ConsentValidFromMonth = month;
-            model.ConsentValidFromYear = year;
+            model.ConsentValidFromDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
 
             var controller = GetMockAssessmentController(model);
 
@@ -100,9 +86,7 @@
 
         private Task<ViewResult> SetConsentedToDate(int day, int month, int year, DecisionViewModel model)
         {
-            model.ConsentValidToDay = day;
-            model.ConsentValidToMonth = month;
-            model.ConsentValidToYear = year;
+            model.ConsentValidToDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
 
             var controller = GetMockAssessmentController(model);
 

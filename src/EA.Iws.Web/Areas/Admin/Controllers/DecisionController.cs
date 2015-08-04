@@ -44,9 +44,9 @@
             {
                 NotificationApplicationId = model.NotificationId,
                 ConditionsOfConsent = model.ConditionsOfConsent,
-                DecisionMade = GetDateFromUserInput(model.DecisionMadeDay, model.DecisionMadeMonth, model.DecisionMadeYear),
-                ConsentedFrom = GetDateFromUserInput(model.ConsentValidFromDay, model.ConsentValidFromMonth, model.ConsentValidFromYear),
-                ConsentedTo = GetDateFromUserInput(model.ConsentValidToDay, model.ConsentValidToMonth, model.ConsentValidToYear),
+                DecisionMade = model.DecisionMadeDate.AsDateTime(),
+                ConsentedFrom = model.ConsentValidFromDate.AsDateTime(),
+                ConsentedTo = model.ConsentValidToDate.AsDateTime(),
                 DecisionType = Convert.ToInt32(model.DecisionType)
             };
 

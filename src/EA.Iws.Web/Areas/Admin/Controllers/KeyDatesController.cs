@@ -35,13 +35,13 @@
 
             var setDates = new SetDates
             {
-                NotificationReceivedDate = GetDateFromUserInput(model.NotificationReceivedDay, model.NotificationReceivedMonth, model.NotificationReceivedYear),
-                PaymentReceivedDate = GetDateFromUserInput(model.PaymentReceivedDay, model.PaymentReceivedMonth, model.PaymentReceivedYear),
-                CommencementDate = GetDateFromUserInput(model.CommencementDay, model.CommencementMonth, model.CommencementYear),
-                CompleteDate = GetDateFromUserInput(model.NotificationCompleteDay, model.NotificationCompleteMonth, model.NotificationCompleteYear),
-                TransmittedDate = GetDateFromUserInput(model.NotificationTransmittedDay, model.NotificationTransmittedMonth, model.NotificationTransmittedYear),
-                AcknowledgedDate = GetDateFromUserInput(model.NotificationAcknowledgedDay, model.NotificationAcknowledgedMonth, model.NotificationAcknowledgedYear),
-                DecisionDate = GetDateFromUserInput(model.DecisionDay, model.DecisionMonth, model.DecisionYear),
+                NotificationReceivedDate = model.NotificationReceivedDate.AsDateTime(),
+                PaymentReceivedDate = model.PaymentReceivedDate.AsDateTime(),
+                CommencementDate = model.CommencementDate.AsDateTime(),
+                CompleteDate = model.NotificationCompleteDate.AsDateTime(),
+                TransmittedDate = model.NotificationTransmittedDate.AsDateTime(),
+                AcknowledgedDate = model.NotificationAcknowledgedDate.AsDateTime(),
+                DecisionDate = model.DecisionDate.AsDateTime(),
                 NameOfOfficer = model.NameOfOfficer,
                 NotificationApplicationId = model.NotificationId
             };
