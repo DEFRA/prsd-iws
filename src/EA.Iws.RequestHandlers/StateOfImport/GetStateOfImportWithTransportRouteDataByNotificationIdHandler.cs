@@ -27,12 +27,12 @@
         private readonly IMap<Country, CountryData> countryMapper;
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
 
-        public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context, 
-            IMap<StateOfImport, StateOfImportData> stateOfImportMapper, 
+        public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context,
+            IMap<StateOfImport, StateOfImportData> stateOfImportMapper,
             IMap<StateOfExport, StateOfExportData> stateOfExportMapper,
-            IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper, 
-            IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper, 
-            IMap<Country, CountryData> countryMapper, 
+            IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper,
+            IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
+            IMap<Country, CountryData> countryMapper,
             IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper)
         {
             this.context = context;
@@ -59,13 +59,11 @@
 
             if (notification.StateOfImport != null)
             {
-                var competentAuthorities =
-                    await
-                        context.CompetentAuthorities.Where(ca => ca.Country.Id == notification.StateOfImport.Country.Id).ToArrayAsync();
-                var entryPoints =
-                    await
-                        context.EntryOrExitPoints.Where(ep => ep.Country.Id == notification.StateOfImport.Country.Id)
-                            .ToArrayAsync();
+                var competentAuthorities = await context.CompetentAuthorities
+                                            .Where(ca => ca.Country.Id == notification.StateOfImport.Country.Id)
+                                            .OrderBy(x => x.Code)
+                                            .ToArrayAsync();
+                var entryPoints = await context.EntryOrExitPoints.Where(ep => ep.Country.Id == notification.StateOfImport.Country.Id).ToArrayAsync();
 
                 data.CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray();
                 data.EntryPoints = entryPoints.Select(entryOrExitPointMapper.Map).ToArray();

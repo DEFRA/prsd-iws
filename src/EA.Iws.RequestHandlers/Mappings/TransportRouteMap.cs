@@ -57,7 +57,10 @@
 
             if (source.StateOfExport != null)
             {
-                var competentAuthorities = context.CompetentAuthorities.Where(ca => ca.Country.Id == source.StateOfExport.Country.Id).ToArray();
+                var competentAuthorities = context.CompetentAuthorities
+                                            .Where(ca => ca.Country.Id == source.StateOfExport.Country.Id)
+                                            .OrderBy(x => x.Code)
+                                            .ToArray();
                 var entryPoints = context.EntryOrExitPoints.Where(ep => ep.Country.Id == source.StateOfExport.Country.Id).ToArray();
 
                 data.CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray();

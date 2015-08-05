@@ -31,8 +31,10 @@
         public async Task<CompententAuthorityAndEntryOrExitPointData> HandleAsync(
             GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId message)
         {
-            var competentAuthorities =
-                await context.CompetentAuthorities.Where(ca => ca.Country.Id == message.Id).ToArrayAsync();
+            var competentAuthorities = await context.CompetentAuthorities
+                                        .Where(ca => ca.Country.Id == message.Id)
+                                        .OrderBy(x => x.Code)
+                                        .ToArrayAsync();
             var entryOrExitPoints =
                 await context.EntryOrExitPoints.Where(ep => ep.Country.Id == message.Id).ToArrayAsync();
 
