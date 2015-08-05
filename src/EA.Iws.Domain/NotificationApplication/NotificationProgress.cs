@@ -5,6 +5,7 @@
 
     public class NotificationProgress
     {
+        private const decimal FullyRecoverablePercentage = 100.00M;
         private readonly NotificationApplication notification;
 
         public NotificationProgress(NotificationApplication notification)
@@ -181,13 +182,31 @@
             {
                 return true;
             }
+            return (IsRecoveryPercentageCompleted() && IsRecoveryValueCompleted());
+        }
 
-            if (notification.PercentageRecoverable.GetValueOrDefault() == 100.00M)
+        private bool IsRecoveryPercentageCompleted()
+        {
+            if (notification.PercentageRecoverable.GetValueOrDefault() == FullyRecoverablePercentage)
             {
                 return true;
             }
 
             return (notification.PercentageRecoverable != null && notification.MethodOfDisposal != null);
+        }
+
+        private bool IsRecoveryValueCompleted()
+        {
+            if (!notification.HasRecoveryInfo)
+            {
+                return false;
+            }
+
+            if (notification.PercentageRecoverable.GetValueOrDefault() != FullyRecoverablePercentage)
+            {
+                return notification.RecoveryInfo.DisposalUnit != null && notification.RecoveryInfo.DisposalAmount != null;
+            }
+            return notification.RecoveryInfo != null;
         }
 
         public bool IsAllCompleted()

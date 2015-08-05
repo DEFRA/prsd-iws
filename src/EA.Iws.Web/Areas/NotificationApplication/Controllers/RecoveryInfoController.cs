@@ -49,17 +49,22 @@
                 {
                     if (model.IsProvidedByImporter)
                     {
-                        await client.SendAsync(User.GetAccessToken(), new SetRecoveryPercentageData(model.NotificationId, true, null, null));
+                        await client.SendAsync(User.GetAccessToken(), model.ToRequest());
                         return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                     }
 
-                    if (model.PercentageRecoverable.HasValue && model.PercentageRecoverable.Value == 100.00M)
+                    if (model.PercentageRecoverable.HasValue)
                     {
+                        var fullyRecoverablePercentage = 100.00M;
                         await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-                        return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = false });
-                    }
 
-                    return RedirectToAction("MethodOfDisposal", "RecoveryInfo", new { id = model.NotificationId, recoveryPercentage = model.PercentageRecoverable.GetValueOrDefault() });
+                        if (model.PercentageRecoverable.Value == fullyRecoverablePercentage)
+                        {
+                            return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = false });
+                        }
+
+                        return RedirectToAction("MethodOfDisposal", "RecoveryInfo", new { id = model.NotificationId });
+                    }
                 }
                 catch (ApiBadRequestException e)
                 {
@@ -75,14 +80,12 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MethodOfDisposal(Guid id, decimal recoveryPercentage)
+        public async Task<ActionResult> MethodOfDisposal(Guid id)
         {
             using (var client = apiClient())
             {
                 var recoveryPercentageData = await client.SendAsync(User.GetAccessToken(), new GetRecoveryPercentageData(id));
-                var model = new MethodOfDisposalViewModel(id, recoveryPercentage);
-                model.MethodOfDisposal = recoveryPercentageData.MethodOfDisposal;
-
+                var model = new MethodOfDisposalViewModel(recoveryPercentageData);
                 return View(model);
             }
         }

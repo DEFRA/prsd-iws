@@ -37,9 +37,9 @@
                 return new SetRecoveryPercentageData(NotificationId, true, null, null);
             }
 
-            if (PercentageRecoverable.HasValue && PercentageRecoverable.GetValueOrDefault() == 100.00M)
+            if (PercentageRecoverable.HasValue)
             {
-                return new SetRecoveryPercentageData(NotificationId, IsProvidedByImporter, null, 100M);
+                return new SetRecoveryPercentageData(NotificationId, false, PercentageRecoverable.Value, null);
             }
 
             throw new InvalidOperationException("Recovery percentage data cannot be set without method of disposal, when recovery percentage is less than 100.");

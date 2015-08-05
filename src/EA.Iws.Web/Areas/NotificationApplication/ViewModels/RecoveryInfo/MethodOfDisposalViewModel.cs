@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Core.Notification;
     using Requests.Notification;
 
     public class MethodOfDisposalViewModel : IValidatableObject
@@ -19,15 +20,16 @@
         {
         }
 
-        public MethodOfDisposalViewModel(Guid id, decimal percentageRecoverable)
+        public MethodOfDisposalViewModel(RecoveryPercentageData data)
         {
-            NotificationId = id;
-            PercentageRecoverable = percentageRecoverable;
+            NotificationId = data.NotificationId;
+            PercentageRecoverable = data.PercentageRecoverable.GetValueOrDefault();
+            MethodOfDisposal = data.MethodOfDisposal;
         }
 
         public SetRecoveryPercentageData ToRequest()
         {
-            return new SetRecoveryPercentageData(NotificationId, false, MethodOfDisposal, PercentageRecoverable);
+            return new SetRecoveryPercentageData(NotificationId, false, PercentageRecoverable, MethodOfDisposal);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

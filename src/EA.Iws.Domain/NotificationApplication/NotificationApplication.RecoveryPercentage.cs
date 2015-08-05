@@ -10,12 +10,12 @@
             get { return percentageRecoverable; }
             private set
             {
-                percentageRecoverable = (value.HasValue) ? 
+                percentageRecoverable = (value.HasValue) ?
                     decimal.Round(value.Value, 2, MidpointRounding.AwayFromZero)
                     : value;
             }
         }
-        
+
         public bool? IsProvidedByImporter { get; private set; }
         public string MethodOfDisposal { get; private set; }
 
@@ -26,7 +26,7 @@
             MethodOfDisposal = null;
         }
 
-        public void SetRecoveryPercentageData(decimal percentageRecoverableMaterial, string methodOfDisposal)
+        public void SetPercentageRecoverable(decimal percentageRecoverableMaterial)
         {
             PercentageRecoverable = percentageRecoverableMaterial;
 
@@ -40,11 +40,16 @@
                 throw new InvalidOperationException("The percentage recoverable cannot be less than 0%");
             }
 
-            if (PercentageRecoverable < 100 && methodOfDisposal == null)
+            if (PercentageRecoverable == 100)
             {
-                throw new InvalidOperationException("If the information is not being provided by the importer then the method of disposal is required");
+                MethodOfDisposal = null;
             }
 
+            IsProvidedByImporter = null;
+        }
+
+        public void SetMethodOfDisposal(string methodOfDisposal)
+        {
             if (PercentageRecoverable == 100 && methodOfDisposal != null)
             {
                 throw new InvalidOperationException("When the recovery percentage is 100% there cannot be any method of disposal text");

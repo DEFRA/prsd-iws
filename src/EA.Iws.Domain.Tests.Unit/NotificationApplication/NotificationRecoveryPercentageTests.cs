@@ -18,37 +18,17 @@
         {
             var notification = CreateNotificationApplication();
 
-            Action setRecoveryPercentageData = () => notification.SetRecoveryPercentageData(101, MethodOfDisposal);
+            Action setRecoveryPercentageData = () => notification.SetPercentageRecoverable(101);
 
             Assert.Throws<InvalidOperationException>(setRecoveryPercentageData);
         }
 
         [Fact]
-        public void RecoveryPercentageCannotBeGreaterLessThanZero()
+        public void RecoveryPercentageCannotBeLessThanZero()
         {
             var notification = CreateNotificationApplication();
 
-            Action setRecoveryPercentageData = () => notification.SetRecoveryPercentageData(-1, null);
-
-            Assert.Throws<InvalidOperationException>(setRecoveryPercentageData);
-        }
-
-        [Fact]
-        public void MethodOfDisposalCannotBeNull()
-        {
-            var notification = CreateNotificationApplication();
-
-            Action setRecoveryPercentageData = () => notification.SetRecoveryPercentageData(50, null);
-
-            Assert.Throws<InvalidOperationException>(setRecoveryPercentageData);
-        }
-
-        [Fact]
-        public void RecoveryPercentageRoundedTo100IsNotAllowed()
-        {
-            var notification = CreateNotificationApplication();
-
-            Action setRecoveryPercentageData = () => notification.SetRecoveryPercentageData(99.999999M, MethodOfDisposal);
+            Action setRecoveryPercentageData = () => notification.SetPercentageRecoverable(-1);
 
             Assert.Throws<InvalidOperationException>(setRecoveryPercentageData);
         }
@@ -58,7 +38,7 @@
         {
             var notification = CreateNotificationApplication();
 
-            notification.SetRecoveryPercentageData(12.9876543M, MethodOfDisposal);
+            notification.SetPercentageRecoverable(12.9876543M);
 
             Assert.True(notification.PercentageRecoverable == 12.99M);
         }
@@ -68,7 +48,8 @@
         {
             var notification = CreateNotificationApplication();
 
-            Action setRecoveryPercentageData = () => notification.SetRecoveryPercentageData(100, MethodOfDisposal);
+            notification.SetPercentageRecoverable(100);
+            Action setRecoveryPercentageData = () => notification.SetMethodOfDisposal(MethodOfDisposal);
 
             Assert.Throws<InvalidOperationException>(setRecoveryPercentageData);
         }

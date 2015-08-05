@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -26,7 +25,14 @@
             }
             else
             {
-                notification.SetRecoveryPercentageData(message.PercentageRecoverable.GetValueOrDefault(), message.MethodOfDisposal);
+                if (message.MethodOfDisposal == null)
+                {
+                    notification.SetPercentageRecoverable(message.PercentageRecoverable.GetValueOrDefault());
+                }
+                else
+                {
+                    notification.SetMethodOfDisposal(message.MethodOfDisposal);
+                }
             }
 
             await context.SaveChangesAsync();

@@ -233,15 +233,19 @@
         [Fact]
         public async Task CanAddRecoveryPercentageData()
         {
+            var recoveryPercentage = 56.78M;
+            var methodOfDisposal = "Some method of disposal text";
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
             UKCompetentAuthority.England, 0);
 
-            notification.SetRecoveryPercentageData(56, "Some text");
+            notification.SetPercentageRecoverable(recoveryPercentage);
+            notification.SetMethodOfDisposal(methodOfDisposal);
+            
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.Equal(56, notification.PercentageRecoverable);
-            Assert.Equal("Some text", notification.MethodOfDisposal);
+            Assert.Equal(recoveryPercentage, notification.PercentageRecoverable);
+            Assert.Equal(methodOfDisposal, notification.MethodOfDisposal);
 
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
