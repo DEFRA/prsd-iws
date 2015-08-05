@@ -9,9 +9,11 @@
     using Mapper;
     using ViewModels;
 
-    internal class CarrierBlock : INotificationBlock, IAnnexedBlock
+    internal class CarrierBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
     {
         private readonly IList<CarrierViewModel> data;
+
+        public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
         public CarrierBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
@@ -47,9 +49,9 @@
 
             MergeMultipleCarriersTable(properties);
             MergeAnnexNumber(annexNumber);
-        }
 
-        public IList<MergeField> AnnexMergeFields { get; private set; }
+            TocText = "Annex " + annexNumber + " - Intended Carriers";
+        }
 
         private void MergeCarriersToMainDocument(CarrierViewModel carrier, PropertyInfo[] properties)
         {
@@ -63,12 +65,12 @@
         {
             var mergeTableRows = new TableRow[data.Count];
 
-            // Find both the first row in the multiple producers table and the table itself.
+            // Find both the first row in the multiple carriers table and the table itself.
             var firstMergeFieldInTable = FindFirstMergeFieldInAnnexTable();
             var table = FindMultipleCarriersTable(firstMergeFieldInTable);
 
             // Get the table row containing the merge fields.
-            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().Single();
+            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().First();
 
             // Create a row containing merge fields for each of the Carriers.
             for (var i = 1; i < data.Count; i++)
@@ -87,8 +89,6 @@
                 }
             }
         }
-
-        public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
         public string TypeName
         {
@@ -111,33 +111,8 @@
                     MergeCarriersToMainDocument(data[0], carriers);
                 }
 
-                ClearAnnexFields();
+                RemoveAnnex();
             }
-        }
-
-        private void ClearAnnexFields()
-        {
-            ClearMultipleCarriersTable();
-            ClearAnnexTitleAndSeeAnnexNotice();
-        }
-
-        private void ClearAnnexTitleAndSeeAnnexNotice()
-        {
-            FindAnnexNumberMergeField().RemoveCurrentContents();
-        }
-
-        private void ClearMultipleCarriersTable()
-        {
-            var table = FindMultipleCarriersTable(FindFirstMergeFieldInAnnexTable());
-            table.Remove();
-        }
-
-        private void MergeAnnexNumber(int annexNumber)
-        {
-            // Set the annex number as the page title.
-            var annexNumberField = FindAnnexNumberMergeField();
-            annexNumberField.RemoveCurrentContents();
-            annexNumberField.SetText(annexNumber.ToString(), 0);
         }
 
         private MergeField FindFirstMergeFieldInAnnexTable()
@@ -149,15 +124,9 @@
                               StringComparison.InvariantCultureIgnoreCase));
         }
 
-        private MergeField FindAnnexNumberMergeField()
-        {
-            return AnnexMergeFields.Single(
-                mf => mf.FieldName.InnerTypeName != null && mf.FieldName.InnerTypeName.Equals("AnnexNumber"));
-        }
-
         private Table FindMultipleCarriersTable(MergeField firstMergeFieldInTable)
         {
-            return firstMergeFieldInTable.Run.Ancestors<Table>().Single();
+            return firstMergeFieldInTable.Run.Ancestors<Table>().First();
         }
     }
 }

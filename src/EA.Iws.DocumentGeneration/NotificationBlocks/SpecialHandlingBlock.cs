@@ -8,7 +8,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class SpecialHandlingBlock : INotificationBlock, IAnnexedBlock
+    internal class SpecialHandlingBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
     {
         private const string SpecialHandling = "SpHandling";
         private readonly SpecialHandlingViewModel data;
@@ -19,8 +19,6 @@
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, SpecialHandling);
         }
-
-        public IList<MergeField> AnnexMergeFields { get; private set; }
 
         public bool HasAnnex
         {
@@ -63,6 +61,8 @@
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(SpecialHandlingViewModel));
             MergeSpecialHandlingDataToDocument(SpecialHandlingViewModel.GetSpecialHandlingAnnexNotice(data, annexNumber), properties);
             MergeAnnexNumber(annexNumber);
+
+            TocText = "Annex " + annexNumber + " - Special handling requirements";
         }
 
         private void MergeSpecialHandlingDataToDocument(SpecialHandlingViewModel specialHandling, PropertyInfo[] properties)
@@ -85,34 +85,7 @@
                 field.RemoveCurrentContents();
             }
 
-            ClearAnnexFields();
-        }
-
-        private void ClearAnnexFields()
-        {
-            foreach (var field in FindAllAnnexMergeFields())
-            {
-                field.RemoveCurrentContents();
-            }
-        }
-
-        private void MergeAnnexNumber(int annexNumber)
-        {
-            var annexNumberField = FindAnnexNumberMergeField();
-            annexNumberField.RemoveCurrentContents();
-            annexNumberField.SetText(annexNumber.ToString(), 0);
-        }
-
-        private MergeField FindAnnexNumberMergeField()
-        {
-            return AnnexMergeFields.Single(mf => mf.FieldName.InnerTypeName != null
-                                    && mf.FieldName.InnerTypeName.Equals("AnnexNumber"));
-        }
-
-        private IEnumerable<MergeField> FindAllAnnexMergeFields()
-        {
-            return AnnexMergeFields.Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
-                                     && mf.FieldName.OuterTypeName.Equals(SpecialHandling));
+            RemoveAnnex();
         }
     }
 }

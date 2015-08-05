@@ -58,6 +58,8 @@
     <Compile Include="MergeFieldLocator.cs" />
     <Compile Include="MergeFieldName.cs" />
     <Compile Include="MergeFieldType.cs" />
+    <Compile Include="NotificationBlocks\AnnexBlockBase.cs" />
+    <Compile Include="NotificationBlocks\NumberOfAnnexesAndInstructionsAndToCBlock.cs" />
     <Compile Include="NotificationBlocks\CarrierBlock.cs" />
     <Compile Include="NotificationBlocks\CustomsOfficeBlock.cs" />
     <Compile Include="NotificationBlocks\ImporterBlock.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="ViewModels\CustomsOfficeViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\ImporterViewModel.cs" />
+    <Compile Include="ViewModels\NumberOfAnnexesAndInstructionsAndToCViewModel.cs" />
     <Compile Include="ViewModels\OperationViewModel.cs" />
     <Compile Include="ViewModels\FacilityViewModel.cs" />
     <Compile Include="ViewModels\ProducerViewModel.cs" />

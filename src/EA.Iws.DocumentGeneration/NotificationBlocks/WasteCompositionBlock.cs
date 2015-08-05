@@ -9,7 +9,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class WasteCompositionBlock : INotificationBlock, IAnnexedBlock
+    internal class WasteCompositionBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
     {
         private const string Parameters = "Parameters";
         private const string Constituents = "Constituents";
@@ -28,8 +28,6 @@
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
-        public IList<MergeField> AnnexMergeFields { get; private set; }
-
         public bool HasAnnex
         {
             get 
@@ -46,6 +44,13 @@
         {
             MergeToMainDocument(annexNumber);
             MergeAnnexNumber(annexNumber);
+
+            TocText = "Annex " + annexNumber + " - Designation and composition of waste";
+
+            if (data.HasAnnex)
+            {
+                InstructionsText = "Designation and composition of waste - annex " + annexNumber;
+            }
 
             var tableproperties = PropertyHelper.GetPropertiesForViewModel(typeof(ChemicalCompositionPercentages));
 
@@ -89,7 +94,7 @@
                     MergeFieldDataMapper.BindCorrespondingField(field, data, properties);
                 }
 
-                ClearAnnexFields();
+                RemoveAnnex();
             }
         }
 
@@ -115,7 +120,7 @@
             var firstMergeFieldInTable = FindFirstMergeFieldInTable(tableName);
             var table = FindTable(firstMergeFieldInTable);
 
-            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().Single();
+            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().First();
 
             for (var i = 1; i < list.Count(); i++)
             {
@@ -147,15 +152,7 @@
         {
             var fieldRun = firstMergeFieldInTable.Run;
             var tableAncestors = fieldRun.Ancestors<Table>();
-            return tableAncestors.Single();
-        }
-
-        private void ClearAnnexFields()
-        {
-            foreach (var annexMergeField in AnnexMergeFields)
-            {
-                annexMergeField.RemoveCurrentContents();
-            }
+            return tableAncestors.First();
         }
 
         private void ClearAnnexFields(string type)
@@ -165,23 +162,6 @@
             {
                 annexMergeField.RemoveCurrentContents();
             }
-        }
-
-        private void MergeAnnexNumber(int annexNumber)
-        {
-            // Set the annex number as the page title.
-            foreach (var annexNumberField in FindAnnexNumberMergeFields())
-            {
-                annexNumberField.RemoveCurrentContents();
-                annexNumberField.SetText(annexNumber.ToString(), 0);
-            }
-        }
-
-        private IEnumerable<MergeField> FindAnnexNumberMergeFields()
-        {
-            return AnnexMergeFields.Where(mf => mf.FieldName.InnerTypeName != null
-                    && mf.FieldName.OuterTypeName.Equals(TypeName)
-                    && mf.FieldName.InnerTypeName.Equals("AnnexNumber"));
         }
     }
 }

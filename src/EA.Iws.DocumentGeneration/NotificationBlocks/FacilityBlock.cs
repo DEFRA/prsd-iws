@@ -9,7 +9,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class FacilityBlock : INotificationBlock, IAnnexedBlock
+    internal class FacilityBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
     {
         private const string ActualSiteOfTreatment = "ActualSite";
         private readonly IList<FacilityViewModel> data;
@@ -26,8 +26,6 @@
             ((List<MergeField>)AnnexMergeFields).AddRange(MergeFieldLocator.GetAnnexMergeFields(mergeFields, ActualSiteOfTreatment));
         }
 
-        public IList<MergeField> AnnexMergeFields { get; private set; }
-
         public bool HasAnnex
         {
             get { return data.Count > 1; }
@@ -36,6 +34,8 @@
         public void GenerateAnnex(int annexNumber)
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(FacilityViewModel));
+
+            TocText = "Annex " + annexNumber + " - Disposal or Recovery Facility";
 
             if (data.Count == 2)
             {
@@ -97,7 +97,7 @@
                     MergeFacilityToMainDocument(data[0], properties);
                 }
 
-                ClearAnnexFields();
+                RemoveAnnex();
             }
         }
 
@@ -116,7 +116,7 @@
             var table = FindMultipleFacilitiesTable(firstMergeFieldInTable);
 
             // Get the table row containing the merge fields.
-            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().Single();
+            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().First();
             for (var i = 1; i < data.Count; i++)
             {
                 mergeTableRows[i] = (TableRow)mergeTableRows[0].CloneNode(true);
@@ -133,28 +133,6 @@
             }
         }
 
-        private void ClearAnnexFields()
-        {
-            ClearMultipleFacilitiesTable();
-
-            ClearAnnexTitleAndSeeAnnexNotice();
-
-            ClearActualSiteOfTreatmentFields();
-        }
-
-        private void ClearActualSiteOfTreatmentFields()
-        {
-            foreach (var mergeField in FindActualSiteOfTreatmentMergeFields())
-            {
-                mergeField.RemoveCurrentContents();
-            }
-        }
-
-        private void ClearAnnexTitleAndSeeAnnexNotice()
-        {
-            FindAnnexNumberMergeField().RemoveCurrentContents();
-        }
-
         private void ClearMultipleFacilitiesTable()
         {
             var table = FindMultipleFacilitiesTable(FindFirstMergeFieldInAnnexTable());
@@ -169,29 +147,15 @@
             }
         }
 
-        private void MergeAnnexNumber(int annexNumber)
-        {
-            // Set the annex number as the page title.
-            var annexNumberField = FindAnnexNumberMergeField();
-            annexNumberField.RemoveCurrentContents();
-            annexNumberField.SetText(annexNumber.ToString(), 0);
-        }
-
         private MergeField FindFirstMergeFieldInAnnexTable()
         {
             return AnnexMergeFields.Single(mf => mf.FieldName.OuterTypeName.Equals(TypeName, StringComparison.InvariantCultureIgnoreCase)
                           && mf.FieldName.InnerTypeName.Equals("RegistrationNumber", StringComparison.InvariantCultureIgnoreCase));
         }
 
-        private MergeField FindAnnexNumberMergeField()
-        {
-            return AnnexMergeFields.Single(mf => mf.FieldName.InnerTypeName != null
-                        && mf.FieldName.InnerTypeName.Equals("AnnexNumber"));
-        }
-
         private Table FindMultipleFacilitiesTable(MergeField firstMergeFieldInTable)
         {
-            return firstMergeFieldInTable.Run.Ancestors<Table>().Single();
+            return firstMergeFieldInTable.Run.Ancestors<Table>().First();
         }
 
         private IEnumerable<MergeField> FindActualSiteOfTreatmentMergeFields()

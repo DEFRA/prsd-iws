@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using DocumentFormat.OpenXml.Packaging;
@@ -9,6 +10,9 @@
 
     public class DocumentGenerator : IDocumentGenerator
     {
+        private string TocText { get; set; }
+        private string InstructionsText { get; set; }
+
         public byte[] GenerateNotificationDocument(NotificationApplication notification)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("NotificationMergeTemplate.docx"))
@@ -34,9 +38,19 @@
                         if (annexBlock != null && annexBlock.HasAnnex)
                         {
                             annexBlock.GenerateAnnex(annexNumber);
+
+                            var newTocText = string.IsNullOrEmpty(annexBlock.TocText) ? string.Empty : annexBlock.TocText + Environment.NewLine;
+                            TocText = TocText + newTocText;
+
+                            var newInstructionsText = string.IsNullOrEmpty(annexBlock.InstructionsText) ? string.Empty : annexBlock.InstructionsText + Environment.NewLine;
+                            InstructionsText = InstructionsText + newInstructionsText;
+
                             annexNumber++;
                         }
                     }
+
+                    var finalBlock = new NumberOfAnnexesAndInstructionsAndToCBlock(mergeFields, annexNumber - 1, TocText, InstructionsText);
+                    finalBlock.Merge();
 
                     MergeFieldLocator.RemoveDataSourceSettingFromMergedDocument(document);
                 }

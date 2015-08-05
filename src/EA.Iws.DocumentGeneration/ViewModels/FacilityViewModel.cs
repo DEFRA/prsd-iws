@@ -49,7 +49,7 @@
 
         private void SetActualSiteOfTreatment(int countOfFacilities)
         {
-            ActualSite = (countOfFacilities == 1) ? "As Above" : "See Annex";
+            ActualSite = (countOfFacilities == 1) ? "Site as above" : "See Annex";
         }
 
         public static FacilityViewModel GetSeeAnnexInstructionForFacility(int annexNumber)

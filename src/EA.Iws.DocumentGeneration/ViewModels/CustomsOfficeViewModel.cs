@@ -5,6 +5,8 @@
 
     internal class CustomsOfficeViewModel
     {
+        public string EntryTitle { get; private set; }
+        public string ExitTitle { get; private set; }
         public string EntryName { get; private set; }
         public string ExitName { get; private set; }
         public string EntryAddress { get; private set; }
@@ -15,6 +17,8 @@
 
         public CustomsOfficeViewModel(NotificationApplication notification)
         {
+            EntryTitle = notification.EntryCustomsOffice != null ? "Entry customs office:" : string.Empty;
+            ExitTitle = notification.ExitCustomsOffice != null ? "Exit customs office:" : string.Empty;
             EntryName = notification.EntryCustomsOffice != null ? notification.EntryCustomsOffice.Name : string.Empty;
             ExitName = notification.ExitCustomsOffice != null ? notification.ExitCustomsOffice.Name : string.Empty;
             EntryAddress = notification.EntryCustomsOffice != null ? notification.EntryCustomsOffice.Address : string.Empty;

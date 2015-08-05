@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using Domain.TransportRoute;
 

@@ -9,5 +9,9 @@
         void GenerateAnnex(int annexNumber);
 
         IList<MergeField> AnnexMergeFields { get; }
+
+        string TocText { get; }
+
+        string InstructionsText { get; }
     }
 }

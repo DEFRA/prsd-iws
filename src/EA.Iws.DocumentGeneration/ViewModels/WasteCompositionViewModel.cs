@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using Core.WasteType;
     using Domain.NotificationApplication;
@@ -30,8 +31,8 @@
             ChemicalCompositionDescription = wasteType.ChemicalCompositionDescription ?? string.Empty;
             ShortDescription = string.Empty;
             LongDescription = string.Empty;
-            Energy = wasteType.EnergyInformation ?? string.Empty;
-            OptionalInformation = wasteType.OptionalInformation ?? string.Empty;
+            Energy = AddTitleToEnergy(wasteType);
+            OptionalInformation = AddTitleToOptionalInformation(wasteType);
             OtherTypeDescription = wasteType.OtherWasteTypeDescription ?? string.Empty;
             WoodTypeDescription = wasteType.WoodTypeDescription ?? string.Empty;
             ChemicalComposition = wasteType.ChemicalCompositionType;
@@ -80,6 +81,30 @@
             }
 
             Compositions = data;
+        }
+
+        private string AddTitleToOptionalInformation(WasteType wasteType)
+        {
+            if (wasteType.OptionalInformation != null)
+            {
+                return Environment.NewLine + "Additional Information" + Environment.NewLine + wasteType.OptionalInformation + Environment.NewLine;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        private string AddTitleToEnergy(WasteType wasteType)
+        {
+            if (wasteType.EnergyInformation != null)
+            {
+                return Environment.NewLine + "Energy Efficiency = " + wasteType.EnergyInformation;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         private void SetAdditionalInfos(WasteType wasteType)

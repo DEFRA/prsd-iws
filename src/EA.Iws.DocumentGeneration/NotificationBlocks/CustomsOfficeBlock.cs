@@ -2,16 +2,17 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using DocumentFormat.OpenXml.Wordprocessing;
     using Domain.NotificationApplication;
     using Mapper;
     using ViewModels;
 
-    internal class CustomsOfficeBlock : INotificationBlock, IAnnexedBlock
+    internal class CustomsOfficeBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
     {
         private readonly CustomsOfficeViewModel data;
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
-        public IList<MergeField> AnnexMergeFields { get; private set; }
+        //public IList<MergeField> AnnexMergeFields { get; private set; }
 
         public CustomsOfficeBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
@@ -47,13 +48,15 @@
                     MergeFieldDataMapper.BindCorrespondingField(field, data, properties);
                 }
 
-                ClearAnnexFields();
+                RemoveAnnex();
             }
         }
 
         public void GenerateAnnex(int annexNumber)
         {
             MergeToMainDocument(annexNumber);
+
+            TocText = "Annex " + annexNumber + " - Customs offices";
 
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(CustomsOfficeViewModel));
 
@@ -65,14 +68,6 @@
             MergeAnnexNumber(annexNumber);
         }
 
-        private void ClearAnnexFields()
-        {
-            foreach (var annexMergeField in AnnexMergeFields)
-            {
-                annexMergeField.RemoveCurrentContents();
-            }
-        }
-
         private void MergeToMainDocument(int annexNumber)
         {
             data.SetAnnexMessages(annexNumber);
@@ -82,23 +77,6 @@
             {
                 MergeFieldDataMapper.BindCorrespondingField(field, data, properties);
             }
-        }
-
-        private void MergeAnnexNumber(int annexNumber)
-        {
-            // Set the annex number as the page title.
-            foreach (var annexNumberField in FindAnnexNumberMergeFields())
-            {
-                annexNumberField.RemoveCurrentContents();
-                annexNumberField.SetText(annexNumber.ToString(), 0);
-            }
-        }
-
-        private IEnumerable<MergeField> FindAnnexNumberMergeFields()
-        {
-            return AnnexMergeFields.Where(mf => mf.FieldName.InnerTypeName != null
-                    && mf.FieldName.OuterTypeName.Equals(TypeName)
-                    && mf.FieldName.InnerTypeName.Equals("AnnexNumber"));
         }
     }
 }

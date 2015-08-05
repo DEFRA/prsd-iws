@@ -259,8 +259,8 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Documents\NotificationMergeTemplate.docx" />
     <Content Include="Documents\FinancialGuaranteeForm.pdf" />
+    <Content Include="Documents\NotificationMergeTemplate.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

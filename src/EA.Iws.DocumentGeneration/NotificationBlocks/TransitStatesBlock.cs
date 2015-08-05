@@ -9,11 +9,10 @@
     using Mapper;
     using ViewModels;
 
-    internal class TransitStatesBlock : INotificationBlock, IAnnexedBlock
+    internal class TransitStatesBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
     {
         private readonly TransitStateViewModel data;
 
-        public IList<MergeField> AnnexMergeFields { get; private set; }
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
         public TransitStatesBlock(IList<MergeField> mergeFields, NotificationApplication notification)
@@ -40,7 +39,7 @@
             {
                 MergeToMainDocument();
 
-                ClearAnnexTable();
+                RemoveAnnex();
             }
         }
 
@@ -64,6 +63,8 @@
             MergeToMainDocument();
             MergeAnnexNumber(annexNumber);
 
+            TocText = "Annex " + annexNumber + " - States of transit";
+
             var tableproperties = PropertyHelper.GetPropertiesForViewModel(typeof(TransitStateDetail));
             MergeToTable(tableproperties);
         }
@@ -77,7 +78,7 @@
             var table = FindAnnexTable(firstMergeFieldInTable);
 
             // Get the table row containing the merge fields.
-            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().Single();
+            mergeTableRows[0] = firstMergeFieldInTable.Run.Ancestors<TableRow>().First();
 
             // Create a row containing merge fields for each of the producers.
             for (var i = 1; i < data.TransitStateDetails.Count; i++)
@@ -97,12 +98,6 @@
             }
         }
 
-        private void ClearAnnexTable()
-        {
-            var table = FindAnnexTable(FindFirstMergeFieldInAnnexTable());
-            table.Remove();
-        }
-
         private MergeField FindFirstMergeFieldInAnnexTable()
         {
             return
@@ -114,21 +109,7 @@
 
         private Table FindAnnexTable(MergeField firstMergeFieldInTable)
         {
-            return firstMergeFieldInTable.Run.Ancestors<Table>().Single();
-        }
-
-        private void MergeAnnexNumber(int annexNumber)
-        {
-            // Set the annex number as the page title.
-            var annexNumberField = FindAnnexNumberMergeField();
-            annexNumberField.RemoveCurrentContents();
-            annexNumberField.SetText(annexNumber.ToString(), 0);
-        }
-
-        private MergeField FindAnnexNumberMergeField()
-        {
-            return AnnexMergeFields.Single(
-                mf => mf.FieldName.InnerTypeName != null && mf.FieldName.InnerTypeName.Equals("AnnexNumber"));
+            return firstMergeFieldInTable.Run.Ancestors<Table>().First();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
+    using System;
     using Domain.NotificationApplication;
 
     internal class ProducerViewModel
@@ -22,6 +23,7 @@
             CountOfProducers = countOfProducers;
             ProcessOfGeneration = processText ?? string.Empty;
             IsProcessAnnexAttached = isIsProcessAnnexAttachedAttached;
+            DescriptionTitle = "Description of Process of Generation";
         }
 
         private ProducerViewModel()
@@ -34,6 +36,8 @@
         {
             get { return address.Address(AddressLines.Three); }
         }
+
+        public string DescriptionTitle { get; set; }
 
         public string RegistrationNumber { get; private set; }
 
