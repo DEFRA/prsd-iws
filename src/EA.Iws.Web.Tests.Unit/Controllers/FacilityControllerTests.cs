@@ -23,7 +23,7 @@
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private readonly Guid facilityId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
         private readonly FacilityController facilityController;
-        private Guid facilityId2 = new Guid("D8991991-64A7-4101-A3A2-2F6B538A0A7A");
+        private readonly Guid facilityId2 = new Guid("D8991991-64A7-4101-A3A2-2F6B538A0A7A");
 
         public FacilityControllerTests()
         {
@@ -140,8 +140,15 @@
         public async Task CopyFromImporter_ReturnsView()
         {
             var result = await facilityController.CopyFromImporter(notificationId) as ViewResult;
-
             Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public async Task CopyFromImporter_FacilityExists_RedirectsTo_List()
+        {
+            A.CallTo(() => client.SendAsync(A<string>._, A<GetFacilitiesByNotificationId>._)).Returns(new List<FacilityData>() { CreateFacility(facilityId) });
+            var result = await facilityController.CopyFromImporter(notificationId) as RedirectToRouteResult;
+            Assert.Equal("List", result.RouteValues["action"]);
         }
 
         [Fact]

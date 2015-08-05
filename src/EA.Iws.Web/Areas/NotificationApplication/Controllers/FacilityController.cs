@@ -254,15 +254,20 @@
         [HttpGet]
         public async Task<ActionResult> CopyFromImporter(Guid id)
         {
-            var model = new YesNoChoiceViewModel();
-            ViewBag.NotificationId = id;
-
             using (var client = apiClient())
             {
-                var notificationInfo =
-                    await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
+                var response = await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
+                if (response != null && response.Count > 0)
+                {
+                    return RedirectToAction("List");
+                }
+
+                var notificationInfo = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
                 ViewBag.NotificationType = notificationInfo.NotificationType.ToString().ToLowerInvariant();
             }
+
+            var model = new YesNoChoiceViewModel();
+            ViewBag.NotificationId = id;
 
             return View(model);
         }

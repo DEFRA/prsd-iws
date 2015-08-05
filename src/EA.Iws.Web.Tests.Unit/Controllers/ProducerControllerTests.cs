@@ -21,7 +21,7 @@
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private readonly Guid producerId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
         private readonly ProducerController producerController;
-        private Guid producerId2 = new Guid("D8991991-64A7-4101-A3A2-2F6B538A0A7A");
+        private readonly Guid producerId2 = new Guid("D8991991-64A7-4101-A3A2-2F6B538A0A7A");
 
         public ProducerControllerTests()
         {
@@ -39,6 +39,7 @@
                     Name = "Germany"
                 }
             });
+
             A.CallTo(() => client.SendAsync(A<string>._, A<GetProducerForNotification>._)).Returns(CreateProducer(producerId));
             producerController = new ProducerController(() => client);
         }
@@ -57,11 +58,18 @@
         }
 
         [Fact]
-        public void CopyFromExporter_ReturnsView()
+        public async Task CopyFromExporter_ReturnsView()
         {
-            var result = producerController.CopyFromExporter(notificationId) as ViewResult;
-
+            var result = await producerController.CopyFromExporter(notificationId) as ViewResult;
             Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public async Task CopyFromExporter_ProducerExists_RedirectsTo_List()
+        {
+            A.CallTo(() => client.SendAsync(A<string>._, A<GetProducersByNotificationId>._)).Returns(new List<ProducerData>() { CreateProducer(producerId) });
+            var result = await producerController.CopyFromExporter(notificationId) as RedirectToRouteResult;
+            Assert.Equal("List", result.RouteValues["action"]);
         }
 
         [Fact]

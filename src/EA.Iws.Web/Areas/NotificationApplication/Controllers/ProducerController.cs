@@ -23,8 +23,17 @@
         }
 
         [HttpGet]
-        public ActionResult CopyFromExporter(Guid id)
+        public async Task<ActionResult> CopyFromExporter(Guid id)
         {
+            using (var client = apiClient())
+            {
+                var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
+                if (response != null && response.Count > 0)
+                {
+                    return RedirectToAction("List");
+                }
+            }
+
             var model = new YesNoChoiceViewModel();
             ViewBag.NotificationId = id;
 
@@ -168,7 +177,7 @@
                 {
                     ViewBag.Error =
                         string.Format("You have chosen to remove {0} which is the site of export. " +
-                                      "You will need to select an alternative site of export before you can remove this producer.", 
+                                      "You will need to select an alternative site of export before you can remove this producer.",
                                       model.ProducerName);
                     return View(model);
                 }
