@@ -10,6 +10,7 @@ namespace EA.Iws.Web
     using System.Web.Mvc;
     using Autofac;
     using Autofac.Integration.Mvc;
+    using Infrastructure;
     using Owin;
     using Services;
     using Thinktecture.IdentityModel.Client;
@@ -36,6 +37,8 @@ namespace EA.Iws.Web
             ConfigureAuth(app, configuration.CurrentConfiguration);
 
             AntiForgeryConfig.UniqueClaimTypeIdentifier = JwtClaimTypes.Subject;
+            AntiForgeryConfig.RequireSsl = true;
+            AntiForgeryConfig.CookieName = Prsd.Core.Web.Constants.CookiePrefix + Constants.AntiForgeryCookieName;
 
             MvcHandler.DisableMvcResponseHeader = true;
         }
