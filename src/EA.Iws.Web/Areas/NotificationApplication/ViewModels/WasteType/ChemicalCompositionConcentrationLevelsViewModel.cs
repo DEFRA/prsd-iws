@@ -23,6 +23,7 @@
 
         public string Command { get; set; }
 
+        [StringLength(70, ErrorMessage = "Please limit your answer to 70 characters or less")]
         public string Description { get; set; }
 
         public ChemicalCompositionType ChemicalCompositionType { get; set; }

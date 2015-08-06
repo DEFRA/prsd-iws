@@ -18,6 +18,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
         @Html.Gds().ValidationMessageFor(m => m.Description)
         <p>Brief description of the type of wood</p>
+        @Html.Gds().HintSpan("Limit your answer to 70 characters or less")
         @Html.Gds().TextBoxFor(m => m.Description)
     </div>
     <h2 class="heading-small">What is the chemical composition of the waste?</h2>
