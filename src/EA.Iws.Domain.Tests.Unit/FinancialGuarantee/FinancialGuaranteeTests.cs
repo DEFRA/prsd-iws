@@ -3,167 +3,56 @@
     using System;
     using Core.FinancialGuarantee;
     using Domain.FinancialGuarantee;
-    using Prsd.Core;
+    using FakeItEasy;
+    using Prsd.Core.Domain;
     using TestHelpers.Helpers;
-    using Xunit;
 
     public class FinancialGuaranteeTests
     {
-        private static readonly DateTime AnyDate = new DateTime(2014, 5, 5);
-        private readonly FinancialGuarantee financialGuarantee;
-        private readonly FinancialGuarantee completedFinancialGuarantee;
-        private readonly FinancialGuarantee receivedFinancialGuarantee;
+        protected static readonly DateTime AnyDate = new DateTime(2014, 5, 5);
+        protected static readonly string AnyString = "test";
+        protected static readonly DateTime CompletedDate = AnyDate.AddDays(1);
+        protected static readonly DateTime AfterCompletionDate = AnyDate.AddDays(2);
+        protected static readonly DateTime BeforeCompletionDate = AnyDate;
+
+        protected readonly FinancialGuarantee FinancialGuarantee;
+        protected readonly FinancialGuarantee CompletedFinancialGuarantee;
+        protected readonly FinancialGuarantee ReceivedFinancialGuarantee;
+        protected readonly FinancialGuarantee ApprovedFinancialGuarantee;
+        protected readonly FinancialGuarantee RefusedFinancialGuarantee;
+
+        protected readonly IDeferredEventDispatcher Dispatcher;
 
         public FinancialGuaranteeTests()
         {
-            financialGuarantee = FinancialGuarantee.Create(new Guid("C91DA02A-114A-44C3-8B12-3FF24950D6E4"));
+            FinancialGuarantee = FinancialGuarantee.Create(new Guid("C91DA02A-114A-44C3-8B12-3FF24950D6E4"));
 
-            completedFinancialGuarantee = FinancialGuarantee.Create(new Guid("5DC6DB46-89DF-4F3D-BE47-4290EEE890D3"));
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationComplete, completedFinancialGuarantee);
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, completedFinancialGuarantee);
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, AnyDate.AddDays(1), completedFinancialGuarantee);
+            CompletedFinancialGuarantee = FinancialGuarantee.Create(new Guid("5DC6DB46-89DF-4F3D-BE47-4290EEE890D3"));
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationComplete, CompletedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, CompletedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, CompletedFinancialGuarantee);
 
-            receivedFinancialGuarantee = FinancialGuarantee.Create(new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD9"));
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationReceived, receivedFinancialGuarantee);
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, receivedFinancialGuarantee);
-        }
+            ApprovedFinancialGuarantee = FinancialGuarantee.Create(new Guid("38CBD523-7F96-45AA-9251-955DB1632F3A"));
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.Approved, ApprovedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, ApprovedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, ApprovedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.DecisionDate, AfterCompletionDate, ApprovedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ApprovedFrom, AfterCompletionDate, ApprovedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ApprovedTo, AfterCompletionDate.AddYears(1), ApprovedFinancialGuarantee);
 
-        [Fact]
-        public void SetReceivedDate_SetsDate()
-        {
-            financialGuarantee.Received(AnyDate);
+            RefusedFinancialGuarantee = FinancialGuarantee.Create(new Guid("229F6957-3CBE-4C70-9A5F-40F42CF5BA11"));
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.Refused, RefusedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, RefusedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, RefusedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.DecisionDate, AfterCompletionDate, RefusedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.RefusalReason, AnyString, RefusedFinancialGuarantee);
 
-            Assert.Equal(AnyDate, financialGuarantee.ReceivedDate);
-        }
+            ReceivedFinancialGuarantee = FinancialGuarantee.Create(new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD9"));
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationReceived, ReceivedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, ReceivedFinancialGuarantee);
 
-        [Fact]
-        public void Status_IsPending()
-        {
-            Assert.Equal(FinancialGuaranteeStatus.AwaitingApplication, financialGuarantee.Status);
-        }
-
-        [Fact]
-        public void SetReceivedDate_ChangesStatus()
-        {
-            financialGuarantee.Received(AnyDate);
-
-            Assert.Equal(FinancialGuaranteeStatus.ApplicationReceived, financialGuarantee.Status);
-        }
-
-        [Fact]
-        public void SetCompletedDate_NullReceivedDate_Throws()
-        {
-            Assert.Throws<InvalidOperationException>(() => financialGuarantee.Completed(AnyDate));
-        }
-
-        [Fact]
-        public void SetReceivedDateTwice_Throws()
-        {
-            financialGuarantee.Received(AnyDate);
-
-            Assert.Throws<InvalidOperationException>(() => financialGuarantee.Received(AnyDate.AddDays(1)));
-        }
-
-        [Fact]
-        public void SetCompletedDate_AfterReceivedDate_SetsDate()
-        {
-            financialGuarantee.Received(AnyDate);
-
-            financialGuarantee.Completed(AnyDate.AddDays(1));
-
-            Assert.Equal(AnyDate.AddDays(1), financialGuarantee.CompletedDate);
-        }
-
-        [Fact]
-        public void SetCompletedDate_BeforeReceivedDate_Throws()
-        {
-            financialGuarantee.Received(AnyDate);
-
-            Assert.Throws<InvalidOperationException>(() => financialGuarantee.Completed(AnyDate.AddDays(-1)));
-        }
-
-        [Fact]
-        public void Create_GeneratesObjectwithExpectedValues()
-        {
-            SystemTime.Freeze();
-
-            var fg = FinancialGuarantee.Create(new Guid("03A3DC05-7144-483A-BF99-3AF02D3DEF72"));
-
-            Assert.Equal(SystemTime.UtcNow, fg.CreatedDate);
-            Assert.Equal(FinancialGuaranteeStatus.AwaitingApplication, fg.Status);
-
-            SystemTime.Unfreeze();
-        }
-
-        [Fact]
-        public void UpdateReceivedDate_NullReceivedDate_Throws()
-        {
-            Assert.Throws<InvalidOperationException>(() => financialGuarantee.UpdateReceivedDate(AnyDate));
-        }
-
-        [Fact]
-        public void UpdateReceivedDate_GreaterThanCompletedDate_Throws()
-        {
-            Assert.Throws<InvalidOperationException>(() => completedFinancialGuarantee.UpdateReceivedDate(AnyDate.AddDays(2)));
-        }
-
-        [Fact]
-        public void UpdateReceivedDate_SetToSameDate_Passes()
-        {
-            receivedFinancialGuarantee.UpdateReceivedDate(AnyDate);
-
-            Assert.Equal(AnyDate, receivedFinancialGuarantee.ReceivedDate);
-        }
-
-        [Fact]
-        public void UpdateReceivedDate_ToEarlierDate_Passes()
-        {
-            receivedFinancialGuarantee.UpdateReceivedDate(AnyDate.AddDays(-2));
-
-            Assert.Equal(AnyDate.AddDays(-2), receivedFinancialGuarantee.ReceivedDate);
-        }
-
-        [Fact]
-        public void UpdateReceivedDateForCompleted_ToEarlierDate_Passes()
-        {
-            completedFinancialGuarantee.UpdateReceivedDate(AnyDate.AddDays(-1));
-
-            Assert.Equal(AnyDate.AddDays(-1), completedFinancialGuarantee.ReceivedDate);
-        }
-
-        [Fact]
-        public void UpdateCompletedDate_NewRecord_Throws()
-        {
-            Assert.Throws<InvalidOperationException>(() => financialGuarantee.UpdateCompletedDate(AnyDate));
-        }
-
-        [Fact]
-        public void UpdateCompletedDate_ReceivedRecord_Throws()
-        {
-            Assert.Throws<InvalidOperationException>(() => receivedFinancialGuarantee.UpdateCompletedDate(AnyDate));
-        }
-
-        [Fact]
-        public void UpdateCompletedDate_ToBeforeReceivedDate_Throws()
-        {
-            Assert.Throws<InvalidOperationException>(
-                () => completedFinancialGuarantee.UpdateCompletedDate(AnyDate.AddDays(-1)));
-        }
-
-        [Fact]
-        public void UpdateCompletedDate_AfterCurrentDate_Updates()
-        {
-            completedFinancialGuarantee.UpdateCompletedDate(AnyDate.AddDays(3));
-
-            Assert.Equal(AnyDate.AddDays(3), completedFinancialGuarantee.CompletedDate);
-        }
-
-        [Fact]
-        public void UpdateCompletedDate_ToCurrentDate_Updates()
-        {
-            completedFinancialGuarantee.UpdateCompletedDate(AnyDate.AddDays(1));
-
-            Assert.Equal(AnyDate.AddDays(1), completedFinancialGuarantee.CompletedDate);
+            Dispatcher = A.Fake<IDeferredEventDispatcher>();
+            DomainEvents.Dispatcher = Dispatcher;
         }
     }
 }

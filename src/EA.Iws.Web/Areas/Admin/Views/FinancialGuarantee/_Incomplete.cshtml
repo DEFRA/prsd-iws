@@ -1,0 +1,12 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.FinancialGuarantee.FinancialGuaranteeDecisionViewModel
+
+<p class="lede">This financial guarantee has not been marked as completed.</p>
+<p>Please enter the application the dates on which the financial guarantee application was received and completed before recording your decision.</p>
+@using (Html.BeginForm())
+{
+    <button class="button" type="submit">Continue</button>
+    <div class="form-group">
+        @Html.ActionLink("Enter received and completion dates", "Dates", new { id = ViewContext.RouteData.Values["ID"] })
+    </div>
+}
+

@@ -69,6 +69,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />

@@ -1,0 +1,19 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.FinancialGuarantee.FinancialGuaranteeDecisionViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ApprovedFrom.Day)  @Html.Gds().FormGroupClass(m => m.ApprovedFrom.Month)  @Html.Gds().FormGroupClass(m => m.ApprovedFrom.Year)">
+    @Html.Gds().ValidationMessageFor(m => m.ApprovedFrom)
+    @Html.Gds().LabelFor(m => m.ApprovedFrom, false)
+    @Html.EditorFor(m => m.ApprovedFrom)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ApprovedTo.Day) @Html.Gds().FormGroupClass(m => m.ApprovedTo.Month) @Html.Gds().FormGroupClass(m => m.ApprovedTo.Year)">
+    @Html.Gds().ValidationMessageFor(m => m.ApprovedTo)
+    @Html.Gds().LabelFor(m => m.ApprovedTo, false)
+    @Html.EditorFor(m => m.ApprovedTo)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ActiveLoadsPermitted)">
+    @Html.Gds().ValidationMessageFor(m => m.ActiveLoadsPermitted)
+    @Html.Gds().LabelFor(m => m.ActiveLoadsPermitted, false)
+    @Html.Gds().TextBoxFor(m => m.ActiveLoadsPermitted, new { type = "number", min = "1", step="1", pattern = "[0-9]*" })
+</div>

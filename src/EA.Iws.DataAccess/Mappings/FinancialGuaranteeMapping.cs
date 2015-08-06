@@ -16,6 +16,8 @@
                     "StatusChangeCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("FinancialGuaranteeId"));
+
+            Property(x => x.RefusalReason).HasMaxLength(2048);
         }
     }
 }

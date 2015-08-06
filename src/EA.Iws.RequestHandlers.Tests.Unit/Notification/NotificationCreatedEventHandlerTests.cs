@@ -7,6 +7,7 @@
     using Core.NotificationAssessment;
     using DataAccess;
     using Domain;
+    using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
@@ -29,8 +30,10 @@
             var dbSetHelper = new DbContextHelper();
 
             var assessments = dbSetHelper.GetAsyncEnabledDbSet(new List<NotificationAssessment>());
+            var financialGuarantees = dbSetHelper.GetAsyncEnabledDbSet(new List<FinancialGuarantee>());
 
             A.CallTo(() => context.NotificationAssessments).Returns(assessments);
+            A.CallTo(() => context.FinancialGuarantees).Returns(financialGuarantees);
 
             var notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notification, notificationId);
@@ -53,6 +56,14 @@
             await handler.HandleAsync(message);
 
             Assert.Equal(NotificationStatus.NotSubmitted, context.NotificationAssessments.Single(p => p.NotificationApplicationId == notificationId).Status);
+        }
+
+        [Fact]
+        public async Task FinancialGuaranteeIsCreated()
+        {
+            await handler.HandleAsync(message);
+
+            Assert.Single(context.FinancialGuarantees, fg => fg.NotificationApplicationId == notificationId);
         }
     }
 }

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Admin\ApprovalAction.cs" />
     <Compile Include="Admin\FinancialGuaranteeData.cs" />
+    <Compile Include="Admin\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUser.cs" />
     <Compile Include="Admin\InternalUserStatus.cs" />
     <Compile Include="Admin\DecisionType.cs" />

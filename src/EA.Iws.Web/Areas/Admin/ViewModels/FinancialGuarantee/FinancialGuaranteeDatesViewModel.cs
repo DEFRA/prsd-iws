@@ -7,7 +7,7 @@
     using Core.Admin;
     using Prsd.Core.Helpers;
 
-    public class FinancialGuaranteeInformationViewModel : IValidatableObject
+    public class FinancialGuaranteeDatesViewModel : IValidatableObject
     {
         [Required]
         [DisplayName("Guarantee received")]
@@ -24,19 +24,10 @@
 
         public bool IsRequiredEntryComplete { get; set; }
 
-        public FinancialGuaranteeInformationViewModel()
+        public FinancialGuaranteeDatesViewModel()
         {
             Received = new OptionalDateInputViewModel();
             Completed = new OptionalDateInputViewModel();
-        }
-
-        public FinancialGuaranteeInformationViewModel(FinancialGuaranteeData financialGuaranteeData)
-        {
-            Status = EnumHelper.GetDisplayName(financialGuaranteeData.Status);
-            Received = new OptionalDateInputViewModel(financialGuaranteeData.ReceivedDate);
-            Completed = new OptionalDateInputViewModel(financialGuaranteeData.CompletedDate);
-            DecisionRequired = financialGuaranteeData.DecisionRequiredDate;
-            IsRequiredEntryComplete = financialGuaranteeData.ReceivedDate.HasValue;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

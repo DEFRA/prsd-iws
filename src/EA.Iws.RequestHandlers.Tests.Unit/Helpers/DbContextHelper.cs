@@ -33,11 +33,11 @@
                 });
 
             A.CallTo(() => ((IDbAsyncEnumerable<T>)dbSet).GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<T>(queryable.GetEnumerator()));
-            A.CallTo(() => ((IQueryable<T>)dbSet).Provider).Returns(new TestDbAsyncQueryProvider<T>(queryable.Provider));
+            A.CallTo(() => ((IQueryable<T>)dbSet).Provider).ReturnsLazily(() => new TestDbAsyncQueryProvider<T>(queryable.Provider));
 
             A.CallTo(() => ((IQueryable<T>)dbSet).Expression).Returns(queryable.Expression);
             A.CallTo(() => ((IQueryable<T>)dbSet).ElementType).Returns(queryable.ElementType);
-            A.CallTo(() => ((IQueryable<T>)dbSet).GetEnumerator()).Returns(queryable.GetEnumerator());
+            A.CallTo(() => ((IQueryable<T>)dbSet).GetEnumerator()).ReturnsLazily(() => queryable.GetEnumerator());
 
             A.CallTo(() => dbSet.Add(A<T>.Ignored))
                 .Invokes((T item) =>

@@ -37,9 +37,8 @@
       <HintPath>..\packages\EA.Prsd.Core.1.0.15218-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FakeItEasy, Version=1.25.3.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+    <Reference Include="FakeItEasy">
       <HintPath>..\packages\FakeItEasy.1.25.3\lib\net40\FakeItEasy.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,7 +63,13 @@
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
     <Compile Include="BusinessTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeApproveTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeCompletedTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeReceivedTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeRefuseTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeReleaseTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
     <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationTests.cs" />

@@ -69,6 +69,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuaranteeHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandlerTests.cs" />
     <Compile Include="Admin\GetDatesHandlerTests.cs" />
