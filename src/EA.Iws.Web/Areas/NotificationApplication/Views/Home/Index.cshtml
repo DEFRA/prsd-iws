@@ -1,66 +1,99 @@
-﻿@using EA.Iws.Core.Shared
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
 @{
-    ViewBag.Title = "Notification overview";
+    ViewBag.Title = "Submit";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-<h1 class="heading-large">Notification overview</h1>
+<div class="grid-row" id="submit-grid-row">
+    @Html.Partial("_SummaryTableContainer", Model)
+    @Html.Action("SubmitSideBar", new { charge = ViewBag.Charge })
+</div>
 
-<section class="notification-overview">
-    <div>
+@section scripts{
+    <script>
+        $(function () {
+            window["detailsOpened"] = false;
 
-        <h2 class="heading-medium">Organisations involved</h2>
+            $("#expand-contract").click(function () {
+                var container = $(this).parents("div").first();
+                var details = container.find("details");
+                if (!window["detailsOpened"]) {
+                    expandContract(details, true);
+                }
+                else {
+                    expandContract(details, false);
+                }
+            });
+        });
 
-        @Html.Partial("_Exporter")
-        @Html.Partial("_Producer")
-        @Html.Partial("_Importer")
-        @Html.Partial("_Facility")
-
-        <h2 class="heading-medium">@Model.NotificationType operation</h2>
-
-        @Html.Partial("_PreConsented")
-        @Html.Partial("_RecoveryDisposal")
-        @Html.Partial("_Technology")
-        @Html.Partial("_ReasonForExport")
-
-        <h2 class="heading-medium">Transportation</h2>
-
-        @Html.Partial("_Carrier")
-        @Html.Partial("_MeansOfTransport")
-        @Html.Partial("_Packaging")
-        @Html.Partial("_Handling")
-
-        <h2 class="heading-medium">The journey</h2>
-
-        @Html.Partial("_StateOfExport")
-        @Html.Partial("_TransitStates")
-        @Html.Partial("_StateOfImport")
-        @Html.Partial("_Customs")
-
-        <h2 class="heading-medium">Amounts and dates</h2>
-
-        @Html.Partial("_IntendedShipments")
-
-        <h2 class="heading-medium">Classify your waste</h2>
-
-        @Html.Partial("_ChemicalComposition")
-        @Html.Partial("_ProcessOfGeneration")
-        @Html.Partial("_PhysicalCharacteristics")
-        @Html.Partial("_WasteCodes")
-
-        @if (Model.NotificationType == NotificationType.Recovery)
-        {
-            <h2 class="heading-medium">Waste recovery</h2>
-            @Html.Partial("_RecoveryInfo")
+        function expandContract(details, show) {
+            details.prop("open", show);
+            details.find("div").show();
+            details.find("summary").attr("aria-expanded", show);
+            details.find("div").attr("aria-hidden", !show);
+            window["detailsOpened"] = show;
+            $("#expand-contract").text(show ? "Collapse all -" : "Expand all +");
         }
 
-        @Html.Partial("_NotificationCharge")
-    </div>
+        $("#submit-fixed-sidebar-container").css({
+            "position": "absolute",
+            "height": "100%",
+        });
+        
+        $("#submit-fixed-sidebar").css({
+            "position": "absolute",
+            "bottom": "auto"
+        });
 
-</section>
-@if (Model.Progress.IsAllComplete)
-{
-    <div class="form-group">
-        @Html.ActionLink("Continue", "Index", "Submit", new { id = Model.NotificationId }, new { @class = "button" })
-    </div>
+        var width = $("#submit-fixed-sidebar-container").parents("div").first().width();
+        $("#submit-fixed-sidebar").css({
+            "width": width
+        });
+        
+        $(window).resize(function () {
+            width = $("#submit-fixed-sidebar-container").parents("div").first().width();
+            $("#submit-fixed-sidebar").css({
+                "width": width
+            });
+            
+        })
+
+        
+        var sidebarheight = $("#submit-fixed-sidebar").height();
+        $(window).scroll(function () {
+            var scroll = $(this).scrollTop();
+            var length = $("#submit-grid-row").height() - sidebarheight + $("#submit-grid-row").offset().top;
+            var height = $("#submit-fixed-sidebar").height() + "px";
+            width = $("#submit-fixed-sidebar-container").parents("div").first().width();
+
+            var mainContentHeight = $("#submit-grid-row").height()
+            $("#submit-fixed-sidebar-container").css({
+                "height": mainContentHeight
+                })
+            
+                if (scroll < $("#submit-fixed-sidebar-container").offset().top) {
+                    $("#submit-fixed-sidebar").css({
+                        "position": "absolute",
+                        "top": "0",
+                        "width": width
+                    });
+                }
+                else if (scroll > length) {
+                    $("#submit-fixed-sidebar").css({
+                        "position": "absolute",
+                        "bottom": 0,
+                        "top": "auto",
+                        "width": width
+                    });
+                }
+                else {
+                    $("#submit-fixed-sidebar").css({
+                        "position": "fixed",
+                        "top": "0",
+                        "height": height,
+                        "width": width
+                    });
+                }
+        });
+    </script>
 }

@@ -221,12 +221,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\NotificationApplication\Views\Submit\_RecoveryOperation.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_Journey.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_ClassifyYourWaste.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_WasteRecovery.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_RecoveryOperation.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_Journey.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_ClassifyYourWaste.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_WasteRecovery.cshtml" />
     <Content Include="Areas\FinancialGuarantee\Views\web.config" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_OrganisationsInvolved.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_OrganisationsInvolved.cshtml" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -452,33 +452,10 @@
     <Content Include="Areas\NotificationApplication\Views\Producer\_BusinessType.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Disclaimer.cshtml" />
     <Content Include="Content\iws\_overview.scss" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Exporter.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Producer.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Importer.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_SubmitSideBar.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_Transportation.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_AmountsAndDates.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Facility.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_PreConsented.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_RecoveryDisposal.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Technology.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_ReasonForExport.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Carrier.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_MeansOfTransport.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Packaging.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Handling.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_StateOfExport.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_TransitStates.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_StateOfImport.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Customs.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_IntendedShipments.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_ChemicalComposition.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_ProcessOfGeneration.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_PhysicalCharacteristics.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_WasteCodes.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_RecoveryInfo.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_NotificationCharge.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_SubmitSideBar.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_Transportation.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_AmountsAndDates.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Submitted.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
@@ -585,7 +562,6 @@
     <Content Include="Areas\NotificationApplication\Views\Facility\List.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\CopyFromExporter.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\_SpecialHandling.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\Index.cshtml" />
@@ -636,6 +612,8 @@
     <Content Include="Views\Registration\ChangeAccountDetails.cshtml" />
     <Content Include="Views\Registration\EditApplicantDetails.cshtml" />
     <Content Include="Views\Registration\EditOrganisationDetails.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AddressData.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ContactData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -676,14 +654,20 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\RemoveCarrierViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\RemoveFacilityViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\SiteOfTreatmentViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\AmountsAndDatesViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\ClassifyYourWasteViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\JourneyViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\NavigationViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\OrganisationsInvolvedViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\RecoveryOperationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmittedViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\TransportationViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\WasteRecoveryViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Producer\RemoveProducerViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Producer\SiteOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\MethodOfDisposalViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Submit\SubmitSideBarViewModel.cs" />
-    <Content Include="Areas\NotificationApplication\Views\Submit\_SummaryTableContainer.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_SummaryTableContainer.cshtml" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />

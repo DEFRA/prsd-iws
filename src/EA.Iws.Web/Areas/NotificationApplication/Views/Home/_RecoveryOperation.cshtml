@@ -1,0 +1,77 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
+@{
+    var id = Model.NotificationId;
+    var disposalOrRecovery = Model.NotificationType;
+}
+
+<h2 class="heading-medium">@disposalOrRecovery operation</h2>
+
+<div>
+    @if (disposalOrRecovery == NotificationType.Recovery)
+    {
+        <details>
+            <summary>
+                Pre-consent facility @if (Model.Progress.IsPreconsentStatusChosen)
+                { <i class="fa fa-check green-text"></i> }
+                <span class="edit-link-container">@Html.ActionLink("Edit", "RecoveryPreconsent", "Facility", new { id }, null)</span>
+            </summary>
+            <div class="expanded-details">
+                <div class="panel-indent">
+                    <p>@Html.DisplayFor(m => m.PreconstedAnswer)</p>
+                </div>
+            </div>
+        </details>
+    }
+    <details>
+        <summary>
+            @disposalOrRecovery codes @if (Model.Progress.AreOperationCodesChosen)
+            { <i class="fa fa-check green-text"></i> }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "RecoveryCodes", "WasteOperations", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @foreach (var code in Model.OperationCodes)
+                {
+                    <span class="operation-code-list">@code</span>
+                }
+            </div>
+        </div>
+    </details>
+    <details>
+        <summary>
+            Technology employed @if (Model.Progress.IsTechnologyEmployedCompleted)
+            { <i class="fa fa-check green-text"></i> }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "TechnologyEmployed", "WasteOperations", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            @if (Model.Progress.IsTechnologyEmployedCompleted)
+            {
+                <div class="panel-indent">
+                    <dl>
+                        <dt>Description:</dt>
+                        <dd>@Html.DisplayFor(m => m.TechnologyEmployed.Details)</dd>
+
+                        @if (!Model.TechnologyEmployed.AnnexProvided)
+                        {
+                            <dt>Further details:</dt>
+                            <dd>@Html.DisplayFor(m=> m.TechnologyEmployed.FurtherDetails)</dd>
+                        }
+                    </dl>
+                </div>
+            }
+        </div>
+    </details>
+    <details>
+        <summary>
+            Reason for export @if (Model.Progress.IsReasonForExportCompleted)
+            { <i class="fa fa-check green-text"></i> }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "ReasonForExport", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                <p>@Html.DisplayFor(m => m.ReasonForExport)</p>
+            </div>
+        </div>
+    </details>
+</div>

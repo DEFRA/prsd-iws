@@ -1,0 +1,33 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
+@{
+    var id = Model.NotificationId;
+}
+
+<h2 class="heading-medium">Amount and dates</h2>
+
+<div>
+    <details>
+        <summary>
+            Intended shipments @if (Model.Progress.IsIntendedShipmentsCompleted)
+            { <i class="fa fa-check green-text"></i> }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Shipment", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.ShipmentData.NumberOfShipments > 0)
+                {
+                    <dl>
+                        <dt>Total intended number of shipments:</dt>
+                        <dd>@Model.ShipmentData.NumberOfShipments</dd>
+
+                        <dt>Total intended quantity:</dt>
+                        <dd>@(Model.ShipmentData.Quantity.ToString("0.000") + " " + Model.ShipmentData.Units)</dd>
+
+                        <dt>Intended dates of departure:</dt>
+                        <dd>@Html.Gds().DisplayDateRangeFor(m => m.ShipmentData.FirstDate, m => m.ShipmentData.LastDate)</dd>
+                    </dl>
+                }
+            </div>
+        </div>
+    </details>
+</div>

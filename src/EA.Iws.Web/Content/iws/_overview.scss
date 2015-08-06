@@ -159,3 +159,93 @@
         width: 70%;
     }
 }
+
+#submit-side-bar {
+    h3:first-of-type {
+        border-bottom: 10px solid $link-colour;
+    }
+
+    a {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-bottom: 0.3em;
+    }
+
+    .squash-margin {
+        margin-top: 1em;
+        margin-bottom: 0;
+    }
+
+    #charge {
+        font-size: 40px;
+        font-weight: 700;
+        margin-top: 0;
+    }
+
+    .line {
+        display: block;
+    }
+
+    .text-fade {
+        color: $secondary-text-colour;
+    }
+}
+
+#submit-overview-area {
+
+    details {
+        margin-bottom: 15px;
+
+        .expanded-details {
+            padding-bottom: 10px;
+        }
+
+        .panel-indent {
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+        dl dt {
+            margin: 15px 0 3px 0;
+            color: $secondary-text-colour;
+        }
+
+        hr {
+            display: block; 
+            height: 1px;
+            border: 0; 
+            border-top: 1px solid #BFC1C3;
+            margin: 15px 0 3px 0;
+        }
+
+        .definition-indent {
+            margin-left: 10px;
+        }
+
+        dt.definition-indent {
+            margin-left: 10px;
+            margin-top: 7px;
+        }
+
+        > summary {
+            display: block;
+
+            > .edit-link-container {
+                float: right;
+            }
+        }
+
+    }
+
+    hr {
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        display: inline-block;
+    }
+}
