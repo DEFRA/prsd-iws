@@ -135,19 +135,5 @@
             }
             return RedirectToAction("Index", "Home", new { id = model.Id });
         }
-
-        //[HttpGet]
-        //public ActionResult SubmitSideBar(Guid id, int charge)
-        //{
-        //    using (var client = apiClient())
-        //    {
-        //        var result = client.SendAsync(User.GetAccessToken(),
-        //            new GetSubmitSummaryInformationForNotification(id)).GetAwaiter().GetResult();
-
-        //        result.Charge = charge;
-
-        //        return PartialView("_SubmitSideBar", mapper.Map(result, id));
-        //    }
-        //}
     }
 }

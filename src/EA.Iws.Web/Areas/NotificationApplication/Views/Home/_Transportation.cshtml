@@ -8,8 +8,11 @@
 <div>
     <details>
         <summary>
-            Intended carriers @if (Model.IsCarrierCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Intended carriers 
+            @if (Model.IsCarrierCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Carrier", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -46,8 +49,11 @@
     </details>
     <details>
         <summary>
-            Means of transport @if (Model.IsMeansOfTransportCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Means of transport 
+            @if (Model.IsMeansOfTransportCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "MeansOfTransport", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -65,8 +71,11 @@
     </details>
     <details>
         <summary>
-            Packaging types @if (Model.IsPackagingTypesCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Packaging types 
+            @if (Model.IsPackagingTypesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PackagingTypes", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -82,8 +91,11 @@
     </details>
     <details>
         <summary>
-            Special handling @if (Model.IsSpecialHandlingCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Special handling 
+            @if (Model.IsSpecialHandlingCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "SpecialHandling", new { id }, null)</span>
         </summary>
         <div class="expanded-details">

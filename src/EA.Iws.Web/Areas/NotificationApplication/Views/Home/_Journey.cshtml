@@ -8,8 +8,11 @@
 <div>
     <details>
         <summary>
-            Transport route - export @if (Model.IsStateOfExportCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Transport route - export 
+            @if (Model.IsStateOfExportCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfExport", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -36,8 +39,11 @@
 
     <details>
         <summary>
-            Transport route - transits @if (Model.AreTransitStatesCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Transport route - transits 
+            @if (Model.AreTransitStatesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Summary", "TransportRoute", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -69,8 +75,11 @@
 
     <details>
         <summary>
-            Transport route - import @if (Model.IsStateOfImportCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Transport route - import 
+            @if (Model.IsStateOfImportCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfImport", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -99,8 +108,11 @@
     {
         <details>
             <summary>
-                Custom office @if (Model.IsCustomsOfficeCompleted)
-                { <i class="fa fa-check green-text"></i> }
+                Custom office 
+                @if (Model.IsCustomsOfficeCompleted)
+                {
+                    <i class="fa fa-check green-text"></i>
+                }
                 <span class="edit-link-container">@Html.ActionLink("Edit", "List", "CustomsOffice", new { id }, null)</span>
             </summary>
             <div class="expanded-details">

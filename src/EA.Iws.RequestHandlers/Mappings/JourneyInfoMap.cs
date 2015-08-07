@@ -16,7 +16,7 @@
         public JourneyInfoMap(
             IMap<NotificationApplication, StateOfExportWithTransportRouteData> transportRouteMap,
             IMap<NotificationApplication, EntryCustomsOfficeAddData> customsOfficeEntryMap,
-        IMap<NotificationApplication, ExitCustomsOfficeAddData> customsOfficeExitMap)
+            IMap<NotificationApplication, ExitCustomsOfficeAddData> customsOfficeExitMap)
         {
             this.transportRouteMap = transportRouteMap;
             this.customsOfficeEntryMap = customsOfficeEntryMap;

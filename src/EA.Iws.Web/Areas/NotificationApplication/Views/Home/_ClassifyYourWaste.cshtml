@@ -12,8 +12,11 @@
 <div>
     <details>
         <summary>
-            Chemical composition @if (Model.IsChemicalCompositionCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Chemical composition 
+            @if (Model.IsChemicalCompositionCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "ChemicalComposition", "WasteType", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -64,8 +67,11 @@
     </details>
     <details>
         <summary>
-            Process of generation @if (Model.IsProcessOfGenerationCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Process of generation 
+            @if (Model.IsProcessOfGenerationCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "WasteGenerationProcess", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -79,8 +85,11 @@
     </details>
     <details>
         <summary>
-            Physical characteristics @if (Model.ArePhysicalCharacteristicsCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Physical characteristics 
+            @if (Model.ArePhysicalCharacteristicsCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PhysicalCharacteristics", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -97,8 +106,11 @@
     </details>
     <details>
         <summary>
-            Waste codes @if (Model.AreWasteCodesCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Waste codes 
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
