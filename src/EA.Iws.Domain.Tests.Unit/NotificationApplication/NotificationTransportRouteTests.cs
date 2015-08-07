@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.NotificationApplication;
+    using FakeItEasy.Configuration;
     using TestHelpers.Helpers;
     using TransportRoute;
     using Xunit;
@@ -165,15 +166,15 @@
         }
 
         [Fact]
-        public void TransitState_EntryAndExitPointTheSame_Throws()
+        public void TransitState_EntryAndExitPointTheSame_Succeeds()
         {
             var country = countries[0];
+            var entryPoint = GetTestEntryOrExitPoint(country, new Guid("E0B04105-8E22-49E6-A00C-CBD2F2D11B54"));
+            var exitPoint = GetTestEntryOrExitPoint(country, new Guid("E0B04105-8E22-49E6-A00C-CBD2F2D11B54"));
+            var transitState = new TransitState(country, GetTestCompetentAuthority(country), entryPoint, exitPoint, 1);
 
-            Assert.Throws<InvalidOperationException>(() => new TransitState(country,
-                GetTestCompetentAuthority(country),
-                GetTestEntryOrExitPoint(country, new Guid("E0B04105-8E22-49E6-A00C-CBD2F2D11B54")),
-                GetTestEntryOrExitPoint(country, new Guid("E0B04105-8E22-49E6-A00C-CBD2F2D11B54")),
-                1));
+            Assert.Equal(new Guid("E0B04105-8E22-49E6-A00C-CBD2F2D11B54"), transitState.EntryPoint.Id);
+            Assert.Equal(new Guid("E0B04105-8E22-49E6-A00C-CBD2F2D11B54"), transitState.ExitPoint.Id);
         }
 
         [Theory]

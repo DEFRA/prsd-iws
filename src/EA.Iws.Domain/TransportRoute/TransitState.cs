@@ -39,11 +39,6 @@ namespace EA.Iws.Domain.TransportRoute
                     country.Name));
             }
 
-            if (entryPoint.Id == exitPoint.Id)
-            {
-                throw new InvalidOperationException(string.Format("Transit State cannot have same Entry and Exit Point. Entry: {0} Exit: {1}.", entryPoint.Id, exitPoint.Id));
-            }
-
             Country = country;
             CompetentAuthority = competentAuthority;
             ExitPoint = exitPoint;

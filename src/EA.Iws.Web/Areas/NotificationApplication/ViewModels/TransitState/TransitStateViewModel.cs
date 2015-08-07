@@ -60,11 +60,6 @@
             {
                 yield return new ValidationResult("Transit country may not be the same as another transit country.", new[] { "CountryId" });
             }
-
-            if (ExitPointId == EntryPointId && CountryId.HasValue && ShowNextSection)
-            {
-                yield return new ValidationResult("Exit and entry point must not be the same.", new[] { "ExitPointId" });
-            }
         }
     }
 }
