@@ -6,8 +6,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
+    using Core.NotificationAssessment;
     using Core.WasteType;
     using DataAccess;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Admin;
 
@@ -22,22 +24,45 @@
 
         public async Task<IList<BasicSearchResult>> HandleAsync(GetBasicSearchResults query)
         {
-            var results = await(from n in context.NotificationApplications
-                                where (n.NotificationNumber.Contains(query.SearchTerm) ||
-                                       n.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm) ||
-                                       n.Exporter.Business.Name.Contains(query.SearchTerm))
-                                    select new { n.Id, n.NotificationNumber, ExporterName = n.Exporter.Business.Name, WasteType = (int?)n.WasteType.ChemicalCompositionType.Value }).ToListAsync();
-            return results.Select(r => ConvertToSearchResults(r.Id, r.NotificationNumber, r.ExporterName, r.WasteType)).ToList();
+            return (await context.NotificationApplications
+                .Where(p => p.NotificationNumber.Contains(query.SearchTerm) ||
+                            p.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm) ||
+                            p.Exporter.Business.Name.Contains(query.SearchTerm))
+                .Join(context.NotificationAssessments
+                    .Where(p => p.Status != NotificationStatus.NotSubmitted), n => n.Id,
+                    na => na.NotificationApplicationId, (n, na) => new { n, na })
+                .Select(
+                    s =>
+                        new
+                        {
+                            s.n.Id,
+                            s.n.NotificationNumber,
+                            ExporterName = s.n.Exporter.Business.Name,
+                            WasteType = (int?)s.n.WasteType.ChemicalCompositionType.Value,
+                            s.na.Status
+                        })
+                .ToListAsync())
+                .Select(s => ConvertToSearchResults(
+                    s.Id,
+                    s.NotificationNumber,
+                    s.ExporterName,
+                    s.WasteType,
+                    s.Status)).ToList();
         }
 
-        private BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber, string exporterName, int? wasteTypeValue)
+        private static BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber,
+            string exporterName, int? wasteTypeValue, NotificationStatus status)
         {
-            BasicSearchResult searchResult = new BasicSearchResult
+            var searchResult = new BasicSearchResult
             {
                 Id = notificationId,
                 NotificationNumber = notificationNumber,
                 ExporterName = exporterName,
-                WasteType = wasteTypeValue != null ? Enum.GetName(typeof(ChemicalCompositionType), wasteTypeValue) : string.Empty
+                WasteType =
+                    wasteTypeValue != null
+                        ? Enum.GetName(typeof(ChemicalCompositionType), wasteTypeValue)
+                        : string.Empty,
+                NotificationStatus = EnumHelper.GetDisplayName(status)
             };
 
             return searchResult;

@@ -28,6 +28,7 @@
                 <thead>
                     <tr>
                         <th>Notification number</th>
+                        <th>Status</th>
                         <th>Company name</th>
                         <th>Waste type</th>
                     </tr>
@@ -38,10 +39,13 @@
                         <tr>
                             <td>
                                 @Html.ActionLink(linkText: @Html.DisplayFor(m => m.SearchResults[i].NotificationNumber).ToString(),
-                                                 actionName: "Index",
-                                                 controllerName: "Home",
-                                                 routeValues: new { id = Model.SearchResults[i].Id, area = "NotificationApplication" },
-                                                 htmlAttributes: null)
+                                    actionName: "Index",
+                                    controllerName: "Home",
+                                    routeValues: new { id = Model.SearchResults[i].Id, area = "NotificationApplication" },
+                                    htmlAttributes: null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.SearchResults[i].NotificationStatus)
                             </td>
                             <td>
                                 @Html.DisplayFor(m => m.SearchResults[i].ExporterName)
