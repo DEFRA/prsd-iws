@@ -67,8 +67,6 @@
                             </div>
                             <div class="column-half">
                                 <dl>
-                                    <dt>@Html.DisplayFor(m => m.Producers[i].IsSiteOfExport) Site of export</dt>
-
                                     <dt>Contact:</dt>
                                     <dd>@Html.DisplayFor(m => m.Producers[i].Contact)</dd>
                                 </dl>
@@ -79,6 +77,37 @@
                             <hr />
                         }
                     }
+                </div>
+            }
+        </div>
+    </details>
+    <details>
+        <summary>
+            Site of export @if (Model.IsProducerCompleted)
+            { <i class="fa fa-check green-text"></i> }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfExport", "Producer", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            @if (Model.IsProducerCompleted)
+            {
+                <div class="panel-indent">
+                    <div class="grid-row">
+                        <div class="column-half">
+                            <dl>
+                                <dt>Organisation name:</dt>
+                                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Business.Name)</dd>
+
+                                <dt>Address:</dt>
+                                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address)</dd>
+                            </dl>
+                        </div>
+                        <div class="column-half">
+                            <dl>
+                                <dt>Contact:</dt>
+                                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Contact)</dd>
+                            </dl>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
@@ -122,7 +151,7 @@
     </details>
     <details>
         <summary>
-            @disposalOrRecovery-facilities @if (Model.IsFacilityCompleted)
+            @disposalOrRecovery facilities @if (Model.IsFacilityCompleted)
             { <i class="fa fa-check green-text"></i> }
             <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Facility", new { id }, null)</span>
         </summary>
@@ -150,8 +179,6 @@
                                     <dt>Company registration:</dt>
                                     <dd>@Html.DisplayFor(m => m.Facilities[i].Business.RegistrationNumber)</dd>
 
-                                    <dt>@Html.DisplayFor(m => m.Facilities[i].IsActualSiteOfTreatment) Actual site</dt>
-
                                     <dt>Contact:</dt>
                                     <dd>@Html.DisplayFor(m => m.Facilities[i].Contact)</dd>
                                 </dl>
@@ -162,6 +189,43 @@
                             <hr />
                         }
                     }
+                </div>
+            }
+        </div>
+    </details>
+    <details>
+        <summary>
+            Actual site of @disposalOrRecovery.ToString().ToLowerInvariant() @if (Model.IsFacilityCompleted)
+            { <i class="fa fa-check green-text"></i> }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfTreatment", "Facility", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            @if (Model.IsFacilityCompleted)
+            {
+                <div class="panel-indent">
+                    <div class="grid-row">
+                        <div class="column-half">
+                            <dl>
+                                <dt>Organisation name:</dt>
+                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.Name)</dd>
+
+                                <dt>Address:</dt>
+                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address)</dd>
+                            </dl>
+                        </div>
+                        <div class="column-half">
+                            <dl>
+                                <dt>Organisation type:</dt>
+                                <dd>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.BusinessType)</dd>
+
+                                <dt>Company registration:</dt>
+                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.RegistrationNumber)</dd>
+
+                                <dt>Contact:</dt>
+                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Contact)</dd>
+                            </dl>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
