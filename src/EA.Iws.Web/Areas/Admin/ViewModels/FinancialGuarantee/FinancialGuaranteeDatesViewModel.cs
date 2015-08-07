@@ -34,7 +34,7 @@
         {
             if (!Received.IsCompleted && !Completed.IsCompleted)
             {
-                yield return new ValidationResult("Received date is required.", new[] { "Received.Day" });
+                yield return new ValidationResult("Received date is required", new[] { "Received.Day" });
             }
 
             if (Received.IsCompleted && Completed.IsCompleted && Received.AsDateTime() > Completed.AsDateTime())

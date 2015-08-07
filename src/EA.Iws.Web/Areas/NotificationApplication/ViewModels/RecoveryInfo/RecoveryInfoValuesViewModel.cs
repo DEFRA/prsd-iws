@@ -23,11 +23,11 @@
 
         public RadioButtonStringCollectionOptionalViewModel DisposalUnit { get; set; }
 
-        [Required(ErrorMessage = "Please enter the amount in GBP(£) for estimated value of the recoverable material.")]
+        [Required(ErrorMessage = "Please enter the amount in GBP(£) for estimated value of the recoverable material")]
         [Display(Name = "Enter the amount in GBP(£)")]
         public string EstimatedAmount { get; set; }
 
-        [Required(ErrorMessage = "Please enter the amount in GBP(£) for cost of recovery.")]
+        [Required(ErrorMessage = "Please enter the amount in GBP(£) for cost of recovery")]
         [Display(Name = "Enter the amount in GBP(£)")]
         public string CostAmount { get; set; }
 
@@ -86,7 +86,7 @@
             {
                 if (String.IsNullOrWhiteSpace(DisposalUnit.SelectedValue))
                 {
-                    results.Add(new ValidationResult("Please answer this question.", new[] { "DisposalUnit.SelectedValue" }));
+                    results.Add(new ValidationResult("Please answer this question", new[] { "DisposalUnit.SelectedValue" }));
                 }
 
                 if (!IsCostValid(DisposalAmount))

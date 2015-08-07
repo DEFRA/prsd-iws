@@ -60,7 +60,7 @@
 
             if (HasAnnex && !(string.IsNullOrEmpty(FurtherInformation)))
             {
-                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here.", new[] { "FurtherInformation" });
+                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here", new[] { "FurtherInformation" });
             }
         }
 

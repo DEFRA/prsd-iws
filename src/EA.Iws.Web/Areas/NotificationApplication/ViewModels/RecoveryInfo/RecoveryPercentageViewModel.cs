@@ -53,7 +53,7 @@
 
         [Range(0, 100, ErrorMessage = "The percentage (%) of recoverable material must be between 0 and 100")]
         [Display(Name = "Enter the percentage (%) of recoverable material")]
-        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places.")]
+        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places")]
         [RequiredIf("IsProvidedByImporter", false, "Please enter the percentage (%) of recoverable material or check the box")]
         public decimal? PercentageRecoverable { get; set; }
 

@@ -14,7 +14,7 @@
         public bool AnnexProvided { get; set; }
 
         [Display(Name = "Display name for details")]
-        [StringLength(70, ErrorMessage = "This description cannot be longer than 70 characters.")]
+        [StringLength(70, ErrorMessage = "This description cannot be longer than 70 characters")]
         public string Details { get; set; }
 
         public string FurtherDetails { get; set; }
@@ -23,11 +23,11 @@
         {
             if (string.IsNullOrEmpty(Details))
             {
-                yield return new ValidationResult("Please enter a description of the technologies used.", new[] { "Details" });
+                yield return new ValidationResult("Please enter a description of the technologies used", new[] { "Details" });
             }
             if (AnnexProvided && !(string.IsNullOrEmpty(FurtherDetails)))
             {
-                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here.", new[] { "FurtherDetails" });
+                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here", new[] { "FurtherDetails" });
             }
         }
     }

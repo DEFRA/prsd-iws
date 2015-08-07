@@ -31,7 +31,7 @@
                     {
                         yield return
                             new ValidationResult(
-                                "Cannot have a means of transport which is the same as the previous means of transport.",
+                                "Cannot have a means of transport which is the same as the previous means of transport",
                                 new[] { "SelectedMeans" });
                         break;
                     }

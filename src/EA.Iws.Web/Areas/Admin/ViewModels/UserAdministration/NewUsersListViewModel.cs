@@ -25,7 +25,7 @@
         {
             if (Users.Count > 0 && Users.All(u => u.Action == null))
             {
-                yield return new ValidationResult("Please select at least one action to perform.");
+                yield return new ValidationResult("Please select at least one action to perform");
             }
         }
     }

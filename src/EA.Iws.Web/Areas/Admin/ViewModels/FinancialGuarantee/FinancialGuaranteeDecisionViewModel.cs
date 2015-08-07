@@ -13,7 +13,7 @@
         public Guid NotificationId { get; set; }
 
         private static readonly Func<string, string> RequiredValidationMessage =
-            s => string.Format("The {0} field is required.", s);
+            s => string.Format("The {0} field is required", s);
 
         public bool IsApplicationCompleted { get; set; }
 
@@ -101,7 +101,7 @@
                 && ApprovedTo.IsCompleted 
                 && ApprovedFrom.AsDateTime() > ApprovedTo.AsDateTime())
             {
-                yield return new ValidationResult("The Approved to date must not be before the Approved from date.", new[] { "ApprovedTo.Day" });
+                yield return new ValidationResult("The Approved to date must not be before the Approved from date", new[] { "ApprovedTo.Day" });
             }
 
             if (!ActiveLoadsPermitted.HasValue)
@@ -111,7 +111,7 @@
 
             if (ActiveLoadsPermitted.HasValue && ActiveLoadsPermitted.Value <= 0)
             {
-                yield return new ValidationResult("The Active loads permitted must be greater than 0.", new[] { "ActiveLoadsPermitted" });
+                yield return new ValidationResult("The Active loads permitted must be greater than 0", new[] { "ActiveLoadsPermitted" });
             }
         }
 

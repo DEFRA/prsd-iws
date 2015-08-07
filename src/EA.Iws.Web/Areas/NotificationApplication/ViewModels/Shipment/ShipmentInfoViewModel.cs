@@ -131,7 +131,7 @@
             {
                 yield return
                     new ValidationResult(
-                        string.Format("The first departure date and last departure date must be within a {0} month period.",
+                        string.Format("The first departure date and last departure date must be within a {0} month period",
                             monthPeriodLength), new[] { "EndYear" });
             }
         }

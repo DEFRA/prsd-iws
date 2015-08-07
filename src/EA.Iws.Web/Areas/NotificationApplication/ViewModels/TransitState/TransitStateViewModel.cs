@@ -48,17 +48,17 @@
         {
             if (CountryId == StateOfExportCountryId)
             {
-                yield return new ValidationResult("Transit country may not be the same as export country.", new[] { "CountryId" });
+                yield return new ValidationResult("Transit country may not be the same as export country", new[] { "CountryId" });
             }
 
             if (CountryId == StateOfImportCountryId)
             {
-                yield return new ValidationResult("Transit country may not be the same as import country.", new[] { "CountryId" });
+                yield return new ValidationResult("Transit country may not be the same as import country", new[] { "CountryId" });
             }
 
             if (TransitStateCountryIds != null && TransitStateCountryIds.Contains(CountryId.GetValueOrDefault()))
             {
-                yield return new ValidationResult("Transit country may not be the same as another transit country.", new[] { "CountryId" });
+                yield return new ValidationResult("Transit country may not be the same as another transit country", new[] { "CountryId" });
             }
         }
     }

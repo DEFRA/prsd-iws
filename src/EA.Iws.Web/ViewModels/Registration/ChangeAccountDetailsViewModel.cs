@@ -4,7 +4,7 @@
 
     public class ChangeAccountDetailsViewModel
     {
-        [Required(ErrorMessage = "Please answer this question.")]
+        [Required(ErrorMessage = "Please answer this question")]
         public bool? ChangeOptions { get; set; }
     }
 }

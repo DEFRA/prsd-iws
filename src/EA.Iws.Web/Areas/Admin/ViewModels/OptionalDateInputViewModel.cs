@@ -62,17 +62,17 @@
             {
                 if (!Day.HasValue)
                 {
-                    yield return new ValidationResult("The Day field is required.", new[] { "Day" });
+                    yield return new ValidationResult("The Day field is required", new[] { "Day" });
                 }
 
                 if (!Month.HasValue)
                 {
-                    yield return new ValidationResult("The Month field is required.", new[] { "Month" });
+                    yield return new ValidationResult("The Month field is required", new[] { "Month" });
                 }
 
                 if (!Year.HasValue)
                 {
-                    yield return new ValidationResult("The Year field is required.", new[] { "Year" });
+                    yield return new ValidationResult("The Year field is required", new[] { "Year" });
                 }
 
                 if (Day.HasValue && Month.HasValue && Year.HasValue)

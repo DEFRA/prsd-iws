@@ -58,7 +58,7 @@
         {
             if (rbp.Key == null || rbp.Value == null)
             {
-                throw new InvalidOperationException("Attempted to cast from an empty RadioButtonPair.");
+                throw new InvalidOperationException("Attempted to cast from an empty RadioButtonPair");
             }
             return new KeyValuePair<TKey, TValue>(rbp.Key, rbp.Value);
         }
