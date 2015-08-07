@@ -10,7 +10,7 @@
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsIntendedShipmentsCompleted { get; set; }
         public ShipmentData ShipmentData { get; set; }
 
         public AmountsAndDatesViewModel()
@@ -21,7 +21,7 @@
         {
             NotificationId = amountAndDatesInfo.NotificationId;
             NotificationType = amountAndDatesInfo.NotificationType;
-            Progress = amountAndDatesInfo.Progress;
+            IsIntendedShipmentsCompleted = amountAndDatesInfo.IsIntendedShipmentsCompleted;
             ShipmentData = amountAndDatesInfo.ShipmentData ?? new ShipmentData();
         }
     }

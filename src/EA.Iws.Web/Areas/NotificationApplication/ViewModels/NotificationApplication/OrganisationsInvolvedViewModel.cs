@@ -16,7 +16,10 @@
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsExporterCompleted { get; set; }
+        public bool IsProducerCompleted { get; set; }
+        public bool IsImporterCompleted { get; set; }
+        public bool IsFacilityCompleted { get; set; }
         public ExporterData Exporter { get; set; }
         public List<ProducerData> Producers { get; set; }
         public ImporterData Importer { get; set; }
@@ -30,7 +33,10 @@
         {
             NotificationId = info.NotificationId;
             NotificationType = info.NotificationType;
-            Progress = info.Progress;
+            IsExporterCompleted = info.IsExporterCompleted;
+            IsProducerCompleted = info.IsProducerCompleted;
+            IsImporterCompleted = info.IsImporterCompleted;
+            IsFacilityCompleted = info.IsFacilityCompleted;
             Exporter = info.Exporter;
             Producers = info.Producers;
             Importer = info.Importer;

@@ -1,31 +1,28 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Submit.SubmitSideBarViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.SubmitSideBarViewModel
 
-<div class="column-third" id="submit-side-bar">
-    <div id="submit-fixed-sidebar-container">
-        <div id="submit-fixed-sidebar">
-            <h3 class="heading-medium">Summary</h3>
+<h3 class="heading-medium">Summary</h3>
 
-            <p>@Html.DisplayFor(m => m.CompetentAuthorityName)</p>
-            <p class="lede" style="font-weight: 700;">@Html.DisplayFor(m => m.NotificationNumber)</p>
-            <p class="font-xsmall"><span class="text-fade">Created:</span> @Html.Gds().DisplayDateFor(m => m.CreatedDate)</p>
+<p>@Html.DisplayFor(m => m.CompetentAuthorityName)</p>
+<p class="lede" style="font-weight: 700;">@Html.DisplayFor(m => m.NotificationNumber)</p>
+<p class="font-xsmall"><span class="text-fade">Created:</span> @Html.Gds().DisplayDateFor(m => m.CreatedDate)</p>
 
-            <h3 class="heading-medium squash-margin">Overall status</h3>
-            <span>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</span>
+<h3 class="heading-medium squash-margin">Overall status</h3>
+<span>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</span>
 
-            <h3 class="heading-medium squash-margin">Notification charge</h3>
-            <p id="charge">£@Html.DisplayFor(m => m.Charge)</p>
-            <ul>
-                <li>@Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", null, new { id = Model.NotificationId })</li>
-                <li>@Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)</li>
-            </ul>
+<h3 class="heading-medium squash-margin">Notification charge</h3>
+<p id="charge">£@Html.DisplayFor(m => m.Charge)</p>
+<ul>
+    <li>@Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", null, new { id = Model.NotificationId })</li>
+    <li>@Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)</li>
+</ul>
 
-            <p>
-                <span class="line">Portable document format (PDF)</span>
-                Approximate size (3356k)
-            </p>
-            <p>If you do not have PDF viewer you can download it from adobe</p>
+<p>
+    <span class="line">Portable document format (PDF)</span>
+    Approximate size (3356k)
+</p>
+<p>If you do not have PDF viewer you can download it from adobe</p>
 
-            @Html.ActionLink("Submit", "Disclaimer", "Home", null, new { @class = "button" })
-        </div>
-    </div>
-</div>
+@if (Model.IsNotificationComplete)
+{
+    @Html.ActionLink("Submit", "Disclaimer", "Home", null, new { @class = "button" })
+}

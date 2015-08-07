@@ -666,7 +666,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\Producer\RemoveProducerViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Producer\SiteOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\MethodOfDisposalViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\Submit\SubmitSideBarViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmitSideBarViewModel.cs" />
     <Content Include="Areas\NotificationApplication\Views\Home\_SummaryTableContainer.cshtml" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
@@ -710,7 +710,6 @@
     <Compile Include="Mappings\FinancialGuaranteeDataToDecisionMap.cs" />
     <Compile Include="Mappings\FinancialGuaranteeDecisionViewModelMap.cs" />
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
-    <Compile Include="Mappings\SubmitSideBarMap.cs" />
     <Compile Include="Mappings\TransitStateWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\StateOfImportWithTransportRouteDataMap.cs" />
     <Compile Include="Services\EmailService.cs" />

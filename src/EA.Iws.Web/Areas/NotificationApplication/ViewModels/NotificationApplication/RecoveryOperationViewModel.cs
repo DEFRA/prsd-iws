@@ -13,7 +13,10 @@
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsPreconsentStatusChosen { get; set; }
+        public bool AreOperationCodesChosen { get; set; }
+        public bool IsTechnologyEmployedCompleted { get; set; }
+        public bool IsReasonForExportCompleted { get; set; }
         public string PreconstedAnswer { get; set; }
         public List<string> OperationCodes { get; set; }
         public TechnologyEmployedData TechnologyEmployed { get; set; }
@@ -27,7 +30,10 @@
         {
             NotificationId = recoveryOperationInfo.NotificationId;
             NotificationType = recoveryOperationInfo.NotificationType;
-            Progress = recoveryOperationInfo.Progress;
+            IsPreconsentStatusChosen = recoveryOperationInfo.IsPreconsentStatusChosen;
+            AreOperationCodesChosen = recoveryOperationInfo.AreOperationCodesChosen;
+            IsTechnologyEmployedCompleted = recoveryOperationInfo.IsTechnologyEmployedCompleted;
+            IsReasonForExportCompleted = recoveryOperationInfo.IsReasonForExportCompleted;
             PreconstedAnswer = recoveryOperationInfo.PreconstedAnswer;
             OperationCodes = recoveryOperationInfo.OperationCodes.OrderBy(c => c.Value).Select(c => c.Code).ToList();
             TechnologyEmployed = recoveryOperationInfo.TechnologyEmployed;

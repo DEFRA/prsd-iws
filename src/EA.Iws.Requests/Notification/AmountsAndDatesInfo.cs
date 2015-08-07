@@ -9,7 +9,7 @@
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsIntendedShipmentsCompleted { get; set; }
         public ShipmentData ShipmentData { get; set; }
     }
 }

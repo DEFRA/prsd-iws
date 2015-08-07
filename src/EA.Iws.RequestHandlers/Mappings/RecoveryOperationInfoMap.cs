@@ -14,16 +14,13 @@
 
     internal class RecoveryOperationInfoMap : IMap<NotificationApplication, RecoveryOperationInfo>
     {
-        private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap;
         private readonly IMap<NotificationApplication, string> preconsentedAnswerMap;
         private readonly IMap<NotificationApplication, TechnologyEmployedData> technologyEmployedMap;
 
         public RecoveryOperationInfoMap(
-            IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap,
             IMap<NotificationApplication, string> preconsentedAnswerMap,
             IMap<NotificationApplication, TechnologyEmployedData> technologyEmployedMap)
         {
-            this.completionProgressMap = completionProgressMap;
             this.preconsentedAnswerMap = preconsentedAnswerMap;
             this.technologyEmployedMap = technologyEmployedMap;
         }
@@ -36,7 +33,6 @@
                 NotificationType = notification.NotificationType == NotificationType.Disposal
                         ? Core.Shared.NotificationType.Disposal
                         : Core.Shared.NotificationType.Recovery,
-                Progress = completionProgressMap.Map(notification),
                 PreconstedAnswer = preconsentedAnswerMap.Map(notification),
                 TechnologyEmployed = technologyEmployedMap.Map(notification),
                 ReasonForExport = notification.ReasonForExport ?? string.Empty,

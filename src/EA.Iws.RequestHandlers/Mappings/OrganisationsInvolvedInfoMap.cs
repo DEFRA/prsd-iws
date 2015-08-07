@@ -16,20 +16,17 @@
 
     internal class OrganisationsInvolvedInfoMap : IMap<NotificationApplication, OrganisationsInvolvedInfo>
     {
-        private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap;
         private readonly IMap<NotificationApplication, ExporterData> exporterMap;
         private readonly IMap<NotificationApplication, ImporterData> importerMap;
         private readonly IMap<NotificationApplication, IList<ProducerData>> producerMap;
         private readonly IMap<NotificationApplication, IList<FacilityData>> facilityMap;
 
         public OrganisationsInvolvedInfoMap(
-            IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap,
             IMap<NotificationApplication, ExporterData> exporterMap,
             IMap<NotificationApplication, ImporterData> importerMap,
             IMap<NotificationApplication, IList<ProducerData>> producerMap,
             IMap<NotificationApplication, IList<FacilityData>> facilityMap)
         {
-            this.completionProgressMap = completionProgressMap;
             this.exporterMap = exporterMap;
             this.importerMap = importerMap;
             this.producerMap = producerMap;
@@ -44,7 +41,6 @@
                 NotificationType = notification.NotificationType == NotificationType.Disposal
                         ? Core.Shared.NotificationType.Disposal
                         : Core.Shared.NotificationType.Recovery,
-                Progress = completionProgressMap.Map(notification),
                 Exporter = exporterMap.Map(notification),
                 Importer = importerMap.Map(notification),
                 Producers = producerMap.Map(notification).ToList(),

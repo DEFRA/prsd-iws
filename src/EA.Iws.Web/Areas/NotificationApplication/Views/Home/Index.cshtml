@@ -5,8 +5,12 @@
 }
 
 <div class="grid-row" id="submit-grid-row">
-    @Html.Partial("_SummaryTableContainer", Model)
-    @Html.Action("SubmitSideBar", new { charge = ViewBag.Charge })
+    <div class="column-two-thirds" id="submit-overview-area">
+        @Html.Partial("_SummaryTableContainer", Model)
+    </div>
+    <div class="column-third" id="submit-side-bar">
+        @Html.Partial("_SubmitSideBar", Model.SubmitSideBarViewModel)
+    </div>
 </div>
 
 @section scripts{
@@ -34,66 +38,5 @@
             window["detailsOpened"] = show;
             $("#expand-contract").text(show ? "Collapse all -" : "Expand all +");
         }
-
-        $("#submit-fixed-sidebar-container").css({
-            "position": "absolute",
-            "height": "100%",
-        });
-        
-        $("#submit-fixed-sidebar").css({
-            "position": "absolute",
-            "bottom": "auto"
-        });
-
-        var width = $("#submit-fixed-sidebar-container").parents("div").first().width();
-        $("#submit-fixed-sidebar").css({
-            "width": width
-        });
-        
-        $(window).resize(function () {
-            width = $("#submit-fixed-sidebar-container").parents("div").first().width();
-            $("#submit-fixed-sidebar").css({
-                "width": width
-            });
-            
-        })
-
-        
-        var sidebarheight = $("#submit-fixed-sidebar").height();
-        $(window).scroll(function () {
-            var scroll = $(this).scrollTop();
-            var length = $("#submit-grid-row").height() - sidebarheight + $("#submit-grid-row").offset().top;
-            var height = $("#submit-fixed-sidebar").height() + "px";
-            width = $("#submit-fixed-sidebar-container").parents("div").first().width();
-
-            var mainContentHeight = $("#submit-grid-row").height()
-            $("#submit-fixed-sidebar-container").css({
-                "height": mainContentHeight
-                })
-            
-                if (scroll < $("#submit-fixed-sidebar-container").offset().top) {
-                    $("#submit-fixed-sidebar").css({
-                        "position": "absolute",
-                        "top": "0",
-                        "width": width
-                    });
-                }
-                else if (scroll > length) {
-                    $("#submit-fixed-sidebar").css({
-                        "position": "absolute",
-                        "bottom": 0,
-                        "top": "auto",
-                        "width": width
-                    });
-                }
-                else {
-                    $("#submit-fixed-sidebar").css({
-                        "position": "fixed",
-                        "top": "0",
-                        "height": height,
-                        "width": width
-                    });
-                }
-        });
     </script>
 }

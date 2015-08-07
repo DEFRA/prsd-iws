@@ -15,16 +15,13 @@
 
     internal class ClassifyYourWasteInfoMap : IMap<NotificationApplication, ClassifyYourWasteInfo>
     {
-        private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper;
         private readonly IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]> wasteCodesMapper;
         private readonly IMap<WasteType, WasteTypeData> wasteTypeMapper;
 
         public ClassifyYourWasteInfoMap(
-            IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper,
             IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]> wasteCodesMapper,
             IMap<WasteType, WasteTypeData> wasteTypeMapper)
         {
-            this.completionProgressMapper = completionProgressMapper;
             this.wasteCodesMapper = wasteCodesMapper;
             this.wasteTypeMapper = wasteTypeMapper;
         }
@@ -33,7 +30,7 @@
         {
             return new ClassifyYourWasteInfo
             {
-                Progress = completionProgressMapper.Map(notification),
+                NotificationId = notification.Id,
                 ChemicalComposition = GetWasteType(notification),
                 PhysicalCharacteristics = GetPhysicalCharacteristics(notification),
                 ProcessOfGeneration = GetWasteGenerationProcess(notification),

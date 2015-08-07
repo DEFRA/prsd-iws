@@ -12,7 +12,7 @@
     {
         <details>
             <summary>
-                Pre-consent facility @if (Model.Progress.IsPreconsentStatusChosen)
+                Pre-consent facility @if (Model.IsPreconsentStatusChosen)
                 { <i class="fa fa-check green-text"></i> }
                 <span class="edit-link-container">@Html.ActionLink("Edit", "RecoveryPreconsent", "Facility", new { id }, null)</span>
             </summary>
@@ -25,7 +25,7 @@
     }
     <details>
         <summary>
-            @disposalOrRecovery codes @if (Model.Progress.AreOperationCodesChosen)
+            @disposalOrRecovery codes @if (Model.AreOperationCodesChosen)
             { <i class="fa fa-check green-text"></i> }
             <span class="edit-link-container">@Html.ActionLink("Edit", "RecoveryCodes", "WasteOperations", new { id }, null)</span>
         </summary>
@@ -40,12 +40,12 @@
     </details>
     <details>
         <summary>
-            Technology employed @if (Model.Progress.IsTechnologyEmployedCompleted)
+            Technology employed @if (Model.IsTechnologyEmployedCompleted)
             { <i class="fa fa-check green-text"></i> }
             <span class="edit-link-container">@Html.ActionLink("Edit", "TechnologyEmployed", "WasteOperations", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.Progress.IsTechnologyEmployedCompleted)
+            @if (Model.IsTechnologyEmployedCompleted)
             {
                 <div class="panel-indent">
                     <dl>
@@ -64,7 +64,7 @@
     </details>
     <details>
         <summary>
-            Reason for export @if (Model.Progress.IsReasonForExportCompleted)
+            Reason for export @if (Model.IsReasonForExportCompleted)
             { <i class="fa fa-check green-text"></i> }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "ReasonForExport", new { id }, null)</span>
         </summary>

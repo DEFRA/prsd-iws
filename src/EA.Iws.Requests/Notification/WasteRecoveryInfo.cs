@@ -13,7 +13,7 @@
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsWasteRecoveryInformationCompleted { get; set; }
         public RecoveryPercentageData RecoveryPercentageData { get; set; }
         public RecoveryInfoData RecoveryInfoData { get; set; }
     }

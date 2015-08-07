@@ -13,7 +13,7 @@
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsWasteRecoveryInformationCompleted { get; set; }
         public RecoveryPercentageData RecoveryPercentageData { get; set; }
         public RecoveryInfoData RecoveryInfoData { get; set; }
 
@@ -25,7 +25,7 @@
         {
             NotificationId = wasteRecoveryInfo.NotificationId;
             NotificationType = wasteRecoveryInfo.NotificationType;
-            Progress = wasteRecoveryInfo.Progress;
+            IsWasteRecoveryInformationCompleted = wasteRecoveryInfo.IsWasteRecoveryInformationCompleted;
             RecoveryPercentageData = wasteRecoveryInfo.RecoveryPercentageData;
             RecoveryInfoData = wasteRecoveryInfo.RecoveryInfoData;
         }

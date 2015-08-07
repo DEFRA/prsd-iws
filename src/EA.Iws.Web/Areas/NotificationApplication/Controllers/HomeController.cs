@@ -6,7 +6,6 @@
     using Api.Client;
     using EA.Iws.Core.Notification;
     using EA.Iws.Requests.Submit;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.Submit;
     using EA.Prsd.Core.Mapper;
     using Infrastructure;
     using Prsd.Core;
@@ -20,12 +19,10 @@
     public class HomeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
-        private readonly IMapWithParentObjectId<SubmitSummaryData, SubmitSideBarViewModel> mapper;
 
-        public HomeController(Func<IIwsClient> apiClient, IMapWithParentObjectId<SubmitSummaryData, SubmitSideBarViewModel> mapper)
+        public HomeController(Func<IIwsClient> apiClient)
         {
             this.apiClient = apiClient;
-            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -139,18 +136,18 @@
             return RedirectToAction("Index", "Home", new { id = model.Id });
         }
 
-        [HttpGet]
-        public ActionResult SubmitSideBar(Guid id, int charge)
-        {
-            using (var client = apiClient())
-            {
-                var result = client.SendAsync(User.GetAccessToken(),
-                    new GetSubmitSummaryInformationForNotification(id)).GetAwaiter().GetResult();
+        //[HttpGet]
+        //public ActionResult SubmitSideBar(Guid id, int charge)
+        //{
+        //    using (var client = apiClient())
+        //    {
+        //        var result = client.SendAsync(User.GetAccessToken(),
+        //            new GetSubmitSummaryInformationForNotification(id)).GetAwaiter().GetResult();
 
-                result.Charge = charge;
+        //        result.Charge = charge;
 
-                return PartialView("_SubmitSideBar", mapper.Map(result, id));
-            }
-        }
+        //        return PartialView("_SubmitSideBar", mapper.Map(result, id));
+        //    }
+        //}
     }
 }

@@ -8,13 +8,6 @@
 
     internal class WasteRecoveryInfoMap : IMap<NotificationApplication, WasteRecoveryInfo>
     {
-        private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap;
-
-        public WasteRecoveryInfoMap(IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap)
-        {
-            this.completionProgressMap = completionProgressMap;
-        }
-
         public WasteRecoveryInfo Map(NotificationApplication notification)
         {
             return new WasteRecoveryInfo
@@ -23,7 +16,6 @@
                 NotificationType = notification.NotificationType == NotificationType.Disposal
                         ? Core.Shared.NotificationType.Disposal
                         : Core.Shared.NotificationType.Recovery,
-                Progress = completionProgressMap.Map(notification),
                 RecoveryInfoData = GetRecoveryInfo(notification),
                 RecoveryPercentageData = GetRecoveryPercentage(notification)
             };

@@ -37,7 +37,9 @@
         public WasteRecoveryInfo WasteRecoveryInfo { get; set; }
 
         public AmountsAndDatesInfo AmountsAndDatesInfo { get; set; }
-        
+
+        public SubmitSummaryData SubmitSummaryData { get; set; }
+
         public int NotificationCharge { get; set; }
     }
 }

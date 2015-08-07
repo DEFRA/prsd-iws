@@ -13,14 +13,11 @@
 
     internal class TransportationInfoMap : IMap<NotificationApplication, TransportationInfo>
     {
-        private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper;
         private readonly IMap<NotificationApplication, IList<CarrierData>> carrierMap;
 
         public TransportationInfoMap(
-            IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMapper,
             IMap<NotificationApplication, IList<CarrierData>> carrierMap)
         {
-            this.completionProgressMapper = completionProgressMapper;
             this.carrierMap = carrierMap;
         }
 
@@ -28,7 +25,7 @@
         {
             return new TransportationInfo 
             {
-                Progress = completionProgressMapper.Map(notification),
+                NotificationId = notification.Id,
                 Carriers = carrierMap.Map(notification).ToList(),
                 MeanOfTransport = notification.MeansOfTransport.ToList(),
                 PackagingData = GetPackagingData(notification),

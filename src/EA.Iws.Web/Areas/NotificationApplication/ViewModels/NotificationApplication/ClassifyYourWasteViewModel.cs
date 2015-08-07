@@ -13,7 +13,10 @@
     public class ClassifyYourWasteViewModel
     {
         public Guid NotificationId { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsChemicalCompositionCompleted { get; set; }
+        public bool IsProcessOfGenerationCompleted { get; set; }
+        public bool ArePhysicalCharacteristicsCompleted { get; set; }
+        public bool AreWasteCodesCompleted { get; set; }
         public WasteTypeData ChemicalComposition { get; set; }
         public string ProcessOfGeneration { get; set; }
         public List<string> PhysicalCharacteristics { get; set; }
@@ -35,7 +38,10 @@
         public ClassifyYourWasteViewModel(ClassifyYourWasteInfo classifyYourWasteInfo)
         {
             NotificationId = classifyYourWasteInfo.NotificationId;
-            Progress = classifyYourWasteInfo.Progress;
+            IsChemicalCompositionCompleted = classifyYourWasteInfo.IsChemicalCompositionCompleted;
+            IsProcessOfGenerationCompleted = classifyYourWasteInfo.IsProcessOfGenerationCompleted;
+            ArePhysicalCharacteristicsCompleted = classifyYourWasteInfo.ArePhysicalCharacteristicsCompleted;
+            AreWasteCodesCompleted = classifyYourWasteInfo.AreWasteCodesCompleted;
             ChemicalComposition = classifyYourWasteInfo.ChemicalComposition;
             ProcessOfGeneration = classifyYourWasteInfo.ProcessOfGeneration.IsDocumentAttached ? 
                 "The details will be provided in a separate document" : classifyYourWasteInfo.ProcessOfGeneration.Process;

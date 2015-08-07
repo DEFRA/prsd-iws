@@ -26,6 +26,8 @@
 
         public AmountsAndDatesViewModel AmountsAndDatesViewModel { get; set; }
 
+        public SubmitSideBarViewModel SubmitSideBarViewModel { get; set; }
+
         public int NotificationCharge { get; set; }
 
         public NotificationOverviewViewModel()
@@ -43,6 +45,7 @@
             ClassifyYourWasteViewModel = new ClassifyYourWasteViewModel(notificationInfo.ClassifyYourWasteInfo);
             WasteRecoveryViewModel = new WasteRecoveryViewModel(notificationInfo.WasteRecoveryInfo);
             AmountsAndDatesViewModel = new AmountsAndDatesViewModel(notificationInfo.AmountsAndDatesInfo);
+            SubmitSideBarViewModel = new SubmitSideBarViewModel(notificationInfo.SubmitSummaryData, notificationInfo.NotificationCharge);
             NotificationCharge = notificationInfo.NotificationCharge;
         }
     }

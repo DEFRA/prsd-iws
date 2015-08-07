@@ -14,7 +14,10 @@
     public class JourneyViewModel
     {
         public Guid NotificationId { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsStateOfExportCompleted { get; set; }
+        public bool IsStateOfImportCompleted { get; set; }
+        public bool AreTransitStatesCompleted { get; set; }
+        public bool IsCustomsOfficeCompleted { get; set; }
         public StateOfExportData StateOfExportData { get; set; }
         public List<TransitStateData> TransitStates { get; set; }
         public StateOfImportData StateOfImportData { get; set; }
@@ -28,7 +31,10 @@
         public JourneyViewModel(JourneyInfo journeyInfo)
         {
             NotificationId = journeyInfo.NotificationId;
-            Progress = journeyInfo.Progress;
+            IsStateOfExportCompleted = journeyInfo.IsStateOfExportCompleted;
+            IsStateOfImportCompleted = journeyInfo.IsStateOfImportCompleted;
+            AreTransitStatesCompleted = journeyInfo.AreTransitStatesCompleted;
+            IsCustomsOfficeCompleted = journeyInfo.IsCustomsOfficeCompleted;
             StateOfExportData = journeyInfo.TransportRoute.StateOfExport;
             TransitStates = journeyInfo.TransportRoute.TransitStates.ToList();
             StateOfImportData = journeyInfo.TransportRoute.StateOfImport;

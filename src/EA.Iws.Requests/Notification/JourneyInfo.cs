@@ -8,7 +8,10 @@
     public class JourneyInfo
     {
         public Guid NotificationId { get; set; }
-        public NotificationApplicationCompletionProgress Progress { get; set; }
+        public bool IsStateOfExportCompleted { get; set; }
+        public bool IsStateOfImportCompleted { get; set; }
+        public bool AreTransitStatesCompleted { get; set; }
+        public bool IsCustomsOfficeCompleted { get; set; }
         public StateOfExportWithTransportRouteData TransportRoute { get; set; }
         public EntryCustomsOfficeAddData EntryCustomsOffice { get; set; }
         public ExitCustomsOfficeAddData ExitCustomsOffice { get; set; }

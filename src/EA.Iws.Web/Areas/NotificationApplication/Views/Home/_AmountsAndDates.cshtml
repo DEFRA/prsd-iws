@@ -8,7 +8,7 @@
 <div>
     <details>
         <summary>
-            Intended shipments @if (Model.Progress.IsIntendedShipmentsCompleted)
+            Intended shipments @if (Model.IsIntendedShipmentsCompleted)
             { <i class="fa fa-check green-text"></i> }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Shipment", new { id }, null)</span>
         </summary>
