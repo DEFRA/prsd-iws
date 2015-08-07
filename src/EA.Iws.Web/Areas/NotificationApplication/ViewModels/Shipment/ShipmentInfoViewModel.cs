@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using Core.Shipment;
@@ -29,7 +30,7 @@
                 EndMonth = shipmentData.LastDate.Month;
                 EndYear = shipmentData.LastDate.Year;
                 NumberOfShipments = shipmentData.NumberOfShipments.ToString();
-                Quantity = shipmentData.Quantity;
+                Quantity = shipmentData.Quantity.ToString();
                 StartDay = shipmentData.FirstDate.Day;
                 StartMonth = shipmentData.FirstDate.Month;
                 StartYear = shipmentData.FirstDate.Year;
@@ -46,10 +47,7 @@
         public string NumberOfShipments { get; set; }
 
         [Required(ErrorMessage = "Please enter the total intended quantity")]
-        [Range(0.0001, 99999, ErrorMessage = "The quantity must be between 0.0001 and 99999")]
-        [RegularExpression(@"\d+(\.\d{1,4})?",
-            ErrorMessage = "The quantity must be a number with a maximum of 4 decimal places.")]
-        public decimal? Quantity { get; set; }
+        public string Quantity { get; set; }
 
         [Required(ErrorMessage = "Please select the units.")]
         public ShipmentQuantityUnits? Units { get; set; }
@@ -91,6 +89,11 @@
             if (!IsNumberOfShipmentsValid())
             {
                 yield return new ValidationResult("Please enter a valid number between 1 and 99999", new[] { "NumberOfShipments" });                
+            }
+
+            if (!IsQuantityValid())
+            {
+                yield return new ValidationResult("Please enter a valid number with a maximum of 4 decimal places", new[] { "Quantity" });
             }
 
             DateTime startDate;
@@ -161,6 +164,25 @@
             return true;
         }
 
+        private bool IsQuantityValid()
+        {
+            decimal quantity;
+            NumberStyles style = NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
+
+            if (!decimal.TryParse(Quantity, style, culture, out quantity))
+            {
+                return false;
+            }
+
+            if (decimal.Round(quantity, 4) != quantity)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public SetShipmentInfoForNotification ToRequest()
         {
             DateTime startDate;
@@ -172,7 +194,7 @@
             return new SetShipmentInfoForNotification(
                 NotificationId,
                 Convert.ToInt32(NumberOfShipments),
-                Quantity.GetValueOrDefault(),
+                Convert.ToDecimal(Quantity),
                 Units.GetValueOrDefault(),
                 startDate,
                 endDate);

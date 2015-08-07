@@ -18,7 +18,7 @@
             {
                 Units = ShipmentQuantityUnits.Kilograms,
                 NumberOfShipments = "1",
-                Quantity = 1
+                Quantity = "1"
             };
             SystemTime.Freeze(new DateTime(2015, 5, 1));
         }
@@ -26,6 +26,61 @@
         public void Dispose()
         {
             SystemTime.Unfreeze();
+        }
+
+        [Theory]
+        [InlineData("1.1")]
+        [InlineData("0")]
+        [InlineData("100000")]
+        public void NumberOfShipmentsValidationTests(string v)
+        {
+            AddValidDateToModel();
+            model.NumberOfShipments = v;
+
+            var errors = ViewModelValidator.ValidateViewModel(model);
+
+            Assert.Equal(1, errors.Count);
+            Assert.Equal("Please enter a valid number between 1 and 99999", errors[0].ErrorMessage);
+        }
+
+        [Fact]
+        public void NumberOfShipmentsCanContainCommas()
+        {
+            AddValidDateToModel();
+            model.NumberOfShipments = "1,000";
+
+            var errors = ViewModelValidator.ValidateViewModel(model);
+
+            Assert.Equal(0, errors.Count);
+        }
+
+        [Theory]
+        [InlineData("1000.1234")]
+        [InlineData("1,000.1234")]
+        [InlineData("1000.12")]
+        [InlineData("1000123400")]
+        [InlineData("1,000,123,400")]
+        public void QuantyContainValidData(string v)
+        {
+            AddValidDateToModel();
+            model.Quantity = v;
+
+            var errors = ViewModelValidator.ValidateViewModel(model);
+
+            Assert.Equal(0, errors.Count);
+        }
+
+        [Theory]
+        [InlineData("1000.12345")]
+        public void QuantityValidationTests(string v)
+        {
+            AddValidDateToModel();
+            model.Quantity = v;
+
+            var errors = ViewModelValidator.ValidateViewModel(model);
+
+            Assert.Equal(1, errors.Count);
+            Assert.Equal("Please enter a valid number with a maximum of 4 decimal places", errors[0].ErrorMessage);
         }
 
         [Fact]
@@ -126,6 +181,19 @@
             var errors = ViewModelValidator.ValidateViewModel(model);
 
             Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date and last departure date must be within a 36 month period."));
+        }
+
+        private void AddValidDateToModel()
+        {
+            model.IsPreconsentedRecoveryFacility = true;
+
+            model.StartDay = 2;
+            model.StartMonth = 5;
+            model.StartYear = 2015;
+
+            model.EndDay = 1;
+            model.EndMonth = 5;
+            model.EndYear = 2016;
         }
     }
 }
