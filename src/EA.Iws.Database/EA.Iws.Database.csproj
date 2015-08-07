@@ -85,6 +85,7 @@
     <Content Include="scripts\Update\Sprint13\20150804-154400-split-notification-assessment.sql" />
     <Content Include="scripts\Update\Sprint13\20150804-170200-update-financial-guarantee-fk.sql" />
     <Content Include="scripts\Update\Sprint13\20150805-141800-create-notification-assessment-records.sql" />
+    <Content Include="scripts\Update\Sprint13\20150807-120000-insert-data-into-ca-for-missing-countries.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
