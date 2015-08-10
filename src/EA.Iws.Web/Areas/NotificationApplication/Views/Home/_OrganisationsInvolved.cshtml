@@ -13,9 +13,9 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Exporter", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (@Model.IsExporterCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (@Model.IsExporterCompleted)
+                {
                     <div class="grid-row">
                         <div class="column-half">
                             <dl>
@@ -39,8 +39,12 @@
                             </dl>
                         </div>
                     </div>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
@@ -50,10 +54,10 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Producer", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (@Model.IsProducerCompleted)
-            {
-                <div class="panel-indent">
-                    @for (int i = 0; i < Model.Producers.Count; i++)
+            <div class="panel-indent">
+                @if (@Model.IsProducerCompleted)
+                {
+                    for (int i = 0; i < Model.Producers.Count; i++)
                     {
                         <div class="grid-row">
                             <div class="column-half">
@@ -77,8 +81,12 @@
                             <hr />
                         }
                     }
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
@@ -88,9 +96,9 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfExport", "Producer", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsProducerCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (Model.IsProducerCompleted)
+                {
                     <div class="grid-row">
                         <div class="column-half">
                             <dl>
@@ -108,8 +116,12 @@
                             </dl>
                         </div>
                     </div>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
@@ -119,9 +131,9 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Importer", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsImporterCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (Model.IsImporterCompleted)
+                {
                     <div class="grid-row">
                         <div class="column-half">
                             <dl>
@@ -145,8 +157,12 @@
                             </dl>
                         </div>
                     </div>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
@@ -156,10 +172,10 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Facility", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsFacilityCompleted)
-            {
-                <div class="panel-indent">
-                    @for (int i = 0; i < Model.Facilities.Count; i++)
+            <div class="panel-indent">
+                @if (Model.IsFacilityCompleted)
+                {
+                    for (int i = 0; i < Model.Facilities.Count; i++)
                     {
                         <div class="grid-row">
                             <div class="column-half">
@@ -189,8 +205,12 @@
                             <hr />
                         }
                     }
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
@@ -200,9 +220,9 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfTreatment", "Facility", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsFacilityCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (Model.IsFacilityCompleted)
+                {
                     <div class="grid-row">
                         <div class="column-half">
                             <dl>
@@ -226,8 +246,12 @@
                             </dl>
                         </div>
                     </div>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
 </div>

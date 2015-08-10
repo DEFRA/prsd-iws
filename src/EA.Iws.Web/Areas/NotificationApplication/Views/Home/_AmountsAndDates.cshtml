@@ -30,6 +30,10 @@
                         <dd>@Html.Gds().DisplayDateRangeFor(m => m.ShipmentData.FirstDate, m => m.ShipmentData.LastDate)</dd>
                     </dl>
                 }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>

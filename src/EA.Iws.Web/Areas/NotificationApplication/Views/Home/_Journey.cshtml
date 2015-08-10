@@ -8,7 +8,7 @@
 <div>
     <details>
         <summary>
-            Transport route - export 
+            Transport route - export
             @if (Model.IsStateOfExportCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -30,13 +30,17 @@
                         <dd>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</dd>
                     </dl>
                 }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>
 
     <details>
         <summary>
-            Transport route - transits 
+            Transport route - transits
             @if (Model.AreTransitStatesCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -62,7 +66,7 @@
                             <dt>Exit point:</dt>
                             <dd>@transitState.ExitPoint.Name</dd>
                         </dl>
-                        
+
                         if (transitState != Model.TransitStates.OrderBy(ts => ts.OrdinalPosition).Last())
                         {
                             <hr />
@@ -79,7 +83,7 @@
 
     <details>
         <summary>
-            Transport route - import 
+            Transport route - import
             @if (Model.IsStateOfImportCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -101,23 +105,27 @@
                         <dd>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</dd>
                     </dl>
                 }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>
 
-    @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name) || !string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
-    {
-        <details>
-            <summary>
-                Custom office 
-                @if (Model.IsCustomsOfficeCompleted)
+    <details>
+        <summary>
+            Custom office
+            @if (Model.IsCustomsOfficeCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "List", "CustomsOffice", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name) || !string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
                 {
-                    <i class="fa fa-check green-text"></i>
-                }
-                <span class="edit-link-container">@Html.ActionLink("Edit", "List", "CustomsOffice", new { id }, null)</span>
-            </summary>
-            <div class="expanded-details">
-                <div class="panel-indent">
                     <dl>
                         @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name))
                         {
@@ -138,8 +146,16 @@
                             <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Country.Name)</dd>
                         }
                     </dl>
-                </div>
+                }
+                else if (Model.IsCustomsOfficeCompleted)
+                {
+                    <p>Not applicable</p>
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
-        </details>
-    }
+        </div>
+    </details>
 </div>

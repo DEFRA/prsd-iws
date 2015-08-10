@@ -8,7 +8,7 @@
 <div>
     <details>
         <summary>
-            Intended carriers 
+            Intended carriers
             @if (Model.IsCarrierCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -16,10 +16,10 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Carrier", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsCarrierCompleted)
-            {
-                <div class="panel-indent">
-                    @for (int i = 0; i < Model.Carriers.Count; i++)
+            <div class="panel-indent">
+                @if (Model.IsCarrierCompleted)
+                {
+                    for (int i = 0; i < Model.Carriers.Count; i++)
                     {
                         <div class="grid-row">
                             <div class="column-half">
@@ -43,13 +43,17 @@
                             <hr />
                         }
                     }
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
         <summary>
-            Means of transport 
+            Means of transport
             @if (Model.IsMeansOfTransportCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -58,20 +62,27 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @for (int i = 0; i < Model.MeanOfTransport.Count; i++)
+                @if (Model.IsMeansOfTransportCompleted)
                 {
-                    @Html.DisplayFor(m => m.MeanOfTransport[i].DisplayName)
-                    if (i != Model.MeanOfTransport.Count - 1)
+                    for (int i = 0; i < Model.MeanOfTransport.Count; i++)
                     {
-                        <text>&#8594;</text>
+                        @Html.DisplayFor(m => m.MeanOfTransport[i].DisplayName)
+                        if (i != Model.MeanOfTransport.Count - 1)
+                        {
+                            <text>&#8594;</text>
+                        }
                     }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
                 }
             </div>
         </div>
     </details>
     <details>
         <summary>
-            Packaging types 
+            Packaging types
             @if (Model.IsPackagingTypesCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -80,18 +91,25 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                <ul>
-                    @for (int i = 0; i < Model.PackagingData.Count; i++)
-                    {
-                        <li>@Html.DisplayFor(m => m.PackagingData[i])</li>
-                    }
-                </ul>
+                @if (Model.IsPackagingTypesCompleted)
+                {
+                    <ul>
+                        @for (int i = 0; i < Model.PackagingData.Count; i++)
+                        {
+                            <li>@Html.DisplayFor(m => m.PackagingData[i])</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>
     <details>
         <summary>
-            Special handling 
+            Special handling
             @if (Model.IsSpecialHandlingCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -100,7 +118,14 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                <p>@Html.DisplayFor(m => m.SpecialHandlingDetails)</p>
+                @if (Model.IsSpecialHandlingCompleted)
+                {
+                    <p>@Html.DisplayFor(m => m.SpecialHandlingDetails)</p>
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>

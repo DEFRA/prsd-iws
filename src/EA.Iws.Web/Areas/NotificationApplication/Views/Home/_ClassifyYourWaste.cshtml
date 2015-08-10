@@ -20,9 +20,9 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "ChemicalComposition", "WasteType", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsChemicalCompositionCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (Model.IsChemicalCompositionCompleted)
+                {
                     <dl>
                         <dt>Type:</dt>
                         <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</dd>
@@ -38,7 +38,8 @@
                             <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionDescription)</dd>
                         }
                     </dl>
-                    @if (Model.ChemicalComposition.ChemicalCompositionType != EA.Iws.Core.WasteType.ChemicalCompositionType.Other)
+                    
+                    if (Model.ChemicalComposition.ChemicalCompositionType != EA.Iws.Core.WasteType.ChemicalCompositionType.Other)
                     {
                         <dl>
                             <dt>Chemical composition minimum and maximum as a weight by weight percentage:</dt>
@@ -80,10 +81,14 @@
                             }
                         </dl>
                     }
-                </div>
-            }
-        </div>
 
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
+        </div>
     </details>
     <details>
         <summary>
@@ -95,12 +100,16 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "WasteGenerationProcess", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsProcessOfGenerationCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (Model.IsProcessOfGenerationCompleted)
+                {
                     <p>@Html.DisplayFor(m => m.ProcessOfGeneration)</p>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
@@ -113,15 +122,19 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PhysicalCharacteristics", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.ArePhysicalCharacteristicsCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (Model.ArePhysicalCharacteristicsCompleted)
+                {
                     <dl>
                         <dt>Physical characteristics of the waste:</dt>
                         <dd>@string.Join(", ", Model.PhysicalCharacteristics)</dd>
                     </dl>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
@@ -134,10 +147,10 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.AreWasteCodesCompleted)
-            {
-                <div class="panel-indent">
-                    @if (Model.BaselOecdCode.Any())
+            <div class="panel-indent">
+                @if (Model.AreWasteCodesCompleted)
+                {
+                    if (Model.BaselOecdCode.Any())
                     {
                         <h4 class="heading-small">@baselOrOecdType code</h4>
 
@@ -155,7 +168,7 @@
                         <hr />
                     }
 
-                    @if (Model.EwcCodes.Any())
+                    if (Model.EwcCodes.Any())
                     {
                         <h4 class="heading-small">EWC code(s)</h4>
 
@@ -174,7 +187,7 @@
                         <hr />
                     }
 
-                    @if (Model.YCodes.Any())
+                    if (Model.YCodes.Any())
                     {
                         <h4 class="heading-small">Y code(s)</h4>
                         <dl>
@@ -194,7 +207,7 @@
                         <hr />
                     }
 
-                    @if (Model.HCodes.Any())
+                    if (Model.HCodes.Any())
                     {
                         <h4 class="heading-small">H or HP code(s)</h4>
                         <dl>
@@ -214,7 +227,7 @@
                         <hr />
                     }
 
-                    @if (Model.UnClass.Any())
+                    if (Model.UnClass.Any())
                     {
                         <h4 class="heading-small">UN class(es)</h4>
                         <dl>
@@ -234,7 +247,7 @@
                         <hr />
                     }
 
-                    @if (Model.UnNumber.Any())
+                    if (Model.UnNumber.Any())
                     {
                         <h4 class="heading-small">UN number(s)</h4>
                         <dl>
@@ -274,8 +287,12 @@
                             <dd>@string.Join(", ", Model.CustomCodes.Select(c => c.CustomCode).ToList())</dd>
                         }
                     </dl>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
 </div>

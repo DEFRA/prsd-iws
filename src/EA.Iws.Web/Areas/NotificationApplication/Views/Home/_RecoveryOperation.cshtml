@@ -12,7 +12,7 @@
     {
         <details>
             <summary>
-                Pre-consent facility 
+                Pre-consent facility
                 @if (Model.IsPreconsentStatusChosen)
                 {
                     <i class="fa fa-check green-text"></i>
@@ -21,14 +21,21 @@
             </summary>
             <div class="expanded-details">
                 <div class="panel-indent">
-                    <p>@Html.DisplayFor(m => m.PreconstedAnswer)</p>
+                    @if (Model.IsPreconsentStatusChosen)
+                    {
+                        <p>@Html.DisplayFor(m => m.PreconstedAnswer)</p>
+                    }
+                    else
+                    {
+                        <p>@ViewBag.SectionIncompleteText</p>
+                    }
                 </div>
             </div>
         </details>
     }
     <details>
         <summary>
-            @disposalOrRecovery codes 
+            @disposalOrRecovery codes
             @if (Model.AreOperationCodesChosen)
             {
                 <i class="fa fa-check green-text"></i>
@@ -37,13 +44,20 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @string.Join(", ", Model.OperationCodes)
+                @if (Model.OperationCodes.Any())
+                {
+                    string.Join(", ", Model.OperationCodes);
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>
     <details>
         <summary>
-            Technology employed 
+            Technology employed
             @if (Model.IsTechnologyEmployedCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -51,9 +65,9 @@
             <span class="edit-link-container">@Html.ActionLink("Edit", "TechnologyEmployed", "WasteOperations", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
-            @if (Model.IsTechnologyEmployedCompleted)
-            {
-                <div class="panel-indent">
+            <div class="panel-indent">
+                @if (Model.IsTechnologyEmployedCompleted)
+                {
                     <dl>
                         <dt>Description:</dt>
                         <dd>@Html.DisplayFor(m => m.TechnologyEmployed.Details)</dd>
@@ -61,16 +75,20 @@
                         @if (!Model.TechnologyEmployed.AnnexProvided)
                         {
                             <dt>Further details:</dt>
-                            <dd>@Html.DisplayFor(m=> m.TechnologyEmployed.FurtherDetails)</dd>
+                            <dd>@Html.DisplayFor(m => m.TechnologyEmployed.FurtherDetails)</dd>
                         }
                     </dl>
-                </div>
-            }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
         </div>
     </details>
     <details>
         <summary>
-            Reason for export 
+            Reason for export
             @if (Model.IsReasonForExportCompleted)
             {
                 <i class="fa fa-check green-text"></i>
@@ -79,7 +97,14 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                <p>@Html.DisplayFor(m => m.ReasonForExport)</p>
+                @if (Model.IsReasonForExportCompleted)
+                {
+                    <p>@Html.DisplayFor(m => m.ReasonForExport)</p>
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>
