@@ -62,7 +62,7 @@
                 }
                 else if ((!IsDecimal(WasteComposition[i].MinConcentration) && !WasteComposition[i].MinConcentration.ToUpper().Equals("NA")) || (!IsDecimal(WasteComposition[i].MaxConcentration) && !WasteComposition[i].MaxConcentration.ToUpper().Equals("NA")))
                 {
-                    yield return new ValidationResult("Please enter  valid Min and Max concentration for " + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                    yield return new ValidationResult("Please enter valid Min and Max concentration for " + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
                 }
             }
 

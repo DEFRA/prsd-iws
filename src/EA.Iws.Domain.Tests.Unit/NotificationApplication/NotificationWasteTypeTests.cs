@@ -54,21 +54,21 @@
         [Fact]
         public void CanChangeChemicalCompositionType()
         {
-            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWoodWasteTypeCollection()));
 
             notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
-            
+
             Assert.Equal(ChemicalComposition.SRF, notification.WasteType.ChemicalCompositionType);
         }
-
+        
         [Fact]
         public void CanChangeChemicalCompositionTypeMultipleTimes()
         {
-            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWoodWasteTypeCollection()));
 
             notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
 
-            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWoodWasteTypeCollection()));
 
             Assert.Equal(ChemicalComposition.Wood, notification.WasteType.ChemicalCompositionType);
         }
@@ -153,6 +153,17 @@
             wasteCompositions.Add(WasteComposition.CreateWasteComposition("Third Constituent", 3, 100, ChemicalCompositionCategory.Food));
             wasteCompositions.Add(WasteComposition.CreateWasteComposition("Fourth Constituent", 4, 100, ChemicalCompositionCategory.Textiles));
             wasteCompositions.Add(WasteComposition.CreateWasteComposition("Fifth Constituent", 5, 100, ChemicalCompositionCategory.Plastics));
+            return wasteCompositions;
+        }
+
+        private List<WasteComposition> GetWoodWasteTypeCollection()
+        {
+            List<WasteComposition> wasteCompositions = new List<WasteComposition>();
+            wasteCompositions.Add(WasteComposition.CreateWasteComposition("First Constituent", 1, 100, ChemicalCompositionCategory.Metals));
+            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Second Constituent", 2, 100, ChemicalCompositionCategory.Wood));
+            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Third Constituent", 3, 100, ChemicalCompositionCategory.Textiles));
+            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Fourth Constituent", 4, 100, ChemicalCompositionCategory.Plastics));
+            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Other Constituent", 10, 20, ChemicalCompositionCategory.Other));
             return wasteCompositions;
         }
 

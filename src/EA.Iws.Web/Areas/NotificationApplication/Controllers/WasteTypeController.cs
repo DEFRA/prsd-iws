@@ -150,7 +150,7 @@
         [HttpGet]
         public async Task<ActionResult> WoodType(Guid id, ChemicalCompositionType chemicalCompositionType)
         {
-            var model = GetBlankViewModel(id, chemicalCompositionType);
+            var model = GetViewModelForWood(id, chemicalCompositionType);
 
             await GetExistingCompositions(id, chemicalCompositionType, model);
 
@@ -437,6 +437,14 @@
                 OtherCodes = new List<WasteTypeCompositionData> { new WasteTypeCompositionData() },
                 ChemicalCompositionType = chemicalCompositionType
             };
+        }
+
+        private ChemicalCompositionConcentrationLevelsViewModel GetViewModelForWood(Guid id, ChemicalCompositionType chemicalCompositionType)
+        {
+            var woodCompositions = GetBlankViewModel(id, chemicalCompositionType);
+            woodCompositions.WasteComposition = woodCompositions.WasteComposition.Where(x => x.ChemicalCompositionCategory != ChemicalCompositionCategory.Food).ToList();
+
+            return woodCompositions;
         }
     }
 }

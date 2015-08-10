@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.WasteType;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -221,6 +222,11 @@
 
         public static WasteType CreateWoodWasteType(string chemicalCompositionDescription, IList<WasteComposition> wasteCompositions)
         {
+            if (wasteCompositions != null
+                && wasteCompositions.Any(x => x.ChemicalCompositionType == ChemicalCompositionCategory.Food))
+            {
+                throw new InvalidOperationException("Food constituent can not be set for chemical composition Wood.");
+            }
             return new WasteType(ChemicalComposition.Wood, wasteCompositions, chemicalCompositionDescription);
         }
 
