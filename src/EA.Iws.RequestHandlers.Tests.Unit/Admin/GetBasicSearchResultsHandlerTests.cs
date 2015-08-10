@@ -45,12 +45,12 @@
         {
             return helper.GetAsyncEnabledDbSet(new[]
             {
-                CreateNotificationApplication(notification1, "Exporter one", UKCompetentAuthority.Scotland, WasteType.CreateRdfWasteType(null)),
+                CreateNotificationApplication(notification1, "Exporter one", UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
                 CreateNotificationApplication(notification2, "GB 0001 000000", UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
-                CreateNotificationApplication(notification3, "Exporter two", UKCompetentAuthority.Wales, WasteType.CreateSrfWasteType(null)),
-                CreateNotificationApplication(notification4, "Exporter RDF", UKCompetentAuthority.Wales, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification3, "Exporter two", UKCompetentAuthority.England, WasteType.CreateSrfWasteType(null)),
+                CreateNotificationApplication(notification4, "Exporter RDF", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
                 CreateNotificationApplication(notification5, "not submitted", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification5, "exporter", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
+                CreateNotificationApplication(notification5, "Exporter", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
             });
         }
 
@@ -58,6 +58,7 @@
         {
             User user = new User("ac795e26-1563-4833-b8f9-0529eb9e66ae", "Name", "Surname", "123456", "test@test.com");
             ObjectInstantiator<User>.SetProperty(u => u.CompetentAuthority, "EA", user);
+
             var users = helper.GetAsyncEnabledDbSet(new[]
             {
                 user
@@ -111,7 +112,7 @@
         {
             var results = await ResultsWhenSearchingFor("GB 0001 000000");
 
-            Assert.Equal(1, results.Count);
+            Assert.Equal(4, results.Count);
             Assert.True(results.Any(r => r.NotificationNumber.Contains("GB 0001 000000")));
         }
 
@@ -130,21 +131,21 @@
         {
             var results = await ResultsWhenSearchingFor("GB0001000000");
 
-            Assert.Equal(1, results.Count);
+            Assert.Equal(4, results.Count);
         }
 
         [Fact]
         public async Task SearchBy_ExporterName()
         {
-            var results = await ResultsWhenSearchingFor("exporter");
+            var results = await ResultsWhenSearchingFor("Exporter");
 
-            Assert.Equal(1, results.Count);
+            Assert.Equal(3, results.Count);
         }
 
         [Fact]
         public async Task SearchBy_ExporterName_Multiples()
         {
-            var results = await ResultsWhenSearchingFor("exporter");
+            var results = await ResultsWhenSearchingFor("Exporter");
 
             Assert.Equal(3, results.Count);
         }
@@ -170,7 +171,7 @@
         {
             var results = await ResultsWhenSearchingFor("GB 0");
 
-            Assert.Equal(1, results.Count);
+            Assert.Equal(4, results.Count);
         }
 
         [Fact]
@@ -185,7 +186,7 @@
         public async Task SearchExcludesDifferenctCompetentAuthority()
         {
             var results = await ResultsWhenSearchingFor("GB 0001");
-            Assert.Equal(1, results.Count);
+            Assert.Equal(4, results.Count);
         }
     }
 }
