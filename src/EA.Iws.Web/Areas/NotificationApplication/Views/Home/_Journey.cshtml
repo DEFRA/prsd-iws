@@ -19,22 +19,16 @@
             <div class="panel-indent">
                 @if (Model.IsStateOfExportCompleted)
                 {
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Country</th>
-                                <th>Competent authority</th>
-                                <th>Entry point</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>@Html.DisplayFor(m => m.StateOfExportData.Country.Name)</td>
-                                <td>@Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)</td>
-                                <td>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <dl>
+                        <dt>Country:</dt>
+                        <dd>@Html.DisplayFor(m => m.StateOfExportData.Country.Name)</dd>
+
+                        <dt>Competent authority:</dt>
+                        <dd>@Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)</dd>
+
+                        <dt>Exit point:</dt>
+                        <dd>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</dd>
+                    </dl>
                 }
             </div>
         </div>
@@ -51,29 +45,29 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreTransitStatesCompleted)
+                @if (Model.AreTransitStatesCompleted && Model.TransitStates.Any())
                 {
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Country</th>
-                                <th>Competent Authority</th>
-                                <th>Entry point</th>
-                                <th>Exit point</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var ts in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
-                            {
-                                <tr>
-                                    <td>@ts.Country.Name</td>
-                                    <td>@ts.CompetentAuthority.Name</td>
-                                    <td>@ts.EntryPoint.Name</td>
-                                    <td>@ts.ExitPoint.Name</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    foreach (var transitState in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
+                    {
+                        <dl>
+                            <dt>Country:</dt>
+                            <dd>@transitState.Country.Name</dd>
+
+                            <dt>Competent authority:</dt>
+                            <dd>@transitState.CompetentAuthority.Name</dd>
+
+                            <dt>Entry point:</dt>
+                            <dd>@transitState.EntryPoint.Name</dd>
+
+                            <dt>Exit point:</dt>
+                            <dd>@transitState.ExitPoint.Name</dd>
+                        </dl>
+                        
+                        if (transitState != Model.TransitStates.OrderBy(ts => ts.OrdinalPosition).Last())
+                        {
+                            <hr />
+                        }
+                    }
                 }
                 else
                 {
@@ -96,22 +90,16 @@
             <div class="panel-indent">
                 @if (Model.IsStateOfImportCompleted)
                 {
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Country</th>
-                                <th>Competent authority</th>
-                                <th>Entry point</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</td>
-                                <td>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</td>
-                                <td>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <dl>
+                        <dt>Country:</dt>
+                        <dd>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</dd>
+
+                        <dt>Competent authority:</dt>
+                        <dd>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</dd>
+
+                        <dt>Entry point:</dt>
+                        <dd>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</dd>
+                    </dl>
                 }
             </div>
         </div>

@@ -37,10 +37,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @foreach (var code in Model.OperationCodes)
-                {
-                    <span class="operation-code-list">@code</span>
-                }
+                @string.Join(", ", Model.OperationCodes)
             </div>
         </div>
     </details>
