@@ -31,7 +31,7 @@
         {
             using (var client = apiClient())
             {
-                var searchResults = await client.SendAsync(User.GetAccessToken(), new GetBasicSearchResults(model.SearchTerm, User.GetUserId()));
+                var searchResults = await client.SendAsync(User.GetAccessToken(), model.ToRequest());
                 if (searchResults != null)
                 {
                     model.SearchResults = searchResults.ToList();

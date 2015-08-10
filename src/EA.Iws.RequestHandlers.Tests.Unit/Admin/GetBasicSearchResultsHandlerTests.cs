@@ -11,6 +11,7 @@
     using Domain.NotificationApplication;
     using FakeItEasy;
     using Helpers;
+    using Prsd.Core.Domain;
     using Prsd.Core.Helpers;
     using RequestHandlers.Admin.Search;
     using Requests.Admin;
@@ -34,11 +35,14 @@
             var assessments = GetNotificationAssessments();
 
             var context = A.Fake<IwsContext>();
+            var userContext = A.Fake<IUserContext>();
+
             A.CallTo(() => context.NotificationApplications).Returns(applications);
             A.CallTo(() => context.NotificationAssessments).Returns(assessments);
             A.CallTo(() => context.Users).Returns(GetUsers());
+            A.CallTo(() => userContext.UserId).Returns(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"));
 
-            handler = new GetBasicSearchResultsHandler(context);
+            handler = new GetBasicSearchResultsHandler(context, userContext);
         }
 
         private System.Data.Entity.DbSet<NotificationApplication> GetNotificationApplications()
@@ -104,7 +108,7 @@
 
         private async Task<IList<BasicSearchResult>> ResultsWhenSearchingFor(string searchTerm)
         {
-            return await handler.HandleAsync(new GetBasicSearchResults(searchTerm, "ac795e26-1563-4833-b8f9-0529eb9e66ae"));
+            return await handler.HandleAsync(new GetBasicSearchResults(searchTerm));
         }
 
         [Fact]

@@ -10,6 +10,7 @@
     using Core.WasteType;
     using DataAccess;
     using Domain;
+    using Prsd.Core.Domain;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Admin;
@@ -17,20 +18,24 @@
     public class GetBasicSearchResultsHandler : IRequestHandler<GetBasicSearchResults, IList<BasicSearchResult>>
     {
         private readonly IwsContext context;
+        private readonly IUserContext userContext;
 
-        public GetBasicSearchResultsHandler(IwsContext context)
+        public GetBasicSearchResultsHandler(IwsContext context, IUserContext userContext)
         {
             this.context = context;
+            this.userContext = userContext;
         }
 
         public async Task<IList<BasicSearchResult>> HandleAsync(GetBasicSearchResults query)
         {
-            var user = await context.Users.SingleAsync(u => u.Id == query.UserId);
+            var userCompetentAuthority = await context.Users.Where(u => u.Id == userContext.UserId.ToString()).Select(u => u.CompetentAuthority).SingleAsync();
+            var compAuthority = UKCompetentAuthority.FromShortName(userCompetentAuthority);
 
-            var results = (await context.NotificationApplications
+            return (await context.NotificationApplications
                 .Where(p => p.NotificationNumber.Contains(query.SearchTerm) ||
                             p.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm) ||
-                            p.Exporter.Business.Name.Contains(query.SearchTerm))
+                            p.Exporter.Business.Name.Contains(query.SearchTerm) &&
+                            p.CompetentAuthority.Value == compAuthority.Value)
                 .Join(context.NotificationAssessments
                     .Where(p => p.Status != NotificationStatus.NotSubmitted), n => n.Id,
                     na => na.NotificationApplicationId, (n, na) => new { n, na })
@@ -45,10 +50,7 @@
                             s.na.Status,
                             s.n.CompetentAuthority
                         })
-                .ToListAsync());
-
-            var filteredResults = results.Where(r => r.CompetentAuthority == UKCompetentAuthority.FromShortName(user.CompetentAuthority));
-            return filteredResults.Select(s => ConvertToSearchResults(
+                .ToListAsync()).Select(s => ConvertToSearchResults(
                     s.Id,
                     s.NotificationNumber,
                     s.ExporterName,
