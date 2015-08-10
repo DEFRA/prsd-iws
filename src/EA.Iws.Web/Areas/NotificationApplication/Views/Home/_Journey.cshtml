@@ -17,22 +17,25 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Country</th>
-                            <th>Competent authority</th>
-                            <th>Entry point</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@Html.DisplayFor(m => m.StateOfExportData.Country.Name)</td>
-                            <td>@Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)</td>
-                            <td>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</td>
-                        </tr>
-                    </tbody>
-                </table>
+                @if (Model.IsStateOfExportCompleted)
+                {
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>Competent authority</th>
+                                <th>Entry point</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Html.DisplayFor(m => m.StateOfExportData.Country.Name)</td>
+                                <td>@Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)</td>
+                                <td>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
             </div>
         </div>
     </details>
@@ -48,27 +51,34 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Country</th>
-                            <th>Competent Authority</th>
-                            <th>Entry point</th>
-                            <th>Exit point</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var ts in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
-                        {
+                @if (Model.AreTransitStatesCompleted)
+                {
+                    <table>
+                        <thead>
                             <tr>
-                                <td>@ts.Country.Name</td>
-                                <td>@ts.CompetentAuthority.Name</td>
-                                <td>@ts.EntryPoint.Name</td>
-                                <td>@ts.ExitPoint.Name</td>
+                                <th>Country</th>
+                                <th>Competent Authority</th>
+                                <th>Entry point</th>
+                                <th>Exit point</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var ts in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
+                            {
+                                <tr>
+                                    <td>@ts.Country.Name</td>
+                                    <td>@ts.CompetentAuthority.Name</td>
+                                    <td>@ts.EntryPoint.Name</td>
+                                    <td>@ts.ExitPoint.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>There are no transit states</p>
+                }
             </div>
         </div>
     </details>
@@ -84,22 +94,25 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Country</th>
-                            <th>Competent authority</th>
-                            <th>Entry point</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</td>
-                            <td>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</td>
-                            <td>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</td>
-                        </tr>
-                    </tbody>
-                </table>
+                @if (Model.IsStateOfImportCompleted)
+                {
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>Competent authority</th>
+                                <th>Entry point</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</td>
+                                <td>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</td>
+                                <td>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
             </div>
         </div>
     </details>
