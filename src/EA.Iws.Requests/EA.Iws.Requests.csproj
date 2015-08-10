@@ -75,7 +75,6 @@
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationId.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
     <Compile Include="Notification\NotificationBasicInformation.cs" />
-    <Compile Include="Notification\NotificationProgressInfo.cs" />
     <Compile Include="Notification\SubmitNotification.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />
     <Compile Include="Notification\OrganisationsInvolvedInfo.cs" />

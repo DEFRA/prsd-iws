@@ -11,46 +11,46 @@
 </p>
 
 <h4>Organisations involved</h4>
-@Html.Navigation().Link("Exporter notifier", Model.Progress.IsExporterCompleted, "Index", "Exporter", "NotificationApplication")
-@Html.Navigation().Link("Waste generator producer", Model.Progress.IsProducerCompleted, "List", "Producer", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromExporter", "Remove" })
-@Html.Navigation().Link("Site of export", Model.Progress.IsProducerCompleted, "SiteOfExport", "Producer", "NotificationApplication")
-@Html.Navigation().Link("Importer consignee", Model.Progress.IsImporterCompleted, "Index", "Importer", "NotificationApplication")
-@Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.IsFacilityCompleted, "List", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromImporter", "Remove" })
-@Html.Navigation().Link("Actual site of " + Model.NotificationType.ToString().ToLowerInvariant(), Model.Progress.IsFacilityCompleted, "SiteOfTreatment", "Facility", "NotificationApplication")
+@Html.Navigation().Link("Exporter notifier", Model.Progress.HasExporter, "Index", "Exporter", "NotificationApplication")
+@Html.Navigation().Link("Waste generator producer", Model.Progress.HasProducer, "List", "Producer", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromExporter", "Remove" })
+@Html.Navigation().Link("Site of export", Model.Progress.HasSiteOfExport, "SiteOfExport", "Producer", "NotificationApplication")
+@Html.Navigation().Link("Importer consignee", Model.Progress.HasImporter, "Index", "Importer", "NotificationApplication")
+@Html.Navigation().Link(Model.NotificationType + " facility", Model.Progress.HasFacility, "List", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromImporter", "Remove" })
+@Html.Navigation().Link("Actual site of " + Model.NotificationType.ToString().ToLowerInvariant(), Model.Progress.HasActualSiteOfTreatment, "SiteOfTreatment", "Facility", "NotificationApplication")
 
 <h4>@Model.NotificationType operation</h4>
 @if (Model.NotificationType == NotificationType.Recovery)
 {
-    @Html.Navigation().Link("Pre-consent facility", Model.Progress.IsPreconsentStatusChosen, "RecoveryPreconsent", "Facility", "NotificationApplication")
+    @Html.Navigation().Link("Pre-consent facility", Model.Progress.HasPreconsentedInformation, "RecoveryPreconsent", "Facility", "NotificationApplication")
 }
-@Html.Navigation().Link(Model.NotificationType + " codes", Model.Progress.AreOperationCodesChosen, "OperationCodes", "WasteOperations", "NotificationApplication", additionalActiveActionNames: new[] { "RecoveryCodes", "DisposalCodes" })
-@Html.Navigation().Link("Technology employed", Model.Progress.IsTechnologyEmployedCompleted, "TechnologyEmployed", "WasteOperations", "NotificationApplication")
-@Html.Navigation().Link("Reason for export", Model.Progress.IsReasonForExportCompleted, "Index", "ReasonForExport", "NotificationApplication")
+@Html.Navigation().Link(Model.NotificationType + " codes", Model.Progress.HasOperationCodes, "OperationCodes", "WasteOperations", "NotificationApplication", additionalActiveActionNames: new[] { "RecoveryCodes", "DisposalCodes" })
+@Html.Navigation().Link("Technology employed", Model.Progress.HasTechnologyEmployed, "TechnologyEmployed", "WasteOperations", "NotificationApplication")
+@Html.Navigation().Link("Reason for export", Model.Progress.HasReasonForExport, "Index", "ReasonForExport", "NotificationApplication")
 
 <h4>The transportation</h4>
-@Html.Navigation().Link("Intended carrier", Model.Progress.IsCarrierCompleted, "List", "Carrier", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
-@Html.Navigation().Link("Means of transport", Model.Progress.IsMeansOfTransportCompleted, "Index", "MeansOfTransport", "NotificationApplication")
-@Html.Navigation().Link("Packaging types", Model.Progress.IsPackagingTypesCompleted, "Index", "PackagingTypes", "NotificationApplication")
-@Html.Navigation().Link("Special handling", Model.Progress.IsSpecialHandlingCompleted, "Index", "SpecialHandling", "NotificationApplication")
+@Html.Navigation().Link("Intended carrier", Model.Progress.HasCarrier, "List", "Carrier", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
+@Html.Navigation().Link("Means of transport", Model.Progress.HasMeansOfTransport, "Index", "MeansOfTransport", "NotificationApplication")
+@Html.Navigation().Link("Packaging types", Model.Progress.HasPackagingInfo, "Index", "PackagingTypes", "NotificationApplication")
+@Html.Navigation().Link("Special handling", Model.Progress.HasSpecialHandlingRequirements, "Index", "SpecialHandling", "NotificationApplication")
 
 <h4>The journey</h4>
-@Html.Navigation().Link("Transport route export", Model.Progress.IsStateOfExportCompleted, "Index", "StateOfExport", "NotificationApplication")
-@Html.Navigation().Link("Transport route transits", Model.Progress.AreTransitStatesCompleted, "Summary", "TransportRoute", "NotificationApplication")
-@Html.Navigation().Link("Transport route import", Model.Progress.IsStateOfImportCompleted, "Index", "StateOfImport", "NotificationApplication")
-@Html.Navigation().Link("Customs office", Model.Progress.IsCustomsOfficeCompleted, "Index", "CustomsOffice", "NotificationApplication")
+@Html.Navigation().Link("Transport route export", Model.Progress.HasStateOfExport, "Index", "StateOfExport", "NotificationApplication")
+@Html.Navigation().Link("Transport route transits", Model.Progress.HasTransitState, "Summary", "TransportRoute", "NotificationApplication")
+@Html.Navigation().Link("Transport route import", Model.Progress.HasStateOfImport, "Index", "StateOfImport", "NotificationApplication")
+@Html.Navigation().Link("Customs office", Model.Progress.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication")
 
 <h4>Amounts and dates</h4>
-@Html.Navigation().Link("Intended shipments", Model.Progress.IsIntendedShipmentsCompleted, "Index", "Shipment", "NotificationApplication")
+@Html.Navigation().Link("Intended shipments", Model.Progress.HasShipmentInfo, "Index", "Shipment", "NotificationApplication")
 
 <h4>Classify your waste</h4>
-@Html.Navigation().Link("Chemical composition", Model.Progress.IsChemicalCompositionCompleted, "ChemicalComposition", "WasteType", "NotificationApplication", additionalActiveActionNames: new[] { "OtherWaste", "OtherWasteAdditionalInformation", "RdfAdditionalInformation", "RdfSrfType", "WoodAdditionalInformation", "WoodType" })
-@Html.Navigation().Link("Process of generation", Model.Progress.IsProcessOfGenerationCompleted, "Index", "WasteGenerationProcess", "NotificationApplication")
-@Html.Navigation().Link("Physical characteristics", Model.Progress.ArePhysicalCharacteristicsCompleted, "Index", "PhysicalCharacteristics", "NotificationApplication")
-@Html.Navigation().Link("Waste codes", Model.Progress.AreWasteCodesCompleted, "BaselEwcCode", "WasteCodes", "NotificationApplication")
+@Html.Navigation().Link("Chemical composition", Model.Progress.HasWasteType, "ChemicalComposition", "WasteType", "NotificationApplication", additionalActiveActionNames: new[] { "OtherWaste", "OtherWasteAdditionalInformation", "RdfAdditionalInformation", "RdfSrfType", "WoodAdditionalInformation", "WoodType" })
+@Html.Navigation().Link("Process of generation", Model.Progress.HasWasteGenerationProcess, "Index", "WasteGenerationProcess", "NotificationApplication")
+@Html.Navigation().Link("Physical characteristics", Model.Progress.HasPhysicalCharacteristics, "Index", "PhysicalCharacteristics", "NotificationApplication")
+@Html.Navigation().Link("Waste codes", Model.Progress.HasWasteCodes, "BaselEwcCode", "WasteCodes", "NotificationApplication")
 
 @if (Model.NotificationType == NotificationType.Recovery)
 {
     <h4>Waste Recovery</h4>
-    @Html.Navigation().Link("Recovery information", Model.Progress.IsWasteRecoveryInformationCompleted, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication")
+    @Html.Navigation().Link("Recovery information", Model.Progress.HasRecoveryInfo, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication")
 }
 <em></em>

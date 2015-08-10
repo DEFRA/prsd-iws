@@ -20,12 +20,12 @@
         private readonly Guid notificationId = new Guid("8D41E751-D4F3-4182-A6FD-B8FE4EE897D1");
         private readonly SubmitNotification message;
         private readonly IwsContext context;
-        private readonly INotificationProgressCalculator progressCalculator;
+        private readonly INotificationProgressService progressService;
 
         public SubmitNotificationHandlerTests()
         {
             context = A.Fake<IwsContext>();
-            progressCalculator = A.Fake<INotificationProgressCalculator>();
+            progressService = A.Fake<INotificationProgressService>();
 
             var dbSetHelper = new DbContextHelper();
 
@@ -35,9 +35,9 @@
             });
 
             A.CallTo(() => context.NotificationAssessments).Returns(assessments);
-            A.CallTo(() => progressCalculator.IsComplete(notificationId)).Returns(true);
+            A.CallTo(() => progressService.IsComplete(notificationId)).Returns(true);
 
-            handler = new SubmitNotificationHandler(context, progressCalculator);
+            handler = new SubmitNotificationHandler(context, progressService);
             message = new SubmitNotification(notificationId);
         }
 

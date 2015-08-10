@@ -81,10 +81,10 @@
 
                 var model = new NavigationViewModel
                 {
-                    NotificationId = response.NotificationId,
+                    NotificationId = response.Id,
                     NotificationNumber = response.NotificationNumber,
                     NotificationType = response.NotificationType,
-                    Progress = response.Progress
+                    Progress = response
                 };
                 return PartialView(model);
             }

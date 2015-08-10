@@ -56,6 +56,7 @@
     <Content Include="scripts\Everytime\Permissions\0002-Permissions-Grants.sql" />
     <Content Include="scripts\Everytime\Permissions\0001-Permissions-AppRole.sql" />
     <Content Include="scripts\Everytime\placeholder.txt" />
+    <Content Include="scripts\Everytime\StoredProcedures\uspNotificationProgress.sql" />
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
     <Content Include="scripts\TestData\placeholder.txt" />

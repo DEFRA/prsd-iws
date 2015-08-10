@@ -81,6 +81,7 @@
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
+    <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
     <Compile Include="Mappings\SubmitSummaryDataMap.cs" />
     <Compile Include="Mappings\BacsDetailsMap.cs" />
@@ -90,7 +91,7 @@
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
-    <Compile Include="Notification\NotificationProgressCalculator.cs" />
+    <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
     <Compile Include="WorkingDayCalculator.cs" />
     <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
@@ -122,10 +123,8 @@
     <Compile Include="Mappings\FinancialGuaranteeMap.cs" />
     <Compile Include="Mappings\InternalUserMap.cs" />
     <Compile Include="Mappings\JourneyInfoMap.cs" />
-    <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="Mappings\NotificationBasicInfoMap.cs" />
     <Compile Include="Mappings\NotificationInfoMap.cs" />
-    <Compile Include="Mappings\NotificationProgressInfoMap.cs" />
     <Compile Include="Mappings\OrganisationsInvolvedInfoMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsMap.cs" />

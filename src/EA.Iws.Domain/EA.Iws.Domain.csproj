@@ -66,7 +66,7 @@
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
-    <Compile Include="NotificationApplication\INotificationProgressCalculator.cs" />
+    <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />
     <Compile Include="NotificationAssessment\NotificationDecision.cs" />
@@ -76,7 +76,6 @@
     <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\INotificationNumberGenerator.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.PhysicalCharacteristics.cs" />
-    <Compile Include="NotificationApplication\NotificationProgress.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.WasteCodes.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.WasteGenerationProcess.cs" />
     <Compile Include="NotificationApplication\PricingStructure.cs" />

@@ -68,9 +68,9 @@
             DomainEvents.Raise(new NotificationStatusChangeEvent(this, transition.Destination));
         }
 
-        public void Submit(INotificationProgressCalculator progressCalculator)
+        public void Submit(INotificationProgressService progressService)
         {
-            if (!progressCalculator.IsComplete(NotificationApplicationId))
+            if (!progressService.IsComplete(NotificationApplicationId))
             {
                 throw new InvalidOperationException(string.Format("Cannot submit an incomplete notification: {0}", NotificationApplicationId));
             }

@@ -1,31 +1,24 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
-    using DataAccess;
+    using Core.Notification;
     using Domain.NotificationApplication;
-    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
     internal class GetNotificationProgressInfoHandler :
-        IRequestHandler<GetNotificationProgressInfo, NotificationProgressInfo>
+        IRequestHandler<GetNotificationProgressInfo, NotificationApplicationCompletionProgress>
     {
-        private readonly IwsContext context;
-        private readonly IMap<NotificationApplication, NotificationProgressInfo> mapper;
+        private readonly INotificationProgressService progressService;
 
-        public GetNotificationProgressInfoHandler(IwsContext context,
-            IMap<NotificationApplication, NotificationProgressInfo> mapper)
+        public GetNotificationProgressInfoHandler(INotificationProgressService progressService)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this.progressService = progressService;
         }
 
-        public async Task<NotificationProgressInfo> HandleAsync(GetNotificationProgressInfo message)
+        public Task<NotificationApplicationCompletionProgress> HandleAsync(GetNotificationProgressInfo message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
-
-            return mapper.Map(notification);
+            return Task.FromResult(progressService.GetNotificationProgressInfo(message.NotificationId));
         }
     }
 }

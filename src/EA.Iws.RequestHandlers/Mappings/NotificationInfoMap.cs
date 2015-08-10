@@ -43,40 +43,40 @@
         {
             var notificationCompletionProgress = completionProgressMap.Map(notification);
             var organisationsInvolvedInfo = organisationsInvolvedInfoMap.Map(notification);
-            organisationsInvolvedInfo.IsExporterCompleted = notificationCompletionProgress.IsExporterCompleted;
-            organisationsInvolvedInfo.IsProducerCompleted = notificationCompletionProgress.IsProducerCompleted;
-            organisationsInvolvedInfo.IsImporterCompleted = notificationCompletionProgress.IsImporterCompleted;
-            organisationsInvolvedInfo.IsFacilityCompleted = notificationCompletionProgress.IsFacilityCompleted;
+            organisationsInvolvedInfo.IsExporterCompleted = notificationCompletionProgress.HasExporter;
+            organisationsInvolvedInfo.IsProducerCompleted = notificationCompletionProgress.HasProducer;
+            organisationsInvolvedInfo.IsImporterCompleted = notificationCompletionProgress.HasImporter;
+            organisationsInvolvedInfo.IsFacilityCompleted = notificationCompletionProgress.HasFacility;
 
             var recoveryOperationInfo = recoveryOperationInfoMap.Map(notification);
-            recoveryOperationInfo.IsPreconsentStatusChosen = notificationCompletionProgress.IsPreconsentStatusChosen;
-            recoveryOperationInfo.AreOperationCodesChosen = notificationCompletionProgress.AreOperationCodesChosen;
-            recoveryOperationInfo.IsTechnologyEmployedCompleted = notificationCompletionProgress.IsTechnologyEmployedCompleted;
-            recoveryOperationInfo.IsReasonForExportCompleted = notificationCompletionProgress.IsReasonForExportCompleted;
+            recoveryOperationInfo.IsPreconsentStatusChosen = notificationCompletionProgress.HasPreconsentedInformation;
+            recoveryOperationInfo.AreOperationCodesChosen = notificationCompletionProgress.HasOperationCodes;
+            recoveryOperationInfo.IsTechnologyEmployedCompleted = notificationCompletionProgress.HasTechnologyEmployed;
+            recoveryOperationInfo.IsReasonForExportCompleted = notificationCompletionProgress.HasReasonForExport;
 
             var transportationInfo = transportationInfoMap.Map(notification);
-            transportationInfo.IsCarrierCompleted = notificationCompletionProgress.IsCarrierCompleted;
-            transportationInfo.IsMeansOfTransportCompleted = notificationCompletionProgress.IsMeansOfTransportCompleted;
-            transportationInfo.IsPackagingTypesCompleted = notificationCompletionProgress.IsPackagingTypesCompleted;
-            transportationInfo.IsSpecialHandlingCompleted = notificationCompletionProgress.IsSpecialHandlingCompleted;
+            transportationInfo.IsCarrierCompleted = notificationCompletionProgress.HasCarrier;
+            transportationInfo.IsMeansOfTransportCompleted = notificationCompletionProgress.HasMeansOfTransport;
+            transportationInfo.IsPackagingTypesCompleted = notificationCompletionProgress.HasPackagingInfo;
+            transportationInfo.IsSpecialHandlingCompleted = notificationCompletionProgress.HasSpecialHandlingRequirements;
 
             var journeyInfo = journeyInfoMap.Map(notification);
-            journeyInfo.IsStateOfExportCompleted = notificationCompletionProgress.IsStateOfExportCompleted;
-            journeyInfo.IsStateOfImportCompleted = notificationCompletionProgress.IsStateOfImportCompleted;
-            journeyInfo.AreTransitStatesCompleted = notificationCompletionProgress.AreTransitStatesCompleted;
-            journeyInfo.IsCustomsOfficeCompleted = notificationCompletionProgress.IsCustomsOfficeCompleted;
+            journeyInfo.IsStateOfExportCompleted = notificationCompletionProgress.HasStateOfExport;
+            journeyInfo.IsStateOfImportCompleted = notificationCompletionProgress.HasStateOfImport;
+            journeyInfo.AreTransitStatesCompleted = notificationCompletionProgress.HasTransitState;
+            journeyInfo.IsCustomsOfficeCompleted = notificationCompletionProgress.HasCustomsOffice;
 
             var amountsAndDatesInfo = amountsAndDatesInfoMap.Map(notification);
-            amountsAndDatesInfo.IsIntendedShipmentsCompleted = notificationCompletionProgress.IsIntendedShipmentsCompleted;
+            amountsAndDatesInfo.IsIntendedShipmentsCompleted = notificationCompletionProgress.HasShipmentInfo;
 
             var classifyYourWasteInfo = classifyYourWasteInfoMap.Map(notification);
-            classifyYourWasteInfo.IsChemicalCompositionCompleted = notificationCompletionProgress.IsChemicalCompositionCompleted;
-            classifyYourWasteInfo.IsProcessOfGenerationCompleted = notificationCompletionProgress.IsProcessOfGenerationCompleted;
-            classifyYourWasteInfo.ArePhysicalCharacteristicsCompleted = notificationCompletionProgress.ArePhysicalCharacteristicsCompleted;
-            classifyYourWasteInfo.AreWasteCodesCompleted = notificationCompletionProgress.AreWasteCodesCompleted;
+            classifyYourWasteInfo.IsChemicalCompositionCompleted = notificationCompletionProgress.HasWasteType;
+            classifyYourWasteInfo.IsProcessOfGenerationCompleted = notificationCompletionProgress.HasWasteGenerationProcess;
+            classifyYourWasteInfo.ArePhysicalCharacteristicsCompleted = notificationCompletionProgress.HasPhysicalCharacteristics;
+            classifyYourWasteInfo.AreWasteCodesCompleted = notificationCompletionProgress.HasWasteCodes;
 
             var wasteRecoveryInfo = wasteRecoveryInfoMap.Map(notification);
-            wasteRecoveryInfo.IsWasteRecoveryInformationCompleted = notificationCompletionProgress.IsWasteRecoveryInformationCompleted;
+            wasteRecoveryInfo.IsWasteRecoveryInformationCompleted = notificationCompletionProgress.HasRecoveryData;
 
             var submitSummaryData = submitSummaryDataMap.Map(notification);
             submitSummaryData.IsNotificationComplete = notificationCompletionProgress.IsAllComplete;

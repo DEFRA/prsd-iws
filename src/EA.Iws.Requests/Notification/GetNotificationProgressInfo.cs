@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
+    using Core.Notification;
     using Prsd.Core.Mediator;
 
-    public class GetNotificationProgressInfo : IRequest<NotificationProgressInfo>
+    public class GetNotificationProgressInfo : IRequest<NotificationApplicationCompletionProgress>
     {
         public GetNotificationProgressInfo(Guid notificationId)
         {
