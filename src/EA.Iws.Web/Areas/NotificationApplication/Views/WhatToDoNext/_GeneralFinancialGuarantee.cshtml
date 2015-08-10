@@ -1,0 +1,6 @@
+﻿@model EA.Iws.Requests.Notification.WhatToDoNextData
+
+<h3 class="heading-medium">Step 4: Complete the Financial Guarantee form</h3>
+<p>Download and complete the Financial Guarantee template and send to the @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.CompetentAuthority.Name) using the address below.</p>
+<p>@Html.ActionLink("Print Financial Guarantee form", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)</p>
+<p>An approved Financial Guarantee must be in place before any shipments can be made.</p>

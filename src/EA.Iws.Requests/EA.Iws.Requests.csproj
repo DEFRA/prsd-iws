@@ -66,11 +66,14 @@
     <Compile Include="Copy\GetNotificationsToCopyForUser.cs" />
     <Compile Include="Copy\NotificationApplicationCopyData.cs" />
     <Compile Include="Notification\GetNotificationProgressInfo.cs" />
-    <Compile Include="Notification\GetNotificationType.cs" />
+    <Compile Include="Notification\GetNotificationBasicInformation.cs" />
     <Compile Include="Notification\JourneyInfo.cs" />
-    <Compile Include="Notification\NotificationBasicInfo.cs" />
+    <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationId.cs" />
+    <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
+    <Compile Include="Notification\NotificationBasicInformation.cs" />
     <Compile Include="Notification\NotificationProgressInfo.cs" />
     <Compile Include="Notification\SubmitNotification.cs" />
+    <Compile Include="Notification\WhatToDoNextData.cs" />
     <Compile Include="Notification\OrganisationsInvolvedInfo.cs" />
     <Compile Include="Notification\RecoveryOperationInfo.cs" />
     <Compile Include="Notification\TransportationInfo.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="Shared\GetCountries.cs" />
     <Compile Include="Registration\LinkUserToOrganisation.cs" />
     <Compile Include="Registration\Users\UserById.cs" />
+    <Compile Include="Shared\GetUnitedKingdomCompetentAuthorityInformation.cs" />
     <Compile Include="Shipment\SetShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\GetPackagingInfoForNotification.cs" />
     <Compile Include="Shipment\GetShipmentInfoForNotification.cs" />

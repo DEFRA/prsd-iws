@@ -54,6 +54,7 @@
     <Compile Include="Business.cs" />
     <Compile Include="BusinessType.cs" />
     <Compile Include="CompetentAuthority.cs" />
+    <Compile Include="CompetentAuthorityBacsDetails.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="FinancialGuarantee\ApproveDates.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="NotificationApplication\ShipmentInfo.cs" />
     <Compile Include="ShipmentQuantityUnits.cs" />
     <Compile Include="UKCompetentAuthority.cs" />
+    <Compile Include="UnitedKingdomCompetentAuthority.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

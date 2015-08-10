@@ -3,7 +3,6 @@
     using Core.Shared;
     using Domain;
     using Prsd.Core.Mapper;
-    using Requests.Shared;
 
     internal class CompetentAuthorityMap : IMap<CompetentAuthority, CompetentAuthorityData>
     {

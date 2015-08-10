@@ -88,6 +88,7 @@
     <Content Include="scripts\Update\Sprint13\20150807-120000-insert-data-into-ca-for-missing-countries.sql" />
     <Content Include="scripts\Update\Sprint13\20150806-114000-create-financial-guarantee-records.sql" />
     <Content Include="scripts\Update\Sprint13\20150807-093600-add-financial-guarantee-columns.sql" />
+    <Content Include="scripts\Update\Sprint13\20150807-154500-create-united-kingdom-competent-authority-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

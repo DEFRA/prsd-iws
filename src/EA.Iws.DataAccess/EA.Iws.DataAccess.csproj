@@ -81,6 +81,7 @@
     <Compile Include="Mappings\ActivityMapping.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\BankHolidayMapping.cs" />
+    <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />
     <Compile Include="Mappings\NotificationAssessmentMapping.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Mappings\ChemicalCompositionTypeMapping.cs" />
     <Compile Include="Mappings\ShipmentQuantityUnitsMapping.cs" />
     <Compile Include="Mappings\UKCompetentAuthorityMapping.cs" />
+    <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\NotificationTypeMapping.cs" />
     <Compile Include="Mappings\WasteAdditionalInformationMapping.cs" />

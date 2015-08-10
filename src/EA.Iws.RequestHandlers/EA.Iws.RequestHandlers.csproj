@@ -80,8 +80,14 @@
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="Mappings\SubmitSummaryDataMap.cs" />
+    <Compile Include="Mappings\BacsDetailsMap.cs" />
+    <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />
+    <Compile Include="Mappings\WhatToDoNextMap.cs" />
+    <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
+    <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressCalculator.cs" />
+    <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
     <Compile Include="WorkingDayCalculator.cs" />
     <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />

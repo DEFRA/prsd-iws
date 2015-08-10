@@ -77,6 +77,7 @@
     <Compile Include="RecoveryInfo\RecoveryInfoUnits.cs" />
     <Compile Include="Registration\Users\User.cs" />
     <Compile Include="Shared\AddressData.cs" />
+    <Compile Include="Shared\BacsData.cs" />
     <Compile Include="Shared\BusinessData.cs" />
     <Compile Include="Shared\BusinessInfoData.cs" />
     <Compile Include="Shared\BusinessType.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Shared\NotificationType.cs" />
     <Compile Include="Notification\SubmitSummaryData.cs" />
     <Compile Include="Shared\TradeDirection.cs" />
+    <Compile Include="Shared\UnitedKingdomCompetentAuthorityData.cs" />
     <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="Shipment\ShipmentQuantityUnits.cs" />

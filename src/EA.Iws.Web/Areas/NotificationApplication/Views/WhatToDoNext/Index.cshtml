@@ -1,0 +1,141 @@
+﻿@using EA.Iws.Core.Notification
+@model EA.Iws.Requests.Notification.WhatToDoNextData
+
+@{
+    ViewBag.Title = "What to do next";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<header class="hgroup">
+    <h2 class="heading-large">What to do next</h2>
+    <h2 class="heading-small">Before we consider your notification you need to:</h2>
+</header>
+
+<div>
+    <h3 class="heading-medium">Step 1. Print the notification document</h3>
+    @Html.ActionLink(linkText: "Print document", actionName: "GenerateNotificationDocument", controllerName: "Home", routeValues: new { id = Model.Id, area = "NotificationApplication" }, htmlAttributes: null)
+</div>
+
+<div>
+    <h3 class="heading-medium">Step 2: Sign in block 17</h3>
+    <p>Ensure you sign and date block 17 of the notification document</p>
+    @switch (Model.CompetentAuthority)
+    {
+        case CompetentAuthority.England:
+            @Html.Partial("_EaBlock17Disclosure")
+            break;
+        case CompetentAuthority.Scotland:
+            @Html.Partial("_SepaBlock17Disclosure")
+            break;
+        case CompetentAuthority.NorthernIreland:
+            @Html.Partial("_NieaBlock17Disclosure")
+            break;
+        case CompetentAuthority.Wales:
+            @Html.Partial("_NrwBlock17Disclosure")
+            break;
+    }
+</div>
+
+<div>
+    <h3 class="heading-medium">Step 3: Pay the notification charge</h3>
+    <p>Payments must be made in sterling.</p>
+
+    <h4 class="heading-small">Bank transfers</h4>
+    <p>Use our bank details below to make a bank transfer. It is important to use the correct payment reference to ensure assessment of your notification is not delayed.</p>
+    <table class="table-pad-bottom">
+        <tbody>
+            <tr>
+                <td>Payment Reference</td>
+                <td>@Html.DisplayFor(m => m.NotificationNumber)</td>
+            </tr>
+            <tr>
+                <td>Payment Due</td>
+                <td>£@Html.DisplayFor(m => m.Charge)</td>
+            </tr>
+            <tr>
+                <td>Account Name</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountName)</td>
+            </tr>
+            <tr>
+                <td>Bank Name</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Bank)</td>
+            </tr>
+            <tr>
+                <td>Bank Address</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.BankAddress)</td>
+            </tr>
+            <tr>
+                <td>Sort Code</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SortCode)</td>
+            </tr>
+            <tr>
+                <td>Account Number</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountNumber)</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>If you are paying from outside the United Kingdom, include the international banking references below.</p>
+    <table class="table-pad-bottom">
+        <tr>
+            <td>IBAN</td>
+            <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Iban)</td>
+        </tr>
+        <tr>
+            <td>SWIFTBIC</td>
+            <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SwiftBic)</td>
+        </tr>
+    </table>
+    @if (Model.CompetentAuthority == CompetentAuthority.Wales)
+    {
+        @Html.Partial("_NrwRemittanceEmail")
+    }
+    else
+    {
+        @Html.Partial("_GeneralRemittanceEmail")
+    }
+
+    <h4 class="heading-small">By post</h4>
+    @Html.Partial("_GeneralPost")
+
+    @Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
+</div>
+
+<div>
+    @switch (Model.CompetentAuthority)
+    {
+        case CompetentAuthority.Wales:
+            @Html.Partial("_NrwFinancialGuarantee")
+            break;
+        case CompetentAuthority.Scotland:
+        @Html.Partial("_SepaFinancialGuarantee")
+            break;
+        default:
+        @Html.Partial("_GeneralFinancialGuarantee")
+            break;
+    }
+</div>
+
+<div>
+    <h3 class="heading-medium">Step 5: Post the notification package to the following address:</h3>
+    @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address)
+    <p>Telephone: @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Telephone)</p>
+    <ul class="what-next-list">
+        The package must include:
+        <li>The signed notification document</li>
+        <li>The movement document</li>
+        <li>Any supplementary information that was declared in the notification application</li>
+        <li>Proof of payment if paying by bank transfer, alternatively include your cheque or postal order</li>
+    </ul>
+    <p>
+        Assessment of this notification will start when both the notification package and the correct payment have been received by
+        @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.CompetentAuthority.Name).
+    </p>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

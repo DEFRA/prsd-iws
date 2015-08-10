@@ -59,6 +59,8 @@
 
         public virtual DbSet<BankHoliday> BankHolidays { get; set; }
 
+        public virtual DbSet<UnitedKingdomCompetentAuthority> UnitedKingdomCompetentAuthorities { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

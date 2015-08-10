@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.NotificationApplication;

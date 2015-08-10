@@ -1,14 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
-    using System.Data.Entity;
     using System.Linq;
-    using System.Threading.Tasks;
     using Core.Shared;
     using DataAccess;
     using Domain;
     using Prsd.Core.Mapper;
-    using Requests.Shared;
 
     public class AddressMap : IMap<Address, AddressData>
     {

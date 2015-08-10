@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Core.Shared.AddressData
+
+<address>
+    <span>@Html.DisplayFor(m => m.Building)</span>
+    <span>@Html.DisplayFor(m => m.StreetOrSuburb)</span>
+    @if (!string.IsNullOrWhiteSpace(Model.Address2))
+    {
+        <span>@Html.DisplayFor(m => m.Address2)</span>
+    }
+    <span>@Html.DisplayFor(m => m.TownOrCity)</span>
+    <span>@Html.DisplayFor(m => m.PostalCode)</span>
+    @if (!string.IsNullOrWhiteSpace(Model.Region))
+    {
+        <span>@Html.DisplayFor(m => m.Region)</span>
+    }
+    <span>@Html.DisplayFor(m => m.CountryName)</span>
+</address>

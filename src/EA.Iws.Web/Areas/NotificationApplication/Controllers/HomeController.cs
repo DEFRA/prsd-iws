@@ -110,30 +110,8 @@
             {
                 await client.SendAsync(User.GetAccessToken(),
                     new SubmitNotification(model.Id));
-                return RedirectToAction("Submitted", "Home", new { id = model.Id });
+                return RedirectToAction("Index", "WhatToDoNext", new { id = model.Id });
             }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Submitted(Guid id)
-        {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
-                var model = new SubmittedViewModel { CompetentAuthority = response.CompetentAuthority, Id = id };
-                return View(model);
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Submitted(SubmittedViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            return RedirectToAction("Index", "Home", new { id = model.Id });
         }
     }
 }

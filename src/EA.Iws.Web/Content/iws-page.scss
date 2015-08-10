@@ -616,17 +616,35 @@ dl.object-summary {
 
 .international-number {
 
-  .international-number-body {
-    display: inline-block;
-    width: 65%;
-  }
+    .international-number-body {
+        display: inline-block;
+        width: 65%;
+    }
 
     .international-number-prefix {
-    display: inline-block;
-    width: 100px;
-  }
+        display: inline-block;
+        width: 100px;
+    }
 
-   .plus-label {
-   display: inline-block;
-  }
+    .plus-label {
+        display: inline-block;
+    }
+}
+
+address > span {
+    display: block;
+    font-style: normal;
+}
+
+.what-next-list {
+    li {
+        list-style-position: inside;
+        list-style-type: disc;
+    }
+
+    margin-bottom: 1em;
+}
+
+table.table-pad-bottom{
+    margin-bottom: 1em;
 }

@@ -456,7 +456,6 @@
     <Content Include="Areas\NotificationApplication\Views\Home\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_Transportation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_AmountsAndDates.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\Submitted.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -496,6 +495,21 @@
     <Content Include="Areas\Admin\Views\FinancialGuarantee\_Approve.cshtml" />
     <Content Include="Areas\Admin\Views\FinancialGuarantee\_Refuse.cshtml" />
     <Content Include="Areas\Admin\Views\FinancialGuarantee\_Release.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Shared\DisplayTemplates\AddressData.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_GeneralRemittanceEmail.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwRemittanceEmail.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_GeneralPost.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_EaCard.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_SepaCard.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwCard.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_GeneralFinancialGuarantee.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_SepaFinancialGuarantee.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwFinancialGuarantee.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_EaBlock17Disclosure.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_SepaBlock17Disclosure.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NieaBlock17Disclosure.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwBlock17Disclosure.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -651,6 +665,7 @@
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />
     <Compile Include="Areas\FinancialGuarantee\FinancialGuaranteeAreaRegistration.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\WhatToDoNextController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\RemoveCarrierViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\RemoveFacilityViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\SiteOfTreatmentViewModel.cs" />
