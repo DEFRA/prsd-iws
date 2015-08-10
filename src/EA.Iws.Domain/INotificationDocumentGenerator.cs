@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.Domain
 {
-    public interface IDocumentGenerator
+    public interface INotificationDocumentGenerator
     {
         byte[] GenerateNotificationDocument(NotificationApplication.NotificationApplication notification);
-
-        byte[] GenerateFinancialGuaranteeDocument();
     }
 }

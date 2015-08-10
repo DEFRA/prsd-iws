@@ -51,7 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentFormatter.cs" />
-    <Compile Include="DocumentGenerator\DocumentGenerator.cs" />
+    <Compile Include="DocumentGenerator\FinancialGuaranteeDocumentGenerator.cs" />
+    <Compile Include="DocumentGenerator\NotificationDocumentGenerator.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Mapper\MergeFieldDataMapper.cs" />
     <Compile Include="MergeField.cs" />

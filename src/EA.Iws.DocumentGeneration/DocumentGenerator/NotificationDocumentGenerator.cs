@@ -8,7 +8,7 @@
     using Domain.NotificationApplication;
     using NotificationBlocks;
 
-    public class DocumentGenerator : IDocumentGenerator
+    public class NotificationDocumentGenerator : INotificationDocumentGenerator
     {
         private string TocText { get; set; }
         private string InstructionsText { get; set; }
@@ -55,14 +55,6 @@
                     MergeFieldLocator.RemoveDataSourceSettingFromMergedDocument(document);
                 }
 
-                return memoryStream.ToArray();
-            }
-        }
-
-        public byte[] GenerateFinancialGuaranteeDocument()
-        {
-            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("FinancialGuaranteeForm.pdf"))
-            {
                 return memoryStream.ToArray();
             }
         }

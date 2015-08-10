@@ -15,13 +15,7 @@
     </div>
     <div class="column-third" id="submit-side-bar">
         <h3 class="heading-medium">Account services</h3>
-        @Html.ActionLink("Change account details", "ChangeAccountDetails", "Registration")
-        @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
-        <p>
-            <span class="line">Portable document format (PDF)</span>
-            Approximate size (3356k)
-        </p>
-        <p>If you do not have PDF viewer you can download it from adobe</p>
+        <i class="fa fa-briefcase"></i>&nbsp;&nbsp;@Html.ActionLink("Account details", "ChangeAccountDetails", "Registration")
     </div>
 </div>
 

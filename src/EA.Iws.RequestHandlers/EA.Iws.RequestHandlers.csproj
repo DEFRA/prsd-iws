@@ -79,6 +79,8 @@
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
+    <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
+    <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
     <Compile Include="Mappings\SubmitSummaryDataMap.cs" />
     <Compile Include="Mappings\BacsDetailsMap.cs" />
     <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />

@@ -8,7 +8,8 @@
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<DocumentGenerator>().As<IDocumentGenerator>();
+            builder.RegisterType<NotificationDocumentGenerator>().As<INotificationDocumentGenerator>();
+            builder.RegisterType<FinancialGuaranteeDocumentGenerator>().As<IFinancialGuaranteeDocumentGenerator>();
         }
     }
 }

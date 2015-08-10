@@ -116,7 +116,8 @@
                 var model = new CreatedViewModel
                 {
                     NotificationId = response.NotificationId,
-                    NotificationNumber = response.NotificationNumber
+                    NotificationNumber = response.NotificationNumber,
+                    CompetentAuthority = response.CompetentAuthority
                 };
                 return View(model);
             }

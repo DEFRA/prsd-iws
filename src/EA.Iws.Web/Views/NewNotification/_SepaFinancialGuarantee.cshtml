@@ -1,6 +1,5 @@
-﻿@model EA.Iws.Requests.Notification.WhatToDoNextData
+﻿@model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
 
-<h3 class="heading-medium">Step 4: Submit a Financial Guarantee</h3>
 <p>
     You will need a financial guarantee in place before any shipments can be made.
 </p>
@@ -8,7 +7,7 @@
     Ensure you submit your original Financial Guarantee with your notification package.
 </p>
 <p>
-    If you intend to submit a bank or parent company guarantee, print either the
+    If you intend to submit a bank or parent company guarantee, print either the 
     @Html.ActionLink("Bank Guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
     or
     @Html.ActionLink("Parent Company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)

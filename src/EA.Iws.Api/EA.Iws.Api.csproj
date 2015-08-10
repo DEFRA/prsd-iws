@@ -259,8 +259,12 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Documents\FinancialGuaranteeForm.pdf" />
+    <Content Include="Documents\EAFinancialGuaranteeForm.pdf" />
     <Content Include="Documents\NotificationMergeTemplate.docx" />
+    <Content Include="Documents\NRWFinancialGuaranteeForm.pdf" />
+    <Content Include="Documents\NIEAFinancialGuaranteeForm.pdf" />
+    <Content Include="Documents\SEPABankGuaranteeTemplate.doc" />
+    <Content Include="Documents\SEPAParentCompanyTemplate.doc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

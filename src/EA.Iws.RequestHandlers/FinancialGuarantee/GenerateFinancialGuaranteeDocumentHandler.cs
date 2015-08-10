@@ -7,16 +7,16 @@
 
     internal class GenerateFinancialGuaranteeDocumentHandler : IRequestHandler<GenerateFinancialGuaranteeDocument, byte[]>
     {
-        private readonly IDocumentGenerator documentGenerator;
+        private readonly IFinancialGuaranteeDocumentGenerator financialGuaranteeDocumentGenerator;
 
-        public GenerateFinancialGuaranteeDocumentHandler(IDocumentGenerator documentGenerator)
+        public GenerateFinancialGuaranteeDocumentHandler(IFinancialGuaranteeDocumentGenerator financialGuaranteeDocumentGenerator)
         {
-            this.documentGenerator = documentGenerator;
+            this.financialGuaranteeDocumentGenerator = financialGuaranteeDocumentGenerator;
         }
 
         public Task<byte[]> HandleAsync(GenerateFinancialGuaranteeDocument query)
         {
-            return Task.FromResult(documentGenerator.GenerateFinancialGuaranteeDocument());
+            return Task.FromResult(financialGuaranteeDocumentGenerator.GenerateFinancialGuaranteeDocument(query.CompetentAuthority));
         }
     }
 }

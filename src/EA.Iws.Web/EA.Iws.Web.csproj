@@ -628,6 +628,8 @@
     <Content Include="Views\Registration\EditOrganisationDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AddressData.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ContactData.cshtml" />
+    <Content Include="Views\NewNotification\_GeneralFinancialGuarantee.cshtml" />
+    <Content Include="Views\NewNotification\_SepaFinancialGuarantee.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

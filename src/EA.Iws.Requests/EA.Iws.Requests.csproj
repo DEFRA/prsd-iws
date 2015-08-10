@@ -58,6 +58,8 @@
     <Compile Include="Carriers\DeleteCarrierForNotification.cs" />
     <Compile Include="Admin\GetBasicSearchResults.cs" />
     <Compile Include="Facilities\CopyFacilityFromImporter.cs" />
+    <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
+    <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />
     <Compile Include="Notification\ClassifyYourWasteInfo.cs" />

@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.SubmitSideBarViewModel
+﻿@using EA.Iws.Core.Notification
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.SubmitSideBarViewModel
 
 <h3 class="heading-medium">Summary</h3>
 
@@ -12,8 +13,16 @@
 <h3 class="heading-medium squash-margin">Notification charge</h3>
 <p id="charge">£@Html.DisplayFor(m => m.Charge)</p>
 <ul>
-    <li>@Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", null, new { id = Model.NotificationId })</li>
-    <li>@Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)</li>
+    <li>@Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId }, null)</li>
+    @if (Model.CompetentAuthority == CompetentAuthority.Scotland)
+    {
+        <li>@Html.ActionLink("Bank Guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)</li>
+        <li>@Html.ActionLink("Parent Company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)</li>
+    }
 </ul>
 
 <p>

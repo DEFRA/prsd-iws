@@ -12,6 +12,8 @@
 
         public DateTime CreatedDate { get; set; }
 
+        public CompetentAuthority CompetentAuthority { get; set; }
+
         public string NotificationNumber { get; set; }
 
         public int Charge { get; set; }
@@ -29,6 +31,7 @@
             Charge = notificationCharge;
             Status = submitSummaryData.Status;
             IsNotificationComplete = submitSummaryData.IsNotificationComplete;
+            CompetentAuthority = submitSummaryData.CompetentAuthority;
         }
     }
 }

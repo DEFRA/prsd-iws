@@ -9,20 +9,20 @@
     internal class GenerateNotificationDocumentHandler : IRequestHandler<GenerateNotificationDocument, byte[]>
     {
         private readonly IwsContext context;
-        private readonly IDocumentGenerator documentGenerator;
+        private readonly INotificationDocumentGenerator notificationDocumentGenerator;
 
         public GenerateNotificationDocumentHandler(IwsContext context,
-            IDocumentGenerator documentGenerator)
+            INotificationDocumentGenerator notificationDocumentGenerator)
         {
             this.context = context;
-            this.documentGenerator = documentGenerator;
+            this.notificationDocumentGenerator = notificationDocumentGenerator;
         }
 
         public async Task<byte[]> HandleAsync(GenerateNotificationDocument query)
         {
             var notification = await context.GetNotificationApplication(query.NotificationId);
 
-            return documentGenerator.GenerateNotificationDocument(notification);
+            return notificationDocumentGenerator.GenerateNotificationDocument(notification);
         }
     }
 }

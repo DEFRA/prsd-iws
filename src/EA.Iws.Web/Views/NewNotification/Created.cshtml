@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
+﻿@using EA.Iws.Core.Notification
+@model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
 @{
     ViewBag.Title = "Notification Application Created";
 }
@@ -20,13 +21,15 @@
         <p>
             Your unique notification number has been automatically saved.
         </p>
-        <p>
-            You can return to this saved notification at any time.
-        </p>
-        <p>
-            Print and complete a @Html.ActionLink("Financial Guarantee form", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null).
-            An approved Financial Guarantee must be in place before any shipments can be made
-        </p>
+        @switch (Model.CompetentAuthority)
+        {
+            case CompetentAuthority.Scotland:
+                @Html.Partial("_SepaFinancialGuarantee")
+                break;
+            default:
+                @Html.Partial("_GeneralFinancialGuarantee")
+                break;
+        }
     </div>
     
     <div class="form-group">
