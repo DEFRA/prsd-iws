@@ -162,7 +162,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date and last departure date must be within a 12 month period."));
+            Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date and last departure date must be within a 12 month period"));
         }
 
         [Fact]
@@ -180,7 +180,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date and last departure date must be within a 36 month period."));
+            Assert.True(errors.Any(p => p.ErrorMessage.Contains("The first departure date and last departure date must be within a 36 month period")));
         }
 
         private void AddValidDateToModel()
