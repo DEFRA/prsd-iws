@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Admin.Search;
-    using Requests.Admin;
 
     public class BasicSearchViewModel
     {
@@ -17,10 +16,5 @@
         public List<BasicSearchResult> SearchResults { get; set; }
 
         public bool HasSearched { get; set; }
-
-        public GetBasicSearchResults ToRequest()
-        {
-            return new GetBasicSearchResults(SearchTerm);
-        }
     }
 }

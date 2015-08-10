@@ -9,6 +9,7 @@
     using Core.NotificationAssessment;
     using Core.WasteType;
     using DataAccess;
+    using Domain;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Admin;
@@ -24,7 +25,9 @@
 
         public async Task<IList<BasicSearchResult>> HandleAsync(GetBasicSearchResults query)
         {
-            return (await context.NotificationApplications
+            var user = await context.Users.SingleAsync(u => u.Id == query.UserId);
+
+            var results = (await context.NotificationApplications
                 .Where(p => p.NotificationNumber.Contains(query.SearchTerm) ||
                             p.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm) ||
                             p.Exporter.Business.Name.Contains(query.SearchTerm))
@@ -39,10 +42,13 @@
                             s.n.NotificationNumber,
                             ExporterName = s.n.Exporter.Business.Name,
                             WasteType = (int?)s.n.WasteType.ChemicalCompositionType.Value,
-                            s.na.Status
+                            s.na.Status,
+                            s.n.CompetentAuthority
                         })
-                .ToListAsync())
-                .Select(s => ConvertToSearchResults(
+                .ToListAsync());
+
+            var filteredResults = results.Where(r => r.CompetentAuthority == UKCompetentAuthority.FromShortName(user.CompetentAuthority));
+            return filteredResults.Select(s => ConvertToSearchResults(
                     s.Id,
                     s.NotificationNumber,
                     s.ExporterName,

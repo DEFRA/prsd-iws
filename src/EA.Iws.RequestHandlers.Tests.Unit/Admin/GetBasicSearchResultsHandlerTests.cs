@@ -36,6 +36,7 @@
             var context = A.Fake<IwsContext>();
             A.CallTo(() => context.NotificationApplications).Returns(applications);
             A.CallTo(() => context.NotificationAssessments).Returns(assessments);
+            A.CallTo(() => context.Users).Returns(GetUsers());
 
             handler = new GetBasicSearchResultsHandler(context);
         }
@@ -48,8 +49,20 @@
                 CreateNotificationApplication(notification2, "GB 0001 000000", UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
                 CreateNotificationApplication(notification3, "Exporter two", UKCompetentAuthority.Wales, WasteType.CreateSrfWasteType(null)),
                 CreateNotificationApplication(notification4, "Exporter RDF", UKCompetentAuthority.Wales, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification5, "not submitted", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
+                CreateNotificationApplication(notification5, "not submitted", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification5, "exporter", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
             });
+        }
+
+        private System.Data.Entity.DbSet<User> GetUsers()
+        {
+            User user = new User("ac795e26-1563-4833-b8f9-0529eb9e66ae", "Name", "Surname", "123456", "test@test.com");
+            ObjectInstantiator<User>.SetProperty(u => u.CompetentAuthority, "EA", user);
+            var users = helper.GetAsyncEnabledDbSet(new[]
+            {
+                user
+            });
+            return users;
         }
 
         private System.Data.Entity.DbSet<Domain.NotificationAssessment.NotificationAssessment> GetNotificationAssessments()
@@ -90,7 +103,7 @@
 
         private async Task<IList<BasicSearchResult>> ResultsWhenSearchingFor(string searchTerm)
         {
-            return await handler.HandleAsync(new GetBasicSearchResults(searchTerm));
+            return await handler.HandleAsync(new GetBasicSearchResults(searchTerm, "ac795e26-1563-4833-b8f9-0529eb9e66ae"));
         }
 
         [Fact]
@@ -123,7 +136,7 @@
         [Fact]
         public async Task SearchBy_ExporterName()
         {
-            var results = await ResultsWhenSearchingFor("Exporter one");
+            var results = await ResultsWhenSearchingFor("exporter");
 
             Assert.Equal(1, results.Count);
         }
@@ -131,7 +144,7 @@
         [Fact]
         public async Task SearchBy_ExporterName_Multiples()
         {
-            var results = await ResultsWhenSearchingFor("Exporter");
+            var results = await ResultsWhenSearchingFor("exporter");
 
             Assert.Equal(3, results.Count);
         }
@@ -157,7 +170,7 @@
         {
             var results = await ResultsWhenSearchingFor("GB 0");
 
-            Assert.Equal(4, results.Count);
+            Assert.Equal(1, results.Count);
         }
 
         [Fact]
@@ -166,6 +179,13 @@
             var results = await ResultsWhenSearchingFor("GB 0");
 
             Assert.True(results.All(p => p.NotificationStatus != EnumHelper.GetDisplayName(NotificationStatus.NotSubmitted)));
+        }
+
+        [Fact]
+        public async Task SearchExcludesDifferenctCompetentAuthority()
+        {
+            var results = await ResultsWhenSearchingFor("GB 0001");
+            Assert.Equal(1, results.Count);
         }
     }
 }

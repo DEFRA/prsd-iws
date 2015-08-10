@@ -8,9 +8,13 @@
     {
         public string SearchTerm { get; set; }
 
-        public GetBasicSearchResults(string searchTerm)
+        public string UserId { get; set; }
+
+        public GetBasicSearchResults(string searchTerm, string userId)
         {
             SearchTerm = searchTerm;
+
+            UserId = userId;
         }
     }
 }

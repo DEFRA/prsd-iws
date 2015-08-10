@@ -52,5 +52,26 @@
 
             throw new InvalidOperationException(string.Format("Unknown competent authority {0}", this.DisplayName));
         }
+
+        public static UKCompetentAuthority FromShortName(string name)
+        {
+            if (England.ShortName == name)
+            {
+                return England;
+            }
+            if (Scotland.ShortName == name)
+            {
+                return Scotland;
+            }
+            if (NorthernIreland.ShortName == name)
+            {
+                return NorthernIreland;
+            }
+            if (Wales.ShortName == name)
+            {
+                return Wales;
+            }
+            throw new InvalidOperationException(string.Format("Unknown competent authority short name {0}", name));
+        }
     }
 }
