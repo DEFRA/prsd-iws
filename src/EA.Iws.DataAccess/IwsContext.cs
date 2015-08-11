@@ -61,6 +61,8 @@
 
         public virtual DbSet<UnitedKingdomCompetentAuthority> UnitedKingdomCompetentAuthorities { get; set; }
 
+        public virtual DbSet<LocalArea> LocalAreas { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

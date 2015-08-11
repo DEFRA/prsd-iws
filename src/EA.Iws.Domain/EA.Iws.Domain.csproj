@@ -64,6 +64,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
+    <Compile Include="LocalArea.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationProgressCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />

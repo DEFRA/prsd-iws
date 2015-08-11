@@ -26,7 +26,6 @@
         public string CompetentAuthority { get; set; }
 
         [Required]
-        [StringLength(80)]
         [DataType(DataType.Text)]
         [Display(Name = "Local area covered")]
         public string LocalArea { get; set; }

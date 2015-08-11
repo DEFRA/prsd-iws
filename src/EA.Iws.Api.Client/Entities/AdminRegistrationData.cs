@@ -25,7 +25,6 @@
         public string JobTitle { get; set; }
 
         [Required]
-        [StringLength(50)]
         [DataType(DataType.Text)]
         public string LocalArea { get; set; }
 

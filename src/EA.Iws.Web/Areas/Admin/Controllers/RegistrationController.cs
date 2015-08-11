@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Mail;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -12,6 +13,7 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Prsd.Core.Web.OAuth;
+    using Requests.Admin;
     using Services;
     using ViewModels;
 
@@ -35,13 +37,13 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
-            var model = GetModelData(new AdminRegistrationViewModel());
+            var model = await GetModelData(new AdminRegistrationViewModel());
             return View(model);
         }
 
-        private AdminRegistrationViewModel GetModelData(AdminRegistrationViewModel model)
+        private async Task<AdminRegistrationViewModel> GetModelData(AdminRegistrationViewModel model)
         {
             var competentAuthorities = new List<SelectListItem>
             {
@@ -51,17 +53,13 @@
                 new SelectListItem{Text = "NRW", Value = "NRW"},
             };
 
-            var areas = new List<SelectListItem>
+            using (var client = apiClient())
             {
-                new SelectListItem{Text = "North", Value = "North"},
-                new SelectListItem{Text = "South", Value = "South"},
-                new SelectListItem{Text = "East", Value = "East"},
-                new SelectListItem{Text = "West", Value = "West"},
-            };
-
-            model.CompetentAuthorities = new SelectList(competentAuthorities, "Text", "Value");
-            model.Areas = new SelectList(areas, "Text", "Value");
-            return model;
+                var result = await client.SendAsync(User.GetAccessToken(), new GetAreaNames());
+                model.CompetentAuthorities = new SelectList(competentAuthorities, "Text", "Value");
+                model.Areas = new SelectList(result.Select(area => new SelectListItem {Text = area, Value = area}), "Text", "Value");
+                return model;
+            }
         }
 
         [HttpPost]
@@ -71,7 +69,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return View(GetModelData(model));
+                return View(await GetModelData(model));
             }
 
             using (var client = apiClient())
@@ -112,7 +110,7 @@
                     }
                 }
             }
-            return View(GetModelData(model));
+            return View(await GetModelData(model));
         }
 
         [HttpGet]

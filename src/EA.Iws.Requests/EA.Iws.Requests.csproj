@@ -49,6 +49,7 @@
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuarantee.cs" />
+    <Compile Include="Admin\GetAreaNames.cs" />
     <Compile Include="Admin\SetDecision.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationId.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDates.cs" />
