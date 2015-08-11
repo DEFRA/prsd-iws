@@ -679,7 +679,6 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\AmountsAndDatesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\ClassifyYourWasteViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\JourneyViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\NavigationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\OrganisationsInvolvedViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\RecoveryOperationViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmittedViewModel.cs" />

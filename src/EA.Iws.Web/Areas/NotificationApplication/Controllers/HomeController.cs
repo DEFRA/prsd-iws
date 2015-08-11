@@ -71,7 +71,7 @@
         {
             if (id == Guid.Empty)
             {
-                return PartialView(new NavigationViewModel());
+                return PartialView(new NotificationApplicationCompletionProgress());
             }
 
             using (var client = apiClient())
@@ -79,14 +79,7 @@
                 var response =
                     client.SendAsync(User.GetAccessToken(), new GetNotificationProgressInfo(id)).GetAwaiter().GetResult();
 
-                var model = new NavigationViewModel
-                {
-                    NotificationId = response.Id,
-                    NotificationNumber = response.NotificationNumber,
-                    NotificationType = response.NotificationType,
-                    Progress = response
-                };
-                return PartialView(model);
+                return PartialView(response);
             }
         }
 
