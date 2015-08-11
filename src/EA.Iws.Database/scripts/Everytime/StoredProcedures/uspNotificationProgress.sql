@@ -116,7 +116,14 @@ BEGIN
         CAST(CASE WHEN T.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasTechnologyEmployed,
         CAST(CASE WHEN PI.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasPackagingInfo,
         CAST(CASE WHEN PC.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasPhysicalCharacteristics,
-        CAST(CASE WHEN R.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasRecoveryInfo,
+        CAST(CASE 
+            WHEN N.IsRecoveryPercentageDataProvidedByImporter = 1 THEN 1
+            ELSE
+                CASE
+                    WHEN R.Id IS NULL THEN 0 
+                    ELSE 1
+                END 
+         END AS BIT) AS HasRecoveryInfo,
         CAST(CASE WHEN S.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasShipmentInfo,
         CAST(
             CASE 
