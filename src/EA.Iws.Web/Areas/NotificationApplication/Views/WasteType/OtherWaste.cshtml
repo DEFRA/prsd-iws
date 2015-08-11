@@ -18,8 +18,9 @@
         This may be the name or names by which the material is commonly known or the commercial name
     </div>
     <div class="form-group">
+        @Html.Gds().ValidationMessageFor(m => m.Description)
         @Html.Gds().HintSpan("Limit your answer to 70 characters or less")
-        @Html.Gds().TextBoxFor(m => m.Description)
+        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70 })
     </div>
     <div class="form-group">
         <button class="button" name="Command" value="continue" type="submit">Continue</button>
