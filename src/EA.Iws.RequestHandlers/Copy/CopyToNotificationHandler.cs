@@ -79,6 +79,8 @@
         {
             var destination = await context.GetNotificationApplication(destinationId);
             var destinationAssessment = await context.NotificationAssessments.SingleAsync(p => p.NotificationApplicationId == destinationId);
+            var destinationFinancialGuarantee =
+                await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == destinationId);
 
             var clone = await GetCopyOfSourceNotification(sourceId);
             var clonedAssessment = await GetCopyOfNotificationAssessment(destinationId);
@@ -89,6 +91,7 @@
 
             // Remove the destination.
             context.DeleteOnCommit(destinationAssessment);
+            context.DeleteOnCommit(destinationFinancialGuarantee);
             await context.SaveChangesAsync();
 
             context.DeleteOnCommit(destination);

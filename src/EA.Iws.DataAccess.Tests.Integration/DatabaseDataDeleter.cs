@@ -68,6 +68,16 @@
         DELETE FROM [Notification].[TransitState] 
         WHERE NotificationId = @NotificationId;
 
+        DELETE FROM [Notification].[NotificationAssessment]
+        WHERE NotificationApplicationId = @NotificationId;
+
+        DELETE FROM [Notification].[FinancialGuaranteeStatusChange]
+        WHERE FinancialGuaranteeId = 
+            (SELECT Id FROM [Notification].[FinancialGuarantee] WHERE NotificationApplicationId = @NotificationId);
+
+        DELETE FROM [Notification].[FinancialGuarantee]
+        WHERE NotificationApplicationId = @NotificationId;
+
         DELETE FROM [Notification].[Notification] 
         WHERE Id = @NotificationId;
         

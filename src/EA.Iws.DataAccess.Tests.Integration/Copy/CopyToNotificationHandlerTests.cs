@@ -5,7 +5,9 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
+    using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationAssessment;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;
@@ -49,9 +51,20 @@
             destination = new NotificationApplication(UserId, DestinationNotificationType, DestinationCompetentAuthority, DestinationNumber);
             EntityHelper.SetEntityId(destination, new Guid("63581B29-EFB9-47F0-BCC3-E67382F4EAFA"));
             handler = new CopyToNotificationHandler(context, userContext, new NotificationToNotificationCopy());
-
+            
             context.NotificationApplications.Add(source);
             context.NotificationApplications.Add(destination);
+            context.SaveChanges();
+
+            var sourceAssessment = new NotificationAssessment(source.Id);
+            var destinationAssessment = new NotificationAssessment(destination.Id);
+            context.NotificationAssessments.Add(sourceAssessment);
+            context.NotificationAssessments.Add(destinationAssessment);
+
+            var sourceFinancialGuarantee = FinancialGuarantee.Create(source.Id);
+            var destinationFinancialGuarantee = FinancialGuarantee.Create(destination.Id);
+            context.FinancialGuarantees.Add(sourceFinancialGuarantee);
+            context.FinancialGuarantees.Add(destinationFinancialGuarantee);
             context.SaveChanges();
         }
 
