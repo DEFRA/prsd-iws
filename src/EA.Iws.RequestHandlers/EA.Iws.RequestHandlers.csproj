@@ -86,6 +86,7 @@
     <Compile Include="Mappings\BacsDetailsMap.cs" />
     <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
@@ -168,7 +169,7 @@
     <Compile Include="Notification\GetNotificationInfoHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
     <Compile Include="Notification\GetNotificationProgressInfoHandler.cs" />
-    <Compile Include="Notification\GetNotificationTypeHandler.cs" />
+    <Compile Include="Notification\GetNotificationBasicInfoHandler.cs" />
     <Compile Include="Notification\GetReasonForExportHandler.cs" />
     <Compile Include="Notification\GetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />

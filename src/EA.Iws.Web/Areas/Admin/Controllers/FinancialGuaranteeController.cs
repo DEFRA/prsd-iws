@@ -56,8 +56,10 @@
                 await
                     client.SendAsync(User.GetAccessToken(), new SetFinancialGuaranteeDates(id, model.Received.AsDateTime(),
                         model.Completed.AsDateTime()));
-
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                
+                return (model.IsRequiredEntryComplete) ? 
+                    RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" }) 
+                    : RedirectToAction("Dates", "FinancialGuarantee", new { id, area = "Admin" });
             }
         }
 
@@ -75,6 +77,13 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult ReturnToAssessment(Guid id)
+        {
+            return RedirectToAction("Index", "Home", new { area = "NotificationAssessment" });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Decision(Guid id, FinancialGuaranteeDecisionViewModel model)
         {
             if (!ModelState.IsValid)
@@ -82,11 +91,16 @@
                 return View(model);
             }
 
+            if (!model.IsApplicationCompleted)
+            {
+                return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
+            }
+
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), requestMap.Map(model, id));
 
-                return RedirectToAction("Decision", new { id });
+                return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
             }
         }
     }

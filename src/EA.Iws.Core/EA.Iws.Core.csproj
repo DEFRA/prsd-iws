@@ -59,6 +59,7 @@
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
+    <Compile Include="NotificationAssessment\NotificationAssessmentSummaryInformationData.cs" />
     <Compile Include="NotificationAssessment\NotificationStatus.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />

@@ -62,6 +62,7 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />
     <Compile Include="Notification\ClassifyYourWasteInfo.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />

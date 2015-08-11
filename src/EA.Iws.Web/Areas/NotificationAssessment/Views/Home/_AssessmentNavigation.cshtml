@@ -1,0 +1,15 @@
+﻿@using EA.Iws.Web.Infrastructure
+@model EA.Iws.Core.NotificationAssessment.NotificationAssessmentSummaryInformationData
+<p>
+    <span>@Model.Number</span>
+</p>
+
+<p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CompetentAuthority)</p>
+<p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</p>
+
+<h4>Notification assessment</h4>
+@Html.ActionLink("Notification assessment dates", "DateInput", "KeyDates", new { Model.Id, area = "Admin" }, null)
+@Html.ActionLink("Notification assessment decision", "Decision", "Decision", new { Model.Id, area = "Admin" }, null)
+<h4>Financial guarantee</h4>
+@Html.ActionLink("Financial guarantee dates", "Dates", "FinancialGuarantee", new { Model.Id, area = "Admin" }, null)
+@Html.ActionLink("Financial guarantee decision", "Decision", "FinancialGuarantee", new { Model.Id, area = "Admin" }, null)
