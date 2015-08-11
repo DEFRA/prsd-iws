@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Areas.Admin.ViewModels;
+    using FakeItEasy;
     using Prsd.Core.Web.OAuth;
     using Xunit;
 
@@ -60,7 +61,9 @@
 
         private static Areas.Admin.Controllers.RegistrationController GetMockAccountController(object viewModel)
         {
-            var registrationController = new Areas.Admin.Controllers.RegistrationController(() => new OAuthClient("test", "test", "test"), () => new IwsClient("test"), null, null);
+            var oauth = A.Fake<IOAuthClient>();
+            var iwsClient = A.Fake<IIwsClient>();
+            var registrationController = new Areas.Admin.Controllers.RegistrationController(() => oauth, () => iwsClient, null, null);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();
