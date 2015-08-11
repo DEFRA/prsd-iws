@@ -98,7 +98,7 @@ BEGIN
          END AS BIT) AS HasRecoveryData,
         CAST(CASE WHEN [MethodOfDisposal] IS NULL THEN 0 ELSE 1 END AS BIT) AS HasMethodOfDisposal,
         CAST(CASE 
-            WHEN [IsWasteGenerationProcessAttached] IS NULL THEN 0 
+            WHEN [IsWasteGenerationProcessAttached] = 1 THEN 1 
             ELSE 
                 CASE 
                     WHEN [WasteGenerationProcess] IS NULL THEN 0 
