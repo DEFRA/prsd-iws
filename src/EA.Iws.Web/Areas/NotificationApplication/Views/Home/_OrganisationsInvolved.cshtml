@@ -8,8 +8,11 @@
 <div>
     <details>
         <summary>
-            Exporter-notifier @if (Model.IsExporterCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Exporter-notifier
+            @if (Model.IsExporterCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Exporter", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -49,8 +52,11 @@
     </details>
     <details>
         <summary>
-            Generator-producer @if (Model.IsProducerCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Generator-producer
+            @if (Model.IsProducerCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Producer", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -91,13 +97,16 @@
     </details>
     <details>
         <summary>
-            Site of export @if (Model.IsProducerCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Site of export
+            @if (Model.HasSiteOfExport)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfExport", "Producer", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsProducerCompleted)
+                @if (Model.HasSiteOfExport)
                 {
                     <div class="grid-row">
                         <div class="column-half">
@@ -126,8 +135,11 @@
     </details>
     <details>
         <summary>
-            Importer-consignee @if (Model.IsImporterCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Importer-consignee
+            @if (Model.IsImporterCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Importer", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -167,8 +179,11 @@
     </details>
     <details>
         <summary>
-            @disposalOrRecovery facilities @if (Model.IsFacilityCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            @disposalOrRecovery facilities
+            @if (Model.IsFacilityCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Facility", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
@@ -215,13 +230,16 @@
     </details>
     <details>
         <summary>
-            Actual site of @disposalOrRecovery.ToString().ToLowerInvariant() @if (Model.IsFacilityCompleted)
-            { <i class="fa fa-check green-text"></i> }
+            Actual site of @disposalOrRecovery.ToString().ToLowerInvariant()
+            @if (Model.HasActualSiteOfTreatment)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
             <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfTreatment", "Facility", new { id }, null)</span>
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsFacilityCompleted)
+                @if (Model.HasActualSiteOfTreatment)
                 {
                     <div class="grid-row">
                         <div class="column-half">

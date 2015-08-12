@@ -98,6 +98,7 @@
             await AddFacility();
             Assert.True(notification.Facilities.Count() == 2);
             EntityHelper.SetEntityId(notification.Facilities.First(), facilityId);
+            notification.SetFacilityAsSiteOfTreatment(facilityId);
 
             var request = new DeleteFacilityForNotification(notificationId, facilityId);
             await Assert.ThrowsAsync<InvalidOperationException>(async () => await deleteHandler.HandleAsync(request));

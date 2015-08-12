@@ -98,6 +98,7 @@
             await AddProducer();
             Assert.True(notification.Producers.Count() == 2);
             EntityHelper.SetEntityId(notification.Producers.First(), producerId);
+            notification.SetProducerAsSiteOfExport(producerId);
 
             var request = new DeleteProducerForNotification(producerId, notificationId);
             await Assert.ThrowsAsync<InvalidOperationException>(async () => await deleteHandler.HandleAsync(request));

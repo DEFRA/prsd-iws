@@ -10,10 +10,6 @@
         public Facility AddFacility(Business business, Address address, Contact contact)
         {
             var facility = new Facility(business, address, contact);
-            if (!FacilitiesCollection.Any())
-            {
-                facility.IsActualSiteOfTreatment = true;
-            }
 
             FacilitiesCollection.Add(facility);
             return facility;

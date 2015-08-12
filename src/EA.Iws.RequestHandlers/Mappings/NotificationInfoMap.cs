@@ -47,6 +47,8 @@
             organisationsInvolvedInfo.IsProducerCompleted = notificationCompletionProgress.HasProducer;
             organisationsInvolvedInfo.IsImporterCompleted = notificationCompletionProgress.HasImporter;
             organisationsInvolvedInfo.IsFacilityCompleted = notificationCompletionProgress.HasFacility;
+            organisationsInvolvedInfo.HasSiteOfExport = notificationCompletionProgress.HasSiteOfExport;
+            organisationsInvolvedInfo.HasActualSiteOfTreatment = notificationCompletionProgress.HasActualSiteOfTreatment;
 
             var recoveryOperationInfo = recoveryOperationInfoMap.Map(notification);
             recoveryOperationInfo.IsPreconsentStatusChosen = notificationCompletionProgress.HasPreconsentedInformation;
