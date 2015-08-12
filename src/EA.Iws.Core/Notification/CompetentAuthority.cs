@@ -4,13 +4,13 @@
 
     public enum CompetentAuthority
     {
-        [Display(Name = "Environment Agency")]
+        [Display(Name = "Environment Agency (EA)")]
         England = 1,
-        [Display(Name = "Scottish Environment Protection Agency")]
+        [Display(Name = "Scottish Environment Protection Agency (SEPA)")]
         Scotland = 2,
-        [Display(Name = "Northern Ireland Environment Agency")]
+        [Display(Name = "Northern Ireland Environment Agency (NIEA)")]
         NorthernIreland = 3,
-        [Display(Name = "Natural Resources Wales")]
+        [Display(Name = "Natural Resources Wales (NRW)")]
         Wales = 4
     }
 }

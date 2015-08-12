@@ -3,7 +3,7 @@
     ViewBag.Title = "Site Of Export";
 }
 
-<h2 class="heading-large">Select the site the waste will be exported from</h2>
+<h2 class="heading-large">Which waste generator - producer is the site of export?</h2>
 
 @if (Model.Producers.Any())
 {
@@ -36,12 +36,12 @@
                             </td>
                             <td>
                                 @{
-                                    var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
-                                    if (@Model.Producers[i].IsSiteOfExport)
-                                    {
-                                        htmlAttr.Add("checked", "checked");
-                                    }
-                                    @Html.RadioButtonFor(m => m.SelectedSiteOfExport, Model.Producers[i].Id, htmlAttr)
+                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
+                        if (@Model.Producers[i].IsSiteOfExport)
+                        {
+                            htmlAttr.Add("checked", "checked");
+                        }
+                        @Html.RadioButtonFor(m => m.SelectedSiteOfExport, Model.Producers[i].Id, htmlAttr)
                                 }
                             </td>
                         </tr>
