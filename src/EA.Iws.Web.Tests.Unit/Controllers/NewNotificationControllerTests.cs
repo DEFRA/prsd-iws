@@ -4,8 +4,10 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.Notification;
     using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Helpers;
     using Requests.Notification;
     using Web.Controllers;
     using Web.ViewModels.NewNotification;
@@ -80,7 +82,7 @@
         public void NotificationTypeQuestion_Get_ReturnsCorrectView()
         {
             var controller = CreateNewNotificationController();
-            var result = controller.NotificationType("Environment Agency", "Recovery") as ViewResult;
+            var result = controller.NotificationType(EnumHelper.GetDisplayName(CompetentAuthority.England), EnumHelper.GetDisplayName(NotificationType.Recovery)) as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<NotificationTypeViewModel>(result.Model);
