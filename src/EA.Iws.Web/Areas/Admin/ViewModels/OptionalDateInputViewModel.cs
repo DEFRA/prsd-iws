@@ -79,13 +79,13 @@
                 {
                     if ((Year > 9999) || (AllowPastDates && Year < 2000))
                     {
-                        yield return new ValidationResult("The year must be between 2000 and 99999", new[] { "Year" });
+                        yield return new ValidationResult("The year must be greater than 2000", new[] { "Year" });
                         yield break;
                     }
 
                     if (!AllowPastDates && Year < 2010)
                     {
-                        yield return new ValidationResult("The year must be between 2010 and 99999", new[] { "Year" });
+                        yield return new ValidationResult("The year must be greater than 2010", new[] { "Year" });
                     }
 
                     if (Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))

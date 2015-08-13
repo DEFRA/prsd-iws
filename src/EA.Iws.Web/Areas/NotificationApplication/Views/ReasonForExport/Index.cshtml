@@ -16,11 +16,11 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForExport)">
         @Html.Gds().HintParagraph("Please limit your answer to 70 characters or less")
         @Html.Gds().ValidationMessageFor(m => m.ReasonForExport)
-        @Html.TextBoxFor(m => m.ReasonForExport, new { @class = "full-width" })
+        @Html.TextBoxFor(m => m.ReasonForExport, new { @class = "full-width", @MaxLength = 70 })
     </div>
-    
+
     @Html.HiddenFor(m => m.NotificationId)
-    
+
     <div class="form-group">
         <button class="button" type="submit">Continue</button>
     </div>

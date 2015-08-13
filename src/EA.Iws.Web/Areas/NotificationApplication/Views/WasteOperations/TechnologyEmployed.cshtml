@@ -31,7 +31,7 @@
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
             @Html.Gds().ValidationMessageFor(m => m.Details)
-            @Html.TextBoxFor(m => m.Details, new { @class = "full-width" })
+            @Html.TextBoxFor(m => m.Details, new { @class = "full-width", @MaxLength = 70 })
         </div>
 
         <header class="hgroup">
