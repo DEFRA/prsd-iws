@@ -1,14 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
-    using FakeItEasy;
-    using Helpers;
     using RequestHandlers.Admin;
     using Requests.Admin;
     using TestHelpers.Helpers;
@@ -23,26 +20,16 @@
 
         public GetDatesHandlerTests()
         {
-            context = A.Fake<IwsContext>();
+            context = new TestIwsContext();
             handler = new SetDatesHandler(context);
-            var dbSetHelper = new DbContextHelper();
             notificationDates = new NotificationDates(notificationId);
             EntityHelper.SetEntityId(notificationDates, notificationId);
 
-            var dbSet = dbSetHelper.GetAsyncEnabledDbSet(new List<NotificationDates>
-            {
-                notificationDates
-            });
-
             var notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notification, notificationId);
-            var notificationAssessments = dbSetHelper.GetAsyncEnabledDbSet(new List<NotificationApplication>
-            {
-                notification
-            });
 
-            A.CallTo(() => context.NotificationDates).Returns(dbSet);
-            A.CallTo(() => context.NotificationApplications).Returns(notificationAssessments);
+            context.NotificationDates.Add(notificationDates);
+            context.NotificationApplications.Add(notification);
         }
 
         [Fact]

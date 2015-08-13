@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using DataAccess;
     using FakeItEasy;
-    using Helpers;
+    using Prsd.Core.Domain;
     using RequestHandlers.TransitState;
     using Requests.TransitState;
     using TestHelpers.Helpers;
@@ -21,18 +21,16 @@
 
         public RemoveTransitStateForNotificationHandlerTests()
         {
-            context = A.Fake<IwsContext>();
-            var helper = new DbContextHelper();
+            var userContext = A.Fake<IUserContext>();
+            A.CallTo(() => userContext.UserId).Returns(Guid.Empty);
+            context = new TestIwsContext(userContext);
 
             var notification = NotificationApplicationFactory.Create(ExistingNotificationId);
 
             notification.AddTransitStateToNotification(TransitStateFactory.Create(ExistingTransitStateId, 
                 CountryFactory.Create(new Guid("3E7A0092-B6CB-46AD-ABCC-FB741EB6CF35")), 1));
 
-            A.CallTo(() => context.NotificationApplications).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                notification
-            }));
+            context.NotificationApplications.Add(notification);
 
             handler = new RemoveTransitStateForNotificationHandler(context);
         }

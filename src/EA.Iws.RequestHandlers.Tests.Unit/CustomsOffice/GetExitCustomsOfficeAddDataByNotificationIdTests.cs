@@ -6,8 +6,6 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
-    using FakeItEasy;
-    using Helpers;
     using Mappings;
     using RequestHandlers.CustomsOffice;
     using Requests.CustomsOffice;
@@ -16,50 +14,44 @@
 
     public class GetExitCustomsOfficeAddDataByNotificationIdTests
     {
-        private static readonly Guid IgnoredGuid = Guid.Empty;
+        private static readonly Guid NotificationId = new Guid("FD7C6336-A825-4452-AF05-AF0A5D312327");
         private readonly GetExitCustomsOfficeAddDataByNotificationIdHandler handler;
         private readonly IwsContext context;
-        private readonly DbContextHelper helper;
         private readonly ExitCustomsOffice exitCustomsOffice;
         private readonly Country country;
         private readonly NotificationApplication notification;
 
         public GetExitCustomsOfficeAddDataByNotificationIdTests()
         {
-            context = A.Fake<IwsContext>();
+            context = new TestIwsContext();
             handler = new GetExitCustomsOfficeAddDataByNotificationIdHandler(context, 
                 new CustomsOfficeExitMap(context,
                                             new CountryMap(), 
                                             new CustomsOfficeMap(new CountryMap())));
 
-            helper = new DbContextHelper();
-
             country = CountryFactory.Create(new Guid("05C21C57-2F39-4A15-A09A-5F38CF139C05"));
             exitCustomsOffice = new ExitCustomsOffice("any name", "any address", country);
 
-            notification = new NotificationApplication(IgnoredGuid, NotificationType.Recovery,
+            notification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 500);
+
+            EntityHelper.SetEntityId(notification, NotificationId);
+
+            context.Countries.Add(country);
+            context.NotificationApplications.Add(notification);
         }
 
         [Fact]
         public async Task Handle_NotificationDoesNotExist_Throws()
         {
-            A.CallTo(() => context.NotificationApplications)
-                .Returns(helper.GetAsyncEnabledDbSet(new NotificationApplication[] {}));
-
             await Assert.ThrowsAsync<InvalidOperationException>(
-                () => handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(IgnoredGuid)));
+                () => handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(new Guid("75D096E0-4393-47A4-AABC-12D22624C034"))));
         }
 
         [Fact]
         public async Task Handler_NotificationHasNoExitCustomsOffice_ReturnsStatusAndCountries()
         {
-            A.CallTo(() => context.NotificationApplications)
-                .Returns(helper.GetAsyncEnabledDbSet(new[] { notification }));
-
-            A.CallTo(() => context.Countries).Returns(helper.GetAsyncEnabledDbSet(new[] { country }));
-
-            var result = await handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(IgnoredGuid));
+            var result = await handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(NotificationId));
 
             Assert.NotNull(result.Countries);
             Assert.Null(result.CustomsOfficeData);
@@ -71,12 +63,7 @@
         {
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ExitCustomsOffice, exitCustomsOffice, notification);
 
-            A.CallTo(() => context.NotificationApplications)
-                .Returns(helper.GetAsyncEnabledDbSet(new[] { notification }));
-
-            A.CallTo(() => context.Countries).Returns(helper.GetAsyncEnabledDbSet(new[] { country }));
-
-            var result = await handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(IgnoredGuid));
+            var result = await handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(NotificationId));
 
             Assert.Equal(1, result.Countries.Count);
             Assert.Equal(exitCustomsOffice.Name, result.CustomsOfficeData.Name);

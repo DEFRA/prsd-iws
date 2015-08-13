@@ -5,7 +5,6 @@
     using DataAccess;
     using Domain;
     using FakeItEasy;
-    using Helpers;
     using Prsd.Core.Domain;
     using RequestHandlers.Organisations;
     using Requests.Organisations;
@@ -31,21 +30,19 @@
 
         public GetOrganisationDetailsByUserHandlerTests()
         {
-            context = A.Fake<IwsContext>();
             userContext = A.Fake<IUserContext>();
-
             A.CallTo(() => userContext.UserId).Returns(userId);
 
-            var dbContextHelper = new DbContextHelper();
+            context = new TestIwsContext(userContext);
 
             var country = CountryFactory.Create(new Guid("05C21C57-2F39-4A15-A09A-5F38CF139C05"));
-            A.CallTo(() => context.Countries).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { country }));
+            context.Countries.Add(country);
 
             address = new Address(address1, address2, town, null, postcode, country.Name);
 
-            A.CallTo(() => context.Organisations).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { GetOrganisation() }));
+            context.Organisations.Add(GetOrganisation());
 
-            A.CallTo(() => context.Users).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { GetUser() }));
+            context.Users.Add(GetUser());
 
             message = new GetOrganisationDetailsByUser();
             handler = new GetOrganisationDetailsByUserHandler(context, userContext);

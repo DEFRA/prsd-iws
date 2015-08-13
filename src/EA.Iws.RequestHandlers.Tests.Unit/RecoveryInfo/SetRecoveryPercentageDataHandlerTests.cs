@@ -5,8 +5,6 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
     using RequestHandlers.Notification;
     using Requests.Notification;
     using TestHelpers.Helpers;
@@ -24,15 +22,11 @@
 
         public SetRecoveryPercentageDataHandlerTests()
         {
-            context = A.Fake<IwsContext>();
-            var helper = new DbContextHelper();
-            notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            context = new TestIwsContext();
+            notification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notification, notificationId);
 
-            A.CallTo(() => context.NotificationApplications).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                notification
-            }));
+            context.NotificationApplications.Add(notification);
 
             setHandler = new SetRecoveryPercentageDataHandler(context);
         }

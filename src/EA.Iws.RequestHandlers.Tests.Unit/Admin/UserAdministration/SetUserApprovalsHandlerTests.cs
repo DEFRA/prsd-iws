@@ -6,8 +6,6 @@
     using System.Threading.Tasks;
     using Core.Admin;
     using DataAccess;
-    using FakeItEasy;
-    using Helpers;
     using RequestHandlers.Admin.UserAdministration;
     using Requests.Admin.UserAdministration;
     using Xunit;
@@ -17,14 +15,13 @@
         private readonly SetUserApprovalsHandler handler;
         private readonly IwsContext context;
         private readonly TestUserContext userContext;
-        private readonly DbContextHelper contextHelper = new DbContextHelper();
         private readonly SetUserApprovals approvePendingAdminMessage;
         private readonly Func<Guid, IwsContext, InternalUserStatus?> getUserStatusFromContext;
 
         public SetUserApprovalsHandlerTests()
         {
-            this.context = A.Fake<IwsContext>();
-            A.CallTo(() => context.Users).Returns(contextHelper.GetAsyncEnabledDbSet(new InternalUserCollection().Users));
+            this.context = new TestIwsContext();
+            context.Users.AddRange(new InternalUserCollection().Users);
 
             this.userContext = new TestUserContext(Guid.Empty);
 

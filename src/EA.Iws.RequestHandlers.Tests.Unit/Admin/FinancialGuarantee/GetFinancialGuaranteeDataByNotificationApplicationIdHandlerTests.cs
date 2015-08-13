@@ -1,15 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
 {
     using System;
-    using System.Data.Entity;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
-    using DataAccess;
-    using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
     using Mappings;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
@@ -27,11 +23,10 @@
 
         public GetFinancialGuaranteeDataByNotificationApplicationIdHandlerTests()
         {
-            var context = A.Fake<IwsContext>();
+            var context = new TestIwsContext();
 
-            A.CallTo(() => context.FinancialGuarantees).Returns(GenerateFinancialGuaranteesDbSet());
-            A.CallTo(() => context.BankHolidays).Returns(new DbContextHelper().GetAsyncEnabledDbSet(new BankHoliday[] { }));
-            A.CallTo(() => context.NotificationApplications).Returns(GenerateApplications());
+            context.FinancialGuarantees.AddRange(GenerateFinancialGuaranteesDbSet());
+            context.NotificationApplications.AddRange(GenerateApplications());
 
             handler = new GetFinancialGuaranteeDataByNotificationApplicationIdHandler(context, new FinancialGuaranteeMap(new WorkingDayCalculator(context)));
         }
@@ -52,30 +47,26 @@
             Assert.Equal(FinancialGuaranteeStatus.AwaitingApplication, result.Status);
         }
 
-        public DbSet<FinancialGuarantee> GenerateFinancialGuaranteesDbSet()
+        public IEnumerable<FinancialGuarantee> GenerateFinancialGuaranteesDbSet()
         {
-            var helper = new DbContextHelper();
-
-            return helper.GetAsyncEnabledDbSet(new[]
+            return new[]
             {
                 CreateFinancialGuarantee(PendingId, FinancialGuaranteeStatus.AwaitingApplication,
                     null, null),
                 CreateFinancialGuarantee(ReceivedId, FinancialGuaranteeStatus.ApplicationReceived, AnyDate, null),
                 CreateFinancialGuarantee(CompletedId, FinancialGuaranteeStatus.ApplicationComplete, AnyDate,
                     AnyDate.AddDays(1))
-            });
+            };
         }
 
-        public DbSet<NotificationApplication> GenerateApplications()
+        public IEnumerable<NotificationApplication> GenerateApplications()
         {
-            var helper = new DbContextHelper();
-
-            return helper.GetAsyncEnabledDbSet(new[]
+            return new[]
             {
                 NotificationApplicationFactory.Create(PendingId),
                 NotificationApplicationFactory.Create(ReceivedId),
                 NotificationApplicationFactory.Create(CompletedId)
-            });
+            };
         } 
 
         public FinancialGuarantee CreateFinancialGuarantee(Guid notificationId, FinancialGuaranteeStatus status, DateTime? receivedDate, DateTime? completedDate)

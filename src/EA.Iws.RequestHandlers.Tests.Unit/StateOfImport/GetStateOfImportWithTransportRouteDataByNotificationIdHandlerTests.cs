@@ -6,14 +6,12 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
+    using Domain.TransportRoute;
     using Mappings;
     using RequestHandlers.StateOfImport;
     using Requests.StateOfImport;
     using TestHelpers.Helpers;
     using Xunit;
-    using StateOfImport = Domain.TransportRoute.StateOfImport;
 
     public class GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests
     {
@@ -25,11 +23,9 @@
 
         public GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests()
         {
-            context = A.Fake<IwsContext>();
+            context = new TestIwsContext();
 
-            var dbContextHelper = new DbContextHelper();
-
-            var notificationNoStateOfImport = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
+            var notificationNoStateOfImport = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationNoStateOfImport, NotificationNoStateOfImportId);
 
@@ -38,34 +34,28 @@
                 CompetentAuthorityFactory.Create(Guid.Empty, country), 
                 EntryOrExitPointFactory.Create(Guid.Empty, country));
 
-            var notificationWithStateOfImport = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
+            var notificationWithStateOfImport = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationWithStateOfImport, NotificationWithStateOfImportId);
 
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.StateOfImport, stateOfImport, notificationWithStateOfImport);
 
-            A.CallTo(() => context.NotificationApplications).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[]
+            context.NotificationApplications.AddRange(new[]
             {
                 notificationNoStateOfImport,
                 notificationWithStateOfImport
-            }));
+            });
 
-            A.CallTo(() => context.Countries).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[]
+            context.Countries.AddRange(new[]
             {
                 CountryFactory.Create(new Guid("93E82D5D-2135-4C6D-B66C-20D426E4BD12")),
                 CountryFactory.Create(new Guid("FA626801-5659-4EA8-A64B-61916014663A")),
                 country
-            }));
+            });
 
-            A.CallTo(() => context.CompetentAuthorities).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[]
-            {
-                CompetentAuthorityFactory.Create(new Guid("03D04C92-594D-4E6E-B63E-9257211B263B"), country)
-            }));
+            context.CompetentAuthorities.Add(CompetentAuthorityFactory.Create(new Guid("03D04C92-594D-4E6E-B63E-9257211B263B"), country));
 
-            A.CallTo(() => context.EntryOrExitPoints).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[]
-            {
-                EntryOrExitPointFactory.Create(new Guid("E098F49E-CD87-4EFE-AE29-FB87111045CF"), country)
-            }));
+            context.EntryOrExitPoints.Add(EntryOrExitPointFactory.Create(new Guid("E098F49E-CD87-4EFE-AE29-FB87111045CF"), country));
 
             var countryMap = new CountryMap();
             var entryOrExitPointMap = new EntryOrExitPointMap();

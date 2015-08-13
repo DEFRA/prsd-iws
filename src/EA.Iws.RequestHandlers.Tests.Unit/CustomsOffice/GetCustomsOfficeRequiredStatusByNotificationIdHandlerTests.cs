@@ -18,23 +18,16 @@
     public class GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests
     {
         private NotificationApplication notification1;
-        private readonly DbSet<NotificationApplication> notifications;
         private readonly IwsContext context;
 
         public GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests()
         {
-            notification1 = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 500);
+            notification1 = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 500);
             EntityHelper.SetEntityId(notification1, new Guid("295B0511-D0EB-43B4-9D17-938E1A34F0D3"));
 
-            DbContextHelper dbContextHelper = new DbContextHelper();
-            notifications = dbContextHelper.GetAsyncEnabledDbSet(new[]
-            {
-                notification1
-            });
+            context = new TestIwsContext();
 
-            context = A.Fake<IwsContext>();
-
-            A.CallTo(() => context.NotificationApplications).Returns(notifications);
+            context.NotificationApplications.Add(notification1);
         }
 
         [Fact]

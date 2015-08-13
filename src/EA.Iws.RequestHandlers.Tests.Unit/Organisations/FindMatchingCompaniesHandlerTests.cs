@@ -16,7 +16,6 @@
     public class FindMatchingCompaniesHandlerTests
     {
         private readonly BusinessType anyType = BusinessType.LimitedCompany;
-        private readonly DbContextHelper helper = new DbContextHelper();
 
         [Theory]
         [InlineData("", "", 0)]
@@ -66,7 +65,8 @@
         [Fact]
         public async Task FindMatchingOrganisationsHandler_WithLtdCompany_OneMatches()
         {
-            var organisations = helper.GetAsyncEnabledDbSet(new[]
+            var context = new TestIwsContext();
+            context.Organisations.AddRange(new[]
             {
                 GetOrganisationWithName("SFW Ltd"),
                 GetOrganisationWithName("swf"),
@@ -75,10 +75,6 @@
                 GetOrganisationWithName("SEPA England"),
                 GetOrganisationWithName("Tesco Recycling")
             });
-
-            var context = A.Fake<IwsContext>();
-
-            A.CallTo(() => context.Organisations).Returns(organisations);
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
@@ -90,15 +86,12 @@
         [Fact]
         public async Task FindMatchingOrganisationsHandler_WithLtdAndLimitedCompany_TwoMatches()
         {
-            var organisations = helper.GetAsyncEnabledDbSet(new[]
+            var context = new TestIwsContext();
+            context.Organisations.AddRange(new[]
             {
                 GetOrganisationWithName("SFW Ltd"),
                 GetOrganisationWithName("SFW  Limited")
             });
-
-            var context = A.Fake<IwsContext>();
-
-            A.CallTo(() => context.Organisations).Returns(organisations);
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
@@ -110,15 +103,12 @@
         [Fact]
         public async Task FindMatchingOrganisationsHandler_SearchTermContainsThe_ReturnsMatchingResults()
         {
-            var organisations = helper.GetAsyncEnabledDbSet(new[]
+            var context = new TestIwsContext();
+            context.Organisations.AddRange(new[]
             {
                 GetOrganisationWithName("Environment Agency"),
                 GetOrganisationWithName("Enivronent Agency")
             });
-
-            var context = A.Fake<IwsContext>();
-
-            A.CallTo(() => context.Organisations).Returns(organisations);
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
@@ -130,24 +120,19 @@
         [Fact]
         public async Task FindMatchingOrganisationsHandler_DataContainsThe_ReturnsMatchingResults()
         {
-            var data = new[]
+            var context = new TestIwsContext();
+            context.Organisations.AddRange(new[]
             {
                 GetOrganisationWithName("THE  Environemnt Agency"),
                 GetOrganisationWithName("THE Environemnt Agency"),
                 GetOrganisationWithName("Environment Agency")
-            };
-
-            var organisations = helper.GetAsyncEnabledDbSet(data);
-
-            var context = A.Fake<IwsContext>();
-
-            A.CallTo(() => context.Organisations).Returns(organisations);
+            });
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
             var results = await handler.HandleAsync(new FindMatchingOrganisations("Environment Agency"));
 
-            Assert.Equal(data.Length, results.Count);
+            Assert.Equal(3, results.Count);
         }
 
         [Fact]
@@ -157,11 +142,8 @@
 
             var data = names.Select(GetOrganisationWithName).ToArray();
 
-            var organisations = helper.GetAsyncEnabledDbSet(data);
-
-            var context = A.Fake<IwsContext>();
-
-            A.CallTo(() => context.Organisations).Returns(organisations);
+            var context = new TestIwsContext();
+            context.Organisations.AddRange(data);
 
             var handler = new FindMatchingOrganisationsHandler(context);
 
@@ -182,12 +164,10 @@
                 new KeyValuePair<string, int>("BeeKeeprs", 2)
             };
 
-            var organisations =
-                helper.GetAsyncEnabledDbSet(namesWithDistances.Select(n => GetOrganisationWithName(n.Key)).ToArray());
+            var organisations = namesWithDistances.Select(n => GetOrganisationWithName(n.Key)).ToArray();
 
-            var context = A.Fake<IwsContext>();
-
-            A.CallTo(() => context.Organisations).Returns(organisations);
+            var context = new TestIwsContext();
+            context.Organisations.AddRange(organisations);
 
             var handler = new FindMatchingOrganisationsHandler(context);
 

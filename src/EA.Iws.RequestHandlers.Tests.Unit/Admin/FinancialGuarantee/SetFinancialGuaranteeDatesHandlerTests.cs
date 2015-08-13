@@ -27,8 +27,7 @@
 
         public SetFinancialGuaranteeDatesHandlerTests()
         {
-            context = A.Fake<IwsContext>();
-            var dbHelper = new DbContextHelper();
+            context = new TestIwsContext();
 
             var receivedFinancialGuarantee = FinancialGuarantee.Create(ReceivedNotificationId);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationReceived,
@@ -41,20 +40,20 @@
             var receivedNotification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(receivedNotification, ReceivedNotificationId);
             
-            var financialGuarantees = dbHelper.GetAsyncEnabledDbSet(new[]
+            var financialGuarantees = new[]
             {
                 FinancialGuarantee.Create(PendingNotificationId),
                 receivedFinancialGuarantee
-            });
+            };
 
-            var notificationApplications = dbHelper.GetAsyncEnabledDbSet(new List<NotificationApplication>()
+            var notificationApplications = new[]
             {
                 pendingNotification,
                 receivedNotification
-            });
+            };
 
-            A.CallTo(() => context.FinancialGuarantees).Returns(financialGuarantees);
-            A.CallTo(() => context.NotificationApplications).Returns(notificationApplications);
+            context.FinancialGuarantees.AddRange(financialGuarantees);
+            context.NotificationApplications.AddRange(notificationApplications);
 
             handler = new SetFinancialGuaranteeDatesHandler(context);
         }
@@ -106,7 +105,7 @@
         {
             await handler.HandleAsync(new SetFinancialGuaranteeDates(PendingNotificationId, AnyDate, null));
 
-            A.CallTo(() => context.SaveChangesAsync()).MustHaveHappened(Repeated.Exactly.Once);
+            Assert.Equal(1, ((TestIwsContext)context).SaveChangesCount);
         }
 
         [Fact]

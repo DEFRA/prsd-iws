@@ -7,8 +7,6 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
     using RequestHandlers.MeansOfTransport;
     using Requests.MeansOfTransport;
     using TestHelpers.Helpers;
@@ -27,13 +25,12 @@
 
         public GetMeansOfTransportByNotificationIdHandlerTests()
         {
-            this.context = A.Fake<IwsContext>();
-            var dbSetHelper = new DbContextHelper();
-            var notificationNoMeans = new NotificationApplication(Guid.Empty, NotificationType.Disposal,
+            context = new TestIwsContext();
+            var notificationNoMeans = new NotificationApplication(TestIwsContext.UserId, NotificationType.Disposal,
                 UKCompetentAuthority.England, 500);
-            var notificationMeans = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
+            var notificationMeans = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
-            var anotherNotificationWithMeans = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
+            var anotherNotificationWithMeans = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 250);
 
             EntityHelper.SetEntityId(notificationMeans, notificationWithMeansOfTransportId);
@@ -44,14 +41,12 @@
             typeof(NotificationApplication).GetProperty("MeansOfTransportInternal",
                 BindingFlags.Instance | BindingFlags.NonPublic).SetValue(anotherNotificationWithMeans, anotherMeansOfTransport);
 
-            var dbSet = dbSetHelper.GetAsyncEnabledDbSet(new NotificationApplication[]
+            context.NotificationApplications.AddRange(new[]
             {
                 notificationNoMeans,
                 notificationMeans,
                 anotherNotificationWithMeans
             });
-
-            A.CallTo(() => context.NotificationApplications).Returns(dbSet);
 
             handler = new GetMeansOfTransportByNotificationIdHandler(context);
         }

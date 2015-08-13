@@ -6,11 +6,9 @@
     using System.Threading.Tasks;
     using Core.Admin.Search;
     using Core.NotificationAssessment;
-    using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
     using FakeItEasy;
-    using Helpers;
     using Prsd.Core.Domain;
     using Prsd.Core.Helpers;
     using RequestHandlers.Admin.Search;
@@ -20,7 +18,6 @@
 
     public class GetBasicSearchResultsHandlerTests
     {
-        private readonly DbContextHelper helper = new DbContextHelper();
         private string nonExistantSearchTerm;
         private readonly Guid notification1 = new Guid("1A2A6255-A0B1-48B2-B248-D606B1BFB1DA");
         private readonly Guid notification2 = new Guid("879909D1-46BB-4396-8497-950EA4D29AB8");
@@ -34,20 +31,20 @@
             var applications = GetNotificationApplications();
             var assessments = GetNotificationAssessments();
 
-            var context = A.Fake<IwsContext>();
+            var context = new TestIwsContext();
             var userContext = A.Fake<IUserContext>();
 
-            A.CallTo(() => context.NotificationApplications).Returns(applications);
-            A.CallTo(() => context.NotificationAssessments).Returns(assessments);
-            A.CallTo(() => context.Users).Returns(GetUsers());
+            context.NotificationApplications.AddRange(applications);
+            context.NotificationAssessments.AddRange(assessments);
+            context.Users.AddRange(GetUsers());
             A.CallTo(() => userContext.UserId).Returns(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"));
 
             handler = new GetBasicSearchResultsHandler(context, userContext);
         }
 
-        private System.Data.Entity.DbSet<NotificationApplication> GetNotificationApplications()
+        private IEnumerable<NotificationApplication> GetNotificationApplications()
         {
-            return helper.GetAsyncEnabledDbSet(new[]
+            return new[]
             {
                 CreateNotificationApplication(notification1, "Exporter one", UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
                 CreateNotificationApplication(notification2, "GB 0001 000000", UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
@@ -55,31 +52,31 @@
                 CreateNotificationApplication(notification4, "Exporter RDF", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
                 CreateNotificationApplication(notification5, "not submitted", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
                 CreateNotificationApplication(notification5, "Exporter", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
-            });
+            };
         }
 
-        private System.Data.Entity.DbSet<User> GetUsers()
+        private IEnumerable<User> GetUsers()
         {
             var user = UserFactory.Create(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"), "Name", "Surname", "123456", "test@test.com");
             ObjectInstantiator<User>.SetProperty(u => u.CompetentAuthority, "EA", user);
 
-            var users = helper.GetAsyncEnabledDbSet(new[]
+            var users = new[]
             {
                 user
-            });
+            };
             return users;
         }
 
-        private System.Data.Entity.DbSet<Domain.NotificationAssessment.NotificationAssessment> GetNotificationAssessments()
+        private IEnumerable<Domain.NotificationAssessment.NotificationAssessment> GetNotificationAssessments()
         {
-            return helper.GetAsyncEnabledDbSet(new[]
+            return new[]
             {
                 CreateNotificationAssessment(notification1, NotificationStatus.Submitted),
                 CreateNotificationAssessment(notification2, NotificationStatus.Submitted),
                 CreateNotificationAssessment(notification3, NotificationStatus.Submitted),
                 CreateNotificationAssessment(notification4, NotificationStatus.Submitted),
                 CreateNotificationAssessment(notification5, NotificationStatus.NotSubmitted)
-            });
+            };
         }
 
         private Domain.NotificationAssessment.NotificationAssessment CreateNotificationAssessment(Guid notificationApplicationId, NotificationStatus status)

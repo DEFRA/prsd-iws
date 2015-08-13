@@ -1,13 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
-    using DataAccess;
-    using Domain.FinancialGuarantee;
-    using FakeItEasy;
-    using Helpers;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
     using Xunit;
@@ -21,15 +16,11 @@
 
         public ReleaseFinancialGuaranteeHandlerTests()
         {
-            context = A.Fake<IwsContext>();
-            var helper = new DbContextHelper();
+            context = new TestIwsContext();
 
             financialGuarantee = new TestFinancialGuarantee { NotificationApplicationId = ApplicationCompletedId };
 
-            A.CallTo(() => context.FinancialGuarantees).Returns(helper.GetAsyncEnabledDbSet(new List<FinancialGuarantee>
-            {
-                financialGuarantee
-            }));
+            context.FinancialGuarantees.Add(financialGuarantee);
 
             handler = new ReleaseFinancialGuaranteeHandler(context);
         }
@@ -49,7 +40,7 @@
             await
                 handler.HandleAsync(releaseFinancialGuarantee);
 
-            A.CallTo(() => context.SaveChangesAsync()).MustHaveHappened(Repeated.Exactly.Once);
+            Assert.Equal(1, ((TestIwsContext)context).SaveChangesCount);
         }
 
         [Fact]

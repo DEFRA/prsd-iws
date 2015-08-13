@@ -7,7 +7,6 @@
     using Domain;
     using Domain.NotificationApplication;
     using Facilities;
-    using FakeItEasy;
     using Helpers;
     using Requests.Facilities;
     using TestHelpers.Helpers;
@@ -25,21 +24,14 @@
 
         public FacilityHandlerTests()
         {
-            context = A.Fake<IwsContext>();
-            var helper = new DbContextHelper();
-            notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            context = new TestIwsContext();
+            notification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notification, notificationId);
 
-            A.CallTo(() => context.NotificationApplications).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                notification
-            }));
+            context.NotificationApplications.Add(notification);
 
             var countryWithData = CountryFactory.Create(countryId);
-            A.CallTo(() => context.Countries).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                countryWithData
-            }));
+            context.Countries.Add(countryWithData);
 
             addHandler = new AddFacilityToNotificationHandler(context);
             deleteHandler = new DeleteFacilityForNotificationHandler(context);

@@ -5,10 +5,8 @@
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
     using DataAccess;
-    using Domain;
     using Domain.FinancialGuarantee;
     using FakeItEasy;
-    using Helpers;
     using Prsd.Core;
     using RequestHandlers.Admin.FinancialGuarantee;
     using TestHelpers.Helpers;
@@ -26,17 +24,12 @@
 
         public FinancialGuaranteeStatusChangeEventHandlerTests()
         {
-            context = A.Fake<IwsContext>();
+            context = new TestIwsContext();
             var userContext = new TestUserContext(UserId);
             
             handler = new FinancialGuaranteeStatusChangeEventHandler(context, userContext);
 
-            var helper = new DbContextHelper();
-
-            A.CallTo(() => context.Users).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                UserFactory.Create(UserId, AnyString, AnyString, AnyString, AnyString)
-            }));
+            context.Users.Add(UserFactory.Create(UserId, AnyString, AnyString, AnyString, AnyString));
 
             financialGuarantee = FinancialGuarantee.Create(new Guid("68787AC6-7CF5-4862-8E7E-77E20172AECC"));
 
@@ -87,7 +80,7 @@
         {
             await handler.HandleAsync(receivedEvent);
 
-            A.CallTo(() => context.SaveChangesAsync()).MustHaveHappened(Repeated.Exactly.Once);
+            Assert.Equal(1, ((TestIwsContext)context).SaveChangesCount);
         }
 
         [Fact]

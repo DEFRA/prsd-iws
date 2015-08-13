@@ -6,11 +6,8 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
     using System.Collections.Generic;
     using DataAccess;
     using Domain;
-    using FakeItEasy;
-    using Helpers;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthority = Core.Notification.CompetentAuthority;
 
     public class WorkingDayCalculatorTests
     {
@@ -45,9 +42,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
 
         public WorkingDayCalculatorTests()
         {
-            context = A.Fake<IwsContext>();
-
-            var helper = new DbContextHelper();
+            context = new TestIwsContext();
 
             var bankHoliday = ObjectInstantiator<BankHoliday>.CreateNew();
             ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, UKCompetentAuthority.England,
@@ -59,7 +54,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
                 secondBankHoliday);
             ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.Date, Friday24thJuly2015BankHoliday, secondBankHoliday);
 
-            A.CallTo(() => context.BankHolidays).Returns(helper.GetAsyncEnabledDbSet(new[] { bankHoliday, secondBankHoliday }));
+            context.BankHolidays.AddRange(new[] { bankHoliday, secondBankHoliday });
 
             calculator = new WorkingDayCalculator(context);
         }

@@ -6,15 +6,11 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
+    using Domain.TransportRoute;
     using RequestHandlers.CustomsOffice;
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
-    using StateOfExport = Domain.TransportRoute.StateOfExport;
-    using StateOfImport = Domain.TransportRoute.StateOfImport;
 
     public class SetExitCustomsOfficeForNotificationByIdHandlerTests
     {
@@ -23,30 +19,32 @@
         private static readonly Guid AnyGuid = Guid.Empty;
         private readonly Country nonEuCountry;
         private readonly IwsContext context;
-        private readonly DbContextHelper dbContextHelper;
         private readonly SetExitCustomsOfficeForNotificationByIdHandler handler;
         private readonly NotificationApplication anyNotification;
+        private readonly Guid notificationId = new Guid("467CE8AC-71E2-4E6B-8162-FABC997D94FC");
         private readonly Country country;
         private readonly StateOfExport stateOfExport;
         private readonly StateOfImport stateOfImportNonEu;
 
         public SetExitCustomsOfficeForNotificationByIdHandlerTests()
         {
-            this.context = A.Fake<IwsContext>();
-            this.dbContextHelper = new DbContextHelper();
+            this.context = new TestIwsContext();
+
             this.handler = new SetExitCustomsOfficeForNotificationByIdHandler(context);
            
-            anyNotification = new NotificationApplication(AnyGuid, NotificationType.Recovery, UKCompetentAuthority.England, 0);
-            
+            anyNotification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            EntityHelper.SetEntityId(anyNotification, notificationId);
+
+            context.NotificationApplications.Add(anyNotification);
+
             country = CountryFactory.Create(AnyGuid);
-            
             nonEuCountry = CountryFactory.Create(new Guid("606ECF5A-6571-4803-9CCA-7E1AF82D147A"), "test", false);
 
-            A.CallTo(() => context.Countries).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[]
+            context.Countries.AddRange(new[]
             {
                 country,
                 nonEuCountry
-            }));
+            });
 
             stateOfExport = new StateOfExport(country, 
                 CompetentAuthorityFactory.Create(AnyGuid, country), 
@@ -60,9 +58,6 @@
         [Fact]
         public async Task NotificationDoesNotExist_Throws()
         {
-            A.CallTo(() => context.NotificationApplications)
-                .Returns(dbContextHelper.GetAsyncEnabledDbSet(new NotificationApplication[] { }));
-
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
                 handler.HandleAsync(new SetExitCustomsOfficeForNotificationById(AnyGuid, AnyName, AnyAddress, AnyGuid)));
         }
@@ -70,10 +65,7 @@
         [Fact]
         public async Task NotificationExistsButDoesNotRequireCustomsOffice_Throws()
         {
-            var dbSet = dbContextHelper.GetAsyncEnabledDbSet(new[] { anyNotification });
-            A.CallTo(() => context.NotificationApplications).Returns(dbSet);
-
-            var request = new SetExitCustomsOfficeForNotificationById(anyNotification.Id,
+            var request = new SetExitCustomsOfficeForNotificationById(notificationId,
                 AnyName, 
                 AnyAddress, 
                 country.Id);
@@ -87,10 +79,7 @@
             anyNotification.SetStateOfExportForNotification(stateOfExport);
             anyNotification.SetStateOfImportForNotification(stateOfImportNonEu);
 
-            var notifications = dbContextHelper.GetAsyncEnabledDbSet(new[] { anyNotification });
-            A.CallTo(() => context.NotificationApplications).Returns(notifications);
-
-            var request = new SetExitCustomsOfficeForNotificationById(AnyGuid,
+            var request = new SetExitCustomsOfficeForNotificationById(notificationId,
                 AnyName,
                 AnyAddress,
                 country.Id);

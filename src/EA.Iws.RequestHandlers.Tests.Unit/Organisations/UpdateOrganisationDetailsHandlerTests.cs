@@ -1,14 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Organisations
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Registration;
     using DataAccess;
     using Domain;
     using FakeItEasy;
-    using Helpers;
     using Prsd.Core.Domain;
     using RequestHandlers.Organisations;
     using Requests.Organisations;
@@ -34,20 +32,18 @@
 
         public UpdateOrganisationDetailsHandlerTests()
         {
-            context = A.Fake<IwsContext>();
             userContext = A.Fake<IUserContext>();
-
-            var dbContextHelper = new DbContextHelper();
+            A.CallTo(() => userContext.UserId).Returns(userId);
+            context = new TestIwsContext(userContext);
 
             var country = CountryFactory.Create(countryId);
-            A.CallTo(() => context.Countries).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { country }));
+            context.Countries.Add(country);
 
             address = new Address(address1, address2, town, null, postcode, country.Name);
 
-            A.CallTo(() => context.Organisations).Returns(dbContextHelper.GetAsyncEnabledDbSet(new List<Organisation> { GetOrganisation() }));
+            context.Organisations.Add(GetOrganisation());
 
-            A.CallTo(() => context.Users).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { GetUser() }));
-            A.CallTo(() => userContext.UserId).Returns(userId);
+            context.Users.Add(GetUser());
 
             new UpdateOrganisationDetails(GetOrganisationRegistrationData("my"));
             handler = new UpdateOrganisationDetailsHandler(context, userContext);

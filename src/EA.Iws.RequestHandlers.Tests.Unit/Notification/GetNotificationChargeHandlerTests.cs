@@ -6,8 +6,6 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
     using Prsd.Core;
     using RequestHandlers.Notification;
     using Requests.Notification;
@@ -24,22 +22,15 @@
 
         public GetNotificationChargeHandlerTests()
         {
-            context = A.Fake<IwsContext>();
-            var dbSetHelper = new DbContextHelper();
+            context = new TestIwsContext();
 
-            var notifications = dbSetHelper.GetAsyncEnabledDbSet(new[]
+            context.NotificationApplications.AddRange(new[]
             {
                 NotificationNoShipmentInfo(),
                 NotificationWithShipmentInfo()
             });
 
-            var pricingStructures = dbSetHelper.GetAsyncEnabledDbSet(new[]
-            {
-                PricingStructureAll1000()
-            });
-
-            A.CallTo(() => context.PricingStructures).Returns(pricingStructures);
-            A.CallTo(() => context.NotificationApplications).Returns(notifications);
+            context.PricingStructures.Add(PricingStructureAll1000());
 
             handler = new GetNotificationChargeHandler(new NotificationChargeCalculator(context));
 
@@ -53,7 +44,7 @@
 
         private NotificationApplication NotificationNoShipmentInfo()
         {
-            var notificationNoShipmentInfo = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
+            var notificationNoShipmentInfo = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationNoShipmentInfo, notificationNoShipmentInfoId);
             return notificationNoShipmentInfo;
@@ -61,7 +52,7 @@
 
         private NotificationApplication NotificationWithShipmentInfo()
         {
-            var notificationWithShipmentInfo = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
+            var notificationWithShipmentInfo = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationWithShipmentInfo, notificationWithShipmentInfoId);
 

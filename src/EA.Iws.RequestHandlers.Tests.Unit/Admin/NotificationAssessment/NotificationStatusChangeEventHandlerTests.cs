@@ -5,10 +5,8 @@
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using DataAccess;
-    using Domain;
     using Domain.NotificationAssessment;
     using FakeItEasy;
-    using Helpers;
     using Prsd.Core;
     using RequestHandlers.Admin.NotificationAssessment;
     using TestHelpers.Helpers;
@@ -26,17 +24,12 @@
 
         public NotificationStatusChangeEventHandlerTests()
         {
-            context = A.Fake<IwsContext>();
+            context = new TestIwsContext();
             var userContext = new TestUserContext(UserId);
 
             handler = new NotificationStatusChangeEventHandler(context, userContext);
 
-            var helper = new DbContextHelper();
-
-            A.CallTo(() => context.Users).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                UserFactory.Create(UserId, AnyString, AnyString, AnyString, AnyString), 
-            }));
+            context.Users.Add(UserFactory.Create(UserId, AnyString, AnyString, AnyString, AnyString));
 
             notificationAssessment = new NotificationAssessment(NotificationId);
 
@@ -89,7 +82,7 @@
         {
             await handler.HandleAsync(receivedEvent);
 
-            A.CallTo(() => context.SaveChangesAsync()).MustHaveHappened(Repeated.Exactly.Once);
+            Assert.Equal(1, ((TestIwsContext)context).SaveChangesCount);
         }
 
         [Fact]

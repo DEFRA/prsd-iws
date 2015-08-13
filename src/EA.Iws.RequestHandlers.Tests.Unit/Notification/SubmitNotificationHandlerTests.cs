@@ -9,7 +9,6 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
-    using Helpers;
     using RequestHandlers.Notification;
     using Requests.Notification;
     using Xunit;
@@ -24,17 +23,15 @@
 
         public SubmitNotificationHandlerTests()
         {
-            context = A.Fake<IwsContext>();
+            context = new TestIwsContext();
             progressService = A.Fake<INotificationProgressService>();
 
-            var dbSetHelper = new DbContextHelper();
-
-            var assessments = dbSetHelper.GetAsyncEnabledDbSet(new List<NotificationAssessment>
+            var assessments = new List<NotificationAssessment>
             {
                 new NotificationAssessment(notificationId)
-            });
+            };
 
-            A.CallTo(() => context.NotificationAssessments).Returns(assessments);
+            context.NotificationAssessments.AddRange(assessments);
             A.CallTo(() => progressService.IsComplete(notificationId)).Returns(true);
 
             handler = new SubmitNotificationHandler(context, progressService);

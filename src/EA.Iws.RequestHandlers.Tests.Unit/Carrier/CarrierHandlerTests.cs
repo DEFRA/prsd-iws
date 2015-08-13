@@ -6,7 +6,6 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
     using Helpers;
     using RequestHandlers.Carrier;
     using Requests.Carriers;
@@ -30,21 +29,15 @@
 
         public CarrierHandlerTests()
         {
-            context = A.Fake<IwsContext>();
-            var helper = new DbContextHelper();
-            notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            context = new TestIwsContext();
+
+            notification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notification, notificationId);
 
-            A.CallTo(() => context.NotificationApplications).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                notification
-            }));
+            context.NotificationApplications.Add(notification);
 
             var countryWithData = CountryFactory.Create(countryId);
-            A.CallTo(() => context.Countries).Returns(helper.GetAsyncEnabledDbSet(new[]
-            {
-                countryWithData
-            }));
+            context.Countries.Add(countryWithData);
 
             addHandler = new AddCarrierToNotificationHandler(context);
             deleteHandler = new DeleteCarrierForNotificationHandler(context);

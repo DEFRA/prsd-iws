@@ -7,9 +7,6 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
-    using Prsd.Core.Domain;
     using RequestHandlers.Copy;
     using Requests.Copy;
     using TestHelpers.Helpers;
@@ -31,10 +28,9 @@
 
         public GetNotificationsToCopyForUserHandlerTests()
         {
-            var helper = new DbContextHelper();
             userContext = new TestUserContext(UserWithNotificationsId);
 
-            context = A.Fake<IwsContext>(options => options.WithArgumentsForConstructor(() => new IwsContext(userContext, A.Fake<IEventDispatcher>())));
+            context = new TestIwsContext(userContext);
 
             var notification1 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);
@@ -68,14 +64,14 @@
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(destinationNotification2, DestinationNotificationId2);
 
-            A.CallTo(() => context.NotificationApplications).Returns(helper.GetAsyncEnabledDbSet(new[]
+            context.NotificationApplications.AddRange(new[]
             {
                 notification1,
                 notification2,
                 notification3,
                 destinationNotification,
                 destinationNotification2
-            }));
+            });
 
             handler = new GetNotificationsToCopyForUserHandler(context, userContext);
         }

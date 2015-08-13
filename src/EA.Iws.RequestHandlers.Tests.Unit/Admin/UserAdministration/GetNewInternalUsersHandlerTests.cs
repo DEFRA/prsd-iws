@@ -6,8 +6,6 @@
     using System.Threading.Tasks;
     using Core.Admin;
     using DataAccess;
-    using FakeItEasy;
-    using Helpers;
     using Mappings;
     using RequestHandlers.Admin.UserAdministration;
     using Requests.Admin.UserAdministration;
@@ -18,13 +16,12 @@
         private readonly GetNewInternalUsersHandler handler;
         private readonly IwsContext context;
         private readonly TestUserContext userContext;
-        private readonly DbContextHelper contextHelper = new DbContextHelper();
         private readonly GetNewInternalUsers message = new GetNewInternalUsers();
 
         public GetNewInternalUsersHandlerTests()
         {
-            this.context = A.Fake<IwsContext>();
-            A.CallTo(() => context.Users).Returns(contextHelper.GetAsyncEnabledDbSet(new InternalUserCollection().Users));
+            this.context = new TestIwsContext();
+            context.Users.AddRange(new InternalUserCollection().Users);
 
             this.userContext = new TestUserContext(Guid.Empty);
 
