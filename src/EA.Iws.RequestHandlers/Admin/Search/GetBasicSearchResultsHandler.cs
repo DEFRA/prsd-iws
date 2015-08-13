@@ -32,9 +32,9 @@
             var compAuthority = UKCompetentAuthority.FromShortName(userCompetentAuthority);
 
             return (await context.NotificationApplications
-                .Where(p => p.NotificationNumber.Contains(query.SearchTerm) ||
+                .Where(p => (p.NotificationNumber.Contains(query.SearchTerm) ||
                             p.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm) ||
-                            p.Exporter.Business.Name.Contains(query.SearchTerm) &&
+                            p.Exporter.Business.Name.Contains(query.SearchTerm)) &&
                             p.CompetentAuthority.Value == compAuthority.Value)
                 .Join(context.NotificationAssessments
                     .Where(p => p.Status != NotificationStatus.NotSubmitted), n => n.Id,
