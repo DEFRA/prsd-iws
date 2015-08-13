@@ -61,7 +61,7 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
-                    return RedirectToAction("CopyFromExporter", "Producer", new { id = model.NotificationId });
+                    return RedirectToAction("List", "Producer", new { id = model.NotificationId });
                 }
             }
             catch (ApiBadRequestException ex)

@@ -23,45 +23,6 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> CopyFromExporter(Guid id)
-        {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
-                if (response != null && response.Count > 0)
-                {
-                    return RedirectToAction("List");
-                }
-            }
-
-            var model = new YesNoChoiceViewModel();
-            ViewBag.NotificationId = id;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CopyFromExporter(Guid id, YesNoChoiceViewModel inputModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.NotificationId = id;
-                return View(inputModel);
-            }
-
-            if (inputModel.Choices.SelectedValue.Equals("Yes"))
-            {
-                using (var client = apiClient())
-                {
-                    await client.SendAsync(User.GetAccessToken(), new CopyProducerFromExporter(id));
-                }
-            }
-
-            return RedirectToAction("List");
-        }
-
-        [HttpGet]
         public async Task<ActionResult> Add(Guid id)
         {
             var model = new AddProducerViewModel { NotificationId = id };

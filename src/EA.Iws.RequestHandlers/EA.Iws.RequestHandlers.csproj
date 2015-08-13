@@ -105,7 +105,6 @@
     <Compile Include="CustomsOffice\SetEntryCustomsOfficeForNotificationByIdHandler.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandler.cs" />
     <Compile Include="Carrier\AddCarrierToNotificationHandler.cs" />
-    <Compile Include="Facilities\CopyFacilityFromImporterHandler.cs" />
     <Compile Include="Facilities\DeleteFacilityForNotificationHandler.cs" />
     <Compile Include="Facilities\GetFacilitiesByNotificationIdHandler.cs" />
     <Compile Include="Facilities\GetFacilityForNotificationHandler.cs" />
@@ -181,7 +180,6 @@
     <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandler.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandler.cs" />
-    <Compile Include="Producers\CopyProducerFromExporterHandler.cs" />
     <Compile Include="Producers\DeleteProducerForNotificationHandler.cs" />
     <Compile Include="Facilities\AddFacilityToNotificationHandler.cs" />
     <Compile Include="Exporters\GetExporterByNotificationIdHandler.cs" />

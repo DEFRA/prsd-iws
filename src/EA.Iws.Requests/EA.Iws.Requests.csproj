@@ -57,7 +57,6 @@
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
     <Compile Include="Carriers\DeleteCarrierForNotification.cs" />
     <Compile Include="Admin\GetBasicSearchResults.cs" />
-    <Compile Include="Facilities\CopyFacilityFromImporter.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
@@ -82,7 +81,6 @@
     <Compile Include="Notification\WasteRecoveryInfo.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUser.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetails.cs" />
-    <Compile Include="Producers\CopyProducerFromExporter.cs" />
     <Compile Include="RecoveryInfo\AddRecoveryInfoToNotification.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
     <Compile Include="Carriers\GetCarrierForNotification.cs" />

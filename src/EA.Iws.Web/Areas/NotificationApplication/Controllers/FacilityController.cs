@@ -252,56 +252,6 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> CopyFromImporter(Guid id)
-        {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetFacilitiesByNotificationId(id));
-                if (response != null && response.Count > 0)
-                {
-                    return RedirectToAction("List");
-                }
-
-                var notificationInfo = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
-                ViewBag.NotificationType = notificationInfo.NotificationType.ToString().ToLowerInvariant();
-            }
-
-            var model = new YesNoChoiceViewModel();
-            ViewBag.NotificationId = id;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CopyFromImporter(Guid id, YesNoChoiceViewModel inputModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.NotificationId = id;
-
-                using (var client = apiClient())
-                {
-                    var notificationInfo =
-                        await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
-                    ViewBag.NotificationType = notificationInfo.NotificationType.ToString().ToLowerInvariant();
-                }
-
-                return View(inputModel);
-            }
-
-            if (inputModel.Choices.SelectedValue.Equals("Yes"))
-            {
-                using (var client = apiClient())
-                {
-                    await client.SendAsync(User.GetAccessToken(), new CopyFacilityFromImporter(id));
-                }
-            }
-
-            return RedirectToAction("List");
-        }
-
-        [HttpGet]
         public async Task<ActionResult> Remove(Guid id, Guid entityId)
         {
             using (var client = apiClient())

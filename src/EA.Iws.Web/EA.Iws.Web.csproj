@@ -580,13 +580,11 @@
     <Content Include="Views\Shared\EditorTemplates\AddressData.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\List.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContactData.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Producer\CopyFromExporter.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\_SpecialHandling.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\Index.cshtml" />
     <Content Include="Views\Account\EmailVerificationRequired.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Facility\CopyFromImporter.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Edit.cshtml" />
     <Content Include="Views\Emails\VerifyEmailAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\Edit.cshtml" />

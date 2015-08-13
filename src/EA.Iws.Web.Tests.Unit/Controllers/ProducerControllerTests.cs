@@ -12,7 +12,6 @@
     using FakeItEasy;
     using Requests.Producers;
     using Requests.Shared;
-    using Web.ViewModels.Shared;
     using Xunit;
 
     public class ProducerControllerTests
@@ -55,67 +54,6 @@
                 IsSiteOfExport = producerId == this.producerId,
                 NotificationId = notificationId
             };
-        }
-
-        [Fact]
-        public async Task CopyFromExporter_ReturnsView()
-        {
-            var result = await producerController.CopyFromExporter(notificationId) as ViewResult;
-            Assert.Equal(string.Empty, result.ViewName);
-        }
-
-        [Fact]
-        public async Task CopyFromExporter_ProducerExists_RedirectsTo_List()
-        {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetProducersByNotificationId>._)).Returns(new List<ProducerData>() { CreateProducer(producerId) });
-            var result = await producerController.CopyFromExporter(notificationId) as RedirectToRouteResult;
-            Assert.Equal("List", result.RouteValues["action"]);
-        }
-
-        [Fact]
-        public async Task CopyFromExporter_Post_InvalidModelReturnsView()
-        {
-            var model = new YesNoChoiceViewModel();
-
-            producerController.ModelState.AddModelError("Test", "Error");
-
-            var result = await producerController.CopyFromExporter(notificationId, model) as ViewResult;
-
-            Assert.Equal(string.Empty, result.ViewName);
-        }
-
-        [Fact]
-        public async Task CopyFromExporter_Post_YesCallsClient()
-        {
-            var model = new YesNoChoiceViewModel();
-            model.Choices.SelectedValue = "Yes";
-            await producerController.CopyFromExporter(notificationId, model);
-
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<CopyProducerFromExporter>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
-        public async Task CopyFromExporter_Post_NoDoesntCallClient()
-        {
-            var model = new YesNoChoiceViewModel();
-            model.Choices.SelectedValue = "No";
-            await producerController.CopyFromExporter(notificationId, model);
-
-            A.CallTo(() => client.SendAsync(A<string>._, A<CopyProducerFromExporter>._)).MustNotHaveHappened();
-        }
-
-        [Fact]
-        public async Task CopyFromExporter_Post_ReturnsListView()
-        {
-            var model = new YesNoChoiceViewModel();
-            model.Choices.SelectedValue = "No";
-            var result = await producerController.CopyFromExporter(notificationId, model) as RedirectToRouteResult;
-
-            Assert.Equal("List", result.RouteValues["action"]);
         }
 
         [Fact]
