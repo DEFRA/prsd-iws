@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationAssessment
 {
     using System;
+    using System.Linq;
     using Core.NotificationAssessment;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
@@ -53,8 +54,10 @@
         {
             notificationAssessment.Submit(progressService);
 
-            A.CallTo(() => dispatcher.Dispatch(A<NotificationStatusChangeEvent>.That.Matches(p => Equals(p.NotificationAssessment, notificationAssessment)
-                && p.TargetStatus == NotificationStatus.Submitted))).MustHaveHappened(Repeated.Exactly.Once);
+            Assert.Equal(notificationAssessment,
+                notificationAssessment.Events.OfType<NotificationStatusChangeEvent>()
+                    .SingleOrDefault()
+                    .NotificationAssessment);
         }
 
         [Fact]
@@ -62,8 +65,10 @@
         {
             notificationAssessment.Submit(progressService);
 
-            A.CallTo(() => dispatcher.Dispatch(A<NotificationSubmittedEvent>.That.Matches(p => p.NotificationApplicationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+            Assert.Equal(notificationId,
+                notificationAssessment.Events.OfType<NotificationSubmittedEvent>()
+                    .SingleOrDefault()
+                    .NotificationApplicationId);
         }
 
         [Fact]

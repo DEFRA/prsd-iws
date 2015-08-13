@@ -25,7 +25,7 @@
 
             A.CallTo(() => userContext.UserId).Returns(Guid.NewGuid());
 
-            context = new IwsContext(userContext);
+            context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
         }
 
         [Fact]

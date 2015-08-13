@@ -23,11 +23,13 @@
     public class IwsContext : DbContext
     {
         private readonly IUserContext userContext;
+        private readonly IEventDispatcher dispatcher;
 
-        public IwsContext(IUserContext userContext)
+        public IwsContext(IUserContext userContext, IEventDispatcher dispatcher)
             : base("name=Iws.DefaultConnection")
         {
             this.userContext = userContext;
+            this.dispatcher = dispatcher;
             Database.SetInitializer<IwsContext>(null);
         }
 
@@ -84,13 +86,17 @@
             return base.SaveChanges();
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             this.SetEntityId();
             DeleteRemovedRelationships(this);
             this.AuditChanges(userContext.UserId);
 
-            return base.SaveChangesAsync(cancellationToken);
+            int result = await base.SaveChangesAsync(cancellationToken);
+
+            await this.DispatchEvents(dispatcher);
+
+            return result;
         }
 
         public void DeleteOnCommit(Entity entity)

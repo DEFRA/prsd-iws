@@ -12,22 +12,6 @@
         {
         }
 
-        public User(string id, string firstName, string surname, string phoneNumber, string email)
-        {
-            Guard.ArgumentNotNullOrEmpty(() => firstName, firstName);
-            Guard.ArgumentNotNullOrEmpty(() => surname, surname);
-            Guard.ArgumentNotNullOrEmpty(() => phoneNumber, phoneNumber);
-            Guard.ArgumentNotNullOrEmpty(() => email, email);
-            Guard.ArgumentNotNullOrEmpty(() => id, id);
-
-            FirstName = firstName;
-            Surname = surname;
-            PhoneNumber = phoneNumber;
-            Email = email;
-            Id = id;
-            UserName = email;
-        }
-
         public string Id { get; private set; }
 
         public string FirstName { get; private set; }

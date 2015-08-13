@@ -15,7 +15,7 @@
 
         public UnitedKingdomCompetentAuthorityIntegration()
         {
-            context = new IwsContext(A.Fake<IUserContext>());
+            context = new IwsContext(A.Fake<IUserContext>(), A.Fake<IEventDispatcher>());
         }
 
         [Fact]

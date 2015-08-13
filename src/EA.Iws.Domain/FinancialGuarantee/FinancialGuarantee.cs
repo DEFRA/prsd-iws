@@ -153,7 +153,7 @@
 
         private void OnTransitionAction(StateMachine<FinancialGuaranteeStatus, Trigger>.Transition transition)
         {
-            DomainEvents.Raise(new FinancialGuaranteeStatusChangeEvent(this, transition.Destination));
+            RaiseEvent(new FinancialGuaranteeStatusChangeEvent(this, transition.Destination));
         }
 
         private enum Trigger

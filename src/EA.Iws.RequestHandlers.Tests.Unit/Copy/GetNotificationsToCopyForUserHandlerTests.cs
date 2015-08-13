@@ -9,6 +9,7 @@
     using Domain.NotificationApplication;
     using FakeItEasy;
     using Helpers;
+    using Prsd.Core.Domain;
     using RequestHandlers.Copy;
     using Requests.Copy;
     using TestHelpers.Helpers;
@@ -33,7 +34,7 @@
             var helper = new DbContextHelper();
             userContext = new TestUserContext(UserWithNotificationsId);
 
-            context = A.Fake<IwsContext>(options => options.WithArgumentsForConstructor(() => new IwsContext(userContext)));
+            context = A.Fake<IwsContext>(options => options.WithArgumentsForConstructor(() => new IwsContext(userContext, A.Fake<IEventDispatcher>())));
 
             var notification1 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);

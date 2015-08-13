@@ -63,17 +63,17 @@
         {
             Users = new[]
             {
-                new User(AdminPendingId.ToString(), AnyString, AnyString, AnyString,
+                UserFactory.Create(AdminPendingId, AnyString, AnyString, AnyString,
                     AnyString),
-                new User(AdminApprovedId.ToString(), AnyString, AnyString, AnyString,
+                UserFactory.Create(AdminApprovedId, AnyString, AnyString, AnyString,
                     AnyString),
-                new User(AdminRejectedId.ToString(), AnyString, AnyString, AnyString,
+                UserFactory.Create(AdminRejectedId, AnyString, AnyString, AnyString,
                     AnyString),  
-                new User(ThisUserAdminPendingId.ToString(), AnyString, AnyString, AnyString,
+                UserFactory.Create(ThisUserAdminPendingId, AnyString, AnyString, AnyString,
                     AnyString),
-                new User(ThisUserAdminApprovedId.ToString(), AnyString, AnyString, AnyString,
+                UserFactory.Create(ThisUserAdminApprovedId, AnyString, AnyString, AnyString,
                     AnyString),
-                new User(NonAdminUserId.ToString(), AnyString, AnyString, AnyString,
+                UserFactory.Create(NonAdminUserId, AnyString, AnyString, AnyString,
                     AnyString)
             };
 

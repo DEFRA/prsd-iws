@@ -60,7 +60,7 @@
 
         private System.Data.Entity.DbSet<User> GetUsers()
         {
-            User user = new User("ac795e26-1563-4833-b8f9-0529eb9e66ae", "Name", "Surname", "123456", "test@test.com");
+            var user = UserFactory.Create(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"), "Name", "Surname", "123456", "test@test.com");
             ObjectInstantiator<User>.SetProperty(u => u.CompetentAuthority, "EA", user);
 
             var users = helper.GetAsyncEnabledDbSet(new[]

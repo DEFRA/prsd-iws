@@ -55,7 +55,7 @@
 
         private User GetUser()
         {
-            User user = new User(userId.ToString(), "firstName", "lastName", "9123456789", "test@test.com");
+            User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
             Organisation org = new Organisation(name, address, BusinessType.Other, otherDescription);
             EntityHelper.SetEntityId(org, organisationId);
 
@@ -65,7 +65,7 @@
 
         private Organisation GetOrganisation()
         {
-            User user = new User(userId.ToString(), "firstName", "lastName", "9123456789", "test@test.com");
+            User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
             Organisation org = new Organisation(name, address, BusinessType.Other, otherDescription);
             EntityHelper.SetEntityId(org, organisationId);
 

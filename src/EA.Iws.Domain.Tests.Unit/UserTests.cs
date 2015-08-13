@@ -8,101 +8,13 @@
     public class UserTests
     {
         private static readonly BusinessType AnyType = BusinessType.LimitedCompany;
-        private readonly User anyUser = new User("id", "first", "last", "123", "email@address.com");
+        private readonly User anyUser = UserFactory.Create(new Guid("FB282058-6C3C-4B4B-94B4-BDDA2889E89B"), "first", "last", "123", "email@address.com");
 
         private static readonly Action<User, bool> SetIsAdminForUser =
             (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsInternal, isAdmin, user);
 
         private static readonly Action<User, InternalUserStatus> SetInternalUserStatus =
             (user, status) => ObjectInstantiator<User>.SetProperty(u => u.InternalUserStatus, status, user);
-
-        [Fact]
-        public void CanCreateUser()
-        {
-            var user = new User("id", "first", "last", "123", "email@address.com");
-
-            Assert.NotNull(user);
-        }
-
-        [Fact]
-        public void IdCannotBeNull()
-        {
-            Action createUser = () => new User(null, "first", "last", "123", "email@address.com");
-
-            Assert.Throws<ArgumentNullException>("id", createUser);
-        }
-
-        [Fact]
-        public void IdCannotBeEmpty()
-        {
-            Action createUser = () => new User(string.Empty, "first", "last", "123", "email@address.com");
-
-            Assert.Throws<ArgumentException>("id", createUser);
-        }
-
-        [Fact]
-        public void FirstNameCannotBeNull()
-        {
-            Action createUser = () => new User("id", null, "last", "123", "email@address.com");
-
-            Assert.Throws<ArgumentNullException>("firstName", createUser);
-        }
-
-        [Fact]
-        public void FirstNameCannotBeEmpty()
-        {
-            Action createUser = () => new User("id", string.Empty, "last", "123", "email@address.com");
-
-            Assert.Throws<ArgumentException>("firstName", createUser);
-        }
-
-        [Fact]
-        public void SurnameCannotBeNull()
-        {
-            Action createUser = () => new User("id", "first", null, "123", "email@address.com");
-
-            Assert.Throws<ArgumentNullException>("surname", createUser);
-        }
-
-        [Fact]
-        public void SurnameCannotBeEmpty()
-        {
-            Action createUser = () => new User("id", "first", string.Empty, "123", "email@address.com");
-
-            Assert.Throws<ArgumentException>("surname", createUser);
-        }
-
-        [Fact]
-        public void PhoneNumberCannotBeNull()
-        {
-            Action createUser = () => new User("id", "first", "last", null, "email@address.com");
-
-            Assert.Throws<ArgumentNullException>("phoneNumber", createUser);
-        }
-
-        [Fact]
-        public void PhoneNumberCannotBeEmpty()
-        {
-            Action createUser = () => new User("id", "first", "last", string.Empty, "email@address.com");
-
-            Assert.Throws<ArgumentException>("phoneNumber", createUser);
-        }
-
-        [Fact]
-        public void EmailCannotBeNull()
-        {
-            Action createUser = () => new User("id", "first", "last", "123", null);
-
-            Assert.Throws<ArgumentNullException>("email", createUser);
-        }
-
-        [Fact]
-        public void EmailCannotBeEmpty()
-        {
-            Action createUser = () => new User("id", "first", "last", "123", string.Empty);
-
-            Assert.Throws<ArgumentException>("email", createUser);
-        }
 
         [Fact]
         public void CanLinkToOrganisation()
@@ -134,9 +46,7 @@
         [Fact]
         public void LinkedOrganisationCannotBeNull()
         {
-            var user = new User("id", "first", "last", "123", "email@address.com");
-
-            Action linkToOrganisation = () => user.LinkToOrganisation(null);
+            Action linkToOrganisation = () => anyUser.LinkToOrganisation(null);
 
             Assert.Throws<ArgumentNullException>("organisation", linkToOrganisation);
         }

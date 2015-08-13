@@ -25,7 +25,7 @@
             userId = new Guid("5BA5B2CE-A29C-4B94-A528-567F636CA456");
             userContext = A.Fake<IUserContext>();
             A.CallTo(() => userContext.UserId).Returns(userId);
-            context = new IwsContext(userContext);
+            context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
             notification = new NotificationApplication(userId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
         }
@@ -34,7 +34,7 @@
         public async Task UpdateOrganisation_BusinessType_Should_Not_Remove_Organisation()
         {
             //Create new user
-            var newUser = new User(userId.ToString(), "testFirst", "testLast", "9999", "testfirst@testlast.com");
+            var newUser = UserFactory.Create(userId, "testFirst", "testLast", "9999", "testfirst@testlast.com");
 
             //Create new org
             var country = context.Countries.Single(c => c.IsoAlpha2Code.Equals("gb"));
@@ -62,7 +62,7 @@
                 await context.SaveChangesAsync();
 
                 //Update user with newly created org2
-                var user = await context.Users.SingleAsync(u => u.Id == newUser.Id.ToString());
+                var user = await context.Users.SingleAsync(u => u.Id == newUser.Id);
                 user.UpdateOrganisationOfUser(org);
                 await context.SaveChangesAsync();
                 Assert.True(user.Organisation.Id == org.Id);

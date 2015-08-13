@@ -33,7 +33,7 @@
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
             WasteCodeInfoCollection = new List<WasteCodeInfo>();
 
-            DomainEvents.Raise(new NotificationCreatedEvent(this));
+            RaiseEvent(new NotificationCreatedEvent(this));
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }

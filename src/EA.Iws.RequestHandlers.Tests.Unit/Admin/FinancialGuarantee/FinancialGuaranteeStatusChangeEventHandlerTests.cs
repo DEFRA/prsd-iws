@@ -11,6 +11,7 @@
     using Helpers;
     using Prsd.Core;
     using RequestHandlers.Admin.FinancialGuarantee;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class FinancialGuaranteeStatusChangeEventHandlerTests
@@ -34,7 +35,7 @@
 
             A.CallTo(() => context.Users).Returns(helper.GetAsyncEnabledDbSet(new[]
             {
-                new User(UserId.ToString(), AnyString, AnyString, AnyString, AnyString)
+                UserFactory.Create(UserId, AnyString, AnyString, AnyString, AnyString)
             }));
 
             financialGuarantee = FinancialGuarantee.Create(new Guid("68787AC6-7CF5-4862-8E7E-77E20172AECC"));

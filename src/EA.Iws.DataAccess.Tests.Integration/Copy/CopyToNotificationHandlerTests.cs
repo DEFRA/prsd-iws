@@ -36,7 +36,7 @@
         {
             var userContext = A.Fake<IUserContext>();
             A.CallTo(() => userContext.UserId).Returns(UserId);
-            context = new IwsContext(userContext);
+            context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
 

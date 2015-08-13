@@ -8,9 +8,7 @@
     using Core.Shared;
     using DataAccess;
     using Prsd.Core.Mediator;
-    using Requests.Organisations;
     using Requests.Registration.Users;
-    using Requests.Shared;
 
     internal class UserByIdHandler : IRequestHandler<UserById, User>
     {

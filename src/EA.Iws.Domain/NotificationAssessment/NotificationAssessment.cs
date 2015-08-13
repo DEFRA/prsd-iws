@@ -60,12 +60,12 @@
 
         private void OnSubmit()
         {
-            DomainEvents.Raise(new NotificationSubmittedEvent(NotificationApplicationId));
+            RaiseEvent(new NotificationSubmittedEvent(NotificationApplicationId));
         }
 
         private void OnTransitionAction(StateMachine<NotificationStatus, Trigger>.Transition transition)
         {
-            DomainEvents.Raise(new NotificationStatusChangeEvent(this, transition.Destination));
+            RaiseEvent(new NotificationStatusChangeEvent(this, transition.Destination));
         }
 
         public void Submit(INotificationProgressService progressService)
