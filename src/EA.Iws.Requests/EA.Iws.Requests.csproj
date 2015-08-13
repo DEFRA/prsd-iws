@@ -164,10 +164,14 @@
     <Compile Include="TransitState\TransitStateWithTransportRouteData.cs" />
     <Compile Include="TransportRoute\CompententAuthorityAndEntryOrExitPointData.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
+    <Compile Include="WasteCodes\GetAllWasteCodesForNotification.cs" />
+    <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypes.cs" />
     <Compile Include="WasteCodes\GetWasteCodesForNotification.cs" />
     <Compile Include="WasteCodes\SetOtherWasteCodes.cs" />
     <Compile Include="WasteCodes\SetUnNumberWasteCodes.cs" />
+    <Compile Include="WasteCodes\SetBaselOecdCodeForNotification.cs" />
     <Compile Include="WasteCodes\SetYHUnWasteCodes.cs" />
+    <Compile Include="WasteCodes\WasteCodeDataAndNotificationData.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristics.cs" />
     <Compile Include="WasteCodes\GetWasteCodesByType.cs" />

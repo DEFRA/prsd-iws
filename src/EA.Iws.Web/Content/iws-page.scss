@@ -645,6 +645,14 @@ address > span {
     margin-bottom: 1em;
 }
 
-table.table-pad-bottom{
+table.table-pad-bottom {
     margin-bottom: 1em;
+}
+
+#descriptionTextArea > div {
+    border-top: 1px solid $border-colour;
+    border-bottom: 1px solid $border-colour;
+    padding-top: 10px;
+    min-height: 50px;
+    padding-bottom: 10px;
 }

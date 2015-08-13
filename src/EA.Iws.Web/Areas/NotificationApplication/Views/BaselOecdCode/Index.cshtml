@@ -1,0 +1,69 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.BaselOecdCode.BaselOecdCodeViewModel
+
+@{
+    ViewBag.Title = "Basel or OECD code";
+}
+
+<h2 class="heading-large">What is the Basel annex VIII/IX or OECD code?</h2>
+
+<p>Type your code and select from the options that will appear in the list.</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    for (int i = 0; i < Model.WasteCodes.Count; i++)
+    {
+        @Html.HiddenFor(m => m.WasteCodes[i].Id)
+        @Html.HiddenFor(m => m.WasteCodes[i].Name)
+        @Html.HiddenFor(m => m.WasteCodes[i].Description, new { id = "description-" + Model.WasteCodes[i].Id })
+        @Html.HiddenFor(m => m.WasteCodes[i].CodeType)
+    }
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedCode)">
+        @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
+        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list" })
+    </div>
+    
+    <p>Or:</p>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.NotListed)">
+        @Html.Gds().ValidationMessageFor(m => m.NotListed)
+        <label class="block-label" for="NotListed">
+            @Html.CheckBoxFor(m => m.NotListed)
+            @Html.DisplayNameFor(m => m.NotListed)
+        </label>
+    </div>
+
+    <div class="form-group">
+        <div id="descriptionTextArea">
+            <h4 class="heading-small">Description of code:</h4>
+            <div>No code selected</div>
+        </div>
+    </div>
+
+    <button class="button" type="submit">Save and continue</button>
+}
+
+@section scripts{
+    <script>
+        $(function () {
+            var dropdownId = "#code-list";
+
+            $(dropdownId).selectToAutocomplete();
+            
+            $(dropdownId).change(function() {
+                var inputToFind = "#description-" + $(this).find(":selected").attr("value");
+                var description = $(inputToFind).val();
+                if (description === undefined) {
+                    $("#descriptionTextArea div").html("No code selected");
+                } else {
+                    $("#descriptionTextArea div").html(description);
+                }
+            });
+
+            $(dropdownId).trigger("change");
+        });
+    </script>
+}

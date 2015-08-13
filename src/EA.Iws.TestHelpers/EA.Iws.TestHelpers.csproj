@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainFakes\TestableNotificationApplication.cs" />
+    <Compile Include="DomainFakes\TestableWasteCode.cs" />
+    <Compile Include="DomainFakes\TestableWasteCodeInfo.cs" />
     <Compile Include="Helpers\ComplexTypeFactory.cs" />
     <Compile Include="Helpers\CompetentAuthorityFactory.cs" />
     <Compile Include="Helpers\CountryFactory.cs" />

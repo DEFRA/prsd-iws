@@ -10,7 +10,7 @@
     {
         private IEnumerable<WasteCodeInfo> GetWasteCodes(CodeType codeType)
         {
-            return WasteCodeInfoCollection.Where(p => p.WasteCode.CodeType == codeType);
+            return WasteCodeInfoCollection.Where(p => p.CodeType == codeType);
         }
 
         private void SetCodes(IEnumerable<WasteCodeInfo> codes, CodeType codeType)
@@ -129,13 +129,35 @@
             SetCode(customsCode, CodeType.CustomsCode);
         }
 
+        public void SetCodesNotApplicable(CodeType codeType)
+        {
+            var currentCodes = GetWasteCodes(codeType).ToArray();
+
+            foreach (var code in currentCodes)
+            {
+                WasteCodeInfoCollection.Remove(code);
+            }
+
+            WasteCodeInfoCollection.Add(WasteCodeInfo.CreateNotApplicableCodeInfo(codeType));
+        }
+
         public WasteCodeInfo BaselOecdCode
         {
             get
             {
                 return
                     WasteCodeInfoCollection.SingleOrDefault(
-                        p => p.WasteCode.CodeType == CodeType.Basel || p.WasteCode.CodeType == CodeType.Oecd);
+                        p => p.CodeType == CodeType.Basel || p.CodeType == CodeType.Oecd);
+            }
+        }
+
+        public void RemoveCodeOfType(CodeType codeType)
+        {
+            var codes = GetWasteCodes(codeType).ToArray();
+
+            foreach (var code in codes)
+            {
+                WasteCodeInfoCollection.Remove(code);
             }
         }
 

@@ -1,16 +1,15 @@
 ﻿namespace EA.Iws.Requests.WasteCodes
 {
     using Core.WasteCodes;
-    using Core.WasteType;
     using Prsd.Core.Mediator;
 
     public class GetWasteCodesByType : IRequest<WasteCodeData[]>
     {
-        public GetWasteCodesByType(CodeType codeType)
+        public GetWasteCodesByType(params CodeType[] codeTypeses)
         {
-            CodeType = codeType;
+            CodeTypes = codeTypeses;
         }
 
-        public CodeType CodeType { get; private set; }
+        public CodeType[] CodeTypes { get; private set; }
     }
 }

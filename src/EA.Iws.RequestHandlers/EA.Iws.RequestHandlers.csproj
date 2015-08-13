@@ -94,6 +94,9 @@
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
+    <Compile Include="WasteCodes\GetAllWasteCodesForNotificationHandler.cs" />
+    <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypesHandler.cs" />
+    <Compile Include="WasteCodes\SetBaselOecdCodeForNotificationHandler.cs" />
     <Compile Include="WorkingDayCalculator.cs" />
     <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
@@ -234,7 +237,7 @@
     <Compile Include="WasteCodes\SetYHUnWasteCodesHandler.cs" />
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristicsHandler.cs" />
-    <Compile Include="WasteCodes\GetWasteCodesHandler.cs" />
+    <Compile Include="WasteCodes\GetWasteCodesByTypeHandler.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcessHandler.cs" />
     <Compile Include="WasteType\GetWasteTypeHandler.cs" />
     <Compile Include="WasteType\SetEnergyAndOptionalInformationHandler.cs" />

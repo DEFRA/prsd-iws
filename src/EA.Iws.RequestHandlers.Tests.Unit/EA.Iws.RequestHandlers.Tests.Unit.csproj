@@ -111,6 +111,8 @@
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandlerTests.cs" />
     <Compile Include="TransitState\RemoveTransitStateForNotificationHandlerTests.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandlerTests.cs" />
+    <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypesHandlerTests.cs" />
+    <Compile Include="WasteCodes\WasteCodeHandlerTests.cs" />
     <Compile Include="WorkingDayCalculatorTests.cs" />
   </ItemGroup>
   <ItemGroup>

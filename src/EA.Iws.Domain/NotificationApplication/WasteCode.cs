@@ -9,12 +9,12 @@
         {
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; protected set; }
 
-        public string Description { get; private set; }
+        public string Description { get; protected set; }
 
-        public string Code { get; private set; }
+        public string Code { get; protected set; }
 
-        public CodeType CodeType { get; private set; }
+        public CodeType CodeType { get; protected set; }
     }
 }

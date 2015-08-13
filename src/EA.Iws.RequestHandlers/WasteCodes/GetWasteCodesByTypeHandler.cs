@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteCodes
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -23,7 +24,17 @@
 
         public async Task<WasteCodeData[]> HandleAsync(GetWasteCodesByType message)
         {
-            var result = await context.WasteCodes.Where(p => p.CodeType == message.CodeType).ToArrayAsync();
+            IList<WasteCode> result;
+
+            if (message.CodeTypes == null || message.CodeTypes.Length == 0)
+            {
+                result = await context.WasteCodes.ToArrayAsync();
+            }
+            else
+            {
+                result = await context.WasteCodes.Where(p => message.CodeTypes.Contains(p.CodeType)).ToArrayAsync();
+            }
+            
             return result.Select(c => mapper.Map(c)).OrderBy(m => m.Code).ToArray();
         }
     }

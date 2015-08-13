@@ -2,12 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Core.WasteCodes;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
     internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>, IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]>,
-        IMap<WasteCodeInfo, WasteCodeData[]>, IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]>
+        IMap<IEnumerable<WasteCode>, WasteCodeData[]>,
+        IMap<WasteCodeInfo, WasteCodeData[]>, 
+        IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]>
     {
         public WasteCodeData Map(WasteCode source)
         {
@@ -29,7 +32,7 @@
                 wasteCodeData.CustomCode = wasteCode.CustomCode;
                 wasteCodes.Add(wasteCodeData);
 
-                wasteCodeData.IsNotApplicable = wasteCode.IsNotApplicable.HasValue && wasteCode.IsNotApplicable.Value;
+                wasteCodeData.IsNotApplicable = wasteCode.IsNotApplicable;
             }
             return wasteCodes.ToArray();
         }
@@ -41,9 +44,22 @@
                 return new WasteCodeData[] { };
             }
 
+            if (source.IsNotApplicable)
+            {
+                return new[]
+                {
+                    new WasteCodeData
+                    {
+                        CodeType = source.CodeType,
+                        Code = "Not applicable",
+                        IsNotApplicable = true
+                    }
+                };
+            }
+
             var wasteCodeData = Map(source.WasteCode);
             wasteCodeData.CustomCode = source.CustomCode;
-            wasteCodeData.IsNotApplicable = source.IsNotApplicable.HasValue && source.IsNotApplicable.Value;
+            wasteCodeData.IsNotApplicable = source.IsNotApplicable;
 
             return new[]
             {
@@ -79,6 +95,11 @@
                 default:
                     throw new InvalidOperationException(string.Format("Unknown code type {0}", parameter));
             }
+        }
+
+        public WasteCodeData[] Map(IEnumerable<WasteCode> source)
+        {
+            return source.Select(wc => Map(wc)).ToArray();
         }
     }
 }

@@ -15,11 +15,14 @@
         {
             Guard.ArgumentNotNull(() => wasteCode, wasteCode);
             WasteCode = wasteCode;
+            CodeType = wasteCode.CodeType;
         }
 
         private WasteCodeInfo(WasteCode wasteCode, string customCode)
         {
             Guard.ArgumentNotNull(() => wasteCode, wasteCode);
+
+            CodeType = wasteCode.CodeType;
 
             if (string.IsNullOrEmpty(customCode))
             {
@@ -28,12 +31,21 @@
 
             if (!CanHaveCustomCode(wasteCode.CodeType))
             {
-                throw new InvalidOperationException(string.Format("Cannot set optional values for non optional code type for notification {0}", Id));
+                throw new InvalidOperationException(
+                    string.Format("Cannot set optional values for non optional code type for notification {0}", Id));
             }
 
             WasteCode = wasteCode;
             CustomCode = customCode;
         }
+
+        public virtual WasteCode WasteCode { get; protected set; }
+
+        public string CustomCode { get; protected set; }
+
+        public bool IsNotApplicable { get; protected set; }
+
+        public CodeType CodeType { get; protected set; }
 
         public static WasteCodeInfo CreateCustomWasteCodeInfo(WasteCode wasteCode, string customCode)
         {
@@ -49,15 +61,19 @@
             return new WasteCodeInfo(wasteCode);
         }
 
-        public virtual WasteCode WasteCode { get; private set; }
-
-        public string CustomCode { get; private set; }
-
-        public bool? IsNotApplicable { get; private set; }
+        public static WasteCodeInfo CreateNotApplicableCodeInfo(CodeType codeType)
+        {
+            return new WasteCodeInfo
+            {
+                CodeType = codeType,
+                IsNotApplicable = true,
+            };
+        }
 
         private static bool CanHaveCustomCode(CodeType codeType)
         {
-            return codeType == CodeType.CustomsCode || codeType == CodeType.ExportCode || codeType == CodeType.ImportCode || codeType == CodeType.OtherCode;
+            return codeType == CodeType.CustomsCode || codeType == CodeType.ExportCode ||
+                   codeType == CodeType.ImportCode || codeType == CodeType.OtherCode;
         }
     }
 }
