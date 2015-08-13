@@ -16,7 +16,7 @@
                 {
                     LoginPath = new PathString("/Account/Login"),
                     SlidingExpiration = true,
-                    ExpireTimeSpan = TimeSpan.FromMinutes(20)
+                    ExpireTimeSpan = TimeSpan.FromHours(9)
                 });
         }
     }
