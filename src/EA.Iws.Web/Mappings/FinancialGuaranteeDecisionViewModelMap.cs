@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Mappings
 {
     using System;
-    using Areas.Admin.ViewModels.FinancialGuarantee;
+    using Areas.NotificationAssessment.ViewModels.FinancialGuarantee;
     using Core.Admin;
     using Prsd.Core.Mapper;
     using Requests.Admin.FinancialGuarantee;

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Admin.Controllers
+﻿namespace EA.Iws.Web.Areas.NotificationAssessment.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -21,18 +21,20 @@
         }
 
         [HttpGet]
-        public ActionResult Decision(Guid id)
+        public ActionResult Index(Guid id)
         {
-            var model = new DecisionViewModel();
-            model.NotificationId = id;
-            model.DecisionTypes = GetDecisionTypes();
+            var model = new DecisionViewModel
+            {
+                NotificationId = id, 
+                DecisionTypes = GetDecisionTypes()
+            };
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ViewResult> Decision(DecisionViewModel model)
+        public async Task<ViewResult> Index(DecisionViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -56,15 +58,6 @@
             }
             model.DecisionTypes = GetDecisionTypes();
             return View(model);
-        }
-
-        private DateTime? GetDateFromUserInput(int? day, int? month, int? year)
-        {
-            if (day.HasValue && month.HasValue && year.HasValue)
-            {
-                return new DateTime(year.Value, month.Value, day.Value);
-            }
-            return null;
         }
 
         private SelectList GetDecisionTypes()

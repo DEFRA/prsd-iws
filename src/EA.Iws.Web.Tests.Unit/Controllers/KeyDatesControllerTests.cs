@@ -9,12 +9,11 @@
     using Api.Client;
     using Areas.Admin.Controllers;
     using Areas.Admin.ViewModels;
-    using Areas.NotificationApplication.Controllers;
-    using Core.CustomsOffice;
+    using Areas.NotificationAssessment.Controllers;
+    using Areas.NotificationAssessment.ViewModels;
     using FakeItEasy;
-    using Prsd.Core.Web.OAuth;
     using Requests.Admin;
-    using Requests.CustomsOffice;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class KeyDatesControllerTests
@@ -58,7 +57,7 @@
             return controller.DateInput(model);
         }
 
-        private Areas.Admin.Controllers.KeyDatesController GetMockAssessmentController(object viewModel)
+        private KeyDatesController GetMockAssessmentController(object viewModel)
         {
             var assessmentController = new KeyDatesController(() => client);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model

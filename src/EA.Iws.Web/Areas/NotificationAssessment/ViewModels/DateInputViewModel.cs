@@ -1,8 +1,9 @@
-﻿namespace EA.Iws.Web.Areas.Admin.ViewModels
+﻿namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Web.ViewModels.Shared;
 
     public class DateInputViewModel : IValidatableObject
     {

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Admin.ViewModels
+namespace EA.Iws.Web.ViewModels.Shared
 {
     using System;
     using System.Collections.Generic;

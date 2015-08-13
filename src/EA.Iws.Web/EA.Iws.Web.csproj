@@ -465,21 +465,21 @@
     <Content Include="Areas\Admin\Views\Registration\AwaitApproval.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\ApprovalRejected.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\SiteOfExport.cshtml" />
-    <Content Include="Areas\Admin\Views\KeyDates\DateInput.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\KeyDates\DateInput.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatment.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\Remove.cshtml" />
-    <Content Include="Areas\Admin\Views\Decision\Decision.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
-    <Content Include="Areas\Admin\Views\FinancialGuarantee\Dates.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Decision\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\Dates.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\MethodOfDisposal.cshtml" />
-    <Content Include="Areas\Admin\Views\FinancialGuarantee\Decision.cshtml" />
-    <Content Include="Areas\Admin\Views\FinancialGuarantee\_Incomplete.cshtml" />
-    <Content Include="Areas\Admin\Views\FinancialGuarantee\_Complete.cshtml" />
-    <Content Include="Areas\Admin\Views\FinancialGuarantee\_Approve.cshtml" />
-    <Content Include="Areas\Admin\Views\FinancialGuarantee\_Refuse.cshtml" />
-    <Content Include="Areas\Admin\Views\FinancialGuarantee\_Release.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\Decision.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Incomplete.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Complete.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Approve.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Refuse.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Release.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\DisplayTemplates\AddressData.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_GeneralRemittanceEmail.cshtml" />
@@ -653,19 +653,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\DecisionController.cs" />
-    <Compile Include="Areas\Admin\Controllers\KeyDatesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\FinancialGuaranteeController.cs" />
+    <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />
+    <Compile Include="Areas\NotificationAssessment\Controllers\KeyDatesController.cs" />
+    <Compile Include="Areas\NotificationAssessment\Controllers\FinancialGuaranteeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\AdminRegistrationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\BasicSearchViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\DecisionViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\DateInputViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\FinancialGuarantee\FinancialGuaranteeDatesViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\FinancialGuarantee\FinancialGuaranteeDecisionViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\OptionalDateInputViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\DecisionViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\DateInputViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDatesViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDecisionViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\NewUsersListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />
@@ -789,6 +788,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\OperationCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\YcodeHcodeAndUnClassViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
+    <Compile Include="ViewModels\Shared\OptionalDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\SpecialHandling\SpecialHandlingViewModel.cs" />
@@ -833,9 +833,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
-    <Folder Include="Areas\NotificationAssessment\ViewModels\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

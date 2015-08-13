@@ -1,9 +1,9 @@
 namespace EA.Iws.Web.Mappings
 {
-    using Areas.Admin.ViewModels;
-    using Areas.Admin.ViewModels.FinancialGuarantee;
+    using Areas.NotificationAssessment.ViewModels.FinancialGuarantee;
     using Core.Admin;
     using Prsd.Core.Mapper;
+    using ViewModels.Shared;
 
     public class FinancialGuaranteeDataToDecisionMap : IMap<FinancialGuaranteeData, FinancialGuaranteeDecisionViewModel>
     {
@@ -19,7 +19,9 @@ namespace EA.Iws.Web.Mappings
                 DecisionMadeDate = new OptionalDateInputViewModel(source.DecisionDate),
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
                 ReasonForRefusal = source.RefusalReason,
-                Decision = source.Decision
+                Decision = source.Decision,
+                CompletedDate = source.CompletedDate,
+                ReceivedDate = source.ReceivedDate
             };
         }
     }

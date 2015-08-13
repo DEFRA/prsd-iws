@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Web.Mappings
 {
-    using Areas.Admin.ViewModels;
-    using Areas.Admin.ViewModels.FinancialGuarantee;
+    using Areas.NotificationAssessment.ViewModels.FinancialGuarantee;
     using Core.Admin;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
+    using ViewModels.Shared;
 
     public class FinancialGuaranteeDataToDatesMap : IMap<FinancialGuaranteeData, FinancialGuaranteeDatesViewModel>
     {

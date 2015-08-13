@@ -7,10 +7,11 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Areas.Admin.Controllers;
-    using Areas.Admin.ViewModels;
+    using Areas.NotificationAssessment.Controllers;
+    using Areas.NotificationAssessment.ViewModels;
     using FakeItEasy;
     using Requests.Admin;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class DecisionControllerTests
@@ -72,7 +73,7 @@
 
             var controller = GetMockAssessmentController(model);
 
-            return controller.Decision(model);
+            return controller.Index(model);
         }
 
         private Task<ViewResult> SetConsentedFromDate(int day, int month, int year, DecisionViewModel model)
@@ -81,7 +82,7 @@
 
             var controller = GetMockAssessmentController(model);
 
-            return controller.Decision(model);
+            return controller.Index(model);
         }
 
         private Task<ViewResult> SetConsentedToDate(int day, int month, int year, DecisionViewModel model)
@@ -90,7 +91,7 @@
 
             var controller = GetMockAssessmentController(model);
 
-            return controller.Decision(model);
+            return controller.Index(model);
         }
 
         private DecisionController GetMockAssessmentController(object viewModel)

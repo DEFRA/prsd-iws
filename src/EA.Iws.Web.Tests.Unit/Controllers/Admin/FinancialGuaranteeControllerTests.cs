@@ -5,15 +5,15 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using Areas.Admin.Controllers;
-    using Areas.Admin.ViewModels;
-    using Areas.Admin.ViewModels.FinancialGuarantee;
+    using Areas.NotificationAssessment.Controllers;
+    using Areas.NotificationAssessment.ViewModels.FinancialGuarantee;
     using Core.Admin;
     using Core.FinancialGuarantee;
     using FakeItEasy;
     using Mappings;
     using Requests.Admin.FinancialGuarantee;
     using TestHelpers;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class FinancialGuaranteeControllerTests

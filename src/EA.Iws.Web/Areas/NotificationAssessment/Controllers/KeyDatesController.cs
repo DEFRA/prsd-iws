@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Admin.Controllers
+﻿namespace EA.Iws.Web.Areas.NotificationAssessment.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -51,15 +51,6 @@
                 await client.SendAsync(User.GetAccessToken(), setDates);
             }
             return View(model);
-        }
-
-        private DateTime? GetDateFromUserInput(int? day, int? month, int? year)
-        {
-            if (day.HasValue && month.HasValue && year.HasValue)
-            {
-                return new DateTime(year.Value, month.Value, day.Value);
-            }
-            return null;
         }
     }
 }

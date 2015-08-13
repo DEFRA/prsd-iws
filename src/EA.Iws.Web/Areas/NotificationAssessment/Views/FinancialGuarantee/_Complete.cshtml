@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Core.Admin
-@model EA.Iws.Web.Areas.Admin.ViewModels.FinancialGuarantee.FinancialGuaranteeDecisionViewModel
+@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.FinancialGuarantee.FinancialGuaranteeDecisionViewModel
 
 @using (Html.BeginForm())
 {
@@ -7,6 +7,8 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.Status)
     @Html.HiddenFor(m => m.IsApplicationCompleted)
+    @Html.HiddenFor(m => m.CompletedDate)
+    @Html.HiddenFor(m => m.ReceivedDate)
 
     <div class="form-group">
         @Html.Gds().LabelFor(m => m.Decision, false)

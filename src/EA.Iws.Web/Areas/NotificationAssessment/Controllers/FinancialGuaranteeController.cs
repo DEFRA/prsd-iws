@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Admin.Controllers
+﻿namespace EA.Iws.Web.Areas.NotificationAssessment.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -59,7 +59,7 @@
                 
                 return (model.IsRequiredEntryComplete) ? 
                     RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" }) 
-                    : RedirectToAction("Dates", "FinancialGuarantee", new { id, area = "Admin" });
+                    : RedirectToAction("Dates", "FinancialGuarantee", new { id });
             }
         }
 

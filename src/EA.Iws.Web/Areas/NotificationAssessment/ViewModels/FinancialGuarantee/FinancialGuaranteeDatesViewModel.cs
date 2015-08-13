@@ -1,11 +1,10 @@
-﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.FinancialGuarantee
+﻿namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.FinancialGuarantee
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using Core.Admin;
-    using Prsd.Core.Helpers;
+    using Web.ViewModels.Shared;
 
     public class FinancialGuaranteeDatesViewModel : IValidatableObject
     {

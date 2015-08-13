@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.FinancialGuarantee
+﻿namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.FinancialGuarantee
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +7,7 @@
     using Core.Admin;
     using Core.FinancialGuarantee;
     using Prsd.Core.Helpers;
+    using Web.ViewModels.Shared;
 
     public class FinancialGuaranteeDecisionViewModel : IValidatableObject
     {
@@ -22,6 +23,10 @@
         public FinancialGuaranteeDecision? Decision { get; set; }
 
         public SelectList PossibleDecisions { get; set; }
+
+        public DateTime? ReceivedDate { get; set; }
+
+        public DateTime? CompletedDate { get; set; }
 
         public DateTime? DecisionRequiredDate { get; set; }
 
@@ -67,8 +72,18 @@
             }
         }
 
+        private bool DecisionMadeDateIsBeforeCompletedDate()
+        {
+            return DecisionMadeDate.IsCompleted && DecisionMadeDate.AsDateTime() < CompletedDate;
+        }
+
         private IEnumerable<ValidationResult> ValidateRefusal()
         {
+            if (DecisionMadeDateIsBeforeCompletedDate())
+            {
+                yield return ValidateDecisionDate();
+            }
+
             if (string.IsNullOrWhiteSpace(ReasonForRefusal))
             {
                 yield return new ValidationResult(RequiredValidationMessage("Reason for refusal"), new[] { "ReasonForRefusal" });
@@ -82,6 +97,11 @@
 
         private IEnumerable<ValidationResult> ValidateApproval()
         {
+            if (DecisionMadeDateIsBeforeCompletedDate())
+            {
+                yield return ValidateDecisionDate();
+            }
+
             if (!DecisionMadeDate.IsCompleted)
             {
                 yield return DecisionMadeDateValidation();
@@ -117,6 +137,11 @@
 
         private IEnumerable<ValidationResult> ValidateRelease()
         {
+            if (DecisionMadeDateIsBeforeCompletedDate())
+            {
+                yield return ValidateDecisionDate();
+            }
+
             if (!DecisionMadeDate.IsCompleted)
             {
                 yield return DecisionMadeDateValidation();
@@ -126,6 +151,13 @@
         private ValidationResult DecisionMadeDateValidation()
         {
             return new ValidationResult(RequiredValidationMessage("Date decision made"), new[] { "DecisionMadeDate.Day" });
+        }
+
+        private ValidationResult ValidateDecisionDate()
+        {
+            return new ValidationResult(string.Format("The decision date cannot be before the completed date of {0}",
+                CompletedDate.Value.ToShortDateString()), 
+                new[] { "DecisionMadeDate.Day" });
         }
     }
 }
