@@ -22,10 +22,6 @@
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Building name or number")]
-        public string Building { get; set; }
-
-        [Required]
         [Display(Name = "Address line 1")]
         public string Address1 { get; set; }
 

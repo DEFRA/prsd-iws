@@ -177,6 +177,7 @@
       <DependentUpon>placeholder.txt</DependentUpon>
     </None>
     <None Include="scripts\Update\Sprint10\20150624-141556-add-table-recovery-info.sql" />
+    <None Include="scripts\Update\Sprint14\20150814-144111-delete-column-building-org-exporter-producer-importer-facility-carrier.sql" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

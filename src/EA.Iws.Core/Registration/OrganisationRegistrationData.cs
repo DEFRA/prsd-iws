@@ -9,7 +9,6 @@
         public string Name { get; set; }
         public string TownOrCity { get; set; }
         public string CountyOrProvince { get; set; }
-        public string Building { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string Postcode { get; set; }

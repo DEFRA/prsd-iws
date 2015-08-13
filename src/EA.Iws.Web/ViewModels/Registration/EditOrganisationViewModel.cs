@@ -21,10 +21,6 @@
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Building name or number")]
-        public string Building { get; set; }
-
-        [Required]
         [Display(Name = "Address line 1")]
         public string Address1 { get; set; }
 
@@ -84,7 +80,6 @@
         {
             OrganisationId = orgData.OrganisationId;
             Name = orgData.Name;
-            Building = orgData.Building;
             Address1 = orgData.Address1;
             Address2 = orgData.Address2;
             TownOrCity = orgData.TownOrCity;
@@ -100,7 +95,6 @@
             {
                 OrganisationId = OrganisationId,
                 Name = Name,
-                Building = Building,
                 Address1 = Address1,
                 Address2 = Address2,
                 TownOrCity = TownOrCity,

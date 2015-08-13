@@ -2,7 +2,6 @@
 {
     using System;
     using System.Data.Entity;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using DataAccess;
     using DataAccess.Identity;
@@ -11,7 +10,6 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Registration;
-    using ClaimTypes = Core.Shared.ClaimTypes;
 
     internal class CreateOrganisationHandler : IRequestHandler<CreateOrganisation, Guid>
     {
@@ -31,8 +29,7 @@
             var orgData = command.Organisation;
             var country = await db.Countries.SingleAsync(c => c.Id == command.Organisation.CountryId);
 
-            var address = new Address(orgData.Building, orgData.Address1,
-                orgData.Address2, orgData.TownOrCity, null, orgData.Postcode, country.Name);
+            var address = new Address(orgData.Address1, orgData.Address2, orgData.TownOrCity, null, orgData.Postcode, country.Name);
             var organisation = new Organisation(command.Organisation.Name, address, BusinessType.FromBusinessType(command.Organisation.BusinessType), command.Organisation.OtherDescription);
 
             db.Organisations.Add(organisation);

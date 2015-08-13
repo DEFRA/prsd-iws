@@ -5,10 +5,9 @@
 
     public class Address
     {
-        public Address(string building, string address1, string address2, string townOrCity, string region,
+        public Address(string address1, string address2, string townOrCity, string region,
             string postalCode, string country)
         {
-            Guard.ArgumentNotNullOrEmpty(() => building, building);
             Guard.ArgumentNotNullOrEmpty(() => townOrCity, townOrCity);
             Guard.ArgumentNotNullOrEmpty(() => country, country);
             Guard.ArgumentNotNullOrEmpty(() => address1, address1);
@@ -20,7 +19,6 @@
                 throw new InvalidOperationException("Postal code cannot be null for UK addresses.");
             }
 
-            Building = building;
             TownOrCity = townOrCity;
             PostalCode = postalCode;
             Address2 = address2;
@@ -31,8 +29,6 @@
         protected Address()
         {
         }
-
-        public string Building { get; private set; }
 
         public string Address1 { get; private set; }
 

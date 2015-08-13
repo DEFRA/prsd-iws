@@ -32,7 +32,6 @@
             {
                 OrganisationId = org.Id,
                 Name = org.Name,
-                Building = org.Address.Building,
                 Address1 = org.Address.Address1,
                 Address2 = org.Address.Address2,
                 TownOrCity = org.Address.TownOrCity,

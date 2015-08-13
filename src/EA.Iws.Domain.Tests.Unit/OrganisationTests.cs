@@ -10,7 +10,7 @@
 
         public OrganisationTests()
         {
-            this.address = new Address(AnyString, AnyString, AnyString, AnyString, AnyString, AnyString, AnyString);
+            this.address = new Address(AnyString, AnyString, AnyString, AnyString, AnyString, AnyString);
         }
 
         [Fact]

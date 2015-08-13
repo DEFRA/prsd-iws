@@ -60,15 +60,13 @@
         {
             var updateProducer = notification.Producers.Single(p => p.Id == anyProducer1.Id);
 
-            var newBuilding = "new building";
+            var newAddress1 = "new address one";
 
-            var newAddress = new Address(newBuilding, "address1", string.Empty, "town", string.Empty,
-                string.Empty,
-                "country");
+            var newAddress = new Address(newAddress1, string.Empty, "town", string.Empty, string.Empty, "country");
 
             updateProducer.Address = newAddress;
 
-            Assert.Equal(newBuilding, notification.Producers.Single(p => p.Id == anyProducer1.Id).Address.Building);
+            Assert.Equal(newAddress1, notification.Producers.Single(p => p.Id == anyProducer1.Id).Address.Address1);
         }
 
         [Fact]

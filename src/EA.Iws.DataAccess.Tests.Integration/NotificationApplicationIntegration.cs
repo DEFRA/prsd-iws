@@ -57,8 +57,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            var address = new Address("building", "address1", string.Empty, "town", string.Empty, string.Empty,
-                "country");
+            var address = new Address("address1", string.Empty, "town", string.Empty, string.Empty, "country");
 
             var business = ObjectFactory.CreateEmptyProducerBusiness();
 
@@ -70,19 +69,17 @@
             await context.SaveChangesAsync();
 
             var updateProducer = notification.Producers.Single(p => p.Id == producer.Id);
-            var newAddress = new Address("new building", "address1", string.Empty, "town", string.Empty,
-                string.Empty,
-                "country");
+            var newAddress = new Address("address1", string.Empty, "town", string.Empty, string.Empty, "country");
 
             updateProducer.Address = newAddress;
 
             await context.SaveChangesAsync();
 
-            var newBuildingName =
-                await context.Database.SqlQuery<string>("SELECT Building FROM [Business].[Producer] WHERE Id = @id",
+            var newAddress1 =
+                await context.Database.SqlQuery<string>("SELECT [Address1] FROM [Business].[Producer] WHERE Id = @id",
                     new SqlParameter("id", producer.Id)).SingleAsync();
 
-            Assert.Equal("new building", newBuildingName);
+            Assert.Equal("address1", newAddress1);
 
             context.DeleteOnCommit(producer);
             context.DeleteOnCommit(notification);
@@ -240,7 +237,7 @@
 
             notification.SetPercentageRecoverable(recoveryPercentage);
             notification.SetMethodOfDisposal(methodOfDisposal);
-            
+
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 

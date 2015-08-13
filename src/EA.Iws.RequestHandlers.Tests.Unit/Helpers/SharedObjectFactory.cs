@@ -9,7 +9,6 @@
         {
             return new AddressData()
             {
-                Building = "Building",
                 Address2 = "Address2",
                 CountryId = countryId,
                 CountryName = "test",

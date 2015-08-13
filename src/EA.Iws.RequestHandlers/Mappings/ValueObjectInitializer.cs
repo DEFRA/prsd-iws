@@ -30,8 +30,7 @@
 
         public static Address CreateAddress(AddressData address, string countryName)
         {
-            return new Address(address.Building,
-                address.StreetOrSuburb,
+            return new Address(address.StreetOrSuburb,
                 address.Address2,
                 address.TownOrCity,
                 address.Region,

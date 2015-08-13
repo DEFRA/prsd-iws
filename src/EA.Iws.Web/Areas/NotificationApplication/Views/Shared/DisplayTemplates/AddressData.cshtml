@@ -1,7 +1,6 @@
 ﻿@model EA.Iws.Core.Shared.AddressData
 
 <address>
-    <span>@Html.DisplayFor(m => m.Building)</span>
     <span>@Html.DisplayFor(m => m.StreetOrSuburb)</span>
     @if (!string.IsNullOrWhiteSpace(Model.Address2))
     {

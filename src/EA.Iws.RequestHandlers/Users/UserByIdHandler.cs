@@ -37,7 +37,6 @@
                     Address = new AddressData()
                     {
                         Address2 = u.Organisation.Address.Address2,
-                        Building = u.Organisation.Address.Building,
                         CountryName = u.Organisation.Address.Country,
                         PostalCode = u.Organisation.Address.PostalCode,
                         StreetOrSuburb = u.Organisation.Address.Address1,

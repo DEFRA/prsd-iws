@@ -22,7 +22,6 @@
 
             return new AddressData
             {
-                Building = source.Building,
                 StreetOrSuburb = source.Address1,
                 Address2 = source.Address2,
                 TownOrCity = source.TownOrCity,

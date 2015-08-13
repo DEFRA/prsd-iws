@@ -23,7 +23,6 @@
         private Address address;
 
         private string name = "My org name";
-        private string building = "building";
         private string address1 = "address line one";
         private string address2 = "address line two";
         private string town = "Mytown";
@@ -42,7 +41,7 @@
             var country = CountryFactory.Create(new Guid("05C21C57-2F39-4A15-A09A-5F38CF139C05"));
             A.CallTo(() => context.Countries).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { country }));
 
-            address = new Address(building, address1, address2, town, null, postcode, country.Name);
+            address = new Address(address1, address2, town, null, postcode, country.Name);
 
             A.CallTo(() => context.Organisations).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { GetOrganisation() }));
 
@@ -77,7 +76,7 @@
         {
             var result = await handler.HandleAsync(message);
             Assert.True(result.Name == name
-                        && result.Building == building && result.Address1 == address1 && result.Address2 == address2
+                        && result.Address1 == address1 && result.Address2 == address2
                         && result.TownOrCity == town && result.Postcode == postcode
                         && result.BusinessType == Core.Shared.BusinessType.Other && result.OtherDescription == otherDescription);
         }

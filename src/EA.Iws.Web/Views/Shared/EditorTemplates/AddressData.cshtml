@@ -1,10 +1,5 @@
 ﻿@model EA.Iws.Core.Shared.AddressData
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Building)">
-    @Html.Gds().LabelFor(m => m.Building)
-    @Html.Gds().ValidationMessageFor(m => m.Building)
-    @Html.Gds().TextBoxFor(m => m.Building)
-</div>
 <div class="form-group @Html.Gds().FormGroupClass(m => m.StreetOrSuburb)">
     @Html.Gds().LabelFor(m => m.StreetOrSuburb)
     @Html.Gds().ValidationMessageFor(m => m.StreetOrSuburb)

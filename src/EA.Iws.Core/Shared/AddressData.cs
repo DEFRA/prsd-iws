@@ -8,11 +8,7 @@
     public class AddressData : IValidatableObject
     {
         private const string DefaultCountryName = "United Kingdom";
-
-        [Required]
-        [Display(Name = "Building name or number")]
-        public string Building { get; set; }
-
+        
         [Required]
         [Display(Name = "Address line 1")]
         public string StreetOrSuburb { get; set; }

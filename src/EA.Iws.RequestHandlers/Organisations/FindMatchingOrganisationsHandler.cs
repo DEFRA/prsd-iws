@@ -79,7 +79,6 @@
                     Id = o.Id, 
                     Address = new AddressData
                     {
-                        Building = o.Address.Building,
                         StreetOrSuburb = o.Address.Address1,
                         Address2 = o.Address.Address2,
                         CountryName = o.Address.Country,

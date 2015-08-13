@@ -16,7 +16,7 @@
 
         public AddressViewModel(Address address)
         {
-            addressLine1 = address.Building + ", " + address.Address1;
+            addressLine1 = address.Address1;
             addressLine2 = address.Address2;
             townOrCity = address.TownOrCity;
             region = address.Region;

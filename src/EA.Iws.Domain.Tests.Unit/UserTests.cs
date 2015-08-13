@@ -107,7 +107,7 @@
         [Fact]
         public void CanLinkToOrganisation()
         {
-            var address = new Address("building", "address1", "address2", "town", "region", "postcode", "country");
+            var address = new Address("address1", "address2", "town", "region", "postcode", "country");
             var org = new Organisation("name", address, AnyType, "123");
 
             anyUser.LinkToOrganisation(org);
@@ -118,12 +118,12 @@
         [Fact]
         public void CannotLinkToSecondOrganisation()
         {
-            var address = new Address("building", "address1", "address2", "town", "region", "postcode", "country");
+            var address = new Address("address1", "address2", "town", "region", "postcode", "country");
             var org = new Organisation("name", address, AnyType, "123");
 
             anyUser.LinkToOrganisation(org);
 
-            var secondAddress = new Address("building2", "address12", "address22", "town2", "region2", "postcode2", "country2");
+            var secondAddress = new Address("address12", "address22", "town2", "region2", "postcode2", "country2");
             var secondOrg = new Organisation("name2", secondAddress, AnyType, "1232");
 
             Action linkToOrganisation = () => anyUser.LinkToOrganisation(secondOrg);

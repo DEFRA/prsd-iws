@@ -21,8 +21,7 @@
 
         public static Address CreateDefaultAddress()
         {
-            return new Address("building", "address1", string.Empty, "town", string.Empty, string.Empty,
-                "country");
+            return new Address("address1", string.Empty, "town", string.Empty, string.Empty, "country");
         }
     }
 }

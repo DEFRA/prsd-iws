@@ -19,20 +19,18 @@
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;
-        private readonly UpdateOrganisationDetails message;
         private readonly UpdateOrganisationDetailsHandler handler;
         private readonly Guid organisationId = new Guid("6414C995-7E20-48B7-AE37-5A8537D98645");
         private readonly Guid userId = new Guid("814C1C27-0DBA-46A9-914F-CD97FA2F3146");
         private readonly Guid countryId = new Guid("05C21C57-2F39-4A15-A09A-5F38CF139C05");
         private readonly Address address;
 
-        private string name = "org name";
-        private string building = "building";
-        private string address1 = "address line one";
-        private string address2 = "address line two";
-        private string town = "town";
-        private string postcode = "GU227UY";
-        private string otherDescription = "other business type";
+        private const string name = "org name";
+        private const string address1 = "address line one";
+        private const string address2 = "address line two";
+        private const string town = "town";
+        private const string postcode = "GU227UY";
+        private const string otherDescription = "other business type";
 
         public UpdateOrganisationDetailsHandlerTests()
         {
@@ -44,14 +42,14 @@
             var country = CountryFactory.Create(countryId);
             A.CallTo(() => context.Countries).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { country }));
 
-            address = new Address(building, address1, address2, town, null, postcode, country.Name);
+            address = new Address(address1, address2, town, null, postcode, country.Name);
 
             A.CallTo(() => context.Organisations).Returns(dbContextHelper.GetAsyncEnabledDbSet(new List<Organisation> { GetOrganisation() }));
 
             A.CallTo(() => context.Users).Returns(dbContextHelper.GetAsyncEnabledDbSet(new[] { GetUser() }));
             A.CallTo(() => userContext.UserId).Returns(userId);
 
-            message = new UpdateOrganisationDetails(GetOrganisationRegistrationData("my"));
+            new UpdateOrganisationDetails(GetOrganisationRegistrationData("my"));
             handler = new UpdateOrganisationDetailsHandler(context, userContext);
         }
 
@@ -81,7 +79,6 @@
             {
                 OrganisationId = organisationId,
                 Name = prefix + name,
-                Building = prefix + building,
                 Address1 = prefix + address1,
                 Address2 = prefix + address2,
                 TownOrCity = prefix + town,
@@ -100,7 +97,6 @@
             {
                 OrganisationId = organisationId,
                 Name = prefix + name,
-                Building = prefix + building,
                 Address1 = prefix + address1,
                 Address2 = prefix + address2,
                 TownOrCity = prefix + town,

@@ -65,7 +65,6 @@
                 Address = new AddressData
                 {
                     Address2 = "address2",
-                    Building = "building",
                     CountryId = new Guid("4345FB05-F7DF-4E16-939C-C09FCA5C7D7B"),
                     CountryName = "United Kingdom",
                     PostalCode = "postcode",
@@ -97,7 +96,6 @@
                 Address = new AddressData
                 {
                     Address2 = "address2",
-                    Building = "building",
                     CountryId = new Guid("4345FB05-F7DF-4E16-939C-C09FCA5C7D7B"),
                     CountryName = "United Kingdom",
                     PostalCode = "postcode",
