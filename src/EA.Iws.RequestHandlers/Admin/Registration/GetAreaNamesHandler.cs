@@ -19,7 +19,7 @@
 
         public async Task<List<string>> HandleAsync(GetAreaNames query)
         {
-            var result = await context.LocalAreas.ToArrayAsync();
+            var result = await context.LocalAreas.OrderBy(x => x.Name).ToArrayAsync();
             return result.Select(c => c.Name).ToList();
         }
     }

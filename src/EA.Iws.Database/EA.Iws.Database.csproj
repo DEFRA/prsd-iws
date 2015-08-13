@@ -93,6 +93,7 @@
     <Content Include="scripts\Update\Sprint13\20150810-120000-delete-data-for-food-for-wood-chemical-composition.sql" />
     <Content Include="scripts\Update\Sprint13\20150811-093245-add-local-area-table.sql" />
     <Content Include="scripts\Update\Sprint13\20150811-093300-add-indexes-to-some-foreign-keys.sql" />
+    <Content Include="scripts\Update\Sprint14\20150813-120000-update-local-area.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
