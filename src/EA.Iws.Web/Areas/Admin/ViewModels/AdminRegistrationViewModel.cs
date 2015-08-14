@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Prsd.Core.Validation;
+    using Core.Notification;
 
     public class AdminRegistrationViewModel : IValidatableObject
     {
@@ -20,15 +21,12 @@
         public string Surname { get; set; }
 
         [Required]
-        [StringLength(80)]
-        [DataType(DataType.Text)]
         [Display(Name = "Competent authority")]
-        public string CompetentAuthority { get; set; }
+        public CompetentAuthority CompetentAuthority { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
         [Display(Name = "Local area covered")]
-        public string LocalArea { get; set; }
+        public Guid LocalAreaId { get; set; }
 
         [Required]
         [StringLength(80)]
@@ -59,7 +57,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (CompetentAuthority.Equals("EA") && !Email.EndsWith("@environment-agency.gov.uk"))
+            if (CompetentAuthority == CompetentAuthority.England && !Email.EndsWith("@environment-agency.gov.uk"))
             {
                 yield return new ValidationResult("Email address must end in @environment-agency.gov.uk when applying to the EA", new[] { "Email" });                
             }

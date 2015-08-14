@@ -21,7 +21,7 @@
         public GetNewInternalUsersHandlerTests()
         {
             this.context = new TestIwsContext();
-            context.Users.AddRange(new InternalUserCollection().Users);
+            context.InternalUsers.AddRange(new InternalUserCollection().Users);
 
             this.userContext = new TestUserContext(Guid.Empty);
 
@@ -39,7 +39,7 @@
         [Fact]
         public async Task GetAsNonApprovedAdminUser_Throws()
         {
-            userContext.ReturnsId = InternalUserCollection.ThisUserAdminPendingId;
+            userContext.ReturnsId = InternalUserCollection.ThisUserAdminPendingUserId;
 
             await Assert.ThrowsAsync<SecurityException>(() => handler.HandleAsync(message));
         }
@@ -47,7 +47,7 @@
         [Fact]
         public async Task GetAsApprovedAdmin_ReturnsResults()
         {
-            userContext.ReturnsId = InternalUserCollection.ThisUserAdminApprovedId;
+            userContext.ReturnsId = InternalUserCollection.ThisUserAdminApprovedUserId;
 
             var result = await handler.HandleAsync(message);
 
@@ -57,7 +57,7 @@
         [Fact]
         public async Task Get_ReturnsOnlyPendingUsers()
         {
-            userContext.ReturnsId = InternalUserCollection.ThisUserAdminApprovedId;
+            userContext.ReturnsId = InternalUserCollection.ThisUserAdminApprovedUserId;
 
             var result = await handler.HandleAsync(message);
 
@@ -67,12 +67,12 @@
         [Fact]
         public async Task Get_ReturnsExpectedUsers()
         {
-            userContext.ReturnsId = InternalUserCollection.ThisUserAdminApprovedId;
+            userContext.ReturnsId = InternalUserCollection.ThisUserAdminApprovedUserId;
 
             var result = await handler.HandleAsync(message);
 
-            Assert.Contains(InternalUserCollection.AdminPendingId.ToString(), result.Select(u => u.Id));
-            Assert.DoesNotContain(InternalUserCollection.ThisUserAdminApprovedId.ToString(), result.Select(u => u.Id));
+            Assert.Contains(InternalUserCollection.AdminPendingUserId.ToString(), result.Select(u => u.UserId));
+            Assert.DoesNotContain(InternalUserCollection.ThisUserAdminApprovedUserId.ToString(), result.Select(u => u.UserId));
         }
     }
 }

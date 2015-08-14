@@ -1,8 +1,13 @@
 ﻿namespace EA.Iws.Core.Admin
 {
-    public class InternalUser
+    using System;
+    using Notification;
+
+    public class InternalUserData
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
+
+        public string UserId { get; set; }
 
         public string Email { get; set; }
 
@@ -16,7 +21,7 @@
 
         public string JobTitle { get; set; }
 
-        public string CompetentAuthority { get; set; }
+        public CompetentAuthority CompetentAuthority { get; set; }
 
         public string FullName
         {

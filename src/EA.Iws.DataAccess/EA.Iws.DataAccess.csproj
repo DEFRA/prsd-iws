@@ -84,6 +84,7 @@
     <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />
+    <Compile Include="Mappings\InternalUserMapping.cs" />
     <Compile Include="Mappings\LocalAreaMapping.cs" />
     <Compile Include="Mappings\NotificationAssessmentMapping.cs" />
     <Compile Include="Mappings\NotificationDatesMapping.cs" />

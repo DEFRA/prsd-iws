@@ -13,9 +13,6 @@
             Property(x => x.Surname).IsRequired().HasMaxLength(256);
             Property(x => x.Email).IsRequired().HasMaxLength(256);
             Property(x => x.PhoneNumber).IsOptional();
-            Property(x => x.LocalArea).IsOptional().HasMaxLength(256);
-            Property(x => x.JobTitle).IsOptional().HasMaxLength(256);
-            Property(x => x.CompetentAuthority).IsOptional().HasMaxLength(256);
         }
     }
 }

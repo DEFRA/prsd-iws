@@ -28,8 +28,8 @@
 
         public async Task<IList<BasicSearchResult>> HandleAsync(GetBasicSearchResults query)
         {
-            var userCompetentAuthority = await context.Users.Where(u => u.Id == userContext.UserId.ToString()).Select(u => u.CompetentAuthority).SingleAsync();
-            var compAuthority = UKCompetentAuthority.FromShortName(userCompetentAuthority);
+            var userCompetentAuthority = await context.InternalUsers.Where(u => u.UserId == userContext.UserId.ToString()).Select(u => u.CompetentAuthority.Value).SingleAsync();
+            var compAuthority = Enumeration.FromValue<UKCompetentAuthority>(userCompetentAuthority);
 
             return (await context.NotificationApplications
                 .Where(p => (p.NotificationNumber.Contains(query.SearchTerm) ||

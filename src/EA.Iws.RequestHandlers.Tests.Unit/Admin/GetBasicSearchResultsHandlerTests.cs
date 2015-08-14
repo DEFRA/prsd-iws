@@ -15,6 +15,7 @@
     using Requests.Admin;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthority = Core.Notification.CompetentAuthority;
 
     public class GetBasicSearchResultsHandlerTests
     {
@@ -36,7 +37,7 @@
 
             context.NotificationApplications.AddRange(applications);
             context.NotificationAssessments.AddRange(assessments);
-            context.Users.AddRange(GetUsers());
+            context.InternalUsers.AddRange(GetUsers());
             A.CallTo(() => userContext.UserId).Returns(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"));
 
             handler = new GetBasicSearchResultsHandler(context, userContext);
@@ -55,14 +56,16 @@
             };
         }
 
-        private IEnumerable<User> GetUsers()
+        private IEnumerable<InternalUser> GetUsers()
         {
             var user = UserFactory.Create(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"), "Name", "Surname", "123456", "test@test.com");
-            ObjectInstantiator<User>.SetProperty(u => u.CompetentAuthority, "EA", user);
+
+            var internalUser = InternalUserFactory.Create(new Guid("9C67BFF3-6991-4188-9D8B-C989ADCE6E32"),  user);
+            ObjectInstantiator<InternalUser>.SetProperty(u => u.CompetentAuthority, UKCompetentAuthority.England, internalUser);
 
             var users = new[]
             {
-                user
+                internalUser
             };
             return users;
         }

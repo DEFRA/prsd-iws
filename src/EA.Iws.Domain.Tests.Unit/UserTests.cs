@@ -10,12 +10,6 @@
         private static readonly BusinessType AnyType = BusinessType.LimitedCompany;
         private readonly User anyUser = UserFactory.Create(new Guid("FB282058-6C3C-4B4B-94B4-BDDA2889E89B"), "first", "last", "123", "email@address.com");
 
-        private static readonly Action<User, bool> SetIsAdminForUser =
-            (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsInternal, isAdmin, user);
-
-        private static readonly Action<User, InternalUserStatus> SetInternalUserStatus =
-            (user, status) => ObjectInstantiator<User>.SetProperty(u => u.InternalUserStatus, status, user);
-
         [Fact]
         public void CanLinkToOrganisation()
         {
@@ -49,44 +43,6 @@
             Action linkToOrganisation = () => anyUser.LinkToOrganisation(null);
 
             Assert.Throws<ArgumentNullException>("organisation", linkToOrganisation);
-        }
-
-        [Fact]
-        public void Approve_CannotApproveExternalUser()
-        {
-            SetIsAdminForUser(anyUser, false);
-
-            Assert.Throws<InvalidOperationException>(() => anyUser.Approve());
-        }
-
-        [Fact]
-        public void Approve_CannotRejectExternalUser()
-        {
-            SetIsAdminForUser(anyUser, false);
-
-            Assert.Throws<InvalidOperationException>(() => anyUser.Reject());
-        }
-
-        [Fact]
-        public void Approve_CanApproveInternalUser()
-        {
-            SetIsAdminForUser(anyUser, true);
-            SetInternalUserStatus(anyUser, InternalUserStatus.Pending);
-
-            anyUser.Approve();
-
-            Assert.Equal(InternalUserStatus.Approved, anyUser.InternalUserStatus);
-        }
-
-        [Fact]
-        public void Reject_CanRejectInternalUser()
-        {
-            SetIsAdminForUser(anyUser, true);
-            SetInternalUserStatus(anyUser, InternalUserStatus.Pending);
-
-            anyUser.Reject();
-
-            Assert.Equal(InternalUserStatus.Rejected, anyUser.InternalUserStatus);
         }
     }
 }

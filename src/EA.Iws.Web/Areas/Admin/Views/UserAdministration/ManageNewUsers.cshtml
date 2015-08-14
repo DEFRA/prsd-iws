@@ -29,17 +29,17 @@
         @for (int i = 0; i < Model.Users.Count; i++)
         {
             <tr>
-                <td>@Html.DisplayFor(m => m.Users[i].User.FullName)</td>
-                <td>@Html.DisplayFor(m => m.Users[i].User.Email)</td>
+                <td>@Html.DisplayFor(m => m.Users[i].UserData.FullName)</td>
+                <td>@Html.DisplayFor(m => m.Users[i].UserData.Email)</td>
                 <td>
-                    @Html.HiddenFor(m => m.Users[i].User.Id)
-                    @Html.HiddenFor(m => m.Users[i].User.Email)
-                    @Html.HiddenFor(m => m.Users[i].User.FirstName)
-                    @Html.HiddenFor(m => m.Users[i].User.Surname)
-                    @Html.HiddenFor(m => m.Users[i].User.CompetentAuthority)
-                    @Html.HiddenFor(m => m.Users[i].User.JobTitle)
-                    @Html.HiddenFor(m => m.Users[i].User.PhoneNumber)
-                    @Html.HiddenFor(m => m.Users[i].User.Status)
+                    @Html.HiddenFor(m => m.Users[i].UserData.Id)
+                    @Html.HiddenFor(m => m.Users[i].UserData.Email)
+                    @Html.HiddenFor(m => m.Users[i].UserData.FirstName)
+                    @Html.HiddenFor(m => m.Users[i].UserData.Surname)
+                    @Html.HiddenFor(m => m.Users[i].UserData.CompetentAuthority)
+                    @Html.HiddenFor(m => m.Users[i].UserData.JobTitle)
+                    @Html.HiddenFor(m => m.Users[i].UserData.PhoneNumber)
+                    @Html.HiddenFor(m => m.Users[i].UserData.Status)
                     @Html.Gds().DropDownListFor(m => m.Users[i].Action, Model.ApprovalActionsList, optionLabel: "Pending", htmlAttributes: new { @class = "action-dropdown" })
                 </td>
                 <td style="text-align: center;">

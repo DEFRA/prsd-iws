@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.Admin
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -7,6 +8,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Areas.Admin.ViewModels;
+    using Core.Notification;
     using FakeItEasy;
     using Prsd.Core.Web.OAuth;
     using Xunit;
@@ -82,9 +84,9 @@
             const string ValidPassword = "P@ssword1";
             const string ValidName = "ValidName";
             const string ValidSurname = "ValidSurname";
-            const string ValidCA = "EA";
+            const CompetentAuthority ValidCA = CompetentAuthority.England;
             const string ValidJobTitle = "Title";
-            const string ValidRegion = "North";
+            Guid validLocalAreaId = new Guid("BA16D091-6C2A-410A-84CE-8689D2CE2EFF");
 
             var validRegisterViewModel = new AdminRegistrationViewModel
             {
@@ -95,7 +97,7 @@
                 Surname = ValidSurname,
                 CompetentAuthority = ValidCA,
                 JobTitle = ValidJobTitle,
-                LocalArea = ValidRegion
+                LocalAreaId = validLocalAreaId
             };
 
             return validRegisterViewModel;

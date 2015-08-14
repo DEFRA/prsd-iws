@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Api.Client.Entities
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
+    using Core.Notification;
 
     public class AdminRegistrationData
     {
@@ -18,20 +20,6 @@
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        [DataType(DataType.Text)]
-        public string JobTitle { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        public string LocalArea { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        [DataType(DataType.Text)]
-        public string CompetentAuthority { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]

@@ -1,15 +1,16 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Net.Mail;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
+    using Core.Notification;
     using Infrastructure;
     using Microsoft.Owin.Security;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Prsd.Core.Web.OAuth;
@@ -45,21 +46,18 @@
 
         private async Task<AdminRegistrationViewModel> GetModelData(AdminRegistrationViewModel model)
         {
-            var competentAuthorities = new List<SelectListItem>
-            {
-                new SelectListItem{Text = "EA", Value = "EA"},
-                new SelectListItem{Text = "SEPA", Value = "SEPA"},
-                new SelectListItem{Text = "NIEA", Value = "NIEA"},
-                new SelectListItem{Text = "NRW", Value = "NRW"},
-            };
+            var competentAuthorities = EnumHelper.GetValues(typeof(CompetentAuthority))
+                .Select(p => new SelectListItem() { Text = p.Value, Value = p.Key.ToString() });
 
+            model.CompetentAuthorities = new SelectList(competentAuthorities, "Value", "Text");
+            
             using (var client = apiClient())
             {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetAreaNames());
-                model.CompetentAuthorities = new SelectList(competentAuthorities, "Text", "Value");
-                model.Areas = new SelectList(result.Select(area => new SelectListItem {Text = area, Value = area}), "Text", "Value");
-                return model;
+                var result = await client.SendAsync(User.GetAccessToken(), new GetLocalAreas());
+                model.Areas = new SelectList(result.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }), "Value", "Text");
             }
+            
+            return model;
         }
 
         [HttpPost]
@@ -80,10 +78,7 @@
                     FirstName = model.Name,
                     Surname = model.Surname,
                     Password = model.Password,
-                    ConfirmPassword = model.ConfirmPassword,
-                    LocalArea = model.LocalArea,
-                    CompetentAuthority = model.CompetentAuthority,
-                    JobTitle = model.JobTitle
+                    ConfirmPassword = model.ConfirmPassword
                 };
 
                 try
@@ -97,6 +92,10 @@
                     var verificationEmail = emailService.GenerateEmailVerificationMessage(Url.Action("AdminVerifyEmail", "Registration", null,
                         Request.Url.Scheme), verificationCode, userId, model.Email);
                     await emailService.SendAsync(verificationEmail);
+
+                    await
+                        client.SendAsync(signInResponse.AccessToken,
+                            new CreateInternalUser(userId, model.JobTitle, model.LocalAreaId, model.CompetentAuthority));
 
                     return RedirectToAction("AdminEmailVerificationRequired");
                 }

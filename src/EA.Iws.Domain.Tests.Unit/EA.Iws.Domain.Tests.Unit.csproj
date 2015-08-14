@@ -70,6 +70,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeReleaseTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
+    <Compile Include="InternalUserTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
     <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationTests.cs" />

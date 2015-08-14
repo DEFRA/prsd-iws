@@ -50,6 +50,7 @@
     <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\EntryOrExitPointFactory.cs" />
     <Compile Include="Helpers\FinancialGuaranteeFactory.cs" />
+    <Compile Include="Helpers\InternalUserFactory.cs" />
     <Compile Include="Helpers\NotificationApplicationFactory.cs" />
     <Compile Include="Helpers\ObjectFactory.cs" />
     <Compile Include="Helpers\ObjectInstantiator.cs" />

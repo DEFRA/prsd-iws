@@ -1,10 +1,7 @@
 ﻿namespace EA.Iws.Domain
 {
     using System;
-    using Core.Admin;
-    using Events;
     using Prsd.Core;
-    using Prsd.Core.Domain;
 
     public class User
     {
@@ -22,14 +19,6 @@
 
         public string Email { get; private set; }
 
-        public string JobTitle { get; private set; }
-
-        public string CompetentAuthority { get; private set; }
-
-        public string LocalArea { get; private set; }
-
-        public bool IsInternal { get; private set; }
-
         public bool PhoneNumberConfirmed { get; private set; }
 
         public bool EmailConfirmed { get; private set; }
@@ -42,8 +31,6 @@
 
         public string UserName { get; private set; }
 
-        public InternalUserStatus? InternalUserStatus { get; private set; }
-
         public virtual Organisation Organisation { get; private set; }
 
         public void LinkToOrganisation(Organisation organisation)
@@ -53,7 +40,9 @@
             if (Organisation != null)
             {
                 throw new InvalidOperationException(
-                    string.Format("User {0} is already linked to an organisation and may not be linked to another. This user is linked to organisation: {1}", Id, Organisation.Id));
+                    string.Format(
+                        "User {0} is already linked to an organisation and may not be linked to another. This user is linked to organisation: {1}",
+                        Id, Organisation.Id));
             }
 
             Organisation = organisation;
@@ -63,30 +52,6 @@
         {
             Guard.ArgumentNotNull(() => organisation, organisation);
             Organisation = organisation;
-        }
-
-        public void Approve()
-        {
-            if (!IsInternal)
-            {
-                throw new InvalidOperationException(string.Format("Cannot set an internal user status of approved for an external user. Id: {0}", Id));
-            }
-
-            InternalUserStatus = Core.Admin.InternalUserStatus.Approved;
-
-            DomainEvents.Raise(new RegistrationApprovedEvent(Email));
-        }
-
-        public void Reject()
-        {
-            if (!IsInternal)
-            {
-                throw new InvalidOperationException(string.Format("Cannot set an internal user status of rejected for an external user. Id: {0}", Id));
-            }
-
-            InternalUserStatus = Core.Admin.InternalUserStatus.Rejected;
-
-            DomainEvents.Raise(new RegistrationRejectedEvent(Email));
         }
     }
 }

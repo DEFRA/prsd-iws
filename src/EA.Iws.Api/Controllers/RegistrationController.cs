@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Client.Entities;
-    using Core.Admin;
     using DataAccess.Identity;
     using Identity;
     using Microsoft.AspNet.Identity;
@@ -65,12 +64,7 @@
                 UserName = model.Email,
                 Email = model.Email,
                 FirstName = model.FirstName,
-                Surname = model.Surname,
-                JobTitle = model.JobTitle,
-                LocalArea = model.LocalArea,
-                CompetentAuthority = model.CompetentAuthority,
-                IsInternal = true,
-                InternalUserStatus = InternalUserStatus.Pending
+                Surname = model.Surname
             };
 
             var result = await userManager.CreateAsync(user, model.Password);

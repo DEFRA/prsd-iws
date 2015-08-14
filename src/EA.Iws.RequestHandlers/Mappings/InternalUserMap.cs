@@ -1,39 +1,29 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
     using Core.Admin;
     using Domain;
     using Prsd.Core.Mapper;
 
-    internal class InternalUserMap : IMap<User, InternalUser>
+    internal class InternalUserMap : IMap<InternalUser, InternalUserData>
     {
-        public InternalUser Map(User source)
+        public InternalUserData Map(InternalUser source)
         {
             if (source == null)
             {
                 return null;
             }
 
-            if (!source.IsInternal)
-            {
-                throw new InvalidOperationException("Cannot map an external user to an internal user! Id: " + source.Id);
-            }
-
-            if (!source.InternalUserStatus.HasValue)
-            {
-                throw new InvalidOperationException("Cannot map a user with no status to an internal user! Id: " + source.Id);
-            }
-
-            return new InternalUser
+            return new InternalUserData
             {
                 Id = source.Id,
-                Email = source.Email,
-                CompetentAuthority = source.CompetentAuthority,
-                FirstName = source.FirstName,
-                Surname = source.Surname,
-                Status = source.InternalUserStatus.Value,
+                UserId = source.UserId,
+                Email = source.User.Email,
+                CompetentAuthority = source.CompetentAuthority.AsCompetentAuthority(),
+                FirstName = source.User.FirstName,
+                Surname = source.User.Surname,
+                Status = source.Status,
                 JobTitle = source.JobTitle,
-                PhoneNumber = source.PhoneNumber
+                PhoneNumber = source.User.PhoneNumber
             };
         }
     }

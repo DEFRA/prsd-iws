@@ -4,7 +4,7 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration
 
     public class UserApprovalViewModel
     {
-        public InternalUser User { get; set; }
+        public InternalUserData UserData { get; set; }
 
         public ApprovalAction? Action { get; set; }
 
@@ -12,9 +12,9 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration
         {
         }
 
-        public UserApprovalViewModel(InternalUser user)
+        public UserApprovalViewModel(InternalUserData userData)
         {
-            User = user;
+            UserData = userData;
         }
     }
 }

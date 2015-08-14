@@ -4,7 +4,7 @@
     using Core.Admin;
     using Prsd.Core.Mediator;
 
-    public class GetNewInternalUsers : IRequest<IList<InternalUser>> 
+    public class GetNewInternalUsers : IRequest<IList<InternalUserData>> 
     {
     }
 }

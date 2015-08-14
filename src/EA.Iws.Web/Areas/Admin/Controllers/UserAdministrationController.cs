@@ -49,7 +49,7 @@
                 var message = new SetUserApprovals(
                     model.Users
                         .Where(u => u.Action.HasValue)
-                        .Select(u => new KeyValuePair<string, ApprovalAction>(u.User.Id, u.Action.Value))
+                        .Select(u => new KeyValuePair<Guid, ApprovalAction>(u.UserData.Id, u.Action.Value))
                         .ToList());
 
                 await client.SendAsync(User.GetAccessToken(), message);

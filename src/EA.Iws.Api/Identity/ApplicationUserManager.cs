@@ -2,9 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using DataAccess;
     using DataAccess.Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -15,13 +17,16 @@
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         private readonly ConfigurationService configurationService;
+        private readonly Func<IwsContext> iwsContext;
 
         public ApplicationUserManager(IUserStore<ApplicationUser> store,
             IDataProtectionProvider dataProtectionProvider,
-            ConfigurationService configurationService)
+            ConfigurationService configurationService,
+            Func<IwsContext> iwsContext)
             : base(store)
         {
             this.configurationService = configurationService;
+            this.iwsContext = iwsContext;
 
             UserValidator = new UserValidator<ApplicationUser>(this)
             {
@@ -112,28 +117,26 @@
                 return claims;
             }
 
-            if (user.InternalUserStatus.HasValue)
-            {
-                claims.Add(new Claim(ClaimTypes.InternalUserStatus, user.InternalUserStatus.Value.ToString()));
-            }
-
             if (user.OrganisationId.HasValue)
             {
                 claims.Add(new Claim(ClaimTypes.OrganisationId, user.OrganisationId.Value.ToString()));
             }
 
             claims.Add(new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", user.FirstName, user.Surname)));
+            claims.Add(new Claim(System.Security.Claims.ClaimTypes.Email, user.Email));
 
-            if (user.IsInternal)
+            var context = iwsContext();
+            var internalUser = await context.InternalUsers.SingleOrDefaultAsync(p => p.UserId == userId);
+
+            if (internalUser != null)
             {
+                claims.Add(new Claim(ClaimTypes.InternalUserStatus, internalUser.Status.ToString()));
                 claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "internal"));
             }
             else
             {
                 claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "external"));
             }
-
-            claims.Add(new Claim(System.Security.Claims.ClaimTypes.Email, user.Email));
 
             return claims;
         }

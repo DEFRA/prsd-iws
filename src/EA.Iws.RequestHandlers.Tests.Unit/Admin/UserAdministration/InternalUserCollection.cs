@@ -10,94 +10,82 @@
     internal class InternalUserCollection
     {
         private static readonly string AnyString = "test";
-        public static readonly Guid AdminPendingId = new Guid("89EBDF61-0B9B-459A-AE14-368A5B9928EB");
-        public static readonly Guid AdminApprovedId = new Guid("AFBB7102-DD59-4BDA-9C59-93AFA768AE50");
-        public static readonly Guid AdminRejectedId = new Guid("25E2A9F6-14C0-462E-A0CC-E58665819B50");
-        public static readonly Guid ThisUserAdminPendingId = new Guid("29BA2B1E-65CF-4AC6-968C-B2E72385B8E5");
-        public static readonly Guid ThisUserAdminApprovedId = new Guid("E8DA4222-A18B-4E73-A750-BAEC509174AC");
+        public static readonly Guid AdminPendingUserId = new Guid("89EBDF61-0B9B-459A-AE14-368A5B9928EB");
+        public static readonly Guid AdminApprovedUserId = new Guid("AFBB7102-DD59-4BDA-9C59-93AFA768AE50");
+        public static readonly Guid AdminRejectedUserId = new Guid("25E2A9F6-14C0-462E-A0CC-E58665819B50");
+        public static readonly Guid ThisUserAdminPendingUserId = new Guid("29BA2B1E-65CF-4AC6-968C-B2E72385B8E5");
+        public static readonly Guid ThisUserAdminApprovedUserId = new Guid("E8DA4222-A18B-4E73-A750-BAEC509174AC");
         public static readonly Guid NonAdminUserId = new Guid("4573456B-605B-4629-9FA5-3CD4AA95C46B");
 
-        private static readonly Action<User, bool> SetIsAdminForUser =
-            (user, isAdmin) => ObjectInstantiator<User>.SetProperty(u => u.IsInternal, isAdmin, user);
-        private static readonly Action<User, InternalUserStatus> SetInternalUserStatus =
-            (user, status) => ObjectInstantiator<User>.SetProperty(u => u.InternalUserStatus, status, user);
+        public static readonly Guid AdminPendingId = new Guid("2842B4DF-4751-4364-888F-7B40E8869D75");
+        public static readonly Guid AdminApprovedId = new Guid("462662F0-9EDA-41FC-A0D4-AD986CBF7259");
+        public static readonly Guid AdminRejectedId = new Guid("DB78653C-DC68-4A21-97BB-C8A1D1634FC5");
+        public static readonly Guid ThisUserAdminPendingId = new Guid("D7A53F47-F4A6-445B-A6C2-F27DD721261D");
+        public static readonly Guid ThisUserAdminApprovedId = new Guid("74F4850C-911F-41DF-9517-DDD3E0E4AB75");
+
+        private static readonly Action<InternalUser, InternalUserStatus> SetInternalUserStatus =
+            (user, status) => ObjectInstantiator<InternalUser>.SetProperty(u => u.Status, status, user);
+
         private static readonly Action<User, bool> SetEmailConfirmed =
             (user, b) => ObjectInstantiator<User>.SetProperty(u => u.EmailConfirmed, b, user);
 
-        private readonly Func<Guid, IList<User>, int> getUserIndexById =
-            (guid, users) => { return users.IndexOf(users.Single(u => u.Id == guid.ToString())); };
+        private readonly Func<Guid, IList<InternalUser>, int> getUserIndexById =
+            (guid, users) => { return users.IndexOf(users.Single(u => u.UserId == guid.ToString())); };
 
-        public IList<User> Users;
+        public IList<InternalUser> Users;
 
         public int AdminPendingIndex
         {
-            get { return getUserIndexById(AdminPendingId, Users); }
+            get { return getUserIndexById(AdminPendingUserId, Users); }
         }
 
         public int AdminApprovedIndex
         {
-            get { return getUserIndexById(AdminApprovedId, Users); }
+            get { return getUserIndexById(AdminApprovedUserId, Users); }
         }
 
         public int AdminRejectedIndex
         {
-            get { return getUserIndexById(AdminRejectedId, Users); }
+            get { return getUserIndexById(AdminRejectedUserId, Users); }
         }
 
         public int ThisUserAdminPendingIndex
         {
-            get { return getUserIndexById(ThisUserAdminPendingId, Users); }
+            get { return getUserIndexById(ThisUserAdminPendingUserId, Users); }
         }
 
         public int ThisUserAdminApprovedIndex
         {
-            get { return getUserIndexById(ThisUserAdminApprovedId, Users); }
-        }
-
-        public int NonAdminUserIndex
-        {
-            get { return getUserIndexById(NonAdminUserId, Users); }
+            get { return getUserIndexById(ThisUserAdminApprovedUserId, Users); }
         }
 
         public InternalUserCollection()
         {
             Users = new[]
             {
-                UserFactory.Create(AdminPendingId, AnyString, AnyString, AnyString,
-                    AnyString),
-                UserFactory.Create(AdminApprovedId, AnyString, AnyString, AnyString,
-                    AnyString),
-                UserFactory.Create(AdminRejectedId, AnyString, AnyString, AnyString,
-                    AnyString),  
-                UserFactory.Create(ThisUserAdminPendingId, AnyString, AnyString, AnyString,
-                    AnyString),
-                UserFactory.Create(ThisUserAdminApprovedId, AnyString, AnyString, AnyString,
-                    AnyString),
-                UserFactory.Create(NonAdminUserId, AnyString, AnyString, AnyString,
-                    AnyString)
+                InternalUserFactory.Create(AdminPendingId,
+                    UserFactory.Create(AdminPendingUserId, AnyString, AnyString, AnyString,
+                        AnyString)),
+                InternalUserFactory.Create(AdminApprovedId, UserFactory.Create(AdminApprovedUserId, AnyString, AnyString, AnyString,
+                    AnyString)),
+                InternalUserFactory.Create(AdminRejectedId, UserFactory.Create(AdminRejectedUserId, AnyString, AnyString, AnyString,
+                    AnyString)),
+                InternalUserFactory.Create(ThisUserAdminPendingId, UserFactory.Create(ThisUserAdminPendingUserId, AnyString, AnyString, AnyString,
+                    AnyString)),
+                InternalUserFactory.Create(ThisUserAdminApprovedId, UserFactory.Create(ThisUserAdminApprovedUserId, AnyString, AnyString, AnyString,
+                    AnyString))
             };
 
             foreach (var user in Users)
             {
-                SetEmailConfirmed(user, true);
+                SetEmailConfirmed(user.User, true);
             }
 
-            SetIsAdminForUser(Users[AdminPendingIndex], true);
             SetInternalUserStatus(Users[AdminPendingIndex], InternalUserStatus.Pending);
-
-            SetIsAdminForUser(Users[AdminApprovedIndex], true);
             SetInternalUserStatus(Users[AdminApprovedIndex], InternalUserStatus.Approved);
-
-            SetIsAdminForUser(Users[AdminRejectedIndex], true);
             SetInternalUserStatus(Users[AdminRejectedIndex], InternalUserStatus.Rejected);
-
-            SetIsAdminForUser(Users[ThisUserAdminPendingIndex], true);
             SetInternalUserStatus(Users[ThisUserAdminPendingIndex], InternalUserStatus.Pending);
-
-            SetIsAdminForUser(Users[ThisUserAdminApprovedIndex], true);
             SetInternalUserStatus(Users[ThisUserAdminApprovedIndex], InternalUserStatus.Approved);
-
-            SetIsAdminForUser(Users[NonAdminUserIndex], false);
         }
     }
 }

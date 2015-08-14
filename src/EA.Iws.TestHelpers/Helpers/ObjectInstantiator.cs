@@ -3,7 +3,6 @@
     using System;
     using System.Linq.Expressions;
     using System.Reflection;
-    using System.Runtime.Serialization;
 
     public class ObjectInstantiator<T>
     {
@@ -23,7 +22,7 @@
             }
             else
             {
-                return () => (T)FormatterServices.GetUninitializedObject(type);
+                return () => (T)Activator.CreateInstance(type, true);
             }
         }
 

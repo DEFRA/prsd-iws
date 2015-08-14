@@ -73,5 +73,22 @@
             }
             throw new InvalidOperationException(string.Format("Unknown competent authority short name {0}", name));
         }
+
+        public static UKCompetentAuthority FromCompetentAuthority(Core.Notification.CompetentAuthority value)
+        {
+            switch (value)
+            {
+                case Core.Notification.CompetentAuthority.England:
+                    return England;
+                case Core.Notification.CompetentAuthority.NorthernIreland:
+                    return NorthernIreland;
+                case Core.Notification.CompetentAuthority.Scotland:
+                    return Scotland;
+                case Core.Notification.CompetentAuthority.Wales:
+                    return Wales;
+                default:
+                    throw new InvalidOperationException(string.Format("Unknown competent authority {0}", value));
+            }
+        }
     }
 }

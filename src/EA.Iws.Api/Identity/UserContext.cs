@@ -2,16 +2,23 @@
 {
     using System;
     using System.Security.Claims;
-    using System.Web;
+    using Microsoft.Owin.Security;
     using Prsd.Core.Domain;
 
     public class UserContext : IUserContext
     {
+        private readonly IAuthenticationManager authentication;
+
+        public UserContext(IAuthenticationManager authentication)
+        {
+            this.authentication = authentication;
+        }
+
         public Guid UserId
         {
             get
             {
-                var claimsPrincipal = HttpContext.Current.User as ClaimsPrincipal;
+                var claimsPrincipal = authentication.User;
 
                 if (claimsPrincipal != null)
                 {
@@ -35,7 +42,7 @@
 
         public ClaimsPrincipal Principal
         {
-            get { return HttpContext.Current.User as ClaimsPrincipal; }
+            get { return authentication.User; }
         }
     }
 }

@@ -47,9 +47,10 @@
     <Compile Include="Admin\ApprovalAction.cs" />
     <Compile Include="Admin\FinancialGuaranteeData.cs" />
     <Compile Include="Admin\FinancialGuaranteeDecision.cs" />
-    <Compile Include="Admin\InternalUser.cs" />
+    <Compile Include="Admin\InternalUserData.cs" />
     <Compile Include="Admin\InternalUserStatus.cs" />
     <Compile Include="Admin\DecisionType.cs" />
+    <Compile Include="Admin\LocalAreaData.cs" />
     <Compile Include="Carriers\CarrierData.cs" />
     <Compile Include="CustomsOffice\CustomsOfficeData.cs" />
     <Compile Include="CustomsOffice\CustomsOffices.cs" />

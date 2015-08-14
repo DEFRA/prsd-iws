@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.UserAdministration
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Security;
     using System.Threading.Tasks;
     using Core.Admin;
     using DataAccess;
@@ -23,19 +25,18 @@
 
         public async Task<bool> HandleAsync(SetUserApprovals message)
         {
-            var requestUser = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
+            var requestUser = await context.InternalUsers.SingleOrDefaultAsync(u => u.UserId == userContext.UserId.ToString());
 
-            if (!requestUser.IsInternal || requestUser.InternalUserStatus != InternalUserStatus.Approved)
+            if (requestUser == null || requestUser.Status != InternalUserStatus.Approved)
             {
-                return false;
+                throw new SecurityException("A user who is not an administrator or not approved may not set user approvals. Id: " + userContext.UserId);
             }
 
             var userIds = message.UserActions.Select(ua => ua.Key).ToArray();
 
-            var users =
-                context.Users.Where(u => userIds.Contains(u.Id)
-                    && u.InternalUserStatus == InternalUserStatus.Pending
-                    && u.EmailConfirmed);
+            var users = await context.InternalUsers.Where(u => userIds.Contains(u.Id)
+                    && u.Status == InternalUserStatus.Pending
+                    && u.User.EmailConfirmed).ToListAsync();
 
             if (users.Count() != message.UserActions.Count)
             {
@@ -49,7 +50,7 @@
             return true;
         }
 
-        private void UpdateUsers(IQueryable<User> users, SetUserApprovals message)
+        private void UpdateUsers(IList<InternalUser> users, SetUserApprovals message)
         {
             foreach (var user in users)
             {

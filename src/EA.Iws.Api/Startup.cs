@@ -5,6 +5,7 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Api
 {
+    using System.Web;
     using System.Web.Http;
     using System.Web.Http.ExceptionHandling;
     using Autofac;
@@ -35,6 +36,7 @@ namespace EA.Iws.Api
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
             builder.Register(c => configurationService).As<ConfigurationService>().SingleInstance();
             builder.Register(c => configurationService.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
 
             var container = AutofacBootstrapper.Initialize(builder, config);
 
