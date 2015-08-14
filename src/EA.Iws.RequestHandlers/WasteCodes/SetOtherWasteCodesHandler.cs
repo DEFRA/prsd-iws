@@ -25,18 +25,12 @@
             var exportCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.ExportCode);
             var importCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.ImportCode);
             var otherCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.OtherCode);
+            var customsCode = await context.WasteCodes.SingleAsync(w => w.CodeType == CodeType.CustomsCode);
             
             notification.SetExportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(exportCode, command.ExportNationalCode));
             notification.SetImportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(importCode, command.ImportNationalCode));
-
-            if (string.IsNullOrWhiteSpace(command.OtherCode))
-            {
-                notification.RemoveOtherCode();
-            }
-            else
-            {
-                notification.SetOtherCode(WasteCodeInfo.CreateCustomWasteCodeInfo(otherCode, command.OtherCode));
-            }
+            notification.SetCustomsCode(WasteCodeInfo.CreateCustomWasteCodeInfo(customsCode, command.CustomsCode));
+            notification.SetOtherCode(WasteCodeInfo.CreateCustomWasteCodeInfo(otherCode, command.OtherCode));
 
             await context.SaveChangesAsync();
             return notification.Id;

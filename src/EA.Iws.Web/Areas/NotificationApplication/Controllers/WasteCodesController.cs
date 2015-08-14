@@ -147,12 +147,19 @@
             {
                 var exportCode = (await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.ExportCode))).SingleOrDefault();
                 model.ExportNationalCode = exportCode == null ? null : exportCode.CustomCode;
+                model.ExportNationalCodeNotApplicable = exportCode != null && exportCode.IsNotApplicable;
 
                 var importCode = (await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.ImportCode))).SingleOrDefault();
                 model.ImportNationalCode = importCode == null ? null : importCode.CustomCode;
+                model.ImportNationalCodeNotApplicable = importCode != null && importCode.IsNotApplicable;
+
+                var customsCode = (await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.CustomsCode))).SingleOrDefault();
+                model.CustomsCode = customsCode == null ? null : customsCode.CustomCode;
+                model.CustomsCodeNotApplicable = customsCode != null && customsCode.IsNotApplicable;
 
                 var otherCode = (await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.OtherCode))).SingleOrDefault();
                 model.OtherCode = otherCode == null ? null : otherCode.CustomCode;
+                model.OtherCodeNotApplicable = otherCode != null && otherCode.IsNotApplicable;
             }
 
             return View(model);
@@ -173,7 +180,7 @@
                 {
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new SetOtherWasteCodes(model.NotificationId, model.ExportNationalCode, model.ImportNationalCode, model.OtherCode));
+                            new SetOtherWasteCodes(model.NotificationId, model.ExportNationalCode, model.ImportNationalCode, model.CustomsCode, model.OtherCode));
 
                     return RedirectToAction("AddYcodeHcodeAndUnClass", new { id = model.NotificationId });
                 }

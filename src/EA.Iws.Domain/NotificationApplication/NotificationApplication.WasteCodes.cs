@@ -124,9 +124,9 @@
             SetCodes(unNumbers, CodeType.UnNumber);
         }
 
-        public void SetCustomsCodes(IEnumerable<WasteCodeInfo> customsCodes)
+        public void SetCustomsCode(WasteCodeInfo customsCode)
         {
-            SetCodes(customsCodes, CodeType.CustomsCode);
+            SetCode(customsCode, CodeType.CustomsCode);
         }
 
         public WasteCodeInfo BaselOecdCode
@@ -179,9 +179,9 @@
             get { return GetWasteCodes(CodeType.UnNumber); }
         }
 
-        public IEnumerable<WasteCodeInfo> CustomsCodes
+        public WasteCodeInfo CustomsCode
         {
-            get { return GetWasteCodes(CodeType.CustomsCode); }
+            get { return GetWasteCodes(CodeType.CustomsCode).SingleOrDefault(); }
         }
     }
 }

@@ -16,7 +16,7 @@
                 Id = source.Id,
                 Description = source.Description,
                 Code = source.Code,
-                CodeType = source.CodeType
+                CodeType = source.CodeType,
             };
         }
 
@@ -28,6 +28,8 @@
                 var wasteCodeData = Map(wasteCode.WasteCode);
                 wasteCodeData.CustomCode = wasteCode.CustomCode;
                 wasteCodes.Add(wasteCodeData);
+
+                wasteCodeData.IsNotApplicable = wasteCode.IsNotApplicable.HasValue && wasteCode.IsNotApplicable.Value;
             }
             return wasteCodes.ToArray();
         }
@@ -41,6 +43,8 @@
 
             var wasteCodeData = Map(source.WasteCode);
             wasteCodeData.CustomCode = source.CustomCode;
+            wasteCodeData.IsNotApplicable = source.IsNotApplicable.HasValue && source.IsNotApplicable.Value;
+
             return new[]
             {
                 wasteCodeData
@@ -71,7 +75,7 @@
                 case CodeType.UnNumber:
                     return Map(source.UnNumbers);
                 case CodeType.CustomsCode:
-                    return Map(source.CustomsCodes);
+                    return Map(source.CustomsCode);
                 default:
                     throw new InvalidOperationException(string.Format("Unknown code type {0}", parameter));
             }

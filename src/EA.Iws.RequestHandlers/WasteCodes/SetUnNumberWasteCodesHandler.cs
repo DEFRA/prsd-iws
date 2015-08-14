@@ -41,7 +41,6 @@
                 message.CustomsCodes.Select(code => WasteCodeInfo.CreateCustomWasteCodeInfo(customsCode, code)).ToList();
 
             notification.SetUnNumbers(unNumbers);
-            notification.SetCustomsCodes(customsCodes);
 
             await context.SaveChangesAsync();
 

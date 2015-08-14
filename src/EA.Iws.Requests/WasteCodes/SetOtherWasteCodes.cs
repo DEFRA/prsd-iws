@@ -5,12 +5,13 @@
 
     public class SetOtherWasteCodes : IRequest<Guid>
     {
-        public SetOtherWasteCodes(Guid notificationId, string exportNationalCode, string importNationalCode, string otherCode)
+        public SetOtherWasteCodes(Guid notificationId, string exportNationalCode, string importNationalCode, string customsCode, string otherCode)
         {
             NotificationId = notificationId;
             ExportNationalCode = exportNationalCode;
             ImportNationalCode = importNationalCode;
             OtherCode = otherCode;
+            CustomsCode = customsCode;
         }
 
         public Guid NotificationId { get; private set; }
@@ -20,5 +21,7 @@
         public string ImportNationalCode { get; private set; }
 
         public string OtherCode { get; private set; }
+
+        public string CustomsCode { get; private set; }
     }
 }

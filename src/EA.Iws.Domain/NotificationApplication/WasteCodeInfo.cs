@@ -20,7 +20,11 @@
         private WasteCodeInfo(WasteCode wasteCode, string customCode)
         {
             Guard.ArgumentNotNull(() => wasteCode, wasteCode);
-            Guard.ArgumentNotNullOrEmpty(() => customCode, customCode);
+
+            if (string.IsNullOrEmpty(customCode))
+            {
+                IsNotApplicable = true;
+            }
 
             if (!CanHaveCustomCode(wasteCode.CodeType))
             {
@@ -34,7 +38,6 @@
         public static WasteCodeInfo CreateCustomWasteCodeInfo(WasteCode wasteCode, string customCode)
         {
             Guard.ArgumentNotNull(() => wasteCode, wasteCode);
-            Guard.ArgumentNotNullOrEmpty(() => customCode, customCode);
 
             return new WasteCodeInfo(wasteCode, customCode);
         }
@@ -49,6 +52,8 @@
         public virtual WasteCode WasteCode { get; private set; }
 
         public string CustomCode { get; private set; }
+
+        public bool? IsNotApplicable { get; private set; }
 
         private static bool CanHaveCustomCode(CodeType codeType)
         {

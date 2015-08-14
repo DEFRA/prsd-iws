@@ -78,9 +78,9 @@
                 destination.SetBaselOecdCode(WasteCodeInfo.CreateWasteCodeInfo(source.BaselOecdCode.WasteCode));
             }
 
-            if (source.CustomsCodes != null)
+            if (source.CustomsCode != null)
             {
-                destination.SetCustomsCodes(source.CustomsCodes.Select(c => WasteCodeInfo.CreateCustomWasteCodeInfo(c.WasteCode, c.CustomCode)));
+                destination.SetCustomsCode(WasteCodeInfo.CreateCustomWasteCodeInfo(source.CustomsCode.WasteCode, source.CustomsCode.CustomCode));
             }
 
             destination.SetEwcCodes(

@@ -13,5 +13,7 @@
         public CodeType CodeType { get; set; }
 
         public string CustomCode { get; set; }
+
+        public bool IsNotApplicable { get; set; }
     }
 }

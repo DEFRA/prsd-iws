@@ -6,7 +6,10 @@
     <div class="form-group">
         @Html.Gds().HintParagraph("Step 2 of 4")
     </div>
-    <h2 class="heading-large">Waste Identification</h2>
+    <h2 class="heading-large">What other codes apply to the waste?</h2>
+    <div>
+        Enter any other codes which are relevant to your waste. If no codes are relevant then tick not applicable
+    </div>
 </header>
 @using (Html.BeginForm())
 {
@@ -14,36 +17,39 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     <div class="wastecode-block">
-        <div class="form-group top-blue-line">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ExportNationalCode)">
-                <div class="heading-medium">National code in country of export</div>
-                @Html.Gds().HintSpan("Enter the relevant code or not applicable")
-                @Html.Gds().ValidationMessageFor(m => m.ExportNationalCode)
-                @Html.Gds().TextBoxFor(m => m.ExportNationalCode)
-            </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ExportNationalCode)">
+            @Html.Gds().LabelFor(m => m.ExportNationalCode)
+            @Html.Gds().ValidationMessageFor(m => m.ExportNationalCode)
+            @Html.Gds().TextBoxFor(m => m.ExportNationalCode)
+            @Html.Gds().CheckBoxFor(m => m.ExportNationalCodeNotApplicable)
         </div>
     </div>
     <div class="wastecode-block">
-        <div class="form-group top-blue-line">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ImportNationalCode)">
-                <div class="heading-medium">National code in country of import</div>
-                @Html.Gds().HintSpan("Enter the relevant code or not applicable")
-                @Html.Gds().ValidationMessageFor(m => m.ImportNationalCode)
-                @Html.Gds().TextBoxFor(m => m.ImportNationalCode)
-            </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ImportNationalCode)">
+            @Html.Gds().LabelFor(m => m.ImportNationalCode)
+            @Html.Gds().ValidationMessageFor(m => m.ImportNationalCode)
+            @Html.Gds().TextBoxFor(m => m.ImportNationalCode)
+            @Html.Gds().CheckBoxFor(m => m.ImportNationalCodeNotApplicable)
         </div>
     </div>
     <div class="wastecode-block">
-        <div class="form-group top-blue-line">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCode)">
-                <div class="heading-medium">Other codes &nbsp;&nbsp;(optional)</div>
-                @Html.Gds().ValidationMessageFor(m => m.OtherCode)
-                @Html.Gds().HintParagraph("If useful or required by the relevant competent authority add any other code to help identify the waste")
-                @Html.Gds().TextBoxFor(m => m.OtherCode)
-            </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.CustomsCode)">
+            @Html.Gds().LabelFor(m => m.CustomsCode, false)
+            @Html.Gds().ValidationMessageFor(m => m.CustomsCode)
+            @Html.Gds().TextBoxFor(m => m.CustomsCode)
+            @Html.Gds().CheckBoxFor(m => m.CustomsCodeNotApplicable)
+        </div>
+    </div>
+    <div class="wastecode-block">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCode)">
+            @Html.Gds().LabelFor(m => m.OtherCode, false)
+            @Html.Gds().HintParagraph("If useful or required by the relevant competent authority add any other code to help identify the waste")
+            @Html.Gds().ValidationMessageFor(m => m.OtherCode)
+            @Html.Gds().TextBoxFor(m => m.OtherCode)
+            @Html.Gds().CheckBoxFor(m => m.OtherCodeNotApplicable)
         </div>
     </div>
     <div class="form-group">
-        <button class="button" type="submit">Continue</button>
+        <button class="button" type="submit">Save and Continue</button>
     </div>
 }

@@ -138,11 +138,9 @@
             {
                 WasteCodeInfo.CreateWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.UnNumber))
             });
-            notification.SetCustomsCodes(new[]
-            {
+            notification.SetCustomsCode(
                 WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.CustomsCode),
-                    "olives")
-            });
+                    "olives"));
             notification.SetImportCode(
                 WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.ImportCode),
                     "cardboard boxes"));

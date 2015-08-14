@@ -37,7 +37,7 @@
             H = notification.HCodes.Count() != 0 ? MakeStringOfCodes(notification.HCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
             UnClass = notification.UnClasses.Count() != 0 ? MakeStringOfCodes(notification.UnClasses.OrderBy(c => c.WasteCode.Code)) : string.Empty;
             SetUnNumbersAndShippingNames(notification);
-            Customs = notification.CustomsCodes.Count() != 0 ? MakeStringOfCustomCodes(notification.CustomsCodes) : string.Empty;
+            Customs = notification.CustomsCode != null ? notification.CustomsCode.CustomCode : string.Empty;
             SetIsAnnexNeeded();
         }
 
@@ -172,18 +172,6 @@
             foreach (var c in codes)
             {
                 codesString = codesString + c.WasteCode.Code + ", ";
-            }
-
-            return codesString.Substring(0, (codesString.Length - 2));
-        }
-
-        private string MakeStringOfCustomCodes(IEnumerable<WasteCodeInfo> codes)
-        {
-            var codesString = string.Empty;
-
-            foreach (var c in codes)
-            {
-                codesString = codesString + c.CustomCode + ", ";
             }
 
             return codesString.Substring(0, (codesString.Length - 2));

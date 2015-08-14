@@ -672,99 +672,41 @@
         [Fact]
         public void CustomsCodes_ReturnsEmptyIEnumerableWhenNotSet()
         {
-            Assert.Empty(notification.CustomsCodes);
+            Assert.Null(notification.CustomsCode);
         }
 
         [Fact]
-        public void CanSetCustomsCodes()
+        public void CanSetCustomsCode()
         {
-            var customsCodes = new List<WasteCodeInfo>
-            {
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E5B35439-AC37-479A-9992-627C453299B9"),
-                    CodeType.CustomsCode)),
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("209DAE97-84B8-4478-89EF-E57B3EA2AA70"),
-                    CodeType.CustomsCode)),
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"),
-                    CodeType.CustomsCode))
-            };
-            notification.SetCustomsCodes(customsCodes);
+            var customsCode = WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"), CodeType.CustomsCode));
+           
+            notification.SetCustomsCode(customsCode);
 
-            Assert.Equal(3, notification.CustomsCodes.Count());
+            Assert.NotNull(notification.CustomsCode);
         }
 
         [Fact]
         public void SetCustomsCodes_ReplacesExisting()
         {
-            var customsCodes = new List<WasteCodeInfo>
-            {
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E5B35439-AC37-479A-9992-627C453299B9"),
-                    CodeType.CustomsCode)),
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("209DAE97-84B8-4478-89EF-E57B3EA2AA70"),
-                    CodeType.CustomsCode)),
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"),
-                    CodeType.CustomsCode))
-            };
-            notification.SetCustomsCodes(customsCodes);
+            var customsCode = WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"), CodeType.CustomsCode));
 
-            var newCustomsCodes = new List<WasteCodeInfo>
-            {
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("521154F9-A265-472A-9275-8871F0DACA9F"),
-                    CodeType.CustomsCode)),
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"),
-                    CodeType.CustomsCode))
-            };
-            notification.SetCustomsCodes(newCustomsCodes);
+            notification.SetCustomsCode(customsCode);
 
-            Assert.Collection(notification.CustomsCodes,
-                item =>
-                    Assert.True(
-                        notification.CustomsCodes.Any(
-                            p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F"))),
-                item =>
-                    Assert.True(
-                        notification.CustomsCodes.Any(
-                            p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"))));
+            var newCustomsCode = WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"), CodeType.CustomsCode));
+
+            notification.SetCustomsCode(newCustomsCode);
+
+            Assert.Equal(notification.CustomsCode.WasteCode.Id, new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"));
         }
 
         [Fact]
         public void SetCustomsCodes_NotAllCustomsCodes_ThrowsException()
         {
-            var customsCodes = new List<WasteCodeInfo>
-            {
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E5B35439-AC37-479A-9992-627C453299B9"),
-                    CodeType.H)),
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("209DAE97-84B8-4478-89EF-E57B3EA2AA70"),
-                    CodeType.Oecd)),
-                WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"),
-                    CodeType.CustomsCode))
-            };
-            Action setCustomsCodes = () => notification.SetCustomsCodes(customsCodes);
+            var customsCode = WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"), CodeType.Ewc));
+
+            Action setCustomsCodes = () => notification.SetCustomsCode(customsCode);
 
             Assert.Throws<InvalidOperationException>(setCustomsCodes);
-        }
-
-        [Fact]
-        public void CanEnterMultipleCustomsCodes()
-        {
-            var customsCodes = new List<WasteCodeInfo>
-            {
-                WasteCodeInfo.CreateCustomWasteCodeInfo(GetTestWasteCode(new Guid("521154F9-A265-472A-9275-8871F0DACA9F"),
-                    CodeType.CustomsCode), "code1"),
-                WasteCodeInfo.CreateCustomWasteCodeInfo(GetTestWasteCode(new Guid("521154F9-A265-472A-9275-8871F0DACA9F"),
-                    CodeType.CustomsCode), "code2")
-            };
-
-            notification.SetCustomsCodes(customsCodes);
-
-            Assert.Collection(notification.CustomsCodes,
-                item =>
-                    Assert.True(
-                        notification.CustomsCodes.Any(
-                            p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F") && p.CustomCode == "code1")),
-                item =>
-                    Assert.True(
-                        notification.CustomsCodes.Any(
-                            p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F") && p.CustomCode == "code2")));
         }
 
         private static WasteCode GetTestWasteCode(Guid id, CodeType codeType)
