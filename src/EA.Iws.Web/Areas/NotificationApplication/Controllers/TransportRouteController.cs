@@ -18,9 +18,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Summary(Guid id)
+        public async Task<ActionResult> Summary(Guid id, bool? backToOverview = null)
         {
             ViewBag.NotificationId = id;
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
             using (var client = apiClient())
             {
@@ -32,9 +33,16 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Summary(Guid id, FormCollection model)
+        public ActionResult Summary(Guid id, FormCollection model, bool? backToOverview = null)
         {
-            return RedirectToAction("Index", "CustomsOffice", new { id });
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id });
+            }
+            else
+            {
+                return RedirectToAction("Index", "CustomsOffice", new { id }); 
+            }
         }
     }
 }

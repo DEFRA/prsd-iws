@@ -11,7 +11,7 @@
             For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number.";
 }
 
-@using (Html.BeginForm("Index", "Exporter", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using System;
     using System.Threading.Tasks;
@@ -9,6 +9,7 @@
     using Core.Shared;
     using Core.StateOfImport;
     using Core.TransportRoute;
+    using EA.Iws.Requests.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Mapper;
     using Requests.StateOfImport;
@@ -32,6 +33,16 @@
             var countries = new[]
             {
                 new CountryData { Id = AnyCountryId, Name = AnyString }
+            };
+
+            var competentAuthorties = new[] 
+            {
+                new CompetentAuthorityData { Id = AnyCompetentAuthorityId, Name = AnyString }
+            };
+
+            var entryOrExitPoints = new[]
+            {
+                new EntryOrExitPointData { Id = AnyEntryOrExitPointId, CountryId = AnyCountryId, Name = AnyString }
             };
 
             A.CallTo(
@@ -65,6 +76,13 @@
                     }
                 }
                 });
+            A.CallTo(
+                () => client.SendAsync(A<string>.Ignored, A<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == AnyCountryId)))
+                .Returns(new CompententAuthorityAndEntryOrExitPointData()
+                {
+                    CompetentAuthorities = competentAuthorties,
+                    EntryOrExitPoints = entryOrExitPoints
+                });
 
             this.controller = new StateOfImportController(() => client, new TestMap());
         }
@@ -79,6 +97,31 @@
             var model = result.Model as StateOfImportViewModel;
 
             Assert.False(model.ShowNextSection);
+        }
+
+        [Fact]
+        public async Task Post_BackToOverviewTrue_RedirectsToOverview()
+        {
+            var model = CreateStateOfImportViewModel();
+            var result = await controller.Index(ExistingStateOfImportGuid, model, AnyString, true) as RedirectToRouteResult;
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
+        }
+
+        [Fact]
+        public async Task Post_BackToOverviewFalse_RedirectsToTransportRouteSummary()
+        {
+            var model = CreateStateOfImportViewModel();
+            var result = await controller.Index(ExistingStateOfImportGuid, model, AnyString, false) as RedirectToRouteResult;
+            RouteAssert.RoutesTo(result.RouteValues, "Summary", "TransportRoute");
+        }
+
+        private static StateOfImportViewModel CreateStateOfImportViewModel()
+        {
+            return new StateOfImportViewModel()
+            {
+                CountryId = AnyCountryId,
+                EntryOrExitPointId = AnyEntryOrExitPointId
+            };
         }
 
         private class TestMap : IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel>

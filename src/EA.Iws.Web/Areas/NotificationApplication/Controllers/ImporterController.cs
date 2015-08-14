@@ -21,7 +21,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -44,7 +44,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(ImporterViewModel model)
+        public async Task<ActionResult> Index(ImporterViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -57,8 +57,14 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-
-                    return RedirectToAction("List", "Facility", new { id = model.NotificationId });
+                    if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("List", "Facility", new { id = model.NotificationId });
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {

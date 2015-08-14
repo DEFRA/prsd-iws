@@ -31,9 +31,11 @@
                             @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id }, null)
+                            @Html.ActionLink("Edit", "Edit", "Facility", 
+                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                             <span class="table-divider">|</span>
-                            @Html.ActionLink("Remove", "Remove", "Facility", new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id }, null)
+                            @Html.ActionLink("Remove", "Remove", "Facility",
+                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                         </td>
                     </tr>
                 }
@@ -43,7 +45,13 @@
 }
 
 <div class="form-group">
-    @Html.ActionLink("Add facility", "Add", "Facility", new { id = Model.NotificationId }, null)
+    @Html.ActionLink("Add facility", "Add", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
-
-@Html.ActionLink("Continue", "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+@if (ViewBag.BackToOverview)
+{
+    @Html.ActionLink("Continue", "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+}
+else
+{
+    @Html.ActionLink("Continue", "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+}

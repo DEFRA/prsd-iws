@@ -55,6 +55,13 @@
 else
 {
     <p>You have not added any producers to this notification. Please add a producer before selecting the site of export.</p>
-    <p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId }, null)</p>
-    @Html.ActionLink("Continue", "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
+    <p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
+    if (ViewBag.BackToOverview)
+    {
+        @Html.ActionLink("Continue", "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    }
+    else
+    {
+       @Html.ActionLink("Continue", "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
+    }
 }

@@ -21,7 +21,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var model = new SpecialHandlingViewModel { NotificationId = id };
             using (var client = apiClient())
@@ -40,7 +40,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(SpecialHandlingViewModel model)
+        public async Task<ActionResult> Index(SpecialHandlingViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -56,7 +56,14 @@
                         new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
                             model.SpecialHandlingDetails));
 
-                    return RedirectToAction("Index", "StateOfExport", new { id = model.NotificationId });
+                    if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "StateOfExport", new { id = model.NotificationId }); 
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {

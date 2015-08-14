@@ -30,9 +30,11 @@
                             @Html.DisplayFor(m => m.Carriers[i].Address.TownOrCity)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Carrier", new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id }, null)
+                            @Html.ActionLink("Edit", "Edit", "Carrier", 
+                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                             <span class="table-divider">|</span>
-                            @Html.ActionLink("Remove", "Remove", "Carrier", new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id }, null)
+                            @Html.ActionLink("Remove", "Remove", "Carrier", 
+                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                         </td>
                     </tr>
                 }
@@ -44,11 +46,18 @@
 <div class="form-group">
     @if (Model != null && Model.Carriers.Any())
     {
-        @Html.ActionLink("Add another carrier", "Add", "Carrier", new { id = Model.NotificationId }, null)
+        @Html.ActionLink("Add another carrier", "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview  }, null)
     }
     else
     {
-        @Html.ActionLink("Add your first carrier", "Add", "Carrier", new { id = Model.NotificationId }, null)
+        @Html.ActionLink("Add your first carrier", "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview  }, null)
     }
 </div>
-@Html.ActionLink("Continue", "Index", "MeansOfTransport", new { id = Model.NotificationId }, new { @class = "button" })
+@if (ViewBag.BackToOverview)
+{
+    @Html.ActionLink("Continue", "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+}
+else
+{
+    @Html.ActionLink("Continue", "Index", "MeansOfTransport", new { id = Model.NotificationId }, new { @class = "button" })
+}

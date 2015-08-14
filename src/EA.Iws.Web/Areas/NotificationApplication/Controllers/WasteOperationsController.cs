@@ -30,7 +30,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> OperationCodes(Guid id)
+        public async Task<ActionResult> OperationCodes(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -41,12 +41,12 @@
 
                     if (notificationInfo.NotificationType == NotificationType.Disposal)
                     {
-                        return RedirectToAction("DisposalCodes", "WasteOperations", new { id });
+                        return RedirectToAction("DisposalCodes", "WasteOperations", new { id, backToOverview });
                     }
 
                     if (notificationInfo.NotificationType == NotificationType.Recovery)
                     {
-                        return RedirectToAction("RecoveryCodes", "WasteOperations", new { id });
+                        return RedirectToAction("RecoveryCodes", "WasteOperations", new { id, backToOverview });
                     }
                 }
                 catch (ApiBadRequestException ex)
@@ -65,7 +65,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> RecoveryCodes(Guid id)
+        public async Task<ActionResult> RecoveryCodes(Guid id, bool? backToOverview = null)
         {
             var model = new OperationCodesViewModel { NotificationId = id };
             model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>();
@@ -89,7 +89,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RecoveryCodes(OperationCodesViewModel model)
+        public async Task<ActionResult> RecoveryCodes(OperationCodesViewModel model, bool? backToOverview = null)
         {
             model.CodeInformation = new Dictionary<string, string>();
 
@@ -121,7 +121,14 @@
                         client.SendAsync(User.GetAccessToken(),
                             new AddRecoveryCodes(selectedRecoveryCodes, model.NotificationId));
 
-                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
+                    if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -138,7 +145,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> DisposalCodes(Guid id)
+        public async Task<ActionResult> DisposalCodes(Guid id, bool? backToOverview = null)
         {
             var model = new OperationCodesViewModel { NotificationId = id };
             model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<DisposalCode>();
@@ -162,7 +169,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DisposalCodes(OperationCodesViewModel model)
+        public async Task<ActionResult> DisposalCodes(OperationCodesViewModel model, bool? backToOverview = null)
         {
             model.CodeInformation = new Dictionary<string, string>();
 
@@ -194,7 +201,14 @@
                         client.SendAsync(User.GetAccessToken(),
                             new AddDisposalCodes(selectedDisposalCodes, model.NotificationId));
 
-                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
+                    if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -211,7 +225,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> TechnologyEmployed(Guid id)
+        public async Task<ActionResult> TechnologyEmployed(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -235,7 +249,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> TechnologyEmployed(TechnologyEmployedViewModel model)
+        public async Task<ActionResult> TechnologyEmployed(TechnologyEmployedViewModel model, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -250,8 +264,16 @@
                         client.SendAsync(User.GetAccessToken(),
                             new SetTechnologyEmployed(model.NotificationId, model.AnnexProvided, model.Details, model.FurtherDetails));
 
-                    return RedirectToAction("Index", "ReasonForExport",
+                    if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home",
                         new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "ReasonForExport",
+                                    new { id = model.NotificationId }); 
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {

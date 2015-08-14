@@ -13,7 +13,7 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Carrier", new { id }, null)</span>
+            <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Carrier", new { id, backToOverview = true }, null)</span>
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -58,7 +58,7 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "MeansOfTransport", new { id }, null)</span>
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "MeansOfTransport", new { id, backToOverview = true }, null)</span>
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -87,7 +87,7 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PackagingTypes", new { id }, null)</span>
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PackagingTypes", new { id, backToOverview = true }, null)</span>
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -114,7 +114,7 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "SpecialHandling", new { id }, null)</span>
+            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "SpecialHandling", new { id, backToOverview = true }, null)</span>
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">

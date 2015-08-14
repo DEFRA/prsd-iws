@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using System;
     using System.Collections.Generic;
@@ -97,9 +97,45 @@
         }
 
         [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = CreateValidAddProducer();
+
+            var result = await producerController.Add(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = CreateValidAddProducer();
+
+            var result = await producerController.Add(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = CreateValidAddProducer();
+
+            var result = await producerController.Add(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
         public async Task Edit_ReturnsView()
         {
-            var result = await producerController.Edit(notificationId, producerId) as ViewResult;
+            var result = await producerController.Edit(notificationId, producerId, null) as ViewResult;
 
             Assert.Equal(string.Empty, result.ViewName);
         }
@@ -147,6 +183,42 @@
             var result = await producerController.Edit(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = CreateValidEditProducer();
+
+            var result = await producerController.Edit(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = CreateValidEditProducer();
+
+            var result = await producerController.Edit(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = CreateValidEditProducer();
+
+            var result = await producerController.Edit(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
 
         [Fact]
@@ -227,6 +299,54 @@
             var result = await producerController.Remove(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = new RemoveProducerViewModel
+            {
+                NotificationId = notificationId,
+                ProducerId = producerId
+            };
+
+            var result = await producerController.Remove(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = new RemoveProducerViewModel
+            {
+                NotificationId = notificationId,
+                ProducerId = producerId
+            };
+
+            var result = await producerController.Remove(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = new RemoveProducerViewModel
+            {
+                NotificationId = notificationId,
+                ProducerId = producerId
+            };
+
+            var result = await producerController.Remove(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
 
         [Fact]
@@ -311,6 +431,65 @@
             };
 
             var result = await producerController.SiteOfExport(model, false) as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "Importer");
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        [InlineData(null)]
+        public async Task SiteOfExport_BackToListTrue_IgnoresBackToOverview(bool? backToOverview)
+        {
+            var model = new SiteOfExportViewModel
+            {
+                NotificationId = notificationId,
+                SelectedSiteOfExport = producerId
+            };
+
+            var result = await producerController.SiteOfExport(model, true, backToOverview) as RedirectToRouteResult;
+
+            Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task SiteOfExport_BackToListFalse_BackToOverviewTrue_ReturnsOverview()
+        {
+            var model = new SiteOfExportViewModel
+            {
+                NotificationId = notificationId,
+                SelectedSiteOfExport = producerId
+            };
+
+            var result = await producerController.SiteOfExport(model, false, true) as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
+        }
+
+        [Fact]
+        public async Task SiteOfExport_BackToListFalse_BackToOverviewFalse_ReturnsImporterIndex()
+        {
+            var model = new SiteOfExportViewModel
+            {
+                NotificationId = notificationId,
+                SelectedSiteOfExport = producerId
+            };
+
+            var result = await producerController.SiteOfExport(model, false, false) as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "Importer");
+        }
+
+        [Fact]
+        public async Task SiteOfExport_BackToListFalse_BackToOverviewNull_ReturnsImporterIndex()
+        {
+            var model = new SiteOfExportViewModel
+            {
+                NotificationId = notificationId,
+                SelectedSiteOfExport = producerId
+            };
+
+            var result = await producerController.SiteOfExport(model, false, null) as RedirectToRouteResult;
 
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Importer");
         }

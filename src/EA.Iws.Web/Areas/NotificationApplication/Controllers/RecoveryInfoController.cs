@@ -22,7 +22,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> RecoveryPercentage(Guid id)
+        public async Task<ActionResult> RecoveryPercentage(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -36,7 +36,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RecoveryPercentage(RecoveryPercentageViewModel model)
+        public async Task<ActionResult> RecoveryPercentage(RecoveryPercentageViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -60,10 +60,10 @@
 
                         if (model.PercentageRecoverable.Value == fullyRecoverablePercentage)
                         {
-                            return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = false });
+                            return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = false, backToOverview });
                         }
 
-                        return RedirectToAction("MethodOfDisposal", "RecoveryInfo", new { id = model.NotificationId });
+                        return RedirectToAction("MethodOfDisposal", "RecoveryInfo", new { id = model.NotificationId, backToOverview });
                     }
                 }
                 catch (ApiBadRequestException e)
@@ -80,7 +80,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MethodOfDisposal(Guid id)
+        public async Task<ActionResult> MethodOfDisposal(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -92,7 +92,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MethodOfDisposal(MethodOfDisposalViewModel model)
+        public async Task<ActionResult> MethodOfDisposal(MethodOfDisposalViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -104,7 +104,7 @@
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-                    return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = true });
+                    return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = true, backToOverview });
                 }
                 catch (ApiBadRequestException e)
                 {
@@ -120,7 +120,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> RecoveryValues(Guid id, bool isDisposal)
+        public async Task<ActionResult> RecoveryValues(Guid id, bool isDisposal, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -137,7 +137,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RecoveryValues(RecoveryInfoValuesViewModel model)
+        public async Task<ActionResult> RecoveryValues(RecoveryInfoValuesViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {

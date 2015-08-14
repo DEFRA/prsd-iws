@@ -22,7 +22,8 @@
 else
 {
     <p>@ViewBag.Error</p>
-    <p>@Html.ActionLink(string.Format("Change site of {0}", Model.NotificationType.ToString().ToLowerInvariant()), "SiteOfTreatment", "Facility", new { id = Model.NotificationId, backToList = true }, new { @class = "button" })</p>
+    <p>@Html.ActionLink(string.Format("Change site of {0}", Model.NotificationType.ToString().ToLowerInvariant()), "SiteOfTreatment", "Facility", 
+            new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })</p>
 }
 
-<p>@Html.ActionLink("Back to facilities", "List", "Facility", new { id = Model.NotificationId }, null)</p>
+<p>@Html.ActionLink("Back to facilities", "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>

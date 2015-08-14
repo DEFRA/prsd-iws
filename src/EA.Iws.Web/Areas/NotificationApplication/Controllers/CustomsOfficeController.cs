@@ -11,22 +11,22 @@
     public class CustomsOfficeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
-        private readonly Func<Guid, RedirectToRouteResult> intendedShipments;
-        private readonly Func<Guid, RedirectToRouteResult> transportRouteSummary;
-        private readonly Func<Guid, RedirectToRouteResult> addExitCustomsOffice;
-        private readonly Func<Guid, RedirectToRouteResult> addEntryCustomsOffice;
+        private readonly Func<Guid, bool?, RedirectToRouteResult> intendedShipments;
+        private readonly Func<Guid, bool?, RedirectToRouteResult> transportRouteSummary;
+        private readonly Func<Guid, bool?, RedirectToRouteResult> addExitCustomsOffice;
+        private readonly Func<Guid, bool?, RedirectToRouteResult> addEntryCustomsOffice;
 
         public CustomsOfficeController(Func<IIwsClient> apiClient)
         {
             this.apiClient = apiClient;
 
-            intendedShipments = id => this.RedirectToAction("Index", "Shipment", new { id });
-            transportRouteSummary = id => this.RedirectToAction("Summary", "TransportRoute", new { id });
-            addExitCustomsOffice = id => this.RedirectToAction("Index", "ExitCustomsOffice", new { id });
-            addEntryCustomsOffice = id => this.RedirectToAction("Index", "EntryCustomsOffice", new { id });
+            intendedShipments = (id, backToOverview) => this.RedirectToAction("Index", "Shipment", new { id, backToOverview });
+            transportRouteSummary = (id, backToOverview) => this.RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
+            addExitCustomsOffice = (id, backToOverview) => this.RedirectToAction("Index", "ExitCustomsOffice", new { id, backToOverview });
+            addEntryCustomsOffice = (id, backToOverview) => this.RedirectToAction("Index", "EntryCustomsOffice", new { id, backToOverview });
         }
 
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             CustomsOfficeCompletionStatus customsOffice;
             using (var client = apiClient())
@@ -37,14 +37,14 @@
             switch (customsOffice.CustomsOfficesRequired)
             {
                 case CustomsOffices.None:
-                    return intendedShipments(id);
+                    return intendedShipments(id, backToOverview);
                 case CustomsOffices.EntryAndExit:
                 case CustomsOffices.Exit:
-                    return addExitCustomsOffice(id);
+                    return addExitCustomsOffice(id, backToOverview);
                 case CustomsOffices.Entry:
-                    return addEntryCustomsOffice(id);
+                    return addEntryCustomsOffice(id, backToOverview);
                 default:
-                    return transportRouteSummary(id);
+                    return transportRouteSummary(id, backToOverview);
             }
         }
     }

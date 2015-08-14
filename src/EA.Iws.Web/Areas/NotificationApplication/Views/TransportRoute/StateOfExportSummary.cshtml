@@ -23,7 +23,7 @@ else
                 <td>@Html.DisplayFor(m => m.Country.Name)</td>
                 <td>@Html.DisplayFor(m => m.CompetentAuthority.Code) - @Html.DisplayFor(m => m.CompetentAuthority.Name)</td>
                 <td>@Html.DisplayFor(m => m.ExitPoint.Name)</td>
-                <th>@Html.ActionLink("Edit", "Index", "StateOfExport", new { id = ViewData["Id"] }, null)</th>
+                <th>@Html.ActionLink("Edit", "Index", "StateOfExport", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</th>
             </tr>
         </tbody>
     </table>

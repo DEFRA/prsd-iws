@@ -22,7 +22,8 @@
 else
 {
     <p>@ViewBag.Error</p>
-    <p>@Html.ActionLink("Change site of export", "SiteOfExport", "Producer", new { id = Model.NotificationId, backToList = true }, new { @class = "button" })</p>
+    <p>@Html.ActionLink("Change site of export", "SiteOfExport", "Producer", 
+        new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })</p>
 }
 
-<p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId }, null)</p>
+<p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>

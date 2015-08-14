@@ -22,8 +22,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Add(Guid id, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
             var model = new AddCarrierViewModel { NotificationId = id };
             await this.BindCountryList(apiClient);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
@@ -32,7 +33,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(AddCarrierViewModel model)
+        public async Task<ActionResult> Add(AddCarrierViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -45,7 +46,7 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
                     
-                    return RedirectToAction("List", "Carrier", new { id = model.NotificationId });
+                    return RedirectToAction("List", "Carrier", new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -62,7 +63,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(Guid id, Guid entityId)
+        public async Task<ActionResult> Edit(Guid id, Guid entityId, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -78,7 +79,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditCarrierViewModel model)
+        public async Task<ActionResult> Edit(EditCarrierViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -95,7 +96,7 @@
                     await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("List", "Carrier",
-                        new { id = model.NotificationId });
+                        new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -112,8 +113,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> List(Guid id)
+        public async Task<ActionResult> List(Guid id, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
             var model = new CarrierListViewModel();
 
             using (var client = apiClient())
@@ -129,8 +131,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Remove(Guid id, Guid entityId)
+        public async Task<ActionResult> Remove(Guid id, Guid entityId, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
             using (var client = apiClient())
             {
                 var carrier = await client.SendAsync(User.GetAccessToken(), new GetCarrierForNotification(id, entityId));
@@ -148,7 +152,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Remove(RemoveCarrierViewModel model)
+        public async Task<ActionResult> Remove(RemoveCarrierViewModel model, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -165,7 +169,7 @@
                     }
                 }
             }
-            return RedirectToAction("List", "Carrier", new { id = model.NotificationId });
+            return RedirectToAction("List", "Carrier", new { id = model.NotificationId, backToOverview });
         }
     }
 }

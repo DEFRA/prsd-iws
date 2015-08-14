@@ -12,6 +12,7 @@
     using TestHelpers.Helpers;
     using Xunit;
 
+    [Trait("Category", "Integration")]
     public class RelationshipDeletionIntegration
     {
         private readonly IUserContext userContext;

@@ -5,11 +5,11 @@
 @if (Model == null || Model.Count == 0)
 {
     <p>No transit states have been added.</p>
-    <p>@Html.ActionLink("Add a transit state", "Index", "TransitState", new { id = ViewData["Id"] }, null)</p>
+    <p>@Html.ActionLink("Add a transit state", "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
 }
 else
 {
-    using (Html.BeginForm("Delete", "TransitState"))
+    using (Html.BeginForm("Delete", "TransitState", new { backToOverview = ViewBag.BackToOverview } ,FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <table>
@@ -32,7 +32,7 @@ else
                         <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
                         <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
                         <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
-                        <th>@Html.ActionLink("Edit", "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id }, null) |
+                        <th>@Html.ActionLink("Edit", "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id, backToOverview = ViewData["BackToOverview"] }, null) |
                         <button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">Delete</button></th>
                     </tr>
                 }
@@ -40,5 +40,5 @@ else
         </table>
     }
 
-    <p style="margin-top: 10px;">@Html.ActionLink("Add another transit state", "Index", "TransitState", new { id = ViewData["Id"] }, null)</p>
+    <p style="margin-top: 10px;">@Html.ActionLink("Add another transit state", "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
 }

@@ -23,7 +23,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var physicalCharacteristics = CheckBoxCollectionViewModel.CreateFromEnum<PhysicalCharacteristicType>();
             physicalCharacteristics.ShowEnumValue = true;
@@ -60,7 +60,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(PhysicalCharacteristicsViewModel model)
+        public async Task<ActionResult> Index(PhysicalCharacteristicsViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +85,14 @@
                         client.SendAsync(User.GetAccessToken(),
                             new SetPhysicalCharacteristics(selectedPackagingTypes, model.NotificationId,
                                 model.OtherDescription));
-                    return RedirectToAction("BaselEwcCode", "WasteCodes", new { id = model.NotificationId });
+                    if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
+                    }
+                    else
+                    {
+                        return RedirectToAction("BaselEwcCode", "WasteCodes", new { id = model.NotificationId });
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {

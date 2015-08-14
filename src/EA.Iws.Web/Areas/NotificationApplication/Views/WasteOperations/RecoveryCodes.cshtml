@@ -4,7 +4,7 @@
     <h2 class="heading-large">Which recovery operation codes apply to this notification?</h2>
 </header>
 
-@using (Html.BeginForm("RecoveryCodes", "WasteOperations", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

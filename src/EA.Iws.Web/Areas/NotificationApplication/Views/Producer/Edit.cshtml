@@ -3,7 +3,7 @@
     ViewBag.Title = "Waste Generator(s) - Producer(s)";
 }
 
-@using (Html.BeginForm("Edit", "Producer", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

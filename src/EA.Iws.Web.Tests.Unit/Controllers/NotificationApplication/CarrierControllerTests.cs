@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using System;
     using System.Collections.Generic;
@@ -148,7 +148,7 @@
         {
             var model = CreateValidAddCarrier();
 
-            await carrierController.Add(model);
+            await carrierController.Add(model, null);
 
             A.CallTo(() => client.SendAsync(A<string>._, A<AddCarrierToNotification>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
@@ -162,6 +162,42 @@
             var result = await carrierController.Add(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = CreateValidAddCarrier();
+
+            var result = await carrierController.Add(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = CreateValidAddCarrier();
+
+            var result = await carrierController.Add(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = CreateValidAddCarrier();
+
+            var result = await carrierController.Add(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
 
         [Fact]
@@ -203,6 +239,42 @@
             var result = await carrierController.Edit(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = CreateValidEditCarrier();
+
+            var result = await carrierController.Edit(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = CreateValidEditCarrier();
+
+            var result = await carrierController.Edit(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = CreateValidEditCarrier();
+
+            var result = await carrierController.Edit(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
 
         [Fact]
@@ -259,6 +331,54 @@
 
             A.CallTo(() => client.SendAsync(A<string>._, A<DeleteCarrierForNotification>.That.Matches(p => p.CarrierId == carrierId && p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = new RemoveCarrierViewModel
+            {
+                NotificationId = notificationId,
+                CarrierId = carrierId
+            };
+
+            var result = await carrierController.Remove(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = new RemoveCarrierViewModel
+            {
+                NotificationId = notificationId,
+                CarrierId = carrierId
+            };
+
+            var result = await carrierController.Remove(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = new RemoveCarrierViewModel
+            {
+                NotificationId = notificationId,
+                CarrierId = carrierId
+            };
+
+            var result = await carrierController.Remove(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
     }
 }

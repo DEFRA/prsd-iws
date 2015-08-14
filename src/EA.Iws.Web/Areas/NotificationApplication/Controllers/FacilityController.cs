@@ -25,7 +25,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Add(Guid id, bool? backToOverview = null)
         {
             var facility = new AddFacilityViewModel();
             using (var client = apiClient())
@@ -43,7 +43,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(AddFacilityViewModel model)
+        public async Task<ActionResult> Add(AddFacilityViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
                     return RedirectToAction("List", "Facility",
-                        new { id = model.NotificationId });
+                        new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -74,7 +74,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(Guid id, Guid entityId)
+        public async Task<ActionResult> Edit(Guid id, Guid entityId, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -97,7 +97,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditFacilityViewModel model)
+        public async Task<ActionResult> Edit(EditFacilityViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -114,7 +114,7 @@
                     await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("List", "Facility",
-                        new { id = model.NotificationId });
+                        new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -131,8 +131,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> List(Guid id)
+        public async Task<ActionResult> List(Guid id, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
             var model = new MultipleFacilitiesViewModel();
 
             using (var client = apiClient())
@@ -152,8 +154,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> SiteOfTreatment(Guid id, bool? backToList)
+        public async Task<ActionResult> SiteOfTreatment(Guid id, bool? backToList, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
             using (var client = apiClient())
             {
                 var response =
@@ -175,7 +179,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SiteOfTreatment(SiteOfTreatmentViewModel model, bool? backToList)
+        public async Task<ActionResult> SiteOfTreatment(SiteOfTreatmentViewModel model, bool? backToList, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -187,7 +191,11 @@
 
                     if (backToList.GetValueOrDefault())
                     {
-                        return RedirectToAction("List", "Facility", new { id = model.NotificationId });
+                        return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });
+                    }
+                    else if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                     }
                     else if (model.NotificationType == NotificationType.Recovery)
                     {
@@ -213,7 +221,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> RecoveryPreconsent(Guid id)
+        public async Task<ActionResult> RecoveryPreconsent(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -233,7 +241,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RecoveryPreconsent(Guid id, TrueFalseViewModel model)
+        public async Task<ActionResult> RecoveryPreconsent(Guid id, TrueFalseViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid || !model.Value.HasValue)
             {
@@ -248,12 +256,21 @@
                 await client.SendAsync(User.GetAccessToken(), new SetPreconsentedRecoveryFacility(id, isPreconsented));
             }
 
-            return RedirectToAction("OperationCodes", "WasteOperations", new { id });
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id });
+            }
+            else
+            {
+                return RedirectToAction("OperationCodes", "WasteOperations", new { id });
+            }
         }
 
         [HttpGet]
-        public async Task<ActionResult> Remove(Guid id, Guid entityId)
+        public async Task<ActionResult> Remove(Guid id, Guid entityId, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
             using (var client = apiClient())
             {
                 var notificationInfo =
@@ -285,14 +302,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Remove(RemoveFacilityViewModel model)
+        public async Task<ActionResult> Remove(RemoveFacilityViewModel model, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), new DeleteFacilityForNotification(model.NotificationId, model.FacilityId));
-                    return RedirectToAction("List", "Facility", new { id = model.NotificationId });
+                    return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {

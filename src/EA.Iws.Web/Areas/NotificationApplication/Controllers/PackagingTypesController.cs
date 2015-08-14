@@ -24,7 +24,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var packagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>();
             packagingTypes.ShowEnumValue = true;
@@ -61,7 +61,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(PackagingTypesViewModel model)
+        public async Task<ActionResult> Index(PackagingTypesViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -92,7 +92,14 @@
                         new SetPackagingInfoForNotification(selectedPackagingTypes, model.NotificationId,
                             model.OtherDescription));
 
-                    return RedirectToAction("Index", "SpecialHandling", new { id = model.NotificationId });
+                    if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "SpecialHandling", new { id = model.NotificationId }); 
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {

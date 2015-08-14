@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using System;
     using System.Collections.Generic;
@@ -145,7 +145,7 @@
         [Fact]
         public async Task Add_GetsNotificationBasicInfo()
         {
-            await facilityController.Add(notificationId);
+            await facilityController.Add(notificationId, null);
 
             A.CallTo(() => client.SendAsync(A<string>._, A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
@@ -181,6 +181,42 @@
             var result = await facilityController.Add(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = CreateValidAddFacility();
+
+            var result = await facilityController.Add(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = CreateValidAddFacility();
+
+            var result = await facilityController.Add(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Add_ValidModel_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = CreateValidAddFacility();
+
+            var result = await facilityController.Add(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
 
         [Fact]
@@ -230,6 +266,42 @@
             var result = await facilityController.Edit(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = CreateValidEditFacility();
+
+            var result = await facilityController.Edit(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = CreateValidEditFacility();
+
+            var result = await facilityController.Edit(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Edit_ValidModel_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = CreateValidEditFacility();
+
+            var result = await facilityController.Edit(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
 
         [Fact]
@@ -358,6 +430,24 @@
             RouteAssert.RoutesTo(result.RouteValues, "OperationCodes", "WasteOperations");
         }
 
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        [InlineData(null)]
+        public async Task SiteOfTreatment_BackToListTrue_IgnoresBackToOverview(bool? backToOverview)
+        {
+            var model = new SiteOfTreatmentViewModel
+            {
+                NotificationId = notificationId,
+                SelectedSiteOfTreatment = facilityId,
+                NotificationType = NotificationType.Recovery
+            };
+
+            var result = await facilityController.SiteOfTreatment(model, true, backToOverview) as RedirectToRouteResult;
+
+            Assert.Equal("List", result.RouteValues["action"]);
+        }
+
         [Fact]
         public async Task RecoveryPreconsent_DisposalOperation_RedirectsToOperationCodes()
         {
@@ -426,6 +516,36 @@
             RouteAssert.RoutesTo(result.RouteValues, "OperationCodes", "WasteOperations");
         }
 
+        [Fact]
+        public async Task RecoveryPreconsent_Post_BackToOverviewTrue_RedirectsToOverview()
+        {
+            var model = new TrueFalseViewModel { Value = true };
+
+            var result = await facilityController.RecoveryPreconsent(notificationId, model, true) as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
+        }
+
+        [Fact]
+        public async Task RecoveryPreconsent_Post_BackToOverviewFalse_RedirectToOperationCodes()
+        {
+            var model = new TrueFalseViewModel { Value = true };
+
+            var result = await facilityController.RecoveryPreconsent(notificationId, model, false) as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(result.RouteValues, "OperationCodes", "WasteOperations");
+        }
+        
+        [Fact]
+        public async Task RecoveryPreconsent_Post_BackToOverviewNull_RedirectToOperationCodes()
+        {
+            var model = new TrueFalseViewModel { Value = true };
+
+            var result = await facilityController.RecoveryPreconsent(notificationId, model, null) as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(result.RouteValues, "OperationCodes", "WasteOperations");
+        }
+        
         [Fact]
         public async Task Remove_MultipleFacilitiesRemoveSiteOfTreatment_ReturnsViewWithError()
         {
@@ -504,6 +624,54 @@
             var result = await facilityController.Remove(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = new RemoveFacilityViewModel
+            {
+                NotificationId = notificationId,
+                FacilityId = facilityId
+            };
+
+            var result = await facilityController.Remove(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = new RemoveFacilityViewModel
+            {
+                NotificationId = notificationId,
+                FacilityId = facilityId
+            };
+
+            var result = await facilityController.Remove(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task Remove_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = new RemoveFacilityViewModel
+            {
+                NotificationId = notificationId,
+                FacilityId = facilityId
+            };
+
+            var result = await facilityController.Remove(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
     }
 }

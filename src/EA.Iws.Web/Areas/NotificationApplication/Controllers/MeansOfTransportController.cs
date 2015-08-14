@@ -23,7 +23,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -43,7 +43,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, MeansOfTransportViewModel model)
+        public async Task<ActionResult> Index(Guid id, MeansOfTransportViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +72,14 @@
                 }
             }
 
-            return RedirectToAction("Index", "PackagingTypes", new { id });
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id });
+            }
+            else
+            {
+                return RedirectToAction("Index", "PackagingTypes", new { id }); 
+            }
         }
     }
 }

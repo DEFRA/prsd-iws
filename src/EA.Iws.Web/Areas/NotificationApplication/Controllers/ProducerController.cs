@@ -23,7 +23,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(Guid id)
+        public async Task<ActionResult> Add(Guid id, bool? backToOverview = null)
         {
             var model = new AddProducerViewModel { NotificationId = id };
 
@@ -35,7 +35,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(AddProducerViewModel model)
+        public async Task<ActionResult> Add(AddProducerViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +52,7 @@
                     await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("List", "Producer",
-                        new { id = model.NotificationId });
+                        new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -69,7 +69,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(Guid id, Guid entityId)
+        public async Task<ActionResult> Edit(Guid id, Guid entityId, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -86,7 +86,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditProducerViewModel model)
+        public async Task<ActionResult> Edit(EditProducerViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -103,7 +103,7 @@
                     await client.SendAsync(User.GetAccessToken(), request);
 
                     return RedirectToAction("List", "Producer",
-                        new { id = model.NotificationId });
+                        new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -120,8 +120,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Remove(Guid id, Guid entityId)
+        public async Task<ActionResult> Remove(Guid id, Guid entityId, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
             using (var client = apiClient())
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
@@ -149,14 +151,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Remove(RemoveProducerViewModel model)
+        public async Task<ActionResult> Remove(RemoveProducerViewModel model, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
                 try
                 {
                     await client.SendAsync(User.GetAccessToken(), new DeleteProducerForNotification(model.ProducerId, model.NotificationId));
-                    return RedirectToAction("List", "Producer", new { id = model.NotificationId });
+                    return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
                 }
                 catch (ApiBadRequestException ex)
                 {
@@ -172,8 +174,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> List(Guid id)
+        public async Task<ActionResult> List(Guid id, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
             var model = new MultipleProducersViewModel();
 
             using (var client = apiClient())
@@ -189,8 +193,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> SiteOfExport(Guid id, bool? backToList)
+        public async Task<ActionResult> SiteOfExport(Guid id, bool? backToList, bool? backToOverview = null)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
             using (var client = apiClient())
             {
                 var response =
@@ -208,7 +214,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SiteOfExport(SiteOfExportViewModel model, bool? backToList)
+        public async Task<ActionResult> SiteOfExport(SiteOfExportViewModel model, bool? backToList, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -219,7 +225,11 @@
 
                     if (backToList.GetValueOrDefault())
                     {
-                        return RedirectToAction("List", "Producer", new { id = model.NotificationId });
+                        return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
+                    }
+                    else if (backToOverview.GetValueOrDefault())
+                    {
+                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                     }
                     else
                     {

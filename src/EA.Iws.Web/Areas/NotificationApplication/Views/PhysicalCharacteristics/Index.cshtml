@@ -8,7 +8,7 @@
     <p>This is what the waste looks like at normal temperatures and pressures</p>
     <p>Select all that apply:</p>
 </header>
-@using (Html.BeginForm(actionName: "Index", controllerName: "PhysicalCharacteristics", method: FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

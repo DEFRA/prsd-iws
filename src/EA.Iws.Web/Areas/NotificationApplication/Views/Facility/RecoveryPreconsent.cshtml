@@ -3,7 +3,7 @@
     ViewBag.Title = "Is Recovery Facility Pre-consented?";
 }
 
-@using (Html.BeginForm(actionName: "RecoveryPreconsent", controllerName: "Facility", method: FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

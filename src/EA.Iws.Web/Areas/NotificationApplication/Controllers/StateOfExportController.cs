@@ -31,7 +31,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -45,7 +45,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, StateOfExportViewModel model, string submit)
+        public async Task<ActionResult> Index(Guid id, StateOfExportViewModel model, string submit, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
@@ -64,7 +64,7 @@
                     case ChangeCountry:
                         return ChangeCountryAction(id, model, client);
                     default:
-                        return await SubmitAction(id, model, client);
+                        return await SubmitAction(id, model, client, backToOverview);
                 }
             }
         }
@@ -84,7 +84,7 @@
             return View("Index", model);
         }
 
-        private async Task<ActionResult> SubmitAction(Guid id, StateOfExportViewModel model, IIwsClient client)
+        private async Task<ActionResult> SubmitAction(Guid id, StateOfExportViewModel model, IIwsClient client, bool? backToOverview)
         {
             await client.SendAsync(User.GetAccessToken(),
                 new SetStateOfExportForNotification(id,
@@ -92,7 +92,14 @@
                     model.EntryOrExitPointId.Value,
                     model.CompetentAuthorities.SelectedValue));
 
-            return RedirectToAction("Index", "StateOfImport", new { id });
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id });
+            }
+            else
+            {
+                return RedirectToAction("Index", "StateOfImport", new { id }); 
+            }
         }
 
         private async Task<SelectList> GetCountrySelectListForModel(IIwsClient client, StateOfExportViewModel model)

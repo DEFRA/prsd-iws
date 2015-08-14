@@ -3,7 +3,7 @@
     ViewBag.Title = "Intended carrier(s)";
 }
 
-@using (Html.BeginForm("Add", "Carrier", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

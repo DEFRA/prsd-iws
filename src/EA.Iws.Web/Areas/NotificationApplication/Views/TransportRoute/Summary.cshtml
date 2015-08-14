@@ -5,11 +5,9 @@
 
 <h2 class="heading-large">Transport route</h2>
 
-@Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary { { "Id", ViewBag.NotificationId } })
-
-@Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary { { "Id", ViewBag.NotificationId } })
-
-@Html.Partial("StateOfImportSummary", Model.StateOfImportData, new ViewDataDictionary{{"Id", ViewBag.NotificationId}})
+@Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })
+@Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })
+@Html.Partial("StateOfImportSummary", Model.StateOfImportData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })
 
 @using (Html.BeginForm())
 {

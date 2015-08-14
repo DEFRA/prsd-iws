@@ -29,9 +29,11 @@
                             @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
+                            @Html.ActionLink("Edit", "Edit", "Producer",
+                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                             <span class="table-divider">|</span>
-                            @Html.ActionLink("Remove", "Remove", "Producer", new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id }, null)
+                            @Html.ActionLink("Remove", "Remove", "Producer",
+                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                         </td>
                     </tr>
                 }
@@ -41,7 +43,13 @@
 }
 
 <div class="form-group">
-    @Html.ActionLink("Add producer", "Add", "Producer", new { id = Model.NotificationId }, null)
+    @Html.ActionLink("Add producer", "Add", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
-
-@Html.ActionLink("Continue", "SiteOfExport", "Producer", new { id = Model.NotificationId }, new { @class = "button" })
+@if (ViewBag.BackToOverview)
+{
+    @Html.ActionLink("Continue", "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+}
+else
+{
+    @Html.ActionLink("Continue", "SiteOfExport", "Producer", new { id = Model.NotificationId }, new { @class = "button" })
+}

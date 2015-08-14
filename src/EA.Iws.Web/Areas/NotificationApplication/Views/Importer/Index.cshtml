@@ -12,7 +12,7 @@
     ViewBag.NonJavascriptMessage = message;
 }
 
-@using (Html.BeginForm("Index", "Importer", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

@@ -24,7 +24,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ChemicalComposition(Guid id)
+        public async Task<ActionResult> ChemicalComposition(Guid id, bool? backToOverview = null)
         {
             var model = new ChemicalCompositionViewModel
             {
@@ -46,7 +46,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChemicalComposition(ChemicalCompositionViewModel model)
+        public ActionResult ChemicalComposition(ChemicalCompositionViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -56,18 +56,18 @@
             switch (model.ChemicalCompositionType.SelectedValue)
             {
                 case "Solid recovered fuel (SRF)":
-                    return RedirectToAction("RdfSrfType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.SRF });
+                    return RedirectToAction("RdfSrfType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.SRF, backToOverview });
                 case "Refuse derived fuel (RDF)":
-                    return RedirectToAction("RdfSrfType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.RDF });
+                    return RedirectToAction("RdfSrfType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.RDF, backToOverview });
                 case "Wood":
-                    return RedirectToAction("WoodType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.Wood });
+                    return RedirectToAction("WoodType", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.Wood, backToOverview });
                 default:
-                    return RedirectToAction("OtherWaste", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.Other });
+                    return RedirectToAction("OtherWaste", new { id = model.NotificationId, chemicalCompositionType = ChemicalCompositionType.Other, backToOverview });
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> OtherWaste(Guid id, ChemicalCompositionType chemicalCompositionType)
+        public async Task<ActionResult> OtherWaste(Guid id, ChemicalCompositionType chemicalCompositionType, bool? backToOverview = null)
         {
             var model = new OtherWasteViewModel
             {
@@ -89,7 +89,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> OtherWaste(OtherWasteViewModel model)
+        public async Task<ActionResult> OtherWaste(OtherWasteViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -105,12 +105,12 @@
                     ChemicalCompositionType = ChemicalCompositionType.Other
                 });
 
-                return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId });
+                return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId, backToOverview });
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> OtherWasteAdditionalInformation(Guid id)
+        public async Task<ActionResult> OtherWasteAdditionalInformation(Guid id, bool? backToOverview = null)
         {
             var model = new OtherWasteAdditionalInformationViewModel
             {
@@ -132,7 +132,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> OtherWasteAdditionalInformation(OtherWasteAdditionalInformationViewModel model)
+        public async Task<ActionResult> OtherWasteAdditionalInformation(OtherWasteAdditionalInformationViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -144,11 +144,18 @@
                 await client.SendAsync(User.GetAccessToken(), new SetOtherWasteAdditionalInformation(model.NotificationId, model.Description, model.HasAttachement));
             }
 
-            return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
+            }
+            else
+            {
+                return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId }); 
+            }
         }
 
         [HttpGet]
-        public async Task<ActionResult> WoodType(Guid id, ChemicalCompositionType chemicalCompositionType)
+        public async Task<ActionResult> WoodType(Guid id, ChemicalCompositionType chemicalCompositionType, bool? backToOverview = null)
         {
             var model = GetViewModelForWood(id, chemicalCompositionType);
 
@@ -159,7 +166,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> WoodType(ChemicalCompositionConcentrationLevelsViewModel model)
+        public async Task<ActionResult> WoodType(ChemicalCompositionConcentrationLevelsViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -197,11 +204,11 @@
                 await client.SendAsync(User.GetAccessToken(), new SetWoodTypeDescription(model.Description, model.NotificationId));
             }
 
-            return RedirectToAction("WoodAdditionalInformation", new { id = model.NotificationId, chemicalCompositionType = model.ChemicalCompositionType });
+            return RedirectToAction("WoodAdditionalInformation", new { id = model.NotificationId, chemicalCompositionType = model.ChemicalCompositionType, backToOverview });
         }
 
         [HttpGet]
-        public async Task<ActionResult> RdfSrfType(Guid id, ChemicalCompositionType chemicalCompositionType)
+        public async Task<ActionResult> RdfSrfType(Guid id, ChemicalCompositionType chemicalCompositionType, bool? backToOverview = null)
         {
             var model = GetBlankViewModel(id, chemicalCompositionType);
 
@@ -212,7 +219,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RdfSrfType(ChemicalCompositionConcentrationLevelsViewModel model)
+        public async Task<ActionResult> RdfSrfType(ChemicalCompositionConcentrationLevelsViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -250,11 +257,11 @@
             {
                 await client.SendAsync(User.GetAccessToken(), createNewWasteType);
             }
-            return RedirectToAction("RdfAdditionalInformation", new { id = model.NotificationId, chemicalCompositionType = model.ChemicalCompositionType });
+            return RedirectToAction("RdfAdditionalInformation", new { id = model.NotificationId, chemicalCompositionType = model.ChemicalCompositionType, backToOverview });
         }
 
         [HttpGet]
-        public async Task<ActionResult> WoodAdditionalInformation(Guid id, ChemicalCompositionType chemicalCompositionType)
+        public async Task<ActionResult> WoodAdditionalInformation(Guid id, ChemicalCompositionType chemicalCompositionType, bool? backToOverview = null)
         {
             var categories = Enum.GetValues(typeof(WasteInformationType)).Cast<int>()
                             .Select(c => new WoodInformationData { WasteInformationType = (WasteInformationType)c })
@@ -275,7 +282,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> WoodAdditionalInformation(ChemicalCompositionInformationViewModel model)
+        public async Task<ActionResult> WoodAdditionalInformation(ChemicalCompositionInformationViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -293,11 +300,18 @@
                         new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.HasAnnex,
                             model.NotificationId));
             }
-            return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
+            }
+            else
+            {
+                return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
+            }
         }
 
         [HttpGet]
-        public async Task<ActionResult> RdfAdditionalInformation(Guid id)
+        public async Task<ActionResult> RdfAdditionalInformation(Guid id, bool? backToOverview = null)
         {
             var categories = GetWasteInformationType();
 
@@ -314,7 +328,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RdfAdditionalInformation(ChemicalCompositionInformationViewModel model)
+        public async Task<ActionResult> RdfAdditionalInformation(ChemicalCompositionInformationViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
@@ -329,7 +343,14 @@
                 await client.SendAsync(User.GetAccessToken(), new SetEnergyAndOptionalInformation(model.Energy, model.FurtherInformation, model.HasAnnex, model.NotificationId));
             }
 
-            return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
+            }
+            else
+            {
+                return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });  
+            }
         }
 
         private List<WasteTypeCompositionData> GetChemicalCompositionCategories()

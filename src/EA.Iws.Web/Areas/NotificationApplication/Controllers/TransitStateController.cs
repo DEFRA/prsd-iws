@@ -32,8 +32,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, Guid? entityId)
+        public async Task<ActionResult> Index(Guid id, Guid? entityId, bool? backToOverview)
         {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
             using (var client = apiClient())
             {
                 TransitStateWithTransportRouteData result =
@@ -46,10 +47,10 @@
                 return View(model);
             }
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, Guid? entityId, TransitStateViewModel model, string submit)
+        public async Task<ActionResult> Index(Guid id, Guid? entityId, TransitStateViewModel model, string submit, bool? backToOverview)
         {
             using (var client = apiClient())
             {
@@ -68,7 +69,7 @@
                     case ChangeCountry:
                         return ChangeCountryAction(id, model, client);
                     default:
-                        return await SubmitAction(id, entityId, model, client);
+                        return await SubmitAction(id, entityId, model, client, backToOverview);
                 }
             }
         }
@@ -88,7 +89,7 @@
             return View("Index", model);
         }
 
-        private async Task<ActionResult> SubmitAction(Guid id, Guid? transitStateId, TransitStateViewModel model, IIwsClient client)
+        private async Task<ActionResult> SubmitAction(Guid id, Guid? transitStateId, TransitStateViewModel model, IIwsClient client, bool? backToOverview)
         {
             try
             {
@@ -99,10 +100,10 @@
                     model.CompetentAuthorities.SelectedValue,
                     transitStateId,
                     model.OrdinalPosition);
-                
+
                 await client.SendAsync(User.GetAccessToken(), request);
 
-                return RedirectToAction("Summary", "TransportRoute", new { id });
+                return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
             }
             catch (ApiException)
             {
@@ -113,13 +114,13 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(Guid id, Guid delete)
+        public async Task<ActionResult> Delete(Guid id, Guid delete, bool? backToOverview = null)
         {
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new RemoveTransitStateForNotification(id, delete));
 
-                return RedirectToAction("Summary", "TransportRoute", new { id });
+                return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
             }
         }
 
