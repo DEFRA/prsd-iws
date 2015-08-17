@@ -78,9 +78,12 @@
                 var newExists = context.Organisations.Any(x => x.Id == org.Id);
                 Assert.True(newExists);
             }
+            catch (Exception ex)
+            {
+            }
             finally
             {
-                CleanUp(org);
+                context.DeleteOnCommit(org);
 
                 context.Entry(newUser).State = EntityState.Deleted;
                 context.SaveChanges();
@@ -198,13 +201,6 @@
         private static Address TestAddress(Country country)
         {
             return new Address("test street", null, "Woking", null, "GU22 7UM", country.Name);
-        }
-
-        private void CleanUp(Organisation organisation)
-        {
-            context.Organisations.Remove(organisation);
-
-            context.SaveChanges();
         }
     }
 }

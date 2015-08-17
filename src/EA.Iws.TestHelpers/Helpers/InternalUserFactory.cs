@@ -13,6 +13,8 @@
             ObjectInstantiator<InternalUser>.SetProperty(x => x.User, user, internalUser);
             ObjectInstantiator<InternalUser>.SetProperty(x => x.UserId, user.Id, internalUser);
 
+            ObjectInstantiator<InternalUser>.SetProperty(x => x.CompetentAuthority, UKCompetentAuthority.England, internalUser);
+
             return internalUser;
         }
     }

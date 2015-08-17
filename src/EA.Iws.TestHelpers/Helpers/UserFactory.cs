@@ -14,6 +14,7 @@
             ObjectInstantiator<User>.SetProperty(u => u.Surname, lastName, user);
             ObjectInstantiator<User>.SetProperty(u => u.PhoneNumber, phoneNumber, user);
             ObjectInstantiator<User>.SetProperty(u => u.Email, email, user);
+            ObjectInstantiator<User>.SetProperty(u => u.UserName, email, user);
 
             return user;
         }
