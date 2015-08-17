@@ -48,14 +48,6 @@ ALTER TABLE [Business].[Producer] DROP COLUMN [Building];
 
 
 GO
-PRINT N'Refreshing [Notification].[uspNotificationProgress]...';
-
-
-GO
-EXECUTE sp_refreshsqlmodule N'[Notification].[uspNotificationProgress]';
-
-
-GO
 PRINT N'Update complete.';
 
 
