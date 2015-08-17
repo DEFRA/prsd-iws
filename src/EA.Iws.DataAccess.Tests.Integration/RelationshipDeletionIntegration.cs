@@ -78,9 +78,6 @@
                 var newExists = context.Organisations.Any(x => x.Id == org.Id);
                 Assert.True(newExists);
             }
-            catch (Exception ex)
-            {
-            }
             finally
             {
                 context.DeleteOnCommit(org);
