@@ -27,13 +27,6 @@
             Database.SetInitializer<IwsContext>(null);
         }
 
-        public IwsContext(IUserContext userContext)
-            : base("name=Iws.DefaultConnection")
-        {
-            this.userContext = userContext;
-            Database.SetInitializer<IwsContext>(null);
-        }
-
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
 
         public virtual DbSet<Country> Countries { get; set; }
@@ -86,7 +79,11 @@
             this.DeleteRemovedRelationships();
             this.AuditChanges(userContext.UserId);
 
-            return base.SaveChanges();
+            int result = base.SaveChanges();
+
+            Task.Run(() => this.DispatchEvents(dispatcher)).Wait();
+
+            return result;
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
@@ -97,10 +94,7 @@
 
             int result = await base.SaveChangesAsync(cancellationToken);
 
-            if (dispatcher != null)
-            {
-                await this.DispatchEvents(dispatcher);
-            }
+            await this.DispatchEvents(dispatcher);
 
             return result;
         }

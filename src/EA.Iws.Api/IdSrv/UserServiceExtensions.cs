@@ -26,6 +26,7 @@
             factory.Register(new Registration<IwsContext>() { Mode = RegistrationMode.InstancePerHttpRequest });
             factory.Register(new Registration<IUserContext, UserContext>() { Mode = RegistrationMode.InstancePerHttpRequest });
             factory.Register(new Registration<IAuthenticationManager>(resolver => HttpContext.Current.GetOwinContext().Authentication) { Mode = RegistrationMode.InstancePerHttpRequest });
+            factory.Register(new Registration<IEventDispatcher, NullEventDispatcher>() { Mode = RegistrationMode.Singleton });
         }
     }
 }
