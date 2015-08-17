@@ -3,6 +3,7 @@
     using System;
     using Core.Admin;
     using Events;
+    using Prsd.Core;
     using Prsd.Core.Domain;
 
     public class InternalUser : Entity
@@ -13,6 +14,10 @@
 
         public InternalUser(string userId, string jobTitle, UKCompetentAuthority competentAuthority, Guid localAreaId)
         {
+            Guard.ArgumentNotNullOrEmpty(() => userId, userId);
+            Guard.ArgumentNotNullOrEmpty(() => jobTitle, jobTitle);
+            Guard.ArgumentNotDefaultValue(() => localAreaId, localAreaId);
+
             UserId = userId;
             JobTitle = jobTitle;
             CompetentAuthority = competentAuthority;
