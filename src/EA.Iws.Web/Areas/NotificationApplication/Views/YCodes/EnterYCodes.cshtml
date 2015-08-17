@@ -1,0 +1,105 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.YCodesViewModel
+
+@{
+    ViewBag.Title = "Y codes, H codes and UN class";
+}
+
+<div class="grid-row">
+    <header class="hgroup">
+        <h2 class="heading-large">What Y codes apply to the waste?</h2>
+    </header>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+
+        <div class="wastecode-block" id="YcodePosition">
+            <div class="@Html.Gds().FormGroupClass(m => m.SelectedYcode)">
+                <div class="heading-medium">Type your code and select from the options that will appear in the list.</div>
+                @Html.Gds().ValidationMessageFor(m => m.SelectedYcode)
+                <select data-val="true" data-val-required="The SelectedYcode field is required." id="ycode-list" name="SelectedYcode">
+                    <option description="" selected="selected" value=""></option>
+                    @foreach (var wasteCode in Model.Ycodes)
+                    {
+                        <option ycodedescription="@wasteCode.Description" ycode="@wasteCode.Code" value="@wasteCode.Id">@wasteCode.Code</option>
+                    }
+                </select>
+                <button id="YcodeAdd" type="submit" name="command" value="addYcode">Insert this code into table below</button>
+            </div>
+            @Html.Gds().CheckBoxFor(m => m.IsNotApplicable)
+
+            <table id="nonjsYcodeDescriptionTable">
+                <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                @if (Model.SelectedYcodesList.Count < 1)
+                {
+                    <tr>
+                        <td>Awaiting code...</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+                @for (int i = 0; i < Model.SelectedYcodesList.Count; i++)
+                {
+                    <tr>
+                        <td><input name="SelectedYCodesList[@i].Code" type="hidden" value="@Model.SelectedYcodesList[i].Code" />@Model.SelectedYcodesList[i].Code</td>
+                        <td><input name="SelectedYCodesList[@i].Description" type="hidden" value="@Model.SelectedYcodesList[i].Description" />@Model.SelectedYcodesList[i].Description</td>
+                        <td><input name="SelectedYCodesList[@i].Id" type="hidden" value="@Model.SelectedYcodesList[i].Id" /></td>
+                        <td><button class="link-submit" type="submit" name="remove" value="@Model.SelectedYcodesList[i].Id">Remove</button></td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="form-group">
+            <button class="button" type="submit" name="command" value="continue">Save and Continue</button>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        (function ($) {
+            $(function () {
+                $('#ycode-list').selectToAutocomplete();
+                $('#hcode-list').selectToAutocomplete();
+                $('#unclass-list').selectToAutocomplete();
+            });
+        })(jQuery);
+
+        $(function () {
+            $('#YcodeAdd').css('display', 'inline-block');
+
+            $('#HcodeAdd').css('display', 'inline-block');
+
+            $('#UnClassAdd').css('display', 'inline-block');
+
+            var codeAdded = $('#typeOfCodeAdded').val();
+
+            if (codeAdded == "Y") {
+                $('#YcodeAdd').prev('.ui-autocomplete-input').focus().val('');
+            }
+
+            if (codeAdded == "H") {
+                $("html, body").animate({ scrollTop: ($('#HcodePosition').offset().top) }, 500);
+                $('#HcodeAdd').prev('.ui-autocomplete-input').focus().val('');
+            }
+
+            if (codeAdded == "UN") {
+                $("html, body").animate({ scrollTop: ($('#UnClassPosition').offset().top) }, 500);
+                $('#UnClassAdd').prev('.ui-autocomplete-input').focus().val('');
+            }
+
+        });
+
+    </script>
+}
