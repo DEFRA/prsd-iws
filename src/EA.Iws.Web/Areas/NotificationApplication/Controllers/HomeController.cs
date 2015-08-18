@@ -80,29 +80,5 @@
                 return PartialView(response);
             }
         }
-
-        [HttpGet]
-        public ActionResult Disclaimer(Guid id)
-        {
-            var model = new DisclaimerViewModel { Id = id };
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Disclaimer(DisclaimerViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(),
-                    new SubmitNotification(model.Id));
-                return RedirectToAction("Index", "WhatToDoNext", new { id = model.Id });
-            }
-        }
     }
 }

@@ -450,7 +450,7 @@
     <Content Include="Areas\NotificationApplication\Views\WasteType\WoodAdditionalInformation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\WoodType.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\_BusinessType.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Home\Disclaimer.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\Disclaimer.cshtml" />
     <Content Include="Content\iws\_overview.scss" />
     <Content Include="Areas\NotificationApplication\Views\Home\_SubmitSideBar.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Index.cshtml" />
@@ -516,6 +516,7 @@
     <Content Include="Content\govuk_toolkit\stylesheets\_conditionals.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
     <Content Include="Areas\NotificationApplication\Views\BaselOecdCode\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -656,6 +657,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\FinancialGuaranteeController.cs" />

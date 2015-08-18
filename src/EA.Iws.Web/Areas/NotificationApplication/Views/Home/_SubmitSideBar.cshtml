@@ -34,7 +34,7 @@
 
 @if (Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
 {
-    @Html.ActionLink("Submit", "Disclaimer", "Home", null, new { @class = "button" })
+    @Html.ActionLink("Submit", "Disclaimer", "Submit", null, new { @class = "button" })
 }
 else
 {
