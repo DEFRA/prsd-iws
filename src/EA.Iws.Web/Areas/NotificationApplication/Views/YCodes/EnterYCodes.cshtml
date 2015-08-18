@@ -12,7 +12,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.EnterWasteCodesViewModel.NotificationId)
 
     @Html.EditorFor(m => m.EnterWasteCodesViewModel)
 
@@ -27,36 +27,9 @@
     <script>
         (function ($) {
             $(function () {
-                $('#ycode-list').selectToAutocomplete();
-                $('#hcode-list').selectToAutocomplete();
-                $('#unclass-list').selectToAutocomplete();
+                $('#code-list').selectToAutocomplete();
             });
         })(jQuery);
-
-        $(function () {
-            $('#YcodeAdd').css('display', 'inline-block');
-
-            $('#HcodeAdd').css('display', 'inline-block');
-
-            $('#UnClassAdd').css('display', 'inline-block');
-
-            var codeAdded = $('#typeOfCodeAdded').val();
-
-            if (codeAdded == "Y") {
-                $('#YcodeAdd').prev('.ui-autocomplete-input').focus().val('');
-            }
-
-            if (codeAdded == "H") {
-                $("html, body").animate({ scrollTop: ($('#HcodePosition').offset().top) }, 500);
-                $('#HcodeAdd').prev('.ui-autocomplete-input').focus().val('');
-            }
-
-            if (codeAdded == "UN") {
-                $("html, body").animate({ scrollTop: ($('#UnClassPosition').offset().top) }, 500);
-                $('#UnClassAdd').prev('.ui-autocomplete-input').focus().val('');
-            }
-
-        });
 
     </script>
 }

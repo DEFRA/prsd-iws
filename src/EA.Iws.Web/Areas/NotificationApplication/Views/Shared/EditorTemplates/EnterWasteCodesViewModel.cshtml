@@ -1,22 +1,21 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.EnterWasteCodesViewModel
 
-
-<div class="wastecode-block" id="YcodePosition">
+<div class="wastecode-block">
     <div class="@Html.Gds().FormGroupClass(m => m.SelectedCode)">
         <div class="heading-medium">Type your code and select from the options that will appear in the list.</div>
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
-        <select data-val="true" data-val-required="The SelectedYcode field is required." id="ycode-list" name="EnterWasteCodesViewModel.SelectedCode">
+        <select data-val="true" id="code-list" name="EnterWasteCodesViewModel.SelectedCode">
             <option description="" selected="selected" value=""></option>
             @foreach (var wasteCode in Model.Codes)
             {
-                <option ycodedescription="@wasteCode.Description" ycode="@wasteCode.Code" value="@wasteCode.Id">@wasteCode.Code</option>
+                <option codedescription="@wasteCode.Description" code="@wasteCode.Code" value="@wasteCode.Id">@wasteCode.Code</option>
             }
         </select>
-        <button id="YcodeAdd" type="submit" name="command" value="addYcode">Insert this code into table below</button>
+        <button type="submit" name="command" value="addcode">Insert this code into table below</button>
     </div>
     @Html.Gds().CheckBoxFor(m => m.IsNotApplicable)
 
-    <table id="nonjsYcodeDescriptionTable">
+    <table>
         <thead>
             <tr>
                 <th>Code</th>

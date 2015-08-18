@@ -17,6 +17,7 @@
     public class YCodesController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
+        private static readonly IList<CodeType> RequiredCodeTypes = new[] { CodeType.Y };
 
         public YCodesController(Func<IIwsClient> apiClient)
         {
@@ -26,15 +27,17 @@
         [HttpGet]
         public async Task<ActionResult> EnterYCodes(Guid id)
         {
-            var model = new YCodesViewModel
-            {
-                NotificationId = id
-            };
+            var model = new YCodesViewModel();
 
             using (var client = apiClient())
             {
-                model.EnterWasteCodesViewModel.Codes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Y));
-                model.EnterWasteCodesViewModel.SelectedCodesList = new List<WasteCodeData>(await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.Y)));
+                var result =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
+
+                model.EnterWasteCodesViewModel.Codes = result.LookupWasteCodeData.Values.Single().ToList();
+                model.EnterWasteCodesViewModel.SelectedCodesList = result.NotificationWasteCodeData.Values.Single().ToList();
                 model.EnterWasteCodesViewModel.NotificationId = id;
             }
 
@@ -47,7 +50,7 @@
         {
             if (remove != null)
             {
-                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                await InitializeYcodeHcodeAndUnClassViewModel(model.EnterWasteCodesViewModel.NotificationId, model);
                 ModelState.Clear();
 
                 if (model.EnterWasteCodesViewModel.SelectedCodesList.Any(c => c.Id.ToString() == remove))
@@ -58,9 +61,9 @@
                 return View(model);
             }
 
-            if (command.Equals("addYcode"))
+            if (command.Equals("addcode"))
             {
-                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                await InitializeYcodeHcodeAndUnClassViewModel(model.EnterWasteCodesViewModel.NotificationId, model);
                 WasteCodeData codeToAdd;
 
                 try
@@ -99,56 +102,57 @@
 
             if (!ModelState.IsValid)
             {
-                await InitializeYcodeHcodeAndUnClassViewModel(model);
+                await InitializeYcodeHcodeAndUnClassViewModel(model.EnterWasteCodesViewModel.NotificationId, model);
                 return View(model);
             }
 
             if (command == "continue")
             {
-                using (var client = apiClient())
+                if (model.EnterWasteCodesViewModel.SelectedCode != null)
                 {
-                    if (model.EnterWasteCodesViewModel.SelectedCode != null)
+                    var selectedYWasteCode = new WasteCodeData { Id = new Guid(model.EnterWasteCodesViewModel.SelectedCode) };
+                    if (model.EnterWasteCodesViewModel.SelectedCodesList == null)
                     {
-                        var selectedYWasteCode = new WasteCodeData { Id = new Guid(model.EnterWasteCodesViewModel.SelectedCode) };
-                        if (model.EnterWasteCodesViewModel.SelectedCodesList == null)
+                        model.EnterWasteCodesViewModel.SelectedCodesList = new List<WasteCodeData>();
+                        model.EnterWasteCodesViewModel.SelectedCodesList.Add(selectedYWasteCode);
+                    }
+                    else
+                    {
+                        if (model.EnterWasteCodesViewModel.SelectedCodesList.All(x => x.Id != selectedYWasteCode.Id))
                         {
-                            model.EnterWasteCodesViewModel.SelectedCodesList = new List<WasteCodeData>();
                             model.EnterWasteCodesViewModel.SelectedCodesList.Add(selectedYWasteCode);
                         }
-                        else
-                        {
-                            if (model.EnterWasteCodesViewModel.SelectedCodesList.All(x => x.Id != selectedYWasteCode.Id))
-                            {
-                                model.EnterWasteCodesViewModel.SelectedCodesList.Add(selectedYWasteCode);
-                            }
-                        }
                     }
+                }
 
-                    try
+                try
+                {
+                    return RedirectToAction("EnterYCodes", new { id = model.EnterWasteCodesViewModel.NotificationId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+                    if (ModelState.IsValid)
                     {
-                        //await client.SendAsync(User.GetAccessToken(), new SetYHUnWasteCodes(model.NotificationId, model.SelectedYcodesList.Select(p => p.Id)));
-                        return RedirectToAction("UnNumber", new { id = model.NotificationId });
-                    }
-                    catch (ApiBadRequestException ex)
-                    {
-                        this.HandleBadRequest(ex);
-                        if (ModelState.IsValid)
-                        {
-                            throw;
-                        }
+                        throw;
                     }
                 }
             }
 
-            await InitializeYcodeHcodeAndUnClassViewModel(model);
+            await InitializeYcodeHcodeAndUnClassViewModel(model.EnterWasteCodesViewModel.NotificationId, model);
             return View(model);
         }
 
-        private async Task<YCodesViewModel> InitializeYcodeHcodeAndUnClassViewModel(YCodesViewModel model)
+        private async Task<YCodesViewModel> InitializeYcodeHcodeAndUnClassViewModel(Guid id, YCodesViewModel model)
         {
             using (var client = apiClient())
             {
-                model.EnterWasteCodesViewModel.Codes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Y));
+                var result =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
+
+                model.EnterWasteCodesViewModel.Codes = result.LookupWasteCodeData.Values.Single().ToList();
                 return model;
             }
         }
