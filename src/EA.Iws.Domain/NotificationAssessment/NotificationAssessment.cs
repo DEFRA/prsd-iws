@@ -52,8 +52,7 @@
                 .Permit(Trigger.Submit, NotificationStatus.Submitted);
 
             stateMachine.Configure(NotificationStatus.Submitted)
-                .OnEntryFrom(Trigger.Submit, OnSubmit)
-                .PermitReentry(Trigger.Submit);
+                .OnEntryFrom(Trigger.Submit, OnSubmit);
 
             return stateMachine;
         }

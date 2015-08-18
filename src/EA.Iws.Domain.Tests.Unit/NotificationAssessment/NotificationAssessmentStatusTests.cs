@@ -41,12 +41,12 @@
         }
 
         [Fact]
-        public void CanSubmitTwice()
+        public void CantSubmitTwice()
         {
             notificationAssessment.Submit(progressService);
-            notificationAssessment.Submit(progressService);
+            Action submitAgain = () => notificationAssessment.Submit(progressService);
 
-            Assert.Equal(NotificationStatus.Submitted, notificationAssessment.Status);
+            Assert.Throws<InvalidOperationException>(submitAgain);
         }
 
         [Fact]

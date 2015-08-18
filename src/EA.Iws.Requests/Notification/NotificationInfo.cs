@@ -1,18 +1,7 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
-    using System.Collections.Generic;
-    using Core.MeansOfTransport;
     using Core.Notification;
-    using Core.OperationCodes;
-    using Core.RecoveryInfo;
-    using Core.Shared;
-    using Core.Shipment;
-    using Core.TechnologyEmployed;
-    using Core.WasteCodes;
-    using Core.WasteType;
-    using CustomsOffice;
-    using StateOfExport;
 
     public class NotificationInfo
     {

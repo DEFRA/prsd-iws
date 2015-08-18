@@ -4,9 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
-    using EA.Iws.Core.Notification;
-    using EA.Iws.Requests.Submit;
-    using EA.Prsd.Core.Mapper;
+    using Core.Notification;
     using Infrastructure;
     using Prsd.Core;
     using Prsd.Core.Web.ApiClient;
