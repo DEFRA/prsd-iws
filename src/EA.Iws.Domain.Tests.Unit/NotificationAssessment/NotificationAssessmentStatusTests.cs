@@ -6,24 +6,20 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
-    using Prsd.Core.Domain;
     using Xunit;
 
     public class NotificationAssessmentStatusTests
     {
         private readonly Guid notificationId;
         private readonly NotificationAssessment notificationAssessment;
-        private readonly IDeferredEventDispatcher dispatcher;
         private readonly INotificationProgressService progressService;
 
         public NotificationAssessmentStatusTests()
         {
             notificationId = new Guid("C4C62654-048C-45A2-BF7F-9837EFCF328F");
             notificationAssessment = new NotificationAssessment(notificationId);
-            dispatcher = A.Fake<IDeferredEventDispatcher>();
             progressService = A.Fake<INotificationProgressService>();
             A.CallTo(() => progressService.IsComplete(notificationId)).Returns(true);
-            DomainEvents.Dispatcher = dispatcher;
         }
 
         [Fact]
