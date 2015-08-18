@@ -11,14 +11,14 @@
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class GetDatesHandlerTests
+    public class SetDatesHandlerTests
     {
         private readonly IwsContext context;
         private readonly SetDatesHandler handler;
         private readonly NotificationDates notificationDates;
         private readonly Guid notificationId = new Guid("5243D3E5-CA81-4A3E-B589-4D22D6676B28");
 
-        public GetDatesHandlerTests()
+        public SetDatesHandlerTests()
         {
             context = new TestIwsContext();
             handler = new SetDatesHandler(context);
