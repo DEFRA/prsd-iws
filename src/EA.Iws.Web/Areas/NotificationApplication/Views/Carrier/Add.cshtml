@@ -1,17 +1,6 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddCarrierViewModel
 @{
     ViewBag.Title = "Intended carrier(s)";
-
-    var message = @"This may be the waste carrier licence number that allows the intended carrier to transport waste across land.  
-                    If this carrier has more than one license, for example, for different stages of the journey, enter each licence number separated by a comma.  
-                    Enter Not applicable where no relevant registration number applies.";
-
-    ViewBag.SoleTraderRegistrationNumber = message;
-    ViewBag.PartnershipRegistrationNumber = message;
-    ViewBag.CompanyRegistrationNumber = message;
-    ViewBag.SoleTraderRegistrationNumber = message;
-    ViewBag.OtherRegistrationNumber = string.Empty;
-    ViewBag.NonJavascriptMessage = message;
 }
 
 @using (Html.BeginForm("Add", "Carrier", FormMethod.Post))
@@ -26,7 +15,7 @@
     </header>
 
 
-    @Html.EditorFor(m => m.Business)
+    @Html.Partial("CarrierBusinessTypeViewModel", Model.Business)
 
     <h2 class="heading-medium">Address</h2>
     <hr />

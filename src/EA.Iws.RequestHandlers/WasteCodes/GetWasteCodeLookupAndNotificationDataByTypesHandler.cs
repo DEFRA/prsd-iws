@@ -28,7 +28,7 @@
             var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.Id);
 
             IList<WasteCode> lookupCodes = await GetLookupCodes(message);
-            IList<WasteCode> notificationCodes = await GetNotificationCodes(message, notification);
+            IList<WasteCode> notificationCodes = GetNotificationCodes(message, notification);
             
             var lookupCodesDictionary = lookupCodes.GroupBy(wc => wc.CodeType).ToDictionary(x => x.Key, x => mapper.Map(x));
 
@@ -46,7 +46,7 @@
             };
         }
 
-        private async Task<IList<WasteCode>> GetNotificationCodes(GetWasteCodeLookupAndNotificationDataByTypes message, NotificationApplication notification)
+        private IList<WasteCode> GetNotificationCodes(GetWasteCodeLookupAndNotificationDataByTypes message, NotificationApplication notification)
         {
             if (message.NotificationWasteCodeTypes.Count == 0)
             {

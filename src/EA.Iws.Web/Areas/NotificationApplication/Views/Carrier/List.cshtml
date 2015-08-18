@@ -2,8 +2,9 @@
 @{
     ViewBag.Title = "List Carriers";
 }
-<h2 class="heading-large">Intended carriers</h2>
-<p>Add details of all the intended carriers for the whole journey.</p>
+<h2 class="heading-large">Who are your intended carriers?</h2>
+<p>Add details of all the intended carriers for the whole journey. 
+    After you've added your first carrier, you can add several more by selecting "Add another carrier"</p>
 
 @if (Model != null && Model.Carriers.Any())
 {
@@ -41,6 +42,13 @@
 }
 
 <div class="form-group">
-    @Html.ActionLink("Add carrier", "Add", "Carrier", new { id = Model.NotificationId }, null)
+    @if (Model != null && Model.Carriers.Any())
+    {
+        @Html.ActionLink("Add another carrier", "Add", "Carrier", new { id = Model.NotificationId }, null)
+    }
+    else
+    {
+        @Html.ActionLink("Add your first carrier", "Add", "Carrier", new { id = Model.NotificationId }, null)
+    }
 </div>
 @Html.ActionLink("Continue", "Index", "MeansOfTransport", new { id = Model.NotificationId }, new { @class = "button" })
