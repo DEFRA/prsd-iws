@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Admin
+﻿namespace EA.Iws.Requests.Admin.UserAdministration
 {
     using System;
     using Core.Notification;

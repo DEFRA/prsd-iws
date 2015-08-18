@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Admin
+﻿namespace EA.Iws.RequestHandlers.Admin.NotificationAssessment
 {
     using System;
     using System.Data.Entity;
@@ -7,7 +7,7 @@
     using DataAccess;
     using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
-    using Requests.Admin;
+    using Requests.Admin.NotificationAssessment;
 
     public class SetDecisionHandler : IRequestHandler<SetDecision, Guid>
     {

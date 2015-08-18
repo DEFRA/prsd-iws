@@ -149,10 +149,10 @@
   <ItemGroup>
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
-    <Compile Include="Controllers\Admin\FinancialGuaranteeControllerTests.cs" />
+    <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />
     <Compile Include="Controllers\CarrierControllerTests.cs" />
-    <Compile Include="Controllers\DecisionControllerTests.cs" />
-    <Compile Include="Controllers\KeyDatesControllerTests.cs" />
+    <Compile Include="Controllers\NotificationAssessment\DecisionControllerTests.cs" />
+    <Compile Include="Controllers\NotificationAssessment\KeyDatesControllerTests.cs" />
     <Compile Include="Controllers\ControllerTests.cs" />
     <Compile Include="Controllers\FacilityControllerTests.cs" />
     <Compile Include="Controllers\NewNotificationControllerTests.cs" />

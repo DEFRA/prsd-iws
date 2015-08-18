@@ -8,6 +8,7 @@
     using Infrastructure;
     using Prsd.Core.Helpers;
     using Requests.Admin;
+    using Requests.Admin.NotificationAssessment;
     using ViewModels;
 
     [Authorize(Roles = "internal")]

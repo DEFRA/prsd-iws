@@ -15,6 +15,7 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Prsd.Core.Web.OAuth;
     using Requests.Admin;
+    using Requests.Admin.UserAdministration;
     using Services;
     using ViewModels;
 

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers.Admin
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationAssessment
 {
     using System;
     using System.Collections.Generic;

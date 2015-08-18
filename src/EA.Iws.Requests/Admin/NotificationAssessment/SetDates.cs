@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Admin
+﻿namespace EA.Iws.Requests.Admin.NotificationAssessment
 {
     using System;
     using Prsd.Core.Mediator;

@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.UserAdministration
 {
     using System;
     using System.Linq;
     using Core.Notification;
-    using RequestHandlers.Admin;
-    using Requests.Admin;
+    using RequestHandlers.Admin.UserAdministration;
+    using Requests.Admin.UserAdministration;
     using Xunit;
 
     public class CreateInternalUserHandlerTests

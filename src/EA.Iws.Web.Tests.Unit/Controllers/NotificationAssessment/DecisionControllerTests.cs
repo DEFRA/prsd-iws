@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationAssessment
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@
     using Areas.NotificationAssessment.Controllers;
     using Areas.NotificationAssessment.ViewModels;
     using FakeItEasy;
-    using Requests.Admin;
+    using Requests.Admin.NotificationAssessment;
     using Web.ViewModels.Shared;
     using Xunit;
 

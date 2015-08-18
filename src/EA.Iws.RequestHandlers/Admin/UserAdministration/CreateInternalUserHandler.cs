@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.RequestHandlers.Admin
+﻿namespace EA.Iws.RequestHandlers.Admin.UserAdministration
 {
     using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
     using Prsd.Core.Mediator;
-    using Requests.Admin;
+    using Requests.Admin.UserAdministration;
 
     internal class CreateInternalUserHandler : IRequestHandler<CreateInternalUser, Guid>
     {

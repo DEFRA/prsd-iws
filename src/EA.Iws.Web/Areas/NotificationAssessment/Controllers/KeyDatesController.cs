@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
-    using Requests.Admin;
+    using Requests.Admin.NotificationAssessment;
     using ViewModels;
 
     [Authorize(Roles = "internal")]

@@ -68,22 +68,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\CreateInternalUserHandlerTests.cs" />
+    <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuaranteeHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandlerTests.cs" />
-    <Compile Include="Admin\SetDatesHandlerTests.cs" />
-    <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetDatesHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\InternalUserCollection.cs" />
     <Compile Include="Carrier\CarrierHandlerTests.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
-    <Compile Include="Admin\SetDecisionHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetDecisionHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
@@ -151,7 +151,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="NotificationAssessment\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

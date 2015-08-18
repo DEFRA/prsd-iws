@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.NotificationAssessment
 {
     using System;
     using System.Threading.Tasks;
@@ -7,8 +7,8 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
-    using RequestHandlers.Admin;
-    using Requests.Admin;
+    using RequestHandlers.Admin.NotificationAssessment;
+    using Requests.Admin.NotificationAssessment;
     using TestHelpers.Helpers;
     using Xunit;
 

@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\CreateInternalUserHandler.cs" />
+    <Compile Include="Admin\UserAdministration\CreateInternalUserHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuaranteeHandler.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />
     <Compile Include="Admin\Registration\GetLocalAreasHandler.cs" />
-    <Compile Include="Admin\SetDatesHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetDatesHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
@@ -211,7 +211,7 @@
     <Compile Include="RecoveryInfo\AddRecoveryInfoToNotificationHandler.cs" />
     <Compile Include="RecoveryInfo\GetRecoveryValuesDataHandler.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
-    <Compile Include="Admin\SetDecisionHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetDecisionHandler.cs" />
     <Compile Include="Registration\UpdateOrganisationOfUserHandler.cs" />
     <Compile Include="Shared\GetCountriesHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
