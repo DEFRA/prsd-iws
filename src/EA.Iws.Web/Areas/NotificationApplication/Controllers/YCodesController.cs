@@ -33,8 +33,9 @@
 
             using (var client = apiClient())
             {
-                model.Ycodes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Y));
-                model.SelectedYcodesList = new List<WasteCodeData>(await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.Y)));
+                model.EnterWasteCodesViewModel.Codes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Y));
+                model.EnterWasteCodesViewModel.SelectedCodesList = new List<WasteCodeData>(await client.SendAsync(User.GetAccessToken(), new GetWasteCodesForNotification(model.NotificationId, CodeType.Y)));
+                model.EnterWasteCodesViewModel.NotificationId = id;
             }
 
             return View(model);
@@ -49,9 +50,9 @@
                 await InitializeYcodeHcodeAndUnClassViewModel(model);
                 ModelState.Clear();
 
-                if (model.SelectedYcodesList.Any(c => c.Id.ToString() == remove))
+                if (model.EnterWasteCodesViewModel.SelectedCodesList.Any(c => c.Id.ToString() == remove))
                 {
-                    model.SelectedYcodesList.RemoveAll(c => c.Id.ToString() == remove);
+                    model.EnterWasteCodesViewModel.SelectedCodesList.RemoveAll(c => c.Id.ToString() == remove);
                 }
 
                 return View(model);
@@ -64,7 +65,7 @@
 
                 try
                 {
-                    codeToAdd = model.Ycodes.Single(c => c.Id.ToString() == model.SelectedYcode);
+                    codeToAdd = model.EnterWasteCodesViewModel.Codes.Single(c => c.Id.ToString() == model.EnterWasteCodesViewModel.SelectedCode);
                 }
                 catch (Exception)
                 {
@@ -73,24 +74,24 @@
 
                 if (codeToAdd.Code.Equals("Not applicable"))
                 {
-                    model.SelectedYcodesList.Clear();
-                    model.SelectedYcodesList.Add(codeToAdd);
+                    model.EnterWasteCodesViewModel.SelectedCodesList.Clear();
+                    model.EnterWasteCodesViewModel.SelectedCodesList.Add(codeToAdd);
                     return View(model);
                 }
 
-                if (model.SelectedYcodesList == null)
+                if (model.EnterWasteCodesViewModel.SelectedCodesList == null)
                 {
-                    model.SelectedYcodesList = new List<WasteCodeData>();
+                    model.EnterWasteCodesViewModel.SelectedCodesList = new List<WasteCodeData>();
                 }
 
-                if (model.SelectedYcodesList.All(c => c.Id != codeToAdd.Id))
+                if (model.EnterWasteCodesViewModel.SelectedCodesList.All(c => c.Id != codeToAdd.Id))
                 {
-                    if (model.SelectedYcodesList.Any(c => c.Code == "Not applicable"))
+                    if (model.EnterWasteCodesViewModel.SelectedCodesList.Any(c => c.Code == "Not applicable"))
                     {
-                        model.SelectedYcodesList.RemoveAll(c => c.Code.Equals("Not applicable"));
+                        model.EnterWasteCodesViewModel.SelectedCodesList.RemoveAll(c => c.Code.Equals("Not applicable"));
                     }
 
-                    model.SelectedYcodesList.Add(codeToAdd);
+                    model.EnterWasteCodesViewModel.SelectedCodesList.Add(codeToAdd);
                 }
 
                 return View(model);
@@ -106,19 +107,19 @@
             {
                 using (var client = apiClient())
                 {
-                    if (model.SelectedYcode != null)
+                    if (model.EnterWasteCodesViewModel.SelectedCode != null)
                     {
-                        var selectedYWasteCode = new WasteCodeData { Id = new Guid(model.SelectedYcode) };
-                        if (model.SelectedYcodesList == null)
+                        var selectedYWasteCode = new WasteCodeData { Id = new Guid(model.EnterWasteCodesViewModel.SelectedCode) };
+                        if (model.EnterWasteCodesViewModel.SelectedCodesList == null)
                         {
-                            model.SelectedYcodesList = new List<WasteCodeData>();
-                            model.SelectedYcodesList.Add(selectedYWasteCode);
+                            model.EnterWasteCodesViewModel.SelectedCodesList = new List<WasteCodeData>();
+                            model.EnterWasteCodesViewModel.SelectedCodesList.Add(selectedYWasteCode);
                         }
                         else
                         {
-                            if (model.SelectedYcodesList.All(x => x.Id != selectedYWasteCode.Id))
+                            if (model.EnterWasteCodesViewModel.SelectedCodesList.All(x => x.Id != selectedYWasteCode.Id))
                             {
-                                model.SelectedYcodesList.Add(selectedYWasteCode);
+                                model.EnterWasteCodesViewModel.SelectedCodesList.Add(selectedYWasteCode);
                             }
                         }
                     }
@@ -147,7 +148,7 @@
         {
             using (var client = apiClient())
             {
-                model.Ycodes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Y));
+                model.EnterWasteCodesViewModel.Codes = await client.SendAsync(User.GetAccessToken(), new GetWasteCodesByType(CodeType.Y));
                 return model;
             }
         }

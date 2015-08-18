@@ -1,0 +1,47 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.EnterWasteCodesViewModel
+
+
+<div class="wastecode-block" id="YcodePosition">
+    <div class="@Html.Gds().FormGroupClass(m => m.SelectedCode)">
+        <div class="heading-medium">Type your code and select from the options that will appear in the list.</div>
+        @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
+        <select data-val="true" data-val-required="The SelectedYcode field is required." id="ycode-list" name="EnterWasteCodesViewModel.SelectedCode">
+            <option description="" selected="selected" value=""></option>
+            @foreach (var wasteCode in Model.Codes)
+            {
+                <option ycodedescription="@wasteCode.Description" ycode="@wasteCode.Code" value="@wasteCode.Id">@wasteCode.Code</option>
+            }
+        </select>
+        <button id="YcodeAdd" type="submit" name="command" value="addYcode">Insert this code into table below</button>
+    </div>
+    @Html.Gds().CheckBoxFor(m => m.IsNotApplicable)
+
+    <table id="nonjsYcodeDescriptionTable">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model.SelectedCodesList.Count < 1)
+        {
+            <tr>
+                <td>Awaiting code...</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        @for (int i = 0; i < Model.SelectedCodesList.Count; i++)
+        {
+            <tr>
+                <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Code" type="hidden" value="@Model.SelectedCodesList[i].Code" />@Model.SelectedCodesList[i].Code</td>
+                <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Description" type="hidden" value="@Model.SelectedCodesList[i].Description" />@Model.SelectedCodesList[i].Description</td>
+                <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.SelectedCodesList[i].Id" /></td>
+                <td><button class="link-submit" type="submit" name="remove" value="@Model.SelectedCodesList[i].Id">Remove</button></td>
+            </tr>
+        }
+    </table>
+</div>

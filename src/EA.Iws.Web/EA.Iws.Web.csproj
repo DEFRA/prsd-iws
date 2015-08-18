@@ -518,6 +518,7 @@
     <Content Include="Areas\NotificationApplication\Views\BaselOecdCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\YCodes\EnterYCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -697,6 +698,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\SubmitSideBarViewModel.cs" />
     <Content Include="Areas\NotificationApplication\Views\Home\_SummaryTableContainer.cshtml" />
     <Compile Include="Areas\NotificationApplication\Views\Shared\WasteCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\EnterWasteCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\YCodesViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationAssessment\NotificationAssessmentAreaRegistration.cs" />
