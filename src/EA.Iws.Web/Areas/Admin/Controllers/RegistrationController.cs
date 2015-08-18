@@ -95,7 +95,7 @@
 
                     await
                         client.SendAsync(signInResponse.AccessToken,
-                            new CreateInternalUser(userId, model.JobTitle, model.LocalAreaId, model.CompetentAuthority));
+                            new CreateInternalUser(userId, model.JobTitle, model.LocalAreaId.GetValueOrDefault(), model.CompetentAuthority.GetValueOrDefault()));
 
                     return RedirectToAction("AdminEmailVerificationRequired");
                 }

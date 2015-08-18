@@ -22,11 +22,11 @@
 
         [Required]
         [Display(Name = "Competent authority")]
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public CompetentAuthority? CompetentAuthority { get; set; }
 
         [Required]
         [Display(Name = "Local area covered")]
-        public Guid LocalAreaId { get; set; }
+        public Guid? LocalAreaId { get; set; }
 
         [Required]
         [StringLength(80)]
@@ -57,9 +57,13 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (CompetentAuthority == CompetentAuthority.England && !Email.EndsWith("@environment-agency.gov.uk"))
+            if (CompetentAuthority.GetValueOrDefault() == Core.Notification.CompetentAuthority.England &&
+                !Email.EndsWith("@environment-agency.gov.uk"))
             {
-                yield return new ValidationResult("Email address must end in @environment-agency.gov.uk when applying to the EA", new[] { "Email" });                
+                yield return
+                    new ValidationResult(
+                        "Email address must end in @environment-agency.gov.uk when applying to the EA",
+                        new[] { "Email" });
             }
         }
     }
