@@ -6,27 +6,27 @@ WasteCodes nvarchar(max)
 DECLARE @customscodeid uniqueidentifier
 SET @customscodeid =
 ( 
-    SELECT id FROM [Lookup].[WasteCode] WHERE codetype = 10
+    SELECT id FROM [Lookup].[WasteCode] WHERE [CodeType] = 10
 )
 
 INSERT INTO @wasteCodes
-SELECT DISTINCT WC2.NotificationId, STUFF(
-             (SELECT ', ' + [CustomCode] 
+SELECT DISTINCT WCI2.NotificationId, STUFF(
+             (SELECT ', ' + WCI.[CustomCode] 
               FROM [Business].[WasteCodeInfo] WCI
               INNER JOIN [Lookup].[WasteCode] WC ON WC.Id = WCI.WasteCodeId
-              WHERE codetype = 10
-              AND NotificationId = WC2.NotificationId
+              WHERE WCI.[CodeType] = 10
+              AND WCI.NotificationId = WCI2.NotificationId
               FOR XML PATH (''))
              , 1, 1, '')
-FROM [Business].[WasteCodeInfo] WC2 where wastecodeid = @customscodeid
+FROM [Business].[WasteCodeInfo] WCI2 where WCI2.[WasteCodeId] = @customscodeid
 
 DELETE FROM [Business].[WasteCodeInfo] WHERE ID NOT IN
 (
-    SELECT MIN(id) AS ID FROM [Business].[WasteCodeInfo]
-    GROUP BY wastecodeid, notificationid
-    HAVING wastecodeid = @customscodeid
+    SELECT MIN(Id) AS Id FROM [Business].[WasteCodeInfo]
+    GROUP BY [WasteCodeId], [NotificationId]
+    HAVING [WasteCodeId] = @customscodeid
 )
-AND wastecodeid = @customscodeid
+AND [WasteCodeId] = @customscodeid
 
 UPDATE WCI
 SET CustomCode = T.WasteCodes 
