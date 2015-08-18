@@ -96,6 +96,7 @@
     <Content Include="scripts\Update\Sprint14\20150813-120000-update-local-area.sql" />
     <Content Include="scripts\Update\Sprint14\20150814-093432-update-waste-code-information.sql" />
     <Content Include="scripts\Update\Sprint14\20150814-145800-create-internal-user-table.sql" />
+    <Content Include="scripts\Update\Sprint14\20150818-095623-remove-multiple-customs-codes.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
