@@ -7,6 +7,8 @@
         [Display(Name = "Not submitted")]
         NotSubmitted = 1,
         [Display(Name = "Submitted")]
-        Submitted = 2
+        Submitted = 2,
+        [Display(Name = "Notification received")]
+        NotificationReceived = 3
     }
 }

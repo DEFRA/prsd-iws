@@ -24,7 +24,7 @@
         }
 
         [Fact]
-        public async Task DecisionDate_ValidInput_NoValidationError()
+        public async Task Index_ValidInput_NoValidationError()
         {
             var result = await SetDecisionRequiredDate(22, 7, 2015) as ViewResult;
 
@@ -32,7 +32,7 @@
         }
 
         [Fact]
-        public async Task DecisionDate_ValidInput_DecisionDateSetCorrectly()
+        public async Task Index_ValidInput_DecisionDateSetCorrectly()
         {
             SetDates expectedDates = new SetDates();
             expectedDates.DecisionDate = new DateTime(2015, 7, 22);
@@ -41,7 +41,55 @@
             A.CallTo(() => client.SendAsync(A<string>.Ignored, A<SetDates>.That.Matches(dates => dates.DecisionDate == expectedDates.DecisionDate))).MustHaveHappened(Repeated.Exactly.Once);
         }
 
-        private Task<ViewResult> SetDecisionRequiredDate(int day, int month, int year)
+        [Fact]
+        public async Task NotificationReceived_ValidInput_NoValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.NotificationReceivedDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 1));
+            model.Command = "notificationReceived";
+
+            var controller = GetMockAssessmentController(model);
+
+            var result = await controller.Index(model) as ViewResult;
+
+            Assert.True(result.ViewData.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task NotificationReceived_InvalidInput_ValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.Command = "notificationReceived";
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NotificationReceivedDate"));
+        }
+
+        [Fact]
+        public async Task NotificationReceived_ValidInput_CallsClient()
+        {
+            var model = new DateInputViewModel();
+            model.NotificationReceivedDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 1));
+            model.Command = "notificationReceived";
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            A.CallTo(
+                () =>
+                    client.SendAsync(A<string>._,
+                        A<SetNotificationReceivedDate>.That.Matches(
+                            p =>
+                                p.NotificationId == model.NotificationId &&
+                                p.NotificationReceivedDate == model.NotificationReceivedDate.AsDateTime().Value)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        private Task<ActionResult> SetDecisionRequiredDate(int day, int month, int year)
         {
             DateInputViewModel model = new DateInputViewModel();
             model.DecisionDate = new OptionalDateInputViewModel();
@@ -52,7 +100,7 @@
 
             var controller = GetMockAssessmentController(model);
 
-            return controller.DateInput(model);
+            return controller.Index(model);
         }
 
         private KeyDatesController GetMockAssessmentController(object viewModel)

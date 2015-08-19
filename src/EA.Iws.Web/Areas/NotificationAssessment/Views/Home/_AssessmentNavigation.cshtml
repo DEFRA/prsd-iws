@@ -7,7 +7,7 @@
 <p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</p>
 
 <h4>Notification assessment</h4>
-@Html.ActionLink("Notification assessment dates", "DateInput", "KeyDates", new { Model.Id, area = "NotificationAssessment" }, null)
+@Html.ActionLink("Notification assessment dates", "Index", "KeyDates", new { Model.Id, area = "NotificationAssessment" }, null)
 @Html.ActionLink("Notification assessment decision", "Index", "Decision", new { Model.Id, area = "NotificationAssessment" }, null)
 <h4>Financial guarantee</h4>
 @Html.ActionLink("Financial guarantee dates", "Dates", "FinancialGuarantee", new { Model.Id, area = "NotificationAssessment" }, null)

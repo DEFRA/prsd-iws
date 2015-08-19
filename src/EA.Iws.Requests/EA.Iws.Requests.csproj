@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUser.cs" />
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionRequest.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuarantee.cs" />

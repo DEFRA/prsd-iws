@@ -13,7 +13,8 @@
     {
         private enum Trigger
         {
-            Submit
+            Submit,
+            NotificationReceived
         }
 
         private readonly StateMachine<NotificationStatus, Trigger> stateMachine;
@@ -29,6 +30,8 @@
             get { return StatusChangeCollection.ToSafeIEnumerable(); }
         }
 
+        public virtual NotificationDates Dates { get; set; }
+
         protected NotificationAssessment()
         {
             stateMachine = CreateStateMachine();
@@ -40,6 +43,7 @@
             Status = NotificationStatus.NotSubmitted;
             StatusChangeCollection = new List<NotificationStatusChange>();
             stateMachine = CreateStateMachine();
+            Dates = new NotificationDates();
         }
 
         private StateMachine<NotificationStatus, Trigger> CreateStateMachine()
@@ -52,7 +56,8 @@
                 .Permit(Trigger.Submit, NotificationStatus.Submitted);
 
             stateMachine.Configure(NotificationStatus.Submitted)
-                .OnEntryFrom(Trigger.Submit, OnSubmit);
+                .OnEntryFrom(Trigger.Submit, OnSubmit)
+                .Permit(Trigger.NotificationReceived, NotificationStatus.NotificationReceived);
 
             return stateMachine;
         }
@@ -82,6 +87,12 @@
             Guard.ArgumentNotNull(() => statusChange, statusChange);
 
             StatusChangeCollection.Add(statusChange);
+        }
+
+        public void SetNotifiationReceived(DateTime receivedDate)
+        {
+            Dates.NotificationReceivedDate = receivedDate;
+            stateMachine.Fire(Trigger.NotificationReceived);
         }
     }
 }

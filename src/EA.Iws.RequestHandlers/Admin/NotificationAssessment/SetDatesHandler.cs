@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
 
@@ -25,13 +24,7 @@
                 throw new InvalidOperationException(string.Format("Notification {0} does not exist.", message.NotificationApplicationId));
             }
 
-            var notificationDates = context.NotificationDates.SingleOrDefault(a => a.NotificationApplicationId == message.NotificationApplicationId);
-
-            if (notificationDates == null)
-            {
-                notificationDates = new NotificationDates(message.NotificationApplicationId);
-                context.NotificationDates.Add(notificationDates);
-            }
+            var notificationDates = await context.NotificationAssessments.Where(a => a.NotificationApplicationId == message.NotificationApplicationId).Select(p => p.Dates).SingleAsync();
 
             notificationDates.NotificationReceivedDate = message.NotificationReceivedDate;
             notificationDates.PaymentReceivedDate = message.PaymentReceivedDate;

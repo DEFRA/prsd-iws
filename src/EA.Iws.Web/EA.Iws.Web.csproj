@@ -467,7 +467,7 @@
     <Content Include="Areas\Admin\Views\Registration\AwaitApproval.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\ApprovalRejected.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\SiteOfExport.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\KeyDates\DateInput.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatment.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\Remove.cshtml" />
@@ -519,7 +519,6 @@
     <Content Include="Areas\NotificationApplication\Views\YCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EwcCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\HCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_WasteCodes.cshtml" />

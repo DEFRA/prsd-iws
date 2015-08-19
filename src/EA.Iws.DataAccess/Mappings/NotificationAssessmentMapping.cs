@@ -16,6 +16,10 @@
                     "StatusChangeCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationAssessmentId"));
+
+            HasRequired(x => x.Dates)
+                .WithRequiredPrincipal()
+                .Map(m => m.MapKey("NotificationAssessmentId"));
         }
     }
 }

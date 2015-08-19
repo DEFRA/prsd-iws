@@ -6,6 +6,7 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class NotificationAssessmentStatusTests
@@ -13,6 +14,7 @@
         private readonly Guid notificationId;
         private readonly NotificationAssessment notificationAssessment;
         private readonly INotificationProgressService progressService;
+        private DateTime receivedDate = new DateTime(2015, 8, 1);
 
         public NotificationAssessmentStatusTests()
         {
@@ -20,6 +22,12 @@
             notificationAssessment = new NotificationAssessment(notificationId);
             progressService = A.Fake<INotificationProgressService>();
             A.CallTo(() => progressService.IsComplete(notificationId)).Returns(true);
+        }
+
+        private void SetNotificationStatusToSubmitted()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.Submitted,
+                notificationAssessment);
         }
 
         [Fact]
@@ -75,6 +83,47 @@
             Action submit = () => notificationAssessment.Submit(progressService);
 
             Assert.Throws<InvalidOperationException>(submit);
+        }
+
+        [Fact]
+        public void SetNotificationReceivedSetsDate()
+        {
+            SetNotificationStatusToSubmitted();
+
+            notificationAssessment.SetNotifiationReceived(receivedDate);
+
+            Assert.Equal(receivedDate, notificationAssessment.Dates.NotificationReceivedDate);
+        }
+
+        [Fact]
+        public void SetNotificationReceivedChangesStatusToNotificationReceived()
+        {
+            SetNotificationStatusToSubmitted();
+
+            notificationAssessment.SetNotifiationReceived(receivedDate);
+
+            Assert.Equal(NotificationStatus.NotificationReceived, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantSetNotificationStatusWhenNotSubmitted()
+        {
+            Action setNotificationReceived = () => notificationAssessment.SetNotifiationReceived(receivedDate);
+
+            Assert.Throws<InvalidOperationException>(setNotificationReceived);
+        }
+
+        [Fact]
+        public void SetNotificationReceivedRaisesStatusChangeEvent()
+        {
+            SetNotificationStatusToSubmitted();
+
+            notificationAssessment.SetNotifiationReceived(receivedDate);
+
+            Assert.Equal(notificationAssessment,
+                notificationAssessment.Events.OfType<NotificationStatusChangeEvent>()
+                    .SingleOrDefault()
+                    .NotificationAssessment);
         }
     }
 }

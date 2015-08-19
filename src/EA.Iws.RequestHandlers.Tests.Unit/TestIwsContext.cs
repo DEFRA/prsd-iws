@@ -40,7 +40,6 @@
             this.LocalAreas = new TestDbSet<LocalArea>();
             this.NotificationApplications = new TestDbSet<NotificationApplication>();
             this.NotificationAssessments = new TestDbSet<NotificationAssessment>();
-            this.NotificationDates = new TestDbSet<NotificationDates>();
             this.NotificationDecisions = new TestDbSet<NotificationDecision>();
             this.Organisations = new TestDbSet<Organisation>();
             this.PricingStructures = new TestDbSet<PricingStructure>();

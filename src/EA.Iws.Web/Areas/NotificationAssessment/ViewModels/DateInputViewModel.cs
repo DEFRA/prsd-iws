@@ -20,6 +20,8 @@
 
         public Guid NotificationId { get; set; }
 
+        public string Command { get; set; }
+
         public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
 
         public OptionalDateInputViewModel PaymentReceivedDate { get; set; }
@@ -44,6 +46,11 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Command == "notificationReceived" && !NotificationReceivedDate.IsCompleted)
+            {
+                yield return new ValidationResult("Please enter the notification received date", new[] { "NotificationReceivedDate" });
+            }
+
             if ((CommencementDate.IsCompleted || !string.IsNullOrWhiteSpace(NameOfOfficer)) && (!CommencementDate.IsCompleted || string.IsNullOrWhiteSpace(NameOfOfficer)))
             {
                 yield return new ValidationResult("Please complete the date and name of officer", new[] { "CommencementDate" });

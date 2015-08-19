@@ -19,36 +19,49 @@
         }
 
         [HttpGet]
-        public ActionResult DateInput(Guid id)
+        public ActionResult Index(Guid id)
         {
-            return View(new DateInputViewModel{NotificationId = id});
+            return View(new DateInputViewModel{ NotificationId = id });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ViewResult> DateInput(DateInputViewModel model)
+        public async Task<ActionResult> Index(DateInputViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var setDates = new SetDates
+            if (model.Command == "notificationReceived")
             {
-                NotificationReceivedDate = model.NotificationReceivedDate.AsDateTime(),
-                PaymentReceivedDate = model.PaymentReceivedDate.AsDateTime(),
-                CommencementDate = model.CommencementDate.AsDateTime(),
-                CompleteDate = model.NotificationCompleteDate.AsDateTime(),
-                TransmittedDate = model.NotificationTransmittedDate.AsDateTime(),
-                AcknowledgedDate = model.NotificationAcknowledgedDate.AsDateTime(),
-                DecisionDate = model.DecisionDate.AsDateTime(),
-                NameOfOfficer = model.NameOfOfficer,
-                NotificationApplicationId = model.NotificationId
-            };
+                var setNotificationReceivedDate = new SetNotificationReceivedDate(model.NotificationId,
+                    model.NotificationReceivedDate.AsDateTime().GetValueOrDefault());
 
-            using (var client = apiClient())
+                using (var client = apiClient())
+                {
+                    await client.SendAsync(User.GetAccessToken(), setNotificationReceivedDate);
+                }
+            }
+            else
             {
-                await client.SendAsync(User.GetAccessToken(), setDates);
+                var setDates = new SetDates
+                {
+                    NotificationReceivedDate = model.NotificationReceivedDate.AsDateTime(),
+                    PaymentReceivedDate = model.PaymentReceivedDate.AsDateTime(),
+                    CommencementDate = model.CommencementDate.AsDateTime(),
+                    CompleteDate = model.NotificationCompleteDate.AsDateTime(),
+                    TransmittedDate = model.NotificationTransmittedDate.AsDateTime(),
+                    AcknowledgedDate = model.NotificationAcknowledgedDate.AsDateTime(),
+                    DecisionDate = model.DecisionDate.AsDateTime(),
+                    NameOfOfficer = model.NameOfOfficer,
+                    NotificationApplicationId = model.NotificationId
+                };
+
+                using (var client = apiClient())
+                {
+                    await client.SendAsync(User.GetAccessToken(), setDates);
+                }
             }
             return View(model);
         }

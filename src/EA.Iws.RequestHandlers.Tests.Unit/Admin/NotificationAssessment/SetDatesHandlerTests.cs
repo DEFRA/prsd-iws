@@ -17,19 +17,26 @@
         private readonly SetDatesHandler handler;
         private readonly NotificationDates notificationDates;
         private readonly Guid notificationId = new Guid("5243D3E5-CA81-4A3E-B589-4D22D6676B28");
+        private readonly Guid assessmentId = new Guid("6F3C6D5A-9914-4C2E-B432-E6BB2AA1BD2C");
 
         public SetDatesHandlerTests()
         {
             context = new TestIwsContext();
             handler = new SetDatesHandler(context);
-            notificationDates = new NotificationDates(notificationId);
+            notificationDates = ObjectInstantiator<NotificationDates>.CreateNew();
             EntityHelper.SetEntityId(notificationDates, notificationId);
 
             var notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notification, notificationId);
 
-            context.NotificationDates.Add(notificationDates);
             context.NotificationApplications.Add(notification);
+
+            var assessment = new NotificationAssessment(notificationId);
+            EntityHelper.SetEntityId(assessment, assessmentId);
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Dates, notificationDates, assessment);
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.NotificationApplicationId, notificationId, assessment);
+
+            context.NotificationAssessments.Add(assessment);
         }
 
         [Fact]

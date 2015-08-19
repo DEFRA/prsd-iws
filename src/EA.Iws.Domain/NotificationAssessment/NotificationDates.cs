@@ -5,16 +5,9 @@ namespace EA.Iws.Domain.NotificationAssessment
 
     public class NotificationDates : Entity
     {
-        protected NotificationDates()
+        internal NotificationDates()
         {
         }
-
-        public NotificationDates(Guid notificationApplicationId)
-        {
-            NotificationApplicationId = notificationApplicationId;
-        }
-
-        public Guid NotificationApplicationId { get; private set; }
 
         public DateTime? NotificationReceivedDate { get; set; }
 

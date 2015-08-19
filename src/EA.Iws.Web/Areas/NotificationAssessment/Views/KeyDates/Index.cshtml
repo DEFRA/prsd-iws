@@ -4,34 +4,44 @@
 
 @using (Html.BeginForm())
 {
-@Html.Gds().ValidationSummary()
-@Html.HiddenFor(m => m.NotificationId)
-@Html.AntiForgeryToken()
-    
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.AntiForgeryToken()
+
+    <div>
+        <details>
+            <summary>
+                <span class="summary">Notification received date</span>
+                @if (Model.NotificationReceivedDate.AsDateTime() != null)
+                {
+                    <i class="fa-check fa green-tick"></i>
+                }
+            </summary>
+            <div class="expanded-details">
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Year)">
+                    <fieldset>
+                        <div class="form-date">
+                            @Html.Gds().HintParagraph("For example, 31 3 2015")
+                            @Html.EditorFor(m => m.NotificationReceivedDate)
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="button" name="Command" value="notificationReceived">Set received</button>
+                </div>
+            </div>
+        </details>
+    </div>
+
     <div class="form-group">
         <table>
-            <tr>
-                <td>
-                    <details>
-                        <summary><span class="summary">Notification received date</span></summary>
-                        @{if (Model.NotificationReceivedDate.AsDateTime() != null){<i class="fa-check fa green-tick"></i>}}
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Year)">
-                            <fieldset>
-                                <div class="form-date">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.EditorFor(m => m.NotificationReceivedDate)
-                                </div>
-                            </fieldset>
-                        </div>
-                    </details>
-
-                </td>
-            </tr>
+            <tr></tr>
             <tr>
                 <td>
                     <details>
                         <summary><span class="summary">Payment recieved date</span></summary>
-                        @{if (Model.PaymentReceivedDate.AsDateTime() != null){<i class="fa-check fa green-tick"></i>}}
+                        @{if (Model.PaymentReceivedDate.AsDateTime() != null)
+                        {<i class="fa-check fa green-tick"></i>}}
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Year)">
                             <fieldset>
                                 <div class="form-date">
@@ -48,7 +58,8 @@
                 <td>
                     <details>
                         <summary><span class="summary">Assessment commencement date and name of officer</span></summary>
-                        @{if (Model.CommencementComplete){<i class="fa-check fa green-tick"></i>}}
+                        @{if (Model.CommencementComplete)
+                        {<i class="fa-check fa green-tick"></i>}}
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.CommencementDate) @Html.Gds().FormGroupClass(m => m.CommencementDate.Day) @Html.Gds().FormGroupClass(m => m.CommencementDate.Month) @Html.Gds().FormGroupClass(m => m.CommencementDate.Year)">
                             <fieldset>
                                 <div class="form-date form-group">
@@ -69,7 +80,8 @@
                 <td>
                     <details>
                         <summary><span class="summary">Notification complete date</span></summary>
-                        @{if (Model.NotificationCompleteDate.AsDateTime() != null){<i class="fa-check fa green-tick"></i>}}
+                        @{if (Model.NotificationCompleteDate.AsDateTime() != null)
+                        {<i class="fa-check fa green-tick"></i>}}
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate) @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate.Year)">
                             <fieldset>
                                 <div class="form-date">
@@ -86,7 +98,8 @@
                 <td>
                     <details>
                         <summary><span class="summary">Notification transmitted date</span></summary>
-                        @{if (Model.NotificationTransmittedDate.AsDateTime() != null){<i class="fa-check fa green-tick"></i>}}
+                        @{if (Model.NotificationTransmittedDate.AsDateTime() != null)
+                        {<i class="fa-check fa green-tick"></i>}}
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationTransmittedDate) @Html.Gds().FormGroupClass(m => m.NotificationTransmittedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationTransmittedDate.Year)">
                             <fieldset>
                                 <div class="form-date">
@@ -103,7 +116,8 @@
                 <td>
                     <details>
                         <summary><span class="summary">Notification acknowledged date</span></summary>
-                        @{if (Model.NotificationAcknowledgedDate.AsDateTime() != null){<i class="fa-check fa green-tick"></i>}}
+                        @{if (Model.NotificationAcknowledgedDate.AsDateTime() != null)
+                        {<i class="fa-check fa green-tick"></i>}}
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationAcknowledgedDate) @Html.Gds().FormGroupClass(m => m.NotificationAcknowledgedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationAcknowledgedDate.Year)">
                             <fieldset>
                                 <div class="form-date">
@@ -120,7 +134,8 @@
                 <td>
                     <details>
                         <summary><span class="summary">Decision required by date</span></summary>
-                        @{if (Model.DecisionDate.AsDateTime() != null){<i class="fa-check fa green-tick"></i>}}
+                        @{if (Model.DecisionDate.AsDateTime() != null)
+                        {<i class="fa-check fa green-tick"></i>}}
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionDate) @Html.Gds().FormGroupClass(m => m.DecisionDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionDate.Year)">
                             <fieldset>
                                 <div class="form-date">
