@@ -9,16 +9,17 @@
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Requests.WasteCodes;
+    using ViewModels.HCode;
     using ViewModels.WasteCodes;
 
     [Authorize]
-    public class YCodeController : BaseWasteCodeController
+    public class HCodeController : BaseWasteCodeController
     {
-        private readonly IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper;
-        private static readonly IList<CodeType> RequiredCodeTypes = new[] { CodeType.Y };
+        private readonly IMap<WasteCodeDataAndNotificationData, HCodeViewModel> mapper;
 
-        public YCodeController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper)
-            : base(apiClient, CodeType.Y)
+        private static readonly IList<CodeType> codeTypes = new[] { CodeType.H }; 
+
+        public HCodeController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, HCodeViewModel> mapper) : base(apiClient, CodeType.H)
         {
             this.mapper = mapper;
         }
@@ -31,7 +32,7 @@
                 var result =
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
+                            new GetWasteCodeLookupAndNotificationDataByTypes(id, codeTypes, codeTypes));
 
                 return View(mapper.Map(result));
             }
@@ -39,10 +40,10 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, YCodeViewModel model, string command, string remove)
+        public async Task<ActionResult> Index(Guid id, HCodeViewModel model, string command, string remove)
         {
             return await Post(id, model, command, remove);
-        }
+        } 
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel)
         {
@@ -50,10 +51,10 @@
             {
                 await
                     client.SendAsync(User.GetAccessToken(),
-                        new SetYCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
+                        new SetHCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return RedirectToAction("Index", "HCode", new { id });
+                return RedirectToAction("Index", "UNClass", new { id });
             }
         }
     }

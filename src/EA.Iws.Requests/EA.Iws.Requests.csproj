@@ -167,6 +167,8 @@
     <Compile Include="WasteCodes\GetAllWasteCodesForNotification.cs" />
     <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypes.cs" />
     <Compile Include="WasteCodes\GetWasteCodesForNotification.cs" />
+    <Compile Include="WasteCodes\SetHCodes.cs" />
+    <Compile Include="WasteCodes\SetUNClasses.cs" />
     <Compile Include="WasteCodes\SetYCodes.cs" />
     <Compile Include="WasteCodes\SetEwcCodes.cs" />
     <Compile Include="WasteCodes\SetOtherWasteCodes.cs" />

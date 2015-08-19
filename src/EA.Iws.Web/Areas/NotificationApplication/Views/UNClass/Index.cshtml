@@ -1,12 +1,12 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.EwcCode.EwcCodeViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.UNClass.UNClassViewModel
 
 @{
-    ViewBag.Title = "EWC codes";
+    ViewBag.Title = "UN classes";
 }
 
 <div class="grid-row">
     <header class="hgroup">
-        <h2 class="heading-large">What are your European Waste Catalogues (EWC) codes?</h2>
+        <h2 class="heading-large">What UN classes apply to the waste?</h2>
     </header>
 @using (Html.BeginForm())
 {
@@ -29,5 +29,6 @@
                 $('#code-list').selectToAutocomplete();
             });
         })(jQuery);
+
     </script>
 }

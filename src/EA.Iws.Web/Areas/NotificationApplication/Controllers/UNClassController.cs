@@ -9,16 +9,16 @@
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Requests.WasteCodes;
+    using ViewModels.UNClass;
     using ViewModels.WasteCodes;
 
     [Authorize]
-    public class YCodeController : BaseWasteCodeController
+    public class UNClassController : BaseWasteCodeController
     {
-        private readonly IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper;
-        private static readonly IList<CodeType> RequiredCodeTypes = new[] { CodeType.Y };
+        private readonly IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper;
+        private static readonly IList<CodeType> codeTypes = new[] { CodeType.Un }; 
 
-        public YCodeController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper)
-            : base(apiClient, CodeType.Y)
+        public UNClassController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper) : base(apiClient, CodeType.Un)
         {
             this.mapper = mapper;
         }
@@ -31,7 +31,7 @@
                 var result =
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
+                            new GetWasteCodeLookupAndNotificationDataByTypes(id, codeTypes, codeTypes));
 
                 return View(mapper.Map(result));
             }
@@ -39,7 +39,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, YCodeViewModel model, string command, string remove)
+        public async Task<ActionResult> Index(Guid id, UNClassViewModel model, string command, string remove)
         {
             return await Post(id, model, command, remove);
         }
@@ -50,10 +50,10 @@
             {
                 await
                     client.SendAsync(User.GetAccessToken(),
-                        new SetYCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
+                        new SetUNClasses(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return RedirectToAction("Index", "HCode", new { id });
+                return RedirectToAction("Index", "UNClass", new { id });
             }
         }
     }

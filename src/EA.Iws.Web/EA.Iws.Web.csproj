@@ -521,6 +521,8 @@
     <Content Include="Areas\NotificationApplication\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EwcCode\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\HCode\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UNClass\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -663,9 +665,13 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\HCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\UNClassController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\UNClass\UNClassViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaseWasteCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\HCode\HCodeViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\FinancialGuaranteeController.cs" />
@@ -704,7 +710,7 @@
     <Content Include="Areas\NotificationApplication\Views\Home\_SummaryTableContainer.cshtml" />
     <Compile Include="Areas\NotificationApplication\Views\Shared\WasteCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\EnterWasteCodesViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\YCodesViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\YCodeViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationAssessment\NotificationAssessmentAreaRegistration.cs" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
@@ -754,6 +760,8 @@
     <Compile Include="Mappings\WasteCodes\EwcCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\BaselOecdCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\WasteCodeViewModelMap.cs" />
+    <Compile Include="Mappings\WasteCodes\HCodeMap.cs" />
+    <Compile Include="Mappings\WasteCodes\UNClassMap.cs" />
     <Compile Include="Mappings\WasteCodes\YCodeMap.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\EmailTemplate.cs" />

@@ -97,6 +97,8 @@
     <Compile Include="WasteCodes\GetAllWasteCodesForNotificationHandler.cs" />
     <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypesHandler.cs" />
     <Compile Include="WasteCodes\SetBaselOecdCodeForNotificationHandler.cs" />
+    <Compile Include="WasteCodes\SetUNClassesHandler.cs" />
+    <Compile Include="WasteCodes\SetHCodesHandler.cs" />
     <Compile Include="WasteCodes\SetYCodesHandler.cs" />
     <Compile Include="WasteCodes\SetEwcCodesHandler.cs" />
     <Compile Include="WorkingDayCalculator.cs" />
