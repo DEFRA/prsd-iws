@@ -4,7 +4,7 @@
     ViewBag.Title = "Site Of Treatment";
 }
 
-<h2 class="heading-large">Select the site the waste will be finally @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed")</h2>
+<h2 class="heading-large">Where will the waste be finally @(Model.NotificationType == NotificationType.Recovery ? "recovered?" : "disposed?")</h2>
 
 @if (Model.Facilities.Any())
 {
@@ -21,7 +21,7 @@
                     <tr>
                         <th>Organisation name</th>
                         <th>Address</th>
-                        <th>Site of @Model.NotificationType.ToString().ToLowerInvariant()?</th>
+                        <th>Actual site of @Model.NotificationType.ToString().ToLowerInvariant()</th>
                     </tr>
                 </thead>
                 <tbody>
