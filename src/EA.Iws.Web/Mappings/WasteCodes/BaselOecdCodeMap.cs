@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Mappings.WasteCodes
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Areas.NotificationApplication.ViewModels.BaselOecdCode;
     using Areas.NotificationApplication.Views.Shared;
@@ -11,6 +12,13 @@
     public class BaselOecdCodeMap : IMap<WasteCodeDataAndNotificationData, BaselOecdCodeViewModel>,
         IMapWithParameter<BaselOecdCodeViewModel, Guid, SetBaselOecdCodeForNotification>
     {
+        private readonly IMap<IEnumerable<WasteCodeData>, IList<WasteCodeViewModel>> mapper;
+
+        public BaselOecdCodeMap(IMap<IEnumerable<WasteCodeData>, IList<WasteCodeViewModel>> mapper)
+        {
+            this.mapper = mapper;
+        }
+
         public BaselOecdCodeViewModel Map(WasteCodeDataAndNotificationData source)
         {
             WasteCodeData selectedCode = null;
@@ -26,16 +34,7 @@
 
             var model = new BaselOecdCodeViewModel
             {
-                WasteCodes =
-                    source.LookupWasteCodeData.Values.SelectMany(x => x)
-                        .Select(wc => new WasteCodeViewModel
-                        {
-                            Id = wc.Id,
-                            Description = wc.Description,
-                            Name = wc.Code,
-                            CodeType = wc.CodeType
-                        })
-                        .ToList()
+                WasteCodes = mapper.Map(source.LookupWasteCodeData.Values.SelectMany(x => x))
             };
 
             if (selectedCode != null)

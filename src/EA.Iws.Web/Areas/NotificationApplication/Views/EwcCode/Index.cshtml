@@ -1,0 +1,68 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.EwcCode.EwcCodeViewModel
+@{
+    ViewBag.Title = "EWC code";
+}
+
+<h2 class="heading-large">What are your European Waste Catalogues (EWC) codes?</h2>
+
+<p>Type your code and select from the options that will appear in the list.</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    for (int i = 0; i < Model.WasteCodesViewModel.WasteCodes.Count; i++)
+    {
+        @Html.HiddenFor(m => m.WasteCodesViewModel.WasteCodes[i].Id)
+        @Html.HiddenFor(m => m.WasteCodesViewModel.WasteCodes[i].Name)
+        @Html.HiddenFor(m => m.WasteCodesViewModel.WasteCodes[i].Description, new { id = "description-" + Model.WasteCodesViewModel.WasteCodes[i].Id })
+        @Html.HiddenFor(m => m.WasteCodesViewModel.WasteCodes[i].CodeType)
+    }
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteCodesViewModel.SelectedCode)">
+        @Html.Gds().ValidationMessageFor(m => m.WasteCodesViewModel.SelectedCode)
+        @Html.Gds().DropDownListFor(m => m.WasteCodesViewModel.SelectedCode, Model.WasteCodesViewModel.Codes, string.Empty, new { id = "code-list" })
+    </div>
+    
+    <p>Or:</p>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteCodesViewModel.IsNotApplicable)">
+        @Html.Gds().ValidationMessageFor(m => m.WasteCodesViewModel.IsNotApplicable)
+        <label class="block-label" for="NotListed">
+            @Html.CheckBoxFor(m => m.WasteCodesViewModel.IsNotApplicable)
+            @Html.DisplayNameFor(m => m.WasteCodesViewModel.IsNotApplicable)
+        </label>
+    </div>
+
+    <div class="form-group">
+        <div id="descriptionTextArea">
+            <h4 class="heading-small">Description of code:</h4>
+            <div>No code selected</div>
+        </div>
+    </div>
+
+    <button class="button" type="submit">Save and continue</button>
+}
+
+@section scripts{
+    <script>
+        $(function () {
+            var dropdownId = "#code-list";
+
+            $(dropdownId).selectToAutocomplete();
+            
+            $(dropdownId).change(function() {
+                var inputToFind = "#description-" + $(this).find(":selected").attr("value");
+                var description = $(inputToFind).val();
+                if (description === undefined) {
+                    $("#descriptionTextArea div").html("No code selected");
+                } else {
+                    $("#descriptionTextArea div").html(description);
+                }
+            });
+
+            $(dropdownId).trigger("change");
+        });
+    </script>
+}

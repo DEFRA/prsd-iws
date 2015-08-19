@@ -520,6 +520,7 @@
     <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\EwcCode\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -660,7 +661,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaseWasteCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\EnterWasteCodesViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\FinancialGuaranteeController.cs" />
@@ -746,7 +752,9 @@
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\TransitStateWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\StateOfImportWithTransportRouteDataMap.cs" />
+    <Compile Include="Mappings\WasteCodes\EwcCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\BaselOecdCodeMap.cs" />
+    <Compile Include="Mappings\WasteCodes\WasteCodeViewModelMap.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\EmailTemplate.cs" />
     <Compile Include="Services\EmailTemplateService.cs" />

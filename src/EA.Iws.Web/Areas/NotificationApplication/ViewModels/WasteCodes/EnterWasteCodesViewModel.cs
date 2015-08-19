@@ -4,24 +4,31 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Core.WasteCodes;
+    using System.Web.Mvc;
+    using Views.Shared;
 
     public class EnterWasteCodesViewModel : IValidatableObject
     {
-        public Guid NotificationId { get; set; }
+        public IList<WasteCodeViewModel> WasteCodes { get; set; }
 
-        public IEnumerable<WasteCodeData> Codes { get; set; }
+        public Guid? SelectedCode { get; set; }
 
-        public string SelectedCode { get; set; }
-
-        public List<WasteCodeData> SelectedCodesList { get; set; }
+        public List<Guid> SelectedWasteCodes { get; set; }
 
         [Display(Name = "Not applicable")]
         public bool IsNotApplicable { get; set; }
 
+        public SelectList Codes
+        {
+            get
+            {
+                return new SelectList(WasteCodes, "Id", "Name", SelectedCode);
+            }
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(SelectedCode) && (SelectedCodesList == null || !SelectedCodesList.Any()) && !IsNotApplicable)
+            if (!SelectedCode.HasValue && SelectedWasteCodes == null || !SelectedWasteCodes.Any() && !IsNotApplicable)
             {
                 yield return new ValidationResult("Please enter a code or select not applicable", new[] { "SelectedCode" });
             }
