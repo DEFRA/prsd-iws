@@ -34,16 +34,6 @@
                 ChemicalComposition = GetWasteType(notification),
                 PhysicalCharacteristics = GetPhysicalCharacteristics(notification),
                 ProcessOfGeneration = GetWasteGenerationProcess(notification),
-                BaselOecdCode = wasteCodesMapper.Map(notification, CodeType.Basel),
-                EwcCodes = wasteCodesMapper.Map(notification, CodeType.Ewc),
-                NationExportCode = wasteCodesMapper.Map(notification, CodeType.ExportCode),
-                NationImportCode = wasteCodesMapper.Map(notification, CodeType.ImportCode),
-                OtherCodes = wasteCodesMapper.Map(notification, CodeType.OtherCode),
-                YCodes = wasteCodesMapper.Map(notification, CodeType.Y),
-                HCodes = wasteCodesMapper.Map(notification, CodeType.H),
-                UnClass = wasteCodesMapper.Map(notification, CodeType.Un),
-                UnNumber = wasteCodesMapper.Map(notification, CodeType.UnNumber),
-                CustomCodes = wasteCodesMapper.Map(notification, CodeType.CustomsCode)
             };
         }
 

@@ -76,6 +76,7 @@
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
     <Compile Include="Notification\NotificationBasicInformation.cs" />
     <Compile Include="Notification\SubmitNotification.cs" />
+    <Compile Include="Notification\WasteCodesOverviewInfo.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />
     <Compile Include="Notification\OrganisationsInvolvedInfo.cs" />
     <Compile Include="Notification\RecoveryOperationInfo.cs" />

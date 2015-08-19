@@ -522,6 +522,7 @@
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EwcCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\HCode\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_WasteCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UNClass\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -670,6 +671,7 @@
     <Compile Include="Areas\NotificationApplication\Controllers\UNClassController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNClass\UNClassViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\WasteCodeOverviewViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaseWasteCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\HCode\HCodeViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />

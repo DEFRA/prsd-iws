@@ -1,0 +1,294 @@
+﻿@using EA.Iws.Core.WasteCodes
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+@{
+    var id = Model.NotificationId;
+    var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
+        ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
+        EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
+}
+
+<h2 class="heading-medium">Waste codes</h2>
+
+<div>
+    <details>
+        <summary>
+            Basel or OECD code
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.AreWasteCodesCompleted)
+                {
+                    if (Model.BaselOecdCode.Any())
+                    {
+                        <h4 class="heading-small">@baselOrOecdType code</h4>
+
+                        foreach (var c in Model.BaselOecdCode)
+                        {
+                            <dl>
+                                <dt>Code:</dt>
+                                <dd>@c.Code</dd>
+
+                                <dt>Description:</dt>
+                                <dd>@c.Description</dd>
+                            </dl>
+                        }
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            EWC codes
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.AreWasteCodesCompleted)
+                {
+                    if (Model.EwcCodes.Any())
+                    {
+                        <h4 class="heading-small">EWC code(s)</h4>
+
+                        foreach (var c in Model.EwcCodes)
+                        {
+                            <dl>
+                                <dt>Code:</dt>
+                                <dd>@c.Code</dd>
+
+                                <dt>Description:</dt>
+                                <dd>@c.Description</dd>
+                            </dl>
+                        }
+
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            Y codes
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.AreWasteCodesCompleted)
+                {
+                    if (Model.YCodes.Any())
+                    {
+                        <h4 class="heading-small">Y code(s)</h4>
+                        <dl>
+                            @foreach (var c in Model.YCodes)
+                            {
+                                <dt>Code:</dt>
+                                <dd>@c.Code</dd>
+
+                                if (!string.IsNullOrWhiteSpace(c.Description))
+                                {
+                                    <dt>Description:</dt>
+                                    <dd>@c.Description</dd>
+                                }
+                            }
+                        </dl>
+
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            H or HP codes
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.AreWasteCodesCompleted)
+                {
+                    if (Model.HCodes.Any())
+                    {
+                        <h4 class="heading-small">H or HP code(s)</h4>
+                        <dl>
+                            @foreach (var c in Model.HCodes)
+                            {
+                                <dt>Code:</dt>
+                                <dd>@c.Code</dd>
+
+                                if (!string.IsNullOrWhiteSpace(c.Description))
+                                {
+                                    <dt>Description:</dt>
+                                    <dd>@c.Description</dd>
+                                }
+                            }
+                        </dl>
+
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            UN classes
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.AreWasteCodesCompleted)
+                {
+                    if (Model.UnClass.Any())
+                    {
+                        <h4 class="heading-small">UN class(es)</h4>
+                        <dl>
+                            @foreach (var c in Model.UnClass)
+                            {
+                                <dt>Code:</dt>
+                                <dd>@c.Code</dd>
+
+                                if (!string.IsNullOrWhiteSpace(c.Description))
+                                {
+                                    <dt>Description:</dt>
+                                    <dd>@c.Description</dd>
+                                }
+                            }
+                        </dl>
+
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            UN number
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @if (Model.AreWasteCodesCompleted)
+                {
+                    if (Model.UnNumber.Any())
+                    {
+                        <h4 class="heading-small">UN number(s)</h4>
+                        <dl>
+                            @foreach (var c in Model.UnNumber)
+                            {
+                                <dt>Code:</dt>
+                                <dd>@c.Code</dd>
+
+                                if (!string.IsNullOrWhiteSpace(c.Description))
+                                {
+                                    <dt>Description:</dt>
+                                    <dd>@c.Description</dd>
+                                }
+                            }
+                        </dl>
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            Other codes
+            @if (Model.AreWasteCodesCompleted)
+            {
+                <i class="fa fa-check green-text"></i>
+            }
+            <span class="edit-link-container">@Html.ActionLink("Edit", "BaselEwcCode", "WasteCodes", new { id }, null)</span>
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                    @if (Model.AreWasteCodesCompleted)
+                    {
+                        <h4 class="heading-small">Other codes</h4>
+                        <dl>
+                            @if (Model.OtherCodes.Any())
+                            {
+                            <dt>Other code:</dt>
+                            <dd>@string.Join(", ", Model.OtherCodes.Select(c => c.CustomCode).ToList())</dd>
+                            }
+
+                            <dt>National code in country of export:</dt>
+                            <dd>@string.Join(", ", Model.NationExportCode.Select(c => c.CustomCode).ToList())</dd>
+
+                            <dt>National code in country of import:</dt>
+                            <dd>@string.Join(", ", Model.NationImportCode.Select(c => c.CustomCode).ToList())</dd>
+
+                            @if (Model.CustomCodes.Any())
+                            {
+                            <dt>Customs code(s):</dt>
+                            <dd>@string.Join(", ", Model.CustomCodes.Select(c => c.CustomCode).ToList())</dd>
+                            }
+                        </dl>
+                    }
+                    else
+                    {
+                        <p>@ViewBag.SectionIncompleteText</p>
+                    }
+            </div>
+        </div>
+    </details>
+</div>

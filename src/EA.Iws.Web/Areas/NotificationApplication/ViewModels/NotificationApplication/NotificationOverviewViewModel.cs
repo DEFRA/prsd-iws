@@ -22,6 +22,8 @@
 
         public ClassifyYourWasteViewModel ClassifyYourWasteViewModel { get; set; }
 
+        public WasteCodeOverviewViewModel WasteCodeOverviewViewModel { get; set; }
+
         public WasteRecoveryViewModel WasteRecoveryViewModel { get; set; }
 
         public AmountsAndDatesViewModel AmountsAndDatesViewModel { get; set; }
@@ -46,6 +48,7 @@
             WasteRecoveryViewModel = new WasteRecoveryViewModel(notificationInfo.WasteRecoveryInfo);
             AmountsAndDatesViewModel = new AmountsAndDatesViewModel(notificationInfo.AmountsAndDatesInfo);
             SubmitSideBarViewModel = new SubmitSideBarViewModel(notificationInfo.SubmitSummaryData, notificationInfo.NotificationCharge);
+            WasteCodeOverviewViewModel = new WasteCodeOverviewViewModel(notificationInfo.WasteCodesOverviewInfo);
             NotificationCharge = notificationInfo.NotificationCharge;
         }
     }

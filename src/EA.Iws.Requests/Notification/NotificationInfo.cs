@@ -25,6 +25,8 @@
 
         public WasteRecoveryInfo WasteRecoveryInfo { get; set; }
 
+        public WasteCodesOverviewInfo WasteCodesOverviewInfo { get; set; }
+
         public AmountsAndDatesInfo AmountsAndDatesInfo { get; set; }
 
         public SubmitSummaryData SubmitSummaryData { get; set; }

@@ -32,6 +32,10 @@
     @Html.Partial("_ClassifyYourWaste", Model.ClassifyYourWasteViewModel)
 </div>
 
+<div>
+    @Html.Partial("_WasteCodes", Model.WasteCodeOverviewViewModel)
+</div>
+
 @if (Model.WasteRecoveryViewModel.NotificationType == NotificationType.Recovery)
 {
     <div>

@@ -16,6 +16,7 @@
         private readonly IMap<NotificationApplication, ClassifyYourWasteInfo> classifyYourWasteInfoMap;
         private readonly IMap<NotificationApplication, WasteRecoveryInfo> wasteRecoveryInfoMap;
         private readonly IMap<NotificationApplication, SubmitSummaryData> submitSummaryDataMap;
+        private readonly IMap<NotificationApplication, WasteCodesOverviewInfo> wasteCodesOverviewMap;
 
         public NotificationInfoMap(
             IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap,
@@ -26,7 +27,8 @@
             IMap<NotificationApplication, AmountsAndDatesInfo> amountsAndDatesInfoMap,
             IMap<NotificationApplication, ClassifyYourWasteInfo> classifyYourWasteInfoMap,
             IMap<NotificationApplication, WasteRecoveryInfo> wasteRecoveryInfoMap,
-            IMap<NotificationApplication, SubmitSummaryData> submitSummaryDataMap)
+            IMap<NotificationApplication, SubmitSummaryData> submitSummaryDataMap,
+            IMap<NotificationApplication, WasteCodesOverviewInfo> wasteCodesOverviewMap)
         {
             this.completionProgressMap = completionProgressMap;
             this.organisationsInvolvedInfoMap = organisationsInvolvedInfoMap;
@@ -37,6 +39,7 @@
             this.wasteRecoveryInfoMap = wasteRecoveryInfoMap;
             this.classifyYourWasteInfoMap = classifyYourWasteInfoMap;
             this.submitSummaryDataMap = submitSummaryDataMap;
+            this.wasteCodesOverviewMap = wasteCodesOverviewMap;
         }
 
         public NotificationInfo Map(NotificationApplication notification)
@@ -75,7 +78,9 @@
             classifyYourWasteInfo.IsChemicalCompositionCompleted = notificationCompletionProgress.HasWasteType;
             classifyYourWasteInfo.IsProcessOfGenerationCompleted = notificationCompletionProgress.HasWasteGenerationProcess;
             classifyYourWasteInfo.ArePhysicalCharacteristicsCompleted = notificationCompletionProgress.HasPhysicalCharacteristics;
-            classifyYourWasteInfo.AreWasteCodesCompleted = notificationCompletionProgress.HasWasteCodes;
+
+            var wasteCodesOverviewInfo = wasteCodesOverviewMap.Map(notification);
+            wasteCodesOverviewInfo.AreWasteCodesCompleted = notificationCompletionProgress.HasWasteCodes;
 
             var wasteRecoveryInfo = wasteRecoveryInfoMap.Map(notification);
             wasteRecoveryInfo.IsWasteRecoveryInformationCompleted = notificationCompletionProgress.HasRecoveryData;
@@ -95,6 +100,7 @@
                 AmountsAndDatesInfo = amountsAndDatesInfo,
                 ClassifyYourWasteInfo = classifyYourWasteInfo,
                 WasteRecoveryInfo = wasteRecoveryInfo,
+                WasteCodesOverviewInfo = wasteCodesOverviewInfo,
                 SubmitSummaryData = submitSummaryData
             };
         }
