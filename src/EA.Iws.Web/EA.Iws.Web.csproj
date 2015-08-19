@@ -516,7 +516,7 @@
     <Content Include="Content\govuk_toolkit\stylesheets\_conditionals.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
     <Content Include="Areas\NotificationApplication\Views\BaselOecdCode\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\YCodes\EnterYCodes.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\YCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
@@ -666,7 +666,6 @@
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaseWasteCodeViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\EnterWasteCodesViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\FinancialGuaranteeController.cs" />
@@ -685,7 +684,7 @@
     <Compile Include="Areas\FinancialGuarantee\FinancialGuaranteeAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaselOecdCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\WhatToDoNextController.cs" />
-    <Compile Include="Areas\NotificationApplication\Controllers\YCodesController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\YCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\BaselOecdCode\BaselOecdCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\RemoveCarrierViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\RemoveFacilityViewModel.cs" />
@@ -755,6 +754,7 @@
     <Compile Include="Mappings\WasteCodes\EwcCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\BaselOecdCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\WasteCodeViewModelMap.cs" />
+    <Compile Include="Mappings\WasteCodes\YCodeMap.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\EmailTemplate.cs" />
     <Compile Include="Services\EmailTemplateService.cs" />

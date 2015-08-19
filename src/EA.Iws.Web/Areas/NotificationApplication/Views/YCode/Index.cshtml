@@ -1,7 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.YCodesViewModel
 
 @{
-    ViewBag.Title = "Y codes, H codes and UN class";
+    ViewBag.Title = "Y codes";
 }
 
 <div class="grid-row">
@@ -12,7 +12,6 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-    @Html.HiddenFor(m => m.EnterWasteCodesViewModel.NotificationId)
 
     @Html.EditorFor(m => m.EnterWasteCodesViewModel)
 

@@ -20,16 +20,16 @@
 
         public EwcCodeViewModel Map(WasteCodeDataAndNotificationData source)
         {
-            WasteCodeData[] selectedCodes = null;
+            List<WasteCodeData> selectedCodes = new List<WasteCodeData>();
 
             if (source.NotificationWasteCodeData[CodeType.Ewc].Length > 0)
             {
-                selectedCodes = source.NotificationWasteCodeData[CodeType.Basel];
+                selectedCodes.AddRange(source.NotificationWasteCodeData[CodeType.Ewc]);
             }
 
             var model = new EwcCodeViewModel
             {
-                WasteCodesViewModel = new EnterWasteCodesViewModel
+                EnterWasteCodesViewModel = new EnterWasteCodesViewModel
                 {
                     SelectedWasteCodes = selectedCodes.Select(wc => wc.Id).ToList(),
                     IsNotApplicable = source.NotApplicableCodes.Any(nac => nac == CodeType.Ewc),

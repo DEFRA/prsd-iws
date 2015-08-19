@@ -9,17 +9,16 @@
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Requests.WasteCodes;
-    using ViewModels.EwcCode;
     using ViewModels.WasteCodes;
 
     [Authorize]
-    public class EwcCodeController : BaseWasteCodeController
+    public class YCodeController : BaseWasteCodeController
     {
-        private static readonly IList<CodeType> ewcCodeTypes = new[] { CodeType.Ewc }; 
-        private readonly IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper;
+        private readonly IMap<WasteCodeDataAndNotificationData, YCodesViewModel> mapper;
+        private static readonly IList<CodeType> RequiredCodeTypes = new[] { CodeType.Y };
 
-        public EwcCodeController(Func<IIwsClient> apiClient, 
-            IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper) : base(apiClient, CodeType.Ewc)
+        public YCodeController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, YCodesViewModel> mapper)
+            : base(apiClient, CodeType.Y)
         {
             this.mapper = mapper;
         }
@@ -32,7 +31,7 @@
                 var result =
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, ewcCodeTypes, ewcCodeTypes));
+                            new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
 
                 return View(mapper.Map(result));
             }
@@ -40,10 +39,10 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, EwcCodeViewModel model, string command, string remove)
+        public async Task<ActionResult> Index(Guid id, YCodesViewModel model, string command, string remove)
         {
             return await Post(id, model, command, remove);
-        } 
+        }
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel)
         {
@@ -51,10 +50,10 @@
             {
                 await
                     client.SendAsync(User.GetAccessToken(),
-                        new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
+                        new SetYCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return RedirectToAction("Index", "YCode", new { id });
+                return RedirectToAction("Index", new { id });
             }
         }
     }

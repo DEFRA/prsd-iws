@@ -42,7 +42,7 @@
                 model.SelectedCode = selectedCode.Id;
             }
 
-            if (source.NotApplicableCodes.Count > 0)
+            if (source.NotApplicableCodes.Any(ct => ct == CodeType.Oecd || ct == CodeType.Basel))
             {
                 model.NotListed = true;
             }

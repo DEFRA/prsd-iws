@@ -58,7 +58,7 @@
                             model.NotListed,
                             model.SelectedCode.Value));
 
-                return View(model);
+                return RedirectToAction("Index", "EwcCode", new { id });
             }
         }
     }

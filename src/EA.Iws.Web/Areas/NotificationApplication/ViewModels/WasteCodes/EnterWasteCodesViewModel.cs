@@ -22,15 +22,25 @@
         {
             get
             {
-                return new SelectList(WasteCodes, "Id", "Name", SelectedCode);
+                return new SelectList(WasteCodes.OrderBy(wc => wc.Name), "Id", "Name", SelectedCode);
             }
+        }
+
+        public EnterWasteCodesViewModel()
+        {
+            SelectedWasteCodes = new List<Guid>();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!SelectedCode.HasValue && SelectedWasteCodes == null || !SelectedWasteCodes.Any() && !IsNotApplicable)
+            if (!SelectedCode.HasValue && SelectedWasteCodes.Count == 0 && !IsNotApplicable)
             {
                 yield return new ValidationResult("Please enter a code or select not applicable", new[] { "SelectedCode" });
+            }
+
+            if (IsNotApplicable && SelectedWasteCodes != null && SelectedWasteCodes.Count > 0 && !SelectedCode.HasValue)
+            {
+                yield return new ValidationResult("Do not select not applicable where you have also selected codes", new[] { "IsNotApplicable" });
             }
         }
     }

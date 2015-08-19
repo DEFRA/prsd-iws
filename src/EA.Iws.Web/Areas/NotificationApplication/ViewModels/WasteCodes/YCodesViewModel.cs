@@ -1,12 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes
 {
-    public class YCodesViewModel
+    public class YCodesViewModel : BaseWasteCodeViewModel
     {
-        public EnterWasteCodesViewModel EnterWasteCodesViewModel { get; set; }
-
-        public YCodesViewModel()
-        {
-            EnterWasteCodesViewModel = new EnterWasteCodesViewModel();
-        }
     }
 }
