@@ -227,7 +227,7 @@
     <Compile Include="PackagingType\SetPackagingInfoForNotificationHandler.cs" />
     <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
     <Compile Include="StateOfExport\GetStateOfExportWithTransportRouteDataByNotificationIdHandler.cs" />
-    <Compile Include="StateOfExport\SetStateOfImportForNotificationHandler.cs" />
+    <Compile Include="StateOfExport\SetStateOfExportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\GetStateOfImportWithTransportRouteDataByNotificationIdHandler.cs" />
     <Compile Include="Submit\GetSubmitSummaryInformationHandlerForNotificationHandler.cs" />

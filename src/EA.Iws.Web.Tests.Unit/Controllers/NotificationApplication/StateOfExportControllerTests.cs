@@ -7,13 +7,9 @@
     using EA.Iws.Requests.TransportRoute;
     using EA.Iws.Web.Areas.NotificationApplication.Controllers;
     using EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfExport;
-    using EA.Iws.Web.ViewModels.Shared;
     using EA.Prsd.Core.Mapper;
     using FakeItEasy;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Xunit;
@@ -79,14 +75,7 @@
         {
             public StateOfExportViewModel Map(StateOfExportWithTransportRouteData source)
             {
-                return new StateOfExportViewModel
-                {
-                    ShowNextSection = false,
-                    Countries = new SelectList(new CountryData[]
-                    {
-                        new CountryData { Id = anyCountryId, Name = anyString }
-                    }, "Id", "Name")
-                };
+                return new StateOfExportViewModel();
             }
         }
     }

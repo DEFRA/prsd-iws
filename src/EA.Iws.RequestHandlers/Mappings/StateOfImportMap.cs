@@ -6,10 +6,6 @@
     using Domain;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
-    using Requests.Registration;
-    using Requests.Shared;
-    using Requests.StateOfImport;
-    using Requests.TransportRoute;
 
     internal class StateOfImportMap : IMap<StateOfImport, StateOfImportData>
     {

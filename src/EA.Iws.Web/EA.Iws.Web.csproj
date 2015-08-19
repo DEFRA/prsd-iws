@@ -440,8 +440,6 @@
     <Content Include="Areas\NotificationApplication\Views\TransitState\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\_AllDetails.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransitState\_CountryOnly.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\StateOfExport\_AllDetails.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\StateOfExport\_CountryOnly.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfExport\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\OtherWaste.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteType\OtherWasteAdditionalInformation.cshtml" />

@@ -21,9 +21,13 @@
         {
             var notification = await context.GetNotificationApplication(message.NotificationId);
 
-            var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
-            var competentAuthority =
-                await context.CompetentAuthorities.SingleAsync(ca => ca.Id == message.CompetentAuthorityId);
+            var ukcompAuth = await context.UnitedKingdomCompetentAuthorities.SingleAsync(ca => ca.Id == notification.CompetentAuthority.Value);
+
+            var country = await context.Countries.SingleAsync(c => c.Name == ukcompAuth.CountryName);
+
+            var caid = ukcompAuth.CompetentAuthority.Id;
+            var competentAuthority = await context.CompetentAuthorities.SingleAsync(ca => ca.Id == caid);
+
             var exitPoint = await context.EntryOrExitPoints.SingleAsync(ep => ep.Id == message.EntryOrExitPointId);
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);

@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
-    using System.Threading.Tasks;
     using Core.Shared;
     using Core.StateOfExport;
     using Core.StateOfImport;
@@ -55,18 +53,20 @@
                 TransitStates = transitStateMapper.Map(source.TransitStates)
             };
 
-            if (source.StateOfExport != null)
+            if (source.StateOfExport == null)
             {
-                var competentAuthorities = context.CompetentAuthorities
-                                            .Where(ca => ca.Country.Id == source.StateOfExport.Country.Id)
-                                            .OrderBy(x => x.Code)
-                                            .ToArray();
-                var entryPoints = context.EntryOrExitPoints.Where(ep => ep.Country.Id == source.StateOfExport.Country.Id).ToArray();
+                data.StateOfExport = new StateOfExportData();
+            
+                var ukcompAuth = context.UnitedKingdomCompetentAuthorities.Single(ca => ca.Id == source.CompetentAuthority.Value);
 
-                data.CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray();
-                data.ExitPoints = entryPoints.Select(entryOrExitPointMapper.Map).ToArray();
+                data.StateOfExport.Country = countryMapper.Map(countries.Single(c => c.Name == ukcompAuth.CountryName));
+
+                data.StateOfExport.CompetentAuthority = competentAuthorityMapper.Map(context.CompetentAuthorities.Single(ca => ca.Id == ukcompAuth.CompetentAuthority.Id));
             }
 
+            var entryPoints = context.EntryOrExitPoints.Where(ep => ep.Country.Id == data.StateOfExport.Country.Id).ToArray();
+            data.ExitPoints = entryPoints.Select(entryOrExitPointMapper.Map).ToArray();
+            
             return data;
         }
     }

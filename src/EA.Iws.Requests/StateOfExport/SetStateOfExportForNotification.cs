@@ -7,18 +7,12 @@
     {
         public Guid NotificationId { get; private set; }
 
-        public Guid CountryId { get; private set; }
-
         public Guid EntryOrExitPointId { get; private set; }
 
-        public Guid CompetentAuthorityId { get; private set; }
-
-        public SetStateOfExportForNotification(Guid notificationId, Guid countryId, Guid entryOrExitPointId, Guid competentAuthorityId)
+        public SetStateOfExportForNotification(Guid notificationId, Guid entryOrExitPointId)
         {
             NotificationId = notificationId;
-            CountryId = countryId;
             EntryOrExitPointId = entryOrExitPointId;
-            CompetentAuthorityId = competentAuthorityId;
         }
     }
 }
