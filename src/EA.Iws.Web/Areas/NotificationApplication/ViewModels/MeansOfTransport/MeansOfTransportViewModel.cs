@@ -16,7 +16,7 @@
 
         [Required(ErrorMessage = "Please answer this question")]
         [RegularExpression(@"^([RTSWA]\-)*?[RTSWA]$",
-            ErrorMessage = "Means of transport is not in a valid format. Please enter a value such as 'R-S-R'")]
+            ErrorMessage = "Means of transport is not in a valid format. Please enter a value such as R-S-R")]
         [Display(Name = "Means of transport")]
         public string SelectedMeans { get; set; }
 
