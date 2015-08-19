@@ -39,7 +39,9 @@
                         {
                             Id = n.Notification.Id,
                             NotificationNumber = n.Notification.NotificationNumber,
-                            LastUpdated = n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault() == null ? n.Notification.CreatedDate : n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault().ChangeDate,
+                            StatusDate = n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault() == null 
+                                        ? n.Notification.CreatedDate 
+                                        : n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault().ChangeDate,
                             Status = n.Assessment.Status
                         }).ToList();
         }

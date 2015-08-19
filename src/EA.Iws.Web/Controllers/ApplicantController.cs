@@ -1,10 +1,12 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
     using Requests.Notification;
+    using ViewModels.Applicant;
 
     [Authorize]
     public class ApplicantController : Controller
@@ -34,6 +36,56 @@
 
                 return PartialView(response);
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ApprovedNotification(Guid id)
+        {
+            ApprovedNotificationViewModel model;
+            using (var client = apiClient())
+            {
+                var notificationInfo = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
+                model = new ApprovedNotificationViewModel(notificationInfo.NotificationType);
+            }
+            model.NotificationId = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApprovedNotification(ApprovedNotificationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.UserChoices.SelectedValue == 1)
+            {
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId, area = "NotificationApplication" });
+            }
+            if (model.UserChoices.SelectedValue == 2)
+            {
+                return RedirectToAction("GenerateNotificationDocument", "Home", new { id = model.NotificationId, area = "NotificationApplication" });
+            }
+            if (model.UserChoices.SelectedValue == 3)
+            {
+                return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+            }
+            if (model.UserChoices.SelectedValue == 4)
+            {
+                return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+            }
+            if (model.UserChoices.SelectedValue == 5)
+            {
+                return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+            }
+            if (model.UserChoices.SelectedValue == 6)
+            {
+                return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+            }
+
+            throw new InvalidOperationException("Invalid user choice to view applicant's notification");
         }
     }
 }

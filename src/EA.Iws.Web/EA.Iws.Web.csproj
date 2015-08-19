@@ -645,6 +645,8 @@
     <Content Include="Views\Shared\DisplayTemplates\ContactData.cshtml" />
     <Content Include="Views\NewNotification\_GeneralFinancialGuarantee.cshtml" />
     <Content Include="Views\NewNotification\_SepaFinancialGuarantee.cshtml" />
+    <Content Include="Views\Applicant\ApprovedNotification.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StringIntRadioButtons.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -808,6 +810,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\AddFacilityViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\EditFacilityViewModel.cs" />
+    <Compile Include="ViewModels\Applicant\ApprovedNotificationViewModel.cs" />
     <Compile Include="ViewModels\CopyFromNotification\CopyFromNotificationViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\MeansOfTransport\MeansOfTransportViewModel.cs" />
@@ -829,6 +832,7 @@
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\OptionalDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />
+    <Compile Include="ViewModels\Shared\StringIntRadioButtons.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\SpecialHandling\SpecialHandlingViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Producer\EditProducerViewModel.cs" />

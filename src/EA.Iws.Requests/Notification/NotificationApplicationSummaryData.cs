@@ -11,6 +11,6 @@
 
         public NotificationStatus Status { get; set; }
 
-        public DateTime LastUpdated { get; set; }
+        public DateTime StatusDate { get; set; }
     }
 }
