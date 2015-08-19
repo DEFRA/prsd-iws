@@ -19,9 +19,13 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            return View(new DateInputViewModel{ NotificationId = id });
+            using (var client = apiClient())
+            {
+                var dates = await client.SendAsync(User.GetAccessToken(), new GetDates(id));
+                return View(new DateInputViewModel(dates));
+            }
         }
 
         [HttpPost]
@@ -47,7 +51,6 @@
             {
                 var setDates = new SetDates
                 {
-                    NotificationReceivedDate = model.NotificationReceivedDate.AsDateTime(),
                     PaymentReceivedDate = model.PaymentReceivedDate.AsDateTime(),
                     CommencementDate = model.CommencementDate.AsDateTime(),
                     CompleteDate = model.NotificationCompleteDate.AsDateTime(),

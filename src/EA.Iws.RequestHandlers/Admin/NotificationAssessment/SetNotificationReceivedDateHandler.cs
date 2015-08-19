@@ -22,7 +22,7 @@
                     context.NotificationAssessments.SingleAsync(
                         p => p.NotificationApplicationId == message.NotificationId);
 
-            assessment.SetNotifiationReceived(message.NotificationReceivedDate);
+            assessment.SetNotificationReceived(message.NotificationReceivedDate);
 
             await context.SaveChangesAsync();
 

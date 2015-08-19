@@ -89,7 +89,7 @@
             StatusChangeCollection.Add(statusChange);
         }
 
-        public void SetNotifiationReceived(DateTime receivedDate)
+        public void SetNotificationReceived(DateTime receivedDate)
         {
             Dates.NotificationReceivedDate = receivedDate;
             stateMachine.Fire(Trigger.NotificationReceived);

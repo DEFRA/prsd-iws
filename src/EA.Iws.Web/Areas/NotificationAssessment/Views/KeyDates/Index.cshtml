@@ -12,22 +12,31 @@
         <details>
             <summary>
                 <span class="summary">Notification received date</span>
-                @if (Model.NotificationReceivedDate.AsDateTime() != null)
+                @if (Model.NotificationReceivedDate.IsCompleted)
                 {
                     <i class="fa-check fa green-tick"></i>
                 }
             </summary>
             <div class="expanded-details">
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Year)">
-                    <fieldset>
-                        <div class="form-date">
-                            @Html.Gds().HintParagraph("For example, 31 3 2015")
-                            @Html.EditorFor(m => m.NotificationReceivedDate)
+                <div class="panel-indent">
+                    @if (Model.NotificationReceivedDate.IsCompleted)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
+                    }
+                    else
+                    {
+                        <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Year)">
+                            <fieldset>
+                                <div class="form-date">
+                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
+                                    @Html.EditorFor(m => m.NotificationReceivedDate)
+                                </div>
+                            </fieldset>
                         </div>
-                    </fieldset>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="button" name="Command" value="notificationReceived">Set received</button>
+                        <div class="form-group">
+                            <button type="submit" class="button" name="Command" value="notificationReceived">Set received</button>
+                        </div>
+                    }
                 </div>
             </div>
         </details>

@@ -26,7 +26,6 @@
 
             var notificationDates = await context.NotificationAssessments.Where(a => a.NotificationApplicationId == message.NotificationApplicationId).Select(p => p.Dates).SingleAsync();
 
-            notificationDates.NotificationReceivedDate = message.NotificationReceivedDate;
             notificationDates.PaymentReceivedDate = message.PaymentReceivedDate;
             notificationDates.CommencementDate = message.CommencementDate;
             notificationDates.CompleteDate = message.CompleteDate;

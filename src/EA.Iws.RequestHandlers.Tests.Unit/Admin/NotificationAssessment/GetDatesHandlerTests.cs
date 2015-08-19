@@ -1,0 +1,68 @@
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.NotificationAssessment
+{
+    using System;
+    using System.Threading.Tasks;
+    using Domain.NotificationAssessment;
+    using Mappings.NotificationAssessment;
+    using RequestHandlers.Admin.NotificationAssessment;
+    using Requests.Admin.NotificationAssessment;
+    using TestHelpers.Helpers;
+    using Xunit;
+
+    public class GetDatesHandlerTests
+    {
+        private readonly TestIwsContext context;
+        private readonly Guid notificationId1 = new Guid("91E55968-E01A-4015-891D-B613820B50AB");
+        private readonly DateTime receivedDate = new DateTime(2015, 8, 1);
+        private readonly Guid notificationId2 = new Guid("35D538A0-1FD9-4C4A-AB75-A9F81CE5E67A");
+        private readonly GetDatesHandler handler;
+
+        public GetDatesHandlerTests()
+        {
+            context = new TestIwsContext();
+
+            var assessment1 = new NotificationAssessment(notificationId1);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.NotificationReceivedDate, receivedDate, assessment1.Dates);
+
+            var assessment2 = new NotificationAssessment(notificationId2);
+
+            context.NotificationAssessments.AddRange(new[]
+            {
+                assessment1,
+                assessment2
+            });
+
+            handler = new GetDatesHandler(context, new NotificationDatesMap());
+        }
+
+        [Fact]
+        public async Task SetsNotificationId()
+        {
+            var message = new GetDates(notificationId1);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Equal(notificationId1, result.NotificationId);
+        }
+
+        [Fact]
+        public async Task HasReceivedDate_SetsReceivedDate()
+        {
+            var message = new GetDates(notificationId1);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Equal(receivedDate, result.NotificationReceivedDate);
+        }
+
+        [Fact]
+        public async Task HasNoReceivedDate_ReceivedDateIsNull()
+        {
+            var message = new GetDates(notificationId2);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Null(result.NotificationReceivedDate);
+        }
+    }
+}

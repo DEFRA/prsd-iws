@@ -9,6 +9,7 @@
     using Api.Client;
     using Areas.NotificationAssessment.Controllers;
     using Areas.NotificationAssessment.ViewModels;
+    using Core.NotificationAssessment;
     using FakeItEasy;
     using Requests.Admin.NotificationAssessment;
     using Web.ViewModels.Shared;
@@ -17,10 +18,23 @@
     public class KeyDatesControllerTests
     {
         private readonly IIwsClient client;
+        private Guid notificationId = new Guid("65214A82-EE7B-42FF-A4A1-220B2A7E74BB");
+        private DateTime notificationReceivedDate = new DateTime(2015, 8, 1);
+        private KeyDatesController controller;
 
         public KeyDatesControllerTests()
         {
             client = A.Fake<IIwsClient>();
+
+            A.CallTo(
+                () => client.SendAsync(A<string>._, A<GetDates>.That.Matches(p => p.NotificationId == notificationId)))
+                .Returns(new NotificationDatesData()
+                {
+                    NotificationId = notificationId,
+                    NotificationReceivedDate = notificationReceivedDate
+                });
+
+            controller = new KeyDatesController(() => client);
         }
 
         [Fact]
@@ -42,10 +56,29 @@
         }
 
         [Fact]
+        public async Task Index_FetchesNotificationDates()
+        {
+            await controller.Index(notificationId);
+
+            A.CallTo(() => client.SendAsync(A<string>._, A<GetDates>.That.Matches(dates => dates.NotificationId == notificationId)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task Index_SetsNotificationReceivedDateIfPopulated()
+        {
+            var controller = new KeyDatesController(() => client);
+
+            var result = await controller.Index(notificationId) as ViewResult;
+
+            Assert.Equal(notificationReceivedDate, ((DateInputViewModel)result.Model).NotificationReceivedDate.AsDateTime());
+        }
+
+        [Fact]
         public async Task NotificationReceived_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
-            model.NotificationReceivedDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 1));
+            model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
             model.Command = "notificationReceived";
 
             var controller = GetMockAssessmentController(model);
@@ -72,7 +105,7 @@
         public async Task NotificationReceived_ValidInput_CallsClient()
         {
             var model = new DateInputViewModel();
-            model.NotificationReceivedDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 1));
+            model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
             model.Command = "notificationReceived";
 
             var controller = GetMockAssessmentController(model);

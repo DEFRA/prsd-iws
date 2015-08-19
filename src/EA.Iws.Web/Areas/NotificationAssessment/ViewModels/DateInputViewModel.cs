@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Core.NotificationAssessment;
     using Web.ViewModels.Shared;
 
     public class DateInputViewModel : IValidatableObject
@@ -10,6 +11,18 @@
         public DateInputViewModel()
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(true);
+            PaymentReceivedDate = new OptionalDateInputViewModel(true);
+            CommencementDate = new OptionalDateInputViewModel(true);
+            NotificationCompleteDate = new OptionalDateInputViewModel(true);
+            NotificationTransmittedDate = new OptionalDateInputViewModel(true);
+            NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
+            DecisionDate = new OptionalDateInputViewModel(true);
+        }
+
+        public DateInputViewModel(NotificationDatesData dates)
+        {
+            NotificationId = dates.NotificationId;
+            NotificationReceivedDate = new OptionalDateInputViewModel(dates.NotificationReceivedDate, true);
             PaymentReceivedDate = new OptionalDateInputViewModel(true);
             CommencementDate = new OptionalDateInputViewModel(true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);

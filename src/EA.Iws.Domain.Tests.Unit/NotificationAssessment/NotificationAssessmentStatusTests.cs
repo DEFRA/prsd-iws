@@ -90,7 +90,7 @@
         {
             SetNotificationStatusToSubmitted();
 
-            notificationAssessment.SetNotifiationReceived(receivedDate);
+            notificationAssessment.SetNotificationReceived(receivedDate);
 
             Assert.Equal(receivedDate, notificationAssessment.Dates.NotificationReceivedDate);
         }
@@ -100,7 +100,7 @@
         {
             SetNotificationStatusToSubmitted();
 
-            notificationAssessment.SetNotifiationReceived(receivedDate);
+            notificationAssessment.SetNotificationReceived(receivedDate);
 
             Assert.Equal(NotificationStatus.NotificationReceived, notificationAssessment.Status);
         }
@@ -108,7 +108,7 @@
         [Fact]
         public void CantSetNotificationStatusWhenNotSubmitted()
         {
-            Action setNotificationReceived = () => notificationAssessment.SetNotifiationReceived(receivedDate);
+            Action setNotificationReceived = () => notificationAssessment.SetNotificationReceived(receivedDate);
 
             Assert.Throws<InvalidOperationException>(setNotificationReceived);
         }
@@ -118,7 +118,7 @@
         {
             SetNotificationStatusToSubmitted();
 
-            notificationAssessment.SetNotifiationReceived(receivedDate);
+            notificationAssessment.SetNotificationReceived(receivedDate);
 
             Assert.Equal(notificationAssessment,
                 notificationAssessment.Events.OfType<NotificationStatusChangeEvent>()

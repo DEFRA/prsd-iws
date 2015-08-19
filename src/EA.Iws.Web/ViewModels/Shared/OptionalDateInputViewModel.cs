@@ -33,7 +33,7 @@ namespace EA.Iws.Web.ViewModels.Shared
             AllowPastDates = allowPastDates;
         }
 
-        public OptionalDateInputViewModel(DateTime? date)
+        public OptionalDateInputViewModel(DateTime? date, bool allowPastDates = false)
         {
             if (date.HasValue)
             {
