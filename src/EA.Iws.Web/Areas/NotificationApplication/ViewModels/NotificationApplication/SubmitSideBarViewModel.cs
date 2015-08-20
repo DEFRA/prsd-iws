@@ -3,6 +3,7 @@
     using System;
     using Core.Notification;
     using Core.NotificationAssessment;
+    using EA.Prsd.Core.Helpers;
 
     public class SubmitSideBarViewModel
     {
@@ -25,7 +26,7 @@
         public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, int notificationCharge)
         {
             NotificationId = submitSummaryData.NotificationId;
-            CompetentAuthorityName = submitSummaryData.CompetentAuthority.ToString();
+            CompetentAuthorityName = EnumHelper.GetDisplayName(submitSummaryData.CompetentAuthority);
             CreatedDate = submitSummaryData.CreatedDate;
             NotificationNumber = submitSummaryData.NotificationNumber;
             Charge = notificationCharge;

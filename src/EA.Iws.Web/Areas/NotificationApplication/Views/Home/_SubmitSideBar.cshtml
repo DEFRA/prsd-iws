@@ -6,7 +6,6 @@
 
 <p>@Html.DisplayFor(m => m.CompetentAuthorityName)</p>
 <p class="lede" style="font-weight: 700;">@Html.DisplayFor(m => m.NotificationNumber)</p>
-<p class="font-xsmall"><span class="text-fade">Created:</span> @Html.Gds().DisplayDateFor(m => m.CreatedDate)</p>
 
 <h3 class="heading-medium squash-margin">Overall status</h3>
 <span>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</span>
@@ -26,17 +25,11 @@
     }
 </ul>
 
-<p>
-    <span class="line">Portable document format (PDF)</span>
-    Approximate size (3356k)
-</p>
-<p>If you do not have PDF viewer you can download it from adobe</p>
-
-@if (Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
-{
-    @Html.ActionLink("Submit", "Disclaimer", "Submit", null, new { @class = "button" })
-}
-else
-{
-    <a href="#" class="button" disabled="disabled">Submit</a>
+    @if (Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
+    {
+        @Html.ActionLink("Submit", "Disclaimer", "Submit", null, new { @class = "button" })
+    }
+    else
+    {
+        <a href="#" class="button" disabled="disabled">Submit</a>
 }
