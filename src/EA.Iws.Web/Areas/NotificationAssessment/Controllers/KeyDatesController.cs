@@ -37,21 +37,18 @@
                 return View(model);
             }
 
-            if (model.Command == "notificationReceived")
+            if (model.Command == DateInputViewModel.NotificationReceived)
             {
-                var setNotificationReceivedDate = new SetNotificationReceivedDate(model.NotificationId,
-                    model.NotificationReceivedDate.AsDateTime().GetValueOrDefault());
-
-                using (var client = apiClient())
-                {
-                    await client.SendAsync(User.GetAccessToken(), setNotificationReceivedDate);
-                }
+                await SetNotificationReceived(model);
+            }
+            else if (model.Command == DateInputViewModel.PaymentReceived)
+            {
+                await SetPaymentReceived(model);
             }
             else
             {
                 var setDates = new SetDates
                 {
-                    PaymentReceivedDate = model.PaymentReceivedDate.AsDateTime(),
                     CommencementDate = model.CommencementDate.AsDateTime(),
                     CompleteDate = model.NotificationCompleteDate.AsDateTime(),
                     TransmittedDate = model.NotificationTransmittedDate.AsDateTime(),
@@ -67,6 +64,28 @@
                 }
             }
             return View(model);
+        }
+
+        private async Task SetPaymentReceived(DateInputViewModel model)
+        {
+            var setPaymentReceivedDate = new SetPaymentReceivedDate(model.NotificationId,
+                model.PaymentReceivedDate.AsDateTime().GetValueOrDefault());
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), setPaymentReceivedDate);
+            }
+        }
+
+        private async Task SetNotificationReceived(DateInputViewModel model)
+        {
+            var setNotificationReceivedDate = new SetNotificationReceivedDate(model.NotificationId,
+                model.NotificationReceivedDate.AsDateTime().GetValueOrDefault());
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), setNotificationReceivedDate);
+            }
         }
     }
 }

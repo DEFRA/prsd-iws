@@ -21,6 +21,7 @@
         private Guid notificationId = new Guid("65214A82-EE7B-42FF-A4A1-220B2A7E74BB");
         private DateTime notificationReceivedDate = new DateTime(2015, 8, 1);
         private KeyDatesController controller;
+        private DateTime paymentReceivedDate = new DateTime(2015, 8, 2);
 
         public KeyDatesControllerTests()
         {
@@ -79,7 +80,7 @@
         {
             var model = new DateInputViewModel();
             model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
-            model.Command = "notificationReceived";
+            model.Command = DateInputViewModel.NotificationReceived;
 
             var controller = GetMockAssessmentController(model);
 
@@ -92,7 +93,7 @@
         public async Task NotificationReceived_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
-            model.Command = "notificationReceived";
+            model.Command = DateInputViewModel.NotificationReceived;
 
             var controller = GetMockAssessmentController(model);
 
@@ -106,7 +107,7 @@
         {
             var model = new DateInputViewModel();
             model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
-            model.Command = "notificationReceived";
+            model.Command = DateInputViewModel.NotificationReceived;
 
             var controller = GetMockAssessmentController(model);
 
@@ -119,6 +120,54 @@
                             p =>
                                 p.NotificationId == model.NotificationId &&
                                 p.NotificationReceivedDate == model.NotificationReceivedDate.AsDateTime().Value)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task PaymentReceived_ValidInput_NoValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.PaymentReceivedDate = new OptionalDateInputViewModel(paymentReceivedDate);
+            model.Command = DateInputViewModel.PaymentReceived;
+
+            var controller = GetMockAssessmentController(model);
+
+            var result = await controller.Index(model) as ViewResult;
+
+            Assert.True(result.ViewData.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task PaymentReceived_InvalidInput_ValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.Command = DateInputViewModel.PaymentReceived;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("PaymentReceivedDate"));
+        }
+
+        [Fact]
+        public async Task PaymentReceived_ValidInput_CallsClient()
+        {
+            var model = new DateInputViewModel();
+            model.PaymentReceivedDate = new OptionalDateInputViewModel(paymentReceivedDate);
+            model.Command = DateInputViewModel.PaymentReceived;
+
+            var controller = GetMockAssessmentController(model);
+            
+            await controller.Index(model);
+
+            A.CallTo(
+                () =>
+                    client.SendAsync(A<string>._,
+                        A<SetPaymentReceivedDate>.That.Matches(
+                            p =>
+                                p.NotificationId == model.NotificationId &&
+                                p.PaymentReceivedDate == model.PaymentReceivedDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

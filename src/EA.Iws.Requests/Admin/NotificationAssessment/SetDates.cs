@@ -7,8 +7,6 @@
     {
         public Guid NotificationApplicationId { get; set; }
 
-        public DateTime? PaymentReceivedDate { get; set; }
-
         public DateTime? CommencementDate { get; set; }
 
         public DateTime? CompleteDate { get; set; }

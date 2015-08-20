@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.DateInputViewModel
+﻿@using EA.Iws.Web.Areas.NotificationAssessment.ViewModels
+@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.DateInputViewModel
 
 <h2 class="heading-large">Which date(s) would you like to enter?</h2>
 
@@ -34,7 +35,7 @@
                             </fieldset>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="button" name="Command" value="notificationReceived">Set received</button>
+                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.NotificationReceived">Set received</button>
                         </div>
                     }
                 </div>
@@ -42,15 +43,23 @@
         </details>
     </div>
 
-    <div class="form-group">
-        <table>
-            <tr></tr>
-            <tr>
-                <td>
-                    <details>
-                        <summary><span class="summary">Payment recieved date</span></summary>
-                        @{if (Model.PaymentReceivedDate.AsDateTime() != null)
-                        {<i class="fa-check fa green-tick"></i>}}
+    <div>
+        <details>
+            <summary>
+                <span class="summary">Payment recieved date</span>
+                @if (Model.PaymentReceivedDate.IsCompleted)
+                {
+                    <i class="fa-check fa green-tick"></i>
+                }
+            </summary>
+            <div class="expanded-details">
+                <div class="panel-indent">
+                    @if (Model.PaymentReceivedDate.IsCompleted)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.AsDateTime().GetValueOrDefault())
+                    }
+                    else
+                    {
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Year)">
                             <fieldset>
                                 <div class="form-date">
@@ -60,9 +69,17 @@
                                 </div>
                             </fieldset>
                         </div>
-                    </details>
-                </td>
-            </tr>
+                        <div class="form-group">
+                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.PaymentReceived">Payment received</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="form-group">
+        <table>
             <tr>
                 <td>
                     <details>

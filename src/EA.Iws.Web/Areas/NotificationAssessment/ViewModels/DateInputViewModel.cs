@@ -8,6 +8,9 @@
 
     public class DateInputViewModel : IValidatableObject
     {
+        public static readonly string NotificationReceived = "notificationReceived";
+        public static readonly string PaymentReceived = "paymentReceived";
+
         public DateInputViewModel()
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(true);
@@ -59,9 +62,14 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Command == "notificationReceived" && !NotificationReceivedDate.IsCompleted)
+            if (Command == NotificationReceived && !NotificationReceivedDate.IsCompleted)
             {
                 yield return new ValidationResult("Please enter the notification received date", new[] { "NotificationReceivedDate" });
+            }
+
+            if (Command == PaymentReceived && !PaymentReceivedDate.IsCompleted)
+            {
+                yield return new ValidationResult("Please enter the payment received date", new[] { "PaymentReceivedDate" });
             }
 
             if ((CommencementDate.IsCompleted || !string.IsNullOrWhiteSpace(NameOfOfficer)) && (!CommencementDate.IsCompleted || string.IsNullOrWhiteSpace(NameOfOfficer)))
