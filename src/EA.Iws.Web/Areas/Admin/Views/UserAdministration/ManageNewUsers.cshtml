@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Core.Admin
+@using EA.Iws.Web.Infrastructure
 @model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.NewUsersListViewModel
 @{
     ViewBag.Title = "Manage users";
@@ -62,7 +63,7 @@
     </table>
 
     <div class="form-group">
-        <button class="button" type="submit">Continue</button>
+        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
     </div>
 }
 

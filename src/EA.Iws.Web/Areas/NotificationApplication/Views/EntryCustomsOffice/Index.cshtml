@@ -19,6 +19,6 @@
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
     @Html.Partial("~/Areas/NotificationApplication/Views/CustomsOffice/_Index.cshtml", Model)
-    <button class="button" type="submit">Continue</button>
+    <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
 }
 

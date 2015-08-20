@@ -5,7 +5,7 @@
 @using (Html.BeginForm("ReturnToAssessment", "FinancialGuarantee", new { id = ViewContext.RouteData.Values["ID"] }))
 {
     @Html.AntiForgeryToken()
-    <button class="button" type="submit">Continue</button>
+    <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
     <div class="form-group">
         @Html.ActionLink("Enter received and completion dates", "Dates", new { id = ViewContext.RouteData.Values["ID"] })
     </div>
