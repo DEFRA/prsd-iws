@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.NotificationAssessment
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Domain.NotificationAssessment;
     using Mappings.NotificationAssessment;
@@ -16,6 +17,7 @@
         private readonly DateTime receivedDate = new DateTime(2015, 8, 1);
         private readonly Guid notificationId2 = new Guid("35D538A0-1FD9-4C4A-AB75-A9F81CE5E67A");
         private readonly GetDatesHandler handler;
+        private readonly DateTime paymentDate = new DateTime(2015, 8, 2);
 
         public GetDatesHandlerTests()
         {
@@ -23,6 +25,7 @@
 
             var assessment1 = new NotificationAssessment(notificationId1);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.NotificationReceivedDate, receivedDate, assessment1.Dates);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, paymentDate, assessment1.Dates);
 
             var assessment2 = new NotificationAssessment(notificationId2);
 
@@ -63,6 +66,26 @@
             var result = await handler.HandleAsync(message);
 
             Assert.Null(result.NotificationReceivedDate);
+        }
+
+        [Fact]
+        public async Task HasPaymentDate_SetsReceivedDate()
+        {
+            var message = new GetDates(notificationId1);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Equal(paymentDate, result.PaymentReceivedDate);
+        }
+
+        [Fact]
+        public async Task HasNoPaymentDate_ReceivedDateIsNull()
+        {
+            var message = new GetDates(notificationId2);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Null(result.PaymentReceivedDate);
         }
     }
 }

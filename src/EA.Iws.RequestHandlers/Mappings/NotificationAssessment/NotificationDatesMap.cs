@@ -12,7 +12,8 @@
             return new NotificationDatesData
             {
                 NotificationId = parameter,
-                NotificationReceivedDate = source.NotificationReceivedDate
+                NotificationReceivedDate = source.NotificationReceivedDate,
+                PaymentReceivedDate = source.PaymentReceivedDate
             };
         }
     }

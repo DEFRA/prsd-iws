@@ -26,7 +26,7 @@
         {
             NotificationId = dates.NotificationId;
             NotificationReceivedDate = new OptionalDateInputViewModel(dates.NotificationReceivedDate, true);
-            PaymentReceivedDate = new OptionalDateInputViewModel(true);
+            PaymentReceivedDate = new OptionalDateInputViewModel(dates.PaymentReceivedDate, true);
             CommencementDate = new OptionalDateInputViewModel(true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);
             NotificationTransmittedDate = new OptionalDateInputViewModel(true);

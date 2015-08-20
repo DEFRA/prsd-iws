@@ -32,7 +32,8 @@
                 .Returns(new NotificationDatesData()
                 {
                     NotificationId = notificationId,
-                    NotificationReceivedDate = notificationReceivedDate
+                    NotificationReceivedDate = notificationReceivedDate,
+                    PaymentReceivedDate = paymentReceivedDate
                 });
 
             controller = new KeyDatesController(() => client);
@@ -41,9 +42,9 @@
         [Fact]
         public async Task Index_ValidInput_NoValidationError()
         {
-            var result = await SetDecisionRequiredDate(22, 7, 2015) as ViewResult;
+            await controller.Index(GetDecisionRequiredDateModel(22, 7, 2015));
 
-            Assert.True(result.ViewData.ModelState.IsValid);
+            Assert.True(controller.ModelState.IsValid);
         }
 
         [Fact]
@@ -51,7 +52,7 @@
         {
             SetDates expectedDates = new SetDates();
             expectedDates.DecisionDate = new DateTime(2015, 7, 22);
-            var result = await SetDecisionRequiredDate(22, 07, 2015) as ViewResult;
+            await controller.Index(GetDecisionRequiredDateModel(22, 7, 2015));
 
             A.CallTo(() => client.SendAsync(A<string>.Ignored, A<SetDates>.That.Matches(dates => dates.DecisionDate == expectedDates.DecisionDate))).MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -76,6 +77,16 @@
         }
 
         [Fact]
+        public async Task Index_SetsPaymentReceivedDateIfPopulated()
+        {
+            var controller = new KeyDatesController(() => client);
+
+            var result = await controller.Index(notificationId) as ViewResult;
+
+            Assert.Equal(paymentReceivedDate, ((DateInputViewModel)result.Model).PaymentReceivedDate.AsDateTime());
+        }
+
+        [Fact]
         public async Task NotificationReceived_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
@@ -84,9 +95,9 @@
 
             var controller = GetMockAssessmentController(model);
 
-            var result = await controller.Index(model) as ViewResult;
+            await controller.Index(model);
 
-            Assert.True(result.ViewData.ModelState.IsValid);
+            Assert.True(controller.ModelState.IsValid);
         }
 
         [Fact]
@@ -132,9 +143,9 @@
 
             var controller = GetMockAssessmentController(model);
 
-            var result = await controller.Index(model) as ViewResult;
+            await controller.Index(model);
 
-            Assert.True(result.ViewData.ModelState.IsValid);
+            Assert.True(controller.ModelState.IsValid);
         }
 
         [Fact]
@@ -171,7 +182,7 @@
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
-        private Task<ActionResult> SetDecisionRequiredDate(int day, int month, int year)
+        private DateInputViewModel GetDecisionRequiredDateModel(int day, int month, int year)
         {
             DateInputViewModel model = new DateInputViewModel();
             model.DecisionDate = new OptionalDateInputViewModel();
@@ -180,9 +191,7 @@
             model.DecisionDate.Month = month;
             model.DecisionDate.Year = year;
 
-            var controller = GetMockAssessmentController(model);
-
-            return controller.Index(model);
+            return model;
         }
 
         private KeyDatesController GetMockAssessmentController(object viewModel)
