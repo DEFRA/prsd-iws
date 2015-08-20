@@ -349,7 +349,7 @@
                 {
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new SetUnNumberWasteCodes(model.NotificationId, model.SelectedUnNumbers.Select(p => p.Id), model.SelectedCustomCodes));
+                            new SetUNNumbers(model.NotificationId, model.SelectedUnNumbers.Select(p => p.Id), false));
 
                     var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(model.NotificationId));
                     if (response.NotificationType == NotificationType.Recovery)

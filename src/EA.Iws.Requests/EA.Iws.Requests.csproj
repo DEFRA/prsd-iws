@@ -170,12 +170,13 @@
     <Compile Include="WasteCodes\GetAllWasteCodesForNotification.cs" />
     <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypes.cs" />
     <Compile Include="WasteCodes\GetWasteCodesForNotification.cs" />
+    <Compile Include="WasteCodes\BaseSetCodes.cs" />
     <Compile Include="WasteCodes\SetHCodes.cs" />
     <Compile Include="WasteCodes\SetUNClasses.cs" />
     <Compile Include="WasteCodes\SetYCodes.cs" />
     <Compile Include="WasteCodes\SetEwcCodes.cs" />
     <Compile Include="WasteCodes\SetOtherWasteCodes.cs" />
-    <Compile Include="WasteCodes\SetUnNumberWasteCodes.cs" />
+    <Compile Include="WasteCodes\SetUNNumbers.cs" />
     <Compile Include="WasteCodes\SetBaselOecdCodeForNotification.cs" />
     <Compile Include="WasteCodes\SetYHUnWasteCodes.cs" />
     <Compile Include="WasteCodes\WasteCodeDataAndNotificationData.cs" />

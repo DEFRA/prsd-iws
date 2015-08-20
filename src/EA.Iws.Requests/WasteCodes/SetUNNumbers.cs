@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    public class SetUNClasses : BaseSetCodes
+    public class SetUNNumbers : BaseSetCodes
     {
-        public SetUNClasses(Guid id, IEnumerable<Guid> codes, bool isNotApplicable) 
+        public SetUNNumbers(Guid id, IEnumerable<Guid> codes, bool isNotApplicable) 
             : base(id, codes, isNotApplicable)
         {
         }

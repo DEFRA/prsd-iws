@@ -9,7 +9,7 @@
 
     internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>, IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]>,
         IMap<IEnumerable<WasteCode>, WasteCodeData[]>,
-        IMap<WasteCodeInfo, WasteCodeData[]>, 
+        IMap<WasteCodeInfo, WasteCodeData[]>,
         IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]>
     {
         public WasteCodeData Map(WasteCode source)
@@ -28,11 +28,21 @@
             var wasteCodes = new List<WasteCodeData>();
             foreach (var wasteCode in source)
             {
-                var wasteCodeData = Map(wasteCode.WasteCode);
-                wasteCodeData.CustomCode = wasteCode.CustomCode;
-                wasteCodes.Add(wasteCodeData);
-
-                wasteCodeData.IsNotApplicable = wasteCode.IsNotApplicable;
+                if (wasteCode.IsNotApplicable)
+                {
+                    wasteCodes.Add(new WasteCodeData
+                    {
+                        Id = Guid.Empty,
+                        CodeType = wasteCode.CodeType,
+                        IsNotApplicable = true
+                    });
+                }
+                else
+                {
+                    var wasteCodeData = Map(wasteCode.WasteCode);
+                    wasteCodeData.CustomCode = wasteCode.CustomCode;
+                    wasteCodes.Add(wasteCodeData);
+                }
             }
             return wasteCodes.ToArray();
         }

@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
+    <Compile Include="Controllers\BaseWasteCodeControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />
     <Compile Include="Controllers\CarrierControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\DecisionControllerTests.cs" />

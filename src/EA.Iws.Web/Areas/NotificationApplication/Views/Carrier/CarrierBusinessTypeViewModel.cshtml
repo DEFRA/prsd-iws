@@ -30,7 +30,7 @@
     <label class="block-label" data-target="other-description">
         @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
     </label>
-    <div class="panel-indent hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+    <div class="panel-indent @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
             @Html.Gds().LabelFor(m => m.Business.OtherDescription)
             @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)

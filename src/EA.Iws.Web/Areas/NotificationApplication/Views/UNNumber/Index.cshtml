@@ -1,0 +1,34 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.UNNumber.UNNumberViewModel
+
+@{
+    ViewBag.Title = "UN numbers";
+}
+
+<div class="grid-row">
+    <header class="hgroup">
+        <h2 class="heading-large">Which UN numbers apply to the waste?</h2>
+    </header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.EditorFor(m => m.EnterWasteCodesViewModel)
+
+    <div class="form-group">
+        <button class="button" type="submit" name="command" value="continue">Save and Continue</button>
+    </div>
+}
+
+</div>
+
+@section scripts{
+    <script>
+        (function ($) {
+            $(function () {
+                $('#code-list').selectToAutocomplete();
+            });
+        })(jQuery);
+
+    </script>
+}

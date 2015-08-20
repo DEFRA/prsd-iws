@@ -43,6 +43,11 @@
                 return View(viewModel);
             }
 
+            if (string.IsNullOrWhiteSpace(command) && string.IsNullOrWhiteSpace(remove))
+            {
+                throw new InvalidOperationException();
+            }
+
             if (command.Equals(AddCode) && HasASelectedCode(viewModel))
             {
                 AddCodeToViewModel(viewModel);
@@ -67,7 +72,7 @@
             throw new InvalidOperationException();
         }
 
-        private async Task RebindModel(Guid id, BaseWasteCodeViewModel viewModel)
+        protected virtual async Task RebindModel(Guid id, BaseWasteCodeViewModel viewModel)
         {
             using (var client = ApiClient())
             {

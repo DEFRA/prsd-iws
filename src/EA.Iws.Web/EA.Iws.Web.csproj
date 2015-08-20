@@ -523,6 +523,8 @@
     <Content Include="Areas\NotificationApplication\Views\HCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_WasteCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UNClass\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UNNumber\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -668,9 +670,11 @@
     <Compile Include="Areas\NotificationApplication\Controllers\HCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\UNClassController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\UNNumberController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNClass\UNClassViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\WasteCodeOverviewViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\UNNumber\UNNumberViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaseWasteCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\HCode\HCodeViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />
@@ -758,8 +762,10 @@
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\TransitStateWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\StateOfImportWithTransportRouteDataMap.cs" />
+    <Compile Include="Mappings\WasteCodes\UNNumberMap.cs" />
     <Compile Include="Mappings\WasteCodes\EwcCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\BaselOecdCodeMap.cs" />
+    <Compile Include="Mappings\WasteCodes\WasteCodeMapBase.cs" />
     <Compile Include="Mappings\WasteCodes\WasteCodeViewModelMap.cs" />
     <Compile Include="Mappings\WasteCodes\HCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\UNClassMap.cs" />

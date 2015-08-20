@@ -241,7 +241,7 @@
     <Compile Include="TransportRoute\GetTransportRouteSummaryForNotificationHandler.cs" />
     <Compile Include="Users\UserByIdHandler.cs" />
     <Compile Include="WasteCodes\GetWasteCodesForNotificationHandler.cs" />
-    <Compile Include="WasteCodes\SetUnNumberWasteCodesHandler.cs" />
+    <Compile Include="WasteCodes\SetUNNumbersHandler.cs" />
     <Compile Include="WasteCodes\SetYHUnWasteCodesHandler.cs" />
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristicsHandler.cs" />
