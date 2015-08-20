@@ -523,6 +523,10 @@
     <Content Include="Areas\NotificationApplication\Views\UNClass\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UNNumber\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
+    <Content Include="Areas\MovementDocument\Views\web.config" />
+    <Content Include="Areas\MovementDocument\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\MovementDocument\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\MovementDocument\Views\ShipmentDate\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -666,6 +670,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\MovementDocument\Controllers\HomeController.cs" />
+    <Compile Include="Areas\MovementDocument\Controllers\ShipmentDateController.cs" />
+    <Compile Include="Areas\MovementDocument\MovementDocumentAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\HCodeController.cs" />
@@ -878,6 +885,8 @@
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
+    <Folder Include="Areas\MovementDocument\Models\" />
+    <Folder Include="Areas\MovementDocument\Views\Home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
