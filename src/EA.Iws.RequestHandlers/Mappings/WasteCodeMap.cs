@@ -84,13 +84,13 @@
                     return Map(source.EwcCodes);
                 case CodeType.Basel:
                 case CodeType.Oecd:
-                    return new[] { Map(source.BaselOecdCode) };
+                    return (source.BaselOecdCode == null) ? null : new[] { Map(source.BaselOecdCode) };
                 case CodeType.ExportCode:
-                    return new[] { Map(source.ExportCode) };
+                    return (source.BaselOecdCode == null) ? null : new[] { Map(source.ExportCode) };
                 case CodeType.ImportCode:
-                    return new[] { Map(source.BaselOecdCode) };
+                    return (source.ImportCode == null) ? null : new[] { Map(source.ImportCode) };
                 case CodeType.OtherCode:
-                    return new[] { Map(source.OtherCode) };
+                    return (source.OtherCode == null) ? null : new[] { Map(source.OtherCode) };
                 case CodeType.Y:
                     return Map(source.YCodes);
                 case CodeType.H:
@@ -100,7 +100,7 @@
                 case CodeType.UnNumber:
                     return Map(source.UnNumbers);
                 case CodeType.CustomsCode:
-                    return new[] { Map(source.CustomsCode) };
+                    return (source.CustomsCode == null) ? null : new[] { Map(source.CustomsCode) };
                 default:
                     throw new InvalidOperationException(string.Format("Unknown code type {0}", parameter));
             }
