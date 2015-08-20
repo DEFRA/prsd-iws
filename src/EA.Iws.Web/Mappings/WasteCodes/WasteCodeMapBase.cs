@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Mappings.WasteCodes
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Areas.NotificationApplication.ViewModels.WasteCodes;
@@ -23,7 +24,7 @@
             {
                 IsNotApplicable = source.NotApplicableCodes.Any(nac => nac == codeType),
                 SelectedWasteCodes =
-                    source.NotificationWasteCodeData[codeType].Select(wc => wc.Id).ToList(),
+                    source.NotificationWasteCodeData[codeType].Where(wc => wc.Id != Guid.Empty).Select(wc => wc.Id).ToList(),
                 WasteCodes = mapper.Map(source.LookupWasteCodeData[codeType])
             };
         }

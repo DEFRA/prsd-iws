@@ -519,11 +519,9 @@
         [Fact]
         public void CreateWasteCode_AsOptionalCode_ThrowsException()
         {
-            var wasteCode = GetTestWasteCode(Guid.NewGuid(), CodeType.Basel);
-
             Action createWasteCode =
                 () =>
-                    WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCode, "optional code");
+                    WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.Basel, "optional code");
 
             Assert.Throws<InvalidOperationException>(createWasteCode);
         }
@@ -531,11 +529,9 @@
         [Fact]
         public void CreateOptionalWasteCode_WithWrongWasteType_ThrowsException()
         {
-            var wasteCode = GetTestWasteCode(Guid.NewGuid(), CodeType.Ewc);
-
             Action createWasteCode =
                 () =>
-                    WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCode, "optional code");
+                    WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.Ewc, "optional code");
 
             Assert.Throws<InvalidOperationException>(createWasteCode);
         }
@@ -543,8 +539,7 @@
         [Fact]
         public void CreateCustomWasteCode_CustomCodeIsSet()
         {
-            var wasteCode = GetTestWasteCode(Guid.NewGuid(), CodeType.OtherCode);
-            var wasteCodeInfo = WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCode, "code");
+            var wasteCodeInfo = WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.OtherCode, "code");
 
             Assert.Equal("code", wasteCodeInfo.CustomCode);
         }

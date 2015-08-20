@@ -18,24 +18,18 @@
             CodeType = wasteCode.CodeType;
         }
 
-        private WasteCodeInfo(WasteCode wasteCode, string customCode)
+        private WasteCodeInfo(CodeType codeType, string customCode)
         {
-            Guard.ArgumentNotNull(() => wasteCode, wasteCode);
+            Guard.ArgumentNotNullOrEmpty(() => customCode, customCode);
 
-            CodeType = wasteCode.CodeType;
+            CodeType = codeType;
 
-            if (string.IsNullOrEmpty(customCode))
-            {
-                IsNotApplicable = true;
-            }
-
-            if (!CanHaveCustomCode(wasteCode.CodeType))
+            if (!CanHaveCustomCode(codeType))
             {
                 throw new InvalidOperationException(
                     string.Format("Cannot set optional values for non optional code type for notification {0}", Id));
             }
 
-            WasteCode = wasteCode;
             CustomCode = customCode;
         }
 
@@ -47,11 +41,11 @@
 
         public CodeType CodeType { get; protected set; }
 
-        public static WasteCodeInfo CreateCustomWasteCodeInfo(WasteCode wasteCode, string customCode)
+        public static WasteCodeInfo CreateCustomWasteCodeInfo(CodeType codeType, string customCode)
         {
-            Guard.ArgumentNotNull(() => wasteCode, wasteCode);
+            Guard.ArgumentNotNullOrEmpty(() => customCode, customCode);
 
-            return new WasteCodeInfo(wasteCode, customCode);
+            return new WasteCodeInfo(codeType, customCode);
         }
 
         public static WasteCodeInfo CreateWasteCodeInfo(WasteCode wasteCode)
@@ -72,8 +66,10 @@
 
         private static bool CanHaveCustomCode(CodeType codeType)
         {
-            return codeType == CodeType.CustomsCode || codeType == CodeType.ExportCode ||
-                   codeType == CodeType.ImportCode || codeType == CodeType.OtherCode;
+            return codeType == CodeType.CustomsCode 
+                || codeType == CodeType.ExportCode 
+                || codeType == CodeType.ImportCode 
+                || codeType == CodeType.OtherCode;
         }
     }
 }

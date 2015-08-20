@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Areas.NotificationApplication.ViewModels.WasteCodes;
+    using Areas.NotificationApplication.ViewModels.YCode;
     using Areas.NotificationApplication.Views.Shared;
     using Core.WasteCodes;
     using Prsd.Core.Mapper;

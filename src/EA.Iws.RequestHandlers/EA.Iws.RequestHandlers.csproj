@@ -243,7 +243,6 @@
     <Compile Include="Users\UserByIdHandler.cs" />
     <Compile Include="WasteCodes\GetWasteCodesForNotificationHandler.cs" />
     <Compile Include="WasteCodes\SetUNNumbersHandler.cs" />
-    <Compile Include="WasteCodes\SetYHUnWasteCodesHandler.cs" />
     <Compile Include="WasteType\CreateWasteTypeHandler.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristicsHandler.cs" />
     <Compile Include="WasteCodes\GetWasteCodesByTypeHandler.cs" />
@@ -251,8 +250,7 @@
     <Compile Include="WasteType\GetWasteTypeHandler.cs" />
     <Compile Include="WasteType\SetEnergyAndOptionalInformationHandler.cs" />
     <Compile Include="WasteType\SetOtherWasteAdditionalInformationHandler.cs" />
-    <Compile Include="WasteCodes\SetWasteCodesHandler.cs" />
-    <Compile Include="WasteCodes\SetOtherWasteCodesHandler.cs" />
+    <Compile Include="WasteCodes\SetCustomWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristicsHandler.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcessHandler.cs" />
     <Compile Include="WasteType\SetWoodTypeDescriptionHandler.cs" />

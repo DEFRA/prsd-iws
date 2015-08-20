@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
-    using Mappings;
+    using RequestHandlers.Mappings;
     using RequestHandlers.TransportRoute;
     using Requests.TransportRoute;
     using TestHelpers.Helpers;

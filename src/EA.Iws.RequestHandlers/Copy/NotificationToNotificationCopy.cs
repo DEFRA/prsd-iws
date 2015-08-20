@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using Core.WasteCodes;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Prsd.Core.Domain;
@@ -80,18 +81,18 @@
 
             if (source.CustomsCode != null)
             {
-                destination.SetCustomsCode(WasteCodeInfo.CreateCustomWasteCodeInfo(source.CustomsCode.WasteCode, source.CustomsCode.CustomCode));
+                destination.SetCustomsCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.CustomsCode, source.CustomsCode.CustomCode));
             }
 
             destination.SetEwcCodes(
                 source.EwcCodes.Select(c => WasteCodeInfo.CreateWasteCodeInfo(c.WasteCode)));
 
-            destination.SetExportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(source.ExportCode.WasteCode, source.ExportCode.CustomCode));
-            destination.SetImportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(source.ImportCode.WasteCode, source.ImportCode.CustomCode));
+            destination.SetExportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.ExportCode, source.ExportCode.CustomCode));
+            destination.SetImportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.ImportCode, source.ImportCode.CustomCode));
 
             if (source.OtherCode != null)
             {
-                destination.SetOtherCode(WasteCodeInfo.CreateCustomWasteCodeInfo(source.OtherCode.WasteCode, source.OtherCode.CustomCode));
+                destination.SetOtherCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.OtherCode, source.OtherCode.CustomCode));
             }
             
             destination.SetUnClasses(source.UnClasses.Select(c => WasteCodeInfo.CreateWasteCodeInfo(c.WasteCode)));

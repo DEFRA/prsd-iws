@@ -7,9 +7,10 @@
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
-    internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>, IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]>,
+    internal class WasteCodeMap : IMap<WasteCode, WasteCodeData>,
+        IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]>,
         IMap<IEnumerable<WasteCode>, WasteCodeData[]>,
-        IMap<WasteCodeInfo, WasteCodeData[]>,
+        IMap<WasteCodeInfo, WasteCodeData>,
         IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]>
     {
         public WasteCodeData Map(WasteCode source)
@@ -25,56 +26,54 @@
 
         public WasteCodeData[] Map(IEnumerable<WasteCodeInfo> source)
         {
-            var wasteCodes = new List<WasteCodeData>();
-            foreach (var wasteCode in source)
-            {
-                if (wasteCode.IsNotApplicable)
-                {
-                    wasteCodes.Add(new WasteCodeData
-                    {
-                        Id = Guid.Empty,
-                        CodeType = wasteCode.CodeType,
-                        IsNotApplicable = true
-                    });
-                }
-                else
-                {
-                    var wasteCodeData = Map(wasteCode.WasteCode);
-                    wasteCodeData.CustomCode = wasteCode.CustomCode;
-                    wasteCodes.Add(wasteCodeData);
-                }
-            }
-            return wasteCodes.ToArray();
+            return source.Select(Map).ToArray();
         }
 
-        public WasteCodeData[] Map(WasteCodeInfo source)
+        public WasteCodeData Map(WasteCodeInfo source)
         {
             if (source == null)
             {
-                return new WasteCodeData[] { };
+                return new WasteCodeData();
             }
 
+            if (HasAWasteCode(source))
+            {
+                 return Map(source.WasteCode);
+            }
+            
             if (source.IsNotApplicable)
             {
-                return new[]
+                return new WasteCodeData
                 {
-                    new WasteCodeData
-                    {
-                        CodeType = source.CodeType,
-                        Code = "Not applicable",
-                        IsNotApplicable = true
-                    }
+                    Id = Guid.Empty,
+                    CodeType = source.CodeType,
+                    IsNotApplicable = true
                 };
             }
 
-            var wasteCodeData = Map(source.WasteCode);
-            wasteCodeData.CustomCode = source.CustomCode;
-            wasteCodeData.IsNotApplicable = source.IsNotApplicable;
-
-            return new[]
+            if (IsACustomCode(source))
             {
-                wasteCodeData
-            };
+                return
+                    new WasteCodeData
+                    {
+                        Id = Guid.Empty,
+                        CodeType = source.CodeType,
+                        Code = source.CustomCode,
+                        CustomCode = source.CustomCode
+                    };
+            }
+
+            return new WasteCodeData();
+        }
+
+        private bool HasAWasteCode(WasteCodeInfo source)
+        {
+            return source.WasteCode != null;
+        }
+
+        private bool IsACustomCode(WasteCodeInfo source)
+        {
+            return !string.IsNullOrWhiteSpace(source.CustomCode);
         }
 
         public WasteCodeData[] Map(NotificationApplication source, CodeType parameter)
@@ -85,13 +84,13 @@
                     return Map(source.EwcCodes);
                 case CodeType.Basel:
                 case CodeType.Oecd:
-                    return Map(source.BaselOecdCode);
+                    return new[] { Map(source.BaselOecdCode) };
                 case CodeType.ExportCode:
-                    return Map(source.ExportCode);
+                    return new[] { Map(source.ExportCode) };
                 case CodeType.ImportCode:
-                    return Map(source.ImportCode);
+                    return new[] { Map(source.BaselOecdCode) };
                 case CodeType.OtherCode:
-                    return Map(source.OtherCode);
+                    return new[] { Map(source.OtherCode) };
                 case CodeType.Y:
                     return Map(source.YCodes);
                 case CodeType.H:
@@ -101,7 +100,7 @@
                 case CodeType.UnNumber:
                     return Map(source.UnNumbers);
                 case CodeType.CustomsCode:
-                    return Map(source.CustomsCode);
+                    return new[] { Map(source.CustomsCode) };
                 default:
                     throw new InvalidOperationException(string.Format("Unknown code type {0}", parameter));
             }

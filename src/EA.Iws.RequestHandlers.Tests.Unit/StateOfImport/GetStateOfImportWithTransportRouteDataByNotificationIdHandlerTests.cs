@@ -8,6 +8,7 @@
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Mappings;
+    using RequestHandlers.Mappings;
     using RequestHandlers.StateOfImport;
     using Requests.StateOfImport;
     using TestHelpers.Helpers;

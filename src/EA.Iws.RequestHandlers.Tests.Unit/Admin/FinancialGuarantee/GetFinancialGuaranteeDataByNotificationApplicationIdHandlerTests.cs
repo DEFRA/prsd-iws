@@ -6,8 +6,8 @@
     using Core.FinancialGuarantee;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
-    using Mappings;
     using RequestHandlers.Admin.FinancialGuarantee;
+    using RequestHandlers.Mappings;
     using Requests.Admin.FinancialGuarantee;
     using TestHelpers.Helpers;
     using Xunit;

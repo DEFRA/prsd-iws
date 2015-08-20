@@ -42,7 +42,7 @@
 
         private void SetCode(WasteCodeInfo code, CodeType codeType)
         {
-            if (code.WasteCode.CodeType != codeType)
+            if (code.WasteCode != null && code.WasteCode.CodeType != codeType)
             {
                 throw new InvalidOperationException(string.Format("This method can only set {0} code for this notification {1}", codeType, Id));
             }

@@ -91,7 +91,7 @@
                     }
                     else
                     {
-                        return RedirectToAction("BaselEwcCode", "WasteCodes", new { id = model.NotificationId });
+                        return RedirectToAction("Index", "BaselOecdCode", new { id = model.NotificationId });
                     }
                 }
                 catch (ApiBadRequestException ex)

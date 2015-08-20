@@ -5,10 +5,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.WasteCodes;
-    using DataAccess;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Mappings;
+    using RequestHandlers.Mappings;
     using RequestHandlers.WasteCodes;
     using Requests.WasteCodes;
     using TestHelpers.DomainFakes;
@@ -24,7 +22,7 @@
         {
             var context = new TestIwsContext();
 
-            handler = new GetWasteCodeLookupAndNotificationDataByTypesHandler(context, new WasteCodeMap());
+            handler = new GetWasteCodeLookupAndNotificationDataByTypesHandler(context, new WasteCodeMap(), new WasteCodeMap());
 
             context.WasteCodes.AddRange(wasteCodes.Select(wc => wc as WasteCode).ToList());
 
@@ -46,11 +44,11 @@
         }
 
         [Fact]
-        public async Task WithNullLookupTypesList_ReturnsAllCodes()
+        public async Task WithNullLookupTypesList_ReturnsEmptyList()
         {
             var result = await handler.HandleAsync(new GetWasteCodeLookupAndNotificationDataByTypes(NotificationWithoutWasteCodesId));
 
-            Assert.Equal(wasteCodes.GroupBy(wc => wc.CodeType).Count(), result.LookupWasteCodeData.Count);
+            Assert.Empty(result.LookupWasteCodeData);
         }
 
         [Fact]

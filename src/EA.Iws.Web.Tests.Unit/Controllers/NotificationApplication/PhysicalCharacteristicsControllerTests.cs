@@ -47,7 +47,7 @@
                 PhysicalCharacteristics = physicalCharacteristics
             };
             var result = await physicalCharacteristicsController.Index(model, false) as RedirectToRouteResult;
-            RouteAssert.RoutesTo(result.RouteValues, "BaselEwcCode", "WasteCodes");
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "BaselOecdCode");
         }
     }
 }

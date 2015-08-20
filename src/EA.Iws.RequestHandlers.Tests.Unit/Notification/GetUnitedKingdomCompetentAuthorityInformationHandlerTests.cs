@@ -7,6 +7,7 @@
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mapper;
+    using RequestHandlers.Mappings;
     using Requests.Shared;
     using Submit;
     using Xunit;

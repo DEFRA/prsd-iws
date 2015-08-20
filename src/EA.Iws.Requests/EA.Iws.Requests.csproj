@@ -176,10 +176,9 @@
     <Compile Include="WasteCodes\SetUNClasses.cs" />
     <Compile Include="WasteCodes\SetYCodes.cs" />
     <Compile Include="WasteCodes\SetEwcCodes.cs" />
-    <Compile Include="WasteCodes\SetOtherWasteCodes.cs" />
+    <Compile Include="WasteCodes\SetCustomWasteCodes.cs" />
     <Compile Include="WasteCodes\SetUNNumbers.cs" />
     <Compile Include="WasteCodes\SetBaselOecdCodeForNotification.cs" />
-    <Compile Include="WasteCodes\SetYHUnWasteCodes.cs" />
     <Compile Include="WasteCodes\WasteCodeDataAndNotificationData.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristics.cs" />
@@ -188,7 +187,6 @@
     <Compile Include="WasteType\GetWasteType.cs" />
     <Compile Include="WasteType\SetEnergyAndOptionalInformation.cs" />
     <Compile Include="WasteType\SetOtherWasteAdditionalInformation.cs" />
-    <Compile Include="WasteCodes\SetWasteCodes.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristics.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcess.cs" />
     <Compile Include="TransportRoute\GetEntryOrExitPointsByCountry.cs" />

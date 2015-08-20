@@ -10,6 +10,7 @@
     using Prsd.Core.Mapper;
     using Requests.WasteCodes;
     using ViewModels.WasteCodes;
+    using ViewModels.YCode;
 
     [Authorize]
     public class YCodeController : BaseWasteCodeController

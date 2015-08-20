@@ -8,6 +8,7 @@
     using DataAccess;
     using Mappings;
     using RequestHandlers.Admin.UserAdministration;
+    using RequestHandlers.Mappings;
     using Requests.Admin.UserAdministration;
     using Xunit;
 

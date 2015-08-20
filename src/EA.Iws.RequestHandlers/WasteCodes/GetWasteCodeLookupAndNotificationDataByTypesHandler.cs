@@ -14,13 +14,16 @@
     internal class GetWasteCodeLookupAndNotificationDataByTypesHandler : IRequestHandler<GetWasteCodeLookupAndNotificationDataByTypes, WasteCodeDataAndNotificationData>
     {
         private readonly IwsContext context;
-        private readonly IMap<IEnumerable<WasteCode>, WasteCodeData[]> mapper;
+        private readonly IMap<IEnumerable<WasteCode>, WasteCodeData[]> wasteCodeMapper;
+        private readonly IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]> wasteCodeInfoMapper;
 
         public GetWasteCodeLookupAndNotificationDataByTypesHandler(IwsContext context, 
-            IMap<IEnumerable<WasteCode>, WasteCodeData[]> mapper)
+            IMap<IEnumerable<WasteCode>, WasteCodeData[]> wasteCodeMapper,
+            IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]> wasteCodeInfoMapper)
         {
             this.context = context;
-            this.mapper = mapper;
+            this.wasteCodeMapper = wasteCodeMapper;
+            this.wasteCodeInfoMapper = wasteCodeInfoMapper;
         }
 
         public async Task<WasteCodeDataAndNotificationData> HandleAsync(GetWasteCodeLookupAndNotificationDataByTypes message)
@@ -28,12 +31,12 @@
             var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.Id);
 
             IList<WasteCode> lookupCodes = await GetLookupCodes(message);
-            IList<WasteCode> notificationCodes = GetNotificationCodes(message, notification);
+            IList<WasteCodeInfo> notificationCodes = GetNotificationCodes(message, notification);
             
-            var lookupCodesDictionary = lookupCodes.GroupBy(wc => wc.CodeType).ToDictionary(x => x.Key, x => mapper.Map(x));
+            var lookupCodesDictionary = lookupCodes.GroupBy(wc => wc.CodeType).ToDictionary(x => x.Key, x => wasteCodeMapper.Map(x));
 
             var notificationCodesDictionary = message.NotificationWasteCodeTypes.GroupBy(wc => wc)
-                .ToDictionary(x => x.Key, x => mapper.Map(notificationCodes.Where(nc => nc.CodeType == x.Key)));
+                .ToDictionary(x => x.Key, x => wasteCodeInfoMapper.Map(notificationCodes.Where(nc => nc.CodeType == x.Key)));
 
             var notApplicable =
                 notification.WasteCodes.Where(wc => wc.IsNotApplicable).Select(wc => wc.CodeType).ToList();
@@ -46,25 +49,23 @@
             };
         }
 
-        private IList<WasteCode> GetNotificationCodes(GetWasteCodeLookupAndNotificationDataByTypes message, NotificationApplication notification)
+        private IList<WasteCodeInfo> GetNotificationCodes(GetWasteCodeLookupAndNotificationDataByTypes message, NotificationApplication notification)
         {
             if (message.NotificationWasteCodeTypes.Count == 0)
             {
-                return notification.WasteCodes.Where(wc => wc.WasteCode != null).Select(wc => wc.WasteCode).ToArray();
+                return notification.WasteCodes.Where(wc => wc.WasteCode != null).ToArray();
             }
 
             return notification.WasteCodes
-                .Where(wc => wc.WasteCode != null 
-                    && message.NotificationWasteCodeTypes.Contains(wc.WasteCode.CodeType))
-                .Select(wc => wc.WasteCode)
-                .ToArray();
+                .Where(wc => message.NotificationWasteCodeTypes.Contains(wc.CodeType))
+                             .ToArray();
         }
 
         private async Task<IList<WasteCode>> GetLookupCodes(GetWasteCodeLookupAndNotificationDataByTypes message)
         {
             if (message.LookupWasteCodeTypes.Count == 0)
             {
-                return await context.WasteCodes.ToArrayAsync();
+                return new WasteCode[0];
             }
 
             return await

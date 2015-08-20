@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Domain.NotificationAssessment;
-    using Mappings.NotificationAssessment;
     using RequestHandlers.Admin.NotificationAssessment;
+    using RequestHandlers.Mappings.NotificationAssessment;
     using Requests.Admin.NotificationAssessment;
     using TestHelpers.Helpers;
     using Xunit;

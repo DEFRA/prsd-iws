@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomWasteCode
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Prsd.Core.Validation;
 
-    public class OtherWasteCodesViewModel : IValidatableObject
+    public class CustomWasteCodesViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 

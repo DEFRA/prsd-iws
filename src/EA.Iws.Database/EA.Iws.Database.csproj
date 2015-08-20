@@ -99,6 +99,7 @@
     <Content Include="scripts\Update\Sprint14\20150817-103000-add-code-type-columns.sql" />
     <Content Include="scripts\Update\Sprint14\20150818-095623-remove-multiple-customs-codes.sql" />
     <Content Include="scripts\Update\Sprint14\20150819-094100-link-notification-dates-to-assessment.sql" />
+    <Content Include="scripts\Update\Sprint14\20150820-153500-delete-custom-codes-waste-code-link.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

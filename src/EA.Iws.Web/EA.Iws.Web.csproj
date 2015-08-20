@@ -429,7 +429,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Areas\NotificationApplication\Views\WasteCodes\OtherWasteCodes.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\CustomWasteCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryValues.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteCodes\UnNumber.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
@@ -674,6 +674,7 @@
     <Compile Include="Areas\MovementDocument\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\MovementDocument\MovementDocumentAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\CustomWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\HCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
@@ -723,7 +724,7 @@
     <Content Include="Areas\NotificationApplication\Views\Home\_SummaryTableContainer.cshtml" />
     <Compile Include="Areas\NotificationApplication\Views\Shared\WasteCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\EnterWasteCodesViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\YCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\YCode\YCodeViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationAssessment\NotificationAssessmentAreaRegistration.cs" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
@@ -734,7 +735,6 @@
     <Compile Include="Areas\NotificationApplication\Controllers\PhysicalCharacteristicsController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReasonForExportController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\RecoveryInfoController.cs" />
-    <Compile Include="Areas\NotificationApplication\Controllers\WasteCodesController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\WasteGenerationProcessController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\CustomsOffice\CustomsOfficeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\NotificationApplicationAreaRegistration.cs" />
@@ -756,8 +756,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteType\OtherWasteViewModel.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\NewNotificationController.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\OtherWasteCodesViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\UnNumberViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\CustomWasteCode\CustomWasteCodesViewModel.cs" />
     <Compile Include="Infrastructure\AdminApprovalRequired.cs" />
     <Compile Include="Infrastructure\AntiForgeryErrorFilter.cs" />
     <Compile Include="Infrastructure\AreaRegistrationContextExtensions.cs" />
@@ -770,6 +769,7 @@
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\TransitStateWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\StateOfImportWithTransportRouteDataMap.cs" />
+    <Compile Include="Mappings\WasteCodes\CustomWasteCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\UNNumberMap.cs" />
     <Compile Include="Mappings\WasteCodes\EwcCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\BaselOecdCodeMap.cs" />
@@ -834,7 +834,6 @@
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\OperationCodesViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\YcodeHcodeAndUnClassViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\OptionalDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />
@@ -862,7 +861,6 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\StateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\PhysicalCharacteristics\PhysicalCharacteristicsViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\TransitState\TransitStateViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaselEwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteGenerationProcess\WasteGenerationProcessViewModel.cs" />
     <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />

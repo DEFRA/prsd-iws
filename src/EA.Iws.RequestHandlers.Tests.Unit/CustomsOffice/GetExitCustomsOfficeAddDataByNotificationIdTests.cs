@@ -6,8 +6,8 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
-    using Mappings;
     using RequestHandlers.CustomsOffice;
+    using RequestHandlers.Mappings;
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;

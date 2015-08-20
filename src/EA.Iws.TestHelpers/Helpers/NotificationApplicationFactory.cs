@@ -139,13 +139,13 @@
                 WasteCodeInfo.CreateWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.UnNumber))
             });
             notification.SetCustomsCode(
-                WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.CustomsCode),
+                WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.CustomsCode,
                     "olives"));
             notification.SetImportCode(
-                WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.ImportCode),
+                WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.ImportCode,
                     "cardboard boxes"));
             notification.SetExportCode(
-                WasteCodeInfo.CreateCustomWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.ExportCode),
+                WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.ExportCode,
                     "gravel"));
             notification.SetPreconsentedRecoveryFacility(false);
 
