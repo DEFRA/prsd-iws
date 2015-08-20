@@ -44,12 +44,12 @@
         }
 
         [Fact]
-        public void UserSelects_GeneratePrenotification_RedirectsTo_MyHome()
+        public void UserSelects_GeneratePrenotification_RedirectsTo_Actual_Shipment_Date()
         {
             var result = applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.GeneratePrenotification)) as RedirectToRouteResult;
             Assert.NotNull(result);
-            Assert.Equal("Home", result.RouteValues["action"]);
-            Assert.Equal("Applicant", result.RouteValues["controller"]);
+            Assert.Equal("Index", result.RouteValues["action"]);
+            Assert.Equal("ShipmentDate", result.RouteValues["controller"]);
             Assert.Equal(notificationId, result.RouteValues["id"]);
         }
 
