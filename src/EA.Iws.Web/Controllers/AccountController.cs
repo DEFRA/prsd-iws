@@ -99,6 +99,10 @@
         [HttpGet]
         public ActionResult EmailVerificationRequired()
         {
+            var identity = (ClaimsIdentity)User.Identity;
+
+            ViewBag.Email = identity.Claims.Single(c => c.Type.Equals(ClaimTypes.Email)).Value;
+
             return View();
         }
 

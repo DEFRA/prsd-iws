@@ -15,16 +15,16 @@
     </div>
 }
 
-<h2 class="heading-large">Confirm your email</h2>
+<h2 class="heading-large">Activate your account</h2>
 
-<p class="lede">In order to continue using this service you must confirm your email address</p>
-<p>You should have received an email after registering to use the International Waste Shipments system. Check your email inbox or junk mail folder for the account you registered with.</p>
+<p>We've sent your activation email to @(ViewBag.Email). Please use the link in the email to activate your user account. You may need to check your junk or spam folder if you can't see the email in your inbox.</p>
+<p>Once you have followed the activation link, you will be directed to your account login page.</p>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <p>
-        If you have not received the email you can
-        <button class="link-submit" type="submit">request another email</button>.
+        If you did not receive the email, you can
+        <button class="link-submit" type="submit">request another activation email</button>.
     </p>
 }
