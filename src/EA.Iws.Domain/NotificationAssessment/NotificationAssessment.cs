@@ -19,6 +19,8 @@
 
         private readonly StateMachine<NotificationStatus, Trigger> stateMachine;
 
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
+
         public Guid NotificationApplicationId { get; private set; }
         
         public NotificationStatus Status { get; private set; }
@@ -50,6 +52,8 @@
         {
             var stateMachine = new StateMachine<NotificationStatus, Trigger>(() => Status, s => Status = s);
 
+            receivedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.NotificationReceived);
+
             stateMachine.OnTransitioned(OnTransitionAction);
 
             stateMachine.Configure(NotificationStatus.NotSubmitted)
@@ -59,12 +63,20 @@
                 .OnEntryFrom(Trigger.Submit, OnSubmit)
                 .Permit(Trigger.NotificationReceived, NotificationStatus.NotificationReceived);
 
+            stateMachine.Configure(NotificationStatus.NotificationReceived)
+                .OnEntryFrom(receivedTrigger, OnReceived);
+
             return stateMachine;
         }
 
         private void OnSubmit()
         {
             RaiseEvent(new NotificationSubmittedEvent(NotificationApplicationId));
+        }
+
+        private void OnReceived(DateTime receivedDate)
+        {
+            Dates.NotificationReceivedDate = receivedDate;
         }
 
         private void OnTransitionAction(StateMachine<NotificationStatus, Trigger>.Transition transition)
@@ -91,8 +103,7 @@
 
         public void SetNotificationReceived(DateTime receivedDate)
         {
-            Dates.NotificationReceivedDate = receivedDate;
-            stateMachine.Fire(Trigger.NotificationReceived);
+            stateMachine.Fire(receivedTrigger, receivedDate);
         }
     }
 }
