@@ -647,6 +647,7 @@
     <Content Include="Views\NewNotification\_SepaFinancialGuarantee.cshtml" />
     <Content Include="Views\Applicant\ApprovedNotification.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringIntRadioButtons.cshtml" />
+    <Content Include="Views\Account\EmailVerificationResent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

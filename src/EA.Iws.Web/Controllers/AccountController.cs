@@ -134,7 +134,17 @@
                 return View();
             }
 
-            return RedirectToAction("EmailVerificationRequired");
+            return RedirectToAction("EmailVerificationResent");
+        }
+
+        [HttpGet]
+        public ActionResult EmailVerificationResent()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+
+            ViewBag.Email = identity.Claims.Single(c => c.Type.Equals(ClaimTypes.Email)).Value;
+
+            return View();
         }
 
         [HttpGet]

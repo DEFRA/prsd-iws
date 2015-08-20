@@ -16,7 +16,8 @@
             "VerifyEmail",
             "AdminVerifyEmail",
             "VerificationEmailSent",
-            "AwaitApproval"
+            "AwaitApproval",
+            "EmailVerificationResent"
         };
 
         public static bool SkipAuthorisation(this AuthorizationContext authorizationContext)
