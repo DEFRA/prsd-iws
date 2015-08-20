@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDateHandler.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandler.cs" />
