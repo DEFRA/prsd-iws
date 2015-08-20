@@ -8,7 +8,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    @Html.ActionLink("Continue", "Index", "Home", null ,new {@class = "button"})
+    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", null ,new {@class = "button"})
 }
 else
 {

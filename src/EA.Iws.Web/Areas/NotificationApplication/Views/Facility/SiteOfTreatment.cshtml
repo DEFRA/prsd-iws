@@ -60,17 +60,17 @@ else
     <p>@Html.ActionLink("Back to facilities", "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
-        @Html.ActionLink("Continue", "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
     }
     else
     {
         if (Model.NotificationType == NotificationType.Recovery)
         {
-            @Html.ActionLink("Continue", "RecoveryPreconsent", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+            @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "RecoveryPreconsent", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
         }
         else
         {
-            @Html.ActionLink("Continue", "OperationCodes", "WasteOperations", new { id = Model.NotificationId }, new { @class = "button" })
+            @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "OperationCodes", "WasteOperations", new { id = Model.NotificationId }, new { @class = "button" })
         }
     }
 }

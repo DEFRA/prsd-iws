@@ -58,10 +58,10 @@ else
     <p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
-        @Html.ActionLink("Continue", "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
     }
     else
     {
-       @Html.ActionLink("Continue", "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
+       @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
     }
 }

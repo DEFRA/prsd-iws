@@ -49,9 +49,9 @@
 </div>
 @if (ViewBag.BackToOverview)
 {
-    @Html.ActionLink("Continue", "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
 }
 else
 {
-    @Html.ActionLink("Continue", "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
 }
