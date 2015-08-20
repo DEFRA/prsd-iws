@@ -105,5 +105,15 @@
         {
             stateMachine.Fire(receivedTrigger, receivedDate);
         }
+
+        public void SetPaymentReceived(DateTime paymentDate)
+        {
+            if (!stateMachine.IsInState(NotificationStatus.NotificationReceived))
+            {
+                throw new InvalidOperationException(string.Format("Cannot set payment received on this notification {0} in status {1}", NotificationApplicationId, Status));
+            }
+
+            Dates.PaymentReceivedDate = paymentDate;
+        }
     }
 }

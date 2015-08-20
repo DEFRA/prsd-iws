@@ -11,7 +11,7 @@ namespace EA.Iws.Domain.NotificationAssessment
 
         public DateTime? NotificationReceivedDate { get; internal set; }
 
-        public DateTime? PaymentReceivedDate { get; set; }
+        public DateTime? PaymentReceivedDate { get; internal set; }
 
         public DateTime? CommencementDate { get; set; }
 

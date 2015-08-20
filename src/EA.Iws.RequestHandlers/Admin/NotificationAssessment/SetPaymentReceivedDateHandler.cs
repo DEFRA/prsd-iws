@@ -22,7 +22,7 @@
                     context.NotificationAssessments.SingleAsync(
                         p => p.NotificationApplicationId == message.NotificationId);
 
-            assessment.Dates.PaymentReceivedDate = message.PaymentReceivedDate;
+            assessment.SetPaymentReceived(message.PaymentReceivedDate);
 
             await context.SaveChangesAsync();
 

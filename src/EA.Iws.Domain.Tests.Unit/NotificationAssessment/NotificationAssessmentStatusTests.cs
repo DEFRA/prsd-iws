@@ -15,6 +15,7 @@
         private readonly NotificationAssessment notificationAssessment;
         private readonly INotificationProgressService progressService;
         private DateTime receivedDate = new DateTime(2015, 8, 1);
+        private DateTime paymentDate = new DateTime(2015, 8, 2);
 
         public NotificationAssessmentStatusTests()
         {
@@ -124,6 +125,23 @@
                 notificationAssessment.Events.OfType<NotificationStatusChangeEvent>()
                     .SingleOrDefault()
                     .NotificationAssessment);
+        }
+
+        [Fact]
+        public void CanSetPaymentReceivedDateWhenReceived()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            notificationAssessment.SetPaymentReceived(paymentDate);
+
+            Assert.Equal(paymentDate, notificationAssessment.Dates.PaymentReceivedDate);
+        }
+
+        [Fact]
+        public void CantSetPaymentReceivedWhenNotificationNotReceived()
+        {
+            Action setPayment = () => notificationAssessment.SetPaymentReceived(paymentDate);
+
+            Assert.Throws<InvalidOperationException>(setPayment);
         }
     }
 }

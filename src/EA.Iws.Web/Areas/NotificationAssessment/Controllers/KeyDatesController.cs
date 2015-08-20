@@ -63,7 +63,8 @@
                     await client.SendAsync(User.GetAccessToken(), setDates);
                 }
             }
-            return View(model);
+
+            return RedirectToAction("Index", new { id = model.NotificationId });
         }
 
         private async Task SetPaymentReceived(DateInputViewModel model)
