@@ -9,6 +9,8 @@
         [Display(Name = "Submitted")]
         Submitted = 2,
         [Display(Name = "Notification received")]
-        NotificationReceived = 3
+        NotificationReceived = 3,
+        [Display(Name = "In assessment")]
+        InAssessment = 4
     }
 }

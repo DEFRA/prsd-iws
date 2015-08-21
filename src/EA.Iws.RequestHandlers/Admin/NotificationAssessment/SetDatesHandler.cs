@@ -26,12 +26,10 @@
 
             var notificationDates = await context.NotificationAssessments.Where(a => a.NotificationApplicationId == message.NotificationApplicationId).Select(p => p.Dates).SingleAsync();
 
-            notificationDates.CommencementDate = message.CommencementDate;
             notificationDates.CompleteDate = message.CompleteDate;
             notificationDates.TransmittedDate = message.TransmittedDate;
             notificationDates.AcknowledgedDate = message.AcknowledgedDate;
             notificationDates.DecisionDate = message.DecisionDate;
-            notificationDates.NameOfOfficer = message.NameOfOfficer;
 
             await context.SaveChangesAsync();
 

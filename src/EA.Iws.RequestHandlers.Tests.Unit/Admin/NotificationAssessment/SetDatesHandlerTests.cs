@@ -43,18 +43,14 @@
         public async Task SetDates()
         {
             var acknowledgedDate = new DateTime(2015, 1, 1);
-            var commencementDate = new DateTime(2015, 1, 2);
             var decisionDate = new DateTime(2015, 1, 3);
             var completeDate = new DateTime(2015, 1, 4);
             var transmittedDate = new DateTime(2015, 1, 5);
-            var nameOfOfficer = "name";
 
             var request = new SetDates
             {
                 NotificationApplicationId = notificationId,
-                NameOfOfficer = nameOfOfficer,
                 AcknowledgedDate = acknowledgedDate,
-                CommencementDate = commencementDate,
                 DecisionDate = decisionDate,
                 CompleteDate = completeDate,
                 TransmittedDate = transmittedDate
@@ -63,9 +59,9 @@
             await handler.HandleAsync(request);
 
             Assert.True(notificationDates.AcknowledgedDate == acknowledgedDate
-                        && notificationDates.CommencementDate == commencementDate && notificationDates.DecisionDate == decisionDate &&
+                        && notificationDates.DecisionDate == decisionDate &&
                         notificationDates.CompleteDate == completeDate &&
-                        notificationDates.TransmittedDate == transmittedDate && notificationDates.NameOfOfficer == nameOfOfficer);
+                        notificationDates.TransmittedDate == transmittedDate);
         }
     }
 }

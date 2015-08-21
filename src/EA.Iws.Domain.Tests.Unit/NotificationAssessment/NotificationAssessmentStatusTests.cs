@@ -16,6 +16,8 @@
         private readonly INotificationProgressService progressService;
         private DateTime receivedDate = new DateTime(2015, 8, 1);
         private DateTime paymentDate = new DateTime(2015, 8, 2);
+        private DateTime commencementDate = new DateTime(2015, 8, 10);
+        private string nameOfOfficer = "officer";
 
         public NotificationAssessmentStatusTests()
         {
@@ -142,6 +144,71 @@
             Action setPayment = () => notificationAssessment.SetPaymentReceived(paymentDate);
 
             Assert.Throws<InvalidOperationException>(setPayment);
+        }
+
+        [Fact]
+        public void CanSetCommencementDateWhenReceived()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
+
+            notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+
+            Assert.Equal(commencementDate, notificationAssessment.Dates.CommencementDate);
+        }
+
+        [Fact]
+        public void CanSetCommencementDateWhenReceived_SetsNameOfOfficer()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
+
+            notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+
+            Assert.Equal(nameOfOfficer, notificationAssessment.Dates.NameOfOfficer);
+        }
+
+        [Fact]
+        public void CantSetCommencementDateWithoutPaymentDate()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+
+            Action setCommencementDate = () => notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+
+            Assert.Throws<InvalidOperationException>(setCommencementDate);
+        }
+
+        [Fact]
+        public void SetCommencementDateUpdatesStatusToInAssessment()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
+
+            notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+
+            Assert.Equal(NotificationStatus.InAssessment, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void SetCommencementDate_NameOfOfficerCantBeNull()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
+
+            Action setCommencementDate = () => notificationAssessment.SetCommencementDate(commencementDate, null);
+
+            Assert.Throws<ArgumentNullException>("nameOfOfficer", setCommencementDate);
+        }
+
+        [Fact]
+        public void SetCommencementDate_NameOfOfficerCantBeEmpty()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
+
+            Action setCommencementDate = () => notificationAssessment.SetCommencementDate(commencementDate, string.Empty);
+
+            Assert.Throws<ArgumentException>("nameOfOfficer", setCommencementDate);
         }
     }
 }

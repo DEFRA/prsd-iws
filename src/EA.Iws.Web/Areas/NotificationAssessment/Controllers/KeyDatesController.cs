@@ -53,12 +53,10 @@
             {
                 var setDates = new SetDates
                 {
-                    CommencementDate = model.CommencementDate.AsDateTime(),
                     CompleteDate = model.NotificationCompleteDate.AsDateTime(),
                     TransmittedDate = model.NotificationTransmittedDate.AsDateTime(),
                     AcknowledgedDate = model.NotificationAcknowledgedDate.AsDateTime(),
                     DecisionDate = model.DecisionDate.AsDateTime(),
-                    NameOfOfficer = model.NameOfOfficer,
                     NotificationApplicationId = model.NotificationId
                 };
 

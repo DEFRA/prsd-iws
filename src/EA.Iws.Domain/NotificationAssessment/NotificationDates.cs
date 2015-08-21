@@ -13,7 +13,7 @@ namespace EA.Iws.Domain.NotificationAssessment
 
         public DateTime? PaymentReceivedDate { get; internal set; }
 
-        public DateTime? CommencementDate { get; set; }
+        public DateTime? CommencementDate { get; internal set; }
 
         public DateTime? CompleteDate { get; set; }
 
@@ -23,6 +23,6 @@ namespace EA.Iws.Domain.NotificationAssessment
 
         public DateTime? DecisionDate { get; set; }
 
-        public string NameOfOfficer { get; set; }
+        public string NameOfOfficer { get; internal set; }
     }
 }

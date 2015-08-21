@@ -12,17 +12,19 @@
 
     public class SetCommencedDateHandlerTests
     {
-        private Guid notificationId = new Guid("688CA6BB-63EF-4D5E-A887-7EC952B9810D");
+        private readonly Guid notificationId = new Guid("688CA6BB-63EF-4D5E-A887-7EC952B9810D");
         private readonly TestIwsContext context;
         private readonly DateTime commencementDate = new DateTime(2015, 8, 10);
         private readonly SetCommencedDateHandler handler;
         private readonly SetCommencedDate message;
+        private readonly DateTime receivedDate = new DateTime(2015, 8, 10);
 
         public SetCommencedDateHandlerTests()
         {
             context = new TestIwsContext();
             var assessment = new NotificationAssessment(notificationId);
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.Submitted, assessment);
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, assessment);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, assessment.Dates);
 
             context.NotificationAssessments.Add(assessment);
 
