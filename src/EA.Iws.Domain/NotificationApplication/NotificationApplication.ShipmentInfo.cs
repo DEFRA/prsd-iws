@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
+    using ShipmentQuantityUnits = Core.Shared.ShipmentQuantityUnits;
 
     public partial class NotificationApplication
     {

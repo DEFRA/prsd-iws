@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using System.Linq;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     internal class GeneralViewModel
     {
@@ -107,7 +109,7 @@
             {
                 IntendedQuantityM3 = shipmentInfo.Quantity.ToString();
             }
-            else if (shipmentInfo.Units == ShipmentQuantityUnits.Kilogram)
+            else if (shipmentInfo.Units == ShipmentQuantityUnits.Kilograms)
             {
                 IntendedQuantityKg = shipmentInfo.Quantity + " kg";
             }

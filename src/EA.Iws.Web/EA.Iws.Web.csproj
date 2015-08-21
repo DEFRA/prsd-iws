@@ -668,6 +668,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\HomeController.cs" />
+    <Compile Include="Areas\MovementDocument\Controllers\QuantityController.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\MovementDocument\ViewModels\ShipmentDateViewModel.cs" />
     <Compile Include="Areas\MovementDocument\MovementDocumentAreaRegistration.cs" />

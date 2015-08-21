@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.DocumentGeneration
 {
+    using Core.Shared;
     using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
-    using Domain;
 
     internal static class DocumentFormatter
     {

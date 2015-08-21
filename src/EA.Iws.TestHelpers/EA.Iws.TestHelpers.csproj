@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainFakes\TestableMovement.cs" />
     <Compile Include="DomainFakes\TestableNotificationApplication.cs" />
+    <Compile Include="DomainFakes\TestableNotificationAssessment.cs" />
+    <Compile Include="DomainFakes\TestableShipmentInfo.cs" />
     <Compile Include="DomainFakes\TestableWasteCode.cs" />
     <Compile Include="DomainFakes\TestableWasteCodeInfo.cs" />
     <Compile Include="Helpers\ComplexTypeFactory.cs" />

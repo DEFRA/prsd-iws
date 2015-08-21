@@ -11,6 +11,8 @@
 
         public Guid NotificationApplicationId { get; private set; }
 
+        public decimal Quantity { get; private set; }
+
         protected Movement()
         {
         }

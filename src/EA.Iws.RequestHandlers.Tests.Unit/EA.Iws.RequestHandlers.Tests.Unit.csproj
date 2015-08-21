@@ -92,6 +92,7 @@
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
+    <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\NotificationMovementServiceTests.cs" />
     <Compile Include="Movement\TestService.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />

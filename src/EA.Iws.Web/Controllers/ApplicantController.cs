@@ -70,7 +70,7 @@
             }
             if (model.UserChoices.SelectedValue == 3)
             {
-                return RedirectToAction("Index", "ShipmentDate", new { id = model.NotificationId, area = "MovementDocument" });
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId, area = "MovementDocument" });
             }
             if (model.UserChoices.SelectedValue == 4)
             {

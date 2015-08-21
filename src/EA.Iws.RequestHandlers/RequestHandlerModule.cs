@@ -4,6 +4,7 @@
     using Copy;
     using Domain;
     using Domain.NotificationApplication;
+    using Movement;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
@@ -40,7 +41,7 @@
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
-            builder.RegisterType<INotificationMovementService>().As<INotificationMovementService>();
+            builder.RegisterType<NotificationMovementService>().As<INotificationMovementService>();
         }
     }
 }

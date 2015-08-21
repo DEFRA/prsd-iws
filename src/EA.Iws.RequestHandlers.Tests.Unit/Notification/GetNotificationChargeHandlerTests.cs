@@ -12,7 +12,6 @@
     using TestHelpers.Helpers;
     using Xunit;
     using NotificationType = Domain.NotificationApplication.NotificationType;
-    using ShipmentQuantityUnits = Domain.ShipmentQuantityUnits;
 
     public class GetNotificationChargeHandlerTests : IDisposable
     {
@@ -57,7 +56,7 @@
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationWithShipmentInfo, notificationWithShipmentInfoId);
 
-            notificationWithShipmentInfo.SetShipmentInfo(new DateTime(2016, 1, 1), new DateTime(2016, 12, 31), 1, 1, ShipmentQuantityUnits.Kilogram);
+            notificationWithShipmentInfo.SetShipmentInfo(new DateTime(2016, 1, 1), new DateTime(2016, 12, 31), 1, 1, ShipmentQuantityUnits.Kilograms);
 
             return notificationWithShipmentInfo;
         }

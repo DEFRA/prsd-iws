@@ -96,6 +96,7 @@
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
+    <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetShipmentDataByIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Movement\NotificationMovementService.cs" />
@@ -151,7 +152,6 @@
     <Compile Include="Mappings\RecoveryPercentageMap.cs" />
     <Compile Include="Mappings\RecoveryInfoMap.cs" />
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
-    <Compile Include="Mappings\ShipmentQuantityUnitsMap.cs" />
     <Compile Include="Mappings\SpecialHandlingMap.cs" />
     <Compile Include="Mappings\TechnologyEmployedMap.cs" />
     <Compile Include="Mappings\TransportationInfoMap.cs" />

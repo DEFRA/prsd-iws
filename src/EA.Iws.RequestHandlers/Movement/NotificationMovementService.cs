@@ -41,6 +41,11 @@
 
         public int GetNextMovementNumber(Guid notificationApplicationId)
         {
+            if (!context.NotificationApplications.Any(na => na.Id == notificationApplicationId))
+            {
+                throw new InvalidOperationException("Cannot get next movement number for non-existent notification " + notificationApplicationId);
+            }
+
             return context.Movements.Count(m => m.NotificationApplicationId == notificationApplicationId) + 1;
         }
     }

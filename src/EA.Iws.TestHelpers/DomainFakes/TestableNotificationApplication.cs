@@ -38,6 +38,12 @@
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.NotificationNumber, value, this); }
         }
 
+        public new ShipmentInfo ShipmentInfo
+        {
+            get { return base.ShipmentInfo; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ShipmentInfo, value, this); }
+        }
+
         public TestableNotificationApplication()
         {
         }

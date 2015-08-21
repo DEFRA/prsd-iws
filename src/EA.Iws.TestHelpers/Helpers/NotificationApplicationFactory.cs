@@ -6,11 +6,13 @@
     using System.Reflection;
     using Core.MeansOfTransport;
     using Core.RecoveryInfo;
+    using Core.Shared;
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
     using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
@@ -83,7 +85,7 @@
             });
 
             notification.SetShipmentInfo(new DateTime(DateTime.UtcNow.Year + 1, 2, 1),
-                new DateTime(DateTime.UtcNow.Year + 2, 1, 1), 420, 69, ShipmentQuantityUnits.Kilogram);
+                new DateTime(DateTime.UtcNow.Year + 2, 1, 1), 420, 69, ShipmentQuantityUnits.Kilograms);
 
             var exitPoint =
                 entryOrExitPoints.OrderBy(ep => ep.Country.Name).First(ep => ep.Country.IsEuropeanUnionMember);
