@@ -46,6 +46,7 @@
             this.UnitedKingdomCompetentAuthorities = new TestDbSet<UnitedKingdomCompetentAuthority>();
             this.Users = new TestDbSet<User>();
             this.WasteCodes = new TestDbSet<WasteCode>();
+            this.Movements = new TestDbSet<Domain.Movement.Movement>();
         }
 
         public int SaveChangesCount { get; private set; }

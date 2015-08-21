@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Domain;
     using Domain.FinancialGuarantee;
+    using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
@@ -58,6 +59,8 @@
         public virtual DbSet<LocalArea> LocalAreas { get; set; }
 
         public virtual DbSet<InternalUser> InternalUsers { get; set; }
+
+        public virtual DbSet<Movement> Movements { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="heading-large">Pre Notifications</h2>
+
+@using (Html.BeginForm("Create", "Home"))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-group">
+        <button class="button" type="submit">Create new pre notification</button>
+    </div>
+}

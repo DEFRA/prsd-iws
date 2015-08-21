@@ -12,6 +12,7 @@
     using TestHelpers.Helpers;
     using Xunit;
     using NotificationType = Domain.NotificationApplication.NotificationType;
+    using ShipmentQuantityUnits = Domain.ShipmentQuantityUnits;
 
     public class GetNotificationChargeHandlerTests : IDisposable
     {

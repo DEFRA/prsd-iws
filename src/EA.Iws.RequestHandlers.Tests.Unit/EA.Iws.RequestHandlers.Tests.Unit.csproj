@@ -91,6 +91,9 @@
     <Compile Include="Admin\NotificationAssessment\SetDecisionHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
+    <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
+    <Compile Include="Movement\NotificationMovementServiceTests.cs" />
+    <Compile Include="Movement\TestService.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />

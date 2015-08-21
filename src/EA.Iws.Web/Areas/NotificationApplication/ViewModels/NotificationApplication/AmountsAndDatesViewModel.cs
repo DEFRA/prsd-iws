@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
+    using Core.IntendedShipments;
     using Core.Notification;
     using Core.Shared;
-    using Core.Shipment;
     using Requests.Notification;
 
     public class AmountsAndDatesViewModel
@@ -11,7 +11,7 @@
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
         public bool IsIntendedShipmentsCompleted { get; set; }
-        public ShipmentData ShipmentData { get; set; }
+        public IntendedShipmentData IntendedShipmentData { get; set; }
 
         public AmountsAndDatesViewModel()
         {
@@ -22,7 +22,7 @@
             NotificationId = amountAndDatesInfo.NotificationId;
             NotificationType = amountAndDatesInfo.NotificationType;
             IsIntendedShipmentsCompleted = amountAndDatesInfo.IsIntendedShipmentsCompleted;
-            ShipmentData = amountAndDatesInfo.ShipmentData ?? new ShipmentData();
+            IntendedShipmentData = amountAndDatesInfo.IntendedShipmentData ?? new IntendedShipmentData();
         }
     }
 }

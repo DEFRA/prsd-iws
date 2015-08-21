@@ -95,7 +95,10 @@
     <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
+    <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
+    <Compile Include="Movement\GetShipmentDataByIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
+    <Compile Include="Movement\NotificationMovementService.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
@@ -223,10 +226,10 @@
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />
     <Compile Include="RequestHandlerModule.cs" />
     <Compile Include="Shared\GetCompetentAuthoritiesByCountryHandler.cs" />
-    <Compile Include="Shipment\SetShipmentInfoForNotificationHandler.cs" />
+    <Compile Include="IntendedShipments\SetIntendedShipmentInfoForNotificationHandler.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountriesHandler.cs" />
     <Compile Include="PackagingType\GetPackagingInfoForNotificationHandler.cs" />
-    <Compile Include="Shipment\GetShipmentInfoForNotificationHandler.cs" />
+    <Compile Include="IntendedShipments\GetIntendedShipmentInfoForNotificationHandler.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotificationHandler.cs" />
     <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
     <Compile Include="StateOfExport\GetStateOfExportWithTransportRouteDataByNotificationIdHandler.cs" />

@@ -60,6 +60,7 @@
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
+    <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentSummaryInformationData.cs" />
     <Compile Include="NotificationAssessment\NotificationDatesData.cs" />
     <Compile Include="NotificationAssessment\NotificationStatus.cs" />
@@ -93,8 +94,8 @@
     <Compile Include="Shared\TradeDirection.cs" />
     <Compile Include="Shared\UnitedKingdomCompetentAuthorityData.cs" />
     <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
-    <Compile Include="Shipment\ShipmentData.cs" />
-    <Compile Include="Shipment\ShipmentQuantityUnits.cs" />
+    <Compile Include="IntendedShipments\IntendedShipmentData.cs" />
+    <Compile Include="Shared\ShipmentQuantityUnits.cs" />
     <Compile Include="StateOfExport\StateOfExportData.cs" />
     <Compile Include="StateOfImport\StateOfImportData.cs" />
     <Compile Include="TransitState\TransitStateData.cs" />

@@ -1,26 +1,26 @@
-﻿namespace EA.Iws.RequestHandlers.Shipment
+﻿namespace EA.Iws.RequestHandlers.IntendedShipments
 {
     using System;
     using System.Threading.Tasks;
-    using Core.Shipment;
+    using Core.Shared;
     using DataAccess;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Shipment;
+    using Requests.IntendedShipments;
 
-    internal class SetShipmentInfoForNotificationHandler : IRequestHandler<SetShipmentInfoForNotification, Guid>
+    internal class SetIntendedShipmentInfoForNotificationHandler : IRequestHandler<SetIntendedShipmentInfoForNotification, Guid>
     {
         private readonly IwsContext context;
         private readonly IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits> shipmentQuantityUnitsMapper;
 
-        public SetShipmentInfoForNotificationHandler(IwsContext context,
+        public SetIntendedShipmentInfoForNotificationHandler(IwsContext context,
             IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits> shipmentQuantityUnitsMapper)
         {
             this.context = context;
             this.shipmentQuantityUnitsMapper = shipmentQuantityUnitsMapper;
         }
 
-        public async Task<Guid> HandleAsync(SetShipmentInfoForNotification command)
+        public async Task<Guid> HandleAsync(SetIntendedShipmentInfoForNotification command)
         {
             var notification = await context.GetNotificationApplication(command.NotificationId);
 

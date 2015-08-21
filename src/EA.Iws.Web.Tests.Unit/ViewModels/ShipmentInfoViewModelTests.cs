@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using Areas.NotificationApplication.ViewModels.Shipment;
-    using Core.Shipment;
+    using Core.Shared;
     using Prsd.Core;
     using TestHelpers;
     using Xunit;

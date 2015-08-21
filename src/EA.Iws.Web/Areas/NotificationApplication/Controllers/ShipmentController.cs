@@ -7,7 +7,7 @@
     using Infrastructure;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
-    using Requests.Shipment;
+    using Requests.IntendedShipments;
     using ViewModels.Shipment;
 
     [Authorize]
@@ -28,7 +28,7 @@
                 var shipmentData =
                     await
                         client.SendAsync(User.GetAccessToken(),
-                            new GetShipmentInfoForNotification(id));
+                            new GetIntendedShipmentInfoForNotification(id));
                 
                 var model = new ShipmentInfoViewModel(shipmentData);
                 return View(model);

@@ -1,20 +1,17 @@
-﻿namespace EA.Iws.Core.Shipment
+﻿namespace EA.Iws.Core.MovementDocument
 {
     using System;
+    using Shared;
 
     public class ShipmentData
     {
         public Guid NotificationId { get; set; }
 
-        public bool HasShipmentData { get; set; }
+        public int ShipmentNumber { get; set; }
 
-        public bool IsPreconsentedRecoveryFacility { get; set; }
+        public int NumberOfPackages { get; set; }
 
-        public int NumberOfShipments { get; set; }
-
-        public DateTime FirstDate { get; set; }
-
-        public DateTime LastDate { get; set; }
+        public DateTime Date { get; set; }
 
         public ShipmentQuantityUnits Units { get; set; }
 

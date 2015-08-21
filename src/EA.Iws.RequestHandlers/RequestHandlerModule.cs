@@ -40,6 +40,7 @@
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
+            builder.RegisterType<INotificationMovementService>().As<INotificationMovementService>();
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
-    using Core.Shipment;
+    using Core.Shared;
     using Prsd.Core.Mapper;
-    using Requests.Shipment;
 
     internal class ShipmentQuantityUnitsMap : IMap<ShipmentQuantityUnits, Domain.ShipmentQuantityUnits>,
         IMap<Domain.ShipmentQuantityUnits, ShipmentQuantityUnits>

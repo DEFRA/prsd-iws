@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Core.Shipment
+﻿namespace EA.Iws.Core.Shared
 {
     using System.ComponentModel.DataAnnotations;
 

@@ -67,6 +67,8 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
+    <Compile Include="Movement\CreateMovementForNotificationById.cs" />
+    <Compile Include="Movement\GetShipmentDataById.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />
     <Compile Include="Notification\ClassifyYourWasteInfo.cs" />
@@ -150,9 +152,9 @@
     <Compile Include="Registration\LinkUserToOrganisation.cs" />
     <Compile Include="Registration\Users\UserById.cs" />
     <Compile Include="Shared\GetUnitedKingdomCompetentAuthorityInformation.cs" />
-    <Compile Include="Shipment\SetShipmentInfoForNotification.cs" />
+    <Compile Include="IntendedShipments\SetIntendedShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\GetPackagingInfoForNotification.cs" />
-    <Compile Include="Shipment\GetShipmentInfoForNotification.cs" />
+    <Compile Include="IntendedShipments\GetIntendedShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotification.cs" />
     <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
     <Compile Include="StateOfExport\GetStateOfExportWithTransportRouteDataByNotificationId.cs" />

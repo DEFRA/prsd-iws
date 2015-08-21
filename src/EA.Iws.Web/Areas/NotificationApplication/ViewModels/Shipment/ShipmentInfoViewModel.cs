@@ -6,10 +6,11 @@
     using System.Globalization;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
-    using Core.Shipment;
+    using Core.IntendedShipments;
+    using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Helpers;
-    using Requests.Shipment;
+    using Requests.IntendedShipments;
 
     public class ShipmentInfoViewModel : IValidatableObject
     {
@@ -18,23 +19,23 @@
             UnitsSelectList = new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
         }
 
-        public ShipmentInfoViewModel(ShipmentData shipmentData)
+        public ShipmentInfoViewModel(IntendedShipmentData intendedShipmentData)
         {
-            NotificationId = shipmentData.NotificationId;
+            NotificationId = intendedShipmentData.NotificationId;
             UnitsSelectList = new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
-            IsPreconsentedRecoveryFacility = shipmentData.IsPreconsentedRecoveryFacility;
+            IsPreconsentedRecoveryFacility = intendedShipmentData.IsPreconsentedRecoveryFacility;
 
-            if (shipmentData.HasShipmentData)
+            if (intendedShipmentData.HasShipmentData)
             {
-                EndDay = shipmentData.LastDate.Day;
-                EndMonth = shipmentData.LastDate.Month;
-                EndYear = shipmentData.LastDate.Year;
-                NumberOfShipments = shipmentData.NumberOfShipments.ToString();
-                Quantity = shipmentData.Quantity.ToString();
-                StartDay = shipmentData.FirstDate.Day;
-                StartMonth = shipmentData.FirstDate.Month;
-                StartYear = shipmentData.FirstDate.Year;
-                Units = shipmentData.Units;
+                EndDay = intendedShipmentData.LastDate.Day;
+                EndMonth = intendedShipmentData.LastDate.Month;
+                EndYear = intendedShipmentData.LastDate.Year;
+                NumberOfShipments = intendedShipmentData.NumberOfShipments.ToString();
+                Quantity = intendedShipmentData.Quantity.ToString();
+                StartDay = intendedShipmentData.FirstDate.Day;
+                StartMonth = intendedShipmentData.FirstDate.Month;
+                StartYear = intendedShipmentData.FirstDate.Year;
+                Units = intendedShipmentData.Units;
             }
         }
 
@@ -183,7 +184,7 @@
             return true;
         }
 
-        public SetShipmentInfoForNotification ToRequest()
+        public SetIntendedShipmentInfoForNotification ToRequest()
         {
             DateTime startDate;
             SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
@@ -191,7 +192,7 @@
             DateTime endDate;
             SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
 
-            return new SetShipmentInfoForNotification(
+            return new SetIntendedShipmentInfoForNotification(
                 NotificationId,
                 Convert.ToInt32(NumberOfShipments),
                 Convert.ToDecimal(Quantity),

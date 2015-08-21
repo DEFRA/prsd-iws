@@ -1,12 +1,12 @@
-﻿namespace EA.Iws.Requests.Shipment
+﻿namespace EA.Iws.Requests.IntendedShipments
 {
     using System;
-    using Core.Shipment;
+    using Core.Shared;
     using Prsd.Core.Mediator;
 
-    public class SetShipmentInfoForNotification : IRequest<Guid>
+    public class SetIntendedShipmentInfoForNotification : IRequest<Guid>
     {
-        public SetShipmentInfoForNotification(Guid notificationId, int numberOfShipments,  decimal quantity, ShipmentQuantityUnits units, DateTime startDate, DateTime endDate)
+        public SetIntendedShipmentInfoForNotification(Guid notificationId, int numberOfShipments,  decimal quantity, ShipmentQuantityUnits units, DateTime startDate, DateTime endDate)
         {
             NotificationId = notificationId;
             NumberOfShipments = numberOfShipments;

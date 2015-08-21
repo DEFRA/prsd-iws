@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using Core.Shipment;
+    using Core.IntendedShipments;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Shipment;
 
-    internal class ShipmentInfoMap : IMap<NotificationApplication, ShipmentData>
+    internal class ShipmentInfoMap : IMap<NotificationApplication, IntendedShipmentData>
     {
         private readonly IMap<Domain.ShipmentQuantityUnits, ShipmentQuantityUnits> shipmentQuantityUnitsMapper;
 
@@ -14,12 +14,12 @@
             this.shipmentQuantityUnitsMapper = shipmentQuantityUnitsMapper;
         }
 
-        public ShipmentData Map(NotificationApplication source)
+        public IntendedShipmentData Map(NotificationApplication source)
         {
-            ShipmentData data;
+            IntendedShipmentData data;
             if (source.HasShipmentInfo)
             {
-                data = new ShipmentData
+                data = new IntendedShipmentData
                 {
                     NotificationId = source.Id,
                     HasShipmentData = true,
@@ -33,7 +33,7 @@
             }
             else
             {
-                data = new ShipmentData
+                data = new IntendedShipmentData
                 {
                     NotificationId = source.Id,
                     HasShipmentData = false,
