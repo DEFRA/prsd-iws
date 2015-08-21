@@ -7,7 +7,7 @@
     {
         public PackagingInfoMapping()
         {
-            ToTable("PackagingInfo", "Business");
+            ToTable("PackagingInfo", "Notification");
 
             Property(x => x.OtherDescription).HasColumnName("OtherDescription").HasMaxLength(100);
         }

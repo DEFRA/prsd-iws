@@ -7,7 +7,7 @@
     {
         public ShipmentInfoMapping()
         {
-            ToTable("ShipmentInfo", "Business");
+            ToTable("ShipmentInfo", "Notification");
         }
     }
 }

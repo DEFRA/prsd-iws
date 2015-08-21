@@ -7,7 +7,7 @@
     {
         public RecoveryInfoMapping()
         {
-            ToTable("RecoveryInfo", "Business");
+            ToTable("RecoveryInfo", "Notification");
 
             Property(x => x.EstimatedUnit).IsRequired();
             Property(x => x.EstimatedAmount).IsRequired();

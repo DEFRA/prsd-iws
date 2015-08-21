@@ -9,7 +9,7 @@
     {
         public WasteTypeMapping()
         {
-            ToTable("WasteType", "Business");
+            ToTable("WasteType", "Notification");
 
             Property(x => x.ChemicalCompositionName).IsOptional().HasMaxLength(120);
             Property(x => x.OtherWasteTypeDescription).IsOptional().HasMaxLength(256);

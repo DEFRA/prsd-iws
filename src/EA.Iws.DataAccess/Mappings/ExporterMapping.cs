@@ -7,7 +7,7 @@
     {
         public ExporterMapping()
         {
-            ToTable("Exporter", "Business");
+            ToTable("Exporter", "Notification");
         }
     }
 }

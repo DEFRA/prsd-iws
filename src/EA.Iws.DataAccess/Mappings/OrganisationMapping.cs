@@ -7,7 +7,7 @@
     {
         public OrganisationMapping()
         {
-            this.ToTable("Organisation", "Business");
+            this.ToTable("Organisation", "Notification");
 
             Property(x => x.Name).IsRequired().HasMaxLength(2048);
             Property(x => x.RegistrationNumber).HasMaxLength(64);

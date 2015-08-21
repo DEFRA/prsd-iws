@@ -8,7 +8,7 @@
     {
         public FacilityMapping()
         {
-            ToTable("Facility", "Business");
+            ToTable("Facility", "Notification");
 
             Property(x => x.IsActualSiteOfTreatment).IsRequired();
         }

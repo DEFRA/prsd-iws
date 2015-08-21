@@ -7,7 +7,7 @@
     {
         public ImporterMapping()
         {
-            this.ToTable("Importer", "Business");
+            this.ToTable("Importer", "Notification");
         }
     }
 }

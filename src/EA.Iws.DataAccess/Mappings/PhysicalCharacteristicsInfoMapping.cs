@@ -7,7 +7,7 @@
     {
         public PhysicalCharacteristicsInfoMapping()
         {
-            ToTable("PhysicalCharacteristicsInfo", "Business");
+            ToTable("PhysicalCharacteristicsInfo", "Notification");
 
             Property(x => x.OtherDescription).HasColumnName("OtherDescription").HasMaxLength(120);
         }

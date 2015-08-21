@@ -7,7 +7,7 @@
     {
         public ProducerMapping()
         {
-            this.ToTable("Producer", "Business");
+            this.ToTable("Producer", "Notification");
 
             Property(x => x.IsSiteOfExport).IsRequired();
         }

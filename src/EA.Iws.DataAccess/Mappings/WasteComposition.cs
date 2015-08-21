@@ -7,7 +7,7 @@
     {
         public WasteCompositionMapping()
         {
-            ToTable("WasteComposition", "Business");
+            ToTable("WasteComposition", "Notification");
 
             Property(x => x.Constituent).IsRequired().HasMaxLength(1024);
             Property(x => x.MinConcentration).IsRequired();

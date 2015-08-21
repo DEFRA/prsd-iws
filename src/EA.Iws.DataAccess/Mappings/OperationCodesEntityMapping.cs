@@ -7,7 +7,7 @@
     {
         public OperationCodesEntityMapping()
         {
-            ToTable("OperationCodes", "Business");
+            ToTable("OperationCodes", "Notification");
         }
     }
 }

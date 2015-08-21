@@ -7,7 +7,7 @@
     {
         public WasteCodeInfoMapping()
         {
-            this.ToTable("WasteCodeInfo", "Business");
+            this.ToTable("WasteCodeInfo", "Notification");
         }
     }
 }

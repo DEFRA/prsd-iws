@@ -112,7 +112,7 @@
 
                 var count =
                     await context.Database.SqlQuery<int>(
-                        "select count(id) from business.PackagingInfo where NotificationId = @id",
+                        "select count(id) from notification.PackagingInfo where NotificationId = @id",
                         new SqlParameter("id", notificationId)).SingleAsync();
 
                 Assert.Equal(1, count);
@@ -127,7 +127,7 @@
 
                 count =
                     await context.Database.SqlQuery<int>(
-                        "select count(id) from business.PackagingInfo where NotificationId = @id",
+                        "select count(id) from notification.PackagingInfo where NotificationId = @id",
                         new SqlParameter("id", notificationId)).SingleAsync();
 
                 Assert.Equal(2, count);
@@ -172,7 +172,7 @@
 
                 var count =
                     await context.Database.SqlQuery<int>(
-                        "select count(id) from business.Exporter where Id = @id",
+                        "select count(id) from notification.Exporter where Id = @id",
                         new SqlParameter("id", notification.Exporter.Id)).SingleAsync();
 
                 Assert.Equal(1, count);
@@ -183,7 +183,7 @@
 
                 count =
                     await context.Database.SqlQuery<int>(
-                        "select count(id) from business.Exporter where Id = @id",
+                        "select count(id) from notification.Exporter where Id = @id",
                         new SqlParameter("id", notification.Exporter.Id)).SingleAsync();
 
                 Assert.Equal(1, count);

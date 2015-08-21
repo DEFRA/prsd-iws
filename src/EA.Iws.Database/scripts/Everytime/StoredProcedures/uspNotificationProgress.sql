@@ -21,7 +21,7 @@ BEGIN
     SELECT 
         DISTINCT wc.CodeType 
     FROM
-        [Business].WasteCodeInfo wci
+        [Notification].WasteCodeInfo wci
         INNER JOIN [Lookup].WasteCode wc ON wci.WasteCodeId = wc.Id
     WHERE 
         wci.NotificationId = @NotificationId;
@@ -107,10 +107,10 @@ BEGIN
          END AS BIT) AS HasWasteGenerationProcess,
         CAST(CASE WHEN E.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasExporter,
         CAST(CASE WHEN P.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasProducer,
-        CAST(ISNULL((SELECT MAX(CASE WHEN IsSiteOfExport = 1 THEN 1 ELSE 0 END) FROM [Business].[Producer] WHERE NotificationId = N.Id), 0) AS BIT) AS HasSiteOfExport,
+        CAST(ISNULL((SELECT MAX(CASE WHEN IsSiteOfExport = 1 THEN 1 ELSE 0 END) FROM [Notification].[Producer] WHERE NotificationId = N.Id), 0) AS BIT) AS HasSiteOfExport,
         CAST(CASE WHEN I.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasImporter,
         CAST(CASE WHEN F.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasFacility,
-        CAST(ISNULL((SELECT MAX(CASE WHEN IsActualSiteOfTreatment = 1 THEN 1 ELSE 0 END) FROM [Business].[Facility] WHERE NotificationId = N.Id), 0) AS BIT) AS HasActualSiteOfTreatment,
+        CAST(ISNULL((SELECT MAX(CASE WHEN IsActualSiteOfTreatment = 1 THEN 1 ELSE 0 END) FROM [Notification].[Facility] WHERE NotificationId = N.Id), 0) AS BIT) AS HasActualSiteOfTreatment,
         CAST(CASE WHEN C.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasCarrier,
         CAST(CASE WHEN OC.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasOperationCodes,
         CAST(CASE WHEN T.Id IS NULL THEN 0 ELSE 1 END AS BIT) AS HasTechnologyEmployed,
@@ -145,49 +145,49 @@ BEGIN
     FROM 
         [Notification].[Notification] N
 
-        LEFT JOIN [Business].[Exporter] AS E 
+        LEFT JOIN [Notification].[Exporter] AS E 
         ON N.Id = E.NotificationId
 
-        LEFT JOIN [Business].[Producer] AS P 
+        LEFT JOIN [Notification].[Producer] AS P 
         ON N.Id = P.NotificationId
 
-        LEFT JOIN [Business].[Importer] AS I
+        LEFT JOIN [Notification].[Importer] AS I
         ON N.Id = I.NotificationId
 
-        LEFT JOIN [Business].[Facility] AS F 
+        LEFT JOIN [Notification].[Facility] AS F 
         ON N.Id = F.NotificationId
 
-        LEFT JOIN [Business].[Carrier] AS C 
+        LEFT JOIN [Notification].[Carrier] AS C 
         ON N.Id = C.NotificationId
 
-        LEFT JOIN [Business].[OperationCodes] AS OC 
+        LEFT JOIN [Notification].[OperationCodes] AS OC 
         ON N.Id = OC.NotificationId
 
         LEFT JOIN [Notification].[TechnologyEmployed] AS T 
         ON N.Id = T.NotificationId
 
-        LEFT JOIN [Business].[PackagingInfo] AS PI 
+        LEFT JOIN [Notification].[PackagingInfo] AS PI 
         ON N.Id = PI.NotificationId
 
-        LEFT JOIN [Business].[PhysicalCharacteristicsInfo] AS PC 
+        LEFT JOIN [Notification].[PhysicalCharacteristicsInfo] AS PC 
         ON N.Id = PC.NotificationId
 
-        LEFT JOIN [Business].[RecoveryInfo] AS R 
+        LEFT JOIN [Notification].[RecoveryInfo] AS R 
         ON N.Id = R.NotificationId
 
-        LEFT JOIN [Business].[ShipmentInfo] AS S 
+        LEFT JOIN [Notification].[ShipmentInfo] AS S 
         ON N.Id = S.NotificationId
 
-        LEFT JOIN [Business].[WasteCodeInfo] AS WCI 
+        LEFT JOIN [Notification].[WasteCodeInfo] AS WCI 
         ON N.Id = WCI.NotificationId
 
         LEFT JOIN [Lookup].[WasteCode] AS WC 
         ON WCI.WasteCodeId = WC.Id
 
-        LEFT JOIN [Business].[WasteType] AS WT 
+        LEFT JOIN [Notification].[WasteType] AS WT 
         ON N.Id = WT.NotificationId
 
-        LEFT JOIN [Business].[WasteAdditionalInformation] AS WA 
+        LEFT JOIN [Notification].[WasteAdditionalInformation] AS WA 
         ON WT.Id = WA.WasteTypeId
 
         LEFT JOIN [Notification].[StateOfExport] AS SE 

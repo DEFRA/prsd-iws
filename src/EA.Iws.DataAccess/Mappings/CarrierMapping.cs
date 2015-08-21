@@ -7,7 +7,7 @@
     {
         public CarrierMapping()
         {
-            this.ToTable("Carrier", "Business");
+            this.ToTable("Carrier", "Notification");
         }
     }
 }

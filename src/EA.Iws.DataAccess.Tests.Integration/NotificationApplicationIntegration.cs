@@ -76,7 +76,7 @@
             await context.SaveChangesAsync();
 
             var newAddress1 =
-                await context.Database.SqlQuery<string>("SELECT [Address1] FROM [Business].[Producer] WHERE Id = @id",
+                await context.Database.SqlQuery<string>("SELECT [Address1] FROM [Notification].[Producer] WHERE Id = @id",
                     new SqlParameter("id", producer.Id)).SingleAsync();
 
             Assert.Equal("address1", newAddress1);
