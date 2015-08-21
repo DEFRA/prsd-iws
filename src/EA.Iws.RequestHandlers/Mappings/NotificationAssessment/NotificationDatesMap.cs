@@ -13,7 +13,9 @@
             {
                 NotificationId = parameter,
                 NotificationReceivedDate = source.NotificationReceivedDate,
-                PaymentReceivedDate = source.PaymentReceivedDate
+                PaymentReceivedDate = source.PaymentReceivedDate,
+                CommencementDate = source.CommencementDate,
+                NameOfOfficer = source.NameOfOfficer
             };
         }
     }

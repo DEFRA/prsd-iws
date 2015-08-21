@@ -28,11 +28,12 @@
             NotificationId = dates.NotificationId;
             NotificationReceivedDate = new OptionalDateInputViewModel(dates.NotificationReceivedDate, true);
             PaymentReceivedDate = new OptionalDateInputViewModel(dates.PaymentReceivedDate, true);
-            CommencementDate = new OptionalDateInputViewModel(true);
+            CommencementDate = new OptionalDateInputViewModel(dates.CommencementDate, true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);
             NotificationTransmittedDate = new OptionalDateInputViewModel(true);
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
             DecisionDate = new OptionalDateInputViewModel(true);
+            NameOfOfficer = dates.NameOfOfficer;
         }
 
         public Guid NotificationId { get; set; }
