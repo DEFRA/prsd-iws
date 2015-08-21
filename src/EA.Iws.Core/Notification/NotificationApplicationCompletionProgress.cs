@@ -41,7 +41,14 @@
         public bool HasWasteType { get; set; }
         public bool HasWasteGenerationProcess { get; set; }
         public bool HasPhysicalCharacteristics { get; set; }
-        public bool HasWasteCodes { get; set; }
+
+        public bool HasBaselOecdCode { get; set; }
+        public bool HasEwcCodes { get; set; }
+        public bool HasYCodes { get; set; }
+        public bool HasHCodes { get; set; }
+        public bool HasUnClasses { get; set; }
+        public bool HasUnNumbers { get; set; }
+        public bool HasOtherCodes { get; set; }
 
         public bool HasRecoveryData { get; set; }
         public bool HasRecoveryInfo { get; set; }

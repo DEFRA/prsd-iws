@@ -80,7 +80,13 @@
             classifyYourWasteInfo.ArePhysicalCharacteristicsCompleted = notificationCompletionProgress.HasPhysicalCharacteristics;
 
             var wasteCodesOverviewInfo = wasteCodesOverviewMap.Map(notification);
-            wasteCodesOverviewInfo.AreWasteCodesCompleted = notificationCompletionProgress.HasWasteCodes;
+            wasteCodesOverviewInfo.IsBaselOecdCodeCompleted = notificationCompletionProgress.HasBaselOecdCode;
+            wasteCodesOverviewInfo.AreEwcCodesCompleted = notificationCompletionProgress.HasEwcCodes;
+            wasteCodesOverviewInfo.AreYCodesCompleted = notificationCompletionProgress.HasYCodes;
+            wasteCodesOverviewInfo.AreHCodesCompleted = notificationCompletionProgress.HasHCodes;
+            wasteCodesOverviewInfo.AreUnClassesCompleted = notificationCompletionProgress.HasUnClasses;
+            wasteCodesOverviewInfo.AreUnNumbersCompleted = notificationCompletionProgress.HasUnNumbers;
+            wasteCodesOverviewInfo.AreOtherCodesCompleted = notificationCompletionProgress.HasOtherCodes;
 
             var wasteRecoveryInfo = wasteRecoveryInfoMap.Map(notification);
             wasteRecoveryInfo.IsWasteRecoveryInformationCompleted = notificationCompletionProgress.HasRecoveryData;

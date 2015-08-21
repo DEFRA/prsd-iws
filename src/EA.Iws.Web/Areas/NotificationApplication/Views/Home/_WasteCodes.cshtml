@@ -13,7 +13,7 @@
     <details>
         <summary>
             Basel or OECD code
-            @if (Model.AreWasteCodesCompleted)
+            @if (Model.IsBaselOecdCodeCompleted)
             {
                 <i class="fa fa-check green-text"></i>
             }
@@ -21,7 +21,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreWasteCodesCompleted)
+                @if (Model.IsBaselOecdCodeCompleted)
                 {
                     if (Model.BaselOecdCode.Any())
                     {
@@ -51,7 +51,7 @@
     <details>
         <summary>
             EWC codes
-            @if (Model.AreWasteCodesCompleted)
+            @if (Model.AreEwcCodesCompleted)
             {
                 <i class="fa fa-check green-text"></i>
             }
@@ -59,7 +59,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreWasteCodesCompleted)
+                @if (Model.AreEwcCodesCompleted)
                 {
                     if (Model.EwcCodes.Any())
                     {
@@ -90,7 +90,7 @@
     <details>
         <summary>
             Y codes
-            @if (Model.AreWasteCodesCompleted)
+            @if (Model.AreYCodesCompleted)
             {
                 <i class="fa fa-check green-text"></i>
             }
@@ -98,7 +98,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreWasteCodesCompleted)
+                @if (Model.AreYCodesCompleted)
                 {
                     if (Model.YCodes.Any())
                     {
@@ -131,7 +131,7 @@
     <details>
         <summary>
             H or HP codes
-            @if (Model.AreWasteCodesCompleted)
+            @if (Model.AreHCodesCompleted)
             {
                 <i class="fa fa-check green-text"></i>
             }
@@ -139,7 +139,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreWasteCodesCompleted)
+                @if (Model.AreHCodesCompleted)
                 {
                     if (Model.HCodes.Any())
                     {
@@ -172,7 +172,7 @@
     <details>
         <summary>
             UN classes
-            @if (Model.AreWasteCodesCompleted)
+            @if (Model.AreUnClassesCompleted)
             {
                 <i class="fa fa-check green-text"></i>
             }
@@ -180,7 +180,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreWasteCodesCompleted)
+                @if (Model.AreUnClassesCompleted)
                 {
                     if (Model.UnClass.Any())
                     {
@@ -213,7 +213,7 @@
     <details>
         <summary>
             UN number
-            @if (Model.AreWasteCodesCompleted)
+            @if (Model.AreUnNumbersCompleted)
             {
                 <i class="fa fa-check green-text"></i>
             }
@@ -221,7 +221,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreWasteCodesCompleted)
+                @if (Model.AreUnNumbersCompleted)
                 {
                     if (Model.UnNumber.Any())
                     {
@@ -253,7 +253,7 @@
     <details>
         <summary>
             Other codes
-            @if (Model.AreWasteCodesCompleted)
+            @if (Model.AreOtherCodesCompleted)
             {
                 <i class="fa fa-check green-text"></i>
             }
@@ -261,7 +261,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                    @if (Model.AreWasteCodesCompleted)
+                    @if (Model.AreOtherCodesCompleted)
                     {
                         <h4 class="heading-small">Other codes</h4>
                         <dl>

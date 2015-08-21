@@ -17,7 +17,13 @@
         public WasteCodeData[] UnClass { get; set; }
         public WasteCodeData[] UnNumber { get; set; }
         public WasteCodeData[] CustomCodes { get; set; }
-        public bool AreWasteCodesCompleted { get; set; }
+        public bool IsBaselOecdCodeCompleted { get; set; }
+        public bool AreEwcCodesCompleted { get; set; }
+        public bool AreYCodesCompleted { get; set; }
+        public bool AreHCodesCompleted { get; set; }
+        public bool AreUnClassesCompleted { get; set; }
+        public bool AreUnNumbersCompleted { get; set; }
+        public bool AreOtherCodesCompleted { get; set; }
 
         public WasteCodeOverviewViewModel(WasteCodesOverviewInfo classifyYourWasteInfo)
         {
@@ -32,7 +38,13 @@
             UnClass = classifyYourWasteInfo.UnClass;
             UnNumber = classifyYourWasteInfo.UnNumber;
             CustomCodes = classifyYourWasteInfo.CustomCodes;
-            AreWasteCodesCompleted = classifyYourWasteInfo.AreWasteCodesCompleted;
+            IsBaselOecdCodeCompleted = classifyYourWasteInfo.IsBaselOecdCodeCompleted;
+            AreEwcCodesCompleted = classifyYourWasteInfo.AreEwcCodesCompleted;
+            AreYCodesCompleted = classifyYourWasteInfo.AreYCodesCompleted;
+            AreHCodesCompleted = classifyYourWasteInfo.AreHCodesCompleted;
+            AreUnClassesCompleted = classifyYourWasteInfo.AreUnClassesCompleted;
+            AreUnNumbersCompleted = classifyYourWasteInfo.AreUnNumbersCompleted;
+            AreOtherCodesCompleted = classifyYourWasteInfo.AreOtherCodesCompleted;
         }
     }
 }
