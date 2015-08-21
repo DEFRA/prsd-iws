@@ -1,8 +1,4 @@
-﻿CREATE SCHEMA Shipment;
-
-GO
-
-CREATE TABLE [Shipment].[Data]
+﻿CREATE TABLE [Notification].[Movement]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL, 
     [ShipmentNumber] INT NOT NULL,
