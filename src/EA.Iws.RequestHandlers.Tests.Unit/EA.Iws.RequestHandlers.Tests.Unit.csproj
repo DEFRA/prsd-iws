@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\NotificationAssessment\GetDatesHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDateHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />
