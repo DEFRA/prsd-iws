@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "List Producers";
 }
-<h2 class="heading-large">Waste generator - producer</h2>
-<p>Add details of the waste generator - producers.</p>
+<h2 class="heading-large">Who is the waste generator - producer?</h2>
+<p>Add details of all the waste generators - producers. After you've added your first waste generator - producer, you can add several more by selecting "Add another waste generator - producer".</p>
 
 @if (Model != null && Model.ProducerData.Any())
 {
@@ -42,9 +42,13 @@
     </div>
 }
 
-<div class="form-group">
-    @Html.ActionLink("Add producer", "Add", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
-</div>
+ @{
+     var buttonText = Model.ProducerData.Count > 0 ? "Add another waste generator - producer" : "Add your first waste generator - producer";
+     <div class="form-group">
+         @Html.ActionLink(buttonText, "Add", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
+     </div>
+ }
+
 @if (ViewBag.BackToOverview)
 {
     @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
