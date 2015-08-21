@@ -45,6 +45,10 @@
             {
                 await SetPaymentReceived(model);
             }
+            else if (model.Command == DateInputViewModel.AssessmentCommenced)
+            {
+                await SetAssessmentCommenced(model);
+            }
             else
             {
                 var setDates = new SetDates
@@ -86,6 +90,17 @@
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), setNotificationReceivedDate);
+            }
+        }
+
+        private async Task SetAssessmentCommenced(DateInputViewModel model)
+        {
+            var setAssessmentCommenced = new SetCommencedDate(model.NotificationId, 
+                model.CommencementDate.AsDateTime().GetValueOrDefault(), model.NameOfOfficer);
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), setAssessmentCommenced);
             }
         }
     }

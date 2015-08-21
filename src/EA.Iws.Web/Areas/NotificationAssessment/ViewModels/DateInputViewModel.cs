@@ -10,6 +10,7 @@
     {
         public static readonly string NotificationReceived = "notificationReceived";
         public static readonly string PaymentReceived = "paymentReceived";
+        public static readonly string AssessmentCommenced = "assessmentCommenced";
 
         public DateInputViewModel()
         {
@@ -66,15 +67,21 @@
             {
                 yield return new ValidationResult("Please enter the notification received date", new[] { "NotificationReceivedDate" });
             }
-
-            if (Command == PaymentReceived && !PaymentReceivedDate.IsCompleted)
+            else if (Command == PaymentReceived && !PaymentReceivedDate.IsCompleted)
             {
                 yield return new ValidationResult("Please enter the payment received date", new[] { "PaymentReceivedDate" });
             }
-
-            if ((CommencementDate.IsCompleted || !string.IsNullOrWhiteSpace(NameOfOfficer)) && (!CommencementDate.IsCompleted || string.IsNullOrWhiteSpace(NameOfOfficer)))
+            else if (Command == AssessmentCommenced)
             {
-                yield return new ValidationResult("Please complete the date and name of officer", new[] { "CommencementDate" });
+                if (!CommencementDate.IsCompleted)
+                {
+                    yield return new ValidationResult("Please enter the assessment commenced date", new[] { "CommencementDate" });
+                }
+
+                if (string.IsNullOrWhiteSpace(NameOfOfficer))
+                {
+                    yield return new ValidationResult("Please enter the name of the officer", new[] { "NameOfOfficer" });
+                }
             }
         }
     }

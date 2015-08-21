@@ -78,14 +78,25 @@
         </details>
     </div>
 
-    <div class="form-group">
-        <table>
-            <tr>
-                <td>
-                    <details>
-                        <summary><span class="summary">Assessment commencement date and name of officer</span></summary>
-                        @{if (Model.CommencementComplete)
-                        {<i class="fa-check fa green-tick"></i>}}
+    <div>
+        <details>
+            <summary>
+                <span class="summary">Assessment commencement date and name of officer</span>
+                @if (Model.CommencementComplete)
+                {
+                    <i class="fa-check fa green-tick"></i>
+                }
+            </summary>
+            <div class="expanded-details">
+                <div class="panel-indent">
+                    @if (Model.CommencementComplete)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.CommencementDate.AsDateTime().GetValueOrDefault())
+                        <br/>
+                        @Html.DisplayFor(m => m.NameOfOfficer)
+                    }
+                    else
+                    {
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.CommencementDate) @Html.Gds().FormGroupClass(m => m.CommencementDate.Day) @Html.Gds().FormGroupClass(m => m.CommencementDate.Month) @Html.Gds().FormGroupClass(m => m.CommencementDate.Year)">
                             <fieldset>
                                 <div class="form-date form-group">
@@ -99,9 +110,17 @@
                                 </div>
                             </fieldset>
                         </div>
-                    </details>
-                </td>
-            </tr>
+                        <div class="form-group">
+                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.AssessmentCommenced">Set assessment commenced</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="form-group">
+        <table>
             <tr>
                 <td>
                     <details>

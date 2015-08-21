@@ -18,10 +18,11 @@
     public class KeyDatesControllerTests
     {
         private readonly IIwsClient client;
-        private Guid notificationId = new Guid("65214A82-EE7B-42FF-A4A1-220B2A7E74BB");
-        private DateTime notificationReceivedDate = new DateTime(2015, 8, 1);
-        private KeyDatesController controller;
-        private DateTime paymentReceivedDate = new DateTime(2015, 8, 2);
+        private readonly Guid notificationId = new Guid("65214A82-EE7B-42FF-A4A1-220B2A7E74BB");
+        private readonly DateTime notificationReceivedDate = new DateTime(2015, 8, 1);
+        private readonly KeyDatesController controller;
+        private readonly DateTime paymentReceivedDate = new DateTime(2015, 8, 2);
+        private readonly DateTime commencementDate = new DateTime(2015, 8, 3);
 
         public KeyDatesControllerTests()
         {
@@ -179,6 +180,57 @@
                             p =>
                                 p.NotificationId == model.NotificationId &&
                                 p.PaymentReceivedDate == model.PaymentReceivedDate.AsDateTime().Value)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task AssessmentCommenced_ValidInput_NoValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.CommencementDate = new OptionalDateInputViewModel(commencementDate);
+            model.NameOfOfficer = "Officer";
+            model.Command = DateInputViewModel.AssessmentCommenced;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task AssessmentCommenced_InvalidInput_ValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.Command = DateInputViewModel.AssessmentCommenced;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("CommencementDate") && controller.ModelState.ContainsKey("NameOfOfficer"));
+        }
+
+        [Fact]
+        public async Task AssessmentCommenced_ValidInput_CallsClient()
+        {
+            var model = new DateInputViewModel();
+            model.CommencementDate = new OptionalDateInputViewModel(commencementDate);
+            model.NameOfOfficer = "Officer";
+            model.Command = DateInputViewModel.AssessmentCommenced;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            A.CallTo(
+                () =>
+                    client.SendAsync(A<string>._,
+                        A<SetCommencedDate>.That.Matches(
+                            p =>
+                                p.NotificationId == model.NotificationId &&
+                                p.CommencementDate == model.CommencementDate.AsDateTime().Value &&
+                                p.NameOfOfficer == model.NameOfOfficer)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
