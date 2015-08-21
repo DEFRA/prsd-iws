@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using System;
     using System.Collections.Generic;
@@ -127,19 +127,6 @@
         }
 
         [Fact]
-        public async Task AddCode_NoSelectedCode_Throws()
-        {
-            try
-            {
-                await controller.Post(AnyGuid, viewModel, AddCode, null);
-            }
-            catch (InvalidOperationException)
-            {
-                Assert.True(true);
-            }
-        }
-
-        [Fact]
         public async Task AddCode_CallsAddAction()
         {
             viewModel.EnterWasteCodesViewModel.SelectedCode = AnyGuid;
@@ -169,6 +156,18 @@
             await controller.Post(AnyGuid, viewModel, AddCode, null);
 
             Assert.Single(viewModel.EnterWasteCodesViewModel.SelectedWasteCodes, AnyGuid);
+        }
+
+        [Fact]
+        public async Task ClickingAddWithoutASelectedCodeDoesNotCallAddAndReturnsView()
+        {
+            var result = await controller.Post(AnyGuid, viewModel, AddCode, null) as ViewResult;
+
+            Assert.False(controller.IsAddCalled);
+            Assert.False(controller.IsContinueCalled);
+            Assert.True(controller.IsRebindCalled);
+
+            Assert.IsType<TestViewModel>(result.Model);
         }
 
         private void InvalidateModelState()

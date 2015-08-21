@@ -149,7 +149,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
-    <Compile Include="Controllers\BaseWasteCodeControllerTests.cs" />
+    <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />
     <Compile Include="Controllers\ApplicantControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\CarrierControllerTests.cs" />

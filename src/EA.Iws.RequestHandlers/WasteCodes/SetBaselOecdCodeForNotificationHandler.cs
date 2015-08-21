@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteCodes
 {
+    using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.WasteCodes;
@@ -21,17 +22,29 @@
         {
             var notification = await context.GetNotificationApplication(message.Id);
 
-            var wasteCode = await context.WasteCodes.SingleAsync(wc => wc.Id == message.Code);
-
             if (message.NotApplicable)
             {
-                notification.SetCodesNotApplicable(message.CodeType);
+                SetNotApplicable(message, notification);
             }
             else
             {
-                notification.SetBaselOecdCode(WasteCodeInfo.CreateWasteCodeInfo(wasteCode));
+                await SetCode(message, notification);
             }
 
+            await context.SaveChangesAsync();
+
+            return true;
+        }
+
+        private void SetNotApplicable(SetBaselOecdCodeForNotification message, NotificationApplication notification)
+        {
+            notification.SetCodesNotApplicable(message.CodeType);
+
+            ClearOldCodes(message, notification);
+        }
+
+        private void ClearOldCodes(SetBaselOecdCodeForNotification message, NotificationApplication notification)
+        {
             if (message.CodeType == CodeType.Basel)
             {
                 notification.RemoveCodeOfType(CodeType.Oecd);
@@ -40,10 +53,27 @@
             {
                 notification.RemoveCodeOfType(CodeType.Basel);
             }
+        }
 
-            await context.SaveChangesAsync();
+        private async Task SetCode(SetBaselOecdCodeForNotification message, NotificationApplication notification)
+        {
+            var wasteCode = await context.WasteCodes.SingleAsync(wc => wc.Id == message.Code);
 
-            return true;
+            if (wasteCode.CodeType != message.CodeType)
+            {
+                var errorMessage =
+                    string.Format(
+                        "Tried to set an invalid code of type {0} where the set for code type {1} was requested. For notification {2}.",
+                        wasteCode.CodeType,
+                        message.CodeType,
+                        message.Id);
+
+                throw new InvalidOperationException(errorMessage);
+            }
+            
+            notification.SetBaselOecdCode(WasteCodeInfo.CreateWasteCodeInfo(wasteCode));
+
+            ClearOldCodes(message, notification);
         }
     }
 }

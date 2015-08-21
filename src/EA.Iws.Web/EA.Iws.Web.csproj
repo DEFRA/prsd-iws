@@ -431,7 +431,6 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\NotificationApplication\Views\CustomWasteCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryValues.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteCodes\UnNumber.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\RecoveryInfo\RecoveryPercentage.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\Index.cshtml" />
@@ -621,11 +620,7 @@
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\StateOfImportSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummary.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ReasonForExport\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteCodes\BaselEwcCode.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\_ShipmentForm.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteCodes\AddYcodeHcodeAndUnClass.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\_PackagingTypes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\Index.cshtml" />

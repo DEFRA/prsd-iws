@@ -42,6 +42,11 @@
             {
                 yield return new ValidationResult("Do not select not applicable where you have also selected codes", new[] { "IsNotApplicable" });
             }
+
+            if (IsNotApplicable && SelectedCode.HasValue)
+            {
+                yield return new ValidationResult("Do not select both not applicable and a code", new[] { "IsNotApplicable" });
+            }
         }
     }
 }

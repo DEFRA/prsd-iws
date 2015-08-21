@@ -117,6 +117,7 @@
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandlerTests.cs" />
     <Compile Include="WasteCodes\BaseSetCodesTests.cs" />
     <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypesHandlerTests.cs" />
+    <Compile Include="WasteCodes\SetBaselOecdCodeForNotificationHandlerTests.cs" />
     <Compile Include="WasteCodes\WasteCodeHandlerTests.cs" />
     <Compile Include="WorkingDayCalculatorTests.cs" />
   </ItemGroup>

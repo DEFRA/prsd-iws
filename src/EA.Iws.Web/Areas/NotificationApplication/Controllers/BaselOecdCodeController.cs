@@ -51,12 +51,16 @@
                     return View(model);
                 }
 
+                var codeType = (model.SelectedCode.HasValue)
+                    ? model.WasteCodes.Single(wc => wc.Id == model.SelectedCode.Value).CodeType
+                    : CodeType.Basel;
+
                 await
                     client.SendAsync(User.GetAccessToken(),
                         new SetBaselOecdCodeForNotification(id,
-                            model.WasteCodes.Single(wc => wc.Id == model.SelectedCode.Value).CodeType,
+                            codeType,
                             model.NotListed,
-                            model.SelectedCode.Value));
+                            model.SelectedCode));
 
                 return RedirectToAction("Index", "EwcCode", new { id });
             }

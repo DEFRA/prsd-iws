@@ -1,13 +1,19 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.EnterWasteCodesViewModel
 
 <div class="wastecode-block">
-    <h4 class="heading-medium">Type your code and select from the options that will appear in the list.</h4>
-    <div class="@Html.Gds().FormGroupClass(m => m.SelectedCode)">
+    <p>Type your code and select from the options that will appear in the list.</p>
+    <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
         @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list" })
         <button type="submit" name="command" value="addcode">Insert this code into table below</button>
     </div>
-    @Html.Gds().CheckBoxFor(m => m.IsNotApplicable)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.IsNotApplicable)">
+        <label for="EnterWasteCodesViewModel_IsNotApplicable">
+            @Html.Gds().ValidationMessageFor(m => m.IsNotApplicable)
+            @Html.CheckBoxFor(m => m.IsNotApplicable)
+            @Html.DisplayNameFor(m => m.IsNotApplicable)
+        </label>
+    </div>
 
     <table>
         <thead>

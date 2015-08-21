@@ -21,16 +21,13 @@
         @Html.HiddenFor(m => m.WasteCodes[i].CodeType)
     }
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedCode)">
+    <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
         @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list" })
     </div>
-    
-    <p>Or:</p>
-
     <div class="form-group @Html.Gds().FormGroupClass(m => m.NotListed)">
         @Html.Gds().ValidationMessageFor(m => m.NotListed)
-        <label class="block-label" for="NotListed">
+        <label for="NotListed">
             @Html.CheckBoxFor(m => m.NotListed)
             @Html.DisplayNameFor(m => m.NotListed)
         </label>
@@ -60,6 +57,19 @@
                     $("#descriptionTextArea div").html("No code selected");
                 } else {
                     $("#descriptionTextArea div").html(description);
+                }
+            });
+
+            $("#NotListed").change(function () {
+                if ($(this).is(":checked")) {
+                    // clear the selected drop-down option.
+                    $("#code-list option[value='']").attr("selected", true);
+
+                    // propagate the change to the drop-down select element.
+                    $("#code-list").change();
+
+                    // clear the visible input box.
+                    $("input.ui-autocomplete-input").val('').change();
                 }
             });
 

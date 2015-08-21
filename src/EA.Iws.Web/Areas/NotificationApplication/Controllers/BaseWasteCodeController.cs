@@ -37,15 +37,15 @@
 
                 return RemoveAction(viewModel);
             }
-
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
-
+            
             if (string.IsNullOrWhiteSpace(command) && string.IsNullOrWhiteSpace(remove))
             {
                 throw new InvalidOperationException();
+            }
+
+            if (!ModelState.IsValid || (command.Equals(AddCode) && !HasASelectedCode(viewModel)))
+            {
+                return View(viewModel);
             }
 
             if (command.Equals(AddCode) && HasASelectedCode(viewModel))

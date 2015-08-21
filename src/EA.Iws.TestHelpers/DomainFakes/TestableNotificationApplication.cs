@@ -20,6 +20,24 @@
             set { WasteCodeInfoCollection = value; }
         }
 
+        public new Guid UserId
+        {
+            get { return base.UserId; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.UserId, value, this); }
+        }
+
+        public new NotificationType NotificationType
+        {
+            get { return base.NotificationType; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.NotificationType, value, this); }
+        }
+
+        public new string NotificationNumber
+        {
+            get { return base.NotificationNumber; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.NotificationNumber, value, this); }
+        }
+
         public TestableNotificationApplication()
         {
         }
