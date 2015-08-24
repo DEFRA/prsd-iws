@@ -1,7 +1,10 @@
 ﻿namespace EA.Iws.TestHelpers.DomainFakes
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Helpers;
 
     public class TestableMovement : Movement
@@ -18,6 +21,12 @@
             set { ObjectInstantiator<Movement>.SetProperty(x => x.NotificationApplicationId, value, this); }
         }
 
+        public new NotificationApplication NotificationApplication
+        {
+            get { return base.NotificationApplication; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.NotificationApplication, value, this); }
+        }
+
         public new decimal Quantity
         {
             get { return base.Quantity; }
@@ -28,6 +37,12 @@
         {
             get { return base.Date; }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Date, value, this); }
+        }
+
+        public new IEnumerable<PackagingInfo> PackagingInfos
+        {
+            get { return base.PackagingInfos; }
+            set { PackagingInfosCollection = value.ToList(); }
         }
     }
 }

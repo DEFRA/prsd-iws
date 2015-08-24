@@ -70,11 +70,12 @@
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="Movement\CreateMovementForNotificationById.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementId.cs" />
-    <Compile Include="Movement\GetShipmentDataById.cs" />
+    <Compile Include="Movement\GetPackagingDataForMovement.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementId.cs" />
     <Compile Include="Movement\MovementDatesData.cs" />
     <Compile Include="Movement\MovementQuantityData.cs" />
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
+    <Compile Include="Movement\SetPackagingDataForMovement.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />
     <Compile Include="Notification\ClassifyYourWasteInfo.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="WasteType\WasteTypeCompositionData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Movement\GetPackagingDataValidForMovement.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

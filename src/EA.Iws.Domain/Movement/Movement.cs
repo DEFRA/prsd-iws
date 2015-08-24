@@ -2,7 +2,10 @@
 {
     using System;
     using NotificationApplication;
+    using System.Collections.Generic;
+    using Domain.NotificationApplication;
     using Prsd.Core.Domain;
+    using Prsd.Core.Extensions;
 
     public class Movement : Entity
     {
@@ -24,7 +27,16 @@
 
         public Guid NotificationApplicationId { get; private set; }
 
+        public virtual NotificationApplication NotificationApplication { get; private set; }
+
         public decimal Quantity { get; private set; }
+
+        protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
+
+        public IEnumerable<PackagingInfo> PackagingInfos 
+        {
+            get { return PackagingInfosCollection.ToSafeIEnumerable(); }
+        }
 
         public void UpdateDate(DateTime date)
         {
@@ -37,6 +49,16 @@
             {
                 throw new InvalidOperationException(
                     "The date is not within the shipment date range for this notification " + date);
+            }
+        }
+
+        public void SetPackagingInfos(IEnumerable<PackagingInfo> packagingInfos)
+        {
+            PackagingInfosCollection.Clear();
+
+            foreach (var packagingInfo in packagingInfos)
+            {
+                PackagingInfosCollection.Add(packagingInfo);
             }
         }
     }

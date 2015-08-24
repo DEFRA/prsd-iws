@@ -105,6 +105,7 @@
     <Content Include="scripts\Update\Sprint14\20150824-143000-rename-shipment-number-column.sql" />
     <Content Include="scripts\Update\Sprint14\20150825-092345-add-address-table.sql" />
     <Content Include="scripts\Update\Sprint14\20150821-114800-add-actual-shipment-data-table.sql" />
+    <Content Include="scripts\Update\Sprint14\20150825-112700-add-movement-packaging-info-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

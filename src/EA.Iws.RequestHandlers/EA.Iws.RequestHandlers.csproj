@@ -98,9 +98,12 @@
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
+    <Compile Include="Movement\GetPackagingDataForMovementHandler.cs" />
+    <Compile Include="Movement\GetPackagingDataValidForMovementHandler.cs" />
     <Compile Include="Movement\GetShipmentDataByIdHandler.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
+    <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Movement\NotificationMovementService.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />

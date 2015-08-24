@@ -48,6 +48,7 @@
     <Compile Include="DomainFakes\TestableNotificationApplication.cs" />
     <Compile Include="DomainFakes\TestableNotificationAssessment.cs" />
     <Compile Include="DomainFakes\TestableRecoveryInfo.cs" />
+    <Compile Include="DomainFakes\TestablePackagingInfo.cs" />
     <Compile Include="DomainFakes\TestableShipmentInfo.cs" />
     <Compile Include="DomainFakes\TestableWasteCode.cs" />
     <Compile Include="DomainFakes\TestableWasteCodeInfo.cs" />

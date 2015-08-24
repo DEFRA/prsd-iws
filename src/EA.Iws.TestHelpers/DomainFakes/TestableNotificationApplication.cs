@@ -62,6 +62,12 @@
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.MethodOfDisposal, value, this); }
         }
 
+	public new IEnumerable<PackagingInfo> PackagingInfos
+        {
+            get { return base.PackagingInfos; }
+            set { PackagingInfosCollection = value.ToList(); }
+        }
+
         public TestableNotificationApplication()
         {
         }
