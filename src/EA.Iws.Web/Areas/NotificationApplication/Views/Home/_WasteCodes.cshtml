@@ -5,6 +5,7 @@
     var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
         ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
         EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
+    var codeDefinitionListPartialName = "_CodeDefinitionList";
 }
 
 <h2 class="heading-medium">Waste codes</h2>
@@ -25,15 +26,13 @@
                 {
                     <h4 class="heading-small">@baselOrOecdType code</h4>
 
-                    foreach (var c in Model.BaselOecdCode)
+                    if (Model.IsBaselOecdCodeNotApplicable)
                     {
-                        <dl>
-                            <dt>Code:</dt>
-                            <dd>@c.Code</dd>
-
-                            <dt>Description:</dt>
-                            <dd>@c.Description</dd>
-                        </dl>
+                        <p>Not listed</p>
+                    }
+                    else
+                    {
+                        @Html.Partial(codeDefinitionListPartialName, Model.BaselOecdCode)
                     }
                 }
                 else
@@ -59,20 +58,13 @@
                 {
                     <h4 class="heading-small">EWC code(s)</h4>
 
-                    foreach (var c in Model.EwcCodes)
+                    if (Model.AreEwcCodesNotApplicable)
                     {
-                        <dl>
-                            <dt>Code:</dt>
-                            <dd>@c.Code</dd>
-
-                            <dt>Description:</dt>
-                            <dd>@c.Description</dd>
-                        </dl>
-
-                        if (c != Model.EwcCodes.Last())
-                        {
-                            <hr />
-                        }
+                        <p>Not applicable</p>
+                    }
+                    else
+                    {
+                        @Html.Partial(codeDefinitionListPartialName, Model.EwcCodes)
                     }
                 }
                 else
@@ -96,28 +88,15 @@
             <div class="panel-indent">
                 @if (Model.AreYCodesCompleted)
                 {
-                    if (Model.YCodes.Any())
+                    <h4 class="heading-small">Y code(s)</h4>
+
+                    if (Model.AreYCodesNotApplicable)
                     {
-                        <h4 class="heading-small">Y code(s)</h4>
-
-                        foreach (var c in Model.YCodes)
-                        {
-                            <dl>
-                                <dt>Code:</dt>
-                                <dd>@c.Code</dd>
-
-                                @if (!string.IsNullOrWhiteSpace(c.Description))
-                                {
-                                    <dt>Description:</dt>
-                                    <dd>@c.Description</dd>
-                                }
-                            </dl>
-
-                            if (c != Model.YCodes.Last())
-                            {
-                                <hr />
-                            }
-                        }
+                        <p>Not applicable</p>
+                    }
+                    else
+                    {
+                        @Html.Partial(codeDefinitionListPartialName, Model.YCodes)
                     }
                 }
                 else
@@ -143,23 +122,13 @@
                 {
                     <h4 class="heading-small">H or HP code(s)</h4>
 
-                    foreach (var c in Model.HCodes)
+                    if (Model.AreHCodesNotApplicable)
                     {
-                        <dl>
-                            <dt>Code:</dt>
-                            <dd>@c.Code</dd>
-
-                            @if (!string.IsNullOrWhiteSpace(c.Description))
-                            {
-                                <dt>Description:</dt>
-                                <dd>@c.Description</dd>
-                            }
-                        </dl>
-
-                        if (c != Model.HCodes.Last())
-                        {
-                            <hr />
-                        }
+                        <p>Not applicable</p>
+                    }
+                    else
+                    {
+                        @Html.Partial(codeDefinitionListPartialName, Model.HCodes)
                     }
                 }
                 else
@@ -185,23 +154,13 @@
                 {
                     <h4 class="heading-small">UN class(es)</h4>
 
-                    foreach (var c in Model.UnClass)
+                    if (Model.AreUnClassesNotApplicable)
                     {
-                        <dl>
-                            <dt>Code:</dt>
-                            <dd>@c.Code</dd>
-
-                            @if (!string.IsNullOrWhiteSpace(c.Description))
-                            {
-                                <dt>Description:</dt>
-                                <dd>@c.Description</dd>
-                            }
-                        </dl>
-
-                        if (c != Model.UnClass.Last())
-                        {
-                            <hr />
-                        }
+                        <p>Not applicable</p>
+                    }
+                    else
+                    {
+                        @Html.Partial(codeDefinitionListPartialName, Model.UnClass)
                     }
                 }
                 else
@@ -226,24 +185,14 @@
                 @if (Model.AreUnNumbersCompleted)
                 {
                     <h4 class="heading-small">UN number(s)</h4>
-                    
-                    foreach (var c in Model.UnNumber)
-                    {
-                        <dl>
-                            <dt>Code:</dt>
-                            <dd>@c.Code</dd>
 
-                            @if (!string.IsNullOrWhiteSpace(c.Description))
-                            {
-                                <dt>Description:</dt>
-                                <dd>@c.Description</dd>
-                            }
-                        </dl>
-                        
-                        if (c != Model.UnNumber.Last())
-                        {
-                            <hr />
-                        }
+                    if (Model.AreUnNumbersNotApplicable)
+                    {
+                        <p>Not applicable</p>
+                    }
+                    else
+                    {
+                        @Html.Partial(codeDefinitionListPartialName, Model.UnNumber)
                     }
                 }
                 else

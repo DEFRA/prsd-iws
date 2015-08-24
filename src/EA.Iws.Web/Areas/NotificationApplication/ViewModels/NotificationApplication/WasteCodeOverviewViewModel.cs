@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
+    using System.Linq;
     using Core.WasteCodes;
     using Requests.Notification;
 
@@ -24,6 +25,44 @@
         public bool AreUnClassesCompleted { get; set; }
         public bool AreUnNumbersCompleted { get; set; }
         public bool AreOtherCodesCompleted { get; set; }
+
+        public bool IsBaselOecdCodeNotApplicable
+        {
+            get { return IsCodeTypeNotApplicable(IsBaselOecdCodeCompleted, BaselOecdCode); }
+        }
+
+        public bool AreEwcCodesNotApplicable
+        {
+            get { return IsCodeTypeNotApplicable(AreEwcCodesCompleted, EwcCodes); }
+        }
+
+        public bool AreYCodesNotApplicable
+        {
+            get { return IsCodeTypeNotApplicable(AreYCodesCompleted, YCodes); }
+        }
+
+        public bool AreHCodesNotApplicable
+        {
+            get { return IsCodeTypeNotApplicable(AreHCodesCompleted, HCodes); }
+        }
+
+        public bool AreUnNumbersNotApplicable
+        {
+            get { return IsCodeTypeNotApplicable(AreUnNumbersCompleted, UnNumber); }
+        }
+
+        public bool AreUnClassesNotApplicable
+        {
+            get { return IsCodeTypeNotApplicable(AreUnClassesCompleted, UnClass); }
+        }
+
+        private bool IsCodeTypeNotApplicable(bool isCodeTypeCompleted, WasteCodeData[] codesOfType)
+        {
+            return isCodeTypeCompleted
+                       && codesOfType != null
+                       && codesOfType.Any()
+                       && codesOfType.First().IsNotApplicable;
+        }
 
         public WasteCodeOverviewViewModel(WasteCodesOverviewInfo classifyYourWasteInfo)
         {
