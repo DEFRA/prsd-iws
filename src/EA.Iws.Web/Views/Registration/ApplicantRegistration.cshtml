@@ -41,6 +41,9 @@
         @Html.Gds().ValidationMessageFor(m => m.Email)
         @Html.Gds().TextBoxFor(m => m.Email)
     </div>
+    
+        @Html.EditorFor(m => m.Address)
+    
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.Gds().LabelFor(m => m.Password)
         @Html.Gds().ValidationMessageFor(m => m.Password)
@@ -92,6 +95,8 @@
             </label>
         </fieldset>
     </div>
+    @Html.HiddenFor(m => m.Address.DefaultCountryId)
+
     <div class="form-group">
         <input type="submit" class="button" value="Continue" />
     </div>

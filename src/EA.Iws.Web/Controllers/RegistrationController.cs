@@ -41,9 +41,12 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ApplicantRegistration()
+        public async Task<ActionResult> ApplicantRegistration()
         {
-            return View(new ApplicantRegistrationViewModel());
+            var model = new ApplicantRegistrationViewModel();
+            await this.BindCountryList(apiClient);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
+            return View(model);
         }
 
         [HttpPost]
@@ -62,11 +65,19 @@
                         Surname = model.Surname,
                         Phone = model.PhoneNumber,
                         Password = model.Password,
-                        ConfirmPassword = model.ConfirmPassword
+                        ConfirmPassword = model.ConfirmPassword,
+                        Address1 = model.Address.StreetOrSuburb,
+                        Address2 = model.Address.Address2,
+                        TownOrCity = model.Address.TownOrCity,
+                        Postcode = model.Address.PostalCode,
+                        CountyOrProvince = model.Address.Region
                     };
 
                     try
                     {
+                        var selectedCountry = await client.SendAsync(new GetCountry{CountryId = model.Address.CountryId.Value});
+                        applicantRegistrationData.CountryName = selectedCountry.Name;
+
                         var userId = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
                         var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                         authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
@@ -88,11 +99,11 @@
                             throw;
                         }
                     }
-
+                    await this.BindCountryList(apiClient);
                     return View(model);
                 }
             }
-
+            await this.BindCountryList(apiClient);
             return View(model);
         }
 
@@ -169,7 +180,7 @@
         [HttpGet]
         public async Task<ActionResult> CreateNewOrganisation(string organisationName)
         {
-            var model = new CreateNewOrganisationViewModel { Name = organisationName, Countries = await GetCountries() };
+            var model = new CreateNewOrganisationViewModel { Name = organisationName };
             return View(model);
         }
 
@@ -179,18 +190,12 @@
         {
             if (!ModelState.IsValid)
             {
-                model.Countries = await GetCountries();
                 return View(model);
             }
 
             var organisationRegistrationData = new OrganisationRegistrationData
             {
                 Name = model.Name,
-                Address1 = model.Address1,
-                Address2 = model.Address2,
-                TownOrCity = model.TownOrCity,
-                Postcode = model.Postcode,
-                CountryId = model.CountryId,
                 BusinessType = model.BusinessType,
                 OtherDescription = model.OtherDescription
             };
@@ -212,7 +217,6 @@
                         throw;
                     }
                 }
-                model.Countries = await GetCountries();
                 return View(model);
             }
         }

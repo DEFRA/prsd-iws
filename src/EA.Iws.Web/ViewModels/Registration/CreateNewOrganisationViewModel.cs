@@ -1,19 +1,12 @@
 ﻿namespace EA.Iws.Web.ViewModels.Registration
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
     using Core.Shared;
     using Prsd.Core.Validation;
 
     public class CreateNewOrganisationViewModel
     {
-        private const string DefaultCountryName = "United Kingdom";
-
-        public IEnumerable<CountryData> Countries { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrganisationId { get; set; }
 
@@ -22,55 +15,11 @@
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Address line 1")]
-        public string Address1 { get; set; }
-
-        [Display(Name = "Address line 2")]
-        public string Address2 { get; set; }
-
-        [Required]
-        [Display(Name = "Town or city")]
-        public string TownOrCity { get; set; }
-
-        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", "The Postcode field is required")]
-        public string Postcode { get; set; }
-
-        [Required]
-        [Display(Name = "Country")]
-        public Guid CountryId { get; set; }
-
-        public Guid DefaultCountryId { get; set; }
-
-        [Required]
         [Display(Name = "Organisation type")]
         public BusinessType BusinessType { get; set; }
 
         [RequiredIf("BusinessType", BusinessType.Other, "Description is required")]
         [Display(Name = "Organisation type")]
         public string OtherDescription { get; set; }
-
-        public CountryData DefaultCountry
-        {
-            get
-            {
-                if (Countries == null || !Countries.Any())
-                {
-                    return null;
-                }
-
-                var country = Countries.SingleOrDefault(c => c.Name.Equals(DefaultCountryName));
-
-                if (this.CountryId == Guid.Empty)
-                {
-                    if (country != null)
-                    {
-                        this.CountryId = country.Id;
-                        DefaultCountryId = country.Id;
-                    }
-                }
-
-                return country ?? Countries.First();
-            }
-        }
     }
 }

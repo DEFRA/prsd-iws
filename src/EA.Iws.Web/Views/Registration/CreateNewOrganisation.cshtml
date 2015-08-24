@@ -19,32 +19,6 @@
         @Html.Gds().ValidationMessageFor(m => m.Name)
         @Html.Gds().TextBoxFor(m => m.Name)
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Address1)">
-        @Html.Gds().LabelFor(m => m.Address1)
-        @Html.Gds().ValidationMessageFor(m => m.Address1)
-        @Html.Gds().TextBoxFor(m => m.Address1)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Address2)">
-        @Html.Gds().LabelFor(m => m.Address2)
-        @Html.Gds().ValidationMessageFor(m => m.Address2)
-        @Html.Gds().TextBoxFor(m => m.Address2)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
-        @Html.Gds().LabelFor(m => m.TownOrCity)
-        @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
-        @Html.Gds().TextBoxFor(m => m.TownOrCity)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Postcode)">
-        @Html.Gds().LabelFor(m => m.Postcode, "(optional for non-UK address)")
-        @Html.Gds().ValidationMessageFor(m => m.Postcode)
-        @Html.Gds().TextBoxFor(m => m.Postcode)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
-        @Html.Gds().LabelFor(m => m.CountryId)
-        @Html.Gds().ValidationMessageFor(m => m.CountryId)
-        @Html.Gds().DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "Id", "Name", Model.DefaultCountry.Id))
-    </div>
-
     <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
         <label class="form-label">Organisation type</label>
         @Html.Gds().ValidationMessageFor(m => m.BusinessType)
@@ -68,8 +42,6 @@
             </div>
         </div>
     </div>
-    
-    @Html.HiddenFor(m => m.DefaultCountryId)
     
     <div class="form-group">
         <input type="submit" class="button" value="Continue" />

@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Client.Entities;
+    using Core.Shared;
     using DataAccess.Identity;
     using Identity;
     using Microsoft.AspNet.Identity;
@@ -37,7 +38,13 @@
                 Email = model.Email,
                 PhoneNumber = model.Phone,
                 FirstName = model.FirstName,
-                Surname = model.Surname
+                Surname = model.Surname,
+                Address2 = model.Address2,
+                Address1 = model.Address1,
+                PostalCode = model.Postcode,
+                Region = model.CountyOrProvince,
+                Country = model.CountryName,
+                TownOrCity = model.TownOrCity
             };
 
             var result = await userManager.CreateAsync(user, model.Password);

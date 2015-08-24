@@ -1,10 +1,19 @@
 ﻿namespace EA.Iws.Web.ViewModels.Registration
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using Core.Shared;
     using Prsd.Core.Validation;
 
     public class ApplicantRegistrationViewModel
     {
+        public ApplicantRegistrationViewModel()
+        {
+            Address = new AddressData();
+        }
+
         [Required]
         [Display(Name = "First name")]
         [StringLength(50)]
@@ -47,5 +56,7 @@
 
         [MustBeTrue(ErrorMessage = "Please confirm that you have read the terms and conditions")]
         public bool TermsAndConditions { get; set; }
+
+        public AddressData Address { get; set; }
     }
 }

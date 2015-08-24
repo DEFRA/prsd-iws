@@ -80,11 +80,6 @@
         {
             OrganisationId = orgData.OrganisationId;
             Name = orgData.Name;
-            Address1 = orgData.Address1;
-            Address2 = orgData.Address2;
-            TownOrCity = orgData.TownOrCity;
-            Postcode = orgData.Postcode;
-            CountryId = orgData.CountryId;
             BusinessType = orgData.BusinessType;
             OtherDescription = orgData.OtherDescription;
         }
@@ -95,11 +90,6 @@
             {
                 OrganisationId = OrganisationId,
                 Name = Name,
-                Address1 = Address1,
-                Address2 = Address2,
-                TownOrCity = TownOrCity,
-                Postcode = Postcode,
-                CountryId = CountryId,
                 BusinessType = BusinessType,
                 OtherDescription = OtherDescription
             };
