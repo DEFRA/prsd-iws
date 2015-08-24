@@ -10,34 +10,34 @@
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class SetNotificationReceivedDateHandlerTests
+    public class SetNotificationCompleteDateHandlerTests
     {
-        private readonly SetNotificationReceivedDateHandler handler;
-        private readonly DateTime notificationReceivedDate = new DateTime(2015, 8, 1);
+        private readonly SetNotificationCompleteDate message;
+        private readonly SetNotificationCompleteDateHandler handler;
+        private readonly TestIwsContext context;
+        private readonly DateTime notificationCompleteDate = new DateTime(2015, 8, 20);
         private readonly Guid notificationId = new Guid("688CA6BB-63EF-4D5E-A887-7EC952B9810D");
         private readonly NotificationAssessment assessment;
-        private readonly TestIwsContext context;
-        private readonly SetNotificationReceivedDate message;
 
-        public SetNotificationReceivedDateHandlerTests()
+        public SetNotificationCompleteDateHandlerTests()
         {
             context = new TestIwsContext();
             assessment = new NotificationAssessment(notificationId);
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.Submitted, assessment);
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.InAssessment, assessment);
 
             context.NotificationAssessments.Add(assessment);
 
-            handler = new SetNotificationReceivedDateHandler(context);
-            message = new SetNotificationReceivedDate(notificationId, notificationReceivedDate);
+            message = new SetNotificationCompleteDate(notificationId, notificationCompleteDate);
+            handler = new SetNotificationCompleteDateHandler(context);
         }
 
         [Fact]
-        public async Task SetsNotificationReceivedDate()
+        public async Task SetsNotificationCompleteDate()
         {
             await handler.HandleAsync(message);
 
-            Assert.Equal(notificationReceivedDate,
-                context.NotificationAssessments.Single().Dates.NotificationReceivedDate);
+            Assert.Equal(notificationCompleteDate,
+                context.NotificationAssessments.Single().Dates.CompleteDate);
         }
 
         [Fact]

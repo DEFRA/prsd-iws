@@ -13,5 +13,7 @@
         public DateTime? CommencementDate { get; set; }
 
         public string NameOfOfficer { get; set; }
+
+        public DateTime? CompletedDate { get; set; }
     }
 }

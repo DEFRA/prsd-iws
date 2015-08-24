@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDateHandler.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandler.cs" />

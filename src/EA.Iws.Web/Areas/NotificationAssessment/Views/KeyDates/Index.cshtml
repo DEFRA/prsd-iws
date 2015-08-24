@@ -92,7 +92,7 @@
                     @if (Model.CommencementComplete)
                     {
                         @Html.Gds().DisplayDateFor(m => m.CommencementDate.AsDateTime().GetValueOrDefault())
-                        <br/>
+                        <br />
                         @Html.DisplayFor(m => m.NameOfOfficer)
                     }
                     else
@@ -119,14 +119,23 @@
         </details>
     </div>
 
-    <div class="form-group">
-        <table>
-            <tr>
-                <td>
-                    <details>
-                        <summary><span class="summary">Notification complete date</span></summary>
-                        @{if (Model.NotificationCompleteDate.AsDateTime() != null)
-                        {<i class="fa-check fa green-tick"></i>}}
+    <div>
+        <details>
+            <summary>
+                <span class="summary">Notification complete date</span>
+                @if (Model.NotificationCompleteDate.IsCompleted)
+                {
+                    <i class="fa-check fa green-tick"></i>
+                }
+            </summary>
+            <div class="expanded-details">
+                <div class="panel-indent">
+                    @if (Model.NotificationCompleteDate.IsCompleted)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
+                    }
+                    else
+                    {
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate) @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate.Year)">
                             <fieldset>
                                 <div class="form-date">
@@ -136,9 +145,17 @@
                                 </div>
                             </fieldset>
                         </div>
-                    </details>
-                </td>
-            </tr>
+                        <div class="form-group">
+                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.NotificationComplete">Set notification complete</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="form-group">
+        <table>
             <tr>
                 <td>
                     <details>

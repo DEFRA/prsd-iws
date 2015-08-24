@@ -18,6 +18,7 @@
         private readonly GetDatesHandler handler;
         private readonly DateTime paymentDate = new DateTime(2015, 8, 2);
         private readonly DateTime commencementDate = new DateTime(2015, 8, 10);
+        private readonly DateTime completedDate = new DateTime(2015, 8, 20);
         private string nameOfOfficer = "officer";
 
         public GetDatesHandlerTests()
@@ -29,6 +30,7 @@
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, paymentDate, assessment1.Dates);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.CommencementDate, commencementDate, assessment1.Dates);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.NameOfOfficer, nameOfOfficer, assessment1.Dates);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.CompleteDate, completedDate, assessment1.Dates);
 
             var assessment2 = new NotificationAssessment(notificationId2);
 
@@ -129,6 +131,26 @@
             var result = await handler.HandleAsync(message);
 
             Assert.Null(result.NameOfOfficer);
+        }
+
+        [Fact]
+        public async Task HasCompletedDate_SetsCompletedDate()
+        {
+            var message = new GetDates(notificationId1);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Equal(completedDate, result.CompletedDate);
+        }
+
+        [Fact]
+        public async Task HasNoCompletedDate_CompletedDateIsNull()
+        {
+            var message = new GetDates(notificationId2);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Null(result.CompletedDate);
         }
     }
 }

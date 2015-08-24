@@ -49,11 +49,14 @@
             {
                 await SetAssessmentCommenced(model);
             }
+            else if (model.Command == DateInputViewModel.NotificationComplete)
+            {
+                await SetNotificationComplete(model);
+            }
             else
             {
                 var setDates = new SetDates
                 {
-                    CompleteDate = model.NotificationCompleteDate.AsDateTime(),
                     TransmittedDate = model.NotificationTransmittedDate.AsDateTime(),
                     AcknowledgedDate = model.NotificationAcknowledgedDate.AsDateTime(),
                     DecisionDate = model.DecisionDate.AsDateTime(),
@@ -67,6 +70,17 @@
             }
 
             return RedirectToAction("Index", new { id = model.NotificationId });
+        }
+
+        private async Task SetNotificationComplete(DateInputViewModel model)
+        {
+            var setNotificationComplete = new SetNotificationCompleteDate(model.NotificationId,
+                model.NotificationCompleteDate.AsDateTime().GetValueOrDefault());
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), setNotificationComplete);
+            }
         }
 
         private async Task SetPaymentReceived(DateInputViewModel model)

@@ -18,6 +18,7 @@
         private DateTime paymentDate = new DateTime(2015, 8, 2);
         private DateTime commencementDate = new DateTime(2015, 8, 10);
         private string nameOfOfficer = "officer";
+        private DateTime completedDate = new DateTime(2015, 8, 20);
 
         public NotificationAssessmentStatusTests()
         {
@@ -30,6 +31,12 @@
         private void SetNotificationStatusToSubmitted()
         {
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.Submitted,
+                notificationAssessment);
+        }
+
+        private void SetNotificationStatusToInAssessment()
+        {
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.InAssessment,
                 notificationAssessment);
         }
 
@@ -109,7 +116,7 @@
         }
 
         [Fact]
-        public void CantSetNotificationStatusWhenNotSubmitted()
+        public void CantSetNotificationReceivedWhenNotSubmitted()
         {
             Action setNotificationReceived = () => notificationAssessment.SetNotificationReceived(receivedDate);
 
@@ -209,6 +216,34 @@
             Action setCommencementDate = () => notificationAssessment.SetCommencementDate(commencementDate, string.Empty);
 
             Assert.Throws<ArgumentException>("nameOfOfficer", setCommencementDate);
+        }
+
+        [Fact]
+        public void SetNotificationCompletedSetsDate()
+        {
+            SetNotificationStatusToInAssessment();
+
+            notificationAssessment.SetNotificationCompleted(completedDate);
+
+            Assert.Equal(completedDate, notificationAssessment.Dates.CompleteDate);
+        }
+
+        [Fact]
+        public void SetNotificationReceivedChangesStatusToReadyToTransmit()
+        {
+            SetNotificationStatusToInAssessment();
+
+            notificationAssessment.SetNotificationCompleted(completedDate);
+
+            Assert.Equal(NotificationStatus.ReadyToTransmit, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantSetNotificationCompleteWhenNotInAssessment()
+        {
+            Action setNotificationComplete = () => notificationAssessment.SetNotificationCompleted(completedDate);
+
+            Assert.Throws<InvalidOperationException>(setNotificationComplete);
         }
     }
 }

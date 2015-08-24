@@ -15,7 +15,8 @@
                 NotificationReceivedDate = source.NotificationReceivedDate,
                 PaymentReceivedDate = source.PaymentReceivedDate,
                 CommencementDate = source.CommencementDate,
-                NameOfOfficer = source.NameOfOfficer
+                NameOfOfficer = source.NameOfOfficer,
+                CompletedDate = source.CompleteDate
             };
         }
     }

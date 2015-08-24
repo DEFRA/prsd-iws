@@ -11,6 +11,7 @@
         public static readonly string NotificationReceived = "notificationReceived";
         public static readonly string PaymentReceived = "paymentReceived";
         public static readonly string AssessmentCommenced = "assessmentCommenced";
+        public static readonly string NotificationComplete = "notificationComplete";
 
         public DateInputViewModel()
         {
@@ -29,7 +30,7 @@
             NotificationReceivedDate = new OptionalDateInputViewModel(dates.NotificationReceivedDate, true);
             PaymentReceivedDate = new OptionalDateInputViewModel(dates.PaymentReceivedDate, true);
             CommencementDate = new OptionalDateInputViewModel(dates.CommencementDate, true);
-            NotificationCompleteDate = new OptionalDateInputViewModel(true);
+            NotificationCompleteDate = new OptionalDateInputViewModel(dates.CompletedDate, true);
             NotificationTransmittedDate = new OptionalDateInputViewModel(true);
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
             DecisionDate = new OptionalDateInputViewModel(true);
@@ -83,6 +84,10 @@
                 {
                     yield return new ValidationResult("Please enter the name of the officer", new[] { "NameOfOfficer" });
                 }
+            }
+            else if (Command == NotificationComplete && !NotificationCompleteDate.IsCompleted)
+            {
+                yield return new ValidationResult("Please enter the notification complete date", new[] { "NotificationCompleteDate" });   
             }
         }
     }

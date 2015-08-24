@@ -44,7 +44,6 @@
         {
             var acknowledgedDate = new DateTime(2015, 1, 1);
             var decisionDate = new DateTime(2015, 1, 3);
-            var completeDate = new DateTime(2015, 1, 4);
             var transmittedDate = new DateTime(2015, 1, 5);
 
             var request = new SetDates
@@ -52,7 +51,6 @@
                 NotificationApplicationId = notificationId,
                 AcknowledgedDate = acknowledgedDate,
                 DecisionDate = decisionDate,
-                CompleteDate = completeDate,
                 TransmittedDate = transmittedDate
             };
 
@@ -60,7 +58,6 @@
 
             Assert.True(notificationDates.AcknowledgedDate == acknowledgedDate
                         && notificationDates.DecisionDate == decisionDate &&
-                        notificationDates.CompleteDate == completeDate &&
                         notificationDates.TransmittedDate == transmittedDate);
         }
     }

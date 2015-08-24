@@ -11,6 +11,8 @@
         [Display(Name = "Notification received")]
         NotificationReceived = 3,
         [Display(Name = "In assessment")]
-        InAssessment = 4
+        InAssessment = 4,
+        [Display(Name = "Ready to transmit")]
+        ReadyToTransmit = 5
     }
 }

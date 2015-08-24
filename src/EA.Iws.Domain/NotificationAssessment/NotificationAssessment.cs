@@ -15,13 +15,15 @@
         {
             Submit,
             NotificationReceived,
-            AssessmentCommenced
+            AssessmentCommenced,
+            NotificationCompleted
         }
 
         private readonly StateMachine<NotificationStatus, Trigger> stateMachine;
 
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> commencementTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> completedTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
         
@@ -56,6 +58,7 @@
 
             receivedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.NotificationReceived);
             commencementTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.AssessmentCommenced);
+            completedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.NotificationCompleted);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -71,7 +74,11 @@
                 .PermitIf(Trigger.AssessmentCommenced, NotificationStatus.InAssessment, () => Dates.PaymentReceivedDate.HasValue);
 
             stateMachine.Configure(NotificationStatus.InAssessment)
-                .OnEntryFrom(commencementTrigger, OnInAssessment);
+                .OnEntryFrom(commencementTrigger, OnInAssessment)
+                .Permit(Trigger.NotificationCompleted, NotificationStatus.ReadyToTransmit);
+
+            stateMachine.Configure(NotificationStatus.ReadyToTransmit)
+                .OnEntryFrom(completedTrigger, OnCompleted);
 
             return stateMachine;
         }
@@ -90,6 +97,11 @@
         {
             Dates.CommencementDate = commencementDate;
             Dates.NameOfOfficer = nameOfOfficer;
+        }
+
+        private void OnCompleted(DateTime completedDate)
+        {
+            Dates.CompleteDate = completedDate;
         }
 
         private void OnTransitionAction(StateMachine<NotificationStatus, Trigger>.Transition transition)
@@ -133,6 +145,11 @@
         {
             Guard.ArgumentNotNullOrEmpty(() => nameOfOfficer, nameOfOfficer);
             stateMachine.Fire(commencementTrigger, commencementDate, nameOfOfficer);
+        }
+
+        public void SetNotificationCompleted(DateTime completedDate)
+        {
+            stateMachine.Fire(completedTrigger, completedDate);
         }
     }
 }
