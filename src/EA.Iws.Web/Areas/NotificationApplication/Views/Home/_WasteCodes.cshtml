@@ -23,21 +23,17 @@
             <div class="panel-indent">
                 @if (Model.IsBaselOecdCodeCompleted)
                 {
-                    if (Model.BaselOecdCode.Any())
+                    <h4 class="heading-small">@baselOrOecdType code</h4>
+
+                    foreach (var c in Model.BaselOecdCode)
                     {
-                        <h4 class="heading-small">@baselOrOecdType code</h4>
+                        <dl>
+                            <dt>Code:</dt>
+                            <dd>@c.Code</dd>
 
-                        foreach (var c in Model.BaselOecdCode)
-                        {
-                            <dl>
-                                <dt>Code:</dt>
-                                <dd>@c.Code</dd>
-
-                                <dt>Description:</dt>
-                                <dd>@c.Description</dd>
-                            </dl>
-                        }
-                        <hr />
+                            <dt>Description:</dt>
+                            <dd>@c.Description</dd>
+                        </dl>
                     }
                 }
                 else
@@ -61,22 +57,22 @@
             <div class="panel-indent">
                 @if (Model.AreEwcCodesCompleted)
                 {
-                    if (Model.EwcCodes.Any())
+                    <h4 class="heading-small">EWC code(s)</h4>
+
+                    foreach (var c in Model.EwcCodes)
                     {
-                        <h4 class="heading-small">EWC code(s)</h4>
+                        <dl>
+                            <dt>Code:</dt>
+                            <dd>@c.Code</dd>
 
-                        foreach (var c in Model.EwcCodes)
+                            <dt>Description:</dt>
+                            <dd>@c.Description</dd>
+                        </dl>
+
+                        if (c != Model.EwcCodes.Last())
                         {
-                            <dl>
-                                <dt>Code:</dt>
-                                <dd>@c.Code</dd>
-
-                                <dt>Description:</dt>
-                                <dd>@c.Description</dd>
-                            </dl>
+                            <hr />
                         }
-
-                        <hr />
                     }
                 }
                 else
@@ -103,21 +99,25 @@
                     if (Model.YCodes.Any())
                     {
                         <h4 class="heading-small">Y code(s)</h4>
-                        <dl>
-                            @foreach (var c in Model.YCodes)
-                            {
+
+                        foreach (var c in Model.YCodes)
+                        {
+                            <dl>
                                 <dt>Code:</dt>
                                 <dd>@c.Code</dd>
 
-                                if (!string.IsNullOrWhiteSpace(c.Description))
+                                @if (!string.IsNullOrWhiteSpace(c.Description))
                                 {
                                     <dt>Description:</dt>
                                     <dd>@c.Description</dd>
                                 }
-                            }
-                        </dl>
+                            </dl>
 
-                        <hr />
+                            if (c != Model.YCodes.Last())
+                            {
+                                <hr />
+                            }
+                        }
                     }
                 }
                 else
@@ -141,24 +141,25 @@
             <div class="panel-indent">
                 @if (Model.AreHCodesCompleted)
                 {
-                    if (Model.HCodes.Any())
-                    {
-                        <h4 class="heading-small">H or HP code(s)</h4>
-                        <dl>
-                            @foreach (var c in Model.HCodes)
-                            {
-                                <dt>Code:</dt>
-                                <dd>@c.Code</dd>
+                    <h4 class="heading-small">H or HP code(s)</h4>
 
-                                if (!string.IsNullOrWhiteSpace(c.Description))
-                                {
-                                    <dt>Description:</dt>
-                                    <dd>@c.Description</dd>
-                                }
+                    foreach (var c in Model.HCodes)
+                    {
+                        <dl>
+                            <dt>Code:</dt>
+                            <dd>@c.Code</dd>
+
+                            @if (!string.IsNullOrWhiteSpace(c.Description))
+                            {
+                                <dt>Description:</dt>
+                                <dd>@c.Description</dd>
                             }
                         </dl>
 
-                        <hr />
+                        if (c != Model.HCodes.Last())
+                        {
+                            <hr />
+                        }
                     }
                 }
                 else
@@ -182,24 +183,25 @@
             <div class="panel-indent">
                 @if (Model.AreUnClassesCompleted)
                 {
-                    if (Model.UnClass.Any())
-                    {
-                        <h4 class="heading-small">UN class(es)</h4>
-                        <dl>
-                            @foreach (var c in Model.UnClass)
-                            {
-                                <dt>Code:</dt>
-                                <dd>@c.Code</dd>
+                    <h4 class="heading-small">UN class(es)</h4>
 
-                                if (!string.IsNullOrWhiteSpace(c.Description))
-                                {
-                                    <dt>Description:</dt>
-                                    <dd>@c.Description</dd>
-                                }
+                    foreach (var c in Model.UnClass)
+                    {
+                        <dl>
+                            <dt>Code:</dt>
+                            <dd>@c.Code</dd>
+
+                            @if (!string.IsNullOrWhiteSpace(c.Description))
+                            {
+                                <dt>Description:</dt>
+                                <dd>@c.Description</dd>
                             }
                         </dl>
 
-                        <hr />
+                        if (c != Model.UnClass.Last())
+                        {
+                            <hr />
+                        }
                     }
                 }
                 else
@@ -223,23 +225,25 @@
             <div class="panel-indent">
                 @if (Model.AreUnNumbersCompleted)
                 {
-                    if (Model.UnNumber.Any())
+                    <h4 class="heading-small">UN number(s)</h4>
+                    
+                    foreach (var c in Model.UnNumber)
                     {
-                        <h4 class="heading-small">UN number(s)</h4>
                         <dl>
-                            @foreach (var c in Model.UnNumber)
-                            {
-                                <dt>Code:</dt>
-                                <dd>@c.Code</dd>
+                            <dt>Code:</dt>
+                            <dd>@c.Code</dd>
 
-                                if (!string.IsNullOrWhiteSpace(c.Description))
-                                {
-                                    <dt>Description:</dt>
-                                    <dd>@c.Description</dd>
-                                }
+                            @if (!string.IsNullOrWhiteSpace(c.Description))
+                            {
+                                <dt>Description:</dt>
+                                <dd>@c.Description</dd>
                             }
                         </dl>
-                        <hr />
+                        
+                        if (c != Model.UnNumber.Last())
+                        {
+                            <hr />
+                        }
                     }
                 }
                 else
@@ -261,33 +265,33 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                    @if (Model.AreOtherCodesCompleted)
-                    {
-                        <h4 class="heading-small">Other codes</h4>
-                        <dl>
-                            @if (Model.OtherCodes.Any())
-                            {
+                @if (Model.AreOtherCodesCompleted)
+                {
+                    <h4 class="heading-small">Other codes</h4>
+                    <dl>
+                        @if (Model.OtherCodes != null)
+                        {
                             <dt>Other code:</dt>
                             <dd>@string.Join(", ", Model.OtherCodes.Select(c => c.CustomCode).ToList())</dd>
-                            }
+                        }
 
-                            <dt>National code in country of export:</dt>
-                            <dd>@string.Join(", ", Model.NationExportCode.Select(c => c.CustomCode).ToList())</dd>
+                        <dt>National code in country of export:</dt>
+                        <dd>@string.Join(", ", Model.NationExportCode.Select(c => c.CustomCode).ToList())</dd>
 
-                            <dt>National code in country of import:</dt>
-                            <dd>@string.Join(", ", Model.NationImportCode.Select(c => c.CustomCode).ToList())</dd>
+                        <dt>National code in country of import:</dt>
+                        <dd>@string.Join(", ", Model.NationImportCode.Select(c => c.CustomCode).ToList())</dd>
 
-                            @if (Model.CustomCodes.Any())
-                            {
+                        @if (Model.CustomCodes != null)
+                        {
                             <dt>Customs code(s):</dt>
                             <dd>@string.Join(", ", Model.CustomCodes.Select(c => c.CustomCode).ToList())</dd>
-                            }
-                        </dl>
-                    }
-                    else
-                    {
-                        <p>@ViewBag.SectionIncompleteText</p>
-                    }
+                        }
+                    </dl>
+                }
+                else
+                {
+                    <p>@ViewBag.SectionIncompleteText</p>
+                }
             </div>
         </div>
     </details>
