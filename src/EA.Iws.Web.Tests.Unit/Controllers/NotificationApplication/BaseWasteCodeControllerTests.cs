@@ -39,7 +39,7 @@
         [Fact]
         public async Task Remove_CallsRemoveAction()
         {
-            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString());
+            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString(), false);
 
             Assert.True(controller.IsRemoveCalled);
         }
@@ -49,7 +49,7 @@
         {
             selectedCodes.Add(AnyGuid);
 
-            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString());
+            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString(), false);
 
             Assert.Empty(selectedCodes);
         }
@@ -57,7 +57,7 @@
         [Fact]
         public async Task RemoveWhereItemIsNotInList_DoesNotThrow()
         {
-            await controller.Post(AnyGuid, viewModel, null, Guid.Empty.ToString());
+            await controller.Post(AnyGuid, viewModel, null, Guid.Empty.ToString(), false);
 
             Assert.Empty(selectedCodes);
         }
@@ -65,7 +65,7 @@
         [Fact]
         public async Task Remove_CallsRebind()
         {
-            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString());
+            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString(), false);
 
             Assert.True(controller.IsRebindCalled);
         }
@@ -75,7 +75,7 @@
         {
             InvalidateModelState();
 
-            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString());
+            await controller.Post(AnyGuid, viewModel, null, AnyGuid.ToString(), false);
 
             Assert.True(controller.IsRemoveCalled);
         }
@@ -86,7 +86,7 @@
             try
             {
                 // This cannot be used with ThrowsAsync for some reason.
-                await controller.Post(AnyGuid, viewModel, null, string.Empty);
+                await controller.Post(AnyGuid, viewModel, null, string.Empty, false);
             }
             catch (InvalidOperationException)
             {
@@ -99,7 +99,7 @@
         {
             InvalidateModelState();
 
-            await controller.Post(AnyGuid, viewModel, Continue, null);
+            await controller.Post(AnyGuid, viewModel, Continue, null, false);
 
             Assert.False(controller.IsContinueCalled);
             Assert.False(controller.IsRemoveCalled);
@@ -111,7 +111,7 @@
         {
             InvalidateModelState();
 
-            await controller.Post(AnyGuid, viewModel, Continue, null);
+            await controller.Post(AnyGuid, viewModel, Continue, null, false);
 
             Assert.True(controller.IsRebindCalled);
         }
@@ -121,7 +121,7 @@
         {
             InvalidateModelState();
 
-            await controller.Post(AnyGuid, viewModel, AddCode, null);
+            await controller.Post(AnyGuid, viewModel, AddCode, null, false);
 
             Assert.False(controller.IsAddCalled);
         }
@@ -131,7 +131,7 @@
         {
             viewModel.EnterWasteCodesViewModel.SelectedCode = AnyGuid;
 
-            await controller.Post(AnyGuid, viewModel, AddCode, null);
+            await controller.Post(AnyGuid, viewModel, AddCode, null, false);
 
             Assert.True(controller.IsAddCalled);
         }
@@ -141,7 +141,7 @@
         {
             viewModel.EnterWasteCodesViewModel.SelectedCode = AnyGuid;
 
-            await controller.Post(AnyGuid, viewModel, AddCode, null);
+            await controller.Post(AnyGuid, viewModel, AddCode, null, false);
 
             Assert.Contains(AnyGuid, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes);
         }
@@ -153,7 +153,7 @@
 
             viewModel.EnterWasteCodesViewModel.SelectedCode = AnyGuid;
 
-            await controller.Post(AnyGuid, viewModel, AddCode, null);
+            await controller.Post(AnyGuid, viewModel, AddCode, null, false);
 
             Assert.Single(viewModel.EnterWasteCodesViewModel.SelectedWasteCodes, AnyGuid);
         }
@@ -161,7 +161,7 @@
         [Fact]
         public async Task ClickingAddWithoutASelectedCodeDoesNotCallAddAndReturnsView()
         {
-            var result = await controller.Post(AnyGuid, viewModel, AddCode, null) as ViewResult;
+            var result = await controller.Post(AnyGuid, viewModel, AddCode, null, false) as ViewResult;
 
             Assert.False(controller.IsAddCalled);
             Assert.False(controller.IsContinueCalled);
@@ -199,7 +199,7 @@
                 return base.RemoveAction(viewModel);
             }
 
-            protected override Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel)
+            protected override Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backtoOverview = false)
             {
                 IsContinueCalled = true;
                 return Task.FromResult(View() as ActionResult);

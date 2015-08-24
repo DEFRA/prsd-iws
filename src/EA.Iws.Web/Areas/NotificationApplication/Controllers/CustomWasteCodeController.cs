@@ -46,7 +46,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, CustomWasteCodesViewModel model)
+        public async Task<ActionResult> Index(Guid id, CustomWasteCodesViewModel model, bool backToOverview = false)
         {
             if (!ModelState.IsValid)
             {
@@ -69,7 +69,8 @@
                                 model.OtherCode,
                                 model.OtherCodeNotApplicable));
 
-                    return RedirectToAction("RecoveryPercentage", "RecoveryInfo", new { id });
+                    return (backToOverview) ? RedirectToAction("Index", "Home", new { id }) 
+                        : RedirectToAction("RecoveryPercentage", "RecoveryInfo", new { id });
                 }
                 catch (ApiBadRequestException ex)
                 {

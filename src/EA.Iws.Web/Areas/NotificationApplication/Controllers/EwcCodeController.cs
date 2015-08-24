@@ -25,7 +25,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool backToOverview = false)
         {
             using (var client = ApiClient())
             {
@@ -40,12 +40,12 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, EwcCodeViewModel model, string command, string remove)
+        public async Task<ActionResult> Index(Guid id, EwcCodeViewModel model, string command, string remove, bool backToOverview = false)
         {
-            return await Post(id, model, command, remove);
+            return await Post(id, model, command, remove, backToOverview);
         } 
 
-        protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel)
+        protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
             using (var client = ApiClient())
             {
@@ -54,7 +54,8 @@
                         new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return RedirectToAction("Index", "YCode", new { id });
+                return (backToOverview) ? BackToOverviewResult(id) 
+                    : RedirectToAction("Index", "YCode", new { id });
             }
         }
     }

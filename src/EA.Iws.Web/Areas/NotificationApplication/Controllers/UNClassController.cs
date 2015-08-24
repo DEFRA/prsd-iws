@@ -39,12 +39,12 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, UNClassViewModel model, string command, string remove)
+        public async Task<ActionResult> Index(Guid id, UNClassViewModel model, string command, string remove, bool backToOverview = false)
         {
-            return await Post(id, model, command, remove);
+            return await Post(id, model, command, remove, backToOverview);
         }
 
-        protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel)
+        protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
             using (var client = ApiClient())
             {
@@ -53,7 +53,8 @@
                         new SetUNClasses(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return RedirectToAction("Index", "UNNumber", new { id });
+                return (backToOverview) ? BackToOverviewResult(id) 
+                    : RedirectToAction("Index", "UNNumber", new { id });
             }
         }
     }

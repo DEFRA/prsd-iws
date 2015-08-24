@@ -25,7 +25,7 @@
             this.codeType = codeType;
         }
 
-        public async Task<ActionResult> Post(Guid id, BaseWasteCodeViewModel viewModel, string command, string remove)
+        public async Task<ActionResult> Post(Guid id, BaseWasteCodeViewModel viewModel, string command, string remove, bool backToOverview)
         {
             await RebindModel(id, viewModel);
 
@@ -66,7 +66,7 @@
                     AddCodeToViewModel(viewModel);
                 }
 
-                return await ContinueAction(id, viewModel);
+                return await ContinueAction(id, viewModel, backToOverview);
             }
 
             throw new InvalidOperationException();
@@ -123,6 +123,11 @@
             return viewModel.EnterWasteCodesViewModel.SelectedCode.HasValue;
         }
 
-        protected abstract Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel);
+        protected abstract Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview);
+
+        protected ActionResult BackToOverviewResult(Guid id)
+        {
+            return RedirectToAction("Index", "Home", new { id });
+        }
     }
 }

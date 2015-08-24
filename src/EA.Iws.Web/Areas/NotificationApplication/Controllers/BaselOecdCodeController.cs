@@ -27,7 +27,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool backToOverview = false)
         {
             using (var client = apiClient())
             {
@@ -42,7 +42,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, BaselOecdCodeViewModel model)
+        public async Task<ActionResult> Index(Guid id, BaselOecdCodeViewModel model, bool backToOverview = false)
         {
             using (var client = apiClient())
             {
@@ -62,7 +62,8 @@
                             model.NotListed,
                             model.SelectedCode));
 
-                return RedirectToAction("Index", "EwcCode", new { id });
+                return (backToOverview) ? RedirectToAction("Index", "Home", new { id }) 
+                    : RedirectToAction("Index", "EwcCode", new { id });
             }
         }
     }
