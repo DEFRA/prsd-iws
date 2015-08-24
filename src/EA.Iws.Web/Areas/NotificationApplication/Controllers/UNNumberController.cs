@@ -54,7 +54,7 @@
                         new SetUNNumbers(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return RedirectToAction("Index", "Home", new { id });
+                return RedirectToAction("Index", "CustomWasteCode", new { id });
             }
         }
     }
