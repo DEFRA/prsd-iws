@@ -38,7 +38,7 @@
 
         private Organisation GetOrganisationWithName(string name)
         {
-            var organisation = new Organisation(name, GetAddress(), anyType);
+            var organisation = new Organisation(name, anyType);
 
             var properties = typeof(Organisation).GetProperties();
 

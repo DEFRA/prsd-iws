@@ -26,17 +26,11 @@
             var userId = userContext.UserId.ToString();
             var user = await context.Users.SingleAsync(x => x.Id == userId);
             var org = user.Organisation;
-            var country = await context.Countries.SingleAsync(c => c.Name.Equals(org.Address.Country, StringComparison.InvariantCultureIgnoreCase));
 
             return new OrganisationRegistrationData()
             {
                 OrganisationId = org.Id,
                 Name = org.Name,
-                Address1 = org.Address.Address1,
-                Address2 = org.Address.Address2,
-                TownOrCity = org.Address.TownOrCity,
-                Postcode = org.Address.PostalCode,
-                CountryId = country.Id,
                 BusinessType = GetBusinessType(org.Type),
                 OtherDescription = org.OtherDescription,
                 RegistrationNumber = org.RegistrationNumber

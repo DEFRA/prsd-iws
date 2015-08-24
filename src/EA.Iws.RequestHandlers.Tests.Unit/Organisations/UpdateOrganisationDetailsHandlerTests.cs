@@ -52,7 +52,7 @@
         private User GetUser()
         {
             User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
-            Organisation org = new Organisation(name, address, BusinessType.Other, otherDescription);
+            Organisation org = new Organisation(name, BusinessType.Other, otherDescription);
             EntityHelper.SetEntityId(org, organisationId);
 
             user.LinkToOrganisation(org);
@@ -62,7 +62,7 @@
         private Organisation GetOrganisation()
         {
             User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
-            Organisation org = new Organisation(name, address, BusinessType.Other, otherDescription);
+            Organisation org = new Organisation(name, BusinessType.Other, otherDescription);
             EntityHelper.SetEntityId(org, organisationId);
 
             user.LinkToOrganisation(org);

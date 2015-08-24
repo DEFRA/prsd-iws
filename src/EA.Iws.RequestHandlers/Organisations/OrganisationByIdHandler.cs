@@ -25,14 +25,6 @@
                 .Organisations
                 .Select(o => new OrganisationData
                 {
-                    Address = new AddressData
-                    {
-                        Address2 = o.Address.Address2,
-                        CountryName = o.Address.Country,
-                        PostalCode = o.Address.PostalCode,
-                        StreetOrSuburb = o.Address.Address1,
-                        TownOrCity = o.Address.TownOrCity
-                    },
                     Id = o.Id,
                     Name = o.Name
                 }).SingleAsync();

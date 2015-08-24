@@ -51,7 +51,7 @@
         private User GetUser()
         {
             User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
-            Organisation org = new Organisation(name, address, BusinessType.Other, otherDescription);
+            Organisation org = new Organisation(name, BusinessType.Other, otherDescription);
             EntityHelper.SetEntityId(org, organisationId);
 
             user.LinkToOrganisation(org);
@@ -61,7 +61,7 @@
         private Organisation GetOrganisation()
         {
             User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
-            Organisation org = new Organisation(name, address, BusinessType.Other, otherDescription);
+            Organisation org = new Organisation(name, BusinessType.Other, otherDescription);
             EntityHelper.SetEntityId(org, organisationId);
 
             user.LinkToOrganisation(org);
@@ -73,8 +73,6 @@
         {
             var result = await handler.HandleAsync(message);
             Assert.True(result.Name == name
-                        && result.Address1 == address1 && result.Address2 == address2
-                        && result.TownOrCity == town && result.Postcode == postcode
                         && result.BusinessType == Core.Shared.BusinessType.Other && result.OtherDescription == otherDescription);
         }
     }

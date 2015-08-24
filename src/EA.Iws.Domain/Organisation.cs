@@ -6,10 +6,9 @@
 
     public class Organisation : Entity
     {
-        public Organisation(string name, Address address, BusinessType type, string otherDescription = null)
+        public Organisation(string name, BusinessType type, string otherDescription = null)
         {
             Guard.ArgumentNotNullOrEmpty(() => name, name);
-            Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNull(() => type, type);
 
             if (type == BusinessType.Other)
@@ -18,7 +17,6 @@
             }
 
             Name = name;
-            Address = address;
             Type = type.DisplayName;
             OtherDescription = otherDescription;
         }
@@ -29,7 +27,7 @@
 
         public string Name { get; private set; }
 
-        public Address Address { get; private set; }
+        //public Address Address { get; private set; }
 
         public string Type { get; private set; }
 
@@ -48,7 +46,6 @@
             }
 
             Name = name;
-            Address = address;
             Type = type.DisplayName;
             OtherDescription = otherDescription;
         }

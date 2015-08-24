@@ -40,7 +40,7 @@
             //Create new org
             var country = context.Countries.Single(c => c.IsoAlpha2Code.Equals("gb"));
             var address = TestAddress(country);
-            var org = new Organisation("SFW Ltd", address, BusinessType.LimitedCompany);
+            var org = new Organisation("SFW Ltd", BusinessType.LimitedCompany);
 
             try
             {
@@ -58,7 +58,7 @@
                 var oldOrgId = org.Id;
 
                 //Update org with change in Business Type
-                org = new Organisation("Name Changed", address, BusinessType.SoleTrader);
+                org = new Organisation("Name Changed", BusinessType.SoleTrader);
                 context.Organisations.Add(org);
                 await context.SaveChangesAsync();
 

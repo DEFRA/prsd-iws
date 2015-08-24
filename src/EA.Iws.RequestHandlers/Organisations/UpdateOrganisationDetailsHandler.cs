@@ -23,14 +23,11 @@
         public async Task<Guid> HandleAsync(UpdateOrganisationDetails message)
         {
             var orgData = message.Organisation;
-            var country = await context.Countries.SingleAsync(c => c.Id == orgData.CountryId);
 
             var org = await context.Organisations.SingleAsync(x => x.Id == orgData.OrganisationId);
-            var address = new Address(orgData.Address1, orgData.Address2, orgData.TownOrCity, null, orgData.Postcode, country.Name);
-
             BusinessType type = BusinessType.FromBusinessType(orgData.BusinessType);
 
-            org = new Organisation(orgData.Name, address, type, orgData.OtherDescription);
+            org = new Organisation(orgData.Name, type, orgData.OtherDescription);
             context.Organisations.Add(org);
             await context.SaveChangesAsync();
 

@@ -16,13 +16,13 @@
         [Fact]
         public void TypeOther_NoDescription_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => new Organisation(AnyString, address, BusinessType.Other));
+            Assert.Throws<ArgumentNullException>(() => new Organisation(AnyString, BusinessType.Other));
         }
 
         [Fact]
         public void TypeCompany_CreatesSuccessfully()
         {
-            var organisation = new Organisation(AnyString, address, BusinessType.LimitedCompany, null);
+            var organisation = new Organisation(AnyString, BusinessType.LimitedCompany, null);
 
             Assert.Equal(AnyString, organisation.Name);
             Assert.Equal(BusinessType.LimitedCompany.DisplayName, organisation.Type);

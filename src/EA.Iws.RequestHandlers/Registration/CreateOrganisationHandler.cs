@@ -26,11 +26,7 @@
 
         public async Task<Guid> HandleAsync(CreateOrganisation command)
         {
-            var orgData = command.Organisation;
-            var country = await db.Countries.SingleAsync(c => c.Id == command.Organisation.CountryId);
-
-            var address = new Address(orgData.Address1, orgData.Address2, orgData.TownOrCity, null, orgData.Postcode, country.Name);
-            var organisation = new Organisation(command.Organisation.Name, address, BusinessType.FromBusinessType(command.Organisation.BusinessType), command.Organisation.OtherDescription);
+            var organisation = new Organisation(command.Organisation.Name, BusinessType.FromBusinessType(command.Organisation.BusinessType), command.Organisation.OtherDescription);
 
             db.Organisations.Add(organisation);
 

@@ -54,7 +54,7 @@
 
             var address = TestAddress(country);
 
-            var org = new Organisation("SFW Ltd", address, BusinessType.LimitedCompany);
+            var org = new Organisation("SFW Ltd", BusinessType.LimitedCompany);
 
             context.Organisations.Add(org);
 
@@ -78,7 +78,7 @@
         {
             var country = context.Countries.Single(c => c.IsoAlpha2Code.Equals("gb"));
             var address = TestAddress(country);
-            var org = new Organisation("SFW Ltd", address, BusinessType.LimitedCompany);
+            var org = new Organisation("SFW Ltd", BusinessType.LimitedCompany);
 
             context.Organisations.Add(org);
             context.SaveChanges();
