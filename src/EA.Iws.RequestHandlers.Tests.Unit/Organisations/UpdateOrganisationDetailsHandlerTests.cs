@@ -75,11 +75,6 @@
             {
                 OrganisationId = organisationId,
                 Name = prefix + name,
-                Address1 = prefix + address1,
-                Address2 = prefix + address2,
-                TownOrCity = prefix + town,
-                Postcode = postcode,
-                CountryId = countryId,
                 BusinessType = Core.Shared.BusinessType.Other,
                 OtherDescription = otherDescription
             };
@@ -93,11 +88,6 @@
             {
                 OrganisationId = organisationId,
                 Name = prefix + name,
-                Address1 = prefix + address1,
-                Address2 = prefix + address2,
-                TownOrCity = prefix + town,
-                Postcode = "AB142TR",
-                CountryId = countryId,
                 BusinessType = Core.Shared.BusinessType.SoleTrader
             });
             var orgId = await handler.HandleAsync(request);
