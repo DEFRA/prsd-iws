@@ -7,7 +7,10 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.Shared;
+    using FakeItEasy;
     using Prsd.Core.Web.OAuth;
+    using Requests.Shared;
     using Web.Controllers;
     using Web.ViewModels.Registration;
     using Xunit;
@@ -136,7 +139,24 @@
 
         private static RegistrationController GetMockAccountController(object viewModel)
         {
-            var registrationController = new RegistrationController(() => new OAuthClient("test", "test", "test"), () => new IwsClient("test"), null, null);
+            var client = A.Fake<IIwsClient>();
+            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
+            {
+                new CountryData
+                {
+                    Id = new Guid("4345FB05-F7DF-4E16-939C-C09FCA5C7D7B"),
+                    Name = "United Kingdom"
+                },
+                new CountryData
+                {
+                    Id = new Guid("29B0D09E-BA77-49FB-AF95-4171408C07C9"),
+                    Name = "Germany"
+                }
+            });
+
+            var oauth = A.Fake<IOAuthClient>();
+
+            var registrationController = new RegistrationController(() => oauth, () => client, null, null);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();
@@ -168,7 +188,7 @@
 
         private static EditApplicantDetailsViewModel GetEditApplicantDetailsViewModel()
         {
-            return new EditApplicantDetailsViewModel()
+            return new EditApplicantDetailsViewModel
             {
                 Id = UserIdGuid,
                 FirstName = ValidName,
