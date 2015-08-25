@@ -19,29 +19,23 @@
 
         public async Task<Guid> HandleAsync(CreateAddress command)
         {
-            try
-            {
-                var country = await db.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
+            var country = await db.Countries.SingleAsync(c => c.Id == command.Address.CountryId);
 
-                var address = new UserAddress(command.Address.StreetOrSuburb, command.Address.Address2, command.Address.TownOrCity, command.Address.Region,
-                    command.Address.PostalCode, country.Name);
+            var address =
+                new UserAddress(new Address(command.Address.StreetOrSuburb, command.Address.Address2, command.Address.TownOrCity, command.Address.Region, command.Address.PostalCode,
+                    country.Name));
 
-                db.Addresses.Add(address);
+            db.Addresses.Add(address);
 
-                await db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
-                var user = await db.Users.SingleAsync(u => u.Id == command.UserId);
+            var user = await db.Users.SingleAsync(u => u.Id == command.UserId);
 
-                user.LinkToAddress(address);
+            user.LinkToAddress(address);
 
-                await db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
-                return address.Id;
-            }
-            catch (Exception ex)
-            {
-                return new Guid();
-            }
+            return address.Id;
         }
     }
 }

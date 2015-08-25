@@ -57,7 +57,7 @@
         {
             User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
             Organisation org = new Organisation(name, BusinessType.Other, otherDescription);
-            user.LinkToAddress(new UserAddress(address1, address2, town, null, postcode, "United Kingdom"));
+            user.LinkToAddress(new UserAddress(new Address(address1, address2, town, null, postcode, "United Kingdom")));
 
             EntityHelper.SetEntityId(org, organisationId);
 
@@ -100,7 +100,7 @@
             var orgId = await handler.HandleAsync(request);
 
             var user = await context.Users.SingleAsync(x => x.Id == userId.ToString());
-            Assert.Equal(address1, user.Address.Address1);
+            Assert.Equal(address1, user.Address.Address.Address1);
         }
     }
 }

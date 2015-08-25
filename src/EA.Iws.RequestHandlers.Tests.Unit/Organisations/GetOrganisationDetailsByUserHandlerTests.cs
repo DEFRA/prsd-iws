@@ -49,7 +49,7 @@
         private User GetUser()
         {
             User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
-            user.LinkToAddress(new UserAddress(address1, address2, town, null, postcode, "United Kingdom"));
+            user.LinkToAddress(new UserAddress(new Address(address1, address2, town, null, postcode, "United Kingdom")));
             Organisation org = new Organisation(name, BusinessType.Other, otherDescription);
             EntityHelper.SetEntityId(org, organisationId);
 

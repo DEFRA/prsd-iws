@@ -9,14 +9,12 @@
         {
             this.ToTable("Address", "Person");
 
-            Property(x => x.Address1).HasColumnName("Address1").IsRequired().HasMaxLength(1024);
-            Property(x => x.Address2).HasColumnName("Address2");
-            Property(x => x.TownOrCity).HasColumnName("TownOrCity").IsRequired().HasMaxLength(1024);
-            Property(x => x.Region).HasColumnName("Region").HasMaxLength(1024);
-            Property(x => x.PostalCode).HasColumnName("PostalCode").HasMaxLength(64);
-            Property(x => x.Country).HasColumnName("Country").IsRequired().HasMaxLength(1024);
-
-            Ignore(address => address.IsUkAddress);
+            Property(x => x.Address.Address1).HasColumnName("Address1").IsRequired().HasMaxLength(1024);
+            Property(x => x.Address.Address2).HasColumnName("Address2");
+            Property(x => x.Address.TownOrCity).HasColumnName("TownOrCity").IsRequired().HasMaxLength(1024);
+            Property(x => x.Address.Region).HasColumnName("Region").HasMaxLength(1024);
+            Property(x => x.Address.PostalCode).HasColumnName("PostalCode").HasMaxLength(64);
+            Property(x => x.Address.Country).HasColumnName("Country").IsRequired().HasMaxLength(1024);
         }
     }
 }
