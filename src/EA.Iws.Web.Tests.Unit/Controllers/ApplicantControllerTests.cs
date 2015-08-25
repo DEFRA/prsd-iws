@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using FakeItEasy;
+    using Requests.NotificationAssessment;
     using Web.Controllers;
     using Web.ViewModels.Applicant;
     using Xunit;
@@ -22,9 +25,9 @@
         }
 
         [Fact]
-        public void UserSelects_PrintNotification_RedirectsTo_GenerateNotificationDocument()
+        public async Task UserSelects_PrintNotification_RedirectsTo_GenerateNotificationDocument()
         {
-            var result = applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.PrintNotification)) as RedirectToRouteResult;
+            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.PrintNotification)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("GenerateNotificationDocument", result.RouteValues["action"]);
             Assert.Equal("Home", result.RouteValues["controller"]);
@@ -33,9 +36,12 @@
         }
 
         [Fact]
-        public void UserSelects_ViewNotification_RedirectsTo_Index()
+        public async Task UserSelects_ViewNotification_Status_Not_NotSubmitted_RedirectsTo_Index()
         {
-            var result = applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.ViewNotification)) as RedirectToRouteResult;
+            A.CallTo(() => 
+                client.SendAsync(A<string>.Ignored, A<GetNotificationAssessmentSummaryInformation>.Ignored))
+                .Returns(new NotificationAssessmentSummaryInformationData() { Status = NotificationStatus.Submitted });
+            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.ViewNotification)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("Home", result.RouteValues["controller"]);
@@ -44,9 +50,23 @@
         }
 
         [Fact]
-        public void UserSelects_GeneratePrenotification_RedirectsTo_Actual_Shipment_Date()
+        public async Task UserSelects_ViewNotification_Status_NotSubmitted_RedirectsTo_Exporter()
         {
-            var result = applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.GeneratePrenotification)) as RedirectToRouteResult;
+            A.CallTo(() => 
+                client.SendAsync(A<string>.Ignored, A<GetNotificationAssessmentSummaryInformation>.Ignored))
+                .Returns(new NotificationAssessmentSummaryInformationData() { Status = NotificationStatus.NotSubmitted });
+            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.ViewNotification)) as RedirectToRouteResult;
+            Assert.NotNull(result);
+            Assert.Equal("Index", result.RouteValues["action"]);
+            Assert.Equal("Exporter", result.RouteValues["controller"]);
+            Assert.Equal(notificationId, result.RouteValues["id"]);
+            Assert.Equal("NotificationApplication", result.RouteValues["area"]);
+        }
+
+        [Fact]
+        public async Task UserSelects_GeneratePrenotification_RedirectsTo_Actual_Shipment_Date()
+        {
+            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.GeneratePrenotification)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("Home", result.RouteValues["controller"]);
@@ -54,9 +74,9 @@
         }
 
         [Fact]
-        public void UserSelects_RecordCertificateOfReceipt_RedirectsTo_MyHome()
+        public async Task UserSelects_RecordCertificateOfReceipt_RedirectsTo_MyHome()
         {
-            var result = applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfReceipt)) as RedirectToRouteResult;
+            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfReceipt)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("Home", result.RouteValues["action"]);
             Assert.Equal("Applicant", result.RouteValues["controller"]);
@@ -64,9 +84,9 @@
         }
 
         [Fact]
-        public void UserSelects_RecordCertificateOfDisposal_RedirectsTo_MyHome()
+        public async Task UserSelects_RecordCertificateOfDisposal_RedirectsTo_MyHome()
         {
-            var result = applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfDisposal)) as RedirectToRouteResult;
+            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfDisposal)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("Home", result.RouteValues["action"]);
             Assert.Equal("Applicant", result.RouteValues["controller"]);
@@ -74,9 +94,9 @@
         }
 
         [Fact]
-        public void UserSelects_RecordCertificateOfRecovery_RedirectsTo_MyHome()
+        public async Task UserSelects_RecordCertificateOfRecovery_RedirectsTo_MyHome()
         {
-            var result = applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfRecovery)) as RedirectToRouteResult;
+            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfRecovery)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("Home", result.RouteValues["action"]);
             Assert.Equal("Applicant", result.RouteValues["controller"]);

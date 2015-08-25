@@ -4,8 +4,10 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.NotificationAssessment;
     using Infrastructure;
     using Requests.Notification;
+    using Requests.NotificationAssessment;
     using ViewModels.Applicant;
 
     [Authorize]
@@ -53,7 +55,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ApprovedNotification(ApprovedNotificationViewModel model)
+        public async Task<ActionResult> ApprovedNotification(ApprovedNotificationViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +64,17 @@
 
             if (model.UserChoices.SelectedValue == 1)
             {
-                return RedirectToAction("Index", "Home", new { id = model.NotificationId, area = "NotificationApplication" });
+                using (var client = apiClient())
+                {
+                    var notificationAssessmentInfo = await client.SendAsync(User.GetAccessToken(), new GetNotificationAssessmentSummaryInformation(model.NotificationId));
+
+                    if (notificationAssessmentInfo.Status == NotificationStatus.NotSubmitted)
+                    {
+                        return RedirectToAction("Index", "Exporter", new { id = model.NotificationId, area = "NotificationApplication" });
+                    }
+
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId, area = "NotificationApplication" });
+                }
             }
             if (model.UserChoices.SelectedValue == 2)
             {
