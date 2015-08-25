@@ -310,13 +310,5 @@
             }
             return RedirectToAction("Home", "Applicant");
         }
-
-        private async Task<IEnumerable<CountryData>> GetCountries()
-        {
-            using (var client = apiClient())
-            {
-                return await client.SendAsync(new GetCountries());
-            }
-        }
     }
 }

@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using Core.Registration;
     using Core.Shared;
     using Prsd.Core.Validation;
@@ -39,14 +38,6 @@
 
         public Guid DefaultCountryId { get; set; }
 
-        [Required]
-        [Display(Name = "Organisation type")]
-        public BusinessType BusinessType { get; set; }
-
-        [RequiredIf("BusinessType", BusinessType.Other, "Description is required")]
-        [Display(Name = "Organisation type")]
-        public string OtherDescription { get; set; }
-
         public EditOrganisationViewModel()
         {
         }
@@ -54,8 +45,6 @@
         public EditOrganisationViewModel(OrganisationRegistrationData orgData)
         {
             OrganisationId = orgData.OrganisationId;
-            BusinessType = orgData.BusinessType;
-            OtherDescription = orgData.OtherDescription;
             Address1 = orgData.Address.StreetOrSuburb;
             Address2 = orgData.Address.Address2;
             TownOrCity = orgData.Address.TownOrCity;
@@ -69,8 +58,6 @@
             return new OrganisationRegistrationData
             {
                 OrganisationId = OrganisationId,
-                BusinessType = BusinessType,
-                OtherDescription = OtherDescription,
                 Name = Name,
                 Address = new AddressData
                 {

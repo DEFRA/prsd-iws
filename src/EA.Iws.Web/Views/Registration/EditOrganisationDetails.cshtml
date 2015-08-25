@@ -49,30 +49,6 @@
         @Html.HiddenFor(m => m.DefaultCountryId)
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
-        <label class="form-label">Organisation type</label>
-        @Html.Gds().ValidationMessageFor(m => m.BusinessType)
-        <label class="block-label">
-            @Html.RadioButtonFor(m => m.BusinessType, "SoleTrader") Sole trader
-        </label>
-        <label class="block-label">
-            @Html.RadioButtonFor(m => m.BusinessType, "Partnership") Partnership
-        </label>
-        <label class="block-label" data-target="companies-house-number">
-            @Html.RadioButtonFor(m => m.BusinessType, "LimitedCompany") Limited company
-        </label>
-        <label class="block-label" data-target="other-description">
-            @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
-        </label>
-        <div class="panel-indent @(Model.BusinessType != null && Model.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
-                @Html.Gds().LabelFor(m => m.OtherDescription)
-                @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
-                @Html.Gds().TextBoxFor(m => m.OtherDescription)
-            </div>
-        </div>
-    </div>
-
     <div class="form-group">
         <input type="submit" class="button" value="Update"/>
     </div>

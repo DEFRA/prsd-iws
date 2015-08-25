@@ -87,7 +87,7 @@
         }
 
         [Fact]
-        public async Task UpdateOrgDetails_BusinessType_Changes_OrgId()
+        public async Task UpdateDetails_Address_Changes_Address()
         {
             var prefix = "updated";
             var request = new UpdateOrganisationDetails(new OrganisationRegistrationData()
@@ -100,7 +100,7 @@
             var orgId = await handler.HandleAsync(request);
 
             var user = await context.Users.SingleAsync(x => x.Id == userId.ToString());
-            Assert.Equal(orgId, user.Organisation.Id);
+            Assert.Equal(address1, user.Address.Address1);
         }
     }
 }

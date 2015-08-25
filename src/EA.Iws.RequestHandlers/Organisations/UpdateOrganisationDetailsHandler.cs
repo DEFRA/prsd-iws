@@ -24,15 +24,15 @@
         {
             var orgData = message.Organisation;
 
-            var org = await context.Organisations.SingleAsync(x => x.Id == orgData.OrganisationId);
-            BusinessType type = BusinessType.FromBusinessType(orgData.BusinessType);
+            //var org = await context.Organisations.SingleAsync(x => x.Id == orgData.OrganisationId);
+            //BusinessType type = BusinessType.FromBusinessType(orgData.BusinessType);
 
-            org = new Organisation(orgData.Name, type, orgData.OtherDescription);
-            context.Organisations.Add(org);
-            await context.SaveChangesAsync();
+            //org = new Organisation(orgData.Name, type, orgData.OtherDescription);
+            //context.Organisations.Add(org);
+            //await context.SaveChangesAsync();
 
             var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
-            user.UpdateOrganisationOfUser(org);
+            //user.UpdateOrganisationOfUser(org);
             await context.SaveChangesAsync();
 
             var country = await context.Countries.SingleAsync(c => c.Id == orgData.Address.CountryId);
@@ -41,7 +41,7 @@
             address.UpdateAddress(orgData.Address.StreetOrSuburb, orgData.Address.Address2, orgData.Address.TownOrCity, orgData.Address.Region, orgData.Address.PostalCode, country.Name);
             await context.SaveChangesAsync();
 
-            return org.Id;
+            return address.Id;
         }
     }
 }
