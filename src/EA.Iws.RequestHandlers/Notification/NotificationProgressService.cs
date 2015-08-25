@@ -170,9 +170,7 @@
             }
 
             return progress.HasStateOfExport
-                && progress.HasStateOfImport
-                && progress.HasTransitState
-                && progress.HasCustomsOffice;
+                && progress.HasStateOfImport;
         }
 
         private bool MapProgressForAmountsAndDates(NotificationApplicationCompletionProgress progress, NotificationProgressResult progressResult)
