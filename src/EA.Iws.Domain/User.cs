@@ -53,5 +53,7 @@
             Guard.ArgumentNotNull(() => organisation, organisation);
             Organisation = organisation;
         }
+
+        public virtual UserAddress Address { get; set; }
     }
 }

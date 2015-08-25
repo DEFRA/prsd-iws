@@ -62,6 +62,8 @@
 
         public virtual DbSet<Movement> Movements { get; set; }
 
+        public virtual DbSet<UserAddress> Addresses { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

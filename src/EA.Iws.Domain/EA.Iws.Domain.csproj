@@ -139,6 +139,7 @@
     <Compile Include="UKCompetentAuthority.cs" />
     <Compile Include="UnitedKingdomCompetentAuthority.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserAddress.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NotificationApplication\NotificationApplication.TransportRoute.cs" />

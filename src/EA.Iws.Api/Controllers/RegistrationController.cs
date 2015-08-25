@@ -39,12 +39,6 @@
                 PhoneNumber = model.Phone,
                 FirstName = model.FirstName,
                 Surname = model.Surname,
-                Address2 = model.Address2,
-                Address1 = model.Address1,
-                PostalCode = model.Postcode,
-                Region = model.CountyOrProvince,
-                Country = model.CountryName,
-                TownOrCity = model.TownOrCity
             };
 
             var result = await userManager.CreateAsync(user, model.Password);

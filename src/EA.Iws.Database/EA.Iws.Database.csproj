@@ -102,6 +102,7 @@
     <Content Include="scripts\Update\Sprint14\20150820-153500-delete-custom-codes-waste-code-link.sql" />
     <Content Include="scripts\Update\Sprint14\20150821-103600-move-business-to-notification-schema.sql" />
     <Content Include="scripts\Update\Sprint14\20150824-143000-rename-shipment-number-column.sql" />
+    <Content Include="scripts\Update\Sprint14\20150825-092345-add-address-table.sql" />
     <Content Include="scripts\Update\Sprint14\20150821-114800-add-actual-shipment-data-table.sql" />
   </ItemGroup>
   <ItemGroup>

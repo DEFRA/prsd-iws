@@ -65,19 +65,11 @@
                         Surname = model.Surname,
                         Phone = model.PhoneNumber,
                         Password = model.Password,
-                        ConfirmPassword = model.ConfirmPassword,
-                        Address1 = model.Address.StreetOrSuburb,
-                        Address2 = model.Address.Address2,
-                        TownOrCity = model.Address.TownOrCity,
-                        Postcode = model.Address.PostalCode,
-                        CountyOrProvince = model.Address.Region
+                        ConfirmPassword = model.ConfirmPassword
                     };
 
                     try
                     {
-                        var selectedCountry = await client.SendAsync(new GetCountry{CountryId = model.Address.CountryId.Value});
-                        applicantRegistrationData.CountryName = selectedCountry.Name;
-
                         var userId = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
                         var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                         authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
@@ -87,6 +79,9 @@
                         var verificationEmail = emailService.GenerateEmailVerificationMessage(Url.Action("VerifyEmail", "Account", null,
                             Request.Url.Scheme), verificationCode, userId, model.Email);
                         await emailService.SendAsync(verificationEmail);
+
+                        var addressId = await client.SendAsync(signInResponse.AccessToken, new CreateAddress { Address = model.Address, UserId = userId});
+                        applicantRegistrationData.AddressId = addressId;
 
                         return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                     }

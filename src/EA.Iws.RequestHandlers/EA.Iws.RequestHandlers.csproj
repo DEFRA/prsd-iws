@@ -105,6 +105,7 @@
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
+    <Compile Include="Registration\CreateAddressHandler.cs" />
     <Compile Include="Shared\GetCountryHandler.cs" />
     <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
     <Compile Include="WasteCodes\GetAllWasteCodesForNotificationHandler.cs" />

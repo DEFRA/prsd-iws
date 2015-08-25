@@ -128,6 +128,7 @@
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
     <Compile Include="RecoveryInfo\GetRecoveryValuesData.cs" />
+    <Compile Include="Registration\CreateAddress.cs" />
     <Compile Include="Registration\UpdateOrganisationOfUser.cs" />
     <Compile Include="Shared\GetCountry.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
