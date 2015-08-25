@@ -169,6 +169,11 @@
         {
             var codesString = string.Empty;
 
+            if (codes.Any(c => c.IsNotApplicable))
+            {
+                return "Not applicable";
+            }
+
             foreach (var c in codes)
             {
                 codesString = codesString + c.WasteCode.Code + ", ";

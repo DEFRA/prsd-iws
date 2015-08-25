@@ -19,7 +19,6 @@
         private readonly GetOrganisationDetailsByUserHandler handler;
         private readonly Guid organisationId = new Guid("C0A5E713-61F0-46DA-AEB6-D0602E5B3ED6");
         private readonly Guid userId = new Guid("714E6E4F-C5D2-4BD8-8C1A-1032452C55EC");
-        private UserAddress address;
 
         private string name = "My org name";
         private string address1 = "address line one";

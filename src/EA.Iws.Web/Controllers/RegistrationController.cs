@@ -173,7 +173,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> CreateNewOrganisation(string organisationName)
+        public ActionResult CreateNewOrganisation(string organisationName)
         {
             var model = new CreateNewOrganisationViewModel { Name = organisationName };
             return View(model);
