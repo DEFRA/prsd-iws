@@ -56,5 +56,16 @@
                 return true;
             }
         }
+
+        public void UpdateAddress(string address1, string address2, string townOrCity, string region,
+            string postalCode, string country)
+        {
+            Address1 = address1;
+            Address2 = address2;
+            TownOrCity = townOrCity;
+            Region = region;
+            PostalCode = postalCode;
+            Country = country;
+        }
     }
 }

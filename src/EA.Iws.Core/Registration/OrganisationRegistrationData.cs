@@ -10,5 +10,6 @@
         public BusinessType BusinessType { get; set; }
         public string OtherDescription { get; set; }
         public string RegistrationNumber { get; set; }
+        public AddressData Address { get; set; }
     }
 }

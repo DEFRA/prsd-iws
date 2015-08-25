@@ -35,6 +35,12 @@
             user.UpdateOrganisationOfUser(org);
             await context.SaveChangesAsync();
 
+            var country = await context.Countries.SingleAsync(c => c.Id == orgData.Address.CountryId);
+
+            var address = user.Address;
+            address.UpdateAddress(orgData.Address.StreetOrSuburb, orgData.Address.Address2, orgData.Address.TownOrCity, orgData.Address.Region, orgData.Address.PostalCode, country.Name);
+            await context.SaveChangesAsync();
+
             return org.Id;
         }
     }

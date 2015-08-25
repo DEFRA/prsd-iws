@@ -54,6 +54,13 @@
             Organisation = organisation;
         }
 
-        public virtual UserAddress Address { get; set; }
+        public void LinkToAddress(UserAddress address)
+        {
+            Guard.ArgumentNotNull(() => address, address);
+
+            Address = address;
+        }
+
+        public virtual UserAddress Address { get; private set; }
     }
 }

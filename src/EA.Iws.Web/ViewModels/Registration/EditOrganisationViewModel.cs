@@ -10,14 +10,10 @@
 
     public class EditOrganisationViewModel
     {
-        private const string DefaultCountryName = "United Kingdom";
-
         public IEnumerable<CountryData> Countries { get; set; }
 
         public Guid OrganisationId { get; set; }
 
-        [Required]
-        [Display(Name = "Organisation name")]
         public string Name { get; set; }
 
         [Required]
@@ -30,6 +26,9 @@
         [Required]
         [Display(Name = "Town")]
         public string TownOrCity { get; set; }
+
+        [Display(Name = "Region")]
+        public string Region { get; set; }
 
         [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", "The Postcode field is required")]
         public string Postcode { get; set; }
@@ -48,30 +47,6 @@
         [Display(Name = "Organisation type")]
         public string OtherDescription { get; set; }
 
-        public CountryData DefaultCountry
-        {
-            get
-            {
-                if (Countries == null || !Countries.Any())
-                {
-                    return null;
-                }
-
-                var country = Countries.SingleOrDefault(c => c.Name.Equals(DefaultCountryName));
-
-                if (this.CountryId == Guid.Empty)
-                {
-                    if (country != null)
-                    {
-                        this.CountryId = country.Id;
-                        DefaultCountryId = country.Id;
-                    }
-                }
-
-                return country ?? Countries.First();
-            }
-        }
-
         public EditOrganisationViewModel()
         {
         }
@@ -79,9 +54,14 @@
         public EditOrganisationViewModel(OrganisationRegistrationData orgData)
         {
             OrganisationId = orgData.OrganisationId;
-            Name = orgData.Name;
             BusinessType = orgData.BusinessType;
             OtherDescription = orgData.OtherDescription;
+            Address1 = orgData.Address.StreetOrSuburb;
+            Address2 = orgData.Address.Address2;
+            TownOrCity = orgData.Address.TownOrCity;
+            Postcode = orgData.Address.PostalCode;
+            Region = orgData.Address.Region;
+            Name = orgData.Name;
         }
 
         public OrganisationRegistrationData ToRequest()
@@ -89,9 +69,18 @@
             return new OrganisationRegistrationData
             {
                 OrganisationId = OrganisationId,
-                Name = Name,
                 BusinessType = BusinessType,
-                OtherDescription = OtherDescription
+                OtherDescription = OtherDescription,
+                Name = Name,
+                Address = new AddressData
+                {
+                    StreetOrSuburb = Address1,
+                    Address2 = Address2,
+                    CountryId = CountryId,
+                    PostalCode = Postcode,
+                    Region = Region,
+                    TownOrCity = TownOrCity
+                }
             };
         }
     }

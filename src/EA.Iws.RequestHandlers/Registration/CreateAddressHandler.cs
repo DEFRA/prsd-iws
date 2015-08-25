@@ -32,7 +32,7 @@
 
                 var user = await db.Users.SingleAsync(u => u.Id == command.UserId);
 
-                user.Address = address;
+                user.LinkToAddress(address);
 
                 await db.SaveChangesAsync();
 

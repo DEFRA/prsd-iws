@@ -26,6 +26,7 @@
             var userId = userContext.UserId.ToString();
             var user = await context.Users.SingleAsync(x => x.Id == userId);
             var org = user.Organisation;
+            var address = user.Address;
 
             return new OrganisationRegistrationData()
             {
@@ -33,7 +34,16 @@
                 Name = org.Name,
                 BusinessType = GetBusinessType(org.Type),
                 OtherDescription = org.OtherDescription,
-                RegistrationNumber = org.RegistrationNumber
+                RegistrationNumber = org.RegistrationNumber,
+                Address = new AddressData
+                {
+                    CountryName = address.Country,
+                    Address2 = address.Address2,
+                    PostalCode = address.PostalCode,
+                    Region = address.Region,
+                    StreetOrSuburb = address.Address1,
+                    TownOrCity = address.TownOrCity
+                }
             };
         }
 

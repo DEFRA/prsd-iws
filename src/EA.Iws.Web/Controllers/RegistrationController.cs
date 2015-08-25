@@ -286,7 +286,10 @@
             {
                 var response = await client.SendAsync(User.GetAccessToken(), new GetOrganisationDetailsByUser());
                 var model = new EditOrganisationViewModel(response);
+
                 await this.BindCountryList(apiClient);
+                model.CountryId = new Guid(((SelectList)ViewBag.Countries).Single(c => c.Text.Equals(response.Address.CountryName, StringComparison.InvariantCultureIgnoreCase)).Value);
+
                 return View(model);
             }
         }
