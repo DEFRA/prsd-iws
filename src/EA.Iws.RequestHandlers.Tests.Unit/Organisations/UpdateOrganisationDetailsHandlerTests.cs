@@ -4,14 +4,17 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Registration;
+    using Core.Shared;
     using DataAccess;
     using Domain;
     using FakeItEasy;
+    using FakeItEasy.ExtensionSyntax.Full;
     using Prsd.Core.Domain;
     using RequestHandlers.Organisations;
     using Requests.Organisations;
     using TestHelpers.Helpers;
     using Xunit;
+    using BusinessType = Domain.BusinessType;
 
     public class UpdateOrganisationDetailsHandlerTests
     {
@@ -34,6 +37,7 @@
         {
             userContext = A.Fake<IUserContext>();
             A.CallTo(() => userContext.UserId).Returns(userId);
+
             context = new TestIwsContext(userContext);
 
             var country = CountryFactory.Create(countryId);
@@ -53,6 +57,8 @@
         {
             User user = UserFactory.Create(userId, "firstName", "lastName", "9123456789", "test@test.com");
             Organisation org = new Organisation(name, BusinessType.Other, otherDescription);
+            user.LinkToAddress(new UserAddress(address1, address2, town, null, postcode, "United Kingdom"));
+
             EntityHelper.SetEntityId(org, organisationId);
 
             user.LinkToOrganisation(org);
@@ -88,7 +94,8 @@
             {
                 OrganisationId = organisationId,
                 Name = prefix + name,
-                BusinessType = Core.Shared.BusinessType.SoleTrader
+                BusinessType = Core.Shared.BusinessType.SoleTrader,
+                Address = new AddressData { Address2 = address2, StreetOrSuburb = address1, CountryId = countryId, PostalCode = postcode, TownOrCity = town }
             });
             var orgId = await handler.HandleAsync(request);
 

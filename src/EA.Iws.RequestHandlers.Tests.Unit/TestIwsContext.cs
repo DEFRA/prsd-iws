@@ -45,6 +45,7 @@
             this.PricingStructures = new TestDbSet<PricingStructure>();
             this.UnitedKingdomCompetentAuthorities = new TestDbSet<UnitedKingdomCompetentAuthority>();
             this.Users = new TestDbSet<User>();
+            this.Addresses = new TestDbSet<UserAddress>();
             this.WasteCodes = new TestDbSet<WasteCode>();
             this.Movements = new TestDbSet<Domain.Movement.Movement>();
         }
