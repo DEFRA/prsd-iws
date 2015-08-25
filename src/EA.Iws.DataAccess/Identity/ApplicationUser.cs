@@ -9,6 +9,5 @@
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public Guid? OrganisationId { get; private set; }
-        //public virtual Address Address { get; set; }
     }
 }
