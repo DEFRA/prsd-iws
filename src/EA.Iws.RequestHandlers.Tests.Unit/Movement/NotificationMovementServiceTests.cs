@@ -10,6 +10,8 @@
     {
         private static readonly Guid UserId = new Guid("5EC700AC-256D-4C61-ADB1-2DD481BB6741");
         private static readonly Guid NotificationId = new Guid("5EC700AC-256D-4C61-ADB1-2DD481BB6741");
+        private static readonly DateTime FirstDate = new DateTime(2014, 1, 1);
+        private static readonly DateTime LastDate = new DateTime(2015, 1, 1);
 
         private readonly NotificationMovementService movementService;
         private readonly TestableNotificationAssessment assessment;
@@ -22,7 +24,11 @@
             testContext = new TestIwsContext(new TestUserContext(UserId));
             movementService = new NotificationMovementService(testContext);
 
-            shipmentInfo = new TestableShipmentInfo();
+            shipmentInfo = new TestableShipmentInfo
+            {
+                FirstDate = FirstDate,
+                LastDate = LastDate
+            };
 
             notification = new TestableNotificationApplication
             {
@@ -121,6 +127,24 @@
             });
 
             Assert.Equal(2, movementService.GetNextMovementNumber(NotificationId));
+        }
+
+        [Fact]
+        public void DateInRangeReturnsTrueTest()
+        {
+            Assert.True(movementService.DateIsValid(NotificationId, new DateTime(2014, 5, 5)));
+        }
+
+        [Fact]
+        public void DateBeforeStartReturnsFalseTest()
+        {
+            Assert.False(movementService.DateIsValid(NotificationId, new DateTime(2013, 5, 5)));
+        }
+
+        [Fact]
+        public void DateAfterEndReturnsFalseTest()
+        {
+            Assert.False(movementService.DateIsValid(NotificationId, new DateTime(2015, 5, 5)));
         }
     }
 }

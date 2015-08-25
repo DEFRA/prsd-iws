@@ -27,5 +27,17 @@
             NotificationApplicationId = notificationApplicationId;
             Number = movementService.GetNextMovementNumber(notificationApplicationId);
         }
+
+        public void UpdateDate(Guid notificationApplicationId, INotificationMovementService movementService, DateTime date)
+        {
+            if (movementService.DateIsValid(notificationApplicationId, date))
+            {
+                this.Date = date;
+            }
+            else
+            {
+                throw new InvalidOperationException("The date is not within the shipment date range for this notification " + date);
+            }
+        }
     }
 }

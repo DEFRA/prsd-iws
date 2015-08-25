@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
+    <Compile Include="Controllers\MovementDocument\ShipmentDateControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />
     <Compile Include="Controllers\MovementDocument\HomeControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
     <Compile Include="ViewModels\MethodOfDisposalViewModelTests.cs" />
+    <Compile Include="ViewModels\MovementDocument\ShipmentDateViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
     <Compile Include="ViewModels\RecoveryPercentageViewModelTests.cs" />

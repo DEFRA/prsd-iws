@@ -71,7 +71,10 @@
     <Compile Include="Movement\CreateMovementForNotificationById.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementId.cs" />
     <Compile Include="Movement\GetShipmentDataById.cs" />
+    <Compile Include="Movement\GetShipmentDateDataByMovementId.cs" />
+    <Compile Include="Movement\MovementDatesData.cs" />
     <Compile Include="Movement\MovementQuantityData.cs" />
+    <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />
     <Compile Include="Notification\ClassifyYourWasteInfo.cs" />

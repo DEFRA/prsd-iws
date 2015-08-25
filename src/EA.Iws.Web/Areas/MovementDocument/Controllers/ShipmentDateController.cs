@@ -5,7 +5,9 @@
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
-    using Requests.IntendedShipments;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Mvc.Extensions;
+    using Requests.Movement;
     using ViewModels;
 
     [Authorize]
@@ -23,13 +25,40 @@
         {
             using (var client = apiClient())
             {
-                var notificationShipmentInfo = await client.SendAsync(User.GetAccessToken(), new GetIntendedShipmentInfoForNotification(id));
+                var movementDateInfo = await client.SendAsync(User.GetAccessToken(), new GetShipmentDateDataByMovementId(id));
 
-                var model = new ShipmentDateViewModel
+                var model = new ShipmentDateViewModel(movementDateInfo);
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(ShipmentDateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var client = apiClient())
+            {
+                try
                 {
-                    StartDate = notificationShipmentInfo.FirstDate,
-                    EndDate = notificationShipmentInfo.LastDate
-                };
+                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
+
+                    return RedirectToAction("Index", "ShipmentDate", new { id = model.MovementId });
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
 
                 return View(model);
             }

@@ -23,5 +23,11 @@
             get { return base.Quantity; }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Quantity, value, this); }
         }
+
+        public new DateTime Date
+        {
+            get { return base.Date; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.Date, value, this); }
+        }
     }
 }

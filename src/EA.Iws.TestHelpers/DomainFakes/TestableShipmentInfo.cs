@@ -4,6 +4,7 @@
     using Core.Shared;
     using Domain.NotificationApplication;
     using Helpers;
+    using Prsd.Core;
 
     public class TestableShipmentInfo : ShipmentInfo
     {
@@ -29,6 +30,18 @@
         {
             get { return base.Units; }
             set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.Units, value, this); }
+        }
+
+        public new DateTime FirstDate
+        {
+            get { return base.FirstDate; }
+            set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.FirstDate, value, this); }
+        }
+
+        public new DateTime LastDate
+        {
+            get { return base.LastDate; }
+            set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.LastDate, value, this); }
         }
     }
 }

@@ -48,5 +48,15 @@
 
             return context.Movements.Count(m => m.NotificationApplicationId == notificationApplicationId) + 1;
         }
+
+        public bool DateIsValid(Guid notificationId, DateTime date)
+        {
+            var notification = context.NotificationApplications.Single(na => na.Id == notificationId);
+
+            bool isGreaterThanOrEqualToFirstDate = date >= notification.ShipmentInfo.FirstDate;
+            bool isLessThanOrEqualToLastDate = date <= notification.ShipmentInfo.LastDate;
+
+            return isGreaterThanOrEqualToFirstDate && isLessThanOrEqualToLastDate;
+        }
     }
 }

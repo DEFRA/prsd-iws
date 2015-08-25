@@ -6,5 +6,6 @@
     {
         bool CanCreateNewMovementForNotification(Guid notificationId);
         int GetNextMovementNumber(Guid notificationApplicationId);
+        bool DateIsValid(Guid notificationId, DateTime date);
     }
 }
