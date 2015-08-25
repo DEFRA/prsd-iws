@@ -72,6 +72,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
     <Compile Include="InternalUserTests.cs" />
     <Compile Include="Movement\UpdateMovementTests.cs" />
+    <Compile Include="Movement\ShipmentQuantityUnitConverterTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
     <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationTests.cs" />

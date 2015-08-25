@@ -50,63 +50,6 @@
         }
 
         [Fact]
-        public void NotificationDoesNotExistThrows()
-        {
-            Assert.Throws<InvalidOperationException>(
-                () => movementService.CanCreateNewMovementForNotification(Guid.Empty));
-        }
-
-        [Fact]
-        public void NotificationNotSubmittedReturnsFalse()
-        {
-            assessment.Status = NotificationStatus.NotSubmitted;
-
-            Assert.False(movementService.CanCreateNewMovementForNotification(NotificationId));
-        }
-
-        [Fact]
-        public void WouldExceedActiveShipmentsZeroReturnsFalse()
-        {
-            notification.ShipmentInfo = new TestableShipmentInfo();
-
-            Assert.False(movementService.CanCreateNewMovementForNotification(NotificationId));
-        }
-
-        [Fact]
-        public void WouldExceedActiveShipmentsOneReturnsFalse()
-        {
-            shipmentInfo.NumberOfShipments = 1;
-
-            testContext.Movements.Add(new TestableMovement
-            {
-                NotificationApplicationId = NotificationId
-            });
-
-            Assert.False(movementService.CanCreateNewMovementForNotification(NotificationId));
-        }
-
-        [Fact]
-        public void CanCreateReturnsTrue()
-        {
-            shipmentInfo.NumberOfShipments = 1;
-
-            Assert.True(movementService.CanCreateNewMovementForNotification(NotificationId));
-        }
-
-        [Fact]
-        public void CanCreateWhereMovementExistsReturnsTrue()
-        {
-            shipmentInfo.NumberOfShipments = 2;
-
-            testContext.Movements.Add(new TestableMovement
-            {
-                NotificationApplicationId = NotificationId
-            });
-
-            Assert.True(movementService.CanCreateNewMovementForNotification(NotificationId));
-        }
-
-        [Fact]
         public void NextNumbersWhereZeroReturnsOne()
         {
             Assert.Equal(1, movementService.GetNextMovementNumber(NotificationId));

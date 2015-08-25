@@ -26,14 +26,15 @@
                 .Select(na => new { na.ShipmentInfo.Quantity, na.ShipmentInfo.Units }).SingleAsync();
 
             var currentlyUsed = await context.Movements
-                .Where(m => m.NotificationApplicationId == movement.NotificationApplicationId)
+                .Where(m => m.NotificationApplicationId == movement.NotificationApplicationId
+                && m.Quantity.HasValue)
                 .SumAsync(m => m.Quantity);
 
             return new MovementQuantityData
             {
                 TotalNotifiedQuantity = notificationQuantityAndUnits.Quantity,
-                ThisMovementQuantity = movement.Quantity.GetValueOrDefault(),
-                TotalCurrentlyUsedQuantity = currentlyUsed,
+                ThisMovementQuantity = movement.Quantity,
+                TotalCurrentlyUsedQuantity = currentlyUsed.GetValueOrDefault(),
                 Units = notificationQuantityAndUnits.Units
             };
         }

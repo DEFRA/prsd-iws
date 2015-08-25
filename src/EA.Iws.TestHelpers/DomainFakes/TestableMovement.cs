@@ -27,7 +27,7 @@
             set { ObjectInstantiator<Movement>.SetProperty(x => x.NotificationApplication, value, this); }
         }
 
-        public new decimal Quantity
+        public new decimal? Quantity
         {
             get { return base.Quantity.GetValueOrDefault(); }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Quantity, value, this); }

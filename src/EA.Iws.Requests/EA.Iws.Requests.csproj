@@ -77,6 +77,7 @@
     <Compile Include="Movement\MovementQuantityData.cs" />
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetPackagingDataForMovement.cs" />
+    <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />
     <Compile Include="Notification\ClassifyYourWasteInfo.cs" />

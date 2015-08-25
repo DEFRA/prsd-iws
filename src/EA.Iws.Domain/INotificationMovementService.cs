@@ -4,8 +4,7 @@
 
     public interface INotificationMovementService
     {
-        bool CanCreateNewMovementForNotification(Guid notificationId);
-        int GetNextMovementNumber(Guid notificationApplicationId);
+        int GetNextMovementNumber(Guid notificationId);
         bool DateIsValid(Guid notificationId, DateTime date);
     }
 }

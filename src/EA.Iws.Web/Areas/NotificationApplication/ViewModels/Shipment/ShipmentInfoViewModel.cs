@@ -11,6 +11,7 @@
     using Prsd.Core;
     using Prsd.Core.Helpers;
     using Requests.IntendedShipments;
+    using Services;
 
     public class ShipmentInfoViewModel : IValidatableObject
     {
@@ -139,49 +140,12 @@
 
         private bool IsNumberOfShipmentsValid()
         {
-            int numberOfShipments;
-            if (NumberOfShipments.Contains(","))
-            {
-                Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)?$");
-                if (rgx.IsMatch(NumberOfShipments))
-                {
-                    NumberOfShipments = NumberOfShipments.Replace(",", string.Empty);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            if (!Int32.TryParse(NumberOfShipments, out numberOfShipments))
-            {
-                return false;
-            }
-
-            if (numberOfShipments < 1 || numberOfShipments > 99999)
-            {
-                return false;
-            }
-            return true;
+            return ViewModelService.IsNumberOfShipmentsValid(NumberOfShipments);
         }
 
         private bool IsQuantityValid()
         {
-            decimal quantity;
-            NumberStyles style = NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
-
-            if (!decimal.TryParse(Quantity, style, culture, out quantity))
-            {
-                return false;
-            }
-
-            if (decimal.Round(quantity, 4) != quantity)
-            {
-                return false;
-            }
-
-            return true;
+            return ViewModelService.IsStringValidDecimalToFourDecimalPlaces(Quantity);
         }
 
         public SetIntendedShipmentInfoForNotification ToRequest()

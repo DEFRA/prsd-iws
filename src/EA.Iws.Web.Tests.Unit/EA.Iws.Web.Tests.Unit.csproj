@@ -151,6 +151,7 @@
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
     <Compile Include="Controllers\MovementDocument\ShipmentDateControllerTests.cs" />
     <Compile Include="Controllers\MovementDocument\PackagingTypesControllerTests.cs" />
+    <Compile Include="Controllers\MovementDocument\QuantityControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />
     <Compile Include="Controllers\MovementDocument\HomeControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />

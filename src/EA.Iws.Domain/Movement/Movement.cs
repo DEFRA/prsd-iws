@@ -1,10 +1,12 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
-    using System;
+    using Core.Shared;
     using NotificationApplication;
-    using System.Collections.Generic;
+    using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
+    using System;
+    using System.Collections.Generic;
 
     public class Movement : Entity
     {
@@ -29,6 +31,8 @@
 
         public decimal? Quantity { get; private set; }
 
+        public ShipmentQuantityUnits? Units { get; private set; }
+
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
 
         public IEnumerable<PackagingInfo> PackagingInfos 
@@ -48,6 +52,22 @@
                 throw new InvalidOperationException(
                     "The date is not within the shipment date range for this notification " + date);
             }
+        }
+
+        public void SetQuantity(decimal quantity, ShipmentQuantityUnits units)
+        {
+            Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
+            Guard.ArgumentNotNull(() => NotificationApplication.ShipmentInfo, NotificationApplication.ShipmentInfo);
+
+            var notificationUnits = NotificationApplication.ShipmentInfo.Units;
+
+            if (units != notificationUnits)
+            {
+                quantity = ShipmentQuantityUnitConverter.ConvertToTarget(units, notificationUnits, quantity);
+            }
+
+            Quantity = quantity;
+            Units = notificationUnits;
         }
 
         public void SetPackagingInfos(IEnumerable<PackagingInfo> packagingInfos)

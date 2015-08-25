@@ -96,6 +96,8 @@
         [Fact]
         public async Task ReturnsCorrectThisMovementQuantityWhereZero()
         {
+            movement.Quantity = 0;
+
             var result = await handler.HandleAsync(request);
 
             Assert.Equal(0, result.ThisMovementQuantity);
