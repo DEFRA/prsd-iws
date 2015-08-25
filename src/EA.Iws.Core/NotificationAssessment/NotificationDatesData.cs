@@ -15,5 +15,7 @@
         public string NameOfOfficer { get; set; }
 
         public DateTime? CompletedDate { get; set; }
+
+        public DateTime? TransmittedDate { get; set; }
     }
 }

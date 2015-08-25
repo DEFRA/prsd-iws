@@ -48,6 +48,7 @@
     <Compile Include="Admin\NotificationAssessment\GetDates.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDate.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUser.cs" />

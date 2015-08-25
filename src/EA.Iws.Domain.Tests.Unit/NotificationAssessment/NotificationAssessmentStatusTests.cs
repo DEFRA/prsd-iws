@@ -19,6 +19,7 @@
         private DateTime commencementDate = new DateTime(2015, 8, 10);
         private string nameOfOfficer = "officer";
         private DateTime completedDate = new DateTime(2015, 8, 20);
+        private DateTime transmittedDate = new DateTime(2015, 8, 22);
 
         public NotificationAssessmentStatusTests()
         {
@@ -28,15 +29,9 @@
             A.CallTo(() => progressService.IsComplete(notificationId)).Returns(true);
         }
 
-        private void SetNotificationStatusToSubmitted()
+        private void SetNotificationStatus(NotificationStatus status)
         {
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.Submitted,
-                notificationAssessment);
-        }
-
-        private void SetNotificationStatusToInAssessment()
-        {
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.InAssessment,
+            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, status,
                 notificationAssessment);
         }
 
@@ -98,9 +93,9 @@
         [Fact]
         public void SetNotificationReceivedSetsDate()
         {
-            SetNotificationStatusToSubmitted();
+            SetNotificationStatus(NotificationStatus.Submitted);
 
-            notificationAssessment.SetNotificationReceived(receivedDate);
+            notificationAssessment.NotificationReceived(receivedDate);
 
             Assert.Equal(receivedDate, notificationAssessment.Dates.NotificationReceivedDate);
         }
@@ -108,9 +103,9 @@
         [Fact]
         public void SetNotificationReceivedChangesStatusToNotificationReceived()
         {
-            SetNotificationStatusToSubmitted();
+            SetNotificationStatus(NotificationStatus.Submitted);
 
-            notificationAssessment.SetNotificationReceived(receivedDate);
+            notificationAssessment.NotificationReceived(receivedDate);
 
             Assert.Equal(NotificationStatus.NotificationReceived, notificationAssessment.Status);
         }
@@ -118,7 +113,7 @@
         [Fact]
         public void CantSetNotificationReceivedWhenNotSubmitted()
         {
-            Action setNotificationReceived = () => notificationAssessment.SetNotificationReceived(receivedDate);
+            Action setNotificationReceived = () => notificationAssessment.NotificationReceived(receivedDate);
 
             Assert.Throws<InvalidOperationException>(setNotificationReceived);
         }
@@ -126,9 +121,9 @@
         [Fact]
         public void SetNotificationReceivedRaisesStatusChangeEvent()
         {
-            SetNotificationStatusToSubmitted();
+            SetNotificationStatus(NotificationStatus.Submitted);
 
-            notificationAssessment.SetNotificationReceived(receivedDate);
+            notificationAssessment.NotificationReceived(receivedDate);
 
             Assert.Equal(notificationAssessment,
                 notificationAssessment.Events.OfType<NotificationStatusChangeEvent>()
@@ -140,7 +135,7 @@
         public void CanSetPaymentReceivedDateWhenReceived()
         {
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
-            notificationAssessment.SetPaymentReceived(paymentDate);
+            notificationAssessment.PaymentReceived(paymentDate);
 
             Assert.Equal(paymentDate, notificationAssessment.Dates.PaymentReceivedDate);
         }
@@ -148,7 +143,7 @@
         [Fact]
         public void CantSetPaymentReceivedWhenNotificationNotReceived()
         {
-            Action setPayment = () => notificationAssessment.SetPaymentReceived(paymentDate);
+            Action setPayment = () => notificationAssessment.PaymentReceived(paymentDate);
 
             Assert.Throws<InvalidOperationException>(setPayment);
         }
@@ -159,7 +154,7 @@
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
 
-            notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+            notificationAssessment.Commenced(commencementDate, nameOfOfficer);
 
             Assert.Equal(commencementDate, notificationAssessment.Dates.CommencementDate);
         }
@@ -170,7 +165,7 @@
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
 
-            notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+            notificationAssessment.Commenced(commencementDate, nameOfOfficer);
 
             Assert.Equal(nameOfOfficer, notificationAssessment.Dates.NameOfOfficer);
         }
@@ -180,7 +175,7 @@
         {
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
 
-            Action setCommencementDate = () => notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+            Action setCommencementDate = () => notificationAssessment.Commenced(commencementDate, nameOfOfficer);
 
             Assert.Throws<InvalidOperationException>(setCommencementDate);
         }
@@ -191,7 +186,7 @@
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
 
-            notificationAssessment.SetCommencementDate(commencementDate, nameOfOfficer);
+            notificationAssessment.Commenced(commencementDate, nameOfOfficer);
 
             Assert.Equal(NotificationStatus.InAssessment, notificationAssessment.Status);
         }
@@ -202,7 +197,7 @@
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
 
-            Action setCommencementDate = () => notificationAssessment.SetCommencementDate(commencementDate, null);
+            Action setCommencementDate = () => notificationAssessment.Commenced(commencementDate, null);
 
             Assert.Throws<ArgumentNullException>("nameOfOfficer", setCommencementDate);
         }
@@ -213,7 +208,7 @@
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
 
-            Action setCommencementDate = () => notificationAssessment.SetCommencementDate(commencementDate, string.Empty);
+            Action setCommencementDate = () => notificationAssessment.Commenced(commencementDate, string.Empty);
 
             Assert.Throws<ArgumentException>("nameOfOfficer", setCommencementDate);
         }
@@ -221,9 +216,9 @@
         [Fact]
         public void SetNotificationCompletedSetsDate()
         {
-            SetNotificationStatusToInAssessment();
+            SetNotificationStatus(NotificationStatus.InAssessment);
 
-            notificationAssessment.SetNotificationCompleted(completedDate);
+            notificationAssessment.Complete(completedDate);
 
             Assert.Equal(completedDate, notificationAssessment.Dates.CompleteDate);
         }
@@ -231,9 +226,9 @@
         [Fact]
         public void SetNotificationReceivedChangesStatusToReadyToTransmit()
         {
-            SetNotificationStatusToInAssessment();
+            SetNotificationStatus(NotificationStatus.InAssessment);
 
-            notificationAssessment.SetNotificationCompleted(completedDate);
+            notificationAssessment.Complete(completedDate);
 
             Assert.Equal(NotificationStatus.ReadyToTransmit, notificationAssessment.Status);
         }
@@ -241,9 +236,37 @@
         [Fact]
         public void CantSetNotificationCompleteWhenNotInAssessment()
         {
-            Action setNotificationComplete = () => notificationAssessment.SetNotificationCompleted(completedDate);
+            Action setNotificationComplete = () => notificationAssessment.Complete(completedDate);
 
             Assert.Throws<InvalidOperationException>(setNotificationComplete);
+        }
+
+        [Fact]
+        public void SetNotificationTransmittedSetsDate()
+        {
+            SetNotificationStatus(NotificationStatus.ReadyToTransmit);
+
+            notificationAssessment.Transmit(transmittedDate);
+
+            Assert.Equal(transmittedDate, notificationAssessment.Dates.TransmittedDate);
+        }
+
+        [Fact]
+        public void SetNotificationTransmittedChangesStatusToTransmitted()
+        {
+            SetNotificationStatus(NotificationStatus.ReadyToTransmit);
+
+            notificationAssessment.Transmit(transmittedDate);
+
+            Assert.Equal(NotificationStatus.Transmitted, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantSetNotificationTransmittedWhenNotReadyToTransmit()
+        {
+            Action setNotificationTransmitted = () => notificationAssessment.Transmit(transmittedDate);
+
+            Assert.Throws<InvalidOperationException>(setNotificationTransmitted);
         }
     }
 }

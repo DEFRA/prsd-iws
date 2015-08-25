@@ -7,8 +7,6 @@
     {
         public Guid NotificationApplicationId { get; set; }
 
-        public DateTime? TransmittedDate { get; set; }
-
         public DateTime? AcknowledgedDate { get; set; }
 
         public DateTime? DecisionDate { get; set; }

@@ -22,7 +22,7 @@
                     context.NotificationAssessments.SingleAsync(
                         p => p.NotificationApplicationId == message.NotificationId);
 
-            assessment.SetCommencementDate(message.CommencementDate, message.NameOfOfficer);
+            assessment.Commenced(message.CommencementDate, message.NameOfOfficer);
 
             await context.SaveChangesAsync();
 

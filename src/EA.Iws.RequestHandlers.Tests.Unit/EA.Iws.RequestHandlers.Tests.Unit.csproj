@@ -72,6 +72,7 @@
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDateHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandlerTests.cs" />

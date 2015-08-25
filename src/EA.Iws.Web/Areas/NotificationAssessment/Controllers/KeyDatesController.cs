@@ -53,11 +53,14 @@
             {
                 await SetNotificationComplete(model);
             }
+            else if (model.Command == DateInputViewModel.NotificationTransmitted)
+            {
+                await SetNotificationTransmitted(model);
+            }
             else
             {
                 var setDates = new SetDates
                 {
-                    TransmittedDate = model.NotificationTransmittedDate.AsDateTime(),
                     AcknowledgedDate = model.NotificationAcknowledgedDate.AsDateTime(),
                     DecisionDate = model.DecisionDate.AsDateTime(),
                     NotificationApplicationId = model.NotificationId
@@ -70,6 +73,17 @@
             }
 
             return RedirectToAction("Index", new { id = model.NotificationId });
+        }
+
+        private async Task SetNotificationTransmitted(DateInputViewModel model)
+        {
+            var setNotificationTransmitted = new SetNotificationTransmittedDate(model.NotificationId,
+                model.NotificationTransmittedDate.AsDateTime().GetValueOrDefault());
+
+            using (var client = apiClient())
+            {
+                await client.SendAsync(User.GetAccessToken(), setNotificationTransmitted);
+            }
         }
 
         private async Task SetNotificationComplete(DateInputViewModel model)

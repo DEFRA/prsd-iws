@@ -6,23 +6,23 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
 
-    internal class SetNotificationCompleteDateHandler : IRequestHandler<SetNotificationCompleteDate, bool>
+    internal class SetNotificationTransmittedDateHandler : IRequestHandler<SetNotificationTransmittedDate, bool>
     {
         private readonly IwsContext context;
 
-        public SetNotificationCompleteDateHandler(IwsContext context)
+        public SetNotificationTransmittedDateHandler(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(SetNotificationCompleteDate message)
+        public async Task<bool> HandleAsync(SetNotificationTransmittedDate message)
         {
             var assessment =
                 await
                     context.NotificationAssessments.SingleAsync(
                         p => p.NotificationApplicationId == message.NotificationId);
 
-            assessment.Complete(message.NotificationCompleteDate);
+            assessment.Transmit(message.NotificationTransmittedDate);
 
             await context.SaveChangesAsync();
 

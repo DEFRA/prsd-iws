@@ -26,7 +26,6 @@
 
             var notificationDates = await context.NotificationAssessments.Where(a => a.NotificationApplicationId == message.NotificationApplicationId).Select(p => p.Dates).SingleAsync();
 
-            notificationDates.TransmittedDate = message.TransmittedDate;
             notificationDates.AcknowledgedDate = message.AcknowledgedDate;
             notificationDates.DecisionDate = message.DecisionDate;
 

@@ -24,6 +24,7 @@
         private readonly DateTime paymentReceivedDate = new DateTime(2015, 8, 2);
         private readonly DateTime commencementDate = new DateTime(2015, 8, 3);
         private readonly DateTime completeDate = new DateTime(2015, 8, 20);
+        private readonly DateTime transmittedDate = new DateTime(2015, 8, 21);
 
         public KeyDatesControllerTests()
         {
@@ -280,6 +281,54 @@
                             p =>
                                 p.NotificationId == model.NotificationId &&
                                 p.NotificationCompleteDate == model.NotificationCompleteDate.AsDateTime().Value)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task NotificationTransmitted_ValidInput_NoValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.NotificationTransmittedDate = new OptionalDateInputViewModel(transmittedDate);
+            model.Command = DateInputViewModel.NotificationTransmitted;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task NotificationTransmitted_InvalidInput_ValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.Command = DateInputViewModel.NotificationTransmitted;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NotificationTransmittedDate"));
+        }
+
+        [Fact]
+        public async Task NotificationTransmitted_ValidInput_CallsClient()
+        {
+            var model = new DateInputViewModel();
+            model.NotificationTransmittedDate = new OptionalDateInputViewModel(transmittedDate);
+            model.Command = DateInputViewModel.NotificationTransmitted;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            A.CallTo(
+                () =>
+                    client.SendAsync(A<string>._,
+                        A<SetNotificationTransmittedDate>.That.Matches(
+                            p =>
+                                p.NotificationId == model.NotificationId &&
+                                p.NotificationTransmittedDate == model.NotificationTransmittedDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

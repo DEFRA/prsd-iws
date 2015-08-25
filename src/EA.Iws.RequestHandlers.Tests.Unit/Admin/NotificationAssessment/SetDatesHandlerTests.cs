@@ -44,21 +44,18 @@
         {
             var acknowledgedDate = new DateTime(2015, 1, 1);
             var decisionDate = new DateTime(2015, 1, 3);
-            var transmittedDate = new DateTime(2015, 1, 5);
 
             var request = new SetDates
             {
                 NotificationApplicationId = notificationId,
                 AcknowledgedDate = acknowledgedDate,
-                DecisionDate = decisionDate,
-                TransmittedDate = transmittedDate
+                DecisionDate = decisionDate
             };
 
             await handler.HandleAsync(request);
 
             Assert.True(notificationDates.AcknowledgedDate == acknowledgedDate
-                        && notificationDates.DecisionDate == decisionDate &&
-                        notificationDates.TransmittedDate == transmittedDate);
+                        && notificationDates.DecisionDate == decisionDate);
         }
     }
 }

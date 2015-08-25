@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.NotificationAssessment
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Domain.NotificationAssessment;
     using RequestHandlers.Admin.NotificationAssessment;
@@ -20,6 +21,7 @@
         private readonly DateTime commencementDate = new DateTime(2015, 8, 10);
         private readonly DateTime completedDate = new DateTime(2015, 8, 20);
         private string nameOfOfficer = "officer";
+        private DateTime transmitDate = new DateTime(2015, 8, 22);
 
         public GetDatesHandlerTests()
         {
@@ -31,6 +33,7 @@
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.CommencementDate, commencementDate, assessment1.Dates);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.NameOfOfficer, nameOfOfficer, assessment1.Dates);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.CompleteDate, completedDate, assessment1.Dates);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.TransmittedDate, transmitDate, assessment1.Dates);
 
             var assessment2 = new NotificationAssessment(notificationId2);
 
@@ -151,6 +154,26 @@
             var result = await handler.HandleAsync(message);
 
             Assert.Null(result.CompletedDate);
+        }
+
+        [Fact]
+        public async Task HasTransmitDate_SetsTransmitDate()
+        {
+            var message = new GetDates(notificationId1);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Equal(transmitDate, result.TransmittedDate);
+        }
+
+        [Fact]
+        public async Task HasNoTransmitDate_TransmitDateIsNull()
+        {
+            var message = new GetDates(notificationId2);
+
+            var result = await handler.HandleAsync(message);
+
+            Assert.Null(result.TransmittedDate);
         }
     }
 }
