@@ -9,6 +9,8 @@
 
     internal class WasteCodesViewModel
     {
+        private const string NotApplicable = "Not applicable";
+
         public string Basel { get; private set; }
         public string Oecd { get; private set; }
         public string Ewc { get; private set; }
@@ -29,15 +31,15 @@
         public WasteCodesViewModel(NotificationApplication notification)
         {
             SetBaselAndOecdCode(notification);
-            Ewc = notification.EwcCodes.Count() != 0 ? MakeStringOfCodes(notification.EwcCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
-            Nce = notification.ExportCode != null ? notification.ExportCode.CustomCode : string.Empty;
-            Nci = notification.ImportCode != null ? notification.ImportCode.CustomCode : string.Empty;
-            Other = notification.OtherCode != null ? notification.OtherCode.CustomCode : string.Empty;
-            Y = notification.YCodes.Count() != 0 ? MakeStringOfCodes(notification.YCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
-            H = notification.HCodes.Count() != 0 ? MakeStringOfCodes(notification.HCodes.OrderBy(c => c.WasteCode.Code)) : string.Empty;
-            UnClass = notification.UnClasses.Count() != 0 ? MakeStringOfCodes(notification.UnClasses.OrderBy(c => c.WasteCode.Code)) : string.Empty;
+            Ewc = notification.EwcCodes.Count() != 0 ? MakeStringOfCodes(notification.EwcCodes.OrderBy(c => c.WasteCode)) : string.Empty;
+            Nce = GetValueOfCustomCode(notification.ExportCode);
+            Nci = GetValueOfCustomCode(notification.ImportCode);
+            Other = GetValueOfCustomCode(notification.OtherCode);
+            Y = notification.YCodes.Count() != 0 ? MakeStringOfCodes(notification.YCodes.OrderBy(c => c.WasteCode)) : string.Empty;
+            H = notification.HCodes.Count() != 0 ? MakeStringOfCodes(notification.HCodes.OrderBy(c => c.WasteCode)) : string.Empty;
+            UnClass = notification.UnClasses.Count() != 0 ? MakeStringOfCodes(notification.UnClasses.OrderBy(c => c.WasteCode)) : string.Empty;
             SetUnNumbersAndShippingNames(notification);
-            Customs = notification.CustomsCode != null ? notification.CustomsCode.CustomCode : string.Empty;
+            Customs = GetValueOfCustomCode(notification.CustomsCode);
             SetIsAnnexNeeded();
         }
 
@@ -129,15 +131,17 @@
 
         private void SetBaselAndOecdCode(NotificationApplication notification)
         {
-            if (notification.BaselOecdCode.WasteCode.CodeType == CodeType.Basel)
+            var value = (notification.BaselOecdCode.IsNotApplicable) ? NotApplicable : notification.BaselOecdCode.WasteCode.Code;
+
+            if (notification.BaselOecdCode.CodeType == CodeType.Basel)
             {
-                Basel = notification.BaselOecdCode.WasteCode.Code;
+                Basel = value;
                 Oecd = string.Empty;
             }
 
-            if (notification.BaselOecdCode.WasteCode.CodeType == CodeType.Oecd)
+            if (notification.BaselOecdCode.CodeType == CodeType.Oecd)
             {
-                Oecd = notification.BaselOecdCode.WasteCode.Code;
+                Oecd = value;
                 Basel = string.Empty;
             } 
         }
@@ -148,7 +152,12 @@
             var descriptionsString = string.Empty;
             var combinedString = string.Empty;
 
-            if (notification.UnNumbers != null)
+            if (notification.UnNumbers.Any(c => c.IsNotApplicable))
+            {
+                codesString = NotApplicable;
+            }
+
+            if (notification.UnNumbers != null && !notification.UnNumbers.Any(c => c.IsNotApplicable))
             {
                 var codes = notification.UnNumbers.OrderBy(c => c.WasteCode.Code);
 
@@ -171,10 +180,10 @@
 
             if (codes.Any(c => c.IsNotApplicable))
             {
-                return "Not applicable";
+                return NotApplicable;
             }
 
-            foreach (var c in codes)
+            foreach (var c in codes.OrderBy(c => c.WasteCode.Code))
             {
                 codesString = codesString + c.WasteCode.Code + ", ";
             }
@@ -198,6 +207,26 @@
                            Customs.Length > CustomsLength);
 
             IsAnnexNeeded = result;
+        }
+
+        private string GetValueOfCustomCode(WasteCodeInfo code)
+        {
+            if (code == null)
+            {
+                return string.Empty;
+            }
+
+            if (code.IsNotApplicable)
+            {
+                return NotApplicable;
+            }
+
+            if (string.IsNullOrWhiteSpace(code.CustomCode))
+            {
+                return string.Empty;
+            }
+
+            return code.CustomCode;
         }
 
         private const int BaselLength = 25;
