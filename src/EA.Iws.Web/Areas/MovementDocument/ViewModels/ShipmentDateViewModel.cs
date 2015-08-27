@@ -18,11 +18,11 @@
             StartDate = movementDatesData.FirstDate;
             EndDate = movementDatesData.LastDate;
 
-            if (movementDatesData.ActualDate.Year > 1)
+            if (movementDatesData.ActualDate != null)
             {
-                Day = movementDatesData.ActualDate.Day;
-                Month = movementDatesData.ActualDate.Month;
-                Year = movementDatesData.ActualDate.Year;
+                Day = movementDatesData.ActualDate.Value.Day;
+                Month = movementDatesData.ActualDate.Value.Month;
+                Year = movementDatesData.ActualDate.Value.Year;
             }
         }
 
@@ -44,19 +44,13 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public string StartDateString 
+        public string DateHintText
         {
             get
             {
-                return StartDate.ToString("dd.MM.yyyy");
-            }
-        }
+                var dateString = SystemTime.Now.Day + " " + SystemTime.Now.Month + " " + SystemTime.Now.Year;
 
-        public string EndDateString
-        {
-            get
-            {
-                return EndDate.ToString("dd.MM.yyyy");
+                return "For example, " + dateString;
             }
         }
 
@@ -73,12 +67,7 @@
 
             if (shipmentDate < StartDate || shipmentDate > EndDate)
             {
-                yield return new ValidationResult(string.Format("The date must be between {0} and {1}", StartDateString, EndDateString), new[] { "Day" });
-            }
-
-            if (shipmentDate < SystemTime.Now.Date)
-            {
-                yield return new ValidationResult("The shipment date cannot be in the past", new[] { "Day" });
+                yield return new ValidationResult("The date is not within the given range", new[] { "Day" });
             }
         }
 

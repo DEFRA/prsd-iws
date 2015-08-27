@@ -20,25 +20,14 @@
         }
 
         [Fact]
-        public void DateCannotBeInThePastTest()
-        {
-            var model = GetViewModel(new DateTime(2015, 3, 2));
-
-            var errors = ViewModelValidator.ValidateViewModel(model);
-
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("The shipment date cannot be in the past", errors[0].ErrorMessage);
-        }
-
-        [Fact]
         public void DateCannotBeBeforeFirstDateTest()
         {
             var model = GetViewModel(new DateTime(2015, 1, 1));
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Equal(2, errors.Count);
-            Assert.Equal("The date must be between 01.02.2015 and 01.01.2016", errors[0].ErrorMessage);
+            Assert.Equal(1, errors.Count);
+            Assert.Equal("The date is not within the given range", errors[0].ErrorMessage);
         }
 
         [Fact]
@@ -49,7 +38,15 @@
             var errors = ViewModelValidator.ValidateViewModel(model);
 
             Assert.Equal(1, errors.Count);
-            Assert.Equal("The date must be between 01.02.2015 and 01.01.2016", errors[0].ErrorMessage);
+            Assert.Equal("The date is not within the given range", errors[0].ErrorMessage);
+        }
+
+        [Fact]
+        public void DateHIntTextIsCorrect()
+        {
+            var model = GetViewModel(new DateTime(2017, 1, 1));
+
+            Assert.Equal("For example, 1 5 2015", model.DateHintText);
         }
 
         private ShipmentDateViewModel GetViewModel(DateTime actualDate)

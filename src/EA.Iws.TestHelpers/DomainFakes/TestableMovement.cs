@@ -29,13 +29,13 @@
 
         public new decimal Quantity
         {
-            get { return base.Quantity; }
+            get { return base.Quantity.GetValueOrDefault(); }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Quantity, value, this); }
         }
 
         public new DateTime Date
         {
-            get { return base.Date; }
+            get { return base.Date.GetValueOrDefault(); }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Date, value, this); }
         }
 

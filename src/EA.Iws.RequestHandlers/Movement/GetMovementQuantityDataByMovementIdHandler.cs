@@ -32,7 +32,7 @@
             return new MovementQuantityData
             {
                 TotalNotifiedQuantity = notificationQuantityAndUnits.Quantity,
-                ThisMovementQuantity = movement.Quantity,
+                ThisMovementQuantity = movement.Quantity.GetValueOrDefault(),
                 TotalCurrentlyUsedQuantity = currentlyUsed,
                 Units = notificationQuantityAndUnits.Units
             };

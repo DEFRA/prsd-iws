@@ -4,7 +4,6 @@
     using Core.Shared;
     using Domain.NotificationApplication;
     using Helpers;
-    using Prsd.Core;
 
     public class TestableShipmentInfo : ShipmentInfo
     {

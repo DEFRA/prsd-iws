@@ -16,17 +16,18 @@
         {
             NotificationApplicationId = notificationApplication.Id;
             Number = movementNumber;
+            NotificationApplication = notificationApplication;
         }
 
         public int Number { get; private set; }
 
         public virtual NotificationApplication NotificationApplication { get; private set; }
 
-        public DateTime Date { get; private set; }
+        public DateTime? Date { get; private set; }
 
         public Guid NotificationApplicationId { get; private set; }
 
-        public decimal Quantity { get; private set; }
+        public decimal? Quantity { get; private set; }
 
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
 
