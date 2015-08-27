@@ -31,13 +31,13 @@
         public WasteCodesViewModel(NotificationApplication notification)
         {
             SetBaselAndOecdCode(notification);
-            Ewc = notification.EwcCodes.Count() != 0 ? MakeStringOfCodes(notification.EwcCodes.OrderBy(c => c.WasteCode)) : string.Empty;
+            Ewc = notification.EwcCodes.Count() != 0 ? MakeStringOfCodes(notification.EwcCodes) : string.Empty;
             Nce = GetValueOfCustomCode(notification.ExportCode);
             Nci = GetValueOfCustomCode(notification.ImportCode);
             Other = GetValueOfCustomCode(notification.OtherCode);
-            Y = notification.YCodes.Count() != 0 ? MakeStringOfCodes(notification.YCodes.OrderBy(c => c.WasteCode)) : string.Empty;
-            H = notification.HCodes.Count() != 0 ? MakeStringOfCodes(notification.HCodes.OrderBy(c => c.WasteCode)) : string.Empty;
-            UnClass = notification.UnClasses.Count() != 0 ? MakeStringOfCodes(notification.UnClasses.OrderBy(c => c.WasteCode)) : string.Empty;
+            Y = notification.YCodes.Count() != 0 ? MakeStringOfCodes(notification.YCodes) : string.Empty;
+            H = notification.HCodes.Count() != 0 ? MakeStringOfCodes(notification.HCodes) : string.Empty;
+            UnClass = notification.UnClasses.Count() != 0 ? MakeStringOfCodes(notification.UnClasses) : string.Empty;
             SetUnNumbersAndShippingNames(notification);
             Customs = GetValueOfCustomCode(notification.CustomsCode);
             SetIsAnnexNeeded();
