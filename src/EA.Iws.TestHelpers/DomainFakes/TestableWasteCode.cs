@@ -24,6 +24,12 @@
             set { base.Code = value; }
         }
 
+        public new string Description
+        {
+            get { return base.Description; }
+            set { base.Description = value; }
+        }
+
         public TestableWasteCode()
         {
         }

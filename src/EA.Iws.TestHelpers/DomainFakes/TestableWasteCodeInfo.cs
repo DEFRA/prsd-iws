@@ -39,5 +39,31 @@
             this.WasteCode = wasteCode;
             this.CustomCode = customCode;
         }
+
+        public static TestableWasteCodeInfo Create(CodeType codeType,
+            string code = null,
+            string description = null,
+            bool isNotApplicable = false)
+        {
+            if (isNotApplicable)
+            {
+                return new TestableWasteCodeInfo
+                {
+                    CodeType = codeType,
+                    IsNotApplicable = true
+                };
+            }
+
+            return new TestableWasteCodeInfo
+            {
+                CodeType = codeType,
+                WasteCode = new TestableWasteCode
+                {
+                    CodeType = codeType,
+                    Code = code,
+                    Description = description
+                }
+            };
+        }
     }
 }

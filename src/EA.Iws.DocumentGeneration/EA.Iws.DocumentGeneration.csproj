@@ -54,6 +54,7 @@
     <Compile Include="DocumentGenerator\FinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\NotificationDocumentGenerator.cs" />
     <Compile Include="DocumentHelper.cs" />
+    <Compile Include="Formatters\WasteCodeInfoFormatter.cs" />
     <Compile Include="Mapper\MergeFieldDataMapper.cs" />
     <Compile Include="MergeField.cs" />
     <Compile Include="MergeFieldLocator.cs" />

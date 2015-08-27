@@ -6,6 +6,7 @@
     using System.Reflection;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain.NotificationApplication;
+    using Formatters;
     using Mapper;
     using ViewModels;
 
@@ -18,7 +19,7 @@
         public WasteCodesBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new WasteCodesViewModel(notification);
+            data = new WasteCodesViewModel(notification, new WasteCodeInfoFormatter());
 
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }
