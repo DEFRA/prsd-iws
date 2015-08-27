@@ -70,6 +70,7 @@
     <Compile Include="NotificationBlocks\ProducerBlock.cs" />
     <Compile Include="NotificationBlocks\ExporterBlock.cs" />
     <Compile Include="NotificationBlocks\GeneralBlock.cs" />
+    <Compile Include="NotificationBlocks\RecoveryInfoBlock.cs" />
     <Compile Include="NotificationBlocks\SpecialHandlingBlock.cs" />
     <Compile Include="NotificationBlocks\TransitStatesBlock.cs" />
     <Compile Include="NotificationBlocks\TransportBlock.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="ViewModels\ExporterViewModel.cs" />
     <Compile Include="NotificationBlocks\INotificationBlock.cs" />
     <Compile Include="ViewModels\PropertyHelper.cs" />
+    <Compile Include="ViewModels\RecoveryInfoViewModel.cs" />
     <Compile Include="ViewModels\SpecialHandlingViewModel.cs" />
     <Compile Include="ViewModels\TransitStateDetail.cs" />
     <Compile Include="ViewModels\TransitStateViewModel.cs" />
