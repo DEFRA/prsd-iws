@@ -2,23 +2,42 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Domain.Movement;
     using RequestHandlers.Movement;
     using Requests.Movement;
+    using TestHelpers.DomainFakes;
     using Xunit;
 
     public class CreateMovementForNotificationByIdHandlerTests
     {
         private readonly CreateMovementForNotificationByIdHandler handler;
-        private readonly TestService service;
         private static readonly Guid notificationId = new Guid("4F2C1FC0-44F6-478A-BEBC-33DFEE22D977");
         private readonly TestIwsContext testContext;
+        private readonly TestableShipmentInfo shipmentInfo;
 
         public CreateMovementForNotificationByIdHandlerTests()
         {
             testContext = new TestIwsContext();
-            service = new TestService();
 
-            handler = new CreateMovementForNotificationByIdHandler(testContext, service);
+            shipmentInfo = new TestableShipmentInfo
+            {
+                NumberOfShipments = 1
+            };
+
+            testContext.NotificationApplications.Add(new TestableNotificationApplication
+            {
+                Id = notificationId,
+                ShipmentInfo = shipmentInfo
+            });
+
+            testContext.NotificationAssessments.Add(new TestableNotificationAssessment
+            {
+                NotificationApplicationId = notificationId
+            });
+
+            var factory = new MovementFactory();
+
+            handler = new CreateMovementForNotificationByIdHandler(testContext, factory);
         }
 
         [Fact]
@@ -31,8 +50,6 @@
         [Fact]
         public async Task NotificationExistsAddsMovement()
         {
-            service.CanCreate = true;
-
             var result = await handler.HandleAsync(new CreateMovementForNotificationById(notificationId));
 
             Assert.Single(testContext.Movements, m => m.NotificationApplicationId == notificationId);
@@ -41,8 +58,6 @@
         [Fact]
         public async Task SaveChangesIsCalled()
         {
-            service.CanCreate = true;
-
             var result = await handler.HandleAsync(new CreateMovementForNotificationById(notificationId));
 
             Assert.Equal(1, testContext.SaveChangesCount);
@@ -51,7 +66,12 @@
         [Fact]
         public async Task CannotCreateThrows()
         {
-            service.CanCreate = false;
+            shipmentInfo.NumberOfShipments = 1;
+
+            testContext.Movements.Add(new TestableMovement
+            {
+                NotificationApplicationId = notificationId
+            });
 
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => handler.HandleAsync(new CreateMovementForNotificationById(notificationId)));

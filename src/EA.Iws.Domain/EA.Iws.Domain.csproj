@@ -67,6 +67,8 @@
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
+    <Compile Include="Movement\IMovementFactory.cs" />
+    <Compile Include="Movement\MovementFactory.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />

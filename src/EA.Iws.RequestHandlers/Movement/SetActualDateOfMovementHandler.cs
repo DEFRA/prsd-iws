@@ -23,7 +23,7 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == command.MovementId);
 
-            movement.UpdateDate(movement.NotificationApplicationId, movementService, command.Date);
+            movement.UpdateDate(command.Date);
 
             await context.SaveChangesAsync();
 

@@ -3,6 +3,7 @@
     using Autofac;
     using Copy;
     using Domain;
+    using Domain.Movement;
     using Domain.NotificationApplication;
     using Movement;
     using Notification;
@@ -42,6 +43,7 @@
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<NotificationMovementService>().As<INotificationMovementService>();
+            builder.RegisterType<MovementFactory>().As<IMovementFactory>();
         }
     }
 }
