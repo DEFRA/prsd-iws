@@ -21,11 +21,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid movementId)
         {
             using (var client = apiClient())
             {
-                var movementDateInfo = await client.SendAsync(User.GetAccessToken(), new GetShipmentDateDataByMovementId(id));
+                var movementDateInfo = await client.SendAsync(User.GetAccessToken(), new GetShipmentDateDataByMovementId(movementId));
 
                 var model = new ShipmentDateViewModel(movementDateInfo);
 
@@ -48,7 +48,7 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
-                    return RedirectToAction("Index", "ShipmentDate", new { id = model.MovementId });
+                    return RedirectToAction("Index", "PackagingTypes", new { movementId = model.MovementId });
                 }
                 catch (ApiBadRequestException ex)
                 {

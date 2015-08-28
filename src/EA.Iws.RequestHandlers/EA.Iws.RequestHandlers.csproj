@@ -98,6 +98,7 @@
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
+    <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\GetPackagingDataValidForMovementHandler.cs" />
     <Compile Include="Movement\GetShipmentDataByIdHandler.cs" />

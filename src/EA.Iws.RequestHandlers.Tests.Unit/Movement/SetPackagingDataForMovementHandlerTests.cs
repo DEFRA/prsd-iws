@@ -22,7 +22,6 @@
         private readonly SetPackagingDataForMovementHandler handler;
         private readonly TestableNotificationApplication notificationApplication;
         private readonly TestableMovement movement;
-        private readonly SetPackagingDataForMovement request;
 
         public SetPackagingDataForMovementHandlerTests()
         {

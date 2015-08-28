@@ -24,15 +24,15 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid movementId)
         {
             using (var client = apiClient())
             {
                 var availablePackagingInfo = await client.SendAsync(User.GetAccessToken(),
-                    new GetPackagingDataValidForMovement(id));
+                    new GetPackagingDataValidForMovement(movementId));
 
                 var selectedPackagingInfo = await client.SendAsync(User.GetAccessToken(),
-                    new GetPackagingDataForMovement(id));
+                    new GetPackagingDataForMovement(movementId));
 
                 var checkBoxCollection = new CheckBoxCollectionViewModel();
                 
@@ -65,7 +65,7 @@
                 var model = new PackagingTypesViewModel()
                 {
                     PackagingTypes = checkBoxCollection,
-                    MovementId = id
+                    MovementId = movementId
                 };
 
                 return View(model);
@@ -90,9 +90,15 @@
                                                     .Select(p => (PackagingType)Convert.ToInt32(p.Value))
                                                     .ToList();
 
+                    if (!selectedPackagingTypes.Any())
+                    {
+                        ModelState.AddModelError(string.Empty, "Please select at least one option");
+                        return View(model);
+                    }
+
                     await client.SendAsync(User.GetAccessToken(), new SetPackagingDataForMovement(model.MovementId, selectedPackagingTypes));
 
-                    return RedirectToAction("Index", "ShipmentDate", new { id = model.MovementId });
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (ApiBadRequestException ex)
                 {

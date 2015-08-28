@@ -3,7 +3,6 @@
     using System;
     using NotificationApplication;
     using System.Collections.Generic;
-    using Domain.NotificationApplication;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
 
@@ -21,13 +20,11 @@
 
         public int Number { get; private set; }
 
-        public NotificationApplication NotificationApplication { get; private set; }
+        public virtual NotificationApplication NotificationApplication { get; private set; }
 
         public DateTime Date { get; private set; }
 
         public Guid NotificationApplicationId { get; private set; }
-
-        public virtual NotificationApplication NotificationApplication { get; private set; }
 
         public decimal Quantity { get; private set; }
 

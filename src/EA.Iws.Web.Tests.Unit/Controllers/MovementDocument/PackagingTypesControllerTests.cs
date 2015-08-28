@@ -141,19 +141,7 @@
         [Fact]
         public async Task Index_Post_SendsRequestWithCorrectData()
         {
-            var selectedPackagingTypes = new[] 
-            { 
-                new SelectListItem{ Text = "Bag", Value = "5" }, 
-                new SelectListItem{ Text = "Box", Value = "4" }
-            };
-            var packagingTypes = new CheckBoxCollectionViewModel();
-            packagingTypes.PossibleValues = selectedPackagingTypes;
-            packagingTypes.SetSelectedValues(new[] { 4, 5 });
-            var model = new PackagingTypesViewModel
-            {
-                MovementId = movementId,
-                PackagingTypes = packagingTypes
-            };
+            var model = CreateValidPackingTypesViewModel(withValuesSelected: true);
 
             await controller.Index(model);
 
@@ -164,6 +152,50 @@
                     && r.PackagingTypes.Contains(PackagingType.Box)
                     && r.PackagingTypes.Count == 2)))
                 .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task Index_Post_RedirectsToMovementList()
+        {
+            var model = CreateValidPackingTypesViewModel(withValuesSelected: true);
+
+            var result = await controller.Index(model);
+
+            Assert.IsAssignableFrom(typeof(RedirectToRouteResult), result);
+            RouteAssert.RoutesTo(((RedirectToRouteResult)result).RouteValues, "Index", "Home");
+        }
+
+        [Fact]
+        public async Task Index_Post_DoesNotAllowEmptySubmission()
+        {
+            var model = CreateValidPackingTypesViewModel(withValuesSelected: false);
+
+            await controller.Index(model);
+
+            Assert.False(controller.ModelState.IsValid);
+        }
+
+        private PackagingTypesViewModel CreateValidPackingTypesViewModel(bool withValuesSelected)
+        {
+            var selectedPackagingTypes = new[] 
+            { 
+                new SelectListItem{ Text = "Bag", Value = "5" }, 
+                new SelectListItem{ Text = "Box", Value = "4" }
+            };
+
+            var packagingTypes = new CheckBoxCollectionViewModel();
+            packagingTypes.PossibleValues = selectedPackagingTypes;
+
+            if (withValuesSelected)
+            {
+                packagingTypes.SetSelectedValues(new[] { 4, 5 });
+            }
+
+            return new PackagingTypesViewModel
+            {
+                MovementId = movementId,
+                PackagingTypes = packagingTypes
+            };
         }
 
         private void SetUpPackagingData(IList<PackagingType> availablePackagingTypes, IList<PackagingType> selectedPackagingTypes, string otherDescription = null)

@@ -64,13 +64,13 @@
         }
 
         [Fact]
-        public async Task UserSelects_GeneratePrenotification_RedirectsTo_Actual_Shipment_Date()
+        public async Task UserSelects_GeneratePrenotification_RedirectsTo_MovementsIndex()
         {
             var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.GeneratePrenotification)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("Home", result.RouteValues["controller"]);
-            Assert.Equal(notificationId, result.RouteValues["id"]);
+            Assert.Equal(notificationId, result.RouteValues["notificationId"]);
         }
 
         [Fact]

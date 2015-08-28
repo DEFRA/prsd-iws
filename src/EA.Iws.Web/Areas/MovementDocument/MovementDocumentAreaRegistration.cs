@@ -18,8 +18,8 @@
         {
             context.MapLowercaseDashedRoute(
                 name: "MovementDocument_default",
-                url: "Movement-Document/{id}/{controller}/{action}/{entityId}",
-                defaults: new { action = "Index", controller = "Home", entityId = UrlParameter.Optional },
+                url: "Movement-Document/{notificationId}/{controller}/{action}/{movementId}/{entityId}",
+                defaults: new { action = "Index", controller = "Home", movementId = UrlParameter.Optional, entityId = UrlParameter.Optional },
                 namespaces: new[] { typeof(HomeController).Namespace });
         }
     }

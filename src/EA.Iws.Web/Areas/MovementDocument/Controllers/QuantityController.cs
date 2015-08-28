@@ -18,11 +18,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ActionResult(Guid id)
+        public async Task<ActionResult> ActionResult(Guid movementId)
         {
             using (var client = apiClient())
             {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetMovementQuantityDataByMovementId(id));
+                var result = await client.SendAsync(User.GetAccessToken(), new GetMovementQuantityDataByMovementId(movementId));
 
                 throw new NotImplementedException();
             }

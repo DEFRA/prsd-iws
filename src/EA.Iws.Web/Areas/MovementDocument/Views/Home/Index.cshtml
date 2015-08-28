@@ -1,14 +1,26 @@
-﻿@{
+﻿@model EA.Iws.Web.Areas.MovementDocument.ViewModels.MovementDocumentsViewModel
+
+@{
     ViewBag.Title = "Index";
 }
 
 <h2 class="heading-large">Pre Notifications</h2>
 
+<table style="margin-bottom: 30px">
+    @foreach (var item in Model.Movements)
+    {
+        <tr>
+            <td>Movement @item.Key</td>
+            <td>@Html.ActionLink("Edit", "Index", "ShipmentDate", new { movementId = item.Value }, new {  })</td>
+        </tr>
+    }
+</table>
+
 @using (Html.BeginForm("Create", "Home"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-group">
-        <button class="button" type="submit">Create new pre notification</button>
+        <p><button class="button" type="submit">Create new pre notification</button></p>
     </div>
 }
