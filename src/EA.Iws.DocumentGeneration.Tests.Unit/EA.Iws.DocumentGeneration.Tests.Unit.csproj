@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Formatters\WasteCodeInfoFormatterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\RecoveryInfoViewModelTests.cs" />
     <Compile Include="ViewModels\TransitStateViewModelTests.cs" />
     <Compile Include="ViewModels\WasteCodesViewModelTests.cs" />
   </ItemGroup>

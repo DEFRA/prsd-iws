@@ -44,6 +44,24 @@
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ShipmentInfo, value, this); }
         }
 
+        public new RecoveryInfo RecoveryInfo
+        {
+            get { return base.RecoveryInfo; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.RecoveryInfo, value, this); }
+        }
+
+        public new decimal? PercentageRecoverable
+        {
+            get { return base.PercentageRecoverable; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.PercentageRecoverable, value, this); }
+        }
+
+        public new string MethodOfDisposal
+        {
+            get { return base.MethodOfDisposal; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.MethodOfDisposal, value, this); }
+        }
+
         public TestableNotificationApplication()
         {
         }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.NotificationApplication;
+    using Formatters;
     using Mapper;
     using ViewModels;
 
@@ -25,7 +26,7 @@
 
             HasAnnex = true;
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new RecoveryInfoViewModel(notification.RecoveryInfo, notification);
+            data = new RecoveryInfoViewModel(notification, new RecoveryInfoFormatter());
         }
 
         public string TypeName

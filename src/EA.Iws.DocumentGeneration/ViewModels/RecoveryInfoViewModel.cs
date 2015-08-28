@@ -1,36 +1,80 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using Domain.NotificationApplication;
+    using Formatters;
 
     internal class RecoveryInfoViewModel
     {
-        public RecoveryInfoViewModel(RecoveryInfo recoveryInfo, NotificationApplication notification)
+        private string methodOfDisposal = string.Empty;
+        public string MethodOfDisposal
         {
-            MethodOfDisposal = notification.MethodOfDisposal;
-            PercentageRecoverable = string.Format("{0} %", notification.PercentageRecoverable.GetValueOrDefault());
-            EstimatedAmountText = string.Format("£ {0} / {1}", recoveryInfo.EstimatedAmount, recoveryInfo.EstimatedUnit);
-            CostAmountText = string.Format("£ {0} / {1}", recoveryInfo.CostAmount, recoveryInfo.CostUnit);
-            DisposalAmountText = recoveryInfo.DisposalAmount.HasValue ?
-                             string.Format("£ {0} / {1}", recoveryInfo.DisposalAmount, recoveryInfo.DisposalUnit) :
-                             string.Empty;
-            AnnexMessage = string.Empty;
+            get { return methodOfDisposal; }
+        }
+
+        private string percentageRecoverable = string.Empty;
+        public string PercentageRecoverable
+        {
+            get { return percentageRecoverable; }
+        }
+
+        private string estimatedAmountText = string.Empty;
+        public string EstimatedAmountText
+        {
+            get { return estimatedAmountText; }
+        }
+
+        private string costAmountText = string.Empty;
+        public string CostAmountText
+        {
+            get { return costAmountText; }
+        }
+
+        private string disposalAmountText = string.Empty;
+        public string DisposalAmountText
+        {
+            get { return disposalAmountText; }
+        }
+
+        private string annexMessage = string.Empty;
+        public string AnnexMessage
+        {
+            get { return annexMessage; }
+        }
+
+        public RecoveryInfoViewModel(NotificationApplication notification, RecoveryInfoFormatter recoveryInfoFormatter)
+        {
+            if (notification == null)
+            {
+                return;
+            }
+
+            methodOfDisposal = notification.MethodOfDisposal ?? string.Empty;
+
+            percentageRecoverable = recoveryInfoFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);
+
+            estimatedAmountText = recoveryInfoFormatter.CostAmountWithUnits(notification.RecoveryInfo, 
+                ri => ri.EstimatedAmount, 
+                ri => ri.EstimatedUnit);
+
+            costAmountText = recoveryInfoFormatter.CostAmountWithUnits(notification.RecoveryInfo,
+                ri => ri.CostAmount,
+                ri => ri.CostUnit);
+
+            disposalAmountText = recoveryInfoFormatter.CostAmountWithUnits(notification.RecoveryInfo,
+                ri => ri.DisposalAmount,
+                ri => ri.DisposalUnit);
+
+            annexMessage = string.Empty;
         }
 
         public RecoveryInfoViewModel(RecoveryInfoViewModel model, int annexNumber)
         {
-            MethodOfDisposal = model.MethodOfDisposal;
-            PercentageRecoverable = model.PercentageRecoverable;
-            EstimatedAmountText = model.EstimatedAmountText;
-            CostAmountText = model.CostAmountText;
-            DisposalAmountText = model.DisposalAmountText;
-            AnnexMessage = "See Annex " + annexNumber;
+            methodOfDisposal = model.MethodOfDisposal;
+            percentageRecoverable = model.PercentageRecoverable;
+            estimatedAmountText = model.EstimatedAmountText;
+            costAmountText = model.CostAmountText;
+            disposalAmountText = model.DisposalAmountText;
+            annexMessage = "See Annex " + annexNumber;
         }
-
-        public string MethodOfDisposal { get; private set; }
-        public string PercentageRecoverable { get; private set; }
-        public string EstimatedAmountText { get; private set; }
-        public string CostAmountText { get; private set; }
-        public string DisposalAmountText { get; private set; }
-        public string AnnexMessage { get; private set; }
     }
 }
