@@ -36,7 +36,7 @@
         {
             using (var client = apiClient())
             {
-                var model = new MovementDocumentsViewModel()
+                var model = new MovementsViewModel()
                 {
                     Movements = await client.SendAsync(User.GetAccessToken(), new GetMovementsForNotificationById(notificationId))
                 };

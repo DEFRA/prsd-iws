@@ -672,7 +672,7 @@
     <Compile Include="Areas\MovementDocument\Controllers\QuantityController.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\PackagingTypesController.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\ShipmentDateController.cs" />
-    <Compile Include="Areas\MovementDocument\ViewModels\MovementDocumentsViewModel.cs" />
+    <Compile Include="Areas\MovementDocument\ViewModels\MovementsViewModel.cs" />
     <Compile Include="Areas\MovementDocument\ViewModels\PackagingTypesViewModel.cs" />
     <Compile Include="Areas\MovementDocument\ViewModels\ShipmentDateViewModel.cs" />
     <Compile Include="Areas\MovementDocument\MovementDocumentAreaRegistration.cs" />

@@ -35,8 +35,8 @@
 
             var result = await controller.Index(notificationId) as ViewResult;
 
-            Assert.IsAssignableFrom(typeof(MovementDocumentsViewModel), result.Model);
-            Assert.True(((MovementDocumentsViewModel)result.Model).Movements.Any());
+            Assert.IsAssignableFrom(typeof(MovementsViewModel), result.Model);
+            Assert.True(((MovementsViewModel)result.Model).Movements.Any());
         }
 
         [Fact]

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class MovementDocumentsViewModel
+    public class MovementsViewModel
     {
         public Dictionary<int, Guid> Movements { get; set; }
     }
