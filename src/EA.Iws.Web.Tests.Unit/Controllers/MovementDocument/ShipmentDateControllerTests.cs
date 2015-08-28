@@ -30,14 +30,14 @@
         }
 
         [Fact]
-        public async Task Create_RedirectsToPackagingTypes()
+        public async Task Create_RedirectsToQuantity()
         {
             var viewModel = new ShipmentDateViewModel();
 
             var result = await controller.Index(viewModel) as RedirectToRouteResult;
 
             Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("PackagingTypes", result.RouteValues["controller"]);
+            Assert.Equal("Quantity", result.RouteValues["controller"]);
         }
 
         [Fact]

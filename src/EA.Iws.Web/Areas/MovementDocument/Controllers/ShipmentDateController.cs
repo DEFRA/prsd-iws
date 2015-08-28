@@ -48,7 +48,7 @@
                 {
                     await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
-                    return RedirectToAction("Index", "PackagingTypes", new { movementId = model.MovementId });
+                    return RedirectToAction("Index", "Quantity", new { movementId = model.MovementId });
                 }
                 catch (ApiBadRequestException ex)
                 {

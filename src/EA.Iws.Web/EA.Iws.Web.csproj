@@ -545,6 +545,7 @@
     <Content Include="Areas\MovementDocument\Views\Home\Index.cshtml" />
     <Content Include="Areas\MovementDocument\Views\PackagingTypes\Index.cshtml" />
     <Content Include="Areas\MovementDocument\Views\Quantity\Index.cshtml" />
+    <Content Include="Areas\MovementDocument\Views\NumberOfPackages\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -670,10 +671,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\HomeController.cs" />
+    <Compile Include="Areas\MovementDocument\Controllers\NumberOfPackagesController.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\QuantityController.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\PackagingTypesController.cs" />
     <Compile Include="Areas\MovementDocument\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\MovementDocument\ViewModels\MovementsViewModel.cs" />
+    <Compile Include="Areas\MovementDocument\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />
     <Compile Include="Areas\MovementDocument\ViewModels\Quantity\QuantityViewModel.cs" />
     <Compile Include="Areas\MovementDocument\ViewModels\PackagingTypesViewModel.cs" />
     <Compile Include="Areas\MovementDocument\ViewModels\ShipmentDateViewModel.cs" />

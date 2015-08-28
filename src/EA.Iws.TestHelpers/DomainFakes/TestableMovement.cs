@@ -44,5 +44,11 @@
             get { return base.PackagingInfos; }
             set { PackagingInfosCollection = value.ToList(); }
         }
+
+        public new int? NumberOfPackages
+        {
+            get { return base.NumberOfPackages; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.NumberOfPackages, value, this); }
+        }
     }
 }

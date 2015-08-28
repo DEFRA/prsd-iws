@@ -30,6 +30,8 @@
         public Guid NotificationApplicationId { get; private set; }
 
         public decimal? Quantity { get; private set; }
+        
+        public int? NumberOfPackages { get; private set; }
 
         public ShipmentQuantityUnits? Units { get; private set; }
 
@@ -78,6 +80,13 @@
             {
                 PackagingInfosCollection.Add(packagingInfo);
             }
+        }
+
+        public void SetNumberOfPackages(int number)
+        {
+            Guard.ArgumentNotZeroOrNegative(() => number, number);
+
+            NumberOfPackages = number;
         }
     }
 }

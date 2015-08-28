@@ -74,7 +74,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(PackagingTypesViewModel model)
+        public async Task<ActionResult> Index(Guid movementId, PackagingTypesViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -98,7 +98,7 @@
 
                     await client.SendAsync(User.GetAccessToken(), new SetPackagingDataForMovement(model.MovementId, selectedPackagingTypes));
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "NumberOfPackages", new { movementId });
                 }
                 catch (ApiBadRequestException ex)
                 {

@@ -132,7 +132,7 @@
 
             controller.ModelState.AddModelError("Test", "Error");
 
-            var result = await controller.Index(model);
+            var result = await controller.Index(movementId, model);
 
             Assert.IsAssignableFrom(typeof(ViewResult), result);
             Assert.Equal(string.Empty, ((ViewResult)result).ViewName);
@@ -143,7 +143,7 @@
         {
             var model = CreateValidPackingTypesViewModel(withValuesSelected: true);
 
-            await controller.Index(model);
+            await controller.Index(movementId, model);
 
             A.CallTo(() => client.SendAsync(A<string>.Ignored,
                 A<SetPackagingDataForMovement>.That.Matches(
@@ -155,14 +155,14 @@
         }
 
         [Fact]
-        public async Task Index_Post_RedirectsToMovementList()
+        public async Task Index_Post_RedirectsToNumberOfPackages()
         {
             var model = CreateValidPackingTypesViewModel(withValuesSelected: true);
 
-            var result = await controller.Index(model);
+            var result = await controller.Index(movementId, model);
 
             Assert.IsAssignableFrom(typeof(RedirectToRouteResult), result);
-            RouteAssert.RoutesTo(((RedirectToRouteResult)result).RouteValues, "Index", "Home");
+            RouteAssert.RoutesTo(((RedirectToRouteResult)result).RouteValues, "Index", "NumberOfPackages");
         }
 
         [Fact]
@@ -170,7 +170,7 @@
         {
             var model = CreateValidPackingTypesViewModel(withValuesSelected: false);
 
-            await controller.Index(model);
+            await controller.Index(movementId, model);
 
             Assert.False(controller.ModelState.IsValid);
         }
