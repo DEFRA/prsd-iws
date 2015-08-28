@@ -10,7 +10,7 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
-    public class SetPackagingDataForMovementHandler : IRequestHandler<SetPackagingDataForMovement, Guid>
+    internal class SetPackagingDataForMovementHandler : IRequestHandler<SetPackagingDataForMovement, Guid>
     {
         private readonly IwsContext context;
 

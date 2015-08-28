@@ -8,7 +8,7 @@
     using EA.Prsd.Core.Mediator;
     using Requests.Movement;
 
-    public class GetPackagingDataForMovementHandler : IRequestHandler<GetPackagingDataForMovement, PackagingData>
+    internal class GetPackagingDataForMovementHandler : IRequestHandler<GetPackagingDataForMovement, PackagingData>
     {
         private readonly IwsContext context;
 

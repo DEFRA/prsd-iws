@@ -8,7 +8,7 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
-    public class GetMovementsForNotificationByIdHandler : IRequestHandler<GetMovementsForNotificationById, Dictionary<int, Guid>>
+    internal class GetMovementsForNotificationByIdHandler : IRequestHandler<GetMovementsForNotificationById, Dictionary<int, Guid>>
     {
         private readonly IwsContext context;
 
