@@ -5,11 +5,22 @@
             <a href="/" id="proposition-name">International Waste Shipments</a>
             @if (Request.IsAuthenticated)
             {
-                <ul id="proposition-links">
-                    <li>
-                        @Html.ActionLink(linkText: "My account", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
-                    </li>
-                </ul>
+                if (User.IsInRole("internal"))
+                {
+                    <ul id="proposition-links">
+                        <li>
+                            @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul id="proposition-links">
+                        <li>
+                            @Html.ActionLink(linkText: "My account", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
+                        </li>
+                    </ul>
+                }
             }
         </nav>
     </div>
