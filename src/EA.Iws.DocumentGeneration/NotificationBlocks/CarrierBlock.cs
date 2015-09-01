@@ -50,7 +50,7 @@
             MergeMultipleCarriersTable(properties);
             MergeAnnexNumber(annexNumber);
 
-            TocText = "Annex " + annexNumber + " - Intended Carriers";
+            TocText = "Annex " + annexNumber + " - Intended carriers";
         }
 
         private void MergeCarriersToMainDocument(CarrierViewModel carrier, PropertyInfo[] properties)

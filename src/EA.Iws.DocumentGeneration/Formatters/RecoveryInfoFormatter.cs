@@ -24,7 +24,7 @@
                 return string.Empty;
             }
 
-            return string.Format("£ {0} / {1}", cost(recoveryInfo), units(recoveryInfo));
+            return string.Format("£{0} per {1}", cost(recoveryInfo), units(recoveryInfo));
         }
 
         public string CostAmountWithUnits(RecoveryInfo recoveryInfo, Func<RecoveryInfo, decimal?> cost,
@@ -37,7 +37,7 @@
                 return string.Empty;
             }
 
-            return string.Format("£ {0} / {1}", cost(recoveryInfo).Value, units(recoveryInfo).Value);
+            return string.Format("£{0} per {1}", cost(recoveryInfo).Value, units(recoveryInfo).Value);
         }
     }
 }

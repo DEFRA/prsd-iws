@@ -60,7 +60,7 @@
             }
             else
             {
-                ClearAnnexFields("Constituents");
+                RemoveAnnexTable("Constituents");
             }
 
             if (data.AdditionalInfos.Count > 0)
@@ -69,7 +69,7 @@
             }
             else
             {
-                ClearAnnexFields("Parameters");
+                RemoveAnnexTable("Parameters");
             }
         }
 
@@ -155,13 +155,11 @@
             return tableAncestors.First();
         }
 
-        private void ClearAnnexFields(string type)
+        private void RemoveAnnexTable(string id)
         {
-            var annexFields = AnnexMergeFields.Where(c => c.FieldName.ToString().Contains(type));
-            foreach (var annexMergeField in annexFields)
-            {
-                annexMergeField.RemoveCurrentContents();
-            }
+            var mf = FindFirstMergeFieldInTable(id);
+
+            mf.Run.Ancestors<Table>().First().Remove();
         }
     }
 }

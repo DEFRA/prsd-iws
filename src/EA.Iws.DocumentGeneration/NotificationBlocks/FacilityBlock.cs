@@ -35,7 +35,7 @@
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(FacilityViewModel));
 
-            TocText = "Annex " + annexNumber + " - Disposal or Recovery Facility";
+            TocText = "Annex " + annexNumber + " - Disposal or recovery facility";
 
             if (data.Count == 2)
             {

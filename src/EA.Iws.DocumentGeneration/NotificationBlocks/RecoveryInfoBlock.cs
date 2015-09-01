@@ -57,7 +57,7 @@
 
             MergeAnnexNumber(annexNumber);
 
-            TocText = "Annex " + annexNumber + " - Genuine Recovery Information";
+            TocText = "Annex " + annexNumber + " - Genuine recovery information";
         }
 
         private void MergeOperationToMainDocument(int annexNumber)
