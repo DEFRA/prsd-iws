@@ -86,7 +86,7 @@
                 case CodeType.Oecd:
                     return (source.BaselOecdCode == null) ? null : new[] { Map(source.BaselOecdCode) };
                 case CodeType.ExportCode:
-                    return (source.BaselOecdCode == null) ? null : new[] { Map(source.ExportCode) };
+                    return (source.ExportCode == null) ? null : new[] { Map(source.ExportCode) };
                 case CodeType.ImportCode:
                     return (source.ImportCode == null) ? null : new[] { Map(source.ImportCode) };
                 case CodeType.OtherCode:
