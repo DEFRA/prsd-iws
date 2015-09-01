@@ -78,8 +78,8 @@
             AssertAnnexMessageEmpty(model);
             Assert.Equal("50 %", model.PercentageRecoverable);
             Assert.Equal(methodOfDisposal, model.MethodOfDisposal);
-            Assert.Equal("£ 100 / Kilogram", model.CostAmountText);
-            Assert.Equal("£ 250 / Tonne", model.EstimatedAmountText);
+            Assert.Equal("£100 per Kilogram", model.CostAmountText);
+            Assert.Equal("£250 per Tonne", model.EstimatedAmountText);
             Assert.Equal(string.Empty, model.DisposalAmountText);
         }
 
@@ -106,9 +106,9 @@
             AssertAnnexMessageEmpty(model);
             Assert.Equal("90 %", model.PercentageRecoverable);
             Assert.Equal(methodOfDisposal, model.MethodOfDisposal);
-            Assert.Equal("£ 100 / Kilogram", model.CostAmountText);
-            Assert.Equal("£ 90 / Kilogram", model.DisposalAmountText);
-            Assert.Equal("£ 110 / Tonne", model.EstimatedAmountText);
+            Assert.Equal("£100 per Kilogram", model.CostAmountText);
+            Assert.Equal("£90 per Kilogram", model.DisposalAmountText);
+            Assert.Equal("£110 per Tonne", model.EstimatedAmountText);
         }
 
         private void AssertAllModelStringAreEmpty(RecoveryInfoViewModel model)
