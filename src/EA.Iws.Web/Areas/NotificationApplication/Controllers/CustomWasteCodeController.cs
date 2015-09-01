@@ -4,11 +4,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
+    using Core.Shared;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
+    using Requests.Notification;
     using Requests.WasteCodes;
     using ViewModels.CustomWasteCode;
 
@@ -69,8 +71,18 @@
                                 model.OtherCode,
                                 model.OtherCodeNotApplicable));
 
-                    return (backToOverview) ? RedirectToAction("Index", "Home", new { id }) 
-                        : RedirectToAction("RecoveryPercentage", "RecoveryInfo", new { id });
+                    var notificationInfo =
+                        await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
+
+                    if (notificationInfo.NotificationType == NotificationType.Recovery)
+                    {
+                        return (backToOverview) ? RedirectToAction("Index", "Home", new { id })
+                            : RedirectToAction("RecoveryPercentage", "RecoveryInfo", new { id });    
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home", new { id });
+                    }
                 }
                 catch (ApiBadRequestException ex)
                 {
