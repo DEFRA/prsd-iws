@@ -22,6 +22,11 @@
             if (message.IsProvidedByImporter)
             {
                 notification.SetRecoveryPercentageDataProvidedByImporter();
+
+                if (notification.RecoveryInfo != null)
+                {
+                    context.DeleteOnCommit(notification.RecoveryInfo);
+                }
             }
             else
             {
