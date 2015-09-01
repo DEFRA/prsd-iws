@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.NotificationBlocks
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Domain.NotificationApplication;
     using Formatters;
     using Mapper;
@@ -17,16 +15,16 @@
         {
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
             
-            if (notification.NotificationType == NotificationType.Disposal)
+            if (notification.NotificationType == NotificationType.Disposal || notification.IsProvidedByImporter.GetValueOrDefault())
             {
-                RemoveAnnexMessage(mergeFields);
                 HasAnnex = false;
-                return;
             }
-
-            HasAnnex = true;
-            CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new RecoveryInfoViewModel(notification, new RecoveryInfoFormatter());
+            else
+            {
+                HasAnnex = true;
+                CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
+                data = new RecoveryInfoViewModel(notification, new RecoveryInfoFormatter());
+            }
         }
 
         public string TypeName
@@ -53,15 +51,6 @@
 
         public void GenerateAnnex(int annexNumber)
         {
-            MergeOperationToMainDocument(annexNumber);
-
-            MergeAnnexNumber(annexNumber);
-
-            TocText = "Annex " + annexNumber + " - Genuine recovery information";
-        }
-
-        private void MergeOperationToMainDocument(int annexNumber)
-        {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(RecoveryInfoViewModel));
             foreach (var field in CorrespondingMergeFields)
             {
@@ -72,14 +61,10 @@
             {
                 MergeFieldDataMapper.BindCorrespondingField(annexMergeField, data, properties);
             }
-        }
 
-        private void RemoveAnnexMessage(IList<MergeField> mergeFields)
-        {
-            var annexMessageMergeField = mergeFields.Single(mf => mf.FieldName.OuterTypeName.Equals(RecoveryInfo, StringComparison.InvariantCultureIgnoreCase)
-                          && mf.FieldName.InnerTypeName.Equals("AnnexMessage", StringComparison.InvariantCultureIgnoreCase));
+            MergeAnnexNumber(annexNumber);
 
-            annexMessageMergeField.RemoveCurrentContents();
+            TocText = "Annex " + annexNumber + " - Genuine recovery information";
         }
     }
 }
