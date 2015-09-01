@@ -218,21 +218,43 @@
                 {
                     <h4 class="heading-small">Other codes</h4>
                     <dl>
-                        @if (Model.OtherCodes != null)
+                        <dt>Other code:</dt>
+                        @if (Model.OtherCodes.First().IsNotApplicable)
                         {
-                            <dt>Other code:</dt>
+                            <dd>Not applicable</dd>
+                        }
+                        else
+                        {
                             <dd>@string.Join(", ", Model.OtherCodes.Select(c => c.CustomCode).ToList())</dd>
                         }
 
                         <dt>National code in country of export:</dt>
-                        <dd>@string.Join(", ", Model.NationExportCode.Select(c => c.CustomCode).ToList())</dd>
+                        @if (Model.NationExportCode.First().IsNotApplicable)
+                        {
+                            <dd>Not applicable</dd>
+                        }
+                        else
+                        {
+                            <dd>@string.Join(", ", Model.NationExportCode.Select(c => c.CustomCode).ToList())</dd>
+                        }
 
                         <dt>National code in country of import:</dt>
-                        <dd>@string.Join(", ", Model.NationImportCode.Select(c => c.CustomCode).ToList())</dd>
-
-                        @if (Model.CustomCodes != null)
+                        @if (Model.NationImportCode.First().IsNotApplicable)
                         {
-                            <dt>Customs code(s):</dt>
+                            <dd>Not applicable</dd>
+                        }
+                        else
+                        {
+                            <dd>@string.Join(", ", Model.NationImportCode.Select(c => c.CustomCode).ToList())</dd>
+                        }
+
+                        <dt>Customs code(s):</dt>
+                        @if (Model.CustomCodes.First().IsNotApplicable)
+                        {
+                            <dd>Not applicable</dd>
+                        }
+                        else
+                        {
                             <dd>@string.Join(", ", Model.CustomCodes.Select(c => c.CustomCode).ToList())</dd>
                         }
                     </dl>
