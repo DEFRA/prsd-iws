@@ -205,11 +205,10 @@
             progress.HasHCodes = progressResult.WasteCodes.Any(wc => wc.CodeType == CodeType.H);
             progress.HasUnClasses = progressResult.WasteCodes.Any(wc => wc.CodeType == CodeType.Un);
             progress.HasUnNumbers = progressResult.WasteCodes.Any(wc => wc.CodeType == CodeType.UnNumber);
-            progress.HasOtherCodes = progressResult.WasteCodes.Any(wc =>
-                wc.CodeType == CodeType.CustomsCode
-                || wc.CodeType == CodeType.ImportCode
-                || wc.CodeType == CodeType.ExportCode
-                || wc.CodeType == CodeType.OtherCode);
+
+            var otherCodes = new[] { CodeType.CustomsCode, CodeType.ImportCode, CodeType.ExportCode, CodeType.OtherCode };
+            progress.HasOtherCodes = otherCodes.All(oc => 
+                progressResult.WasteCodes.Select(wc => wc.CodeType).Contains(oc));
 
             return progress.HasBaselOecdCode
                 && progress.HasEwcCodes
