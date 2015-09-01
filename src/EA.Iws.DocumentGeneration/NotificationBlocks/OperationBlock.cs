@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Domain.NotificationApplication;
+    using Formatters;
     using Mapper;
     using ViewModels;
 
@@ -12,7 +13,7 @@
         public OperationBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new OperationViewModel(notification);
+            data = new OperationViewModel(notification, new OperationInfoFormatter());
 
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }

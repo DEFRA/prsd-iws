@@ -86,10 +86,23 @@
             get { return base.TransitStates.ToList(); }
             set { TransitStatesCollection = value; }
         }
-    } 
 
-        public TestableNotificationApplication()
+        public new IList<OperationInfo> OperationInfos
         {
+            get { return base.OperationInfos.ToList(); }
+            set { OperationInfosCollection = value; }
+        }
+
+        public new string ReasonForExport
+        {
+            get { return base.ReasonForExport; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ReasonForExport, value, this); }
+        }
+
+        public new TechnologyEmployed TechnologyEmployed
+        {
+            get { return base.TechnologyEmployed; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.TechnologyEmployed, value, this); }
         }
     }
 }
