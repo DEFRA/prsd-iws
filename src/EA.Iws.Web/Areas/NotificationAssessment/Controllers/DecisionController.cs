@@ -7,7 +7,6 @@
     using Core.Admin;
     using Infrastructure;
     using Prsd.Core.Helpers;
-    using Requests.Admin;
     using Requests.Admin.NotificationAssessment;
     using ViewModels;
 
@@ -35,7 +34,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ViewResult> Index(DecisionViewModel model)
+        public async Task<ActionResult> Index(DecisionViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -58,10 +57,11 @@
                 await client.SendAsync(User.GetAccessToken(), setDates);
             }
             model.DecisionTypes = GetDecisionTypes();
-            return View(model);
+
+            return RedirectToAction("Index", "Home", new { area = "NotificationAssessment" });
         }
 
-        private SelectList GetDecisionTypes()
+        private static SelectList GetDecisionTypes()
         {
             return new SelectList(EnumHelper.GetValues(typeof(DecisionType)), "Key", "Value");
         }

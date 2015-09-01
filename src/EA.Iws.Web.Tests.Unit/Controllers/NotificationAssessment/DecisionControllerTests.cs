@@ -24,27 +24,33 @@
         }
 
         [Fact]
-        public async Task DecisionDate_ValidInput_NoValidationError()
+        public async Task DecisionDate_ValidInput_RedirectsTo_Home()
         {
-            var result = await SetDecisionDate(22, 7, 2015, new DecisionViewModel());
-
-            Assert.True(result.ViewData.ModelState.IsValid);
+            var result = await SetDecisionDate(22, 7, 2015, new DecisionViewModel()) as RedirectToRouteResult;
+            Assert.NotNull(result);
+            Assert.Equal("Index", result.RouteValues["action"]);
+            Assert.Equal("Home", result.RouteValues["controller"]);
+            Assert.Equal("NotificationAssessment", result.RouteValues["area"]);
         }
 
         [Fact]
-        public async Task ConsentFromDate_ValidInput_NoValidationError()
+        public async Task ConsentFromDate_ValidInput_RedirectsTo_Home()
         {
-            var result = await SetConsentedFromDate(22, 7, 2015, new DecisionViewModel());
-
-            Assert.True(result.ViewData.ModelState.IsValid);
+            var result = await SetConsentedFromDate(22, 7, 2015, new DecisionViewModel()) as RedirectToRouteResult;
+            Assert.NotNull(result);
+            Assert.Equal("Index", result.RouteValues["action"]);
+            Assert.Equal("Home", result.RouteValues["controller"]);
+            Assert.Equal("NotificationAssessment", result.RouteValues["area"]);
         }
 
         [Fact]
-        public async Task ConsentToDate_ValidInput_NoValidationError()
+        public async Task ConsentToDate_ValidInput_RedirectsTo_Home()
         {
-            var result = await SetConsentedToDate(22, 7, 2015, new DecisionViewModel());
-
-            Assert.True(result.ViewData.ModelState.IsValid);
+            var result = await SetConsentedToDate(22, 7, 2015, new DecisionViewModel()) as RedirectToRouteResult;
+            Assert.NotNull(result);
+            Assert.Equal("Index", result.RouteValues["action"]);
+            Assert.Equal("Home", result.RouteValues["controller"]);
+            Assert.Equal("NotificationAssessment", result.RouteValues["area"]);
         }
 
         [Fact]
@@ -54,7 +60,7 @@
             await SetConsentedToDate(22, 7, 2015, decisionViewModel);
             var result = await SetConsentedFromDate(22, 7, 2015, decisionViewModel);
 
-            Assert.False(result.ViewData.ModelState.IsValid);
+            Assert.False(((ViewResult)result).ViewData.ModelState.IsValid);
         }
 
         [Fact]
@@ -67,7 +73,7 @@
             A.CallTo(() => client.SendAsync(A<string>.Ignored, A<SetDecision>.That.Matches(dates => dates.DecisionMade == expectedDates.DecisionMade))).MustHaveHappened(Repeated.Exactly.Once);
         }
 
-        private Task<ViewResult> SetDecisionDate(int day, int month, int year, DecisionViewModel model)
+        private Task<ActionResult> SetDecisionDate(int day, int month, int year, DecisionViewModel model)
         {
             model.DecisionMadeDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
 
@@ -76,7 +82,7 @@
             return controller.Index(model);
         }
 
-        private Task<ViewResult> SetConsentedFromDate(int day, int month, int year, DecisionViewModel model)
+        private Task<ActionResult> SetConsentedFromDate(int day, int month, int year, DecisionViewModel model)
         {
             model.ConsentValidFromDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
 
@@ -85,7 +91,7 @@
             return controller.Index(model);
         }
 
-        private Task<ViewResult> SetConsentedToDate(int day, int month, int year, DecisionViewModel model)
+        private Task<ActionResult> SetConsentedToDate(int day, int month, int year, DecisionViewModel model)
         {
             model.ConsentValidToDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
 
