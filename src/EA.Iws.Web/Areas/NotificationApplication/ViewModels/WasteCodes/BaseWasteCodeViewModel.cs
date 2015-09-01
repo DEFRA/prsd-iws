@@ -2,7 +2,7 @@
 {
     public abstract class BaseWasteCodeViewModel
     {
-        public EnterWasteCodesViewModel EnterWasteCodesViewModel { get; set; }
+        public virtual EnterWasteCodesViewModel EnterWasteCodesViewModel { get; set; }
 
         protected BaseWasteCodeViewModel()
         {

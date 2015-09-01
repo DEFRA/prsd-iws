@@ -17,17 +17,19 @@
     {
         private static readonly IList<CodeType> ewcCodeTypes = new[] { CodeType.Ewc }; 
         private readonly IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper;
+        private readonly Func<IIwsClient> apiClient;
 
         public EwcCodeController(Func<IIwsClient> apiClient, 
             IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper) : base(apiClient, CodeType.Ewc)
         {
             this.mapper = mapper;
+            this.apiClient = apiClient;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool backToOverview = false)
         {
-            using (var client = ApiClient())
+            using (var client = apiClient())
             {
                 var result =
                     await
@@ -40,10 +42,11 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, EwcCodeViewModel model, string command, string remove, bool backToOverview = false)
+        public async Task<ActionResult> Index(Guid id, EwcCodeViewModel model, string command, string remove,
+            bool backToOverview = false)
         {
             return await Post(id, model, command, remove, backToOverview);
-        } 
+        }
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
@@ -51,10 +54,10 @@
             {
                 await
                     client.SendAsync(User.GetAccessToken(),
-                        new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
-                            viewModel.EnterWasteCodesViewModel.IsNotApplicable));
+                        new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes));
 
-                return (backToOverview) ? BackToOverviewResult(id) 
+                return (backToOverview)
+                    ? BackToOverviewResult(id)
                     : RedirectToAction("Index", "YCode", new { id });
             }
         }

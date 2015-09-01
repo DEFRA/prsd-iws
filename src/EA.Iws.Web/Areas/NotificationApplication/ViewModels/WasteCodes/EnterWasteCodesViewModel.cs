@@ -9,6 +9,13 @@
 
     public class EnterWasteCodesViewModel : IValidatableObject
     {
+        private string validationMessage = "Please enter a code or select not applicable";
+        public virtual string ValidationMessage
+        {
+            get { return validationMessage; }
+            set { validationMessage = value; }
+        }
+
         public IList<WasteCodeViewModel> WasteCodes { get; set; }
 
         public Guid? SelectedCode { get; set; }
@@ -16,7 +23,7 @@
         public List<Guid> SelectedWasteCodes { get; set; }
 
         [Display(Name = "Not applicable")]
-        public bool IsNotApplicable { get; set; }
+        public virtual bool IsNotApplicable { get; set; }
 
         public SelectList Codes
         {
@@ -35,7 +42,7 @@
         {
             if (!SelectedCode.HasValue && SelectedWasteCodes.Count == 0 && !IsNotApplicable)
             {
-                yield return new ValidationResult("Please enter a code or select not applicable", new[] { "SelectedCode" });
+                yield return new ValidationResult(this.ValidationMessage, new[] { "SelectedCode" });
             }
 
             if (IsNotApplicable && SelectedWasteCodes != null && SelectedWasteCodes.Count > 0 && !SelectedCode.HasValue)

@@ -5,8 +5,8 @@
 
     public class SetEwcCodes : BaseSetCodes
     {
-        public SetEwcCodes(Guid id, IEnumerable<Guid> codes, bool isNotApplicable) 
-            : base(id, codes, isNotApplicable)
+        public SetEwcCodes(Guid id, IEnumerable<Guid> codes) 
+            : base(id, codes, isNotApplicable: false)
         {
         }
     }

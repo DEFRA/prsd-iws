@@ -689,6 +689,7 @@
     <Compile Include="Areas\NotificationApplication\Controllers\UNClassController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\UNNumberController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcEnterCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNClass\UNClassViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\WasteCodeOverviewViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNNumber\UNNumberViewModel.cs" />
