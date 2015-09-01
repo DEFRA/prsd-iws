@@ -2,13 +2,19 @@
 {
     using System;
     using System.Linq;
-    using Core.WasteCodes;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Prsd.Core.Domain;
 
     internal class NotificationToNotificationCopy
     {
+        private readonly WasteCodeCopy wasteCodeCopy;
+
+        public NotificationToNotificationCopy(WasteCodeCopy wasteCodeCopy)
+        {
+            this.wasteCodeCopy = wasteCodeCopy;
+        }
+
         public virtual void CopyNotificationProperties(NotificationApplication source, NotificationApplication destination)
         {
             // We want to set all properties except a few decided by business logic.
@@ -74,31 +80,7 @@
 
         protected virtual void CopyWasteCodes(NotificationApplication source, NotificationApplication destination)
         {
-            if (source.BaselOecdCode != null)
-            {
-                destination.SetBaselOecdCode(WasteCodeInfo.CreateWasteCodeInfo(source.BaselOecdCode.WasteCode));
-            }
-
-            if (source.CustomsCode != null)
-            {
-                destination.SetCustomsCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.CustomsCode, source.CustomsCode.CustomCode));
-            }
-
-            destination.SetEwcCodes(
-                source.EwcCodes.Select(c => WasteCodeInfo.CreateWasteCodeInfo(c.WasteCode)));
-
-            destination.SetExportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.ExportCode, source.ExportCode.CustomCode));
-            destination.SetImportCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.ImportCode, source.ImportCode.CustomCode));
-
-            if (source.OtherCode != null)
-            {
-                destination.SetOtherCode(WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.OtherCode, source.OtherCode.CustomCode));
-            }
-            
-            destination.SetUnClasses(source.UnClasses.Select(c => WasteCodeInfo.CreateWasteCodeInfo(c.WasteCode)));
-            destination.SetUnNumbers(source.UnNumbers.Select(c => WasteCodeInfo.CreateWasteCodeInfo(c.WasteCode)));
-            destination.SetYCodes(source.YCodes.Select(c => WasteCodeInfo.CreateWasteCodeInfo(c.WasteCode)));
-            destination.SetHCodes(source.HCodes.Select(c => WasteCodeInfo.CreateWasteCodeInfo(c.WasteCode)));
+            wasteCodeCopy.CopyWasteCodes(source, destination);
         }
     }
 }

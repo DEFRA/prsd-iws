@@ -147,7 +147,10 @@
         /// <returns></returns>
         private async Task<NotificationAssessment> GetCopyOfNotificationAssessment(Guid id)
         {
-            return await context.NotificationAssessments.AsNoTracking().SingleAsync(p => p.NotificationApplicationId == id);
+            return await context.NotificationAssessments
+                .AsNoTracking()
+                .Include(na => na.Dates)
+                .SingleAsync(p => p.NotificationApplicationId == id);
         }
 
         private static void SetNotificationApplicationIdOnAssessment(NotificationAssessment assessment, Guid notificationId)

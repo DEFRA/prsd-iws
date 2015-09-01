@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Tests.Integration.Copy
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
@@ -50,7 +51,7 @@
 
             destination = new NotificationApplication(UserId, DestinationNotificationType, DestinationCompetentAuthority, DestinationNumber);
             EntityHelper.SetEntityId(destination, new Guid("63581B29-EFB9-47F0-BCC3-E67382F4EAFA"));
-            handler = new CopyToNotificationHandler(context, userContext, new NotificationToNotificationCopy());
+            handler = new CopyToNotificationHandler(context, userContext, new NotificationToNotificationCopy(new WasteCodeCopy()));
             
             context.NotificationApplications.Add(source);
             context.NotificationApplications.Add(destination);
@@ -117,10 +118,8 @@
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
 
-            Assert.Equal(sourceNotification.WasteCodes.Select(wc => wc.WasteCode).OrderBy(wc => wc.Id),
-                copiedNotification.WasteCodes.Select(wc => wc.WasteCode).OrderBy(wc => wc.Id));
-            Assert.Equal(sourceNotification.WasteCodes.Select(wci => wci.CustomCode).OrderBy(cc => cc),
-                copiedNotification.WasteCodes.Select(wci => wci.CustomCode).OrderBy(cc => cc));
+            Assert.Equal(sourceNotification.WasteCodes.OrderBy(wc => wc.CodeType).ThenBy(wc => wc.Id),
+                copiedNotification.WasteCodes.OrderBy(wc => wc.CodeType).ThenBy(wc => wc.Id), new CodeComparer());
         }
 
         [Fact]
@@ -245,6 +244,40 @@
             }
 
             context.Dispose();
+        }
+
+        private class CodeComparer : IEqualityComparer<WasteCodeInfo>
+        {
+            public bool Equals(WasteCodeInfo x, WasteCodeInfo y)
+            {
+                if (x == y)
+                {
+                    return true;
+                }
+
+                if (x.IsNotApplicable && y.IsNotApplicable)
+                {
+                    return true;
+                }
+
+                if (x.WasteCode != null && y.WasteCode != null)
+                {
+                    return x.WasteCode.Id == y.WasteCode.Id;
+                }
+
+                if (!string.IsNullOrWhiteSpace(x.CustomCode)
+                    && !string.IsNullOrWhiteSpace(y.CustomCode))
+                {
+                    return x.CustomCode == y.CustomCode;
+                }
+
+                return false;
+            }
+
+            public int GetHashCode(WasteCodeInfo obj)
+            {
+                return base.GetHashCode();
+            }
         }
     }
 }

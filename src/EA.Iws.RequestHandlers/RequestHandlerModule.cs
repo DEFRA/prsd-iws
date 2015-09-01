@@ -37,6 +37,7 @@
             builder.RegisterAssemblyTypes(ThisAssembly).AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
+            builder.RegisterType<WasteCodeCopy>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();

@@ -8,46 +8,46 @@
         private static string deleteCommand = @"
         DECLARE @NotificationId UNIQUEIDENTIFIER = '{0}'
 
-        DELETE FROM [Business].[Exporter]
+        DELETE FROM [Notification].[Exporter]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[Importer]
+        DELETE FROM [Notification].[Importer]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[Producer]
+        DELETE FROM [Notification].[Producer]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[Carrier]
+        DELETE FROM [Notification].[Carrier]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[Facility]
+        DELETE FROM [Notification].[Facility]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[OperationCodes]
+        DELETE FROM [Notification].[OperationCodes]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[PackagingInfo]
+        DELETE FROM [Notification].[PackagingInfo]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[PhysicalCharacteristicsInfo]
+        DELETE FROM [Notification].[PhysicalCharacteristicsInfo]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[RecoveryInfo]
+        DELETE FROM [Notification].[RecoveryInfo]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[ShipmentInfo]
+        DELETE FROM [Notification].[ShipmentInfo]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[WasteAdditionalInformation]
-        WHERE WasteTypeId IN (SELECT [Id] FROM [Business].[WasteType] WHERE NotificationId = @NotificationId);
+        DELETE FROM [Notification].[WasteAdditionalInformation]
+        WHERE WasteTypeId IN (SELECT [Id] FROM [Notification].[WasteType] WHERE NotificationId = @NotificationId);
 
-        DELETE FROM [Business].[WasteComposition]
-        WHERE WasteTypeId IN (SELECT [Id] FROM [Business].[WasteType] WHERE NotificationId = @NotificationId);
+        DELETE FROM [Notification].[WasteComposition]
+        WHERE WasteTypeId IN (SELECT [Id] FROM [Notification].[WasteType] WHERE NotificationId = @NotificationId);
 
-        DELETE FROM [Business].[WasteType] 
+        DELETE FROM [Notification].[WasteType] 
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Business].[WasteCodeInfo] 
+        DELETE FROM [Notification].[WasteCodeInfo] 
         WHERE NotificationId = @NotificationId;
 
         DELETE FROM [Notification].[EntryCustomsOffice] 
@@ -67,6 +67,10 @@
 
         DELETE FROM [Notification].[TransitState] 
         WHERE NotificationId = @NotificationId;
+
+        DELETE FROM [Notification].[NotificationDates]
+        WHERE NotificationAssessmentId = 
+            (SELECT Id FROM [Notification].[NotificationAssessment] WHERE NotificationApplicationId = @NotificationId);
 
         DELETE FROM [Notification].[NotificationAssessment]
         WHERE NotificationApplicationId = @NotificationId;
