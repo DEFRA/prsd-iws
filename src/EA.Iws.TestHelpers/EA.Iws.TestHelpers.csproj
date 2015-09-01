@@ -44,12 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainFakes\TestableCompetentAuthority.cs" />
+    <Compile Include="DomainFakes\TestableCountry.cs" />
+    <Compile Include="DomainFakes\TestableEntryOrExitPoint.cs" />
     <Compile Include="DomainFakes\TestableMovement.cs" />
     <Compile Include="DomainFakes\TestableNotificationApplication.cs" />
     <Compile Include="DomainFakes\TestableNotificationAssessment.cs" />
     <Compile Include="DomainFakes\TestableRecoveryInfo.cs" />
     <Compile Include="DomainFakes\TestablePackagingInfo.cs" />
     <Compile Include="DomainFakes\TestableShipmentInfo.cs" />
+    <Compile Include="DomainFakes\TestableStateOfImport.cs" />
+    <Compile Include="DomainFakes\TestableStateOfExport.cs" />
+    <Compile Include="DomainFakes\TestableTransitState.cs" />
     <Compile Include="DomainFakes\TestableWasteCode.cs" />
     <Compile Include="DomainFakes\TestableWasteCodeInfo.cs" />
     <Compile Include="Helpers\ComplexTypeFactory.cs" />

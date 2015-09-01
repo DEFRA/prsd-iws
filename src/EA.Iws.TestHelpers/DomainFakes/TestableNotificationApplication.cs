@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.NotificationApplication;
+    using Domain.TransportRoute;
     using Helpers;
 
     public class TestableNotificationApplication : NotificationApplication
@@ -67,6 +68,25 @@
             get { return base.PackagingInfos; }
             set { PackagingInfosCollection = value.ToList(); }
         }
+
+        public new StateOfExport StateOfExport
+        {
+            get { return base.StateOfExport; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.StateOfExport, value, this); }
+        }
+
+        public new StateOfImport StateOfImport
+        {
+            get { return base.StateOfImport; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.StateOfImport, value, this); }
+        }
+
+        public new IList<TransitState> TransitStates
+        {
+            get { return base.TransitStates.ToList(); }
+            set { TransitStatesCollection = value; }
+        }
+    } 
 
         public TestableNotificationApplication()
         {
