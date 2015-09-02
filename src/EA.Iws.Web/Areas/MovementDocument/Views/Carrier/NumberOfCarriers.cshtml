@@ -1,0 +1,36 @@
+﻿@model EA.Iws.Web.Areas.MovementDocument.ViewModels.Carrier.NumberOfCarriersViewModel
+@{
+    ViewBag.Title = "Intended carriers";
+}
+
+<h2 class="heading-large">How many carriers will be used for this shipment?</h2>
+
+@Html.Gds().ValidationSummary()
+
+@Html.Partial("_MeansOfTransport", Model.MeansOfTransportViewModel)
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
+        <div class="grid-row">
+            <div class="column-third">
+                @Html.Gds().LabelFor(m => m.Amount, false)
+                @Html.Gds().HintSpan("For example 3")
+                @Html.Gds().ValidationMessageFor(m => m.Amount)
+                @Html.Gds().TextBoxFor(m => m.Amount, new
+                {
+                    @class = "form-control form-control-wide",
+                    type = "number",
+                    min = 1,
+                    step = 1
+                })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+    </div>
+}

@@ -24,6 +24,12 @@
                      m.MapRightKey("PackagingInfoId");
                      m.ToTable("MovementPackagingInfo", "Notification");
                  });
+
+            HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<Movement, ICollection<MovementCarrier>>(
+                    "MovementCarriersCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("MovementId"));
         }
     }
 }

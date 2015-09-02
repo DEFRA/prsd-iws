@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
 {
     using System;
-    using RequestHandlers.Mappings;
+    using RequestHandlers.Mappings.Movement;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -124,6 +124,8 @@
         [Fact]
         public void CarriersIsNull_ReturnsFalse()
         {
+            movement.MovementCarriers = null;
+
             var result = map.Map(movement);
 
             Assert.False(result.AreIntendedCarriersCompleted);
@@ -132,17 +134,24 @@
         [Fact]
         public void CarriersIsEmpty_ReturnsFalse()
         {
+            movement.MovementCarriers = new TestableMovementCarrier[0];
+
             var result = map.Map(movement);
 
             Assert.False(result.AreIntendedCarriersCompleted);
         }
 
         [Fact]
-        public void CarriersIsPopulated_ReturnsFalse()
+        public void CarriersIsPopulated_ReturnsTrue()
         {
+            movement.MovementCarriers = new[]
+            {
+                new TestableMovementCarrier()
+            };
+
             var result = map.Map(movement);
 
-            Assert.False(result.AreIntendedCarriersCompleted);
+            Assert.True(result.AreIntendedCarriersCompleted);
         }
     }
 }

@@ -91,7 +91,8 @@
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="Copy\WasteCodeCopy.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
-    <Compile Include="Mappings\MovementMap.cs" />
+    <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
+    <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationDatesMap.cs" />
@@ -101,13 +102,16 @@
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
+    <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
+    <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandler.cs" />
     <Compile Include="Movement\GetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="Movement\GetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\GetPackagingDataValidForMovementHandler.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementIdHandler.cs" />
+    <Compile Include="Movement\SetActualMovementCarriersHandler.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
     <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />

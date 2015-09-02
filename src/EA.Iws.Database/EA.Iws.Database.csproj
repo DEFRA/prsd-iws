@@ -108,6 +108,7 @@
     <Content Include="scripts\Update\Sprint14\20150821-114800-add-actual-shipment-data-table.sql" />
     <Content Include="scripts\Update\Sprint14\20150825-112700-add-movement-packaging-info-table.sql" />
     <Content Include="scripts\Update\Sprint15\20150902-141500-generate-missing-financial-guarantees.sql" />
+    <Content Include="scripts\Update\Sprint15\20150903-140200-add-movement-carrier-table.sql" />
     <Content Include="scripts\Update\Sprint15\20150908-093500-resize-waste-additional-information-columns.sql" />
   </ItemGroup>
   <ItemGroup>

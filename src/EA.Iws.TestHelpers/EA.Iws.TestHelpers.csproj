@@ -58,6 +58,7 @@
     <Compile Include="DomainFakes\TestableFinancialGuarantee.cs" />
     <Compile Include="DomainFakes\TestableInternalUser.cs" />
     <Compile Include="DomainFakes\TestableMovement.cs" />
+    <Compile Include="DomainFakes\TestableMovementCarrier.cs" />
     <Compile Include="DomainFakes\TestableNotificationApplication.cs" />
     <Compile Include="DomainFakes\TestableNotificationAssessment.cs" />
     <Compile Include="DomainFakes\TestableOperationInfo.cs" />

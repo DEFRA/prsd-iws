@@ -1,12 +1,18 @@
 ﻿namespace EA.Iws.TestHelpers.DomainFakes
 {
+    using System;
     using Domain;
     using Domain.NotificationApplication;
     using Helpers;
 
     public class TestableCarrier : Carrier
     {
-        public new Business Business 
+        public new Guid Id
+        {
+            get { return base.Id; }
+            set { ObjectInstantiator<Carrier>.SetProperty(x => x.Id, value, this); }
+        }
+        public new Business Business
         {
             get { return base.Business; }
             set { ObjectInstantiator<Carrier>.SetProperty(x => x.Business, value, this); }

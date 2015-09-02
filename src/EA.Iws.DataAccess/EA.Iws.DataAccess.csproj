@@ -86,6 +86,7 @@
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />
     <Compile Include="Mappings\InternalUserMapping.cs" />
     <Compile Include="Mappings\LocalAreaMapping.cs" />
+    <Compile Include="Mappings\MovementCarrierMapping.cs" />
     <Compile Include="Mappings\MovementMapping.cs" />
     <Compile Include="Mappings\NotificationAssessmentMapping.cs" />
     <Compile Include="Mappings\NotificationDatesMapping.cs" />

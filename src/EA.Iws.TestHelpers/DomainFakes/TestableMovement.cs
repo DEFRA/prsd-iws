@@ -45,6 +45,12 @@
             set { PackagingInfosCollection = (value == null) ? null : value.ToList(); }
         }
 
+        public new IEnumerable<MovementCarrier> MovementCarriers
+        {
+            get { return base.MovementCarriers; }
+            set { MovementCarriersCollection = (value == null) ? null : value.ToList(); }
+        }
+
         public new int? NumberOfPackages
         {
             get { return base.NumberOfPackages; }

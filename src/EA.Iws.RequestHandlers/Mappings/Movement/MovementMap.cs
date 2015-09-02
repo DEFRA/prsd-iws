@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Mappings
+﻿namespace EA.Iws.RequestHandlers.Mappings.Movement
 {
     using Core.Movement;
     using Domain.Movement;
@@ -19,7 +19,7 @@
                 IsActualDateCompleted = source.Date.HasValue,
                 IsActualQuantityCompleted = source.Quantity.HasValue,
                 IsNumberOfPackagesCompleted = source.NumberOfPackages.HasValue,
-                AreIntendedCarriersCompleted = false,
+                AreIntendedCarriersCompleted = (source.MovementCarriers != null) && source.MovementCarriers.Any(),
                 ArePackagingTypesCompleted = (source.PackagingInfos != null) && source.PackagingInfos.Any()
             };
         }

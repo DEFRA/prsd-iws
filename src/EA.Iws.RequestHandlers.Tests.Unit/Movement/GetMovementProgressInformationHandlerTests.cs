@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Prsd.Core;
-    using RequestHandlers.Mappings;
+    using RequestHandlers.Mappings.Movement;
     using RequestHandlers.Movement;
     using Requests.Movement;
     using TestHelpers.DomainFakes;

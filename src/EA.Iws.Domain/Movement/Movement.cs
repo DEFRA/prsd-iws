@@ -37,9 +37,16 @@
 
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
 
+        protected virtual ICollection<MovementCarrier> MovementCarriersCollection { get; set; }
+
         public IEnumerable<PackagingInfo> PackagingInfos 
         {
             get { return PackagingInfosCollection.ToSafeIEnumerable(); }
+        }
+
+        public IEnumerable<MovementCarrier> MovementCarriers
+        {
+            get { return MovementCarriersCollection.ToSafeIEnumerable(); }
         }
 
         public void UpdateDate(DateTime date)
@@ -87,6 +94,16 @@
             Guard.ArgumentNotZeroOrNegative(() => number, number);
 
             NumberOfPackages = number;
+        }
+
+        public void SetMovementCarriers(IEnumerable<MovementCarrier> movementCarriers)
+        {
+            MovementCarriersCollection.Clear();
+
+            foreach (var movementCarrier in movementCarriers)
+            {
+                MovementCarriersCollection.Add(movementCarrier);
+            }
         }
     }
 }
