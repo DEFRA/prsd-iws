@@ -104,5 +104,11 @@
             get { return base.TechnologyEmployed; }
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.TechnologyEmployed, value, this); }
         }
+
+        public new IList<Carrier> Carriers
+        {
+            get { return base.Carriers.ToList(); }
+            set { CarriersCollection = value; }
+        } 
     }
 }

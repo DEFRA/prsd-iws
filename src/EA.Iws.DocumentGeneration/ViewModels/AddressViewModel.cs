@@ -7,21 +7,26 @@
 
     internal class AddressViewModel
     {
-        private readonly string addressLine2;
-        private readonly string country;
-        private readonly string postcode;
-        private readonly string region;
-        private readonly string townOrCity;
-        private string addressLine1;
+        private readonly string addressLine2 = string.Empty;
+        private readonly string country = string.Empty;
+        private readonly string postcode = string.Empty;
+        private readonly string region = string.Empty;
+        private readonly string townOrCity = string.Empty;
+        private string addressLine1 = string.Empty;
 
         public AddressViewModel(Address address)
         {
-            addressLine1 = address.Address1;
-            addressLine2 = address.Address2;
-            townOrCity = address.TownOrCity;
-            region = address.Region;
-            postcode = address.PostalCode;
-            country = address.Country;
+            if (address == null)
+            {
+                return;
+            }
+
+            addressLine1 = address.Address1 ?? string.Empty;
+            addressLine2 = address.Address2 ?? string.Empty;
+            townOrCity = address.TownOrCity ?? string.Empty;
+            region = address.Region ?? string.Empty;
+            postcode = address.PostalCode ?? string.Empty;
+            country = address.Country ?? string.Empty;
         }
 
         private AddressViewModel()

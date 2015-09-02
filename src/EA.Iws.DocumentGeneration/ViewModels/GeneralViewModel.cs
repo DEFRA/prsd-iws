@@ -2,7 +2,6 @@
 {
     using System.Linq;
     using Core.Shared;
-    using Domain;
     using Domain.NotificationApplication;
     using NotificationType = Domain.NotificationApplication.NotificationType;
 

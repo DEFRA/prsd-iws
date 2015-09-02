@@ -6,6 +6,7 @@
     using System.Reflection;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain.NotificationApplication;
+    using Formatters;
     using Mapper;
     using ViewModels;
 
@@ -19,19 +20,7 @@
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
-            var motString = string.Empty;
-            var mot = notification.MeansOfTransport.ToList();
-
-            for (int i = 0; i < notification.MeansOfTransport.Count(); i++)
-            {
-                motString = motString + mot[i].Symbol;
-                if (i != mot.Count - 1)
-                {
-                    motString = motString + " → ";
-                }
-            }
-
-            data = notification.Carriers.Select(c => new CarrierViewModel(c, motString)).ToList();
+            data = CarrierViewModel.CreateCarrierViewModelsForNotification(notification, new MeansOfTransportFormatter());
 
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }
