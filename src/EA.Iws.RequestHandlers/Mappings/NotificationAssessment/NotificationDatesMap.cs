@@ -17,7 +17,9 @@
                 CommencementDate = source.CommencementDate,
                 NameOfOfficer = source.NameOfOfficer,
                 CompletedDate = source.CompleteDate,
-                TransmittedDate = source.TransmittedDate
+                TransmittedDate = source.TransmittedDate,
+                AcknowledgedDate = source.AcknowledgedDate,
+                DecisionRequiredDate = source.DecisionDate
             };
         }
     }

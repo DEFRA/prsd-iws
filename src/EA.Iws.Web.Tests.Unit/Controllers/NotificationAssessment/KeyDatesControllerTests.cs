@@ -25,6 +25,8 @@
         private readonly DateTime commencementDate = new DateTime(2015, 8, 3);
         private readonly DateTime completeDate = new DateTime(2015, 8, 20);
         private readonly DateTime transmittedDate = new DateTime(2015, 8, 21);
+        private readonly DateTime acknowledgedDate = new DateTime(2015, 8, 22);
+        private readonly DateTime decisionRequiredDate = new DateTime(2015, 8, 22);
 
         public KeyDatesControllerTests()
         {
@@ -36,7 +38,9 @@
                 {
                     NotificationId = notificationId,
                     NotificationReceivedDate = notificationReceivedDate,
-                    PaymentReceivedDate = paymentReceivedDate
+                    PaymentReceivedDate = paymentReceivedDate,
+                    AcknowledgedDate = acknowledgedDate,
+                    DecisionRequiredDate = decisionRequiredDate
                 });
 
             controller = new KeyDatesController(() => client);
@@ -51,19 +55,9 @@
         }
 
         [Fact]
-        public async Task Index_ValidInput_DecisionDateSetCorrectly()
-        {
-            SetDates expectedDates = new SetDates();
-            expectedDates.DecisionDate = new DateTime(2015, 7, 22);
-            await controller.Index(GetDecisionRequiredDateModel(22, 7, 2015));
-
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<SetDates>.That.Matches(dates => dates.DecisionDate == expectedDates.DecisionDate))).MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
         public async Task Index_FetchesNotificationDates()
         {
-            await controller.Index(notificationId);
+            await controller.Index(notificationId, 0);
 
             A.CallTo(() => client.SendAsync(A<string>._, A<GetDates>.That.Matches(dates => dates.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
@@ -74,7 +68,7 @@
         {
             var controller = new KeyDatesController(() => client);
 
-            var result = await controller.Index(notificationId) as ViewResult;
+            var result = await controller.Index(notificationId, 0) as ViewResult;
 
             Assert.Equal(notificationReceivedDate, ((DateInputViewModel)result.Model).NotificationReceivedDate.AsDateTime());
         }
@@ -84,17 +78,37 @@
         {
             var controller = new KeyDatesController(() => client);
 
-            var result = await controller.Index(notificationId) as ViewResult;
+            var result = await controller.Index(notificationId, 0) as ViewResult;
 
             Assert.Equal(paymentReceivedDate, ((DateInputViewModel)result.Model).PaymentReceivedDate.AsDateTime());
+        }
+
+        [Fact]
+        public async Task Index_SetsAcknowledgedDateIfPopulated()
+        {
+            var controller = new KeyDatesController(() => client);
+
+            var result = await controller.Index(notificationId, 0) as ViewResult;
+
+            Assert.Equal(acknowledgedDate, ((DateInputViewModel)result.Model).NotificationAcknowledgedDate.AsDateTime());
+        }
+
+        [Fact]
+        public async Task Index_SetsDecisionRequiredByDateIfPopulated()
+        {
+            var controller = new KeyDatesController(() => client);
+
+            var result = await controller.Index(notificationId, 0) as ViewResult;
+
+            Assert.Equal(decisionRequiredDate, ((DateInputViewModel)result.Model).DecisionDate.AsDateTime());
         }
 
         [Fact]
         public async Task NotificationReceived_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
-            model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
-            model.Command = DateInputViewModel.NotificationReceived;
+            model.NewDate = new OptionalDateInputViewModel(notificationReceivedDate);
+            model.Command = KeyDatesStatusEnum.NotificationReceived;
 
             var controller = GetMockAssessmentController(model);
 
@@ -107,21 +121,21 @@
         public async Task NotificationReceived_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
-            model.Command = DateInputViewModel.NotificationReceived;
+            model.Command = KeyDatesStatusEnum.NotificationReceived;
 
             var controller = GetMockAssessmentController(model);
 
             await controller.Index(model);
 
-            Assert.True(controller.ModelState.ContainsKey("NotificationReceivedDate"));
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
         }
 
         [Fact]
         public async Task NotificationReceived_ValidInput_CallsClient()
         {
             var model = new DateInputViewModel();
-            model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
-            model.Command = DateInputViewModel.NotificationReceived;
+            model.NewDate = new OptionalDateInputViewModel(notificationReceivedDate);
+            model.Command = KeyDatesStatusEnum.NotificationReceived;
 
             var controller = GetMockAssessmentController(model);
 
@@ -133,7 +147,7 @@
                         A<SetNotificationReceivedDate>.That.Matches(
                             p =>
                                 p.NotificationId == model.NotificationId &&
-                                p.NotificationReceivedDate == model.NotificationReceivedDate.AsDateTime().Value)))
+                                p.NotificationReceivedDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -141,8 +155,8 @@
         public async Task PaymentReceived_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
-            model.PaymentReceivedDate = new OptionalDateInputViewModel(paymentReceivedDate);
-            model.Command = DateInputViewModel.PaymentReceived;
+            model.NewDate = new OptionalDateInputViewModel(paymentReceivedDate);
+            model.Command = KeyDatesStatusEnum.PaymentReceived;
 
             var controller = GetMockAssessmentController(model);
 
@@ -155,21 +169,21 @@
         public async Task PaymentReceived_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
-            model.Command = DateInputViewModel.PaymentReceived;
+            model.Command = KeyDatesStatusEnum.PaymentReceived;
 
             var controller = GetMockAssessmentController(model);
 
             await controller.Index(model);
 
-            Assert.True(controller.ModelState.ContainsKey("PaymentReceivedDate"));
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
         }
 
         [Fact]
         public async Task PaymentReceived_ValidInput_CallsClient()
         {
             var model = new DateInputViewModel();
-            model.PaymentReceivedDate = new OptionalDateInputViewModel(paymentReceivedDate);
-            model.Command = DateInputViewModel.PaymentReceived;
+            model.NewDate = new OptionalDateInputViewModel(paymentReceivedDate);
+            model.Command = KeyDatesStatusEnum.PaymentReceived;
 
             var controller = GetMockAssessmentController(model);
             
@@ -181,7 +195,7 @@
                         A<SetPaymentReceivedDate>.That.Matches(
                             p =>
                                 p.NotificationId == model.NotificationId &&
-                                p.PaymentReceivedDate == model.PaymentReceivedDate.AsDateTime().Value)))
+                                p.PaymentReceivedDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -189,9 +203,9 @@
         public async Task AssessmentCommenced_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
-            model.CommencementDate = new OptionalDateInputViewModel(commencementDate);
+            model.NewDate = new OptionalDateInputViewModel(commencementDate);
             model.NameOfOfficer = "Officer";
-            model.Command = DateInputViewModel.AssessmentCommenced;
+            model.Command = KeyDatesStatusEnum.AssessmentCommenced;
 
             var controller = GetMockAssessmentController(model);
 
@@ -204,22 +218,22 @@
         public async Task AssessmentCommenced_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
-            model.Command = DateInputViewModel.AssessmentCommenced;
+            model.Command = KeyDatesStatusEnum.AssessmentCommenced;
 
             var controller = GetMockAssessmentController(model);
 
             await controller.Index(model);
 
-            Assert.True(controller.ModelState.ContainsKey("CommencementDate") && controller.ModelState.ContainsKey("NameOfOfficer"));
+            Assert.True(controller.ModelState.ContainsKey("NewDate") && controller.ModelState.ContainsKey("NameOfOfficer"));
         }
 
         [Fact]
         public async Task AssessmentCommenced_ValidInput_CallsClient()
         {
             var model = new DateInputViewModel();
-            model.CommencementDate = new OptionalDateInputViewModel(commencementDate);
+            model.NewDate = new OptionalDateInputViewModel(commencementDate);
             model.NameOfOfficer = "Officer";
-            model.Command = DateInputViewModel.AssessmentCommenced;
+            model.Command = KeyDatesStatusEnum.AssessmentCommenced;
 
             var controller = GetMockAssessmentController(model);
 
@@ -231,7 +245,7 @@
                         A<SetCommencedDate>.That.Matches(
                             p =>
                                 p.NotificationId == model.NotificationId &&
-                                p.CommencementDate == model.CommencementDate.AsDateTime().Value &&
+                                p.CommencementDate == model.NewDate.AsDateTime().Value &&
                                 p.NameOfOfficer == model.NameOfOfficer)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -240,8 +254,8 @@
         public async Task NotificationComplete_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
-            model.NotificationCompleteDate = new OptionalDateInputViewModel(completeDate);
-            model.Command = DateInputViewModel.NotificationComplete;
+            model.NewDate = new OptionalDateInputViewModel(completeDate);
+            model.Command = KeyDatesStatusEnum.NotificationComplete;
 
             var controller = GetMockAssessmentController(model);
 
@@ -254,21 +268,21 @@
         public async Task NotificationComplete_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
-            model.Command = DateInputViewModel.NotificationComplete;
+            model.Command = KeyDatesStatusEnum.NotificationComplete;
 
             var controller = GetMockAssessmentController(model);
 
             await controller.Index(model);
 
-            Assert.True(controller.ModelState.ContainsKey("NotificationCompleteDate"));
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
         }
 
         [Fact]
         public async Task NotificationComplete_ValidInput_CallsClient()
         {
             var model = new DateInputViewModel();
-            model.NotificationCompleteDate = new OptionalDateInputViewModel(completeDate);
-            model.Command = DateInputViewModel.NotificationComplete;
+            model.NewDate = new OptionalDateInputViewModel(completeDate);
+            model.Command = KeyDatesStatusEnum.NotificationComplete;
 
             var controller = GetMockAssessmentController(model);
 
@@ -280,7 +294,7 @@
                         A<SetNotificationCompleteDate>.That.Matches(
                             p =>
                                 p.NotificationId == model.NotificationId &&
-                                p.NotificationCompleteDate == model.NotificationCompleteDate.AsDateTime().Value)))
+                                p.NotificationCompleteDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -288,8 +302,8 @@
         public async Task NotificationTransmitted_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
-            model.NotificationTransmittedDate = new OptionalDateInputViewModel(transmittedDate);
-            model.Command = DateInputViewModel.NotificationTransmitted;
+            model.NewDate = new OptionalDateInputViewModel(transmittedDate);
+            model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
 
@@ -302,21 +316,21 @@
         public async Task NotificationTransmitted_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
-            model.Command = DateInputViewModel.NotificationTransmitted;
+            model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
 
             await controller.Index(model);
 
-            Assert.True(controller.ModelState.ContainsKey("NotificationTransmittedDate"));
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
         }
 
         [Fact]
         public async Task NotificationTransmitted_ValidInput_CallsClient()
         {
             var model = new DateInputViewModel();
-            model.NotificationTransmittedDate = new OptionalDateInputViewModel(transmittedDate);
-            model.Command = DateInputViewModel.NotificationTransmitted;
+            model.NewDate = new OptionalDateInputViewModel(transmittedDate);
+            model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
 
@@ -328,7 +342,103 @@
                         A<SetNotificationTransmittedDate>.That.Matches(
                             p =>
                                 p.NotificationId == model.NotificationId &&
-                                p.NotificationTransmittedDate == model.NotificationTransmittedDate.AsDateTime().Value)))
+                                p.NotificationTransmittedDate == model.NewDate.AsDateTime().Value)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_ValidInput_NoValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.NewDate = new OptionalDateInputViewModel(acknowledgedDate);
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_InvalidInput_ValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task DecisionRequiredByDate_ValidInput_CallsClient()
+        {
+            var model = new DateInputViewModel();
+            model.NewDate = new OptionalDateInputViewModel(decisionRequiredDate);
+            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            A.CallTo(
+                () =>
+                    client.SendAsync(A<string>._,
+                        A<SetNotificationDecisionRequiredByDate>.That.Matches(
+                            p =>
+                                p.NotificationId == model.NotificationId &&
+                                p.DecisionRequiredByDate == model.NewDate.AsDateTime().Value)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task DecisionRequiredByDate_ValidInput_NoValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.NewDate = new OptionalDateInputViewModel(decisionRequiredDate);
+            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.IsValid);
+        }
+
+        [Fact]
+        public async Task DecisionRequiredByDate_InvalidInput_ValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_ValidInput_CallsClient()
+        {
+            var model = new DateInputViewModel();
+            model.NewDate = new OptionalDateInputViewModel(acknowledgedDate);
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            A.CallTo(
+                () =>
+                    client.SendAsync(A<string>._,
+                        A<SetNotificationAcknowledgedDate>.That.Matches(
+                            p =>
+                                p.NotificationId == model.NotificationId &&
+                                p.AcknowledgedDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

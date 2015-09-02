@@ -15,6 +15,10 @@
         [Display(Name = "Ready to transmit")]
         ReadyToTransmit = 5,
         [Display(Name = "Transmitted")]
-        Transmitted = 6
+        Transmitted = 6,
+        [Display(Name = "Acknowledged")]
+        Acknowledged = 7,
+        [Display(Name = "Decision required by")]
+        DecisionRequiredBy = 8
     }
 }

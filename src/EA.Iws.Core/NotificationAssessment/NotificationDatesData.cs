@@ -17,5 +17,9 @@
         public DateTime? CompletedDate { get; set; }
 
         public DateTime? TransmittedDate { get; set; }
+
+        public DateTime? AcknowledgedDate { get; set; }
+
+        public DateTime? DecisionRequiredDate { get; set; }
     }
 }

@@ -17,7 +17,9 @@
             NotificationReceived,
             AssessmentCommenced,
             NotificationComplete,
-            Transmit
+            Transmit,
+            Acknowledged,
+            DecisionRequiredBySet
         }
 
         private readonly StateMachine<NotificationStatus, Trigger> stateMachine;
@@ -26,6 +28,8 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> commencedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> completeTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> transmitTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> decisionRequiredByTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
         
@@ -62,6 +66,8 @@
             commencedTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.AssessmentCommenced);
             completeTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.NotificationComplete);
             transmitTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Transmit);
+            acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
+            decisionRequiredByTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.DecisionRequiredBySet);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -85,7 +91,15 @@
                 .Permit(Trigger.Transmit, NotificationStatus.Transmitted);
 
             stateMachine.Configure(NotificationStatus.Transmitted)
-                .OnEntryFrom(transmitTrigger, OnTransmitted);
+                .OnEntryFrom(transmitTrigger, OnTransmitted)
+                .Permit(Trigger.Acknowledged, NotificationStatus.Acknowledged);
+
+            stateMachine.Configure(NotificationStatus.Acknowledged)
+                .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
+                .Permit(Trigger.DecisionRequiredBySet, NotificationStatus.DecisionRequiredBy);
+
+            stateMachine.Configure(NotificationStatus.DecisionRequiredBy)
+                .OnEntryFrom(decisionRequiredByTrigger, OnDecisionRequiredBy);
 
             return stateMachine;
         }
@@ -119,6 +133,16 @@
         private void OnTransitionAction(StateMachine<NotificationStatus, Trigger>.Transition transition)
         {
             RaiseEvent(new NotificationStatusChangeEvent(this, transition.Destination));
+        }
+
+        private void OnAcknowledged(DateTime acknowledgedDate)
+        {
+            Dates.AcknowledgedDate = acknowledgedDate;
+        }
+
+        private void OnDecisionRequiredBy(DateTime decisionByDate)
+        {
+            Dates.DecisionDate = decisionByDate;
         }
 
         public void Submit(INotificationProgressService progressService)
@@ -167,6 +191,16 @@
         public void Transmit(DateTime transmittedDate)
         {
             stateMachine.Fire(transmitTrigger, transmittedDate);
+        }
+
+        public void Acknowledge(DateTime acknowledgedDate)
+        {
+            stateMachine.Fire(acknowledgedTrigger, acknowledgedDate);
+        }
+
+        public void DecisionRequiredBy(DateTime decisionRequiredByDate)
+        {
+            stateMachine.Fire(decisionRequiredByTrigger, decisionRequiredByDate);
         }
     }
 }

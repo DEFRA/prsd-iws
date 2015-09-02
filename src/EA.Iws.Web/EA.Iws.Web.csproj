@@ -778,6 +778,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\YCode\YCodeViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationAssessment\NotificationAssessmentAreaRegistration.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\KeyDatesStatusEnum.cs" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />

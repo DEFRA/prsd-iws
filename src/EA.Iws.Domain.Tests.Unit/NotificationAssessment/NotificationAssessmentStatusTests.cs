@@ -20,6 +20,8 @@
         private string nameOfOfficer = "officer";
         private DateTime completedDate = new DateTime(2015, 8, 20);
         private DateTime transmittedDate = new DateTime(2015, 8, 22);
+        private DateTime acknowledgedDate = new DateTime(2015, 8, 23);
+        private DateTime decisionByDate = new DateTime(2015, 8, 24);
 
         public NotificationAssessmentStatusTests()
         {
@@ -267,6 +269,52 @@
             Action setNotificationTransmitted = () => notificationAssessment.Transmit(transmittedDate);
 
             Assert.Throws<InvalidOperationException>(setNotificationTransmitted);
+        }
+
+        [Fact]
+        public void SetAcknowledgedSetsDate()
+        {
+            SetNotificationStatus(NotificationStatus.Transmitted);
+
+            notificationAssessment.Acknowledge(acknowledgedDate);
+
+            Assert.Equal(acknowledgedDate, notificationAssessment.Dates.AcknowledgedDate);
+        }
+
+        [Fact]
+        public void SetAcknowledgedChabgesStatusToAcknowledged()
+        {
+            SetNotificationStatus(NotificationStatus.Transmitted);
+
+            notificationAssessment.Acknowledge(acknowledgedDate);
+
+            Assert.Equal(NotificationStatus.Acknowledged, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantSetNotificationAcknowledgedWhenNotTransmitted()
+        {
+            Action setAcknowledged = () => notificationAssessment.Acknowledge(acknowledgedDate);
+
+            Assert.Throws<InvalidOperationException>(setAcknowledged);
+        }
+
+        [Fact]
+        public void SetDecisionRequiredBySetSetsDate()
+        {
+            SetNotificationStatus(NotificationStatus.Acknowledged);
+
+            notificationAssessment.DecisionRequiredBy(decisionByDate);
+
+            Assert.Equal(decisionByDate, notificationAssessment.Dates.DecisionDate);
+        }
+
+        [Fact]
+        public void CantSetDecisionRequiredByWhenNotAcknowledged()
+        {
+            Action setDecisionRequiredBy = () => notificationAssessment.DecisionRequiredBy(acknowledgedDate);
+
+            Assert.Throws<InvalidOperationException>(setDecisionRequiredBy);
         }
     }
 }

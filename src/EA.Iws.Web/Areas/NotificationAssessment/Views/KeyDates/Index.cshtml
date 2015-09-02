@@ -1,237 +1,241 @@
 ﻿@using EA.Iws.Web.Areas.NotificationAssessment.ViewModels
 @model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.DateInputViewModel
 
-<h2 class="heading-large">Which date(s) would you like to enter?</h2>
+<h1 class="heading-large">Enter the key dates for this notification</h1>
 
-@using (Html.BeginForm())
-{
-    @Html.Gds().ValidationSummary()
-    @Html.HiddenFor(m => m.NotificationId)
-    @Html.AntiForgeryToken()
+@{
+    var nullMarker = "- -";
+    var byText = " by ";
+}
+    
+
 
     <div>
-        <details>
-            <summary>
-                <span class="summary">Notification received date</span>
-                @if (Model.NotificationReceivedDate.IsCompleted)
-                {
-                    <i class="fa-check fa green-tick"></i>
-                }
-            </summary>
-            <div class="expanded-details">
-                <div class="panel-indent">
+        These are the dates so far:
+
+        <table>
+            <tr>
+                <th>Activities</th>
+                <th>Dates</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
+                <td>
                     @if (Model.NotificationReceivedDate.IsCompleted)
                     {
                         @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
                     }
                     else
                     {
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Year)">
-                            <fieldset>
-                                <div class="form-date">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.EditorFor(m => m.NotificationReceivedDate)
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.NotificationReceived">Set received</button>
-                        </div>
+                        @nullMarker
                     }
-                </div>
-            </div>
-        </details>
-    </div>
+                </td>
+                <td>
+                    @(Model.NotificationReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null))
+                </td>
+            </tr>
 
-    <div>
-        <details>
-            <summary>
-                <span class="summary">Payment recieved date</span>
-                @if (Model.PaymentReceivedDate.IsCompleted)
-                {
-                    <i class="fa-check fa green-tick"></i>
-                }
-            </summary>
-            <div class="expanded-details">
-                <div class="panel-indent">
+            <tr>
+                <td>Payment received</td>
+                <td>
                     @if (Model.PaymentReceivedDate.IsCompleted)
                     {
                         @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.AsDateTime().GetValueOrDefault())
                     }
                     else
                     {
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Year)">
-                            <fieldset>
-                                <div class="form-date">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.PaymentReceivedDate)
-                                    @Html.EditorFor(m => m.PaymentReceivedDate)
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.PaymentReceived">Payment received</button>
-                        </div>
+                        @nullMarker
                     }
-                </div>
-            </div>
-        </details>
-    </div>
+                </td>
+                <td>
+                    @if (Model.NotificationReceivedDate.IsCompleted)
+                    {
+                        @(Model.PaymentReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.PaymentReceived }, null)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.PaymentReceived }, null))
+                    }
+                </td>
 
-    <div>
-        <details>
-            <summary>
-                <span class="summary">Assessment commencement date and name of officer</span>
-                @if (Model.CommencementComplete)
-                {
-                    <i class="fa-check fa green-tick"></i>
-                }
-            </summary>
-            <div class="expanded-details">
-                <div class="panel-indent">
-                    @if (Model.CommencementComplete)
+            </tr>
+
+            <tr>
+                <td>Assessment started</td>
+                <td>
+                    @if (Model.CommencementDate.IsCompleted)
                     {
                         @Html.Gds().DisplayDateFor(m => m.CommencementDate.AsDateTime().GetValueOrDefault())
-                        <br />
+                        @byText
                         @Html.DisplayFor(m => m.NameOfOfficer)
                     }
                     else
                     {
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.CommencementDate) @Html.Gds().FormGroupClass(m => m.CommencementDate.Day) @Html.Gds().FormGroupClass(m => m.CommencementDate.Month) @Html.Gds().FormGroupClass(m => m.CommencementDate.Year)">
-                            <fieldset>
-                                <div class="form-date form-group">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.CommencementDate)
-                                    @Html.EditorFor(m => m.CommencementDate)
-                                </div>
-                                <div>
-                                    @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
-                                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer, false)
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.AssessmentCommenced">Set assessment commenced</button>
-                        </div>
+                        @nullMarker
                     }
-                </div>
-            </div>
-        </details>
-    </div>
+                </td>
+                <td>
+                    @if (Model.PaymentReceivedDate.IsCompleted)
+                    {
+                        @(Model.CommencementDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null))
+                    }
+                </td>
 
-    <div>
-        <details>
-            <summary>
-                <span class="summary">Notification complete date</span>
-                @if (Model.NotificationCompleteDate.IsCompleted)
-                {
-                    <i class="fa-check fa green-tick"></i>
-                }
-            </summary>
-            <div class="expanded-details">
-                <div class="panel-indent">
+            </tr>
+
+            <tr>
+                <td>Date completed</td>
+                <td>
                     @if (Model.NotificationCompleteDate.IsCompleted)
                     {
                         @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
                     }
                     else
                     {
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate) @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationCompleteDate.Year)">
-                            <fieldset>
-                                <div class="form-date">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.NotificationCompleteDate)
-                                    @Html.EditorFor(m => m.NotificationCompleteDate)
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.NotificationComplete">Set notification complete</button>
-                        </div>
+                        @nullMarker
                     }
-                </div>
-            </div>
-        </details>
-    </div>
+                </td>
+                <td>
+                    @if (Model.CommencementDate.IsCompleted)
+                    {
+                        @(Model.NotificationCompleteDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null))
+                    }
+                </td>
 
-    <div>
-        <details>
-            <summary>
-                <span class="summary">Notification transmitted date</span>
-                @if (Model.NotificationTransmittedDate.AsDateTime() != null)
-                {
-                    <i class="fa-check fa green-tick"></i>
-                }
-            </summary>
-            <div class="expanded-details">
-                <div class="panel-indent">
-                    @if (Model.NotificationTransmittedDate.AsDateTime() != null)
+            </tr>
+
+            <tr>
+                <td>Transmitted on</td>
+                <td>
+                    @if (Model.NotificationTransmittedDate.IsCompleted)
                     {
                         @Html.Gds().DisplayDateFor(m => m.NotificationTransmittedDate.AsDateTime().GetValueOrDefault())
                     }
                     else
                     {
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationTransmittedDate) @Html.Gds().FormGroupClass(m => m.NotificationTransmittedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationTransmittedDate.Year)">
-                            <fieldset>
-                                <div class="form-date">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.NotificationTransmittedDate)
-                                    @Html.EditorFor(m => m.NotificationTransmittedDate)
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="button" name="Command" value="@DateInputViewModel.NotificationTransmitted">Set notification transmitted</button>
-                        </div>
+                        @nullMarker
                     }
-                </div>
-            </div>
-        </details>
-
-    </div>
-
-    <div class="form-group">
-        <table>
-            <tr>
-                <td>
-                    <details>
-                        <summary><span class="summary">Notification acknowledged date</span></summary>
-                        @{if (Model.NotificationAcknowledgedDate.AsDateTime() != null)
-                        {<i class="fa-check fa green-tick"></i>}}
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationAcknowledgedDate) @Html.Gds().FormGroupClass(m => m.NotificationAcknowledgedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationAcknowledgedDate.Year)">
-                            <fieldset>
-                                <div class="form-date">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.NotificationAcknowledgedDate)
-                                    @Html.EditorFor(m => m.NotificationAcknowledgedDate)
-                                </div>
-                            </fieldset>
-                        </div>
-                    </details>
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    <details>
-                        <summary><span class="summary">Decision required by date</span></summary>
-                        @{if (Model.DecisionDate.AsDateTime() != null)
-                        {<i class="fa-check fa green-tick"></i>}}
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionDate) @Html.Gds().FormGroupClass(m => m.DecisionDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionDate.Year)">
-                            <fieldset>
-                                <div class="form-date">
-                                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                                    @Html.Gds().ValidationMessageFor(m => m.DecisionDate)
-                                    @Html.EditorFor(m => m.DecisionDate)
-                                </div>
-                            </fieldset>
-                        </div>
-                    </details>
+                    @if (Model.NotificationCompleteDate.IsCompleted)
+                    {
+                        @(Model.NotificationTransmittedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null))
+                    }
                 </td>
+
             </tr>
+
+            <tr>
+                <td>Acknowledged on</td>
+                <td>
+                    @if (Model.NotificationAcknowledgedDate.IsCompleted)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.NotificationAcknowledgedDate.AsDateTime().GetValueOrDefault())
+                    }
+                    else
+                    {
+                        @nullMarker
+                    }
+                </td>
+                <td>
+                    @if (Model.NotificationTransmittedDate.IsCompleted)
+                    {
+                        @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null))
+                    }
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>Decision required by</td>
+                <td>
+                    @if (Model.DecisionDate.IsCompleted)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.DecisionDate.AsDateTime().GetValueOrDefault())
+                    }
+                    else
+                    {
+                        @nullMarker
+                    }
+                </td>
+                <td>
+                    @if (Model.NotificationAcknowledgedDate.IsCompleted)
+                    {
+                        @(Model.DecisionDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationDecisionDateEntered }, null)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationDecisionDateEntered }, null))
+                    }
+                </td>
+
+            </tr>
+
         </table>
+
     </div>
 
-    <div class="form-group">
-        <input type="submit" class="button" value="@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText" />
-    </div>
+@if (Model.Command != 0)
+{
+    using (Html.BeginForm("Index", "KeyDates", FormMethod.Post))
+    {
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.Command)
+        @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
+        @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
+        @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
+        @Html.HiddenFor(m => m.PaymentReceivedDate.Day)
+        @Html.HiddenFor(m => m.PaymentReceivedDate.Month)
+        @Html.HiddenFor(m => m.PaymentReceivedDate.Year)
+        @Html.HiddenFor(m => m.CommencementDate.Day)
+        @Html.HiddenFor(m => m.CommencementDate.Month)
+        @Html.HiddenFor(m => m.CommencementDate.Year)
+        @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
+        @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
+        @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
+        @Html.HiddenFor(m => m.NotificationTransmittedDate.Day)
+        @Html.HiddenFor(m => m.NotificationTransmittedDate.Month)
+        @Html.HiddenFor(m => m.NotificationTransmittedDate.Year)
+        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Day)
+        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Month)
+        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Year)
+        @Html.HiddenFor(m => m.DecisionDate.Day)
+        @Html.HiddenFor(m => m.DecisionDate.Month)
+        @Html.HiddenFor(m => m.DecisionDate.Year)
+        
+        @Html.AntiForgeryToken()
+
+        <br /><br />
+        <fieldset>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
+                @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
+                @Html.Gds().ValidationMessageFor(m => m.NewDate)
+                @Html.Gds().HintParagraph("For example, 31 3 2015")
+                @Html.EditorFor(m => m.NewDate)
+            </div>
+        </fieldset>
+
+        if (Model.Command == KeyDatesStatusEnum.AssessmentCommenced)
+        {
+            <fieldset>
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
+                    @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
+                    @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
+                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer)
+                </div>
+            </fieldset>
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.NameOfOfficer)
+        }
+
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="button" value="Submit date" />
+        </div>
+
+    }
 }
