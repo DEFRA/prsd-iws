@@ -17,7 +17,7 @@
             set { ObjectInstantiator<TechnologyEmployed>.SetProperty(x => x.Details, value, this); }
         }
 
-        public string FurtherDetails
+        public new string FurtherDetails
         {
             get { return base.FurtherDetails; }
             set { ObjectInstantiator<TechnologyEmployed>.SetProperty(x => x.FurtherDetails, value, this); }

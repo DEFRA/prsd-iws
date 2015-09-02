@@ -60,7 +60,7 @@
     <Compile Include="DomainFakes\TestableShipmentInfo.cs" />
     <Compile Include="DomainFakes\TestableStateOfImport.cs" />
     <Compile Include="DomainFakes\TestableStateOfExport.cs" />
-    <Compile Include="DomainFakes\TestableTechnologYEmployed.cs" />
+    <Compile Include="DomainFakes\TestableTechnologyEmployed.cs" />
     <Compile Include="DomainFakes\TestableTransitState.cs" />
     <Compile Include="DomainFakes\TestableWasteCode.cs" />
     <Compile Include="DomainFakes\TestableWasteCodeInfo.cs" />

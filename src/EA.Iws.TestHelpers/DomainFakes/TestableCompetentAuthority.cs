@@ -11,31 +11,31 @@
             set { base.Id = value; }
         }
 
-        public virtual Country Country
+        public new virtual Country Country
         {
             get { return base.Country; }
             set { base.Country = value; }
         }
 
-        public string Name
+        public new string Name
         {
             get { return base.Name; }
             set { base.Name = value; }
         }
 
-        public string Abbreviation
+        public new string Abbreviation
         {
             get { return base.Abbreviation; }
             set { base.Abbreviation = value; }
         }
 
-        public string Code
+        public new string Code
         {
             get { return base.Code; }
             set { base.Code = value; }
         }
 
-        public bool IsSystemUser
+        public new bool IsSystemUser
         {
             get { return base.IsSystemUser; }
             set { base.IsSystemUser = value; }
