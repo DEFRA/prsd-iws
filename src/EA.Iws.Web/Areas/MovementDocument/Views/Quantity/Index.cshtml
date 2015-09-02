@@ -5,10 +5,8 @@
 
 <h2 class="heading-large">How much waste is being exported?</h2>
 
-<p>Enter the actual quantity of waste as a number. You can add decimal figures if necessary</p>
+<p>Enter the actual quantity of waste as a number. You can add decimal figures if necessary.</p>
 
-<p>You have used <em class="bold-small">@Html.DisplayFor(m => m.TotalUsed)</em> of <em class="bold-small">@Html.DisplayFor(m => m.TotalNotified)</em> @Html.DisplayFor(m => m.UnitsDisplay) for this notification.</p>
-<p>You have <em class="bold-small">@Html.DisplayFor(m => m.TotalAvailable)</em> @Html.DisplayFor(m => m.UnitsDisplay) remaining.</p>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -39,9 +37,3 @@
         <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
     </div>
 }
-
-<style>
-    .form-control-wide {
-        width: 100%;
-    }
-</style>
