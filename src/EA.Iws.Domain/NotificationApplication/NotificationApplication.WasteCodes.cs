@@ -17,13 +17,15 @@
         {
             var newCodes = codes as WasteCodeInfo[] ?? codes.ToArray();
 
-            if (codeType != CodeType.CustomsCode && newCodes.Select(p => p.WasteCode.Id).Distinct().Count() != newCodes.Count())
+            if (codeType != CodeType.CustomsCode 
+                && !newCodes.Any(c => c.IsNotApplicable)
+                && newCodes.Select(p => p.WasteCode.Id).Distinct().Count() != newCodes.Count())
             {
                 throw new InvalidOperationException(
                     string.Format("The same code cannot be entered twice for notification {0}", Id));
             }
 
-            if (newCodes.Any(p => p.WasteCode.CodeType != codeType))
+            if (newCodes.Any(p => p.CodeType != codeType))
             {
                 throw new InvalidOperationException(string.Format("All codes must be of type {0} for notification {1}", codeType, Id));
             }
@@ -42,7 +44,7 @@
 
         private void SetCode(WasteCodeInfo code, CodeType codeType)
         {
-            if (code.WasteCode != null && code.WasteCode.CodeType != codeType)
+            if (code.CodeType != codeType)
             {
                 throw new InvalidOperationException(string.Format("This method can only set {0} code for this notification {1}", codeType, Id));
             }
@@ -58,7 +60,7 @@
 
         public void SetBaselOecdCode(WasteCodeInfo wasteCodeInfo)
         {
-            if (wasteCodeInfo.WasteCode.CodeType != CodeType.Basel && wasteCodeInfo.WasteCode.CodeType != CodeType.Oecd)
+            if (wasteCodeInfo.CodeType != CodeType.Basel && wasteCodeInfo.CodeType != CodeType.Oecd)
             {
                 throw new InvalidOperationException(string.Format("This method can only set Basel or OECD codes for this notification {0}", Id));
             }
