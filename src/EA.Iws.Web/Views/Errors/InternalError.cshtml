@@ -23,3 +23,21 @@
 
 <h2 class="heading-medium">What now?</h2>
 <p><a href="/">Return to the home page.</a></p>
+<p>
+    @if (User.IsInRole("internal"))
+    {
+        <ul id="proposition-links">
+            <li>
+                @Html.ActionLink(linkText: "Return to the home page.", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul id="proposition-links">
+            <li>
+                @Html.ActionLink(linkText: "Return to the home page.", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
+            </li>
+        </ul>
+    }
+</p>
