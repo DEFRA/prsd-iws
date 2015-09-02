@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
@@ -19,7 +20,9 @@
 
         public async Task<Dictionary<int, Guid>> HandleAsync(GetMovementsForNotificationById message)
         {
-            return await context.Movements.ToDictionaryAsync(m => m.Number, m => m.Id);
+            return await context.Movements
+                .Where(m => message.NotificationId == m.NotificationApplicationId)
+                .ToDictionaryAsync(m => m.Number, m => m.Id);
         }
     }
 }
