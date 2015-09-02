@@ -89,6 +89,7 @@
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="Copy\WasteCodeCopy.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
+    <Compile Include="Mappings\MovementMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationDatesMap.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
+    <Compile Include="Movement\GetMovementProgressInformationHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetNumberOfPackagesByMovementIdHandler.cs" />

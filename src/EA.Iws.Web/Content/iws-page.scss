@@ -657,6 +657,24 @@ table.table-pad-bottom {
     padding-bottom: 10px;
 }
 
-.form-group.form-group-half-border{
+#form-menu .summary-list {
+    > li {
+        @include core-19() {
+            font-size: $font-size;
+        }
 
+        > span {
+            font-size: inherit;
+            font-weight: normal;
+            display: inline-block;
+            padding: 0;
+        }
+
+        padding-top: 9px;
+        padding-bottom: 9px;
+        border-top: 1px solid $border-colour;
+    }
+
+    padding-bottom: 16px;
+    border-bottom: 10px solid $link-colour;
 }

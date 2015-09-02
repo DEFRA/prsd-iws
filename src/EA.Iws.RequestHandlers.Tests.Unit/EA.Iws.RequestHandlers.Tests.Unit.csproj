@@ -91,8 +91,10 @@
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetDecisionHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
+    <Compile Include="Mappings\MovementMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
+    <Compile Include="Movement\GetMovementProgressInformationHandlerTests.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetPackagingDataForMovementHandlerTests.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementIdTests.cs" />

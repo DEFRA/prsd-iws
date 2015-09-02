@@ -69,6 +69,7 @@
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="Movement\CreateMovementForNotificationById.cs" />
+    <Compile Include="Movement\GetMovementProgressInformation.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementId.cs" />
     <Compile Include="Movement\GetMovementsForNotificationById.cs" />
     <Compile Include="Movement\GetPackagingDataForMovement.cs" />

@@ -3,6 +3,9 @@
 }
 
 <div class="grid-row">
+    <aside id="form-menu" class="column-third form-status">
+        @Html.Action("Navigation", "Home")
+    </aside>
 
     <div class="column-two-thirds">
         @RenderBody()

@@ -36,12 +36,27 @@
         {
             using (var client = apiClient())
             {
-                var model = new MovementsViewModel()
+                var model = new MovementsViewModel
                 {
                     Movements = await client.SendAsync(User.GetAccessToken(), new GetMovementsForNotificationById(notificationId))
                 };
 
                 return View(model);
+            }
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult Navigation(Guid notificationId, Guid movementId)
+        {
+            using (var client = apiClient())
+            {
+                var result =
+                    client.SendAsync(User.GetAccessToken(),
+                            new GetMovementProgressInformation(notificationId, movementId))
+                            .GetAwaiter()
+                            .GetResult();
+
+                return PartialView("_Navigation", result);
             }
         }
     }

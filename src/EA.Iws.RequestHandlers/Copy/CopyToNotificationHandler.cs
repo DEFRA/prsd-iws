@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Prsd.Core;
@@ -84,7 +85,7 @@
 
             var clone = await GetCopyOfSourceNotification(sourceId);
             var clonedAssessment = await GetCopyOfNotificationAssessment(destinationId);
-
+            
             copier.CopyNotificationProperties(clone, destination);
 
             context.NotificationApplications.Add(clone);
@@ -105,6 +106,9 @@
             // Update foreign key on assessment object
             SetNotificationApplicationIdOnAssessment(clonedAssessment, clone.Id);
             context.NotificationAssessments.Add(clonedAssessment);
+
+            // Add financial guarantee
+            context.FinancialGuarantees.Add(FinancialGuarantee.Create(clone.Id));
 
             return clone;
         }

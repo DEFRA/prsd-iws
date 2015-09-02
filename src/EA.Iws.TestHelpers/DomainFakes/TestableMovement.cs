@@ -33,22 +33,28 @@
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Quantity, value, this); }
         }
 
-        public new DateTime Date
+        public new DateTime? Date
         {
-            get { return base.Date.GetValueOrDefault(); }
+            get { return base.Date; }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Date, value, this); }
         }
 
         public new IEnumerable<PackagingInfo> PackagingInfos
         {
             get { return base.PackagingInfos; }
-            set { PackagingInfosCollection = value.ToList(); }
+            set { PackagingInfosCollection = (value == null) ? null : value.ToList(); }
         }
 
         public new int? NumberOfPackages
         {
             get { return base.NumberOfPackages; }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.NumberOfPackages, value, this); }
+        }
+
+        public new int Number
+        {
+            get { return base.Number; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.Number, value, this); }
         }
     }
 }

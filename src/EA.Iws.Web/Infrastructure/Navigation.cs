@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Web.Mvc;
+    using System.Web.Routing;
 
     public class Navigation
     {
@@ -10,6 +11,23 @@
         public Navigation(HtmlHelper htmlHelper)
         {
             this.htmlHelper = htmlHelper;
+        }
+
+        public MvcHtmlString Link(string linkText, bool isComplete, string actionName, string controllerName,
+            RouteValueDictionary routeValues, string[] additionalActiveActionNames = null)
+        {
+            var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+
+            var link = new TagBuilder("a");
+            link.GenerateId(linkText);
+            link.Attributes.Add("href", urlHelper.Action(actionName, controllerName, routeValues));
+            
+            if (IsActiveItem(htmlHelper, controllerName, actionName, routeValues["area"].ToString(), additionalActiveActionNames))
+            {
+                link.AddCssClass("active");
+            }
+
+            return GenerateProgressLink(link, isComplete, linkText);
         }
 
         /// <summary>
@@ -35,6 +53,11 @@
                 link.AddCssClass("active");
             }
 
+            return GenerateProgressLink(link, isComplete, linkText);
+        }
+
+        private static MvcHtmlString GenerateProgressLink(TagBuilder link, bool isComplete, string linkText)
+        {
             link.Attributes.Add("title", linkText);
             link.Attributes.Add("role", "progressbar");
             link.Attributes.Add("aria-valuemin", "0");
@@ -53,7 +76,7 @@
                 link.Attributes.Add("aria-valuenow", "0");
             }
 
-            link.InnerHtml = linkText + icon.ToString();
+            link.InnerHtml = linkText + icon;
 
             return MvcHtmlString.Create(link.ToString());
         }

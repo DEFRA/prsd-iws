@@ -60,6 +60,8 @@
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
+    <Compile Include="Movement\ProgressData.cs" />
+    <Compile Include="Movement\MovementProgressAndSummaryData.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentSummaryInformationData.cs" />

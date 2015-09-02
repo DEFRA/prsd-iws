@@ -51,6 +51,7 @@
     <Compile Include="DomainFakes\TestableContact.cs" />
     <Compile Include="DomainFakes\TestableCountry.cs" />
     <Compile Include="DomainFakes\TestableEntryOrExitPoint.cs" />
+    <Compile Include="DomainFakes\TestableFinancialGuarantee.cs" />
     <Compile Include="DomainFakes\TestableMovement.cs" />
     <Compile Include="DomainFakes\TestableNotificationApplication.cs" />
     <Compile Include="DomainFakes\TestableNotificationAssessment.cs" />
