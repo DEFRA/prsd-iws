@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
-    using System;
     using Domain.NotificationApplication;
 
     internal class ProducerViewModel
@@ -23,11 +22,7 @@
             CountOfProducers = countOfProducers;
             ProcessOfGeneration = processText ?? string.Empty;
             IsProcessAnnexAttached = isIsProcessAnnexAttachedAttached;
-            DescriptionTitle = "Description of Process of Generation";
-        }
-
-        private ProducerViewModel()
-        {
+            DescriptionTitle = "Process of generation";
         }
 
         public string Name { get; private set; }
@@ -79,7 +74,6 @@
         private string GetSiteAndProcessText(int annexNumber)
         {
             string text = string.Empty;
-
             bool isProcessAnnexAttached = false;
 
             if (IsProcessAnnexAttached.HasValue)
@@ -123,7 +117,7 @@
 
         public ProducerViewModel GetProducerViewModelShowingAnnexMessages(int producerCount, ProducerViewModel pvm, int annexNumber)
         {
-            //If there is only one left put it on the form otherwise put them all in the annex - one has been removed hence > 1 here
+            //If there is only one let put it on the form otherwise put them all in the annex - one has been removed hence > 1 here
             if (producerCount > 1)
             {
                 return GetProducerViewModelShowingAnnexMessagesForProducerCountGreaterThanTwo(pvm, annexNumber);
@@ -152,7 +146,6 @@
         private ProducerViewModel GetProducerViewModelShowingAnnexMessagesForProducerCountNotGreaterThanTwo(ProducerViewModel pvm, int annexNumber)
         {
             pvm.SiteOfGeneration = GetSiteAndProcessText(annexNumber);
-
             return pvm;
         }
 

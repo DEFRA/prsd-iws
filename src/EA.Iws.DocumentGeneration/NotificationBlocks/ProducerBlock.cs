@@ -27,10 +27,8 @@
 
             // The producers annex contains a set of different merge fields for producer marked as Site of Export.
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
-            ((List<MergeField>)AnnexMergeFields).AddRange(MergeFieldLocator.GetAnnexMergeFields(mergeFields,
-                SiteOfExport));
-            ((List<MergeField>)AnnexMergeFields).AddRange(MergeFieldLocator.GetAnnexMergeFields(mergeFields,
-                PoGtext));
+            ((List<MergeField>)AnnexMergeFields).AddRange(MergeFieldLocator.GetAnnexMergeFields(mergeFields, SiteOfExport));
+            ((List<MergeField>)AnnexMergeFields).AddRange(MergeFieldLocator.GetAnnexMergeFields(mergeFields, PoGtext));
         }
 
         public bool HasAnnex
@@ -88,7 +86,8 @@
             }
 
             //Clear the annex process of generation field if it contains no text
-            if (!(data[0].ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()))
+            if (!(data[0].ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()) &&
+                !(data.Count == 1 && data[0].IsProcessAnnexAttached.GetValueOrDefault()))
             {
                 ClearProcessOfGenerationTextFields();
             }
@@ -187,7 +186,8 @@
 
         private void MergeProcessOfGenerationTextInAnnex(ProducerViewModel pvm, PropertyInfo[] proerties)
         {
-            if (pvm.ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength())
+            if (pvm.IsProcessAnnexAttached.GetValueOrDefault() ||
+                (pvm.ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()))
             {
                 foreach (var mergeField in FindProcessOfGenerationTextMergeFields())
                 {
