@@ -2,6 +2,7 @@
 @{
     var id = Model.NotificationId;
     var disposalOrRecovery = Model.NotificationType;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
 <h2 class="heading-medium">Waste @disposalOrRecovery.ToString().ToLowerInvariant()</h2>
@@ -18,43 +19,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsWasteRecoveryInformationCompleted)
-                {
-                    <dl>
-                        @if (Model.RecoveryPercentageData.IsProvidedByImporter.GetValueOrDefault())
-                        {
-                            <dt>Details:</dt>
-                            <dd>The importer-consignee will provide the details</dd>
-                        }
-                        else
-                        {
-                            <dt>Percentage recoverable:</dt>
-                            <dd>@Html.DisplayFor(m => m.RecoveryPercentageData.PercentageRecoverable)%</dd>
-
-                            if (Model.RecoveryPercentageData.PercentageRecoverable.GetValueOrDefault() < 100)
-                            {
-                                <dt>Disposal method:</dt>
-                                <dd>@Html.DisplayFor(m => m.RecoveryPercentageData.MethodOfDisposal)</dd>
-                            }
-
-                            <dt>Estimated value of recoverable material (per @Html.DisplayFor(m => m.RecoveryInfoData.EstimatedUnit)):</dt>
-                            <dd>£@Html.DisplayFor(m => m.RecoveryInfoData.EstimatedAmount)</dd>
-
-                            <dt>Cost of recovery (per @Html.DisplayFor(m => m.RecoveryInfoData.CostUnit)):</dt>
-                            <dd>£@Html.DisplayFor(m => m.RecoveryInfoData.CostAmount)</dd>
-
-                            if (Model.RecoveryInfoData.DisposalAmount.HasValue)
-                            {
-                                <dt>Cost of disposal (per @Html.DisplayFor(m => m.RecoveryInfoData.DisposalUnit)):</dt>
-                                <dd>£@Html.DisplayFor(m => m.RecoveryInfoData.DisposalAmount)</dd>
-                            }
-                        }
-                    </dl>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_RecoveryInformation.cshtml")
             </div>
         </div>
     </details>

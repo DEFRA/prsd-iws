@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
+           
+@if (Model.IsPreconsentStatusChosen)
+{
+    <p>@Html.DisplayFor(m => m.PreconstedAnswer)</p>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

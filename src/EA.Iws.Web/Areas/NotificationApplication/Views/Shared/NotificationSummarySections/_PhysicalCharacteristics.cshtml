@@ -1,0 +1,13 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
+    
+@if (Model.ArePhysicalCharacteristicsCompleted)
+{
+    <dl>
+        <dt>Physical characteristics of the waste:</dt>
+        <dd>@string.Join(", ", Model.PhysicalCharacteristics)</dd>
+    </dl>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

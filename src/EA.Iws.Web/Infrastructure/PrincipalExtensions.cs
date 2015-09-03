@@ -66,5 +66,17 @@
 
             return claim != null ? claim.Value : null;
         }
+
+        public static bool IsInternalUser(this IPrincipal principal)
+        {
+            var claimsPrincipal = principal as ClaimsPrincipal;
+
+            if (claimsPrincipal == null)
+            {
+                return false;
+            }
+
+            return claimsPrincipal.HasClaim(ClaimTypes.Role, "internal");
+        }
     }
 }

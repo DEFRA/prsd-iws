@@ -1,0 +1,22 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+@{
+    var codeDefinitionListPartialName = Constants.NotificationSummaryViewLocation + "_CodeDefinitionList.cshtml";
+}
+
+@if (Model.AreUnClassesCompleted)
+{
+    <h4 class="heading-small">UN class(es)</h4>
+
+    if (Model.AreUnClassesNotApplicable)
+    {
+        <p>Not applicable</p>
+    }
+    else
+    {
+        @Html.Partial(codeDefinitionListPartialName, Model.UnClass)
+    }
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

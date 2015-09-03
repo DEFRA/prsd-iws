@@ -1,0 +1,19 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
+    
+@if (Model.IntendedShipmentData.NumberOfShipments > 0)
+{
+    <dl>
+        <dt>Total intended number of shipments:</dt>
+        <dd>@Model.IntendedShipmentData.NumberOfShipments</dd>
+
+        <dt>Total intended quantity:</dt>
+        <dd>@(Model.IntendedShipmentData.Quantity.ToString("0.000") + " " + Model.IntendedShipmentData.Units)</dd>
+
+        <dt>Intended dates of departure:</dt>
+        <dd>@Html.Gds().DisplayDateRangeFor(m => m.IntendedShipmentData.FirstDate, m => m.IntendedShipmentData.LastDate)</dd>
+    </dl>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

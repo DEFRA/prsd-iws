@@ -1,0 +1,33 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+    
+@if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name) || !string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+{
+    <dl>
+        @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name))
+        {
+            <dt>Exit customs office name:</dt>
+            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Name)</dd>
+            <dt>Exit customs office address:</dt>
+            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Address)</dd>
+            <dt>Exit customs office country:</dt>
+            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Country.Name)</dd>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+        {
+            <dt>Entry customs office name:</dt>
+            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Name)</dd>
+            <dt>Entry customs office address:</dt>
+            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Address)</dd>
+            <dt>Entry customs office country:</dt>
+            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Country.Name)</dd>
+        }
+    </dl>
+}
+else if (Model.IsCustomsOfficeCompleted)
+{
+    <p>Not applicable</p>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

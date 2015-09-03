@@ -1,6 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
 @{
     var id = Model.NotificationId;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
 <h2 class="heading-medium">Amount and dates</h2>
@@ -17,23 +18,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IntendedShipmentData.NumberOfShipments > 0)
-                {
-                    <dl>
-                        <dt>Total intended number of shipments:</dt>
-                        <dd>@Model.IntendedShipmentData.NumberOfShipments</dd>
-
-                        <dt>Total intended quantity:</dt>
-                        <dd>@(Model.IntendedShipmentData.Quantity.ToString("0.000") + " " + Model.IntendedShipmentData.Units)</dd>
-
-                        <dt>Intended dates of departure:</dt>
-                        <dd>@Html.Gds().DisplayDateRangeFor(m => m.IntendedShipmentData.FirstDate, m => m.IntendedShipmentData.LastDate)</dd>
-                    </dl>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_IntendedShipments.cshtml")
             </div>
         </div>
     </details>

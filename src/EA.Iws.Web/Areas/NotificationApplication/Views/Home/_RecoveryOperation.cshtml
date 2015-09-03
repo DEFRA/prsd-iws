@@ -3,6 +3,7 @@
 @{
     var id = Model.NotificationId;
     var disposalOrRecovery = Model.NotificationType;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
 <h2 class="heading-medium">@disposalOrRecovery operation</h2>
@@ -21,14 +22,7 @@
             </summary>
             <div class="expanded-details">
                 <div class="panel-indent">
-                    @if (Model.IsPreconsentStatusChosen)
-                    {
-                        <p>@Html.DisplayFor(m => m.PreconstedAnswer)</p>
-                    }
-                    else
-                    {
-                        <p>@ViewBag.SectionIncompleteText</p>
-                    }
+                    @Html.Partial(viewLocation + "_PreconsentStatus.cshtml")
                 </div>
             </div>
         </details>
@@ -44,14 +38,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.OperationCodes.Any())
-                {
-                    <p>@string.Join(", ", Model.OperationCodes)</p>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_OperationCodes.cshtml")
             </div>
         </div>
     </details>
@@ -66,23 +53,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsTechnologyEmployedCompleted)
-                {
-                    <dl>
-                        <dt>Description:</dt>
-                        <dd>@Html.DisplayFor(m => m.TechnologyEmployed.Details)</dd>
-
-                        @if (!Model.TechnologyEmployed.AnnexProvided)
-                        {
-                            <dt>Further details:</dt>
-                            <dd>@Html.DisplayFor(m => m.TechnologyEmployed.FurtherDetails)</dd>
-                        }
-                    </dl>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_TechnologyEmployed.cshtml")
             </div>
         </div>
     </details>
@@ -97,14 +68,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsReasonForExportCompleted)
-                {
-                    <p>@Html.DisplayFor(m => m.ReasonForExport)</p>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_ReasonForExport.cshtml")
             </div>
         </div>
     </details>

@@ -1,6 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
 @{
     var id = Model.NotificationId;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
 <h2 class="heading-medium">The journey</h2>
@@ -17,23 +18,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsStateOfExportCompleted)
-                {
-                    <dl>
-                        <dt>Country:</dt>
-                        <dd>@Html.DisplayFor(m => m.StateOfExportData.Country.Name)</dd>
-
-                        <dt>Competent authority:</dt>
-                        <dd>@Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)</dd>
-
-                        <dt>Exit point:</dt>
-                        <dd>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</dd>
-                    </dl>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_StateOfExport.cshtml")
             </div>
         </div>
     </details>
@@ -49,34 +34,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreTransitStatesCompleted && Model.TransitStates.Any())
-                {
-                    foreach (var transitState in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
-                    {
-                        <dl>
-                            <dt>Country:</dt>
-                            <dd>@transitState.Country.Name</dd>
-
-                            <dt>Competent authority:</dt>
-                            <dd>@transitState.CompetentAuthority.Name</dd>
-
-                            <dt>Entry point:</dt>
-                            <dd>@transitState.EntryPoint.Name</dd>
-
-                            <dt>Exit point:</dt>
-                            <dd>@transitState.ExitPoint.Name</dd>
-                        </dl>
-
-                        if (transitState != Model.TransitStates.OrderBy(ts => ts.OrdinalPosition).Last())
-                        {
-                            <hr />
-                        }
-                    }
-                }
-                else
-                {
-                    <p>There are no transit states</p>
-                }
+                @Html.Partial(viewLocation + "_TransitStates.cshtml")
             </div>
         </div>
     </details>
@@ -92,23 +50,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsStateOfImportCompleted)
-                {
-                    <dl>
-                        <dt>Country:</dt>
-                        <dd>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</dd>
-
-                        <dt>Competent authority:</dt>
-                        <dd>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</dd>
-
-                        <dt>Entry point:</dt>
-                        <dd>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</dd>
-                    </dl>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_StateOfImport.cshtml")
             </div>
         </div>
     </details>
@@ -124,37 +66,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name) || !string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
-                {
-                    <dl>
-                        @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name))
-                        {
-                            <dt>Exit customs office name:</dt>
-                            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Name)</dd>
-                            <dt>Exit customs office address:</dt>
-                            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Address)</dd>
-                            <dt>Exit customs office country:</dt>
-                            <dd>@Html.DisplayFor(m => m.ExitCustomsOffice.Country.Name)</dd>
-                        }
-                        @if (!string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
-                        {
-                            <dt>Entry customs office name:</dt>
-                            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Name)</dd>
-                            <dt>Entry customs office address:</dt>
-                            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Address)</dd>
-                            <dt>Entry customs office country:</dt>
-                            <dd>@Html.DisplayFor(m => m.EntryCustomsOffice.Country.Name)</dd>
-                        }
-                    </dl>
-                }
-                else if (Model.IsCustomsOfficeCompleted)
-                {
-                    <p>Not applicable</p>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_CustomsOffice.cshtml")
             </div>
         </div>
     </details>

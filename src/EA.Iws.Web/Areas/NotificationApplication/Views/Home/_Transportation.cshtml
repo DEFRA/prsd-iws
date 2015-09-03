@@ -1,6 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.TransportationViewModel
 @{
     var id = Model.NotificationId;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
 <h2 class="heading-medium">The transportation</h2>
@@ -17,37 +18,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsCarrierCompleted)
-                {
-                    for (int i = 0; i < Model.Carriers.Count; i++)
-                    {
-                        <div class="grid-row">
-                            <div class="column-half">
-                                <dl>
-                                    <dt>Organisation name:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Carriers[i].Business.Name)</dd>
-
-                                    <dt>Address:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Carriers[i].Address)</dd>
-                                </dl>
-                            </div>
-                            <div class="column-half">
-                                <dl>
-                                    <dt>Contact:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Carriers[i].Contact)</dd>
-                                </dl>
-                            </div>
-                        </div>
-                        if (i < Model.Carriers.Count - 1)
-                        {
-                            <hr />
-                        }
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_Carrier.cshtml")
             </div>
         </div>
     </details>
@@ -62,21 +33,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsMeansOfTransportCompleted)
-                {
-                    for (int i = 0; i < Model.MeanOfTransport.Count; i++)
-                    {
-                        @Html.DisplayFor(m => m.MeanOfTransport[i].DisplayName)
-                        if (i != Model.MeanOfTransport.Count - 1)
-                        {
-                            <text>&#8594;</text>
-                        }
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_MeansOfTransport.cshtml")
             </div>
         </div>
     </details>
@@ -91,19 +48,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsPackagingTypesCompleted)
-                {
-                    <ul>
-                        @for (int i = 0; i < Model.PackagingData.Count; i++)
-                        {
-                            <li>@Html.DisplayFor(m => m.PackagingData[i])</li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_PackagingTypes.cshtml")
             </div>
         </div>
     </details>
@@ -118,14 +63,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsSpecialHandlingCompleted)
-                {
-                    <p>@Html.DisplayFor(m => m.SpecialHandlingDetails)</p>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_SpecialHandling.cshtml")
             </div>
         </div>
     </details>

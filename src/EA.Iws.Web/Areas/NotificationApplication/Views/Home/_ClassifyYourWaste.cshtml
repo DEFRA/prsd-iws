@@ -1,7 +1,7 @@
-﻿@using EA.Iws.Core.WasteCodes
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
 @{
     var id = Model.NotificationId;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
 <h2 class="heading-medium">Classify your waste</h2>
@@ -18,72 +18,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsChemicalCompositionCompleted)
-                {
-                    <dl>
-                        <dt>Type:</dt>
-                        <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</dd>
-
-                        @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionName))
-                        {
-                            <dt>Name:</dt>
-                            <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionName)</dd>
-                        }
-                        @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription))
-                        {
-                            <dt>Description:</dt>
-                            <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionDescription)</dd>
-                        }
-                    </dl>
-                    
-                    if (Model.ChemicalComposition.ChemicalCompositionType != EA.Iws.Core.WasteType.ChemicalCompositionType.Other)
-                    {
-                        <dl>
-                            <dt>Chemical composition minimum and maximum as a weight by weight percentage:</dt>
-                        </dl>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Constituent</th>
-                                    <th>Composition</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = 0; i < Model.ChemicalComposition.WasteCompositionData.Count; i++)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].Constituent)</td>
-                                        <td>
-                                            @Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].MinConcentration)%
-                                            - @Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].MaxConcentration)%
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <dl>
-                            @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.OtherWasteTypeDescription))
-                            {
-                                <dt>Description:</dt>
-                                <dd>@Model.ChemicalComposition.OtherWasteTypeDescription</dd>
-                            }
-                            @if (Model.ChemicalComposition.HasAnnex)
-                            {
-                                <dt>Further details:</dt>
-                                <dd>To be provided in a separate annex.</dd>
-                            }
-                        </dl>
-                    }
-
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                 @Html.Partial(viewLocation + "_ChemicalComposition.cshtml")
             </div>
         </div>
     </details>
@@ -98,14 +33,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsProcessOfGenerationCompleted)
-                {
-                    <p>@Html.DisplayFor(m => m.ProcessOfGeneration)</p>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_ProcessOfGeneration.cshtml")
             </div>
         </div>
     </details>
@@ -120,17 +48,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.ArePhysicalCharacteristicsCompleted)
-                {
-                    <dl>
-                        <dt>Physical characteristics of the waste:</dt>
-                        <dd>@string.Join(", ", Model.PhysicalCharacteristics)</dd>
-                    </dl>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_PhysicalCharacteristics.cshtml")
             </div>
         </div>
     </details>

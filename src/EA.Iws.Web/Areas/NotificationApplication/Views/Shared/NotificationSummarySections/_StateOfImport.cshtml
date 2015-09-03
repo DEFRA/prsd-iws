@@ -1,0 +1,19 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+    
+@if (Model.IsStateOfImportCompleted)
+{
+    <dl>
+        <dt>Country:</dt>
+        <dd>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</dd>
+
+        <dt>Competent authority:</dt>
+        <dd>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</dd>
+
+        <dt>Entry point:</dt>
+        <dd>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</dd>
+    </dl>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

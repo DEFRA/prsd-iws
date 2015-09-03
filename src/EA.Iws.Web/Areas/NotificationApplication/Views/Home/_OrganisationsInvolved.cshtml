@@ -2,6 +2,7 @@
 @{
     var id = Model.NotificationId;
     var disposalOrRecovery = Model.NotificationType;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 <h2 class="heading-medium">Organisations involved</h2>
 
@@ -17,36 +18,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (@Model.IsExporterCompleted)
-                {
-                    <div class="grid-row">
-                        <div class="column-half">
-                            <dl>
-                                <dt>Organisation name:</dt>
-                                <dd>@Html.DisplayFor(m => m.Exporter.Business.Name)</dd>
-
-                                <dt>Address:</dt>
-                                <dd>@Html.DisplayFor(m => m.Exporter.Address)</dd>
-                            </dl>
-                        </div>
-                        <div class="column-half">
-                            <dl>
-                                <dt>Organisation type:</dt>
-                                <dd>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Exporter.Business.BusinessType)</dd>
-
-                                <dt>Company registration:</dt>
-                                <dd>@Html.DisplayFor(m => m.Exporter.Business.RegistrationNumber)</dd>
-
-                                <dt>Contact:</dt>
-                                <dd>@Html.DisplayFor(m => m.Exporter.Contact)</dd>
-                            </dl>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_Exporter.cshtml")
             </div>
         </div>
     </details>
@@ -61,37 +33,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (@Model.IsProducerCompleted)
-                {
-                    for (int i = 0; i < Model.Producers.Count; i++)
-                    {
-                        <div class="grid-row">
-                            <div class="column-half">
-                                <dl>
-                                    <dt>Organisation name:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Producers[i].Business.Name)</dd>
-
-                                    <dt>Address:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Producers[i].Address)</dd>
-                                </dl>
-                            </div>
-                            <div class="column-half">
-                                <dl>
-                                    <dt>Contact:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Producers[i].Contact)</dd>
-                                </dl>
-                            </div>
-                        </div>
-                        if (i < Model.Producers.Count - 1)
-                        {
-                            <hr />
-                        }
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_Producer.cshtml")
             </div>
         </div>
     </details>
@@ -106,30 +48,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.HasSiteOfExport)
-                {
-                    <div class="grid-row">
-                        <div class="column-half">
-                            <dl>
-                                <dt>Organisation name:</dt>
-                                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Business.Name)</dd>
-
-                                <dt>Address:</dt>
-                                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address)</dd>
-                            </dl>
-                        </div>
-                        <div class="column-half">
-                            <dl>
-                                <dt>Contact:</dt>
-                                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Contact)</dd>
-                            </dl>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_SiteOfExport.cshtml")
             </div>
         </div>
     </details>
@@ -144,36 +63,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsImporterCompleted)
-                {
-                    <div class="grid-row">
-                        <div class="column-half">
-                            <dl>
-                                <dt>Organisation name:</dt>
-                                <dd>@Html.DisplayFor(m => m.Importer.Business.Name)</dd>
-
-                                <dt>Address</dt>
-                                <dd>@Html.DisplayFor(m => m.Importer.Address)</dd>
-                            </dl>
-                        </div>
-                        <div class="column-half">
-                            <dl>
-                                <dt>Organisation type:</dt>
-                                <dd>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Importer.Business.BusinessType)</dd>
-
-                                <dt>Company registration:</dt>
-                                <dd>@Html.DisplayFor(m => m.Importer.Business.RegistrationNumber)</dd>
-
-                                <dt>Contact:</dt>
-                                <dd>@Html.DisplayFor(m => m.Importer.Contact)</dd>
-                            </dl>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_Importer.cshtml")
             </div>
         </div>
     </details>
@@ -188,43 +78,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsFacilityCompleted)
-                {
-                    for (int i = 0; i < Model.Facilities.Count; i++)
-                    {
-                        <div class="grid-row">
-                            <div class="column-half">
-                                <dl>
-                                    <dt>Organisation name:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Facilities[i].Business.Name)</dd>
-
-                                    <dt>Address:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Facilities[i].Address)</dd>
-                                </dl>
-                            </div>
-                            <div class="column-half">
-                                <dl>
-                                    <dt>Organisation type:</dt>
-                                    <dd>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Facilities[i].Business.BusinessType)</dd>
-
-                                    <dt>Company registration:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Facilities[i].Business.RegistrationNumber)</dd>
-
-                                    <dt>Contact:</dt>
-                                    <dd>@Html.DisplayFor(m => m.Facilities[i].Contact)</dd>
-                                </dl>
-                            </div>
-                        </div>
-                        if (i < Model.Facilities.Count - 1)
-                        {
-                            <hr />
-                        }
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+               @Html.Partial(viewLocation + "_Facility.cshtml")
             </div>
         </div>
     </details>
@@ -239,36 +93,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.HasActualSiteOfTreatment)
-                {
-                    <div class="grid-row">
-                        <div class="column-half">
-                            <dl>
-                                <dt>Organisation name:</dt>
-                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.Name)</dd>
-
-                                <dt>Address:</dt>
-                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address)</dd>
-                            </dl>
-                        </div>
-                        <div class="column-half">
-                            <dl>
-                                <dt>Organisation type:</dt>
-                                <dd>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.BusinessType)</dd>
-
-                                <dt>Company registration:</dt>
-                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.RegistrationNumber)</dd>
-
-                                <dt>Contact:</dt>
-                                <dd>@Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Contact)</dd>
-                            </dl>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_SiteOfRecovery.cshtml")
             </div>
         </div>
     </details>

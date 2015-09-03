@@ -1,11 +1,7 @@
-﻿@using EA.Iws.Core.WasteCodes
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
 @{
     var id = Model.NotificationId;
-    var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
-        ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
-        EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
-    var codeDefinitionListPartialName = "_CodeDefinitionList";
+    var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
 <h2 class="heading-medium">Waste codes</h2>
@@ -22,23 +18,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.IsBaselOecdCodeCompleted)
-                {
-                    <h4 class="heading-small">@baselOrOecdType code</h4>
-
-                    if (Model.IsBaselOecdCodeNotApplicable)
-                    {
-                        <p>Not listed</p>
-                    }
-                    else
-                    {
-                        @Html.Partial(codeDefinitionListPartialName, Model.BaselOecdCode)
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                 @Html.Partial(viewLocation + "_BaselOecdCode.cshtml")
             </div>
         </div>
     </details>
@@ -54,23 +34,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreEwcCodesCompleted)
-                {
-                    <h4 class="heading-small">EWC code(s)</h4>
-
-                    if (Model.AreEwcCodesNotApplicable)
-                    {
-                        <p>Not applicable</p>
-                    }
-                    else
-                    {
-                        @Html.Partial(codeDefinitionListPartialName, Model.EwcCodes)
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                 @Html.Partial(viewLocation + "_EwcCodes.cshtml")
             </div>
         </div>
     </details>
@@ -86,23 +50,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreYCodesCompleted)
-                {
-                    <h4 class="heading-small">Y code(s)</h4>
-
-                    if (Model.AreYCodesNotApplicable)
-                    {
-                        <p>Not applicable</p>
-                    }
-                    else
-                    {
-                        @Html.Partial(codeDefinitionListPartialName, Model.YCodes)
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_YCodes.cshtml")
             </div>
         </div>
     </details>
@@ -118,23 +66,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreHCodesCompleted)
-                {
-                    <h4 class="heading-small">H or HP code(s)</h4>
-
-                    if (Model.AreHCodesNotApplicable)
-                    {
-                        <p>Not applicable</p>
-                    }
-                    else
-                    {
-                        @Html.Partial(codeDefinitionListPartialName, Model.HCodes)
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_HCodes.cshtml")
             </div>
         </div>
     </details>
@@ -150,23 +82,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreUnClassesCompleted)
-                {
-                    <h4 class="heading-small">UN class(es)</h4>
-
-                    if (Model.AreUnClassesNotApplicable)
-                    {
-                        <p>Not applicable</p>
-                    }
-                    else
-                    {
-                        @Html.Partial(codeDefinitionListPartialName, Model.UnClass)
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_UnClasses.cshtml")
             </div>
         </div>
     </details>
@@ -182,23 +98,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreUnNumbersCompleted)
-                {
-                    <h4 class="heading-small">UN number(s)</h4>
-
-                    if (Model.AreUnNumbersNotApplicable)
-                    {
-                        <p>Not applicable</p>
-                    }
-                    else
-                    {
-                        @Html.Partial(codeDefinitionListPartialName, Model.UnNumber)
-                    }
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_UnNumbers.cshtml")
             </div>
         </div>
     </details>
@@ -214,55 +114,7 @@
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
-                @if (Model.AreOtherCodesCompleted)
-                {
-                    <h4 class="heading-small">Other codes</h4>
-                    <dl>
-                        <dt>Other code:</dt>
-                        @if (Model.OtherCodes.First().IsNotApplicable)
-                        {
-                            <dd>Not applicable</dd>
-                        }
-                        else
-                        {
-                            <dd>@string.Join(", ", Model.OtherCodes.Select(c => c.CustomCode).ToList())</dd>
-                        }
-
-                        <dt>National code in country of export:</dt>
-                        @if (Model.NationExportCode.First().IsNotApplicable)
-                        {
-                            <dd>Not applicable</dd>
-                        }
-                        else
-                        {
-                            <dd>@string.Join(", ", Model.NationExportCode.Select(c => c.CustomCode).ToList())</dd>
-                        }
-
-                        <dt>National code in country of import:</dt>
-                        @if (Model.NationImportCode.First().IsNotApplicable)
-                        {
-                            <dd>Not applicable</dd>
-                        }
-                        else
-                        {
-                            <dd>@string.Join(", ", Model.NationImportCode.Select(c => c.CustomCode).ToList())</dd>
-                        }
-
-                        <dt>Customs code(s):</dt>
-                        @if (Model.CustomCodes.First().IsNotApplicable)
-                        {
-                            <dd>Not applicable</dd>
-                        }
-                        else
-                        {
-                            <dd>@string.Join(", ", Model.CustomCodes.Select(c => c.CustomCode).ToList())</dd>
-                        }
-                    </dl>
-                }
-                else
-                {
-                    <p>@ViewBag.SectionIncompleteText</p>
-                }
+                @Html.Partial(viewLocation + "_OtherCodes.cshtml")
             </div>
         </div>
     </details>

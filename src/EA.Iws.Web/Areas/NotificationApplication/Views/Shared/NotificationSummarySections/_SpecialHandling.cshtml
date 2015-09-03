@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.TransportationViewModel
+
+@if (Model.IsSpecialHandlingCompleted)
+{
+    <p>@Html.DisplayFor(m => m.SpecialHandlingDetails)</p>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

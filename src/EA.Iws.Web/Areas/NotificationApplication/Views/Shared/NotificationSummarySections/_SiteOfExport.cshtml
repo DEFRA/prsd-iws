@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+    
+@if (Model.HasSiteOfExport)
+{
+    <div class="grid-row">
+        <div class="column-half">
+            <dl>
+                <dt>Organisation name:</dt>
+                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Business.Name)</dd>
+
+                <dt>Address:</dt>
+                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address)</dd>
+            </dl>
+        </div>
+        <div class="column-half">
+            <dl>
+                <dt>Contact:</dt>
+                <dd>@Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Contact)</dd>
+            </dl>
+        </div>
+    </div>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}
