@@ -12,10 +12,10 @@
 
     <div class="grid-row">
         <div class="column-two-thirds">
-            <h2 class="heading-large">Search</h2>
+            <h1 class="heading-large">Search</h1>
             <p>Enter notification number or exporter company name</p>
 
-            @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
+            @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control", @title="Search term" })
             &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go" />
 
             <hr class="section-bottom" />
@@ -23,7 +23,7 @@
             @if (Model != null && Model.SearchResults != null && Model.SearchResults.Count > 0)
             {
                 <h2 class="heading-medium">Your search returned @Model.SearchResults.Count results</h2>
-                <table>
+                <table title="Search results">
                     <thead>
                         <tr>
                             <th>Notification number</th>
@@ -63,7 +63,7 @@
             }
         </div>
         <div class="column-third" id="submit-side-bar">
-            <h3 class="heading-medium">Account services</h3>
+            <h2 class="heading-medium">Account services</h2>
             <p>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration")</p>
         </div>
     </div>

@@ -9,9 +9,8 @@
     }
     else
     {
-        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty)
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = "Exit country" })
     }
-    
 </div>
 
-<button class="button" type="submit" value="country" name="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+<button class="button" type="submit" value="country" name="submit">@Constants.ContinueButtonText</button>

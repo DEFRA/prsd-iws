@@ -1,12 +1,11 @@
 ﻿@using EA.Iws.Core.Admin
-@using EA.Iws.Web.Infrastructure
 @model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.NewUsersListViewModel
 @{
     ViewBag.Title = "Manage users";
     var usersNoun = Model.Users.Count != 1 ? "users" : "user";
 }
 
-<h2 class="heading-large">Manage new users</h2>
+<h1 class="heading-large">Manage new users</h1>
 
 <p>Displaying @Model.Users.Count @usersNoun</p>
 
@@ -17,7 +16,7 @@
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <table class="form-group">
+    <table class="form-group" title="Manage new users">
         <thead>
         <tr>
             <th>Name</th>
@@ -63,7 +62,7 @@
     </table>
 
     <div class="form-group">
-        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }
 

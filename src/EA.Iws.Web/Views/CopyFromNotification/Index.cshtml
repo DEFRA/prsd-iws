@@ -7,7 +7,7 @@
 @if (Model.Notifications.Any())
 {
     <header class="hgroup">
-        <h2 class="heading-large">Which previous notification would you like to use?</h2>
+        <h1 class="heading-large">Which previous notification would you like to use?</h1>
         <p>
             Select a notification from your previous notifications to copy the data from.
             You will have to set intended shipments information for this copied notification.
@@ -20,60 +20,58 @@
         @Html.Gds().ValidationSummary()
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
-            <table>
+            <table title="Notification summary to copy from existing notification">
                 <thead>
-                <tr>
-                    <th class="formatted-block-table-header">
-                        Notification number
-                    </th>
-                    <th class="formatted-block-table-header">
-                        Exporter
-                    </th>
-                    <th class="formatted-block-table-header">
-                        Importer
-                    </th>
-                    <th class="formatted-block-table-header">
-                        Waste type
-                    </th>
-                    <th class="formatted-block-table-header">
-                        Select
-                    </th>
-                </tr>
+                    <tr>
+                        <th class="formatted-block-table-header">
+                            Notification number
+                        </th>
+                        <th class="formatted-block-table-header">
+                            Exporter
+                        </th>
+                        <th class="formatted-block-table-header">
+                            Importer
+                        </th>
+                        <th class="formatted-block-table-header">
+                            Waste type
+                        </th>
+                        <th class="formatted-block-table-header">
+                            Select
+                        </th>
+                    </tr>
                 </thead>
                 <tbody class="formatted-block-table-body">
-                @for (int i = 0; i < Model.Notifications.Count; i++)
-                {
-                    var radioId = "radio" + i;
-                    <tr class="auto-width">
-                        <td>
-                            <div class="formatted-block-table-cell">
+                    @for (int i = 0; i < Model.Notifications.Count; i++)
+                    {
+                        var radioId = "radio" + i;
+                        <tr class="auto-width">
+                            <td>
+                                <div class="formatted-block-table-cell">
 
-                                @Html.DisplayFor(m => m.Notifications[i].Number)
+                                    @Html.DisplayFor(m => m.Notifications[i].Number)
 
-                            </div>
-                        </td>
-                        <td>
-                            <div class="formatted-block-table-cell">
-                                @Html.DisplayFor(m => m.Notifications[i].ExporterName)
-                            </div>
-                        </td>
-                        <td>
-                            <div class="formatted-block-table-cell">
-                                @Html.DisplayFor(m => m.Notifications[i].ImporterName)
-                            </div>
-                        </td>
-                        <td>
-                            <div class="formatted-block-table-cell">
-                                @Html.DisplayFor(m => m.Notifications[i].WasteName)
-                            </div>
-                        </td>
-                        <td>
-                            <label for="@radioId">
-                                @Html.RadioButtonFor(m => m.SelectedNotification, Model.Notifications[i].Id, new { id = radioId })
-                            </label>
-                        </td>
-                    </tr>
-                }
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formatted-block-table-cell">
+                                    @Html.DisplayFor(m => m.Notifications[i].ExporterName)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formatted-block-table-cell">
+                                    @Html.DisplayFor(m => m.Notifications[i].ImporterName)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="formatted-block-table-cell">
+                                    @Html.DisplayFor(m => m.Notifications[i].WasteName)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.RadioButtonFor(m => m.SelectedNotification, Model.Notifications[i].Id, new { id = radioId, title = Model.Notifications[i].Number })
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -88,18 +86,16 @@
         }
 
         <div class="form-group">
-            <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
         </div>
     }
 }
 else
 {
-    <header class="hgroup">
-        <h2 class="heading-large">No notifications available</h2>
-        <p>
-            There are notifications available to copy from. Please continue with your application.
-        </p>
-    </header>
-    
-    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Exporter", new { area = "NotificationApplication" }, new { @class = "button" })
+    <h2 class="heading-large">No notifications available</h2>
+    <p>
+        There are notifications available to copy from. Please continue with your application.
+    </p>
+
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Exporter", new { area = "NotificationApplication" }, new { @class = "button" })
 }

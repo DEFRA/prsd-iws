@@ -7,7 +7,7 @@
 }
 
 <header class="hgroup">
-    <h2 class="heading-large">What to do next</h2>
+    <h1 class="heading-large">What to do next</h1>
     <h2 class="heading-small">Before we consider your notification you need to:</h2>
 </header>
 
@@ -25,13 +25,13 @@
             @Html.Partial("_EaBlock17Disclosure")
             break;
         case CompetentAuthority.Scotland:
-            @Html.Partial("_SepaBlock17Disclosure")
+        @Html.Partial("_SepaBlock17Disclosure")
             break;
         case CompetentAuthority.NorthernIreland:
-            @Html.Partial("_NieaBlock17Disclosure")
+        @Html.Partial("_NieaBlock17Disclosure")
             break;
         case CompetentAuthority.Wales:
-            @Html.Partial("_NrwBlock17Disclosure")
+        @Html.Partial("_NrwBlock17Disclosure")
             break;
     }
 </div>
@@ -42,7 +42,7 @@
 
     <h4 class="heading-small">Bank transfers</h4>
     <p>Use our bank details below to make a bank transfer. It is important to use the correct payment reference to ensure assessment of your notification is not delayed.</p>
-    <table class="table-pad-bottom">
+    <table class="table-pad-bottom" title="Bank details">
         <tbody>
             <tr>
                 <td>Payment Reference</td>
@@ -75,7 +75,7 @@
         </tbody>
     </table>
     <p>If you are paying from outside the United Kingdom, include the international banking references below.</p>
-    <table class="table-pad-bottom">
+    <table class="table-pad-bottom" title="International banking details">
         <tr>
             <td>IBAN</td>
             <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Iban)</td>
@@ -119,8 +119,8 @@
     <h3 class="heading-medium">Step 5: Post the notification package to the following address:</h3>
     @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address)
     <p>Telephone: @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Telephone)</p>
+    The package must include:
     <ul class="what-next-list">
-        The package must include:
         <li>The signed notification document</li>
         <li>The movement document</li>
         <li>Any supplementary information that was declared in the notification application</li>

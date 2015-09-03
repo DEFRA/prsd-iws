@@ -6,7 +6,7 @@
     <div class="form-group">
         @Html.Gds().HintParagraph("Step 2 of 3")
     </div>
-    <h2 class="heading-large">What type of wood?</h2>
+    <h1 class="heading-large">What type of wood?</h1>
 </header>
 @using (Html.BeginForm())
 {
@@ -19,7 +19,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
         @Html.Gds().ValidationMessageFor(m => m.Description)
         @Html.Gds().HintSpan("Limit your answer to 70 characters or less")
-        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70 })
+        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title = "Wood waste type description" })
     </div>
     <h2 class="heading-small">What is the chemical composition of the waste?</h2>
     <p>
@@ -39,11 +39,11 @@
                     </div>
                     <div class="grid-row">
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %", title = "Min concentration" })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].ChemicalCompositionCategory, new { type = "hidden" })
                         </div>
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %", title = "Max concentration" })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory) })
                         </div>
                     </div>
@@ -58,15 +58,15 @@
                         @Html.Gds().ValidationMessageFor(m => m.OtherCodes[i])
                         <div class="grid-row">
                             <div class="column-two-thirds form-group">
-                                <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" />
+                                <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title="Other constituent" />
                             </div>
                         </div>
                         <div class="grid-row">
                             <div class="column-half">
-                                <input name="OtherCodes[@i].MinConcentration" style="width:65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" />
+                                <input name="OtherCodes[@i].MinConcentration" style="width:65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title="Min concentration" />
                             </div>
                             <div class="column-half">
-                                <input name="OtherCodes[@i].MaxConcentration" style="width:65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" />
+                                <input name="OtherCodes[@i].MaxConcentration" style="width:65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title="Max concentration" />
                                 <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
                             </div>
                         </div>

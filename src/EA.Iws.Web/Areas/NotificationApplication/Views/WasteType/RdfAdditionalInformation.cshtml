@@ -8,7 +8,7 @@
     <div class="form-group">
         @Html.Gds().HintParagraph("Step 3 of 3")
     </div>
-    <h2 class="heading-large">Additional Information required</h2>
+    <h1 class="heading-large">Additional Information required</h1>
     <p>
         Concentration levels of the constituents present in the waste
         Enter minimum and maximum as a weight by weight percentage (%),
@@ -36,11 +36,11 @@
                 var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
                         }
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min" + placeholderText })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min" + placeholderText, title = "Min concentration" })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
                         </div>
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max" + placeholderText })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max" + placeholderText, title = "Max concentration" })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
                         </div>
                     </div>
@@ -58,12 +58,12 @@
                         The energy efficiency is calculated using a formula taken from the Directive 2008/98/EC on waste (Waste Framework Directive).
                         The formula used to calculate this value of energy efficiency, "the R1 Energy Efficiency Formula" is:
                     </p>
-                    <table class="fraction">
+                    <table class="fraction" title="Guidance notes for energy efficiency">
                         <tr>
-                            <td rowspan="2" nowrap="nowrap">
+                            <td rowspan="2">
                                 Energy Efficiency =
                             </td>
-                            <td nowrap="nowrap">
+                            <td>
                                 (E<sub>p</sub> - (E<sub>f</sub> + E<sub>i</sub>))
                             </td>
                         </tr>
@@ -74,7 +74,7 @@
                         </tr>
                     </table>
                     In which:
-                    <table>
+                    <table title="Formula parameters description">
                         <tr><td></td><td></td></tr>
                         <tr><td>E<sub>p</sub></td><td>The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year)</td></tr>
                         <tr><td>E<sub>f</sub></td><td>The annual energy input to the system from fuel contributions to the production of steam (GJ/year)</td></tr>
@@ -85,14 +85,14 @@
                 </div>
             </details>
             @Html.Gds().HintSpan("Enter the value or not applicable. If the waste is going to a cement kiln, this may not be applicable. This information may be obtained from the recovery facility.")
-            @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds" })
+            @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds", @title="Energy" })
         </div>
 
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
         @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
         Any other relevant information (optional)
-        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds" })
+        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = "Further information" })
     </div>
     <div class="form-group">
         <fieldset>
@@ -103,6 +103,6 @@
         </fieldset>
     </div>
     <div class="form-group">
-        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

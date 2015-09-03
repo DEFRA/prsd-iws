@@ -5,7 +5,7 @@
 }
 
 <header class="hgroup">
-    <h2 class="heading-large">Add recovery info - values</h2>
+    <h1 class="heading-large">Add recovery info - values</h1>
     <div class="colored-header-bar"></div>
 </header>
 
@@ -16,7 +16,7 @@
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.IsDisposal)
 
-    <h2 class="heading-medium">What is the estimated value of the recoverable material?</h2>
+    <h1 class="heading-medium">What is the estimated value of the recoverable material?</h1>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.EstimatedUnit.SelectedValue)">
         @Html.Gds().ValidationMessageFor(model => model.EstimatedUnit.SelectedValue)
         @Html.EditorFor(m => m.EstimatedUnit)
@@ -28,7 +28,7 @@
         @Html.Gds().TextBoxFor(m => m.EstimatedAmount)
     </div>
 
-    <h2 class="heading-medium">What is the cost of recovery?</h2>
+    <h1 class="heading-medium">What is the cost of recovery?</h1>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CostUnit.SelectedValue)">
         @Html.Gds().ValidationMessageFor(model => model.CostUnit.SelectedValue)
         @Html.EditorFor(m => m.CostUnit)
@@ -41,13 +41,13 @@
     </div>
 
     <div class="form-group @( Model.IsDisposal ? "" : "js-hidden")">
-        <h2 class="heading-medium">What is the cost of disposal of the non-recoverable fraction?</h2>
+        <h1 class="heading-medium">What is the cost of disposal of the non-recoverable fraction?</h1>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalUnit.SelectedValue)">
             @Html.Gds().ValidationMessageFor(m => m.DisposalUnit.SelectedValue)
             @Html.EditorFor(m => m.DisposalUnit)
         </div>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalAmount)">
-            @Html.Gds().LabelFor(m => m.DisposalAmount, showOptionalLabel:false)
+            @Html.Gds().LabelFor(m => m.DisposalAmount, showOptionalLabel: false)
             @Html.Gds().HintSpan("The amount can be entered with or without commas as thousand separators. For example, 3,333.88 or 3333.88")
             @Html.Gds().ValidationMessageFor(m => m.DisposalAmount)
             @Html.Gds().TextBoxFor(m => m.DisposalAmount)

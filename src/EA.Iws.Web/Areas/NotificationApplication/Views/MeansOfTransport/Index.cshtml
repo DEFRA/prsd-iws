@@ -1,10 +1,9 @@
-﻿@using EA.Iws.Web.Services
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.MeansOfTransport.MeansOfTransportViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.MeansOfTransport.MeansOfTransportViewModel
 @{
     ViewBag.Title = "Means of Transport";
 }
 
-<h2 class="heading-large">Which means of transport will be used?</h2>
+<h1 class="heading-large">Which means of transport will be used?</h1>
 <p>Enter each of the transport methods that will be used for the whole journey in the order in which they will occur</p>
 
 @using (Html.BeginForm())
@@ -13,7 +12,7 @@
     @Html.Gds().ValidationSummary()
 
     <div class="form-group">
-        <table>
+        <table title="Transport methods">
             <thead>
                 <tr>
                     <th colspan="2">Transport methods</th>
@@ -39,6 +38,6 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" class="button" value="Submit" name="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button type="submit" class="button" value="Submit" name="submit">@Constants.ContinueButtonText</button>
     </div>
 }

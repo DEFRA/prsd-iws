@@ -10,21 +10,20 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h2 class="heading-large">Add waste generator - producer</h2>
+        <h1 class="heading-large">Add waste generator - producer</h1>
         <div class="colored-header-bar"></div>
     </header>
 
     @Html.Partial("_BusinessType", Model)
 
     <h2 class="heading-medium">Address</h2>
-    <hr/>
+    <hr />
     <p>This should be the site address for the waste generator-producer.</p>
     @Html.EditorFor(m => m.Address)
 
     <h2 class="heading-medium">Contact person</h2>
-    <hr/>
-    
+    <hr />
     @Html.EditorFor(m => m.Contact)
-    
+
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }

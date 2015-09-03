@@ -5,7 +5,7 @@
 }
 
 <header class="hgroup">
-    <h2 class="heading-large">What is the reason for export?</h2>
+    <h1 class="heading-large">What is the reason for export?</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -16,7 +16,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForExport)">
         @Html.Gds().HintParagraph("Please limit your answer to 70 characters or less")
         @Html.Gds().ValidationMessageFor(m => m.ReasonForExport)
-        @Html.TextBoxFor(m => m.ReasonForExport, new { @class = "full-width", @MaxLength = 70 })
+        @Html.TextBoxFor(m => m.ReasonForExport, new { @class = "full-width", @MaxLength = 70, @title = "Reason for export" })
     </div>
 
     @Html.HiddenFor(m => m.NotificationId)

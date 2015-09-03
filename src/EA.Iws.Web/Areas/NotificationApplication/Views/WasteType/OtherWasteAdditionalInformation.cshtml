@@ -6,7 +6,7 @@
     <div class="form-group">
         @Html.Gds().HintParagraph("Step 3 of 3")
     </div>
-    <h2 class="heading-large">What is the chemical composition of the waste?</h2>
+    <h1 class="heading-large">What is the chemical composition of the waste?</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -15,12 +15,12 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     <div>
-        
+
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
         @Html.Gds().ValidationMessageFor(m => m.Description)
         @Html.Gds().HintParagraph("This may be the names of its major constituents and their relative concentrations expressed as a percentage")
-        @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds" })
+        @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds", @title = "Other description" })
     </div>
     <div class="form-group">
         <fieldset>

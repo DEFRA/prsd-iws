@@ -4,7 +4,7 @@
     <p>Type your code and select from the options that will appear in the list.</p>
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
-        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list" })
+        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title="code list" })
         <button type="submit" name="command" value="addcode">Insert this code into table below</button>
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.IsNotApplicable)">
@@ -15,7 +15,7 @@
         </label>
     </div>
 
-    <table>
+    <table title="Codes with description">
         <thead>
             <tr>
                 <th>Code</th>

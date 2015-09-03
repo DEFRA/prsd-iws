@@ -6,7 +6,7 @@
 
 <div class="grid-row">
     <header class="hgroup">
-        <h2 class="heading-large">What H or HP codes apply to the waste?</h2>
+        <h1 class="heading-large">What H or HP codes apply to the waste?</h1>
     </header>
 @using (Html.BeginForm())
 {
@@ -16,7 +16,7 @@
     @Html.EditorFor(m => m.EnterWasteCodesViewModel)
 
     <div class="form-group">
-        <button class="button" type="submit" name="command" value="continue">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
     </div>
 }
 

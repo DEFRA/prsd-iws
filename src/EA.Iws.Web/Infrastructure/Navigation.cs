@@ -59,21 +59,13 @@
         private static MvcHtmlString GenerateProgressLink(TagBuilder link, bool isComplete, string linkText)
         {
             link.Attributes.Add("title", linkText);
-            link.Attributes.Add("role", "progressbar");
-            link.Attributes.Add("aria-valuemin", "0");
-            link.Attributes.Add("aria-valuemax", "100");
-
+            
             var icon = new TagBuilder("i");
             icon.AddCssClass("fa");
 
             if (isComplete)
             {
                 icon.AddCssClass("fa-check");
-                link.Attributes.Add("aria-valuenow", "100");
-            }
-            else
-            {
-                link.Attributes.Add("aria-valuenow", "0");
             }
 
             link.InnerHtml = linkText + icon;

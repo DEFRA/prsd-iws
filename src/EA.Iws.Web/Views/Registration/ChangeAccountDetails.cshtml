@@ -12,12 +12,14 @@
     @Html.Gds().ValidationSummary()
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
-        <label class="block-label" for="rdoOrganisationDetails">
-            @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails" })Organisation details you initially registered with
-        </label>
-        <label class="block-label" for="rdoPersonalDetails">
-            @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails" })Your details
-        </label>
+        <fieldset>
+            <label class="block-label" for="rdoOrganisationDetails">
+                @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails" })Organisation details you initially registered with
+            </label>
+            <label class="block-label" for="rdoPersonalDetails">
+                @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails" })Your details
+            </label>
+        </fieldset>
     </div>
 
     <div class="form-group">

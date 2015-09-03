@@ -4,14 +4,14 @@
     ViewBag.Title = "List Facilities";
 }
 
-<h2 class="heading-large">@Model.NotificationType.ToString() facilities</h2>
+<h1 class="heading-large">@Model.NotificationType.ToString() facilities</h1>
 <p>Add details of the @Model.NotificationType.ToString().ToLowerInvariant() facilities.</p>
 
 @if (Model != null && Model.FacilityData.Any())
 {
     <div class="colored-header-bar"></div>
     <div class="form-group">
-        <table>
+        <table title="List of facilities">
             <thead>
                 <tr>
                     <th>Organisation name</th>
@@ -31,7 +31,7 @@
                             @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Facility", 
+                            @Html.ActionLink("Edit", "Edit", "Facility",
                                 new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                             <span class="table-divider">|</span>
                             @Html.ActionLink("Remove", "Remove", "Facility",

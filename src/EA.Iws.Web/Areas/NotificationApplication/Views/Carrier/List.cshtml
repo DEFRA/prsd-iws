@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "List Carriers";
 }
-<h2 class="heading-large">Who are your intended carriers?</h2>
+<h1 class="heading-large">Who are your intended carriers?</h1>
 <p>Add details of all the intended carriers for the whole journey. 
     After you've added your first carrier, you can add several more by selecting "Add another carrier"</p>
 
@@ -10,7 +10,7 @@
 {
     <div class="colored-header-bar"></div>
     <div class="form-group">
-        <table>
+        <table title="Carriers">
             <thead>
                 <tr>
                     <th>Organisation name</th>
@@ -55,9 +55,9 @@
 </div>
 @if (ViewBag.BackToOverview)
 {
-    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
 }
 else
 {
-    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "MeansOfTransport", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "MeansOfTransport", new { id = Model.NotificationId }, new { @class = "button" })
 }

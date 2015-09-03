@@ -3,7 +3,7 @@
     ViewBag.Title = "Site Of Export";
 }
 
-<h2 class="heading-large">Which waste generator - producer is the site of export?</h2>
+<h1 class="heading-large">Which waste generator - producer is the site of export?</h1>
 
 @if (Model.Producers.Any())
 {
@@ -14,7 +14,7 @@
         @Html.HiddenFor(m => m.NotificationId)
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfExport)">
-            <table>
+            <table title="List of producers for set site of export">
                 <thead>
                     <tr>
                         <th>Organisation name</th>
@@ -36,6 +36,7 @@
                             <td>
                                 @{
                         var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
+                                    htmlAttr.Add("title", "Site of export?");
                         if (@Model.Producers[i].IsSiteOfExport)
                         {
                             htmlAttr.Add("checked", "checked");
@@ -62,6 +63,6 @@ else
     }
     else
     {
-       @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
     }
 }

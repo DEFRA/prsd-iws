@@ -4,7 +4,7 @@
     ViewBag.Title = "Site Of Treatment";
 }
 
-<h2 class="heading-large">Where will the waste be finally @(Model.NotificationType == NotificationType.Recovery ? "recovered?" : "disposed?")</h2>
+<h1 class="heading-large">Where will the waste be finally @(Model.NotificationType == NotificationType.Recovery ? "recovered?" : "disposed?")</h1>
 
 @if (Model.Facilities.Any())
 {
@@ -16,7 +16,7 @@
         @Html.HiddenFor(m => m.NotificationType)
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfTreatment)">
-            <table>
+            <table title="List of facilities for actual site of treatment">
                 <thead>
                     <tr>
                         <th>Organisation name</th>
@@ -37,18 +37,20 @@
                             </td>
                             <td>
                                 @{
-                                    var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
-                                    if (@Model.Facilities[i].IsActualSiteOfTreatment)
-                                    {
-                                        htmlAttr.Add("checked", "checked");
-                                    }
-                                    @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
+                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
+                        htmlAttr.Add("title", "Actual site of treatment?");
+                        if (@Model.Facilities[i].IsActualSiteOfTreatment)
+                        {
+                            htmlAttr.Add("checked", "checked");
+                        }
+                        @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
                                 }
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
+
         </div>
 
         <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>

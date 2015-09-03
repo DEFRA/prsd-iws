@@ -20,21 +20,21 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h2 class="heading-large">Add @facilityType facility</h2>
+        <h1 class="heading-large">Add @facilityType facility</h1>
         <div class="colored-header-bar"></div>
     </header>
 
     @Html.EditorFor(m => m.Business)
 
     <h2 class="heading-medium">Their address</h2>
-    <hr/>
+    <hr />
     <p>This should be the site address for the @facilityType facility.</p>
     @Html.EditorFor(m => m.Address)
 
     <h2 class="heading-medium">Their contact person</h2>
-    <hr/>
+    <hr />
     <p>This should be the contact person for the @facilityType facility.</p>
     @Html.EditorFor(m => m.Contact)
-    
+
     <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
 }

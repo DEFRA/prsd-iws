@@ -2,14 +2,14 @@
 @{
     ViewBag.Title = "List Producers";
 }
-<h2 class="heading-large">Who is the waste generator - producer?</h2>
+<h1 class="heading-large">Who is the waste generator - producer?</h1>
 <p>Add details of all the waste generators - producers. After you've added your first waste generator - producer, you can add several more by selecting "Add another waste generator - producer".</p>
 
 @if (Model != null && Model.ProducerData.Any())
 {
     <div class="colored-header-bar"></div>
     <div class="form-group">
-        <table>
+        <table title="List of producers">
             <thead>
                 <tr>
                     <th>Organisation name</th>

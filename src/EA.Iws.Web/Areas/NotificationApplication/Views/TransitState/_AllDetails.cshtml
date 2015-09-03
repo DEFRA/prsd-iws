@@ -19,16 +19,16 @@
     @Html.Gds().LabelFor(m => m.EntryPointId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph("Enter the specific port or border crossing the waste will enter the country or state through")
     @Html.ValidationMessageFor(m => m.EntryPointId)
-    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty)
+    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Entry point" })
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
     @Html.Gds().LabelFor(m => m.ExitPointId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph("Enter the specific port or border crossing the waste will leave the country or state from")
     @Html.ValidationMessageFor(m => m.ExitPointId)
-    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty)
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Exit point" })
 </div>
 
 <div class="form-group">
-    <button class="button" type="submit" value="submit" name="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+    <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
 </div>

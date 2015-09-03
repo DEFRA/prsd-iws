@@ -3,7 +3,7 @@
     ViewBag.Title = "Transport Route Summary";
 }
 
-<h2 class="heading-large">Transport route</h2>
+<h1 class="heading-large">Transport route</h1>
 
 @Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })
 @Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })

@@ -12,7 +12,7 @@ else
 {
     <p>You have generated the following notifications</p>
 
-    <table>
+    <table title="Manage Notifications">
         <thead>
             <tr>
                 <th class="formatted-block-table-header">
@@ -50,7 +50,7 @@ else
                     <td>
                         <div class="formatted-block-table-cell">
                             @Html.ActionLink(linkText: "Select", actionName: "ApprovedNotification", controllerName: "Applicant",
-                                routeValues: new { id = Model[i].Id, area = string.Empty }, htmlAttributes: null)
+                                routeValues: new { id = Model[i].Id, area = string.Empty }, htmlAttributes: new { @title = Model[i].NotificationNumber })
                         </div>
                     </td>
                 </tr>

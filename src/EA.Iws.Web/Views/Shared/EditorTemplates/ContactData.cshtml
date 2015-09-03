@@ -23,7 +23,7 @@
                 +
             </div>
             <div class="international-number-prefix">
-                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, false)
+                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = "Telephone Prefix" })
             </div>
             <div class="international-number-body">
                 @Html.Gds().TextBoxFor(m => m.Telephone, false)
@@ -43,7 +43,7 @@
                 +
             </div>
             <div class="international-number-prefix">
-                @Html.Gds().TextBoxFor(m => m.FaxPrefix, false)
+                @Html.Gds().TextBoxFor(m => m.FaxPrefix, new { @title = "Fax Prefix" })
             </div>
             <div class="international-number-body">
                 @Html.Gds().TextBoxFor(m => m.Fax, false)

@@ -1,7 +1,4 @@
-﻿@using System.Web.UI.WebControls
-@using EA.Iws.Core.Shared
-@using EA.Iws.Requests.WasteType
-@using EA.Iws.Web.Infrastructure
+﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionConcentrationLevelsViewModel
 @{
     ViewBag.Title = "Waste Code";
@@ -10,7 +7,7 @@
     <div class="form-group">
         @Html.Gds().HintParagraph("Step 2 of 3")
     </div>
-    <h2 class="heading-large">What is the chemical composition of the waste?</h2>
+    <h1 class="heading-large">What is the chemical composition of the waste?</h1>
 </header>
 @using (Html.BeginForm())
 {
@@ -30,17 +27,17 @@
                     @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                     <div class="grid-row">
                         <div class="column-two-thirds">
-                            @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
+                            @EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
                         </div>
                     </div>
                     <div class="grid-row">
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %", title = "Min concentration" })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].ChemicalCompositionCategory, new { type = "hidden" })
                         </div>
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %" })
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory) })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %", title = "Max concentration" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory) })
                         </div>
                     </div>
                 </div>
@@ -54,15 +51,15 @@
                         @Html.Gds().ValidationMessageFor(m => m.OtherCodes[i])
                         <div class="grid-row">
                             <div class="column-two-thirds form-group">
-                                <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" />
+                                <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title="Other constituent" />
                             </div>
                         </div>
                         <div class="grid-row">
                             <div class="column-half">
-                                <input name="OtherCodes[@i].MinConcentration" style="width:65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" />
+                                <input name="OtherCodes[@i].MinConcentration" style="width:65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title="Min constituent" />
                             </div>
                             <div class="column-half">
-                                <input name="OtherCodes[@i].MaxConcentration" style="width:65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" />
+                                <input name="OtherCodes[@i].MaxConcentration" style="width:65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title="Max constituent" />
                                 <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
                             </div>
                         </div>
@@ -76,6 +73,6 @@
         <button class="link-submit" type="submit" name="Command" value="add">Add</button>
     </div>
     <div class="form-group">
-        <button class="button" name="Command" value="continue" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

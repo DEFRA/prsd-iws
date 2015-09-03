@@ -6,54 +6,54 @@
 
 <div class="grid-row">
     <header class="hgroup">
-        <h2 class="heading-large">What are your European Waste Catalogues (EWC) codes?</h2>
+        <h1 class="heading-large">What are your European Waste Catalogues (EWC) codes?</h1>
     </header>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
 
 
-    <div class="wastecode-block">
-        <p>Type your code and select from the options that will appear in the list.</p>
-        <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.EnterWasteCodesViewModel.SelectedCode)">
-            @Html.Gds().ValidationMessageFor(m => m.EnterWasteCodesViewModel.SelectedCode)
-            @Html.Gds().DropDownListFor(m => m.EnterWasteCodesViewModel.SelectedCode, Model.EnterWasteCodesViewModel.Codes, string.Empty, new { id = "code-list" })
-            <button type="submit" name="command" value="addcode">Insert this code into table below</button>
+        <div class="wastecode-block">
+            <p>Type your code and select from the options that will appear in the list.</p>
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.EnterWasteCodesViewModel.SelectedCode)">
+                @Html.Gds().ValidationMessageFor(m => m.EnterWasteCodesViewModel.SelectedCode)
+                @Html.Gds().DropDownListFor(m => m.EnterWasteCodesViewModel.SelectedCode, Model.EnterWasteCodesViewModel.Codes, string.Empty, new { id = "code-list", title = "Code list" })
+                <button type="submit" name="command" value="addcode">Insert this code into table below</button>
+            </div>
+
+            <table title="Ewc codes">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @if (Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count < 1)
+                {
+                    <tr>
+                        <td colspan="4">Awaiting code...</td>
+                    </tr>
+                }
+                @for (int i = 0; i < Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count; i++)
+                {
+                    var thisCode = Model.EnterWasteCodesViewModel.WasteCodes.Single(wc => wc.Id == Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]);
+                    <tr>
+                        <td>@Html.HiddenFor(m => m.EnterWasteCodesViewModel.SelectedWasteCodes[i]) @Html.Raw(thisCode.Name)</td>
+                        <td>@Html.Raw(thisCode.Description)</td>
+                        <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]" /></td>
+                        <td><button class="link-submit" type="submit" name="remove" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]">Remove</button></td>
+                    </tr>
+                }
+            </table>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            @if (Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count < 1)
-            {
-                <tr>
-                    <td colspan="4">Awaiting code...</td>
-                </tr>
-            }
-            @for (int i = 0; i < Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count; i++)
-            {
-                var thisCode = Model.EnterWasteCodesViewModel.WasteCodes.Single(wc => wc.Id == Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]);
-                <tr>
-                    <td>@Html.HiddenFor(m => m.EnterWasteCodesViewModel.SelectedWasteCodes[i]) @Html.Raw(thisCode.Name)</td>
-                    <td>@Html.Raw(thisCode.Description)</td>
-                    <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]" /></td>
-                    <td><button class="link-submit" type="submit" name="remove" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]">Remove</button></td>
-                </tr>
-            }
-        </table>
-    </div>
-
-    <div class="form-group">
-        <button class="button" type="submit" name="command" value="continue">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
-    </div>
-}
+        <div class="form-group">
+            <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
+        </div>
+    }
 
 </div>
 

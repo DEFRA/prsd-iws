@@ -3,14 +3,14 @@
 @model EA.Iws.Core.Notification.NotificationApplicationCompletionProgress
 
 <p>
-    <span>@Model.NotificationNumber</span>
+    <span class="number">@Model.NotificationNumber</span>
 </p>
 
 <p>
     @Html.Navigation().Link("Overview", false, "Index", "Home", "NotificationApplication")
 </p>
 
-<h4>Organisations involved</h4>
+<span>Organisations involved</span>
 @Html.Navigation().Link("Exporter notifier", Model.HasExporter, "Index", "Exporter", "NotificationApplication")
 @Html.Navigation().Link("Waste generator producer", Model.HasProducer, "List", "Producer", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromExporter", "Remove" })
 @Html.Navigation().Link("Site of export", Model.HasSiteOfExport, "SiteOfExport", "Producer", "NotificationApplication")
@@ -18,7 +18,7 @@
 @Html.Navigation().Link(Model.NotificationType + " facility", Model.HasFacility, "List", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromImporter", "Remove" })
 @Html.Navigation().Link("Actual site of " + Model.NotificationType.ToString().ToLowerInvariant(), Model.HasActualSiteOfTreatment, "SiteOfTreatment", "Facility", "NotificationApplication")
 
-<h4>@Model.NotificationType operation</h4>
+<span>@Model.NotificationType operation</span>
 @if (Model.NotificationType == NotificationType.Recovery)
 {
     @Html.Navigation().Link("Pre-consent facility", Model.HasPreconsentedInformation, "RecoveryPreconsent", "Facility", "NotificationApplication")
@@ -27,27 +27,27 @@
 @Html.Navigation().Link("Technology employed", Model.HasTechnologyEmployed, "TechnologyEmployed", "WasteOperations", "NotificationApplication")
 @Html.Navigation().Link("Reason for export", Model.HasReasonForExport, "Index", "ReasonForExport", "NotificationApplication")
 
-<h4>The transportation</h4>
+<span>The transportation</span>
 @Html.Navigation().Link("Intended carrier", Model.HasCarrier, "List", "Carrier", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit" })
 @Html.Navigation().Link("Means of transport", Model.HasMeansOfTransport, "Index", "MeansOfTransport", "NotificationApplication")
 @Html.Navigation().Link("Packaging types", Model.HasPackagingInfo, "Index", "PackagingTypes", "NotificationApplication")
 @Html.Navigation().Link("Special handling", Model.HasSpecialHandlingRequirements, "Index", "SpecialHandling", "NotificationApplication")
 
-<h4>The journey</h4>
+<span>The journey</span>
 @Html.Navigation().Link("Transport route export", Model.HasStateOfExport, "Index", "StateOfExport", "NotificationApplication")
 @Html.Navigation().Link("Transport route transits", Model.HasTransitState, "Summary", "TransportRoute", "NotificationApplication")
 @Html.Navigation().Link("Transport route import", Model.HasStateOfImport, "Index", "StateOfImport", "NotificationApplication")
 @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication")
 
-<h4>Amounts and dates</h4>
+<span>Amounts and dates</span>
 @Html.Navigation().Link("Intended shipments", Model.HasShipmentInfo, "Index", "Shipment", "NotificationApplication")
 
-<h4>Classify your waste</h4>
+<span>Classify your waste</span>
 @Html.Navigation().Link("Chemical composition", Model.HasWasteType, "ChemicalComposition", "WasteType", "NotificationApplication", additionalActiveActionNames: new[] { "OtherWaste", "OtherWasteAdditionalInformation", "RdfAdditionalInformation", "RdfSrfType", "WoodAdditionalInformation", "WoodType" })
 @Html.Navigation().Link("Process of generation", Model.HasWasteGenerationProcess, "Index", "WasteGenerationProcess", "NotificationApplication")
 @Html.Navigation().Link("Physical characteristics", Model.HasPhysicalCharacteristics, "Index", "PhysicalCharacteristics", "NotificationApplication")
 
-<h4>Waste codes</h4>
+<span>Waste codes</span>
 @Html.Navigation().Link("Basel or OECD code", Model.HasBaselOecdCode, "Index", "BaselOecdCode", "NotificationApplication")
 @Html.Navigation().Link("EWC codes", Model.HasEwcCodes, "Index", "EwcCode", "NotificationApplication")
 @Html.Navigation().Link("Y codes", Model.HasYCodes, "Index", "YCode", "NotificationApplication")
@@ -58,7 +58,7 @@
 
 @if (Model.NotificationType == NotificationType.Recovery)
 {
-    <h4>Waste recovery</h4>
+    <span>Waste recovery</span>
     @Html.Navigation().Link("Recovery information", Model.HasRecoveryInfo, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication", additionalActiveActionNames: new[] { "MethodOfDisposal", "RecoveryValues" })
 }
 <em></em>
