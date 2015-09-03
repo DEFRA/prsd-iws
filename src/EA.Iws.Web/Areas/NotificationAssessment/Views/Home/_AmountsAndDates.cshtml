@@ -1,0 +1,20 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
+}
+
+<h2 class="heading-medium">Amount and dates</h2>
+
+<div>
+    <details>
+        <summary>
+            Intended shipments
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_IntendedShipments.cshtml")
+            </div>
+        </div>
+    </details>
+</div>

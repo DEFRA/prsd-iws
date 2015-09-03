@@ -18,9 +18,11 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
             get { return ReturnsId; }
         }
 
+        public ClaimsPrincipal ReturnsPrincipal;
+
         public ClaimsPrincipal Principal
         {
-            get { throw new NotImplementedException(); }
+            get { return ReturnsPrincipal; }
         }
     }
 }

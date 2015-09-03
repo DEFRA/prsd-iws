@@ -1,0 +1,86 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
+}
+
+<h2 class="heading-medium">Waste codes</h2>
+
+<div>
+    <details>
+        <summary>
+            Basel or OECD code
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                 @Html.Partial(viewLocation + "_BaselOecdCode.cshtml")
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            EWC codes
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                 @Html.Partial(viewLocation + "_EwcCodes.cshtml")
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            Y codes
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_YCodes.cshtml")
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            H or HP codes
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_HCodes.cshtml")
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            UN classes
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_UnClasses.cshtml")
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            UN number
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_UnNumbers.cshtml")
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>
+            Other codes
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_OtherCodes.cshtml")
+            </div>
+        </div>
+    </details>
+</div>

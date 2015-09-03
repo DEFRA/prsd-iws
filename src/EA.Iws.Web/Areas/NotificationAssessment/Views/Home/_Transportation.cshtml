@@ -1,0 +1,50 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.TransportationViewModel
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
+}
+
+<h2 class="heading-medium">The transportation</h2>
+
+<div>
+    <details>
+        <summary>
+            Intended carriers
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_Carrier.cshtml")
+            </div>
+        </div>
+    </details>
+    <details>
+        <summary>
+            Means of transport
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_MeansOfTransport.cshtml")
+            </div>
+        </div>
+    </details>
+    <details>
+        <summary>
+            Packaging types
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_PackagingTypes.cshtml")
+            </div>
+        </div>
+    </details>
+    <details>
+        <summary>
+            Special handling
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_SpecialHandling.cshtml")
+            </div>
+        </div>
+    </details>
+</div>

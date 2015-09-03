@@ -1,0 +1,21 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteRecoveryViewModel
+@{
+    var id = Model.NotificationId;
+    var disposalOrRecovery = Model.NotificationType;
+    var viewLocation = Constants.NotificationSummaryViewLocation;
+}
+
+<h2 class="heading-medium">Waste @disposalOrRecovery.ToString().ToLowerInvariant()</h2>
+
+<div>
+    <details>
+        <summary>
+            @disposalOrRecovery information
+        </summary>
+        <div class="expanded-details">
+            <div class="panel-indent">
+                @Html.Partial(viewLocation + "_RecoveryInformation.cshtml")
+            </div>
+        </div>
+    </details>
+</div>

@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationAssessment.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Infrastructure;
+    using NotificationApplication.ViewModels.NotificationApplication;
+    using Requests.Notification;
     using Requests.NotificationAssessment;
 
     [Authorize(Roles = "internal")]
@@ -17,9 +20,15 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            return View();
+            using (var client = apiClient())
+            {
+                var result = await client.SendAsync(User.GetAccessToken(), 
+                    new GetNotificationInfoInternal(id));
+                
+                return View(new NotificationOverviewViewModel(result));
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]

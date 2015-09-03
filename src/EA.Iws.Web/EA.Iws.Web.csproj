@@ -578,6 +578,15 @@
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_UnNumbers.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_OtherCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_RecoveryInformation.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_AmountsAndDates.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_ClassifyYourWaste.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_Journey.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_OrganisationsInvolved.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_RecoveryOperation.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_Transportation.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_WasteCodes.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_WasteRecovery.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Home\_SummaryTableContainer.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />

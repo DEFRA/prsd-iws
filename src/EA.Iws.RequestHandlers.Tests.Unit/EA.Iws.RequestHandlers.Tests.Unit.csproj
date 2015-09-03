@@ -91,7 +91,16 @@
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetDecisionHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
+    <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
+    <Compile Include="Mappings\AddressMapTests.cs" />
+    <Compile Include="Helpers\BusinessInfoDataEqualityComparer.cs" />
+    <Compile Include="Mappings\BusinessInfoMapTests.cs" />
+    <Compile Include="Mappings\BusinessMapTests.cs" />
+    <Compile Include="Helpers\ContactDataEqualityComparer.cs" />
+    <Compile Include="Mappings\ContactMapTests.cs" />
+    <Compile Include="Mappings\ExporterMapTests.cs" />
     <Compile Include="Mappings\MovementMapTests.cs" />
+    <Compile Include="Mappings\BusinessTestBase.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandlerTests.cs" />
@@ -106,6 +115,7 @@
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandlerTests.cs" />
     <Compile Include="Movement\TestService.cs" />
+    <Compile Include="Notification\GetNotificationInfoInternalHandlerTests.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />

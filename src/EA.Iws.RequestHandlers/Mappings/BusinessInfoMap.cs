@@ -4,7 +4,6 @@
     using Core.Shared;
     using Domain;
     using Prsd.Core.Mapper;
-    using Requests.Shared;
     using BusinessType = Core.Shared.BusinessType;
 
     internal class BusinessInfoMap : IMap<Business, BusinessInfoData>

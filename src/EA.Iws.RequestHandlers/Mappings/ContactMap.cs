@@ -16,7 +16,9 @@
                 Email = source.Email
             };
 
-            if (source.Telephone.Contains("-") && (source.Telephone.Split('-').Length > 0))
+            if (source.Telephone != null 
+                && source.Telephone.Contains("-") 
+                && (source.Telephone.Split('-').Length > 0))
             {
                 contactData.TelephonePrefix = source.Telephone.Split('-')[0];
                 contactData.Telephone = source.Telephone.Split('-')[1];
