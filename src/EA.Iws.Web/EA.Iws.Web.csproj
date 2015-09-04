@@ -691,6 +691,7 @@
     <Content Include="Views\Applicant\ApprovedNotification.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringIntRadioButtons.cshtml" />
     <Content Include="Views\Account\EmailVerificationResent.cshtml" />
+    <Content Include="Views\Errors\_WhatNow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
