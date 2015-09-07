@@ -1,10 +1,11 @@
-﻿.notification-overview{
-    .expanded-details{
+﻿.notification-overview {
+    .expanded-details {
         margin-left: 23px;
         margin-bottom: 15px;
     }
-    .list-heading-no-detail{
-        color:#005EA5;
+
+    .list-heading-no-detail {
+        color: #005EA5;
         margin-left: 7px;
     }
 }
@@ -151,7 +152,7 @@
 
     .price {
         float: left;
-        width: 30%
+        width: 30%;
     }
 
     .detail {
@@ -212,16 +213,16 @@
             padding-bottom: 0;
             margin-bottom: 0;
         }
-        
+
         dl dt {
             margin: 15px 0 3px 0;
             color: $secondary-text-colour;
         }
 
         hr {
-            display: block; 
+            display: block;
             height: 1px;
-            border: 0; 
+            border: 0;
             border-top: 1px solid #BFC1C3;
             margin: 15px 0 3px 0;
         }
@@ -243,6 +244,12 @@
             }
         }
 
+        p {
+            word-wrap: break-word;
+        }
+        dd{
+            word-wrap: break-word;
+        }
     }
 
     hr {
