@@ -289,6 +289,7 @@
 
                 await this.BindCountryList(apiClient);
                 model.CountryId = new Guid(((SelectList)ViewBag.Countries).Single(c => c.Text.Equals(response.Address.CountryName, StringComparison.InvariantCultureIgnoreCase)).Value);
+                model.DefaultCountryId = this.GetDefaultCountryId();
 
                 return View(model);
             }
