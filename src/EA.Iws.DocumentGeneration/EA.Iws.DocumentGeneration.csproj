@@ -58,6 +58,7 @@
     <Compile Include="Formatters\OperationInfoFormatter.cs" />
     <Compile Include="Formatters\WasteCodeInfoFormatter.cs" />
     <Compile Include="Formatters\RecoveryInfoFormatter.cs" />
+    <Compile Include="Formatters\WasteCompositionFormatter.cs" />
     <Compile Include="Mapper\MergeFieldDataMapper.cs" />
     <Compile Include="MergeField.cs" />
     <Compile Include="MergeFieldLocator.cs" />

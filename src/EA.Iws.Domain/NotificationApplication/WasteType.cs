@@ -47,7 +47,7 @@
 
         public ChemicalComposition ChemicalCompositionType { get; internal set; }
 
-        private string chemicalCompositionDescription;
+        protected string chemicalCompositionDescription;
         public string ChemicalCompositionDescription
         {
             get
@@ -67,7 +67,7 @@
             }
         }
 
-        private string chemicalCompositionName;
+        protected string chemicalCompositionName;
         public string ChemicalCompositionName
         {
             get
@@ -121,7 +121,7 @@
             }
         }
 
-        private string otherWasteTypeDescription;
+        protected string otherWasteTypeDescription;
         public string OtherWasteTypeDescription
         {
             get
@@ -141,7 +141,7 @@
             }
         }
 
-        private string woodTypeDescription;
+        protected string woodTypeDescription;
         public string WoodTypeDescription
         {
             get
@@ -161,7 +161,7 @@
             }
         }
 
-        private string energyInformation;
+        protected string energyInformation;
         public string EnergyInformation
         {
             get
@@ -181,7 +181,7 @@
             }
         }
 
-        private string optionalInformation;
+        protected string optionalInformation;
         public string OptionalInformation
         {
             get

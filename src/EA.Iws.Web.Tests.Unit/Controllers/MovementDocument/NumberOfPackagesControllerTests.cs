@@ -93,7 +93,7 @@
                Number = 5
             }) as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(result.RouteValues, "Index", "NumberOfCarriers");
+            RouteAssert.RoutesTo(result.RouteValues, "NumberOfCarriers", "Carrier");
         }
     }
 }

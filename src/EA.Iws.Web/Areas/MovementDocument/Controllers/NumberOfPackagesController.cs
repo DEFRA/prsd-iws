@@ -44,7 +44,7 @@
                     client.SendAsync(User.GetAccessToken(),
                         new SetNumberOfPackagesByMovementId(movementId, model.Number.Value));
 
-                return RedirectToAction("Index", "NumberOfCarriers", new { movementId });
+                return RedirectToAction("NumberOfCarriers", "Carrier", new { movementId });
             }
         } 
     }
