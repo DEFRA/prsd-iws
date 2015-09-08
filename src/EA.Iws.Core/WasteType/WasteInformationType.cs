@@ -9,7 +9,7 @@
         MoistureContent = 2,
         [Description("Ash content")]
         AshContent = 3,
-        [Description("Heavy metals (Megagram per kg)")]
+        [Description("Heavy metals (milligrams per kg)")]
         HeavyMetals = 4,
         [Description("Chlorine")]
         Chlorine = 5,

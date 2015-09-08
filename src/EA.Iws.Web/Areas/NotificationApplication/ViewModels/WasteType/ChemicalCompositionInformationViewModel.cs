@@ -38,16 +38,19 @@
                     yield return new ValidationResult("Please enter a valid Min and Max concentration for " + EnumHelper.GetDescription(WasteComposition[i].WasteInformationType), new[] { "WasteComposition[" + i + "]" });
                 }
 
-                if (IsDecimal(WasteComposition[i].MinConcentration) && IsDecimal(WasteComposition[i].MaxConcentration))
+                if (IsDecimal(WasteComposition[i].MinConcentration) 
+                    && IsDecimal(WasteComposition[i].MaxConcentration))
                 {
-                    var minConcentrationValue = Convert.ToDecimal(WasteComposition[i].MinConcentration);
-                    var maxConcentrationValue = Convert.ToDecimal(WasteComposition[i].MaxConcentration);
+                    var minConcentrationValue = 
+                        Convert.ToDecimal(WasteComposition[i].MinConcentration);
+                    var maxConcentrationValue = 
+                        Convert.ToDecimal(WasteComposition[i].MaxConcentration);
 
-                    if (minConcentrationValue < 0 || minConcentrationValue > 100)
+                    if (minConcentrationValue < 0 || minConcentrationValue > 100 && IsPercentageQuantity(WasteComposition[i]))
                     {
                         yield return new ValidationResult("Min concentration should be in range from 0 to 100 for  " + EnumHelper.GetDescription(WasteComposition[i].WasteInformationType), new[] { "WasteComposition[" + i + "]" });
                     }
-                    if (maxConcentrationValue < 0 || maxConcentrationValue > 100)
+                    if (maxConcentrationValue < 0 || maxConcentrationValue > 100 && IsPercentageQuantity(WasteComposition[i]))
                     {
                         yield return new ValidationResult("Max concentration should be in range from 0 to 100 for  " + EnumHelper.GetDescription(WasteComposition[i].WasteInformationType), new[] { "WasteComposition[" + i + "]" });
                     }
@@ -68,6 +71,12 @@
         {
             double value;
             return Double.TryParse(input, out value);
+        }
+
+        private static bool IsPercentageQuantity(WoodInformationData wasteData)
+        {
+            return wasteData.WasteInformationType != WasteInformationType.HeavyMetals
+                   && wasteData.WasteInformationType != WasteInformationType.NetCalorificValue;
         }
     }
 }

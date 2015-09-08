@@ -2,22 +2,25 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Core.WasteType;
     using Domain.NotificationApplication;
+    using Prsd.Core;
     using Prsd.Core.Mapper;
 
     internal class WasteAdditionalInformationMap : IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>>
     {
         public IList<WasteAdditionalInformation> Map(IList<WoodInformationData> source)
         {
-            var wasteCompositions = new List<WasteAdditionalInformation>();
-            foreach (var item in source)
-            {
-                wasteCompositions.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation(item.Constituent,
-                Convert.ToDecimal(item.MinConcentration), Convert.ToDecimal(item.MaxConcentration),
-                item.WasteInformationType));
-            }
-            return wasteCompositions;
+            Guard.ArgumentNotNull(() => source, source);
+
+            var result = source.Select(i =>
+                WasteAdditionalInformation.CreateWasteAdditionalInformation(i.Constituent,
+                    Convert.ToDecimal(i.MinConcentration),
+                    Convert.ToDecimal(i.MaxConcentration),
+                    i.WasteInformationType));
+
+            return result.ToList();
         }
     }
 }

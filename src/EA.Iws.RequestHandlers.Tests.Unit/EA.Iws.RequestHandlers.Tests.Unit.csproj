@@ -101,6 +101,7 @@
     <Compile Include="Mappings\ExporterMapTests.cs" />
     <Compile Include="Mappings\MovementMapTests.cs" />
     <Compile Include="Mappings\BusinessTestBase.cs" />
+    <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandlerTests.cs" />
