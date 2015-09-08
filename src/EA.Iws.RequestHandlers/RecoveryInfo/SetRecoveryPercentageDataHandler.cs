@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.RequestHandlers.Notification
+﻿namespace EA.Iws.RequestHandlers.RecoveryInfo
 {
     using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
-    using Requests.Notification;
+    using Requests.RecoveryInfo;
 
     public class SetRecoveryPercentageDataHandler : IRequestHandler<SetRecoveryPercentageData, Guid>
     {

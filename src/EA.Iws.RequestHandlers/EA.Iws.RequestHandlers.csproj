@@ -216,7 +216,7 @@
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Notification\SetReasonForExportHandler.cs" />
     <Compile Include="Notification\SetSpecialHandlingHandler.cs" />
-    <Compile Include="Notification\SetRecoveryPercentageDataHandler.cs" />
+    <Compile Include="RecoveryInfo\SetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\SubmitNotificationHandler.cs" />
     <Compile Include="OperationCodes\AddDisposalCodesHandler.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />

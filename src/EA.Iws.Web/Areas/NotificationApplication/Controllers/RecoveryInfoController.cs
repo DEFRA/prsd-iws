@@ -47,24 +47,9 @@
             {
                 try
                 {
-                    if (model.IsProvidedByImporter)
-                    {
-                        await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
+                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
 
-                    if (model.PercentageRecoverable.HasValue)
-                    {
-                        var fullyRecoverablePercentage = 100.00M;
-                        await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-
-                        if (model.PercentageRecoverable.Value == fullyRecoverablePercentage)
-                        {
-                            return RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = false, backToOverview });
-                        }
-
-                        return RedirectToAction("MethodOfDisposal", "RecoveryInfo", new { id = model.NotificationId, backToOverview });
-                    }
+                    return GetNextScreenForRecoveryPercentageView(model, backToOverview);
                 }
                 catch (ApiBadRequestException e)
                 {
@@ -77,6 +62,18 @@
 
                 return View(model);
             }
+        }
+
+        private ActionResult GetNextScreenForRecoveryPercentageView(RecoveryPercentageViewModel model, bool? backToOverview)
+        {
+            if (model.IsProvidedByImporter)
+            {
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+            }
+
+            return model.PercentageRecoverable.GetValueOrDefault() == 100 ? 
+                RedirectToAction("RecoveryValues", "RecoveryInfo", new { isDisposal = false, backToOverview }) 
+                : RedirectToAction("MethodOfDisposal", "RecoveryInfo", new { id = model.NotificationId, backToOverview });
         }
 
         [HttpGet]

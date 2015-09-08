@@ -5,8 +5,8 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using RequestHandlers.Notification;
-    using Requests.Notification;
+    using RequestHandlers.RecoveryInfo;
+    using Requests.RecoveryInfo;
     using TestHelpers.Helpers;
     using Xunit;
 

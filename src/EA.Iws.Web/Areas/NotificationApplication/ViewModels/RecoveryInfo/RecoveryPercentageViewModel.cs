@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using Core.Notification;
     using Prsd.Core.Validation;
-    using Requests.Notification;
+    using Requests.RecoveryInfo;
 
     public class RecoveryPercentageViewModel : IValidatableObject
     {

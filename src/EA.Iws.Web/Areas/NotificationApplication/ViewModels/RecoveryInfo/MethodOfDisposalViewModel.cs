@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Core.Notification;
-    using Requests.Notification;
+    using Requests.RecoveryInfo;
 
     public class MethodOfDisposalViewModel : IValidatableObject
     {

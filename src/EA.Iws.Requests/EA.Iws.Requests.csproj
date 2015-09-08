@@ -148,7 +148,7 @@
     <Compile Include="Registration\UpdateOrganisationOfUser.cs" />
     <Compile Include="Shared\GetCountry.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
-    <Compile Include="Notification\SetRecoveryPercentageData.cs" />
+    <Compile Include="RecoveryInfo\SetRecoveryPercentageData.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="OperationCodes\AddDisposalCodes.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationId.cs" />

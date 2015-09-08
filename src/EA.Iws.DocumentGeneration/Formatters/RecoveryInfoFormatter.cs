@@ -10,7 +10,7 @@
         {
             if (value.HasValue)
             {
-                return string.Format("{0} %", value.Value);
+                return string.Format("{0}%", value.Value.ToString("G29"));
             }
 
             return string.Empty;
