@@ -31,6 +31,7 @@
     {
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedItems[i])">
             <div class="grid-row">
+                <p>@Html.Gds().ValidationMessageFor(m => m.SelectedItems[i])</p>
                 <div class="column-half">
                     @EA.Iws.Web.Services.ViewService.WordForNumber(i + 1)
                 </div>
