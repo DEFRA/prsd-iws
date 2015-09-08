@@ -49,7 +49,10 @@
         [Fact]
         public async Task Index_ValidInput_NoValidationError()
         {
-            await controller.Index(GetDecisionRequiredDateModel(22, 7, 2015));
+            var model = GetDecisionRequiredDateModel(22, 7, 2015);
+            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
+
+            await controller.Index(model);
 
             Assert.True(controller.ModelState.IsValid);
         }
