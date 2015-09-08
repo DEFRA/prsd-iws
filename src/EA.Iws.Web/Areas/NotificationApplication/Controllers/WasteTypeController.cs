@@ -179,7 +179,12 @@
                 {
                     model.OtherCodes = new List<WasteTypeCompositionData>();
                 }
-                model.OtherCodes.Add(new WasteTypeCompositionData());
+
+                if (AllOtherCodesFieldsContainData(model))
+                {
+                    model.OtherCodes.Add(new WasteTypeCompositionData());
+                }
+                
                 return View(model);
             }
 
@@ -232,7 +237,12 @@
                 {
                     model.OtherCodes = new List<WasteTypeCompositionData>();
                 }
-                model.OtherCodes.Add(new WasteTypeCompositionData());
+
+                if (AllOtherCodesFieldsContainData(model))
+                {
+                    model.OtherCodes.Add(new WasteTypeCompositionData());
+                }
+                
                 return View(model);
             }
 
@@ -466,6 +476,21 @@
             woodCompositions.WasteComposition = woodCompositions.WasteComposition.Where(x => x.ChemicalCompositionCategory != ChemicalCompositionCategory.Food).ToList();
 
             return woodCompositions;
+        }
+
+        private bool AllOtherCodesFieldsContainData(ChemicalCompositionConcentrationLevelsViewModel model)
+        {
+            var result = true;
+
+            foreach (var i in model.OtherCodes)
+            {
+                if (string.IsNullOrWhiteSpace(i.Constituent))
+                {
+                    result = false;
+                }
+            }
+
+            return result;
         }
     }
 }
