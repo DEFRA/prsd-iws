@@ -42,50 +42,112 @@
                 yield return new ValidationResult("Description is required", new[] { "Description" });
             }
 
+            for (var i = 0; i < WasteComposition.Count; i++)
+            {
+                if (IsDecimal(WasteComposition[i].MinConcentration) && IsDecimal(WasteComposition[i].MaxConcentration))
+                {
+                    var minConcentrationValue = Convert.ToDecimal(WasteComposition[i].MinConcentration);
+                    var maxConcentrationValue = Convert.ToDecimal(WasteComposition[i].MaxConcentration);
+
+                    if (minConcentrationValue > maxConcentrationValue)
+                    {
+                        yield return new ValidationResult("Min concentration should be lower than the Max concentration - "
+                            + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                    }
+
+                    if (maxConcentrationValue < 0 || maxConcentrationValue > 100)
+                    {
+                        yield return new ValidationResult("Max concentration should be in range from 0 to 100 for "
+                            + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                    }
+                }
+
+                if (string.IsNullOrEmpty(WasteComposition[i].MinConcentration) || string.IsNullOrEmpty(WasteComposition[i].MaxConcentration))
+                {
+                    yield return new ValidationResult("Please enter a Min and Max concentration for " 
+                        + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                }
+                else if ((!IsDecimal(WasteComposition[i].MinConcentration) && !WasteComposition[i].MinConcentration.ToUpper().Equals("NA")) 
+                    || (!IsDecimal(WasteComposition[i].MaxConcentration) && !WasteComposition[i].MaxConcentration.ToUpper().Equals("NA")))
+                {
+                    yield return new ValidationResult("Please enter a Min and Max concentration for " 
+                        + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                }
+
+                if (!string.IsNullOrEmpty(WasteComposition[i].MinConcentration) && !string.IsNullOrEmpty(WasteComposition[i].MaxConcentration))
+                {
+                    if ((WasteComposition[i].MinConcentration.ToUpper().Equals("NA") && !WasteComposition[i].MaxConcentration.ToUpper().Equals("NA"))
+                    || (!WasteComposition[i].MinConcentration.ToUpper().Equals("NA") && WasteComposition[i].MaxConcentration.ToUpper().Equals("NA")))
+                    {
+                        yield return new ValidationResult("Both fields must either contain 'NA' or a value - "
+                            + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                    }
+                }
+            }
+
             for (var i = 0; i < OtherCodes.Count; i++)
             {
+                if (IsDecimal(OtherCodes[i].MinConcentration) && IsDecimal(OtherCodes[i].MaxConcentration))
+                {
+                    var minConcentrationValue = Convert.ToDecimal(OtherCodes[i].MinConcentration);
+                    var maxConcentrationValue = Convert.ToDecimal(OtherCodes[i].MaxConcentration);
+
+                    if (minConcentrationValue < 0 || minConcentrationValue > 100)
+                    {
+                        yield return new ValidationResult("Min concentration should be in range from 0 to 100 for " + EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory), new[] { "OtherCodes[" + i + "]" });
+                    }
+
+                    if (maxConcentrationValue < 0 || maxConcentrationValue > 100)
+                    {
+                        yield return new ValidationResult("Max concentration should be in range from 0 to 100 for " + EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory), new[] { "OtherCodes[" + i + "]" });
+                    }
+
+                    if (minConcentrationValue > maxConcentrationValue)
+                    {
+                        yield return new ValidationResult("Min concentration should be lower than the Max concentration - " + EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory), new[] { "OtherCodes[" + i + "]" });
+                    }
+                }
+
                 if (!string.IsNullOrEmpty(OtherCodes[i].Constituent) && (string.IsNullOrEmpty(OtherCodes[i].MinConcentration) || string.IsNullOrEmpty(OtherCodes[i].MaxConcentration)))
                 {
                     yield return new ValidationResult("Please enter a Min and Max concentration for " + EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory), new[] { "OtherCodes[" + i + "]" });
                 }
+
                 if (string.IsNullOrEmpty(OtherCodes[i].Constituent) && (!string.IsNullOrEmpty(OtherCodes[i].MinConcentration) || !string.IsNullOrEmpty(OtherCodes[i].MaxConcentration)))
                 {
                     yield return new ValidationResult("Please enter a name for the 'Other' component " + EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory), new[] { "OtherCodes[" + i + "]" });
                 }
+
+                if (!string.IsNullOrEmpty(OtherCodes[i].MinConcentration) && !string.IsNullOrEmpty(OtherCodes[i].MaxConcentration))
+                {
+                    if ((OtherCodes[i].MinConcentration.ToUpper().Equals("NA") && !OtherCodes[i].MaxConcentration.ToUpper().Equals("NA"))
+                        || (!OtherCodes[i].MinConcentration.ToUpper().Equals("NA") && OtherCodes[i].MaxConcentration.ToUpper().Equals("NA")))
+                    {
+                        yield return new ValidationResult("Both fields must either contain 'NA' or a value - "
+                            + EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory), new[] { "OtherCodes[" + i + "]" });
+                    }
+                }
             }
 
-            for (var i = 0; i < WasteComposition.Count; i++)
+            var totalNas = 0;
+            var totalNotEmpty = 0;
+
+            foreach (WasteTypeCompositionData i in allCompositions)
             {
-                if (string.IsNullOrEmpty(WasteComposition[i].MinConcentration) || string.IsNullOrEmpty(WasteComposition[i].MaxConcentration))
+                if (!string.IsNullOrEmpty(i.MinConcentration) && !string.IsNullOrEmpty(i.MaxConcentration))
                 {
-                    yield return new ValidationResult("Please enter a Min and Max concentration for " + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
-                }
-                else if ((!IsDecimal(WasteComposition[i].MinConcentration) && !WasteComposition[i].MinConcentration.ToUpper().Equals("NA")) || (!IsDecimal(WasteComposition[i].MaxConcentration) && !WasteComposition[i].MaxConcentration.ToUpper().Equals("NA")))
-                {
-                    yield return new ValidationResult("Please enter valid Min and Max concentration for " + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                    totalNotEmpty = totalNotEmpty + 1;
+
+                    if (i.MinConcentration.ToUpper().Equals("NA") && i.MaxConcentration.ToUpper().Equals("NA"))
+                    {
+                        totalNas = totalNas + 1;
+                    }
                 }
             }
 
-            for (var i = 0; i < allCompositions.Count; i++)
+            if (totalNas == totalNotEmpty)
             {
-                if (IsDecimal(allCompositions[i].MinConcentration) && IsDecimal(allCompositions[i].MaxConcentration))
-                {
-                    var minConcentrationValue = Convert.ToDecimal(allCompositions[i].MinConcentration);
-                    var maxConcentrationValue = Convert.ToDecimal(allCompositions[i].MaxConcentration);
-
-                    if (minConcentrationValue < 0 || minConcentrationValue > 100)
-                    {
-                        yield return new ValidationResult("Min concentration should be in range from 0 to 100 for  " + EnumHelper.GetDescription(allCompositions[i].ChemicalCompositionCategory));
-                    }
-                    if (maxConcentrationValue < 0 || maxConcentrationValue > 100)
-                    {
-                        yield return new ValidationResult("Max concentration should be in range from 0 to 100 for  " + EnumHelper.GetDescription(allCompositions[i].ChemicalCompositionCategory));
-                    }
-                    if (minConcentrationValue > maxConcentrationValue)
-                    {
-                        yield return new ValidationResult("Min concentration should be lower than the Max concentration  " + EnumHelper.GetDescription(allCompositions[i].ChemicalCompositionCategory));
-                    }
-                }
+                yield return new ValidationResult("You’ve not entered any data about the waste’s chemical composition. Please make sure you enter the concentration levels for at least one component.");
             }
         }
 

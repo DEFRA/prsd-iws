@@ -197,6 +197,7 @@
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
     <Compile Include="ViewModels\RecoveryPercentageViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />
+    <Compile Include="ViewModels\WasteType\ChemicalCompositionConcentrationLevelsViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
