@@ -33,7 +33,7 @@
 
             foreach (var item in movementCarriersData)
             {
-                movementCarriers.Add(MovementCarrier.CreateMovementCarrier(item.Order, item.Carrier));
+                movementCarriers.Add(new MovementCarrier(item.Order, item.Carrier));
             }
 
             movement.SetMovementCarriers(movementCarriers);

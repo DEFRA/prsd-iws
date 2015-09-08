@@ -14,7 +14,7 @@
         {
         }
 
-        protected MovementCarrier(int order, Carrier carrier)
+        public MovementCarrier(int order, Carrier carrier)
         {
             Order = order;
             Carrier = carrier;
@@ -23,10 +23,5 @@
         public virtual Carrier Carrier { get; private set; }
 
         public int Order { get; private set; }
-
-        public static MovementCarrier CreateMovementCarrier(int order, Carrier carrier)
-        {
-            return new MovementCarrier(order, carrier);
-        }
     }
 }
