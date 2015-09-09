@@ -18,7 +18,7 @@
         Transmitted = 6,
         [Display(Name = "Acknowledged")]
         Acknowledged = 7,
-        [Display(Name = "Decision required by")]
+        [Display(Name = "Decision required")]
         DecisionRequiredBy = 8
     }
 }
