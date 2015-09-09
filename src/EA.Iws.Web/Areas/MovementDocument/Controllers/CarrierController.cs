@@ -122,14 +122,10 @@
                 var numberOfCarriers = await client.SendAsync(User.GetAccessToken(),
                     new GetNumberOfCarriersByMovementId(movementId));
 
-                var meansOfTransport = await client.SendAsync(User.GetAccessToken(),
-                    new GetMeansOfTransportByNotificationId(notificationId));
-
                 var viewModel = new NumberOfCarriersViewModel
                 {
                     Amount = numberOfCarriers,
-                    MeansOfTransportViewModel =
-                        new MeansOfTransportViewModel { NotificationMeansOfTransport = meansOfTransport.ToList() }
+                    MeansOfTransportViewModel = await GetMeansOfTransport(client, notificationId)
                 };
 
                 return View(viewModel);
@@ -138,11 +134,15 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NumberOfCarriers(Guid movementId, NumberOfCarriersViewModel viewModel)
+        public async Task<ActionResult> NumberOfCarriers(Guid movementId, Guid notificationId, NumberOfCarriersViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                using (var client = apiClient())
+                {
+                    viewModel.MeansOfTransportViewModel = await GetMeansOfTransport(client, notificationId);
+                    return View(viewModel);
+                }
             }
 
             return RedirectToAction("Index", "Carrier", new { movementId, numberOfCarriers = viewModel.Amount });

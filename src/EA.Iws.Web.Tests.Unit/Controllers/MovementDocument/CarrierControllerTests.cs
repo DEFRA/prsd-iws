@@ -46,9 +46,12 @@
             var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid);
 
             Assert.IsType<ViewResult>(result);
-            Assert.IsType<NumberOfCarriersViewModel>(((ViewResult)result).Model);
 
-            var model = ((ViewResult)result).Model as NumberOfCarriersViewModel;
+            var viewResult = result as ViewResult;
+
+            Assert.IsType<NumberOfCarriersViewModel>(viewResult.Model);
+
+            var model = viewResult.Model as NumberOfCarriersViewModel;
 
             Assert.Equal(null, model.Amount);
         }
@@ -62,28 +65,34 @@
             var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid);
 
             Assert.IsType<ViewResult>(result);
-            Assert.IsType<NumberOfCarriersViewModel>(((ViewResult)result).Model);
 
-            var model = ((ViewResult)result).Model as NumberOfCarriersViewModel;
+            var viewResult = result as ViewResult;
+
+            Assert.IsType<NumberOfCarriersViewModel>(viewResult.Model);
+
+            var model = viewResult.Model as NumberOfCarriersViewModel;
 
             Assert.Equal(3, model.Amount);
         }
 
         [Fact]
-        public void NumberOfCarriers_Post_InvalidModel_ReturnsView()
+        public async Task NumberOfCarriers_Post_InvalidModel_ReturnsView()
         {
             controller.ModelState.AddModelError("Test", "Error");
 
-            var result = controller.NumberOfCarriers(AnyGuid, new NumberOfCarriersViewModel());
+            var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid, new NumberOfCarriersViewModel());
 
             Assert.IsType<ViewResult>(result);
-            Assert.IsType<NumberOfCarriersViewModel>(((ViewResult)result).Model);
+
+            var viewResult = result as ViewResult;
+
+            Assert.IsType<NumberOfCarriersViewModel>(viewResult.Model);
         }
 
         [Fact]
-        public void NumberOfCarriers_Post_RedirectsToIndex_WithQuerystringValue()
+        public async Task NumberOfCarriers_Post_RedirectsToIndex_WithQuerystringValue()
         {
-            var result = controller.NumberOfCarriers(AnyGuid, new NumberOfCarriersViewModel { Amount = 3 });
+            var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid, new NumberOfCarriersViewModel { Amount = 3 });
 
             Assert.IsType<RedirectToRouteResult>(result);
 
