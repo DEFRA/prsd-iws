@@ -85,9 +85,9 @@
                 MergeProducerToMainDocument(data[0].GetProducerViewModelShowingAnnexMessages(data.Count, data[0], annexNumber), properties);
             }
 
-            //Clear the annex process of generation field if it contains no text
-            if (!(data[0].ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()) &&
-                !(data.Count == 1 && data[0].IsProcessAnnexAttached.GetValueOrDefault()))
+            //Clear the annex process of generation fields if they should not be displayed
+            if (!(data[0].ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()) ||
+                (data[0].IsProcessAnnexAttached.GetValueOrDefault()))
             {
                 ClearProcessOfGenerationTextFields();
             }
