@@ -106,19 +106,19 @@
             IntendedQuantityLtrs = string.Empty;
             if (shipmentInfo.Units == ShipmentQuantityUnits.CubicMetres)
             {
-                IntendedQuantityM3 = shipmentInfo.Quantity.ToString();
+                IntendedQuantityM3 = shipmentInfo.Quantity.ToString("G29");
             }
             else if (shipmentInfo.Units == ShipmentQuantityUnits.Kilograms)
             {
-                IntendedQuantityKg = shipmentInfo.Quantity + " kg";
+                IntendedQuantityKg = shipmentInfo.Quantity.ToString("G29") + " kg";
             }
             else if (shipmentInfo.Units == ShipmentQuantityUnits.Tonnes)
             {
-                IntendedQuantityTonnes = shipmentInfo.Quantity.ToString();
+                IntendedQuantityTonnes = shipmentInfo.Quantity.ToString("G29");
             }
             else if (shipmentInfo.Units == ShipmentQuantityUnits.Litres)
             {
-                IntendedQuantityLtrs = shipmentInfo.Quantity + " Ltrs";
+                IntendedQuantityLtrs = shipmentInfo.Quantity.ToString("G29") + " Ltrs";
             }
         }
 
