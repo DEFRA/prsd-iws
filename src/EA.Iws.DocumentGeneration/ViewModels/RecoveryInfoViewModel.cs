@@ -48,6 +48,12 @@
                 return;
             }
 
+            if (notification.IsProvidedByImporter.GetValueOrDefault())
+            {
+                annexMessage = "Provided by importer-consignee";
+                return;
+            }
+
             methodOfDisposal = notification.MethodOfDisposal ?? string.Empty;
 
             percentageRecoverable = recoveryInfoFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);

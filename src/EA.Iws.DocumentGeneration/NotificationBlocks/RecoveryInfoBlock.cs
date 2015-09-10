@@ -14,16 +14,33 @@
         public RecoveryInfoBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
-            
-            if (notification.NotificationType == NotificationType.Disposal || notification.IsProvidedByImporter.GetValueOrDefault())
+
+            if (notification.NotificationType == NotificationType.Disposal)
             {
                 HasAnnex = false;
             }
             else
             {
                 HasAnnex = true;
+
                 CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
                 data = new RecoveryInfoViewModel(notification, new RecoveryInfoFormatter());
+
+                if (notification.IsProvidedByImporter.GetValueOrDefault())
+                {
+                    HasAnnex = false;
+
+                    MergeMainDocumentBlock();
+                }
+            }
+        }
+
+        private void MergeMainDocumentBlock()
+        {
+            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(RecoveryInfoViewModel));
+            foreach (var field in CorrespondingMergeFields)
+            {
+                MergeFieldDataMapper.BindCorrespondingField(field, data, properties);
             }
         }
 
