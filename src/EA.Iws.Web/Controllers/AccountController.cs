@@ -60,8 +60,7 @@
             {
                 var identity = response.GenerateUserIdentity();
 
-                authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe },
-                    identity);
+                authenticationManager.SignIn(new AuthenticationProperties(), identity);
 
                 bool isInternal = await IsInternalUser(response.AccessToken);
 
