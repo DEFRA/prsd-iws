@@ -7,14 +7,12 @@
     internal class WasteCompositionViewModel
     {
         private const int textLength = 150;
-
-        private string longDescription = string.Empty;
-        private string shortDescription = string.Empty;
         private string annexMessage = string.Empty;
-
-        private string otherTypeDescription = string.Empty;
-        private string woodTypeDescription = string.Empty;
         private string chemicalCompositionDescription = string.Empty;
+        private string longDescription = string.Empty;
+        private string otherTypeDescription = string.Empty;
+        private string shortDescription = string.Empty;
+        private string woodTypeDescription = string.Empty;
 
         public WasteCompositionViewModel(WasteType wasteType, WasteCompositionFormatter formatter)
         {
@@ -32,27 +30,6 @@
                 formatter.GetAdditionalInformationChemicalCompositionPercentages(wasteType.WasteAdditionalInformation);
 
             SetMergeDescriptionText();
-        }
-
-        private void SetWasteTypeDescription(WasteType wasteType)
-        {
-            if (wasteType == null)
-            {
-                return;
-            }
-
-            if (wasteType.ChemicalCompositionType == ChemicalComposition.Wood)
-            {
-                WoodTypeDescription = wasteType.WoodTypeDescription ?? string.Empty;
-            }
-            else if (wasteType.ChemicalCompositionType == ChemicalComposition.Other)
-            {
-                OtherTypeDescription = wasteType.OtherWasteTypeDescription ?? string.Empty;
-            }
-            else
-            {
-                ChemicalCompositionDescription = wasteType.ChemicalCompositionDescription ?? string.Empty;
-            }
         }
 
         public WasteCompositionViewModel(WasteCompositionViewModel model, int annexNumber)
@@ -123,14 +100,40 @@
             private set { annexMessage = value; }
         }
 
-        private bool ChemicalCompositionDescriptionOverflowsToAnnex()
+        private void SetWasteTypeDescription(WasteType wasteType)
         {
-            return ChemicalCompositionDescription.Length > textLength;
+            if (wasteType == null)
+            {
+                return;
+            }
+
+            if (wasteType.ChemicalCompositionType == ChemicalComposition.Wood)
+            {
+                WoodTypeDescription = wasteType.WoodTypeDescription ?? string.Empty;
+            }
+            else if (wasteType.ChemicalCompositionType == ChemicalComposition.Other)
+            {
+                OtherTypeDescription = wasteType.OtherWasteTypeDescription ?? string.Empty;
+            }
+            else
+            {
+                ChemicalCompositionDescription = wasteType.ChemicalCompositionDescription ?? string.Empty;
+            }
         }
 
-        private bool HasChemicalCompositionDescription()
+        private bool IsTypeOther()
         {
-            return !string.IsNullOrWhiteSpace(ChemicalCompositionDescription);
+            return ChemicalComposition == ChemicalComposition.Other;
+        }
+
+        private bool IsOtherDescriptionTooLongForBlock()
+        {
+            if (OtherTypeDescription != null)
+            {
+                return OtherTypeDescription.Length > textLength;
+            }
+
+            return false;
         }
 
         protected void SetAnnexMessageAndMergeDescriptions(int annexNumber)
@@ -138,42 +141,16 @@
             var messageText = string.Empty;
             var seeAnnex = "See Annex " + annexNumber;
 
-            if (HasAnnex || OptionalInformation.Length > 0)
+            if (!IsTypeOther() || IsOtherDescriptionTooLongForBlock())
+            {
+                messageText = seeAnnex;
+            }
+            else if (IsTypeOther() && (HasAnnex || OptionalInformation.Length > 0))
             {
                 messageText = seeAnnex;
             }
 
-            if (ChemicalCompositionDescriptionOverflowsToAnnex())
-            {
-                messageText = seeAnnex;
-                LongDescription = ChemicalCompositionDescription;
-            }
-            else if (HasChemicalCompositionDescription())
-            {
-                messageText = seeAnnex;
-                ShortDescription = ChemicalCompositionDescription;
-            }
-
-            if (OtherTypeDescription.Length > textLength)
-            {
-                messageText = seeAnnex;
-                LongDescription = OtherTypeDescription;
-            }
-            else if (OtherTypeDescription.Length > 0)
-            {
-                ShortDescription = OtherTypeDescription;
-            }
-
-            if (WoodTypeDescription.Length > textLength)
-            {
-                messageText = seeAnnex;
-                LongDescription = WoodTypeDescription;
-            }
-            else if (WoodTypeDescription.Length > 0)
-            {
-                messageText = seeAnnex;
-                ShortDescription = WoodTypeDescription;
-            }
+            SetMergeDescriptionText();
 
             AnnexMessage = messageText;
         }

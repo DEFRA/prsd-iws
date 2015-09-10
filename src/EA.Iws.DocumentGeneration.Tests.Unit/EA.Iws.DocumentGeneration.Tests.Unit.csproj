@@ -70,6 +70,7 @@
     <Compile Include="ViewModels\TransportViewModelTests.cs" />
     <Compile Include="ViewModels\TransitStateViewModelTests.cs" />
     <Compile Include="ViewModels\WasteCodesViewModelTests.cs" />
+    <Compile Include="ViewModels\WasteCompositionViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
