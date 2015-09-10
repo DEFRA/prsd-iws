@@ -1,14 +1,18 @@
 ﻿@model EA.Iws.Core.NotificationAssessment.NotificationAssessmentSummaryInformationData
-<p>
-    <span>@Model.Number</span>
-</p>
 
-<p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CompetentAuthority)</p>
-<p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</p>
+<div class="internal-side-nav">
+    <p class="lede" style="font-weight: 700;">@Model.Number</p>
+    <p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CompetentAuthority)</p>
+    <p class="heading-small">Status</p>
+    <p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</p>
+</div>
 
-<h4>Notification assessment</h4>
-@Html.ActionLink("Notification assessment dates", "Index", "KeyDates", new { Model.Id, area = "NotificationAssessment" }, null)
-@Html.ActionLink("Notification assessment decision", "Index", "Decision", new { Model.Id, area = "NotificationAssessment" }, null)
-<h4>Financial guarantee</h4>
-@Html.ActionLink("Financial guarantee dates", "Dates", "FinancialGuarantee", new { Model.Id, area = "NotificationAssessment" }, null)
-@Html.ActionLink("Financial guarantee decision", "Decision", "FinancialGuarantee", new { Model.Id, area = "NotificationAssessment" }, null)
+<p>@Html.Navigation().Link("Overview", false, "Index", "Home", "NotificationAssessment")</p>
+
+<span>Notification assessment</span>
+@Html.Navigation().Link("Key dates", false, "Index", "KeyDates", "NotificationAssessment")
+@Html.Navigation().Link("Assessment decision", false, "Index", "Decision", "NotificationAssessment")
+
+<span>Financial guarantee</span>
+@Html.Navigation().Link("FG dates", false, "Dates", "FinancialGuarantee", "NotificationAssessment")
+@Html.Navigation().Link("FG decision", false, "Decision", "FinancialGuarantee", "NotificationAssessment")
