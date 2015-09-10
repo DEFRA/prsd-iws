@@ -37,22 +37,11 @@
 @Html.Navigation().Link("Transport route export", Model.HasStateOfExport, "Index", "StateOfExport", "NotificationApplication")
 @Html.Navigation().Link("Transport route import", Model.HasStateOfImport, "Index", "StateOfImport", "NotificationApplication")
 @Html.Navigation().Link("Transport route transits", Model.HasTransitState, "Summary", "TransportRoute", "NotificationApplication")
-@if (Model.HasExitCustomsOffice && Model.HasEntryCustomsOffice)
+@Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication", new[]
 {
-    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "ExitCustomsOffice", "NotificationApplication")
-}
-else if (Model.HasExitCustomsOffice)
-{
-    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "ExitCustomsOffice", "NotificationApplication")
-}
-else if (Model.HasEntryCustomsOffice)
-{
-    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "EntryCustomsOffice", "NotificationApplication")
-}
-else
-{
-    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication")
-}
+    new Tuple<string, string>("ExitCustomsOffice", "Index"),
+    new Tuple<string, string>("EntryCustomsOffice", "Index") 
+})
 
 <span>Amounts and dates</span>
 @Html.Navigation().Link("Intended shipments", Model.HasShipmentInfo, "Index", "Shipment", "NotificationApplication")

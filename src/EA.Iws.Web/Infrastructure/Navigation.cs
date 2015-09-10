@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -13,6 +14,42 @@
             this.htmlHelper = htmlHelper;
         }
 
+        public MvcHtmlString Link(string linkText,
+            bool isComplete,
+            string actionName,
+            string controllerName,
+            string areaName,
+            Tuple<string, string>[] additionalActiveControllerActionNames)
+        {
+            var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+
+            var link = new TagBuilder("a");
+            link.GenerateId(linkText);
+            link.Attributes.Add("href", urlHelper.Action(actionName, controllerName, new { area = areaName }));
+
+            if (IsActiveItem(htmlHelper, controllerName, actionName, areaName)
+                || IsAdditionalControllerAction(htmlHelper, areaName, additionalActiveControllerActionNames))
+            {
+                link.AddCssClass("active");
+            }
+
+            return GenerateProgressLink(link, isComplete, linkText);
+        }
+
+        private static bool IsAdditionalControllerAction(HtmlHelper htmlHelper, string areaName,
+            Tuple<string, string>[] additionalActiveControllerActionNames)
+        {
+            if (additionalActiveControllerActionNames == null || additionalActiveControllerActionNames.Length == 0)
+            {
+                return false;
+            }
+
+            return additionalActiveControllerActionNames.Any(t =>
+                TokenMatches(htmlHelper, areaName, "area")
+                && ValueMatches(htmlHelper, t.Item1, "controller")
+                && ValueMatches(htmlHelper, t.Item2, "action"));
+        }
+
         public MvcHtmlString Link(string linkText, bool isComplete, string actionName, string controllerName,
             RouteValueDictionary routeValues, string[] additionalActiveActionNames = null)
         {
@@ -21,8 +58,9 @@
             var link = new TagBuilder("a");
             link.GenerateId(linkText);
             link.Attributes.Add("href", urlHelper.Action(actionName, controllerName, routeValues));
-            
-            if (IsActiveItem(htmlHelper, controllerName, actionName, routeValues["area"].ToString(), additionalActiveActionNames))
+
+            if (IsActiveItem(htmlHelper, controllerName, actionName, routeValues["area"].ToString(),
+                additionalActiveActionNames))
             {
                 link.AddCssClass("active");
             }
@@ -31,16 +69,20 @@
         }
 
         /// <summary>
-        /// Returns a navigation link
+        ///     Returns a navigation link
         /// </summary>
         /// <param name="linkText">The text to display in the link</param>
         /// <param name="isComplete">Whether the section is complete. When true, a tick is shown next to the link.</param>
         /// <param name="actionName">The name of the action.</param>
         /// <param name="controllerName">The name of the controller.</param>
         /// <param name="areaName">The name of the area.</param>
-        /// <param name="additionalActiveActionNames">Additional action names that are considered to be the active page for the action.</param>
+        /// <param name="additionalActiveActionNames">
+        ///     Additional action names that are considered to be the active page for the
+        ///     action.
+        /// </param>
         /// <returns></returns>
-        public MvcHtmlString Link(string linkText, bool isComplete, string actionName, string controllerName, string areaName, string[] additionalActiveActionNames = null)
+        public MvcHtmlString Link(string linkText, bool isComplete, string actionName, string controllerName,
+            string areaName, string[] additionalActiveActionNames = null)
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 
@@ -59,7 +101,7 @@
         private static MvcHtmlString GenerateProgressLink(TagBuilder link, bool isComplete, string linkText)
         {
             link.Attributes.Add("title", linkText);
-            
+
             var icon = new TagBuilder("i");
             icon.AddCssClass("fa");
 
@@ -73,7 +115,8 @@
             return MvcHtmlString.Create(link.ToString());
         }
 
-        private static bool IsActiveItem(HtmlHelper htmlHelper, string controller, string action, string area, string[] additionalActiveActionNames = null)
+        private static bool IsActiveItem(HtmlHelper htmlHelper, string controller, string action, string area,
+            string[] additionalActiveActionNames = null)
         {
             if (!TokenMatches(htmlHelper, area, "area"))
             {
@@ -90,7 +133,9 @@
                 return true;
             }
 
-            return additionalActiveActionNames != null && additionalActiveActionNames.Any(additionalAction => ValueMatches(htmlHelper, additionalAction, "action"));
+            return additionalActiveActionNames != null &&
+                   additionalActiveActionNames.Any(
+                       additionalAction => ValueMatches(htmlHelper, additionalAction, "action"));
         }
 
         private static bool ValueMatches(HtmlHelper htmlHelper, string item, string dataToken)
