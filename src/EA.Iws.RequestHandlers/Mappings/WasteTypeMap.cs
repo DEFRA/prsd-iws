@@ -34,7 +34,7 @@
                 OtherWasteTypeDescription = source.OtherWasteTypeDescription,
                 WasteCompositionData = wasteTypeDataMapper.Map(source.WasteCompositions).ToList(),
                 HasAnnex = source.HasAnnex,
-                WasteAdditionalInformarion = wasteAdditionalInformationMapper.Map(source.WasteAdditionalInformation).ToList(),
+                WasteAdditionalInformation = wasteAdditionalInformationMapper.Map(source.WasteAdditionalInformation).ToList(),
                 EnergyInformation = source.EnergyInformation,
                 FurtherInformation = source.OptionalInformation,
                 WoodTypeDescription = source.WoodTypeDescription

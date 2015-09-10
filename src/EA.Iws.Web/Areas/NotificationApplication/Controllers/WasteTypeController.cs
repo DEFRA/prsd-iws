@@ -384,9 +384,25 @@
             using (var client = apiClient())
             {
                 var wasteTypeData = await client.SendAsync(User.GetAccessToken(), new GetWasteType(id));
-                if (wasteTypeData != null && wasteTypeData.WasteAdditionalInformarion != null && wasteTypeData.WasteAdditionalInformarion.Count > 0)
+                
+                var compositions = wasteTypeData.WasteAdditionalInformation;
+
+                var notApplicableCompositions =
+                    model.WasteComposition.Where(
+                        wc =>
+                            compositions.All(c => c.WasteInformationType != wc.WasteInformationType)).Select(wc => new WoodInformationData
+                            {
+                                Constituent = wc.Constituent,
+                                WasteInformationType = wc.WasteInformationType,
+                                MinConcentration = NotApplicable,
+                                MaxConcentration = NotApplicable
+                            });
+
+                compositions.AddRange(notApplicableCompositions);
+
+                if (wasteTypeData != null && wasteTypeData.WasteAdditionalInformation != null && wasteTypeData.WasteAdditionalInformation.Count > 0)
                 {
-                    model.WasteComposition = wasteTypeData.WasteAdditionalInformarion;
+                    model.WasteComposition = compositions;
                     model.Energy = wasteTypeData.EnergyInformation;
                     model.FurtherInformation = wasteTypeData.FurtherInformation;
                     model.HasAnnex = wasteTypeData.HasAnnex;

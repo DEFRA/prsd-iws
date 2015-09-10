@@ -17,7 +17,7 @@
 
         public List<WasteCompositionData> WasteCompositionData { get; set; }
 
-        public List<WoodInformationData> WasteAdditionalInformarion { get; set; }
+        public List<WoodInformationData> WasteAdditionalInformation { get; set; }
         
         public string OtherWasteTypeDescription { get; set; }
 
