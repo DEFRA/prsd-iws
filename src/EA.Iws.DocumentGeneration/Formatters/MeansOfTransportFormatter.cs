@@ -12,7 +12,7 @@
                 return string.Empty;
             }
 
-            return string.Join(" - ", meansOfTransport.Select(m => m.Symbol));
+            return string.Join("-", meansOfTransport.Select(m => m.Symbol));
         }
     }
 }

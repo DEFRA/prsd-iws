@@ -45,7 +45,7 @@
                 MeansOfTransport.Air
             }.OrderBy(m => m.Symbol));
 
-            Assert.Equal("A - R", result);
+            Assert.Equal("A-R", result);
         }
 
         [Fact]
@@ -58,7 +58,7 @@
                 MeansOfTransport.Sea
             }.OrderBy(m => m.Symbol));
 
-            Assert.Equal("A - R - S", result);
+            Assert.Equal("A-R-S", result);
         }
     }
 }
