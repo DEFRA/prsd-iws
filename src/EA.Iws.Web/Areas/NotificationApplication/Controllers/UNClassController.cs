@@ -13,12 +13,12 @@
     using ViewModels.WasteCodes;
 
     [Authorize]
-    public class UNClassController : BaseWasteCodeController
+    public class UnClassController : BaseWasteCodeController
     {
         private readonly IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper;
         private static readonly IList<CodeType> codeTypes = new[] { CodeType.Un }; 
 
-        public UNClassController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper) : base(apiClient, CodeType.Un)
+        public UnClassController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper) : base(apiClient, CodeType.Un)
         {
             this.mapper = mapper;
         }
@@ -54,7 +54,7 @@
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
                 return (backToOverview) ? BackToOverviewResult(id) 
-                    : RedirectToAction("Index", "UNNumber", new { id });
+                    : RedirectToAction("Index", "UnNumber", new { id });
             }
         }
     }

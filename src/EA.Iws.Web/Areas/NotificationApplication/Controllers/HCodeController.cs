@@ -55,7 +55,7 @@
                             viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
                 return (backToOverview) ? BackToOverviewResult(id) 
-                    : RedirectToAction("Index", "UNClass", new { id });
+                    : RedirectToAction("Index", "UnClass", new { id });
             }
         }
     }

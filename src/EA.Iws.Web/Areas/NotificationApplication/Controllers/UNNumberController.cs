@@ -13,12 +13,12 @@
     using ViewModels.WasteCodes;
 
     [Authorize]
-    public class UNNumberController : BaseWasteCodeController
+    public class UnNumberController : BaseWasteCodeController
     {
         private readonly IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper;
         private readonly IList<CodeType> requiredCodeTypes = new[] { CodeType.UnNumber }; 
 
-        public UNNumberController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper) 
+        public UnNumberController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper) 
             : base(apiClient, CodeType.UnNumber)
         {
             this.mapper = mapper;

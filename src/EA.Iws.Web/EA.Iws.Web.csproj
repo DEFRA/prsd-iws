@@ -534,8 +534,8 @@
     <Content Include="Areas\NotificationApplication\Views\EwcCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\HCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_WasteCodes.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\UNClass\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\UNNumber\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UnClass\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UnNumber\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
     <Content Include="Areas\MovementDocument\Views\web.config" />
     <Content Include="Areas\MovementDocument\Views\_ViewStart.cshtml" />
@@ -736,8 +736,8 @@
     <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\HCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
-    <Compile Include="Areas\NotificationApplication\Controllers\UNClassController.cs" />
-    <Compile Include="Areas\NotificationApplication\Controllers\UNNumberController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\UnClassController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\UnNumberController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcEnterCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNClass\UNClassViewModel.cs" />
