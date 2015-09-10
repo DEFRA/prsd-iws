@@ -35,9 +35,24 @@
 
 <span>The journey</span>
 @Html.Navigation().Link("Transport route export", Model.HasStateOfExport, "Index", "StateOfExport", "NotificationApplication")
-@Html.Navigation().Link("Transport route transits", Model.HasTransitState, "Summary", "TransportRoute", "NotificationApplication")
 @Html.Navigation().Link("Transport route import", Model.HasStateOfImport, "Index", "StateOfImport", "NotificationApplication")
-@Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication")
+@Html.Navigation().Link("Transport route transits", Model.HasTransitState, "Summary", "TransportRoute", "NotificationApplication")
+@if (Model.HasExitCustomsOffice && Model.HasEntryCustomsOffice)
+{
+    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "ExitCustomsOffice", "NotificationApplication")
+}
+else if (Model.HasExitCustomsOffice)
+{
+    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "ExitCustomsOffice", "NotificationApplication")
+}
+else if (Model.HasEntryCustomsOffice)
+{
+    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "EntryCustomsOffice", "NotificationApplication")
+}
+else
+{
+    @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication")
+}
 
 <span>Amounts and dates</span>
 @Html.Navigation().Link("Intended shipments", Model.HasShipmentInfo, "Index", "Shipment", "NotificationApplication")

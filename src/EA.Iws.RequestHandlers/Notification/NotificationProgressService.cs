@@ -81,7 +81,7 @@
             var classifyYourWasteComplete = MapProgressForClassifyYourWaste(progress, progressResult);
             var wasteCodesComplete = MapProgressForWasteCodes(progress, progressResult);
             var wasteRecoveryComplete = MapProgressForWasteRecovery(progress, progressResult);
-            
+
             progress.HasMethodOfDisposal = !string.IsNullOrWhiteSpace(progressResult.Notification.MethodOfDisposal);
 
             progress.IsAllComplete = organisationsInvolvedComplete
@@ -105,11 +105,11 @@
             progress.HasFacility = progressResult.Facilities.Any(f => f.Id.HasValue);
             progress.HasActualSiteOfTreatment = progressResult.Facilities.Any(f => f.IsActualSiteOfTreatment.GetValueOrDefault());
 
-            return progress.HasExporter 
-                && progress.HasProducer 
-                && progress.HasSiteOfExport 
-                && progress.HasImporter 
-                && progress.HasFacility 
+            return progress.HasExporter
+                && progress.HasProducer
+                && progress.HasSiteOfExport
+                && progress.HasImporter
+                && progress.HasFacility
                 && progress.HasActualSiteOfTreatment;
         }
 
@@ -163,6 +163,9 @@
                     || (importOutsideEu && hasExitOffice)
                     || (importAndTransitsOutsideEu && hasEntryOffice)
                     || (transitsOutsideEu && hasExitOffice && hasEntryOffice);
+
+                progress.HasEntryCustomsOffice = hasEntryOffice;
+                progress.HasExitCustomsOffice = hasExitOffice;
             }
             else
             {
@@ -207,7 +210,7 @@
             progress.HasUnNumbers = progressResult.WasteCodes.Any(wc => wc.CodeType == CodeType.UnNumber);
 
             var otherCodes = new[] { CodeType.CustomsCode, CodeType.ImportCode, CodeType.ExportCode, CodeType.OtherCode };
-            progress.HasOtherCodes = otherCodes.All(oc => 
+            progress.HasOtherCodes = otherCodes.All(oc =>
                 progressResult.WasteCodes.Select(wc => wc.CodeType).Contains(oc));
 
             return progress.HasBaselOecdCode
