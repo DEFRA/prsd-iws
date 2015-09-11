@@ -162,5 +162,24 @@
 
             return View();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return View();
+        }
     }
 }

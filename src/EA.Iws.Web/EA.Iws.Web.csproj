@@ -696,6 +696,7 @@
     <Content Include="Views\Shared\EditorTemplates\StringIntRadioButtons.cshtml" />
     <Content Include="Views\Account\EmailVerificationResent.cshtml" />
     <Content Include="Views\Errors\_WhatNow.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -925,6 +926,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\TransitState\TransitStateViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteGenerationProcess\WasteGenerationProcessViewModel.cs" />
     <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
+    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
