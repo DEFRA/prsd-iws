@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Web.Areas.NotificationAssessment.ViewModels
-@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.DateInputViewModel
+@model DateInputViewModel
 
 <h1 class="heading-large">Enter the key dates for this notification</h1>
 
@@ -8,12 +8,10 @@
     var byText = " by ";
 }
     
-
-
     <div>
         These are the dates so far:
 
-        <table>
+        <table title="Assessment dates currently recorded">
             <tr>
                 <th>Activities</th>
                 <th>Dates</th>

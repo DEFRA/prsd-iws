@@ -3,7 +3,7 @@
     ViewBag.Title = "Financial guarantee dates";
 }
 
-<h2 class="heading-large">Financial guarantee assessment</h2>
+<h1 class="heading-large">Financial guarantee assessment</h1>
 
 <dl class="object-summary">
     <dt>Status:</dt>
@@ -24,7 +24,7 @@
     @Html.HiddenFor(m => m.IsRequiredEntryComplete)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Received.Day) @Html.Gds().FormGroupClass(m => m.Received.Month) @Html.Gds().FormGroupClass(m => m.Received.Year)">
-        @Html.Gds().LabelFor(m => m.Received)
+        <label class="form-label" for="Received_Day">Guarantee received</label>
         @Html.Gds().HintParagraph("For example, 20 3 2015")
         @Html.EditorFor(m => m.Received)
     </div>
@@ -32,7 +32,7 @@
     if (Model.IsRequiredEntryComplete)
     {
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Completed.Day) @Html.Gds().FormGroupClass(m => m.Completed.Month) @Html.Gds().FormGroupClass(m => m.Completed.Year)">
-            @Html.Gds().LabelFor(m => m.Completed)
+            <label class="form-label" for="Completed_Day">Guarantee received</label>
             @Html.EditorFor(m => m.Completed)
         </div>
     }
