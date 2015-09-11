@@ -50,7 +50,7 @@
 
             if (notification.IsProvidedByImporter.GetValueOrDefault())
             {
-                annexMessage = "Provided by importer-consignee";
+                annexMessage = string.Empty;
                 return;
             }
 
