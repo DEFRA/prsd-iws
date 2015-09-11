@@ -15,7 +15,11 @@
         private List<WasteTypeCompositionData> wasteComposition = new List<WasteTypeCompositionData>();
         public List<WasteTypeCompositionData> WasteComposition
         {
-            get { return wasteComposition.OrderBy(wc => wc.ChemicalCompositionCategory).ToList(); }
+            get
+            {
+                wasteComposition.Sort((x, y) => x.ChemicalCompositionCategory.CompareTo(y.ChemicalCompositionCategory));
+                return wasteComposition;
+            }
             set { wasteComposition = value; }
         }
 

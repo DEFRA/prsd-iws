@@ -8,9 +8,20 @@
 
     public class ChemicalCompositionInformationViewModel : IValidatableObject
     {
+        private List<WoodInformationData> wasteComposition = new List<WoodInformationData>();
+
         public Guid NotificationId { get; set; }
 
-        public List<WoodInformationData> WasteComposition { get; set; }
+        public List<WoodInformationData> WasteComposition
+        {
+            get
+            {
+                wasteComposition.Sort((x, y) => 
+                    x.WasteInformationType.CompareTo(y.WasteInformationType));
+                return wasteComposition;
+            }
+            set { wasteComposition = value; }
+        }
 
         public string FurtherInformation { get; set; }
 
