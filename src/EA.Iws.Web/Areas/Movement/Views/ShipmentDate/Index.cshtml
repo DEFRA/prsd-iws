@@ -1,6 +1,10 @@
 ﻿@using EA.Prsd.Core.Web.Mvc.RazorHelpers
 @model EA.Iws.Web.Areas.Movement.ViewModels.ShipmentDateViewModel
 
+<header class="hgroup">
+    <h2 class="heading-large">What is the actual date of shipment?</h2>
+</header>
+
 @using (Html.BeginForm("Index", "ShipmentDate", FormMethod.Post))
 {
 
@@ -10,17 +14,10 @@
     @Html.HiddenFor(m => m.StartDate)
     @Html.HiddenFor(m => m.EndDate)
 
-    <header class="hgroup">
-        <h2 class="heading-large">What is the actual date of shipment?</h2>
-    </header>
-
-
     <p>
         You can schedule your shipments from 
-
         @Html.Gds().DisplayShortDateRangeFor(m => m.StartDate, m => m.EndDate).
     </p>
-
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>

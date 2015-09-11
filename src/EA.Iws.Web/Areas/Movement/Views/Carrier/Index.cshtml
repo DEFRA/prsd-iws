@@ -34,7 +34,10 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedItems[i])">
                 <div class="grid-row carrier-list">
                     <div class="column-third">
-                        <p>@EA.Iws.Web.Services.ViewService.WordForNumber(i + 1)</p>
+                        <p>
+                        @Html.LabelFor(m => m.SelectedItems[i], 
+                        EA.Iws.Web.Services.ViewService.WordForNumber(i + 1))
+                        </p>
                     </div>
                     <div class="column-two-thirds">
                         @Html.Gds().ValidationMessageFor(m => m.SelectedItems[i])

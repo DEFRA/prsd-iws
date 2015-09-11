@@ -82,7 +82,7 @@
             }
             if (model.UserChoices.SelectedValue == 3)
             {
-                return RedirectToAction("Index", "Home", new { notificationId = model.NotificationId, area = "MovementDocument" });
+                return RedirectToAction("Index", "Home", new { notificationId = model.NotificationId, area = "Movement" });
             }
             if (model.UserChoices.SelectedValue == 4)
             {
