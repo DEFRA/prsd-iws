@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.MovementDocument
 {
     using System;
-    using Areas.MovementDocument.ViewModels;
+    using Areas.Movement.ViewModels;
     using Prsd.Core;
     using Requests.Movement;
     using TestHelpers;

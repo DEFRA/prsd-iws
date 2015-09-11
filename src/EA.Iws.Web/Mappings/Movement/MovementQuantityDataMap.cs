@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using Areas.MovementDocument.ViewModels.Quantity;
+    using Areas.Movement.ViewModels.Quantity;
     using Core.Shared;
     using Prsd.Core.Mapper;
     using Requests.Movement;

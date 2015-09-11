@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Areas.Movement.ViewModels.Carrier;
     using Core.Carriers;
     using TestHelpers;
-    using Web.Areas.MovementDocument.ViewModels.Carrier;
     using Xunit;
 
     public class CarrierViewModelTests

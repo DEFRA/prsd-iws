@@ -1,0 +1,55 @@
+﻿@model EA.Iws.Web.Areas.Movement.ViewModels.Carrier.CarrierViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Gds().ValidationSummary()
+
+<header class="hgroup">
+    <h2 class="heading-large">Which carriers will be used for this shipment?</h2>
+    Choose all the carriers for this journey.
+</header>
+
+@Html.Partial("_MeansOfTransport", Model.MeansOfTransportViewModel)
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Gds().HintParagraph("Please make sure that the order of your carriers match up to the original means of transport that you specified.")
+
+    <div id="carrier-select-lists">
+        <div id="carrier-list-heading">
+            <div class="grid-row">
+                <div class="column-third">
+                    Order of carriers
+                </div>
+                <div class="column-two-thirds">
+                    Carrier name
+                </div>
+            </div>
+        </div>
+        @for (int i = 0; i < Model.CarrierSelectLists.Count; i++)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedItems[i])">
+                <div class="grid-row carrier-list">
+                    <div class="column-third">
+                        <p>@EA.Iws.Web.Services.ViewService.WordForNumber(i + 1)</p>
+                    </div>
+                    <div class="column-two-thirds">
+                        @Html.Gds().ValidationMessageFor(m => m.SelectedItems[i])
+                        @Html.Gds().DropDownListFor(m => m.SelectedItems[i], Model.CarrierSelectLists[i], string.Empty)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+    </div>
+}
+
+<div class="form-group">
+    @Html.ActionLink("Change the number of carriers", "NumberOfCarriers", new { movementId = Model.MovementId })
+</div>

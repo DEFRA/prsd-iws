@@ -1,0 +1,39 @@
+﻿@using EA.Prsd.Core.Web.Mvc.RazorHelpers
+@model EA.Iws.Web.Areas.Movement.ViewModels.PackagingTypesViewModel
+
+@Html.Gds().ValidationSummary()
+
+<header class="hgroup">
+    <h2 class="heading-large">What packaging types will be used?</h2>
+    <p>Select all the types of packaging that will be used for this shipment.</p>
+</header>
+
+@using (Html.BeginForm("Index", "PackagingTypes", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.MovementId)
+
+    <div class="form-group">
+        <fieldset>
+            @for (int i = 0; i < Model.PackagingTypes.PossibleValues.Count; i++)
+            {
+                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PackagingTypes.PossibleValues[i]);
+
+                <label for="@idForThisCheckBox" class="block-label">
+                    @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
+                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
+                    @if (Model.PackagingTypes.ShowEnumValue)
+                    {
+                        @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value) @Html.Raw(" - ")
+                    }
+                    @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                </label>
+            }
+        </fieldset>
+    </div>
+
+    <div class="form-group">
+        <p><button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button></p>
+    </div>
+}
