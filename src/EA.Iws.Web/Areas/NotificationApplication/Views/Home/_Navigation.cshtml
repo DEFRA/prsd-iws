@@ -36,7 +36,10 @@
 <span>The journey</span>
 @Html.Navigation().Link("Transport route export", Model.HasStateOfExport, "Index", "StateOfExport", "NotificationApplication")
 @Html.Navigation().Link("Transport route import", Model.HasStateOfImport, "Index", "StateOfImport", "NotificationApplication")
-@Html.Navigation().Link("Transport route transits", Model.HasTransitState, "Summary", "TransportRoute", "NotificationApplication")
+@Html.Navigation().Link("Transport route transits", Model.HasTransitState, "Summary", "TransportRoute", "NotificationApplication", new []
+{
+    new Tuple<string, string>("TransitState", "Index") 
+})
 @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication", new[]
 {
     new Tuple<string, string>("ExitCustomsOffice", "Index"),
