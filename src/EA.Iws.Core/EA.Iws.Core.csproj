@@ -60,6 +60,7 @@
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
+    <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\ProgressData.cs" />
     <Compile Include="Movement\MovementProgressAndSummaryData.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />
@@ -120,6 +121,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

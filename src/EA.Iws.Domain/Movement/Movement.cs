@@ -1,12 +1,14 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
+    using System;
+    using System.Collections.Generic;
     using Core.Shared;
+    using MovementReceipt;
     using NotificationApplication;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
-    using System;
-    using System.Collections.Generic;
+    using MovementReceiptDecision = Core.MovementReceipt.Decision;
 
     public class Movement : Entity
     {
@@ -24,6 +26,8 @@
         public int Number { get; private set; }
 
         public virtual NotificationApplication NotificationApplication { get; private set; }
+
+        public virtual MovementReceipt Receipt { get; private set; }
 
         public DateTime? Date { get; private set; }
 
@@ -104,6 +108,33 @@
             {
                 MovementCarriersCollection.Add(movementCarrier);
             }
+        }
+
+        public MovementReceipt Receive(DateTime dateReceived)
+        {
+            this.Receipt = new MovementReceipt(dateReceived, this);
+            return this.Receipt;
+        }
+
+        public void Accept()
+        {
+            if (this.Receipt == null)
+            {
+                throw new InvalidOperationException("Cannot accept a movement that has not been recieved.");
+            }
+
+            this.Receipt.Decision = MovementReceiptDecision.Accepted;
+        }
+
+        public void Reject(string reason)
+        {
+            if (this.Receipt == null)
+            {
+                throw new InvalidOperationException("Cannot reject a movement that has not been recieved.");
+            }
+
+            this.Receipt.Decision = MovementReceiptDecision.Rejected;
+            this.Receipt.RejectReason = reason;
         }
     }
 }

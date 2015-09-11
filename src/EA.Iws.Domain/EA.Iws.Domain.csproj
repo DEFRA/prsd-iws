@@ -67,6 +67,7 @@
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
+    <Compile Include="MovementReceipt\MovementReceipt.cs" />
     <Compile Include="Movement\IMovementFactory.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />
