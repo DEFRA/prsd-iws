@@ -117,11 +117,6 @@
                 throw new InvalidOperationException("Cannot receive a movement this is not active.");
             }
 
-            if (this.Receipt != null)
-            {
-                throw new InvalidOperationException("Cannot receive a movement more than once.");
-            }
-
             this.Receipt = new MovementReceipt(dateReceived);
             
             return this.Receipt;

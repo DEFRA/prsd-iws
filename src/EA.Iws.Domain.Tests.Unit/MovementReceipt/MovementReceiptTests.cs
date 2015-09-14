@@ -38,15 +38,7 @@
         {
             Assert.Throws<InvalidOperationException>(() => movement.Receive(BeforeMovementDate));
         }
-
-        [Fact]
-        public void MovementAlreadyReceived_Throws()
-        {
-            movement.Receive(AfterMovementDate);
-
-            Assert.Throws<InvalidOperationException>(() => movement.Receive(AfterMovementDate));
-        }
-
+        
         [Fact]
         public void MovementNotYetActive_Throws()
         {
