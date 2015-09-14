@@ -11,16 +11,10 @@
         {
         }
 
-        internal MovementReceipt(DateTime dateReceived, Movement movement)
+        internal MovementReceipt(DateTime dateReceived)
         {
             Date = dateReceived;
-            Movement = movement;
-            MovementId = movement.Id;
         }
-
-        protected virtual Movement Movement { get; private set; }
-
-        public Guid MovementId { get; private set; }
 
         public DateTime Date { get; private set; }
 

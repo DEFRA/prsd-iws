@@ -112,7 +112,13 @@
 
         public MovementReceipt Receive(DateTime dateReceived)
         {
-            this.Receipt = new MovementReceipt(dateReceived, this);
+            if (dateReceived < this.Date)
+            {
+                throw new InvalidOperationException("Cannot receive a movement before the movement date.");
+            }
+
+            this.Receipt = new MovementReceipt(dateReceived);
+            
             return this.Receipt;
         }
 
@@ -120,7 +126,7 @@
         {
             if (this.Receipt == null)
             {
-                throw new InvalidOperationException("Cannot accept a movement that has not been recieved.");
+                throw new InvalidOperationException("Cannot accept a movement that has not been received.");
             }
 
             this.Receipt.Decision = MovementReceiptDecision.Accepted;
@@ -130,7 +136,7 @@
         {
             if (this.Receipt == null)
             {
-                throw new InvalidOperationException("Cannot reject a movement that has not been recieved.");
+                throw new InvalidOperationException("Cannot reject a movement that has not been received.");
             }
 
             this.Receipt.Decision = MovementReceiptDecision.Rejected;

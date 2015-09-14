@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Data.Entity.ModelConfiguration;
     using Domain.Movement;
+    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using EA.Prsd.Core.Helpers;
 
@@ -28,6 +29,11 @@
             HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<Movement, ICollection<MovementCarrier>>(
                     "MovementCarriersCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("MovementId"));
+
+            HasOptional(
+                ExpressionHelper.GetPrivatePropertyExpression<Movement, MovementReceipt>("Receipt"))
                 .WithRequired()
                 .Map(m => m.MapKey("MovementId"));
         }

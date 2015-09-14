@@ -4,6 +4,7 @@
     using Domain.Movement;
     using Domain.MovementReceipt;
     using Domain.NotificationApplication;
+    using TestHelpers.Helpers;
     using System;
     using Xunit;
 
@@ -26,6 +27,17 @@
 
             Assert.NotNull(movement.Receipt);
             Assert.Equal(AnyDate, movement.Receipt.Date);
+        }
+
+        [Fact]
+        public void MovementReceivedBeforeMovementDate_Throws()
+        {
+            var movementDate = new DateTime(2015, 9, 1);
+            var beforeMovementDate = movementDate.AddMonths(-1);
+
+            ObjectInstantiator<Movement>.SetProperty(x => x.Date, movementDate, movement);
+
+            Assert.Throws<InvalidOperationException>(() => movement.Receive(beforeMovementDate));
         }
 
         [Fact]
