@@ -182,6 +182,7 @@
     <Compile Include="Controllers\NotificationApplication\StateOfImportControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\TransitStateControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\WasteOperationsControllerTests.cs" />
+    <Compile Include="Controllers\NotificationMovementControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteAssert.cs" />
     <Compile Include="TestHelpers\Factories\AutofacContainerFactory.cs" />

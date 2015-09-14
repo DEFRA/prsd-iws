@@ -86,7 +86,7 @@
             }
             if (model.UserChoices.SelectedValue == 4)
             {
-                return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+                return RedirectToAction("Receipt", "NotificationMovement", new { id = model.NotificationId });
             }
             if (model.UserChoices.SelectedValue == 5)
             {

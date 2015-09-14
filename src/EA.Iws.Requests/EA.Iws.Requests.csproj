@@ -70,6 +70,7 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
+    <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationId.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementId.cs" />
     <Compile Include="Movement\MovementCarrierData.cs" />
     <Compile Include="Movement\CreateMovementForNotificationById.cs" />

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.Movement;
+    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using Helpers;
 
@@ -61,6 +62,12 @@
         {
             get { return base.Number; }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Number, value, this); }
+        }
+
+        public new MovementReceipt Receipt
+        {
+            get { return base.Receipt; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.Receipt, value, this); }
         }
     }
 }

@@ -591,6 +591,7 @@
     <Content Include="Areas\Movement\Views\Carrier\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Carrier\_MeansOfTransport.cshtml" />
     <Content Include="Content\iws\_movement.scss" />
+    <Content Include="Views\NotificationMovement\Receipt.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -736,11 +737,13 @@
     <Compile Include="Areas\NotificationApplication\Controllers\CustomWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\HCodeController.cs" />
+    <Compile Include="Controllers\NotificationMovementController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\UnClassController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\UnNumberController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcEnterCodesViewModel.cs" />
+    <Compile Include="ViewModels\Movement\MovementReceiptViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNClass\UNClassViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\WasteCodeOverviewViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNNumber\UNNumberViewModel.cs" />

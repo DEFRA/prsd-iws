@@ -107,6 +107,7 @@
     <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
+    <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandlerTests.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandlerTests.cs" />
@@ -129,6 +130,8 @@
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
     <Compile Include="RecoveryInfo\SetRecoveryPercentageDataHandlerTests.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="TestBaseTests.cs" />
     <Compile Include="TestIwsContext.cs" />
     <Compile Include="TestUserContext.cs" />
     <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />

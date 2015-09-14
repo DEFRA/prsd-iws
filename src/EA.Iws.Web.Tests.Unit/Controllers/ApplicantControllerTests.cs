@@ -78,8 +78,8 @@
         {
             var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfReceipt)) as RedirectToRouteResult;
             Assert.NotNull(result);
-            Assert.Equal("Home", result.RouteValues["action"]);
-            Assert.Equal("Applicant", result.RouteValues["controller"]);
+            Assert.Equal("Receipt", result.RouteValues["action"]);
+            Assert.Equal("NotificationMovement", result.RouteValues["controller"]);
             Assert.Equal(notificationId, result.RouteValues["id"]);
         }
 
