@@ -13,6 +13,7 @@ using Xunit;
     public class GetMovementReceiptDateByMovementIdHandlerTests
     {
         private readonly GetMovementReceiptDateByMovementIdHandler handler;
+        private readonly GetMovementReceiptDateByMovementId request;
         private readonly TestableMovement movement;
         private readonly TestIwsContext context;
 
@@ -30,6 +31,7 @@ using Xunit;
             };
             context.Movements.Add(movement);
             handler = new GetMovementReceiptDateByMovementIdHandler(context);
+            request = new GetMovementReceiptDateByMovementId(MovementId);
         }
 
         [Fact]
@@ -39,21 +41,29 @@ using Xunit;
         }
 
         [Fact]
-        public async Task MovementNotRecievedReturnsNull()
+        public async Task ReturnsMovementDate()
         {
-            var result = await handler.HandleAsync(new GetMovementReceiptDateByMovementId(MovementId));
+            var result = await handler.HandleAsync(request);
 
-            Assert.Null(result);
+            Assert.Equal(MovementDate, result.MovementDate);
         }
 
         [Fact]
-        public async Task ReturnsDateWhenSet()
+        public async Task MovementNotRecieved_ReturnsNullDateReceived()
+        {
+            var result = await handler.HandleAsync(request);
+
+            Assert.Null(result.DateReceived);
+        }
+
+        [Fact]
+        public async Task MovementReceived_ReturnsDateReceived()
         {
             movement.Receive(DateReceived);
 
-            var result = await handler.HandleAsync(new GetMovementReceiptDateByMovementId(MovementId));
+            var result = await handler.HandleAsync(request);
 
-            Assert.Equal(DateReceived, result);
+            Assert.Equal(DateReceived, result.DateReceived);
         }
     }
 }

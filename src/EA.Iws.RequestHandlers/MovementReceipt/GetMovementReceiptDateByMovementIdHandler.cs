@@ -7,7 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
 
-    internal class GetMovementReceiptDateByMovementIdHandler : IRequestHandler<GetMovementReceiptDateByMovementId, DateTime?>
+    internal class GetMovementReceiptDateByMovementIdHandler : IRequestHandler<GetMovementReceiptDateByMovementId, MovementReceiptDateData>
     {
         private readonly IwsContext context;
 
@@ -16,18 +16,18 @@
             this.context = context;
         }
 
-        public async Task<DateTime?> HandleAsync(GetMovementReceiptDateByMovementId message)
+        public async Task<MovementReceiptDateData> HandleAsync(GetMovementReceiptDateByMovementId message)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
 
+            var dates = new MovementReceiptDateData { MovementDate = movement.Date.Value };
+
             if (movement.Receipt != null)
             {
-                return movement.Receipt.Date;
+                dates.DateReceived = movement.Receipt.Date;
             }
-            else
-            {
-                return null;
-            }
+
+            return dates;
         }
     }
 }

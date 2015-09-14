@@ -22,9 +22,9 @@
         {
             using (var client = apiClient())
             {
-                var dateReceived = await client.SendAsync(User.GetAccessToken(), new GetMovementReceiptDateByMovementId(movementId));
+                var dates = await client.SendAsync(User.GetAccessToken(), new GetMovementReceiptDateByMovementId(movementId));
 
-                var viewModel = new DateReceivedViewModel(dateReceived);
+                var viewModel = new DateReceivedViewModel(dates.DateReceived, dates.MovementDate);
 
                 return View(viewModel);
             }

@@ -3,7 +3,7 @@
     using System;
     using EA.Prsd.Core.Mediator;
 
-    public class GetMovementReceiptDateByMovementId : IRequest<DateTime?>
+    public class GetMovementReceiptDateByMovementId : IRequest<MovementReceiptDateData>
     {
         public Guid MovementId { get; private set; }
 
