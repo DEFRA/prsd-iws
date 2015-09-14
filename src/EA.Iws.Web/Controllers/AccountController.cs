@@ -169,7 +169,7 @@
         {
             return View();
         }
-
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -179,6 +179,14 @@
             {
                 return View(model);
             }
+            return RedirectToAction("ResetPasswordEmailSent", "Account", new { email = model.Email });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ResetPasswordEmailSent(string email)
+        {
+            ViewBag.Email = email;
             return View();
         }
     }
