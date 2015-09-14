@@ -77,6 +77,8 @@
     <Compile Include="Movement\GetMeansOfTransportByMovementId.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementId.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementId.cs" />
+    <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementId.cs" />
+    <Compile Include="MovementReceipt\GetMovementReceiptQuantityByMovementId.cs" />
     <Compile Include="Movement\MovementCarrierData.cs" />
     <Compile Include="Movement\CreateMovementForNotificationById.cs" />
     <Compile Include="Movement\GetMovementProgressInformation.cs" />

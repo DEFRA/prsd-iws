@@ -1,0 +1,25 @@
+﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Web.Areas.Movement.ViewModels.Quantity.QuantityReceivedViewModel
+@{
+    ViewBag.Title = "Quantity Received";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">How much waste has been received?</h1>
+    <p>Enter the quantity of waste received as a number. You can add decimal figures if necessary.</p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.HiddenFor(m => m.MovementUnits)
+    
+    <div class="form-group">
+        <label class="form-label" for="Quantity">Quantity received in @EnumHelper.GetDisplayName(Model.MovementUnits)</label>
+        @Html.Gds().TextBoxFor(m => m.Quantity)
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

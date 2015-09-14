@@ -5,7 +5,7 @@
     using Domain.Movement;
     using Domain.MovementReceipt;
     using Domain.NotificationApplication;
-    using EA.Prsd.Core.Helpers;
+    using Prsd.Core.Helpers;
 
     public class MovementMapping : EntityTypeConfiguration<Movement>
     {
@@ -14,6 +14,8 @@
             ToTable("Movement", "Notification");
 
             Property(x => x.NotificationApplicationId).HasColumnName("NotificationId");
+            Property(x => x.DisplayUnits).HasColumnName("DisplayUnit");
+            Property(x => x.Units).HasColumnName("QuantityUnit");
 
             HasMany(
                  ExpressionHelper.GetPrivatePropertyExpression<Movement, ICollection<PackagingInfo>>(

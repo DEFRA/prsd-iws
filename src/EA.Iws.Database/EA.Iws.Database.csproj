@@ -111,6 +111,7 @@
     <Content Include="scripts\Update\Sprint15\20150903-140200-add-movement-carrier-table.sql" />
     <Content Include="scripts\Update\Sprint15\20150908-093500-resize-waste-additional-information-columns.sql" />
     <Content Include="scripts\Update\Sprint16\20150914-092400-add-movement-receipt-table.sql" />
+    <Content Include="scripts\Update\Sprint16\20150914-141500-add-units-for-movement.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

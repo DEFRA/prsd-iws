@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
+    using Core.Shared;
     using Domain.Movement;
     using Prsd.Core;
     using TestHelpers.DomainFakes;
@@ -15,13 +16,16 @@
 
         private readonly TestableNotificationApplication notificationApplication;
         private readonly TestableShipmentInfo shipmentInfo;
+        private readonly Movement movement;
 
         public UpdateMovementTests()
         {
             shipmentInfo = new TestableShipmentInfo
             {
                 FirstDate = startDate,
-                LastDate = endDate
+                LastDate = endDate,
+                Quantity = 520,
+                Units = ShipmentQuantityUnits.Tonnes
             };
 
             notificationApplication = new TestableNotificationApplication
@@ -30,6 +34,8 @@
                 UserId = UserId,
                 ShipmentInfo = shipmentInfo
             };
+
+            movement = new Movement(notificationApplication, 5);
 
             SystemTime.Freeze(new DateTime(2015, 06, 01));
         }
@@ -42,8 +48,6 @@
         [Fact]
         public void DateCannotBeBeforeStartDate()
         {
-            var movement = new Movement(notificationApplication, 5);
-
             Action updateMovementDate = () => movement.UpdateDate(new DateTime(2014, 1, 1));
 
             Assert.Throws<InvalidOperationException>(updateMovementDate);
@@ -52,11 +56,32 @@
         [Fact]
         public void DateCannotBeAfterTheEndDate()
         {
-            var movement = new Movement(notificationApplication, 5);
-
             Action updateMovementDate = () => movement.UpdateDate(new DateTime(2017, 1, 1));
 
             Assert.Throws<InvalidOperationException>(updateMovementDate);
+        }
+
+        [Fact]
+        public void SetQuantity_SetsDisplayUnitsToPassedValue()
+        {
+            movement.SetQuantity(10, ShipmentQuantityUnits.Tonnes);
+
+            AssertQuantity(10, ShipmentQuantityUnits.Tonnes, ShipmentQuantityUnits.Tonnes);
+        }
+
+        [Fact]
+        public void SetQuantity_ConvertsQuantity_SetsUnitsCorrectly()
+        {
+            movement.SetQuantity(100, ShipmentQuantityUnits.Kilograms);
+
+            AssertQuantity(0.1m, ShipmentQuantityUnits.Tonnes, ShipmentQuantityUnits.Kilograms);
+        }
+
+        private void AssertQuantity(decimal quantity, ShipmentQuantityUnits unit, ShipmentQuantityUnits displayUnit)
+        {
+            Assert.Equal(quantity, movement.Quantity);
+            Assert.Equal(unit, movement.Units);
+            Assert.Equal(displayUnit, movement.DisplayUnits);
         }
     }
 }

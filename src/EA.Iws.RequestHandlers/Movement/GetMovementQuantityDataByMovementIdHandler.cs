@@ -33,9 +33,9 @@
             return new MovementQuantityData
             {
                 TotalNotifiedQuantity = notificationQuantityAndUnits.Quantity,
-                ThisMovementQuantity = movement.Quantity,
+                ThisMovementQuantity = movement.QuantityInDisplayUnits(),
                 TotalCurrentlyUsedQuantity = currentlyUsed.GetValueOrDefault(),
-                Units = notificationQuantityAndUnits.Units
+                Units = movement.DisplayUnits ?? notificationQuantityAndUnits.Units
             };
         }
     }

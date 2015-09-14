@@ -109,6 +109,7 @@
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
+    <Compile Include="MovementReceipt\GetMovementReceiptQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />
     <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandler.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Movement\SetActualMovementCarriersHandler.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
+    <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />

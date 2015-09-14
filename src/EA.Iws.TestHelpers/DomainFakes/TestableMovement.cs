@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Shared;
     using Domain.Movement;
     using Domain.MovementReceipt;
     using Domain.NotificationApplication;
@@ -32,6 +33,18 @@
         {
             get { return base.Quantity.GetValueOrDefault(); }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Quantity, value, this); }
+        }
+
+        public new ShipmentQuantityUnits? Units
+        {
+            get { return base.Units; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.Units, value, this); }
+        }
+
+        public new ShipmentQuantityUnits? DisplayUnits
+        {
+            get { return base.DisplayUnits; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.DisplayUnits, value, this); }
         }
 
         public new DateTime? Date

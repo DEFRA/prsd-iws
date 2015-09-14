@@ -17,6 +17,8 @@
         protected const string TestString = "Paddington Bear";
         protected const int AnyInt = 7;
         protected const int TestInt = 3;
+        protected const decimal AnyDecimal = 6.9m;
+        protected const decimal TestDecimal = 52.0m;
 
         protected static readonly DateTime OldestDate = new DateTime(2015, 2, 5);
         protected static readonly DateTime MiddleDate = new DateTime(2015, 7, 2);
@@ -25,6 +27,7 @@
         internal readonly TestIwsContext Context;
         internal readonly TestUserContext UserContext;
         protected readonly TestableNotificationApplication NotificationApplication;
+        protected readonly TestableMovement Movement;
 
         protected TestBase()
         {
@@ -35,6 +38,20 @@
             {
                 Id = NotificationId,
                 UserId = UserId
+            };
+
+            Context.Countries.AddRange(new[]
+            {
+                TestableCountry.France,
+                TestableCountry.Switzerland,
+                TestableCountry.UnitedKingdom
+            });
+
+            Movement = new TestableMovement
+            {
+                Id = MovementId,
+                NotificationApplication = NotificationApplication,
+                NotificationApplicationId = NotificationId
             };
         }
 

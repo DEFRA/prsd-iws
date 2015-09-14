@@ -39,6 +39,8 @@
 
         public ShipmentQuantityUnits? Units { get; private set; }
 
+        public ShipmentQuantityUnits? DisplayUnits { get; private set; }
+
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
 
         protected virtual ICollection<MovementCarrier> MovementCarriersCollection { get; set; }
@@ -80,7 +82,9 @@
             }
 
             Quantity = quantity;
+
             Units = notificationUnits;
+            DisplayUnits = units;
         }
 
         public void SetPackagingInfos(IEnumerable<PackagingInfo> packagingInfos)
@@ -148,6 +152,18 @@
 
             this.Receipt.Decision = MovementReceiptDecision.Rejected;
             this.Receipt.RejectReason = reason;
+        }
+
+        public decimal? QuantityInDisplayUnits()
+        {
+            if (Quantity.HasValue && Units.HasValue 
+                && DisplayUnits.HasValue
+                && DisplayUnits.Value != Units.Value)
+            {
+                return ShipmentQuantityUnitConverter.ConvertToTarget(Units.Value, DisplayUnits.Value, Quantity.Value);
+            }
+
+            return Quantity;
         }
     }
 }

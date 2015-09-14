@@ -6,11 +6,15 @@
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using System;
+    using Core.Shared;
     using Xunit;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class MovementReceiptTests
     {
         private readonly Movement movement;
+        private readonly MovementReceipt movementReceipt;
+
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private static readonly DateTime MovementDate = new DateTime(2015, 12, 1);
         private static readonly DateTime BeforeMovementDate = new DateTime(2015, 10, 1);
@@ -22,6 +26,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
             movement = new Movement(notification, 1);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
+            movementReceipt = new MovementReceipt(AfterMovementDate);
         }
 
         [Fact]
@@ -89,6 +94,35 @@
             movement.Reject(AnyString);
 
             Assert.Equal(AnyString, movement.Receipt.RejectReason);
+        }
+
+        [Fact]
+        public void SetQuantity_ReceiptNotAccepted_Throws()
+        {
+            Action action =
+                () => movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms);
+
+            Assert.Throws<InvalidOperationException>(action);
+        }
+
+        [Fact]
+        public void SetQuantity_ReceiptAccepted_Sets()
+        {
+            ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Decision, Decision.Accepted, movementReceipt);
+
+            movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms);
+
+            Assert.Equal(10, movementReceipt.Quantity);
+        }
+
+        [Fact]
+        public void SetQuantity_DisplayUnitsDifferentToNotificationUnits_SetsWithConversion()
+        {
+            ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Decision, Decision.Accepted, movementReceipt);
+
+            movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Tonnes, ShipmentQuantityUnits.Kilograms);
+
+            Assert.Equal(10 * 1000, movementReceipt.Quantity);
         }
 
         [Fact]
