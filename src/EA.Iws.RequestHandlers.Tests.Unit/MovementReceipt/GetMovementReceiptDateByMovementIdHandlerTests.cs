@@ -1,36 +1,32 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.MovementReceipt
 {
+    using System;
+    using System.Threading.Tasks;
     using EA.Iws.RequestHandlers.MovementReceipt;
-using EA.Iws.Requests.MovementReceipt;
-using EA.Iws.TestHelpers.DomainFakes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+    using EA.Iws.Requests.MovementReceipt;
+    using EA.Iws.TestHelpers.DomainFakes;
+    using Xunit;
 
-    public class GetMovementReceiptDateByMovementIdHandlerTests
+    public class GetMovementReceiptDateByMovementIdHandlerTests : TestBase
     {
         private readonly GetMovementReceiptDateByMovementIdHandler handler;
         private readonly GetMovementReceiptDateByMovementId request;
         private readonly TestableMovement movement;
-        private readonly TestIwsContext context;
 
-        private static readonly Guid MovementId = new Guid("09CF4780-D5CB-43FC-98BC-74DD9273896E");
         private static readonly DateTime MovementDate = new DateTime(2015, 6, 1);
         private static readonly DateTime DateReceived = new DateTime(2015, 9, 1);
 
         public GetMovementReceiptDateByMovementIdHandlerTests()
         {
-            context = new TestIwsContext();
-            movement = new TestableMovement 
-            { 
+            movement = new TestableMovement
+            {
                 Id = MovementId,
                 Date = MovementDate
             };
-            context.Movements.Add(movement);
-            handler = new GetMovementReceiptDateByMovementIdHandler(context);
+
+            Context.Movements.Add(movement);
+
+            handler = new GetMovementReceiptDateByMovementIdHandler(Context);
             request = new GetMovementReceiptDateByMovementId(MovementId);
         }
 
