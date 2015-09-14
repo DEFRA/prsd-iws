@@ -196,6 +196,7 @@
     <Compile Include="ViewModels\MethodOfDisposalViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\CarrierViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\DateReceivedViewModelTests.cs" />
+    <Compile Include="ViewModels\MovementDocument\ShipmentAcceptanceViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\ShipmentDateViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.MovementReceipt
 {
     using System;
+    using System.Linq;
     using Core.MovementReceipt;
     using Core.Shared;
     using Prsd.Core;
@@ -25,8 +26,8 @@
 
         public decimal? Quantity { get; internal set; }
 
-        public void SetQuantity(decimal quantity, 
-            ShipmentQuantityUnits displayUnits, 
+        public void SetQuantity(decimal quantity,
+            ShipmentQuantityUnits displayUnits,
             ShipmentQuantityUnits notificationUnits)
         {
             Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
@@ -41,6 +42,28 @@
                     "Cannot set quantity for a movement receipt where the movement has not been accepted. Receipt: "
                     + Id);
             }
+        }
+
+        public void Reject(string reason)
+        {
+            if (string.IsNullOrEmpty(reason))
+            {
+                throw new InvalidOperationException("A rejection reason must be provided for a rejected shipment");
+            }
+
+            if (!string.IsNullOrEmpty(reason) && reason.Length > 200)
+            {
+                throw new InvalidOperationException("The rejection reason must not be greater than 200 characters in length");
+            }
+
+            Decision = Core.MovementReceipt.Decision.Rejected;
+            RejectReason = reason;
+        }
+
+        public void Accept()
+        {
+            Decision = Core.MovementReceipt.Decision.Accepted;
+            RejectReason = null;
         }
     }
 }

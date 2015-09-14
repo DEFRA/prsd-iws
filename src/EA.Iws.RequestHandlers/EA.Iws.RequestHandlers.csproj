@@ -103,6 +103,7 @@
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="MovementReceipt\CreateMovementReceiptForMovementHandler.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandler.cs" />
+    <Compile Include="MovementReceipt\UpdateMovementAcceptanceDataByMovementIdHandler.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMeansOfTransportByMovementIdHandler.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Movement\GetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="Movement\GetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\GetPackagingDataValidForMovementHandler.cs" />
+    <Compile Include="MovementReceipt\GetMovementAcceptanceDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualMovementCarriersHandler.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandler.cs" />

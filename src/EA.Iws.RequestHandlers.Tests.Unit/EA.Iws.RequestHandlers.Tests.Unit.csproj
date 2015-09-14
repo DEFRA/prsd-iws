@@ -108,6 +108,8 @@
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="MovementReceipt\CreateMovementReceiptForMovementHandlerTests.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandlerTests.cs" />
+    <Compile Include="MovementReceipt\GetShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
+    <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandlerTests.cs" />

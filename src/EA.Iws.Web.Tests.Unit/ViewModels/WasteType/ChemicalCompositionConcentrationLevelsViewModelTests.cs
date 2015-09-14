@@ -1,12 +1,10 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.WasteType
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Areas.NotificationApplication.ViewModels.WasteType;
     using Core.WasteType;
-    using Iws.TestHelpers.Helpers;
     using Requests.WasteType;
     using Xunit;
 
