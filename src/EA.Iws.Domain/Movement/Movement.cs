@@ -112,9 +112,14 @@
 
         public MovementReceipt Receive(DateTime dateReceived)
         {
-            if (dateReceived < this.Date)
+            if (!this.Date.HasValue || dateReceived < this.Date)
             {
-                throw new InvalidOperationException("Cannot receive a movement before the movement date.");
+                throw new InvalidOperationException("Cannot receive a movement this is not active.");
+            }
+
+            if (this.Receipt != null)
+            {
+                throw new InvalidOperationException("Cannot receive a movement more than once.");
             }
 
             this.Receipt = new MovementReceipt(dateReceived);

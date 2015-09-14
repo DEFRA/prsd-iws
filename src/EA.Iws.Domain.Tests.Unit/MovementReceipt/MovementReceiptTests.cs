@@ -11,33 +11,48 @@
     public class MovementReceiptTests
     {
         private readonly Movement movement;
-        private static readonly DateTime AnyDate = new DateTime(2015, 12, 31);
+        private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
+        private static readonly DateTime MovementDate = new DateTime(2015, 12, 1);
+        private static readonly DateTime BeforeMovementDate = new DateTime(2015, 10, 1);
+        private static readonly DateTime AfterMovementDate = new DateTime(2016, 1, 1);
         private static readonly string AnyString = "text";
 
         public MovementReceiptTests()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
             movement = new Movement(notification, 1);
+            ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
         }
 
         [Fact]
         public void CanReceiveMovementWithDateProvided()
         {
-            movement.Receive(AnyDate);
+            movement.Receive(AfterMovementDate);
 
             Assert.NotNull(movement.Receipt);
-            Assert.Equal(AnyDate, movement.Receipt.Date);
+            Assert.Equal(AfterMovementDate, movement.Receipt.Date);
         }
 
         [Fact]
         public void MovementReceivedBeforeMovementDate_Throws()
         {
-            var movementDate = new DateTime(2015, 9, 1);
-            var beforeMovementDate = movementDate.AddMonths(-1);
+            Assert.Throws<InvalidOperationException>(() => movement.Receive(BeforeMovementDate));
+        }
 
-            ObjectInstantiator<Movement>.SetProperty(x => x.Date, movementDate, movement);
+        [Fact]
+        public void MovementAlreadyReceived_Throws()
+        {
+            movement.Receive(AfterMovementDate);
 
-            Assert.Throws<InvalidOperationException>(() => movement.Receive(beforeMovementDate));
+            Assert.Throws<InvalidOperationException>(() => movement.Receive(AfterMovementDate));
+        }
+
+        [Fact]
+        public void MovementNotYetActive_Throws()
+        {
+            ObjectInstantiator<Movement>.SetProperty(x => x.Date, null, movement);
+
+            Assert.Throws<InvalidOperationException>(() => movement.Receive(AnyDate));
         }
 
         [Fact]
@@ -55,7 +70,7 @@
         [Fact]
         public void CanAcceptMovement()
         {
-            movement.Receive(AnyDate);
+            movement.Receive(AfterMovementDate);
 
             movement.Accept();
 
@@ -66,7 +81,7 @@
         [Fact]
         public void CanRejectMovement()
         {
-            movement.Receive(AnyDate);
+            movement.Receive(AfterMovementDate);
 
             movement.Reject(AnyString);
 
@@ -77,7 +92,7 @@
         [Fact]
         public void RejectedMovementMustHaveReason()
         {
-            movement.Receive(AnyDate);
+            movement.Receive(AfterMovementDate);
 
             movement.Reject(AnyString);
 

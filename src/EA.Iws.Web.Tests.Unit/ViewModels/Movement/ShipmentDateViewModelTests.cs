@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.MovementDocument
+﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.Movement
 {
     using System;
     using Areas.Movement.ViewModels;

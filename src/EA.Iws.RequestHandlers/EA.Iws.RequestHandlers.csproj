@@ -101,6 +101,8 @@
     <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
+    <Compile Include="MovementReceipt\CreateMovementReceiptForMovementHandler.cs" />
+    <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandler.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />

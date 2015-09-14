@@ -150,6 +150,7 @@
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
     <Compile Include="Controllers\Movement\CarrierControllerTests.cs" />
+    <Compile Include="Controllers\Movement\DateReceivedControllerTests.cs" />
     <Compile Include="Controllers\Movement\NumberOfPackagesControllerTests.cs" />
     <Compile Include="Controllers\Movement\ShipmentDateControllerTests.cs" />
     <Compile Include="Controllers\Movement\PackagingTypesControllerTests.cs" />
@@ -192,8 +193,8 @@
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
     <Compile Include="ViewModels\MethodOfDisposalViewModelTests.cs" />
-    <Compile Include="ViewModels\MovementDocument\CarrierViewModelTests.cs" />
-    <Compile Include="ViewModels\MovementDocument\ShipmentDateViewModelTests.cs" />
+    <Compile Include="ViewModels\Movement\CarrierViewModelTests.cs" />
+    <Compile Include="ViewModels\Movement\ShipmentDateViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
     <Compile Include="ViewModels\RecoveryPercentageViewModelTests.cs" />
