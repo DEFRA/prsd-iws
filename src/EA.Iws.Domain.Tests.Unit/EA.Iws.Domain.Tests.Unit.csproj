@@ -97,6 +97,7 @@
     <Compile Include="NotificationApplication\NotificationWasteCodeTests.cs" />
     <Compile Include="NotificationApplication\NotificationWasteGenerationProcessTests.cs" />
     <Compile Include="NotificationApplication\NotificationWasteTypeTests.cs" />
+    <Compile Include="NotificationAssessment\NotificationAssessmentEditableTests.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentStatusTests.cs" />
     <Compile Include="OrganisationTests.cs" />
     <Compile Include="ProducerBusinessTests.cs" />

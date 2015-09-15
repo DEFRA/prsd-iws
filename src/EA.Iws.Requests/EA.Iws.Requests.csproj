@@ -100,6 +100,7 @@
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />
+    <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\ClassifyYourWasteInfo.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
     <Compile Include="Copy\CopyToNotification.cs" />

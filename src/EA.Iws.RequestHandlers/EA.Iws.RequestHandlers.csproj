@@ -127,6 +127,7 @@
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Movement\NotificationMovementService.cs" />
+    <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoInternalHandler.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />

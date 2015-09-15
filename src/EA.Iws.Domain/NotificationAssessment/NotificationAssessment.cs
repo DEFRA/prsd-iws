@@ -44,6 +44,17 @@
 
         public virtual NotificationDates Dates { get; set; }
 
+        public bool CanEditNotification
+        {
+            get
+            {
+                return stateMachine.IsInState(NotificationStatus.NotSubmitted)
+                       || stateMachine.IsInState(NotificationStatus.Submitted)
+                       || stateMachine.IsInState(NotificationStatus.NotificationReceived)
+                       || stateMachine.IsInState(NotificationStatus.InAssessment);
+            }
+        }
+
         protected NotificationAssessment()
         {
             stateMachine = CreateStateMachine();
