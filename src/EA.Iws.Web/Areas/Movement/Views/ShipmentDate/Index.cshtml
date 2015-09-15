@@ -2,7 +2,7 @@
 @model EA.Iws.Web.Areas.Movement.ViewModels.ShipmentDateViewModel
 
 <header class="hgroup">
-    <h2 class="heading-large">What is the actual date of shipment?</h2>
+    <h1 class="heading-large">What is the actual date of shipment?</h1>
 </header>
 
 @using (Html.BeginForm("Index", "ShipmentDate", FormMethod.Post))
@@ -48,7 +48,7 @@
 
     <div class="form-group">
         <p>
-            <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
         </p>
     </div>
 }

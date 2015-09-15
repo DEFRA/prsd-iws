@@ -150,7 +150,7 @@
             {
                 bool importIsEuMember = progressResult.CustomsOffices.First().ImportIsEuMember.GetValueOrDefault();
                 bool exportIsEuMember = progressResult.CustomsOffices.First().ExportIsEuMember.GetValueOrDefault();
-                bool allTransitStatsAreEu = progressResult.CustomsOffices.All(co => co.TransitIsEuMember.GetValueOrDefault());
+                bool allTransitStatsAreEu = progressResult.CustomsOffices.All(co => co.TransitIsEuMember.GetValueOrDefault(true));
                 bool hasEntryOffice = progressResult.CustomsOffices.First().EntryCustomsOfficeId.HasValue;
                 bool hasExitOffice = progressResult.CustomsOffices.First().ExitCustomsOfficeId.HasValue;
 
@@ -163,9 +163,6 @@
                     || (importOutsideEu && hasExitOffice)
                     || (importAndTransitsOutsideEu && hasEntryOffice)
                     || (transitsOutsideEu && hasExitOffice && hasEntryOffice);
-
-                progress.HasEntryCustomsOffice = hasEntryOffice;
-                progress.HasExitCustomsOffice = hasExitOffice;
             }
             else
             {
