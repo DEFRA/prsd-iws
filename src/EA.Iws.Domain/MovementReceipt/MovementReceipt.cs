@@ -16,7 +16,7 @@
             Date = dateReceived;
         }
 
-        public DateTime Date { get; private set; }
+        public DateTime Date { get; internal set; }
 
         public Decision? Decision { get; internal set; }
 

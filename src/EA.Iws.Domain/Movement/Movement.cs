@@ -34,7 +34,7 @@
         public Guid NotificationApplicationId { get; private set; }
 
         public decimal? Quantity { get; private set; }
-        
+
         public int? NumberOfPackages { get; private set; }
 
         public ShipmentQuantityUnits? Units { get; private set; }
@@ -43,7 +43,7 @@
 
         protected virtual ICollection<MovementCarrier> MovementCarriersCollection { get; set; }
 
-        public IEnumerable<PackagingInfo> PackagingInfos 
+        public IEnumerable<PackagingInfo> PackagingInfos
         {
             get { return PackagingInfosCollection.ToSafeIEnumerable(); }
         }
@@ -117,8 +117,15 @@
                 throw new InvalidOperationException("Cannot receive a movement this is not active.");
             }
 
-            this.Receipt = new MovementReceipt(dateReceived);
-            
+            if (this.Receipt == null)
+            {
+                this.Receipt = new MovementReceipt(dateReceived);
+            }
+            else
+            {
+                this.Receipt.Date = dateReceived;
+            }
+
             return this.Receipt;
         }
 

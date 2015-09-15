@@ -90,5 +90,31 @@
 
             Assert.Equal(AnyString, movement.Receipt.RejectReason);
         }
+
+        [Fact]
+        public void ReceiveMoreThanOnceUpdatesReceiptDate()
+        {
+            movement.Receive(AfterMovementDate);
+
+            var newDate = AfterMovementDate.AddDays(1);
+
+            movement.Receive(newDate);
+
+            Assert.Equal(newDate, movement.Receipt.Date);
+        }
+
+        [Fact]
+        public void ReceiveMoreThanOnceDoesNotCreateNewReceipt()
+        {
+            movement.Receive(AfterMovementDate);
+
+            var newDate = AfterMovementDate.AddDays(1);
+
+            movement.Accept();
+
+            movement.Receive(newDate);
+
+            Assert.NotNull(movement.Receipt.Decision);
+        }
     }
 }
