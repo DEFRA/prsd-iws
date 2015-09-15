@@ -258,7 +258,7 @@
 
             var redirectResult = result as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(redirectResult.RouteValues, "Index", "Home");
+            RouteAssert.RoutesTo(redirectResult.RouteValues, "Index", "NotificationMovement");
         }
 
         private void SetUpMovementCarrierData(CarrierData[] notificationCarriers, Dictionary<int, CarrierData> selectedCarriers = null)

@@ -9,27 +9,18 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class GetMovementProgressInformationHandlerTests
+    public class GetMovementProgressInformationHandlerTests : TestBase
     {
-        private static readonly Guid MovementId = new Guid("CC8BA90F-D39C-4B24-A67F-20C96B60B232");
-        private static readonly Guid NotificationId = new Guid("52D4CF08-5ED2-40FE-A39C-3FC565DF43ED");
-        private static readonly Guid UserId = new Guid("D02B8E59-5D5D-44ED-B585-90A5E5F50C12");
-        private static readonly Guid FinancialGuaranteeId = new Guid("B154EFBC-070B-4D22-AB91-60A18645CC05");
-
         private readonly GetMovementProgressInformationHandler handler;
         private readonly Func<GetMovementProgressInformation> getRequest =
             () => new GetMovementProgressInformation(MovementId); 
 
-        private readonly TestIwsContext context;
         private readonly TestableMovement movement;
         private readonly TestableShipmentInfo shipmentInfo;
         private readonly TestableFinancialGuarantee financialGuarantee;
-        private readonly TestableNotificationApplication notification;
 
         public GetMovementProgressInformationHandlerTests()
         {
-            context = new TestIwsContext(new TestUserContext(UserId));
-
             shipmentInfo = new TestableShipmentInfo();
 
             financialGuarantee = new TestableFinancialGuarantee
@@ -38,24 +29,20 @@
                 NotificationApplicationId = NotificationId
             };
 
-            notification = new TestableNotificationApplication
-            {
-                Id = NotificationId,
-                UserId = UserId,
-                ShipmentInfo = shipmentInfo,
-                NotificationNumber = "GB 001 00520"
-            };
+            NotificationApplication.ShipmentInfo = shipmentInfo;
+            NotificationApplication.NotificationNumber = "GB 001 00520";
 
             movement = new TestableMovement
             {
-                Id = MovementId
+                Id = MovementId,
+                NotificationApplicationId = NotificationId
             };
 
-            context.NotificationApplications.Add(notification);
-            context.Movements.Add(movement);
-            context.FinancialGuarantees.Add(financialGuarantee);
+            Context.NotificationApplications.Add(NotificationApplication);
+            Context.Movements.Add(movement);
+            Context.FinancialGuarantees.Add(financialGuarantee);
 
-            handler = new GetMovementProgressInformationHandler(context, new MovementMap());
+            handler = new GetMovementProgressInformationHandler(Context, new MovementMap());
         }
 
         [Fact]
@@ -78,7 +65,7 @@
         {
             var result = await handler.HandleAsync(getRequest());
 
-            Assert.Equal(notification.NotificationNumber, result.NotificationNumber);
+            Assert.Equal(NotificationApplication.NotificationNumber, result.NotificationNumber);
         }
 
         [Fact]
@@ -116,7 +103,7 @@
         {
             SystemTime.Freeze(new DateTime(2015, 1, 1));
 
-            context.Movements.AddRange(new[]
+            Context.Movements.AddRange(new[]
             {
                 new TestableMovement
                 {

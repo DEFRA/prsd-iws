@@ -69,8 +69,8 @@
             var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.GeneratePrenotification)) as RedirectToRouteResult;
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("Home", result.RouteValues["controller"]);
-            Assert.Equal(notificationId, result.RouteValues["notificationId"]);
+            Assert.Equal("NotificationMovement", result.RouteValues["controller"]);
+            Assert.Equal(notificationId, result.RouteValues["id"]);
         }
 
         [Fact]

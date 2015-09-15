@@ -116,7 +116,7 @@
 
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("PackagingTypes", result.RouteValues["controller"]);
-            Assert.Equal(AnyGuid, result.RouteValues["movementId"]);
+            Assert.Equal(AnyGuid, result.RouteValues["id"]);
         }
 
         private class TestMap : IMap<MovementQuantityData, QuantityViewModel>
