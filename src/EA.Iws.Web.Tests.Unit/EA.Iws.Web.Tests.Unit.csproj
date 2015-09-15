@@ -153,6 +153,7 @@
     <Compile Include="Controllers\Movement\DateReceivedControllerTests.cs" />
     <Compile Include="Controllers\Movement\NumberOfPackagesControllerTests.cs" />
     <Compile Include="Controllers\Movement\QuantityReceivedControllerTests.cs" />
+    <Compile Include="Controllers\Movement\ReceiptCompleteControllerTests.cs" />
     <Compile Include="Controllers\Movement\ShipmentDateControllerTests.cs" />
     <Compile Include="Controllers\Movement\PackagingTypesControllerTests.cs" />
     <Compile Include="Controllers\Movement\QuantityControllerTests.cs" />
