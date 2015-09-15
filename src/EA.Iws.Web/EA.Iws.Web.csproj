@@ -542,7 +542,7 @@
     <Content Include="Areas\Movement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Movement\Views\ShipmentDate\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_CodeDefinitionList.cshtml" />
-    <Content Include="Areas\Movement\Views\Home\Index.cshtml" />
+    <Content Include="Views\NotificationMovement\Index.cshtml" />
     <Content Include="Areas\Movement\Views\PackagingTypes\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Quantity\Index.cshtml" />
     <Content Include="Areas\Movement\Views\NumberOfPackages\Index.cshtml" />
@@ -732,6 +732,7 @@
     <Compile Include="Areas\Movement\ViewModels\Carrier\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\MovementsViewModel.cs" />
+    <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityViewModel.cs" />

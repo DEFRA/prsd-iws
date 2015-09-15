@@ -22,11 +22,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid movementId)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetMovementQuantityDataByMovementId(movementId));
+                var result = await client.SendAsync(User.GetAccessToken(), new GetMovementQuantityDataByMovementId(id));
 
                 return View(quantityMap.Map(result));
             }
@@ -34,7 +34,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid movementId, QuantityViewModel model)
+        public async Task<ActionResult> Index(Guid id, QuantityViewModel model)
         {
             using (var client = apiClient())
             {
@@ -43,11 +43,11 @@
                     return View(model);
                 }
 
-                await client.SendAsync(User.GetAccessToken(), new SetMovementQuantityByMovementId(movementId, 
+                await client.SendAsync(User.GetAccessToken(), new SetMovementQuantityByMovementId(id, 
                     Convert.ToDecimal(model.Quantity), 
                     model.Units.Value));
 
-                return RedirectToAction("Index", "PackagingTypes", new { movementId });
+                return RedirectToAction("Index", "PackagingTypes", new { id });
             }
         }
     }

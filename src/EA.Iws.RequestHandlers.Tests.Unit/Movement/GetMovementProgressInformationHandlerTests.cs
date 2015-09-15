@@ -18,7 +18,7 @@
 
         private readonly GetMovementProgressInformationHandler handler;
         private readonly Func<GetMovementProgressInformation> getRequest =
-            () => new GetMovementProgressInformation(NotificationId, MovementId); 
+            () => new GetMovementProgressInformation(MovementId); 
 
         private readonly TestIwsContext context;
         private readonly TestableMovement movement;
@@ -63,22 +63,14 @@
         {
             var request = getRequest();
 
-            Assert.Equal(NotificationId, request.NotificationId);
             Assert.Equal(MovementId, request.MovementId);
-        }
-
-        [Fact]
-        public async Task NotificationDoesNotExist_Throws()
-        {
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                handler.HandleAsync(new GetMovementProgressInformation(Guid.Empty, MovementId)));
         }
 
         [Fact]
         public async Task MovementDoesNotExist_Throws()
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                handler.HandleAsync(new GetMovementProgressInformation(NotificationId, Guid.Empty)));
+                handler.HandleAsync(new GetMovementProgressInformation(Guid.Empty)));
         }
 
         [Fact]

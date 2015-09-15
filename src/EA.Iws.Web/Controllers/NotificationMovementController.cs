@@ -19,6 +19,20 @@
         }
 
         [HttpGet]
+        public async Task<ActionResult> Index(Guid? id)
+        {
+            using (var client = apiClient())
+            {
+                var model = new MovementsViewModel
+                {
+                    Movements = await client.SendAsync(User.GetAccessToken(), new GetMovementsForNotificationById(id.Value))
+                };
+
+                return View(model);
+            }
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Receipt(Guid id)
         {
             using (var client = apiClient())
@@ -48,6 +62,18 @@
                     model.NotificationId,
                     area = "Movement"
                 });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var movementId = await client.SendAsync(User.GetAccessToken(), new CreateMovementForNotificationById(id));
+
+                return RedirectToAction("Index", "ShipmentDate", new { movementId });
+            }
         }
     }
 }

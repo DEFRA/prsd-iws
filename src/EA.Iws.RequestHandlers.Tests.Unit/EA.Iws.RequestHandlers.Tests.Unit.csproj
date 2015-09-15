@@ -113,6 +113,7 @@
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandlerTests.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandlerTests.cs" />
+    <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetPackagingDataForMovementHandlerTests.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementIdTests.cs" />

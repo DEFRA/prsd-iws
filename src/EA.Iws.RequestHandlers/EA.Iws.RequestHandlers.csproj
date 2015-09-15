@@ -105,10 +105,12 @@
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandler.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler.cs" />
+    <Compile Include="Movement\GetMeansOfTransportByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
+    <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />
     <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandler.cs" />
     <Compile Include="Movement\GetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="Movement\GetPackagingDataForMovementHandler.cs" />

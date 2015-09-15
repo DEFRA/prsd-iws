@@ -18,12 +18,12 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid movementId)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
                 var result =
-                    await client.SendAsync(User.GetAccessToken(), new GetNumberOfPackagesByMovementId(movementId));
+                    await client.SendAsync(User.GetAccessToken(), new GetNumberOfPackagesByMovementId(id));
 
                 return View(new NumberOfPackagesViewModel{ Number = result });
             }
@@ -31,7 +31,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid movementId, NumberOfPackagesViewModel model)
+        public async Task<ActionResult> Index(Guid id, NumberOfPackagesViewModel model)
         {
             using (var client = apiClient())
             {
@@ -42,9 +42,9 @@
 
                 await
                     client.SendAsync(User.GetAccessToken(),
-                        new SetNumberOfPackagesByMovementId(movementId, model.Number.Value));
+                        new SetNumberOfPackagesByMovementId(id, model.Number.Value));
 
-                return RedirectToAction("NumberOfCarriers", "Carrier", new { movementId });
+                return RedirectToAction("Index", "Carrier", new { id });
             }
         } 
     }

@@ -18,40 +18,14 @@
             this.apiClient = apiClient;
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Guid notificationId)
-        {
-            using (var client = apiClient())
-            {
-                var movementId = await client.SendAsync(User.GetAccessToken(), new CreateMovementForNotificationById(notificationId));
-
-                return RedirectToAction("Index", "ShipmentDate", new { movementId });
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Index(Guid notificationId)
-        {
-            using (var client = apiClient())
-            {
-                var model = new MovementsViewModel
-                {
-                    Movements = await client.SendAsync(User.GetAccessToken(), new GetMovementsForNotificationById(notificationId))
-                };
-
-                return View(model);
-            }
-        }
-
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult Navigation(Guid notificationId, Guid movementId)
+        public ActionResult Navigation(Guid id)
         {
             using (var client = apiClient())
             {
                 var result =
                     client.SendAsync(User.GetAccessToken(),
-                            new GetMovementProgressInformation(notificationId, movementId))
+                            new GetMovementProgressInformation(id))
                             .GetAwaiter()
                             .GetResult();
 

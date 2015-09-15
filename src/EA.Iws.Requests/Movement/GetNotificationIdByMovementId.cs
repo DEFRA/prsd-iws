@@ -1,14 +1,13 @@
 ﻿namespace EA.Iws.Requests.Movement
 {
     using System;
-    using Core.Movement;
     using Prsd.Core.Mediator;
 
-    public class GetMovementProgressInformation : IRequest<MovementProgressAndSummaryData>
+    public class GetNotificationIdByMovementId : IRequest<Guid>
     {
         public Guid MovementId { get; private set; }
 
-        public GetMovementProgressInformation(Guid movementId)
+        public GetNotificationIdByMovementId(Guid movementId)
         {
             MovementId = movementId;
         }

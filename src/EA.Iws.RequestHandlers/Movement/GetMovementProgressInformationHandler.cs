@@ -24,10 +24,13 @@
 
         public async Task<MovementProgressAndSummaryData> HandleAsync(GetMovementProgressInformation message)
         {
+            var movement = await context.Movements
+                .SingleAsync(m => m.Id == message.MovementId);
+
             var notificationInformation = await context.NotificationApplications
                 .Join(context.FinancialGuarantees, 
-                application => application.Id == message.NotificationId,
-                fg => fg.NotificationApplicationId == message.NotificationId,
+                application => application.Id == movement.NotificationApplicationId,
+                fg => fg.NotificationApplicationId == movement.NotificationApplicationId,
                 (na, fg) => new
                 {
                     Id = na.Id,
@@ -35,15 +38,12 @@
                     Shipments = na.ShipmentInfo.NumberOfShipments,
                     ActiveLoadsPermitted = fg.ActiveLoadsPermitted
                 })
-                .SingleAsync(x => x.Id == message.NotificationId);
-
-            var movement = await context.Movements
-                .SingleAsync(m => m.Id == message.MovementId);
+                .SingleAsync(x => x.Id == movement.NotificationApplicationId);
 
             var totalActiveMovements = await context
                 .Movements
                 .CountAsync(m =>
-                    m.NotificationApplicationId == message.NotificationId
+                    m.NotificationApplicationId == movement.NotificationApplicationId
                     && m.Date.HasValue
                     && m.Date < SystemTime.UtcNow);
 

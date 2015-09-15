@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels
+﻿namespace EA.Iws.Web.ViewModels.Movement
 {
     using System;
     using System.Collections.Generic;

@@ -50,6 +50,50 @@
         }
 
         [Fact]
+        public async Task Get_Index_ListsMovementsForNotification()
+        {
+            var movements = new Dictionary<int, Guid>();
+            movements.Add(1, AnyGuid);
+
+            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementsForNotificationById>.Ignored)).Returns(movements);
+
+            var result = await controller.Index(AnyGuid);
+
+            Assert.IsType<ViewResult>(result);
+            var viewResult = result as ViewResult;
+
+            Assert.IsType<MovementsViewModel>(viewResult.Model);
+            var model = viewResult.Model as MovementsViewModel;
+
+            Assert.NotEmpty(model.Movements);
+        }
+
+        [Fact]
+        public async Task Create_SendsRequest()
+        {
+            await controller.Create(Guid.Empty);
+
+            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<CreateMovementForNotificationById>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task Create_RedirectsToActualDate()
+        {
+            var result = await controller.Create(Guid.Empty) as RedirectToRouteResult;
+
+            Assert.Equal("Index", result.RouteValues["action"]);
+            Assert.Equal("ShipmentDate", result.RouteValues["controller"]);
+        }
+
+        [Fact]
+        public async Task Create_SendsRequestWithCorrectId()
+        {
+            await controller.Create(Guid.Empty);
+
+            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<CreateMovementForNotificationById>.That.Matches(r => r.Id == Guid.Empty))).MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
         public void Post_ReceiptWithModelErrors_ReturnsView()
         {
             controller.ModelState.AddModelError("a", "b");

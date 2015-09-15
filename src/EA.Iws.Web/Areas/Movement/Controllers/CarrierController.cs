@@ -22,20 +22,20 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid movementId, Guid notificationId, int? numberOfCarriers = null)
+        public async Task<ActionResult> Index(Guid id, int? numberOfCarriers = null)
         {
             using (var client = apiClient())
             {
-                var carrierData = await client.SendAsync(User.GetAccessToken(), new GetMovementCarrierDataByMovementId(movementId));
+                var carrierData = await client.SendAsync(User.GetAccessToken(), new GetMovementCarrierDataByMovementId(id));
 
                 if (CheckSelectedCarriersExistWithNullOrValidNumber(carrierData.SelectedCarriers, numberOfCarriers)
                     || CheckNumberOfCarriersIsValid(numberOfCarriers))
                 {
                     var viewModel = new CarrierViewModel
                     {
-                        MovementId = movementId,
+                        MovementId = id,
                         NotificationCarriers = carrierData.NotificationCarriers.ToList(),
-                        MeansOfTransportViewModel = await GetMeansOfTransport(client, notificationId)
+                        MeansOfTransportViewModel = await GetMeansOfTransport(client, id)
                     };
 
                     viewModel.SetCarrierSelectLists(carrierData.SelectedCarriers,
@@ -45,7 +45,7 @@
                 }
                 else
                 {
-                    return RedirectToAction("NumberOfCarriers", "Carrier", new { movementId });
+                    return RedirectToAction("NumberOfCarriers", "Carrier", new { id });
                 }
             }
         }
@@ -69,10 +69,10 @@
                 && numberOfCarriers.Value < 101;
         }
 
-        private async Task<MeansOfTransportViewModel> GetMeansOfTransport(IIwsClient client, Guid notificationId)
+        private async Task<MeansOfTransportViewModel> GetMeansOfTransport(IIwsClient client, Guid id)
         {
             var meansOfTransport = await client.SendAsync(User.GetAccessToken(),
-                 new GetMeansOfTransportByNotificationId(notificationId));
+                 new GetMeansOfTransportByMovementId(id));
 
             return new MeansOfTransportViewModel
             {
@@ -82,15 +82,15 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid movementId, Guid notificationId, CarrierViewModel viewModel, int? numberOfCarriers = null)
+        public async Task<ActionResult> Index(Guid id, CarrierViewModel viewModel, int? numberOfCarriers = null)
         {
             using (var client = apiClient())
             {
                 if (!ModelState.IsValid)
                 {
-                    viewModel.MeansOfTransportViewModel = await GetMeansOfTransport(client, notificationId);
+                    viewModel.MeansOfTransportViewModel = await GetMeansOfTransport(client, id);
 
-                    var carrierData = await client.SendAsync(User.GetAccessToken(), new GetMovementCarrierDataByMovementId(movementId));
+                    var carrierData = await client.SendAsync(User.GetAccessToken(), new GetMovementCarrierDataByMovementId(id));
                     viewModel.NotificationCarriers = carrierData.NotificationCarriers.ToList();
 
                     if (viewModel.SelectedItems != null)
@@ -108,24 +108,26 @@
                     selectedCarriers.Add(i, viewModel.SelectedItems[i].Value);
                 }
 
-                await client.SendAsync(User.GetAccessToken(), new SetActualMovementCarriers(movementId, selectedCarriers));
+                await client.SendAsync(User.GetAccessToken(), new SetActualMovementCarriers(id, selectedCarriers));
 
-                return RedirectToAction("Index", "Home", new { movementId });
+                var notificationId = await client.SendAsync(User.GetAccessToken(), new GetNotificationIdByMovementId(id));
+
+                return RedirectToAction("Index", "NotificationMovement", new { id = notificationId, area = string.Empty });
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> NumberOfCarriers(Guid movementId, Guid notificationId)
+        public async Task<ActionResult> NumberOfCarriers(Guid id)
         {
             using (var client = apiClient())
             {
                 var numberOfCarriers = await client.SendAsync(User.GetAccessToken(),
-                    new GetNumberOfCarriersByMovementId(movementId));
+                    new GetNumberOfCarriersByMovementId(id));
 
                 var viewModel = new NumberOfCarriersViewModel
                 {
                     Amount = numberOfCarriers,
-                    MeansOfTransportViewModel = await GetMeansOfTransport(client, notificationId)
+                    MeansOfTransportViewModel = await GetMeansOfTransport(client, id)
                 };
 
                 return View(viewModel);
@@ -134,18 +136,18 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NumberOfCarriers(Guid movementId, Guid notificationId, NumberOfCarriersViewModel viewModel)
+        public async Task<ActionResult> NumberOfCarriers(Guid id, NumberOfCarriersViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
                 using (var client = apiClient())
                 {
-                    viewModel.MeansOfTransportViewModel = await GetMeansOfTransport(client, notificationId);
+                    viewModel.MeansOfTransportViewModel = await GetMeansOfTransport(client, id);
                     return View(viewModel);
                 }
             }
 
-            return RedirectToAction("Index", "Carrier", new { movementId, numberOfCarriers = viewModel.Amount });
+            return RedirectToAction("Index", "Carrier", new { id, numberOfCarriers = viewModel.Amount });
         }
     }
 }

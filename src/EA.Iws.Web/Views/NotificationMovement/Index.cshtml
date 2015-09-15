@@ -1,4 +1,4 @@
-﻿@model EA.Iws.Web.Areas.Movement.ViewModels.MovementsViewModel
+﻿@model EA.Iws.Web.ViewModels.Movement.MovementsViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -11,13 +11,13 @@
     @foreach (var item in Model.Movements)
     {
         <tr>
-            <td>Movement @item.Key</td>
-            <td>@Html.ActionLink("Edit", "Index", "ShipmentDate", new { movementId = item.Value }, new {  })</td>
+            <td>Shipment @item.Key</td>
+            <td>@Html.ActionLink("Edit", "Index", "ShipmentDate", new { id = item.Value, area = "Movement" }, new {  })</td>
         </tr>
     }
 </table>
 
-@using (Html.BeginForm("Create", "Home"))
+@using (Html.BeginForm("Create", "NotificationMovement"))
 {
     @Html.AntiForgeryToken()
 

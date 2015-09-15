@@ -156,7 +156,6 @@
     <Compile Include="Controllers\Movement\PackagingTypesControllerTests.cs" />
     <Compile Include="Controllers\Movement\QuantityControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />
-    <Compile Include="Controllers\Movement\HomeControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />
     <Compile Include="Controllers\ApplicantControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\CarrierControllerTests.cs" />

@@ -20,6 +20,9 @@
             routes.MapRoute("Error500", "errors/500",
                 new { controller = "Errors", action = "InternalError" });
 
+            routes.MapRoute("Movements", "notification-movement/{id}",
+                new { controller = "NotificationMovement", action = "Index" });
+
             routes.MapLowercaseDashedRoute("Default", "{controller}/{action}/{id}",
                 defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional},
                 namespaces: new[] { typeof(HomeController).Namespace });

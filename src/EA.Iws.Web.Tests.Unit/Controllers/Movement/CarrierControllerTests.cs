@@ -31,7 +31,7 @@
         [Fact]
         public async Task NumberOfCarriers_Get_SendsCorrectRequest()
         {
-            await controller.NumberOfCarriers(AnyGuid, AnyGuid);
+            await controller.NumberOfCarriers(AnyGuid);
 
             A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfCarriersByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
@@ -43,7 +43,7 @@
             A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfCarriersByMovementId>.Ignored))
                 .Returns<int?>(null);
 
-            var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid);
+            var result = await controller.NumberOfCarriers(AnyGuid);
 
             Assert.IsType<ViewResult>(result);
 
@@ -62,7 +62,7 @@
             A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfCarriersByMovementId>.Ignored))
                 .Returns<int?>(3);
 
-            var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid);
+            var result = await controller.NumberOfCarriers(AnyGuid);
 
             Assert.IsType<ViewResult>(result);
 
@@ -80,7 +80,7 @@
         {
             controller.ModelState.AddModelError("Test", "Error");
 
-            var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid, new NumberOfCarriersViewModel());
+            var result = await controller.NumberOfCarriers(AnyGuid, new NumberOfCarriersViewModel());
 
             Assert.IsType<ViewResult>(result);
 
@@ -92,7 +92,7 @@
         [Fact]
         public async Task NumberOfCarriers_Post_RedirectsToIndex_WithQuerystringValue()
         {
-            var result = await controller.NumberOfCarriers(AnyGuid, AnyGuid, new NumberOfCarriersViewModel { Amount = 3 });
+            var result = await controller.NumberOfCarriers(AnyGuid, new NumberOfCarriersViewModel { Amount = 3 });
 
             Assert.IsType<RedirectToRouteResult>(result);
 
@@ -110,7 +110,7 @@
         {
             SetUpMovementCarrierData(new[] { new CarrierData { Id = CarrierId } });
 
-            var result = await controller.Index(AnyGuid, AnyGuid);
+            var result = await controller.Index(AnyGuid);
 
             Assert.IsType<RedirectToRouteResult>(result);
 
@@ -127,7 +127,7 @@
         {
             SetUpMovementCarrierData(new[] { new CarrierData { Id = CarrierId } });
 
-            var result = await controller.Index(AnyGuid, AnyGuid, numberOfCarriers);
+            var result = await controller.Index(AnyGuid, numberOfCarriers);
 
             Assert.IsType<RedirectToRouteResult>(result);
 
@@ -146,7 +146,7 @@
                 notificationCarriers: new[] { new CarrierData { Id = AnyGuid } },
                 selectedCarriers: new Dictionary<int, CarrierData> { { 0, new CarrierData { Id = AnyGuid } } });
 
-            var result = await controller.Index(AnyGuid, AnyGuid, numberOfCarriers);
+            var result = await controller.Index(AnyGuid, numberOfCarriers);
 
             Assert.IsType<RedirectToRouteResult>(result);
 
@@ -162,7 +162,7 @@
                 notificationCarriers: new[] { new CarrierData { Id = AnyGuid } },
                 selectedCarriers: new Dictionary<int, CarrierData> { { 0, new CarrierData { Id = AnyGuid } } });
 
-            var result = await controller.Index(AnyGuid, AnyGuid);
+            var result = await controller.Index(AnyGuid);
 
             Assert.IsType<ViewResult>(result);
 
@@ -178,7 +178,7 @@
                 notificationCarriers: new[] { new CarrierData { Id = AnyGuid } },
                 selectedCarriers: new Dictionary<int, CarrierData> { { 0, new CarrierData { Id = AnyGuid } } });
 
-            var result = await controller.Index(AnyGuid, AnyGuid, 3);
+            var result = await controller.Index(AnyGuid, 3);
 
             Assert.IsType<ViewResult>(result);
 
@@ -192,7 +192,7 @@
         {
             SetUpMovementCarrierData(new[] { new CarrierData { Id = AnyGuid } });
 
-            await controller.Index(AnyGuid, AnyGuid, 3);
+            await controller.Index(AnyGuid, 3);
 
             A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementCarrierDataByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
@@ -203,7 +203,7 @@
         {
             SetUpMovementCarrierData(new[] { new CarrierData { Id = CarrierId } });
 
-            var result = await controller.Index(AnyGuid, AnyGuid, 3);
+            var result = await controller.Index(AnyGuid, 3);
 
             Assert.IsType<ViewResult>(result);
             var viewResult = result as ViewResult;
@@ -221,7 +221,7 @@
 
             SetUpMovementCarrierData(new[] { new CarrierData { Id = CarrierId } });
 
-            var result = await controller.Index(AnyGuid, AnyGuid, new CarrierViewModel());
+            var result = await controller.Index(AnyGuid, new CarrierViewModel());
 
             Assert.IsType<ViewResult>(result);
 
@@ -235,7 +235,7 @@
         {
             var selectedCarriers = new[] { CarrierId };
 
-            await controller.Index(MovementId, AnyGuid, new CarrierViewModel { SelectedItems = selectedCarriers.Select(sc => (Guid?)sc).ToList() });
+            await controller.Index(MovementId, new CarrierViewModel { SelectedItems = selectedCarriers.Select(sc => (Guid?)sc).ToList() });
 
             A.CallTo(
                 () =>
@@ -252,7 +252,7 @@
         [Fact]
         public async Task CarriersRedirectsToCorrectScreen()
         {
-            var result = await controller.Index(AnyGuid, AnyGuid, new CarrierViewModel());
+            var result = await controller.Index(AnyGuid, new CarrierViewModel());
 
             Assert.IsType<RedirectToRouteResult>(result);
 

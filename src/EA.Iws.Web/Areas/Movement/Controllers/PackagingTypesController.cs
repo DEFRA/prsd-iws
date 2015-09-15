@@ -24,15 +24,15 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid movementId)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
                 var availablePackagingInfo = await client.SendAsync(User.GetAccessToken(),
-                    new GetPackagingDataValidForMovement(movementId));
+                    new GetPackagingDataValidForMovement(id));
 
                 var selectedPackagingInfo = await client.SendAsync(User.GetAccessToken(),
-                    new GetPackagingDataForMovement(movementId));
+                    new GetPackagingDataForMovement(id));
 
                 var checkBoxCollection = new CheckBoxCollectionViewModel();
                 
@@ -65,7 +65,7 @@
                 var model = new PackagingTypesViewModel()
                 {
                     PackagingTypes = checkBoxCollection,
-                    MovementId = movementId
+                    MovementId = id
                 };
 
                 return View(model);
@@ -74,7 +74,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid movementId, PackagingTypesViewModel model)
+        public async Task<ActionResult> Index(Guid id, PackagingTypesViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -98,7 +98,7 @@
 
                     await client.SendAsync(User.GetAccessToken(), new SetPackagingDataForMovement(model.MovementId, selectedPackagingTypes));
 
-                    return RedirectToAction("Index", "NumberOfPackages", new { movementId });
+                    return RedirectToAction("Index", "NumberOfPackages", new { id });
                 }
                 catch (ApiBadRequestException ex)
                 {
