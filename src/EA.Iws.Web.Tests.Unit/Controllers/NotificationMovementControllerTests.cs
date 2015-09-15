@@ -123,7 +123,7 @@
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("DateReceived", result.RouteValues["controller"]);
             Assert.Equal("Movement", result.RouteValues["area"]);
-            Assert.Equal(movementId, result.RouteValues["movementId"]);
+            Assert.Equal(movementId, result.RouteValues["id"]);
         }
     }
 }

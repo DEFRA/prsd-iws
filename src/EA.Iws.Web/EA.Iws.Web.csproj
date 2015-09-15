@@ -731,7 +731,6 @@
     <Compile Include="Areas\Movement\ViewModels\Carrier\CarrierViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\MovementsViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />

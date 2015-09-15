@@ -18,11 +18,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid movementId)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
-                var dates = await client.SendAsync(User.GetAccessToken(), new GetMovementReceiptDateByMovementId(movementId));
+                var dates = await client.SendAsync(User.GetAccessToken(), new GetMovementReceiptDateByMovementId(id));
 
                 var viewModel = new DateReceivedViewModel(dates.DateReceived, dates.MovementDate);
 
@@ -32,7 +32,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid movementId, DateReceivedViewModel viewModel)
+        public async Task<ActionResult> Index(Guid id, DateReceivedViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -41,9 +41,9 @@
 
             using (var client = apiClient())
             {
-                await client.SendAsync(User.GetAccessToken(), new CreateMovementReceiptForMovement(movementId, viewModel.GetDateReceived()));
+                await client.SendAsync(User.GetAccessToken(), new CreateMovementReceiptForMovement(id, viewModel.GetDateReceived()));
 
-                return RedirectToAction("Index", "ShipmentAcceptance");
+                return RedirectToAction("Index", "ShipmentAcceptance", new { id });
             }
         }
     }
