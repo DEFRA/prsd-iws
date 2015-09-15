@@ -12,12 +12,12 @@
     {
         <tr>
             <td>Shipment @item.Key</td>
-            <td>@Html.ActionLink("Edit", "Index", "ShipmentDate", new { id = item.Value, area = "Movement" }, new {  })</td>
+            <td>@Html.ActionLink("Edit", "Index", "ShipmentDate", new { id = item.Value, area = "Movement" }, new { })</td>
         </tr>
     }
 </table>
 
-@using (Html.BeginForm("Create", "NotificationMovement"))
+@using (Html.BeginForm("Create", "NotificationMovement", new { id = Model.NotificationId }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

@@ -19,13 +19,14 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid? id)
+        public async Task<ActionResult> Index(Guid id)
         {
             using (var client = apiClient())
             {
                 var model = new MovementsViewModel
                 {
-                    Movements = await client.SendAsync(User.GetAccessToken(), new GetMovementsForNotificationById(id.Value))
+                    NotificationId = id,
+                    Movements = await client.SendAsync(User.GetAccessToken(), new GetMovementsForNotificationById(id))
                 };
 
                 return View(model);
@@ -58,8 +59,7 @@
             return RedirectToAction("Index", "DateReceived",
                 new
                 {
-                    MovementId = model.RadioButtons.SelectedValue,
-                    model.NotificationId,
+                    id = model.RadioButtons.SelectedValue,
                     area = "Movement"
                 });
         }
@@ -72,7 +72,7 @@
             {
                 var movementId = await client.SendAsync(User.GetAccessToken(), new CreateMovementForNotificationById(id));
 
-                return RedirectToAction("Index", "ShipmentDate", new { movementId });
+                return RedirectToAction("Index", "ShipmentDate", new { id = movementId, area = "Movement" });
             }
         }
     }

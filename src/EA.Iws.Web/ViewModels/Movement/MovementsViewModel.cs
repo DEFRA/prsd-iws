@@ -5,6 +5,7 @@
 
     public class MovementsViewModel
     {
+        public Guid NotificationId { get; set; }
         public Dictionary<int, Guid> Movements { get; set; }
     }
 }
