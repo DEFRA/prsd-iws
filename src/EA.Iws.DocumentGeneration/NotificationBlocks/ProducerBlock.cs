@@ -86,8 +86,7 @@
             }
 
             //Clear the annex process of generation fields if they should not be displayed
-            if (!(data[0].ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()) ||
-                (data[0].IsProcessAnnexAttached.GetValueOrDefault()))
+            if (!(data[0].ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()))
             {
                 ClearProcessOfGenerationTextFields();
             }
