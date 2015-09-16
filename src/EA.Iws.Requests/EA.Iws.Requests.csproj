@@ -31,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15236.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.15236-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15259.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15259-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -71,6 +71,7 @@
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementId.cs" />
+    <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementId.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationId.cs" />
     <Compile Include="MovementReceipt\CreateMovementReceiptForMovement.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementId.cs" />

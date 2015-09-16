@@ -33,9 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.15236.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.15236-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="EA.Prsd.Core, Version=1.0.15259.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EA.Prsd.Core.1.0.15259-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -110,6 +110,7 @@
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandlerTests.cs" />
     <Compile Include="MovementReceipt\GetShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
     <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
+    <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandlerTests.cs" />
