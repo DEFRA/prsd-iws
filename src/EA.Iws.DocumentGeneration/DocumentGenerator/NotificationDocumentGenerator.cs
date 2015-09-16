@@ -59,9 +59,9 @@
             }
         }
 
-        private static IList<INotificationBlock> GetBlocks(NotificationApplication notification, IList<MergeField> mergeFields)
+        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, IList<MergeField> mergeFields)
         {
-            return new List<INotificationBlock>
+            return new List<IDocumentBlock>
             {
                 new GeneralBlock(mergeFields, notification),
                 new ExporterBlock(mergeFields, notification),

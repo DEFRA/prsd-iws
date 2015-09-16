@@ -10,7 +10,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class WasteCodesBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class WasteCodesBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private readonly WasteCodesViewModel data;
 

@@ -8,7 +8,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class SpecialHandlingBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class SpecialHandlingBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private const string SpecialHandling = "SpHandling";
         private readonly SpecialHandlingViewModel data;

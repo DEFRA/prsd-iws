@@ -10,7 +10,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class CarrierBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class CarrierBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private readonly IList<CarrierViewModel> data;
 

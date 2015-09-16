@@ -9,7 +9,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class FacilityBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class FacilityBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private const string ActualSiteOfTreatment = "ActualSite";
         private readonly IList<FacilityViewModel> data;

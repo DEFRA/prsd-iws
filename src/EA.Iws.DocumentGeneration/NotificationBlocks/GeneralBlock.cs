@@ -5,7 +5,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class GeneralBlock : INotificationBlock
+    internal class GeneralBlock : IDocumentBlock
     {
         private readonly GeneralViewModel data;
 

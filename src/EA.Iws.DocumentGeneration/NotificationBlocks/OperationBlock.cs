@@ -6,7 +6,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class OperationBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class OperationBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private readonly OperationViewModel data;
 

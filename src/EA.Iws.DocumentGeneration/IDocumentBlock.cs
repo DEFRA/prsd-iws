@@ -1,8 +1,8 @@
-namespace EA.Iws.DocumentGeneration.NotificationBlocks
+namespace EA.Iws.DocumentGeneration
 {
     using System.Collections.Generic;
 
-    public interface INotificationBlock
+    public interface IDocumentBlock
     {
         string TypeName { get; }
 

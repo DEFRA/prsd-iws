@@ -6,7 +6,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class RecoveryInfoBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class RecoveryInfoBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private const string RecoveryInfo = "RecovInfo";
         private readonly RecoveryInfoViewModel data;

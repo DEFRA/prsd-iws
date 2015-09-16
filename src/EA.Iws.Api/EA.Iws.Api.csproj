@@ -270,6 +270,7 @@
     <Content Include="Documents\NIEAFinancialGuaranteeForm.pdf" />
     <Content Include="Documents\SEPABankGuaranteeTemplate.doc" />
     <Content Include="Documents\SEPAParentCompanyTemplate.doc" />
+    <Content Include="Documents\MovementMergeTemplate.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

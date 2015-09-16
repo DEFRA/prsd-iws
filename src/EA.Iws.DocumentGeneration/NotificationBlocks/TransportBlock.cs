@@ -6,7 +6,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class TransportBlock : INotificationBlock
+    internal class TransportBlock : IDocumentBlock
     {
         private const string TransportFields = "Transport";
         private readonly TransportViewModel data;

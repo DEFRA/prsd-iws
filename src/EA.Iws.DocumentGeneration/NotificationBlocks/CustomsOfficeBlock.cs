@@ -7,7 +7,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class CustomsOfficeBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class CustomsOfficeBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private readonly CustomsOfficeViewModel data;
 

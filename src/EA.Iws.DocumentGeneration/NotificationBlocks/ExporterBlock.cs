@@ -5,7 +5,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class ExporterBlock : INotificationBlock
+    internal class ExporterBlock : IDocumentBlock
     {
         private readonly ExporterViewModel data;
 

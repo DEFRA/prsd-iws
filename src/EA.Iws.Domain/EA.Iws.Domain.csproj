@@ -63,6 +63,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChange.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
+    <Compile Include="IMovementDocumentGenerator.cs" />
     <Compile Include="INotificationMovementService.cs" />
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />

@@ -9,7 +9,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class TransitStatesBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class TransitStatesBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private readonly TransitStateViewModel data;
 

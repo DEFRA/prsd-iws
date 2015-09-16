@@ -9,7 +9,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class ProducerBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class ProducerBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private const string SiteOfExport = "SiteOfExport";
         private const string PoGtext = "PoGtext";

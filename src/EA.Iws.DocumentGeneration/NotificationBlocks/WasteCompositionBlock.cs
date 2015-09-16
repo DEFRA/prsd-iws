@@ -10,7 +10,7 @@
     using Mapper;
     using ViewModels;
 
-    internal class WasteCompositionBlock : AnnexBlockBase, INotificationBlock, IAnnexedBlock
+    internal class WasteCompositionBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private const string Parameters = "Parameters";
         private const string Constituents = "Constituents";
