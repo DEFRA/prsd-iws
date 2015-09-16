@@ -42,7 +42,7 @@
             Context.Movements.Add(movement);
             Context.FinancialGuarantees.Add(financialGuarantee);
 
-            handler = new GetMovementProgressInformationHandler(Context, new MovementMap());
+            handler = new GetMovementProgressInformationHandler(Context, new MovementMap(), new ActiveMovementsService(Context));
         }
 
         [Fact]

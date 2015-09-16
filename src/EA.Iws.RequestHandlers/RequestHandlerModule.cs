@@ -4,8 +4,10 @@
     using Copy;
     using Domain;
     using Domain.Movement;
+    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using Movement;
+    using MovementReceipt;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
@@ -45,6 +47,9 @@
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<NotificationMovementService>().As<INotificationMovementService>();
             builder.RegisterType<MovementFactory>().As<IMovementFactory>();
+            builder.RegisterType<ActiveMovementsService>().As<IActiveMovementsService>();
+            builder.RegisterType<MovementReceiptService>().As<IMovementReceiptService>();
+            builder.RegisterType<MovementQuantityCalculator>().As<IMovementQuantityCalculator>();
         }
     }
 }

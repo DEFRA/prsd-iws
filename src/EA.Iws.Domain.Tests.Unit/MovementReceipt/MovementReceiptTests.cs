@@ -14,6 +14,7 @@
     {
         private readonly Movement movement;
         private readonly MovementReceipt movementReceipt;
+        private readonly MovementReceiptService service;
 
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private static readonly DateTime MovementDate = new DateTime(2015, 12, 1);
@@ -27,6 +28,7 @@
             movement = new Movement(notification, 1);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
             movementReceipt = new MovementReceipt(AfterMovementDate);
+            service = new MovementReceiptService();
         }
 
         [Fact]
@@ -120,9 +122,9 @@
         {
             ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Decision, Decision.Accepted, movementReceipt);
 
-            movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Tonnes, ShipmentQuantityUnits.Kilograms);
+            movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Tonnes);
 
-            Assert.Equal(10 * 1000, movementReceipt.Quantity);
+            Assert.Equal(10m / 1000, movementReceipt.Quantity);
         }
 
         [Fact]
@@ -149,6 +151,36 @@
             movement.Receive(newDate);
 
             Assert.NotNull(movement.Receipt.Decision);
+        }
+
+        [Fact]
+        public void MovementIsReceivedWhenEverythingIsComplete()
+        {
+            movement.Receive(AfterMovementDate);
+
+            movement.Accept();
+
+            movement.Receipt.SetQuantity(5, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms);
+
+            Assert.True(service.IsReceived(movement));
+        }
+
+        [Fact]
+        public void IncompleteMovement_IsNotReceieved()
+        {
+            movement.Receive(AfterMovementDate);
+
+            Assert.False(service.IsReceived(movement));
+        }
+
+        [Fact]
+        public void RejectedMovement_IsNotReceived()
+        {
+            movement.Receive(AfterMovementDate);
+
+            movement.Reject(AnyString);
+
+            Assert.False(service.IsReceived(movement));
         }
     }
 }

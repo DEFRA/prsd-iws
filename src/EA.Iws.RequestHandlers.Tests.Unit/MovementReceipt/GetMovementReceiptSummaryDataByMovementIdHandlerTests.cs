@@ -1,5 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.MovementReceipt
 {
+    using EA.Iws.Domain.MovementReceipt;
+    using EA.Iws.RequestHandlers.Movement;
     using EA.Iws.RequestHandlers.MovementReceipt;
     using EA.Iws.Requests.MovementReceipt;
     using EA.Iws.TestHelpers.DomainFakes;
@@ -43,7 +45,10 @@
             Context.NotificationApplications.Add(NotificationApplication);
             Context.FinancialGuarantees.Add(financialGuarantee);
 
-            handler = new GetMovementReceiptSummaryDataByMovementIdHandler(Context);
+            handler = new GetMovementReceiptSummaryDataByMovementIdHandler(
+                Context, 
+                new ActiveMovementsService(Context), 
+                new MovementQuantityCalculator(Context, new MovementReceiptService()));
         }
 
         [Fact]

@@ -15,11 +15,15 @@
     {
         private readonly IwsContext context;
         private readonly IMap<Movement, ProgressData> progressMap;
+        private readonly IActiveMovementsService activeMovements;
 
-        public GetMovementProgressInformationHandler(IwsContext context, IMap<Movement, ProgressData> progressMap)
+        public GetMovementProgressInformationHandler(IwsContext context, 
+            IMap<Movement, ProgressData> progressMap,
+            IActiveMovementsService activeMovementsService)
         {
             this.context = context;
             this.progressMap = progressMap;
+            this.activeMovements = activeMovementsService;
         }
 
         public async Task<MovementProgressAndSummaryData> HandleAsync(GetMovementProgressInformation message)
@@ -27,10 +31,12 @@
             var movement = await context.Movements
                 .SingleAsync(m => m.Id == message.MovementId);
 
+            var notificationId = movement.NotificationApplicationId;
+
             var notificationInformation = await context.NotificationApplications
-                .Join(context.FinancialGuarantees, 
-                application => application.Id == movement.NotificationApplicationId,
-                fg => fg.NotificationApplicationId == movement.NotificationApplicationId,
+                .Join(context.FinancialGuarantees,
+                application => application.Id == notificationId,
+                fg => fg.NotificationApplicationId == notificationId,
                 (na, fg) => new
                 {
                     Id = na.Id,
@@ -38,20 +44,13 @@
                     Shipments = na.ShipmentInfo.NumberOfShipments,
                     ActiveLoadsPermitted = fg.ActiveLoadsPermitted
                 })
-                .SingleAsync(x => x.Id == movement.NotificationApplicationId);
-
-            var totalActiveMovements = await context
-                .Movements
-                .CountAsync(m =>
-                    m.NotificationApplicationId == movement.NotificationApplicationId
-                    && m.Date.HasValue
-                    && m.Date < SystemTime.UtcNow);
+                .SingleAsync(x => x.Id == notificationId);
 
             return new MovementProgressAndSummaryData
             {
                 NotificationNumber = notificationInformation.Number,
                 TotalNumberOfMovements = notificationInformation.Shipments,
-                CurrentActiveLoads = totalActiveMovements,
+                CurrentActiveLoads = await activeMovements.TotalActiveMovementsAsync(notificationId),
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = notificationInformation.ActiveLoadsPermitted.GetValueOrDefault(),
                 Progress = progressMap.Map(movement),
