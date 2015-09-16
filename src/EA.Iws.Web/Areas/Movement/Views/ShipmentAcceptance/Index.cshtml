@@ -18,11 +18,11 @@
         @Html.HiddenFor(m => m.MovementId)
 
         <div class="form-group">
-            <label class="block-label" data-target="" for="rejection-reason">
+            <label class="block-label" data-target="" for="rdoYes">
                 @Html.RadioButtonFor(m => m.Decision, Decision.Accepted, new { @class = "", @id = "rdoYes" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(YesNo.Yes)
             </label>
 
-            <label class="block-label" data-target="rejection-reason" for="rejection-reason">
+            <label class="block-label" data-target="rejection-reason" for="rdoNo">
                 @Html.RadioButtonFor(m => m.Decision, Decision.Rejected, new { @class = "", @id = "rdoNo" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(YesNo.No)
             </label>
         </div>
