@@ -16,7 +16,7 @@
             ShipmentQuantityUnits.Kilograms,
             ShipmentQuantityUnits.Tonnes
         };
-
+        
         public static bool IsVolumeUnit(ShipmentQuantityUnits unit)
         {
             return VolumeUnits.Contains(unit);

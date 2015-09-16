@@ -19,7 +19,7 @@
             set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Quantity, value, this); }
         }
 
-        public new DateTime? Date
+        public new DateTime Date
         {
             get { return base.Date; }
             set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Date, value, this); }
