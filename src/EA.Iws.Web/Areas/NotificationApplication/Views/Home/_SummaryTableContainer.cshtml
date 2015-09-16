@@ -1,6 +1,11 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
-@{ViewBag.SectionIncompleteText = "Section incomplete";}
+
+@{
+    ViewBag.SectionIncompleteText = "Section incomplete";
+    ViewBag.CanEditNotification = Model.CanEditNotification;
+}
+
 <header class="hgroup">
     <h1 class="heading-large">Notification overview</h1>
 </header>

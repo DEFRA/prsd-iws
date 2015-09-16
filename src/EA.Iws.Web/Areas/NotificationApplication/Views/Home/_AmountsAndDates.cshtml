@@ -14,7 +14,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Shipment", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Shipment", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">

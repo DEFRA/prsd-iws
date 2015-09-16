@@ -14,7 +14,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Exporter", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Exporter", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -29,7 +32,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Producer", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Producer", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -44,7 +50,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfExport", "Producer", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfExport", "Producer", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -59,7 +68,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Importer", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Importer", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -74,7 +86,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Facility", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Facility", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -89,7 +104,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfTreatment", "Facility", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "SiteOfTreatment", "Facility", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">

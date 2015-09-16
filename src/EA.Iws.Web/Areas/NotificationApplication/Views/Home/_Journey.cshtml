@@ -14,7 +14,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfExport", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfExport", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -30,7 +33,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Summary", "TransportRoute", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Summary", "TransportRoute", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -46,7 +52,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfImport", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfImport", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -62,7 +71,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "CustomsOffice", new { id }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "CustomsOffice", new { id }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">

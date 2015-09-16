@@ -14,7 +14,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "BaselOecdCode", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "BaselOecdCode", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -30,7 +33,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "EwcCode", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "EwcCode", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -46,7 +52,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "YCode", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "YCode", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -62,7 +71,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "HCode", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "HCode", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -78,7 +90,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "UnClass", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "UnClass", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -94,7 +109,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "UnNumber", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "UnNumber", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">
@@ -110,7 +128,10 @@
             {
                 <i class="fa fa-check green-text"></i>
             }
-            <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "CustomWasteCode", new { id, backToOverview = true }, null)</span>
+            @if (ViewBag.CanEditNotification)
+            {
+                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "CustomWasteCode", new { id, backToOverview = true }, null)</span>
+            }
         </summary>
         <div class="expanded-details">
             <div class="panel-indent">

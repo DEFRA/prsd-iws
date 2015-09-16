@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Requests.Notification;
 
     public class NotificationOverviewViewModel
@@ -31,6 +29,8 @@
 
         public int NotificationCharge { get; set; }
 
+        public bool CanEditNotification { get; set; }
+
         public NotificationOverviewViewModel()
         {
         }
@@ -49,6 +49,7 @@
             SubmitSideBarViewModel = new SubmitSideBarViewModel(notificationInfo.SubmitSummaryData, notificationInfo.NotificationCharge);
             WasteCodeOverviewViewModel = new WasteCodeOverviewViewModel(notificationInfo.WasteCodesOverviewInfo);
             NotificationCharge = notificationInfo.NotificationCharge;
+            CanEditNotification = notificationInfo.CanEditNotification;
         }
     }
 }
