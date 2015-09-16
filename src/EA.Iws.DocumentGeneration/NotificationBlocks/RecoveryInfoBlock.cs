@@ -15,16 +15,18 @@
         {
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
 
+            CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
+            data = new RecoveryInfoViewModel(notification, new RecoveryInfoFormatter());
+
             if (notification.NotificationType == NotificationType.Disposal)
             {
                 HasAnnex = false;
+
+                MergeMainDocumentBlock();
             }
             else
             {
                 HasAnnex = true;
-
-                CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-                data = new RecoveryInfoViewModel(notification, new RecoveryInfoFormatter());
 
                 if (notification.IsProvidedByImporter.GetValueOrDefault())
                 {
