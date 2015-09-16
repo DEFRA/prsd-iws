@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using Domain.NotificationApplication;
     using Formatters;
@@ -62,7 +63,7 @@
 
         public string OtherTypeDescription
         {
-            get { return otherTypeDescription; }
+            get { return otherTypeDescription.Replace(Environment.NewLine, ",  "); }
             private set { otherTypeDescription = value; }
         }
 
