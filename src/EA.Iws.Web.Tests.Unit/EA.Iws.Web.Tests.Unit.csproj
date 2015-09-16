@@ -203,6 +203,7 @@
     <Compile Include="ViewModels\RecoveryPercentageViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />
     <Compile Include="ViewModels\WasteType\ChemicalCompositionConcentrationLevelsViewModelTests.cs" />
+    <Compile Include="ViewModels\WasteType\ChemicalCompositionInformationViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
