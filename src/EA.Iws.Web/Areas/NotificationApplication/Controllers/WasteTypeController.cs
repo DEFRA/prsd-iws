@@ -8,6 +8,7 @@
     using Api.Client;
     using Core.WasteType;
     using Infrastructure;
+    using Prsd.Core.Mapper;
     using Requests.WasteType;
     using ViewModels.WasteType;
     using Web.ViewModels.Shared;
@@ -17,10 +18,17 @@
     {
         private const string NotApplicable = "NA";
         private readonly Func<IIwsClient> apiClient;
+        private readonly IMapWithParameter<WasteTypeData,
+            ICollection<WoodInformationData>,
+            ChemicalCompositionInformationViewModel> chemicalCompositionInformationMap;
 
-        public WasteTypeController(Func<IIwsClient> apiClient)
+        public WasteTypeController(Func<IIwsClient> apiClient,
+            IMapWithParameter<WasteTypeData,
+            ICollection<WoodInformationData>,
+            ChemicalCompositionInformationViewModel> chemicalCompositionInformationMap)
         {
             this.apiClient = apiClient;
+            this.chemicalCompositionInformationMap = chemicalCompositionInformationMap;
         }
 
         [HttpGet]
@@ -146,11 +154,11 @@
 
             if (backToOverview.GetValueOrDefault())
             {
-                return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId });
             }
             else
             {
-                return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId }); 
+                return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
             }
         }
 
@@ -184,7 +192,7 @@
                 {
                     model.OtherCodes.Add(new WasteTypeCompositionData());
                 }
-                
+
                 return View(model);
             }
 
@@ -242,7 +250,7 @@
                 {
                     model.OtherCodes.Add(new WasteTypeCompositionData());
                 }
-                
+
                 return View(model);
             }
 
@@ -273,21 +281,17 @@
         [HttpGet]
         public async Task<ActionResult> WoodAdditionalInformation(Guid id, ChemicalCompositionType chemicalCompositionType, bool? backToOverview = null)
         {
-            var categories = Enum.GetValues(typeof(WasteInformationType)).Cast<int>()
-                            .Select(c => new WoodInformationData { WasteInformationType = (WasteInformationType)c })
-                            .Where(c => c.WasteInformationType != WasteInformationType.Energy)
-                            .ToList();
-
-            var model = new ChemicalCompositionInformationViewModel()
+            using (var client = apiClient())
             {
-                NotificationId = id,
-                WasteComposition = categories,
-                ChemicalCompositionType = chemicalCompositionType
-            };
+                var result = await client.SendAsync(User.GetAccessToken(), new GetWasteType(id));
+                var categories = GetWasteInformationType().Where(c => c.WasteInformationType != WasteInformationType.Energy);
 
-            await GetExistingAdditionalInformation(id, model);
-
-            return View(model);
+                var model = chemicalCompositionInformationMap.Map(result, categories.ToArray());
+                model.NotificationId = id;
+                model.ChemicalCompositionType = chemicalCompositionType;
+                
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -312,7 +316,7 @@
             }
             if (backToOverview.GetValueOrDefault())
             {
-                return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId });
             }
             else
             {
@@ -323,17 +327,16 @@
         [HttpGet]
         public async Task<ActionResult> RdfAdditionalInformation(Guid id, bool? backToOverview = null)
         {
-            var categories = GetWasteInformationType();
-
-            var model = new ChemicalCompositionInformationViewModel
+            using (var client = apiClient())
             {
-                NotificationId = id,
-                WasteComposition = categories
-            };
+                var result = await client.SendAsync(User.GetAccessToken(), new GetWasteType(id));
+                var categories = GetWasteInformationType();
 
-            await GetExistingAdditionalInformation(id, model);
+                var model = chemicalCompositionInformationMap.Map(result, categories);
+                model.NotificationId = id;
 
-            return View(model);
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -355,11 +358,11 @@
 
             if (backToOverview.GetValueOrDefault())
             {
-                return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId });
             }
             else
             {
-                return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });  
+                return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
             }
         }
 
@@ -377,37 +380,6 @@
                 .Select(c => new WoodInformationData { WasteInformationType = (WasteInformationType)c })
                 .Where(c => c.WasteInformationType != WasteInformationType.Energy)
                 .ToList();
-        }
-
-        private async Task GetExistingAdditionalInformation(Guid id, ChemicalCompositionInformationViewModel model)
-        {
-            using (var client = apiClient())
-            {
-                var wasteTypeData = await client.SendAsync(User.GetAccessToken(), new GetWasteType(id));
-                
-                var compositions = wasteTypeData.WasteAdditionalInformation;
-
-                var notApplicableCompositions =
-                    model.WasteComposition.Where(
-                        wc =>
-                            compositions.All(c => c.WasteInformationType != wc.WasteInformationType)).Select(wc => new WoodInformationData
-                            {
-                                Constituent = wc.Constituent,
-                                WasteInformationType = wc.WasteInformationType,
-                                MinConcentration = NotApplicable,
-                                MaxConcentration = NotApplicable
-                            });
-
-                compositions.AddRange(notApplicableCompositions);
-
-                if (wasteTypeData != null && wasteTypeData.WasteAdditionalInformation != null && wasteTypeData.WasteAdditionalInformation.Count > 0)
-                {
-                    model.WasteComposition = compositions;
-                    model.Energy = wasteTypeData.EnergyInformation;
-                    model.FurtherInformation = wasteTypeData.FurtherInformation;
-                    model.HasAnnex = wasteTypeData.HasAnnex;
-                }
-            }
         }
 
         private List<T> RemoveNotApplicableValues<T>(IEnumerable<T> data) where T : ChemicalCompositionData

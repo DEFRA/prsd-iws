@@ -46,7 +46,7 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
             
-            result.AssertControllerReturn(IntendedShipmentsAction, IntendedShipmentsController);
+            result.AssertControllerReturn("NoCustomsOffice", "CustomsOffice");
             Assert.Equal(guid, result.RouteValues["id"]);
         }
 

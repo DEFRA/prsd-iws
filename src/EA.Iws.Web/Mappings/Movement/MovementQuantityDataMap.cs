@@ -33,7 +33,8 @@
                 TotalAvailable = source.AvailableQuantity,
                 TotalNotified = source.TotalNotifiedQuantity,
                 Quantity = quantity,
-                AvailableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(source.Units).ToList()
+                AvailableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(source.Units).ToList(),
+                NotificationUnits = source.Units
             };
         }
     }

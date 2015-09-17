@@ -16,9 +16,11 @@
     @Html.Gds().ValidationSummary()
 
     @Html.HiddenFor(m => m.MovementUnits)
+    @Html.HiddenFor(m => m.NotificationUnits)
     
-    <div class="form-group">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
         <label class="form-label" for="Quantity">Quantity received in @EnumHelper.GetDisplayName(Model.MovementUnits)</label>
+        @Html.Gds().ValidationMessageFor(m => m.Quantity)
         @Html.Gds().TextBoxFor(m => m.Quantity)
     </div>
 

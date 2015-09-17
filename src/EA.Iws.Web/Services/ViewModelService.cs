@@ -34,7 +34,7 @@
             return true;
         }
 
-        public static bool IsStringValidDecimalToFourDecimalPlaces(string s)
+        public static bool IsStringValidDecimalToNDecimalPlaces(string s, int n)
         {
             decimal quantity;
             NumberStyles style = NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
@@ -45,12 +45,17 @@
                 return false;
             }
 
-            if (decimal.Round(quantity, 4) != quantity)
+            return IsDecimalValidToNDecimalPlaces(quantity, n);
+        }
+
+        public static bool IsDecimalValidToNDecimalPlaces(decimal? d, int n)
+        {
+            if (!d.HasValue)
             {
                 return false;
             }
 
-            return true;
+            return decimal.Round(d.Value, n) == d.Value;
         }
     }
 }

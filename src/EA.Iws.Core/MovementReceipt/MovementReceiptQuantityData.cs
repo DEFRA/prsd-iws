@@ -6,6 +6,8 @@
     {
         public ShipmentQuantityUnits MovementUnit { get; set; }
 
+        public ShipmentQuantityUnits NotificationUnits { get; set; }
+
         public decimal? Quantity { get; set; }
     }
 }

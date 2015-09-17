@@ -37,6 +37,8 @@
 
         public ShipmentQuantityUnits? Units { get; set; }
 
+        public ShipmentQuantityUnits NotificationUnits { get; set; }
+
         public string UnitsDisplay
         {
             get { return EnumHelper.GetDisplayName(Units); }
@@ -49,9 +51,23 @@
                 yield return new ValidationResult("The Actual quantity field is required", new[] { "Quantity" });
             }
 
-            if (!string.IsNullOrWhiteSpace(Quantity) && !ViewModelService.IsStringValidDecimalToFourDecimalPlaces(Quantity))
+            if (!string.IsNullOrWhiteSpace(Quantity) && !ViewModelService.IsStringValidDecimalToNDecimalPlaces(Quantity, 4))
             {
                 yield return new ValidationResult("Please enter a valid positive number with a maximum of 4 decimal places", new[] { "Quantity" });
+            }
+
+            if (Units.HasValue && Units != NotificationUnits)
+            {
+                if (Units.Value == ShipmentQuantityUnits.Kilograms
+                    || Units.Value == ShipmentQuantityUnits.Litres)
+                {
+                    var hasTooManyDecimalPlaces = !ViewModelService.IsStringValidDecimalToNDecimalPlaces(Quantity, 1);
+
+                    if (hasTooManyDecimalPlaces)
+                    {
+                        yield return new ValidationResult("The quantity expressed in Kilograms or Litres can only have a maximum of 1 decimal place", new[] { "Quantity" });
+                    }
+                }
             }
         }
     }

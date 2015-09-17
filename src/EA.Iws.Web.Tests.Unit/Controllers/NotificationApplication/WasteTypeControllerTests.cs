@@ -1,18 +1,17 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Core.WasteType;
-    using EA.Iws.Requests.WasteType;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType;
-    using EA.Iws.Web.ViewModels.Shared;
-    using FakeItEasy;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.WasteType;
+    using Core.WasteType;
+    using FakeItEasy;
+    using Mappings;
+    using Requests.WasteType;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class WasteTypeControllerTests
@@ -24,7 +23,7 @@
         public WasteTypeControllerTests()
         {
             client = A.Fake<IIwsClient>();
-            wasteTypeController = new WasteTypeController(() => client);
+            wasteTypeController = new WasteTypeController(() => client, new ChemicalCompositionAdditionalInformationMap());
         }
 
         [Theory]

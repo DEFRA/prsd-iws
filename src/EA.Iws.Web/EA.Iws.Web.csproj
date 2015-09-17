@@ -740,6 +740,7 @@
     <Compile Include="Areas\Movement\ViewModels\Carrier\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
+    <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />

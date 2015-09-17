@@ -20,6 +20,7 @@
     @Html.HiddenFor(m => m.TotalUsed)
     @Html.HiddenFor(m => m.TotalNotified)
     @Html.HiddenFor(m => m.TotalAvailable)
+    @Html.HiddenFor(m => m.NotificationUnits)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
         @Html.Gds().LabelFor(m => m.Quantity, false)

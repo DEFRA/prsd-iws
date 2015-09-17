@@ -33,13 +33,15 @@
             {
                 return new MovementReceiptQuantityData
                 {
-                    MovementUnit = movement.DisplayUnits.Value
+                    MovementUnit = movement.DisplayUnits.Value,
+                    NotificationUnits = movement.Units.Value
                 };
             }
 
             return new MovementReceiptQuantityData
             {
                 MovementUnit = movement.DisplayUnits.Value,
+                NotificationUnits = movement.Units.Value,
                 Quantity = (movement.Receipt.Quantity.HasValue) ? (decimal?)ShipmentQuantityUnitConverter.ConvertToTarget(movement.Units.Value,
                     movement.DisplayUnits.Value,
                     movement.Receipt.Quantity.Value) : null

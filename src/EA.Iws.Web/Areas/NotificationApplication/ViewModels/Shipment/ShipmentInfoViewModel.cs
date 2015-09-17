@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Globalization;
-    using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using Core.IntendedShipments;
     using Core.Shared;
@@ -145,7 +143,7 @@
 
         private bool IsQuantityValid()
         {
-            return ViewModelService.IsStringValidDecimalToFourDecimalPlaces(Quantity);
+            return ViewModelService.IsStringValidDecimalToNDecimalPlaces(Quantity, 4);
         }
 
         public SetIntendedShipmentInfoForNotification ToRequest()
