@@ -597,6 +597,7 @@
     <Content Include="Areas\Movement\Views\ShipmentAcceptance\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Shared\_LayoutReceipt.cshtml" />
     <Content Include="Areas\Movement\Views\ReceiptComplete\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOffice.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />

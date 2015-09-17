@@ -42,6 +42,7 @@
 })
 @Html.Navigation().Link("Customs office", Model.HasCustomsOffice, "Index", "CustomsOffice", "NotificationApplication", new[]
 {
+    new Tuple<string, string>("CustomsOffice", "NoCustomsOffice"),
     new Tuple<string, string>("ExitCustomsOffice", "Index"),
     new Tuple<string, string>("EntryCustomsOffice", "Index") 
 })

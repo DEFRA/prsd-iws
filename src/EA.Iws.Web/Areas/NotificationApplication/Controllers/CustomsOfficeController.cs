@@ -11,7 +11,7 @@
     public class CustomsOfficeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
-        private readonly Func<Guid, bool?, RedirectToRouteResult> intendedShipments;
+        private readonly Func<Guid, bool?, RedirectToRouteResult> noCustomsOffice;
         private readonly Func<Guid, bool?, RedirectToRouteResult> transportRouteSummary;
         private readonly Func<Guid, bool?, RedirectToRouteResult> addExitCustomsOffice;
         private readonly Func<Guid, bool?, RedirectToRouteResult> addEntryCustomsOffice;
@@ -20,10 +20,10 @@
         {
             this.apiClient = apiClient;
 
-            intendedShipments = (id, backToOverview) => this.RedirectToAction("Index", "Shipment", new { id, backToOverview });
-            transportRouteSummary = (id, backToOverview) => this.RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
-            addExitCustomsOffice = (id, backToOverview) => this.RedirectToAction("Index", "ExitCustomsOffice", new { id, backToOverview });
-            addEntryCustomsOffice = (id, backToOverview) => this.RedirectToAction("Index", "EntryCustomsOffice", new { id, backToOverview });
+            noCustomsOffice = (id, backToOverview) => RedirectToAction("NoCustomsOffice", "CustomsOffice", new { id, backToOverview });
+            transportRouteSummary = (id, backToOverview) => RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
+            addExitCustomsOffice = (id, backToOverview) => RedirectToAction("Index", "ExitCustomsOffice", new { id, backToOverview });
+            addEntryCustomsOffice = (id, backToOverview) => RedirectToAction("Index", "EntryCustomsOffice", new { id, backToOverview });
         }
 
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
@@ -37,7 +37,7 @@
             switch (customsOffice.CustomsOfficesRequired)
             {
                 case CustomsOffices.None:
-                    return intendedShipments(id, backToOverview);
+                    return noCustomsOffice(id, backToOverview);
                 case CustomsOffices.EntryAndExit:
                 case CustomsOffices.Exit:
                     return addExitCustomsOffice(id, backToOverview);
@@ -46,6 +46,11 @@
                 default:
                     return transportRouteSummary(id, backToOverview);
             }
+        }
+
+        public ActionResult NoCustomsOffice(Guid id, bool? backToOverview = null)
+        {
+            return View();
         }
     }
 }
