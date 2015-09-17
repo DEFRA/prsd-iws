@@ -128,12 +128,6 @@
 
             if (!user.Email.Equals(model.Email))
             {
-                //Verify user password
-                var resultChangePassword = await userManager.CheckPasswordAsync(user, model.Password);
-                if (!resultChangePassword)
-                {
-                    return BadRequest("Wrong password");
-                }
                 user.Email = model.Email;
                 user.UserName = model.Email;
             }

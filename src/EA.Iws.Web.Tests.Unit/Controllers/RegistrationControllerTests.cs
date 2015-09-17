@@ -194,8 +194,7 @@
                 FirstName = ValidName,
                 Surname = ValidSurname,
                 Email = ValidEmail,
-                ExistingEmail = ValidEmail,
-                Password = ValidPassword
+                ExistingEmail = ValidEmail
             };
         }
     }

@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Api.Client.Entities;
-    using Prsd.Core.Validation;
 
     public class EditApplicantDetailsViewModel
     {
@@ -38,12 +37,6 @@
             get { return !Email.Trim().Equals(ExistingEmail.Trim()); }
         }
 
-        [RequiredIf("IsEmailChanged", true, "Please enter your password")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long", MinimumLength = 8)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
         public EditApplicantDetailsViewModel()
         {
         }
@@ -66,8 +59,7 @@
                 FirstName = FirstName,
                 Surname = Surname,
                 Phone = PhoneNumber,
-                Email = Email,
-                Password = Password
+                Email = Email
             };
         }
     }
