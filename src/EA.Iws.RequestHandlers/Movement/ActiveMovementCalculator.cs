@@ -11,9 +11,9 @@
     internal class ActiveMovementCalculator : IActiveMovementCalculator
     {
         private readonly IwsContext context;
-        private readonly IActiveMovement activeMovement;
+        private readonly ActiveMovement activeMovement;
 
-        public ActiveMovementCalculator(IwsContext context, IActiveMovement activeMovement)
+        public ActiveMovementCalculator(IwsContext context, ActiveMovement activeMovement)
         {
             this.context = context;
             this.activeMovement = activeMovement;

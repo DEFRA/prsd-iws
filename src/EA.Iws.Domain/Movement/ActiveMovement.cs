@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
-    using EA.Prsd.Core;
     using System;
+    using Prsd.Core;
 
-    public class ActiveMovement : IActiveMovement
+    public class ActiveMovement
     {
         public bool IsActive(Movement movement)
         {

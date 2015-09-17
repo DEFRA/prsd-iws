@@ -6,7 +6,7 @@
     using NotificationApplication;
     using NotificationAssessment;
 
-    public class MovementFactory : IMovementFactory
+    public class MovementFactory
     {
         public Movement Create(NotificationApplication notificationApplication, 
             NotificationAssessment notificationAssessment, 

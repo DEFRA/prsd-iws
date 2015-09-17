@@ -14,7 +14,7 @@
     {
         private readonly Movement movement;
         private readonly MovementReceipt movementReceipt;
-        private readonly MovementReceiptService service;
+        private readonly MovementReceived service;
 
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private static readonly DateTime MovementDate = new DateTime(2015, 12, 1);
@@ -28,7 +28,7 @@
             movement = new Movement(notification, 1);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
             movementReceipt = new MovementReceipt(AfterMovementDate);
-            service = new MovementReceiptService();
+            service = new MovementReceived();
         }
 
         [Fact]

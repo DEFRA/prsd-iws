@@ -10,12 +10,12 @@
     internal class MovementQuantityCalculator : IMovementQuantityCalculator
     {
         private readonly IwsContext context;
-        private readonly IMovementReceiptService movementReceiptService;
+        private readonly MovementReceived movementReceived;
 
-        public MovementQuantityCalculator(IwsContext context, IMovementReceiptService movementReceiptService)
+        public MovementQuantityCalculator(IwsContext context, MovementReceived movementReceivedService)
         {
             this.context = context;
-            this.movementReceiptService = movementReceiptService;
+            this.movementReceived = movementReceivedService;
         }
 
         public async Task<decimal> TotalQuantityReceivedAsync(Guid notificationId)
@@ -24,7 +24,7 @@
                     m.NotificationApplicationId == notificationId)
                 .ToListAsync();
 
-            return movements.Where(m => movementReceiptService.IsReceived(m))
+            return movements.Where(m => movementReceived.IsReceived(m))
                 .Sum(m => m.Receipt.Quantity.Value);
         }
 

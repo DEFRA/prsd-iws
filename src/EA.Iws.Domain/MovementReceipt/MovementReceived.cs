@@ -4,7 +4,7 @@
     using Core.MovementReceipt;
     using Movement;
 
-    public class MovementReceiptService : IMovementReceiptService
+    public class MovementReceived
     {
         public bool IsReceived(Movement movement)
         {

@@ -12,9 +12,9 @@
     public class CreateMovementForNotificationByIdHandler : IRequestHandler<CreateMovementForNotificationById, Guid>
     {
         private readonly IwsContext context;
-        private readonly IMovementFactory movementFactory;
+        private readonly MovementFactory movementFactory;
 
-        public CreateMovementForNotificationByIdHandler(IwsContext context, IMovementFactory movementFactory)
+        public CreateMovementForNotificationByIdHandler(IwsContext context, MovementFactory movementFactory)
         {
             this.context = context;
             this.movementFactory = movementFactory;

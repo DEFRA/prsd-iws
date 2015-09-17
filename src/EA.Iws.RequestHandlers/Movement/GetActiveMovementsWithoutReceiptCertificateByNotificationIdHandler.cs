@@ -6,30 +6,37 @@
     using System.Threading.Tasks;
     using Core.Movement;
     using DataAccess;
+    using Domain.Movement;
     using Prsd.Core;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Movement = Domain.Movement.Movement;
 
     internal class GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler : IRequestHandler<GetActiveMovementsWithoutReceiptCertificateByNotificationId, IList<MovementData>>
     {
         private readonly IwsContext context;
         private readonly IMap<Movement, MovementData> mapper;
+        private readonly ActiveMovement activeMovement;
 
-        public GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(IwsContext context, IMap<Movement, MovementData> mapper)
+        public GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(IwsContext context, 
+            IMap<Movement, MovementData> mapper,
+            ActiveMovement activeMovement)
         {
             this.context = context;
             this.mapper = mapper;
+            this.activeMovement = activeMovement;
         }
 
         public async Task<IList<MovementData>> HandleAsync(GetActiveMovementsWithoutReceiptCertificateByNotificationId message)
         {
-            var movements = await context.Movements.Where(m => m.NotificationApplicationId == message.Id
-                && m.Date.HasValue
-                && m.Date <= SystemTime.UtcNow).ToArrayAsync();
+            var movements = await context.Movements
+                .Where(m => m.NotificationApplicationId == message.Id)
+                .ToArrayAsync();
 
-            return movements.Select(mapper.Map).ToArray();
+            return movements
+                .Where(m => activeMovement.IsActive(m))
+                .Select(mapper.Map)
+                .ToArray();
         }
     }
 }

@@ -28,7 +28,7 @@
             Context.NotificationApplications.Add(NotificationApplication);
             Context.Movements.Add(Movement);
 
-            service = new MovementQuantityCalculator(Context, new MovementReceiptService());
+            service = new MovementQuantityCalculator(Context, new MovementReceived());
         }
 
         [Fact]

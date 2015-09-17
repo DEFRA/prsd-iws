@@ -40,15 +40,16 @@
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
             builder.RegisterType<WasteCodeCopy>().AsSelf();
+            builder.RegisterType<MovementFactory>().AsSelf();
+            builder.RegisterType<MovementReceived>().AsSelf();
+            builder.RegisterType<ActiveMovement>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<NotificationMovementService>().As<INotificationMovementService>();
-            builder.RegisterType<MovementFactory>().As<IMovementFactory>();
             builder.RegisterType<ActiveMovementCalculator>().As<IActiveMovementCalculator>();
-            builder.RegisterType<MovementReceiptService>().As<IMovementReceiptService>();
             builder.RegisterType<MovementQuantityCalculator>().As<IMovementQuantityCalculator>();
         }
     }

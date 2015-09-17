@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.MovementReceipt;
+    using Domain.Movement;
     using Prsd.Core;
     using RequestHandlers.Mappings.Movement;
     using RequestHandlers.Movement;
@@ -19,7 +20,11 @@
 
         public GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandlerTests()
         {
-            handler = new GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(Context, new MovementMap());
+            handler = new GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(
+                Context, 
+                new MovementMap(),
+                new ActiveMovement());
+
             SystemTime.Freeze(MiddleDate);
 
             notificationMovement = new TestableMovement

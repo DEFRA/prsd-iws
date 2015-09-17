@@ -49,7 +49,7 @@
             handler = new GetMovementReceiptSummaryDataByMovementIdHandler(
                 Context, 
                 new ActiveMovementCalculator(Context, new ActiveMovement()), 
-                new MovementQuantityCalculator(Context, new MovementReceiptService()));
+                new MovementQuantityCalculator(Context, new MovementReceived()));
         }
 
         [Fact]
