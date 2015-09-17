@@ -16,25 +16,22 @@
     {
         private readonly IwsContext context;
         private readonly IMap<Movement, MovementData> mapper;
-        private readonly ActiveMovement activeMovement;
+        private readonly ActiveMovementCalculator activeMovementCalculator;
 
         public GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(IwsContext context, 
             IMap<Movement, MovementData> mapper,
-            ActiveMovement activeMovement)
+            ActiveMovementCalculator activeMovementCalculator)
         {
             this.context = context;
             this.mapper = mapper;
-            this.activeMovement = activeMovement;
+            this.activeMovementCalculator = activeMovementCalculator;
         }
 
         public async Task<IList<MovementData>> HandleAsync(GetActiveMovementsWithoutReceiptCertificateByNotificationId message)
         {
-            var movements = await context.Movements
-                .Where(m => m.NotificationApplicationId == message.Id)
-                .ToArrayAsync();
+            var movements = await context.GetMovementsForNotificationAsync(message.Id);
 
-            return movements
-                .Where(m => activeMovement.IsActive(m))
+            return activeMovementCalculator.ActiveMovements(movements)
                 .Select(mapper.Map)
                 .ToArray();
         }

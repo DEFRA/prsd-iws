@@ -7,28 +7,34 @@
     using Domain.Movement;
     using Domain.MovementReceipt;
     using Prsd.Core.Mediator;
+    using RequestHandlers.Movement;
     using Requests.MovementReceipt;
 
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
     {
         private readonly IwsContext context;
-        private readonly IActiveMovementCalculator activeMovements;
-        private readonly IMovementQuantityCalculator movementQuantity;
+        private readonly ActiveMovementCalculator activeMovementCalculator;
+        private readonly MovementQuantityCalculator movementQuantityCalculator;
 
         public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context, 
-            IActiveMovementCalculator activeMovementsService,
-            IMovementQuantityCalculator movementQuantityCalculator)
+            ActiveMovementCalculator activeMovementCalculator,
+            MovementQuantityCalculator movementQuantityCalculator)
         {
             this.context = context;
-            this.activeMovements = activeMovementsService;
-            this.movementQuantity = movementQuantityCalculator;
+            this.activeMovementCalculator = activeMovementCalculator;
+            this.movementQuantityCalculator = movementQuantityCalculator;
         }
 
         public async Task<MovementReceiptSummaryData> HandleAsync(GetMovementReceiptSummaryDataByMovementId message)
         {
-            var movement = await context.Movements.SingleAsync(m => m.Id == message.Id);
-            
-            var financialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == movement.NotificationApplicationId);
+            var movement = await context
+                .Movements.SingleAsync(m => m.Id == message.Id);
+
+            var relatedMovements = await context
+                .GetMovementsForNotificationAsync(movement.NotificationApplicationId);
+
+            var financialGuarantee = await context
+                .FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == movement.NotificationApplicationId);
 
             var data = new MovementReceiptSummaryData
             {
@@ -37,9 +43,10 @@
                 NotificationNumber = movement.NotificationApplication.NotificationNumber,
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
-                CurrentActiveLoads = await activeMovements.TotalActiveMovementsAsync(movement.NotificationApplicationId),
-                QuantitySoFar = await movementQuantity.TotalQuantityReceivedAsync(movement.NotificationApplicationId),
-                QuantityRemaining = await movementQuantity.TotalQuantityRemainingAsync(movement.NotificationApplicationId),
+                CurrentActiveLoads = activeMovementCalculator.TotalActiveMovements(relatedMovements),
+                QuantitySoFar = movementQuantityCalculator.QuantityReceived(relatedMovements),
+                QuantityRemaining = movementQuantityCalculator
+                    .QuantityRemaining(movement.NotificationApplication.ShipmentInfo, relatedMovements),
                 DisplayUnit = movement.NotificationApplication.ShipmentInfo.Units
             };
 

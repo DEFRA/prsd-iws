@@ -1,14 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.MovementReceipt
 {
-    using EA.Iws.Domain.Movement;
-    using EA.Iws.Domain.MovementReceipt;
-    using EA.Iws.RequestHandlers.Movement;
-    using EA.Iws.RequestHandlers.MovementReceipt;
-    using EA.Iws.Requests.MovementReceipt;
-    using EA.Iws.TestHelpers.DomainFakes;
-    using EA.Prsd.Core;
     using System;
     using System.Threading.Tasks;
+    using Core.Shared;
+    using Domain.Movement;
+    using Prsd.Core;
+    using RequestHandlers.MovementReceipt;
+    using Requests.MovementReceipt;
+    using TestHelpers.DomainFakes;
     using Xunit;
 
     public class GetMovementReceiptSummaryDataByMovementIdHandlerTests : TestBase
@@ -22,7 +21,7 @@
         {
             shipmentInfo = new TestableShipmentInfo();
             shipmentInfo.Quantity = 50;
-            shipmentInfo.Units = Core.Shared.ShipmentQuantityUnits.Kilograms;
+            shipmentInfo.Units = ShipmentQuantityUnits.Kilograms;
 
             financialGuarantee = new TestableFinancialGuarantee
             {
@@ -35,6 +34,7 @@
             NotificationApplication.NotificationNumber = "GB 00010 6103";
 
             Movement.Number = 1;
+            Movement.Units = ShipmentQuantityUnits.Kilograms;
             Movement.Receipt = new TestableMovementReceipt
             {
                 Date = new DateTime(2015, 9, 1),
@@ -47,9 +47,9 @@
             Context.FinancialGuarantees.Add(financialGuarantee);
 
             handler = new GetMovementReceiptSummaryDataByMovementIdHandler(
-                Context, 
-                new ActiveMovementCalculator(Context, new ActiveMovement()), 
-                new MovementQuantityCalculator(Context, new MovementReceived()));
+                Context,
+                new ActiveMovementCalculator(),
+                new MovementQuantityCalculator(new ReceivedMovementCalculator()));
         }
 
         [Fact]
@@ -93,17 +93,20 @@
                 new TestableMovement
                 {
                     NotificationApplicationId = NotificationId,
-                    Date = new DateTime(2014, 9, 7)
+                    Date = new DateTime(2014, 9, 7),
+                    Units = ShipmentQuantityUnits.Kilograms
                 },
                 new TestableMovement
                 {
                     NotificationApplicationId = NotificationId,
-                    Date = new DateTime(2014, 11, 15)
+                    Date = new DateTime(2014, 11, 15),
+                    Units = ShipmentQuantityUnits.Kilograms
                 },
                 new TestableMovement
                 {
                     NotificationApplicationId = NotificationId,
-                    Date = new DateTime(2015, 2, 4)
+                    Date = new DateTime(2015, 2, 4),
+                    Units = ShipmentQuantityUnits.Kilograms
                 }
             });
 
@@ -135,7 +138,7 @@
         {
             var result = await handler.HandleAsync(getRequest());
 
-            Assert.Equal(Core.Shared.ShipmentQuantityUnits.Kilograms, result.DisplayUnit);
+            Assert.Equal(ShipmentQuantityUnits.Kilograms, result.DisplayUnit);
         }
     }
 }

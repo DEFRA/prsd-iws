@@ -46,7 +46,7 @@
             handler = new GetMovementProgressInformationHandler(
                 Context, 
                 new MovementMap(), 
-                new ActiveMovementCalculator(Context, new ActiveMovement()));
+                new ActiveMovementCalculator());
         }
 
         [Fact]

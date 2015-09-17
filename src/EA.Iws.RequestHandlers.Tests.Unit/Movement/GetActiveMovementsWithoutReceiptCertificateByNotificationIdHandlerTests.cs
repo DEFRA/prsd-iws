@@ -23,7 +23,7 @@
             handler = new GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(
                 Context, 
                 new MovementMap(),
-                new ActiveMovement());
+                new ActiveMovementCalculator());
 
             SystemTime.Freeze(MiddleDate);
 

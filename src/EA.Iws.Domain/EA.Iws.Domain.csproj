@@ -68,13 +68,12 @@
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
-    <Compile Include="MovementReceipt\IMovementQuantityCalculator.cs" />
     <Compile Include="MovementReceipt\MovementReceipt.cs" />
-    <Compile Include="MovementReceipt\MovementReceived.cs" />
-    <Compile Include="Movement\ActiveMovement.cs" />
-    <Compile Include="Movement\IActiveMovementCalculator.cs" />
+    <Compile Include="Movement\ActiveMovementCalculator.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />
+    <Compile Include="Movement\MovementQuantityCalculator.cs" />
+    <Compile Include="Movement\ReceivedMovementCalculator.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />

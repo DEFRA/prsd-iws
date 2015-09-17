@@ -14,7 +14,7 @@
     {
         private readonly Movement movement;
         private readonly MovementReceipt movementReceipt;
-        private readonly MovementReceived service;
+        private readonly ReceivedMovementCalculator receivedMovementCalculator;
 
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private static readonly DateTime MovementDate = new DateTime(2015, 12, 1);
@@ -28,7 +28,7 @@
             movement = new Movement(notification, 1);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
             movementReceipt = new MovementReceipt(AfterMovementDate);
-            service = new MovementReceived();
+            receivedMovementCalculator = new ReceivedMovementCalculator();
         }
 
         [Fact]
@@ -162,7 +162,7 @@
 
             movement.Receipt.SetQuantity(5, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms);
 
-            Assert.True(service.IsReceived(movement));
+            Assert.True(receivedMovementCalculator.IsReceived(movement));
         }
 
         [Fact]
@@ -170,7 +170,7 @@
         {
             movement.Receive(AfterMovementDate);
 
-            Assert.False(service.IsReceived(movement));
+            Assert.False(receivedMovementCalculator.IsReceived(movement));
         }
 
         [Fact]
@@ -180,7 +180,7 @@
 
             movement.Reject(AnyString);
 
-            Assert.False(service.IsReceived(movement));
+            Assert.False(receivedMovementCalculator.IsReceived(movement));
         }
     }
 }
