@@ -3,11 +3,15 @@
     using System.Linq;
     using Core.Shared;
     using Domain.NotificationApplication;
+    using Formatters;
     using NotificationType = Domain.NotificationApplication.NotificationType;
 
     internal class GeneralViewModel
     {
-        public GeneralViewModel(NotificationApplication notification)
+        public GeneralViewModel(NotificationApplication notification,
+            DateTimeFormatter dateTimeFormatter,
+            QuantityFormatter quantityFormatter,
+            PhysicalCharacteristicsFormatter physicalCharacteristicsFormatter)
         {
             Number = notification.NotificationNumber;
             IsDisposal = notification.NotificationType.Equals(NotificationType.Disposal);
@@ -37,9 +41,9 @@
             }
 
             IntendedNumberOfShipments = notification.ShipmentInfo.NumberOfShipments.ToString();
-            FirstDeparture = notification.ShipmentInfo.FirstDate.ToString("dd.MM.yy");
-            LastDeparture = notification.ShipmentInfo.LastDate.ToString("dd.MM.yy");
-            SetIntendedQuantityFields(notification.ShipmentInfo);
+            FirstDeparture = dateTimeFormatter.DateTimeToDocumentFormatString(notification.ShipmentInfo.FirstDate);
+            LastDeparture = dateTimeFormatter.DateTimeToDocumentFormatString(notification.ShipmentInfo.LastDate);
+            SetIntendedQuantityFields(notification.ShipmentInfo, quantityFormatter);
 
             var hasSpecialHandlingRequirements = notification.HasSpecialHandlingRequirements;
             if (!hasSpecialHandlingRequirements.HasValue)
@@ -55,7 +59,9 @@
 
             PackagingTypes = GetPackagingInfo(notification);
 
-            PhysicalCharacteristics = GetPhysicalCharacteristics(notification);
+            PhysicalCharacteristics =
+                physicalCharacteristicsFormatter.PhysicalCharacteristicsToCommaDelimitedString(
+                    notification.PhysicalCharacteristics);
         }
 
         private static string GetPackagingInfo(NotificationApplication notification)
@@ -78,47 +84,32 @@
             return pistring;
         }
 
-        private static string GetPhysicalCharacteristics(NotificationApplication notification)
-        {
-            var pcstring = string.Empty;
-            var pclist = notification.PhysicalCharacteristics.OrderBy(c => c.PhysicalCharacteristic.Value).ToList();
-
-            for (int i = 0; i < notification.PhysicalCharacteristics.Count(); i++)
-            {
-                pcstring = pcstring + (pclist[i].PhysicalCharacteristic != PhysicalCharacteristicType.Other
-                    ? pclist[i].PhysicalCharacteristic.Value.ToString()
-                    : pclist[i].PhysicalCharacteristic.Value + "(" + pclist[i].OtherDescription + ")");
-
-                if (i < (notification.PhysicalCharacteristics.Count() - 1))
-                {
-                    pcstring = pcstring + ", ";
-                }
-            }
-
-            return pcstring;
-        }
-
-        private void SetIntendedQuantityFields(ShipmentInfo shipmentInfo)
+        private void SetIntendedQuantityFields(ShipmentInfo shipmentInfo, QuantityFormatter quantityFormatter)
         {
             IntendedQuantityTonnes = string.Empty;
             IntendedQuantityKg = string.Empty;
             IntendedQuantityM3 = string.Empty;
             IntendedQuantityLtrs = string.Empty;
-            if (shipmentInfo.Units == ShipmentQuantityUnits.CubicMetres)
+
+            var quantity = quantityFormatter.QuantityToStringWithUnits(shipmentInfo.Quantity,
+                        shipmentInfo.Units);
+
+            switch (shipmentInfo.Units)
             {
-                IntendedQuantityM3 = shipmentInfo.Quantity.ToString("G29");
-            }
-            else if (shipmentInfo.Units == ShipmentQuantityUnits.Kilograms)
-            {
-                IntendedQuantityKg = shipmentInfo.Quantity.ToString("G29") + " kg";
-            }
-            else if (shipmentInfo.Units == ShipmentQuantityUnits.Tonnes)
-            {
-                IntendedQuantityTonnes = shipmentInfo.Quantity.ToString("G29");
-            }
-            else if (shipmentInfo.Units == ShipmentQuantityUnits.Litres)
-            {
-                IntendedQuantityLtrs = shipmentInfo.Quantity.ToString("G29") + " Ltrs";
+                case ShipmentQuantityUnits.Kilograms:
+                    IntendedQuantityKg = quantity;
+                    break;
+                case ShipmentQuantityUnits.CubicMetres:
+                    IntendedQuantityM3 = quantity;
+                    break;
+                case ShipmentQuantityUnits.Litres:
+                    IntendedQuantityLtrs = quantity;
+                    break;
+                case ShipmentQuantityUnits.Tonnes:
+                    IntendedQuantityTonnes = quantity;
+                    break;
+                default:
+                    break;
             }
         }
 

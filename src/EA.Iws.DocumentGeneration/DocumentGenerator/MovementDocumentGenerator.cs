@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
-    using System;
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
     using Domain.Movement;
@@ -14,21 +13,15 @@
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
-                    ApplyUnitStrikethroughFormatting(document, movement);
-
-                    var movementDocument = new MovementDocument(movement);
+                    var movementDocument = new MovementDocument(document, movement);
 
                     movementDocument.Merge();
+
+                    MergeFieldLocator.RemoveDataSourceSettingFromMergedDocument(document);
                 }
 
                 return memoryStream.ToArray();
             }
-        }
-
-        private void ApplyUnitStrikethroughFormatting(WordprocessingDocument document, Movement movement)
-        {
-            //TODO: Apply strike-through formatting to the units for the actual quantity field
-            throw new NotImplementedException();
         }
     }
 }

@@ -115,6 +115,18 @@
         {
             get { return base.Carriers.ToList(); }
             set { CarriersCollection = value; }
+        }
+
+        public new bool? HasSpecialHandlingRequirements
+        {
+            get { return base.HasSpecialHandlingRequirements; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.HasSpecialHandlingRequirements, value, this); }
+        }
+
+        public new IList<PhysicalCharacteristicsInfo> PhysicalCharacteristics
+        {
+            get { return base.PhysicalCharacteristics.ToList(); }
+            set { PhysicalCharacteristicsCollection = value; }
         } 
     }
 }

@@ -1,34 +1,41 @@
 ﻿namespace EA.Iws.DocumentGeneration.Movement
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using DocumentFormat.OpenXml.Packaging;
     using Domain.Movement;
+    using Formatters;
+    using MovementBlocks;
 
     public class MovementDocument
     {
-        private ICollection<IDocumentBlock> movementBlocks = new List<IDocumentBlock>(); 
+        private readonly WordprocessingDocument document;
+        private readonly MovementBlockCollection movementBlockCollection;
 
-        public MovementDocument(Movement movement)
+        public MovementDocument(WordprocessingDocument document, Movement movement)
         {
-            GetBlocks(movement);
+            this.document = document;
+            var fields = MergeFieldLocator.GetMergeRuns(document);
+            movementBlockCollection = new MovementBlockCollection(fields, movement);
+            ApplyUnitStrikethrough(movement);
         }
 
         public void Merge()
         {
-            foreach (var block in movementBlocks.OrderBy(b => b.OrdinalPosition))
+            foreach (var block in movementBlockCollection.OrderBy(b => b.OrdinalPosition))
             {
                 block.Merge();
             }
 
             //TODO: Generate carrier annex
-            throw new NotImplementedException();
         }
 
-        private void GetBlocks(Movement movement)
+        private void ApplyUnitStrikethrough(Movement movement)
         {
-            //TODO: Add correct blocks
-            throw new NotImplementedException();
+            if (movement != null && movement.DisplayUnits.HasValue)
+            {
+                ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, 
+                    movement.DisplayUnits.Value);
+            }
         }
     }
 }

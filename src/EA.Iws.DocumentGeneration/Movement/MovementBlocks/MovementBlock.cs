@@ -1,31 +1,30 @@
-﻿namespace EA.Iws.DocumentGeneration.NotificationBlocks
+﻿namespace EA.Iws.DocumentGeneration.Movement.MovementBlocks
 {
     using System.Collections.Generic;
-    using Domain.NotificationApplication;
+    using Domain.Movement;
     using Formatters;
     using Mapper;
     using ViewModels;
 
-    internal class GeneralBlock : IDocumentBlock
+    public class MovementBlock : IDocumentBlock
     {
-        private readonly GeneralViewModel data;
+        private readonly MovementViewModel data;
 
-        public GeneralBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public MovementBlock(IList<MergeField> mergeFields, Movement movement)
         {
-            CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, "General");
-
-            data = new GeneralViewModel(notification, 
-                new DateTimeFormatter(), 
+            CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
+            data = new MovementViewModel(movement,
+                new DateTimeFormatter(),
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter());
         }
 
         public string TypeName
         {
-            get { return "General"; }
+            get { return "Movement"; }
         }
 
-        public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
+        public ICollection<MergeField> CorrespondingMergeFields { get; set; }
 
         public void Merge()
         {
@@ -39,7 +38,7 @@
 
         public int OrdinalPosition
         {
-            get { return 3; }
+            get { return 0; }
         }
     }
 }

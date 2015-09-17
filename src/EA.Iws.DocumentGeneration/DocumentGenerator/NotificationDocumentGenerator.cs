@@ -6,6 +6,7 @@
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
     using Domain.NotificationApplication;
+    using Formatters;
     using NotificationBlocks;
 
     public class NotificationDocumentGenerator : INotificationDocumentGenerator
@@ -19,7 +20,7 @@
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
-                    DocumentFormatter.ApplyFormatting(document, notification.ShipmentInfo.Units);
+                    ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, notification.ShipmentInfo);
 
                     // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
