@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Domain.Movement;
     using Prsd.Core;
     using RequestHandlers.Mappings.Movement;
     using RequestHandlers.Movement;
@@ -42,7 +43,10 @@
             Context.Movements.Add(movement);
             Context.FinancialGuarantees.Add(financialGuarantee);
 
-            handler = new GetMovementProgressInformationHandler(Context, new MovementMap(), new ActiveMovementsService(Context));
+            handler = new GetMovementProgressInformationHandler(
+                Context, 
+                new MovementMap(), 
+                new ActiveMovementCalculator(Context, new ActiveMovement()));
         }
 
         [Fact]

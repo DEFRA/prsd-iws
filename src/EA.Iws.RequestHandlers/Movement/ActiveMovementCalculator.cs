@@ -8,13 +8,15 @@
     using EA.Prsd.Core;
     using System.Threading.Tasks;
 
-    internal class ActiveMovementsService : IActiveMovementsService
+    internal class ActiveMovementCalculator : IActiveMovementCalculator
     {
         private readonly IwsContext context;
+        private readonly IActiveMovement activeMovement;
 
-        public ActiveMovementsService(IwsContext context)
+        public ActiveMovementCalculator(IwsContext context, IActiveMovement activeMovement)
         {
             this.context = context;
+            this.activeMovement = activeMovement;
         }
 
         public async Task<int> TotalActiveMovementsAsync(Guid notificationId)
@@ -23,12 +25,7 @@
                     m.NotificationApplicationId == notificationId)
                 .ToListAsync();
 
-            return movements.Where(m => IsMovementActive(m)).Count();
-        }
-
-        public bool IsMovementActive(Movement movement)
-        {
-            return movement.Date.HasValue && movement.Date < SystemTime.UtcNow;
+            return movements.Where(m => activeMovement.IsActive(m)).Count();
         }
     }
 }

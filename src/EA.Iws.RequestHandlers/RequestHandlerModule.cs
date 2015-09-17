@@ -47,7 +47,7 @@
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<NotificationMovementService>().As<INotificationMovementService>();
             builder.RegisterType<MovementFactory>().As<IMovementFactory>();
-            builder.RegisterType<ActiveMovementsService>().As<IActiveMovementsService>();
+            builder.RegisterType<ActiveMovementCalculator>().As<IActiveMovementCalculator>();
             builder.RegisterType<MovementReceiptService>().As<IMovementReceiptService>();
             builder.RegisterType<MovementQuantityCalculator>().As<IMovementQuantityCalculator>();
         }

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Movement
 {
+    using EA.Iws.Domain.Movement;
     using EA.Iws.RequestHandlers.Movement;
     using EA.Iws.TestHelpers.DomainFakes;
     using EA.Prsd.Core;
@@ -10,16 +11,16 @@
     using System.Threading.Tasks;
     using Xunit;
 
-    public class ActiveMovementsServiceTests : TestBase
+    public class ActiveMovementCalculatorTests : TestBase
     {
-        private readonly ActiveMovementsService service;
+        private readonly ActiveMovementCalculator service;
 
-        public ActiveMovementsServiceTests()
+        public ActiveMovementCalculatorTests()
         {
             Context.Movements.Add(Movement);
             Context.NotificationApplications.Add(NotificationApplication);
 
-            service = new ActiveMovementsService(Context);
+            service = new ActiveMovementCalculator(Context, new ActiveMovement());
         }
 
         [Fact]

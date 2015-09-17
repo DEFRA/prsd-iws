@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    public interface IActiveMovementsService
+    public interface IActiveMovementCalculator
     {
         Task<int> TotalActiveMovementsAsync(Guid notificationId);
-        bool IsMovementActive(Movement movement);
     }
 }

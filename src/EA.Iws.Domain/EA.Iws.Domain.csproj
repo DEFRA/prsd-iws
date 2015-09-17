@@ -72,7 +72,9 @@
     <Compile Include="MovementReceipt\IMovementReceiptService.cs" />
     <Compile Include="MovementReceipt\MovementReceipt.cs" />
     <Compile Include="MovementReceipt\MovementReceiptService.cs" />
-    <Compile Include="Movement\IActiveMovementsService.cs" />
+    <Compile Include="Movement\ActiveMovement.cs" />
+    <Compile Include="Movement\IActiveMovement.cs" />
+    <Compile Include="Movement\IActiveMovementCalculator.cs" />
     <Compile Include="Movement\IMovementFactory.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />

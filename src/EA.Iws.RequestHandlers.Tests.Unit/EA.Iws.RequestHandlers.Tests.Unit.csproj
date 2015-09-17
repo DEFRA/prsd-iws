@@ -112,7 +112,7 @@
     <Compile Include="MovementReceipt\MovementQuantityCalculatorTests.cs" />
     <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementIdHandlerTests.cs" />
-    <Compile Include="Movement\ActiveMovementsServiceTests.cs" />
+    <Compile Include="Movement\ActiveMovementCalculatorTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandlerTests.cs" />

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.MovementReceipt
 {
+    using EA.Iws.Domain.Movement;
     using EA.Iws.Domain.MovementReceipt;
     using EA.Iws.RequestHandlers.Movement;
     using EA.Iws.RequestHandlers.MovementReceipt;
@@ -47,14 +48,15 @@
 
             handler = new GetMovementReceiptSummaryDataByMovementIdHandler(
                 Context, 
-                new ActiveMovementsService(Context), 
+                new ActiveMovementCalculator(Context, new ActiveMovement()), 
                 new MovementQuantityCalculator(Context, new MovementReceiptService()));
         }
 
         [Fact]
         public async Task MovementNotExists_Throws()
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(new GetMovementReceiptSummaryDataByMovementId(Guid.Empty)));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => 
+                handler.HandleAsync(new GetMovementReceiptSummaryDataByMovementId(Guid.Empty)));
         }
 
         [Fact]

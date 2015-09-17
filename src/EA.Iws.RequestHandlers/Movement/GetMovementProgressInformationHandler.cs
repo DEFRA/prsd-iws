@@ -15,11 +15,11 @@
     {
         private readonly IwsContext context;
         private readonly IMap<Movement, ProgressData> progressMap;
-        private readonly IActiveMovementsService activeMovements;
+        private readonly IActiveMovementCalculator activeMovements;
 
         public GetMovementProgressInformationHandler(IwsContext context, 
             IMap<Movement, ProgressData> progressMap,
-            IActiveMovementsService activeMovementsService)
+            IActiveMovementCalculator activeMovementsService)
         {
             this.context = context;
             this.progressMap = progressMap;

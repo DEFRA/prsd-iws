@@ -12,11 +12,11 @@
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
     {
         private readonly IwsContext context;
-        private readonly IActiveMovementsService activeMovements;
+        private readonly IActiveMovementCalculator activeMovements;
         private readonly IMovementQuantityCalculator movementQuantity;
 
         public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context, 
-            IActiveMovementsService activeMovementsService,
+            IActiveMovementCalculator activeMovementsService,
             IMovementQuantityCalculator movementQuantityCalculator)
         {
             this.context = context;
