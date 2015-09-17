@@ -1,12 +1,7 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
-    using EA.Iws.Domain.NotificationApplication;
-    using EA.Prsd.Core.Domain;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using NotificationApplication;
+    using Prsd.Core.Domain;
 
     public class MovementCarrier : Entity
     {

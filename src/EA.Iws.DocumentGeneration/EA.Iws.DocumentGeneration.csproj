@@ -70,6 +70,7 @@
     <Compile Include="MergeFieldType.cs" />
     <Compile Include="Movement\MovementBlocks\MovementBlock.cs" />
     <Compile Include="Movement\MovementBlocks\MovementBlockCollection.cs" />
+    <Compile Include="Movement\MovementBlocks\MovementCarrierBlock.cs" />
     <Compile Include="RunLocator.cs" />
     <Compile Include="ViewModels\MovementViewModel.cs" />
     <Compile Include="Movement\MovementDocument.cs" />
@@ -99,6 +100,8 @@
     <Compile Include="ViewModels\CustomsOfficeViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\ImporterViewModel.cs" />
+    <Compile Include="ViewModels\MovementCarrierDetails.cs" />
+    <Compile Include="ViewModels\MovementCarriersViewModel.cs" />
     <Compile Include="ViewModels\NumberOfAnnexesAndInstructionsAndToCViewModel.cs" />
     <Compile Include="ViewModels\OperationViewModel.cs" />
     <Compile Include="ViewModels\FacilityViewModel.cs" />

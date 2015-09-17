@@ -22,7 +22,8 @@
                 new ProducerBlock(mergeFields, notification),
                 new WasteCodesBlock(mergeFields, notification),
                 new WasteCompositionBlock(mergeFields, notification),
-                new OperationBlock(mergeFields, notification)
+                new OperationBlock(mergeFields, notification),
+                new MovementCarrierBlock(mergeFields, movement)
             };
         }
 
