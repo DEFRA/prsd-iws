@@ -37,6 +37,7 @@
             builder.RegisterAssemblyTypes(ThisAssembly).AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
+            builder.RegisterType<TransportRouteToTransportRouteCopy>().AsSelf();
             builder.RegisterType<WasteCodeCopy>().AsSelf();
             builder.RegisterType<MovementFactory>().AsSelf();
             builder.RegisterType<ActiveMovements>().AsSelf();

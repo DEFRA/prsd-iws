@@ -49,6 +49,7 @@
             this.WasteCodes = new TestDbSet<WasteCode>();
             this.Movements = new TestDbSet<Domain.Movement.Movement>();
             this.AddressBooks = new TestDbSet<Domain.AddressBook.AddressBook>();
+            this.TransportRoutes = new TestDbSet<Domain.TransportRoute.TransportRoute>();
             this.ShipmentInfos = new TestDbSet<ShipmentInfo>();
         }
 

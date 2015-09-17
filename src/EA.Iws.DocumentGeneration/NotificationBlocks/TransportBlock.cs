@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using Domain.NotificationApplication;
+    using Domain.TransportRoute;
     using Mapper;
     using ViewModels;
 
@@ -11,10 +11,10 @@
         private const string TransportFields = "Transport";
         private readonly TransportViewModel data;
 
-        public TransportBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public TransportBlock(IList<MergeField> mergeFields, TransportRoute transportRoute)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new TransportViewModel(notification);
+            data = new TransportViewModel(transportRoute);
         }
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }

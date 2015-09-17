@@ -81,28 +81,6 @@
 
             Property(x => x.CreatedDate).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
 
-            HasMany(
-                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<TransitState>>(
-                    "TransitStatesCollection"))
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
-            HasOptional(x => x.StateOfExport)
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
-            HasOptional(x => x.StateOfImport)
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
-            HasOptional(x => x.ExitCustomsOffice)
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
-            HasOptional(x => x.EntryCustomsOffice)
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
             Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
 
             Ignore(x => x.MeansOfTransport);

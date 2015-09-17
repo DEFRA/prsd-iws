@@ -11,9 +11,6 @@
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.StateOfExport;
-    using Requests.StateOfImport;
-    using Requests.TransitState;
     using Requests.TransportRoute;
 
     internal class GetTransportRouteSummaryForNotificationHandler : IRequestHandler<GetTransportRouteSummaryForNotification, TransportRouteData>
@@ -36,13 +33,15 @@
 
         public async Task<TransportRouteData> HandleAsync(GetTransportRouteSummaryForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            await context.CheckNotificationAccess(message.NotificationId);
+
+            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == message.NotificationId);
 
             return new TransportRouteData
             {
-                StateOfExportData = stateOfExportMapper.Map(notification.StateOfExport),
-                StateOfImportData = stateOfImportMapper.Map(notification.StateOfImport),
-                TransitStatesData = transitStateMapper.Map(notification.TransitStates)
+                StateOfExportData = stateOfExportMapper.Map(transportRoute.StateOfExport),
+                StateOfImportData = stateOfImportMapper.Map(transportRoute.StateOfImport),
+                TransitStatesData = transitStateMapper.Map(transportRoute.TransitStates)
             };
         }
     }

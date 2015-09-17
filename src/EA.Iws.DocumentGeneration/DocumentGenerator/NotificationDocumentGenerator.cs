@@ -6,6 +6,7 @@
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
     using Domain.NotificationApplication;
+    using Domain.TransportRoute;
     using Formatters;
     using NotificationBlocks;
 
@@ -14,7 +15,7 @@
         private string TocText { get; set; }
         private string InstructionsText { get; set; }
 
-        public byte[] GenerateNotificationDocument(NotificationApplication notification, ShipmentInfo shipmentInfo)
+        public byte[] GenerateNotificationDocument(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("NotificationMergeTemplate.docx"))
             {
@@ -25,7 +26,7 @@
                     // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 
-                    var blocks = GetBlocks(notification, shipmentInfo, mergeFields);
+                    var blocks = GetBlocks(notification, shipmentInfo, transportRoute, mergeFields);
 
                     foreach (var block in blocks)
                     {
@@ -60,7 +61,7 @@
             }
         }
 
-        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, IList<MergeField> mergeFields)
+        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, IList<MergeField> mergeFields)
         {
             return new List<IDocumentBlock>
             {
@@ -74,10 +75,10 @@
                 new CarrierBlock(mergeFields, notification),
                 new SpecialHandlingBlock(mergeFields, notification),
                 new WasteCompositionBlock(mergeFields, notification),
-                new TransportBlock(mergeFields, notification),
+                new TransportBlock(mergeFields, transportRoute),
                 new WasteCodesBlock(mergeFields, notification),
-                new CustomsOfficeBlock(mergeFields, notification),
-                new TransitStatesBlock(mergeFields, notification)
+                new CustomsOfficeBlock(mergeFields, transportRoute),
+                new TransitStatesBlock(mergeFields, transportRoute)
             };
         }
     }

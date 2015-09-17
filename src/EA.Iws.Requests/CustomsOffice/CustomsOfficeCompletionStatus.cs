@@ -5,7 +5,5 @@
     public class CustomsOfficeCompletionStatus
     {
         public CustomsOffices CustomsOfficesRequired { get; set; }
-
-        public CustomsOffices CustomsOfficesCompleted { get; set; }
     }
 }

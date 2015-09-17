@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Domain.NotificationApplication;
-    using FakeItEasy.Configuration;
     using TestHelpers.Helpers;
     using TransportRoute;
     using Xunit;
@@ -13,14 +11,13 @@
     {
         private readonly IList<Guid> guids;
 
-        private readonly NotificationApplication notification;
+        private readonly TransportRoute transportRoute;
         private readonly IList<Country> countries;
         private readonly IList<TransitState> transitStates; 
 
         public NotificationTransportRouteTests()
         {
-            this.notification = new NotificationApplication(Guid.Empty, NotificationType.Disposal,
-                UKCompetentAuthority.England, 650);
+            this.transportRoute = new TransportRoute(Guid.Empty);
 
             guids = new List<Guid>
             {
@@ -52,7 +49,7 @@
         [Fact]
         public void SetStateOfExport_WithNullState_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => notification.SetStateOfExportForNotification(null));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null));
         }
 
         [Fact]
@@ -65,17 +62,17 @@
                 competentAuthority,
                 exitPoint);
 
-            notification.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
 
-            notification.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
 
-            Assert.Equal(stateOfExport.Country.Id, notification.StateOfExport.Country.Id);
+            Assert.Equal(stateOfExport.Country.Id, transportRoute.StateOfExport.Country.Id);
         }
 
         [Fact]
         public void SetStateOfImport_WithNullState_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => notification.SetStateOfImportForNotification(null));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null));
         }
 
         [Fact]
@@ -88,11 +85,11 @@
                 competentAuthority,
                 entryPoint);
 
-            notification.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport);
 
-            notification.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport);
 
-            Assert.Equal(stateOfImport.CompetentAuthority.Id, notification.StateOfImport.CompetentAuthority.Id);
+            Assert.Equal(stateOfImport.CompetentAuthority.Id, transportRoute.StateOfImport.CompetentAuthority.Id);
         }
 
         [Fact]
@@ -116,10 +113,10 @@
                 importExitPoint);
 
             // Act
-            notification.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => notification.SetStateOfImportForNotification(stateOfImport));
+            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport));
         }
 
         [Fact]
@@ -143,11 +140,11 @@
                 importExitPoint);
 
             // Act
-            notification.SetStateOfExportForNotification(stateOfExport);
-            notification.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport);
 
             // Assert
-            Assert.Equal(importCountry.Id, notification.StateOfImport.Country.Id);
+            Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
         }
 
         [Theory]
@@ -205,9 +202,9 @@
                 GetTestEntryOrExitPoint(country, new Guid("E8E2D79A-F1CA-4928-9ED8-AAF961E2B7B7")),
                 1);
 
-            notification.AddTransitStateToNotification(transitState);
+            transportRoute.AddTransitStateToNotification(transitState);
 
-            Assert.True(notification.TransitStates.Count() == 1);
+            Assert.True(transportRoute.TransitStates.Count() == 1);
         }
 
         [Fact]
@@ -219,7 +216,7 @@
                 GetTestEntryOrExitPoint(countries[0], guids[2]),
                 1);
 
-            notification.AddTransitStateToNotification(firstTransitState);
+            transportRoute.AddTransitStateToNotification(firstTransitState);
 
             var secondTransitState = new TransitState(countries[1],
                 GetTestCompetentAuthority(countries[1]),
@@ -228,7 +225,7 @@
                 1);
 
             Assert.Throws<InvalidOperationException>(
-                () => notification.AddTransitStateToNotification(secondTransitState));
+                () => transportRoute.AddTransitStateToNotification(secondTransitState));
         }
 
         [Fact]
@@ -240,7 +237,7 @@
                 GetTestEntryOrExitPoint(countries[0], guids[2]),
                 1);
 
-            notification.AddTransitStateToNotification(firstTransitState);
+            transportRoute.AddTransitStateToNotification(firstTransitState);
 
             var thirdTransitState = new TransitState(countries[1],
                 GetTestCompetentAuthority(countries[1]),
@@ -248,7 +245,7 @@
                 GetTestEntryOrExitPoint(countries[1], guids[4]),
                 3);
 
-            Assert.Throws<InvalidOperationException>(() => notification.AddTransitStateToNotification(thirdTransitState));
+            Assert.Throws<InvalidOperationException>(() => transportRoute.AddTransitStateToNotification(thirdTransitState));
         }
 
         [Fact]
@@ -263,7 +260,7 @@
                 GetTestEntryOrExitPoint(firstCountry, guids[2]),
                 1);
 
-            notification.AddTransitStateToNotification(firstTransitState);
+            transportRoute.AddTransitStateToNotification(firstTransitState);
 
             var secondTransitState = new TransitState(secondCountry,
                 GetTestCompetentAuthority(secondCountry),
@@ -271,9 +268,9 @@
                 GetTestEntryOrExitPoint(secondCountry, guids[4]),
                 2);
 
-            notification.AddTransitStateToNotification(secondTransitState);
+            transportRoute.AddTransitStateToNotification(secondTransitState);
 
-            Assert.Equal(2, notification.TransitStates.Count());
+            Assert.Equal(2, transportRoute.TransitStates.Count());
         }
 
         [Fact]
@@ -289,7 +286,7 @@
                 GetTestEntryOrExitPoint(firstCountry, guids[2]),
                 1);
 
-            notification.AddTransitStateToNotification(firstTransitState);
+            transportRoute.AddTransitStateToNotification(firstTransitState);
 
             var secondTransitState = new TransitState(secondCountry,
                 GetTestCompetentAuthority(secondCountry),
@@ -297,7 +294,7 @@
                 GetTestEntryOrExitPoint(secondCountry, guids[4]),
                 2);
 
-            notification.AddTransitStateToNotification(secondTransitState);
+            transportRoute.AddTransitStateToNotification(secondTransitState);
 
             var thirdTransitState = new TransitState(thirdCountry,
                 GetTestCompetentAuthority(thirdCountry),
@@ -305,15 +302,15 @@
                 GetTestEntryOrExitPoint(thirdCountry, guids[6]),
                 3);
 
-            notification.AddTransitStateToNotification(thirdTransitState);
+            transportRoute.AddTransitStateToNotification(thirdTransitState);
 
-            Assert.Equal(3, notification.TransitStates.Count());
+            Assert.Equal(3, transportRoute.TransitStates.Count());
         }
 
         [Fact]
         public void GetAvailableTransitStatePositions_WhereNotificationIsEmpty_ReturnsOne()
         {
-            int[] result = notification.GetAvailableTransitStatePositions();
+            int[] result = transportRoute.GetAvailableTransitStatePositions();
 
             Assert.Equal(1, result[0]);
         }
@@ -329,9 +326,9 @@
                 GetTestEntryOrExitPoint(firstCountry, guids[2]),
                 1);
 
-            notification.AddTransitStateToNotification(firstTransitState);
+            transportRoute.AddTransitStateToNotification(firstTransitState);
 
-            int[] result = notification.GetAvailableTransitStatePositions();
+            int[] result = transportRoute.GetAvailableTransitStatePositions();
 
             Assert.Equal(2, result[0]);
         }
@@ -348,7 +345,7 @@
                 GetTestEntryOrExitPoint(firstCountry, guids[2]),
                 1);
 
-            notification.AddTransitStateToNotification(firstTransitState);
+            transportRoute.AddTransitStateToNotification(firstTransitState);
 
             var secondTransitState = new TransitState(secondCountry,
                 GetTestCompetentAuthority(secondCountry),
@@ -356,9 +353,9 @@
                 GetTestEntryOrExitPoint(secondCountry, guids[4]),
                 2);
 
-            notification.AddTransitStateToNotification(secondTransitState);
+            transportRoute.AddTransitStateToNotification(secondTransitState);
 
-            int[] result = notification.GetAvailableTransitStatePositions();
+            int[] result = transportRoute.GetAvailableTransitStatePositions();
 
             Assert.Equal(3, result[0]);
         }
@@ -366,11 +363,11 @@
         [Fact]
         public void UpdateTransitState_SetToSameCountryAsExisting_Throws()
         {
-            notification.AddTransitStateToNotification(transitStates[0]);
+            transportRoute.AddTransitStateToNotification(transitStates[0]);
 
-            notification.AddTransitStateToNotification(transitStates[1]);
+            transportRoute.AddTransitStateToNotification(transitStates[1]);
 
-            Assert.Throws<InvalidOperationException>(() => notification.UpdateTransitStateForNotification(transitStates[1].Id, countries[0], 
+            Assert.Throws<InvalidOperationException>(() => transportRoute.UpdateTransitStateForNotification(transitStates[1].Id, countries[0], 
                 CompetentAuthorityFactory.Create(guids[0], countries[0]),
                 EntryOrExitPointFactory.Create(guids[0], countries[0]),
                 EntryOrExitPointFactory.Create(guids[1], countries[0]), null));
@@ -379,11 +376,11 @@
         [Fact]
         public void UpdateTransitState_SetToSameOrdinalPositionAsExisting_Throws()
         {
-            notification.AddTransitStateToNotification(transitStates[0]);
+            transportRoute.AddTransitStateToNotification(transitStates[0]);
 
-            notification.AddTransitStateToNotification(transitStates[1]);
+            transportRoute.AddTransitStateToNotification(transitStates[1]);
 
-            Assert.Throws<InvalidOperationException>(() => notification.UpdateTransitStateForNotification(transitStates[1].Id, countries[1],
+            Assert.Throws<InvalidOperationException>(() => transportRoute.UpdateTransitStateForNotification(transitStates[1].Id, countries[1],
                 CompetentAuthorityFactory.Create(guids[0], countries[1]),
                 EntryOrExitPointFactory.Create(guids[0], countries[1]),
                 EntryOrExitPointFactory.Create(guids[1], countries[1]), 1));
@@ -392,16 +389,16 @@
         [Fact]
         public void UpdateTransitState_ValidUpdate_SetsCorrectValue()
         {
-            notification.AddTransitStateToNotification(transitStates[0]);
+            transportRoute.AddTransitStateToNotification(transitStates[0]);
 
-            notification.AddTransitStateToNotification(transitStates[1]);
+            transportRoute.AddTransitStateToNotification(transitStates[1]);
 
-            notification.UpdateTransitStateForNotification(transitStates[1].Id, countries[1],
+            transportRoute.UpdateTransitStateForNotification(transitStates[1].Id, countries[1],
                 CompetentAuthorityFactory.Create(guids[0], countries[1]),
                 EntryOrExitPointFactory.Create(guids[0], countries[1]),
                 EntryOrExitPointFactory.Create(guids[2], countries[1]), null);
 
-            Assert.Equal(guids[2], notification.TransitStates.Single(ts => ts.Id == transitStates[1].Id).ExitPoint.Id);
+            Assert.Equal(guids[2], transportRoute.TransitStates.Single(ts => ts.Id == transitStates[1].Id).ExitPoint.Id);
         }
 
         private EntryOrExitPoint GetTestEntryOrExitPoint(Country country, Guid? id = null)

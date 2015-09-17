@@ -11,24 +11,24 @@
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
+    using Domain.TransportRoute;
     using Prsd.Core;
-    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Copy;
 
     internal class CopyToNotificationHandler : IRequestHandler<CopyToNotification, Guid>
     {
         private readonly IwsContext context;
-        private readonly IUserContext userContext;
         private readonly NotificationToNotificationCopy copier;
+        private readonly TransportRouteToTransportRouteCopy transportRouteCopier;
 
         public CopyToNotificationHandler(IwsContext context,
-            IUserContext userContext,
-            NotificationToNotificationCopy copier)
+            NotificationToNotificationCopy copier, 
+            TransportRouteToTransportRouteCopy transportRouteCopier)
         {
             this.context = context;
-            this.userContext = userContext;
             this.copier = copier;
+            this.transportRouteCopier = transportRouteCopier;
         }
 
         public async Task<Guid> HandleAsync(CopyToNotification message)
@@ -110,6 +110,9 @@
             // Add financial guarantee
             context.FinancialGuarantees.Add(FinancialGuarantee.Create(clone.Id));
 
+            // Transport route
+            await CloneTransportRoute(sourceId, clone.Id);
+
             return clone;
         }
 
@@ -186,6 +189,22 @@
         protected virtual DbContextTransaction BeginTransaction()
         {
             return context.Database.BeginTransaction(IsolationLevel.ReadCommitted);
+        }
+
+        private async Task<TransportRoute> CloneTransportRoute(Guid sourceNotificationId, Guid destinationNotificationId)
+        {
+            var transportRoute =
+                await context.TransportRoutes.SingleAsync(p => p.NotificationId == sourceNotificationId);
+
+            var destinationTransportRoute = new TransportRoute(destinationNotificationId);
+
+            transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute);
+
+            context.TransportRoutes.Add(destinationTransportRoute);
+
+            await context.SaveChangesAsync();
+
+            return destinationTransportRoute;
         }
     }
 }

@@ -9,7 +9,7 @@
 
     public class NotificationCustomsOfficeTests
     {
-        private readonly NotificationApplication notification;
+        private readonly TransportRoute notification;
         private readonly Country europeanCountry1;
         private readonly Country europeanCountry2;
         private readonly Country europeanCountry3;
@@ -33,7 +33,7 @@
 
         public NotificationCustomsOfficeTests()
         {
-            notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 520);
+            notification = new TransportRoute(Guid.Empty);
 
             europeanCountry1 = CreateCountry(new Guid("FB908C44-7AF1-4894-A0A5-860338468DFA"), true);
             europeanCountry2 = CreateCountry(new Guid("8057CD56-A12C-4C7D-BED4-B12D98DCADAB"), true);
@@ -59,7 +59,7 @@
         [Fact]
         public void CustomsOfficesRequired_TransitStatesEmpty_TransitStatesNotSet()
         {
-            var result = notification.GetCustomsOfficesRequired();
+            var result = notification.GetRequiredCustomsOffices();
 
             Assert.Equal(CustomsOffices.TransitStatesNotSet, result);
         }
@@ -73,7 +73,7 @@
             SetNotificationStateOfExport(stateOfExport);
             SetNotificationStateOfImport(stateOfImport);
 
-            var result = notification.GetCustomsOfficesRequired();
+            var result = notification.GetRequiredCustomsOffices();
 
             Assert.Equal(CustomsOffices.None, result);
         }
@@ -88,7 +88,7 @@
             SetNotificationStateOfExport(stateOfExport);
             SetNotificationStateOfImport(stateOfImport);
 
-            var result = notification.GetCustomsOfficesRequired();
+            var result = notification.GetRequiredCustomsOffices();
 
             Assert.Equal(CustomsOffices.Exit, result);
         }
@@ -109,7 +109,7 @@
             SetNotificationStateOfExport(stateOfExport);
             SetNotificationStateOfImport(stateOfImport);
 
-            var result = notification.GetCustomsOfficesRequired();
+            var result = notification.GetRequiredCustomsOffices();
 
             Assert.Equal(CustomsOffices.EntryAndExit, result);
         }
@@ -134,7 +134,7 @@
             notification.AddTransitStateToNotification(europeanTransitState);
             notification.AddTransitStateToNotification(nonEuropeantransitState);
 
-            var result = notification.GetCustomsOfficesRequired();
+            var result = notification.GetRequiredCustomsOffices();
 
             Assert.Equal(CustomsOffices.EntryAndExit, result);
         }
@@ -155,7 +155,7 @@
             SetNotificationStateOfExport(stateOfExport);
             SetNotificationStateOfImport(stateOfImport);
 
-            var result = notification.GetCustomsOfficesRequired();
+            var result = notification.GetRequiredCustomsOffices();
 
             Assert.Equal(CustomsOffices.Exit, result);
         }
@@ -171,7 +171,7 @@
             SetNotificationStateOfExport(stateOfExport);
             SetNotificationStateOfImport(stateOfImport);
 
-            var result = notification.GetCustomsOfficesRequired();
+            var result = notification.GetRequiredCustomsOffices();
 
             Assert.Equal(CustomsOffices.None, result);
         }
@@ -298,50 +298,14 @@
             Assert.Equal(europeanCountry2.Id, notification.EntryCustomsOffice.Country.Id);
         }
 
-        [Fact]
-        public void GetCustomsOfficesCompleted_NeitherCompleted_ReturnsNone()
-        {
-            var result = notification.GetCustomsOfficesCompleted();
-
-            Assert.Equal(CustomsOffices.None, result);
-        }
-
-        [Fact]
-        public void GetCustomsOfficesCompleted_ExitCompleted_ReturnsExit()
-        {
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ExitCustomsOffice, exitCustomsOffice, notification);
-            var result = notification.GetCustomsOfficesCompleted();
-
-            Assert.Equal(CustomsOffices.Exit, result);
-        }
-
-        [Fact]
-        public void GetCustomsOfficesCompleted_BothCompleted_ReturnsEntryAndExit()
-        {
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ExitCustomsOffice, exitCustomsOffice, notification);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.EntryCustomsOffice, entryCustomsOffice, notification);
-            var result = notification.GetCustomsOfficesCompleted();
-
-            Assert.Equal(CustomsOffices.EntryAndExit, result);
-        }
-
-        [Fact]
-        public void GetCustomsOfficesCompleted_EntryCompleted_ReturnsEntry()
-        {
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.EntryCustomsOffice, entryCustomsOffice, notification);
-            var result = notification.GetCustomsOfficesCompleted();
-
-            Assert.Equal(CustomsOffices.Entry, result);
-        }
-
         private void SetNotificationStateOfExport(StateOfExport stateOfExport)
         {
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.StateOfExport, stateOfExport, notification);
+            ObjectInstantiator<TransportRoute>.SetProperty(x => x.StateOfExport, stateOfExport, notification);
         }
 
         private void SetNotificationStateOfImport(StateOfImport stateOfImport)
         {
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.StateOfImport, stateOfImport, notification);
+            ObjectInstantiator<TransportRoute>.SetProperty(x => x.StateOfImport, stateOfImport, notification);
         }
 
         private Country CreateCountry(Guid id, bool isEuMember)

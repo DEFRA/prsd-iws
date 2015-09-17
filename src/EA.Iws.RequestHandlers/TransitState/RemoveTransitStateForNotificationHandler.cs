@@ -17,9 +17,11 @@
 
         public async Task<bool> HandleAsync(RemoveTransitStateForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            await context.CheckNotificationAccess(message.NotificationId);
 
-            notification.RemoveTransitState(message.TransitStateId);
+            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == message.NotificationId);
+
+            transportRoute.RemoveTransitState(message.TransitStateId);
 
             await context.SaveChangesAsync();
 

@@ -74,13 +74,13 @@ BEGIN
 		LEFT JOIN (SELECT TOP (1) NotificationId, WAI.Id FROM [Notification].[WasteType] WT INNER JOIN [Notification].[WasteAdditionalInformation] WAI ON WT.Id = WAI.WasteTypeId WHERE NotificationId = @NotificationId) AS WA 
 		ON N.Id = WA.NotificationId
 
-		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[StateOfExport] WHERE NotificationId = @NotificationId) AS SE 
+		LEFT JOIN (SELECT TOP (1) TR.NotificationId, SE.Id FROM [Notification].[StateOfExport] SE INNER JOIN [Notification].[TransportRoute] TR ON TR.[Id] = SE.[TransportRouteId] WHERE TR.NotificationId = @NotificationId) AS SE 
 		ON N.Id = SE.NotificationId 
 
-		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[StateOfImport] WHERE NotificationId = @NotificationId) AS SI 
+		LEFT JOIN (SELECT TOP (1) TR.NotificationId, SI.Id FROM [Notification].[StateOfImport] SI INNER JOIN [Notification].[TransportRoute] TR ON TR.[Id] = SI.[TransportRouteId] WHERE TR.NotificationId = @NotificationId) AS SI 
 		ON N.Id = SI.NotificationId
 
-		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[TransitState] WHERE NotificationId = @NotificationId) AS TS 
+		LEFT JOIN (SELECT TOP (1) TR.NotificationId, TS.Id FROM [Notification].[TransitState] TS INNER JOIN [Notification].[TransportRoute] TR ON TR.[Id] = TS.[TransportRouteId] WHERE TR.NotificationId = @NotificationId) AS TS 
 		ON N.Id = TS.NotificationId
 	WHERE
 		N.Id = @NotificationId;
@@ -124,17 +124,17 @@ BEGIN
 		ECO.Id AS EntryCustomsOfficeId,
 		XCO.Id AS ExitCustomsOfficeId
 	FROM
-		[Notification].[Notification] N
-		LEFT JOIN [Notification].[EntryCustomsOffice] ECO on N.Id = ECO.NotificationId
-		LEFT JOIN [Notification].[ExitCustomsOffice] XCO on N.Id = XCO.NotificationId
-		LEFT JOIN [Notification].[StateOfExport] SE on N.Id = SE.NotificationId 
-		LEFT JOIN [Notification].[StateOfImport] SI on N.Id = SI.NotificationId
-		LEFT JOIN [Notification].[TransitState] TS on N.Id = TS.NotificationId
+		[Notification].[TransportRoute] TR
+		LEFT JOIN [Notification].[EntryCustomsOffice] ECO on TR.Id = ECO.TransportRouteId
+		LEFT JOIN [Notification].[ExitCustomsOffice] XCO on TR.Id = XCO.TransportRouteId
+		LEFT JOIN [Notification].[StateOfExport] SE on TR.Id = SE.TransportRouteId 
+		LEFT JOIN [Notification].[StateOfImport] SI on TR.Id = SI.TransportRouteId
+		LEFT JOIN [Notification].[TransitState] TS on TR.Id = TS.TransportRouteId
 		LEFT JOIN [Lookup].Country ImportCountry on SI.CountryId = ImportCountry.Id
 		LEFT JOIN [Lookup].Country ExportCountry on SE.CountryId = ExportCountry.Id
 		LEFT JOIN [Lookup].Country TransitCountry on TS.CountryId = TransitCountry.Id
 	WHERE
-		N.Id = @NotificationId;
+		TR.NotificationId = @NotificationId;
 
 END
 GO

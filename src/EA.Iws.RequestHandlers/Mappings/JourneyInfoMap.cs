@@ -1,7 +1,10 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using System.Linq;
     using Core.Notification;
+    using DataAccess;
     using Domain.NotificationApplication;
+    using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Requests.CustomsOffice;
     using Requests.Notification;
@@ -9,15 +12,18 @@
 
     internal class JourneyInfoMap : IMap<NotificationApplication, JourneyInfo>
     {
-        private readonly IMap<NotificationApplication, StateOfExportWithTransportRouteData> transportRouteMap;
-        private readonly IMap<NotificationApplication, EntryCustomsOfficeAddData> customsOfficeEntryMap;
-        private readonly IMap<NotificationApplication, ExitCustomsOfficeAddData> customsOfficeExitMap;
+        private readonly IwsContext context;
+        private readonly IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap;
+        private readonly IMap<TransportRoute, EntryCustomsOfficeAddData> customsOfficeEntryMap;
+        private readonly IMap<TransportRoute, ExitCustomsOfficeAddData> customsOfficeExitMap;
 
         public JourneyInfoMap(
-            IMap<NotificationApplication, StateOfExportWithTransportRouteData> transportRouteMap,
-            IMap<NotificationApplication, EntryCustomsOfficeAddData> customsOfficeEntryMap,
-            IMap<NotificationApplication, ExitCustomsOfficeAddData> customsOfficeExitMap)
+            IwsContext context,
+            IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap,
+            IMap<TransportRoute, EntryCustomsOfficeAddData> customsOfficeEntryMap,
+            IMap<TransportRoute, ExitCustomsOfficeAddData> customsOfficeExitMap)
         {
+            this.context = context;
             this.transportRouteMap = transportRouteMap;
             this.customsOfficeEntryMap = customsOfficeEntryMap;
             this.customsOfficeExitMap = customsOfficeExitMap;
@@ -25,12 +31,14 @@
 
         public JourneyInfo Map(NotificationApplication notification)
         {
+            var transportRoute = context.TransportRoutes.SingleOrDefault(p => p.NotificationId == notification.Id);
+
             return new JourneyInfo
             {
                 NotificationId = notification.Id,
-                TransportRoute = transportRouteMap.Map(notification),
-                EntryCustomsOffice = customsOfficeEntryMap.Map(notification),
-                ExitCustomsOffice = customsOfficeExitMap.Map(notification)
+                TransportRoute = transportRouteMap.Map(transportRoute),
+                EntryCustomsOffice = customsOfficeEntryMap.Map(transportRoute),
+                ExitCustomsOffice = customsOfficeExitMap.Map(transportRoute)
             };
         }
     }

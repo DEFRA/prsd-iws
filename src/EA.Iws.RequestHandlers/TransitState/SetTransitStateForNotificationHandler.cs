@@ -20,7 +20,15 @@
 
         public async Task<Guid> HandleAsync(SetTransitStateForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            await context.CheckNotificationAccess(message.NotificationId);
+
+            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.NotificationId);
+
+            if (transportRoute == null)
+            {
+                transportRoute = new TransportRoute(message.NotificationId);
+                context.TransportRoutes.Add(transportRoute);
+            }
 
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
             var competentAuthority =
@@ -31,7 +39,7 @@
             Guid result;
             if (message.TransitStateId.HasValue)
             {
-                notification.UpdateTransitStateForNotification(message.TransitStateId.Value,
+                transportRoute.UpdateTransitStateForNotification(message.TransitStateId.Value,
                     country, 
                     competentAuthority, 
                     entryPoint, 
@@ -42,10 +50,10 @@
             }
             else
             {
-                var ordinalPosition = notification.GetAvailableTransitStatePositions().First();
+                var ordinalPosition = transportRoute.GetAvailableTransitStatePositions().First();
                 var transitState = new TransitState(country, competentAuthority, entryPoint, exitPoint, ordinalPosition);
                 result = transitState.Id;
-                notification.AddTransitStateToNotification(transitState);
+                transportRoute.AddTransitStateToNotification(transitState);
             }
 
             await context.SaveChangesAsync();

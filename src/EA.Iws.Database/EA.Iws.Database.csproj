@@ -119,6 +119,7 @@
     <Content Include="scripts\Update\Sprint16\20150922-100000-remove-display-units-column.sql" />
     <Content Include="scripts\Update\Sprint16\20150922-160000-fix-any-missed-conversions.sql" />
     <Content Include="scripts\Update\Sprint17\20150923-170000-add-address-book.sql" />
+    <Content Include="scripts\Update\Sprint17\20150924-094000-create-transport-route-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

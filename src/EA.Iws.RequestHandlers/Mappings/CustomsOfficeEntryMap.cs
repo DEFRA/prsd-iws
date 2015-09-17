@@ -5,12 +5,11 @@
     using Core.Shared;
     using DataAccess;
     using Domain;
-    using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Requests.CustomsOffice;
 
-    internal class CustomsOfficeEntryMap : IMap<NotificationApplication, EntryCustomsOfficeAddData>
+    internal class CustomsOfficeEntryMap : IMap<TransportRoute, EntryCustomsOfficeAddData>
     {
         private readonly IwsContext context;
         private readonly IMap<Country, CountryData> countryMap;
@@ -23,15 +22,15 @@
             this.countryMap = countryMap;
             this.customsOfficeMap = customsOfficeMap;
         }
- 
-        public EntryCustomsOfficeAddData Map(NotificationApplication source)
+
+        public EntryCustomsOfficeAddData Map(TransportRoute source)
         {
             var countries = context.Countries.Where(c => c.IsEuropeanUnionMember).OrderBy(c => c.Name).ToArray();
  
             return new EntryCustomsOfficeAddData
             {
                 Countries = countries.Select(countryMap.Map).ToArray(),
-                CustomsOfficesRequired = source.GetCustomsOfficesRequired(),
+                CustomsOfficesRequired = source.GetRequiredCustomsOffices(),
                 CustomsOfficeData = customsOfficeMap.Map(source.EntryCustomsOffice)
             };
         }

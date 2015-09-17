@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.NotificationBlocks
 {
     using System.Collections.Generic;
-    using System.Linq;
-    using DocumentFormat.OpenXml.Wordprocessing;
-    using Domain.NotificationApplication;
+    using Domain.TransportRoute;
     using Mapper;
     using ViewModels;
 
@@ -14,10 +12,10 @@
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
         //public IList<MergeField> AnnexMergeFields { get; private set; }
 
-        public CustomsOfficeBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public CustomsOfficeBlock(IList<MergeField> mergeFields, TransportRoute transportRoute)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new CustomsOfficeViewModel(notification);
+            data = new CustomsOfficeViewModel(transportRoute);
 
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }

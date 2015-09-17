@@ -9,12 +9,11 @@
     using Core.TransportRoute;
     using DataAccess;
     using Domain;
-    using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Requests.StateOfExport;
 
-    internal class TransportRouteMap : IMap<NotificationApplication, StateOfExportWithTransportRouteData>
+    internal class TransportRouteMap : IMap<TransportRoute, StateOfExportWithTransportRouteData>
     {
         private readonly IwsContext context;
         private readonly IMap<StateOfImport, StateOfImportData> stateOfImportMapper;
@@ -41,9 +40,10 @@
             this.competentAuthorityMapper = competentAuthorityMapper;
         }
 
-        public StateOfExportWithTransportRouteData Map(NotificationApplication source)
+        public StateOfExportWithTransportRouteData Map(TransportRoute source)
         {
             var countries = context.Countries.OrderBy(c => c.Name).ToArray();
+            var notification = context.NotificationApplications.Single(n => n.Id == source.NotificationId);
 
             var data = new StateOfExportWithTransportRouteData
             {
@@ -56,8 +56,8 @@
             if (source.StateOfExport == null)
             {
                 data.StateOfExport = new StateOfExportData();
-            
-                var ukcompAuth = context.UnitedKingdomCompetentAuthorities.Single(ca => ca.Id == source.CompetentAuthority.Value);
+
+                var ukcompAuth = context.UnitedKingdomCompetentAuthorities.Single(ca => ca.Id == notification.CompetentAuthority.Value);
 
                 data.StateOfExport.Country = countryMapper.Map(countries.Single(c => c.Name == ukcompAuth.CountryName));
 

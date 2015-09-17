@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using RequestHandlers.TransitState;
@@ -26,11 +27,13 @@
             context = new TestIwsContext(userContext);
 
             var notification = NotificationApplicationFactory.Create(ExistingNotificationId);
+            var transport = new TransportRoute(ExistingNotificationId);
 
-            notification.AddTransitStateToNotification(TransitStateFactory.Create(ExistingTransitStateId, 
+            transport.AddTransitStateToNotification(TransitStateFactory.Create(ExistingTransitStateId, 
                 CountryFactory.Create(new Guid("3E7A0092-B6CB-46AD-ABCC-FB741EB6CF35")), 1));
 
             context.NotificationApplications.Add(notification);
+            context.TransportRoutes.Add(transport);
 
             handler = new RemoveTransitStateForNotificationHandler(context);
         }
@@ -58,7 +61,7 @@
             await
                 handler.HandleAsync(new RemoveTransitStateForNotification(ExistingNotificationId, ExistingTransitStateId));
 
-            Assert.Empty(context.NotificationApplications.Single(na => na.Id == ExistingNotificationId).TransitStates);
+            Assert.Empty(context.TransportRoutes.Single(p => p.NotificationId == ExistingNotificationId).TransitStates);
         }
     }
 }

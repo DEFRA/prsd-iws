@@ -9,6 +9,7 @@
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
+    using Domain.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;
@@ -45,16 +46,20 @@
             source = NotificationApplicationFactory.CreateCompleted(new Guid("0ED9A007-3C35-48A3-B008-9D5623FA5AD9"),
                 UserId,
                 context.Countries.ToArray(),
-                context.EntryOrExitPoints.ToArray(),
-                context.CompetentAuthorities.ToArray(),
                 context.WasteCodes.ToArray(),
                 SourceNumber);
 
+            var transportRoute = TransportRouteFactory.CreateCompleted(
+                new Guid("16CE4AE7-1FCF-4A04-84A3-9067DF24DEF6"), source.Id,
+                context.EntryOrExitPoints.ToArray(),
+                context.CompetentAuthorities.ToArray());
+
             destination = new NotificationApplication(UserId, DestinationNotificationType, DestinationCompetentAuthority, DestinationNumber);
             EntityHelper.SetEntityId(destination, new Guid("63581B29-EFB9-47F0-BCC3-E67382F4EAFA"));
-            handler = new CopyToNotificationHandler(context, userContext, new NotificationToNotificationCopy(new WasteCodeCopy()));
+            handler = new CopyToNotificationHandler(context, new NotificationToNotificationCopy(new WasteCodeCopy()), new TransportRouteToTransportRouteCopy());
             
             context.NotificationApplications.Add(source);
+            context.TransportRoutes.Add(transportRoute);
             context.NotificationApplications.Add(destination);
             context.SaveChanges();
 
@@ -143,19 +148,19 @@
         {
             var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
-            var copiedNotification = GetCopied();
-            var sourceNotification = GetSource();
+            var copiedTransport = GetCopiedTransportRoute();
+            var sourceTransport = GetSourceTransportRoute();
 
-            Assert.Equal(sourceNotification.StateOfExport.Country.Id, copiedNotification.StateOfExport.Country.Id);
-            Assert.Equal(sourceNotification.StateOfExport.CompetentAuthority.Id, copiedNotification.StateOfExport.CompetentAuthority.Id);
-            Assert.Equal(sourceNotification.StateOfExport.ExitPoint.Id, copiedNotification.StateOfExport.ExitPoint.Id);
+            Assert.Equal(sourceTransport.StateOfExport.Country.Id, copiedTransport.StateOfExport.Country.Id);
+            Assert.Equal(sourceTransport.StateOfExport.CompetentAuthority.Id, copiedTransport.StateOfExport.CompetentAuthority.Id);
+            Assert.Equal(sourceTransport.StateOfExport.ExitPoint.Id, copiedTransport.StateOfExport.ExitPoint.Id);
 
-            Assert.Equal(sourceNotification.StateOfImport.Country.Id, copiedNotification.StateOfImport.Country.Id);
-            Assert.Equal(sourceNotification.StateOfImport.CompetentAuthority.Id, copiedNotification.StateOfImport.CompetentAuthority.Id);
-            Assert.Equal(sourceNotification.StateOfImport.EntryPoint.Id, copiedNotification.StateOfImport.EntryPoint.Id);
+            Assert.Equal(sourceTransport.StateOfImport.Country.Id, copiedTransport.StateOfImport.Country.Id);
+            Assert.Equal(sourceTransport.StateOfImport.CompetentAuthority.Id, copiedTransport.StateOfImport.CompetentAuthority.Id);
+            Assert.Equal(sourceTransport.StateOfImport.EntryPoint.Id, copiedTransport.StateOfImport.EntryPoint.Id);
 
-            Assert.NotEqual(sourceNotification.StateOfImport.Id, copiedNotification.StateOfImport.Id);
-            Assert.NotEqual(sourceNotification.StateOfExport.Id, copiedNotification.StateOfExport.Id);
+            Assert.NotEqual(sourceTransport.StateOfImport.Id, copiedTransport.StateOfImport.Id);
+            Assert.NotEqual(sourceTransport.StateOfExport.Id, copiedTransport.StateOfExport.Id);
         }
 
         [Fact]
@@ -233,6 +238,16 @@
         private NotificationApplication GetSource()
         {
             return context.NotificationApplications.Single(n => n.Id == source.Id);
+        }
+
+        private TransportRoute GetSourceTransportRoute()
+        {
+            return context.TransportRoutes.Single(p => p.NotificationId == source.Id);
+        }
+
+        private TransportRoute GetCopiedTransportRoute()
+        {
+            return context.TransportRoutes.Single(n => n.NotificationId == destination.Id);
         }
 
         public void Dispose()

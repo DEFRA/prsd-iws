@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
+    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
@@ -22,8 +23,10 @@
         {
             var notification = await context.GetNotificationApplication(query.NotificationId);
             var shipmentInfo = await context.GetShipmentInfoAsync(query.NotificationId);
+            var transportRoute =
+                await context.TransportRoutes.SingleAsync(p => p.NotificationId == query.NotificationId);
 
-            return notificationDocumentGenerator.GenerateNotificationDocument(notification, shipmentInfo);
+            return notificationDocumentGenerator.GenerateNotificationDocument(notification, shipmentInfo, transportRoute);
         }
     }
 }

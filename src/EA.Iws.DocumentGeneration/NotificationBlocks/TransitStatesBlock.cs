@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using DocumentFormat.OpenXml.Wordprocessing;
-    using Domain.NotificationApplication;
+    using Domain.TransportRoute;
     using Mapper;
     using ViewModels;
 
@@ -15,10 +15,10 @@
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
-        public TransitStatesBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public TransitStatesBlock(IList<MergeField> mergeFields, TransportRoute transportRoute)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new TransitStateViewModel(notification.TransitStates.ToList());
+            data = new TransitStateViewModel(transportRoute.TransitStates.ToList());
 
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }

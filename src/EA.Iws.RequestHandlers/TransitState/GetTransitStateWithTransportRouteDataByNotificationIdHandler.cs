@@ -45,17 +45,19 @@
         public async Task<TransitStateWithTransportRouteData> HandleAsync(GetTransitStateWithTransportRouteDataByNotificationId message)
         {
             var countries = await context.Countries.ToArrayAsync();
-            var notification = await context.GetNotificationApplication(message.Id);
+            await context.CheckNotificationAccess(message.Id);
+
+            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == message.Id);
 
             var data = new TransitStateWithTransportRouteData
             {
                 Countries = countries.Select(countryMapper.Map).ToArray(),
-                StateOfExport = stateOfExportMapper.Map(notification.StateOfExport),
-                StateOfImport = stateOfImportMapper.Map(notification.StateOfImport),
-                TransitStates = notification.TransitStates.Select(transitStateMapper.Map).ToArray()
+                StateOfExport = stateOfExportMapper.Map(transportRoute.StateOfExport),
+                StateOfImport = stateOfImportMapper.Map(transportRoute.StateOfImport),
+                TransitStates = transportRoute.TransitStates.Select(transitStateMapper.Map).ToArray()
             };
 
-            var thisTransitState = notification.TransitStates.SingleOrDefault(ts => ts.Id == message.TransitStateId);
+            var thisTransitState = transportRoute.TransitStates.SingleOrDefault(ts => ts.Id == message.TransitStateId);
             if (thisTransitState != null)
             {
                 var competentAuthorities = await context.CompetentAuthorities

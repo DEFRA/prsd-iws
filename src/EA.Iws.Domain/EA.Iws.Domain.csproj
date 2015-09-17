@@ -154,8 +154,6 @@
     <Compile Include="UserAddress.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NotificationApplication\NotificationApplication.TransportRoute.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.CustomsOffice.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

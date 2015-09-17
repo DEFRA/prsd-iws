@@ -20,6 +20,13 @@
         public async Task<Guid> HandleAsync(SetStateOfExportForNotification message)
         {
             var notification = await context.GetNotificationApplication(message.NotificationId);
+            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.NotificationId);
+
+            if (transportRoute == null)
+            {
+                transportRoute = new TransportRoute(message.NotificationId);
+                context.TransportRoutes.Add(transportRoute);
+            }
 
             var ukcompAuth = await context.UnitedKingdomCompetentAuthorities.SingleAsync(ca => ca.Id == notification.CompetentAuthority.Value);
 
@@ -32,7 +39,7 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            notification.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
 
             await context.SaveChangesAsync();
 

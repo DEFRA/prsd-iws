@@ -6,7 +6,7 @@
 
     public class TransportViewModelTests
     {
-        private readonly TestableNotificationApplication notification = new TestableNotificationApplication
+        private readonly TestableTransportRoute transportRoute = new TestableTransportRoute
         {
             StateOfExport = new TestableStateOfExport
             {
@@ -25,7 +25,7 @@
         [Fact]
         public void ExportCountry()
         {
-            var model = new TransportViewModel(notification);
+            var model = new TransportViewModel(transportRoute);
 
             Assert.Equal(TestableCountry.UnitedKingdom.Name, model.ExportCountry);
         }
@@ -33,7 +33,7 @@
         [Fact]
         public void ExportCompetentAuthority()
         {
-            var model = new TransportViewModel(notification);
+            var model = new TransportViewModel(transportRoute);
 
             Assert.Equal(TestableCompetentAuthority.EnvironmentAgency.Code, model.ExportCompetentAuthority);
         }
@@ -41,7 +41,7 @@
         [Fact]
         public void ExportExitPoint()
         {
-            var model = new TransportViewModel(notification);
+            var model = new TransportViewModel(transportRoute);
 
             Assert.Equal(TestableEntryOrExitPoint.Dover.Name, model.ExitPoint);
         }
@@ -49,7 +49,7 @@
         [Fact]
         public void ImportCountry()
         {
-            var model = new TransportViewModel(notification);
+            var model = new TransportViewModel(transportRoute);
 
             Assert.Equal(TestableCountry.Switzerland.Name, model.ImportCountry);
         }
@@ -57,7 +57,7 @@
         [Fact]
         public void ImportCompetentAuthority()
         {
-            var model = new TransportViewModel(notification);
+            var model = new TransportViewModel(transportRoute);
 
             Assert.Equal(TestableCompetentAuthority.SwissAuthority.Code, model.ImportCompetentAuthority);
         }
@@ -65,7 +65,7 @@
         [Fact]
         public void ImportEntryPoint()
         {
-            var model = new TransportViewModel(notification);
+            var model = new TransportViewModel(transportRoute);
 
             Assert.Equal(TestableEntryOrExitPoint.Basel.Name, model.EntryPoint);
         }

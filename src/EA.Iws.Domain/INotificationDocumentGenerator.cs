@@ -2,6 +2,6 @@
 {
     public interface INotificationDocumentGenerator
     {
-        byte[] GenerateNotificationDocument(NotificationApplication.NotificationApplication notification, NotificationApplication.ShipmentInfo shipmentInfo);
+        byte[] GenerateNotificationDocument(NotificationApplication.NotificationApplication notification, NotificationApplication.ShipmentInfo shipmentInfo, TransportRoute.TransportRoute transportRoute);
     }
 }

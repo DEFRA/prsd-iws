@@ -73,6 +73,7 @@
     <Compile Include="DomainFakes\TestableStateOfExport.cs" />
     <Compile Include="DomainFakes\TestableTechnologyEmployed.cs" />
     <Compile Include="DomainFakes\TestableTransitState.cs" />
+    <Compile Include="DomainFakes\TestableTransportRoute.cs" />
     <Compile Include="DomainFakes\TestableWasteCode.cs" />
     <Compile Include="DomainFakes\TestableWasteCodeInfo.cs" />
     <Compile Include="DomainFakes\TestableWasteType.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Helpers\ExporterFactory.cs" />
     <Compile Include="Helpers\ProducerFactory.cs" />
     <Compile Include="Helpers\TransitStateFactory.cs" />
+    <Compile Include="Helpers\TransportRouteFactory.cs" />
     <Compile Include="Helpers\UserFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

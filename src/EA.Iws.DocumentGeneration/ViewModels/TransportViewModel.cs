@@ -1,26 +1,30 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
-    using Domain.NotificationApplication;
+    using Domain.TransportRoute;
 
     internal class TransportViewModel
     {
-        public TransportViewModel(NotificationApplication notification)
+        public TransportViewModel(TransportRoute transportRoute)
         {
-            ExportCountry = notification.StateOfExport.Country.Name;
-            ExportCompetentAuthority = notification.StateOfExport.CompetentAuthority.Code;
-            ExitPoint = notification.StateOfExport.ExitPoint.Name;
+            ExportCountry = transportRoute.StateOfExport.Country.Name;
+            ExportCompetentAuthority = transportRoute.StateOfExport.CompetentAuthority.Code;
+            ExitPoint = transportRoute.StateOfExport.ExitPoint.Name;
 
-            ImportCountry = notification.StateOfImport.Country.Name;
-            ImportCompetentAuthority = notification.StateOfImport.CompetentAuthority.Code;
-            EntryPoint = notification.StateOfImport.EntryPoint.Name;
+            ImportCountry = transportRoute.StateOfImport.Country.Name;
+            ImportCompetentAuthority = transportRoute.StateOfImport.CompetentAuthority.Code;
+            EntryPoint = transportRoute.StateOfImport.EntryPoint.Name;
         }
 
         public string ExportCountry { get; private set; }
+
         public string ExportCompetentAuthority { get; private set; }
+
         public string ExitPoint { get; private set; }
 
         public string ImportCountry { get; private set; }
+
         public string ImportCompetentAuthority { get; private set; }
+
         public string EntryPoint { get; private set; }
     }
 }

@@ -11,7 +11,6 @@
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
-    using Domain.TransportRoute;
     using NotificationType = Domain.NotificationApplication.NotificationType;
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
     using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
@@ -39,8 +38,6 @@
         public static NotificationApplication CreateCompleted(Guid id,
             Guid userId,
             IList<Country> countries,
-            IList<EntryOrExitPoint> entryOrExitPoints,
-            IList<CompetentAuthority> competentAuthorities,
             IList<WasteCode> wasteCodes,
             int number = 250)
         {
@@ -83,19 +80,6 @@
             {
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)
             });
-
-            var exitPoint =
-                entryOrExitPoints.OrderBy(ep => ep.Country.Name).First(ep => ep.Country.IsEuropeanUnionMember);
-            var stateOfExport = new StateOfExport(exitPoint.Country,
-                competentAuthorities.First(ca => ca.Country.Id == exitPoint.Country.Id), exitPoint);
-
-            var entryPoint = entryOrExitPoints.OrderBy(ep => ep.Country.Name)
-                .First(ep => ep.Country.IsEuropeanUnionMember && ep.Country.Id != exitPoint.Country.Id);
-            var stateOfImport = new StateOfImport(entryPoint.Country,
-                competentAuthorities.First(ca => ca.Country.Id == entryPoint.Country.Id), entryPoint);
-
-            notification.SetStateOfExportForNotification(stateOfExport);
-            notification.SetStateOfImportForNotification(stateOfImport);
 
             notification.SetWasteType(WasteType.CreateRdfWasteType(new[]
             {

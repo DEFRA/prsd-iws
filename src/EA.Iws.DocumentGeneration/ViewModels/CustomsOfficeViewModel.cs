@@ -1,32 +1,45 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
-    using System;
-    using Domain.NotificationApplication;
+    using Domain.TransportRoute;
 
     internal class CustomsOfficeViewModel
     {
-        public string EntryTitle { get; private set; }
-        public string ExitTitle { get; private set; }
-        public string EntryName { get; private set; }
-        public string ExitName { get; private set; }
-        public string EntryAddress { get; private set; }
-        public string ExitAddress { get; private set; }
-        public string EntryAnnexMessage { get; private set; }
-        public string ExitAnnexMessage { get; private set; }
-        public bool IsAnnexNeeded { get; private set; }
-
-        public CustomsOfficeViewModel(NotificationApplication notification)
+        public CustomsOfficeViewModel(TransportRoute transportRoute)
         {
-            EntryTitle = notification.EntryCustomsOffice != null ? "Entry customs office:" : string.Empty;
-            ExitTitle = notification.ExitCustomsOffice != null ? "Exit customs office:" : string.Empty;
-            EntryName = notification.EntryCustomsOffice != null ? notification.EntryCustomsOffice.Name : string.Empty;
-            ExitName = notification.ExitCustomsOffice != null ? notification.ExitCustomsOffice.Name : string.Empty;
-            EntryAddress = notification.EntryCustomsOffice != null ? notification.EntryCustomsOffice.Address : string.Empty;
-            ExitAddress = notification.ExitCustomsOffice != null ? notification.ExitCustomsOffice.Address : string.Empty;
+            EntryTitle = transportRoute.EntryCustomsOffice != null ? "Entry customs office:" : string.Empty;
+            ExitTitle = transportRoute.ExitCustomsOffice != null ? "Exit customs office:" : string.Empty;
+            EntryName = transportRoute.EntryCustomsOffice != null
+                ? transportRoute.EntryCustomsOffice.Name
+                : string.Empty;
+            ExitName = transportRoute.ExitCustomsOffice != null ? transportRoute.ExitCustomsOffice.Name : string.Empty;
+            EntryAddress = transportRoute.EntryCustomsOffice != null
+                ? transportRoute.EntryCustomsOffice.Address
+                : string.Empty;
+            ExitAddress = transportRoute.ExitCustomsOffice != null
+                ? transportRoute.ExitCustomsOffice.Address
+                : string.Empty;
             EntryAnnexMessage = string.Empty;
             ExitAnnexMessage = string.Empty;
-            SetIsAnnexNeeded(notification);
+            SetIsAnnexNeeded(transportRoute);
         }
+
+        public string EntryTitle { get; private set; }
+
+        public string ExitTitle { get; private set; }
+
+        public string EntryName { get; private set; }
+
+        public string ExitName { get; private set; }
+
+        public string EntryAddress { get; private set; }
+
+        public string ExitAddress { get; private set; }
+
+        public string EntryAnnexMessage { get; private set; }
+
+        public string ExitAnnexMessage { get; private set; }
+
+        public bool IsAnnexNeeded { get; private set; }
 
         public void SetAnnexMessages(int annexNumber)
         {
@@ -41,9 +54,9 @@
             }
         }
 
-        private void SetIsAnnexNeeded(NotificationApplication notification)
+        private void SetIsAnnexNeeded(TransportRoute transportRoute)
         {
-            IsAnnexNeeded = notification.EntryCustomsOffice != null || notification.ExitCustomsOffice != null;
+            IsAnnexNeeded = transportRoute.EntryCustomsOffice != null || transportRoute.ExitCustomsOffice != null;
         }
     }
 }

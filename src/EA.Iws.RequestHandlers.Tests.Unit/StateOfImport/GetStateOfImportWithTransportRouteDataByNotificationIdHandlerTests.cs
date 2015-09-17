@@ -7,7 +7,6 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
-    using Mappings;
     using RequestHandlers.Mappings;
     using RequestHandlers.StateOfImport;
     using Requests.StateOfImport;
@@ -39,13 +38,17 @@
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationWithStateOfImport, NotificationWithStateOfImportId);
 
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.StateOfImport, stateOfImport, notificationWithStateOfImport);
+            var transport = new TransportRoute(NotificationWithStateOfImportId);
+
+            ObjectInstantiator<TransportRoute>.SetProperty(x => x.StateOfImport, stateOfImport, transport);
 
             context.NotificationApplications.AddRange(new[]
             {
                 notificationNoStateOfImport,
                 notificationWithStateOfImport
             });
+
+            context.TransportRoutes.Add(transport);
 
             context.Countries.AddRange(new[]
             {

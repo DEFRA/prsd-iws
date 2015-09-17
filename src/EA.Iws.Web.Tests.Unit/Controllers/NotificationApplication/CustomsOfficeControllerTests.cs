@@ -40,7 +40,6 @@
             A.CallTo(
                 () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
-                    CustomsOfficesCompleted = CustomsOffices.None,
                     CustomsOfficesRequired = CustomsOffices.None
                 });
 
@@ -56,7 +55,6 @@
             A.CallTo(
                 () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
-                    CustomsOfficesCompleted = CustomsOffices.None,
                     CustomsOfficesRequired = CustomsOffices.Entry
                 });
 
@@ -71,7 +69,6 @@
             A.CallTo(
                 () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
-                    CustomsOfficesCompleted = CustomsOffices.None,
                     CustomsOfficesRequired = CustomsOffices.Exit
                 });
 
@@ -86,7 +83,6 @@
             A.CallTo(
                 () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
-                    CustomsOfficesCompleted = CustomsOffices.None,
                     CustomsOfficesRequired = CustomsOffices.EntryAndExit
                 });
 
@@ -101,7 +97,6 @@
             A.CallTo(
                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                {
-                   CustomsOfficesCompleted = CustomsOffices.Exit,
                    CustomsOfficesRequired = CustomsOffices.Exit
                });
 
@@ -117,7 +112,6 @@
             A.CallTo(
                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                {
-                   CustomsOfficesCompleted = CustomsOffices.Exit,
                    CustomsOfficesRequired = CustomsOffices.EntryAndExit
                });
 

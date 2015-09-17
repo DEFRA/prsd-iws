@@ -25,6 +25,7 @@
         private readonly Country country;
         private readonly StateOfExport stateOfExport;
         private readonly StateOfImport stateOfImportNonEu;
+        private readonly TransportRoute transport;
 
         public SetExitCustomsOfficeForNotificationByIdHandlerTests()
         {
@@ -35,7 +36,10 @@
             anyNotification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(anyNotification, notificationId);
 
+            transport = new TransportRoute(notificationId);
+
             context.NotificationApplications.Add(anyNotification);
+            context.TransportRoutes.Add(transport);
 
             country = CountryFactory.Create(AnyGuid);
             nonEuCountry = CountryFactory.Create(new Guid("606ECF5A-6571-4803-9CCA-7E1AF82D147A"), "test", false);
@@ -76,8 +80,8 @@
         [Fact]
         public async Task NotificationExistsAndRequiresExitCustomsOffice_SetsExitOffice()
         {
-            anyNotification.SetStateOfExportForNotification(stateOfExport);
-            anyNotification.SetStateOfImportForNotification(stateOfImportNonEu);
+            transport.SetStateOfExportForNotification(stateOfExport);
+            transport.SetStateOfImportForNotification(stateOfImportNonEu);
 
             var request = new SetExitCustomsOfficeForNotificationById(notificationId,
                 AnyName,
@@ -86,9 +90,9 @@
 
             await handler.HandleAsync(request);
 
-            var notification = context.NotificationApplications.First();
+            var transportRoute = context.TransportRoutes.First();
 
-            Assert.Equal(request.Name, notification.ExitCustomsOffice.Name);
+            Assert.Equal(request.Name, transportRoute.ExitCustomsOffice.Name);
         }
     }
 }

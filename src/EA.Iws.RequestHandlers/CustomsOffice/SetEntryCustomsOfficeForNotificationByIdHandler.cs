@@ -18,10 +18,19 @@
 
         public async Task<CustomsOfficeCompletionStatus> HandleAsync(SetEntryCustomsOfficeForNotificationById message)
         {
-            var notification = await context.GetNotificationApplication(message.Id);
+            await context.CheckNotificationAccess(message.Id);
+
+            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.Id);
+
+            if (transportRoute == null)
+            {
+                transportRoute = new TransportRoute(message.Id);
+                context.TransportRoutes.Add(transportRoute);
+            }
+
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
 
-            notification.SetEntryCustomsOffice(new EntryCustomsOffice(message.Name, 
+            transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice(message.Name, 
                 message.Address, 
                 country));
 
@@ -29,8 +38,7 @@
 
             return new CustomsOfficeCompletionStatus
             {
-                CustomsOfficesCompleted = notification.GetCustomsOfficesCompleted(),
-                CustomsOfficesRequired = notification.GetCustomsOfficesRequired()
+                CustomsOfficesRequired = transportRoute.GetRequiredCustomsOffices()
             };
         }
     }

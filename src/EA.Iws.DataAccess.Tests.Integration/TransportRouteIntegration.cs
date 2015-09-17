@@ -34,6 +34,12 @@
 
             await context.SaveChangesAsync();
 
+            var transport = new TransportRoute(notification.Id);
+
+            context.TransportRoutes.Add(transport);
+
+            await context.SaveChangesAsync();
+
             var exitPoint = await context.EntryOrExitPoints.FirstAsync();
 
             var country = exitPoint.Country;
@@ -42,16 +48,17 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            notification.SetStateOfExportForNotification(stateOfExport);
+            transport.SetStateOfExportForNotification(stateOfExport);
 
             await context.SaveChangesAsync();
 
-            Assert.Equal(country.Id, notification.StateOfExport.Country.Id);
-            Assert.Equal(competentAuthority.Id, notification.StateOfExport.CompetentAuthority.Id);
-            Assert.Equal(exitPoint.Id, notification.StateOfExport.ExitPoint.Id);
+            Assert.Equal(country.Id, transport.StateOfExport.Country.Id);
+            Assert.Equal(competentAuthority.Id, transport.StateOfExport.CompetentAuthority.Id);
+            Assert.Equal(exitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 
             context.DeleteOnCommit(stateOfExport);
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(transport);
             await context.SaveChangesAsync();
         }
 
@@ -64,6 +71,12 @@
 
             context.SaveChanges();
 
+            var transport = new TransportRoute(notification.Id);
+
+            context.TransportRoutes.Add(transport);
+
+            context.SaveChanges();
+
             var exitPoint = context.EntryOrExitPoints.First();
 
             var country = exitPoint.Country;
@@ -72,7 +85,7 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            notification.SetStateOfExportForNotification(stateOfExport);
+            transport.SetStateOfExportForNotification(stateOfExport);
 
             context.SaveChanges();
 
@@ -85,13 +98,14 @@
             }
 
             var newStateOfExport = new StateOfExport(country, competentAuthority, nextExitPoint);
-            notification.SetStateOfExportForNotification(newStateOfExport);
+            transport.SetStateOfExportForNotification(newStateOfExport);
 
             context.SaveChanges();
 
-            Assert.Equal(nextExitPoint.Id, notification.StateOfExport.ExitPoint.Id);
+            Assert.Equal(nextExitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(transport);
 
             context.SaveChanges();
         }

@@ -46,28 +46,36 @@
 
         public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
         {
-            var notification = await context.GetNotificationApplication(message.Id);
+            await context.CheckNotificationAccess(message.Id);
+
+            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.Id);
             var countries = await context.Countries.OrderBy(c => c.Name).ToArrayAsync();
 
-            var data = new StateOfImportWithTransportRouteData
-            {
-                StateOfImport = stateOfImportMapper.Map(notification.StateOfImport),
-                StateOfExport = stateOfExportMapper.Map(notification.StateOfExport),
-                Countries = countries.Select(countryMapper.Map).ToArray(),
-                TransitStates = transitStateMapper.Map(notification.TransitStates)
-            };
+            var data = new StateOfImportWithTransportRouteData();
 
-            if (notification.StateOfImport != null)
+            if (transportRoute != null)
             {
-                var competentAuthorities = await context.CompetentAuthorities
-                                            .Where(ca => ca.Country.Id == notification.StateOfImport.Country.Id)
-                                            .OrderBy(x => x.Code)
-                                            .ToArrayAsync();
-                var entryPoints = await context.EntryOrExitPoints.Where(ep => ep.Country.Id == notification.StateOfImport.Country.Id).ToArrayAsync();
+                data.StateOfImport = stateOfImportMapper.Map(transportRoute.StateOfImport);
+                data.StateOfExport = stateOfExportMapper.Map(transportRoute.StateOfExport);
+                data.TransitStates = transitStateMapper.Map(transportRoute.TransitStates);
 
-                data.CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray();
-                data.EntryPoints = entryPoints.Select(entryOrExitPointMapper.Map).ToArray();
+                if (transportRoute.StateOfImport != null)
+                {
+                    var competentAuthorities = await context.CompetentAuthorities
+                        .Where(ca => ca.Country.Id == transportRoute.StateOfImport.Country.Id)
+                        .OrderBy(x => x.Code)
+                        .ToArrayAsync();
+                    var entryPoints =
+                        await
+                            context.EntryOrExitPoints.Where(
+                                ep => ep.Country.Id == transportRoute.StateOfImport.Country.Id).ToArrayAsync();
+
+                    data.CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray();
+                    data.EntryPoints = entryPoints.Select(entryOrExitPointMapper.Map).ToArray();
+                }
             }
+            
+            data.Countries = countries.Select(countryMapper.Map).ToArray();
 
             return data;
         }

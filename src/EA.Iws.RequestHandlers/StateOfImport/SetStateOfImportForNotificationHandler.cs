@@ -19,7 +19,15 @@
 
         public async Task<Guid> HandleAsync(SetStateOfImportForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            await context.CheckNotificationAccess(message.NotificationId);
+
+            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.NotificationId);
+
+            if (transportRoute == null)
+            {
+                transportRoute = new TransportRoute(message.NotificationId);
+                context.TransportRoutes.Add(transportRoute);
+            }
 
             var country = await context.Countries.SingleAsync(c => c.Id == message.CountryId);
             var competentAuthority =
@@ -28,7 +36,7 @@
 
             var stateOfImport = new StateOfImport(country, competentAuthority, entryPoint);
 
-            notification.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport);
 
             await context.SaveChangesAsync();
 

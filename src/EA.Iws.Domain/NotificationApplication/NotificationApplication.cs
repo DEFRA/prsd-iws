@@ -27,7 +27,6 @@
             ProducersCollection = new List<Producer>();
             FacilitiesCollection = new List<Facility>();
             CarriersCollection = new List<Carrier>();
-            TransitStatesCollection = new List<TransitState>();
             OperationInfosCollection = new List<OperationInfo>();
             PackagingInfosCollection = new List<PackagingInfo>();
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
@@ -41,8 +40,6 @@
         protected virtual ICollection<Facility> FacilitiesCollection { get; set; }
 
         protected virtual ICollection<Carrier> CarriersCollection { get; set; }
-
-        protected virtual ICollection<TransitState> TransitStatesCollection { get; set; }
 
         protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
 
@@ -65,10 +62,6 @@
         public string NotificationNumber { get; private set; }
 
         public virtual WasteType WasteType { get; private set; }
-
-        public virtual StateOfExport StateOfExport { get; private set; }
-
-        public virtual StateOfImport StateOfImport { get; private set; }
 
         public virtual TechnologyEmployed TechnologyEmployed { get; private set; }
 
@@ -109,11 +102,6 @@
             get { return CarriersCollection.ToSafeIEnumerable(); }
         }
 
-        public IEnumerable<TransitState> TransitStates
-        {
-            get { return TransitStatesCollection.ToSafeIEnumerable(); }
-        }
-
         public IEnumerable<OperationInfo> OperationInfos
         {
             get { return OperationInfosCollection.ToSafeIEnumerable(); }
@@ -133,10 +121,6 @@
         {
             get { return WasteCodeInfoCollection.ToSafeIEnumerable(); }
         }
-
-        public virtual ExitCustomsOffice ExitCustomsOffice { get; private set; }
-
-        public virtual EntryCustomsOffice EntryCustomsOffice { get; private set; }
 
         private string CreateNotificationNumber(int notificationNumber)
         {

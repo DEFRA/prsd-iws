@@ -20,6 +20,7 @@
         private readonly ExitCustomsOffice exitCustomsOffice;
         private readonly Country country;
         private readonly NotificationApplication notification;
+        private readonly TransportRoute transport;
 
         public GetExitCustomsOfficeAddDataByNotificationIdTests()
         {
@@ -35,10 +36,13 @@
             notification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 500);
 
+            transport = new TransportRoute(NotificationId);
+
             EntityHelper.SetEntityId(notification, NotificationId);
 
             context.Countries.Add(country);
             context.NotificationApplications.Add(notification);
+            context.TransportRoutes.Add(transport);
         }
 
         [Fact]
@@ -61,7 +65,7 @@
         [Fact]
         public async Task Handler_NotificationHasExitCustomsOffice_ReturnsAllData()
         {
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ExitCustomsOffice, exitCustomsOffice, notification);
+            ObjectInstantiator<TransportRoute>.SetProperty(x => x.ExitCustomsOffice, exitCustomsOffice, transport);
 
             var result = await handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(NotificationId));
 
