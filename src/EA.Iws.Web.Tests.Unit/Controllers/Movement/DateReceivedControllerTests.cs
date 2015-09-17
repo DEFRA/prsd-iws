@@ -89,7 +89,7 @@
 
             var redirectResult = result as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(redirectResult.RouteValues, "Index", "ShipmentAcceptance");
+            RouteAssert.RoutesTo(redirectResult.RouteValues, "Index", "Acceptance");
         }
     }
 }

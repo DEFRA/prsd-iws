@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Areas.Movement.ViewModels.ShipmentAcceptance;
+    using Areas.Movement.ViewModels.Acceptance;
     using Core.MovementReceipt;
     using Xunit;
 
@@ -12,7 +12,7 @@
         [Fact]
         public void ValidViewModel_Yes_Validates()
         {
-            var viewModel = new ShipmentAcceptanceViewModel();
+            var viewModel = new AcceptanceViewModel();
             viewModel.Decision = Decision.Accepted;
 
             var result = ValidateViewModel(viewModel);
@@ -23,7 +23,7 @@
         [Fact]
         public void ValidViewModel_No_Validates()
         {
-            var viewModel = new ShipmentAcceptanceViewModel();
+            var viewModel = new AcceptanceViewModel();
             viewModel.Decision = Decision.Rejected;
             viewModel.RejectReason = "Rejected because";
 
@@ -35,7 +35,7 @@
         [Fact]
         public void NoAndNoReason_Invalid()
         {
-            var viewModel = new ShipmentAcceptanceViewModel();
+            var viewModel = new AcceptanceViewModel();
             viewModel.Decision = Decision.Rejected;
 
             var result = ValidateViewModel(viewModel);
@@ -47,7 +47,7 @@
         [Fact]
         public void NoAnswer_Invalid()
         {
-            var viewModel = new ShipmentAcceptanceViewModel();
+            var viewModel = new AcceptanceViewModel();
 
             var result = ValidateViewModel(viewModel);
 
@@ -58,7 +58,7 @@
         [Fact]
         public void ReasonTooLong_Invalid()
         {
-            var viewModel = new ShipmentAcceptanceViewModel();
+            var viewModel = new AcceptanceViewModel();
             viewModel.Decision = Decision.Rejected;
             viewModel.RejectReason = GetLongString();
 

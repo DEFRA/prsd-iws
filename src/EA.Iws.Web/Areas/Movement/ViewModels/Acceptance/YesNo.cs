@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.ShipmentAcceptance
+﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Acceptance
 {
     using System.ComponentModel.DataAnnotations;
 

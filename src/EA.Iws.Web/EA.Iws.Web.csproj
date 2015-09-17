@@ -594,7 +594,7 @@
     <Content Include="Views\NotificationMovement\Receipt.cshtml" />
     <Content Include="Areas\Movement\Views\DateReceived\Index.cshtml" />
     <Content Include="Areas\Movement\Views\QuantityReceived\Index.cshtml" />
-    <Content Include="Areas\Movement\Views\ShipmentAcceptance\Index.cshtml" />
+    <Content Include="Areas\Movement\Views\Acceptance\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Shared\_LayoutReceipt.cshtml" />
     <Content Include="Areas\Movement\Views\ReceiptComplete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOffice.cshtml" />
@@ -733,7 +733,7 @@
     <Compile Include="Areas\Movement\Controllers\PackagingTypesController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\ReceiptCompleteController.cs" />
-    <Compile Include="Areas\Movement\Controllers\ShipmentAcceptanceController.cs" />
+    <Compile Include="Areas\Movement\Controllers\AcceptanceController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\CarrierViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\MeansOfTransportViewModel.cs" />
@@ -745,8 +745,8 @@
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\PackagingTypesViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\ShipmentAcceptance\ShipmentAcceptanceViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\ShipmentAcceptance\YesNo.cs" />
+    <Compile Include="Areas\Movement\ViewModels\Acceptance\AcceptanceViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\Acceptance\YesNo.cs" />
     <Compile Include="Areas\Movement\ViewModels\ShipmentDateViewModel.cs" />
     <Compile Include="Areas\Movement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />

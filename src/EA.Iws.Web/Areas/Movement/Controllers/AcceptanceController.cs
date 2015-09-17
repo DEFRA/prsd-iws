@@ -7,14 +7,14 @@
     using Core.MovementReceipt;
     using Infrastructure;
     using Requests.MovementReceipt;
-    using ViewModels.ShipmentAcceptance;
+    using ViewModels.Acceptance;
 
     [Authorize]
-    public class ShipmentAcceptanceController : Controller
+    public class AcceptanceController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
 
-        public ShipmentAcceptanceController(Func<IIwsClient> apiClient)
+        public AcceptanceController(Func<IIwsClient> apiClient)
         {
             this.apiClient = apiClient;
         }
@@ -26,7 +26,7 @@
             {
                 var acceptanceInfo = await client.SendAsync(User.GetAccessToken(), new GetMovementAcceptanceDataByMovementId(id));
 
-                var model = new ShipmentAcceptanceViewModel(acceptanceInfo);
+                var model = new AcceptanceViewModel(acceptanceInfo);
 
                 return View(model);
             }
@@ -34,7 +34,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, ShipmentAcceptanceViewModel model)
+        public async Task<ActionResult> Index(Guid id, AcceptanceViewModel model)
         {
             if (!ModelState.IsValid)
             {

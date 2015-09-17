@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.ShipmentAcceptance
+﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Acceptance
 {
     using Requests.MovementReceipt;
     using System;
@@ -7,7 +7,7 @@
     using System.Linq;
     using Core.MovementReceipt;
 
-    public class ShipmentAcceptanceViewModel : IValidatableObject
+    public class AcceptanceViewModel : IValidatableObject
     {
         public Decision? Decision { get; set; }
          
@@ -15,11 +15,11 @@
 
         public Guid MovementId { get; set; }
 
-        public ShipmentAcceptanceViewModel()
+        public AcceptanceViewModel()
         {
         }
 
-        public ShipmentAcceptanceViewModel(MovementAcceptanceData acceptanceData)
+        public AcceptanceViewModel(MovementAcceptanceData acceptanceData)
         {
             Decision = acceptanceData.Decision;
             RejectReason = acceptanceData.RejectionReason;

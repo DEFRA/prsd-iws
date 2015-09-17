@@ -43,7 +43,7 @@
             {
                 await client.SendAsync(User.GetAccessToken(), new CreateMovementReceiptForMovement(id, viewModel.GetDateReceived()));
 
-                return RedirectToAction("Index", "ShipmentAcceptance", new { id });
+                return RedirectToAction("Index", "Acceptance", new { id });
             }
         }
     }
