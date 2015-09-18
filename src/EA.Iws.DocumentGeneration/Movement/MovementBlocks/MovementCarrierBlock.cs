@@ -10,7 +10,7 @@
     using NotificationBlocks;
     using ViewModels;
 
-    public class MovementCarrierBlock : IDocumentBlock, IAnnexedBlock
+    public class MovementCarrierBlock : IDocumentBlock
     {
         private readonly MovementCarriersViewModel data;
 
@@ -33,7 +33,7 @@
             get { return data.IsAnnexNeeded; }
         }
 
-        public void GenerateAnnex(int annexNumber)
+        public void Merge()
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(MovementCarriersViewModel));
 
@@ -42,29 +42,17 @@
                 MergeFieldDataMapper.BindCorrespondingField(field, data, properties);
             }
 
-            MergeCarriersTable(properties);
-        }
-
-        public IList<MergeField> AnnexMergeFields { get; protected set; }
-
-        public string TocText { get; private set; }
-
-        public string InstructionsText { get; private set; }
-
-        public void Merge()
-        {
-            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(MovementCarriersViewModel));
-
-            if (!HasAnnex)
+            if (HasAnnex)
             {
-                foreach (var field in CorrespondingMergeFields)
-                {
-                    MergeFieldDataMapper.BindCorrespondingField(field, data, properties);
-                }
-
+                MergeCarriersTable();
+            }
+            else
+            {
                 RemoveAnnex();
             }
         }
+
+        public IList<MergeField> AnnexMergeFields { get; protected set; }
 
         public int OrdinalPosition 
         {
@@ -74,15 +62,16 @@
         protected void RemoveAnnex()
         {
             var field = AnnexMergeFields.Single(
-                mf => mf.FieldName.InnerTypeName != null && mf.FieldName.InnerTypeName.Equals("NotificationNumber"));
+                mf => mf.FieldName.InnerTypeName != null && mf.FieldName.InnerTypeName.Equals("Order"));
 
-            var table = field.Run.Ancestors<Table>().Single();
+            var table = field.Run.Ancestors<Table>().First().Ancestors<Table>().First();
             table.Remove();
         }
 
-        private void MergeCarriersTable(PropertyInfo[] properties)
+        private void MergeCarriersTable()
         {
             var mergeTableRows = new TableRow[data.CarrierDetails.Count];
+            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(MovementCarrierDetails));
 
             // Find both the first row in the multiple carriers table and the table itself.
             var firstMergeFieldInTable = FindFirstMergeFieldInAnnexTable();
@@ -114,7 +103,7 @@
             return
                 AnnexMergeFields.Single(
                     mf => mf.FieldName.OuterTypeName.Equals(TypeName, StringComparison.InvariantCultureIgnoreCase)
-                          && mf.FieldName.InnerTypeName.Equals("FirstReg",
+                          && mf.FieldName.InnerTypeName.Equals("Order",
                               StringComparison.InvariantCultureIgnoreCase));
         }
 

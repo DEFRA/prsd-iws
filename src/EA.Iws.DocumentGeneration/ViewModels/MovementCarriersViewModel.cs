@@ -7,23 +7,39 @@
 
     internal class MovementCarriersViewModel
     {
+        private AddressViewModel firstAddress;
+        private AddressViewModel secondAddress;
+        private AddressViewModel lastAddress;
+
+        public string FirstAddress
+        {
+            get { return firstAddress.Address(AddressLines.Three); }
+        }
+
+        public string SecondAddress
+        {
+            get { return secondAddress.Address(AddressLines.Three); }
+        }
+
+        public string LastAddress
+        {
+            get { return lastAddress.Address(AddressLines.Three); }
+        }
+
         public string FirstReg { get; private set; }
         public string FirstName { get; private set; }
-        public AddressViewModel FirstAddress { get; private set; }
         public string FirstTel { get; private set; }
         public string FirstFax { get; private set; }
         public string FirstEmail { get; private set; }
 
         public string SecondReg { get; private set; }
         public string SecondName { get; private set; }
-        public AddressViewModel SecondAddress { get; private set; }
         public string SecondTel { get; private set; }
         public string SecondFax { get; private set; }
         public string SecondEmail { get; private set; }
 
         public string LastReg { get; private set; }
         public string LastName { get; private set; }
-        public AddressViewModel LastAddress { get; private set; }
         public string LastTel { get; private set; }
         public string LastFax { get; private set; }
         public string LastEmail { get; private set; }
@@ -66,21 +82,21 @@
         {
             FirstReg = string.Empty;
             FirstName = string.Empty;
-            FirstAddress = new AddressViewModel(null);
+            firstAddress = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty);
             FirstTel = string.Empty;
             FirstFax = string.Empty;
             FirstEmail = string.Empty;
 
             SecondReg = string.Empty;
             SecondName = string.Empty;
-            SecondAddress = new AddressViewModel(null);
+            secondAddress = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty);
             SecondTel = string.Empty;
             SecondFax = string.Empty;
             SecondEmail = string.Empty;
 
             LastReg = string.Empty;
             LastName = string.Empty;
-            LastAddress = new AddressViewModel(null);
+            lastAddress = AddressViewModel.GetAddressViewModelShowingSeeAnnexInstruction(string.Empty);
             LastTel = string.Empty;
             LastFax = string.Empty;
             LastEmail = string.Empty;
@@ -112,9 +128,10 @@
             {
                 var mcd = new MovementCarrierDetails
                 {
+                    Order = (i + 1).ToString(),
                     Reg = sortedCarriersList[i].Carrier.Business.RegistrationNumber,
                     Name = sortedCarriersList[i].Carrier.Business.Name,
-                    Address = new AddressViewModel(sortedCarriersList[i].Carrier.Address),
+                    AddressViewModel = new AddressViewModel(sortedCarriersList[i].Carrier.Address),
                     Tel = sortedCarriersList[i].Carrier.Contact.Telephone,
                     Fax = sortedCarriersList[i].Carrier.Contact.Fax ?? string.Empty,
                     Email = sortedCarriersList[i].Carrier.Contact.Email
@@ -131,7 +148,7 @@
         {
             FirstReg = carrier.Business.RegistrationNumber;
             FirstName = carrier.Business.Name;
-            FirstAddress = new AddressViewModel(carrier.Address);
+            firstAddress = new AddressViewModel(carrier.Address);
             FirstTel = carrier.Contact.Telephone;
             FirstFax = carrier.Contact.Fax ?? string.Empty;
             FirstEmail = carrier.Contact.Email;
@@ -141,7 +158,7 @@
         {
             SecondReg = carrier.Business.RegistrationNumber;
             SecondName = carrier.Business.Name;
-            SecondAddress = new AddressViewModel(carrier.Address);
+            secondAddress = new AddressViewModel(carrier.Address);
             SecondTel = carrier.Contact.Telephone;
             SecondFax = carrier.Contact.Fax ?? string.Empty;
             SecondEmail = carrier.Contact.Email;
@@ -151,7 +168,7 @@
         {
             LastReg = carrier.Business.RegistrationNumber;
             LastName = carrier.Business.Name;
-            LastAddress = new AddressViewModel(carrier.Address);
+            lastAddress = new AddressViewModel(carrier.Address);
             LastTel = carrier.Contact.Telephone;
             LastFax = carrier.Contact.Fax ?? string.Empty;
             LastEmail = carrier.Contact.Email;

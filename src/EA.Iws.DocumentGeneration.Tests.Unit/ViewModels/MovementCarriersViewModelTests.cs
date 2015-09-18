@@ -123,7 +123,7 @@
             Assert.Equal(string.Empty, model.FirstTel);
             Assert.Equal(string.Empty, model.FirstFax);
             Assert.Equal(string.Empty, model.FirstEmail);
-            Assert.Equal(string.Empty, model.FirstAddress.Address(0));
+            Assert.Equal(string.Empty, model.FirstAddress);
         }
 
         private void AssertSecondCarrierIsEmpty(MovementCarriersViewModel model)
@@ -133,7 +133,7 @@
             Assert.Equal(string.Empty, model.SecondTel);
             Assert.Equal(string.Empty, model.SecondFax);
             Assert.Equal(string.Empty, model.SecondEmail);
-            Assert.Equal(string.Empty, model.SecondAddress.Address(0));
+            Assert.Equal(string.Empty, model.SecondAddress);
         }
 
         private void AssertLastCarrierIsEmpty(MovementCarriersViewModel model)
@@ -143,7 +143,7 @@
             Assert.Equal(string.Empty, model.LastTel);
             Assert.Equal(string.Empty, model.LastFax);
             Assert.Equal(string.Empty, model.LastEmail);
-            Assert.Equal(string.Empty, model.LastAddress.Address(0));
+            Assert.Equal(string.Empty, model.LastAddress);
         }
 
         private void AssertFirstCarrierIsDefault(MovementCarriersViewModel model)
