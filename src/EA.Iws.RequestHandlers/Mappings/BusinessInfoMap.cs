@@ -13,7 +13,7 @@
             return new BusinessInfoData
             {
                 Name = source.Name,
-                BusinessType = GetBusinessType(source.Type),
+                BusinessType = GetBusinessType(source.Type.DisplayName),
                 AdditionalRegistrationNumber = source.AdditionalRegistrationNumber,
                 RegistrationNumber = source.RegistrationNumber,
                 OtherDescription = source.OtherDescription

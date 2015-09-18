@@ -1,5 +1,7 @@
 namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
 {
+    using System.Collections.Generic;
+    using Domain;
     using RequestHandlers.Mappings;
     using TestHelpers.DomainFakes;
     using Xunit;
@@ -15,14 +17,14 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
             Name = AnyString,
             AdditionalRegistrationNumber = AnyString,
             RegistrationNumber = AnyString,
-            Type = AnyString
+            Type = BusinessType.Partnership
         };
 
         public BusinessMapTests()
         {
             businessMap = new BusinessMap();
         }
-        
+
         [Theory]
         [InlineData(null)]
         [InlineData("")]
@@ -30,23 +32,17 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
         public void MapName(string name)
         {
             testBusiness.Name = name;
-
             var result = businessMap.Map(testBusiness);
-
             Assert.Equal(name, result.Name);
         }
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(TestString)]
-        public void MapEntityType(string entityType)
+        [MemberData("GetDataForBusinessMapTests")]
+        public void MapEntityType(Domain.BusinessType entityType)
         {
             testBusiness.Type = entityType;
-
             var result = businessMap.Map(testBusiness);
-
-            Assert.Equal(entityType, result.EntityType);
+            Assert.Equal(entityType.DisplayName, result.EntityType);
         }
 
         [Theory]
@@ -56,9 +52,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
         public void MapRegistrationNumber(string registrationNumber)
         {
             testBusiness.RegistrationNumber = registrationNumber;
-
             var result = businessMap.Map(testBusiness);
-
             Assert.Equal(registrationNumber, result.RegistrationNumber);
         }
 
@@ -69,10 +63,19 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
         public void MapAdditionalRegistrationNumber(string additionalRegistrationNumber)
         {
             testBusiness.AdditionalRegistrationNumber = additionalRegistrationNumber;
-
             var result = businessMap.Map(testBusiness);
-
             Assert.Equal(additionalRegistrationNumber, result.AdditionalRegistrationNumber);
+        }
+
+        public static IEnumerable<object[]> GetDataForBusinessMapTests
+        {
+            get
+            {
+                yield return new object[] { Domain.BusinessType.LimitedCompany };
+                yield return new object[] { Domain.BusinessType.SoleTrader };
+                yield return new object[] { Domain.BusinessType.Partnership };
+                yield return new object[] { Domain.BusinessType.Other };
+            }
         }
     }
 }

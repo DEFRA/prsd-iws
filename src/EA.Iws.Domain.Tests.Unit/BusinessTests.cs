@@ -34,7 +34,7 @@
         {
             var business = Business.CreateOtherBusiness("name", "123", "456", "other");
 
-            Assert.Equal(BusinessType.Other.DisplayName, business.Type);
+            Assert.Equal(BusinessType.Other, business.Type);
         }
 
         [Fact]

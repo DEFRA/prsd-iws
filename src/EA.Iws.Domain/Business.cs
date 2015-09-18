@@ -13,7 +13,7 @@
             Guard.ArgumentNotNullOrEmpty(() => registrationNumber, registrationNumber);
 
             Name = name;
-            Type = type.DisplayName;
+            Type = type;
             RegistrationNumber = registrationNumber;
             AdditionalRegistrationNumber = additionalRegistrationNumber;
             OtherDescription = otherDescription;
@@ -25,7 +25,7 @@
 
         public string Name { get; private set; }
 
-        public string Type { get; private set; }
+        public BusinessType Type { get; private set; }
 
         public string RegistrationNumber { get; private set; }
 
@@ -39,7 +39,7 @@
             }
             private set
             {
-                if (Type == BusinessType.Other.DisplayName)
+                if (Type == BusinessType.Other)
                 {
                     Guard.ArgumentNotNullOrEmpty(() => value, value);
                     otherDescription = value;

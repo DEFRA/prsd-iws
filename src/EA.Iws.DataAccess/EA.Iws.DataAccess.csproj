@@ -81,6 +81,7 @@
     <Compile Include="Mappings\ActivityMapping.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\BankHolidayMapping.cs" />
+    <Compile Include="Mappings\BusinessTypeMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />

@@ -11,7 +11,7 @@
             return new BusinessData
             {
                 Name = source.Name,
-                EntityType = source.Type,
+                EntityType = source.Type.DisplayName,
                 AdditionalRegistrationNumber = source.AdditionalRegistrationNumber,
                 RegistrationNumber = source.RegistrationNumber
             };

@@ -11,7 +11,7 @@
             set { ObjectInstantiator<Business>.SetProperty(x => x.Name, value, this); }
         }
 
-        public new string Type
+        public new BusinessType Type
         {
             get { return base.Type; }
             set { ObjectInstantiator<Business>.SetProperty(x => x.Type, value, this); }
@@ -42,7 +42,7 @@
                 return new TestableBusiness
                 {
                     Name = "Waste Solutions Ltd",
-                    Type = "Sole trader",
+                    Type = BusinessType.SoleTrader,
                     RegistrationNumber = "46541531"
                 };
             }
@@ -55,7 +55,7 @@
                 return new TestableBusiness
                 {
                     Name = "Garbage Collection Engineering",
-                    Type = "Limited company",
+                    Type = BusinessType.LimitedCompany,
                     RegistrationNumber = "556566"
                 };
             }
@@ -68,7 +68,7 @@
                 return new TestableBusiness
                 {
                     Name = "Environmental Protection Solutions Delivered",
-                    Type = "Other",
+                    Type = BusinessType.Other,
                     OtherDescription = "Charity",
                     RegistrationNumber = "5643553",
                     AdditionalRegistrationNumber = "745744"
