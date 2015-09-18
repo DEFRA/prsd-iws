@@ -15,15 +15,15 @@
     {
         private readonly IwsContext context;
         private readonly IMap<Movement, ProgressData> progressMap;
-        private readonly ActiveMovementCalculator activeMovementCalculator;
+        private readonly ActiveMovementService activeMovementService;
 
         public GetMovementProgressInformationHandler(IwsContext context, 
             IMap<Movement, ProgressData> progressMap,
-            ActiveMovementCalculator activeMovementCalculator)
+            ActiveMovementService activeMovementService)
         {
             this.context = context;
             this.progressMap = progressMap;
-            this.activeMovementCalculator = activeMovementCalculator;
+            this.activeMovementService = activeMovementService;
         }
 
         public async Task<MovementProgressAndSummaryData> HandleAsync(GetMovementProgressInformation message)
@@ -52,7 +52,7 @@
             {
                 NotificationNumber = notificationInformation.Number,
                 TotalNumberOfMovements = notificationInformation.Shipments,
-                CurrentActiveLoads = activeMovementCalculator.TotalActiveMovements(relatedMovements),
+                CurrentActiveLoads = activeMovementService.TotalActiveMovements(relatedMovements),
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = notificationInformation.ActiveLoadsPermitted.GetValueOrDefault(),
                 Progress = progressMap.Map(movement),

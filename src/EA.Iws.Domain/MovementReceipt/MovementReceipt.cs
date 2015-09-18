@@ -24,7 +24,7 @@
 
         public decimal? Quantity { get; internal set; }
 
-        public virtual MovementOperationReceipt OperationReceipt { get; private set; }
+        public virtual MovementOperationReceipt OperationReceipt { get; internal set; }
 
         public void SetQuantity(decimal quantity)
         {

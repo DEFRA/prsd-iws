@@ -41,8 +41,8 @@
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
             builder.RegisterType<WasteCodeCopy>().AsSelf();
             builder.RegisterType<MovementFactory>().AsSelf();
-            builder.RegisterType<ActiveMovementCalculator>().AsSelf();
-            builder.RegisterType<ReceivedMovementCalculator>().AsSelf();
+            builder.RegisterType<ActiveMovementService>().AsSelf();
+            builder.RegisterType<ReceivedMovementService>().AsSelf();
             builder.RegisterType<MovementQuantityCalculator>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();

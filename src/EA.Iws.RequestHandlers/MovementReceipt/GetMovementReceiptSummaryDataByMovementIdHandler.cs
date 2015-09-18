@@ -13,15 +13,15 @@
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
     {
         private readonly IwsContext context;
-        private readonly ActiveMovementCalculator activeMovementCalculator;
+        private readonly ActiveMovementService activeMovementService;
         private readonly MovementQuantityCalculator movementQuantityCalculator;
 
         public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context, 
-            ActiveMovementCalculator activeMovementCalculator,
+            ActiveMovementService activeMovementService,
             MovementQuantityCalculator movementQuantityCalculator)
         {
             this.context = context;
-            this.activeMovementCalculator = activeMovementCalculator;
+            this.activeMovementService = activeMovementService;
             this.movementQuantityCalculator = movementQuantityCalculator;
         }
 
@@ -43,7 +43,7 @@
                 NotificationNumber = movement.NotificationApplication.NotificationNumber,
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
-                CurrentActiveLoads = activeMovementCalculator.TotalActiveMovements(relatedMovements),
+                CurrentActiveLoads = activeMovementService.TotalActiveMovements(relatedMovements),
                 QuantitySoFar = movementQuantityCalculator.QuantityReceived(relatedMovements),
                 QuantityRemaining = movementQuantityCalculator
                     .QuantityRemaining(movement.NotificationApplication.ShipmentInfo, relatedMovements),

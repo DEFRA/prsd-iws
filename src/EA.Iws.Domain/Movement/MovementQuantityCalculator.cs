@@ -8,16 +8,21 @@
 
     public class MovementQuantityCalculator
     {
-        private readonly ReceivedMovementCalculator receivedMovementCalculator;
+        private readonly ReceivedMovementService receivedMovementService;
 
-        public MovementQuantityCalculator(ReceivedMovementCalculator receivedMovementCalculator)
+        public MovementQuantityCalculator(ReceivedMovementService receivedMovementService)
         {
-            this.receivedMovementCalculator = receivedMovementCalculator;
+            this.receivedMovementService = receivedMovementService;
         }
 
         public decimal QuantityReceived(IList<Movement> movements)
         {
-            var receivedMovements = receivedMovementCalculator.ReceivedMovements(movements);
+            var receivedMovements = receivedMovementService.ReceivedMovements(movements);
+
+            if (!HasReceivedMovements(receivedMovements))
+            {
+                return 0;
+            }
 
             if (!HasReceivedMovements(receivedMovements))
             {
@@ -35,7 +40,12 @@
 
         public decimal QuantityRemaining(ShipmentInfo shipmentInfo, IList<Movement> movements)
         {
-            var receivedMovements = receivedMovementCalculator.ReceivedMovements(movements);
+            var receivedMovements = receivedMovementService.ReceivedMovements(movements);
+
+            if (!HasReceivedMovements(receivedMovements))
+            {
+                return shipmentInfo.Quantity;
+            }
 
             if (!HasReceivedMovements(receivedMovements))
             {

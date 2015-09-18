@@ -70,11 +70,11 @@
     <Compile Include="LocalArea.cs" />
     <Compile Include="MovementOperationReceipt\MovementOperationReceipt.cs" />
     <Compile Include="MovementReceipt\MovementReceipt.cs" />
-    <Compile Include="Movement\ActiveMovementCalculator.cs" />
+    <Compile Include="Movement\ActiveMovementService.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />
     <Compile Include="Movement\MovementQuantityCalculator.cs" />
-    <Compile Include="Movement\ReceivedMovementCalculator.cs" />
+    <Compile Include="Movement\ReceivedMovementService.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />

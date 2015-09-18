@@ -71,10 +71,12 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
     <Compile Include="InternalUserTests.cs" />
+    <Compile Include="MovementOperationReceipt\MovementOperationReceiptTests.cs" />
     <Compile Include="MovementReceipt\MovementReceiptTests.cs" />
-    <Compile Include="Movement\ActiveMovementCalculatorTests.cs" />
+    <Compile Include="Movement\ActiveMovementServiceTests.cs" />
     <Compile Include="Movement\MovementQuantityCalculatorTests.cs" />
-    <Compile Include="Movement\ReceivedMovementCalculatorTests.cs" />
+    <Compile Include="Movement\MovementTests.cs" />
+    <Compile Include="Movement\ReceivedMovementServiceTests.cs" />
     <Compile Include="Movement\UpdateMovementTests.cs" />
     <Compile Include="Movement\ShipmentQuantityUnitConverterTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />

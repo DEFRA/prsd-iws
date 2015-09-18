@@ -9,9 +9,9 @@
         {
         }
 
-        internal MovementOperationReceipt(DateTime dateReceived)
+        internal MovementOperationReceipt(DateTime dateComplete)
         {
-            Date = dateReceived;
+            Date = dateComplete;
         }
 
         public DateTime Date { get; internal set; }

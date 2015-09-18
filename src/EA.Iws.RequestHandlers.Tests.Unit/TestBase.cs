@@ -32,7 +32,7 @@
         protected TestBase()
         {
             UserContext = new TestUserContext(UserId);
-            Context = new TestIwsContext();
+            Context = new TestIwsContext(UserContext);
 
             NotificationApplication = new TestableNotificationApplication
             {

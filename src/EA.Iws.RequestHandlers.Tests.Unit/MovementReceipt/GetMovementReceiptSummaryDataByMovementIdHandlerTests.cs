@@ -48,8 +48,8 @@
 
             handler = new GetMovementReceiptSummaryDataByMovementIdHandler(
                 Context,
-                new ActiveMovementCalculator(),
-                new MovementQuantityCalculator(new ReceivedMovementCalculator()));
+                new ActiveMovementService(),
+                new MovementQuantityCalculator(new ReceivedMovementService()));
         }
 
         [Fact]

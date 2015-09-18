@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Core.Shared;
+    using MovementOperationReceipt;
     using MovementReceipt;
     using NotificationApplication;
     using Prsd.Core;
@@ -24,6 +25,25 @@
         }
 
         public int Number { get; private set; }
+
+        public bool IsActive
+        {
+            get
+            {
+                return this.Date.HasValue
+                    && this.Date < SystemTime.UtcNow;
+            }
+        }
+
+        public bool IsReceived
+        {
+            get
+            {
+                return this.Receipt != null
+                    && this.Receipt.Decision == MovementReceiptDecision.Accepted
+                    && this.Receipt.Quantity.HasValue;
+            }
+        }
 
         public virtual NotificationApplication NotificationApplication { get; private set; }
 
@@ -138,6 +158,16 @@
 
             this.Receipt.Decision = MovementReceiptDecision.Rejected;
             this.Receipt.RejectReason = reason;
+        }
+
+        public void CompleteMovement(DateTime dateComplete)
+        {
+            if (!this.IsReceived)
+            {
+                throw new InvalidOperationException("Cannot complete a movement that has not been received.");
+            }
+
+            this.Receipt.OperationReceipt = new MovementOperationReceipt(dateComplete);
         }
     }
 }

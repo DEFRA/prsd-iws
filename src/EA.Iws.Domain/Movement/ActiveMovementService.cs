@@ -4,7 +4,7 @@
     using System.Linq;
     using Prsd.Core;
 
-    public class ActiveMovementCalculator
+    public class ActiveMovementService
     {
         public int TotalActiveMovements(IList<Movement> movements)
         {
@@ -13,13 +13,7 @@
 
         public IList<Movement> ActiveMovements(IList<Movement> movements)
         {
-            return movements.Where(IsActive).ToArray();
-        }
-
-        public bool IsActive(Movement movement)
-        {
-            return movement.Date.HasValue 
-                && movement.Date < SystemTime.UtcNow;
+            return movements.Where(m => m.IsActive).ToArray();
         }
     }
 }

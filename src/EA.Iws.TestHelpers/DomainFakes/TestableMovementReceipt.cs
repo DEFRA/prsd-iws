@@ -2,6 +2,7 @@
 {
     using System;
     using Core.MovementReceipt;
+    using Domain.MovementOperationReceipt;
     using Domain.MovementReceipt;
     using Helpers;
 
@@ -35,6 +36,12 @@
         {
             get { return base.RejectReason; }
             set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.RejectReason, value, this); }
+        }
+
+        public new MovementOperationReceipt OperationReceipt
+        {
+            get { return base.OperationReceipt; }
+            set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.OperationReceipt, value, this); }
         }
     }
 }
