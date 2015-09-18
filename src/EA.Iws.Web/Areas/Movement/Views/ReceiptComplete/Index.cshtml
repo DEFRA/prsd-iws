@@ -17,8 +17,19 @@
     <p><button class="button" type="submit">Upload now</button></p>
 </div>
 
-@Html.ActionLink("Receive another shipment",
+<div class="form-group">
+    <p>
+        @Html.ActionLink("Receive another shipment",
             "Receipt",
             "NotificationMovement",
             new { area = string.Empty, id = Model.NotificationId },
             null)
+    </p>
+    <p>
+        @Html.ActionLink("Perform another activity",
+            "ApprovedNotification",
+            "Applicant",
+            new { area = string.Empty, id = Model.NotificationId },
+            null)
+    </p>
+</div>
