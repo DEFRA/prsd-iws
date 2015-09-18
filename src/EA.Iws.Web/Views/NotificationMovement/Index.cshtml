@@ -8,13 +8,16 @@
 <h2 class="heading-large">Pre Notifications</h2>
 
 <table style="margin-bottom: 30px">
-    @foreach (var item in Model.Movements)
-    {
-        <tr>
-            <td>Shipment @item.Key</td>
-            <td>@Html.ActionLink("Edit", "Index", "ShipmentDate", new { id = item.Value, area = "Movement" }, new { })</td>
-        </tr>
-    }
+    <tbody>
+        @foreach (var item in Model.Movements)
+        {
+            <tr>
+                <td>Shipment @item.Key</td>
+                <td>@Html.ActionLink("Edit", "Index", "ShipmentDate", new { id = item.Value, area = "Movement" }, new { })</td>
+                <td>@Html.ActionLink("Download", "GenerateMovementDocument", "Home", new { id = item.Value, area = "Movement" }, new { })</td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 @using (Html.BeginForm("Create", "NotificationMovement", new { id = Model.NotificationId }, FormMethod.Post))

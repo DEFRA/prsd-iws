@@ -28,7 +28,7 @@
 
         public void Merge()
         {
-            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(GeneralViewModel));
+            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(MovementViewModel));
 
             foreach (var field in CorrespondingMergeFields)
             {

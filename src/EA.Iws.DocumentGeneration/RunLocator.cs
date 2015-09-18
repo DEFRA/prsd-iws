@@ -10,7 +10,7 @@
     {
         private static readonly Func<WordprocessingDocument, string, IEnumerable<Run>> FindRunsCaseInsensitive =
             (document, content) => document.MainDocumentPart.Document.Descendants<Run>()
-                .Where(r => r.InnerText.Equals(content, StringComparison.OrdinalIgnoreCase));
+                .Where(r => r.InnerText.Contains(content));
 
         public static Run FirstRunByContent(WordprocessingDocument document, string content)
         {

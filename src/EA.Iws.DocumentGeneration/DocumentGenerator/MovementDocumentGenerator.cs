@@ -9,7 +9,7 @@
     {
         public byte[] Generate(Movement movement)
         {
-            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("MovementMergeTemplate"))
+            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("MovementMergeTemplate.docx"))
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
