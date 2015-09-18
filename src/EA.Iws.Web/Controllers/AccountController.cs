@@ -12,7 +12,6 @@
     using Microsoft.Owin.Security;
     using Prsd.Core.Web.OAuth;
     using Prsd.Core.Web.OpenId;
-    using Services;
     using ViewModels.Account;
 
     [Authorize]
@@ -21,19 +20,16 @@
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
         private readonly Func<IIwsClient> apiClient;
-        private readonly IEmailService emailService;
         private readonly Func<IUserInfoClient> userInfoClient;
 
         public AccountController(Func<IOAuthClient> oauthClient,
             IAuthenticationManager authenticationManager,
             Func<IIwsClient> apiClient,
-            IEmailService emailService,
             Func<IUserInfoClient> userInfoClient)
         {
             this.oauthClient = oauthClient;
             this.apiClient = apiClient;
             this.authenticationManager = authenticationManager;
-            this.emailService = emailService;
             this.userInfoClient = userInfoClient;
         }
 
@@ -113,12 +109,13 @@
             {
                 using (var client = apiClient())
                 {
-                    var verificationToken = await client.Registration.GetUserEmailVerificationTokenAsync(User.GetAccessToken());
-                    var verificationEmail =
-                        emailService.GenerateEmailVerificationMessage(
-                            Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme),
-                            verificationToken, User.GetUserId(), User.GetEmailAddress());
-                    var emailSent = await emailService.SendAsync(verificationEmail);
+                    var emailSent =
+                    await
+                        client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
+                            new EmailVerificationData
+                            {
+                                Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
+                            });
 
                     if (!emailSent)
                     {

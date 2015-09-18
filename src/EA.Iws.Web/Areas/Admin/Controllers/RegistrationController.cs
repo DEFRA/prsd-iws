@@ -16,25 +16,21 @@
     using Prsd.Core.Web.OAuth;
     using Requests.Admin;
     using Requests.Admin.UserAdministration;
-    using Services;
     using ViewModels;
 
     public class RegistrationController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
         private readonly IAuthenticationManager authenticationManager;
-        private readonly IEmailService emailService;
         private readonly Func<IOAuthClient> oauthClient;
 
         public RegistrationController(Func<IOAuthClient> oauthClient,
             Func<IIwsClient> apiClient,
-            IAuthenticationManager authenticationManager,
-            IEmailService emailService)
+            IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
             this.apiClient = apiClient;
             this.authenticationManager = authenticationManager;
-            this.emailService = emailService;
         }
 
         [HttpGet]
@@ -88,11 +84,12 @@
                     var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                     authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
-                    var verificationCode = await
-                        client.Registration.GetUserEmailVerificationTokenAsync(signInResponse.AccessToken);
-                    var verificationEmail = emailService.GenerateEmailVerificationMessage(Url.Action("AdminVerifyEmail", "Registration", null,
-                        Request.Url.Scheme), verificationCode, userId, model.Email);
-                    await emailService.SendAsync(verificationEmail);
+                    var emailSent = await
+                        client.Registration.SendEmailVerificationAsync(signInResponse.AccessToken,
+                            new EmailVerificationData
+                            {
+                                Url = Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme)
+                            });
 
                     await
                         client.SendAsync(signInResponse.AccessToken,
@@ -127,12 +124,12 @@
             {
                 using (var client = apiClient())
                 {
-                    var verificationToken = await client.Registration.GetUserEmailVerificationTokenAsync(User.GetAccessToken());
-                    var verificationEmail =
-                        emailService.GenerateEmailVerificationMessage(
-                            Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme),
-                            verificationToken, User.GetUserId(), User.GetEmailAddress());
-                    var emailSent = await emailService.SendAsync(verificationEmail);
+                    var emailSent = await
+                        client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
+                            new EmailVerificationData
+                            {
+                                Url = Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme)
+                            });
 
                     if (!emailSent)
                     {

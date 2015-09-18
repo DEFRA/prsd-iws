@@ -619,7 +619,6 @@
     <Content Include="Scripts\vendor\jquery-1.11.0.min.js" />
     <Content Include="Scripts\vendor\modernizr.custom.77028.js" />
     <Content Include="Scripts\vendor\prism.js" />
-    <Content Include="Views\Emails\VerifyEmailAddress.txt" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -657,7 +656,6 @@
     <Content Include="Views\Account\EmailVerificationRequired.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Edit.cshtml" />
-    <Content Include="Views\Emails\VerifyEmailAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxCollectionViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\RecoveryPreconsent.cshtml" />
@@ -722,7 +720,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\Modules\MappingModule.cs" />
-    <Compile Include="App_Start\Modules\EmailModule.cs" />
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -862,10 +859,6 @@
     <Compile Include="Mappings\WasteCodes\HCodeMap.cs" />
     <Compile Include="Mappings\WasteCodes\UNClassMap.cs" />
     <Compile Include="Mappings\WasteCodes\YCodeMap.cs" />
-    <Compile Include="Services\EmailService.cs" />
-    <Compile Include="Services\EmailTemplate.cs" />
-    <Compile Include="Services\EmailTemplateService.cs" />
-    <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ExporterController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CarrierController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ImporterController.cs" />
@@ -890,7 +883,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
-    <Compile Include="Services\IEmailTemplateService.cs" />
     <Compile Include="Services\ViewModelService.cs" />
     <Compile Include="Services\ViewService.cs" />
     <Compile Include="Startup.cs" />

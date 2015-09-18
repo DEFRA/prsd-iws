@@ -34,13 +34,11 @@
             return await response.CreateResponseAsync<bool>();
         }
 
-        public async Task<string> GetUserEmailVerificationTokenAsync(string accessToken)
+        public async Task<bool> SendEmailVerificationAsync(string accessToken, EmailVerificationData emailVerificationData)
         {
             httpClient.SetBearerToken(accessToken);
-
-            var response = await httpClient.GetAsync(Controller + "GetUserEmailVerificationToken");
-
-            return await response.CreateResponseAsync<string>();
+            var response = await httpClient.PostAsJsonAsync(Controller + "SendEmailVerification", emailVerificationData);
+            return await response.CreateResponseAsync<bool>();
         }
 
         public async Task<EditApplicantRegistrationData> GetApplicantDetailsAsync(string accessToken)

@@ -6,24 +6,20 @@
 
     internal class RegistrationApprovedHandler : IEventHandler<RegistrationApprovedEvent>
     {
-        private readonly IEmailTemplateService emailTemplateService;
+        private readonly IEmailService emailService;
         private readonly SiteInformation siteInformation;
 
-        public RegistrationApprovedHandler(IEmailTemplateService emailTemplateService, SiteInformation siteInformation)
+        public RegistrationApprovedHandler(IEmailService emailService, SiteInformation siteInformation)
         {
-            this.emailTemplateService = emailTemplateService;
+            this.emailService = emailService;
             this.siteInformation = siteInformation;
         }
 
         public async Task HandleAsync(RegistrationApprovedEvent message)
         {
-            var email = emailTemplateService.TemplateWithDynamicModel("InternalRegistrationApproved",
-                new { SignInLink = string.Format("{0}/Account/Login", siteInformation.WebUrl) });
+            var model = new { SignInLink = string.Format("{0}/Account/Login", siteInformation.WebUrl) };
 
-            var mailMessage = EmailService.GenerateMailMessageWithHtmlAndPlainTextParts("mailfrom@mail.com", message.EmailAddress,
-                "Registration approved", email);
-
-            await EmailService.SendMailAsync(mailMessage, siteInformation);
+            await emailService.SendEmail("InternalRegistrationApproved", message.EmailAddress, "Registration approved", model);
         }
     }
 }

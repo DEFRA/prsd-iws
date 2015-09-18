@@ -12,10 +12,10 @@
             {
                 var componentContext = c.Resolve<IComponentContext>();
                 var config = componentContext.Resolve<AppConfiguration>();
-                return new SiteInformation(config.SiteRoot, config.WebSiteRoot, config.SendEmail);
+                return new SiteInformation(config.SiteRoot, config.WebSiteRoot);
             }).SingleInstance();
 
-            builder.RegisterAssemblyModules(typeof(IEmailTemplateService).Assembly);
+            builder.RegisterModule(new EmailMessagingModule());
         }
     }
 }

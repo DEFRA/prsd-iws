@@ -16,8 +16,6 @@
     using Prsd.Core.Web.OAuth;
     using Requests.Organisations;
     using Requests.Registration;
-    using Requests.Shared;
-    using Services;
     using ViewModels.Registration;
 
     [Authorize]
@@ -26,17 +24,14 @@
         private readonly Func<IIwsClient> apiClient;
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
-        private readonly IEmailService emailService;
 
         public RegistrationController(Func<IOAuthClient> oauthClient,
             Func<IIwsClient> apiClient,
-            IAuthenticationManager authenticationManager,
-            IEmailService emailService)
+            IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
             this.apiClient = apiClient;
             this.authenticationManager = authenticationManager;
-            this.emailService = emailService;
         }
 
         [HttpGet]
@@ -74,11 +69,13 @@
                         var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                         authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
-                        var verificationCode = await
-                            client.Registration.GetUserEmailVerificationTokenAsync(signInResponse.AccessToken);
-                        var verificationEmail = emailService.GenerateEmailVerificationMessage(Url.Action("VerifyEmail", "Account", null,
-                            Request.Url.Scheme), verificationCode, userId, model.Email);
-                        await emailService.SendAsync(verificationEmail);
+                        var emailSent =
+                            await
+                                client.Registration.SendEmailVerificationAsync(signInResponse.AccessToken,
+                                    new EmailVerificationData
+                                    {
+                                        Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
+                                    });
 
                         var addressId = await client.SendAsync(signInResponse.AccessToken, new CreateAddress { Address = model.Address, UserId = userId});
                         applicantRegistrationData.AddressId = addressId;
@@ -270,11 +267,15 @@
 
                 //Update applicant details & Send verification email
                 await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
-                var verificationCode = await client.Registration.GetUserEmailVerificationTokenAsync(User.GetAccessToken());
-                var verificationEmail = emailService.GenerateEmailVerificationMessage(
-                                        Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme),
-                                        verificationCode, model.Id.ToString(), model.Email);
-                await emailService.SendAsync(verificationEmail);
+
+                var emailSent =
+                    await
+                        client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
+                            new EmailVerificationData
+                            {
+                                Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
+                            });
+
                 return RedirectToAction("EmailVerificationRequired", "Account");
             }
         }

@@ -1,47 +1,32 @@
 ﻿namespace EA.Iws.EmailMessaging
 {
-    using System.Net.Mail;
-    using System.Net.Mime;
-    using System.Text;
     using System.Threading.Tasks;
-    using Autofac;
+    using Prsd.Email;
 
-    internal class EmailService
+    internal class EmailService : IEmailService
     {
-        private readonly IComponentContext context;
+        private readonly ITemplateExecutor templateExecutor;
+        private readonly IMessageCreator messageCreator;
+        private readonly ISender sender;
 
-        public EmailService(IComponentContext context)
+        public EmailService(ITemplateExecutor templateExecutor, IMessageCreator messageCreator, ISender sender)
         {
-            this.context = context;
+            this.templateExecutor = templateExecutor;
+            this.messageCreator = messageCreator;
+            this.sender = sender;
         }
 
-        public static MailMessage GenerateMailMessageWithHtmlAndPlainTextParts(string from, 
-            string to, 
-            string subject,
-            EmailTemplate emailTemplate)
+        public async Task<bool> SendEmail(string template, string mailTo, string subject, object model)
         {
-            var mail = new MailMessage(from, to) { Subject = subject, IsBodyHtml = true };
-
-            // Add the plain text alternative for other email clients.
-            var plainText = AlternateView.CreateAlternateViewFromString(emailTemplate.PlainText, Encoding.UTF8, MediaTypeNames.Text.Plain);
-            mail.AlternateViews.Add(plainText);
-
-            // Add the HTML view.
-            var htmlText = AlternateView.CreateAlternateViewFromString(emailTemplate.HtmlText, Encoding.UTF8,
-                MediaTypeNames.Text.Html);
-            mail.AlternateViews.Add(htmlText);
-
-            return mail;
-        }
-
-        public static async Task SendMailAsync(MailMessage message, SiteInformation siteInformation)
-        {
-            var client = new SmtpClient();
-
-            if (siteInformation.SendEmail)
+            var content = new EmailContent
             {
-                await client.SendMailAsync(message);
-            }
+                HtmlText = templateExecutor.Execute(template + ".cshtml", model),
+                PlainText = templateExecutor.Execute(template + ".txt", model)
+            };
+
+            var message = messageCreator.Create(mailTo, subject, content);
+
+            return await sender.SendAsync(message);
         }
     }
 }

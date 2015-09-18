@@ -2,10 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
+    using System.Web;
     using System.Web.Http;
     using Client.Entities;
-    using Core.Shared;
     using DataAccess.Identity;
+    using EmailMessaging;
     using Identity;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Domain;
@@ -14,12 +15,15 @@
     public class RegistrationController : ApiController
     {
         private readonly IUserContext userContext;
+        private readonly IEmailService emailService;
         private readonly ApplicationUserManager userManager;
 
         public RegistrationController(ApplicationUserManager userManager,
-            IUserContext userContext)
+            IUserContext userContext,
+            IEmailService emailService)
         {
             this.userContext = userContext;
+            this.emailService = emailService;
             this.userManager = userManager;
         }
 
@@ -78,13 +82,19 @@
             return Ok(user.Id);
         }
 
-        [HttpGet]
-        [Route("GetUserEmailVerificationToken")]
-        public async Task<string> GetUserEmailVerificationToken()
+        [HttpPost]
+        [Route("SendEmailVerification")]
+        public async Task<IHttpActionResult> SendEmailVerification(EmailVerificationData model)
         {
-            var token = await userManager.GenerateEmailConfirmationTokenAsync(userContext.UserId.ToString());
+            var userId = userContext.UserId.ToString();
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(userId);
+            var email = await userManager.GetEmailAsync(userId);
 
-            return token;
+            var emailModel = new { VerifyLink = GetEmailVerificationUrl(model.Url, token, userId) };
+
+            var result = await emailService.SendEmail("VerifyEmailAddress", email, "Verify your email address", emailModel);
+
+            return Ok(result);
         }
 
         [HttpPost]
@@ -172,6 +182,19 @@
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Generates the correct verification URL for a user to verify their email.
+        /// </summary>
+        private string GetEmailVerificationUrl(string baseUrl, string verificationToken, string userId)
+        {
+            var uriBuilder = new UriBuilder(baseUrl);
+            uriBuilder.Path += "/" + userId;
+            var parameters = HttpUtility.ParseQueryString(string.Empty);
+            parameters["code"] = verificationToken;
+            uriBuilder.Query = parameters.ToString();
+            return uriBuilder.Uri.ToString();
         }
     }
 }
