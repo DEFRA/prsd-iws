@@ -102,7 +102,7 @@
         public void SetQuantity_ReceiptNotAccepted_Throws()
         {
             Action action =
-                () => movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms);
+                () => movementReceipt.SetQuantity(10m);
 
             Assert.Throws<InvalidOperationException>(action);
         }
@@ -112,19 +112,9 @@
         {
             ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Decision, Decision.Accepted, movementReceipt);
 
-            movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms);
+            movementReceipt.SetQuantity(10m);
 
             Assert.Equal(10, movementReceipt.Quantity);
-        }
-
-        [Fact]
-        public void SetQuantity_DisplayUnitsDifferentToNotificationUnits_SetsWithConversion()
-        {
-            ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Decision, Decision.Accepted, movementReceipt);
-
-            movementReceipt.SetQuantity(10m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Tonnes);
-
-            Assert.Equal(10m / 1000, movementReceipt.Quantity);
         }
 
         [Fact]
@@ -160,7 +150,7 @@
 
             movement.Accept();
 
-            movement.Receipt.SetQuantity(5, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms);
+            movement.Receipt.SetQuantity(10m);
 
             Assert.True(receivedMovementCalculator.IsReceived(movement));
         }

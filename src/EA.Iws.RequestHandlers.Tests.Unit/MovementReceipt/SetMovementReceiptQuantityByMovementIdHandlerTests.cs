@@ -18,7 +18,7 @@
         {
             Context.Movements.Add(Movement);
             handler = new SetMovementReceiptQuantityByMovementIdHandler(Context);
-            request = new SetMovementReceiptQuantityByMovementId(MovementId, ShipmentQuantityUnits.Kilograms, TestDecimal);
+            request = new SetMovementReceiptQuantityByMovementId(MovementId, TestDecimal);
         }
 
         [Fact]
@@ -27,7 +27,7 @@
             Func<Task> action =
                 () =>
                     handler.HandleAsync(new SetMovementReceiptQuantityByMovementId(Guid.Empty,
-                        ShipmentQuantityUnits.Kilograms, AnyDecimal));
+                        AnyDecimal));
 
             await Assert.ThrowsAsync<InvalidOperationException>(action);
         }

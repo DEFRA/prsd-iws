@@ -14,8 +14,7 @@
             ToTable("Movement", "Notification");
 
             Property(x => x.NotificationApplicationId).HasColumnName("NotificationId");
-            Property(x => x.DisplayUnits).HasColumnName("DisplayUnit");
-            Property(x => x.Units).HasColumnName("QuantityUnit");
+            Property(x => x.Units).HasColumnName("Unit");
 
             HasMany(
                  ExpressionHelper.GetPrivatePropertyExpression<Movement, ICollection<PackagingInfo>>(

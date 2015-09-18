@@ -38,8 +38,8 @@
 
             Action updateShipmentInfo =
                 () =>
-                    notification.SetShipmentInfo(firstDate, lastDate, 10, 0.0001M,
-                        ShipmentQuantityUnits.Tonnes);
+                    notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                    new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
             Assert.Throws<InvalidOperationException>(updateShipmentInfo);
         }
@@ -52,8 +52,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 0.0001M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
             Assert.True(notification.HasShipmentInfo);
         }
@@ -68,7 +68,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 100, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 
+                new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
         }
@@ -83,7 +84,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 0, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
+                new ShipmentQuantity(0, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
         }
@@ -98,7 +100,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, -5, 100, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, -5, 
+                new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
         }
@@ -113,7 +116,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, -5, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
+                new ShipmentQuantity(-5, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
         }
@@ -128,7 +132,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2016, 01, 02);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 0, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 
+                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<InvalidOperationException>(addShipmentDates);
         }
@@ -143,7 +148,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 31);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 1, 1, ShipmentQuantityUnits.Kilograms);
+            notification.SetShipmentInfo(firstDate, lastDate, 1, 
+                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
 
             Assert.True(notification.HasShipmentInfo);
         }
@@ -158,7 +164,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2018, 01, 02);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 1, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
+                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<InvalidOperationException>(addShipmentDates);
         }
@@ -173,37 +180,38 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2017, 12, 31);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 1, 1, ShipmentQuantityUnits.Kilograms);
+            notification.SetShipmentInfo(firstDate, lastDate, 1, 
+                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
 
             Assert.True(notification.HasShipmentInfo);
         }
 
         [Fact]
-        public void QuantityRoundedUpTo4DecimalPlaces()
+        public void QuantityMoreThan4DecimalPlacesRoundsUp()
         {
             var notification = CreateNotificationApplication();
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 1.23445M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(1.23446m, ShipmentQuantityUnits.Tonnes));
 
-            Assert.Equal(1.2345M, notification.ShipmentInfo.Quantity);
+            Assert.Equal(1.2345m, notification.ShipmentInfo.Quantity);
         }
 
         [Fact]
-        public void QuantityRoundedDownTo4DecimalPlaces()
+        public void QuantityWithMoreThan4DecimalPlacesRoundsDown()
         {
             var notification = CreateNotificationApplication();
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 1.23444M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(1.23012m, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Equal(1.2344M, notification.ShipmentInfo.Quantity);
+            Assert.Equal(1.2301m, notification.ShipmentInfo.Quantity);
         }
 
         [Fact]
@@ -214,7 +222,8 @@
             var firstDate = DateTime.MinValue;
             var lastDate = DateTime.MinValue.AddDays(1);
 
-            Action updateDates = () => notification.SetShipmentInfo(firstDate, lastDate, 10, 10M, ShipmentQuantityUnits.Kilograms);
+            Action updateDates = () => notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<ArgumentException>("firstDate", updateDates);
         }
@@ -227,7 +236,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = DateTime.MinValue;
 
-            Action updateDates = () => notification.SetShipmentInfo(firstDate, lastDate, 10, 10M, ShipmentQuantityUnits.Kilograms);
+            Action updateDates = () => notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<ArgumentException>("lastDate", updateDates);
         }
@@ -240,13 +250,14 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 0.0001M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
             var newFirstDate = new DateTime(2015, 06, 01);
             var newLastDate = new DateTime(2016, 05, 31);
 
-            notification.SetShipmentInfo(newFirstDate, newLastDate, 10, 0.0001M, ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(newFirstDate, newLastDate, 10, 
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
             Assert.Equal(newFirstDate, notification.ShipmentInfo.FirstDate);
             Assert.Equal(newLastDate, notification.ShipmentInfo.LastDate);
@@ -260,10 +271,11 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 0.0001M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 2.0M, ShipmentQuantityUnits.Kilograms);
+            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(2.0M, ShipmentQuantityUnits.Kilograms));
 
             Assert.Equal(2.0M, notification.ShipmentInfo.Quantity);
             Assert.Equal(ShipmentQuantityUnits.Kilograms, notification.ShipmentInfo.Units);
@@ -277,11 +289,11 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 0.0001M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
-            notification.SetShipmentInfo(firstDate, lastDate, 50, 0.0001M,
-                ShipmentQuantityUnits.Tonnes);
+            notification.SetShipmentInfo(firstDate, lastDate, 50, 
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
             Assert.Equal(50, notification.ShipmentInfo.NumberOfShipments);
         }
@@ -299,8 +311,8 @@
 
             Action updateShipmentInfo =
                 () =>
-                    notification.SetShipmentInfo(firstDate, lastDate, 10, 0.0001M,
-                        ShipmentQuantityUnits.Tonnes);
+                    notification.SetShipmentInfo(firstDate, lastDate, 10, 
+                    new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
             Assert.Throws<InvalidOperationException>(updateShipmentInfo);
 
@@ -317,7 +329,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2016, 01, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 0, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 
+                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<InvalidOperationException>(addShipmentDates);
         }
@@ -332,7 +345,8 @@
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2018, 01, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 1, ShipmentQuantityUnits.Kilograms);
+            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
+                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
 
             Assert.Throws<InvalidOperationException>(addShipmentDates);
         }

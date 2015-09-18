@@ -6,7 +6,6 @@
     using System.Web.Mvc;
     using Core.Shared;
     using Prsd.Core.Helpers;
-    using Services;
 
     public class QuantityViewModel : IValidatableObject
     {
@@ -51,22 +50,18 @@
                 yield return new ValidationResult("The Actual quantity field is required", new[] { "Quantity" });
             }
 
-            if (!string.IsNullOrWhiteSpace(Quantity) && !ViewModelService.IsStringValidDecimalToNDecimalPlaces(Quantity, 4))
+            decimal quantity;
+            if (decimal.TryParse(Quantity, out quantity))
             {
-                yield return new ValidationResult("Please enter a valid positive number with a maximum of 4 decimal places", new[] { "Quantity" });
-            }
-
-            if (Units.HasValue && Units != NotificationUnits)
-            {
-                if (Units.Value == ShipmentQuantityUnits.Kilograms
-                    || Units.Value == ShipmentQuantityUnits.Litres)
+                if (quantity <= 0)
                 {
-                    var hasTooManyDecimalPlaces = !ViewModelService.IsStringValidDecimalToNDecimalPlaces(Quantity, 1);
+                    yield return new ValidationResult("The Actual quantity field must be a positive value", new[] { "Quantity" });
+                }
 
-                    if (hasTooManyDecimalPlaces)
-                    {
-                        yield return new ValidationResult("The quantity expressed in Kilograms or Litres can only have a maximum of 1 decimal place", new[] { "Quantity" });
-                    }
+                if (Units.HasValue && !quantity.IsDecimalValidToNDecimalPlaces(4))
+                {
+                    yield return new ValidationResult("Please enter a valid positive number with a maximum of 4 decimal places",
+                        new[] { "Quantity" });
                 }
             }
         }

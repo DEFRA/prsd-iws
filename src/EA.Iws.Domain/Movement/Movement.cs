@@ -39,8 +39,6 @@
 
         public ShipmentQuantityUnits? Units { get; private set; }
 
-        public ShipmentQuantityUnits? DisplayUnits { get; private set; }
-
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
 
         protected virtual ICollection<MovementCarrier> MovementCarriersCollection { get; set; }
@@ -69,22 +67,10 @@
             }
         }
 
-        public void SetQuantity(decimal quantity, ShipmentQuantityUnits units)
+        public void SetQuantity(ShipmentQuantity shipmentQuantity)
         {
-            Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
-            Guard.ArgumentNotNull(() => NotificationApplication.ShipmentInfo, NotificationApplication.ShipmentInfo);
-
-            var notificationUnits = NotificationApplication.ShipmentInfo.Units;
-
-            if (units != notificationUnits)
-            {
-                quantity = ShipmentQuantityUnitConverter.ConvertToTarget(units, notificationUnits, quantity);
-            }
-
-            Quantity = quantity;
-
-            Units = notificationUnits;
-            DisplayUnits = units;
+            Quantity = shipmentQuantity.Quantity;
+            Units = shipmentQuantity.Units;
         }
 
         public void SetPackagingInfos(IEnumerable<PackagingInfo> packagingInfos)
@@ -152,18 +138,6 @@
 
             this.Receipt.Decision = MovementReceiptDecision.Rejected;
             this.Receipt.RejectReason = reason;
-        }
-
-        public decimal? QuantityInDisplayUnits()
-        {
-            if (Quantity.HasValue && Units.HasValue 
-                && DisplayUnits.HasValue
-                && DisplayUnits.Value != Units.Value)
-            {
-                return ShipmentQuantityUnitConverter.ConvertToTarget(Units.Value, DisplayUnits.Value, Quantity.Value);
-            }
-
-            return Quantity;
         }
     }
 }

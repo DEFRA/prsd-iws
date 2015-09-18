@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Prsd.Core.Mediator;
     using Requests.IntendedShipments;
 
@@ -20,7 +21,7 @@
             var notification = await context.GetNotificationApplication(command.NotificationId);
 
             notification.SetShipmentInfo(command.StartDate, command.EndDate, command.NumberOfShipments,
-                command.Quantity, command.Units);
+                new ShipmentQuantity(command.Quantity, command.Units));
 
             await context.SaveChangesAsync();
 

@@ -29,10 +29,8 @@
             {
                 return receivedMovements.Sum(m => m.Receipt.Quantity.Value);
             }
-            else
-            {
-                throw new InvalidOperationException("Cannot sum movement quantities that have different units.");
-            }
+            
+            throw new InvalidOperationException("Cannot sum movement quantities that have different units.");
         }
 
         public decimal QuantityRemaining(ShipmentInfo shipmentInfo, IList<Movement> movements)
@@ -57,7 +55,7 @@
 
         private bool TryParseMovementsUnit(IList<Movement> movements, out ShipmentQuantityUnits unit)
         {
-            if (movements.Where(m => !m.Units.HasValue).Any())
+            if (movements.Any(m => !m.Units.HasValue))
             {
                 unit = default(ShipmentQuantityUnits);
                 return false;

@@ -64,24 +64,23 @@
         [Fact]
         public void SetQuantity_SetsDisplayUnitsToPassedValue()
         {
-            movement.SetQuantity(10, ShipmentQuantityUnits.Tonnes);
+            movement.SetQuantity(new ShipmentQuantity(10, ShipmentQuantityUnits.Tonnes));
 
-            AssertQuantity(10, ShipmentQuantityUnits.Tonnes, ShipmentQuantityUnits.Tonnes);
+            AssertQuantity(10, ShipmentQuantityUnits.Tonnes);
         }
 
         [Fact]
         public void SetQuantity_ConvertsQuantity_SetsUnitsCorrectly()
         {
-            movement.SetQuantity(100, ShipmentQuantityUnits.Kilograms);
+            movement.SetQuantity(new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms));
 
-            AssertQuantity(0.1m, ShipmentQuantityUnits.Tonnes, ShipmentQuantityUnits.Kilograms);
+            AssertQuantity(100, ShipmentQuantityUnits.Kilograms);
         }
 
-        private void AssertQuantity(decimal quantity, ShipmentQuantityUnits unit, ShipmentQuantityUnits displayUnit)
+        private void AssertQuantity(decimal quantity, ShipmentQuantityUnits unit)
         {
             Assert.Equal(quantity, movement.Quantity);
             Assert.Equal(unit, movement.Units);
-            Assert.Equal(displayUnit, movement.DisplayUnits);
         }
     }
 }

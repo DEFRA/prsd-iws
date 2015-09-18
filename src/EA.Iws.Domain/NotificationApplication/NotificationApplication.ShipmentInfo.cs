@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
-    using ShipmentQuantityUnits = Core.Shared.ShipmentQuantityUnits;
 
     public partial class NotificationApplication
     {
@@ -10,7 +9,7 @@
             get { return ShipmentInfo != null; }
         }
 
-        public void SetShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
+        public void SetShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, ShipmentQuantity shipmentQuantity)
         {
             int monthPeriodLength = IsPreconsentedRecoveryFacility.GetValueOrDefault() ? 36 : 12;
             if (lastDate >= firstDate.AddMonths(monthPeriodLength))
@@ -22,12 +21,12 @@
 
             if (ShipmentInfo == null)
             {
-                ShipmentInfo = new ShipmentInfo(firstDate, lastDate, numberOfShipments, quantity, unit);
+                ShipmentInfo = new ShipmentInfo(firstDate, lastDate, numberOfShipments, shipmentQuantity);
             }
             else
             {
                 ShipmentInfo.UpdateShipmentPeriod(firstDate, lastDate);
-                ShipmentInfo.UpdateQuantity(quantity, unit);
+                ShipmentInfo.UpdateQuantity(shipmentQuantity);
                 ShipmentInfo.NumberOfShipments = numberOfShipments;
             }
         }

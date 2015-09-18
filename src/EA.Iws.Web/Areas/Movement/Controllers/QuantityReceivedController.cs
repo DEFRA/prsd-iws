@@ -26,7 +26,7 @@
 
                 return View(new QuantityReceivedViewModel
                 {
-                    MovementUnits = result.MovementUnit,
+                    Unit = result.Unit,
                     Quantity = result.Quantity
                 });
             }
@@ -44,7 +44,6 @@
             using (var client = apiClient())
             {
                 await client.SendAsync(User.GetAccessToken(), new SetMovementReceiptQuantityByMovementId(id,
-                    model.MovementUnits,
                     model.Quantity.Value));
 
                 return RedirectToAction("Index", "ReceiptComplete", new { id });

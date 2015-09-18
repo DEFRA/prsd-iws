@@ -23,9 +23,8 @@
             var movement = await context.Movements.Where(m => m.Id == message.Id)
                 .Select(m => new
                 {
-                    m.DisplayUnits,
-                    m.Receipt,
-                    m.Units
+                    m.Units,
+                    m.Receipt
                 })
                 .SingleAsync();
 
@@ -33,18 +32,14 @@
             {
                 return new MovementReceiptQuantityData
                 {
-                    MovementUnit = movement.DisplayUnits.Value,
-                    NotificationUnits = movement.Units.Value
+                    Unit = movement.Units.Value
                 };
             }
 
             return new MovementReceiptQuantityData
             {
-                MovementUnit = movement.DisplayUnits.Value,
-                NotificationUnits = movement.Units.Value,
-                Quantity = (movement.Receipt.Quantity.HasValue) ? (decimal?)ShipmentQuantityUnitConverter.ConvertToTarget(movement.Units.Value,
-                    movement.DisplayUnits.Value,
-                    movement.Receipt.Quantity.Value) : null
+                Unit = movement.Units.Value,
+                Quantity = movement.Receipt.Quantity
             };
         }
     }

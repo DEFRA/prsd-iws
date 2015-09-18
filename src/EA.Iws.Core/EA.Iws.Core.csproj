@@ -66,6 +66,7 @@
     <Compile Include="Movement\MovementReceiptSummaryData.cs" />
     <Compile Include="Movement\ProgressData.cs" />
     <Compile Include="Movement\MovementProgressAndSummaryData.cs" />
+    <Compile Include="Shared\PrimitiveExtensions.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentSummaryInformationData.cs" />

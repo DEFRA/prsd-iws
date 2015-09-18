@@ -3,16 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using Core.IntendedShipments;
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Helpers;
     using Requests.IntendedShipments;
-    using Services;
 
     public class ShipmentInfoViewModel : IValidatableObject
     {
+        private const NumberStyles Style = NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
+
         public ShipmentInfoViewModel()
         {
             UnitsSelectList = new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
@@ -30,7 +33,7 @@
                 EndMonth = intendedShipmentData.LastDate.Month;
                 EndYear = intendedShipmentData.LastDate.Year;
                 NumberOfShipments = intendedShipmentData.NumberOfShipments.ToString();
-                Quantity = intendedShipmentData.Quantity.ToString();
+                Quantity = intendedShipmentData.Quantity.ToString("G29");
                 StartDay = intendedShipmentData.FirstDate.Day;
                 StartMonth = intendedShipmentData.FirstDate.Month;
                 StartYear = intendedShipmentData.FirstDate.Year;
@@ -88,7 +91,7 @@
         {
             if (!IsNumberOfShipmentsValid())
             {
-                yield return new ValidationResult("Please enter a valid number between 1 and 99999", new[] { "NumberOfShipments" });                
+                yield return new ValidationResult("Please enter a valid number between 1 and 99999", new[] { "NumberOfShipments" });
             }
 
             if (!IsQuantityValid())
@@ -138,12 +141,43 @@
 
         private bool IsNumberOfShipmentsValid()
         {
-            return ViewModelService.IsNumberOfShipmentsValid(NumberOfShipments);
+            int numberOfShipments;
+            string numberOfShipmentsString = NumberOfShipments;
+            if (numberOfShipmentsString.Contains(","))
+            {
+                Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)?$");
+                if (rgx.IsMatch(numberOfShipmentsString))
+                {
+                    numberOfShipmentsString = numberOfShipmentsString.Replace(",", string.Empty);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (!Int32.TryParse(numberOfShipmentsString, out numberOfShipments))
+            {
+                return false;
+            }
+
+            if (numberOfShipments < 1 || numberOfShipments > 99999)
+            {
+                return false;
+            }
+            return true;
         }
 
-        private bool IsQuantityValid()
+        public bool IsQuantityValid()
         {
-            return ViewModelService.IsStringValidDecimalToNDecimalPlaces(Quantity, 4);
+            if (!Units.HasValue)
+            {
+                return false;
+            }
+
+            decimal quantity;
+            return Decimal.TryParse(Quantity, Style, CultureInfo.CurrentCulture, out quantity)
+                && quantity.IsDecimalValidToNDecimalPlaces(4);
         }
 
         public SetIntendedShipmentInfoForNotification ToRequest()

@@ -4,7 +4,6 @@
     using Core.Shared;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
-    using Domain.Movement;
     using Domain.NotificationApplication;
     using TestHelpers.DomainFakes;
     using Xunit;
@@ -81,7 +80,6 @@
             movement.Date = new DateTime(2015, 1, 1);
             movement.Quantity = 70;
             movement.Units = ShipmentQuantityUnits.Kilograms;
-            movement.DisplayUnits = ShipmentQuantityUnits.Kilograms;
             movement.Number = 5;
 
             var result = GenerateViewModel();
@@ -101,51 +99,12 @@
             }.Evaluate(result);
         }
 
-        [Theory]
-        [InlineData(70, ShipmentQuantityUnits.Litres, ShipmentQuantityUnits.Litres, "", "", "70 Ltrs", "")]
-        [InlineData(70, ShipmentQuantityUnits.CubicMetres, ShipmentQuantityUnits.CubicMetres, "70", "", "", "")]
-        [InlineData(70, ShipmentQuantityUnits.Tonnes, ShipmentQuantityUnits.Tonnes, "", "", "", "70")]
-        [InlineData(70, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms, "", "70 kg", "", "")]
-        [InlineData(70.25, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms, "", "70.25 kg", "", "")]
-        [InlineData(70.250, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Kilograms, "", "70.25 kg", "", "")]
-        public void SetsMovementPropertiesWithCorrectUnits(decimal quantity,
-            ShipmentQuantityUnits units,
-            ShipmentQuantityUnits displayUnits,
-            string cubicDisplay,
-            string kilogramsDisplay,
-            string litresDisplay,
-            string tonnesDisplay)
-        {
-            movement.Date = new DateTime(2015, 12, 15);
-            movement.Quantity = quantity;
-            movement.Units = units;
-            movement.DisplayUnits = displayUnits;
-            movement.Number = 7;
-
-            var result = GenerateViewModel();
-
-            new ExpectedMovementViewModel
-            {
-                ActualCubicMetres = cubicDisplay,
-                ActualDate = "15.12.15",
-                ActualKilograms = kilogramsDisplay,
-                ActualLitres = litresDisplay,
-                ActualTonnes = tonnesDisplay,
-                IsNotSpecialHandling = false,
-                IsSpecialHandling = false,
-                NotificationNumber = string.Empty,
-                Number = "7",
-                PhysicalCharacteristics = string.Empty
-            }.Evaluate(result);
-        }
-
         [Fact]
-        public void SetsMovementPropertiesConvertingToDisplayUnits()
+        public void SetsMovementPropertiesWithCorrectUnits()
         {
             movement.Date = new DateTime(2010, 10, 5);
             movement.Quantity = 69;
             movement.Units = ShipmentQuantityUnits.Tonnes;
-            movement.DisplayUnits = ShipmentQuantityUnits.Kilograms;
             movement.Number = 2;
 
             var result = GenerateViewModel();
@@ -154,9 +113,9 @@
             {
                 ActualCubicMetres = string.Empty,
                 ActualDate = "05.10.10",
-                ActualKilograms = "69000 kg",
+                ActualKilograms = string.Empty,
                 ActualLitres = string.Empty,
-                ActualTonnes = string.Empty,
+                ActualTonnes = "69",
                 IsNotSpecialHandling = false,
                 IsSpecialHandling = false,
                 NotificationNumber = string.Empty,
@@ -171,7 +130,6 @@
             movement.Date = new DateTime(2025, 5, 2);
             movement.Quantity = 30.7m;
             movement.Units = ShipmentQuantityUnits.Kilograms;
-            movement.DisplayUnits = ShipmentQuantityUnits.Tonnes;
             movement.Number = 12;
 
             notification.NotificationNumber = "GB 001 00250";
@@ -191,9 +149,9 @@
             {
                 ActualCubicMetres = string.Empty,
                 ActualDate = "02.05.25",
-                ActualKilograms = string.Empty,
+                ActualKilograms = "30.7 kg",
                 ActualLitres = string.Empty,
-                ActualTonnes = "0.0307",
+                ActualTonnes = string.Empty,
                 IsNotSpecialHandling = true,
                 IsSpecialHandling = false,
                 NotificationNumber = notification.NotificationNumber,

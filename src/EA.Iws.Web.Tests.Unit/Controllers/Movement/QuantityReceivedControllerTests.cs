@@ -30,13 +30,13 @@
                     A<GetMovementReceiptQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid)))
                 .Returns(new MovementReceiptQuantityData
                 {
-                    MovementUnit = ShipmentQuantityUnits.Kilograms,
+                    Unit = ShipmentQuantityUnits.Kilograms,
                     Quantity = 250
                 });
 
             viewModel = new QuantityReceivedViewModel
             {
-                MovementUnits = ShipmentQuantityUnits.Kilograms,
+                Unit = ShipmentQuantityUnits.Kilograms,
                 Quantity = 250
             };
         }
@@ -60,7 +60,7 @@
 
             Assert.NotNull(result);
             var model = Assert.IsType<QuantityReceivedViewModel>(result.Model);
-            Assert.Equal(ShipmentQuantityUnits.Kilograms, model.MovementUnits);
+            Assert.Equal(ShipmentQuantityUnits.Kilograms, model.Unit);
             Assert.Equal(250, model.Quantity);
         }
 
@@ -85,8 +85,6 @@
                 A<SetMovementReceiptQuantityByMovementId>
                     .That
                     .Matches(r => r.Id == AnyGuid
-                                  &&
-                                  r.Units == viewModel.MovementUnits
                                   && r.Quantity == viewModel.Quantity)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }

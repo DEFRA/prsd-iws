@@ -19,7 +19,7 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.Id);
 
-            movement.Receipt.SetQuantity(message.Quantity, message.Units, movement.Units.Value);
+            movement.Receipt.SetQuantity(message.Quantity);
 
             await context.SaveChangesAsync();
 

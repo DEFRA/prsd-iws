@@ -58,24 +58,14 @@
         }
 
         [Fact]
-        public async Task UnitDimensionsDoNotMatchThrows()
-        {
-            await
-                Assert.ThrowsAsync<ArgumentException>(
-                    () =>
-                        handler.HandleAsync(new SetMovementQuantityByMovementId(MovementId, 10,
-                            ShipmentQuantityUnits.Kilograms)));
-        }
-
-        [Fact]
-        public async Task UnitsAreDifferentButConvertibleSetsValueAndConvertsUnits()
+        public async Task SetsQuantityDifferentToNotification()
         {
             await
                 handler.HandleAsync(new SetMovementQuantityByMovementId(MovementId, 10,
                     ShipmentQuantityUnits.CubicMetres));
 
-            Assert.Equal(10 * 1000, movement.Quantity);
-            Assert.Equal(ShipmentQuantityUnits.Litres, movement.Units);
+            Assert.Equal(10, movement.Quantity);
+            Assert.Equal(ShipmentQuantityUnits.CubicMetres, movement.Units);
         }
 
         [Fact]

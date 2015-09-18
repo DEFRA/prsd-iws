@@ -16,14 +16,10 @@
             if (source.ThisMovementQuantity.HasValue
                 && source.ThisMovementQuantity.Value > 0)
             {
-                if (Math.Ceiling(source.ThisMovementQuantity.Value) == source.ThisMovementQuantity.Value)
-                {
-                    quantity = ((int)source.ThisMovementQuantity.Value).ToString("G");
-                }
-                else
-                {
-                    quantity = source.ThisMovementQuantity.Value.ToString("0,0.0000");
-                }
+                quantity = Math.Ceiling(source.ThisMovementQuantity.Value) == 
+                    source.ThisMovementQuantity.Value 
+                    ? ((int)source.ThisMovementQuantity.Value).ToString("G29") 
+                    : source.ThisMovementQuantity.Value.ToString("0,0.0000");
             }
 
             return new QuantityViewModel

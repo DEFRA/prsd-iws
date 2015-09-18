@@ -87,16 +87,14 @@
 
         private void SetQuantity(Movement movement, QuantityFormatter quantityFormatter)
         {
-            if (!movement.DisplayUnits.HasValue || !movement.Units.HasValue || !movement.Quantity.HasValue)
+            if (!movement.Units.HasValue || !movement.Quantity.HasValue)
             {
                 return;
             }
 
-            var value = ShipmentQuantityUnitConverter.ConvertToTarget(movement.Units.Value, movement.DisplayUnits.Value,
-                movement.Quantity.Value);
-            var displayString = quantityFormatter.QuantityToStringWithUnits(value, movement.DisplayUnits.Value);
+            var displayString = quantityFormatter.QuantityToStringWithUnits(movement.Quantity, movement.Units.Value);
 
-            switch (movement.DisplayUnits.Value)
+            switch (movement.Units.Value)
             {
                 case ShipmentQuantityUnits.Kilograms:
                     ActualKilograms = displayString;

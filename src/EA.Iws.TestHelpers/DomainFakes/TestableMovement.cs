@@ -41,12 +41,6 @@
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Units, value, this); }
         }
 
-        public new ShipmentQuantityUnits? DisplayUnits
-        {
-            get { return base.DisplayUnits; }
-            set { ObjectInstantiator<Movement>.SetProperty(x => x.DisplayUnits, value, this); }
-        }
-
         public new DateTime? Date
         {
             get { return base.Date; }

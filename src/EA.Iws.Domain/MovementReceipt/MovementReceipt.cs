@@ -2,9 +2,7 @@
 {
     using System;
     using Core.MovementReceipt;
-    using Core.Shared;
     using MovementOperationReceipt;
-    using Prsd.Core;
     using Prsd.Core.Domain;
 
     public class MovementReceipt : Entity
@@ -28,15 +26,11 @@
 
         public virtual MovementOperationReceipt OperationReceipt { get; private set; }
 
-        public void SetQuantity(decimal quantity,
-            ShipmentQuantityUnits displayUnits,
-            ShipmentQuantityUnits notificationUnits)
+        public void SetQuantity(decimal quantity)
         {
-            Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
-
             if (Decision.HasValue && Decision.Value == Core.MovementReceipt.Decision.Accepted)
             {
-                Quantity = ShipmentQuantityUnitConverter.ConvertToTarget(displayUnits, notificationUnits, quantity);
+                Quantity = quantity;
             }
             else
             {

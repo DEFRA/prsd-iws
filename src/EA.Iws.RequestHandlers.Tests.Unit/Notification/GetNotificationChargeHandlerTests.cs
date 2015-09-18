@@ -56,7 +56,7 @@
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationWithShipmentInfo, notificationWithShipmentInfoId);
 
-            notificationWithShipmentInfo.SetShipmentInfo(new DateTime(2016, 1, 1), new DateTime(2016, 12, 31), 1, 1, ShipmentQuantityUnits.Kilograms);
+            notificationWithShipmentInfo.SetShipmentInfo(new DateTime(2016, 1, 1), new DateTime(2016, 12, 31), 1, new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
 
             return notificationWithShipmentInfo;
         }

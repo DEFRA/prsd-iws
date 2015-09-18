@@ -85,7 +85,7 @@
             });
 
             notification.SetShipmentInfo(new DateTime(DateTime.UtcNow.Year + 1, 2, 1),
-                new DateTime(DateTime.UtcNow.Year + 2, 1, 1), 420, 69, ShipmentQuantityUnits.Kilograms);
+                new DateTime(DateTime.UtcNow.Year + 2, 1, 1), 420, new ShipmentQuantity(69, ShipmentQuantityUnits.Kilograms));
 
             var exitPoint =
                 entryOrExitPoints.OrderBy(ep => ep.Country.Name).First(ep => ep.Country.IsEuropeanUnionMember);

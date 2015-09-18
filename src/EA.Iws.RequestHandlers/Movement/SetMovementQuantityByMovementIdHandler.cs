@@ -3,6 +3,7 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
@@ -19,7 +20,7 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.Id);
 
-            movement.SetQuantity(message.Quantity, message.Units);
+            movement.SetQuantity(new ShipmentQuantity(message.Quantity, message.Units));
 
             await context.SaveChangesAsync();
 

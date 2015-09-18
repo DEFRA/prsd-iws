@@ -31,10 +31,10 @@
 
         private void ApplyUnitStrikethrough(Movement movement)
         {
-            if (movement != null && movement.DisplayUnits.HasValue)
+            if (movement != null && movement.Units.HasValue)
             {
                 ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, 
-                    movement.DisplayUnits.Value);
+                    movement.Units.Value);
             }
         }
     }

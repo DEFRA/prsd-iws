@@ -16,10 +16,10 @@
         {
         }
 
-        internal ShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, decimal quantity, ShipmentQuantityUnits unit)
+        internal ShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, ShipmentQuantity shipmentQuantity)
         {
             UpdateShipmentPeriod(firstDate, lastDate);
-            UpdateQuantity(quantity, unit);
+            UpdateQuantity(shipmentQuantity);
 
             NumberOfShipments = numberOfShipments;
         }
@@ -86,10 +86,10 @@
             this.lastDate = lastDate;
         }
 
-        internal void UpdateQuantity(decimal quantity, ShipmentQuantityUnits units)
+        internal void UpdateQuantity(ShipmentQuantity shipmentQuantity)
         {
-            Quantity = quantity;
-            Units = units;
+            Quantity = shipmentQuantity.Quantity;
+            Units = shipmentQuantity.Units;
         }
     }
 }
