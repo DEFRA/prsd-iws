@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.Domain.MovementReceipt
 {
     using System;
-    using System.Linq;
     using Core.MovementReceipt;
     using Core.Shared;
+    using MovementOperationReceipt;
     using Prsd.Core;
     using Prsd.Core.Domain;
 
@@ -25,6 +25,8 @@
         public string RejectReason { get; internal set; }
 
         public decimal? Quantity { get; internal set; }
+
+        public virtual MovementOperationReceipt OperationReceipt { get; private set; }
 
         public void SetQuantity(decimal quantity,
             ShipmentQuantityUnits displayUnits,

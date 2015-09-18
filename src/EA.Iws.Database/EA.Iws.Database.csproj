@@ -112,6 +112,7 @@
     <Content Include="scripts\Update\Sprint15\20150908-093500-resize-waste-additional-information-columns.sql" />
     <Content Include="scripts\Update\Sprint16\20150914-092400-add-movement-receipt-table.sql" />
     <Content Include="scripts\Update\Sprint16\20150914-141500-add-units-for-movement.sql" />
+    <Content Include="scripts\Update\Sprint16\20150918_105600_add_movement_operation_receipt_table.sql" />
     <Content Include="scripts\Update\Sprint16\20150918-000000-update-column-type-from-string-to-int-with-data-migration.sql" />
   </ItemGroup>
   <ItemGroup>
