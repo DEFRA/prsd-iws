@@ -98,6 +98,8 @@
     <EmbeddedResource Include="Templates\InternalRegistrationApproved.cshtml" />
     <EmbeddedResource Include="Templates\InternalRegistrationRejected.cshtml" />
     <EmbeddedResource Include="Templates\VerifyEmailAddress.cshtml" />
+    <EmbeddedResource Include="Templates\PasswordResetRequest.cshtml" />
+    <EmbeddedResource Include="Templates\PasswordResetRequest.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -54,5 +54,12 @@
             var response = await httpClient.PostAsJsonAsync(Controller + "UpdateApplicantDetails", applicantRegistrationData);
             return await response.CreateResponseAsync<string>();
         }
+
+        public async Task<bool> ResetPasswordAsync(PasswordResetRequest passwordResetRequest)
+        {
+            var response = await httpClient.PostAsJsonAsync(Controller + "ResetPasswordRequest", passwordResetRequest);
+
+            return await response.CreateResponseAsync<bool>();
+        }
     }
 }

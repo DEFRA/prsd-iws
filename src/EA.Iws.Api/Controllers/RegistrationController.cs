@@ -151,6 +151,25 @@
             return Ok(user.Id);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("ResetPasswordRequest")]
+        public async Task<IHttpActionResult> ResetPasswordRequest(PasswordResetRequest model)
+        {
+            var user = await userManager.FindByEmailAsync(model.EmailAddress);
+            if (user != null)
+            {
+                var token = await userManager.GeneratePasswordResetTokenAsync(user.Id);
+
+                var emailModel = new { PasswordResetUrl = GetEmailVerificationUrl(model.Url, token, user.Id) };
+
+                await emailService.SendEmail("PasswordResetRequest", model.EmailAddress, "Reset your IWS password", emailModel);
+                return Ok(true);
+            }
+
+            return Ok(false);
+        }
+
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
             if (result == null)

@@ -10,7 +10,10 @@
         Task<bool> VerifyEmailAsync(VerifiedEmailData verifiedEmailData);
         Task<bool> SendEmailVerificationAsync(string accessToken, EmailVerificationData emailVerificationData);
         Task<EditApplicantRegistrationData> GetApplicantDetailsAsync(string accessToken);
+
         Task<string> UpdateApplicantDetailsAsync(string accessToken,
             EditApplicantRegistrationData applicantRegistrationData);
+
+        Task<bool> ResetPasswordAsync(PasswordResetRequest passwordResetRequest);
     }
 }

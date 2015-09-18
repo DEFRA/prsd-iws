@@ -86,6 +86,7 @@
     <Compile Include="Entities\EditApplicantRegistrationData.cs" />
     <Compile Include="Entities\ApplicantRegistrationData.cs" />
     <Compile Include="Entities\EmailVerificationData.cs" />
+    <Compile Include="Entities\PasswordResetRequest.cs" />
     <Compile Include="Entities\VerifiedEmailData.cs" />
     <Compile Include="IIwsClient.cs" />
     <Compile Include="IwsClient.cs" />

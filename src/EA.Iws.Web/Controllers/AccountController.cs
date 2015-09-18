@@ -170,13 +170,37 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+
+            using (var client = apiClient())
+            {
+                var result = await client.Registration.ResetPasswordAsync(
+                    new PasswordResetRequest
+                    {
+                        EmailAddress = model.Email,
+                        Url = Url.Action("ResetPasswordUpdate", "Account", null, Request.Url.Scheme)
+                    });
+
+                if (!result)
+                {
+                    ModelState.AddModelError("Email", "Email address not recognised.");
+                    return View(model);
+                }
+            }
+
             return RedirectToAction("ResetPasswordEmailSent", "Account", new { email = model.Email });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ResetPasswordUpdate(Guid id, string code)
+        {
+            return HttpNotFound();
         }
 
         [HttpGet]
