@@ -61,6 +61,7 @@
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
     <Content Include="scripts\TestData\20150825-143456-add-address-to-test-user.sql" />
+    <Content Include="scripts\TestData\20150921-145000-create-submitted-notification-2501.sql" />
     <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\Sprint10\20150625-103000-add-us-competent-authority.sql" />
