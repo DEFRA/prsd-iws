@@ -170,6 +170,35 @@
             return Ok(false);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("ResetPassword")]
+        public async Task<IHttpActionResult> ResetPassword(PasswordResetData model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await userManager.ResetPasswordAsync(model.UserId.ToString(), model.Token, model.Password);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                // Because an invalid token or an invalid password does not throw an error on reset, we can say the only other parameter (user Id) is invalid
+                ModelState.AddModelError(string.Empty, "User not recognised");
+                return BadRequest(ModelState);
+            }
+
+            return Ok(true);
+        }
+
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
             if (result == null)

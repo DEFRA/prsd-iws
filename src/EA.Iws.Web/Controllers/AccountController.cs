@@ -10,6 +10,8 @@
     using Api.Client.Entities;
     using Infrastructure;
     using Microsoft.Owin.Security;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Mvc.Extensions;
     using Prsd.Core.Web.OAuth;
     using Prsd.Core.Web.OpenId;
     using ViewModels.Account;
@@ -170,7 +172,7 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -179,7 +181,7 @@
 
             using (var client = apiClient())
             {
-                var result = await client.Registration.ResetPasswordAsync(
+                var result = await client.Registration.ResetPasswordRequestAsync(
                     new PasswordResetRequest
                     {
                         EmailAddress = model.Email,
@@ -198,16 +200,59 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ResetPassword(Guid id, string code)
+        public ActionResult ResetPasswordEmailSent(string email)
         {
-            return HttpNotFound();
+            ViewBag.Email = email;
+            return View();
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ResetPasswordEmailSent(string email)
+        public ActionResult ResetPassword(Guid id, string code)
         {
-            ViewBag.Email = email;
+            var model = new ResetPasswordViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(Guid id, string code, ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (var client = apiClient())
+                    {
+                        await client.Registration.ResetPasswordAsync(new PasswordResetData
+                        {
+                            Password = model.Password,
+                            Token = code,
+                            UserId = id
+                        });
+
+                        return RedirectToAction("PasswordUpdated", "Account");
+                    }
+                }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult PasswordUpdated()
+        {
             return View();
         }
     }

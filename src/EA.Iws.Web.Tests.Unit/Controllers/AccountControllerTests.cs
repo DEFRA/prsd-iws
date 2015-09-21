@@ -51,7 +51,7 @@
         {
             controller.ModelState.AddModelError("Email", "Invalid email");
 
-            var result = await controller.ForgotPassword(new ResetPasswordViewModel()) as ViewResult;
+            var result = await controller.ForgotPassword(new ForgotPasswordViewModel()) as ViewResult;
 
             Assert.Equal(string.Empty, result.ViewName);
         }
@@ -59,22 +59,59 @@
         [Fact]
         public async Task ForgotPassword_ValidModel_CallsApi()
         {
-            await controller.ForgotPassword(new ResetPasswordViewModel { Email = "test@email.com" });
+            await controller.ForgotPassword(new ForgotPasswordViewModel { Email = "test@email.com" });
 
-            A.CallTo(() => client.Registration.ResetPasswordAsync(A<PasswordResetRequest>._))
+            A.CallTo(() => client.Registration.ResetPasswordRequestAsync(A<PasswordResetRequest>._))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
         public async Task ForgotPassword_ValidModel_ReturnsEmailSentView()
         {
-            A.CallTo(() => client.Registration.ResetPasswordAsync(A<PasswordResetRequest>._)).Returns(true);
+            A.CallTo(() => client.Registration.ResetPasswordRequestAsync(A<PasswordResetRequest>._)).Returns(true);
 
             var result =
-                await controller.ForgotPassword(new ResetPasswordViewModel { Email = "test@email.com" }) as
+                await controller.ForgotPassword(new ForgotPasswordViewModel { Email = "test@email.com" }) as
                     RedirectToRouteResult;
 
             RouteAssert.RoutesTo(result.RouteValues, "ResetPasswordEmailSent", "Account");
+        }
+
+        [Fact]
+        public void ResetPassword_ReturnsView()
+        {
+            var result = controller.ResetPassword(new Guid("9E6E137D-4903-414B-BE9D-1A89893C678B"), "code") as ViewResult;
+
+            Assert.Equal(String.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public async Task ResetPassword_InvalidModel_ReturnsView()
+        {
+            controller.ModelState.AddModelError("Password", "Error");
+            var result = await controller.ResetPassword(new Guid("9E6E137D-4903-414B-BE9D-1A89893C678B"), "code", new ResetPasswordViewModel()) as ViewResult;
+
+            Assert.Equal(String.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public async Task ResetPassword_ValidModel_CallsApi()
+        {
+            await
+                controller.ResetPassword(new Guid("9E6E137D-4903-414B-BE9D-1A89893C678B"), "code",
+                    new ResetPasswordViewModel());
+
+            A.CallTo(() => client.Registration.ResetPasswordAsync(A<PasswordResetData>._))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task ResetPassword_ValidModel_RedirectsToPasswordUpdated()
+        {
+            var result = await controller.ResetPassword(new Guid("9E6E137D-4903-414B-BE9D-1A89893C678B"), "code",
+                new ResetPasswordViewModel()) as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(result.RouteValues, "PasswordUpdated", "Account");
         }
     }
 }

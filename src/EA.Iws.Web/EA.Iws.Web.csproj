@@ -705,6 +705,8 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordEmailSent.cshtml" />
     <Content Include="Views\Shared\_IwsHelpline.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\PasswordUpdated.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -739,6 +741,7 @@
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
+    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />
@@ -940,7 +943,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\TransitState\TransitStateViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteGenerationProcess\WasteGenerationProcessViewModel.cs" />
     <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
-    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Views\Shared\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,8 @@
         Task<string> UpdateApplicantDetailsAsync(string accessToken,
             EditApplicantRegistrationData applicantRegistrationData);
 
-        Task<bool> ResetPasswordAsync(PasswordResetRequest passwordResetRequest);
+        Task<bool> ResetPasswordRequestAsync(PasswordResetRequest passwordResetRequest);
+
+        Task<bool> ResetPasswordAsync(PasswordResetData passwordResetData);
     }
 }

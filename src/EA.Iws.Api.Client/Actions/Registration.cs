@@ -55,9 +55,16 @@
             return await response.CreateResponseAsync<string>();
         }
 
-        public async Task<bool> ResetPasswordAsync(PasswordResetRequest passwordResetRequest)
+        public async Task<bool> ResetPasswordRequestAsync(PasswordResetRequest passwordResetRequest)
         {
             var response = await httpClient.PostAsJsonAsync(Controller + "ResetPasswordRequest", passwordResetRequest);
+
+            return await response.CreateResponseAsync<bool>();
+        }
+
+        public async Task<bool> ResetPasswordAsync(PasswordResetData passwordResetData)
+        {
+            var response = await httpClient.PostAsJsonAsync(Controller + "ResetPassword", passwordResetData);
 
             return await response.CreateResponseAsync<bool>();
         }
