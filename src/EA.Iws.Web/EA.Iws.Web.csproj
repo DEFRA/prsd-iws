@@ -702,7 +702,7 @@
     <Content Include="Views\Shared\EditorTemplates\StringIntRadioButtons.cshtml" />
     <Content Include="Views\Account\EmailVerificationResent.cshtml" />
     <Content Include="Views\Errors\_WhatNow.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordEmailSent.cshtml" />
     <Content Include="Views\Shared\_IwsHelpline.cshtml" />
     <None Include="Web.Debug.config">

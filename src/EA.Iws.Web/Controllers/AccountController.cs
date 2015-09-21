@@ -162,7 +162,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ResetPassword()
+        public ActionResult ForgotPassword()
         {
             return View();
         }
@@ -170,7 +170,7 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ForgotPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -183,7 +183,7 @@
                     new PasswordResetRequest
                     {
                         EmailAddress = model.Email,
-                        Url = Url.Action("ResetPasswordUpdate", "Account", null, Request.Url.Scheme)
+                        Url = Url.Action("ResetPassword", "Account", null, Request.Url.Scheme)
                     });
 
                 if (!result)
@@ -198,7 +198,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ResetPasswordUpdate(Guid id, string code)
+        public ActionResult ResetPassword(Guid id, string code)
         {
             return HttpNotFound();
         }
