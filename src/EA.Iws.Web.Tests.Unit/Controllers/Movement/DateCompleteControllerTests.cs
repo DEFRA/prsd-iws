@@ -73,19 +73,11 @@
         }
 
         [Fact]
-        public async Task PostRedirectsToCorrectScreenIfRecovery()
+        public async Task PostRedirectsToCorrectScreen()
         {
             var result = await PostValidModel(NotificationType.Recovery);
 
-            RouteAssert.RoutesTo(result.RouteValues, "Index", "RecoveryComplete");
-        }
-
-        [Fact]
-        public async Task PostRedirectsToCorrectScreenIfDisposal()
-        {
-            var result = await PostValidModel(NotificationType.Disposal);
-
-            RouteAssert.RoutesTo(result.RouteValues, "Index", "DisposalComplete");
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "OperationComplete");
         }
 
         private async Task<RedirectToRouteResult> PostValidModel(NotificationType notificationType)

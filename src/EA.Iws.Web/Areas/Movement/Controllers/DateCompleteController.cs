@@ -47,7 +47,7 @@
             {
                 await client.SendAsync(User.GetAccessToken(), new CreateMovementOperationReceiptForMovement(id, model.GetDateComplete()));
 
-                return RedirectToAction("Index", model.NotificationType == NotificationType.Recovery ? "RecoveryComplete" : "DisposalComplete");
+                return RedirectToAction("Index", "OperationComplete");
             }
         }
     }
