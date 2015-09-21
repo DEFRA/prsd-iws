@@ -114,5 +114,37 @@
 
             Assert.Equal(15, movementQuantityCalculator.QuantityRemaining(shipmentInfo, movements));
         }
+
+        [Fact]
+        public void QuantityReceived_Zero_WhenNoMovementsReceived()
+        {
+            var nonReceivedMovement = new TestableMovement
+            {
+                Receipt = new TestableMovementReceipt
+                {
+                    Quantity = 5
+                }
+            };
+
+            var movements = new[] { nonReceivedMovement };
+
+            Assert.Equal(0, movementQuantityCalculator.QuantityReceived(movements));
+        }
+
+        [Fact]
+        public void QuantityRemaining_Unchanged_WhenNoMovementsReceived()
+        {
+            var nonReceivedMovement = new TestableMovement
+            {
+                Receipt = new TestableMovementReceipt
+                {
+                    Quantity = 5
+                }
+            };
+
+            var movements = new[] { nonReceivedMovement };
+
+            Assert.Equal(20, movementQuantityCalculator.QuantityRemaining(shipmentInfo, movements));
+        }
     }
 }

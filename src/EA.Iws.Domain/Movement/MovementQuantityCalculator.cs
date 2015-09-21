@@ -19,6 +19,11 @@
         {
             var receivedMovements = receivedMovementCalculator.ReceivedMovements(movements);
 
+            if (!HasReceivedMovements(receivedMovements))
+            {
+                return 0;
+            }
+
             ShipmentQuantityUnits unit;
             if (TryParseMovementsUnit(receivedMovements, out unit))
             {
@@ -33,6 +38,11 @@
         public decimal QuantityRemaining(ShipmentInfo shipmentInfo, IList<Movement> movements)
         {
             var receivedMovements = receivedMovementCalculator.ReceivedMovements(movements);
+
+            if (!HasReceivedMovements(receivedMovements))
+            {
+                return shipmentInfo.Quantity;
+            }
 
             ShipmentQuantityUnits unit;
             if (TryParseMovementsUnit(receivedMovements, out unit) && unit == shipmentInfo.Units)
@@ -65,6 +75,11 @@
                 unit = units.Single();
                 return true;
             }
+        }
+
+        private bool HasReceivedMovements(IList<Movement> receivedMovements)
+        {
+            return receivedMovements != null && receivedMovements.Count > 0;
         }
     }
 }
