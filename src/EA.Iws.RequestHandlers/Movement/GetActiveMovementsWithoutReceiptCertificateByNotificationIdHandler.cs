@@ -1,13 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
-    using Prsd.Core;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;

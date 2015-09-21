@@ -94,12 +94,12 @@
         }
 
         [Fact]
-        public async Task UserSelects_RecordCertificateOfRecovery_RedirectsTo_MyHome()
+        public async Task UserSelects_RecordCertificateOfRecovery_RedirectsTo_Operation()
         {
             var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfRecovery)) as RedirectToRouteResult;
             Assert.NotNull(result);
-            Assert.Equal("Home", result.RouteValues["action"]);
-            Assert.Equal("Applicant", result.RouteValues["controller"]);
+            Assert.Equal("Operation", result.RouteValues["action"]);
+            Assert.Equal("NotificationMovement", result.RouteValues["controller"]);
             Assert.Equal(notificationId, result.RouteValues["id"]);
         }
 

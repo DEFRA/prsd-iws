@@ -34,6 +34,37 @@
         }
 
         [HttpGet]
+        public async Task<ActionResult> Operation(Guid id)
+        {
+            using (var client = apiClient())
+            {
+                var result =
+                    await
+                        client.SendAsync(User.GetAccessToken(),
+                            new GetActiveMovementsWithReceiptCertificateByNotificationId(id));
+
+                return View(new MovementOperationViewModel(id, result));
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Operation(Guid id, MovementOperationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "DateComplete",
+                new
+                {
+                    id = model.RadioButtons.SelectedValue,
+                    area = "Movement"
+                });
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Receipt(Guid id)
         {
             using (var client = apiClient())

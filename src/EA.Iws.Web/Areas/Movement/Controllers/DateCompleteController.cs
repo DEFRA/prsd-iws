@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Api.Client;
     using Areas.Movement.ViewModels;
-    using Core.Shared;
     using Infrastructure;
     using Requests.MovementOperationReceipt;
 

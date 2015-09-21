@@ -37,7 +37,7 @@
 
             movements = new[] { movement1, movement2 };
 
-            receivedMovements = new ReceivedMovements();
+            receivedMovements = new ReceivedMovements(new ActiveMovements());
         }
 
         [Fact]

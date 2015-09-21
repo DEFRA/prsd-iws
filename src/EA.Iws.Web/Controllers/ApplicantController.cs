@@ -86,7 +86,7 @@
             }
             if (model.UserChoices.SelectedValue == 6)
             {
-                return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+                return RedirectToAction("Operation", "NotificationMovement", new { id = model.NotificationId });
             }
 
             throw new InvalidOperationException("Invalid user choice to view applicant's notification");

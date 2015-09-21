@@ -28,7 +28,7 @@
             movement = new Movement(1, notification.Id);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
             movementReceipt = new MovementReceipt(AfterMovementDate);
-            receivedMovementService = new ReceivedMovements();
+            receivedMovementService = new ReceivedMovements(new ActiveMovements());
         }
 
         [Fact]

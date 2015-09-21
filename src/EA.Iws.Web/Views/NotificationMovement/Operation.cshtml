@@ -1,0 +1,37 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.ViewModels.Movement.MovementOperationViewModel
+@{
+    ViewBag.Title = "Certificate of Recovery / Disposal";
+}
+
+<h1 class="heading-large">Which shipment has been @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of")?</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    if (Model.RadioButtons == null || !Model.RadioButtons.PossibleValues.Any())
+    {
+        <p>You have no active shipments with a recorded certificate of receipt.</p>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.Gds().ValidationMessageFor(m => m.RadioButtons.SelectedValue)
+            @Html.EditorFor(m => m.RadioButtons)
+        </div>
+    }
+
+    <div class="form-group-compound">
+        <button class="button" type="submit">Continue</button>
+    </div>
+
+    @Html.ActionLink("Perform another activity",
+            "ApprovedNotification",
+            "Applicant",
+            new { area = string.Empty, id = Model.NotificationId },
+            null)
+}
+

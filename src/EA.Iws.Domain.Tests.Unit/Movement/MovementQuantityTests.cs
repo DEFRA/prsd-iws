@@ -33,7 +33,7 @@
                 Units = ShipmentQuantityUnits.Kilograms
             };
 
-            movementQuantity = new MovementQuantity(new ReceivedMovements());
+            movementQuantity = new MovementQuantity(new ReceivedMovements(new ActiveMovements()));
         }
 
         [Fact]

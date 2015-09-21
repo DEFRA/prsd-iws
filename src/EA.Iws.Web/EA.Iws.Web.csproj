@@ -707,6 +707,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordEmailSent.cshtml" />
     <Content Include="Views\Shared\_IwsHelpline.cshtml" />
+    <Content Include="Views\NotificationMovement\Operation.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\PasswordUpdated.cshtml" />
     <Content Include="Views\NewUser\Cookies.cshtml" />
@@ -749,6 +750,7 @@
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Movement\MovementOperationViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />
