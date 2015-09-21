@@ -17,7 +17,7 @@
             }
 
             Name = name;
-            Type = type.DisplayName;
+            Type = type;
             OtherDescription = otherDescription;
         }
 
@@ -27,7 +27,7 @@
 
         public string Name { get; private set; }
 
-        public string Type { get; private set; }
+        public BusinessType Type { get; private set; }
 
         public string RegistrationNumber { get; private set; }
 
@@ -44,7 +44,7 @@
             }
 
             Name = name;
-            Type = type.DisplayName;
+            Type = type;
             OtherDescription = otherDescription;
         }
     }

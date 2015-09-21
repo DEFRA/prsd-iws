@@ -35,5 +35,22 @@
                     throw new ArgumentException(string.Format("Unknown business type: {0}", businessType), "businessType");
             }
         }
+
+        public static explicit operator Core.Shared.BusinessType(BusinessType businessType)
+        {
+            if (businessType == LimitedCompany)
+            {
+                return Core.Shared.BusinessType.LimitedCompany;
+            }
+            if (businessType == Partnership)
+            {
+                return Core.Shared.BusinessType.Partnership;
+            }
+            if (businessType == SoleTrader)
+            {
+                return Core.Shared.BusinessType.SoleTrader;
+            }
+            return Core.Shared.BusinessType.Other;
+        }
     }
 }

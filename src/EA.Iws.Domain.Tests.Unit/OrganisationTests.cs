@@ -5,13 +5,7 @@
 
     public class OrganisationTests
     {
-        private readonly Address address;
-        private static readonly string AnyString = "test";
-
-        public OrganisationTests()
-        {
-            this.address = new Address(AnyString, AnyString, AnyString, AnyString, AnyString, AnyString);
-        }
+        private const string AnyString = "test";
 
         [Fact]
         public void TypeOther_NoDescription_Throws()
@@ -25,7 +19,7 @@
             var organisation = new Organisation(AnyString, BusinessType.LimitedCompany, null);
 
             Assert.Equal(AnyString, organisation.Name);
-            Assert.Equal(BusinessType.LimitedCompany.DisplayName, organisation.Type);
+            Assert.Equal(BusinessType.LimitedCompany, organisation.Type);
         }
     }
 }

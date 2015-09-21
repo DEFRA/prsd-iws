@@ -11,7 +11,6 @@
 
             Property(x => x.Name).IsRequired().HasMaxLength(2048);
             Property(x => x.RegistrationNumber).HasMaxLength(64);
-            Property(x => x.Type).IsRequired().HasMaxLength(64);
         }
     }
 }

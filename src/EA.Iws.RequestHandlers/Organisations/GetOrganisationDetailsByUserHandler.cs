@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Organisations
 {
-    using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Registration;
@@ -32,7 +31,7 @@
             {
                 OrganisationId = org.Id,
                 Name = org.Name,
-                BusinessType = GetBusinessType(org.Type),
+                BusinessType = (BusinessType)org.Type,
                 OtherDescription = org.OtherDescription,
                 RegistrationNumber = org.RegistrationNumber,
                 Address = new AddressData
@@ -45,28 +44,6 @@
                     TownOrCity = userAddress.Address.TownOrCity
                 }
             };
-        }
-
-        private static BusinessType GetBusinessType(string businessType)
-        {
-            if (businessType.Equals(Domain.BusinessType.SoleTrader.DisplayName, StringComparison.OrdinalIgnoreCase))
-            {
-                return BusinessType.SoleTrader;
-            }
-            if (businessType.Equals(Domain.BusinessType.Partnership.DisplayName, StringComparison.OrdinalIgnoreCase))
-            {
-                return BusinessType.Partnership;
-            }
-            if (businessType.Equals(Domain.BusinessType.LimitedCompany.DisplayName, StringComparison.OrdinalIgnoreCase))
-            {
-                return BusinessType.LimitedCompany;
-            }
-            if (businessType.Equals(Domain.BusinessType.Other.DisplayName, StringComparison.OrdinalIgnoreCase))
-            {
-                return BusinessType.Other;
-            }
-
-            throw new ArgumentException(string.Format("Unknown business type: {0}", businessType), "businessType");
         }
     }
 }
