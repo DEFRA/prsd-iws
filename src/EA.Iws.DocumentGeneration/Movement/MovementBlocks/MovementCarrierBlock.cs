@@ -3,11 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain.Movement;
     using Mapper;
-    using NotificationBlocks;
     using ViewModels;
 
     public class MovementCarrierBlock : IDocumentBlock

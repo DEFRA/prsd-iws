@@ -28,8 +28,12 @@
         [Fact]
         public void MovementIsNull()
         {
-            var result = new MovementViewModel(null, new DateTimeFormatter(), new QuantityFormatter(),
-                new PhysicalCharacteristicsFormatter());
+            var result = new MovementViewModel(null, 
+                null, 
+                new DateTimeFormatter(), 
+                new QuantityFormatter(),
+                new PhysicalCharacteristicsFormatter(),
+                new PackagingTypesFormatter());
 
             new ExpectedMovementViewModel
             {
@@ -163,9 +167,11 @@
         private MovementViewModel GenerateViewModel()
         {
             return new MovementViewModel(movement,
+                movement.NotificationApplication,
                 new DateTimeFormatter(),
                 new QuantityFormatter(),
-                new PhysicalCharacteristicsFormatter());
+                new PhysicalCharacteristicsFormatter(),
+                new PackagingTypesFormatter());
         }
 
         private class ExpectedMovementViewModel

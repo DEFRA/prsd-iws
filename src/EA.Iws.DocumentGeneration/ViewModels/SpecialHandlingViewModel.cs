@@ -4,16 +4,26 @@
 
     internal class SpecialHandlingViewModel
     {
-        public string Requirements { get; private set; }
+        private string requirements = string.Empty;
+        private readonly string details = string.Empty;
 
-        public string Details { get; private set; }
+        public string Requirements
+        {
+            get { return requirements; }
+            private set { requirements = value; }
+        }
+
+        public string Details
+        {
+            get { return details; }
+        }
 
         public SpecialHandlingViewModel(NotificationApplication notification)
         {
             if (notification.HasSpecialHandlingRequirements.GetValueOrDefault())
             {
                 Requirements = "See Annex";
-                Details = notification.SpecialHandlingDetails;
+                details = notification.SpecialHandlingDetails;
             }
         }
 

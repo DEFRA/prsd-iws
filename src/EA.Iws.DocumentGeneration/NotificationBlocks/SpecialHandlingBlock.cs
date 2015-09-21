@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
     using Domain.NotificationApplication;
     using Mapper;
@@ -12,6 +11,11 @@
     {
         private const string SpecialHandling = "SpHandling";
         private readonly SpecialHandlingViewModel data;
+
+        public SpecialHandlingViewModel Data
+        {
+            get { return data; }
+        }
 
         public SpecialHandlingBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
@@ -32,7 +36,7 @@
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
-        public void Merge()
+        public virtual void Merge()
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(SpecialHandlingViewModel));
             if (HasAnnex)
@@ -50,7 +54,7 @@
             get { return 7; }
         }
 
-        public void GenerateAnnex(int annexNumber)
+        public virtual void GenerateAnnex(int annexNumber)
         {
             if (!HasAnnex)
             {
@@ -65,7 +69,7 @@
             TocText = "Annex " + annexNumber + " - Special handling requirements";
         }
 
-        private void MergeSpecialHandlingDataToDocument(SpecialHandlingViewModel specialHandling, PropertyInfo[] properties)
+        protected void MergeSpecialHandlingDataToDocument(SpecialHandlingViewModel specialHandling, PropertyInfo[] properties)
         {
             foreach (var field in CorrespondingMergeFields)
             {

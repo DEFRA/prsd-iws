@@ -16,14 +16,15 @@
             movementDocumentBlocks = new List<IDocumentBlock>
             {
                 new MovementBlock(mergeFields, movement),
-                new ExporterBlock(mergeFields, notification),
-                new FacilityBlock(mergeFields, notification),
+                new MovementFacilityBlock(mergeFields, notification),
+                new MovementOperationBlock(mergeFields, notification),
                 new ImporterBlock(mergeFields, notification),
-                new ProducerBlock(mergeFields, notification),
-                new WasteCodesBlock(mergeFields, notification),
-                new WasteCompositionBlock(mergeFields, notification),
-                new OperationBlock(mergeFields, notification),
-                new MovementCarrierBlock(mergeFields, movement)
+                new ExporterBlock(mergeFields, notification),
+                new MovementProducerBlock(mergeFields, notification),
+                new MovementCarrierBlock(mergeFields, movement),
+                new MovementWasteCodesBlock(mergeFields, notification),
+                new MovementWasteCompositionBlock(mergeFields, notification),
+                new MovementSpecialHandlingBlock(mergeFields, notification)
             };
         }
 

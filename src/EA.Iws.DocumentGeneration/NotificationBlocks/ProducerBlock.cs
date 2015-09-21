@@ -15,6 +15,14 @@
         private const string PoGtext = "PoGtext";
         private readonly IList<ProducerViewModel> data;
 
+        public IReadOnlyList<ProducerViewModel> Data
+        {
+            get
+            {
+                return data.ToList();
+            }
+        }
+
         public ProducerBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
@@ -40,7 +48,7 @@
             }
         }
 
-        public void GenerateAnnex(int annexNumber)
+        public virtual void GenerateAnnex(int annexNumber)
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(ProducerViewModel));
             MergeAnnexNumber(annexNumber);
@@ -104,7 +112,7 @@
             get { return 9; }
         }
 
-        public void Merge()
+        public virtual void Merge()
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(ProducerViewModel));
 
@@ -120,7 +128,7 @@
             }
         }
 
-        private void MergeProducerToMainDocument(ProducerViewModel producer, PropertyInfo[] properties)
+        protected void MergeProducerToMainDocument(ProducerViewModel producer, PropertyInfo[] properties)
         {
             foreach (var field in CorrespondingMergeFields)
             {
@@ -132,7 +140,7 @@
         ///     Merges all producers in the data list into the multiple producers table in the annex.
         /// </summary>
         /// <param name="properties">Property info for the view model.</param>
-        private void MergeMultipleProducersTable(PropertyInfo[] properties)
+        protected void MergeMultipleProducersTable(PropertyInfo[] properties)
         {
             var mergeTableRows = new TableRow[data.Count];
 
@@ -161,7 +169,7 @@
             }
         }
 
-        private void ClearProcessOfGenerationTextFields()
+        protected void ClearProcessOfGenerationTextFields()
         {
             foreach (var mergeField in FindProcessOfGenerationTextMergeFields())
             {
@@ -169,13 +177,13 @@
             }
         }
 
-        private void ClearMultipleProducersTable()
+        protected void ClearMultipleProducersTable()
         {
             var table = FindMultipleProducersTable(FindFirstMergeFieldInAnnexTable());
             table.Remove();
         }
 
-        private void MergeSiteOfExportInAnnex(ProducerViewModel siteOfExportProducer, PropertyInfo[] properties)
+        protected void MergeSiteOfExportInAnnex(ProducerViewModel siteOfExportProducer, PropertyInfo[] properties)
         {
             foreach (var mergeField in FindSiteOfExportMergeFields())
             {
@@ -183,7 +191,7 @@
             }
         }
 
-        private void MergeProcessOfGenerationTextInAnnex(ProducerViewModel pvm, PropertyInfo[] proerties)
+        protected void MergeProcessOfGenerationTextInAnnex(ProducerViewModel pvm, PropertyInfo[] proerties)
         {
             if (pvm.IsProcessAnnexAttached.GetValueOrDefault() ||
                 (pvm.ProcessOfGeneration.Length > ProducerViewModel.ProcessOfGenerationMaxTextLength()))
@@ -195,7 +203,7 @@
             }
         }
 
-        private MergeField FindFirstMergeFieldInAnnexTable()
+        protected MergeField FindFirstMergeFieldInAnnexTable()
         {
             return
                 AnnexMergeFields.Single(
@@ -204,12 +212,12 @@
                               StringComparison.InvariantCultureIgnoreCase));
         }
 
-        private Table FindMultipleProducersTable(MergeField firstMergeFieldInTable)
+        protected Table FindMultipleProducersTable(MergeField firstMergeFieldInTable)
         {
             return firstMergeFieldInTable.Run.Ancestors<Table>().First();
         }
 
-        private void RemoveSiteOfGenerationTable()
+        protected void RemoveSiteOfGenerationTable()
         {
             MergeField f = AnnexMergeFields.Single(
                     mf => mf.FieldName.OuterTypeName.Equals("SiteOfExport", StringComparison.InvariantCultureIgnoreCase)
@@ -219,13 +227,13 @@
             f.Run.Ancestors<Table>().First().Remove();
         }
 
-        private IEnumerable<MergeField> FindSiteOfExportMergeFields()
+        protected IEnumerable<MergeField> FindSiteOfExportMergeFields()
         {
             return AnnexMergeFields.Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
                                                 && mf.FieldName.OuterTypeName.Equals(SiteOfExport));
         }
 
-        private IEnumerable<MergeField> FindProcessOfGenerationTextMergeFields()
+        protected IEnumerable<MergeField> FindProcessOfGenerationTextMergeFields()
         {
             return AnnexMergeFields.Where(mf => !string.IsNullOrWhiteSpace(mf.FieldName.OuterTypeName)
                                                 && mf.FieldName.OuterTypeName.Equals(PoGtext));

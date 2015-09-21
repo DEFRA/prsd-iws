@@ -14,6 +14,11 @@
     {
         private readonly WasteCodesViewModel data;
 
+        public WasteCodesViewModel Data
+        {
+            get { return data; }
+        }
+
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
         public WasteCodesBlock(IList<MergeField> mergeFields, NotificationApplication notification)
@@ -29,7 +34,7 @@
             get { return "WasteCodes"; }
         }
 
-        public void Merge()
+        public virtual void Merge()
         {
             if (!HasAnnex)
             {
@@ -54,7 +59,7 @@
             get { return data.IsAnnexNeeded; }
         }
 
-        public void GenerateAnnex(int annexNumber)
+        public virtual void GenerateAnnex(int annexNumber)
         {
             MergeToMainDocument(annexNumber);
             MergeAnnexNumber(annexNumber);
@@ -65,7 +70,7 @@
             MergeToTable(tableproperties, data.AnnexTableWasteCodes);
         }
 
-        private void MergeToMainDocument(int annexNumber)
+        protected void MergeToMainDocument(int annexNumber)
         {
             data.SetAnnexMessagesAndData(annexNumber);
 
@@ -76,7 +81,7 @@
             }
         }
 
-        private void MergeToTable(PropertyInfo[] properties, IList<AnnexTableWasteCodes> list)
+        protected void MergeToTable(PropertyInfo[] properties, IList<AnnexTableWasteCodes> list)
         {
             var mergeTableRows = new TableRow[list.Count()];
 
@@ -101,7 +106,7 @@
             }
         }
 
-        private MergeField FindFirstMergeFieldInAnnexTable()
+        protected MergeField FindFirstMergeFieldInAnnexTable()
         {
             return
                 AnnexMergeFields.Single(
@@ -110,7 +115,7 @@
                               StringComparison.InvariantCultureIgnoreCase));
         }
 
-        private Table FindTable(MergeField firstMergeFieldInTable)
+        protected Table FindTable(MergeField firstMergeFieldInTable)
         {
             var fieldRun = firstMergeFieldInTable.Run;
             var tableAncestors = fieldRun.Ancestors<Table>();

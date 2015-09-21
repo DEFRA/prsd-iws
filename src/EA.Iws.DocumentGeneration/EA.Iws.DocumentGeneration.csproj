@@ -57,6 +57,7 @@
     <Compile Include="Formatters\DateTimeFormatter.cs" />
     <Compile Include="Formatters\MeansOfTransportFormatter.cs" />
     <Compile Include="Formatters\OperationInfoFormatter.cs" />
+    <Compile Include="Formatters\PackagingTypesFormatter.cs" />
     <Compile Include="Formatters\PhysicalCharacteristicsFormatter.cs" />
     <Compile Include="Formatters\QuantityFormatter.cs" />
     <Compile Include="Formatters\ShipmentQuantityUnitFormatter.cs" />
@@ -71,6 +72,12 @@
     <Compile Include="Movement\MovementBlocks\MovementBlock.cs" />
     <Compile Include="Movement\MovementBlocks\MovementBlockCollection.cs" />
     <Compile Include="Movement\MovementBlocks\MovementCarrierBlock.cs" />
+    <Compile Include="Movement\MovementBlocks\MovementFacilityBlock.cs" />
+    <Compile Include="Movement\MovementBlocks\MovementOperationBlock.cs" />
+    <Compile Include="Movement\MovementBlocks\MovementProducerBlock.cs" />
+    <Compile Include="Movement\MovementBlocks\MovementWasteCodesBlock.cs" />
+    <Compile Include="Movement\MovementBlocks\MovementWasteCompositionBlock.cs" />
+    <Compile Include="Movement\MovementSpecialHandlingBlock.cs" />
     <Compile Include="RunLocator.cs" />
     <Compile Include="ViewModels\MovementViewModel.cs" />
     <Compile Include="Movement\MovementDocument.cs" />

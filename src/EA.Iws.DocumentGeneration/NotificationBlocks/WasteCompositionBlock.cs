@@ -16,6 +16,11 @@
         private const string Constituents = "Constituents";
         private readonly WasteCompositionViewModel data;
 
+        public WasteCompositionViewModel Data
+        {
+            get { return data; }
+        }
+
         public WasteCompositionBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
@@ -41,7 +46,7 @@
             }
         }
 
-        public void GenerateAnnex(int annexNumber)
+        public virtual void GenerateAnnex(int annexNumber)
         {
             MergeToMainDocument(annexNumber);
             MergeAnnexNumber(annexNumber);
@@ -84,7 +89,7 @@
             get { return 12; }
         }
 
-        public void Merge()
+        public virtual void Merge()
         {
             if (!HasAnnex)
             {
@@ -99,7 +104,7 @@
             }
         }
 
-        private void MergeToMainDocument(int annexNumber)
+        protected void MergeToMainDocument(int annexNumber)
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(WasteCompositionViewModel));
             foreach (var field in CorrespondingMergeFields)

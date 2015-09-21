@@ -10,6 +10,11 @@
     {
         private readonly OperationViewModel data;
 
+        public OperationViewModel Data 
+        {
+            get { return data; }
+        }
+
         public OperationBlock(IList<MergeField> mergeFields, NotificationApplication notification)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
@@ -30,7 +35,7 @@
             get { return 11; }
         }
 
-        public void Merge()
+        public virtual void Merge()
         {
             if (!HasAnnex)
             {
@@ -49,7 +54,7 @@
             get { return (data.IsAnnexProvided || !string.IsNullOrEmpty(data.FurtherDetails)); }
         }
 
-        public void GenerateAnnex(int annexNumber)
+        public virtual void GenerateAnnex(int annexNumber)
         {
             MergeOperationToMainDocument(annexNumber);
             MergeAnnexNumber(annexNumber);
@@ -62,7 +67,7 @@
             }
         }
 
-        private void MergeOperationToMainDocument(int annexNumber)
+        protected void MergeOperationToMainDocument(int annexNumber)
         {
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(OperationViewModel));
             foreach (var field in CorrespondingMergeFields)

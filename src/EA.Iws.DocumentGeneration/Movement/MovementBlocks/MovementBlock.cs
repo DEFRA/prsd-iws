@@ -13,10 +13,13 @@
         public MovementBlock(IList<MergeField> mergeFields, Movement movement)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
+
             data = new MovementViewModel(movement,
+                (movement == null) ? null : movement.NotificationApplication,
                 new DateTimeFormatter(),
                 new QuantityFormatter(),
-                new PhysicalCharacteristicsFormatter());
+                new PhysicalCharacteristicsFormatter(),
+                new PackagingTypesFormatter());
         }
 
         public string TypeName

@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using Core.Shared;
-    using Domain;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Formatters;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class MovementViewModel
     {
@@ -15,6 +16,9 @@
         private string actualCubicMetres = string.Empty;
         private string actualDate = string.Empty;
         private string physicalCharacteristics = string.Empty;
+        private string intendedNumberOfShipments = string.Empty;
+        private string numberOfPackages = string.Empty;
+        private string packagingTypes = string.Empty;
 
         public string NotificationNumber
         {
@@ -56,14 +60,34 @@
             get { return physicalCharacteristics; }
             set { physicalCharacteristics = value; }
         }
+        public string PackagingTypes
+        {
+            get { return packagingTypes; }
+            set { packagingTypes = value; }
+        }
+
+        public string IntendedNumberOfShipments
+        {
+            get { return intendedNumberOfShipments; }
+            set { intendedNumberOfShipments = value; }
+        }
+        public string NumberOfPackages
+        {
+            get { return numberOfPackages; }
+            set { numberOfPackages = value; }
+        }
 
         public bool IsSpecialHandling { get; set; }
         public bool IsNotSpecialHandling { get; set; }
+        public bool IsDisposal { get; set; }
+        public bool IsRecovery { get; set; }
 
-        public MovementViewModel(Movement movement, 
-            DateTimeFormatter dateTimeFormatter, 
+        public MovementViewModel(Movement movement,
+            NotificationApplication notification,
+            DateTimeFormatter dateTimeFormatter,
             QuantityFormatter quantityFormatter,
-            PhysicalCharacteristicsFormatter physicalCharacteristicsFormatter)
+            PhysicalCharacteristicsFormatter physicalCharacteristicsFormatter,
+            PackagingTypesFormatter packagingTypesFormatter)
         {
             if (movement == null)
             {
@@ -73,16 +97,24 @@
             ActualDate = dateTimeFormatter.DateTimeToDocumentFormatString(movement.Date);
             SetQuantity(movement, quantityFormatter);
             Number = movement.Number.ToString();
+            PackagingTypes = packagingTypesFormatter.PackagingTypesToCommaDelimitedString(movement.PackagingInfos);
+            NumberOfPackages = movement.NumberOfPackages.ToString();
 
-            if (movement.NotificationApplication != null)
+            if (notification == null)
             {
-                NotificationNumber = movement.NotificationApplication.NotificationNumber ?? string.Empty;
-                IsSpecialHandling = movement.NotificationApplication.HasSpecialHandlingRequirements.GetValueOrDefault();
-                IsNotSpecialHandling = !movement.NotificationApplication.HasSpecialHandlingRequirements.GetValueOrDefault(true);
-                PhysicalCharacteristics =
-                    physicalCharacteristicsFormatter.PhysicalCharacteristicsToCommaDelimitedString(
-                        movement.NotificationApplication.PhysicalCharacteristics);
+                return;
             }
+
+            NotificationNumber = notification.NotificationNumber ?? string.Empty;
+            IsSpecialHandling = notification.HasSpecialHandlingRequirements.GetValueOrDefault();
+            IsNotSpecialHandling = !notification.HasSpecialHandlingRequirements.GetValueOrDefault(true);
+            PhysicalCharacteristics =
+                physicalCharacteristicsFormatter.PhysicalCharacteristicsToCommaDelimitedString(notification.PhysicalCharacteristics);
+            IntendedNumberOfShipments = (notification.ShipmentInfo == null)
+                ? "0"
+                : notification.ShipmentInfo.NumberOfShipments.ToString();
+            IsRecovery = notification.NotificationType == NotificationType.Recovery;
+            IsDisposal = notification.NotificationType == NotificationType.Disposal;
         }
 
         private void SetQuantity(Movement movement, QuantityFormatter quantityFormatter)
