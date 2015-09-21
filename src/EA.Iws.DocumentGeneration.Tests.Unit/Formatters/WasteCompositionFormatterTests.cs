@@ -104,6 +104,23 @@
             AssertExpectedCompositionPercentage(constituent, max, min, result.Single());
         }
 
+        [Fact]
+        public void GetWasteCompositionPercentages_DoesNotReturnWasteWherePercentagesAreBothZero()
+        {
+            var wcs = new List<WasteComposition>();
+            var wc1 = WasteComposition.CreateWasteComposition("One", 1, 10, ChemicalCompositionCategory.Food);
+            var wc2 = WasteComposition.CreateWasteComposition("One", 0, 0, ChemicalCompositionCategory.Food);
+
+            wcs.Add(wc1);
+            wcs.Add(wc2);
+
+            wasteType.WasteCompositions = wcs;
+
+            var result = formatter.GetWasteCompositionPercentages(wasteType);
+
+            AssertExpectedCompositionPercentage("One", 10, 1, result.Single());
+        }
+
         [Theory]
         [InlineData(ChemicalCompositionType.RDF, "Refuse Derived Fuel (RDF)")]
         [InlineData(ChemicalCompositionType.SRF, "Solid Recovered Fuel (SRF)")]

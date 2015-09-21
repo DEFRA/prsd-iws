@@ -57,8 +57,8 @@
             {
                 return new ChemicalCompositionPercentages[0];
             }
-
-            return wasteType.WasteCompositions.Select(wc => new ChemicalCompositionPercentages
+            
+            return wasteType.WasteCompositions.Where(wc => wc.MaxConcentration != 0 && wc.MinConcentration != 0).Select(wc => new ChemicalCompositionPercentages
             {
                 Min = wc.MinConcentration.ToString("N"),
                 Max = wc.MaxConcentration.ToString("N"),
