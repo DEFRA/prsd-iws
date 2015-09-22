@@ -94,9 +94,11 @@
                 yield return new ValidationResult("Please enter a valid number between 1 and 99999", new[] { "NumberOfShipments" });
             }
 
-            if (!IsQuantityValid())
+            if (!IsQuantityValid() && Units.HasValue)
             {
-                yield return new ValidationResult("Please enter a valid number with a maximum of 4 decimal places", new[] { "Quantity" });
+                yield return new ValidationResult("Please enter a valid number with a maximum of " 
+                    + ShipmentQuantityUnitsMetadata.Precision[Units.Value] 
+                    + " decimal places", new[] { "Quantity" });
             }
 
             DateTime startDate;
@@ -177,7 +179,7 @@
 
             decimal quantity;
             return Decimal.TryParse(Quantity, Style, CultureInfo.CurrentCulture, out quantity)
-                && decimal.Round(quantity, 4) != quantity;
+                && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) == quantity;
         }
 
         public SetIntendedShipmentInfoForNotification ToRequest()

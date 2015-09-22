@@ -15,6 +15,8 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     
+    @Html.HiddenFor(m => m.Unit)
+    
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
         <label class="form-label" for="Quantity">Quantity received in @EnumHelper.GetDisplayName(Model.Unit)</label>
         @Html.Gds().ValidationMessageFor(m => m.Quantity)

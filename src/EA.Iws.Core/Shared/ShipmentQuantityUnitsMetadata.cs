@@ -5,6 +5,15 @@
 
     public static class ShipmentQuantityUnitsMetadata
     {
+        public static IReadOnlyDictionary<ShipmentQuantityUnits, int> Precision = 
+            new Dictionary<ShipmentQuantityUnits, int>
+        {
+            { ShipmentQuantityUnits.CubicMetres, 4 },
+            { ShipmentQuantityUnits.Tonnes, 4 },
+            { ShipmentQuantityUnits.Litres, 1 },
+            { ShipmentQuantityUnits.Kilograms, 1 }
+        }; 
+
         public static IEnumerable<ShipmentQuantityUnits> VolumeUnits = new[]
         {
             ShipmentQuantityUnits.Litres,

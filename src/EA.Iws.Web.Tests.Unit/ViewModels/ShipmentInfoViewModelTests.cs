@@ -16,7 +16,7 @@
         {
             model = new ShipmentInfoViewModel
             {
-                Units = ShipmentQuantityUnits.Kilograms,
+                Units = ShipmentQuantityUnits.Tonnes,
                 NumberOfShipments = "1",
                 Quantity = "1"
             };

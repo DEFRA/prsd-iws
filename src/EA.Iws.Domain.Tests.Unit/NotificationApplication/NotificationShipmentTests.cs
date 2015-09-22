@@ -187,7 +187,7 @@
         }
 
         [Fact]
-        public void QuantityMoreThan4DecimalPlacesRoundsUp()
+        public void QuantityTonnesMoreThan4DecimalPlacesRoundsUp()
         {
             var notification = CreateNotificationApplication();
 
@@ -201,7 +201,7 @@
         }
 
         [Fact]
-        public void QuantityWithMoreThan4DecimalPlacesRoundsDown()
+        public void QuantityTonnesMoreThan4DecimalPlacesRoundsDown()
         {
             var notification = CreateNotificationApplication();
 
@@ -209,9 +209,37 @@
             var lastDate = new DateTime(2015, 12, 01);
 
             notification.SetShipmentInfo(firstDate, lastDate, 10, 
-                new ShipmentQuantity(1.23012m, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(1.23012m, ShipmentQuantityUnits.Tonnes));
 
             Assert.Equal(1.2301m, notification.ShipmentInfo.Quantity);
+        }
+
+        [Fact]
+        public void QuantityKilogramsMoreThan2DecimalPlaceRoundsUp()
+        {
+            var notification = CreateNotificationApplication();
+
+            var firstDate = new DateTime(2015, 01, 01);
+            var lastDate = new DateTime(2015, 12, 01);
+
+            notification.SetShipmentInfo(firstDate, lastDate, 10,
+                new ShipmentQuantity(1.26m, ShipmentQuantityUnits.Kilograms));
+
+            Assert.Equal(1.3m, notification.ShipmentInfo.Quantity);
+        }
+
+        [Fact]
+        public void QuantityKilogramsMoreThan1DecimalPlaceRoundsDown()
+        {
+            var notification = CreateNotificationApplication();
+
+            var firstDate = new DateTime(2015, 01, 01);
+            var lastDate = new DateTime(2015, 12, 01);
+
+            notification.SetShipmentInfo(firstDate, lastDate, 10,
+                new ShipmentQuantity(1.23m, ShipmentQuantityUnits.Kilograms));
+
+            Assert.Equal(1.2m, notification.ShipmentInfo.Quantity);
         }
 
         [Fact]

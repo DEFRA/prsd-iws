@@ -24,9 +24,11 @@
                 yield return new ValidationResult("The Actual quantity field must be a positive value", new[] { "Quantity" });
             }
 
-            if (Quantity.HasValue && decimal.Round(Quantity.Value, 4) != Quantity.Value)
+            if (Quantity.HasValue && decimal.Round(Quantity.Value, ShipmentQuantityUnitsMetadata.Precision[Unit]) != Quantity.Value)
             {
-                yield return new ValidationResult("Please enter a valid positive number with a maximum of 4 decimal places",
+                yield return new ValidationResult("Please enter a valid positive number with a maximum of " 
+                    + ShipmentQuantityUnitsMetadata.Precision[Unit]
+                    + " decimal places",
                     new[] { "Quantity" });
             }
         }

@@ -12,7 +12,7 @@
         {
             Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
             
-            Quantity = decimal.Round(quantity, 4);
+            Quantity = decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[units]);
             Units = units;
         }
     }
