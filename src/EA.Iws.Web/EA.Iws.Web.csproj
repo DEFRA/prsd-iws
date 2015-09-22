@@ -599,6 +599,7 @@
     <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
     <Content Include="Areas\Movement\Views\ReceiptComplete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOffice.cshtml" />
+    <Content Include="Content\iws\_footer.scss" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
