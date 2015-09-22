@@ -1,8 +1,8 @@
 UPDATE [Notification].[Movement]
 SET Quantity = 
 	CASE 
-		WHEN DisplayUnit IN (3, 4) THEN ROUND(Quantity / 1000, 4)
-		WHEN DisplayUnit IN (1, 2) THEN ROUND(Quantity * 1000, 4)
+		WHEN DisplayUnit IN (3, 4) THEN ROUND(Quantity * 1000, 4)
+		WHEN DisplayUnit IN (1, 2) THEN ROUND(Quantity / 1000, 4)
 	END,
 QuantityUnit = DisplayUnit
 WHERE DisplayUnit != QuantityUnit
