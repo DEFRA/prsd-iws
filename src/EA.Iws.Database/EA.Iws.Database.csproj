@@ -117,6 +117,7 @@
     <Content Include="scripts\Update\Sprint16\20150918_105600_add_movement_operation_receipt_table.sql" />
     <Content Include="scripts\Update\Sprint16\20150918-000000-update-column-type-from-string-to-int-with-data-migration.sql" />
     <Content Include="scripts\Update\Sprint16\20150922-100000-remove-display-units-column.sql" />
+    <Content Include="scripts\Update\Sprint16\20150922-160000-fix-any-missed-conversions.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
