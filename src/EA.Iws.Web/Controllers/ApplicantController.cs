@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.NotificationAssessment;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels.Applicant;
@@ -13,11 +12,11 @@
     [Authorize]
     public class ApplicantController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public ApplicantController(Func<IIwsClient> apiClient)
+        public ApplicantController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -29,26 +28,22 @@
         [HttpGet]
         public ActionResult _GetUserNotifications()
         {
-            using (var client = apiClient())
-            {
-                // Child actions (partial views) cannot be async and we must therefore get the result of the task.
-                // The called code must use ConfigureAwait(false) on async tasks to prevent deadlock.
-                var response =
-                    client.SendAsync(User.GetAccessToken(), new GetNotificationsByUser()).Result;
+            // Child actions (partial views) cannot be async and we must therefore get the result of the task.
+            // The called code must use ConfigureAwait(false) on async tasks to prevent deadlock.
+            var response =
+                mediator.SendAsync(new GetNotificationsByUser()).Result;
 
-                return PartialView(response);
-            }
+            return PartialView(response);
         }
 
         [HttpGet]
         public async Task<ActionResult> ApprovedNotification(Guid id)
         {
             ApprovedNotificationViewModel model;
-            using (var client = apiClient())
-            {
-                var notificationInfo = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
-                model = new ApprovedNotificationViewModel(notificationInfo.NotificationType);
-            }
+
+            var notificationInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+            model = new ApprovedNotificationViewModel(notificationInfo.NotificationType);
+            
             model.NotificationId = id;
             return View(model);
         }
@@ -64,17 +59,14 @@
 
             if (model.UserChoices.SelectedValue == 1)
             {
-                using (var client = apiClient())
+                var notificationAssessmentInfo = await mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(model.NotificationId));
+
+                if (notificationAssessmentInfo.Status == NotificationStatus.NotSubmitted)
                 {
-                    var notificationAssessmentInfo = await client.SendAsync(User.GetAccessToken(), new GetNotificationAssessmentSummaryInformation(model.NotificationId));
-
-                    if (notificationAssessmentInfo.Status == NotificationStatus.NotSubmitted)
-                    {
-                        return RedirectToAction("Index", "Exporter", new { id = model.NotificationId, area = "NotificationApplication" });
-                    }
-
-                    return RedirectToAction("Index", "Home", new { id = model.NotificationId, area = "NotificationApplication" });
+                    return RedirectToAction("Index", "Exporter", new { id = model.NotificationId, area = "NotificationApplication" });
                 }
+
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId, area = "NotificationApplication" });
             }
             if (model.UserChoices.SelectedValue == 2)
             {

@@ -3,10 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.NotificationAssessment;
     using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
     using Web.Controllers;
     using Web.ViewModels.Applicant;
@@ -15,13 +15,13 @@
     public class ApplicantControllerTests
     {
         private readonly ApplicantController applicantController;
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly Guid notificationId = Guid.NewGuid();
 
         public ApplicantControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            applicantController = new ApplicantController(() => client);
+            mediator = A.Fake<IMediator>();
+            applicantController = new ApplicantController(mediator);
         }
 
         [Fact]
@@ -38,8 +38,8 @@
         [Fact]
         public async Task UserSelects_ViewNotification_Status_Not_NotSubmitted_RedirectsTo_Index()
         {
-            A.CallTo(() => 
-                client.SendAsync(A<string>.Ignored, A<GetNotificationAssessmentSummaryInformation>.Ignored))
+            A.CallTo(() =>
+                mediator.SendAsync(A<GetNotificationAssessmentSummaryInformation>.Ignored))
                 .Returns(new NotificationAssessmentSummaryInformationData() { Status = NotificationStatus.Submitted });
             var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.ViewNotification)) as RedirectToRouteResult;
             Assert.NotNull(result);
@@ -52,8 +52,8 @@
         [Fact]
         public async Task UserSelects_ViewNotification_Status_NotSubmitted_RedirectsTo_Exporter()
         {
-            A.CallTo(() => 
-                client.SendAsync(A<string>.Ignored, A<GetNotificationAssessmentSummaryInformation>.Ignored))
+            A.CallTo(() =>
+                mediator.SendAsync(A<GetNotificationAssessmentSummaryInformation>.Ignored))
                 .Returns(new NotificationAssessmentSummaryInformationData() { Status = NotificationStatus.NotSubmitted });
             var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.ViewNotification)) as RedirectToRouteResult;
             Assert.NotNull(result);

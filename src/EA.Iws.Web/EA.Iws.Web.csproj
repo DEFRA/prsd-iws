@@ -743,6 +743,7 @@
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
+    <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />

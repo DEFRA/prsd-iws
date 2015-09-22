@@ -2,6 +2,8 @@
 {
     using Api.Client;
     using Autofac;
+    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.OAuth;
     using Prsd.Core.Web.OpenId;
     using Services;
@@ -30,6 +32,8 @@
                 var config = cc.Resolve<AppConfiguration>();
                 return new UserInfoClient(config.ApiUrl);
             }).As<IUserInfoClient>();
+
+            builder.RegisterType<ApiMediator>().As<IMediator>();
         }
     }
 }
