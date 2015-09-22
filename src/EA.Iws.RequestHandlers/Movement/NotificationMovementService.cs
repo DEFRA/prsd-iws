@@ -23,7 +23,7 @@
                 throw new InvalidOperationException("Cannot get next movement number for non-existent notification " + notificationId);
             }
 
-            return context.Movements.Count(m => m.NotificationApplicationId == notificationId) + 1;
+            return context.Movements.Count(m => m.NotificationId == notificationId) + 1;
         }
 
         public bool DateIsValid(Guid notificationId, DateTime date)

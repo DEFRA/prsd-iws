@@ -17,14 +17,15 @@
         {
         }
 
-        internal Movement(NotificationApplication notificationApplication, int movementNumber)
+        internal Movement(int movementNumber, Guid notificationId)
         {
-            NotificationApplicationId = notificationApplication.Id;
             Number = movementNumber;
-            NotificationApplication = notificationApplication;
+            NotificationId = notificationId;
         }
 
         public int Number { get; private set; }
+
+        public Guid NotificationId { get; private set; }
 
         public bool IsActive
         {
@@ -45,13 +46,9 @@
             }
         }
 
-        public virtual NotificationApplication NotificationApplication { get; private set; }
-
         public virtual MovementReceipt Receipt { get; private set; }
 
-        public DateTime? Date { get; private set; }
-
-        public Guid NotificationApplicationId { get; private set; }
+        public DateTime? Date { get; internal set; }
 
         public decimal? Quantity { get; private set; }
 
@@ -71,20 +68,6 @@
         public IEnumerable<MovementCarrier> MovementCarriers
         {
             get { return MovementCarriersCollection.ToSafeIEnumerable(); }
-        }
-
-        public void UpdateDate(DateTime date)
-        {
-            if (date >= NotificationApplication.ShipmentInfo.FirstDate
-                && date <= NotificationApplication.ShipmentInfo.LastDate)
-            {
-                this.Date = date;
-            }
-            else
-            {
-                throw new InvalidOperationException(
-                    "The date is not within the shipment date range for this notification " + date);
-            }
         }
 
         public void SetQuantity(ShipmentQuantity shipmentQuantity)
@@ -137,27 +120,6 @@
             }
 
             return this.Receipt;
-        }
-
-        public void Accept()
-        {
-            if (this.Receipt == null)
-            {
-                throw new InvalidOperationException("Cannot accept a movement that has not been received.");
-            }
-
-            this.Receipt.Decision = MovementReceiptDecision.Accepted;
-        }
-
-        public void Reject(string reason)
-        {
-            if (this.Receipt == null)
-            {
-                throw new InvalidOperationException("Cannot reject a movement that has not been received.");
-            }
-
-            this.Receipt.Decision = MovementReceiptDecision.Rejected;
-            this.Receipt.RejectReason = reason;
         }
 
         public void CompleteMovement(DateTime dateComplete)

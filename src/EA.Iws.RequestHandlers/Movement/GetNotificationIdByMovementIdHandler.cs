@@ -20,7 +20,7 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
 
-            return movement.NotificationApplicationId;
+            return movement.NotificationId;
         }
     }
 }

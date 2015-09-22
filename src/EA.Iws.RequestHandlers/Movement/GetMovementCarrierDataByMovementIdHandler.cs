@@ -29,11 +29,12 @@
 
         public async Task<MovementCarrierData> HandleAsync(GetMovementCarrierDataByMovementId message)
         {
-            var movement = await context.Movements.Where(m => m.Id == message.MovementId).SingleAsync();
+            var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
 
             return new MovementCarrierData
             {
-                NotificationCarriers = notificationCarrierMapper.Map(movement.NotificationApplication),
+                NotificationCarriers = notificationCarrierMapper.Map(notification),
                 SelectedCarriers = movementCarrierMapper.Map(movement)
             };
         }

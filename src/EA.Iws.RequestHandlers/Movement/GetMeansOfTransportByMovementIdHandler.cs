@@ -21,8 +21,9 @@
         public async Task<IList<MeansOfTransport>> HandleAsync(GetMeansOfTransportByMovementId message)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.Id);
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
 
-            return movement.NotificationApplication.MeansOfTransport.ToArray();
+            return notification.MeansOfTransport.ToArray();
         }
     }
 }

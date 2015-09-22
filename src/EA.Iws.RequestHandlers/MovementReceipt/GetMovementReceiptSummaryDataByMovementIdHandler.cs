@@ -13,12 +13,12 @@
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
     {
         private readonly IwsContext context;
-        private readonly ActiveMovementService activeMovementService;
-        private readonly MovementQuantityCalculator movementQuantityCalculator;
+        private readonly ActiveMovements activeMovementService;
+        private readonly MovementQuantity movementQuantityCalculator;
 
         public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context, 
-            ActiveMovementService activeMovementService,
-            MovementQuantityCalculator movementQuantityCalculator)
+            ActiveMovements activeMovementService,
+            MovementQuantity movementQuantityCalculator)
         {
             this.context = context;
             this.activeMovementService = activeMovementService;
@@ -30,27 +30,28 @@
             var movement = await context
                 .Movements.SingleAsync(m => m.Id == message.Id);
 
+            var notification = await context
+                .GetNotificationApplication(movement.NotificationId);
+
             var relatedMovements = await context
-                .GetMovementsForNotificationAsync(movement.NotificationApplicationId);
+                .GetMovementsForNotificationAsync(movement.NotificationId);
 
             var financialGuarantee = await context
-                .FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == movement.NotificationApplicationId);
+                .FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == movement.NotificationId);
 
-            var data = new MovementReceiptSummaryData
+            return new MovementReceiptSummaryData
             {
-                NotificationId = movement.NotificationApplicationId,
+                NotificationId = movement.NotificationId,
                 MovementId = movement.Id,
-                NotificationNumber = movement.NotificationApplication.NotificationNumber,
+                NotificationNumber = notification.NotificationNumber,
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
-                CurrentActiveLoads = activeMovementService.TotalActiveMovements(relatedMovements),
-                QuantitySoFar = movementQuantityCalculator.QuantityReceived(relatedMovements),
+                CurrentActiveLoads = activeMovementService.Total(relatedMovements),
+                QuantitySoFar = movementQuantityCalculator.Received(notification.ShipmentInfo, relatedMovements),
                 QuantityRemaining = movementQuantityCalculator
-                    .QuantityRemaining(movement.NotificationApplication.ShipmentInfo, relatedMovements),
-                DisplayUnit = movement.NotificationApplication.ShipmentInfo.Units
+                    .Remaining(notification.ShipmentInfo, relatedMovements),
+                DisplayUnit = notification.ShipmentInfo.Units
             };
-
-            return data;
         }
     }
 }

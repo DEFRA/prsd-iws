@@ -21,7 +21,7 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.Id);
 
-            var notification = await context.GetNotificationApplication(movement.NotificationApplicationId);
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
 
             DateTime? dateCompleted = null;
 

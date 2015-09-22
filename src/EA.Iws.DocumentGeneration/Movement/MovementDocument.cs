@@ -3,6 +3,7 @@
     using System.Linq;
     using DocumentFormat.OpenXml.Packaging;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Formatters;
     using MovementBlocks;
     using NotificationBlocks;
@@ -13,17 +14,12 @@
         private readonly MovementBlockCollection movementBlockCollection;
         private readonly bool hasCarrierAnnex;
 
-        public MovementDocument(WordprocessingDocument document, Movement movement)
+        public MovementDocument(WordprocessingDocument document, Movement movement, NotificationApplication notification)
         {
             this.document = document;
             var fields = MergeFieldLocator.GetMergeRuns(document);
-
-            if (movement != null && movement.NotificationApplication != null)
-            {
-                hasCarrierAnnex = movement.NotificationApplication.Carriers.Count() > 1;
-            }
-
-            movementBlockCollection = new MovementBlockCollection(fields, movement);
+            hasCarrierAnnex = notification.Carriers.Count() > 1;
+            movementBlockCollection = new MovementBlockCollection(fields, movement, notification);
             ApplyUnitStrikethrough(movement);
         }
 

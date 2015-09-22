@@ -15,11 +15,11 @@
     {
         private readonly IwsContext context;
         private readonly IMap<Movement, ProgressData> progressMap;
-        private readonly ActiveMovementService activeMovementService;
+        private readonly ActiveMovements activeMovementService;
 
         public GetMovementProgressInformationHandler(IwsContext context, 
             IMap<Movement, ProgressData> progressMap,
-            ActiveMovementService activeMovementService)
+            ActiveMovements activeMovementService)
         {
             this.context = context;
             this.progressMap = progressMap;
@@ -31,7 +31,7 @@
             var movement = await context.Movements
                 .SingleAsync(m => m.Id == message.MovementId);
 
-            var notificationId = movement.NotificationApplicationId;
+            var notificationId = movement.NotificationId;
 
             var relatedMovements = await context.GetMovementsForNotificationAsync(notificationId);
 
@@ -52,7 +52,7 @@
             {
                 NotificationNumber = notificationInformation.Number,
                 TotalNumberOfMovements = notificationInformation.Shipments,
-                CurrentActiveLoads = activeMovementService.TotalActiveMovements(relatedMovements),
+                CurrentActiveLoads = activeMovementService.Total(relatedMovements),
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = notificationInformation.ActiveLoadsPermitted.GetValueOrDefault(),
                 Progress = progressMap.Map(movement),

@@ -16,11 +16,11 @@
     {
         private readonly IwsContext context;
         private readonly IMap<Movement, MovementData> mapper;
-        private readonly ActiveMovementService activeMovementService;
+        private readonly ActiveMovements activeMovementService;
 
         public GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(IwsContext context, 
             IMap<Movement, MovementData> mapper,
-            ActiveMovementService activeMovementService)
+            ActiveMovements activeMovementService)
         {
             this.context = context;
             this.mapper = mapper;
@@ -31,7 +31,7 @@
         {
             var movements = await context.GetMovementsForNotificationAsync(message.Id);
 
-            return activeMovementService.ActiveMovements(movements)
+            return activeMovementService.List(movements)
                 .Select(mapper.Map)
                 .ToArray();
         }

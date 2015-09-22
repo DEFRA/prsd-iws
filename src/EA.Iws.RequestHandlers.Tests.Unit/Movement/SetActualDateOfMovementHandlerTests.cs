@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.Movement;
     using RequestHandlers.Movement;
     using Requests.Movement;
     using TestHelpers.DomainFakes;
@@ -31,7 +32,8 @@
             shipmentInfo = new TestableShipmentInfo
             {
                 FirstDate = startDate,
-                LastDate = endDate
+                LastDate = endDate,
+                NotificationId = NotificationId
             };
 
             notificationApplication = new TestableNotificationApplication
@@ -46,13 +48,12 @@
             movement = new TestableMovement
             {
                 Id = MovementId,
-                NotificationApplicationId = NotificationId,
-                NotificationApplication = notificationApplication
+                NotificationId = NotificationId
             };
 
             context.Movements.Add(movement);
 
-            handler = new SetActualDateOfMovementHandler(context);
+            handler = new SetActualDateOfMovementHandler(context, new SetActualDateOfShipment());
             request = new SetActualDateOfMovement(MovementId, shipmentDate);
         }
 

@@ -13,7 +13,6 @@
         {
             ToTable("Movement", "Notification");
 
-            Property(x => x.NotificationApplicationId).HasColumnName("NotificationId");
             Property(x => x.Units).HasColumnName("Unit");
 
             HasMany(

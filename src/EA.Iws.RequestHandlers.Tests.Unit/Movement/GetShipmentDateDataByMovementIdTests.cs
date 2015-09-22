@@ -45,7 +45,7 @@
             movement = new TestableMovement
             {
                 Id = MovementId,
-                NotificationApplicationId = NotificationId
+                NotificationId = NotificationId
             };
 
             context.Movements.Add(movement);

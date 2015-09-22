@@ -8,13 +8,13 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class MovementQuantityCalculatorTests
+    public class MovementQuantityTests
     {
-        private readonly MovementQuantityCalculator movementQuantityCalculator;
+        private readonly MovementQuantity movementQuantity;
         private readonly TestableMovement movement;
         private readonly TestableShipmentInfo shipmentInfo;
 
-        public MovementQuantityCalculatorTests()
+        public MovementQuantityTests()
         {
             movement = new TestableMovement();
 
@@ -33,7 +33,7 @@
                 Units = ShipmentQuantityUnits.Kilograms
             };
 
-            movementQuantityCalculator = new MovementQuantityCalculator(new ReceivedMovementService());
+            movementQuantity = new MovementQuantity(new ReceivedMovements());
         }
 
         [Fact]
@@ -41,7 +41,7 @@
         {
             var movements = new[] { movement };
 
-            Assert.Equal(5, movementQuantityCalculator.QuantityReceived(movements));
+            Assert.Equal(5, movementQuantity.Received(shipmentInfo, movements));
         }
 
         [Fact]
@@ -49,11 +49,11 @@
         {
             var movements = new[] { movement };
 
-            Assert.Equal(15, movementQuantityCalculator.QuantityRemaining(shipmentInfo, movements));
+            Assert.Equal(15, movementQuantity.Remaining(shipmentInfo, movements));
         }
 
         [Fact]
-        public void QuantityReceived_IfMovementsUnitsDiffer_Throws()
+        public void QuantityReceived_IfMovementsUnitsDiffer_ConvertsAndSums()
         {
             var movementWithOtherUnits = new TestableMovement
             {
@@ -62,25 +62,23 @@
                 {
                     Date = new DateTime(2015, 9, 2),
                     Decision = Core.MovementReceipt.Decision.Accepted,
-                    Quantity = 0.01m
+                    Quantity = 0.001m
                 }
             };
 
             var movements = new[] { movement, movementWithOtherUnits };
 
-            Assert.Throws<InvalidOperationException>(() => 
-                movementQuantityCalculator.QuantityReceived(movements));
+            Assert.Equal(6, movementQuantity.Received(shipmentInfo, movements));
         }
 
         [Fact]
-        public void QuantityRemaining_IfMovementsAndNotificationShipmentUnitsDiffer_Throws()
+        public void QuantityRemaining_IfMovementsAndNotificationShipmentUnitsDiffer_ConvertsToNotificationUnits()
         {
             shipmentInfo.Units = ShipmentQuantityUnits.Tonnes;
 
             var movements = new[] { movement };
 
-            Assert.Throws<InvalidOperationException>(() =>
-                movementQuantityCalculator.QuantityRemaining(shipmentInfo, movements));
+            Assert.Equal(0.005m, movementQuantity.Received(shipmentInfo, movements));
         }
 
         [Fact]
@@ -96,7 +94,7 @@
 
             var movements = new[] { movement, nonReceivedMovement };
 
-            Assert.Equal(5, movementQuantityCalculator.QuantityReceived(movements));
+            Assert.Equal(5, movementQuantity.Received(shipmentInfo, movements));
         }
 
         [Fact]
@@ -112,7 +110,7 @@
 
             var movements = new[] { movement, nonReceivedMovement };
 
-            Assert.Equal(15, movementQuantityCalculator.QuantityRemaining(shipmentInfo, movements));
+            Assert.Equal(15, movementQuantity.Remaining(shipmentInfo, movements));
         }
 
         [Fact]
@@ -128,7 +126,7 @@
 
             var movements = new[] { nonReceivedMovement };
 
-            Assert.Equal(0, movementQuantityCalculator.QuantityReceived(movements));
+            Assert.Equal(0, movementQuantity.Received(shipmentInfo, movements));
         }
 
         [Fact]
@@ -144,7 +142,17 @@
 
             var movements = new[] { nonReceivedMovement };
 
-            Assert.Equal(20, movementQuantityCalculator.QuantityRemaining(shipmentInfo, movements));
+            Assert.Equal(20, movementQuantity.Remaining(shipmentInfo, movements));
+        }
+
+        [Fact]
+        public void QuantityRemaining_ReturnedInShipmentInfoUnits()
+        {
+            shipmentInfo.Units = ShipmentQuantityUnits.Tonnes;
+
+            var movements = new[] { movement };
+
+            Assert.Equal(19.995m, movementQuantity.Remaining(shipmentInfo, movements));
         }
     }
 }

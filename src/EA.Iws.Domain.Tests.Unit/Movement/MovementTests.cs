@@ -27,7 +27,7 @@
                 UKCompetentAuthority.England, 
                 0);
 
-            movement = new Movement(notification, 1);
+            movement = new Movement(1, notification.Id);
 
             SystemTime.Freeze(FrozenTime);
         }
@@ -65,8 +65,8 @@
             ObjectInstantiator<Movement>.SetProperty(x => x.Units, ShipmentQuantityUnits.Tonnes, movement);
 
             movement.Receive(FrozenTime);
-            movement.Accept();
-            movement.Receipt.SetQuantity(5.0m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Tonnes);
+            movement.Receipt.Accept();
+            movement.Receipt.SetQuantity(5.0m);
         }
     }
 }

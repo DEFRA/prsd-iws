@@ -11,12 +11,16 @@
     {
         private static readonly Guid UserId = new Guid("35745EEC-55E7-42F1-9D8E-3515AC6FA281");
         private static readonly Guid NotificationId = new Guid("28760D3F-E18F-4986-BC7E-06BCD72D554C");
-        private static readonly DateTime startDate = new DateTime(2015, 1, 1);
-        private static readonly DateTime endDate = new DateTime(2016, 1, 1);
 
-        private readonly TestableNotificationApplication notificationApplication;
+        private static readonly DateTime beforeStartDate = new DateTime(2014, 1, 1);
+        private static readonly DateTime startDate = new DateTime(2015, 1, 1);
+        private static readonly DateTime validDate = new DateTime(2015, 2, 2);
+        private static readonly DateTime endDate = new DateTime(2016, 1, 1);
+        private static readonly DateTime afterEndDate = new DateTime(2017, 1, 1);
+
         private readonly TestableShipmentInfo shipmentInfo;
         private readonly Movement movement;
+        private readonly SetActualDateOfShipment dateSetter;
 
         public UpdateMovementTests()
         {
@@ -25,17 +29,12 @@
                 FirstDate = startDate,
                 LastDate = endDate,
                 Quantity = 520,
-                Units = ShipmentQuantityUnits.Tonnes
+                Units = ShipmentQuantityUnits.Tonnes,
+                NotificationId = NotificationId
             };
 
-            notificationApplication = new TestableNotificationApplication
-            {
-                Id = NotificationId,
-                UserId = UserId,
-                ShipmentInfo = shipmentInfo
-            };
-
-            movement = new Movement(notificationApplication, 5);
+            movement = new Movement(5, NotificationId);
+            dateSetter = new SetActualDateOfShipment();
 
             SystemTime.Freeze(new DateTime(2015, 06, 01));
         }
@@ -46,9 +45,19 @@
         }
 
         [Fact]
+        public void ShipmentInfoAndMovementNotificationIdsDiffer_Throws()
+        {
+            shipmentInfo.NotificationId = Guid.NewGuid();
+
+            Action updateMovementDate = () => dateSetter.Apply(validDate, movement, shipmentInfo);
+
+            Assert.Throws<InvalidOperationException>(updateMovementDate);
+        }
+
+        [Fact]
         public void DateCannotBeBeforeStartDate()
         {
-            Action updateMovementDate = () => movement.UpdateDate(new DateTime(2014, 1, 1));
+            Action updateMovementDate = () => dateSetter.Apply(beforeStartDate, movement, shipmentInfo);
 
             Assert.Throws<InvalidOperationException>(updateMovementDate);
         }
@@ -56,9 +65,17 @@
         [Fact]
         public void DateCannotBeAfterTheEndDate()
         {
-            Action updateMovementDate = () => movement.UpdateDate(new DateTime(2017, 1, 1));
+            Action updateMovementDate = () => dateSetter.Apply(afterEndDate, movement, shipmentInfo);
 
             Assert.Throws<InvalidOperationException>(updateMovementDate);
+        }
+
+        [Fact]
+        public void ValidDateAndMatchingNotifications_SetsDate()
+        {
+            dateSetter.Apply(validDate, movement, shipmentInfo);
+
+            Assert.Equal(validDate, movement.Date);
         }
 
         [Fact]

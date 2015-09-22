@@ -3,19 +3,18 @@
     using System.Collections;
     using System.Collections.Generic;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using NotificationBlocks;
 
     internal class MovementBlockCollection : IEnumerable<IDocumentBlock>
     {
         private readonly List<IDocumentBlock> movementDocumentBlocks;
 
-        public MovementBlockCollection(IList<MergeField> mergeFields, Movement movement)
+        public MovementBlockCollection(IList<MergeField> mergeFields, Movement movement, NotificationApplication notification)
         {
-            var notification = movement.NotificationApplication;
-
             movementDocumentBlocks = new List<IDocumentBlock>
             {
-                new MovementBlock(mergeFields, movement),
+                new MovementBlock(mergeFields, movement, notification),
                 new MovementFacilityBlock(mergeFields, notification),
                 new MovementOperationBlock(mergeFields, notification),
                 new ImporterBlock(mergeFields, notification),

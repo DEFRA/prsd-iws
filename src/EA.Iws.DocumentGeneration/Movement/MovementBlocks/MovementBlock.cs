@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Formatters;
     using Mapper;
     using ViewModels;
@@ -10,12 +11,12 @@
     {
         private readonly MovementViewModel data;
 
-        public MovementBlock(IList<MergeField> mergeFields, Movement movement)
+        public MovementBlock(IList<MergeField> mergeFields, Movement movement, NotificationApplication notification)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-
-            data = new MovementViewModel(movement,
-                (movement == null) ? null : movement.NotificationApplication,
+            data = new MovementViewModel(
+                movement,
+                notification,
                 new DateTimeFormatter(),
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter(),

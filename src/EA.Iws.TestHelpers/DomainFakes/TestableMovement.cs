@@ -17,16 +17,10 @@
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Id, value, this); }
         }
 
-        public new Guid NotificationApplicationId
+        public new Guid NotificationId
         {
-            get { return base.NotificationApplicationId; }
-            set { ObjectInstantiator<Movement>.SetProperty(x => x.NotificationApplicationId, value, this); }
-        }
-
-        public new NotificationApplication NotificationApplication
-        {
-            get { return base.NotificationApplication; }
-            set { ObjectInstantiator<Movement>.SetProperty(x => x.NotificationApplication, value, this); }
+            get { return base.NotificationId; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.NotificationId, value, this); }
         }
 
         public new decimal? Quantity

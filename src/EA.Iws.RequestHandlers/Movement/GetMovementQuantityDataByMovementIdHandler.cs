@@ -22,11 +22,11 @@
 
             var notificationQuantityAndUnits =
                 await context.NotificationApplications
-                .Where(na => na.Id == movement.NotificationApplicationId)
+                .Where(na => na.Id == movement.NotificationId)
                 .Select(na => new { na.ShipmentInfo.Quantity, na.ShipmentInfo.Units }).SingleAsync();
 
             var currentlyUsed = await context.Movements
-                .Where(m => m.NotificationApplicationId == movement.NotificationApplicationId
+                .Where(m => m.NotificationId == movement.NotificationId
                 && m.Quantity.HasValue)
                 .SumAsync(m => m.Quantity);
 

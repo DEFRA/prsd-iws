@@ -20,10 +20,11 @@
         public async Task<PackagingData> HandleAsync(GetPackagingDataValidForMovement message)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
 
             var packagingData = new PackagingData();
 
-            foreach (var packagingInfo in movement.NotificationApplication.PackagingInfos)
+            foreach (var packagingInfo in notification.PackagingInfos)
             {
                 packagingData.PackagingTypes.Add((PackagingType)packagingInfo.PackagingType.Value);
                 if (packagingInfo.OtherDescription != null)

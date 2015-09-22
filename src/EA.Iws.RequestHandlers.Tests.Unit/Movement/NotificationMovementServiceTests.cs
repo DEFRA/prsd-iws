@@ -66,7 +66,7 @@
         {
             testContext.Movements.Add(new TestableMovement
             {
-                NotificationApplicationId = NotificationId
+                NotificationId = NotificationId
             });
 
             Assert.Equal(2, movementService.GetNextMovementNumber(NotificationId));

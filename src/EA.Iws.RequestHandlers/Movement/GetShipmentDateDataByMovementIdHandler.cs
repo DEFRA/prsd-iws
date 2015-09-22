@@ -19,7 +19,7 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
 
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == movement.NotificationApplicationId);
+            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == movement.NotificationId);
 
             return new MovementDatesData
             {

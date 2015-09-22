@@ -36,7 +36,7 @@
             movement = new TestableMovement
             {
                 Id = MovementId,
-                NotificationApplicationId = NotificationId
+                NotificationId = NotificationId
             };
 
             Context.NotificationApplications.Add(NotificationApplication);
@@ -46,7 +46,7 @@
             handler = new GetMovementProgressInformationHandler(
                 Context, 
                 new MovementMap(), 
-                new ActiveMovementService());
+                new ActiveMovement());
         }
 
         [Fact]
@@ -111,17 +111,17 @@
             {
                 new TestableMovement
                 {
-                    NotificationApplicationId = NotificationId,
+                    NotificationId = NotificationId,
                     Date = new DateTime(2014, 9, 7)
                 },
                 new TestableMovement
                 {
-                    NotificationApplicationId = NotificationId,
+                    NotificationId = NotificationId,
                     Date = new DateTime(2014, 6, 9)
                 },
                 new TestableMovement
                 {
-                    NotificationApplicationId = NotificationId,
+                    NotificationId = NotificationId,
                     Date = new DateTime(2015, 5, 3)
                 }
             });

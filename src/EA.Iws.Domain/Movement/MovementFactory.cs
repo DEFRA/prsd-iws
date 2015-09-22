@@ -31,7 +31,7 @@
                     notificationApplication.ShipmentInfo.NumberOfShipments));
             }
 
-            return new Movement(notificationApplication, currentNumberOfMovements + 1);
+            return new Movement(currentNumberOfMovements + 1, notificationApplication.Id);
         }
     }
 }

@@ -73,10 +73,10 @@
     <Compile Include="InternalUserTests.cs" />
     <Compile Include="MovementOperationReceipt\MovementOperationReceiptTests.cs" />
     <Compile Include="MovementReceipt\MovementReceiptTests.cs" />
-    <Compile Include="Movement\ActiveMovementServiceTests.cs" />
-    <Compile Include="Movement\MovementQuantityCalculatorTests.cs" />
+    <Compile Include="Movement\ActiveMovementsTests.cs" />
+    <Compile Include="Movement\MovementQuantityTests.cs" />
     <Compile Include="Movement\MovementTests.cs" />
-    <Compile Include="Movement\ReceivedMovementServiceTests.cs" />
+    <Compile Include="Movement\ReceivedMovementsTests.cs" />
     <Compile Include="Movement\UpdateMovementTests.cs" />
     <Compile Include="Movement\ShipmentQuantityUnitConverterTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />

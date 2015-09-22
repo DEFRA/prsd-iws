@@ -52,7 +52,7 @@
         {
             var result = await handler.HandleAsync(new CreateMovementForNotificationById(notificationId));
 
-            Assert.Single(testContext.Movements, m => m.NotificationApplicationId == notificationId);
+            Assert.Single(testContext.Movements, m => m.NotificationId == notificationId);
         }
 
         [Fact]
@@ -70,7 +70,7 @@
 
             testContext.Movements.Add(new TestableMovement
             {
-                NotificationApplicationId = notificationId
+                NotificationId = notificationId
             });
 
             await Assert.ThrowsAsync<InvalidOperationException>(

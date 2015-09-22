@@ -21,8 +21,9 @@
         public async Task<byte[]> HandleAsync(GenerateMovementDocument message)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.Id);
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
 
-            var document = documentGenerator.Generate(movement);
+            var document = documentGenerator.Generate(movement, notification);
 
             return document;
         }

@@ -26,7 +26,7 @@
         }
 
         [Fact]
-        public void MovementIsNull()
+        public void MovementAndNotificationIsNull()
         {
             var result = new MovementViewModel(null, 
                 null, 
@@ -59,7 +59,7 @@
             {
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)
             };
-            movement.NotificationApplication = notification;
+            movement.NotificationId = notification.Id;
 
             var result = GenerateViewModel();
 
@@ -145,7 +145,7 @@
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Powdery)
             };
 
-            movement.NotificationApplication = notification;
+            movement.NotificationId = notification.Id;
 
             var result = GenerateViewModel();
 
@@ -166,8 +166,9 @@
 
         private MovementViewModel GenerateViewModel()
         {
-            return new MovementViewModel(movement,
-                movement.NotificationApplication,
+            return new MovementViewModel(
+                movement,
+                notification,
                 new DateTimeFormatter(),
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter(),

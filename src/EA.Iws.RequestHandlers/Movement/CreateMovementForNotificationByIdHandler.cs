@@ -27,7 +27,7 @@
             var notificationAssessment =
                 await context.NotificationAssessments.SingleAsync(na => na.NotificationApplicationId == message.Id);
 
-            var movements = await context.Movements.Where(m => m.NotificationApplicationId == message.Id).ToArrayAsync();
+            var movements = await context.Movements.Where(m => m.NotificationId == message.Id).ToArrayAsync();
 
             var movement = movementFactory.Create(notification, notificationAssessment, movements);
 

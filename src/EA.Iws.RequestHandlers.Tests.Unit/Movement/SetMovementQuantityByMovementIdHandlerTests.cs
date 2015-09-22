@@ -8,36 +8,22 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class SetMovementQuantityByMovementIdHandlerTests
+    public class SetMovementQuantityByMovementIdHandlerTests : TestBase
     {
-        private static readonly Guid UserId = new Guid("F128624E-3BC3-432C-899E-0A48EBD98332");
-        private static readonly Guid MovementId = new Guid("F128624E-3BC3-432C-899E-0A48EBD98332");
-        private static readonly Guid NotificationId = new Guid("F128624E-3BC3-432C-899E-0A48EBD98332");
-
         private readonly SetMovementQuantityByMovementIdHandler handler;
-        private readonly TestIwsContext context;
-        private readonly TestableMovement movement;
         private readonly SetMovementQuantityByMovementId request;
 
         public SetMovementQuantityByMovementIdHandlerTests()
         {
-            context = new TestIwsContext(new TestUserContext(UserId));
-            movement = new TestableMovement
+            NotificationApplication.ShipmentInfo = new TestableShipmentInfo
             {
-                Id = MovementId,
-                NotificationApplicationId = NotificationId,
-                NotificationApplication = new TestableNotificationApplication
-                {
-                    Id = NotificationId,
-                    ShipmentInfo = new TestableShipmentInfo
-                    {
-                        Units = ShipmentQuantityUnits.Litres
-                    }
-                }
+                Units = ShipmentQuantityUnits.Litres
             };
-            context.Movements.Add(movement);
 
-            handler = new SetMovementQuantityByMovementIdHandler(context);
+            Context.Movements.Add(Movement);
+            Context.NotificationApplications.Add(NotificationApplication);
+
+            handler = new SetMovementQuantityByMovementIdHandler(Context);
             request = new SetMovementQuantityByMovementId(MovementId, 10, ShipmentQuantityUnits.Litres);
         }
 
@@ -54,7 +40,7 @@
         {
             await handler.HandleAsync(request);
 
-            Assert.Equal(1, context.SaveChangesCount);
+            Assert.Equal(1, Context.SaveChangesCount);
         }
 
         [Fact]
@@ -64,8 +50,8 @@
                 handler.HandleAsync(new SetMovementQuantityByMovementId(MovementId, 10,
                     ShipmentQuantityUnits.CubicMetres));
 
-            Assert.Equal(10, movement.Quantity);
-            Assert.Equal(ShipmentQuantityUnits.CubicMetres, movement.Units);
+            Assert.Equal(10, Movement.Quantity);
+            Assert.Equal(ShipmentQuantityUnits.CubicMetres, Movement.Units);
         }
 
         [Fact]
@@ -81,11 +67,11 @@
         [Fact]
         public async Task SetsQuantity()
         {
-            movement.Quantity = 0;
+            Movement.Quantity = 0;
 
             await handler.HandleAsync(request);
 
-            Assert.Equal(request.Quantity, movement.Quantity);
+            Assert.Equal(request.Quantity, Movement.Quantity);
         }
 
         [Fact]

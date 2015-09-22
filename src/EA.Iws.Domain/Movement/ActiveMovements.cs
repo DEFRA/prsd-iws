@@ -4,14 +4,14 @@
     using System.Linq;
     using Prsd.Core;
 
-    public class ActiveMovementService
+    public class ActiveMovements
     {
-        public int TotalActiveMovements(IList<Movement> movements)
+        public int Total(IList<Movement> movements)
         {
-            return ActiveMovements(movements).Count();
+            return List(movements).Count();
         }
 
-        public IList<Movement> ActiveMovements(IList<Movement> movements)
+        public IList<Movement> List(IList<Movement> movements)
         {
             return movements.Where(m => m.IsActive).ToArray();
         }

@@ -21,7 +21,7 @@
         public async Task<Dictionary<int, Guid>> HandleAsync(GetMovementsForNotificationById message)
         {
             return await context.Movements
-                .Where(m => message.NotificationId == m.NotificationApplicationId)
+                .Where(m => message.NotificationId == m.NotificationId)
                 .ToDictionaryAsync(m => m.Number, m => m.Id);
         }
     }

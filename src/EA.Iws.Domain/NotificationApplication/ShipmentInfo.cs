@@ -24,6 +24,8 @@
             NumberOfShipments = numberOfShipments;
         }
 
+        public Guid NotificationId { get; private set; }
+
         public int NumberOfShipments
         {
             get { return numberOfShipments; }

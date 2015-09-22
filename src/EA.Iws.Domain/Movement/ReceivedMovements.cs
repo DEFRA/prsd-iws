@@ -4,9 +4,9 @@
     using System.Linq;
     using Core.MovementReceipt;
 
-    public class ReceivedMovementService
+    public class ReceivedMovements
     {
-        public IList<Movement> ReceivedMovements(IList<Movement> movements)
+        public IList<Movement> List(IList<Movement> movements)
         {
             return movements.Where(m => m.IsReceived).ToArray();
         }

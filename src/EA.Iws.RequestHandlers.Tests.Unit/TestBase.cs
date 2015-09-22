@@ -50,8 +50,7 @@
             Movement = new TestableMovement
             {
                 Id = MovementId,
-                NotificationApplication = NotificationApplication,
-                NotificationApplicationId = NotificationId
+                NotificationId = NotificationId
             };
         }
 

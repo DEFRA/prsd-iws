@@ -6,14 +6,14 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class ActiveMovementServiceTests
+    public class ActiveMovementsTests
     {
-        private readonly ActiveMovementService activeMovementService;
+        private readonly ActiveMovements activeMovements;
         private readonly TestableMovement movement;
 
-        public ActiveMovementServiceTests()
+        public ActiveMovementsTests()
         {
-            activeMovementService = new ActiveMovementService();
+            activeMovements = new ActiveMovements();
             movement = new TestableMovement();
         }
 
@@ -38,7 +38,7 @@
                 }
             };
 
-            Assert.Equal(2, activeMovementService.TotalActiveMovements(movements));
+            Assert.Equal(2, activeMovements.Total(movements));
 
             SystemTime.Unfreeze();
         }

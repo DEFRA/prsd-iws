@@ -22,7 +22,8 @@
         public async Task<Guid> HandleAsync(SetPackagingDataForMovement message)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
-            var packagingInfos = movement.NotificationApplication.PackagingInfos
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
+            var packagingInfos = notification.PackagingInfos
                 .Where(info => PackagingTypesAsInt(message.PackagingTypes)
                 .Contains(info.PackagingType.Value));
 

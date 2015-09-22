@@ -48,8 +48,8 @@
 
             handler = new GetMovementReceiptSummaryDataByMovementIdHandler(
                 Context,
-                new ActiveMovementService(),
-                new MovementQuantityCalculator(new ReceivedMovementService()));
+                new ActiveMovements(),
+                new MovementQuantity(new ReceivedMovements()));
         }
 
         [Fact]
@@ -92,19 +92,19 @@
             {
                 new TestableMovement
                 {
-                    NotificationApplicationId = NotificationId,
+                    NotificationId = NotificationId,
                     Date = new DateTime(2014, 9, 7),
                     Units = ShipmentQuantityUnits.Kilograms
                 },
                 new TestableMovement
                 {
-                    NotificationApplicationId = NotificationId,
+                    NotificationId = NotificationId,
                     Date = new DateTime(2014, 11, 15),
                     Units = ShipmentQuantityUnits.Kilograms
                 },
                 new TestableMovement
                 {
-                    NotificationApplicationId = NotificationId,
+                    NotificationId = NotificationId,
                     Date = new DateTime(2015, 2, 4),
                     Units = ShipmentQuantityUnits.Kilograms
                 }

@@ -21,10 +21,10 @@
         public async Task<bool> HandleAsync(SetActualMovementCarriers message)
         {
             var movement = await context.Movements.Where(m => m.Id == message.MovementId).SingleAsync();
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
 
-            var movementCarriersData = movement.NotificationApplication
-                .Carriers.Join
-                    (message.SelectedCarriers,
+            var movementCarriersData = notification.Carriers
+                .Join(message.SelectedCarriers,
                     c => c.Id,
                     sc => sc.Value,
                     (carrier, order) => new { Order = order.Key, Carrier = carrier });

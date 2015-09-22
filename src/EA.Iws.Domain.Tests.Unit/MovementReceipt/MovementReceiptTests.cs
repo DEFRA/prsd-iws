@@ -14,7 +14,7 @@
     {
         private readonly Movement movement;
         private readonly MovementReceipt movementReceipt;
-        private readonly ReceivedMovementService receivedMovementService;
+        private readonly ReceivedMovements receivedMovementService;
 
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private static readonly DateTime MovementDate = new DateTime(2015, 12, 1);
@@ -25,10 +25,10 @@
         public MovementReceiptTests()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
-            movement = new Movement(notification, 1);
+            movement = new Movement(1, notification.Id);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
             movementReceipt = new MovementReceipt(AfterMovementDate);
-            receivedMovementService = new ReceivedMovementService();
+            receivedMovementService = new ReceivedMovements();
         }
 
         [Fact]
@@ -55,23 +55,11 @@
         }
 
         [Fact]
-        public void AcceptThrowsIfNoReceipt()
-        {
-            Assert.Throws<InvalidOperationException>(() => movement.Accept());
-        }
-
-        [Fact]
-        public void RejectThrowsIfNoReceipt()
-        {
-            Assert.Throws<InvalidOperationException>(() => movement.Reject(AnyString));
-        }
-
-        [Fact]
         public void CanAcceptMovement()
         {
             movement.Receive(AfterMovementDate);
 
-            movement.Accept();
+            movement.Receipt.Accept();
 
             Assert.NotNull(movement.Receipt.Decision);
             Assert.Equal(Decision.Accepted, movement.Receipt.Decision);
@@ -82,7 +70,7 @@
         {
             movement.Receive(AfterMovementDate);
 
-            movement.Reject(AnyString);
+            movement.Receipt.Reject(AnyString);
 
             Assert.NotNull(movement.Receipt.Decision);
             Assert.Equal(Decision.Rejected, movement.Receipt.Decision);
@@ -93,7 +81,7 @@
         {
             movement.Receive(AfterMovementDate);
 
-            movement.Reject(AnyString);
+            movement.Receipt.Reject(AnyString);
 
             Assert.Equal(AnyString, movement.Receipt.RejectReason);
         }
@@ -136,7 +124,7 @@
 
             var newDate = AfterMovementDate.AddDays(1);
 
-            movement.Accept();
+            movement.Receipt.Accept();
 
             movement.Receive(newDate);
 
@@ -148,7 +136,7 @@
         {
             movement.Receive(AfterMovementDate);
 
-            movement.Accept();
+            movement.Receipt.Accept();
 
             movement.Receipt.SetQuantity(10m);
 
@@ -168,7 +156,7 @@
         {
             movement.Receive(AfterMovementDate);
 
-            movement.Reject(AnyString);
+            movement.Receipt.Reject(AnyString);
 
             Assert.False(movement.IsReceived);
         }

@@ -26,7 +26,7 @@
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationApplicationType.Recovery, UKCompetentAuthority.England, 0);
 
-            movement = new Movement(notification, 1);
+            movement = new Movement(1, notification.Id);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);
             ObjectInstantiator<Movement>.SetProperty(x => x.Units, ShipmentQuantityUnits.Kilograms, movement);
         }
@@ -51,8 +51,8 @@
         private void FullyReceiveMovement()
         {
             movement.Receive(AfterMovementDate);
-            movement.Accept();
-            movement.Receipt.SetQuantity(5.0m, ShipmentQuantityUnits.Kilograms, ShipmentQuantityUnits.Tonnes);
+            movement.Receipt.Accept();
+            movement.Receipt.SetQuantity(5.0m);
         }
     }
 }

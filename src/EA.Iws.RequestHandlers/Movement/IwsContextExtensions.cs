@@ -15,7 +15,7 @@
             return await context
                 .Movements
                 .Where(m => 
-                    m.NotificationApplicationId == notificationId)
+                    m.NotificationId == notificationId)
                 .ToArrayAsync();
         }
     }

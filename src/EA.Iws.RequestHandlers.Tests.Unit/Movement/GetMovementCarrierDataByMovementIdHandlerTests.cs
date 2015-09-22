@@ -10,26 +10,17 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class GetMovementCarrierDataByMovementIdHandlerTests
+    public class GetMovementCarrierDataByMovementIdHandlerTests : TestBase
     {
-        private static readonly Guid MovementId = new Guid("687EE07E-D699-42FC-A9DB-F51D7B49F622");
-        private static readonly Guid NotificationId = new Guid("33AE2679-DEE9-4B46-A4AF-3D4443A29FA1");
         private static readonly Guid Carrier1Id = new Guid("C437991A-4819-4AE6-9BA0-5833F623A8DE");
         private static readonly Guid Carrier2Id = new Guid("5CD5CA14-2E0A-43E3-992E-6AA24F3F9CB8");
 
-        private readonly TestIwsContext context;
         private readonly GetMovementCarrierDataByMovementIdHandler handler;
-        private readonly TestableMovement movement;
-        private readonly TestableNotificationApplication notification;
         private readonly TestableCarrier carrier1;
         private readonly TestableCarrier carrier2;
 
         public GetMovementCarrierDataByMovementIdHandlerTests()
         {
-            context = new TestIwsContext();
-
-            context.Countries.Add(TestableCountry.UnitedKingdom);
-
             carrier1 = new TestableCarrier
             {
                 Id = Carrier1Id,
@@ -46,31 +37,20 @@
                 Contact = TestableContact.BillyKnuckles
             };
 
-            notification = new TestableNotificationApplication
-            {
-                Id = NotificationId,
-                Carriers = new[] { carrier1, carrier2 }
-            };
+            NotificationApplication.Carriers = new[] { carrier1, carrier2 };
 
-            movement = new TestableMovement
-            {
-                Id = MovementId,
-                NotificationApplication = notification,
-                NotificationApplicationId = NotificationId
-            };
-
-            context.NotificationApplications.Add(notification);
-            context.Movements.Add(movement);
+            Context.NotificationApplications.Add(NotificationApplication);
+            Context.Movements.Add(Movement);
 
             var carrierDataMap = new CarrierDataMap(
-                    new AddressMap(context),
+                    new AddressMap(Context),
                     new BusinessInfoMap(),
                     new ContactMap()); 
 
             var movementCarrierMap = new MovementCarrierMap(carrierDataMap);
 
             handler = new GetMovementCarrierDataByMovementIdHandler(
-                context, 
+                Context, 
                 carrierDataMap,
                 movementCarrierMap);
         }
@@ -95,7 +75,7 @@
         [Fact]
         public async Task ReturnsSelectedCarriersForMovement()
         {
-            movement.MovementCarriers = new[] 
+            Movement.MovementCarriers = new[] 
             {
                 new TestableMovementCarrier
                 {

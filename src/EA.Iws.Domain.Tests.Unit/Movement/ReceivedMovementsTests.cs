@@ -6,14 +6,14 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class ReceivedMovementServiceTests
+    public class ReceivedMovementsTests
     {
-        private readonly ReceivedMovementService receivedMovementService;
+        private readonly ReceivedMovements receivedMovements;
         private readonly Movement movement1;
         private readonly Movement movement2;
         private readonly Movement[] movements;
 
-        public ReceivedMovementServiceTests()
+        public ReceivedMovementsTests()
         {
             movement1 = new TestableMovement
             {
@@ -37,13 +37,13 @@
 
             movements = new[] { movement1, movement2 };
 
-            receivedMovementService = new ReceivedMovementService();
+            receivedMovements = new ReceivedMovements();
         }
 
         [Fact]
         public void ReceivedMovements_ReturnsCorrectMovements()
         {
-            Assert.Equal(1, receivedMovementService.ReceivedMovements(movements).Count);
+            Assert.Equal(1, receivedMovements.List(movements).Count);
         }
     }
 }
