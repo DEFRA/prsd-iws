@@ -1,6 +1,8 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.GovUK.cshtml";
+    ViewBag.CookieMessage = "<p>GOV.UK uses cookies to make the site simpler. Find out more about " +
+                            Html.ActionLink("cookies", "Cookies", "NewUser", new { area = string.Empty }, new { target = "_blank" }) + "</p>";
     ViewBag.HeaderClass = "with-proposition";
+    Layout = "~/Views/Shared/_Layout.GovUK.cshtml";
 }
 
 @* Implement sections here *@
@@ -32,7 +34,11 @@
 }
 
 @section footer_support_links {
-
+    <ul>
+        <li>
+            @Html.ActionLink("Cookies", "Cookies", "NewUser", new { area = string.Empty }, new { target = "_blank" })
+        </li>
+    </ul>
 }
 
 @section body_end {
