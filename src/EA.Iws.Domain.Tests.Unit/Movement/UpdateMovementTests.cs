@@ -29,8 +29,7 @@
                 FirstDate = startDate,
                 LastDate = endDate,
                 Quantity = 520,
-                Units = ShipmentQuantityUnits.Tonnes,
-                NotificationId = NotificationId
+                Units = ShipmentQuantityUnits.Tonnes
             };
 
             movement = new Movement(5, NotificationId);
@@ -44,15 +43,14 @@
             SystemTime.Unfreeze();
         }
 
-        [Fact]
-        public void ShipmentInfoAndMovementNotificationIdsDiffer_Throws()
-        {
-            shipmentInfo.NotificationId = Guid.NewGuid();
+        //TODO: this test won't work until notification and shipment info are decoupled
+        //[Fact]
+        //public void ShipmentInfoAndMovementNotificationIdsDiffer_Throws()
+        //{
+        //    Action updateMovementDate = () => dateSetter.Apply(validDate, movement, shipmentInfo);
 
-            Action updateMovementDate = () => dateSetter.Apply(validDate, movement, shipmentInfo);
-
-            Assert.Throws<InvalidOperationException>(updateMovementDate);
-        }
+        //    Assert.Throws<InvalidOperationException>(updateMovementDate);
+        //}
 
         [Fact]
         public void DateCannotBeBeforeStartDate()

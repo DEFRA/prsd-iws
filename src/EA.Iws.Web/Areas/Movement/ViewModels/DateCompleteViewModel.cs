@@ -17,6 +17,22 @@
         [Required]
         public int? Year { get; set; }
 
+        public DateCompleteViewModel()
+        {
+        }
+
+        public DateCompleteViewModel(DateTime? dateComplete, NotificationType notificationType)
+        {
+            if (dateComplete.HasValue)
+            {
+                Day = dateComplete.Value.Day;
+                Month = dateComplete.Value.Month;
+                Year = dateComplete.Value.Year;
+            }
+
+            NotificationType = notificationType;
+        }
+
         public DateTime GetDateComplete()
         {
             DateTime dateComplete;

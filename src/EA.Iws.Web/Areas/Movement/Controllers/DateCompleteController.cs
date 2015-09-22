@@ -25,10 +25,7 @@
             {
                 var data = await client.SendAsync(User.GetAccessToken(), new GetMovementOperationReceiptDataByMovementId(id));
 
-                var model = new DateCompleteViewModel
-                {
-                    NotificationType = data.NotificationType
-                };
+                var model = new DateCompleteViewModel(data.DateCompleted, data.NotificationType);
 
                 return View(model);
             }

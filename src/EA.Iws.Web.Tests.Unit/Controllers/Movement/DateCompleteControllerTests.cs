@@ -44,7 +44,7 @@
         {
             controller.ModelState.AddModelError("Test", "Error");
 
-            var result = await controller.Index(AnyGuid, new DateCompleteViewModel());
+            var result = await controller.Index(AnyGuid, new DateCompleteViewModel(null, NotificationType.Recovery));
 
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<DateCompleteViewModel>(viewResult.Model);
@@ -53,12 +53,7 @@
         [Fact]
         public async Task PostSendsCorrectRequest()
         {
-            var viewModel = new DateCompleteViewModel
-            {
-                Day = AnyDate.Day,
-                Month = AnyDate.Month,
-                Year = AnyDate.Year
-            };
+            var viewModel = new DateCompleteViewModel(AnyDate, NotificationType.Recovery);
 
             await controller.Index(AnyGuid, viewModel);
 
@@ -82,13 +77,7 @@
 
         private async Task<RedirectToRouteResult> PostValidModel(NotificationType notificationType)
         {
-            var viewModel = new DateCompleteViewModel
-            {
-                Day = AnyDate.Day,
-                Month = AnyDate.Month,
-                Year = AnyDate.Year,
-                NotificationType = notificationType
-            };
+            var viewModel = new DateCompleteViewModel(AnyDate, notificationType);
 
             var result = await controller.Index(AnyGuid, viewModel);
 

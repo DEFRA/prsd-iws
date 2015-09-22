@@ -32,8 +32,7 @@
             shipmentInfo = new TestableShipmentInfo
             {
                 FirstDate = startDate,
-                LastDate = endDate,
-                NotificationId = NotificationId
+                LastDate = endDate
             };
 
             notificationApplication = new TestableNotificationApplication

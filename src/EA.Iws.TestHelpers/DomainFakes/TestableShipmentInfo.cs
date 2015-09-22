@@ -13,12 +13,6 @@
             set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.Id, value, this); }
         }
 
-        public new Guid NotificationId 
-        {
-            get { return base.NotificationId; } 
-            set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.NotificationId, value, this); } 
-        }
-
         public new int NumberOfShipments
         {
             get { return base.NumberOfShipments; }
