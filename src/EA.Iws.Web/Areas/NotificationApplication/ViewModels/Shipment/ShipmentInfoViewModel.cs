@@ -177,7 +177,7 @@
 
             decimal quantity;
             return Decimal.TryParse(Quantity, Style, CultureInfo.CurrentCulture, out quantity)
-                && quantity.IsDecimalValidToNDecimalPlaces(4);
+                && decimal.Round(quantity, 4) != quantity;
         }
 
         public SetIntendedShipmentInfoForNotification ToRequest()
