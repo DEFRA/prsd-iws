@@ -4,10 +4,8 @@
     using Copy;
     using Domain;
     using Domain.Movement;
-    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using Movement;
-    using MovementReceipt;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;

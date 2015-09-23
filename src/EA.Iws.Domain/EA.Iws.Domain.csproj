@@ -96,6 +96,8 @@
     <Compile Include="NotificationAssessment\NotificationSubmittedEvent.cs" />
     <Compile Include="ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />
+    <Compile Include="AddressBook\AddressBook.cs" />
+    <Compile Include="AddressBook\AddressBookRecord.cs" />
     <Compile Include="ShipmentQuantity.cs" />
     <Compile Include="ShipmentQuantityUnitConverter.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />

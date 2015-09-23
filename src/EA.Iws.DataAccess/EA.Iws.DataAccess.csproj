@@ -79,6 +79,8 @@
     <Compile Include="Identity\IwsIdentityContext.cs" />
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\ActivityMapping.cs" />
+    <Compile Include="Mappings\AddressBookMapping.cs" />
+    <Compile Include="Mappings\AddressBookRecordMapping.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\BankHolidayMapping.cs" />
     <Compile Include="Mappings\BusinessTypeMapping.cs" />

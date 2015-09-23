@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressBook\AddressBookData.cs" />
+    <Compile Include="AddressBook\AddressBookRecordData.cs" />
+    <Compile Include="AddressBook\AddressRecordType.cs" />
     <Compile Include="Admin\ApprovalAction.cs" />
     <Compile Include="Admin\FinancialGuaranteeData.cs" />
     <Compile Include="Admin\FinancialGuaranteeDecision.cs" />

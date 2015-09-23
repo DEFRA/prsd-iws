@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainFakes\TestableAddressBook.cs" />
+    <Compile Include="DomainFakes\TestableAddressBookRecord.cs" />
     <Compile Include="DomainFakes\TestableBusiness.cs" />
     <Compile Include="DomainFakes\TestableAddress.cs" />
     <Compile Include="DomainFakes\TestableImporter.cs" />

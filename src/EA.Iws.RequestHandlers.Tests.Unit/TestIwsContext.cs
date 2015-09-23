@@ -48,6 +48,7 @@
             this.Addresses = new TestDbSet<UserAddress>();
             this.WasteCodes = new TestDbSet<WasteCode>();
             this.Movements = new TestDbSet<Domain.Movement.Movement>();
+            this.AddressBooks = new TestDbSet<Domain.AddressBook.AddressBook>();
         }
 
         public int SaveChangesCount { get; private set; }

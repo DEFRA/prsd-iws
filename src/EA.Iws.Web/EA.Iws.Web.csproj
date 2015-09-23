@@ -712,6 +712,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\PasswordUpdated.cshtml" />
     <Content Include="Views\NewUser\Cookies.cshtml" />
+    <Content Include="Views\AddressBook\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -749,6 +750,7 @@
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\OperationCompleteViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
+    <Compile Include="Controllers\AddressBookController.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />

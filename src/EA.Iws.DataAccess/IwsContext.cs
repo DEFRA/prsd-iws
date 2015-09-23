@@ -6,6 +6,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Domain;
+    using Domain.AddressBook;
     using Domain.FinancialGuarantee;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -63,6 +64,8 @@
         public virtual DbSet<Movement> Movements { get; set; }
 
         public virtual DbSet<UserAddress> Addresses { get; set; }
+
+        public virtual DbSet<AddressBook> AddressBooks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressBook\GetProducerAddressBook.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDates.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationDecisionRequiredByDate.cs" />
