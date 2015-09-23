@@ -33,7 +33,7 @@
 
             // Register the map classes
             builder.RegisterAssemblyTypes(ThisAssembly)
-                .Where(t => t.Namespace.Contains("Mappings"))
+                .Where(t => t.Namespace != null && t.Namespace.Contains("Mappings"))
                 .AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(ThisAssembly).AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces();
@@ -44,6 +44,7 @@
             builder.RegisterType<ActiveMovements>().AsSelf();
             builder.RegisterType<ReceivedMovements>().AsSelf();
             builder.RegisterType<MovementQuantity>().AsSelf();
+            builder.RegisterType<SetActualDateOfShipment>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
