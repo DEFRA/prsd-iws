@@ -601,6 +601,7 @@
     <Content Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOffice.cshtml" />
     <Content Include="Content\iws\_footer.scss" />
     <Content Include="Areas\Movement\Views\DateComplete\Index.cshtml" />
+    <Content Include="Areas\Movement\Views\OperationComplete\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -735,6 +736,7 @@
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
     <Compile Include="Areas\Movement\Controllers\NumberOfPackagesController.cs" />
+    <Compile Include="Areas\Movement\Controllers\OperationCompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityController.cs" />
     <Compile Include="Areas\Movement\Controllers\PackagingTypesController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
@@ -745,6 +747,7 @@
     <Compile Include="Areas\Movement\ViewModels\Carrier\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\DateCompleteViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\OperationCompleteViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
