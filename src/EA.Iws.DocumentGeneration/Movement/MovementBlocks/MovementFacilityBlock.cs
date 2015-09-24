@@ -1,21 +1,34 @@
 ﻿namespace EA.Iws.DocumentGeneration.Movement.MovementBlocks
 {
     using System.Collections.Generic;
+    using System.Reflection;
     using Domain.NotificationApplication;
     using NotificationBlocks;
     using ViewModels;
 
     internal class MovementFacilityBlock : FacilityBlock
     {
+        private readonly PropertyInfo[] properties;
+
         public MovementFacilityBlock(IList<MergeField> mergeFields, NotificationApplication notification)
             : base(mergeFields, notification)
         {
+            properties = PropertyHelper.GetPropertiesForViewModel(typeof(FacilityViewModel));
+        }
+
+        public override void Merge()
+        {
+            if (!HasAnnex)
+            {
+                if (Data.Count == 1)
+                {
+                    MergeFacilityToMainDocument(Data[0], properties);
+                }
+            }
         }
 
         public override void GenerateAnnex(int annexNumber)
         {
-            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(FacilityViewModel));
-
             if (Data.Count == 2)
             {
                 var facility = (Data[0].IsActualSite) ? Data[1] : Data[0];

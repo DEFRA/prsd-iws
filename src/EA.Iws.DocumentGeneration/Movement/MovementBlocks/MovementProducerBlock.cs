@@ -1,21 +1,34 @@
 ﻿namespace EA.Iws.DocumentGeneration.Movement.MovementBlocks
 {
     using System.Collections.Generic;
+    using System.Reflection;
     using Domain.NotificationApplication;
     using NotificationBlocks;
     using ViewModels;
 
     internal class MovementProducerBlock : ProducerBlock
     {
+        private readonly PropertyInfo[] properties;
+
         public MovementProducerBlock(IList<MergeField> mergeFields, NotificationApplication notification) 
             : base(mergeFields, notification)
         {
+            properties = PropertyHelper.GetPropertiesForViewModel(typeof(ProducerViewModel));
+        }
+
+        public override void Merge()
+        {
+            if (!HasAnnex)
+            {
+                if (Data.Count == 1)
+                {
+                    MergeProducerToMainDocument(Data[0].GetProducerViewModelShowingAnnexMessages(Data.Count, Data[0], 0), properties);
+                }
+            }
         }
 
         public override void GenerateAnnex(int annexNumber)
-        {
-            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(ProducerViewModel));
-            
+        {  
             //If there is only one producer but also an annex
             if (Data.Count == 1)
             {
