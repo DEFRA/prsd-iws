@@ -43,12 +43,11 @@
             builder.RegisterType<ReceivedMovements>().AsSelf();
             builder.RegisterType<MovementQuantity>().AsSelf();
             builder.RegisterType<SetActualDateOfShipment>().AsSelf();
+            builder.RegisterType<NotificationChargeCalculator>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
-            builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
-            builder.RegisterType<NotificationMovementService>().As<INotificationMovementService>();
         }
     }
 }

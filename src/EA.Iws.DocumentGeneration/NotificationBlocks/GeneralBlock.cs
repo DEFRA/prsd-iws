@@ -10,11 +10,12 @@
     {
         private readonly GeneralViewModel data;
 
-        public GeneralBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public GeneralBlock(IList<MergeField> mergeFields, NotificationApplication notification, ShipmentInfo shipmentInfo)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, "General");
 
             data = new GeneralViewModel(notification, 
+                shipmentInfo,
                 new DateTimeFormatter(), 
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter());

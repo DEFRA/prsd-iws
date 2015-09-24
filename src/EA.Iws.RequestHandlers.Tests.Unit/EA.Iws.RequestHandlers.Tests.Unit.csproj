@@ -130,11 +130,9 @@
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetNumberOfPackagesByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetPackagingDataValidForMovementHandlerTests.cs" />
-    <Compile Include="Movement\NotificationMovementServiceTests.cs" />
     <Compile Include="Movement\SetPackagingDataForMovementHandlerTests.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandlerTests.cs" />
-    <Compile Include="Movement\TestService.cs" />
     <Compile Include="Notification\GetNotificationInfoInternalHandlerTests.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />

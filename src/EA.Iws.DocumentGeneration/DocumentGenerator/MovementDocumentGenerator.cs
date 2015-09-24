@@ -8,13 +8,13 @@
 
     public class MovementDocumentGenerator : IMovementDocumentGenerator
     {
-        public byte[] Generate(Movement movement, NotificationApplication notification)
+        public byte[] Generate(Movement movement, NotificationApplication notification, ShipmentInfo shipmentInfo)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("MovementMergeTemplate.docx"))
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
-                    var movementDocument = new MovementDocument(document, movement, notification);
+                    var movementDocument = new MovementDocument(document, movement, notification, shipmentInfo);
 
                     movementDocument.Merge();
 

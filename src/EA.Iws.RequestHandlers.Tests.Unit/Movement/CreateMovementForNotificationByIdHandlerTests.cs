@@ -21,19 +21,22 @@
 
             shipmentInfo = new TestableShipmentInfo
             {
+                NotificationId = notificationId,
                 NumberOfShipments = 1
             };
 
             testContext.NotificationApplications.Add(new TestableNotificationApplication
             {
                 Id = notificationId,
-                ShipmentInfo = shipmentInfo
+                UserId = TestIwsContext.UserId
             });
 
             testContext.NotificationAssessments.Add(new TestableNotificationAssessment
             {
                 NotificationApplicationId = notificationId
             });
+
+            testContext.ShipmentInfos.Add(shipmentInfo);
 
             var factory = new MovementFactory();
 

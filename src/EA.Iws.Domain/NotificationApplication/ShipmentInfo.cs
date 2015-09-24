@@ -7,52 +7,25 @@
 
     public class ShipmentInfo : Entity
     {
-        private int numberOfShipments;
         private decimal quantity;
-        private DateTime firstDate;
-        private DateTime lastDate;
 
         protected ShipmentInfo()
         {
         }
 
-        internal ShipmentInfo(DateTime firstDate, DateTime lastDate, int numberOfShipments, ShipmentQuantity shipmentQuantity)
+        public ShipmentInfo(Guid notificationId, ShipmentPeriod shipmentPeriod, int numberOfShipments, ShipmentQuantity shipmentQuantity)
         {
-            UpdateShipmentPeriod(firstDate, lastDate);
+            NotificationId = notificationId;
             UpdateQuantity(shipmentQuantity);
-
-            NumberOfShipments = numberOfShipments;
+            UpdateShipmentPeriod(shipmentPeriod);
+            UpdateNumberOfShipments(numberOfShipments);
         }
 
-        public int NumberOfShipments
-        {
-            get { return numberOfShipments; }
-            internal set
-            {
-                Guard.ArgumentNotZeroOrNegative(() => value, value);
-                numberOfShipments = value;
-            }
-        }
+        public Guid NotificationId { get; private set; }
 
-        public DateTime FirstDate
-        {
-            get { return firstDate; }
-            private set
-            {
-                Guard.ArgumentNotDefaultValue(() => value, value);
-                firstDate = value;
-            }
-        }
+        public int NumberOfShipments { get; private set; }
 
-        public DateTime LastDate
-        {
-            get { return lastDate; }
-            private set
-            {
-                Guard.ArgumentNotDefaultValue(() => value, value);
-                lastDate = value;
-            }
-        }
+        public ShipmentPeriod ShipmentPeriod { get; private set; }
 
         public ShipmentQuantityUnits Units { get; private set; }
 
@@ -66,30 +39,28 @@
             }
         }
 
-        internal void UpdateShipmentPeriod(DateTime firstDate, DateTime lastDate)
-        {
-            Guard.ArgumentNotDefaultValue(() => firstDate, firstDate);
-            Guard.ArgumentNotDefaultValue(() => lastDate, lastDate);
-
-            if (firstDate < SystemTime.Now.Date)
-            {
-                throw new InvalidOperationException(string.Format("The start date cannot be in the past on shipment info {0}", Id));
-            }
-
-            if (firstDate > lastDate)
-            {
-                throw new InvalidOperationException(
-                    string.Format("The start date must be before the end date on shipment info {0}", Id));
-            }
-
-            this.firstDate = firstDate;
-            this.lastDate = lastDate;
-        }
-
-        internal void UpdateQuantity(ShipmentQuantity shipmentQuantity)
+        public void UpdateQuantity(ShipmentQuantity shipmentQuantity)
         {
             Quantity = shipmentQuantity.Quantity;
             Units = shipmentQuantity.Units;
+        }
+
+        public void UpdateShipmentPeriod(ShipmentPeriod shipmentPeriod)
+        {
+            if (shipmentPeriod.FirstDate < SystemTime.Now.Date)
+            {
+                throw new InvalidOperationException(string.Format(
+                    "The start date cannot be in the past on shipment info {0}", Id));
+            }
+
+            ShipmentPeriod = shipmentPeriod;
+        }
+
+        public void UpdateNumberOfShipments(int numberOfShipments)
+        {
+            Guard.ArgumentNotZeroOrNegative(() => numberOfShipments, numberOfShipments);
+
+            NumberOfShipments = numberOfShipments;
         }
     }
 }

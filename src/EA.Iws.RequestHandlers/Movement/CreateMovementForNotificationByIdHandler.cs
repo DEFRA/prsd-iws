@@ -2,11 +2,11 @@
 {
     using System;
     using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Movement;
     using Prsd.Core.Mediator;
+    using RequestHandlers.Notification;
     using Requests.Movement;
 
     public class CreateMovementForNotificationByIdHandler : IRequestHandler<CreateMovementForNotificationById, Guid>
@@ -22,14 +22,13 @@
 
         public async Task<Guid> HandleAsync(CreateMovementForNotificationById message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.Id);
-
+            var notification = await context.GetNotificationApplication(message.Id);
             var notificationAssessment =
                 await context.NotificationAssessments.SingleAsync(na => na.NotificationApplicationId == message.Id);
+            var movements = await context.GetMovementsForNotificationAsync(message.Id);
+            var shipmentInfo = await context.GetShipmentInfoAsync(message.Id);
 
-            var movements = await context.Movements.Where(m => m.NotificationId == message.Id).ToArrayAsync();
-
-            var movement = movementFactory.Create(notification, notificationAssessment, movements);
+            var movement = movementFactory.Create(notification, notificationAssessment, shipmentInfo, movements);
 
             context.Movements.Add(movement);
 

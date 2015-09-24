@@ -13,11 +13,11 @@
     {
         private readonly IwsContext context;
         private readonly IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextData> map;
-        private readonly INotificationChargeCalculator chargeCalculator;
+        private readonly NotificationChargeCalculator chargeCalculator;
 
         public GetWhatToDoNextDataForNotificationHandler(IwsContext context, 
             IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextData> map,
-            INotificationChargeCalculator chargeCalculator)
+            NotificationChargeCalculator chargeCalculator)
         {
             this.context = context;
             this.map = map;
@@ -26,7 +26,9 @@
 
         public async Task<WhatToDoNextData> HandleAsync(GetWhatToDoNextDataForNotification message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == message.Id);
+            var notification = await context.GetNotificationApplication(message.Id);
+            var pricingStructures = await context.PricingStructures.ToArrayAsync();
+            var shipmentInfo = await context.GetShipmentInfoAsync(message.Id);
 
             var competentAuthority =
                 await
@@ -35,7 +37,7 @@
 
             var result = map.Map(notification, competentAuthority);
 
-            result.Charge = await chargeCalculator.GetValue(message.Id);
+            result.Charge = chargeCalculator.GetValue(pricingStructures, notification, shipmentInfo);
 
             return result;
         }

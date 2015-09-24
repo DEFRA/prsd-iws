@@ -31,17 +31,17 @@
 
             shipmentInfo = new TestableShipmentInfo
             {
-                FirstDate = startDate,
-                LastDate = endDate
+                NotificationId = NotificationId,
+                ShipmentPeriod = new Domain.ShipmentPeriod(startDate, endDate, true)
             };
 
             notificationApplication = new TestableNotificationApplication
             {
                 Id = NotificationId,
-                UserId = UserId,
-                ShipmentInfo = shipmentInfo
+                UserId = UserId
             };
 
+            context.ShipmentInfos.Add(shipmentInfo);
             context.NotificationApplications.Add(notificationApplication);
 
             movement = new TestableMovement

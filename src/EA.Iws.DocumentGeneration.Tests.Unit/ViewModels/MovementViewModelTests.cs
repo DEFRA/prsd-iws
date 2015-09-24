@@ -12,6 +12,7 @@
     {
         private readonly TestableMovement movement;
         private readonly TestableNotificationApplication notification;
+        private readonly TestableShipmentInfo shipmentInfo;
 
         public MovementViewModelTests()
         {
@@ -23,6 +24,10 @@
             {
                 Id = new Guid("B20B7BBE-EA7C-45F7-B6DB-04F645E7375B")
             };
+            shipmentInfo = new TestableShipmentInfo
+            {
+                Id = new Guid("B2B2ADE7-34EF-468D-BB88-72D8B5394AE6")
+            };
         }
 
         [Fact]
@@ -30,6 +35,7 @@
         {
             var result = new MovementViewModel(null, 
                 null, 
+                null,
                 new DateTimeFormatter(), 
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter(),
@@ -169,6 +175,7 @@
             return new MovementViewModel(
                 movement,
                 notification,
+                shipmentInfo,
                 new DateTimeFormatter(),
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter(),

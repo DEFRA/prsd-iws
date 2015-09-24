@@ -6,6 +6,7 @@
     using DataAccess;
     using Domain.Movement;
     using Prsd.Core.Mediator;
+    using RequestHandlers.Notification;
     using Requests.Movement;
 
     internal class SetActualDateOfMovementHandler : IRequestHandler<SetActualDateOfMovement, Guid>
@@ -23,8 +24,9 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == command.MovementId);
             var notification = await context.GetNotificationApplication(movement.NotificationId);
+            var shipmentInfo = await context.GetShipmentInfoAsync(movement.NotificationId);
 
-            setActualDateOfShipment.Apply(command.Date, movement, notification.ShipmentInfo);
+            setActualDateOfShipment.Apply(command.Date, movement, shipmentInfo);
 
             await context.SaveChangesAsync();
 

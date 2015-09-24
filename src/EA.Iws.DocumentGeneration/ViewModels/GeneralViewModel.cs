@@ -9,6 +9,7 @@
     internal class GeneralViewModel
     {
         public GeneralViewModel(NotificationApplication notification,
+            ShipmentInfo shipmentInfo,
             DateTimeFormatter dateTimeFormatter,
             QuantityFormatter quantityFormatter,
             PhysicalCharacteristicsFormatter physicalCharacteristicsFormatter)
@@ -29,7 +30,7 @@
                 IsNotPreconsented = !isPreconsented.GetValueOrDefault();
             }
 
-            if (notification.ShipmentInfo.NumberOfShipments > 1)
+            if (shipmentInfo.NumberOfShipments > 1)
             {
                 IsIndividualShipment = false;
                 IsNotIndividualShipment = true;
@@ -40,10 +41,10 @@
                 IsNotIndividualShipment = false;
             }
 
-            IntendedNumberOfShipments = notification.ShipmentInfo.NumberOfShipments.ToString();
-            FirstDeparture = dateTimeFormatter.DateTimeToDocumentFormatString(notification.ShipmentInfo.FirstDate);
-            LastDeparture = dateTimeFormatter.DateTimeToDocumentFormatString(notification.ShipmentInfo.LastDate);
-            SetIntendedQuantityFields(notification.ShipmentInfo, quantityFormatter);
+            IntendedNumberOfShipments = shipmentInfo.NumberOfShipments.ToString();
+            FirstDeparture = dateTimeFormatter.DateTimeToDocumentFormatString(shipmentInfo.ShipmentPeriod.FirstDate);
+            LastDeparture = dateTimeFormatter.DateTimeToDocumentFormatString(shipmentInfo.ShipmentPeriod.LastDate);
+            SetIntendedQuantityFields(shipmentInfo, quantityFormatter);
 
             var hasSpecialHandlingRequirements = notification.HasSpecialHandlingRequirements;
             if (!hasSpecialHandlingRequirements.HasValue)

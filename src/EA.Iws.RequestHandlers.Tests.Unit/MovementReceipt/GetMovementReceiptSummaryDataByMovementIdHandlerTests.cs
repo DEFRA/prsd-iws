@@ -20,6 +20,7 @@
         public GetMovementReceiptSummaryDataByMovementIdHandlerTests()
         {
             shipmentInfo = new TestableShipmentInfo();
+            shipmentInfo.NotificationId = NotificationId;
             shipmentInfo.Quantity = 50;
             shipmentInfo.Units = ShipmentQuantityUnits.Kilograms;
 
@@ -30,7 +31,6 @@
                 ActiveLoadsPermitted = 5
             };
 
-            NotificationApplication.ShipmentInfo = shipmentInfo;
             NotificationApplication.NotificationNumber = "GB 00010 6103";
 
             Movement.Number = 1;
@@ -42,6 +42,7 @@
                 Quantity = 5
             };
 
+            Context.ShipmentInfos.Add(shipmentInfo);
             Context.Movements.Add(Movement);
             Context.NotificationApplications.Add(NotificationApplication);
             Context.FinancialGuarantees.Add(financialGuarantee);

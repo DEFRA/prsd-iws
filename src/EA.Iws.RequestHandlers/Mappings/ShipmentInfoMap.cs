@@ -4,32 +4,29 @@
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
-    internal class ShipmentInfoMap : IMap<NotificationApplication, IntendedShipmentData>
+    internal class ShipmentInfoMap : IMap<ShipmentInfo, IntendedShipmentData>
     {
-        public IntendedShipmentData Map(NotificationApplication source)
+        public IntendedShipmentData Map(ShipmentInfo source)
         {
             IntendedShipmentData data;
-            if (source.HasShipmentInfo)
+            if (source != null)
             {
                 data = new IntendedShipmentData
                 {
-                    NotificationId = source.Id,
+                    NotificationId = source.NotificationId,
                     HasShipmentData = true,
-                    IsPreconsentedRecoveryFacility = source.IsPreconsentedRecoveryFacility.GetValueOrDefault(),
-                    FirstDate = source.ShipmentInfo.FirstDate,
-                    LastDate = source.ShipmentInfo.LastDate,
-                    NumberOfShipments = source.ShipmentInfo.NumberOfShipments,
-                    Quantity = source.ShipmentInfo.Quantity,
-                    Units = source.ShipmentInfo.Units
+                    FirstDate = source.ShipmentPeriod.FirstDate,
+                    LastDate = source.ShipmentPeriod.LastDate,
+                    NumberOfShipments = source.NumberOfShipments,
+                    Quantity = source.Quantity,
+                    Units = source.Units
                 };
             }
             else
             {
                 data = new IntendedShipmentData
                 {
-                    NotificationId = source.Id,
-                    HasShipmentData = false,
-                    IsPreconsentedRecoveryFacility = source.IsPreconsentedRecoveryFacility.GetValueOrDefault(),
+                    HasShipmentData = false
                 };
             }
             return data;

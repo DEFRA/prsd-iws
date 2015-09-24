@@ -11,12 +11,16 @@
     {
         private readonly MovementViewModel data;
 
-        public MovementBlock(IList<MergeField> mergeFields, Movement movement, NotificationApplication notification)
+        public MovementBlock(IList<MergeField> mergeFields, 
+            Movement movement, 
+            NotificationApplication notification, 
+            ShipmentInfo shipmentInfo)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
             data = new MovementViewModel(
                 movement,
                 notification,
+                shipmentInfo,
                 new DateTimeFormatter(),
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter(),

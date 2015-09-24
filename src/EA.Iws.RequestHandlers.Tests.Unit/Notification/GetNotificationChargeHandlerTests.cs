@@ -30,9 +30,11 @@
                 NotificationWithShipmentInfo()
             });
 
+            context.ShipmentInfos.Add(ShipmentInfo());
+
             context.PricingStructures.Add(PricingStructureAll1000());
 
-            handler = new GetNotificationChargeHandler(new NotificationChargeCalculator(context));
+            handler = new GetNotificationChargeHandler(context, new NotificationChargeCalculator());
 
             SystemTime.Freeze(new DateTime(2015, 7, 1));
         }
@@ -47,6 +49,7 @@
             var notificationNoShipmentInfo = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationNoShipmentInfo, notificationNoShipmentInfoId);
+
             return notificationNoShipmentInfo;
         }
 
@@ -56,9 +59,16 @@
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notificationWithShipmentInfo, notificationWithShipmentInfoId);
 
-            notificationWithShipmentInfo.SetShipmentInfo(new DateTime(2016, 1, 1), new DateTime(2016, 12, 31), 1, new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
-
             return notificationWithShipmentInfo;
+        }
+
+        private ShipmentInfo ShipmentInfo()
+        {
+            return new ShipmentInfo(
+                notificationWithShipmentInfoId,
+                new ShipmentPeriod(new DateTime(2016, 1, 1), new DateTime(2016, 12, 31), true),
+                1,
+                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
         }
 
         private PricingStructure PricingStructureAll1000()

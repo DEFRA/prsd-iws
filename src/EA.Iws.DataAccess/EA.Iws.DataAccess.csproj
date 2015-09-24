@@ -106,6 +106,7 @@
     <Compile Include="Mappings\PhysicalCharacteristicTypeMapping.cs" />
     <Compile Include="Mappings\PricingStructureMapping.cs" />
     <Compile Include="Mappings\RecoveryInfoMapping.cs" />
+    <Compile Include="Mappings\ShipmentPeriodMapping.cs" />
     <Compile Include="Mappings\ShipmentQuantityRangeMapping.cs" />
     <Compile Include="Mappings\TechnologyEmployedMapping.cs" />
     <Compile Include="Mappings\TransitStateMapping.cs" />

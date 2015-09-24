@@ -84,6 +84,7 @@
 
         public MovementViewModel(Movement movement,
             NotificationApplication notification,
+            ShipmentInfo shipmentInfo,
             DateTimeFormatter dateTimeFormatter,
             QuantityFormatter quantityFormatter,
             PhysicalCharacteristicsFormatter physicalCharacteristicsFormatter,
@@ -110,9 +111,9 @@
             IsNotSpecialHandling = !notification.HasSpecialHandlingRequirements.GetValueOrDefault(true);
             PhysicalCharacteristics =
                 physicalCharacteristicsFormatter.PhysicalCharacteristicsToCommaDelimitedString(notification.PhysicalCharacteristics);
-            IntendedNumberOfShipments = (notification.ShipmentInfo == null)
+            IntendedNumberOfShipments = (shipmentInfo == null)
                 ? "0"
-                : notification.ShipmentInfo.NumberOfShipments.ToString();
+                : shipmentInfo.NumberOfShipments.ToString();
             IsRecovery = notification.NotificationType == NotificationType.Recovery;
             IsDisposal = notification.NotificationType == NotificationType.Disposal;
         }

@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Shared;
+    using Domain;
     using Domain.NotificationApplication;
     using Helpers;
 
@@ -11,6 +12,12 @@
         {
             get { return base.Id; }
             set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.Id, value, this); }
+        }
+
+        public new Guid NotificationId
+        {
+            get { return base.Id; }
+            set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.NotificationId, value, this); }
         }
 
         public new int NumberOfShipments
@@ -31,16 +38,10 @@
             set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.Units, value, this); }
         }
 
-        public new DateTime FirstDate
+        public new ShipmentPeriod ShipmentPeriod
         {
-            get { return base.FirstDate; }
-            set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.FirstDate, value, this); }
-        }
-
-        public new DateTime LastDate
-        {
-            get { return base.LastDate; }
-            set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.LastDate, value, this); }
+            get { return base.ShipmentPeriod; }
+            set { ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.ShipmentPeriod, value, this); }
         }
     }
 }

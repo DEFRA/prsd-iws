@@ -21,8 +21,9 @@
         public async Task<byte[]> HandleAsync(GenerateNotificationDocument query)
         {
             var notification = await context.GetNotificationApplication(query.NotificationId);
+            var shipmentInfo = await context.GetShipmentInfoAsync(query.NotificationId);
 
-            return notificationDocumentGenerator.GenerateNotificationDocument(notification);
+            return notificationDocumentGenerator.GenerateNotificationDocument(notification, shipmentInfo);
         }
     }
 }

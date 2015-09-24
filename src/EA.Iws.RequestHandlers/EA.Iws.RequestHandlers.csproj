@@ -135,11 +135,11 @@
     <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
-    <Compile Include="Movement\NotificationMovementService.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\GetNotificationInfoInternalHandler.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
+    <Compile Include="Notification\IwsContextExtensions.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="Registration\CreateAddressHandler.cs" />
@@ -230,7 +230,6 @@
     <Compile Include="Notification\GetReasonForExportHandler.cs" />
     <Compile Include="Notification\GetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />
-    <Compile Include="Notification\NotificationChargeCalculator.cs" />
     <Compile Include="Notification\NotificationNumberGenerator.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Notification\SetReasonForExportHandler.cs" />

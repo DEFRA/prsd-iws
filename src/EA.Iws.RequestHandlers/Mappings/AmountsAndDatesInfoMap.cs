@@ -7,18 +7,22 @@
     using System.Threading.Tasks;
     using Core.IntendedShipments;
     using Core.Notification;
+    using DataAccess;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
+    using RequestHandlers.Notification;
     using Requests.Notification;
 
     internal class AmountsAndDatesInfoMap : IMap<NotificationApplication, AmountsAndDatesInfo>
     {
-        private readonly IMap<NotificationApplication, IntendedShipmentData> shipmentDataMap;
+        private readonly IMap<ShipmentInfo, IntendedShipmentData> shipmentDataMap;
+        private readonly IwsContext context;
 
-        public AmountsAndDatesInfoMap(
-            IMap<NotificationApplication, IntendedShipmentData> shipmentDataMap)
+        public AmountsAndDatesInfoMap(IwsContext context,
+            IMap<ShipmentInfo, IntendedShipmentData> shipmentDataMap)
         {
             this.shipmentDataMap = shipmentDataMap;
+            this.context = context;
         }
 
         public AmountsAndDatesInfo Map(NotificationApplication notification)
@@ -29,7 +33,8 @@
                 NotificationType = notification.NotificationType == NotificationType.Disposal
                         ? Core.Shared.NotificationType.Disposal
                         : Core.Shared.NotificationType.Recovery,
-                IntendedShipmentData = shipmentDataMap.Map(notification)
+                IntendedShipmentData = shipmentDataMap.Map(
+                    context.ShipmentInfos.Single(si => si.NotificationId == notification.Id))
             };
         }
     }

@@ -10,11 +10,14 @@
     {
         private readonly List<IDocumentBlock> movementDocumentBlocks;
 
-        public MovementBlockCollection(IList<MergeField> mergeFields, Movement movement, NotificationApplication notification)
+        public MovementBlockCollection(IList<MergeField> mergeFields, 
+            Movement movement, 
+            NotificationApplication notification, 
+            ShipmentInfo shipmentInfo)
         {
             movementDocumentBlocks = new List<IDocumentBlock>
             {
-                new MovementBlock(mergeFields, movement, notification),
+                new MovementBlock(mergeFields, movement, notification, shipmentInfo),
                 new MovementFacilityBlock(mergeFields, notification),
                 new MovementOperationBlock(mergeFields, notification),
                 new ImporterBlock(mergeFields, notification),

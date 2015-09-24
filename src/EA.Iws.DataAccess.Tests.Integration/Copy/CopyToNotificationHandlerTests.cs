@@ -12,6 +12,7 @@
     using FakeItEasy;
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;
+    using RequestHandlers.Notification;
     using Requests.Copy;
     using TestHelpers.Helpers;
     using Xunit;
@@ -128,10 +129,13 @@
             var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
-            var sourceNotification = GetSource();
+            var copiedShipmentInfo = context.GetShipmentInfoAsync(copiedNotification.Id);
 
-            Assert.Null(copiedNotification.ShipmentInfo);
-            Assert.NotNull(sourceNotification.ShipmentInfo);
+            var sourceNotification = GetSource();
+            var sourceShipmentInfo = context.GetShipmentInfoAsync(sourceNotification.Id);
+
+            Assert.Null(copiedShipmentInfo);
+            Assert.NotNull(sourceShipmentInfo);
         }
 
         [Fact]

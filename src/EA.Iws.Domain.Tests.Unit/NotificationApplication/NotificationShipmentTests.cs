@@ -9,13 +9,7 @@
 
     public class NotificationShipmentTests : IDisposable
     {
-        private static NotificationApplication CreateNotificationApplication()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-
-            return notification;
-        }
+        private static readonly Guid AnyGuid = new Guid("7F4201C4-2BF9-4F09-B3B3-077313A3A871");
 
         public NotificationShipmentTests()
         {
@@ -31,299 +25,271 @@
         [Fact]
         public void LastDateCantBeBeforeFirstDate()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 02);
             var lastDate = new DateTime(2015, 01, 01);
 
-            Action updateShipmentInfo =
-                () =>
-                    notification.SetShipmentInfo(firstDate, lastDate, 10, 
-                    new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+            var shipmentQuantity = new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes);
 
-            Assert.Throws<InvalidOperationException>(updateShipmentInfo);
+            Action createShipmentInfo = () =>
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 1, shipmentQuantity);
+
+            Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
 
         [Fact]
-        public void CanUpdateShipmentInfo()
+        public void CanCreateShipmentInfo()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
-            Assert.True(notification.HasShipmentInfo);
+            Assert.NotNull(shipmentInfo);
         }
 
         [Fact]
         public void NumberOfShipmentsCantBeZero()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(true);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 
-                new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms));
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+            var shipmentQuantity = new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms);
 
-            Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, 0, shipmentQuantity);
+
+            Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
 
         [Fact]
         public void QuantityCantBeZero()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(true);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, 1,
                 new ShipmentQuantity(0, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
+            Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
 
         [Fact]
         public void NumberOfShipmentsCantBeNegative()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(true);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, -5, 
-                new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms));
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+            var shipmentQuantity = new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms);
 
-            Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, -5, shipmentQuantity);
+
+            Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
 
         [Fact]
         public void QuantityCantBeNegative()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(true);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, 1,
                 new ShipmentQuantity(-5, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Throws<ArgumentOutOfRangeException>(addShipmentDates);
+            Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
 
         [Fact]
         public void NonPreconsentedNotificationDatesCantBeOutside12Months()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(false);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2016, 01, 02);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 
-                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms));
+            var shipmentQuantity = new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes);
 
-            Assert.Throws<InvalidOperationException>(addShipmentDates);
+            Action createShipmentInfo = () =>
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, false), 1, shipmentQuantity);
+
+            Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
 
         [Fact]
         public void NonPreconsentedNotificationDatesCanBeInside12Months()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(false);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 31);
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 1, 
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
 
-            Assert.True(notification.HasShipmentInfo);
+            Assert.NotNull(shipmentInfo);
         }
 
         [Fact]
         public void PreconsentedNotificationDatesCantBeOutside36Months()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(true);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2018, 01, 02);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
-                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
+            var shipmentQuantity = new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes);
 
-            Assert.Throws<InvalidOperationException>(addShipmentDates);
+            Action createShipmentInfo = () =>
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 1, shipmentQuantity);
+
+            Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
 
         [Fact]
         public void PreconsentedNotificationDatesCanBeInside36Months()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(true);
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2017, 12, 31);
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 1, 
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
 
-            Assert.True(notification.HasShipmentInfo);
+            Assert.NotNull(shipmentInfo);
         }
 
         [Fact]
         public void QuantityTonnesMoreThan4DecimalPlacesRoundsUp()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(1.23446m, ShipmentQuantityUnits.Tonnes));
 
-            Assert.Equal(1.2345m, notification.ShipmentInfo.Quantity);
+            Assert.Equal(1.2345m, shipmentInfo.Quantity);
         }
 
         [Fact]
         public void QuantityTonnesMoreThan4DecimalPlacesRoundsDown()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(1.23012m, ShipmentQuantityUnits.Tonnes));
 
-            Assert.Equal(1.2301m, notification.ShipmentInfo.Quantity);
+            Assert.Equal(1.2301m, shipmentInfo.Quantity);
         }
 
         [Fact]
         public void QuantityKilogramsMoreThan2DecimalPlaceRoundsUp()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10,
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(1.26m, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Equal(1.3m, notification.ShipmentInfo.Quantity);
+            Assert.Equal(1.3m, shipmentInfo.Quantity);
         }
 
         [Fact]
         public void QuantityKilogramsMoreThan1DecimalPlaceRoundsDown()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10,
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
+
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(1.23m, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Equal(1.2m, notification.ShipmentInfo.Quantity);
+            Assert.Equal(1.2m, shipmentInfo.Quantity);
         }
 
         [Fact]
         public void FirstDateCantBeDateTimeMinValue()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = DateTime.MinValue;
             var lastDate = DateTime.MinValue.AddDays(1);
 
-            Action updateDates = () => notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            Action createShipmentInfo = () =>
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 10,
                 new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Throws<ArgumentException>("firstDate", updateDates);
+            Assert.Throws<ArgumentException>("firstDate", createShipmentInfo);
         }
 
         [Fact]
         public void LastDateCantBeDateTimeMinValue()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = DateTime.MinValue;
 
-            Action updateDates = () => notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            Action createShipmentInfo = () =>
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 10,
                 new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Throws<ArgumentException>("lastDate", updateDates);
+            Assert.Throws<ArgumentException>("lastDate", createShipmentInfo);
         }
 
         [Fact]
         public void CanUpdateShipmentPeriod()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
             var newFirstDate = new DateTime(2015, 06, 01);
             var newLastDate = new DateTime(2016, 05, 31);
+            var newShipmentPeriod = new ShipmentPeriod(newFirstDate, newLastDate, true);
 
-            notification.SetShipmentInfo(newFirstDate, newLastDate, 10, 
-                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+            shipmentInfo.UpdateShipmentPeriod(newShipmentPeriod);
 
-            Assert.Equal(newFirstDate, notification.ShipmentInfo.FirstDate);
-            Assert.Equal(newLastDate, notification.ShipmentInfo.LastDate);
+            Assert.Equal(newFirstDate, shipmentInfo.ShipmentPeriod.FirstDate);
+            Assert.Equal(newLastDate, shipmentInfo.ShipmentPeriod.LastDate);
         }
 
         [Fact]
         public void CanUpdateShipmentQuantity()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 
-                new ShipmentQuantity(2.0M, ShipmentQuantityUnits.Kilograms));
+            shipmentInfo.UpdateQuantity(new ShipmentQuantity(2.0M, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Equal(2.0M, notification.ShipmentInfo.Quantity);
-            Assert.Equal(ShipmentQuantityUnits.Kilograms, notification.ShipmentInfo.Units);
+            Assert.Equal(2.0M, shipmentInfo.Quantity);
+            Assert.Equal(ShipmentQuantityUnits.Kilograms, shipmentInfo.Units);
         }
 
         [Fact]
         public void CanUpdateNumberOfShipments()
         {
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2015, 12, 01);
+            var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
-            notification.SetShipmentInfo(firstDate, lastDate, 10, 
+            var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
                 new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
-            notification.SetShipmentInfo(firstDate, lastDate, 50, 
-                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+            shipmentInfo.UpdateNumberOfShipments(50);
 
-            Assert.Equal(50, notification.ShipmentInfo.NumberOfShipments);
+            Assert.Equal(50, shipmentInfo.NumberOfShipments);
         }
 
         [Fact]
@@ -332,17 +298,15 @@
             // Set "today" at 2015/06/01
             SystemTime.Freeze(new DateTime(2015, 06, 01));
 
-            var notification = CreateNotificationApplication();
-
             var firstDate = new DateTime(2015, 01, 02);
             var lastDate = new DateTime(2015, 01, 12);
 
-            Action updateShipmentInfo =
+            Action createShipmentInfo =
                 () =>
-                    notification.SetShipmentInfo(firstDate, lastDate, 10, 
-                    new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+                     new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 10,
+                        new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
 
-            Assert.Throws<InvalidOperationException>(updateShipmentInfo);
+            Assert.Throws<InvalidOperationException>(createShipmentInfo);
 
             SystemTime.Unfreeze();
         }
@@ -350,33 +314,31 @@
         [Fact]
         public void NonPreconsentedNotificationDatesCantBeExactly12Months()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(false);
+            bool preconsentedRecoveryFacility = false;
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2016, 01, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 0, 
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid,
+                new ShipmentPeriod(firstDate, lastDate, preconsentedRecoveryFacility), 1,
                 new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Throws<InvalidOperationException>(addShipmentDates);
+            Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
 
         [Fact]
         public void PreconsentedNotificationDatesCantBeExact36Months()
         {
-            var notification = CreateNotificationApplication();
-
-            notification.SetPreconsentedRecoveryFacility(true);
+            bool preconsentedRecoveryFacility = true;
 
             var firstDate = new DateTime(2015, 01, 01);
             var lastDate = new DateTime(2018, 01, 01);
 
-            Action addShipmentDates = () => notification.SetShipmentInfo(firstDate, lastDate, 1, 
-                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid,
+                new ShipmentPeriod(firstDate, lastDate, preconsentedRecoveryFacility), 1,
+                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms));
 
-            Assert.Throws<InvalidOperationException>(addShipmentDates);
+            Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
     }
 }

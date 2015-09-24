@@ -14,12 +14,15 @@
         private readonly MovementBlockCollection movementBlockCollection;
         private readonly bool hasCarrierAnnex;
 
-        public MovementDocument(WordprocessingDocument document, Movement movement, NotificationApplication notification)
+        public MovementDocument(WordprocessingDocument document, 
+            Movement movement, 
+            NotificationApplication notification, 
+            ShipmentInfo shipmentInfo)
         {
             this.document = document;
             var fields = MergeFieldLocator.GetMergeRuns(document);
             hasCarrierAnnex = notification.Carriers.Count() > 1;
-            movementBlockCollection = new MovementBlockCollection(fields, movement, notification);
+            movementBlockCollection = new MovementBlockCollection(fields, movement, notification, shipmentInfo);
             ApplyUnitStrikethrough(movement);
         }
 

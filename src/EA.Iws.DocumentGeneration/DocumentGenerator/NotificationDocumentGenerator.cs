@@ -14,18 +14,18 @@
         private string TocText { get; set; }
         private string InstructionsText { get; set; }
 
-        public byte[] GenerateNotificationDocument(NotificationApplication notification)
+        public byte[] GenerateNotificationDocument(NotificationApplication notification, ShipmentInfo shipmentInfo)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("NotificationMergeTemplate.docx"))
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
-                    ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, notification.ShipmentInfo);
+                    ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, shipmentInfo);
 
                     // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 
-                    var blocks = GetBlocks(notification, mergeFields);
+                    var blocks = GetBlocks(notification, shipmentInfo, mergeFields);
 
                     foreach (var block in blocks)
                     {
@@ -60,11 +60,11 @@
             }
         }
 
-        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, IList<MergeField> mergeFields)
+        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, IList<MergeField> mergeFields)
         {
             return new List<IDocumentBlock>
             {
-                new GeneralBlock(mergeFields, notification),
+                new GeneralBlock(mergeFields, notification, shipmentInfo),
                 new ExporterBlock(mergeFields, notification),
                 new ProducerBlock(mergeFields, notification),
                 new ImporterBlock(mergeFields, notification),

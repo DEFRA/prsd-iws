@@ -15,11 +15,13 @@
 
         public SetMovementQuantityByMovementIdHandlerTests()
         {
-            NotificationApplication.ShipmentInfo = new TestableShipmentInfo
+            var shipmentInfo = new TestableShipmentInfo
             {
+                NotificationId = NotificationId,
                 Units = ShipmentQuantityUnits.Litres
             };
 
+            Context.ShipmentInfos.Add(shipmentInfo);
             Context.Movements.Add(Movement);
             Context.NotificationApplications.Add(NotificationApplication);
 

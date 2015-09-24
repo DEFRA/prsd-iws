@@ -64,8 +64,6 @@
 
         public string NotificationNumber { get; private set; }
 
-        public virtual ShipmentInfo ShipmentInfo { get; private set; }
-
         public virtual WasteType WasteType { get; private set; }
 
         public virtual StateOfExport StateOfExport { get; private set; }

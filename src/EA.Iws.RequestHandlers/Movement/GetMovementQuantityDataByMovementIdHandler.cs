@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
+    using RequestHandlers.Notification;
     using Requests.Movement;
 
     internal class GetMovementQuantityDataByMovementIdHandler : IRequestHandler<GetMovementQuantityDataByMovementId, MovementQuantityData>
@@ -19,11 +20,7 @@
         public async Task<MovementQuantityData> HandleAsync(GetMovementQuantityDataByMovementId message)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
-
-            var notificationQuantityAndUnits =
-                await context.NotificationApplications
-                .Where(na => na.Id == movement.NotificationId)
-                .Select(na => new { na.ShipmentInfo.Quantity, na.ShipmentInfo.Units }).SingleAsync();
+            var shipmentInfo = await context.GetShipmentInfoAsync(movement.NotificationId);
 
             var currentlyUsed = await context.Movements
                 .Where(m => m.NotificationId == movement.NotificationId
@@ -32,10 +29,10 @@
 
             return new MovementQuantityData
             {
-                TotalNotifiedQuantity = notificationQuantityAndUnits.Quantity,
+                TotalNotifiedQuantity = shipmentInfo.Quantity,
                 ThisMovementQuantity = movement.Quantity,
                 TotalCurrentlyUsedQuantity = currentlyUsed.GetValueOrDefault(),
-                Units = movement.Units ?? notificationQuantityAndUnits.Units
+                Units = movement.Units ?? shipmentInfo.Units
             };
         }
     }

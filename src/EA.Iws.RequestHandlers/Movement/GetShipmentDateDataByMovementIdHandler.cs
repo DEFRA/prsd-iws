@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Mediator;
+    using RequestHandlers.Notification;
     using Requests.Movement;
 
     internal class GetShipmentDateDataByMovementIdHandler : IRequestHandler<GetShipmentDateDataByMovementId, MovementDatesData>
@@ -19,13 +20,14 @@
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
 
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == movement.NotificationId);
+            var notification = await context.GetNotificationApplication(movement.NotificationId);
+            var shipmentInfo = await context.GetShipmentInfoAsync(movement.NotificationId);
 
             return new MovementDatesData
             {
                 MovementId = message.MovementId,
-                FirstDate = notification.ShipmentInfo.FirstDate,
-                LastDate = notification.ShipmentInfo.LastDate,
+                FirstDate = shipmentInfo.ShipmentPeriod.FirstDate,
+                LastDate = shipmentInfo.ShipmentPeriod.LastDate,
                 ActualDate = movement.Date
             };
         }

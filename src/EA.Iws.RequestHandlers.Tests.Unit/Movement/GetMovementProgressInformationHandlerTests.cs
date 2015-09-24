@@ -14,7 +14,7 @@
     {
         private readonly GetMovementProgressInformationHandler handler;
         private readonly Func<GetMovementProgressInformation> getRequest =
-            () => new GetMovementProgressInformation(MovementId); 
+            () => new GetMovementProgressInformation(MovementId);
 
         private readonly TestableMovement movement;
         private readonly TestableShipmentInfo shipmentInfo;
@@ -22,7 +22,7 @@
 
         public GetMovementProgressInformationHandlerTests()
         {
-            shipmentInfo = new TestableShipmentInfo();
+            shipmentInfo = new TestableShipmentInfo { NotificationId = NotificationId };
 
             financialGuarantee = new TestableFinancialGuarantee
             {
@@ -30,7 +30,6 @@
                 NotificationApplicationId = NotificationId
             };
 
-            NotificationApplication.ShipmentInfo = shipmentInfo;
             NotificationApplication.NotificationNumber = "GB 001 00520";
 
             movement = new TestableMovement
@@ -39,13 +38,14 @@
                 NotificationId = NotificationId
             };
 
+            Context.ShipmentInfos.Add(shipmentInfo);
             Context.NotificationApplications.Add(NotificationApplication);
             Context.Movements.Add(movement);
             Context.FinancialGuarantees.Add(financialGuarantee);
 
             handler = new GetMovementProgressInformationHandler(
-                Context, 
-                new MovementMap(), 
+                Context,
+                new MovementMap(),
                 new ActiveMovements());
         }
 

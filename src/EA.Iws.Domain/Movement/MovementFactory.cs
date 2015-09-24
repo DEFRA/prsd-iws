@@ -9,7 +9,8 @@
     public class MovementFactory
     {
         public Movement Create(NotificationApplication notificationApplication, 
-            NotificationAssessment notificationAssessment, 
+            NotificationAssessment notificationAssessment,
+            ShipmentInfo shipmentInfo,
             ICollection<Movement> notificationMovements)
         {
             if (notificationAssessment.Status == NotificationStatus.NotSubmitted)
@@ -22,13 +23,13 @@
 
             int currentNumberOfMovements = notificationMovements.Count;
 
-            if (currentNumberOfMovements == notificationApplication.ShipmentInfo.NumberOfShipments)
+            if (currentNumberOfMovements == shipmentInfo.NumberOfShipments)
             {
                 throw new InvalidOperationException(
                     string.Format("Cannot add a movement to notification {0} which has {1} of {2} movements",
                     notificationApplication.Id,
                     currentNumberOfMovements,
-                    notificationApplication.ShipmentInfo.NumberOfShipments));
+                    shipmentInfo.NumberOfShipments));
             }
 
             return new Movement(currentNumberOfMovements + 1, notificationApplication.Id);

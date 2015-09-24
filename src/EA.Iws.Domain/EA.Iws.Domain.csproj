@@ -64,7 +64,6 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="IMovementDocumentGenerator.cs" />
-    <Compile Include="INotificationMovementService.cs" />
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
@@ -78,13 +77,13 @@
     <Compile Include="Movement\SetActualDateOfShipment.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
+    <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />
     <Compile Include="NotificationAssessment\NotificationDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationStatusChange.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessment.cs" />
     <Compile Include="Events\RegistrationRejectedEvent.cs" />
-    <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\INotificationNumberGenerator.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.PhysicalCharacteristics.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.WasteCodes.cs" />
@@ -97,6 +96,7 @@
     <Compile Include="ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
+    <Compile Include="ShipmentPeriod.cs" />
     <Compile Include="AddressBook\AddressBookRecord.cs" />
     <Compile Include="ShipmentQuantity.cs" />
     <Compile Include="ShipmentQuantityUnitConverter.cs" />
@@ -130,7 +130,6 @@
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Importer.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Producers.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.ShipmentInfo.cs" />
     <Compile Include="NotificationApplication\NotificationType.cs" />
     <Compile Include="NotificationApplication\PackagingInfo.cs" />
     <Compile Include="NotificationApplication\ChemicalComposition.cs" />

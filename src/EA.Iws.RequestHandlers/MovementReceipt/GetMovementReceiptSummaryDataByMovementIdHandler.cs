@@ -5,9 +5,9 @@
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
-    using Domain.MovementReceipt;
     using Prsd.Core.Mediator;
     using RequestHandlers.Movement;
+    using RequestHandlers.Notification;
     using Requests.MovementReceipt;
 
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
@@ -39,6 +39,9 @@
             var financialGuarantee = await context
                 .FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == movement.NotificationId);
 
+            var shipmentInfo = await context
+                .GetShipmentInfoAsync(movement.NotificationId);
+
             return new MovementReceiptSummaryData
             {
                 NotificationId = movement.NotificationId,
@@ -47,10 +50,10 @@
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
                 CurrentActiveLoads = activeMovementService.Total(relatedMovements),
-                QuantitySoFar = movementQuantityCalculator.Received(notification.ShipmentInfo, relatedMovements),
+                QuantitySoFar = movementQuantityCalculator.Received(shipmentInfo, relatedMovements),
                 QuantityRemaining = movementQuantityCalculator
-                    .Remaining(notification.ShipmentInfo, relatedMovements),
-                DisplayUnit = notification.ShipmentInfo.Units
+                    .Remaining(shipmentInfo, relatedMovements),
+                DisplayUnit = shipmentInfo.Units
             };
         }
     }

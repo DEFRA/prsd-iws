@@ -67,6 +67,8 @@
 
         public virtual DbSet<AddressBook> AddressBooks { get; set; }
 
+        public virtual DbSet<ShipmentInfo> ShipmentInfos { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

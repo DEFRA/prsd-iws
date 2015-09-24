@@ -29,16 +29,18 @@
 
             shipmentInfo = new TestableShipmentInfo
             {
+                NotificationId = NotificationId,
                 Quantity = AnyDecimal,
                 Units = ShipmentQuantityUnits.CubicMetres
             };
+
             notificationApplication = new TestableNotificationApplication
             {
                 Id = NotificationId,
-                UserId = UserId,
-                ShipmentInfo = shipmentInfo
+                UserId = UserId
             };
 
+            context.ShipmentInfos.Add(shipmentInfo);
             context.NotificationApplications.Add(notificationApplication);
 
             movement = new TestableMovement

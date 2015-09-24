@@ -6,9 +6,9 @@
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
-    using Prsd.Core;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using RequestHandlers.Notification;
     using Requests.Movement;
 
     internal class GetMovementProgressInformationHandler : IRequestHandler<GetMovementProgressInformation, MovementProgressAndSummaryData>
@@ -30,10 +30,9 @@
         {
             var movement = await context.Movements
                 .SingleAsync(m => m.Id == message.MovementId);
-
             var notificationId = movement.NotificationId;
-
             var relatedMovements = await context.GetMovementsForNotificationAsync(notificationId);
+            var shipmentInfo = await context.GetShipmentInfoAsync(notificationId);
 
             var notificationInformation = await context.NotificationApplications
                 .Join(context.FinancialGuarantees,
@@ -43,7 +42,7 @@
                 {
                     Id = na.Id,
                     Number = na.NotificationNumber, 
-                    Shipments = na.ShipmentInfo.NumberOfShipments,
+                    Shipments = shipmentInfo.NumberOfShipments,
                     ActiveLoadsPermitted = fg.ActiveLoadsPermitted
                 })
                 .SingleAsync(x => x.Id == notificationId);
