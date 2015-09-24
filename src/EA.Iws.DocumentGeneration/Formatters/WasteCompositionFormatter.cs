@@ -43,7 +43,7 @@
                 return new ChemicalCompositionPercentages[0];
             }
 
-            return wasteAdditionalInformations.Select(wi => new ChemicalCompositionPercentages
+            return wasteAdditionalInformations.Where(wc => !(wc.MaxConcentration == 0 && wc.MinConcentration == 0)).Select(wi => new ChemicalCompositionPercentages
             {
                 Min = wi.MinConcentration.ToString("N"),
                 Max = wi.MaxConcentration.ToString("N"),
@@ -58,7 +58,7 @@
                 return new ChemicalCompositionPercentages[0];
             }
             
-            return wasteType.WasteCompositions.Where(wc => wc.MaxConcentration != 0 && wc.MinConcentration != 0).Select(wc => new ChemicalCompositionPercentages
+            return wasteType.WasteCompositions.Where(wc => !(wc.MaxConcentration == 0 && wc.MinConcentration == 0)).Select(wc => new ChemicalCompositionPercentages
             {
                 Min = wc.MinConcentration.ToString("N"),
                 Max = wc.MaxConcentration.ToString("N"),

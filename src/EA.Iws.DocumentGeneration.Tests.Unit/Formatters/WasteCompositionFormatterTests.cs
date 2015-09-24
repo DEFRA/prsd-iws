@@ -105,6 +105,34 @@
         }
 
         [Fact]
+        public void GetAdditionalInformationCompositionPercentages_DoesNotReturnWasteWherePercentagesAreBothZero()
+        {
+            var wcs = new List<WasteAdditionalInformation>();
+            var wa1 = WasteAdditionalInformation.CreateWasteAdditionalInformation("One", 1, 10, WasteInformationType.AshContent);
+            var wa2 = WasteAdditionalInformation.CreateWasteAdditionalInformation("One", 0, 0, WasteInformationType.MoistureContent);
+
+            wcs.Add(wa1);
+            wcs.Add(wa2);
+
+            var result = formatter.GetAdditionalInformationChemicalCompositionPercentages(wcs);
+
+            AssertExpectedCompositionPercentage("One", 10, 1, result.Single());
+        }
+
+        [Fact]
+        public void GetAdditionalInformationCompositionPercentages_DoesReturnWasteWherePercentagesHasOneZero()
+        {
+            var wcs = new List<WasteAdditionalInformation>();
+            var wa = WasteAdditionalInformation.CreateWasteAdditionalInformation("One", 0, 10, WasteInformationType.AshContent);
+
+            wcs.Add(wa);
+
+            var result = formatter.GetAdditionalInformationChemicalCompositionPercentages(wcs);
+
+            AssertExpectedCompositionPercentage("One", 10, 0, result.Single());
+        }
+
+        [Fact]
         public void GetWasteCompositionPercentages_DoesNotReturnWasteWherePercentagesAreBothZero()
         {
             var wcs = new List<WasteComposition>();
@@ -119,6 +147,21 @@
             var result = formatter.GetWasteCompositionPercentages(wasteType);
 
             AssertExpectedCompositionPercentage("One", 10, 1, result.Single());
+        }
+
+        [Fact]
+        public void GetWasteCompositionPercentages_DoesReturnWasteWherePercentagesHasOneZero()
+        {
+            var wcs = new List<WasteComposition>();
+            var wc = WasteComposition.CreateWasteComposition("One", 0, 10, ChemicalCompositionCategory.Food);
+
+            wcs.Add(wc);
+
+            wasteType.WasteCompositions = wcs;
+
+            var result = formatter.GetWasteCompositionPercentages(wasteType);
+
+            AssertExpectedCompositionPercentage("One", 10, 0, result.Single());
         }
 
         [Theory]
