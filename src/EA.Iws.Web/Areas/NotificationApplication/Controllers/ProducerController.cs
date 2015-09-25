@@ -4,22 +4,25 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
+    using Requests.AddressBook;
     using Requests.Producers;
     using ViewModels.Producer;
-    using Web.ViewModels.Shared;
 
     [Authorize]
     public class ProducerController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator client;
+        private readonly IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap;
 
-        public ProducerController(Func<IIwsClient> apiClient)
+        public ProducerController(IMediator client, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap)
         {
-            this.apiClient = apiClient;
+            this.client = client;
+            this.producerAddressBookMap = producerAddressBookMap;
         }
 
         [HttpGet]
@@ -27,7 +30,7 @@
         {
             var model = new AddProducerViewModel { NotificationId = id };
 
-            await this.BindCountryList(apiClient);
+            await this.BindCountryList(client);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
 
             return View(model);
@@ -39,49 +42,48 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(apiClient);
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                try
-                {
-                    var request = model.ToRequest();
-
-                    await client.SendAsync(User.GetAccessToken(), request);
-
-                    return RedirectToAction("List", "Producer",
-                        new { id = model.NotificationId, backToOverview });
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
                 await this.BindCountryList(client);
                 return View(model);
             }
+
+            try
+            {
+                var request = model.ToRequest();
+
+                await client.SendAsync(request);
+
+                if (model.IsAddedToAddressBook)
+                {
+                    await client.SendAsync(producerAddressBookMap.Map(model));
+                }
+
+                return RedirectToAction("List", "Producer",
+                    new { id = model.NotificationId, backToOverview });
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            await this.BindCountryList(client);
+            return View(model);
         }
 
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id, Guid entityId, bool? backToOverview = null)
         {
-            using (var client = apiClient())
-            {
-                var producer =
-                    await client.SendAsync(User.GetAccessToken(), new GetProducerForNotification(id, entityId));
+            var producer =
+                await client.SendAsync(new GetProducerForNotification(id, entityId));
 
-                var model = new EditProducerViewModel(producer);
+            var model = new EditProducerViewModel(producer);
 
-                await this.BindCountryList(client);
-                model.Address.DefaultCountryId = this.GetDefaultCountryId();
-                return View(model);
-            }
+            await this.BindCountryList(client);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
+            return View(model);
         }
 
         [HttpPost]
@@ -90,33 +92,30 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(apiClient);
-                return View(model);
-            }
-
-            using (var client = apiClient())
-            {
-                try
-                {
-                    var request = model.ToRequest();
-
-                    await client.SendAsync(User.GetAccessToken(), request);
-
-                    return RedirectToAction("List", "Producer",
-                        new { id = model.NotificationId, backToOverview });
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
                 await this.BindCountryList(client);
                 return View(model);
             }
+
+            try
+            {
+                var request = model.ToRequest();
+
+                await client.SendAsync(request);
+
+                return RedirectToAction("List", "Producer",
+                    new { id = model.NotificationId, backToOverview });
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            await this.BindCountryList(client);
+            return View(model);
         }
 
         [HttpGet]
@@ -124,49 +123,43 @@
         {
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
-            using (var client = apiClient())
+            var response = await client.SendAsync(new GetProducersByNotificationId(id));
+            var producer = response.Single(p => p.Id == entityId);
+
+            var model = new RemoveProducerViewModel
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
-                var producer = response.Single(p => p.Id == entityId);
+                NotificationId = id,
+                ProducerId = entityId,
+                ProducerName = producer.Business.Name
+            };
 
-                var model = new RemoveProducerViewModel
-                {
-                    NotificationId = id,
-                    ProducerId = entityId,
-                    ProducerName = producer.Business.Name
-                };
-
-                if (producer.IsSiteOfExport && response.Count > 1)
-                {
-                    ViewBag.Error =
-                        string.Format("You have chosen to remove {0} which is the site of export. " +
-                                      "You will need to select an alternative site of export before you can remove this producer.",
-                                      model.ProducerName);
-                    return View(model);
-                }
-
+            if (producer.IsSiteOfExport && response.Count > 1)
+            {
+                ViewBag.Error =
+                    string.Format("You have chosen to remove {0} which is the site of export. " +
+                                  "You will need to select an alternative site of export before you can remove this producer.",
+                        model.ProducerName);
                 return View(model);
             }
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Remove(RemoveProducerViewModel model, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            try
             {
-                try
+                await client.SendAsync(new DeleteProducerForNotification(model.ProducerId, model.NotificationId));
+                return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
                 {
-                    await client.SendAsync(User.GetAccessToken(), new DeleteProducerForNotification(model.ProducerId, model.NotificationId));
-                    return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    throw;
                 }
             }
 
@@ -179,17 +172,13 @@
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
             var model = new MultipleProducersViewModel();
+            var response =
+                await client.SendAsync(new GetProducersByNotificationId(id));
 
-            using (var client = apiClient())
-            {
-                var response =
-                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
+            model.NotificationId = id;
+            model.ProducerData = response;
 
-                model.NotificationId = id;
-                model.ProducerData = response;
-
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpGet]
@@ -197,53 +186,46 @@
         {
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
-            using (var client = apiClient())
+            var response =
+                await client.SendAsync(new GetProducersByNotificationId(id));
+
+            var model = new SiteOfExportViewModel
             {
-                var response =
-                    await client.SendAsync(User.GetAccessToken(), new GetProducersByNotificationId(id));
+                NotificationId = id,
+                Producers = response
+            };
 
-                var model = new SiteOfExportViewModel
-                {
-                    NotificationId = id,
-                    Producers = response
-                };
-
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SiteOfExport(SiteOfExportViewModel model, bool? backToList, bool? backToOverview = null)
+        public async Task<ActionResult> SiteOfExport(SiteOfExportViewModel model, bool? backToList,
+            bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    await client.SendAsync(User.GetAccessToken(),
-                        new SetSiteOfExport(model.SelectedSiteOfExport.GetValueOrDefault(), model.NotificationId));
+                await
+                    client.SendAsync(new SetSiteOfExport(model.SelectedSiteOfExport.GetValueOrDefault(),
+                        model.NotificationId));
 
-                    if (backToList.GetValueOrDefault())
-                    {
-                        return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
-                    }
-                    else if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
-                    }
+                if (backToList.GetValueOrDefault())
+                {
+                    return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
                 }
-                catch (ApiBadRequestException ex)
+                if (backToOverview.GetValueOrDefault())
                 {
-                    this.HandleBadRequest(ex);
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                }
+                return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
 
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                if (ModelState.IsValid)
+                {
+                    throw;
                 }
             }
 

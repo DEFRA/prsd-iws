@@ -10,13 +10,16 @@
     using Core.Producers;
     using Core.Shared;
     using FakeItEasy;
+    using Mappings;
+    using Prsd.Core.Mediator;
     using Requests.Producers;
     using Requests.Shared;
     using Xunit;
 
     public class ProducerControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
+
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private readonly Guid producerId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
         private readonly ProducerController producerController;
@@ -24,8 +27,8 @@
 
         public ProducerControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
+            mediator = A.Fake<IMediator>();
+            A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
                 new CountryData
                 {
@@ -39,8 +42,8 @@
                 }
             });
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetProducerForNotification>._)).Returns(CreateProducer(producerId));
-            producerController = new ProducerController(() => client);
+            A.CallTo(() => mediator.SendAsync(A<GetProducerForNotification>._)).Returns(CreateProducer(producerId));
+            producerController = new ProducerController(mediator, new AddAddressBookEntryMap());
         }
 
         private ProducerData CreateProducer(Guid producerId)
@@ -83,7 +86,7 @@
 
             await producerController.Add(model);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<AddProducerToNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<AddProducerToNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -147,8 +150,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetProducerForNotification>.That.Matches(
+                    mediator.SendAsync(A<GetProducerForNotification>.That.Matches(
                             p => p.NotificationId == notificationId && p.ProducerId == producerId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -172,7 +174,7 @@
 
             await producerController.Edit(model);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<UpdateProducerForNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<UpdateProducerForNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -224,7 +226,7 @@
         [Fact]
         public async Task Remove_MultipleProducersRemoveSiteOfExport_ReturnsViewWithError()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetProducersByNotificationId>._)).Returns(
+            A.CallTo(() => mediator.SendAsync(A<GetProducersByNotificationId>._)).Returns(
                 new List<ProducerData>
                 {
                     CreateProducer(producerId),
@@ -240,7 +242,7 @@
         [Fact]
         public async Task Remove_MultipleProducersRemoveNotSiteOfExport_ReturnsViewWithNoError()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetProducersByNotificationId>._)).Returns(
+            A.CallTo(() => mediator.SendAsync(A<GetProducersByNotificationId>._)).Returns(
                 new List<ProducerData>
                 {
                     CreateProducer(producerId),
@@ -256,7 +258,7 @@
         [Fact]
         public async Task Remove_SingleProducer_ReturnsViewWithNoError()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetProducersByNotificationId>._)).Returns(
+            A.CallTo(() => mediator.SendAsync(A<GetProducersByNotificationId>._)).Returns(
                 new List<ProducerData>
                 {
                     CreateProducer(producerId)
@@ -281,8 +283,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<DeleteProducerForNotification>.That.Matches(
+                    mediator.SendAsync(A<DeleteProducerForNotification>.That.Matches(
                             p => p.NotificationId == notificationId && p.ProducerId == producerId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -364,8 +365,8 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetProducersByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetProducersByNotificationId>
+                    .That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -384,8 +385,8 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetProducersByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetProducersByNotificationId>
+                    .That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -402,8 +403,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<SetSiteOfExport>.That.Matches(p => p.NotificationId == notificationId && p.ProducerId == producerId)))
+                    mediator.SendAsync(A<SetSiteOfExport>.That.Matches(p => p.NotificationId == notificationId && p.ProducerId == producerId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

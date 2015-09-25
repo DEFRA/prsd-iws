@@ -9,6 +9,22 @@
 
     public class AddressBook : Entity
     {
+        private static readonly AddressBookRecordComparer AddressBookRecordComparer 
+            = new AddressBookRecordComparer();
+
+        protected AddressBook()
+        {
+        }
+
+        public AddressBook(IEnumerable<AddressBookRecord> addresses,
+            AddressRecordType type,
+            Guid userId)
+        {
+            UserId = userId;
+            AddressCollection = addresses.ToList();
+            Type = type;
+        }
+
         protected virtual ICollection<AddressBookRecord> AddressCollection { get; set; }
 
         public Guid UserId { get; set; }
@@ -20,17 +36,12 @@
 
         public AddressRecordType Type { get; private set; }
 
-        protected AddressBook()
+        public void AddAddress(AddressBookRecord addressBookRecord)
         {
-        }
-
-        public AddressBook(IEnumerable<AddressBookRecord> addresses, 
-            AddressRecordType type,
-            Guid userId)
-        {
-            UserId = userId;
-            AddressCollection = addresses.ToList();
-            Type = type;
+            if (!AddressCollection.Contains(addressBookRecord, AddressBookRecordComparer))
+            {
+                AddressCollection.Add(addressBookRecord);
+            }
         }
     }
 }

@@ -69,8 +69,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressBook\AddAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\GetProducerAddressBookHandler.cs" />
     <Compile Include="AddressBook\IwsContextExtensions.cs" />
+    <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationDecisionRequiredByDateHandler.cs" />

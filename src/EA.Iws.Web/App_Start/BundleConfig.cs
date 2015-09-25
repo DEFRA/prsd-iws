@@ -16,6 +16,10 @@
                 "~/Scripts/jquery-ui-{version}.js",
                 "~/Scripts/jquery.select-to-autocomplete.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/address-book").Include(
+                "~/Scripts/address-book.js",
+                "~/Scripts/jquery-ui-autocomplete-html-extension.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/custom-validation.js"));

@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
+    <Compile Include="ContactComparer.cs" />
+    <Compile Include="BusinessComparer.cs" />
+    <Compile Include="AddressComparer.cs" />
     <Compile Include="BankHoliday.cs" />
     <Compile Include="Business.cs" />
     <Compile Include="BusinessType.cs" />

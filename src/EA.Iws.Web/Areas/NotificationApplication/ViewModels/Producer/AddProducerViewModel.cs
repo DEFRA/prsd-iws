@@ -23,6 +23,8 @@
 
         public ProducerBusinessTypeViewModel Business { get; set; }
 
+        public bool IsAddedToAddressBook { get; set; }
+
         public AddProducerToNotification ToRequest()
         {
             return new AddProducerToNotification
