@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Core.NotificationAssessment;
     using Web.ViewModels.Shared;
 
@@ -76,9 +77,18 @@
                 yield return new ValidationResult("Please enter a valid date", new[] {"NewDate"});
             }
 
-            if (Command == KeyDatesStatusEnum.AssessmentCommenced && string.IsNullOrWhiteSpace(NameOfOfficer))
+            if (Command == KeyDatesStatusEnum.AssessmentCommenced)
             {
-                yield return new ValidationResult("Please enter the name of the officer", new[] { "NameOfOfficer" });
+                if (string.IsNullOrWhiteSpace(NameOfOfficer))
+                {
+                    yield return new ValidationResult("Please enter the name of the officer", new[] { "NameOfOfficer" });
+                }
+                else if (NameOfOfficer.Count() > 256)
+                {
+                    yield return
+                        new ValidationResult("The name of the officer cannot be more than 256 characters in length",
+                            new[] { "NameOfOfficer" });
+                }
             }
         }
     }

@@ -231,6 +231,21 @@
         }
 
         [Fact]
+        public async Task AssessmentCommenced_OfficerNameToLong_ValidationError()
+        {
+            var model = new DateInputViewModel();
+            model.NewDate = new OptionalDateInputViewModel(commencementDate);
+            model.NameOfOfficer = GetLongString();
+            model.Command = KeyDatesStatusEnum.AssessmentCommenced;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NameOfOfficer"));
+        }
+
+        [Fact]
         public async Task AssessmentCommenced_ValidInput_CallsClient()
         {
             var model = new DateInputViewModel();
@@ -470,6 +485,13 @@
             }
 
             return assessmentController;
+        }
+
+        private string GetLongString()
+        {
+            return "A string longer than 256 characters asdfasdf asdfasdf asfasdf asdfasdf asdfasdfs sdfas alksdfjh asdkfhj " +
+                   "asdklfhj  alksdhf alskdf asdf asd fa sdf a sdf as df asdfa as df asdf a sdf asdf  asdf a sdf asdf asdf " +
+                   "asdf asdf asd fa sdf as df asdf a sdf asdfasdfasd7";
         }
     }
 }
