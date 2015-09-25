@@ -85,6 +85,8 @@
     <Compile Include="Mappings\BankHolidayMapping.cs" />
     <Compile Include="Mappings\BusinessTypeMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
+    <Compile Include="Mappings\DisposalCostMapping.cs" />
+    <Compile Include="Mappings\EstimatedValueMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />
     <Compile Include="Mappings\InternalUserMapping.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Mappings\PhysicalCharacteristicsInfoMapping.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicTypeMapping.cs" />
     <Compile Include="Mappings\PricingStructureMapping.cs" />
+    <Compile Include="Mappings\RecoveryCostMapping.cs" />
     <Compile Include="Mappings\RecoveryInfoMapping.cs" />
     <Compile Include="Mappings\ShipmentPeriodMapping.cs" />
     <Compile Include="Mappings\ShipmentQuantityRangeMapping.cs" />

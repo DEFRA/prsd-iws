@@ -11,12 +11,12 @@
         private const string RecoveryInfo = "RecovInfo";
         private readonly RecoveryInfoViewModel data;
 
-        public RecoveryInfoBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public RecoveryInfoBlock(IList<MergeField> mergeFields, NotificationApplication notification, RecoveryInfo recoveryInfo)
         {
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
 
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new RecoveryInfoViewModel(notification, new RecoveryInfoFormatter());
+            data = new RecoveryInfoViewModel(notification, recoveryInfo, new RecoveryInfoFormatter());
 
             if (notification.NotificationType == NotificationType.Disposal)
             {

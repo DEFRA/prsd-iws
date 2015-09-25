@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.RecoveryInfo
 {
     using System;
+    using Shared;
 
     public class RecoveryInfoData
     {
@@ -10,11 +11,11 @@
 
         public bool IsDisposal { get; set; }
 
-        public RecoveryInfoUnits? EstimatedUnit { get; set; }
+        public ValuePerWeightUnits? EstimatedUnit { get; set; }
 
-        public RecoveryInfoUnits? CostUnit { get; set; }
+        public ValuePerWeightUnits? CostUnit { get; set; }
 
-        public RecoveryInfoUnits? DisposalUnit { get; set; }
+        public ValuePerWeightUnits? DisposalUnit { get; set; }
 
         public decimal? EstimatedAmount { get; set; }
 

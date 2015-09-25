@@ -141,7 +141,6 @@
                         .Include("WasteType.WasteCompositionCollection")
                         .Include("WasteType.WasteAdditionalInformationCollection")
                         .Include("PhysicalCharacteristicsCollection")
-                        .Include(n => n.RecoveryInfo)
                         .SingleAsync(n => n.Id == id);
 
             return clone;

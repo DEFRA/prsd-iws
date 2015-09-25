@@ -8,13 +8,6 @@
         public RecoveryInfoMapping()
         {
             ToTable("RecoveryInfo", "Notification");
-
-            Property(x => x.EstimatedUnit).IsRequired();
-            Property(x => x.EstimatedAmount).IsRequired();
-            Property(x => x.CostUnit).IsRequired();
-            Property(x => x.CostAmount).IsRequired();
-            Property(x => x.DisposalUnit).IsOptional();
-            Property(x => x.DisposalAmount).IsOptional();
         }
     }
 }

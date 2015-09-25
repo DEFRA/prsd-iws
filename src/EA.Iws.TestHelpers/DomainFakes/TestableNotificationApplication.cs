@@ -38,12 +38,6 @@
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.NotificationNumber, value, this); }
         }
 
-        public new RecoveryInfo RecoveryInfo
-        {
-            get { return base.RecoveryInfo; }
-            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.RecoveryInfo, value, this); }
-        }
-
         public new decimal? PercentageRecoverable
         {
             get { return base.PercentageRecoverable; }

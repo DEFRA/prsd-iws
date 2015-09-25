@@ -57,6 +57,8 @@
     <Compile Include="CompetentAuthorityBacsDetails.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="DisposalCost.cs" />
+    <Compile Include="EstimatedValue.cs" />
     <Compile Include="FinancialGuarantee\ApproveDates.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuarantee.cs" />
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="AddressBook\AddressBook.cs" />
     <Compile Include="ShipmentPeriod.cs" />
     <Compile Include="AddressBook\AddressBookRecord.cs" />
+    <Compile Include="RecoveryCost.cs" />
     <Compile Include="ShipmentQuantity.cs" />
     <Compile Include="ShipmentQuantityUnitConverter.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
@@ -106,7 +109,6 @@
     <Compile Include="NotificationApplication\NotificationApplication.MeansOfTransport.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.PackagingInfo.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.RecoveryPercentage.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.RecoveryInfo.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="UnitedKingdomCompetentAuthority.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserAddress.cs" />
+    <Compile Include="ValuePerWeight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

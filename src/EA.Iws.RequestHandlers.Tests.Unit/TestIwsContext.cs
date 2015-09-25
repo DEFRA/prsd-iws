@@ -51,6 +51,7 @@
             this.AddressBooks = new TestDbSet<Domain.AddressBook.AddressBook>();
             this.TransportRoutes = new TestDbSet<Domain.TransportRoute.TransportRoute>();
             this.ShipmentInfos = new TestDbSet<ShipmentInfo>();
+            this.RecoveryInfos = new TestDbSet<Domain.NotificationApplication.RecoveryInfo>();
         }
 
         public int SaveChangesCount { get; private set; }

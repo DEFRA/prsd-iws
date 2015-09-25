@@ -12,9 +12,9 @@
     internal class GetRecoveryValuesDataHandler : IRequestHandler<GetRecoveryValuesData, RecoveryInfoData>
     {
         private readonly IwsContext context;
-        private readonly IMap<NotificationApplication, RecoveryInfoData> recoveryInfoDataMap;
+        private readonly IMap<RecoveryInfo, RecoveryInfoData> recoveryInfoDataMap;
 
-        public GetRecoveryValuesDataHandler(IwsContext context, IMap<NotificationApplication, RecoveryInfoData> recoveryInfoDataMap)
+        public GetRecoveryValuesDataHandler(IwsContext context, IMap<RecoveryInfo, RecoveryInfoData> recoveryInfoDataMap)
         {
             this.context = context;
             this.recoveryInfoDataMap = recoveryInfoDataMap;
@@ -22,9 +22,9 @@
 
         public async Task<RecoveryInfoData> HandleAsync(GetRecoveryValuesData message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            var recoveryInfo = await context.GetRecoveryInfoAsync(message.NotificationId);
 
-            return recoveryInfoDataMap.Map(notification);
+            return recoveryInfoDataMap.Map(recoveryInfo);
         }
     }
 }

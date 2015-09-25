@@ -1,16 +1,16 @@
 ﻿namespace EA.Iws.Requests.RecoveryInfo
 {
     using System;
-    using Core.RecoveryInfo;
+    using Core.Shared;
     using Prsd.Core.Mediator;
 
     public class AddRecoveryInfoToNotification : IRequest<Guid>
     {
-        public RecoveryInfoUnits EstimatedUnit { get; set; }
+        public ValuePerWeightUnits EstimatedUnit { get; set; }
 
-        public RecoveryInfoUnits CostUnit { get; set; }
+        public ValuePerWeightUnits CostUnit { get; set; }
 
-        public RecoveryInfoUnits? DisposalUnit { get; set; }
+        public ValuePerWeightUnits? DisposalUnit { get; set; }
 
         public decimal EstimatedAmount { get; set; }
 
@@ -23,9 +23,9 @@
         public bool IsDisposal { get; set; }
         
         public AddRecoveryInfoToNotification(Guid notificationId, bool isDisposal, 
-            RecoveryInfoUnits estimatedUnit, decimal estimatedAmount,
-            RecoveryInfoUnits costUnit, decimal costAmount,
-            RecoveryInfoUnits? disposalUnit, decimal? disposalAmount)
+            ValuePerWeightUnits estimatedUnit, decimal estimatedAmount,
+            ValuePerWeightUnits costUnit, decimal costAmount,
+            ValuePerWeightUnits? disposalUnit, decimal? disposalAmount)
         {
             NotificationId = notificationId;
             IsDisposal = isDisposal;

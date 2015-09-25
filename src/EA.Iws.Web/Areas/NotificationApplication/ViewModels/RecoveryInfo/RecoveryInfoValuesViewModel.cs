@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
     using Core.RecoveryInfo;
+    using Core.Shared;
     using Prsd.Core.Helpers;
     using Requests.RecoveryInfo;
     using Web.ViewModels.Shared;
@@ -36,16 +37,16 @@
 
         public AddRecoveryInfoToNotification ToRequest()
         {
-            RecoveryInfoUnits estimatedUnit = (EstimatedUnit.SelectedValue == EnumHelper.GetDisplayName(RecoveryInfoUnits.Kilogram))
-                                                ? RecoveryInfoUnits.Kilogram : RecoveryInfoUnits.Tonne;
+            ValuePerWeightUnits estimatedUnit = (EstimatedUnit.SelectedValue == EnumHelper.GetDisplayName(ValuePerWeightUnits.Kilogram))
+                                                ? ValuePerWeightUnits.Kilogram : ValuePerWeightUnits.Tonne;
 
-            RecoveryInfoUnits costUnit = (CostUnit.SelectedValue == EnumHelper.GetDisplayName(RecoveryInfoUnits.Kilogram))
-                                                ? RecoveryInfoUnits.Kilogram : RecoveryInfoUnits.Tonne;
+            ValuePerWeightUnits costUnit = (CostUnit.SelectedValue == EnumHelper.GetDisplayName(ValuePerWeightUnits.Kilogram))
+                                                ? ValuePerWeightUnits.Kilogram : ValuePerWeightUnits.Tonne;
 
             if (IsDisposal)
             {
-                RecoveryInfoUnits disposalUnit = (DisposalUnit.SelectedValue == EnumHelper.GetDisplayName(RecoveryInfoUnits.Kilogram))
-                                                    ? RecoveryInfoUnits.Kilogram : RecoveryInfoUnits.Tonne;
+                ValuePerWeightUnits disposalUnit = (DisposalUnit.SelectedValue == EnumHelper.GetDisplayName(ValuePerWeightUnits.Kilogram))
+                                                    ? ValuePerWeightUnits.Kilogram : ValuePerWeightUnits.Tonne;
 
                 return new AddRecoveryInfoToNotification(NotificationId, IsDisposal,
                             estimatedUnit, Convert.ToDecimal(EstimatedAmount),
@@ -60,16 +61,16 @@
 
         public RecoveryInfoValuesViewModel()
         {
-            EstimatedUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<RecoveryInfoUnits>();
-            CostUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<RecoveryInfoUnits>();
-            DisposalUnit = RadioButtonStringCollectionOptionalViewModel.CreateFromEnum<RecoveryInfoUnits>();
+            EstimatedUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<ValuePerWeightUnits>();
+            CostUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<ValuePerWeightUnits>();
+            DisposalUnit = RadioButtonStringCollectionOptionalViewModel.CreateFromEnum<ValuePerWeightUnits>();
         }
 
         public RecoveryInfoValuesViewModel(RecoveryInfoData recoveryInfoData)
         {
-            EstimatedUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<RecoveryInfoUnits>();
-            CostUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<RecoveryInfoUnits>();
-            DisposalUnit = RadioButtonStringCollectionOptionalViewModel.CreateFromEnum<RecoveryInfoUnits>();
+            EstimatedUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<ValuePerWeightUnits>();
+            CostUnit = RadioButtonStringCollectionViewModel.CreateFromEnum<ValuePerWeightUnits>();
+            DisposalUnit = RadioButtonStringCollectionOptionalViewModel.CreateFromEnum<ValuePerWeightUnits>();
 
             EstimatedAmount = recoveryInfoData.EstimatedAmount.ToString();
             CostAmount = recoveryInfoData.CostAmount.ToString();

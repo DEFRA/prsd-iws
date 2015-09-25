@@ -1,8 +1,8 @@
-﻿namespace EA.Iws.Core.RecoveryInfo
+﻿namespace EA.Iws.Core.Shared
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum RecoveryInfoUnits
+    public enum ValuePerWeightUnits
     {
         [Display(Name = "per kg")]
         Kilogram = 1,

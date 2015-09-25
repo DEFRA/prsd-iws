@@ -5,6 +5,7 @@
     using DataAccess;
     using Domain;
     using Prsd.Core.Mediator;
+    using RequestHandlers.RecoveryInfo;
     using Requests.Notification;
 
     internal class GenerateNotificationDocumentHandler : IRequestHandler<GenerateNotificationDocument, byte[]>
@@ -22,11 +23,12 @@
         public async Task<byte[]> HandleAsync(GenerateNotificationDocument query)
         {
             var notification = await context.GetNotificationApplication(query.NotificationId);
+            var recoveryInfo = await context.GetRecoveryInfoAsync(query.NotificationId);
             var shipmentInfo = await context.GetShipmentInfoAsync(query.NotificationId);
             var transportRoute =
                 await context.TransportRoutes.SingleAsync(p => p.NotificationId == query.NotificationId);
 
-            return notificationDocumentGenerator.GenerateNotificationDocument(notification, shipmentInfo, transportRoute);
+            return notificationDocumentGenerator.GenerateNotificationDocument(notification, shipmentInfo, transportRoute, recoveryInfo);
         }
     }
 }

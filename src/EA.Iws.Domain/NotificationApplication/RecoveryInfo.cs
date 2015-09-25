@@ -1,31 +1,51 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
-    using Core.RecoveryInfo;
+    using System;
+    using Core.Shared;
     using Prsd.Core.Domain;
 
     public class RecoveryInfo : Entity
     {
-        public RecoveryInfoUnits EstimatedUnit { get; internal set; }
-        public RecoveryInfoUnits CostUnit { get; internal set; }
-        public RecoveryInfoUnits? DisposalUnit { get; internal set; }
-
-        public decimal EstimatedAmount { get; internal set; }
-        public decimal CostAmount { get; internal set; }
-        public decimal? DisposalAmount { get; internal set; }
+        public Guid NotificationId { get; private set; }
+        public EstimatedValue EstimatedValue { get; private set; }
+        public RecoveryCost RecoveryCost { get; private set; }
+        public DisposalCost DisposalCost { get; private set; }
 
         protected RecoveryInfo()
         {
         }
 
-        internal RecoveryInfo(RecoveryInfoUnits estimatedUnit, decimal estimatedAmount, RecoveryInfoUnits costUnit, decimal costAmount, 
-            RecoveryInfoUnits? disposalUnit, decimal? disposalAmount)
+        public RecoveryInfo(Guid notificationId,
+            EstimatedValue estimatedValue,
+            RecoveryCost recoveryCost,
+            DisposalCost disposalCost)
         {
-            EstimatedUnit = estimatedUnit;
-            CostUnit = costUnit;
-            DisposalUnit = disposalUnit;
-            EstimatedAmount = estimatedAmount;
-            CostAmount = costAmount;
-            DisposalAmount = disposalAmount;
+            NotificationId = notificationId;
+            UpdateEstimatedValue(estimatedValue);
+            UpdateRecoveryCost(recoveryCost);
+            UpdateDisposalCost(disposalCost);
+        }
+
+        public void UpdateEstimatedValue(EstimatedValue estimatedValue)
+        {
+            EstimatedValue = estimatedValue;
+        }
+
+        public void UpdateRecoveryCost(RecoveryCost recoveryCost)
+        {
+            RecoveryCost = recoveryCost;
+        }
+
+        public void UpdateDisposalCost(DisposalCost disposalCost)
+        {
+            if (disposalCost == null)
+            {
+                DisposalCost = new DisposalCost();
+            }
+            else
+            {
+                DisposalCost = disposalCost;
+            }
         }
     }
 }

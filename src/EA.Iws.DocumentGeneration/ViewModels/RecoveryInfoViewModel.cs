@@ -41,7 +41,9 @@
             get { return annexMessage; }
         }
 
-        public RecoveryInfoViewModel(NotificationApplication notification, RecoveryInfoFormatter recoveryInfoFormatter)
+        public RecoveryInfoViewModel(NotificationApplication notification,
+            RecoveryInfo recoveryInfo,
+            RecoveryInfoFormatter recoveryInfoFormatter)
         {
             if (notification == null)
             {
@@ -58,17 +60,17 @@
 
             percentageRecoverable = recoveryInfoFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);
 
-            estimatedAmountText = recoveryInfoFormatter.CostAmountWithUnits(notification.RecoveryInfo, 
-                ri => ri.EstimatedAmount, 
-                ri => ri.EstimatedUnit);
+            estimatedAmountText = recoveryInfoFormatter
+                .CostAmountWithUnits(recoveryInfo, 
+                    ri => ri.EstimatedValue);
 
-            costAmountText = recoveryInfoFormatter.CostAmountWithUnits(notification.RecoveryInfo,
-                ri => ri.CostAmount,
-                ri => ri.CostUnit);
+            costAmountText = recoveryInfoFormatter
+                .CostAmountWithUnits(recoveryInfo,
+                    ri => ri.RecoveryCost);
 
-            disposalAmountText = recoveryInfoFormatter.CostAmountWithUnits(notification.RecoveryInfo,
-                ri => ri.DisposalAmount,
-                ri => ri.DisposalUnit);
+            disposalAmountText = recoveryInfoFormatter
+                .CostAmountWithUnits(recoveryInfo,
+                    ri => ri.DisposalCost);
 
             annexMessage = string.Empty;
         }

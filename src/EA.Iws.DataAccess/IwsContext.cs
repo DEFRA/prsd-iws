@@ -71,6 +71,8 @@
         public virtual DbSet<ShipmentInfo> ShipmentInfos { get; set; }
 
         public virtual DbSet<TransportRoute> TransportRoutes { get; set; } 
+        
+        public virtual DbSet<RecoveryInfo> RecoveryInfos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

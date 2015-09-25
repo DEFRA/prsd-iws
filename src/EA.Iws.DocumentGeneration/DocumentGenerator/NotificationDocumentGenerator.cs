@@ -15,7 +15,7 @@
         private string TocText { get; set; }
         private string InstructionsText { get; set; }
 
-        public byte[] GenerateNotificationDocument(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute)
+        public byte[] GenerateNotificationDocument(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, RecoveryInfo recoveryInfo)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("NotificationMergeTemplate.docx"))
             {
@@ -26,7 +26,7 @@
                     // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 
-                    var blocks = GetBlocks(notification, shipmentInfo, transportRoute, mergeFields);
+                    var blocks = GetBlocks(notification, shipmentInfo, transportRoute, recoveryInfo, mergeFields);
 
                     foreach (var block in blocks)
                     {
@@ -61,7 +61,7 @@
             }
         }
 
-        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, IList<MergeField> mergeFields)
+        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, RecoveryInfo recoveryInfo, IList<MergeField> mergeFields)
         {
             return new List<IDocumentBlock>
             {
@@ -71,7 +71,7 @@
                 new ImporterBlock(mergeFields, notification),
                 new FacilityBlock(mergeFields, notification),
                 new OperationBlock(mergeFields, notification),
-                new RecoveryInfoBlock(mergeFields, notification),
+                new RecoveryInfoBlock(mergeFields, notification, recoveryInfo),
                 new CarrierBlock(mergeFields, notification),
                 new SpecialHandlingBlock(mergeFields, notification),
                 new WasteCompositionBlock(mergeFields, notification),

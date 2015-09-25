@@ -65,8 +65,6 @@
 
         public virtual TechnologyEmployed TechnologyEmployed { get; private set; }
 
-        public virtual RecoveryInfo RecoveryInfo { get; private set; }
-
         protected string MeansOfTransportInternal { get; set; }
 
         public IOrderedEnumerable<MeansOfTransport> MeansOfTransport

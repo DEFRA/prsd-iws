@@ -18,14 +18,15 @@
         public async Task<Guid> HandleAsync(SetRecoveryPercentageData message)
         {
             var notification = await context.GetNotificationApplication(message.NotificationId);
+            var recoveryInfo = await context.GetRecoveryInfoAsync(message.NotificationId);
 
             if (message.IsProvidedByImporter)
             {
                 notification.SetRecoveryPercentageDataProvidedByImporter();
 
-                if (notification.RecoveryInfo != null)
+                if (recoveryInfo != null)
                 {
-                    context.DeleteOnCommit(notification.RecoveryInfo);
+                    context.DeleteOnCommit(recoveryInfo);
                 }
             }
             else

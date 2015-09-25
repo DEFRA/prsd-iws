@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.RequestHandlers.RecoveryInfo
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.RecoveryInfo;
@@ -19,18 +19,28 @@
 
         public async Task<Guid> HandleAsync(AddRecoveryInfoToNotification command)
         {
-            var notification = await context.GetNotificationApplication(command.NotificationId);
-            RecoveryInfo recoveryInfo;
-            if (command.IsDisposal)
+            var recoveryInfo = await context.GetRecoveryInfoAsync(command.NotificationId);
+
+            var estimatedValue = new EstimatedValue(command.EstimatedUnit, command.EstimatedAmount);
+            var recoveryCost = new RecoveryCost(command.CostUnit, command.CostAmount);
+            var disposalCost = new DisposalCost(command.DisposalUnit, command.CostAmount);
+            if (recoveryInfo == null)
             {
-                recoveryInfo = notification.SetRecoveryInfoValues(command.EstimatedUnit, command.EstimatedAmount,
-                                    command.CostUnit, command.CostAmount, command.DisposalUnit, command.DisposalAmount);
+                recoveryInfo = new RecoveryInfo(
+                    command.NotificationId,
+                    estimatedValue, 
+                    recoveryCost,
+                    disposalCost);
+
+                context.RecoveryInfos.Add(recoveryInfo);
             }
             else
             {
-                recoveryInfo = notification.SetRecoveryInfoValues(command.EstimatedUnit, command.EstimatedAmount,
-                    command.CostUnit, command.CostAmount, null, null);
+                recoveryInfo.UpdateEstimatedValue(estimatedValue);
+                recoveryInfo.UpdateRecoveryCost(recoveryCost);
+                recoveryInfo.UpdateDisposalCost(disposalCost);
             }
+
             await context.SaveChangesAsync();
 
             return recoveryInfo.Id;

@@ -97,8 +97,6 @@
 
             notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("cheddar", "cheese"));
 
-            notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Kilogram, 10, null,
-                null);
             notification.SetOperationCodes(new[] { OperationCode.R1, OperationCode.R7 });
             notification.ReasonForExport = "recovery";
             notification.SetEwcCodes(new[]

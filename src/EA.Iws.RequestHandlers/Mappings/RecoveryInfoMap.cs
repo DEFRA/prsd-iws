@@ -3,26 +3,31 @@
     using Core.RecoveryInfo;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.RecoveryInfo;
 
-    internal class RecoveryInfoMap : IMap<NotificationApplication, RecoveryInfoData>
+    internal class RecoveryInfoMap : IMap<RecoveryInfo, RecoveryInfoData>
     {
-        public RecoveryInfoData Map(NotificationApplication source)
+        public RecoveryInfoData Map(RecoveryInfo source)
         {
             RecoveryInfoData data = null;
-            if (source.HasRecoveryInfo)
+
+            if (source != null)
             {
                 data = new RecoveryInfoData
                 {
-                    NotificationId = source.Id,
-                    EstimatedUnit = source.RecoveryInfo.EstimatedUnit,
-                    EstimatedAmount = source.RecoveryInfo.EstimatedAmount,
-                    CostUnit = source.RecoveryInfo.CostUnit,
-                    CostAmount = source.RecoveryInfo.CostAmount,
-                    DisposalUnit = source.RecoveryInfo.DisposalUnit,
-                    DisposalAmount = source.RecoveryInfo.DisposalAmount
+                    NotificationId = source.NotificationId,
+                    EstimatedUnit = source.EstimatedValue.Units,
+                    EstimatedAmount = source.EstimatedValue.Amount,
+                    CostUnit = source.RecoveryCost.Units,
+                    CostAmount = source.RecoveryCost.Amount
                 };
+
+                if (source.DisposalCost != null)
+                {
+                    data.DisposalUnit = source.DisposalCost.Units;
+                    data.DisposalAmount = source.DisposalCost.Amount;
+                }
             }
+
             return data;
         }
     }

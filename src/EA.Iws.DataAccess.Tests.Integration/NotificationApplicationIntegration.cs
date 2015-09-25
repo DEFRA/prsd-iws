@@ -5,7 +5,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.RecoveryInfo;
+    using Core.Shared;
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
@@ -13,6 +13,7 @@
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     [Trait("Category", "Integration")]
     public class NotificationApplicationIntegration
@@ -205,12 +206,24 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+            
+            var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
+            var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
+            var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
 
-            notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Tonne, 20.25M, RecoveryInfoUnits.Kilogram, 30);
+            var recoveryInfo = new RecoveryInfo(notification.Id, estimatedValue, recoveryCost, disposalCost);
 
+            context.RecoveryInfos.Add(recoveryInfo);
             await context.SaveChangesAsync();
 
-            Assert.Equal(true, notification.HasRecoveryInfo);
+            Assert.NotNull(context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id));
+
+            context.DeleteOnCommit(recoveryInfo);
+            await context.SaveChangesAsync();
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -219,12 +232,23 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
-
-            notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Tonne, -20, null, null);
-
             await context.SaveChangesAsync();
 
-            Assert.Equal(true, notification.HasRecoveryInfo);
+            var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
+            var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, -20);
+
+            var recoveryInfo = new RecoveryInfo(notification.Id, estimatedValue, recoveryCost, null);
+
+            context.RecoveryInfos.Add(recoveryInfo);
+            await context.SaveChangesAsync();
+
+            Assert.NotNull(context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id));
+
+            context.DeleteOnCommit(recoveryInfo);
+            await context.SaveChangesAsync();
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
         }
 
         [Fact]

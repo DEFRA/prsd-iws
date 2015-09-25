@@ -1,33 +1,33 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
-    using Core.RecoveryInfo;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Xunit;
 
     public class NotificationRecoveryInfoTests
     {
-        private static NotificationApplication CreateNotificationApplication()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
-            return notification;
-        }
-
         [Fact]
         public void CanAddRecoveryInfoValues()
         {
-            var notification = CreateNotificationApplication();
-            notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Tonne, 20, RecoveryInfoUnits.Kilogram, 30);
-            Assert.True(notification.HasRecoveryInfo);
+            var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
+            var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
+            var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
+
+            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), estimatedValue, recoveryCost, disposalCost);
+
+            Assert.NotNull(recoveryInfo);
         }
 
         [Fact]
         public void CanAddRecoveryInfoValues_WithoutDisposal()
         {
-            var notification = CreateNotificationApplication();
-            notification.SetRecoveryInfoValues(RecoveryInfoUnits.Kilogram, 10, RecoveryInfoUnits.Tonne, 20, null, null);
-            Assert.True(notification.HasRecoveryInfo);
+            var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
+            var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
+
+            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), estimatedValue, recoveryCost, null);
+
+            Assert.NotNull(recoveryInfo);
         }
     }
 }

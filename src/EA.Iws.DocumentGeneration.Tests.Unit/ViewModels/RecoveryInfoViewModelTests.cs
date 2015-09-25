@@ -1,8 +1,9 @@
 ﻿namespace EA.Iws.DocumentGeneration.Tests.Unit.ViewModels
 {
-    using Core.RecoveryInfo;
+    using Core.Shared;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
+    using Domain;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -13,7 +14,7 @@
         [Fact]
         public void CanConstructWithNullNotification()
         {
-            var model = new RecoveryInfoViewModel(null, recoveryInfoFormatter);
+            var model = new RecoveryInfoViewModel(null, null, recoveryInfoFormatter);
 
             AssertAllModelStringAreEmpty(model);
         }
@@ -21,7 +22,7 @@
         [Fact]
         public void CanConstructWithNullRecoveryInfo()
         {
-            var model = new RecoveryInfoViewModel(new TestableNotificationApplication(), recoveryInfoFormatter);
+            var model = new RecoveryInfoViewModel(new TestableNotificationApplication(), null, recoveryInfoFormatter);
 
             AssertAllModelStringAreEmpty(model);
         }
@@ -32,7 +33,7 @@
             var model = new RecoveryInfoViewModel(new TestableNotificationApplication
             {
                 PercentageRecoverable = 100
-            }, recoveryInfoFormatter);
+            }, null, recoveryInfoFormatter);
 
             AssertAnnexMessageEmpty(model);
             AssertAllRecoveryInfoStringsAreEmpty(model);
@@ -49,7 +50,7 @@
             {
                 PercentageRecoverable = 50,
                 MethodOfDisposal = methodOfDisposal
-            }, recoveryInfoFormatter);
+            }, null, recoveryInfoFormatter);
 
             AssertAllRecoveryInfoStringsAreEmpty(model);
             AssertAnnexMessageEmpty(model);
@@ -63,17 +64,16 @@
             var methodOfDisposal = "smash it to bits";
 
             var model = new RecoveryInfoViewModel(new TestableNotificationApplication
-            {
-                PercentageRecoverable = 50,
-                MethodOfDisposal = methodOfDisposal,
-                RecoveryInfo = new TestableRecoveryInfo
                 {
-                    CostAmount = 100,
-                    CostUnit = RecoveryInfoUnits.Kilogram,
-                    EstimatedAmount = 250,
-                    EstimatedUnit = RecoveryInfoUnits.Tonne
-                }
-            }, recoveryInfoFormatter);
+                    PercentageRecoverable = 50,
+                    MethodOfDisposal = methodOfDisposal
+                },
+                new TestableRecoveryInfo
+                {
+                    EstimatedValue = new EstimatedValue(ValuePerWeightUnits.Tonne, 250),
+                    RecoveryCost = new RecoveryCost(ValuePerWeightUnits.Kilogram, 100),
+                },
+                recoveryInfoFormatter);
 
             AssertAnnexMessageEmpty(model);
             Assert.Equal("50%", model.PercentageRecoverable);
@@ -89,19 +89,17 @@
             var methodOfDisposal = "recycle";
 
             var model = new RecoveryInfoViewModel(new TestableNotificationApplication
-            {
-                PercentageRecoverable = 90,
-                MethodOfDisposal = methodOfDisposal,
-                RecoveryInfo = new TestableRecoveryInfo
                 {
-                    CostAmount = 100,
-                    CostUnit = RecoveryInfoUnits.Kilogram,
-                    DisposalAmount = 90,
-                    DisposalUnit = RecoveryInfoUnits.Kilogram,
-                    EstimatedAmount = 110,
-                    EstimatedUnit = RecoveryInfoUnits.Tonne
-                }
-            }, recoveryInfoFormatter);
+                    PercentageRecoverable = 90,
+                    MethodOfDisposal = methodOfDisposal
+                },
+                new TestableRecoveryInfo
+                {
+                    EstimatedValue = new EstimatedValue(ValuePerWeightUnits.Tonne, 110),
+                    RecoveryCost = new RecoveryCost(ValuePerWeightUnits.Kilogram, 100),
+                    DisposalCost = new DisposalCost(ValuePerWeightUnits.Kilogram, 90)
+                },
+                recoveryInfoFormatter);
 
             AssertAnnexMessageEmpty(model);
             Assert.Equal("90%", model.PercentageRecoverable);
