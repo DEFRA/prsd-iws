@@ -23,12 +23,13 @@
 
             var estimatedValue = new EstimatedValue(command.EstimatedUnit, command.EstimatedAmount);
             var recoveryCost = new RecoveryCost(command.CostUnit, command.CostAmount);
-            var disposalCost = new DisposalCost(command.DisposalUnit, command.CostAmount);
+            var disposalCost = new DisposalCost(command.DisposalUnit, command.DisposalAmount);
+           
             if (recoveryInfo == null)
             {
                 recoveryInfo = new RecoveryInfo(
                     command.NotificationId,
-                    estimatedValue, 
+                    estimatedValue,
                     recoveryCost,
                     disposalCost);
 

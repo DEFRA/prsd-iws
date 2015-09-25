@@ -33,8 +33,8 @@
             EstimatedAmount = estimatedAmount;
             CostUnit = costUnit;
             CostAmount = costAmount;
-            DisposalUnit = disposalUnit.GetValueOrDefault();
-            DisposalAmount = disposalAmount.GetValueOrDefault();
+            DisposalUnit = disposalUnit;
+            DisposalAmount = disposalAmount;
         }
     }
 }

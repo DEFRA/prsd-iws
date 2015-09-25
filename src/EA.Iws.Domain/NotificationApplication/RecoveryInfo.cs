@@ -38,14 +38,7 @@
 
         public void UpdateDisposalCost(DisposalCost disposalCost)
         {
-            if (disposalCost == null)
-            {
-                DisposalCost = new DisposalCost();
-            }
-            else
-            {
-                DisposalCost = disposalCost;
-            }
+            DisposalCost = disposalCost;
         }
     }
 }
