@@ -79,7 +79,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            authenticationManager.SignOut();
+            authenticationManager.SignOut(Constants.IwsAuthType);
             return RedirectToAction("Index", "Home");
         }
 
