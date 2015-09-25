@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.CustomsOffice
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
-    using DataAccess;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -11,21 +9,19 @@
     internal class GetExitCustomsOfficeAddDataByNotificationIdHandler :
         IRequestHandler<GetExitCustomsOfficeAddDataByNotificationId, ExitCustomsOfficeAddData>
     {
-        private readonly IwsContext context;
+        private readonly ITransportRouteRepository repository;
         private readonly IMap<TransportRoute, ExitCustomsOfficeAddData> customsOfficeExitMap;
 
-        public GetExitCustomsOfficeAddDataByNotificationIdHandler(IwsContext context,
+        public GetExitCustomsOfficeAddDataByNotificationIdHandler(ITransportRouteRepository repository,
             IMap<TransportRoute, ExitCustomsOfficeAddData> customsOfficeExitMap)
         {
-            this.context = context;
+            this.repository = repository;
             this.customsOfficeExitMap = customsOfficeExitMap;
         }
 
         public async Task<ExitCustomsOfficeAddData> HandleAsync(GetExitCustomsOfficeAddDataByNotificationId message)
         {
-            await context.CheckNotificationAccess(message.Id);
-
-            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == message.Id);
+            var transportRoute = await repository.GetByNotificationId(message.Id);
 
             return customsOfficeExitMap.Map(transportRoute);
         }

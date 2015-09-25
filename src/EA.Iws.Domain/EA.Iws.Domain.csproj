@@ -78,6 +78,7 @@
     <Compile Include="Movement\ReceivedMovements.cs" />
     <Compile Include="Movement\SetActualDateOfShipment.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
+    <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
+    <Compile Include="Security\INotificationApplicationAuthorization.cs" />
     <Compile Include="ShipmentPeriod.cs" />
     <Compile Include="AddressBook\AddressBookRecord.cs" />
     <Compile Include="RecoveryCost.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="NotificationApplication\OperationInfo.cs" />
     <Compile Include="NotificationApplication\OperationCode.cs" />
     <Compile Include="TransportRoute\IState.cs" />
+    <Compile Include="TransportRoute\ITransportRouteRepository.cs" />
     <Compile Include="TransportRoute\StateOfExport.cs" />
     <Compile Include="TransportRoute\StateOfImport.cs" />
     <Compile Include="TransportRoute\TransitState.cs" />

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Data.Entity;
-    using System.Linq;
     using System.Security;
     using System.Threading;
     using System.Threading.Tasks;
@@ -126,16 +125,6 @@
                     notificationId, userContext.UserId));
             }
             return notification;
-        }
-
-        public async Task CheckNotificationAccess(Guid notificationId)
-        {
-            var notificationUserId = await NotificationApplications.Where(n => n.Id == notificationId).Select(n => n.UserId).SingleAsync();
-            if (notificationUserId != userContext.UserId)
-            {
-                throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
-                    notificationId, userContext.UserId));
-            }
         }
     }
 }

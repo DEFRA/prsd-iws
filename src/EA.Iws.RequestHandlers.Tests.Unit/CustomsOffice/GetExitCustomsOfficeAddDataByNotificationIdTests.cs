@@ -6,6 +6,7 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
+    using FakeItEasy;
     using RequestHandlers.CustomsOffice;
     using RequestHandlers.Mappings;
     using Requests.CustomsOffice;
@@ -25,10 +26,7 @@
         public GetExitCustomsOfficeAddDataByNotificationIdTests()
         {
             context = new TestIwsContext();
-            handler = new GetExitCustomsOfficeAddDataByNotificationIdHandler(context, 
-                new CustomsOfficeExitMap(context,
-                                            new CountryMap(), 
-                                            new CustomsOfficeMap(new CountryMap())));
+            var repository = A.Fake<ITransportRouteRepository>();
 
             country = CountryFactory.Create(new Guid("05C21C57-2F39-4A15-A09A-5F38CF139C05"));
             exitCustomsOffice = new ExitCustomsOffice("any name", "any address", country);
@@ -43,13 +41,13 @@
             context.Countries.Add(country);
             context.NotificationApplications.Add(notification);
             context.TransportRoutes.Add(transport);
-        }
 
-        [Fact]
-        public async Task Handle_NotificationDoesNotExist_Throws()
-        {
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(new Guid("75D096E0-4393-47A4-AABC-12D22624C034"))));
+            A.CallTo(() => repository.GetByNotificationId(NotificationId)).Returns(transport);
+
+            handler = new GetExitCustomsOfficeAddDataByNotificationIdHandler(repository,
+                new CustomsOfficeExitMap(context,
+                                            new CountryMap(),
+                                            new CustomsOfficeMap(new CountryMap())));
         }
 
         [Fact]

@@ -1,26 +1,23 @@
 ﻿namespace EA.Iws.RequestHandlers.CustomsOffice
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
-    using DataAccess;
+    using Domain.TransportRoute;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
 
     internal class GetCustomsCompletionStatusByNotificationIdHandler :
         IRequestHandler<GetCustomsCompletionStatusByNotificationId, CustomsOfficeCompletionStatus>
     {
-        private readonly IwsContext context;
+        private readonly ITransportRouteRepository repository;
 
-        public GetCustomsCompletionStatusByNotificationIdHandler(IwsContext context)
+        public GetCustomsCompletionStatusByNotificationIdHandler(ITransportRouteRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
         public async Task<CustomsOfficeCompletionStatus> HandleAsync(GetCustomsCompletionStatusByNotificationId message)
         {
-            await context.CheckNotificationAccess(message.Id);
-
-            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == message.Id);
+            var transportRoute = await repository.GetByNotificationId(message.Id);
 
             return new CustomsOfficeCompletionStatus
             {

@@ -143,6 +143,9 @@
     <Compile Include="Mappings\WasteComposition.cs" />
     <Compile Include="Mappings\WasteTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\NotificationApplicationRepository.cs" />
+    <Compile Include="Repositories\TransportRouteRepository.cs" />
+    <Compile Include="Security\NotificationApplicationAuthorization.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -7,6 +7,7 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
+    using FakeItEasy;
     using RequestHandlers.CustomsOffice;
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
@@ -30,8 +31,7 @@
         public SetExitCustomsOfficeForNotificationByIdHandlerTests()
         {
             this.context = new TestIwsContext();
-
-            this.handler = new SetExitCustomsOfficeForNotificationByIdHandler(context);
+            var repository = A.Fake<ITransportRouteRepository>();
            
             anyNotification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(anyNotification, notificationId);
@@ -57,13 +57,10 @@
             stateOfImportNonEu = new StateOfImport(nonEuCountry,
                 CompetentAuthorityFactory.Create(new Guid("5E4F1F22-5054-449B-9EC7-933A43BB5D6D"), nonEuCountry),
                 EntryOrExitPointFactory.Create(new Guid("9781324F-17B8-4009-89B2-C18963E3E6E1"), nonEuCountry));
-        }
 
-        [Fact]
-        public async Task NotificationDoesNotExist_Throws()
-        {
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                handler.HandleAsync(new SetExitCustomsOfficeForNotificationById(AnyGuid, AnyName, AnyAddress, AnyGuid)));
+            A.CallTo(() => repository.GetByNotificationId(notificationId)).Returns(transport);
+
+            this.handler = new SetExitCustomsOfficeForNotificationByIdHandler(context, repository);
         }
 
         [Fact]

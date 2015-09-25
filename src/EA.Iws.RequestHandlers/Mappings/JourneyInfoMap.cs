@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System.Linq;
-    using Core.Notification;
     using DataAccess;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;

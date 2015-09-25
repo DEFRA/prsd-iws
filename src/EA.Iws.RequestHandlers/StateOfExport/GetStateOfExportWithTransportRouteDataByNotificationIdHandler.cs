@@ -11,22 +11,20 @@
     internal class GetStateOfExportWithTransportRouteDataByNotificationIdHandler :
         IRequestHandler<GetStateOfExportWithTransportRouteDataByNotificationId, StateOfExportWithTransportRouteData>
     {
-        private readonly IwsContext context;
+        private readonly ITransportRouteRepository repository;
         private readonly IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap;
 
-        public GetStateOfExportWithTransportRouteDataByNotificationIdHandler(IwsContext context,
+        public GetStateOfExportWithTransportRouteDataByNotificationIdHandler(ITransportRouteRepository repository,
             IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap)
         {
-            this.context = context;
+            this.repository = repository;
             this.transportRouteMap = transportRouteMap;
         }
 
         public async Task<StateOfExportWithTransportRouteData> HandleAsync(
             GetStateOfExportWithTransportRouteDataByNotificationId message)
         {
-            await context.CheckNotificationAccess(message.Id);
-
-            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == message.Id);
+            var transportRoute = await repository.GetByNotificationId(message.Id);
 
             return transportRouteMap.Map(transportRoute);
         }

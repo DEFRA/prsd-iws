@@ -10,17 +10,17 @@
     internal class SetEntryCustomsOfficeForNotificationByIdHandler : IRequestHandler<SetEntryCustomsOfficeForNotificationById, CustomsOfficeCompletionStatus>
     {
         private readonly IwsContext context;
+        private readonly ITransportRouteRepository repository;
 
-        public SetEntryCustomsOfficeForNotificationByIdHandler(IwsContext context)
+        public SetEntryCustomsOfficeForNotificationByIdHandler(IwsContext context, ITransportRouteRepository repository)
         {
             this.context = context;
+            this.repository = repository;
         }
 
         public async Task<CustomsOfficeCompletionStatus> HandleAsync(SetEntryCustomsOfficeForNotificationById message)
         {
-            await context.CheckNotificationAccess(message.Id);
-
-            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.Id);
+            var transportRoute = await repository.GetByNotificationId(message.Id);
 
             if (transportRoute == null)
             {

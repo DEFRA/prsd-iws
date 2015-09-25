@@ -12,17 +12,17 @@
     internal class SetTransitStateForNotificationHandler : IRequestHandler<SetTransitStateForNotification, Guid>
     {
         private readonly IwsContext context;
+        private readonly ITransportRouteRepository repository;
 
-        public SetTransitStateForNotificationHandler(IwsContext context)
+        public SetTransitStateForNotificationHandler(IwsContext context, ITransportRouteRepository repository)
         {
             this.context = context;
+            this.repository = repository;
         }
 
         public async Task<Guid> HandleAsync(SetTransitStateForNotification message)
         {
-            await context.CheckNotificationAccess(message.NotificationId);
-
-            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.NotificationId);
+            var transportRoute = await repository.GetByNotificationId(message.NotificationId);
 
             if (transportRoute == null)
             {

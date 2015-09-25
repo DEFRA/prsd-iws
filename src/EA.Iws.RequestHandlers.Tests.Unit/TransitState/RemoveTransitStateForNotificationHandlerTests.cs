@@ -35,7 +35,10 @@
             context.NotificationApplications.Add(notification);
             context.TransportRoutes.Add(transport);
 
-            handler = new RemoveTransitStateForNotificationHandler(context);
+            var repository = A.Fake<ITransportRouteRepository>();
+            A.CallTo(() => repository.GetByNotificationId(ExistingNotificationId)).Returns(transport);
+
+            handler = new RemoveTransitStateForNotificationHandler(context, repository);
         }
 
         [Fact]

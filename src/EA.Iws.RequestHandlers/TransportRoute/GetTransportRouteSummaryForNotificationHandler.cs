@@ -1,13 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.TransportRoute
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.StateOfExport;
     using Core.StateOfImport;
     using Core.TransitState;
     using Core.TransportRoute;
-    using DataAccess;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -15,17 +13,17 @@
 
     internal class GetTransportRouteSummaryForNotificationHandler : IRequestHandler<GetTransportRouteSummaryForNotification, TransportRouteData>
     {
-        private readonly IwsContext context;
+        private readonly ITransportRouteRepository repository;
         private readonly IMap<StateOfExport, StateOfExportData> stateOfExportMapper;
         private readonly IMap<StateOfImport, StateOfImportData> stateOfImportMapper;
         private readonly IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper;
 
-        public GetTransportRouteSummaryForNotificationHandler(IwsContext context, 
+        public GetTransportRouteSummaryForNotificationHandler(ITransportRouteRepository repository, 
             IMap<StateOfExport, StateOfExportData> stateOfExportMapper, 
             IMap<StateOfImport, StateOfImportData> stateOfImportMapper,
             IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper)
         {
-            this.context = context;
+            this.repository = repository;
             this.stateOfExportMapper = stateOfExportMapper;
             this.stateOfImportMapper = stateOfImportMapper;
             this.transitStateMapper = transitStateMapper;
@@ -33,9 +31,7 @@
 
         public async Task<TransportRouteData> HandleAsync(GetTransportRouteSummaryForNotification message)
         {
-            await context.CheckNotificationAccess(message.NotificationId);
-
-            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == message.NotificationId);
+            var transportRoute = await repository.GetByNotificationId(message.NotificationId);
 
             return new TransportRouteData
             {

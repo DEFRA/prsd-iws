@@ -7,6 +7,7 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
+    using FakeItEasy;
     using RequestHandlers.Mappings;
     using RequestHandlers.StateOfImport;
     using Requests.StateOfImport;
@@ -64,21 +65,19 @@
             var countryMap = new CountryMap();
             var entryOrExitPointMap = new EntryOrExitPointMap();
             var competentAuthorityMap = new CompetentAuthorityMap();
+
+            var repository = A.Fake<ITransportRouteRepository>();
+            A.CallTo(() => repository.GetByNotificationId(NotificationWithStateOfImportId)).Returns(transport);
+            A.CallTo(() => repository.GetByNotificationId(NotificationNoStateOfImportId)).Returns((TransportRoute)null);
+
             handler = new GetStateOfImportWithTransportRouteDataByNotificationIdHandler(context, 
                 new StateOfImportMap(countryMap, competentAuthorityMap, entryOrExitPointMap),
                 new StateOfExportMap(countryMap, competentAuthorityMap, entryOrExitPointMap),
                 new TransitStateMap(countryMap, competentAuthorityMap, entryOrExitPointMap), 
                 entryOrExitPointMap,
                 countryMap, 
-                competentAuthorityMap);
-        }
-
-        [Fact]
-        public async Task Handler_NotificationDoesNotExist_Throws()
-        {
-            await
-                Assert.ThrowsAsync<InvalidOperationException>(
-                    () => handler.HandleAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(Guid.Empty)));
+                competentAuthorityMap,
+                repository);
         }
 
         [Fact]

@@ -11,16 +11,18 @@
     internal class SetStateOfExportForNotificationHandler : IRequestHandler<SetStateOfExportForNotification, Guid>
     {
         private readonly IwsContext context;
+        private readonly ITransportRouteRepository transportRouteRepository;
 
-        public SetStateOfExportForNotificationHandler(IwsContext context)
+        public SetStateOfExportForNotificationHandler(IwsContext context, ITransportRouteRepository transportRouteRepository)
         {
             this.context = context;
+            this.transportRouteRepository = transportRouteRepository;
         }
 
         public async Task<Guid> HandleAsync(SetStateOfExportForNotification message)
         {
             var notification = await context.GetNotificationApplication(message.NotificationId);
-            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.NotificationId);
+            var transportRoute = await transportRouteRepository.GetByNotificationId(message.NotificationId);
 
             if (transportRoute == null)
             {

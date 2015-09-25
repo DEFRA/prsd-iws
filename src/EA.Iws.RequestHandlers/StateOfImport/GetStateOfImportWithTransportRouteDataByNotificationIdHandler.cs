@@ -26,6 +26,7 @@
         private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper;
         private readonly IMap<Country, CountryData> countryMapper;
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
+        private readonly ITransportRouteRepository transportRouteRepository;
 
         public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context,
             IMap<StateOfImport, StateOfImportData> stateOfImportMapper,
@@ -33,7 +34,8 @@
             IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper,
             IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
             IMap<Country, CountryData> countryMapper,
-            IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper)
+            IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper,
+            ITransportRouteRepository transportRouteRepository)
         {
             this.context = context;
             this.stateOfImportMapper = stateOfImportMapper;
@@ -42,13 +44,12 @@
             this.entryOrExitPointMapper = entryOrExitPointMapper;
             this.countryMapper = countryMapper;
             this.competentAuthorityMapper = competentAuthorityMapper;
+            this.transportRouteRepository = transportRouteRepository;
         }
 
         public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
         {
-            await context.CheckNotificationAccess(message.Id);
-
-            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == message.Id);
+            var transportRoute = await transportRouteRepository.GetByNotificationId(message.Id);
             var countries = await context.Countries.OrderBy(c => c.Name).ToArrayAsync();
 
             var data = new StateOfImportWithTransportRouteData();
