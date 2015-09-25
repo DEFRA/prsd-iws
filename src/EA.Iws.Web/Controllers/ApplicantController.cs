@@ -82,7 +82,7 @@
             }
             if (model.UserChoices.SelectedValue == 5)
             {
-                return RedirectToAction("Home", "Applicant", new { id = model.NotificationId });
+                return RedirectToAction("Operation", "NotificationMovement", new { id = model.NotificationId });
             }
             if (model.UserChoices.SelectedValue == 6)
             {
