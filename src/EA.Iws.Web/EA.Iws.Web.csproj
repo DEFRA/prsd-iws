@@ -715,6 +715,8 @@
     <Content Include="Views\Account\PasswordUpdated.cshtml" />
     <Content Include="Views\NewUser\Cookies.cshtml" />
     <Content Include="Areas\AddressBook\Views\Home\Index.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
+    <Content Include="Views\Feedback\FeedbackSent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -756,6 +758,7 @@
     <Compile Include="Areas\Movement\ViewModels\OperationCompleteViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Controllers\SearchController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Mappings\AddAddressBookEntryMap.cs" />
@@ -926,6 +929,8 @@
     <Compile Include="ViewModels\NewNotification\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="ViewModels\NewNotification\CreatedViewModel.cs" />
     <Compile Include="ViewModels\NewNotification\NotificationTypeViewModel.cs" />
+    <Compile Include="ViewModels\NewUser\FeedbackOptions.cs" />
+    <Compile Include="ViewModels\NewUser\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\Registration\EditApplicantDetailsViewModel.cs" />
     <Compile Include="ViewModels\Registration\ChangeAccountDetailsViewModel.cs" />
     <Compile Include="ViewModels\Registration\EditOrganisationViewModel.cs" />

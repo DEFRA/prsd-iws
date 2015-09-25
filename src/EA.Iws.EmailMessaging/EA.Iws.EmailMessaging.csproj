@@ -84,10 +84,6 @@
       <Project>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</Project>
       <Name>EA.Iws.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
-      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
-      <Name>EA.Iws.RequestHandlers</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\VerifyEmailAddress.txt" />
@@ -100,6 +96,8 @@
     <EmbeddedResource Include="Templates\VerifyEmailAddress.cshtml" />
     <EmbeddedResource Include="Templates\PasswordResetRequest.cshtml" />
     <EmbeddedResource Include="Templates\PasswordResetRequest.txt" />
+    <EmbeddedResource Include="Templates\Feedback.cshtml" />
+    <EmbeddedResource Include="Templates\Feedback.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

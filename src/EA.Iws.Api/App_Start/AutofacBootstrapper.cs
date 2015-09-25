@@ -9,6 +9,8 @@
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Autofac;
     using RequestHandlers;
+    using RequestHandlers.Feedback;
+    using Services;
 
     public class AutofacBootstrapper
     {
@@ -36,6 +38,13 @@
             builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().As<UserManager<ApplicationUser>>().InstancePerRequest();
+
+            builder.Register(c =>
+            {
+                var componentContext = c.Resolve<IComponentContext>();
+                var configFeedback = componentContext.Resolve<AppConfiguration>();
+                return new FeedbackInformation(configFeedback.FeedbackEmailTo);
+            }).SingleInstance();
 
             return builder.Build();
         }

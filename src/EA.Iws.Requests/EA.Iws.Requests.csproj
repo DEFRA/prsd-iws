@@ -71,6 +71,7 @@
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
     <Compile Include="Carriers\DeleteCarrierForNotification.cs" />
     <Compile Include="Admin\GetBasicSearchResults.cs" />
+    <Compile Include="Feedback\FeedbackData.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />

@@ -17,5 +17,7 @@
         public string SendEmail { get; set; }
 
         public string VerificationEmailTestDomains { get; set; }
+
+        public string FeedbackEmailTo { get; set; }
     }
 }

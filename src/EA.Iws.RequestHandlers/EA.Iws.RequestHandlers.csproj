@@ -95,6 +95,8 @@
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="Copy\TransportRouteToTransportRouteCopy.cs" />
     <Compile Include="Copy\WasteCodeCopy.cs" />
+    <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />
+    <Compile Include="Feedback\FeedbackInformation.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
@@ -319,6 +321,10 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.EmailMessaging\EA.Iws.EmailMessaging.csproj">
+      <Project>{ff9ed7b2-c556-4779-8c7e-25b4ef5087fe}</Project>
+      <Name>EA.Iws.EmailMessaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
       <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>
