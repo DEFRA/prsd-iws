@@ -79,7 +79,7 @@
                         <tr><td>E<sub>p</sub></td><td>The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year)</td></tr>
                         <tr><td>E<sub>f</sub></td><td>The annual energy input to the system from fuel contributions to the production of steam (GJ/year)</td></tr>
                         <tr><td>E<sub>i</sub></td><td>The annual energy imported excluding E<sub>w</sub> and E<sub>f</sub> (GJ/year)</td></tr>
-                        <tr><td>E<sub>w</sub></td><td>The annual energy contained in the treated waste calculated using the net calorific value fo the waste (GJ/year)</td></tr>
+                        <tr><td>E<sub>w</sub></td><td>The annual energy contained in the treated waste calculated using the net calorific value of the waste (GJ/year)</td></tr>
                         <tr><td>0.97</td><td>The factor accounting for energy losses due to bottom ask and radiation</td></tr>
                     </table>
                 </div>
@@ -92,7 +92,8 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
         @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
         Any other relevant information (optional)
-        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = "Further information" })
+        @Html.Gds().HintParagraph("Please limit your answer to 256 characters")
+        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = "Further information", @MaxLength = 256 })
     </div>
     <div class="form-group">
         <fieldset>
