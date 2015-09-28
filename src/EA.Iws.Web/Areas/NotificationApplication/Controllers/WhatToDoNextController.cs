@@ -8,6 +8,8 @@
     using Infrastructure;
     using Requests.Notification;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public class WhatToDoNextController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

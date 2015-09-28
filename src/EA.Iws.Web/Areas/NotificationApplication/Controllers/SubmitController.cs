@@ -10,6 +10,7 @@
     using Requests.NotificationAssessment;
     using ViewModels.NotificationApplication;
 
+    [Authorize]
     public class SubmitController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

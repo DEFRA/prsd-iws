@@ -15,6 +15,7 @@
     using Web.ViewModels.Shared;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class StateOfImportController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

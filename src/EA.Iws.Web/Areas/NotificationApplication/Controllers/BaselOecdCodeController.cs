@@ -13,6 +13,7 @@
     using ViewModels.BaselOecdCode;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class BaselOecdCodeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

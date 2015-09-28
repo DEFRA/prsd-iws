@@ -12,6 +12,8 @@
     using ViewModels.WasteCodes;
     using Views.Shared;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public abstract class BaseWasteCodeController : Controller
     {
         protected const string AddCode = "addcode";

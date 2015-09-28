@@ -14,6 +14,7 @@
     using ViewModels.CustomsOffice;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class ExitCustomsOfficeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

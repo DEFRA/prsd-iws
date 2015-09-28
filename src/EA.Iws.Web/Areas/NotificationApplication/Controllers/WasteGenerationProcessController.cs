@@ -10,6 +10,8 @@
     using Requests.WasteType;
     using ViewModels.WasteGenerationProcess;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public class WasteGenerationProcessController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

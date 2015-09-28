@@ -13,6 +13,7 @@
     using ViewModels.YCode;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class YCodeController : BaseWasteCodeController
     {
         private readonly IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper;

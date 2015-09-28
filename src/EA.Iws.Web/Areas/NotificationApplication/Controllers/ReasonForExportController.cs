@@ -10,6 +10,8 @@
     using Requests.Notification;
     using ViewModels.NotificationApplication;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public class ReasonForExportController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

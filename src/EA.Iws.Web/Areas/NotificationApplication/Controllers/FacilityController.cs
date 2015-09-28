@@ -15,6 +15,7 @@
     using Web.ViewModels.Shared;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class FacilityController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

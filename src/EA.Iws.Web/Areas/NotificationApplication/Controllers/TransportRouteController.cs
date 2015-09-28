@@ -8,6 +8,7 @@
     using Requests.TransportRoute;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class TransportRouteController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

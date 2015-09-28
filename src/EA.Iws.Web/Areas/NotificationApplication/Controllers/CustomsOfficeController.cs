@@ -8,6 +8,8 @@
     using Infrastructure;
     using Requests.CustomsOffice;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public class CustomsOfficeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

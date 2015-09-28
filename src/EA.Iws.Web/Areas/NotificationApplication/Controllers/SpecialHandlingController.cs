@@ -11,6 +11,7 @@
     using ViewModels.SpecialHandling;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class SpecialHandlingController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

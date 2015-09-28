@@ -20,6 +20,7 @@
     using Web.ViewModels.Shared;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class WasteOperationsController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

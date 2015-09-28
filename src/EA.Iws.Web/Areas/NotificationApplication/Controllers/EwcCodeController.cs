@@ -13,6 +13,7 @@
     using ViewModels.WasteCodes;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class EwcCodeController : BaseWasteCodeController
     {
         private static readonly IList<CodeType> ewcCodeTypes = new[] { CodeType.Ewc }; 

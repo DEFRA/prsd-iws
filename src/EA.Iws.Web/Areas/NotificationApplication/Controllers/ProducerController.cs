@@ -14,6 +14,7 @@
     using ViewModels.Producer;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class ProducerController : Controller
     {
         private readonly IMediator client;

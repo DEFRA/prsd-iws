@@ -12,6 +12,8 @@
     using Requests.RecoveryInfo;
     using ViewModels.RecoveryInfo;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public class RecoveryInfoController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

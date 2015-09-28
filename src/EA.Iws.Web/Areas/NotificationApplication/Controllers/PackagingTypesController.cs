@@ -14,6 +14,7 @@
     using Web.ViewModels.Shared;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class PackagingTypesController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

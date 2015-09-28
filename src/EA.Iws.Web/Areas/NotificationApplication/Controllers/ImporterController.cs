@@ -11,6 +11,7 @@
     using ViewModels.Importer;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class ImporterController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

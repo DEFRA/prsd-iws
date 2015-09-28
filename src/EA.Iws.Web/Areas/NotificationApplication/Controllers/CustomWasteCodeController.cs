@@ -15,6 +15,7 @@
     using ViewModels.CustomWasteCode;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class CustomWasteCodeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

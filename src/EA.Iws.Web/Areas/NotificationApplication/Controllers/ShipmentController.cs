@@ -11,6 +11,7 @@
     using ViewModels.Shipment;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class ShipmentController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

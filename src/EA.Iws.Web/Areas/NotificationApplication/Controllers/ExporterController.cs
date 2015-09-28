@@ -11,6 +11,7 @@
     using ViewModels.Exporter;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class ExporterController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

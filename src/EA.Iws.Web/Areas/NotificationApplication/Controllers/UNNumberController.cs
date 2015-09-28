@@ -13,6 +13,7 @@
     using ViewModels.WasteCodes;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class UnNumberController : BaseWasteCodeController
     {
         private readonly IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper;

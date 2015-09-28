@@ -14,6 +14,7 @@
     using Web.ViewModels.Shared;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class WasteTypeController : Controller
     {
         private const string NotApplicable = "NA";

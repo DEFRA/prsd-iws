@@ -13,6 +13,7 @@
     using ViewModels.MeansOfTransport;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class MeansOfTransportController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

@@ -12,6 +12,8 @@
     using Requests.Carriers;
     using ViewModels.Carrier;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public class CarrierController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

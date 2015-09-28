@@ -605,6 +605,7 @@
     <Content Include="Areas\AddressBook\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AddressBook\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AddressBook\Views\Home\_Navigation.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ReadOnly\Index.cshtml" />
     <Content Include="Areas\AddressBook\Views\Delete\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -760,9 +761,11 @@
     <Compile Include="Areas\Movement\ViewModels\OperationCompleteViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Controllers\SearchController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\ReadOnlyController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
+    <Compile Include="Infrastructure\NotificationReadOnlyFilter.cs" />
     <Compile Include="Mappings\AddAddressBookEntryMap.cs" />
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />

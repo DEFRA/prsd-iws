@@ -11,6 +11,7 @@
     using ViewModels.CustomsOffice;
 
     [Authorize]
+    [NotificationReadOnlyFilter]
     public class EntryCustomsOfficeController : Controller
     {
         private readonly Func<IIwsClient> apiClient;

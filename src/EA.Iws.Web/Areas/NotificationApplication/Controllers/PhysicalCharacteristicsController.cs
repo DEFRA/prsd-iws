@@ -13,6 +13,8 @@
     using ViewModels.PhysicalCharacteristics;
     using Web.ViewModels.Shared;
 
+    [Authorize]
+    [NotificationReadOnlyFilter]
     public class PhysicalCharacteristicsController : Controller
     {
         private readonly Func<IIwsClient> apiClient;
