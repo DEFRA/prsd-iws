@@ -1,0 +1,63 @@
+﻿@model EA.Iws.Core.AddressBook.AddressBookData
+@{
+    ViewBag.Title = "Index";
+}
+
+<header>
+    <h1 class="heading-large">Your address book</h1>
+    <p class="subtitle">Manage your address book</p>
+</header>
+
+@for (int i = 0; i < Model.AddressRecords.Count; i += 2)
+{
+    <div class="grid-row form-group">
+        @for (int j = i; j < i + 2 && j < Model.AddressRecords.Count; j++)
+        {
+            <div class="column-half">
+                <div class="address-record">
+                    <h2 class="heading-small">@Html.DisplayFor(m => m.AddressRecords[j].BusinessData.Name)</h2>
+                        <h3>Address</h3>
+                            @Html.DisplayFor(m => m.AddressRecords[j].AddressData)
+                    <h3>Contact</h3>
+                            @Html.DisplayFor(m => m.AddressRecords[j].ContactData)
+                    <ul class="inline-list">
+                        <li>@Html.ActionLink("Edit", "Edit", "AddressBookRecord", new { id = Model.AddressRecords[j].Id }, null)</li>
+                        <li>@Html.ActionLink("Delete", "Delete", "AddressBookRecord", new { id = Model.AddressRecords[j].Id }, null)</li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <button class="button" type="submit">Add new record</button>
+    </div>
+}
+
+<style>
+    .inline-list li {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .inline-list {
+        margin-top: 15px;
+    }
+
+    .address-record {
+        border: 1px solid #bfc1c3;
+        padding: 5px 21px 5px 21px;
+    }
+
+    .address-record>.heading-small {
+        margin-top: 5px;
+    }
+
+    .address-record h3 {
+        color: #bfc1c3;
+        margin-top: 10px;
+    }
+</style>

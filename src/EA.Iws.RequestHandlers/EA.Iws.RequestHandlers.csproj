@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBook\AddAddressBookEntryHandler.cs" />
-    <Compile Include="AddressBook\GetProducerAddressBookHandler.cs" />
+    <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
     <Compile Include="AddressBook\IwsContextExtensions.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Copy\WasteCodeCopy.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
+    <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />

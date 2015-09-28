@@ -1,6 +1,5 @@
-﻿namespace EA.Iws.Web.Controllers
+﻿namespace EA.Iws.Web.Areas.AddressBook.Controllers
 {
-    using System.Net.Mime;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.AddressBook;
@@ -10,27 +9,19 @@
     using Requests.AddressBook;
 
     [Authorize]
-    public class AddressBookController : Controller
+    public class SearchController : Controller
     {
         private const string JsonContentType = "application/json";
 
         private readonly IMediator mediator;
 
-        public AddressBookController(IMediator mediator)
+        public SearchController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index()
-        {
-            var result = await mediator.SendAsync(new GetProducerAddressBook());
-
-            return View(result);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Search(string term, AddressRecordType type)
+        public async Task<ActionResult> Index(string term, AddressRecordType type)
         {
             if (term != null)
             {

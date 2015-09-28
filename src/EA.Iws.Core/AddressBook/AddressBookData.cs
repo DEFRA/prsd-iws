@@ -5,10 +5,15 @@
 
     public class AddressBookData
     {
-        public int Count { get; set; }
-
         public Guid Id { get; set; }
 
         public List<AddressBookRecordData> AddressRecords { get; set; }
+
+        public AddressRecordType Type { get; set; }
+
+        public AddressBookData()
+        {
+            AddressRecords = new List<AddressBookRecordData>();
+        }
     }
 }

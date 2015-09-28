@@ -6,7 +6,7 @@
     @Html.Gds().ValidationMessageFor(m => m.Business.Name)
     @Html.Gds().TextBoxFor(m => m.Business.Name, new
     {
-        data_addressbook_url = Url.Action("Search", "AddressBook", new { area = string.Empty }),
+        data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
         data_addressbook_type = "Producer"
     })
 </div>

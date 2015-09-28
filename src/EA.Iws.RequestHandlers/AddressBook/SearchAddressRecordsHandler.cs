@@ -8,6 +8,7 @@
     using Core.Shared;
     using DataAccess;
     using Domain;
+    using Domain.AddressBook;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -17,21 +18,15 @@
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;
-        private readonly IMap<Address, AddressData> addressMap;
-        private readonly IMap<Business, BusinessInfoData> businessMap;
-        private readonly IMap<Contact, ContactData> contactMap;
+        private readonly IMap<AddressBookRecord, AddressBookRecordData> addressBookRecordMap;
 
         public SearchAddressRecordsHandler(IwsContext context, 
             IUserContext userContext,
-            IMap<Address, AddressData> addressMap,
-            IMap<Business, BusinessInfoData> businessMap,
-            IMap<Contact, ContactData> contactMap)
+            IMap<AddressBookRecord, AddressBookRecordData> addressBookRecordMap)
         {
             this.context = context;
             this.userContext = userContext;
-            this.addressMap = addressMap;
-            this.businessMap = businessMap;
-            this.contactMap = contactMap;
+            this.addressBookRecordMap = addressBookRecordMap;
         }
 
         public async Task<IList<AddressBookRecordData>> HandleAsync(SearchAddressRecords message)
@@ -46,12 +41,7 @@
             return
                 addressBook.Addresses.Where(
                     a => a.Business.Name.StartsWith(message.SearchTerm, StringComparison.OrdinalIgnoreCase))
-                    .Select(a => new AddressBookRecordData
-                    {
-                        AddressData = addressMap.Map(a.Address),
-                        BusinessData = businessMap.Map(a.Business),
-                        ContactData = contactMap.Map(a.Contact)
-                    }).ToArray();
+                    .Select(addressBookRecordMap.Map).ToArray();
         }
     }
 }

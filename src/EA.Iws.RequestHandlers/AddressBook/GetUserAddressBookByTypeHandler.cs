@@ -9,13 +9,13 @@
     using Prsd.Core.Mediator;
     using Requests.AddressBook;
 
-    internal class GetProducerAddressBookHandler : IRequestHandler<GetProducerAddressBook, AddressBookData>
+    internal class GetUserAddressBookByTypeHandler : IRequestHandler<GetUserAddressBookByType, AddressBookData>
     {
         private readonly IMap<AddressBook, AddressBookData> addressBookMap;
         private readonly IwsContext context;
         private readonly IUserContext userContext;
 
-        public GetProducerAddressBookHandler(IwsContext context,
+        public GetUserAddressBookByTypeHandler(IwsContext context,
             IUserContext userContext,
             IMap<AddressBook, AddressBookData> addressBookMap)
         {
@@ -24,10 +24,10 @@
             this.addressBookMap = addressBookMap;
         }
 
-        public async Task<AddressBookData> HandleAsync(GetProducerAddressBook message)
+        public async Task<AddressBookData> HandleAsync(GetUserAddressBookByType message)
         {
             var addressBook = await context.GetAddressBookForUserAsync(userContext, 
-                AddressRecordType.Producer);
+                message.Type);
 
             return addressBookMap.Map(addressBook);
         }
