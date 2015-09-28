@@ -145,6 +145,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />
     <Compile Include="Repositories\RecoveryInfoRepository.cs" />
+    <Compile Include="Repositories\NotificationAssessmentRepository.cs" />
     <Compile Include="Repositories\TransportRouteRepository.cs" />
     <Compile Include="Security\NotificationApplicationAuthorization.cs" />
     <Compile Include="Repositories\ShipmentInfoRepository.cs" />

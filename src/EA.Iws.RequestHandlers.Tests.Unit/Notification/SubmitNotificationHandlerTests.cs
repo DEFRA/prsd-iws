@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Notification
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
@@ -26,15 +25,15 @@
             context = new TestIwsContext();
             progressService = A.Fake<INotificationProgressService>();
 
-            var assessments = new List<NotificationAssessment>
-            {
-                new NotificationAssessment(notificationId)
-            };
+            var assessment = new NotificationAssessment(notificationId);
 
-            context.NotificationAssessments.AddRange(assessments);
+            var repo = A.Fake<INotificationAssessmentRepository>();
+            A.CallTo(() => repo.GetByNotificationId(notificationId)).Returns(assessment);
+
+            context.NotificationAssessments.Add(assessment);
             A.CallTo(() => progressService.IsComplete(notificationId)).Returns(true);
 
-            handler = new SubmitNotificationHandler(context, progressService);
+            handler = new SubmitNotificationHandler(context, progressService, repo);
             message = new SubmitNotification(notificationId);
         }
 

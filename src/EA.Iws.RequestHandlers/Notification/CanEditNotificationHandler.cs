@@ -1,27 +1,22 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
-    using DataAccess;
+    using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
     internal class CanEditNotificationHandler : IRequestHandler<CanEditNotification, bool>
     {
-        private readonly IwsContext context;
+        private readonly INotificationAssessmentRepository repository;
 
-        public CanEditNotificationHandler(IwsContext context)
+        public CanEditNotificationHandler(INotificationAssessmentRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
         public async Task<bool> HandleAsync(CanEditNotification message)
         {
-            var assessment =
-                await
-                    context.NotificationAssessments.Where(p => p.NotificationApplicationId == message.NotificationId)
-                        .SingleAsync();
+            var assessment = await repository.GetByNotificationId(message.NotificationId);
 
             return assessment.CanEditNotification;
         }

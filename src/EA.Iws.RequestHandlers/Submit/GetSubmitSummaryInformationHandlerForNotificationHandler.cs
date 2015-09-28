@@ -1,27 +1,30 @@
 ﻿namespace EA.Iws.RequestHandlers.Submit
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Notification;
-    using DataAccess;
+    using Domain.NotificationApplication;
+    using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.Submit;
 
     internal class GetSubmitSummaryInformationHandlerForNotificationHandler : IRequestHandler<GetSubmitSummaryInformationForNotification, SubmitSummaryData>
     {
-        private readonly IwsContext context;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly INotificationAssessmentRepository notificationAssessmentRepository;
 
-        public GetSubmitSummaryInformationHandlerForNotificationHandler(IwsContext context)
+        public GetSubmitSummaryInformationHandlerForNotificationHandler(INotificationApplicationRepository notificationApplicationRepository,
+            INotificationAssessmentRepository notificationAssessmentRepository)
         {
-            this.context = context;
+            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.notificationAssessmentRepository = notificationAssessmentRepository;
         }
 
         public async Task<SubmitSummaryData> HandleAsync(GetSubmitSummaryInformationForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.Id);
+            var notification = await notificationApplicationRepository.GetById(message.Id);
 
             var assessment =
-                await context.NotificationAssessments.SingleAsync(p => p.NotificationApplicationId == notification.Id);
+                await notificationAssessmentRepository.GetByNotificationId(message.Id);
 
             var competentAuthority = notification.CompetentAuthority.AsCompetentAuthority();
             

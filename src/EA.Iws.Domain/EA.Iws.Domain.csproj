@@ -88,6 +88,7 @@
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationApplication\Recovery\IRecoveryInfoRepository.cs" />
+    <Compile Include="NotificationAssessment\INotificationAssessmentRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />
     <Compile Include="NotificationAssessment\NotificationDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationStatusChange.cs" />
