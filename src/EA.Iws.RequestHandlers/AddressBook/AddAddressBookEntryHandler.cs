@@ -48,8 +48,22 @@
         private Business GetBusiness(AddAddressBookEntry message)
         {
             return (message.Type == AddressRecordType.Producer) ? 
-                ProducerBusiness.CreateProducerBusiness(message.Business.Name, BusinessType.FromBusinessType(message.Business.BusinessType),
-                message.Business.RegistrationNumber, message.Business.OtherDescription)
+                CreateProducerBusiness(message)
+                : CreateBusiness(message);
+        }
+
+        private Business CreateProducerBusiness(AddAddressBookEntry message)
+        {
+            return ProducerBusiness.CreateProducerBusiness(message.Business.Name,
+                BusinessType.FromBusinessType(message.Business.BusinessType),
+                message.Business.RegistrationNumber, message.Business.OtherDescription);
+        }
+
+        private Business CreateBusiness(AddAddressBookEntry message)
+        {
+            return (message.Business.BusinessType == Core.Shared.BusinessType.Other) ? 
+                Business.CreateOtherBusiness(message.Business.Name, message.Business.RegistrationNumber, 
+                message.Business.AdditionalRegistrationNumber, message.Business.OtherDescription) 
                 : Business.CreateBusiness(message.Business.Name, BusinessType.FromBusinessType(message.Business.BusinessType),
                 message.Business.RegistrationNumber, message.Business.AdditionalRegistrationNumber);
         }

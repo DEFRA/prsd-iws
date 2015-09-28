@@ -4,12 +4,13 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Carrier;
     using Core.Carriers;
     using Core.Shared;
     using FakeItEasy;
+    using Mappings;
+    using Prsd.Core.Mediator;
     using Requests.Carriers;
     using Requests.Shared;
     using Web.ViewModels.Shared;
@@ -19,13 +20,13 @@
     {
         private readonly CarrierController carrierController;
         private readonly Guid carrierId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
 
         public CarrierControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
+            mediator = A.Fake<IMediator>();
+            A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
                 new CountryData
                 {
@@ -41,11 +42,10 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetCarrierForNotification>.That.Matches(p => p.CarrierId == carrierId)))
+                    mediator.SendAsync(A<GetCarrierForNotification>.That.Matches(p => p.CarrierId == carrierId)))
                 .Returns(CreateCarrier(carrierId));
 
-            carrierController = new CarrierController(() => client);
+            carrierController = new CarrierController(mediator, new AddAddressBookEntryMap());
         }
 
         private AddCarrierViewModel CreateValidAddCarrier()
@@ -150,7 +150,7 @@
 
             await carrierController.Add(model, null);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<AddCarrierToNotification>.That.Matches(p => p.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<AddCarrierToNotification>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -227,7 +227,7 @@
 
             await carrierController.Edit(model);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<UpdateCarrierForNotification>.That.Matches(p => p.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<UpdateCarrierForNotification>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -292,8 +292,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetCarriersByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetCarriersByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -312,8 +311,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetCarrierForNotification>.That.Matches(
+                    mediator.SendAsync(A<GetCarrierForNotification>.That.Matches(
                             p => p.CarrierId == carrierId && p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -329,7 +327,7 @@
 
             await carrierController.Remove(model);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<DeleteCarrierForNotification>.That.Matches(p => p.CarrierId == carrierId && p.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<DeleteCarrierForNotification>.That.Matches(p => p.CarrierId == carrierId && p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

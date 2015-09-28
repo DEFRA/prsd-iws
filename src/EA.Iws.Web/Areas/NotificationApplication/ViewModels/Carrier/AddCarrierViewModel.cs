@@ -3,7 +3,6 @@
     using System;
     using Core.Shared;
     using Requests.Carriers;
-    using Requests.Shared;
     using Web.ViewModels.Shared;
 
     public class AddCarrierViewModel
@@ -15,6 +14,8 @@
         public ContactData Contact { get; set; }
 
         public BusinessTypeViewModel Business { get; set; }
+
+        public bool IsAddedToAddressBook { get; set; }
 
         public AddCarrierViewModel()
         {
