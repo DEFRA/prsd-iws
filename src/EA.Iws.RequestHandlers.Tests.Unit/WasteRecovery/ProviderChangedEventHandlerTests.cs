@@ -26,7 +26,7 @@
         [Fact]
         public async Task WasteRecoveryExists_ChangeToImporter_DeletesRecoveryInfo()
         {
-            var wasteRecovery = new WasteRecovery(NotificationId, null, null, null, null);
+            var wasteRecovery = new WasteRecovery(NotificationId, null, null, null);
 
             A.CallTo(() => repository.GetByNotificationId(NotificationId)).Returns(wasteRecovery);
 
@@ -38,7 +38,7 @@
         [Fact]
         public async Task IfWasteRecoveryDeleted_CallsSaveChanges()
         {
-            var wasteRecovery = new WasteRecovery(NotificationId, null, null, null, null);
+            var wasteRecovery = new WasteRecovery(NotificationId, null, null, null);
 
             A.CallTo(() => repository.GetByNotificationId(NotificationId)).Returns(wasteRecovery);
 

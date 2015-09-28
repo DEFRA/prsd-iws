@@ -75,6 +75,8 @@
         
         public virtual DbSet<WasteRecovery> WasteRecoveries { get; set; }
 
+        public virtual DbSet<WasteDisposal> WasteDisposals { get; set; } 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

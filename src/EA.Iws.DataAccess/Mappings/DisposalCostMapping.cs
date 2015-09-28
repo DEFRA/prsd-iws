@@ -7,8 +7,8 @@
     {
         public DisposalCostMapping()
         {
-            Property(x => x.Amount).HasColumnName("DisposalAmount").IsOptional();
-            Property(x => x.Units).HasColumnName("DisposalUnit").IsOptional();
+            Property(x => x.Amount).HasColumnName("Amount").IsRequired();
+            Property(x => x.Units).HasColumnName("Unit").IsRequired();
         }
     }
 }

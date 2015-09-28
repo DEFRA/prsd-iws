@@ -88,11 +88,11 @@
             WasteRecovery wasteRecovery;
             if (withDisposal)
             {
-                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(50), estimatedValue, recoveryCost, disposalCost);
+                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(50), estimatedValue, recoveryCost);
             }
             else
             {
-                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(100), estimatedValue, recoveryCost, new DisposalCost(null, null));
+                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(100), estimatedValue, recoveryCost);
             }
 
             context.WasteRecoveries.Add(wasteRecovery);

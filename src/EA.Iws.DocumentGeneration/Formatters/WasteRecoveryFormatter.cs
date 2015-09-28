@@ -28,9 +28,7 @@
 
         public string CostAmountWithUnits(WasteRecovery wasteRecovery, Func<WasteRecovery, DisposalCost> disposalCost)
         {
-            if (wasteRecovery == null || disposalCost(wasteRecovery) == null
-                || !disposalCost(wasteRecovery).Amount.HasValue
-                || !disposalCost(wasteRecovery).Units.HasValue)
+            if (wasteRecovery == null || disposalCost(wasteRecovery) == null)
             {
                 return string.Empty;
             }

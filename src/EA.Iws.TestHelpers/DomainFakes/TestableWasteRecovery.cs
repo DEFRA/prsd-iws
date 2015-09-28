@@ -25,11 +25,5 @@
             get { return base.RecoveryCost; }
             set { ObjectInstantiator<WasteRecovery>.SetProperty(x => x.RecoveryCost, value, this); }
         }
-
-        public new DisposalCost DisposalCost
-        {
-            get { return base.DisposalCost; }
-            set { ObjectInstantiator<WasteRecovery>.SetProperty(x => x.DisposalCost, value, this); }
-        }
     }
 }

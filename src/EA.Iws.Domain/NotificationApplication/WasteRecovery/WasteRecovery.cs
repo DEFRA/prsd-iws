@@ -9,7 +9,6 @@
         public Percentage PercentageRecoverable { get; private set; }
         public EstimatedValue EstimatedValue { get; private set; }
         public RecoveryCost RecoveryCost { get; private set; }
-        public DisposalCost DisposalCost { get; private set; }
 
         protected WasteRecovery()
         {
@@ -18,14 +17,12 @@
         public WasteRecovery(Guid notificationId,
             Percentage percentageRecoverable,
             EstimatedValue estimatedValue,
-            RecoveryCost recoveryCost,
-            DisposalCost disposalCost)
+            RecoveryCost recoveryCost)
         {
             NotificationId = notificationId;
             PercentageRecoverable = percentageRecoverable;
             EstimatedValue = estimatedValue;
             RecoveryCost = recoveryCost;
-            DisposalCost = disposalCost;
         }
 
         public void UpdateWasteRecovery(Percentage percentageRecoverable,
@@ -36,7 +33,6 @@
             PercentageRecoverable = percentageRecoverable;
             EstimatedValue = estimatedValue;
             RecoveryCost = recoveryCost;
-            DisposalCost = disposalCost;
         }
     }
 }

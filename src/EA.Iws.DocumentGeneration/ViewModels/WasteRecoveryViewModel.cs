@@ -69,9 +69,9 @@
                 .CostAmountWithUnits(wasteRecovery,
                     ri => ri.RecoveryCost);
 
-            disposalAmountText = wasteRecoveryFormatter
-                .CostAmountWithUnits(wasteRecovery,
-                    ri => ri.DisposalCost);
+            //disposalAmountText = wasteRecoveryFormatter
+            //    .CostAmountWithUnits(wasteRecovery,
+            //        ri => ri.DisposalCost);
 
             annexMessage = string.Empty;
         }

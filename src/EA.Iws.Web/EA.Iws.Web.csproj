@@ -488,7 +488,7 @@
     <Content Include="Scripts\jquery.prevent-double-click.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\Dates.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteRecovery\MethodOfDisposal.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalMethod.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\Decision.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Incomplete.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Complete.cshtml" />
@@ -609,6 +609,7 @@
     <Content Include="Areas\AddressBook\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AddressBook\Views\Home\_Navigation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ReadOnly\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalCost.cshtml" />
     <Content Include="Areas\AddressBook\Views\Delete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\Index.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Decision\NewIndex.cshtml" />
@@ -771,10 +772,12 @@
     <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Controllers\SearchController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReadOnlyController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalMethodViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\WasteRecoveryViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\DecisionRecordViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\NotificationAssessmentDecisionViewModel.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalCostViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Infrastructure\NotificationReadOnlyFilter.cs" />
@@ -1005,6 +1008,8 @@
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
+    <Folder Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\" />
+    <Folder Include="Areas\NotificationApplication\Views\RecoveryInfo\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

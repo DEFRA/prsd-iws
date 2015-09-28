@@ -246,7 +246,6 @@
             public bool? HasSpecialHandlingRequirements { get; set; }
             public string MeansOfTransport { get; set; }
             public bool? IsRecoveryPercentageDataProvidedByImporter { get; set; }
-            public string MethodOfDisposal { get; set; }
             public bool? IsWasteGenerationProcessAttached { get; set; }
             public string WasteGenerationProcess { get; set; }
             public Guid? ExporterId { get; set; }
@@ -257,6 +256,7 @@
             public Guid? PackagingInfoId { get; set; }
             public Guid? PhysicalCharacteristicsId { get; set; }
             public Guid? RecoveryInfoId { get; set; }
+            public Guid? DisposalInfoId { get; set; }
             public Guid? ShipmentInfoId { get; set; }
             public Guid? WasteTypeId { get; set; }
             public string OtherWasteTypeDescription { get; set; }

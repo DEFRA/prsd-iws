@@ -88,6 +88,7 @@
     <Compile Include="Mappings\BusinessTypeMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\DisposalCostMapping.cs" />
+    <Compile Include="Mappings\WasteDisposalMapping.cs" />
     <Compile Include="Mappings\EstimatedValueMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeMapping.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Mappings\WasteTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressBookRepository.cs" />
+    <Compile Include="Repositories\WasteDisposalRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />
     <Compile Include="Repositories\WasteRecoveryRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentRepository.cs" />

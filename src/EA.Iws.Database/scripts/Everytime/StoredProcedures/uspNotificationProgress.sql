@@ -18,7 +18,6 @@ BEGIN
 		N.[HasSpecialHandlingRequirements],
 		N.[MeansOfTransport],
 		N.[IsRecoveryPercentageDataProvidedByImporter],
-		N.[MethodOfDisposal],
 		N.[IsWasteGenerationProcessAttached],
 		N.[WasteGenerationProcess],
 		E.[Id] AS [ExporterId],
@@ -63,6 +62,9 @@ BEGIN
 
 		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[RecoveryInfo] WHERE NotificationId = @NotificationId) AS R 
 		ON N.Id = R.NotificationId
+
+		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[DisposalInfo] WHERE NotificationId = @NotificationId) AS D 
+		ON N.Id = D.NotificationId
 
 		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[ShipmentInfo] WHERE NotificationId = @NotificationId) AS S 
 		ON N.Id = S.NotificationId

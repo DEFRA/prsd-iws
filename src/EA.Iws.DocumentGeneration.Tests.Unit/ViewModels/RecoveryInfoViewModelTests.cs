@@ -82,7 +82,7 @@
                 {
                     EstimatedValue = new EstimatedValue(ValuePerWeightUnits.Tonne, 110),
                     RecoveryCost = new RecoveryCost(ValuePerWeightUnits.Kilogram, 100),
-                    DisposalCost = new DisposalCost(ValuePerWeightUnits.Kilogram, 90)
+                    //DisposalCost = new DisposalCost(ValuePerWeightUnits.Kilogram, 90)
                 },
                 wasteRecoveryFormatter);
 

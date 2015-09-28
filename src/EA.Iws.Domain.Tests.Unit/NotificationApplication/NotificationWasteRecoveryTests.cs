@@ -17,7 +17,7 @@
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
             var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
 
-            var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(50), estimatedValue, recoveryCost, disposalCost);
+            var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(50), estimatedValue, recoveryCost);
 
             Assert.NotNull(wasteRecovery);
         }
@@ -28,7 +28,7 @@
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
 
-            var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(100), estimatedValue, recoveryCost, null);
+            var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(100), estimatedValue, recoveryCost);
 
             Assert.NotNull(wasteRecovery);
         }

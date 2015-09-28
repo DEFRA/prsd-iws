@@ -1,0 +1,34 @@
+﻿@using EA.Iws.Core.Shared
+@using Microsoft.Web.Mvc
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.DisposalCostViewModel
+@{
+    ViewBag.Title = "Cost of Disposal for Recoverable Material";
+}
+
+@using (Html.BeginForm("DisposalCost", "WasteRecovery", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <header class="hgroup">
+        <h1 class="heading-large">What is the cost of disposal for the non-recoverable fraction?</h1>
+    </header>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
+        @Html.Gds().ValidationMessageFor(m => m.Amount)
+        @Html.Gds().ValidationMessageFor(m => m.Units)
+        <div class="grid-row">
+            <div class="column-third">
+                @Html.Gds().TextBoxFor(m => m.Amount, new { @class = "form-control form-control-wide" })
+            </div>
+            <div class="column-third">
+                @Html.Gds().DropDownListFor(m => m.Units, Model.PossibleUnits, new { @class = "form-control form-control-wide" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

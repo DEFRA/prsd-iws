@@ -45,11 +45,11 @@
                 recoveryInfoData.CostAmount = recoveryInfo.RecoveryCost.Amount;
                 recoveryInfoData.CostUnit = recoveryInfo.RecoveryCost.Units;
                
-                if (recoveryInfo.DisposalCost != null)
-                {
-                    recoveryInfoData.DisposalAmount = recoveryInfo.DisposalCost.Amount;
-                    recoveryInfoData.DisposalUnit = recoveryInfo.DisposalCost.Units;
-                }
+                //if (recoveryInfo.DisposalCost != null)
+                //{
+                //    recoveryInfoData.DisposalAmount = recoveryInfo.DisposalCost.Amount;
+                //    recoveryInfoData.DisposalUnit = recoveryInfo.DisposalCost.Units;
+                //}
             }
 
             return recoveryInfoData;

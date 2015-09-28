@@ -2,19 +2,15 @@
 {
     using Core.Shared;
 
-    public class DisposalCost
+    public class DisposalCost : ValuePerWeight
     {
-        public ValuePerWeightUnits? Units { get; private set; }
-        public decimal? Amount { get; private set; }
-
         internal DisposalCost()
         {
         }
 
-        public DisposalCost(ValuePerWeightUnits? units, decimal? amount)
+        public DisposalCost(ValuePerWeightUnits units, decimal amount)
+            : base(units, amount)
         {
-            Units = units;
-            Amount = amount;
         }
     }
 }

@@ -102,6 +102,7 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
+    <Compile Include="Mappings\ValuePerWeightMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
@@ -156,6 +157,9 @@
     <Compile Include="WasteRecovery\GetWasteRecoveryProviderHandler.cs" />
     <Compile Include="WasteRecovery\ProviderChangedEventHandler.cs" />
     <Compile Include="WasteRecovery\SetWasteRecoveryProviderHandler.cs" />
+    <Compile Include="WasteRecovery\GetDisposalCostHandler.cs" />
+    <Compile Include="WasteRecovery\GetDisposalMethodHandler.cs" />
+    <Compile Include="WasteRecovery\SetWasteDisposalHandler.cs" />
     <Compile Include="Registration\CreateAddressHandler.cs" />
     <Compile Include="Shared\GetCountryHandler.cs" />
     <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
