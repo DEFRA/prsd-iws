@@ -391,6 +391,11 @@ VALUES (NEWID(),
         NULL,
         @NotificationId)
 
+INSERT INTO [Notification].[TransportRoute]
+([Id], [NotificationId])
+VALUES ('51393bf2-8cba-4d09-9fdb-a4d401338eee', 
+		@NotificationId)
+
 DECLARE @CountryId UNIQUEIDENTIFIER;
 
 SELECT @CountryId = id
@@ -412,12 +417,12 @@ WHERE  [name] = 'Dover';
 
 INSERT [Notification].[stateofexport]
        ([id],
-        [notificationid],
+        [TransportRouteId],
         [countryid],
         [competentauthorityid],
         [exitpointid])
 VALUES (NEWID(),
-        @NotificationId,
+        '51393bf2-8cba-4d09-9fdb-a4d401338eee',
         @CountryId,
         @CAId,
         @EntryId)
@@ -436,12 +441,12 @@ WHERE  [name] = 'Aachen';
 
 INSERT [Notification].[stateofimport]
        ([id],
-        [notificationid],
+        [TransportRouteId],
         [countryid],
         [competentauthorityid],
         [entrypointid])
 VALUES (NEWID(),
-        @NotificationId,
+        '51393bf2-8cba-4d09-9fdb-a4d401338eee',
         @CountryId,
         @CAId,
         @ExitId)
@@ -464,14 +469,14 @@ WHERE  [name] = 'Lille';
 
 INSERT [Notification].[transitstate]
        ([id],
-        [notificationid],
+        [TransportRouteId],
         [countryid],
         [competentauthorityid],
         [entrypointid],
         [exitpointid],
         [ordinalposition])
 VALUES (NEWID(),
-        @NotificationId,
+        '51393bf2-8cba-4d09-9fdb-a4d401338eee',
         @CountryId,
         @CAId,
         @EntryId,
