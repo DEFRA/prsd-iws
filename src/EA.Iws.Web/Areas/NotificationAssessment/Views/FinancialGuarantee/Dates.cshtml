@@ -32,7 +32,7 @@
     if (Model.IsRequiredEntryComplete)
     {
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Completed.Day) @Html.Gds().FormGroupClass(m => m.Completed.Month) @Html.Gds().FormGroupClass(m => m.Completed.Year)">
-            <label class="form-label" for="Completed_Day">Guarantee received</label>
+            <label class="form-label" for="Completed_Day">Guarantee completed</label>
             @Html.EditorFor(m => m.Completed)
         </div>
     }
