@@ -3,8 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Requests.Copy;
     using ViewModels.CopyFromNotification;
@@ -12,22 +11,19 @@
     [Authorize]
     public class CopyFromNotificationController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public CopyFromNotificationController(Func<IIwsClient> apiClient)
+        public CopyFromNotificationController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetNotificationsToCopyForUser(id));
-                
-                return View(new CopyFromNotificationViewModel { Notifications = result });
-            }
+            var result = await mediator.SendAsync(new GetNotificationsToCopyForUser(id));
+
+            return View(new CopyFromNotificationViewModel { Notifications = result });
         }
 
         [HttpPost]
@@ -38,25 +34,23 @@
             {
                 return View(model);
             }
-
-            using (var client = apiClient())
+            
+            try
             {
-                try
-                {
-                    var resultId = await
-                        client.SendAsync(User.GetAccessToken(), new CopyToNotification(model.SelectedNotification.Value, id));
+                var resultId = await
+                    mediator.SendAsync(new CopyToNotification(model.SelectedNotification.Value, id));
 
-                    if (resultId != Guid.Empty)
-                    {
-                        return RedirectToAction("Result", "CopyFromNotification", new { id = resultId });
-                    }
-                }
-                catch (ApiException)
+                if (resultId != Guid.Empty)
                 {
-                    ModelState.AddModelError(string.Empty, "An error occurred copying this record. Please try again.");
+                    return RedirectToAction("Result", "CopyFromNotification", new { id = resultId });
                 }
-                return View(model);
             }
+            catch (ApiException)
+            {
+                ModelState.AddModelError(string.Empty, "An error occurred copying this record. Please try again.");
+            }
+
+            return View(model);
         }
 
         [HttpGet]

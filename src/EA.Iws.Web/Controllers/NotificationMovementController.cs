@@ -3,48 +3,40 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.Movement;
 
     [Authorize]
     public class NotificationMovementController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public NotificationMovementController(Func<IIwsClient> apiClient)
+        public NotificationMovementController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
+            var model = new MovementsViewModel
             {
-                var model = new MovementsViewModel
-                {
-                    NotificationId = id,
-                    Movements = await client.SendAsync(User.GetAccessToken(), new GetMovementsForNotificationById(id))
-                };
+                NotificationId = id,
+                Movements = await mediator.SendAsync(new GetMovementsForNotificationById(id))
+            };
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpGet]
         public async Task<ActionResult> Operation(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetActiveMovementsWithReceiptCertificateByNotificationId(id));
+            var result =
+                await
+                    mediator.SendAsync(new GetActiveMovementsWithReceiptCertificateByNotificationId(id));
 
-                return View(new MovementOperationViewModel(id, result));
-            }
+            return View(new MovementOperationViewModel(id, result));
         }
 
         [HttpPost]
@@ -67,15 +59,12 @@
         [HttpGet]
         public async Task<ActionResult> Receipt(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetActiveMovementsWithoutReceiptCertificateByNotificationId(id));
+            var result =
+                await
+                    mediator.SendAsync(
+                        new GetActiveMovementsWithoutReceiptCertificateByNotificationId(id));
 
-                return View(new MovementReceiptViewModel(id, result));
-            }
+            return View(new MovementReceiptViewModel(id, result));
         }
 
         [HttpPost]
@@ -99,12 +88,9 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var movementId = await client.SendAsync(User.GetAccessToken(), new CreateMovementForNotificationById(id));
+            var movementId = await mediator.SendAsync(new CreateMovementForNotificationById(id));
 
-                return RedirectToAction("Index", "ShipmentDate", new { id = movementId, area = "Movement" });
-            }
+            return RedirectToAction("Index", "ShipmentDate", new { id = movementId, area = "Movement" });
         }
     }
 }

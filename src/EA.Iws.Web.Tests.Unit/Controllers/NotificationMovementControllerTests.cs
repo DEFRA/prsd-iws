@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Movement;
     using Core.MovementOperation;
     using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using Web.Controllers;
     using Web.ViewModels.Movement;
@@ -19,21 +19,19 @@
     {
         private static readonly Guid AnyGuid = new Guid("850D92A7-4143-4146-90BB-6D5EF943C790");
         private readonly NotificationMovementController controller;
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
 
         public NotificationMovementControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            controller = new NotificationMovementController(() => client);
+            mediator = A.Fake<IMediator>();
+            controller = new NotificationMovementController(mediator);
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>.Ignored,
-                        A<GetActiveMovementsWithoutReceiptCertificateByNotificationId>.Ignored))
+                    mediator.SendAsync(A<GetActiveMovementsWithoutReceiptCertificateByNotificationId>.Ignored))
                 .Returns(new List<MovementData>());
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>.Ignored,
-                        A<GetActiveMovementsWithReceiptCertificateByNotificationId>.Ignored))
+                    mediator.SendAsync(A<GetActiveMovementsWithReceiptCertificateByNotificationId>.Ignored))
                 .Returns(new MovementOperationData
                 {
                     MovementDatas = new List<MovementData>(),
@@ -46,8 +44,10 @@
         {
             await controller.Receipt(AnyGuid);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, 
-                A<GetActiveMovementsWithoutReceiptCertificateByNotificationId>.That.Matches(r => r.Id == AnyGuid)))
+            A.CallTo(
+                () =>
+                    mediator.SendAsync(
+                        A<GetActiveMovementsWithoutReceiptCertificateByNotificationId>.That.Matches(r => r.Id == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -66,7 +66,7 @@
             var movements = new Dictionary<int, Guid>();
             movements.Add(1, AnyGuid);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementsForNotificationById>.Ignored)).Returns(movements);
+            A.CallTo(() => mediator.SendAsync(A<GetMovementsForNotificationById>.Ignored)).Returns(movements);
 
             var result = await controller.Index(AnyGuid);
 
@@ -84,7 +84,8 @@
         {
             await controller.Create(Guid.Empty);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<CreateMovementForNotificationById>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<CreateMovementForNotificationById>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -101,7 +102,9 @@
         {
             await controller.Create(Guid.Empty);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<CreateMovementForNotificationById>.That.Matches(r => r.Id == Guid.Empty))).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(
+                () => mediator.SendAsync(A<CreateMovementForNotificationById>.That.Matches(r => r.Id == Guid.Empty)))
+                .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -110,7 +113,8 @@
             controller.ModelState.AddModelError("a", "b");
 
             var result =
-                controller.Receipt(AnyGuid, new MovementReceiptViewModel(AnyGuid, new List<MovementData>())) as ViewResult;
+                controller.Receipt(AnyGuid, new MovementReceiptViewModel(AnyGuid, new List<MovementData>())) as
+                    ViewResult;
 
             Assert.IsType<MovementReceiptViewModel>(result.Model);
             Assert.Equal(AnyGuid, (result.Model as MovementReceiptViewModel).NotificationId);
