@@ -391,9 +391,10 @@ VALUES (NEWID(),
         NULL,
         @NotificationId)
 
+DECLARE @TransportRouteId UNIQUEIDENTIFIER = NEWID();
 INSERT INTO [Notification].[TransportRoute]
 ([Id], [NotificationId])
-VALUES ('51393bf2-8cba-4d09-9fdb-a4d401338eee', 
+VALUES (@TransportRouteId, 
 		@NotificationId)
 
 DECLARE @CountryId UNIQUEIDENTIFIER;
@@ -422,7 +423,7 @@ INSERT [Notification].[stateofexport]
         [competentauthorityid],
         [exitpointid])
 VALUES (NEWID(),
-        '51393bf2-8cba-4d09-9fdb-a4d401338eee',
+        @TransportRouteId,
         @CountryId,
         @CAId,
         @EntryId)
@@ -446,7 +447,7 @@ INSERT [Notification].[stateofimport]
         [competentauthorityid],
         [entrypointid])
 VALUES (NEWID(),
-        '51393bf2-8cba-4d09-9fdb-a4d401338eee',
+        @TransportRouteId,
         @CountryId,
         @CAId,
         @ExitId)
@@ -476,7 +477,7 @@ INSERT [Notification].[transitstate]
         [exitpointid],
         [ordinalposition])
 VALUES (NEWID(),
-        '51393bf2-8cba-4d09-9fdb-a4d401338eee',
+        @TransportRouteId,
         @CountryId,
         @CAId,
         @EntryId,
@@ -527,7 +528,7 @@ VALUES (@WasteTypeId,
         @NotificationId,
         0,
         NULL,
-        NULL,
+        55,
         NULL,
         NULL)
 
