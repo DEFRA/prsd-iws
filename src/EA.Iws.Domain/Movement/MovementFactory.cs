@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.NotificationAssessment;
     using NotificationApplication;
+    using NotificationApplication.Shipment;
     using NotificationAssessment;
 
     public class MovementFactory

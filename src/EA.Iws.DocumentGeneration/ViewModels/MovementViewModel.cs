@@ -3,6 +3,7 @@
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Formatters;
     using NotificationType = Domain.NotificationApplication.NotificationType;
 

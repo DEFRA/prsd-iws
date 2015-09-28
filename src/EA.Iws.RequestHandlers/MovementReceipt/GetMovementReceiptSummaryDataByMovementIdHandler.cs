@@ -5,6 +5,7 @@
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
+    using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mediator;
     using RequestHandlers.Movement;
     using RequestHandlers.Notification;
@@ -15,14 +16,17 @@
         private readonly IwsContext context;
         private readonly ActiveMovements activeMovementService;
         private readonly MovementQuantity movementQuantityCalculator;
+        private readonly IShipmentInfoRepository shipmentInfoRepository;
 
         public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context, 
             ActiveMovements activeMovementService,
-            MovementQuantity movementQuantityCalculator)
+            MovementQuantity movementQuantityCalculator,
+            IShipmentInfoRepository shipmentInfoRepository)
         {
             this.context = context;
             this.activeMovementService = activeMovementService;
             this.movementQuantityCalculator = movementQuantityCalculator;
+            this.shipmentInfoRepository = shipmentInfoRepository;
         }
 
         public async Task<MovementReceiptSummaryData> HandleAsync(GetMovementReceiptSummaryDataByMovementId message)
@@ -39,8 +43,8 @@
             var financialGuarantee = await context
                 .FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == movement.NotificationId);
 
-            var shipmentInfo = await context
-                .GetShipmentInfoAsync(movement.NotificationId);
+            var shipmentInfo = await shipmentInfoRepository
+                .GetByNotificationId(movement.NotificationId);
 
             return new MovementReceiptSummaryData
             {

@@ -3,6 +3,7 @@
     using System.Linq;
     using Core.Shared;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Formatters;
     using NotificationType = Domain.NotificationApplication.NotificationType;
 

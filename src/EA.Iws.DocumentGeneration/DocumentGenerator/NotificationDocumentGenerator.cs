@@ -3,24 +3,48 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using DataAccess;
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.Shipment;
     using Domain.TransportRoute;
     using Formatters;
     using NotificationBlocks;
+    using System.Threading.Tasks;
 
     public class NotificationDocumentGenerator : INotificationDocumentGenerator
     {
         private string TocText { get; set; }
         private string InstructionsText { get; set; }
+        private readonly INotificationApplicationRepository notificationRepository;
+        private readonly IShipmentInfoRepository shipmentInfoRepository;
+        private readonly ITransportRouteRepository transportRouteRepository;
+        private readonly IRecoveryInfoRepository recoveryInfoRepository;
 
-        public byte[] GenerateNotificationDocument(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, RecoveryInfo recoveryInfo)
+        public NotificationDocumentGenerator(INotificationApplicationRepository notificationRepository,
+            IShipmentInfoRepository shipmentInfoRepository,
+            ITransportRouteRepository transportRouteRepository,
+            IRecoveryInfoRepository recoveryInfoRepository)
+        {
+            this.notificationRepository = notificationRepository;
+            this.shipmentInfoRepository = shipmentInfoRepository;
+            this.transportRouteRepository = transportRouteRepository;
+            this.recoveryInfoRepository = recoveryInfoRepository;
+        }
+
+        public async Task<byte[]> GenerateNotificationDocument(Guid notificationId)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("NotificationMergeTemplate.docx"))
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
+                    var notification = await notificationRepository.GetById(notificationId);
+                    var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
+                    var transportRoute = await transportRouteRepository.GetByNotificationId(notificationId);
+                    var recoveryInfo = await recoveryInfoRepository.GetByNotificationId(notificationId);
+
                     ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, shipmentInfo);
 
                     // Get all merge fields.

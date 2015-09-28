@@ -2,8 +2,8 @@
 {
     public interface IMovementDocumentGenerator
     {
-        byte[] Generate(Movement.Movement movement, 
+        byte[] Generate(Movement.Movement movement,
             NotificationApplication.NotificationApplication notification,
-            NotificationApplication.ShipmentInfo shipmentInfo);
+            NotificationApplication.Shipment.ShipmentInfo shipmentInfo);
     }
 }

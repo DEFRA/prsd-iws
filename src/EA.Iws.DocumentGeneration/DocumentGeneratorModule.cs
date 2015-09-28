@@ -1,7 +1,7 @@
-﻿namespace EA.Iws.Api.Modules
+﻿namespace EA.Iws.DocumentGeneration
 {
     using Autofac;
-    using DocumentGeneration.DocumentGenerator;
+    using DocumentGenerator;
     using Domain;
 
     public class DocumentGeneratorModule : Module

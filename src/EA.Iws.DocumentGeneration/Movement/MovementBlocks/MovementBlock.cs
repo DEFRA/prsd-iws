@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Formatters;
     using Mapper;
     using ViewModels;

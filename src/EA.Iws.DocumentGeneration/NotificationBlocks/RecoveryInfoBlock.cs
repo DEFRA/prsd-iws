@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
     using Formatters;
     using Mapper;
     using ViewModels;

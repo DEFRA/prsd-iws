@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
     using Formatters;
 
     internal class RecoveryInfoViewModel

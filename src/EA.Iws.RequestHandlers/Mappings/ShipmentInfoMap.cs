@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using Core.IntendedShipments;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
 
     internal class ShipmentInfoMap : IMap<ShipmentInfo, IntendedShipmentData>

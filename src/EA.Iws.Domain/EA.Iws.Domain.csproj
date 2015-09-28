@@ -84,8 +84,10 @@
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
+    <Compile Include="NotificationApplication\Shipment\IShipmentInfoRepository.cs" />
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
+    <Compile Include="NotificationApplication\Recovery\IRecoveryInfoRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />
     <Compile Include="NotificationAssessment\NotificationDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationStatusChange.cs" />
@@ -119,7 +121,7 @@
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicType.cs" />
-    <Compile Include="NotificationApplication\RecoveryInfo.cs" />
+    <Compile Include="NotificationApplication\Recovery\RecoveryInfo.cs" />
     <Compile Include="NotificationApplication\TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\WasteCode.cs" />
     <Compile Include="NotificationApplication\WasteCodeInfo.cs" />
@@ -156,7 +158,7 @@
     <Compile Include="INotificationDocumentGenerator.cs" />
     <Compile Include="NotificationApplication\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NotificationApplication\ShipmentInfo.cs" />
+    <Compile Include="NotificationApplication\Shipment\ShipmentInfo.cs" />
     <Compile Include="UKCompetentAuthority.cs" />
     <Compile Include="UnitedKingdomCompetentAuthority.cs" />
     <Compile Include="User.cs" />

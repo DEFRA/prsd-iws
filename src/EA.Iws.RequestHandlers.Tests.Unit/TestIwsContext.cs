@@ -7,6 +7,7 @@
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using FakeItEasy;
@@ -51,7 +52,7 @@
             this.AddressBooks = new TestDbSet<Domain.AddressBook.AddressBook>();
             this.TransportRoutes = new TestDbSet<Domain.TransportRoute.TransportRoute>();
             this.ShipmentInfos = new TestDbSet<ShipmentInfo>();
-            this.RecoveryInfos = new TestDbSet<Domain.NotificationApplication.RecoveryInfo>();
+            this.RecoveryInfos = new TestDbSet<Domain.NotificationApplication.Recovery.RecoveryInfo>();
         }
 
         public int SaveChangesCount { get; private set; }

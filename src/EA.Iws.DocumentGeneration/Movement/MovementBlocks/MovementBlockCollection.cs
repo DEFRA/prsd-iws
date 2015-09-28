@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using NotificationBlocks;
 
     internal class MovementBlockCollection : IEnumerable<IDocumentBlock>

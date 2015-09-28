@@ -6,6 +6,7 @@
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
+    using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using RequestHandlers.Notification;
@@ -16,14 +17,17 @@
         private readonly IwsContext context;
         private readonly IMap<Movement, ProgressData> progressMap;
         private readonly ActiveMovements activeMovementService;
+        private readonly IShipmentInfoRepository shipmentInfoRepository;
 
         public GetMovementProgressInformationHandler(IwsContext context, 
             IMap<Movement, ProgressData> progressMap,
-            ActiveMovements activeMovementService)
+            ActiveMovements activeMovementService,
+            IShipmentInfoRepository shipmentInfoRepository)
         {
             this.context = context;
             this.progressMap = progressMap;
             this.activeMovementService = activeMovementService;
+            this.shipmentInfoRepository = shipmentInfoRepository;
         }
 
         public async Task<MovementProgressAndSummaryData> HandleAsync(GetMovementProgressInformation message)
@@ -32,7 +36,7 @@
                 .SingleAsync(m => m.Id == message.MovementId);
             var notificationId = movement.NotificationId;
             var relatedMovements = await context.GetMovementsForNotificationAsync(notificationId);
-            var shipmentInfo = await context.GetShipmentInfoAsync(notificationId);
+            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
 
             var notificationInformation = await context.NotificationApplications
                 .Join(context.FinancialGuarantees,

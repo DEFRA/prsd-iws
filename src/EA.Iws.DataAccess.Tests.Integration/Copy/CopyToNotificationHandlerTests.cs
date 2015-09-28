@@ -5,9 +5,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
+    using DataAccess.Repositories;
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using FakeItEasy;
@@ -134,10 +137,10 @@
             var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
-            var copiedShipmentInfo = context.GetShipmentInfoAsync(copiedNotification.Id);
+            var copiedShipmentInfo = context.ShipmentInfos.SingleOrDefault(si => si.NotificationId == copiedNotification.Id);
 
             var sourceNotification = GetSource();
-            var sourceShipmentInfo = context.GetShipmentInfoAsync(sourceNotification.Id);
+            var sourceShipmentInfo = context.ShipmentInfos.SingleOrDefault(si => si.NotificationId == sourceNotification.Id);
 
             Assert.Null(copiedShipmentInfo);
             Assert.NotNull(sourceShipmentInfo);

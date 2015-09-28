@@ -4,6 +4,7 @@
     using System.Linq;
     using Core.Shared;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
 
     public class NotificationChargeCalculator
     {

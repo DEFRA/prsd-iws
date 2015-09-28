@@ -4,7 +4,7 @@
 
     using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
 
     public class ShipmentQuantityUnitFormatter
     {

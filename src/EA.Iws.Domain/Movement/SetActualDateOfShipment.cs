@@ -2,6 +2,7 @@
 {
     using System;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
 
     public class SetActualDateOfShipment
     {

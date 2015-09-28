@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Core.RecoveryInfo;
     using DataAccess;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.RecoveryInfo;

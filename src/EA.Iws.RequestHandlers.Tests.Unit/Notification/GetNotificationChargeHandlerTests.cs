@@ -6,6 +6,8 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
+    using FakeItEasy;
     using Prsd.Core;
     using RequestHandlers.Notification;
     using Requests.Notification;
@@ -30,11 +32,14 @@
                 NotificationWithShipmentInfo()
             });
 
-            context.ShipmentInfos.Add(ShipmentInfo());
-
             context.PricingStructures.Add(PricingStructureAll1000());
 
-            handler = new GetNotificationChargeHandler(context, new NotificationChargeCalculator());
+            var shipmentInfoRepository = A.Fake<IShipmentInfoRepository>();
+
+            A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationWithShipmentInfoId)).Returns(ShipmentInfo());
+            A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationNoShipmentInfoId)).Returns<ShipmentInfo>(null);
+
+            handler = new GetNotificationChargeHandler(context, new NotificationChargeCalculator(), shipmentInfoRepository);
 
             SystemTime.Freeze(new DateTime(2015, 7, 1));
         }

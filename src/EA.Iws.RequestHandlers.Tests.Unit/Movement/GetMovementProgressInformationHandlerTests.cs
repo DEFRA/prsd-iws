@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using Domain.Movement;
+    using Domain.NotificationApplication.Shipment;
+    using FakeItEasy;
     using Prsd.Core;
     using RequestHandlers.Mappings.Movement;
     using RequestHandlers.Movement;
@@ -43,10 +45,14 @@
             Context.Movements.Add(movement);
             Context.FinancialGuarantees.Add(financialGuarantee);
 
+            var shipmentRepository = A.Fake<IShipmentInfoRepository>();
+            A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipmentInfo);
+
             handler = new GetMovementProgressInformationHandler(
                 Context,
                 new MovementMap(),
-                new ActiveMovements());
+                new ActiveMovements(),
+                shipmentRepository);
         }
 
         [Fact]

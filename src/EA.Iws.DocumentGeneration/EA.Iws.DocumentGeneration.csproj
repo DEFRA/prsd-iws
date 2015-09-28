@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
@@ -50,6 +54,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentGeneratorModule.cs" />
     <Compile Include="DocumentGenerator\FinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\MovementDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\NotificationDocumentGenerator.cs" />
@@ -128,6 +133,10 @@
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
       <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
       <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
+      <Project>{46300373-d7ae-40aa-bf96-3fc3889825a4}</Project>
+      <Name>EA.Iws.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>

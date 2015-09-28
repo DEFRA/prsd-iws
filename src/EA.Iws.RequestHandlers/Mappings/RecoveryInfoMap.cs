@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using Core.RecoveryInfo;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
     using Prsd.Core.Mapper;
 
     internal class RecoveryInfoMap : IMap<RecoveryInfo, RecoveryInfoData>

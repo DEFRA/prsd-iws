@@ -9,6 +9,7 @@
     using Core.Notification;
     using DataAccess;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
     using RequestHandlers.Notification;
     using Requests.Notification;

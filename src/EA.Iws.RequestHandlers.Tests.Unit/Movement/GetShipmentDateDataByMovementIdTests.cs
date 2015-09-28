@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.NotificationApplication.Shipment;
+    using FakeItEasy;
     using RequestHandlers.Movement;
     using Requests.Movement;
     using TestHelpers.DomainFakes;
@@ -50,7 +52,10 @@
 
             context.Movements.Add(movement);
 
-            handler = new GetShipmentDateDataByMovementIdHandler(context);
+            var shipmentRepository = A.Fake<IShipmentInfoRepository>();
+            A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipmentInfo);
+
+            handler = new GetShipmentDateDataByMovementIdHandler(context, shipmentRepository);
             request = new GetShipmentDateDataByMovementId(MovementId);
         }
 

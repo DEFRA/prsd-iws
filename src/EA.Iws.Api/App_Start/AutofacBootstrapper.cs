@@ -5,6 +5,7 @@
     using Autofac.Integration.WebApi;
     using DataAccess;
     using DataAccess.Identity;
+    using DocumentGeneration;
     using Identity;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Autofac;
@@ -30,6 +31,7 @@
 
             builder.RegisterModule(new RequestHandlerModule());
             builder.RegisterModule(new EntityFrameworkModule());
+            builder.RegisterModule(new DocumentGeneratorModule());
 
             // http://www.talksharp.com/configuring-autofac-to-work-with-the-aspnet-identity-framework-in-mvc-5
             builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();

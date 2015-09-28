@@ -10,6 +10,8 @@
     using Domain.FinancialGuarantee;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using Prsd.Core.DataAccess.Extensions;

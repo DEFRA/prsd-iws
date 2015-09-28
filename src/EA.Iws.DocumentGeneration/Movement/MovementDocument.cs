@@ -4,6 +4,7 @@
     using DocumentFormat.OpenXml.Packaging;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Formatters;
     using MovementBlocks;
     using NotificationBlocks;

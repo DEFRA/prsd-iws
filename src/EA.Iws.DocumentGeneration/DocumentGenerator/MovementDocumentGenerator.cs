@@ -4,6 +4,7 @@
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Movement;
 
     public class MovementDocumentGenerator : IMovementDocumentGenerator

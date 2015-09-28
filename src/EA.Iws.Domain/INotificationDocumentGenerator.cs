@@ -1,7 +1,10 @@
 ﻿namespace EA.Iws.Domain
 {
+    using System;
+    using System.Threading.Tasks;
+
     public interface INotificationDocumentGenerator
     {
-        byte[] GenerateNotificationDocument(NotificationApplication.NotificationApplication notification, NotificationApplication.ShipmentInfo shipmentInfo, TransportRoute.TransportRoute transportRoute, NotificationApplication.RecoveryInfo recoveryInfo);
+        Task<byte[]> GenerateNotificationDocument(Guid notificationId);
     }
 }

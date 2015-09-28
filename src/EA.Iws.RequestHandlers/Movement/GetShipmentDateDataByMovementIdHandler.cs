@@ -3,6 +3,7 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mediator;
     using RequestHandlers.Notification;
     using Requests.Movement;
@@ -10,18 +11,18 @@
     internal class GetShipmentDateDataByMovementIdHandler : IRequestHandler<GetShipmentDateDataByMovementId, MovementDatesData>
     {
         private readonly IwsContext context;
+        private readonly IShipmentInfoRepository shipmentInfoRepository;
 
-        public GetShipmentDateDataByMovementIdHandler(IwsContext context)
+        public GetShipmentDateDataByMovementIdHandler(IwsContext context, IShipmentInfoRepository shipmentInfoRepository)
         {
             this.context = context;
+            this.shipmentInfoRepository = shipmentInfoRepository;
         }
 
         public async Task<MovementDatesData> HandleAsync(GetShipmentDateDataByMovementId message)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
-
-            var notification = await context.GetNotificationApplication(movement.NotificationId);
-            var shipmentInfo = await context.GetShipmentInfoAsync(movement.NotificationId);
+            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(movement.NotificationId);
 
             return new MovementDatesData
             {

@@ -2,7 +2,7 @@
 {
     using System;
     using Core.Shared;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Prsd.Core;
     using Xunit;
     using NotificationType = Domain.NotificationApplication.NotificationType;

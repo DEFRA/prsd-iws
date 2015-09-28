@@ -3,7 +3,7 @@
     using System;
     using Core.Shared;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Helpers;
 
     public class TestableShipmentInfo : ShipmentInfo

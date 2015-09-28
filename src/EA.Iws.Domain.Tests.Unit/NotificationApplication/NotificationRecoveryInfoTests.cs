@@ -3,6 +3,7 @@
     using System;
     using Core.Shared;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Recovery;
     using Xunit;
 
     public class NotificationRecoveryInfoTests
