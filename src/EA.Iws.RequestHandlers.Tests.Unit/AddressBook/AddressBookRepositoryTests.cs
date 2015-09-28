@@ -9,14 +9,17 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class IwsContextExtensionsTests : TestBase
+    public class AddressBookRepositoryTests : TestBase
     {
         private readonly AddressBook addressBook;
-        private readonly List<AddressBookRecord> addressBookRecords; 
+        private readonly List<AddressBookRecord> addressBookRecords;
+        private readonly AddressBookRepository addressBookRepository;
 
-        public IwsContextExtensionsTests()
+        public AddressBookRepositoryTests()
         {
             addressBookRecords = new List<AddressBookRecord>();
+
+            addressBookRepository = new AddressBookRepository(Context);
 
             addressBook = new TestableAddressBook
             {
@@ -30,7 +33,7 @@
         [Fact]
         public async Task UserHasNoAddressBook_ReturnsEmptyAddressBook()
         {
-            var result = await Context.GetAddressBookForUserAsync(UserContext, AddressRecordType.Producer);
+            var result = await addressBookRepository.GetAddressBookForUser(UserId, AddressRecordType.Producer);
 
             Assert.Empty(result.Addresses);
             Assert.Equal(AddressRecordType.Producer, result.Type);
@@ -39,7 +42,7 @@
         [Fact]
         public async Task UserHasNoAddressBook_ReturnsAddressBookForUser()
         {
-            var result = await Context.GetAddressBookForUserAsync(UserContext, AddressRecordType.Producer);
+            var result = await addressBookRepository.GetAddressBookForUser(UserId, AddressRecordType.Producer);
 
             Assert.Equal(UserId, result.UserId);
         }
@@ -49,7 +52,7 @@
         {
             Context.AddressBooks.Add(addressBook);
 
-            var result = await Context.GetAddressBookForUserAsync(UserContext, AddressRecordType.Producer);
+            var result = await addressBookRepository.GetAddressBookForUser(UserId, AddressRecordType.Producer);
 
             Assert.Equal(DeterministicGuid(1), result.Id);
         }
@@ -66,7 +69,7 @@
 
             Context.AddressBooks.Add(addressBook);
 
-            var result = await Context.GetAddressBookForUserAsync(UserContext, AddressRecordType.Producer);
+            var result = await addressBookRepository.GetAddressBookForUser(UserId, AddressRecordType.Producer);
 
             Assert.Single(result.Addresses, abr => 
                 abr.Address.Address1 == TestableAddress.WitneyAddress.Address1);
@@ -77,7 +80,7 @@
         {
             Context.AddressBooks.Add(addressBook);
 
-            var result = await Context.GetAddressBookForUserAsync(UserContext, AddressRecordType.Carrier);
+            var result = await addressBookRepository.GetAddressBookForUser(UserId, AddressRecordType.Carrier);
 
             Assert.Equal(Guid.Empty, result.Id);
         }

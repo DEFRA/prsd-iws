@@ -24,7 +24,7 @@
     <hr />
     @Html.EditorFor(m => m.Contact)
 
-    <div class="form-group js-visible">
+    <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
             Add as new address to address book

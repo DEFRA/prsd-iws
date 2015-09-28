@@ -16,11 +16,23 @@
             this.mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<ActionResult> Index(Guid id, AddressRecordType type)
         {
             var result = await mediator.SendAsync(new GetAddressBookRecordById(id, type));
 
+            ViewBag.Type = type;
+
             return View(result);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(Guid id, AddressRecordType type, FormCollection model)
+        {
+            await mediator.SendAsync(new DeleteAddressBookRecord(id, type));
+
+            return RedirectToAction("Index", "Home", new { type });
         } 
     }
 }

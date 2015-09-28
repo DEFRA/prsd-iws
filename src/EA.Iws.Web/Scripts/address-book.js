@@ -57,7 +57,7 @@ function selectAutocompleteData(event, ui) {
         $.deserializeIntoNamedInputs("Business", data.BusinessData);
         $.deserializeIntoNamedInputs("Contact", data.ContactData);
     } catch (e) {
-        console.log("An error occured obtaining the JSON from string");
+        console.log("An error occurred obtaining the JSON from string");
     } finally {
         event.preventDefault ? event.preventDefault() : event.returnValue = false;
     }

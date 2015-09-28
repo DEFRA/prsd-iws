@@ -15,22 +15,24 @@
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;
+        private readonly IAddressBookRepository addressBookRepository;
 
-        public AddAddressBookEntryHandler(IwsContext context, IUserContext userContext)
+        public AddAddressBookEntryHandler(IwsContext context, IUserContext userContext, IAddressBookRepository addressBookRepository)
         {
             this.context = context;
             this.userContext = userContext;
+            this.addressBookRepository = addressBookRepository;
         }
 
         public async Task<bool> HandleAsync(AddAddressBookEntry message)
         {
-            var addressBook = await context.GetAddressBookForUserAsync(userContext, message.Type);
+            var addressBook = await addressBookRepository.GetAddressBookForUser(userContext.UserId, message.Type);
 
             var address = await GetAddress(message);
             var business = GetBusiness(message);
             var contact = ValueObjectInitializer.CreateContact(message.Contact);
             
-            addressBook.AddAddress(new AddressBookRecord(address, business, contact));
+            addressBook.Add(new AddressBookRecord(address, business, contact));
 
             await SaveAddressBook(addressBook);
 

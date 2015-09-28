@@ -5,9 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.AddressBook;
-    using Core.Shared;
-    using DataAccess;
-    using Domain;
     using Domain.AddressBook;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
@@ -16,22 +13,22 @@
 
     public class SearchAddressRecordsHandler : IRequestHandler<SearchAddressRecords, IList<AddressBookRecordData>>
     {
-        private readonly IwsContext context;
         private readonly IUserContext userContext;
         private readonly IMap<AddressBookRecord, AddressBookRecordData> addressBookRecordMap;
+        private readonly IAddressBookRepository addressBookRepository;
 
-        public SearchAddressRecordsHandler(IwsContext context, 
-            IUserContext userContext,
-            IMap<AddressBookRecord, AddressBookRecordData> addressBookRecordMap)
+        public SearchAddressRecordsHandler(IUserContext userContext,
+            IMap<AddressBookRecord, AddressBookRecordData> addressBookRecordMap,
+            IAddressBookRepository addressBookRepository)
         {
-            this.context = context;
             this.userContext = userContext;
             this.addressBookRecordMap = addressBookRecordMap;
+            this.addressBookRepository = addressBookRepository;
         }
 
         public async Task<IList<AddressBookRecordData>> HandleAsync(SearchAddressRecords message)
         {
-            var addressBook = await context.GetAddressBookForUserAsync(userContext, message.Type);
+            var addressBook = await addressBookRepository.GetAddressBookForUser(userContext.UserId, message.Type);
 
             if (!addressBook.Addresses.Any())
             {

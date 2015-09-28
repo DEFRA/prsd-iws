@@ -36,12 +36,17 @@
 
         public AddressRecordType Type { get; private set; }
 
-        public void AddAddress(AddressBookRecord addressBookRecord)
+        public void Add(AddressBookRecord addressBookRecord)
         {
             if (!AddressCollection.Contains(addressBookRecord, AddressBookRecordComparer))
             {
                 AddressCollection.Add(addressBookRecord);
             }
+        }
+
+        public void Delete(AddressBookRecord addressBookRecord)
+        {
+            AddressCollection.Remove(addressBookRecord);
         }
     }
 }

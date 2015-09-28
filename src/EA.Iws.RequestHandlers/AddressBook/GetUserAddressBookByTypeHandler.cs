@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using Core.AddressBook;
-    using DataAccess;
     using Domain.AddressBook;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
@@ -12,22 +11,21 @@
     internal class GetUserAddressBookByTypeHandler : IRequestHandler<GetUserAddressBookByType, AddressBookData>
     {
         private readonly IMap<AddressBook, AddressBookData> addressBookMap;
-        private readonly IwsContext context;
+        private readonly IAddressBookRepository addressBookRepository;
         private readonly IUserContext userContext;
 
-        public GetUserAddressBookByTypeHandler(IwsContext context,
-            IUserContext userContext,
-            IMap<AddressBook, AddressBookData> addressBookMap)
+        public GetUserAddressBookByTypeHandler(IUserContext userContext,
+            IMap<AddressBook, AddressBookData> addressBookMap,
+            IAddressBookRepository addressBookRepository)
         {
-            this.context = context;
             this.userContext = userContext;
             this.addressBookMap = addressBookMap;
+            this.addressBookRepository = addressBookRepository;
         }
 
         public async Task<AddressBookData> HandleAsync(GetUserAddressBookByType message)
         {
-            var addressBook = await context.GetAddressBookForUserAsync(userContext, 
-                message.Type);
+            var addressBook = await addressBookRepository.GetAddressBookForUser(userContext.UserId, message.Type);
 
             return addressBookMap.Map(addressBook);
         }

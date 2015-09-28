@@ -9,3 +9,61 @@
 .autocomplete-data {
     display: none;
 }
+
+.tabbed-nav{
+    border-bottom: 1px solid $border-colour;
+    margin-bottom: 21px;
+}
+
+.tabbed-tab {
+    border: 1px solid transparent;
+    border-bottom: 1px solid $border-colour;
+    display: inline-block;
+    margin-bottom: -1px;
+    margin-right: 1px;
+    padding: 15px 10px;
+}
+
+.tabbed-tab.active {
+    background: #fff;
+    border-color: #bfc1c3;
+    border-bottom-color: #fff;
+    color: #0b0c0c;
+    text-decoration: none
+}
+
+.tabbed-tab.active:hover {
+    color: inherit;
+    cursor: default;
+    text-decoration: none
+}
+
+.tabbed-tab:hover {
+    text-decoration: underline
+}
+
+.tabbed-tab:focus {
+    outline: none
+}
+
+.inline-list {
+    margin-top: 15px;
+
+    li {
+        display: inline-block;
+        margin-right: 5px;
+    }
+}
+
+.address-record {
+    padding: 5px 21px 5px 21px;
+
+    > .heading-small {
+        margin-top: 5px;
+    }
+
+    h3 {
+        color: #bfc1c3;
+        margin-top: 10px;
+    }
+}

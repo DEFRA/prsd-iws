@@ -68,7 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressBook\IwsContextExtensionsTests.cs" />
+    <Compile Include="AddressBook\AddressBookRepositoryTests.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationDecisionRequiredByDateHandlerTests.cs" />

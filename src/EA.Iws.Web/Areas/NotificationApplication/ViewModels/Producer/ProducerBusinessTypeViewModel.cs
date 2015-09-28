@@ -49,7 +49,7 @@
                 AdditionalRegistrationNumber = AdditionalRegistrationNumber,
                 BusinessType = BusinessType.Value,
                 Name = Name,
-                OtherDescription = OtherDescription,
+                OtherDescription = (BusinessType.Value == Core.Shared.BusinessType.Other) ? OtherDescription : null,
                 RegistrationNumber = RegistrationNumber
             };
         }

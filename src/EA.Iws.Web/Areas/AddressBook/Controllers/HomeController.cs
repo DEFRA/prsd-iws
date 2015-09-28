@@ -16,11 +16,19 @@
             this.mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<ActionResult> Index(AddressRecordType? type)
         {
             var result = await mediator.SendAsync(new GetUserAddressBookByType(type ?? AddressRecordType.Producer));
 
             return View(result);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index()
+        {
+            return RedirectToAction("Home", "Applicant", new { area = string.Empty });
         }
     }
 }

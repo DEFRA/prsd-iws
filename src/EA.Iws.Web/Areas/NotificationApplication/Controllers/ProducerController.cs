@@ -102,6 +102,11 @@
 
                 await client.SendAsync(request);
 
+                if (model.IsAddedToAddressBook)
+                {
+                    await client.SendAsync(producerAddressBookMap.Map(model));
+                }
+
                 return RedirectToAction("List", "Producer",
                     new { id = model.NotificationId, backToOverview });
             }

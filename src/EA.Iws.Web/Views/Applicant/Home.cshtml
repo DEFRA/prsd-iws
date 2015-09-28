@@ -15,7 +15,10 @@
     </div>
     <div class="column-third" id="submit-side-bar">
         <h3 class="heading-medium">Account services</h3>
-        <i class="fa fa-briefcase"></i>&nbsp;&nbsp;@Html.ActionLink("Account details", "ChangeAccountDetails", "Registration")
+        <ul>
+            <li><i class="fa fa-briefcase"></i>&nbsp;&nbsp;@Html.ActionLink("Account details", "ChangeAccountDetails", "Registration")</li>
+            <li><i class="fa fa-book"></i>&nbsp;&nbsp;@Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)</li>
+        </ul>
     </div>
 </div>
 

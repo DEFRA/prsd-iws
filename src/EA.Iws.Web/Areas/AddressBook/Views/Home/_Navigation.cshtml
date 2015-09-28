@@ -1,0 +1,20 @@
+﻿@using EA.Iws.Core.AddressBook
+@model AddressBookData
+
+<nav class="tabbed-nav">
+    @Html.ActionLink("Producers", "Index", "Home", new { type = AddressRecordType.Producer.ToString() }, 
+        new
+        {
+            @class = "tabbed-tab" + ((Model.Type == AddressRecordType.Producer) ? " active" : "")
+        })
+    @Html.ActionLink("Carriers", "Index", "Home", new { type = AddressRecordType.Carrier.ToString() }, 
+    new
+    {
+        @class = "tabbed-tab" + ((Model.Type == AddressRecordType.Carrier) ? " active" : "")
+    })
+    @Html.ActionLink("Facilities", "Index", "Home", new { type = AddressRecordType.Facility.ToString() },
+    new
+    {
+        @class = "tabbed-tab" + ((Model.Type == AddressRecordType.Facility) ? " active" : "")
+    })
+</nav>

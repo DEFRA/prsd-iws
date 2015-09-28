@@ -70,8 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBook\AddAddressBookEntryHandler.cs" />
+    <Compile Include="AddressBook\DeleteAddressBookRecordHandler.cs" />
+    <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
-    <Compile Include="AddressBook\IwsContextExtensions.cs" />
+    <Compile Include="AddressBook\AddressBookRepository.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
