@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.StateOfExport
 {
+    using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
@@ -12,10 +13,10 @@
         IRequestHandler<GetStateOfExportWithTransportRouteDataByNotificationId, StateOfExportWithTransportRouteData>
     {
         private readonly ITransportRouteRepository repository;
-        private readonly IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap;
+        private readonly IMapWithParameter<TransportRoute, Guid, StateOfExportWithTransportRouteData> transportRouteMap;
 
         public GetStateOfExportWithTransportRouteDataByNotificationIdHandler(ITransportRouteRepository repository,
-            IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap)
+            IMapWithParameter<TransportRoute, Guid, StateOfExportWithTransportRouteData> transportRouteMap)
         {
             this.repository = repository;
             this.transportRouteMap = transportRouteMap;
@@ -26,7 +27,7 @@
         {
             var transportRoute = await repository.GetByNotificationId(message.Id);
 
-            return transportRouteMap.Map(transportRoute);
+            return transportRouteMap.Map(transportRoute, message.Id);
         }
     }
 }

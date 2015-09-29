@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Core.Shared;
@@ -13,7 +14,7 @@
     using Prsd.Core.Mapper;
     using Requests.StateOfExport;
 
-    internal class TransportRouteMap : IMap<TransportRoute, StateOfExportWithTransportRouteData>
+    internal class TransportRouteMap : IMapWithParameter<TransportRoute, Guid, StateOfExportWithTransportRouteData>
     {
         private readonly IwsContext context;
         private readonly IMap<StateOfImport, StateOfImportData> stateOfImportMapper;
@@ -40,20 +41,23 @@
             this.competentAuthorityMapper = competentAuthorityMapper;
         }
 
-        public StateOfExportWithTransportRouteData Map(TransportRoute source)
+        public StateOfExportWithTransportRouteData Map(TransportRoute source, Guid parameter)
         {
+            var data = new StateOfExportWithTransportRouteData();
+
             var countries = context.Countries.OrderBy(c => c.Name).ToArray();
-            var notification = context.NotificationApplications.Single(n => n.Id == source.NotificationId);
+            var notification = context.NotificationApplications.Single(n => n.Id == parameter);
 
-            var data = new StateOfExportWithTransportRouteData
+            data.Countries = countries.Select(countryMapper.Map).ToArray();
+
+            if (source != null)
             {
-                StateOfImport = stateOfImportMapper.Map(source.StateOfImport),
-                StateOfExport = stateOfExportMapper.Map(source.StateOfExport),
-                Countries = countries.Select(countryMapper.Map).ToArray(),
-                TransitStates = transitStateMapper.Map(source.TransitStates)
-            };
+                data.StateOfImport = stateOfImportMapper.Map(source.StateOfImport);
+                data.StateOfExport = stateOfExportMapper.Map(source.StateOfExport);
+                data.TransitStates = transitStateMapper.Map(source.TransitStates);
+            }
 
-            if (source.StateOfExport == null)
+            if (data.StateOfExport == null)
             {
                 data.StateOfExport = new StateOfExportData();
 

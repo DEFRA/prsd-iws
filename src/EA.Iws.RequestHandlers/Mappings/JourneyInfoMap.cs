@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using System;
     using System.Linq;
     using DataAccess;
     using Domain.NotificationApplication;
@@ -12,13 +13,13 @@
     internal class JourneyInfoMap : IMap<NotificationApplication, JourneyInfo>
     {
         private readonly IwsContext context;
-        private readonly IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap;
+        private readonly IMapWithParameter<TransportRoute, Guid, StateOfExportWithTransportRouteData> transportRouteMap;
         private readonly IMap<TransportRoute, EntryCustomsOfficeAddData> customsOfficeEntryMap;
         private readonly IMap<TransportRoute, ExitCustomsOfficeAddData> customsOfficeExitMap;
 
         public JourneyInfoMap(
             IwsContext context,
-            IMap<TransportRoute, StateOfExportWithTransportRouteData> transportRouteMap,
+            IMapWithParameter<TransportRoute, Guid, StateOfExportWithTransportRouteData> transportRouteMap,
             IMap<TransportRoute, EntryCustomsOfficeAddData> customsOfficeEntryMap,
             IMap<TransportRoute, ExitCustomsOfficeAddData> customsOfficeExitMap)
         {
@@ -35,7 +36,7 @@
             return new JourneyInfo
             {
                 NotificationId = notification.Id,
-                TransportRoute = transportRouteMap.Map(transportRoute),
+                TransportRoute = transportRouteMap.Map(transportRoute, notification.Id),
                 EntryCustomsOffice = customsOfficeEntryMap.Map(transportRoute),
                 ExitCustomsOffice = customsOfficeExitMap.Map(transportRoute)
             };
