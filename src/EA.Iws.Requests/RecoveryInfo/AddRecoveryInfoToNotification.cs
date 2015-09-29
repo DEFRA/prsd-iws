@@ -4,6 +4,7 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class AddRecoveryInfoToNotification : IRequest<Guid>
     {
         public ValuePerWeightUnits EstimatedUnit { get; set; }

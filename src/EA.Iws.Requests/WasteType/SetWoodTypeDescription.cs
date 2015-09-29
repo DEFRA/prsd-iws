@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetWoodTypeDescription : IRequest<Guid>
     {
         public SetWoodTypeDescription(string woodTypeDescription, Guid notificationId)

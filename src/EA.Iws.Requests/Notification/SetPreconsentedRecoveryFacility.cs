@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetPreconsentedRecoveryFacility : IRequest<string>
     {
         public SetPreconsentedRecoveryFacility(Guid notificationId, bool isPreconsentedRecoveryFacility)

@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetWasteGenerationProcess : IRequest<Guid>
     {
         public SetWasteGenerationProcess(string process, Guid notificationId, bool isDocumentAttached)

@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetEnergyAndOptionalInformation : IRequest<Guid>
     {
         public SetEnergyAndOptionalInformation(string energyInformation, string optionalInformation, bool hasAnnex, Guid notificationId)

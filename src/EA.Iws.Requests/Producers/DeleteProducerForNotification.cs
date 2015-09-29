@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class DeleteProducerForNotification : IRequest<bool>
     {
         public DeleteProducerForNotification(Guid producerId, Guid notificationId)

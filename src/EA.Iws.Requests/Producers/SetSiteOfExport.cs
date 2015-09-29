@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetSiteOfExport : IRequest<Guid>
     {
         public SetSiteOfExport(Guid producerId, Guid notificationId)

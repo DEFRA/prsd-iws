@@ -4,6 +4,7 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class AddFacilityToNotification : IRequest<Guid>
     {
         public BusinessInfoData Business { get; set; }

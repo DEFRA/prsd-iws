@@ -4,6 +4,7 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class AddCarrierToNotification : IRequest<Guid>
     {
         public Guid NotificationId { get; set; }

@@ -5,6 +5,7 @@
     using Core.MeansOfTransport;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetMeansOfTransportForNotification : IRequest<Guid>
     {
         public Guid Id { get; private set; }

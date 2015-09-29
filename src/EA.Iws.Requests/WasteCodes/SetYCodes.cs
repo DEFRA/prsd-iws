@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    [NotificationReadOnlyAuthorize]
     public class SetYCodes : BaseSetCodes
     {
         public SetYCodes(Guid id, IEnumerable<Guid> codes, bool isNotApplicable) 

@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetTransitStateForNotification : IRequest<Guid>
     {
         public Guid? TransitStateId { get; private set; }

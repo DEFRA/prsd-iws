@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class DeleteFacilityForNotification : IRequest<bool>
     {
         public DeleteFacilityForNotification(Guid notificationId, Guid facilityId)

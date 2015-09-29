@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class DeleteCarrierForNotification : IRequest<bool>
     {
         public DeleteCarrierForNotification(Guid notificationId, Guid carrierId)

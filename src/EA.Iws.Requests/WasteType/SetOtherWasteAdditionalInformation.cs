@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetOtherWasteAdditionalInformation : IRequest<Guid>
     {
         public SetOtherWasteAdditionalInformation(Guid notificationId, string description, bool hasAnnex)

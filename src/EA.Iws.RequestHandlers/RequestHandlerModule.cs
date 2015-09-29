@@ -5,7 +5,6 @@
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
-    using Movement;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
@@ -23,7 +22,8 @@
             builder.RegisterGenericDecorators(ThisAssembly, typeof(IRequestHandler<,>), "request_handler",
                 typeof(EventDispatcherRequestHandlerDecorator<,>), // <-- inner most decorator
                 typeof(AuthorizationRequestHandlerDecorator<,>),
-                typeof(AuthenticationRequestHandlerDecorator<,>)); // <-- outer most decorator
+                typeof(AuthenticationRequestHandlerDecorator<,>),
+                typeof(NotificationReadOnlyAuthorizeDecorator<,>)); // <-- outer most decorator
 
             builder.RegisterAssemblyTypes()
                 .AsClosedTypesOf(typeof(IRequest<>))

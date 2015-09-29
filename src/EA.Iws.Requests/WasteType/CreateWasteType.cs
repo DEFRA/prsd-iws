@@ -5,6 +5,7 @@
     using Core.WasteType;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class CreateWasteType : IRequest<Guid>
     {
         public Guid NotificationId { get; set; }

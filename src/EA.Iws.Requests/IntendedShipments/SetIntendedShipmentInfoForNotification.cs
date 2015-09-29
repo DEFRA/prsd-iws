@@ -4,6 +4,7 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetIntendedShipmentInfoForNotification : IRequest<Guid>
     {
         public SetIntendedShipmentInfoForNotification(Guid notificationId, int numberOfShipments,  decimal quantity, ShipmentQuantityUnits units, DateTime startDate, DateTime endDate)

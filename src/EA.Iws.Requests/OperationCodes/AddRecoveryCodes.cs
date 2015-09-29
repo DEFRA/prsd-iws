@@ -5,6 +5,7 @@
     using Core.OperationCodes;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class AddRecoveryCodes : IRequest<Guid>
     {
         public AddRecoveryCodes(List<RecoveryCode> recoveryCodes, Guid notificationId)

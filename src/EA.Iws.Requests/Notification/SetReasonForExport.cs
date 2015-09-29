@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetReasonForExport : IRequest<string>
     {
         public SetReasonForExport(Guid notificationId, string reasonForExport)

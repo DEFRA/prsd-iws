@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetEntryCustomsOfficeForNotificationById : IRequest<CustomsOfficeCompletionStatus>
     {
         public Guid Id { get; private set; }

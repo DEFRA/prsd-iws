@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetRecoveryPercentageData : IRequest<Guid>
     {
         public SetRecoveryPercentageData(Guid notificationId, bool isProvidedByImporter, decimal? percentageRecoverable, string methodOfDisposal)

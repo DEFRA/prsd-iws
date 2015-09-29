@@ -5,6 +5,7 @@
     using Core.WasteType;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetPhysicalCharacteristics : IRequest<Guid>
     {
         public SetPhysicalCharacteristics(List<PhysicalCharacteristicType> physicalCharacteristics, Guid notificationId, string otherDescription)

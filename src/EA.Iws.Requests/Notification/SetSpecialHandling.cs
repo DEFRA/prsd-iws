@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetSpecialHandling : IRequest<string>
     {
         public SetSpecialHandling(Guid notificationId, bool hasSpecialHandlingRequirements, string specialHandlingDetails)

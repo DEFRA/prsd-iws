@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetStateOfExportForNotification : IRequest<Guid>
     {
         public Guid NotificationId { get; private set; }

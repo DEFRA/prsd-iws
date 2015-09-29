@@ -5,6 +5,7 @@
     using Core.PackagingType;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetPackagingInfoForNotification : IRequest<Guid>
     {
         public SetPackagingInfoForNotification(List<PackagingType> packagingTypes, Guid notificationId, string otherDescription)

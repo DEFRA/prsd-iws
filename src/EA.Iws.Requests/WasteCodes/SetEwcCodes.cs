@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    [NotificationReadOnlyAuthorize]
     public class SetEwcCodes : BaseSetCodes
     {
         public SetEwcCodes(Guid id, IEnumerable<Guid> codes) 

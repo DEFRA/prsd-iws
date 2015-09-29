@@ -4,6 +4,7 @@
     using Core.WasteCodes;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetBaselOecdCodeForNotification : IRequest<bool>
     {
         public Guid Id { get; private set; }

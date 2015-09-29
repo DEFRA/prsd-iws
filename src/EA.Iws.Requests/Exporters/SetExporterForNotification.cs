@@ -3,8 +3,8 @@
     using System;
     using Core.Shared;
     using Prsd.Core.Mediator;
-    using Shared;
 
+    [NotificationReadOnlyAuthorize]
     public class SetExporterForNotification : IRequest<Guid>
     {
         public BusinessInfoData Business { get; set; }

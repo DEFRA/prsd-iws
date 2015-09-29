@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetActualSiteOfTreatment : IRequest<Guid>
     {
         public SetActualSiteOfTreatment(Guid facilityId, Guid notificationId)

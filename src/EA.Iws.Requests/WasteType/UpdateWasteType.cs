@@ -5,6 +5,7 @@
     using Core.WasteType;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class UpdateWasteType : IRequest<Guid>
     {
         public UpdateWasteType(Guid notificationId, ChemicalCompositionType chemicalCompositionType,

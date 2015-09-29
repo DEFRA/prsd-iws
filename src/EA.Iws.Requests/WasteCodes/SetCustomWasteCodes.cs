@@ -3,6 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class SetCustomWasteCodes : IRequest<Guid>
     {
         public SetCustomWasteCodes(Guid notificationId,

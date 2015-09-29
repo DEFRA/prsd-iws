@@ -5,6 +5,7 @@
     using Core.OperationCodes;
     using Prsd.Core.Mediator;
 
+    [NotificationReadOnlyAuthorize]
     public class AddDisposalCodes : IRequest<Guid>
     {
         public AddDisposalCodes(List<DisposalCode> disposalCodes, Guid notificationId)
