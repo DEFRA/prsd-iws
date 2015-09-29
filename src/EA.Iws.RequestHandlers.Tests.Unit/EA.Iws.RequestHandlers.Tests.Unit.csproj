@@ -139,7 +139,9 @@
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
-    <Compile Include="RecoveryInfo\SetRecoveryPercentageDataHandlerTests.cs" />
+    <Compile Include="RecoveryInfo\GetRecoveryInfoProviderHandlerTests.cs" />
+    <Compile Include="RecoveryInfo\ProviderChangedEventHandlerTests.cs" />
+    <Compile Include="RecoveryInfo\SetRecoveryInfoProviderHandlerTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="TestBaseTests.cs" />
     <Compile Include="TestIwsContext.cs" />

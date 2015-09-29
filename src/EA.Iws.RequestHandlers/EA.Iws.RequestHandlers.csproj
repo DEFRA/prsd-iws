@@ -149,7 +149,10 @@
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
+    <Compile Include="RecoveryInfo\GetRecoveryInfoProviderHandler.cs" />
     <Compile Include="RecoveryInfo\IwsContextExtensions.cs" />
+    <Compile Include="RecoveryInfo\ProviderChangedEventHandler.cs" />
+    <Compile Include="RecoveryInfo\SetRecoveryInfoProviderHandler.cs" />
     <Compile Include="Registration\CreateAddressHandler.cs" />
     <Compile Include="Shared\GetCountryHandler.cs" />
     <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
@@ -242,7 +245,6 @@
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />
     <Compile Include="Notification\SetReasonForExportHandler.cs" />
     <Compile Include="Notification\SetSpecialHandlingHandler.cs" />
-    <Compile Include="RecoveryInfo\SetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\SubmitNotificationHandler.cs" />
     <Compile Include="OperationCodes\AddDisposalCodesHandler.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationIdHandler.cs" />

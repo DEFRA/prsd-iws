@@ -6,5 +6,7 @@
     public interface IRecoveryInfoRepository
     {
         Task<RecoveryInfo> GetByNotificationId(Guid notificationId);
+
+        void Delete(RecoveryInfo recoveryInfo);
     }
 }

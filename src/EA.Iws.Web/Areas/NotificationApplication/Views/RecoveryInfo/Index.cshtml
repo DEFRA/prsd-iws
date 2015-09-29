@@ -1,0 +1,38 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo.RecoveryInfoViewModel
+
+<header class="hgroup">
+    <h1 class="heading-large">Tell us about your waste's recovery</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    <div class="text">
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+
+        <p>By law, you need to provide us with specific recovery information about the processing of your waste.</p>
+
+        <p>In this section, we'll ask you questions around the amount, value, and cost of your waste's recovery. We may also need details of the possible methods and costs of any non-recoverable waste disposal.</p>
+
+        <h2 class="heading-small">Who will provide us with this information?</h2>
+
+        <div class="form-group">
+            <label class="block-label" for="rdoNotifier">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Notifier, new { @class = "", @id = "rdoNotifier" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Notifier)
+            </label>
+
+            <label class="block-label" data-target="importer-note" for="rdoImporter">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Importer, new { @class = "", @id = "rdoImporter" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Importer)
+            </label>
+
+            <div class="panel-indent @(Model.ProvidedBy != null && Model.ProvidedBy == ProvidedBy.Importer ? string.Empty : "js-hidden")" id="importer-note">
+                <p>Please note: Should your importer-consignee be sending through the recovery information, it will still remain your responsibility to ensure we receive it.</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+    </div>
+}

@@ -51,7 +51,7 @@
                 return;
             }
 
-            if (notification.IsProvidedByImporter.GetValueOrDefault())
+            if (notification.RecoveryInformationProvidedByImporter.GetValueOrDefault())
             {
                 annexMessage = string.Empty;
                 return;

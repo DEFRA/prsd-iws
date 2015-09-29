@@ -29,7 +29,7 @@
             {
                 HasAnnex = true;
 
-                if (notification.IsProvidedByImporter.GetValueOrDefault())
+                if (notification.RecoveryInformationProvidedByImporter.GetValueOrDefault())
                 {
                     HasAnnex = false;
 

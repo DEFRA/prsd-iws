@@ -81,7 +81,7 @@
 
             Ignore(x => x.MeansOfTransport);
             
-            Property(x => x.IsProvidedByImporter).HasColumnName("IsRecoveryPercentageDataProvidedByImporter");
+            Property(x => x.RecoveryInformationProvidedByImporter).HasColumnName("IsRecoveryPercentageDataProvidedByImporter");
 
             Property(ExpressionHelper
                 .GetPrivatePropertyExpression<NotificationApplication, string>("MeansOfTransportInternal"))

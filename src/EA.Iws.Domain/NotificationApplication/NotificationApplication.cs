@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.MeansOfTransport;
+    using Core.Shared;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
-    using TransportRoute;
+    using Recovery;
 
     public partial class NotificationApplication : Entity
     {
@@ -64,6 +65,22 @@
         public virtual WasteType WasteType { get; private set; }
 
         public virtual TechnologyEmployed TechnologyEmployed { get; private set; }
+
+        public bool? RecoveryInformationProvidedByImporter { get; private set; }
+
+        public void SetRecoveryInformationProvider(ProvidedBy providedBy)
+        {
+            RaiseEvent(new ProviderChangedEvent(this.Id, providedBy));
+            
+            if (providedBy == ProvidedBy.Notifier)
+            {
+                this.RecoveryInformationProvidedByImporter = false;
+            }
+            else if (providedBy == ProvidedBy.Importer)
+            {
+                this.RecoveryInformationProvidedByImporter = true;
+            }
+        }
 
         protected string MeansOfTransportInternal { get; set; }
 

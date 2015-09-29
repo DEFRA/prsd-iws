@@ -17,6 +17,11 @@
             this.notificationApplicationAuthorization = notificationApplicationAuthorization;
         }
 
+        public void Delete(RecoveryInfo recoveryInfo)
+        {
+            context.DeleteOnCommit(recoveryInfo);
+        }
+
         public async Task<RecoveryInfo> GetByNotificationId(Guid notificationId)
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);

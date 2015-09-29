@@ -1,15 +1,13 @@
-﻿namespace EA.Iws.DataAccess.Tests.Integration
+﻿namespace EA.Iws.DataAccess.Tests.Integration.Notification
 {
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Shared;
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
@@ -200,95 +198,7 @@
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
-
-        [Fact]
-        public async Task CanAddRecoveryInfo()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
-
-            context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
-            
-            var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
-            var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
-            var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
-
-            var recoveryInfo = new RecoveryInfo(notification.Id, estimatedValue, recoveryCost, disposalCost);
-
-            context.RecoveryInfos.Add(recoveryInfo);
-            await context.SaveChangesAsync();
-
-            Assert.NotNull(context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id));
-
-            context.DeleteOnCommit(recoveryInfo);
-            await context.SaveChangesAsync();
-
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
-        }
-
-        [Fact]
-        public async Task CanAddRecoveryInfo_WithoutDisposal()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
-
-            context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
-
-            var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
-            var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, -20);
-
-            var recoveryInfo = new RecoveryInfo(notification.Id, estimatedValue, recoveryCost, null);
-
-            context.RecoveryInfos.Add(recoveryInfo);
-            await context.SaveChangesAsync();
-
-            Assert.NotNull(context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id));
-
-            context.DeleteOnCommit(recoveryInfo);
-            await context.SaveChangesAsync();
-
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
-        }
-
-        [Fact]
-        public async Task CanAddRecoveryPercentageData()
-        {
-            var recoveryPercentage = 56.78M;
-            var methodOfDisposal = "Some method of disposal text";
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-            UKCompetentAuthority.England, 0);
-
-            notification.SetPercentageRecoverable(recoveryPercentage);
-            notification.SetMethodOfDisposal(methodOfDisposal);
-
-            context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
-
-            Assert.Equal(recoveryPercentage, notification.PercentageRecoverable);
-            Assert.Equal(methodOfDisposal, notification.MethodOfDisposal);
-
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
-        }
-
-        [Fact]
-        public async Task CanAddRecoveryPercentageDataProvidedByImporter()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-            UKCompetentAuthority.England, 0);
-
-            notification.SetRecoveryPercentageDataProvidedByImporter();
-            context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
-
-            Assert.True(notification.IsProvidedByImporter);
-
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
-        }
-
+        
         [Fact]
         public async Task CanRemoveProducer()
         {

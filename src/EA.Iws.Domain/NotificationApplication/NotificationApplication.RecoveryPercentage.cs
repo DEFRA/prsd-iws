@@ -16,16 +16,8 @@
             }
         }
 
-        public bool? IsProvidedByImporter { get; private set; }
         public string MethodOfDisposal { get; private set; }
-
-        public void SetRecoveryPercentageDataProvidedByImporter()
-        {
-            IsProvidedByImporter = true;
-            PercentageRecoverable = null;
-            MethodOfDisposal = null;
-        }
-
+        
         public void SetPercentageRecoverable(decimal percentageRecoverableMaterial)
         {
             PercentageRecoverable = percentageRecoverableMaterial;
@@ -45,7 +37,7 @@
                 MethodOfDisposal = null;
             }
 
-            IsProvidedByImporter = null;
+            RecoveryInformationProvidedByImporter = null;
         }
 
         public void SetMethodOfDisposal(string methodOfDisposal)
@@ -55,7 +47,7 @@
                 throw new InvalidOperationException("When the recovery percentage is 100% there cannot be any method of disposal text");
             }
 
-            IsProvidedByImporter = null;
+            RecoveryInformationProvidedByImporter = null;
             MethodOfDisposal = methodOfDisposal;
         }
     }

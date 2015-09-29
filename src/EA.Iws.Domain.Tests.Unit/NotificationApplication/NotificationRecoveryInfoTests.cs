@@ -1,10 +1,12 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
+    using System.Linq;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Recovery;
     using Xunit;
+    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class NotificationRecoveryInfoTests
     {
@@ -29,6 +31,17 @@
             var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), estimatedValue, recoveryCost, null);
 
             Assert.NotNull(recoveryInfo);
+        }
+
+        [Fact]
+        public void SetProvider_RaisesEvent()
+        {
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
+                UKCompetentAuthority.England, 0);
+
+            notification.SetRecoveryInformationProvider(ProvidedBy.Importer);
+
+            Assert.Equal(ProvidedBy.Importer, notification.Events.OfType<ProviderChangedEvent>().SingleOrDefault().ProvidedBy);
         }
     }
 }

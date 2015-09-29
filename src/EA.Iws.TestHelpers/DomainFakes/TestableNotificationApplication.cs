@@ -97,5 +97,11 @@
             get { return base.PhysicalCharacteristics.ToList(); }
             set { PhysicalCharacteristicsCollection = value; }
         } 
+
+        public new bool? RecoveryInformationProvidedByImporter
+        {
+            get { return base.RecoveryInformationProvidedByImporter; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.RecoveryInformationProvidedByImporter, value, this); }
+        }
     }
 }
