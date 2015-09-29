@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Security;
 
     [NotificationReadOnlyAuthorize]
     public class SetYCodes : BaseSetCodes

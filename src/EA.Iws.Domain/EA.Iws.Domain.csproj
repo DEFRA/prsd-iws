@@ -86,6 +86,7 @@
     <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\Recovery\ProviderChangedEvent.cs" />
+    <Compile Include="NotificationApplication\NotificationReadOnlyException.cs" />
     <Compile Include="NotificationApplication\Shipment\IShipmentInfoRepository.cs" />
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />

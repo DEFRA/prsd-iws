@@ -1,11 +1,12 @@
-﻿namespace EA.Iws.RequestHandlers
+﻿namespace EA.Iws.RequestHandlers.Decorators
 {
     using System;
     using System.Reflection;
     using System.Threading.Tasks;
+    using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
-    using Requests;
+    using Requests.Security;
 
     internal class NotificationReadOnlyAuthorizeDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
@@ -31,7 +32,7 @@
 
                 if (notificationIdProperty == null)
                 {
-                    throw new InvalidOperationException("Request does not contain a property for notification id");
+                    throw new InvalidOperationException(string.Format("No public property NotificationId or Id found on this request object: {0}", typeof(TRequest).FullName));
                 }
 
                 var notificationId = (Guid)notificationIdProperty.GetValue(message);
@@ -40,7 +41,7 @@
 
                 if (!assessment.CanEditNotification)
                 {
-                    throw new InvalidOperationException(string.Format("Can't edit notification {0} as it is read-only", notificationId));
+                    throw new NotificationReadOnlyException(notificationId);
                 }
             }
 

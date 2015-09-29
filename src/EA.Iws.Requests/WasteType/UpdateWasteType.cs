@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.WasteType;
     using Prsd.Core.Mediator;
+    using Security;
 
     [NotificationReadOnlyAuthorize]
     public class UpdateWasteType : IRequest<Guid>

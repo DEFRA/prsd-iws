@@ -3,6 +3,7 @@
     using System;
     using Core.Shared;
     using Prsd.Core.Mediator;
+    using Security;
 
     [NotificationReadOnlyAuthorize]
     public class AddFacilityToNotification : IRequest<Guid>

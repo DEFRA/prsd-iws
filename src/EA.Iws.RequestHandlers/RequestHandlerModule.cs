@@ -2,6 +2,7 @@
 {
     using Autofac;
     using Copy;
+    using Decorators;
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;

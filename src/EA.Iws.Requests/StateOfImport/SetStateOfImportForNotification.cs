@@ -2,6 +2,7 @@
 {
     using System;
     using Prsd.Core.Mediator;
+    using Security;
 
     [NotificationReadOnlyAuthorize]
     public class SetStateOfImportForNotification : IRequest<Guid>

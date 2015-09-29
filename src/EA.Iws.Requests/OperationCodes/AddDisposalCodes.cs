@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.OperationCodes;
     using Prsd.Core.Mediator;
+    using Security;
 
     [NotificationReadOnlyAuthorize]
     public class AddDisposalCodes : IRequest<Guid>

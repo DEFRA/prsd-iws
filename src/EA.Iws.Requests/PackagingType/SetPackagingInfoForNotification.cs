@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.PackagingType;
     using Prsd.Core.Mediator;
+    using Security;
 
     [NotificationReadOnlyAuthorize]
     public class SetPackagingInfoForNotification : IRequest<Guid>

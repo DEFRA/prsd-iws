@@ -3,6 +3,7 @@
     using System;
     using Core.WasteCodes;
     using Prsd.Core.Mediator;
+    using Security;
 
     [NotificationReadOnlyAuthorize]
     public class SetBaselOecdCodeForNotification : IRequest<bool>
