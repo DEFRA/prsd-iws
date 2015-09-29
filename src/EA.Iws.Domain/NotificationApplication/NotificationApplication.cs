@@ -70,16 +70,9 @@
 
         public void SetRecoveryInformationProvider(ProvidedBy providedBy)
         {
+            this.RecoveryInformationProvidedByImporter = providedBy == ProvidedBy.Importer;
+
             RaiseEvent(new ProviderChangedEvent(this.Id, providedBy));
-            
-            if (providedBy == ProvidedBy.Notifier)
-            {
-                this.RecoveryInformationProvidedByImporter = false;
-            }
-            else if (providedBy == ProvidedBy.Importer)
-            {
-                this.RecoveryInformationProvidedByImporter = true;
-            }
         }
 
         protected string MeansOfTransportInternal { get; set; }
