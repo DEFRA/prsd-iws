@@ -7,12 +7,12 @@
     public class ProviderChangedEvent : IEvent
     {
         public Guid NotificationId { get; set; }
-        public ProvidedBy ProvidedBy { get; private set; }
+        public ProvidedBy NewProvider { get; private set; }
 
-        public ProviderChangedEvent(Guid notificationId, ProvidedBy providedBy)
+        public ProviderChangedEvent(Guid notificationId, ProvidedBy newProvider)
         {
             NotificationId = notificationId;
-            ProvidedBy = providedBy;
+            NewProvider = newProvider;
         }
     }
 }

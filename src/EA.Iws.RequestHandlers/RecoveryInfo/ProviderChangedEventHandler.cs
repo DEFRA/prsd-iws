@@ -19,7 +19,7 @@
 
         public async Task HandleAsync(ProviderChangedEvent @event)
         {
-            if (@event.ProvidedBy == ProvidedBy.Importer)
+            if (@event.NewProvider == ProvidedBy.Importer)
             {
                 var recoveryInfo = await repository.GetByNotificationId(@event.NotificationId);
 

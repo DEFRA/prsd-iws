@@ -56,14 +56,13 @@
             Assert.Equal(competentAuthority.Id, transport.StateOfExport.CompetentAuthority.Id);
             Assert.Equal(exitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 
-            context.DeleteOnCommit(stateOfExport);
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(transport);
-            await context.SaveChangesAsync();
+            await DeleteEntity(stateOfExport);
+            await DeleteEntity(transport);
+            await DeleteEntity(notification);
         }
 
         [Fact]
-        public void CanUpdateStateOfExport()
+        public async Task CanUpdateStateOfExport()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal, UKCompetentAuthority.England, 450);
 
@@ -104,10 +103,14 @@
 
             Assert.Equal(nextExitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(transport);
+            await DeleteEntity(transport);
+            await DeleteEntity(notification);
+        }
 
-            context.SaveChanges();
+        private async Task DeleteEntity(Entity entity)
+        {
+            context.DeleteOnCommit(entity);
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -1,14 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.RecoveryInfo
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
-    using DataAccess;
     using Domain.NotificationApplication.Recovery;
     using FakeItEasy;
     using RequestHandlers.RecoveryInfo;
-    using TestHelpers.DomainFakes;
     using Xunit;
 
     public class ProviderChangedEventHandlerTests

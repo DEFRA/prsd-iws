@@ -41,7 +41,7 @@
 
             notification.SetRecoveryInformationProvider(ProvidedBy.Importer);
 
-            Assert.Equal(ProvidedBy.Importer, notification.Events.OfType<ProviderChangedEvent>().SingleOrDefault().ProvidedBy);
+            Assert.Equal(ProvidedBy.Importer, notification.Events.OfType<ProviderChangedEvent>().SingleOrDefault().NewProvider);
         }
     }
 }

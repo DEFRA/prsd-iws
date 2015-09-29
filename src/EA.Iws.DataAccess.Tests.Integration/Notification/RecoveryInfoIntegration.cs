@@ -13,7 +13,7 @@
     using NotificationType = Domain.NotificationApplication.NotificationType;
 
     [Trait("Category", "Integration")]
-    public class RecoveryInfoIntegration : IDisposable
+    public class RecoveryInfoIntegration
     {
         private readonly IwsContext context;
         private readonly IEventDispatcher eventDispatcher;
@@ -52,23 +52,6 @@
             await DeleteEntity(recoveryInfo);
             await DeleteEntity(notification);
         }
-
-        //[Fact]
-        //public async Task RecoveryInfoExists_SetProviderToImporter_RemovesExistingInfo()
-        //{
-        //    NotificationApplication notification = await CreateNotification();
-        //    RecoveryInfo recoveryInfo = await CreateRecoveryInfo(notification);
-
-        //    A.CallTo(() => eventDispatcher.Dispatch(A<ProviderChangedEvent>.Ignored)).Invokes(new ProviderChangedEventHandler(context, ));
-
-        //    notification.SetRecoveryInformationProvider(ProvidedBy.Importer);
-        //    await context.SaveChangesAsync();
-
-        //    Assert.Null(context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id));
-
-        //    await DeleteEntity(recoveryInfo);
-        //    await DeleteEntity(notification);
-        //}
 
         [Fact]
         public async Task CanAddRecoveryPercentageData()
@@ -142,11 +125,6 @@
         {
             context.DeleteOnCommit(entity);
             await context.SaveChangesAsync();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

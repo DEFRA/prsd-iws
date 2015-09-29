@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Shared;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.RecoveryInfo;
     using ViewModels.RecoveryInfo;
