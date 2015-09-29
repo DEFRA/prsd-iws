@@ -9,12 +9,18 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-    
+
     @Html.HiddenFor(m => m.NotificationId)
 
     if (Model.RadioButtons == null || !Model.RadioButtons.PossibleValues.Any())
     {
         <p>You have no active shipments to record receipt for.</p>
+
+        @Html.ActionLink("Continue",
+            "ApprovedNotification",
+            "Applicant",
+            new { area = string.Empty, id = Model.NotificationId },
+            new { @class = "button" })
     }
     else
     {
@@ -22,16 +28,16 @@
             @Html.Gds().ValidationMessageFor(m => m.RadioButtons.SelectedValue)
             @Html.EditorFor(m => m.RadioButtons)
         </div>
-    }
 
-    <div class="form-group-compound">
-        <button class="button" type="submit">Continue</button>
-    </div>
+        <div class="form-group-compound">
+            <button class="button" type="submit">Continue</button>
+        </div>
 
-    @Html.ActionLink("Go to notification options",
+        @Html.ActionLink("Go to notification options",
             "ApprovedNotification",
             "Applicant",
             new { area = string.Empty, id = Model.NotificationId },
             null)
+    }
 }
 
