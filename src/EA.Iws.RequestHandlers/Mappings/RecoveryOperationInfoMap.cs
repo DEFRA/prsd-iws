@@ -1,18 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Core.Notification;
     using Core.OperationCodes;
     using Core.TechnologyEmployed;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
-    internal class RecoveryOperationInfoMap : IMap<NotificationApplication, RecoveryOperationInfo>
+    internal class RecoveryOperationInfoMap : IMap<NotificationApplication, RecoveryOperation>
     {
         private readonly IMap<NotificationApplication, string> preconsentedAnswerMap;
         private readonly IMap<NotificationApplication, TechnologyEmployedData> technologyEmployedMap;
@@ -25,9 +20,9 @@
             this.technologyEmployedMap = technologyEmployedMap;
         }
 
-        public RecoveryOperationInfo Map(NotificationApplication notification)
+        public RecoveryOperation Map(NotificationApplication notification)
         {
-            return new RecoveryOperationInfo
+            return new RecoveryOperation
             {
                 NotificationId = notification.Id,
                 NotificationType = notification.NotificationType == NotificationType.Disposal

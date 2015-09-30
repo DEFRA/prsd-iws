@@ -79,7 +79,6 @@
     <Compile Include="NotificationAssessment\NotificationStatus.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />
-    <Compile Include="Notification\RecoveryPercentageData.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
     <Compile Include="OperationCodes\DisposalCode.cs" />
     <Compile Include="OperationCodes\OperationCodeData.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="PackagingType\PackagingType.cs" />
     <Compile Include="Producers\ProducerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecoveryInfo\RecoveryInfoData.cs" />
     <Compile Include="Registration\OrganisationRegistrationData.cs" />
     <Compile Include="Shared\ValuePerWeightUnits.cs" />
     <Compile Include="Registration\Users\User.cs" />

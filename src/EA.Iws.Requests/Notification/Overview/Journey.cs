@@ -1,11 +1,10 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Notification.Overview
 {
     using System;
-    using Core.Notification;
-    using Requests.CustomsOffice;
-    using Requests.StateOfExport;
+    using CustomsOffice;
+    using StateOfExport;
 
-    public class JourneyInfo
+    public class Journey
     {
         public Guid NotificationId { get; set; }
         public bool IsStateOfExportCompleted { get; set; }

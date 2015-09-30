@@ -112,6 +112,7 @@
     <Compile Include="Mappings\SubmitSummaryDataMap.cs" />
     <Compile Include="Mappings\BacsDetailsMap.cs" />
     <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />
+    <Compile Include="Mappings\ValuePerWeightMap.cs" />
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="MovementOperationReceipt\CreateMovementOperationReceiptForMovementHandler.cs" />
@@ -155,8 +156,12 @@
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
+    <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
+    <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />
+    <Compile Include="WasteRecovery\GetRecoveryCostHandler.cs" />
     <Compile Include="WasteRecovery\GetWasteRecoveryProviderHandler.cs" />
     <Compile Include="WasteRecovery\ProviderChangedEventHandler.cs" />
+    <Compile Include="WasteRecovery\SaveWasteRecoveryHandler.cs" />
     <Compile Include="WasteRecovery\SetWasteRecoveryProviderHandler.cs" />
     <Compile Include="WasteRecovery\GetDisposalCostHandler.cs" />
     <Compile Include="WasteRecovery\GetDisposalMethodHandler.cs" />
@@ -209,7 +214,6 @@
     <Compile Include="Mappings\PreconsentedAnswerMap.cs" />
     <Compile Include="Mappings\PreconsentedFacilityMap.cs" />
     <Compile Include="Mappings\RecoveryOperationInfoMap.cs" />
-    <Compile Include="Mappings\RecoveryPercentageMap.cs" />
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
     <Compile Include="Mappings\SpecialHandlingMap.cs" />
     <Compile Include="Mappings\TechnologyEmployedMap.cs" />
@@ -241,12 +245,11 @@
     <Compile Include="Mappings\StateOfExportMap.cs" />
     <Compile Include="Mappings\TransitStateMap.cs" />
     <Compile Include="Notification\GetNotificationChargeHandler.cs" />
-    <Compile Include="Notification\GetNotificationInfoHandler.cs" />
+    <Compile Include="Notification\GetNotificationOverviewHandler.cs" />
     <Compile Include="Mappings\ValueObjectInitializer.cs" />
     <Compile Include="Notification\GetNotificationProgressInfoHandler.cs" />
     <Compile Include="Notification\GetNotificationBasicInfoHandler.cs" />
     <Compile Include="Notification\GetReasonForExportHandler.cs" />
-    <Compile Include="Notification\GetRecoveryPercentageDataHandler.cs" />
     <Compile Include="Notification\GetSpecialHandingForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationNumberGenerator.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacilityHandler.cs" />

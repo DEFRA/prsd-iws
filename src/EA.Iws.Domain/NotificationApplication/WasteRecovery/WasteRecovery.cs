@@ -25,14 +25,15 @@
             RecoveryCost = recoveryCost;
         }
 
-        public void UpdateWasteRecovery(Percentage percentageRecoverable,
+        public void Update(Percentage percentageRecoverable,
             EstimatedValue estimatedValue,
-            RecoveryCost recoveryCost,
-            DisposalCost disposalCost)
+            RecoveryCost recoveryCost)
         {
             PercentageRecoverable = percentageRecoverable;
             EstimatedValue = estimatedValue;
             RecoveryCost = recoveryCost;
+
+            RaiseEvent(new PercentageChangedEvent(this.NotificationId, percentageRecoverable));
         }
     }
 }

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Core.WasteType;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class ClassifyYourWasteViewModel
     {
@@ -19,7 +19,7 @@
         {
         }
 
-        public ClassifyYourWasteViewModel(ClassifyYourWasteInfo classifyYourWasteInfo)
+        public ClassifyYourWasteViewModel(ClassifyYourWaste classifyYourWasteInfo)
         {
             NotificationId = classifyYourWasteInfo.NotificationId;
             IsChemicalCompositionCompleted = classifyYourWasteInfo.IsChemicalCompositionCompleted;

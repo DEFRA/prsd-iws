@@ -3,13 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using Core.CustomsOffice;
-    using Core.Notification;
     using Core.StateOfExport;
     using Core.StateOfImport;
     using Core.TransitState;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class JourneyViewModel
     {
@@ -28,7 +26,7 @@
         {
         }
 
-        public JourneyViewModel(JourneyInfo journeyInfo)
+        public JourneyViewModel(Journey journeyInfo)
         {
             NotificationId = journeyInfo.NotificationId;
             IsStateOfExportCompleted = journeyInfo.IsStateOfExportCompleted;

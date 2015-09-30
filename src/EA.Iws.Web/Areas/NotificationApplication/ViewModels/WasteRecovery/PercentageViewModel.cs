@@ -7,7 +7,7 @@
     using Prsd.Core.Validation;
     using Requests.WasteRecovery;
 
-    public class RecoveryPercentageViewModel
+    public class PercentageViewModel
     {
         [Required(ErrorMessage = "Please enter a value")]
         [Range(0, 100, ErrorMessage = "The percentage (%) must be between 0 and 100")]

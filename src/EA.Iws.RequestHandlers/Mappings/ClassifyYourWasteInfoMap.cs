@@ -1,19 +1,14 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Core.Notification;
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
     using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
-    internal class ClassifyYourWasteInfoMap : IMap<NotificationApplication, ClassifyYourWasteInfo>
+    internal class ClassifyYourWasteInfoMap : IMap<NotificationApplication, ClassifyYourWaste>
     {
         private readonly IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]> wasteCodesMapper;
         private readonly IMap<WasteType, WasteTypeData> wasteTypeMapper;
@@ -26,9 +21,9 @@
             this.wasteTypeMapper = wasteTypeMapper;
         }
 
-        public ClassifyYourWasteInfo Map(NotificationApplication notification)
+        public ClassifyYourWaste Map(NotificationApplication notification)
         {
-            return new ClassifyYourWasteInfo
+            return new ClassifyYourWaste
             {
                 NotificationId = notification.Id,
                 ChemicalComposition = GetWasteType(notification),

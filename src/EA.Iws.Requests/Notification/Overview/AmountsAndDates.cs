@@ -1,11 +1,10 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Notification.Overview
 {
     using System;
     using Core.IntendedShipments;
-    using Core.Notification;
     using Core.Shared;
 
-    public class AmountsAndDatesInfo
+    public class AmountsAndDates
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }

@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class NotificationOverviewViewModel
     {
@@ -35,7 +35,7 @@
         {
         }
 
-        public NotificationOverviewViewModel(NotificationInfo notificationInfo)
+        public NotificationOverviewViewModel(NotificationOverview notificationInfo)
         {
             NotificationId = notificationInfo.NotificationId;
             NotificationNumber = notificationInfo.NotificationNumber;

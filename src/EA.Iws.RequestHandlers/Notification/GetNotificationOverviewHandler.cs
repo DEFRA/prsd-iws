@@ -8,16 +8,17 @@
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.Notification.Overview;
 
-    internal class GetNotificationInfoHandler : IRequestHandler<GetNotificationInfo, NotificationInfo>
+    internal class GetNotificationOverviewHandler : IRequestHandler<GetNotificationOverview, NotificationOverview>
     {
         private readonly IwsContext db;
-        private readonly IMap<NotificationApplication, NotificationInfo> notificationInfoMap;
+        private readonly IMap<NotificationApplication, NotificationOverview> notificationInfoMap;
         private readonly NotificationChargeCalculator notificationChargeCalculator;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
 
-        public GetNotificationInfoHandler(IwsContext db,
-            IMap<NotificationApplication, NotificationInfo> notificationInfoMap,
+        public GetNotificationOverviewHandler(IwsContext db,
+            IMap<NotificationApplication, NotificationOverview> notificationInfoMap,
             NotificationChargeCalculator notificationChargeCalculator,
             IShipmentInfoRepository shipmentInfoRepository)
         {
@@ -27,7 +28,7 @@
             this.shipmentInfoRepository = shipmentInfoRepository;
         }
 
-        public async Task<NotificationInfo> HandleAsync(GetNotificationInfo message)
+        public async Task<NotificationOverview> HandleAsync(GetNotificationOverview message)
         {
             var notification = await db.GetNotificationApplication(message.NotificationId);
             var pricingStructures = await db.PricingStructures.ToArrayAsync();

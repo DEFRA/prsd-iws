@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Notification.Overview
 {
     using System;
     using System.Collections.Generic;
     using Core.WasteType;
 
-    public class ClassifyYourWasteInfo
+    public class ClassifyYourWaste
     {
         public Guid NotificationId { get; set; }
         public bool IsChemicalCompositionCompleted { get; set; }

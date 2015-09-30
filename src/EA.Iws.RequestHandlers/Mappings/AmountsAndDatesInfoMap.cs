@@ -6,9 +6,9 @@
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
-    internal class AmountsAndDatesInfoMap : IMap<NotificationApplication, AmountsAndDatesInfo>
+    internal class AmountsAndDatesInfoMap : IMap<NotificationApplication, AmountsAndDates>
     {
         private readonly IMap<ShipmentInfo, IntendedShipmentData> shipmentDataMap;
         private readonly IwsContext context;
@@ -20,9 +20,9 @@
             this.context = context;
         }
 
-        public AmountsAndDatesInfo Map(NotificationApplication notification)
+        public AmountsAndDates Map(NotificationApplication notification)
         {
-            return new AmountsAndDatesInfo
+            return new AmountsAndDates
             {
                 NotificationId = notification.Id,
                 NotificationType = notification.NotificationType == NotificationType.Disposal

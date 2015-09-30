@@ -2,9 +2,8 @@
 {
     using System;
     using Core.IntendedShipments;
-    using Core.Notification;
     using Core.Shared;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class AmountsAndDatesViewModel
     {
@@ -17,7 +16,7 @@
         {
         }
 
-        public AmountsAndDatesViewModel(AmountsAndDatesInfo amountAndDatesInfo)
+        public AmountsAndDatesViewModel(AmountsAndDates amountAndDatesInfo)
         {
             NotificationId = amountAndDatesInfo.NotificationId;
             NotificationType = amountAndDatesInfo.NotificationType;

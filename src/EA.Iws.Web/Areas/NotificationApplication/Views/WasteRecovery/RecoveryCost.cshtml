@@ -1,0 +1,33 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.RecoveryCostViewModel
+@{
+    ViewBag.Title = "Recovery cost";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.PercentageRecoverable)
+    @Html.HiddenFor(m => m.EstimatedValueAmount)
+    @Html.HiddenFor(m => m.EstimatedValueUnit)
+
+    <header class="hgroup">
+        <h1 class="heading-large">What is the cost of the recovery?</h1>
+    </header>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
+        @Html.Gds().LabelFor(m => m.Amount, false)
+        @Html.Gds().ValidationMessageFor(m => m.Amount)
+        <div class="grid-row">
+            <div class="column-third">
+                @Html.Gds().TextBoxFor(m => m.Amount, new { @class = "form-control form-control-wide" })
+            </div>
+            <div class="column-third">
+                @Html.Gds().DropDownListFor(m => m.SelectedUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

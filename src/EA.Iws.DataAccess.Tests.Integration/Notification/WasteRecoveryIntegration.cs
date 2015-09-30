@@ -29,45 +29,7 @@
             context = new IwsContext(userContext, eventDispatcher);
         }
 
-        [Fact]
-        public async Task CanAddWasteRecovery()
-        {
-            NotificationApplication notification = await CreateNotification();
-            WasteRecovery wasteRecovery = await CreateWasteRecovery(notification);
-
-            Assert.NotNull(context.WasteRecoveries.SingleOrDefault(ri => ri.NotificationId == notification.Id));
-
-            await DeleteEntity(wasteRecovery);
-            await DeleteEntity(notification);
-        }
-
-        [Fact]
-        public async Task CanAddWasteRecovery_WithoutDisposal()
-        {
-            NotificationApplication notification = await CreateNotification();
-            WasteRecovery wasteRecovery = await CreateWasteRecovery(notification, withDisposal: false);
-
-            Assert.NotNull(context.WasteRecoveries.SingleOrDefault(ri => ri.NotificationId == notification.Id));
-
-            await DeleteEntity(wasteRecovery);
-            await DeleteEntity(notification);
-        }
-        
-        [Fact]
-        public async Task CanAddRecoveryPercentageDataProvidedByImporter()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-            UKCompetentAuthority.England, 0);
-
-            notification.SetWasteRecoveryInformationProvider(ProvidedBy.Importer);
-            context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
-
-            Assert.True(notification.WasteRecoveryInformationProvidedByImporter);
-
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
-        }
+        //TODO: write new integration tests that test the creation, updation and deletion of waste recovery and disposal information.
 
         private async Task<NotificationApplication> CreateNotification()
         {
@@ -79,21 +41,12 @@
             return notification;
         }
 
-        private async Task<WasteRecovery> CreateWasteRecovery(NotificationApplication notification, bool withDisposal = true)
+        private async Task<WasteRecovery> CreateWasteRecovery(NotificationApplication notification)
         {
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
-            var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
-            
-            WasteRecovery wasteRecovery;
-            if (withDisposal)
-            {
-                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(50), estimatedValue, recoveryCost);
-            }
-            else
-            {
-                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(100), estimatedValue, recoveryCost);
-            }
+
+            var wasteRecovery = new WasteRecovery(notification.Id, new Percentage(50), estimatedValue, recoveryCost);
 
             context.WasteRecoveries.Add(wasteRecovery);
             await context.SaveChangesAsync();

@@ -2,13 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using Core.Carriers;
     using Core.MeansOfTransport;
-    using Core.Notification;
     using Core.Shared;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class TransportationViewModel
     {
@@ -27,7 +24,7 @@
         {
         }
 
-        public TransportationViewModel(TransportationInfo transportationInfo)
+        public TransportationViewModel(Transportation transportationInfo)
         {
             NotificationId = transportationInfo.NotificationId;
             NotificationType = transportationInfo.NotificationType;

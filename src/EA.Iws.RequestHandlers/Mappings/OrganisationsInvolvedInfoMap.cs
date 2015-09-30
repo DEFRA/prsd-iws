@@ -1,20 +1,16 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Core.Exporters;
     using Core.Facilities;
     using Core.Importer;
-    using Core.Notification;
     using Core.Producers;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
-    internal class OrganisationsInvolvedInfoMap : IMap<NotificationApplication, OrganisationsInvolvedInfo>
+    internal class OrganisationsInvolvedInfoMap : IMap<NotificationApplication, OrganisationsInvolved>
     {
         private readonly IMap<NotificationApplication, ExporterData> exporterMap;
         private readonly IMap<NotificationApplication, ImporterData> importerMap;
@@ -33,9 +29,9 @@
             this.facilityMap = facilityMap;
         }
 
-        public OrganisationsInvolvedInfo Map(NotificationApplication notification)
+        public OrganisationsInvolved Map(NotificationApplication notification)
         {
-            return new OrganisationsInvolvedInfo
+            return new OrganisationsInvolved
             {
                 NotificationId = notification.Id,
                 NotificationType = notification.NotificationType == NotificationType.Disposal

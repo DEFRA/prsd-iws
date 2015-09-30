@@ -54,7 +54,7 @@
         {
             using (var client = apiClient())
             {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationInfo(id));
+                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationOverview(id));
 
                 var model = new NotificationOverviewViewModel(response);
 

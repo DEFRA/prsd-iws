@@ -15,20 +15,8 @@
         {
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
-            var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
 
             var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(50), estimatedValue, recoveryCost);
-
-            Assert.NotNull(wasteRecovery);
-        }
-
-        [Fact]
-        public void CanAddWasteRecoveryValues_WithoutDisposal()
-        {
-            var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
-            var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
-
-            var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(100), estimatedValue, recoveryCost);
 
             Assert.NotNull(wasteRecovery);
         }
@@ -72,6 +60,20 @@
             notification.SetWasteRecoveryInformationProvider(ProvidedBy.Importer);
 
             Assert.Equal(ProvidedBy.Importer, notification.Events.OfType<ProviderChangedEvent>().SingleOrDefault().NewProvider);
+        }
+
+        [Fact]
+        public void UpdateWasteRecovery_RaisesEvent()
+        {
+            var wasteRecovery = new WasteRecovery(
+                Guid.NewGuid(),
+                new Percentage(50m),
+                new EstimatedValue(ValuePerWeightUnits.Kilogram, 50m),
+                new RecoveryCost(ValuePerWeightUnits.Kilogram, 40m));
+
+            wasteRecovery.Update(new Percentage(60m), new EstimatedValue(ValuePerWeightUnits.Tonne, 50000m), new RecoveryCost(ValuePerWeightUnits.Tonne, 40000m));
+
+            Assert.Equal(60m, wasteRecovery.Events.OfType<PercentageChangedEvent>().SingleOrDefault().NewPercentage.Value);
         }
     }
 }

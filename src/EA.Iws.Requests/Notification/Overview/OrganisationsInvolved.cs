@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Notification.Overview
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using Core.Producers;
     using Core.Shared;
 
-    public class OrganisationsInvolvedInfo
+    public class OrganisationsInvolved
     {
         public Guid NotificationId { get; set; }
 

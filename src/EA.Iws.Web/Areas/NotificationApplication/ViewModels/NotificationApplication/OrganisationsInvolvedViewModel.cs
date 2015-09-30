@@ -7,7 +7,7 @@
     using Core.Importer;
     using Core.Producers;
     using Core.Shared;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class OrganisationsInvolvedViewModel
     {
@@ -28,7 +28,7 @@
         {
         }
 
-        public OrganisationsInvolvedViewModel(OrganisationsInvolvedInfo info)
+        public OrganisationsInvolvedViewModel(OrganisationsInvolved info)
         {
             NotificationId = info.NotificationId;
             NotificationType = info.NotificationType;

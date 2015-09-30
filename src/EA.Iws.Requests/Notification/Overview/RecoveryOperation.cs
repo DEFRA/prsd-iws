@@ -1,16 +1,12 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Notification.Overview
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Core.Notification;
     using Core.OperationCodes;
     using Core.Shared;
     using Core.TechnologyEmployed;
 
-    public class RecoveryOperationInfo
+    public class RecoveryOperation
     {
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }

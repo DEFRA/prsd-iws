@@ -14,6 +14,8 @@
     public class WasteRecoveryController : Controller
     {
         private readonly IMediator mediator;
+        private const string PercentageKey = "Percentage";
+        private const string EstimatedValueKey = "EstimatedValue";
 
         public WasteRecoveryController(IMediator mediator)
         {
@@ -32,6 +34,11 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, WasteRecoveryViewModel model, bool? backToOverview = null)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             await mediator.SendAsync(new SetWasteRecoveryProvider(model.ProvidedBy.Value, id));
 
             return model.ProvidedBy == ProvidedBy.Notifier
@@ -40,11 +47,30 @@
         }
 
         [HttpGet]
-        public ActionResult Percentage(Guid id, bool? backToOverview = null)
+        public async Task<ActionResult> Percentage(Guid id, bool? backToOverview = null)
         {
-            //TODO: mediator call
+            var percentageRecoverable = await mediator.SendAsync(new GetRecoverablePercentage(id));
 
-            return View();
+            var model = new PercentageViewModel
+            {
+                PercentageRecoverable = percentageRecoverable
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Percentage(Guid id, PercentageViewModel model, bool? backToOverview = null)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData.Add(PercentageKey, model.PercentageRecoverable);
+
+            return RedirectToAction("EstimatedValue", "WasteRecovery", new { backToOverview });
         }
 
         [HttpGet]
@@ -110,6 +136,86 @@
             }
 
             return RedirectToAction("DisposalMethod", "WasteRecovery", new { backToOverview, amount = model.Amount, unit = (int)model.Units});
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EstimatedValue(Guid id, bool? backToOverview = null)
+        {
+            object result;
+            if (TempData.TryGetValue(PercentageKey, out result))
+            {
+                var percentageRecoverable = Convert.ToDecimal(result);
+                var estimatedValue = await mediator.SendAsync(new GetEstimatedValue(id));
+
+                var model = new EstimatedValueViewModel(percentageRecoverable, estimatedValue);
+
+                return View(model);
+            }
+
+            return RedirectToAction("Percentage", "WasteRecovery", new { backToOverview });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EstimatedValue(Guid id, EstimatedValueViewModel model, bool? backToOverview = null)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData.Add(PercentageKey, model.PercentageRecoverable);
+            TempData.Add(EstimatedValueKey, model.GetEstimatedValue());
+            
+            return RedirectToAction("RecoveryCost", "WasteRecovery", new { backToOverview });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> RecoveryCost(Guid id, bool? backToOverview = null)
+        {
+            object percentageResult;
+            object estimatedValueResult;
+
+            if (TempData.TryGetValue(PercentageKey, out percentageResult) 
+                && TempData.TryGetValue(EstimatedValueKey, out estimatedValueResult))
+            {
+                var recoveryCost = await mediator.SendAsync(new GetRecoveryCost(id));
+                var estimatedValue = estimatedValueResult as ValuePerWeightData;
+                var percentage = Convert.ToDecimal(percentageResult);
+
+                var model = new RecoveryCostViewModel(
+                    percentage,
+                    estimatedValue,
+                    recoveryCost);
+
+                return View(model);
+            }
+
+            return RedirectToAction("Percentage", "WasteRecovery", new { backToOverview });
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RecoveryCost(Guid id, RecoveryCostViewModel model, bool? backToOverview)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var saveData = new SaveWasteRecovery(id, 
+                model.PercentageRecoverable, 
+                model.GetEstimatedValue(), 
+                model.GetRecoveryCost());
+
+            await mediator.SendAsync(saveData);
+
+            if (model.PercentageRecoverable < 100)
+            {
+                return RedirectToAction("DisposalCost", "WasteRecovery");
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

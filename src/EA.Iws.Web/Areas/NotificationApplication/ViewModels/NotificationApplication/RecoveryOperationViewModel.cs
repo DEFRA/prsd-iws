@@ -7,7 +7,7 @@
     using Core.Notification;
     using Core.Shared;
     using Core.TechnologyEmployed;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class RecoveryOperationViewModel
     {
@@ -26,7 +26,7 @@
         {
         }
 
-        public RecoveryOperationViewModel(RecoveryOperationInfo recoveryOperationInfo)
+        public RecoveryOperationViewModel(RecoveryOperation recoveryOperationInfo)
         {
             NotificationId = recoveryOperationInfo.NotificationId;
             NotificationType = recoveryOperationInfo.NotificationType;

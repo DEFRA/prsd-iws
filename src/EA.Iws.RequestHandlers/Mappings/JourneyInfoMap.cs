@@ -7,10 +7,10 @@
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Requests.CustomsOffice;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
     using Requests.StateOfExport;
 
-    internal class JourneyInfoMap : IMap<NotificationApplication, JourneyInfo>
+    internal class JourneyInfoMap : IMap<NotificationApplication, Journey>
     {
         private readonly IwsContext context;
         private readonly IMapWithParameter<TransportRoute, Guid, StateOfExportWithTransportRouteData> transportRouteMap;
@@ -29,11 +29,11 @@
             this.customsOfficeExitMap = customsOfficeExitMap;
         }
 
-        public JourneyInfo Map(NotificationApplication notification)
+        public Journey Map(NotificationApplication notification)
         {
             var transportRoute = context.TransportRoutes.SingleOrDefault(p => p.NotificationId == notification.Id);
 
-            return new JourneyInfo
+            return new Journey
             {
                 NotificationId = notification.Id,
                 TransportRoute = transportRouteMap.Map(transportRoute, notification.Id),

@@ -1,69 +1,28 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System.Linq;
-    using Core.Notification;
-    using Core.RecoveryInfo;
-    using DataAccess;
-    using Domain.NotificationApplication;
+    using Domain;
+    using Domain.NotificationApplication.WasteRecovery;
     using Prsd.Core.Mapper;
-    using Requests.Notification;
+    using Requests.WasteRecovery;
+    using WasteRecoveryOverview = Requests.Notification.Overview.WasteRecovery;
 
-    internal class WasteRecoveryInfoMap : IMap<NotificationApplication, WasteRecoveryInfo>
+    internal class WasteRecoveryInfoMap : IMap<WasteRecovery, WasteRecoveryOverview>
     {
-        //TODO: This class should not use a notification anymore...
+        private readonly IMap<ValuePerWeight, ValuePerWeightData> valueMapper;
 
-        private readonly IwsContext context;
-
-        public WasteRecoveryInfoMap(IwsContext context)
+        public WasteRecoveryInfoMap(IMap<ValuePerWeight, ValuePerWeightData> valueMapper)
         {
-            this.context = context;
+            this.valueMapper = valueMapper;
         }
-
-        public WasteRecoveryInfo Map(NotificationApplication notification)
+        public WasteRecoveryOverview Map(WasteRecovery wasteRecovery)
         {
-            return new WasteRecoveryInfo
+            return new WasteRecoveryOverview
             {
-                NotificationId = notification.Id,
-                NotificationType = notification.NotificationType == NotificationType.Disposal
-                        ? Core.Shared.NotificationType.Disposal
-                        : Core.Shared.NotificationType.Recovery,
-                RecoveryInfoData = GetRecoveryInfo(notification),
-                RecoveryPercentageData = GetRecoveryPercentage(notification)
+                NotificationId = wasteRecovery.NotificationId,
+                PercentageRecoverable = wasteRecovery.PercentageRecoverable.Value,
+                EstimatedValue = valueMapper.Map(wasteRecovery.EstimatedValue),
+                RecoveryCost  = valueMapper.Map(wasteRecovery.RecoveryCost)
             };
-        }
-
-        private RecoveryInfoData GetRecoveryInfo(NotificationApplication notification)
-        {
-            var recoveryInfoData = new RecoveryInfoData();
-
-            var recoveryInfo = context.WasteRecoveries.SingleOrDefault(ri => ri.NotificationId == notification.Id);
-
-            if (recoveryInfo != null)
-            {
-                recoveryInfoData.EstimatedAmount = recoveryInfo.EstimatedValue.Amount;
-                recoveryInfoData.EstimatedUnit = recoveryInfo.EstimatedValue.Units;
-                recoveryInfoData.CostAmount = recoveryInfo.RecoveryCost.Amount;
-                recoveryInfoData.CostUnit = recoveryInfo.RecoveryCost.Units;
-               
-                //if (recoveryInfo.DisposalCost != null)
-                //{
-                //    recoveryInfoData.DisposalAmount = recoveryInfo.DisposalCost.Amount;
-                //    recoveryInfoData.DisposalUnit = recoveryInfo.DisposalCost.Units;
-                //}
-            }
-
-            return recoveryInfoData;
-        }
-
-        private RecoveryPercentageData GetRecoveryPercentage(NotificationApplication notification)
-        {
-            var recoveryPercentageData = new RecoveryPercentageData
-            {
-                IsProvidedByImporter = notification.WasteRecoveryInformationProvidedByImporter,
-                //PercentageRecoverable = notification.PercentageRecoverable,
-                //MethodOfDisposal = notification.MethodOfDisposal ?? string.Empty
-            };
-            return recoveryPercentageData;
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
+    using Overview;
     using Prsd.Core.Mediator;
 
-    public class GetNotificationInfo : IRequest<NotificationInfo>
+    public class GetNotificationOverview : IRequest<NotificationOverview>
     {
         public Guid NotificationId { get; set; }
 
-        public GetNotificationInfo(Guid notificationId)
+        public GetNotificationOverview(Guid notificationId)
         {
             NotificationId = notificationId;
         }

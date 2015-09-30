@@ -1,17 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Core.Carriers;
-    using Core.Notification;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
-    internal class TransportationInfoMap : IMap<NotificationApplication, TransportationInfo>
+    internal class TransportationInfoMap : IMap<NotificationApplication, Transportation>
     {
         private readonly IMap<NotificationApplication, IList<CarrierData>> carrierMap;
 
@@ -21,9 +17,9 @@
             this.carrierMap = carrierMap;
         }
 
-        public TransportationInfo Map(NotificationApplication notification)
+        public Transportation Map(NotificationApplication notification)
         {
-            return new TransportationInfo 
+            return new Transportation 
             {
                 NotificationId = notification.Id,
                 Carriers = carrierMap.Map(notification).ToList(),

@@ -9,15 +9,16 @@
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.Notification.Overview;
 
-    internal class GetNotificationInfoInternalHandler : IRequestHandler<GetNotificationInfoInternal, NotificationInfo>
+    internal class GetNotificationInfoInternalHandler : IRequestHandler<GetNotificationInfoInternal, NotificationOverview>
     {
         private readonly IwsContext context;
-        private readonly IMap<NotificationApplication, NotificationInfo> notificationInfoMap;
+        private readonly IMap<NotificationApplication, NotificationOverview> notificationInfoMap;
         private readonly IUserContext userContext;
 
         public GetNotificationInfoInternalHandler(IwsContext context,
-            IMap<NotificationApplication, NotificationInfo> notificationInfoMap,
+            IMap<NotificationApplication, NotificationOverview> notificationInfoMap,
             IUserContext userContext)
         {
             this.context = context;
@@ -25,7 +26,7 @@
             this.userContext = userContext;
         }
 
-        public async Task<NotificationInfo> HandleAsync(GetNotificationInfoInternal message)
+        public async Task<NotificationOverview> HandleAsync(GetNotificationInfoInternal message)
         {
             if (!await context.IsInternalUserAsync(userContext))
             {

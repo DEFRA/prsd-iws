@@ -90,6 +90,7 @@
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\ProviderChangedEvent.cs" />
     <Compile Include="NotificationApplication\NotificationReadOnlyException.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\WasteDisposal.cs" />

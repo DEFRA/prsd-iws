@@ -430,7 +430,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\NotificationApplication\Views\CustomWasteCode\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WasteRecovery\RecoveryValues.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\Percentage.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\StateOfImport\Index.cshtml" />
@@ -617,6 +616,8 @@
     <Content Include="Areas\NotificationAssessment\Views\Decision\_Object.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Decision\_Consent.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Decision\_History.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteRecovery\EstimatedValue.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WasteRecovery\RecoveryCost.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -773,6 +774,8 @@
     <Compile Include="Areas\AddressBook\Controllers\SearchController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReadOnlyController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalMethodViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\EstimatedValueViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\RecoveryCostViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\WasteRecoveryViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\DecisionRecordViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\NotificationAssessmentDecisionViewModel.cs" />
@@ -866,7 +869,7 @@
     <Compile Include="Areas\NotificationApplication\NotificationApplicationAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\DisclaimerViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Producer\ProducerBusinessTypeViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\RecoveryPercentageViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\PercentageViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\PackagingTypesController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SpecialHandlingController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\StateOfImportController.cs" />

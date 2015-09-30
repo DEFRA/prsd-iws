@@ -6,30 +6,31 @@
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.Notification;
+    using Requests.Notification.Overview;
 
-    internal class NotificationInfoMap : IMap<NotificationApplication, NotificationInfo>
+    internal class NotificationInfoMap : IMap<NotificationApplication, NotificationOverview>
     {
         private readonly IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap;
-        private readonly IMap<NotificationApplication, OrganisationsInvolvedInfo> organisationsInvolvedInfoMap;
-        private readonly IMap<NotificationApplication, RecoveryOperationInfo> recoveryOperationInfoMap;
-        private readonly IMap<NotificationApplication, TransportationInfo> transportationInfoMap;
-        private readonly IMap<NotificationApplication, JourneyInfo> journeyInfoMap;
-        private readonly IMap<NotificationApplication, AmountsAndDatesInfo> amountsAndDatesInfoMap;
-        private readonly IMap<NotificationApplication, ClassifyYourWasteInfo> classifyYourWasteInfoMap;
-        private readonly IMap<NotificationApplication, WasteRecoveryInfo> wasteRecoveryInfoMap;
+        private readonly IMap<NotificationApplication, OrganisationsInvolved> organisationsInvolvedInfoMap;
+        private readonly IMap<NotificationApplication, RecoveryOperation> recoveryOperationInfoMap;
+        private readonly IMap<NotificationApplication, Transportation> transportationInfoMap;
+        private readonly IMap<NotificationApplication, Journey> journeyInfoMap;
+        private readonly IMap<NotificationApplication, AmountsAndDates> amountsAndDatesInfoMap;
+        private readonly IMap<NotificationApplication, ClassifyYourWaste> classifyYourWasteInfoMap;
+        private readonly IMap<NotificationApplication, WasteRecovery> wasteRecoveryInfoMap;
         private readonly IMap<NotificationApplication, SubmitSummaryData> submitSummaryDataMap;
         private readonly IMap<NotificationApplication, WasteCodesOverviewInfo> wasteCodesOverviewMap;
         private readonly IwsContext context;
 
         public NotificationInfoMap(
             IMap<NotificationApplication, NotificationApplicationCompletionProgress> completionProgressMap,
-            IMap<NotificationApplication, OrganisationsInvolvedInfo> organisationsInvolvedInfoMap,
-            IMap<NotificationApplication, RecoveryOperationInfo> recoveryOperationInfoMap,
-            IMap<NotificationApplication, TransportationInfo> transportationInfoMap,
-            IMap<NotificationApplication, JourneyInfo> journeyInfoMap,
-            IMap<NotificationApplication, AmountsAndDatesInfo> amountsAndDatesInfoMap,
-            IMap<NotificationApplication, ClassifyYourWasteInfo> classifyYourWasteInfoMap,
-            IMap<NotificationApplication, WasteRecoveryInfo> wasteRecoveryInfoMap,
+            IMap<NotificationApplication, OrganisationsInvolved> organisationsInvolvedInfoMap,
+            IMap<NotificationApplication, RecoveryOperation> recoveryOperationInfoMap,
+            IMap<NotificationApplication, Transportation> transportationInfoMap,
+            IMap<NotificationApplication, Journey> journeyInfoMap,
+            IMap<NotificationApplication, AmountsAndDates> amountsAndDatesInfoMap,
+            IMap<NotificationApplication, ClassifyYourWaste> classifyYourWasteInfoMap,
+            IMap<NotificationApplication, WasteRecovery> wasteRecoveryInfoMap,
             IMap<NotificationApplication, SubmitSummaryData> submitSummaryDataMap,
             IMap<NotificationApplication, WasteCodesOverviewInfo> wasteCodesOverviewMap,
             IwsContext context)
@@ -47,7 +48,7 @@
             this.context = context;
         }
 
-        public NotificationInfo Map(NotificationApplication notification)
+        public NotificationOverview Map(NotificationApplication notification)
         {
             var assessment = context.NotificationAssessments.Single(na => na.NotificationApplicationId == notification.Id);
             var notificationCompletionProgress = completionProgressMap.Map(notification);
@@ -62,7 +63,7 @@
             var wasteRecoveryInfo = GetWasteRecoveryInfo(notification, notificationCompletionProgress);
             var submitSummaryData = GetSubmitSummaryData(notification, notificationCompletionProgress);
 
-            return new NotificationInfo
+            return new NotificationOverview
             {
                 NotificationId = notification.Id,
                 CompetentAuthority = (CompetentAuthority)notification.CompetentAuthority.Value,
@@ -88,11 +89,11 @@
             return submitSummaryData;
         }
 
-        private WasteRecoveryInfo GetWasteRecoveryInfo(NotificationApplication notification,
+        private WasteRecovery GetWasteRecoveryInfo(NotificationApplication notification,
             NotificationApplicationCompletionProgress notificationCompletionProgress)
         {
             var wasteRecoveryInfo = wasteRecoveryInfoMap.Map(notification);
-            wasteRecoveryInfo.IsWasteRecoveryInformationCompleted = notificationCompletionProgress.HasRecoveryData;
+            //wasteRecoveryInfo.IsWasteRecoveryInformationCompleted = notificationCompletionProgress.HasRecoveryData;
             return wasteRecoveryInfo;
         }
 
@@ -110,7 +111,7 @@
             return wasteCodesOverviewInfo;
         }
 
-        private ClassifyYourWasteInfo GetClassifyYourWasteInfo(NotificationApplication notification,
+        private ClassifyYourWaste GetClassifyYourWasteInfo(NotificationApplication notification,
             NotificationApplicationCompletionProgress notificationCompletionProgress)
         {
             var classifyYourWasteInfo = classifyYourWasteInfoMap.Map(notification);
@@ -121,7 +122,7 @@
             return classifyYourWasteInfo;
         }
 
-        private AmountsAndDatesInfo GetAmountsAndDatesInfo(NotificationApplication notification,
+        private AmountsAndDates GetAmountsAndDatesInfo(NotificationApplication notification,
             NotificationApplicationCompletionProgress notificationCompletionProgress)
         {
             var amountsAndDatesInfo = amountsAndDatesInfoMap.Map(notification);
@@ -129,7 +130,7 @@
             return amountsAndDatesInfo;
         }
 
-        private JourneyInfo GetJourneyInfo(NotificationApplication notification,
+        private Journey GetJourneyInfo(NotificationApplication notification,
             NotificationApplicationCompletionProgress notificationCompletionProgress)
         {
             var journeyInfo = journeyInfoMap.Map(notification);
@@ -140,7 +141,7 @@
             return journeyInfo;
         }
 
-        private TransportationInfo GetTransportationInfo(NotificationApplication notification,
+        private Transportation GetTransportationInfo(NotificationApplication notification,
             NotificationApplicationCompletionProgress notificationCompletionProgress)
         {
             var transportationInfo = transportationInfoMap.Map(notification);
@@ -151,7 +152,7 @@
             return transportationInfo;
         }
 
-        private RecoveryOperationInfo GetRecoveryOperationInfo(NotificationApplication notification,
+        private RecoveryOperation GetRecoveryOperationInfo(NotificationApplication notification,
             NotificationApplicationCompletionProgress notificationCompletionProgress)
         {
             var recoveryOperationInfo = recoveryOperationInfoMap.Map(notification);
@@ -162,7 +163,7 @@
             return recoveryOperationInfo;
         }
 
-        private OrganisationsInvolvedInfo GetOrganisationsInvolvedInfo(NotificationApplication notification,
+        private OrganisationsInvolved GetOrganisationsInvolvedInfo(NotificationApplication notification,
             NotificationApplicationCompletionProgress notificationCompletionProgress)
         {
             var organisationsInvolvedInfo = organisationsInvolvedInfoMap.Map(notification);

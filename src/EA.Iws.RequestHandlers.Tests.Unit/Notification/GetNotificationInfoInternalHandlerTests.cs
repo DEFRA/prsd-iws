@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Notification
 {
     using System;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using RequestHandlers.Notification;
     using Requests.Notification;
+    using Requests.Notification.Overview;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -73,7 +73,7 @@
         [Fact]
         public async Task ReturnsNotificationInfo()
         {
-            map.NotificationInfo = new NotificationInfo
+            map.NotificationInfo = new NotificationOverview
             {
                 NotificationId = NotificationId
             };
@@ -83,15 +83,15 @@
             Assert.Equal(NotificationId, result.NotificationId);
         }
 
-        private class TestMap : IMap<NotificationApplication, NotificationInfo>
+        private class TestMap : IMap<NotificationApplication, NotificationOverview>
         {
-            public NotificationInfo NotificationInfo { get; set; }
+            public NotificationOverview NotificationInfo { get; set; }
 
             public bool MapCalled { get; set; }
 
             public NotificationApplication ObjectMapRequestedFor { get; set; }
 
-            public NotificationInfo Map(NotificationApplication source)
+            public NotificationOverview Map(NotificationApplication source)
             {
                 MapCalled = true;
                 ObjectMapRequestedFor = source;
