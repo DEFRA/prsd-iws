@@ -10,6 +10,10 @@
     display: none;
 }
 
+.table-container{
+    padding: 0 $gutter;
+}
+
 .tabbed-nav{
     border-bottom: 1px solid $border-colour;
     margin-bottom: 21px;

@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Core.Shared
+﻿@using EA.Iws.Core.AddressBook
+@using EA.Iws.Core.Shared
 @model EA.Iws.Web.ViewModels.Shared.BusinessTypeViewModel
 
 @{
@@ -11,12 +12,24 @@
     string otherRegistrationNumber = ViewBag.OtherRegistrationNumber;
     string otherAdditionalRegistrationNumber = ViewBag.OtherAdditionalRegistrationNumber;
     string nonJavascriptMessage = ViewBag.NonJavascriptMessage;
+    AddressRecordType? addressType = ViewBag.AddressType;
 }
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
     @Html.Gds().LabelFor(m => m.Name)
     @Html.Gds().ValidationMessageFor(m => m.Name)
-    @Html.Gds().TextBoxFor(m => m.Name)
+    @if (addressType.HasValue)
+    {
+        @Html.Gds().TextBoxFor(m => m.Name, new
+        {
+            data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+            data_addressbook_type = addressType.Value.ToString()
+        })
+    }
+    else
+    {
+        @Html.Gds().TextBoxFor(m => m.Name)
+    }
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">

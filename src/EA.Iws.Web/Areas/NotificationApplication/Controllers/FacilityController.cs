@@ -6,9 +6,11 @@
     using System.Web.Mvc;
     using Core.Shared;
     using Infrastructure;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
+    using Requests.AddressBook;
     using Requests.Facilities;
     using Requests.Notification;
     using ViewModels.Facility;
@@ -18,11 +20,13 @@
     [NotificationReadOnlyFilter]
     public class FacilityController : Controller
     {
-        private readonly IMediator client;
+        private readonly IMediator mediator;
+        private readonly IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap;
 
-        public FacilityController(IMediator client)
+        public FacilityController(IMediator mediator, IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap)
         {
-            this.client = client;
+            this.mediator = mediator;
+            this.addFacilityAddressBookMap = addFacilityAddressBookMap;
         }
 
         [HttpGet]
@@ -31,11 +35,11 @@
             var facility = new AddFacilityViewModel();
 
             var response =
-                await client.SendAsync(new GetNotificationBasicInfo(id));
+                await mediator.SendAsync(new GetNotificationBasicInfo(id));
             facility.NotificationType = response.NotificationType;
             facility.NotificationId = id;
 
-            await this.BindCountryList(client, false);
+            await this.BindCountryList(mediator, false);
             facility.Address.DefaultCountryId = this.GetDefaultCountryId();
 
             return View(facility);
@@ -47,13 +51,18 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(client, false);
+                await this.BindCountryList(mediator, false);
                 return View(model);
             }
 
             try
             {
-                await client.SendAsync(model.ToRequest());
+                await mediator.SendAsync(model.ToRequest());
+
+                if (model.IsAddedToAddressBook)
+                {
+                    await mediator.SendAsync(addFacilityAddressBookMap.Map(model));
+                }
 
                 return RedirectToAction("List", "Facility",
                     new { id = model.NotificationId, backToOverview });
@@ -66,7 +75,7 @@
                     throw;
                 }
             }
-            await this.BindCountryList(client, false);
+            await this.BindCountryList(mediator, false);
             return View(model);
         }
 
@@ -75,14 +84,14 @@
         {
             var facility =
                 await
-                    client.SendAsync(new GetFacilityForNotification(id, entityId));
+                    mediator.SendAsync(new GetFacilityForNotification(id, entityId));
 
             var response =
-                await client.SendAsync(new GetNotificationBasicInfo(id));
+                await mediator.SendAsync(new GetNotificationBasicInfo(id));
 
             var model = new EditFacilityViewModel(facility) { NotificationType = response.NotificationType };
 
-            await this.BindCountryList(client, false);
+            await this.BindCountryList(mediator, false);
             facility.Address.DefaultCountryId = this.GetDefaultCountryId();
 
             return View(model);
@@ -94,7 +103,7 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(client, false);
+                await this.BindCountryList(mediator, false);
                 return View(model);
             }
 
@@ -102,7 +111,12 @@
             {
                 var request = model.ToRequest();
 
-                await client.SendAsync(request);
+                await mediator.SendAsync(request);
+
+                if (model.IsAddedToAddressBook)
+                {
+                    await mediator.SendAsync(addFacilityAddressBookMap.Map(model));
+                }
 
                 return RedirectToAction("List", "Facility",
                     new { id = model.NotificationId, backToOverview });
@@ -116,8 +130,7 @@
                     throw;
                 }
             }
-
-            await this.BindCountryList(client, false);
+            await this.BindCountryList(mediator, false);
             return View(model);
         }
 
@@ -129,10 +142,10 @@
             var model = new MultipleFacilitiesViewModel();
 
             var response =
-                await client.SendAsync(new GetFacilitiesByNotificationId(id));
+                await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
 
             var notificationInfo =
-                await client.SendAsync(new GetNotificationBasicInfo(id));
+                await mediator.SendAsync(new GetNotificationBasicInfo(id));
 
             model.NotificationId = id;
             model.FacilityData = response;
@@ -147,10 +160,10 @@
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
             var response =
-                await client.SendAsync(new GetFacilitiesByNotificationId(id));
+                await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
 
             var notificationInfo =
-                await client.SendAsync(new GetNotificationBasicInfo(id));
+                await mediator.SendAsync(new GetNotificationBasicInfo(id));
 
             var model = new SiteOfTreatmentViewModel
             {
@@ -167,17 +180,10 @@
         public async Task<ActionResult> SiteOfTreatment(SiteOfTreatmentViewModel model, bool? backToList,
             bool? backToOverview = null)
         {
-            ViewBag.BackToOverview = backToOverview ?? false;
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             try
             {
                 await
-                    client.SendAsync(
+                    mediator.SendAsync(
                         new SetActualSiteOfTreatment(model.SelectedSiteOfTreatment.GetValueOrDefault(),
                             model.NotificationId));
 
@@ -212,7 +218,7 @@
         public async Task<ActionResult> RecoveryPreconsent(Guid id, bool? backToOverview = null)
         {
             var preconsentedFacilityData =
-                await client.SendAsync(new GetIsPreconsentedRecoveryFacility(id));
+                await mediator.SendAsync(new GetIsPreconsentedRecoveryFacility(id));
 
             if (preconsentedFacilityData.NotificationType == NotificationType.Disposal)
             {
@@ -237,7 +243,7 @@
 
             var isPreconsented = model.Value.Value;
 
-            await client.SendAsync(new SetPreconsentedRecoveryFacility(id, isPreconsented));
+            await mediator.SendAsync(new SetPreconsentedRecoveryFacility(id, isPreconsented));
 
             if (backToOverview.GetValueOrDefault())
             {
@@ -252,9 +258,9 @@
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
             var notificationInfo =
-                await client.SendAsync(new GetNotificationBasicInfo(id));
+                await mediator.SendAsync(new GetNotificationBasicInfo(id));
 
-            var response = await client.SendAsync(new GetFacilitiesByNotificationId(id));
+            var response = await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
             var facility = response.Single(p => p.Id == entityId);
 
             var model = new RemoveFacilityViewModel
@@ -283,7 +289,7 @@
         {
             try
             {
-                await client.SendAsync(new DeleteFacilityForNotification(model.NotificationId, model.FacilityId));
+                await mediator.SendAsync(new DeleteFacilityForNotification(model.NotificationId, model.FacilityId));
                 return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });
             }
             catch (ApiBadRequestException ex)

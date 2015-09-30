@@ -10,26 +10,39 @@
 
 @Html.Partial("_Navigation")
 
-@for (int i = 0; i < Model.AddressRecords.Count; i += 2)
+@if (Model.AddressRecords.Count > 0)
 {
-    <div class="grid-row form-group">
-        @for (int j = i; j < i + 2 && j < Model.AddressRecords.Count; j++)
-        {
-            <div class="column-half">
-                <div class="address-record">
-                    <h2 class="heading-small">@Html.DisplayFor(m => m.AddressRecords[j].BusinessData.Name)</h2>
-                    <h3>Address</h3>
-                    @Html.DisplayFor(m => m.AddressRecords[j].AddressData)
-                    <h3>Contact</h3>
-                    @Html.DisplayFor(m => m.AddressRecords[j].ContactData)
-                    <ul class="inline-list">
-                        <li>@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[j].Id, type = Model.Type }, null)</li>
-                    </ul>
-                </div>
-            </div>
-        }
+    <div class="form-group table-container">
+        <table title="Address book records">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (int i = 0; i < Model.AddressRecords.Count; i++)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
+                    <td>
+                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
+                        @if (Model.AddressRecords[i].AddressData.Address2 != null)
+                        {
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
+                        }
+                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
+                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
+                    </td>
+                    <td>@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
-}
+} 
+
 @if (Model.AddressRecords.Count == 0)
 {
     <p>You have no address records for this business type</p>

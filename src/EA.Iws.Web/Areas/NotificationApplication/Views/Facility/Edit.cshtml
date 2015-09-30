@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.EditFacilityViewModel
+﻿@using EA.Iws.Core.AddressBook
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.EditFacilityViewModel
 @{
     ViewBag.Title = "Edit a facility";
 
@@ -11,6 +12,7 @@
     ViewBag.SoleTraderRegistrationNumber = message;
     ViewBag.OtherRegistrationNumber = message;
     ViewBag.NonJavascriptMessage = message;
+    ViewBag.AddressType = AddressRecordType.Facility;
 }
 
 @using (Html.BeginForm())
@@ -35,6 +37,13 @@
     <hr />
     <p>This should be the contact person for the @facilityType facility.</p>
     @Html.EditorFor(m => m.Contact)
+
+    <div class="form-group no-js-hidden">
+        <label class="block-label" for="addressBook">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            Add as new address to address book
+        </label>
+    </div>
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }

@@ -10,6 +10,7 @@
     using Core.Notification;
     using Core.Shared;
     using FakeItEasy;
+    using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Facilities;
     using Requests.Notification;
@@ -54,7 +55,7 @@
                     NotificationType = NotificationType.Recovery
                 });
 
-            facilityController = new FacilityController(mediator);
+            facilityController = new FacilityController(mediator, new AddAddressBookEntryMap());
         }
 
         private AddFacilityViewModel CreateValidAddFacility()
