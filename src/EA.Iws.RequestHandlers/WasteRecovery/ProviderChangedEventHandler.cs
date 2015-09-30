@@ -1,17 +1,17 @@
-﻿namespace EA.Iws.RequestHandlers.RecoveryInfo
+﻿namespace EA.Iws.RequestHandlers.WasteRecovery
 {
     using System.Threading.Tasks;
     using Core.Shared;
     using DataAccess;
-    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.WasteRecovery;
     using Prsd.Core.Domain;
 
     internal class ProviderChangedEventHandler : IEventHandler<ProviderChangedEvent>
     {
         private readonly IwsContext context;
-        private readonly IRecoveryInfoRepository repository;
+        private readonly IWasteRecoveryRepository repository;
 
-        public ProviderChangedEventHandler(IwsContext context, IRecoveryInfoRepository repository)
+        public ProviderChangedEventHandler(IwsContext context, IWasteRecoveryRepository repository)
         {
             this.context = context;
             this.repository = repository;
@@ -21,11 +21,11 @@
         {
             if (@event.NewProvider == ProvidedBy.Importer)
             {
-                var recoveryInfo = await repository.GetByNotificationId(@event.NotificationId);
+                var wasteRecovery = await repository.GetByNotificationId(@event.NotificationId);
 
-                if (recoveryInfo != null)
+                if (wasteRecovery != null)
                 {
-                    repository.Delete(recoveryInfo);
+                    repository.Delete(wasteRecovery);
                     await context.SaveChangesAsync();
                 }
             }

@@ -4,33 +4,33 @@
     using System.Linq;
     using Core.Shared;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.WasteRecovery;
     using Xunit;
     using NotificationType = Domain.NotificationApplication.NotificationType;
 
-    public class NotificationRecoveryInfoTests
+    public class NotificationWasteRecoveryTests
     {
         [Fact]
-        public void CanAddRecoveryInfoValues()
+        public void CanAddWasteRecoveryValues()
         {
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
             var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
 
-            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), new Percentage(50), estimatedValue, recoveryCost, disposalCost);
+            var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(50), estimatedValue, recoveryCost, disposalCost);
 
-            Assert.NotNull(recoveryInfo);
+            Assert.NotNull(wasteRecovery);
         }
 
         [Fact]
-        public void CanAddRecoveryInfoValues_WithoutDisposal()
+        public void CanAddWasteRecoveryValues_WithoutDisposal()
         {
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
 
-            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), new Percentage(100), estimatedValue, recoveryCost, null);
+            var wasteRecovery = new WasteRecovery(Guid.NewGuid(), new Percentage(100), estimatedValue, recoveryCost, null);
 
-            Assert.NotNull(recoveryInfo);
+            Assert.NotNull(wasteRecovery);
         }
 
         [Fact]
@@ -69,7 +69,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
 
-            notification.SetRecoveryInformationProvider(ProvidedBy.Importer);
+            notification.SetWasteRecoveryInformationProvider(ProvidedBy.Importer);
 
             Assert.Equal(ProvidedBy.Importer, notification.Events.OfType<ProviderChangedEvent>().SingleOrDefault().NewProvider);
         }

@@ -86,10 +86,10 @@
             set { PhysicalCharacteristicsCollection = value; }
         } 
 
-        public new bool? RecoveryInformationProvidedByImporter
+        public new bool? WasteRecoveryInformationProvidedByImporter
         {
-            get { return base.RecoveryInformationProvidedByImporter; }
-            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.RecoveryInformationProvidedByImporter, value, this); }
+            get { return base.WasteRecoveryInformationProvidedByImporter; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteRecoveryInformationProvidedByImporter, value, this); }
         }
     }
 }

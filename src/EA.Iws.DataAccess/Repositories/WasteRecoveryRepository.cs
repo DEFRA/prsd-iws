@@ -3,29 +3,29 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
-    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.WasteRecovery;
     using Domain.Security;
 
-    internal class RecoveryInfoRepository : IRecoveryInfoRepository
+    internal class WasteRecoveryRepository : IWasteRecoveryRepository
     {
         private readonly IwsContext context;
         private readonly INotificationApplicationAuthorization notificationApplicationAuthorization;
 
-        public RecoveryInfoRepository(IwsContext context, INotificationApplicationAuthorization notificationApplicationAuthorization)
+        public WasteRecoveryRepository(IwsContext context, INotificationApplicationAuthorization notificationApplicationAuthorization)
         {
             this.context = context;
             this.notificationApplicationAuthorization = notificationApplicationAuthorization;
         }
 
-        public void Delete(RecoveryInfo recoveryInfo)
+        public void Delete(WasteRecovery wasteRecovery)
         {
-            context.DeleteOnCommit(recoveryInfo);
+            context.DeleteOnCommit(wasteRecovery);
         }
 
-        public async Task<RecoveryInfo> GetByNotificationId(Guid notificationId)
+        public async Task<WasteRecovery> GetByNotificationId(Guid notificationId)
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
-            return await context.RecoveryInfos.SingleOrDefaultAsync(ri => ri.NotificationId == notificationId);
+            return await context.WasteRecoveries.SingleOrDefaultAsync(ri => ri.NotificationId == notificationId);
         }
     }
 }

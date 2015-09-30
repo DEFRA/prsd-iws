@@ -1,29 +1,27 @@
-﻿namespace EA.Iws.RequestHandlers.RecoveryInfo
+﻿namespace EA.Iws.RequestHandlers.WasteRecovery
 {
-    using System;
     using System.Threading.Tasks;
-    using Core.Shared;
     using DataAccess;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
-    using Requests.RecoveryInfo;
+    using Requests.WasteRecovery;
 
-    internal class SetRecoveryInfoProviderHandler : IRequestHandler<SetRecoveryInfoProvider, bool>
+    internal class SetWasteRecoveryProviderHandler : IRequestHandler<SetWasteRecoveryProvider, bool>
     {
         private readonly IwsContext context;
         private readonly INotificationApplicationRepository repository;
 
-        public SetRecoveryInfoProviderHandler(INotificationApplicationRepository repository, IwsContext context)
+        public SetWasteRecoveryProviderHandler(INotificationApplicationRepository repository, IwsContext context)
         {
             this.repository = repository;
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(SetRecoveryInfoProvider message)
+        public async Task<bool> HandleAsync(SetWasteRecoveryProvider message)
         {
             var notification = await repository.GetById(message.NotificationId);
 
-            notification.SetRecoveryInformationProvider(message.ProvidedBy);
+            notification.SetWasteRecoveryInformationProvider(message.ProvidedBy);
 
             await context.SaveChangesAsync();
 

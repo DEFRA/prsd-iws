@@ -1,14 +1,14 @@
-﻿namespace EA.Iws.Requests.RecoveryInfo
+﻿namespace EA.Iws.Requests.WasteRecovery
 {
     using System;
     using Core.Shared;
     using Prsd.Core.Mediator;
 
-    public class GetRecoveryInfoProvider : IRequest<ProvidedBy?>
+    public class GetWasteRecoveryProvider : IRequest<ProvidedBy?>
     {
         public Guid NotificationId { get; private set; }
 
-        public GetRecoveryInfoProvider(Guid notificationId)
+        public GetWasteRecoveryProvider(Guid notificationId)
         {
             NotificationId = notificationId;
         }

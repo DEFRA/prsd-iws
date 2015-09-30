@@ -5,18 +5,14 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
-    using DataAccess.Repositories;
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
-    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;
-    using RequestHandlers.Notification;
     using Requests.Copy;
     using TestHelpers.Helpers;
     using Xunit;

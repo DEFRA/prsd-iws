@@ -108,7 +108,7 @@
     <Compile Include="Mappings\PhysicalCharacteristicTypeMapping.cs" />
     <Compile Include="Mappings\PricingStructureMapping.cs" />
     <Compile Include="Mappings\RecoveryCostMapping.cs" />
-    <Compile Include="Mappings\RecoveryInfoMapping.cs" />
+    <Compile Include="Mappings\WasteRecoveryMapping.cs" />
     <Compile Include="Mappings\ShipmentPeriodMapping.cs" />
     <Compile Include="Mappings\ShipmentQuantityRangeMapping.cs" />
     <Compile Include="Mappings\TechnologyEmployedMapping.cs" />
@@ -145,7 +145,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressBookRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />
-    <Compile Include="Repositories\RecoveryInfoRepository.cs" />
+    <Compile Include="Repositories\WasteRecoveryRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentRepository.cs" />
     <Compile Include="Repositories\TransportRouteRepository.cs" />
     <Compile Include="Security\NotificationApplicationAuthorization.cs" />

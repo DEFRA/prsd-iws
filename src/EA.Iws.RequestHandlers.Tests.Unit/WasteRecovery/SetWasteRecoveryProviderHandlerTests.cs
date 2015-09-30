@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.RecoveryInfo
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.WasteRecovery
 {
     using System;
     using System.Linq;
@@ -6,19 +6,19 @@
     using Core.Shared;
     using Domain.NotificationApplication;
     using FakeItEasy;
-    using RequestHandlers.RecoveryInfo;
-    using Requests.RecoveryInfo;
+    using RequestHandlers.WasteRecovery;
+    using Requests.WasteRecovery;
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class SetRecoveryInfoProviderHandlerTests
+    public class SetWasteRecoveryProviderHandlerTests
     {
         private static readonly Guid NotificationId = Guid.NewGuid();
         private readonly TestIwsContext context;
         private readonly INotificationApplicationRepository repository;
-        private readonly SetRecoveryInfoProviderHandler handler;
+        private readonly SetWasteRecoveryProviderHandler handler;
 
-        public SetRecoveryInfoProviderHandlerTests()
+        public SetWasteRecoveryProviderHandlerTests()
         {
             context = new TestIwsContext();
             repository = A.Fake<INotificationApplicationRepository>();
@@ -31,13 +31,13 @@
             context.NotificationApplications.Add(notification);
             A.CallTo(() => repository.GetById(NotificationId)).Returns(notification);
 
-            handler = new SetRecoveryInfoProviderHandler(repository, context);
+            handler = new SetWasteRecoveryProviderHandler(repository, context);
         }
 
         [Fact]
         public async Task CallsSaveChanges()
         {
-            await handler.HandleAsync(new SetRecoveryInfoProvider(ProvidedBy.Importer, NotificationId));
+            await handler.HandleAsync(new SetWasteRecoveryProvider(ProvidedBy.Importer, NotificationId));
 
             Assert.Equal(1, context.SaveChangesCount);
         }
@@ -45,21 +45,21 @@
         [Fact]
         public async Task IsProvidedByImporter_False_WhenSetWithNotifier()
         {
-            await handler.HandleAsync(new SetRecoveryInfoProvider(ProvidedBy.Notifier, NotificationId));
+            await handler.HandleAsync(new SetWasteRecoveryProvider(ProvidedBy.Notifier, NotificationId));
 
             var notification = context.NotificationApplications.Single(n => n.Id == NotificationId);
 
-            Assert.False(notification.RecoveryInformationProvidedByImporter);
+            Assert.False(notification.WasteRecoveryInformationProvidedByImporter);
         }
 
         [Fact]
         public async Task IsProvidedByImporter_True_WhenSetWithImporter()
         {
-            await handler.HandleAsync(new SetRecoveryInfoProvider(ProvidedBy.Importer, NotificationId));
+            await handler.HandleAsync(new SetWasteRecoveryProvider(ProvidedBy.Importer, NotificationId));
 
             var notification = context.NotificationApplications.Single(n => n.Id == NotificationId);
 
-            Assert.True(notification.RecoveryInformationProvidedByImporter);
+            Assert.True(notification.WasteRecoveryInformationProvidedByImporter);
         }
     }
 }

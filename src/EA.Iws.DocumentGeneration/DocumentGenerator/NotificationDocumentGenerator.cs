@@ -3,16 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using DataAccess;
+    using System.Threading.Tasks;
     using DocumentFormat.OpenXml.Packaging;
     using Domain;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
     using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationApplication.WasteRecovery;
     using Domain.TransportRoute;
     using Formatters;
     using NotificationBlocks;
-    using System.Threading.Tasks;
 
     public class NotificationDocumentGenerator : INotificationDocumentGenerator
     {
@@ -21,17 +20,17 @@
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly ITransportRouteRepository transportRouteRepository;
-        private readonly IRecoveryInfoRepository recoveryInfoRepository;
+        private readonly IWasteRecoveryRepository wasteRecoveryRepository;
 
         public NotificationDocumentGenerator(INotificationApplicationRepository notificationRepository,
             IShipmentInfoRepository shipmentInfoRepository,
             ITransportRouteRepository transportRouteRepository,
-            IRecoveryInfoRepository recoveryInfoRepository)
+            IWasteRecoveryRepository wasteRecoveryRepository)
         {
             this.notificationRepository = notificationRepository;
             this.shipmentInfoRepository = shipmentInfoRepository;
             this.transportRouteRepository = transportRouteRepository;
-            this.recoveryInfoRepository = recoveryInfoRepository;
+            this.wasteRecoveryRepository = wasteRecoveryRepository;
         }
 
         public async Task<byte[]> GenerateNotificationDocument(Guid notificationId)
@@ -43,14 +42,14 @@
                     var notification = await notificationRepository.GetById(notificationId);
                     var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
                     var transportRoute = await transportRouteRepository.GetByNotificationId(notificationId);
-                    var recoveryInfo = await recoveryInfoRepository.GetByNotificationId(notificationId);
+                    var wasteRecovery = await wasteRecoveryRepository.GetByNotificationId(notificationId);
 
                     ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, shipmentInfo);
 
                     // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 
-                    var blocks = GetBlocks(notification, shipmentInfo, transportRoute, recoveryInfo, mergeFields);
+                    var blocks = GetBlocks(notification, shipmentInfo, transportRoute, wasteRecovery, mergeFields);
 
                     foreach (var block in blocks)
                     {
@@ -85,7 +84,7 @@
             }
         }
 
-        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, RecoveryInfo recoveryInfo, IList<MergeField> mergeFields)
+        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, WasteRecovery wasteRecovery, IList<MergeField> mergeFields)
         {
             return new List<IDocumentBlock>
             {
@@ -95,7 +94,7 @@
                 new ImporterBlock(mergeFields, notification),
                 new FacilityBlock(mergeFields, notification),
                 new OperationBlock(mergeFields, notification),
-                new RecoveryInfoBlock(mergeFields, notification, recoveryInfo),
+                new WasteRecoveryBlock(mergeFields, notification, wasteRecovery),
                 new CarrierBlock(mergeFields, notification),
                 new SpecialHandlingBlock(mergeFields, notification),
                 new WasteCompositionBlock(mergeFields, notification),

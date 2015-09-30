@@ -6,19 +6,19 @@
     using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.WasteRecovery;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using Xunit;
     using NotificationType = Domain.NotificationApplication.NotificationType;
 
     [Trait("Category", "Integration")]
-    public class RecoveryInfoIntegration
+    public class WasteRecoveryIntegration
     {
         private readonly IwsContext context;
         private readonly IEventDispatcher eventDispatcher;
 
-        public RecoveryInfoIntegration()
+        public WasteRecoveryIntegration()
         {
             var userContext = A.Fake<IUserContext>();
 
@@ -30,26 +30,26 @@
         }
 
         [Fact]
-        public async Task CanAddRecoveryInfo()
+        public async Task CanAddWasteRecovery()
         {
             NotificationApplication notification = await CreateNotification();
-            RecoveryInfo recoveryInfo = await CreateRecoveryInfo(notification);
+            WasteRecovery wasteRecovery = await CreateWasteRecovery(notification);
 
-            Assert.NotNull(context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id));
+            Assert.NotNull(context.WasteRecoveries.SingleOrDefault(ri => ri.NotificationId == notification.Id));
 
-            await DeleteEntity(recoveryInfo);
+            await DeleteEntity(wasteRecovery);
             await DeleteEntity(notification);
         }
 
         [Fact]
-        public async Task CanAddRecoveryInfo_WithoutDisposal()
+        public async Task CanAddWasteRecovery_WithoutDisposal()
         {
             NotificationApplication notification = await CreateNotification();
-            RecoveryInfo recoveryInfo = await CreateRecoveryInfo(notification, withDisposal: false);
+            WasteRecovery wasteRecovery = await CreateWasteRecovery(notification, withDisposal: false);
 
-            Assert.NotNull(context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id));
+            Assert.NotNull(context.WasteRecoveries.SingleOrDefault(ri => ri.NotificationId == notification.Id));
 
-            await DeleteEntity(recoveryInfo);
+            await DeleteEntity(wasteRecovery);
             await DeleteEntity(notification);
         }
         
@@ -59,11 +59,11 @@
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
             UKCompetentAuthority.England, 0);
 
-            notification.SetRecoveryInformationProvider(ProvidedBy.Importer);
+            notification.SetWasteRecoveryInformationProvider(ProvidedBy.Importer);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.RecoveryInformationProvidedByImporter);
+            Assert.True(notification.WasteRecoveryInformationProvidedByImporter);
 
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
@@ -79,25 +79,25 @@
             return notification;
         }
 
-        private async Task<RecoveryInfo> CreateRecoveryInfo(NotificationApplication notification, bool withDisposal = true)
+        private async Task<WasteRecovery> CreateWasteRecovery(NotificationApplication notification, bool withDisposal = true)
         {
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
             var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
             
-            RecoveryInfo recoveryInfo;
+            WasteRecovery wasteRecovery;
             if (withDisposal)
             {
-                recoveryInfo = new RecoveryInfo(notification.Id, new Percentage(50), estimatedValue, recoveryCost, disposalCost);
+                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(50), estimatedValue, recoveryCost, disposalCost);
             }
             else
             {
-                recoveryInfo = new RecoveryInfo(notification.Id, new Percentage(100), estimatedValue, recoveryCost, new DisposalCost(null, null));
+                wasteRecovery = new WasteRecovery(notification.Id, new Percentage(100), estimatedValue, recoveryCost, new DisposalCost(null, null));
             }
 
-            context.RecoveryInfos.Add(recoveryInfo);
+            context.WasteRecoveries.Add(wasteRecovery);
             await context.SaveChangesAsync();
-            return recoveryInfo;
+            return wasteRecovery;
         }
 
         private async Task DeleteEntity(Entity entity)

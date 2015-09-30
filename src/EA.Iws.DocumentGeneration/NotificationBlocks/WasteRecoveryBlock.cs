@@ -2,22 +2,22 @@
 {
     using System.Collections.Generic;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.WasteRecovery;
     using Formatters;
     using Mapper;
     using ViewModels;
 
-    internal class RecoveryInfoBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
+    internal class WasteRecoveryBlock : AnnexBlockBase, IDocumentBlock, IAnnexedBlock
     {
         private const string RecoveryInfo = "RecovInfo";
-        private readonly RecoveryInfoViewModel data;
+        private readonly WasteRecoveryViewModel data;
 
-        public RecoveryInfoBlock(IList<MergeField> mergeFields, NotificationApplication notification, RecoveryInfo recoveryInfo)
+        public WasteRecoveryBlock(IList<MergeField> mergeFields, NotificationApplication notification, WasteRecovery wasteRecovery)
         {
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
 
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new RecoveryInfoViewModel(notification, recoveryInfo, new RecoveryInfoFormatter());
+            data = new WasteRecoveryViewModel(notification, wasteRecovery, new WasteRecoveryFormatter());
 
             if (notification.NotificationType == NotificationType.Disposal)
             {
@@ -29,7 +29,7 @@
             {
                 HasAnnex = true;
 
-                if (notification.RecoveryInformationProvidedByImporter.GetValueOrDefault())
+                if (notification.WasteRecoveryInformationProvidedByImporter.GetValueOrDefault())
                 {
                     HasAnnex = false;
 
@@ -40,7 +40,7 @@
 
         private void MergeMainDocumentBlock()
         {
-            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(RecoveryInfoViewModel));
+            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(WasteRecoveryViewModel));
             foreach (var field in CorrespondingMergeFields)
             {
                 MergeFieldDataMapper.BindCorrespondingField(field, data, properties);
@@ -71,10 +71,10 @@
 
         public void GenerateAnnex(int annexNumber)
         {
-            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(RecoveryInfoViewModel));
+            var properties = PropertyHelper.GetPropertiesForViewModel(typeof(WasteRecoveryViewModel));
             foreach (var field in CorrespondingMergeFields)
             {
-                MergeFieldDataMapper.BindCorrespondingField(field, new RecoveryInfoViewModel(data, annexNumber), properties);
+                MergeFieldDataMapper.BindCorrespondingField(field, new WasteRecoveryViewModel(data, annexNumber), properties);
             }
 
             foreach (var annexMergeField in AnnexMergeFields)

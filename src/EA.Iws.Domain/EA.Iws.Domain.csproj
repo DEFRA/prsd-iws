@@ -85,12 +85,12 @@
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
-    <Compile Include="NotificationApplication\Recovery\ProviderChangedEvent.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\ProviderChangedEvent.cs" />
     <Compile Include="NotificationApplication\NotificationReadOnlyException.cs" />
     <Compile Include="NotificationApplication\Shipment\IShipmentInfoRepository.cs" />
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
-    <Compile Include="NotificationApplication\Recovery\IRecoveryInfoRepository.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />
     <Compile Include="NotificationAssessment\NotificationDecision.cs" />
@@ -125,7 +125,7 @@
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicType.cs" />
-    <Compile Include="NotificationApplication\Recovery\RecoveryInfo.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\WasteRecovery.cs" />
     <Compile Include="NotificationApplication\TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\WasteCode.cs" />
     <Compile Include="NotificationApplication\WasteCodeInfo.cs" />

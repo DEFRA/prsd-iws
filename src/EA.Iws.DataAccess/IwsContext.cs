@@ -10,8 +10,8 @@
     using Domain.FinancialGuarantee;
     using Domain.Movement;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
     using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationApplication.WasteRecovery;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using Prsd.Core.DataAccess.Extensions;
@@ -73,7 +73,7 @@
 
         public virtual DbSet<TransportRoute> TransportRoutes { get; set; } 
         
-        public virtual DbSet<RecoveryInfo> RecoveryInfos { get; set; }
+        public virtual DbSet<WasteRecovery> WasteRecoveries { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

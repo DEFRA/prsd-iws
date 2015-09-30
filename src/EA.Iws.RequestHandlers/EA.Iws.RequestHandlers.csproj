@@ -150,10 +150,9 @@
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
-    <Compile Include="RecoveryInfo\GetRecoveryInfoProviderHandler.cs" />
-    <Compile Include="RecoveryInfo\IwsContextExtensions.cs" />
-    <Compile Include="RecoveryInfo\ProviderChangedEventHandler.cs" />
-    <Compile Include="RecoveryInfo\SetRecoveryInfoProviderHandler.cs" />
+    <Compile Include="WasteRecovery\GetWasteRecoveryProviderHandler.cs" />
+    <Compile Include="WasteRecovery\ProviderChangedEventHandler.cs" />
+    <Compile Include="WasteRecovery\SetWasteRecoveryProviderHandler.cs" />
     <Compile Include="Registration\CreateAddressHandler.cs" />
     <Compile Include="Shared\GetCountryHandler.cs" />
     <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
@@ -203,7 +202,6 @@
     <Compile Include="Mappings\PreconsentedFacilityMap.cs" />
     <Compile Include="Mappings\RecoveryOperationInfoMap.cs" />
     <Compile Include="Mappings\RecoveryPercentageMap.cs" />
-    <Compile Include="Mappings\RecoveryInfoMap.cs" />
     <Compile Include="Mappings\ShipmentInfoMap.cs" />
     <Compile Include="Mappings\SpecialHandlingMap.cs" />
     <Compile Include="Mappings\TechnologyEmployedMap.cs" />
@@ -268,8 +266,6 @@
     <Compile Include="Producers\UpdateProducerForNotificationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OperationCodes\AddRecoveryCodesHandler.cs" />
-    <Compile Include="RecoveryInfo\AddRecoveryInfoToNotificationHandler.cs" />
-    <Compile Include="RecoveryInfo\GetRecoveryValuesDataHandler.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetDecisionHandler.cs" />
     <Compile Include="Registration\UpdateOrganisationOfUserHandler.cs" />

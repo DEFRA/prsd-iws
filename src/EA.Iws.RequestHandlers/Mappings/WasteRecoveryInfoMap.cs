@@ -10,6 +10,8 @@
 
     internal class WasteRecoveryInfoMap : IMap<NotificationApplication, WasteRecoveryInfo>
     {
+        //TODO: This class should not use a notification anymore...
+
         private readonly IwsContext context;
 
         public WasteRecoveryInfoMap(IwsContext context)
@@ -34,7 +36,7 @@
         {
             var recoveryInfoData = new RecoveryInfoData();
 
-            var recoveryInfo = context.RecoveryInfos.SingleOrDefault(ri => ri.NotificationId == notification.Id);
+            var recoveryInfo = context.WasteRecoveries.SingleOrDefault(ri => ri.NotificationId == notification.Id);
 
             if (recoveryInfo != null)
             {
@@ -57,7 +59,7 @@
         {
             var recoveryPercentageData = new RecoveryPercentageData
             {
-                IsProvidedByImporter = notification.RecoveryInformationProvidedByImporter,
+                IsProvidedByImporter = notification.WasteRecoveryInformationProvidedByImporter,
                 //PercentageRecoverable = notification.PercentageRecoverable,
                 //MethodOfDisposal = notification.MethodOfDisposal ?? string.Empty
             };

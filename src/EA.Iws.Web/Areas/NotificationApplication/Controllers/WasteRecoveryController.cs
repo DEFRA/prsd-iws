@@ -6,7 +6,7 @@
     using Core.Shared;
     using Infrastructure;
     using Prsd.Core.Mediator;
-    using Requests.RecoveryInfo;
+    using Requests.WasteRecovery;
     using ViewModels.WasteRecovery;
 
     [Authorize]
@@ -23,7 +23,7 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            var result = await mediator.SendAsync(new GetRecoveryInfoProvider(id));
+            var result = await mediator.SendAsync(new GetWasteRecoveryProvider(id));
 
             return View(new WasteRecoveryViewModel(result));
         }
@@ -32,7 +32,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, WasteRecoveryViewModel model, bool? backToOverview = null)
         {
-            await mediator.SendAsync(new SetRecoveryInfoProvider(model.ProvidedBy.Value, id));
+            await mediator.SendAsync(new SetWasteRecoveryProvider(model.ProvidedBy.Value, id));
 
             return model.ProvidedBy == ProvidedBy.Notifier
                 ? RedirectToAction("Percentage", "WasteRecovery", new { backToOverview })

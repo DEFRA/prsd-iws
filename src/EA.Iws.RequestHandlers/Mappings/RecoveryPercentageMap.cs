@@ -12,7 +12,7 @@
             RecoveryPercentageData data = new RecoveryPercentageData
             {
                 NotificationId = source.Id,
-                IsProvidedByImporter = source.RecoveryInformationProvidedByImporter,
+                IsProvidedByImporter = source.WasteRecoveryInformationProvidedByImporter,
                 //PercentageRecoverable = source.PercentageRecoverable,
                 //MethodOfDisposal = source.MethodOfDisposal
             };

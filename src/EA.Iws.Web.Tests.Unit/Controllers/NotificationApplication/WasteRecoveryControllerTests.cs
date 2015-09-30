@@ -8,7 +8,7 @@
     using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
-    using Requests.RecoveryInfo;
+    using Requests.WasteRecovery;
     using Xunit;
 
     public class WasteRecoveryControllerTests
@@ -48,7 +48,7 @@
         {
             A.CallTo(() =>
                 mediator.SendAsync(
-                    A<GetRecoveryInfoProvider>.That.Matches(r =>
+                    A<GetWasteRecoveryProvider>.That.Matches(r =>
                         r.NotificationId == notificationId)))
                 .Returns(providedBy);
         }

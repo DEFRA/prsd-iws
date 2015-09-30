@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.WasteRecovery;
     using Formatters;
 
-    internal class RecoveryInfoViewModel
+    internal class WasteRecoveryViewModel
     {
         private string methodOfDisposal = string.Empty;
         public string MethodOfDisposal
@@ -42,16 +42,16 @@
             get { return annexMessage; }
         }
 
-        public RecoveryInfoViewModel(NotificationApplication notification,
-            RecoveryInfo recoveryInfo,
-            RecoveryInfoFormatter recoveryInfoFormatter)
+        public WasteRecoveryViewModel(NotificationApplication notification,
+            WasteRecovery wasteRecovery,
+            WasteRecoveryFormatter wasteRecoveryFormatter)
         {
             if (notification == null)
             {
                 return;
             }
 
-            if (notification.RecoveryInformationProvidedByImporter.GetValueOrDefault())
+            if (notification.WasteRecoveryInformationProvidedByImporter.GetValueOrDefault())
             {
                 annexMessage = string.Empty;
                 return;
@@ -59,24 +59,24 @@
 
             //methodOfDisposal = notification.MethodOfDisposal ?? string.Empty;
 
-            //percentageRecoverable = recoveryInfoFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);
+            //percentageRecoverable = wasteRecoveryFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);
 
-            estimatedAmountText = recoveryInfoFormatter
-                .CostAmountWithUnits(recoveryInfo, 
+            estimatedAmountText = wasteRecoveryFormatter
+                .CostAmountWithUnits(wasteRecovery, 
                     ri => ri.EstimatedValue);
 
-            costAmountText = recoveryInfoFormatter
-                .CostAmountWithUnits(recoveryInfo,
+            costAmountText = wasteRecoveryFormatter
+                .CostAmountWithUnits(wasteRecovery,
                     ri => ri.RecoveryCost);
 
-            disposalAmountText = recoveryInfoFormatter
-                .CostAmountWithUnits(recoveryInfo,
+            disposalAmountText = wasteRecoveryFormatter
+                .CostAmountWithUnits(wasteRecovery,
                     ri => ri.DisposalCost);
 
             annexMessage = string.Empty;
         }
 
-        public RecoveryInfoViewModel(RecoveryInfoViewModel model, int annexNumber)
+        public WasteRecoveryViewModel(WasteRecoveryViewModel model, int annexNumber)
         {
             methodOfDisposal = model.MethodOfDisposal;
             percentageRecoverable = model.PercentageRecoverable;

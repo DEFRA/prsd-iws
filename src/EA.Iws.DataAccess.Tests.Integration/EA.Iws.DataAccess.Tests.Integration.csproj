@@ -76,7 +76,7 @@
     <Compile Include="Copy\CopyToNotificationHandlerTests.cs" />
     <Compile Include="DatabaseDataDeleter.cs" />
     <Compile Include="Notification\NotificationApplicationIntegration.cs" />
-    <Compile Include="Notification\RecoveryInfoIntegration.cs" />
+    <Compile Include="Notification\WasteRecoveryIntegration.cs" />
     <Compile Include="OrganisationIntegration.cs" />
     <Compile Include="PricingStructureIntegration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

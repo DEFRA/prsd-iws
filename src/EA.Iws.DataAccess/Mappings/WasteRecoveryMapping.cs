@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.DataAccess.Mappings
 {
     using System.Data.Entity.ModelConfiguration;
-    using Domain.NotificationApplication.Recovery;
+    using Domain.NotificationApplication.WasteRecovery;
 
-    internal class RecoveryInfoMapping : EntityTypeConfiguration<RecoveryInfo>
+    internal class WasteRecoveryMapping : EntityTypeConfiguration<WasteRecovery>
     {
-        public RecoveryInfoMapping()
+        public WasteRecoveryMapping()
         {
             ToTable("RecoveryInfo", "Notification");
 

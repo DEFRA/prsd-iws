@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Domain.NotificationApplication.Recovery
+﻿namespace EA.Iws.Domain.NotificationApplication.WasteRecovery
 {
     using System;
     using Core.Shared;

@@ -139,9 +139,9 @@
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
-    <Compile Include="RecoveryInfo\GetRecoveryInfoProviderHandlerTests.cs" />
-    <Compile Include="RecoveryInfo\ProviderChangedEventHandlerTests.cs" />
-    <Compile Include="RecoveryInfo\SetRecoveryInfoProviderHandlerTests.cs" />
+    <Compile Include="WasteRecovery\GetWasteRecoveryProviderHandlerTests.cs" />
+    <Compile Include="WasteRecovery\ProviderChangedEventHandlerTests.cs" />
+    <Compile Include="WasteRecovery\SetWasteRecoveryProviderHandlerTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="TestBaseTests.cs" />
     <Compile Include="TestIwsContext.cs" />

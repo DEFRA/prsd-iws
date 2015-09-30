@@ -135,7 +135,6 @@
     <Compile Include="Notification\WasteRecoveryInfo.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUser.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetails.cs" />
-    <Compile Include="RecoveryInfo\AddRecoveryInfoToNotification.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
     <Compile Include="Carriers\GetCarrierForNotification.cs" />
     <Compile Include="Carriers\GetCarriersByNotificationId.cs" />
@@ -168,14 +167,12 @@
     <Compile Include="Notification\PreconsentedFacilityData.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
-    <Compile Include="RecoveryInfo\GetRecoveryInfoProvider.cs" />
-    <Compile Include="RecoveryInfo\GetRecoveryValuesData.cs" />
-    <Compile Include="RecoveryInfo\SetRecoveryInfoProvider.cs" />
+    <Compile Include="WasteRecovery\GetWasteRecoveryProvider.cs" />
+    <Compile Include="WasteRecovery\SetWasteRecoveryProvider.cs" />
     <Compile Include="Registration\CreateAddress.cs" />
     <Compile Include="Registration\UpdateOrganisationOfUser.cs" />
     <Compile Include="Shared\GetCountry.cs" />
     <Compile Include="Shared\GetEuropeanUnionCountries.cs" />
-    <Compile Include="RecoveryInfo\SetRecoveryPercentageData.cs" />
     <Compile Include="Notification\SetSpecialHandling.cs" />
     <Compile Include="OperationCodes\AddDisposalCodes.cs" />
     <Compile Include="OperationCodes\GetOperationCodesByNotificationId.cs" />

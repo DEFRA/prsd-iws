@@ -3,9 +3,9 @@
     using DocumentGeneration.Formatters;
     using Xunit;
 
-    public class RecoveryInfoFormatterTests
+    public class WasteRecoveryFormatterTests
     {
-        private readonly RecoveryInfoFormatter formatter = new RecoveryInfoFormatter();
+        private readonly WasteRecoveryFormatter formatter = new WasteRecoveryFormatter();
 
         [Fact]
         public void NullableDecimalAsPercentage_NoDecimalPlaces_ReturnsCorrectString()

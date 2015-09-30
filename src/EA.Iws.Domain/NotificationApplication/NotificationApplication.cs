@@ -7,7 +7,7 @@
     using Core.Shared;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
-    using Recovery;
+    using WasteRecovery;
 
     public partial class NotificationApplication : Entity
     {
@@ -66,11 +66,11 @@
 
         public virtual TechnologyEmployed TechnologyEmployed { get; private set; }
 
-        public bool? RecoveryInformationProvidedByImporter { get; private set; }
+        public bool? WasteRecoveryInformationProvidedByImporter { get; private set; }
 
-        public void SetRecoveryInformationProvider(ProvidedBy providedBy)
+        public void SetWasteRecoveryInformationProvider(ProvidedBy providedBy)
         {
-            this.RecoveryInformationProvidedByImporter = providedBy == ProvidedBy.Importer;
+            this.WasteRecoveryInformationProvidedByImporter = providedBy == ProvidedBy.Importer;
 
             RaiseEvent(new ProviderChangedEvent(this.Id, providedBy));
         }

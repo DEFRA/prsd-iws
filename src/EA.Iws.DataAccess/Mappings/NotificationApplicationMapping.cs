@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
     using Domain.NotificationApplication;
-    using Domain.TransportRoute;
     using Prsd.Core.Helpers;
 
     internal class NotificationApplicationMapping : EntityTypeConfiguration<NotificationApplication>
@@ -81,7 +80,7 @@
 
             Ignore(x => x.MeansOfTransport);
             
-            Property(x => x.RecoveryInformationProvidedByImporter).HasColumnName("IsRecoveryPercentageDataProvidedByImporter");
+            Property(x => x.WasteRecoveryInformationProvidedByImporter).HasColumnName("IsRecoveryPercentageDataProvidedByImporter");
 
             Property(ExpressionHelper
                 .GetPrivatePropertyExpression<NotificationApplication, string>("MeansOfTransportInternal"))

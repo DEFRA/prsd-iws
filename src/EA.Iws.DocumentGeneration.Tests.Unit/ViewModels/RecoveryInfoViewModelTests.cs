@@ -9,20 +9,20 @@
 
     public class RecoveryInfoViewModelTests
     {
-        private readonly RecoveryInfoFormatter recoveryInfoFormatter = new RecoveryInfoFormatter();
+        private readonly WasteRecoveryFormatter wasteRecoveryFormatter = new WasteRecoveryFormatter();
 
         [Fact]
         public void CanConstructWithNullNotification()
         {
-            var model = new RecoveryInfoViewModel(null, null, recoveryInfoFormatter);
+            var model = new WasteRecoveryViewModel(null, null, wasteRecoveryFormatter);
 
             AssertAllModelStringAreEmpty(model);
         }
 
         [Fact]
-        public void CanConstructWithNullRecoveryInfo()
+        public void CanConstructWithNullWasteRecovery()
         {
-            var model = new RecoveryInfoViewModel(new TestableNotificationApplication(), null, recoveryInfoFormatter);
+            var model = new WasteRecoveryViewModel(new TestableNotificationApplication(), null, wasteRecoveryFormatter);
 
             AssertAllModelStringAreEmpty(model);
         }
@@ -30,10 +30,10 @@
         [Fact(Skip = "Recovery percentage refactored, not yet reimplemented")]
         public void CanConstructWithPercentageRecoverableSet()
         {
-            var model = new RecoveryInfoViewModel(new TestableNotificationApplication(), null, recoveryInfoFormatter);
+            var model = new WasteRecoveryViewModel(new TestableNotificationApplication(), null, wasteRecoveryFormatter);
 
             AssertAnnexMessageEmpty(model);
-            AssertAllRecoveryInfoStringsAreEmpty(model);
+            AssertAllWasteRecoveryStringsAreEmpty(model);
             Assert.Equal("100%", model.PercentageRecoverable);
             Assert.Equal(string.Empty, model.MethodOfDisposal);
         }
@@ -43,26 +43,26 @@
         {
             var methodOfDisposal = "throw in the bin";
 
-            var model = new RecoveryInfoViewModel(new TestableNotificationApplication(), null, recoveryInfoFormatter);
+            var model = new WasteRecoveryViewModel(new TestableNotificationApplication(), null, wasteRecoveryFormatter);
 
-            AssertAllRecoveryInfoStringsAreEmpty(model);
+            AssertAllWasteRecoveryStringsAreEmpty(model);
             AssertAnnexMessageEmpty(model);
             Assert.Equal("50%", model.PercentageRecoverable);
             Assert.Equal(methodOfDisposal, model.MethodOfDisposal);
         }
 
         [Fact(Skip = "Recovery percentage refactored, not yet reimplemented")]
-        public void CanConstructWithRecoveryInformationWhereDisposalInfoIsNull()
+        public void CanConstructWithWasteRecoveryInformationWhereDisposalInfoIsNull()
         {
             var methodOfDisposal = "smash it to bits";
 
-            var model = new RecoveryInfoViewModel(new TestableNotificationApplication(),
-                new TestableRecoveryInfo
+            var model = new WasteRecoveryViewModel(new TestableNotificationApplication(),
+                new TestableWasteRecovery
                 {
                     EstimatedValue = new EstimatedValue(ValuePerWeightUnits.Tonne, 250),
                     RecoveryCost = new RecoveryCost(ValuePerWeightUnits.Kilogram, 100),
                 },
-                recoveryInfoFormatter);
+                wasteRecoveryFormatter);
 
             AssertAnnexMessageEmpty(model);
             Assert.Equal("50%", model.PercentageRecoverable);
@@ -73,18 +73,18 @@
         }
 
         [Fact(Skip = "Recovery percentage refactored, not yet reimplemented")]
-        public void CanConstructWithRecoveryInformationWithDisposalInfo()
+        public void CanConstructWithWasteRecoveryInformationWithDisposalInfo()
         {
             var methodOfDisposal = "recycle";
 
-            var model = new RecoveryInfoViewModel(new TestableNotificationApplication(),
-                new TestableRecoveryInfo
+            var model = new WasteRecoveryViewModel(new TestableNotificationApplication(),
+                new TestableWasteRecovery
                 {
                     EstimatedValue = new EstimatedValue(ValuePerWeightUnits.Tonne, 110),
                     RecoveryCost = new RecoveryCost(ValuePerWeightUnits.Kilogram, 100),
                     DisposalCost = new DisposalCost(ValuePerWeightUnits.Kilogram, 90)
                 },
-                recoveryInfoFormatter);
+                wasteRecoveryFormatter);
 
             AssertAnnexMessageEmpty(model);
             Assert.Equal("90%", model.PercentageRecoverable);
@@ -94,22 +94,22 @@
             Assert.Equal("£110 per Tonne", model.EstimatedAmountText);
         }
 
-        private void AssertAllModelStringAreEmpty(RecoveryInfoViewModel model)
+        private void AssertAllModelStringAreEmpty(WasteRecoveryViewModel model)
         {
             Assert.Equal(string.Empty, model.MethodOfDisposal);
-            AssertAllRecoveryInfoStringsAreEmpty(model);
+            AssertAllWasteRecoveryStringsAreEmpty(model);
             AssertAnnexMessageEmpty(model);
             Assert.Equal(string.Empty, model.PercentageRecoverable);
         }
 
-        private void AssertAllRecoveryInfoStringsAreEmpty(RecoveryInfoViewModel model)
+        private void AssertAllWasteRecoveryStringsAreEmpty(WasteRecoveryViewModel model)
         {
             Assert.Equal(string.Empty, model.CostAmountText);
             Assert.Equal(string.Empty, model.DisposalAmountText);
             Assert.Equal(string.Empty, model.EstimatedAmountText);
         }
 
-        private void AssertAnnexMessageEmpty(RecoveryInfoViewModel model)
+        private void AssertAnnexMessageEmpty(WasteRecoveryViewModel model)
         {
             Assert.Equal(string.Empty, model.AnnexMessage);
         }

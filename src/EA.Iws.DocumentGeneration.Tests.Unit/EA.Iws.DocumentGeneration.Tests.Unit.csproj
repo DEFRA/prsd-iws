@@ -60,7 +60,7 @@
   <ItemGroup>
     <Compile Include="Formatters\MeansOfTransportFormatterTests.cs" />
     <Compile Include="Formatters\OperationInfoFormatterTests.cs" />
-    <Compile Include="Formatters\RecoveryInfoFormatterTests.cs" />
+    <Compile Include="Formatters\WasteRecoveryFormatterTests.cs" />
     <Compile Include="Formatters\WasteCodeInfoFormatterTests.cs" />
     <Compile Include="Formatters\WasteCompositionFormatterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

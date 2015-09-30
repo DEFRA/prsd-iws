@@ -6,7 +6,7 @@
     using Domain.NotificationApplication.Shipment;
     using Domain.TransportRoute;
     using Prsd.Core.Mediator;
-    using RequestHandlers.RecoveryInfo;
+    using RequestHandlers.WasteRecovery;
     using Requests.Notification;
 
     internal class GenerateNotificationDocumentHandler : IRequestHandler<GenerateNotificationDocument, byte[]>
