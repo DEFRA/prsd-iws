@@ -133,6 +133,7 @@ $(document).ready(function () {
 
     //Unhide if javascript is enabled
     $('.no-js-hidden').css('display', 'block');
+
+    // Prevent double form submissions
+    $(':submit').preventDoubleClick();
 });
-
-
