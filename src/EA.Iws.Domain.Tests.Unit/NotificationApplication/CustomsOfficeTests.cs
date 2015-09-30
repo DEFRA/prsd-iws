@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
+    using Domain.TransportRoute;
     using TestHelpers.Helpers;
-    using TransportRoute;
     using Xunit;
 
     public class CustomsOfficeTests

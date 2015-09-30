@@ -154,6 +154,7 @@
     <Compile Include="NotificationApplication\OperationCode.cs" />
     <Compile Include="TransportRoute\IState.cs" />
     <Compile Include="TransportRoute\ITransportRouteRepository.cs" />
+    <Compile Include="TransportRoute\RequiredCustomsOffices.cs" />
     <Compile Include="TransportRoute\StateOfExport.cs" />
     <Compile Include="TransportRoute\StateOfImport.cs" />
     <Compile Include="TransportRoute\TransitState.cs" />

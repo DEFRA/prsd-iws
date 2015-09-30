@@ -26,12 +26,14 @@
         public EntryCustomsOfficeAddData Map(TransportRoute source)
         {
             var countries = context.Countries.Where(c => c.IsEuropeanUnionMember).OrderBy(c => c.Name).ToArray();
- 
+            var requiredCustomsOffices = new RequiredCustomsOffices();
+            var entryCustomsOffice = source == null ? null : source.EntryCustomsOffice;
+
             return new EntryCustomsOfficeAddData
             {
                 Countries = countries.Select(countryMap.Map).ToArray(),
-                CustomsOfficesRequired = source.GetRequiredCustomsOffices(),
-                CustomsOfficeData = customsOfficeMap.Map(source.EntryCustomsOffice)
+                CustomsOfficesRequired = requiredCustomsOffices.GetForTransportRoute(source),
+                CustomsOfficeData = customsOfficeMap.Map(entryCustomsOffice)
             };
         }
     }

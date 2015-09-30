@@ -21,6 +21,7 @@
         public async Task<CustomsOfficeCompletionStatus> HandleAsync(SetExitCustomsOfficeForNotificationById message)
         {
             var transportRoute = await repository.GetByNotificationId(message.Id);
+            var requiredCustomsOffices = new RequiredCustomsOffices();
 
             if (transportRoute == null)
             {
@@ -38,7 +39,7 @@
 
             return new CustomsOfficeCompletionStatus
             {
-                CustomsOfficesRequired = transportRoute.GetRequiredCustomsOffices()
+                CustomsOfficesRequired = requiredCustomsOffices.GetForTransportRoute(transportRoute)
             };
         }
     }

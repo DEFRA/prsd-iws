@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Domain.TransportRoute;
     using TestHelpers.Helpers;
-    using TransportRoute;
     using Xunit;
 
     public class NotificationTransportRouteTests

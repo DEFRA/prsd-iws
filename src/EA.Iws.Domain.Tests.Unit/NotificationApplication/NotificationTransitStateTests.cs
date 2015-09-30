@@ -2,9 +2,9 @@
 {
     using System;
     using System.Linq;
+    using Domain.TransportRoute;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
-    using TransportRoute;
     using Xunit;
 
     public class NotificationTransitStateTests

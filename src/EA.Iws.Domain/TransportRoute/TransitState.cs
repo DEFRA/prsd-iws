@@ -46,7 +46,7 @@ namespace EA.Iws.Domain.TransportRoute
             OrdinalPosition = ordinalPosition;
         }
 
-        public void UpdateTransitState(Country country, 
+        internal void UpdateTransitState(Country country, 
             CompetentAuthority competentAuthority, 
             EntryOrExitPoint entryPoint,
             EntryOrExitPoint exitPoint, 
@@ -64,7 +64,7 @@ namespace EA.Iws.Domain.TransportRoute
             this.OrdinalPosition = ordinalPosition ?? this.OrdinalPosition;
         }
 
-        public void UpdateOrdinalPosition(int ordinalPosition)
+        internal void UpdateOrdinalPosition(int ordinalPosition)
         {
             Guard.ArgumentNotZeroOrNegative(() => ordinalPosition, ordinalPosition);
 

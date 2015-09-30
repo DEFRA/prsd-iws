@@ -1,15 +1,13 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
-    using Core.CustomsOffice;
-    using Domain.NotificationApplication;
+    using Domain.TransportRoute;
     using TestHelpers.Helpers;
-    using TransportRoute;
     using Xunit;
 
     public class NotificationCustomsOfficeTests
     {
-        private readonly TransportRoute notification;
+        private readonly TransportRoute transportRoute;
         private readonly Country europeanCountry1;
         private readonly Country europeanCountry2;
         private readonly Country europeanCountry3;
@@ -28,12 +26,9 @@
         private EntryOrExitPoint[] nonEuEntryOrExitPoints1;
         private EntryOrExitPoint[] nonEuEntryOrExitPoints2;
 
-        private readonly ExitCustomsOffice exitCustomsOffice;
-        private readonly EntryCustomsOffice entryCustomsOffice;
-
         public NotificationCustomsOfficeTests()
         {
-            notification = new TransportRoute(Guid.Empty);
+            transportRoute = new TransportRoute(Guid.Empty);
 
             europeanCountry1 = CreateCountry(new Guid("FB908C44-7AF1-4894-A0A5-860338468DFA"), true);
             europeanCountry2 = CreateCountry(new Guid("8057CD56-A12C-4C7D-BED4-B12D98DCADAB"), true);
@@ -50,130 +45,7 @@
             nonEuCompetentAuthority1 = CreateCompetentAuthority(new Guid("2842CAAE-B34D-4311-A1DE-286EEF492AD6"), nonEuCountry1);
             nonEuCompetentAuthority2 = CreateCompetentAuthority(new Guid("F84CF9EF-A98A-4B8F-B4EC-C3185833226B"), nonEuCountry2);
 
-            exitCustomsOffice = new ExitCustomsOffice("test", "test", europeanCountry1);
-            entryCustomsOffice = new EntryCustomsOffice("test", "test", europeanCountry1);
-
             SetTransitStates();
-        }
-
-        [Fact]
-        public void CustomsOfficesRequired_TransitStatesEmpty_TransitStatesNotSet()
-        {
-            var result = notification.GetRequiredCustomsOffices();
-
-            Assert.Equal(CustomsOffices.TransitStatesNotSet, result);
-        }
-
-        [Fact]
-        public void CustomsOfficesRequired_TransitStatesInEU_None()
-        {
-            var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1, europeanEntryOrExitPoints1[0]);
-            var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2, europeanEntryOrExitPoints2[0]);
-
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-
-            var result = notification.GetRequiredCustomsOffices();
-
-            Assert.Equal(CustomsOffices.None, result);
-        }
-
-        [Fact]
-        public void CustomsOfficesRequired_StateOfImportOutsideEU_Exit()
-        {
-            var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1,
-                europeanEntryOrExitPoints1[0]);
-            var stateOfImport = new StateOfImport(nonEuCountry1, nonEuCompetentAuthority1, nonEuEntryOrExitPoints1[0]);
-
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-
-            var result = notification.GetRequiredCustomsOffices();
-
-            Assert.Equal(CustomsOffices.Exit, result);
-        }
-
-        [Fact]
-        public void CustomsOfficesRequired_StateOfTransitOutsideEUImportInsideEU_EntryAndExit()
-        {
-            var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1,
-                europeanEntryOrExitPoints1[0]);
-            var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2,
-                europeanEntryOrExitPoints2[0]);
-
-            var transitState = new TransitState(nonEuCountry1, nonEuCompetentAuthority1, nonEuEntryOrExitPoints1[0],
-                nonEuEntryOrExitPoints1[1], 1);
-
-            notification.AddTransitStateToNotification(transitState);
-
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-
-            var result = notification.GetRequiredCustomsOffices();
-
-            Assert.Equal(CustomsOffices.EntryAndExit, result);
-        }
-
-        [Fact]
-        public void CustomsOfficesRequired_StateOfTransitMixedImportInsideEU_EntryAndExit()
-        {
-            var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1,
-                europeanEntryOrExitPoints1[0]);
-            var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2,
-                europeanEntryOrExitPoints2[0]);
-
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-
-            var europeanTransitState = new TransitState(europeanCountry3, europeanCompetentAuthority3,
-                europeanEntryOrExitPoints3[0],
-                europeanEntryOrExitPoints3[1], 1);
-            var nonEuropeantransitState = new TransitState(nonEuCountry1, nonEuCompetentAuthority1, nonEuEntryOrExitPoints1[0],
-                nonEuEntryOrExitPoints1[1], 2);
-
-            notification.AddTransitStateToNotification(europeanTransitState);
-            notification.AddTransitStateToNotification(nonEuropeantransitState);
-
-            var result = notification.GetRequiredCustomsOffices();
-
-            Assert.Equal(CustomsOffices.EntryAndExit, result);
-        }
-
-        [Fact]
-        public void CustomsOfficesRequired_StateOfTransitInsideEUImportOutside_Exit()
-        {
-            var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1,
-                europeanEntryOrExitPoints1[0]);
-            var stateOfImport = new StateOfImport(nonEuCountry2, nonEuCompetentAuthority2,
-                nonEuEntryOrExitPoints2[0]);
-
-            var transitState = new TransitState(europeanCountry2, europeanCompetentAuthority2, europeanEntryOrExitPoints2[0],
-                europeanEntryOrExitPoints2[1], 1);
-
-            notification.AddTransitStateToNotification(transitState);
-
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-
-            var result = notification.GetRequiredCustomsOffices();
-
-            Assert.Equal(CustomsOffices.Exit, result);
-        }
-
-        [Fact]
-        public void CustomsOfficesRequired_ImportAndExportInsideEU_None()
-        {
-            var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1,
-                europeanEntryOrExitPoints1[0]);
-            var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2,
-                europeanEntryOrExitPoints2[0]);
-
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-
-            var result = notification.GetRequiredCustomsOffices();
-
-            Assert.Equal(CustomsOffices.None, result);
         }
 
         [Fact]
@@ -185,12 +57,12 @@
             var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2,
                 europeanEntryOrExitPoints2[0]);
 
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
+            SetStateOfExport(stateOfExport);
+            SetStateOfImport(stateOfImport);
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    notification.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1)));
+                    transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1)));
         }
 
         [Fact]
@@ -202,14 +74,14 @@
             var stateOfImport = new StateOfImport(nonEuCountry1, nonEuCompetentAuthority1,
                 nonEuEntryOrExitPoints1[0]);
 
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
+            SetStateOfExport(stateOfExport);
+            SetStateOfImport(stateOfImport);
 
-            notification.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1));
+            transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1));
 
-            Assert.Equal("test", notification.ExitCustomsOffice.Name);
-            Assert.Equal("test", notification.ExitCustomsOffice.Address);
-            Assert.Equal(europeanCountry1.Id, notification.ExitCustomsOffice.Country.Id);
+            Assert.Equal("test", transportRoute.ExitCustomsOffice.Name);
+            Assert.Equal("test", transportRoute.ExitCustomsOffice.Address);
+            Assert.Equal(europeanCountry1.Id, transportRoute.ExitCustomsOffice.Country.Id);
         }
 
         [Fact]
@@ -221,16 +93,16 @@
             var stateOfImport = new StateOfImport(nonEuCountry1, nonEuCompetentAuthority1,
                 nonEuEntryOrExitPoints1[0]);
 
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
+            SetStateOfExport(stateOfExport);
+            SetStateOfImport(stateOfImport);
 
-            notification.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1));
+            transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1));
 
-            notification.SetExitCustomsOffice(new ExitCustomsOffice("test2", "test2", europeanCountry2));
+            transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("test2", "test2", europeanCountry2));
 
-            Assert.Equal("test2", notification.ExitCustomsOffice.Name);
-            Assert.Equal("test2", notification.ExitCustomsOffice.Address);
-            Assert.Equal(europeanCountry2.Id, notification.ExitCustomsOffice.Country.Id);
+            Assert.Equal("test2", transportRoute.ExitCustomsOffice.Name);
+            Assert.Equal("test2", transportRoute.ExitCustomsOffice.Address);
+            Assert.Equal(europeanCountry2.Id, transportRoute.ExitCustomsOffice.Country.Id);
         }
 
         [Fact]
@@ -242,12 +114,12 @@
             var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2,
                 europeanEntryOrExitPoints2[0]);
 
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
+            SetStateOfExport(stateOfExport);
+            SetStateOfImport(stateOfImport);
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    notification.SetEntryCustomsOffice(new EntryCustomsOffice("test", "test", europeanCountry1)));
+                    transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice("test", "test", europeanCountry1)));
         }
 
         [Fact]
@@ -262,15 +134,15 @@
             var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2,
                 europeanEntryOrExitPoints2[0]);
 
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-            notification.AddTransitStateToNotification(transitState);
+            SetStateOfExport(stateOfExport);
+            SetStateOfImport(stateOfImport);
+            transportRoute.AddTransitStateToNotification(transitState);
 
-            notification.SetEntryCustomsOffice(new EntryCustomsOffice("test", "test", europeanCountry1));
+            transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice("test", "test", europeanCountry1));
 
-            Assert.Equal("test", notification.EntryCustomsOffice.Name);
-            Assert.Equal("test", notification.EntryCustomsOffice.Address);
-            Assert.Equal(europeanCountry1.Id, notification.EntryCustomsOffice.Country.Id);
+            Assert.Equal("test", transportRoute.EntryCustomsOffice.Name);
+            Assert.Equal("test", transportRoute.EntryCustomsOffice.Address);
+            Assert.Equal(europeanCountry1.Id, transportRoute.EntryCustomsOffice.Country.Id);
         }
 
         [Fact]
@@ -285,27 +157,27 @@
             var stateOfImport = new StateOfImport(europeanCountry2, europeanCompetentAuthority2,
                 europeanEntryOrExitPoints2[0]);
 
-            SetNotificationStateOfExport(stateOfExport);
-            SetNotificationStateOfImport(stateOfImport);
-            notification.AddTransitStateToNotification(transitState);
+            SetStateOfExport(stateOfExport);
+            SetStateOfImport(stateOfImport);
+            transportRoute.AddTransitStateToNotification(transitState);
 
-            notification.SetEntryCustomsOffice(new EntryCustomsOffice("test", "test", europeanCountry1));
+            transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice("test", "test", europeanCountry1));
 
-            notification.SetEntryCustomsOffice(new EntryCustomsOffice("test2", "test2", europeanCountry2));
+            transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice("test2", "test2", europeanCountry2));
 
-            Assert.Equal("test2", notification.EntryCustomsOffice.Name);
-            Assert.Equal("test2", notification.EntryCustomsOffice.Address);
-            Assert.Equal(europeanCountry2.Id, notification.EntryCustomsOffice.Country.Id);
+            Assert.Equal("test2", transportRoute.EntryCustomsOffice.Name);
+            Assert.Equal("test2", transportRoute.EntryCustomsOffice.Address);
+            Assert.Equal(europeanCountry2.Id, transportRoute.EntryCustomsOffice.Country.Id);
         }
 
-        private void SetNotificationStateOfExport(StateOfExport stateOfExport)
+        private void SetStateOfExport(StateOfExport stateOfExport)
         {
-            ObjectInstantiator<TransportRoute>.SetProperty(x => x.StateOfExport, stateOfExport, notification);
+            ObjectInstantiator<TransportRoute>.SetProperty(x => x.StateOfExport, stateOfExport, transportRoute);
         }
 
-        private void SetNotificationStateOfImport(StateOfImport stateOfImport)
+        private void SetStateOfImport(StateOfImport stateOfImport)
         {
-            ObjectInstantiator<TransportRoute>.SetProperty(x => x.StateOfImport, stateOfImport, notification);
+            ObjectInstantiator<TransportRoute>.SetProperty(x => x.StateOfImport, stateOfImport, transportRoute);
         }
 
         private Country CreateCountry(Guid id, bool isEuMember)

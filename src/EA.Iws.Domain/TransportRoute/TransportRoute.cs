@@ -10,6 +10,11 @@
 
     public class TransportRoute : Entity
     {
+        // TODO - split customs offices to new aggregate, but for now use
+        // the service in the domain object.
+        private readonly Lazy<RequiredCustomsOffices> requiredCustomsOffices =
+            new Lazy<RequiredCustomsOffices>(() => new RequiredCustomsOffices());
+
         protected TransportRoute()
         {
         }
@@ -215,32 +220,9 @@
             UpdateCustomsOffices();
         }
 
-        public CustomsOffices GetRequiredCustomsOffices()
-        {
-            if (StateOfExport == null || StateOfImport == null)
-            {
-                return CustomsOffices.TransitStatesNotSet;
-            }
-
-            bool isStartPointEU = StateOfExport.Country.IsEuropeanUnionMember;
-            bool isEndPointEU = StateOfImport.Country.IsEuropeanUnionMember;
-            bool areAllTransitStatesEU = isStartPointEU && isEndPointEU;
-
-            if (TransitStates != null)
-            {
-                areAllTransitStatesEU = TransitStates.All(ts => ts.Country.IsEuropeanUnionMember);
-            }
-
-            if (isEndPointEU)
-            {
-                return areAllTransitStatesEU ? CustomsOffices.None : CustomsOffices.EntryAndExit;
-            }
-            return CustomsOffices.Exit;
-        }
-
         public void SetExitCustomsOffice(ExitCustomsOffice customsOffice)
         {
-            var customsOfficeRequiredStatus = GetRequiredCustomsOffices();
+            var customsOfficeRequiredStatus = requiredCustomsOffices.Value.GetForTransportRoute(this);
 
             switch (customsOfficeRequiredStatus)
             {
@@ -256,7 +238,7 @@
 
         public void SetEntryCustomsOffice(EntryCustomsOffice customsOffice)
         {
-            var customsOfficeRequiredStatus = GetRequiredCustomsOffices();
+            var customsOfficeRequiredStatus = requiredCustomsOffices.Value.GetForTransportRoute(this);
 
             switch (customsOfficeRequiredStatus)
             {
