@@ -4,30 +4,30 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
-    using Areas.NotificationApplication.ViewModels.RecoveryInfo;
+    using Areas.NotificationApplication.ViewModels.WasteRecovery;
     using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.RecoveryInfo;
     using Xunit;
 
-    public class RecoveryInfoControllerTests
+    public class WasteRecoveryControllerTests
     {
         private static readonly Guid AnyGuid = Guid.NewGuid();
 
         private readonly IMediator mediator;
-        private readonly RecoveryInfoController controller;
+        private readonly WasteRecoveryController controller;
 
-        public RecoveryInfoControllerTests()
+        public WasteRecoveryControllerTests()
         {
             mediator = A.Fake<IMediator>();
-            controller = new RecoveryInfoController(mediator);
+            controller = new WasteRecoveryController(mediator);
         }
 
         [Fact]
         public async Task RedirectsToOverview_WhenProvidedByImporter()
         {
-            var result = await controller.Index(AnyGuid, new RecoveryInfoViewModel(ProvidedBy.Importer));
+            var result = await controller.Index(AnyGuid, new WasteRecoveryViewModel(ProvidedBy.Importer));
 
             var routeResult = Assert.IsType<RedirectToRouteResult>(result);
 
@@ -37,11 +37,11 @@
         [Fact]
         public async Task RedirectsToCorrectScreen_WhenProvidedByNotifier()
         {
-            var result = await controller.Index(AnyGuid, new RecoveryInfoViewModel(ProvidedBy.Notifier));
+            var result = await controller.Index(AnyGuid, new WasteRecoveryViewModel(ProvidedBy.Notifier));
 
             var routeResult = Assert.IsType<RedirectToRouteResult>(result);
 
-            RouteAssert.RoutesTo(routeResult.RouteValues, "RecoveryPercentage", "RecoveryInfo");
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Percentage", "WasteRecovery");
         }
 
         private void SetNotificationProvidedBy(Guid notificationId, ProvidedBy? providedBy)

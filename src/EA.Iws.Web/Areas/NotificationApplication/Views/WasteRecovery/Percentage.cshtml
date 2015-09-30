@@ -1,0 +1,24 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.RecoveryPercentageViewModel
+@{
+    ViewBag.Title = "Percentage Recoverable";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <header class="hgroup">
+        <h1 class="heading-large">What is the amount of recovered material in relation to the non-recoverable waste?</h1>
+    </header>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.PercentageRecoverable)">
+        @Html.Gds().LabelFor(m => m.PercentageRecoverable, false)
+        @Html.Gds().ValidationMessageFor(m => m.PercentageRecoverable)
+        @Html.TextBoxFor(m => m.PercentageRecoverable)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

@@ -7,15 +7,15 @@
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.RecoveryInfo;
-    using ViewModels.RecoveryInfo;
+    using ViewModels.WasteRecovery;
 
     [Authorize]
     [NotificationReadOnlyFilter]
-    public class RecoveryInfoController : Controller
+    public class WasteRecoveryController : Controller
     {
         private readonly IMediator mediator;
 
-        public RecoveryInfoController(IMediator mediator)
+        public WasteRecoveryController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -25,18 +25,26 @@
         {
             var result = await mediator.SendAsync(new GetRecoveryInfoProvider(id));
 
-            return View(new RecoveryInfoViewModel(result));
+            return View(new WasteRecoveryViewModel(result));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, RecoveryInfoViewModel model, bool? backToOverview = null)
+        public async Task<ActionResult> Index(Guid id, WasteRecoveryViewModel model, bool? backToOverview = null)
         {
             await mediator.SendAsync(new SetRecoveryInfoProvider(model.ProvidedBy.Value, id));
 
             return model.ProvidedBy == ProvidedBy.Notifier
-                ? RedirectToAction("RecoveryPercentage", "RecoveryInfo")
+                ? RedirectToAction("Percentage", "WasteRecovery", new { backToOverview })
                 : RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Percentage(Guid id, bool? backToOverview = null)
+        {
+            //TODO: mediator call
+
+            return View();
         }
     }
 }

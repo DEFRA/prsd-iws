@@ -1,16 +1,16 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery
 {
     using Core.Shared;
 
-    public class RecoveryInfoViewModel
+    public class WasteRecoveryViewModel
     {
         public ProvidedBy? ProvidedBy { get; set; }
 
-        public RecoveryInfoViewModel()
+        public WasteRecoveryViewModel()
         {
         }
 
-        public RecoveryInfoViewModel(ProvidedBy? providedBy)
+        public WasteRecoveryViewModel(ProvidedBy? providedBy)
         {
             if (providedBy.HasValue)
             {

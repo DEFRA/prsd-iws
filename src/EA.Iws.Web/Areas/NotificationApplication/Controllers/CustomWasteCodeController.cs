@@ -78,7 +78,7 @@
                     if (notificationInfo.NotificationType == NotificationType.Recovery)
                     {
                         return (backToOverview) ? RedirectToAction("Index", "Home", new { id })
-                            : RedirectToAction("RecoveryPercentage", "RecoveryInfo", new { id });    
+                            : RedirectToAction("Index", "WasteRecovery", new { id });    
                     }
                     else
                     {

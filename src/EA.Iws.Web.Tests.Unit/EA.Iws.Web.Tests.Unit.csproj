@@ -183,7 +183,7 @@
     <Compile Include="Controllers\NotificationApplication\TransportRouteControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\WasteGenerationProcessControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\WasteTypeControllerTests.cs" />
-    <Compile Include="Controllers\NotificationApplication\RecoveryInfoControllerTests.cs" />
+    <Compile Include="Controllers\NotificationApplication\WasteRecoveryControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\StateOfImportControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\TransitStateControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\WasteOperationsControllerTests.cs" />
