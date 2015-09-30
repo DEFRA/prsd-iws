@@ -122,6 +122,7 @@
     <Content Include="scripts\Update\Sprint17\20150923-170000-add-address-book.sql" />
     <Content Include="scripts\Update\Sprint17\20150924-094000-create-transport-route-table.sql" />
     <Content Include="scripts\Update\Sprint17\20150929-144444-update-providers-where-recovery-info-exists.sql" />
+    <Content Include="scripts\Update\Sprint17\20150929-164000-migrate-percentage-recoverable-to-recovery-info.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

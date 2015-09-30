@@ -67,6 +67,6 @@
 @if (Model.NotificationType == NotificationType.Recovery)
 {
     <span>Waste recovery</span>
-    @Html.Navigation().Link("Recovery information", Model.HasRecoveryInfo, "RecoveryPercentage", "RecoveryInfo", "NotificationApplication", additionalActiveActionNames: new[] { "MethodOfDisposal", "RecoveryValues" })
+    @Html.Navigation().Link("Recovery information", Model.HasRecoveryData, "Index", "RecoveryInfo", "NotificationApplication", additionalActiveActionNames: new[] { "MethodOfDisposal", "RecoveryValues" })
 }
 <em></em>

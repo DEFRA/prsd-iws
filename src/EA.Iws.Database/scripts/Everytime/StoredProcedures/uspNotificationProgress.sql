@@ -18,7 +18,6 @@ BEGIN
 		N.[HasSpecialHandlingRequirements],
 		N.[MeansOfTransport],
 		N.[IsRecoveryPercentageDataProvidedByImporter],
-		N.[PercentageRecoverable],
 		N.[MethodOfDisposal],
 		N.[IsWasteGenerationProcessAttached],
 		N.[WasteGenerationProcess],

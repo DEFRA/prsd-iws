@@ -17,7 +17,7 @@
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
             var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
 
-            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), estimatedValue, recoveryCost, disposalCost);
+            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), new Percentage(50), estimatedValue, recoveryCost, disposalCost);
 
             Assert.NotNull(recoveryInfo);
         }
@@ -28,9 +28,39 @@
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
 
-            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), estimatedValue, recoveryCost, null);
+            var recoveryInfo = new RecoveryInfo(Guid.NewGuid(), new Percentage(100), estimatedValue, recoveryCost, null);
 
             Assert.NotNull(recoveryInfo);
+        }
+
+        [Fact]
+        public void PercentageLessThanZero_Throws()
+        {
+            Action newPercentage = () => new Percentage(-1);
+
+            Assert.Throws<ArgumentOutOfRangeException>(newPercentage);
+        }
+
+        [Fact]
+        public void PercentageGreaterThan100_Throws()
+        {
+            Action newPercentage = () => new Percentage(110);
+
+            Assert.Throws<ArgumentOutOfRangeException>(newPercentage);
+        }
+
+        [Theory]
+        [InlineData(37.123, 37.12)]
+        [InlineData(52.999, 53)]
+        [InlineData(12.9876543, 12.99)]
+        public void PercentageRoundsUpToTwoDecimalPlaces(double value, double expected)
+        {
+            var decimalValue = (decimal)value;
+            var decimalExpected = (decimal)expected;
+
+            var result = new Percentage(decimalValue);
+
+            Assert.Equal(decimalExpected, result.Value);
         }
 
         [Fact]

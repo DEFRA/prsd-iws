@@ -106,6 +106,7 @@
     <Compile Include="NotificationApplication\WasteAdditionalInformation.cs" />
     <Compile Include="NotificationAssessment\NotificationStatusChangeEvent.cs" />
     <Compile Include="NotificationAssessment\NotificationSubmittedEvent.cs" />
+    <Compile Include="Percentage.cs" />
     <Compile Include="ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
@@ -120,7 +121,6 @@
     <Compile Include="TransportRoute\EntryCustomsOffice.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.MeansOfTransport.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.PackagingInfo.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.RecoveryPercentage.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />

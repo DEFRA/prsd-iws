@@ -58,8 +58,8 @@
             var recoveryPercentageData = new RecoveryPercentageData
             {
                 IsProvidedByImporter = notification.RecoveryInformationProvidedByImporter,
-                PercentageRecoverable = notification.PercentageRecoverable,
-                MethodOfDisposal = notification.MethodOfDisposal ?? string.Empty
+                //PercentageRecoverable = notification.PercentageRecoverable,
+                //MethodOfDisposal = notification.MethodOfDisposal ?? string.Empty
             };
             return recoveryPercentageData;
         }

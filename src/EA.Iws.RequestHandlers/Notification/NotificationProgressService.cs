@@ -82,8 +82,6 @@
             var wasteCodesComplete = MapProgressForWasteCodes(progress, progressResult);
             var wasteRecoveryComplete = MapProgressForWasteRecovery(progress, progressResult);
 
-            progress.HasMethodOfDisposal = !string.IsNullOrWhiteSpace(progressResult.Notification.MethodOfDisposal);
-
             progress.IsAllComplete = organisationsInvolvedComplete
                 && recoveryOperationComplete
                 && transportationComplete
@@ -222,12 +220,10 @@
         private bool MapProgressForWasteRecovery(NotificationApplicationCompletionProgress progress, NotificationProgressResult progressResult)
         {
             progress.HasRecoveryData = progressResult.Notification.IsRecoveryPercentageDataProvidedByImporter.HasValue
-                || progressResult.Notification.PercentageRecoverable.HasValue;
-            progress.HasRecoveryInfo = progressResult.Notification.IsRecoveryPercentageDataProvidedByImporter.GetValueOrDefault()
-                || progressResult.Notification.RecoveryInfoId.HasValue;
+                && (progressResult.Notification.IsRecoveryPercentageDataProvidedByImporter.Value
+                || progressResult.Notification.RecoveryInfoId.HasValue);
 
-            return progress.HasRecoveryData
-                && progress.HasRecoveryInfo;
+            return progress.HasRecoveryData;
         }
 
         private class NotificationProgressResult
@@ -250,7 +246,6 @@
             public bool? HasSpecialHandlingRequirements { get; set; }
             public string MeansOfTransport { get; set; }
             public bool? IsRecoveryPercentageDataProvidedByImporter { get; set; }
-            public decimal? PercentageRecoverable { get; set; }
             public string MethodOfDisposal { get; set; }
             public bool? IsWasteGenerationProcessAttached { get; set; }
             public string WasteGenerationProcess { get; set; }

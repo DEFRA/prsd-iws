@@ -1,14 +1,14 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Core.Shared;
-    using EA.Iws.Requests.RecoveryInfo;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.RecoveryInfo;
-    using EA.Prsd.Core.Mediator;
-    using FakeItEasy;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.RecoveryInfo;
+    using Core.Shared;
+    using FakeItEasy;
+    using Prsd.Core.Mediator;
+    using Requests.RecoveryInfo;
     using Xunit;
 
     public class RecoveryInfoControllerTests

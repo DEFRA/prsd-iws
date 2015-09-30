@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication.Recovery
 {
     using System;
-    using Core.Shared;
     using Prsd.Core.Domain;
 
     public class RecoveryInfo : Entity
     {
         public Guid NotificationId { get; private set; }
+        public Percentage PercentageRecoverable { get; private set; }
         public EstimatedValue EstimatedValue { get; private set; }
         public RecoveryCost RecoveryCost { get; private set; }
         public DisposalCost DisposalCost { get; private set; }
@@ -16,28 +16,26 @@
         }
 
         public RecoveryInfo(Guid notificationId,
+            Percentage percentageRecoverable,
             EstimatedValue estimatedValue,
             RecoveryCost recoveryCost,
             DisposalCost disposalCost)
         {
             NotificationId = notificationId;
-            UpdateEstimatedValue(estimatedValue);
-            UpdateRecoveryCost(recoveryCost);
-            UpdateDisposalCost(disposalCost);
-        }
-
-        public void UpdateEstimatedValue(EstimatedValue estimatedValue)
-        {
+            PercentageRecoverable = percentageRecoverable;
             EstimatedValue = estimatedValue;
-        }
-
-        public void UpdateRecoveryCost(RecoveryCost recoveryCost)
-        {
             RecoveryCost = recoveryCost;
+            DisposalCost = disposalCost;
         }
 
-        public void UpdateDisposalCost(DisposalCost disposalCost)
+        public void UpdateRecoveryInfo(Percentage percentageRecoverable,
+            EstimatedValue estimatedValue,
+            RecoveryCost recoveryCost,
+            DisposalCost disposalCost)
         {
+            PercentageRecoverable = percentageRecoverable;
+            EstimatedValue = estimatedValue;
+            RecoveryCost = recoveryCost;
             DisposalCost = disposalCost;
         }
     }

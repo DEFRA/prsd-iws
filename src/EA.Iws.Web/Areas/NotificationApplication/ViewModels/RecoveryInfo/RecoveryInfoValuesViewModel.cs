@@ -48,15 +48,10 @@
                 ValuePerWeightUnits disposalUnit = (DisposalUnit.SelectedValue == EnumHelper.GetDisplayName(ValuePerWeightUnits.Kilogram))
                                                     ? ValuePerWeightUnits.Kilogram : ValuePerWeightUnits.Tonne;
 
-                return new AddRecoveryInfoToNotification(NotificationId, IsDisposal,
-                            estimatedUnit, Convert.ToDecimal(EstimatedAmount),
-                            costUnit, Convert.ToDecimal(CostAmount),
-                            disposalUnit, Convert.ToDecimal(DisposalAmount));
+                throw new NotImplementedException();
             }
 
-            return new AddRecoveryInfoToNotification(NotificationId, IsDisposal,
-                        estimatedUnit, Convert.ToDecimal(EstimatedAmount),
-                        costUnit, Convert.ToDecimal(CostAmount), null, null);
+            throw new NotImplementedException();
         }
 
         public RecoveryInfoValuesViewModel()

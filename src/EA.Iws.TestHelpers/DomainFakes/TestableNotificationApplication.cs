@@ -37,19 +37,7 @@
             get { return base.NotificationNumber; }
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.NotificationNumber, value, this); }
         }
-
-        public new decimal? PercentageRecoverable
-        {
-            get { return base.PercentageRecoverable; }
-            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.PercentageRecoverable, value, this); }
-        }
-
-        public new string MethodOfDisposal
-        {
-            get { return base.MethodOfDisposal; }
-            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.MethodOfDisposal, value, this); }
-        }
-
+        
         public new IEnumerable<PackagingInfo> PackagingInfos
         {
             get { return base.PackagingInfos; }

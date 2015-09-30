@@ -52,28 +52,7 @@
             await DeleteEntity(recoveryInfo);
             await DeleteEntity(notification);
         }
-
-        [Fact]
-        public async Task CanAddRecoveryPercentageData()
-        {
-            var recoveryPercentage = 56.78M;
-            var methodOfDisposal = "Some method of disposal text";
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-            UKCompetentAuthority.England, 0);
-
-            notification.SetPercentageRecoverable(recoveryPercentage);
-            notification.SetMethodOfDisposal(methodOfDisposal);
-
-            context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
-
-            Assert.Equal(recoveryPercentage, notification.PercentageRecoverable);
-            Assert.Equal(methodOfDisposal, notification.MethodOfDisposal);
-
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
-        }
-
+        
         [Fact]
         public async Task CanAddRecoveryPercentageDataProvidedByImporter()
         {
@@ -105,15 +84,15 @@
             var estimatedValue = new EstimatedValue(ValuePerWeightUnits.Kilogram, 10);
             var recoveryCost = new RecoveryCost(ValuePerWeightUnits.Tonne, 50);
             var disposalCost = new DisposalCost(ValuePerWeightUnits.Tonne, 55);
-
+            
             RecoveryInfo recoveryInfo;
             if (withDisposal)
             {
-                recoveryInfo = new RecoveryInfo(notification.Id, estimatedValue, recoveryCost, disposalCost);
+                recoveryInfo = new RecoveryInfo(notification.Id, new Percentage(50), estimatedValue, recoveryCost, disposalCost);
             }
             else
             {
-                recoveryInfo = new RecoveryInfo(notification.Id, estimatedValue, recoveryCost, new DisposalCost(null, null));
+                recoveryInfo = new RecoveryInfo(notification.Id, new Percentage(100), estimatedValue, recoveryCost, new DisposalCost(null, null));
             }
 
             context.RecoveryInfos.Add(recoveryInfo);

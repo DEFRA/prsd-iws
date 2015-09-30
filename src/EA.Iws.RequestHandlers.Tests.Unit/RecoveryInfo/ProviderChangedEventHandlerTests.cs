@@ -26,7 +26,7 @@
         [Fact]
         public async Task RecoveryInfoExists_ChangeToImporter_DeletesRecoveryInfo()
         {
-            var recoveryInfo = new RecoveryInfo(NotificationId, null, null, null);
+            var recoveryInfo = new RecoveryInfo(NotificationId, null, null, null, null);
 
             A.CallTo(() => repository.GetByNotificationId(NotificationId)).Returns(recoveryInfo);
 
@@ -38,7 +38,7 @@
         [Fact]
         public async Task IfRecoveryInfoDeleted_CallsSaveChanges()
         {
-            var recoveryInfo = new RecoveryInfo(NotificationId, null, null, null);
+            var recoveryInfo = new RecoveryInfo(NotificationId, null, null, null, null);
 
             A.CallTo(() => repository.GetByNotificationId(NotificationId)).Returns(recoveryInfo);
 

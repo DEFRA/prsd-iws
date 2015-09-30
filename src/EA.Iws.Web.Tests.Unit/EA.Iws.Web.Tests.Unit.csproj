@@ -196,7 +196,6 @@
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
-    <Compile Include="ViewModels\MethodOfDisposalViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\CarrierViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\DateCompleteViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\DateReceivedViewModelTests.cs" />
@@ -204,7 +203,6 @@
     <Compile Include="ViewModels\Movement\ShipmentDateViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
-    <Compile Include="ViewModels\RecoveryPercentageViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />
     <Compile Include="ViewModels\WasteType\ChemicalCompositionConcentrationLevelsViewModelTests.cs" />
     <Compile Include="ViewModels\WasteType\ChemicalCompositionInformationViewModelTests.cs" />

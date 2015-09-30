@@ -57,9 +57,9 @@
                 return;
             }
 
-            methodOfDisposal = notification.MethodOfDisposal ?? string.Empty;
+            //methodOfDisposal = notification.MethodOfDisposal ?? string.Empty;
 
-            percentageRecoverable = recoveryInfoFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);
+            //percentageRecoverable = recoveryInfoFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);
 
             estimatedAmountText = recoveryInfoFormatter
                 .CostAmountWithUnits(recoveryInfo, 

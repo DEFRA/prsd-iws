@@ -13,8 +13,8 @@
             {
                 NotificationId = source.Id,
                 IsProvidedByImporter = source.RecoveryInformationProvidedByImporter,
-                PercentageRecoverable = source.PercentageRecoverable,
-                MethodOfDisposal = source.MethodOfDisposal
+                //PercentageRecoverable = source.PercentageRecoverable,
+                //MethodOfDisposal = source.MethodOfDisposal
             };
              
             return data;

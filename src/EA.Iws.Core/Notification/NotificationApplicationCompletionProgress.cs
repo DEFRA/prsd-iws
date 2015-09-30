@@ -51,9 +51,6 @@
         public bool HasOtherCodes { get; set; }
 
         public bool HasRecoveryData { get; set; }
-        public bool HasRecoveryInfo { get; set; }
-
-        public bool HasMethodOfDisposal { get; set; }
 
         public bool IsAllComplete { get; set; }
     }

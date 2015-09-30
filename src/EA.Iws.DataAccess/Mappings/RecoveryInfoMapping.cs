@@ -8,6 +8,8 @@
         public RecoveryInfoMapping()
         {
             ToTable("RecoveryInfo", "Notification");
+
+            Property(x => x.PercentageRecoverable.Value).HasColumnName("PercentageRecoverable");
         }
     }
 }

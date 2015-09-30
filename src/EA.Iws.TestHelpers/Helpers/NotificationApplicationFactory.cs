@@ -67,8 +67,6 @@
                 ComplexTypeFactory.Create<Address>(),
                 ComplexTypeFactory.Create<Contact>());
 
-            OI.SetProperty(x => x.PercentageRecoverable, 100, notification);
-
             notification.SetMeansOfTransport(new List<MeansOfTransport>
             {
                 MeansOfTransport.Air,

@@ -17,34 +17,9 @@
             this.context = context;
         }
 
-        public async Task<Guid> HandleAsync(AddRecoveryInfoToNotification command)
+        public Task<Guid> HandleAsync(AddRecoveryInfoToNotification command)
         {
-            var recoveryInfo = await context.GetRecoveryInfoAsync(command.NotificationId);
-
-            var estimatedValue = new EstimatedValue(command.EstimatedUnit, command.EstimatedAmount);
-            var recoveryCost = new RecoveryCost(command.CostUnit, command.CostAmount);
-            var disposalCost = new DisposalCost(command.DisposalUnit, command.DisposalAmount);
-           
-            if (recoveryInfo == null)
-            {
-                recoveryInfo = new RecoveryInfo(
-                    command.NotificationId,
-                    estimatedValue,
-                    recoveryCost,
-                    disposalCost);
-
-                context.RecoveryInfos.Add(recoveryInfo);
-            }
-            else
-            {
-                recoveryInfo.UpdateEstimatedValue(estimatedValue);
-                recoveryInfo.UpdateRecoveryCost(recoveryCost);
-                recoveryInfo.UpdateDisposalCost(disposalCost);
-            }
-
-            await context.SaveChangesAsync();
-
-            return recoveryInfo.Id;
+            throw new NotImplementedException();
         }
     }
 }
