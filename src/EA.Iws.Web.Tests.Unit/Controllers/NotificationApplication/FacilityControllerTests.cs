@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Facility;
     using Core.Facilities;
     using Core.Notification;
     using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Facilities;
     using Requests.Notification;
     using Requests.Shared;
@@ -19,7 +19,7 @@
 
     public class FacilityControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private readonly Guid facilityId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
         private readonly FacilityController facilityController;
@@ -27,9 +27,9 @@
 
         public FacilityControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
+            A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
                 new CountryData
                 {
@@ -45,8 +45,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
                 .Returns(new NotificationBasicInfo
                 {
                     CompetentAuthority = CompetentAuthority.England,
@@ -55,7 +54,7 @@
                     NotificationType = NotificationType.Recovery
                 });
 
-            facilityController = new FacilityController(() => client);
+            facilityController = new FacilityController(mediator);
         }
 
         private AddFacilityViewModel CreateValidAddFacility()
@@ -147,7 +146,7 @@
         {
             await facilityController.Add(notificationId, null);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -170,7 +169,7 @@
 
             await facilityController.Add(model);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<AddFacilityToNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<AddFacilityToNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -232,7 +231,7 @@
         {
             await facilityController.Edit(notificationId, facilityId);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -255,7 +254,7 @@
 
             await facilityController.Edit(model);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<UpdateFacilityForNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<UpdateFacilityForNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -319,8 +318,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetFacilitiesByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetFacilitiesByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -331,8 +329,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -351,8 +348,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetFacilitiesByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetFacilitiesByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -363,8 +359,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
+                    mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -381,8 +376,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<SetActualSiteOfTreatment>.That.Matches(p => p.NotificationId == notificationId && p.FacilityId == facilityId)))
+                    mediator.SendAsync(A<SetActualSiteOfTreatment>.That.Matches(p => p.NotificationId == notificationId && p.FacilityId == facilityId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -451,7 +445,7 @@
         [Fact]
         public async Task RecoveryPreconsent_DisposalOperation_RedirectsToOperationCodes()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetIsPreconsentedRecoveryFacility>.That.Matches(p => p.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<GetIsPreconsentedRecoveryFacility>.That.Matches(p => p.NotificationId == notificationId)))
                 .Returns(new PreconsentedFacilityData
                 {
                     NotificationId = notificationId,
@@ -467,7 +461,7 @@
         [Fact]
         public async Task RecoveryPreconsent_RecoveryOperation_ReturnsView()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetIsPreconsentedRecoveryFacility>.That.Matches(p => p.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<GetIsPreconsentedRecoveryFacility>.That.Matches(p => p.NotificationId == notificationId)))
                 .Returns(new PreconsentedFacilityData
                 {
                     NotificationId = notificationId,
@@ -500,8 +494,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<SetPreconsentedRecoveryFacility>.That.Matches(
+                    mediator.SendAsync(A<SetPreconsentedRecoveryFacility>.That.Matches(
                             p => p.NotificationId == notificationId && p.IsPreconsentedRecoveryFacility)))
                             .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -549,7 +542,7 @@
         [Fact]
         public async Task Remove_MultipleFacilitiesRemoveSiteOfTreatment_ReturnsViewWithError()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetFacilitiesByNotificationId>._)).Returns(
+            A.CallTo(() => mediator.SendAsync(A<GetFacilitiesByNotificationId>._)).Returns(
                 new List<FacilityData>
                 {
                     CreateFacility(facilityId),
@@ -565,7 +558,7 @@
         [Fact]
         public async Task Remove_MultipleFacilitiesRemoveNotSiteOfTreatment_ReturnsViewWithNoError()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetFacilitiesByNotificationId>._)).Returns(
+            A.CallTo(() => mediator.SendAsync(A<GetFacilitiesByNotificationId>._)).Returns(
                 new List<FacilityData>
                 {
                     CreateFacility(facilityId),
@@ -581,7 +574,7 @@
         [Fact]
         public async Task Remove_SingleFacility_ReturnsViewWithNoError()
         {
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetFacilitiesByNotificationId>._)).Returns(
+            A.CallTo(() => mediator.SendAsync(A<GetFacilitiesByNotificationId>._)).Returns(
                 new List<FacilityData>
                 {
                     CreateFacility(facilityId)
@@ -606,8 +599,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(A<string>._,
-                        A<DeleteFacilityForNotification>.That.Matches(
+                    mediator.SendAsync(A<DeleteFacilityForNotification>.That.Matches(
                             p => p.NotificationId == notificationId && p.FacilityId == facilityId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
