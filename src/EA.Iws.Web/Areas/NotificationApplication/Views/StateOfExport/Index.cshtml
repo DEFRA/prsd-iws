@@ -19,7 +19,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
         @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
         @Html.Gds().HintParagraph("Enter the specific port or border crossing from which your waste will be leaving the UK")
-        @Html.ValidationMessageFor(m => m.EntryOrExitPointId)
+        @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
         @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title="Exit point"})
     </div>
 

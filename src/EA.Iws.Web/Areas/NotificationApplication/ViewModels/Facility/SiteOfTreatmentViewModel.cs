@@ -6,7 +6,7 @@
     using Core.Facilities;
     using Core.Shared;
 
-    public class SiteOfTreatmentViewModel
+    public class SiteOfTreatmentViewModel : IValidatableObject
     {
         public SiteOfTreatmentViewModel()
         {
@@ -15,12 +15,22 @@
 
         public Guid NotificationId { get; set; }
 
-        [Required]
-        [Display(Name = "Site of treatment")]
         public Guid? SelectedSiteOfTreatment { get; set; }
 
         public IList<FacilityData> Facilities { get; set; }
 
         public NotificationType NotificationType { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!SelectedSiteOfTreatment.HasValue)
+            {
+                var errorMessage = (NotificationType == NotificationType.Recovery)
+                    ? "site of recovery"
+                    : "site of disposal";
+
+                yield return new ValidationResult(string.Format("The actual {0} is required", errorMessage), new[] { "SelectedSiteOfTreatment" });
+            }
+        }
     }
 }

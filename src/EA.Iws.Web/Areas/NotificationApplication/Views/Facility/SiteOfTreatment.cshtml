@@ -30,10 +30,17 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(m => m.Facilities[i].Business.Name)
+
+                                @Html.HiddenFor(m => m.Facilities[i].Business.Name)
                             </td>
                             <td>
                                 @Html.DisplayFor(m => m.Facilities[i].Address.StreetOrSuburb),
                                 @Html.DisplayFor(m => m.Facilities[i].Address.TownOrCity)
+
+                                @Html.HiddenFor(m => m.Facilities[i].Address.StreetOrSuburb)
+                                @Html.HiddenFor(m => m.Facilities[i].Address.CountryName)
+                                @Html.HiddenFor(m => m.Facilities[i].Address.CountryId)
+                                @Html.HiddenFor(m => m.Facilities[i].Address.TownOrCity)
                             </td>
                             <td>
                                 @{
@@ -45,6 +52,9 @@
                         }
                         @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
                                 }
+                                
+                                @Html.HiddenFor(m => m.Facilities[i].IsActualSiteOfTreatment)
+                                @Html.HiddenFor(m => m.Facilities[i].Id)
                             </td>
                         </tr>
                     }
@@ -53,7 +63,7 @@
 
         </div>
 
-        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
     }
 }
 else
@@ -62,17 +72,17 @@ else
     <p>@Html.ActionLink("Back to facilities", "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
-        @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
     }
     else
     {
         if (Model.NotificationType == NotificationType.Recovery)
         {
-            @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "RecoveryPreconsent", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+            @Html.ActionLink(Constants.ContinueButtonText, "RecoveryPreconsent", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
         }
         else
         {
-            @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "OperationCodes", "WasteOperations", new { id = Model.NotificationId }, new { @class = "button" })
+            @Html.ActionLink(Constants.ContinueButtonText, "OperationCodes", "WasteOperations", new { id = Model.NotificationId }, new { @class = "button" })
         }
     }
 }

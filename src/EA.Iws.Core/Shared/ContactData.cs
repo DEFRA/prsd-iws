@@ -17,12 +17,12 @@
         [Required]
         [Display(Name = "Telephone number")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression("\\d+", ErrorMessage = "The telephone number is invalid")]
+        [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessage = "The telephone number is invalid")]
         public string Telephone { get; set; }
 
         [Display(Name = "Fax number")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression("\\d+", ErrorMessage = "The fax number is invalid")]
+        [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessage = "The fax number is invalid")]
         public string Fax { get; set; }
 
         [Required]
