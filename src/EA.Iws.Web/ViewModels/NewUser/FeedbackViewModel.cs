@@ -27,7 +27,6 @@
         [Required]
         public RadioButtonStringCollectionViewModel FeedbackOptions { get; set; }
 
-        [Required]
         [StringLength(1200)]
         [Display(Name = "Feedback")]
         public string FeedbackDescription { get; set; }
