@@ -29,7 +29,7 @@
                     ? "site of recovery"
                     : "site of disposal";
 
-                yield return new ValidationResult(string.Format("The actual {0} is required", errorMessage), new[] { "SelectedSiteOfTreatment" });
+                yield return new ValidationResult(string.Format("Please select the actual {0}", errorMessage), new[] { "SelectedSiteOfTreatment" });
             }
         }
     }

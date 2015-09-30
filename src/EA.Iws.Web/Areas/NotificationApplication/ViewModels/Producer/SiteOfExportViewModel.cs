@@ -9,7 +9,7 @@
     {
         public Guid NotificationId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select the site of export")]
         [Display(Name = "Site of export")]
         public Guid? SelectedSiteOfExport { get; set; }
 
