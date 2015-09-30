@@ -79,7 +79,14 @@ $(function() {
                     console.log("An error occurred retrieving address book entries");
                 });
             },
-            select: selectAutocompleteData
+            select: selectAutocompleteData,
+            focus: function (event, ui) {
+                var data = JSON.parse($(ui.item.value).last().html());
+
+                $("#Business_Name").val(data.BusinessData.Name);
+
+                event.preventDefault ? event.preventDefault() : event.returnValue = false;
+            }
         });
     });
 });
