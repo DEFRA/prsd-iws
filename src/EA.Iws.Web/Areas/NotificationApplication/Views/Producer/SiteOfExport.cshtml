@@ -1,6 +1,6 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.SiteOfExportViewModel
 @{
-    ViewBag.Title = "Site Of Export";
+    ViewBag.Title = "Site of export";
 }
 
 <h1 class="heading-large">Which waste generator - producer is the site of export?</h1>
@@ -55,6 +55,7 @@
 }
 else
 {
+    ViewBag.Title = "Site of export: Add a producer first";
     <p>You have not added any producers to this notification. Please add a producer before selecting the site of export.</p>
     <p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
