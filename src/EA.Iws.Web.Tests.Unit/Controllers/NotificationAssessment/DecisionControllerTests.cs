@@ -6,21 +6,22 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationAssessment.Controllers;
     using Areas.NotificationAssessment.ViewModels;
     using FakeItEasy;
+    using Mappings.NotificationAssessment;
+    using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
     using Web.ViewModels.Shared;
     using Xunit;
 
     public class DecisionControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
 
         public DecisionControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
         }
 
         [Fact]
@@ -70,7 +71,7 @@
             expectedDates.DecisionMade = new DateTime(2015, 7, 22);
             var result = await SetDecisionDate(22, 07, 2015, new DecisionViewModel());
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<SetDecision>.That.Matches(dates => dates.DecisionMade == expectedDates.DecisionMade))).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<SetDecision>.That.Matches(dates => dates.DecisionMade == expectedDates.DecisionMade))).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         private Task<ActionResult> SetDecisionDate(int day, int month, int year, DecisionViewModel model)
@@ -102,7 +103,7 @@
 
         private DecisionController GetMockAssessmentController(object viewModel)
         {
-            var decisionController = new DecisionController(() => client);
+            var decisionController = new DecisionController(mediator, new NotificationAssessmentDecisionDataMap());
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

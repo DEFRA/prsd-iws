@@ -19,6 +19,14 @@
         [Display(Name = "Acknowledged")]
         Acknowledged = 7,
         [Display(Name = "Decision required")]
-        DecisionRequiredBy = 8
+        DecisionRequiredBy = 8,
+        [Display(Name = "Withdrawn")]
+        Withdrawn = 9,
+        [Display(Name = "Objected")]
+        Objected = 10,
+        [Display(Name = "Consented")]
+        Consented = 11,
+        [Display(Name = "Consent withdrawn")]
+        ConsentWithdrawn = 12
     }
 }

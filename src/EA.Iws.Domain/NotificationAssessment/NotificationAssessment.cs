@@ -2,6 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using Core.Admin;
     using Core.NotificationAssessment;
     using NotificationApplication;
     using Prsd.Core;
@@ -19,8 +22,20 @@
             NotificationComplete,
             Transmit,
             Acknowledged,
-            DecisionRequiredBySet
+            DecisionRequiredBySet,
+            Withdraw,
+            Object,
+            Consent,
+            WithdrawConsent
         }
+
+        private static readonly IDictionary<DecisionType, Trigger> DecisionTriggers = new Dictionary<DecisionType, Trigger>
+        {
+            { DecisionType.Consent, Trigger.Consent },
+            { DecisionType.Withdrawn, Trigger.Withdraw },
+            { DecisionType.Object, Trigger.Object },
+            { DecisionType.ConsentWithdrawn, Trigger.WithdrawConsent }
+        }; 
 
         private readonly StateMachine<NotificationStatus, Trigger> stateMachine;
 
@@ -30,6 +45,7 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> transmitTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> decisionRequiredByTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<ConsentDecision> consentTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
         
@@ -79,6 +95,7 @@
             transmitTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Transmit);
             acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
             decisionRequiredByTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.DecisionRequiredBySet);
+            consentTrigger = stateMachine.SetTriggerParameters<ConsentDecision>(Trigger.Consent);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -87,30 +104,49 @@
 
             stateMachine.Configure(NotificationStatus.Submitted)
                 .OnEntryFrom(Trigger.Submit, OnSubmit)
-                .Permit(Trigger.NotificationReceived, NotificationStatus.NotificationReceived);
+                .Permit(Trigger.NotificationReceived, NotificationStatus.NotificationReceived)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.NotificationReceived)
                 .OnEntryFrom(receivedTrigger, OnReceived)
-                .PermitIf(Trigger.AssessmentCommenced, NotificationStatus.InAssessment, () => Dates.PaymentReceivedDate.HasValue);
+                .PermitIf(Trigger.AssessmentCommenced, NotificationStatus.InAssessment, () => Dates.PaymentReceivedDate.HasValue)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.InAssessment)
                 .OnEntryFrom(commencedTrigger, OnInAssessment)
-                .Permit(Trigger.NotificationComplete, NotificationStatus.ReadyToTransmit);
+                .Permit(Trigger.NotificationComplete, NotificationStatus.ReadyToTransmit)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.ReadyToTransmit)
                 .OnEntryFrom(completeTrigger, OnCompleted)
-                .Permit(Trigger.Transmit, NotificationStatus.Transmitted);
+                .Permit(Trigger.Transmit, NotificationStatus.Transmitted)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.Transmitted)
                 .OnEntryFrom(transmitTrigger, OnTransmitted)
-                .Permit(Trigger.Acknowledged, NotificationStatus.Acknowledged);
+                .Permit(Trigger.Acknowledged, NotificationStatus.Acknowledged)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.Acknowledged)
                 .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
-                .Permit(Trigger.DecisionRequiredBySet, NotificationStatus.DecisionRequiredBy);
+                .Permit(Trigger.DecisionRequiredBySet, NotificationStatus.DecisionRequiredBy)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.DecisionRequiredBy)
-                .OnEntryFrom(decisionRequiredByTrigger, OnDecisionRequiredBy);
+                .OnEntryFrom(decisionRequiredByTrigger, OnDecisionRequiredBy)
+                .Permit(Trigger.Consent, NotificationStatus.Consented)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
+
+            stateMachine.Configure(NotificationStatus.Consented)
+                .OnEntryFrom(consentTrigger, OnConsented)
+                .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn);
 
             return stateMachine;
         }
@@ -118,6 +154,10 @@
         private void OnSubmit()
         {
             RaiseEvent(new NotificationSubmittedEvent(NotificationApplicationId));
+        }
+
+        private void OnConsented(ConsentDecision decision)
+        {
         }
 
         private void OnReceived(DateTime receivedDate)
@@ -212,6 +252,16 @@
         public void DecisionRequiredBy(DateTime decisionRequiredByDate)
         {
             stateMachine.Fire(decisionRequiredByTrigger, decisionRequiredByDate);
+        }
+
+        public IEnumerable<DecisionType> GetAvailableDecisions()
+        {
+            var triggers = stateMachine.PermittedTriggers.Where(t =>
+            {
+                return DecisionTriggers.Any(dt => dt.Value == t);
+            });
+
+            return DecisionTriggers.Where(dt => triggers.Contains(dt.Value)).Select(dt => dt.Key);
         }
     }
 }

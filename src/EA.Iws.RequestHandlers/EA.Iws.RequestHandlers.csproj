@@ -106,6 +106,7 @@
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationDatesMap.cs" />
     <Compile Include="Mappings\SubmitSummaryDataMap.cs" />
     <Compile Include="Mappings\BacsDetailsMap.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Decorators\NotificationReadOnlyAuthorizeDecorator.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />

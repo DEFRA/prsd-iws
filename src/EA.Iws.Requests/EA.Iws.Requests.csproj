@@ -110,6 +110,7 @@
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetPackagingDataForMovement.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\AmountsAndDatesInfo.cs" />

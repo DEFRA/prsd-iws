@@ -378,6 +378,7 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\decision-dropdown.js" />
     <Content Include="Scripts\jquery-ui-autocomplete-html-extension.js" />
     <Content Include="Scripts\address-book.js" />
     <Content Include="Scripts\application.js" />
@@ -610,6 +611,11 @@
     <Content Include="Areas\NotificationApplication\Views\ReadOnly\Index.cshtml" />
     <Content Include="Areas\AddressBook\Views\Delete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\Index.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Decision\NewIndex.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Decision\_Withdrawn.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Decision\_Object.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Decision\_Consent.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Decision\_History.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -766,12 +772,15 @@
     <Compile Include="Areas\AddressBook\Controllers\SearchController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReadOnlyController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\WasteRecoveryViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\DecisionRecordViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\NotificationAssessmentDecisionViewModel.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Infrastructure\NotificationReadOnlyFilter.cs" />
     <Compile Include="Mappings\AddAddressBookEntryMap.cs" />
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementOperationViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />

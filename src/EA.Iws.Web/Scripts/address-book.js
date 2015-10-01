@@ -63,30 +63,35 @@ function selectAutocompleteData(event, ui) {
     }
 }
 
-$(function() {
-    $("*[data-addressbook-url]").each(function() {
+$(function () {
+    $("*[data-addressbook-url]").each(function () {
         var url = $(this).data("addressbook-url");
         var type = $(this).data("addressbook-type");
         $(this).autocomplete({
             html: true,
-            source: function(request, response) {
-                $.getJSON(getSearchUrlForAddressBook(url,
+            source: function (request, response) {
+                // Does not use .getJSON because caching needs to be removed for this request.
+                $.ajax({
+                    url: getSearchUrlForAddressBook(url,
                         request.term,
                         type),
-                    function() {}).done(function(data) {
+                    success: function () { },
+                    dataType: "json",
+                    cache: false
+                }).done(function (data) {
                     response(autocompleteListEntriesForData(data));
-                }).error(function() {
+                }).error(function () {
                     console.log("An error occurred retrieving address book entries");
                 });
-            },
-            select: selectAutocompleteData,
-            focus: function (event, ui) {
-                var data = JSON.parse($(ui.item.value).last().html());
+    },
+        select: selectAutocompleteData,
+    focus: function (event, ui) {
+        var data = JSON.parse($(ui.item.value).last().html());
 
-                $("#Business_Name").val(data.BusinessData.Name);
+        $("#Business_Name").val(data.BusinessData.Name);
 
-                event.preventDefault ? event.preventDefault() : event.returnValue = false;
-            }
-        });
-    });
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    }
+});
+});
 });

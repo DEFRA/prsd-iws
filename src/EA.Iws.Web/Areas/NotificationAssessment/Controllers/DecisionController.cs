@@ -3,21 +3,46 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Admin;
-    using Infrastructure;
+    using Core.NotificationAssessment;
     using Prsd.Core.Helpers;
+    using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
+    using Requests.NotificationAssessment;
     using ViewModels;
 
     [Authorize(Roles = "internal")]
     public class DecisionController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
+        private readonly IMap<NotificationAssessmentDecisionData, NotificationAssessmentDecisionViewModel> decisionMap;
 
-        public DecisionController(Func<IIwsClient> apiClient)
+        public DecisionController(IMediator mediator, 
+            IMap<NotificationAssessmentDecisionData, NotificationAssessmentDecisionViewModel> decisionMap)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
+            this.decisionMap = decisionMap;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> NewIndex(Guid id)
+        {
+            var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(id));
+
+            return View(decisionMap.Map(data));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewIndex(Guid id, NotificationAssessmentDecisionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -52,10 +77,8 @@
                 DecisionType = Convert.ToInt32(model.DecisionType)
             };
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setDates);
-            }
+            await mediator.SendAsync(setDates);
+            
             model.DecisionTypes = GetDecisionTypes();
 
             return RedirectToAction("Index", "Home", new { area = "NotificationAssessment" });
