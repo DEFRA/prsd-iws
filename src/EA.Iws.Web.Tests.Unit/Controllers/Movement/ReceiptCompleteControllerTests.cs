@@ -3,26 +3,27 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
+    using TestHelpers.Factories;
     using Xunit;
 
     public class ReceiptCompleteControllerTests
     {
         private static readonly Guid MovementId = new Guid("3509A56B-FA19-4A50-9C44-FB43E490EC68");
         private static readonly Guid AnyGuid = new Guid("29C4BF73-017B-4C2C-BC7C-0E2EEBF5CAF3");
-
-        private readonly IIwsClient client;
         private readonly ReceiptCompleteController controller;
+
+        private readonly IMediator mediator;
 
         public ReceiptCompleteControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
-            controller = new ReceiptCompleteController(() => client);    
+            controller = new ReceiptCompleteController(mediator);
         }
 
         [Fact]
@@ -30,18 +31,24 @@
         {
             await controller.Index(MovementId);
 
-            A.CallTo(() => 
-                client.SendAsync(
-                    A<string>.Ignored, 
-                    A<GetNotificationIdByMovementId>.That.Matches(r => 
+            A.CallTo(() =>
+                mediator.SendAsync(
+                    A<GetNotificationIdByMovementId>.That.Matches(r =>
                         r.MovementId == MovementId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
-        public void PostRedirectsToCorrectScreen()
+        public async Task PostRedirectsToCorrectScreen()
         {
-            var result = controller.Index(AnyGuid, new ReceiptCompleteViewModel { NotificationId = AnyGuid });
+            var result =
+                await
+                    controller.Index(AnyGuid,
+                        new ReceiptCompleteViewModel
+                        {
+                            NotificationId = AnyGuid,
+                            File = FakeHttpPostedFileFactory.CreateTestFile()
+                        });
 
             Assert.IsType<RedirectToRouteResult>(result);
             var routeResult = result as RedirectToRouteResult;

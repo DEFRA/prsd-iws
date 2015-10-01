@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Data.Entity.ModelConfiguration;
     using Domain.Movement;
-    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using Prsd.Core.Helpers;
 

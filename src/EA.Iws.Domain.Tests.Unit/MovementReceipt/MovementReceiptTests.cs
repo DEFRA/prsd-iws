@@ -2,7 +2,6 @@
 {
     using Core.MovementReceipt;
     using Domain.Movement;
-    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using System;
@@ -144,7 +143,7 @@
         }
 
         [Fact]
-        public void IncompleteMovement_IsNotReceieved()
+        public void IncompleteMovement_IsNotReceived()
         {
             movement.Receive(AfterMovementDate);
 
@@ -159,6 +158,18 @@
             movement.Receipt.Reject(AnyString);
 
             Assert.False(movement.IsReceived);
+        }
+
+        [Fact]
+        public void CanSetCertificateFile()
+        {
+            var fileId = new Guid("5665B9BA-8B32-44C6-93F1-161765F9DF66");
+
+            movement.Receive(AfterMovementDate);
+
+            movement.Receipt.SetCertificateFile(fileId);
+
+            Assert.Equal(fileId, movement.Receipt.FileId);
         }
     }
 }

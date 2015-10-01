@@ -5,7 +5,6 @@
     using System.Linq;
     using Core.Shared;
     using Domain.Movement;
-    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using Helpers;
 

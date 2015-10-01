@@ -2,8 +2,7 @@
 {
     using System;
     using Core.MovementReceipt;
-    using Domain.MovementOperationReceipt;
-    using Domain.MovementReceipt;
+    using Domain.Movement;
     using Helpers;
 
     public class TestableMovementReceipt : MovementReceipt

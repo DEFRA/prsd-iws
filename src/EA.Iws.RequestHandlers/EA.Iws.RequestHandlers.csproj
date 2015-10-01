@@ -115,6 +115,7 @@
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="MovementOperationReceipt\CreateMovementOperationReceiptForMovementHandler.cs" />
     <Compile Include="MovementOperationReceipt\GetMovementOperationReceiptDataByMovementIdHandler.cs" />
+    <Compile Include="MovementOperationReceipt\SetCertificateOfReceiptHandler.cs" />
     <Compile Include="MovementReceipt\CreateMovementReceiptForMovementHandler.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandler.cs" />
     <Compile Include="MovementReceipt\UpdateMovementAcceptanceDataByMovementIdHandler.cs" />

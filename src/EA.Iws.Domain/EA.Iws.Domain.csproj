@@ -65,6 +65,8 @@
     <Compile Include="DateRange.cs" />
     <Compile Include="DisposalCost.cs" />
     <Compile Include="EstimatedValue.cs" />
+    <Compile Include="FileStore\File.cs" />
+    <Compile Include="FileStore\IFileRepository.cs" />
     <Compile Include="FinancialGuarantee\ApproveDates.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuarantee.cs" />
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
@@ -75,8 +77,10 @@
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
-    <Compile Include="MovementOperationReceipt\MovementOperationReceipt.cs" />
-    <Compile Include="MovementReceipt\MovementReceipt.cs" />
+    <Compile Include="Movement\CertificateOfReceiptFactory.cs" />
+    <Compile Include="Movement\CertificateOfReceiptName.cs" />
+    <Compile Include="Movement\MovementOperationReceipt.cs" />
+    <Compile Include="Movement\MovementReceipt.cs" />
     <Compile Include="Movement\ActiveMovements.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />

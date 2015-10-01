@@ -1,8 +1,7 @@
-﻿namespace EA.Iws.Domain.MovementReceipt
+﻿namespace EA.Iws.Domain.Movement
 {
     using System;
     using Core.MovementReceipt;
-    using MovementOperationReceipt;
     using Prsd.Core.Domain;
 
     public class MovementReceipt : Entity
@@ -25,6 +24,8 @@
         public decimal? Quantity { get; internal set; }
 
         public virtual MovementOperationReceipt OperationReceipt { get; internal set; }
+
+        public Guid? FileId { get; private set; }
 
         public void SetQuantity(decimal quantity)
         {
@@ -60,6 +61,11 @@
         {
             Decision = Core.MovementReceipt.Decision.Accepted;
             RejectReason = null;
+        }
+
+        public void SetCertificateFile(Guid fileId)
+        {
+            FileId = fileId;
         }
     }
 }

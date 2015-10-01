@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Domain.MovementOperationReceipt
+﻿namespace EA.Iws.Domain.Movement
 {
     using System;
     using Prsd.Core.Domain;

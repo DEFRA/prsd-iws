@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using Core.Shared;
-    using MovementOperationReceipt;
-    using MovementReceipt;
     using NotificationApplication;
     using Prsd.Core;
     using Prsd.Core.Domain;

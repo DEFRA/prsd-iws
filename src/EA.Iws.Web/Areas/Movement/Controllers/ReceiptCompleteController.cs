@@ -1,38 +1,42 @@
 ﻿namespace EA.Iws.Web.Areas.Movement.Controllers
 {
     using System;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.MovementOperationReceipt;
     using ViewModels;
 
     public class ReceiptCompleteController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public ReceiptCompleteController(Func<IIwsClient> apiClient)
+        public ReceiptCompleteController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var notificationId = await client.SendAsync(User.GetAccessToken(), new GetNotificationIdByMovementId(id));
+            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
 
-                return View(new ReceiptCompleteViewModel { NotificationId = notificationId });
-            }
+            return View(new ReceiptCompleteViewModel { NotificationId = notificationId });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Guid id, ReceiptCompleteViewModel model)
+        public async Task<ActionResult> Index(Guid id, ReceiptCompleteViewModel model)
         {
-            return RedirectToAction("ApprovedNotification", "Applicant", new { id = model.NotificationId });
+            var fileExtension = Path.GetExtension(model.File.FileName);
+            var uploadedFile = new byte[model.File.InputStream.Length];
+            model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+
+            await mediator.SendAsync(new SetCertificateOfReceipt(id, uploadedFile, fileExtension));
+
+            return RedirectToAction("ApprovedNotification", "Applicant", new { id = model.NotificationId, area = string.Empty });
         }
     }
 }

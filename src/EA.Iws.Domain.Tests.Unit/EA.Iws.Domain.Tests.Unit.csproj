@@ -74,6 +74,7 @@
     <Compile Include="MovementOperationReceipt\MovementOperationReceiptTests.cs" />
     <Compile Include="MovementReceipt\MovementReceiptTests.cs" />
     <Compile Include="Movement\ActiveMovementsTests.cs" />
+    <Compile Include="Movement\CertificateOfReceiptNameTests.cs" />
     <Compile Include="Movement\MovementQuantityTests.cs" />
     <Compile Include="Movement\MovementTests.cs" />
     <Compile Include="Movement\ReceivedMovementsTests.cs" />

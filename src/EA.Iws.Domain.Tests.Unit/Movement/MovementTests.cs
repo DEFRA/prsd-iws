@@ -4,7 +4,6 @@
     using Core.MovementReceipt;
     using Core.Shared;
     using Domain.Movement;
-    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using Prsd.Core;
     using TestHelpers.Helpers;

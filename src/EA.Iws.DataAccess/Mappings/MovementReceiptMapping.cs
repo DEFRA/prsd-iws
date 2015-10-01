@@ -1,8 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Mappings
 {
     using System.Data.Entity.ModelConfiguration;
-    using Domain.MovementOperationReceipt;
-    using Domain.MovementReceipt;
+    using Domain.Movement;
     using Prsd.Core.Helpers;
 
     internal class MovementReceiptMapping : EntityTypeConfiguration<MovementReceipt>

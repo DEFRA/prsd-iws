@@ -46,6 +46,8 @@
             builder.RegisterType<MovementQuantity>().AsSelf();
             builder.RegisterType<SetActualDateOfShipment>().AsSelf();
             builder.RegisterType<NotificationChargeCalculator>().AsSelf();
+            builder.RegisterType<CertificateOfReceiptFactory>().AsSelf();
+            builder.RegisterType<CertificateOfReceiptName>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();

@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
     using Core.Shared;
     using Domain.Movement;
-    using Domain.MovementReceipt;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
