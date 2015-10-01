@@ -5,10 +5,10 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Admin.NotificationAssessment;
     using Requests.NotificationAssessment;
     using ViewModels;
 
@@ -18,7 +18,7 @@
         private readonly IMediator mediator;
         private readonly IMap<NotificationAssessmentDecisionData, NotificationAssessmentDecisionViewModel> decisionMap;
 
-        public DecisionController(IMediator mediator, 
+        public DecisionController(IMediator mediator,
             IMap<NotificationAssessmentDecisionData, NotificationAssessmentDecisionViewModel> decisionMap)
         {
             this.mediator = mediator;
@@ -26,7 +26,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> NewIndex(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(id));
 
@@ -35,53 +35,32 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewIndex(Guid id, NotificationAssessmentDecisionViewModel model)
+        public async Task<ActionResult> Index(Guid id, NotificationAssessmentDecisionViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult Index(Guid id)
-        {
-            var model = new DecisionViewModel
+            switch (model.SelectedDecision)
             {
-                NotificationId = id, 
-                DecisionTypes = GetDecisionTypes()
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(DecisionViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                model.DecisionTypes = GetDecisionTypes();
-                return View(model);
+                case DecisionType.Consent:
+                    await PostConsent(model);
+                    break;
+                default:
+                    break;
             }
-
-            var setDates = new SetDecision
-            {
-                NotificationApplicationId = model.NotificationId,
-                ConditionsOfConsent = model.ConditionsOfConsent,
-                DecisionMade = model.DecisionMadeDate.AsDateTime(),
-                ConsentedFrom = model.ConsentValidFromDate.AsDateTime(),
-                ConsentedTo = model.ConsentValidToDate.AsDateTime(),
-                DecisionType = Convert.ToInt32(model.DecisionType)
-            };
-
-            await mediator.SendAsync(setDates);
-            
-            model.DecisionTypes = GetDecisionTypes();
 
             return RedirectToAction("Index", "Home", new { area = "NotificationAssessment" });
+        }
+
+        private async Task PostConsent(NotificationAssessmentDecisionViewModel model)
+        {
+            var request = new ConsentNotificationApplication(model.NotificationId,
+                new DateRange(model.ConsentValidFromDate.AsDateTime().Value, model.ConsentValidToDate.AsDateTime().Value),
+                model.ConsentConditions);
+
+            await mediator.SendAsync(request);
         }
 
         private static SelectList GetDecisionTypes()

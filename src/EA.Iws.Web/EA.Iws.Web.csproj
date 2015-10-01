@@ -463,7 +463,6 @@
     <Content Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatment.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\Remove.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\Index.cshtml" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\analytics.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\download-link-tracker.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\error-tracking.js" />
@@ -606,7 +605,7 @@
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalCost.cshtml" />
     <Content Include="Areas\AddressBook\Views\Delete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\Index.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\NewIndex.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Decision\Index.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Decision\_Withdrawn.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Decision\_Object.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Decision\_Consent.cshtml" />

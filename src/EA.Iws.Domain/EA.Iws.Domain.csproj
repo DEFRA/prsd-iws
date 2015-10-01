@@ -62,7 +62,6 @@
     <Compile Include="CompetentAuthorityBacsDetails.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Country.cs" />
-    <Compile Include="DateRange.cs" />
     <Compile Include="DisposalCost.cs" />
     <Compile Include="EstimatedValue.cs" />
     <Compile Include="FileStore\File.cs" />
@@ -99,7 +98,7 @@
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
-    <Compile Include="NotificationAssessment\ConsentDecision.cs" />
+    <Compile Include="NotificationAssessment\Consent.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />
     <Compile Include="NotificationAssessment\NotificationDecision.cs" />

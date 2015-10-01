@@ -6,9 +6,10 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.NotificationAssessment;
+    using Prsd.Core;
     using Web.ViewModels.Shared;
 
-    public class NotificationAssessmentDecisionViewModel
+    public class NotificationAssessmentDecisionViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
@@ -47,5 +48,50 @@
             PreviousDecisions = new List<DecisionRecordViewModel>();
             DecisionTypes = new List<DecisionType>();
         }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (SelectedDecision == DecisionType.Consent)
+            {
+                return ValidateConsent();
+            }
+
+            return new ValidationResult[0];
+        }
+
+        private IEnumerable<ValidationResult> ValidateConsent()
+        {
+            if (string.IsNullOrWhiteSpace(ConsentConditions))
+            {
+                yield return new ValidationResult("The conditions of consent are required", 
+                    new[] { "ConsentConditions" });
+            }
+
+            if (!ConsentValidFromDate.IsCompleted)
+            {
+                yield return new ValidationResult("The consent valid from date is required", 
+                    new[] { "ConsentValidFromDate" });
+            }
+
+            if (!ConsentValidToDate.IsCompleted)
+            {
+                yield return new ValidationResult("The consent valid to date is required", 
+                    new[] { "ConsentValidToDate" });
+            }
+
+            if (ConsentValidFromDate.IsCompleted && ConsentValidFromDate.IsCompleted 
+                && ConsentValidFromDate.AsDateTime() > ConsentValidToDate.AsDateTime())
+            {
+                yield return new ValidationResult("The consent valid from date must be before the consent valid to date", 
+                    new[] { "ConsentValidFromDate" });
+            }
+
+            if (ConsentValidFromDate.IsCompleted 
+                && ConsentValidFromDate.AsDateTime().GetValueOrDefault().Date < SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult("The consent valid from date must not be in the past", 
+                    new[] { "ConsentValidFromDate" });
+            }
+        } 
     }
 }

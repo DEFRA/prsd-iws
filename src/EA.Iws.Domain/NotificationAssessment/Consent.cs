@@ -1,9 +1,11 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using Core.Shared;
     using Prsd.Core;
+    using Prsd.Core.Domain;
 
-    public class ConsentDecision
+    public class Consent : Entity
     {
         public DateTime ValidFrom { get; private set; }
 
@@ -11,9 +13,9 @@
 
         public string Conditions { get; private set; }
 
-        public DateTime DecisionDate { get; private set; }
+        public Guid UserId { get; private set; }
 
-        public ConsentDecision(DateRange consentRange, string conditions, DateTime decisionDate)
+        public Consent(DateRange consentRange, string conditions, Guid userId)
         {
             Guard.ArgumentNotNullOrEmpty(() => conditions, conditions);
 
@@ -22,7 +24,7 @@
 
             Conditions = conditions;
 
-            DecisionDate = decisionDate;
+            UserId = userId;
         }
     }
 }

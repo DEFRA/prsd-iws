@@ -86,6 +86,7 @@
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\BankHolidayMapping.cs" />
     <Compile Include="Mappings\BusinessTypeMapping.cs" />
+    <Compile Include="Mappings\ConsentMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\DisposalCostMapping.cs" />
     <Compile Include="Mappings\WasteDisposalMapping.cs" />

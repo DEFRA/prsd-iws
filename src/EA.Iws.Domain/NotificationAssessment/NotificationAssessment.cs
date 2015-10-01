@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Linq;
     using Core.Admin;
     using Core.NotificationAssessment;
@@ -45,7 +44,7 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> transmitTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> decisionRequiredByTrigger;
-        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<ConsentDecision> consentTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<Consent> consentTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
         
@@ -59,6 +58,8 @@
         }
 
         public virtual NotificationDates Dates { get; set; }
+
+        public virtual Consent Consent { get; private set; }
 
         public bool CanEditNotification
         {
@@ -95,7 +96,7 @@
             transmitTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Transmit);
             acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
             decisionRequiredByTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.DecisionRequiredBySet);
-            consentTrigger = stateMachine.SetTriggerParameters<ConsentDecision>(Trigger.Consent);
+            consentTrigger = stateMachine.SetTriggerParameters<Consent>(Trigger.Consent);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -156,8 +157,9 @@
             RaiseEvent(new NotificationSubmittedEvent(NotificationApplicationId));
         }
 
-        private void OnConsented(ConsentDecision decision)
+        private void OnConsented(Consent decision)
         {
+            Consent = decision;
         }
 
         private void OnReceived(DateTime receivedDate)
@@ -262,6 +264,11 @@
             });
 
             return DecisionTriggers.Where(dt => triggers.Contains(dt.Value)).Select(dt => dt.Key);
+        }
+
+        public void RecordConsent(Consent consentDecision)
+        {
+            stateMachine.Fire(consentTrigger, consentDecision);
         }
     }
 }

@@ -127,6 +127,7 @@
     <Content Include="scripts\Update\Sprint17\20151001-135000-add-address-type.sql" />
     <Content Include="scripts\Update\Sprint17\20150929-164000-migrate-percentage-recoverable-to-recovery-info.sql" />
     <Content Include="scripts\Update\Sprint17\20151001-163000-create-filestore-table.sql" />
+    <Content Include="scripts\Update\Sprint17\20151001-164500-create-consent-table.sql" />
     <Content Include="scripts\Update\Sprint17\20151002-141734-remove-old-disposal-data-columns.sql" />
     <Content Include="scripts\Update\Sprint17\20151001-162600-create-filestore-filegroup.sql" />
     <Content Include="scripts\Update\Sprint17\20151002-143100-add-fileid-movement-recepit.sql" />

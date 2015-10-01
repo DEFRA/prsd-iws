@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Domain
+﻿namespace EA.Iws.Core.Shared
 {
     using System;
 
