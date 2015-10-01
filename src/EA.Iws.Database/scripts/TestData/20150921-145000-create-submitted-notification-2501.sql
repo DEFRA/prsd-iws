@@ -18,7 +18,6 @@ INSERT [Notification].[notification]
         [specialhandlingdetails],
         [meansoftransport],
         [isrecoverypercentagedataprovidedbyimporter],
-        [percentagerecoverable],
         [methodofdisposal],
         [wastegenerationprocess],
         [iswastegenerationprocessattached])
@@ -34,7 +33,6 @@ VALUES (@NotificationId,
         NULL,
         N'R;S;R;A;R',
         1,
-        NULL,
         NULL,
         NULL,
         1)

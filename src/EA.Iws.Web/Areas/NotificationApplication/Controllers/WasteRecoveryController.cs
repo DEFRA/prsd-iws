@@ -40,7 +40,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Percentage(Guid id, bool? backToOverview = null)
+        public ActionResult Percentage(Guid id, bool? backToOverview = null)
         {
             //TODO: mediator call
 

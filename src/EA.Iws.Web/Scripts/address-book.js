@@ -29,13 +29,13 @@ function autocompleteListEntriesForData(data) {
 /*
 * Sets the drop-down entry displayed on auto-complete to show the following:
 * Business Name (bold)
-* Address line 1, Postcode
+* Address line 1, Postcode (or Town/City if postcode is null)
 * Hidden Json string
 */
 function autocompleteHtmlForAddressBookRecord(addressBookRecord) {
     return "<span class='autocomplete-title'>" + addressBookRecord.BusinessData.Name + "</span>"
         + "<span class='autocomplete-line'>" + addressBookRecord.AddressData.StreetOrSuburb + ", "
-        + addressBookRecord.AddressData.PostalCode + "</span>"
+        + ((addressBookRecord.AddressData.PostalCode) ? addressBookRecord.AddressData.PostalCode : addressBookRecord.AddressData.TownOrCity) + "</span>"
         + "<span class='autocomplete-data'>" + JSON.stringify(addressBookRecord) + "</span>";
 }
 
