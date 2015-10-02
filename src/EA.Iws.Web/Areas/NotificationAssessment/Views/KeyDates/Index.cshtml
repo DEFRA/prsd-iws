@@ -220,7 +220,7 @@
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
                     @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
                     @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
-                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer)
+                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30})
                 </div>
             </fieldset>
         }
