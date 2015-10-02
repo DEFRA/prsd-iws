@@ -182,6 +182,11 @@
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
                 await
                     mediator.SendAsync(
                         new SetActualSiteOfTreatment(model.SelectedSiteOfTreatment.GetValueOrDefault(),
