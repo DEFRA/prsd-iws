@@ -163,7 +163,6 @@
     <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />
     <Compile Include="Controllers\ApplicantControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\CarrierControllerTests.cs" />
-    <Compile Include="Controllers\NotificationAssessment\DecisionControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\KeyDatesControllerTests.cs" />
     <Compile Include="Controllers\ControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\FacilityControllerTests.cs" />

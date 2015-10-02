@@ -5,7 +5,7 @@ CREATE TABLE [Notification].[Consent]
 	[ValidTo] DATE NOT NULL,
 	[Conditions] NVARCHAR(4000) NOT NULL,
 	[UserId] UNIQUEIDENTIFIER NOT NULL,
-	[NotificationAssessmentId] UNIQUEIDENTIFIER CONSTRAINT FK_Consent_NotificationAssessment FOREIGN KEY REFERENCES [Notification].[NotificationAssessment]([Id]) NOT NULL,
+	[NotificationApplicationId] UNIQUEIDENTIFIER CONSTRAINT FK_Consent_Notification FOREIGN KEY REFERENCES [Notification].[Notification]([Id]) NOT NULL,
 	[RowVersion] ROWVERSION NOT NULL
 );
 GO

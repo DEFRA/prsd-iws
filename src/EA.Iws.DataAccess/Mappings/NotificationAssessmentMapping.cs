@@ -20,10 +20,6 @@
             HasRequired(x => x.Dates)
                 .WithRequiredPrincipal()
                 .Map(m => m.MapKey("NotificationAssessmentId"));
-
-            HasOptional(x => x.Consent)
-                .WithOptionalPrincipal()
-                .Map(m => m.MapKey("NotificationAssessmentId"));
         }
     }
 }

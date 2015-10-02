@@ -5,7 +5,9 @@
     using System.Linq;
     using Core.Admin;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using NotificationApplication;
+    using NotificationConsent;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -28,13 +30,14 @@
             WithdrawConsent
         }
 
-        private static readonly IDictionary<DecisionType, Trigger> DecisionTriggers = new Dictionary<DecisionType, Trigger>
-        {
-            { DecisionType.Consent, Trigger.Consent },
-            { DecisionType.Withdrawn, Trigger.Withdraw },
-            { DecisionType.Object, Trigger.Object },
-            { DecisionType.ConsentWithdrawn, Trigger.WithdrawConsent }
-        }; 
+        private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
+            = new BidirectionalDictionary<DecisionType, Trigger>(new Dictionary<DecisionType, Trigger>
+                {
+                    { DecisionType.Consent, Trigger.Consent },
+                    { DecisionType.Withdrawn, Trigger.Withdraw },
+                    { DecisionType.Object, Trigger.Object },
+                    { DecisionType.ConsentWithdrawn, Trigger.WithdrawConsent }
+                });
 
         private readonly StateMachine<NotificationStatus, Trigger> stateMachine;
 
@@ -44,10 +47,9 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> transmitTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> decisionRequiredByTrigger;
-        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<Consent> consentTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
-        
+
         public NotificationStatus Status { get; private set; }
 
         protected virtual ICollection<NotificationStatusChange> StatusChangeCollection { get; set; }
@@ -58,8 +60,6 @@
         }
 
         public virtual NotificationDates Dates { get; set; }
-
-        public virtual Consent Consent { get; private set; }
 
         public bool CanEditNotification
         {
@@ -96,7 +96,6 @@
             transmitTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Transmit);
             acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
             decisionRequiredByTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.DecisionRequiredBySet);
-            consentTrigger = stateMachine.SetTriggerParameters<Consent>(Trigger.Consent);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -146,7 +145,6 @@
                 .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.Consented)
-                .OnEntryFrom(consentTrigger, OnConsented)
                 .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn);
 
             return stateMachine;
@@ -155,11 +153,6 @@
         private void OnSubmit()
         {
             RaiseEvent(new NotificationSubmittedEvent(NotificationApplicationId));
-        }
-
-        private void OnConsented(Consent decision)
-        {
-            Consent = decision;
         }
 
         private void OnReceived(DateTime receivedDate)
@@ -258,17 +251,18 @@
 
         public IEnumerable<DecisionType> GetAvailableDecisions()
         {
-            var triggers = stateMachine.PermittedTriggers.Where(t =>
-            {
-                return DecisionTriggers.Any(dt => dt.Value == t);
-            });
+            var triggers = stateMachine.PermittedTriggers
+                .Where(t => DecisionTriggers.ContainsKey(t))
+                .Select(t => DecisionTriggers[t]);
 
-            return DecisionTriggers.Where(dt => triggers.Contains(dt.Value)).Select(dt => dt.Key);
+            return triggers;
         }
 
-        public void RecordConsent(Consent consentDecision)
+        internal Consent Consent(DateRange dateRange, string conditions, Guid userId)
         {
-            stateMachine.Fire(consentTrigger, consentDecision);
+            stateMachine.Fire(Trigger.Consent);
+
+            return new Consent(NotificationApplicationId, dateRange, conditions, userId);
         }
     }
 }

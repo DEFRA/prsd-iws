@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Core.Shared
+﻿namespace EA.Iws.Domain
 {
     using System;
 
@@ -11,6 +11,10 @@
         public int Days
         {
             get { return (To - From).Days; }
+        }
+
+        protected DateRange()
+        {
         }
 
         public DateRange(DateTime from, DateTime to)

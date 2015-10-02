@@ -83,6 +83,7 @@
     <Compile Include="Mappings\ActivityMapping.cs" />
     <Compile Include="Mappings\AddressBookMapping.cs" />
     <Compile Include="Mappings\AddressBookRecordMapping.cs" />
+    <Compile Include="Mappings\DateRangeMapping.cs" />
     <Compile Include="Mappings\AddressMapping.cs" />
     <Compile Include="Mappings\BankHolidayMapping.cs" />
     <Compile Include="Mappings\BusinessTypeMapping.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Mappings\WasteTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressBookRepository.cs" />
+    <Compile Include="Repositories\NotificationConsentRepository.cs" />
     <Compile Include="Repositories\WasteDisposalRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />
     <Compile Include="Repositories\WasteRecoveryRepository.cs" />

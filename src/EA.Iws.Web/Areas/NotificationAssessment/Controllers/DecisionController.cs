@@ -5,8 +5,6 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.NotificationAssessment;
-    using Core.Shared;
-    using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
@@ -57,15 +55,11 @@
         private async Task PostConsent(NotificationAssessmentDecisionViewModel model)
         {
             var request = new ConsentNotificationApplication(model.NotificationId,
-                new DateRange(model.ConsentValidFromDate.AsDateTime().Value, model.ConsentValidToDate.AsDateTime().Value),
+                model.ConsentValidFromDate.AsDateTime().Value, 
+                model.ConsentValidToDate.AsDateTime().Value,
                 model.ConsentConditions);
 
             await mediator.SendAsync(request);
-        }
-
-        private static SelectList GetDecisionTypes()
-        {
-            return new SelectList(EnumHelper.GetValues(typeof(DecisionType)), "Key", "Value");
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Requests.NotificationAssessment
 {
     using System;
-    using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Mediator;
 
@@ -9,18 +8,22 @@
     {
         public Guid NotificationId { get; set; }
 
-        public DateRange ConsentRange { get; set; }
+        public DateTime ConsentFrom { get; set; }
+
+        public DateTime ConsentTo { get; set; }
 
         public string ConsentConditions { get; set; }
 
         public ConsentNotificationApplication(Guid notificationId, 
-            DateRange consentRange,
+            DateTime consentFrom,
+            DateTime consentTo,
             string consentConditions)
         {
             Guard.ArgumentNotNullOrEmpty(() => consentConditions, consentConditions);
 
             NotificationId = notificationId;
-            ConsentRange = consentRange;
+            ConsentFrom = consentFrom;
+            ConsentTo = consentTo;
             ConsentConditions = consentConditions;
         }
     }

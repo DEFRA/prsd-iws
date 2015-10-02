@@ -9,13 +9,19 @@
     {
         public NotificationAssessmentDecisionData Map(NotificationAssessment source)
         {
-            return new NotificationAssessmentDecisionData
+            var data = new NotificationAssessmentDecisionData
             {
                 NotificationId = source.NotificationApplicationId,
                 Status = source.Status,
-                StatusHistory = source.StatusChanges.Select(sc => sc.Status).ToArray(),
+                StatusHistory = source.StatusChanges.Select(sc => new NotificationAssessmentDecisionRecord
+                {
+                    Date = sc.ChangeDate,
+                    Status = sc.Status
+                }).ToArray(),
                 AvailableDecisions = source.GetAvailableDecisions()
             };
+
+            return data;
         }
     }
 }

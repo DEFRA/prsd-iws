@@ -74,7 +74,8 @@
     <Compile Include="Movement\MovementProgressAndSummaryData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
-    <Compile Include="Shared\DateRange.cs" />
+    <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
+    <Compile Include="Shared\BidirectionalDictionary.cs" />
     <Compile Include="Shared\CompetentAuthorityMetadata.cs" />
     <Compile Include="Shared\ProvidedBy.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />

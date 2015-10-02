@@ -6,6 +6,7 @@
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationConsent;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
@@ -48,6 +49,7 @@
             builder.RegisterType<NotificationChargeCalculator>().AsSelf();
             builder.RegisterType<CertificateOfReceiptFactory>().AsSelf();
             builder.RegisterType<CertificateOfReceiptName>().AsSelf();
+            builder.RegisterType<ConsentNotification>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();

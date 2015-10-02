@@ -13,6 +13,7 @@
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationApplication.WasteRecovery;
     using Domain.NotificationAssessment;
+    using Domain.NotificationConsent;
     using Domain.TransportRoute;
     using Prsd.Core.DataAccess.Extensions;
     using Prsd.Core.Domain;
@@ -75,7 +76,9 @@
         
         public virtual DbSet<WasteRecovery> WasteRecoveries { get; set; }
 
-        public virtual DbSet<WasteDisposal> WasteDisposals { get; set; } 
+        public virtual DbSet<WasteDisposal> WasteDisposals { get; set; }
+
+        public virtual DbSet<Consent> Consents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
