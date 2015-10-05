@@ -6,7 +6,6 @@
     using DataAccess;
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mediator;
-    using RequestHandlers.Notification;
     using Requests.Movement;
 
     internal class GetMovementQuantityDataByMovementIdHandler : IRequestHandler<GetMovementQuantityDataByMovementId, MovementQuantityData>

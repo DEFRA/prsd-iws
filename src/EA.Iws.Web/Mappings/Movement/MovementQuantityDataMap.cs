@@ -18,7 +18,7 @@
             {
                 quantity = Math.Ceiling(source.ThisMovementQuantity.Value) == 
                     source.ThisMovementQuantity.Value 
-                    ? ((int)source.ThisMovementQuantity.Value).ToString("G29") 
+                    ? source.ThisMovementQuantity.Value.ToString("G29") 
                     : source.ThisMovementQuantity.Value.ToString("0,0.0000");
             }
 
