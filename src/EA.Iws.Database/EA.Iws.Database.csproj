@@ -121,6 +121,8 @@
     <Content Include="scripts\Update\Sprint16\20150922-160000-fix-any-missed-conversions.sql" />
     <Content Include="scripts\Update\Sprint17\20150923-170000-add-address-book.sql" />
     <Content Include="scripts\Update\Sprint17\20150924-094000-create-transport-route-table.sql" />
+    <Content Include="scripts\Update\Sprint17\20150928-104547-add-disposal-info-table.sql" />
+    <Content Include="scripts\Update\Sprint17\20150928-114734-migrate-disposal-info-data.sql" />
     <Content Include="scripts\Update\Sprint17\20150929-144444-update-providers-where-recovery-info-exists.sql" />
     <Content Include="scripts\Update\Sprint17\20151001-135000-add-address-type.sql" />
     <Content Include="scripts\Update\Sprint17\20150929-164000-migrate-percentage-recoverable-to-recovery-info.sql" />

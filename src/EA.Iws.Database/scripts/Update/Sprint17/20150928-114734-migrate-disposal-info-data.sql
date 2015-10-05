@@ -8,7 +8,7 @@ SELECT
 	,[NotificationId]
       ,[DisposalUnit]
       ,[DisposalAmount]
-	  ,B.[MethodOfDisposal]
+	  ,RIGHT(B.[MethodOfDisposal], 39)
   FROM [Notification].[RecoveryInfo] A
   INNER JOIN 
   [Notification].[Notification]  B on A.NotificationId = B.Id
