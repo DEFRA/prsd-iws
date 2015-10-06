@@ -160,7 +160,7 @@
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCostHandler.cs" />
     <Compile Include="WasteRecovery\GetWasteRecoveryProviderHandler.cs" />
-    <Compile Include="WasteRecovery\ProviderChangedEventHandler.cs" />
+    <Compile Include="WasteRecovery\DeleteWasteRecoveryWhenProviderChangesToImporter.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecoveryHandler.cs" />
     <Compile Include="WasteRecovery\SetWasteRecoveryProviderHandler.cs" />
     <Compile Include="WasteRecovery\GetDisposalCostHandler.cs" />

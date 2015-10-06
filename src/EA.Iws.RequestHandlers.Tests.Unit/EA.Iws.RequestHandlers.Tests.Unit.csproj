@@ -143,7 +143,7 @@
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandlerTests.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCostHandlerTests.cs" />
     <Compile Include="WasteRecovery\GetWasteRecoveryProviderHandlerTests.cs" />
-    <Compile Include="WasteRecovery\ProviderChangedEventHandlerTests.cs" />
+    <Compile Include="WasteRecovery\DeleteWasteRecoveryWhenProviderChangesToImporterTests.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecoveryHandlerTests.cs" />
     <Compile Include="WasteRecovery\SetWasteRecoveryProviderHandlerTests.cs" />
     <Compile Include="TestBase.cs" />
