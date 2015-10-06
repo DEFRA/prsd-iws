@@ -1,14 +1,21 @@
 ﻿namespace EA.Iws.Web
 {
+    using System.Web.Mvc;
     using Autofac;
     using Autofac.Integration.Mvc;
+    using Prsd.Core.Web.Mvc;
 
     public class AutofacBootstrapper
     {
         public static IContainer Initialize(ContainerBuilder builder)
         {
             // Register all controllers
-            builder.RegisterControllers(typeof(Startup).Assembly);
+            builder.RegisterControllers(typeof(Startup).Assembly)
+                .OnActivating(e =>
+                {
+                    var controller = (Controller)e.Instance;
+                    controller.TempDataProvider = new CookieTempDataProvider();
+                });
 
             // Register model binders
             builder.RegisterModelBinders(typeof(Startup).Assembly);
