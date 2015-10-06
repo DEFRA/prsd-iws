@@ -21,16 +21,19 @@
         private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly ITransportRouteRepository transportRouteRepository;
         private readonly IWasteRecoveryRepository wasteRecoveryRepository;
+        private readonly IWasteDisposalRepository wasteDisposalRepository;
 
         public NotificationDocumentGenerator(INotificationApplicationRepository notificationRepository,
             IShipmentInfoRepository shipmentInfoRepository,
             ITransportRouteRepository transportRouteRepository,
-            IWasteRecoveryRepository wasteRecoveryRepository)
+            IWasteRecoveryRepository wasteRecoveryRepository,
+            IWasteDisposalRepository wasteDisposalRepository)
         {
             this.notificationRepository = notificationRepository;
             this.shipmentInfoRepository = shipmentInfoRepository;
             this.transportRouteRepository = transportRouteRepository;
             this.wasteRecoveryRepository = wasteRecoveryRepository;
+            this.wasteDisposalRepository = wasteDisposalRepository;
         }
 
         public async Task<byte[]> GenerateNotificationDocument(Guid notificationId)
@@ -43,13 +46,14 @@
                     var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
                     var transportRoute = await transportRouteRepository.GetByNotificationId(notificationId);
                     var wasteRecovery = await wasteRecoveryRepository.GetByNotificationId(notificationId);
+                    var wasteDisposal = await wasteDisposalRepository.GetByNotificationId(notificationId);
 
                     ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, shipmentInfo);
 
                     // Get all merge fields.
                     var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 
-                    var blocks = GetBlocks(notification, shipmentInfo, transportRoute, wasteRecovery, mergeFields);
+                    var blocks = GetBlocks(notification, shipmentInfo, transportRoute, wasteRecovery, wasteDisposal, mergeFields);
 
                     foreach (var block in blocks)
                     {
@@ -84,7 +88,7 @@
             }
         }
 
-        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, WasteRecovery wasteRecovery, IList<MergeField> mergeFields)
+        private static IList<IDocumentBlock> GetBlocks(NotificationApplication notification, ShipmentInfo shipmentInfo, TransportRoute transportRoute, WasteRecovery wasteRecovery, WasteDisposal wasteDisposal, IList<MergeField> mergeFields)
         {
             return new List<IDocumentBlock>
             {
@@ -94,7 +98,7 @@
                 new ImporterBlock(mergeFields, notification),
                 new FacilityBlock(mergeFields, notification),
                 new OperationBlock(mergeFields, notification),
-                new WasteRecoveryBlock(mergeFields, notification, wasteRecovery),
+                new WasteRecoveryBlock(mergeFields, notification, wasteRecovery, wasteDisposal),
                 new CarrierBlock(mergeFields, notification),
                 new SpecialHandlingBlock(mergeFields, notification),
                 new WasteCompositionBlock(mergeFields, notification),

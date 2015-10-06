@@ -12,13 +12,13 @@
         private const string RecoveryInfo = "RecovInfo";
         private readonly WasteRecoveryViewModel data;
 
-        public WasteRecoveryBlock(IList<MergeField> mergeFields, NotificationApplication notification, WasteRecovery wasteRecovery)
+        public WasteRecoveryBlock(IList<MergeField> mergeFields, NotificationApplication notification, WasteRecovery wasteRecovery, WasteDisposal wasteDisposal)
         {
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
 
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new WasteRecoveryViewModel(notification, wasteRecovery, new WasteRecoveryFormatter());
-
+            data = new WasteRecoveryViewModel(notification, wasteRecovery, wasteDisposal, new WasteRecoveryFormatter());
+            
             if (notification.NotificationType == NotificationType.Disposal)
             {
                 HasAnnex = false;

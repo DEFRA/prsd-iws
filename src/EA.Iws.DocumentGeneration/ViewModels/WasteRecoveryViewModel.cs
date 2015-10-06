@@ -44,6 +44,7 @@
 
         public WasteRecoveryViewModel(NotificationApplication notification,
             WasteRecovery wasteRecovery,
+            WasteDisposal wasteDisposal,
             WasteRecoveryFormatter wasteRecoveryFormatter)
         {
             if (notification == null)
@@ -57,9 +58,15 @@
                 return;
             }
 
-            //methodOfDisposal = notification.MethodOfDisposal ?? string.Empty;
-
-            //percentageRecoverable = wasteRecoveryFormatter.NullableDecimalAsPercentage(notification.PercentageRecoverable);
+            if (wasteDisposal != null)
+            {
+                methodOfDisposal = wasteDisposal.Method ?? string.Empty;
+            }
+            
+            if (wasteRecovery != null && wasteRecovery.PercentageRecoverable != null)
+            {
+                percentageRecoverable = wasteRecoveryFormatter.NullableDecimalAsPercentage(wasteRecovery.PercentageRecoverable.Value);
+            }
 
             estimatedAmountText = wasteRecoveryFormatter
                 .CostAmountWithUnits(wasteRecovery, 
@@ -69,9 +76,9 @@
                 .CostAmountWithUnits(wasteRecovery,
                     ri => ri.RecoveryCost);
 
-            //disposalAmountText = wasteRecoveryFormatter
-            //    .CostAmountWithUnits(wasteRecovery,
-            //        ri => ri.DisposalCost);
+            disposalAmountText = wasteRecoveryFormatter
+                .CostAmountWithUnits(wasteDisposal,
+                    ri => ri.Cost);
 
             annexMessage = string.Empty;
         }

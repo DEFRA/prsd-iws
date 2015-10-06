@@ -26,14 +26,14 @@
             return string.Format("£{0} per {1}", valuePerWeight(wasteRecovery).Amount, valuePerWeight(wasteRecovery).Units);
         }
 
-        public string CostAmountWithUnits(WasteRecovery wasteRecovery, Func<WasteRecovery, DisposalCost> disposalCost)
+        public string CostAmountWithUnits(WasteDisposal wasteDisposal, Func<WasteDisposal, DisposalCost> disposalCost)
         {
-            if (wasteRecovery == null || disposalCost(wasteRecovery) == null)
+            if (wasteDisposal == null || disposalCost(wasteDisposal) == null)
             {
                 return string.Empty;
             }
 
-            return string.Format("£{0} per {1}", disposalCost(wasteRecovery).Amount, disposalCost(wasteRecovery).Units);
+            return string.Format("£{0} per {1}", disposalCost(wasteDisposal).Amount, disposalCost(wasteDisposal).Units);
         }
     }
 }
