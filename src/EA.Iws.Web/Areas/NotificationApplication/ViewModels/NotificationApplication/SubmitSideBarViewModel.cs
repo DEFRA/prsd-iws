@@ -23,7 +23,7 @@
 
         public bool IsNotificationComplete { get; set; }
 
-        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, int notificationCharge)
+        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, int notificationCharge, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = submitSummaryData.NotificationId;
             CompetentAuthorityName = EnumHelper.GetDisplayName(submitSummaryData.CompetentAuthority);
@@ -31,7 +31,7 @@
             NotificationNumber = submitSummaryData.NotificationNumber;
             Charge = notificationCharge;
             Status = submitSummaryData.Status;
-            IsNotificationComplete = submitSummaryData.IsNotificationComplete;
+            IsNotificationComplete = progress.IsAllComplete;
             CompetentAuthority = submitSummaryData.CompetentAuthority;
         }
     }

@@ -102,7 +102,6 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
-    <Compile Include="Mappings\ValuePerWeightMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
@@ -114,6 +113,7 @@
     <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />
     <Compile Include="Mappings\ValuePerWeightMap.cs" />
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
+    <Compile Include="Mappings\WasteDisposalMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="MovementOperationReceipt\CreateMovementOperationReceiptForMovementHandler.cs" />
     <Compile Include="MovementOperationReceipt\GetMovementOperationReceiptDataByMovementIdHandler.cs" />
@@ -207,7 +207,6 @@
     <Compile Include="Mappings\InternalUserMap.cs" />
     <Compile Include="Mappings\JourneyInfoMap.cs" />
     <Compile Include="Mappings\NotificationBasicInfoMap.cs" />
-    <Compile Include="Mappings\NotificationInfoMap.cs" />
     <Compile Include="Mappings\OrganisationsInvolvedInfoMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsMap.cs" />

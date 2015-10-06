@@ -1,16 +1,15 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteRecoveryViewModel
 @{
     var id = Model.NotificationId;
-    var disposalOrRecovery = Model.NotificationType;
     var viewLocation = Constants.NotificationSummaryViewLocation;
 }
 
-<h2 class="heading-medium">Waste @disposalOrRecovery.ToString().ToLowerInvariant()</h2>
+<h2 class="heading-medium">Waste recovery</h2>
 
 <div>
     <details>
         <summary>
-            @disposalOrRecovery information
+            Recovery information
             @if (Model.IsWasteRecoveryInformationCompleted)
             {
                 <i class="fa fa-check green-text"></i>

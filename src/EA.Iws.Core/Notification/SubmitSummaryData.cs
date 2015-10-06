@@ -16,7 +16,5 @@
         public NotificationStatus Status { get; set; }
 
         public int Charge { get; set; }
-
-        public bool IsNotificationComplete { get; set; }
     }
 }

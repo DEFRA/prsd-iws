@@ -5,6 +5,7 @@
     using Core.Exporters;
     using Core.Facilities;
     using Core.Importer;
+    using Core.Notification;
     using Core.Producers;
     using Core.Shared;
     using Requests.Notification.Overview;
@@ -28,16 +29,16 @@
         {
         }
 
-        public OrganisationsInvolvedViewModel(OrganisationsInvolved info)
+        public OrganisationsInvolvedViewModel(OrganisationsInvolved info, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = info.NotificationId;
             NotificationType = info.NotificationType;
-            IsExporterCompleted = info.IsExporterCompleted;
-            HasSiteOfExport = info.HasSiteOfExport;
-            IsProducerCompleted = info.IsProducerCompleted;
-            IsImporterCompleted = info.IsImporterCompleted;
-            IsFacilityCompleted = info.IsFacilityCompleted;
-            HasActualSiteOfTreatment = info.HasActualSiteOfTreatment;
+            IsExporterCompleted = progress.HasExporter;
+            HasSiteOfExport = progress.HasSiteOfExport;
+            IsProducerCompleted = progress.HasProducer;
+            IsImporterCompleted = progress.HasImporter;
+            IsFacilityCompleted = progress.HasFacility;
+            HasActualSiteOfTreatment = progress.HasActualSiteOfTreatment;
             Exporter = info.Exporter;
             Producers = info.Producers;
             Importer = info.Importer;

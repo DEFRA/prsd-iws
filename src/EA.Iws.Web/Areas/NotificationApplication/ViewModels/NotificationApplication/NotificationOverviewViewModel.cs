@@ -1,11 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
+    using Core.Shared;
     using Requests.Notification.Overview;
 
     public class NotificationOverviewViewModel
     {
         public string NotificationNumber { get; set; }
+
+        public NotificationType NotificationType { get; set; }
 
         public Guid NotificationId { get; set; }
 
@@ -35,21 +38,22 @@
         {
         }
 
-        public NotificationOverviewViewModel(NotificationOverview notificationInfo)
+        public NotificationOverviewViewModel(NotificationOverview overviewData)
         {
-            NotificationId = notificationInfo.NotificationId;
-            NotificationNumber = notificationInfo.NotificationNumber;
-            OrganisationsInvolvedViewModel = new OrganisationsInvolvedViewModel(notificationInfo.OrganisationsInvolvedInfo);
-            RecoveryOperationViewModel = new RecoveryOperationViewModel(notificationInfo.RecoveryOperationInfo);
-            TransportationViewModel = new TransportationViewModel(notificationInfo.TransportationInfo);
-            JourneyViewModel = new JourneyViewModel(notificationInfo.JourneyInfo);
-            ClassifyYourWasteViewModel = new ClassifyYourWasteViewModel(notificationInfo.ClassifyYourWasteInfo);
-            WasteRecoveryViewModel = new WasteRecoveryViewModel(notificationInfo.WasteRecoveryInfo);
-            AmountsAndDatesViewModel = new AmountsAndDatesViewModel(notificationInfo.AmountsAndDatesInfo);
-            SubmitSideBarViewModel = new SubmitSideBarViewModel(notificationInfo.SubmitSummaryData, notificationInfo.NotificationCharge);
-            WasteCodeOverviewViewModel = new WasteCodeOverviewViewModel(notificationInfo.WasteCodesOverviewInfo);
-            NotificationCharge = notificationInfo.NotificationCharge;
-            CanEditNotification = notificationInfo.CanEditNotification;
+            NotificationType = overviewData.NotificationType;
+            NotificationId = overviewData.NotificationId;
+            NotificationNumber = overviewData.NotificationNumber;
+            OrganisationsInvolvedViewModel = new OrganisationsInvolvedViewModel(overviewData.OrganisationsInvolved, overviewData.Progress);
+            RecoveryOperationViewModel = new RecoveryOperationViewModel(overviewData.RecoveryOperation, overviewData.Progress);
+            TransportationViewModel = new TransportationViewModel(overviewData.Transportation, overviewData.Progress);
+            JourneyViewModel = new JourneyViewModel(overviewData.Journey, overviewData.Progress);
+            ClassifyYourWasteViewModel = new ClassifyYourWasteViewModel(overviewData.WasteClassificationOverview, overviewData.Progress);
+            WasteRecoveryViewModel = new WasteRecoveryViewModel(overviewData.NotificationId, overviewData.WasteRecovery, overviewData.WasteDisposal, overviewData.Progress);
+            AmountsAndDatesViewModel = new AmountsAndDatesViewModel(overviewData.ShipmentOverview, overviewData.Progress);
+            SubmitSideBarViewModel = new SubmitSideBarViewModel(overviewData.SubmitSummaryData, overviewData.NotificationCharge, overviewData.Progress);
+            WasteCodeOverviewViewModel = new WasteCodeOverviewViewModel(overviewData.WasteCodesOverview, overviewData.Progress);
+            NotificationCharge = overviewData.NotificationCharge;
+            CanEditNotification = overviewData.CanEditNotification;
         }
     }
 }

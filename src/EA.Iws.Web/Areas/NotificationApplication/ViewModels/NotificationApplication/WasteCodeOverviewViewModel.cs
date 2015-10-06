@@ -2,8 +2,9 @@
 {
     using System;
     using System.Linq;
+    using Core.Notification;
     using Core.WasteCodes;
-    using Requests.Notification;
+    using Requests.Notification.Overview;
 
     public class WasteCodeOverviewViewModel
     {
@@ -64,7 +65,7 @@
                        && codesOfType.First().IsNotApplicable;
         }
 
-        public WasteCodeOverviewViewModel(WasteCodesOverviewInfo classifyYourWasteInfo)
+        public WasteCodeOverviewViewModel(WasteCodesOverviewInfo classifyYourWasteInfo, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = classifyYourWasteInfo.NotificationId;
             BaselOecdCode = classifyYourWasteInfo.BaselOecdCode;
@@ -77,13 +78,13 @@
             UnClass = classifyYourWasteInfo.UnClass;
             UnNumber = classifyYourWasteInfo.UnNumber;
             CustomCodes = classifyYourWasteInfo.CustomCodes;
-            IsBaselOecdCodeCompleted = classifyYourWasteInfo.IsBaselOecdCodeCompleted;
-            AreEwcCodesCompleted = classifyYourWasteInfo.AreEwcCodesCompleted;
-            AreYCodesCompleted = classifyYourWasteInfo.AreYCodesCompleted;
-            AreHCodesCompleted = classifyYourWasteInfo.AreHCodesCompleted;
-            AreUnClassesCompleted = classifyYourWasteInfo.AreUnClassesCompleted;
-            AreUnNumbersCompleted = classifyYourWasteInfo.AreUnNumbersCompleted;
-            AreOtherCodesCompleted = classifyYourWasteInfo.AreOtherCodesCompleted;
+            IsBaselOecdCodeCompleted = progress.HasBaselOecdCode;
+            AreEwcCodesCompleted = progress.HasEwcCodes;
+            AreYCodesCompleted = progress.HasYCodes;
+            AreHCodesCompleted = progress.HasHCodes;
+            AreUnClassesCompleted = progress.HasUnClasses;
+            AreUnNumbersCompleted = progress.HasUnNumbers;
+            AreOtherCodesCompleted = progress.HasOtherCodes;
         }
     }
 }

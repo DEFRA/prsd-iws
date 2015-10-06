@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.Carriers;
     using Core.MeansOfTransport;
+    using Core.Notification;
     using Core.Shared;
     using Requests.Notification.Overview;
 
@@ -24,14 +25,14 @@
         {
         }
 
-        public TransportationViewModel(Transportation transportationInfo)
+        public TransportationViewModel(Transportation transportationInfo, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = transportationInfo.NotificationId;
             NotificationType = transportationInfo.NotificationType;
-            IsCarrierCompleted = transportationInfo.IsCarrierCompleted;
-            IsMeansOfTransportCompleted = transportationInfo.IsMeansOfTransportCompleted;
-            IsPackagingTypesCompleted = transportationInfo.IsPackagingTypesCompleted;
-            IsSpecialHandlingCompleted = transportationInfo.IsSpecialHandlingCompleted;
+            IsCarrierCompleted = progress.HasCarrier;
+            IsMeansOfTransportCompleted = progress.HasMeansOfTransport;
+            IsPackagingTypesCompleted = progress.HasPackagingInfo;
+            IsSpecialHandlingCompleted = progress.HasSpecialHandlingRequirements;
             Carriers = transportationInfo.Carriers;
             MeanOfTransport = transportationInfo.MeanOfTransport;
             PackagingData = transportationInfo.PackagingData;

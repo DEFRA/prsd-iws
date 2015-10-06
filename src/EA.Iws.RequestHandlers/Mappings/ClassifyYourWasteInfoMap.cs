@@ -8,7 +8,7 @@
     using Requests.Notification.Overview;
     using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
-    internal class ClassifyYourWasteInfoMap : IMap<NotificationApplication, ClassifyYourWaste>
+    internal class ClassifyYourWasteInfoMap : IMap<NotificationApplication, WasteClassificationOverview>
     {
         private readonly IMapWithParameter<NotificationApplication, CodeType, WasteCodeData[]> wasteCodesMapper;
         private readonly IMap<WasteType, WasteTypeData> wasteTypeMapper;
@@ -21,9 +21,9 @@
             this.wasteTypeMapper = wasteTypeMapper;
         }
 
-        public ClassifyYourWaste Map(NotificationApplication notification)
+        public WasteClassificationOverview Map(NotificationApplication notification)
         {
-            return new ClassifyYourWaste
+            return new WasteClassificationOverview
             {
                 NotificationId = notification.Id,
                 ChemicalComposition = GetWasteType(notification),

@@ -3,7 +3,7 @@
     using System;
     using Requests.WasteRecovery;
 
-    public class WasteRecovery
+    public class WasteRecoveryOverview
     {
         public Guid NotificationId { get; set; }
         public decimal PercentageRecoverable { get; set; }

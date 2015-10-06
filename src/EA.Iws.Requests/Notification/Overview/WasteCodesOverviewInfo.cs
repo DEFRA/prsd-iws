@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Notification.Overview
 {
     using System;
     using Core.WasteCodes;
@@ -6,13 +6,6 @@
     public class WasteCodesOverviewInfo
     {
         public Guid NotificationId { get; set; }
-        public bool IsBaselOecdCodeCompleted { get; set; }
-        public bool AreEwcCodesCompleted { get; set; }
-        public bool AreYCodesCompleted { get; set; }
-        public bool AreHCodesCompleted { get; set; }
-        public bool AreUnClassesCompleted { get; set; }
-        public bool AreUnNumbersCompleted { get; set; }
-        public bool AreOtherCodesCompleted { get; set; }
         public WasteCodeData[] BaselOecdCode { get; set; }
         public WasteCodeData[] EwcCodes { get; set; }
         public WasteCodeData[] NationExportCode { get; set; }

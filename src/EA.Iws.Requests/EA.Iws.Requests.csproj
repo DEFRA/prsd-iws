@@ -113,10 +113,11 @@
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
+    <Compile Include="Notification\Overview\WasteDisposalOverview.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
-    <Compile Include="Notification\Overview\AmountsAndDates.cs" />
+    <Compile Include="Notification\Overview\ShipmentOverview.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
-    <Compile Include="Notification\Overview\ClassifyYourWaste.cs" />
+    <Compile Include="Notification\Overview\WasteClassificationOverview.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
     <Compile Include="Copy\CopyToNotification.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUser.cs" />
@@ -129,12 +130,12 @@
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
     <Compile Include="Notification\NotificationBasicInformation.cs" />
     <Compile Include="Notification\SubmitNotification.cs" />
-    <Compile Include="Notification\WasteCodesOverviewInfo.cs" />
+    <Compile Include="Notification\Overview\WasteCodesOverviewInfo.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />
     <Compile Include="Notification\Overview\OrganisationsInvolved.cs" />
     <Compile Include="Notification\Overview\RecoveryOperation.cs" />
     <Compile Include="Notification\Overview\Transportation.cs" />
-    <Compile Include="Notification\Overview\WasteRecovery.cs" />
+    <Compile Include="Notification\Overview\WasteRecoveryOverview.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUser.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetails.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
@@ -238,7 +239,6 @@
     <Compile Include="WasteCodes\SetUNNumbers.cs" />
     <Compile Include="WasteCodes\SetBaselOecdCodeForNotification.cs" />
     <Compile Include="WasteCodes\WasteCodeDataAndNotificationData.cs" />
-    <Compile Include="WasteRecovery\ValuePerWeightData.cs" />
     <Compile Include="WasteType\CreateWasteType.cs" />
     <Compile Include="WasteType\GetPhysicalCharacteristics.cs" />
     <Compile Include="WasteCodes\GetWasteCodesByType.cs" />

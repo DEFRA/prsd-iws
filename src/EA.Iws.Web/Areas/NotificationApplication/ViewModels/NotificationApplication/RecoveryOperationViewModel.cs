@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using Core.Notification;
     using Core.Shared;
     using Core.TechnologyEmployed;
@@ -26,14 +25,14 @@
         {
         }
 
-        public RecoveryOperationViewModel(RecoveryOperation recoveryOperationInfo)
+        public RecoveryOperationViewModel(RecoveryOperation recoveryOperationInfo, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = recoveryOperationInfo.NotificationId;
             NotificationType = recoveryOperationInfo.NotificationType;
-            IsPreconsentStatusChosen = recoveryOperationInfo.IsPreconsentStatusChosen;
-            AreOperationCodesChosen = recoveryOperationInfo.AreOperationCodesChosen;
-            IsTechnologyEmployedCompleted = recoveryOperationInfo.IsTechnologyEmployedCompleted;
-            IsReasonForExportCompleted = recoveryOperationInfo.IsReasonForExportCompleted;
+            IsPreconsentStatusChosen = progress.HasPreconsentedInformation;
+            AreOperationCodesChosen = progress.HasOperationCodes;
+            IsTechnologyEmployedCompleted = progress.HasTechnologyEmployed;
+            IsReasonForExportCompleted = progress.HasReasonForExport;
             PreconstedAnswer = recoveryOperationInfo.PreconstedAnswer;
             OperationCodes = recoveryOperationInfo.OperationCodes.OrderBy(c => c.Value).Select(c => c.Code).ToList();
             TechnologyEmployed = recoveryOperationInfo.TechnologyEmployed;

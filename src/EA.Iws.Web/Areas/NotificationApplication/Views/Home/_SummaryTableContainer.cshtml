@@ -39,7 +39,7 @@
     @Html.Partial("_WasteCodes", Model.WasteCodeOverviewViewModel)
 </div>
 
-@if (Model.WasteRecoveryViewModel.NotificationType == NotificationType.Recovery)
+@if (Model.NotificationType == NotificationType.Recovery)
 {
     <div>
         @Html.Partial("_WasteRecovery", Model.WasteRecoveryViewModel)

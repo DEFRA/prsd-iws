@@ -2,6 +2,7 @@
 {
     using System;
     using Core.IntendedShipments;
+    using Core.Notification;
     using Core.Shared;
     using Requests.Notification.Overview;
 
@@ -16,11 +17,11 @@
         {
         }
 
-        public AmountsAndDatesViewModel(AmountsAndDates amountAndDatesInfo)
+        public AmountsAndDatesViewModel(ShipmentOverview amountAndDatesInfo, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = amountAndDatesInfo.NotificationId;
             NotificationType = amountAndDatesInfo.NotificationType;
-            IsIntendedShipmentsCompleted = amountAndDatesInfo.IsIntendedShipmentsCompleted;
+            IsIntendedShipmentsCompleted = progress.HasShipmentInfo;
             IntendedShipmentData = amountAndDatesInfo.IntendedShipmentData ?? new IntendedShipmentData();
         }
     }

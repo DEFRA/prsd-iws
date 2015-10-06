@@ -4,7 +4,7 @@
     using Domain.NotificationApplication.WasteRecovery;
     using Prsd.Core.Mapper;
     using Requests.WasteRecovery;
-    using WasteRecoveryOverview = Requests.Notification.Overview.WasteRecovery;
+    using WasteRecoveryOverview = Requests.Notification.Overview.WasteRecoveryOverview;
 
     internal class WasteRecoveryInfoMap : IMap<WasteRecovery, WasteRecoveryOverview>
     {
@@ -14,15 +14,23 @@
         {
             this.valueMapper = valueMapper;
         }
+
         public WasteRecoveryOverview Map(WasteRecovery wasteRecovery)
         {
-            return new WasteRecoveryOverview
+            WasteRecoveryOverview data = null;
+
+            if (wasteRecovery != null)
             {
-                NotificationId = wasteRecovery.NotificationId,
-                PercentageRecoverable = wasteRecovery.PercentageRecoverable.Value,
-                EstimatedValue = valueMapper.Map(wasteRecovery.EstimatedValue),
-                RecoveryCost  = valueMapper.Map(wasteRecovery.RecoveryCost)
-            };
+                data = new WasteRecoveryOverview
+                {
+                    NotificationId = wasteRecovery.NotificationId,
+                    PercentageRecoverable = wasteRecovery.PercentageRecoverable.Value,
+                    EstimatedValue = valueMapper.Map(wasteRecovery.EstimatedValue),
+                    RecoveryCost = valueMapper.Map(wasteRecovery.RecoveryCost)
+                };
+            }
+
+            return data; 
         }
     }
 }

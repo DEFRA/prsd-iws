@@ -14,18 +14,6 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public bool IsExporterCompleted { get; set; }
-
-        public bool IsProducerCompleted { get; set; }
-
-        public bool HasSiteOfExport { get; set; }
-
-        public bool IsImporterCompleted { get; set; }
-
-        public bool IsFacilityCompleted { get; set; }
-
-        public bool HasActualSiteOfTreatment { get; set; }
-
         public ExporterData Exporter { get; set; }
 
         public List<ProducerData> Producers { get; set; }

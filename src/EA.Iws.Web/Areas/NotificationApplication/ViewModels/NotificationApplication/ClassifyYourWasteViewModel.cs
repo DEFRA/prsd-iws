@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Notification;
     using Core.WasteType;
     using Requests.Notification.Overview;
 
@@ -19,12 +20,12 @@
         {
         }
 
-        public ClassifyYourWasteViewModel(ClassifyYourWaste classifyYourWasteInfo)
+        public ClassifyYourWasteViewModel(WasteClassificationOverview classifyYourWasteInfo, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = classifyYourWasteInfo.NotificationId;
-            IsChemicalCompositionCompleted = classifyYourWasteInfo.IsChemicalCompositionCompleted;
-            IsProcessOfGenerationCompleted = classifyYourWasteInfo.IsProcessOfGenerationCompleted;
-            ArePhysicalCharacteristicsCompleted = classifyYourWasteInfo.ArePhysicalCharacteristicsCompleted;
+            IsChemicalCompositionCompleted = progress.HasWasteType;
+            IsProcessOfGenerationCompleted = progress.HasWasteGenerationProcess;
+            ArePhysicalCharacteristicsCompleted = progress.HasPhysicalCharacteristics;
             ChemicalComposition = classifyYourWasteInfo.ChemicalComposition;
             ProcessOfGeneration = classifyYourWasteInfo.ProcessOfGeneration.IsDocumentAttached ? 
                 "The details will be provided in a separate document" : classifyYourWasteInfo.ProcessOfGeneration.Process;

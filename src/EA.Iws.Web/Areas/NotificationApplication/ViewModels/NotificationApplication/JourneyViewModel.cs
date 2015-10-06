@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.CustomsOffice;
+    using Core.Notification;
     using Core.StateOfExport;
     using Core.StateOfImport;
     using Core.TransitState;
@@ -26,13 +27,13 @@
         {
         }
 
-        public JourneyViewModel(Journey journeyInfo)
+        public JourneyViewModel(Journey journeyInfo, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = journeyInfo.NotificationId;
-            IsStateOfExportCompleted = journeyInfo.IsStateOfExportCompleted;
-            IsStateOfImportCompleted = journeyInfo.IsStateOfImportCompleted;
-            AreTransitStatesCompleted = journeyInfo.AreTransitStatesCompleted;
-            IsCustomsOfficeCompleted = journeyInfo.IsCustomsOfficeCompleted;
+            IsStateOfExportCompleted = progress.HasStateOfExport;
+            IsStateOfImportCompleted = progress.HasStateOfImport;
+            AreTransitStatesCompleted = progress.HasTransitState;
+            IsCustomsOfficeCompleted = progress.HasCustomsOffice;
             StateOfExportData = journeyInfo.TransportRoute.StateOfExport;
             TransitStates = journeyInfo.TransportRoute.TransitStates.ToList();
             StateOfImportData = journeyInfo.TransportRoute.StateOfImport;
