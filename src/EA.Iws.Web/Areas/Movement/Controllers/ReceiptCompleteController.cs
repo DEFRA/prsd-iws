@@ -30,6 +30,10 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, ReceiptCompleteViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var fileExtension = Path.GetExtension(model.File.FileName);
             var uploadedFile = new byte[model.File.InputStream.Length];
             model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
