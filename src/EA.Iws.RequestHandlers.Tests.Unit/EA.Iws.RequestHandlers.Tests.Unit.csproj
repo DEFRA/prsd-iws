@@ -139,6 +139,7 @@
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
+    <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMaxTests.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandlerTests.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandlerTests.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCostHandlerTests.cs" />
