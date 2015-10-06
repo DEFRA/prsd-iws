@@ -129,11 +129,13 @@
         }
 
         [Fact]
-        public void ImportAndExportInEU_EditTransitStateFromNonEUToEU_RemovesCustomsOfficeData()
+        public void ImportAndExportInEU_EditTransitStateFromNonEUToEU_RaisesAllTransitStatesInEUEvent()
         {
             transportRoute.RemoveTransitState(FirstTransitStateId);
             transportRoute.RemoveTransitState(ThirdTransitStateId);
             transportRoute.RemoveTransitState(SecondTransitStateId);
+
+            transportRoute.ClearEvents();
 
             var importCountry = CountryFactory.Create(new Guid("EFFD18F8-32F1-48FE-8513-0FD5E45EF730"));
             var exportCountry = CountryFactory.Create(new Guid("FA92F4B9-CE86-44D7-8554-23D3B07A5269"));
@@ -172,12 +174,12 @@
                 new TestableEntryOrExitPoint() { Country = transitCountry },
                 1);
 
-            Assert.True(transportRoute.EntryCustomsOffice == null && transportRoute.ExitCustomsOffice == null,
-                "Entry and Exit customs office are not both null");
+            Assert.Equal(transportRoute,
+                transportRoute.Events.OfType<AllTransitStatesInEUEvent>().SingleOrDefault().TransportRoute);
         }
 
         [Fact]
-        public void RemoveOnlyNonEUTransitState_RemovesCustomsOfficeData()
+        public void RemoveOnlyNonEUTransitState_RaisesAllTransitStatesInEUEvent()
         {
             var importCountry = CountryFactory.Create(new Guid("EFFD18F8-32F1-48FE-8513-0FD5E45EF730"));
             var exportCountry = CountryFactory.Create(new Guid("FA92F4B9-CE86-44D7-8554-23D3B07A5269"));
@@ -211,8 +213,8 @@
 
             transportRoute.RemoveTransitState(transitStateId);
 
-            Assert.True(transportRoute.EntryCustomsOffice == null && transportRoute.ExitCustomsOffice == null,
-                "Entry and Exit customs office are not both null");
+            Assert.Equal(transportRoute,
+                transportRoute.Events.OfType<AllTransitStatesInEUEvent>().SingleOrDefault().TransportRoute);
         }
     }
 }

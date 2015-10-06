@@ -124,6 +124,7 @@
     <Compile Include="RecoveryCost.cs" />
     <Compile Include="ShipmentQuantity.cs" />
     <Compile Include="ShipmentQuantityUnitConverter.cs" />
+    <Compile Include="TransportRoute\AllTransitStatesInEUEvent.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\ExitCustomsOffice.cs" />
     <Compile Include="TransportRoute\EntryCustomsOffice.cs" />

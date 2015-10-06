@@ -179,7 +179,7 @@
 
             targetTransitState.UpdateTransitState(country, competentAuthority, entryPoint, exitPoint, ordinalPosition);
 
-            UpdateCustomsOffices();
+            CheckAllTransitStatesInEU();
         }
 
         public int[] GetAvailableTransitStatePositions()
@@ -217,7 +217,7 @@
                 state.UpdateOrdinalPosition(state.OrdinalPosition - 1);
             }
 
-            UpdateCustomsOffices();
+            CheckAllTransitStatesInEU();
         }
 
         public void SetExitCustomsOffice(ExitCustomsOffice customsOffice)
@@ -252,12 +252,11 @@
             }
         }
 
-        private void UpdateCustomsOffices()
+        private void CheckAllTransitStatesInEU()
         {
             if (TransitStates.All(ts => ts.Country.IsEuropeanUnionMember))
             {
-                EntryCustomsOffice = null;
-                ExitCustomsOffice = null;
+                RaiseEvent(new AllTransitStatesInEUEvent(this));
             }
         }
     }
