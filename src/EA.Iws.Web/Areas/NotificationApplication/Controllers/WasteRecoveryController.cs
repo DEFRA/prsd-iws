@@ -100,7 +100,7 @@
             }
 
             TempData.Add(PercentageKey, model.PercentageRecoverable);
-            TempData.Add(EstimatedValueKey, model.GetEstimatedValue());
+            TempData.Add(EstimatedValueKey, new ValuePerWeightData(model.Amount.ToMoneyDecimal(), model.SelectedUnits.Value));
             
             return RedirectToAction("RecoveryCost", "WasteRecovery", new { backToOverview });
         }
@@ -140,8 +140,8 @@
 
             var saveData = new SaveWasteRecovery(id, 
                 model.PercentageRecoverable, 
-                model.GetEstimatedValue(), 
-                model.GetRecoveryCost());
+                new ValuePerWeightData(model.EstimatedValueAmount, model.EstimatedValueUnit), 
+                new ValuePerWeightData(model.Amount.ToMoneyDecimal(), model.SelectedUnits.Value));
 
             await mediator.SendAsync(saveData);
 
@@ -213,7 +213,7 @@
                 return View(model);
             }
 
-            await mediator.SendAsync(new SetWasteDisposal(model.NotificationId, model.DisposalMethod, Convert.ToDecimal(model.Amount), model.Units));
+            await mediator.SendAsync(new SetWasteDisposal(model.NotificationId, model.DisposalMethod, model.Amount.ToMoneyDecimal(), model.Units));
 
             return RedirectToAction("Index", "Home", new { backToOverview });
         }

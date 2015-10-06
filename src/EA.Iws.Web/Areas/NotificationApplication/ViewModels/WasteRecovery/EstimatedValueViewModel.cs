@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using Core.Shared;
+    using Infrastructure;
     using Prsd.Core.Helpers;
     using Requests.WasteRecovery;
 
@@ -51,50 +51,21 @@
                 SelectedUnits = estimatedValueData.Unit;
             }
         }
-
-        public ValuePerWeightData GetEstimatedValue()
-        {
-            var amount = Convert.ToDecimal(Amount);
-
-            return new ValuePerWeightData(amount, SelectedUnits.Value);
-        }
-
-        public bool IsAmountValid()
-        {
-            decimal amount;
-            string amountString = Amount;
-
-            if (amountString.Contains(","))
-            {
-                Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)(?:\.\d{1,2})?$");
-                if (rgx.IsMatch(amountString))
-                {
-                    amountString = amountString.Replace(",", string.Empty);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            if (!decimal.TryParse(amountString, out amount))
-            {
-                return false;
-            }
-
-            if (amount < 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
+                
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!IsAmountValid())
+            if (!Amount.IsValidMoneyDecimal())
             {
                 yield return new ValidationResult("Please enter a valid cost amount", new[] { "Amount" });
+            }
+            else if (Amount.ToMoneyDecimal() < 0)
+            {
+                yield return new ValidationResult("Please enter a valid cost amount", new[] { "Amount" });
+            }
+
+            if (!SelectedUnits.HasValue)
+            {
+                yield return new ValidationResult("Please select a unit", new[] { "SelectedUnits" });
             }
         }
     }

@@ -784,6 +784,7 @@
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Infrastructure\NotificationReadOnlyFilter.cs" />
+    <Compile Include="Infrastructure\StringExtensions.cs" />
     <Compile Include="Mappings\AddAddressBookEntryMap.cs" />
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />

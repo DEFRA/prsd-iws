@@ -1,13 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery
 {
-    using Core.Shared;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Web.Mvc;
+    using Core.Shared;
+    using Infrastructure;
     using Prsd.Core.Helpers;
     using Requests.WasteRecovery;
 
@@ -46,48 +46,6 @@
             Units = data.Unit;
         }
         
-        private bool IsCostValid(string amount)
-        {
-            if (string.IsNullOrWhiteSpace(amount))
-            {
-                return false;
-            }
-
-            decimal cost;
-            if (amount.Contains(","))
-            {
-                Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)(?:\.\d{1,2})?$");
-                if (rgx.IsMatch(amount))
-                {
-                    amount = amount.Replace(",", string.Empty);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                Regex rgx = new Regex(@"^[-]?\d+(?:\.\d{1,2})?$");
-                if (!rgx.IsMatch(amount))
-                {
-                    return false;
-                }
-            }
-
-            if (!Decimal.TryParse(amount, out cost))
-            {
-                return false;
-            }
-
-            if (cost < 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = new List<ValidationResult>();
@@ -97,9 +55,13 @@
                 results.Add(new ValidationResult("Please select the units"));
             }
 
-            if (!IsCostValid(Amount))
+            if (!Amount.IsValidMoneyDecimal())
             {
                 results.Add(new ValidationResult("The amount that you have entered does not seem to be valid, it needs to be a number with no more than two decimal places and can have a comma as a thousand separator, please see the examples.", new[] { "Amount" }));
+            }
+            else if (Amount.ToMoneyDecimal() < 0)
+            {
+                results.Add(new ValidationResult("The amount entered cannot be negative", new[] { "Amount" }));
             }
 
             return results;
