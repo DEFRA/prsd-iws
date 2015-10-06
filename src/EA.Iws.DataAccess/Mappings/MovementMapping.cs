@@ -14,6 +14,8 @@
 
             Property(x => x.Units).HasColumnName("Unit");
 
+            Property(x => x.Quantity).HasPrecision(18, 4);
+
             HasMany(
                  ExpressionHelper.GetPrivatePropertyExpression<Movement, ICollection<PackagingInfo>>(
                      "PackagingInfosCollection"))

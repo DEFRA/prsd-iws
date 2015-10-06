@@ -47,7 +47,7 @@
         {
             if (string.IsNullOrWhiteSpace(Quantity))
             {
-                yield return new ValidationResult("The Actual quantity field is required", new[] { "Quantity" });
+                yield return new ValidationResult("The actual quantity is required", new[] { "Quantity" });
             }
 
             decimal quantity;
@@ -55,7 +55,11 @@
             {
                 if (quantity <= 0)
                 {
-                    yield return new ValidationResult("The Actual quantity field must be a positive value", new[] { "Quantity" });
+                    yield return new ValidationResult("The actual quantity must be a positive value", new[] { "Quantity" });
+                }
+                else if (quantity > 999999999999999999)
+                {
+                    yield return new ValidationResult("The actual quantity must be a valid number", new[] { "Quantity" });
                 }
 
                 if (Units.HasValue && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) != quantity)
@@ -65,6 +69,10 @@
                         + " decimal places",
                         new[] { "Quantity" });
                 }
+            }
+            else
+            {
+                yield return new ValidationResult("The actual quantity must be a valid number", new[] { "Quantity" });
             }
         }
     }
