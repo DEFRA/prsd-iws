@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
+    using FakeItEasy;
     using Prsd.Core.Mapper;
     using RequestHandlers.Notification;
     using Requests.Notification;
@@ -25,7 +26,7 @@
             var userContext = new TestUserContext(UserId);
 
             context = new TestIwsContext(userContext);
-            //handler = new GetNotificationInfoInternalHandler();
+            handler = A.Fake<GetNotificationInfoInternalHandler>();
 
             context.NotificationApplications.Add(new TestableNotificationApplication
             {
