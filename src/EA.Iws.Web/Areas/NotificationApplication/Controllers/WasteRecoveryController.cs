@@ -15,7 +15,8 @@
     {
         private readonly IMediator mediator;
         private const string PercentageKey = "Percentage";
-        private const string EstimatedValueKey = "EstimatedValue";
+        private const string EstimatedValueAmountKey = "EstimatedValueAmount";
+        private const string EstimatedValueUnitKey = "EstimatedValueUnit";
 
         public WasteRecoveryController(IMediator mediator)
         {
@@ -100,8 +101,9 @@
             }
 
             TempData.Add(PercentageKey, model.PercentageRecoverable);
-            TempData.Add(EstimatedValueKey, new ValuePerWeightData(model.Amount.ToMoneyDecimal(), model.SelectedUnits.Value));
-            
+            TempData.Add(EstimatedValueAmountKey, model.Amount.ToMoneyDecimal());
+            TempData.Add(EstimatedValueUnitKey, model.SelectedUnits.Value);
+
             return RedirectToAction("RecoveryCost", "WasteRecovery", new { backToOverview });
         }
 
@@ -109,18 +111,21 @@
         public async Task<ActionResult> RecoveryCost(Guid id, bool? backToOverview = null)
         {
             object percentageResult;
-            object estimatedValueResult;
+            object estimatedValueAmountResult;
+            object estimatedValueUnitResult;
 
             if (TempData.TryGetValue(PercentageKey, out percentageResult) 
-                && TempData.TryGetValue(EstimatedValueKey, out estimatedValueResult))
+                && TempData.TryGetValue(EstimatedValueAmountKey, out estimatedValueAmountResult)
+                && TempData.TryGetValue(EstimatedValueUnitKey, out estimatedValueUnitResult))
             {
                 var recoveryCost = await mediator.SendAsync(new GetRecoveryCost(id));
-                var estimatedValue = estimatedValueResult as ValuePerWeightData;
+                var estimatedValue = Convert.ToDecimal(estimatedValueAmountResult);
+                var unit = (ValuePerWeightUnits)estimatedValueUnitResult;
                 var percentage = Convert.ToDecimal(percentageResult);
 
                 var model = new RecoveryCostViewModel(
                     percentage,
-                    estimatedValue,
+                    new ValuePerWeightData(estimatedValue, unit),
                     recoveryCost);
 
                 return View(model);
