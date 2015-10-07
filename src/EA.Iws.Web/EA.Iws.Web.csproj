@@ -408,7 +408,6 @@
     <Content Include="Content\main-ie7.scss" />
     <Content Include="Content\main-ie8.scss" />
     <Content Include="Content\main.scss" />
-    <Content Include="Content\prism.scss" />
     <Content Include="Content\service-design-manual\helpers\_breadcrumbs.scss" />
     <Content Include="Content\service-design-manual\helpers\_page-header.scss" />
     <Content Include="Content\service-design-manual\styleguide\_colours.scss" />
@@ -637,7 +636,6 @@
     <Content Include="Scripts\vendor\details.polyfill.js" />
     <Content Include="Scripts\vendor\jquery-1.11.0.min.js" />
     <Content Include="Scripts\vendor\modernizr.custom.77028.js" />
-    <Content Include="Scripts\vendor\prism.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

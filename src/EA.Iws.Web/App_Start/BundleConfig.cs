@@ -38,9 +38,6 @@
                       "~/Scripts/application.js",
                       "~/Scripts/business-type-radio-buttons.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/prism").Include(
-                      "~/Scripts/vendor/prism.js"));
-
             bundles.Add(new SassBundle("~/Content/iws-page-ie6", "~/Content/govuk_toolkit/stylesheets").Include(
                       "~/Content/iws-page-ie6.scss"));
 
@@ -52,9 +49,6 @@
 
             bundles.Add(new SassBundle("~/Content/iws-page", "~/Content/govuk_toolkit/stylesheets").Include(
                       "~/Content/iws-page.scss"));
-
-            bundles.Add(new SassBundle("~/Content/prism", "~/Content/govuk_toolkit/stylesheets").Include(
-                      "~/Content/prism.scss"));
 
             bundles.Add(new StyleBundle("~/Content/css/font-awesome")
                 .Include("~/Content/css/font-awesome.css"));
