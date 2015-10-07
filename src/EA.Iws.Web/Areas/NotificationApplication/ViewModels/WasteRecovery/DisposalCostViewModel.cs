@@ -57,7 +57,7 @@
 
             if (!Amount.IsValidMoneyDecimal())
             {
-                results.Add(new ValidationResult("The amount that you have entered does not seem to be valid, it needs to be a number with no more than two decimal places and can have a comma as a thousand separator, please see the examples.", new[] { "Amount" }));
+                results.Add(new ValidationResult("The amount that you have entered does not seem to be valid, it needs to be a number with no more than two decimal places and can have a comma as a thousand separator.", new[] { "Amount" }));
             }
             else if (Amount.ToMoneyDecimal() < 0)
             {
