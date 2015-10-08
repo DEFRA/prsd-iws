@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.Notification;
     using ViewModels.Movement;
 
     [Authorize]
@@ -94,9 +95,18 @@
         }
 
         [HttpGet]
-        public ActionResult Summary(Guid id)
+        public async Task<ActionResult> Summary(Guid id)
         {
-            return View();
+            var notificationBasicInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+
+            var model = new MovementSummaryViewModel
+            {
+                NotificationId = id,
+                NotificationNumber = notificationBasicInfo.NotificationNumber,
+                NotificationType = notificationBasicInfo.NotificationType
+            };
+
+            return View(model);
         }
     }
 }

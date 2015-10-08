@@ -74,21 +74,9 @@
             }
             if (model.UserChoices.SelectedValue == 3)
             {
-                return RedirectToAction("Index", "NotificationMovement", new { id = model.NotificationId });
+                return RedirectToAction("Summary", "NotificationMovement", new { id = model.NotificationId });
             }
-            if (model.UserChoices.SelectedValue == 4)
-            {
-                return RedirectToAction("Receipt", "NotificationMovement", new { id = model.NotificationId });
-            }
-            if (model.UserChoices.SelectedValue == 5)
-            {
-                return RedirectToAction("Operation", "NotificationMovement", new { id = model.NotificationId });
-            }
-            if (model.UserChoices.SelectedValue == 6)
-            {
-                return RedirectToAction("Operation", "NotificationMovement", new { id = model.NotificationId });
-            }
-
+            
             throw new InvalidOperationException("Invalid user choice to view applicant's notification");
         }
     }

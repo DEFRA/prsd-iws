@@ -1,4 +1,7 @@
-﻿@{
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.ViewModels.Movement.MovementSummaryViewModel
+
+@{
     ViewBag.Title = "Shipment summary";
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
@@ -8,7 +11,7 @@
     <section class="noti-switch" id="">
         <div>
             <span>You're working on</span>
-            <button class="button note" type="button">GB 00010 6013</button>
+            <button class="button note" type="button">@Model.NotificationNumber</button>
             <i class="fa fa-exchange"></i>
             <button class="button switch" type="button">Change notification</button>
         </div>
@@ -57,10 +60,21 @@
             <i class="fa fa-road"></i>
             <h2 class="heading-small">Shipping options</h2>
             <nav>
-                <a title="Generate a pre-notification" href="/">Generate a pre-notification</a>
+                <a title="Generate a pre-notification" href="/">
+                    @Html.ActionLink("Generate a pre-notification", "Index", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
+                </a>
+
                 <a title="Cancel a pre-notification" href="/">Cancel a pre-notification</a>
-                <a title="Record a certificate of receipt" href="/">Record a certificate of receipt</a>
-                <a title="Record certificate of recovery" href="/">Record certificate of recovery</a>
+
+                <a title="Record a certificate of receipt" href="/">
+                    @Html.ActionLink("Record a certificate of receipt", "Receipt", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
+                </a>
+
+                @{ var linkText = "Record a certificate of " + (Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery"); }
+                <a title="Record certificate of recovery" href="/">
+                    @Html.ActionLink(linkText, "Operation", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
+                </a>
+
                 <a title="Record a rejected shipment" href="/">Record a rejected shipment</a>
             </nav>
         </div>

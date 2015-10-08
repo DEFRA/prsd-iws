@@ -789,6 +789,7 @@
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementOperationViewModel.cs" />
+    <Compile Include="ViewModels\Movement\MovementSummaryViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />
