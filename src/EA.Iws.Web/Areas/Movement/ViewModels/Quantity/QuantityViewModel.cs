@@ -1,10 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Quantity
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
+    using Infrastructure.Attributes;
     using Prsd.Core.Helpers;
 
     public class QuantityViewModel : IValidatableObject
@@ -32,6 +34,7 @@
         public IList<ShipmentQuantityUnits> AvailableUnits { get; set; }
 
         [Display(Name = "Actual quantity")]
+        [IsValidNumber(maxPrecision: 18, allowNegative: false)]
         public string Quantity { get; set; }
 
         public ShipmentQuantityUnits? Units { get; set; }
@@ -45,34 +48,19 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrWhiteSpace(Quantity))
+            decimal quantity = Convert.ToDecimal(Quantity);
+
+            if (quantity == 0)
             {
-                yield return new ValidationResult("The actual quantity is required", new[] { "Quantity" });
+                yield return new ValidationResult("The actual quantity must be a positive value", new[] { "Quantity" });
             }
 
-            decimal quantity;
-            if (decimal.TryParse(Quantity, out quantity))
+            if (Units.HasValue && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) != quantity)
             {
-                if (quantity <= 0)
-                {
-                    yield return new ValidationResult("The actual quantity must be a positive value", new[] { "Quantity" });
-                }
-                else if (quantity > 999999999999999999)
-                {
-                    yield return new ValidationResult("The actual quantity must be a valid number", new[] { "Quantity" });
-                }
-
-                if (Units.HasValue && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) != quantity)
-                {
-                    yield return new ValidationResult("Please enter a valid positive number with a maximum of " 
-                        + ShipmentQuantityUnitsMetadata.Precision[Units.Value] 
-                        + " decimal places",
-                        new[] { "Quantity" });
-                }
-            }
-            else
-            {
-                yield return new ValidationResult("The actual quantity must be a valid number", new[] { "Quantity" });
+                yield return new ValidationResult("Please enter a valid positive number with a maximum of "
+                    + ShipmentQuantityUnitsMetadata.Precision[Units.Value]
+                    + " decimal places",
+                    new[] { "Quantity" });
             }
         }
     }

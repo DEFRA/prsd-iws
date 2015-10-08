@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Core.Shared;
     using Infrastructure;
+    using Infrastructure.Attributes;
     using Prsd.Core.Helpers;
     using Requests.WasteRecovery;
 
@@ -14,7 +15,9 @@
     {
         public decimal PercentageRecoverable { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a value")]
+        [IsValidNumber(maxPrecision: 12, allowNegative: false)]
+        [IsValidMoneyDecimal]
         [Display(Name = "Please enter £/kg or tonne")]
         public string Amount { get; set; }
 
@@ -54,15 +57,6 @@
                 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!Amount.IsValidMoneyDecimal())
-            {
-                yield return new ValidationResult("Please enter a valid cost amount", new[] { "Amount" });
-            }
-            else if (Amount.ToMoneyDecimal() < 0)
-            {
-                yield return new ValidationResult("Please enter a valid cost amount", new[] { "Amount" });
-            }
-
             if (!SelectedUnits.HasValue)
             {
                 yield return new ValidationResult("Please select a unit", new[] { "SelectedUnits" });

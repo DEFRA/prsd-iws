@@ -14,6 +14,8 @@
         <h1 class="heading-large">What is the cost of the recovery?</h1>
     </header>
 
+    @Html.Gds().ValidationSummary()
+
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
         @Html.Gds().LabelFor(m => m.Amount, false)
         @Html.Gds().ValidationMessageFor(m => m.Amount)

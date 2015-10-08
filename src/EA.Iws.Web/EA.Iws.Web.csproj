@@ -781,6 +781,8 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalCostViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
+    <Compile Include="Infrastructure\Attributes\IsValidMoneyDecimal.cs" />
+    <Compile Include="Infrastructure\Attributes\IsValidNumber.cs" />
     <Compile Include="Infrastructure\NotificationReadOnlyFilter.cs" />
     <Compile Include="Infrastructure\StringExtensions.cs" />
     <Compile Include="Mappings\AddAddressBookEntryMap.cs" />

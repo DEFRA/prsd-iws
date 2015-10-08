@@ -12,6 +12,8 @@
         <h1 class="heading-large">What is the estimated value of the recovered material?</h1>
     </header>
 
+    @Html.Gds().ValidationSummary()
+
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
         @Html.Gds().LabelFor(m => m.Amount, false)
         @Html.Gds().ValidationMessageFor(m => m.Amount)
