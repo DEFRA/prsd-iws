@@ -92,5 +92,11 @@
 
             return RedirectToAction("Index", "ShipmentDate", new { id = movementId, area = "Movement" });
         }
+
+        [HttpGet]
+        public ActionResult Summary(Guid id)
+        {
+            return View();
+        }
     }
 }
