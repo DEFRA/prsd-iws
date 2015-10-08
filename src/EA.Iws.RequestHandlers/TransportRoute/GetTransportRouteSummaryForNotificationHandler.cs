@@ -18,8 +18,8 @@
         private readonly IMap<StateOfImport, StateOfImportData> stateOfImportMapper;
         private readonly IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper;
 
-        public GetTransportRouteSummaryForNotificationHandler(ITransportRouteRepository repository, 
-            IMap<StateOfExport, StateOfExportData> stateOfExportMapper, 
+        public GetTransportRouteSummaryForNotificationHandler(ITransportRouteRepository repository,
+            IMap<StateOfExport, StateOfExportData> stateOfExportMapper,
             IMap<StateOfImport, StateOfImportData> stateOfImportMapper,
             IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper)
         {
@@ -35,9 +35,9 @@
 
             return new TransportRouteData
             {
-                StateOfExportData = stateOfExportMapper.Map(transportRoute.StateOfExport),
-                StateOfImportData = stateOfImportMapper.Map(transportRoute.StateOfImport),
-                TransitStatesData = transitStateMapper.Map(transportRoute.TransitStates)
+                StateOfExportData = transportRoute == null ? null : stateOfExportMapper.Map(transportRoute.StateOfExport),
+                StateOfImportData = transportRoute == null ? null : stateOfImportMapper.Map(transportRoute.StateOfImport),
+                TransitStatesData = transportRoute == null ? null : transitStateMapper.Map(transportRoute.TransitStates)
             };
         }
     }

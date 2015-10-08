@@ -51,6 +51,14 @@
 
             var transportRoute = await transportRouteRepository.GetByNotificationId(message.Id);
 
+            if (transportRoute == null)
+            {
+                return new TransitStateWithTransportRouteData
+                {
+                    Countries = countries.Select(countryMapper.Map).ToArray()
+                };
+            }
+
             var data = new TransitStateWithTransportRouteData
             {
                 Countries = countries.Select(countryMapper.Map).ToArray(),
