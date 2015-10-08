@@ -5,7 +5,7 @@
 
     public class WasteRecoveryViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please select who will provide the information")]
         public ProvidedBy? ProvidedBy { get; set; }
 
         public WasteRecoveryViewModel()
