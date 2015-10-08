@@ -71,13 +71,13 @@
     <Compile Include="Movement\ProgressData.cs" />
     <Compile Include="Movement\MovementProgressAndSummaryData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
+    <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Shared\ProvidedBy.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentSummaryInformationData.cs" />
     <Compile Include="NotificationAssessment\NotificationDatesData.cs" />
     <Compile Include="NotificationAssessment\NotificationStatus.cs" />
-    <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
     <Compile Include="OperationCodes\DisposalCode.cs" />

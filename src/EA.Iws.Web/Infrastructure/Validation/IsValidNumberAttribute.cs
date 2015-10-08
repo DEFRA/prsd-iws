@@ -1,15 +1,15 @@
-﻿namespace EA.Iws.Web.Infrastructure.Attributes
+﻿namespace EA.Iws.Web.Infrastructure.Validation
 {
     using System;
     using System.ComponentModel.DataAnnotations;
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class IsValidNumber : ValidationAttribute
+    public sealed class IsValidNumberAttribute : ValidationAttribute
     {
         private readonly int precision;
         private readonly bool allowNegative;
 
-        public IsValidNumber(int maxPrecision, bool allowNegative)
+        public IsValidNumberAttribute(int maxPrecision, bool allowNegative)
         {
             this.allowNegative = allowNegative;
             this.precision = maxPrecision;

@@ -1,11 +1,10 @@
-﻿namespace EA.Iws.Web.Infrastructure.Attributes
+﻿namespace EA.Iws.Web.Infrastructure.Validation
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Text.RegularExpressions;
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class IsValidMoneyDecimal : ValidationAttribute
+    public class IsValidMoneyDecimalAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

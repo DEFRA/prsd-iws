@@ -6,8 +6,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
-    using Infrastructure;
-    using Infrastructure.Attributes;
+    using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Requests.WasteRecovery;
 

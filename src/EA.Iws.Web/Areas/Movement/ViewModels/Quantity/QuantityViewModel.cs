@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
-    using Infrastructure.Attributes;
+    using Infrastructure.Validation;
     using Prsd.Core.Helpers;
 
     public class QuantityViewModel : IValidatableObject
