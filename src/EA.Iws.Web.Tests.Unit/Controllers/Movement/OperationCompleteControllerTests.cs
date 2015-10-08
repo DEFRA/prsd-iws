@@ -8,6 +8,7 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using TestHelpers.Factories;
     using Xunit;
 
     public class OperationCompleteControllerTests
@@ -40,7 +41,11 @@
         [Fact]
         public void PostRedirectsToCorrectScreen()
         {
-            var result = controller.Index(AnyGuid, new OperationCompleteViewModel { NotificationId = AnyGuid });
+            var result = controller.Index(AnyGuid, new OperationCompleteViewModel
+            {
+                NotificationId = AnyGuid,
+                File = FakeHttpPostedFileFactory.CreateTestFile()
+            });
 
             Assert.IsType<RedirectToRouteResult>(result);
             var routeResult = result as RedirectToRouteResult;
