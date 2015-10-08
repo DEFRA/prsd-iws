@@ -24,11 +24,24 @@
 
 @section scripts{
     <script>
-        (function ($) {
-            $(function () {
+        (function($) {
+            $(function() {
                 $('#code-list').selectToAutocomplete();
             });
-        })(jQuery);
 
+            $("#EnterWasteCodesViewModel_IsNotApplicable").change(function() {
+
+                var not = "<td colspan=\"4\">Not applicable</td>";
+                var await = "<td colspan=\"4\">Awaiting code...</td>";
+
+                var c = @Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count();
+
+                if (c == 0) {
+                    var t = this.checked ? not : await;
+                    $("#codeTable tr").eq(1).html(t);
+                }
+
+            });
+        })(jQuery);
     </script>
 }
