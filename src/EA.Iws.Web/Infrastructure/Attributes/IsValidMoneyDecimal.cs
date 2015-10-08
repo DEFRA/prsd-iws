@@ -11,14 +11,9 @@
         {
             var validationResult = new ValidationResult("Please enter a valid amount");
 
-            if (!string.IsNullOrWhiteSpace(value.ToString()))
+            if (value.ToString().IsValidMoneyDecimal())
             {
-                Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)(?:\.\d{1,2})?$");
-
-                if (rgx.IsMatch(value.ToString()))
-                {
-                    validationResult = ValidationResult.Success;
-                }
+                validationResult = ValidationResult.Success;
             }
 
             return validationResult;
