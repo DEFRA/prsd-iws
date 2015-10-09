@@ -1,0 +1,76 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.CancelMovement.CancelMovementsViewModel
+
+@{
+    ViewBag.Title = "Select prenotification to cancel";
+}
+
+<header class="hgroup text">
+    <h1 class="heading-large">Select the pre-notifications would wish to cancel?</h1>
+    Only shipments that have been pre-notified but are not yet shipped are available to cancel.
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="form-group">
+        <h2 class="heading-medium">Notifications available to cancel</h2>
+
+        @if (Model.SubmittedMovements.Count == 0)
+        {
+            <p>You currently have no pre-notifications to cancel.</p>
+        }
+        else
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SubmittedMovements)">
+                <table id="SubmittedMovements" title="Select pre-notifications to cancel">
+                    <thead>
+                        <tr>
+                            <th>
+                                Number
+                            </th>
+                            <th>
+                                Pre-notified
+                            </th>
+                            <th>
+                                Shipment due
+                            </th>
+                            <th>
+                                Option
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.SubmittedMovements.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => m.SubmittedMovements[i].Number)
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                                <td>
+                                    @Html.Raw(Model.SubmittedMovements[i].ShipmentDate.ToString("dd/MM/yyyy"))
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(m => m.SubmittedMovements[i].MovementId)
+                                    @Html.CheckBoxFor(m => m.SubmittedMovements[i].IsSelected, new { @id = "chkCancel" + i })
+                                    Cancel
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+        }
+    </div>
+}
+<div class="form-group">
+    @Html.ActionLink("Go to notification options", "ApprovedNotification", "Applicant", new { area = string.Empty, id = Model.NotificationId }, null)
+</div>

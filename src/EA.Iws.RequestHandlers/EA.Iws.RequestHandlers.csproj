@@ -132,6 +132,7 @@
     <Compile Include="Movement\GetMovementProgressInformationHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptQuantityByMovementIdHandler.cs" />
+    <Compile Include="Movement\GetSubmittedMovementsHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />
     <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandler.cs" />
@@ -348,6 +349,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <Compile Include="Admin\Search\GetBasicSearchResultsHandler.cs" />
+    <Compile Include="Mappings\Movement\SubmittedMovementMap.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

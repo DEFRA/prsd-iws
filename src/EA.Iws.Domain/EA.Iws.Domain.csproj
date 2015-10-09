@@ -79,6 +79,7 @@
     <Compile Include="LocalArea.cs" />
     <Compile Include="Movement\CertificateOfReceiptFactory.cs" />
     <Compile Include="Movement\CertificateOfReceiptName.cs" />
+    <Compile Include="Movement\IMovementRepository.cs" />
     <Compile Include="Movement\MovementOperationReceipt.cs" />
     <Compile Include="Movement\MovementReceipt.cs" />
     <Compile Include="Movement\ActiveMovements.cs" />

@@ -64,7 +64,9 @@
                     @Html.ActionLink("Generate a pre-notification", "Index", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
                 </a>
 
-                <a title="Cancel a pre-notification" href="/">Cancel a pre-notification</a>
+                <a title="Cancel a pre-notification" href="/">
+                    @Html.ActionLink("Cancel a pre-notification", "Index", "CancelMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                </a>
 
                 <a title="Record a certificate of receipt" href="/">
                     @Html.ActionLink("Record a certificate of receipt", "Receipt", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
