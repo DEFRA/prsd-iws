@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Extensions
 {
     using System;
-    using Infrastructure;
+    using Web.Infrastructure;
     using Xunit;
 
     public class StringExtensionsTests

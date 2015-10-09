@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Notification;
+    using Infrastructure.Validation;
 
-    public class AdminRegistrationViewModel : IValidatableObject
+    public class AdminRegistrationViewModel
     {
         [Required]
         [Display(Name = "First name")]
@@ -37,6 +37,7 @@
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        [CompetentAuthorityEmailAddress("CompetentAuthority")]
         public string Email { get; set; }
 
         [Required]
@@ -48,23 +49,12 @@
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
+        [System.ComponentModel.DataAnnotations.Compare("Password",
+            ErrorMessage = "The password and confirmation password do not match")]
         public string ConfirmPassword { get; set; }
 
         public SelectList Areas { get; set; }
 
         public SelectList CompetentAuthorities { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (CompetentAuthority.GetValueOrDefault() == Core.Notification.CompetentAuthority.England &&
-                !Email.EndsWith("@environment-agency.gov.uk"))
-            {
-                yield return
-                    new ValidationResult(
-                        "Email address must end in @environment-agency.gov.uk when applying to the EA",
-                        new[] { "Email" });
-            }
-        }
     }
 }

@@ -11,10 +11,22 @@
     using Core.Notification;
     using FakeItEasy;
     using Prsd.Core.Web.OAuth;
+    using Services;
     using Xunit;
 
     public class AdminRegistrationControllerTests
     {
+        public AdminRegistrationControllerTests()
+        {
+            var dependencyResolver = A.Fake<IDependencyResolver>();
+            A.CallTo(() => dependencyResolver.GetService(typeof(AppConfiguration))).Returns(
+                new AppConfiguration()
+                {
+                    Environment = "LIVE"
+                });
+            DependencyResolver.SetResolver(dependencyResolver);
+        }
+
         [Fact]
         public async Task ApplicantRegister_NameNotProvided_ValidationError()
         {
