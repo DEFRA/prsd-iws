@@ -7,11 +7,9 @@
     public sealed class IsValidNumberAttribute : ValidationAttribute
     {
         private readonly int precision;
-        private readonly bool allowNegative;
 
-        public IsValidNumberAttribute(int maxPrecision, bool allowNegative)
+        public IsValidNumberAttribute(int maxPrecision)
         {
-            this.allowNegative = allowNegative;
             this.precision = maxPrecision;
         }
 
@@ -34,7 +32,7 @@
         private bool NumberIsValid(decimal number)
         {
             var maxNumber = (long)Math.Pow(10, precision) - 1;
-            var minNumber = allowNegative ? 0 - maxNumber : 0;
+            var minNumber = 0 - maxNumber;
 
             return number > minNumber && number < maxNumber;
         }

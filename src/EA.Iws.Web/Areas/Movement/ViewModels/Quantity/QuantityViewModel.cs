@@ -34,7 +34,7 @@
         public IList<ShipmentQuantityUnits> AvailableUnits { get; set; }
 
         [Display(Name = "Actual quantity")]
-        [IsValidNumber(maxPrecision: 18, allowNegative: false)]
+        [IsValidNumber(maxPrecision: 18, ErrorMessage = "The actual quantity must be a valid number")]
         public string Quantity { get; set; }
 
         public ShipmentQuantityUnits? Units { get; set; }
@@ -50,7 +50,7 @@
         {
             decimal quantity = Convert.ToDecimal(Quantity);
 
-            if (quantity == 0)
+            if (quantity <= 0)
             {
                 yield return new ValidationResult("The actual quantity must be a positive value", new[] { "Quantity" });
             }

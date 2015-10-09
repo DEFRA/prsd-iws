@@ -8,6 +8,7 @@
     using System.Web.Mvc;
     using Core.Shared;
     using Infrastructure;
+    using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Requests.WasteRecovery;
 
@@ -15,8 +16,10 @@
     {
         public Guid NotificationId { get; set; }
 
-        [Required(ErrorMessage = "Please enter the amount in GBP(£) for cost of disposal")]
         [Display(Name = "Please enter £/kg or tonne")]
+        [Required(ErrorMessage = "Please enter the amount in GBP(£) for cost of disposal")]
+        [IsValidNumber(maxPrecision: 12)]
+        [IsValidMoneyDecimal]
         public string Amount { get; set; }
 
         public ValuePerWeightUnits Units { get; set; }
@@ -55,11 +58,7 @@
                 results.Add(new ValidationResult("Please select the units"));
             }
 
-            if (!Amount.IsValidMoneyDecimal())
-            {
-                results.Add(new ValidationResult("The amount that you have entered does not seem to be valid, it needs to be a number with no more than two decimal places and can have a comma as a thousand separator.", new[] { "Amount" }));
-            }
-            else if (Amount.ToMoneyDecimal() < 0)
+            if (Amount.ToMoneyDecimal() < 0)
             {
                 results.Add(new ValidationResult("The amount entered cannot be negative", new[] { "Amount" }));
             }
