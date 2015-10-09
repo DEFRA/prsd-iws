@@ -152,7 +152,7 @@
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Decorators\NotificationReadOnlyAuthorizeDecorator.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
-    <Compile Include="Notification\GetNotificationInfoInternalHandler.cs" />
+    <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />

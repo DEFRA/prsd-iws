@@ -4,11 +4,11 @@
     using Overview;
     using Prsd.Core.Mediator;
 
-    public class GetNotificationInfoInternal : IRequest<NotificationOverview>
+    public class GetNotificationOverviewInternal : IRequest<NotificationOverview>
     {
         public Guid NotificationId { get; private set; }
 
-        public GetNotificationInfoInternal(Guid notificationId)
+        public GetNotificationOverviewInternal(Guid notificationId)
         {
             NotificationId = notificationId;
         }

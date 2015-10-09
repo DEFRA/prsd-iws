@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -7,52 +8,58 @@
     using DataAccess;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationApplication.WasteRecovery;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.Notification.Overview;
 
-    internal class GetNotificationOverviewHandler : IRequestHandler<GetNotificationOverview, NotificationOverview>
+    internal class GetNotificationOverviewInternalHandler : IRequestHandler<GetNotificationOverviewInternal, NotificationOverview>
     {
-        private readonly IwsContext db;
-        private readonly NotificationChargeCalculator notificationChargeCalculator;
+        private readonly IwsContext context;
+        private readonly IUserContext userContext;
         private readonly INotificationProgressService progressService;
-        private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly IMapper mapper;
 
-        public GetNotificationOverviewHandler(IwsContext db,
-            NotificationChargeCalculator notificationChargeCalculator,
+        public GetNotificationOverviewInternalHandler(IwsContext context,
+            IUserContext userContext,
             INotificationProgressService progressService,
-            IShipmentInfoRepository shipmentInfoRepository,
             IMapper mapper)
         {
-            this.db = db;
-            this.notificationChargeCalculator = notificationChargeCalculator;
+            this.context = context;
+            this.userContext = userContext;
             this.progressService = progressService;
-            this.shipmentInfoRepository = shipmentInfoRepository;
             this.mapper = mapper;
         }
 
-        public async Task<NotificationOverview> HandleAsync(GetNotificationOverview message)
+        public async Task<NotificationOverview> HandleAsync(GetNotificationOverviewInternal message)
         {
-            var pricingStructures = await db.PricingStructures.ToArrayAsync();
-            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(message.NotificationId);
+            if (!await context.IsInternalUserAsync(userContext))
+            {
+                throw new InvalidOperationException(
+                    string.Format("Cannot access the notification {0} because the requesting user {1} is not an internal user.",
+                    message.NotificationId,
+                    userContext.UserId));
+            }
+
+            //TODO: this should be turned into some sort of repository, it's untidy and is being used in two places!
 
             var overviewDataQuery =
-                from notification in db.NotificationApplications
+                from notification in context.NotificationApplications
                 where notification.Id == message.NotificationId
                 from wasteRecovery
                 //left join waste recovery, if it exists
-                in db.WasteRecoveries
+                in context.WasteRecoveries
                     .Where(wr => wr.NotificationId == notification.Id)
                     .DefaultIfEmpty()
                 from assessment
                 //left join assessment, if it exists
-                in db.NotificationAssessments
+                in context.NotificationAssessments
                     .Where(na => na.NotificationApplicationId == notification.Id)
                     .DefaultIfEmpty()
                 from wasteDiposal
-                in db.WasteDisposals
+                in context.WasteDisposals
                     .Where(wd => wd.NotificationId == notification.Id)
                     .DefaultIfEmpty()
                 select new
@@ -64,9 +71,6 @@
                 };
 
             var overviewData = await overviewDataQuery.SingleOrDefaultAsync();
-
-            //TODO: as each domain entity is removed from the notification, each map below can be changed so that it doesn't
-            // map the whole notification to the sub-overview object. The above query will need way more joins...
 
             return new NotificationOverview
             {
@@ -83,11 +87,8 @@
                 RecoveryOperation = mapper.Map<RecoveryOperation>(overviewData.Notification),
                 OrganisationsInvolved = mapper.Map<OrganisationsInvolved>(overviewData.Notification),
                 Transportation = mapper.Map<Transportation>(overviewData.Notification),
-                SubmitSummaryData = mapper.Map<SubmitSummaryData>(overviewData.Notification),
                 WasteCodesOverview = mapper.Map<WasteCodesOverviewInfo>(overviewData.Notification),
-                CanEditNotification = overviewData.NotificationAssessment.CanEditNotification,
-                NotificationCharge = decimal.ToInt32(
-                    notificationChargeCalculator.GetValue(pricingStructures, overviewData.Notification, shipmentInfo))
+                SubmitSummaryData = mapper.Map<SubmitSummaryData>(overviewData.Notification)
             };
         }
     }

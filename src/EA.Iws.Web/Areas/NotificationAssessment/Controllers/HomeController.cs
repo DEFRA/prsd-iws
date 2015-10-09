@@ -25,7 +25,7 @@
             using (var client = apiClient())
             {
                 var result = await client.SendAsync(User.GetAccessToken(), 
-                    new GetNotificationInfoInternal(id));
+                    new GetNotificationOverviewInternal(id));
                 
                 return View(new NotificationOverviewViewModel(result));
             }

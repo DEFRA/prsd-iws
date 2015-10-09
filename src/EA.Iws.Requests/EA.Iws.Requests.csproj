@@ -124,7 +124,7 @@
     <Compile Include="Copy\CopyToNotification.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUser.cs" />
     <Compile Include="Copy\NotificationApplicationCopyData.cs" />
-    <Compile Include="Notification\GetNotificationInfoInternal.cs" />
+    <Compile Include="Notification\GetNotificationOverviewInternal.cs" />
     <Compile Include="Notification\GetNotificationProgressInfo.cs" />
     <Compile Include="Notification\GetNotificationBasicInformation.cs" />
     <Compile Include="Notification\Overview\Journey.cs" />

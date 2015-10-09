@@ -16,7 +16,7 @@
         private static readonly Guid UserId = new Guid("28F41771-44EF-45AC-A6D1-7A153E9B9F4C");
         private static readonly Guid NotificationId = new Guid("64D2FC99-332E-4BCF-8D6A-B9B666723AF2");
 
-        private readonly GetNotificationInfoInternalHandler handler;
+        private readonly GetNotificationOverviewInternalHandler handler;
         private readonly TestIwsContext context;
         private readonly TestMap map;
 
@@ -26,7 +26,7 @@
             var userContext = new TestUserContext(UserId);
 
             context = new TestIwsContext(userContext);
-            handler = A.Fake<GetNotificationInfoInternalHandler>();
+            handler = A.Fake<GetNotificationOverviewInternalHandler>();
 
             context.NotificationApplications.Add(new TestableNotificationApplication
             {
@@ -44,13 +44,13 @@
         public async Task NotificationDoesNotExistThrows()
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                handler.HandleAsync(new GetNotificationInfoInternal(Guid.Empty)));
+                handler.HandleAsync(new GetNotificationOverviewInternal(Guid.Empty)));
         }
 
         [Fact(Skip = "Need to fix these tests...")]
         public async Task CallsTheMapper()
         {
-            await handler.HandleAsync(new GetNotificationInfoInternal(NotificationId));
+            await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
 
             Assert.True(map.MapCalled);
         }
@@ -58,7 +58,7 @@
         [Fact(Skip = "Need to fix these tests...")]
         public async Task CallsMapForTheCorrectObject()
         {
-            await handler.HandleAsync(new GetNotificationInfoInternal(NotificationId));
+            await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
 
             Assert.Equal(NotificationId, map.ObjectMapRequestedFor.Id);
         }
@@ -66,7 +66,7 @@
         [Fact(Skip = "Need to fix these tests...")]
         public async Task DoesNotCallSaveChanges()
         {
-            await handler.HandleAsync(new GetNotificationInfoInternal(NotificationId));
+            await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
 
             Assert.Equal(0, context.SaveChangesCount);
         }
@@ -79,7 +79,7 @@
                 NotificationId = NotificationId
             };
 
-            var result = await handler.HandleAsync(new GetNotificationInfoInternal(NotificationId));
+            var result = await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
 
             Assert.Equal(NotificationId, result.NotificationId);
         }
