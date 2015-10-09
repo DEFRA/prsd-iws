@@ -2,12 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Mapper;
     using RequestHandlers.Notification;
     using Requests.Notification;
-    using Requests.Notification.Overview;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -18,15 +16,14 @@
 
         private readonly GetNotificationOverviewInternalHandler handler;
         private readonly TestIwsContext context;
-        private readonly TestMap map;
+        private readonly IMapper mapper;
 
         public GetNotificationInfoInternalHandlerTests()
         {
-            map = new TestMap();
             var userContext = new TestUserContext(UserId);
-
+            mapper = A.Fake<IMapper>();
             context = new TestIwsContext(userContext);
-            handler = A.Fake<GetNotificationOverviewInternalHandler>();
+            handler = new GetNotificationOverviewInternalHandler(context, userContext, null, mapper);
 
             context.NotificationApplications.Add(new TestableNotificationApplication
             {
@@ -40,30 +37,14 @@
             });
         }
 
-        [Fact(Skip = "Need to fix these tests...")]
+        [Fact]
         public async Task NotificationDoesNotExistThrows()
         {
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
                 handler.HandleAsync(new GetNotificationOverviewInternal(Guid.Empty)));
         }
-
-        [Fact(Skip = "Need to fix these tests...")]
-        public async Task CallsTheMapper()
-        {
-            await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
-
-            Assert.True(map.MapCalled);
-        }
-
-        [Fact(Skip = "Need to fix these tests...")]
-        public async Task CallsMapForTheCorrectObject()
-        {
-            await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
-
-            Assert.Equal(NotificationId, map.ObjectMapRequestedFor.Id);
-        }
-
-        [Fact(Skip = "Need to fix these tests...")]
+        
+        [Fact(Skip = "Waiting for an 'overview' repository")]
         public async Task DoesNotCallSaveChanges()
         {
             await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
@@ -71,33 +52,12 @@
             Assert.Equal(0, context.SaveChangesCount);
         }
 
-        [Fact(Skip = "Need to fix these tests...")]
+        [Fact(Skip = "Waiting for an 'overview' repository")]
         public async Task ReturnsNotificationInfo()
         {
-            map.NotificationInfo = new NotificationOverview
-            {
-                NotificationId = NotificationId
-            };
-
             var result = await handler.HandleAsync(new GetNotificationOverviewInternal(NotificationId));
 
             Assert.Equal(NotificationId, result.NotificationId);
-        }
-
-        private class TestMap : IMap<NotificationApplication, NotificationOverview>
-        {
-            public NotificationOverview NotificationInfo { get; set; }
-
-            public bool MapCalled { get; set; }
-
-            public NotificationApplication ObjectMapRequestedFor { get; set; }
-
-            public NotificationOverview Map(NotificationApplication source)
-            {
-                MapCalled = true;
-                ObjectMapRequestedFor = source;
-                return NotificationInfo;
-            }
         }
     }
 }

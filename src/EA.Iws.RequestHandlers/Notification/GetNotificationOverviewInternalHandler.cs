@@ -70,7 +70,7 @@
                     NotificationAssessment = assessment
                 };
 
-            var overviewData = await overviewDataQuery.SingleOrDefaultAsync();
+            var overviewData = await overviewDataQuery.SingleAsync();
 
             return new NotificationOverview
             {
