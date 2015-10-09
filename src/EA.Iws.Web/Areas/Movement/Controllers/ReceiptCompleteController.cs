@@ -6,7 +6,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Requests.MovementOperationReceipt;
+    using Requests.MovementReceipt;
     using ViewModels;
 
     public class ReceiptCompleteController : Controller

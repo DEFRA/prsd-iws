@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.MovementOperationReceipt
+﻿namespace EA.Iws.RequestHandlers.MovementReceipt
 {
     using System;
     using System.Data.Entity;
@@ -7,7 +7,7 @@
     using Domain.FileStore;
     using Domain.Movement;
     using Prsd.Core.Mediator;
-    using Requests.MovementOperationReceipt;
+    using Requests.MovementReceipt;
 
     internal class SetCertificateOfReceiptHandler : IRequestHandler<SetCertificateOfReceipt, Guid>
     {

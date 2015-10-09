@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.MovementOperationReceipt
+﻿namespace EA.Iws.Requests.MovementReceipt
 {
     using System;
     using Prsd.Core.Mediator;
