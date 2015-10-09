@@ -62,47 +62,7 @@
             Assert.Equal(notificationId, result.RouteValues["id"]);
             Assert.Equal("NotificationApplication", result.RouteValues["area"]);
         }
-
-        [Fact]
-        public async Task UserSelects_GeneratePrenotification_RedirectsTo_MovementsIndex()
-        {
-            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.GeneratePrenotification)) as RedirectToRouteResult;
-            Assert.NotNull(result);
-            Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("NotificationMovement", result.RouteValues["controller"]);
-            Assert.Equal(notificationId, result.RouteValues["id"]);
-        }
-
-        [Fact]
-        public async Task UserSelects_RecordCertificateOfReceipt_RedirectsTo_MyHome()
-        {
-            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfReceipt)) as RedirectToRouteResult;
-            Assert.NotNull(result);
-            Assert.Equal("Receipt", result.RouteValues["action"]);
-            Assert.Equal("NotificationMovement", result.RouteValues["controller"]);
-            Assert.Equal(notificationId, result.RouteValues["id"]);
-        }
-
-        [Fact]
-        public async Task UserSelects_RecordCertificateOfDisposal_RedirectsTo_Operation()
-        {
-            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfDisposal)) as RedirectToRouteResult;
-            Assert.NotNull(result);
-            Assert.Equal("Operation", result.RouteValues["action"]);
-            Assert.Equal("NotificationMovement", result.RouteValues["controller"]);
-            Assert.Equal(notificationId, result.RouteValues["id"]);
-        }
-
-        [Fact]
-        public async Task UserSelects_RecordCertificateOfRecovery_RedirectsTo_Operation()
-        {
-            var result = await applicantController.ApprovedNotification(GetApprovedNotificationViewModel(UserChoice.RecordCertificateOfRecovery)) as RedirectToRouteResult;
-            Assert.NotNull(result);
-            Assert.Equal("Operation", result.RouteValues["action"]);
-            Assert.Equal("NotificationMovement", result.RouteValues["controller"]);
-            Assert.Equal(notificationId, result.RouteValues["id"]);
-        }
-
+        
         private ApprovedNotificationViewModel GetApprovedNotificationViewModel(UserChoice userChoice)
         {
             var approvedNotificationViewModel = new ApprovedNotificationViewModel(NotificationType.Recovery);

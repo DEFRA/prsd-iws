@@ -6,9 +6,8 @@
     using DataAccess;
     using Domain.Movement;
     using Domain.NotificationApplication.Shipment;
+    using Movement;
     using Prsd.Core.Mediator;
-    using RequestHandlers.Movement;
-    using RequestHandlers.Notification;
     using Requests.MovementReceipt;
 
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>

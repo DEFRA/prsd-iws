@@ -3,8 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
+    using Requests.Admin.FinancialGuarantee;
+    using Requests.IntendedShipments;
     using Requests.Movement;
+    using Requests.Movement.Summary;
     using Requests.Notification;
     using ViewModels.Movement;
 
@@ -97,13 +101,19 @@
         [HttpGet]
         public async Task<ActionResult> Summary(Guid id)
         {
-            var notificationBasicInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+            var movementsSummary = await mediator.SendAsync(new GetMovementsSummaryByNotificationId(id));
 
             var model = new MovementSummaryViewModel
             {
                 NotificationId = id,
-                NotificationNumber = notificationBasicInfo.NotificationNumber,
-                NotificationType = notificationBasicInfo.NotificationType
+                NotificationNumber = movementsSummary.NotificationNumber,
+                NotificationType = movementsSummary.NotificationType,
+                IntendedShipments = movementsSummary.IntendedShipments,
+                UsedShipments = movementsSummary.UsedShipments,
+                QuantityIntendedTotal = movementsSummary.IntendedQuantityTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(movementsSummary.DisplayUnits),
+                QuantityReceivedTotal = movementsSummary.ReceivedQuantityTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(movementsSummary.DisplayUnits),
+                ActiveLoadsPermitted = movementsSummary.ActiveLoadsPermitted,
+                ActiveLoadsCurrent = movementsSummary.ActiveLoadsCurrent
             };
 
             return View(model);

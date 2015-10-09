@@ -34,23 +34,23 @@
                 <tbody>
                     <tr>
                         <td>Total intended number of shipments:</td>
-                        <td>200</td>
+                        <td>@Model.IntendedShipments</td>
                     </tr>
                     <tr>
                         <td>Number of shipments used:</td>
-                        <td>10</td>
+                        <td>@Model.UsedShipments</td>
                     </tr>
                     <tr>
                         <td>Total quantity received:</td>
-                        <td>10</td>
+                        <td>@Model.QuantityReceivedTotal</td>
                     </tr>
                     <tr>
                         <td>Active loads permitted:</td>
-                        <td>20</td>
+                        <td>@Model.ActiveLoadsPermitted</td>
                     </tr>
                     <tr>
                         <td>Current active loads:</td>
-                        <td>20</td>
+                        <td>@Model.ActiveLoadsCurrent</td>
                     </tr>
                 </tbody>
             </table>
@@ -83,36 +83,36 @@
 
 
 
-    <section class="ship-data">
-        <h3 class="heading-small">
-            Information, date and status
-        </h3>
-        <p>
-            Configure your results
-        </p>
-        <div class="grid-row form-group">
-            <div class="column-half">
-                <select name="select" class="form-control view-by">
-                    <option value="value1" selected>View all</option>
-                    <option value="value2">Pre-notified</option>
-                    <option value="value3">Recovered</option>
-                    <option value="value4">Rejected</option>
-                    <option value="value5">Canceled</option>
-                    <option value="value6">Complete</option>
-                    <option value="value7">Shipment due</option>
-                </select>
-                <select name="select" class="form-control">
-                    <option value="value1" selected>50 per page</option>
-                    <option value="value2">100 per page</option>
-                    <option value="value3">250 per page</option>
-                    <option value="value4">500 per page</option>
-                </select>
-            </div>
-
+<section class="ship-data">
+    <h3 class="heading-small">
+        Information, date and status
+    </h3>
+    <p>
+        Configure your results
+    </p>
+    <div class="grid-row form-group">
+        <div class="column-half">
+            <select name="select" class="form-control view-by">
+                <option value="value1" selected>View all</option>
+                <option value="value2">Pre-notified</option>
+                <option value="value3">Recovered</option>
+                <option value="value4">Rejected</option>
+                <option value="value5">Canceled</option>
+                <option value="value6">Complete</option>
+                <option value="value7">Shipment due</option>
+            </select>
+            <select name="select" class="form-control">
+                <option value="value1" selected>50 per page</option>
+                <option value="value2">100 per page</option>
+                <option value="value3">250 per page</option>
+                <option value="value4">500 per page</option>
+            </select>
         </div>
 
-        <!-- //////////// /////// -->
-        @*<div class="pager">
+    </div>
+
+    <!-- //////////// /////// -->
+    @*<div class="pager">
 
               <div class="pager-controls">
 
@@ -131,96 +131,96 @@
               <div class="pager-summary">Showing 1 &ndash; 50 of 146 agents</div>
 
             </div>*@
-        <!-- //////////// /////// -->
+    <!-- //////////// /////// -->
 
 
-        <div class="">
-            <table class="odd-table">
-                <caption class="visuallyhidden">Shipment summary</caption>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Status</th>
-                        <th>Pre-notification</th>
-                        <th>Shipment due</th>
-                        <th>Received</th>
-                        <th>Quantity</th>
-                        <th>Recovered</th>
-                    </tr>
-                </thead>
+    <div class="form-group">
+        <table class="odd-table">
+            <caption class="visuallyhidden">Shipment summary</caption>
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Status</th>
+                <th>Pre-notification</th>
+                <th>Shipment date</th>
+                <th>Received</th>
+                <th>Quantity</th>
+                <th>Recovered</th>
+            </tr>
+            </thead>
 
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Pre-notified</td>
-                        <td>21/08/2015</td>
-                        <td>21/08/2015</td>
-                        <td>- -</td>
-                        <td>- -</td>
-                        <td>- -</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Shipped</td>
-                        <td>21/08/2015</td>
-                        <td>23/08/2015</td>
-                        <td>- -</td>
-                        <td>- -</td>
-                        <td>- -</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Received</td>
-                        <td>21/08/2015</td>
-                        <td>23/08/2015</td>
-                        <td>28/08/2015</td>
-                        <td>25 Tonnes</td>
-                        <td>- -</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Complete</td>
-                        <td>21/08/2015</td>
-                        <td>23/08/2015</td>
-                        <td>28/08/2015</td>
-                        <td>25 Tonnes</td>
-                        <td>01/09/2015</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Canceled</td>
-                        <td>21/08/2015</td>
-                        <td>23/08/2015</td>
-                        <td>- -</td>
-                        <td>- -</td>
-                        <td>- -</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Rejected</td>
-                        <td>21/08/2015</td>
-                        <td>23/08/2015</td>
-                        <td>28/08/2015</td>
-                        <td>- -</td>
-                        <td>- -</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Complete</td>
-                        <td>21/08/2015</td>
-                        <td>23/08/2015</td>
-                        <td>28/08/2015</td>
-                        <td>25 Tonnes</td>
-                        <td>01/09/2015</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Pre-notified</td>
+                <td>21/08/2015</td>
+                <td>21/08/2015</td>
+                <td>- -</td>
+                <td>- -</td>
+                <td>- -</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Shipped</td>
+                <td>21/08/2015</td>
+                <td>23/08/2015</td>
+                <td>- -</td>
+                <td>- -</td>
+                <td>- -</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Received</td>
+                <td>21/08/2015</td>
+                <td>23/08/2015</td>
+                <td>28/08/2015</td>
+                <td>25 Tonnes</td>
+                <td>- -</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Complete</td>
+                <td>21/08/2015</td>
+                <td>23/08/2015</td>
+                <td>28/08/2015</td>
+                <td>25 Tonnes</td>
+                <td>01/09/2015</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Canceled</td>
+                <td>21/08/2015</td>
+                <td>23/08/2015</td>
+                <td>- -</td>
+                <td>- -</td>
+                <td>- -</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Rejected</td>
+                <td>21/08/2015</td>
+                <td>23/08/2015</td>
+                <td>28/08/2015</td>
+                <td>- -</td>
+                <td>- -</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Complete</td>
+                <td>21/08/2015</td>
+                <td>23/08/2015</td>
+                <td>28/08/2015</td>
+                <td>25 Tonnes</td>
+                <td>01/09/2015</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 
 
-        <!-- //////////// /////// -->
-        @*<div class="pager">
+    <!-- //////////// /////// -->
+    @*<div class="pager">
 
               <div class="pager-controls">
 
@@ -239,7 +239,14 @@
               <div class="pager-summary">Showing 1 &ndash; 50 of 146 agents</div>
 
             </div>*@
-        <!-- //////////// /////// -->
+    <!-- //////////// /////// -->
 
-    </section>
+</section>
+<div class="form-group">
+    @Html.ActionLink("Go to notification options",
+            "ApprovedNotification",
+            "Applicant",
+            new { area = string.Empty, id = Model.NotificationId },
+            new {@class = "button"})
+</div>
 </div>

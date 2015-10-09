@@ -111,6 +111,7 @@
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetPackagingDataForMovement.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
+    <Compile Include="Movement\Summary\GetMovementsSummaryByNotificationId.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="Notification\Overview\WasteDisposalOverview.cs" />

@@ -1,9 +1,10 @@
-﻿namespace EA.Iws.Web.ViewModels.Movement
+﻿namespace EA.Iws.Core.Movement
 {
     using System;
-    using Core.Shared;
+    using System.Collections.Generic;
+    using Shared;
 
-    public class MovementSummaryViewModel
+    public class MovementSummaryData
     {
         public Guid NotificationId { get; set; }
 
@@ -15,12 +16,17 @@
 
         public int UsedShipments { get; set; }
 
-        public string QuantityIntendedTotal { get; set; }
+        public decimal IntendedQuantityTotal { get; set; }
 
-        public string QuantityReceivedTotal { get; set; }
+        public decimal ReceivedQuantityTotal { get; set; }
+
+        public ShipmentQuantityUnits DisplayUnits { get; set; }
 
         public int ActiveLoadsPermitted { get; set; }
 
         public int ActiveLoadsCurrent { get; set; }
+
+        public List<MovementSummaryTableData> ShipmentTableData { get; set; }
+
     }
 }

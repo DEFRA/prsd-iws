@@ -146,6 +146,7 @@
     <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
+    <Compile Include="Movement\Summary\GetMovementsSummaryByNotificationIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Decorators\NotificationReadOnlyAuthorizeDecorator.cs" />
