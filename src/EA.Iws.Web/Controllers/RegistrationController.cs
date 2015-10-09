@@ -1,14 +1,12 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
     using Core.Registration;
-    using Core.Shared;
     using Infrastructure;
     using Microsoft.Owin.Security;
     using Prsd.Core.Web.ApiClient;
@@ -77,7 +75,10 @@
                                         Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
                                     });
 
-                        var addressId = await client.SendAsync(signInResponse.AccessToken, new CreateAddress { Address = model.Address, UserId = userId});
+                        var addressId =
+                            await
+                                client.SendAsync(signInResponse.AccessToken,
+                                    new CreateAddress { Address = model.Address, UserId = userId });
                         applicantRegistrationData.AddressId = addressId;
 
                         return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
@@ -196,7 +197,9 @@
             {
                 try
                 {
-                    var organisationId = await client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
+                    var organisationId =
+                        await
+                            client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
                     await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(organisationId));
                     return RedirectToAction("Home", "Applicant");
                 }
@@ -256,28 +259,42 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                if (model.Email.Equals(model.ExistingEmail))
+                using (var client = apiClient())
                 {
-                    //Update applicant details only
+                    if (model.Email.Equals(model.ExistingEmail))
+                    {
+                        //Update applicant details only
+                        await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
+                        return RedirectToAction("Home", "Applicant", new { id = model.Id, area = string.Empty });
+                    }
+
+                    //Update applicant details & Send verification email
                     await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
-                    return RedirectToAction("Home", "Applicant", new { id = model.Id, area = string.Empty });
+
+                    var emailSent =
+                        await
+                            client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
+                                new EmailVerificationData
+                                {
+                                    Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
+                                });
+
+                    return RedirectToAction("EmailVerificationRequired", "Account");
                 }
-
-                //Update applicant details & Send verification email
-                await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
-
-                var emailSent =
-                    await
-                        client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
-                            new EmailVerificationData
-                            {
-                                Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
-                            });
-
-                return RedirectToAction("EmailVerificationRequired", "Account");
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -289,7 +306,12 @@
                 var model = new EditOrganisationViewModel(response);
 
                 await this.BindCountryList(apiClient);
-                model.CountryId = new Guid(((SelectList)ViewBag.Countries).Single(c => c.Text.Equals(response.Address.CountryName, StringComparison.InvariantCultureIgnoreCase)).Value);
+                model.CountryId =
+                    new Guid(
+                        ((SelectList)ViewBag.Countries).Single(
+                            c =>
+                                c.Text.Equals(response.Address.CountryName, StringComparison.InvariantCultureIgnoreCase))
+                            .Value);
                 model.DefaultCountryId = this.GetDefaultCountryId();
 
                 return View(model);
