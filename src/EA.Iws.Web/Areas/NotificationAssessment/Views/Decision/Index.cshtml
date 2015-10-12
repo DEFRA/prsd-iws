@@ -22,22 +22,34 @@
 
     <h2 class="heading-medium">Decision</h2>
 
-    <div class="form-group">
-        @Html.Gds().ValidationMessageFor(m => m.SelectedDecision)
-        @Html.Gds().DropDownListFor(m => m.SelectedDecision, Model.PossibleDecisions, string.Empty, new { id = "decision-select" })
-    </div>
+    if (!Model.PossibleDecisions.Any())
+     {
+         <p>
+             This notification is in a status of @Model.Status<text>.</text>
+         </p>
+         <p>
+             No further decisions are possible.
+         </p>
+     }
+    else
+    {
+        <div class="form-group">
+            @Html.Gds().ValidationMessageFor(m => m.SelectedDecision)
+            @Html.Gds().DropDownListFor(m => m.SelectedDecision, Model.PossibleDecisions, string.Empty, new { id = "decision-select" })
+        </div>
 
-    <div id="@Html.Raw("status" + DecisionType.Withdrawn)" class="js-hidden assessment-decision">
-        @Html.Partial("_Withdrawn")
-    </div>
+        <div id="@Html.Raw("status" + DecisionType.Withdrawn)" class="js-hidden assessment-decision">
+            @Html.Partial("_Withdrawn")
+        </div>
 
-    <div id="@Html.Raw("status" + DecisionType.Object)" class="js-hidden assessment-decision">
-        @Html.Partial("_Object")
-    </div>
+        <div id="@Html.Raw("status" + DecisionType.Object)" class="js-hidden assessment-decision">
+            @Html.Partial("_Object")
+        </div>
 
-    <div id="@Html.Raw("status" + DecisionType.Consent)" class="js-hidden assessment-decision">
-        @Html.Partial("_Consent")
-    </div>
+        <div id="@Html.Raw("status" + DecisionType.Consent)" class="js-hidden assessment-decision">
+            @Html.Partial("_Consent")
+        </div>
+    }
 
     <div class="form-group">
         <input type="submit" class="button" value="@Constants.ContinueButtonText" />

@@ -27,6 +27,8 @@
         [Display(Name = "Consented")]
         Consented = 11,
         [Display(Name = "Consent withdrawn")]
-        ConsentWithdrawn = 12
+        ConsentWithdrawn = 12,
+        [Display(Name = "In Determination")]
+        InDetermination = 100
     }
 }

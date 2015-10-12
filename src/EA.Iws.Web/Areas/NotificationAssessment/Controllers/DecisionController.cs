@@ -45,6 +45,9 @@
                 case DecisionType.Consent:
                     await PostConsent(model);
                     break;
+                case DecisionType.Withdrawn:
+                    await PostWithdrawn(model);
+                    break;
                 default:
                     break;
             }
@@ -52,10 +55,17 @@
             return RedirectToAction("Index", "Home", new { area = "NotificationAssessment" });
         }
 
+        private async Task PostWithdrawn(NotificationAssessmentDecisionViewModel model)
+        {
+            var request = new WithdrawNotificationApplication(model.NotificationId);
+
+            await mediator.SendAsync(request);
+        }
+
         private async Task PostConsent(NotificationAssessmentDecisionViewModel model)
         {
             var request = new ConsentNotificationApplication(model.NotificationId,
-                model.ConsentValidFromDate.AsDateTime().Value, 
+                model.ConsentValidFromDate.AsDateTime().Value,
                 model.ConsentValidToDate.AsDateTime().Value,
                 model.ConsentConditions);
 

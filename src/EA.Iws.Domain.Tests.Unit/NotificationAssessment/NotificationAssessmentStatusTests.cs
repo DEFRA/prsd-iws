@@ -6,6 +6,7 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
+    using Prsd.Core;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -315,6 +316,18 @@
             Action setDecisionRequiredBy = () => notificationAssessment.DecisionRequiredBy(acknowledgedDate);
 
             Assert.Throws<InvalidOperationException>(setDecisionRequiredBy);
+        }
+
+        [Fact]
+        public void WithdrawSetsDate()
+        {
+            var date = new DateTime(2017, 1, 1);
+            
+            SetNotificationStatus(NotificationStatus.Submitted);
+
+            notificationAssessment.Withdraw(date);
+            
+            Assert.Equal(date, notificationAssessment.Dates.WithdrawnDate);
         }
     }
 }

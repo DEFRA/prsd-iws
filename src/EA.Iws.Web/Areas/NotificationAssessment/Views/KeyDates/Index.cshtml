@@ -236,4 +236,18 @@
         </div>
 
     }
+    
+    @section scripts{
+        <script>
+            $(function () {
+                // On page load with a date input, moves the cursor to the first input box.
+                var input = $("form #NewDate_Day");
+                
+                if (input) {
+                    input.focus();
+                }                
+            });
+        </script>
+    }
 }
+

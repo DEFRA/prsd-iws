@@ -24,5 +24,7 @@ namespace EA.Iws.Domain.NotificationAssessment
         public DateTime? DecisionDate { get; set; }
 
         public string NameOfOfficer { get; internal set; }
+
+        public DateTime? WithdrawnDate { get; internal set; }
     }
 }

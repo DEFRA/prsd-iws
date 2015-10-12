@@ -39,8 +39,6 @@
 
         public string ReasonForObjection { get; set; }
 
-        public string ReasonWithdrawn { get; set; }
-
         public NotificationAssessmentDecisionViewModel()
         {
             ConsentValidFromDate = new OptionalDateInputViewModel();
