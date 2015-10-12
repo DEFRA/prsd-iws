@@ -12,7 +12,7 @@ $.deserializeIntoNamedInputs = function (prefix, json) {
             prefixedWithPropertyName.val(value);
         }
         else if ($("#" + value).length && $("#" + value).is(":radio")) {
-            $("#" + value).attr('checked', true);
+            $("#" + value).prop('checked', true);
             $("#" + value).triggerHandler("click");
         }
     });
