@@ -132,6 +132,7 @@
     <Content Include="scripts\Update\Sprint17\20151002-141734-remove-old-disposal-data-columns.sql" />
     <Content Include="scripts\Update\Sprint17\20151001-162600-create-filestore-filegroup.sql" />
     <Content Include="scripts\Update\Sprint17\20151002-143100-add-fileid-movement-recepit.sql" />
+    <Content Include="scripts\Update\Sprint18\20151012-170000-add-lookup-tables-with-insert-data.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
