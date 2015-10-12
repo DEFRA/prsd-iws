@@ -36,5 +36,13 @@
                 .ToArrayAsync())
                 .Where(m => !m.IsReceived);
         }
+
+        public async Task<IEnumerable<Movement>> GetMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+            return await context.Movements
+                .Where(m => m.NotificationId == notificationId)
+                .ToArrayAsync();
+        }
     }
 }

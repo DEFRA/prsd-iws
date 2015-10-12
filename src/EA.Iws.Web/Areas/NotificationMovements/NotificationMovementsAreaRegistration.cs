@@ -15,7 +15,7 @@
         {
             context.MapLowercaseDashedRoute("NotificationMovements_default",
                 "Notification-Movements/{notificationId}/{controller}/{action}",
-                new { action = "Index", controller = "Home" }, new[] { typeof(CancelMovementController).Namespace });
+                new { action = "Index", controller = "Home" }, new[] { typeof(HomeController).Namespace });
         }
     }
 }

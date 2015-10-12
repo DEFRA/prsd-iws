@@ -3,10 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Requests.Movement.Summary;
     using ViewModels.Movement;
 
     [Authorize]
@@ -93,27 +91,6 @@
             var movementId = await mediator.SendAsync(new CreateMovementForNotificationById(id));
 
             return RedirectToAction("Index", "ShipmentDate", new { id = movementId, area = "Movement" });
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Summary(Guid id)
-        {
-            var movementsSummary = await mediator.SendAsync(new GetMovementsSummaryByNotificationId(id));
-
-            var model = new MovementSummaryViewModel
-            {
-                NotificationId = id,
-                NotificationNumber = movementsSummary.NotificationNumber,
-                NotificationType = movementsSummary.NotificationType,
-                IntendedShipments = movementsSummary.IntendedShipments,
-                UsedShipments = movementsSummary.UsedShipments,
-                QuantityIntendedTotal = movementsSummary.IntendedQuantityTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(movementsSummary.DisplayUnits),
-                QuantityReceivedTotal = movementsSummary.ReceivedQuantityTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(movementsSummary.DisplayUnits),
-                ActiveLoadsPermitted = movementsSummary.ActiveLoadsPermitted,
-                ActiveLoadsCurrent = movementsSummary.ActiveLoadsCurrent
-            };
-
-            return View(model);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Core.Shared
-@model EA.Iws.Web.ViewModels.Movement.MovementSummaryViewModel
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home.MovementSummaryViewModel
 
 @{
     ViewBag.Title = "Shipment summary";
@@ -134,7 +134,7 @@
 
             </div>*@
     <!-- //////////// /////// -->
-
+    @{ var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed Of" : "Recovered"; }
 
     <div class="form-group">
         <table class="odd-table">
@@ -147,74 +147,25 @@
                 <th>Shipment date</th>
                 <th>Received</th>
                 <th>Quantity</th>
-                <th>Recovered</th>
+                <th>@operationTitle</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Pre-notified</td>
-                <td>21/08/2015</td>
-                <td>21/08/2015</td>
-                <td>- -</td>
-                <td>- -</td>
-                <td>- -</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Shipped</td>
-                <td>21/08/2015</td>
-                <td>23/08/2015</td>
-                <td>- -</td>
-                <td>- -</td>
-                <td>- -</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Received</td>
-                <td>21/08/2015</td>
-                <td>23/08/2015</td>
-                <td>28/08/2015</td>
-                <td>25 Tonnes</td>
-                <td>- -</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Complete</td>
-                <td>21/08/2015</td>
-                <td>23/08/2015</td>
-                <td>28/08/2015</td>
-                <td>25 Tonnes</td>
-                <td>01/09/2015</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Canceled</td>
-                <td>21/08/2015</td>
-                <td>23/08/2015</td>
-                <td>- -</td>
-                <td>- -</td>
-                <td>- -</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Rejected</td>
-                <td>21/08/2015</td>
-                <td>23/08/2015</td>
-                <td>28/08/2015</td>
-                <td>- -</td>
-                <td>- -</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Complete</td>
-                <td>21/08/2015</td>
-                <td>23/08/2015</td>
-                <td>28/08/2015</td>
-                <td>25 Tonnes</td>
-                <td>01/09/2015</td>
-            </tr>
+            @{
+                foreach (var d in Model.TableData)
+                {
+                    <tr>
+                        <td>@d.Number</td>
+                        <td>@d.Status</td>
+                        <td>@d.PreNotification</td>
+                        <td>@d.ShipmentDate</td>
+                        <td>@d.Received</td>
+                        <td>@d.Quantity</td>
+                        <td>@d.RecoveredOrDisposedOf</td>
+                    </tr>
+                }
+            }
             </tbody>
         </table>
     </div>

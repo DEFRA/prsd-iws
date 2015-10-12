@@ -104,6 +104,7 @@
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
+    <Compile Include="Mappings\Movement\Summary\MovementSummaryTableMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionMap.cs" />

@@ -1,0 +1,29 @@
+﻿namespace EA.Iws.RequestHandlers.Mappings.Movement.Summary
+{
+    using Core.Movement;
+    using Domain.Movement;
+    using Prsd.Core.Mapper;
+
+    internal class MovementSummaryTableMap : IMap<Movement, MovementSummaryTableData>
+    {
+        public MovementSummaryTableData Map(Movement source)
+        {
+            var data = new MovementSummaryTableData();
+            data.Number = source.Number;
+            data.ShipmentDate = source.Date;
+            if (source.Receipt != null)
+            {
+                data.Received = source.Receipt.Date;
+                data.Quantity = source.Receipt.Quantity;
+
+                if (source.Receipt.OperationReceipt != null)
+                {
+                    data.RecoveredOrDisposedOf = source.Receipt.OperationReceipt.Date;
+                }
+            }
+            data.QuantityUnits = source.Units;
+            
+            return data;
+        }
+    }
+}

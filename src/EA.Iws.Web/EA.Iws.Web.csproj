@@ -617,6 +617,7 @@
     <Content Include="Areas\NotificationMovements\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\_ViewStart.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\CancelMovement\Confirm.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -729,7 +730,6 @@
     <Content Include="Areas\AddressBook\Views\Home\Index.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Feedback\FeedbackSent.cshtml" />
-    <Content Include="Views\NotificationMovement\Summary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -766,6 +766,7 @@
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsList.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\CarrierViewModel.cs" />
@@ -797,7 +798,8 @@
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementOperationViewModel.cs" />
-    <Compile Include="ViewModels\Movement\MovementSummaryViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryTableViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />
