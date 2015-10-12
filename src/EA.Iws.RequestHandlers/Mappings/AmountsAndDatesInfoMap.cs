@@ -2,11 +2,11 @@
 {
     using System.Linq;
     using Core.IntendedShipments;
+    using Core.Notification.Overview;
     using DataAccess;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
-    using Requests.Notification.Overview;
 
     internal class AmountsAndDatesInfoMap : IMap<NotificationApplication, ShipmentOverview>
     {

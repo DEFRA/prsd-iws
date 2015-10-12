@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.StateOfExport
 {
     using System;
+    using Core.StateOfExport;
     using Prsd.Core.Mediator;
 
     public class GetStateOfExportWithTransportRouteDataByNotificationId : IRequest<StateOfExportWithTransportRouteData>

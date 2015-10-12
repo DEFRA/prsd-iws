@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.CustomsOffice
 {
     using System.Threading.Tasks;
+    using Core.CustomsOffice;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;

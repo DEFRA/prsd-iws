@@ -2,13 +2,13 @@
 {
     using System;
     using System.Linq;
+    using Core.CustomsOffice;
+    using Core.Notification.Overview;
+    using Core.StateOfExport;
     using DataAccess;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
-    using Requests.CustomsOffice;
-    using Requests.Notification.Overview;
-    using Requests.StateOfExport;
 
     internal class JourneyInfoMap : IMap<NotificationApplication, Journey>
     {

@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Requests.Notification.Overview
+﻿namespace EA.Iws.Core.Notification.Overview
 {
     using System;
     using System.Collections.Generic;
-    using Core.OperationCodes;
-    using Core.Shared;
-    using Core.TechnologyEmployed;
+    using OperationCodes;
+    using Shared;
+    using TechnologyEmployed;
 
     public class RecoveryOperation
     {

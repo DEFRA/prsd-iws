@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using Core.Notification;
+    using Core.Notification.Overview;
     using Core.WasteType;
-    using Requests.Notification.Overview;
 
     public class ClassifyYourWasteViewModel
     {

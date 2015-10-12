@@ -1,7 +1,5 @@
-﻿namespace EA.Iws.Requests.WasteRecovery
+﻿namespace EA.Iws.Core.Shared
 {
-    using Core.Shared;
-
     public class ValuePerWeightData
     {
         public decimal Amount { get; private set; }

@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System.Collections.Generic;
+    using Core.Notification.Overview;
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification.Overview;
     using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
     internal class ClassifyYourWasteInfoMap : IMap<NotificationApplication, WasteClassificationOverview>

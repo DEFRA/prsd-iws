@@ -1,8 +1,8 @@
-﻿namespace EA.Iws.Requests.Notification.Overview
+﻿namespace EA.Iws.Core.Notification.Overview
 {
     using System;
-    using Core.IntendedShipments;
-    using Core.Shared;
+    using IntendedShipments;
+    using Shared;
 
     public class ShipmentOverview
     {

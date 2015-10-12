@@ -5,10 +5,10 @@
     using System.Linq;
     using Core.CustomsOffice;
     using Core.Notification;
+    using Core.Notification.Overview;
     using Core.StateOfExport;
     using Core.StateOfImport;
     using Core.TransitState;
-    using Requests.Notification.Overview;
 
     public class JourneyViewModel
     {

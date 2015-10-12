@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Notification.Overview
+﻿namespace EA.Iws.Core.Notification.Overview
 {
     using System;
     using CustomsOffice;

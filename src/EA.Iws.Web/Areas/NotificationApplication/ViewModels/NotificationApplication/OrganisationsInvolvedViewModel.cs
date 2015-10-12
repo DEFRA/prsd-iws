@@ -6,9 +6,9 @@
     using Core.Facilities;
     using Core.Importer;
     using Core.Notification;
+    using Core.Notification.Overview;
     using Core.Producers;
     using Core.Shared;
-    using Requests.Notification.Overview;
 
     public class OrganisationsInvolvedViewModel
     {

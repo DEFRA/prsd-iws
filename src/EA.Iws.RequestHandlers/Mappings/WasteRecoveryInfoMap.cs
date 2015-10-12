@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using Core.Notification.Overview;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication.WasteRecovery;
     using Prsd.Core.Mapper;
-    using Requests.WasteRecovery;
-    using WasteRecoveryOverview = Requests.Notification.Overview.WasteRecoveryOverview;
 
     internal class WasteRecoveryInfoMap : IMap<WasteRecovery, WasteRecoveryOverview>
     {

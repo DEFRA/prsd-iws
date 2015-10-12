@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
-    using Overview;
+    using Core.Notification.Overview;
     using Prsd.Core.Mediator;
 
     public class GetNotificationOverview : IRequest<NotificationOverview>

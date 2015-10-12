@@ -1,8 +1,8 @@
-﻿namespace EA.Iws.Requests.Notification.Overview
+﻿namespace EA.Iws.Core.Notification.Overview
 {
     using System;
     using System.Collections.Generic;
-    using Core.WasteType;
+    using WasteType;
 
     public class WasteClassificationOverview
     {

@@ -57,6 +57,8 @@
     <Compile Include="Carriers\CarrierData.cs" />
     <Compile Include="CustomsOffice\CustomsOfficeData.cs" />
     <Compile Include="CustomsOffice\CustomsOffices.cs" />
+    <Compile Include="CustomsOffice\EntryCustomsOfficeAddData.cs" />
+    <Compile Include="CustomsOffice\ExitCustomsOfficeAddData.cs" />
     <Compile Include="Exporters\ExporterData.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatus.cs" />
@@ -76,9 +78,20 @@
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
     <Compile Include="Shared\BidirectionalDictionary.cs" />
+    <Compile Include="Notification\Overview\Journey.cs" />
+    <Compile Include="Notification\Overview\NotificationOverview.cs" />
+    <Compile Include="Notification\Overview\OrganisationsInvolved.cs" />
+    <Compile Include="Notification\Overview\RecoveryOperation.cs" />
+    <Compile Include="Notification\Overview\ShipmentOverview.cs" />
+    <Compile Include="Notification\Overview\Transportation.cs" />
+    <Compile Include="Notification\Overview\WasteClassificationOverview.cs" />
+    <Compile Include="Notification\Overview\WasteCodesOverviewInfo.cs" />
+    <Compile Include="Notification\Overview\WasteDisposalOverview.cs" />
+    <Compile Include="Notification\Overview\WasteRecoveryOverview.cs" />
     <Compile Include="Shared\CompetentAuthorityMetadata.cs" />
     <Compile Include="Shared\ProvidedBy.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />
+    <Compile Include="Shared\ValuePerWeightData.cs" />
     <Compile Include="Shipment\ShipmentData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentSummaryInformationData.cs" />
     <Compile Include="NotificationAssessment\NotificationDatesData.cs" />
@@ -109,6 +122,7 @@
     <Compile Include="Notification\SubmitSummaryData.cs" />
     <Compile Include="Shared\TradeDirection.cs" />
     <Compile Include="Shared\UnitedKingdomCompetentAuthorityData.cs" />
+    <Compile Include="StateOfImport\StateOfImportWithTransportRouteData.cs" />
     <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
     <Compile Include="IntendedShipments\IntendedShipmentData.cs" />
     <Compile Include="Shared\ShipmentQuantityUnits.cs" />

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.WasteRecovery
 {
     using System;
+    using Core.Shared;
     using Prsd.Core.Mediator;
 
     public class SaveWasteRecovery : IRequest<bool>

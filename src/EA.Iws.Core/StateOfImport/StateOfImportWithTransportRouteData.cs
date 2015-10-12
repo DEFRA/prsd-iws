@@ -1,11 +1,10 @@
-﻿namespace EA.Iws.Requests.StateOfExport
+﻿namespace EA.Iws.Core.StateOfExport
 {
     using System.Collections.Generic;
-    using Core.Shared;
-    using Core.StateOfExport;
-    using Core.StateOfImport;
-    using Core.TransitState;
-    using Core.TransportRoute;
+    using Shared;
+    using StateOfImport;
+    using TransitState;
+    using TransportRoute;
 
     public class StateOfExportWithTransportRouteData
     {

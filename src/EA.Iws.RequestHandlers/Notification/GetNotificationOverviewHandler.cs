@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Notification;
+    using Core.Notification.Overview;
     using DataAccess;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
@@ -11,7 +12,6 @@
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
-    using Requests.Notification.Overview;
 
     internal class GetNotificationOverviewHandler : IRequestHandler<GetNotificationOverview, NotificationOverview>
     {

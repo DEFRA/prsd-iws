@@ -3,8 +3,8 @@
     using System.Linq;
     using System.Web.Mvc;
     using Areas.NotificationApplication.ViewModels.StateOfExport;
+    using Core.StateOfExport;
     using Prsd.Core.Mapper;
-    using Requests.StateOfExport;
 
     public class StateOfExportWithTransportRouteDataMap : IMap<StateOfExportWithTransportRouteData, StateOfExportViewModel>
     {

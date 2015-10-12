@@ -3,8 +3,8 @@
     using System;
     using Core.IntendedShipments;
     using Core.Notification;
+    using Core.Notification.Overview;
     using Core.Shared;
-    using Requests.Notification.Overview;
 
     public class AmountsAndDatesViewModel
     {

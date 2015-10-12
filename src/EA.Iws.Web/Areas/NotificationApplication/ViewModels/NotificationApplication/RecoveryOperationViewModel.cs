@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.Notification;
+    using Core.Notification.Overview;
     using Core.Shared;
     using Core.TechnologyEmployed;
-    using Requests.Notification.Overview;
 
     public class RecoveryOperationViewModel
     {

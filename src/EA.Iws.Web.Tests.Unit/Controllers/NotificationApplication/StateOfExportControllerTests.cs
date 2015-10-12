@@ -1,17 +1,17 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Core.Shared;
-    using EA.Iws.Core.TransportRoute;
-    using EA.Iws.Requests.StateOfExport;
-    using EA.Iws.Requests.TransportRoute;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfExport;
-    using EA.Prsd.Core.Mapper;
-    using FakeItEasy;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Api.Client;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.StateOfExport;
+    using Core.Shared;
+    using Core.StateOfExport;
+    using Core.TransportRoute;
+    using FakeItEasy;
+    using Prsd.Core.Mapper;
+    using Requests.TransportRoute;
     using Xunit;
 
     public class StateOfExportControllerTests

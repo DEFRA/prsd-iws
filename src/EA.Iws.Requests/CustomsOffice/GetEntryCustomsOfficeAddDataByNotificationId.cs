@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Requests.CustomsOffice
 {
     using System;
+    using Core.CustomsOffice;
     using Prsd.Core.Mediator;
 
     public class GetEntryCustomsOfficeAddDataByNotificationId : IRequest<EntryCustomsOfficeAddData>

@@ -1,7 +1,7 @@
-﻿namespace EA.Iws.Requests.Notification.Overview
+﻿namespace EA.Iws.Core.Notification.Overview
 {
     using System;
-    using Core.WasteCodes;
+    using WasteCodes;
 
     public class WasteCodesOverviewInfo
     {

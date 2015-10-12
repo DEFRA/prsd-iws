@@ -5,10 +5,10 @@
     using Core.Exporters;
     using Core.Facilities;
     using Core.Importer;
+    using Core.Notification.Overview;
     using Core.Producers;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification.Overview;
 
     internal class OrganisationsInvolvedInfoMap : IMap<NotificationApplication, OrganisationsInvolved>
     {

@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Requests.Notification.Overview
+﻿namespace EA.Iws.Core.Notification.Overview
 {
     using System;
     using System.Collections.Generic;
-    using Core.Carriers;
-    using Core.MeansOfTransport;
-    using Core.Shared;
+    using Carriers;
+    using MeansOfTransport;
+    using Shared;
 
     public class Transportation
     {

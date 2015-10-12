@@ -1,9 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.StateOfExport
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
-    using DataAccess;
+    using Core.StateOfExport;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;

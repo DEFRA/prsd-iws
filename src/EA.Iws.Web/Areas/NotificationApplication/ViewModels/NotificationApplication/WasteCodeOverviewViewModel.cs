@@ -3,8 +3,8 @@
     using System;
     using System.Linq;
     using Core.Notification;
+    using Core.Notification.Overview;
     using Core.WasteCodes;
-    using Requests.Notification.Overview;
 
     public class WasteCodeOverviewViewModel
     {

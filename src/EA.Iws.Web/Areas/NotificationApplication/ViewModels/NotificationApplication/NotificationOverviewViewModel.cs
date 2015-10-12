@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
+    using Core.Notification.Overview;
     using Core.Shared;
-    using Requests.Notification.Overview;
 
     public class NotificationOverviewViewModel
     {

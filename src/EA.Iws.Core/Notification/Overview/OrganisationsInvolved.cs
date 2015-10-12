@@ -1,12 +1,12 @@
-﻿namespace EA.Iws.Requests.Notification.Overview
+﻿namespace EA.Iws.Core.Notification.Overview
 {
     using System;
     using System.Collections.Generic;
-    using Core.Exporters;
-    using Core.Facilities;
-    using Core.Importer;
-    using Core.Producers;
-    using Core.Shared;
+    using Exporters;
+    using Facilities;
+    using Importer;
+    using Producers;
+    using Shared;
 
     public class OrganisationsInvolved
     {

@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System.Collections.Generic;
+    using Core.Notification.Overview;
     using Core.OperationCodes;
     using Core.TechnologyEmployed;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification.Overview;
 
     internal class RecoveryOperationInfoMap : IMap<NotificationApplication, RecoveryOperation>
     {

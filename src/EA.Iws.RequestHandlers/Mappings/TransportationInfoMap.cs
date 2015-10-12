@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.Carriers;
+    using Core.Notification.Overview;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification.Overview;
 
     internal class TransportationInfoMap : IMap<NotificationApplication, Transportation>
     {

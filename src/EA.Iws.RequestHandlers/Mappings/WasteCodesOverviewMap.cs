@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using Core.Notification.Overview;
     using Core.WasteCodes;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Notification.Overview;
 
     internal class WasteCodesOverviewMap : IMap<NotificationApplication, WasteCodesOverviewInfo>
     {

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteRecovery
 {
     using System.Threading.Tasks;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication.WasteRecovery;
     using Prsd.Core.Mapper;

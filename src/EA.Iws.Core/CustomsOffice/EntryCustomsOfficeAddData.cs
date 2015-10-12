@@ -1,8 +1,7 @@
-﻿namespace EA.Iws.Requests.CustomsOffice
+﻿namespace EA.Iws.Core.CustomsOffice
 {
     using System.Collections.Generic;
-    using Core.CustomsOffice;
-    using Core.Shared;
+    using Shared;
 
     public class EntryCustomsOfficeAddData
     {
