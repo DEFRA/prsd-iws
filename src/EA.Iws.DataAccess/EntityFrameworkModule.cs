@@ -3,6 +3,8 @@
     using Autofac;
     using Domain.FileStore;
     using Filestore;
+    using Prsd.Core.DataAccess.Mapper;
+    using Prsd.Core.Mapper;
 
     public class EntityFrameworkModule : Module
     {
@@ -20,6 +22,8 @@
                 .AsImplementedInterfaces();
 
             builder.RegisterType<DbFileRepository>().As<IFileRepository>();
+
+            builder.RegisterType<EfTypeResolver>().As<ITypeResolver>();
         }
     }
 }

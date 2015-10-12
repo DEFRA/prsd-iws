@@ -8,7 +8,6 @@
     using Core.Notification.Overview;
     using DataAccess;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.WasteRecovery;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -75,19 +74,19 @@
             {
                 NotificationType = (Core.Shared.NotificationType)overviewData.Notification.NotificationType.Value,
                 Progress = progressService.GetNotificationProgressInfo(message.NotificationId),
-                ShipmentOverview = mapper.Map<NotificationApplication, ShipmentOverview>(overviewData.Notification),
-                WasteClassificationOverview = mapper.Map<NotificationApplication, WasteClassificationOverview>(overviewData.Notification),
+                ShipmentOverview = mapper.Map<ShipmentOverview>(overviewData.Notification),
+                WasteClassificationOverview = mapper.Map<WasteClassificationOverview>(overviewData.Notification),
                 CompetentAuthority = (CompetentAuthority)overviewData.Notification.CompetentAuthority.Value,
-                WasteRecovery = mapper.Map<WasteRecovery, WasteRecoveryOverview>(overviewData.WasteRecovery),
-                WasteDisposal = mapper.Map<WasteDisposal, WasteDisposalOverview>(overviewData.WasteDisposal),
+                WasteRecovery = mapper.Map<WasteRecoveryOverview>(overviewData.WasteRecovery),
+                WasteDisposal = mapper.Map<WasteDisposalOverview>(overviewData.WasteDisposal),
                 NotificationNumber = overviewData.Notification.NotificationNumber,
                 NotificationId = overviewData.Notification.Id,
-                Journey = mapper.Map<NotificationApplication, Journey>(overviewData.Notification),
-                RecoveryOperation = mapper.Map<NotificationApplication, RecoveryOperation>(overviewData.Notification),
-                OrganisationsInvolved = mapper.Map<NotificationApplication, OrganisationsInvolved>(overviewData.Notification),
-                Transportation = mapper.Map<NotificationApplication, Transportation>(overviewData.Notification),
-                WasteCodesOverview = mapper.Map<NotificationApplication, WasteCodesOverviewInfo>(overviewData.Notification),
-                SubmitSummaryData = mapper.Map<NotificationApplication, SubmitSummaryData>(overviewData.Notification)
+                Journey = mapper.Map<Journey>(overviewData.Notification),
+                RecoveryOperation = mapper.Map<RecoveryOperation>(overviewData.Notification),
+                OrganisationsInvolved = mapper.Map<OrganisationsInvolved>(overviewData.Notification),
+                Transportation = mapper.Map<Transportation>(overviewData.Notification),
+                WasteCodesOverview = mapper.Map<WasteCodesOverviewInfo>(overviewData.Notification),
+                SubmitSummaryData = mapper.Map<SubmitSummaryData>(overviewData.Notification)
             };
         }
     }
