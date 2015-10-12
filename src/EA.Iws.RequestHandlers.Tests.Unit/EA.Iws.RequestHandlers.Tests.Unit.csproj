@@ -131,7 +131,6 @@
     <Compile Include="Movement\SetPackagingDataForMovementHandlerTests.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandlerTests.cs" />
-    <Compile Include="Notification\GetNotificationInfoInternalHandlerTests.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
