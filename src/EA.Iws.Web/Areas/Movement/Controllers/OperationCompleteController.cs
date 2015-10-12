@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.MovementOperationReceipt;
     using Requests.Notification;
     using ViewModels;
 
@@ -35,7 +36,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Guid id, OperationCompleteViewModel model)
+        public async Task<ActionResult> Index(Guid id, OperationCompleteViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -46,7 +47,7 @@
             var uploadedFile = new byte[model.File.InputStream.Length];
             model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
 
-            //TODO: await mediator
+            await mediator.SendAsync(new SetCertificateOfRecovery(id, uploadedFile, fileExtension));
 
             return RedirectToAction("ApprovedNotification", "Applicant", new { id = model.NotificationId, area = string.Empty });
         }

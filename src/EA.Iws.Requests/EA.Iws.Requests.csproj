@@ -79,6 +79,7 @@
     <Compile Include="MovementOperationReceipt\CreateMovementOperationReceiptForMovement.cs" />
     <Compile Include="MovementOperationReceipt\GetMovementOperationReceiptDataByMovementId.cs" />
     <Compile Include="MovementOperationReceipt\MovementOperationReceiptData.cs" />
+    <Compile Include="MovementOperationReceipt\SetCertificateOfRecovery.cs" />
     <Compile Include="MovementReceipt\SetCertificateOfReceipt.cs" />
     <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementId.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementId.cs" />
