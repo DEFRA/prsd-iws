@@ -108,6 +108,7 @@
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationDatesMap.cs" />
+    <Compile Include="Mappings\NotificationOverviewMap.cs" />
     <Compile Include="Mappings\SubmitSummaryDataMap.cs" />
     <Compile Include="Mappings\BacsDetailsMap.cs" />
     <Compile Include="Mappings\UnitedKingdomCompetentAuthorityMap.cs" />
