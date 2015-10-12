@@ -10,8 +10,12 @@
 <h3 class="heading-medium squash-margin">Overall status</h3>
 <span>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</span>
 
-<h3 class="heading-medium squash-margin">Notification charge</h3>
-<p id="charge">£@Html.DisplayFor(m => m.Charge)</p>
+@if (Model.Charge != 0)
+{
+    <h3 class="heading-medium squash-margin">Notification charge</h3>
+    <p id="charge">£@Html.DisplayFor(m => m.Charge)</p>
+}
+
 <ul>
     @if (Model.IsNotificationComplete)
     {
@@ -28,11 +32,11 @@
     }
 </ul>
 
-    @if (Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
-    {
-        @Html.ActionLink("Submit", "Disclaimer", "Submit", null, new { @class = "button" })
-    }
-    else
-    {
-        <a href="#" class="button" disabled="disabled">Submit</a>
+@if (Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
+{
+    @Html.ActionLink("Submit", "Disclaimer", "Submit", null, new { @class = "button" })
+}
+else
+{
+    <a href="#" class="button" disabled="disabled">Submit</a>
 }
