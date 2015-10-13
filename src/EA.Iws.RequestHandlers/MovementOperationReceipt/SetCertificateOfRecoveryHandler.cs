@@ -1,36 +1,35 @@
-﻿namespace EA.Iws.RequestHandlers.MovementReceipt
+﻿namespace EA.Iws.RequestHandlers.MovementOperationReceipt
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.FileStore;
     using Domain.Movement;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
+    using Requests.MovementOperationReceipt;
 
-    internal class SetCertificateOfReceiptHandler : IRequestHandler<SetCertificateOfReceipt, Guid>
+    internal class SetCertificateOfRecoveryHandler : IRequestHandler<SetCertificateOfRecovery, Guid>
     {
-        private readonly IMovementRepository movementRepository;
-        private readonly CertificateOfReceiptNameGenerator nameGenerator;
+        private readonly CertificateOfRecoveryNameGenerator nameGenerator;
         private readonly CertificateFactory certificateFactory;
-        private readonly IwsContext context;
+        private readonly IMovementRepository movementRepository;
         private readonly IFileRepository fileRepository;
+        private readonly IwsContext context;
 
-        public SetCertificateOfReceiptHandler(IwsContext context,
+        public SetCertificateOfRecoveryHandler(IwsContext context,
             IFileRepository fileRepository,
             IMovementRepository movementRepository,
             CertificateFactory certificateFactory,
-            CertificateOfReceiptNameGenerator nameGenerator)
+            CertificateOfRecoveryNameGenerator nameGenerator)
         {
             this.context = context;
             this.fileRepository = fileRepository;
+            this.movementRepository = movementRepository;
             this.certificateFactory = certificateFactory;
             this.nameGenerator = nameGenerator;
-            this.movementRepository = movementRepository;
         }
 
-        public async Task<Guid> HandleAsync(SetCertificateOfReceipt message)
+        public async Task<Guid> HandleAsync(SetCertificateOfRecovery message)
         {
             var movement = await movementRepository.GetById(message.MovementId);
 
@@ -38,7 +37,7 @@
 
             var fileId = await fileRepository.Store(receipt);
 
-            movement.Receipt.SetCertificateFile(fileId);
+            movement.Receipt.OperationReceipt.SetCertificateFile(fileId);
 
             await context.SaveChangesAsync();
 

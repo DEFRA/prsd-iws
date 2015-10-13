@@ -10,7 +10,7 @@
 
     public class CertificateOfReceiptNameTests
     {
-        private readonly CertificateOfReceiptName certificateOfReceiptName;
+        private readonly CertificateOfReceiptNameGenerator certificateOfReceiptName;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly Guid notificationId;
 
@@ -19,7 +19,7 @@
             notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
             notificationId = new Guid("6CE221A8-F8EC-4EDD-A2D7-33B8836B9BBF");
 
-            certificateOfReceiptName = new CertificateOfReceiptName(notificationApplicationRepository);
+            certificateOfReceiptName = new CertificateOfReceiptNameGenerator(notificationApplicationRepository);
         }
 
         [Theory]

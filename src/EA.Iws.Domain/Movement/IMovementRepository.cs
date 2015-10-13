@@ -7,5 +7,7 @@
     public interface IMovementRepository
     {
         Task<IEnumerable<Movement>> GetSubmittedMovements(Guid notificationId);
+
+        Task<Movement> GetById(Guid movementId);
     }
 }

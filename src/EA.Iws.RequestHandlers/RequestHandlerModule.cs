@@ -47,8 +47,9 @@
             builder.RegisterType<MovementQuantity>().AsSelf();
             builder.RegisterType<SetActualDateOfShipment>().AsSelf();
             builder.RegisterType<NotificationChargeCalculator>().AsSelf();
-            builder.RegisterType<CertificateOfReceiptFactory>().AsSelf();
-            builder.RegisterType<CertificateOfReceiptName>().AsSelf();
+            builder.RegisterType<CertificateFactory>().AsSelf();
+            builder.RegisterType<CertificateOfReceiptNameGenerator>().AsSelf();
+            builder.RegisterType<CertificateOfRecoveryNameGenerator>().AsSelf();
             builder.RegisterType<ConsentNotification>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();

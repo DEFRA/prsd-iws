@@ -15,5 +15,12 @@
         }
 
         public DateTime Date { get; internal set; }
+
+        public Guid? FileId { get; internal set; }
+
+        public void SetCertificateFile(Guid fileId)
+        {
+            FileId = fileId;
+        }
     }
 }

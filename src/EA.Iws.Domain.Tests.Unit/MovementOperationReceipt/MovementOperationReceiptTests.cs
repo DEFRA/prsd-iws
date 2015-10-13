@@ -47,6 +47,20 @@
             Assert.NotNull(movement.Receipt.OperationReceipt);
         }
 
+        [Fact]
+        public void CanSetCertificateFile()
+        {
+            var fileId = new Guid("85D08925-6D0F-466D-AADC-59ADF9CCC85A");
+
+            FullyReceiveMovement();
+
+            movement.CompleteMovement(AfterReceiptDate);
+
+            movement.Receipt.OperationReceipt.SetCertificateFile(fileId);
+
+            Assert.Equal(fileId, movement.Receipt.OperationReceipt.FileId);
+        }
+
         private void FullyReceiveMovement()
         {
             movement.Receive(AfterMovementDate);

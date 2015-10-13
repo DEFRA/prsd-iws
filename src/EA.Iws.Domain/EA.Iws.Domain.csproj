@@ -77,9 +77,11 @@
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
-    <Compile Include="Movement\CertificateOfReceiptFactory.cs" />
-    <Compile Include="Movement\CertificateOfReceiptName.cs" />
     <Compile Include="Movement\IMovementRepository.cs" />
+    <Compile Include="Movement\CertificateFactory.cs" />
+    <Compile Include="Movement\CertificateOfReceiptNameGenerator.cs" />
+    <Compile Include="Movement\CertificateOfRecoveryNameGenerator.cs" />
+    <Compile Include="Movement\ICertificateNameGenerator.cs" />
     <Compile Include="Movement\MovementOperationReceipt.cs" />
     <Compile Include="Movement\MovementReceipt.cs" />
     <Compile Include="Movement\ActiveMovements.cs" />

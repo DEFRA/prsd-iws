@@ -3,12 +3,12 @@
     using System.Threading.Tasks;
     using NotificationApplication;
 
-    public class CertificateOfReceiptName
+    public class CertificateOfReceiptNameGenerator : ICertificateNameGenerator
     {
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly string nameFormat = "{0}-shipment-{1}-receipt";
 
-        public CertificateOfReceiptName(INotificationApplicationRepository notificationApplicationRepository)
+        public CertificateOfReceiptNameGenerator(INotificationApplicationRepository notificationApplicationRepository)
         {
             this.notificationApplicationRepository = notificationApplicationRepository;
         }

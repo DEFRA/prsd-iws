@@ -39,9 +39,9 @@
         }
 
         [Fact]
-        public void PostRedirectsToCorrectScreen()
+        public async Task PostRedirectsToCorrectScreen()
         {
-            var result = controller.Index(AnyGuid, new OperationCompleteViewModel
+            var result = await controller.Index(AnyGuid, new OperationCompleteViewModel
             {
                 NotificationId = AnyGuid,
                 File = FakeHttpPostedFileFactory.CreateTestFile()
