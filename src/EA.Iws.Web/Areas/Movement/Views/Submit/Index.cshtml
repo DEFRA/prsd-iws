@@ -1,0 +1,43 @@
+﻿@model EA.Iws.Web.Areas.Movement.ViewModels.SubmitViewModel
+@{
+    ViewBag.Title = "Submit a pre-notification";
+    Layout = "~/Areas/Movement/Views/Shared/_LayoutReceipt.cshtml";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">Your pre-notification is now almost complete</h1>
+    <h2 class="heading-small">Before we consider your pre-notification you need to:</h2>
+    <h3>
+        Download the
+        @Html.ActionLink("IwsMovement.doc", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "Movement" }, new { })
+        (approx. 55kb), print, sign and upload it.
+    </h3>
+</header>
+
+@using (Html.BeginForm(null, "Submit", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.MovementId)
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+        @Html.Gds().LabelFor(m => m.File, showOptionalLabel: false)
+        @Html.Gds().ValidationMessageFor(m => m.File)
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+    </div>
+
+    <div class="form-group-compound">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}
+<div class="form-group">
+    <p>
+        @Html.ActionLink("Go to notification options",
+            "ApprovedNotification",
+            "Applicant",
+            new { area = string.Empty, id = Model.NotificationId },
+            null)
+    </p>
+</div>
+

@@ -105,6 +105,7 @@
     <Compile Include="Movement\GetNumberOfCarriersByMovementId.cs" />
     <Compile Include="Movement\GetPackagingDataForMovement.cs" />
     <Compile Include="Movement\SetActualMovementCarriers.cs" />
+    <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementId.cs" />
     <Compile Include="Movement\GetNumberOfPackagesByMovementId.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementId.cs" />

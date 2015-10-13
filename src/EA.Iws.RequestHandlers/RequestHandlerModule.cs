@@ -51,6 +51,7 @@
             builder.RegisterType<CertificateOfReceiptNameGenerator>().AsSelf();
             builder.RegisterType<CertificateOfRecoveryNameGenerator>().AsSelf();
             builder.RegisterType<ConsentNotification>().AsSelf();
+            builder.RegisterType<MovementFileNameGenerator>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();

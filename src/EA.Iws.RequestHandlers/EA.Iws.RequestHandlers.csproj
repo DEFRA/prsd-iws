@@ -145,6 +145,7 @@
     <Compile Include="Movement\GetShipmentDateDataByMovementIdHandler.cs" />
     <Compile Include="Movement\IwsContextExtensions.cs" />
     <Compile Include="Movement\SetActualMovementCarriersHandler.cs" />
+    <Compile Include="Movement\SetMovementFileIdHandler.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
     <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementIdHandler.cs" />

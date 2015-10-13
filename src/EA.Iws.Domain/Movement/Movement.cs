@@ -58,6 +58,8 @@
 
         public ShipmentQuantityUnits? Units { get; private set; }
 
+        public Guid? FileId { get; private set; }
+
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
 
         protected virtual ICollection<MovementCarrier> MovementCarriersCollection { get; set; }
@@ -132,6 +134,11 @@
             }
 
             this.Receipt.OperationReceipt = new MovementOperationReceipt(dateComplete);
+        }
+
+        public void SetFile(Guid fileId)
+        {
+            FileId = fileId;
         }
     }
 }

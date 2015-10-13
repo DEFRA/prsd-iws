@@ -101,7 +101,7 @@
 
             var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
 
-            return RedirectToAction("Index", "NotificationMovement", new { id = notificationId, area = string.Empty });
+                return RedirectToAction("Index", "Submit", new { id, area = "Movement" });
         }
 
         [HttpGet]
