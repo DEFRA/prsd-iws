@@ -3,11 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Notification;
     using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Helpers;
+    using Prsd.Core.Mediator;
     using Requests.Notification;
     using Web.Controllers;
     using Web.ViewModels.NewNotification;
@@ -34,10 +34,10 @@
 
         private static NewNotificationController CreateNewNotificationController()
         {
-            var client = A.Fake<IIwsClient>();
-            A.CallTo(() => client.SendAsync(A<string>._, A<CreateNotificationApplication>._))
+            var mediator = A.Fake<IMediator>();
+            A.CallTo(() => mediator.SendAsync(A<CreateNotificationApplication>._))
                 .Returns(Guid.Empty);
-            return new NewNotificationController(() => client);
+            return new NewNotificationController(mediator);
         }
 
         [Fact]

@@ -3,11 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Notification;
     using Core.Shared;
-    using Infrastructure;
     using Prsd.Core.Extensions;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
@@ -15,11 +14,11 @@
 
     public class NewNotificationController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public NewNotificationController(Func<IIwsClient> apiClient)
+        public NewNotificationController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -72,55 +71,49 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    var response =
-                        await
-                            client.SendAsync(User.GetAccessToken(),
-                                new CreateNotificationApplication
-                                {
-                                    CompetentAuthority = model.CompetentAuthority,
-                                    NotificationType = model.SelectedNotificationType
-                                });
+                var response =
+                    await
+                        mediator.SendAsync(
+                            new CreateNotificationApplication
+                            {
+                                CompetentAuthority = model.CompetentAuthority,
+                                NotificationType = model.SelectedNotificationType
+                            });
 
-                    return RedirectToAction("Created",
-                        new
-                        {
-                            id = response,
-                            cfp
-                        });
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
+                return RedirectToAction("Created",
+                    new
                     {
-                        throw;
-                    }
-                }
-
-                return View(model);
+                        id = response,
+                        cfp
+                    });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
 
         [HttpGet]
         public async Task<ActionResult> Created(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
+            var response = await mediator.SendAsync(new GetNotificationBasicInfo(id));
 
-                var model = new CreatedViewModel
-                {
-                    NotificationId = response.NotificationId,
-                    NotificationNumber = response.NotificationNumber,
-                    CompetentAuthority = response.CompetentAuthority
-                };
-                return View(model);
-            }
+            var model = new CreatedViewModel
+            {
+                NotificationId = response.NotificationId,
+                NotificationNumber = response.NotificationNumber,
+                CompetentAuthority = response.CompetentAuthority
+            };
+            return View(model);
         }
 
         [HttpPost]

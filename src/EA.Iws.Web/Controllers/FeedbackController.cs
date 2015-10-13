@@ -2,17 +2,16 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Antlr.Runtime.Misc;
-    using Api.Client;
+    using Prsd.Core.Mediator;
     using ViewModels.NewUser;
 
     public class FeedbackController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public FeedbackController(Func<IIwsClient> apiClient)
+        public FeedbackController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -33,11 +32,8 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(model.ToRequest());
-                return View("FeedbackSent");
-            }
+            await mediator.SendAsync(model.ToRequest());
+            return View("FeedbackSent");
         }
 
         [HttpGet]

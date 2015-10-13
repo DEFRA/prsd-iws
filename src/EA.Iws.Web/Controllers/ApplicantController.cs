@@ -39,10 +39,8 @@
         [HttpGet]
         public async Task<ActionResult> ApprovedNotification(Guid id)
         {
-            ApprovedNotificationViewModel model;
-
             var notificationInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
-            model = new ApprovedNotificationViewModel(notificationInfo.NotificationType);
+            var model = new ApprovedNotificationViewModel(notificationInfo.NotificationType);
             
             model.NotificationId = id;
             return View(model);

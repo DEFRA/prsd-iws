@@ -38,7 +38,7 @@
             try
             {
                 var resultId = await
-                    mediator.SendAsync(new CopyToNotification(model.SelectedNotification.Value, id));
+                    mediator.SendAsync(new CopyToNotification(model.SelectedNotification.GetValueOrDefault(), id));
 
                 if (resultId != Guid.Empty)
                 {
