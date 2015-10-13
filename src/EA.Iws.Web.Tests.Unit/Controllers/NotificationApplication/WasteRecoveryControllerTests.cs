@@ -43,14 +43,5 @@
 
             RouteAssert.RoutesTo(routeResult.RouteValues, "Percentage", "WasteRecovery");
         }
-
-        private void SetNotificationProvidedBy(Guid notificationId, ProvidedBy? providedBy)
-        {
-            A.CallTo(() =>
-                mediator.SendAsync(
-                    A<GetWasteRecoveryProvider>.That.Matches(r =>
-                        r.NotificationId == notificationId)))
-                .Returns(providedBy);
-        }
     }
 }

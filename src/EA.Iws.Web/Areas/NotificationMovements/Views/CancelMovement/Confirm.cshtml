@@ -1,0 +1,29 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.CancelMovement.ConfirmCancelMovementsViewModel
+
+@{
+    ViewBag.Title = "Confirm cancellation";
+}
+
+<header class="hgroup text">
+    <h1 class="heading-large">Are you sure you want to cancel these pre-notifications?</h1>
+    Shipments
+</header>
+
+<div class="form-group">
+    @Html.HiddenFor(m => m.NotificationId)
+    @foreach (var cancelMovement in Model.ListForCancelMovement)
+    {
+        <span class="operation-code-list">@cancelMovement.Number</span>
+    }
+</div>
+<div class="form-group">
+    <button class="button" type="submit">Confirm cancellation</button>
+</div>
+
+<div class="form-group">
+    @Html.ActionLink("I would like to edit this list", "Index", "CancelMovement", new { area = "NotificationMovements", notificationId = Model.NotificationId }, null)
+</div>
+
+<div class="form-group">
+    @Html.ActionLink("No I dont want to cancel these shipments", "Index", "CancelMovement", new { area = "NotificationMovements", notificationId = Model.NotificationId }, null)
+</div>

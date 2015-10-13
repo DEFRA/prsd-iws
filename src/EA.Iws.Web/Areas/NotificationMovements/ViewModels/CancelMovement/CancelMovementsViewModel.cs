@@ -12,8 +12,9 @@
         {
         }
 
-        public CancelMovementsViewModel(List<SubmittedMovement> result)
+        public CancelMovementsViewModel(Guid notificationId, List<SubmittedMovement> result)
         {
+            NotificationId = notificationId;
             SubmittedMovements = result.OrderByDescending(m => m.ShipmentDate).ToList();
         }
 
