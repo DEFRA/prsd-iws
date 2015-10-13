@@ -25,5 +25,5 @@
 </div>
 
 <div class="form-group">
-    @Html.ActionLink("No I dont want to cancel these shipments", "Index", "CancelMovement", new { area = "NotificationMovements", notificationId = Model.NotificationId }, null)
+    @Html.ActionLink("No I don't want to cancel these shipments", "Summary", "NotificationMovement", new { area = string.Empty, id = Model.NotificationId }, null)
 </div>
