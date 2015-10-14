@@ -3,49 +3,40 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.NumberOfPackages;
 
     public class NumberOfPackagesController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public NumberOfPackagesController(Func<IIwsClient> apiClient)
+        public NumberOfPackagesController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result =
-                    await client.SendAsync(User.GetAccessToken(), new GetNumberOfPackagesByMovementId(id));
+            var result =
+                await mediator.SendAsync(new GetNumberOfPackagesByMovementId(id));
 
-                return View(new NumberOfPackagesViewModel{ Number = result });
-            }
+            return View(new NumberOfPackagesViewModel { Number = result });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, NumberOfPackagesViewModel model)
         {
-            using (var client = apiClient())
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetNumberOfPackagesByMovementId(id, model.Number.Value));
-
-                return RedirectToAction("Index", "Carrier", new { id });
+                return View(model);
             }
-        } 
+
+            await mediator.SendAsync(new SetNumberOfPackagesByMovementId(id, model.Number.GetValueOrDefault()));
+
+            return RedirectToAction("Index", "Carrier", new { id });
+        }
     }
 }

@@ -5,26 +5,26 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels;
     using Core.PackagingType;
     using FakeItEasy;
     using Iws.TestHelpers.Helpers;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using Web.ViewModels.Shared;
     using Xunit;
 
     public class PackagingTypesControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly Guid movementId = new Guid("C1C159CB-AF37-4465-A66E-953779158B61");
         private readonly PackagingTypesController controller;
 
         public PackagingTypesControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            controller = new PackagingTypesController(() => client);
+            mediator = A.Fake<IMediator>();
+            controller = new PackagingTypesController(mediator);
         }
 
         [Fact]
@@ -118,7 +118,7 @@
             var result = await controller.Index(movementId) as ViewResult;
             var possibleValuesFromViewModel = ((PackagingTypesViewModel)result.Model).PackagingTypes.PossibleValues;
 
-            Assert.Equal(new[] { "Bag" }.ToList(), 
+            Assert.Equal(new[] { "Bag" }.ToList(),
                 possibleValuesFromViewModel.Where(p => p.Selected).Select(p => p.Text).ToList());
         }
 
@@ -145,8 +145,7 @@
 
             await controller.Index(movementId, model);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored,
-                A<SetPackagingDataForMovement>.That.Matches(
+            A.CallTo(() => mediator.SendAsync(A<SetPackagingDataForMovement>.That.Matches(
                     r => r.MovementId == movementId
                     && r.PackagingTypes.Contains(PackagingType.Bag)
                     && r.PackagingTypes.Contains(PackagingType.Box)
@@ -218,10 +217,10 @@
                     selectedPackagingTypes,
                     selectedPackagingData);
 
-                A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetPackagingDataForMovement>.Ignored)).Returns(selectedPackagingData);
+                A.CallTo(() => mediator.SendAsync(A<GetPackagingDataForMovement>.Ignored)).Returns(selectedPackagingData);
             }
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetPackagingDataValidForMovement>.Ignored)).Returns(packagingData);
+            A.CallTo(() => mediator.SendAsync(A<GetPackagingDataValidForMovement>.Ignored)).Returns(packagingData);
         }
 
         private void SetUpPackagingData(IList<PackagingType> packagingTypes, string otherDescription = null)

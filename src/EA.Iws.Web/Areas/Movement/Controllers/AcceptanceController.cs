@@ -3,33 +3,27 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.MovementReceipt;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
     using ViewModels.Acceptance;
 
     [Authorize]
     public class AcceptanceController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public AcceptanceController(Func<IIwsClient> apiClient)
+        public AcceptanceController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var acceptanceInfo = await client.SendAsync(User.GetAccessToken(), new GetMovementAcceptanceDataByMovementId(id));
-
-                var model = new AcceptanceViewModel(acceptanceInfo);
-
-                return View(model);
-            }
+            var acceptanceInfo = await mediator.SendAsync(new GetMovementAcceptanceDataByMovementId(id));
+            var model = new AcceptanceViewModel(acceptanceInfo);
+            return View(model);
         }
 
         [HttpPost]
@@ -41,20 +35,15 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            await mediator.SendAsync(new UpdateShipmentAcceptanceDataByMovementId(id, model.Decision.GetValueOrDefault(), model.RejectReason));
+
+            if (model.Decision == Decision.Rejected)
             {
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new UpdateShipmentAcceptanceDataByMovementId(id, model.Decision.GetValueOrDefault(), model.RejectReason));
-
-                if (model.Decision == Decision.Rejected)
-                {
-                    // Change to redirect to completed page when it is available
-                    return RedirectToAction("Index", "ReceiptComplete", new { id });
-                }
-
-                return RedirectToAction("Index", "QuantityReceived", new { id });
+                // Change to redirect to completed page when it is available
+                return RedirectToAction("Index", "ReceiptComplete", new { id });
             }
+
+            return RedirectToAction("Index", "QuantityReceived", new { id });
         }
     }
 }

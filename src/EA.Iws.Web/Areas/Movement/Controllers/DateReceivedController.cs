@@ -3,31 +3,27 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Areas.Movement.ViewModels;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
+    using ViewModels;
 
     public class DateReceivedController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public DateReceivedController(Func<IIwsClient> apiClient)
+        public DateReceivedController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var dates = await client.SendAsync(User.GetAccessToken(), new GetMovementReceiptDateByMovementId(id));
+            var dates = await mediator.SendAsync(new GetMovementReceiptDateByMovementId(id));
 
-                var viewModel = new DateReceivedViewModel(dates.DateReceived, dates.MovementDate);
+            var viewModel = new DateReceivedViewModel(dates.DateReceived, dates.MovementDate);
 
-                return View(viewModel);
-            }
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -39,12 +35,8 @@
                 return View(viewModel);
             }
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new CreateMovementReceiptForMovement(id, viewModel.GetDateReceived()));
-
-                return RedirectToAction("Index", "Acceptance", new { id });
-            }
+            await mediator.SendAsync(new CreateMovementReceiptForMovement(id, viewModel.GetDateReceived()));
+            return RedirectToAction("Index", "Acceptance", new { id });
         }
     }
 }

@@ -3,17 +3,17 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Movement.Controllers;
+    using Areas.Movement.ViewModels;
     using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.MovementOperationReceipt;
-    using Web.Areas.Movement.ViewModels;
     using Xunit;
 
     public class DateCompleteControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly DateCompleteController controller;
 
         private static readonly Guid AnyGuid = new Guid("F4034567-92BA-4FB5-A2F8-69CF8304525B");
@@ -21,9 +21,9 @@
 
         public DateCompleteControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
-            controller = new DateCompleteController(() => client);
+            controller = new DateCompleteController(mediator);
         }
 
         [Fact]
@@ -31,12 +31,10 @@
         {
             await controller.Index(AnyGuid);
 
-            A.CallTo(() => 
-                client.SendAsync(
-                    A<string>.Ignored, 
-                    A<GetMovementOperationReceiptDataByMovementId>
+            A.CallTo(() =>
+                mediator.SendAsync(A<GetMovementOperationReceiptDataByMovementId>
                         .That.Matches(r => r.Id == AnyGuid)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                        .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -58,13 +56,9 @@
             await controller.Index(AnyGuid, viewModel);
 
             A.CallTo(() =>
-                client.SendAsync(
-                    A<string>.Ignored,
-                    A<CreateMovementOperationReceiptForMovement>
-                        .That.Matches(r =>
-                            r.MovementId == AnyGuid
-                            && r.DateComplete == AnyDate)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                mediator.SendAsync(A<CreateMovementOperationReceiptForMovement>
+                            .That.Matches(r => r.MovementId == AnyGuid && r.DateComplete == AnyDate)))
+                            .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -82,7 +76,7 @@
             var result = await controller.Index(AnyGuid, viewModel);
 
             var redirectResult = Assert.IsType<RedirectToRouteResult>(result);
-            
+
             return redirectResult;
         }
     }

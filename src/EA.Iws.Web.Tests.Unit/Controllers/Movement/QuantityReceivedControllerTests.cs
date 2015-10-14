@@ -1,14 +1,14 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.Movement
 {
-    using Api.Client;
-    using Areas.Movement.Controllers;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels.Quantity;
     using Core.MovementReceipt;
     using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
     using Xunit;
 
@@ -17,17 +17,16 @@
         private static readonly Guid AnyGuid = new Guid("5AD21761-507B-4A19-8763-709AC3C5813E");
 
         private readonly QuantityReceivedController controller;
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly QuantityReceivedViewModel viewModel;
 
         public QuantityReceivedControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            controller = new QuantityReceivedController(() => client);
+            mediator = A.Fake<IMediator>();
+            controller = new QuantityReceivedController(mediator);
 
             A.CallTo(() =>
-                client.SendAsync(A<string>.Ignored,
-                    A<GetMovementReceiptQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid)))
+                mediator.SendAsync(A<GetMovementReceiptQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid)))
                 .Returns(new MovementReceiptQuantityData
                 {
                     Unit = ShipmentQuantityUnits.Kilograms,
@@ -46,10 +45,8 @@
         {
             await controller.Index(AnyGuid);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored,
-                        A<GetMovementReceiptQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid)))
+            A.CallTo(() =>
+                mediator.SendAsync(A<GetMovementReceiptQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -81,12 +78,10 @@
         {
             await controller.Index(AnyGuid, viewModel);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored,
-                A<SetMovementReceiptQuantityByMovementId>
-                    .That
-                    .Matches(r => r.Id == AnyGuid
+            A.CallTo(() => mediator.SendAsync(A<SetMovementReceiptQuantityByMovementId>
+                    .That.Matches(r => r.Id == AnyGuid
                                   && r.Quantity == viewModel.Quantity)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                    .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]

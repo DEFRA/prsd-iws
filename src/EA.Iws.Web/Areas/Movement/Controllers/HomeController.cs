@@ -3,59 +3,48 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
     using Prsd.Core;
+    using Prsd.Core.Mediator;
+    using Prsd.Core.Web;
     using Requests.Movement;
     using Requests.MovementReceipt;
 
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public HomeController(Func<IIwsClient> apiClient)
+        public HomeController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Navigation(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result =
-                    client.SendAsync(User.GetAccessToken(),
-                            new GetMovementProgressInformation(id))
+            var result = mediator.SendAsync(new GetMovementProgressInformation(id))
                             .GetAwaiter()
                             .GetResult();
 
-                return PartialView("_Navigation", result);
-            }
+            return PartialView("_Navigation", result);
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult ReceiptSummary(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = client.SendAsync(User.GetAccessToken(), new GetMovementReceiptSummaryDataByMovementId(id)).GetAwaiter().GetResult();
+            var result = mediator.SendAsync(new GetMovementReceiptSummaryDataByMovementId(id)).GetAwaiter().GetResult();
 
-                return PartialView("_ReceiptSummary", result);
-            }
+            return PartialView("_ReceiptSummary", result);
         }
 
         [HttpGet]
         public async Task<ActionResult> GenerateMovementDocument(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = await client.SendAsync(User.GetAccessToken(), new GenerateMovementDocument(id));
+            var result = await mediator.SendAsync(new GenerateMovementDocument(id));
 
-                var downloadName = "IwsMovement" + SystemTime.UtcNow.ToShortDateString() + ".docx";
+            var downloadName = "IwsMovement" + SystemTime.UtcNow.ToShortDateString() + ".docx";
 
-                return File(result, Prsd.Core.Web.Constants.MicrosoftWordContentType, downloadName);
-            }
-        } 
+            return File(result, Constants.MicrosoftWordContentType, downloadName);
+        }
     }
 }

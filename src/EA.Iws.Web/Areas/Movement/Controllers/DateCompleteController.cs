@@ -3,31 +3,25 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Areas.Movement.ViewModels;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.MovementOperationReceipt;
+    using ViewModels;
 
     public class DateCompleteController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public DateCompleteController(Func<IIwsClient> apiClient)
+        public DateCompleteController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var data = await client.SendAsync(User.GetAccessToken(), new GetMovementOperationReceiptDataByMovementId(id));
-
-                var model = new DateCompleteViewModel(data.DateCompleted, data.NotificationType);
-
-                return View(model);
-            }
+            var data = await mediator.SendAsync(new GetMovementOperationReceiptDataByMovementId(id));
+            var model = new DateCompleteViewModel(data.DateCompleted, data.NotificationType);
+            return View(model);
         }
 
         [HttpPost]
@@ -39,12 +33,8 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new CreateMovementOperationReceiptForMovement(id, model.GetDateComplete()));
-
-                return RedirectToAction("Index", "OperationComplete");
-            }
+            await mediator.SendAsync(new CreateMovementOperationReceiptForMovement(id, model.GetDateComplete()));
+            return RedirectToAction("Index", "OperationComplete");
         }
     }
 }

@@ -5,17 +5,17 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels.Carrier;
     using Core.Carriers;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using Xunit;
 
     public class CarrierControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly CarrierController controller;
         private static readonly Guid AnyGuid = new Guid("7B9974BC-A709-4916-A040-0DDC3FB9BE02");
         private static readonly Guid MovementId = new Guid("5E07EC6F-9314-49E7-AA4D-FEB136BBC802");
@@ -23,9 +23,9 @@
 
         public CarrierControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
-            controller = new CarrierController(() => client);
+            controller = new CarrierController(mediator);
         }
 
         [Fact]
@@ -33,14 +33,14 @@
         {
             await controller.NumberOfCarriers(AnyGuid);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfCarriersByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
+            A.CallTo(() => mediator.SendAsync(A<GetNumberOfCarriersByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
         public async Task NumberOfCarriers_Get_ReturnsNull_ReturnsNullInViewModel()
         {
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfCarriersByMovementId>.Ignored))
+            A.CallTo(() => mediator.SendAsync(A<GetNumberOfCarriersByMovementId>.Ignored))
                 .Returns<int?>(null);
 
             var result = await controller.NumberOfCarriers(AnyGuid);
@@ -59,7 +59,7 @@
         [Fact]
         public async Task NumberOfCarriers_Get_ReturnsNumber_ReturnsNumberInViewModel()
         {
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfCarriersByMovementId>.Ignored))
+            A.CallTo(() => mediator.SendAsync(A<GetNumberOfCarriersByMovementId>.Ignored))
                 .Returns<int?>(3);
 
             var result = await controller.NumberOfCarriers(AnyGuid);
@@ -194,7 +194,7 @@
 
             await controller.Index(AnyGuid, 3);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementCarrierDataByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
+            A.CallTo(() => mediator.SendAsync(A<GetMovementCarrierDataByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -239,9 +239,7 @@
 
             A.CallTo(
                 () =>
-                    client.SendAsync(
-                        A<string>.Ignored,
-                        A<SetActualMovementCarriers>
+                    mediator.SendAsync(A<SetActualMovementCarriers>
                             .That.Matches(
                                 r => r.MovementId == MovementId
                                 && r.SelectedCarriers.ContainsKey(0)
@@ -263,7 +261,7 @@
 
         private void SetUpMovementCarrierData(CarrierData[] notificationCarriers, Dictionary<int, CarrierData> selectedCarriers = null)
         {
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementCarrierDataByMovementId>.Ignored))
+            A.CallTo(() => mediator.SendAsync(A<GetMovementCarrierDataByMovementId>.Ignored))
                 .Returns(new MovementCarrierData
                 {
                     NotificationCarriers = notificationCarriers,

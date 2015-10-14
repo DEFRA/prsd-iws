@@ -3,12 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels.Quantity;
     using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using Xunit;
 
@@ -17,18 +17,18 @@
         private static readonly Guid AnyGuid = new Guid("5AD21761-507B-4A19-8763-709AC3C5813E");
 
         private readonly QuantityController controller;
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly TestMap mapper;
 
         public QuantityControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
             mapper = new TestMap();
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementQuantityDataByMovementId>.Ignored))
+            A.CallTo(() => mediator.SendAsync(A<GetMovementQuantityDataByMovementId>.Ignored))
                 .Returns(new MovementQuantityData());
 
-            controller = new QuantityController(() => client, mapper);
+            controller = new QuantityController(mediator, mapper);
         }
 
         [Fact]
@@ -36,7 +36,7 @@
         {
             await controller.Index(AnyGuid);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementQuantityDataByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
+            A.CallTo(() => mediator.SendAsync(A<GetMovementQuantityDataByMovementId>.That.Matches(r => r.MovementId == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -66,7 +66,7 @@
 
             await controller.Index(AnyGuid, new QuantityViewModel());
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetMovementQuantityDataByMovementId>.Ignored))
+            A.CallTo(() => mediator.SendAsync(A<GetMovementQuantityDataByMovementId>.Ignored))
                 .MustNotHaveHappened();
         }
 
@@ -98,8 +98,7 @@
 
             await controller.Index(AnyGuid, model);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored,
-                        A<SetMovementQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid
+            A.CallTo(() => mediator.SendAsync(A<SetMovementQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid
                         && r.Units == model.Units
                         && r.Quantity == Convert.ToDecimal(model.Quantity))))
                 .MustHaveHappened(Repeated.Exactly.Once);

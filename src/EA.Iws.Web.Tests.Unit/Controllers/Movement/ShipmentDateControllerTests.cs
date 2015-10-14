@@ -3,22 +3,22 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using Xunit;
 
     public class ShipmentDateControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly ShipmentDateController controller;
 
         public ShipmentDateControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            controller = new ShipmentDateController(() => client);
+            mediator = A.Fake<IMediator>();
+            controller = new ShipmentDateController(mediator);
         }
 
         [Fact]
@@ -26,7 +26,7 @@
         {
             await controller.Index(Guid.Empty);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetShipmentDateDataByMovementId>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<GetShipmentDateDataByMovementId>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -45,7 +45,7 @@
         {
             await controller.Index(Guid.Empty);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetShipmentDateDataByMovementId>.That.Matches(r => r.MovementId == Guid.Empty))).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<GetShipmentDateDataByMovementId>.That.Matches(r => r.MovementId == Guid.Empty))).MustHaveHappened(Repeated.Exactly.Once);
         }
     }
 }

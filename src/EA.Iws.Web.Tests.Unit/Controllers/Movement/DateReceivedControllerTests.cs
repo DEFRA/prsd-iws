@@ -1,18 +1,18 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.Movement
 {
-    using Api.Client;
-    using Areas.Movement.Controllers;
-    using EA.Iws.Requests.MovementReceipt;
-    using EA.Iws.Web.Areas.Movement.ViewModels;
-    using FakeItEasy;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Areas.Movement.Controllers;
+    using Areas.Movement.ViewModels;
+    using FakeItEasy;
+    using Prsd.Core.Mediator;
+    using Requests.MovementReceipt;
     using Xunit;
 
     public class DateReceivedControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly DateReceivedController controller;
 
         private static readonly Guid MovementId = new Guid("09CF4780-D5CB-43FC-98BC-74DD9273896E");
@@ -20,9 +20,9 @@
 
         public DateReceivedControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
-            controller = new DateReceivedController(() => client);
+            controller = new DateReceivedController(mediator);
         }
 
         [Fact]
@@ -30,12 +30,10 @@
         {
             await controller.Index(MovementId);
 
-            A.CallTo(() => 
-                client.SendAsync(
-                    A<string>.Ignored, 
-                    A<GetMovementReceiptDateByMovementId>.That.Matches(r => 
-                        r.MovementId == MovementId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() =>
+                mediator.SendAsync(A<GetMovementReceiptDateByMovementId>
+                    .That.Matches(r => r.MovementId == MovementId)))
+                    .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -64,13 +62,10 @@
 
             await controller.Index(MovementId, viewModel);
 
-            A.CallTo(() => 
-                client.SendAsync(
-                    A<string>.Ignored, 
-                    A<CreateMovementReceiptForMovement>.That.Matches(r => 
-                        r.MovementId == MovementId 
-                        && r.DateReceived == DateReceived)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() =>
+                mediator.SendAsync(A<CreateMovementReceiptForMovement>
+                        .That.Matches(r => r.MovementId == MovementId && r.DateReceived == DateReceived)))
+                        .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]

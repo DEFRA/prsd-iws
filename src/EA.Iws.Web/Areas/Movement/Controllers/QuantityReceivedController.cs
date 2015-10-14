@@ -3,33 +3,29 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
     using ViewModels.Quantity;
 
     public class QuantityReceivedController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public QuantityReceivedController(Func<IIwsClient> apiClient)
+        public QuantityReceivedController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetMovementReceiptQuantityByMovementId(id));
+            var result = await mediator.SendAsync(new GetMovementReceiptQuantityByMovementId(id));
 
-                return View(new QuantityReceivedViewModel
-                {
-                    Unit = result.Unit,
-                    Quantity = result.Quantity
-                });
-            }
+            return View(new QuantityReceivedViewModel
+            {
+                Unit = result.Unit,
+                Quantity = result.Quantity
+            });
         }
 
         [HttpPost]
@@ -41,13 +37,10 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new SetMovementReceiptQuantityByMovementId(id,
-                    model.Quantity.Value));
+            await mediator.SendAsync(new SetMovementReceiptQuantityByMovementId(id,
+                model.Quantity.GetValueOrDefault()));
 
-                return RedirectToAction("Index", "ReceiptComplete", new { id });
-            }
-        } 
+            return RedirectToAction("Index", "ReceiptComplete", new { id });
+        }
     }
 }

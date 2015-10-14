@@ -3,8 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Movement;
@@ -13,24 +12,21 @@
     [Authorize]
     public class ShipmentDateController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public ShipmentDateController(Func<IIwsClient> apiClient)
+        public ShipmentDateController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var movementDateInfo = await client.SendAsync(User.GetAccessToken(), new GetShipmentDateDataByMovementId(id));
+            var movementDateInfo = await mediator.SendAsync(new GetShipmentDateDataByMovementId(id));
 
-                var model = new ShipmentDateViewModel(movementDateInfo);
+            var model = new ShipmentDateViewModel(movementDateInfo);
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]
@@ -42,26 +38,22 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-
-                    return RedirectToAction("Index", "Quantity", new { id = model.MovementId });
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-
-                return View(model);
+                await mediator.SendAsync(model.ToRequest());
+                return RedirectToAction("Index", "Quantity", new { id = model.MovementId });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
     }
 }

@@ -3,52 +3,45 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.Quantity;
 
     [Authorize]
     public class QuantityController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
         private readonly IMap<MovementQuantityData, QuantityViewModel> quantityMap;
 
-        public QuantityController(Func<IIwsClient> apiClient, IMap<MovementQuantityData, QuantityViewModel> quantityMap)
+        public QuantityController(IMediator mediator, IMap<MovementQuantityData, QuantityViewModel> quantityMap)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
             this.quantityMap = quantityMap;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetMovementQuantityDataByMovementId(id));
+            var result = await mediator.SendAsync(new GetMovementQuantityDataByMovementId(id));
 
-                return View(quantityMap.Map(result));
-            }
+            return View(quantityMap.Map(result));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, QuantityViewModel model)
         {
-            using (var client = apiClient())
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                await client.SendAsync(User.GetAccessToken(), new SetMovementQuantityByMovementId(id, 
-                    Convert.ToDecimal(model.Quantity), 
-                    model.Units.Value));
-
-                return RedirectToAction("Index", "PackagingTypes", new { id });
+                return View(model);
             }
+
+            await mediator.SendAsync(new SetMovementQuantityByMovementId(id,
+                Convert.ToDecimal(model.Quantity),
+                model.Units.GetValueOrDefault()));
+
+            return RedirectToAction("Index", "PackagingTypes", new { id });
         }
     }
 }

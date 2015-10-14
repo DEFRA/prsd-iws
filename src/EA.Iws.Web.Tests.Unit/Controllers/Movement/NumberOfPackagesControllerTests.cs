@@ -3,10 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels.NumberOfPackages;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Movement;
     using Xunit;
 
@@ -15,19 +15,19 @@
         private static readonly Guid AnyGuid = new Guid("C95DD463-ACF8-4B4E-B060-E6FDABBBD975");
 
         private readonly NumberOfPackagesController controller;
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
 
         public NumberOfPackagesControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
-            controller = new NumberOfPackagesController(() => client);
+            controller = new NumberOfPackagesController(mediator);
         }
 
         [Fact]
         public async Task GetReturnsNull_ReturnsNullInViewModel()
         {
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfPackagesByMovementId>.Ignored))
+            A.CallTo(() => mediator.SendAsync(A<GetNumberOfPackagesByMovementId>.Ignored))
                 .Returns<int?>(null);
 
             var result = await controller.Index(AnyGuid) as ViewResult;
@@ -40,7 +40,7 @@
         [Fact]
         public async Task GetReturnsNumber_ReturnsNumberInViewModel()
         {
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfPackagesByMovementId>.Ignored))
+            A.CallTo(() => mediator.SendAsync(A<GetNumberOfPackagesByMovementId>.Ignored))
                 .Returns(7);
 
             var result = await controller.Index(AnyGuid) as ViewResult;
@@ -55,7 +55,7 @@
         {
             await controller.Index(AnyGuid);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetNumberOfPackagesByMovementId>.That.Matches(r => r.Id == AnyGuid)))
+            A.CallTo(() => mediator.SendAsync(A<GetNumberOfPackagesByMovementId>.That.Matches(r => r.Id == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -77,12 +77,9 @@
                 Number = 7
             });
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored,
-                        A<SetNumberOfPackagesByMovementId>.That.Matches(r => r.Id == AnyGuid
-                                                                             && r.NumberOfPackages == 7)))
-                                                                             .MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<SetNumberOfPackagesByMovementId>
+                .That.Matches(r => r.Id == AnyGuid && r.NumberOfPackages == 7)))
+                .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
