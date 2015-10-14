@@ -6,7 +6,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">When did you @(Model.NotificationType == NotificationType.Recovery ? "recover" : "dispose of") the waste?</h1>
+    <h1 class="heading-large">When was the waste @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed") of?</h1>
 </header>
 
 @using (Html.BeginForm())
