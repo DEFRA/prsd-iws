@@ -1,98 +1,86 @@
 ﻿namespace EA.Iws.Web.Areas.FinancialGuarantee.Controllers
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Notification;
-    using Infrastructure;
     using Prsd.Core;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.FinancialGuarantee;
 
     public class HomeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public HomeController(Func<IIwsClient> apiClient)
+        public HomeController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> GenerateBankGuaranteeDocument()
         {
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    var response = await client.SendAsync(User.GetAccessToken(), new GenerateBankGuaranteeDocument());
+                var response = await mediator.SendAsync(new GenerateBankGuaranteeDocument());
 
-                    var downloadName = "IwsBankGuarantee" + SystemTime.UtcNow + ".doc";
+                var downloadName = "IwsBankGuarantee" + SystemTime.UtcNow + ".doc";
 
-                    return File(response, "application/msword", downloadName);
-                }
-                catch (ApiBadRequestException ex)
+                return File(response, "application/msword", downloadName);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                    return HttpNotFound();
+                    throw;
                 }
+                return HttpNotFound();
             }
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> GenerateParentCompanyDocument()
         {
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    var response = await client.SendAsync(User.GetAccessToken(), new GenerateParentCompanyDocument());
+                var response = await mediator.SendAsync(new GenerateParentCompanyDocument());
 
-                    var downloadName = "IwsParentCompanyGuarantee" + SystemTime.UtcNow + ".doc";
+                var downloadName = "IwsParentCompanyGuarantee" + SystemTime.UtcNow + ".doc";
 
-                    return File(response, "application/msword", downloadName);
-                }
-                catch (ApiBadRequestException ex)
+                return File(response, "application/msword", downloadName);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                    return HttpNotFound();
+                    throw;
                 }
+                return HttpNotFound();
             }
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> GenerateFinancialGuaranteeDocument(CompetentAuthority competentAuthority)
         {
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    var response =
-                        await client.SendAsync(User.GetAccessToken(), new GenerateFinancialGuaranteeDocument(competentAuthority));
-                    
-                    var downloadName = "IwsFinancialGuarantee" + SystemTime.UtcNow + ".pdf";
+                var response = await mediator.SendAsync(new GenerateFinancialGuaranteeDocument(competentAuthority));
 
-                    return File(response, "application/pdf", downloadName);
-                }
-                catch (ApiBadRequestException ex)
+                var downloadName = "IwsFinancialGuarantee" + SystemTime.UtcNow + ".pdf";
+
+                return File(response, "application/pdf", downloadName);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                    return HttpNotFound();
+                    throw;
                 }
+                return HttpNotFound();
             }
         }
     }

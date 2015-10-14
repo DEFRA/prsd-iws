@@ -1,22 +1,19 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
-    using Api.Client;
-    using Infrastructure;
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Requests.Admin;
+    using Prsd.Core.Mediator;
     using ViewModels;
 
     [Authorize(Roles = "internal")]
     public class HomeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public HomeController(Func<IIwsClient> apiClient)
+        public HomeController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -29,15 +26,13 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(BasicSearchViewModel model)
         {
-            using (var client = apiClient())
+            var searchResults = await mediator.SendAsync(model.ToRequest());
+            if (searchResults != null)
             {
-                var searchResults = await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-                if (searchResults != null)
-                {
-                    model.SearchResults = searchResults.ToList();
-                }
-                model.HasSearched = true;
+                model.SearchResults = searchResults.ToList();
             }
+            model.HasSearched = true;
+
             return View(model);
         }
     }

@@ -5,34 +5,30 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Admin;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Admin.UserAdministration;
     using ViewModels.UserAdministration;
 
     [Authorize(Roles = "internal")]
     public class UserAdministrationController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public UserAdministrationController(Func<IIwsClient> apiClient)
+        public UserAdministrationController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> ManageNewUsers()
         {
-            using (var client = apiClient())
-            {
-                var users = await client.SendAsync(User.GetAccessToken(), new GetNewInternalUsers());
+            var users = await mediator.SendAsync(new GetNewInternalUsers());
 
-                return View(new NewUsersListViewModel
-                {
-                    Users = users.Select(u => new UserApprovalViewModel(u)).ToArray()
-                });
-            }
+            return View(new NewUsersListViewModel
+            {
+                Users = users.Select(u => new UserApprovalViewModel(u)).ToArray()
+            });
         }
 
         [HttpPost]
@@ -44,18 +40,15 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                var message = new SetUserApprovals(
-                    model.Users
-                        .Where(u => u.Action.HasValue)
-                        .Select(u => new KeyValuePair<Guid, ApprovalAction>(u.UserData.Id, u.Action.Value))
-                        .ToList());
+            var message = new SetUserApprovals(
+                model.Users
+                    .Where(u => u.Action.HasValue)
+                    .Select(u => new KeyValuePair<Guid, ApprovalAction>(u.UserData.Id, u.Action.Value))
+                    .ToList());
 
-                await client.SendAsync(User.GetAccessToken(), message);
+            await mediator.SendAsync(message);
 
-                return RedirectToAction("Index", "Home");
-            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

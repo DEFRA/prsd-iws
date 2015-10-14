@@ -4,26 +4,26 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.Admin.Controllers;
     using Areas.Admin.ViewModels;
     using Core.Admin.Search;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Admin;
     using Xunit;
 
     public class HomeControllerTests
     {
         private readonly HomeController controller;
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly BasicSearchViewModel postModel;
-        private readonly IList<BasicSearchResult> searchResults; 
+        private readonly IList<BasicSearchResult> searchResults;
 
         public HomeControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
-            controller = new HomeController(() => client);
+            controller = new HomeController(mediator);
 
             postModel = new BasicSearchViewModel
             {
@@ -48,8 +48,7 @@
                 }
             };
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetBasicSearchResults>.Ignored))
-                .Returns(searchResults);
+            A.CallTo(() => mediator.SendAsync(A<GetBasicSearchResults>.Ignored)).Returns(searchResults);
         }
 
         [Fact]
@@ -70,8 +69,7 @@
         {
             var result = await controller.Index(postModel);
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetBasicSearchResults>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<GetBasicSearchResults>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -93,8 +91,7 @@
         [Fact]
         public async Task PostIndex_SearchReturnsNullReturnsViewmodel()
         {
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<GetBasicSearchResults>.Ignored))
-                .Returns<IList<BasicSearchResult>>(null);
+            A.CallTo(() => mediator.SendAsync(A<GetBasicSearchResults>.Ignored)).Returns<IList<BasicSearchResult>>(null);
 
             var result = await controller.Index(postModel) as ViewResult;
 
