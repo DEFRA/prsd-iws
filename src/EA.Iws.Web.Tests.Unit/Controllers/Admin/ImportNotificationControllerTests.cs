@@ -25,7 +25,7 @@
         }
 
         [Fact]
-        public async Task WithoutNotificationNumber_NotValid()
+        public void WithoutNotificationNumber_NotValid()
         {
             NotificationNumberViewModel model = new NotificationNumberViewModel();
             controller.ModelState.AddModelError("test", "test");
