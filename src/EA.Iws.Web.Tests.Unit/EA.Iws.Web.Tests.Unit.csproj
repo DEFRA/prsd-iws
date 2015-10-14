@@ -149,6 +149,7 @@
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
+    <Compile Include="Controllers\Admin\ImportNotificationControllerTests.cs" />
     <Compile Include="Controllers\Movement\CarrierControllerTests.cs" />
     <Compile Include="Controllers\Movement\DateCompleteControllerTests.cs" />
     <Compile Include="Controllers\Movement\DateReceivedControllerTests.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="TestHelpers\TestExtensions.cs" />
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
+    <Compile Include="ViewModels\Admin\NotificationNumberViewModelTests.cs" />
     <Compile Include="ViewModels\DisposalCostViewModelTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\CarrierViewModelTests.cs" />

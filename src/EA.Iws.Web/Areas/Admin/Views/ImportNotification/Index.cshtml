@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationNumberViewModel
+
+@{
+    ViewBag.Title = "Enter import notification number";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <header class="hgroup">
+        <h1 class="heading-large">Enter import notification number</h1>
+    </header>
+
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationNumber)">
+        @Html.Gds().LabelFor(m => m.NotificationNumber)
+        @Html.Gds().ValidationMessageFor(m => m.NotificationNumber)
+        @Html.Gds().TextBoxFor(m => m.NotificationNumber, new { @MaxLength = 14 })
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}
