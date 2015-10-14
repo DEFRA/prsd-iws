@@ -741,7 +741,6 @@
     <Content Include="Areas\AddressBook\Views\Home\Index.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Feedback\FeedbackSent.cshtml" />
-    <Content Include="Views\NotificationMovement\Summary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
