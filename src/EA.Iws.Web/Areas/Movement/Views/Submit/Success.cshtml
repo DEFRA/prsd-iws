@@ -1,8 +1,29 @@
-﻿@{
+﻿@model EA.Iws.Web.Areas.Movement.ViewModels.SuccessViewModel
+@{
     ViewBag.Title = "Movement successful";
     Layout = "~/Areas/Movement/Views/Shared/_LayoutReceipt.cshtml";
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">You have successfully pre-notified us of shipment x</h1>
+    <h1 class="heading-large">You have successfully pre-notified us of shipment @Model.MovementNumber</h1>
 </header>
+
+@Html.HiddenFor(m => m.NotificationId)
+
+
+    <p>
+        @Html.ActionLink("Continue",
+            "Index",
+            "Home",
+            new { area = "NotificationMovements", notificationId = Model.NotificationId },
+            new { @class = "button"})
+    </p>
+
+
+    <p>
+        @Html.ActionLink("Go to notification options",
+            "ApprovedNotification",
+            "Applicant",
+            new { area = string.Empty, id = Model.NotificationId },
+            null)
+    </p>

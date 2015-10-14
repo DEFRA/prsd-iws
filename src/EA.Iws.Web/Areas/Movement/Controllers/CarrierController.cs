@@ -99,8 +99,6 @@
 
             await mediator.SendAsync(new SetActualMovementCarriers(id, selectedCarriers));
 
-            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
-
                 return RedirectToAction("Index", "Submit", new { id, area = "Movement" });
         }
 

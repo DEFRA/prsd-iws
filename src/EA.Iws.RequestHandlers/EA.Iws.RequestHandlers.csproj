@@ -131,6 +131,7 @@
     <Compile Include="Movement\GetActiveMovementsWithReceiptCertificateByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMeansOfTransportByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
+    <Compile Include="Movement\GetMovementNumberByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementProgressInformationHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptQuantityByMovementIdHandler.cs" />

@@ -51,9 +51,18 @@
         }
 
         [HttpGet]
-        public ActionResult Success(Guid id)
+        public async Task<ActionResult> Success(Guid id)
         {
-            return View();
+            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
+            var movementNumber = await mediator.SendAsync(new GetMovementNumberByMovementId(id));
+
+            var model = new SuccessViewModel
+            {
+                MovementNumber = movementNumber,
+                NotificationId = notificationId
+            };
+
+            return View(model);
         }
     }
 }

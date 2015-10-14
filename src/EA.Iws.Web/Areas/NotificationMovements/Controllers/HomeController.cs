@@ -2,10 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Movement.Summary;
     using ViewModels.Home;

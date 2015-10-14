@@ -780,6 +780,7 @@
     <Compile Include="Areas\Movement\Controllers\AcceptanceController.cs" />
     <None Include="Areas\Movement\Views\Submit\Success.cshtml" />
     <Compile Include="Areas\Movement\ViewModels\SubmitViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
