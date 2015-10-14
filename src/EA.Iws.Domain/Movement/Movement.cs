@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Movement;
     using Core.Shared;
     using NotificationApplication;
     using Prsd.Core;
@@ -19,11 +20,14 @@
         {
             Number = movementNumber;
             NotificationId = notificationId;
+            Status = MovementStatus.New;
         }
 
         public int Number { get; private set; }
 
         public Guid NotificationId { get; private set; }
+
+        public MovementStatus Status { get; private set; }
 
         public bool IsActive
         {
