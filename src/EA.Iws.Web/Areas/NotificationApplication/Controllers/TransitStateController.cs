@@ -134,7 +134,7 @@
 
             var entryPointsAndCompetentAuthorities =
                 await
-                    client.SendAsync(User.GetAccessToken(), new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+                    client.SendAsync(User.GetAccessToken(), new GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
 
             var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
                 new KeyValuePair<string, Guid>(ca.Code + " - " + ca.Name, ca.Id));

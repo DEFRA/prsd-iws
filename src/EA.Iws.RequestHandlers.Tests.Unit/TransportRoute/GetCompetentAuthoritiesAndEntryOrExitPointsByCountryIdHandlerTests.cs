@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
+    using FakeItEasy;
     using RequestHandlers.Mappings;
     using RequestHandlers.TransportRoute;
     using Requests.TransportRoute;
@@ -25,19 +27,24 @@
             var countryWithData = CountryFactory.Create(countryWithDataId);
             var countryWithNoData = CountryFactory.Create(countryWithNoDataId);
 
-            context.CompetentAuthorities.AddRange(new[]
+            var competentAuthorities = new[]
             {
                 CompetentAuthorityFactory.Create(new Guid("C74A75B9-C338-4330-A43A-3AAF3B8FA5E7"), countryWithData),
                 CompetentAuthorityFactory.Create(new Guid("B076AF57-83EB-4F99-BDE6-859CC2B35FBE"), countryWithData)
-            });
+            };
+
+            context.CompetentAuthorities.AddRange(competentAuthorities);
 
             context.EntryOrExitPoints.AddRange(new[]
             {
                 EntryOrExitPointFactory.Create(new Guid("B054CA23-18D3-4E4E-A2B1-F92B7503919A"), countryWithData),
                 EntryOrExitPointFactory.Create(new Guid("9F0DC969-8224-4FEC-BD0D-B90B70378323"), countryWithData)
             });
+
+            var repository = A.Fake<ICompetentAuthorityRepository>();
+            A.CallTo(() => repository.GetCompetentAuthorities(countryWithDataId)).Returns(competentAuthorities);
             
-            handler = new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler(context, entryOrExitPointMapper, competentAuthorityMapper);
+            handler = new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler(context, entryOrExitPointMapper, competentAuthorityMapper, repository);
         }
 
         [Fact]

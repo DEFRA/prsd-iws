@@ -12,15 +12,15 @@
     using Prsd.Core.Mediator;
     using Requests.TransportRoute;
 
-    internal class GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler :
-        IRequestHandler<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId, CompententAuthorityAndEntryOrExitPointData>
+    internal class GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler :
+        IRequestHandler<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId, CompententAuthorityAndEntryOrExitPointData>
     {
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
         private readonly IwsContext context;
         private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper;
 
-        public GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler(IwsContext context,
+        public GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler(IwsContext context,
             IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
             IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper,
             ICompetentAuthorityRepository competentAuthorityRepository)
@@ -32,9 +32,9 @@
         }
 
         public async Task<CompententAuthorityAndEntryOrExitPointData> HandleAsync(
-            GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId message)
+            GetTransitAuthoritiesAndEntryOrExitPointsByCountryId message)
         {
-            var competentAuthorities = (await competentAuthorityRepository.GetCompetentAuthorities(message.Id));
+            var competentAuthorities = (await competentAuthorityRepository.GetTransitAuthorities(message.Id));
 
             var entryOrExitPoints =
                 await context.EntryOrExitPoints.Where(ep => ep.Country.Id == message.Id).ToArrayAsync();

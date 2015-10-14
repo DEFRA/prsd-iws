@@ -161,6 +161,7 @@
     <Compile Include="Notification\PreconsentedFacilityData.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
+    <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCost.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecovery.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValue.cs" />
@@ -202,7 +203,6 @@
     <Compile Include="PackagingType\GetPackagingInfoForNotification.cs" />
     <Compile Include="IntendedShipments\GetIntendedShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotification.cs" />
-    <Compile Include="Shared\GetAllCompetentAuthorities.cs" />
     <Compile Include="StateOfExport\GetStateOfExportWithTransportRouteDataByNotificationId.cs" />
     <Compile Include="StateOfExport\SetStateOfExportForNotification.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotification.cs" />

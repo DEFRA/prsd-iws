@@ -16,6 +16,8 @@
 
         public bool IsSystemUser { get; protected set; }
 
+        public bool? IsTransitAuthority { get; protected set; }
+
         protected CompetentAuthority()
         {
         }

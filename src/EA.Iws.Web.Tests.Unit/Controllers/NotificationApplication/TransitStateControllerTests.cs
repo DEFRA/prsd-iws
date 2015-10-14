@@ -43,7 +43,7 @@
                 };
             A.CallTo(
                 () => client.SendAsync(A<string>.Ignored,
-                    A<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == hull.CountryId)))
+                    A<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == hull.CountryId)))
                 .Returns(new CompententAuthorityAndEntryOrExitPointData()
                 {
                     CompetentAuthorities = competentAuthorties,

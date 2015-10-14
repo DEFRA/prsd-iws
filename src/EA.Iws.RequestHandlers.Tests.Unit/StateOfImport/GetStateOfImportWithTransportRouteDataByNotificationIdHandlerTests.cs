@@ -58,7 +58,8 @@
                 country
             });
 
-            context.CompetentAuthorities.Add(CompetentAuthorityFactory.Create(new Guid("03D04C92-594D-4E6E-B63E-9257211B263B"), country));
+            var competentAuthority = CompetentAuthorityFactory.Create(new Guid("03D04C92-594D-4E6E-B63E-9257211B263B"), country);
+            context.CompetentAuthorities.Add(competentAuthority);
 
             context.EntryOrExitPoints.Add(EntryOrExitPointFactory.Create(new Guid("E098F49E-CD87-4EFE-AE29-FB87111045CF"), country));
 
@@ -66,9 +67,13 @@
             var entryOrExitPointMap = new EntryOrExitPointMap();
             var competentAuthorityMap = new CompetentAuthorityMap();
 
-            var repository = A.Fake<ITransportRouteRepository>();
-            A.CallTo(() => repository.GetByNotificationId(NotificationWithStateOfImportId)).Returns(transport);
-            A.CallTo(() => repository.GetByNotificationId(NotificationNoStateOfImportId)).Returns((TransportRoute)null);
+            var transportRouteRepository = A.Fake<ITransportRouteRepository>();
+            A.CallTo(() => transportRouteRepository.GetByNotificationId(NotificationWithStateOfImportId)).Returns(transport);
+            A.CallTo(() => transportRouteRepository.GetByNotificationId(NotificationNoStateOfImportId)).Returns((TransportRoute)null);
+
+            var competentAuthorityRepository = A.Fake<ICompetentAuthorityRepository>();
+            A.CallTo(() => competentAuthorityRepository.GetCompetentAuthorities(stateOfImportCountryId))
+                .Returns(new[] { competentAuthority });
 
             handler = new GetStateOfImportWithTransportRouteDataByNotificationIdHandler(context, 
                 new StateOfImportMap(countryMap, competentAuthorityMap, entryOrExitPointMap),
@@ -77,7 +82,8 @@
                 entryOrExitPointMap,
                 countryMap, 
                 competentAuthorityMap,
-                repository);
+                transportRouteRepository,
+                competentAuthorityRepository);
         }
 
         [Fact]

@@ -135,6 +135,7 @@
     <Content Include="scripts\Update\Sprint18\20151012-170000-add-lookup-tables-with-insert-data.sql" />
     <Content Include="scripts\Update\Sprint18\20151013-121600-add-fileid-movement-operation-receipt.sql" />
     <Content Include="scripts\Update\Sprint18\20151014-101500-add-movement-status.sql" />
+    <Content Include="scripts\Update\Sprint18\20151014-102700-add-transit-state-to-ca.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

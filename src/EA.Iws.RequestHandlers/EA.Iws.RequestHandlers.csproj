@@ -162,6 +162,7 @@
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
+    <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMax.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />
@@ -295,7 +296,6 @@
     <Compile Include="PackagingType\GetPackagingInfoForNotificationHandler.cs" />
     <Compile Include="IntendedShipments\GetIntendedShipmentInfoForNotificationHandler.cs" />
     <Compile Include="PackagingType\SetPackagingInfoForNotificationHandler.cs" />
-    <Compile Include="Shared\GetAllCompetentAuthoritiesHandler.cs" />
     <Compile Include="StateOfExport\GetStateOfExportWithTransportRouteDataByNotificationIdHandler.cs" />
     <Compile Include="StateOfExport\SetStateOfExportForNotificationHandler.cs" />
     <Compile Include="StateOfImport\SetStateOfImportForNotificationHandler.cs" />

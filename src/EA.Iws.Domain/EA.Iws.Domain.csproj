@@ -72,6 +72,7 @@
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChange.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
+    <Compile Include="ICompetentAuthorityRepository.cs" />
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="IMovementDocumentGenerator.cs" />
     <Compile Include="InternalUser.cs" />
