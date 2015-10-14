@@ -10,6 +10,7 @@
         private const string PrintNotification = "Print notification document";
         private const string ViewNotification = "View notification";
         private const string ManageShipments = "Manage shipments";
+        private const string NotificationKeyDates = "View notification status";
 
         public Guid NotificationId { get; set; }
 
@@ -29,6 +30,7 @@
             choices.Add(new KeyValuePair<string, int>(ViewNotification, 1));
             choices.Add(new KeyValuePair<string, int>(PrintNotification, 2));
             choices.Add(new KeyValuePair<string, int>(ManageShipments, 3));
+            choices.Add(new KeyValuePair<string, int>(NotificationKeyDates, 4));
 
             UserChoices = new StringIntRadioButtons(choices);
         }

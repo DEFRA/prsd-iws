@@ -609,7 +609,6 @@
     <Content Include="Areas\NotificationMovements\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\_ViewStart.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\CancelMovement\Confirm.cshtml" />
-    <Content Include="Areas\Movement\Views\Submit\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Home\Index.cshtml" />
     <Content Include="Content\govuk_elements\_tables.scss" />
     <Content Include="Content\govuk_elements\_reset.scss" />
@@ -629,6 +628,9 @@
     <Content Include="Content\iws\_movement-summary.scss" />
     <Content Include="Content\iws\_buttons.scss" />
     <Content Include="Areas\Admin\Views\ImportNotification\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\KeyDates\Index.cshtml" />
+    <Content Include="Areas\Movement\Views\Submit\Index.cshtml" />
+    <Content Include="Areas\Movement\Views\Submit\Success.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -766,7 +768,6 @@
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationNumberViewModel.cs" />
     <Compile Include="Areas\Movement\Controllers\CarrierController.cs" />
-    <Compile Include="Areas\Movement\Controllers\SubmitController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateCompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
@@ -777,13 +778,15 @@
     <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\ReceiptCompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\AcceptanceController.cs" />
-    <None Include="Areas\Movement\Views\Submit\Success.cshtml" />
+    <Compile Include="Areas\Movement\Controllers\SubmitController.cs" />
     <Compile Include="Areas\Movement\ViewModels\SubmitViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\SuccessViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\KeyDatesController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
-    <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsList.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\CarrierViewModel.cs" />
@@ -801,8 +804,6 @@
     <Compile Include="Areas\NotificationAssessment\ViewModels\DecisionRecordViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\NotificationAssessmentDecisionViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\NotificationMovementsAreaRegistration.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryTableViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalCostViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
@@ -817,6 +818,8 @@
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementOperationViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryTableViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />

@@ -3,10 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using System.Web.UI.WebControls;
     using Api.Client;
     using Infrastructure;
-    using Microsoft.Ajax.Utilities;
     using Requests.Admin.NotificationAssessment;
     using ViewModels;
 

@@ -1,0 +1,139 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.KeyDates.KeyDatesViewModel
+@{
+    ViewBag.Title = "Notification status history";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="column-two-thirds">
+
+<header class="hgroup">
+    <h1 class="heading-large">Notification status history</h1>
+</header>
+
+@Html.HiddenFor(m => m.NotificationId)
+
+@{
+    var nullMarker = "- -";
+}
+
+<div class="form-group">
+    These are the dates so far:
+
+    <table title="Assessment dates currently recorded">
+        <tr>
+            <th>Activities</th>
+            <th>Dates</th>
+        </tr>
+        <tr>
+            <td>Notification received</td>
+            <td>
+                @if (Model.NotificationReceivedDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Payment received</td>
+            <td>
+                @if (Model.PaymentReceivedDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Assessment started</td>
+            <td>
+                @if (Model.CommencementDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.CommencementDate.GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Date application complete</td>
+            <td>
+                @if (Model.CompletedDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.CompletedDate.GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Transmitted on</td>
+            <td>
+                @if (Model.TransmittedDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.TransmittedDate.GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Acknowledged on</td>
+            <td>
+                @if (Model.AcknowledgedDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.AcknowledgedDate.GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Decision required by</td>
+            <td>
+                @if (Model.DecisionRequiredDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.DecisionRequiredDate.GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+
+
+<p>
+    @Html.ActionLink("Go to notification options",
+        "ApprovedNotification",
+        "Applicant",
+        new { area = string.Empty, id = Model.NotificationId },
+        new { @class = "button" })
+</p>
+
+</div>
