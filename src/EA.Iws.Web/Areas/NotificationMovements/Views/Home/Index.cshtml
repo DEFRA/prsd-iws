@@ -113,27 +113,6 @@
 
     </div>
 
-    <!-- //////////// /////// -->
-    @*<div class="pager">
-
-              <div class="pager-controls">
-
-                <ul class="pager-items">
-                  <li>1</li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                </ul>
-
-                <a class="pager-next" href="#">Next</a>
-
-              </div>
-
-              <div class="pager-summary">Showing 1 &ndash; 50 of 146 agents</div>
-
-            </div>*@
-    <!-- //////////// /////// -->
     @{
         var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed Of" : "Recovered";
         var nullMarker = "- -";
@@ -199,31 +178,6 @@
             </tbody>
         </table>
     </div>
-
-
-
-    <!-- //////////// /////// -->
-    @*<div class="pager">
-
-              <div class="pager-controls">
-
-                <ul class="pager-items">
-                  <li>1</li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                </ul>
-
-                <a class="pager-next" href="#">Next</a>
-
-              </div>
-
-              <div class="pager-summary">Showing 1 &ndash; 50 of 146 agents</div>
-
-            </div>*@
-    <!-- //////////// /////// -->
-
 </section>
 <div class="form-group">
     @Html.ActionLink("Go to notification options",

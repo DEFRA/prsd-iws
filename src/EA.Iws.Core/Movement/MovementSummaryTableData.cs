@@ -7,18 +7,18 @@
     {
         public int Number { get; set; }
 
-        public string Status { get; set; }
+        public MovementStatus Status { get; set; }
 
-        public DateTime? PreNotification { get; set; }
+        public DateTime? SubmittedDate { get; set; }
 
         public DateTime? ShipmentDate { get; set; }
 
-        public DateTime? Received { get; set; }
+        public DateTime? ReceivedDate { get; set; }
 
         public decimal? Quantity { get; set; }
 
         public ShipmentQuantityUnits? QuantityUnits { get; set; }
 
-        public DateTime? RecoveredOrDisposedOf { get; set; }
+        public DateTime? CompletedDate { get; set; }
     }
 }

@@ -11,14 +11,15 @@
             var data = new MovementSummaryTableData();
             data.Number = source.Number;
             data.ShipmentDate = source.Date;
+            data.Status = source.Status;
             if (source.Receipt != null)
             {
-                data.Received = source.Receipt.Date;
+                data.ReceivedDate = source.Receipt.Date;
                 data.Quantity = source.Receipt.Quantity;
 
                 if (source.Receipt.OperationReceipt != null)
                 {
-                    data.RecoveredOrDisposedOf = source.Receipt.OperationReceipt.Date;
+                    data.CompletedDate = source.Receipt.OperationReceipt.Date;
                 }
             }
             data.QuantityUnits = source.Units;

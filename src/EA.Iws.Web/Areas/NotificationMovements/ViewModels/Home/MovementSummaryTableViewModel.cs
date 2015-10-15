@@ -23,12 +23,12 @@
         public MovementSummaryTableViewModel(MovementSummaryTableData data)
         {
             Number = data.Number;
-            Status = "In determination";
+            Status = EnumHelper.GetDisplayName(data.Status);
             PreNotification = "- -";
             ShipmentDate = data.ShipmentDate;
-            Received = data.Received;
+            Received = data.ReceivedDate;
             Quantity = data.Quantity.HasValue ? data.Quantity.Value.ToString("G29") + " " + EnumHelper.GetDisplayName(data.QuantityUnits.GetValueOrDefault()) : "- -";
-            RecoveredOrDisposedOf = data.RecoveredOrDisposedOf;
+            RecoveredOrDisposedOf = data.CompletedDate;
         }
     }
 }

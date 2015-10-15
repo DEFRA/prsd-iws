@@ -60,7 +60,6 @@
 
                 var model = new ConfirmCancelMovementsViewModel(notificationId, selectedMovements);
 
-                //do we need to do this again? :S
                 TempData[SubmittedMovementListKey] = selectedMovements;
 
                 return View(model);
