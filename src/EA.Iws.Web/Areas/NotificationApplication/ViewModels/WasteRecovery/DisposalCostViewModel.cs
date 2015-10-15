@@ -24,6 +24,8 @@
 
         public ValuePerWeightUnits Units { get; set; }
 
+        public string DisposalMethod { get; set; }
+
         public SelectList PossibleUnits
         {
             get

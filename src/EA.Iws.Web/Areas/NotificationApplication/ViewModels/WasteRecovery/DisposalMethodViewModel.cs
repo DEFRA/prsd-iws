@@ -11,10 +11,6 @@
         [Required(ErrorMessage = "Please enter the method of disposal")]
         public string DisposalMethod { get; set; }
 
-        public string Amount { get; set; }
-
-        public ValuePerWeightUnits Units { get; set; }
-
         public DisposalMethodViewModel()
         {
         }

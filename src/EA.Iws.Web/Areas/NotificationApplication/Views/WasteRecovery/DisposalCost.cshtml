@@ -8,6 +8,7 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.DisposalMethod)
 
     <header class="hgroup">
         <h1 class="heading-large">What is the cost of disposal for the non-recoverable fraction?</h1>

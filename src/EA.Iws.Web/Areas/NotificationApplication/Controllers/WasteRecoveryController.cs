@@ -17,6 +17,7 @@
         private const string PercentageKey = "Percentage";
         private const string EstimatedValueAmountKey = "EstimatedValueAmount";
         private const string EstimatedValueUnitKey = "EstimatedValueUnit";
+        private const string DisposalMethodKey = "DisposalMethod";
 
         public WasteRecoveryController(IMediator mediator)
         {
@@ -152,44 +153,14 @@
 
             if (model.PercentageRecoverable < 100)
             {
-                return RedirectToAction("DisposalCost", "WasteRecovery");
+                return RedirectToAction("DisposalMethod", "WasteRecovery");
             }
 
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
-        public async Task<ActionResult> DisposalCost(Guid id, bool? backToOverview = null)
-        {
-            var costModel = new DisposalCostViewModel();
-            var disposalCost = await mediator.SendAsync(new GetDisposalCost(id));
-
-            if (disposalCost != null)
-            {
-                costModel = new DisposalCostViewModel(id, disposalCost);
-            }
-            else
-            {
-                costModel.NotificationId = id;
-            }
-
-            return View(costModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DisposalCost(DisposalCostViewModel model, bool? backToOverview = null)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            return RedirectToAction("DisposalMethod", "WasteRecovery", new { backToOverview, amount = model.Amount, unit = (int)model.Units });
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> DisposalMethod(Guid id, string amount, int unit, bool? backToOverview = null)
+        public async Task<ActionResult> DisposalMethod(Guid id, bool? backToOverview = null)
         {
             var model = new DisposalMethodViewModel();
             var disposalMethod = await mediator.SendAsync(new GetDisposalMethod(id));
@@ -203,15 +174,53 @@
                 model.NotificationId = id;
             }
 
-            model.Amount = amount;
-            model.Units = (ValuePerWeightUnits)unit;
-
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DisposalMethod(DisposalMethodViewModel model, bool? backToOverview = null)
+        public ActionResult DisposalMethod(DisposalMethodViewModel model, bool? backToOverview = null)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData.Add(DisposalMethodKey, model.DisposalMethod);
+
+            return RedirectToAction("DisposalCost", "WasteRecovery", new { backToOverview });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> DisposalCost(Guid id, bool? backToOverview = null)
+        {
+            object disposalMethodResult;
+
+            if (TempData.TryGetValue(DisposalMethodKey, out disposalMethodResult))
+            {
+                var costModel = new DisposalCostViewModel();
+                var disposalCost = await mediator.SendAsync(new GetDisposalCost(id));
+
+                if (disposalCost != null)
+                {
+                    costModel = new DisposalCostViewModel(id, disposalCost);
+                }
+                else
+                {
+                    costModel.NotificationId = id;
+                }
+
+                costModel.DisposalMethod = disposalMethodResult.ToString();
+
+                return View(costModel);
+            }
+
+            return RedirectToAction("DisposalMethod", "WasteRecovery", new { backToOverview });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DisposalCost(DisposalCostViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
