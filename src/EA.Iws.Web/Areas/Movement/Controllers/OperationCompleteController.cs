@@ -49,7 +49,20 @@
 
             await mediator.SendAsync(new SetCertificateOfRecovery(id, uploadedFile, fileExtension));
 
-            return RedirectToAction("ApprovedNotification", "Applicant", new { id = model.NotificationId, area = string.Empty });
+            return RedirectToAction("Success", "OperationComplete", new { id = model.NotificationId, area = "Movement" });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Success(Guid id)
+        {
+            var notification = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+            var model = new OperationCompleteSuccessViewModel
+            {
+                NotificationId = id,
+                NotificationType = notification.NotificationType
+            };
+
+            return View(model);
         }
     }
 }

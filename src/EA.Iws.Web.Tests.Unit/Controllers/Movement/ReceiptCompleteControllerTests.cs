@@ -53,7 +53,7 @@
             Assert.IsType<RedirectToRouteResult>(result);
             var routeResult = result as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(routeResult.RouteValues, "ApprovedNotification", "Applicant");
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Success", "ReceiptComplete");
         }
     }
 }

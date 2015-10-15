@@ -1,0 +1,23 @@
+﻿@model EA.Iws.Web.Areas.Movement.ViewModels.SuccessViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    ViewBag.Title = "Certificate of receipt upload successful";
+}
+
+<div class="grid-row">
+    <section class="column-two-thirds">
+        <header class="hgroup">
+            <h1 class="heading-large">Thank you. Your certificate of receipt is now uploaded</h1>
+        </header>
+        @Html.HiddenFor(m => m.NotificationId)
+        
+        <p>Your shipment is recorded as received.</p>
+
+        <p>
+            @Html.ActionLink("Go to shipment summary", "Index", "Home", 
+                new { area = "NotificationMovements", notificationId = Model.NotificationId }, 
+                new { @class = "button" })
+        </p>
+    </section>
+</div>

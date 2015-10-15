@@ -40,7 +40,17 @@
 
             await mediator.SendAsync(new SetCertificateOfReceipt(id, uploadedFile, fileExtension));
 
-            return RedirectToAction("ApprovedNotification", "Applicant", new { id = model.NotificationId, area = string.Empty });
+            return RedirectToAction("Success", "ReceiptComplete", new { id = model.NotificationId, area = "Movement" });
+        }
+
+        [HttpGet]
+        public ActionResult Success(Guid id)
+        {
+            var model = new SuccessViewModel
+            {
+                NotificationId = id
+            };
+            return View(model);
         }
     }
 }

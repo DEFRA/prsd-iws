@@ -8,6 +8,7 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.Notification;
     using TestHelpers.Factories;
     using Xunit;
 
@@ -50,7 +51,18 @@
             Assert.IsType<RedirectToRouteResult>(result);
             var routeResult = result as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(routeResult.RouteValues, "ApprovedNotification", "Applicant");
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Success", "OperationComplete");
+        }
+
+        [Fact]
+        public async Task SuccessGetCallsCorrectRequest()
+        {
+            await controller.Success(AnyGuid);
+
+            A.CallTo(() =>
+                mediator.SendAsync(A<GetNotificationBasicInfo>
+                    .That.Matches(r => r.NotificationId == AnyGuid)))
+                    .MustHaveHappened(Repeated.Exactly.Once);
         }
     }
 }
