@@ -4,13 +4,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Notification;
-    using Prsd.Core;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
     using ViewModels.NotificationApplication;
-    using Constants = Prsd.Core.Web.Constants;
 
     [Authorize]
     public class HomeController : Controller
@@ -27,12 +26,10 @@
         {
             try
             {
-                var response =
-                    await mediator.SendAsync(new GenerateNotificationDocument(id));
+                var response = await mediator.SendAsync(new GenerateNotificationDocument(id));
 
-                var downloadName = "IwsNotification" + SystemTime.UtcNow + ".docx";
-
-                return File(response, Constants.MicrosoftWordContentType, downloadName);
+                return File(response.Content, MimeTypeHelper.GetMimeType(response.FileNameWithExtension),
+                    response.FileNameWithExtension);
             }
             catch (ApiBadRequestException ex)
             {

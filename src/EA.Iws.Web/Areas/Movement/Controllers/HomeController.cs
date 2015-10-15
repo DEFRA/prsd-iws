@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Prsd.Core;
+    using Infrastructure;
     using Prsd.Core.Mediator;
-    using Prsd.Core.Web;
     using Requests.Movement;
 
     [Authorize]
@@ -22,8 +21,8 @@
         public ActionResult Navigation(Guid id)
         {
             var result = mediator.SendAsync(new GetMovementProgressInformation(id))
-                            .GetAwaiter()
-                            .GetResult();
+                .GetAwaiter()
+                .GetResult();
 
             return PartialView("_Navigation", result);
         }
@@ -41,9 +40,8 @@
         {
             var result = await mediator.SendAsync(new GenerateMovementDocument(id));
 
-            var downloadName = "IwsMovement" + SystemTime.UtcNow.ToShortDateString() + ".docx";
-
-            return File(result, Constants.MicrosoftWordContentType, downloadName);
+            return File(result.Content, MimeTypeHelper.GetMimeType(result.FileNameWithExtension),
+                result.FileNameWithExtension);
         }
     }
 }

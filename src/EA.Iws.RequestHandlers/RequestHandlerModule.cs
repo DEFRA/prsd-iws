@@ -1,9 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers
 {
+    using System;
+    using System.IO;
+    using Aspose.Words;
     using Authorization;
     using Autofac;
     using Copy;
     using Decorators;
+    using Documents;
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -38,7 +42,9 @@
                 .Where(t => t.Namespace != null && t.Namespace.Contains("Mappings"))
                 .AsImplementedInterfaces();
 
-            builder.RegisterAssemblyTypes(ThisAssembly).AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AsClosedTypesOf(typeof(IEventHandler<>))
+                .AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
             builder.RegisterType<TransportRouteToTransportRouteCopy>().AsSelf();
@@ -61,10 +67,32 @@
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
 
+            if (HasAsposeLicense())
+            {
+                builder.RegisterType<AsposePdfGenerator>().As<IPdfGenerator>();
+            }
+
             builder.RegisterType<AuthorizationManager>().As<IAuthorizationManager>();
             builder.RegisterType<UserRoleService>().As<IUserRoleService>();
             builder.RegisterType<RequestAuthorizationAttributeCache>().AsSelf().SingleInstance();
             builder.RegisterType<InMemoryAuthorizationService>().As<IAuthorizationService>();
+        }
+
+        private static bool HasAsposeLicense()
+        {
+            var license = Path.Combine((string)AppDomain.CurrentDomain.GetData("DataDirectory"), "Aspose.Words.lic");
+
+            if (File.Exists(license))
+            {
+                using (var fileStream = new FileStream(license, FileMode.Open))
+                {
+                    new License().SetLicense(fileStream);
+                }
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

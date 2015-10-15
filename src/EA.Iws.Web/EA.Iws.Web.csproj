@@ -824,6 +824,7 @@
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Controllers\NotificationSwitch.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
+    <Compile Include="Infrastructure\MimeTypeHelper.cs" />
     <Compile Include="Infrastructure\RequestAuthorizationChecker.cs" />
     <Compile Include="Infrastructure\RequestAuthorizationErrorFilter.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttribute.cs" />

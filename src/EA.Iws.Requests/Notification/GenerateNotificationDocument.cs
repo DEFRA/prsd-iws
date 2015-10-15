@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
+    using Core.Documents;
     using Prsd.Core.Mediator;
 
-    public class GenerateNotificationDocument : IRequest<byte[]>
+    public class GenerateNotificationDocument : IRequest<FileData>
     {
         public GenerateNotificationDocument(Guid notificationId)
         {

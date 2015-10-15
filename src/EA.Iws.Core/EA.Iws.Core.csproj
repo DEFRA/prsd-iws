@@ -126,6 +126,8 @@
     <Compile Include="Shared\TradeDirection.cs" />
     <Compile Include="Shared\UnitedKingdomCompetentAuthorityData.cs" />
     <Compile Include="StateOfImport\StateOfImportWithTransportRouteData.cs" />
+    <Compile Include="Documents\FileData.cs" />
+    <Compile Include="Documents\FileType.cs" />
     <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
     <Compile Include="IntendedShipments\IntendedShipmentData.cs" />
     <Compile Include="Shared\ShipmentQuantityUnits.cs" />
