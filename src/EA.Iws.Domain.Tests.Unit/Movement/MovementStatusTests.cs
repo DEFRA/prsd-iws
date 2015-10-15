@@ -4,6 +4,7 @@
     using System.Linq;
     using Core.Movement;
     using Domain.Movement;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class MovementStatusTests
@@ -33,6 +34,15 @@
         }
 
         [Fact]
+        public void CantSubmitTwice()
+        {
+            movement.Submit(AnyGuid);
+            Action submitAgain = () => movement.Submit(AnyGuid);
+
+            Assert.Throws<InvalidOperationException>(submitAgain);
+        }
+
+        [Fact]
         public void SubmitRaisesStatusChangedEvent()
         {
             movement.Submit(AnyGuid);
@@ -41,6 +51,16 @@
                 movement.Events.OfType<MovementStatusChangeEvent>()
                     .SingleOrDefault()
                     .Movement);
+        }
+
+        [Fact]
+        public void CanCancelSubmittedMovement()
+        {
+            ObjectInstantiator<Movement>.SetProperty(m => m.Status, MovementStatus.Submitted, movement);
+
+            movement.Cancel();
+
+            Assert.Equal(movement.Status, MovementStatus.Cancelled);
         }
     }
 }

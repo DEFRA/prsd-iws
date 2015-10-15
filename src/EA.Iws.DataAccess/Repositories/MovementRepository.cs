@@ -5,6 +5,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
     using Domain.Movement;
     using Domain.Security;
 
@@ -30,19 +31,32 @@
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
-            // TODO: filter on submitted status
-            return (await context.Movements
-                .Where(m => m.NotificationId == notificationId)
-                .ToArrayAsync())
-                .Where(m => !m.IsReceived);
+            return await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && m.Status == MovementStatus.Submitted)
+                .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<Movement>> GetMovements(Guid notificationId)
+        public async Task<IEnumerable<Movement>> GetAllMovements(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
             return await context.Movements
                 .Where(m => m.NotificationId == notificationId)
                 .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Movement>> GetMovementsByIds(Guid notificationId, IEnumerable<Guid> movementIds)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var movements = await context.Movements
+                .Where(m => 
+                    m.NotificationId == notificationId
+                    && movementIds.Contains(m.Id))
+                .ToArrayAsync();
+
+            return movements;
         }
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandler.cs" />
     <Compile Include="MovementReceipt\UpdateMovementAcceptanceDataByMovementIdHandler.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementIdHandler.cs" />
+    <Compile Include="Movement\CancelMovementsHandler.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GenerateMovementDocumentHandler.cs" />
     <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler.cs" />

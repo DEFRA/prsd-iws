@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Movement;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.CancelMovement;
@@ -13,7 +14,7 @@
     public class CancelMovementController : Controller
     {
         private readonly IMediator mediator;
-        private const string SubmittedMovementList = "SubmittedMovementList";
+        private const string SubmittedMovementListKey = "SubmittedMovementList";
 
         public CancelMovementController(IMediator mediator)
         {
@@ -39,8 +40,13 @@
                 return await Index(model.NotificationId);
             }
 
-            var selectedMovements = model.SubmittedMovements.Where(m => m.IsSelected).Select(p => new CancelMovementsList { MovementId = p.MovementId, Number = p.Number }).ToList();
-            TempData.Add(SubmittedMovementList, selectedMovements);
+            var selectedMovements = model.SubmittedMovements
+                .Where(m => m.IsSelected)
+                .Select(p => new MovementData { Id = p.MovementId, Number = p.Number })
+                .ToList();
+
+            TempData[SubmittedMovementListKey] = selectedMovements;
+
             return RedirectToAction("Confirm", "CancelMovement", new { notificationId = model.NotificationId });
         }
 
@@ -48,12 +54,36 @@
         public ActionResult Confirm(Guid notificationId)
         {
             object result;
-            if (TempData.TryGetValue(SubmittedMovementList, out result))
+            if (TempData.TryGetValue(SubmittedMovementListKey, out result))
             {
-                var model = new ConfirmCancelMovementsViewModel(notificationId, result as List<CancelMovementsList>);
+                var selectedMovements = result as List<MovementData>;
+
+                var model = new ConfirmCancelMovementsViewModel(notificationId, selectedMovements);
+
+                //do we need to do this again? :S
+                TempData[SubmittedMovementListKey] = selectedMovements;
+
                 return View(model);
             }
+
             return RedirectToAction("Index", "CancelMovement", new { notificationId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Confirm(ConfirmCancelMovementsViewModel model)
+        {
+            object result;
+            if (TempData.TryGetValue(SubmittedMovementListKey, out result))
+            {
+                var selectedMovements = result as List<MovementData>;
+
+                await mediator.SendAsync(new CancelMovements(model.NotificationId, selectedMovements));
+
+                return RedirectToAction("Index", "Home", new { notificationId = model.NotificationId });
+            }
+
+            return HttpNotFound();
         }
     }
 }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Movement;
 
     public class ConfirmCancelMovementsViewModel
     {
@@ -10,14 +11,14 @@
         {
         }
 
-        public ConfirmCancelMovementsViewModel(Guid notificationId, IEnumerable<CancelMovementsList> result)
+        public ConfirmCancelMovementsViewModel(Guid notificationId, IEnumerable<MovementData> result)
         {
             NotificationId = notificationId;
-            ListForCancelMovement = result.OrderBy(m => m.Number).ToList();
+            SelectedMovements = result.OrderBy(m => m.Number).ToList();
         }
 
         public Guid NotificationId { get; set; }
 
-        public IEnumerable<CancelMovementsList> ListForCancelMovement { get; set; }
+        public IEnumerable<MovementData> SelectedMovements { get; set; }
     }
 }

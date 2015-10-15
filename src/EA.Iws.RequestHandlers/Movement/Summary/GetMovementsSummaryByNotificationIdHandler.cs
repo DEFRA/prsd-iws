@@ -43,7 +43,7 @@
         {
             var notification = await notificationApplicationRepository.GetById(message.Id);
 
-            var relatedMovements = (await movementRepository.GetMovements(message.Id)).ToList();
+            var relatedMovements = (await movementRepository.GetAllMovements(message.Id)).ToList();
 
             var financialGuarantee = await context.FinancialGuarantees.SingleAsync(
                 fg => fg.NotificationApplicationId == message.Id);

@@ -202,6 +202,11 @@
             FileId = fileId;
         }
 
+        public void Cancel()
+        {
+            stateMachine.Fire(Trigger.Cancel);
+        }
+
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
         {
             Guard.ArgumentNotNull(() => statusChange, statusChange);

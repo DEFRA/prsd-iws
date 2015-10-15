@@ -10,6 +10,8 @@
 
         Task<Movement> GetById(Guid movementId);
 
-        Task<IEnumerable<Movement>> GetMovements(Guid notificationId);
+        Task<IEnumerable<Movement>> GetMovementsByIds(Guid notificationId, IEnumerable<Guid> movementIds);
+
+        Task<IEnumerable<Movement>> GetAllMovements(Guid notificationId);
     }
 }

@@ -10,15 +10,21 @@
 </header>
 
 <div class="form-group">
-    @Html.HiddenFor(m => m.NotificationId)
-    @foreach (var cancelMovement in Model.ListForCancelMovement)
+    @foreach (var cancelMovement in Model.SelectedMovements)
     {
         <span class="operation-code-list">@cancelMovement.Number</span>
     }
 </div>
-<div class="form-group">
-    <button class="button" type="submit">Confirm cancellation</button>
-</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="form-group">
+        <button class="button" type="submit">Confirm cancellation</button>
+    </div>
+}
 
 <div class="form-group">
     @Html.ActionLink("I would like to edit this list", "Index", "CancelMovement", new { area = "NotificationMovements", notificationId = Model.NotificationId }, null)
