@@ -37,7 +37,7 @@
             var file = await certificateFactory.CreateForMovement(nameGenerator, movement, message.MovementBytes, message.FileType);
             var fileId = await fileRepository.Store(file);
 
-            movement.SetFile(fileId);
+            movement.Submit(fileId);
 
             await context.SaveChangesAsync();
 

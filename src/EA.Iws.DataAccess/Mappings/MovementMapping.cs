@@ -28,6 +28,12 @@
                  });
 
             HasMany(
+                ExpressionHelper.GetPrivatePropertyExpression<Movement, ICollection<MovementStatusChange>>(
+                    "StatusChangeCollection"))
+                .WithRequired()
+                .Map(m => m.MapKey("MovementId"));
+
+            HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<Movement, ICollection<MovementCarrier>>(
                     "MovementCarriersCollection"))
                 .WithRequired()

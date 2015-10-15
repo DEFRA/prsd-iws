@@ -91,6 +91,7 @@
     <Compile Include="Movement\MovementFactory.cs" />
     <Compile Include="Movement\MovementQuantity.cs" />
     <Compile Include="Movement\MovementStatusChange.cs" />
+    <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\ReceivedMovements.cs" />
     <Compile Include="Movement\SetActualDateOfShipment.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />

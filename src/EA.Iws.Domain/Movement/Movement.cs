@@ -15,6 +15,8 @@
     {
         private readonly StateMachine<MovementStatus, Trigger> stateMachine;
 
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid> submittedTrigger;
+
         private enum Trigger
         {
             Submit,
@@ -34,6 +36,7 @@
             Number = movementNumber;
             NotificationId = notificationId;
             Status = MovementStatus.New;
+            StatusChangeCollection = new List<MovementStatusChange>();
             stateMachine = CreateStateMachine();
         }
 
@@ -156,20 +159,20 @@
 
             this.Receipt.OperationReceipt = new MovementOperationReceipt(dateComplete);
         }
-
-        public void SetFile(Guid fileId)
-        {
-            FileId = fileId;
-        }
         
         private StateMachine<MovementStatus, Trigger> CreateStateMachine()
         {
             var stateMachine = new StateMachine<MovementStatus, Trigger>(() => Status, s => Status = s);
 
+            submittedTrigger = stateMachine.SetTriggerParameters<Guid>(Trigger.Submit);
+
+            stateMachine.OnTransitioned(OnTransitionAction);
+
             stateMachine.Configure(MovementStatus.New)
                 .Permit(Trigger.Submit, MovementStatus.Submitted);
 
             stateMachine.Configure(MovementStatus.Submitted)
+                .OnEntryFrom(submittedTrigger, OnSubmitted)
                 .Permit(Trigger.Receive, MovementStatus.Received)
                 .Permit(Trigger.Reject, MovementStatus.Rejected)
                 .Permit(Trigger.Cancel, MovementStatus.Cancelled);
@@ -178,6 +181,25 @@
                 .Permit(Trigger.Complete, MovementStatus.Completed);
             
             return stateMachine;
+        }
+
+        private void OnTransitionAction(StateMachine<MovementStatus, Trigger>.Transition transition)
+        {
+            RaiseEvent(new MovementStatusChangeEvent(this, transition.Destination));
+        }
+
+        public void Submit(Guid fileId)
+        {
+            Guard.ArgumentNotDefaultValue(() => fileId, fileId);
+
+            //TODO: Check the movement is in a valid state to submit
+
+            stateMachine.Fire(submittedTrigger, fileId);
+        }
+
+        private void OnSubmitted(Guid fileId)
+        {
+            FileId = fileId;
         }
 
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
