@@ -90,6 +90,7 @@
     <Compile Include="Mappings\ConsentMapping.cs" />
     <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\DisposalCostMapping.cs" />
+    <Compile Include="Mappings\MovementStatusChangeMapping.cs" />
     <Compile Include="Mappings\WasteDisposalMapping.cs" />
     <Compile Include="Mappings\EstimatedValueMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />

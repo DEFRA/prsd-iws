@@ -8,12 +8,25 @@
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
+    using Stateless;
     using MovementReceiptDecision = Core.MovementReceipt.Decision;
 
     public class Movement : Entity
     {
+        private readonly StateMachine<MovementStatus, Trigger> stateMachine;
+
+        private enum Trigger
+        {
+            Submit,
+            Receive,
+            Complete,
+            Reject,
+            Cancel
+        }
+
         protected Movement()
         {
+            stateMachine = CreateStateMachine();
         }
 
         internal Movement(int movementNumber, Guid notificationId)
@@ -21,6 +34,7 @@
             Number = movementNumber;
             NotificationId = notificationId;
             Status = MovementStatus.New;
+            stateMachine = CreateStateMachine();
         }
 
         public int Number { get; private set; }
@@ -28,6 +42,13 @@
         public Guid NotificationId { get; private set; }
 
         public MovementStatus Status { get; private set; }
+
+        protected virtual ICollection<MovementStatusChange> StatusChangeCollection { get; set; }
+
+        public IEnumerable<MovementStatusChange> StatusChanges
+        {
+            get { return StatusChangeCollection.ToSafeIEnumerable(); }
+        }
 
         public bool IsActive
         {
@@ -139,6 +160,31 @@
         public void SetFile(Guid fileId)
         {
             FileId = fileId;
+        }
+        
+        private StateMachine<MovementStatus, Trigger> CreateStateMachine()
+        {
+            var stateMachine = new StateMachine<MovementStatus, Trigger>(() => Status, s => Status = s);
+
+            stateMachine.Configure(MovementStatus.New)
+                .Permit(Trigger.Submit, MovementStatus.Submitted);
+
+            stateMachine.Configure(MovementStatus.Submitted)
+                .Permit(Trigger.Receive, MovementStatus.Received)
+                .Permit(Trigger.Reject, MovementStatus.Rejected)
+                .Permit(Trigger.Cancel, MovementStatus.Cancelled);
+
+            stateMachine.Configure(MovementStatus.Received)
+                .Permit(Trigger.Complete, MovementStatus.Completed);
+            
+            return stateMachine;
+        }
+
+        public void AddStatusChangeRecord(MovementStatusChange statusChange)
+        {
+            Guard.ArgumentNotNull(() => statusChange, statusChange);
+
+            StatusChangeCollection.Add(statusChange);
         }
     }
 }
