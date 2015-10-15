@@ -48,6 +48,9 @@
                 case DecisionType.Withdrawn:
                     await PostWithdrawn(model);
                     break;
+                case DecisionType.Object:
+                    await PostObjection(model);
+                    break;
                 default:
                     break;
             }
@@ -68,6 +71,13 @@
                 model.ConsentValidFromDate.AsDateTime().Value,
                 model.ConsentValidToDate.AsDateTime().Value,
                 model.ConsentConditions);
+
+            await mediator.SendAsync(request);
+        }
+
+        private async Task PostObjection(NotificationAssessmentDecisionViewModel model)
+        {
+            var request = new ObjectNotificationApplication(model.NotificationId);
 
             await mediator.SendAsync(request);
         }

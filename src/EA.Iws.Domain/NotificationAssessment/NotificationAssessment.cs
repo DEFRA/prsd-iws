@@ -48,6 +48,7 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> decisionRequiredByTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> withdrawTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> objectTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
 
@@ -98,6 +99,7 @@
             acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
             decisionRequiredByTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.DecisionRequiredBySet);
             withdrawTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Withdraw);
+            objectTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Object);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -117,7 +119,8 @@
             stateMachine.Configure(NotificationStatus.InAssessment)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(commencedTrigger, OnInAssessment)
-                .Permit(Trigger.NotificationComplete, NotificationStatus.ReadyToTransmit);
+                .Permit(Trigger.NotificationComplete, NotificationStatus.ReadyToTransmit)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.ReadyToTransmit)
                 .SubstateOf(NotificationStatus.InDetermination)
@@ -137,13 +140,17 @@
             stateMachine.Configure(NotificationStatus.DecisionRequiredBy)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(decisionRequiredByTrigger, OnDecisionRequiredBy)
-                .Permit(Trigger.Consent, NotificationStatus.Consented);
+                .Permit(Trigger.Consent, NotificationStatus.Consented)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.InDetermination)
                 .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn);
 
             stateMachine.Configure(NotificationStatus.Withdrawn)
                 .OnEntryFrom(withdrawTrigger, OnWithdrawn);
+
+            stateMachine.Configure(NotificationStatus.Objected)
+                .OnEntryFrom(objectTrigger, OnObjected);
 
             stateMachine.Configure(NotificationStatus.Consented)
                 .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn);
@@ -180,6 +187,11 @@
         private void OnTransmitted(DateTime transmittedDate)
         {
             Dates.TransmittedDate = transmittedDate;
+        }
+
+        private void OnObjected(DateTime objectionDate)
+        {
+            Dates.ObjectedDate = objectionDate;
         }
 
         private void OnTransitionAction(StateMachine<NotificationStatus, Trigger>.Transition transition)
@@ -274,6 +286,11 @@
         public void Withdraw(DateTime withdrawnDate)
         {
             stateMachine.Fire(withdrawTrigger, withdrawnDate);
+        }
+
+        public void Object(DateTime objectionDate)
+        {
+            stateMachine.Fire(objectTrigger, objectionDate);
         }
     }
 }

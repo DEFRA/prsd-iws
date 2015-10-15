@@ -7,171 +7,171 @@
     var nullMarker = "- -";
     var byText = " by ";
 }
-    
-    <div>
-        These are the dates so far:
 
-        <table title="Assessment dates currently recorded">
-            <tr>
-                <th>Activities</th>
-                <th>Dates</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
-                <td>
-                    @if (Model.NotificationReceivedDate.IsCompleted)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
-                    }
-                    else
-                    {
-                        @nullMarker
-                    }
-                </td>
-                <td>
-                    @(Model.NotificationReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null)
+<div>
+    These are the dates so far:
+
+    <table title="Assessment dates currently recorded">
+        <tr>
+            <th>Activities</th>
+            <th>Dates</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
+            <td>
+                @if (Model.NotificationReceivedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @(Model.NotificationReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null))
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>Payment received</td>
-                <td>
-                    @if (Model.PaymentReceivedDate.IsCompleted)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.AsDateTime().GetValueOrDefault())
-                    }
-                    else
-                    {
-                        @nullMarker
-                    }
-                </td>
-                <td>
-                    @if (Model.NotificationReceivedDate.IsCompleted)
-                    {
-                        @(Model.PaymentReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.PaymentReceived }, null)
+        <tr>
+            <td>Payment received</td>
+            <td>
+                @if (Model.PaymentReceivedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationReceivedDate.IsCompleted)
+                {
+                    @(Model.PaymentReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.PaymentReceived }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.PaymentReceived }, null))
-                    }
-                </td>
+                }
+            </td>
 
-            </tr>
+        </tr>
 
-            <tr>
-                <td>Assessment started</td>
-                <td>
-                    @if (Model.CommencementDate.IsCompleted)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.CommencementDate.AsDateTime().GetValueOrDefault())
-                        @byText
-                        @Html.DisplayFor(m => m.NameOfOfficer)
-                    }
-                    else
-                    {
-                        @nullMarker
-                    }
-                </td>
-                <td>
-                    @if (Model.PaymentReceivedDate.IsCompleted)
-                    {
-                        @(Model.CommencementDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
+        <tr>
+            <td>Assessment started</td>
+            <td>
+                @if (Model.CommencementDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.CommencementDate.AsDateTime().GetValueOrDefault())
+                    @byText
+                    @Html.DisplayFor(m => m.NameOfOfficer)
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.PaymentReceivedDate.IsCompleted)
+                {
+                    @(Model.CommencementDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null))
-                    }
-                </td>
+                }
+            </td>
 
-            </tr>
+        </tr>
 
-            <tr>
-                <td>Date application complete</td>
-                <td>
-                    @if (Model.NotificationCompleteDate.IsCompleted)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
-                    }
-                    else
-                    {
-                        @nullMarker
-                    }
-                </td>
-                <td>
-                    @if (Model.CommencementDate.IsCompleted)
-                    {
-                        @(Model.NotificationCompleteDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
+        <tr>
+            <td>Date application complete</td>
+            <td>
+                @if (Model.NotificationCompleteDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.CommencementDate.IsCompleted)
+                {
+                    @(Model.NotificationCompleteDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null))
-                    }
-                </td>
+                }
+            </td>
 
-            </tr>
+        </tr>
 
-            <tr>
-                <td>Transmitted on</td>
-                <td>
-                    @if (Model.NotificationTransmittedDate.IsCompleted)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.NotificationTransmittedDate.AsDateTime().GetValueOrDefault())
-                    }
-                    else
-                    {
-                        @nullMarker
-                    }
-                </td>
-                <td>
-                    @if (Model.NotificationCompleteDate.IsCompleted)
-                    {
-                        @(Model.NotificationTransmittedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
+        <tr>
+            <td>Transmitted on</td>
+            <td>
+                @if (Model.NotificationTransmittedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationTransmittedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationCompleteDate.IsCompleted)
+                {
+                    @(Model.NotificationTransmittedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null))
-                    }
-                </td>
+                }
+            </td>
 
-            </tr>
+        </tr>
 
-            <tr>
-                <td>Acknowledged on</td>
-                <td>
-                    @if (Model.NotificationAcknowledgedDate.IsCompleted)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.NotificationAcknowledgedDate.AsDateTime().GetValueOrDefault())
-                    }
-                    else
-                    {
-                        @nullMarker
-                    }
-                </td>
-                <td>
-                    @if (Model.NotificationTransmittedDate.IsCompleted)
-                    {
-                        @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null)
+        <tr>
+            <td>Acknowledged on</td>
+            <td>
+                @if (Model.NotificationAcknowledgedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationAcknowledgedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationTransmittedDate.IsCompleted)
+                {
+                    @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null))
-                    }
-                </td>
+                }
+            </td>
 
-            </tr>
+        </tr>
 
-            <tr>
-                <td>Decision required by</td>
-                <td>
-                    @if (Model.DecisionDate.IsCompleted)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.DecisionDate.AsDateTime().GetValueOrDefault())
-                    }
-                    else
-                    {
-                        @nullMarker
-                    }
-                </td>
-                <td>
-                    @if (Model.NotificationAcknowledgedDate.IsCompleted)
-                    {
-                        @(Model.DecisionDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationDecisionDateEntered }, null)
+        <tr>
+            <td>Decision required by</td>
+            <td>
+                @if (Model.DecisionDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.DecisionDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationAcknowledgedDate.IsCompleted)
+                {
+                    @(Model.DecisionDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationDecisionDateEntered }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationDecisionDateEntered }, null))
-                    }
-                </td>
+                }
+            </td>
 
-            </tr>
+        </tr>
 
-        </table>
+    </table>
 
-    </div>
+</div>
 
 @if (Model.Command != 0)
 {
@@ -201,7 +201,7 @@
         @Html.HiddenFor(m => m.DecisionDate.Day)
         @Html.HiddenFor(m => m.DecisionDate.Month)
         @Html.HiddenFor(m => m.DecisionDate.Year)
-        
+
         @Html.AntiForgeryToken()
 
         <br /><br />
@@ -220,7 +220,7 @@
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
                     @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
                     @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
-                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30})
+                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30 })
                 </div>
             </fieldset>
         }
@@ -236,18 +236,33 @@
         </div>
 
     }
-    
+
     @section scripts{
         <script>
             $(function () {
                 // On page load with a date input, moves the cursor to the first input box.
                 var input = $("form #NewDate_Day");
-                
+
                 if (input) {
                     input.focus();
-                }                
+                }
             });
         </script>
     }
 }
+else
+{
+    @section scripts{
+        <script>
+            $(function() {
+                var link = $("td a").filter(function (i) { return $(this).text() === "Add" });
+
+                if (link) {
+                    link.focus();
+                }
+            })
+        </script>
+    }
+}
+
 
