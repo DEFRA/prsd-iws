@@ -1,13 +1,13 @@
 ﻿namespace EA.Iws.DocumentGeneration.Movement
 {
     using System.Linq;
+    using Blocks;
     using DocumentFormat.OpenXml.Packaging;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using Formatters;
-    using MovementBlocks;
-    using NotificationBlocks;
+    using Notification.Blocks;
 
     public class MovementDocument
     {
