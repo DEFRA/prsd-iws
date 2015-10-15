@@ -134,7 +134,10 @@
 
             </div>*@
     <!-- //////////// /////// -->
-    @{ var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed Of" : "Recovered"; }
+    @{
+        var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed Of" : "Recovered";
+        var nullMarker = "- -";
+    }
 
     <div class="form-group">
         <table class="odd-table">
@@ -153,16 +156,43 @@
 
             <tbody>
             @{
-                foreach (var d in Model.TableData)
+                for (int i = 0; i < Model.TableData.Count; i++)
                 {
                     <tr>
-                        <td>@d.Number</td>
-                        <td>@d.Status</td>
-                        <td>@d.PreNotification</td>
-                        <td>@d.ShipmentDate</td>
-                        <td>@d.Received</td>
-                        <td>@d.Quantity</td>
-                        <td>@d.RecoveredOrDisposedOf</td>
+                        <td>@Model.TableData[i].Number</td>
+                        <td>@Model.TableData[i].Status</td>
+                        <td>@Model.TableData[i].PreNotification</td>
+                        <td>
+                            @if (Model.TableData[i].ShipmentDate.HasValue)
+                            {
+                                @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
+                            }
+                            else
+                            {
+                                @nullMarker
+                            }
+                        </td>
+                        <td>
+                            @if (Model.TableData[i].Received.HasValue)
+                            {
+                                @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
+                            }
+                            else
+                            {
+                                @nullMarker
+                            }
+                        </td>
+                        <td>@Model.TableData[i].Quantity</td>
+                        <td>
+                            @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue)
+                            {
+                                @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
+                            }
+                            else
+                            {
+                                @nullMarker
+                            }
+                        </td>
                     </tr>
                 }
             }
