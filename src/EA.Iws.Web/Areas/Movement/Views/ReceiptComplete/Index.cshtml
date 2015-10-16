@@ -13,6 +13,11 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.Unit)
+    @Html.HiddenFor(m => m.Decision)
+    @Html.HiddenFor(m => m.DateReceived)
+    @Html.HiddenFor(m => m.RejectionReason)
+    @Html.HiddenFor(m => m.Quantity)
     @Html.Gds().ValidationSummary()
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">

@@ -61,9 +61,8 @@
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, BeforeFrozenTime, movement);
             ObjectInstantiator<Movement>.SetProperty(x => x.Units, ShipmentQuantityUnits.Tonnes, movement);
 
-            movement.Receive(FrozenTime);
+            movement.Receive(Guid.NewGuid(), FrozenTime, 5.0m);
             movement.Receipt.Accept();
-            movement.Receipt.SetQuantity(5.0m);
         }
     }
 }

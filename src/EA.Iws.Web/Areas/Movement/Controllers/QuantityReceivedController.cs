@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.MovementReceipt;
     using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
     using ViewModels.Quantity;
@@ -10,6 +11,10 @@
     public class QuantityReceivedController : Controller
     {
         private readonly IMediator mediator;
+        private const string DateReceivedKey = "DateReceived";
+        private const string DecisionKey = "Decision";
+        private const string UnitKey = "Unit";
+        private const string QuantityKey = "Quantity";
 
         public QuantityReceivedController(IMediator mediator)
         {
@@ -19,26 +24,37 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetMovementReceiptQuantityByMovementId(id));
+            object dateReceivedResult;
+            object decisionResult;
 
-            return View(new QuantityReceivedViewModel
+            if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult) && TempData.TryGetValue(DecisionKey, out decisionResult))
             {
-                Unit = result.Unit,
-                Quantity = result.Quantity
-            });
+                var result = await mediator.SendAsync(new GetMovementReceiptQuantityByMovementId(id));
+
+                return View(new QuantityReceivedViewModel
+                {
+                    DateReceived = DateTime.Parse(dateReceivedResult.ToString()),
+                    Decision = (Decision)decisionResult,
+                    Unit = result.Unit
+                });
+            }
+
+            return RedirectToAction("Index", "DateReceived", new { id });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, QuantityReceivedViewModel model)
+        public ActionResult Index(Guid id, QuantityReceivedViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            await mediator.SendAsync(new SetMovementReceiptQuantityByMovementId(id,
-                model.Quantity.GetValueOrDefault()));
+            TempData[DateReceivedKey] = model.DateReceived;
+            TempData[DecisionKey] = model.Decision;
+            TempData[UnitKey] = model.Unit;
+            TempData[QuantityKey] = model.Quantity;
 
             return RedirectToAction("Index", "ReceiptComplete", new { id });
         }

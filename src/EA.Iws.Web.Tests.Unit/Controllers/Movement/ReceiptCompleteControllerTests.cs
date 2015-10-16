@@ -5,6 +5,8 @@
     using System.Web.Mvc;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels;
+    using Core.MovementReceipt;
+    using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -29,6 +31,10 @@
         [Fact]
         public async Task GetCallsCorrectRequest()
         {
+            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
+            controller.TempData["Decision"] = Decision.Accepted;
+            controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
+            controller.TempData["Quantity"] = (decimal)1.2;
             await controller.Index(MovementId);
 
             A.CallTo(() =>

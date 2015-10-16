@@ -51,15 +51,5 @@
 
             Assert.Null(result.DateReceived);
         }
-
-        [Fact]
-        public async Task MovementReceived_ReturnsDateReceived()
-        {
-            movement.Receive(DateReceived);
-
-            var result = await handler.HandleAsync(request);
-
-            Assert.Equal(DateReceived, result.DateReceived);
-        }
     }
 }

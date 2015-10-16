@@ -17,6 +17,8 @@
 
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid> submittedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, Guid> completedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, string> rejectedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, decimal> acceptedTrigger;
 
         private enum Trigger
         {
@@ -133,31 +135,12 @@
                 MovementCarriersCollection.Add(movementCarrier);
             }
         }
-
+        
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
         {
             Guard.ArgumentNotNull(() => statusChange, statusChange);
 
             StatusChangeCollection.Add(statusChange);
-        }
-
-        public MovementReceipt Receive(DateTime dateReceived)
-        {
-            if (!this.Date.HasValue || dateReceived < this.Date)
-            {
-                throw new InvalidOperationException("Cannot receive a movement this is not active.");
-            }
-
-            if (this.Receipt == null)
-            {
-                this.Receipt = new MovementReceipt(dateReceived);
-            }
-            else
-            {
-                this.Receipt.Date = dateReceived;
-            }
-
-            return this.Receipt;
         }
 
         private StateMachine<MovementStatus, Trigger> CreateStateMachine()
@@ -166,6 +149,10 @@
 
             submittedTrigger = stateMachine.SetTriggerParameters<Guid>(Trigger.Submit);
             completedTrigger = stateMachine.SetTriggerParameters<DateTime, Guid>(Trigger.Complete);
+
+            rejectedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, string>(Trigger.Reject);
+
+            acceptedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, decimal>(Trigger.Receive);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -179,11 +166,14 @@
                 .Permit(Trigger.Cancel, MovementStatus.Cancelled);
 
             stateMachine.Configure(MovementStatus.Received)
+                .OnEntryFrom(acceptedTrigger, OnReceived)
                 .Permit(Trigger.Complete, MovementStatus.Completed);
 
             stateMachine.Configure(MovementStatus.Completed)
                 .OnEntryFrom(completedTrigger, OnCompleted);
-
+                
+            stateMachine.Configure(MovementStatus.Rejected).OnEntryFrom(rejectedTrigger, OnRejected);
+            
             return stateMachine;
         }
 
@@ -204,6 +194,34 @@
         private void OnSubmitted(Guid fileId)
         {
             FileId = fileId;
+        }
+
+        public void Reject(Guid fileId, DateTime dateReceived, string reason)
+        {
+            Guard.ArgumentNotDefaultValue(() => fileId, fileId);
+            Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
+            Guard.ArgumentNotDefaultValue(() => reason, reason);
+
+            stateMachine.Fire(rejectedTrigger, fileId, dateReceived, reason);
+        }
+
+        public void OnRejected(Guid fileId, DateTime dateReceived, string reason)
+        {
+            Receipt = new MovementReceipt(fileId, dateReceived, reason);
+        }
+
+        public void Receive(Guid fileId, DateTime dateReceived, decimal quantity)
+        {
+            Guard.ArgumentNotDefaultValue(() => fileId, fileId);
+            Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
+            Guard.ArgumentNotDefaultValue(() => quantity, quantity);
+
+            stateMachine.Fire(acceptedTrigger, fileId, dateReceived, quantity);
+        }
+
+        public void OnReceived(Guid fileId, DateTime dateReceived, decimal quantity)
+        {
+            Receipt = new MovementReceipt(fileId, dateReceived, quantity);
         }
 
         public void Cancel()

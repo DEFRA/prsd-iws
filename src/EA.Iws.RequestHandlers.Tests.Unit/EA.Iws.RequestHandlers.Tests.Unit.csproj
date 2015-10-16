@@ -104,13 +104,11 @@
     <Compile Include="Mappings\BusinessTestBase.cs" />
     <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
-    <Compile Include="MovementReceipt\CreateMovementReceiptForMovementHandlerTests.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandlerTests.cs" />
     <Compile Include="MovementReceipt\GetShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
     <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
-    <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetActiveMovementsWithReceiptCertificateByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementsForCancelByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandlerTests.cs" />
@@ -123,7 +121,6 @@
     <Compile Include="Movement\GetShipmentDateDataByMovementIdTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="Movement\SetActualMovementCarriersHandlerTests.cs" />
-    <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetNumberOfPackagesByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetPackagingDataValidForMovementHandlerTests.cs" />

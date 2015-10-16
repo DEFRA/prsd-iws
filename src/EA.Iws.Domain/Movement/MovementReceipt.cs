@@ -10,12 +10,21 @@
         {
         }
 
-        internal MovementReceipt(DateTime dateReceived)
+        internal MovementReceipt(Guid fileId, DateTime dateReceived, string rejectionReason)
         {
+            FileId = fileId;
             Date = dateReceived;
+            RejectReason = rejectionReason;
+        }
+
+        internal MovementReceipt(Guid fileId, DateTime dateReceived, decimal quantity)
+        {
+            FileId = fileId;
+            Date = dateReceived;
+            Quantity = quantity;
         }
         
-        public DateTime Date { get; internal set; }
+        public DateTime Date { get; private set; }
 
         public Decision? Decision { get; internal set; }
 
@@ -24,20 +33,6 @@
         public decimal? Quantity { get; internal set; }
 
         public Guid? FileId { get; private set; }
-
-        public void SetQuantity(decimal quantity)
-        {
-            if (Decision.HasValue && Decision.Value == Core.MovementReceipt.Decision.Accepted)
-            {
-                Quantity = quantity;
-            }
-            else
-            {
-                throw new InvalidOperationException(
-                    "Cannot set quantity for a movement receipt where the movement has not been accepted. Receipt: "
-                    + Id);
-            }
-        }
 
         public void Reject(string reason)
         {

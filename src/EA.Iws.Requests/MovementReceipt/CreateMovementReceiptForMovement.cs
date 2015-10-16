@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Requests.MovementReceipt
 {
     using System;
-    using EA.Prsd.Core.Mediator;
+    using Prsd.Core.Mediator;
 
     public class CreateMovementReceiptForMovement : IRequest<bool>
     {

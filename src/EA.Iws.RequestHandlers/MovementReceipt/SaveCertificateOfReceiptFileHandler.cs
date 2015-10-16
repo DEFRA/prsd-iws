@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.MovementReceipt
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.FileStore;
@@ -9,7 +8,7 @@
     using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
 
-    internal class SetCertificateOfReceiptHandler : IRequestHandler<SetCertificateOfReceipt, Guid>
+    internal class SaveCertificateOfReceiptFileHandler : IRequestHandler<SaveCertificateOfReceiptFile, Guid>
     {
         private readonly IMovementRepository movementRepository;
         private readonly CertificateOfReceiptNameGenerator nameGenerator;
@@ -17,7 +16,7 @@
         private readonly IwsContext context;
         private readonly IFileRepository fileRepository;
 
-        public SetCertificateOfReceiptHandler(IwsContext context,
+        public SaveCertificateOfReceiptFileHandler(IwsContext context,
             IFileRepository fileRepository,
             IMovementRepository movementRepository,
             CertificateFactory certificateFactory,
@@ -30,15 +29,13 @@
             this.movementRepository = movementRepository;
         }
 
-        public async Task<Guid> HandleAsync(SetCertificateOfReceipt message)
+        public async Task<Guid> HandleAsync(SaveCertificateOfReceiptFile message)
         {
             var movement = await movementRepository.GetById(message.MovementId);
 
             var receipt = await certificateFactory.CreateForMovement(nameGenerator, movement, message.CertificateBytes, message.FileType);
 
             var fileId = await fileRepository.Store(receipt);
-
-            movement.Receipt.SetCertificateFile(fileId);
 
             await context.SaveChangesAsync();
 

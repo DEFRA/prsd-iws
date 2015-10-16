@@ -43,6 +43,8 @@
         [Fact]
         public async Task Get_SendsCorrectQuery()
         {
+            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
+            controller.TempData["Decision"] = Decision.Accepted;
             await controller.Index(AnyGuid);
 
             A.CallTo(() =>
@@ -53,20 +55,21 @@
         [Fact]
         public async Task Get_ReturnsCorrectModel()
         {
+            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
+            controller.TempData["Decision"] = Decision.Accepted;
             var result = await controller.Index(AnyGuid) as ViewResult;
 
             Assert.NotNull(result);
             var model = Assert.IsType<QuantityReceivedViewModel>(result.Model);
             Assert.Equal(ShipmentQuantityUnits.Kilograms, model.Unit);
-            Assert.Equal(250, model.Quantity);
         }
 
         [Fact]
-        public async Task PostWithInvalidModel_ReturnsView()
+        public void PostWithInvalidModel_ReturnsView()
         {
             controller.ModelState.AddModelError("a", "b");
 
-            var result = await controller.Index(AnyGuid, viewModel) as ViewResult;
+            var result = controller.Index(AnyGuid, viewModel) as ViewResult;
 
             Assert.NotNull(result);
             var modelReturned = Assert.IsType<QuantityReceivedViewModel>(result.Model);
@@ -74,20 +77,9 @@
         }
 
         [Fact]
-        public async Task Post_SendsCorrectCommand()
+        public void Post_RedirectsToCorrectAction()
         {
-            await controller.Index(AnyGuid, viewModel);
-
-            A.CallTo(() => mediator.SendAsync(A<SetMovementReceiptQuantityByMovementId>
-                    .That.Matches(r => r.Id == AnyGuid
-                                  && r.Quantity == viewModel.Quantity)))
-                    .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
-        public async Task Post_RedirectsToCorrectAction()
-        {
-            var result = await controller.Index(AnyGuid, viewModel) as RedirectToRouteResult;
+            var result = controller.Index(AnyGuid, viewModel) as RedirectToRouteResult;
 
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("ReceiptComplete", result.RouteValues["controller"]);

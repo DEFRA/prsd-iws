@@ -15,6 +15,8 @@
 
         public Guid MovementId { get; set; }
 
+        public DateTime DateReceived { get; set; }
+
         public AcceptanceViewModel()
         {
         }

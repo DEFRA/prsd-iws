@@ -10,6 +10,7 @@
     public class DateReceivedController : Controller
     {
         private readonly IMediator mediator;
+        private const string DateReceivedKey = "DateReceived";
 
         public DateReceivedController(IMediator mediator)
         {
@@ -28,14 +29,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, DateReceivedViewModel viewModel)
+        public ActionResult Index(Guid id, DateReceivedViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
 
-            await mediator.SendAsync(new CreateMovementReceiptForMovement(id, viewModel.GetDateReceived()));
+            TempData[DateReceivedKey] = viewModel.GetDateReceived();
             return RedirectToAction("Index", "Acceptance", new { id });
         }
     }

@@ -79,7 +79,9 @@
     <Compile Include="Movement\Complete\SaveMovementCompletedReceipt.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
     <Compile Include="ImportNotification\CreateImportNotification.cs" />
-    <Compile Include="MovementReceipt\SetCertificateOfReceipt.cs" />
+    <Compile Include="MovementReceipt\SaveCertificateOfReceiptFile.cs" />
+    <Compile Include="MovementReceipt\SetMovementAccepted.cs" />
+    <Compile Include="MovementReceipt\SetMovementRejected.cs" />
     <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementId.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementId.cs" />
     <Compile Include="Movement\CancelMovements.cs" />
@@ -94,7 +96,6 @@
     <Compile Include="Movement\GetMovementNumberByMovementId.cs" />
     <Compile Include="Movement\GetSubmittedMovements.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementId.cs" />
-    <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementId.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptQuantityByMovementId.cs" />
     <Compile Include="MovementReceipt\GetMovementAcceptanceDataByMovementId.cs" />
     <Compile Include="MovementReceipt\MovementAcceptanceData.cs" />

@@ -10,7 +10,6 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Web.Controllers;
     using Web.ViewModels.Movement;
     using Web.ViewModels.Shared;
     using Xunit;

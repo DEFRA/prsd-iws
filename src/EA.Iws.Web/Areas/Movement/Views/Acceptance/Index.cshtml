@@ -17,6 +17,7 @@
         @Html.AntiForgeryToken()
         @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.MovementId)
+        @Html.HiddenFor(m => m.DateReceived)
 
         <div class="form-group">
             <label class="block-label" data-target="" for="rdoYes">

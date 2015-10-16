@@ -3,9 +3,9 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class SetCertificateOfReceipt : IRequest<Guid>
+    public class SaveCertificateOfReceiptFile : IRequest<Guid>
     {
-        public SetCertificateOfReceipt(Guid movementId, byte[] certificateBytes, string fileType)
+        public SaveCertificateOfReceiptFile(Guid movementId, byte[] certificateBytes, string fileType)
         {
             MovementId = movementId;
             CertificateBytes = certificateBytes;

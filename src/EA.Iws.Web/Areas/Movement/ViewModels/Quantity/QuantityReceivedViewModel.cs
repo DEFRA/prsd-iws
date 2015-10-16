@@ -1,12 +1,18 @@
 ﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Quantity
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Core.MovementReceipt;
     using Core.Shared;
 
     public class QuantityReceivedViewModel : IValidatableObject
     {
         public ShipmentQuantityUnits Unit { get; set; }
+
+        public Decision Decision { get; set; }
+
+        public DateTime DateReceived { get; set; }
 
         [Required]
         [Range(0, int.MaxValue)]

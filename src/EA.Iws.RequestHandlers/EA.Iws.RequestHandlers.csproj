@@ -119,9 +119,10 @@
     <Compile Include="Mappings\WasteDisposalMap.cs" />
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="Movement\Complete\SaveMovementCompletedReceiptHandler.cs" />
-    <Compile Include="MovementReceipt\SetCertificateOfReceiptHandler.cs" />
-    <Compile Include="MovementReceipt\CreateMovementReceiptForMovementHandler.cs" />
+    <Compile Include="MovementReceipt\SaveCertificateOfReceiptFileHandler.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandler.cs" />
+    <Compile Include="MovementReceipt\SetMovementAcceptedHandler.cs" />
+    <Compile Include="MovementReceipt\SetMovementRejectedHandler.cs" />
     <Compile Include="MovementReceipt\UpdateMovementAcceptanceDataByMovementIdHandler.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementIdHandler.cs" />
     <Compile Include="Movement\CancelMovementsHandler.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="Movement\SetMovementFileIdHandler.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
-    <Compile Include="MovementReceipt\SetMovementReceiptQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="Movement\Summary\GetMovementsSummaryByNotificationIdHandler.cs" />
