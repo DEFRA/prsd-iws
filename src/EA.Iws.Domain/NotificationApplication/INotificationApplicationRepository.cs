@@ -6,5 +6,6 @@
     public interface INotificationApplicationRepository
     {
         Task<NotificationApplication> GetById(Guid id);
+        Task<NotificationApplication> GetByMovementId(Guid movementId);
     }
 }

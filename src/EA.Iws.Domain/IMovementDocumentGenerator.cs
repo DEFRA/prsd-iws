@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Domain
 {
+    using System;
+    using System.Threading.Tasks;
+
     public interface IMovementDocumentGenerator
     {
-        byte[] Generate(Movement.Movement movement,
-            NotificationApplication.NotificationApplication notification,
-            NotificationApplication.Shipment.ShipmentInfo shipmentInfo);
+        Task<byte[]> Generate(Guid movementId);
     }
 }

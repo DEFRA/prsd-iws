@@ -3,6 +3,9 @@
     using Autofac;
     using DocumentGenerator;
     using Domain;
+    using Movement;
+    using Movement.Blocks.Factories;
+    using Notification;
     using Notification.Blocks.Factories;
 
     public class DocumentGeneratorModule : Module
@@ -16,6 +19,13 @@
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<INotificationBlockFactory>()
                 .As<INotificationBlockFactory>();
+
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AssignableTo<IMovementBlockFactory>()
+                .As<IMovementBlockFactory>();
+
+            builder.RegisterType<NotificationBlocksFactory>().AsSelf();
+            builder.RegisterType<MovementBlocksFactory>().AsSelf();
         }
     }
 }

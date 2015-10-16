@@ -2,31 +2,37 @@
 {
     using System;
     using System.Data.Entity;
-    using System.Security;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
-    using Prsd.Core.Domain;
+    using Domain.Security;
 
     internal class NotificationApplicationRepository : INotificationApplicationRepository
     {
         private readonly IwsContext context;
-        private readonly IUserContext userContext;
+        private readonly INotificationApplicationAuthorization notificationApplicationAuthorization;
 
-        public NotificationApplicationRepository(IwsContext context, IUserContext userContext)
+        public NotificationApplicationRepository(IwsContext context,
+            INotificationApplicationAuthorization notificationApplicationAuthorization)
         {
             this.context = context;
-            this.userContext = userContext;
+            this.notificationApplicationAuthorization = notificationApplicationAuthorization;
         }
 
         public async Task<NotificationApplication> GetById(Guid id)
         {
-            var notification = await context.NotificationApplications.SingleAsync(n => n.Id == id);
-            if (notification.UserId != userContext.UserId)
-            {
-                throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
-                    id, userContext.UserId));
-            }
-            return notification;
+            await notificationApplicationAuthorization.EnsureAccessAsync(id);
+            return await context.NotificationApplications.SingleAsync(n => n.Id == id);
+        }
+
+        public async Task<NotificationApplication> GetByMovementId(Guid movementId)
+        {
+            var notificationId = await context.Movements
+                .Where(m => m.Id == movementId)
+                .Select(m => m.NotificationId)
+                .SingleAsync();
+
+            return await GetById(notificationId);
         }
     }
 }

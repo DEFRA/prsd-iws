@@ -1,36 +1,22 @@
 ﻿namespace EA.Iws.DocumentGeneration.Movement
 {
+    using System.Collections.Generic;
     using System.Linq;
-    using Blocks;
-    using DocumentFormat.OpenXml.Packaging;
-    using Domain.Movement;
-    using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Shipment;
-    using Formatters;
     using Notification.Blocks;
 
     public class MovementDocument
     {
-        private readonly WordprocessingDocument document;
-        private readonly MovementBlockCollection movementBlockCollection;
-        private readonly bool hasCarrierAnnex;
+        private readonly IEnumerable<IDocumentBlock> movementBlocks;
 
-        public MovementDocument(WordprocessingDocument document, 
-            Movement movement, 
-            NotificationApplication notification, 
-            ShipmentInfo shipmentInfo)
+        public MovementDocument(IEnumerable<IDocumentBlock> movementBlocks)
         {
-            this.document = document;
-            var fields = MergeFieldLocator.GetMergeRuns(document);
-            hasCarrierAnnex = notification.Carriers.Count() > 1;
-            movementBlockCollection = new MovementBlockCollection(fields, movement, notification, shipmentInfo);
-            ApplyUnitStrikethrough(movement);
+            this.movementBlocks = movementBlocks;
         }
 
-        public void Merge()
+        public void Merge(bool hasCarrierAnnex)
         {
             int i = (hasCarrierAnnex) ? 2 : 1;
-            foreach (var block in movementBlockCollection.OrderBy(b => b.OrdinalPosition))
+            foreach (var block in movementBlocks.OrderBy(b => b.OrdinalPosition))
             {
                 block.Merge();
 
@@ -41,15 +27,6 @@
                     annexBlock.GenerateAnnex(i);
                     i++;
                 }
-            }
-        }
-
-        private void ApplyUnitStrikethrough(Movement movement)
-        {
-            if (movement != null && movement.Units.HasValue)
-            {
-                ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, 
-                    movement.Units.Value);
             }
         }
     }
