@@ -140,6 +140,7 @@
     <Content Include="scripts\Update\Sprint18\20151013-142200-add-fileid-to-movement.sql" />
     <Content Include="scripts\Update\Sprint18\20151014-134651-add-movement-status-history.sql" />
     <Content Include="scripts\Update\Sprint18\20151015-115300-add-objected-date-column.sql" />
+    <Content Include="scripts\Update\Sprint18\20151016-085800-add-import-notification-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

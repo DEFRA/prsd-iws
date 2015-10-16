@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;

@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.ViewModels.NewNotification
 {
     using Core.Notification;
-    using Requests.Notification;
     using Shared;
 
     public class CompetentAuthorityChoiceViewModel

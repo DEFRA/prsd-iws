@@ -477,7 +477,7 @@
             var result = (await context.PricingStructures.SingleAsync(
                 p => p.CompetentAuthority.Value == ca &&
                      p.Activity.TradeDirection == td &&
-                     p.Activity.NotificationType.Value == nt &&
+                     (int)p.Activity.NotificationType == nt &&
                      p.Activity.IsInterim == isInterim &&
                      (p.ShipmentQuantityRange.RangeFrom <= numberOfShipments &&
                       (p.ShipmentQuantityRange.RangeTo == null || p.ShipmentQuantityRange.RangeTo >= numberOfShipments))))

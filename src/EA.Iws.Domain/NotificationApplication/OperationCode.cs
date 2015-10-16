@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
+    using Core.Shared;
     using Prsd.Core.Domain;
 
     public class OperationCode : Enumeration

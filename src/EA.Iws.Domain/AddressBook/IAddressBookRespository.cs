@@ -10,5 +10,7 @@
         Task<AddressBook> GetAddressBookForUser(Guid userId, AddressRecordType type);
 
         Task<IList<AddressBook>> GetAllAddressBooksForUser(Guid userId);
+
+        Task Update(AddressBook addressBook);
     }
 }

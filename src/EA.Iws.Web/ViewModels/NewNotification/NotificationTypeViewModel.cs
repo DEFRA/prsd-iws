@@ -6,8 +6,6 @@
     using System.Linq;
     using Core.Notification;
     using Core.Shared;
-    using Requests.Notification;
-    using Requests.Shared;
 
     public class NotificationTypeViewModel
     {

@@ -10,7 +10,6 @@
     using FakeItEasy;
     using Prsd.Core.Domain;
     using Xunit;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     [Trait("Category", "Integration")]
     public class WasteRecoveryIntegration

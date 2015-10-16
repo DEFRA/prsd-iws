@@ -3,6 +3,7 @@
     using System.Linq;
     using Core.IntendedShipments;
     using Core.Notification.Overview;
+    using Core.Shared;
     using DataAccess;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;

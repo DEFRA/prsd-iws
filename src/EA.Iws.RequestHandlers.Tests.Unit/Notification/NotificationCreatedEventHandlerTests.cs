@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;

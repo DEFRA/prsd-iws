@@ -54,7 +54,7 @@
             {
                 NotificationId = message.Id,
                 NotificationNumber = notification.NotificationNumber,
-                NotificationType = (Core.Shared.NotificationType)notification.NotificationType.Value,
+                NotificationType = (Core.Shared.NotificationType)notification.NotificationType,
                 IntendedShipments = shipmentInfo.NumberOfShipments,
                 UsedShipments = relatedMovements.Count,
                 IntendedQuantityTotal = shipmentInfo.Quantity,

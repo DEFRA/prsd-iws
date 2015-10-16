@@ -34,7 +34,7 @@
             
             addressBook.Add(new AddressBookRecord(address, business, contact));
 
-            await SaveAddressBook(addressBook);
+            await addressBookRepository.Update(addressBook);
 
             return true;
         }
@@ -66,16 +66,6 @@
                 message.Business.AdditionalRegistrationNumber, message.Business.OtherDescription) 
                 : Business.CreateBusiness(message.Business.Name, BusinessType.FromBusinessType(message.Business.BusinessType),
                 message.Business.RegistrationNumber, message.Business.AdditionalRegistrationNumber);
-        }
-
-        private async Task SaveAddressBook(AddressBook addressBook)
-        {
-            if (context.Entry(addressBook).State == EntityState.Detached)
-            {
-                context.AddressBooks.Add(addressBook);
-            }
-
-            await context.SaveChangesAsync();
         }
     }
 }

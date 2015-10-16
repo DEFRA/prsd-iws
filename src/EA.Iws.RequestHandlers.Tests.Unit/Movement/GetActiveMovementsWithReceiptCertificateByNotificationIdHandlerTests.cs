@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.MovementReceipt;
+    using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Prsd.Core;

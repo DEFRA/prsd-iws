@@ -6,6 +6,7 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using Core.MeansOfTransport;
+    using Core.Shared;
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;

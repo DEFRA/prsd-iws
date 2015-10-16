@@ -32,7 +32,7 @@
 
             return new MovementOperationReceiptData
             {
-                NotificationType = (NotificationType)notification.NotificationType.Value,
+                NotificationType = (NotificationType)notification.NotificationType,
                 DateCompleted = dateCompleted
             };
         }

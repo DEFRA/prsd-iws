@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.NotificationBlocks
 {
     using System.Collections.Generic;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.WasteRecovery;
     using Formatters;

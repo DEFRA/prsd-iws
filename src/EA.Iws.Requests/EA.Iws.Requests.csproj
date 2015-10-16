@@ -76,6 +76,8 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
+    <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
+    <Compile Include="ImportNotification\CreateImportNotification.cs" />
     <Compile Include="MovementOperationReceipt\CreateMovementOperationReceiptForMovement.cs" />
     <Compile Include="MovementOperationReceipt\GetMovementOperationReceiptDataByMovementId.cs" />
     <Compile Include="MovementOperationReceipt\MovementOperationReceiptData.cs" />

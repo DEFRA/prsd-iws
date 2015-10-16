@@ -21,7 +21,7 @@
             {
                 Id = source.Id,
                 NotificationNumber = source.NotificationNumber,
-                NotificationType = (Core.Shared.NotificationType)source.NotificationType.Value,
+                NotificationType = source.NotificationType,
                 CompetentAuthority = (Core.Notification.CompetentAuthority)source.CompetentAuthority.Value,
                 UnitedKingdomCompetentAuthorityData = competentAuthorityMap.Map(parameter)
             };

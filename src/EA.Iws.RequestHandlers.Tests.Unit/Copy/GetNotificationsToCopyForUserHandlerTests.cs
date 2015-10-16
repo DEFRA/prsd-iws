@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.Shared;
     using Core.WasteType;
     using DataAccess;
     using Domain;

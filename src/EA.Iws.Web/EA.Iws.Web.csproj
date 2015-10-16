@@ -627,12 +627,13 @@
     <Content Include="Content\govuk_elements\forms\_form-block-labels.scss" />
     <Content Include="Content\iws\_movement-summary.scss" />
     <Content Include="Content\iws\_buttons.scss" />
-    <Content Include="Areas\Admin\Views\ImportNotification\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ImportNotification\Number.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Submit\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Submit\Success.cshtml" />
     <Content Include="Areas\Movement\Views\ReceiptComplete\Success.cshtml" />
     <Content Include="Areas\Movement\Views\OperationComplete\Success.cshtml" />
+    <None Include="Areas\Admin\Views\ImportNotification\NotificationType.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -769,6 +770,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationNumberViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationTypeViewModel.cs" />
     <Compile Include="Areas\Movement\Controllers\CarrierController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateCompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />

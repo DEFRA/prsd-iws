@@ -61,7 +61,7 @@
             Property(x => x.CompetentAuthority.Value)
                 .IsRequired();
 
-            Property(x => x.NotificationType.Value)
+            Property(x => x.NotificationType)
                 .IsRequired();
 
             Property(x => x.UserId)

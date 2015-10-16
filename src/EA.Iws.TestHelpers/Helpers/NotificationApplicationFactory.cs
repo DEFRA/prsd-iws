@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Reflection;
     using Core.MeansOfTransport;
+    using Core.Shared;
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
     using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 

@@ -7,7 +7,6 @@
     using Requests.MovementOperationReceipt;
     using TestHelpers.DomainFakes;
     using Xunit;
-    using NotificationApplicationType = Domain.NotificationApplication.NotificationType;
 
     public class GetMovementOperationReceiptDataByMovementIdHandlerTests : TestBase
     {
@@ -18,7 +17,7 @@
 
         public GetMovementOperationReceiptDataByMovementIdHandlerTests()
         {
-            NotificationApplication.NotificationType = NotificationApplicationType.Recovery;
+            NotificationApplication.NotificationType = NotificationType.Recovery;
             Context.NotificationApplications.Add(NotificationApplication);
             Context.Movements.Add(Movement);
             handler = new GetMovementOperationReceiptDataByMovementIdHandler(Context);
@@ -39,11 +38,11 @@
         {
             if (notificationType == NotificationType.Recovery)
             {
-                NotificationApplication.NotificationType = NotificationApplicationType.Recovery;
+                NotificationApplication.NotificationType = NotificationType.Recovery;
             }
             else
             {
-                NotificationApplication.NotificationType = NotificationApplicationType.Disposal;
+                NotificationApplication.NotificationType = NotificationType.Disposal;
             }
 
             var result = await handler.HandleAsync(request);

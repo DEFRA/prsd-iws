@@ -1,9 +1,11 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
+    using BusinessType = Domain.BusinessType;
 
     public class NotificationImporterTests
     {

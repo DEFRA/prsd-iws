@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Core.Admin.Search;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
     using FakeItEasy;
@@ -15,6 +16,7 @@
     using Requests.Admin;
     using TestHelpers.Helpers;
     using Xunit;
+    using BusinessType = Domain.BusinessType;
     using CompetentAuthority = Core.Notification.CompetentAuthority;
 
     public class GetBasicSearchResultsHandlerTests

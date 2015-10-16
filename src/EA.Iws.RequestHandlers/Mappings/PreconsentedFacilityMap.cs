@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.Notification;
@@ -20,7 +21,7 @@
         private static Core.Shared.NotificationType GetNotificationType(NotificationType type)
         {
             Core.Shared.NotificationType notificationType;
-            if (Enum.TryParse(type.Value.ToString(), out notificationType))
+            if (Enum.TryParse(type.ToString(), out notificationType))
             {
                 return notificationType;
             }

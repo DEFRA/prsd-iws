@@ -32,5 +32,15 @@
         {
             return await context.AddressBooks.Where(ab => ab.UserId == userId).ToArrayAsync();
         }
+
+        public async Task Update(AddressBook addressBook)
+        {
+            if (context.Entry(addressBook).State == EntityState.Detached)
+            {
+                context.AddressBooks.Add(addressBook);
+            }
+
+            await context.SaveChangesAsync();
+        }
     }
 }

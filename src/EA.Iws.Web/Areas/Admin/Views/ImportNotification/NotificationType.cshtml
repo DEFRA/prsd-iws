@@ -1,0 +1,20 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationTypeViewModel
+@{
+    ViewBag.Title = "Enter import notification type";
+}
+
+<header class="hgroup text">
+    <h1 class="heading-large">What type of notification are you recording?</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.NotificationNumber)
+
+    <div class="form-group">@Html.EditorFor(m => m.NotificationTypeRadioButtons)</div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

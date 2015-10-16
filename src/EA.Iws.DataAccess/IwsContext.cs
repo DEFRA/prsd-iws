@@ -8,6 +8,7 @@
     using Domain;
     using Domain.AddressBook;
     using Domain.FinancialGuarantee;
+    using Domain.ImportNotification;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
@@ -79,6 +80,8 @@
         public virtual DbSet<WasteDisposal> WasteDisposals { get; set; }
 
         public virtual DbSet<Consent> Consents { get; set; }
+
+        public virtual DbSet<ImportNotification> ImportNotifications { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

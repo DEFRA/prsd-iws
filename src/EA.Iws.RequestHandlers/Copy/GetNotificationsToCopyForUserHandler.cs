@@ -28,7 +28,7 @@
 
             var notificationData = await context.NotificationApplications
                 .Where(na => na.UserId == userContext.UserId
-                    && na.NotificationType.Value == notificationType.Value
+                    && na.NotificationType == notificationType
                     && na.Exporter != null 
                     && na.Importer != null
                     && na.WasteType != null)

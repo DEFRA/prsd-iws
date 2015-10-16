@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Helpers;
 

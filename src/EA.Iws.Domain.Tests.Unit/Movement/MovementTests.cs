@@ -1,14 +1,12 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
-    using Core.MovementReceipt;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Prsd.Core;
     using TestHelpers.Helpers;
     using Xunit;
-    using NotificationApplicationType = Domain.NotificationApplication.NotificationType;
 
     public class MovementTests : IDisposable
     {
@@ -22,7 +20,7 @@
         {
             var notification = new NotificationApplication(
                 Guid.NewGuid(), 
-                NotificationApplicationType.Recovery, 
+                NotificationType.Recovery, 
                 UKCompetentAuthority.England, 
                 0);
 

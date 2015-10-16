@@ -10,7 +10,6 @@
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
-    using NotificationApplicationType = Domain.NotificationApplication.NotificationType;
 
     public class MovementOperationReceiptTests
     {
@@ -23,7 +22,7 @@
 
         public MovementOperationReceiptTests()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationApplicationType.Recovery, UKCompetentAuthority.England, 0);
+            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             movement = new Movement(1, notification.Id);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, MovementDate, movement);

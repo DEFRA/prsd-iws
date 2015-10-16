@@ -73,7 +73,6 @@
     <Compile Include="AddressBook\DeleteAddressBookRecordHandler.cs" />
     <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
-    <Compile Include="AddressBook\AddressBookRepository.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
@@ -100,6 +99,8 @@
     <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />
     <Compile Include="Feedback\FeedbackInformation.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
+    <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
+    <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />

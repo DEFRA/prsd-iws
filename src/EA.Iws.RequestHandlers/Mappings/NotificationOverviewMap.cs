@@ -19,7 +19,7 @@
             return new NotificationOverview
             {
                 NotificationId = source.Notification.Id,
-                NotificationType = (Core.Shared.NotificationType)source.Notification.NotificationType.Value,
+                NotificationType = (Core.Shared.NotificationType)source.Notification.NotificationType,
                 NotificationNumber = source.Notification.NotificationNumber,
                 CompetentAuthority = (CompetentAuthority)source.Notification.CompetentAuthority.Value,
                 Progress = source.Progress,

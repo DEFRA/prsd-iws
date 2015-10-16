@@ -14,7 +14,7 @@
             {
                 NotificationId = source.Id,
                 NotificationNumber = source.NotificationNumber,
-                NotificationType = (NotificationType)source.NotificationType.Value,
+                NotificationType = (NotificationType)source.NotificationType,
                 CompetentAuthority = (CompetentAuthority)source.CompetentAuthority.Value
             };
         }

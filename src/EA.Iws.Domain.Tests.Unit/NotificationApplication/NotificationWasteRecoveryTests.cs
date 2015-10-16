@@ -6,7 +6,6 @@
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.WasteRecovery;
     using Xunit;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class NotificationWasteRecoveryTests
     {

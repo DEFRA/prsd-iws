@@ -18,7 +18,7 @@
             var pricingStructure = pricingStructures.Single(p =>
                 p.CompetentAuthority.Value == notification.CompetentAuthority.Value
                 && p.Activity.TradeDirection == TradeDirection.Export
-                && p.Activity.NotificationType.Value == notification.NotificationType.Value
+                && p.Activity.NotificationType == notification.NotificationType
                 && p.Activity.IsInterim == notification.IsInterim
                 && (p.ShipmentQuantityRange.RangeFrom <= shipmentInfo.NumberOfShipments
                     && (p.ShipmentQuantityRange.RangeTo == null

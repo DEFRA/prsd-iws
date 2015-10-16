@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.Admin;
+    using Core.Shared;
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;

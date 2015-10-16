@@ -17,7 +17,7 @@
         {
             var notification = await notificationRepository.GetById(movement.NotificationId);
             var notificationNumber = notification.NotificationNumber.Replace(" ", string.Empty);
-            var notificationType = notification.NotificationType.DisplayName.ToLowerInvariant();
+            var notificationType = notification.NotificationType.ToString().ToLowerInvariant();
 
             return string.Format(nameFormat, notificationNumber, movement.Number, notificationType);
         }

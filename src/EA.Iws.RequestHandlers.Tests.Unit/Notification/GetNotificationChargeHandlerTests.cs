@@ -13,7 +13,6 @@
     using Requests.Notification;
     using TestHelpers.Helpers;
     using Xunit;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class GetNotificationChargeHandlerTests : IDisposable
     {

@@ -75,6 +75,8 @@
     <Compile Include="ICompetentAuthorityRepository.cs" />
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="IMovementDocumentGenerator.cs" />
+    <Compile Include="ImportNotification\IImportNotificationRepository.cs" />
+    <Compile Include="ImportNotification\ImportNotification.cs" />
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
@@ -165,7 +167,6 @@
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Importer.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Producers.cs" />
-    <Compile Include="NotificationApplication\NotificationType.cs" />
     <Compile Include="NotificationApplication\PackagingInfo.cs" />
     <Compile Include="NotificationApplication\ChemicalComposition.cs" />
     <Compile Include="NotificationApplication\PackagingType.cs" />

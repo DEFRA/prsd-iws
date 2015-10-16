@@ -5,7 +5,6 @@
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core;
     using Xunit;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class NotificationShipmentTests : IDisposable
     {

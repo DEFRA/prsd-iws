@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;

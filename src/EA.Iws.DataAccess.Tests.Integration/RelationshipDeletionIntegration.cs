@@ -5,12 +5,14 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
     using Xunit;
+    using BusinessType = Domain.BusinessType;
 
     [Trait("Category", "Integration")]
     public class RelationshipDeletionIntegration

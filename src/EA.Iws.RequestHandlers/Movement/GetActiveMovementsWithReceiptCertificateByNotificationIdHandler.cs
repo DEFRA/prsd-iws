@@ -39,7 +39,7 @@
             return new MovementOperationData
             {
                 MovementDatas = receivedMovementDatas,
-                NotificationType = (NotificationType)notification.NotificationType.Value
+                NotificationType = notification.NotificationType
             };
         }
     }

@@ -5,7 +5,6 @@
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using Formatters;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     internal class GeneralViewModel
     {

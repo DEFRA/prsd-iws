@@ -5,6 +5,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Shared;
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
@@ -12,7 +13,6 @@
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
     using Xunit;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     [Trait("Category", "Integration")]
     public class NotificationApplicationIntegration

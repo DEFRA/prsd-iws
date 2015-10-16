@@ -7,6 +7,7 @@
     using Core.Importer;
     using Core.Notification.Overview;
     using Core.Producers;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 

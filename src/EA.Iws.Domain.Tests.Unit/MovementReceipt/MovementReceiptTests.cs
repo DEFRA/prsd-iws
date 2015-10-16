@@ -7,7 +7,6 @@
     using System;
     using Core.Shared;
     using Xunit;
-    using NotificationType = Domain.NotificationApplication.NotificationType;
 
     public class MovementReceiptTests
     {

@@ -54,7 +54,7 @@
 
         public void SetPreconsentedRecoveryFacility(bool isPreconsentedRecoveryFacility)
         {
-            if (NotificationType != NotificationType.Recovery)
+            if (NotificationType != Core.Shared.NotificationType.Recovery)
             {
                 throw new InvalidOperationException(String.Format(
                     "Can't set pre-consented recovery facility as notification type is not Recovery for notification: {0}", Id));

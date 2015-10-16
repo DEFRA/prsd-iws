@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Core.Notification.Overview;
     using Core.OperationCodes;
+    using Core.Shared;
     using Core.TechnologyEmployed;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
