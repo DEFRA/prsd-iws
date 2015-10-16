@@ -86,7 +86,7 @@
     <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementId.cs" />
     <Compile Include="Movement\CancelMovements.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
-    <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationId.cs" />
+    <Compile Include="Movement\GetSubmittedMovementsByNotificationId.cs" />
     <Compile Include="MovementReceipt\CreateMovementReceiptForMovement.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementId.cs" />
     <Compile Include="MovementReceipt\MovementReceiptDateData.cs" />

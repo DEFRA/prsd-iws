@@ -62,15 +62,13 @@
                 </a>
 
                 <a title="Record a certificate of receipt" href="/">
-                    @Html.ActionLink("Record a certificate of receipt", "Receipt", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
+                    @Html.ActionLink("Record a certificate of receipt", "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                 </a>
 
                 @{ var linkText = "Record a certificate of " + (Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery"); }
                 <a title="Record certificate of recovery" href="/">
                     @Html.ActionLink(linkText, "Index", "Complete")
                 </a>
-
-                <a title="Record a rejected shipment" href="/">Record a rejected shipment</a>
             </nav>
         </div>
     </div>

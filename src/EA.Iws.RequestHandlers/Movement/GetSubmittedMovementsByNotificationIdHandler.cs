@@ -10,26 +10,27 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
-    internal class GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler : IRequestHandler<GetActiveMovementsWithoutReceiptCertificateByNotificationId, IList<MovementData>>
+    internal class GetSubmittedMovementsByNotificationIdHandler : IRequestHandler<GetSubmittedMovementsByNotificationId, IList<MovementData>>
     {
-        private readonly IwsContext context;
+        private readonly IMovementRepository movementRepository;
         private readonly IMap<Movement, MovementData> mapper;
         private readonly ActiveMovements activeMovementService;
 
-        public GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler(IwsContext context, 
+        public GetSubmittedMovementsByNotificationIdHandler(
+            IMovementRepository movementRepository,
             IMap<Movement, MovementData> mapper,
             ActiveMovements activeMovementService)
         {
-            this.context = context;
+            this.movementRepository = movementRepository;
             this.mapper = mapper;
             this.activeMovementService = activeMovementService;
         }
 
-        public async Task<IList<MovementData>> HandleAsync(GetActiveMovementsWithoutReceiptCertificateByNotificationId message)
+        public async Task<IList<MovementData>> HandleAsync(GetSubmittedMovementsByNotificationId message)
         {
-            var movements = await context.GetMovementsForNotificationAsync(message.Id);
+            var movements = await movementRepository.GetSubmittedMovements(message.Id);
 
-            return activeMovementService.List(movements)
+            return activeMovementService.List(movements.ToList())
                 .Select(mapper.Map)
                 .ToArray();
         }

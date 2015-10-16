@@ -5,11 +5,11 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    public class GetActiveMovementsWithoutReceiptCertificateByNotificationId : IRequest<IList<MovementData>>
+    public class GetSubmittedMovementsByNotificationId : IRequest<IList<MovementData>>
     {
         public Guid Id { get; private set; }
 
-        public GetActiveMovementsWithoutReceiptCertificateByNotificationId(Guid id)
+        public GetSubmittedMovementsByNotificationId(Guid id)
         {
             Id = id;
         }

@@ -139,7 +139,7 @@
     <Compile Include="Movement\CancelMovementsHandler.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GenerateMovementDocumentHandler.cs" />
-    <Compile Include="Movement\GetActiveMovementsWithoutReceiptCertificateByNotificationIdHandler.cs" />
+    <Compile Include="Movement\GetSubmittedMovementsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMeansOfTransportByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementNumberByMovementIdHandler.cs" />

@@ -23,6 +23,12 @@
             Date = dateReceived;
             Quantity = quantity;
         }
+
+        internal MovementReceipt(DateTime dateReceived, decimal quantity)
+        {
+            Date = dateReceived;
+            Quantity = quantity;
+        }
         
         public DateTime Date { get; private set; }
 

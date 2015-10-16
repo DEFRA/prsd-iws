@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Web.ViewModels.Movement
+﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiveMovement
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Core.Movement;
-    using Shared;
+    using Web.ViewModels.Shared;
 
     public class MovementReceiptViewModel
     {

@@ -564,7 +564,6 @@
     <Content Include="Areas\Movement\Views\Carrier\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Carrier\_MeansOfTransport.cshtml" />
     <Content Include="Content\iws\_movement.scss" />
-    <Content Include="Views\NotificationMovement\Receipt.cshtml" />
     <Content Include="Areas\Movement\Views\DateReceived\Index.cshtml" />
     <Content Include="Areas\Movement\Views\QuantityReceived\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Acceptance\Index.cshtml" />
@@ -635,6 +634,7 @@
     <Content Include="Areas\Movement\Views\Complete\Success.cshtml" />
     <None Include="Areas\Admin\Views\ImportNotification\NotificationType.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Complete\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiveMovement\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -791,6 +791,7 @@
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\ReceiveMovementController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\CarrierViewModel.cs" />
@@ -809,6 +810,7 @@
     <Compile Include="Areas\NotificationAssessment\ViewModels\NotificationAssessmentDecisionViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\NotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Complete\CompleteMovementViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModel.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalCostViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
@@ -846,7 +848,6 @@
     <Compile Include="Areas\NotificationApplication\Controllers\UnNumberController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\EwcCode\EwcEnterCodesViewModel.cs" />
-    <Compile Include="ViewModels\Movement\MovementReceiptViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNClass\UNClassViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\WasteCodeOverviewViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UNNumber\UNNumberViewModel.cs" />
