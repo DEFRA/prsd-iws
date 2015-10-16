@@ -21,6 +21,8 @@
 
         public string BusinessUnit { get; protected set; }
 
+        public string Building { get; protected set; }
+
         public Address Address { get; protected set; }
 
         public string Telephone { get; protected set; }

@@ -25,6 +25,7 @@
             {
                 Id = source.Id,
                 BusinessUnit = source.BusinessUnit,
+                Building = source.Building,
                 Telephone = source.Telephone,
                 CompetentAuthority = competentAuthorityMap.Map(source.CompetentAuthority),
                 Address = addressMap.Map(source.Address),

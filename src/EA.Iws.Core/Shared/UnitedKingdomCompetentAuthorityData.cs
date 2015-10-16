@@ -13,6 +13,8 @@
 
         public string BusinessUnit { get; set; }
 
+        public string Building { get; set; }
+
         public AddressData Address { get; set; }
 
         public string Telephone { get; set; }

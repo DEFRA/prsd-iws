@@ -117,9 +117,27 @@
 
 <div>
     <h3 class="heading-medium">Step 5: Post the notification package to the following address:</h3>
-    <p>
-        @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address)
-    </p>
+    <div class="form-group">
+        <address>
+            <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BusinessUnit)</span>
+            <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.CompetentAuthority.Name)</span>
+            <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Building)</span>
+            <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address.StreetOrSuburb)</span>
+            @if (!string.IsNullOrWhiteSpace(Model.UnitedKingdomCompetentAuthorityData.Address.Address2))
+            {
+                <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address.Address2)</span>
+            }
+            <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address.TownOrCity)</span>
+            @if (!string.IsNullOrWhiteSpace(Model.UnitedKingdomCompetentAuthorityData.Address.PostalCode))
+            {
+                <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address.PostalCode)</span>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.UnitedKingdomCompetentAuthorityData.Address.Region))
+            {
+                <span>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.Address.Region)</span>
+            }
+        </address>
+    </div>
 
     The package must include:
     <ul class="what-next-list">
