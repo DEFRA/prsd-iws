@@ -11,6 +11,7 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security.DataProtection;
+    using RequestHandlers.Authorization;
     using Services;
     using ClaimTypes = Core.Shared.ClaimTypes;
 
@@ -18,15 +19,18 @@
     {
         private readonly ConfigurationService configurationService;
         private readonly Func<IwsContext> iwsContext;
+        private readonly RequestAuthorizationClaimsProvider requestAuthorizationClaimsProvider;
 
         public ApplicationUserManager(IUserStore<ApplicationUser> store,
             IDataProtectionProvider dataProtectionProvider,
             ConfigurationService configurationService,
-            Func<IwsContext> iwsContext)
+            Func<IwsContext> iwsContext,
+            RequestAuthorizationClaimsProvider requestAuthorizationClaimsProvider)
             : base(store)
         {
             this.configurationService = configurationService;
             this.iwsContext = iwsContext;
+            this.requestAuthorizationClaimsProvider = requestAuthorizationClaimsProvider;
 
             UserValidator = new UserValidator<ApplicationUser>(this)
             {
@@ -136,6 +140,13 @@
             else
             {
                 claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "external"));
+            }
+
+            var requestClaims = await requestAuthorizationClaimsProvider.GetClaims(userId);
+
+            foreach (var claim in requestClaims)
+            {
+                claims.Add(claim);
             }
 
             return claims;

@@ -1,29 +1,26 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Core.Shared;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter;
-    using EA.Iws.Web.ViewModels.Shared;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.Exporter;
+    using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class ExporterControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator client;
         private readonly Guid notificationId = new Guid("81CBBCEE-34C0-4628-B054-E0D8135A7947");
         private readonly ExporterController exporterController;
 
         public ExporterControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            exporterController = new ExporterController(() => client);
+            client = A.Fake<IMediator>();
+            exporterController = new ExporterController(client);
         }
 
         private ExporterViewModel CreateExporterViewModel()

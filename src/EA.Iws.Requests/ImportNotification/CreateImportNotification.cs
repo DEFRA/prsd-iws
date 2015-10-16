@@ -1,9 +1,11 @@
 ﻿namespace EA.Iws.Requests.ImportNotification
 {
     using System;
+    using Core.Authorization;
     using Core.Shared;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization("Create Import Notification")]
     public class CreateImportNotification : IRequest<Guid>
     {
         public string Number { get; private set; }

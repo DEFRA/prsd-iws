@@ -15,6 +15,7 @@
             filters.Add(new EmailVerificationRequiredAttribute());
             filters.Add(new AntiForgeryErrorFilter());
             filters.Add(new AdminApprovalRequired());
+            filters.Add(new RequestAuthorizationErrorFilter());
         }
     }
 }

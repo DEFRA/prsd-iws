@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers
 {
+    using Authorization;
     using Autofac;
     using Copy;
     using Decorators;
@@ -23,7 +24,7 @@
             // Order matters here
             builder.RegisterGenericDecorators(ThisAssembly, typeof(IRequestHandler<,>), "request_handler",
                 typeof(EventDispatcherRequestHandlerDecorator<,>), // <-- inner most decorator
-                typeof(AuthorizationRequestHandlerDecorator<,>),
+                typeof(RequestAuthorizationDecorator<,>),
                 typeof(AuthenticationRequestHandlerDecorator<,>),
                 typeof(NotificationReadOnlyAuthorizeDecorator<,>)); // <-- outer most decorator
 
@@ -56,6 +57,11 @@
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
+
+            builder.RegisterType<AuthorizationManager>().As<IAuthorizationManager>();
+            builder.RegisterType<UserRoleService>().As<IUserRoleService>();
+            builder.RegisterType<RequestAuthorizationAttributeCache>().AsSelf().SingleInstance();
+            builder.RegisterType<InMemoryAuthorizationService>().As<IAuthorizationService>();
         }
     }
 }

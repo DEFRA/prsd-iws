@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
+    using Core.Authorization;
     using Core.Notification;
     using Core.Shared;
     using Prsd.Core.Mediator;
-    using Shared;
 
+    [RequestAuthorization("Create Export Notification")]
     public class CreateNotificationApplication : IRequest<Guid>
     {
         public NotificationType NotificationType { get; set; }

@@ -811,6 +811,8 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalCostViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
+    <Compile Include="Infrastructure\RequestAuthorizationChecker.cs" />
+    <Compile Include="Infrastructure\RequestAuthorizationErrorFilter.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidMoneyDecimalAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidNumberAttribute.cs" />
