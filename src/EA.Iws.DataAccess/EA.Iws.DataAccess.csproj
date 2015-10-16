@@ -100,7 +100,7 @@
     <Compile Include="Mappings\LocalAreaMapping.cs" />
     <Compile Include="Mappings\MovementCarrierMapping.cs" />
     <Compile Include="Mappings\MovementMapping.cs" />
-    <Compile Include="Mappings\MovementOperationReceiptMapping.cs" />
+    <Compile Include="Mappings\MovementCompletedReceiptMapping.cs" />
     <Compile Include="Mappings\MovementReceiptMapping.cs" />
     <Compile Include="Mappings\NotificationAssessmentMapping.cs" />
     <Compile Include="Mappings\NotificationDatesMapping.cs" />

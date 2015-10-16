@@ -1,12 +1,12 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels
+﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Complete
 {
     using System;
     using System.Collections.Generic;
-    using Core.Shared;
     using System.ComponentModel.DataAnnotations;
-    using EA.Prsd.Core;
+    using Core.Shared;
+    using Prsd.Core;
 
-    public class DateCompleteViewModel : IValidatableObject
+    public class DateViewModel : IValidatableObject
     {
         public NotificationType NotificationType { get; set; }
 
@@ -17,19 +17,12 @@
         [Required]
         public int? Year { get; set; }
 
-        public DateCompleteViewModel()
+        public DateViewModel()
         {
         }
 
-        public DateCompleteViewModel(DateTime? dateComplete, NotificationType notificationType)
+        public DateViewModel(NotificationType notificationType)
         {
-            if (dateComplete.HasValue)
-            {
-                Day = dateComplete.Value.Day;
-                Month = dateComplete.Value.Month;
-                Year = dateComplete.Value.Year;
-            }
-
             NotificationType = notificationType;
         }
 

@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Core.Shared
-@model EA.Iws.Web.Areas.Movement.ViewModels.OperationCompleteViewModel
+@model EA.Iws.Web.Areas.Movement.ViewModels.Complete.UploadViewModel
 @{
     ViewBag.Title = "Recovery / disposal complete";
     Layout = "~/Areas/Movement/Views/Shared/_LayoutReceipt.cshtml";
@@ -15,6 +15,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.CompletedDate)
     @Html.Gds().ValidationSummary()
     
     <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">

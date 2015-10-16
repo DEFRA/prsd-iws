@@ -23,8 +23,6 @@
 
         public decimal? Quantity { get; internal set; }
 
-        public virtual MovementOperationReceipt OperationReceipt { get; internal set; }
-
         public Guid? FileId { get; private set; }
 
         public void SetQuantity(decimal quantity)

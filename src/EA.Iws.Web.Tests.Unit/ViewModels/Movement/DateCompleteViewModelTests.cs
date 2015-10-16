@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.Movement
 {
     using System;
-    using Areas.Movement.ViewModels;
+    using Areas.Movement.ViewModels.Complete;
     using Prsd.Core;
     using TestHelpers;
     using Xunit;
@@ -63,9 +63,9 @@
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(viewModel));
         }
 
-        private DateCompleteViewModel CreateViewModel(int year, int month, int day)
+        private DateViewModel CreateViewModel(int year, int month, int day)
         {
-            return new DateCompleteViewModel
+            return new DateViewModel
             {
                 Day = day,
                 Month = month,

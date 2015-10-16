@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.MovementOperationReceipt
+﻿namespace EA.Iws.RequestHandlers.Movement.Complete
 {
     using System;
     using System.Threading.Tasks;
@@ -6,9 +6,9 @@
     using Domain.FileStore;
     using Domain.Movement;
     using Prsd.Core.Mediator;
-    using Requests.MovementOperationReceipt;
+    using Requests.Movement.Complete;
 
-    internal class SetCertificateOfRecoveryHandler : IRequestHandler<SetCertificateOfRecovery, Guid>
+    internal class SaveMovementCompletedReceiptHandler : IRequestHandler<SaveMovementCompletedReceipt, Guid>
     {
         private readonly CertificateOfRecoveryNameGenerator nameGenerator;
         private readonly CertificateFactory certificateFactory;
@@ -16,7 +16,7 @@
         private readonly IFileRepository fileRepository;
         private readonly IwsContext context;
 
-        public SetCertificateOfRecoveryHandler(IwsContext context,
+        public SaveMovementCompletedReceiptHandler(IwsContext context,
             IFileRepository fileRepository,
             IMovementRepository movementRepository,
             CertificateFactory certificateFactory,
@@ -29,7 +29,7 @@
             this.nameGenerator = nameGenerator;
         }
 
-        public async Task<Guid> HandleAsync(SetCertificateOfRecovery message)
+        public async Task<Guid> HandleAsync(SaveMovementCompletedReceipt message)
         {
             var movement = await movementRepository.GetById(message.MovementId);
 
@@ -37,7 +37,7 @@
 
             var fileId = await fileRepository.Store(receipt);
 
-            movement.Receipt.OperationReceipt.SetCertificateFile(fileId);
+            movement.Complete(message.CompletedDate, fileId);
 
             await context.SaveChangesAsync();
 

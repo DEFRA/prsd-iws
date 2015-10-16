@@ -12,11 +12,17 @@
         private readonly Movement movement;
         private readonly Guid notificationId;
         private static readonly Guid AnyGuid = new Guid("B68806E3-524E-476E-A505-40B717B3191E");
+        private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
 
         public MovementStatusTests()
         {
             notificationId = new Guid("EAD34BEE-E962-4D4D-9D53-ADCD7240C333");
             movement = new Movement(1, notificationId);
+        }
+
+        private void SetMovementStatus(MovementStatus status, Movement movement)
+        {
+            ObjectInstantiator<Movement>.SetProperty(x => x.Status, status, movement);
         }
 
         [Fact]
@@ -61,6 +67,38 @@
             movement.Cancel();
 
             Assert.Equal(movement.Status, MovementStatus.Cancelled);
+        }
+
+        [Fact]
+        public void CompleteChangesStatusToCompleted()
+        {
+            SetMovementStatus(MovementStatus.Received, movement);
+
+            movement.Complete(AnyDate, AnyGuid);
+
+            Assert.Equal(MovementStatus.Completed, movement.Status);
+        }
+
+        [Fact]
+        public void CompleteCreatesMovementCompletedReceipt()
+        {
+            SetMovementStatus(MovementStatus.Received, movement);
+
+            movement.Complete(AnyDate, AnyGuid);
+
+            Assert.NotNull(movement.CompletedReceipt);
+        }
+
+        [Theory]
+        [InlineData(MovementStatus.New)]
+        [InlineData(MovementStatus.Rejected)]
+        [InlineData(MovementStatus.Cancelled)]
+        [InlineData(MovementStatus.Submitted)]
+        public void CannotCompleteNonReceivedMovement(MovementStatus status)
+        {
+            SetMovementStatus(status, movement);
+
+            Assert.Throws<InvalidOperationException>(() => movement.Complete(AnyDate, AnyGuid));
         }
     }
 }

@@ -165,8 +165,8 @@
             }) as RedirectToRouteResult;
 
             Assert.NotNull(result);
-            Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("DateComplete", result.RouteValues["controller"]);
+            Assert.Equal("Date", result.RouteValues["action"]);
+            Assert.Equal("Complete", result.RouteValues["controller"]);
             Assert.Equal("Movement", result.RouteValues["area"]);
             Assert.Equal(movementId, result.RouteValues["id"]);
         }

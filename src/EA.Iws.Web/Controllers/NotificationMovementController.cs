@@ -48,7 +48,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Index", "DateComplete",
+            return RedirectToAction("Date", "Complete",
                 new
                 {
                     id = model.RadioButtons.SelectedValue,

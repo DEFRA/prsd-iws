@@ -43,6 +43,11 @@
                 ExpressionHelper.GetPrivatePropertyExpression<Movement, MovementReceipt>("Receipt"))
                 .WithRequired()
                 .Map(m => m.MapKey("MovementId"));
+
+            HasOptional(
+                ExpressionHelper.GetPrivatePropertyExpression<Movement, MovementCompletedReceipt>("CompletedReceipt"))
+                .WithRequired()
+                .Map(m => m.MapKey("MovementId"));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels
+﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Complete
 {
     using System;
     using System.Collections.Generic;
@@ -6,13 +6,16 @@
     using System.Web;
     using Core.Shared;
 
-    public class OperationCompleteViewModel : IValidatableObject
+    public class UploadViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
+
         public NotificationType NotificationType { get; set; }
 
         [Display(Name = "Upload the signed copy")]
         public HttpPostedFileBase File { get; set; }
+
+        public DateTime CompletedDate { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -9,6 +9,7 @@
         public MovementSummaryTableData Map(Movement source)
         {
             var data = new MovementSummaryTableData();
+
             data.Number = source.Number;
             data.ShipmentDate = source.Date;
             data.Status = source.Status;
@@ -16,14 +17,15 @@
             {
                 data.ReceivedDate = source.Receipt.Date;
                 data.Quantity = source.Receipt.Quantity;
-
-                if (source.Receipt.OperationReceipt != null)
-                {
-                    data.CompletedDate = source.Receipt.OperationReceipt.Date;
-                }
             }
+
+            if (source.CompletedReceipt != null)
+            {
+                data.CompletedDate = source.CompletedReceipt.Date;
+            }
+
             data.QuantityUnits = source.Units;
-            
+
             return data;
         }
     }

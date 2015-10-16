@@ -16,6 +16,7 @@
         private readonly StateMachine<MovementStatus, Trigger> stateMachine;
 
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid> submittedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, Guid> completedTrigger;
 
         private enum Trigger
         {
@@ -74,6 +75,8 @@
 
         public virtual MovementReceipt Receipt { get; private set; }
 
+        public virtual MovementCompletedReceipt CompletedReceipt { get; private set; }
+
         public DateTime? Date { get; internal set; }
 
         public decimal? Quantity { get; private set; }
@@ -131,6 +134,13 @@
             }
         }
 
+        public void AddStatusChangeRecord(MovementStatusChange statusChange)
+        {
+            Guard.ArgumentNotNull(() => statusChange, statusChange);
+
+            StatusChangeCollection.Add(statusChange);
+        }
+
         public MovementReceipt Receive(DateTime dateReceived)
         {
             if (!this.Date.HasValue || dateReceived < this.Date)
@@ -150,21 +160,12 @@
             return this.Receipt;
         }
 
-        public void CompleteMovement(DateTime dateComplete)
-        {
-            if (!this.IsReceived)
-            {
-                throw new InvalidOperationException("Cannot complete a movement that has not been received.");
-            }
-
-            this.Receipt.OperationReceipt = new MovementOperationReceipt(dateComplete);
-        }
-        
         private StateMachine<MovementStatus, Trigger> CreateStateMachine()
         {
             var stateMachine = new StateMachine<MovementStatus, Trigger>(() => Status, s => Status = s);
 
             submittedTrigger = stateMachine.SetTriggerParameters<Guid>(Trigger.Submit);
+            completedTrigger = stateMachine.SetTriggerParameters<DateTime, Guid>(Trigger.Complete);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -179,7 +180,10 @@
 
             stateMachine.Configure(MovementStatus.Received)
                 .Permit(Trigger.Complete, MovementStatus.Completed);
-            
+
+            stateMachine.Configure(MovementStatus.Completed)
+                .OnEntryFrom(completedTrigger, OnCompleted);
+
             return stateMachine;
         }
 
@@ -207,11 +211,17 @@
             stateMachine.Fire(Trigger.Cancel);
         }
 
-        public void AddStatusChangeRecord(MovementStatusChange statusChange)
+        public void Complete(DateTime completedDate, Guid fileId)
         {
-            Guard.ArgumentNotNull(() => statusChange, statusChange);
+            Guard.ArgumentNotDefaultValue(() => completedDate, completedDate);
+            Guard.ArgumentNotDefaultValue(() => fileId, fileId);
 
-            StatusChangeCollection.Add(statusChange);
+            stateMachine.Fire(completedTrigger, completedDate, fileId);
+        }
+
+        private void OnCompleted(DateTime completedDate, Guid fileId)
+        {
+            this.CompletedReceipt = new MovementCompletedReceipt(completedDate, fileId);
         }
     }
 }

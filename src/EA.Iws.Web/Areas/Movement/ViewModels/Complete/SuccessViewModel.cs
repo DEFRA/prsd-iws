@@ -1,9 +1,9 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels
+﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Complete
 {
     using System;
     using Core.Shared;
 
-    public class OperationCompleteSuccessViewModel
+    public class SuccessViewModel
     {
         public Guid NotificationId { get; set; }
 

@@ -8,12 +8,12 @@
     using System.Threading.Tasks;
     using Domain.Movement;
 
-    public class TestableMovementOperationReceipt : MovementOperationReceipt
+    public class TestableMovementOperationReceipt : MovementCompletedReceipt
     {
         public new DateTime Date
         {
             get { return base.Date; }
-            set { ObjectInstantiator<MovementOperationReceipt>.SetProperty(x => x.Date, value, this); }
+            set { ObjectInstantiator<MovementCompletedReceipt>.SetProperty(x => x.Date, value, this); }
         }
     }
 }

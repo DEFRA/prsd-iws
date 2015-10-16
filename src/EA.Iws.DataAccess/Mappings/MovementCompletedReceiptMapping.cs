@@ -3,9 +3,9 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.Movement;
 
-    internal class MovementOperationReceiptMapping : EntityTypeConfiguration<MovementOperationReceipt>
+    internal class MovementCompletedReceiptMapping : EntityTypeConfiguration<MovementCompletedReceipt>
     {
-        public MovementOperationReceiptMapping()
+        public MovementCompletedReceiptMapping()
         {
             ToTable("MovementOperationReceipt", "Notification");
         }

@@ -69,5 +69,11 @@
             get { return base.Receipt; }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.Receipt, value, this); }
         }
+
+        public new MovementCompletedReceipt CompletedReceipt
+        {
+            get { return base.CompletedReceipt; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.CompletedReceipt, value, this); }
+        }
     }
 }

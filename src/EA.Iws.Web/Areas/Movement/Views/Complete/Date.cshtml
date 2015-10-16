@@ -1,12 +1,12 @@
 ﻿@using EA.Iws.Core.Shared
-@model EA.Iws.Web.Areas.Movement.ViewModels.DateCompleteViewModel
+@model EA.Iws.Web.Areas.Movement.ViewModels.Complete.DateViewModel
 @{
     ViewBag.Title = "Date complete";
     Layout = "~/Areas/Movement/Views/Shared/_LayoutReceipt.cshtml";
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">When was the waste @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed") of?</h1>
+    <h1 class="heading-large">When was the waste @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of")?</h1>
 </header>
 
 @using (Html.BeginForm())
