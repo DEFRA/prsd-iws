@@ -29,5 +29,34 @@
 
             return Path.Combine(root, "Documents");
         }
+
+        /// <summary>
+        /// Formats Telephone and Fax number for merge document.
+        /// Ensures non empty numbers starts with + sign.
+        /// Country code and number is separated by space.
+        /// </summary>
+        /// <param name="contactNumber">Telephone or Fax number (Country code and number separated by - sign).</param>
+        /// <returns>Formatted contact number. For null, empty or whitespace only, it will return string.empty.</returns>
+        public static string ToFormattedContact(this string contactNumber)
+        {
+            const string countryCodePrefix = "+";
+            const string countryCodeSeparator = "-";
+
+            if (string.IsNullOrWhiteSpace(contactNumber))
+            {
+                return string.Empty;
+            }
+
+            if (!contactNumber.StartsWith(countryCodePrefix))
+            {
+                contactNumber = countryCodePrefix + contactNumber;
+            }
+
+            if (contactNumber.Contains(countryCodeSeparator))
+            {
+                return contactNumber.Replace(countryCodeSeparator, " ");
+            }
+            return contactNumber;
+        }
     }
 }

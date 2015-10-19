@@ -15,7 +15,7 @@
         private readonly TestableNotificationApplication notificiation;
         private readonly TestableCarrier firstCarrier;
         private readonly TestableCarrier secondCarrier;
-        private readonly List<Carrier> carriers = new List<Carrier>(); 
+        private readonly List<Carrier> carriers = new List<Carrier>();
 
         public CarrierViewModelTests()
         {
@@ -25,7 +25,7 @@
                 Business = TestableBusiness.WasteSolutions,
                 Contact = TestableContact.BillyKnuckles
             };
-            
+
             secondCarrier = new TestableCarrier
             {
                 Address = TestableAddress.WitneyAddress,
@@ -87,7 +87,7 @@
 
             Assert.Equal(string.Empty, result.MeansOfTransport);
         }
-        
+
         [Fact]
         public void SetsMeansOfTransport()
         {
@@ -103,17 +103,22 @@
         {
             var result = new CarrierViewModel(firstCarrier, string.Empty);
 
-            Assert.Equal(string.Format("{0} {1}", firstCarrier.Contact.FirstName, firstCarrier.Contact.LastName), 
+            Assert.Equal(string.Format("{0} {1}", firstCarrier.Contact.FirstName, firstCarrier.Contact.LastName),
                 result.ContactPerson);
         }
 
-        [Fact]
-        public void SetsFax()
+        [Theory]
+        [InlineData(null, "")]
+        [InlineData("", "")]
+        [InlineData(" ", "")]
+        [InlineData("44-901 353 7450", "+44 901 353 7450")]
+        [InlineData("44-1234567890", "+44 1234567890")]
+        public void SetsFaxToFormattedFaxNumber(string inputFax, string expectedFax)
         {
             firstCarrier.Contact = new TestableContact
             {
                 Email = AnyString,
-                Fax = "01353450",
+                Fax = inputFax,
                 FirstName = AnyString,
                 LastName = AnyString,
                 Telephone = AnyString
@@ -121,17 +126,29 @@
 
             var result = new CarrierViewModel(firstCarrier, string.Empty);
 
-            Assert.Equal(firstCarrier.Contact.Fax,
-                result.Fax);
+            Assert.Equal(expectedFax, result.Fax);
         }
 
-        [Fact]
-        public void SetsTelephone()
+        [Theory]
+        [InlineData(null, "")]
+        [InlineData("", "")]
+        [InlineData(" ", "")]
+        [InlineData("44-901 353 7450", "+44 901 353 7450")]
+        [InlineData("44-1234567890", "+44 1234567890")]
+        public void SetsTelephoneToFormattedPhoneNumber(string inputPhone, string expectedPhone)
         {
+            firstCarrier.Contact = new TestableContact
+            {
+                Email = AnyString,
+                Telephone = inputPhone,
+                FirstName = AnyString,
+                LastName = AnyString,
+                Fax = AnyString
+            };
+
             var result = new CarrierViewModel(firstCarrier, string.Empty);
 
-            Assert.Equal(firstCarrier.Contact.Telephone,
-                result.Telephone);
+            Assert.Equal(expectedPhone, result.Telephone);
         }
 
         [Fact]

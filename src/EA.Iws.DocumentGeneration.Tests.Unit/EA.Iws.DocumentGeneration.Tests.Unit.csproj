@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentHelperTests.cs" />
     <Compile Include="Formatters\MeansOfTransportFormatterTests.cs" />
     <Compile Include="Formatters\OperationInfoFormatterTests.cs" />
     <Compile Include="Formatters\WasteRecoveryFormatterTests.cs" />

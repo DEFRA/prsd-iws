@@ -11,8 +11,8 @@
             Name = facility.Business.Name;
             address = new AddressViewModel(facility.Address);
             ContactPerson = facility.Contact.FirstName + " " + facility.Contact.LastName;
-            Telephone = facility.Contact.Telephone;
-            Fax = facility.Contact.Fax ?? string.Empty;
+            Telephone = facility.Contact.Telephone.ToFormattedContact();
+            Fax = facility.Contact.Fax.ToFormattedContact();
             Email = facility.Contact.Email;
             RegistrationNumber = facility.Business.RegistrationNumber;
             IsActualSite = facility.IsActualSiteOfTreatment;

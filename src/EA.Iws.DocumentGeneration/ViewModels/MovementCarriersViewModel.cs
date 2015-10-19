@@ -132,8 +132,8 @@
                     Reg = sortedCarriersList[i].Carrier.Business.RegistrationNumber,
                     Name = sortedCarriersList[i].Carrier.Business.Name,
                     AddressViewModel = new AddressViewModel(sortedCarriersList[i].Carrier.Address),
-                    Tel = sortedCarriersList[i].Carrier.Contact.Telephone,
-                    Fax = sortedCarriersList[i].Carrier.Contact.Fax ?? string.Empty,
+                    Tel = sortedCarriersList[i].Carrier.Contact.Telephone.ToFormattedContact(),
+                    Fax = sortedCarriersList[i].Carrier.Contact.Fax.ToFormattedContact(),
                     Email = sortedCarriersList[i].Carrier.Contact.Email
                 };
 
@@ -149,8 +149,8 @@
             FirstReg = carrier.Business.RegistrationNumber;
             FirstName = carrier.Business.Name;
             firstAddress = new AddressViewModel(carrier.Address);
-            FirstTel = carrier.Contact.Telephone;
-            FirstFax = carrier.Contact.Fax ?? string.Empty;
+            FirstTel = carrier.Contact.Telephone.ToFormattedContact();
+            FirstFax = carrier.Contact.Fax.ToFormattedContact();
             FirstEmail = carrier.Contact.Email;
         }
 
@@ -159,8 +159,8 @@
             SecondReg = carrier.Business.RegistrationNumber;
             SecondName = carrier.Business.Name;
             secondAddress = new AddressViewModel(carrier.Address);
-            SecondTel = carrier.Contact.Telephone;
-            SecondFax = carrier.Contact.Fax ?? string.Empty;
+            SecondTel = carrier.Contact.Telephone.ToFormattedContact();
+            SecondFax = carrier.Contact.Fax.ToFormattedContact();
             SecondEmail = carrier.Contact.Email;
         }
 
@@ -169,8 +169,8 @@
             LastReg = carrier.Business.RegistrationNumber;
             LastName = carrier.Business.Name;
             lastAddress = new AddressViewModel(carrier.Address);
-            LastTel = carrier.Contact.Telephone;
-            LastFax = carrier.Contact.Fax ?? string.Empty;
+            LastTel = carrier.Contact.Telephone.ToFormattedContact();
+            LastFax = carrier.Contact.Fax.ToFormattedContact();
             LastEmail = carrier.Contact.Email;
         }
     }

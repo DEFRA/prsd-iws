@@ -106,13 +106,13 @@
 
         public string Telephone
         {
-            get { return telephone; }
+            get { return telephone.ToFormattedContact(); }
             private set { telephone = value; }
         }
 
         public string Fax
         {
-            get { return fax; }
+            get { return fax.ToFormattedContact(); }
             private set { fax = value; }
         }
 

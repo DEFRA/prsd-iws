@@ -11,8 +11,8 @@
             Name = importer.Business.Name;
             address = new AddressViewModel(importer.Address);
             ContactPerson = importer.Contact.FirstName + " " + importer.Contact.LastName;
-            Telephone = importer.Contact.Telephone;
-            Fax = importer.Contact.Fax ?? string.Empty;
+            Telephone = importer.Contact.Telephone.ToFormattedContact();
+            Fax = importer.Contact.Fax.ToFormattedContact();
             Email = importer.Contact.Email;
             RegistrationNumber = importer.Business.RegistrationNumber;
         }
