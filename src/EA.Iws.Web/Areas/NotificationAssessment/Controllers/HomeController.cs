@@ -3,44 +3,33 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
     using NotificationApplication.ViewModels.NotificationApplication;
+    using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationAssessment;
 
     [Authorize(Roles = "internal")]
     public class HomeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public HomeController(Func<IIwsClient> apiClient)
+        public HomeController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = await client.SendAsync(User.GetAccessToken(), 
-                    new GetNotificationOverviewInternal(id));
-                
-                return View(new NotificationOverviewViewModel(result));
-            }
+            var result = await mediator.SendAsync(new GetNotificationOverviewInternal(id));
+            return View(new NotificationOverviewViewModel(result));
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult AssessmentNavigation(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var response =
-                    client.SendAsync(User.GetAccessToken(), new GetNotificationAssessmentSummaryInformation(id)).GetAwaiter().GetResult();
-
-                return PartialView("_AssessmentNavigation", response);
-            }
+            var response = mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id)).GetAwaiter().GetResult();
+            return PartialView("_AssessmentNavigation", response);
         }
     }
 }

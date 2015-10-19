@@ -6,18 +6,18 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationAssessment.Controllers;
     using Areas.NotificationAssessment.ViewModels;
     using Core.NotificationAssessment;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
     using Web.ViewModels.Shared;
     using Xunit;
 
     public class KeyDatesControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly Guid notificationId = new Guid("65214A82-EE7B-42FF-A4A1-220B2A7E74BB");
         private readonly DateTime notificationReceivedDate = new DateTime(2015, 8, 1);
         private readonly KeyDatesController controller;
@@ -30,10 +30,10 @@
 
         public KeyDatesControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
             A.CallTo(
-                () => client.SendAsync(A<string>._, A<GetDates>.That.Matches(p => p.NotificationId == notificationId)))
+                () => mediator.SendAsync(A<GetDates>.That.Matches(p => p.NotificationId == notificationId)))
                 .Returns(new NotificationDatesData()
                 {
                     NotificationId = notificationId,
@@ -43,7 +43,7 @@
                     DecisionRequiredDate = decisionRequiredDate
                 });
 
-            controller = new KeyDatesController(() => client);
+            controller = new KeyDatesController(mediator);
         }
 
         [Fact]
@@ -62,14 +62,14 @@
         {
             await controller.Index(notificationId, 0);
 
-            A.CallTo(() => client.SendAsync(A<string>._, A<GetDates>.That.Matches(dates => dates.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<GetDates>.That.Matches(dates => dates.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
         public async Task Index_SetsNotificationReceivedDateIfPopulated()
         {
-            var controller = new KeyDatesController(() => client);
+            var controller = new KeyDatesController(mediator);
 
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
@@ -79,7 +79,7 @@
         [Fact]
         public async Task Index_SetsPaymentReceivedDateIfPopulated()
         {
-            var controller = new KeyDatesController(() => client);
+            var controller = new KeyDatesController(mediator);
 
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
@@ -89,7 +89,7 @@
         [Fact]
         public async Task Index_SetsAcknowledgedDateIfPopulated()
         {
-            var controller = new KeyDatesController(() => client);
+            var controller = new KeyDatesController(mediator);
 
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
@@ -99,7 +99,7 @@
         [Fact]
         public async Task Index_SetsDecisionRequiredByDateIfPopulated()
         {
-            var controller = new KeyDatesController(() => client);
+            var controller = new KeyDatesController(mediator);
 
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
@@ -144,14 +144,10 @@
 
             await controller.Index(model);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<SetNotificationReceivedDate>.That.Matches(
-                            p =>
-                                p.NotificationId == model.NotificationId &&
+            A.CallTo(() => mediator.SendAsync(A<SetNotificationReceivedDate>
+                    .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.NotificationReceivedDate == model.NewDate.AsDateTime().Value)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                    .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -189,15 +185,11 @@
             model.Command = KeyDatesStatusEnum.PaymentReceived;
 
             var controller = GetMockAssessmentController(model);
-            
+
             await controller.Index(model);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<SetPaymentReceivedDate>.That.Matches(
-                            p =>
-                                p.NotificationId == model.NotificationId &&
+            A.CallTo(() => mediator.SendAsync(A<SetPaymentReceivedDate>
+                .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.PaymentReceivedDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -257,12 +249,8 @@
 
             await controller.Index(model);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<SetCommencedDate>.That.Matches(
-                            p =>
-                                p.NotificationId == model.NotificationId &&
+            A.CallTo(() => mediator.SendAsync(A<SetCommencedDate>
+                .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.CommencementDate == model.NewDate.AsDateTime().Value &&
                                 p.NameOfOfficer == model.NameOfOfficer)))
                 .MustHaveHappened(Repeated.Exactly.Once);
@@ -306,12 +294,8 @@
 
             await controller.Index(model);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<SetNotificationCompleteDate>.That.Matches(
-                            p =>
-                                p.NotificationId == model.NotificationId &&
+            A.CallTo(() => mediator.SendAsync(A<SetNotificationCompleteDate>
+                .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.NotificationCompleteDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -354,12 +338,8 @@
 
             await controller.Index(model);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<SetNotificationTransmittedDate>.That.Matches(
-                            p =>
-                                p.NotificationId == model.NotificationId &&
+            A.CallTo(() => mediator.SendAsync(A<SetNotificationTransmittedDate>
+                .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.NotificationTransmittedDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -402,12 +382,8 @@
 
             await controller.Index(model);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<SetNotificationDecisionRequiredByDate>.That.Matches(
-                            p =>
-                                p.NotificationId == model.NotificationId &&
+            A.CallTo(() => mediator.SendAsync(A<SetNotificationDecisionRequiredByDate>
+                .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.DecisionRequiredByDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -450,12 +426,8 @@
 
             await controller.Index(model);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>._,
-                        A<SetNotificationAcknowledgedDate>.That.Matches(
-                            p =>
-                                p.NotificationId == model.NotificationId &&
+            A.CallTo(() => mediator.SendAsync(A<SetNotificationAcknowledgedDate>
+                .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.AcknowledgedDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -474,7 +446,7 @@
 
         private KeyDatesController GetMockAssessmentController(object viewModel)
         {
-            var assessmentController = new KeyDatesController(() => client);
+            var assessmentController = new KeyDatesController(mediator);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

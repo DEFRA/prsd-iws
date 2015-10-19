@@ -3,36 +3,32 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
     using ViewModels;
 
     [Authorize(Roles = "internal")]
     public class KeyDatesController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public KeyDatesController(Func<IIwsClient> apiClient)
+        public KeyDatesController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, KeyDatesStatusEnum? command)
         {
-            using (var client = apiClient())
+            var dates = await mediator.SendAsync(new GetDates(id));
+            var model = new DateInputViewModel(dates);
+            if (command != null)
             {
-                var dates = await client.SendAsync(User.GetAccessToken(), new GetDates(id));
-                var model = new DateInputViewModel(dates);
-                if (command != null)
-                {
-                    model.Command = command.GetValueOrDefault();
-                    AddRelevantDateToNewDate(model);
-                }
-
-                return View(model);
+                model.Command = command.GetValueOrDefault();
+                AddRelevantDateToNewDate(model);
             }
+
+            return View(model);
         }
 
         [HttpPost]
@@ -85,10 +81,7 @@
             var setNotificationTransmitted = new SetNotificationTransmittedDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setNotificationTransmitted);
-            }
+            await mediator.SendAsync(setNotificationTransmitted);
         }
 
         private async Task SetNotificationComplete(DateInputViewModel model)
@@ -96,10 +89,7 @@
             var setNotificationComplete = new SetNotificationCompleteDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setNotificationComplete);
-            }
+            await mediator.SendAsync(setNotificationComplete);
         }
 
         private async Task SetPaymentReceived(DateInputViewModel model)
@@ -107,10 +97,7 @@
             var setPaymentReceivedDate = new SetPaymentReceivedDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setPaymentReceivedDate);
-            }
+            await mediator.SendAsync(setPaymentReceivedDate);
         }
 
         private async Task SetNotificationReceived(DateInputViewModel model)
@@ -118,21 +105,15 @@
             var setNotificationReceivedDate = new SetNotificationReceivedDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setNotificationReceivedDate);
-            }
+            await mediator.SendAsync(setNotificationReceivedDate);
         }
 
         private async Task SetAssessmentCommenced(DateInputViewModel model)
         {
-            var setAssessmentCommenced = new SetCommencedDate(model.NotificationId, 
+            var setAssessmentCommenced = new SetCommencedDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault(), model.NameOfOfficer);
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setAssessmentCommenced);
-            }
+            await mediator.SendAsync(setAssessmentCommenced);
         }
 
         private async Task SetAcknowledged(DateInputViewModel model)
@@ -140,10 +121,7 @@
             var setAcknowledged = new SetNotificationAcknowledgedDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setAcknowledged);
-            }
+            await mediator.SendAsync(setAcknowledged);
         }
 
         private async Task SetDecisionRequiredByDate(DateInputViewModel model)
@@ -151,10 +129,7 @@
             var setDecisionRequiredByDate = new SetNotificationDecisionRequiredByDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), setDecisionRequiredByDate);
-            }
+            await mediator.SendAsync(setDecisionRequiredByDate);
         }
 
         private void AddRelevantDateToNewDate(DateInputViewModel model)

@@ -27,7 +27,6 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(id));
-
             return View(decisionMap.Map(data));
         }
 
@@ -61,15 +60,14 @@
         private async Task PostWithdrawn(NotificationAssessmentDecisionViewModel model)
         {
             var request = new WithdrawNotificationApplication(model.NotificationId);
-
             await mediator.SendAsync(request);
         }
 
         private async Task PostConsent(NotificationAssessmentDecisionViewModel model)
         {
             var request = new ConsentNotificationApplication(model.NotificationId,
-                model.ConsentValidFromDate.AsDateTime().Value,
-                model.ConsentValidToDate.AsDateTime().Value,
+                model.ConsentValidFromDate.AsDateTime().GetValueOrDefault(),
+                model.ConsentValidToDate.AsDateTime().GetValueOrDefault(),
                 model.ConsentConditions);
 
             await mediator.SendAsync(request);
@@ -78,7 +76,6 @@
         private async Task PostObjection(NotificationAssessmentDecisionViewModel model)
         {
             var request = new ObjectNotificationApplication(model.NotificationId);
-
             await mediator.SendAsync(request);
         }
     }

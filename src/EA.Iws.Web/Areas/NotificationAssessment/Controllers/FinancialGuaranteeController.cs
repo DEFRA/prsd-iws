@@ -3,27 +3,26 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Admin;
-    using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
     using ViewModels.FinancialGuarantee;
 
     [Authorize(Roles = "internal")]
     public class FinancialGuaranteeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
         private readonly IMap<FinancialGuaranteeData, FinancialGuaranteeDatesViewModel> dateMap;
         private readonly IMap<FinancialGuaranteeData, FinancialGuaranteeDecisionViewModel> decisionMap;
         private readonly IMapWithParameter<FinancialGuaranteeDecisionViewModel, Guid, FinancialGuaranteeDecisionRequest> requestMap;
 
-        public FinancialGuaranteeController(Func<IIwsClient> apiClient,
+        public FinancialGuaranteeController(IMediator mediator,
             IMap<FinancialGuaranteeData, FinancialGuaranteeDatesViewModel> dateMap,
             IMap<FinancialGuaranteeData, FinancialGuaranteeDecisionViewModel> decisionMap,
             IMapWithParameter<FinancialGuaranteeDecisionViewModel, Guid, FinancialGuaranteeDecisionRequest> requestMap)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
             this.dateMap = dateMap;
             this.decisionMap = decisionMap;
             this.requestMap = requestMap;
@@ -32,14 +31,8 @@
         [HttpGet]
         public async Task<ActionResult> Dates(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = await
-                    client.SendAsync(User.GetAccessToken(),
-                        new GetFinancialGuaranteeDataByNotificationApplicationId(id));
-
-                return View(dateMap.Map(result));
-            }
+            var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id));
+            return View(dateMap.Map(result));
         }
 
         [HttpPost]
@@ -51,28 +44,19 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                await
-                    client.SendAsync(User.GetAccessToken(), new SetFinancialGuaranteeDates(id, model.Received.AsDateTime(),
-                        model.Completed.AsDateTime()));
-                
-                return (model.IsRequiredEntryComplete) ? 
-                    RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" }) 
-                    : RedirectToAction("Dates", "FinancialGuarantee", new { id });
-            }
+            await mediator.SendAsync(new SetFinancialGuaranteeDates(id, model.Received.AsDateTime(),
+                    model.Completed.AsDateTime()));
+
+            return (model.IsRequiredEntryComplete) ?
+                RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" })
+                : RedirectToAction("Dates", "FinancialGuarantee", new { id });
         }
 
         [HttpGet]
         public async Task<ActionResult> Decision(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var result = await client.SendAsync(User.GetAccessToken(),
-                    new GetFinancialGuaranteeDataByNotificationApplicationId(id));
-
-                return View(decisionMap.Map(result));
-            }
+            var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id));
+            return View(decisionMap.Map(result));
         }
 
         [HttpPost]
@@ -96,12 +80,9 @@
                 return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
             }
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), requestMap.Map(model, id));
+            await mediator.SendAsync(requestMap.Map(model, id));
 
-                return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
-            }
+            return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
         }
     }
 }

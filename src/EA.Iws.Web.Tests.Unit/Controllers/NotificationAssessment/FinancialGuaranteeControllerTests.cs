@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationAssessment.Controllers;
     using Areas.NotificationAssessment.ViewModels.FinancialGuarantee;
     using Core.Admin;
     using Core.FinancialGuarantee;
     using FakeItEasy;
     using Mappings;
+    using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
     using TestHelpers;
     using Web.ViewModels.Shared;
@@ -51,39 +51,31 @@
         };
 
         private readonly FinancialGuaranteeController controller;
-        private readonly IIwsClient client;
+        private readonly IMediator client;
         private readonly FinancialGuaranteeDatesViewModel model;
 
         public FinancialGuaranteeControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            client = A.Fake<IMediator>();
 
-            controller = new FinancialGuaranteeController(() => client, 
-                new FinancialGuaranteeDataToDatesMap(), 
+            controller = new FinancialGuaranteeController(client,
+                new FinancialGuaranteeDataToDatesMap(),
                 new FinancialGuaranteeDataToDecisionMap(),
                 new FinancialGuaranteeDecisionViewModelMap());
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored,
+            A.CallTo(() => client.SendAsync(
                         A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == ReceivedId)))
                 .Returns(ReceivedFinancialGuaranteeData);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored,
+            A.CallTo(() => client.SendAsync(
                         A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == CompletedId)))
                 .Returns(CompletedFinancialGuaranteeData);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored,
+            A.CallTo(() => client.SendAsync(
                         A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == ApprovedId)))
                 .Returns(ApprovedFinancialGuaranteeData);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored,
+            A.CallTo(() => client.SendAsync(
                         A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == AnyGuid)))
                 .Returns(new FinancialGuaranteeData
                 {
@@ -97,7 +89,7 @@
                 Status = "Tony"
             };
 
-            A.CallTo(() => client.SendAsync(A<string>.Ignored, A<SetFinancialGuaranteeDates>.Ignored)).Returns(true);
+            A.CallTo(() => client.SendAsync(A<SetFinancialGuaranteeDates>.Ignored)).Returns(true);
         }
 
         [Fact]
@@ -113,9 +105,7 @@
         {
             var result = await controller.Dates(AnyGuid) as ViewResult;
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored,
+            A.CallTo(() => client.SendAsync(
                         A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
@@ -144,9 +134,7 @@
         {
             var result = await controller.Decision(ReceivedId);
 
-            A.CallTo(
-                () =>
-                    client.SendAsync(A<string>.Ignored, A<GetFinancialGuaranteeDataByNotificationApplicationId>.Ignored))
+            A.CallTo(() => client.SendAsync(A<GetFinancialGuaranteeDataByNotificationApplicationId>.Ignored))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -154,7 +142,7 @@
         public async Task GetDecision_ReturnsCorrectModel()
         {
             var result = await controller.Decision(CompletedId) as ViewResult;
-            
+
             Assert.IsType<FinancialGuaranteeDecisionViewModel>(result.Model);
         }
 
@@ -164,7 +152,7 @@
             var result = await controller.Decision(ReceivedId) as ViewResult;
 
             var model = result.Model as FinancialGuaranteeDecisionViewModel;
-            
+
             Assert.NotNull(model);
             Assert.False(model.IsApplicationCompleted);
         }
@@ -202,8 +190,8 @@
         {
             public bool Equals(OptionalDateInputViewModel x, OptionalDateInputViewModel y)
             {
-                return x.Day == y.Day 
-                    && x.Month == y.Month 
+                return x.Day == y.Day
+                    && x.Month == y.Month
                     && x.Year == y.Year;
             }
 
