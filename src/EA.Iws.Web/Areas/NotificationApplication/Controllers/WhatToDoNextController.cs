@@ -3,31 +3,28 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Notification;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Notification;
 
     [Authorize]
     [NotificationReadOnlyFilter]
     public class WhatToDoNextController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public WhatToDoNextController(Func<IIwsClient> apiClient)
+        public WhatToDoNextController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetWhatToDoNextDataForNotification(id));
+            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
 
-                return View(response);
-            }
+            return View(response);
         }
 
         [HttpPost]

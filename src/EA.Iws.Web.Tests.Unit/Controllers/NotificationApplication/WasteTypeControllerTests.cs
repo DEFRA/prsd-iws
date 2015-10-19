@@ -4,26 +4,26 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.WasteType;
     using Core.WasteType;
     using FakeItEasy;
     using Mappings;
+    using Prsd.Core.Mediator;
     using Requests.WasteType;
     using Web.ViewModels.Shared;
     using Xunit;
 
     public class WasteTypeControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly WasteTypeController wasteTypeController;
         private readonly Guid notificationId = new Guid("D711F96B-3AF8-46BC-91B9-B906F764FF22");
 
         public WasteTypeControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            wasteTypeController = new WasteTypeController(() => client, new ChemicalCompositionAdditionalInformationMap());
+            mediator = A.Fake<IMediator>();
+            wasteTypeController = new WasteTypeController(mediator, new ChemicalCompositionAdditionalInformationMap());
         }
 
         [Theory]
