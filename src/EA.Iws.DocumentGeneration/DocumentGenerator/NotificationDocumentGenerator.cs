@@ -23,20 +23,22 @@
         public async Task<byte[]> GenerateNotificationDocument(Guid notificationId)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("NotificationMergeTemplate.docx"))
-            using (var document = WordprocessingDocument.Open(memoryStream, true))
             {
-                var mergeFields = MergeFieldLocator.GetMergeRuns(document);
+                using (var document = WordprocessingDocument.Open(memoryStream, true))
+                {
+                    var mergeFields = MergeFieldLocator.GetMergeRuns(document);
 
-                var blocks = await blocksFactory.GetBlocks(notificationId, mergeFields);
+                    var blocks = await blocksFactory.GetBlocks(notificationId, mergeFields);
 
-                var notificationDocument = new NotificationDocumentMerger(mergeFields, blocks);
+                    var notificationDocument = new NotificationDocumentMerger(mergeFields, blocks);
 
-                var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
-                ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, shipmentInfo);
+                    var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
+                    ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, shipmentInfo);
 
-                notificationDocument.Merge();
+                    notificationDocument.Merge();
 
-                MergeFieldLocator.RemoveDataSourceSettingFromMergedDocument(document);
+                    MergeFieldLocator.RemoveDataSourceSettingFromMergedDocument(document);
+                }
 
                 return memoryStream.ToArray();
             }
