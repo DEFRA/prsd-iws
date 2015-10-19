@@ -28,34 +28,7 @@
 
             return View(model);
         }
-
-        [HttpGet]
-        public async Task<ActionResult> Operation(Guid id)
-        {
-            var result =
-                await
-                    mediator.SendAsync(new GetActiveMovementsWithReceiptCertificateByNotificationId(id));
-
-            return View(new MovementOperationViewModel(id, result));
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Operation(Guid id, MovementOperationViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            return RedirectToAction("Date", "Complete",
-                new
-                {
-                    id = model.RadioButtons.SelectedValue,
-                    area = "Movement"
-                });
-        }
-
+        
         [HttpGet]
         public async Task<ActionResult> Receipt(Guid id)
         {

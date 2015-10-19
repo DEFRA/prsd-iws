@@ -90,7 +90,6 @@
     <Compile Include="MovementReceipt\CreateMovementReceiptForMovement.cs" />
     <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementId.cs" />
     <Compile Include="MovementReceipt\MovementReceiptDateData.cs" />
-    <Compile Include="Movement\GetActiveMovementsWithReceiptCertificateByNotificationId.cs" />
     <Compile Include="Movement\GetMeansOfTransportByMovementId.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementId.cs" />
     <Compile Include="Movement\GetMovementNumberByMovementId.cs" />
@@ -122,6 +121,7 @@
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
     <Compile Include="NotificationAssessment\ObjectNotificationApplication.cs" />
     <Compile Include="NotificationAssessment\WithdrawNotificationApplication.cs" />
+    <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />

@@ -5,8 +5,6 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
-    using Core.MovementOperation;
-    using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -29,14 +27,6 @@
                 () =>
                     mediator.SendAsync(A<GetActiveMovementsWithoutReceiptCertificateByNotificationId>.Ignored))
                 .Returns(new List<MovementData>());
-            A.CallTo(
-                () =>
-                    mediator.SendAsync(A<GetActiveMovementsWithReceiptCertificateByNotificationId>.Ignored))
-                .Returns(new MovementOperationData
-                {
-                    MovementDatas = new List<MovementData>(),
-                    NotificationType = NotificationType.Recovery
-                });
         }
 
         [Fact]
@@ -137,36 +127,6 @@
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("DateReceived", result.RouteValues["controller"]);
-            Assert.Equal("Movement", result.RouteValues["area"]);
-            Assert.Equal(movementId, result.RouteValues["id"]);
-        }
-
-        [Fact]
-        public async Task Get_Operation_ReturnsCorrectViewModel()
-        {
-            var result = await controller.Operation(AnyGuid) as ViewResult;
-
-            Assert.IsType<MovementOperationViewModel>(result.Model);
-            Assert.Equal(AnyGuid, (result.Model as MovementOperationViewModel).NotificationId);
-        }
-
-        [Fact]
-        public void Post_Operation_RedirectsToAction()
-        {
-            var movementId = new Guid("E3CB71D2-7D9A-4C1D-A30B-0EAACFCE8545");
-
-            var result = controller.Operation(AnyGuid, new MovementOperationViewModel
-            {
-                NotificationId = AnyGuid,
-                RadioButtons = new StringGuidRadioButtons
-                {
-                    SelectedValue = movementId
-                }
-            }) as RedirectToRouteResult;
-
-            Assert.NotNull(result);
-            Assert.Equal("Date", result.RouteValues["action"]);
-            Assert.Equal("Complete", result.RouteValues["controller"]);
             Assert.Equal("Movement", result.RouteValues["area"]);
             Assert.Equal(movementId, result.RouteValues["id"]);
         }

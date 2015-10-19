@@ -634,6 +634,7 @@
     <Content Include="Areas\Movement\Views\ReceiptComplete\Success.cshtml" />
     <Content Include="Areas\Movement\Views\Complete\Success.cshtml" />
     <None Include="Areas\Admin\Views\ImportNotification\NotificationType.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Complete\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -739,7 +740,6 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordEmailSent.cshtml" />
     <Content Include="Views\Shared\_IwsHelpline.cshtml" />
-    <Content Include="Views\NotificationMovement\Operation.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\PasswordUpdated.cshtml" />
     <Content Include="Views\NewUser\Cookies.cshtml" />
@@ -789,6 +789,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
@@ -807,6 +808,7 @@
     <Compile Include="Areas\NotificationAssessment\ViewModels\DecisionRecordViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\NotificationAssessmentDecisionViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\NotificationMovementsAreaRegistration.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Complete\CompleteMovementViewModel.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalCostViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
@@ -822,7 +824,6 @@
     <Compile Include="Mappings\ChemicalCompositionAdditionalInformationMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Movement\MovementOperationViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryTableViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />

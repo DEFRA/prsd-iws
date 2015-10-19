@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Core.Shared
-@model EA.Iws.Web.ViewModels.Movement.MovementOperationViewModel
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Complete.CompleteMovementViewModel
 @{
     ViewBag.Title = "Certificate of Recovery / Disposal";
 }
@@ -29,15 +29,14 @@
             @Html.EditorFor(m => m.RadioButtons)
         </div>
 
-    <div class="form-group-compound">
-        <button class="button" type="submit">Continue</button>
-    </div>
+        <div class="form-group-compound">
+            <button class="button" type="submit">Continue</button>
+        </div>
 
-    @Html.ActionLink("Go to notification options",
+        @Html.ActionLink("Go to notification options",
             "ApprovedNotification",
             "Applicant",
             new { area = string.Empty, id = Model.NotificationId },
             null)
     }
 }
-

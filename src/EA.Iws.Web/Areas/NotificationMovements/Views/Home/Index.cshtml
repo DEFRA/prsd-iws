@@ -65,7 +65,7 @@
                 </a>
 
                 <a title="Cancel a pre-notification" href="/">
-                    @Html.ActionLink("Cancel a pre-notification", "Index", "CancelMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                    @Html.ActionLink("Cancel a pre-notification", "Index", "CancelMovement")
                 </a>
 
                 <a title="Record a certificate of receipt" href="/">
@@ -74,7 +74,7 @@
 
                 @{ var linkText = "Record a certificate of " + (Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery"); }
                 <a title="Record certificate of recovery" href="/">
-                    @Html.ActionLink(linkText, "Operation", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
+                    @Html.ActionLink(linkText, "Index", "Complete")
                 </a>
 
                 <a title="Record a rejected shipment" href="/">Record a rejected shipment</a>
@@ -85,105 +85,105 @@
 
 
 
-<section class="ship-data">
-    <h3 class="heading-small">
-        Information, date and status
-    </h3>
-    <p>
-        Configure your results
-    </p>
-    <div class="grid-row form-group">
-        <div class="column-half">
-            <select name="select" class="form-control view-by">
-                <option value="value1" selected>View all</option>
-                <option value="value2">Pre-notified</option>
-                <option value="value3">Recovered</option>
-                <option value="value4">Rejected</option>
-                <option value="value5">Canceled</option>
-                <option value="value6">Complete</option>
-                <option value="value7">Shipment due</option>
-            </select>
-            <select name="select" class="form-control">
-                <option value="value1" selected>50 per page</option>
-                <option value="value2">100 per page</option>
-                <option value="value3">250 per page</option>
-                <option value="value4">500 per page</option>
-            </select>
+    <section class="ship-data">
+        <h3 class="heading-small">
+            Information, date and status
+        </h3>
+        <p>
+            Configure your results
+        </p>
+        <div class="grid-row form-group">
+            <div class="column-half">
+                <select name="select" class="form-control view-by">
+                    <option value="value1" selected>View all</option>
+                    <option value="value2">Pre-notified</option>
+                    <option value="value3">Recovered</option>
+                    <option value="value4">Rejected</option>
+                    <option value="value5">Canceled</option>
+                    <option value="value6">Complete</option>
+                    <option value="value7">Shipment due</option>
+                </select>
+                <select name="select" class="form-control">
+                    <option value="value1" selected>50 per page</option>
+                    <option value="value2">100 per page</option>
+                    <option value="value3">250 per page</option>
+                    <option value="value4">500 per page</option>
+                </select>
+            </div>
+
         </div>
 
-    </div>
+        @{
+            var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed Of" : "Recovered";
+            var nullMarker = "- -";
+        }
 
-    @{
-        var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed Of" : "Recovered";
-        var nullMarker = "- -";
-    }
-
-    <div class="form-group">
-        <table class="odd-table">
-            <caption class="visuallyhidden">Shipment summary</caption>
-            <thead>
-            <tr>
-                <th>No.</th>
-                <th>Status</th>
-                <th>Pre-notification</th>
-                <th>Shipment date</th>
-                <th>Received</th>
-                <th>Quantity</th>
-                <th>@operationTitle</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            @{
-                for (int i = 0; i < Model.TableData.Count; i++)
-                {
+        <div class="form-group">
+            <table class="odd-table">
+                <caption class="visuallyhidden">Shipment summary</caption>
+                <thead>
                     <tr>
-                        <td>@Model.TableData[i].Number</td>
-                        <td>@Model.TableData[i].Status</td>
-                        <td>@Model.TableData[i].PreNotification</td>
-                        <td>
-                            @if (Model.TableData[i].ShipmentDate.HasValue)
-                            {
-                                @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
-                            }
-                            else
-                            {
-                                @nullMarker
-                            }
-                        </td>
-                        <td>
-                            @if (Model.TableData[i].Received.HasValue)
-                            {
-                                @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
-                            }
-                            else
-                            {
-                                @nullMarker
-                            }
-                        </td>
-                        <td>@Model.TableData[i].Quantity</td>
-                        <td>
-                            @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue)
-                            {
-                                @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
-                            }
-                            else
-                            {
-                                @nullMarker
-                            }
-                        </td>
+                        <th>No.</th>
+                        <th>Status</th>
+                        <th>Pre-notification</th>
+                        <th>Shipment date</th>
+                        <th>Received</th>
+                        <th>Quantity</th>
+                        <th>@operationTitle</th>
                     </tr>
-                }
-            }
-            </tbody>
-        </table>
-    </div>
-</section>
-<div class="form-group">
-    @Html.ActionLink("Go to notification options",
+                </thead>
+
+                <tbody>
+                    @{
+                        for (int i = 0; i < Model.TableData.Count; i++)
+                        {
+                            <tr>
+                                <td>@Model.TableData[i].Number</td>
+                                <td>@Model.TableData[i].Status</td>
+                                <td>@Model.TableData[i].PreNotification</td>
+                                <td>
+                                    @if (Model.TableData[i].ShipmentDate.HasValue)
+                                    {
+                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
+                                    }
+                                    else
+                                    {
+                                        @nullMarker
+                                    }
+                                </td>
+                                <td>
+                                    @if (Model.TableData[i].Received.HasValue)
+                                    {
+                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
+                                    }
+                                    else
+                                    {
+                                        @nullMarker
+                                    }
+                                </td>
+                                <td>@Model.TableData[i].Quantity</td>
+                                <td>
+                                    @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue)
+                                    {
+                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
+                                    }
+                                    else
+                                    {
+                                        @nullMarker
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div class="form-group">
+        @Html.ActionLink("Go to notification options",
             "ApprovedNotification",
             "Applicant",
             new { area = string.Empty, id = Model.NotificationId },
-            new {@class = "button"})
-</div>
+            new { @class = "button" })
+    </div>
 </div>
