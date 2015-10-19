@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.WasteCodes;
     using ViewModels.BaselOecdCode;
 
@@ -16,56 +16,48 @@
     [NotificationReadOnlyFilter]
     public class BaselOecdCodeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
         private readonly IMap<WasteCodeDataAndNotificationData, BaselOecdCodeViewModel> codeMapper;
         private static readonly IList<CodeType> RequiredCodeTypes = new[] { CodeType.Basel, CodeType.Oecd };
 
-        public BaselOecdCodeController(Func<IIwsClient> apiClient,
+        public BaselOecdCodeController(IMediator mediator,
             IMap<WasteCodeDataAndNotificationData, BaselOecdCodeViewModel> codeMapper)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
             this.codeMapper = codeMapper;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool backToOverview = false)
         {
-            using (var client = apiClient())
-            {
-                var result =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
+            var result =
+                await
+                    mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
 
-                return View(codeMapper.Map(result));
-            }
+            return View(codeMapper.Map(result));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, BaselOecdCodeViewModel model, bool backToOverview = false)
         {
-            using (var client = apiClient())
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                var codeType = (model.SelectedCode.HasValue)
-                    ? model.WasteCodes.Single(wc => wc.Id == model.SelectedCode.Value).CodeType
-                    : CodeType.Basel;
-
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetBaselOecdCodeForNotification(id,
-                            codeType,
-                            model.NotListed,
-                            model.SelectedCode));
-
-                return (backToOverview) ? RedirectToAction("Index", "Home", new { id }) 
-                    : RedirectToAction("Index", "EwcCode", new { id });
+                return View(model);
             }
+
+            var codeType = (model.SelectedCode.HasValue)
+                ? model.WasteCodes.Single(wc => wc.Id == model.SelectedCode.Value).CodeType
+                : CodeType.Basel;
+
+            await
+                mediator.SendAsync(new SetBaselOecdCodeForNotification(id,
+                        codeType,
+                        model.NotListed,
+                        model.SelectedCode));
+
+            return (backToOverview) ? RedirectToAction("Index", "Home", new { id })
+                : RedirectToAction("Index", "EwcCode", new { id });
         }
     }
 }

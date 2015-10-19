@@ -8,6 +8,7 @@
     using Api.Client;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Requests.Shared;
     using Requests.TransitState;
@@ -19,16 +20,15 @@
     [NotificationReadOnlyFilter]
     public class TransitStateController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
         private readonly IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper;
 
         private const string SelectCountry = "country";
-        private const string Submit = "submit";
         private const string ChangeCountry = "changeCountry";
 
-        public TransitStateController(Func<IIwsClient> apiClient, IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper)
+        public TransitStateController(IMediator mediator, IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
             this.transitStateMapper = transitStateMapper;
         }
 
@@ -36,53 +36,47 @@
         public async Task<ActionResult> Index(Guid id, Guid? entityId, bool? backToOverview)
         {
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
-            using (var client = apiClient())
-            {
-                TransitStateWithTransportRouteData result =
+
+            TransitStateWithTransportRouteData result =
                     await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetTransitStateWithTransportRouteDataByNotificationId(id, entityId));
+                        mediator.SendAsync(new GetTransitStateWithTransportRouteDataByNotificationId(id, entityId));
 
-                var model = transitStateMapper.Map(result);
+            var model = transitStateMapper.Map(result);
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, Guid? entityId, TransitStateViewModel model, string submit, bool? backToOverview)
         {
-            using (var client = apiClient())
+            model.Countries = await GetCountrySelectListForModel(model);
+            await GetCompetentAuthoritiesAndCountriesForModel(model);
+
+            if (!ModelState.IsValid && submit != ChangeCountry)
             {
-                model.Countries = await GetCountrySelectListForModel(client, model);
-                await GetCompetentAuthoritiesAndCountriesForModel(client, model);
+                return View(model);
+            }
 
-                if (!ModelState.IsValid && submit != ChangeCountry)
-                {
-                    return View(model);
-                }
-
-                switch (submit)
-                {
-                    case SelectCountry:
-                        return SelectCountryAction(id, model, client);
-                    case ChangeCountry:
-                        return ChangeCountryAction(id, model, client);
-                    default:
-                        return await SubmitAction(id, entityId, model, client, backToOverview);
-                }
+            switch (submit)
+            {
+                case SelectCountry:
+                    return SelectCountryAction(model);
+                case ChangeCountry:
+                    return ChangeCountryAction(model);
+                default:
+                    return await SubmitAction(id, entityId, model, backToOverview);
             }
         }
 
-        private ActionResult SelectCountryAction(Guid id, TransitStateViewModel model, IIwsClient client)
+        private ActionResult SelectCountryAction(TransitStateViewModel model)
         {
             model.ShowNextSection = true;
 
             return View("Index", model);
         }
 
-        private ActionResult ChangeCountryAction(Guid id, TransitStateViewModel model, IIwsClient client)
+        private ActionResult ChangeCountryAction(TransitStateViewModel model)
         {
             ModelState.Clear();
             model.ShowNextSection = false;
@@ -90,7 +84,7 @@
             return View("Index", model);
         }
 
-        private async Task<ActionResult> SubmitAction(Guid id, Guid? transitStateId, TransitStateViewModel model, IIwsClient client, bool? backToOverview)
+        private async Task<ActionResult> SubmitAction(Guid id, Guid? transitStateId, TransitStateViewModel model, bool? backToOverview)
         {
             try
             {
@@ -102,7 +96,7 @@
                     transitStateId,
                     model.OrdinalPosition);
 
-                await client.SendAsync(User.GetAccessToken(), request);
+                await mediator.SendAsync(request);
 
                 return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
             }
@@ -117,15 +111,12 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(Guid id, Guid delete, bool? backToOverview = null)
         {
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new RemoveTransitStateForNotification(id, delete));
+            await mediator.SendAsync(new RemoveTransitStateForNotification(id, delete));
 
-                return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
-            }
+            return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
         }
 
-        private async Task GetCompetentAuthoritiesAndCountriesForModel(IIwsClient client, TransitStateViewModel model)
+        private async Task GetCompetentAuthoritiesAndCountriesForModel(TransitStateViewModel model)
         {
             if (!model.CountryId.HasValue)
             {
@@ -134,7 +125,7 @@
 
             var entryPointsAndCompetentAuthorities =
                 await
-                    client.SendAsync(User.GetAccessToken(), new GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+                    mediator.SendAsync(new GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
 
             var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
                 new KeyValuePair<string, Guid>(ca.Code + " - " + ca.Name, ca.Id));
@@ -149,9 +140,9 @@
             model.EntryOrExitPoints = new SelectList(entryPointsAndCompetentAuthorities.EntryOrExitPoints, "Id", "Name");
         }
 
-        private async Task<SelectList> GetCountrySelectListForModel(IIwsClient client, TransitStateViewModel model)
+        private async Task<SelectList> GetCountrySelectListForModel(TransitStateViewModel model)
         {
-            var countries = await client.SendAsync(new GetCountries());
+            var countries = await mediator.SendAsync(new GetCountries());
 
             return (model.CountryId.HasValue)
                 ? new SelectList(countries, "Id", "Name", model.CountryId.Value)

@@ -1,26 +1,20 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.Controllers;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Xunit;
 
     public class TransportRouteControllerTests
     {
-        private readonly IIwsClient client;
         private readonly Guid notificationId = new Guid();
         private readonly TransportRouteController transportRouteController;
 
         public TransportRouteControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            transportRouteController = new TransportRouteController(() => client);
+            transportRouteController = new TransportRouteController(A.Fake<IMediator>());
         }
 
         [Fact]

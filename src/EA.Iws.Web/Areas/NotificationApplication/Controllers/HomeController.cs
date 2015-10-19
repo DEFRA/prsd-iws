@@ -3,10 +3,9 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.Notification;
-    using Infrastructure;
     using Prsd.Core;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
@@ -16,52 +15,46 @@
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public HomeController(Func<IIwsClient> apiClient)
+        public HomeController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> GenerateNotificationDocument(Guid id)
         {
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    var response =
-                        await client.SendAsync(User.GetAccessToken(), new GenerateNotificationDocument(id));
+                var response =
+                    await mediator.SendAsync(new GenerateNotificationDocument(id));
 
-                    var downloadName = "IwsNotification" + SystemTime.UtcNow + ".docx";
+                var downloadName = "IwsNotification" + SystemTime.UtcNow + ".docx";
 
-                    return File(response, Constants.MicrosoftWordContentType, downloadName);
-                }
-                catch (ApiBadRequestException ex)
+                return File(response, Constants.MicrosoftWordContentType, downloadName);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                    return HttpNotFound();
+                    throw;
                 }
+                return HttpNotFound();
             }
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetNotificationOverview(id));
+            var response = await mediator.SendAsync(new GetNotificationOverview(id));
 
-                var model = new NotificationOverviewViewModel(response);
+            var model = new NotificationOverviewViewModel(response);
 
-                ViewBag.Charge = response.NotificationCharge;
+            ViewBag.Charge = response.NotificationCharge;
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
@@ -72,13 +65,10 @@
                 return PartialView(new NotificationApplicationCompletionProgress());
             }
 
-            using (var client = apiClient())
-            {
-                var response =
-                    client.SendAsync(User.GetAccessToken(), new GetNotificationProgressInfo(id)).GetAwaiter().GetResult();
+            var response =
+                mediator.SendAsync(new GetNotificationProgressInfo(id)).GetAwaiter().GetResult();
 
-                return PartialView(response);
-            }
+            return PartialView(response);
         }
     }
 }

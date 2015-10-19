@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.IntendedShipments;
@@ -14,26 +14,22 @@
     [NotificationReadOnlyFilter]
     public class ShipmentController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public ShipmentController(Func<IIwsClient> apiClient)
+        public ShipmentController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
-            {
-                var shipmentData =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetIntendedShipmentInfoForNotification(id));
-                
-                var model = new ShipmentInfoViewModel(shipmentData);
-                return View(model);
-            }
+            var shipmentData =
+                await
+                    mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
+
+            var model = new ShipmentInfoViewModel(shipmentData);
+            return View(model);
         }
 
         [HttpPost]
@@ -45,34 +41,28 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    await client.SendAsync(User.GetAccessToken(),
-                        model.ToRequest());
+                await mediator.SendAsync(model.ToRequest());
 
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("ChemicalComposition", "WasteType", new { id = model.NotificationId }); 
-                    }
-                }
-                catch (ApiBadRequestException ex)
+                if (backToOverview.GetValueOrDefault())
                 {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
 
-                return View(model);
+                return RedirectToAction("ChemicalComposition", "WasteType", new { id = model.NotificationId });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
     }
 }

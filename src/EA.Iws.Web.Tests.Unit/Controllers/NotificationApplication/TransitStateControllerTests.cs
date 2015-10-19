@@ -1,25 +1,24 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.TransitState;
+    using Core.Shared;
+    using Core.TransportRoute;
+    using FakeItEasy;
+    using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
+    using Requests.TransitState;
+    using Requests.TransportRoute;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.Shared;
-    using Core.TransportRoute;
-    using EA.Iws.Api.Client;
-    using EA.Iws.Requests.TransitState;
-    using EA.Iws.Requests.TransportRoute;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.TransitState;
-    using EA.Iws.Web.ViewModels.Shared;
-    using EA.Prsd.Core.Mapper;
-    using FakeItEasy;
     using Xunit;
 
     public class TransitStateControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly TransitStateController transitStateController;
         private const string UnitedKingdom = "United Kingdom";
         private const string anyString = "test";
@@ -32,7 +31,7 @@
 
         public TransitStateControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
             var competentAuthorties = new[] 
                 {
                     new CompetentAuthorityData { Id = environmentAgency.Id, Name = anyString }
@@ -42,14 +41,13 @@
                     new EntryOrExitPointData { Id = hull.Id, CountryId = hull.CountryId, Name = anyString }
                 };
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored,
-                    A<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == hull.CountryId)))
+                () => mediator.SendAsync(A<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == hull.CountryId)))
                 .Returns(new CompententAuthorityAndEntryOrExitPointData()
                 {
                     CompetentAuthorities = competentAuthorties,
                     EntryOrExitPoints = entryOrExitPoints
                 });
-            transitStateController = new TransitStateController(() => client, new TestMap());
+            transitStateController = new TransitStateController(mediator, new TestMap());
         }
 
         [Theory]

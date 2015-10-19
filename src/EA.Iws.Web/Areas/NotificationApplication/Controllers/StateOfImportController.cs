@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.Shared;
     using Requests.StateOfImport;
     using Requests.TransportRoute;
@@ -18,66 +18,59 @@
     [NotificationReadOnlyFilter]
     public class StateOfImportController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
         private readonly IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper;
 
         private const string SelectCountry = "country";
-        private const string Submit = "submit";
         private const string ChangeCountry = "changeCountry";
 
-        public StateOfImportController(Func<IIwsClient> apiClient, IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper)
+        public StateOfImportController(IMediator mediator, IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
             this.mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
-            {
-                var stateOfImportSetData = await client.SendAsync(User.GetAccessToken(), new GetStateOfImportWithTransportRouteDataByNotificationId(id));
+            var stateOfImportSetData = await mediator.SendAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(id));
 
-                var model = mapper.Map(stateOfImportSetData);
+            var model = mapper.Map(stateOfImportSetData);
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, StateOfImportViewModel model, string submit, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            model.Countries = await GetCountrySelectListForModel(model);
+            await GetCompetentAuthoritiesAndEntryPoints(model);
+
+            if (!ModelState.IsValid && submit != ChangeCountry)
             {
-                model.Countries = await GetCountrySelectListForModel(client, model);
-                await GetCompetentAuthoritiesAndEntryPoints(client, model);
+                return View(model);
+            }
 
-                if (!ModelState.IsValid && submit != ChangeCountry)
-                {
-                    return View(model);
-                }
-
-                switch (submit)
-                {
-                    case SelectCountry:
-                        return SelectCountryAction(id, model, client);
-                    case ChangeCountry:
-                        return ChangeCountryAction(id, model, client);
-                    default:
-                        return await SubmitAction(id, model, client, backToOverview);
-                }
+            switch (submit)
+            {
+                case SelectCountry:
+                    return SelectCountryAction(model);
+                case ChangeCountry:
+                    return ChangeCountryAction(model);
+                default:
+                    return await SubmitAction(id, model, backToOverview);
             }
         }
 
-        private ActionResult SelectCountryAction(Guid id, StateOfImportViewModel model, IIwsClient client)
+        private ActionResult SelectCountryAction(StateOfImportViewModel model)
         {
             model.ShowNextSection = true;
 
             return View("Index", model);
         }
 
-        private ActionResult ChangeCountryAction(Guid id, StateOfImportViewModel model, IIwsClient client)
+        private ActionResult ChangeCountryAction(StateOfImportViewModel model)
         {
             ModelState.Clear();
             model.ShowNextSection = false;
@@ -85,34 +78,33 @@
             return View("Index", model);
         }
 
-        private async Task<ActionResult> SubmitAction(Guid id, StateOfImportViewModel model, IIwsClient client, bool? backToOverview)
+        private async Task<ActionResult> SubmitAction(Guid id, StateOfImportViewModel model, bool? backToOverview)
         {
-                await client.SendAsync(User.GetAccessToken(),
-                    new SetStateOfImportForNotification(id,
-                        model.CountryId.Value,
-                        model.EntryOrExitPointId.Value,
-                        model.CompetentAuthorities.SelectedValue));
+            await mediator.SendAsync(new SetStateOfImportForNotification(id,
+                    model.CountryId.Value,
+                    model.EntryOrExitPointId.Value,
+                    model.CompetentAuthorities.SelectedValue));
 
-                if (backToOverview.GetValueOrDefault())
-                {
-                    return RedirectToAction("Index", "Home", new { id });
-                }
-                else
-                {
-                    return RedirectToAction("Summary", "TransportRoute", new { id }); 
-                }
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id });
+            }
+            else
+            {
+                return RedirectToAction("Summary", "TransportRoute", new { id });
+            }
         }
 
-        private async Task<SelectList> GetCountrySelectListForModel(IIwsClient client, StateOfImportViewModel model)
+        private async Task<SelectList> GetCountrySelectListForModel(StateOfImportViewModel model)
         {
-            var countries = await client.SendAsync(new GetCountries());
+            var countries = await mediator.SendAsync(new GetCountries());
 
             return (model.CountryId.HasValue)
                 ? new SelectList(countries, "Id", "Name", model.CountryId.Value)
                 : new SelectList(countries, "Id", "Name");
         }
 
-        private async Task GetCompetentAuthoritiesAndEntryPoints(IIwsClient client, StateOfImportViewModel model)
+        private async Task GetCompetentAuthoritiesAndEntryPoints(StateOfImportViewModel model)
         {
             if (!model.CountryId.HasValue)
             {
@@ -121,7 +113,7 @@
 
             var entryPointsAndCompetentAuthorities =
                 await
-                    client.SendAsync(User.GetAccessToken(), new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+                    mediator.SendAsync(new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
 
             var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
                 new KeyValuePair<string, Guid>(ca.Code + " -" + ca.Name, ca.Id));

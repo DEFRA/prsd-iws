@@ -1,24 +1,24 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.StateOfImport;
     using Core.Shared;
     using Core.StateOfImport;
     using Core.TransportRoute;
-    using EA.Iws.Requests.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.StateOfImport;
+    using Requests.TransportRoute;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Xunit;
 
     public class StateOfImportControllerTests
     {
         private readonly StateOfImportController controller;
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private static readonly Guid NullStateOfImportGuid = new Guid("6DF6FDA2-BA9F-477D-94D9-F1E03F4D2E61");
         private static readonly Guid ExistingStateOfImportGuid = new Guid("3B541912-2D24-4C7F-B6E5-20831363CE44");
         private static readonly Guid AnyCompetentAuthorityId = new Guid("92D4DF75-A6D1-413F-9C6C-B69DA69F006A");
@@ -28,7 +28,7 @@
 
         public StateOfImportControllerTests()
         {
-            client = A.Fake<IIwsClient>();
+            mediator = A.Fake<IMediator>();
 
             var countries = new[]
             {
@@ -46,13 +46,13 @@
             };
 
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetStateOfImportWithTransportRouteDataByNotificationId>.That.Matches(s => s.Id == NullStateOfImportGuid)))
+                () => mediator.SendAsync(A<GetStateOfImportWithTransportRouteDataByNotificationId>.That.Matches(s => s.Id == NullStateOfImportGuid)))
                 .Returns(new StateOfImportWithTransportRouteData
                 {
                     Countries = countries
                 });
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetStateOfImportWithTransportRouteDataByNotificationId>.That.Matches(s => s.Id == ExistingStateOfImportGuid)))
+                () => mediator.SendAsync(A<GetStateOfImportWithTransportRouteDataByNotificationId>.That.Matches(s => s.Id == ExistingStateOfImportGuid)))
                 .Returns(new StateOfImportWithTransportRouteData
                 {
                     Countries = countries,
@@ -77,14 +77,14 @@
                 }
                 });
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == AnyCountryId)))
+                () => mediator.SendAsync(A<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == AnyCountryId)))
                 .Returns(new CompententAuthorityAndEntryOrExitPointData()
                 {
                     CompetentAuthorities = competentAuthorties,
                     EntryOrExitPoints = entryOrExitPoints
                 });
 
-            this.controller = new StateOfImportController(() => client, new TestMap());
+            this.controller = new StateOfImportController(mediator, new TestMap());
         }
 
         [Fact]

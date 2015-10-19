@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.MeansOfTransport;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.MeansOfTransport;
@@ -16,30 +16,27 @@
     [NotificationReadOnlyFilter]
     public class MeansOfTransportController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public MeansOfTransportController(Func<IIwsClient> apiClient)
+        public MeansOfTransportController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            var model = new MeansOfTransportViewModel();
+
+            var currentMeans =
+                await mediator.SendAsync(new GetMeansOfTransportByNotificationId(id));
+
+            if (currentMeans.Count != 0)
             {
-                var model = new MeansOfTransportViewModel();
-
-                var currentMeans =
-                    await client.SendAsync(User.GetAccessToken(), new GetMeansOfTransportByNotificationId(id));
-
-                if (currentMeans.Count != 0)
-                {
-                    model.SelectedMeans = string.Join("-", currentMeans.Select(p => p.Symbol));
-                }
-
-                return View(model);
+                model.SelectedMeans = string.Join("-", currentMeans.Select(p => p.Symbol));
             }
+
+            return View(model);
         }
 
         [HttpPost]
@@ -53,15 +50,9 @@
 
             try
             {
-                using (var client = apiClient())
-                {
-                    var meansList = model.SelectedMeans.Split('-').Select(MeansOfTransport.GetFromToken).ToArray();
+                var meansList = model.SelectedMeans.Split('-').Select(MeansOfTransport.GetFromToken).ToArray();
 
-                    var result =
-                        await
-                            client.SendAsync(User.GetAccessToken(),
-                                new SetMeansOfTransportForNotification(id, meansList));
-                }
+                await mediator.SendAsync(new SetMeansOfTransportForNotification(id, meansList));
             }
             catch (ApiBadRequestException ex)
             {
@@ -77,10 +68,8 @@
             {
                 return RedirectToAction("Index", "Home", new { id });
             }
-            else
-            {
-                return RedirectToAction("Index", "PackagingTypes", new { id }); 
-            }
+
+            return RedirectToAction("Index", "PackagingTypes", new { id });
         }
     }
 }

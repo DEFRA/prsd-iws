@@ -3,22 +3,20 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.WasteOperations;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Xunit;
 
     public class WasteOperationsControllerTests
     {
-        private readonly IIwsClient client;
         private readonly Guid notificationId = Guid.NewGuid();
         private readonly WasteOperationsController wasteOperationsController;
 
         public WasteOperationsControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            wasteOperationsController = new WasteOperationsController(() => client);
+            wasteOperationsController = new WasteOperationsController(A.Fake<IMediator>());
         }
 
         [Fact]

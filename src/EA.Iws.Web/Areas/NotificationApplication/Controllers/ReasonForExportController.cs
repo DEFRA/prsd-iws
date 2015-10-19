@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
@@ -14,27 +14,24 @@
     [NotificationReadOnlyFilter]
     public class ReasonForExportController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public ReasonForExportController(Func<IIwsClient> apiClient)
+        public ReasonForExportController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
-            {
-                var reasonForExport = await client.SendAsync(User.GetAccessToken(), new GetReasonForExport(id));
+            var reasonForExport = await mediator.SendAsync(new GetReasonForExport(id));
 
-                var model = new ReasonForExportViewModel
-                {
-                    NotificationId = id,
-                    ReasonForExport = reasonForExport
-                };
-                return View(model);
-            }
+            var model = new ReasonForExportViewModel
+            {
+                NotificationId = id,
+                ReasonForExport = reasonForExport
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -46,33 +43,27 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new SetReasonForExport(model.NotificationId, model.ReasonForExport));
+                await
+                    mediator.SendAsync(new SetReasonForExport(model.NotificationId, model.ReasonForExport));
 
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("List", "Carrier", new { id = model.NotificationId }); 
-                    }
-                }
-                catch (ApiBadRequestException ex)
+                if (backToOverview.GetValueOrDefault())
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
-                return View(model);
+
+                return RedirectToAction("List", "Carrier", new { id = model.NotificationId });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            return View(model);
         }
     }
 }

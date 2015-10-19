@@ -1,26 +1,20 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.SpecialHandling;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.SpecialHandling;
     using FakeItEasy;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Prsd.Core.Mediator;
     using Xunit;
 
     public class SpecialHandlingControllerTests
     {
-        private readonly IIwsClient client;
         private readonly SpecialHandlingController specialHandlingController;
 
         public SpecialHandlingControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            specialHandlingController = new SpecialHandlingController(() => client);
+            specialHandlingController = new SpecialHandlingController(A.Fake<IMediator>());
         }
 
         [Fact]

@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.WasteType;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.WasteType;
@@ -17,11 +17,11 @@
     [NotificationReadOnlyFilter]
     public class PhysicalCharacteristicsController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public PhysicalCharacteristicsController(Func<IIwsClient> apiClient)
+        public PhysicalCharacteristicsController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -42,19 +42,16 @@
                 NotificationId = id
             };
 
-            using (var client = apiClient())
-            {
-                var physicalCharacteristicsData =
-                    await client.SendAsync(User.GetAccessToken(), new GetPhysicalCharacteristics(id));
+            var physicalCharacteristicsData =
+                await mediator.SendAsync(new GetPhysicalCharacteristics(id));
 
-                if (physicalCharacteristicsData != null)
+            if (physicalCharacteristicsData != null)
+            {
+                model.PhysicalCharacteristics.SetSelectedValues(physicalCharacteristicsData.PhysicalCharacteristics);
+                if (!string.IsNullOrWhiteSpace(physicalCharacteristicsData.OtherDescription))
                 {
-                    model.PhysicalCharacteristics.SetSelectedValues(physicalCharacteristicsData.PhysicalCharacteristics);
-                    if (!string.IsNullOrWhiteSpace(physicalCharacteristicsData.OtherDescription))
-                    {
-                        model.OtherSelected = true;
-                        model.OtherDescription = physicalCharacteristicsData.OtherDescription;
-                    }
+                    model.OtherSelected = true;
+                    model.OtherDescription = physicalCharacteristicsData.OtherDescription;
                 }
             }
             return View(model);
@@ -69,43 +66,38 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    var selectedPackagingTypes =
-                        model.PhysicalCharacteristics.PossibleValues.Where(p => p.Selected)
-                            .Select(p => (PhysicalCharacteristicType)(Convert.ToInt32(p.Value)))
-                            .ToList();
+                var selectedPackagingTypes =
+                    model.PhysicalCharacteristics.PossibleValues.Where(p => p.Selected)
+                        .Select(p => (PhysicalCharacteristicType)(Convert.ToInt32(p.Value)))
+                        .ToList();
 
-                    if (model.OtherSelected)
-                    {
-                        selectedPackagingTypes.Add(PhysicalCharacteristicType.Other);
-                    }
-
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new SetPhysicalCharacteristics(selectedPackagingTypes, model.NotificationId,
-                                model.OtherDescription));
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "BaselOecdCode", new { id = model.NotificationId });
-                    }
-                }
-                catch (ApiBadRequestException ex)
+                if (model.OtherSelected)
                 {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    selectedPackagingTypes.Add(PhysicalCharacteristicType.Other);
                 }
-                return View(model);
+
+                await
+                    mediator.SendAsync(new SetPhysicalCharacteristics(selectedPackagingTypes, model.NotificationId,
+                            model.OtherDescription));
+
+                if (backToOverview.GetValueOrDefault())
+                {
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                }
+
+                return RedirectToAction("Index", "BaselOecdCode", new { id = model.NotificationId });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            return View(model);
         }
     }
 }

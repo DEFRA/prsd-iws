@@ -3,10 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.StateOfExport;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.StateOfExport;
     using Requests.TransportRoute;
     using ViewModels.StateOfExport;
@@ -15,60 +15,52 @@
     [NotificationReadOnlyFilter]
     public class StateOfExportController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
         private readonly IMap<StateOfExportWithTransportRouteData, StateOfExportViewModel> mapper;
 
-        public StateOfExportController(Func<IIwsClient> apiClient, IMap<StateOfExportWithTransportRouteData, StateOfExportViewModel> mapper)
+        public StateOfExportController(IMediator mediator, IMap<StateOfExportWithTransportRouteData, StateOfExportViewModel> mapper)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
             this.mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
-            {
-                var stateOfExportSetData = await client.SendAsync(User.GetAccessToken(), new GetStateOfExportWithTransportRouteDataByNotificationId(id));
+            var stateOfExportSetData = await mediator.SendAsync(new GetStateOfExportWithTransportRouteDataByNotificationId(id));
 
-                var model = mapper.Map(stateOfExportSetData);
+            var model = mapper.Map(stateOfExportSetData);
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, StateOfExportViewModel model, string submit, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            await GetCompetentAuthoritiesAndEntryPoints(mediator, model);
+
+            if (!ModelState.IsValid)
             {
-                await GetCompetentAuthoritiesAndEntryPoints(client, model);
-
-                if (!ModelState.IsValid)         
-                {
-                    return View(model);
-                }
-
-                return await SubmitAction(id, model, client, backToOverview);
+                return View(model);
             }
+
+            return await SubmitAction(id, model, mediator, backToOverview);
         }
 
-        private async Task<ActionResult> SubmitAction(Guid id, StateOfExportViewModel model, IIwsClient client, bool? backToOverview)
+        private async Task<ActionResult> SubmitAction(Guid id, StateOfExportViewModel model, IMediator mediator, bool? backToOverview)
         {
-            await client.SendAsync(User.GetAccessToken(), new SetStateOfExportForNotification(id, model.EntryOrExitPointId.Value));
+            await mediator.SendAsync(new SetStateOfExportForNotification(id, model.EntryOrExitPointId.Value));
 
             if (backToOverview.GetValueOrDefault())
             {
                 return RedirectToAction("Index", "Home", new { id });
             }
-            else
-            {
-                return RedirectToAction("Index", "StateOfImport", new { id }); 
-            }
+
+            return RedirectToAction("Index", "StateOfImport", new { id });
         }
 
-        private async Task GetCompetentAuthoritiesAndEntryPoints(IIwsClient client, StateOfExportViewModel model)
+        private async Task GetCompetentAuthoritiesAndEntryPoints(IMediator mediator, StateOfExportViewModel model)
         {
             if (!model.CountryId.HasValue)
             {
@@ -77,7 +69,7 @@
 
             var entryPointsAndCompetentAuthorities =
                 await
-                    client.SendAsync(User.GetAccessToken(), new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+                    mediator.SendAsync(new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
 
             model.ExitPoints = new SelectList(entryPointsAndCompetentAuthorities.EntryOrExitPoints, "Id", "Name");
         }

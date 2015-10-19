@@ -1,26 +1,20 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.Shipment;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.Shipment;
     using FakeItEasy;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Prsd.Core.Mediator;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Xunit;
 
     public class ShipmentControllerTests
     {
-        private readonly IIwsClient client;
         private readonly ShipmentController shipmentController;
 
         public ShipmentControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            shipmentController = new ShipmentController(() => client);
+            shipmentController = new ShipmentController(A.Fake<IMediator>());
         }
 
         [Fact]

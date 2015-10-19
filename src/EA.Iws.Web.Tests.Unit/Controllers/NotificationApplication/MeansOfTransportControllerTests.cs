@@ -1,27 +1,22 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.MeansOfTransport;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.MeansOfTransport;
     using FakeItEasy;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Prsd.Core.Mediator;
     using Xunit;
 
     public class MeansOfTransportControllerTests
     {
-        private readonly IIwsClient client;
         private readonly Guid notificationId = new Guid("09237AF4-F46B-4191-AAB7-6404D0A1A751");
         private readonly MeansOfTransportController meansOfTransportController;
 
         public MeansOfTransportControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            meansOfTransportController = new MeansOfTransportController(() => client);
+            meansOfTransportController = new MeansOfTransportController(A.Fake<IMediator>());
         }
 
         private MeansOfTransportViewModel CreateValidMeansOfTransportViewModel()

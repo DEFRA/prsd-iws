@@ -1,26 +1,24 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.Importer;
+    using Core.Shared;
+    using FakeItEasy;
+    using Prsd.Core.Mediator;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using EA.Iws.Api.Client;
-    using EA.Iws.Core.Shared;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.Importer;
-    using EA.Iws.Web.ViewModels.Shared;
-    using FakeItEasy;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class ImporterControllerTests
     {
-        private readonly IIwsClient client;
         private readonly Guid notificationId = new Guid("31D3BCAA-7315-4FD6-A6C3-A1B9D6697DF2");
         private readonly ImporterController importerController;
 
         public ImporterControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            importerController = new ImporterController(() => client);
+            importerController = new ImporterController(A.Fake<IMediator>());
         }
 
         private ImporterViewModel CreateImporterViewModel()

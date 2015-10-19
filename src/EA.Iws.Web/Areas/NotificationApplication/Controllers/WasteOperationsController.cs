@@ -10,11 +10,11 @@
     using Core.Shared;
     using Infrastructure;
     using Prsd.Core.Helpers;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
     using Requests.OperationCodes;
-    using Requests.Shared;
     using Requests.TechnologyEmployed;
     using ViewModels.WasteOperations;
     using Web.ViewModels.Shared;
@@ -23,41 +23,38 @@
     [NotificationReadOnlyFilter]
     public class WasteOperationsController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public WasteOperationsController(Func<IIwsClient> apiClient)
+        public WasteOperationsController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> OperationCodes(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            try
             {
-                try
+                var notificationInfo =
+                    await mediator.SendAsync(new GetNotificationBasicInfo(id));
+
+                if (notificationInfo.NotificationType == NotificationType.Disposal)
                 {
-                    var notificationInfo =
-                        await client.SendAsync(User.GetAccessToken(), new GetNotificationBasicInfo(id));
-
-                    if (notificationInfo.NotificationType == NotificationType.Disposal)
-                    {
-                        return RedirectToAction("DisposalCodes", "WasteOperations", new { id, backToOverview });
-                    }
-
-                    if (notificationInfo.NotificationType == NotificationType.Recovery)
-                    {
-                        return RedirectToAction("RecoveryCodes", "WasteOperations", new { id, backToOverview });
-                    }
+                    return RedirectToAction("DisposalCodes", "WasteOperations", new { id, backToOverview });
                 }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
 
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                if (notificationInfo.NotificationType == NotificationType.Recovery)
+                {
+                    return RedirectToAction("RecoveryCodes", "WasteOperations", new { id, backToOverview });
+                }
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
                 }
             }
 
@@ -77,13 +74,10 @@
                 model.CodeInformation.Add(code.ToString(), EnumHelper.GetDescription(code));
             }
 
-            using (var client = apiClient())
-            {
-                var selectedCodes =
-                        await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+            var selectedCodes =
+                    await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
-                model.Codes.SetSelectedValues(selectedCodes.Select(s => s.Value));
-            }
+            model.Codes.SetSelectedValues(selectedCodes.Select(s => s.Value));
 
             return View(model);
         }
@@ -104,45 +98,41 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
+                var selectedRecoveryCodes = model.Codes.PossibleValues.Where(r => r.Selected)
+                    .Select(r => (RecoveryCode)(Convert.ToInt32(r.Value)))
+                    .ToList();
+
+                if (!selectedRecoveryCodes.Any())
                 {
-                    var selectedRecoveryCodes = model.Codes.PossibleValues.Where(r => r.Selected)
-                        .Select(r => (RecoveryCode)(Convert.ToInt32(r.Value)))
-                        .ToList();
-
-                    if (!selectedRecoveryCodes.Any())
-                    {
-                        ModelState.AddModelError(string.Empty, "Please select at least one option");
-                        return View(model);
-                    }
-
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new AddRecoveryCodes(selectedRecoveryCodes, model.NotificationId));
-
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
-                    }
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError(string.Empty, "Please select at least one option");
+                    return View(model);
                 }
 
-                return View(model);
+                await
+                    mediator.SendAsync(new AddRecoveryCodes(selectedRecoveryCodes, model.NotificationId));
+
+                if (backToOverview.GetValueOrDefault())
+                {
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                }
+                else
+                {
+                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
+                }
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -157,13 +147,10 @@
                 model.CodeInformation.Add(code.ToString(), EnumHelper.GetDescription(code));
             }
 
-            using (var client = apiClient())
-            {
-                var selectedCodes =
-                        await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+            var selectedCodes =
+                    await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
-                model.Codes.SetSelectedValues(selectedCodes.Select(s => s.Value));
-            }
+            model.Codes.SetSelectedValues(selectedCodes.Select(s => s.Value));
 
             return View(model);
         }
@@ -184,116 +171,105 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
+                var selectedDisposalCodes = model.Codes.PossibleValues.Where(r => r.Selected)
+                    .Select(r => (DisposalCode)(Convert.ToInt32(r.Value)))
+                    .ToList();
+
+                if (!selectedDisposalCodes.Any())
                 {
-                    var selectedDisposalCodes = model.Codes.PossibleValues.Where(r => r.Selected)
-                        .Select(r => (DisposalCode)(Convert.ToInt32(r.Value)))
-                        .ToList();
-
-                    if (!selectedDisposalCodes.Any())
-                    {
-                        ModelState.AddModelError(string.Empty, "Please select at least one option");
-                        return View(model);
-                    }
-
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new AddDisposalCodes(selectedDisposalCodes, model.NotificationId));
-
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
-                    }
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError(string.Empty, "Please select at least one option");
+                    return View(model);
                 }
 
-                return View(model);
+                await
+                    mediator.SendAsync(new AddDisposalCodes(selectedDisposalCodes, model.NotificationId));
+
+                if (backToOverview.GetValueOrDefault())
+                {
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                }
+                else
+                {
+                    return RedirectToAction("TechnologyEmployed", "WasteOperations", new { id = model.NotificationId });
+                }
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
 
         [HttpGet]
         public async Task<ActionResult> TechnologyEmployed(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            var model = new TechnologyEmployedViewModel();
+            model.NotificationId = id;
+            model.OperationCodes = await GetOperationCodes(id);
+
+            var technologyEmployedData =
+                await mediator.SendAsync(new GetTechnologyEmployed(id));
+
+            if (technologyEmployedData.HasTechnologyEmployed)
             {
-                var model = new TechnologyEmployedViewModel();
-                model.NotificationId = id;
-                model.OperationCodes = await GetOperationCodes(id, client);
-
-                var technologyEmployedData =
-                    await client.SendAsync(User.GetAccessToken(), new GetTechnologyEmployed(id));
-
-                if (technologyEmployedData.HasTechnologyEmployed)
-                {
-                    model.AnnexProvided = technologyEmployedData.AnnexProvided;
-                    model.Details = technologyEmployedData.Details;
-                    model.FurtherDetails = technologyEmployedData.FurtherDetails;
-                }
-
-                return View(model);
+                model.AnnexProvided = technologyEmployedData.AnnexProvided;
+                model.Details = technologyEmployedData.Details;
+                model.FurtherDetails = technologyEmployedData.FurtherDetails;
             }
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> TechnologyEmployed(TechnologyEmployedViewModel model, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    model.OperationCodes = await GetOperationCodes(model.NotificationId, client);
-                    return View(model);
-                }
-                try
-                {
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new SetTechnologyEmployed(model.NotificationId, model.AnnexProvided, model.Details, model.FurtherDetails));
-
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home",
-                        new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "ReasonForExport",
-                                    new { id = model.NotificationId }); 
-                    }
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-
+                model.OperationCodes = await GetOperationCodes(model.NotificationId);
                 return View(model);
             }
+            try
+            {
+                await
+                    mediator.SendAsync(new SetTechnologyEmployed(model.NotificationId, model.AnnexProvided, model.Details, model.FurtherDetails));
+
+                if (backToOverview.GetValueOrDefault())
+                {
+                    return RedirectToAction("Index", "Home",
+                    new { id = model.NotificationId });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "ReasonForExport",
+                                new { id = model.NotificationId });
+                }
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
 
-        private async Task<List<string>> GetOperationCodes(Guid id, IIwsClient client)
+        private async Task<List<string>> GetOperationCodes(Guid id)
         {
             var codeDatas =
-                await client.SendAsync(User.GetAccessToken(), new GetOperationCodesByNotificationId(id));
+                await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
             var orderedCodeDatas = codeDatas.OrderBy(c => c.Value);
 

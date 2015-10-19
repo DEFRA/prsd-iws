@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
@@ -14,27 +14,25 @@
     [NotificationReadOnlyFilter]
     public class SpecialHandlingController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public SpecialHandlingController(Func<IIwsClient> apiClient)
+        public SpecialHandlingController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var model = new SpecialHandlingViewModel { NotificationId = id };
-            using (var client = apiClient())
-            {
-                var specialHandlingData =
-                    await client.SendAsync(User.GetAccessToken(), new GetSpecialHandingForNotification(id));
 
-                if (specialHandlingData.HasSpecialHandlingRequirements.HasValue)
-                {
-                    model.HasSpecialHandlingRequirements = specialHandlingData.HasSpecialHandlingRequirements;
-                    model.SpecialHandlingDetails = specialHandlingData.SpecialHandlingDetails;
-                }
+            var specialHandlingData =
+                await mediator.SendAsync(new GetSpecialHandingForNotification(id));
+
+            if (specialHandlingData.HasSpecialHandlingRequirements.HasValue)
+            {
+                model.HasSpecialHandlingRequirements = specialHandlingData.HasSpecialHandlingRequirements;
+                model.SpecialHandlingDetails = specialHandlingData.SpecialHandlingDetails;
             }
             return View(model);
         }
@@ -48,36 +46,29 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
+                await
+                mediator.SendAsync(new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
+                        model.SpecialHandlingDetails));
+
+                if (backToOverview.GetValueOrDefault())
                 {
-                    await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
-                            model.SpecialHandlingDetails));
-
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "StateOfExport", new { id = model.NotificationId }); 
-                    }
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-
-                return View(model);
+                return RedirectToAction("Index", "StateOfExport", new { id = model.NotificationId });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
     }
 }

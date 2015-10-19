@@ -3,24 +3,24 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.CustomsOffice;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
 
     [Authorize]
     [NotificationReadOnlyFilter]
     public class CustomsOfficeController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
         private readonly Func<Guid, bool?, RedirectToRouteResult> noCustomsOffice;
         private readonly Func<Guid, bool?, RedirectToRouteResult> transportRouteSummary;
         private readonly Func<Guid, bool?, RedirectToRouteResult> addExitCustomsOffice;
         private readonly Func<Guid, bool?, RedirectToRouteResult> addEntryCustomsOffice;
 
-        public CustomsOfficeController(Func<IIwsClient> apiClient)
+        public CustomsOfficeController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
 
             noCustomsOffice = (id, backToOverview) => RedirectToAction("NoCustomsOffice", "CustomsOffice", new { id, backToOverview });
             transportRouteSummary = (id, backToOverview) => RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
@@ -30,11 +30,7 @@
 
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            CustomsOfficeCompletionStatus customsOffice;
-            using (var client = apiClient())
-            {
-                customsOffice = await client.SendAsync(User.GetAccessToken(), new GetCustomsCompletionStatusByNotificationId(id));
-            }
+            var customsOffice = await mediator.SendAsync(new GetCustomsCompletionStatusByNotificationId(id));
 
             switch (customsOffice.CustomsOfficesRequired)
             {

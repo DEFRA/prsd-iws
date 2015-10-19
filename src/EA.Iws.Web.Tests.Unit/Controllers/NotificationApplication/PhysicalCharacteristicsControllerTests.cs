@@ -1,27 +1,21 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.PhysicalCharacteristics;
-    using EA.Iws.Web.ViewModels.Shared;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.PhysicalCharacteristics;
     using FakeItEasy;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Prsd.Core.Mediator;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class PhysicalCharacteristicsControllerTests
     {
-        private readonly IIwsClient client;
         private readonly PhysicalCharacteristicsController physicalCharacteristicsController;
 
         public PhysicalCharacteristicsControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            physicalCharacteristicsController = new PhysicalCharacteristicsController(() => client);
+            physicalCharacteristicsController = new PhysicalCharacteristicsController(A.Fake<IMediator>());
         }
 
         [Fact]

@@ -3,17 +3,17 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Core.CustomsOffice;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
     using TestHelpers;
     using Xunit;
 
     public class CustomsOfficeControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private readonly CustomsOfficeController controller;
         private readonly Guid guid = Guid.Empty;
         private const string IntendedShipmentsAction = "Index";
@@ -21,8 +21,8 @@
 
         public CustomsOfficeControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            controller = new CustomsOfficeController(() => client);
+            mediator = A.Fake<IMediator>();
+            controller = new CustomsOfficeController(mediator);
         }
 
         [Fact]
@@ -38,13 +38,13 @@
         public async Task Index_NoCustomsOfficeRequired_RedirectsToIntendedShipments()
         {
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
+                () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
                     CustomsOfficesRequired = CustomsOffices.None
                 });
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
-            
+
             result.AssertControllerReturn("NoCustomsOffice", "CustomsOffice");
             Assert.Equal(guid, result.RouteValues["id"]);
         }
@@ -53,7 +53,7 @@
         public async Task Index_CustomOfficesEntry_RedirectsToEntryCustomsOfficePage()
         {
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
+                () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
                     CustomsOfficesRequired = CustomsOffices.Entry
                 });
@@ -67,7 +67,7 @@
         public async Task Index_CustomOfficesExit_RedirectsToExitCustomsOfficePage()
         {
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
+                () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
                     CustomsOfficesRequired = CustomsOffices.Exit
                 });
@@ -81,7 +81,7 @@
         public async Task Index_CustomOfficesEntryAndExit_RedirectsToExitCustomsOfficePage()
         {
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
+                () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                 {
                     CustomsOfficesRequired = CustomsOffices.EntryAndExit
                 });
@@ -95,7 +95,7 @@
         public async Task Index_CustomOfficesExitAlreadyCompleted_RedirectsToExit()
         {
             A.CallTo(
-               () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
+               () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                {
                    CustomsOfficesRequired = CustomsOffices.Exit
                });
@@ -110,7 +110,7 @@
         public async Task Index_CustomOfficesEntryAndExitWithExitAlreadyCompleted_RedirectsToExit()
         {
             A.CallTo(
-               () => client.SendAsync(A<string>.Ignored, A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
+               () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
                {
                    CustomsOfficesRequired = CustomsOffices.EntryAndExit
                });

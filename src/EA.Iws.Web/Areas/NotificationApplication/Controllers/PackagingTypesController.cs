@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.PackagingType;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.PackagingType;
@@ -17,11 +17,11 @@
     [NotificationReadOnlyFilter]
     public class PackagingTypesController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public PackagingTypesController(Func<IIwsClient> apiClient)
+        public PackagingTypesController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -41,19 +41,16 @@
                 NotificationId = id
             };
 
-            using (var client = apiClient())
-            {
-                var packagingData =
-                    await client.SendAsync(User.GetAccessToken(), new GetPackagingInfoForNotification(id));
+            var packagingData =
+                await mediator.SendAsync(new GetPackagingInfoForNotification(id));
 
-                if (packagingData != null)
+            if (packagingData != null)
+            {
+                model.PackagingTypes.SetSelectedValues(packagingData.PackagingTypes);
+                if (!string.IsNullOrWhiteSpace(packagingData.OtherDescription))
                 {
-                    model.PackagingTypes.SetSelectedValues(packagingData.PackagingTypes);
-                    if (!string.IsNullOrWhiteSpace(packagingData.OtherDescription))
-                    {
-                        model.OtherSelected = true;
-                        model.OtherDescription = packagingData.OtherDescription;
-                    }
+                    model.OtherSelected = true;
+                    model.OtherDescription = packagingData.OtherDescription;
                 }
             }
 
@@ -69,50 +66,46 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
+                var selectedPackagingTypes =
+                    model.PackagingTypes.PossibleValues.Where(p => p.Selected)
+                        .Select(p => (PackagingType)(Convert.ToInt32(p.Value)))
+                        .ToList();
+
+                if (model.OtherSelected)
                 {
-                    var selectedPackagingTypes =
-                        model.PackagingTypes.PossibleValues.Where(p => p.Selected)
-                            .Select(p => (PackagingType)(Convert.ToInt32(p.Value)))
-                            .ToList();
-
-                    if (model.OtherSelected)
-                    {
-                        selectedPackagingTypes.Add(PackagingType.Other);
-                    }
-
-                    if (!selectedPackagingTypes.Any())
-                    {
-                        ModelState.AddModelError(string.Empty, "Please select at least one option");
-                        return View(model);
-                    }
-
-                    await client.SendAsync(User.GetAccessToken(),
-                        new SetPackagingInfoForNotification(selectedPackagingTypes, model.NotificationId,
-                            model.OtherDescription));
-
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "SpecialHandling", new { id = model.NotificationId }); 
-                    }
+                    selectedPackagingTypes.Add(PackagingType.Other);
                 }
-                catch (ApiBadRequestException ex)
+
+                if (!selectedPackagingTypes.Any())
                 {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError(string.Empty, "Please select at least one option");
+                    return View(model);
                 }
-                return View(model);
+
+                await mediator.SendAsync(new SetPackagingInfoForNotification(selectedPackagingTypes, model.NotificationId,
+                        model.OtherDescription));
+
+                if (backToOverview.GetValueOrDefault())
+                {
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "SpecialHandling", new { id = model.NotificationId });
+                }
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            return View(model);
         }
     }
 }

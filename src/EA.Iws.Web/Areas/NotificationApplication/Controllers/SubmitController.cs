@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.NotificationAssessment;
-    using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels.NotificationApplication;
@@ -13,34 +12,29 @@
     [Authorize]
     public class SubmitController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public SubmitController(Func<IIwsClient> apiClient)
+        public SubmitController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Disclaimer(Guid id)
         {
-            using (var client = apiClient())
+            var assessmentInfo =
+                await mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id));
+
+            var status = assessmentInfo.Status;
+
+            if (status == NotificationStatus.NotSubmitted)
             {
-                var assessmentInfo =
-                    await client.SendAsync(User.GetAccessToken(), new GetNotificationAssessmentSummaryInformation(id));
-
-                var status = assessmentInfo.Status;
-
-                if (status == NotificationStatus.NotSubmitted)
-                {
-                    var model = new DisclaimerViewModel { Id = id };
-                    return View(model);
-                }
-                else
-                {
-                    ViewBag.NotificationId = id;
-                    return View("AlreadySubmitted");
-                }
+                var model = new DisclaimerViewModel { Id = id };
+                return View(model);
             }
+
+            ViewBag.NotificationId = id;
+            return View("AlreadySubmitted");
         }
 
         [HttpPost]
@@ -52,12 +46,8 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(),
-                    new SubmitNotification(model.Id));
-                return RedirectToAction("Index", "WhatToDoNext", new { id = model.Id });
-            }
+            await mediator.SendAsync(new SubmitNotification(model.Id));
+            return RedirectToAction("Index", "WhatToDoNext", new { id = model.Id });
         }
     }
 }

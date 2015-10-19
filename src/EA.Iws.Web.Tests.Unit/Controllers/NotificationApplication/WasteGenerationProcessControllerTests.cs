@@ -2,21 +2,19 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using EA.Iws.Api.Client;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteGenerationProcess;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.WasteGenerationProcess;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Xunit;
 
     public class WasteGenerationProcessControllerTests
     {
-        private readonly IIwsClient client;
         private readonly WasteGenerationProcessController wasteGenerationProcessController;
 
         public WasteGenerationProcessControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            wasteGenerationProcessController = new WasteGenerationProcessController(() => client);
+            wasteGenerationProcessController = new WasteGenerationProcessController(A.Fake<IMediator>());
         }
 
         [Fact]

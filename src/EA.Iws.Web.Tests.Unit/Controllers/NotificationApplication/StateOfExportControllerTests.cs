@@ -11,12 +11,13 @@
     using Core.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.TransportRoute;
     using Xunit;
 
     public class StateOfExportControllerTests
     {
-        private readonly IIwsClient client;
+        private readonly IMediator mediator;
         private static readonly Guid anyCountryId = new Guid("25D2D146-942E-46DE-926E-00E2ECFB45C7");
         private static readonly Guid anyCompetentAuthorityId = new Guid("1BF015B8-56C6-43C2-BB8B-3A3FF39135BC");
         private static readonly Guid anyEntryOrExitPointId = new Guid("72F68B61-E969-42DB-AF7F-E0B9FEDB7BBF");
@@ -26,8 +27,8 @@
 
         public StateOfExportControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            var competentAuthorties = new[] 
+            mediator = A.Fake<IMediator>();
+            var competentAuthorties = new[]
                 {
                     new CompetentAuthorityData { Id = anyCompetentAuthorityId, Name = anyString }
                 };
@@ -35,15 +36,15 @@
                 {
                     new EntryOrExitPointData { Id = anyEntryOrExitPointId, CountryId = anyCountryId, Name = anyString }
                 };
+
             A.CallTo(
-                () => client.SendAsync(A<string>.Ignored,
-                    A<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == anyCountryId)))
+                () => mediator.SendAsync(A<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == anyCountryId)))
                 .Returns(new CompententAuthorityAndEntryOrExitPointData()
                 {
                     CompetentAuthorities = competentAuthorties,
                     EntryOrExitPoints = entryOrExitPoints
                 });
-            stateOfExportController = new StateOfExportController(() => client, new TestMap());
+            stateOfExportController = new StateOfExportController(mediator, new TestMap());
         }
 
         [Fact]

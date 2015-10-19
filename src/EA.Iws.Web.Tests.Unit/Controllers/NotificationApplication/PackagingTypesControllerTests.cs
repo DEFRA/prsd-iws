@@ -1,29 +1,24 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using EA.Iws.Api.Client;
-    using EA.Iws.Core.PackagingType;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.PackagingTypes;
-    using EA.Iws.Web.ViewModels.Shared;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.PackagingTypes;
+    using Core.PackagingType;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class PackagingTypesControllerTests
     {
-        private readonly IIwsClient client;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
         private readonly PackagingTypesController packagingTypesController;
 
         public PackagingTypesControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            packagingTypesController = new PackagingTypesController(() => client);
+            packagingTypesController = new PackagingTypesController(A.Fake<IMediator>());
         }
 
         private PackagingTypesViewModel CreateValidPackagingTypesViewModel()

@@ -3,19 +3,19 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.TransportRoute;
 
     [Authorize]
     [NotificationReadOnlyFilter]
     public class TransportRouteController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public TransportRouteController(Func<IIwsClient> apiClient)
+        public TransportRouteController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -24,12 +24,9 @@
             ViewBag.NotificationId = id;
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
-            using (var client = apiClient())
-            {
-                var summary = await client.SendAsync(User.GetAccessToken(), new GetTransportRouteSummaryForNotification(id));
+            var summary = await mediator.SendAsync(new GetTransportRouteSummaryForNotification(id));
 
-                return View(summary);
-            }
+            return View(summary);
         }
 
         [HttpPost]
@@ -40,10 +37,8 @@
             {
                 return RedirectToAction("Index", "Home", new { id });
             }
-            else
-            {
-                return RedirectToAction("Index", "CustomsOffice", new { id }); 
-            }
+
+            return RedirectToAction("Index", "CustomsOffice", new { id });
         }
     }
 }

@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Importer;
@@ -14,33 +14,30 @@
     [NotificationReadOnlyFilter]
     public class ImporterController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public ImporterController(Func<IIwsClient> apiClient)
+        public ImporterController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
+            ImporterViewModel model;
+            var importer = await mediator.SendAsync(new GetImporterByNotificationId(id));
+            if (importer.HasImporter)
             {
-                ImporterViewModel model;
-                var importer = await client.SendAsync(User.GetAccessToken(), new GetImporterByNotificationId(id));
-                if (importer.HasImporter)
-                {
-                    model = new ImporterViewModel(importer);
-                }
-                else
-                {
-                    model = new ImporterViewModel { NotificationId = id };
-                }
-
-                await this.BindCountryList(apiClient, false);
-                model.Address.DefaultCountryId = this.GetDefaultCountryId();
-                return View(model);
+                model = new ImporterViewModel(importer);
             }
+            else
+            {
+                model = new ImporterViewModel { NotificationId = id };
+            }
+
+            await this.BindCountryList(mediator, false);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
+            return View(model);
         }
 
         [HttpPost]
@@ -49,36 +46,33 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(apiClient, false);
+                await this.BindCountryList(mediator, false);
                 return View(model);
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
+                await mediator.SendAsync(model.ToRequest());
+                if (backToOverview.GetValueOrDefault())
                 {
-                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                    }
-                    else
-                    {
-                        return RedirectToAction("List", "Facility", new { id = model.NotificationId });
-                    }
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
-                catch (ApiBadRequestException ex)
+                else
                 {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    return RedirectToAction("List", "Facility", new { id = model.NotificationId });
                 }
-                await this.BindCountryList(client, false);
-                return View(model);
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            await this.BindCountryList(mediator, false);
+            return View(model);
         }
     }
 }

@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.WasteType;
@@ -14,25 +14,22 @@
     [NotificationReadOnlyFilter]
     public class WasteGenerationProcessController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IMediator mediator;
 
-        public WasteGenerationProcessController(Func<IIwsClient> apiClient)
+        public WasteGenerationProcessController(IMediator mediator)
         {
-            this.apiClient = apiClient;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
-            using (var client = apiClient())
-            {
-                var wasteGenerationProcessData =
-                    await client.SendAsync(User.GetAccessToken(), new GetWasteGenerationProcess(id));
+            var wasteGenerationProcessData =
+                await mediator.SendAsync(new GetWasteGenerationProcess(id));
 
-                var model = new WasteGenerationProcessViewModel(wasteGenerationProcessData);
-                return View(model);
-            }
+            var model = new WasteGenerationProcessViewModel(wasteGenerationProcessData);
+            return View(model);
         }
 
         [HttpPost]
@@ -43,30 +40,26 @@
             {
                 return View(model);
             }
-            using (var client = apiClient())
+
+            try
             {
-                try
+                await mediator.SendAsync(model.ToRequest());
+                if (backToOverview.GetValueOrDefault())
                 {
-                    await client.SendAsync(User.GetAccessToken(), model.ToRequest());
-                    if (backToOverview.GetValueOrDefault())
-                    {
-                        return RedirectToAction("Index", "Home", new { id = model.NotificationId }); 
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "PhysicalCharacteristics", new { id = model.NotificationId });
-                    }
+                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-                return View(model);
+
+                return RedirectToAction("Index", "PhysicalCharacteristics", new { id = model.NotificationId });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            return View(model);
         }
     }
 }

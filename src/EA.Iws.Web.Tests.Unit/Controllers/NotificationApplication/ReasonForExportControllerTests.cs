@@ -2,21 +2,19 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using EA.Iws.Api.Client;
-    using EA.Iws.Web.Areas.NotificationApplication.Controllers;
-    using EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication;
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.NotificationApplication;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Xunit;
 
     public class ReasonForExportControllerTests
     {
-        private readonly IIwsClient client;
         private readonly ReasonForExportController reasonForExportController;
 
         public ReasonForExportControllerTests()
         {
-            client = A.Fake<IIwsClient>();
-            reasonForExportController = new ReasonForExportController(() => client);
+            reasonForExportController = new ReasonForExportController(A.Fake<IMediator>());
         }
 
         [Fact]
