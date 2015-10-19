@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.WasteCodes;
     using Infrastructure;
+    using Prsd.Core.Mediator;
     using Requests.WasteCodes;
     using ViewModels.WasteCodes;
     using Views.Shared;
@@ -18,12 +18,12 @@
     {
         protected const string AddCode = "addcode";
         protected const string Continue = "continue";
-        protected readonly Func<IIwsClient> ApiClient;
+        protected readonly IMediator Mediator;
         private readonly CodeType codeType;
 
-        protected BaseWasteCodeController(Func<IIwsClient> apiClient, CodeType codeType)
+        protected BaseWasteCodeController(IMediator mediator, CodeType codeType)
         {
-            this.ApiClient = apiClient;
+            this.Mediator = mediator;
             this.codeType = codeType;
         }
 
@@ -76,22 +76,18 @@
 
         protected virtual async Task RebindModel(Guid id, BaseWasteCodeViewModel viewModel)
         {
-            using (var client = ApiClient())
-            {
-                var result =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, new[] { codeType }));
+            var result =
+                await
+                    Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, new[] { codeType }));
 
-                viewModel.EnterWasteCodesViewModel.WasteCodes =
-                    result.LookupWasteCodeData[codeType].Select(wc => new WasteCodeViewModel
-                    {
-                        Id = wc.Id,
-                        CodeType = wc.CodeType,
-                        Description = wc.Description,
-                        Name = wc.Code
-                    }).ToList();
-            }
+            viewModel.EnterWasteCodesViewModel.WasteCodes =
+                result.LookupWasteCodeData[codeType].Select(wc => new WasteCodeViewModel
+                {
+                    Id = wc.Id,
+                    CodeType = wc.CodeType,
+                    Description = wc.Description,
+                    Name = wc.Code
+                }).ToList();
         }
 
         private void AddCodeToViewModel(BaseWasteCodeViewModel viewModel)

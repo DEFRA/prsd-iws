@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.WasteCodes;
     using Core.WasteCodes;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using Xunit;
 
     public class BaseWasteCodeControllerTests
@@ -23,9 +23,9 @@
 
         public BaseWasteCodeControllerTests()
         {
-            var client = A.Fake<IIwsClient>();
+            var mediator = A.Fake<IMediator>();
 
-            controller = new TestController(() => client, CodeType.Y);
+            controller = new TestController(mediator, CodeType.Y);
 
             viewModel = new TestViewModel
             {
@@ -177,8 +177,8 @@
 
         private class TestController : BaseWasteCodeController
         {
-            public TestController(Func<IIwsClient> apiClient, CodeType codeType)
-                : base(apiClient, codeType)
+            public TestController(IMediator mediator, CodeType codeType)
+                : base(mediator, codeType)
             {
             }
 

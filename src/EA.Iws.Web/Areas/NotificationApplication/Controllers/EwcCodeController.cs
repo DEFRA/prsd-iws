@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.WasteCodes;
     using ViewModels.EwcCode;
     using ViewModels.WasteCodes;
@@ -18,27 +18,21 @@
     {
         private static readonly IList<CodeType> ewcCodeTypes = new[] { CodeType.Ewc }; 
         private readonly IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper;
-        private readonly Func<IIwsClient> apiClient;
 
-        public EwcCodeController(Func<IIwsClient> apiClient, 
-            IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper) : base(apiClient, CodeType.Ewc)
+        public EwcCodeController(IMediator mediator, 
+            IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper) : base(mediator, CodeType.Ewc)
         {
             this.mapper = mapper;
-            this.apiClient = apiClient;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool backToOverview = false)
         {
-            using (var client = apiClient())
-            {
-                var result =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, ewcCodeTypes, ewcCodeTypes));
+            var result =
+                await
+                    Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, ewcCodeTypes, ewcCodeTypes));
 
-                return View(mapper.Map(result));
-            }
+            return View(mapper.Map(result));
         }
 
         [HttpPost]
@@ -51,16 +45,12 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
-            using (var client = ApiClient())
-            {
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes));
+            await
+                Mediator.SendAsync(new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes));
 
-                return (backToOverview)
-                    ? BackToOverviewResult(id)
-                    : RedirectToAction("Index", "YCode", new { id });
-            }
+            return (backToOverview)
+                ? BackToOverviewResult(id)
+                : RedirectToAction("Index", "YCode", new { id });
         }
     }
 }

@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.WasteCodes;
     using ViewModels.HCode;
     using ViewModels.WasteCodes;
@@ -20,7 +20,7 @@
 
         private static readonly IList<CodeType> codeTypes = new[] { CodeType.H }; 
 
-        public HCodeController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, HCodeViewModel> mapper) : base(apiClient, CodeType.H)
+        public HCodeController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, HCodeViewModel> mapper) : base(mediator, CodeType.H)
         {
             this.mapper = mapper;
         }
@@ -28,15 +28,11 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = ApiClient())
-            {
-                var result =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, codeTypes, codeTypes));
+            var result =
+                await
+                    Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, codeTypes, codeTypes));
 
-                return View(mapper.Map(result));
-            }
+            return View(mapper.Map(result));
         }
 
         [HttpPost]
@@ -48,16 +44,12 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
-            using (var client = ApiClient())
-            {
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetHCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
-                            viewModel.EnterWasteCodesViewModel.IsNotApplicable));
+            await
+                Mediator.SendAsync(new SetHCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
+                        viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return (backToOverview) ? BackToOverviewResult(id) 
-                    : RedirectToAction("Index", "UnClass", new { id });
-            }
+            return (backToOverview) ? BackToOverviewResult(id) 
+                : RedirectToAction("Index", "UnClass", new { id });
         }
     }
 }

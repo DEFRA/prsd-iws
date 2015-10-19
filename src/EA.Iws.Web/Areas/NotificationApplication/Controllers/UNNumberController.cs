@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.WasteCodes;
     using ViewModels.UNNumber;
     using ViewModels.WasteCodes;
@@ -19,8 +19,8 @@
         private readonly IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper;
         private readonly IList<CodeType> requiredCodeTypes = new[] { CodeType.UnNumber }; 
 
-        public UnNumberController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper) 
-            : base(apiClient, CodeType.UnNumber)
+        public UnNumberController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper) 
+            : base(mediator, CodeType.UnNumber)
         {
             this.mapper = mapper;
         }
@@ -28,15 +28,11 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = ApiClient())
-            {
-                var result =
-                    await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, requiredCodeTypes, requiredCodeTypes));
+            var result =
+                await
+                    Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, requiredCodeTypes, requiredCodeTypes));
 
-                return View(mapper.Map(result));
-            }
+            return View(mapper.Map(result));
         }
 
         [HttpPost]
@@ -48,16 +44,12 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
-            using (var client = ApiClient())
-            {
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetUNNumbers(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
-                            viewModel.EnterWasteCodesViewModel.IsNotApplicable));
+            await
+                Mediator.SendAsync(new SetUNNumbers(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
+                        viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return (backToOverview) ? BackToOverviewResult(id) 
-                    : RedirectToAction("Index", "CustomWasteCode", new { id });
-            }
+            return (backToOverview) ? BackToOverviewResult(id) 
+                : RedirectToAction("Index", "CustomWasteCode", new { id });
         }
     }
 }

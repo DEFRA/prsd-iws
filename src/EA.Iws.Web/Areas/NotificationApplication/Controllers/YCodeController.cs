@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
     using Requests.WasteCodes;
     using ViewModels.WasteCodes;
     using ViewModels.YCode;
@@ -19,8 +19,8 @@
         private readonly IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper;
         private static readonly IList<CodeType> RequiredCodeTypes = new[] { CodeType.Y };
 
-        public YCodeController(Func<IIwsClient> apiClient, IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper)
-            : base(apiClient, CodeType.Y)
+        public YCodeController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, YCodeViewModel> mapper)
+            : base(mediator, CodeType.Y)
         {
             this.mapper = mapper;
         }
@@ -28,15 +28,11 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            using (var client = ApiClient())
-            {
                 var result =
                     await
-                        client.SendAsync(User.GetAccessToken(),
-                            new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
+                        Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
 
                 return View(mapper.Map(result));
-            }
         }
 
         [HttpPost]
@@ -48,16 +44,12 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
-            using (var client = ApiClient())
-            {
-                await
-                    client.SendAsync(User.GetAccessToken(),
-                        new SetYCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
-                            viewModel.EnterWasteCodesViewModel.IsNotApplicable));
+            await
+                Mediator.SendAsync(new SetYCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
+                        viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-                return (backToOverview) ? BackToOverviewResult(id) 
-                    : RedirectToAction("Index", "HCode", new { id });
-            }
+            return (backToOverview) ? BackToOverviewResult(id) 
+                : RedirectToAction("Index", "HCode", new { id });
         }
     }
 }
