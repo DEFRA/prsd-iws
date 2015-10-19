@@ -24,9 +24,7 @@
         private static readonly Guid UserId = new Guid("7A354C6D-BA5D-49F7-8870-73B2E74E2677");
         private const int SourceNumber = 99991;
         private const int DestinationNumber = 99992;
-        private static readonly UKCompetentAuthority SourceCompetentAuthority = UKCompetentAuthority.England;
         private static readonly UKCompetentAuthority DestinationCompetentAuthority = UKCompetentAuthority.Scotland;
-        private static readonly NotificationType SourceNotificationType = NotificationType.Recovery;
         private static readonly NotificationType DestinationNotificationType = NotificationType.Disposal;
 
         private readonly NotificationApplication source;
