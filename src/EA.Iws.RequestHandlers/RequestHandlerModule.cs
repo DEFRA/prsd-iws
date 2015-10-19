@@ -45,7 +45,7 @@
             builder.RegisterType<MovementFactory>().AsSelf();
             builder.RegisterType<ActiveMovements>().AsSelf();
             builder.RegisterType<ReceivedMovements>().AsSelf();
-            builder.RegisterType<MovementQuantity>().AsSelf();
+            builder.RegisterType<NotificationMovementsQuantity>().AsSelf();
             builder.RegisterType<SetActualDateOfShipment>().AsSelf();
             builder.RegisterType<NotificationChargeCalculator>().AsSelf();
             builder.RegisterType<CertificateFactory>().AsSelf();

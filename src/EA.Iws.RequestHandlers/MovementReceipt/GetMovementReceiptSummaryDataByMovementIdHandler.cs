@@ -1,46 +1,54 @@
 ﻿namespace EA.Iws.RequestHandlers.MovementReceipt
 {
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
-    using Movement;
     using Prsd.Core.Mediator;
     using Requests.MovementReceipt;
 
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
     {
+        private readonly INotificationApplicationRepository notificationRepositoy;
+        private readonly IMovementRepository movementRepository;
         private readonly IwsContext context;
         private readonly ActiveMovements activeMovementService;
-        private readonly MovementQuantity movementQuantityCalculator;
+        private readonly NotificationMovementsQuantity movementQuantityCalculator;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
 
-        public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context, 
+        public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context,
             ActiveMovements activeMovementService,
-            MovementQuantity movementQuantityCalculator,
-            IShipmentInfoRepository shipmentInfoRepository)
+            NotificationMovementsQuantity movementQuantityCalculator,
+            IShipmentInfoRepository shipmentInfoRepository,
+            IMovementRepository movementRepository,
+            INotificationApplicationRepository notificationRepositoy)
         {
             this.context = context;
             this.activeMovementService = activeMovementService;
             this.movementQuantityCalculator = movementQuantityCalculator;
             this.shipmentInfoRepository = shipmentInfoRepository;
+            this.movementRepository = movementRepository;
+            this.notificationRepositoy = notificationRepositoy;
         }
 
         public async Task<MovementReceiptSummaryData> HandleAsync(GetMovementReceiptSummaryDataByMovementId message)
         {
-            var movement = await context
-                .Movements.SingleAsync(m => m.Id == message.Id);
+            var movement = await movementRepository
+                .GetById(message.Id);
 
-            var notification = await context
-                .GetNotificationApplication(movement.NotificationId);
+            var notification = await notificationRepositoy
+                .GetByMovementId(message.Id);
 
-            var relatedMovements = await context
-                .GetMovementsForNotificationAsync(movement.NotificationId);
+            var relatedMovements = await movementRepository
+                .GetAllMovements(notification.Id);
 
-            var financialGuarantee = await context
-                .FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == movement.NotificationId);
+            var financialGuarantee = await context.FinancialGuarantees
+                .SingleAsync(fg => 
+                    fg.NotificationApplicationId == movement.NotificationId);
 
             var shipmentInfo = await shipmentInfoRepository
                 .GetByNotificationId(movement.NotificationId);
@@ -52,10 +60,10 @@
                 NotificationNumber = notification.NotificationNumber,
                 ThisMovementNumber = movement.Number,
                 ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
-                CurrentActiveLoads = activeMovementService.Total(relatedMovements),
-                QuantitySoFar = movementQuantityCalculator.Received(shipmentInfo, relatedMovements),
-                QuantityRemaining = movementQuantityCalculator
-                    .Remaining(shipmentInfo, relatedMovements),
+                CurrentActiveLoads = activeMovementService.Total(relatedMovements.ToList()),
+                QuantitySoFar = await movementQuantityCalculator.Received(movement.NotificationId),
+                QuantityRemaining = await movementQuantityCalculator
+                    .Remaining(movement.NotificationId),
                 DisplayUnit = shipmentInfo.Units
             };
         }

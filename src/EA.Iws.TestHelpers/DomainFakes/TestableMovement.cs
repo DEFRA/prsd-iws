@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Movement;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -74,6 +75,12 @@
         {
             get { return base.CompletedReceipt; }
             set { ObjectInstantiator<Movement>.SetProperty(x => x.CompletedReceipt, value, this); }
+        }
+
+        public new MovementStatus Status
+        {
+            get { return base.Status; }
+            set { ObjectInstantiator<Movement>.SetProperty(x => x.Status, value, this); }
         }
     }
 }

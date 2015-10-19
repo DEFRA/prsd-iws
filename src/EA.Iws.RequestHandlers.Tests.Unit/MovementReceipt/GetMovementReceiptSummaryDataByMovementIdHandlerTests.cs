@@ -2,8 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Movement;
     using Core.Shared;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using FakeItEasy;
     using Prsd.Core;
@@ -18,6 +20,7 @@
         private readonly Func<GetMovementReceiptSummaryDataByMovementId> getRequest = () => new GetMovementReceiptSummaryDataByMovementId(MovementId);
         private readonly TestableFinancialGuarantee financialGuarantee;
         private readonly TestableShipmentInfo shipmentInfo;
+        private readonly IMovementRepository movementRepository;
 
         public GetMovementReceiptSummaryDataByMovementIdHandlerTests()
         {
@@ -37,6 +40,7 @@
 
             Movement.Number = 1;
             Movement.Units = ShipmentQuantityUnits.Kilograms;
+            Movement.Status = MovementStatus.Received;
             Movement.Receipt = new TestableMovementReceipt
             {
                 Date = new DateTime(2015, 9, 1),
@@ -44,19 +48,25 @@
                 Quantity = 5
             };
 
-            Context.ShipmentInfos.Add(shipmentInfo);
-            Context.Movements.Add(Movement);
-            Context.NotificationApplications.Add(NotificationApplication);
             Context.FinancialGuarantees.Add(financialGuarantee);
 
             var shipmentRepository = A.Fake<IShipmentInfoRepository>();
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipmentInfo);
 
+            movementRepository = A.Fake<IMovementRepository>();
+            A.CallTo(() => movementRepository.GetReceivedMovements(NotificationId)).Returns(new[] { Movement });
+            A.CallTo(() => movementRepository.GetById(MovementId)).Returns(Movement);
+
+            var notificationRepository = A.Fake<INotificationApplicationRepository>();
+            A.CallTo(() => notificationRepository.GetByMovementId(MovementId)).Returns(NotificationApplication);
+
             handler = new GetMovementReceiptSummaryDataByMovementIdHandler(
                 Context,
                 new ActiveMovements(),
-                new MovementQuantity(new ReceivedMovements(new ActiveMovements())),
-                shipmentRepository);
+                new NotificationMovementsQuantity(movementRepository, shipmentRepository),
+                shipmentRepository,
+                movementRepository,
+                notificationRepository);
         }
 
         [Fact]
@@ -95,7 +105,7 @@
         {
             SystemTime.Freeze(new DateTime(2015, 1, 1));
 
-            Context.Movements.AddRange(new[]
+            A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new[]
             {
                 new TestableMovement
                 {
@@ -116,7 +126,7 @@
                     Units = ShipmentQuantityUnits.Kilograms
                 }
             });
-
+            
             var result = await handler.HandleAsync(getRequest());
 
             Assert.Equal(2, result.CurrentActiveLoads);

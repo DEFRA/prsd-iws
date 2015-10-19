@@ -20,10 +20,21 @@
             this.notificationAuthorization = notificationAuthorization;
         }
 
+        private async Task<IEnumerable<Movement>> GetMovementsByStatus(Guid notificationId, MovementStatus status)
+        {
+            return await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && m.Status == status)
+                .ToArrayAsync();
+        }
+
         public async Task<Movement> GetById(Guid movementId)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == movementId);
+
             await notificationAuthorization.EnsureAccessAsync(movement.NotificationId);
+
             return movement;
         }
 
@@ -31,16 +42,27 @@
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
-            return await context.Movements
-                .Where(m =>
-                    m.NotificationId == notificationId
-                    && m.Status == MovementStatus.Submitted)
-                .ToArrayAsync();
+            return await GetMovementsByStatus(notificationId, MovementStatus.Submitted);
+        }
+
+        public async Task<IEnumerable<Movement>> GetReceivedMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await GetMovementsByStatus(notificationId, MovementStatus.Received);
+        }
+
+        public async Task<IEnumerable<Movement>> GetCompletedMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await GetMovementsByStatus(notificationId, MovementStatus.Completed);
         }
 
         public async Task<IEnumerable<Movement>> GetAllMovements(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
+
             return await context.Movements
                 .Where(m => m.NotificationId == notificationId)
                 .ToArrayAsync();

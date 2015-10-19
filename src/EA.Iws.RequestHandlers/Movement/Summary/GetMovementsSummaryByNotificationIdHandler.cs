@@ -16,7 +16,7 @@
     {
         private readonly IwsContext context;
         private readonly ActiveMovements activeMovementService;
-        private readonly MovementQuantity movementQuantityCalculator;
+        private readonly NotificationMovementsQuantity movementQuantityCalculator;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IMovementRepository movementRepository;
@@ -24,7 +24,7 @@
 
         public GetMovementsSummaryByNotificationIdHandler(IwsContext context,
             ActiveMovements activeMovementService,
-            MovementQuantity movementQuantityCalculator,
+            NotificationMovementsQuantity movementQuantityCalculator,
             IShipmentInfoRepository shipmentInfoRepository,
             INotificationApplicationRepository notificationApplicationRepository,
             IMovementRepository movementRepository,
@@ -54,11 +54,11 @@
             {
                 NotificationId = message.Id,
                 NotificationNumber = notification.NotificationNumber,
-                NotificationType = (Core.Shared.NotificationType)notification.NotificationType,
+                NotificationType = notification.NotificationType,
                 IntendedShipments = shipmentInfo.NumberOfShipments,
                 UsedShipments = relatedMovements.Count,
                 IntendedQuantityTotal = shipmentInfo.Quantity,
-                ReceivedQuantityTotal = movementQuantityCalculator.Received(shipmentInfo, relatedMovements),
+                ReceivedQuantityTotal = await movementQuantityCalculator.Received(message.Id),
                 DisplayUnits = shipmentInfo.Units,
                 ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
                 ActiveLoadsCurrent = activeMovementService.Total(relatedMovements),

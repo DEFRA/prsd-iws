@@ -1,30 +1,37 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.MovementReceipt
 {
-    using EA.Iws.Core.Shared;
-    using EA.Iws.Domain.Movement;
-    using RequestHandlers.MovementReceipt;
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
+    using Core.Shared;
+    using Domain.Movement;
+    using Domain.NotificationApplication.Shipment;
+    using FakeItEasy;
     using TestHelpers.DomainFakes;
     using Xunit;
 
     public class MovementQuantityTests
     {
-        private readonly MovementQuantity movementQuantity;
+        private static readonly Guid NotificationId = new Guid("4B2015E0-5CCC-45C0-B904-F6CC49741E16");
+        private readonly NotificationMovementsQuantity movementQuantity;
         private readonly TestableMovement movement;
         private readonly TestableShipmentInfo shipmentInfo;
+        private readonly IMovementRepository movementRepository;
+        private readonly IShipmentInfoRepository shipmentRepository;
 
         public MovementQuantityTests()
         {
-            movement = new TestableMovement();
-
-            movement.Units = ShipmentQuantityUnits.Kilograms;
-
-            movement.Receipt = new TestableMovementReceipt
+            movement = new TestableMovement
             {
-                Date = new DateTime(2015, 9, 1),
-                Decision = Core.MovementReceipt.Decision.Accepted,
-                Quantity = 5
+                Units = ShipmentQuantityUnits.Kilograms,
+                Status = MovementStatus.Received,
+                Receipt = new TestableMovementReceipt
+                {
+                    Date = new DateTime(2015, 9, 1),
+                    Decision = Core.MovementReceipt.Decision.Accepted,
+                    Quantity = 5
+                }
             };
 
             shipmentInfo = new TestableShipmentInfo
@@ -33,31 +40,50 @@
                 Units = ShipmentQuantityUnits.Kilograms
             };
 
-            movementQuantity = new MovementQuantity(new ReceivedMovements(new ActiveMovements()));
+            movementRepository = A.Fake<IMovementRepository>();
+            shipmentRepository = A.Fake<IShipmentInfoRepository>();
+
+            movementQuantity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
+        }
+
+        private void SetUpRepositoryCalls(Movement[] movements, ShipmentInfo shipment)
+        {
+            A.CallTo(() => movementRepository.GetReceivedMovements(NotificationId)).Returns(movements.Where(m => m.Status == MovementStatus.Received));
+            A.CallTo(() => movementRepository.GetCompletedMovements(NotificationId)).Returns(movements.Where(m => m.Status == MovementStatus.Completed));
+            A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipment);
         }
 
         [Fact]
-        public void ReturnsCorrectQuantityReceived()
+        public async Task ReturnsCorrectQuantityReceived()
         {
             var movements = new[] { movement };
 
-            Assert.Equal(5, movementQuantity.Received(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Received(NotificationId);
+
+            Assert.Equal(5, result);
         }
 
         [Fact]
-        public void ReturnsCorrectQuantityRemaining()
+        public async Task ReturnsCorrectQuantityRemaining()
         {
             var movements = new[] { movement };
 
-            Assert.Equal(15, movementQuantity.Remaining(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Remaining(NotificationId);
+
+            Assert.Equal(15, result);
         }
 
         [Fact]
-        public void QuantityReceived_IfMovementsUnitsDiffer_ConvertsAndSums()
+        public async Task QuantityReceived_IfMovementsUnitsDiffer_ConvertsAndSums()
         {
             var movementWithOtherUnits = new TestableMovement
             {
                 Units = ShipmentQuantityUnits.Tonnes,
+                Status = MovementStatus.Received,
                 Receipt = new TestableMovementReceipt
                 {
                     Date = new DateTime(2015, 9, 2),
@@ -68,24 +94,33 @@
 
             var movements = new[] { movement, movementWithOtherUnits };
 
-            Assert.Equal(6, movementQuantity.Received(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Received(NotificationId);
+
+            Assert.Equal(6, result);
         }
 
         [Fact]
-        public void QuantityRemaining_IfMovementsAndNotificationShipmentUnitsDiffer_ConvertsToNotificationUnits()
+        public async Task QuantityRemaining_IfMovementsAndNotificationShipmentUnitsDiffer_ConvertsToNotificationUnits()
         {
             shipmentInfo.Units = ShipmentQuantityUnits.Tonnes;
 
             var movements = new[] { movement };
 
-            Assert.Equal(0.005m, movementQuantity.Received(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Remaining(NotificationId);
+
+            Assert.Equal(19.995m, result);
         }
 
         [Fact]
-        public void QuantityReceived_OnlyCountsReceivedMovements()
+        public async Task QuantityReceived_CountsReceivedMovements()
         {
             var nonReceivedMovement = new TestableMovement
             {
+                Status = MovementStatus.Submitted,
                 Receipt = new TestableMovementReceipt
                 {
                     Quantity = 5
@@ -94,14 +129,19 @@
 
             var movements = new[] { movement, nonReceivedMovement };
 
-            Assert.Equal(5, movementQuantity.Received(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Received(NotificationId);
+
+            Assert.Equal(5, result);
         }
 
         [Fact]
-        public void QuantityRemaining_OnlyCountsReceivedMovements()
+        public async Task QuantityRemaining_CountsReceivedMovements()
         {
             var nonReceivedMovement = new TestableMovement
             {
+                Status = MovementStatus.New,
                 Receipt = new TestableMovementReceipt
                 {
                     Quantity = 5
@@ -110,14 +150,63 @@
 
             var movements = new[] { movement, nonReceivedMovement };
 
-            Assert.Equal(15, movementQuantity.Remaining(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Remaining(NotificationId);
+
+            Assert.Equal(15, result);
         }
 
         [Fact]
-        public void QuantityReceived_Zero_WhenNoMovementsReceived()
+        public async Task QuantityReceived_CountsCompletedMovements()
+        {
+            var completedMovement = new TestableMovement
+            {
+                Status = MovementStatus.Completed,
+                Units = ShipmentQuantityUnits.Kilograms,
+                Receipt = new TestableMovementReceipt
+                {
+                    Quantity = 5
+                }
+            };
+
+            var movements = new[] { movement, completedMovement };
+
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Received(NotificationId);
+
+            Assert.Equal(10, result);
+        }
+
+        [Fact]
+        public async Task QuantityRemaining_CountsCompletedMovements()
+        {
+            var completedMovement = new TestableMovement
+            {
+                Status = MovementStatus.Completed,
+                Units = ShipmentQuantityUnits.Kilograms,
+                Receipt = new TestableMovementReceipt
+                {
+                    Quantity = 5
+                }
+            };
+
+            var movements = new[] { movement, completedMovement };
+
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Remaining(NotificationId);
+
+            Assert.Equal(10, result);
+        }
+
+        [Fact]
+        public async Task QuantityReceived_Zero_WhenNoMovementsReceived()
         {
             var nonReceivedMovement = new TestableMovement
             {
+                Status = MovementStatus.Submitted,
                 Receipt = new TestableMovementReceipt
                 {
                     Quantity = 5
@@ -126,14 +215,19 @@
 
             var movements = new[] { nonReceivedMovement };
 
-            Assert.Equal(0, movementQuantity.Received(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Received(NotificationId);
+
+            Assert.Equal(0, result);
         }
 
         [Fact]
-        public void QuantityRemaining_Unchanged_WhenNoMovementsReceived()
+        public async Task QuantityRemaining_Unchanged_WhenNoMovementsReceived()
         {
             var nonReceivedMovement = new TestableMovement
             {
+                Status = MovementStatus.Submitted,
                 Receipt = new TestableMovementReceipt
                 {
                     Quantity = 5
@@ -142,17 +236,25 @@
 
             var movements = new[] { nonReceivedMovement };
 
-            Assert.Equal(20, movementQuantity.Remaining(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Remaining(NotificationId);
+
+            Assert.Equal(20, result);
         }
 
         [Fact]
-        public void QuantityRemaining_ReturnedInShipmentInfoUnits()
+        public async Task QuantityRemaining_ReturnedInShipmentInfoUnits()
         {
             shipmentInfo.Units = ShipmentQuantityUnits.Tonnes;
 
             var movements = new[] { movement };
 
-            Assert.Equal(19.995m, movementQuantity.Remaining(shipmentInfo, movements));
+            SetUpRepositoryCalls(movements, shipmentInfo);
+
+            var result = await movementQuantity.Remaining(NotificationId);
+
+            Assert.Equal(19.995m, result);
         }
     }
 }

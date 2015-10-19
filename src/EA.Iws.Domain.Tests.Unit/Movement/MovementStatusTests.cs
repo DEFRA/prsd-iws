@@ -62,11 +62,11 @@
         [Fact]
         public void CanCancelSubmittedMovement()
         {
-            ObjectInstantiator<Movement>.SetProperty(m => m.Status, MovementStatus.Submitted, movement);
+            SetMovementStatus(MovementStatus.Submitted, movement);
 
             movement.Cancel();
 
-            Assert.Equal(movement.Status, MovementStatus.Cancelled);
+            Assert.Equal(MovementStatus.Cancelled, movement.Status);
         }
 
         [Fact]
