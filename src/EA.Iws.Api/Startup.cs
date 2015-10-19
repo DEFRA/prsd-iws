@@ -13,6 +13,7 @@ namespace EA.Iws.Api
     using Elmah.Contrib.WebApi;
     using IdSrv;
     using Microsoft.Owin.Security.DataProtection;
+    using Newtonsoft.Json.Serialization;
     using Owin;
     using Services;
     using Thinktecture.IdentityServer.AccessTokenValidation;
@@ -46,6 +47,7 @@ namespace EA.Iws.Api
             config.Services.Add(typeof(IExceptionLogger), new ElmahExceptionLogger());
             config.Filters.Add(new ElmahHandleErrorApiAttribute());
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver { IgnoreSerializableAttribute = true };
 
             app.UseIdentityServer(GetIdentityServerOptions(app));
 
