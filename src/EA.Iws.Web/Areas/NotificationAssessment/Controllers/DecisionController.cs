@@ -36,6 +36,11 @@
         {
             if (!ModelState.IsValid)
             {
+                if (model.DecisionTypes.Count == 0)
+                {
+                    return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
+                }
+
                 return View(model);
             }
 
