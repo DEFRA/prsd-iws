@@ -7,12 +7,12 @@
 
     public class MovementMapTests
     {
-        private readonly MovementMap map;
+        private readonly MovementProgressMap map;
         private readonly TestableMovement movement;
 
         public MovementMapTests()
         {
-            map = new MovementMap();
+            map = new MovementProgressMap();
             movement = new TestableMovement();
         }
 

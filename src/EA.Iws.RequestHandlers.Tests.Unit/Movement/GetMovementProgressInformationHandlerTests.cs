@@ -50,7 +50,7 @@
 
             handler = new GetMovementProgressInformationHandler(
                 Context,
-                new MovementMap(),
+                new MovementProgressMap(),
                 new ActiveMovements(),
                 shipmentRepository);
         }

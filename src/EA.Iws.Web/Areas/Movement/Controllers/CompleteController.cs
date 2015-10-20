@@ -91,7 +91,7 @@
             var notification = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
             var model = new SuccessViewModel
             {
-                NotificationId = id,
+                NotificationId = notificationId,
                 NotificationType = notification.NotificationType
             };
 
