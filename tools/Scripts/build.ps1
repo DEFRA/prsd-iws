@@ -23,7 +23,6 @@ $srcDir = Join-Path $RootPath "src";
 $toolsDir =  Join-Path $RootPath "tools";
 $outDir = Join-Path $RootPath "build"
 $packagesDir = Join-Path $srcDir "packages";
-$xunit = dir $packagesDir -recurse | where { $_.PSIsContainer -eq $false -and $_.Name -eq "xunit.console.exe" } | foreach { $_.FullName } | sort -descending
 
 if (-not ($outDir.EndsWith("\"))) { 
     $outDir += '\' #MSBuild requires OutDir end with a trailing slash #awesome 
@@ -74,5 +73,6 @@ Copy-Item $srcDir\EA.Iws.Database\scripts\* $outDir\Database\ -Force -Recurse -C
 ###
 # Run unit tests
 ###
+$xunit = dir $packagesDir -recurse | where { $_.PSIsContainer -eq $false -and $_.Name -eq "xunit.console.exe" } | foreach { $_.FullName } | sort -descending
 $testDlls = dir $outDir | where { $_.Name -like "*.Tests.Unit.dll" } | foreach { "`"" + $_.FullName +"`"" }
 &$xunit ([string]::Join(" ", $testDlls)) -parallel none -nunit $outDir\xunit-test-results.xml
