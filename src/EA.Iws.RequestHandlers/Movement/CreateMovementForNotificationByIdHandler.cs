@@ -1,17 +1,15 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
     using System;
-    using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Movement;
-    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationApplication;
-    using Prsd.Core.Mediator;
-    using RequestHandlers.Notification;
-    using Requests.Movement;
+    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
-    using System.Linq;
+    using Prsd.Core.Mediator;
+    using Requests.Movement;
 
     public class CreateMovementForNotificationByIdHandler : IRequestHandler<CreateMovementForNotificationById, Guid>
     {

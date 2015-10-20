@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Movement
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationAssessment;
     using FakeItEasy;
     using RequestHandlers.Movement;
     using Requests.Movement;
@@ -16,6 +19,7 @@
         private static readonly Guid notificationId = new Guid("4F2C1FC0-44F6-478A-BEBC-33DFEE22D977");
         private readonly TestIwsContext testContext;
         private readonly TestableShipmentInfo shipmentInfo;
+        private IMovementRepository movementRepository;
 
         public CreateMovementForNotificationByIdHandlerTests()
         {
@@ -26,26 +30,39 @@
                 NotificationId = notificationId,
                 NumberOfShipments = 1
             };
-
-            testContext.NotificationApplications.Add(new TestableNotificationApplication
-            {
-                Id = notificationId,
-                UserId = TestIwsContext.UserId
-            });
-
-            testContext.NotificationAssessments.Add(new TestableNotificationAssessment
-            {
-                NotificationApplicationId = notificationId
-            });
-
-            testContext.ShipmentInfos.Add(shipmentInfo);
-
+            
             var factory = new MovementFactory();
 
             var shipmentRepository = A.Fake<IShipmentInfoRepository>();
-            A.CallTo(() => shipmentRepository.GetByNotificationId(notificationId)).Returns(shipmentInfo);
+            A.CallTo(() => shipmentRepository.GetByNotificationId(notificationId))
+                .Returns(shipmentInfo);
 
-            handler = new CreateMovementForNotificationByIdHandler(testContext, factory, shipmentRepository);
+            movementRepository = A.Fake<IMovementRepository>();
+            A.CallTo(() => movementRepository.GetAllMovements(notificationId))
+                .Returns(new Movement[0]);
+
+            var notificationRepository = A.Fake<INotificationApplicationRepository>();
+            A.CallTo(() => notificationRepository.GetById(notificationId))
+                .Returns(new TestableNotificationApplication
+                {
+                    Id = notificationId,
+                    UserId = TestIwsContext.UserId
+                });
+
+            var assessmentRepository = A.Fake<INotificationAssessmentRepository>();
+            A.CallTo(() => assessmentRepository.GetByNotificationId(notificationId))
+                .Returns(new TestableNotificationAssessment
+                {
+                    NotificationApplicationId = notificationId
+                });
+
+            handler = new CreateMovementForNotificationByIdHandler(
+                testContext, 
+                factory,
+                movementRepository,
+                notificationRepository,
+                assessmentRepository, 
+                shipmentRepository);
         }
 
         [Fact]
@@ -76,11 +93,15 @@
         {
             shipmentInfo.NumberOfShipments = 1;
 
-            testContext.Movements.Add(new TestableMovement
-            {
-                NotificationId = notificationId
-            });
-
+            A.CallTo(() => movementRepository.GetAllMovements(notificationId))
+                .Returns(new[] 
+                {
+                    new TestableMovement
+                    {
+                        NotificationId = notificationId
+                    }
+                });
+            
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => handler.HandleAsync(new CreateMovementForNotificationById(notificationId)));
         }
