@@ -71,7 +71,6 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
     <Compile Include="InternalUserTests.cs" />
-    <Compile Include="Movement\ActiveMovementsTests.cs" />
     <Compile Include="Movement\CertificateOfReceiptNameTests.cs" />
     <Compile Include="Movement\CertificateOfRecoveryNameTests.cs" />
     <Compile Include="Movement\MovementQuantityTests.cs" />

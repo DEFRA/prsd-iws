@@ -89,7 +89,6 @@
     <Compile Include="Movement\MovementFileNameGenerator.cs" />
     <Compile Include="Movement\MovementCompletedReceipt.cs" />
     <Compile Include="Movement\MovementReceipt.cs" />
-    <Compile Include="Movement\ActiveMovements.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />
     <Compile Include="Movement\NotificationMovementsSummary.cs" />

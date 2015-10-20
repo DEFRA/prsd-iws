@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
+    using Core.Movement;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -32,6 +33,7 @@
         [Fact]
         public void IsActive_ReturnsTrue_WhenDateInPast()
         {
+            ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, BeforeFrozenTime, movement);
 
             Assert.True(movement.HasShipped);

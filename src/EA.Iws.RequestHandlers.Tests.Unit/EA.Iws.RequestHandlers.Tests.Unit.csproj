@@ -105,10 +105,6 @@
     <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="MovementReceipt\GetMovementDateByMovementIdHandlerTests.cs" />
-    <Compile Include="MovementReceipt\GetMovementReceiptSummaryDataByMovementIdHandlerTests.cs" />
-    <Compile Include="MovementReceipt\GetMovementReceiptDateByMovementIdHandlerTests.cs" />
-    <Compile Include="MovementReceipt\GetShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
-    <Compile Include="MovementReceipt\UpdateShipmentAcceptanceDataByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementsForCancelByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandlerTests.cs" />
