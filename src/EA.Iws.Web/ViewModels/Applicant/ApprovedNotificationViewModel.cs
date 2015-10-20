@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Core.Shared;
+    using Core.NotificationAssessment;
     using Shared;
 
     public class ApprovedNotificationViewModel
@@ -14,22 +14,21 @@
 
         public Guid NotificationId { get; set; }
 
-        public NotificationType NotificationType { get; set; }
-
         public StringIntRadioButtons UserChoices { get; set; }
 
         public ApprovedNotificationViewModel()
         {
         }
 
-        public ApprovedNotificationViewModel(NotificationType notificationType)
+        public ApprovedNotificationViewModel(NotificationAssessmentSummaryInformationData notification)
         {
-            NotificationType = notificationType;
-
             var choices = new List<KeyValuePair<string, int>>();
             choices.Add(new KeyValuePair<string, int>(ViewNotification, 1));
-            choices.Add(new KeyValuePair<string, int>(PrintNotification, 2));
-            choices.Add(new KeyValuePair<string, int>(ManageShipments, 3));
+            if (notification.Status != NotificationStatus.NotSubmitted)
+            {
+                choices.Add(new KeyValuePair<string, int>(PrintNotification, 2));
+                choices.Add(new KeyValuePair<string, int>(ManageShipments, 3));
+            }
             choices.Add(new KeyValuePair<string, int>(NotificationKeyDates, 4));
 
             UserChoices = new StringIntRadioButtons(choices);

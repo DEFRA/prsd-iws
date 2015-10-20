@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
-    @Html.HiddenFor(m => m.NotificationType)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.UserChoices.SelectedValue)">
         @Html.Gds().ValidationMessageFor(model => model.UserChoices.SelectedValue)

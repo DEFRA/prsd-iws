@@ -197,6 +197,7 @@
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
     <Compile Include="ViewModels\Admin\NotificationNumberViewModelTests.cs" />
+    <Compile Include="ViewModels\ApprovedNotificationViewModelTests.cs" />
     <Compile Include="ViewModels\DisposalCostViewModelTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\CarrierViewModelTests.cs" />

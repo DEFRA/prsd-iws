@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.NotificationAssessment;
-    using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
@@ -17,11 +16,13 @@
         private readonly ApplicantController applicantController;
         private readonly IMediator mediator;
         private readonly Guid notificationId = Guid.NewGuid();
+        private readonly NotificationAssessmentSummaryInformationData notification; 
 
         public ApplicantControllerTests()
         {
             mediator = A.Fake<IMediator>();
             applicantController = new ApplicantController(mediator);
+            notification = new NotificationAssessmentSummaryInformationData();
         }
 
         [Fact]
@@ -65,7 +66,8 @@
         
         private ApprovedNotificationViewModel GetApprovedNotificationViewModel(UserChoice userChoice)
         {
-            var approvedNotificationViewModel = new ApprovedNotificationViewModel(NotificationType.Recovery);
+            notification.Status = NotificationStatus.Submitted;
+            var approvedNotificationViewModel = new ApprovedNotificationViewModel(notification);
             approvedNotificationViewModel.NotificationId = notificationId;
             approvedNotificationViewModel.UserChoices.SelectedValue = (int)userChoice;
             return approvedNotificationViewModel;
