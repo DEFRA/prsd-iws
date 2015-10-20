@@ -28,16 +28,9 @@
         public DateReceivedViewModel()
         {
         }
-
-        public DateReceivedViewModel(DateTime? dateReceived, DateTime movementDate)
+        
+        public DateReceivedViewModel(DateTime movementDate)
         {
-            if (dateReceived.HasValue)
-            {
-                Day = dateReceived.Value.Day;
-                Month = dateReceived.Value.Month;
-                Year = dateReceived.Value.Year;
-            }
-
             MovementDate = movementDate;
         }
 

@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using Core.MovementReceipt;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
+    using Requests.Movement;
     using ViewModels.Quantity;
 
     public class QuantityReceivedController : Controller
@@ -29,13 +29,13 @@
 
             if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult) && TempData.TryGetValue(DecisionKey, out decisionResult))
             {
-                var result = await mediator.SendAsync(new GetMovementReceiptQuantityByMovementId(id));
+                var units = await mediator.SendAsync(new GetMovementUnitsByMovementId(id));
 
                 return View(new QuantityReceivedViewModel
                 {
                     DateReceived = DateTime.Parse(dateReceivedResult.ToString()),
                     Decision = (Decision)decisionResult,
-                    Unit = result.Unit
+                    Unit = units
                 });
             }
 

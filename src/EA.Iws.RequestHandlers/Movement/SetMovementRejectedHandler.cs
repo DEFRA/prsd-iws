@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.RequestHandlers.MovementReceipt
+﻿namespace EA.Iws.RequestHandlers.Movement
 {
     using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Movement;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
+    using Requests.Movement;
 
     internal class SetMovementRejectedHandler : IRequestHandler<SetMovementRejected, Guid>
     {

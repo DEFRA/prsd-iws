@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Core.MovementReceipt;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
     using ViewModels.Acceptance;
 
     [Authorize]

@@ -3,56 +3,40 @@
     using System;
     using System.Threading.Tasks;
     using Core.Shared;
-    using RequestHandlers.MovementReceipt;
-    using Requests.MovementReceipt;
+    using RequestHandlers.Movement;
+    using Requests.Movement;
     using TestHelpers.DomainFakes;
     using Xunit;
 
     public class GetMovementReceiptQuantityByMovementIdHandlerTests : TestBase
     {
-        private readonly GetMovementReceiptQuantityByMovementIdHandler handler;
-        private readonly GetMovementReceiptQuantityByMovementId request;
+        private readonly GetMovementUnitsByMovementIdHandler handler;
+        private readonly GetMovementUnitsByMovementId request;
 
         public GetMovementReceiptQuantityByMovementIdHandlerTests()
         {
-            handler = new GetMovementReceiptQuantityByMovementIdHandler(Context);
+            handler = new GetMovementUnitsByMovementIdHandler(Context);
 
-            request = new GetMovementReceiptQuantityByMovementId(MovementId);
+            request = new GetMovementUnitsByMovementId(MovementId);
             Movement.Units = ShipmentQuantityUnits.Kilograms;
 
             Context.Movements.Add(Movement);
         }
 
         [Fact]
-        public async Task ReceiptIsNull_ReturnsShipmentDisplayUnits_QuantityNull()
+        public async Task ReceiptIsNull_ReturnsShipmentDisplayUnits()
         {
             var result = await handler.HandleAsync(request);
 
-            Assert.Equal(ShipmentQuantityUnits.Kilograms, result.Unit);
-            Assert.Null(result.Quantity);
+            Assert.Equal(ShipmentQuantityUnits.Kilograms, result);
         }
         
         [Fact]
         public async Task Movement_DoesNotExist_Throws()
         {
-            Func<Task> handle = () => handler.HandleAsync(new GetMovementReceiptQuantityByMovementId(Guid.Empty));
+            Func<Task> handle = () => handler.HandleAsync(new GetMovementUnitsByMovementId(Guid.Empty));
 
             await Assert.ThrowsAsync<InvalidOperationException>(handle);
-        }
-
-        [Fact]
-        public async Task Receipt_HasQuantity_ReturnsQuantity()
-        {
-            Movement.Units = ShipmentQuantityUnits.Tonnes;
-            Movement.Receipt = new TestableMovementReceipt
-            {
-                Quantity = 10
-            };
-
-            var result = await handler.HandleAsync(request);
-
-            Assert.Equal(ShipmentQuantityUnits.Tonnes, result.Unit);
-            Assert.Equal(10, result.Quantity);
         }
     }
 }

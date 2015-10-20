@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.MovementReceipt
+﻿namespace EA.Iws.RequestHandlers.Movement
 {
     using System.Data.Entity;
     using System.Linq;
@@ -9,7 +9,7 @@
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
+    using Requests.Movement;
 
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
     {

@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Acceptance
 {
-    using Requests.MovementReceipt;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -19,12 +18,6 @@
 
         public AcceptanceViewModel()
         {
-        }
-
-        public AcceptanceViewModel(MovementAcceptanceData acceptanceData)
-        {
-            Decision = acceptanceData.Decision;
-            RejectReason = acceptanceData.RejectionReason;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

@@ -7,7 +7,6 @@
     using Prsd.Core.Mediator;
     using Prsd.Core.Web;
     using Requests.Movement;
-    using Requests.MovementReceipt;
 
     [Authorize]
     public class HomeController : Controller

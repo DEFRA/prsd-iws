@@ -7,7 +7,7 @@
     using Areas.Movement.ViewModels;
     using FakeItEasy;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
+    using Requests.Movement;
     using Xunit;
 
     public class DateReceivedControllerTests
@@ -31,7 +31,7 @@
             await controller.Index(MovementId);
 
             A.CallTo(() =>
-                mediator.SendAsync(A<GetMovementReceiptDateByMovementId>
+                mediator.SendAsync(A<GetMovementDateByMovementId>
                     .That.Matches(r => r.MovementId == MovementId)))
                     .MustHaveHappened(Repeated.Exactly.Once);
         }

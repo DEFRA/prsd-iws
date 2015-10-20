@@ -69,7 +69,6 @@
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
-    <Compile Include="MovementReceipt\MovementReceiptQuantityData.cs" />
     <Compile Include="Movement\MovementStatus.cs" />
     <Compile Include="Movement\SubmittedMovement.cs" />
     <Compile Include="Movement\MovementData.cs" />

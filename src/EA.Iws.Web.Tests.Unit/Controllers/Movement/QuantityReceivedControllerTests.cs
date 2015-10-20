@@ -9,7 +9,7 @@
     using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
+    using Requests.Movement;
     using Xunit;
 
     public class QuantityReceivedControllerTests
@@ -26,12 +26,8 @@
             controller = new QuantityReceivedController(mediator);
 
             A.CallTo(() =>
-                mediator.SendAsync(A<GetMovementReceiptQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid)))
-                .Returns(new MovementReceiptQuantityData
-                {
-                    Unit = ShipmentQuantityUnits.Kilograms,
-                    Quantity = 250
-                });
+                mediator.SendAsync(A<GetMovementUnitsByMovementId>.That.Matches(r => r.Id == AnyGuid)))
+                .Returns(ShipmentQuantityUnits.Kilograms);
 
             viewModel = new QuantityReceivedViewModel
             {
@@ -48,7 +44,7 @@
             await controller.Index(AnyGuid);
 
             A.CallTo(() =>
-                mediator.SendAsync(A<GetMovementReceiptQuantityByMovementId>.That.Matches(r => r.Id == AnyGuid)))
+                mediator.SendAsync(A<GetMovementUnitsByMovementId>.That.Matches(r => r.Id == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

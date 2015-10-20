@@ -8,7 +8,6 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Requests.MovementReceipt;
     using ViewModels;
 
     public class ReceiptCompleteController : Controller

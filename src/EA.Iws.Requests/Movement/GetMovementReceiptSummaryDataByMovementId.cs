@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.MovementReceipt
+﻿namespace EA.Iws.Requests.Movement
 {
     using System;
     using Core.Movement;

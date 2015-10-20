@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
-    using Requests.MovementReceipt;
+    using Requests.Movement;
     using ViewModels;
 
     public class DateReceivedController : Controller
@@ -20,9 +20,9 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var dates = await mediator.SendAsync(new GetMovementReceiptDateByMovementId(id));
+            var movementDate = await mediator.SendAsync(new GetMovementDateByMovementId(id));
 
-            var viewModel = new DateReceivedViewModel(dates.DateReceived, dates.MovementDate);
+            var viewModel = new DateReceivedViewModel(movementDate);
 
             return View(viewModel);
         }

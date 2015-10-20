@@ -9,8 +9,8 @@
     using Domain.NotificationApplication.Shipment;
     using FakeItEasy;
     using Prsd.Core;
-    using RequestHandlers.MovementReceipt;
-    using Requests.MovementReceipt;
+    using RequestHandlers.Movement;
+    using Requests.Movement;
     using TestHelpers.DomainFakes;
     using Xunit;
 
