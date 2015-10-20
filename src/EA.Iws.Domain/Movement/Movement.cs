@@ -65,17 +65,7 @@
                     && Date < SystemTime.UtcNow;
             }
         }
-
-        public bool IsReceived
-        {
-            get
-            {
-                return this.Receipt != null
-                    && this.Receipt.Decision == MovementReceiptDecision.Accepted
-                    && this.Receipt.Quantity.HasValue;
-            }
-        }
-
+        
         public virtual MovementReceipt Receipt { get; private set; }
 
         public virtual MovementCompletedReceipt CompletedReceipt { get; private set; }
