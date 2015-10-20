@@ -9,13 +9,13 @@
         {
             MovementId = movementId;
             FileId = fileId;
-            DateReceied = dateReceived;
+            DateReceived = dateReceived;
             Quantity = quantity;
         }
 
         public Guid MovementId { get; private set; }
         public Guid FileId { get; private set; }
-        public DateTime DateReceied { get; private set; }
+        public DateTime DateReceived { get; private set; }
         public decimal Quantity { get; private set; }
     }
 }

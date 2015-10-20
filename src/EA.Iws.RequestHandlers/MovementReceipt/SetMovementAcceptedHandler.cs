@@ -22,7 +22,7 @@
         {
             var movement = await movementRepository.GetById(message.MovementId);
 
-            movement.Receive(message.FileId, message.DateReceied, message.Quantity);
+            movement.Receive(message.FileId, message.DateReceived, message.Quantity);
 
             await context.SaveChangesAsync();
 
