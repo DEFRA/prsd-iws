@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
@@ -9,9 +10,12 @@
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationApplication.WasteRecovery;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using FakeItEasy;
+    using Prsd.Core;
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;
     using Requests.Copy;
@@ -35,9 +39,12 @@
 
         public CopyToNotificationHandlerTests()
         {
-            var userContext = A.Fake<IUserContext>();
-            A.CallTo(() => userContext.UserId).Returns(UserId);
-            context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
+            SystemTime.Freeze(new DateTime(2015, 1, 1));
+            context = new IwsContext(GetUserContext(), A.Fake<IEventDispatcher>());
+            handler = new CopyToNotificationHandler(context, 
+                new NotificationToNotificationCopy(new WasteCodeCopy()), 
+                new TransportRouteToTransportRouteCopy(),
+                new WasteRecoveryToWasteRecoveryCopy());
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
 
@@ -47,30 +54,77 @@
                 context.WasteCodes.ToArray(),
                 SourceNumber);
 
-            var transportRoute = TransportRouteFactory.CreateCompleted(
-                new Guid("16CE4AE7-1FCF-4A04-84A3-9067DF24DEF6"), source.Id,
-                context.EntryOrExitPoints.ToArray(),
-                context.CompetentAuthorities.ToArray());
-
             destination = new NotificationApplication(UserId, DestinationNotificationType, DestinationCompetentAuthority, DestinationNumber);
             EntityHelper.SetEntityId(destination, new Guid("63581B29-EFB9-47F0-BCC3-E67382F4EAFA"));
-            handler = new CopyToNotificationHandler(context, new NotificationToNotificationCopy(new WasteCodeCopy()), new TransportRouteToTransportRouteCopy());
             
             context.NotificationApplications.Add(source);
-            context.TransportRoutes.Add(transportRoute);
             context.NotificationApplications.Add(destination);
+
+            // Calling source id and destination id is only safe after this call to save changes
             context.SaveChanges();
 
-            var sourceAssessment = new NotificationAssessment(source.Id);
-            var destinationAssessment = new NotificationAssessment(destination.Id);
+            AddNotificationLinkedEntities(source.Id, destination.Id);
+            
+            context.SaveChanges();
+        }
+
+        private IUserContext GetUserContext()
+        {
+            var userContext = A.Fake<IUserContext>();
+            A.CallTo(() => userContext.UserId).Returns(UserId);
+            return userContext;
+        }
+
+        private void AddNotificationLinkedEntities(Guid sourceId, Guid destinationId)
+        {
+            AddShipmentInfo(sourceId);
+            AddTransportRoute(sourceId);
+            AddWasteRecovery(sourceId);
+
+            AddNotificationAssessments(sourceId, destinationId);
+            AddFinancialGuarantees(sourceId, destinationId);
+        }
+
+        private void AddShipmentInfo(Guid id)
+        {
+            context.ShipmentInfos.Add(new ShipmentInfo(id,
+                new ShipmentPeriod(new DateTime(2015, 3, 3), new DateTime(2015, 5, 5), false), 25,
+                new ShipmentQuantity(25, ShipmentQuantityUnits.CubicMetres)));
+        }
+
+        private void AddTransportRoute(Guid id)
+        {
+            var transportRoute = TransportRouteFactory.CreateCompleted(
+                new Guid("16CE4AE7-1FCF-4A04-84A3-9067DF24DEF6"), id,
+                context.EntryOrExitPoints.ToArray(),
+                context.CompetentAuthorities.ToArray());
+            context.TransportRoutes.Add(transportRoute);
+        }
+
+        private void AddWasteRecovery(Guid id)
+        {
+            var wasteRecovery = new WasteRecovery(id, 
+                new Percentage(100), 
+                new EstimatedValue(ValuePerWeightUnits.Kilogram, 10), 
+                new RecoveryCost(ValuePerWeightUnits.Kilogram, 5));
+            
+            context.WasteRecoveries.Add(wasteRecovery);
+        }
+
+        private void AddNotificationAssessments(Guid sourceId, Guid destinationId)
+        {
+            var sourceAssessment = new NotificationAssessment(sourceId);
+            var destinationAssessment = new NotificationAssessment(destinationId);
             context.NotificationAssessments.Add(sourceAssessment);
             context.NotificationAssessments.Add(destinationAssessment);
+        }
 
-            var sourceFinancialGuarantee = FinancialGuarantee.Create(source.Id);
-            var destinationFinancialGuarantee = FinancialGuarantee.Create(destination.Id);
+        private void AddFinancialGuarantees(Guid sourceId, Guid destinationId)
+        {
+            var sourceFinancialGuarantee = FinancialGuarantee.Create(sourceId);
+            var destinationFinancialGuarantee = FinancialGuarantee.Create(destinationId);
             context.FinancialGuarantees.Add(sourceFinancialGuarantee);
             context.FinancialGuarantees.Add(destinationFinancialGuarantee);
-            context.SaveChanges();
         }
 
         [Fact]
@@ -86,7 +140,7 @@
         [Fact]
         public async Task CloneHasSourceNumberTypeAndAuthority()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
 
@@ -99,7 +153,7 @@
         [Fact]
         public async Task CloneHasSameExporterAndImporterDetails()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
@@ -117,7 +171,7 @@
         [Fact]
         public async Task CloneHasSameCodes()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
@@ -129,7 +183,7 @@
         [Fact]
         public async Task Copy_CloneDoesNotCopyIntendedShipments()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var copiedShipmentInfo = context.ShipmentInfos.SingleOrDefault(si => si.NotificationId == copiedNotification.Id);
@@ -144,7 +198,7 @@
         [Fact]
         public async Task TransportRouteCopied()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedTransport = GetCopiedTransportRoute();
             var sourceTransport = GetSourceTransportRoute();
@@ -164,7 +218,7 @@
         [Fact]
         public async Task OperationDetailsCopied()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
@@ -178,7 +232,7 @@
         [Fact]
         public async Task PackagingTypesCopied()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
@@ -190,7 +244,7 @@
         [Fact]
         public async Task ProducersCopied()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
@@ -204,7 +258,7 @@
         [Fact]
         public async Task CarriersCopied()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
@@ -218,7 +272,7 @@
         [Fact]
         public async Task AdditionalWasteInfosCopied()
         {
-            var result = await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
@@ -226,6 +280,39 @@
             Assert.Equal(sourceNotification.WasteType.WasteAdditionalInformation.Count(), 
                 copiedNotification.WasteType.WasteAdditionalInformation.Count());
             Assert.True(sourceNotification.WasteType.WasteAdditionalInformation.Any());
+        }
+
+        [Fact]
+        public async Task WasteRecoveryCopied()
+        {
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+
+            var copiedWasteRecovery = GetSourceWasteRecovery();
+            var sourceWasteRecovery = GetCopiedWasteRecovery();
+
+            Assert.NotEqual(sourceWasteRecovery.NotificationId, copiedWasteRecovery.NotificationId);
+            Assert.Equal(sourceWasteRecovery, copiedWasteRecovery, new WasteRecoveryValuesComparer());
+        }
+
+        [Fact]
+        public async Task WasteDisposalCopied()
+        {
+            var method = "Any Method";
+
+            context.WasteDisposals.Add(new WasteDisposal(source.Id, method,
+                new DisposalCost(ValuePerWeightUnits.Kilogram, 25)));
+
+            context.SaveChanges();
+
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+
+            var sourceWasteDisposal = await context.WasteDisposals.SingleAsync(w => w.NotificationId == source.Id);
+            var copyId = GetCopied().Id;
+            var copiedWasteDisposal = await context.WasteDisposals.SingleAsync(w => w.NotificationId == copyId);
+
+            Assert.Equal(method, copiedWasteDisposal.Method);
+            Assert.Equal(sourceWasteDisposal.Cost.Amount, copiedWasteDisposal.Cost.Amount);
+            Assert.Equal(sourceWasteDisposal.Cost.Units, copiedWasteDisposal.Cost.Units);
         }
 
         private NotificationApplication GetCopied()
@@ -245,7 +332,19 @@
 
         private TransportRoute GetCopiedTransportRoute()
         {
-            return context.TransportRoutes.Single(n => n.NotificationId == destination.Id);
+            var copied = GetCopied();
+            return context.TransportRoutes.Single(n => n.NotificationId == copied.Id);
+        }
+
+        private WasteRecovery GetSourceWasteRecovery()
+        {
+            return context.WasteRecoveries.Single(wr => wr.NotificationId == source.Id);
+        }
+
+        private WasteRecovery GetCopiedWasteRecovery()
+        {
+            var copied = GetCopied();
+            return context.WasteRecoveries.Single(wr => wr.NotificationId == copied.Id);
         }
 
         public void Dispose()
@@ -261,13 +360,15 @@
             }
 
             context.Dispose();
+
+            SystemTime.Unfreeze();
         }
 
         private class CodeComparer : IEqualityComparer<WasteCodeInfo>
         {
             public bool Equals(WasteCodeInfo x, WasteCodeInfo y)
             {
-                if (x == y)
+                if (ReferenceEquals(x, y))
                 {
                     return true;
                 }
@@ -294,6 +395,32 @@
             public int GetHashCode(WasteCodeInfo obj)
             {
                 return base.GetHashCode();
+            }
+        }
+
+        private class WasteRecoveryValuesComparer : IEqualityComparer<WasteRecovery>
+        {
+            public bool Equals(WasteRecovery x, WasteRecovery y)
+            {
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                var isRecoveryCostEqual = x.RecoveryCost.Amount == y.RecoveryCost.Amount
+                                          && x.RecoveryCost.Units == y.RecoveryCost.Units;
+
+                var isEstimatedValueEqual = x.EstimatedValue.Amount == y.EstimatedValue.Amount
+                          && x.EstimatedValue.Units == y.EstimatedValue.Units;
+
+                var isPercentageRecoverableEqual = x.PercentageRecoverable.Value == y.PercentageRecoverable.Value;
+
+                return isRecoveryCostEqual && isEstimatedValueEqual && isPercentageRecoverableEqual;
+            }
+
+            public int GetHashCode(WasteRecovery obj)
+            {
+                return obj.GetHashCode();
             }
         }
     }

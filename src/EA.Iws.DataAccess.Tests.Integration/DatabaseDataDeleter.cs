@@ -35,6 +35,9 @@
         DELETE FROM [Notification].[RecoveryInfo]
         WHERE NotificationId = @NotificationId;
 
+        DELETE FROM [Notification].[DisposalInfo]
+        WHERE NotificationId = @NotificationId;
+
         DELETE FROM [Notification].[ShipmentInfo]
         WHERE NotificationId = @NotificationId;
 
@@ -50,22 +53,28 @@
         DELETE FROM [Notification].[WasteCodeInfo] 
         WHERE NotificationId = @NotificationId;
 
+		DECLARE @TransportRouteId UNIQUEIDENTIFIER = 
+		(SELECT [Id] FROM [Notification].[TransportRoute] WHERE [NotificationId] = @NotificationId)
+
         DELETE FROM [Notification].[EntryCustomsOffice] 
-        WHERE NotificationId = @NotificationId;
+        WHERE TransportRouteId = @TransportRouteId;
 
         DELETE FROM [Notification].[ExitCustomsOffice] 
-        WHERE NotificationId = @NotificationId;
+        WHERE TransportRouteId = @TransportRouteId;
 
         DELETE FROM [Notification].[StateOfExport] 
-        WHERE NotificationId = @NotificationId;
+        WHERE TransportRouteId = @TransportRouteId;
 
         DELETE FROM [Notification].[StateOfImport] 
-        WHERE NotificationId = @NotificationId;
-
-        DELETE FROM [Notification].[TechnologyEmployed] 
-        WHERE NotificationId = @NotificationId;
+        WHERE TransportRouteId = @TransportRouteId;
 
         DELETE FROM [Notification].[TransitState] 
+        WHERE TransportRouteId = @TransportRouteId;
+
+		DELETE FROM [Notification].[TransportRoute]
+		WHERE Id = @TransportRouteId;
+
+        DELETE FROM [Notification].[TechnologyEmployed] 
         WHERE NotificationId = @NotificationId;
 
         DELETE FROM [Notification].[NotificationDates]
@@ -84,7 +93,6 @@
 
         DELETE FROM [Notification].[Notification] 
         WHERE Id = @NotificationId;
-        
         ";
 
         public static void DeleteDataForNotification(Guid notificationId, IwsContext context)

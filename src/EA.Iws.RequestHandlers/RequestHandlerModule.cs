@@ -41,6 +41,8 @@
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
             builder.RegisterType<TransportRouteToTransportRouteCopy>().AsSelf();
+            builder.RegisterType<WasteRecoveryToWasteRecoveryCopy>().AsSelf();
+
             builder.RegisterType<WasteCodeCopy>().AsSelf();
             builder.RegisterType<MovementFactory>().AsSelf();
             builder.RegisterType<ActiveMovements>().AsSelf();

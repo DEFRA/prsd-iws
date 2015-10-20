@@ -104,6 +104,7 @@
     <Compile Include="Authorization\UserRoleService.cs" />
     <Compile Include="Copy\TransportRouteToTransportRouteCopy.cs" />
     <Compile Include="Copy\WasteCodeCopy.cs" />
+    <Compile Include="Copy\WasteRecoveryToWasteRecoveryCopy.cs" />
     <Compile Include="Decorators\RequestAuthorizationDecorator.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttributeCache.cs" />
     <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />

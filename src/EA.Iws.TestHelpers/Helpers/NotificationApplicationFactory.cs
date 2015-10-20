@@ -42,7 +42,56 @@
             var notification = Create(id, number);
 
             OI.SetProperty(x => x.UserId, userId, notification);
+            
+            SetBusinesses(notification);
 
+            notification.SetMeansOfTransport(new List<MeansOfTransport>
+            {
+                MeansOfTransport.Air,
+                MeansOfTransport.Road,
+                MeansOfTransport.Train
+            });
+
+            notification.SetPhysicalCharacteristics(new List<PhysicalCharacteristicsInfo>
+            {
+                PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)
+            });
+
+            notification.SetWasteType(WasteType.CreateRdfWasteType(new[]
+            {
+                WasteComposition.CreateWasteComposition("boulder", 5, 10, ChemicalCompositionCategory.Other),
+                WasteComposition.CreateWasteComposition("notes", 6, 9, ChemicalCompositionCategory.Paper)
+            }));
+
+            SetWasteCodes(notification, wasteCodes);
+
+            SetProperty("WasteAdditionalInformationCollection", new List<WasteAdditionalInformation>(),
+                notification.WasteType);
+            notification.SetWasteAdditionalInformation(new[]
+            {
+                WasteAdditionalInformation.CreateWasteAdditionalInformation("Rubik's cubes", 1, 10,
+                    WasteInformationType.AshContent)
+            });
+
+            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("cheddar", "cheese"));
+
+            notification.SetOperationCodes(new[] { OperationCode.R1, OperationCode.R7 });
+            notification.ReasonForExport = "recovery";
+            
+            notification.SetPreconsentedRecoveryFacility(false);
+
+            return notification;
+        }
+
+        private static void SetProperty<T>(string name, object value, T target)
+        {
+            var prop = typeof(T).GetProperty(name,
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+            prop.SetValue(target, value, null);
+        }
+
+        private static void SetBusinesses(NotificationApplication notification)
+        {
             OI.SetProperty(x => x.Exporter, ExporterFactory.Create(Guid.NewGuid()), notification);
             OI.SetProperty(x => x.Importer, ImporterFactory.Create(Guid.NewGuid()), notification);
 
@@ -64,57 +113,35 @@
             notification.AddFacility(ComplexTypeFactory.Create<Business>(FacilityBusinessName2),
                 ComplexTypeFactory.Create<Address>(),
                 ComplexTypeFactory.Create<Contact>());
+        }
 
-            notification.SetMeansOfTransport(new List<MeansOfTransport>
-            {
-                MeansOfTransport.Air,
-                MeansOfTransport.Road,
-                MeansOfTransport.Train
-            });
-
-            notification.SetPhysicalCharacteristics(new List<PhysicalCharacteristicsInfo>
-            {
-                PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)
-            });
-
-            notification.SetWasteType(WasteType.CreateRdfWasteType(new[]
-            {
-                WasteComposition.CreateWasteComposition("boulder", 5, 10, ChemicalCompositionCategory.Other),
-                WasteComposition.CreateWasteComposition("notes", 6, 9, ChemicalCompositionCategory.Paper)
-            }));
-
-            SetProperty("WasteAdditionalInformationCollection", new List<WasteAdditionalInformation>(),
-                notification.WasteType);
-            notification.SetWasteAdditionalInformation(new[]
-            {
-                WasteAdditionalInformation.CreateWasteAdditionalInformation("Rubik's cubes", 1, 10,
-                    WasteInformationType.AshContent)
-            });
-
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("cheddar", "cheese"));
-
-            notification.SetOperationCodes(new[] { OperationCode.R1, OperationCode.R7 });
-            notification.ReasonForExport = "recovery";
+        private static void SetWasteCodes(NotificationApplication notification, IList<WasteCode> wasteCodes)
+        {
             notification.SetEwcCodes(new[]
             {
                 WasteCodeInfo.CreateWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.Ewc))
             });
+
             notification.SetHCodes(new[]
             {
                 WasteCodeInfo.CreateWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.H))
             });
+
             notification.SetYCodes(new[]
             {
                 WasteCodeInfo.CreateWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.Y))
             });
+
             notification.SetUnClasses(new[]
             {
                 WasteCodeInfo.CreateWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.Un))
             });
+
             notification.SetUnNumbers(new[]
             {
                 WasteCodeInfo.CreateWasteCodeInfo(wasteCodes.First(wc => wc.CodeType == CodeType.UnNumber))
             });
+
             notification.SetCustomsCode(
                 WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.CustomsCode,
                     "olives"));
@@ -124,16 +151,6 @@
             notification.SetExportCode(
                 WasteCodeInfo.CreateCustomWasteCodeInfo(CodeType.ExportCode,
                     "gravel"));
-            notification.SetPreconsentedRecoveryFacility(false);
-
-            return notification;
-        }
-
-        private static void SetProperty<T>(string name, object value, T target)
-        {
-            var prop = typeof(T).GetProperty(name,
-                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
-            prop.SetValue(target, value, null);
         }
     }
 }

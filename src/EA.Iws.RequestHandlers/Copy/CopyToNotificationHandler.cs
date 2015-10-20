@@ -21,14 +21,17 @@
         private readonly IwsContext context;
         private readonly NotificationToNotificationCopy copier;
         private readonly TransportRouteToTransportRouteCopy transportRouteCopier;
+        private readonly WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier;
 
         public CopyToNotificationHandler(IwsContext context,
             NotificationToNotificationCopy copier, 
-            TransportRouteToTransportRouteCopy transportRouteCopier)
+            TransportRouteToTransportRouteCopy transportRouteCopier,
+            WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier)
         {
             this.context = context;
             this.copier = copier;
             this.transportRouteCopier = transportRouteCopier;
+            this.wasteRecoveryCopier = wasteRecoveryCopier;
         }
 
         public async Task<Guid> HandleAsync(CopyToNotification message)
@@ -112,6 +115,7 @@
 
             // Transport route
             await CloneTransportRoute(sourceId, clone.Id);
+            await wasteRecoveryCopier.CopyAsync(context, sourceId, clone.Id);
 
             return clone;
         }
