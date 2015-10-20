@@ -23,7 +23,7 @@
 
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
-        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title="Code list" })
+        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title = "Code list" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.NotListed)">
         @Html.Gds().ValidationMessageFor(m => m.NotListed)
@@ -36,7 +36,14 @@
     <div class="form-group">
         <div id="descriptionTextArea">
             <h2 class="heading-small">Description of code:</h2>
-            <div>No code selected</div>
+            @if (Model.NotListed)
+            {
+                <div>Not listed</div>
+            }
+            else
+            {
+                <div>No code selected</div>
+            }
         </div>
     </div>
 
@@ -49,13 +56,19 @@
             var dropdownId = "#code-list";
 
             $(dropdownId).selectToAutocomplete();
-            
-            $(dropdownId).change(function() {
+
+            $(dropdownId).change(function () {
+                if ($("#NotListed").is(":checked")) {
+                    $("#descriptionTextArea div").html("Not listed");
+                    return;
+                }
+
                 var inputToFind = "#description-" + $(this).find(":selected").attr("value");
                 var description = $(inputToFind).val();
                 if (description === undefined) {
                     $("#descriptionTextArea div").html("No code selected");
-                } else {
+                }
+                else {
                     $("#descriptionTextArea div").html(description);
                 }
             });
@@ -65,14 +78,14 @@
                     // clear the selected drop-down option.
                     $("#code-list option[value='']").attr("selected", true);
 
-                    // propagate the change to the drop-down select element.
-                    $("#code-list").change();
-
                     // clear the visible input box.
                     $("input.ui-autocomplete-input").val('').change();
 
                     // Put not listed in the table
                     $("#descriptionTextArea div").html("Not listed");
+                }
+                else {
+                    $("#descriptionTextArea div").html("No code selected");
                 }
             });
 
