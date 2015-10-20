@@ -11,7 +11,7 @@
         Task<IEnumerable<Movement>> GetReceivedMovements(Guid notificationId);
 
         Task<IEnumerable<Movement>> GetCompletedMovements(Guid notificationId);
-
+        
         Task<Movement> GetById(Guid movementId);
 
         Task<IEnumerable<Movement>> GetMovementsByIds(Guid notificationId, IEnumerable<Guid> movementIds);

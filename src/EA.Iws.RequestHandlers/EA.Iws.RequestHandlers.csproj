@@ -117,6 +117,9 @@
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\Movement\MovementProgressMap.cs" />
+    <Compile Include="Mappings\Movement\MovementReceiptSummaryDataMap.cs" />
+    <Compile Include="Mappings\Movement\MovementSummaryAndProgressMap.cs" />
+    <Compile Include="Mappings\Movement\Summary\MovementSummaryDataMap.cs" />
     <Compile Include="Mappings\Movement\Summary\MovementSummaryTableMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />

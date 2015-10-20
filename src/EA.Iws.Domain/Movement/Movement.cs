@@ -56,12 +56,13 @@
             get { return StatusChangeCollection.ToSafeIEnumerable(); }
         }
 
-        public bool IsActive
+        public bool HasShipped
         {
             get
             {
-                return this.Date.HasValue
-                    && this.Date < SystemTime.UtcNow;
+                return (Status == MovementStatus.Submitted 
+                    || Status == MovementStatus.Received)
+                    && Date < SystemTime.UtcNow;
             }
         }
 

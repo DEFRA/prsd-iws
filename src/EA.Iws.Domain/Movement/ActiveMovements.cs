@@ -12,7 +12,7 @@
 
         public IList<Movement> List(IList<Movement> movements)
         {
-            return movements.Where(m => m.IsActive).ToArray();
+            return movements.Where(m => m.HasShipped).ToArray();
         }
     }
 }

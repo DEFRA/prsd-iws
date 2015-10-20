@@ -1,38 +1,25 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
-    using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
-    using DataAccess;
     using Domain.Movement;
-    using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Shipment;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
     internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
     {
-        private readonly INotificationApplicationRepository notificationRepositoy;
+        private readonly IMapper mapper;
+        private readonly INotificationMovementsSummaryRepository summaryRepository;
         private readonly IMovementRepository movementRepository;
-        private readonly IwsContext context;
-        private readonly ActiveMovements activeMovementService;
-        private readonly NotificationMovementsQuantity movementQuantityCalculator;
-        private readonly IShipmentInfoRepository shipmentInfoRepository;
 
-        public GetMovementReceiptSummaryDataByMovementIdHandler(IwsContext context,
-            ActiveMovements activeMovementService,
-            NotificationMovementsQuantity movementQuantityCalculator,
-            IShipmentInfoRepository shipmentInfoRepository,
+        public GetMovementReceiptSummaryDataByMovementIdHandler(IMapper mapper,
             IMovementRepository movementRepository,
-            INotificationApplicationRepository notificationRepositoy)
+            INotificationMovementsSummaryRepository summaryRepository)
         {
-            this.context = context;
-            this.activeMovementService = activeMovementService;
-            this.movementQuantityCalculator = movementQuantityCalculator;
-            this.shipmentInfoRepository = shipmentInfoRepository;
             this.movementRepository = movementRepository;
-            this.notificationRepositoy = notificationRepositoy;
+            this.summaryRepository = summaryRepository;
+            this.mapper = mapper;
         }
 
         public async Task<MovementReceiptSummaryData> HandleAsync(GetMovementReceiptSummaryDataByMovementId message)
@@ -40,32 +27,10 @@
             var movement = await movementRepository
                 .GetById(message.Id);
 
-            var notification = await notificationRepositoy
-                .GetByMovementId(message.Id);
+            var summaryData = await summaryRepository
+                .GetById(movement.NotificationId);
 
-            var relatedMovements = await movementRepository
-                .GetAllMovements(notification.Id);
-
-            var financialGuarantee = await context.FinancialGuarantees
-                .SingleAsync(fg => 
-                    fg.NotificationApplicationId == movement.NotificationId);
-
-            var shipmentInfo = await shipmentInfoRepository
-                .GetByNotificationId(movement.NotificationId);
-
-            return new MovementReceiptSummaryData
-            {
-                NotificationId = movement.NotificationId,
-                MovementId = movement.Id,
-                NotificationNumber = notification.NotificationNumber,
-                ThisMovementNumber = movement.Number,
-                ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
-                CurrentActiveLoads = activeMovementService.Total(relatedMovements.ToList()),
-                QuantitySoFar = await movementQuantityCalculator.Received(movement.NotificationId),
-                QuantityRemaining = await movementQuantityCalculator
-                    .Remaining(movement.NotificationId),
-                DisplayUnit = shipmentInfo.Units
-            };
+            return mapper.Map<NotificationMovementsSummary, Movement, MovementReceiptSummaryData>(summaryData, movement);
         }
     }
 }

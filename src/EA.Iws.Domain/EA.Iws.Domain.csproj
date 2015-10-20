@@ -85,12 +85,14 @@
     <Compile Include="Movement\CertificateOfReceiptNameGenerator.cs" />
     <Compile Include="Movement\CertificateOfRecoveryNameGenerator.cs" />
     <Compile Include="Movement\ICertificateNameGenerator.cs" />
+    <Compile Include="Movement\INotificationMovementsSummaryRepository.cs" />
     <Compile Include="Movement\MovementFileNameGenerator.cs" />
     <Compile Include="Movement\MovementCompletedReceipt.cs" />
     <Compile Include="Movement\MovementReceipt.cs" />
     <Compile Include="Movement\ActiveMovements.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />
+    <Compile Include="Movement\NotificationMovementsSummary.cs" />
     <Compile Include="Movement\NotificationMovementsQuantity.cs" />
     <Compile Include="Movement\MovementStatusChange.cs" />
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />

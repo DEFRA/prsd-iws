@@ -1,67 +1,34 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
-    using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
-    using DataAccess;
     using Domain.Movement;
-    using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using RequestHandlers.Notification;
     using Requests.Movement;
 
     internal class GetMovementProgressInformationHandler : IRequestHandler<GetMovementProgressInformation, MovementProgressAndSummaryData>
     {
-        private readonly IwsContext context;
-        private readonly IMap<Movement, ProgressData> progressMap;
-        private readonly ActiveMovements activeMovementService;
-        private readonly IShipmentInfoRepository shipmentInfoRepository;
+        private readonly IMapper mapper;
+        private readonly IMovementRepository movementRepository;
+        private readonly INotificationMovementsSummaryRepository summaryRepository;
 
-        public GetMovementProgressInformationHandler(IwsContext context, 
-            IMap<Movement, ProgressData> progressMap,
-            ActiveMovements activeMovementService,
-            IShipmentInfoRepository shipmentInfoRepository)
+        public GetMovementProgressInformationHandler(
+            INotificationMovementsSummaryRepository summaryRepository,
+            IMovementRepository movementRepository,
+            IMapper mapper)
         {
-            this.context = context;
-            this.progressMap = progressMap;
-            this.activeMovementService = activeMovementService;
-            this.shipmentInfoRepository = shipmentInfoRepository;
+            this.summaryRepository = summaryRepository;
+            this.movementRepository = movementRepository;
+            this.mapper = mapper;
         }
 
         public async Task<MovementProgressAndSummaryData> HandleAsync(GetMovementProgressInformation message)
         {
-            var movement = await context.Movements
-                .SingleAsync(m => m.Id == message.MovementId);
-            var notificationId = movement.NotificationId;
-            var relatedMovements = await context.GetMovementsForNotificationAsync(notificationId);
-            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
+            var movement = await movementRepository.GetById(message.MovementId);
+            var summaryData = await summaryRepository.GetById(movement.NotificationId);
 
-            var notificationInformation = await context.NotificationApplications
-                .Join(context.FinancialGuarantees,
-                application => application.Id == notificationId,
-                fg => fg.NotificationApplicationId == notificationId,
-                (na, fg) => new
-                {
-                    Id = na.Id,
-                    Number = na.NotificationNumber, 
-                    Shipments = shipmentInfo.NumberOfShipments,
-                    ActiveLoadsPermitted = fg.ActiveLoadsPermitted
-                })
-                .SingleAsync(x => x.Id == notificationId);
-
-            return new MovementProgressAndSummaryData
-            {
-                NotificationNumber = notificationInformation.Number,
-                TotalNumberOfMovements = notificationInformation.Shipments,
-                CurrentActiveLoads = activeMovementService.Total(relatedMovements),
-                ThisMovementNumber = movement.Number,
-                ActiveLoadsPermitted = notificationInformation.ActiveLoadsPermitted.GetValueOrDefault(),
-                Progress = progressMap.Map(movement),
-                NotificationId = notificationInformation.Id,
-                MovementId = movement.Id
-            };
+            return mapper.Map<NotificationMovementsSummary, Movement, MovementProgressAndSummaryData>(summaryData, movement);
         }
     }
 }
