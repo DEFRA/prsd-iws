@@ -151,6 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressBookRepository.cs" />
     <Compile Include="Repositories\CompetentAuthorityRepository.cs" />
+    <Compile Include="Repositories\ExporterRepository.cs" />
     <Compile Include="Repositories\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\MovementRepository.cs" />
     <Compile Include="Repositories\NotificationConsentRepository.cs" />

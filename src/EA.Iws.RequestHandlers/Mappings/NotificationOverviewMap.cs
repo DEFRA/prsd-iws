@@ -1,7 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Core.Exporters;
+    using Core.Facilities;
+    using Core.Importer;
     using Core.Notification;
     using Core.Notification.Overview;
+    using Core.Producers;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
@@ -19,7 +25,7 @@
             return new NotificationOverview
             {
                 NotificationId = source.Notification.Id,
-                NotificationType = (Core.Shared.NotificationType)source.Notification.NotificationType,
+                NotificationType = source.Notification.NotificationType,
                 NotificationNumber = source.Notification.NotificationNumber,
                 CompetentAuthority = (CompetentAuthority)source.Notification.CompetentAuthority.Value,
                 Progress = source.Progress,
@@ -29,13 +35,28 @@
                 WasteDisposal = mapper.Map<WasteDisposalOverview>(source.WasteDisposal),
                 Journey = mapper.Map<Journey>(source.Notification),
                 RecoveryOperation = mapper.Map<RecoveryOperation>(source.Notification),
-                OrganisationsInvolved = mapper.Map<OrganisationsInvolved>(source.Notification),
+                OrganisationsInvolved = MapOrganisationsInvolved(source),
                 Transportation = mapper.Map<Transportation>(source.Notification),
                 SubmitSummaryData = mapper.Map<SubmitSummaryData>(source.Notification),
                 WasteCodesOverview = mapper.Map<WasteCodesOverviewInfo>(source.Notification),
                 CanEditNotification = source.NotificationAssessment.CanEditNotification,
                 NotificationCharge = source.Charge
             };
+        }
+
+        private OrganisationsInvolved MapOrganisationsInvolved(NotificationApplicationOverview source)
+        {
+            var organisationsInvolved = new OrganisationsInvolved
+            {
+                NotificationId = source.Notification.Id,
+                NotificationType = source.Notification.NotificationType,
+                Exporter = mapper.Map<ExporterData>(source.Exporter),
+                Importer = mapper.Map<ImporterData>(source.Notification),
+                Facilities = mapper.Map<IList<FacilityData>>(source.Notification).ToList(),
+                Producers = mapper.Map<IList<ProducerData>>(source.Notification).ToList()
+            };
+
+            return organisationsInvolved;
         }
     }
 }

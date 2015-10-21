@@ -8,8 +8,10 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using RequestHandlers.Copy;
     using Requests.Copy;
+    using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -36,14 +38,12 @@
             var notification1 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification1, Notification1Id);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Exporter, ExporterFactory.Create(new Guid("4FF00D5F-E3CD-4F2E-9059-4E7A60ED463E")), notification1);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Importer, ImporterFactory.Create(new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C")), notification1);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification1);
 
             var notification2 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 2);
             EntityHelper.SetEntityId(notification2, Notification2Id);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Exporter, ExporterFactory.Create(new Guid("4FF00D5F-E3CD-4F2E-9059-4E7A60ED463E")), notification2);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Importer, ImporterFactory.Create(new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C")), notification2);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateRdfWasteType(new List<WasteComposition>
             {
@@ -53,7 +53,6 @@
             var notification3 = new NotificationApplication(UserWithNotificationsId, NotificationType.Disposal,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification3, Notification3Id);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Exporter, ExporterFactory.Create(new Guid("4FF00D5F-E3CD-4F2E-9059-4E7A60ED463E")), notification3);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Importer, ImporterFactory.Create(new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C")), notification3);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification3);
 
@@ -74,7 +73,25 @@
                 destinationNotification2
             });
 
+            context.Exporters.AddRange(new[]
+            {
+                CreateExporter(Notification1Id),
+                CreateExporter(Notification2Id),
+                CreateExporter(Notification3Id)
+            });
+
             handler = new GetNotificationsToCopyForUserHandler(context, userContext);
+        }
+
+        private Exporter CreateExporter(Guid notificationId)
+        {
+            return new TestableExporter
+            {
+                NotificationId = notificationId,
+                Address = TestableAddress.WitneyAddress,
+                Business = TestableBusiness.WasteSolutions,
+                Contact = TestableContact.MikeMerry
+            };
         }
 
         [Fact]

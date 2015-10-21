@@ -97,6 +97,7 @@
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\SetActualDateOfShipment.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
+    <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationOverviewRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
@@ -158,12 +159,11 @@
     <Compile Include="NotificationApplication\WasteType.cs" />
     <Compile Include="NotificationApplication\Facility.cs" />
     <Compile Include="NotificationApplication\Carrier.cs" />
-    <Compile Include="NotificationApplication\Exporter.cs" />
+    <Compile Include="NotificationApplication\Exporter\Exporter.cs" />
     <Compile Include="NotificationApplication\Importer.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Carriers.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Facilities.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.Exporter.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Importer.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Producers.cs" />

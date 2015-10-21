@@ -2,7 +2,7 @@
 {
     using System;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using Helpers;
 
     public class TestableExporter : Exporter
@@ -29,6 +29,12 @@
         {
             get { return base.Address; }
             set { ObjectInstantiator<Exporter>.SetProperty(x => x.Address, value, this); }
+        }
+
+        public new Guid NotificationId
+        {
+            get { return base.NotificationId; }
+            set { ObjectInstantiator<Exporter>.SetProperty(x => x.NotificationId, value, this); }
         }
     }
 }

@@ -92,7 +92,6 @@
 
         private static void SetBusinesses(NotificationApplication notification)
         {
-            OI.SetProperty(x => x.Exporter, ExporterFactory.Create(Guid.NewGuid()), notification);
             OI.SetProperty(x => x.Importer, ImporterFactory.Create(Guid.NewGuid()), notification);
 
             notification.AddProducer(ComplexTypeFactory.Create<ProducerBusiness>(ProducerBusinessName1),

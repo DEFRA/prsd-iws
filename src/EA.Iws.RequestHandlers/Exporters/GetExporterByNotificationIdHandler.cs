@@ -2,28 +2,28 @@
 {
     using System.Threading.Tasks;
     using Core.Exporters;
-    using DataAccess;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Exporters;
 
     internal class GetExporterByNotificationIdHandler : IRequestHandler<GetExporterByNotificationId, ExporterData>
     {
-        private readonly IwsContext context;
-        private readonly IMap<NotificationApplication, ExporterData> mapper;
+        private readonly IExporterRepository exporterRepository;
+        private readonly IMapWithParentObjectId<Exporter, ExporterData> mapper;
 
-        public GetExporterByNotificationIdHandler(IwsContext context, IMap<NotificationApplication, ExporterData> mapper)
+        public GetExporterByNotificationIdHandler(IExporterRepository exporterRepository, 
+            IMapWithParentObjectId<Exporter, ExporterData> mapper)
         {
-            this.context = context;
+            this.exporterRepository = exporterRepository;
             this.mapper = mapper;
         }
 
         public async Task<ExporterData> HandleAsync(GetExporterByNotificationId message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            var notification = await exporterRepository.GetExporterOrDefaultByNotificationId(message.NotificationId);
 
-            return mapper.Map(notification);
+            return mapper.Map(notification, message.NotificationId);
         }
     }
 }

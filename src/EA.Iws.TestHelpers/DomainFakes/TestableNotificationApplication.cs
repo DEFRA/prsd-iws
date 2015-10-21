@@ -63,12 +63,6 @@
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.TechnologyEmployed, value, this); }
         }
 
-        public new Exporter Exporter
-        {
-            get { return base.Exporter; }
-            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Exporter, value, this); }
-        }
-
         public new IList<Carrier> Carriers
         {
             get { return base.Carriers.ToList(); }

@@ -41,6 +41,10 @@
                 in db.WasteDisposals
                     .Where(wd => wd.NotificationId == notification.Id)
                     .DefaultIfEmpty()
+                from exporter
+                    in db.Exporters
+                    .Where(e => e.NotificationId == notification.Id)
+                    .DefaultIfEmpty()
                 from shipmentInfo
                 in db.ShipmentInfos
                     .Where(si => si.NotificationId == notification.Id)
@@ -51,7 +55,8 @@
                     WasteRecovery = wasteRecovery,
                     WasteDisposal = wasteDiposal,
                     NotificationAssessment = assessment,
-                    ShipmentInfo = shipmentInfo
+                    ShipmentInfo = shipmentInfo,
+                    Exporter = exporter
                 };
 
             var data = await query.SingleAsync();
@@ -63,6 +68,7 @@
                 data.NotificationAssessment,
                 data.WasteRecovery,
                 data.WasteDisposal,
+                data.Exporter,
                 decimal.ToInt32(
                     chargeCalculator.GetValue(pricingStructures, data.Notification, data.ShipmentInfo)),
                 progressService.GetNotificationProgressInfo(notificationId));

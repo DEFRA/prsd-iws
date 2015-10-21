@@ -3,21 +3,21 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
 
     internal class MovementExporterBlockFactory : IMovementBlockFactory
     {
-        private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IExporterRepository exporterRepository;
 
-        public MovementExporterBlockFactory(INotificationApplicationRepository notificationApplicationRepository)
+        public MovementExporterBlockFactory(IExporterRepository exporterRepository)
         {
-            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.exporterRepository = exporterRepository;
         }
 
         public async Task<IDocumentBlock> Create(Guid movementId, IList<MergeField> mergeFields)
         {
-            var notification = await notificationApplicationRepository.GetByMovementId(movementId);
-            return new MovementExporterBlock(mergeFields, notification);
+            var exporter = await exporterRepository.GetByMovementId(movementId);
+            return new MovementExporterBlock(mergeFields, exporter);
         }
     }
 }

@@ -55,9 +55,7 @@
         public NotificationType NotificationType { get; private set; }
 
         public UKCompetentAuthority CompetentAuthority { get; private set; }
-
-        public virtual Exporter Exporter { get; private set; }
-
+        
         public virtual Importer Importer { get; private set; }
 
         public string NotificationNumber { get; private set; }

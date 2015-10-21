@@ -157,47 +157,6 @@
             }
         }
 
-        [Fact]
-        public async Task UpdateExporterDeletesOldExporter()
-        {
-            try
-            {
-                context.NotificationApplications.Add(notification);
-
-                await context.SaveChangesAsync();
-
-                notificationId = notification.Id;
-
-                notification.SetExporter(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
-
-                await context.SaveChangesAsync();
-
-                var count =
-                    await context.Database.SqlQuery<int>(
-                        "select count(id) from notification.Exporter where Id = @id",
-                        new SqlParameter("id", notification.Exporter.Id)).SingleAsync();
-
-                Assert.Equal(1, count);
-
-                notification.SetExporter(Business.CreateBusiness("updated", BusinessType.LimitedCompany, "123", "456"), ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
-
-                await context.SaveChangesAsync();
-
-                count =
-                    await context.Database.SqlQuery<int>(
-                        "select count(id) from notification.Exporter where Id = @id",
-                        new SqlParameter("id", notification.Exporter.Id)).SingleAsync();
-
-                Assert.Equal(1, count);
-            }
-            finally
-            {
-                context.DeleteOnCommit(notification);
-
-                context.SaveChanges();
-            }
-        }
-
         private static Address TestAddress(Country country)
         {
             return new Address("test street", null, "Woking", null, "GU22 7UM", country.Name);

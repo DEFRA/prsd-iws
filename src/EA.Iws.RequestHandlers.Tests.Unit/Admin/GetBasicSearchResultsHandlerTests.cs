@@ -9,15 +9,15 @@
     using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using Prsd.Core.Helpers;
     using RequestHandlers.Admin.Search;
     using Requests.Admin;
+    using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
-    using BusinessType = Domain.BusinessType;
-    using CompetentAuthority = Core.Notification.CompetentAuthority;
 
     public class GetBasicSearchResultsHandlerTests
     {
@@ -38,6 +38,7 @@
             var userContext = A.Fake<IUserContext>();
 
             context.NotificationApplications.AddRange(applications);
+            context.Exporters.AddRange(GetExporters());
             context.NotificationAssessments.AddRange(assessments);
             context.InternalUsers.AddRange(GetUsers());
             A.CallTo(() => userContext.UserId).Returns(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"));
@@ -49,13 +50,42 @@
         {
             return new[]
             {
-                CreateNotificationApplication(notification1, "Exporter one", UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
-                CreateNotificationApplication(notification2, "GB 0001 000000", UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
-                CreateNotificationApplication(notification3, "Exporter two", UKCompetentAuthority.England, WasteType.CreateSrfWasteType(null)),
-                CreateNotificationApplication(notification4, "Exporter RDF", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification5, "not submitted", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification5, "Exporter", UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
+                CreateNotificationApplication(notification1, UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
+                CreateNotificationApplication(notification2, UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
+                CreateNotificationApplication(notification3, UKCompetentAuthority.England, WasteType.CreateSrfWasteType(null)),
+                CreateNotificationApplication(notification4, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification5, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification5, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
             };
+        }
+
+        private IEnumerable<Exporter> GetExporters()
+        {
+            return new[]
+            {
+                CreateExporter(notification1, "Exporter one"),
+                CreateExporter(notification2, "GB 0001 000000"),
+                CreateExporter(notification3, "Exporter two"),
+                CreateExporter(notification4, "Exporter RDF"),
+                CreateExporter(notification5, "not submitted"),
+                CreateExporter(notification5, "Exporter")
+            };
+        }
+
+        private Exporter CreateExporter(Guid notificationId, string exporterName)
+        {
+            var business = (TestableBusiness)TestableBusiness.LargeObjectHeap;
+            business.Name = exporterName;
+
+            var exporter = new TestableExporter
+            {
+                NotificationId = notificationId,
+                Address = TestableAddress.SouthernHouse,
+                Contact = TestableContact.BillyKnuckles,
+                Business = business
+            };
+
+            return exporter;
         }
 
         private IEnumerable<InternalUser> GetUsers()
@@ -91,18 +121,12 @@
             return assessment;
         }
 
-        private NotificationApplication CreateNotificationApplication(Guid id, string exporterName, UKCompetentAuthority competentAuthority, WasteType wasteType)
+        private NotificationApplication CreateNotificationApplication(Guid id, UKCompetentAuthority competentAuthority, WasteType wasteType)
         {
             var notificationApplication = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, competentAuthority, 0);
 
             EntityHelper.SetEntityId(notificationApplication, id);
-
-            var business = Business.CreateBusiness(exporterName, BusinessType.LimitedCompany, "irrelevant registration number", "irrelevant registration number");
-            var address = ObjectFactory.CreateDefaultAddress();
-            var contact = ObjectFactory.CreateEmptyContact();
-
-            notificationApplication.SetExporter(business, address, contact);
-
+            
             notificationApplication.SetWasteType(wasteType);
 
             return notificationApplication;

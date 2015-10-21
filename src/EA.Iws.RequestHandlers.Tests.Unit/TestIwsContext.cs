@@ -7,6 +7,7 @@
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
@@ -36,6 +37,7 @@
             this.CompetentAuthorities = new TestDbSet<CompetentAuthority>();
             this.Countries = new TestDbSet<Country>();
             this.EntryOrExitPoints = new TestDbSet<EntryOrExitPoint>();
+            this.Exporters = new TestDbSet<Exporter>();
             this.FinancialGuarantees = new TestDbSet<FinancialGuarantee>();
             this.InternalUsers = new TestDbSet<InternalUser>();
             this.LocalAreas = new TestDbSet<LocalArea>();

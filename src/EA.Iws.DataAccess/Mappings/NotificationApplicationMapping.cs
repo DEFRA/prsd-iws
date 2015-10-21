@@ -36,10 +36,6 @@
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 
-            HasOptional(x => x.Exporter)
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
             HasOptional(x => x.WasteType)
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));

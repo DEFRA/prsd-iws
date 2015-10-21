@@ -4,14 +4,10 @@
     using Core.Exporters;
     using Core.Shared;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using Prsd.Core.Mapper;
-    using Requests.Exporters;
-    using Requests.Shared;
-    using Notification = Domain.NotificationApplication.NotificationApplication;
 
-    internal class ExporterDataMap : IMap<Notification, ExporterData>, 
-        IMap<Exporter, ExporterData>,
+    internal class ExporterDataMap : IMap<Exporter, ExporterData>,
         IMapWithParentObjectId<Exporter, ExporterData>
     {
         private readonly IMap<Address, AddressData> addressMap;
@@ -29,6 +25,11 @@
 
         public ExporterData Map(Exporter source)
         {
+            if (source == null)
+            {
+                return new ExporterData();
+            }
+
             return new ExporterData
             {
                 Address = addressMap.Map(source.Address),
@@ -37,30 +38,6 @@
                 Id = source.Id,
                 HasExporter = true
             };
-        }
-
-        public ExporterData Map(NotificationApplication source)
-        {
-            if (source.HasExporter)
-            {
-                return new ExporterData
-                {
-                    Address = addressMap.Map(source.Exporter.Address),
-                    Business = businessMap.Map(source.Exporter.Business),
-                    Contact = contactMap.Map(source.Exporter.Contact),
-                    Id = source.Exporter.Id,
-                    NotificationId = source.Id,
-                    HasExporter = true
-                };
-            }
-            else
-            {
-                return new ExporterData
-                {
-                    NotificationId = source.Id,
-                    HasExporter = false
-                };
-            }
         }
 
         public ExporterData Map(Exporter source, Guid parentId)

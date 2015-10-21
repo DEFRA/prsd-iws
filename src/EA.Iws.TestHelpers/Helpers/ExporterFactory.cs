@@ -2,7 +2,7 @@
 {
     using System;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
 
     public class ExporterFactory
     {

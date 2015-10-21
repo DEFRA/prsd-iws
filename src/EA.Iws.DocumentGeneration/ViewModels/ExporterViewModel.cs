@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
 
     internal class ExporterViewModel
     {

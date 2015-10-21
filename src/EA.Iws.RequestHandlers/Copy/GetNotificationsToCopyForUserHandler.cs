@@ -27,18 +27,18 @@
                 (await context.GetNotificationApplication(message.DestinationNotificationId)).NotificationType;
 
             var notificationData = await context.NotificationApplications
-                .Where(na => na.UserId == userContext.UserId
-                    && na.NotificationType == notificationType
-                    && na.Exporter != null 
-                    && na.Importer != null
-                    && na.WasteType != null)
-                .Select(n => new
+                .Join(context.Exporters, n => n.Id, e => e.NotificationId, (n, e) => new { n, e })
+                .Where(na => na.n.UserId == userContext.UserId
+                    && na.n.NotificationType == notificationType
+                    && na.n.Importer != null
+                    && na.n.WasteType != null)
+                .Select(na => new
                 {
-                    id = n.Id,
-                    number = n.NotificationNumber,
-                    exporter = n.Exporter.Business.Name,
-                    importer = n.Importer.Business.Name,
-                    waste = n.WasteType
+                    id = na.n.Id,
+                    number = na.n.NotificationNumber,
+                    exporter = na.e.Business.Name,
+                    importer = na.n.Importer.Business.Name,
+                    waste = na.n.WasteType
                 }).ToArrayAsync();
 
             return notificationData.Select(n => new NotificationApplicationCopyData

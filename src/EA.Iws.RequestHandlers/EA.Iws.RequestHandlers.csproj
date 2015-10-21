@@ -102,6 +102,7 @@
     <Compile Include="Authorization\IUserRoleService.cs" />
     <Compile Include="Authorization\UserRole.cs" />
     <Compile Include="Authorization\UserRoleService.cs" />
+    <Compile Include="Copy\ExporterToExporterCopy.cs" />
     <Compile Include="Copy\TransportRouteToTransportRouteCopy.cs" />
     <Compile Include="Copy\WasteCodeCopy.cs" />
     <Compile Include="Copy\WasteRecoveryToWasteRecoveryCopy.cs" />
@@ -232,7 +233,6 @@
     <Compile Include="Mappings\InternalUserMap.cs" />
     <Compile Include="Mappings\JourneyInfoMap.cs" />
     <Compile Include="Mappings\NotificationBasicInfoMap.cs" />
-    <Compile Include="Mappings\OrganisationsInvolvedInfoMap.cs" />
     <Compile Include="Mappings\PackagingInfoMap.cs" />
     <Compile Include="Mappings\PhysicalCharacteristicsMap.cs" />
     <Compile Include="Mappings\PreconsentedAnswerMap.cs" />

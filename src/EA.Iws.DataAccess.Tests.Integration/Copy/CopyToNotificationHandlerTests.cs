@@ -10,6 +10,7 @@
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationApplication.WasteRecovery;
     using Domain.NotificationAssessment;
@@ -19,6 +20,7 @@
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;
     using Requests.Copy;
+    using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -43,6 +45,7 @@
             context = new IwsContext(GetUserContext(), A.Fake<IEventDispatcher>());
             handler = new CopyToNotificationHandler(context, 
                 new NotificationToNotificationCopy(new WasteCodeCopy()), 
+                new ExporterToExporterCopy(), 
                 new TransportRouteToTransportRouteCopy(),
                 new WasteRecoveryToWasteRecoveryCopy());
 
@@ -80,6 +83,7 @@
             AddShipmentInfo(sourceId);
             AddTransportRoute(sourceId);
             AddWasteRecovery(sourceId);
+            AddExporter(sourceId);
 
             AddNotificationAssessments(sourceId, destinationId);
             AddFinancialGuarantees(sourceId, destinationId);
@@ -109,6 +113,13 @@
                 new RecoveryCost(ValuePerWeightUnits.Kilogram, 5));
             
             context.WasteRecoveries.Add(wasteRecovery);
+        }
+
+        private void AddExporter(Guid id)
+        {
+            var exporter = new Exporter(id, TestableAddress.AddlestoneAddress, TestableBusiness.WasteSolutions, TestableContact.SinclairSimms);
+
+            context.Exporters.Add(exporter);
         }
 
         private void AddNotificationAssessments(Guid sourceId, Guid destinationId)
@@ -151,21 +162,32 @@
         }
 
         [Fact]
-        public async Task CloneHasSameExporterAndImporterDetails()
+        public async Task CloneHasSameImporterDetails()
         {
             await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
-
-            Assert.Equal(sourceNotification.Exporter.Business.Name, copiedNotification.Exporter.Business.Name);
-            Assert.Equal(sourceNotification.Exporter.Business.RegistrationNumber, copiedNotification.Exporter.Business.RegistrationNumber);
-            Assert.Equal(sourceNotification.Exporter.Contact.Email, copiedNotification.Exporter.Contact.Email);
+            
             Assert.Equal(sourceNotification.Importer.Business.Name, copiedNotification.Importer.Business.Name);
             Assert.Equal(sourceNotification.Importer.Business.RegistrationNumber, copiedNotification.Importer.Business.RegistrationNumber);
             Assert.Equal(sourceNotification.Importer.Contact.Email, copiedNotification.Importer.Contact.Email);
-            Assert.NotEqual(sourceNotification.Exporter.Id, copiedNotification.Exporter.Id);
             Assert.NotEqual(sourceNotification.Importer.Id, copiedNotification.Importer.Id);
+        }
+
+        [Fact]
+        public async Task CloneHasSameExporterDetails()
+        {
+            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
+
+            var copiedExporter = GetCopiedExporter();
+            var sourceExporter = GetSourceExporter();
+
+            Assert.NotEqual(sourceExporter.Id, copiedExporter.Id);
+            Assert.NotEqual(sourceExporter.NotificationId, copiedExporter.NotificationId);
+            Assert.Equal(sourceExporter.Address, copiedExporter.Address, new AddressComparer());
+            Assert.Equal(sourceExporter.Business, copiedExporter.Business, new BusinessComparer());
+            Assert.Equal(sourceExporter.Contact, copiedExporter.Contact, new ContactComparer());
         }
 
         [Fact]
@@ -325,6 +347,14 @@
             return context.NotificationApplications.Single(n => n.Id == source.Id);
         }
 
+        private Guid GetCopiedId()
+        {
+            return context
+                .NotificationApplications
+                .Where(n => n.NotificationNumber == destination.NotificationNumber)
+                .Select(n => n.Id).Single();
+        }
+
         private TransportRoute GetSourceTransportRoute()
         {
             return context.TransportRoutes.Single(p => p.NotificationId == source.Id);
@@ -332,8 +362,8 @@
 
         private TransportRoute GetCopiedTransportRoute()
         {
-            var copied = GetCopied();
-            return context.TransportRoutes.Single(n => n.NotificationId == copied.Id);
+            var copiedId = GetCopiedId();
+            return context.TransportRoutes.Single(n => n.NotificationId == copiedId);
         }
 
         private WasteRecovery GetSourceWasteRecovery()
@@ -343,8 +373,19 @@
 
         private WasteRecovery GetCopiedWasteRecovery()
         {
-            var copied = GetCopied();
-            return context.WasteRecoveries.Single(wr => wr.NotificationId == copied.Id);
+            var copiedId = GetCopiedId();
+            return context.WasteRecoveries.Single(wr => wr.NotificationId == copiedId);
+        }
+
+        private Exporter GetSourceExporter()
+        {
+            return context.Exporters.Single(e => e.NotificationId == source.Id);
+        }
+
+        private Exporter GetCopiedExporter()
+        {
+            var copiedId = GetCopiedId();
+            return context.Exporters.Single(e => e.NotificationId == copiedId);
         }
 
         public void Dispose()

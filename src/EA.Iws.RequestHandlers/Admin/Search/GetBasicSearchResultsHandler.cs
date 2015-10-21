@@ -32,23 +32,24 @@
             var compAuthority = Enumeration.FromValue<UKCompetentAuthority>(userCompetentAuthority);
 
             return (await context.NotificationApplications
-                .Where(p => (p.NotificationNumber.Contains(query.SearchTerm) ||
-                            p.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm) ||
-                            p.Exporter.Business.Name.Contains(query.SearchTerm)) &&
-                            p.CompetentAuthority.Value == compAuthority.Value)
+                .Join(context.Exporters, n => n.Id, e => e.NotificationId, (n, e) => new { n, e })
+                .Where(p => (p.n.NotificationNumber.Contains(query.SearchTerm) ||
+                            p.n.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm)) ||
+                            p.e.Business.Name.Contains(query.SearchTerm) &&
+                            p.n.CompetentAuthority.Value == compAuthority.Value)
                 .Join(context.NotificationAssessments
-                    .Where(p => p.Status != NotificationStatus.NotSubmitted), n => n.Id,
+                    .Where(p => p.Status != NotificationStatus.NotSubmitted), j => j.n.Id,
                     na => na.NotificationApplicationId, (n, na) => new { n, na })
                 .Select(
                     s =>
                         new
                         {
-                            s.n.Id,
-                            s.n.NotificationNumber,
-                            ExporterName = s.n.Exporter.Business.Name,
-                            WasteType = (int?)s.n.WasteType.ChemicalCompositionType.Value,
+                            s.n.n.Id,
+                            s.n.n.NotificationNumber,
+                            ExporterName = s.n.e.Business.Name,
+                            WasteType = (int?)s.n.n.WasteType.ChemicalCompositionType.Value,
                             s.na.Status,
-                            s.n.CompetentAuthority
+                            s.n.n.CompetentAuthority
                         })
                 .ToListAsync()).Select(s => ConvertToSearchResults(
                     s.Id,

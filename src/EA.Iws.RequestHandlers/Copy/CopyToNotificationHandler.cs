@@ -20,16 +20,19 @@
     {
         private readonly IwsContext context;
         private readonly NotificationToNotificationCopy copier;
+        private readonly ExporterToExporterCopy exporterCopier;
         private readonly TransportRouteToTransportRouteCopy transportRouteCopier;
         private readonly WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier;
 
         public CopyToNotificationHandler(IwsContext context,
             NotificationToNotificationCopy copier, 
+            ExporterToExporterCopy exporterCopier,
             TransportRouteToTransportRouteCopy transportRouteCopier,
             WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier)
         {
             this.context = context;
             this.copier = copier;
+            this.exporterCopier = exporterCopier;
             this.transportRouteCopier = transportRouteCopier;
             this.wasteRecoveryCopier = wasteRecoveryCopier;
         }
@@ -116,6 +119,7 @@
             // Transport route
             await CloneTransportRoute(sourceId, clone.Id);
             await wasteRecoveryCopier.CopyAsync(context, sourceId, clone.Id);
+            await exporterCopier.CopyAsync(context, sourceId, clone.Id);
 
             return clone;
         }
@@ -134,7 +138,6 @@
             //TODO: Filter by status
             var clone = await context.Set<NotificationApplication>()
                         .AsNoTracking()
-                        .Include(n => n.Exporter)
                         .Include("ProducersCollection")
                         .Include(n => n.Importer)
                         .Include("FacilitiesCollection")

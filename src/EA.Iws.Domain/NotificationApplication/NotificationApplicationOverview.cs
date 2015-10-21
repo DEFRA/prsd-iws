@@ -10,6 +10,9 @@
         public NotificationAssessment NotificationAssessment { get; private set; }
         public WasteRecovery.WasteRecovery WasteRecovery { get; private set; }
         public WasteDisposal WasteDisposal { get; private set; }
+
+        public Exporter.Exporter Exporter { get; private set; }
+
         public int Charge { get; private set; }
         public NotificationApplicationCompletionProgress Progress { get; private set; }
 
@@ -17,11 +20,13 @@
             NotificationAssessment assessment, 
             WasteRecovery.WasteRecovery wasteRecovery, 
             WasteDisposal wasteDisposal,
+            Exporter.Exporter exporter,
             int charge,
             NotificationApplicationCompletionProgress progress)
         {
             return new NotificationApplicationOverview
             {
+                Exporter = exporter,
                 Notification = notification,
                 NotificationAssessment = assessment,
                 WasteRecovery = wasteRecovery,

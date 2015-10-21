@@ -11,6 +11,7 @@
     using Domain.ImportNotification;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Exporter;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationApplication.WasteRecovery;
     using Domain.NotificationAssessment;
@@ -82,6 +83,8 @@
         public virtual DbSet<Consent> Consents { get; set; }
 
         public virtual DbSet<ImportNotification> ImportNotifications { get; set; }
+
+        public virtual DbSet<Exporter> Exporters { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
