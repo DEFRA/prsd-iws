@@ -632,7 +632,7 @@
     <Content Include="Areas\Movement\Views\Submit\Success.cshtml" />
     <Content Include="Areas\Movement\Views\ReceiptComplete\Success.cshtml" />
     <Content Include="Areas\Movement\Views\Complete\Success.cshtml" />
-    <None Include="Areas\Admin\Views\ImportNotification\NotificationType.cshtml" />
+    <Content Include="Areas\Admin\Views\ImportNotification\NotificationType.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Complete\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiveMovement\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
