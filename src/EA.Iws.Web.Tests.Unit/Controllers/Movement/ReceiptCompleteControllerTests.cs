@@ -29,7 +29,7 @@
         }
 
         [Fact]
-        public async Task GetCallsCorrectRequest()
+        public async Task GetCallsCorrectRequestWithAccepted()
         {
             controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
             controller.TempData["Decision"] = Decision.Accepted;
@@ -42,6 +42,120 @@
                     A<GetNotificationIdByMovementId>.That.Matches(r =>
                         r.MovementId == MovementId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task GetCallsCorrectRequestWithRejected()
+        {
+            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
+            controller.TempData["Decision"] = Decision.Rejected;
+            controller.TempData["RejectionReason"] = "Rejection reason text";
+            await controller.Index(MovementId);
+
+            A.CallTo(() =>
+                mediator.SendAsync(
+                    A<GetNotificationIdByMovementId>.That.Matches(r =>
+                        r.MovementId == MovementId)))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task AcceptedNoDateRedirectsCorrectly()
+        {
+            controller.TempData["Decision"] = Decision.Accepted;
+            controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
+            controller.TempData["Quantity"] = (decimal)1.2;
+
+            var result = await controller.Index(MovementId);
+
+            A.CallTo(() =>
+                mediator.SendAsync(
+                    A<GetNotificationIdByMovementId>.That.Matches(r =>
+                        r.MovementId == MovementId))).MustNotHaveHappened();
+
+            Assert.IsType<RedirectToRouteResult>(result);
+            var routeResult = result as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
+        }
+
+        [Fact]
+        public async Task AcceptedNoQuantityRedirectsCorrectly()
+        {
+            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
+            controller.TempData["Decision"] = Decision.Accepted;
+            controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
+
+            var result = await controller.Index(MovementId);
+
+            A.CallTo(() =>
+                mediator.SendAsync(
+                    A<GetNotificationIdByMovementId>.That.Matches(r =>
+                        r.MovementId == MovementId))).MustNotHaveHappened();
+
+            Assert.IsType<RedirectToRouteResult>(result);
+            var routeResult = result as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
+        }
+
+        [Fact]
+        public async Task RejectedNoDecisionRedirectsCorrectly()
+        {
+            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
+            controller.TempData["Decision"] = Decision.Rejected;
+
+            var result = await controller.Index(MovementId);
+
+            A.CallTo(() =>
+                mediator.SendAsync(
+                    A<GetNotificationIdByMovementId>.That.Matches(r =>
+                        r.MovementId == MovementId))).MustNotHaveHappened();
+
+            Assert.IsType<RedirectToRouteResult>(result);
+            var routeResult = result as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
+        }
+
+        [Fact]
+        public async Task RejectedNoDateRedirectsCorrectly()
+        {
+            controller.TempData["Decision"] = Decision.Rejected;
+            controller.TempData["RejectionReason"] = "Rejection reason text";
+
+            var result = await controller.Index(MovementId);
+
+            A.CallTo(() =>
+                mediator.SendAsync(
+                    A<GetNotificationIdByMovementId>.That.Matches(r =>
+                        r.MovementId == MovementId))).MustNotHaveHappened();
+
+            Assert.IsType<RedirectToRouteResult>(result);
+            var routeResult = result as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
+        }
+
+        [Fact]
+        public async Task NoDecisionRedirectsCorrectly()
+        {
+            controller.TempData["RejectionReason"] = "Rejection reason text";
+            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
+            controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
+            controller.TempData["Quantity"] = (decimal)1.2;
+
+            var result = await controller.Index(MovementId);
+
+            A.CallTo(() =>
+                mediator.SendAsync(
+                    A<GetNotificationIdByMovementId>.That.Matches(r =>
+                        r.MovementId == MovementId))).MustNotHaveHappened();
+
+            Assert.IsType<RedirectToRouteResult>(result);
+            var routeResult = result as RedirectToRouteResult;
+
+            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
         }
 
         [Fact]
