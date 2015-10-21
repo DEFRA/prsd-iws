@@ -143,6 +143,7 @@
     <Content Include="scripts\Update\Sprint18\20151015-115300-add-objected-date-column.sql" />
     <Content Include="scripts\Update\Sprint18\20151016-140700-update-movement-operation-receipt-table.sql" />
     <Content Include="scripts\Update\Sprint18\20151016-085800-add-import-notification-table.sql" />
+    <Content Include="scripts\Update\Sprint18\20151020-145845-update-movement-operation-receipt-fileid-to-not-null.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
