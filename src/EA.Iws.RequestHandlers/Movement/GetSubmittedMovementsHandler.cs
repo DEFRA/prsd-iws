@@ -12,11 +12,11 @@
     internal class GetSubmittedMovementsHandler :
         IRequestHandler<GetSubmittedMovements, List<SubmittedMovement>>
     {
-        private readonly IMapper mapper;
+        private readonly IMap<Movement, SubmittedMovement> mapper;
         private readonly IMovementRepository movementRepository;
 
         public GetSubmittedMovementsHandler(IMovementRepository movementRepository,
-            IMapper mapper)
+            IMap<Movement, SubmittedMovement> mapper)
         {
             this.movementRepository = movementRepository;
             this.mapper = mapper;
@@ -26,7 +26,7 @@
         {
             var movements = await movementRepository.GetSubmittedMovements(message.NotificationId);
 
-            return movements.Select(m => mapper.Map<SubmittedMovement>(m)).ToList();
+            return movements.Select(m => mapper.Map(m)).ToList();
         }
     }
 }
