@@ -90,6 +90,7 @@
     <Compile Include="Helpers\ImporterFactory.cs" />
     <Compile Include="Helpers\ExporterFactory.cs" />
     <Compile Include="Helpers\ProducerFactory.cs" />
+    <Compile Include="Helpers\TestMapper.cs" />
     <Compile Include="Helpers\TransitStateFactory.cs" />
     <Compile Include="Helpers\TransportRouteFactory.cs" />
     <Compile Include="Helpers\UserFactory.cs" />

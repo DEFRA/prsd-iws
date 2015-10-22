@@ -8,6 +8,7 @@
     using RequestHandlers.Movement;
     using Requests.Movement;
     using TestHelpers.DomainFakes;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class GetMovementsForCancelByNotificationIdHandlerTests : TestBase
@@ -30,7 +31,9 @@
             A.CallTo(() => repository.GetSubmittedMovements(NotificationId))
                 .Returns(movements);
 
-            handler = new GetSubmittedMovementsHandler(repository, new SubmittedMovementMap());
+            var testMapper = new TestMapper();
+            testMapper.AddMapper(new SubmittedMovementMap());
+            handler = new GetSubmittedMovementsHandler(repository, testMapper);
         }
 
         [Fact]
