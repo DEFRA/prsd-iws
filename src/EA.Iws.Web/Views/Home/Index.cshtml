@@ -1,29 +1,30 @@
-﻿@model EA.Iws.Web.ViewModels.Home.IndexViewModel
+﻿@using Resources = EA.Iws.Web.Views.Home.Index
+@model EA.Iws.Web.ViewModels.Home.IndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.Title;
 }
 
 <div class="grid-row">
     <section class="column-two-thirds">
         <header class="hgroup">
-            <h1 class="heading-large">Apply for an international waste shipments notification</h1>
+            <h1 class="heading-large">@Resources.MainHeading</h1>
         </header>
 
         <div>
-            <p>You must apply for an international waste shipments (IWS) notification if you ship waste overseas as part of your business.</p>
+            <p>@Resources.MainParagraph</p>
         </div>
 
         <div>
-            <p>Use this service to:</p>
+            <p>@Resources.ListTitle</p>
             <ul class="list-bullet">
-                <li>Apply for an International Waste Shipments Notification.</li>
-                <li>Download the International Waste Shipments Notification application form and supporting documents.</li>
+                <li>@Resources.ListItem1</li>
+                <li>@Resources.ListItem2</li>
             </ul>
         </div>
 
         <p id="get-started" class="get-started group">
-            @Html.ActionLink("Start now", "LandingPage", "Home", null, new { @class = "button-get-started button" })
+            @Html.ActionLink(Resources.StartButton, "LandingPage", "Home", null, new { @class = "button-get-started button" })
         </p>
     </section>
 
