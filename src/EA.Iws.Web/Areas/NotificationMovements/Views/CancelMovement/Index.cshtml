@@ -53,7 +53,7 @@
                                     @Html.HiddenFor(m => m.SubmittedMovements[i].Number)
                                 </td>
                                 <td>
-                                    -
+                                    @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].SubmittedDate)
                                 </td>
                                 <td>
                                     @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].ShipmentDate)

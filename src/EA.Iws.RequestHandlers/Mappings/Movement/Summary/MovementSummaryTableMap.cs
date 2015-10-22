@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings.Movement.Summary
 {
+    using System;
     using System.Linq;
     using Core.Movement;
     using Domain.Movement;
@@ -15,12 +16,11 @@
             data.ShipmentDate = source.Date;
             data.Status = source.Status;
 
-            var submittedStatusChange = source.StatusChanges.SingleOrDefault(sc => sc.Status == MovementStatus.Submitted);
-            if (submittedStatusChange != null)
-            {
-                data.SubmittedDate = submittedStatusChange.ChangeDate;
-            }
-
+            data.SubmittedDate = source.StatusChanges
+                .Where(sc => sc.Status == MovementStatus.Submitted)
+                .Select(sc => (DateTime?)sc.ChangeDate)
+                .SingleOrDefault();
+            
             if (source.Receipt != null)
             {
                 data.ReceivedDate = source.Receipt.Date;
