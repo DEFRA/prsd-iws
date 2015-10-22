@@ -23,7 +23,7 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(id);
             return await context.NotificationApplications.SingleAsync(n => n.Id == id);
-        }
+        } 
 
         public async Task<NotificationApplication> GetByMovementId(Guid movementId)
         {

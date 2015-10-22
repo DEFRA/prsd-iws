@@ -46,7 +46,6 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> completeTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> transmitTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
-        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> decisionRequiredByTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> withdrawTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> objectTrigger;
 
@@ -97,7 +96,6 @@
             completeTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.NotificationComplete);
             transmitTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Transmit);
             acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
-            decisionRequiredByTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.DecisionRequiredBySet);
             withdrawTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Withdraw);
             objectTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Object);
 
@@ -130,16 +128,11 @@
             stateMachine.Configure(NotificationStatus.Transmitted)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(transmitTrigger, OnTransmitted)
-                .Permit(Trigger.Acknowledged, NotificationStatus.Acknowledged);
-
-            stateMachine.Configure(NotificationStatus.Acknowledged)
-                .SubstateOf(NotificationStatus.InDetermination)
-                .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
-                .Permit(Trigger.DecisionRequiredBySet, NotificationStatus.DecisionRequiredBy);
+                .Permit(Trigger.Acknowledged, NotificationStatus.DecisionRequiredBy);
 
             stateMachine.Configure(NotificationStatus.DecisionRequiredBy)
                 .SubstateOf(NotificationStatus.InDetermination)
-                .OnEntryFrom(decisionRequiredByTrigger, OnDecisionRequiredBy)
+                .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
                 .Permit(Trigger.Consent, NotificationStatus.Consented)
                 .Permit(Trigger.Object, NotificationStatus.Objected);
 
@@ -204,11 +197,6 @@
             Dates.AcknowledgedDate = acknowledgedDate;
         }
 
-        private void OnDecisionRequiredBy(DateTime decisionByDate)
-        {
-            Dates.DecisionDate = decisionByDate;
-        }
-
         public void Submit(INotificationProgressService progressService)
         {
             if (!progressService.IsComplete(NotificationApplicationId))
@@ -260,11 +248,6 @@
         public void Acknowledge(DateTime acknowledgedDate)
         {
             stateMachine.Fire(acknowledgedTrigger, acknowledgedDate);
-        }
-
-        public void DecisionRequiredBy(DateTime decisionRequiredByDate)
-        {
-            stateMachine.Fire(decisionRequiredByTrigger, decisionRequiredByDate);
         }
 
         public IEnumerable<DecisionType> GetAvailableDecisions()

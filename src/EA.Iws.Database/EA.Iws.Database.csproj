@@ -144,6 +144,7 @@
     <Content Include="scripts\Update\Sprint18\20151016-140700-update-movement-operation-receipt-table.sql" />
     <Content Include="scripts\Update\Sprint18\20151016-085800-add-import-notification-table.sql" />
     <Content Include="scripts\Update\Sprint18\20151020-145845-update-movement-operation-receipt-fileid-to-not-null.sql" />
+    <Content Include="scripts\Update\Sprint19\20151022-150700-remove-assessment-status.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

@@ -64,10 +64,6 @@
             {
                 await SetAcknowledged(model);
             }
-            else if (model.Command == KeyDatesStatusEnum.NotificationDecisionDateEntered)
-            {
-                await SetDecisionRequiredByDate(model);
-            }
             else
             {
                 throw new InvalidOperationException();
@@ -122,14 +118,6 @@
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
             await mediator.SendAsync(setAcknowledged);
-        }
-
-        private async Task SetDecisionRequiredByDate(DateInputViewModel model)
-        {
-            var setDecisionRequiredByDate = new SetNotificationDecisionRequiredByDate(model.NotificationId,
-                model.NewDate.AsDateTime().GetValueOrDefault());
-
-            await mediator.SendAsync(setDecisionRequiredByDate);
         }
 
         private void AddRelevantDateToNewDate(DateInputViewModel model)

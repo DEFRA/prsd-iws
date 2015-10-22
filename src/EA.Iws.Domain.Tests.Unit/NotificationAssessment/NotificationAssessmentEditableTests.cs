@@ -38,7 +38,6 @@
         [Theory]
         [InlineData(NotificationStatus.ReadyToTransmit)]
         [InlineData(NotificationStatus.Transmitted)]
-        [InlineData(NotificationStatus.Acknowledged)]
         [InlineData(NotificationStatus.DecisionRequiredBy)]
         public void CanNotEditNotification(NotificationStatus status)
         {

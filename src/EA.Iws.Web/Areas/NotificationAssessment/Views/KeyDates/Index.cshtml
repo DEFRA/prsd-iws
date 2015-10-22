@@ -160,17 +160,10 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationAcknowledgedDate.IsCompleted)
-                {
-                    @(Model.DecisionDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationDecisionDateEntered }, null)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationDecisionDateEntered }, null))
-                }
             </td>
-
         </tr>
 
     </table>
-
 </div>
 
 @if (Model.Command != 0)

@@ -50,7 +50,7 @@
         public async Task Index_ValidInput_NoValidationError()
         {
             var model = GetDecisionRequiredDateModel(22, 7, 2015);
-            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
+            model.Command = KeyDatesStatusEnum.AssessmentCommenced;
 
             await controller.Index(model);
 
@@ -363,50 +363,6 @@
         {
             var model = new DateInputViewModel();
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            Assert.True(controller.ModelState.ContainsKey("NewDate"));
-        }
-
-        [Fact]
-        public async Task DecisionRequiredByDate_ValidInput_CallsClient()
-        {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(decisionRequiredDate);
-            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            A.CallTo(() => mediator.SendAsync(A<SetNotificationDecisionRequiredByDate>
-                .That.Matches(p => p.NotificationId == model.NotificationId &&
-                                p.DecisionRequiredByDate == model.NewDate.AsDateTime().Value)))
-                .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
-        public async Task DecisionRequiredByDate_ValidInput_NoValidationError()
-        {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(decisionRequiredDate);
-            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            Assert.True(controller.ModelState.IsValid);
-        }
-
-        [Fact]
-        public async Task DecisionRequiredByDate_InvalidInput_ValidationError()
-        {
-            var model = new DateInputViewModel();
-            model.Command = KeyDatesStatusEnum.NotificationDecisionDateEntered;
 
             var controller = GetMockAssessmentController(model);
 

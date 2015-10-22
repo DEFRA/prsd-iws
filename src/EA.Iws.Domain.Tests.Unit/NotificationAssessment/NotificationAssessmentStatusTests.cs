@@ -283,13 +283,13 @@
         }
 
         [Fact]
-        public void SetAcknowledgedChabgesStatusToAcknowledged()
+        public void SetAcknowledgedChangesStatusToDecisionRequired()
         {
             SetNotificationStatus(NotificationStatus.Transmitted);
 
             notificationAssessment.Acknowledge(acknowledgedDate);
 
-            Assert.Equal(NotificationStatus.Acknowledged, notificationAssessment.Status);
+            Assert.Equal(NotificationStatus.DecisionRequiredBy, notificationAssessment.Status);
         }
 
         [Fact]
@@ -298,24 +298,6 @@
             Action setAcknowledged = () => notificationAssessment.Acknowledge(acknowledgedDate);
 
             Assert.Throws<InvalidOperationException>(setAcknowledged);
-        }
-
-        [Fact]
-        public void SetDecisionRequiredBySetSetsDate()
-        {
-            SetNotificationStatus(NotificationStatus.Acknowledged);
-
-            notificationAssessment.DecisionRequiredBy(decisionByDate);
-
-            Assert.Equal(decisionByDate, notificationAssessment.Dates.DecisionDate);
-        }
-
-        [Fact]
-        public void CantSetDecisionRequiredByWhenNotAcknowledged()
-        {
-            Action setDecisionRequiredBy = () => notificationAssessment.DecisionRequiredBy(acknowledgedDate);
-
-            Assert.Throws<InvalidOperationException>(setDecisionRequiredBy);
         }
 
         [Fact]

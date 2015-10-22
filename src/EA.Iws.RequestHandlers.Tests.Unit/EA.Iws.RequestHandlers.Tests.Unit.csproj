@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="Admin\NotificationAssessment\GetDatesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetNotificationDecisionRequiredByDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandlerTests.cs" />
@@ -82,7 +81,6 @@
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandlerTests.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetDatesHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandlerTests.cs" />

@@ -52,7 +52,6 @@
     <Compile Include="AddressBook\SearchAddressRecords.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDates.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDate.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetNotificationDecisionRequiredByDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationId.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDates.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsers.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetDates.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
     <Compile Include="Carriers\DeleteCarrierForNotification.cs" />
     <Compile Include="Admin\GetBasicSearchResults.cs" />

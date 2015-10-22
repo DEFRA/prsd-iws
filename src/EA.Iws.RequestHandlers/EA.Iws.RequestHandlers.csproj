@@ -76,7 +76,6 @@
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetNotificationDecisionRequiredByDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />
     <Compile Include="Admin\Registration\GetLocalAreasHandler.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetDatesHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />

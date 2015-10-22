@@ -7,6 +7,7 @@
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
     using Notification;
     using Prsd.Core.Autofac;
@@ -54,6 +55,7 @@
             builder.RegisterType<CertificateOfRecoveryNameGenerator>().AsSelf();
             builder.RegisterType<ConsentNotification>().AsSelf();
             builder.RegisterType<MovementFileNameGenerator>().AsSelf();
+            builder.RegisterType<DecisionRequiredBy>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();

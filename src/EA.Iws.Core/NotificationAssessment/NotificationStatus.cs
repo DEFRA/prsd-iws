@@ -16,18 +16,16 @@
         ReadyToTransmit = 5,
         [Display(Name = "Transmitted")]
         Transmitted = 6,
-        [Display(Name = "Acknowledged")]
-        Acknowledged = 7,
         [Display(Name = "Decision required")]
-        DecisionRequiredBy = 8,
+        DecisionRequiredBy = 7,
         [Display(Name = "Withdrawn")]
-        Withdrawn = 9,
+        Withdrawn = 8,
         [Display(Name = "Objected")]
-        Objected = 10,
+        Objected = 9,
         [Display(Name = "Consented")]
-        Consented = 11,
+        Consented = 10,
         [Display(Name = "Consent withdrawn")]
-        ConsentWithdrawn = 12,
+        ConsentWithdrawn = 11,
         [Display(Name = "In Determination")]
         InDetermination = 100
     }
