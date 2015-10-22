@@ -27,8 +27,12 @@
             if (notification.Status != NotificationStatus.NotSubmitted)
             {
                 choices.Add(new KeyValuePair<string, int>(PrintNotification, 2));
+            }
+            if (notification.Status == NotificationStatus.Consented)
+            {
                 choices.Add(new KeyValuePair<string, int>(ManageShipments, 3));
             }
+
             choices.Add(new KeyValuePair<string, int>(NotificationKeyDates, 4));
 
             UserChoices = new StringIntRadioButtons(choices);

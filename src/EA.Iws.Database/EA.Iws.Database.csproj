@@ -61,6 +61,7 @@
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
     <Content Include="scripts\TestData\20150825-143456-add-address-to-test-user.sql" />
+    <Content Include="scripts\TestData\20151023-084000-create-consented-notification-2503.sql" />
     <Content Include="scripts\TestData\20150921-145000-create-submitted-notification-2501.sql" />
     <Content Include="scripts\TestData\20150928-145000-create-submitted-notification-disposal-2502.sql" />
     <Content Include="scripts\TestData\placeholder.txt" />

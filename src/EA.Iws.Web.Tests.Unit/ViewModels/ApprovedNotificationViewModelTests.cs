@@ -15,9 +15,18 @@
         }
 
         [Fact]
-        public void NotificationStatus_Submitted_Shows_AllUserChoices()
+        public void NotificationStatus_Submitted_Shows_ThreeUserChoices()
         {
             notification.Status = NotificationStatus.Submitted;
+            var approvedNotificationViewModel = new ApprovedNotificationViewModel(notification);
+            Assert.NotNull(approvedNotificationViewModel);
+            Assert.Equal(3, approvedNotificationViewModel.UserChoices.PossibleValues.Count);
+        }
+
+        [Fact]
+        public void NotificationStatus_Submitted_Shows_AllUserChoices()
+        {
+            notification.Status = NotificationStatus.Consented;
             var approvedNotificationViewModel = new ApprovedNotificationViewModel(notification);
             Assert.NotNull(approvedNotificationViewModel);
             Assert.Equal(4, approvedNotificationViewModel.UserChoices.PossibleValues.Count);

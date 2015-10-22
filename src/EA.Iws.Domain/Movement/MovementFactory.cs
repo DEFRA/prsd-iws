@@ -14,7 +14,7 @@
             ShipmentInfo shipmentInfo,
             ICollection<Movement> notificationMovements)
         {
-            if (notificationAssessment.Status == NotificationStatus.NotSubmitted)
+            if (notificationAssessment.Status != NotificationStatus.Consented)
             {
                 throw new InvalidOperationException(
                     string.Format("Cannot create a new movement for notification {0} which has status {1}", 

@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Movement
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.NotificationAssessment;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
@@ -53,7 +53,8 @@
             A.CallTo(() => assessmentRepository.GetByNotificationId(notificationId))
                 .Returns(new TestableNotificationAssessment
                 {
-                    NotificationApplicationId = notificationId
+                    NotificationApplicationId = notificationId,
+                    Status = NotificationStatus.Consented
                 });
 
             handler = new CreateMovementForNotificationByIdHandler(
