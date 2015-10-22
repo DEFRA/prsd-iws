@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
@@ -25,7 +26,7 @@
 
             var tableDataList = new List<MovementSummaryTableViewModel>();
 
-            foreach (var mstd in movementsSummary.ShipmentTableData)
+            foreach (var mstd in movementsSummary.ShipmentTableData.OrderByDescending(m => m.Number))
             {
                 var tableData = new MovementSummaryTableViewModel(mstd);
                 
