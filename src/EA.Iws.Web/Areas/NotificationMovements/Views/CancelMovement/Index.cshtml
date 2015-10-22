@@ -45,6 +45,8 @@
                     <tbody>
                         @for (int i = 0; i < Model.SubmittedMovements.Count; i++)
                         {
+                            MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.SubmittedMovements[i].IsSelected);
+
                             <tr>
                                 <td>
                                     @Html.DisplayFor(m => m.SubmittedMovements[i].Number)
@@ -54,12 +56,14 @@
                                     -
                                 </td>
                                 <td>
-                                    @Html.Raw(Model.SubmittedMovements[i].ShipmentDate.ToString("dd/MM/yyyy"))
+                                    @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].ShipmentDate)
                                 </td>
                                 <td>
-                                    @Html.HiddenFor(m => m.SubmittedMovements[i].MovementId)
-                                    @Html.CheckBoxFor(m => m.SubmittedMovements[i].IsSelected, new { @id = "chkCancel" + i })
-                                    Cancel
+                                    <label for="@idForThisCheckBox">
+                                        @Html.HiddenFor(m => m.SubmittedMovements[i].MovementId)
+                                        @Html.CheckBoxFor(m => m.SubmittedMovements[i].IsSelected, new { id = idForThisCheckBox })
+                                        Cancel
+                                    </label>
                                 </td>
                             </tr>
                         }
@@ -73,5 +77,9 @@
     </div>
 }
 <div class="form-group">
-    @Html.ActionLink("Go to notification options", "ApprovedNotification", "Applicant", new { area = string.Empty, id = Model.NotificationId }, null)
+    @Html.ActionLink("Go to notification options", 
+        "ApprovedNotification", 
+        "Applicant", 
+        new { area = string.Empty, id = Model.NotificationId }, 
+        null)
 </div>

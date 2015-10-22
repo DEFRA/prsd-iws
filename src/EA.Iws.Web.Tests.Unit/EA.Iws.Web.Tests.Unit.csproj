@@ -205,6 +205,7 @@
     <Compile Include="ViewModels\Movement\DateReceivedViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\ShipmentAcceptanceViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\ShipmentDateViewModelTests.cs" />
+    <Compile Include="ViewModels\NotificationMovements\CancelSuccessViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />

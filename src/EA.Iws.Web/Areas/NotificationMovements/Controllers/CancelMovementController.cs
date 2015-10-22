@@ -77,12 +77,30 @@
             {
                 var selectedMovements = result as List<MovementData>;
 
+                TempData[SubmittedMovementListKey] = selectedMovements;
+
                 await mediator.SendAsync(new CancelMovements(model.NotificationId, selectedMovements));
 
-                return RedirectToAction("Index", "Home", new { notificationId = model.NotificationId });
+                return RedirectToAction("Success", "CancelMovement", new { notificationId = model.NotificationId });
             }
 
             return HttpNotFound();
+        }
+
+        [HttpGet]
+        public ActionResult Success(Guid notificationId)
+        {
+            object result;
+            if (TempData.TryGetValue(SubmittedMovementListKey, out result))
+            {
+                var selectedMovements = result as List<MovementData>;
+
+                var shipmentNumbers = selectedMovements.Select(m => m.Number).ToList();
+
+                return View(new SuccessViewModel(notificationId, shipmentNumbers));
+            }
+
+            return RedirectToAction("Index", "CancelMovement", new { notificationId });
         }
     }
 }
