@@ -184,7 +184,7 @@
     <Compile Include="Controllers\NotificationApplication\StateOfExportControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\TransportRouteControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\WasteGenerationProcessControllerTests.cs" />
-    <Compile Include="Controllers\NotificationApplication\WasteTypeControllerTests.cs" />
+    <Compile Include="Controllers\NotificationApplication\ChemicalCompositionControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\WasteRecoveryControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\StateOfImportControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\TransitStateControllerTests.cs" />
@@ -213,8 +213,8 @@
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />
-    <Compile Include="ViewModels\WasteType\ChemicalCompositionConcentrationLevelsViewModelTests.cs" />
-    <Compile Include="ViewModels\WasteType\ChemicalCompositionInformationViewModelTests.cs" />
+    <Compile Include="ViewModels\WasteType\ChemicalCompositionViewModelTests.cs" />
+    <Compile Include="ViewModels\WasteType\ChemicalCompositionContinuedViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

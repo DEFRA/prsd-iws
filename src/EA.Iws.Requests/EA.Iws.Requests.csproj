@@ -237,7 +237,8 @@
     <Compile Include="WasteCodes\GetWasteCodesByType.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcess.cs" />
     <Compile Include="WasteType\GetWasteType.cs" />
-    <Compile Include="WasteType\SetEnergyAndOptionalInformation.cs" />
+    <Compile Include="WasteType\SetEnergy.cs" />
+    <Compile Include="WasteType\SetOptionalInformation.cs" />
     <Compile Include="WasteType\SetOtherWasteAdditionalInformation.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristics.cs" />
     <Compile Include="WasteType\SetWasteGenerationProcess.cs" />

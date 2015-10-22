@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using Core.WasteType;
     using Prsd.Core.Helpers;
 
-    public class ChemicalCompositionInformationViewModel : IValidatableObject
+    public class ChemicalCompositionViewModel : IValidatableObject
     {
         private List<WoodInformationData> wasteComposition = new List<WoodInformationData>();
 
@@ -23,11 +23,10 @@
             set { wasteComposition = value; }
         }
 
-        public string FurtherInformation { get; set; }
-
-        public bool HasAnnex { get; set; }
-
         public string Energy { get; set; }
+
+        [StringLength(70, ErrorMessage = "Please limit your answer to 70 characters or less")]
+        public string Description { get; set; }
 
         public ChemicalCompositionType ChemicalCompositionType { get; set; }
 
@@ -36,6 +35,11 @@
             if (string.IsNullOrEmpty(Energy) && ChemicalCompositionType != ChemicalCompositionType.Wood)
             {
                 yield return new ValidationResult("Please enter a value for Energy", new[] { "Energy" });
+            }
+
+            if (ChemicalCompositionType == ChemicalCompositionType.Wood && string.IsNullOrEmpty(Description))
+            {
+                yield return new ValidationResult("Description is required", new[] { "Description" });
             }
 
             for (var i = 0; i < WasteComposition.Count; i++)
@@ -84,12 +88,7 @@
                     }
                 }
             }
-
-            if (HasAnnex && !(string.IsNullOrEmpty(FurtherInformation)))
-            {
-                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here", new[] { "FurtherInformation" });
-            }
-
+            
             var totalNas = 0;
             var totalNotEmpty = 0;
 
@@ -108,7 +107,7 @@
 
             if (totalNas == totalNotEmpty)
             {
-                yield return new ValidationResult("You’ve not entered any data about the waste’s composition.");
+                yield return new ValidationResult("You have not entered any data about the waste's composition.");
             }
         }
 

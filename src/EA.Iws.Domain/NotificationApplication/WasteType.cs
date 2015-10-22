@@ -26,7 +26,7 @@
         }
 
         private WasteType(ChemicalComposition chemicalComposition,
-            IList<WasteComposition> wasteCompositions, string chemicalCompositionDescription = "")
+            IList<WasteAdditionalInformation> wasteCompositions, string chemicalCompositionDescription = "")
         {
             ChemicalCompositionType = chemicalComposition;
 
@@ -37,11 +37,11 @@
 
             if (wasteCompositions == null)
             {
-                WasteCompositionCollection = new List<WasteComposition>();
+                WasteAdditionalInformationCollection = new List<WasteAdditionalInformation>();
             }
             else
             {
-                WasteCompositionCollection = new List<WasteComposition>(wasteCompositions);
+                WasteAdditionalInformationCollection = new List<WasteAdditionalInformation>(wasteCompositions);
             }
         }
 
@@ -102,6 +102,7 @@
             {
                 throw new InvalidOperationException("Waste Composition cannot be null");
             }
+
             WasteCompositionCollection.Add(wasteComposition);
         }
 
@@ -220,22 +221,17 @@
             return new WasteType(ChemicalComposition.Other, chemicalCompositionName);
         }
 
-        public static WasteType CreateWoodWasteType(string chemicalCompositionDescription, IList<WasteComposition> wasteCompositions)
+        public static WasteType CreateWoodWasteType(string chemicalCompositionDescription, IList<WasteAdditionalInformation> wasteCompositions)
         {
-            if (wasteCompositions != null
-                && wasteCompositions.Any(x => x.ChemicalCompositionType == ChemicalCompositionCategory.Food))
-            {
-                throw new InvalidOperationException("Food constituent can not be set for chemical composition Wood.");
-            }
             return new WasteType(ChemicalComposition.Wood, wasteCompositions, chemicalCompositionDescription);
         }
 
-        public static WasteType CreateRdfWasteType(IList<WasteComposition> wasteCompositions)
+        public static WasteType CreateRdfWasteType(IList<WasteAdditionalInformation> wasteCompositions)
         {
             return new WasteType(ChemicalComposition.RDF, wasteCompositions);
         }
 
-        public static WasteType CreateSrfWasteType(IList<WasteComposition> wasteCompositions)
+        public static WasteType CreateSrfWasteType(IList<WasteAdditionalInformation> wasteCompositions)
         {
             return new WasteType(ChemicalComposition.SRF, wasteCompositions);
         }

@@ -21,7 +21,7 @@
         [Fact]
         public void CanAddWasteTypeForWood()
         {
-            notification.SetWasteType(WasteType.CreateRdfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateRdfWasteType(GetWasteAdditionalInformationCollection()));
 
             Assert.True(notification.HasWasteType);
         }
@@ -29,7 +29,7 @@
         [Fact]
         public void CanAddWasteTypeForOther()
         {
-            notification.SetWasteType(WasteType.CreateRdfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateRdfWasteType(GetWasteAdditionalInformationCollection()));
 
             Assert.True(notification.HasWasteType);
         }
@@ -37,19 +37,19 @@
         [Fact]
         public void CanAddWasteTypeForRdf()
         {
-            notification.SetWasteType(WasteType.CreateRdfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateRdfWasteType(GetWasteAdditionalInformationCollection()));
 
             Assert.True(notification.HasWasteType);
-            Assert.Equal(5, notification.WasteType.WasteCompositions.Count());
+            Assert.Equal(5, notification.WasteType.WasteAdditionalInformation.Count());
         }
 
         [Fact]
         public void CanAddWasteTypeForSrf()
         {
-            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteAdditionalInformationCollection()));
 
             Assert.True(notification.HasWasteType);
-            Assert.Equal(5, notification.WasteType.WasteCompositions.Count());
+            Assert.Equal(5, notification.WasteType.WasteAdditionalInformation.Count());
         }
 
         [Fact]
@@ -57,7 +57,7 @@
         {
             notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWoodWasteTypeCollection()));
 
-            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteAdditionalInformationCollection()));
 
             Assert.Equal(ChemicalComposition.SRF, notification.WasteType.ChemicalCompositionType);
         }
@@ -67,7 +67,7 @@
         {
             notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWoodWasteTypeCollection()));
 
-            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteAdditionalInformationCollection()));
 
             notification.SetWasteType(WasteType.CreateWoodWasteType("some description", GetWoodWasteTypeCollection()));
 
@@ -77,39 +77,37 @@
         [Fact]
         public void CanEditChemicalCompositions()
         {
-            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteAdditionalInformationCollection()));
 
-            List<WasteComposition> editedWasteCompositions = new List<WasteComposition>();
-            editedWasteCompositions.Add(WasteComposition.CreateWasteComposition("First Constituent", 50, 100, ChemicalCompositionCategory.Metals));
-            editedWasteCompositions.Add(WasteComposition.CreateWasteComposition("Second Constituent", 20, 100, ChemicalCompositionCategory.Wood));
-            editedWasteCompositions.Add(WasteComposition.CreateWasteComposition("Third Constituent", 30, 100, ChemicalCompositionCategory.Food));
-            editedWasteCompositions.Add(WasteComposition.CreateWasteComposition("Fourth Constituent", 40, 100, ChemicalCompositionCategory.Textiles));
-            editedWasteCompositions.Add(WasteComposition.CreateWasteComposition("Fifth Constituent", 50, 100, ChemicalCompositionCategory.Plastics));
+            List<WasteAdditionalInformation> editedWasteCompositions = new List<WasteAdditionalInformation>();
+            editedWasteCompositions.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("First Constituent", 50, 100, WasteInformationType.AshContent));
+            editedWasteCompositions.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Second Constituent", 20, 100, WasteInformationType.Chlorine));
+            editedWasteCompositions.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Third Constituent", 30, 100, WasteInformationType.NetCalorificValue));
+            editedWasteCompositions.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Fourth Constituent", 40, 100, WasteInformationType.MoistureContent));
 
             notification.SetWasteType(WasteType.CreateSrfWasteType(editedWasteCompositions));
 
-            Assert.Collection(notification.WasteType.WasteCompositions,
-                item => Assert.Equal(50, notification.WasteType.WasteCompositions.Single(p => p.Constituent == "First Constituent").MinConcentration),
-                item => Assert.Equal(20, notification.WasteType.WasteCompositions.Single(p => p.Constituent == "Second Constituent").MinConcentration),
-                item => Assert.Equal(30, notification.WasteType.WasteCompositions.Single(p => p.Constituent == "Third Constituent").MinConcentration),
-                item => Assert.Equal(40, notification.WasteType.WasteCompositions.Single(p => p.Constituent == "Fourth Constituent").MinConcentration),
-                item => Assert.Equal(50, notification.WasteType.WasteCompositions.Single(p => p.Constituent == "Fifth Constituent").MinConcentration));
+            Assert.Collection(notification.WasteType.WasteAdditionalInformation,
+                item => Assert.Equal(50, notification.WasteType.WasteAdditionalInformation.Single(p => p.Constituent == "First Constituent").MinConcentration),
+                item => Assert.Equal(20, notification.WasteType.WasteAdditionalInformation.Single(p => p.Constituent == "Second Constituent").MinConcentration),
+                item => Assert.Equal(30, notification.WasteType.WasteAdditionalInformation.Single(p => p.Constituent == "Third Constituent").MinConcentration),
+                item => Assert.Equal(40, notification.WasteType.WasteAdditionalInformation.Single(p => p.Constituent == "Fourth Constituent").MinConcentration));
         }
 
         [Fact]
         public void CanAddWasteAdditionalInformation()
         {
-            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteAdditionalInformationCollection()));
 
             notification.SetWasteAdditionalInformation(GetWasteAdditionalInformationCollection());
 
-            Assert.Equal(6, notification.WasteType.WasteAdditionalInformation.Count());
+            Assert.Equal(5, notification.WasteType.WasteAdditionalInformation.Count());
         }
 
         [Fact]
         public void CanEditWasteAdditionalInformation()
         {
-            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteTypeCollection()));
+            notification.SetWasteType(WasteType.CreateSrfWasteType(GetWasteAdditionalInformationCollection()));
 
             notification.SetWasteAdditionalInformation(GetWasteAdditionalInformationCollection());
 
@@ -157,15 +155,15 @@
             return wasteCompositions;
         }
 
-        private List<WasteComposition> GetWoodWasteTypeCollection()
+        private List<WasteAdditionalInformation> GetWoodWasteTypeCollection()
         {
-            List<WasteComposition> wasteCompositions = new List<WasteComposition>();
-            wasteCompositions.Add(WasteComposition.CreateWasteComposition("First Constituent", 1, 100, ChemicalCompositionCategory.Metals));
-            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Second Constituent", 2, 100, ChemicalCompositionCategory.Wood));
-            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Third Constituent", 3, 100, ChemicalCompositionCategory.Textiles));
-            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Fourth Constituent", 4, 100, ChemicalCompositionCategory.Plastics));
-            wasteCompositions.Add(WasteComposition.CreateWasteComposition("Other Constituent", 10, 20, ChemicalCompositionCategory.Other));
-            return wasteCompositions;
+            List<WasteAdditionalInformation> wasteAdditionalInformation = new List<WasteAdditionalInformation>();
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("First Constituent", 5, 10, WasteInformationType.AshContent));
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Second Constituent", 5, 10, WasteInformationType.Chlorine));
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Third Constituent", 5, 10, WasteInformationType.HeavyMetals));
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Fourth Constituent", 5, 10, WasteInformationType.MoistureContent));
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Fifth Constituent", 5, 10, WasteInformationType.NetCalorificValue));
+            return wasteAdditionalInformation;
         }
 
         private List<WasteAdditionalInformation> GetWasteAdditionalInformationCollection()
@@ -173,10 +171,9 @@
             List<WasteAdditionalInformation> wasteAdditionalInformation = new List<WasteAdditionalInformation>();
             wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("First Constituent", 5, 10, WasteInformationType.AshContent));
             wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Second Constituent", 5, 10, WasteInformationType.Chlorine));
-            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Third Constituent", 5, 10, WasteInformationType.Energy));
-            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Fourth Constituent", 5, 10, WasteInformationType.HeavyMetals));
-            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Fifth Constituent", 5, 10, WasteInformationType.MoistureContent));
-            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Sixth Constituent", 5, 10, WasteInformationType.NetCalorificValue));
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Third  Constituent", 5, 10, WasteInformationType.HeavyMetals));
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Fourth Constituent", 5, 10, WasteInformationType.MoistureContent));
+            wasteAdditionalInformation.Add(WasteAdditionalInformation.CreateWasteAdditionalInformation("Fifth Constituent", 5, 10, WasteInformationType.NetCalorificValue));
             return wasteAdditionalInformation;
         }
     }

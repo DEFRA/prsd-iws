@@ -1,18 +1,16 @@
 ﻿@using EA.Iws.Core.WasteType
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionInformationViewModel
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionViewModel
 @{
     ViewBag.Title = "Waste Code";
 }
 <header class="hgroup">
     <div class="form-group">
-        @Html.Gds().HintParagraph("Step 3 of 3")
+        @Html.Gds().HintParagraph("Step 2 of 3")
     </div>
-    <h1 class="heading-large">Additional Information required</h1>
+    <h1 class="heading-large">What is the chemical composition of the waste?</h1>
     <p>
-        Concentration levels of the constituents present in the waste
-        Enter minimum and maximum as a weight by weight percentage (%),
-        unless otherwise stated or you can enter NA where not applicable.
+        Tell us about the concentration levels in the waste's constituent parts. You can enter "NA" where it's not applicable.
     </p>
 </header>
 @using (Html.BeginForm())
@@ -21,12 +19,38 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.ChemicalCompositionType)
+
+    <div>Brief description of the type of wood</div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
+        @Html.Gds().ValidationMessageFor(m => m.Description)
+        @Html.Gds().HintSpan("Limit your answer to 70 characters or less")
+        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title = "Wood waste type description" })
+    </div>
+
     <div class="grid-row">
         <div class="column-half">
             @for (var i = 0; i < Model.WasteComposition.Count; i++)
             {
+                var hintText = "Enter the minimum and maximum as a weight-by-weight percentage.";
+
+                if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue)
+                {
+                    hintText = "Megajoules per kilogram";
+                }
+
+                if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals)
+                {
+                    hintText = "Milligrams per kilogram";
+                }
+
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
                     @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
+                    <div>
+                        <div>
+                            @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType)
+                            @Html.Gds().HintParagraph(hintText)
+                        </div>
+                    </div>
                     <div class="grid-row">
                         <div class="column-two-thirds">
                             @EnumHelper.GetDescription(Model.WasteComposition[i].WasteInformationType)
@@ -50,21 +74,7 @@
             }
         </div>
     </div>
-    <div class="column-half"></div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
-        @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
-        Any other relevant information (optional)
-        @Html.Gds().HintParagraph("Please limit your answer to 256 characters")
-        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = "Further information", @MaxLength = 256 })
-    </div>
-    <div class="form-group">
-        <fieldset>
-            <label class="block-label" for="chkboxFurtherInfo">
-                @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo" })
-                I will provide further details in an annex when I submit my notification.
-            </label>
-        </fieldset>
-    </div>
+    
     <div class="form-group">
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>

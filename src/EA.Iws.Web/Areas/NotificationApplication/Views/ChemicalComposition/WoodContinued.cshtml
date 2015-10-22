@@ -1,12 +1,12 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType.ChemicalCompositionConcentrationLevelsViewModel
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionContinuedViewModel
 @{
-    ViewBag.Title = "Waste Code";
+    ViewBag.Title = "Chemical composition of waste continued";
 }
 <header class="hgroup">
     <div class="form-group">
-        @Html.Gds().HintParagraph("Step 2 of 3")
+        @Html.Gds().HintParagraph("Step 3 of 3")
     </div>
-    <h1 class="heading-large">What type of wood?</h1>
+    <h1 class="heading-large">What is the chemical composition of the waste? (continued)</h1>
 </header>
 @using (Html.BeginForm())
 {
@@ -14,13 +14,7 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.ChemicalCompositionType)
-
-    <div>Brief description of the type of wood</div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
-        @Html.Gds().ValidationMessageFor(m => m.Description)
-        @Html.Gds().HintSpan("Limit your answer to 70 characters or less")
-        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title = "Wood waste type description" })
-    </div>
+    
     <h2 class="heading-small">What is the chemical composition of the waste?</h2>
     <p>
         Concentration levels of the constituents present in the waste.
@@ -77,8 +71,24 @@
         </div>
     </div>
 
-    
+    <div class="column-half"></div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
+        @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
+        Any other relevant information (optional)
+        @Html.Gds().HintParagraph("Please limit your answer to 256 characters")
+        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = "Further information", @MaxLength = 256 })
+    </div>
     <div class="form-group">
-        <button class="button" name="Command" value="continue" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <fieldset>
+            <label class="block-label" for="chkboxFurtherInfo">
+                @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo" })
+                I will provide further details in an annex when I submit my notification.
+            </label>
+        </fieldset>
+    </div>
+
+
+    <div class="form-group">
+        <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

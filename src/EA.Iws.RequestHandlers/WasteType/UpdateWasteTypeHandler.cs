@@ -13,10 +13,10 @@
     public class UpdateWasteTypeHandler : IRequestHandler<UpdateWasteType, Guid>
     {
         private readonly IwsContext context;
-        private readonly IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>> wasteTypeMap;
+        private readonly IMap<IList<WasteTypeCompositionData>, IList<WasteComposition>> wasteTypeMap;
 
         public UpdateWasteTypeHandler(IwsContext context,
-            IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>> wasteTypeMap)
+            IMap<IList<WasteTypeCompositionData>, IList<WasteComposition>> wasteTypeMap)
         {
             this.context = context;
             this.wasteTypeMap = wasteTypeMap;
@@ -26,7 +26,7 @@
         {
             var notification = await context.GetNotificationApplication(command.NotificationId);
 
-            notification.SetWasteAdditionalInformation(wasteTypeMap.Map(command.WasteCompositions));
+            notification.SetChemicalCompostitionContinues(wasteTypeMap.Map(command.WasteCompositions));
 
             await context.SaveChangesAsync();
             return notification.WasteType.Id;

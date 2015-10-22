@@ -10,13 +10,12 @@
     public class UpdateWasteType : IRequest<Guid>
     {
         public UpdateWasteType(Guid notificationId, ChemicalCompositionType chemicalCompositionType,
-            string furtherInformation, string energyInfo, List<WoodInformationData> wasteCompositions)
+            string furtherInformation, List<WasteTypeCompositionData> wasteCompositions)
         {
             NotificationId = notificationId;
             ChemicalCompositionType = chemicalCompositionType;
             ChemicalCompositionDescription = FurtherInformation;
             WasteCompositions = wasteCompositions;
-            EnergyInfo = energyInfo;
             FurtherInformation = furtherInformation;
         }
 
@@ -28,8 +27,6 @@
 
         public string FurtherInformation { get; private set; }
 
-        public string EnergyInfo { get; private set; }
-
-        public List<WoodInformationData> WasteCompositions { get; private set; }
+        public List<WasteTypeCompositionData> WasteCompositions { get; private set; }
     }
 }

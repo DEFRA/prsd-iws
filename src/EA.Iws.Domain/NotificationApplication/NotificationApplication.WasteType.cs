@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public partial class NotificationApplication
     {
@@ -38,14 +39,14 @@
 
             if (wasteType.ChemicalCompositionType == ChemicalComposition.RDF || wasteType.ChemicalCompositionType == ChemicalComposition.SRF)
             {
-                ClearWasteCompositions();
-                WasteType.WasteCompositions = wasteType.WasteCompositions;
+                ClearWasteAdditionalInformation();
+                WasteType.SetWasteAdditionalInformation(wasteType.WasteAdditionalInformation.ToList());
             }
 
             if (wasteType.ChemicalCompositionType == ChemicalComposition.Wood)
             {
-                ClearWasteCompositions();
-                WasteType.WasteCompositions = wasteType.WasteCompositions;
+                ClearWasteAdditionalInformation();
+                WasteType.SetWasteAdditionalInformation(wasteType.WasteAdditionalInformation.ToList());
                 WasteType.WoodTypeDescription = wasteType.WoodTypeDescription;
             }
         }
@@ -100,6 +101,17 @@
             WasteType.SetWasteAdditionalInformation(wasteType);
         }
 
+        public void SetChemicalCompostitionContinues(IList<WasteComposition> wasteCompositions)
+        {
+            if (wasteCompositions == null)
+            {
+                throw new InvalidOperationException(string.Format("Waste type does not exist on notification: {0}", Id));
+            }
+
+            ClearWasteCompositions();
+            WasteType.WasteCompositions = wasteCompositions;
+        }
+
         public void SetWoodTypeDescription(string woodTypeDescription)
         {
             if (WasteType == null)
@@ -109,15 +121,25 @@
             WasteType.WoodTypeDescription = woodTypeDescription;
         }
 
-        public void SetEnergyAndOptionalInformation(string energyInformation, string optionalInformation, bool hasAnnex)
+        public void SetOptionalInformation(string optionalInformation, bool hasAnnex)
         {
             if (WasteType == null)
             {
                 throw new InvalidOperationException(String.Format("Waste Type can not be null for notification: {0}", Id));
             }
-            WasteType.EnergyInformation = energyInformation;
+            
             WasteType.OptionalInformation = optionalInformation;
             WasteType.HasAnnex = hasAnnex;
+        }
+
+        public void SetEnergy(string energyInformation)
+        {
+            if (WasteType == null)
+            {
+                throw new InvalidOperationException(String.Format("Waste Type can not be null for notification: {0}", Id));
+            }
+
+            WasteType.EnergyInformation = energyInformation;
         }
     }
 }

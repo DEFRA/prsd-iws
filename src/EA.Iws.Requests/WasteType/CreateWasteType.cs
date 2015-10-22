@@ -15,7 +15,7 @@
    
         public string ChemicalCompositionDescription { get; set; }
 
-        public List<WasteTypeCompositionData> WasteCompositions { get; set; }
+        public List<WoodInformationData> WasteCompositions { get; set; }
 
         public string WasteCompositionName { get; set; }
     }

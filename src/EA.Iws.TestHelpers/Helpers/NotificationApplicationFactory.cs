@@ -59,8 +59,8 @@
 
             notification.SetWasteType(WasteType.CreateRdfWasteType(new[]
             {
-                WasteComposition.CreateWasteComposition("boulder", 5, 10, ChemicalCompositionCategory.Other),
-                WasteComposition.CreateWasteComposition("notes", 6, 9, ChemicalCompositionCategory.Paper)
+                WasteAdditionalInformation.CreateWasteAdditionalInformation("boulder", 5, 10, WasteInformationType.Energy),
+                WasteAdditionalInformation.CreateWasteAdditionalInformation("notes", 6, 9, WasteInformationType.AshContent)
             }));
 
             SetWasteCodes(notification, wasteCodes);

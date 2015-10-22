@@ -10,17 +10,17 @@
 
     public class WasteTypeMap : IMap<WasteType, WasteTypeData>, IMap<CreateWasteType, WasteType>
     {
-        private readonly IMap<IList<WasteTypeCompositionData>, IList<WasteComposition>> wasteCompositionMapper;
-        private readonly IMap<IEnumerable<WasteComposition>, IList<EA.Iws.Core.WasteType.WasteCompositionData>> wasteTypeDataMapper;
-        private readonly IMap<IEnumerable<WasteAdditionalInformation>, IList<EA.Iws.Core.WasteType.WoodInformationData>> wasteAdditionalInformationMapper;
+        private readonly IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>> compositionContinuedMapper;
+        private readonly IMap<IEnumerable<WasteComposition>, IList<WasteCompositionData>> wasteTypeDataMapper;
+        private readonly IMap<IEnumerable<WasteAdditionalInformation>, IList<WoodInformationData>> compositionMapper;
 
-        public WasteTypeMap(IMap<IList<WasteTypeCompositionData>, IList<WasteComposition>> wasteCompositionMapper,
-            IMap<IEnumerable<WasteComposition>, IList<EA.Iws.Core.WasteType.WasteCompositionData>> wasteTypeDataMapper,
-            IMap<IEnumerable<WasteAdditionalInformation>, IList<EA.Iws.Core.WasteType.WoodInformationData>> wasteAdditionalInformationMapper)
+        public WasteTypeMap(IMap<IList<WoodInformationData>, IList<WasteAdditionalInformation>> compositionContinuedMapper,
+            IMap<IEnumerable<WasteComposition>, IList<WasteCompositionData>> wasteTypeDataMapper,
+            IMap<IEnumerable<WasteAdditionalInformation>, IList<WoodInformationData>> compositionMapper)
         {
-            this.wasteCompositionMapper = wasteCompositionMapper;
+            this.compositionContinuedMapper = compositionContinuedMapper;
             this.wasteTypeDataMapper = wasteTypeDataMapper;
-            this.wasteAdditionalInformationMapper = wasteAdditionalInformationMapper;
+            this.compositionMapper = compositionMapper;
         }
 
         public WasteTypeData Map(WasteType source)
@@ -34,7 +34,7 @@
                 OtherWasteTypeDescription = source.OtherWasteTypeDescription,
                 WasteCompositionData = wasteTypeDataMapper.Map(source.WasteCompositions).ToList(),
                 HasAnnex = source.HasAnnex,
-                WasteAdditionalInformation = wasteAdditionalInformationMapper.Map(source.WasteAdditionalInformation).ToList(),
+                WasteAdditionalInformation = compositionMapper.Map(source.WasteAdditionalInformation).ToList(),
                 EnergyInformation = source.EnergyInformation,
                 FurtherInformation = source.OptionalInformation,
                 WoodTypeDescription = source.WoodTypeDescription
@@ -47,13 +47,13 @@
             switch (source.ChemicalCompositionType)
             {
                 case ChemicalCompositionType.RDF:
-                    wasteType = WasteType.CreateRdfWasteType(wasteCompositionMapper.Map(source.WasteCompositions));
+                    wasteType = WasteType.CreateRdfWasteType(compositionContinuedMapper.Map(source.WasteCompositions));
                     break;
                 case ChemicalCompositionType.SRF:
-                    wasteType = WasteType.CreateSrfWasteType(wasteCompositionMapper.Map(source.WasteCompositions));
+                    wasteType = WasteType.CreateSrfWasteType(compositionContinuedMapper.Map(source.WasteCompositions));
                     break;
                 case ChemicalCompositionType.Wood:
-                    wasteType = WasteType.CreateWoodWasteType(source.ChemicalCompositionDescription, wasteCompositionMapper.Map(source.WasteCompositions));
+                    wasteType = WasteType.CreateWoodWasteType(source.ChemicalCompositionDescription, compositionContinuedMapper.Map(source.WasteCompositions));
                     break;
                 case ChemicalCompositionType.Other:
                     wasteType = WasteType.CreateOtherWasteType(source.WasteCompositionName);

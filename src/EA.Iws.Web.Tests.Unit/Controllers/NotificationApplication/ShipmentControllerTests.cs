@@ -30,7 +30,7 @@
         {
             var model = new ShipmentInfoViewModel();
             var result = await shipmentController.Index(model, false) as RedirectToRouteResult;
-            RouteAssert.RoutesTo(result.RouteValues, "ChemicalComposition", "WasteType");
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "ChemicalComposition");
         }
     }
 }

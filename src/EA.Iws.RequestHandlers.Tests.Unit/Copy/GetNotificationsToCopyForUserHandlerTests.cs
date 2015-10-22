@@ -45,9 +45,9 @@
                 UKCompetentAuthority.England, 2);
             EntityHelper.SetEntityId(notification2, Notification2Id);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Importer, ImporterFactory.Create(new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C")), notification2);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateRdfWasteType(new List<WasteComposition>
+            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateRdfWasteType(new List<WasteAdditionalInformation>
             {
-                WasteComposition.CreateWasteComposition("toffee", 1, 10, ChemicalCompositionCategory.Food)
+                WasteAdditionalInformation.CreateWasteAdditionalInformation("toffee", 1, 10, WasteInformationType.AshContent)
             }), notification2);
 
             var notification3 = new NotificationApplication(UserWithNotificationsId, NotificationType.Disposal,

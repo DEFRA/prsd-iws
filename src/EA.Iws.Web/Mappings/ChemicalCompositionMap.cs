@@ -2,23 +2,23 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Areas.NotificationApplication.ViewModels.WasteType;
+    using Areas.NotificationApplication.ViewModels.ChemicalComposition;
     using Core.WasteType;
     using Prsd.Core.Mapper;
 
-    public class ChemicalCompositionAdditionalInformationMap
-        : IMapWithParameter<WasteTypeData, ICollection<WoodInformationData>, ChemicalCompositionInformationViewModel>
+    public class ChemicalCompositionMap
+        : IMapWithParameter<WasteTypeData, ICollection<WoodInformationData>, ChemicalCompositionViewModel>
     {
         private const string NotApplicable = "NA";
 
-        public ChemicalCompositionInformationViewModel Map(WasteTypeData source, 
+        public ChemicalCompositionViewModel Map(WasteTypeData source, 
             ICollection<WoodInformationData> parameter)
         {
-            var result = new ChemicalCompositionInformationViewModel();
+            var result = new ChemicalCompositionViewModel();
 
             if (source.WasteAdditionalInformation.Any())
             {
-                result.WasteComposition = SetExistingAdditionalInformations(parameter, 
+                result.WasteComposition = SetExistingInformations(parameter, 
                     source);
             }
             else
@@ -27,13 +27,11 @@
             }
 
             result.Energy = source.EnergyInformation;
-            result.FurtherInformation = source.FurtherInformation;
-            result.HasAnnex = source.HasAnnex;
 
             return result;
         }
 
-        private List<WoodInformationData> SetExistingAdditionalInformations(ICollection<WoodInformationData> compositions, 
+        private List<WoodInformationData> SetExistingInformations(ICollection<WoodInformationData> compositions, 
             WasteTypeData existingData)
         {
             var result = new List<WoodInformationData>(existingData.WasteAdditionalInformation);

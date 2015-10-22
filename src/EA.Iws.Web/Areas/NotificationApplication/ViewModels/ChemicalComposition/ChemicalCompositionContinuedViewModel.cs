@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using Prsd.Core.Helpers;
     using Requests.WasteType;
 
-    public class ChemicalCompositionConcentrationLevelsViewModel : IValidatableObject
+    public class ChemicalCompositionContinuedViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
@@ -25,11 +25,12 @@
 
         public List<WasteTypeCompositionData> OtherCodes { get; set; }
 
+        public string FurtherInformation { get; set; }
+
+        public bool HasAnnex { get; set; }
+
         public string Command { get; set; }
-
-        [StringLength(70, ErrorMessage = "Please limit your answer to 70 characters or less")]
-        public string Description { get; set; }
-
+        
         public ChemicalCompositionType ChemicalCompositionType { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -40,12 +41,7 @@
             }
 
             var allCompositions = WasteComposition.Concat(OtherCodes).ToList();
-
-            if (ChemicalCompositionType == ChemicalCompositionType.Wood && string.IsNullOrEmpty(Description))
-            {
-                yield return new ValidationResult("Description is required", new[] { "Description" });
-            }
-
+            
             for (var i = 0; i < WasteComposition.Count; i++)
             {
                 if (IsDecimal(WasteComposition[i].MinConcentration) && IsDecimal(WasteComposition[i].MaxConcentration))
@@ -62,6 +58,12 @@
                     if (maxConcentrationValue < 0 || maxConcentrationValue > 100)
                     {
                         yield return new ValidationResult("Max concentration should be in range from 0 to 100 for "
+                            + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
+                    }
+
+                    if (minConcentrationValue < 0 || minConcentrationValue > 100)
+                    {
+                        yield return new ValidationResult("Min concentration should be in range from 0 to 100 for "
                             + EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory), new[] { "WasteComposition[" + i + "]" });
                     }
                 }
@@ -133,6 +135,11 @@
                 }
             }
 
+            if (HasAnnex && !(string.IsNullOrEmpty(FurtherInformation)))
+            {
+                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here", new[] { "FurtherInformation" });
+            }
+
             var totalNas = 0;
             var totalNotEmpty = 0;
 
@@ -151,7 +158,7 @@
 
             if (totalNas == totalNotEmpty)
             {
-                yield return new ValidationResult("You’ve not entered any data about the waste’s chemical composition. Please make sure you enter the concentration levels for at least one component.");
+                yield return new ValidationResult("You've not entered any data about the waste's composition. Please make sure you enter the concentration levels for at least one component.");
             }
         }
 

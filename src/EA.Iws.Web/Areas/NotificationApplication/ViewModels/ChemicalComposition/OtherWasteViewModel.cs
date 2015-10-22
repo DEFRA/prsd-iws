@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteType
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition
 {
     using System;
     using System.ComponentModel.DataAnnotations;

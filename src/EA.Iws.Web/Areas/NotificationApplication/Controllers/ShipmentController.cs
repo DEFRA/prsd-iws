@@ -50,7 +50,7 @@
                     return RedirectToAction("Index", "Home", new { id = model.NotificationId });
                 }
 
-                return RedirectToAction("ChemicalComposition", "WasteType", new { id = model.NotificationId });
+                return RedirectToAction("Index", "ChemicalComposition", new { id = model.NotificationId });
             }
             catch (ApiBadRequestException ex)
             {

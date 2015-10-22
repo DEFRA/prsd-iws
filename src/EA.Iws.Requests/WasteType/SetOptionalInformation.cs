@@ -5,17 +5,14 @@
     using Security;
 
     [NotificationReadOnlyAuthorize]
-    public class SetEnergyAndOptionalInformation : IRequest<Guid>
+    public class SetOptionalInformation : IRequest<Guid>
     {
-        public SetEnergyAndOptionalInformation(string energyInformation, string optionalInformation, bool hasAnnex, Guid notificationId)
+        public SetOptionalInformation(string optionalInformation, bool hasAnnex, Guid notificationId)
         {
-            EnergyInformation = energyInformation;
             NotificationId = notificationId;
             OptionalInformation = optionalInformation;
             HasAnnex = hasAnnex;
         }
-
-        public string EnergyInformation { get; private set; }
 
         public string OptionalInformation { get; private set; }
 

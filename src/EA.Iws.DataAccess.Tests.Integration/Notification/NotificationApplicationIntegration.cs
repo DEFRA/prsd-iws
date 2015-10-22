@@ -148,10 +148,10 @@
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            List<WasteComposition> wasteCompositions = new List<WasteComposition>
+            List<WasteAdditionalInformation> wasteCompositions = new List<WasteAdditionalInformation>
             {
-                WasteComposition.CreateWasteComposition("First Constituent", 1, 100, ChemicalCompositionCategory.Metals),
-                WasteComposition.CreateWasteComposition("Second Constituent", 2, 100, ChemicalCompositionCategory.Wood)
+                WasteAdditionalInformation.CreateWasteAdditionalInformation("boulder", 5, 10, WasteInformationType.Energy),
+                WasteAdditionalInformation.CreateWasteAdditionalInformation("notes", 6, 9, WasteInformationType.AshContent)
             };
             notification.SetWasteType(WasteType.CreateWoodWasteType("This waste type is of wood type. I am writing some description here.", wasteCompositions));
 

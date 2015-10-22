@@ -51,7 +51,7 @@
 @Html.Navigation().Link("Intended shipments", Model.HasShipmentInfo, "Index", "Shipment", "NotificationApplication")
 
 <span>Classify your waste</span>
-@Html.Navigation().Link("Chemical composition", Model.HasWasteType, "ChemicalComposition", "WasteType", "NotificationApplication", additionalActiveActionNames: new[] { "OtherWaste", "OtherWasteAdditionalInformation", "RdfAdditionalInformation", "RdfSrfType", "WoodAdditionalInformation", "WoodType" })
+@Html.Navigation().Link("Chemical composition", Model.HasWasteType, "Index", "ChemicalComposition", "NotificationApplication", additionalActiveActionNames: new[] { "OtherWaste", "OtherWasteAdditionalInformation", "RdfSrf", "RdfSrfContinued", "Wood", "WoodContinued" })
 @Html.Navigation().Link("Process of generation", Model.HasWasteGenerationProcess, "Index", "WasteGenerationProcess", "NotificationApplication")
 @Html.Navigation().Link("Physical characteristics", Model.HasPhysicalCharacteristics, "Index", "PhysicalCharacteristics", "NotificationApplication")
 

@@ -211,6 +211,7 @@
     <Compile Include="WasteCodes\SetHCodesHandler.cs" />
     <Compile Include="WasteCodes\SetYCodesHandler.cs" />
     <Compile Include="WasteCodes\SetEwcCodesHandler.cs" />
+    <Compile Include="WasteType\SetEnergyHandler.cs" />
     <Compile Include="WorkingDayCalculator.cs" />
     <Compile Include="Carrier\DeleteCarrierForNotificationHandler.cs" />
     <Compile Include="Carrier\GetCarrierForNotificationHandler.cs" />
@@ -342,7 +343,7 @@
     <Compile Include="WasteCodes\GetWasteCodesByTypeHandler.cs" />
     <Compile Include="WasteType\GetWasteGenerationProcessHandler.cs" />
     <Compile Include="WasteType\GetWasteTypeHandler.cs" />
-    <Compile Include="WasteType\SetEnergyAndOptionalInformationHandler.cs" />
+    <Compile Include="WasteType\SetOptionalInformationHandler.cs" />
     <Compile Include="WasteType\SetOtherWasteAdditionalInformationHandler.cs" />
     <Compile Include="WasteCodes\SetCustomWasteCodesHandler.cs" />
     <Compile Include="WasteType\SetPhysicalCharacteristicsHandler.cs" />
