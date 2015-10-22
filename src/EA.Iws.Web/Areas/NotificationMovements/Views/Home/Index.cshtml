@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Core.Shared
+﻿@using EA.Iws.Core.Movement
+@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home.MovementSummaryViewModel
 
 @{
@@ -98,11 +99,10 @@
                     <option value="value4">500 per page</option>
                 </select>
             </div>
-
         </div>
 
         @{
-            var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed Of" : "Recovered";
+            var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed of" : "Recovered";
             var nullMarker = "- -";
         }
 
@@ -125,9 +125,10 @@
                     @{
                         for (int i = 0; i < Model.TableData.Count; i++)
                         {
+                            var statusText = Model.TableData[i].Status == MovementStatus.Completed.ToString() ? operationTitle : Model.TableData[i].Status;
                             <tr>
                                 <td>@Model.TableData[i].Number</td>
-                                <td>@Model.TableData[i].Status</td>
+                                <td>@statusText</td>
                                 <td>
                                     @if (Model.TableData[i].PreNotification.HasValue)
                                     {
