@@ -128,39 +128,48 @@
                             <tr>
                                 <td>@Model.TableData[i].Number</td>
                                 <td>@Model.TableData[i].Status</td>
-                                <td>@Model.TableData[i].PreNotification</td>
                                 <td>
-                                    @if (Model.TableData[i].ShipmentDate.HasValue)
+                                    @if (Model.TableData[i].PreNotification.HasValue)
                                     {
-                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
+                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].PreNotification.GetValueOrDefault())
                                     }
                                     else
                                     {
                                         @nullMarker
                                     }
                                 </td>
-                                <td>
-                                    @if (Model.TableData[i].Received.HasValue)
-                                    {
-                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
-                                    }
-                                    else
-                                    {
-                                        @nullMarker
-                                    }
-                                </td>
-                                <td>@Model.TableData[i].Quantity</td>
-                                <td>
-                                    @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue)
-                                    {
-                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
-                                    }
-                                    else
-                                    {
-                                        @nullMarker
-                                    }
-                                </td>
-                            </tr>
+                            <td>
+                                @if (Model.TableData[i].ShipmentDate.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
+                            <td>
+                                @if (Model.TableData[i].Received.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
+                            <td>@Model.TableData[i].Quantity</td>
+                            <td>
+                                @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
+                        </tr>
                         }
                     }
                 </tbody>

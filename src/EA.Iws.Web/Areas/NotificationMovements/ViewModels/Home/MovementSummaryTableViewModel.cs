@@ -10,7 +10,7 @@
 
         public string Status { get; set; }
 
-        public string PreNotification { get; set; }
+        public DateTime? PreNotification { get; set; }
 
         public DateTime? ShipmentDate { get; set; }
 
@@ -24,7 +24,7 @@
         {
             Number = data.Number;
             Status = EnumHelper.GetDisplayName(data.Status);
-            PreNotification = "- -";
+            PreNotification = data.SubmittedDate;
             ShipmentDate = data.ShipmentDate;
             Received = data.ReceivedDate;
             Quantity = data.Quantity.HasValue ? data.Quantity.Value.ToString("G29") + " " + EnumHelper.GetDisplayName(data.QuantityUnits.GetValueOrDefault()) : "- -";
