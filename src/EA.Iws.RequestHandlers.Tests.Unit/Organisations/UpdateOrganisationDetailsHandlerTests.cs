@@ -8,7 +8,6 @@
     using DataAccess;
     using Domain;
     using FakeItEasy;
-    using FakeItEasy.ExtensionSyntax.Full;
     using Prsd.Core.Domain;
     using RequestHandlers.Organisations;
     using Requests.Organisations;
