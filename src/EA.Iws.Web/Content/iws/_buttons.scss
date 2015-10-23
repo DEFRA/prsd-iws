@@ -10,3 +10,10 @@
     background-image: file-url("icon-pointer-2x.png");
   }
 }
+
+.button.blue{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    @include core-19;
+    background-color: $light-blue;
+}
