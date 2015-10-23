@@ -7,7 +7,7 @@
         private string notificationNumber;
 
         [Required]
-        [StringLength(14, ErrorMessage = "Import notification number cannot be longer than 14 characters")]
+        [StringLength(25, ErrorMessage = "Import notification number cannot be longer than 14 characters")]
         [Display(Name = "Notification number")]
         public string NotificationNumber
         {
