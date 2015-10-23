@@ -20,7 +20,7 @@
             return View(new MovementSearchViewModel());
         }
 
-        public async Task<ActionResult> Search(MovementSearchViewModel model)
+        public ActionResult Search(MovementSearchViewModel model)
         {
             if (!ModelState.IsValid)
             {
