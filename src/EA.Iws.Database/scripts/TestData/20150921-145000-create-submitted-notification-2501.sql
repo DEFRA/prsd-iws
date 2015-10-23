@@ -535,20 +535,6 @@ INSERT [Notification].[wastecomposition]
         [wastetypeid],
         [chemicalcompositiontype])
 VALUES (NEWID(),
-        N'Food',
-        Cast(1.00 AS DECIMAL(5, 2)),
-        Cast(3.00 AS DECIMAL(5, 2)),
-        @WasteTypeId,
-        3)
-
-INSERT [Notification].[wastecomposition]
-       ([id],
-        [constituent],
-        [minconcentration],
-        [maxconcentration],
-        [wastetypeid],
-        [chemicalcompositiontype])
-VALUES (NEWID(),
         N'Plastics',
         Cast(1.00 AS DECIMAL(5, 2)),
         Cast(3.00 AS DECIMAL(5, 2)),
