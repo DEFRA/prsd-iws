@@ -34,5 +34,21 @@
 
             return await GetById(notificationId);
         }
+
+        public async Task<string> GetNumber(Guid id)
+        {
+            return
+                await
+                    context.NotificationApplications.Where(n => n.Id == id)
+                        .Select(n => n.NotificationNumber)
+                        .SingleAsync();
+        }
+
+        public async Task<Guid?> GetIdOrDefault(string number)
+        {
+            return await context.NotificationApplications.Where(n => number == n.NotificationNumber)
+                .Select(n => n.Id)
+                .SingleOrDefaultAsync();
+        }
     }
 }

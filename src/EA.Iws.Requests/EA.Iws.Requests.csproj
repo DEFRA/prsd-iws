@@ -113,9 +113,12 @@
     <Compile Include="NotificationAssessment\ConsentNotificationApplication.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationNumberForAssessment.cs" />
     <Compile Include="NotificationAssessment\ObjectNotificationApplication.cs" />
     <Compile Include="NotificationAssessment\WithdrawNotificationApplication.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
+    <Compile Include="Notification\GetNotificationIdByNumber.cs" />
+    <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />

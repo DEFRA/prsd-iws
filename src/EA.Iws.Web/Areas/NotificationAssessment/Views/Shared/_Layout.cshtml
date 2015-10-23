@@ -12,6 +12,10 @@
     </div>
 </div>
 
+@section top_content_box{
+    @Html.Action("NotificationSwitcher", "Home")  
+}
+
 @section head {
     @RenderSection("head", required: false)
 }

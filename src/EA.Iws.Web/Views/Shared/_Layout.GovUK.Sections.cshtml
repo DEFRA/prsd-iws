@@ -32,7 +32,7 @@
 @section footer_top {
     <div class="footer-categories">
         @Html.Partial("_IwsHelpline")
-        <hr/>
+        <hr />
     </div>
 }
 
@@ -60,6 +60,12 @@
 
 <main id="content">
     @Html.Partial("_FeedbackBanner")
-    @{ Html.RenderAction("_IwsTitle", "Home", new { area = string.Empty });}
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="top-content-box font-xsmall">
+            @RenderSection("top_content_box", false)
+            @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
+        </div>
+    }
     @RenderBody()
 </main>

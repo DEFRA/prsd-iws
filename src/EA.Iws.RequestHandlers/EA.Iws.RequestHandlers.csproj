@@ -168,10 +168,13 @@
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
     <Compile Include="Decorators\NotificationReadOnlyAuthorizeDecorator.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationNumberForAssessmentHandler.cs" />
     <Compile Include="NotificationAssessment\ObjectNotificationApplicationHandler.cs" />
     <Compile Include="NotificationAssessment\WithdrawNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovementsHandler.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
+    <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
+    <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />

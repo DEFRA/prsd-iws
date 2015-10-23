@@ -6,5 +6,7 @@
     public interface INotificationAssessmentRepository
     {
         Task<NotificationAssessment> GetByNotificationId(Guid notificationId);
+
+        Task<string> GetNumberForAssessment(Guid notificationAssessmentId);
     }
 }

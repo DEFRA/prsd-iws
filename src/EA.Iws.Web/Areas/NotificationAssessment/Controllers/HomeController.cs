@@ -7,6 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationAssessment;
+    using Web.ViewModels.Shared;
 
     [Authorize(Roles = "internal")]
     public class HomeController : Controller
@@ -30,6 +31,14 @@
         {
             var response = mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id)).GetAwaiter().GetResult();
             return PartialView("_AssessmentNavigation", response);
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult NotificationSwitcher(Guid id)
+        {
+            var response = mediator.SendAsync(new GetNotificationNumber(id)).GetAwaiter().GetResult();
+
+            return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response));
         }
     }
 }

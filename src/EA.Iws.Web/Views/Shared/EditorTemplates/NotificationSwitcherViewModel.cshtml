@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.ViewModels.Shared.NotificationSwitcherViewModel
+
+<section class="noti-switch" id="">
+    <div>
+        @using (Html.BeginForm("Switch", "NotificationSwitch", new { area = string.Empty }))
+        {
+            @Html.HiddenFor(m => m.OriginalNumber)
+            <span>You're working on</span>
+            @Html.TextBoxFor(m => m.Number, new { title = "Click and type a new notification number", @class = "noti-number" })
+            <i class="fa fa-exchange"></i>
+            <button class="button switch" type="submit">Change notification</button>
+        }
+    </div>
+</section>
