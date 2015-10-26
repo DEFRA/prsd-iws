@@ -1,9 +1,9 @@
 DECLARE @UserId UNIQUEIDENTIFIER;
-DECLARE @NotificationId UNIQUEIDENTIFIER = 'ceb03ae8-2792-4dfc-8f87-6b2384f62502';
+DECLARE @NotificationId UNIQUEIDENTIFIER = 'ceb03ae8-2792-4dfc-8f87-6b2384f62504';
 
 SELECT @UserId = id
 FROM   [Identity].[aspnetusers]
-WHERE  [email] = 'sunily@sfwltd.co.uk';
+WHERE  [email] = 'sunily@sfwltd.co.uk'
 
 INSERT [Notification].[notification]
        ([id],
@@ -24,14 +24,14 @@ VALUES (@NotificationId,
         @UserId,
         2,
         1,
-        N'GB 0001 002502',
-        Cast(N'2015-09-28 09:00:00.0000000' AS DATETIME2),
+        N'GB 0001 002504',
+        Cast(N'2015-10-10 10:00:00.0000000' AS DATETIME2),
         1,
-        N'Recycling at advanced facility',
+        N'Use of advanced facilities',
         0,
         NULL,
-        N'R;S;R;A;R',
-        NULL,
+        N'R;S;R;T',
+        1,
         NULL,
         1)
 
@@ -56,13 +56,13 @@ INSERT [Notification].[facility]
         [notificationid],
         [otherdescription])
 VALUES (NEWID(),
-        N'Importer Facility',
+        N'Waste Treatment Facility',
         1,
         1,
-        N'Micky Finns Imports',
+        N'45645684546',
         NULL,
-        N'Opp. ABCD',
-        N'Near XYZ',
+        N'1 Rue Strasse',
+        N'German Suburb',
         N'Dortmund',
         N'64151',
         N'Dortmund',
@@ -518,29 +518,15 @@ INSERT [Notification].[wastetype]
         [woodtypedescription],
         [optionalinformation])
 VALUES (@WasteTypeId,
-        1,
+        3,
         NULL,
-        NULL,
+        N'Wooden blocks',
         @NotificationId,
         0,
         NULL,
-        55,
         NULL,
+        N'Wooden blocks',
         NULL)
-
-INSERT [Notification].[wastecomposition]
-       ([id],
-        [constituent],
-        [minconcentration],
-        [maxconcentration],
-        [wastetypeid],
-        [chemicalcompositiontype])
-VALUES (NEWID(),
-        N'Food',
-        Cast(1.00 AS DECIMAL(5, 2)),
-        Cast(3.00 AS DECIMAL(5, 2)),
-        @WasteTypeId,
-        3)
 
 INSERT [Notification].[wastecomposition]
        ([id],
@@ -779,32 +765,79 @@ INSERT INTO [Notification].[notificationassessment]
              [status])
 VALUES      (@NotificationAssessmentId,
               @NotificationId,
-              2 ) ;
+              10 ) ;
 
 INSERT INTO [Notification].[NotificationDates]
 (
 	[Id],
-	[NotificationAssessmentId]
+	[NotificationAssessmentId],
+	[NotificationReceivedDate],
+    [PaymentReceivedDate],
+    [CommencementDate],
+    [CompleteDate],
+    [TransmittedDate],
+    [AcknowledgedDate],
+    [NameOfOfficer]
 )
 VALUES
 (
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-	@NotificationAssessmentId
+	@NotificationAssessmentId,
+	'2015-10-20',
+	'2015-10-20',
+	'2015-10-21',
+	'2015-10-21',
+	'2015-10-22',
+	'2015-10-23',
+	'Jane'
 )
 
-INSERT INTO [Notification].[FinancialGuarantee]
-			(
-				[Id],
-				[Status],
-				[CreatedDate],
-				[NotificationApplicationId]
-			)
+INSERT INTO [Notification].[Consent]
+(
+	[Id],
+	[From],
+	[To],
+	[Conditions],
+	[UserId],
+	[NotificationApplicationId]
+)
 VALUES
-			(
-			(SELECT Cast(Cast(Newid() AS BINARY(10))
+(
+	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-			1,
-			GETDATE(),
-            @NotificationId
-			)
+	'2015-10-23',
+	'2016-10-22',
+	'Let me win at chess',
+	(SELECT [Id] FROM [Identity].[AspNetUsers] WHERE [Email] LIKE 'superuser@environment-agency.gov.uk'),
+	@NotificationId
+)
+
+
+INSERT INTO [Notification].[FinancialGuarantee]
+(
+	[Id],
+	[Status],
+	[ReceivedDate],
+	[CompletedDate],
+	[CreatedDate],
+	[NotificationApplicationId],
+	[DecisionDate],
+	[ApprovedFrom],
+	[ApprovedTo],
+	[ActiveLoadsPermitted]
+)
+VALUES
+(
+	(SELECT Cast(Cast(Newid() AS BINARY(10))
+					+ Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
+	4,
+	'2015-10-16',
+	'2015-10-16',
+	GETDATE(),
+	@NotificationId,
+	'2015-10-23',
+	'2015-10-23',
+	'2017-10-23',
+	520
+)
