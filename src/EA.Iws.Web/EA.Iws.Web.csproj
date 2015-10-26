@@ -372,7 +372,7 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-play.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-rewind.png" />
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
-    <None Include="Content\iws\_notification-switcher.scss" />
+    <Content Include="Content\iws\_notification-switcher.scss" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\decision-dropdown.js" />
