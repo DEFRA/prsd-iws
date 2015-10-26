@@ -47,7 +47,7 @@
         public async Task<Guid?> GetIdOrDefault(string number)
         {
             return await context.NotificationApplications.Where(n => number == n.NotificationNumber)
-                .Select(n => n.Id)
+                .Select(n => (Guid?)n.Id)
                 .SingleOrDefaultAsync();
         }
     }

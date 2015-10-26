@@ -1,0 +1,20 @@
+﻿@model EA.Iws.Web.ViewModels.NotificationSwitch.NotFoundViewModel
+    
+@{
+    ViewBag.Title = "Notification number not found";
+}
+
+<h1 class="heading-large">Notification number not found</h1>
+
+<p>
+    No matching notification was found for this number.
+</p>
+<p>
+    Click continue to return to the search page or use the browser back button to return to your previous page.
+</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button class="button" type="submit">Continue</button>
+}

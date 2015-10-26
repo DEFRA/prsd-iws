@@ -5,17 +5,20 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using ViewModels.NotificationSwitch;
     using ViewModels.Shared;
 
     public class NotificationSwitchController : Controller
     {
         private readonly IMediator mediator;
-
+        
         public NotificationSwitchController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Switch(NotificationSwitcherViewModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Number)
@@ -27,7 +30,25 @@
 
             var id = await mediator.SendAsync(new GetNotificationIdByNumber(model.Number));
 
-            return new EmptyResult();
-        } 
+            if (id.HasValue)
+            {
+                return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
+            }
+
+            return RedirectToAction("NotFound", new { number = model.Number });
+        }
+
+        [HttpGet]
+        public ActionResult NotFound(string number)
+        {
+            return View(new NotFoundViewModel { Number = number });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NotFound(string number, FormCollection formCollection)
+        {
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
+        }
     }
 }

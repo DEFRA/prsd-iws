@@ -751,6 +751,7 @@
     <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Feedback\FeedbackSent.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\NotificationSwitcherViewModel.cshtml" />
+    <Content Include="Views\NotificationSwitch\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -822,7 +823,7 @@
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalCostViewModel.cs" />
     <Compile Include="Controllers\NewUserController.cs" />
-    <Compile Include="Controllers\NotificationSwitch.cs" />
+    <Compile Include="Controllers\NotificationSwitchController.cs" />
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Infrastructure\MimeTypeHelper.cs" />
     <Compile Include="Infrastructure\RequestAuthorizationChecker.cs" />
@@ -1001,6 +1002,7 @@
     <Compile Include="ViewModels\NewNotification\NotificationTypeViewModel.cs" />
     <Compile Include="ViewModels\NewUser\FeedbackOptions.cs" />
     <Compile Include="ViewModels\NewUser\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\NotificationSwitch\NotFoundViewModel.cs" />
     <Compile Include="ViewModels\Registration\EditApplicantDetailsViewModel.cs" />
     <Compile Include="ViewModels\Registration\ChangeAccountDetailsViewModel.cs" />
     <Compile Include="ViewModels\Registration\EditOrganisationViewModel.cs" />

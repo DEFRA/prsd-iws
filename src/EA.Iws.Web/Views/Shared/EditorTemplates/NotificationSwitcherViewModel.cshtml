@@ -4,6 +4,7 @@
     <div>
         @using (Html.BeginForm("Switch", "NotificationSwitch", new { area = string.Empty }))
         {
+            @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.OriginalNumber)
             <span>You're working on</span>
             @Html.TextBoxFor(m => m.Number, new { title = "Click and type a new notification number", @class = "noti-number" })
