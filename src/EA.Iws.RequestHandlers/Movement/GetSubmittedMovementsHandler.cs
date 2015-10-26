@@ -24,7 +24,7 @@
 
         public async Task<List<SubmittedMovement>> HandleAsync(GetSubmittedMovements message)
         {
-            var movements = await movementRepository.GetSubmittedMovements(message.NotificationId);
+            var movements = await movementRepository.GetMovementsByStatus(message.NotificationId, MovementStatus.Submitted);
 
             return movements.Select(m => mapper.Map<SubmittedMovement>(m)).ToList();
         }

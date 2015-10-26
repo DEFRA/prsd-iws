@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
     using NotificationApplication.Shipment;
 
     public class NotificationMovementsQuantity
@@ -19,8 +20,8 @@
 
         public async Task<decimal> Received(Guid notificationId)
         {
-            var receivedMovements = await movementRepository.GetReceivedMovements(notificationId);
-            var completedMovements = await movementRepository.GetCompletedMovements(notificationId);
+            var receivedMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.Received);
+            var completedMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.Completed);
             var movements = receivedMovements.Union(completedMovements);
 
             var shipment = await shipmentRepository.GetByNotificationId(notificationId);

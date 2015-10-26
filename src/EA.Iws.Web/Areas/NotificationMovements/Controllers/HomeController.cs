@@ -1,10 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Movement;
     using Prsd.Core.Mediator;
     using Requests.Movement.Summary;
     using ViewModels.Home;
@@ -20,22 +19,23 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid notificationId)
+        public async Task<ActionResult> Index(Guid notificationId, int? status)
         {
-            var movementsSummary = await mediator.SendAsync(new GetMovementsSummaryByNotificationId(notificationId));
+            var movementsSummary =
+                await mediator.SendAsync(new GetMovementsSummaryByNotificationId(notificationId, (MovementStatus?)status));
 
-            var tableDataList = new List<MovementSummaryTableViewModel>();
+            var model = new MovementSummaryViewModel(notificationId, movementsSummary);
+            model.SelectedMovementStatus = (MovementStatus?)status;
 
-            foreach (var mstd in movementsSummary.ShipmentTableData.OrderByDescending(m => m.Number))
-            {
-                var tableData = new MovementSummaryTableViewModel(mstd);
-                
-                tableDataList.Add(tableData);
-            }
-
-            var model = new MovementSummaryViewModel(notificationId, movementsSummary, tableDataList);
-            
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Index")]
+        public ActionResult IndexPost(Guid notificationId, int? selectedMovementStatus)
+        {
+            return RedirectToAction("Index", new { notificationId, status = selectedMovementStatus });
         }
     }
 }

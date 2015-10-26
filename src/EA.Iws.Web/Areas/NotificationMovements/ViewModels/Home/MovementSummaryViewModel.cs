@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
     using Core.Movement;
     using Core.Shared;
-    using Home;
     using Prsd.Core.Helpers;
 
     public class MovementSummaryViewModel
@@ -29,7 +30,27 @@
 
         public List<MovementSummaryTableViewModel> TableData { get; set; }
 
-        public MovementSummaryViewModel(Guid notificationId, MovementSummaryData data, List<MovementSummaryTableViewModel> tableData)
+        public MovementStatus? SelectedMovementStatus { get; set; }
+
+        public SelectList MovementStatuses
+        {
+            get
+            {
+                var units = Enum.GetValues(typeof(MovementStatus))
+                    .Cast<MovementStatus>()
+                    .Select(s => new SelectListItem
+                    {
+                        Text = EnumHelper.GetDisplayName(s),
+                        Value = ((int)s).ToString()
+                    }).ToList();
+
+                units.Insert(0, new SelectListItem { Text = "View all", Value = string.Empty });
+
+                return new SelectList(units, "Value", "Text", SelectedMovementStatus);
+            }
+        }
+
+        public MovementSummaryViewModel(Guid notificationId, MovementSummaryData data)
         {
             NotificationId = notificationId;
             NotificationNumber = data.NotificationNumber;
@@ -40,7 +61,10 @@
             QuantityReceivedTotal = data.ReceivedQuantityTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnits);
             ActiveLoadsPermitted = data.ActiveLoadsPermitted;
             ActiveLoadsCurrent = data.ActiveLoadsCurrent;
-            TableData = tableData;
+
+            TableData = new List<MovementSummaryTableViewModel>(
+                data.ShipmentTableData.OrderByDescending(m => m.Number)
+                    .Select(p => new MovementSummaryTableViewModel(p)));
         }
     }
 }

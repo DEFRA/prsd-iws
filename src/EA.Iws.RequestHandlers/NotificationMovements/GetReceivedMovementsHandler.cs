@@ -27,7 +27,7 @@
 
         public async Task<MovementOperationData> HandleAsync(GetReceivedMovements message)
         {
-            var movements = await movementRepository.GetReceivedMovements(message.NotificationId);
+            var movements = await movementRepository.GetMovementsByStatus(message.NotificationId, MovementStatus.Received);
             var notification = await notificationRepository.GetById(message.NotificationId);
 
             var movementsData = movements.Select(m => mapper.Map<MovementData>(m)).ToArray();

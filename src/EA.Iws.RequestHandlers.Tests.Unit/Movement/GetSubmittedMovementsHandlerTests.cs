@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Movement;
     using Domain.Movement;
     using FakeItEasy;
     using RequestHandlers.Mappings.Movement;
@@ -11,12 +12,12 @@
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class GetMovementsForCancelByNotificationIdHandlerTests : TestBase
+    public class GetSubmittedMovementsHandlerTests : TestBase
     {
         private readonly GetSubmittedMovementsHandler handler;
         private const int MovementCount = 5;
 
-        public GetMovementsForCancelByNotificationIdHandlerTests()
+        public GetSubmittedMovementsHandlerTests()
         {
             var repository = A.Fake<IMovementRepository>();
             var movements = new[]
@@ -28,7 +29,7 @@
                 GetMovement(5),
             };
 
-            A.CallTo(() => repository.GetSubmittedMovements(NotificationId))
+            A.CallTo(() => repository.GetMovementsByStatus(NotificationId, MovementStatus.Submitted))
                 .Returns(movements);
 
             var testMapper = new TestMapper();

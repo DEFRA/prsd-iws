@@ -1,10 +1,15 @@
 ﻿@using EA.Iws.Core.Movement
 @using EA.Iws.Core.Shared
+
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home.MovementSummaryViewModel
 
 @{
     ViewBag.Title = "Shipment summary";
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+
+    var certificateLinkText = "Record a certificate of " + (Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery");
+    var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed of" : "Recovered";
+    var nullMarker = "- -";
 }
 
 <div class="shipping-home">
@@ -27,26 +32,26 @@
             <table class="odd-table">
                 <caption class="visuallyhidden">Shipment summary</caption>
                 <tbody>
-                    <tr>
-                        <td>Total intended number of shipments:</td>
-                        <td>@Model.IntendedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>Number of shipments used:</td>
-                        <td>@Model.UsedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>Total quantity received:</td>
-                        <td>@Model.QuantityReceivedTotal</td>
-                    </tr>
-                    <tr>
-                        <td>Active loads permitted:</td>
-                        <td>@Model.ActiveLoadsPermitted</td>
-                    </tr>
-                    <tr>
-                        <td>Current active loads:</td>
-                        <td>@Model.ActiveLoadsCurrent</td>
-                    </tr>
+                <tr>
+                    <td>Total intended number of shipments:</td>
+                    <td>@Model.IntendedShipments</td>
+                </tr>
+                <tr>
+                    <td>Number of shipments used:</td>
+                    <td>@Model.UsedShipments</td>
+                </tr>
+                <tr>
+                    <td>Total quantity received:</td>
+                    <td>@Model.QuantityReceivedTotal</td>
+                </tr>
+                <tr>
+                    <td>Active loads permitted:</td>
+                    <td>@Model.ActiveLoadsPermitted</td>
+                </tr>
+                <tr>
+                    <td>Current active loads:</td>
+                    <td>@Model.ActiveLoadsCurrent</td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -54,22 +59,13 @@
         <div class="column-half nav-bloc">
             <h2 class="heading-small">Shipping options</h2>
             <nav>
-                <a title="Generate a pre-notification" href="/">
-                    @Html.ActionLink("Generate a pre-notification", "Index", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
-                </a>
+                @Html.ActionLink("Generate a pre-notification", "Index", "NotificationMovement", new { id = Model.NotificationId, area = string.Empty }, null)
 
-                <a title="Cancel a pre-notification" href="/">
-                    @Html.ActionLink("Cancel a pre-notification", "Index", "CancelMovement")
-                </a>
+                @Html.ActionLink("Cancel a pre-notification", "Index", "CancelMovement")
 
-                <a title="Record a certificate of receipt" href="/">
-                    @Html.ActionLink("Record a certificate of receipt", "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-                </a>
+                @Html.ActionLink("Record a certificate of receipt", "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
 
-                @{ var linkText = "Record a certificate of " + (Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery"); }
-                <a title="Record certificate of recovery" href="/">
-                    @Html.ActionLink(linkText, "Index", "Complete")
-                </a>
+                @Html.ActionLink(certificateLinkText, "Index", "Complete")
             </nav>
         </div>
     </div>
@@ -81,64 +77,51 @@
         <p>
             Configure your results
         </p>
-        <div class="grid-row form-group">
-            <div class="column-half">
-                <select name="select" class="form-control view-by">
-                    <option value="value1" selected>View all</option>
-                    <option value="value2">Pre-notified</option>
-                    <option value="value3">Recovered</option>
-                    <option value="value4">Rejected</option>
-                    <option value="value5">Canceled</option>
-                    <option value="value6">Complete</option>
-                    <option value="value7">Shipment due</option>
-                </select>
-                <select name="select" class="form-control">
-                    <option value="value1" selected>50 per page</option>
-                    <option value="value2">100 per page</option>
-                    <option value="value3">250 per page</option>
-                    <option value="value4">500 per page</option>
-                </select>
-            </div>
-        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        @{
-            var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed of" : "Recovered";
-            var nullMarker = "- -";
+            <div class="grid-row form-group">
+                <div class="column-half">
+                    @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                    <button id="updateStatus" class="button" type="submit">Update</button>
+                </div>
+            </div>
         }
 
         <div class="form-group">
             <table class="odd-table">
                 <caption class="visuallyhidden">Shipment summary</caption>
                 <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Status</th>
-                        <th>Pre-notified</th>
-                        <th>Shipment due</th>
-                        <th>Received</th>
-                        <th>Quantity</th>
-                        <th>@operationTitle</th>
-                    </tr>
+                <tr>
+                    <th>No.</th>
+                    <th>Status</th>
+                    <th>Pre-notified</th>
+                    <th>Shipment due</th>
+                    <th>Received</th>
+                    <th>Quantity</th>
+                    <th>@operationTitle</th>
+                </tr>
                 </thead>
 
                 <tbody>
-                    @{
-                        for (int i = 0; i < Model.TableData.Count; i++)
-                        {
-                            var statusText = Model.TableData[i].Status == MovementStatus.Completed.ToString() ? operationTitle : Model.TableData[i].Status;
-                            <tr>
-                                <td>@Model.TableData[i].Number</td>
-                                <td>@statusText</td>
-                                <td>
-                                    @if (Model.TableData[i].PreNotification.HasValue)
-                                    {
-                                        @Html.Gds().DisplayShortDateFor(m => m.TableData[i].PreNotification.GetValueOrDefault())
-                                    }
-                                    else
-                                    {
-                                        @nullMarker
-                                    }
-                                </td>
+                @{
+                    for (int i = 0; i < Model.TableData.Count; i++)
+                    {
+                        var statusText = Model.TableData[i].Status == MovementStatus.Completed.ToString() ? operationTitle : Model.TableData[i].Status;
+                        <tr>
+                            <td>@Model.TableData[i].Number</td>
+                            <td>@statusText</td>
+                            <td>
+                                @if (Model.TableData[i].PreNotification.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].PreNotification.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
                             <td>
                                 @if (Model.TableData[i].ShipmentDate.HasValue)
                                 {
@@ -171,8 +154,8 @@
                                 }
                             </td>
                         </tr>
-                        }
                     }
+                }
                 </tbody>
             </table>
         </div>
@@ -185,3 +168,14 @@
             new { @class = "button" })
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(function() {
+            $("#updateStatus").hide();
+            $("#@Html.NameFor(m => m.SelectedMovementStatus)").change(function() {
+                $("#updateStatus").parents("form").submit();
+            });
+        });
+    </script>
+}

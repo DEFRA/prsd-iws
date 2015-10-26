@@ -48,8 +48,8 @@
 
         private void SetUpRepositoryCalls(Movement[] movements, ShipmentInfo shipment)
         {
-            A.CallTo(() => movementRepository.GetReceivedMovements(NotificationId)).Returns(movements.Where(m => m.Status == MovementStatus.Received));
-            A.CallTo(() => movementRepository.GetCompletedMovements(NotificationId)).Returns(movements.Where(m => m.Status == MovementStatus.Completed));
+            A.CallTo(() => movementRepository.GetMovementsByStatus(NotificationId, MovementStatus.Received)).Returns(movements.Where(m => m.Status == MovementStatus.Received));
+            A.CallTo(() => movementRepository.GetMovementsByStatus(NotificationId, MovementStatus.Completed)).Returns(movements.Where(m => m.Status == MovementStatus.Completed));
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipment);
         }
 

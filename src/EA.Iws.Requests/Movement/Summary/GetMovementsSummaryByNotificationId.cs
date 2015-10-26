@@ -8,9 +8,12 @@
     {
         public Guid Id { get; private set; }
 
-        public GetMovementsSummaryByNotificationId(Guid id)
+        public MovementStatus? Status { get; private set; }
+
+        public GetMovementsSummaryByNotificationId(Guid id, MovementStatus? status)
         {
             Id = id;
+            Status = status;
         }
     }
 }

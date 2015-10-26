@@ -20,8 +20,10 @@
             this.notificationAuthorization = notificationAuthorization;
         }
 
-        private async Task<IEnumerable<Movement>> GetMovementsByStatus(Guid notificationId, MovementStatus status)
+        public async Task<IEnumerable<Movement>> GetMovementsByStatus(Guid notificationId, MovementStatus status)
         {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
             return await context.Movements
                 .Where(m =>
                     m.NotificationId == notificationId
@@ -36,27 +38,6 @@
             await notificationAuthorization.EnsureAccessAsync(movement.NotificationId);
 
             return movement;
-        }
-
-        public async Task<IEnumerable<Movement>> GetSubmittedMovements(Guid notificationId)
-        {
-            await notificationAuthorization.EnsureAccessAsync(notificationId);
-
-            return await GetMovementsByStatus(notificationId, MovementStatus.Submitted);
-        }
-
-        public async Task<IEnumerable<Movement>> GetReceivedMovements(Guid notificationId)
-        {
-            await notificationAuthorization.EnsureAccessAsync(notificationId);
-
-            return await GetMovementsByStatus(notificationId, MovementStatus.Received);
-        }
-
-        public async Task<IEnumerable<Movement>> GetCompletedMovements(Guid notificationId)
-        {
-            await notificationAuthorization.EnsureAccessAsync(notificationId);
-
-            return await GetMovementsByStatus(notificationId, MovementStatus.Completed);
         }
 
         public async Task<IEnumerable<Movement>> GetAllMovements(Guid notificationId)
