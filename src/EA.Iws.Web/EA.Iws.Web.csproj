@@ -639,6 +639,8 @@
     <Content Include="Areas\NotificationMovements\Views\CancelMovement\Success.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\MovementCertificate\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TestEmail\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TestEmail\Success.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -776,8 +778,30 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\SmokeTestController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestEmailController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestEmailResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestEmailResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationNumberViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationTypeViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestEmailViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\TestEmail\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\TestEmail\Success.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Success.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Movement\Controllers\CarrierController.cs" />
     <Compile Include="Areas\Movement\Controllers\CompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
@@ -1074,6 +1098,24 @@
     <Folder Include="Areas\NotificationApplication\Views\RecoveryInfo\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\Admin\Controllers\TestEmailResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestEmailResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestEmailViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\TestEmail\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\TestEmail\Success.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Success.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>

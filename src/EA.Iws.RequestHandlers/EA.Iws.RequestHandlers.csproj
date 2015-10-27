@@ -85,6 +85,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDateHandler.cs" />
+    <Compile Include="Admin\SendTestEmailHandler.cs" />
     <Compile Include="Admin\SmokeTestHandler.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandler.cs" />

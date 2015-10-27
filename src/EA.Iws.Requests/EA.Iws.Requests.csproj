@@ -57,6 +57,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
+    <Compile Include="Admin\SendTestEmail.cs" />
     <Compile Include="Admin\SmokeTest.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUser.cs" />
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionRequest.cs" />
