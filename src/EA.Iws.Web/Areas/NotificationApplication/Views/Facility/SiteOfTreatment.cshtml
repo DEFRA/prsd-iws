@@ -1,10 +1,11 @@
 ﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.SiteOfTreatmentViewModel
 @{
-    ViewBag.Title = "Site Of Treatment";
+    ViewBag.Title = SiteOfTreatmentResources.Title;
 }
 
-<h1 class="heading-large">Where will the waste be finally @(Model.NotificationType == NotificationType.Recovery ? "recovered?" : "disposed?")</h1>
+<h1 class="heading-large">@string.Format(SiteOfTreatmentResources.Header, (Model.NotificationType == NotificationType.Recovery ? "recovered?" : "disposed?"))</h1>
 
 @if (Model.Facilities.Any())
 {
@@ -16,12 +17,12 @@
         @Html.HiddenFor(m => m.NotificationType)
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfTreatment)">
-            <table title="List of facilities for actual site of treatment">
+            <table title=@SiteOfTreatmentResources.TableTitle>
                 <thead>
                     <tr>
-                        <th>Organisation name</th>
-                        <th>Address</th>
-                        <th>Actual site of @Model.NotificationType.ToString().ToLowerInvariant()</th>
+                        <th>@SiteOfTreatmentResources.ThOrgName</th>
+                        <th>@SiteOfTreatmentResources.ThAddress</th>
+                        <th>@string.Format(SiteOfTreatmentResources.ThActualSite, Model.NotificationType.ToString().ToLowerInvariant())</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,15 +45,15 @@
                             </td>
                             <td>
                                 @{
-                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
-                        htmlAttr.Add("title", "Actual site of treatment?");
-                        if (@Model.Facilities[i].IsActualSiteOfTreatment)
-                        {
-                            htmlAttr.Add("checked", "checked");
-                        }
-                        @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
+                                    var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
+                                    htmlAttr.Add("title", SiteOfTreatmentResources.ActualSite);
+                                    if (@Model.Facilities[i].IsActualSiteOfTreatment)
+                                    {
+                                        htmlAttr.Add("checked", "checked");
+                                    }
+                                    @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
                                 }
-                                
+
                                 @Html.HiddenFor(m => m.Facilities[i].IsActualSiteOfTreatment)
                                 @Html.HiddenFor(m => m.Facilities[i].Id)
                             </td>
@@ -60,7 +61,6 @@
                     }
                 </tbody>
             </table>
-
         </div>
 
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
@@ -68,8 +68,8 @@
 }
 else
 {
-    <p>You have not added any facilities to this notification. Please add a facility before selecting the site the waste will be finally @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed").</p>
-    <p>@Html.ActionLink("Back to facilities", "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
+    <p>@string.Format(SiteOfTreatmentResources.NoFacility, (Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed"))</p>
+    <p>@Html.ActionLink(SiteOfTreatmentResources.BackToFacilities, "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
         @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })

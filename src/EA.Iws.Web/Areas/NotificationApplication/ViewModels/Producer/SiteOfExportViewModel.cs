@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Core.Producers;
+    using Views.Producer;
 
     public class SiteOfExportViewModel
     {
         public Guid NotificationId { get; set; }
 
-        [Required(ErrorMessage = "Please select the site of export")]
-        [Display(Name = "Site of export")]
+        [Required(ErrorMessageResourceType = typeof(SiteOfExportResources), ErrorMessageResourceName = "SiteOfExportRequired")]
+        [Display(Name = "SiteOfExport", ResourceType = typeof(SiteOfExportResources))]
         public Guid? SelectedSiteOfExport { get; set; }
 
         public IList<ProducerData> Producers { get; set; }

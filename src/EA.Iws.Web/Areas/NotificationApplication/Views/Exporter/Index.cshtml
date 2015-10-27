@@ -1,14 +1,14 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter.ExporterViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Exporter
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter.ExporterViewModel
 @{
-    ViewBag.Title = "Who is the exporter-notifier?";
-    string registrationNumberGeneralMessage = "If you are acting on behalf of the waste generator-producer, this will be your waste broker license number";
+    ViewBag.Title = ExporterResources.Title;
+    string registrationNumberGeneralMessage = ExporterResources.RegistrationNumberGeneralMessage;
     ViewBag.SoleTraderRegistrationNumber = registrationNumberGeneralMessage;
     ViewBag.PartnershipRegistrationNumber = registrationNumberGeneralMessage;
     ViewBag.OtherRegistrationNumber = registrationNumberGeneralMessage;
     ViewBag.CompanyAdditionalRegistrationNumber = registrationNumberGeneralMessage;
-    ViewBag.CompanyRegistrationNumber = "This should be your Companies House number.";
-    ViewBag.NonJavascriptMessage = @"For Limited company, this should be your Companies House number.
-            For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number.";
+    ViewBag.CompanyRegistrationNumber = ExporterResources.CompanyRegistrationNumber;
+    ViewBag.NonJavascriptMessage = ExporterResources.NonJavascriptMessage;
 }
 
 @using (Html.BeginForm())
@@ -18,19 +18,19 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h1 class="heading-large">Who is the exporter - notifier?</h1>
+        <h1 class="heading-large">@ExporterResources.Header</h1>
     </header>
 
     @Html.EditorFor(m => m.Business)
 
-    <h2 class="heading-medium">Their address</h2>
+    <h2 class="heading-medium">@ExporterResources.AddressHeader</h2>
     <hr />
-    <p>This should be the correspondence address for the exporter - notifier.</p>
+    <p>@ExporterResources.AddressDescription</p>
     @Html.EditorFor(m => m.Address)
 
-    <h2 class="heading-medium">Their contact person</h2>
+    <h2 class="heading-medium">@ExporterResources.ContactHeader</h2>
     <hr />
-    <p>This should be the contact person for the exporter - notifier.</p>
+    <p>@ExporterResources.ContactDescription</p>
     @Html.EditorFor(m => m.Contact)
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>

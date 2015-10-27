@@ -775,6 +775,11 @@
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
     <Compile Include="Areas\AddressBook\Controllers\DeleteController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AddressBook\Views\AddressBookResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddressBookResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\SmokeTestController.cs" />
@@ -788,9 +793,9 @@
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationTypeViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TestEmailViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+	  <DependentUpon>TestEmailViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\TestEmail\Index.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -806,6 +811,56 @@
     <Compile Include="Areas\Movement\Controllers\CompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\NotificationApplication\Views\Exporter\ExporterResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExporterResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Facility\AddEditFacilityResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEditFacilityResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Facility\ListFacilityResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListFacilityResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Facility\RecoveryPreconsentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecoveryPreconsentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Facility\RemoveFacilityResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoveFacilityResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatmentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteOfTreatmentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Producer\AddEditProducerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEditProducerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Producer\ListProducerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListProducerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Producer\RemoveProducerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoveProducerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Producer\SiteOfExportResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteOfExportResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationAssessment\Controllers\MovementCertificateController.cs" />
     <Compile Include="Areas\Movement\Controllers\NumberOfPackagesController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityController.cs" />
@@ -1031,6 +1086,11 @@
     <Compile Include="ViewModels\Registration\EditApplicantDetailsViewModel.cs" />
     <Compile Include="ViewModels\Registration\ChangeAccountDetailsViewModel.cs" />
     <Compile Include="ViewModels\Registration\EditOrganisationViewModel.cs" />
+    <Compile Include="ViewModels\Shared\BusinessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Shared\KeyValuePairViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
@@ -1114,7 +1174,54 @@
     <EmbeddedResource Include="Areas\Admin\Views\TestEmail\Success.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Success.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AddressBook\Views\AddressBookResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressBookResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Exporter\ExporterResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExporterResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\AddEditFacilityResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddEditFacilityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\ListFacilityResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListFacilityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\RecoveryPreconsentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryPreconsentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\RemoveFacilityResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RemoveFacilityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatmentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteOfTreatmentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Producer\AddEditProducerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddEditProducerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Producer\ListProducerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListProducerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Producer\RemoveProducerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RemoveProducerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Producer\SiteOfExportResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteOfExportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\BusinessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

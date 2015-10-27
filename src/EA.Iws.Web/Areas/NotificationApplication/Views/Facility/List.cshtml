@@ -1,20 +1,21 @@
-﻿@using EA.Iws.Core.Shared
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.MultipleFacilitiesViewModel
 @{
-    ViewBag.Title = "List Facilities";
+    ViewBag.Title = ListFacilityResources.Title;
+    var notificationType = Model.NotificationType.ToString();
 }
 
-<h1 class="heading-large">@Model.NotificationType.ToString() facilities</h1>
-<p>Add details of the @Model.NotificationType.ToString().ToLowerInvariant() facilities.</p>
+<h1 class="heading-large">@string.Format(ListFacilityResources.Header, notificationType)</h1>
+<p>@string.Format(ListFacilityResources.HeaderDescription, notificationType.ToLowerInvariant())</p>
 
 @if (Model != null && Model.FacilityData.Any())
 {
     <div class="form-group">
-        <table title="List of facilities">
+        <table title=@ListFacilityResources.TableTitle>
             <thead>
                 <tr>
-                    <th>Organisation name</th>
-                    <th>Address</th>
+                    <th>@ListFacilityResources.ThOrgName</th>
+                    <th>@ListFacilityResources.ThAddress</th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,10 +31,10 @@
                             @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Facility",
+                            @Html.ActionLink(ListFacilityResources.Edit, "Edit", "Facility",
                                 new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                             <span class="table-divider">|</span>
-                            @Html.ActionLink("Remove", "Remove", "Facility",
+                            @Html.ActionLink(ListFacilityResources.Remove, "Remove", "Facility",
                                 new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                         </td>
                     </tr>
@@ -44,13 +45,13 @@
 }
 
 <div class="form-group">
-    @Html.ActionLink("Add facility", "Add", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
+    @Html.ActionLink(ListFacilityResources.AddFacility, "Add", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
 @if (ViewBag.BackToOverview)
 {
-    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
 }
 else
 {
-    @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
 }

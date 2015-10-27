@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using Core.Facilities;
     using Core.Shared;
+    using Views.Facility;
 
     public class SiteOfTreatmentViewModel : IValidatableObject
     {
@@ -29,7 +30,7 @@
                     ? "site of recovery"
                     : "site of disposal";
 
-                yield return new ValidationResult(string.Format("Please select the actual {0}", errorMessage), new[] { "SelectedSiteOfTreatment" });
+                yield return new ValidationResult(string.Format(SiteOfTreatmentResources.SiteRequired, errorMessage), new[] { "SelectedSiteOfTreatment" });
             }
         }
     }

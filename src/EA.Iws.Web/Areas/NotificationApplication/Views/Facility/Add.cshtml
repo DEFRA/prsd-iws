@@ -1,10 +1,12 @@
 ﻿@using EA.Iws.Core.AddressBook
+@using EA.Iws.Web.Areas.AddressBook.Views
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.AddFacilityViewModel
 @{
-    ViewBag.Title = "Add a facility";
+    ViewBag.Title = AddEditFacilityResources.TitleAdd;
 
     var facilityType = Model.NotificationType.ToString().ToLowerInvariant();
-    var message = "This information may be obtained from your " + facilityType + " facility. Enter \"Not applicable\" when no relevant registration number applies";
+    var message = string.Format(AddEditFacilityResources.Message, facilityType);
 
     ViewBag.SoleTraderRegistrationNumber = message;
     ViewBag.PartnershipRegistrationNumber = message;
@@ -22,27 +24,27 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h1 class="heading-large">Add @facilityType facility</h1>
+        <h1 class="heading-large">@string.Format(AddEditFacilityResources.Header, facilityType)</h1>
     </header>
 
     @Html.EditorFor(m => m.Business)
 
-    <h2 class="heading-medium">Their address</h2>
+    <h2 class="heading-medium">@AddEditFacilityResources.Address</h2>
     <hr />
-    <p>This should be the site address for the @facilityType facility.</p>
+    <p>@string.Format(AddEditFacilityResources.AddressDescription, facilityType)</p>
     @Html.EditorFor(m => m.Address)
 
-    <h2 class="heading-medium">Their contact person</h2>
+    <h2 class="heading-medium">@AddEditFacilityResources.Contact</h2>
     <hr />
-    <p>This should be the contact person for the @facilityType facility.</p>
+    <p>@string.Format(AddEditFacilityResources.ContactDescription, facilityType)</p>
     @Html.EditorFor(m => m.Contact)
 
     <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
-            Add as new address to address book
+            @AddressBookResources.AddToAddressBook
         </label>
     </div>
 
-    <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }

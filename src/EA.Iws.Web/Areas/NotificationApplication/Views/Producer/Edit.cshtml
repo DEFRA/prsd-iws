@@ -1,6 +1,8 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.EditProducerViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Producer
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.EditProducerViewModel
 @{
-    ViewBag.Title = "Waste Generator(s) - Producer(s)";
+    ViewBag.Title = AddEditProducerResources.TitleEdit;
 }
 
 @using (Html.BeginForm())
@@ -11,24 +13,24 @@
     @Html.HiddenFor(m => m.ProducerId)
 
     <header class="hgroup">
-        <h1 class="heading-large">Add waste generator - producer</h1>
+        <h1 class="heading-large">@AddEditProducerResources.Header</h1>
     </header>
 
     @Html.Partial("_BusinessType", Model)
 
-    <h2 class="heading-medium">Address</h2>
+    <h2 class="heading-medium">@AddEditProducerResources.Address</h2>
     <hr />
-    <p>This should be the site address for the waste generator-producer.</p>
+    <p>@AddEditProducerResources.AddressDescription</p>
     @Html.EditorFor(m => m.Address)
 
-    <h2 class="heading-medium">Contact person</h2>
+    <h2 class="heading-medium">@AddEditProducerResources.Contact</h2>
     <hr />
     @Html.EditorFor(m => m.Contact)
 
     <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
-            Add as new address to address book
+            @CommonResources.AddToAddressBook
         </label>
     </div>
 

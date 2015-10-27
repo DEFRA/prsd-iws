@@ -35,27 +35,27 @@
             }
         }
 
-        [Required]
-        [Display(Name = "Organisation name")]
+        [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgNameRequired")]
+        [Display(Name = "OrgName", ResourceType = typeof(BusinessResources))]
         public string Name { get; set; }
 
-        [Required]
-        [Display(Name = "Organisation type")]
+        [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
+        [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
         public string EntityType { get; set; }
 
-        [RequiredIf("EntityType", "Limited company", ErrorMessage = "Companies house number is required")]
-        [Display(Name = "Companies House number")]
+        [RequiredIf("EntityType", "Limited company", ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "CompanyHouseRequired")]
+        [Display(Name = "CompaniesHouseNumber", ResourceType = typeof(BusinessResources))]
         public string CompaniesHouseRegistrationNumber { get; set; }
 
-        [RequiredIf("EntityType", "Sole trader", ErrorMessage = "Sole Trader registration number is required")]
-        [Display(Name = "Registration number")]
+        [RequiredIf("EntityType", "Sole trader", ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "SoleTraderRegNoRequired")]
+        [Display(Name = "RegistrationNumber", ResourceType = typeof(BusinessResources))]
         public string SoleTraderRegistrationNumber { get; set; }
 
-        [RequiredIf("EntityType", "Partnership", ErrorMessage = "Partnership registration number is required")]
-        [Display(Name = "Registration number")]
+        [RequiredIf("EntityType", "Partnership", ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "PartnershipRegNoRequired")]
+        [Display(Name = "RegistrationNumber", ResourceType = typeof(BusinessResources))]
         public string PartnershipRegistrationNumber { get; set; }
 
-        [Display(Name = "Additional registration number")]
+        [Display(Name = "AdditionalRegNumber", ResourceType = typeof(BusinessResources))]
         public string AdditionalRegistrationNumber { get; set; }
 
         public static explicit operator BusinessData(BusinessViewModel businessViewModel)

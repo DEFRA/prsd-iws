@@ -2,52 +2,52 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Prsd.Core.Validation;
 
     public class ContactData : IValidatableObject
     {
-        [Required]
-        [Display(Name = "First name")]
+        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "FirstNameRequired")]
+        [Display(Name = "FirstName", ResourceType = typeof(ContactDataResources))]
         public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "Last name")]
+        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "LastNameRequired")]
+        [Display(Name = "LastName", ResourceType = typeof(ContactDataResources))]
         public string LastName { get; set; }
 
-        [Required]
-        [Display(Name = "Telephone number")]
+        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "TelephoneNumberRequired")]
+        [Display(Name = "TelephoneNumber", ResourceType = typeof(ContactDataResources))]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessage = "The telephone number is invalid")]
+        [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "TelephoneInvalid")]
         public string Telephone { get; set; }
 
-        [Display(Name = "Fax number")]
+        [Display(Name = "FaxNumber", ResourceType = typeof(ContactDataResources))]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessage = "The fax number is invalid")]
+        [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "FaxInvalid")]
         public string Fax { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "TelephonePrefixRequired")]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Telephone prefix")]
+        [Display(Name = "TelephonePrefix", ResourceType = typeof(ContactDataResources))]
         [StringLength(3)]
-        [RegularExpression("\\d+", ErrorMessage = "The telephone number is invalid")]
+        [RegularExpression("\\d+", ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "TelephoneInvalid")]
         public string TelephonePrefix { get; set; }
 
-        [Display(Name = "Fax prefix")]
+        [Display(Name = "FaxPrefix", ResourceType = typeof(ContactDataResources))]
         [StringLength(3)]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression("\\d+", ErrorMessage = "The fax number is invalid")]
+        [RegularExpression("\\d+", ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "FaxInvalid")]
         public string FaxPrefix { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "EmailRequired")]
         [EmailAddress]
-        [Display(Name = "Email address")]
+        [Display(Name = "Email", ResourceType = typeof(ContactDataResources))]
         public string Email { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if ((!string.IsNullOrEmpty(Fax) || !string.IsNullOrEmpty(FaxPrefix)) && (string.IsNullOrEmpty(Fax) || string.IsNullOrEmpty(FaxPrefix)))
+            if ((!string.IsNullOrWhiteSpace(Fax) || !string.IsNullOrWhiteSpace(FaxPrefix))
+                && (string.IsNullOrWhiteSpace(Fax) || string.IsNullOrWhiteSpace(FaxPrefix)))
             {
-                yield return new ValidationResult("Please provide a valid fax number", new[] { "FaxPrefix" });
+                yield return new ValidationResult(ContactDataResources.FaxRequired, new[] { "FaxPrefix" });
             }
         }
     }

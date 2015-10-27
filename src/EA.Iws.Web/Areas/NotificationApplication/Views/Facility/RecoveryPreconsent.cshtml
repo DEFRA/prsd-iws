@@ -1,6 +1,7 @@
-﻿@model EA.Iws.Web.ViewModels.Shared.TrueFalseViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
+@model EA.Iws.Web.ViewModels.Shared.TrueFalseViewModel
 @{
-    ViewBag.Title = "Is Recovery Facility Pre-consented?";
+    ViewBag.Title = RecoveryPreconsentResources.Title;
 }
 
 @using (Html.BeginForm())
@@ -9,31 +10,31 @@
     @Html.Gds().ValidationSummary()
 
     <header class="hgroup">
-        <h1 class="heading-large">Are all the recovery facilities pre-consented?</h1>
+        <h1 class="heading-large">@RecoveryPreconsentResources.Header</h1>
     </header>
-    <p>Select 'Yes' if the recovery facility has pre-consent status that will apply to this notification. A recovery facility may be issued with pre-consent status in accordance with Article 14 of Regulation (EC) No. 1013/2006.</p>
+    <p>@RecoveryPreconsentResources.HeaderDescription</p>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Value)">
         @Html.Gds().ValidationMessageFor(model => model.Value)
         <fieldset>
             <label class="block-label" for="rdoYes" data-target="yes-message">
                 @Html.RadioButtonFor(m => m.Value, true, new { id = "rdoYes" })
-                Yes
+                @RecoveryPreconsentResources.Yes
             </label>
             <div class="panel-indent @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="yes-message">
-                <p>This notification may benefit from having intended shipment dates to cover up to a 3 year period. For the one or more recovery facilities entered, you must send evidence of the pre-consent status with your notification submission. This may be the pre-consent certificate or letter issued by the relevant competent authority to the recovery facility.</p>
+                <p>@RecoveryPreconsentResources.YesDescription</p>
             </div>
             <label class="block-label" for="rdoNo" data-target="no-message">
                 @Html.RadioButtonFor(m => m.Value, false, new { id = "rdoNo" })
-                No
+                @RecoveryPreconsentResources.No
             </label>
             <div class="panel-indent @((Model.Value.HasValue && !Model.Value.Value) ? "" : "js-hidden")" id="no-message" id="no-message">
-                <p>This notification will allow intended shipment dates to cover up to a 12 month period.</p>
+                <p>@RecoveryPreconsentResources.NoDescription</p>
             </div>
         </fieldset>
     </div>
 
     <div class="form-group">
-        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

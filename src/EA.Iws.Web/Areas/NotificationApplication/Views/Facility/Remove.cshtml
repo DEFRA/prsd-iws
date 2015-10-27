@@ -1,9 +1,10 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.RemoveFacilityViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.RemoveFacilityViewModel
 @{
-    ViewBag.Title = "Remove Facility";
+    ViewBag.Title = RemoveFacilityResources.Title;
 }
 
-<h1 class="heading-large">Remove @Model.NotificationType.ToString().ToLowerInvariant() facility</h1>
+<h1 class="heading-large">@string.Format(RemoveFacilityResources.Header, @Model.NotificationType.ToString().ToLowerInvariant())</h1>
 
 @if (string.IsNullOrWhiteSpace(ViewBag.Error))
 {
@@ -14,16 +15,18 @@
         @Html.HiddenFor(m => m.NotificationId)
         @Html.HiddenFor(m => m.FacilityId)
 
-        <p>You are about to remove @Model.FacilityName as a facility from this notification.</p>
+        <p>@RemoveFacilityResources.RemoveMessage</p>
 
-        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
     }
 }
 else
 {
     <p>@ViewBag.Error</p>
-    <p>@Html.ActionLink(string.Format("Change site of {0}", Model.NotificationType.ToString().ToLowerInvariant()), "SiteOfTreatment", "Facility", 
-            new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })</p>
+    <p>
+        @Html.ActionLink(string.Format(RemoveFacilityResources.ChangeSite, Model.NotificationType.ToString().ToLowerInvariant()), "SiteOfTreatment", "Facility",
+            new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })
+    </p>
 }
 
-<p>@Html.ActionLink("Back to facilities", "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
+<p>@Html.ActionLink(RemoveFacilityResources.BackToFacilities, "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>

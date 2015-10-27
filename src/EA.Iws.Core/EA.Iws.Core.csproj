@@ -80,6 +80,11 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
+    <Compile Include="Shared\AddressDataResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddressDataResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Shared\BidirectionalDictionary.cs" />
     <Compile Include="Notification\Overview\Journey.cs" />
     <Compile Include="Notification\Overview\NotificationOverview.cs" />
@@ -92,6 +97,11 @@
     <Compile Include="Notification\Overview\WasteDisposalOverview.cs" />
     <Compile Include="Notification\Overview\WasteRecoveryOverview.cs" />
     <Compile Include="Shared\CompetentAuthorityMetadata.cs" />
+    <Compile Include="Shared\ContactDataResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactDataResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Shared\ProvidedBy.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />
     <Compile Include="Shared\ValuePerWeightData.cs" />
@@ -152,7 +162,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Shared\AddressDataResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressDataResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shared\ContactDataResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContactDataResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

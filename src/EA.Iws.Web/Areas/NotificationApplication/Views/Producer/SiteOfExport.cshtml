@@ -1,9 +1,10 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.SiteOfExportViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Producer
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.SiteOfExportViewModel
 @{
-    ViewBag.Title = "Site of export";
+    ViewBag.Title = SiteOfExportResources.Title;
 }
 
-<h1 class="heading-large">Which waste generator - producer is the site of export?</h1>
+<h1 class="heading-large">@SiteOfExportResources.Header</h1>
 
 @if (Model.Producers.Any())
 {
@@ -14,12 +15,12 @@
         @Html.HiddenFor(m => m.NotificationId)
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfExport)">
-            <table title="List of producers for set site of export">
+            <table title=@SiteOfExportResources.TableTitle>
                 <thead>
                     <tr>
-                        <th>Organisation name</th>
-                        <th>Address</th>
-                        <th>Site of export?</th>
+                        <th>@SiteOfExportResources.ThOrganisationName</th>
+                        <th>@SiteOfExportResources.ThAddress</th>
+                        <th>@SiteOfExportResources.ThSiteOfExport</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,13 +36,13 @@
                             </td>
                             <td>
                                 @{
-                        var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
-                                    htmlAttr.Add("title", "Site of export?");
-                        if (@Model.Producers[i].IsSiteOfExport)
-                        {
-                            htmlAttr.Add("checked", "checked");
-                        }
-                        @Html.RadioButtonFor(m => m.SelectedSiteOfExport, Model.Producers[i].Id, htmlAttr)
+                                    var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
+                                    htmlAttr.Add("title", SiteOfExportResources.ThSiteOfExport);
+                                    if (@Model.Producers[i].IsSiteOfExport)
+                                    {
+                                        htmlAttr.Add("checked", "checked");
+                                    }
+                                    @Html.RadioButtonFor(m => m.SelectedSiteOfExport, Model.Producers[i].Id, htmlAttr)
                                 }
                             </td>
                         </tr>
@@ -50,20 +51,20 @@
             </table>
         </div>
 
-        <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
     }
 }
 else
 {
-    ViewBag.Title = "Site of export: Add a producer first";
-    <p>You have not added any producers to this notification. Please add a producer before selecting the site of export.</p>
-    <p>@Html.ActionLink("Back to producers", "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
+    ViewBag.Title = SiteOfExportResources.TitleAddFirst;
+    <p>@SiteOfExportResources.NoProducers</p>
+    <p>@Html.ActionLink(SiteOfExportResources.BackToProducers, "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
-        @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
     }
     else
     {
-        @Html.ActionLink(@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
     }
 }

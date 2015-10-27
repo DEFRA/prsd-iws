@@ -6,23 +6,23 @@
 
     public class BusinessTypeViewModel
     {
-        [Required]
-        [Display(Name = "Organisation name")]
+        [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgNameRequired")]
+        [Display(Name = "OrgName", ResourceType = typeof(BusinessResources))]
         public string Name { get; set; }
 
-        [Required]
-        [Display(Name = "Organisation type")]
+        [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
+        [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
         public BusinessType? BusinessType { get; set; }
 
-        [Required]
-        [Display(Name = "Registration number")]
+        [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "RegNumberRequired")]
+        [Display(Name = "RegistrationNumber", ResourceType = typeof(BusinessResources))]
         public virtual string RegistrationNumber { get; set; }
 
-        [Display(Name = "Additional registration number")]
+        [Display(Name = "AdditionalRegNumber", ResourceType = typeof(BusinessResources))]
         public string AdditionalRegistrationNumber { get; set; }
 
-        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessage = "Please enter your organisation type")]
-        [Display(Name = "Enter your organisation type")]
+        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OtherOrgTypeRequired")]
+        [Display(Name = "OtherOrgType", ResourceType = typeof(BusinessResources))]
         public string OtherDescription { get; set; }
 
         public bool DisplayAdditionalNumber { get; set; }
@@ -47,7 +47,7 @@
             return new BusinessInfoData
             {
                 AdditionalRegistrationNumber = AdditionalRegistrationNumber,
-                BusinessType = BusinessType.Value,
+                BusinessType = BusinessType.GetValueOrDefault(),
                 Name = Name,
                 OtherDescription = OtherDescription,
                 RegistrationNumber = RegistrationNumber
