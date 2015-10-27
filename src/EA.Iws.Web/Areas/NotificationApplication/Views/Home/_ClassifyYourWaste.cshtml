@@ -1,64 +1,60 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
 @{
     var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
-<h2 class="heading-medium">Classify your waste</h2>
-
-<div>
-    <details>
-        <summary>
-            Chemical composition
-            @if (Model.IsChemicalCompositionCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Waste classification</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Chemical composition
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_ChemicalComposition.cshtml")
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "ChemicalComposition", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "ChemicalComposition", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                 @Html.Partial(viewLocation + "_ChemicalComposition.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Process of generation
-            @if (Model.IsProcessOfGenerationCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
-            @if (ViewBag.CanEditNotification)
-            {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "WasteGenerationProcess", new { id, backToOverview = true }, null)</span>
-            }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Process of generation
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_ProcessOfGeneration.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Physical characteristics
-            @if (Model.ArePhysicalCharacteristicsCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PhysicalCharacteristics", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "WasteGenerationProcess", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Physical characteristics
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_PhysicalCharacteristics.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "PhysicalCharacteristics", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

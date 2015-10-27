@@ -9,5 +9,7 @@
         public const string ContinueButtonText = "Save and continue";
 
         public const string NotificationSummaryViewLocation = "~/Areas/NotificationApplication/Views/Shared/NotificationSummarySections/";
+
+        public const string ExternalNotificationOverviewSectionsLocation = "~/Areas/NotificationApplication/Views/Home/OverviewSections/";
     }
 }

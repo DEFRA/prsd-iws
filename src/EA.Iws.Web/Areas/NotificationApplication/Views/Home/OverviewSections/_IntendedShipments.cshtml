@@ -1,0 +1,13 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.IntendedShipmentData.NumberOfShipments > 0)
+        {
+            @Model.IntendedShipmentData.NumberOfShipments
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

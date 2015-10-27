@@ -1,85 +1,71 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
 @{
     var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+
 }
 
-<h2 class="heading-medium">The journey</h2>
-
-<div>
-    <details>
-        <summary>
-            Transport route - export
-            @if (Model.IsStateOfExportCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
-            @if (ViewBag.CanEditNotification)
-            {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfExport", new { id, backToOverview = true }, null)</span>
-            }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">The journey</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Export route
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_StateOfExport.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Transport route - transits
-            @if (Model.AreTransitStatesCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Summary", "TransportRoute", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "StateOfExport", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                @Html.Partial(viewLocation + "_TransitStates.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Transport route - import
-            @if (Model.IsStateOfImportCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
-            @if (ViewBag.CanEditNotification)
-            {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "StateOfImport", new { id, backToOverview = true }, null)</span>
-            }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Import route
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_StateOfImport.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Custom office
-            @if (Model.IsCustomsOfficeCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "CustomsOffice", new { id }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "StateOfImport", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Transits
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_TransitStates.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">@Html.ActionLink("Change", "Summary", "TransportRoute", new { id, backToOverview = true }, null)</td>
+            }
+        </tr>
+        <tr>
+            <td>
+                Customs office
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_CustomsOffice.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">@Html.ActionLink("Change", "Index", "CustomsOffice", new { id }, null)</td>
+            }
+        </tr>
+    </tbody>
+</table>

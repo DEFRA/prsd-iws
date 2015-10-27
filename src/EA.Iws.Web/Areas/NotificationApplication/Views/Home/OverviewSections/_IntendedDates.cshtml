@@ -1,0 +1,13 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.IntendedShipmentData.NumberOfShipments > 0)
+        {
+            @Html.Gds().DisplayDateRangeFor(m => m.IntendedShipmentData.FirstDate, m => m.IntendedShipmentData.LastDate)
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

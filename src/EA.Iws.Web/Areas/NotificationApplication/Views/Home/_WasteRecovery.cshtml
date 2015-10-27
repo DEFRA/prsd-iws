@@ -1,28 +1,181 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteRecoveryViewModel
 @{
     var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
-<h2 class="heading-medium">Waste recovery</h2>
-
-<div>
-    <details>
-        <summary>
-            Recovery information
-            @if (Model.IsWasteRecoveryInformationCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Waste recovery</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Details provided by importer
+            </td>
+            <td>
+                <div class="overview-block">
+                    <div class="overview-block-element">
+                        @if (Model.IsWasteRecoveryInformationCompleted)
+                        {
+                            @(Model.IsProvidedByImporter ? "Yes" : "No")
+                        }
+                        else
+                        {
+                            @ViewBag.SectionIncompleteText
+                        }
+                    </div>
+                </div>
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "WasteRecovery", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                @Html.Partial(viewLocation + "_RecoveryInformation.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+        </tr>
+        @if (!Model.IsProvidedByImporter)
+        {
+            <tr>
+                <td>
+                    Recoverable percentage
+                </td>
+                <td>
+                    <div class="overview-block">
+                        <div class="overview-block-element">
+                            @if (Model.IsWasteRecoveryInformationCompleted)
+                            {
+                                @Html.DisplayFor(m => m.PercentageRecoverable)@:%
+                            }
+                            else
+                            {
+                                @ViewBag.SectionIncompleteText
+                            }
+                        </div>
+                    </div>
+                </td>
+                @if (ViewBag.CanEditNotification)
+                {
+                    <td class="change">
+                        @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
+                    </td>
+                }
+            </tr>
+            if (Model.HasDisposalPortion)
+            {
+                <tr>
+                    <td>
+                        Disposal method
+                    </td>
+                    <td>
+                        <div class="overview-block">
+                            <div class="overview-block-element">
+                                @if (Model.IsWasteRecoveryInformationCompleted)
+                                {
+                                    @Html.DisplayFor(m => m.MethodOfDisposal)
+                                }
+                                else
+                                {
+                                    @ViewBag.SectionIncompleteText
+                                }
+                            </div>
+                        </div>
+                    </td>
+                    @if (ViewBag.CanEditNotification)
+                    {
+                        <td class="change">@Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)</td>
+                    }
+                </tr>
+            }
+            <tr>
+                <td>
+                    Estimated value of recoverable material
+                    @(Model.IsWasteRecoveryInformationCompleted
+                            ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.EstimatedUnit))
+                            : string.Empty)
+                </td>
+                <td>
+                    <div class="overview-block">
+                        <div class="overview-block-element">
+                            @if (Model.IsWasteRecoveryInformationCompleted)
+                            {
+                                @:&pound;@Html.DisplayFor(m => m.EstimatedAmount)
+                            }
+                            else
+                            {
+                                @ViewBag.SectionIncompleteText
+                            }
+                        </div>
+                    </div>
+                </td>
+                @if (ViewBag.CanEditNotification)
+                {
+                    <td class="change">
+                        @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    Recovery cost @(Model.IsWasteRecoveryInformationCompleted
+                            ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CostUnit))
+                            : string.Empty)
+                </td>
+                <td>
+                    <div class="overview-block">
+                        <div class="overview-block-element">
+                            @if (Model.IsWasteRecoveryInformationCompleted)
+                            {
+                                @:&pound;@Html.DisplayFor(m => m.CostAmount)
+	                        }
+                            else
+                            {
+                                @ViewBag.SectionIncompleteText
+                            }
+                        </div>
+                    </div>
+                </td>
+                @if (ViewBag.CanEditNotification)
+                {
+                    <td class="change">
+                        @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
+                    </td>
+                }
+            </tr>
+            if (Model.HasDisposalPortion)
+            {
+                <tr>
+                    <td>
+                        Disposal cost @(Model.IsWasteRecoveryInformationCompleted
+                            ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.DisposalUnit))
+                            : string.Empty)
+                    </td>
+                    <td>
+                        <div class="overview-block">
+                            <div class="overview-block-element">
+                                @if (Model.IsWasteRecoveryInformationCompleted)
+                                {
+                                    @:&pound;@Html.DisplayFor(m => m.DisposalAmount)
+                                }
+                                else
+                                {
+                                    @ViewBag.SectionIncompleteText
+                                }
+                            </div>
+                        </div>
+                    </td>
+                    @if (ViewBag.CanEditNotification)
+                    {
+                        <td class="change">
+                            @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
+                        </td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>

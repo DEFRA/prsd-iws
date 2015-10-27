@@ -1,0 +1,44 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+
+<div class="overview-block">
+    @if (Model.AreTransitStatesCompleted && Model.TransitStates.Any())
+    {
+        for (int i = 0; i < Model.TransitStates.Count; i++)
+        {
+            <div class="overview-block-element">
+                <div class="grid-row">
+                    <div class="column-half">
+                        Entry point:
+                    </div>
+                    <div class="column-half">
+                        @Html.DisplayFor(m => m.TransitStates[i].EntryPoint.Name),
+                        @Html.DisplayFor(m => m.TransitStates[i].Country.Name)
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">
+                        Exit point:
+                    </div>
+                    <div class="column-half">
+                        @Html.DisplayFor(m => m.TransitStates[i].ExitPoint.Name),
+                        @Html.DisplayFor(m => m.TransitStates[i].Country.Name)
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">
+                        Competent authortity:
+                    </div>
+                    <div class="column-half">
+                        @Html.DisplayFor(m => m.TransitStates[i].CompetentAuthority.Name)
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="overview-block-element">
+            <text>None</text>
+        </div>
+    }
+</div>

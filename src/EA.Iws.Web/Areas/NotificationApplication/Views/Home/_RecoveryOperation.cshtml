@@ -2,86 +2,75 @@
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
 @{
     var id = Model.NotificationId;
-    var disposalOrRecovery = Model.NotificationType;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
-<h2 class="heading-medium">@disposalOrRecovery operation</h2>
-
-<div>
-    @if (disposalOrRecovery == NotificationType.Recovery)
-    {
-        <details>
-            <summary>
-                Pre-consent facility
-                @if (Model.IsPreconsentStatusChosen)
-                {
-                    <i class="fa fa-check green-text"></i>
-                }
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">@(Model.NotificationType == NotificationType.Recovery ? "Recovery operation" : "Disposal operation")</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery operation codes" : "Disposal operation codes")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_OperationCodes.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "OperationCodes", "WasteOperations", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        @if (Model.NotificationType == NotificationType.Recovery)
+        {
+            <tr>
+                <td>
+                    Pre-consented facility
+                </td>
+                <td>
+                    @Html.Partial(viewLocation + "_PreconsentStatus.cshtml")
+                </td>
                 @if (ViewBag.CanEditNotification)
                 {
-                    <span class="edit-link-container">@Html.ActionLink("Edit", "RecoveryPreconsent", "Facility", new { id, backToOverview = true }, null)</span>
+                    <td class="change">
+                        @Html.ActionLink("Change", "RecoveryPreconsent", "Facility", new { id, backToOverview = true }, null)
+                    </td>
                 }
-            </summary>
-            <div class="expanded-details">
-                <div class="panel-indent">
-                    @Html.Partial(viewLocation + "_PreconsentStatus.cshtml")
-                </div>
-            </div>
-        </details>
-    }
-    <details>
-        <summary>
-            @disposalOrRecovery codes
-            @if (Model.AreOperationCodesChosen)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
-            @if (ViewBag.CanEditNotification)
-            {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "OperationCodes", "WasteOperations", new { id, backToOverview = true }, null)</span>
-            }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                @Html.Partial(viewLocation + "_OperationCodes.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Technology employed
-            @if (Model.IsTechnologyEmployedCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
-            @if (ViewBag.CanEditNotification)
-            {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "TechnologyEmployed", "WasteOperations", new { id, backToOverview = true }, null)</span>
-            }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+            </tr>
+        }
+        <tr>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery technology" : "Disposal techology")
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_TechnologyEmployed.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Reason for export
-            @if (Model.IsReasonForExportCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "ReasonForExport", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "TechnologyEmployed", "WasteOperations", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Reason for export
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_ReasonForExport.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">@Html.ActionLink("Change", "Index", "ReasonForExport", new { id, backToOverview = true }, null)</td>
+            }
+        </tr>
+    </tbody>
+</table>

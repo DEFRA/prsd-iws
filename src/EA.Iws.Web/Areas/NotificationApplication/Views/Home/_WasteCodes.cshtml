@@ -1,142 +1,122 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+﻿@using EA.Iws.Core.WasteCodes
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
 @{
     var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+    var codeDefinitionListPartialName = Constants.NotificationSummaryViewLocation + "_CodeDefinitionList.cshtml";
+    var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
+        ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
+        EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
 }
 
-<h2 class="heading-medium">Waste codes</h2>
 
-<div>
-    <details>
-        <summary>
-            Basel or OECD code
-            @if (Model.IsBaselOecdCodeCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Waste codes</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @baselOrOecdType code
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_BaselOecdCode.cshtml")
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "BaselOecdCode", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "BaselOecdCode", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                 @Html.Partial(viewLocation + "_BaselOecdCode.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            EWC codes
-            @if (Model.AreEwcCodesCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreEwcCodesCompleted ? (Model.EwcCodes.Length > 1 ? "EWC codes" : "EWC code") : "EWC code(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_EwcCodes.cshtml")
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "EwcCode", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "EwcCode", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                 @Html.Partial(viewLocation + "_EwcCodes.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Y codes
-            @if (Model.AreYCodesCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
-            @if (ViewBag.CanEditNotification)
-            {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "YCode", new { id, backToOverview = true }, null)</span>
-            }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreYCodesCompleted ? (Model.YCodes.Length > 1 ? "Y codes" : "Y code") : "Y code(s)")
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_YCodes.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            H or HP codes
-            @if (Model.AreHCodesCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "HCode", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "YCode", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreHCodesCompleted ? (Model.HCodes.Length > 1 ? "H or HP codes" : "H or HP code") : "H or HP code(s)")
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_HCodes.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            UN classes
-            @if (Model.AreUnClassesCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "UnClass", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "HCode", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                @Html.Partial(viewLocation + "_UnClasses.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            UN number
-            @if (Model.AreUnNumbersCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreUnClassesCompleted ? (Model.UnClass.Length > 1 ? "UN classes" : "UN class") : "UN class(es)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_UNClasses.cshtml")
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "UnNumber", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "UnClass", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                @Html.Partial(viewLocation + "_UnNumbers.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Other codes
-            @if (Model.AreOtherCodesCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreUnNumbersCompleted ? (Model.UnNumber.Length > 1 ? "UN numbers" : "UN number") : "UN number(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_UNNumbers.cshtml")
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "CustomWasteCode", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "UnNumber", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Other codes
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_OtherCodes.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "CustomWasteCode", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

@@ -1,82 +1,74 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.TransportationViewModel
 @{
     var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
-<h2 class="heading-medium">The transportation</h2>
-
-<div>
-    <details>
-        <summary>
-            Intended carriers
-            @if (Model.IsCarrierCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
-            @if (ViewBag.CanEditNotification)
-            {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "List", "Carrier", new { id, backToOverview = true }, null)</span>
-            }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Transportation</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Intended carriers
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_Carrier.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Means of transport
-            @if (Model.IsMeansOfTransportCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "MeansOfTransport", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "List", "Carrier", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Means of transport
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_MeansOfTransport.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Packaging types
-            @if (Model.IsPackagingTypesCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "PackagingTypes", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "MeansOfTransport", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Packaging types
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_PackagingTypes.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Special handling
-            @if (Model.IsSpecialHandlingCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "SpecialHandling", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "PackagingTypes", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+        </tr>
+        <tr>
+            <td>
+                Special handling requirements
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_SpecialHandling.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "SpecialHandling", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

@@ -1,28 +1,60 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
 @{
     var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
-<h2 class="heading-medium">Amount and dates</h2>
-
-<div>
-    <details>
-        <summary>
-            Intended shipments 
-            @if (Model.IsIntendedShipmentsCompleted)
-            {
-                <i class="fa fa-check green-text"></i>
-            }
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Amounts and dates</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Intended total shipments
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_IntendedShipments.cshtml")
+            </td>
             @if (ViewBag.CanEditNotification)
             {
-                <span class="edit-link-container">@Html.ActionLink("Edit", "Index", "Shipment", new { id, backToOverview = true }, null)</span>
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
+                </td>
             }
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                @Html.Partial(viewLocation + "_IntendedShipments.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+        </tr>
+        <tr>
+            <td>
+                Intended total quantity
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_IntendedQuantity.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>
+                Intended dates of departure
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_IntendedDates.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

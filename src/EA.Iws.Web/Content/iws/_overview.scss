@@ -1,4 +1,109 @@
-﻿.notification-overview {
+﻿.overview-block div.overview-block-element:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.overview-block div.overview-sub-block:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.overview-table {
+    td {
+        vertical-align: top;
+    }
+
+    td:first-child {
+        width: 30%;
+    }
+
+    td.change {
+        text-align: right;
+        width: 10%;
+
+        a {
+            font-weight: bold;
+            font-size: 19px;
+            text-decoration: none;
+        }
+    }
+
+    h2 {
+        margin-bottom: 0px;
+    }
+}
+
+.noti-overview{
+    .heading-medium{
+        font-weight: normal;
+        color: $secondary-text-colour;
+        margin-bottom: 0;
+        margin-top: 30px;
+    }
+    .heading-large{
+        margin-top: 0;
+    }
+    span{
+        display: inline-block;
+    }
+    .status{
+        float: right;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+    
+    .noti-charge{
+        background: $light-blue;
+        color: $white;
+        padding: 10px 10px 5px 10px;
+        font-weight: bold;
+        float: right;
+        
+        .price{
+           font-size: 40px;
+            font-weight: bold;
+            
+        }
+    }
+    .noti-links{
+        float: right;
+        padding: 15px 0px 15px 0px;
+        a{
+            display: block;
+            float: right;
+            
+        }
+    }
+    .status, .noti-charge, .noti-links{
+      &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+     }  
+    }
+    &:after {
+        border-bottom: 1px solid $grey-2;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+        margin: 30px 15px 10px 15px;
+     }
+}
+
+/*** All Status ***/
+.status-not-sumitted{
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid $light-blue;
+    padding: 4px 10px 3px 10px;
+    color: $light-blue;
+}
+
+.notification-overview {
     .expanded-details {
         margin-left: 23px;
         margin-bottom: 15px;
@@ -247,7 +352,8 @@
         p {
             word-wrap: break-word;
         }
-        dd{
+
+        dd {
             word-wrap: break-word;
         }
     }
