@@ -1,0 +1,49 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.SubmitSideBarViewModel
+@using EA.Iws.Core.Notification;
+@using EA.Iws.Core.NotificationAssessment;
+
+<section class="grid-row">
+    <div class="noti-overview">
+        <div class="column-half">
+            <h2 class="heading-medium">@Model.NotificationNumber</h2>
+            <h1 class="heading-large">Notification overview</h1>
+
+            @if (Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
+            {
+                @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "button" })
+            }
+            else
+            {
+                <a href="#" class="button" disabled="disabled">Submit notification</a>
+            }
+        </div>
+
+        <div class="column-half charge">
+            
+            <div class="status">
+                <span>Overall Status</span>
+                <span class="statusbox s-blue">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</span>
+            </div>
+            
+            @if (Model.Charge > 0)
+            {
+                <div class="noti-charge">
+                    <span>Notification<br />Charge</span>
+                    <span class="price">&pound;@Model.Charge</span>
+                </div>
+            }
+
+            <div class="noti-links">
+                @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)
+                <br />
+                @if (Model.CompetentAuthority == CompetentAuthority.Scotland)
+                {
+                    @Html.ActionLink("Bank Guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
+                    <br />
+                    @Html.ActionLink("Parent Company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
+                }
+                @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId }, null)
+            </div>
+        </div>
+    </div>
+</section>

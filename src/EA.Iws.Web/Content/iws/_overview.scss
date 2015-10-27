@@ -46,6 +46,7 @@
     }
     .status{
         float: right;
+        clear: right;
         margin-top: 30px;
         margin-bottom: 10px;
     }
@@ -56,6 +57,7 @@
         padding: 10px 10px 5px 10px;
         font-weight: bold;
         float: right;
+        clear: right;
         
         .price{
            font-size: 40px;
@@ -65,6 +67,7 @@
     }
     .noti-links{
         float: right;
+        clear: right;
         padding: 15px 0px 15px 0px;
         a{
             display: block;
@@ -94,13 +97,24 @@
 }
 
 /*** All Status ***/
-.status-not-sumitted{
+.statusbox{
     text-transform: capitalize;
     font-size: 16px;
     font-weight: bold;
     border: 1px solid $light-blue;
     padding: 4px 10px 3px 10px;
+}
+.s-blue{
     color: $light-blue;
+}
+.s-orange{
+    color: $orange;
+}
+.s-green{
+    color: $turquoise;
+}
+.s-red{
+    color: $red;
 }
 
 .notification-overview {

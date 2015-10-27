@@ -7,64 +7,23 @@
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-<section class="grid-row">
-    <div class="noti-overview">
-        <div class="column-half">
-            <h2 class="heading-medium">GB 000010 6013</h2>
-            <h1 class="heading-large">Notification overview</h1>
-            <input class="button" type="submit" value="Submit notification">
-        </div>
+@Html.Partial("_Summary", Model.SubmitSideBarViewModel)
 
-        <div class="column-half charge">
-            <div class="status">
-                <span>Overall Status</span>
-                <span class="status-not-sumitted">Not submitted</span>
-            </div>
+@Html.Partial("_OrganisationsInvolved", Model.OrganisationsInvolvedViewModel)
 
-            <div class="noti-charge">
-                <span>Notification<br />Charge </span>
-                <span class="price">&pound;367</span>
-            </div>
+@Html.Partial("_RecoveryOperation", Model.RecoveryOperationViewModel)
 
-            <div class="noti-links">
-                <a href="" title="Download financial guarantee">Download financial guarantee</a><br />
-                <a href="" title="Download notification">Download notification</a>
-            </div>
-        </div>
-    </div>
-</section>
+@Html.Partial("_Transportation", Model.TransportationViewModel)
 
-<div>
-    @Html.Partial("_OrganisationsInvolved", Model.OrganisationsInvolvedViewModel)
-</div>
+@Html.Partial("_Journey", Model.JourneyViewModel)
 
-<div>
-    @Html.Partial("_RecoveryOperation", Model.RecoveryOperationViewModel)
-</div>
+@Html.Partial("_AmountsAndDates", Model.AmountsAndDatesViewModel)
 
-<div>
-    @Html.Partial("_Transportation", Model.TransportationViewModel)
-</div>
+@Html.Partial("_ClassifyYourWaste", Model.ClassifyYourWasteViewModel)
 
-<div>
-    @Html.Partial("_Journey", Model.JourneyViewModel)
-</div>
-
-<div>
-    @Html.Partial("_AmountsAndDates", Model.AmountsAndDatesViewModel)
-</div>
-
-<div>
-    @Html.Partial("_ClassifyYourWaste", Model.ClassifyYourWasteViewModel)
-</div>
-
-<div>
-    @Html.Partial("_WasteCodes", Model.WasteCodeOverviewViewModel)
-</div>
+@Html.Partial("_WasteCodes", Model.WasteCodeOverviewViewModel)
 
 @if (Model.NotificationType == NotificationType.Recovery)
 {
-    <div>
-        @Html.Partial("_WasteRecovery", Model.WasteRecoveryViewModel)
-    </div>
+    @Html.Partial("_WasteRecovery", Model.WasteRecoveryViewModel)
 }
