@@ -775,6 +775,7 @@
     <Compile Include="Areas\AddressBook\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SmokeTestController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationNumberViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationTypeViewModel.cs" />
     <Compile Include="Areas\Movement\Controllers\CarrierController.cs" />
@@ -1065,6 +1066,7 @@
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
+    <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
     <Folder Include="Areas\Movement\Views\OperationComplete\" />
