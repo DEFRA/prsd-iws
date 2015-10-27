@@ -14,14 +14,14 @@
         [Display(Name = "Organisation type")]
         public BusinessType? BusinessType { get; set; }
 
-        [RequiredIf("BusinessType", Core.Shared.BusinessType.LimitedCompany, "The Registration number field is required")]
+        [RequiredIf("BusinessType", Core.Shared.BusinessType.LimitedCompany, ErrorMessage = "The Registration number field is required")]
         [Display(Name = "Registration number")]
         public virtual string RegistrationNumber { get; set; }
 
         [Display(Name = "Additional registration number")]
         public string AdditionalRegistrationNumber { get; set; }
 
-        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, "Please enter your organisation type")]
+        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessage = "Please enter your organisation type")]
         [Display(Name = "Enter your organisation type")]
         public string OtherDescription { get; set; }
 

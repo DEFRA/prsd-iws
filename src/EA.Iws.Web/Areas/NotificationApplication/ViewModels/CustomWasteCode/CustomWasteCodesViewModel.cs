@@ -9,21 +9,21 @@
     {
         public Guid NotificationId { get; set; }
 
-        [RequiredIf("ImportNationalCodeNotApplicable", false, "Please enter a national code in country of import or select not applicable")]
+        [RequiredIf("ImportNationalCodeNotApplicable", false, ErrorMessage = "Please enter a national code in country of import or select not applicable")]
         [Display(Name = "National code in country of import")]
         public string ImportNationalCode { get; set; }
 
         [Display(Name = "Not applicable")]
         public bool ImportNationalCodeNotApplicable { get; set; }
 
-        [RequiredIf("ExportNationalCodeNotApplicable", false, "Please enter a national code in country of export or select not applicable")]
+        [RequiredIf("ExportNationalCodeNotApplicable", false, ErrorMessage = "Please enter a national code in country of export or select not applicable")]
         [Display(Name = "National code in country of export")]
         public string ExportNationalCode { get; set; }
 
         [Display(Name = "Not applicable")]
         public bool ExportNationalCodeNotApplicable { get; set; }
 
-        [RequiredIf("CustomsCodeNotApplicable", false, "Please enter a customs code or select not applicable")]
+        [RequiredIf("CustomsCodeNotApplicable", false, ErrorMessage = "Please enter a customs code or select not applicable")]
         [Display(Name = "Customs code")]
         public string CustomsCode { get; set; }
 
@@ -31,7 +31,7 @@
         public bool CustomsCodeNotApplicable { get; set; }
 
         [Display(Name = "Other code(s)")]
-        [RequiredIf("OtherCodeNotApplicable", false, "Please enter other code(s) or select not applicable")]
+        [RequiredIf("OtherCodeNotApplicable", false, ErrorMessage = "Please enter other code(s) or select not applicable")]
         public string OtherCode { get; set; }
 
         [Display(Name = "Not applicable")]

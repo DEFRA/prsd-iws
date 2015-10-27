@@ -18,7 +18,7 @@
         [Display(Name = "Organisation type")]
         public BusinessType BusinessType { get; set; }
 
-        [RequiredIf("BusinessType", BusinessType.Other, "Description is required")]
+        [RequiredIf("BusinessType", BusinessType.Other, ErrorMessage = "Description is required")]
         [Display(Name = "Organisation type")]
         public string OtherDescription { get; set; }
     }

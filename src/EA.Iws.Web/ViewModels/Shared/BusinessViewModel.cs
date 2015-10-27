@@ -43,15 +43,15 @@
         [Display(Name = "Organisation type")]
         public string EntityType { get; set; }
 
-        [RequiredIf("EntityType", "Limited company", "Companies house number is required")]
+        [RequiredIf("EntityType", "Limited company", ErrorMessage = "Companies house number is required")]
         [Display(Name = "Companies House number")]
         public string CompaniesHouseRegistrationNumber { get; set; }
 
-        [RequiredIf("EntityType", "Sole trader", "Sole Trader registration number is required")]
+        [RequiredIf("EntityType", "Sole trader", ErrorMessage = "Sole Trader registration number is required")]
         [Display(Name = "Registration number")]
         public string SoleTraderRegistrationNumber { get; set; }
 
-        [RequiredIf("EntityType", "Partnership", "Partnership registration number is required")]
+        [RequiredIf("EntityType", "Partnership", ErrorMessage = "Partnership registration number is required")]
         [Display(Name = "Registration number")]
         public string PartnershipRegistrationNumber { get; set; }
 

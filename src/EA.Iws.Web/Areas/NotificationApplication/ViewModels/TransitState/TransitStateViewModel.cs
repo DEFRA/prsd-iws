@@ -22,15 +22,15 @@
         public SelectList EntryOrExitPoints { get; set; }
 
         [Display(Name = "Entry point")]
-        [RequiredIf("ShowNextSection", true, "The entry point is required")]
+        [RequiredIf("ShowNextSection", true, ErrorMessage = "The entry point is required")]
         public Guid? EntryPointId { get; set; }
 
         [Display(Name = "Exit point")]
-        [RequiredIf("ShowNextSection", true, "The exit point is required")]
+        [RequiredIf("ShowNextSection", true, ErrorMessage = "The exit point is required")]
         public Guid? ExitPointId { get; set; }
 
         [Display(Name = "Competent authority")]
-        [RequiredIf("ShowNextSection", true, "The competent authority is required")]
+        [RequiredIf("ShowNextSection", true, ErrorMessage = "The competent authority is required")]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
 
         public Guid? StateOfImportCountryId { get; set; }

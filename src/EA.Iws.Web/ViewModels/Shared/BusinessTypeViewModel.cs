@@ -21,7 +21,7 @@
         [Display(Name = "Additional registration number")]
         public string AdditionalRegistrationNumber { get; set; }
 
-        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, "Please enter your organisation type")]
+        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessage = "Please enter your organisation type")]
         [Display(Name = "Enter your organisation type")]
         public string OtherDescription { get; set; }
 

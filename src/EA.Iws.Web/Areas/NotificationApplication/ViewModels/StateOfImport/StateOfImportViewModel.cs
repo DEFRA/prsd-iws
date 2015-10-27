@@ -14,13 +14,13 @@
         public Guid? CountryId { get; set; }
 
         [Display(Name = "Entry point")]
-        [RequiredIf("ShowNextSection", true, "The entry point is required")]
+        [RequiredIf("ShowNextSection", true, ErrorMessage = "The entry point is required")]
         public Guid? EntryOrExitPointId { get; set; }
 
         public bool ShowNextSection { get; set; }
 
         [Display(Name = "Competent authority")]
-        [RequiredIf("ShowNextSection", true, "The competent authority is required")]
+        [RequiredIf("ShowNextSection", true, ErrorMessage = "The competent authority is required")]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
         
         public Guid? StateOfExportCountryId { get; set; }

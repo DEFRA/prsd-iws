@@ -15,7 +15,7 @@
 
         public bool OtherSelected { get; set; }
 
-        [RequiredIf("OtherSelected", true, "Please enter a description")]
+        [RequiredIf("OtherSelected", true, ErrorMessage = "Please enter a description")]
         public string OtherDescription { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

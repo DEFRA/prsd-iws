@@ -29,7 +29,7 @@
         [Display(Name = "County")]
         public string Region { get; set; }
 
-        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", "The Postcode field is required")]
+        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", ErrorMessage = "The Postcode field is required")]
         public string Postcode { get; set; }
 
         [Required]

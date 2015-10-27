@@ -11,7 +11,7 @@
         public Guid NotificationId { get; set; }
 
         [Display(Name = "Provide details of the special handling requirements")]
-        [RequiredIf("HasSpecialHandlingRequirements", true, "Please provide details of the special handling requirements")]
+        [RequiredIf("HasSpecialHandlingRequirements", true, ErrorMessage = "Please provide details of the special handling requirements")]
         public string SpecialHandlingDetails { get; set; }
 
         public System.Collections.Generic.IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
