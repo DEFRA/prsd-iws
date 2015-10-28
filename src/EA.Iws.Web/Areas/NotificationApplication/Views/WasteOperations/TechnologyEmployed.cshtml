@@ -1,4 +1,8 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.TechnologyEmployedViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.TechnologyEmployedViewModel
+@{
+    ViewBag.Title = TechnologyEmployedResources.Title;
+}
 
 @using (Html.BeginForm())
 {
@@ -8,13 +12,11 @@
 
     <div>
         <header class="hgroup">
-            <h1 class="heading-large">What is the technology employed?</h1>
+            <h1 class="heading-large">@TechnologyEmployedResources.Header</h1>
         </header>
 
         <header class="hgroup">
-            <h2 class="heading-medium">
-                You have chosen the following operation codes:
-            </h2>
+            <h2 class="heading-medium">@TechnologyEmployedResources.ChosenCodes</h2>
         </header>
 
         @foreach (string code in Model.OperationCodes)
@@ -23,26 +25,22 @@
         }
 
         <header class="hgroup">
-            <h2 class="heading-medium">
-                Give a brief description of the technologies and processes used to treat the waste on site.
-            </h2>
+            <h2 class="heading-medium">@TechnologyEmployedResources.TechnologyDescription</h2>
         </header>
-        @Html.Gds().HintParagraph("Please limit your answer to 70 characters or less")
+        @Html.Gds().HintParagraph(TechnologyEmployedResources.TechnologyHint)
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
             @Html.Gds().ValidationMessageFor(m => m.Details)
-            @Html.TextBoxFor(m => m.Details, new { @class="full-width", @MaxLength = 70, @title="Details" })
+            @Html.TextBoxFor(m => m.Details, new { @class = "full-width", @MaxLength = 70, @title = TechnologyEmployedResources.DetailsTitle })
         </div>
 
         <header class="hgroup">
-            <h1 class="heading-medium">
-                If you wish to provide further details, enter them below. (optional)
-            </h1>
+            <h1 class="heading-medium">@TechnologyEmployedResources.FurtherDetails</h1>
         </header>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherDetails)">
             @Html.Gds().ValidationMessageFor(m => m.FurtherDetails)
-            @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px", @title="Further details" })
+            @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px", @title = TechnologyEmployedResources.FurtherDetailsTitle })
         </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.AnnexProvided)">
@@ -56,8 +54,8 @@
             <input type="submit" class="button" value="@Constants.ContinueButtonText" />
         </div>
     </div>
-
 }
+
 @section scripts
 {
     <script>

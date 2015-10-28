@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Views.WasteOperations;
 
     public class TechnologyEmployedViewModel : IValidatableObject
     {
@@ -10,24 +12,24 @@
 
         public IEnumerable OperationCodes { get; set; }
 
-        [Display(Name = "I will provide these details in an annex when I submit my notification")]
+        [Display(Name = "AnnexProvided", ResourceType = typeof(TechnologyEmployedResources))]
         public bool AnnexProvided { get; set; }
 
-        [Display(Name = "Display name for details")]
-        [StringLength(70, ErrorMessage = "This description cannot be longer than 70 characters")]
+        [Display(Name = "FurtherDetails", ResourceType = typeof(TechnologyEmployedResources))]
+        [StringLength(70, ErrorMessageResourceName = "DetailsMaxLengthErrorMessage", ErrorMessageResourceType = typeof(TechnologyEmployedResources))]
         public string Details { get; set; }
 
         public string FurtherDetails { get; set; }
 
-        public System.Collections.Generic.IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(Details))
+            if (string.IsNullOrWhiteSpace(Details))
             {
-                yield return new ValidationResult("Please enter a description of the technologies used", new[] { "Details" });
+                yield return new ValidationResult(TechnologyEmployedResources.DetailsRequired, new[] { "Details" });
             }
-            if (AnnexProvided && !(string.IsNullOrEmpty(FurtherDetails)))
+            if (AnnexProvided && !(string.IsNullOrWhiteSpace(FurtherDetails)))
             {
-                yield return new ValidationResult("If you select that you are providing the details in a separate annex do not enter any details here", new[] { "FurtherDetails" });
+                yield return new ValidationResult(TechnologyEmployedResources.FurtherDetailsRequired, new[] { "FurtherDetails" });
             }
         }
     }

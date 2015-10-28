@@ -1,7 +1,11 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.OperationCodesViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.OperationCodesViewModel
+@{
+    ViewBag.Title = RecoveryCodesResources.Title;
+}
 
 <header class="hgroup">
-    <h1 class="heading-large">Which recovery operation codes apply to this notification?</h1>
+    <h1 class="heading-large">@RecoveryCodesResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())

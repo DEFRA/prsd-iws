@@ -900,6 +900,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteOfExportResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ReasonForExport\ReasonForExportResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReasonForExportResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisposalCodesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WasteOperations\RecoveryCodesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecoveryCodesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WasteOperations\TechnologyEmployedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechnologyEmployedResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationAssessment\Controllers\MovementCertificateController.cs" />
     <Compile Include="Areas\Movement\Controllers\NumberOfPackagesController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityController.cs" />
@@ -1263,6 +1283,22 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Producer\SiteOfExportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteOfExportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ReasonForExport\ReasonForExportResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReasonForExportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisposalCodesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\RecoveryCodesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryCodesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\TechnologyEmployedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TechnologyEmployedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\BusinessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
