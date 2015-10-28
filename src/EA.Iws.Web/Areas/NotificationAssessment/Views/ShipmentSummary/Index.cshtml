@@ -1,0 +1,165 @@
+﻿@using EA.Iws.Core.Movement
+@using EA.Iws.Core.Shared
+
+@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.ShipmentSummary.MovementSummaryViewModel
+
+@{
+    ViewBag.Title = "Shipment summary";
+    Layout = "~/Areas/NotificationAssessment/Views/Shared/_LayoutSummary.cshtml";
+
+    var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
+    var nullMarker = "- -";
+}
+
+<div class="shipping-home">
+
+    <h1 class="heading-large">
+        Shipment summary
+    </h1>
+
+    <div class="grid-row">
+        <div class="column-half">
+            <table class="odd-table">
+                <caption class="visuallyhidden">Shipment summary</caption>
+                <tbody>
+                <tr>
+                    <td>Total intended number of shipments:</td>
+                    <td>@Model.IntendedShipments</td>
+                </tr>
+                <tr>
+                    <td>Number of shipments used:</td>
+                    <td>@Model.UsedShipments</td>
+                </tr>
+                <tr>
+                    <td>Total quantity received:</td>
+                    <td>@Model.QuantityReceivedTotal</td>
+                </tr>
+                <tr>
+                    <td>Active loads permitted:</td>
+                    <td>@Model.ActiveLoadsPermitted</td>
+                </tr>
+                <tr>
+                    <td>Current active loads:</td>
+                    <td>@Model.ActiveLoadsCurrent</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="column-half nav-bloc">
+            <h2 class="heading-small">Shipping options</h2>
+            <nav>
+                @Html.ActionLink("Record shipment data", "Index", "ShipmentSummary")
+            </nav>
+        </div>
+    </div>
+
+    <section class="ship-data">
+        <h3 class="heading-small">
+            Shipment details
+        </h3>
+        <p>
+            Configure your results
+        </p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="grid-row form-group">
+                <div class="column-half">
+                    @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                    <button id="updateStatus" class="button" type="submit">Update</button>
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <table class="odd-table">
+                <caption class="visuallyhidden">Shipment summary</caption>
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Status</th>
+                    <th>Pre-notified</th>
+                    <th>Shipment due</th>
+                    <th>Received</th>
+                    <th>Quantity</th>
+                    <th>@operationTitle</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @{
+                    for (int i = 0; i < Model.TableData.Count; i++)
+                    {
+                        var statusText = Model.TableData[i].Status == MovementStatus.Completed.ToString() ? operationTitle : Model.TableData[i].Status;
+                        <tr>
+                            <td>@Model.TableData[i].Number</td>
+                            <td>@statusText</td>
+                            <td>
+                                @if (Model.TableData[i].PreNotification.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].PreNotification.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
+                            <td>
+                                @if (Model.TableData[i].ShipmentDate.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
+                            <td>
+                                @if (Model.TableData[i].Received.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
+                            <td>@Model.TableData[i].Quantity</td>
+                            <td>
+                                @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue)
+                                {
+                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
+                                }
+                                else
+                                {
+                                    @nullMarker
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div class="form-group">
+        @Html.ActionLink("Go to notification overview",
+            "Index",
+            "Home",
+            new { area = "NotificationAssessment", id = Model.NotificationId },
+            new { @class = "button" })
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function() {
+            $("#updateStatus").hide();
+            $("#@Html.NameFor(m => m.SelectedMovementStatus)").change(function() {
+                $("#updateStatus").parents("form").submit();
+            });
+        });
+    </script>
+}

@@ -672,7 +672,9 @@
     <Content Include="Areas\NotificationAssessment\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\MovementCertificate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TestEmail\Index.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\ShipmentSummary\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TestEmail\Success.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\Shared\_LayoutSummary.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -911,7 +913,10 @@
     <Compile Include="Areas\Movement\ViewModels\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\KeyDates\KeyDatesViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\Controllers\ShipmentSummaryController.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\MovementSearchViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\ShipmentSummary\MovementSummaryTableViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\ShipmentSummary\MovementSummaryViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
