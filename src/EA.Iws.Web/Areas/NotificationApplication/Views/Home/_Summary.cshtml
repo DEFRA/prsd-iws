@@ -34,15 +34,21 @@
             }
 
             <div class="noti-links">
-                @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)
-                <br />
                 @if (Model.CompetentAuthority == CompetentAuthority.Scotland)
                 {
                     @Html.ActionLink("Bank Guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
                     <br />
                     @Html.ActionLink("Parent Company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
                 }
-                @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId }, null)
+                else
+                {
+                    @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)
+                }
+                <br />
+                @if (Model.IsNotificationComplete)
+                {
+                    @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId }, null)
+                }
             </div>
         </div>
     </div>
