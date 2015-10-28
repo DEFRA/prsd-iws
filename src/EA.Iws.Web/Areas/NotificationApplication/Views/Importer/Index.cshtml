@@ -1,8 +1,9 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Importer.ImporterViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Importer
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Importer.ImporterViewModel
 @{
-    ViewBag.Title = "Who is the importer-consignee?";
+    ViewBag.Title = ImporterResources.Title;
 
-    var message = "This information can be obtained from your importer – consignee. Enter \"Not applicable\" where no relevant registration number applies.";
+    var message = ImporterResources.Message;
 
     ViewBag.SoleTraderRegistrationNumber = message;
     ViewBag.PartnershipRegistrationNumber = message;
@@ -19,20 +20,20 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h1 class="heading-large">Who is the importer - consignee?</h1>
+        <h1 class="heading-large">@ImporterResources.Header</h1>
     </header>
 
     @Html.EditorFor(m => m.Business)
 
-    <h1 class="heading-medium">Their address</h1>
+    <h1 class="heading-medium">@ImporterResources.Address</h1>
     <hr />
-    <p>This should be the correspondence address for the importer - consignee.</p>
+    <p>@ImporterResources.AddressDescription</p>
     @Html.EditorFor(m => m.Address)
 
-    <h1 class="heading-medium">Their contact person</h1>
+    <h1 class="heading-medium">@ImporterResources.Contact</h1>
     <hr />
-    <p>This should be the contact person for the importer - consignee.</p>
+    <p>@ImporterResources.ContactDescription</p>
     @Html.EditorFor(m => m.Contact)
 
-    <button class="button" type="submit">@EA.Iws.Web.Infrastructure.Constants.ContinueButtonText</button>
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }

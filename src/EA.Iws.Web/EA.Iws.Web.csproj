@@ -827,7 +827,7 @@
     <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModelResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-	  <DependentUpon>TestEmailViewModelResources.resx</DependentUpon>
+      <DependentUpon>TestEmailViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\TestEmail\Index.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -872,6 +872,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteOfTreatmentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Importer\ImporterResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImporterResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Producer\AddEditProducerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1233,6 +1238,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteOfTreatmentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Importer\ImporterResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImporterResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Producer\AddEditProducerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
