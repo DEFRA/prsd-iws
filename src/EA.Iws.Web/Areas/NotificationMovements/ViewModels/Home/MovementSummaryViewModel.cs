@@ -40,7 +40,7 @@
                     .Cast<MovementStatus>()
                     .Select(s => new SelectListItem
                     {
-                        Text = EnumHelper.GetDisplayName(s),
+                        Text = GetMovementStatusText(s),
                         Value = ((int)s).ToString()
                     }).ToList();
 
@@ -65,6 +65,16 @@
             TableData = new List<MovementSummaryTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)
                     .Select(p => new MovementSummaryTableViewModel(p)));
+        }
+
+        private string GetMovementStatusText(MovementStatus status)
+        {
+            if (status == MovementStatus.Completed)
+            {
+                return NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
+            }
+
+            return EnumHelper.GetDisplayName(status);
         }
     }
 }
