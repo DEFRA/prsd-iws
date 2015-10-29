@@ -1,0 +1,62 @@
+﻿@using Resource = EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint.Index
+@model EA.Iws.Core.TransportRoute.EntryOrExitPointDataGroup[]
+
+@{
+    ViewBag.Title = "Port or border crossings";
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+<p>@Resource.LeadParagraph</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button class="button" type="submit">Add new</button>
+}
+
+<h2 class="heading-medium">@Resource.TableTitle</h2>
+
+<p>@Resource.TableParagraph</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Country</th>
+        <th>Port or border crossing</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (int i = 0; i < Model.Length; i++)
+    {
+        <tr class="country-row">
+            <td colspan="2" ><i class="fa fa-plus-square"></i>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(m => m[i].Country.Name)</td>
+        </tr>
+        for (int j = 0; j < Model[i].EntryOrExitPoints.Count; j++)
+        {
+            <tr class="js-hidden">
+                <td></td>
+                <td>@Html.DisplayFor(m => m[i].EntryOrExitPoints[j].Name)</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(function() {
+            $(".country-row").click(function () {
+                var currentRow = $(this);
+                var followingRows = $(this).nextUntil(".country-row");
+                if (followingRows.is(".js-hidden")) {
+                    $(currentRow).find("i").replaceWith("<i class='fa fa-minus-square-o'></i>");
+                    followingRows.removeClass("js-hidden");
+                } else {
+                    $(currentRow).find("i").replaceWith("<i class='fa fa-plus-square'></i>");
+                    followingRows.addClass("js-hidden");
+                }
+            });
+        })
+    </script>
+}

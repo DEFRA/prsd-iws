@@ -9,5 +9,7 @@ namespace EA.Iws.Core.TransportRoute
         public string Name { get; set; }
 
         public Guid CountryId { get; set; }
+
+        public byte[] RowVersion { get; set; }
     }
 }

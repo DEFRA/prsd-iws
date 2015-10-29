@@ -1,0 +1,49 @@
+﻿@using Resource = EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint.Add
+@model EA.Iws.Web.Areas.Admin.ViewModels.EntryOrExitPoint.AddEntryOrExitPointViewModel
+
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+<p>@Resource.LeadParagraph</p>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    for (int i = 0; i < Model.Countries.Count; i++)
+    {
+        @Html.HiddenFor(m => m.Countries[i].Name)
+        @Html.HiddenFor(m => m.Countries[i].Id)
+    }
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+        @Html.Gds().LabelFor(m => m.CountryId)
+        @Html.Gds().ValidationMessageFor(m => m.CountryId)
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountryList, "")
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+        @Html.Gds().LabelFor(m => m.Name)
+        @Html.Gds().ValidationMessageFor(m => m.Name)
+        @Html.Gds().TextBoxFor(m => m.Name)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.IsWarningAccepted)">
+        <p class="heading-small">@Resource.Warning</p>
+        @Html.Gds().ValidationMessageFor(m => m.IsWarningAccepted)
+        <label class="block-label" for="warning">
+            @Html.CheckBoxFor(m => m.IsWarningAccepted, new { id = "warning" })
+            @Resource.WarningLabel
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">Save</button>
+    </div>
+
+    @Html.ActionLink("Cancel", "Index")
+}

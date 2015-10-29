@@ -146,6 +146,7 @@
     <Compile Include="StateOfImport\StateOfImportData.cs" />
     <Compile Include="TransitState\TransitStateData.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
+    <Compile Include="TransportRoute\EntryOrExitPointDataGroup.cs" />
     <Compile Include="TransportRoute\TransportRouteData.cs" />
     <Compile Include="WasteType\ChemicalCompositionCategory.cs" />
     <Compile Include="WasteType\ChemicalCompositionData.cs" />
