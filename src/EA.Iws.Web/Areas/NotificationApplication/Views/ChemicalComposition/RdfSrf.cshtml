@@ -49,13 +49,14 @@
                                 @{
                                     var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue
                                         || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
+                                    var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType);
                                 }
                                 <div class="column-half">
-                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min" + placeholderText, title = "Min concentration" })
+                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min" + placeholderText, title = sectionTitle + " minimum concentration"})
                                     @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
                                 </div>
                                 <div class="column-half">
-                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max" + placeholderText, title = "Max concentration" })
+                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max" + placeholderText, title = sectionTitle + " maximum concentration" })
                                     @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
                                 </div>
                             </div>

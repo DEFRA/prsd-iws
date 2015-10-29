@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionContinuedViewModel
+﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionContinuedViewModel
 @{
     ViewBag.Title = "Chemical composition of waste continued";
 }
@@ -28,17 +29,22 @@
                     @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                     <div class="grid-row">
                         <div class="column-two-thirds">
-                            @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
+                            @EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
                         </div>
                     </div>
                     <div class="grid-row">
+                        <div class="column-two-thirds">
+                            @{
+                                var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory);
+                            }
+                        </div>
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %", title = "Min concentration" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %", title = sectionTitle + " minimum concentration" })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].ChemicalCompositionCategory, new { type = "hidden" })
                         </div>
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %", title = "Max concentration" })
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory) })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %", title = sectionTitle + " maximum concentration" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = @EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory) })
                         </div>
                     </div>
                 </div>
