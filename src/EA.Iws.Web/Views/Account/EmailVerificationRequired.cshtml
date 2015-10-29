@@ -2,6 +2,8 @@
     ViewBag.Title = "Activate your email";
 }
 
+<h1 class="heading-large">Activate your account</h1>
+
 @if (ViewBag.Errors != null && ((string[])ViewBag.Errors).Length > 0)
 {
     <div class="validation-summary" style="margin-top: 25px">
@@ -14,8 +16,6 @@
         </ul>
     </div>
 }
-
-<h2 class="heading-large">Activate your account</h2>
 
 <p>We've sent your activation email to @(ViewBag.Email). Please use the link in the email to activate your user account. You may need to check your junk or spam folder if you can't see the email in your inbox.</p>
 <p>Once you have followed the activation link, you will be directed to your account login page.</p>
