@@ -1,8 +1,9 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.TransitState.TransitStateViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransitState
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.TransitState.TransitStateViewModel
 @{
-    ViewBag.Title = "Transit State";
+    ViewBag.Title = TransitStateResources.Title;
 }
-<h1 class="heading-large">Where is the waste travelling through?</h1>
+<h1 class="heading-large">@TransitStateResources.Header</h1>
 
 @using (Html.BeginForm())
 {

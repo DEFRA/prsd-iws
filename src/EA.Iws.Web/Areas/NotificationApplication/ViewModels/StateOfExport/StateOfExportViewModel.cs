@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Views.StateOfExport;
 
     public class StateOfExportViewModel 
     {
         public Guid? CountryId { get; set; }
 
-        [Display(Name = "Exit point")]
-        [Required(ErrorMessage = "The exit point is required")]
+        [Display(Name = "ExitPoint", ResourceType = typeof(StateOfExportResources))]
+        [Required(ErrorMessageResourceName = "ExitPointRequired", ErrorMessageResourceType = typeof(StateOfExportResources))]
         public Guid? EntryOrExitPointId { get; set; }
 
         public string CompetentAuthorityName { get; set; }

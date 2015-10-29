@@ -5,22 +5,23 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Prsd.Core.Validation;
+    using Views.StateOfImport;
     using Web.ViewModels.Shared;
 
     public class StateOfImportViewModel : IValidatableObject
     {
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(StateOfImportResources))]
         public Guid? CountryId { get; set; }
 
-        [Display(Name = "Entry point")]
-        [RequiredIf("ShowNextSection", true, ErrorMessage = "The entry point is required")]
+        [Display(Name = "EntryPoint", ResourceType = typeof(StateOfImportResources))]
+        [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "EntryPointRequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         public Guid? EntryOrExitPointId { get; set; }
 
         public bool ShowNextSection { get; set; }
 
-        [Display(Name = "Competent authority")]
-        [RequiredIf("ShowNextSection", true, ErrorMessage = "The competent authority is required")]
+        [Display(Name = "CA", ResourceType = typeof(StateOfImportResources))]
+        [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "CARequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
         
         public Guid? StateOfExportCountryId { get; set; }
@@ -40,12 +41,12 @@
         {
             if (CountryId.HasValue && CountryId == StateOfExportCountryId)
             {
-                yield return new ValidationResult("State of import country may not be the same as the state of export", new[] { "CountryId" });
+                yield return new ValidationResult(StateOfImportResources.ImportExportCountryShouldNotSame, new[] { "CountryId" });
             }
 
             if (CountryId.HasValue && TransitStateCountryIds.Contains(CountryId.Value))
             {
-                yield return new ValidationResult("State of import country may not be the same as a transit state", new[] { "CountryId" });
+                yield return new ValidationResult(StateOfImportResources.ImportTransitCountryShouldNotSame, new[] { "CountryId" });
             }
         }
     }

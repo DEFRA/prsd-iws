@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Prsd.Core.Validation;
+    using Views.TransitState;
     using Web.ViewModels.Shared;
 
     public class TransitStateViewModel : IValidatableObject
@@ -12,7 +13,7 @@
         public int? OrdinalPosition { get; set; }
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(TransitStateResources))]
         public Guid? CountryId { get; set; }
 
         public bool ShowNextSection { get; set; }
@@ -21,16 +22,16 @@
 
         public SelectList EntryOrExitPoints { get; set; }
 
-        [Display(Name = "Entry point")]
-        [RequiredIf("ShowNextSection", true, ErrorMessage = "The entry point is required")]
+        [Display(Name = "EntryPoint", ResourceType = typeof(TransitStateResources))]
+        [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "EntryPointRequired", ErrorMessageResourceType = typeof(TransitStateResources))]
         public Guid? EntryPointId { get; set; }
 
-        [Display(Name = "Exit point")]
-        [RequiredIf("ShowNextSection", true, ErrorMessage = "The exit point is required")]
+        [Display(Name = "ExitPoint", ResourceType = typeof(TransitStateResources))]
+        [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "ExitPointRequired", ErrorMessageResourceType = typeof(TransitStateResources))]
         public Guid? ExitPointId { get; set; }
 
-        [Display(Name = "Competent authority")]
-        [RequiredIf("ShowNextSection", true, ErrorMessage = "The competent authority is required")]
+        [Display(Name = "CA", ResourceType = typeof(TransitStateResources))]
+        [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "CARequired", ErrorMessageResourceType = typeof(TransitStateResources))]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
 
         public Guid? StateOfImportCountryId { get; set; }
@@ -48,17 +49,17 @@
         {
             if (CountryId == StateOfExportCountryId)
             {
-                yield return new ValidationResult("Transit country may not be the same as export country", new[] { "CountryId" });
+                yield return new ValidationResult(TransitStateResources.TransitNotSameAsExport, new[] { "CountryId" });
             }
 
             if (CountryId == StateOfImportCountryId)
             {
-                yield return new ValidationResult("Transit country may not be the same as import country", new[] { "CountryId" });
+                yield return new ValidationResult(TransitStateResources.TransitNotSameAsImport, new[] { "CountryId" });
             }
 
             if (TransitStateCountryIds != null && TransitStateCountryIds.Contains(CountryId.GetValueOrDefault()))
             {
-                yield return new ValidationResult("Transit country may not be the same as another transit country", new[] { "CountryId" });
+                yield return new ValidationResult(TransitStateResources.TransitNotSameAsAnotherTransit, new[] { "CountryId" });
             }
         }
     }

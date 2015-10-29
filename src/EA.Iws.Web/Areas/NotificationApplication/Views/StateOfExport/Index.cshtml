@@ -1,43 +1,42 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfExport.StateOfExportViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.StateOfExport
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfExport.StateOfExportViewModel
 @{
-    ViewBag.Title = "State Of Export";
+    ViewBag.Title = StateOfExportResources.Title;
 }
-<h1 class="heading-large">Where is the waste being exported from?</h1>
+<h1 class="heading-large">@StateOfExportResources.Header</h1>
 
 @using (Html.BeginForm())
 {
-
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-
     <div class="form-group">
-        <h2 class="heading-small">Competent Authority</h2>
+        <h2 class="heading-small">@StateOfExportResources.CAName</h2>
         @Model.CompetentAuthorityName
     </div>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
         @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
-        @Html.Gds().HintParagraph("Enter the specific port or border crossing from which your waste will be leaving the UK")
+        @Html.Gds().HintParagraph(StateOfExportResources.Hint)
         @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
-        @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title="Exit point"})
+        @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title = StateOfExportResources.ExitPoint })
     </div>
 
     <div class="form-group">
         <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
     </div>
 
-        @section scripts{
-            <script>
-                (function($) {
-                    $(function() {
-                        $('#EntryOrExitPointId').selectToAutocomplete();
-                    });
-                })(jQuery);
-            </script>
+    @section scripts{
+        <script>
+            (function ($) {
+                $(function () {
+                    $('#EntryOrExitPointId').selectToAutocomplete();
+                });
+            })(jQuery);
+        </script>
 
-        }
-    
+    }
+
     @Html.HiddenFor(m => m.CompetentAuthorityName)
     @Html.HiddenFor(m => m.CountryId)
 

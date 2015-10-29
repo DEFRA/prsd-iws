@@ -1,12 +1,12 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.StateOfImport
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
 @{
-    ViewBag.Title = "State Of Import";
+    ViewBag.Title = StateOfImportResources.Title;
 }
-<h1 class="heading-large">Where is the waste being imported into?</h1>
+<h1 class="heading-large">@StateOfImportResources.Header</h1>
 
 @using (Html.BeginForm())
 {
-
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 

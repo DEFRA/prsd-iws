@@ -1,25 +1,26 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.StateOfImport
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
-    @Html.Gds().HintParagraph("This is the country or state where the waste ends its journey")
+    @Html.Gds().HintParagraph(StateOfImportResources.EndJourneyHint)
     @Html.HiddenFor(m => m.CountryId)
-    @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { id = "country-list", disabled = "disabled", title = "Country list" })
-    <button class="link-submit force-newline" type="submit" value="changeCountry" name="submit">Change country</button>
+    @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { id = "country-list", disabled = "disabled", title = StateOfImportResources.CountryList })
+    <button class="link-submit force-newline" type="submit" value="changeCountry" name="submit">@StateOfImportResources.ChangeCountry</button>
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
     @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
-    @Html.Gds().HintParagraph("Select the competent authority for the region of import")
+    @Html.Gds().HintParagraph(StateOfImportResources.CAHint)
     @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
     @Html.EditorFor(m => m.CompetentAuthorities, new { id = "CompetentAuthorities" })
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
     @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
-    @Html.Gds().HintParagraph("Enter the specific port or border crossing the waste will enter the country from")
+    @Html.Gds().HintParagraph(StateOfImportResources.PortHint)
     @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
-    @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.EntryPoints, string.Empty, new { title = "Exit point" })
+    @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.EntryPoints, string.Empty, new { title = StateOfImportResources.EntryPoint })
 </div>
 
 <div class="form-group">
