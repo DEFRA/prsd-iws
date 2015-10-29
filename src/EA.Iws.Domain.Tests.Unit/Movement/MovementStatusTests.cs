@@ -8,6 +8,7 @@
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -16,7 +17,6 @@
         private readonly Movement movement;
         private static readonly Guid AnyGuid = new Guid("B68806E3-524E-476E-A505-40B717B3191E");
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
-        private const string AnyString = "test";
 
         public MovementStatusTests()
         {
@@ -120,31 +120,11 @@
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, AnyDate, movement);
 
             movement.SetQuantity(new ShipmentQuantity(5m, ShipmentQuantityUnits.Tonnes));
+            movement.SetNumberOfPackages(50);
 
             typeof(Movement).GetProperty("PackagingInfosCollection", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(movement, new List<PackagingInfo>());
             movement.SetPackagingInfos(new[] { PackagingInfo.CreatePackagingInfo(PackagingType.Box) });
-            movement.SetNumberOfPackages(50);
-
-            var business = Business.CreateBusiness(
-                AnyString,
-                Domain.BusinessType.LimitedCompany,
-                AnyString,
-                AnyString);
-
-            var address = new Address(
-                AnyString,
-                AnyString,
-                AnyString,
-                AnyString,
-                AnyString,
-                AnyString);
-
-            var contact = new Contact(
-                AnyString,
-                AnyString,
-                AnyString,
-                AnyString);
 
             typeof(Movement).GetProperty("MovementCarriersCollection", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(movement, new List<MovementCarrier>());
@@ -153,9 +133,9 @@
                 new MovementCarrier(
                     1,
                     new Carrier(
-                        business,
-                        address,
-                        contact))
+                        TestableBusiness.WasteSolutions,
+                        TestableAddress.SouthernHouse,
+                        TestableContact.MikeMerry))
             });
 
             return movement;
