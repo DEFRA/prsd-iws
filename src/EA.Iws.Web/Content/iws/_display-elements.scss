@@ -149,3 +149,7 @@ h2 + hr {
     margin-top: -10px;
     margin-bottom: 25px;
 }
+
+summary > h2 {
+    display: inline-block;
+}
