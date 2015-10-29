@@ -59,12 +59,6 @@
 
         private IEnumerable<ValidationResult> ValidateConsent()
         {
-            if (string.IsNullOrWhiteSpace(ConsentConditions))
-            {
-                yield return new ValidationResult("The conditions of consent are required", 
-                    new[] { "ConsentConditions" });
-            }
-
             if (!ConsentValidFromDate.IsCompleted)
             {
                 yield return new ValidationResult("The consent valid from date is required", 
