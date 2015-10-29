@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Core.Movement;
     using Core.Shared;
     using NotificationApplication;
@@ -9,7 +10,6 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
-    using MovementReceiptDecision = Core.MovementReceipt.Decision;
 
     public class Movement : Entity
     {
@@ -56,7 +56,7 @@
             get { return StatusChangeCollection.ToSafeIEnumerable(); }
         }
 
-        public bool HasShipped
+        public bool IsActive
         {
             get
             {
@@ -66,6 +66,26 @@
             }
         }
         
+        public bool CanSubmit
+        {
+            get
+            {
+                return Date.HasValue
+                    && Quantity.HasValue
+                    && PackagingInfos.Any()
+                    && NumberOfPackages.HasValue
+                    && MovementCarriers.Any();
+            }
+        }
+
+        public bool HasShipped
+        {
+            get
+            {
+                return Status == MovementStatus.Received && Date < SystemTime.UtcNow;
+            }
+        }
+
         public virtual MovementReceipt Receipt { get; private set; }
 
         public virtual MovementCompletedReceipt CompletedReceipt { get; private set; }
@@ -177,7 +197,10 @@
         {
             Guard.ArgumentNotDefaultValue(() => fileId, fileId);
 
-            //TODO: Check the movement is in a valid state to submit
+            if (!this.CanSubmit)
+            {
+                throw new InvalidOperationException("Cannot submit an incomplete movement.");
+            }
 
             stateMachine.Fire(submittedTrigger, fileId);
         }

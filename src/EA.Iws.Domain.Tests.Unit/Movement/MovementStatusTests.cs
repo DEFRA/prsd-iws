@@ -1,23 +1,26 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using Core.Movement;
+    using Core.Shared;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
 
     public class MovementStatusTests
     {
         private readonly Movement movement;
-        private readonly Guid notificationId;
         private static readonly Guid AnyGuid = new Guid("B68806E3-524E-476E-A505-40B717B3191E");
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
+        private const string AnyString = "test";
 
         public MovementStatusTests()
         {
-            notificationId = new Guid("EAD34BEE-E962-4D4D-9D53-ADCD7240C333");
-            movement = new Movement(1, notificationId);
+            movement = CreateCompleteMovement();
         }
 
         private void SetMovementStatus(MovementStatus status, Movement movement)
@@ -37,6 +40,14 @@
             movement.Submit(AnyGuid);
 
             Assert.Equal(MovementStatus.Submitted, movement.Status);
+        }
+
+        [Fact]
+        public void CantSubmitIncompelteMovement()
+        {
+            var newMovement = new Movement(2, AnyGuid);
+
+            Assert.Throws<InvalidOperationException>(() => newMovement.Submit(AnyGuid));
         }
 
         [Fact]
@@ -99,6 +110,55 @@
             SetMovementStatus(status, movement);
 
             Assert.Throws<InvalidOperationException>(() => movement.Complete(AnyDate, AnyGuid));
+        }
+
+        private Movement CreateCompleteMovement()
+        {
+            var notificationId = new Guid("EAD34BEE-E962-4D4D-9D53-ADCD7240C333");
+            var movement = new Movement(1, notificationId);
+
+            ObjectInstantiator<Movement>.SetProperty(x => x.Date, AnyDate, movement);
+
+            movement.SetQuantity(new ShipmentQuantity(5m, ShipmentQuantityUnits.Tonnes));
+
+            typeof(Movement).GetProperty("PackagingInfosCollection", BindingFlags.NonPublic | BindingFlags.Instance)
+                .SetValue(movement, new List<PackagingInfo>());
+            movement.SetPackagingInfos(new[] { PackagingInfo.CreatePackagingInfo(PackagingType.Box) });
+            movement.SetNumberOfPackages(50);
+
+            var business = Business.CreateBusiness(
+                AnyString,
+                Domain.BusinessType.LimitedCompany,
+                AnyString,
+                AnyString);
+
+            var address = new Address(
+                AnyString,
+                AnyString,
+                AnyString,
+                AnyString,
+                AnyString,
+                AnyString);
+
+            var contact = new Contact(
+                AnyString,
+                AnyString,
+                AnyString,
+                AnyString);
+
+            typeof(Movement).GetProperty("MovementCarriersCollection", BindingFlags.NonPublic | BindingFlags.Instance)
+                .SetValue(movement, new List<MovementCarrier>());
+            movement.SetMovementCarriers(new[]
+            {
+                new MovementCarrier(
+                    1,
+                    new Carrier(
+                        business,
+                        address,
+                        contact))
+            });
+
+            return movement;
         }
     }
 }

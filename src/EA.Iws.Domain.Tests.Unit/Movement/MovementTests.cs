@@ -36,13 +36,13 @@
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, BeforeFrozenTime, movement);
 
-            Assert.True(movement.HasShipped);
+            Assert.True(movement.IsActive);
         }
 
         [Fact]
         public void IsActive_ReturnsFalse_IfNoDate()
         {
-            Assert.False(movement.HasShipped);
+            Assert.False(movement.IsActive);
         }
         
         [Fact]
@@ -50,7 +50,7 @@
         {
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, AfterFrozenTime, movement);
 
-            Assert.False(movement.HasShipped);
+            Assert.False(movement.IsActive);
         }
 
         public void Dispose()
