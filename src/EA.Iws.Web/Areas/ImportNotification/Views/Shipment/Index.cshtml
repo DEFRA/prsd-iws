@@ -1,0 +1,41 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.ShipmentViewModel
+@{
+    ViewBag.Title = "Amounts and dates";
+}
+
+<header><h1 class="heading-large">Amounts and dates</h1></header>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.TotalShipments)">
+    <div class="grid-row">
+        <div class="column-half">
+            @Html.Gds().LabelFor(m => m.TotalShipments, showOptionalLabel: false)
+            @Html.Gds().TextBoxFor(m => m.TotalShipments)
+        </div>
+    </div>
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m=>m.TotalQuantity)">
+    <div class="grid-row">
+        <div class="column-half">
+            @Html.Gds().LabelFor(m => m.TotalQuantity, showOptionalLabel: false)
+            @Html.Gds().TextBoxFor(m => m.TotalQuantity)
+        </div>
+        <div class="column-half">
+            @Html.Gds().LabelFor(m => m.Units, showOptionalLabel: false)
+            @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList)
+        </div>
+    </div>
+</div>
+
+<h2 class="heading-small">Intended dates of departure</h2>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.StartDate)">
+    <div class="grid-row">
+        <div class="column-half">
+            @Html.EditorFor(m => m.StartDate)
+        </div>
+        <div class="column-half">
+            @Html.EditorFor(m => m.EndDate)
+        </div>
+    </div>
+</div>
