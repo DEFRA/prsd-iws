@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.SpecialHandling
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Prsd.Core.Validation;
+    using Views.SpecialHandling;
 
     public class SpecialHandlingViewModel : IValidatableObject
     {
@@ -10,15 +12,15 @@
 
         public Guid NotificationId { get; set; }
 
-        [Display(Name = "Provide details of the special handling requirements")]
-        [RequiredIf("HasSpecialHandlingRequirements", true, ErrorMessage = "Please provide details of the special handling requirements")]
+        [Display(Name = "SpecialHandlingDetails", ResourceType = typeof(SpecialHandlingResources))]
+        [RequiredIf("HasSpecialHandlingRequirements", true, ErrorMessageResourceName = "SpecialHandlingDetailsRequired", ErrorMessageResourceType = typeof(SpecialHandlingResources))]
         public string SpecialHandlingDetails { get; set; }
 
-        public System.Collections.Generic.IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!HasSpecialHandlingRequirements.HasValue)
             {
-                yield return new ValidationResult("Please answer this question.", new[] { "HasSpecialHandlingRequirements" });
+                yield return new ValidationResult(SpecialHandlingResources.HasSpecialHandlingRequirements, new[] { "HasSpecialHandlingRequirements" });
             }
         }
     }

@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Core.MeansOfTransport;
     using Prsd.Core.Domain;
+    using Views.MeansOfTransport;
 
     public class MeansOfTransportViewModel : IValidatableObject
     {
@@ -14,10 +15,9 @@
 
         public IEnumerable<MeansOfTransport> PossibleMeans { get; set; }
 
-        [Required(ErrorMessage = "Please answer this question")]
-        [RegularExpression(@"^([RTSWA]\-)*?[RTSWA]$",
-            ErrorMessage = "Means of transport is not in a valid format. Please enter a value such as R-S-R")]
-        [Display(Name = "Means of transport")]
+        [Required(ErrorMessageResourceName = "SelectedMeansRequired", ErrorMessageResourceType = typeof(MeansOfTransportResources))]
+        [RegularExpression(@"^([RTSWA]\-)*?[RTSWA]$", ErrorMessageResourceName = "SelectedMeansErrorMessage", ErrorMessageResourceType = typeof(MeansOfTransportResources))]
+        [Display(Name = "SelectedMeans", ResourceType = typeof(MeansOfTransportResources))]
         public string SelectedMeans { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -29,10 +29,7 @@
                 {
                     if (means[i] == means[i - 1])
                     {
-                        yield return
-                            new ValidationResult(
-                                "Cannot have a means of transport which is the same as the previous means of transport",
-                                new[] { "SelectedMeans" });
+                        yield return new ValidationResult(MeansOfTransportResources.SelectedMeansValidationMessage, new[] { "SelectedMeans" });
                         break;
                     }
                 }

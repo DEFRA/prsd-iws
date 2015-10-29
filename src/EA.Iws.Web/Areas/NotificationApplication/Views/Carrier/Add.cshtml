@@ -1,6 +1,8 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddCarrierViewModel
+﻿@using EA.Iws.Web.Areas.AddressBook.Views
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Carrier
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddCarrierViewModel
 @{
-    ViewBag.Title = "Intended carrier(s)";
+    ViewBag.Title = AddEditCarrierResources.Title;
 }
 
 @using (Html.BeginForm())
@@ -10,18 +12,17 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h1 class="heading-large">Add intended carrier</h1>
+        <h1 class="heading-large">@AddEditCarrierResources.Header</h1>
     </header>
-
 
     @Html.Partial("CarrierBusinessTypeViewModel", Model)
 
-    <h2 class="heading-medium">Address</h2>
+    <h2 class="heading-medium">@AddEditCarrierResources.Address</h2>
     <hr />
 
     @Html.EditorFor(m => m.Address)
 
-    <h2 class="heading-medium">Contact person</h2>
+    <h2 class="heading-medium">@AddEditCarrierResources.Contact</h2>
     <hr />
 
     @Html.EditorFor(m => m.Contact)
@@ -29,9 +30,9 @@
     <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
-            Add as new address to address book
+            @AddressBookResources.AddToAddressBook
         </label>
     </div>
-    
+
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }

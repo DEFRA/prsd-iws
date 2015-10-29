@@ -1,10 +1,10 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.CarrierListViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Carrier
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.CarrierListViewModel
 @{
     ViewBag.Title = "List Carriers";
 }
-<h1 class="heading-large">Who are your intended carriers?</h1>
-<p>Add details of all the intended carriers for the whole journey. 
-    After you've added your first carrier, you can add several more by selecting "Add another carrier"</p>
+<h1 class="heading-large">@ListCarrierResources.Header</h1>
+<p>@ListCarrierResources.HeaderDescription</p>
 
 @if (Model != null && Model.Carriers.Any())
 {
@@ -12,8 +12,8 @@
         <table title="Carriers">
             <thead>
                 <tr>
-                    <th>Organisation name</th>
-                    <th>Address</th>
+                    <th>@ListCarrierResources.ThOrgName</th>
+                    <th>@ListCarrierResources.ThAddress</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,10 +29,10 @@
                             @Html.DisplayFor(m => m.Carriers[i].Address.TownOrCity)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Carrier", 
+                            @Html.ActionLink(ListCarrierResources.Edit, "Edit", "Carrier",
                                 new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                             <span class="table-divider">|</span>
-                            @Html.ActionLink("Remove", "Remove", "Carrier", 
+                            @Html.ActionLink(ListCarrierResources.Remove, "Remove", "Carrier",
                                 new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
                         </td>
                     </tr>
@@ -45,11 +45,11 @@
 <div class="form-group">
     @if (Model != null && Model.Carriers.Any())
     {
-        @Html.ActionLink("Add another carrier", "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview  }, null)
+        @Html.ActionLink(ListCarrierResources.AddAnother, "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
     }
     else
     {
-        @Html.ActionLink("Add your first carrier", "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview  }, null)
+        @Html.ActionLink(ListCarrierResources.AddFirst, "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
     }
 </div>
 @if (ViewBag.BackToOverview)

@@ -1,10 +1,11 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.RemoveCarrierViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Carrier
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.RemoveCarrierViewModel
 
 @{
-    ViewBag.Title = "Remove Carrier";
+    ViewBag.Title = RemoveCarrierResources.Title;
 }
 
-<h2 class="heading-large">Remove carrier</h2>
+<h2 class="heading-large">@RemoveCarrierResources.Header</h2>
 
 @using (Html.BeginForm())
 {
@@ -13,9 +14,9 @@
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.CarrierId)
     
-    <p>You are about to remove @Model.CarrierName as a carrier from this notification.</p>
+    <p>@string.Format(RemoveCarrierResources.RemoveMessage, Model.CarrierName)</p>
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }
 
-<p>@Html.ActionLink("Back to carriers", "List", "Carrier", new { id = Model.NotificationId }, null)</p>
+<p>@Html.ActionLink(RemoveCarrierResources.BackToCarriers, "List", "Carrier", new { id = Model.NotificationId }, null)</p>

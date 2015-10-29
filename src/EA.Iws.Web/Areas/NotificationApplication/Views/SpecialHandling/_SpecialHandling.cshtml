@@ -1,8 +1,9 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.SpecialHandling.SpecialHandlingViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.SpecialHandling
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.SpecialHandling.SpecialHandlingViewModel
 
 <header class="hgroup">
-    <h1 class="heading-large">Are there any special handling requirements?</h1>
-    <p>Special handling requirements sometimes get prescribed by producers or other parties. These could include handling instructions for employees, health and safety information, or transport emergency cards.</p>
+    <h1 class="heading-large">@SpecialHandlingResources.Header</h1>
+    <p>@SpecialHandlingResources.HeaderDescription</p>
 </header>
 
 @Html.AntiForgeryToken()

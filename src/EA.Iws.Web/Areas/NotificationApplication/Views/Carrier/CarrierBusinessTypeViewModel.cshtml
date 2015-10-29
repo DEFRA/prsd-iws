@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Carrier
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddCarrierViewModel
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
@@ -13,7 +14,7 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
     @{if (ViewBag.Title != "Exporter - notifier")
-    {<span class="form-hint">If none of these options apply, please select other and add details.</span>}}
+    {<span class="form-hint">@CarrierBusinessTypeResources.OthersHint</span>}}
 
     @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
 
@@ -44,9 +45,7 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
     @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
     <span class="form-hint">
-        This may be the waste carrier licence number that allows the intended carrier to transport waste across land.
-        If this carrier has more than one license, for example, for different stages of the journey, enter each licence number separated by a comma.
-        Enter Not applicable where no relevant registration number applies.
+        @CarrierBusinessTypeResources.RegNoHint
     </span>
     @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
     @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
