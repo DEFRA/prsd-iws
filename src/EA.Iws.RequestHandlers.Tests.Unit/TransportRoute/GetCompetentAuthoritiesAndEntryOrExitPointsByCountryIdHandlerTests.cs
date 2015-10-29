@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using DataAccess;
     using Domain;
+    using Domain.TransportRoute;
     using FakeItEasy;
     using RequestHandlers.Mappings;
     using RequestHandlers.TransportRoute;
@@ -13,14 +13,14 @@
 
     public class GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandlerTests
     {
-        private readonly IwsContext context;
         private readonly Guid countryWithDataId = new Guid("A62BD60E-9B81-4B8A-B59C-2B4579FF97E7");
         private readonly Guid countryWithNoDataId = new Guid("F6BB7204-3526-4920-80A6-3D31419C94AA");
         private readonly GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler handler;
 
         public GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandlerTests()
         {
-            this.context = new TestIwsContext();
+            var entryOrExitPointRepository = A.Fake<IEntryOrExitPointRepository>();
+
             var competentAuthorityMapper = new CompetentAuthorityMap();
             var entryOrExitPointMapper = new EntryOrExitPointMap();
 
@@ -33,9 +33,7 @@
                 CompetentAuthorityFactory.Create(new Guid("B076AF57-83EB-4F99-BDE6-859CC2B35FBE"), countryWithData)
             };
 
-            context.CompetentAuthorities.AddRange(competentAuthorities);
-
-            context.EntryOrExitPoints.AddRange(new[]
+            A.CallTo(() => entryOrExitPointRepository.GetForCountry(countryWithDataId)).Returns(new[]
             {
                 EntryOrExitPointFactory.Create(new Guid("B054CA23-18D3-4E4E-A2B1-F92B7503919A"), countryWithData),
                 EntryOrExitPointFactory.Create(new Guid("9F0DC969-8224-4FEC-BD0D-B90B70378323"), countryWithData)
@@ -44,7 +42,7 @@
             var repository = A.Fake<ICompetentAuthorityRepository>();
             A.CallTo(() => repository.GetCompetentAuthorities(countryWithDataId)).Returns(competentAuthorities);
             
-            handler = new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler(context, entryOrExitPointMapper, competentAuthorityMapper, repository);
+            handler = new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler(entryOrExitPointMapper, competentAuthorityMapper, repository, entryOrExitPointRepository);
         }
 
         [Fact]

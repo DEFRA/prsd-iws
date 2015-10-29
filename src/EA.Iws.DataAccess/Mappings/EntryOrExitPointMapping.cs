@@ -8,7 +8,7 @@
     {
         public EntryOrExitPointMapping()
         {
-            this.ToTable("EntryOrExitPoint", "Lookup");
+            this.ToTable("EntryOrExitPoint", "Notification");
 
             this.Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 

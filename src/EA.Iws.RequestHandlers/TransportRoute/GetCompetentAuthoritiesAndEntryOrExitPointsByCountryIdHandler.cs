@@ -1,11 +1,9 @@
 ﻿namespace EA.Iws.RequestHandlers.TransportRoute
 {
-    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
     using Core.TransportRoute;
-    using DataAccess;
     using Domain;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
@@ -17,15 +15,15 @@
     {
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
-        private readonly IwsContext context;
+        private readonly IEntryOrExitPointRepository entryOrExitPointRepository;
         private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper;
 
-        public GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler(IwsContext context,
-            IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
+        public GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandler(IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
             IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper,
-            ICompetentAuthorityRepository competentAuthorityRepository)
+            ICompetentAuthorityRepository competentAuthorityRepository,
+            IEntryOrExitPointRepository entryOrExitPointRepository)
         {
-            this.context = context;
+            this.entryOrExitPointRepository = entryOrExitPointRepository;
             this.entryOrExitPointMapper = entryOrExitPointMapper;
             this.competentAuthorityMapper = competentAuthorityMapper;
             this.competentAuthorityRepository = competentAuthorityRepository;
@@ -37,7 +35,7 @@
             var competentAuthorities = (await competentAuthorityRepository.GetCompetentAuthorities(message.Id));
 
             var entryOrExitPoints =
-                await context.EntryOrExitPoints.Where(ep => ep.Country.Id == message.Id).ToArrayAsync();
+                await entryOrExitPointRepository.GetForCountry(message.Id);
 
             return new CompententAuthorityAndEntryOrExitPointData
             {

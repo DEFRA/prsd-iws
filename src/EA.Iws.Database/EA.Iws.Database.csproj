@@ -149,6 +149,7 @@
     <Content Include="scripts\Update\Sprint19\20151026-150000-remove-kielcanal-from-entryexitpoint.sql" />
     <Content Include="scripts\Update\Sprint19\20151028-150000-update-Brunsbuttel-from-entryexitpoint.sql" />
     <Content Include="scripts\Update\Sprint19\20151022-150700-remove-assessment-status.sql" />
+    <Content Include="scripts\Update\Sprint19\20151029-113600-change-schema-of-entry-exit-points.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

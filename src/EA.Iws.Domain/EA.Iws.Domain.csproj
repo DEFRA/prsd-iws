@@ -171,6 +171,7 @@
     <Compile Include="NotificationApplication\PackagingInfo.cs" />
     <Compile Include="NotificationApplication\ChemicalComposition.cs" />
     <Compile Include="NotificationApplication\PackagingType.cs" />
+    <Compile Include="TransportRoute\IEntryOrExitPointRepository.cs" />
     <Compile Include="TransportRoute\IEntryPoint.cs" />
     <Compile Include="TransportRoute\IExitPoint.cs" />
     <Compile Include="NotificationApplication\OperationInfo.cs" />

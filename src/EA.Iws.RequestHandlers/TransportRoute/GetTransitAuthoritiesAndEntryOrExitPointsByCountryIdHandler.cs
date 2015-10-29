@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.TransportRoute
 {
-    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
@@ -16,18 +15,19 @@
         IRequestHandler<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId, CompententAuthorityAndEntryOrExitPointData>
     {
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
+        private readonly IEntryOrExitPointRepository entryOrExitPointRepository;
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
-        private readonly IwsContext context;
         private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper;
 
         public GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler(IwsContext context,
             IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
             IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper,
+            IEntryOrExitPointRepository entryOrExitPointRepository,
             ICompetentAuthorityRepository competentAuthorityRepository)
         {
-            this.context = context;
             this.entryOrExitPointMapper = entryOrExitPointMapper;
             this.competentAuthorityMapper = competentAuthorityMapper;
+            this.entryOrExitPointRepository = entryOrExitPointRepository;
             this.competentAuthorityRepository = competentAuthorityRepository;
         }
 
@@ -36,8 +36,7 @@
         {
             var competentAuthorities = (await competentAuthorityRepository.GetTransitAuthorities(message.Id));
 
-            var entryOrExitPoints =
-                await context.EntryOrExitPoints.Where(ep => ep.Country.Id == message.Id).ToArrayAsync();
+            var entryOrExitPoints = await entryOrExitPointRepository.GetForCountry(message.Id);
 
             return new CompententAuthorityAndEntryOrExitPointData
             {
