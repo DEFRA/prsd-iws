@@ -119,8 +119,10 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
+    <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
+    <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\Movement\MovementProgressMap.cs" />

@@ -1,0 +1,45 @@
+﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.ImportNotification.Views.WasteOperation
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteOperation.WasteOperationViewModel
+@{
+    ViewBag.Title = IndexResources.Title;
+}
+
+<h1 class="heading-large">@IndexResources.MainHeading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <h2 class="heading-medium">
+        @(Model.NotificationType == NotificationType.Recovery ? IndexResources.RecoveryCodesHeading : IndexResources.DisposalCodesHeading)
+    </h2>
+
+    <div class="form-group">
+        <fieldset>
+
+            @for (int i = 0; i < Model.Codes.PossibleValues.Count; i++)
+            {
+                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.Codes.PossibleValues[i]);
+
+                <div>
+                    <label for="@idForThisCheckBox" class="block-label grid-view">
+                        @Html.CheckBoxFor(m => m.Codes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
+                        @Html.HiddenFor(m => m.Codes.PossibleValues[i].Text)
+                        @Html.HiddenFor(m => m.Codes.PossibleValues[i].Value)
+                        @Html.DisplayFor(m => m.Codes.PossibleValues[i].Text)
+                    </label>
+                </div>
+            }
+        </fieldset>
+    </div>
+
+    <h2 class="heading-medium">@IndexResources.TechnologyEmployedHeading</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TechnologyEmployed)">
+        @Html.Gds().ValidationMessageFor(m => m.TechnologyEmployed)
+        @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { @class = "full-width" })
+        @Html.Gds().CheckBoxFor(m => m.TechnologyEmployedUploadedLater)
+    </div>
+}

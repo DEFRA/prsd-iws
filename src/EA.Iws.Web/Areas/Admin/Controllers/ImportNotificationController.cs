@@ -67,10 +67,10 @@
                 return View(model);
             }
             
-            await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber,
+            var id = await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber,
                 (NotificationType)model.NotificationTypeRadioButtons.SelectedValue));
 
-            return RedirectToAction("Index", "Producer", new { area = "ImportNotification" });
+            return RedirectToAction("Index", "WasteOperation", new { area = "ImportNotification", id });
         }
     }
 }

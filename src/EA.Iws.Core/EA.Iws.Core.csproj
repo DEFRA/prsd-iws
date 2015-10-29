@@ -66,6 +66,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatus.cs" />
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
+    <Compile Include="ImportNotification\NotificationDetails.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />

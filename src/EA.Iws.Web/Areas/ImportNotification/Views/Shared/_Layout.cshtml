@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        @RenderBody()
+    </div>
+
+    <div class="column-third">
+    </div>
+</div>
+
+@section head {
+    @RenderSection("head", required: false)
+}
+
+@section scripts {
+    @RenderSection("scripts", required: false)
+}
