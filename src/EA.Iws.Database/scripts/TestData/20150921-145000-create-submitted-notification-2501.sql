@@ -409,7 +409,7 @@ DECLARE @EntryId UNIQUEIDENTIFIER;
 DECLARE @ExitId UNIQUEIDENTIFIER;
 
 SELECT @EntryId = id
-FROM   [Lookup].[entryorexitpoint]
+FROM   [Notification].[entryorexitpoint]
 WHERE  [name] = 'Dover';
 
 INSERT [Notification].[stateofexport]
@@ -433,7 +433,7 @@ FROM   [Lookup].[competentauthority]
 WHERE  [code] = 'DE 023';
 
 SELECT @ExitId = id
-FROM   [Lookup].[entryorexitpoint]
+FROM   [Notification].[entryorexitpoint]
 WHERE  [name] = 'Aachen';
 
 INSERT [Notification].[stateofimport]
@@ -457,11 +457,11 @@ FROM   [Lookup].[competentauthority]
 WHERE  [code] = 'FR999';
 
 SELECT @EntryId = id
-FROM   [Lookup].[entryorexitpoint]
+FROM   [Notification].[entryorexitpoint]
 WHERE  [name] = 'Calais';
 
 SELECT @ExitId = id
-FROM   [Lookup].[entryorexitpoint]
+FROM   [Notification].[entryorexitpoint]
 WHERE  [name] = 'Lille';
 
 INSERT [Notification].[transitstate]
