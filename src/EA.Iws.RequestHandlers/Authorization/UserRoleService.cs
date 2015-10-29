@@ -1,18 +1,19 @@
 ﻿namespace EA.Iws.RequestHandlers.Authorization
 {
-    using System;
     using System.Linq;
     using System.Security.Claims;
     using DataAccess;
-    using Microsoft.AspNet.Identity;
+    using Prsd.Core.Domain;
 
     public class UserRoleService : IUserRoleService
     {
         private readonly IwsContext context;
+        private readonly IUserContext userContext;
 
-        public UserRoleService(IwsContext context)
+        public UserRoleService(IwsContext context, IUserContext userContext)
         {
             this.context = context;
+            this.userContext = userContext;
         }
 
         public UserRole Get(ClaimsPrincipal claimsPrincipal)
@@ -24,14 +25,12 @@
                 return UserRole.Unauthenticated;
             }
 
-            var userId = claimsPrincipal.Identity.GetUserId();
-
-            return Get(userId);
+            return Get(userContext.UserId.ToString());
         }
 
         public UserRole Get(string userId)
         {
-            var userIsInternal = context.InternalUsers.Any(iu => iu.UserId == userId);
+            var userIsInternal = context.InternalUsers.Any(iu => iu.UserId == userId.ToString());
 
             return (userIsInternal) ? UserRole.Internal : UserRole.External;
         }
