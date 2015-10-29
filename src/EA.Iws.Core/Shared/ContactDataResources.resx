@@ -121,7 +121,7 @@
     <value>Email address</value>
   </data>
   <data name="EmailRequired" xml:space="preserve">
-    <value>The Email field is required.</value>
+    <value>The Email Address field is required</value>
   </data>
   <data name="FaxInvalid" xml:space="preserve">
     <value>The fax number is invalid.</value>

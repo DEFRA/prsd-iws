@@ -70,7 +70,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Email field is required..
+        ///   Looks up a localized string similar to The Email Address field is required.
         /// </summary>
         public static string EmailRequired {
             get {
