@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
-    using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
@@ -8,6 +7,7 @@
     using Requests.Shared;
     using ViewModels.EntryOrExitPoint;
 
+    [Authorize(Roles = "internal")]
     public class EntryOrExitPointController : Controller
     {
         private readonly IMediator mediator;
@@ -47,14 +47,23 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(AddEntryOrExitPointViewModel model)
+        public async Task<ActionResult> Add(AddEntryOrExitPointViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            throw new IOException();
+            if (!await mediator.SendAsync(new CheckEntryOrExitPointUnique(model.CountryId.Value, model.Name)))
+            {
+                ModelState.AddModelError("Name", EntryOrExitPointControllerResources.NameNotUniqueMessage);
+
+                return View(model);
+            }
+
+            await mediator.SendAsync(new AddEntryOrExitPoint(model.CountryId.Value, model.Name));
+
+            return RedirectToAction("Index");
         }
     }
 }

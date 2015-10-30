@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
+namespace EA.Iws.Web.Areas.Admin.Views.Configuration {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.Configuration.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,16 @@ namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this page to add ports or border crossings requested by external users..
+        ///   Looks up a localized string similar to Manage ports and border crossings.
+        /// </summary>
+        public static string EntryOrExitPointLink {
+            get {
+                return ResourceManager.GetString("EntryOrExitPointLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the links on this page to configure the system..
         /// </summary>
         public static string LeadParagraph {
             get {
@@ -70,34 +79,25 @@ namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to system configuration.
+        ///   Looks up a localized string similar to Return home.
         /// </summary>
-        public static string ReturnConfigurationLink {
+        public static string ReturnHomeLink {
             get {
-                return ResourceManager.GetString("ReturnConfigurationLink", resourceCulture);
+                return ResourceManager.GetString("ReturnHomeLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check the table to ensure the port or border crossing you intend to add does not already exist..
+        ///   Looks up a localized string similar to Configuration.
         /// </summary>
-        public static string TableParagraph {
+        public static string TabTitle {
             get {
-                return ResourceManager.GetString("TableParagraph", resourceCulture);
+                return ResourceManager.GetString("TabTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current ports or border crossings.
-        /// </summary>
-        public static string TableTitle {
-            get {
-                return ResourceManager.GetString("TableTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ports and Border Crossings.
+        ///   Looks up a localized string similar to System configuration.
         /// </summary>
         public static string Title {
             get {

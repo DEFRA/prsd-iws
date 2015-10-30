@@ -12,7 +12,10 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <button class="button" type="submit">Add new</button>
+    <div class="form-group">
+        <button class="button" type="submit">Add new</button>
+    </div>
+    @Html.ActionLink(Resource.ReturnConfigurationLink, "Index", "Configuration")
 }
 
 <h2 class="heading-medium">@Resource.TableTitle</h2>

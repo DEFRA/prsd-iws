@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
+namespace EA.Iws.Web.Areas.Admin.Controllers {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class EntryOrExitPointControllerResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal EntryOrExitPointControllerResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Controllers.EntryOrExitPointControllerResources", typeof(EntryOrExitPointControllerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this page to add ports or border crossings requested by external users..
+        ///   Looks up a localized string similar to A port or border crossing with this name already exists.
         /// </summary>
-        public static string LeadParagraph {
+        public static string NameNotUniqueMessage {
             get {
-                return ResourceManager.GetString("LeadParagraph", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Return to system configuration.
-        /// </summary>
-        public static string ReturnConfigurationLink {
-            get {
-                return ResourceManager.GetString("ReturnConfigurationLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Check the table to ensure the port or border crossing you intend to add does not already exist..
-        /// </summary>
-        public static string TableParagraph {
-            get {
-                return ResourceManager.GetString("TableParagraph", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current ports or border crossings.
-        /// </summary>
-        public static string TableTitle {
-            get {
-                return ResourceManager.GetString("TableTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ports and Border Crossings.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("NameNotUniqueMessage", resourceCulture);
             }
         }
     }

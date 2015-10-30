@@ -36,5 +36,20 @@
         {
             return await context.EntryOrExitPoints.ToArrayAsync();
         }
+
+        public async Task Add(EntryOrExitPoint entryOrExitPoint)
+        {
+            if (await context.EntryOrExitPoints.AnyAsync(eep => 
+            eep.Name.Equals(entryOrExitPoint.Name, StringComparison.InvariantCultureIgnoreCase)
+            && eep.Country.Id == entryOrExitPoint.Country.Id))
+            {
+                throw new InvalidOperationException("Cannot enter a duplicate entry or exit point " 
+                    + entryOrExitPoint.Name 
+                    + " in " 
+                    + entryOrExitPoint.Country.Name);
+            }
+
+            context.EntryOrExitPoints.Add(entryOrExitPoint);
+        }
     }
 }

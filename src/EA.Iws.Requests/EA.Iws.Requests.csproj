@@ -50,6 +50,8 @@
     <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByType.cs" />
     <Compile Include="AddressBook\SearchAddressRecords.cs" />
+    <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPoint.cs" />
+    <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUnique.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDates.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDate.cs" />

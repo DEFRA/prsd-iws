@@ -78,6 +78,8 @@
     <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
+    <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
+    <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />

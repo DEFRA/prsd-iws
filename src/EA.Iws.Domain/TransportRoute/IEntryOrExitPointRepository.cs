@@ -13,5 +13,7 @@
         Task<IEnumerable<EntryOrExitPoint>> GetForCountry(Guid countryId);
 
         Task<IEnumerable<EntryOrExitPoint>> GetAll();
+
+        Task Add(EntryOrExitPoint entryOrExitPoint);
     }
 }

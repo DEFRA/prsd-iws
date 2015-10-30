@@ -73,6 +73,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChange.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
     <Compile Include="ICompetentAuthorityRepository.cs" />
+    <Compile Include="ICountryRepository.cs" />
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="IMovementDocumentGenerator.cs" />
     <Compile Include="ImportNotification\IImportNotificationRepository.cs" />
