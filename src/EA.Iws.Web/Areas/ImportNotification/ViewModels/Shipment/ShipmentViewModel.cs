@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shipment
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Shared;
@@ -13,6 +14,8 @@
             StartDate = new OptionalDateInputViewModel();
             EndDate = new OptionalDateInputViewModel();
         }
+
+        public Guid ImportNotificationId { get; set; }
 
         [Display(Name = "NumberOfShipments", ResourceType = typeof(ShipmentViewModelResources))]
         public int? TotalShipments { get; set; }

@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using Autofac;
     using Autofac.Integration.Mvc;
+    using Prsd.Core.Autofac;
     using Prsd.Core.Web.Mvc;
 
     public class AutofacBootstrapper
@@ -23,6 +24,9 @@
 
             // Register all HTTP abstractions
             builder.RegisterModule<AutofacWebTypesModule>();
+
+            //Register mapper module
+            builder.RegisterModule(new MappingModule());
 
             // Allow property injection in views
             builder.RegisterSource(new ViewRegistrationSource());

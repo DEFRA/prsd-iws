@@ -5,38 +5,47 @@
 }
 
 <header><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ImportNotificationId)
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.TotalShipments)">
-    <div class="grid-row">
-        <div class="column-half">
-            @Html.Gds().LabelFor(m => m.TotalShipments, showOptionalLabel: false)
-            @Html.Gds().TextBoxFor(m => m.TotalShipments)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TotalShipments)">
+        <div class="grid-row">
+            <div class="column-half">
+                @Html.Gds().LabelFor(m => m.TotalShipments, showOptionalLabel: false)
+                @Html.Gds().TextBoxFor(m => m.TotalShipments)
+            </div>
         </div>
     </div>
-</div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.TotalQuantity)">
-    <div class="grid-row">
-        <div class="column-half">
-            @Html.Gds().LabelFor(m => m.TotalQuantity, showOptionalLabel: false)
-            @Html.Gds().TextBoxFor(m => m.TotalQuantity)
-        </div>
-        <div class="column-half">
-            @Html.Gds().LabelFor(m => m.Units, showOptionalLabel: false)
-            @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TotalQuantity)">
+        <div class="grid-row">
+            <div class="column-half">
+                @Html.Gds().LabelFor(m => m.TotalQuantity, showOptionalLabel: false)
+                @Html.Gds().TextBoxFor(m => m.TotalQuantity)
+            </div>
+            <div class="column-half">
+                @Html.Gds().LabelFor(m => m.Units, showOptionalLabel: false)
+                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList)
+            </div>
         </div>
     </div>
-</div>
 
-<h2 class="heading-small">@IndexResources.IntendedDatesHeading</h2>
+    <h2 class="heading-small">@IndexResources.IntendedDatesHeading</h2>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.StartDate)">
-    <div class="grid-row">
-        <div class="column-half">
-            @Html.EditorFor(m => m.StartDate)
-        </div>
-        <div class="column-half">
-            @Html.EditorFor(m => m.EndDate)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDate)">
+        <div class="grid-row">
+            <div class="column-half">
+                @Html.EditorFor(m => m.StartDate)
+            </div>
+            <div class="column-half">
+                @Html.EditorFor(m => m.EndDate)
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+    </div>
+}
