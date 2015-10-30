@@ -1,9 +1,10 @@
-﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.ShipmentViewModel
+﻿@using EA.Iws.Web.Areas.ImportNotification.Views.Shipment;
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Shipment.ShipmentViewModel
 @{
-    ViewBag.Title = "Amounts and dates";
+    ViewBag.Title = IndexResources.Title;
 }
 
-<header><h1 class="heading-large">Amounts and dates</h1></header>
+<header><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.TotalShipments)">
     <div class="grid-row">
@@ -14,7 +15,7 @@
     </div>
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m=>m.TotalQuantity)">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.TotalQuantity)">
     <div class="grid-row">
         <div class="column-half">
             @Html.Gds().LabelFor(m => m.TotalQuantity, showOptionalLabel: false)
@@ -27,7 +28,7 @@
     </div>
 </div>
 
-<h2 class="heading-small">Intended dates of departure</h2>
+<h2 class="heading-small">@IndexResources.IntendedDatesHeading</h2>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDate)">
     <div class="grid-row">

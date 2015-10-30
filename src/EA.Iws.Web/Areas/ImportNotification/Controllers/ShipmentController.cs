@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.Controllers
 {
     using System.Web.Mvc;
-    using ViewModels;
+    using ViewModels.Shipment;
 
     [Authorize(Roles = "internal")]
     public class ShipmentController : Controller

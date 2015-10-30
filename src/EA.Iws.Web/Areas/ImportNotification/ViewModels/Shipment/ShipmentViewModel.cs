@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels
+﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shipment
 {
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
@@ -14,10 +14,10 @@
             EndDate = new OptionalDateInputViewModel();
         }
 
-        [Display(Name = "Number of shipments")]
+        [Display(Name = "NumberOfShipments", ResourceType = typeof(ShipmentViewModelResources))]
         public int? TotalShipments { get; set; }
 
-        [Display(Name = "Total intended quantity")]
+        [Display(Name = "TotalIntendedQuantity", ResourceType = typeof(ShipmentViewModelResources))]
         public decimal? TotalQuantity { get; set; }
 
         public ShipmentQuantityUnits? Units { get; set; }
