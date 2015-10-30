@@ -137,3 +137,13 @@ $(document).ready(function () {
     // Prevent double form submissions
     $(':submit').preventDoubleClick();
 });
+
+$(".date-input").on('keyup', function (event) {
+    console.log(event.keyCode);
+    console.log($(this).val().length + "length")
+    if ($(this).val().length >= 2
+       && ((event.keyCode >= 48 && event.keyCode <= 57)
+      || (event.keyCode >= 96 && event.keyCode <= 105))) {
+        $(this).parent(".form-group").next().find("input").focus();
+    }
+});

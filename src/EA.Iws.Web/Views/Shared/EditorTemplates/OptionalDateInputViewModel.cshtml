@@ -16,7 +16,7 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" })
+            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", @class = "date-input" })
         }
     </div>
     <div class="form-group form-group-month">
@@ -27,7 +27,7 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" })
+            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", @class = "date-input" })
         }
     </div>
     <div class="form-group form-group-year">
