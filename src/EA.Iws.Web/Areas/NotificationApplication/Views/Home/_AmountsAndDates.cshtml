@@ -2,7 +2,7 @@
 @{
     var id = Model.NotificationId;
     var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
-    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+    var headerColspan = ViewBag.CanEditNotification ? 1 : 2;
 }
 
 <table class="overview-table">
@@ -11,6 +11,12 @@
             <th colspan="@headerColspan">
                 <h2 class="heading-medium">Amounts and dates</h2>
             </th>
+            @if (ViewBag.CanEditNotification)
+            {
+                <th class="change">
+                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
+                </th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -21,12 +27,6 @@
             <td>
                 @Html.Partial(viewLocation + "_IntendedShipments.cshtml")
             </td>
-            @if (ViewBag.CanEditNotification)
-            {
-                <td class="change">
-                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
-                </td>
-            }
         </tr>
         <tr>
             <td>
@@ -35,12 +35,6 @@
             <td>
                 @Html.Partial(viewLocation + "_IntendedQuantity.cshtml")
             </td>
-            @if (ViewBag.CanEditNotification)
-            {
-                <td class="change">
-                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
-                </td>
-            }
         </tr>
         <tr>
             <td>
@@ -49,12 +43,6 @@
             <td>
                 @Html.Partial(viewLocation + "_IntendedDates.cshtml")
             </td>
-            @if (ViewBag.CanEditNotification)
-            {
-                <td class="change">
-                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
-                </td>
-            }
         </tr>
     </tbody>
 </table>

@@ -15,7 +15,7 @@
         width: 30%;
     }
 
-    td.change {
+    .change {
         text-align: right;
         width: 10%;
 
@@ -24,6 +24,11 @@
             font-size: 19px;
             text-decoration: none;
         }
+    }
+
+    th.change {
+        width: auto;
+        vertical-align: bottom;
     }
 
     h2 {

@@ -1,7 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteRecoveryViewModel
 @{
     var id = Model.NotificationId;
-    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+    var headerColspan = ViewBag.CanEditNotification ? 1 : 2;
 }
 
 <table class="overview-table">
@@ -10,6 +10,12 @@
             <th colspan="@headerColspan">
                 <h2 class="heading-medium">Waste recovery</h2>
             </th>
+            @if (ViewBag.CanEditNotification)
+            {
+                <th class="change">
+                    @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
+                </th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -31,12 +37,6 @@
                     </div>
                 </div>
             </td>
-            @if (ViewBag.CanEditNotification)
-            {
-                <td class="change">
-                    @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
-                </td>
-            }
         </tr>
         @if (!Model.IsProvidedByImporter)
         {
@@ -58,12 +58,6 @@
                         </div>
                     </div>
                 </td>
-                @if (ViewBag.CanEditNotification)
-                {
-                    <td class="change">
-                        @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
-                    </td>
-                }
             </tr>
             if (Model.HasDisposalPortion)
             {
@@ -85,10 +79,6 @@
                             </div>
                         </div>
                     </td>
-                    @if (ViewBag.CanEditNotification)
-                    {
-                        <td class="change">@Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)</td>
-                    }
                 </tr>
             }
             <tr>
@@ -112,12 +102,6 @@
                         </div>
                     </div>
                 </td>
-                @if (ViewBag.CanEditNotification)
-                {
-                    <td class="change">
-                        @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
-                    </td>
-                }
             </tr>
             <tr>
                 <td>
@@ -139,12 +123,6 @@
                         </div>
                     </div>
                 </td>
-                @if (ViewBag.CanEditNotification)
-                {
-                    <td class="change">
-                        @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
-                    </td>
-                }
             </tr>
             if (Model.HasDisposalPortion)
             {
@@ -168,12 +146,6 @@
                             </div>
                         </div>
                     </td>
-                    @if (ViewBag.CanEditNotification)
-                    {
-                        <td class="change">
-                            @Html.ActionLink("Change", "Index", "WasteRecovery", new { id, backToOverview = true }, null)
-                        </td>
-                    }
                 </tr>
             }
         }
