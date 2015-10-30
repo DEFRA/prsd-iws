@@ -125,6 +125,7 @@
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
+    <Compile Include="Notification\GetNotificationIdAndStatusByNumber.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />

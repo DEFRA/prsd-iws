@@ -186,6 +186,7 @@
     <Compile Include="NotificationAssessment\WithdrawNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovementsHandler.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
+    <Compile Include="Notification\GetNotificationIdAndStatusByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />

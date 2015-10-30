@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using ViewModels.NotificationSwitch;
@@ -28,11 +29,11 @@
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
 
-            var id = await mediator.SendAsync(new GetNotificationIdByNumber(model.Number));
+            var idAndStatus = await mediator.SendAsync(new GetNotificationIdAndStatusByNumber(model.Number));
 
-            if (id.HasValue)
+            if (idAndStatus.Item1.HasValue && idAndStatus.Item2 != NotificationStatus.NotSubmitted)
             {
-                return RedirectToAction("Index", "Home", new { id, area = "NotificationAssessment" });
+                return RedirectToAction("Index", "Home", new { id = idAndStatus.Item1, area = "NotificationAssessment" });
             }
 
             return RedirectToAction("NotFound", new { number = model.Number });
