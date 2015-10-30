@@ -3,12 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.OperationCodes;
-    using Core.Shared;
+    using Core.ImportNotification.Draft;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using ViewModels.WasteOperation;
-    using Web.ViewModels.Shared;
 
     public class WasteOperationController : Controller
     {
@@ -23,18 +21,27 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var details = await mediator.SendAsync(new GetNotificationDetails(id));
+            var data = await mediator.SendAsync(new GetDraftData<WasteOperation>(id));
 
-            var model = new WasteOperationViewModel(details);
-            if (details.NotificationType == NotificationType.Recovery)
-            {
-                model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>();
-            }
-            else
-            {
-                model.Codes = CheckBoxCollectionViewModel.CreateFromEnum<DisposalCode>();
-            }
+            var model = new WasteOperationViewModel(details, data);
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(Guid id, WasteOperationViewModel model)
+        {
+            var wasteOperation = new WasteOperation(id)
+            {
+                OperationCodes = model.SelectedCodes,
+                TechnologyEmployed = model.TechnologyEmployed,
+                TechnologyEmployedUploadedLater = model.TechnologyEmployedUploadedLater
+            };
+
+            await mediator.SendAsync(new SetDraftData<WasteOperation>(id, wasteOperation));
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

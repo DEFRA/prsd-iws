@@ -13,6 +13,7 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
+    using ImportNotification;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
@@ -26,16 +27,18 @@
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AsNamedClosedTypesOf(typeof(IRequestHandler<,>), t => "request_handler");
 
+            builder.RegisterGeneric(typeof(GetDraftDataHandler<>))
+                .Named("request_handler", typeof(IRequestHandler<,>));
+
+            builder.RegisterGeneric(typeof(SetDraftDataHandler<>))
+                .Named("request_handler", typeof(IRequestHandler<,>));
+
             // Order matters here
             builder.RegisterGenericDecorators(ThisAssembly, typeof(IRequestHandler<,>), "request_handler",
                 typeof(EventDispatcherRequestHandlerDecorator<,>), // <-- inner most decorator
                 typeof(RequestAuthorizationDecorator<,>),
                 typeof(AuthenticationRequestHandlerDecorator<,>),
                 typeof(NotificationReadOnlyAuthorizeDecorator<,>)); // <-- outer most decorator
-
-            builder.RegisterAssemblyTypes()
-                .AsClosedTypesOf(typeof(IRequest<>))
-                .AsImplementedInterfaces();
 
             // Register the map classes
             builder.RegisterAssemblyTypes(ThisAssembly)

@@ -73,6 +73,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Draft\DraftContext.cs" />
+    <Compile Include="Draft\DraftImportNotificationRepository.cs" />
+    <Compile Include="Draft\IDraftImportNotificationRepository.cs" />
+    <Compile Include="Draft\Import.cs" />
     <Compile Include="EntityFrameworkModule.cs" />
     <Compile Include="Filestore\DbFileRepository.cs" />
     <Compile Include="Filestore\IwsFileStoreContext.cs" />

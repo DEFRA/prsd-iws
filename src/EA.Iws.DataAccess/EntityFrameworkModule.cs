@@ -2,6 +2,7 @@
 {
     using Autofac;
     using Domain.FileStore;
+    using Draft;
     using Filestore;
     using Prsd.Core.DataAccess.Mapper;
     using Prsd.Core.Mapper;
@@ -12,6 +13,7 @@
         {
             builder.RegisterType<IwsContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<IwsFileStoreContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<DraftContext>().AsSelf().InstancePerRequest();
 
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .Where(t => t.Namespace != null && t.Namespace.Contains("Repositories"))
@@ -22,6 +24,7 @@
                 .AsImplementedInterfaces();
 
             builder.RegisterType<DbFileRepository>().As<IFileRepository>();
+            builder.RegisterType<DraftImportNotificationRepository>().As<IDraftImportNotificationRepository>();
 
             builder.RegisterType<EfTypeResolver>().As<ITypeResolver>();
         }

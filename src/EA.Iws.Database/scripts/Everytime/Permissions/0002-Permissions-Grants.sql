@@ -2,6 +2,7 @@
 GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::[Identity] TO [iws_application]
 GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::[Person] TO [iws_application]
 GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::[FileStore] TO [iws_application]
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::[Draft] TO [iws_application]
 
 GRANT SELECT, INSERT ON SCHEMA::[Auditing] TO [iws_application]
 
