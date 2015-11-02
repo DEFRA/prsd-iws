@@ -16,7 +16,7 @@
         @(Model.NotificationType == NotificationType.Recovery ? IndexResources.RecoveryCodesHeading : IndexResources.DisposalCodesHeading)
     </h2>
 
-    <div class="form-group">
+    <div class="form-group inline">
         @Html.EditorFor(m => m.Codes)
     </div>
 
