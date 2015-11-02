@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationConsent
 {
     using System;
-    using Prsd.Core;
     using Prsd.Core.Domain;
 
     public class Consent : Entity
@@ -20,8 +19,6 @@
 
         public Consent(Guid notificationApplicationId, DateRange consentRange, string conditions, Guid userId)
         {
-            Guard.ArgumentNotNullOrEmpty(() => conditions, conditions);
-
             NotificationApplicationId = notificationApplicationId;
 
             ConsentRange = consentRange;

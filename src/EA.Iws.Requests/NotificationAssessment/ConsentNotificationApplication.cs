@@ -19,8 +19,6 @@
             DateTime consentTo,
             string consentConditions)
         {
-            Guard.ArgumentNotNullOrEmpty(() => consentConditions, consentConditions);
-
             NotificationId = notificationId;
             ConsentFrom = consentFrom;
             ConsentTo = consentTo;
