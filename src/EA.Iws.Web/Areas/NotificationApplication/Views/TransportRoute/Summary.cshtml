@@ -1,9 +1,10 @@
-﻿@model EA.Iws.Core.TransportRoute.TransportRouteData
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransportRoute
+@model EA.Iws.Core.TransportRoute.TransportRouteData
 @{
-    ViewBag.Title = "Transport Route Summary";
+    ViewBag.Title = SummaryResources.Title;
 }
 
-<h1 class="heading-large">Transport route</h1>
+<h1 class="heading-large">@SummaryResources.Header</h1>
 
 @Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })
 @Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })

@@ -1,19 +1,20 @@
-﻿@model EA.Iws.Core.StateOfExport.StateOfExportData
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransportRoute
+@model EA.Iws.Core.StateOfExport.StateOfExportData
            
-<h1 class="heading-medium">State of export</h1>
+<h1 class="heading-medium">@StateOfExportSummaryResources.Header</h1>
 @if (Model == null)
 {
-    <p>No state of export has been added.</p>
-    <p>@Html.ActionLink("Add state of export", "Index", "StateOfExport", new { id = ViewData["Id"] }, null)</p>
+    <p>@StateOfExportSummaryResources.NoStateOfExport</p>
+    <p>@Html.ActionLink(StateOfExportSummaryResources.Add, "Index", "StateOfExport", new { id = ViewData["Id"] }, null)</p>
 }
 else
 {
     <table>
         <thead>
             <tr>
-                <th>Country</th>
-                <th>Competent authority</th>
-                <th>Port or border crossing</th>
+                <th>@StateOfExportSummaryResources.ThCountry</th>
+                <th>@StateOfExportSummaryResources.ThCA</th>
+                <th>@StateOfExportSummaryResources.ThPort</th>
                 <th></th>
             </tr>
         </thead>
@@ -22,7 +23,7 @@ else
                 <td>@Html.DisplayFor(m => m.Country.Name)</td>
                 <td>@Html.DisplayFor(m => m.CompetentAuthority.Code) - @Html.DisplayFor(m => m.CompetentAuthority.Name)</td>
                 <td>@Html.DisplayFor(m => m.ExitPoint.Name)</td>
-                <th>@Html.ActionLink("Edit", "Index", "StateOfExport", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</th>
+                <th>@Html.ActionLink(StateOfExportSummaryResources.Edit, "Index", "StateOfExport", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</th>
             </tr>
         </tbody>
     </table>

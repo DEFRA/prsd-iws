@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Views.EntryCustomsOffice;
 
     public class CustomsOfficeViewModel
     {
@@ -18,7 +19,7 @@
         public SelectList Countries { get; set; }
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(EntryCustomsOfficeResources))]
         public Guid? SelectedCountry { get; set; }
 
         public int Steps { get; set; }

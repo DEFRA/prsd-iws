@@ -928,6 +928,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RemoveCarrierResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOfficeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoCustomsOfficeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\EntryCustomsOffice\EntryCustomsOfficeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntryCustomsOfficeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ExitCustomsOffice\ExitCustomsOfficeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExitCustomsOfficeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Exporter\ExporterResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1017,6 +1032,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TransitStateResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\TransportRoute\StateOfExportSummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StateOfExportSummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\TransportRoute\StateOfImportSummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StateOfImportSummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\TransportRoute\SummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransitStatesSummaryResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1406,6 +1441,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RemoveCarrierResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOfficeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NoCustomsOfficeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\EntryCustomsOffice\EntryCustomsOfficeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EntryCustomsOfficeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ExitCustomsOffice\ExitCustomsOfficeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExitCustomsOfficeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Exporter\ExporterResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ExporterResources.Designer.cs</LastGenOutput>
@@ -1477,6 +1524,22 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\TransitState\TransitStateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TransitStateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\TransportRoute\StateOfExportSummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StateOfExportSummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\TransportRoute\StateOfImportSummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StateOfImportSummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\TransportRoute\SummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\TransportRoute\TransitStatesSummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TransitStatesSummaryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

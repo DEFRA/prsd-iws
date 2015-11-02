@@ -1,10 +1,11 @@
-﻿@model IList<EA.Iws.Core.TransitState.TransitStateData>
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransportRoute
+@model IList<EA.Iws.Core.TransitState.TransitStateData>
 
-<h1 class="heading-medium">Transit states</h1>
+<h1 class="heading-medium">@TransitStatesSummaryResources.Header</h1>
 @if (Model == null || Model.Count == 0)
 {
-    <p>No transit states have been added.</p>
-    <p>@Html.ActionLink("Add a transit state", "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
+    <p>@TransitStatesSummaryResources.NoTransitState</p>
+    <p>@Html.ActionLink(TransitStatesSummaryResources.NoTransitState, "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
 }
 else
 {
@@ -14,11 +15,11 @@ else
         <table>
             <thead>
                 <tr>
-                    <th>Order</th>
-                    <th>Country</th>
-                    <th>Competent authority</th>
-                    <th>Entry port or border crossing</th>
-                    <th>Exit port or border crossing</th>
+                    <th>@TransitStatesSummaryResources.ThOrder</th>
+                    <th>@TransitStatesSummaryResources.ThCountry</th>
+                    <th>@TransitStatesSummaryResources.ThCA</th>
+                    <th>@TransitStatesSummaryResources.ThPortEntry</th>
+                    <th>@TransitStatesSummaryResources.ThPortExit</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,13 +32,13 @@ else
                         <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
                         <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
                         <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
-                        <th>@Html.ActionLink("Edit", "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id, backToOverview = ViewData["BackToOverview"] }, null) |
-                        <button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">Delete</button></th>
+                        <th>@Html.ActionLink(TransitStatesSummaryResources.Edit, "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id, backToOverview = ViewData["BackToOverview"] }, null) |
+                        <button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">@TransitStatesSummaryResources.Delete</button></th>
                     </tr>
                 }
             </tbody>
         </table>
     }
 
-    <p style="margin-top: 10px;">@Html.ActionLink("Add another transit state", "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
+    <p style="margin-top: 10px;">@Html.ActionLink(TransitStatesSummaryResources.AddAnother, "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
 }

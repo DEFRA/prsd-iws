@@ -1,7 +1,8 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomsOffice.CustomsOfficeViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomsOffice.CustomsOfficeViewModel
 
 @{
-    ViewBag.Title = "Entry Customs Office";
+    ViewBag.Title = EntryCustomsOfficeResources.Title;
 }
 <header class="hgroup">
     @if (Model.Steps > 1)
@@ -10,8 +11,8 @@
             @Html.Gds().HintParagraph("Step 2 of " + @Model.Steps)
         </div>
     }
-    <h2 class="heading-large">What is the name and address for the entry customs office?</h2>
-    <p>This is the customs office through which the waste enters the European Economic Area (EEA)</p>
+    <h2 class="heading-large">@EntryCustomsOfficeResources.Header</h2>
+    <p>@EntryCustomsOfficeResources.HeaderDescription</p>
 </header>
 
 @using (Html.BeginForm())
