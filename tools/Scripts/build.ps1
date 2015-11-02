@@ -68,7 +68,7 @@ $buildTarget = $srcDir + "\EA.Iws.sln"
 # Build the solution
 # Because all paths may contain spaces they have to be enclosed with the ' character and the string for iex-ing must start with &
 ###
-$iexBuild = "& '$msbuild' '$buildTarget' /p:Configuration=Release /p:Platform=x64 /p:OutDir='$outDir'"
+$iexBuild = "& '$msbuild' '$buildTarget' /p:Configuration=Release /p:Platform=x64 /p:OutDir='$outDir' /m /verbosity:m"
 &iex "$iexBuild"
 
 if ($lastExitCode -ne 0) { 
@@ -105,5 +105,5 @@ if($xunit -is [system.array])
     $testConsole = $xunit[0]
 }
 
-$iexTest = "& '$testConsole' '$testDllString' -parallel none -nunit '$testOutDir'"
+$iexTest = "& '$testConsole' '$testDllString' -parallel assemblies -nunit '$testOutDir'"
 &iex $iexTest
