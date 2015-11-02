@@ -1,0 +1,37 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates.AddressViewModelEditorResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.AddressViewModel
+
+<h2 class="heading-medium">@Resource.Title</h2>
+
+<hr/>
+
+@for (int i = 0; i < Model.Countries.Count; i++)
+{
+    @Html.HiddenFor(m => m.Countries[i].Id)
+    @Html.HiddenFor(m => m.Countries[i].Name)
+}
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.AddressLine1, false)
+    @Html.Gds().TextBoxFor(m => m.AddressLine1)
+</div>
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.AddressLine2)
+    @Html.Gds().TextBoxFor(m => m.AddressLine2)
+</div>
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.TownOrCity, false)
+    @Html.Gds().TextBoxFor(m => m.TownOrCity)
+</div>
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.CountryId, false)
+    @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountrySelectList, string.Empty)
+</div>
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.PostalCode, false)
+    @Html.Gds().TextBoxFor(m => m.PostalCode)
+</div>

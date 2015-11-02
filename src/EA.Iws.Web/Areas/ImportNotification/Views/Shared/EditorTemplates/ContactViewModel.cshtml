@@ -1,0 +1,21 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates.ContactViewModelEditorResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.ContactViewModel
+
+<h2 class="heading-medium">@Resource.Title</h2>
+
+<hr/>
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.Name, false)
+    @Html.Gds().TextBoxFor(m => m.Name)
+</div>
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.Telephone, false)
+    @Html.Gds().TextBoxFor(m => m.Telephone)
+</div>
+
+<div class="form-group">
+    @Html.Gds().LabelFor(m => m.Email, false)
+    @Html.Gds().TextBoxFor(m => m.Email)
+</div>

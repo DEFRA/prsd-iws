@@ -41,7 +41,7 @@
 
             await mediator.SendAsync(new SetDraftData<WasteOperation>(id, wasteOperation));
 
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return RedirectToAction("Index", "Exporter");
         }
     }
 }
