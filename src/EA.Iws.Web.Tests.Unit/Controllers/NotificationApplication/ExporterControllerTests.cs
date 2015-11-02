@@ -8,6 +8,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Mappings;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -20,7 +21,7 @@
         public ExporterControllerTests()
         {
             client = A.Fake<IMediator>();
-            exporterController = new ExporterController(client);
+            exporterController = new ExporterController(client, new AddAddressBookEntryMap());
         }
 
         private ExporterViewModel CreateExporterViewModel()

@@ -3,11 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
+    using Core.AddressBook;
     using Infrastructure;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
+    using Requests.AddressBook;
     using Requests.Exporters;
     using ViewModels.Exporter;
 
@@ -15,18 +17,20 @@
     [NotificationReadOnlyFilter]
     public class ExporterController : Controller
     {
-        private readonly IMediator client;
+        private readonly IMediator mediator;
+        private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
 
-        public ExporterController(IMediator client)
+        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper)
         {
-            this.client = client;
+            this.mediator = mediator;
+            this.addressBookMapper = addressBookMapper;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             ExporterViewModel model;
-            var exporter = await client.SendAsync(new GetExporterByNotificationId(id));
+            var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
             if (exporter.HasExporter)
             {
                 model = new ExporterViewModel(exporter);
@@ -39,7 +43,7 @@
                 };
             }
 
-            await this.BindCountryList(client);
+            await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
             return View(model);
         }
@@ -50,13 +54,15 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(client);
+                await this.BindCountryList(mediator);
                 return View(model);
             }
 
             try
             {
-                await client.SendAsync(model.ToRequest());
+                await mediator.SendAsync(model.ToRequest());
+
+                await AddToProducerAddressBook(model);
 
                 if (backToOverview.GetValueOrDefault())
                 {
@@ -76,8 +82,20 @@
                 }
             }
 
-            await this.BindCountryList(client);
+            await this.BindCountryList(mediator);
             return View(model);
+        }
+
+        private async Task AddToProducerAddressBook(ExporterViewModel model)
+        {
+            if (!model.IsAddedToAddressBook)
+            {
+                return;
+            }
+
+            var addressRecord = addressBookMapper.Map(model, AddressRecordType.Producer);
+                
+            await mediator.SendAsync(addressRecord);
         }
     }
 }

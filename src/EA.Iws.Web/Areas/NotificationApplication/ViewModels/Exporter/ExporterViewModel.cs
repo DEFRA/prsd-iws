@@ -16,6 +16,8 @@
 
         public BusinessTypeViewModel Business { get; set; }
 
+        public bool IsAddedToAddressBook { get; set; }
+
         public ExporterViewModel()
         {
             Address = new AddressData();

@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Exporter
+﻿@using EA.Iws.Web.Areas.AddressBook.Views
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Exporter
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter.ExporterViewModel
 @{
     ViewBag.Title = ExporterResources.Title;
@@ -32,6 +33,13 @@
     <hr />
     <p>@ExporterResources.ContactDescription</p>
     @Html.EditorFor(m => m.Contact)
+
+    <div class="form-group no-js-hidden">
+        <label class="block-label" for="addressBook">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            @AddressBookResources.AddToAddressBook
+        </label>
+    </div>
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }
