@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TechnologyEmployedUploadedLater" xml:space="preserve">
-    <value>Associated information to be uploaded later</value>
+  <data name="TechnologyEmployed" xml:space="preserve">
+    <value>Brief description of the technologies and processes</value>
   </data>
 </root>

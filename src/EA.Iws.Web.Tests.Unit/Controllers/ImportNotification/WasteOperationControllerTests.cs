@@ -34,8 +34,7 @@
                 Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>(),
                 ImportNotificationId = importNotificationId,
                 NotificationType = NotificationType.Recovery,
-                TechnologyEmployed = "test",
-                TechnologyEmployedUploadedLater = false
+                TechnologyEmployed = "test"
             };
 
             model.Codes.SetSelectedValues(new[] { RecoveryCode.R1, RecoveryCode.R2 });
@@ -46,7 +45,6 @@
                 p.ImportNotificationId == importNotificationId &&
                 p.Data.ImportNotificationId == importNotificationId &&
                 p.Data.TechnologyEmployed == "test" &&
-                p.Data.TechnologyEmployedUploadedLater == false &&
                 p.Data.OperationCodes.Contains(1) &&
                 p.Data.OperationCodes.Contains(2))))
                 .MustHaveHappened();

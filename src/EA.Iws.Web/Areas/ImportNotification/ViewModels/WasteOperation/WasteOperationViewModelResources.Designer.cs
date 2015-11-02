@@ -62,11 +62,11 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteOperation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Associated information to be uploaded later.
+        ///   Looks up a localized string similar to Brief description of the technologies and processes.
         /// </summary>
-        public static string TechnologyEmployedUploadedLater {
+        public static string TechnologyEmployed {
             get {
-                return ResourceManager.GetString("TechnologyEmployedUploadedLater", resourceCulture);
+                return ResourceManager.GetString("TechnologyEmployed", resourceCulture);
             }
         }
     }

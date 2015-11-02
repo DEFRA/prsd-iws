@@ -17,30 +17,15 @@
     </h2>
 
     <div class="form-group">
-        <fieldset>
-
-            @for (int i = 0; i < Model.Codes.PossibleValues.Count; i++)
-            {
-                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.Codes.PossibleValues[i]);
-
-                <div>
-                    <label for="@idForThisCheckBox" class="block-label grid-view">
-                        @Html.CheckBoxFor(m => m.Codes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
-                        @Html.HiddenFor(m => m.Codes.PossibleValues[i].Text)
-                        @Html.HiddenFor(m => m.Codes.PossibleValues[i].Value)
-                        @Html.DisplayFor(m => m.Codes.PossibleValues[i].Text)
-                    </label>
-                </div>
-            }
-        </fieldset>
+        @Html.EditorFor(m => m.Codes)
     </div>
 
     <h2 class="heading-medium">@IndexResources.TechnologyEmployedHeading</h2>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TechnologyEmployed)">
+        @Html.Gds().LabelFor(m => m.TechnologyEmployed)
         @Html.Gds().ValidationMessageFor(m => m.TechnologyEmployed)
         @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { @class = "full-width" })
-        @Html.Gds().CheckBoxFor(m => m.TechnologyEmployedUploadedLater)
     </div>
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>

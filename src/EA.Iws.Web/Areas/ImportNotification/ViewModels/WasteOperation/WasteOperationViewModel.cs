@@ -35,7 +35,6 @@
             }
 
             TechnologyEmployed = data.TechnologyEmployed;
-            TechnologyEmployedUploadedLater = data.TechnologyEmployedUploadedLater;
         }
 
         public Guid ImportNotificationId { get; set; }
@@ -44,10 +43,8 @@
 
         public CheckBoxCollectionViewModel Codes { get; set; }
 
+        [Display(Name = "TechnologyEmployed", ResourceType = typeof(WasteOperationViewModelResources))]
         public string TechnologyEmployed { get; set; }
-
-        [Display(Name = "TechnologyEmployedUploadedLater", ResourceType = typeof(WasteOperationViewModelResources))]
-        public bool TechnologyEmployedUploadedLater { get; set; }
 
         public int[] SelectedCodes
         {

@@ -35,13 +35,12 @@
             var wasteOperation = new WasteOperation(id)
             {
                 OperationCodes = model.SelectedCodes,
-                TechnologyEmployed = model.TechnologyEmployed,
-                TechnologyEmployedUploadedLater = model.TechnologyEmployedUploadedLater
+                TechnologyEmployed = model.TechnologyEmployed
             };
 
             await mediator.SendAsync(new SetDraftData<WasteOperation>(id, wasteOperation));
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
     }
 }

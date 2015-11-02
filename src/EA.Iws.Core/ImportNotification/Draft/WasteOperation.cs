@@ -14,7 +14,5 @@
         public int[] OperationCodes { get; set; }
 
         public string TechnologyEmployed { get; set; }
-
-        public bool TechnologyEmployedUploadedLater { get; set; }
     }
 }
