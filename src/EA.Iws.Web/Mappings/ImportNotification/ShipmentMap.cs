@@ -1,20 +1,22 @@
 ﻿namespace EA.Iws.Web.Mappings.ImportNotification
 {
+    using System;
     using Areas.ImportNotification.ViewModels.Shipment;
     using Core.ImportNotification.Draft;
     using Prsd.Core.Mapper;
 
-    public class ShipmentMap : IMap<ShipmentViewModel, Shipment>
+    public class ShipmentMap : IMapWithParameter<ShipmentViewModel, Guid, Shipment>
     {
-        public Shipment Map(ShipmentViewModel source)
+        public Shipment Map(ShipmentViewModel source, Guid parameter)
         {
-            var shipment = new Shipment(source.ImportNotificationId);
-
-            shipment.TotalShipments = source.TotalShipments;
-            shipment.Quantity = source.TotalQuantity;
-            shipment.Unit = source.Units;
-            shipment.StartDate = source.StartDate.AsDateTime();
-            shipment.EndDate = source.EndDate.AsDateTime();
+            var shipment = new Shipment(parameter)
+            {
+                TotalShipments = source.TotalShipments,
+                Quantity = source.TotalQuantity,
+                Unit = source.Units,
+                StartDate = source.StartDate.AsDateTime(),
+                EndDate = source.EndDate.AsDateTime()
+            };
 
             return shipment;
         }

@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Core.ImportNotification.Draft;
     using Core.Shared;
     using Web.ViewModels.Shared;
 
@@ -15,7 +16,15 @@
             EndDate = new OptionalDateInputViewModel();
         }
 
-        public Guid ImportNotificationId { get; set; }
+        public ShipmentViewModel(Shipment data)
+        {
+            UnitsSelectList = new SelectList(Prsd.Core.Helpers.EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
+            StartDate = new OptionalDateInputViewModel(data.StartDate);
+            EndDate = new OptionalDateInputViewModel(data.EndDate);
+            TotalQuantity = data.Quantity;
+            Units = data.Unit;
+            TotalShipments = data.TotalShipments;
+        }
 
         [Display(Name = "NumberOfShipments", ResourceType = typeof(ShipmentViewModelResources))]
         public int? TotalShipments { get; set; }

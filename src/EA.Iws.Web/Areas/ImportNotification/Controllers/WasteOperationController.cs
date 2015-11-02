@@ -8,6 +8,7 @@
     using Requests.ImportNotification;
     using ViewModels.WasteOperation;
 
+    [Authorize(Roles = "internal")]
     public class WasteOperationController : Controller
     {
         private readonly IMediator mediator;

@@ -4,6 +4,10 @@
 
     public class WasteOperation
     {
+        protected WasteOperation()
+        {
+        }
+
         public WasteOperation(Guid importNotificationId)
         {
             ImportNotificationId = importNotificationId;

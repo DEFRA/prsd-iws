@@ -70,7 +70,7 @@
             var id = await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber,
                 (NotificationType)model.NotificationTypeRadioButtons.SelectedValue));
 
-            return RedirectToAction("Index", "WasteOperation", new { area = "ImportNotification", id });
+            return RedirectToAction("Index", "Shipment", new { area = "ImportNotification", id });
         }
     }
 }

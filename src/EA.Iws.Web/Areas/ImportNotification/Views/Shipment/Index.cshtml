@@ -8,7 +8,6 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.ImportNotificationId)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TotalShipments)">
         <div class="grid-row">
