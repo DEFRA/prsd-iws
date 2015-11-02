@@ -1,11 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home
 {
     using System;
+    using System.Linq;
     using Core.Movement;
     using Prsd.Core.Helpers;
 
     public class MovementSummaryTableViewModel
     {
+        private static readonly string[] HideQuantityStatus = new[] { "New", "Cancelled" };
+
         public int Number { get; set; }
 
         public string Status { get; set; }
@@ -27,7 +30,9 @@
             PreNotification = data.SubmittedDate;
             ShipmentDate = data.ShipmentDate;
             Received = data.ReceivedDate;
-            Quantity = data.Quantity.HasValue ? data.Quantity.Value.ToString("G29") + " " + EnumHelper.GetDisplayName(data.QuantityUnits.GetValueOrDefault()) : "- -";
+            Quantity = data.Quantity.HasValue && !HideQuantityStatus.Contains(Status) 
+                ? data.Quantity.Value.ToString("G29") + " " + EnumHelper.GetDisplayName(data.QuantityUnits.GetValueOrDefault()) 
+                : "- -";
             RecoveredOrDisposedOf = data.CompletedDate;
         }
     }

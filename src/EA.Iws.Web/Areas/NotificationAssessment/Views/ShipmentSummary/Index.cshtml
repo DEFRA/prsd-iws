@@ -9,6 +9,7 @@
 
     var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
     var nullMarker = "- -";
+    var hideDatesStatuses = new[] { "New", "Cancelled" };
 }
 
 <div class="shipping-home">
@@ -97,7 +98,7 @@
                             <td>@Model.TableData[i].Number</td>
                             <td>@statusText</td>
                             <td>
-                                @if (Model.TableData[i].PreNotification.HasValue)
+                                @if (Model.TableData[i].PreNotification.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
                                 {
                                     @Html.Gds().DisplayShortDateFor(m => m.TableData[i].PreNotification.GetValueOrDefault())
                                 }
@@ -107,7 +108,7 @@
                                 }
                             </td>
                             <td>
-                                @if (Model.TableData[i].ShipmentDate.HasValue)
+                                @if (Model.TableData[i].ShipmentDate.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
                                 {
                                     @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
                                 }
@@ -117,7 +118,7 @@
                                 }
                             </td>
                             <td>
-                                @if (Model.TableData[i].Received.HasValue)
+                                @if (Model.TableData[i].Received.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
                                 {
                                     @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
                                 }
@@ -128,7 +129,7 @@
                             </td>
                             <td>@Model.TableData[i].Quantity</td>
                             <td>
-                                @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue)
+                                @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
                                 {
                                     @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
                                 }
