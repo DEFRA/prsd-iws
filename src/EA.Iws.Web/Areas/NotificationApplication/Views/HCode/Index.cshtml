@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.HCode.HCodeViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.HCode
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.HCode.HCodeViewModel
 
 @{
-    ViewBag.Title = "H codes";
+    ViewBag.Title = HCodeResources.Title;
 }
 
 <div class="grid-row">
     <header class="hgroup">
-        <h1 class="heading-large">What H or HP codes apply to the waste?</h1>
+        <h1 class="heading-large">@HCodeResources.Header</h1>
     </header>
 @using (Html.BeginForm())
 {
@@ -40,7 +41,6 @@
                     var t = this.checked ? not : await;
                     $("#codeTable tr").eq(1).html(t);
                 }
-
             });
         })(jQuery);
     </script>

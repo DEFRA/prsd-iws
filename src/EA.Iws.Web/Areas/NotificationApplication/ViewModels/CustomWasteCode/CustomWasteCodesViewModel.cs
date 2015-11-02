@@ -4,59 +4,60 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Prsd.Core.Validation;
+    using Views.CustomWasteCode;
 
     public class CustomWasteCodesViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
-        [RequiredIf("ImportNationalCodeNotApplicable", false, ErrorMessage = "Please enter a national code in country of import or select not applicable")]
-        [Display(Name = "National code in country of import")]
+        [RequiredIf("ImportNationalCodeNotApplicable", false, ErrorMessageResourceName = "ImportNationalCodeRequired", ErrorMessageResourceType = typeof(CustomWasteCodeResources))]
+        [Display(Name = "ImportNationalCode", ResourceType = typeof(CustomWasteCodeResources))]
         public string ImportNationalCode { get; set; }
 
-        [Display(Name = "Not applicable")]
+        [Display(Name = "NotApplicable", ResourceType = typeof(CustomWasteCodeResources))]
         public bool ImportNationalCodeNotApplicable { get; set; }
 
-        [RequiredIf("ExportNationalCodeNotApplicable", false, ErrorMessage = "Please enter a national code in country of export or select not applicable")]
-        [Display(Name = "National code in country of export")]
+        [RequiredIf("ExportNationalCodeNotApplicable", false, ErrorMessageResourceName = "ExportNationalCodeRequired", ErrorMessageResourceType = typeof(CustomWasteCodeResources))]
+        [Display(Name = "ExportNationalCode", ResourceType = typeof(CustomWasteCodeResources))]
         public string ExportNationalCode { get; set; }
 
-        [Display(Name = "Not applicable")]
+        [Display(Name = "NotApplicable", ResourceType = typeof(CustomWasteCodeResources))]
         public bool ExportNationalCodeNotApplicable { get; set; }
 
-        [RequiredIf("CustomsCodeNotApplicable", false, ErrorMessage = "Please enter a customs code or select not applicable")]
-        [Display(Name = "Customs code")]
+        [RequiredIf("CustomsCodeNotApplicable", false, ErrorMessageResourceName = "CustomsCodeRequired", ErrorMessageResourceType = typeof(CustomWasteCodeResources))]
+        [Display(Name = "CustomsCode", ResourceType = typeof(CustomWasteCodeResources))]
         public string CustomsCode { get; set; }
 
-        [Display(Name = "Not applicable")]
+        [Display(Name = "NotApplicable", ResourceType = typeof(CustomWasteCodeResources))]
         public bool CustomsCodeNotApplicable { get; set; }
 
-        [Display(Name = "Other code(s)")]
-        [RequiredIf("OtherCodeNotApplicable", false, ErrorMessage = "Please enter other code(s) or select not applicable")]
+        [Display(Name = "OtherCode", ResourceType = typeof(CustomWasteCodeResources))]
+        [RequiredIf("OtherCodeNotApplicable", false, ErrorMessageResourceName = "OtherCodeRequired", ErrorMessageResourceType = typeof(CustomWasteCodeResources))]
         public string OtherCode { get; set; }
 
-        [Display(Name = "Not applicable")]
+        [Display(Name = "NotApplicable", ResourceType = typeof(CustomWasteCodeResources))]
         public bool OtherCodeNotApplicable { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!string.IsNullOrWhiteSpace(ImportNationalCode) && ImportNationalCodeNotApplicable)
             {
-                yield return new ValidationResult("If not applicable is selected please do not enter a code", new[] { "ImportNationalCode" });
+                yield return new ValidationResult(CustomWasteCodeResources.DoNotEnterCodeIfNASelected, new[] { "ImportNationalCode" });
             }
 
             if (!string.IsNullOrWhiteSpace(ExportNationalCode) && ExportNationalCodeNotApplicable)
             {
-                yield return new ValidationResult("If not applicable is selected please do not enter a code", new[] { "ExportNationalCode" });
+                yield return new ValidationResult(CustomWasteCodeResources.DoNotEnterCodeIfNASelected, new[] { "ExportNationalCode" });
             }
 
             if (!string.IsNullOrWhiteSpace(CustomsCode) && CustomsCodeNotApplicable)
             {
-                yield return new ValidationResult("If not applicable is selected please do not enter a code", new[] { "CustomsCode" });
+                yield return new ValidationResult(CustomWasteCodeResources.DoNotEnterCodeIfNASelected, new[] { "CustomsCode" });
             }
 
             if (!string.IsNullOrWhiteSpace(OtherCode) && OtherCodeNotApplicable)
             {
-                yield return new ValidationResult("If not applicable is selected please do not enter a code", new[] { "OtherCode" });
+                yield return new ValidationResult(CustomWasteCodeResources.DoNotEnterCodeIfNASelected, new[] { "OtherCode" });
             }
         }
     }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Views.BaselOecdCode;
     using Views.Shared;
 
     public class BaselOecdCodeViewModel : IValidatableObject
@@ -20,19 +21,19 @@
             }
         }
 
-        [Display(Name = "Not listed")]
+        [Display(Name = "NotListed", ResourceType = typeof(BaselOecdCodeResources))]
         public bool NotListed { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!NotListed && !SelectedCode.HasValue)
             {
-                yield return new ValidationResult("You must select either not listed or choose a code", new[] { "NotListed" });
+                yield return new ValidationResult(BaselOecdCodeResources.CodeRequired, new[] { "NotListed" });
             }
 
             if (NotListed && SelectedCode.HasValue)
             {
-                yield return new ValidationResult("Do not select Not listed where you have also entered a code", new[] { "NotListed" });
+                yield return new ValidationResult(BaselOecdCodeResources.DoNotSelectNA, new[] { "NotListed" });
             }
         }
     }

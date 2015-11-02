@@ -9,7 +9,7 @@
 
     public class EnterWasteCodesViewModel : IValidatableObject
     {
-        private string validationMessage = "Please enter a code or select not applicable";
+        private string validationMessage = WasteCodesResources.ValidationMessage;
         public virtual string ValidationMessage
         {
             get { return validationMessage; }
@@ -22,7 +22,7 @@
 
         public List<Guid> SelectedWasteCodes { get; set; }
 
-        [Display(Name = "Not applicable")]
+        [Display(Name = "NotApplicable", ResourceType = typeof(WasteCodesResources))]
         public virtual bool IsNotApplicable { get; set; }
 
         public SelectList Codes
@@ -42,17 +42,17 @@
         {
             if (!SelectedCode.HasValue && SelectedWasteCodes.Count == 0 && !IsNotApplicable)
             {
-                yield return new ValidationResult(this.ValidationMessage, new[] { "SelectedCode" });
+                yield return new ValidationResult(ValidationMessage, new[] { "SelectedCode" });
             }
 
             if (IsNotApplicable && SelectedWasteCodes != null && SelectedWasteCodes.Count > 0 && !SelectedCode.HasValue)
             {
-                yield return new ValidationResult("Do not select not applicable where you have also selected codes", new[] { "IsNotApplicable" });
+                yield return new ValidationResult(WasteCodesResources.DoNotSelectNA, new[] { "IsNotApplicable" });
             }
 
             if (IsNotApplicable && SelectedCode.HasValue)
             {
-                yield return new ValidationResult("Do not select both not applicable and a code", new[] { "IsNotApplicable" });
+                yield return new ValidationResult(WasteCodesResources.DoNotSelectBoth, new[] { "IsNotApplicable" });
             }
         }
     }

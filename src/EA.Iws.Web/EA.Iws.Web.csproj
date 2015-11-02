@@ -908,6 +908,16 @@
     <Compile Include="Areas\Movement\Controllers\CompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\WasteCodesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteCodesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\BaselOecdCode\BaselOecdCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaselOecdCodeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Carrier\AddEditCarrierResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -933,10 +943,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NoCustomsOfficeResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\CustomWasteCode\CustomWasteCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomWasteCodeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\EntryCustomsOffice\EntryCustomsOfficeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntryCustomsOfficeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\EwcCode\EwcCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EwcCodeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\ExitCustomsOffice\ExitCustomsOfficeResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -972,6 +992,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteOfTreatmentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\HCode\HCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HCodeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Importer\ImporterResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1053,6 +1078,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TransitStatesSummaryResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\UnClass\UnClassResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnClassResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\UnNumber\UnNumberResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnNumberResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1067,6 +1102,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TechnologyEmployedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\YCode\YCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>YCodeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationAssessment\Controllers\MovementCertificateController.cs" />
     <Compile Include="Areas\Movement\Controllers\NumberOfPackagesController.cs" />
@@ -1425,6 +1465,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\ViewModels\WasteCodes\WasteCodesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteCodesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\BaselOecdCode\BaselOecdCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaselOecdCodeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Carrier\AddEditCarrierResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddEditCarrierResources.Designer.cs</LastGenOutput>
@@ -1445,9 +1493,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NoCustomsOfficeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomWasteCode\CustomWasteCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomWasteCodeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\EntryCustomsOffice\EntryCustomsOfficeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EntryCustomsOfficeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\EwcCode\EwcCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EwcCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\ExitCustomsOffice\ExitCustomsOfficeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1476,6 +1532,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteOfTreatmentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\HCode\HCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Importer\ImporterResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1541,6 +1601,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TransitStatesSummaryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\UnClass\UnClassResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnClassResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\UnNumber\UnNumberResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnNumberResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisposalCodesResources.Designer.cs</LastGenOutput>
@@ -1553,6 +1621,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\TechnologyEmployedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TechnologyEmployedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\YCode\YCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>YCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\BusinessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -1,13 +1,14 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomWasteCode.CustomWasteCodesViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomWasteCode.CustomWasteCodesViewModel
 @{
-    ViewBag.Title = "Waste Identification";
+    ViewBag.Title = CustomWasteCodeResources.Title;
 }
+
 <header class="hgroup">
-    <h1 class="heading-large">What other codes apply to the waste?</h1>
-    <div>
-        Enter any other codes which are relevant to your waste. If no codes are relevant then tick not applicable
-    </div>
+    <h1 class="heading-large">@CustomWasteCodeResources.Header</h1>
+    <div>@CustomWasteCodeResources.HeaderDescription</div>
 </header>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -58,7 +59,7 @@
     <div class="wastecode-block">
         <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.OtherCode)">
             @Html.Gds().LabelFor(m => m.OtherCode, false)
-            @Html.Gds().HintParagraph("If useful or required by the relevant competent authority add any other code to help identify the waste")
+            @Html.Gds().HintParagraph(CustomWasteCodeResources.OtherCodeHint)
             @Html.Gds().ValidationMessageFor(m => m.OtherCode)
             @Html.Gds().TextBoxFor(m => m.OtherCode)
         </div>
@@ -71,6 +72,6 @@
         </div>
     </div>
     <div class="form-group">
-        <button class="button" type="submit">Save and Continue</button>
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

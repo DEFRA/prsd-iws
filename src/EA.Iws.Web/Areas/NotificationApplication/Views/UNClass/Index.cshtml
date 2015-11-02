@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.UNClass.UNClassViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.UnClass
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.UNClass.UNClassViewModel
 
 @{
-    ViewBag.Title = "UN classes";
+    ViewBag.Title = UnClassResources.Title;
 }
 
 <div class="grid-row">
     <header class="hgroup">
-        <h1 class="heading-large">What UN classes apply to the waste?</h1>
+        <h1 class="heading-large">@UnClassResources.Header</h1>
     </header>
 @using (Html.BeginForm())
 {
@@ -40,7 +41,6 @@
                     var t = this.checked ? not : await;
                     $("#codeTable tr").eq(1).html(t);
                 }
-
             });
         })(jQuery);
     </script>

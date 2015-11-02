@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.UNNumber.UNNumberViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.UnNumber
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.UNNumber.UNNumberViewModel
 
 @{
-    ViewBag.Title = "UN numbers";
+    ViewBag.Title = UnNumberResources.Title;
 }
 
 <div class="grid-row">
     <header class="hgroup">
-        <h1 class="heading-large">Which UN numbers apply to the waste?</h1>
+        <h1 class="heading-large">@UnNumberResources.Header</h1>
     </header>
 @using (Html.BeginForm())
 {
@@ -40,9 +41,7 @@
                     var t = this.checked ? not : await;
                     $("#codeTable tr").eq(1).html(t);
                 }
-
             });
         })(jQuery);
-
     </script>
 }

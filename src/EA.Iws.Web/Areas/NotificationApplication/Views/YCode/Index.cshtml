@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.YCode.YCodeViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.YCode
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.YCode.YCodeViewModel
 
 @{
-    ViewBag.Title = "Y codes";
+    ViewBag.Title = YCodeResources.Title;
 }
 
 <div class="grid-row">
     <header class="hgroup">
-        <h1 class="heading-large">What Y codes apply to the waste?</h1>
+        <h1 class="heading-large">@YCodeResources.Header</h1>
     </header>
     @using (Html.BeginForm())
     {
@@ -40,7 +41,6 @@
                     var t = this.checked ? not : await;
                     $("#codeTable tr").eq(1).html(t);
                 }
-
             });
         })(jQuery);
     </script>
