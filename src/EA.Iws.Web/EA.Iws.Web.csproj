@@ -383,6 +383,8 @@
     <Content Include="Scripts\decision-dropdown.js" />
     <Content Include="Scripts\govuk_elements\application.js" />
     <Content Include="Scripts\govuk_elements\vendor\details.polyfill.js" />
+    <Content Include="Scripts\helpers.js" />
+    <Content Include="Scripts\internal-facility-table.js" />
     <Content Include="Scripts\jquery-ui-autocomplete-html-extension.js" />
     <Content Include="Scripts\address-book.js" />
     <Content Include="Scripts\application.js" />
@@ -692,6 +694,12 @@
     <Content Include="Areas\ImportNotification\Views\Exporter\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Importer\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Producer\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\Facility\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityTableRow.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\Facility\_FacilityTable.cshtml" />
+    <Content Include="Content\iws\_facility-table.scss" />
+    <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityAddressViewModel.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityContactViewModel.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -887,6 +895,7 @@
       <DependentUpon>Success.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Controllers\ExporterController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\FacilityController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\HomeController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ImporterController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ProducerController.cs" />
@@ -898,6 +907,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExporterViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Facility\FacilityViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\Facility\FacilityViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacilityViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Importer\ImporterViewModelResources.Designer.cs">
@@ -940,6 +955,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Facility\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ImportNotification\Views\Importer\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -959,6 +979,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressViewModelEditorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityContactViewModelResources.Designer.cs">
+      <DependentUpon>FacilityContactViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityAddressViewModelResources.Designer.cs">
+      <DependentUpon>FacilityAddressViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityTableRowResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacilityTableRowResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\Shipment\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1596,6 +1631,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ExporterViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Facility\FacilityViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FacilityViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Importer\ImporterViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ImporterViewModelResources.Designer.cs</LastGenOutput>
@@ -1624,6 +1663,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Facility\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Importer\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
@@ -1639,6 +1682,18 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\Shared\EditorTemplates\AddressViewModelEditorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressViewModelEditorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityContactViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FacilityContactViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityAddressViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FacilityAddressViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityTableRowResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FacilityTableRowResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Shipment\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

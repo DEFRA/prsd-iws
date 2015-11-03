@@ -1,0 +1,35 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Facility.IndexResources
+@model IList<EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.FacilityViewModel>
+
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+@using (Html.BeginForm("Index", "Facility", FormMethod.Post, new { @class = "form" }))
+{
+    <div class="ajax-target">
+        @Html.Partial("_FacilityTable", Model)
+    </div>
+
+    <div class="form-group">
+        <button class="link-submit" onclick="addPost(event)">Add facility</button>
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/facility")
+
+    <script>
+        function addPost(event) {
+            postAjax('@Url.Action("Add")', event, ".form", onSuccess);
+        }
+
+        function deletePost(event) {
+            postAjax('@Url.Action("Delete")' + "?deleteId=" + event.target.value, event, ".form", onSuccess);
+        }
+    </script>
+}

@@ -1,0 +1,11 @@
+﻿@model List<EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.FacilityViewModel>
+
+@Html.AntiForgeryToken()
+@Html.Gds().ValidationSummary()
+
+<div class="form-group">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        @Html.EditorFor(m => m[i], "FacilityTableRow")
+    }
+</div>

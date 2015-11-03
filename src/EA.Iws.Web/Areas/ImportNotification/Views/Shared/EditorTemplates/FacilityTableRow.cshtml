@@ -1,0 +1,48 @@
+﻿@using EA.Iws.Core.Shared
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates.FacilityTableRowResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.FacilityViewModel
+
+@{
+    var headerTitle = Model.BusinessName ?? Resource.BlankFacilityName;
+    var headerId = "header" + Model.Id;
+    var limitedCompanyId = "LimitedCompany" + Model.Id;
+    var otherId = "Other" + Model.Id;
+}
+
+<div class="facility-header" id="@headerId">
+    <a href="javascript:;" onclick="expandSection(event)">@headerTitle</a>
+    <button class="link-submit right-float" onclick="deletePost(event)" value="@Model.Id">Delete</button>
+</div>
+
+<div class="grid-row js-hidden">
+    <div class="column-half">
+        @Html.HiddenFor(m => m.Id)
+        <h3 class="heading-small">@Resource.OrganisationHeading</h3>
+        <div class="form-group-compound">
+            @Html.Gds().LabelFor(m => m.BusinessName, false)
+            @Html.Gds().TextBoxFor(m => m.BusinessName, new { @class = "form-control form-control-full business-name" })
+        </div>
+        <div class="form-group-compound">
+            @Html.Gds().LabelFor(m => m.RegistrationNumber)
+            @Html.Gds().TextBoxFor(m => m.RegistrationNumber, new { @class = "form-control form-control-full" })
+        </div>
+        <div class="form-group">
+            Type
+            <fieldset>
+                <label class="block-label" for="@limitedCompanyId">
+                    @Html.RadioButtonFor(m => m.Type, BusinessType.LimitedCompany, new { id = limitedCompanyId })
+                    @Resource.LimitedCompanyLabel
+                </label>
+                <label class="block-label" for="@otherId">
+                    @Html.RadioButtonFor(m => m.Type, BusinessType.Other, new { id = otherId })
+                    @Resource.OtherLabel
+                </label>
+            </fieldset>
+        </div>
+        @Html.EditorFor(m => m.Address, "FacilityAddressViewModel")
+    </div>
+    <div class="column-half">
+        @Html.EditorFor(m => m.Contact, "FacilityContactViewModel")
+    </div>
+    <div class="form-group"></div>
+</div>

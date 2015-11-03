@@ -21,6 +21,9 @@
                 "~/Scripts/address-book.js",
                 "~/Scripts/jquery-ui-autocomplete-html-extension.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/helpers").Include(
+                "~/Scripts/helpers.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/decision-dropdown").Include(
                 "~/Scripts/decision-dropdown.js"));
 
@@ -37,6 +40,9 @@
                       "~/Scripts/vendor/details.polyfill.js",
                       "~/Scripts/application.js",
                       "~/Scripts/business-type-radio-buttons.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/facility").Include(
+                "~/Scripts/internal-facility-table.js"));
 
             bundles.Add(new SassBundle("~/Content/iws-page-ie6", "~/Content/govuk_toolkit/stylesheets").Include(
                       "~/Content/iws-page-ie6.scss"));
