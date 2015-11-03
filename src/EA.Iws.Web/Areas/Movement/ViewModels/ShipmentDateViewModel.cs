@@ -64,8 +64,7 @@
             {
                 yield return new ValidationResult("Please enter a valid date", new[] {"Day"});
             }
-
-            if (shipmentDate < StartDate || shipmentDate > EndDate)
+            else if (shipmentDate < StartDate || shipmentDate > EndDate)
             {
                 yield return new ValidationResult("The date is not within the given range", new[] { "Day" });
             }
