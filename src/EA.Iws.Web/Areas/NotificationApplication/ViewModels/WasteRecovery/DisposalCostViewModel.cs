@@ -10,14 +10,14 @@
     using Infrastructure;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
-    using Requests.WasteRecovery;
+    using Views.WasteRecovery;
 
     public class DisposalCostViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
-        [Display(Name = "Please enter £/kg or tonne")]
-        [Required(ErrorMessage = "Please enter the amount in GBP(£) for cost of disposal")]
+        [Display(Name = "Amount", ResourceType = typeof(DisposalCostResources))]
+        [Required(ErrorMessageResourceName = "AmountRequired", ErrorMessageResourceType = typeof(DisposalCostResources))]
         [IsValidNumber(maxPrecision: 12)]
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
@@ -57,12 +57,12 @@
 
             if (Units == 0)
             {
-                results.Add(new ValidationResult("Please select the units"));
+                results.Add(new ValidationResult(DisposalCostResources.UnitsRequired));
             }
 
             if (Amount.ToMoneyDecimal() < 0)
             {
-                results.Add(new ValidationResult("The amount entered cannot be negative", new[] { "Amount" }));
+                results.Add(new ValidationResult(DisposalCostResources.AmountCannotBeNegative, new[] { "Amount" }));
             }
 
             return results;

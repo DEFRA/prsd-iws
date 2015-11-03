@@ -1,6 +1,7 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.PercentageViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.PercentageViewModel
 @{
-    ViewBag.Title = "Percentage Recoverable";
+    ViewBag.Title = PercentageResources.Title;
 }
 
 @using (Html.BeginForm())
@@ -8,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <header class="hgroup">
-        <h1 class="heading-large">What is the amount of recovered material in relation to the non-recoverable waste?</h1>
+        <h1 class="heading-large">@PercentageResources.Header</h1>
     </header>
 
     @Html.Gds().ValidationSummary()

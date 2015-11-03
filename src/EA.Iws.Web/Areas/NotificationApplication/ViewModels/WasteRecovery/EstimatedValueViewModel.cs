@@ -9,19 +9,19 @@
     using Infrastructure;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
-    using Requests.WasteRecovery;
+    using Views.WasteRecovery;
 
     public class EstimatedValueViewModel : IValidatableObject
     {
         public decimal PercentageRecoverable { get; set; }
 
-        [Display(Name = "Please enter £/kg or tonne")]
-        [Required(ErrorMessage = "Please enter the amount in GBP(£) for the estimated value")]
+        [Display(Name = "Amount", ResourceType = typeof(EstimatedValueResources))]
+        [Required(ErrorMessageResourceName = "AmountRequired", ErrorMessageResourceType = typeof(EstimatedValueResources))]
         [IsValidNumber(maxPrecision: 12)]
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
 
-        [Required(ErrorMessage = "Please select the units")]
+        [Required(ErrorMessageResourceName = "UnitsRequired", ErrorMessageResourceType = typeof(EstimatedValueResources))]
         public ValuePerWeightUnits? SelectedUnits { get; set; }
 
         public SelectList UnitSelectList
@@ -59,7 +59,7 @@
         {
             if (Amount.ToMoneyDecimal() < 0)
             {
-                yield return new ValidationResult("The amount entered cannot be negative", new[] { "Amount" });
+                yield return new ValidationResult(EstimatedValueResources.AmountCannotBeNegative, new[] { "Amount" });
             }
         }
     }

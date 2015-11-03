@@ -1,6 +1,7 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.RecoveryCostViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.RecoveryCostViewModel
 @{
-    ViewBag.Title = "Recovery cost";
+    ViewBag.Title = RecoveryCostResources.Title;
 }
 
 @using (Html.BeginForm())
@@ -11,7 +12,7 @@
     @Html.HiddenFor(m => m.EstimatedValueUnit)
 
     <header class="hgroup">
-        <h1 class="heading-large">What is the cost of the recovery?</h1>
+        <h1 class="heading-large">@RecoveryCostResources.Header</h1>
     </header>
 
     @Html.Gds().ValidationSummary()

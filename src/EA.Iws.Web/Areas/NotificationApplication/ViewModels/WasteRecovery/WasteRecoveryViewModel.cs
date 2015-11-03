@@ -2,10 +2,11 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Core.Shared;
+    using Views.WasteRecovery;
 
     public class WasteRecoveryViewModel
     {
-        [Required(ErrorMessage = "Please select who will provide the information")]
+        [Required(ErrorMessageResourceName = "SelectionRequired", ErrorMessageResourceType = typeof(WasteRecoveryResources))]
         public ProvidedBy? ProvidedBy { get; set; }
 
         public WasteRecoveryViewModel()

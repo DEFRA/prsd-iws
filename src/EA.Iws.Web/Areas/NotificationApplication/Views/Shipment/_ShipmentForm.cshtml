@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Shipment.ShipmentInfoViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Shipment
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Shipment.ShipmentInfoViewModel
 
 @Html.AntiForgeryToken()
 @Html.Gds().ValidationSummary()
@@ -6,8 +7,8 @@
 @Html.HiddenFor(m => m.NotificationId)
 @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
 
-<h1 class="heading-large">What is the total intended number of shipments?</h1>
-@Html.Gds().HintSpan("The amount can be entered with or without commas as thousand separators. For example, 3,333 or 3333")
+<h1 class="heading-large">@ShipmentResources.HeaderNumber</h1>
+@Html.Gds().HintSpan(ShipmentResources.NumberHint)
 <div class="grid-row">
     <div class="column-half">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberOfShipments)">
@@ -19,9 +20,8 @@
 </div>
 
 <hr>
-<h1 class="heading-large">What is the total intended quantity?</h1>
-@Html.Gds().HintSpan("The amount can be entered with or without commas as thousand separators. For example, 3,333.8 or 3333.8")
-
+<h1 class="heading-large">@ShipmentResources.HeaderQty</h1>
+@Html.Gds().HintSpan(ShipmentResources.NumberHint)
 <div class="grid-row">
     <div class="column-half">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
@@ -40,19 +40,18 @@
 </div>
 
 <hr>
-<h1 class="heading-large">What are the intended dates of the first and last departure?</h1>
+<h1 class="heading-large">@ShipmentResources.HeaderDates</h1>
 
 <div class="grid-row">
-
     <div class="column-half">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
             <fieldset>
                 <legend>
-                    <span class="form-label">First departure</span>
+                    <span class="form-label">@ShipmentResources.FirstDeparture</span>
                 </legend>
 
                 <div class="form-date">
-                    @Html.Gds().HintParagraph("For example, 31 3 2015")
+                    @Html.Gds().HintParagraph(ShipmentResources.FirstDepartureDateHint)
                     @Html.Gds().ValidationMessageFor(m => m.StartDay)
                     @Html.Gds().ValidationMessageFor(m => m.StartMonth)
                     @Html.Gds().ValidationMessageFor(m => m.StartYear)
@@ -77,11 +76,11 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
             <fieldset>
                 <legend>
-                    <span class="form-label">Last departure</span>
+                    <span class="form-label">@ShipmentResources.LastDeparture</span>
                 </legend>
 
                 <div class="form-date">
-                    @Html.Gds().HintParagraph("For example, 27 11 2015")
+                    @Html.Gds().HintParagraph(ShipmentResources.LastDepartureDateHint)
                     @Html.Gds().ValidationMessageFor(m => m.EndDay)
                     @Html.Gds().ValidationMessageFor(m => m.EndMonth)
                     @Html.Gds().ValidationMessageFor(m => m.EndYear)

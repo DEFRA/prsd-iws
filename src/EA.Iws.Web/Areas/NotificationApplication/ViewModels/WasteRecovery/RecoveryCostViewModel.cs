@@ -9,7 +9,7 @@
     using Infrastructure;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
-    using Requests.WasteRecovery;
+    using Views.WasteRecovery;
 
     public class RecoveryCostViewModel : IValidatableObject
     {
@@ -19,13 +19,13 @@
 
         public ValuePerWeightUnits EstimatedValueUnit { get; set; }
 
-        [Display(Name = "Please enter £/kg or tonne")]
-        [Required(ErrorMessage = "Please enter the amount in GBP(£) for cost of recovery")]
+        [Display(Name = "Amount", ResourceType = typeof(RecoveryCostResources))]
+        [Required(ErrorMessageResourceName = "AmountRequired", ErrorMessageResourceType = typeof(RecoveryCostResources))]
         [IsValidNumber(maxPrecision: 12)]
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
 
-        [Required(ErrorMessage = "Please select the units")]
+        [Required(ErrorMessageResourceName = "UnitsRequired", ErrorMessageResourceType = typeof(RecoveryCostResources))]
         public ValuePerWeightUnits? SelectedUnits { get; set; }
 
         public SelectList UnitSelectList
@@ -67,14 +67,14 @@
         {
             if (Amount.ToMoneyDecimal() < 0)
             {
-                yield return new ValidationResult("The amount entered cannot be negative", new[] { "Amount" });
+                yield return new ValidationResult(RecoveryCostResources.AmountCannotBeNegative, new[] { "Amount" });
             }
 
             if (PercentageRecoverable < 0 
                 || PercentageRecoverable > 100
                 || EstimatedValueAmount < 0)
             {
-                yield return new ValidationResult("Some of your data is invalid, please go back and re-enter your recovery information", new[] { "Amount" });
+                yield return new ValidationResult(RecoveryCostResources.InvalidData, new[] { "Amount" });
             }
         }
     }

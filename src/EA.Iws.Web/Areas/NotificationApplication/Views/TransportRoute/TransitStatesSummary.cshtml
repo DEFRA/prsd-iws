@@ -5,7 +5,7 @@
 @if (Model == null || Model.Count == 0)
 {
     <p>@TransitStatesSummaryResources.NoTransitState</p>
-    <p>@Html.ActionLink(TransitStatesSummaryResources.NoTransitState, "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
+    <p>@Html.ActionLink(TransitStatesSummaryResources.Add, "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
 }
 else
 {

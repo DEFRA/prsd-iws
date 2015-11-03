@@ -1,6 +1,7 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.EstimatedValueViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.EstimatedValueViewModel
 @{
-    ViewBag.Title = "Estimated value";
+    ViewBag.Title = EstimatedValueResources.Title;
 }
 
 @using (Html.BeginForm())
@@ -9,7 +10,7 @@
     @Html.HiddenFor(m => m.PercentageRecoverable)
 
     <header class="hgroup">
-        <h1 class="heading-large">What is the estimated value of the recovered material?</h1>
+        <h1 class="heading-large">@EstimatedValueResources.Header</h1>
     </header>
 
     @Html.Gds().ValidationSummary()

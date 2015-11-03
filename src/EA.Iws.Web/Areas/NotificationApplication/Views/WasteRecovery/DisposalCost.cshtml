@@ -1,6 +1,7 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.DisposalCostViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.DisposalCostViewModel
 @{
-    ViewBag.Title = "Cost of Disposal for Recoverable Material";
+    ViewBag.Title = DisposalCostResources.Title;
 }
 
 @using (Html.BeginForm("DisposalCost", "WasteRecovery", FormMethod.Post))
@@ -11,7 +12,7 @@
     @Html.HiddenFor(m => m.DisposalMethod)
 
     <header class="hgroup">
-        <h1 class="heading-large">What is the cost of disposal for the non-recoverable fraction?</h1>
+        <h1 class="heading-large">@DisposalCostResources.Header</h1>
     </header>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">

@@ -11,6 +11,7 @@
     using Prsd.Core;
     using Prsd.Core.Helpers;
     using Requests.IntendedShipments;
+    using Views.Shipment;
 
     public class ShipmentInfoViewModel : IValidatableObject
     {
@@ -45,74 +46,73 @@
 
         public bool IsPreconsentedRecoveryFacility { get; set; }
 
-        [Required(ErrorMessage = "Please enter the total number of intended shipments")]
-        [Display(Name = "Number of shipments")]
+        [Required(ErrorMessageResourceName = "NumberOfShipmentsRequired", ErrorMessageResourceType = typeof(ShipmentResources))]
+        [Display(Name = "NumberOfShipments", ResourceType = typeof(ShipmentResources))]
         public string NumberOfShipments { get; set; }
 
-        [Required(ErrorMessage = "Please enter the total intended quantity")]
+        [Required(ErrorMessageResourceName = "QuantityRequired", ErrorMessageResourceType = typeof(ShipmentResources))]
         public string Quantity { get; set; }
 
-        [Required(ErrorMessage = "Please select the units.")]
+        [Required(ErrorMessageResourceName = "UnitsRequired", ErrorMessageResourceType = typeof(ShipmentResources))]
         public ShipmentQuantityUnits? Units { get; set; }
 
         public IEnumerable<SelectListItem> UnitsSelectList { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Day' field")]
-        [Display(Name = "Day")]
-        [Range(1, 31, ErrorMessage = "Please enter a valid number in the 'Day' field")]
+        [Required(ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(ShipmentResources))]
+        [Display(Name = "Day", ResourceType = typeof(ShipmentResources))]
+        [Range(1, 31, ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(ShipmentResources))]
         public int? StartDay { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Month' field")]
-        [Display(Name = "Month")]
-        [Range(1, 12, ErrorMessage = "Please enter a valid number in the 'Month' field")]
+        [Required(ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(ShipmentResources))]
+        [Display(Name = "Month", ResourceType = typeof(ShipmentResources))]
+        [Range(1, 12, ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(ShipmentResources))]
         public int? StartMonth { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Year' field")]
-        [Display(Name = "Year")]
-        [Range(2015, 3000, ErrorMessage = "Please enter a valid number in the 'Year' field")]
+        [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(ShipmentResources))]
+        [Display(Name = "Year", ResourceType = typeof(ShipmentResources))]
+        [Range(2015, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(ShipmentResources))]
         public int? StartYear { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Day' field")]
-        [Display(Name = "Day")]
-        [Range(1, 31, ErrorMessage = "Please enter a valid number in the 'Day' field")]
+        [Required(ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(ShipmentResources))]
+        [Display(Name = "Day", ResourceType = typeof(ShipmentResources))]
+        [Range(1, 31, ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(ShipmentResources))]
         public int? EndDay { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Month' field")]
-        [Display(Name = "Month")]
-        [Range(1, 12, ErrorMessage = "Please enter a valid number in the 'Month' field")]
+        [Required(ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(ShipmentResources))]
+        [Display(Name = "Month", ResourceType = typeof(ShipmentResources))]
+        [Range(1, 12, ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(ShipmentResources))]
         public int? EndMonth { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Year' field")]
-        [Display(Name = "Year")]
-        [Range(2015, 3000, ErrorMessage = "Please enter a valid number in the 'Year' field")]
+        [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(ShipmentResources))]
+        [Display(Name = "Year", ResourceType = typeof(ShipmentResources))]
+        [Range(2015, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(ShipmentResources))]
         public int? EndYear { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!IsNumberOfShipmentsValid())
             {
-                yield return new ValidationResult("Please enter a valid number between 1 and 99999", new[] { "NumberOfShipments" });
+                yield return new ValidationResult(ShipmentResources.NumberOfShipmentsValid, new[] { "NumberOfShipments" });
             }
 
             if (!IsQuantityValid() && Units.HasValue)
             {
-                yield return new ValidationResult("Please enter a valid number with a maximum of " 
-                    + ShipmentQuantityUnitsMetadata.Precision[Units.Value] 
-                    + " decimal places", new[] { "Quantity" });
+                yield return new ValidationResult(string.Format(ShipmentResources.DecimalPlacesValid, 
+                    ShipmentQuantityUnitsMetadata.Precision[Units.Value]), new[] { "Quantity" });
             }
 
             DateTime startDate;
             bool isValidStartDate = SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
             if (!isValidStartDate)
             {
-                yield return new ValidationResult("Please enter a valid first departure date", new[] { "StartDay" });
+                yield return new ValidationResult(ShipmentResources.FirstDepartureValid, new[] { "StartDay" });
             }
 
             DateTime endDate;
             bool isValidEndDate = SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
             if (!isValidEndDate)
             {
-                yield return new ValidationResult("Please enter a valid last departure date", new[] { "EndDay" });
+                yield return new ValidationResult(ShipmentResources.LastDepartureValid, new[] { "EndDay" });
             }
 
             if (!(isValidStartDate && isValidEndDate))
@@ -123,21 +123,18 @@
 
             if (startDate < SystemTime.Now.Date)
             {
-                yield return new ValidationResult("The first departure date cannot be in the past");
+                yield return new ValidationResult(ShipmentResources.FirstDeparturePastDate);
             }
 
             if (startDate > endDate)
             {
-                yield return new ValidationResult("The first departure date must be before the last departure date", new[] { "StartYear" });
+                yield return new ValidationResult(ShipmentResources.FirstDepartureBeforeLastDate, new[] { "StartYear" });
             }
 
             var monthPeriodLength = IsPreconsentedRecoveryFacility ? 36 : 12;
             if (endDate >= startDate.AddMonths(monthPeriodLength))
             {
-                yield return
-                    new ValidationResult(
-                        string.Format("The first departure date and last departure date must be within a {0} month period",
-                            monthPeriodLength), new[] { "EndYear" });
+                yield return new ValidationResult(string.Format(ShipmentResources.DepartureDateRange, monthPeriodLength), new[] { "EndYear" });
             }
         }
 

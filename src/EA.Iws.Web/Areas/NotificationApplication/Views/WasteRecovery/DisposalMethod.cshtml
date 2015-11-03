@@ -1,6 +1,7 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.DisposalMethodViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.DisposalMethodViewModel
 @{
-    ViewBag.Title = "Method of Disposal for Recoverable Material";
+    ViewBag.Title = DisposalMethodResources.Title;
 }
 
 @using (Html.BeginForm("DisposalMethod", "WasteRecovery", FormMethod.Post))
@@ -10,11 +11,11 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h1 class="heading-large">What is the planned method of disposal for the non-recoverable fraction after recovery?</h1>
+        <h1 class="heading-large">@DisposalMethodResources.Header</h1>
     </header>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalMethod)">
-        @Html.Gds().HintParagraph("For example: Incineration/landfill/chemical or biological treatment (in a maximum of 40 characters)")
+        @Html.Gds().HintParagraph(DisposalMethodResources.DisposalMethodHint)
         @Html.Gds().ValidationMessageFor(m => m.DisposalMethod)
         @Html.Gds().TextBoxFor(m => m.DisposalMethod, new {@MaxLength = 40 })
     </div>

@@ -2,13 +2,13 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Core.Shared;
+    using Views.WasteRecovery;
 
     public class DisposalMethodViewModel
     {
         public Guid NotificationId { get; set; }
 
-        [Required(ErrorMessage = "Please enter the method of disposal")]
+        [Required(ErrorMessageResourceName = "DisposalMethodRequired", ErrorMessageResourceType = typeof(DisposalMethodResources))]
         public string DisposalMethod { get; set; }
 
         public DisposalMethodViewModel()
