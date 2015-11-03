@@ -7,14 +7,14 @@
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.Shared;
-    using ViewModels.Exporter;
+    using ViewModels.Importer;
 
     [Authorize(Roles = "internal")]
-    public class ExporterController : Controller
+    public class ImporterController : Controller
     {
         private readonly IMediator mediator;
 
-        public ExporterController(IMediator mediator)
+        public ImporterController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -22,11 +22,11 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var exporter = await mediator.SendAsync(new GetDraftData<Exporter>(id));
+            var importer = await mediator.SendAsync(new GetDraftData<Importer>(id));
+
+            var model = new ImporterViewModel(importer);
 
             var countries = await mediator.SendAsync(new GetCountries());
-
-            var model = new ExporterViewModel(exporter);
 
             model.Address.Countries = countries;
 
@@ -35,18 +35,20 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, ExporterViewModel model)
+        public async Task<ActionResult> Index(Guid id, ImporterViewModel model)
         {
-            var exporter = new Exporter
+            var importer = new Importer
             {
                 Address = model.Address.AsAddress(),
                 BusinessName = model.BusinessName,
+                Type = model.Type,
+                RegistrationNumber = model.RegistrationNumber,
                 Contact = model.Contact.AsContact()
             };
 
-            await mediator.SendAsync(new SetDraftData<Exporter>(id, exporter));
+            await mediator.SendAsync(new SetDraftData<Importer>(id, importer));
 
-            return RedirectToAction("Index", "Importer");
-        }
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
+        } 
     }
 }

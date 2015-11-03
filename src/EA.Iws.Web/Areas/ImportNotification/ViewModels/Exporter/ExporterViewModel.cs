@@ -24,21 +24,9 @@
         {
             BusinessName = exporter.BusinessName;
 
-            Address = new AddressViewModel
-            {
-                AddressLine1 = exporter.AddressLine1,
-                AddressLine2 = exporter.AddressLine2,
-                CountryId = exporter.CountryId,
-                PostalCode = exporter.PostalCode,
-                TownOrCity = exporter.TownOrCity
-            };
+            Address = new AddressViewModel(exporter.Address);
 
-            Contact = new ContactViewModel
-            {
-                Email = exporter.Email,
-                Name = exporter.ContactName,
-                Telephone = exporter.Telephone
-            };
+            Contact = new ContactViewModel(exporter.Contact);
         }
     }
 }

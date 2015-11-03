@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
+namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Importer {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ContactViewModelResources {
+    public class ImporterViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ContactViewModelResources() {
+        internal ImporterViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.ContactViewModelResources", typeof(ContactViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.ViewModels.Importer.ImporterViewModelResource" +
+                            "s", typeof(ImporterViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +62,29 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email address.
+        ///   Looks up a localized string similar to Organisation name.
         /// </summary>
-        public static string Email {
+        public static string BusinessName {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("BusinessName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid email address.
+        ///   Looks up a localized string similar to Registration number.
         /// </summary>
-        public static string EmailInvalid {
+        public static string RegistrationNumber {
             get {
-                return ResourceManager.GetString("EmailInvalid", resourceCulture);
+                return ResourceManager.GetString("RegistrationNumber", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First and last name.
+        ///   Looks up a localized string similar to Organisation entity type.
         /// </summary>
-        public static string Name {
+        public static string Type {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tel no.
-        /// </summary>
-        public static string Telephone {
-            get {
-                return ResourceManager.GetString("Telephone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid telephone number.
-        /// </summary>
-        public static string TelephoneInvalid {
-            get {
-                return ResourceManager.GetString("TelephoneInvalid", resourceCulture);
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
     }

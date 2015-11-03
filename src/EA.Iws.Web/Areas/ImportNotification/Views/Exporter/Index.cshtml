@@ -14,8 +14,9 @@
 
     <h2 class="heading-medium">@Resource.OrganisationSubtitle</h2>
 
-    <div class="form-group">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessName)">
         @Html.Gds().LabelFor(m => m.BusinessName, false)
+        @Html.Gds().ValidationMessageFor(m => m.BusinessName)
         @Html.Gds().TextBoxFor(m => m.BusinessName)
     </div>
 

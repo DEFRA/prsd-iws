@@ -1,0 +1,52 @@
+﻿@using EA.Iws.Core.Shared
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Importer.IndexResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Importer.ImporterViewModel
+    
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <h2 class="heading-medium">@Resource.OrganisationSubtitle</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessName)">
+        @Html.Gds().LabelFor(m => m.BusinessName, false)
+        @Html.Gds().ValidationMessageFor(m => m.BusinessName)
+        @Html.Gds().TextBoxFor(m => m.BusinessName)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Type)">
+        @Html.Gds().LabelFor(m => m.Type, false)
+        @Html.Gds().ValidationMessageFor(m => m.Type)
+        <fieldset>
+            <label class="block-label" for="LimitedCompany">
+                @Html.RadioButtonFor(m => m.Type, BusinessType.LimitedCompany, new { id = "LimitedCompany" })
+                @Resource.LimitedCompanyLabel
+            </label>
+            <label class="block-label" for="Other">
+                @Html.RadioButtonFor(m => m.Type, BusinessType.Other, new { id = "Other" })
+                @Resource.OtherLabel
+            </label>
+        </fieldset>
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.RegistrationNumber)">
+        @Html.Gds().LabelFor(m => m.RegistrationNumber)
+        @Html.Gds().ValidationMessageFor(m => m.RegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.RegistrationNumber)
+    </div>
+
+    @Html.EditorFor(m => m.Address)
+
+    @Html.EditorFor(m => m.Contact)
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
+namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ContactViewModelResources {
+    public class IndexResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ContactViewModelResources() {
+        internal IndexResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.ContactViewModelResources", typeof(ContactViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.Importer.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,47 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email address.
+        ///   Looks up a localized string similar to Limited Company.
         /// </summary>
-        public static string Email {
+        public static string LimitedCompanyLabel {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("LimitedCompanyLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid email address.
+        ///   Looks up a localized string similar to Organisation.
         /// </summary>
-        public static string EmailInvalid {
+        public static string OrganisationSubtitle {
             get {
-                return ResourceManager.GetString("EmailInvalid", resourceCulture);
+                return ResourceManager.GetString("OrganisationSubtitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First and last name.
+        ///   Looks up a localized string similar to Other.
         /// </summary>
-        public static string Name {
+        public static string OtherLabel {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("OtherLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tel no.
+        ///   Looks up a localized string similar to Importer.
         /// </summary>
-        public static string Telephone {
+        public static string TabTitle {
             get {
-                return ResourceManager.GetString("Telephone", resourceCulture);
+                return ResourceManager.GetString("TabTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid telephone number.
+        ///   Looks up a localized string similar to Importer - consignee.
         /// </summary>
-        public static string TelephoneInvalid {
+        public static string Title {
             get {
-                return ResourceManager.GetString("TelephoneInvalid", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

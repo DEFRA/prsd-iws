@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Core.ImportNotification.Draft;
     using Core.Shared;
 
     public class AddressViewModel
@@ -32,5 +33,33 @@
         }
 
         public IList<CountryData> Countries { get; set; }
+
+        public AddressViewModel()
+        {
+        }
+
+        public AddressViewModel(Address address)
+        {
+            if (address != null)
+            {
+                AddressLine1 = address.AddressLine1;
+                AddressLine2 = address.AddressLine2;
+                TownOrCity = address.TownOrCity;
+                PostalCode = address.PostalCode;
+                CountryId = address.CountryId;
+            }
+        }
+
+        public Address AsAddress()
+        {
+            return new Address
+            {
+                AddressLine1 = AddressLine1,
+                AddressLine2 = AddressLine2,
+                TownOrCity = TownOrCity,
+                PostalCode = PostalCode,
+                CountryId = CountryId
+            };
+        }
     }
 }

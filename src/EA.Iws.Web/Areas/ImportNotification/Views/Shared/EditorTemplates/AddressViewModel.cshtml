@@ -3,7 +3,7 @@
 
 <h2 class="heading-medium">@Resource.Title</h2>
 
-<hr/>
+<hr />
 
 @for (int i = 0; i < Model.Countries.Count; i++)
 {
@@ -11,27 +11,32 @@
     @Html.HiddenFor(m => m.Countries[i].Name)
 }
 
-<div class="form-group">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.AddressLine1)">
     @Html.Gds().LabelFor(m => m.AddressLine1, false)
+    @Html.Gds().ValidationMessageFor(m => m.AddressLine1)
     @Html.Gds().TextBoxFor(m => m.AddressLine1)
 </div>
 
-<div class="form-group">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.AddressLine2)">
     @Html.Gds().LabelFor(m => m.AddressLine2)
+    @Html.Gds().ValidationMessageFor(m => m.AddressLine2)
     @Html.Gds().TextBoxFor(m => m.AddressLine2)
 </div>
 
-<div class="form-group">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
     @Html.Gds().LabelFor(m => m.TownOrCity, false)
+    @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
     @Html.Gds().TextBoxFor(m => m.TownOrCity)
 </div>
 
-<div class="form-group">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId, false)
+    @Html.Gds().ValidationMessageFor(m => m.CountryId)
     @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountrySelectList, string.Empty)
 </div>
 
-<div class="form-group">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
     @Html.Gds().LabelFor(m => m.PostalCode, false)
+    @Html.Gds().ValidationMessageFor(m => m.PostalCode)
     @Html.Gds().TextBoxFor(m => m.PostalCode)
 </div>
