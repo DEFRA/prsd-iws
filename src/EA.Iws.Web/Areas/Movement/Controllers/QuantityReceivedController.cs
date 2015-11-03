@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.MovementReceipt;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.Quantity;
@@ -12,7 +11,6 @@
     {
         private readonly IMediator mediator;
         private const string DateReceivedKey = "DateReceived";
-        private const string DecisionKey = "Decision";
         private const string UnitKey = "Unit";
         private const string QuantityKey = "Quantity";
 
@@ -25,16 +23,14 @@
         public async Task<ActionResult> Index(Guid id)
         {
             object dateReceivedResult;
-            object decisionResult;
 
-            if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult) && TempData.TryGetValue(DecisionKey, out decisionResult))
+            if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult))
             {
                 var units = await mediator.SendAsync(new GetMovementUnitsByMovementId(id));
 
                 return View(new QuantityReceivedViewModel
                 {
                     DateReceived = DateTime.Parse(dateReceivedResult.ToString()),
-                    Decision = (Decision)decisionResult,
                     Unit = units
                 });
             }
@@ -52,7 +48,6 @@
             }
 
             TempData[DateReceivedKey] = model.DateReceived;
-            TempData[DecisionKey] = model.Decision;
             TempData[UnitKey] = model.Unit;
             TempData[QuantityKey] = model.Quantity;
 

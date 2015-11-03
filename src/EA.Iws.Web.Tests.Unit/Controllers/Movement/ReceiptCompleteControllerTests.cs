@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Areas.Movement.Controllers;
     using Areas.Movement.ViewModels;
-    using Core.MovementReceipt;
     using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
@@ -29,10 +28,9 @@
         }
 
         [Fact]
-        public async Task GetCallsCorrectRequestWithAccepted()
+        public async Task GetCallsCorrectRequest()
         {
             controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
-            controller.TempData["Decision"] = Decision.Accepted;
             controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
             controller.TempData["Quantity"] = (decimal)1.2;
             await controller.Index(MovementId);
@@ -45,24 +43,8 @@
         }
 
         [Fact]
-        public async Task GetCallsCorrectRequestWithRejected()
+        public async Task NoDateRedirectsCorrectly()
         {
-            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
-            controller.TempData["Decision"] = Decision.Rejected;
-            controller.TempData["RejectionReason"] = "Rejection reason text";
-            await controller.Index(MovementId);
-
-            A.CallTo(() =>
-                mediator.SendAsync(
-                    A<GetNotificationIdByMovementId>.That.Matches(r =>
-                        r.MovementId == MovementId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
-        public async Task AcceptedNoDateRedirectsCorrectly()
-        {
-            controller.TempData["Decision"] = Decision.Accepted;
             controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
             controller.TempData["Quantity"] = (decimal)1.2;
 
@@ -80,70 +62,10 @@
         }
 
         [Fact]
-        public async Task AcceptedNoQuantityRedirectsCorrectly()
+        public async Task NoQuantityRedirectsCorrectly()
         {
-            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
-            controller.TempData["Decision"] = Decision.Accepted;
-            controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
-
-            var result = await controller.Index(MovementId);
-
-            A.CallTo(() =>
-                mediator.SendAsync(
-                    A<GetNotificationIdByMovementId>.That.Matches(r =>
-                        r.MovementId == MovementId))).MustNotHaveHappened();
-
-            Assert.IsType<RedirectToRouteResult>(result);
-            var routeResult = result as RedirectToRouteResult;
-
-            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
-        }
-
-        [Fact]
-        public async Task RejectedNoDecisionRedirectsCorrectly()
-        {
-            controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
-            controller.TempData["Decision"] = Decision.Rejected;
-
-            var result = await controller.Index(MovementId);
-
-            A.CallTo(() =>
-                mediator.SendAsync(
-                    A<GetNotificationIdByMovementId>.That.Matches(r =>
-                        r.MovementId == MovementId))).MustNotHaveHappened();
-
-            Assert.IsType<RedirectToRouteResult>(result);
-            var routeResult = result as RedirectToRouteResult;
-
-            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
-        }
-
-        [Fact]
-        public async Task RejectedNoDateRedirectsCorrectly()
-        {
-            controller.TempData["Decision"] = Decision.Rejected;
-            controller.TempData["RejectionReason"] = "Rejection reason text";
-
-            var result = await controller.Index(MovementId);
-
-            A.CallTo(() =>
-                mediator.SendAsync(
-                    A<GetNotificationIdByMovementId>.That.Matches(r =>
-                        r.MovementId == MovementId))).MustNotHaveHappened();
-
-            Assert.IsType<RedirectToRouteResult>(result);
-            var routeResult = result as RedirectToRouteResult;
-
-            RouteAssert.RoutesTo(routeResult.RouteValues, "Index", "DateReceived");
-        }
-
-        [Fact]
-        public async Task NoDecisionRedirectsCorrectly()
-        {
-            controller.TempData["RejectionReason"] = "Rejection reason text";
             controller.TempData["DateReceived"] = new DateTime(2015, 11, 12);
             controller.TempData["Unit"] = ShipmentQuantityUnits.Kilograms;
-            controller.TempData["Quantity"] = (decimal)1.2;
 
             var result = await controller.Index(MovementId);
 

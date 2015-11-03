@@ -37,7 +37,8 @@
             }
 
             TempData[DateReceivedKey] = viewModel.GetDateReceived();
-            return RedirectToAction("Index", "Acceptance", new { id });
+
+            return RedirectToAction("Index", "QuantityReceived", new { id });
         }
     }
 }

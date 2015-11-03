@@ -10,8 +10,6 @@
     {
         public ShipmentQuantityUnits Unit { get; set; }
 
-        public Decision Decision { get; set; }
-
         public DateTime DateReceived { get; set; }
 
         [Required]

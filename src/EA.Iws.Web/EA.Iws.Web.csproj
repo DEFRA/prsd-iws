@@ -572,7 +572,6 @@
     <Content Include="Content\iws\_movement.scss" />
     <Content Include="Areas\Movement\Views\DateReceived\Index.cshtml" />
     <Content Include="Areas\Movement\Views\QuantityReceived\Index.cshtml" />
-    <Content Include="Areas\Movement\Views\Acceptance\Index.cshtml" />
     <Content Include="Areas\Movement\Views\Shared\_LayoutReceipt.cshtml" />
     <Content Include="Areas\Movement\Views\Home\_ReceiptSummary.cshtml" />
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_media-player.scss" />
@@ -1261,7 +1260,6 @@
     <Compile Include="Areas\Movement\Controllers\PackagingTypesController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\ReceiptCompleteController.cs" />
-    <Compile Include="Areas\Movement\Controllers\AcceptanceController.cs" />
     <Compile Include="Areas\Movement\Controllers\SubmitController.cs" />
     <Compile Include="Areas\Movement\ViewModels\Complete\SuccessViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\SubmitViewModel.cs" />
@@ -1323,8 +1321,6 @@
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\PackagingTypesViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Acceptance\AcceptanceViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Acceptance\YesNo.cs" />
     <Compile Include="Areas\Movement\ViewModels\ShipmentDateViewModel.cs" />
     <Compile Include="Areas\Movement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />

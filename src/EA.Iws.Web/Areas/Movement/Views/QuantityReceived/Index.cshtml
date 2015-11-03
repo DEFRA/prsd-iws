@@ -17,7 +17,6 @@
     
     @Html.HiddenFor(m => m.Unit)
     @Html.HiddenFor(m => m.DateReceived)
-    @Html.HiddenFor(m => m.Decision)
     
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
         <label class="form-label" for="Quantity">Quantity received in @EnumHelper.GetDisplayName(Model.Unit)</label>

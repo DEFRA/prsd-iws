@@ -4,7 +4,6 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.MovementReceipt;
     using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -14,10 +13,8 @@
     {
         private readonly IMediator mediator;
         private const string DateReceivedKey = "DateReceived";
-        private const string DecisionKey = "Decision";
         private const string UnitKey = "Unit";
         private const string QuantityKey = "Quantity";
-        private const string RejectionReasonKey = "RejectionReason";
 
         public ReceiptCompleteController(IMediator mediator)
         {
@@ -28,43 +25,21 @@
         public async Task<ActionResult> Index(Guid id)
         {
             object dateReceivedResult;
-            object decisionResult;
             object unitResult;
             object quantityResult;
-            object rejectionReasonResult;
 
             bool allDataPresent = false;
             var model = new ReceiptCompleteViewModel();
-
-            if (TempData.TryGetValue(DecisionKey, out decisionResult))
+            
+            if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult)
+                && TempData.TryGetValue(UnitKey, out unitResult)
+                && TempData.TryGetValue(QuantityKey, out quantityResult))
             {
-                if ((Decision)decisionResult == Decision.Accepted)
-                {
-                    if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult)
-                        && TempData.TryGetValue(UnitKey, out unitResult)
-                        && TempData.TryGetValue(QuantityKey, out quantityResult))
-                    {
-                        allDataPresent = true;
+                allDataPresent = true;
 
-                        model.DateReceived = DateTime.Parse(dateReceivedResult.ToString());
-                        model.Decision = (Decision)decisionResult;
-                        model.Unit = (ShipmentQuantityUnits)unitResult;
-                        model.Quantity = (decimal)quantityResult;
-                    }
-                }
-
-                if ((Decision)decisionResult == Decision.Rejected)
-                {
-                    if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult)
-                        && TempData.TryGetValue(RejectionReasonKey, out rejectionReasonResult))
-                    {
-                        allDataPresent = true;
-
-                        model.DateReceived = DateTime.Parse(dateReceivedResult.ToString());
-                        model.Decision = (Decision)decisionResult;
-                        model.RejectionReason = rejectionReasonResult.ToString();
-                    }
-                }
+                model.DateReceived = DateTime.Parse(dateReceivedResult.ToString());
+                model.Unit = (ShipmentQuantityUnits)unitResult;
+                model.Quantity = (decimal)quantityResult;
             }
 
             if (allDataPresent)
@@ -91,16 +66,8 @@
             model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
 
             var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
-
-            if (model.Decision == Decision.Accepted)
-            {
-                await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault()));
-            }
-
-            if (model.Decision == Decision.Rejected)
-            {
-                await mediator.SendAsync(new SetMovementRejected(id, fileId, model.DateReceived, model.RejectionReason));
-            }
+            
+            await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault()));
 
             return RedirectToAction("Success", "ReceiptComplete", new { id = model.NotificationId, area = "Movement" });
         }
