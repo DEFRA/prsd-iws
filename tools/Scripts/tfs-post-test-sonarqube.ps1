@@ -1,1 +1,1 @@
-& C:\SonarCube\SonarQube.MSBuild.Runner-0.9\SonarQube.MSBuild.Runner.exe
+& C:\SonarCube\SonarQube.MSBuild.Runner-1.0.1\MSBuild.SonarQube.Runner.exe end
