@@ -20,7 +20,10 @@
             {
                 Id = source.Id,
                 Type = source.Type,
-                AddressRecords = source.Addresses.Select(addressBookRecordMap.Map).ToList()
+                AddressRecords = source
+                    .Addresses.Select(addressBookRecordMap.Map)
+                    .OrderBy(r => r.BusinessData.Name)
+                    .ToList()
             };
         }
     }

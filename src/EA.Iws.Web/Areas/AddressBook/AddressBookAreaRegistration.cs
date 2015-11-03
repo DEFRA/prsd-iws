@@ -1,23 +1,26 @@
 ﻿namespace EA.Iws.Web.Areas.AddressBook
 {
     using System.Web.Mvc;
+    using Controllers;
+    using Infrastructure;
 
-    public class AddressBookAreaRegistration : AreaRegistration 
+    public class AddressBookAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "AddressBook";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute(
-                "AddressBook_default",
-                "Address-Book/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional });
+            context.MapLowercaseDashedRoute(
+                name: "AddressBook_default",
+                url: "Address-Book/{controller}/{action}/{id}",
+                defaults: new { action = "Index", controller = "Home", id = UrlParameter.Optional },
+                namespaces: new[] { typeof(HomeController).Namespace });
         }
     }
 }
