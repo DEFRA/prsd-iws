@@ -692,6 +692,7 @@
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\ContactViewModel.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Exporter\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Importer\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\Producer\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -889,6 +890,7 @@
     <Compile Include="Areas\ImportNotification\Controllers\ExporterController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\HomeController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ImporterController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\ProducerController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteOperationController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ShipmentController.cs" />
     <Compile Include="Areas\ImportNotification\ImportNotificationAreaRegistration.cs" />
@@ -903,6 +905,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImporterViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Producer\ProducerViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\Producer\ProducerViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProducerViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\AddressViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\AddressViewModelResources.Designer.cs">
@@ -934,6 +942,11 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\Importer\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Producer\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -1591,6 +1604,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ImporterViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Producer\ProducerViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProducerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Shared\AddressViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressViewModelResources.Designer.cs</LastGenOutput>
@@ -1612,6 +1629,10 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Importer\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Producer\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

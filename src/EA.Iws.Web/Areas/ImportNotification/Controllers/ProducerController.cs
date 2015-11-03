@@ -7,14 +7,14 @@
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.Shared;
-    using ViewModels.Importer;
+    using ViewModels.Producer;
 
     [Authorize(Roles = "internal")]
-    public class ImporterController : Controller
+    public class ProducerController : Controller
     {
         private readonly IMediator mediator;
 
-        public ImporterController(IMediator mediator)
+        public ProducerController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -22,9 +22,9 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var importer = await mediator.SendAsync(new GetDraftData<Importer>(id));
+            var producer = await mediator.SendAsync(new GetDraftData<Producer>(id));
 
-            var model = new ImporterViewModel(importer);
+            var model = new ProducerViewModel(producer);
 
             var countries = await mediator.SendAsync(new GetCountries());
 
@@ -35,25 +35,24 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, ImporterViewModel model)
+        public async Task<ActionResult> Index(Guid id, ProducerViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var importer = new Importer
+            var producer = new Producer
             {
                 Address = model.Address.AsAddress(),
+                AreMultiple = model.AreMultiple,
                 BusinessName = model.BusinessName,
-                Type = model.Type,
-                RegistrationNumber = model.RegistrationNumber,
                 Contact = model.Contact.AsContact()
             };
 
-            await mediator.SendAsync(new SetDraftData<Importer>(id, importer));
+            await mediator.SendAsync(new SetDraftData<Producer>(id, producer));
 
-            return RedirectToAction("Index", "Producer");
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
         } 
     }
 }

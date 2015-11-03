@@ -37,6 +37,11 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, ExporterViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             var exporter = new Exporter
             {
                 Address = model.Address.AsAddress(),

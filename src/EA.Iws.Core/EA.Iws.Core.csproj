@@ -70,6 +70,7 @@
     <Compile Include="ImportNotification\Draft\Contact.cs" />
     <Compile Include="ImportNotification\Draft\Importer.cs" />
     <Compile Include="ImportNotification\Draft\Exporter.cs" />
+    <Compile Include="ImportNotification\Draft\Producer.cs" />
     <Compile Include="ImportNotification\Draft\WasteOperation.cs" />
     <Compile Include="ImportNotification\Draft\Shipment.cs" />
     <Compile Include="ImportNotification\NotificationDetails.cs" />
