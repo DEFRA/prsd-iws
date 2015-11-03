@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.OtherWasteAdditionalInformationViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.OtherWasteAdditionalInformationViewModel
 @{
-    ViewBag.Title = "Waste Code";
+    ViewBag.Title = OtherWasteAdditionalInformationResources.Title;
 }
 <header class="hgroup">
     <div class="form-group">
-        @Html.Gds().HintParagraph("Step 3 of 3")
+        @Html.Gds().HintParagraph(OtherWasteAdditionalInformationResources.Step3)
     </div>
-    <h1 class="heading-large">What is the chemical composition of the waste?</h1>
+    <h1 class="heading-large">@OtherWasteAdditionalInformationResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -19,15 +20,15 @@
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
         @Html.Gds().ValidationMessageFor(m => m.Description)
-        @Html.Gds().HintParagraph("This may be the names of its major constituents and their relative concentrations expressed as a percentage")
-        @Html.Gds().HintParagraph("Please limit your answer to 256 characters")
-        @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds", @title = "Other description", @MaxLength = 256 })
+        @Html.Gds().HintParagraph(OtherWasteAdditionalInformationResources.DescriptionHint1)
+        @Html.Gds().HintParagraph(OtherWasteAdditionalInformationResources.DescriptionHint)
+        @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds", @title = OtherWasteAdditionalInformationResources.OtherDescription, @MaxLength = 256 })
     </div>
     <div class="form-group">
         <fieldset>
             <label class="block-label" for="chkboxFurtherInfo">
                 @Html.CheckBoxFor(m => m.HasAttachement, new { @id = "chkboxFurtherInfo" })
-                I will provide this detail in a separate annex with my notification submission.
+                @OtherWasteAdditionalInformationResources.Declaration
             </label>
         </fieldset>
     </div>

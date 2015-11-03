@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.OtherWasteViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.OtherWasteViewModel
 @{
-    ViewBag.Title = "Waste Code";
+    ViewBag.Title = OtherWasteResources.Title;
 }
 <header class="hgroup">
     <div class="form-group">
-        @Html.Gds().HintParagraph("Step 2 of 3")
+        @Html.Gds().HintParagraph(OtherWasteResources.Step2)
     </div>
-    <h1 class="heading-large">What is the name of the waste?</h1>
+    <h1 class="heading-large">@OtherWasteResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -14,13 +15,11 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
-    <div>
-        This may be the name or names by which the material is commonly known or the commercial name
-    </div>
+    <div>@OtherWasteResources.DescriptionMessage</div>
     <div class="form-group">
         @Html.Gds().ValidationMessageFor(m => m.Description)
-        @Html.Gds().HintSpan("Limit your answer to 70 characters or less")
-        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title="Description" })
+        @Html.Gds().HintSpan(OtherWasteResources.DescriptionHint)
+        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title = OtherWasteResources.Description })
     </div>
     <div class="form-group">
         <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>

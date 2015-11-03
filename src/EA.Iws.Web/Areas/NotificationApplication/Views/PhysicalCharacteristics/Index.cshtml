@@ -1,12 +1,13 @@
 ﻿@using EA.Iws.Core.WasteType
+@using EA.Iws.Web.Areas.NotificationApplication.Views.PhysicalCharacteristics
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.PhysicalCharacteristics.PhysicalCharacteristicsViewModel
 @{
-    ViewBag.Title = "Which Packaging Type";
+    ViewBag.Title = PhysicalCharacteristicsResources.Title;
 }
 <header class="hgroup">
-    <h1 class="heading-large">What are the physical characteristics of the waste?</h1>
-    <p>This is what the waste looks like at normal temperatures and pressures</p>
-    <p>Select all that apply:</p>
+    <h1 class="heading-large">@PhysicalCharacteristicsResources.Header</h1>
+    <p>@PhysicalCharacteristicsResources.HeaderDescription</p>
+    <p>@PhysicalCharacteristicsResources.Select</p>
 </header>
 @using (Html.BeginForm())
 {
@@ -20,12 +21,12 @@
             <div class="form-group form-group-compound">
                 <label class="block-label" for="other-option-check" data-target="other-option">
                     @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
-                    @((int)PhysicalCharacteristicType.Other) - Other
+                    @((int)PhysicalCharacteristicType.Other) - @PhysicalCharacteristicsResources.Other
                 </label>
             </div>
             <div class="panel-indent @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
-                    <label class="form-label" for="OtherDescription">Please specify</label>
+                    <label class="form-label" for="OtherDescription">@PhysicalCharacteristicsResources.OtherRequired</label>
                     @Html.Gds().ValidationMessageFor(m => m.OtherDescription)<br />
                     @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
                 </div>

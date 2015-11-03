@@ -1,116 +1,112 @@
 ﻿@using EA.Iws.Core.WasteType
+@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionViewModel
 @{
-    ViewBag.Title = "Chemical composition of waste";
+    ViewBag.Title = RdfSrfResources.Title;
 }
+
 <header class="hgroup">
     <div class="form-group">
-        @Html.Gds().HintParagraph("Step 2 of 3")
+        @Html.Gds().HintParagraph(RdfSrfResources.Step2)
     </div>
-    <h1 class="heading-large">What is the chemical composition of the waste?</h1>
-    <p>
-        Tell us about the concentration levels in the waste's constituent parts. You can enter "NA" where it's not applicable.
-    </p>
+    <h1 class="heading-large">@RdfSrfResources.Header</h1>
+    <p>@RdfSrfResources.HeaderDescription</p>
 </header>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
-    
-        <div>
-            @for (var i = 0; i < Model.WasteComposition.Count; i++)
+
+    <div>
+        @for (var i = 0; i < Model.WasteComposition.Count; i++)
+        {
+            var hintText = RdfSrfResources.HintText;
+
+            if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue)
             {
-                var hintText = "Enter the minimum and maximum as a weight-by-weight percentage.";
+                hintText = RdfSrfResources.Megajoules;
+            }
 
-                if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue)
-                {
-                    hintText = "Megajoules per kilogram";
-                }
+            if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals)
+            {
+                hintText = RdfSrfResources.Milligrams;
+            }
 
-                if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals)
-                {
-                    hintText = "Milligrams per kilogram";
-                }
-
-
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
-                    @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
+                @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
+                <div>
                     <div>
-                        <div>
-                            @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType)
-                            @Html.Gds().HintParagraph(hintText)
-                        </div>
+                        @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType)
+                        @Html.Gds().HintParagraph(hintText)
                     </div>
-                    <div class="grid-row">
-                        <div class="column-half">
-                            <div class="grid-row">
-                                @{
-                                    var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue
-                                        || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
-                                    var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType);
-                                }
-                                <div class="column-half">
-                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min" + placeholderText, title = sectionTitle + " minimum concentration"})
-                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
-                                </div>
-                                <div class="column-half">
-                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max" + placeholderText, title = sectionTitle + " maximum concentration" })
-                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
-                                </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">
+                        <div class="grid-row">
+                            @{
+                                var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue
+                                    || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
+                                var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType);
+                            }
+                            <div class="column-half">
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = RdfSrfResources.Min + placeholderText, title = sectionTitle + RdfSrfResources.MinConcentration })
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
+                            </div>
+                            <div class="column-half">
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = RdfSrfResources.Max + placeholderText, title = sectionTitle + RdfSrfResources.MaxConcentration })
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
                             </div>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
-        <div class="grid-row">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Energy) column-two-thirds">
-                @Html.Gds().ValidationMessageFor(m => m.Energy)
-                Energy Efficiency
-                <details>
-                    <summary><h2 class="summary heading-xsmall">Guidance notes</h2></summary>
-                    <div class="panel-indent">
-                        <p>
-                            The energy efficiency is calculated using a formula taken from the Directive 2008/98/EC on waste (Waste Framework Directive).
-                            The formula used to calculate this value of energy efficiency, "the R1 Energy Efficiency Formula" is:
-                        </p>
-                        <table class="fraction" title="Guidance notes for energy efficiency">
-                            <tr>
-                                <td rowspan="2">
-                                    Energy Efficiency =
-                                </td>
-                                <td>
-                                    (E<sub>p</sub> - (E<sub>f</sub> + E<sub>i</sub>))
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="upper-line">
-                                    (0.97 x (E<sub>w</sub> + E<sub>f</sub>))
-                                </td>
-                            </tr>
-                        </table>
-                        In which:
-                        <table title="Formula parameters description">
-                            <tr><td></td><td></td></tr>
-                            <tr><td>E<sub>p</sub></td><td>The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year)</td></tr>
-                            <tr><td>E<sub>f</sub></td><td>The annual energy input to the system from fuel contributions to the production of steam (GJ/year)</td></tr>
-                            <tr><td>E<sub>i</sub></td><td>The annual energy imported excluding E<sub>w</sub> and E<sub>f</sub> (GJ/year)</td></tr>
-                            <tr><td>E<sub>w</sub></td><td>The annual energy contained in the treated waste calculated using the net calorific value of the waste (GJ/year)</td></tr>
-                            <tr><td>0.97</td><td>The factor accounting for energy losses due to bottom ask and radiation</td></tr>
-                        </table>
-                        <br />
-                        <p>
-                            Enter the value of energy efficiency. You can obtain this information from the recovery facility. In some cases, this value might not be applicable, for example if the waste is going to a cement kiln. You can then enter "NA".
-                        </p>
-                    </div>
-                </details>
-                @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds", @title = "Energy" })
             </div>
+        }
+    </div>
+    <div class="grid-row">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Energy) column-two-thirds">
+            @Html.Gds().ValidationMessageFor(m => m.Energy)
+            @RdfSrfResources.EnergyEfficiency
+            <details>
+                <summary>
+                    <h2 class="summary heading-xsmall">@RdfSrfResources.GuidanceNotes</h2>
+                </summary>
+                <div class="panel-indent">
+                    <p>@RdfSrfResources.EnrgyEfficiencyDescription</p>
+                    <table class="fraction" title=@RdfSrfResources.GuidanceNotesTitle>
+                        <tr>
+                            <td rowspan="2">
+                                @RdfSrfResources.TdEnergyEfficiencyFormula
+                            </td>
+                            <td>
+                                (E<sub>p</sub> - (E<sub>f</sub> + E<sub>i</sub>))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="upper-line">
+                                (0.97 x (E<sub>w</sub> + E<sub>f</sub>))
+                            </td>
+                        </tr>
+                    </table>
+                    @RdfSrfResources.InWhich
+                    <table title=@RdfSrfResources.FormulaTitle>
+                        <tr><td></td><td></td></tr>
+                        <tr><td>E<sub>p</sub></td><td>@RdfSrfResources.TdFormula1</td></tr>
+                        <tr><td>E<sub>f</sub></td><td>@RdfSrfResources.TdFormula2</td></tr>
+                        <tr><td>E<sub>i</sub></td><td>The annual energy imported excluding E<sub>w</sub> and E<sub>f</sub> (GJ/year)</td></tr>
+                        <tr><td>E<sub>w</sub></td><td>@RdfSrfResources.TdFormula4</td></tr>
+                        <tr><td>0.97</td><td>@RdfSrfResources.TdFormula5</td></tr>
+                    </table>
+                    <br />
+                    <p>@RdfSrfResources.EnergyEfficiencyInfo</p>
+                </div>
+            </details>
+            @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds", @title = RdfSrfResources.Energy })
         </div>
+    </div>
 
-    
     <div class="form-group">
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>

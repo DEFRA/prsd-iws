@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Prsd.Core.Validation;
+    using Views.PhysicalCharacteristics;
     using Web.ViewModels.Shared;
 
     public class PhysicalCharacteristicsViewModel : IValidatableObject
@@ -15,7 +16,7 @@
 
         public bool OtherSelected { get; set; }
 
-        [RequiredIf("OtherSelected", true, ErrorMessage = "Please enter a description")]
+        [RequiredIf("OtherSelected", true, ErrorMessageResourceName = "DescriptionRequired", ErrorMessageResourceType = typeof(PhysicalCharacteristicsResources))]
         public string OtherDescription { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -24,7 +25,7 @@
 
             if (!PhysicalCharacteristics.PossibleValues.Any(p => p.Selected) && !OtherSelected)
             {
-                results.Add(new ValidationResult("Please select at least one option"));
+                results.Add(new ValidationResult(PhysicalCharacteristicsResources.PhysicalCharRequired));
             }
             return results;
         }

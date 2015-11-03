@@ -4,6 +4,7 @@
     using Core.WasteType;
     using Prsd.Core.Validation;
     using Requests.WasteType;
+    using Views.WasteGenerationProcess;
 
     public class WasteGenerationProcessViewModel
     {
@@ -25,10 +26,10 @@
 
         public Guid NotificationId { get; set; }
 
-        [RequiredIf("IsDocumentAttached", false, ErrorMessage = "Please enter a description or check the box")]
+        [RequiredIf("IsDocumentAttached", false, ErrorMessageResourceName = "AnyOneRequired", ErrorMessageResourceType = typeof(WasteGenerationProcessResources))]
         public string ProcessDescription { get; set; }
 
-        [RequiredIf("ProcessDescription", "", ErrorMessage = "Please enter a description or check the box")]
+        [RequiredIf("ProcessDescription", "", ErrorMessageResourceName = "AnyOneRequired", ErrorMessageResourceType = typeof(WasteGenerationProcessResources))]
         public bool IsDocumentAttached { get; set; }
     }
 }

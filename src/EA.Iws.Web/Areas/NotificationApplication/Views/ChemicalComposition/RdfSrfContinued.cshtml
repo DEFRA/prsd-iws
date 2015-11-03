@@ -1,23 +1,25 @@
-﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionContinuedViewModel
 @{
-    ViewBag.Title = "Chemical composition of waste continued";
+    ViewBag.Title = RdfSrfContinuedResources.Title;
 }
+
 <header class="hgroup">
     <div class="form-group">
-        @Html.Gds().HintParagraph("Step 3 of 3")
+        @Html.Gds().HintParagraph(RdfSrfContinuedResources.Step3)
     </div>
-    <h1 class="heading-large">What is the chemical composition of the waste? (continued)</h1>
+    <h1 class="heading-large">@RdfSrfContinuedResources.Header</h1>
 </header>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.ChemicalCompositionType)
-    <p>
-        Tell us more about the concentration levels in the waste's constituent parts. You can enter "NA" where it's not applicable.
-    </p>
+    <p>@RdfSrfContinuedResources.HeaderDescription</p>
+
     <div class="grid-row form-group">
         <div class="column-half">
             @for (var i = 0; i < Model.WasteComposition.Count; i++)
@@ -34,40 +36,40 @@
                             var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory);
                         }
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = "min %", title = sectionTitle + " minimum concentration" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = RdfSrfContinuedResources.Min, title = sectionTitle + RdfSrfContinuedResources.MinConcentration })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].ChemicalCompositionCategory, new { type = "hidden" })
                         </div>
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = "max %", title = sectionTitle + " maximum concentration" })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = RdfSrfContinuedResources.Max, title = sectionTitle + RdfSrfContinuedResources.MaxConcentration })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory) })
                         </div>
                     </div>
                 </div>
             }
             <div class="form-group">
-                Are there any other constituents?
-                <div class="form-hint">Enter any other significant components in the waste. Enter one component per field, add more if required.</div>
+                @RdfSrfContinuedResources.Question
+                <div class="form-hint">@RdfSrfContinuedResources.QuestionDescription</div>
                 @for (int i = 0; i < Model.OtherCodes.Count; i++)
                 {
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCodes[i])">
                         @Html.Gds().ValidationMessageFor(m => m.OtherCodes[i])
                         <div class="grid-row">
                             <div class="column-two-thirds form-group">
-                                <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title="Other constituent"/>
+                                <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title=@RdfSrfContinuedResources.OtherConstituent />
                             </div>
                         </div>
                         <div class="grid-row">
                             <div class="column-half">
-                                <input name="OtherCodes[@i].MinConcentration" style="width: 65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title="Min constituent"/>
+                                <input name="OtherCodes[@i].MinConcentration" style="width: 65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title=@RdfSrfContinuedResources.MinConstituent />
                             </div>
                             <div class="column-half">
-                                <input name="OtherCodes[@i].MaxConcentration" style="width: 65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title="Max constituent"/>
-                                <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory"/>
+                                <input name="OtherCodes[@i].MaxConcentration" style="width: 65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title=@RdfSrfContinuedResources.MaxConstituent />
+                                <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
                             </div>
                         </div>
                     </div>
                 }
-                <button class="link-submit" type="submit" name="Command" value="add">Add</button>
+                <button class="link-submit" type="submit" name="Command" value="add">@RdfSrfContinuedResources.Add</button>
             </div>
             <hr>
         </div>
@@ -75,20 +77,18 @@
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
         @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
-        Any other relevant information (optional)
-        @Html.Gds().HintParagraph("Please limit your answer to 256 characters")
-        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = "Further information", @MaxLength = 256 })
+        @RdfSrfContinuedResources.Header2
+        @Html.Gds().HintParagraph(RdfSrfContinuedResources.Hint)
+        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = RdfSrfContinuedResources.FurtherInformation, @MaxLength = 256 })
     </div>
     <div class="form-group">
         <fieldset>
             <label class="block-label" for="chkboxFurtherInfo">
                 @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo" })
-                I will provide further details in an annex when I submit my notification.
+                @RdfSrfContinuedResources.Declaration
             </label>
         </fieldset>
     </div>
-
-
 
     <div class="form-group">
         <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>

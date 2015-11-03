@@ -992,6 +992,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RemoveCarrierResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\ChemicalCompositionResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChemicalCompositionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\OtherWasteAdditionalInformationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OtherWasteAdditionalInformationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\OtherWasteResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OtherWasteResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\RdfSrfContinuedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RdfSrfContinuedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\RdfSrfResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RdfSrfResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WoodContinuedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WoodContinuedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WoodResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WoodResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOfficeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1066,6 +1101,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PackagingTypesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\PhysicalCharacteristics\PhysicalCharacteristicsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhysicalCharacteristicsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Producer\AddEditProducerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1146,6 +1186,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UnNumberResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WasteGenerationProcess\WasteGenerationProcessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteGenerationProcessResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1610,6 +1655,34 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RemoveCarrierResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\ChemicalCompositionResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChemicalCompositionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\OtherWasteAdditionalInformationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OtherWasteAdditionalInformationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\OtherWasteResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OtherWasteResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\RdfSrfContinuedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RdfSrfContinuedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\RdfSrfResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RdfSrfResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\WoodContinuedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WoodContinuedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\WoodResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WoodResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOfficeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NoCustomsOfficeResources.Designer.cs</LastGenOutput>
@@ -1669,6 +1742,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\PackagingTypes\PackagingTypesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PackagingTypesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\PhysicalCharacteristics\PhysicalCharacteristicsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PhysicalCharacteristicsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Producer\AddEditProducerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1733,6 +1810,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\UnNumber\UnNumberResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UnNumberResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteGenerationProcess\WasteGenerationProcessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteGenerationProcessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

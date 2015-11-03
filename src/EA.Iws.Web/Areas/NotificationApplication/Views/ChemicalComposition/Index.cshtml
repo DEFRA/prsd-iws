@@ -1,14 +1,15 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionTypeViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionTypeViewModel
 @{
-    ViewBag.Title = "Waste Type - Chemical Composition";
+    ViewBag.Title = ChemicalCompositionResources.Title;
 }
 
 <header class="hgroup">
     <div class="form-group">
-        @Html.Gds().HintParagraph("Step 1 of 3")
+        @Html.Gds().HintParagraph(ChemicalCompositionResources.Step1)
     </div>
-    <h1 class="heading-large">What type of waste it is?</h1>
-    <p>This may be its commercial name</p>
+    <h1 class="heading-large">@ChemicalCompositionResources.Header</h1>
+    <p>@ChemicalCompositionResources.HeaderDescription</p>
 </header>
 
 @using (Html.BeginForm())
