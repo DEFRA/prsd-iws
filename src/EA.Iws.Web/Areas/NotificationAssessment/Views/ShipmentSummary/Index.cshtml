@@ -1,5 +1,6 @@
 ﻿@using EA.Iws.Core.Movement
 @using EA.Iws.Core.Shared
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 
 @model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.ShipmentSummary.MovementSummaryViewModel
 
@@ -8,8 +9,30 @@
     Layout = "~/Areas/NotificationAssessment/Views/Shared/_LayoutSummary.cshtml";
 
     var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
-    var nullMarker = "- -";
-    var hideDatesStatuses = new[] { "New", "Cancelled" };
+}
+
+@helper DisplayDate(DateTime? date, MovementStatus status)
+{
+    if (date.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    {
+        @date.Value.ToString("d MMM yyyy")
+    }
+    else if (status != MovementStatus.Cancelled)
+    {
+        @:- -
+    }
+}
+
+@helper DisplayQuantity(decimal? quantity, ShipmentQuantityUnits? unit, MovementStatus status)
+{
+    if (quantity.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    {
+        @(quantity.Value.ToString("G29") + " " + EnumHelper.GetDisplayName(unit.GetValueOrDefault()))
+    }
+    else if (status != MovementStatus.Cancelled)
+    {
+        @:- -
+    }
 }
 
 <div class="shipping-home">
@@ -91,50 +114,24 @@
                 @{
                     for (int i = 0; i < Model.TableData.Count; i++)
                     {
-                        var statusText = Model.TableData[i].Status == MovementStatus.Completed.ToString() ? operationTitle : Model.TableData[i].Status;
+                        var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
                         <tr>
                             <td>@Model.TableData[i].Number</td>
                             <td>@statusText</td>
                             <td>
-                                @if (Model.TableData[i].PreNotification.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
-                                {
-                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].PreNotification.GetValueOrDefault())
-                                }
-                                else
-                                {
-                                    @nullMarker
-                                }
+                                @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
                             </td>
                             <td>
-                                @if (Model.TableData[i].ShipmentDate.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
-                                {
-                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].ShipmentDate.GetValueOrDefault())
-                                }
-                                else
-                                {
-                                    @nullMarker
-                                }
+                                @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
                             </td>
                             <td>
-                                @if (Model.TableData[i].Received.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
-                                {
-                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].Received.GetValueOrDefault())
-                                }
-                                else
-                                {
-                                    @nullMarker
-                                }
+                                @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
                             </td>
-                            <td>@Model.TableData[i].Quantity</td>
                             <td>
-                                @if (Model.TableData[i].RecoveredOrDisposedOf.HasValue && !hideDatesStatuses.Contains(Model.TableData[i].Status))
-                                {
-                                    @Html.Gds().DisplayShortDateFor(m => m.TableData[i].RecoveredOrDisposedOf.GetValueOrDefault())
-                                }
-                                else
-                                {
-                                    @nullMarker
-                                }
+                                @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
+                            </td>
+                            <td>
+                                @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
                             </td>
                         </tr>
                     }
