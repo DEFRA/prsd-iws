@@ -27,6 +27,8 @@
         private readonly Guid notification3 = new Guid("268F7CBA-3146-4F88-9F07-A06B1BD36936");
         private readonly Guid notification4 = new Guid("D961B020-971E-44D4-8F27-C4B70791CAAA");
         private readonly Guid notification5 = new Guid("5C1DB181-2D02-42F5-A8BD-4EFA293007EC");
+        private readonly Guid notification6 = new Guid("B0F061B0-E52A-4130-88DC-D23FF59BBF25");
+        private readonly Guid notification7 = new Guid("ACECE188-5B7C-4A89-A406-416AE090C79B");
         private readonly GetBasicSearchResultsHandler handler;
 
         public GetBasicSearchResultsHandlerTests()
@@ -55,7 +57,8 @@
                 CreateNotificationApplication(notification3, UKCompetentAuthority.England, WasteType.CreateSrfWasteType(null)),
                 CreateNotificationApplication(notification4, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
                 CreateNotificationApplication(notification5, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification5, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null))
+                CreateNotificationApplication(notification6, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification7, UKCompetentAuthority.Scotland, WasteType.CreateWoodWasteType(null, null))
             };
         }
 
@@ -68,7 +71,8 @@
                 CreateExporter(notification3, "Exporter two"),
                 CreateExporter(notification4, "Exporter RDF"),
                 CreateExporter(notification5, "not submitted"),
-                CreateExporter(notification5, "Exporter")
+                CreateExporter(notification6, "Exporter"),
+                CreateExporter(notification7, "WasteCo"),
             };
         }
 
@@ -110,7 +114,8 @@
                 CreateNotificationAssessment(notification2, NotificationStatus.Submitted),
                 CreateNotificationAssessment(notification3, NotificationStatus.Submitted),
                 CreateNotificationAssessment(notification4, NotificationStatus.Submitted),
-                CreateNotificationAssessment(notification5, NotificationStatus.NotSubmitted)
+                CreateNotificationAssessment(notification5, NotificationStatus.NotSubmitted),
+                CreateNotificationAssessment(notification7, NotificationStatus.Submitted),
             };
         }
 
@@ -213,9 +218,9 @@
         }
 
         [Fact]
-        public async Task SearchExcludesDifferenctCompetentAuthority()
+        public async Task SearchExcludesDifferentCompetentAuthority()
         {
-            var results = await ResultsWhenSearchingFor("GB 0001");
+            var results = await ResultsWhenSearchingFor("GB");
             Assert.Equal(4, results.Count);
         }
     }
