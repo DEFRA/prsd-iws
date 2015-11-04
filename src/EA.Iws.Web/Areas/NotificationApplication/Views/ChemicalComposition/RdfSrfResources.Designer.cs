@@ -224,15 +224,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Energy Efficiency =.
-        /// </summary>
-        public static string TdEnergyEfficiencyFormula {
-            get {
-                return ResourceManager.GetString("TdEnergyEfficiencyFormula", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year).
         /// </summary>
         public static string TdFormula1 {

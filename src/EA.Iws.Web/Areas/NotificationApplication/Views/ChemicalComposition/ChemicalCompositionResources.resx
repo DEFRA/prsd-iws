@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DataRequired" xml:space="preserve">
-    <value>Both fields must either contain 'NA' or a number -</value>
-  </data>
-  <data name="DataRequired2" xml:space="preserve">
-    <value>Both fields must either contain 'NA' or a value -</value>
-  </data>
   <data name="DescriptionLength" xml:space="preserve">
     <value>Please limit your answer to 70 characters or less</value>
   </data>
@@ -131,6 +125,12 @@
   </data>
   <data name="EnergyRequired" xml:space="preserve">
     <value>Please enter a value for Energy</value>
+  </data>
+  <data name="FieldShouldHaveNaOrNumber" xml:space="preserve">
+    <value>Both fields must either contain 'NA' or a number - {0}</value>
+  </data>
+  <data name="FieldShouldHaveNaOrValue" xml:space="preserve">
+    <value>Both fields must either contain 'NA' or a value - {0}</value>
   </data>
   <data name="FurtherInfoValidation" xml:space="preserve">
     <value>If you select that you are providing the details in a separate annex do not enter any details here</value>

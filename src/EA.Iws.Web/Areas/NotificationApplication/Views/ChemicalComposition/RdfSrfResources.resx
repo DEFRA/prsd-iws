@@ -171,9 +171,6 @@
   <data name="Step2" xml:space="preserve">
     <value>Step 2 of 3</value>
   </data>
-  <data name="TdEnergyEfficiencyFormula" xml:space="preserve">
-    <value>Energy Efficiency =</value>
-  </data>
   <data name="TdFormula1" xml:space="preserve">
     <value>The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year)</value>
   </data>

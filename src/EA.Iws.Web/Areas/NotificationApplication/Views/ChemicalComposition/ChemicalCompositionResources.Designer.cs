@@ -62,24 +62,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Both fields must either contain &apos;NA&apos; or a number -.
-        /// </summary>
-        public static string DataRequired {
-            get {
-                return ResourceManager.GetString("DataRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Both fields must either contain &apos;NA&apos; or a value -.
-        /// </summary>
-        public static string DataRequired2 {
-            get {
-                return ResourceManager.GetString("DataRequired2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please limit your answer to 70 characters or less.
         /// </summary>
         public static string DescriptionLength {
@@ -103,6 +85,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         public static string EnergyRequired {
             get {
                 return ResourceManager.GetString("EnergyRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Both fields must either contain &apos;NA&apos; or a number - {0}.
+        /// </summary>
+        public static string FieldShouldHaveNaOrNumber {
+            get {
+                return ResourceManager.GetString("FieldShouldHaveNaOrNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Both fields must either contain &apos;NA&apos; or a value - {0}.
+        /// </summary>
+        public static string FieldShouldHaveNaOrValue {
+            get {
+                return ResourceManager.GetString("FieldShouldHaveNaOrValue", resourceCulture);
             }
         }
         

@@ -84,7 +84,7 @@
                     if ((WasteComposition[i].MinConcentration.ToUpper().Equals(ChemicalCompositionResources.NA) && !WasteComposition[i].MaxConcentration.ToUpper().Equals(ChemicalCompositionResources.NA))
                         || (!WasteComposition[i].MinConcentration.ToUpper().Equals(ChemicalCompositionResources.NA) && WasteComposition[i].MaxConcentration.ToUpper().Equals(ChemicalCompositionResources.NA)))
                     {
-                        yield return new ValidationResult(string.Format(ChemicalCompositionResources.DataRequired,
+                        yield return new ValidationResult(string.Format(ChemicalCompositionResources.FieldShouldHaveNaOrNumber,
                             EnumHelper.GetDescription(WasteComposition[i].WasteInformationType)), new[] { "WasteComposition[" + i + "]" });
                     }
                 }
