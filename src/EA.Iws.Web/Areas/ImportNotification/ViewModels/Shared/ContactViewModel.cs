@@ -7,13 +7,12 @@
     {
         [Display(Name = "Name", ResourceType = typeof(ContactViewModelResources))]
         public string Name { get; set; }
-
-        [DataType(DataType.PhoneNumber)]
+        
         [Display(Name = "Telephone", ResourceType = typeof(ContactViewModelResources))]
         [RegularExpression(@"[\+]*[\d]+[\d\s]+[\d]+", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephoneInvalid")]
         public string Telephone { get; set; }
 
-        [EmailAddress(ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "EmailInvalid")]
+        [EmailAddress(ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "EmailInvalid", ErrorMessage = null)]
         [Display(Name = "Email", ResourceType = typeof(ContactViewModelResources))]
         public string Email { get; set; }
 
