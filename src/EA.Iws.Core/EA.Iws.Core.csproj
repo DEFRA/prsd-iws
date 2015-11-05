@@ -75,6 +75,7 @@
     <Compile Include="ImportNotification\Draft\Producer.cs" />
     <Compile Include="ImportNotification\Draft\WasteOperation.cs" />
     <Compile Include="ImportNotification\Draft\Shipment.cs" />
+    <Compile Include="ImportNotification\Draft\WasteType.cs" />
     <Compile Include="ImportNotification\NotificationDetails.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />

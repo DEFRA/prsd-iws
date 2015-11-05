@@ -1,0 +1,21 @@
+﻿@using EA.Iws.Web.Areas.ImportNotification.Views.WasteType;
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType.WasteTypeViewModel
+@{
+    ViewBag.Title = IndexResources.Title;
+}
+
+
+<header class="hgroup"><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+        @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)
+        @Html.Gds().TextBoxFor(m => m.Name, new { maxLength = 70 })
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+    </div>
+}
