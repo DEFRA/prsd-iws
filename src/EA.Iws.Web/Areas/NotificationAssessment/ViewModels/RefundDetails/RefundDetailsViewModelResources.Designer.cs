@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.PaymentDetails {
+namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.RefundDetails {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.PaymentDetails {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PaymentDetailsViewModelResources {
+    public class RefundDetailsViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PaymentDetailsViewModelResources() {
+        internal RefundDetailsViewModelResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.PaymentDetails {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationAssessment.ViewModels.PaymentDetails.PaymentDetailsV" +
-                            "iewModelResources", typeof(PaymentDetailsViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationAssessment.ViewModels.RefundDetails.RefundDetailsVie" +
+                            "wModelResources", typeof(RefundDetailsViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -80,20 +80,20 @@ namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.PaymentDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the amount paid.
+        ///   Looks up a localized string similar to Please enter the amount to refund.
         /// </summary>
-        public static string AmountPaidError {
+        public static string AmountRefundedError {
             get {
-                return ResourceManager.GetString("AmountPaidError", resourceCulture);
+                return ResourceManager.GetString("AmountRefundedError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amount paid (£).
+        ///   Looks up a localized string similar to Amount to refund (£).
         /// </summary>
-        public static string AmountPaidLabel {
+        public static string AmountRefundedLabel {
             get {
-                return ResourceManager.GetString("AmountPaidLabel", resourceCulture);
+                return ResourceManager.GetString("AmountRefundedLabel", resourceCulture);
             }
         }
         
@@ -148,33 +148,6 @@ namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.PaymentDetails {
         public static string MonthLabel {
             get {
                 return ResourceManager.GetString("MonthLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Payment method.
-        /// </summary>
-        public static string PaymentMethodLabel {
-            get {
-                return ResourceManager.GetString("PaymentMethodLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The maximum length of the receipt number is 100 characters.
-        /// </summary>
-        public static string ReceiptLengthError {
-            get {
-                return ResourceManager.GetString("ReceiptLengthError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Receipt number.
-        /// </summary>
-        public static string ReceiptNumberLabel {
-            get {
-                return ResourceManager.GetString("ReceiptNumberLabel", resourceCulture);
             }
         }
         

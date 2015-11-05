@@ -117,49 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AmountCannotBeNegative" xml:space="preserve">
-    <value>The amount entered cannot be negative</value>
+  <data name="DateReceivedHint" xml:space="preserve">
+    <value>For example, 20 3 2015</value>
   </data>
-  <data name="AmountDecimalPlaceError" xml:space="preserve">
-    <value>Please enter a valid number with a maximum of {0} decimal places</value>
+  <data name="DateReceivedLabel" xml:space="preserve">
+    <value>Date refunded</value>
   </data>
-  <data name="AmountPaidError" xml:space="preserve">
-    <value>Please enter the amount paid</value>
-  </data>
-  <data name="AmountPaidLabel" xml:space="preserve">
-    <value>Amount paid (£)</value>
-  </data>
-  <data name="CommentsLabel" xml:space="preserve">
-    <value>Comments</value>
-  </data>
-  <data name="CommentsLengthError" xml:space="preserve">
-    <value>The maximum length of the comments is 500 characters</value>
-  </data>
-  <data name="DayError" xml:space="preserve">
-    <value>Please enter a valid number in the 'Day' field</value>
-  </data>
-  <data name="DayLabel" xml:space="preserve">
-    <value>Day</value>
-  </data>
-  <data name="MonthError" xml:space="preserve">
-    <value>Please enter a valid number in the 'Month' field</value>
-  </data>
-  <data name="MonthLabel" xml:space="preserve">
-    <value>Month</value>
-  </data>
-  <data name="PaymentMethodLabel" xml:space="preserve">
-    <value>Payment method</value>
-  </data>
-  <data name="ReceiptLengthError" xml:space="preserve">
-    <value>The maximum length of the receipt number is 100 characters</value>
-  </data>
-  <data name="ReceiptNumberLabel" xml:space="preserve">
-    <value>Receipt number</value>
-  </data>
-  <data name="YearError" xml:space="preserve">
-    <value>Please enter a valid number in the 'Year' field</value>
-  </data>
-  <data name="YearLabel" xml:space="preserve">
-    <value>Year</value>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Refund details</value>
   </data>
 </root>

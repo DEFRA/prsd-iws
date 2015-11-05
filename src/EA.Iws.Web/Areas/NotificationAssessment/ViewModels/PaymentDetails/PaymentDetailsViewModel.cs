@@ -5,8 +5,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
-    using System.Linq;
     using System.Web.Mvc;
+    using Infrastructure;
+    using Infrastructure.Validation;
+    using NotificationApplication.Views.WasteRecovery;
 
     public class PaymentDetailsViewModel : IValidatableObject
     {
@@ -21,6 +23,8 @@
 
         [Required(ErrorMessageResourceName = "AmountPaidError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
         [Display(Name = "AmountPaidLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
+        [IsValidNumber(maxPrecision: 12)]
+        [IsValidMoneyDecimal]
         public string Amount { get; set; }
 
         [Display(Name = "PaymentMethodLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
@@ -51,26 +55,24 @@
         
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!AmountValid())
-            {
-                yield return new ValidationResult(string.Format(PaymentDetailsViewModelResources.AmountDecimalPlaceError, 2, new[] { "Amount" }));
-            }
+            var results = new List<ValidationResult>();
 
             if (Receipt.Length > 100)
             {
-                yield return new ValidationResult(PaymentDetailsViewModelResources.ReceiptLengthError, new[] { "Receipt" });
+                results.Add(new ValidationResult(PaymentDetailsViewModelResources.ReceiptLengthError, new[] { "Receipt" }));
             }
-
+            
             if (Comments.Length > 500)
             {
-                yield return new ValidationResult(PaymentDetailsViewModelResources.CommentsLengthError, new[] { "Comments" });
+                results.Add(new ValidationResult(PaymentDetailsViewModelResources.CommentsLengthError, new[] { "Comments" }));
             }
-        }
 
-        public bool AmountValid()
-        {
-            decimal amount;
-            return decimal.TryParse(Amount, Style, CultureInfo.CurrentCulture, out amount) && decimal.Round(amount, 2) == amount;
+            if (Amount.ToMoneyDecimal() < 0)
+            {
+                results.Add(new ValidationResult(PaymentDetailsViewModelResources.AmountCannotBeNegative, new[] { "Amount" }));
+            }
+
+            return results;
         }
     }
 }
