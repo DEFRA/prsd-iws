@@ -700,7 +700,7 @@
     <Content Include="Content\iws\_facility-table.scss" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityAddressViewModel.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityContactViewModel.cshtml" />
-    <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\PaymentDetails\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -902,7 +902,6 @@
     <Compile Include="Areas\ImportNotification\Controllers\ProducerController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteOperationController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ShipmentController.cs" />
-    <Compile Include="Areas\ImportNotification\Controllers\WasteTypeController.cs" />
     <Compile Include="Areas\ImportNotification\ImportNotificationAreaRegistration.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Exporter\ExporterViewModelResources.Designer.cs">
@@ -951,12 +950,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WasteOperationViewModelResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ImportNotification\ViewModels\WasteType\WasteTypeViewModel.cs" />
-    <Compile Include="Areas\ImportNotification\ViewModels\WasteType\WasteTypeViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WasteTypeViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\Exporter\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1009,11 +1002,6 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ImportNotification\Views\WasteType\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -1314,10 +1302,23 @@
     <Compile Include="Areas\Movement\ViewModels\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\KeyDates\KeyDatesViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\ShipmentSummaryController.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\MovementSearchViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentDetailsViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentMethods.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\ShipmentSummary\MovementSummaryTableViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\ShipmentSummary\MovementSummaryViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\Views\PaymentDetails\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
@@ -1672,10 +1673,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteOperationViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\WasteType\WasteTypeViewModelResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>WasteTypeViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Exporter\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
@@ -1717,10 +1714,6 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\ImportNotification\Views\WasteType\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -1948,6 +1941,14 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\YCode\YCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>YCodeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentDetailsViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationAssessment\Views\PaymentDetails\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\BusinessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

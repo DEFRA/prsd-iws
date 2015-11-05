@@ -20,3 +20,6 @@
 <span>Shipments</span>
 @Html.Navigation().Link("Shipment summary", false, "Index", "ShipmentSummary", new  RouteValueDictionary( new { status = Model.Status, area = "NotificationAssessment" }))
 @Html.Navigation().Link("Record shipment data", false, "Index", "MovementCertificate", "")
+
+<span>Finance</span>
+@Html.Navigation().Link("Payment details", false, "Index", "PaymentDetails", "NotificationAssessment")
