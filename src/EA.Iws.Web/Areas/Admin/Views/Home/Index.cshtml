@@ -41,7 +41,7 @@
                                     actionName: "Index",
                                     controllerName: "Home",
                                     routeValues: new { id = Model.SearchResults[i].Id, area = "NotificationAssessment" },
-                                    htmlAttributes: new { target = "_blank" })
+                                    htmlAttributes: null)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(m => m.SearchResults[i].NotificationStatus)
