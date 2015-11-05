@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Post code.
+        ///   Looks up a localized string similar to Postcode.
         /// </summary>
         public static string PostalCode {
             get {

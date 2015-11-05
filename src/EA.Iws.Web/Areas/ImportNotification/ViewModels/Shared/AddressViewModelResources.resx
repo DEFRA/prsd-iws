@@ -127,7 +127,7 @@
     <value>Country</value>
   </data>
   <data name="PostalCode" xml:space="preserve">
-    <value>Post code</value>
+    <value>Postcode</value>
   </data>
   <data name="TownOrCity" xml:space="preserve">
     <value>Town or city</value>
