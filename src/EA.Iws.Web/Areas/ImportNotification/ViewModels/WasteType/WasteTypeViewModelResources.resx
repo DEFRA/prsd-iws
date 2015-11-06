@@ -117,7 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BaselCode" xml:space="preserve">
+    <value>Basel/OECD code</value>
+  </data>
+  <data name="BaselCodeNotListed" xml:space="preserve">
+    <value>Not listed</value>
+  </data>
+  <data name="EwcCode" xml:space="preserve">
+    <value>EWC code(s)</value>
+  </data>
+  <data name="HCode" xml:space="preserve">
+    <value>H or HP code(s)</value>
+  </data>
+  <data name="HCodeNotApplicable" xml:space="preserve">
+    <value>Not applicable</value>
+  </data>
+  <data name="UnClass" xml:space="preserve">
+    <value>UN class(es)</value>
+  </data>
+  <data name="UnClassNotApplicable" xml:space="preserve">
+    <value>Not applicable</value>
+  </data>
   <data name="WasteTypeName" xml:space="preserve">
     <value>Name of the waste</value>
+  </data>
+  <data name="YCode" xml:space="preserve">
+    <value>Y code(s)</value>
+  </data>
+  <data name="YCodeNotApplicable" xml:space="preserve">
+    <value>Not applicable</value>
   </data>
 </root>

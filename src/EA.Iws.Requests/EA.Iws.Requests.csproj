@@ -82,6 +82,7 @@
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
+    <Compile Include="ImportNotification\WasteType\GetAllWasteCodes.cs" />
     <Compile Include="Movement\Complete\SaveMovementCompletedReceipt.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
     <Compile Include="ImportNotification\CreateImportNotification.cs" />

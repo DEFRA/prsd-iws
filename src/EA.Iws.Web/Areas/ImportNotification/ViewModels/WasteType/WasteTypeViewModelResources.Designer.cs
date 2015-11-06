@@ -62,11 +62,92 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basel/OECD code.
+        /// </summary>
+        public static string BaselCode {
+            get {
+                return ResourceManager.GetString("BaselCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not listed.
+        /// </summary>
+        public static string BaselCodeNotListed {
+            get {
+                return ResourceManager.GetString("BaselCodeNotListed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EWC code(s).
+        /// </summary>
+        public static string EwcCode {
+            get {
+                return ResourceManager.GetString("EwcCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to H or HP code(s).
+        /// </summary>
+        public static string HCode {
+            get {
+                return ResourceManager.GetString("HCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not applicable.
+        /// </summary>
+        public static string HCodeNotApplicable {
+            get {
+                return ResourceManager.GetString("HCodeNotApplicable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UN class(es).
+        /// </summary>
+        public static string UnClass {
+            get {
+                return ResourceManager.GetString("UnClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not applicable.
+        /// </summary>
+        public static string UnClassNotApplicable {
+            get {
+                return ResourceManager.GetString("UnClassNotApplicable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name of the waste.
         /// </summary>
         public static string WasteTypeName {
             get {
                 return ResourceManager.GetString("WasteTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Y code(s).
+        /// </summary>
+        public static string YCode {
+            get {
+                return ResourceManager.GetString("YCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not applicable.
+        /// </summary>
+        public static string YCodeNotApplicable {
+            get {
+                return ResourceManager.GetString("YCodeNotApplicable", resourceCulture);
             }
         }
     }

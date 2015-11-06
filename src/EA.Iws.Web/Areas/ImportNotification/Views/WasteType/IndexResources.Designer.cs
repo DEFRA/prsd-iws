@@ -61,6 +61,33 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddCodeButton {
+            get {
+                return ResourceManager.GetString("AddCodeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added EWC codes.
+        /// </summary>
+        public static string EwcCodesTableHeading {
+            get {
+                return ResourceManager.GetString("EwcCodesTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added H or HP codes.
+        /// </summary>
+        public static string HCodesTableHeading {
+            get {
+                return ResourceManager.GetString("HCodesTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waste type.
         /// </summary>
         public static string MainHeading {
@@ -70,11 +97,47 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string NoCodes {
+            get {
+                return ResourceManager.GetString("NoCodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string RemoveCodeButton {
+            get {
+                return ResourceManager.GetString("RemoveCodeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waste type.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added UN classes.
+        /// </summary>
+        public static string UnClassesTableHeading {
+            get {
+                return ResourceManager.GetString("UnClassesTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added Y codes.
+        /// </summary>
+        public static string YCodesTableHeading {
+            get {
+                return ResourceManager.GetString("YCodesTableHeading", resourceCulture);
             }
         }
     }

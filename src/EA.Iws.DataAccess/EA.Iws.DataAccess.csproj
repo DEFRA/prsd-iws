@@ -163,6 +163,7 @@
     <Compile Include="Repositories\NotificationConsentRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationOverviewRepository.cs" />
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
+    <Compile Include="Repositories\WasteCodeRepository.cs" />
     <Compile Include="Repositories\WasteDisposalRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />
     <Compile Include="Repositories\WasteRecoveryRepository.cs" />
