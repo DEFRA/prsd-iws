@@ -80,6 +80,7 @@
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
+    <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodes.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Notification\PreconsentedFacilityData.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
+    <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPoints.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCost.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecovery.cs" />
@@ -227,7 +229,7 @@
     <Compile Include="TechnologyEmployed\SetTechnologyEmployed.cs" />
     <Compile Include="TransitState\GetTransitStateWithTransportRouteDataByNotificationId.cs" />
     <Compile Include="TransitState\TransitStateWithTransportRouteData.cs" />
-    <Compile Include="TransportRoute\CompententAuthorityAndEntryOrExitPointData.cs" />
+    <Compile Include="TransportRoute\CompetentAuthorityAndEntryOrExitPointData.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
     <Compile Include="WasteCodes\GetAllWasteCodesForNotification.cs" />
     <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypes.cs" />

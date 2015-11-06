@@ -3,7 +3,7 @@
     using Core.Shared;
     using Core.TransportRoute;
 
-    public class CompententAuthorityAndEntryOrExitPointData
+    public class CompetentAuthorityAndEntryOrExitPointData
     {
         public CompetentAuthorityData[] CompetentAuthorities { get; set; }
         public EntryOrExitPointData[] EntryOrExitPoints { get; set; }

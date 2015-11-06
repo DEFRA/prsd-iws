@@ -12,7 +12,7 @@
     using Requests.TransportRoute;
 
     internal class GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler :
-        IRequestHandler<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId, CompententAuthorityAndEntryOrExitPointData>
+        IRequestHandler<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId, CompetentAuthorityAndEntryOrExitPointData>
     {
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
         private readonly IEntryOrExitPointRepository entryOrExitPointRepository;
@@ -31,14 +31,14 @@
             this.competentAuthorityRepository = competentAuthorityRepository;
         }
 
-        public async Task<CompententAuthorityAndEntryOrExitPointData> HandleAsync(
+        public async Task<CompetentAuthorityAndEntryOrExitPointData> HandleAsync(
             GetTransitAuthoritiesAndEntryOrExitPointsByCountryId message)
         {
             var competentAuthorities = (await competentAuthorityRepository.GetTransitAuthorities(message.Id));
 
             var entryOrExitPoints = await entryOrExitPointRepository.GetForCountry(message.Id);
 
-            return new CompententAuthorityAndEntryOrExitPointData
+            return new CompetentAuthorityAndEntryOrExitPointData
             {
                 CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray(),
                 EntryOrExitPoints = entryOrExitPoints.Select(entryOrExitPointMapper.Map).ToArray()

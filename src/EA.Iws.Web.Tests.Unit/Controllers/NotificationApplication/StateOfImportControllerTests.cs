@@ -78,7 +78,7 @@
                 });
             A.CallTo(
                 () => mediator.SendAsync(A<GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == AnyCountryId)))
-                .Returns(new CompententAuthorityAndEntryOrExitPointData()
+                .Returns(new CompetentAuthorityAndEntryOrExitPointData()
                 {
                     CompetentAuthorities = competentAuthorties,
                     EntryOrExitPoints = entryOrExitPoints

@@ -8,5 +8,7 @@
         Task<Country> GetById(Guid id);
 
         Task<Country> GetByName(string name);
+
+        Task<Guid> GetUnitedKingdomId();
     }
 }

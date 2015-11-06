@@ -123,6 +123,7 @@
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
+    <Compile Include="ImportNotification\GetInternalUserCompetentAuthorityHandler.cs" />
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="ImportNotification\SetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodesHandler.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />
+    <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPointsHandler.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMax.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />

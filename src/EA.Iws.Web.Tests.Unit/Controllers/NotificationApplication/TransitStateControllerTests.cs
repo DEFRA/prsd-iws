@@ -42,7 +42,7 @@
                 };
             A.CallTo(
                 () => mediator.SendAsync(A<GetTransitAuthoritiesAndEntryOrExitPointsByCountryId>.That.Matches(s => s.Id == hull.CountryId)))
-                .Returns(new CompententAuthorityAndEntryOrExitPointData()
+                .Returns(new CompetentAuthorityAndEntryOrExitPointData()
                 {
                     CompetentAuthorities = competentAuthorties,
                     EntryOrExitPoints = entryOrExitPoints

@@ -704,6 +704,7 @@
     <Content Include="Areas\NotificationAssessment\Views\RefundDetails\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\StateOfImport\Index.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\AccountManagement\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\_CompetentAuthoritiesAndExitPoints.cshtml" />
     <Content Include="Content\iws\_import-waste-codes.scss" />
@@ -907,6 +908,7 @@
     <Compile Include="Areas\ImportNotification\Controllers\ImporterController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ProducerController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\StateOfExportController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\StateOfImportController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteOperationController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ShipmentController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteTypeController.cs" />
@@ -955,10 +957,16 @@
       <DependentUpon>ShipmentViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\StateOfExport\StateOfExportViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\StateOfImport\StateOfImportViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\StateOfExport\StateOfExportViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StateOfExportViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\StateOfImport\StateOfImportViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StateOfImportViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModelResources.Designer.cs">
@@ -1026,6 +1034,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\StateOfImport\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1725,6 +1738,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StateOfExportViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\StateOfImport\StateOfImportViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StateOfImportViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteOperationViewModelResources.Designer.cs</LastGenOutput>
@@ -1770,6 +1787,10 @@
       <LastGenOutput>FacilityTableRowResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Shipment\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\StateOfImport\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

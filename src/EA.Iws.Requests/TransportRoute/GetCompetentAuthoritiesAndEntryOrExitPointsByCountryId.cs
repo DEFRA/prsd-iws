@@ -3,7 +3,7 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId : IRequest<CompententAuthorityAndEntryOrExitPointData>
+    public class GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId : IRequest<CompetentAuthorityAndEntryOrExitPointData>
     {
         public Guid Id { get; private set; }
 

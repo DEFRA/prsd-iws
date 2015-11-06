@@ -61,7 +61,7 @@
 
             await mediator.SendAsync(new SetDraftData<StateOfExport>(id, stateOfExport));
 
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return RedirectToAction("Index", "StateOfImport");
         }
 
         [HttpGet]

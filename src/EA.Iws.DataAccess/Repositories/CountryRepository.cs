@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain;
     using Prsd.Core;
@@ -27,6 +28,11 @@
             return
                 await
                     context.Countries.SingleAsync(c => c.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public async Task<Guid> GetUnitedKingdomId()
+        {
+            return await context.Countries.Where(c => c.IsoAlpha2Code == "GB").Select(c => c.Id).SingleAsync();
         }
     }
 }

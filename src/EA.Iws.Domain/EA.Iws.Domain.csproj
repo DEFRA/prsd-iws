@@ -75,6 +75,7 @@
     <Compile Include="ICompetentAuthorityRepository.cs" />
     <Compile Include="ICountryRepository.cs" />
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
+    <Compile Include="IInternalUserRepository.cs" />
     <Compile Include="IMovementDocumentGenerator.cs" />
     <Compile Include="ImportNotification\IImportNotificationRepository.cs" />
     <Compile Include="ImportNotification\ImportNotification.cs" />
