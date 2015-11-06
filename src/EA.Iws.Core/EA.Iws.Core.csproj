@@ -89,7 +89,10 @@
     <Compile Include="Movement\MovementSummaryTableData.cs" />
     <Compile Include="Movement\ProgressData.cs" />
     <Compile Include="Movement\MovementProgressAndSummaryData.cs" />
+    <Compile Include="NotificationAssessment\AccountManagementData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
+    <Compile Include="NotificationAssessment\PaymentHistoryTableData.cs" />
+    <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
     <Compile Include="Shared\AddressDataResources.Designer.cs">

@@ -704,6 +704,7 @@
     <Content Include="Areas\NotificationAssessment\Views\RefundDetails\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\Index.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\AccountManagement\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\_CompetentAuthoritiesAndExitPoints.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -1318,6 +1319,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>YCodeResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\MovementCertificateController.cs" />
     <Compile Include="Areas\Movement\Controllers\NumberOfPackagesController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityController.cs" />
@@ -1333,6 +1335,7 @@
     <Compile Include="Areas\NotificationAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\RefundDetailsController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\ShipmentSummaryController.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\MovementSearchViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1358,6 +1361,11 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationAssessment\Views\AccountManagement\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
@@ -2011,6 +2019,10 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationAssessment\Views\RefundDetails\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationAssessment\Views\AccountManagement\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
