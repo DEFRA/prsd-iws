@@ -7,16 +7,20 @@
     var headerId = "header" + Model.Id;
     var limitedCompanyId = "LimitedCompany" + Model.Id;
     var otherId = "Other" + Model.Id;
+    var setSiteId = "set-actual-site-" + Model.Id;
 }
 
 <div class="facility-header" id="@headerId">
     <a href="javascript:;" onclick="expandSection(event)">@headerTitle</a>
+    <input name="ActualSite" value="@Model.Id" type="radio" onclick="setSite(event)" @if (Model.IsActualSite){ <text>checked</text> } id="@setSiteId"/>
+    <label for="@setSiteId">@string.Format(Resource.ActualSite, Model.NotificationTypeString)</label>
     <button class="link-submit right-float" onclick="deletePost(event)" value="@Model.Id">Delete</button>
 </div>
 
 <div class="grid-row js-hidden">
     <div class="column-half">
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.IsActualSite, new { id = "is-actual-" + Model.Id, @class="hidden-actual-site" })
         <h3 class="heading-small">@Resource.OrganisationHeading</h3>
         <div class="form-group-compound">
             @Html.Gds().LabelFor(m => m.BusinessName, false)

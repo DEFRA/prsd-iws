@@ -68,7 +68,7 @@
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="ImportNotification\Draft\Address.cs" />
     <Compile Include="ImportNotification\Draft\Contact.cs" />
-    <Compile Include="ImportNotification\Draft\Facilities.cs" />
+    <Compile Include="ImportNotification\Draft\FacilityCollection.cs" />
     <Compile Include="ImportNotification\Draft\Facility.cs" />
     <Compile Include="ImportNotification\Draft\Importer.cs" />
     <Compile Include="ImportNotification\Draft\Exporter.cs" />

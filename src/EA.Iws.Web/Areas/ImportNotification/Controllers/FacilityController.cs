@@ -26,11 +26,15 @@
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
 
             var countries = await mediator.SendAsync(new GetCountries());
+            var details = await mediator.SendAsync(new GetNotificationDetails(id));
+
+            ViewBag.Type = details.NotificationType;
 
             return View(facilityCollection.Facilities.Select(f =>
             {
                 var model = new FacilityViewModel(f);
                 model.Address.Countries = countries;
+                model.NotificationType = details.NotificationType;
                 return model;
             }).ToList());
         }
@@ -39,14 +43,15 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, List<FacilityViewModel> model)
         {
+            if (model == null)
+            {
+                model = new List<FacilityViewModel>();
+            }
+
             if (!ModelState.IsValid)
             {
-                var countries = await mediator.SendAsync(new GetCountries());
-
-                foreach (var facilityViewModel in model)
-                {
-                    facilityViewModel.Address.Countries = countries;
-                }
+                await BindCountries(model);
+                await BindNotificationType(id, model);
 
                 return View(model);
             }
@@ -61,13 +66,13 @@
                     RegistrationNumber = f.RegistrationNumber,
                     Id = f.Id,
                     Type = f.Type,
-                    IsSiteOfExport = false
+                    IsActualSite = f.IsActualSite
                 }).ToList()
             };
 
             await mediator.SendAsync(new SetDraftData<FacilityCollection>(id, facilityCollection));
 
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return RedirectToAction("Index", "WasteType");
         }
 
         [HttpPost]
@@ -85,7 +90,26 @@
 
             await BindCountries(model);
 
+            await BindNotificationType(id, model);
+
             return PartialView("_FacilityTable", model);
+        }
+
+        private async Task BindNotificationType(Guid id, List<FacilityViewModel> model)
+        {
+            var details = await mediator.SendAsync(new GetNotificationDetails(id));
+
+            ViewBag.Type = details.NotificationType;
+
+            if (model == null)
+            {
+                return;
+            }
+
+            foreach (var facilityViewModel in model)
+            {
+                facilityViewModel.NotificationType = details.NotificationType;
+            }
         }
 
         [HttpPost]
@@ -107,6 +131,8 @@
             }
 
             await BindCountries(model);
+
+            await BindNotificationType(id, model);
 
             return PartialView("_FacilityTable", model);
         }

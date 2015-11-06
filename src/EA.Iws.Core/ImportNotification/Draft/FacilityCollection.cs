@@ -7,7 +7,7 @@
     {
         public List<Facility> Facilities { get; set; }
 
-        public Facility SiteOfExport
+        public Facility SiteOfTreatment
         {
             get
             {
@@ -16,7 +16,7 @@
                     return null;
                 }
 
-                return Facilities.SingleOrDefault(f => f.IsSiteOfExport);
+                return Facilities.SingleOrDefault(f => f.IsActualSite);
             }
         }
 

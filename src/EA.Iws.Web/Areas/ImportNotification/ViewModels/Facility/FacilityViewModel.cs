@@ -21,6 +21,15 @@
         [Display(Name = "RegistrationNumber", ResourceType = typeof(FacilityViewModelResources))]
         public string RegistrationNumber { get; set; }
 
+        public NotificationType NotificationType { get; set; }
+
+        public string NotificationTypeString
+        {
+            get { return NotificationType.ToString().ToLower(); }
+        }
+
+        public bool IsActualSite { get; set; }
+
         public ContactViewModel Contact { get; set; }
 
         public FacilityViewModel()
@@ -38,6 +47,7 @@
             Contact = new ContactViewModel(facility.Contact);
             RegistrationNumber = facility.RegistrationNumber;
             Type = facility.Type;
+            IsActualSite = facility.IsActualSite;
         }
     }
 }

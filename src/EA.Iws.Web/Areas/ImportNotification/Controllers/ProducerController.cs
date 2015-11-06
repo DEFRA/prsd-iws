@@ -52,7 +52,7 @@
 
             await mediator.SendAsync(new SetDraftData<Producer>(id, producer));
 
-            return RedirectToAction("Index", "WasteType");
+            return RedirectToAction("Index", "Facility");
         } 
     }
 }

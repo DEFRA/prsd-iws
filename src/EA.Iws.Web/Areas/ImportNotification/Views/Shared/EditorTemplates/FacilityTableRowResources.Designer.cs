@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual site of {0}.
+        /// </summary>
+        public static string ActualSite {
+            get {
+                return ResourceManager.GetString("ActualSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unnamed facility.
         /// </summary>
         public static string BlankFacilityName {

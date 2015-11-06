@@ -17,6 +17,6 @@
 
         public Contact Contact { get; set; }
 
-        public bool IsSiteOfExport { get; set; }
+        public bool IsActualSite { get; set; }
     }
 }

@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add {0} facility.
+        /// </summary>
+        public static string AddMoreButton {
+            get {
+                return ResourceManager.GetString("AddMoreButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Facilities.
         /// </summary>
         public static string TabTitle {
@@ -70,7 +79,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Facilities.
+        ///   Looks up a localized string similar to {0} facilities.
         /// </summary>
         public static string Title {
             get {

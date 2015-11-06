@@ -40,3 +40,9 @@ function attachBlurAndShowValidations() {
 
     $(".error").parents(".grid-row").first().removeClass(".js-hidden");
 }
+
+function setSite(event) {
+    $(".hidden-actual-site").val(false);
+    var id = "#is-actual-" + $(event.target).val();
+    $(id).val(true);
+}
