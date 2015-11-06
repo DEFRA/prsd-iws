@@ -1,6 +1,5 @@
 // include Fake lib
 #r "tools/FAKE/tools/FakeLib.dll"
-#r "System.Management.Automation"
 
 open System
 open Fake
@@ -31,10 +30,14 @@ Target "RestorePackages" (fun _ ->
              Retries = 4 })
 )
 
-Target "UpdateAssemblyVersions" (fun _ ->
+let getBuildVersion = (fun _ -> 
     let buildDate = DateTime.Today.ToString("yy").ToString() + DateTime.Today.DayOfYear.ToString()
     let build = environVarOrDefault "BUILD_NUMBER" "0"
-    let version = String.Format("{0}.{1}.{2}.{3}", major, minor, buildDate, build)
+    String.Format("{0}.{1}.{2}.{3}", major, minor, buildDate, build)
+)
+
+Target "UpdateAssemblyVersions" (fun _ ->
+    let version = getBuildVersion()
 
     BulkReplaceAssemblyInfoVersions "src/" (fun f -> 
     { f with
@@ -74,6 +77,65 @@ Target "Test" (fun _ ->
 
 Target "Default" DoNothing
 
+Target "Package" (fun _ ->
+    CreateDir (buildDir @@ "Packages")
+
+    NuGet (fun p -> 
+        {p with
+            Authors = [ "SFW Ltd" ]
+            Project = "EA.Iws.Web"
+            Description = "IWS Web"
+            OutputPath = (buildDir @@ "Packages")
+            Summary = "IWS Web"
+            WorkingDir = "./"
+            Version = getBuildVersion()
+            Publish = false
+            Files = [
+                (@"build\_PublishedWebsites\EA.Iws.Web\**\*.*", Some "website", None)
+                (@"tools\FAKE\tools\FakeLib.dll", Some "tools", None)
+                (@"tools\FAKE\tools\Fake.IIS.dll", Some "tools", None)
+                (@"tools\FAKE\tools\Microsoft.Web.Administration.dll", Some "tools", None)
+            ]
+        }) 
+        "src/EA.Iws.nuspec"
+
+    NuGet (fun p -> 
+        {p with
+            Authors = [ "SFW Ltd" ]
+            Project = "EA.Iws.Api"
+            Description = "IWS API"
+            OutputPath = (buildDir @@ "Packages")
+            Summary = "IWS API"
+            WorkingDir = "./"
+            Version = getBuildVersion()
+            Publish = false
+            Files = [
+                (@"build\_PublishedWebsites\EA.Iws.Api\**\*.*", Some "website", None)
+                (@"tools\FAKE\tools\FakeLib.dll", Some "tools", None)
+                (@"tools\FAKE\tools\Fake.IIS.dll", Some "tools", None)
+                (@"tools\FAKE\tools\Microsoft.Web.Administration.dll", Some "tools", None)
+            ]
+        }) 
+        "src/EA.Iws.nuspec"
+
+    NuGet (fun p -> 
+        {p with
+            Authors = [ "SFW Ltd" ]
+            Project = "EA.Iws.Database"
+            Description = "IWS Database"
+            OutputPath = (buildDir @@ "Packages")
+            Summary = "IWS Database"
+            WorkingDir = "./"
+            Version = getBuildVersion()
+            Publish = false
+            Files = [
+                (@"tools\FAKE\tools\FakeLib.dll", Some "tools", None)
+                (@"build\Database\**\*.*", Some "scripts", None)
+            ]
+        }) 
+        "src/EA.Iws.nuspec"
+)
+
 // Dependencies
 "Clean"
   ==> "RestorePackages"
@@ -83,6 +145,7 @@ Target "Default" DoNothing
   ==> "CopyDatabaseScripts"
   ==> "Test"
   ==> "Default"
+  ==> "Package"
 
 // start build
 RunTargetOrDefault "Default"
