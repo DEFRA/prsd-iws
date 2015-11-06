@@ -1,0 +1,50 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.StateOfExport.IndexResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.StateOfExport.StateOfExportViewModel
+
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    for (int i = 0; i < Model.Countries.Count; i++)
+    {
+        @Html.HiddenFor(m => m.Countries[i].Name)
+        @Html.HiddenFor(m => m.Countries[i].Id)
+    }
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+        @Html.Gds().LabelFor(m => m.CountryId, false)
+        @Html.Gds().ValidationMessageFor(m => m.CountryId)
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountryList, string.Empty, new { onchange = "changeCountry(event)" })
+    </div>
+
+    <div id="ca-and-exit-point">
+        @if (Model.IsCountrySelected)
+        {
+            @Html.Partial("_CompetentAuthoritiesAndExitPoints")
+        }
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}
+
+@section scripts{
+    <script>
+        function changeCountry(event) {
+            var countryId = "countryId=" + $(event.target).val();
+            getAjax('@Url.Action("GetAuthoritiesAndExitPoints")', countryId, updateAuthoritiesAndExitPoints);
+        }
+
+        function updateAuthoritiesAndExitPoints(html) {
+            $("#ca-and-exit-point").html(html);
+        }
+    </script>
+}

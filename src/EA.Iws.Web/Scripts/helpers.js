@@ -18,3 +18,16 @@ function postAjax(url, event, formSelector, successFunction) {
     event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true;
     return false;
 }
+
+function getAjax(url, data, successFunction) {
+    $.get(url, data).done(function(successData) {
+        successFunction(successData);
+    }).fail(function() {
+        console.log("error on get. Url: " + url);
+        console.log(data);
+    });
+
+    event.preventDefault ? event.preventDefault() : event.returnValue = false;
+    event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true;
+    return false;
+}

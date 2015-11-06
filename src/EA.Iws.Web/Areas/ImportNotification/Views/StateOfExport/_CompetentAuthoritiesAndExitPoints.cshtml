@@ -1,0 +1,36 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.StateOfExport.StateOfExportViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorityId)">
+    @for (int i = 0; i < Model.CompetentAuthorities.Count; i++)
+    {
+        @Html.HiddenFor(m => m.CompetentAuthorities[i].Id)
+        @Html.HiddenFor(m => m.CompetentAuthorities[i].Code)
+        @Html.HiddenFor(m => m.CompetentAuthorities[i].Name)
+    }
+    @Html.Gds().LabelFor(m => m.CompetentAuthorityId, false)
+    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorityId)
+    <fieldset>
+        @for (int i = 0; i < Model.CompetentAuthorities.Count; i++)
+        {
+            var label = Model.CompetentAuthorities[i].Code + " - " + Model.CompetentAuthorities[i].Name;
+
+            <div class="form-group form-group-compound">
+                <label class="block-label">
+                    @Html.RadioButtonFor(m => m.CompetentAuthorityId, Model.CompetentAuthorities[i].Id)
+                    @label
+                </label>
+            </div>
+        }
+    </fieldset>
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
+    @for (int i = 0; i < Model.ExitPoints.Count; i++)
+    {
+        @Html.HiddenFor(m => m.ExitPoints[i].Id)
+        @Html.HiddenFor(m => m.ExitPoints[i].Name)
+    }
+    @Html.Gds().LabelFor(m => m.ExitPointId, false)
+    @Html.Gds().ValidationMessageFor(m => m.ExitPointId)
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.ExitPointList, string.Empty)
+</div>
