@@ -1,12 +1,11 @@
-﻿@model EA.Iws.Web.ViewModels.Account.LoginViewModel
+﻿@using EA.Iws.Web.Views.Account
+@model EA.Iws.Web.ViewModels.Account.LoginViewModel
 @{
-    ViewBag.Title = "Sign in to your International Waste Shipments account";
+    ViewBag.Title = LoginResources.Title;
 }
 <div class="grid-row">
     <section class="column-two-thirds">
-        <h1 class="heading-large">
-            Sign in to your account
-        </h1>
+        <h1 class="heading-large">@LoginResources.Header</h1>
         <p class="heading-large"></p>
 
         @using (Html.BeginForm("Login", "Account"))
@@ -26,9 +25,9 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Continue" class="button" />
+                <input type="submit" value="@LoginResources.Continue" class="button" />
             </div>
-            <p>@Html.ActionLink("Forgotten your password?", "ForgotPassword", "Account")</p>
+            <p>@Html.ActionLink(LoginResources.ForgottenPassword, "ForgotPassword", "Account")</p>
         }
     </section>
 </div>

@@ -108,7 +108,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Organisation name field is required..
+        ///   Looks up a localized string similar to Please enter the organisation&apos;s name.
         /// </summary>
         public static string OrgNameRequired {
             get {
@@ -126,7 +126,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Organisation type field is required..
+        ///   Looks up a localized string similar to Please choose the type of organisation.
         /// </summary>
         public static string OrgTypeRequired {
             get {

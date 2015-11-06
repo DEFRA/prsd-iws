@@ -1,10 +1,10 @@
-﻿@model EA.Iws.Web.ViewModels.Registration.EditApplicantDetailsViewModel
+﻿@using EA.Iws.Web.Views.Registration
+@model EA.Iws.Web.ViewModels.Registration.EditApplicantDetailsViewModel
 @{
-    ViewBag.Title = "Update your sign-in details";
+    ViewBag.Title = EditApplicantDetailsResources.Title;
 }
-<h1 class="heading-large">
-    Your sign in details
-</h1>
+
+<h1 class="heading-large">@EditApplicantDetailsResources.Header</h1>
 
 @using (Html.BeginForm("EditApplicantDetails", "Registration"))
 {
@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" class="button" value="Update" />
+        <input type="submit" class="button" value="@EditApplicantDetailsResources.Update" />
     </div>
-    <p>@Html.ActionLink("Go back to My account", "Home", "Applicant", new { id = Model.Id, area = string.Empty }, null)</p>
+    <p>@Html.ActionLink(EditApplicantDetailsResources.GoBackToMyAccount, "Home", "Applicant", new { id = Model.Id, area = string.Empty }, null)</p>
 }

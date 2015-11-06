@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.ViewModels.Registration.SelectOrganisationViewModel
+﻿@using EA.Iws.Web.Views.Registration
+@model EA.Iws.Web.ViewModels.Registration.SelectOrganisationViewModel
 @{
-    ViewBag.Title = "Similar organisations";
+    ViewBag.Title = SelectOrganisationResources.Title;
 }
 
-<h1 class="heading-large">Similar organisations</h1>
+<h1 class="heading-large">@SelectOrganisationResources.Header</h1>
 @if (Model.Organisations != null && Model.Organisations.Count > 0)
 {
-    <p>Select an organisation from the options below or add a organisation.</p>
+    <p>@SelectOrganisationResources.HeaderDescription</p>
 
     using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
     {
@@ -24,7 +25,7 @@
              }
 
             <div class="column-half">
-                <h3 class="heading-small">Organisation @(i + 1)</h3>
+                <h3 class="heading-small">@SelectOrganisationResources.Organisation @(i + 1)</h3>
                 @Html.HiddenFor(m => m.Organisations[i].Id)
                 <ul>
                     <li>
@@ -32,7 +33,7 @@
                         <span class="bold-small">@Html.DisplayFor(m => m.Organisations[i].Name)</span>
                     </li>
                 </ul>
-                <button type="submit" name="submitButton" value="@Html.Raw(Model.Organisations[i].Id)" class="link-submit">Use this organisation</button>
+                <button type="submit" name="submitButton" value="@Html.Raw(Model.Organisations[i].Id)" class="link-submit">@SelectOrganisationResources.ButtonText</button>
             </div>
 
             if (!shouldBeANewRow || i == Model.Organisations.Count - 1)
@@ -43,5 +44,5 @@
     }
 }
 <hr />
-<h2 class="heading-medium">Add a new organisation</h2>
+<h2 class="heading-medium">@SelectOrganisationResources.AddNewOrg</h2>
 @Html.ActionLink(linkText: "Add new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { @class = "button" })<br />

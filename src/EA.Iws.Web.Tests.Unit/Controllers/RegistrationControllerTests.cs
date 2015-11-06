@@ -11,6 +11,7 @@
     using FakeItEasy;
     using Prsd.Core.Web.OAuth;
     using Requests.Shared;
+    using Views.Registration;
     using Web.Controllers;
     using Web.ViewModels.Registration;
     using Xunit;
@@ -110,7 +111,7 @@
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateObject(registerViewModel, validationContext, validationResults, true);
 
-            Assert.True(validationResults.Any(vr => vr.ErrorMessage.Equals("Please confirm that you have read the terms and conditions")));
+            Assert.True(validationResults.Any(vr => vr.ErrorMessage.Equals(ApplicantRegistrationResources.ConfirmTnCs)));
         }
 
         [Fact]

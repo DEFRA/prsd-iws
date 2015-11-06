@@ -1,10 +1,11 @@
-﻿@{
-    ViewBag.Title = "Your account's been activated";
+﻿@using EA.Iws.Web.Views.Account
+@{
+    ViewBag.Title = VerifyEmailResources.Title;
 }
 
-<h2 class="heading-large">Email verified</h2>
+<h2 class="heading-large">@VerifyEmailResources.Header</h2>
 
-<p>Your email has been verified successfully.</p>
+<p>@VerifyEmailResources.HeaderDescription</p>
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -12,5 +13,5 @@
 }
 else
 {
-    @Html.ActionLink("Log in to continue using International Waste Shipments", "Index", "Home")
+    @Html.ActionLink(VerifyEmailResources.LogInLinktext, "Index", "Home")
 }

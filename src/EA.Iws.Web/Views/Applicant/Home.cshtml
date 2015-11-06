@@ -1,32 +1,34 @@
-﻿@{
-    ViewBag.Title = "Your notifications";
+﻿@using EA.Iws.Web.Views.Applicant
+@{
+    ViewBag.Title = HomeResources.Title;
 }
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">Your notifications</h1>
+        <h1 class="heading-large">@HomeResources.Header</h1>
 
-        <h2 class="heading-medium">Would you like to start a notification?</h2>
-        <p>Start a new notification now or read the <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" title="View supporting information on GOV.UK in new tab">supporting information</a> first
-           <span class="visuallyhidden">This link opens in a new browser tab</span>
+        <h2 class="heading-medium">@HomeResources.Header2</h2>
+        <p>
+            @HomeResources.Start <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" title=@HomeResources.TitleSupportingInfo>@HomeResources.SupportingInfo</a> @HomeResources.First
+            <span class="visuallyhidden">@HomeResources.Message</span>
         </p>
 
         <p id="get-started" class="get-started group">
-            @Html.ActionLink("Start a new notification", "CompetentAuthority", "NewNotification", null, new { @class = "button-get-started button" })
+            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null, new { @class = "button-get-started button" })
         </p>
-        <p>Or you can @Html.ActionLink("create a new notification based on a previous one", "CompetentAuthority", "NewNotification", new { cfp = 1 }, null)</p>
+        <p>@HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 }, null)</p>
     </div>
     <div class="column-third" id="submit-side-bar">
-        <h3 class="heading-medium">Account services</h3>
+        <h3 class="heading-medium">@HomeResources.Header3</h3>
         <ul>
-            <li><i class="fa fa-briefcase"></i>&nbsp;&nbsp;@Html.ActionLink("Account details", "ChangeAccountDetails", "Registration")</li>
-            <li><i class="fa fa-book"></i>&nbsp;&nbsp;@Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)</li>
+            <li><i class="fa fa-briefcase"></i>&nbsp;&nbsp;@Html.ActionLink(HomeResources.AccountDetails, "ChangeAccountDetails", "Registration")</li>
+            <li><i class="fa fa-book"></i>&nbsp;&nbsp;@Html.ActionLink(HomeResources.AddressBook, "Index", "Home", new { area = "AddressBook" }, null)</li>
         </ul>
     </div>
 </div>
 
 <div class="form-group"></div>
 
-<h2 class="heading-medium">Choose a notification</h2>
+<h2 class="heading-medium">@HomeResources.HeaderManageYourNotifications</h2>
 
 @Html.Action("_GetUserNotifications")

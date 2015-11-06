@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using Core.Shared;
     using Prsd.Core.Validation;
+    using Views.Registration;
 
     public class CreateNewOrganisationViewModel
     {
@@ -11,15 +12,15 @@
         public int OrganisationId { get; set; }
 
         [Required]
-        [Display(Name = "Organisation name")]
+        [Display(Name = "OrganisationName", ResourceType = typeof(CreateNewOrganisationResources))]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Organisation type")]
+        [Display(Name = "OrganisationType", ResourceType = typeof(CreateNewOrganisationResources))]
         public BusinessType BusinessType { get; set; }
 
-        [RequiredIf("BusinessType", BusinessType.Other, ErrorMessage = "Description is required")]
-        [Display(Name = "Organisation type")]
+        [RequiredIf("BusinessType", BusinessType.Other, ErrorMessageResourceName = "DescriptionRequired", ErrorMessageResourceType = typeof(CreateNewOrganisationResources))]
+        [Display(Name = "OrganisationType", ResourceType = typeof(CreateNewOrganisationResources))]
         public string OtherDescription { get; set; }
     }
 }

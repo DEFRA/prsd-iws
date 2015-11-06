@@ -135,13 +135,13 @@
     <value>Organisation name</value>
   </data>
   <data name="OrgNameRequired" xml:space="preserve">
-    <value>The Organisation name field is required.</value>
+    <value>Please enter the organisation's name</value>
   </data>
   <data name="OrgType" xml:space="preserve">
     <value>Organisation type</value>
   </data>
   <data name="OrgTypeRequired" xml:space="preserve">
-    <value>The Organisation type field is required.</value>
+    <value>Please choose the type of organisation</value>
   </data>
   <data name="OtherOrgType" xml:space="preserve">
     <value>Enter your organisation type</value>

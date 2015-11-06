@@ -6,6 +6,7 @@
     using Core.Registration;
     using Core.Shared;
     using Prsd.Core.Validation;
+    using Views.Registration;
 
     public class EditOrganisationViewModel
     {
@@ -16,24 +17,24 @@
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Address line 1")]
+        [Display(Name = "AddressLine1", ResourceType = typeof(EditOrganisationDetailsResources))]
         public string Address1 { get; set; }
 
-        [Display(Name = "Address line 2")]
+        [Display(Name = "AddressLine2", ResourceType = typeof(EditOrganisationDetailsResources))]
         public string Address2 { get; set; }
 
         [Required]
-        [Display(Name = "Town")]
+        [Display(Name = "Town", ResourceType = typeof(EditOrganisationDetailsResources))]
         public string TownOrCity { get; set; }
 
-        [Display(Name = "County")]
+        [Display(Name = "County", ResourceType = typeof(EditOrganisationDetailsResources))]
         public string Region { get; set; }
 
-        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", ErrorMessage = "The Postcode field is required")]
+        [RequiredIfPropertiesEqual("CountryId", "DefaultCountryId", ErrorMessageResourceName = "PostcodeRequired", ErrorMessageResourceType = typeof(EditOrganisationDetailsResources))]
         public string Postcode { get; set; }
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(EditOrganisationDetailsResources))]
         public Guid CountryId { get; set; }
 
         public Guid DefaultCountryId { get; set; }

@@ -151,7 +151,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Postcode field is required..
+        ///   Looks up a localized string similar to Please enter the post code.
         /// </summary>
         public static string PostcodeRequired {
             get {

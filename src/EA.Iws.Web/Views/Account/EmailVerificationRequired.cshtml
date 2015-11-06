@@ -1,13 +1,14 @@
-﻿@{
-    ViewBag.Title = "Activate your email";
+﻿@using EA.Iws.Web.Views.Account
+@{
+    ViewBag.Title = EmailVerificationRequiredResources.Title;
 }
 
-<h1 class="heading-large">Activate your account</h1>
+<h1 class="heading-large">@EmailVerificationRequiredResources.Header</h1>
 
 @if (ViewBag.Errors != null && ((string[])ViewBag.Errors).Length > 0)
 {
     <div class="validation-summary" style="margin-top: 25px">
-        <h2 class="heading-small">An error occurred.</h2>
+        <h2 class="heading-small">@EmailVerificationRequiredResources.Error</h2>
         <ul>
             @foreach (var error in (string[])ViewBag.Errors)
             {
@@ -17,14 +18,14 @@
     </div>
 }
 
-<p>We've sent your activation email to @(ViewBag.Email). Please use the link in the email to activate your user account. You may need to check your junk or spam folder if you can't see the email in your inbox.</p>
-<p>Once you have followed the activation link, you will be directed to your account login page.</p>
+<p>@string.Format(EmailVerificationRequiredResources.P1, ViewBag.Email)</p>
+<p>@EmailVerificationRequiredResources.P2</p>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <p>
-        If you did not receive the email, you can
-        <button class="link-submit" type="submit">request another activation email</button>.
+        @EmailVerificationRequiredResources.P3
+        <button class="link-submit" type="submit">@EmailVerificationRequiredResources.ButtonText</button>.
     </p>
 }

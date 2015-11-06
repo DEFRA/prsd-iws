@@ -15,6 +15,7 @@
     using Prsd.Core.Web.OAuth;
     using Prsd.Core.Web.OpenId;
     using ViewModels.Account;
+    using Views.Account;
 
     [Authorize]
     public class AccountController : Controller
@@ -64,7 +65,7 @@
 
                 return RedirectToLocal(returnUrl, isInternal);
             }
-            ModelState.AddModelError(string.Empty, "The username or password is incorrect");
+            ModelState.AddModelError(string.Empty, LoginResources.InvalidLoginDetails);
             return View(model);
         }
 
@@ -182,7 +183,7 @@
 
             if (!result)
             {
-                ModelState.AddModelError("Email", "Email address not recognised.");
+                    ModelState.AddModelError("Email", ForgotPasswordResources.EmailNotRegistered);
                 return View(model);
             }
 

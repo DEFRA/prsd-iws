@@ -1,34 +1,35 @@
-﻿<details>
-    <summary><h2 class="summary heading-xsmall">Read standard data notice</h2></summary>
+﻿@using EA.Iws.Web.Views.Shared
+<details>
+    <summary><h2 class="summary heading-xsmall">@IwsStandardDataNoticeResources.Header</h2></summary>
     <div class="panel-indent">
         <p>
-            How we will use your personal information
+            @IwsStandardDataNoticeResources.PersonalInfo
         </p>
 
         <p>
-            We, the Environment Agency, will process the information you provide so that we can:
+            @IwsStandardDataNoticeResources.DataNotice1
 
             <ul class="list-bullet">
-                <li>deal with your application;</li>
-                <li>make sure you keep to the conditions of the licence, permit or registration; and</li>
-                <li>process renewals.</li>
+                <li>@IwsStandardDataNoticeResources.ProcessListItem1</li>
+                <li>@IwsStandardDataNoticeResources.ProcessListItem2</li>
+                <li>@IwsStandardDataNoticeResources.ProcessListItem3</li>
             </ul>
         </p>
 
         <p>
-            We may also process or release the information to:
+            @IwsStandardDataNoticeResources.DataNotice2
 
             <ul class="list-bullet">
-                <li>offer you documents or services relating to environmental matters;</li>
-                <li>consult the public, public organisations and other organisations (for example, the Health and Safety Executive, local authorities, the emergency services, the Department for Environment, Food and Rural Affairs) on environmental issues;</li>
-                <li>carry out research and development work on environmental issues;</li>
-                <li>prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed;</li>
-                <li>assess whether customers are satisfied with our service, and to improve our service; and</li>
-                <li>respond to requests for information under the Freedom of Information Act 2000 and the Environmental Information Regulations 2004 (if the Data Protection Act allows).</li>
+                <li>@IwsStandardDataNoticeResources.ReleaseInfoListItem1</li>
+                <li>@IwsStandardDataNoticeResources.ReleaseInfoListItem2</li>
+                <li>@IwsStandardDataNoticeResources.ReleaseInfoListItem3</li>
+                <li>@IwsStandardDataNoticeResources.ReleaseInfoListItem4</li>
+                <li>@IwsStandardDataNoticeResources.ReleaseInfoListItem5</li>
+                <li>@IwsStandardDataNoticeResources.ReleaseInfoListItem6</li>
             </ul>
         </p>
         <p>
-            We may pass the information on to our agents or representatives to do these things for us.
+            @IwsStandardDataNoticeResources.DataNotice3
         </p>
 
     </div>

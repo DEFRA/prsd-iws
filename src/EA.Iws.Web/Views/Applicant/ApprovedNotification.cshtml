@@ -1,9 +1,11 @@
-﻿@model EA.Iws.Web.ViewModels.Applicant.ApprovedNotificationViewModel
+﻿@using EA.Iws.Web.Views.Applicant
+@model EA.Iws.Web.ViewModels.Applicant.ApprovedNotificationViewModel
 @{
-    ViewBag.Title = "View Approved Notification";
+    ViewBag.Title = ApprovedNotificationResources.Title;
 }
+
 <header class="hgroup text">
-    <h2 class="heading-large">What would you like to do next?</h2>
+    <h2 class="heading-large">@ApprovedNotificationResources.Header</h2>
 </header>
 
 @using (Html.BeginForm("ApprovedNotification", "Applicant"))
@@ -18,7 +20,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" class="button" value="Continue" />
+        <input type="submit" class="button" value=@ApprovedNotificationResources.Continue />
     </div>
-    <p>@Html.ActionLink("Return to My account", "Home", "Applicant", new { id = User.GetUserId(), area = string.Empty }, null)</p>
+    <p>@Html.ActionLink(ApprovedNotificationResources.ReturnToMyAccount, "Home", "Applicant", new { id = User.GetUserId(), area = string.Empty }, null)</p>
 }

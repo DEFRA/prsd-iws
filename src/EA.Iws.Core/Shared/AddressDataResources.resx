@@ -148,6 +148,6 @@
     <value>Postcode</value>
   </data>
   <data name="PostcodeRequired" xml:space="preserve">
-    <value>The Postcode field is required.</value>
+    <value>Please enter the post code</value>
   </data>
 </root>

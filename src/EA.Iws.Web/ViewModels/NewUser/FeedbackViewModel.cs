@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Requests.Feedback;
     using Shared;
+    using Views.Feedback;
 
     public class FeedbackViewModel
     {
@@ -24,11 +25,11 @@
             };
         }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "FeedbackOptionsRequired", ErrorMessageResourceType = typeof(FeedbackResources))]
         public RadioButtonStringCollectionViewModel FeedbackOptions { get; set; }
 
         [StringLength(1200)]
-        [Display(Name = "Feedback")]
+        [Display(Name = "Feedback", ResourceType = typeof(FeedbackResources))]
         public string FeedbackDescription { get; set; }
 
         public FeedbackData ToRequest()

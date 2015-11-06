@@ -1,11 +1,9 @@
 ﻿namespace EA.Iws.Web.ViewModels.Registration
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using Core.Shared;
     using Prsd.Core.Validation;
+    using Views.Registration;
 
     public class ApplicantRegistrationViewModel
     {
@@ -15,7 +13,7 @@
         }
 
         [Required]
-        [Display(Name = "First name")]
+        [Display(Name = "FirstName", ResourceType = typeof(ApplicantRegistrationResources))]
         [StringLength(50)]
         [DataType(DataType.Text)]
         public string Name { get; set; }
@@ -23,38 +21,38 @@
         [Required]
         [StringLength(50)]
         [DataType(DataType.Text)]
-        [Display(Name = "Last name")]
+        [Display(Name = "LastName", ResourceType = typeof(ApplicantRegistrationResources))]
         public string Surname { get; set; }
 
         [Required]
         [StringLength(80)]
         [DataType(DataType.Text)]
-        [Display(Name = "Organisation name")]
+        [Display(Name = "OrganisationName", ResourceType = typeof(ApplicantRegistrationResources))]
         public string OrganisationName { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Telephone number")]
+        [Display(Name = "TelephoneNumber", ResourceType = typeof(ApplicantRegistrationResources))]
         public string PhoneNumber { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email", ResourceType = typeof(ApplicantRegistrationResources))]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long", MinimumLength = 8)]
+        [StringLength(100, ErrorMessageResourceName = "PasswordLength", ErrorMessageResourceType = typeof(ApplicantRegistrationResources), MinimumLength = 8)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(ApplicantRegistrationResources))]
         public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(ApplicantRegistrationResources))]
+        [Compare("Password", ErrorMessageResourceName = "PasswordsDoNotMatch", ErrorMessageResourceType = typeof(ApplicantRegistrationResources))]
         public string ConfirmPassword { get; set; }
 
-        [MustBeTrue(ErrorMessage = "Please confirm that you have read the terms and conditions")]
+        [MustBeTrue(ErrorMessageResourceName = "ConfirmTnCs", ErrorMessageResourceType = typeof(ApplicantRegistrationResources))]
         public bool TermsAndConditions { get; set; }
 
         public AddressData Address { get; set; }

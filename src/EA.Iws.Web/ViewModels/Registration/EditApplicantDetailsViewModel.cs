@@ -3,13 +3,14 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Api.Client.Entities;
+    using Views.Registration;
 
     public class EditApplicantDetailsViewModel
     {
         public Guid Id { get; set; }
 
         [Required]
-        [Display(Name = "First name")]
+        [Display(Name = "FirstName", ResourceType = typeof(EditApplicantDetailsResources))]
         [StringLength(50)]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
@@ -17,17 +18,17 @@
         [Required]
         [StringLength(50)]
         [DataType(DataType.Text)]
-        [Display(Name = "Last name")]
+        [Display(Name = "LastName", ResourceType = typeof(EditApplicantDetailsResources))]
         public string Surname { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Telephone number")]
+        [Display(Name = "TelephoneNumber", ResourceType = typeof(EditApplicantDetailsResources))]
         public string PhoneNumber { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email address")]
+        [Display(Name = "Email", ResourceType = typeof(EditApplicantDetailsResources))]
         public string Email { get; set; }
 
         public string ExistingEmail { get; set; }
