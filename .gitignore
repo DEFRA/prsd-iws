@@ -198,3 +198,8 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# FAKE (F# Make)
+.fake
+tools/FAKE/
+tools/xunit.runner.console/
