@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = IndexResources.Title;
 }
-@helper DisplayCodeTable(string tableId, string tableHeading, string code, IList<WasteCodeViewModel> selectedCodesForDisplay)
+@helper DisplayCodeTable(string tableId, string tableHeading, string jsonCodesId, IList<WasteCodeViewModel> selectedCodesForDisplay)
 {
     <table id="@tableId" class="import-draft-codes-table">
         <thead>
@@ -22,7 +22,7 @@
                 <tr id="row-@item.Id">
                     <td>@item.Name</td>
                     <td class="remove">
-                        <button data-action="remove" data-code-id="@item.Id" data-code-type="@code" type="button">
+                        <button data-action="remove" data-code-id="@item.Id" data-json-codes-id="@jsonCodesId" type="button">
                             @IndexResources.RemoveCodeButton
                         </button>
                     </td>
@@ -33,110 +33,133 @@
 }
 <header class="hgroup"><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div id="import-waste-codes">
 
-    <div class="form-group large-bottom-margin @Html.Gds().FormGroupClass(m => m.Name)">
-        @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)
-        @Html.Gds().TextBoxFor(m => m.Name, new { maxLength = 70 })
-    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <h2 class="heading-medium">Waste codes</h2>
-
-    <hr />
-
-    <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
-        @Html.Gds().LabelFor(m => m.SelectedBaselCode, showOptionalLabel: false)
-        @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_type = "waste-codes" })
-    </div>
-
-    <div class="form-group large-bottom-margin @Html.Gds().FormGroupClass(m => m.BaselCodeNotListed)">
-        <label for="BaselCodeNotListed">
-            @Html.CheckBoxFor(m => m.BaselCodeNotListed)
-            @Html.DisplayNameFor(m => m.BaselCodeNotListed)
-        </label>
-    </div>
-
-    <div class="grid-row">
-        <div class="column-half">
-            <div class="form-group medium-bottom-margin @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
-                @Html.Gds().LabelFor(m => m.SelectedEwcCode, showOptionalLabel: false)
-                @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_type = "waste-codes" })
-                @Html.HiddenFor(model => Model.SelectedEwcCodesJson)
-                <button type="button" id="add-ewc-code" class="add">Add</button>
-            </div>
-
-            <div class="form-group large-bottom-margin">
-                @DisplayCodeTable("ewc-codes-table", IndexResources.EwcCodesTableHeading, "ewc", Model.SelectedEwcCodesDisplay)
-            </div>
-        </div>
-        <div class="column-half">
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
-                @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
-                @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_type = "waste-codes" })
-                @Html.HiddenFor(model => Model.SelectedHCodesJson)
-                <button type="button" id="add-h-code" class="add">Add</button>
-            </div>
-
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.HCodeNotApplicable)">
-                <label for="HCodeNotApplicable">
-                    @Html.CheckBoxFor(m => m.HCodeNotApplicable)
-                    @Html.DisplayNameFor(m => m.HCodeNotApplicable)
-                </label>
-            </div>
-
-            <div class="form-group large-bottom-margin">
-                @DisplayCodeTable("h-codes-table", IndexResources.HCodesTableHeading, "h", Model.SelectedHCodesDisplay)
-            </div>
-        </div>
-    </div>
-    <div class="grid-row">
-        <div class="column-half">
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
-                @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
-                @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_type = "waste-codes" })
-                @Html.HiddenFor(model => Model.SelectedYCodesJson)
-                <button type="button" id="add-y-code" class="add">Add</button>
-            </div>
-
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.YCodeNotApplicable)">
-                <label for="YCodeNotApplicable">
-                    @Html.CheckBoxFor(m => m.YCodeNotApplicable)
-                    @Html.DisplayNameFor(m => m.YCodeNotApplicable)
-                </label>
-            </div>
-
-            <div class="form-group large-bottom-margin">
-                @DisplayCodeTable("y-codes-table", IndexResources.YCodesTableHeading, "y", Model.SelectedYCodesDisplay)
-            </div>
+        <div class="form-group large-bottom-margin @Html.Gds().FormGroupClass(m => m.Name)">
+            @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)
+            @Html.Gds().TextBoxFor(m => m.Name, new { maxLength = 70 })
         </div>
 
-        <div class="column-half">
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
-                @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
-                @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_type = "waste-codes" })
-                @Html.HiddenFor(model => Model.SelectedUnClassesJson)
-                <button type="button" id="add-un-class" class="add">Add</button>
-            </div>
+        <h2 class="heading-medium">Waste codes</h2>
 
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.UnClassNotApplicable)">
-                <label for="UnClassNotApplicable">
-                    @Html.CheckBoxFor(m => m.UnClassNotApplicable)
-                    @Html.DisplayNameFor(m => m.UnClassNotApplicable)
-                </label>
-            </div>
+        <hr />
 
-            <div class="form-group large-bottom-margin">
-                @DisplayCodeTable("un-classes-table", IndexResources.UnClassesTableHeading, "un", Model.SelectedUnClassesDisplay)
+        <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
+            @Html.Gds().LabelFor(m => m.SelectedBaselCode, showOptionalLabel: false)
+            @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_type = "waste-codes" })
+        </div>
+
+        <div class="form-group large-bottom-margin @Html.Gds().FormGroupClass(m => m.BaselCodeNotListed)">
+            <label for="BaselCodeNotListed">
+                @Html.CheckBoxFor(m => m.BaselCodeNotListed)
+                @Html.DisplayNameFor(m => m.BaselCodeNotListed)
+            </label>
+        </div>
+
+        <div class="grid-row">
+            <div class="column-half">
+                <div class="form-group medium-bottom-margin @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
+                    @Html.Gds().LabelFor(m => m.SelectedEwcCode, showOptionalLabel: false)
+                    @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_type = "waste-codes" })
+                    @Html.HiddenFor(model => Model.SelectedEwcCodesJson)
+                    <button type="button" 
+                            class="add" 
+                            data-action="add" 
+                            data-json-codes-id="#SelectedEwcCodesJson" 
+                            data-selected-code-id="#SelectedEwcCode" 
+                            data-table-id="#ewc-codes-table">Add</button>
+                </div>
+
+                <div class="form-group large-bottom-margin">
+                    @DisplayCodeTable("ewc-codes-table", IndexResources.EwcCodesTableHeading, "#SelectedEwcCodesJson", Model.SelectedEwcCodesDisplay)
+                </div>
+            </div>
+            <div class="column-half">
+                <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
+                    @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
+                    @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_type = "waste-codes" })
+                    @Html.HiddenFor(model => Model.SelectedHCodesJson)
+                    <button type="button" 
+                            class="add" 
+                            data-action="add" 
+                            data-json-codes-id="#SelectedHCodesJson" 
+                            data-selected-code-id="#SelectedHCode" 
+                            data-table-id="#h-codes-table">Add</button>
+                </div>
+
+                <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.HCodeNotApplicable)">
+                    <label for="HCodeNotApplicable">
+                        @Html.CheckBoxFor(m => m.HCodeNotApplicable)
+                        @Html.DisplayNameFor(m => m.HCodeNotApplicable)
+                    </label>
+                </div>
+
+                <div class="form-group large-bottom-margin">
+                    @DisplayCodeTable("h-codes-table", IndexResources.HCodesTableHeading, "#SelectedHCodesJson", Model.SelectedHCodesDisplay)
+                </div>
             </div>
         </div>
-    </div>
+        <div class="grid-row">
+            <div class="column-half">
+                <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
+                    @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
+                    @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_type = "waste-codes" })
+                    @Html.HiddenFor(model => Model.SelectedYCodesJson)
+                    <button type="button" 
+                            class="add" 
+                            data-action="add" 
+                            data-json-codes-id="#SelectedYCodesJson" 
+                            data-selected-code-id="#SelectedYCode" 
+                            data-table-id="#y-codes-table">Add</button>
+                </div>
 
-    <div class="form-group">
-        <button type="submit" class="button">@Constants.ContinueButtonText</button>
-    </div>
-}
+                <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.YCodeNotApplicable)">
+                    <label for="YCodeNotApplicable">
+                        @Html.CheckBoxFor(m => m.YCodeNotApplicable)
+                        @Html.DisplayNameFor(m => m.YCodeNotApplicable)
+                    </label>
+                </div>
+
+                <div class="form-group large-bottom-margin">
+                    @DisplayCodeTable("y-codes-table", IndexResources.YCodesTableHeading, "#SelectedYCodesJson", Model.SelectedYCodesDisplay)
+                </div>
+            </div>
+
+            <div class="column-half">
+                <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
+                    @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
+                    @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_type = "waste-codes" })
+                    @Html.HiddenFor(model => Model.SelectedUnClassesJson)
+                    <button type="button" 
+                            class="add" 
+                            data-action="add" 
+                            data-json-codes-id="#SelectedUnClassesJson" 
+                            data-selected-code-id="#SelectedUnClass" 
+                            data-table-id="#un-classes-table">Add</button>
+                </div>
+
+                <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.UnClassNotApplicable)">
+                    <label for="UnClassNotApplicable">
+                        @Html.CheckBoxFor(m => m.UnClassNotApplicable)
+                        @Html.DisplayNameFor(m => m.UnClassNotApplicable)
+                    </label>
+                </div>
+
+                <div class="form-group large-bottom-margin">
+                    @DisplayCodeTable("un-classes-table", IndexResources.UnClassesTableHeading, "#SelectedUnClassesJson", Model.SelectedUnClassesDisplay)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        </div>
+    }
+</div>
 
 @section scripts{
     <script>
@@ -144,39 +167,19 @@
             $('select[data-type="waste-codes"]').selectToAutocomplete();
         });
 
-        $('#add-ewc-code').click(function () {
-            addCode('#SelectedEwcCodesJson', '#SelectedEwcCode', '#ewc-empty-table-row', '#ewc-codes-table');
+        $('button[data-action="add"]').click(function () {
+            addCode(this);
         })
 
-        $('#add-y-code').click(function () {
-            addCode('#SelectedYCodesJson', '#SelectedYCode', '#y-empty-table-row', '#y-codes-table');
+        $('button[data-action="remove"]').click(function () {
+            removeCode(this);
         })
 
-        $('#add-h-code').click(function () {
-            addCode('#SelectedHCodesJson', '#SelectedHCode', '#h-empty-table-row', '#h-codes-table');
-        })
+        function addCode(callingButton) {
+            var currentCodesJsonId = $(callingButton).data('json-codes-id');
+            var selectedCodeId = $(callingButton).data('selected-code-id');
+            var codeTableId = $(callingButton).data('table-id');
 
-        $('#add-un-class').click(function () {
-            addCode('#SelectedUnClassesJson', '#SelectedUnClass', '#un-empty-table-row', '#un-classes-table');
-        })
-
-        $('button[data-action="remove"][data-code-type="ewc"]').click(function () {
-            removeCode(this, '#SelectedEwcCodesJson');
-        })
-        
-        $('button[data-action="remove"][data-code-type="y"]').click(function () {
-            removeCode(this, '#SelectedYCodesJson');
-        })
-
-        $('button[data-action="remove"][data-code-type="h"]').click(function () {
-            removeCode(this, '#SelectedHCodesJson');
-        })
-
-        $('button[data-action="remove"][data-code-type="un"]').click(function () {
-            removeCode(this, '#SelectedUnClassesJson');
-        })
-
-        function addCode(currentCodesJsonId, selectedCodeId, emptyRowId, codeTableId) {
             var elems = [];
             var currentVals = $(currentCodesJsonId).val();
 
@@ -198,12 +201,12 @@
                 $(codeTableId + ' > tbody:last-child').append('<tr id="row-' + newValue + '"><td>'
                     + $(selectedCodeId + ' option:selected').text()
                     + '</td><td class="remove"><button type="button" data-action="remove" '
-                    + 'id="remove-' + newValue + '" data-code-id="' + newValue + '">'
+                    + 'id="remove-' + newValue + '" data-code-id="' + newValue + '" data-json-codes-id="' + currentCodesJsonId + '">'
                     + '@IndexResources.RemoveCodeButton</button></td></tr>');
 
                 //add 'remove' event handler to new button
                 $('#remove-' + newValue).click(function () {
-                    removeCode(this, currentCodesJsonId);
+                    removeCode(this);
                 })
 
                 //clear the input field
@@ -212,9 +215,9 @@
             }
         }
 
-        function removeCode(button, jsonCodeId) {
-            var codeId = $(button).data('code-id');
-
+        function removeCode(callingButton) {
+            var codeId = $(callingButton).data('code-id');
+            var jsonCodeId = $(callingButton).data('json-codes-id');
             var codes = $(jsonCodeId);
            
             var elems = [];

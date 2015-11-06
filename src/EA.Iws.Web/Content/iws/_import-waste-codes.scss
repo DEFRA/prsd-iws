@@ -1,23 +1,25 @@
-﻿table.import-draft-codes-table {
-    width: 80%;
-}
+﻿#import-waste-codes {
+    table.import-draft-codes-table {
+        width: 80%;
 
-tr.empty {
-    height: 46px;
-}
+        tr.empty {
+            height: 46px;
+        }
 
-td.remove {
-    width:10%;
-}
+        td.remove {
+            width: 10%;
+        }
+    }
 
-.large-bottom-margin {
-    margin-bottom: 60px;
-}
+    .large-bottom-margin {
+        margin-bottom: 60px;
+    }
 
-.medium-bottom-margin {
-    margin-bottom: 45px;
-}
+    .medium-bottom-margin {
+        margin-bottom: 45px;
+    }
 
-button.add {
-     margin-left:15px;
+    button.add {
+        margin-left: 15px;
+    }
 }
