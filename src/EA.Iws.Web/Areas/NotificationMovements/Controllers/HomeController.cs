@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
@@ -39,6 +40,40 @@
                 .GetResult();
 
             return PartialView("_Summary", result);
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult CreateSummary(Guid notificationId, int? numberOfNewMovements)
+        {
+            var result = mediator
+                .SendAsync(new GetBasicMovementSummary(notificationId))
+                .GetAwaiter()
+                .GetResult();
+
+            var shipmentNumbers = ComputeNewShipmentNumbers(numberOfNewMovements, result.TotalShipments);
+
+            var model = new CreateSummaryViewModel
+            {
+                SummaryData = result,
+                NewShipmentNumbers = shipmentNumbers
+            };
+
+            return PartialView("_CreateSummary", model);
+        }
+
+        private static List<int> ComputeNewShipmentNumbers(int? numberOfNewMovements, int currentTotalMovements)
+        {
+            var shipmentNumbers = new List<int>();
+
+            if (numberOfNewMovements.HasValue)
+            {
+                for (int i = currentTotalMovements; i < currentTotalMovements + numberOfNewMovements; i++)
+                {
+                    shipmentNumbers.Add(i + 1);
+                }
+            }
+
+            return shipmentNumbers;
         }
 
         [HttpPost]

@@ -708,6 +708,8 @@
     <Content Include="Areas\NotificationMovements\Views\Shared\_SummaryLayout.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Home\_Summary.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Shared\_CreateSummaryLayout.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Home\_CreateSummary.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1418,6 +1420,7 @@
       <DependentUpon>CreateViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ShipmentDateViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Home\CreateSummaryViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Create\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>

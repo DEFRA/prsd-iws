@@ -129,6 +129,12 @@
   <data name="QuantityRemaining" xml:space="preserve">
     <value>Total quantity remaining</value>
   </data>
+  <data name="ShipmentNumber" xml:space="preserve">
+    <value>Shipment number</value>
+  </data>
+  <data name="ShipmentNumbers" xml:space="preserve">
+    <value>Shipment numbers</value>
+  </data>
   <data name="TotalShipments" xml:space="preserve">
     <value>Total number of shipments</value>
   </data>

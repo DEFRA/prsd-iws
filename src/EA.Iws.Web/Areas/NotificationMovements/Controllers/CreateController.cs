@@ -43,6 +43,7 @@
                 var numberToCreate = (int)result;
                 var shipmentDates = await mediator.SendAsync(new GetShipmentDates(notificationId));
 
+                ViewBag.NumberOfNewMovements = numberToCreate;
                 var model = new ShipmentDateViewModel(shipmentDates, numberToCreate);
 
                 return View(model);
