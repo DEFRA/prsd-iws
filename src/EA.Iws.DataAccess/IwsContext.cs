@@ -86,6 +86,8 @@
 
         public virtual DbSet<Exporter> Exporters { get; set; }
 
+        public virtual DbSet<NotificationTransaction> NotificationTransactions { get; set; } 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

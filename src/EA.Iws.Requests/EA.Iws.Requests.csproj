@@ -114,11 +114,13 @@
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbers.cs" />
+    <Compile Include="NotificationAssessment\GetAccountManagementData.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentUnits.cs" />
     <Compile Include="NotificationMovements\Create\GetPackagingTypes.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummary.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentDates.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTable.cs" />
+    <Compile Include="NotificationAssessment\AddNotificationTransaction.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplication.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />

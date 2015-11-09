@@ -9,7 +9,8 @@ CREATE TABLE [Notification].[Transaction] (
 	[ReceiptNumber] NVARCHAR (100) NULL,
 	[Comments] NVARCHAR (500) NULL,
 	[RowVersion] ROWVERSION NOT NULL,
-	CONSTRAINT [PK_Notification_Transaction] PRIMARY KEY CLUSTERED ([Id] ASC)
+	CONSTRAINT [PK_Notification_Transaction] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_Transaction_Notification] FOREIGN KEY ([NotificationId]) REFERENCES [Notification].[Notification]([Id])
 );
 
 GO

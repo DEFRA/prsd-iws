@@ -96,6 +96,7 @@
     <Compile Include="Mappings\DisposalCostMapping.cs" />
     <Compile Include="Mappings\ImportNotificationMapping.cs" />
     <Compile Include="Mappings\MovementStatusChangeMapping.cs" />
+    <Compile Include="Mappings\NotificationTransactionMapping.cs" />
     <Compile Include="Mappings\WasteDisposalMapping.cs" />
     <Compile Include="Mappings\EstimatedValueMapping.cs" />
     <Compile Include="Mappings\FinancialGuaranteeStatusChangeMapping.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Repositories\NotificationConsentRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationOverviewRepository.cs" />
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
+    <Compile Include="Repositories\NotificationTransactionRepository.cs" />
     <Compile Include="Repositories\WasteCodeRepository.cs" />
     <Compile Include="Repositories\WasteDisposalRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />

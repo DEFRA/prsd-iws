@@ -152,6 +152,7 @@
     <Content Include="scripts\Update\Sprint19\20151029-113600-change-schema-of-entry-exit-points.sql" />
     <Content Include="scripts\Update\Sprint19\20151102-105000-make-consent-conditions-optional.sql" />
     <Content Include="scripts\Update\Sprint19\20151030-134200-draft-import-notification.sql" />
+    <Content Include="scripts\Update\Sprint20\20151109-111925-add-transaction-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

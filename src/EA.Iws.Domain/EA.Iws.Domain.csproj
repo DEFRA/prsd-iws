@@ -116,6 +116,9 @@
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />
+    <Compile Include="NotificationAssessment\INotificationTransactionRepository.cs" />
+    <Compile Include="NotificationAssessment\NotificationTransaction.cs" />
+    <Compile Include="NotificationAssessment\NotificationTransactionCalculator.cs" />
     <Compile Include="NotificationConsent\Consent.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />

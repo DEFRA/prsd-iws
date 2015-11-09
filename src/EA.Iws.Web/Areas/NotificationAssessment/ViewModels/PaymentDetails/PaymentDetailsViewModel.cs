@@ -9,6 +9,7 @@
     using Infrastructure;
     using Infrastructure.Validation;
     using NotificationApplication.Views.WasteRecovery;
+    using Prsd.Core;
 
     public class PaymentDetailsViewModel : IValidatableObject
     {
@@ -52,17 +53,25 @@
 
         [Display(Name = "CommentsLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         public string Comments { get; set; }
+
+        public DateTime Date()
+        {
+            DateTime date;
+            SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out date);
+
+            return date;
+        }
         
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = new List<ValidationResult>();
 
-            if (Receipt.Length > 100)
+            if (Receipt != null && Receipt.Length > 100)
             {
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.ReceiptLengthError, new[] { "Receipt" }));
             }
             
-            if (Comments.Length > 500)
+            if (Comments != null && Comments.Length > 500)
             {
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.CommentsLengthError, new[] { "Comments" }));
             }

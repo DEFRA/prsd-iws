@@ -133,9 +133,11 @@
     <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetPackagingTypesHandler.cs" />
+    <Compile Include="NotificationAssessment\GetAccountManagementDataHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentDatesHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentUnitsHandler.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummaryHandler.cs" />
@@ -180,6 +182,7 @@
     <Compile Include="Movement\SetMovementRejectedHandler.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTableHandler.cs" />
+    <Compile Include="NotificationAssessment\AddNotificationTransactionHandler.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplicationHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />

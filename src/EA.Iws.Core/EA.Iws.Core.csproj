@@ -94,6 +94,7 @@
     <Compile Include="Movement\MovementSummary.cs" />
     <Compile Include="NotificationAssessment\AccountManagementData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
+    <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
     <Compile Include="NotificationAssessment\PaymentHistoryTableData.cs" />
     <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
