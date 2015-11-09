@@ -1,0 +1,66 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.TransitState.TransitStateCollectionViewModel
+
+@if (Model.TransitStates.Count > 0)
+{
+    <table class="form-group" style="table-layout: fixed;">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Competent authority</th>
+                <th>Entry point</th>
+                <th>Exit point</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="sortable">
+            @for (int i = 0; i < Model.TransitStates.Count; i++)
+            {
+                @Html.HiddenFor(m => m.TransitStates[i].Id)
+                @Html.HiddenFor(m => m.TransitStates[i].OrdinalPosition)
+
+                if (Model.TransitStates[i].Country != null)
+                {
+                    @Html.HiddenFor(m => m.TransitStates[i].Country.Name)
+                    @Html.HiddenFor(m => m.TransitStates[i].Country.Id)
+                }
+                if (Model.TransitStates[i].CompetentAuthority != null)
+                {
+                    @Html.HiddenFor(m => m.TransitStates[i].CompetentAuthority.Id)
+                    @Html.HiddenFor(m => m.TransitStates[i].CompetentAuthority.Code)
+                    @Html.HiddenFor(m => m.TransitStates[i].CompetentAuthority.Name)
+                }
+                if (Model.TransitStates[i].ExitPoint != null)
+                {
+                    @Html.HiddenFor(m => m.TransitStates[i].ExitPoint.Id)
+                    @Html.HiddenFor(m => m.TransitStates[i].ExitPoint.Name)
+                }
+                if (Model.TransitStates[i].EntryPoint != null)
+                {
+                    @Html.HiddenFor(m => m.TransitStates[i].EntryPoint.Id)
+                    @Html.HiddenFor(m => m.TransitStates[i].EntryPoint.Name)
+                }
+
+                <tr>
+                    <td>
+                        @(Model.TransitStates[i].Country != null ? Model.TransitStates[i].Country.Name : string.Empty)
+                    </td>
+                    <td>
+                        @(Model.TransitStates[i].CompetentAuthority != null ? Model.TransitStates[i].CompetentAuthority.Code + " - " + Model.TransitStates[i].CompetentAuthority.Name : string.Empty)
+                    </td>
+                    <td>
+                        @(Model.TransitStates[i].EntryPoint != null ? Model.TransitStates[i].EntryPoint.Name : string.Empty)
+                    </td>
+                    <td>
+                        @(Model.TransitStates[i].ExitPoint != null ? Model.TransitStates[i].ExitPoint.Name : string.Empty)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { entityId = Model.TransitStates[i].Id })
+                        |
+                        <button class="link-submit in-table" type="submit" name="deleteId" onclick="deletePost(event)" value="@Model.TransitStates[i].Id">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

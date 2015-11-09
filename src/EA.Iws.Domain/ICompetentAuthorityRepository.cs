@@ -9,5 +9,7 @@
         Task<IEnumerable<CompetentAuthority>> GetTransitAuthorities(Guid countryId);
 
         Task<IEnumerable<CompetentAuthority>> GetCompetentAuthorities(Guid countryId);
+
+        Task<CompetentAuthority> GetById(Guid id);
     }
 }

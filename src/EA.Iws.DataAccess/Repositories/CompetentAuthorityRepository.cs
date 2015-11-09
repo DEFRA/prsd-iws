@@ -33,5 +33,10 @@
                     .OrderBy(x => x.Code)
                     .ToArrayAsync();
         }
+
+        public async Task<CompetentAuthority> GetById(Guid id)
+        {
+            return await context.CompetentAuthorities.SingleAsync(ca => ca.Id == id);
+        }
     }
 }

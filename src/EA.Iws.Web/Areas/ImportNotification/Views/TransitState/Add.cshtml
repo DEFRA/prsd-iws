@@ -1,0 +1,22 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.TransitState.TransitStateViewModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h1 class="heading-large">Add</h1>
+
+@Html.Partial("_AddOrEdit", Model)
+
+@section scripts{
+    <script>
+        function changeCountry(event) {
+            var countryId = "countryId=" + $(event.target).val();
+            getAjax('@Url.Action("GetCompetentAuthoritiesAndEntryOrExitPoints")', countryId, updateAuthoritiesAndExitPoints);
+        }
+
+        function updateAuthoritiesAndExitPoints(html) {
+            $("#ca-and-exit-point").html(html);
+        }
+    </script>
+}

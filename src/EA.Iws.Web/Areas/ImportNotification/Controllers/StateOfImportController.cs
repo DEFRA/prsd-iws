@@ -57,7 +57,7 @@
 
             await mediator.SendAsync(new SetDraftData<StateOfImport>(id, stateOfImport));
 
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return RedirectToAction("Index", "TransitState");
         } 
     }
 }
