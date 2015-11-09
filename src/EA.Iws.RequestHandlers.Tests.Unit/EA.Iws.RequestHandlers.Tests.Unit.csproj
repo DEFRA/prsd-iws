@@ -114,7 +114,6 @@
     <Compile Include="MovementReceipt\GetMovementReceiptQuantityByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\GetPackagingDataForMovementHandlerTests.cs" />
-    <Compile Include="Movement\GetShipmentDateDataByMovementIdTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="Movement\SetActualMovementCarriersHandlerTests.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandlerTests.cs" />

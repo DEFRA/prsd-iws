@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.Movement
 {
     using System;
-    using Areas.Movement.ViewModels;
+    using Areas.NotificationMovements.ViewModels.Create;
+    using Core.Movement;
     using Prsd.Core;
-    using Requests.Movement;
     using TestHelpers;
     using Xunit;
 
@@ -42,23 +42,31 @@
         }
 
         [Fact]
-        public void DateHIntTextIsCorrect()
+        public void DateHintTextIsCorrect()
         {
             var model = GetViewModel(new DateTime(2017, 1, 1));
 
             Assert.Equal("For example, 1 5 2015", model.DateHintText);
         }
 
-        private ShipmentDateViewModel GetViewModel(DateTime actualDate)
+        private ShipmentDateViewModel GetViewModel(DateTime? actualDate)
         {
-            var movementData = new MovementDatesData
+            var shipmentDates = new ShipmentDates
             {
-                ActualDate = actualDate,
-                FirstDate = new DateTime(2015, 2, 1),
-                LastDate = new DateTime(2016, 1, 1)
+                StartDate = new DateTime(2015, 2, 1),
+                EndDate = new DateTime(2016, 1, 1)
             };
 
-            return new ShipmentDateViewModel(movementData);
+            var shipmentDateViewModel = new ShipmentDateViewModel(shipmentDates, 10);
+
+            if (actualDate.HasValue)
+            {
+                shipmentDateViewModel.Day = actualDate.Value.Day;
+                shipmentDateViewModel.Month = actualDate.Value.Month;
+                shipmentDateViewModel.Year = actualDate.Value.Year;
+            }
+
+            return shipmentDateViewModel;
         }
     }
 }

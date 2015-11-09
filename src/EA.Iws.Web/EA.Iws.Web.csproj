@@ -521,7 +521,7 @@
     <Content Include="Areas\Movement\Views\web.config" />
     <Content Include="Areas\Movement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Movement\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Movement\Views\ShipmentDate\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\ShipmentDate.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_CodeDefinitionList.cshtml" />
     <Content Include="Views\NotificationMovement\Index.cshtml" />
     <Content Include="Areas\Movement\Views\PackagingTypes\Index.cshtml" />
@@ -1388,7 +1388,6 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
-    <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CreateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
@@ -1418,6 +1417,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\ShipmentDateViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Create\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1457,7 +1457,6 @@
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\PackagingTypesViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\ShipmentDateViewModel.cs" />
     <Compile Include="Areas\Movement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomWasteCodeController.cs" />

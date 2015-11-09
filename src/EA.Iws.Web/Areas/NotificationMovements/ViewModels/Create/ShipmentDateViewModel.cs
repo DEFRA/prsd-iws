@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels
+﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Core.Movement;
     using Prsd.Core;
-    using Requests.Movement;
 
     public class ShipmentDateViewModel : IValidatableObject
     {
@@ -12,19 +12,14 @@
         {
         }
 
-        public ShipmentDateViewModel(MovementDatesData movementDatesData)
+        public ShipmentDateViewModel(ShipmentDates shipmentDates, int numberToCreate)
         {
-            MovementId = movementDatesData.MovementId;
-            StartDate = movementDatesData.FirstDate;
-            EndDate = movementDatesData.LastDate;
-
-            if (movementDatesData.ActualDate != null)
-            {
-                Day = movementDatesData.ActualDate.Value.Day;
-                Month = movementDatesData.ActualDate.Value.Month;
-                Year = movementDatesData.ActualDate.Value.Year;
-            }
+            StartDate = shipmentDates.StartDate;
+            EndDate = shipmentDates.EndDate;
+            NumberToCreate = numberToCreate;
         }
+
+        public int NumberToCreate { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid number in the 'Day' field")]
         [Display(Name = "Day")]
@@ -62,20 +57,12 @@
             bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out shipmentDate);
             if (!isValidDate)
             {
-                yield return new ValidationResult("Please enter a valid date", new[] {"Day"});
+                yield return new ValidationResult("Please enter a valid date", new[] { "Day" });
             }
             else if (shipmentDate < StartDate || shipmentDate > EndDate)
             {
                 yield return new ValidationResult("The date is not within the given range", new[] { "Day" });
             }
-        }
-
-        public SetActualDateOfMovement ToRequest()
-        {
-            DateTime date;
-            SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out date);
-
-            return new SetActualDateOfMovement(MovementId, date);
         }
     }
 }

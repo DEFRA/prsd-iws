@@ -112,13 +112,12 @@
     <Compile Include="Movement\SetMovementRejected.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementId.cs" />
     <Compile Include="Movement\GetNumberOfPackagesByMovementId.cs" />
-    <Compile Include="Movement\GetShipmentDateDataByMovementId.cs" />
-    <Compile Include="Movement\MovementDatesData.cs" />
     <Compile Include="Movement\MovementQuantityData.cs" />
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetPackagingDataForMovement.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummary.cs" />
+    <Compile Include="NotificationMovements\Create\GetShipmentDates.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTable.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplication.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionData.cs" />

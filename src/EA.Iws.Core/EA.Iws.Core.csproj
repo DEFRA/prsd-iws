@@ -83,6 +83,7 @@
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\MovementStatus.cs" />
+    <Compile Include="Movement\ShipmentDates.cs" />
     <Compile Include="Movement\SubmittedMovement.cs" />
     <Compile Include="Movement\MovementData.cs" />
     <Compile Include="Movement\BasicMovementSummary.cs" />
