@@ -2,7 +2,6 @@
 @model EA.Iws.Web.Areas.Movement.ViewModels.Complete.UploadViewModel
 @{
     ViewBag.Title = "Recovery / disposal complete";
-    Layout = "~/Areas/Movement/Views/Shared/_LayoutReceipt.cshtml";
     string operation = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
 }
 

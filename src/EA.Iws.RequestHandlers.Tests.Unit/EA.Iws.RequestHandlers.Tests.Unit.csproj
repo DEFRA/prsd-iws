@@ -102,7 +102,6 @@
     <Compile Include="Mappings\ContactMapTests.cs" />
     <Compile Include="Mappings\ExporterMapTests.cs" />
     <Compile Include="Mappings\MovementCarrierMapTests.cs" />
-    <Compile Include="Mappings\MovementMapTests.cs" />
     <Compile Include="Mappings\BusinessTestBase.cs" />
     <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />

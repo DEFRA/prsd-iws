@@ -22,7 +22,7 @@
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
 
-        public MovementSummaryTableViewModel(MovementSummaryTableData data)
+        public MovementSummaryTableViewModel(MovementTableDataRow data)
         {
             Number = data.Number;
             Status = data.Status;

@@ -90,7 +90,7 @@
     <Compile Include="Movement\CancelMovements.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
-    <Compile Include="Movement\GetMovementReceiptSummaryDataByMovementId.cs" />
+    <Compile Include="Movement\Summary\GetMovementSummary.cs" />
     <Compile Include="Movement\GetMovementUnitsByMovementId.cs" />
     <Compile Include="Movement\GetSubmittedMovementsByNotificationId.cs" />
     <Compile Include="Movement\GetMeansOfTransportByMovementId.cs" />
@@ -100,7 +100,6 @@
     <Compile Include="Movement\GetNotificationIdByMovementId.cs" />
     <Compile Include="Movement\MovementCarrierData.cs" />
     <Compile Include="Movement\CreateMovementForNotificationById.cs" />
-    <Compile Include="Movement\GetMovementProgressInformation.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementId.cs" />
     <Compile Include="Movement\GetMovementsForNotificationById.cs" />
     <Compile Include="Movement\GetNumberOfCarriersByMovementId.cs" />
@@ -119,7 +118,8 @@
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetPackagingDataForMovement.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
-    <Compile Include="Movement\Summary\GetMovementsSummaryByNotificationId.cs" />
+    <Compile Include="NotificationMovements\GetBasicMovementSummary.cs" />
+    <Compile Include="NotificationMovements\GetSummaryAndTable.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplication.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformation.cs" />

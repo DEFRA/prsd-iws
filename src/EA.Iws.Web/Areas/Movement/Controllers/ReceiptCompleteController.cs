@@ -69,16 +69,19 @@
             
             await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault()));
 
-            return RedirectToAction("Success", "ReceiptComplete", new { id = model.NotificationId, area = "Movement" });
+            return RedirectToAction("Success", "ReceiptComplete");
         }
 
         [HttpGet]
-        public ActionResult Success(Guid id)
+        public async Task<ActionResult> Success(Guid id)
         {
+            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
+
             var model = new SuccessViewModel
             {
-                NotificationId = id
+                NotificationId = notificationId
             };
+
             return View(model);
         }
     }

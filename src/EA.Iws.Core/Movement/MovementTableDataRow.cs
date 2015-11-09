@@ -3,7 +3,7 @@
     using System;
     using Shared;
 
-    public class MovementSummaryTableData
+    public class MovementTableDataRow
     {
         public int Number { get; set; }
 

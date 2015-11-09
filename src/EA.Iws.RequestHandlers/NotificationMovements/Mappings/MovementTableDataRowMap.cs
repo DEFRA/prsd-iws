@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Mappings.Movement.Summary
+﻿namespace EA.Iws.RequestHandlers.NotificationMovements.Mappings
 {
     using System;
     using System.Linq;
@@ -6,11 +6,11 @@
     using Domain.Movement;
     using Prsd.Core.Mapper;
 
-    internal class MovementSummaryTableMap : IMap<Movement, MovementSummaryTableData>
+    internal class MovementTableDataRowMap : IMap<Movement, MovementTableDataRow>
     {
-        public MovementSummaryTableData Map(Movement source)
+        public MovementTableDataRow Map(Movement source)
         {
-            var data = new MovementSummaryTableData();
+            var data = new MovementTableDataRow();
 
             data.Number = source.Number;
             data.ShipmentDate = source.Date;

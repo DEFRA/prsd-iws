@@ -20,7 +20,7 @@
 
         public int UsedShipments { get; set; }
 
-        public string QuantityIntendedTotal { get; set; }
+        public string QuantityRemainingTotal { get; set; }
 
         public string QuantityReceivedTotal { get; set; }
 
@@ -50,17 +50,17 @@
             }
         }
 
-        public MovementSummaryViewModel(Guid notificationId, MovementSummaryData data)
+        public MovementSummaryViewModel(Guid notificationId, NotificationMovementsSummaryAndTable data)
         {
             NotificationId = notificationId;
-            NotificationNumber = data.NotificationNumber;
+            NotificationNumber = data.SummaryData.NotificationNumber;
             NotificationType = data.NotificationType;
-            IntendedShipments = data.IntendedShipments;
-            UsedShipments = data.UsedShipments;
-            QuantityIntendedTotal = data.IntendedQuantityTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnits);
-            QuantityReceivedTotal = data.ReceivedQuantityTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnits);
-            ActiveLoadsPermitted = data.ActiveLoadsPermitted;
-            ActiveLoadsCurrent = data.ActiveLoadsCurrent;
+            IntendedShipments = data.TotalIntendedShipments;
+            UsedShipments = data.SummaryData.TotalShipments;
+            QuantityRemainingTotal = data.SummaryData.QuantityRemaining.ToString("G29") + " " + EnumHelper.GetDisplayName(data.SummaryData.DisplayUnit);
+            QuantityReceivedTotal = data.SummaryData.QuantityReceived.ToString("G29") + " " + EnumHelper.GetDisplayName(data.SummaryData.DisplayUnit);
+            ActiveLoadsPermitted = data.SummaryData.ActiveLoadsPermitted;
+            ActiveLoadsCurrent = data.SummaryData.CurrentActiveLoads;
 
             TableData = new List<MovementSummaryTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)

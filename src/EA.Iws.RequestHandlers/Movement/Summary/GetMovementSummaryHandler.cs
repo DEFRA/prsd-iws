@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Movement
+﻿namespace EA.Iws.RequestHandlers.Movement.Summary
 {
     using System.Threading.Tasks;
     using Core.Movement;
@@ -7,13 +7,13 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
-    internal class GetMovementReceiptSummaryDataByMovementIdHandler : IRequestHandler<GetMovementReceiptSummaryDataByMovementId, MovementReceiptSummaryData>
+    internal class GetMovementSummaryHandler : IRequestHandler<GetMovementSummary, MovementSummary>
     {
         private readonly IMapper mapper;
         private readonly INotificationMovementsSummaryRepository summaryRepository;
         private readonly IMovementRepository movementRepository;
 
-        public GetMovementReceiptSummaryDataByMovementIdHandler(IMapper mapper,
+        public GetMovementSummaryHandler(IMapper mapper,
             IMovementRepository movementRepository,
             INotificationMovementsSummaryRepository summaryRepository)
         {
@@ -22,7 +22,7 @@
             this.mapper = mapper;
         }
 
-        public async Task<MovementReceiptSummaryData> HandleAsync(GetMovementReceiptSummaryDataByMovementId message)
+        public async Task<MovementSummary> HandleAsync(GetMovementSummary message)
         {
             var movement = await movementRepository
                 .GetById(message.Id);
@@ -30,7 +30,7 @@
             var summaryData = await summaryRepository
                 .GetById(movement.NotificationId);
 
-            return mapper.Map<NotificationMovementsSummary, Movement, MovementReceiptSummaryData>(summaryData, movement);
+            return mapper.Map<MovementSummary>(summaryData, movement);
         }
     }
 }

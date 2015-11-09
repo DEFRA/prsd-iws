@@ -54,16 +54,12 @@
                 <caption class="visuallyhidden">Shipment summary</caption>
                 <tbody>
                 <tr>
-                    <td>Total intended number of shipments:</td>
+                    <td>Total number of shipments:</td>
                     <td>@Model.IntendedShipments</td>
                 </tr>
                 <tr>
                     <td>Number of shipments used:</td>
                     <td>@Model.UsedShipments</td>
-                </tr>
-                <tr>
-                    <td>Total quantity received:</td>
-                    <td>@Model.QuantityReceivedTotal</td>
                 </tr>
                 <tr>
                     <td>Active loads permitted:</td>
@@ -72,6 +68,14 @@
                 <tr>
                     <td>Current active loads:</td>
                     <td>@Model.ActiveLoadsCurrent</td>
+                </tr>
+                <tr>
+                    <td>Total quantity received:</td>
+                    <td>@Model.QuantityReceivedTotal</td>
+                </tr>
+                <tr>
+                    <td>Total quantity remaining:</td>
+                    <td>@Model.QuantityRemainingTotal</td>
                 </tr>
                 </tbody>
             </table>

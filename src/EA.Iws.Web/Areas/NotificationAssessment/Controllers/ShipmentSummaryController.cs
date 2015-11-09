@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using Core.Movement;
     using Prsd.Core.Mediator;
-    using Requests.Movement.Summary;
+    using Requests.NotificationMovements;
     using ViewModels.ShipmentSummary;
 
     [Authorize]
@@ -22,7 +22,7 @@
         public async Task<ActionResult> Index(Guid id, int? status)
         {
             var movementsSummary =
-                await mediator.SendAsync(new GetMovementsSummaryByNotificationId(id, (MovementStatus?)status));
+                await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status));
 
             var model = new MovementSummaryViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;

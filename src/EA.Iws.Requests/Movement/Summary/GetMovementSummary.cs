@@ -4,11 +4,11 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    public class GetMovementReceiptSummaryDataByMovementId : IRequest<MovementReceiptSummaryData>
+    public class GetMovementSummary : IRequest<MovementSummary>
     {
         public Guid Id { get; private set; }
 
-        public GetMovementReceiptSummaryDataByMovementId(Guid id)
+        public GetMovementSummary(Guid id)
         {
             Id = id;
         }

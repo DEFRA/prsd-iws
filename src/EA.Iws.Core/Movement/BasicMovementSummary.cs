@@ -1,23 +1,24 @@
 ﻿namespace EA.Iws.Core.Movement
 {
     using System;
+    using Shared;
 
-    public class MovementProgressAndSummaryData
+    public class BasicMovementSummary
     {
         public Guid NotificationId { get; set; }
 
-        public Guid MovementId { get; set; }
-
         public string NotificationNumber { get; set; }
 
-        public int TotalNumberOfMovements { get; set; }
-
-        public int ThisMovementNumber { get; set; }
+        public int TotalShipments { get; set; }
 
         public int ActiveLoadsPermitted { get; set; }
 
         public int CurrentActiveLoads { get; set; }
 
-        public ProgressData Progress { get; set; }
+        public decimal QuantityReceived { get; set; }
+
+        public decimal QuantityRemaining { get; set; }
+
+        public ShipmentQuantityUnits DisplayUnit { get; set; }
     }
 }

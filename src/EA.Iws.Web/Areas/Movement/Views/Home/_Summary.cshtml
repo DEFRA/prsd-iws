@@ -1,0 +1,18 @@
+﻿@model EA.Iws.Core.Movement.MovementSummary
+
+<p>
+    <span>@Html.Raw(Model.SummaryData.NotificationNumber)</span>
+</p>
+
+<ul class="summary-list">
+    <li><span class="grey-text">Shipment number</span> @Html.Raw(Model.MovementNumber)</li>
+    <li> <span class="grey-text">Total number of shipments</span> @Html.Raw(Model.SummaryData.TotalShipments)</li>
+    <li><span class="grey-text">Active loads permitted</span> @Html.Raw(Model.SummaryData.ActiveLoadsPermitted)</li>
+    <li><span class="grey-text">Current active loads</span> @Html.Raw(Model.SummaryData.CurrentActiveLoads)</li>
+    <li><span class="grey-text">Total quantity received</span> 
+        @Html.Raw(Model.SummaryData.QuantityReceived.ToString("G29"))
+        @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.SummaryData.DisplayUnit))</li>
+    <li><span class="grey-text">Total quantity remaining</span> 
+        @Html.Raw(Model.SummaryData.QuantityRemaining.ToString("G29"))
+        @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.SummaryData.DisplayUnit))</li>
+</ul>

@@ -85,11 +85,10 @@
     <Compile Include="Movement\MovementStatus.cs" />
     <Compile Include="Movement\SubmittedMovement.cs" />
     <Compile Include="Movement\MovementData.cs" />
-    <Compile Include="Movement\MovementReceiptSummaryData.cs" />
-    <Compile Include="Movement\MovementSummaryData.cs" />
-    <Compile Include="Movement\MovementSummaryTableData.cs" />
-    <Compile Include="Movement\ProgressData.cs" />
-    <Compile Include="Movement\MovementProgressAndSummaryData.cs" />
+    <Compile Include="Movement\BasicMovementSummary.cs" />
+    <Compile Include="Movement\NotificationMovementsSummaryAndTable.cs" />
+    <Compile Include="Movement\MovementTableDataRow.cs" />
+    <Compile Include="Movement\MovementSummary.cs" />
     <Compile Include="NotificationAssessment\AccountManagementData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\PaymentHistoryTableData.cs" />

@@ -16,23 +16,16 @@
         {
             this.mediator = mediator;
         }
-
+        
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult Navigation(Guid id)
+        public ActionResult Summary(Guid id)
         {
-            var result = mediator.SendAsync(new GetMovementProgressInformation(id))
+            var result = mediator
+                .SendAsync(new GetMovementSummary(id))
                 .GetAwaiter()
                 .GetResult();
 
-            return PartialView("_Navigation", result);
-        }
-
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult ReceiptSummary(Guid id)
-        {
-            var result = mediator.SendAsync(new GetMovementReceiptSummaryDataByMovementId(id)).GetAwaiter().GetResult();
-
-            return PartialView("_ReceiptSummary", result);
+            return PartialView("_Summary", result);
         }
 
         [HttpGet]

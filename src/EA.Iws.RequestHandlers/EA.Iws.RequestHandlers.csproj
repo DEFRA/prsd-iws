@@ -132,11 +132,10 @@
     <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
-    <Compile Include="Mappings\Movement\MovementProgressMap.cs" />
-    <Compile Include="Mappings\Movement\MovementReceiptSummaryDataMap.cs" />
-    <Compile Include="Mappings\Movement\MovementSummaryAndProgressMap.cs" />
-    <Compile Include="Mappings\Movement\Summary\MovementSummaryDataMap.cs" />
-    <Compile Include="Mappings\Movement\Summary\MovementSummaryTableMap.cs" />
+    <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
+    <Compile Include="NotificationMovements\GetBasicMovementSummaryHandler.cs" />
+    <Compile Include="NotificationMovements\Mappings\NotificationMovementsSummaryAndTableMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\MovementTableDataRowMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocumentHandler.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionMap.cs" />
@@ -154,13 +153,12 @@
     <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GenerateMovementDocumentHandler.cs" />
     <Compile Include="Movement\GetMovementDateByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetMovementReceiptSummaryDataByMovementIdHandler.cs" />
+    <Compile Include="Movement\Summary\GetMovementSummaryHandler.cs" />
     <Compile Include="Movement\GetMovementUnitsByMovementIdHandler.cs" />
     <Compile Include="Movement\GetSubmittedMovementsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMeansOfTransportByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementNumberByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetMovementProgressInformationHandler.cs" />
     <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
@@ -170,6 +168,7 @@
     <Compile Include="Movement\GetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\GetPackagingDataValidForMovementHandler.cs" />
     <Compile Include="Movement\GetShipmentDateDataByMovementIdHandler.cs" />
+    <Compile Include="Movement\Mappings\BasicMovementSummaryMap.cs" />
     <Compile Include="Movement\RecordMovementStatusChange.cs" />
     <Compile Include="Movement\SaveCertificateOfReceiptFileHandler.cs" />
     <Compile Include="Movement\SetActualMovementCarriersHandler.cs" />
@@ -180,7 +179,7 @@
     <Compile Include="Movement\SetMovementRejectedHandler.cs" />
     <Compile Include="Movement\SetPackagingDataForMovementHandler.cs" />
     <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
-    <Compile Include="Movement\Summary\GetMovementsSummaryByNotificationIdHandler.cs" />
+    <Compile Include="NotificationMovements\GetSummaryAndTableHandler.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplicationHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentDecisionDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAssessmentSummaryInformationHandler.cs" />
