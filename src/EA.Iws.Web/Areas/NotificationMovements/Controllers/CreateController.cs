@@ -7,6 +7,7 @@
     using Requests.NotificationMovements.Create;
     using ViewModels.Create;
 
+    [Authorize]
     public class CreateController : Controller
     {
         private readonly IMediator mediator;

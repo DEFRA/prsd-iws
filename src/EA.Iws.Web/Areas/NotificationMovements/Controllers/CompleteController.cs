@@ -7,6 +7,7 @@
     using Requests.NotificationMovements;
     using ViewModels.Complete;
 
+    [Authorize]
     public class CompleteController : Controller
     {
         private readonly IMediator mediator;
