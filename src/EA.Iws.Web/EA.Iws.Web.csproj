@@ -707,6 +707,7 @@
     <Content Include="Areas\Movement\Views\Home\_Summary.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Shared\_SummaryLayout.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Home\_Summary.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1389,6 +1390,7 @@
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
     <Compile Include="Areas\Movement\Controllers\ShipmentDateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\CreateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\ReceiveMovementController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
@@ -1410,7 +1412,18 @@
     <Compile Include="Areas\NotificationMovements\NotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Complete\CompleteMovementViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\CreateViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\CreateViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\Views\Create\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Home\SummaryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2060,6 +2073,14 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationAssessment\Views\AccountManagement\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\Create\CreateViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
