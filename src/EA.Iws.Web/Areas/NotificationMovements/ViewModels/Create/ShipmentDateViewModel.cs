@@ -51,6 +51,19 @@
 
         public Guid MovementId { get; set; }
 
+        public DateTime? AsDateTime()
+        {
+            if (Day.HasValue && Month.HasValue && Year.HasValue)
+            {
+                if (Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
+                {
+                    return null;
+                }
+                return new DateTime(Year.Value, Month.Value, Day.Value);
+            }
+            return null;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             DateTime shipmentDate;
