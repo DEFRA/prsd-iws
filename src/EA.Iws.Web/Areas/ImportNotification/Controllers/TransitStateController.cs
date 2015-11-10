@@ -29,7 +29,8 @@
             
             var model = new TransitStateCollectionViewModel
             {
-                TransitStates = (await mediator.SendAsync(new GetTransitStateDataForTransitStates(transitStateCollection.TransitStates))).ToList()
+                TransitStates = (await mediator.SendAsync(new GetTransitStateDataForTransitStates(transitStateCollection.TransitStates))).ToList(),
+                HasNoTransitStates = transitStateCollection.HasNoTransitStates
             };
 
             return View(model);
@@ -37,8 +38,19 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index()
+        public async Task<ActionResult> Index(Guid id, TransitStateCollectionViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var transitStateCollection = await mediator.SendAsync(new GetDraftData<TransitStateCollection>(id));
+
+            transitStateCollection.HasNoTransitStates = model.HasNoTransitStates;
+
+            await mediator.SendAsync(new SetDraftData<TransitStateCollection>(id, transitStateCollection));
+
             return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
 

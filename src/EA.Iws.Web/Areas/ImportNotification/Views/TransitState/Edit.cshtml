@@ -1,10 +1,11 @@
-﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.TransitState.TransitStateViewModel
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.TransitState.EditResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.TransitState.TransitStateViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = Resource.TabTitle;
 }
 
-<h1 class="heading-large">Edit</h1>
+<h1 class="heading-large">@Resource.Title</h1>
 
 @Html.Partial("_AddOrEdit", Model)
 

@@ -19,6 +19,14 @@
         @Html.ActionLink("Add", "Add")
     </div>
 
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoTransitStates)">
+        @Html.Gds().ValidationMessageFor(m => m.HasNoTransitStates)
+        <label for="HasNoTransitStates" class="block-label">
+            @Html.CheckBoxFor(m => m.HasNoTransitStates)
+            @Resource.Checkbox
+        </label>
+    </div>
+
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }
 
@@ -30,19 +38,5 @@
                 $("#ajax-table").html(data);
             });
         }
-
-        $(function() {
-            $("#sortable").sortable({
-                revert: true,
-                placeholder: "ui-sortable-handle"
-            });
-        });
     </script>
 }
-
-<style>
-    #sortable tr {
-        background: white;
-        cursor: pointer;
-    }
-</style>

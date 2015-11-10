@@ -53,7 +53,7 @@
         {
             get
             {
-                return new SelectList(ExitPoints, "Id", "Name");
+                return new SelectList(ExitPoints.OrderBy(eep => eep.Name), "Id", "Name");
             }
         }
 

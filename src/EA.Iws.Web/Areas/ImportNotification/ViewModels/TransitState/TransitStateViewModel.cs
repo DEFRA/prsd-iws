@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
     using Core.Shared;
@@ -62,7 +63,7 @@
         {
             get
             {
-                return new SelectList(EntryOrExitPoints, "Id", "Name");
+                return new SelectList(EntryOrExitPoints.OrderBy(eep => eep.Name), "Id", "Name");
             }
         }
 

@@ -6,6 +6,8 @@
     {
         public List<TransitState> TransitStates { get; set; }
 
+        public bool HasNoTransitStates { get; set; }
+
         public TransitStateCollection()
         {
             TransitStates = new List<TransitState>();

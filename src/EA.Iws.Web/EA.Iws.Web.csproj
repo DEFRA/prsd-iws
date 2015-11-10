@@ -978,6 +978,11 @@
       <DependentUpon>StateOfImportViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\TransitState\TransitStateCollectionViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\TransitState\TransitStateCollectionViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransitStateCollectionViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\TransitState\TransitStateViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\TransitState\TransitStateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1056,10 +1061,25 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Areas\ImportNotification\Views\TransitState\AddResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\TransitState\EditResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ImportNotification\Views\TransitState\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\TransitState\TableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1782,6 +1802,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StateOfImportViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\TransitState\TransitStateCollectionViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TransitStateCollectionViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\TransitState\TransitStateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TransitStateViewModelResources.Designer.cs</LastGenOutput>
@@ -1842,9 +1866,21 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\TransitState\AddResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\TransitState\EditResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\TransitState\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\TransitState\TableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TableResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

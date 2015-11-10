@@ -1,15 +1,16 @@
-﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.TransitState.TransitStateCollectionViewModel
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.TransitState.TableResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.TransitState.TransitStateCollectionViewModel
 
 @if (Model.TransitStates.Count > 0)
 {
     <table class="form-group" style="table-layout: fixed;">
         <thead>
             <tr>
-                <th>Country</th>
-                <th>Competent authority</th>
-                <th>Entry point</th>
-                <th>Exit point</th>
-                <th>Action</th>
+                <th>@Resource.Country</th>
+                <th>@Resource.CompetentAuthority</th>
+                <th>@Resource.EntryPoint</th>
+                <th>@Resource.ExitPoint</th>
+                <th>@Resource.Action</th>
             </tr>
         </thead>
         <tbody id="sortable">
