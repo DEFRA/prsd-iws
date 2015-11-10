@@ -25,7 +25,7 @@
 
     <script>
         function addPost(event) {
-            postAjax('@Url.Action("Add")', event, ".form", onSuccess);
+            postAjax('@Url.Action("Add")', event, ".form", onAdd);
         }
 
         function deletePost(event) {

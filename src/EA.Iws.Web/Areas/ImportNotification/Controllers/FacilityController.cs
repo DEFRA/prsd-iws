@@ -144,6 +144,7 @@
             foreach (var model in models)
             {
                 model.Address.Countries = countries;
+                model.DefaultUkIfUnselected(countries);
             }
         }
 

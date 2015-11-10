@@ -16,6 +16,11 @@ function onSuccess(data) {
     });
 }
 
+function onAdd(data) {
+    onSuccess(data);
+    $(".facility-header").last().next(".grid-row").removeClass("js-hidden");
+}
+
 function getOpenSectionIds() {
     var result = [];
     $(".form .grid-row")

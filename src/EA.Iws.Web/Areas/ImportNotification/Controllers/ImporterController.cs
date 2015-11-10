@@ -29,6 +29,7 @@
             var countries = await mediator.SendAsync(new GetCountries());
 
             model.Address.Countries = countries;
+            model.DefaultUkIfUnselected(countries);
 
             return View(model);
         }
