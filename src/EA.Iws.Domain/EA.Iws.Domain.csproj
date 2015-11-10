@@ -82,6 +82,7 @@
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
+    <Compile Include="Movement\MovementNumberGenerator.cs" />
     <Compile Include="Movement\IMovementRepository.cs" />
     <Compile Include="Movement\CertificateFactory.cs" />
     <Compile Include="Movement\CertificateOfReceiptNameGenerator.cs" />
