@@ -35,6 +35,11 @@
                 return View(model);
             }
 
+            if (model.PaymentMethod != PaymentMethods.Cheque)
+            {
+                model.Receipt = "NA";
+            }
+            
             var paymentData = new NotificationTransactionData
             {
                 Date = model.Date(),

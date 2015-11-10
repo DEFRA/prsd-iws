@@ -40,7 +40,8 @@
                 Date = model.Date(),
                 NotificationId = model.NotificationId,
                 Debit = Convert.ToDecimal(model.Amount),
-                Comments = model.Comments
+                Comments = model.Comments,
+                ReceiptNumber = "NA"
             };
 
             await mediator.SendAsync(new AddNotificationTransaction(refundData));

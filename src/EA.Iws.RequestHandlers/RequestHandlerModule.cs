@@ -66,6 +66,7 @@
             builder.RegisterType<MovementFileNameGenerator>().AsSelf();
             builder.RegisterType<DecisionRequiredBy>().AsSelf();
             builder.RegisterType<MovementNumberGenerator>().AsSelf();
+            builder.RegisterType<NotificationTransactionCalculator>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();

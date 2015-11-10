@@ -34,8 +34,8 @@
                 </div>
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Receipt)">
-                @Html.Gds().LabelFor(m => m.Receipt)
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Receipt)" id="receiptArea">
+                @Html.Gds().LabelFor(m => m.Receipt, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.Receipt)
                 @Html.Gds().TextBoxFor(m => m.Receipt, new { @MaxLength = 100, @class = "form-control form-control-wide", @title = PaymentDetailsViewModelResources.ReceiptNumberLabel })
             </div>
@@ -91,4 +91,19 @@
         <p> <button class="button" type="submit">@Constants.ContinueButtonText</button></p>
     </div>
 
+}
+
+@section scripts
+{
+    <script>
+        $('#PaymentMethod').change(function ()
+        {
+            if ($('#PaymentMethod option:selected').text() === 'Cheque') {
+                $('#receiptArea').show();
+            } else {
+                $('#receiptArea').hide();
+            }
+            
+        });
+    </script>
 }
