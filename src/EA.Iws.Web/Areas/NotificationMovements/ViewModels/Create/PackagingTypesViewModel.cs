@@ -12,6 +12,18 @@
         public CheckBoxCollectionViewModel PackagingTypes { get; set; }
         public IList<int> MovementNumbers { get; set; }
 
+        public IList<PackagingType> SelectedValues
+        {
+            get
+            {
+                return PackagingTypes
+                    .PossibleValues
+                    .Where(x => x.Selected)
+                    .Select(x => (PackagingType)System.Convert.ToInt32(x.Value))
+                    .ToList();
+            }
+        }
+
         public PackagingTypesViewModel()
         {
         }

@@ -525,7 +525,7 @@
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_CodeDefinitionList.cshtml" />
     <Content Include="Views\NotificationMovement\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\PackagingTypes.cshtml" />
-    <Content Include="Areas\Movement\Views\NumberOfPackages\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\NumberOfPackages.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_Exporter.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_Producer.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_SiteOfExport.cshtml" />
@@ -1382,7 +1382,6 @@
     </Compile>
     <Compile Include="Areas\NotificationAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\MovementCertificateController.cs" />
-    <Compile Include="Areas\Movement\Controllers\NumberOfPackagesController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\ReceiptCompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\SubmitController.cs" />
@@ -1495,7 +1494,7 @@
     <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\NumberOfPackages\NumberOfPackagesViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\NumberOfPackagesViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />

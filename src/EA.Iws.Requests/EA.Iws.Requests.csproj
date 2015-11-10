@@ -109,8 +109,6 @@
     <Compile Include="Movement\SetMovementAccepted.cs" />
     <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\SetMovementRejected.cs" />
-    <Compile Include="Movement\SetNumberOfPackagesByMovementId.cs" />
-    <Compile Include="Movement\GetNumberOfPackagesByMovementId.cs" />
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbers.cs" />

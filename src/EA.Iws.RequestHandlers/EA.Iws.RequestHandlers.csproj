@@ -170,7 +170,6 @@
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />
     <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="Movement\Mappings\BasicMovementSummaryMap.cs" />
     <Compile Include="Movement\RecordMovementStatusChange.cs" />
     <Compile Include="Movement\SaveCertificateOfReceiptFileHandler.cs" />
@@ -180,7 +179,6 @@
     <Compile Include="Movement\SetMovementQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
     <Compile Include="Movement\SetMovementRejectedHandler.cs" />
-    <Compile Include="Movement\SetNumberOfPackagesByMovementIdHandler.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTableHandler.cs" />
     <Compile Include="NotificationAssessment\AddNotificationTransactionHandler.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplicationHandler.cs" />

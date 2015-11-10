@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
@@ -124,6 +125,37 @@
                 var model = new PackagingTypesViewModel(availablePackagingTypes, movementNumbers);
 
                 return View(model);
+            }
+
+            return RedirectToAction("Index", "Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PackagingTypes(Guid notificationId, PackagingTypesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData[MovementNumbersKey] = model.MovementNumbers;
+            TempData["PackagingTypesKey"] = model.SelectedValues;
+
+            return RedirectToAction("NumberOfPackages", "Create");
+        }
+
+        [HttpGet]
+        public ActionResult NumberOfPackages(Guid notificationId)
+        {
+            object result;
+            if (TempData.TryGetValue(MovementNumbersKey, out result))
+            {
+                var movementNumbers = (IList<int>)result;
+
+                ViewBag.MovementNumbers = movementNumbers;
+
+                return View();
             }
 
             return RedirectToAction("Index", "Create");
