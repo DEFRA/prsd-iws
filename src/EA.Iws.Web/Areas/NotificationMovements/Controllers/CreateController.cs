@@ -110,5 +110,23 @@
 
             return RedirectToAction("PackagingTypes", "Create");
         }
+
+        [HttpGet]
+        public async Task<ActionResult> PackagingTypes(Guid notificationId)
+        {
+            object result;
+            if (TempData.TryGetValue(MovementNumbersKey, out result))
+            {
+                var movementNumbers = (IList<int>)result;
+                var availablePackagingTypes = await mediator.SendAsync(new GetPackagingTypes(notificationId));
+
+                ViewBag.MovementNumbers = movementNumbers;
+                var model = new PackagingTypesViewModel(availablePackagingTypes, movementNumbers);
+
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Create");
+        }
     }
 }

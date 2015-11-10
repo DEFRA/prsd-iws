@@ -20,7 +20,7 @@
         PressureReceptacle = 7,
         [Display(Name = "Bulk")]
         Bulk = 8,
-        [Display(Name = "Other (please specify)")]
+        [Display(Name = "Other (please specify)", ShortName = "Other")]
         Other = 9
     }
 }

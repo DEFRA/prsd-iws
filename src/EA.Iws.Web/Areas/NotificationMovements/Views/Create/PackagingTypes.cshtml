@@ -1,18 +1,24 @@
 ﻿@using EA.Prsd.Core.Web.Mvc.RazorHelpers
-@model EA.Iws.Web.Areas.Movement.ViewModels.PackagingTypesViewModel
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create.PackagingTypesViewModel
 
+@{ 
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+    ViewBag.Title = "Packaging types";
+}
 
 <header class="hgroup">
     <h1 class="heading-large">What packaging types will be used?</h1>
     <p>Select all the types of packaging that will be used for this shipment.</p>
 </header>
 
-@using (Html.BeginForm("Index", "PackagingTypes", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.MovementId)
     @Html.Gds().ValidationSummary()
-
+    for (int i = 0; i < Model.MovementNumbers.Count; i++)
+    {
+        @Html.HiddenFor(m => m.MovementNumbers[i])
+    }
     <div class="form-group">
         <fieldset>
             @for (int i = 0; i < Model.PackagingTypes.PossibleValues.Count; i++)
