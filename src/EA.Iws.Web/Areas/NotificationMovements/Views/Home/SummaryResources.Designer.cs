@@ -115,6 +115,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} to {1}.
+        /// </summary>
+        public static string ShipmentNumbersRangeFormat {
+            get {
+                return ResourceManager.GetString("ShipmentNumbersRangeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total number of shipments.
         /// </summary>
         public static string TotalShipments {

@@ -134,6 +134,7 @@
     <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
+    <Compile Include="NotificationMovements\Create\GenerateMovementNumbersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentDatesHandler.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummaryHandler.cs" />
     <Compile Include="NotificationMovements\Mappings\NotificationMovementsSummaryAndTableMap.cs" />

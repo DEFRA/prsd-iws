@@ -43,39 +43,22 @@
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult CreateSummary(Guid notificationId, int? numberOfNewMovements)
+        public ActionResult CreateSummary(Guid notificationId, IList<int> movementNumbers)
         {
             var result = mediator
                 .SendAsync(new GetBasicMovementSummary(notificationId))
                 .GetAwaiter()
                 .GetResult();
 
-            var shipmentNumbers = ComputeNewShipmentNumbers(numberOfNewMovements, result.TotalShipments);
-
             var model = new CreateSummaryViewModel
             {
                 SummaryData = result,
-                NewShipmentNumbers = shipmentNumbers
+                NewShipmentNumbers = movementNumbers ?? new int[0]
             };
 
             return PartialView("_CreateSummary", model);
         }
-
-        private static List<int> ComputeNewShipmentNumbers(int? numberOfNewMovements, int currentTotalMovements)
-        {
-            var shipmentNumbers = new List<int>();
-
-            if (numberOfNewMovements.HasValue)
-            {
-                for (int i = currentTotalMovements; i < currentTotalMovements + numberOfNewMovements; i++)
-                {
-                    shipmentNumbers.Add(i + 1);
-                }
-            }
-
-            return shipmentNumbers;
-        }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Index")]

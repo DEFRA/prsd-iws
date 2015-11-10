@@ -12,9 +12,9 @@
         {
             <li>
                 <span class="grey-text">@SummaryResources.ShipmentNumbers</span>
-                @Model.NewShipmentNumbers.Min()
-                to
-                @Model.NewShipmentNumbers.Max()
+                @string.Format(SummaryResources.ShipmentNumbersRangeFormat, 
+                    Model.NewShipmentNumbers.Min(), 
+                    Model.NewShipmentNumbers.Max())
             </li>
         }
         else
