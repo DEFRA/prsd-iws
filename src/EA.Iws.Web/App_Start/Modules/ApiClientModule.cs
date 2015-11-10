@@ -17,23 +17,23 @@
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
                 return new IwsClient(config.ApiUrl);
-            }).As<IIwsClient>();
+            }).As<IIwsClient>().InstancePerRequest();
 
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
                 return new OAuthClient(config.ApiUrl, config.ApiClientId, config.ApiSecret);
-            }).As<IOAuthClient>();
+            }).As<IOAuthClient>().SingleInstance();
 
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
                 return new UserInfoClient(config.ApiUrl);
-            }).As<IUserInfoClient>();
+            }).As<IUserInfoClient>().InstancePerRequest();
 
-            builder.RegisterType<ApiMediator>().As<IMediator>();
+            builder.RegisterType<ApiMediator>().As<IMediator>().InstancePerRequest();
         }
     }
 }

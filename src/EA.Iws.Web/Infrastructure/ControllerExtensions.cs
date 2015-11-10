@@ -12,14 +12,6 @@
 
     public static class ControllerExtensions
     {
-        public static async Task BindCountryList(this Controller controller, Func<IIwsClient> apiClient, bool setDefaultAsUnitedKingdom = true)
-        {
-            using (var client = apiClient())
-            {
-                await controller.BindCountryList(client, setDefaultAsUnitedKingdom);
-            }
-        }
-
         public static async Task BindCountryList(this Controller controller, IIwsClient client, bool setDefaultAsUnitedKingdom = true)
         {
             var response = await client.SendAsync(new GetCountries());

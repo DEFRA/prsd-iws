@@ -19,16 +19,16 @@
     [Authorize]
     public class RegistrationController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IIwsClient client;
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
 
         public RegistrationController(Func<IOAuthClient> oauthClient,
-            Func<IIwsClient> apiClient,
+            IIwsClient client,
             IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
-            this.apiClient = apiClient;
+            this.client = client;
             this.authenticationManager = authenticationManager;
         }
 
@@ -37,7 +37,7 @@
         public async Task<ActionResult> ApplicantRegistration()
         {
             var model = new ApplicantRegistrationViewModel();
-            await this.BindCountryList(apiClient);
+            await this.BindCountryList(client);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
             return View(model);
         }
@@ -49,54 +49,53 @@
         {
             if (ModelState.IsValid)
             {
-                using (var client = apiClient())
+                var applicantRegistrationData = new ApplicantRegistrationData
                 {
-                    var applicantRegistrationData = new ApplicantRegistrationData
-                    {
-                        Email = model.Email,
-                        FirstName = model.Name,
-                        Surname = model.Surname,
-                        Phone = model.PhoneNumber,
-                        Password = model.Password,
-                        ConfirmPassword = model.ConfirmPassword
-                    };
+                    Email = model.Email,
+                    FirstName = model.Name,
+                    Surname = model.Surname,
+                    Phone = model.PhoneNumber,
+                    Password = model.Password,
+                    ConfirmPassword = model.ConfirmPassword
+                };
 
-                    try
-                    {
-                        var userId = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
-                        var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
-                        authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
+                try
+                {
+                    var userId = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
+                    var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
+                    authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
-                        var emailSent =
-                            await
-                                client.Registration.SendEmailVerificationAsync(signInResponse.AccessToken,
-                                    new EmailVerificationData
-                                    {
-                                        Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
-                                    });
+                    var emailSent =
+                        await
+                            client.Registration.SendEmailVerificationAsync(signInResponse.AccessToken,
+                                new EmailVerificationData
+                                {
+                                    Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
+                                });
 
-                        var addressId =
-                            await
-                                client.SendAsync(signInResponse.AccessToken,
-                                    new CreateAddress { Address = model.Address, UserId = userId });
-                        applicantRegistrationData.AddressId = addressId;
+                    var addressId =
+                        await
+                            client.SendAsync(signInResponse.AccessToken,
+                                new CreateAddress { Address = model.Address, UserId = userId });
+                    applicantRegistrationData.AddressId = addressId;
 
-                        return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
-                    }
-                    catch (ApiBadRequestException ex)
-                    {
-                        this.HandleBadRequest(ex);
-
-                        if (ModelState.IsValid)
-                        {
-                            throw;
-                        }
-                    }
-                    await this.BindCountryList(apiClient);
-                    return View(model);
+                    return RedirectToAction("SelectOrganisation", new { organisationName = model.OrganisationName });
                 }
+                catch (ApiBadRequestException ex)
+                {
+                    this.HandleBadRequest(ex);
+
+                    if (ModelState.IsValid)
+                    {
+                        throw;
+                    }
+                }
+
+                await this.BindCountryList(client);
+                return View(model);
             }
-            await this.BindCountryList(apiClient);
+
+            await this.BindCountryList(client);
             return View(model);
         }
 
@@ -115,18 +114,15 @@
             }
             else
             {
-                using (var client = apiClient())
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new FindMatchingOrganisations(organisationName));
+
+                if (response == null || response.Count <= 0)
                 {
-                    var response =
-                        await client.SendAsync(User.GetAccessToken(), new FindMatchingOrganisations(organisationName));
-
-                    if (response == null || response.Count <= 0)
-                    {
-                        return RedirectToAction("CreateNewOrganisation", new { organisationName = model.Name });
-                    }
-
-                    model.Organisations = response;
+                    return RedirectToAction("CreateNewOrganisation", new { organisationName = model.Name });
                 }
+
+                model.Organisations = response;
             }
 
             return View(model);
@@ -144,30 +140,27 @@
                 return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
             }
 
-            using (var client = apiClient())
+            try
             {
-                try
+                var response =
+                    await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(selectedGuid));
+
+                if (response)
                 {
-                    var response =
-                        await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(selectedGuid));
-
-                    if (response)
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-
-                return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction("SelectOrganisation", new { organisationName = model.Name });
         }
 
         [HttpGet]
@@ -193,27 +186,25 @@
                 OtherDescription = model.OtherDescription
             };
 
-            using (var client = apiClient())
+            try
             {
-                try
-                {
-                    var organisationId =
-                        await
-                            client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
-                    await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(organisationId));
-                    return RedirectToAction("Home", "Applicant");
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
-                }
-                return View(model);
+                var organisationId =
+                    await
+                        client.SendAsync(User.GetAccessToken(), new CreateOrganisation(organisationRegistrationData));
+                await client.SendAsync(User.GetAccessToken(), new LinkUserToOrganisation(organisationId));
+                return RedirectToAction("Home", "Applicant");
             }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -242,11 +233,10 @@
         public async Task<ActionResult> EditApplicantDetails()
         {
             EditApplicantDetailsViewModel model;
-            using (var client = apiClient())
-            {
-                var response = await client.Registration.GetApplicantDetailsAsync(User.GetAccessToken());
-                model = new EditApplicantDetailsViewModel(response);
-            }
+
+            var response = await client.Registration.GetApplicantDetailsAsync(User.GetAccessToken());
+            model = new EditApplicantDetailsViewModel(response);
+
             return View(model);
         }
 
@@ -261,28 +251,25 @@
 
             try
             {
-                using (var client = apiClient())
+                if (model.Email.Equals(model.ExistingEmail))
                 {
-                    if (model.Email.Equals(model.ExistingEmail))
-                    {
-                        //Update applicant details only
-                        await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
-                        return RedirectToAction("Home", "Applicant", new { id = model.Id, area = string.Empty });
-                    }
-
-                    //Update applicant details & Send verification email
+                    //Update applicant details only
                     await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
-
-                    var emailSent =
-                        await
-                            client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
-                                new EmailVerificationData
-                                {
-                                    Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
-                                });
-
-                    return RedirectToAction("EmailVerificationRequired", "Account");
+                    return RedirectToAction("Home", "Applicant", new { id = model.Id, area = string.Empty });
                 }
+
+                //Update applicant details & Send verification email
+                await client.Registration.UpdateApplicantDetailsAsync(User.GetAccessToken(), model.ToRequest());
+
+                var emailSent =
+                    await
+                        client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
+                            new EmailVerificationData
+                            {
+                                Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
+                            });
+
+                return RedirectToAction("EmailVerificationRequired", "Account");
             }
             catch (ApiBadRequestException ex)
             {
@@ -300,22 +287,19 @@
         [HttpGet]
         public async Task<ActionResult> EditOrganisationDetails()
         {
-            using (var client = apiClient())
-            {
-                var response = await client.SendAsync(User.GetAccessToken(), new GetOrganisationDetailsByUser());
-                var model = new EditOrganisationViewModel(response);
+            var response = await client.SendAsync(User.GetAccessToken(), new GetOrganisationDetailsByUser());
+            var model = new EditOrganisationViewModel(response);
 
-                await this.BindCountryList(apiClient);
-                model.CountryId =
-                    new Guid(
-                        ((SelectList)ViewBag.Countries).Single(
-                            c =>
-                                c.Text.Equals(response.Address.CountryName, StringComparison.InvariantCultureIgnoreCase))
-                            .Value);
-                model.DefaultCountryId = this.GetDefaultCountryId();
+            await this.BindCountryList(client);
+            model.CountryId =
+                new Guid(
+                    ((SelectList)ViewBag.Countries).Single(
+                        c =>
+                            c.Text.Equals(response.Address.CountryName, StringComparison.InvariantCultureIgnoreCase))
+                        .Value);
+            model.DefaultCountryId = this.GetDefaultCountryId();
 
-                return View(model);
-            }
+            return View(model);
         }
 
         [HttpPost]
@@ -324,14 +308,12 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(apiClient);
+                await this.BindCountryList(client);
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                await client.SendAsync(User.GetAccessToken(), new UpdateOrganisationDetails(model.ToRequest()));
-            }
+            await client.SendAsync(User.GetAccessToken(), new UpdateOrganisationDetails(model.ToRequest()));
+
             return RedirectToAction("Home", "Applicant");
         }
     }

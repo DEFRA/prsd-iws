@@ -41,11 +41,6 @@
             return await InternalSendAsync(request).ConfigureAwait(false);
         }
 
-        public void Dispose()
-        {
-            httpClient.Dispose();
-        }
-
         private async Task<TResult> InternalSendAsync<TResult>(IRequest<TResult> request)
         {
             var apiRequest = new ApiRequest

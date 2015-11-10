@@ -20,17 +20,17 @@
     public class AccountController : Controller
     {
         private readonly IAuthenticationManager authenticationManager;
-        private readonly Func<IOAuthClient> oauthClient;
-        private readonly Func<IIwsClient> apiClient;
-        private readonly Func<IUserInfoClient> userInfoClient;
+        private readonly IOAuthClient oauthClient;
+        private readonly IIwsClient client;
+        private readonly IUserInfoClient userInfoClient;
 
-        public AccountController(Func<IOAuthClient> oauthClient,
+        public AccountController(IOAuthClient oauthClient,
             IAuthenticationManager authenticationManager,
-            Func<IIwsClient> apiClient,
-            Func<IUserInfoClient> userInfoClient)
+            IIwsClient client,
+            IUserInfoClient userInfoClient)
         {
             this.oauthClient = oauthClient;
-            this.apiClient = apiClient;
+            this.client = client;
             this.authenticationManager = authenticationManager;
             this.userInfoClient = userInfoClient;
         }
@@ -53,7 +53,7 @@
                 return View(model);
             }
 
-            var response = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
+            var response = await oauthClient.GetAccessTokenAsync(model.Email, model.Password);
             if (response.AccessToken != null)
             {
                 var identity = response.GenerateUserIdentity();
@@ -70,7 +70,7 @@
 
         private async Task<bool> IsInternalUser(string accessToken)
         {
-            var userInfo = await userInfoClient().GetUserInfoAsync(accessToken);
+            var userInfo = await userInfoClient.GetUserInfoAsync(accessToken);
 
             return userInfo.Claims.Any(p => p.Item1 == ClaimTypes.Role && p.Item2 == "internal");
         }
@@ -109,21 +109,18 @@
         {
             try
             {
-                using (var client = apiClient())
-                {
-                    var emailSent =
-                    await
-                        client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
-                            new EmailVerificationData
-                            {
-                                Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
-                            });
+                var emailSent =
+                await
+                    client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
+                        new EmailVerificationData
+                        {
+                            Url = Url.Action("VerifyEmail", "Account", null, Request.Url.Scheme)
+                        });
 
-                    if (!emailSent)
-                    {
-                        ViewBag.Errors = new[] { "Email is currently unavailable at this time, please try again later." };
-                        return View();
-                    }
+                if (!emailSent)
+                {
+                    ViewBag.Errors = new[] { "Email is currently unavailable at this time, please try again later." };
+                    return View();
                 }
             }
             catch (SmtpException)
@@ -149,14 +146,11 @@
         [AllowAnonymous]
         public async Task<ActionResult> VerifyEmail(Guid id, string code)
         {
-            using (var client = apiClient())
-            {
-                bool result = await client.Registration.VerifyEmailAsync(new VerifiedEmailData { Id = id, Code = code });
+            bool result = await client.Registration.VerifyEmailAsync(new VerifiedEmailData { Id = id, Code = code });
 
-                if (!result)
-                {
-                    return RedirectToAction("EmailVerificationRequired");
-                }
+            if (!result)
+            {
+                return RedirectToAction("EmailVerificationRequired");
             }
 
             return View();
@@ -179,20 +173,17 @@
                 return View(model);
             }
 
-            using (var client = apiClient())
-            {
-                var result = await client.Registration.ResetPasswordRequestAsync(
-                    new PasswordResetRequest
-                    {
-                        EmailAddress = model.Email,
-                        Url = Url.Action("ResetPassword", "Account", null, Request.Url.Scheme)
-                    });
-
-                if (!result)
+            var result = await client.Registration.ResetPasswordRequestAsync(
+                new PasswordResetRequest
                 {
-                    ModelState.AddModelError("Email", "Email address not recognised.");
-                    return View(model);
-                }
+                    EmailAddress = model.Email,
+                    Url = Url.Action("ResetPassword", "Account", null, Request.Url.Scheme)
+                });
+
+            if (!result)
+            {
+                ModelState.AddModelError("Email", "Email address not recognised.");
+                return View(model);
             }
 
             return RedirectToAction("ResetPasswordEmailSent", "Account", new { email = model.Email });
@@ -223,17 +214,14 @@
             {
                 try
                 {
-                    using (var client = apiClient())
+                    await client.Registration.ResetPasswordAsync(new PasswordResetData
                     {
-                        await client.Registration.ResetPasswordAsync(new PasswordResetData
-                        {
-                            Password = model.Password,
-                            Token = code,
-                            UserId = id
-                        });
+                        Password = model.Password,
+                        Token = code,
+                        UserId = id
+                    });
 
-                        return RedirectToAction("PasswordUpdated", "Account");
-                    }
+                    return RedirectToAction("PasswordUpdated", "Account");
                 }
                 catch (ApiBadRequestException ex)
                 {

@@ -24,8 +24,8 @@
         {
             client = A.Fake<IIwsClient>();
 
-            controller = new AccountController(A.Fake<IOAuthClient>, A.Fake<IAuthenticationManager>(), () => client,
-                A.Fake<IUserInfoClient>);
+            controller = new AccountController(A.Fake<IOAuthClient>(), A.Fake<IAuthenticationManager>(), client,
+                A.Fake<IUserInfoClient>());
 
             var request = A.Fake<HttpRequestBase>();
             var context = A.Fake<HttpContextBase>();

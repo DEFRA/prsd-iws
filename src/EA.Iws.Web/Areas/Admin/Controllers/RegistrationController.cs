@@ -20,16 +20,16 @@
 
     public class RegistrationController : Controller
     {
-        private readonly Func<IIwsClient> apiClient;
+        private readonly IIwsClient client;
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
 
         public RegistrationController(Func<IOAuthClient> oauthClient,
-            Func<IIwsClient> apiClient,
+            IIwsClient client,
             IAuthenticationManager authenticationManager)
         {
             this.oauthClient = oauthClient;
-            this.apiClient = apiClient;
+            this.client = client;
             this.authenticationManager = authenticationManager;
         }
 
@@ -48,11 +48,8 @@
 
             model.CompetentAuthorities = new SelectList(competentAuthorities, "Value", "Text");
             
-            using (var client = apiClient())
-            {
-                var result = await client.SendAsync(User.GetAccessToken(), new GetLocalAreas());
-                model.Areas = new SelectList(result.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }), "Value", "Text");
-            }
+            var result = await client.SendAsync(User.GetAccessToken(), new GetLocalAreas());
+            model.Areas = new SelectList(result.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }), "Value", "Text");
             
             return model;
         }
@@ -67,46 +64,44 @@
                 return View(await GetModelData(model));
             }
 
-            using (var client = apiClient())
+            var adminRegistrationData = new AdminRegistrationData
             {
-                var adminRegistrationData = new AdminRegistrationData
+                Email = model.Email,
+                FirstName = model.Name,
+                Surname = model.Surname,
+                Password = model.Password,
+                ConfirmPassword = model.ConfirmPassword
+            };
+
+            try
+            {
+                var userId = await client.Registration.RegisterAdminAsync(adminRegistrationData);
+                var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
+                authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
+
+                var emailSent = await
+                    client.Registration.SendEmailVerificationAsync(signInResponse.AccessToken,
+                        new EmailVerificationData
+                        {
+                            Url = Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme)
+                        });
+
+                await
+                    client.SendAsync(signInResponse.AccessToken,
+                        new CreateInternalUser(userId, model.JobTitle, model.LocalAreaId.GetValueOrDefault(), model.CompetentAuthority.GetValueOrDefault()));
+
+                return RedirectToAction("AdminEmailVerificationRequired");
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
                 {
-                    Email = model.Email,
-                    FirstName = model.Name,
-                    Surname = model.Surname,
-                    Password = model.Password,
-                    ConfirmPassword = model.ConfirmPassword
-                };
-
-                try
-                {
-                    var userId = await client.Registration.RegisterAdminAsync(adminRegistrationData);
-                    var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
-                    authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
-
-                    var emailSent = await
-                        client.Registration.SendEmailVerificationAsync(signInResponse.AccessToken,
-                            new EmailVerificationData
-                            {
-                                Url = Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme)
-                            });
-
-                    await
-                        client.SendAsync(signInResponse.AccessToken,
-                            new CreateInternalUser(userId, model.JobTitle, model.LocalAreaId.GetValueOrDefault(), model.CompetentAuthority.GetValueOrDefault()));
-
-                    return RedirectToAction("AdminEmailVerificationRequired");
-                }
-                catch (ApiBadRequestException ex)
-                {
-                    this.HandleBadRequest(ex);
-
-                    if (ModelState.IsValid)
-                    {
-                        throw;
-                    }
+                    throw;
                 }
             }
+
             return View(await GetModelData(model));
         }
 
@@ -122,20 +117,17 @@
         {
             try
             {
-                using (var client = apiClient())
-                {
-                    var emailSent = await
-                        client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
-                            new EmailVerificationData
-                            {
-                                Url = Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme)
-                            });
+                var emailSent = await
+                    client.Registration.SendEmailVerificationAsync(User.GetAccessToken(),
+                        new EmailVerificationData
+                        {
+                            Url = Url.Action("AdminVerifyEmail", "Registration", null, Request.Url.Scheme)
+                        });
 
-                    if (!emailSent)
-                    {
-                        ViewBag.Errors = new[] { "Email is currently unavailable at this time, please try again later." };
-                        return View();
-                    }
+                if (!emailSent)
+                {
+                    ViewBag.Errors = new[] { "Email is currently unavailable at this time, please try again later." };
+                    return View();
                 }
             }
             catch (SmtpException)
@@ -151,14 +143,11 @@
         [AllowAnonymous]
         public async Task<ActionResult> AdminVerifyEmail(Guid id, string code)
         {
-            using (var client = apiClient())
-            {
-                bool result = await client.Registration.VerifyEmailAsync(new VerifiedEmailData { Id = id, Code = code });
+            bool result = await client.Registration.VerifyEmailAsync(new VerifiedEmailData { Id = id, Code = code });
 
-                if (!result)
-                {
-                    return RedirectToAction("AdminEmailVerificationRequired");
-                }
+            if (!result)
+            {
+                return RedirectToAction("AdminEmailVerificationRequired");
             }
 
             return View();

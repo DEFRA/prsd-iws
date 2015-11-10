@@ -156,7 +156,7 @@
 
             var oauth = A.Fake<IOAuthClient>();
 
-            var registrationController = new RegistrationController(() => oauth, () => client, null);
+            var registrationController = new RegistrationController(() => oauth, client, null);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

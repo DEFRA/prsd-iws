@@ -1,11 +1,10 @@
 ﻿namespace EA.Iws.Api.Client
 {
-    using System;
     using System.Threading.Tasks;
     using Actions;
     using Prsd.Core.Mediator;
 
-    public interface IIwsClient : IDisposable
+    public interface IIwsClient
     {
         IRegistration Registration { get; }
 
