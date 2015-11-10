@@ -136,6 +136,7 @@
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentDatesHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetShipmentUnitsHandler.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummaryHandler.cs" />
     <Compile Include="NotificationMovements\Mappings\NotificationMovementsSummaryAndTableMap.cs" />
     <Compile Include="NotificationMovements\Mappings\MovementTableDataRowMap.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Movement\GetMeansOfTransportByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementNumberByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetMovementQuantityDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />

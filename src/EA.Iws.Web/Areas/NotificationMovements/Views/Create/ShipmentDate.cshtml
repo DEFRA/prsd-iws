@@ -10,7 +10,7 @@
     <h1 class="heading-large">What is the actual date of shipment?</h1>
 </header>
 
-@using (Html.BeginForm("Index", "ShipmentDate", FormMethod.Post))
+@using (Html.BeginForm())
 {
 
     @Html.AntiForgeryToken()
@@ -18,6 +18,10 @@
     @Html.HiddenFor(m => m.MovementId)
     @Html.HiddenFor(m => m.StartDate)
     @Html.HiddenFor(m => m.EndDate)
+    for (int i = 0; i < Model.MovementNumbers.Count; i++)
+    {
+        @Html.HiddenFor(m => m.MovementNumbers[i])
+    }
 
     <p>
         You can schedule your shipments from 

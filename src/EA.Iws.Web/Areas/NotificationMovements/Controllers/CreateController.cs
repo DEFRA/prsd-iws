@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
@@ -15,6 +14,8 @@
         private readonly IMediator mediator;
         private const string MovementNumbersKey = "MovementNumbersKey";
         private const string ShipmentDateKey = "ShipmentDateKey";
+        private const string QuantityKey = "QuantityKey";
+        private const string UnitKey = "UnitKey";
 
         public CreateController(IMediator mediator)
         {
@@ -65,6 +66,11 @@
         [ValidateAntiForgeryToken]
         public ActionResult ShipmentDate(Guid notificationId, ShipmentDateViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             TempData[MovementNumbersKey] = model.MovementNumbers;
             TempData[ShipmentDateKey] = model.AsDateTime();
 
@@ -72,9 +78,37 @@
         }
 
         [HttpGet]
-        public ActionResult Quantity(Guid notificationId)
+        public async Task<ActionResult> Quantity(Guid notificationId)
         {
-            return View();
+            object result;
+            if (TempData.TryGetValue(MovementNumbersKey, out result))
+            {
+                var movementNumbers = (IList<int>)result;
+                var shipmentUnits = await mediator.SendAsync(new GetShipmentUnits(notificationId));
+
+                ViewBag.MovementNumbers = movementNumbers;
+                var model = new QuantityViewModel(shipmentUnits, movementNumbers);
+
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Quantity(Guid notificationId, QuantityViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData[MovementNumbersKey] = model.MovementNumbers;
+            TempData[QuantityKey] = model.Quantity;
+            TempData[UnitKey] = model.Units;
+
+            return RedirectToAction("PackagingTypes", "Create");
         }
     }
 }

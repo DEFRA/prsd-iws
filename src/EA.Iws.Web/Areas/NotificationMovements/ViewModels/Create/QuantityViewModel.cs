@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Quantity
+﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create
 {
     using System;
     using System.Collections.Generic;
@@ -11,11 +11,18 @@
 
     public class QuantityViewModel : IValidatableObject
     {
-        public decimal TotalAvailable { get; set; }
+        public QuantityViewModel()
+        {
+        }
 
-        public decimal TotalUsed { get; set; }
+        public QuantityViewModel(ShipmentQuantityUnits notificationShipmentUnits, IList<int> movementNumbers)
+        {
+            MovementNumbers = movementNumbers;
+            NotificationUnits = notificationShipmentUnits;
+            AvailableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(notificationShipmentUnits).ToList();
+        }
 
-        public decimal TotalNotified { get; set; }
+        public IList<int> MovementNumbers { get; set; }
 
         public SelectList UnitsSelectList
         {
