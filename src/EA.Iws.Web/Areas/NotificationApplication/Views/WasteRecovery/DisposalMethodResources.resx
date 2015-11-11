@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DisposalMethod" xml:space="preserve">
+    <value>Please describe the planned method of disposal (maximum 40 characters)</value>
+  </data>
   <data name="DisposalMethodHint" xml:space="preserve">
-    <value>For example: Incineration/landfill/chemical or biological treatment (in a maximum of 40 characters)</value>
+    <value>For example: Incineration/landfill/chemical or biological treatment</value>
   </data>
   <data name="DisposalMethodRequired" xml:space="preserve">
     <value>Please enter the method of disposal</value>

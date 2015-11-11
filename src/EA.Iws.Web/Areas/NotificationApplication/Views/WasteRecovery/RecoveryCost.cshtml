@@ -20,14 +20,13 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
         @Html.Gds().LabelFor(m => m.Amount, false)
         @Html.Gds().ValidationMessageFor(m => m.Amount)
-        <div class="grid-row">
-            <div class="column-third">
-                @Html.Gds().TextBoxFor(m => m.Amount, new { @class = "form-control form-control-wide" })
-            </div>
-            <div class="column-third">
-                @Html.Gds().DropDownListFor(m => m.SelectedUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
-            </div>
-        </div>
+        @Html.Gds().TextBoxFor(m => m.Amount)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedUnits)">
+        @Html.Gds().LabelFor(m => m.SelectedUnits, false)
+        @Html.Gds().ValidationMessageFor(m => m.SelectedUnits)
+        @Html.Gds().DropDownListFor(m => m.SelectedUnits, Model.UnitSelectList)
     </div>
 
     <div class="form-group">

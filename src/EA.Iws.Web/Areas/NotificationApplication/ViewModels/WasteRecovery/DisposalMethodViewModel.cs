@@ -8,6 +8,7 @@
     {
         public Guid NotificationId { get; set; }
 
+        [Display(Name = "DisposalMethod", ResourceType = typeof(DisposalMethodResources))]
         [Required(ErrorMessageResourceName = "DisposalMethodRequired", ErrorMessageResourceType = typeof(DisposalMethodResources))]
         public string DisposalMethod { get; set; }
 

@@ -15,9 +15,10 @@
     </header>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.DisposalMethod)">
+        @Html.Gds().LabelFor(m => m.DisposalMethod)
         @Html.Gds().HintParagraph(DisposalMethodResources.DisposalMethodHint)
         @Html.Gds().ValidationMessageFor(m => m.DisposalMethod)
-        @Html.Gds().TextBoxFor(m => m.DisposalMethod, new {@MaxLength = 40 })
+        @Html.Gds().TextBoxFor(m => m.DisposalMethod, new { @MaxLength = 40 })
     </div>
 
     <div class="form-group">

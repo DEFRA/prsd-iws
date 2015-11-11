@@ -25,6 +25,7 @@
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
 
+        [Display(Name = "SelectedUnits", ResourceType = typeof(RecoveryCostResources))]
         [Required(ErrorMessageResourceName = "UnitsRequired", ErrorMessageResourceType = typeof(RecoveryCostResources))]
         public ValuePerWeightUnits? SelectedUnits { get; set; }
 

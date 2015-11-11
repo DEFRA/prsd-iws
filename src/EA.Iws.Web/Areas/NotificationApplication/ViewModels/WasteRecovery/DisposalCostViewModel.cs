@@ -22,6 +22,7 @@
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
 
+        [Display(Name = "Units", ResourceType = typeof(DisposalCostResources))]
         public ValuePerWeightUnits Units { get; set; }
 
         public string DisposalMethod { get; set; }

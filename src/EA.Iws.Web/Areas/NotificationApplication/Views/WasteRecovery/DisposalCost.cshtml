@@ -16,16 +16,15 @@
     </header>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
+        @Html.Gds().LabelFor(m => m.Amount)
         @Html.Gds().ValidationMessageFor(m => m.Amount)
+        @Html.Gds().TextBoxFor(m => m.Amount)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Units)">
+        @Html.Gds().LabelFor(m => m.Units)
         @Html.Gds().ValidationMessageFor(m => m.Units)
-        <div class="grid-row">
-            <div class="column-third">
-                @Html.Gds().TextBoxFor(m => m.Amount, new { @class = "form-control form-control-wide" })
-            </div>
-            <div class="column-third">
-                @Html.Gds().DropDownListFor(m => m.Units, Model.PossibleUnits, new { @class = "form-control form-control-wide" })
-            </div>
-        </div>
+        @Html.Gds().DropDownListFor(m => m.Units, Model.PossibleUnits)
     </div>
 
     <div class="form-group">

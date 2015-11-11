@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Amount" xml:space="preserve">
-    <value>Please enter £/kg or tonne</value>
+    <value>Estimated value (£)</value>
   </data>
   <data name="AmountCannotBeNegative" xml:space="preserve">
     <value>The amount entered cannot be negative</value>
@@ -131,6 +131,9 @@
   </data>
   <data name="InvalidData" xml:space="preserve">
     <value>Some of your data is invalid, please go back and re-enter your recovery information</value>
+  </data>
+  <data name="SelectedUnits" xml:space="preserve">
+    <value>Unit</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Recovery cost</value>
