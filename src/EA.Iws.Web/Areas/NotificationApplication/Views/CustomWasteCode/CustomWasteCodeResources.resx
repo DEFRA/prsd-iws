@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CustomsCode" xml:space="preserve">
-    <value>CustomsCode</value>
+    <value>Customs code</value>
   </data>
   <data name="CustomsCodeRequired" xml:space="preserve">
     <value>Please enter a customs code or select not applicable</value>

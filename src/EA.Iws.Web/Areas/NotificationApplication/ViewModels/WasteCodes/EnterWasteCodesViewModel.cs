@@ -18,6 +18,7 @@
 
         public IList<WasteCodeViewModel> WasteCodes { get; set; }
 
+        [Display(Name = "SelectedCode", ResourceType = typeof(WasteCodesResources))]
         public Guid? SelectedCode { get; set; }
 
         public List<Guid> SelectedWasteCodes { get; set; }

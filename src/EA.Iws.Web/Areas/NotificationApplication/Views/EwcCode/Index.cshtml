@@ -15,8 +15,9 @@
         @Html.Gds().ValidationSummary()
 
         <div class="wastecode-block">
-            <p>@EwcCodeResources.Message</p>
+
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.EnterWasteCodesViewModel.SelectedCode)">
+                @Html.Gds().LabelFor(m => m.EnterWasteCodesViewModel.SelectedCode, false)
                 @Html.Gds().ValidationMessageFor(m => m.EnterWasteCodesViewModel.SelectedCode)
                 @Html.Gds().DropDownListFor(m => m.EnterWasteCodesViewModel.SelectedCode, Model.EnterWasteCodesViewModel.Codes,
                     string.Empty, new { id = "code-list", title = EwcCodeResources.Title })

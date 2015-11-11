@@ -1,8 +1,9 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.EnterWasteCodesViewModel
 
 <div class="wastecode-block">
-    <p>Type your code and select from the options that will appear in the list.</p>
+    
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
+        @Html.Gds().LabelFor(m => m.SelectedCode, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
         @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title="code list" })
         <button type="submit" name="command" value="addcode">Insert this code into table below</button>

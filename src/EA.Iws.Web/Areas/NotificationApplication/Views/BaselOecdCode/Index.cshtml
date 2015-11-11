@@ -6,7 +6,6 @@
 }
 
 <h1 class="heading-large">@BaselOecdCodeResources.Header</h1>
-<p>@BaselOecdCodeResources.HeaderDescription</p>
 
 @using (Html.BeginForm())
 {
@@ -22,6 +21,7 @@
     }
 
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
+        @Html.Gds().LabelFor(m => m.SelectedCode, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
         @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title = BaselOecdCodeResources.CodeList })
     </div>

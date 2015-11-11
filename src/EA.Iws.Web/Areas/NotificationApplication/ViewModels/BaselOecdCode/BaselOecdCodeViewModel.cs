@@ -9,6 +9,7 @@
 
     public class BaselOecdCodeViewModel : IValidatableObject
     {
+        [Display(Name = "HeaderDescription", ResourceType = typeof(BaselOecdCodeResources))]
         public Guid? SelectedCode { get; set; }
 
         public IList<WasteCodeViewModel> WasteCodes { get; set; }
