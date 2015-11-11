@@ -795,7 +795,6 @@
     <Content Include="Areas\NotificationApplication\Views\ReasonForExport\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shipment\_ShipmentForm.cshtml" />
     <Content Include="Views\Shared\_Layout.GovUK.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\PackagingTypes\_PackagingTypes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\PackagingTypes\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\MeansOfTransport\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\SpecialHandling\Index.cshtml" />
