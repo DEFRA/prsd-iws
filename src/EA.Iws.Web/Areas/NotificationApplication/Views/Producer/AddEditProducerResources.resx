@@ -129,6 +129,9 @@
   <data name="Header" xml:space="preserve">
     <value>Add waste generator - producer</value>
   </data>
+  <data name="ProducerDetails" xml:space="preserve">
+    <value>Producer details</value>
+  </data>
   <data name="TitleAdd" xml:space="preserve">
     <value>Add a waste generator-producer</value>
   </data>

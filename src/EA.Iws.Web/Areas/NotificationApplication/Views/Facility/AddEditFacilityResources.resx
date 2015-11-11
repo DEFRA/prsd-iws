@@ -129,6 +129,9 @@
   <data name="ContactDescription" xml:space="preserve">
     <value>This should be the contact person for the {0}.</value>
   </data>
+  <data name="FacilityDetails" xml:space="preserve">
+    <value>Facility details</value>
+  </data>
   <data name="Header" xml:space="preserve">
     <value>Add {0} facility</value>
   </data>

@@ -28,17 +28,28 @@
         <h1 class="heading-large">@string.Format(AddEditFacilityResources.Header, facilityType)</h1>
     </header>
 
-    @Html.EditorFor(m => m.Business)
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditFacilityResources.FacilityDetails</legend>
+        @Html.EditorFor(m => m.Business)
+    </fieldset>
 
     <h2 class="heading-medium">@AddEditFacilityResources.Address</h2>
     <hr />
     <p>@string.Format(AddEditFacilityResources.AddressDescription, facilityType)</p>
-    @Html.EditorFor(m => m.Address)
+
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditFacilityResources.Address</legend>
+        @Html.EditorFor(m => m.Address)
+    </fieldset>
 
     <h2 class="heading-medium">@AddEditFacilityResources.Contact</h2>
     <hr />
     <p>@string.Format(AddEditFacilityResources.ContactDescription, facilityType)</p>
-    @Html.EditorFor(m => m.Contact)
+
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditFacilityResources.Contact</legend>
+        @Html.EditorFor(m => m.Contact)
+    </fieldset>
 
     <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">

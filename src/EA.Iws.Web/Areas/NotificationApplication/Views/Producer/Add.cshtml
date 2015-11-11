@@ -15,16 +15,27 @@
         <h1 class="heading-large">@AddEditProducerResources.Header</h1>
     </header>
 
-    @Html.Partial("_BusinessType", Model)
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditProducerResources.ProducerDetails</legend>
+        @Html.Partial("_BusinessType", Model)
+    </fieldset>
 
     <h2 class="heading-medium">@AddEditProducerResources.Address</h2>
     <hr />
     <p>@AddEditProducerResources.AddressDescription</p>
-    @Html.EditorFor(m => m.Address)
+
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditProducerResources.Address</legend>
+        @Html.EditorFor(m => m.Address)
+    </fieldset>
 
     <h2 class="heading-medium">@AddEditProducerResources.Contact</h2>
-    <hr />
-    @Html.EditorFor(m => m.Contact)
+    <hr/>
+
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditProducerResources.Contact</legend>
+        @Html.EditorFor(m => m.Contact)
+    </fieldset>
 
     <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">

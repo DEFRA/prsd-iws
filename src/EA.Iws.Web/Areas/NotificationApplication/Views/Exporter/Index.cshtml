@@ -22,17 +22,28 @@
         <h1 class="heading-large">@ExporterResources.Header</h1>
     </header>
 
-    @Html.EditorFor(m => m.Business)
+    <fieldset>
+        <legend class="visuallyhidden">@ExporterResources.Header</legend>
+        @Html.EditorFor(m => m.Business)
+    </fieldset>
 
     <h2 class="heading-medium">@ExporterResources.AddressHeader</h2>
     <hr />
     <p>@ExporterResources.AddressDescription</p>
-    @Html.EditorFor(m => m.Address)
+
+    <fieldset>
+        <legend class="visuallyhidden">@ExporterResources.AddressHeader</legend>
+        @Html.EditorFor(m => m.Address)
+    </fieldset>
 
     <h2 class="heading-medium">@ExporterResources.ContactHeader</h2>
     <hr />
     <p>@ExporterResources.ContactDescription</p>
-    @Html.EditorFor(m => m.Contact)
+
+    <fieldset>
+        <legend class="visuallyhidden">@ExporterResources.ContactHeader</legend>
+        @Html.EditorFor(m => m.Contact)
+    </fieldset>
 
     <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">
