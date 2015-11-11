@@ -63,7 +63,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Result(Guid id, FormCollection formCollection)
         {
-            return RedirectToAction("Index", "Home", new { id, area = "NotificationApplication" });
+            return RedirectToAction("Index", "Shipment", new { id, area = "NotificationApplication", backToOverview = true });
         }
     }
 }
