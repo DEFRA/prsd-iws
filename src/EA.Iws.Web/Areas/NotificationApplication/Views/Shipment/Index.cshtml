@@ -6,5 +6,108 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Partial("_ShipmentForm")
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
+
+    <h1 class="heading-large">@ShipmentResources.HeaderNumber</h1>
+    @Html.Gds().HintSpan(ShipmentResources.NumberHint)
+    <div class="grid-row">
+        <div class="column-half">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberOfShipments)">
+                @Html.Gds().LabelFor(m => m.NumberOfShipments)
+                @Html.Gds().ValidationMessageFor(m => m.NumberOfShipments)
+                @Html.Gds().TextBoxFor(m => m.NumberOfShipments)
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <h1 class="heading-large">@ShipmentResources.HeaderQty</h1>
+    @Html.Gds().HintSpan(ShipmentResources.NumberHint)
+    <div class="grid-row">
+        <div class="column-half">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
+                @Html.Gds().LabelFor(m => m.Quantity)
+                @Html.Gds().ValidationMessageFor(m => m.Quantity)
+                @Html.Gds().TextBoxFor(m => m.Quantity)
+            </div>
+        </div>
+        <div class="column-half">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Units)">
+                @Html.Gds().LabelFor(m => m.Units)
+                @Html.Gds().ValidationMessageFor(m => m.Units)
+                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList)
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <h1 class="heading-large">@ShipmentResources.HeaderDates</h1>
+
+    <div class="grid-row">
+        <div class="column-half">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
+                <fieldset>
+                    <legend>
+                        <span class="form-label">@ShipmentResources.FirstDeparture</span>
+                    </legend>
+
+                    <div class="form-date">
+                        @Html.Gds().HintParagraph(ShipmentResources.FirstDepartureDateHint)
+                        @Html.Gds().ValidationMessageFor(m => m.StartDay)
+                        @Html.Gds().ValidationMessageFor(m => m.StartMonth)
+                        @Html.Gds().ValidationMessageFor(m => m.StartYear)
+                        <div class="form-group form-group-day">
+                            @Html.Gds().LabelFor(m => m.StartDay)
+                            @Html.Gds().TextBoxFor(m => m.StartDay, new { type = "number", min = "1", max = "31" })
+                        </div>
+                        <div class="form-group form-group-month">
+                            @Html.Gds().LabelFor(m => m.StartMonth)
+                            @Html.Gds().TextBoxFor(m => m.StartMonth, new { type = "number", min = "1", max = "12" })
+                        </div>
+                        <div class="form-group form-group-year">
+                            @Html.Gds().LabelFor(m => m.StartYear)
+                            @Html.Gds().TextBoxFor(m => m.StartYear, new { type = "number", min = "2015" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="column-half">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
+                <fieldset>
+                    <legend>
+                        <span class="form-label">@ShipmentResources.LastDeparture</span>
+                    </legend>
+
+                    <div class="form-date">
+                        @Html.Gds().HintParagraph(ShipmentResources.LastDepartureDateHint)
+                        @Html.Gds().ValidationMessageFor(m => m.EndDay)
+                        @Html.Gds().ValidationMessageFor(m => m.EndMonth)
+                        @Html.Gds().ValidationMessageFor(m => m.EndYear)
+                        <div class="form-group form-group-day">
+                            @Html.Gds().LabelFor(m => m.EndDay)
+                            @Html.Gds().TextBoxFor(m => m.EndDay, new { type = "number", min = "1", max = "31" })
+                        </div>
+                        <div class="form-group form-group-month">
+                            @Html.Gds().LabelFor(m => m.EndMonth)
+                            @Html.Gds().TextBoxFor(m => m.EndMonth, new { type = "number", min = "1", max = "12" })
+                        </div>
+                        <div class="form-group form-group-year">
+                            @Html.Gds().LabelFor(m => m.EndYear)
+                            @Html.Gds().TextBoxFor(m => m.EndYear, new { type = "number", min = "2015" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <p> <button class="button" type="submit">@Constants.ContinueButtonText</button></p>
+    </div>
 }
