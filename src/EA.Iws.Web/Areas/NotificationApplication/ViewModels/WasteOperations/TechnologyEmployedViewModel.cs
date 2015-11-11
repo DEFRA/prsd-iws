@@ -15,10 +15,11 @@
         [Display(Name = "AnnexProvided", ResourceType = typeof(TechnologyEmployedResources))]
         public bool AnnexProvided { get; set; }
 
-        [Display(Name = "FurtherDetails", ResourceType = typeof(TechnologyEmployedResources))]
+        [Display(Name = "TechnologyDescription", ResourceType = typeof(TechnologyEmployedResources))]
         [StringLength(70, ErrorMessageResourceName = "DetailsMaxLengthErrorMessage", ErrorMessageResourceType = typeof(TechnologyEmployedResources))]
         public string Details { get; set; }
 
+        [Display(Name = "FurtherDetails", ResourceType = typeof(TechnologyEmployedResources))]
         public string FurtherDetails { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -27,6 +28,7 @@
             {
                 yield return new ValidationResult(TechnologyEmployedResources.DetailsRequired, new[] { "Details" });
             }
+
             if (AnnexProvided && !(string.IsNullOrWhiteSpace(FurtherDetails)))
             {
                 yield return new ValidationResult(TechnologyEmployedResources.FurtherDetailsRequired, new[] { "FurtherDetails" });

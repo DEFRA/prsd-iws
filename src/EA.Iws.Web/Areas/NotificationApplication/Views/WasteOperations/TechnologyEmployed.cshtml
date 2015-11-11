@@ -15,30 +15,24 @@
             <h1 class="heading-large">@TechnologyEmployedResources.Header</h1>
         </header>
 
-        <header class="hgroup">
-            <h2 class="heading-medium">@TechnologyEmployedResources.ChosenCodes</h2>
-        </header>
+        <div class="form-group">
+            <p>@TechnologyEmployedResources.ChosenCodes</p>
 
-        @foreach (string code in Model.OperationCodes)
-        {
-            <span class="operation-code-list">@code</span>
-        }
-
-        <header class="hgroup">
-            <h2 class="heading-medium">@TechnologyEmployedResources.TechnologyDescription</h2>
-        </header>
-        @Html.Gds().HintParagraph(TechnologyEmployedResources.TechnologyHint)
+            @foreach (string code in Model.OperationCodes)
+            {
+                <span class="operation-code-list">@code</span>
+            }
+        </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
+            @Html.Gds().LabelFor(m => m.Details, false)
             @Html.Gds().ValidationMessageFor(m => m.Details)
+            @Html.Gds().HintParagraph(TechnologyEmployedResources.TechnologyHint)
             @Html.TextBoxFor(m => m.Details, new { @class = "full-width", @MaxLength = 70, @title = TechnologyEmployedResources.DetailsTitle })
         </div>
 
-        <header class="hgroup">
-            <h1 class="heading-medium">@TechnologyEmployedResources.FurtherDetails</h1>
-        </header>
-
         <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherDetails)">
+            @Html.Gds().LabelFor(m => m.FurtherDetails)
             @Html.Gds().ValidationMessageFor(m => m.FurtherDetails)
             @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px", @title = TechnologyEmployedResources.FurtherDetailsTitle })
         </div>

@@ -136,7 +136,7 @@
     <value>Details</value>
   </data>
   <data name="FurtherDetails" xml:space="preserve">
-    <value>If you wish to provide further details, enter them below. (optional)</value>
+    <value>If you wish to provide further details, enter them below</value>
   </data>
   <data name="FurtherDetailsRequired" xml:space="preserve">
     <value>If you select that you are providing the details in a separate annex do not enter any details here</value>
@@ -148,7 +148,7 @@
     <value>What is the technology employed?</value>
   </data>
   <data name="TechnologyDescription" xml:space="preserve">
-    <value>Give a brief description of the technologies and processes used to treat the waste on site.</value>
+    <value>Give a brief description of the technologies and processes used to treat the waste on site</value>
   </data>
   <data name="TechnologyHint" xml:space="preserve">
     <value>Please limit your answer to 70 characters or less</value>
