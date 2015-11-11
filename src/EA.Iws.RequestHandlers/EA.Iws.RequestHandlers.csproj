@@ -136,6 +136,8 @@
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbersHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetCarriersHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetMeansOfTransportHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetPackagingTypesHandler.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementDataHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentDatesHandler.cs" />
@@ -163,13 +165,10 @@
     <Compile Include="Movement\Summary\GetMovementSummaryHandler.cs" />
     <Compile Include="Movement\GetMovementUnitsByMovementIdHandler.cs" />
     <Compile Include="Movement\GetSubmittedMovementsByNotificationIdHandler.cs" />
-    <Compile Include="Movement\GetMeansOfTransportByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetMovementCarrierDataByMovementIdHandler.cs" />
     <Compile Include="Movement\GetMovementNumberByMovementIdHandler.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandler.cs" />
     <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetNumberOfCarriersByMovementIdHandler.cs" />
     <Compile Include="Movement\Mappings\BasicMovementSummaryMap.cs" />
     <Compile Include="Movement\RecordMovementStatusChange.cs" />
     <Compile Include="Movement\SaveCertificateOfReceiptFileHandler.cs" />

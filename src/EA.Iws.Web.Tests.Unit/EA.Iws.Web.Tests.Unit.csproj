@@ -155,7 +155,6 @@
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
     <Compile Include="Controllers\Admin\ImportNotificationControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\WasteOperationControllerTests.cs" />
-    <Compile Include="Controllers\Movement\CarrierControllerTests.cs" />
     <Compile Include="Controllers\Movement\DateReceivedControllerTests.cs" />
     <Compile Include="Controllers\Movement\QuantityReceivedControllerTests.cs" />
     <Compile Include="Controllers\Movement\ReceiptCompleteControllerTests.cs" />
@@ -201,7 +200,6 @@
     <Compile Include="ViewModels\ApprovedNotificationViewModelTests.cs" />
     <Compile Include="ViewModels\DisposalCostViewModelTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
-    <Compile Include="ViewModels\Movement\CarrierViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\DateCompleteViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\DateReceivedViewModelTests.cs" />
     <Compile Include="ViewModels\Movement\ShipmentDateViewModelTests.cs" />

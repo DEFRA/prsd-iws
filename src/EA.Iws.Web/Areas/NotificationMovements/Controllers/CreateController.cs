@@ -17,6 +17,8 @@
         private const string ShipmentDateKey = "ShipmentDateKey";
         private const string QuantityKey = "QuantityKey";
         private const string UnitKey = "UnitKey";
+        private const string PackagingTypesKey = "PackagingTypesKey";
+        private const string NumberOfCarriersKey = "NumberOfCarriersKey";
 
         public CreateController(IMediator mediator)
         {
@@ -140,7 +142,7 @@
             }
 
             TempData[MovementNumbersKey] = model.MovementNumbers;
-            TempData["PackagingTypesKey"] = model.SelectedValues;
+            TempData[PackagingTypesKey] = model.SelectedValues;
 
             return RedirectToAction("NumberOfPackages", "Create");
         }
@@ -154,8 +156,84 @@
                 var movementNumbers = (IList<int>)result;
 
                 ViewBag.MovementNumbers = movementNumbers;
+                var model = new NumberOfPackagesViewModel(movementNumbers);
 
-                return View();
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NumberOfPackages(Guid notificationId, NumberOfPackagesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData[MovementNumbersKey] = model.MovementNumbers;
+            TempData["NumberOfPackagesKey"] = model.Number;
+
+            return RedirectToAction("NumberOfCarriers", "Create");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> NumberOfCarriers(Guid notificationId)
+        {
+            object result;
+            if (TempData.TryGetValue(MovementNumbersKey, out result))
+            {
+                var movementsNumbers = (IList<int>)result;
+                var meansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId));
+
+                ViewBag.MovementNumbers = movementsNumbers;
+                var meansOfTransportViewModel = new MeansOfTransportViewModel { NotificationMeansOfTransport = meansOfTransport };
+                var model = new NumberOfCarriersViewModel(meansOfTransportViewModel, movementsNumbers);
+
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NumberOfCarriers(Guid notificationId, NumberOfCarriersViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData[MovementNumbersKey] = model.MovementNumbers;
+            TempData[NumberOfCarriersKey] = model.Number;
+
+            return RedirectToAction("Carriers", "Create");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Carriers(Guid notificationId)
+        {
+            object movementNumbersResult;
+            object numberOfCarriersResult;
+            if (TempData.TryGetValue(MovementNumbersKey, out movementNumbersResult)
+                && TempData.TryGetValue(NumberOfCarriersKey, out numberOfCarriersResult))
+            {
+                var movementNumbers = (IList<int>)movementNumbersResult;
+                var numberOfCarriers = (int)numberOfCarriersResult;
+                var meansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId));
+                var notificationCarriers = await mediator.SendAsync(new GetCarriers(notificationId));
+
+                ViewBag.MovementNumbers = movementNumbers;
+                var meansOfTransportViewModel = new MeansOfTransportViewModel { NotificationMeansOfTransport = meansOfTransport };
+                var model = new CarrierViewModel(notificationCarriers, numberOfCarriers, meansOfTransportViewModel, movementNumbers);
+
+                TempData[MovementNumbersKey] = movementNumbers;
+                TempData[NumberOfCarriersKey] = numberOfCarriers;
+
+                return View(model);
             }
 
             return RedirectToAction("Index", "Create");

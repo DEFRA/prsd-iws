@@ -565,9 +565,9 @@
     <Content Include="Areas\NotificationAssessment\Views\Home\_WasteCodes.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Home\_WasteRecovery.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Home\_SummaryTableContainer.cshtml" />
-    <Content Include="Areas\Movement\Views\Carrier\NumberOfCarriers.cshtml" />
-    <Content Include="Areas\Movement\Views\Carrier\Index.cshtml" />
-    <Content Include="Areas\Movement\Views\Carrier\_MeansOfTransport.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\NumberOfCarriers.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\Carriers.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\_MeansOfTransport.cshtml" />
     <Content Include="Content\iws\_movement.scss" />
     <Content Include="Areas\Movement\Views\DateReceived\Index.cshtml" />
     <Content Include="Areas\Movement\Views\QuantityReceived\Index.cshtml" />
@@ -1091,7 +1091,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Movement\Controllers\CarrierController.cs" />
     <Compile Include="Areas\Movement\Controllers\CompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
@@ -1432,8 +1431,8 @@
     <Compile Include="Areas\NotificationMovements\Controllers\ReceiveMovementController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Carrier\CarrierViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Carrier\MeansOfTransportViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Complete\DateViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Complete\UploadViewModel.cs" />
@@ -1493,7 +1492,7 @@
     <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryTableViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Carrier\NumberOfCarriersViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\NumberOfPackagesViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
     <Compile Include="Areas\Movement\MovementAreaRegistration.cs" />
