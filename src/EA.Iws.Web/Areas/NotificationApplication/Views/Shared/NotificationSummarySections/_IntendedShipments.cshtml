@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
+﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
 
 @if (Model.IntendedShipmentData.NumberOfShipments > 0)
 {
@@ -7,7 +8,7 @@
         <dd>@Model.IntendedShipmentData.NumberOfShipments</dd>
 
         <dt>Total intended quantity:</dt>
-        <dd>@string.Format("{0:0.####} {1}", Model.IntendedShipmentData.Quantity, Model.IntendedShipmentData.Units)</dd>
+        <dd>@string.Format("{0:0.####} {1}", Model.IntendedShipmentData.Quantity, EnumHelper.GetShortName(Model.IntendedShipmentData.Units))</dd>
 
         <dt>Intended dates of departure:</dt>
         <dd>@Html.Gds().DisplayDateRangeFor(m => m.IntendedShipmentData.FirstDate, m => m.IntendedShipmentData.LastDate)</dd>

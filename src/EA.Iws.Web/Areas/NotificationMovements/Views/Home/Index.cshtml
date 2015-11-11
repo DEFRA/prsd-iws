@@ -28,7 +28,7 @@
 {
     if (quantity.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
     {
-        @(quantity.Value.ToString("G29") + " " + EnumHelper.GetDisplayName(unit.GetValueOrDefault()))
+        @(quantity.Value.ToString("G29") + " " + EnumHelper.GetShortName(unit.GetValueOrDefault()))
     }
     else if (status != MovementStatus.Cancelled)
     {

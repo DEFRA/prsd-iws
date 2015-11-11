@@ -1,9 +1,10 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
+﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
 <div class="overview-block">
     <div class="overview-block-element">
         @if (Model.IntendedShipmentData.NumberOfShipments > 0)
         {
-            @Html.Raw(string.Format("{0:0.####} {1}", Model.IntendedShipmentData.Quantity, Model.IntendedShipmentData.Units))
+            @Html.Raw(string.Format("{0:0.####} {1}", Model.IntendedShipmentData.Quantity, EnumHelper.GetShortName(Model.IntendedShipmentData.Units)))
         }
         else
         {
