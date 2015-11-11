@@ -33,14 +33,25 @@
         public string Command { get; set; }
 
         public ChemicalCompositionType ChemicalCompositionType { get; set; }
+        
+        public YesNoEnum Choices
+        {
+            get
+            {
+                if (OtherCodesContainsData())
+                {
+                    return YesNoEnum.Yes;
+                }
+                if (!WasteCompostionContainsData())
+                {
+                    return YesNoEnum.NotSelected;
+                }
+                return YesNoEnum.No;
+            }
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Command.Equals("add"))
-            {
-                yield break;
-            }
-
             var allCompositions = WasteComposition.Concat(OtherCodes).ToList();
 
             for (var i = 0; i < WasteComposition.Count; i++)
@@ -173,6 +184,36 @@
         {
             double value;
             return Double.TryParse(input, out value);
+        }
+
+        public bool OtherCodesContainsData()
+        {
+            bool result = false;
+
+            foreach (var item in OtherCodes)
+            {
+                if (!string.IsNullOrEmpty(item.Constituent))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        private bool WasteCompostionContainsData()
+        {
+            bool result = false;
+
+            foreach (var item in wasteComposition)
+            {
+                if (!string.IsNullOrEmpty(item.MinConcentration))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
         }
     }
 }

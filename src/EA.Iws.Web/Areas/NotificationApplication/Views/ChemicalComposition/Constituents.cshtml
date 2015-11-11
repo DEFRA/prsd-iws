@@ -1,0 +1,114 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition
+@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionContinuedViewModel
+@{
+    ViewBag.Title = ConstituentsResources.Title;
+}
+
+<header class="hgroup">
+    <div class="form-group">
+        @Html.Gds().HintParagraph(ConstituentsResources.Step3)
+    </div>
+    <h1 class="heading-large">@ConstituentsResources.Header</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.ChemicalCompositionType)
+    <p>@ConstituentsResources.HeaderDescription</p>
+
+    <div class="grid-row form-group">
+        <div class="column-half">
+            @for (var i = 0; i < Model.WasteComposition.Count; i++)
+            {
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
+                    @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            @EnumHelper.GetDescription(Model.WasteComposition[i].ChemicalCompositionCategory)
+                        </div>
+                    </div>
+                    <div class="grid-row">
+                        @{
+                            var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory);
+                        }
+                        <div class="column-half">
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ConstituentsResources.Min, title = sectionTitle + ConstituentsResources.MinConcentration })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].ChemicalCompositionCategory, new { type = "hidden" })
+                        </div>
+                        <div class="column-half">
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = ConstituentsResources.Max, title = sectionTitle + ConstituentsResources.MaxConcentration })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory) })
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div>@ConstituentsResources.Question</div>
+
+        <div class="form-group">
+            <label class="block-label" for="rdoNo">
+                @Html.RadioButtonFor(m => m.Choices, YesNoEnum.No, new { @class = "", @id = "rdoNo" })No
+            </label>
+
+            <label class="block-label" data-target="other-constituents" for="rdoYes">
+                @Html.RadioButtonFor(m => m.Choices, YesNoEnum.Yes, new { @class = "", @id = "rdoYes" })Yes
+            </label>
+
+        </div>
+
+        <div class="panel-indent @(Model.OtherCodesContainsData() ? string.Empty : "js-hidden")" id="other-constituents">
+          
+            @for (int i = 0; i < Model.OtherCodes.Count; i++)
+            {
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCodes[i])">
+                    @Html.Gds().ValidationMessageFor(m => m.OtherCodes[i])
+                    
+                    <div><label>Name</label></div>
+                    <span>
+                        <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title=@ConstituentsResources.OtherConstituent />
+                        &nbsp;&nbsp;
+                    </span>
+
+                    <span>
+                        <input name="OtherCodes[@i].MinConcentration" style="width: 65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title=@ConstituentsResources.MinConstituent />
+                        &nbsp;&nbsp;
+                    </span>
+                    <span>
+                        <input name="OtherCodes[@i].MaxConcentration" style="width: 65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title=@ConstituentsResources.MaxConstituent />
+                        <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
+                    </span>
+
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
+        <hr/>
+        @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
+        @ConstituentsResources.Header2
+        @Html.Gds().HintParagraph(ConstituentsResources.Hint)
+        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = ConstituentsResources.FurtherInformation, @MaxLength = 256 })
+    </div>
+    <div class="form-group">
+        <fieldset>
+            <label class="block-label" for="chkboxFurtherInfo">
+                @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo" })
+                @ConstituentsResources.Declaration
+            </label>
+        </fieldset>
+    </div>
+
+    <div class="form-group">
+        <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

@@ -88,7 +88,7 @@
                 WasteComposition = wasteComposition,
                 NotificationId = notificationId
             };
-            var result = await chemicalCompositionController.Wood(model, backToOverview) as RedirectToRouteResult;
+            var result = await chemicalCompositionController.Parameters(model, backToOverview) as RedirectToRouteResult;
             var backToOverviewKey = "backToOverview";
             Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
             Assert.Equal<bool?>(backToOverview.GetValueOrDefault(),
@@ -107,7 +107,7 @@
                 OtherCodes = wasteComposition,
                 Command = "continue"
             };
-            var result = await chemicalCompositionController.WoodContinued(model, true) as RedirectToRouteResult;
+            var result = await chemicalCompositionController.Constituents(model, true) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
         }
         
@@ -123,7 +123,7 @@
                 OtherCodes = wasteComposition,
                 Command = "continue"
             };
-            var result = await chemicalCompositionController.WoodContinued(model, false) as RedirectToRouteResult;
+            var result = await chemicalCompositionController.Constituents(model, false) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "WasteGenerationProcess");
         }
 
@@ -140,7 +140,7 @@
                 WasteComposition = wasteComposition,
                 NotificationId = notificationId
             };
-            var result = await chemicalCompositionController.RdfSrf(model, backToOverview) as RedirectToRouteResult;
+            var result = await chemicalCompositionController.Parameters(model, backToOverview) as RedirectToRouteResult;
             var backToOverviewKey = "backToOverview";
             Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
             Assert.Equal<bool?>(backToOverview.GetValueOrDefault(),
@@ -159,7 +159,7 @@
                 OtherCodes = wasteComposition,
                 Command = "continue"
             };
-            var result = await chemicalCompositionController.RdfSrfContinued(model, true) as RedirectToRouteResult;
+            var result = await chemicalCompositionController.Constituents(model, true) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
         }
 
@@ -175,7 +175,7 @@
                 OtherCodes = wasteComposition,
                 Command = "continue"
             };
-            var result = await chemicalCompositionController.RdfSrfContinued(model, false) as RedirectToRouteResult;
+            var result = await chemicalCompositionController.Constituents(model, false) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "WasteGenerationProcess");
         }
     }
