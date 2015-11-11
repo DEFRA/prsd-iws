@@ -1,11 +1,12 @@
 ﻿@using EA.Iws.Core.Movement
 @using EA.Iws.Core.Shared
+@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.Home.IndexResources
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home.MovementSummaryViewModel
 
 @{
-    ViewBag.Title = "Shipment summary";
+    ViewBag.Title = @Resource.TabTitle;
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 
     var certificateLinkText = "Record a certificate of " + (Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery");
@@ -44,37 +45,35 @@
         </div>
     </section>
 
-    <h1 class="heading-large">
-        Shipment summary
-    </h1>
+    <h1 class="heading-large">@Resource.Title</h1>
 
     <div class="grid-row">
         <div class="column-half">
             <table class="odd-table">
-                <caption class="visuallyhidden">Shipment summary</caption>
+                <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
                 <tbody>
                 <tr>
-                    <td>Total number of shipments:</td>
+                    <td>@Resource.TotalNumber</td>
                     <td>@Model.IntendedShipments</td>
                 </tr>
                 <tr>
-                    <td>Number of shipments used:</td>
+                    <td>@Resource.NumberUsed</td>
                     <td>@Model.UsedShipments</td>
                 </tr>
                 <tr>
-                    <td>Active loads permitted:</td>
+                    <td>@Resource.ActiveLoadsPermitted</td>
                     <td>@Model.ActiveLoadsPermitted</td>
                 </tr>
                 <tr>
-                    <td>Current active loads:</td>
+                    <td>@Resource.CurrentActiveLoads</td>
                     <td>@Model.ActiveLoadsCurrent</td>
                 </tr>
                 <tr>
-                    <td>Total quantity received:</td>
+                    <td>@Resource.TotalQuantityReceived</td>
                     <td>@Model.QuantityReceivedTotal</td>
                 </tr>
                 <tr>
-                    <td>Total quantity remaining:</td>
+                    <td>@Resource.TotalQuantityRemaining</td>
                     <td>@Model.QuantityRemainingTotal</td>
                 </tr>
                 </tbody>
@@ -82,13 +81,15 @@
         </div>
 
         <div class="column-half nav-bloc">
-            <h2 class="heading-small">Shipping options</h2>
+            <h2 class="heading-small">@Resource.OptionsTitle</h2>
             <nav>
-                @Html.ActionLink("Generate a pre-notification", "Index", "Create")
+                @Html.ActionLink(Resource.CreatePrenotification, "Index", "Create")
 
-                @Html.ActionLink("Cancel a pre-notification", "Index", "CancelMovement")
+                @Html.ActionLink(Resource.UploadPrenotification, "Index", "UploadChoice")
 
-                @Html.ActionLink("Record a certificate of receipt", "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                @Html.ActionLink(Resource.CancelPrenotification, "Index", "CancelMovement")
+
+                @Html.ActionLink(Resource.CertificateOfReceipt, "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
 
                 @Html.ActionLink(certificateLinkText, "Index", "Complete")
             </nav>
@@ -97,10 +98,10 @@
 
     <section class="ship-data">
         <h3 class="heading-small">
-            Information, dates and status
+            @Resource.TableTitle
         </h3>
         <p>
-            Configure your results
+            @Resource.Dropdown
         </p>
         @using (Html.BeginForm())
         {

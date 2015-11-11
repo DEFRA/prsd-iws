@@ -7,6 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels;
+    using ViewModels.Submit;
 
     [Authorize]
     public class SubmitController : Controller

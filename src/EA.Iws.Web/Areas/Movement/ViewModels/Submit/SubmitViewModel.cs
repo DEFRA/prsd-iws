@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels
+﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.Submit
 {
     using System;
     using System.Collections.Generic;
@@ -11,14 +11,14 @@
 
         public Guid MovementId { get; set; }
 
-        [Display(Name = "Upload the signed copy of the pre-notification document")]
+        [Display(Name = "File", ResourceType = typeof(SubmitViewModelResources))]
         public HttpPostedFileBase File { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (File == null || File.InputStream.Length == 0)
             {
-                yield return new ValidationResult("Please upload the signed copy of the pre-notification document", new[] { "File" });
+                yield return new ValidationResult(SubmitViewModelResources.FileRequired, new[] { "File" });
             }
         }
     }

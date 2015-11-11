@@ -1,0 +1,22 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice.IndexResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.UploadChoice.UploadChoiceViewModel
+
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+        @Html.Gds().LabelFor(m => m.Number, false)
+        @Html.Gds().ValidationMessageFor(m => m.Number)
+        @Html.Gds().TextBoxFor(m => m.Number, new { type = "number" })
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

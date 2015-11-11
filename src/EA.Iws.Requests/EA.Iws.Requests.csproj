@@ -91,6 +91,7 @@
     <Compile Include="Movement\CancelMovements.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
+    <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Summary\GetMovementSummary.cs" />
     <Compile Include="Movement\GetMovementUnitsByMovementId.cs" />
     <Compile Include="Movement\GetSubmittedMovementsByNotificationId.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Movement\SetMovementRejected.cs" />
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="Movement\SetMovementQuantityByMovementId.cs" />
+    <Compile Include="NotificationMovements\CheckMovementNumberValid.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbers.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementData.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriers.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="NotificationAssessment\ObjectNotificationApplication.cs" />
     <Compile Include="NotificationAssessment\WithdrawNotificationApplication.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
+    <Compile Include="NotificationMovements\MovementNumberStatus.cs" />
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationIdAndStatusByNumber.cs" />

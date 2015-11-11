@@ -31,6 +31,14 @@
                 .ToArrayAsync();
         }
 
+        public async Task<Movement> GetByNumberOrDefault(int movementNumber, Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await context.Movements.Where(m => m.NotificationId == notificationId
+            && m.Number == movementNumber).SingleOrDefaultAsync();
+        }
+
         public async Task<Movement> GetById(Guid movementId)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == movementId);
