@@ -21,29 +21,37 @@
             this.userContext = userContext;
         }
 
-        public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetNotificationsByUser query)
+        public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetNotificationsByUser message)
         {
+            var query = from application in context.NotificationApplications
+                where application.UserId == userContext.UserId
+                from exporter in context.Exporters.Where(e => e.NotificationId == application.Id).DefaultIfEmpty()
+                from assessment in context.NotificationAssessments
+                where assessment.NotificationApplicationId == application.Id
+                orderby application.NotificationNumber
+                select new
+                {
+                    Notification = application,
+                    Exporter = exporter,
+                    Assessment = assessment
+                };
+
             return
-                (await
-                    context.NotificationApplications.Where(na => na.UserId == userContext.UserId)
-                        .Join(context.NotificationAssessments, application => application.Id,
-                            assessment => assessment.NotificationApplicationId,
-                            (application, assessment) => new 
-                            { 
-                                Notification = application, 
-                                Assessment = assessment
-                            })
-                            .OrderBy(p => p.Notification.NotificationNumber)
-                            .ToListAsync())
-                        .Select(n => new NotificationApplicationSummaryData
-                        {
-                            Id = n.Notification.Id,
-                            NotificationNumber = n.Notification.NotificationNumber,
-                            StatusDate = n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault() == null 
-                                        ? n.Notification.CreatedDate 
-                                        : n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault().ChangeDate,
-                            Status = n.Assessment.Status
-                        }).ToList();
+                (await query.ToListAsync())
+                    .Select(n => new NotificationApplicationSummaryData
+                    {
+                        Id = n.Notification.Id,
+                        NotificationNumber = n.Notification.NotificationNumber,
+                        StatusDate =
+                            n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault() == null
+                                ? n.Notification.CreatedDate
+                                : n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate)
+                                    .FirstOrDefault()
+                                    .ChangeDate,
+                        Status = n.Assessment.Status,
+                        Exporter = n.Exporter == null ? null : n.Exporter.Business.Name,
+                        Importer = n.Notification.Importer == null ? null : n.Notification.Importer.Business.Name
+                    }).ToList();
         }
     }
 }

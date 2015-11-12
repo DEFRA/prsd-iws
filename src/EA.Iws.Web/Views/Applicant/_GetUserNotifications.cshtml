@@ -1,4 +1,35 @@
-﻿@model IList<EA.Iws.Requests.Notification.NotificationApplicationSummaryData>
+﻿@using EA.Iws.Core.NotificationAssessment
+
+@model IList<EA.Iws.Requests.Notification.NotificationApplicationSummaryData>
+
+@helper DisplayStatus(NotificationStatus status)
+{
+    string statusColour;
+    switch (status)
+    {
+        case NotificationStatus.InAssessment:
+        case NotificationStatus.ReadyToTransmit:
+        case NotificationStatus.Transmitted:
+        case NotificationStatus.DecisionRequiredBy:
+            statusColour = "s-orange";
+            break;
+
+        case NotificationStatus.Consented:
+            statusColour = "s-green";
+            break;
+
+        case NotificationStatus.Objected:
+        case NotificationStatus.Withdrawn:
+        case NotificationStatus.ConsentWithdrawn:
+            statusColour = "s-red";
+            break;
+        
+        default:
+            statusColour = "s-blue";
+            break;
+    }
+    <span class="statusbox @statusColour">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(status).ToUpperInvariant()</span>
+}
 
 @if (ViewBag.Errors != null && ((IEnumerable<string>)ViewBag.Errors).Any())
 {
@@ -10,51 +41,49 @@ else if (Model.Count == 0)
 }
 else
 {
-    <p>You have generated the following notifications</p>
-
-    <table title="Manage Notifications">
+    <table class="odd-table" title="Manage Notifications">
+        <caption class="visuallyhidden">Notifications</caption>
         <thead>
-            <tr>
-                <th class="formatted-block-table-header">
-                    Notification number
-                </th>
-                <th class="formatted-block-table-header">
-                    Status
-                </th>
-                <th class="formatted-block-table-header">
-                    Status date
-                </th>
-                <th class="formatted-block-table-header">
-                </th>
-            </tr>
+        <tr>
+            <th>
+                Notification number
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Exporter notifier
+            </th>
+            <th>
+                Importer consignee
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
         </thead>
-        <tbody class="formatted-block-table-body">
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <td>
-                        <div class="formatted-block-table-cell">
-                            @Html.DisplayFor(m => m[i].NotificationNumber)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="formatted-block-table-cell">
-                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model[i].Status)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="formatted-block-table-cell">
-                            @Html.Raw(Model[i].StatusDate.ToString("d MMMM yyyy"))
-                        </div>
-                    </td>
-                    <td>
-                        <div class="formatted-block-table-cell">
-                            @Html.ActionLink(linkText: "Select", actionName: "ApprovedNotification", controllerName: "Applicant",
-                                routeValues: new { id = Model[i].Id, area = string.Empty }, htmlAttributes: new { @title = Model[i].NotificationNumber })
-                        </div>
-                    </td>
-                </tr>
-            }
+        <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => m[i].NotificationNumber)
+                </td>
+                <td>
+                    @DisplayStatus(Model[i].Status)
+                </td>
+                <td>
+                    @Model[i].Exporter
+                </td>
+                <td>
+                    @Model[i].Importer
+                </td>
+                <td>
+                    @Html.ActionLink(linkText: "Choose", actionName: "ApprovedNotification", controllerName: "Applicant",
+                        routeValues: new { id = Model[i].Id, area = string.Empty }, htmlAttributes: new { @title = Model[i].NotificationNumber })
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 }

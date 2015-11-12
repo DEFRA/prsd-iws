@@ -12,5 +12,9 @@
         public NotificationStatus Status { get; set; }
 
         public DateTime StatusDate { get; set; }
+
+        public string Exporter { get; set; }
+
+        public string Importer { get; set; }
     }
 }
