@@ -8,6 +8,10 @@
         public decimal Quantity { get; private set; }
         public ShipmentQuantityUnits Units { get; private set; }
 
+        protected ShipmentQuantity()
+        {
+        }
+
         public ShipmentQuantity(decimal quantity, ShipmentQuantityUnits units)
         {
             Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
