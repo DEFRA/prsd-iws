@@ -21,8 +21,6 @@
 }
 
 @section scripts{
-    @Scripts.Render("~/bundles/facility")
-
     <script>
         function addPost(event) {
             postAjax('@Url.Action("Add")', event, ".form", onAdd);

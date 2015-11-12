@@ -50,7 +50,7 @@
 
         <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
             @Html.Gds().LabelFor(m => m.SelectedBaselCode, showOptionalLabel: false)
-            @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_type = "waste-codes" })
+            @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_select_box = "true" })
         </div>
 
         <div class="form-group large-bottom-margin @Html.Gds().FormGroupClass(m => m.BaselCodeNotListed)">
@@ -64,7 +64,7 @@
             <div class="column-half">
                 <div class="form-group medium-bottom-margin @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
                     @Html.Gds().LabelFor(m => m.SelectedEwcCode, showOptionalLabel: false)
-                    @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_type = "waste-codes" })
+                    @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_select_box = "true" })
                     @Html.HiddenFor(model => Model.SelectedEwcCodesJson)
                     <button type="button" 
                             class="add" 
@@ -81,7 +81,7 @@
             <div class="column-half">
                 <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
                     @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
-                    @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_type = "waste-codes" })
+                    @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_select_box = "true" })
                     @Html.HiddenFor(model => Model.SelectedHCodesJson)
                     <button type="button" 
                             class="add" 
@@ -107,7 +107,7 @@
             <div class="column-half">
                 <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
                     @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
-                    @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_type = "waste-codes" })
+                    @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_select_box = "true" })
                     @Html.HiddenFor(model => Model.SelectedYCodesJson)
                     <button type="button" 
                             class="add" 
@@ -132,7 +132,7 @@
             <div class="column-half">
                 <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
                     @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
-                    @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_type = "waste-codes" })
+                    @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_select_box = "true" })
                     @Html.HiddenFor(model => Model.SelectedUnClassesJson)
                     <button type="button" 
                             class="add" 
@@ -163,10 +163,6 @@
 
 @section scripts{
     <script>
-        $(function () {
-            $('select[data-type="waste-codes"]').selectToAutocomplete();
-        });
-
         $('button[data-action="add"]').click(function () {
             addCode(this);
         })

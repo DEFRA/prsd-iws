@@ -20,14 +20,14 @@
     @Html.Gds().LabelFor(m => m.EntryPointId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(TransitStateResources.EntryPortHint)
     @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
-    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = TransitStateResources.EntryPoint })
+    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = TransitStateResources.EntryPoint, data_select_box = "true" })
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
     @Html.Gds().LabelFor(m => m.ExitPointId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(TransitStateResources.ExitPortHint)
     @Html.Gds().ValidationMessageFor(m => m.ExitPointId)
-    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty, new { title = TransitStateResources.ExitPoint })
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty, new { title = TransitStateResources.ExitPoint, data_select_box = "true" })
 </div>
 
 <div class="form-group">

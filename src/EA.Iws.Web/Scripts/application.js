@@ -136,12 +136,29 @@ $(document).ready(function () {
 
     // Prevent double form submissions
     $(':submit').preventDoubleClick();
-});
 
-$("input[data-type='date']").on('keyup', function (event) {
-    if ($(this).val().length >= 2
-       && ((event.keyCode >= 48 && event.keyCode <= 57)
-      || (event.keyCode >= 96 && event.keyCode <= 105))) {
-        $(this).parent(".form-group").next().find("input").focus();
-    }
+    $("input[data-type='date']").on('keyup', function (event) {
+        if ($(this).val().length >= 2
+           && ((event.keyCode >= 48 && event.keyCode <= 57)
+          || (event.keyCode >= 96 && event.keyCode <= 105))) {
+            $(this).parent(".form-group").next().find("input").focus();
+        }
+    });
+
+    // Select lists
+    $("select[data-select-box='true'").removeClass("form-control").select2({
+        placeholder: "Please select...",
+        sortResults: function (results, container, query) {
+            return results.sort(function (a, b) {
+                a = a.text.toLowerCase();
+                b = b.text.toLowerCase();
+                if (a > b) {
+                    return 1;
+                } else if (a < b) {
+                    return -1;
+                }
+                return 0;
+            });
+        }
+    });
 });

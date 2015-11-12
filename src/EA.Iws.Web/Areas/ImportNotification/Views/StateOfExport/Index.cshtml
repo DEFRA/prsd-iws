@@ -21,7 +21,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
         @Html.Gds().LabelFor(m => m.CountryId, false)
         @Html.Gds().ValidationMessageFor(m => m.CountryId)
-        @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountryList, string.Empty, new { onchange = "changeCountry(event)" })
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountryList, string.Empty, new { onchange = "changeCountry(event)", data_select_box = "true" })
     </div>
 
     <div id="ca-and-exit-point">

@@ -5,7 +5,7 @@
     @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(StateOfImportResources.EndJourneyHint)
     @Html.HiddenFor(m => m.CountryId)
-    @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { id = "country-list", disabled = "disabled", title = StateOfImportResources.CountryList })
+    @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { id = "country-list", disabled = "disabled", title = StateOfImportResources.CountryList, data_select_box = "true" })
     <button class="link-submit force-newline" type="submit" value="changeCountry" name="submit">@StateOfImportResources.ChangeCountry</button>
 </div>
 
@@ -20,7 +20,7 @@
     @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(StateOfImportResources.PortHint)
     @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
-    @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.EntryPoints, string.Empty, new { title = StateOfImportResources.EntryPoint })
+    @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.EntryPoints, string.Empty, new { title = StateOfImportResources.EntryPoint, data_select_box = "true" })
 </div>
 
 <div class="form-group">

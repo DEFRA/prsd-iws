@@ -40,7 +40,7 @@
         }
         @Html.Gds().LabelFor(m => m.EntryPointId, false)
         @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
-        @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryPointList, string.Empty)
+        @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryPointList, string.Empty, new { data_select_box = "true" })
     </div>
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>

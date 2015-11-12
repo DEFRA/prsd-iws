@@ -32,5 +32,5 @@
     }
     @Html.Gds().LabelFor(m => m.ExitPointId, false)
     @Html.Gds().ValidationMessageFor(m => m.ExitPointId)
-    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.ExitPointList, string.Empty)
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.ExitPointList, string.Empty, new { data_select_box = "true" })
 </div>

@@ -20,7 +20,7 @@
                 @Html.Gds().LabelFor(m => m.EnterWasteCodesViewModel.SelectedCode, false)
                 @Html.Gds().ValidationMessageFor(m => m.EnterWasteCodesViewModel.SelectedCode)
                 @Html.Gds().DropDownListFor(m => m.EnterWasteCodesViewModel.SelectedCode, Model.EnterWasteCodesViewModel.Codes,
-                    string.Empty, new { id = "code-list", title = EwcCodeResources.Title })
+                    string.Empty, new { id = "code-list", title = EwcCodeResources.Title, data_select_box = "true" })
                 <button type="submit" name="command" value="addcode">@EwcCodeResources.AddCode</button>
             </div>
 
@@ -58,13 +58,3 @@
     }
 
 </div>
-
-@section scripts{
-    <script>
-        (function ($) {
-            $(function () {
-                $('#code-list').selectToAutocomplete();
-            });
-        })(jQuery);
-    </script>
-}

@@ -23,7 +23,7 @@
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
         @Html.Gds().LabelFor(m => m.SelectedCode, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
-        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title = BaselOecdCodeResources.CodeList })
+        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title = BaselOecdCodeResources.CodeList, data_select_box = "true" })
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.NotListed)">
         @Html.Gds().ValidationMessageFor(m => m.NotListed)
@@ -53,10 +53,6 @@
 @section scripts{
     <script>
         $(function () {
-            var dropdownId = "#code-list";
-
-            $(dropdownId).selectToAutocomplete();
-
             $(dropdownId).change(function () {
                 if ($("#NotListed").is(":checked")) {
                     $("#descriptionTextArea div").html("Not listed");

@@ -6,11 +6,11 @@
     @Html.Gds().HintParagraph(TransitStateResources.CountryHint)
     @if (Model.CountryId != null)
     {
-        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries)
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { data_select_box = "true" })
     }
     else
     {
-        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = TransitStateResources.ExitCountry })
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = TransitStateResources.ExitCountry, data_select_box = "true" })
     }
 </div>
 

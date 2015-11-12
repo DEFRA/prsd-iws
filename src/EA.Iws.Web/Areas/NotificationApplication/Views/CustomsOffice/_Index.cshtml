@@ -15,5 +15,5 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedCountry)">
     @Html.Gds().LabelFor(m => m.SelectedCountry)
     @Html.Gds().ValidationMessageFor(m => m.SelectedCountry)
-    @Html.Gds().DropDownListFor(m => m.SelectedCountry, Model.Countries, string.Empty)
+    @Html.Gds().DropDownListFor(m => m.SelectedCountry, Model.Countries, string.Empty, new { data_select_box = "true" })
 </div>

@@ -13,33 +13,12 @@
     if (!Model.ShowNextSection)
     {
         @Html.Partial("_CountryOnly", Model)
-
-        @section scripts{
-            <script>
-                (function ($) {
-                    $(function () {
-                        $('#CountryId').selectToAutocomplete();
-                    });
-                })(jQuery);
-            </script>
-        }
     }
     else
     {
         @Html.HiddenFor(m => m.ShowNextSection)
 
         @Html.Partial("_AllDetails", Model)
-
-        @section scripts{
-            <script>
-                (function ($) {
-                    $(function () {
-                        $('#country-list').selectToAutocomplete();
-                        $('#EntryOrExitPointId').selectToAutocomplete();
-                    });
-                })(jQuery);
-            </script>
-        }
     }
 
     for (int i = 0; i < Model.TransitStateCountryIds.Count; i++)
