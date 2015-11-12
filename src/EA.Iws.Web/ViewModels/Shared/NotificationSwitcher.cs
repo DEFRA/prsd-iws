@@ -6,8 +6,7 @@
     {
         [Required]
         public string OriginalNumber { get; set; }
-
-        [Required]
+        
         public string Number { get; set; }
 
         public NotificationSwitcherViewModel()

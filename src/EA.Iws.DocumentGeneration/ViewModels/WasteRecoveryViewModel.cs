@@ -42,6 +42,13 @@
             get { return annexMessage; }
         }
 
+        private string percentageNonRecoverable = string.Empty;
+
+        public string PercentageNonRecoverable
+        {
+            get { return percentageNonRecoverable; }
+        }
+
         public WasteRecoveryViewModel(NotificationApplication notification,
             WasteRecovery wasteRecovery,
             WasteDisposal wasteDisposal,
@@ -66,6 +73,8 @@
             if (wasteRecovery != null && wasteRecovery.PercentageRecoverable != null)
             {
                 percentageRecoverable = wasteRecoveryFormatter.NullableDecimalAsPercentage(wasteRecovery.PercentageRecoverable.Value);
+                percentageNonRecoverable =
+                    wasteRecoveryFormatter.NullableDecimalAsPercentage(100 - wasteRecovery.PercentageRecoverable.Value);
             }
 
             estimatedAmountText = wasteRecoveryFormatter
@@ -87,6 +96,7 @@
         {
             methodOfDisposal = model.MethodOfDisposal;
             percentageRecoverable = model.PercentageRecoverable;
+            percentageNonRecoverable = model.PercentageNonRecoverable;
             estimatedAmountText = model.EstimatedAmountText;
             costAmountText = model.CostAmountText;
             disposalAmountText = model.DisposalAmountText;
