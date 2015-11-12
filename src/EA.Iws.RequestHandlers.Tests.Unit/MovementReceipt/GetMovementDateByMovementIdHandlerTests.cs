@@ -2,9 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
-    using EA.Iws.TestHelpers.DomainFakes;
+    using Domain.Movement;
+    using FakeItEasy;
     using RequestHandlers.Movement;
     using Requests.Movement;
+    using TestHelpers.DomainFakes;
     using Xunit;
 
     public class GetMovementDateByMovementIdHandlerTests : TestBase
@@ -12,6 +14,7 @@
         private readonly GetMovementDateByMovementIdHandler handler;
         private readonly GetMovementDateByMovementId request;
         private readonly TestableMovement movement;
+        private readonly IMovementRepository repository;
 
         private static readonly DateTime MovementDate = new DateTime(2015, 6, 1);
         private static readonly DateTime DateReceived = new DateTime(2015, 9, 1);
@@ -24,16 +27,11 @@
                 Date = MovementDate
             };
 
-            Context.Movements.Add(movement);
+            repository = A.Fake<IMovementRepository>();
+            A.CallTo(() => repository.GetById(MovementId)).Returns(movement);
 
-            handler = new GetMovementDateByMovementIdHandler(Context);
+            handler = new GetMovementDateByMovementIdHandler(repository);
             request = new GetMovementDateByMovementId(MovementId);
-        }
-
-        [Fact]
-        public async Task MovementDoesNotExistThrows()
-        {
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(new GetMovementDateByMovementId(Guid.Empty)));
         }
 
         [Fact]

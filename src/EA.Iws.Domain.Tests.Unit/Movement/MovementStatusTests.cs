@@ -41,15 +41,7 @@
 
             Assert.Equal(MovementStatus.Submitted, movement.Status);
         }
-
-        [Fact]
-        public void CantSubmitIncompelteMovement()
-        {
-            var newMovement = new Movement(2, AnyGuid);
-
-            Assert.Throws<InvalidOperationException>(() => newMovement.Submit(AnyGuid));
-        }
-
+        
         [Fact]
         public void CantSubmitTwice()
         {
@@ -118,25 +110,6 @@
             var movement = new Movement(1, notificationId);
 
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, AnyDate, movement);
-
-            movement.SetQuantity(new ShipmentQuantity(5m, ShipmentQuantityUnits.Tonnes));
-            movement.SetNumberOfPackages(50);
-
-            typeof(Movement).GetProperty("PackagingInfosCollection", BindingFlags.NonPublic | BindingFlags.Instance)
-                .SetValue(movement, new List<PackagingInfo>());
-            movement.SetPackagingInfos(new[] { PackagingInfo.CreatePackagingInfo(PackagingType.Box) });
-
-            typeof(Movement).GetProperty("MovementCarriersCollection", BindingFlags.NonPublic | BindingFlags.Instance)
-                .SetValue(movement, new List<MovementCarrier>());
-            movement.SetMovementCarriers(new[]
-            {
-                new MovementCarrier(
-                    1,
-                    new Carrier(
-                        TestableBusiness.WasteSolutions,
-                        TestableAddress.SouthernHouse,
-                        TestableContact.MikeMerry))
-            });
 
             return movement;
         }

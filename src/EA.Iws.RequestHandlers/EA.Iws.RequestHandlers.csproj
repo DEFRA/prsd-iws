@@ -133,7 +133,6 @@
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
-    <Compile Include="Mappings\Movement\MovementCarrierMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
@@ -176,10 +175,8 @@
     <Compile Include="Movement\Mappings\BasicMovementSummaryMap.cs" />
     <Compile Include="Movement\RecordMovementStatusChange.cs" />
     <Compile Include="Movement\SaveCertificateOfReceiptFileHandler.cs" />
-    <Compile Include="Movement\SetActualMovementCarriersHandler.cs" />
     <Compile Include="Movement\SetMovementAcceptedHandler.cs" />
     <Compile Include="Movement\SetMovementFileIdHandler.cs" />
-    <Compile Include="Movement\SetMovementQuantityByMovementIdHandler.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
     <Compile Include="Movement\SetMovementRejectedHandler.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTableHandler.cs" />

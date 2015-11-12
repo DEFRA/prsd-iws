@@ -1,26 +1,25 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
-    using DataAccess;
+    using Domain.Movement;
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
     internal class GetMovementDateByMovementIdHandler : IRequestHandler<GetMovementDateByMovementId, DateTime>
     {
-        private readonly IwsContext context;
+        private readonly IMovementRepository repository;
 
-        public GetMovementDateByMovementIdHandler(IwsContext context)
+        public GetMovementDateByMovementIdHandler(IMovementRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
         public async Task<DateTime> HandleAsync(GetMovementDateByMovementId message)
         {
-            var movement = await context.Movements.SingleAsync(m => m.Id == message.MovementId);
+            var movement = await repository.GetById(message.MovementId);
 
-            return movement.Date.GetValueOrDefault();
+            return movement.Date;
         }
     }
 }

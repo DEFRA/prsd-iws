@@ -17,17 +17,17 @@
             RejectReason = rejectionReason;
         }
 
-        internal MovementReceipt(Guid fileId, DateTime dateReceived, decimal quantity)
+        internal MovementReceipt(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)
         {
             FileId = fileId;
             Date = dateReceived;
-            Quantity = quantity;
+            QuantityReceived = quantity;
         }
 
-        internal MovementReceipt(DateTime dateReceived, decimal quantity)
+        internal MovementReceipt(DateTime dateReceived, ShipmentQuantity quantity)
         {
             Date = dateReceived;
-            Quantity = quantity;
+            QuantityReceived = quantity;
         }
         
         public DateTime Date { get; private set; }
@@ -36,7 +36,7 @@
 
         public string RejectReason { get; internal set; }
 
-        public decimal? Quantity { get; internal set; }
+        public ShipmentQuantity QuantityReceived { get; internal set; }
 
         public Guid? FileId { get; private set; }
 

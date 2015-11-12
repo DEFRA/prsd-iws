@@ -14,12 +14,14 @@
 
         public MovementBlock(IList<MergeField> mergeFields, 
             Movement movement, 
+            MovementDetails movementDetails,
             NotificationApplication notification, 
             ShipmentInfo shipmentInfo)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
             data = new MovementViewModel(
                 movement,
+                movementDetails,
                 notification,
                 shipmentInfo,
                 new DateTimeFormatter(),

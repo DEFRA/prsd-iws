@@ -2,10 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Core.Movement;
-    using Core.Shared;
-    using NotificationApplication;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -18,7 +15,7 @@
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid> submittedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, Guid> completedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, string> rejectedTrigger;
-        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, decimal> acceptedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, ShipmentQuantity> acceptedTrigger;
 
         private enum Trigger
         {
@@ -60,21 +57,9 @@
         {
             get
             {
-                return (Status == MovementStatus.Submitted 
+                return (Status == MovementStatus.Submitted
                     || Status == MovementStatus.Received)
                     && Date < SystemTime.UtcNow;
-            }
-        }
-        
-        public bool CanSubmit
-        {
-            get
-            {
-                return Date.HasValue
-                    && Quantity.HasValue
-                    && PackagingInfos.Any()
-                    && NumberOfPackages.HasValue
-                    && MovementCarriers.Any();
             }
         }
 
@@ -90,63 +75,10 @@
 
         public virtual MovementCompletedReceipt CompletedReceipt { get; private set; }
 
-        public DateTime? Date { get; internal set; }
-
-        public decimal? Quantity { get; private set; }
-
-        public int? NumberOfPackages { get; private set; }
-
-        public ShipmentQuantityUnits? Units { get; private set; }
+        public DateTime Date { get; internal set; }
 
         public Guid? FileId { get; private set; }
 
-        protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
-
-        protected virtual ICollection<MovementCarrier> MovementCarriersCollection { get; set; }
-
-        public IEnumerable<PackagingInfo> PackagingInfos
-        {
-            get { return PackagingInfosCollection.ToSafeIEnumerable(); }
-        }
-
-        public IEnumerable<MovementCarrier> MovementCarriers
-        {
-            get { return MovementCarriersCollection.ToSafeIEnumerable(); }
-        }
-
-        public void SetQuantity(ShipmentQuantity shipmentQuantity)
-        {
-            Quantity = shipmentQuantity.Quantity;
-            Units = shipmentQuantity.Units;
-        }
-
-        public void SetPackagingInfos(IEnumerable<PackagingInfo> packagingInfos)
-        {
-            PackagingInfosCollection.Clear();
-
-            foreach (var packagingInfo in packagingInfos)
-            {
-                PackagingInfosCollection.Add(packagingInfo);
-            }
-        }
-
-        public void SetNumberOfPackages(int number)
-        {
-            Guard.ArgumentNotZeroOrNegative(() => number, number);
-
-            NumberOfPackages = number;
-        }
-
-        public void SetMovementCarriers(IEnumerable<MovementCarrier> movementCarriers)
-        {
-            MovementCarriersCollection.Clear();
-
-            foreach (var movementCarrier in movementCarriers)
-            {
-                MovementCarriersCollection.Add(movementCarrier);
-            }
-        }
-        
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
         {
             Guard.ArgumentNotNull(() => statusChange, statusChange);
@@ -163,7 +95,7 @@
 
             rejectedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, string>(Trigger.Reject);
 
-            acceptedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, decimal>(Trigger.Receive);
+            acceptedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, ShipmentQuantity>(Trigger.Receive);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -182,9 +114,9 @@
 
             stateMachine.Configure(MovementStatus.Completed)
                 .OnEntryFrom(completedTrigger, OnCompleted);
-                
+
             stateMachine.Configure(MovementStatus.Rejected).OnEntryFrom(rejectedTrigger, OnRejected);
-            
+
             return stateMachine;
         }
 
@@ -196,11 +128,6 @@
         public void Submit(Guid fileId)
         {
             Guard.ArgumentNotDefaultValue(() => fileId, fileId);
-
-            if (!this.CanSubmit)
-            {
-                throw new InvalidOperationException("Cannot submit an incomplete movement.");
-            }
 
             stateMachine.Fire(submittedTrigger, fileId);
         }
@@ -224,7 +151,7 @@
             Receipt = new MovementReceipt(fileId, dateReceived, reason);
         }
 
-        public void Receive(Guid fileId, DateTime dateReceived, decimal quantity)
+        public void Receive(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)
         {
             Guard.ArgumentNotDefaultValue(() => fileId, fileId);
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
@@ -233,7 +160,7 @@
             stateMachine.Fire(acceptedTrigger, fileId, dateReceived, quantity);
         }
 
-        public void OnReceived(Guid fileId, DateTime dateReceived, decimal quantity)
+        public void OnReceived(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)
         {
             Receipt = new MovementReceipt(fileId, dateReceived, quantity);
         }

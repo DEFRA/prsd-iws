@@ -12,10 +12,10 @@
     {
         private readonly MovementCarriersViewModel data;
 
-        public MovementCarrierBlock(IList<MergeField> mergeFields, Movement movement)
+        public MovementCarrierBlock(IList<MergeField> mergeFields, MovementDetails movementDetails)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new MovementCarriersViewModel(movement.MovementCarriers.ToList());
+            data = new MovementCarriersViewModel(movementDetails.Carriers.ToList());
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }
 

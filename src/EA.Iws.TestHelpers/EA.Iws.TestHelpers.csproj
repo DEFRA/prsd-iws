@@ -50,6 +50,7 @@
     <Compile Include="DomainFakes\TestableAddress.cs" />
     <Compile Include="DomainFakes\TestableImporter.cs" />
     <Compile Include="DomainFakes\TestableFacility.cs" />
+    <Compile Include="DomainFakes\TestableMovementDetails.cs" />
     <Compile Include="DomainFakes\TestableMovementOperationReceipt.cs" />
     <Compile Include="DomainFakes\TestableMovementReceipt.cs" />
     <Compile Include="DomainFakes\TestableProducer.cs" />

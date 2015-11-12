@@ -88,6 +88,8 @@
 
         public virtual DbSet<NotificationTransaction> NotificationTransactions { get; set; } 
 
+        public virtual DbSet<MovementDetails> MovementDetails { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

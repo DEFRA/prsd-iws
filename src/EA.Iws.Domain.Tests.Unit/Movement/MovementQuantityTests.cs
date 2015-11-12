@@ -24,13 +24,12 @@
         {
             movement = new TestableMovement
             {
-                Units = ShipmentQuantityUnits.Kilograms,
                 Status = MovementStatus.Received,
                 Receipt = new TestableMovementReceipt
                 {
                     Date = new DateTime(2015, 9, 1),
                     Decision = Core.MovementReceipt.Decision.Accepted,
-                    Quantity = 5
+                    QuantityReceived = new ShipmentQuantity(5, ShipmentQuantityUnits.Kilograms)
                 }
             };
 
@@ -82,13 +81,12 @@
         {
             var movementWithOtherUnits = new TestableMovement
             {
-                Units = ShipmentQuantityUnits.Tonnes,
                 Status = MovementStatus.Received,
                 Receipt = new TestableMovementReceipt
                 {
                     Date = new DateTime(2015, 9, 2),
                     Decision = Core.MovementReceipt.Decision.Accepted,
-                    Quantity = 0.001m
+                    QuantityReceived = new ShipmentQuantity(0.001m, ShipmentQuantityUnits.Tonnes)
                 }
             };
 
@@ -123,7 +121,7 @@
                 Status = MovementStatus.Submitted,
                 Receipt = new TestableMovementReceipt
                 {
-                    Quantity = 5
+                    QuantityReceived = new ShipmentQuantity(5, ShipmentQuantityUnits.Tonnes)
                 }
             };
 
@@ -144,7 +142,7 @@
                 Status = MovementStatus.New,
                 Receipt = new TestableMovementReceipt
                 {
-                    Quantity = 5
+                    QuantityReceived = new ShipmentQuantity(5, ShipmentQuantityUnits.Tonnes)
                 }
             };
 
@@ -163,10 +161,9 @@
             var completedMovement = new TestableMovement
             {
                 Status = MovementStatus.Completed,
-                Units = ShipmentQuantityUnits.Kilograms,
                 Receipt = new TestableMovementReceipt
                 {
-                    Quantity = 5
+                    QuantityReceived = new ShipmentQuantity(5, ShipmentQuantityUnits.Kilograms)
                 }
             };
 
@@ -185,10 +182,9 @@
             var completedMovement = new TestableMovement
             {
                 Status = MovementStatus.Completed,
-                Units = ShipmentQuantityUnits.Kilograms,
                 Receipt = new TestableMovementReceipt
                 {
-                    Quantity = 5
+                    QuantityReceived = new ShipmentQuantity(5, ShipmentQuantityUnits.Kilograms)
                 }
             };
 
@@ -209,7 +205,7 @@
                 Status = MovementStatus.Submitted,
                 Receipt = new TestableMovementReceipt
                 {
-                    Quantity = 5
+                    QuantityReceived = new ShipmentQuantity(5, ShipmentQuantityUnits.Kilograms)
                 }
             };
 
@@ -230,7 +226,7 @@
                 Status = MovementStatus.Submitted,
                 Receipt = new TestableMovementReceipt
                 {
-                    Quantity = 5
+                    QuantityReceived = new ShipmentQuantity(5, ShipmentQuantityUnits.Kilograms)
                 }
             };
 

@@ -12,15 +12,17 @@
 
     public class MovementDocumentGenerator : IMovementDocumentGenerator
     {
-        private readonly IMovementRepository movementRepository;
+        private readonly IMovementDetailsRepository movementDetailsRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly MovementBlocksFactory blocksFactory;
 
-        public MovementDocumentGenerator(IMovementRepository movementRepository, INotificationApplicationRepository notificationApplicationRepository, MovementBlocksFactory blocksFactory)
+        public MovementDocumentGenerator(INotificationApplicationRepository notificationApplicationRepository,
+            IMovementDetailsRepository movementDetailsRepository,
+            MovementBlocksFactory blocksFactory)
         {
-            this.movementRepository = movementRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.blocksFactory = blocksFactory;
+            this.movementDetailsRepository = movementDetailsRepository;
         }
 
         public async Task<byte[]> Generate(Guid movementId)
@@ -29,7 +31,7 @@
             {
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
-                    var movement = await movementRepository.GetById(movementId);
+                    var movementDetails = await movementDetailsRepository.GetByMovementId(movementId);
                     var notification = await notificationApplicationRepository.GetByMovementId(movementId);
                     bool hasCarrierAnnex = notification.Carriers.Count() > 1;
 
@@ -38,7 +40,7 @@
 
                     var movementDocument = new MovementDocument(blocks);
 
-                    ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, movement.Units.Value);
+                    ShipmentQuantityUnitFormatter.ApplyStrikethroughFormattingToUnits(document, movementDetails.ActualQuantity.Units);
 
                     movementDocument.Merge(hasCarrierAnnex);
 

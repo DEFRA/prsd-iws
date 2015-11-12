@@ -61,9 +61,8 @@
         private void FullyReceiveMovement()
         {
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, BeforeFrozenTime, movement);
-            ObjectInstantiator<Movement>.SetProperty(x => x.Units, ShipmentQuantityUnits.Tonnes, movement);
 
-            movement.Receive(Guid.NewGuid(), FrozenTime, 5.0m);
+            movement.Receive(Guid.NewGuid(), FrozenTime, new ShipmentQuantity(5.0m, ShipmentQuantityUnits.Kilograms));
             movement.Receipt.Accept();
         }
     }

@@ -4,6 +4,7 @@
     using Core.Shared;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
+    using Domain;
     using Domain.NotificationApplication;
     using TestHelpers.DomainFakes;
     using Xunit;
@@ -13,6 +14,7 @@
         private readonly TestableMovement movement;
         private readonly TestableNotificationApplication notification;
         private readonly TestableShipmentInfo shipmentInfo;
+        private TestableMovementDetails movementDetails;
 
         public MovementViewModelTests()
         {
@@ -24,6 +26,10 @@
             {
                 Id = new Guid("B20B7BBE-EA7C-45F7-B6DB-04F645E7375B")
             };
+            movementDetails = new TestableMovementDetails
+            {
+                Id = new Guid("E5DF0706-F17C-49CC-8DB2-B6A524A4C372")
+            };
             shipmentInfo = new TestableShipmentInfo
             {
                 Id = new Guid("B2B2ADE7-34EF-468D-BB88-72D8B5394AE6")
@@ -33,10 +39,11 @@
         [Fact]
         public void MovementAndNotificationIsNull()
         {
-            var result = new MovementViewModel(null, 
-                null, 
+            var result = new MovementViewModel(null,
                 null,
-                new DateTimeFormatter(), 
+                null,
+                null,
+                new DateTimeFormatter(),
                 new QuantityFormatter(),
                 new PhysicalCharacteristicsFormatter(),
                 new PackagingTypesFormatter());
@@ -66,7 +73,7 @@
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)
             };
             movement.NotificationId = notification.Id;
-
+            movementDetails = null;
             var result = GenerateViewModel();
 
             new ExpectedMovementViewModel
@@ -88,9 +95,8 @@
         public void SetsMovementProperties()
         {
             movement.Date = new DateTime(2015, 1, 1);
-            movement.Quantity = 70;
-            movement.Units = ShipmentQuantityUnits.Kilograms;
             movement.Number = 5;
+            movementDetails.ActualQuantity = new ShipmentQuantity(70, ShipmentQuantityUnits.Kilograms);
 
             var result = GenerateViewModel();
 
@@ -113,9 +119,8 @@
         public void SetsMovementPropertiesWithCorrectUnits()
         {
             movement.Date = new DateTime(2010, 10, 5);
-            movement.Quantity = 69;
-            movement.Units = ShipmentQuantityUnits.Tonnes;
             movement.Number = 2;
+            movementDetails.ActualQuantity = new ShipmentQuantity(69, ShipmentQuantityUnits.Tonnes);
 
             var result = GenerateViewModel();
 
@@ -138,9 +143,8 @@
         public void SetsAllProperties()
         {
             movement.Date = new DateTime(2025, 5, 2);
-            movement.Quantity = 30.7m;
-            movement.Units = ShipmentQuantityUnits.Kilograms;
             movement.Number = 12;
+            movementDetails.ActualQuantity = new ShipmentQuantity(30.7m, ShipmentQuantityUnits.Kilograms);
 
             notification.NotificationNumber = "GB 001 00250";
             notification.HasSpecialHandlingRequirements = false;
@@ -174,6 +178,7 @@
         {
             return new MovementViewModel(
                 movement,
+                movementDetails,
                 notification,
                 shipmentInfo,
                 new DateTimeFormatter(),

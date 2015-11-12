@@ -33,9 +33,9 @@
 
             var totalReceived = movements.Sum(m =>
                 ShipmentQuantityUnitConverter.ConvertToTarget(
-                    m.Units.Value,
+                    m.Receipt.QuantityReceived.Units,
                     shipment.Units,
-                    m.Receipt.Quantity.Value));
+                    m.Receipt.QuantityReceived.Quantity));
 
             return totalReceived;
         }

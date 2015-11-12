@@ -101,7 +101,6 @@
     <Compile Include="Helpers\ContactDataEqualityComparer.cs" />
     <Compile Include="Mappings\ContactMapTests.cs" />
     <Compile Include="Mappings\ExporterMapTests.cs" />
-    <Compile Include="Mappings\MovementCarrierMapTests.cs" />
     <Compile Include="Mappings\BusinessTestBase.cs" />
     <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
@@ -109,10 +108,7 @@
     <Compile Include="Movement\CreateMovementForNotificationByIdHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
-    <Compile Include="MovementReceipt\GetMovementReceiptQuantityByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
-    <Compile Include="Movement\SetActualMovementCarriersHandlerTests.cs" />
-    <Compile Include="Movement\SetMovementQuantityByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\SetActualDateOfMovementHandlerTests.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />

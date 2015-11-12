@@ -14,7 +14,7 @@
                 MovementId = source.Id,
                 NotificationId = source.NotificationId,
                 Number = source.Number,
-                ShipmentDate = source.Date.GetValueOrDefault(),
+                ShipmentDate = source.Date,
                 SubmittedDate = source.StatusChanges
                     .Where(sc => sc.Status == MovementStatus.Submitted)
                     .Select(sc => sc.ChangeDate)

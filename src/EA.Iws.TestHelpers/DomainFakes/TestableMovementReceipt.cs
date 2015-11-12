@@ -2,6 +2,7 @@
 {
     using System;
     using Core.MovementReceipt;
+    using Domain;
     using Domain.Movement;
     using Helpers;
 
@@ -13,10 +14,10 @@
             set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Id, value, this); }
         }
 
-        public new decimal? Quantity
+        public new ShipmentQuantity QuantityReceived
         {
-            get { return base.Quantity.GetValueOrDefault(); }
-            set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Quantity, value, this); }
+            get { return base.QuantityReceived; }
+            set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.QuantityReceived, value, this); }
         }
 
         public new DateTime Date

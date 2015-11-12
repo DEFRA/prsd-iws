@@ -20,19 +20,18 @@
                 .Where(sc => sc.Status == MovementStatus.Submitted)
                 .Select(sc => (DateTime?)sc.ChangeDate)
                 .SingleOrDefault();
-            
+
             if (source.Receipt != null)
             {
                 data.ReceivedDate = source.Receipt.Date;
-                data.Quantity = source.Receipt.Quantity;
+                data.Quantity = source.Receipt.QuantityReceived.Quantity;
+                data.QuantityUnits = source.Receipt.QuantityReceived.Units;
             }
 
             if (source.CompletedReceipt != null)
             {
                 data.CompletedDate = source.CompletedReceipt.Date;
             }
-
-            data.QuantityUnits = source.Units;
 
             return data;
         }

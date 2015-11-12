@@ -3,12 +3,12 @@
     using Core.Shared;
     using Prsd.Core;
 
-    public struct ShipmentQuantity
+    public class ShipmentQuantity
     {
         public decimal Quantity { get; private set; }
         public ShipmentQuantityUnits Units { get; private set; }
 
-        public ShipmentQuantity(decimal quantity, ShipmentQuantityUnits units) : this()
+        public ShipmentQuantity(decimal quantity, ShipmentQuantityUnits units)
         {
             Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
             

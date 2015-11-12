@@ -7,17 +7,17 @@
 
     internal class MovementCarrierBlockFactory : IMovementBlockFactory
     {
-        private readonly IMovementRepository movementRepository;
+        private readonly IMovementDetailsRepository repository;
 
-        public MovementCarrierBlockFactory(IMovementRepository movementRepository)
+        public MovementCarrierBlockFactory(IMovementDetailsRepository repository)
         {
-            this.movementRepository = movementRepository;
+            this.repository = repository;
         }
 
         public async Task<IDocumentBlock> Create(Guid movementId, IList<MergeField> mergeFields)
         {
-            var movement = await movementRepository.GetById(movementId);
-            return new MovementCarrierBlock(mergeFields, movement);
+            var movementDetails = await repository.GetByMovementId(movementId);
+            return new MovementCarrierBlock(mergeFields, movementDetails);
         }
     }
 }

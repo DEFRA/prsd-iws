@@ -1,32 +1,25 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
-    using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
-    using DataAccess;
+    using Domain.Movement;
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
     internal class GetMovementUnitsByMovementIdHandler : IRequestHandler<GetMovementUnitsByMovementId, ShipmentQuantityUnits>
     {
-        private readonly IwsContext context;
+        private readonly IMovementDetailsRepository repository;
 
-        public GetMovementUnitsByMovementIdHandler(IwsContext context)
+        public GetMovementUnitsByMovementIdHandler(IMovementDetailsRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
         public async Task<ShipmentQuantityUnits> HandleAsync(GetMovementUnitsByMovementId message)
         {
-            var movement = await context.Movements.Where(m => m.Id == message.Id)
-                .Select(m => new
-                {
-                    m.Units
-                })
-                .SingleAsync();
+            var movementDetails = await repository.GetByMovementId(message.Id);
 
-            return movement.Units.Value;
+            return movementDetails.ActualQuantity.Units;
         }
     }
 }

@@ -25,41 +25,49 @@
             get { return notificationNumber; }
             set { notificationNumber = value; }
         }
+
         public string Number
         {
             get { return number; }
             set { number = value; }
         }
+
         public string ActualTonnes
         {
             get { return actualTonnes; }
             set { actualTonnes = value; }
         }
+
         public string ActualKilograms
         {
             get { return actualKilograms; }
             set { actualKilograms = value; }
         }
+
         public string ActualLitres
         {
             get { return actualLitres; }
             set { actualLitres = value; }
         }
+
         public string ActualCubicMetres
         {
             get { return actualCubicMetres; }
             set { actualCubicMetres = value; }
         }
+
         public string ActualDate
         {
             get { return actualDate; }
             set { actualDate = value; }
         }
+
         public string PhysicalCharacteristics
         {
             get { return physicalCharacteristics; }
             set { physicalCharacteristics = value; }
         }
+
         public string PackagingTypes
         {
             get { return packagingTypes; }
@@ -71,6 +79,7 @@
             get { return intendedNumberOfShipments; }
             set { intendedNumberOfShipments = value; }
         }
+
         public string NumberOfPackages
         {
             get { return numberOfPackages; }
@@ -83,6 +92,7 @@
         public bool IsRecovery { get; set; }
 
         public MovementViewModel(Movement movement,
+            MovementDetails movementDetails,
             NotificationApplication notification,
             ShipmentInfo shipmentInfo,
             DateTimeFormatter dateTimeFormatter,
@@ -90,17 +100,6 @@
             PhysicalCharacteristicsFormatter physicalCharacteristicsFormatter,
             PackagingTypesFormatter packagingTypesFormatter)
         {
-            if (movement == null)
-            {
-                return;
-            }
-
-            ActualDate = dateTimeFormatter.DateTimeToDocumentFormatString(movement.Date);
-            SetQuantity(movement, quantityFormatter);
-            Number = movement.Number.ToString();
-            PackagingTypes = packagingTypesFormatter.PackagingTypesToCommaDelimitedString(movement.PackagingInfos);
-            NumberOfPackages = movement.NumberOfPackages.ToString();
-
             if (notification == null)
             {
                 return;
@@ -116,31 +115,47 @@
                 : shipmentInfo.NumberOfShipments.ToString();
             IsRecovery = notification.NotificationType == NotificationType.Recovery;
             IsDisposal = notification.NotificationType == NotificationType.Disposal;
-        }
 
-        private void SetQuantity(Movement movement, QuantityFormatter quantityFormatter)
-        {
-            if (!movement.Units.HasValue || !movement.Quantity.HasValue)
+            if (movement == null)
             {
                 return;
             }
 
-            var displayString = quantityFormatter.QuantityToStringWithUnits(movement.Quantity, movement.Units.Value);
+            Number = movement.Number.ToString();
 
-            switch (movement.Units.Value)
+            if (movementDetails == null)
+            {
+                return;
+            }
+
+            ActualDate = dateTimeFormatter.DateTimeToDocumentFormatString(movement.Date);
+            SetQuantity(movementDetails, quantityFormatter);
+            PackagingTypes = packagingTypesFormatter.PackagingTypesToCommaDelimitedString(movementDetails.PackagingInfos);
+            NumberOfPackages = movementDetails.NumberOfPackages.ToString();
+        }
+
+        private void SetQuantity(MovementDetails movementDetails, QuantityFormatter quantityFormatter)
+        {
+            var displayString = quantityFormatter.QuantityToStringWithUnits(movementDetails.ActualQuantity.Quantity, movementDetails.ActualQuantity.Units);
+
+            switch (movementDetails.ActualQuantity.Units)
             {
                 case ShipmentQuantityUnits.Kilograms:
                     ActualKilograms = displayString;
                     break;
+
                 case ShipmentQuantityUnits.CubicMetres:
                     ActualCubicMetres = displayString;
                     break;
+
                 case ShipmentQuantityUnits.Litres:
                     ActualLitres = displayString;
                     break;
+
                 case ShipmentQuantityUnits.Tonnes:
                     ActualTonnes = displayString;
                     break;
+
                 default:
                     break;
             }

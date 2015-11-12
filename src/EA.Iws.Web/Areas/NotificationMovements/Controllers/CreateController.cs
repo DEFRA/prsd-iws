@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.PackagingType;
+    using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Create;
     using ViewModels.Create;
@@ -19,6 +20,7 @@
         private const string UnitKey = "UnitKey";
         private const string PackagingTypesKey = "PackagingTypesKey";
         private const string NumberOfCarriersKey = "NumberOfCarriersKey";
+        private const string NumberOfPackagesKey = "NumberOfPackagesKey";
 
         public CreateController(IMediator mediator)
         {
@@ -174,7 +176,7 @@
             }
 
             TempData[MovementNumbersKey] = model.MovementNumbers;
-            TempData["NumberOfPackagesKey"] = model.Number;
+            TempData[NumberOfPackagesKey] = model.Number;
 
             return RedirectToAction("NumberOfCarriers", "Create");
         }
@@ -234,6 +236,56 @@
                 TempData[NumberOfCarriersKey] = numberOfCarriers;
 
                 return View(model);
+            }
+
+            return RedirectToAction("Index", "Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Carriers(Guid notificationId, CarrierViewModel model)
+        {
+            object shipmentDateResult;
+            object quantityResult;
+            object unitResult;
+            object numberOfPackagesResult;
+            object packagingTypesResult;
+
+            var tempDataExists = TempData.TryGetValue(ShipmentDateKey, out shipmentDateResult);
+            tempDataExists &= TempData.TryGetValue(QuantityKey, out quantityResult);
+            tempDataExists &= TempData.TryGetValue(UnitKey, out unitResult);
+            tempDataExists &= TempData.TryGetValue(NumberOfPackagesKey, out numberOfPackagesResult);
+            tempDataExists &= TempData.TryGetValue(PackagingTypesKey, out packagingTypesResult);
+
+            if (tempDataExists)
+            {
+                var shipmentDate = (DateTime)shipmentDateResult;
+                var quantity = Convert.ToDecimal(quantityResult);
+                var unit = (ShipmentQuantityUnits)unitResult;
+                var numberOfPackages = (int)numberOfPackagesResult;
+                var packagingTypes = (IList<PackagingType>)packagingTypesResult;
+
+                var selectedCarriers = new Dictionary<int, Guid>();
+
+                for (int i = 0; i < model.SelectedItems.Count; i++)
+                {
+                    selectedCarriers.Add(i, model.SelectedItems[i].Value);
+                }
+
+                var newMovements = new NewMovements
+                {
+                    Count = model.MovementNumbers.Count,
+                    Date = shipmentDate,
+                    Quantity = quantity,
+                    Units = unit,
+                    PackagingTypes = packagingTypes,
+                    NumberOfPackages = numberOfPackages,
+                    OrderedCarriers = selectedCarriers
+                };
+
+                await mediator.SendAsync(new CreateMovements(notificationId, newMovements));
+
+                return HttpNotFound();
             }
 
             return RedirectToAction("Index", "Create");
