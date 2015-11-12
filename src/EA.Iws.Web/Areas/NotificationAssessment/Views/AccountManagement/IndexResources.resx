@@ -120,6 +120,9 @@
   <data name="BalanceHeading" xml:space="preserve">
     <value>Balance remaining</value>
   </data>
+  <data name="CommentSectionHeading" xml:space="preserve">
+    <value>Comments</value>
+  </data>
   <data name="CurrencySymbol" xml:space="preserve">
     <value>£</value>
   </data>

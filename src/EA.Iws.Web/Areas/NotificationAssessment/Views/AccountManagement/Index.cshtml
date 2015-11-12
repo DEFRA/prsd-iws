@@ -41,33 +41,60 @@
         </tr>
         </thead>
         <tbody>
-            @{
-                for (var i = 0; i < Model.TableData.Count(); i++)
+        @{
+            for (var i = 0; i < Model.TableData.Count(); i++)
+            {
+                var trans = (TransactionType)Model.TableData[i].Transaction;
+
+                Enum type;
+                if (trans == TransactionType.Refund)
                 {
-                    var trans = (TransactionType)Model.TableData[i].Transaction;
-
-                    Enum type;
-                    if (trans == TransactionType.Refund)
-                    {
-                        type = TransactionType.Refund;
-                    }
-                    else
-                    {
-                        type = (PaymentMethods)Model.TableData[i].Type;
-                    }
-
-                    var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "Yes";
-
-                    <tr>
-                        <td>@trans</td>
-                        <td>@Model.TableData[i].Date.ToString("dd/MM/yyyy")</td>
-                        <td>@Model.TableData[i].Amount.ToString("C")</td>
-                        <td>@EnumHelper.GetDescription(type)</td>
-                        <td>@Model.TableData[i].Receipt</td>
-                        <td>@comment</td>
-                    </tr>
+                    type = TransactionType.Refund;
                 }
+                else
+                {
+                    type = (PaymentMethods)Model.TableData[i].Type;
+                }
+
+                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "Yes";
+
+                <tr>
+                    <td>@trans</td>
+                    <td>@Model.TableData[i].Date.ToString("dd/MM/yyyy")</td>
+                    <td>@Model.TableData[i].Amount.ToString("C")</td>
+                    <td>@EnumHelper.GetDescription(type)</td>
+                    <td>@Model.TableData[i].Receipt</td>
+                    <td>@comment</td>
+                </tr>
             }
+        }
         </tbody>
     </table>
+</div>
+
+<h2 class="heading-medium">@IndexResources.CommentSectionHeading</h2>
+
+<div class="form-group">
+
+    @for (var i = 0; i < Model.TableData.Count(); i++)
+    {
+        if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
+        {
+            var trans = (TransactionType)Model.TableData[i].Transaction;
+
+            <details>
+                <summary>
+                    <span class="summary">
+                        @trans
+                        &nbsp;
+                        @Model.TableData[i].Date.ToString("dd/MM/yyyy")
+                    </span>
+                </summary>
+
+                <div class="panel-indent">
+                    <p>@Model.TableData[i].Comments</p>
+                </div>
+            </details>
+        }
+    }
 </div>

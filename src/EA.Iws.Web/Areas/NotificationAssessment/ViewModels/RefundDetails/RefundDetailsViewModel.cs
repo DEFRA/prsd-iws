@@ -50,7 +50,7 @@
         {
             var results = new List<ValidationResult>();
 
-            if (Comments.Length > 500)
+            if (Comments != null && Comments.Length > 500)
             {
                 results.Add(new ValidationResult(RefundDetailsViewModelResources.CommentsLengthError, new[] { "Comments" }));
             }

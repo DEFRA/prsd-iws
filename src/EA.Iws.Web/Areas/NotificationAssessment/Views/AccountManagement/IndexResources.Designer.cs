@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.NotificationAssessment.Views.AccountManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string CommentSectionHeading {
+            get {
+                return ResourceManager.GetString("CommentSectionHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to £.
         /// </summary>
         public static string CurrencySymbol {
