@@ -88,18 +88,6 @@
       <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LibSass.x64, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\libsassnet.x64.3.2.5\lib\net40\LibSass.x64.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="libsassnet, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\libsassnet.x64.3.2.5\lib\net40\libsassnet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="libsassnet.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\libsassnet.Web.x64.2.1.3.1\lib\net40\libsassnet.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="LowercaseDashedRouting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LowercaseDashedRoute.1.0.14\lib\LowercaseDashedRouting.dll</HintPath>
       <Private>True</Private>
@@ -400,10 +388,7 @@
     <Content Include="Content\iws\_helpers.scss" />
     <Content Include="Content\iws\_layout.scss" />
     <Content Include="Content\iws\_tables.scss" />
-    <Content Include="Content\main-ie6.scss" />
-    <Content Include="Content\main-ie7.scss" />
-    <Content Include="Content\main-ie8.scss" />
-    <Content Include="Content\main.scss" />
+    <Content Include="Content\_main.scss" />
     <Content Include="Content\service-design-manual\helpers\_breadcrumbs.scss" />
     <Content Include="Content\service-design-manual\helpers\_page-header.scss" />
     <Content Include="Content\service-design-manual\styleguide\_colours.scss" />
@@ -2282,4 +2267,25 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="BeforeBuild">
+    <!-- Compile sass files -->
+    <Exec Command="$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe -I $(MSBuildProjectDirectory)\Content\govuk_toolkit\stylesheets\ $(MSBuildProjectDirectory)\Content\iws-page.scss &gt; $(MSBuildProjectDirectory)\Content\iws-page.css" />
+    <Exec Command="$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe -I $(MSBuildProjectDirectory)\Content\govuk_toolkit\stylesheets\ $(MSBuildProjectDirectory)\Content\iws-page-ie6.scss &gt; $(MSBuildProjectDirectory)\Content\iws-page-ie6.css" />
+    <Exec Command="$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe -I $(MSBuildProjectDirectory)\Content\govuk_toolkit\stylesheets\ $(MSBuildProjectDirectory)\Content\iws-page-ie7.scss &gt; $(MSBuildProjectDirectory)\Content\iws-page-ie7.css" />
+    <Exec Command="$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe -I $(MSBuildProjectDirectory)\Content\govuk_toolkit\stylesheets\ $(MSBuildProjectDirectory)\Content\iws-page-ie8.scss &gt; $(MSBuildProjectDirectory)\Content\iws-page-ie8.css" />
+    
+	<!-- Include css files as content -->
+    <CreateItem Include="Content\iws-page.css">
+      <Output ItemName="Content" TaskParameter="Include" />
+    </CreateItem>
+    <CreateItem Include="Content\iws-page-ie6.css">
+      <Output ItemName="Content" TaskParameter="Include" />
+    </CreateItem>
+    <CreateItem Include="Content\iws-page-ie7.css">
+      <Output ItemName="Content" TaskParameter="Include" />
+    </CreateItem>
+    <CreateItem Include="Content\iws-page-ie8.css">
+      <Output ItemName="Content" TaskParameter="Include" />
+    </CreateItem>
+  </Target>
 </Project>

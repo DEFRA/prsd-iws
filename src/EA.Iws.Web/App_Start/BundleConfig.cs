@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web
 {
     using System.Web.Optimization;
-    using LibSassNet.Web;
 
     public class BundleConfig
     {
@@ -44,17 +43,17 @@
             bundles.Add(new ScriptBundle("~/bundles/facility").Include(
                 "~/Scripts/internal-facility-table.js"));
 
-            bundles.Add(new SassBundle("~/Content/iws-page-ie6", "~/Content/govuk_toolkit/stylesheets").Include(
-                      "~/Content/iws-page-ie6.scss"));
+            bundles.Add(new StyleBundle("~/Content/iws-page-ie6").Include(
+                      "~/Content/iws-page-ie6.css"));
 
-            bundles.Add(new SassBundle("~/Content/iws-page-ie7", "~/Content/govuk_toolkit/stylesheets").Include(
-                      "~/Content/iws-page-ie7.scss"));
+            bundles.Add(new StyleBundle("~/Content/iws-page-ie7").Include(
+                      "~/Content/iws-page-ie7.css"));
 
-            bundles.Add(new SassBundle("~/Content/iws-page-ie8", "~/Content/govuk_toolkit/stylesheets").Include(
-                      "~/Content/iws-page-ie8.scss"));
+            bundles.Add(new StyleBundle("~/Content/iws-page-ie8").Include(
+                      "~/Content/iws-page-ie8.css"));
 
-            bundles.Add(new SassBundle("~/Content/iws-page", "~/Content/govuk_toolkit/stylesheets").Include(
-                      "~/Content/iws-page.scss"));
+            bundles.Add(new StyleBundle("~/Content/iws-page").Include(
+                      "~/Content/iws-page.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/font-awesome")
                 .Include("~/Content/css/font-awesome.css"));

@@ -460,9 +460,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     font-family: $NTA-Light;
     cursor: pointer;
 
-    @include core-19() {
-        font-size: $font-size;
-    }
+    @include core-19;
 
     &.in-table {
         font-weight: bold;
@@ -473,9 +471,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
 }
 
 #link-sign-out {
-    @include core-16() {
-        font-size: $font-size;
-    }
+    @include core-16;
 }
 
 .link-submit:hover {
@@ -659,9 +655,7 @@ table.table-pad-bottom {
 
 #form-menu .summary-list {
     > li {
-        @include core-19() {
-            font-size: $font-size;
-        }
+        @include core-19;
 
         > span {
             font-size: inherit;

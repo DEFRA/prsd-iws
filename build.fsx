@@ -47,7 +47,7 @@ Target "UpdateAssemblyVersions" (fun _ ->
 
 Target "BuildApp" (fun _ ->
     !! "src/EA.Iws.sln"
-      |> MSBuildReleaseExt buildDir [ ("Platform","x64") ] "Build"
+      |> MSBuildRelease buildDir "Build"
       |> Log "AppBuild-Output: "
 )
 
