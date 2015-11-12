@@ -9,6 +9,7 @@
     using Requests.Movement;
     using ViewModels;
 
+    [Authorize]
     public class ReceiptCompleteController : Controller
     {
         private readonly IMediator mediator;

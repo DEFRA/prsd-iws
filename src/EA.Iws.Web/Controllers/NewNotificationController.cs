@@ -12,6 +12,7 @@
     using Requests.Notification;
     using ViewModels.NewNotification;
 
+    [Authorize]
     public class NewNotificationController : Controller
     {
         private readonly IMediator mediator;

@@ -6,6 +6,7 @@
     using Prsd.Core.Mediator;
     using ViewModels;
 
+    [Authorize(Roles = "internal")]
     public class MovementCertificateController : Controller
     {
         private readonly IMediator mediator;

@@ -7,6 +7,7 @@
     using Requests.Movement;
     using ViewModels;
 
+    [Authorize]
     public class DateReceivedController : Controller
     {
         private readonly IMediator mediator;

@@ -7,6 +7,7 @@
     using Requests.Movement;
     using ViewModels.Quantity;
 
+    [Authorize]
     public class QuantityReceivedController : Controller
     {
         private readonly IMediator mediator;

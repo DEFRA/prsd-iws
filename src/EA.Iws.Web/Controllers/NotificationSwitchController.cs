@@ -9,6 +9,7 @@
     using ViewModels.NotificationSwitch;
     using ViewModels.Shared;
 
+    [Authorize]
     public class NotificationSwitchController : Controller
     {
         private readonly IMediator mediator;

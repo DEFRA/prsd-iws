@@ -11,6 +11,7 @@
     using Requests.Shared;
     using ViewModels.Facility;
 
+    [Authorize(Roles = "internal")]
     public class FacilityController : Controller
     {
         private readonly IMediator mediator;

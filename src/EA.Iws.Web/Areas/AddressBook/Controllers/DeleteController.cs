@@ -7,6 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.AddressBook;
 
+    [Authorize]
     public class DeleteController : Controller
     {
         private readonly IMediator mediator;

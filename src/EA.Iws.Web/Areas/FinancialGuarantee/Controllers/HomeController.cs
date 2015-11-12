@@ -9,6 +9,7 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.FinancialGuarantee;
 
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;
