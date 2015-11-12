@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain.ImportNotification;
     using Prsd.Core;
@@ -38,6 +40,15 @@
             }
 
             context.ImportNotifications.Add(notification);
+        }
+
+        public async Task<IEnumerable<ImportNotification>> SearchByNumber(string number)
+        {
+            var notifications =
+                await context.ImportNotifications.Where(n => n.NotificationNumber.Contains(number))
+                .ToArrayAsync();
+
+            return notifications;
         }
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
+    <Compile Include="Admin\Mappings\ImportSearchResultMap.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandler.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDateHandler.cs" />
+    <Compile Include="Admin\Search\SearchImportNotificationsHandler.cs" />
     <Compile Include="Admin\SendTestEmailHandler.cs" />
     <Compile Include="Admin\SmokeTestHandler.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandler.cs" />
@@ -391,7 +393,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="Admin\Search\GetBasicSearchResultsHandler.cs" />
+    <Compile Include="Admin\Search\SearchExportNotificationsHandler.cs" />
     <Compile Include="Mappings\Movement\SubmittedMovementMap.cs" />
     <None Include="packages.config" />
   </ItemGroup>

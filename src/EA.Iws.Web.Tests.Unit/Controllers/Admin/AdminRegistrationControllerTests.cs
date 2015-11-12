@@ -8,6 +8,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Areas.Admin.ViewModels;
+    using Areas.Admin.ViewModels.Registration;
     using Core.Notification;
     using FakeItEasy;
     using Prsd.Core.Web.OAuth;

@@ -6,10 +6,12 @@
     using System.Web.Mvc;
     using Areas.Admin.Controllers;
     using Areas.Admin.ViewModels;
+    using Areas.Admin.ViewModels.Home;
     using Core.Admin.Search;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Admin;
+    using Requests.Admin.Search;
     using Xunit;
 
     public class HomeControllerTests
@@ -48,7 +50,7 @@
                 }
             };
 
-            A.CallTo(() => mediator.SendAsync(A<GetBasicSearchResults>.Ignored)).Returns(searchResults);
+            A.CallTo(() => mediator.SendAsync(A<SearchExportNotifications>.Ignored)).Returns(searchResults);
         }
 
         [Fact]
@@ -60,7 +62,7 @@
 
             var model = result.Model as BasicSearchViewModel;
 
-            Assert.Null(model.SearchResults);
+            Assert.Null(model.ExportSearchResults);
             Assert.False(model.HasSearched);
         }
 
@@ -69,7 +71,7 @@
         {
             var result = await controller.Index(postModel);
 
-            A.CallTo(() => mediator.SendAsync(A<GetBasicSearchResults>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<SearchExportNotifications>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -77,7 +79,7 @@
         {
             var result = await controller.Index(postModel) as ViewResult;
 
-            Assert.Equal(searchResults, ((BasicSearchViewModel)result.Model).SearchResults, new BasicSearchResultComparer());
+            Assert.Equal(searchResults, ((BasicSearchViewModel)result.Model).ExportSearchResults, new BasicSearchResultComparer());
         }
 
         [Fact]
@@ -91,13 +93,13 @@
         [Fact]
         public async Task PostIndex_SearchReturnsNullReturnsViewmodel()
         {
-            A.CallTo(() => mediator.SendAsync(A<GetBasicSearchResults>.Ignored)).Returns<IList<BasicSearchResult>>(null);
+            A.CallTo(() => mediator.SendAsync(A<SearchExportNotifications>.Ignored)).Returns<IList<BasicSearchResult>>(null);
 
             var result = await controller.Index(postModel) as ViewResult;
 
             var model = result.Model as BasicSearchViewModel;
 
-            Assert.Null(model.SearchResults);
+            Assert.Null(model.ExportSearchResults);
         }
 
         private class BasicSearchResultComparer : IEqualityComparer<BasicSearchResult>

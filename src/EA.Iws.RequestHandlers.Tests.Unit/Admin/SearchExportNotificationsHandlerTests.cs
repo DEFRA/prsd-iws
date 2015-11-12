@@ -15,11 +15,12 @@
     using Prsd.Core.Helpers;
     using RequestHandlers.Admin.Search;
     using Requests.Admin;
+    using Requests.Admin.Search;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class GetBasicSearchResultsHandlerTests
+    public class SearchExportNotificationsHandlerTests
     {
         private string nonExistantSearchTerm;
         private readonly Guid notification1 = new Guid("1A2A6255-A0B1-48B2-B248-D606B1BFB1DA");
@@ -29,9 +30,9 @@
         private readonly Guid notification5 = new Guid("5C1DB181-2D02-42F5-A8BD-4EFA293007EC");
         private readonly Guid notification6 = new Guid("B0F061B0-E52A-4130-88DC-D23FF59BBF25");
         private readonly Guid notification7 = new Guid("ACECE188-5B7C-4A89-A406-416AE090C79B");
-        private readonly GetBasicSearchResultsHandler handler;
+        private readonly SearchExportNotificationsHandler handler;
 
-        public GetBasicSearchResultsHandlerTests()
+        public SearchExportNotificationsHandlerTests()
         {
             var applications = GetNotificationApplications();
             var assessments = GetNotificationAssessments();
@@ -45,7 +46,7 @@
             context.InternalUsers.AddRange(GetUsers());
             A.CallTo(() => userContext.UserId).Returns(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"));
 
-            handler = new GetBasicSearchResultsHandler(context, userContext);
+            handler = new SearchExportNotificationsHandler(context, userContext);
         }
 
         private IEnumerable<NotificationApplication> GetNotificationApplications()
@@ -139,7 +140,7 @@
 
         private async Task<IList<BasicSearchResult>> ResultsWhenSearchingFor(string searchTerm)
         {
-            return await handler.HandleAsync(new GetBasicSearchResults(searchTerm));
+            return await handler.HandleAsync(new SearchExportNotifications(searchTerm));
         }
 
         [Fact]

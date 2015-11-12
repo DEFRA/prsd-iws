@@ -1,14 +1,14 @@
-﻿namespace EA.Iws.Requests.Admin
+﻿namespace EA.Iws.Requests.Admin.Search
 {
     using System.Collections.Generic;
     using Core.Admin.Search;
     using Prsd.Core.Mediator;
 
-    public class GetBasicSearchResults : IRequest<IList<BasicSearchResult>>
+    public class SearchExportNotifications : IRequest<IList<BasicSearchResult>>
     {
         public string SearchTerm { get; set; }
 
-        public GetBasicSearchResults(string searchTerm)
+        public SearchExportNotifications(string searchTerm)
         {
             SearchTerm = searchTerm;
         }

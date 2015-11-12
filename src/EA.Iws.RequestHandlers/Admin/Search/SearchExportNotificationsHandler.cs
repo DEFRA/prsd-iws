@@ -13,20 +13,20 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
-    using Requests.Admin;
+    using Requests.Admin.Search;
 
-    public class GetBasicSearchResultsHandler : IRequestHandler<GetBasicSearchResults, IList<BasicSearchResult>>
+    public class SearchExportNotificationsHandler : IRequestHandler<SearchExportNotifications, IList<BasicSearchResult>>
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;
 
-        public GetBasicSearchResultsHandler(IwsContext context, IUserContext userContext)
+        public SearchExportNotificationsHandler(IwsContext context, IUserContext userContext)
         {
             this.context = context;
             this.userContext = userContext;
         }
 
-        public async Task<IList<BasicSearchResult>> HandleAsync(GetBasicSearchResults query)
+        public async Task<IList<BasicSearchResult>> HandleAsync(SearchExportNotifications query)
         {
             var userCompetentAuthority = await context.InternalUsers
                 .Where(u => u.UserId == userContext.UserId.ToString())

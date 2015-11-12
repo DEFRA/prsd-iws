@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Admin.ViewModels
+﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.Registration
 {
     using System;
     using System.ComponentModel.DataAnnotations;

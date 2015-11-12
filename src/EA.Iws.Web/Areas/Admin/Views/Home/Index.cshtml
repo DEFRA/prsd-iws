@@ -1,72 +1,81 @@
 ﻿@using EA.Prsd.Core.Web.Mvc.RazorHelpers
-@model EA.Iws.Web.Areas.Admin.ViewModels.BasicSearchViewModel
+@using Resource = EA.Iws.Web.Areas.Admin.Views.Home.IndexResources
+@model EA.Iws.Web.Areas.Admin.ViewModels.Home.BasicSearchViewModel
 
 @{
-    ViewBag.Title = "Admin Users - Basic Search";
+    ViewBag.Title = Resource.TabTitle;
 }
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{
-    @Html.Gds().ValidationSummary()
-    @Html.AntiForgeryToken()
+<div class="grid-row">
+    <div class="column-two-thirds">
 
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            <h1 class="heading-large">Search</h1>
-            <p>Enter notification number or exporter company name</p>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            @Html.Gds().ValidationSummary()
+            @Html.AntiForgeryToken()
 
-            @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control", @title="Search term" })
-            &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go" />
+            <h1 class="heading-large">@Resource.Title</h1>
 
-            <hr class="section-bottom" />
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+                @Html.Gds().LabelFor(m => m.SearchTerm)
+                @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control", @title = "Search term" })
+                &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go"/>
+            </div>
+        }
 
-            @if (Model != null && Model.SearchResults != null && Model.SearchResults.Count > 0)
-            {
-                <h2 class="heading-medium">Your search returned @Model.SearchResults.Count results</h2>
-                <table title="Search results">
-                    <thead>
-                        <tr>
-                            <th>Notification number</th>
-                            <th>Status</th>
-                            <th>Company name</th>
-                            <th>Waste type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int i = 0; i < Model.SearchResults.Count; i++)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.ActionLink(linkText: @Html.DisplayFor(m => m.SearchResults[i].NotificationNumber).ToString(),
-                                    actionName: "Index",
-                                    controllerName: "Home",
-                                    routeValues: new { id = Model.SearchResults[i].Id, area = "NotificationAssessment" },
-                                    htmlAttributes: null)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => m.SearchResults[i].NotificationStatus)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => m.SearchResults[i].ExporterName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => m.SearchResults[i].WasteType)
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-            else if (Model != null && Model.HasSearched)
-            {
-                <h2 class="heading-medium">No matching results found</h2>
-            }
-        </div>
-        <div class="column-third" id="submit-side-bar">
-            <h2 class="heading-medium">Account services</h2>
-            <p>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration")</p>
-            <p>@Html.ActionLink("Create a new import notification", "Number", "ImportNotification")</p>
-            <p>@Html.ActionLink("System configuration", "Index", "Configuration")</p>
-        </div>
+        <hr class="section-bottom"/>
+
+        @if (Model != null && Model.ExportSearchResults != null && Model.ExportSearchResults.Count > 0)
+        {
+            <h2 class="heading-medium">Your search returned @Model.ExportSearchResults.Count results</h2>
+            <table title="Search results">
+                <thead>
+                <tr>
+                    <th>Notification number</th>
+                    <th>Status</th>
+                    <th>Company name</th>
+                    <th>Waste type</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for (int i = 0; i < Model.ExportSearchResults.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationNumber).ToString(),
+                                actionName: "Index",
+                                controllerName: "Home",
+                                routeValues: new { id = Model.ExportSearchResults[i].Id, area = "NotificationAssessment" },
+                                htmlAttributes: null)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ExportSearchResults[i].ExporterName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ExportSearchResults[i].WasteType)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        else if (Model != null && Model.HasSearched && Model.ImportSearchResults.Count == 0)
+        {
+            <h2 class="heading-medium">No matching results found</h2>
+        }
+
+        @Html.Partial("_ImportResults", Model)
+
     </div>
-}
+
+    <div class="column-third" id="submit-side-bar">
+        <h2 class="heading-medium">Account services</h2>
+        <p>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration")</p>
+        <p>@Html.ActionLink("Create a new import notification", "Number", "ImportNotification")</p>
+        <p>@Html.ActionLink("System configuration", "Index", "Configuration")</p>
+    </div>
+</div>

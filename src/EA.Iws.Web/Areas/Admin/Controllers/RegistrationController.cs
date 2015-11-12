@@ -17,6 +17,7 @@
     using Requests.Admin;
     using Requests.Admin.UserAdministration;
     using ViewModels;
+    using ViewModels.Registration;
 
     public class RegistrationController : Controller
     {
