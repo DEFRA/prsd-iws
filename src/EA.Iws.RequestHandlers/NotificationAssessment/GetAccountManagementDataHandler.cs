@@ -45,7 +45,7 @@
             var debits = transactionCalculator.TotalDebits(transactions);
 
             accountManagementData.TotalBillable = totalBillable;
-            accountManagementData.Balance = totalBillable - credits + debits;
+            accountManagementData.Balance = credits - debits;
 
             return accountManagementData;
         }

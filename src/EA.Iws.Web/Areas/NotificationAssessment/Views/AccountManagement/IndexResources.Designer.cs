@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationAssessment.Views.AccountManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Balance remaining.
+        ///   Looks up a localized string similar to Total paid.
         /// </summary>
         public static string BalanceHeading {
             get {
