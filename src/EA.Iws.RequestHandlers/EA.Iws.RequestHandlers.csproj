@@ -138,6 +138,7 @@
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValidHandler.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementAndDetailsHandler.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransportHandler.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Mappings\WhatToDoNextMap.cs" />
     <Compile Include="Movement\Complete\SaveMovementCompletedReceiptHandler.cs" />
     <Compile Include="Movement\CancelMovementsHandler.cs" />
-    <Compile Include="Movement\CreateMovementForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GenerateMovementDocumentHandler.cs" />
     <Compile Include="Movement\GetMovementDateByMovementIdHandler.cs" />
     <Compile Include="Movement\Summary\GetMovementSummaryHandler.cs" />
@@ -170,7 +170,6 @@
     <Compile Include="Movement\GetSubmittedMovementsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMovementNumberByMovementIdHandler.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandler.cs" />
-    <Compile Include="Movement\GetMovementsForNotificationByIdHandler.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />
     <Compile Include="Movement\Mappings\BasicMovementSummaryMap.cs" />
     <Compile Include="Movement\RecordMovementStatusChange.cs" />

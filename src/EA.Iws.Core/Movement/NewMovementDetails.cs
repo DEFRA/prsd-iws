@@ -1,14 +1,12 @@
-﻿namespace EA.Iws.Requests.NotificationMovements.Create
+﻿namespace EA.Iws.Core.Movement
 {
     using System;
     using System.Collections.Generic;
-    using Core.PackagingType;
-    using Core.Shared;
+    using PackagingType;
+    using Shared;
 
-    public class NewMovements
+    public class NewMovementDetails
     {
-        public int Count { get; set; }
-        public DateTime Date { get; set; }
         public decimal Quantity { get; set; }
         public ShipmentQuantityUnits Units { get; set; }
         public int NumberOfPackages { get; set; }

@@ -100,8 +100,6 @@
     <Compile Include="Movement\GetSubmittedMovements.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementId.cs" />
     <Compile Include="Movement\MovementCarrierData.cs" />
-    <Compile Include="Movement\CreateMovementForNotificationById.cs" />
-    <Compile Include="Movement\GetMovementsForNotificationById.cs" />
     <Compile Include="Movement\MovementReceiptDateData.cs" />
     <Compile Include="Movement\SaveCertificateOfReceiptFile.cs" />
     <Compile Include="Movement\SetMovementAccepted.cs" />
@@ -109,14 +107,13 @@
     <Compile Include="Movement\SetMovementRejected.cs" />
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValid.cs" />
-    <Compile Include="NotificationMovements\Create\CreateMovements.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementAndDetails.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumbers.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementData.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriers.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransport.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentUnits.cs" />
     <Compile Include="NotificationMovements\Create\GetPackagingTypes.cs" />
-    <Compile Include="NotificationMovements\Create\NewMovements.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummary.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentDates.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTable.cs" />

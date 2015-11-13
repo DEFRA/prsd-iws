@@ -11,6 +11,7 @@
 
     public class CertificateOfReceiptNameTests
     {
+        private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private readonly CertificateOfReceiptNameGenerator certificateOfReceiptName;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly Guid notificationId;
@@ -30,7 +31,7 @@
             var notification = new NotificationApplication(notificationId, NotificationType.Recovery, competentAuthority, notificationNumber);
             A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notification);
 
-            var movement = new Movement(movementNumber, notificationId);
+            var movement = new Movement(movementNumber, notificationId, AnyDate);
             var name = await certificateOfReceiptName.GetValue(movement);
 
             Assert.Equal(expected, name);

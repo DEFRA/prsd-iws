@@ -1,39 +1,49 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Core.NotificationAssessment;
-    using NotificationApplication;
     using NotificationApplication.Shipment;
     using NotificationAssessment;
 
     public class MovementFactory
     {
-        public Movement Create(NotificationApplication notificationApplication, 
-            NotificationAssessment notificationAssessment,
-            ShipmentInfo shipmentInfo,
-            ICollection<Movement> notificationMovements)
+        private readonly INotificationAssessmentRepository assessmentRepository;
+        private readonly IMovementRepository movementRepository;
+        private readonly IShipmentInfoRepository shipmentRepository;
+
+        public MovementFactory(IShipmentInfoRepository shipmentRepository,
+            IMovementRepository movementRepository,
+            INotificationAssessmentRepository assessmentRepository)
         {
-            if (notificationAssessment.Status != NotificationStatus.Consented)
+            this.shipmentRepository = shipmentRepository;
+            this.movementRepository = movementRepository;
+            this.assessmentRepository = assessmentRepository;
+        }
+
+        public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
+        {
+            var maxNumberOfShipments = (await shipmentRepository.GetByNotificationId(notificationId)).NumberOfShipments;
+            var currentNumberOfShipments = (await movementRepository.GetAllMovements(notificationId)).Count();
+
+            if (maxNumberOfShipments == currentNumberOfShipments)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot create a new movement for notification {0} which has status {1}", 
-                    notificationApplication.Id, 
-                    notificationAssessment.Status));
+                    string.Format("Cannot create new movement for notification {0} which has used {1} of {2} movements",
+                        notificationId, currentNumberOfShipments, maxNumberOfShipments));
             }
 
-            int currentNumberOfMovements = notificationMovements.Count;
+            var notificationStatus = (await assessmentRepository.GetByNotificationId(notificationId)).Status;
 
-            if (currentNumberOfMovements == shipmentInfo.NumberOfShipments)
+            if (notificationStatus != NotificationStatus.Consented)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot add a movement to notification {0} which has {1} of {2} movements",
-                    notificationApplication.Id,
-                    currentNumberOfMovements,
-                    shipmentInfo.NumberOfShipments));
+                    string.Format("Cannot create a movement for notification {0} because it's status is {1}",
+                        notificationId, notificationStatus));
             }
 
-            return new Movement(currentNumberOfMovements + 1, notificationApplication.Id);
+            return new Movement(currentNumberOfShipments + 1, notificationId, actualMovementDate);
         }
     }
 }

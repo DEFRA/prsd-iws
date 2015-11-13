@@ -152,7 +152,8 @@
     <Content Include="scripts\Update\Sprint19\20151029-113600-change-schema-of-entry-exit-points.sql" />
     <Content Include="scripts\Update\Sprint19\20151102-105000-make-consent-conditions-optional.sql" />
     <Content Include="scripts\Update\Sprint19\20151030-134200-draft-import-notification.sql" />
-    <Content Include="scripts\Update\Sprint20\20151211-114500-add-units-to-movement-receipt.sql" />
+    <Content Include="scripts\Update\Sprint20\20151113-164400-add-unique-constraint-to-movement-number.sql" />
+    <Content Include="scripts\Update\Sprint20\20151112-114500-add-units-to-movement-receipt.sql" />
     <Content Include="scripts\Update\Sprint20\20151109-111925-add-transaction-table.sql" />
     <Content Include="scripts\Update\Sprint20\20151111-165400-add-movement-details-table.sql" />
   </ItemGroup>

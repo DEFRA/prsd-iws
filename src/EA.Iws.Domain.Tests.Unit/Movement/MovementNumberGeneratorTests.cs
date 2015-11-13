@@ -70,9 +70,7 @@
 
         private Movement GetMovement(int number, Guid notificationId)
         {
-            Movement movement = new Movement(number, notificationId);
-            movement.Date = DateTime.Today.AddDays(-number);
-            return movement;
+            return new Movement(number, notificationId, DateTime.Today.AddDays(-number));
         }
 
         public void Dispose()

@@ -11,6 +11,7 @@
 
     public class CertificateOfRecoveryNameTests
     {
+        private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private readonly CertificateOfRecoveryNameGenerator certificateOfRecoveryName;
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly Guid notificationId;
@@ -29,7 +30,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), notificationType, competentAuthority, notificationNumber);
             A.CallTo(() => notificationRepository.GetById(notificationId)).Returns(notification);
 
-            var result = await certificateOfRecoveryName.GetValue(new Movement(movementNumber, notificationId));
+            var result = await certificateOfRecoveryName.GetValue(new Movement(movementNumber, notificationId, AnyDate));
 
             Assert.Equal(expected, result);
         }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Movement;
     using Core.PackagingType;
     using Core.Shared;
     using Prsd.Core.Mediator;
@@ -272,10 +273,8 @@
                     selectedCarriers.Add(i, model.SelectedItems[i].Value);
                 }
 
-                var newMovements = new NewMovements
+                var newMovementDetails = new NewMovementDetails
                 {
-                    Count = model.MovementNumbers.Count,
-                    Date = shipmentDate,
                     Quantity = quantity,
                     Units = unit,
                     PackagingTypes = packagingTypes,
@@ -283,7 +282,7 @@
                     OrderedCarriers = selectedCarriers
                 };
 
-                await mediator.SendAsync(new CreateMovements(notificationId, newMovements));
+                await mediator.SendAsync(new CreateMovementAndDetails(notificationId, shipmentDate, newMovementDetails));
 
                 return HttpNotFound();
             }

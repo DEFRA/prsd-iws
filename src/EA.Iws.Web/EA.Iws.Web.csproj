@@ -504,7 +504,6 @@
     <Content Include="Areas\Movement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\ShipmentDate.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_CodeDefinitionList.cshtml" />
-    <Content Include="Views\NotificationMovement\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\PackagingTypes.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\NumberOfPackages.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_Exporter.cshtml" />
@@ -1521,7 +1520,6 @@
     <Compile Include="Areas\NotificationApplication\Controllers\CustomWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\HCodeController.cs" />
-    <Compile Include="Controllers\NotificationMovementController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\SubmitController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\UnClassController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\UnNumberController.cs" />

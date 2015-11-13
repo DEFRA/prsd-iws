@@ -13,6 +13,7 @@
     {
         private readonly Movement movement;
 
+        private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
         private static readonly DateTime FrozenTime = new DateTime(2015, 9, 1);
         private static readonly DateTime BeforeFrozenTime = new DateTime(2015, 7, 1);
         private static readonly DateTime AfterFrozenTime = new DateTime(2015, 9, 2);
@@ -25,7 +26,7 @@
                 UKCompetentAuthority.England, 
                 0);
 
-            movement = new Movement(1, notification.Id);
+            movement = new Movement(1, notification.Id, AnyDate);
 
             SystemTime.Freeze(FrozenTime);
         }

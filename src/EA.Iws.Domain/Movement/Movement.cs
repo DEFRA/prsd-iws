@@ -31,10 +31,12 @@
             stateMachine = CreateStateMachine();
         }
 
-        internal Movement(int movementNumber, Guid notificationId)
+        internal Movement(int movementNumber, Guid notificationId, DateTime date)
         {
             Number = movementNumber;
             NotificationId = notificationId;
+            Date = date;
+
             Status = MovementStatus.New;
             StatusChangeCollection = new List<MovementStatusChange>();
             stateMachine = CreateStateMachine();

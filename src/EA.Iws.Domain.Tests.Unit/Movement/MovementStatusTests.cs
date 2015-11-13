@@ -20,7 +20,7 @@
 
         public MovementStatusTests()
         {
-            movement = CreateCompleteMovement();
+            movement = CreateMovement();
         }
 
         private void SetMovementStatus(MovementStatus status, Movement movement)
@@ -104,14 +104,10 @@
             Assert.Throws<InvalidOperationException>(() => movement.Complete(AnyDate, AnyGuid));
         }
 
-        private Movement CreateCompleteMovement()
+        private Movement CreateMovement()
         {
             var notificationId = new Guid("EAD34BEE-E962-4D4D-9D53-ADCD7240C333");
-            var movement = new Movement(1, notificationId);
-
-            ObjectInstantiator<Movement>.SetProperty(x => x.Date, AnyDate, movement);
-
-            return movement;
+            return new Movement(1, notificationId, AnyDate);
         }
     }
 }

@@ -31,7 +31,7 @@
             //TODO: create ObjectInstantator<T>.CreateInstance(params) method...
             var flags = BindingFlags.NonPublic | BindingFlags.Instance;
             var culture = CultureInfo.InvariantCulture;
-            var parameters = new object[] { 1, notificationId };
+            var parameters = new object[] { 1, notificationId, new DateTime(2015, 1, 1) };
             movement = (Movement)Activator.CreateInstance(
                 typeof(Movement), flags, null, parameters, culture);
 
@@ -57,7 +57,7 @@
         [Fact]
         public async Task AddsRecordWithCorrectStatus()
         {
-            Predicate<MovementStatusChange> submittedStatusChanges = 
+            Predicate<MovementStatusChange> submittedStatusChanges =
                 m => m.Status == MovementStatus.Submitted;
 
             Assert.DoesNotContain(movement.StatusChanges, submittedStatusChanges);
@@ -76,7 +76,7 @@
 
             await handler.HandleAsync(receivedEvent);
 
-            Assert.Equal(date, 
+            Assert.Equal(date,
                 movement.StatusChanges
                     .Single(sc => sc.Status == MovementStatus.Submitted)
                     .ChangeDate);
@@ -87,7 +87,7 @@
         {
             await handler.HandleAsync(receivedEvent);
 
-            Assert.Equal(userId.ToString(), 
+            Assert.Equal(userId.ToString(),
                 movement.StatusChanges
                     .Single(sc => sc.Status == MovementStatus.Submitted)
                     .User.Id);
