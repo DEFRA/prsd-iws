@@ -6,17 +6,18 @@
 
 <header class="hgroup">
     <h1 class="heading-large">Download and print your prenotification</h1>
-    <h2 class="heading-small">Before we can consider your prenotification, you'll need to sign it:</h2>
 </header>
+
+<p>Before we can consider your prenotification, you'll need to sign it:</p>
+
 <ol class="list-number">
     <li>
-        Download the
+        download the
         @Html.ActionLink("IWS Movement", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "Movement" }, new { })
-        (.doc) file
+        (.pdf) file
     </li>
-    <li>Print the file</li>
-    <li>Sign it</li>
+    <li>print the file</li>
+    <li>sign it</li>
 </ol>
-        
 
 @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", null, new { @class = "button" })
