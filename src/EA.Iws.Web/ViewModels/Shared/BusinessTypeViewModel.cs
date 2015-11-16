@@ -16,9 +16,11 @@
 
         [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "RegNumberRequired")]
         [Display(Name = "RegistrationNumber", ResourceType = typeof(BusinessResources))]
+        [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "RegistrationNumberMaxLength")]
         public virtual string RegistrationNumber { get; set; }
 
         [Display(Name = "AdditionalRegNumber", ResourceType = typeof(BusinessResources))]
+        [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "AdditionalRegistrationNumberMaxLength")]
         public string AdditionalRegistrationNumber { get; set; }
 
         [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OtherOrgTypeRequired")]

@@ -156,6 +156,7 @@
     <Content Include="scripts\Update\Sprint20\20151112-114500-add-units-to-movement-receipt.sql" />
     <Content Include="scripts\Update\Sprint20\20151109-111925-add-transaction-table.sql" />
     <Content Include="scripts\Update\Sprint20\20151111-165400-add-movement-details-table.sql" />
+    <Content Include="scripts\Update\Sprint20\20151116-160200-update-registration-number-columns.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

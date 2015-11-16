@@ -164,4 +164,10 @@
   <data name="WhereToFindCompanyHouse" xml:space="preserve">
     <value>Where can I find my Companies House number?</value>
   </data>
+  <data name="AdditionalRegistrationNumberMaxLength" xml:space="preserve">
+    <value>The additional registration number cannot be greater than 100 characters</value>
+  </data>
+  <data name="RegistrationNumberMaxLength" xml:space="preserve">
+    <value>The registration number cannot be greater than 100 characters</value>
+  </data>
 </root>

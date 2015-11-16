@@ -751,7 +751,6 @@
     <Content Include="Views\Applicant\_GetUserNotifications.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Exporter\Index.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\BusinessViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Importer\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\List.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\Add.cshtml" />
@@ -1702,7 +1701,6 @@
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Registration\CreateNewOrganisationViewModel.cs" />
     <Compile Include="ViewModels\Registration\SelectOrganisationViewModel.cs" />
-    <Compile Include="ViewModels\Shared\BusinessViewModel.cs" />
     <Compile Include="ViewModels\Shared\CheckBoxCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionViewModel.cs" />

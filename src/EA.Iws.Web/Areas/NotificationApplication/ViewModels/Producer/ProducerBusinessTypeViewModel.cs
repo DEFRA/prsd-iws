@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using Core.Shared;
     using Prsd.Core.Validation;
+    using Web.ViewModels.Shared;
 
     public class ProducerBusinessTypeViewModel
     {
@@ -16,9 +17,11 @@
 
         [RequiredIf("BusinessType", Core.Shared.BusinessType.LimitedCompany, ErrorMessage = "The Registration number field is required")]
         [Display(Name = "Registration number")]
-        public virtual string RegistrationNumber { get; set; }
+        [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "RegistrationNumberMaxLength")]
+        public string RegistrationNumber { get; set; }
 
         [Display(Name = "Additional registration number")]
+        [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "AdditionalRegistrationNumberMaxLength")]
         public string AdditionalRegistrationNumber { get; set; }
 
         [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessage = "Please enter your organisation type")]
