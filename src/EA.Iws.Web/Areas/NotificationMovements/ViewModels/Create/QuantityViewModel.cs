@@ -15,14 +15,14 @@
         {
         }
 
-        public QuantityViewModel(ShipmentQuantityUnits notificationShipmentUnits, IList<int> movementNumbers)
+        public QuantityViewModel(ShipmentQuantityUnits notificationShipmentUnits, int movementNumber)
         {
-            MovementNumbers = movementNumbers;
+            MovementNumber = movementNumber;
             NotificationUnits = notificationShipmentUnits;
             AvailableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(notificationShipmentUnits).ToList();
         }
 
-        public IList<int> MovementNumbers { get; set; }
+        public int MovementNumber { get; set; }
 
         public SelectList UnitsSelectList
         {

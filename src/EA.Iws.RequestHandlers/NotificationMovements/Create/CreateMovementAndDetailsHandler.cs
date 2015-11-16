@@ -12,7 +12,7 @@
     using Requests.NotificationMovements.Create;
     using PackagingTypeEnum = Core.PackagingType.PackagingType;
 
-    internal class CreateMovementAndDetailsHandler : IRequestHandler<CreateMovementAndDetails, bool>
+    internal class CreateMovementAndDetailsHandler : IRequestHandler<CreateMovementAndDetails, Guid>
     {
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IwsContext context;
@@ -27,7 +27,7 @@
             this.notificationRepository = notificationRepository;
         }
 
-        public async Task<bool> HandleAsync(CreateMovementAndDetails message)
+        public async Task<Guid> HandleAsync(CreateMovementAndDetails message)
         {
             var movement = await factory.Create(message.NotificationId, message.ActualMovementDate);
 
@@ -51,7 +51,7 @@
 
             await context.SaveChangesAsync();
 
-            return true;
+            return movement.Id;
         }
 
         private async Task<IEnumerable<PackagingInfo>> GetPackagingInfos(Guid notificationId, IList<PackagingTypeEnum> packagingTypes)

@@ -140,7 +140,7 @@
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValidHandler.cs" />
     <Compile Include="NotificationMovements\Create\CreateMovementAndDetailsHandler.cs" />
-    <Compile Include="NotificationMovements\Create\GenerateMovementNumbersHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GenerateMovementNumberHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransportHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetPackagingTypesHandler.cs" />

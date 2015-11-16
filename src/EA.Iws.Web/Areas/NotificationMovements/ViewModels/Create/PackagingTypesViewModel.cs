@@ -10,7 +10,7 @@
     public class PackagingTypesViewModel
     {
         public CheckBoxCollectionViewModel PackagingTypes { get; set; }
-        public IList<int> MovementNumbers { get; set; }
+        public int MovementNumber { get; set; }
 
         public IList<PackagingType> SelectedValues
         {
@@ -28,9 +28,9 @@
         {
         }
 
-        public PackagingTypesViewModel(PackagingData availablePackagingTypes, IList<int> movementNumbers)
+        public PackagingTypesViewModel(PackagingData availablePackagingTypes, int movementNumber)
         {
-            MovementNumbers = movementNumbers;
+            MovementNumber = movementNumber;
 
             var items = availablePackagingTypes.PackagingTypes
                 .Where(x => x != PackagingType.Other)

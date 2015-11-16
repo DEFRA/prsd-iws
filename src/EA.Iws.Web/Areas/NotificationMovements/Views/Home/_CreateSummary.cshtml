@@ -6,25 +6,10 @@
 </p>
 
 <ul class="summary-list">
-    @if (Model.NewShipmentNumbers.Any())
-    {
-        if (Model.NewShipmentNumbers.Count > 1)
-        {
-            <li>
-                <span class="grey-text">@SummaryResources.ShipmentNumbers</span>
-                @string.Format(SummaryResources.ShipmentNumbersRangeFormat, 
-                    Model.NewShipmentNumbers.Min(), 
-                    Model.NewShipmentNumbers.Max())
-            </li>
-        }
-        else
-        {
-            <li>
-                <span class="grey-text">@SummaryResources.ShipmentNumber</span>
-                @Model.NewShipmentNumbers.First()
-            </li>
-        }
-    }
+    <li>
+        <span class="grey-text">@SummaryResources.ShipmentNumber</span>
+        @Model.NewShipmentNumber
+    </li>
     <li><span class="grey-text">@SummaryResources.TotalShipments</span> @Html.Raw(Model.SummaryData.TotalShipments)</li>
     <li><span class="grey-text">@SummaryResources.ActiveLoadsPermitted</span> @Html.Raw(Model.SummaryData.ActiveLoadsPermitted)</li>
     <li><span class="grey-text">@SummaryResources.CurrentActiveLoads</span> @Html.Raw(Model.SummaryData.CurrentActiveLoads)</li>

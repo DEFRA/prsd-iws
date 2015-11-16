@@ -17,15 +17,15 @@
 
         public MeansOfTransportViewModel MeansOfTransportViewModel { get; set; }
 
-        public IList<int> MovementNumbers { get; set; }
+        public int MovementNumber { get; set; }
 
         public CarrierViewModel()
         {
         }
 
-        public CarrierViewModel(IList<CarrierData> notificationCarriers, int numberOfCarriers, MeansOfTransportViewModel model, IList<int> movementNumbers)
+        public CarrierViewModel(IList<CarrierData> notificationCarriers, int numberOfCarriers, MeansOfTransportViewModel model, int movementNumber)
         {
-            MovementNumbers = movementNumbers;
+            MovementNumber = movementNumber;
             CarrierSelectLists = new Dictionary<int, SelectList>();
             SelectedItems = new List<Guid?>();
             MeansOfTransportViewModel = model;

@@ -10,7 +10,7 @@
         [Range(1, 100, ErrorMessage = "Number of carriers must be between 1 and 100")]
         public int? Number { get; set; }
 
-        public IList<int> MovementNumbers { get; set; }
+        public int MovementNumber { get; set; }
 
         public MeansOfTransportViewModel MeansOfTransportViewModel { get; set; }
 
@@ -18,9 +18,9 @@
         {
         }
 
-        public NumberOfCarriersViewModel(MeansOfTransportViewModel subViewModel, IList<int> movementNumbers)
+        public NumberOfCarriersViewModel(MeansOfTransportViewModel subViewModel, int movementNumber)
         {
-            MovementNumbers = movementNumbers;
+            MovementNumber = movementNumber;
             MeansOfTransportViewModel = subViewModel;
         }
     }

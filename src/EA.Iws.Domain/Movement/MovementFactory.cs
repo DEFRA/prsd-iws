@@ -9,17 +9,20 @@
 
     public class MovementFactory
     {
+        private readonly MovementNumberGenerator numberGenerator;
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly IMovementRepository movementRepository;
         private readonly IShipmentInfoRepository shipmentRepository;
 
         public MovementFactory(IShipmentInfoRepository shipmentRepository,
             IMovementRepository movementRepository,
-            INotificationAssessmentRepository assessmentRepository)
+            INotificationAssessmentRepository assessmentRepository,
+            MovementNumberGenerator numberGenerator)
         {
             this.shipmentRepository = shipmentRepository;
             this.movementRepository = movementRepository;
             this.assessmentRepository = assessmentRepository;
+            this.numberGenerator = numberGenerator;
         }
 
         public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
@@ -43,7 +46,9 @@
                         notificationId, notificationStatus));
             }
 
-            return new Movement(currentNumberOfShipments + 1, notificationId, actualMovementDate);
+            var newNumber = await numberGenerator.Generate(notificationId);
+
+            return new Movement(newNumber, notificationId, actualMovementDate);
         }
     }
 }

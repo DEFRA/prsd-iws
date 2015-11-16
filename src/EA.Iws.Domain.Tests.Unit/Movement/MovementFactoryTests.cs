@@ -25,7 +25,8 @@
             movementRepository = A.Fake<IMovementRepository>();
             assessmentRepository = A.Fake<INotificationAssessmentRepository>();
 
-            factory = new MovementFactory(shipmentRepository, movementRepository, assessmentRepository);
+            var movementNumberGenerator = new MovementNumberGenerator(movementRepository, shipmentRepository);
+            factory = new MovementFactory(shipmentRepository, movementRepository, assessmentRepository, movementNumberGenerator);
         }
 
         [Fact]

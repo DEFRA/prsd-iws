@@ -109,7 +109,7 @@
     <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValid.cs" />
     <Compile Include="NotificationMovements\Create\CreateMovementAndDetails.cs" />
-    <Compile Include="NotificationMovements\Create\GenerateMovementNumbers.cs" />
+    <Compile Include="NotificationMovements\Create\GenerateMovementNumber.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementData.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriers.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransport.cs" />

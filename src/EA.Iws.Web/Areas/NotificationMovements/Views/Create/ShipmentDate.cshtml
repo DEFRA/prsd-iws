@@ -18,10 +18,7 @@
     @Html.HiddenFor(m => m.MovementId)
     @Html.HiddenFor(m => m.StartDate)
     @Html.HiddenFor(m => m.EndDate)
-    for (int i = 0; i < Model.MovementNumbers.Count; i++)
-    {
-        @Html.HiddenFor(m => m.MovementNumbers[i])
-    }
+    @Html.HiddenFor(m => m.MovementNumber)
 
     <p>
         You can schedule your shipments from 

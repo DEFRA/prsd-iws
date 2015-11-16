@@ -10,15 +10,15 @@
         [Display(Name = "Enter the number")]
         public int? Number { get; set; }
 
-        public IList<int> MovementNumbers { get; set; }
+        public int MovementNumber { get; set; }
 
         public NumberOfPackagesViewModel()
         {
         }
 
-        public NumberOfPackagesViewModel(IList<int> movementNumbers)
+        public NumberOfPackagesViewModel(int movementNumber)
         {
-            MovementNumbers = movementNumbers;
+            MovementNumber = movementNumber;
         }
     }
 }

@@ -12,14 +12,14 @@
         {
         }
 
-        public ShipmentDateViewModel(ShipmentDates shipmentDates, IList<int> movementNumbers)
+        public ShipmentDateViewModel(ShipmentDates shipmentDates, int movementNumber)
         {
             StartDate = shipmentDates.StartDate;
             EndDate = shipmentDates.EndDate;
-            MovementNumbers = movementNumbers;
+            MovementNumber = movementNumber;
         }
 
-        public IList<int> MovementNumbers { get; set; }
+        public int MovementNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid number in the 'Day' field")]
         [Display(Name = "Day")]

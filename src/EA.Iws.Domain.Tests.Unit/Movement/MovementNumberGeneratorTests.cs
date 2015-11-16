@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Domain.Movement;
     using Domain.NotificationApplication.Shipment;
@@ -26,17 +25,35 @@
         }
 
         [Fact]
-        public async Task GeneratesCorrectCount()
+        public async Task StartsWithOne()
         {
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(CreateShipmentInfo(10));
+            A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new Movement[0]);
 
-            var result = await generator.Generate(NotificationId, 4);
+            var result = await generator.Generate(NotificationId);
 
-            Assert.Equal(4, result.Count);
+            Assert.Equal(1, result);
+        }
+   
+        [Fact]
+        public async Task FillsGapIfOneExists()
+        {
+            var movements = new[]
+            {
+                GetMovement(1, NotificationId),
+                GetMovement(3, NotificationId)
+            };
+
+            A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(CreateShipmentInfo(10));
+            A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(movements);
+
+            var result = await generator.Generate(NotificationId);
+
+            Assert.Equal(2, result);
         }
 
         [Fact]
-        public async Task GeneratesCorrectFirstAndLastNumber()
+        public async Task PicksNextNumberIfNoGaps()
         {
             var movements = new[]
             {
@@ -47,18 +64,24 @@
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(CreateShipmentInfo(10));
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(movements);
 
-            var result = await generator.Generate(NotificationId, 6);
+            var result = await generator.Generate(NotificationId);
 
-            Assert.Equal(3, result.Min());
-            Assert.Equal(8, result.Max());
+            Assert.Equal(3, result);
         }
 
         [Fact]
-        public async Task ExceedingMaxAllowed_ThrowsException()
+        public async Task MaxShipmentsReached_Throws()
         {
-            A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(CreateShipmentInfo(4));
+            var movements = new[]
+            {
+                GetMovement(1, NotificationId),
+                GetMovement(2, NotificationId)
+            };
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => generator.Generate(NotificationId, 5));
+            A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(CreateShipmentInfo(2));
+            A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(movements);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => generator.Generate(NotificationId));
         }
 
         private ShipmentInfo CreateShipmentInfo(int maxNumberOfMovements)

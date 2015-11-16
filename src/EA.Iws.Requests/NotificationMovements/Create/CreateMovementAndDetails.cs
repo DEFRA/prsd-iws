@@ -4,7 +4,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    public class CreateMovementAndDetails : IRequest<bool>
+    public class CreateMovementAndDetails : IRequest<Guid>
     {
         public Guid NotificationId { get; private set; }
         public NewMovementDetails NewMovementDetails { get; private set; }

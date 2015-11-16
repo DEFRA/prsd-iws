@@ -18,25 +18,40 @@
             this.shipmentRepository = shipmentRepository;
         }
 
-        public async Task<IList<int>> Generate(Guid notificationId, int newMovementsCount)
+        public async Task<int> Generate(Guid notificationId)
         {
             List<int> newMovementNumbers = new List<int>();
             var maxAllowedMovements = (await shipmentRepository.GetByNotificationId(notificationId)).NumberOfShipments;
-            var currentMovementNumber = (await movementRepository.GetAllMovements(notificationId)).Count();
+            var currentMovements = await movementRepository.GetAllMovements(notificationId);
 
-            if (currentMovementNumber + newMovementsCount > maxAllowedMovements)
+            if (currentMovements.Count() == maxAllowedMovements)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot create {0} new movements because this would take the number of movements above the maximum allowed of {1}",
-                        newMovementsCount, maxAllowedMovements));
+                    string.Format("Cannot create a new movement number for notification {0} because there are no more available.",
+                        notificationId));
             }
 
-            for (int i = currentMovementNumber; i < currentMovementNumber + newMovementsCount; i++)
+            var usedNumbers = currentMovements.Select(m => m.Number);
+
+            if (!currentMovements.Any())
             {
-                newMovementNumbers.Add(i + 1);
+                return 1;
             }
 
-            return newMovementNumbers;
+            if (usedNumbers.Max() == currentMovements.Count())
+            {
+                return currentMovements.Count() + 1;
+            }
+
+            for (int i = 1; i < currentMovements.Count() + 1; i++)
+            {
+                if (!usedNumbers.Contains(i))
+                {
+                    return i;
+                }
+            }
+
+            throw new InvalidOperationException("No available numbers (this should not have happened!)");
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
@@ -43,7 +42,7 @@
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult CreateSummary(Guid notificationId, IList<int> movementNumbers)
+        public ActionResult CreateSummary(Guid notificationId, int movementNumber)
         {
             var result = mediator
                 .SendAsync(new GetBasicMovementSummary(notificationId))
@@ -53,12 +52,12 @@
             var model = new CreateSummaryViewModel
             {
                 SummaryData = result,
-                NewShipmentNumbers = movementNumbers ?? new int[0]
+                NewShipmentNumber = movementNumber
             };
 
             return PartialView("_CreateSummary", model);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Index")]

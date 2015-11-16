@@ -57,7 +57,7 @@
                 EndDate = new DateTime(2016, 1, 1)
             };
 
-            var shipmentDateViewModel = new ShipmentDateViewModel(shipmentDates, new[] { 10 });
+            var shipmentDateViewModel = new ShipmentDateViewModel(shipmentDates, 10);
 
             if (actualDate.HasValue)
             {
