@@ -106,20 +106,11 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like to start a notification?.
-        /// </summary>
-        public static string Header2 {
-            get {
-                return ResourceManager.GetString("Header2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Account services.
         /// </summary>
-        public static string Header3 {
+        public static string HeaderAccountServices {
             get {
-                return ResourceManager.GetString("Header3", resourceCulture);
+                return ResourceManager.GetString("HeaderAccountServices", resourceCulture);
             }
         }
         
@@ -129,6 +120,15 @@ namespace EA.Iws.Web.Views.Applicant {
         public static string HeaderManageYourNotifications {
             get {
                 return ResourceManager.GetString("HeaderManageYourNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to start a notification?.
+        /// </summary>
+        public static string HeaderStartNew {
+            get {
+                return ResourceManager.GetString("HeaderStartNew", resourceCulture);
             }
         }
         

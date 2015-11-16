@@ -126,17 +126,17 @@
   <data name="Header" xml:space="preserve">
     <value>What did you think of this service?</value>
   </data>
-  <data name="Header2" xml:space="preserve">
+  <data name="HeaderAboutService" xml:space="preserve">
     <value>Overall, how did you feel about the service you received today?</value>
   </data>
-  <data name="Header3" xml:space="preserve">
-    <value>How could we improve this service? (optional)</value>
+  <data name="HeaderCharacterLimit" xml:space="preserve">
+    <value>(Limit is 1200 characters)</value>
   </data>
-  <data name="Header3Description" xml:space="preserve">
+  <data name="HeaderDescriptionForService" xml:space="preserve">
     <value>Please don't include any personal or financial information, for example your National Insurance or credit card numbers.</value>
   </data>
-  <data name="Header3Message" xml:space="preserve">
-    <value>(Limit is 1200 characters)</value>
+  <data name="HeaderImproveService" xml:space="preserve">
+    <value>How could we improve this service? (optional)</value>
   </data>
   <data name="SendFeedback" xml:space="preserve">
     <value>Send feedback</value>

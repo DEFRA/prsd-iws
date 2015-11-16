@@ -126,13 +126,13 @@
   <data name="Header" xml:space="preserve">
     <value>Activate your account</value>
   </data>
-  <data name="P1" xml:space="preserve">
+  <data name="PActivationEmailSent" xml:space="preserve">
     <value>We've sent your activation email to {0}. Please use the link in the email to activate your user account. You may need to check your junk or spam folder if you can't see the email in your inbox.</value>
   </data>
-  <data name="P2" xml:space="preserve">
+  <data name="PInstructions" xml:space="preserve">
     <value>Once you have followed the activation link, you will be directed to your account login page.</value>
   </data>
-  <data name="P3" xml:space="preserve">
+  <data name="PNotReceivedEmail" xml:space="preserve">
     <value>If you did not receive the email, you can </value>
   </data>
   <data name="Title" xml:space="preserve">

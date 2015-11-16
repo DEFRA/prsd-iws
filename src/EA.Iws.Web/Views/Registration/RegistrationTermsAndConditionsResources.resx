@@ -120,9 +120,6 @@
   <data name="Header" xml:space="preserve">
     <value>Read full terms and conditions of use</value>
   </data>
-  <data name="Terms" xml:space="preserve">
-    <value>Terms and conditions of use</value>
-  </data>
   <data name="Terms1" xml:space="preserve">
     <value>The general purpose of the website is to provide access to web-based transactions and services relating to international waste shipments and to grant access to related data held by the Environment Agency (EA) in accordance with applicable legal provisions.</value>
   </data>
@@ -140,6 +137,9 @@
   </data>
   <data name="Terms6" xml:space="preserve">
     <value>Some of the services available on this website require registration. Users must provide correct and complete information when registering, and update it as necessary. They must not misuse any access rights granted to them (for example by transferring data to unauthorised third persons). By registering, users agree to being contacted by the EA by e‑mail.</value>
+  </data>
+  <data name="TermsAndConditions" xml:space="preserve">
+    <value>Terms and conditions of use</value>
   </data>
   <data name="TermsListItem1" xml:space="preserve">
     <value>Registered users are responsible for maintaining the confidentiality of their account and password to prevent unauthorised access to that account. Users must take all necessary steps to keep their password secure and must inform the EA without delay at needanappropriateemailaddress@ea.gov.uk if it is being or could be used without authorisation.</value>

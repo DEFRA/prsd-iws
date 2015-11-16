@@ -14,20 +14,20 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <h2 class="heading-small">@FeedbackResources.Header2</h2>
+    <h2 class="heading-small">@FeedbackResources.HeaderAboutService</h2>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.FeedbackOptions.SelectedValue)">
         @Html.Gds().ValidationMessageFor(model => model.FeedbackOptions.SelectedValue)
         @Html.EditorFor(m => m.FeedbackOptions)
     </div>
 
     <div class="form-group">
-        <h2 class="heading-small">@FeedbackResources.Header3</h2>
+        <h2 class="heading-small">@FeedbackResources.HeaderImproveService</h2>
         <div class="form-group @Html.Gds().FormGroupClass(m => m.FeedbackDescription)">
             @Html.Gds().ValidationMessageFor(m => m.FeedbackDescription)
             @Html.TextAreaFor(m => m.FeedbackDescription, new { @maxlength = "1200", @class = "text-area two-thirds" })
         </div>
-        <p>@FeedbackResources.Header3Message</p>
-        <p>@FeedbackResources.Header3Description</p>
+        <p>@FeedbackResources.HeaderCharacterLimit</p>
+        <p>@FeedbackResources.HeaderDescriptionForService</p>
     </div>
 
     <div class="form-group">

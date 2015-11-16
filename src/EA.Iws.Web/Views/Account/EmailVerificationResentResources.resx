@@ -120,13 +120,13 @@
   <data name="Header" xml:space="preserve">
     <value>We've sent you another email</value>
   </data>
-  <data name="P1" xml:space="preserve">
-    <value>We've sent another email to {0}, which is the address you registered with.</value>
-  </data>
-  <data name="P2" xml:space="preserve">
+  <data name="PActivationLink" xml:space="preserve">
     <value>Please use the link in the email to activate your user account. You may need to check your junk or spam folder if you can't see the email in your inbox.</value>
   </data>
-  <data name="P3" xml:space="preserve">
+  <data name="PAnotherEmailSent" xml:space="preserve">
+    <value>We've sent another email to {0}, which is the address you registered with.</value>
+  </data>
+  <data name="PInstructions" xml:space="preserve">
     <value>Once you have followed the activation link, you will be directed to your account login page.</value>
   </data>
   <data name="Title" xml:space="preserve">

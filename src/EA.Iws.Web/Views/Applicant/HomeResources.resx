@@ -132,14 +132,14 @@
   <data name="Header" xml:space="preserve">
     <value>Your notifications</value>
   </data>
-  <data name="Header2" xml:space="preserve">
-    <value>Would you like to start a notification?</value>
-  </data>
-  <data name="Header3" xml:space="preserve">
+  <data name="HeaderAccountServices" xml:space="preserve">
     <value>Account services</value>
   </data>
   <data name="HeaderManageYourNotifications" xml:space="preserve">
     <value>Manage your notifications</value>
+  </data>
+  <data name="HeaderStartNew" xml:space="preserve">
+    <value>Would you like to start a notification?</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>This link opens in a new browser tab</value>

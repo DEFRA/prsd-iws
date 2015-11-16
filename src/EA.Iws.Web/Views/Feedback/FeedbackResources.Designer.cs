@@ -90,36 +90,36 @@ namespace EA.Iws.Web.Views.Feedback {
         /// <summary>
         ///   Looks up a localized string similar to Overall, how did you feel about the service you received today?.
         /// </summary>
-        public static string Header2 {
+        public static string HeaderAboutService {
             get {
-                return ResourceManager.GetString("Header2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to How could we improve this service? (optional).
-        /// </summary>
-        public static string Header3 {
-            get {
-                return ResourceManager.GetString("Header3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please don&apos;t include any personal or financial information, for example your National Insurance or credit card numbers..
-        /// </summary>
-        public static string Header3Description {
-            get {
-                return ResourceManager.GetString("Header3Description", resourceCulture);
+                return ResourceManager.GetString("HeaderAboutService", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to (Limit is 1200 characters).
         /// </summary>
-        public static string Header3Message {
+        public static string HeaderCharacterLimit {
             get {
-                return ResourceManager.GetString("Header3Message", resourceCulture);
+                return ResourceManager.GetString("HeaderCharacterLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please don&apos;t include any personal or financial information, for example your National Insurance or credit card numbers..
+        /// </summary>
+        public static string HeaderDescriptionForService {
+            get {
+                return ResourceManager.GetString("HeaderDescriptionForService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How could we improve this service? (optional).
+        /// </summary>
+        public static string HeaderImproveService {
+            get {
+                return ResourceManager.GetString("HeaderImproveService", resourceCulture);
             }
         }
         

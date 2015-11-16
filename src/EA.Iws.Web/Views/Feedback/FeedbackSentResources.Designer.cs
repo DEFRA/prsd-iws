@@ -61,24 +61,6 @@ namespace EA.Iws.Web.Views.Feedback {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thanks for sharing your comments on the IWS online service. It will help improve the service for everyone..
-        /// </summary>
-        public static string Desc1 {
-            get {
-                return ResourceManager.GetString("Desc1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to We regularly update this service and pay careful attention to all the feedback we receive..
-        /// </summary>
-        public static string Desc2 {
-            get {
-                return ResourceManager.GetString("Desc2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Thank you for your feedback.
         /// </summary>
         public static string Header {
@@ -88,11 +70,29 @@ namespace EA.Iws.Web.Views.Feedback {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thanks for sharing your comments on the IWS online service. It will help improve the service for everyone..
+        /// </summary>
+        public static string ThanksMessage {
+            get {
+                return ResourceManager.GetString("ThanksMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feedback sent.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We regularly update this service and pay careful attention to all the feedback we receive..
+        /// </summary>
+        public static string UpdateServiceMessage {
+            get {
+                return ResourceManager.GetString("UpdateServiceMessage", resourceCulture);
             }
         }
     }

@@ -99,18 +99,18 @@ namespace EA.Iws.Web.Views.Account {
         /// <summary>
         ///   Looks up a localized string similar to To reset your password, enter the email address associated with your account..
         /// </summary>
-        public static string H1Description {
+        public static string H1DescriptionToResetPassword {
             get {
-                return ResourceManager.GetString("H1Description", resourceCulture);
+                return ResourceManager.GetString("H1DescriptionToResetPassword", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to If you don&apos;t know the email address belonging to your account, contact your Competent Authority..
         /// </summary>
-        public static string H2Description {
+        public static string H2DescriptionToContactAuthority {
             get {
-                return ResourceManager.GetString("H2Description", resourceCulture);
+                return ResourceManager.GetString("H2DescriptionToContactAuthority", resourceCulture);
             }
         }
         

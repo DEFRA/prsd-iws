@@ -18,14 +18,14 @@
     </div>
 }
 
-<p>@string.Format(EmailVerificationRequiredResources.P1, ViewBag.Email)</p>
-<p>@EmailVerificationRequiredResources.P2</p>
+<p>@string.Format(EmailVerificationRequiredResources.PActivationEmailSent, ViewBag.Email)</p>
+<p>@EmailVerificationRequiredResources.PInstructions</p>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <p>
-        @EmailVerificationRequiredResources.P3
+        @EmailVerificationRequiredResources.PNotReceivedEmail
         <button class="link-submit" type="submit">@EmailVerificationRequiredResources.ButtonText</button>.
     </p>
 }

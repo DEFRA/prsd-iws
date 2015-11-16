@@ -70,29 +70,29 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We&apos;ve sent another email to {0}, which is the address you registered with..
+        ///   Looks up a localized string similar to Please use the link in the email to activate your user account. You may need to check your junk or spam folder if you can&apos;t see the email in your inbox..
         /// </summary>
-        public static string P1 {
+        public static string PActivationLink {
             get {
-                return ResourceManager.GetString("P1", resourceCulture);
+                return ResourceManager.GetString("PActivationLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please use the link in the email to activate your user account. You may need to check your junk or spam folder if you can&apos;t see the email in your inbox..
+        ///   Looks up a localized string similar to We&apos;ve sent another email to {0}, which is the address you registered with..
         /// </summary>
-        public static string P2 {
+        public static string PAnotherEmailSent {
             get {
-                return ResourceManager.GetString("P2", resourceCulture);
+                return ResourceManager.GetString("PAnotherEmailSent", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Once you have followed the activation link, you will be directed to your account login page..
         /// </summary>
-        public static string P3 {
+        public static string PInstructions {
             get {
-                return ResourceManager.GetString("P3", resourceCulture);
+                return ResourceManager.GetString("PInstructions", resourceCulture);
             }
         }
         

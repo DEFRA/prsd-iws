@@ -90,18 +90,18 @@ namespace EA.Iws.Web.Views.Account {
         /// <summary>
         ///   Looks up a localized string similar to Please check your email inbox or junk folder..
         /// </summary>
-        public static string P1 {
+        public static string PCheckEmail {
             get {
-                return ResourceManager.GetString("P1", resourceCulture);
+                return ResourceManager.GetString("PCheckEmail", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to If you have not received the email, you can {0} again..
         /// </summary>
-        public static string P2 {
+        public static string PNotReceivedEmail {
             get {
-                return ResourceManager.GetString("P2", resourceCulture);
+                return ResourceManager.GetString("PNotReceivedEmail", resourceCulture);
             }
         }
         

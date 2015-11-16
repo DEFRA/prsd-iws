@@ -70,15 +70,6 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Terms and conditions of use.
-        /// </summary>
-        public static string Terms {
-            get {
-                return ResourceManager.GetString("Terms", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The general purpose of the website is to provide access to web-based transactions and services relating to international waste shipments and to grant access to related data held by the Environment Agency (EA) in accordance with applicable legal provisions..
         /// </summary>
         public static string Terms1 {
@@ -129,6 +120,15 @@ namespace EA.Iws.Web.Views.Registration {
         public static string Terms6 {
             get {
                 return ResourceManager.GetString("Terms6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terms and conditions of use.
+        /// </summary>
+        public static string TermsAndConditions {
+            get {
+                return ResourceManager.GetString("TermsAndConditions", resourceCulture);
             }
         }
         
