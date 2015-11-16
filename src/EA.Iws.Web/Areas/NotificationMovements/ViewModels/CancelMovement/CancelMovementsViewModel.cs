@@ -26,7 +26,7 @@
         {
             if (!SubmittedMovements.Any(m => m.IsSelected))
             {
-                yield return new ValidationResult("Please select at least one pre-notification to cancel", new[] { "SubmittedMovements" });
+                yield return new ValidationResult("Please select at least one prenotification to cancel", new[] { "SubmittedMovements" });
             }
         }
     }

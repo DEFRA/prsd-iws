@@ -5,7 +5,7 @@
     public enum MovementStatus
     {
         New = 1,
-        [Display(Name = "Pre-notified")]
+        [Display(Name = "Prenotified")]
         Submitted = 2,
         Received = 3,
         Completed = 4,
