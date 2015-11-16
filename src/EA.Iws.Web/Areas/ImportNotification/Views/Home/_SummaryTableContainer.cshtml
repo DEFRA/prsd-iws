@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@{ViewBag.SectionIncompleteText = "Section incomplete";}
+
+<div id="submit-overview-area">
+    <h2 class="heading-medium">Organisations involved</h2>
+    @Html.Partial("_Exporter")
+    @Html.Partial("_Producer")
+    @Html.Partial("_Importer")
+    @Html.Partial("_Facility")
+</div>

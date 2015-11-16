@@ -1,0 +1,16 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+<hr/>
+
+@Html.Partial("_SummaryTableContainer")
+
+<style>
+    .block {
+        display: block;
+    }
+</style>

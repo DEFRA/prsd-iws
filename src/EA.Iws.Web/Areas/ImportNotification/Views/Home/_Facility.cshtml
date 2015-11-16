@@ -1,0 +1,47 @@
+﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+
+<details>
+    <summary class="block">
+        @Model.Type facilities @Html.ActionLink("Change", "Index", "Facility", null, new { @class="right-float" })
+    </summary>
+    <div class="expanded-details">
+        <div class="panel-indent">
+            @if (Model.Facilities != null && Model.Facilities.Count > 0)
+            {
+                for (int i = 0; i < Model.Facilities.Count; i++)
+                {
+                    <div class="grid-row">
+                        <div class="column-half">
+                            <dl>
+                                @if (!string.IsNullOrWhiteSpace(Model.Facilities[i].Name))
+                                {
+                                    <dt>Organisation name:</dt>
+                                    <dd>@Html.DisplayFor(m => m.Facilities[i].Name)</dd>
+                                }
+
+                                @if (!Model.Facilities[i].Address.IsEmpty())
+                                {
+                                    <dt>Address:</dt>
+                                    <dd>@Html.DisplayFor(m => m.Facilities[i].Address)</dd>
+                                }
+                            </dl>
+                        </div>
+                        <div class="column-half">
+                            <dl>
+                                @if (!Model.Facilities[i].Contact.IsEmpty())
+                                {
+                                    <dt>Contact:</dt>
+                                    <dd>@Html.DisplayFor(m => m.Facilities[i].Contact)</dd>
+                                }
+                            </dl>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>@ViewBag.SectionIncompleteText</p>
+            }
+        </div>
+    </div>
+</details>

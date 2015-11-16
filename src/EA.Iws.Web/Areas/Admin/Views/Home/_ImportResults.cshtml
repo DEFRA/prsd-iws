@@ -23,7 +23,7 @@
                         <td>
                             @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ImportSearchResults[i].NotificationNumber).ToString(),
                                 actionName: "Index",
-                                controllerName: "Exporter",
+                                controllerName: "Home",
                                 routeValues: new { id = Model.ImportSearchResults[i].Id, area = "ImportNotification" },
                                 htmlAttributes: null)
                         </td>

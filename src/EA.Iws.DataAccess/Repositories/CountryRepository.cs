@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -14,6 +15,11 @@
         public CountryRepository(IwsContext context)
         {
             this.context = context;
+        }
+
+        public async Task<IEnumerable<Country>> GetAll()
+        {
+            return await context.Countries.ToArrayAsync();
         }
 
         public async Task<Country> GetById(Guid id)
