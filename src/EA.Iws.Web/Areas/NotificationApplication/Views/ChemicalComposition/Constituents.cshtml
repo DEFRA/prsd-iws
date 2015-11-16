@@ -69,7 +69,7 @@
         </div>
 
         <div class="panel-indent @(Model.OtherCodesContainsData() ? string.Empty : "js-hidden")" id="other-constituents">
-          
+            @Html.Gds().HintParagraph(ConstituentsResources.OtherCodesHintText)
             @for (int i = 0; i < Model.OtherCodes.Count; i++)
             {
                 var idText = "OtherCodes_" + i + "_";

@@ -179,6 +179,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To remove any codes that are no longer required delete the name and the minimum and maximium values or enter &quot;NA&quot; for each of the minimum and maximium values.
+        /// </summary>
+        public static string OtherCodesHintText {
+            get {
+                return ResourceManager.GetString("OtherCodesHintText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other constituent.
         /// </summary>
         public static string OtherConstituent {

@@ -16,7 +16,6 @@
 
         [Required(ErrorMessageResourceName = "AmountRefundedError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
         [Display(Name = "AmountRefundedLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
-        [IsValidNumber(maxPrecision: 12)]
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
 

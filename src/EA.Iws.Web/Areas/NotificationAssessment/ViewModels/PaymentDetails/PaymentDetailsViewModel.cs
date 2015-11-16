@@ -24,7 +24,6 @@
 
         [Required(ErrorMessageResourceName = "AmountPaidError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
         [Display(Name = "AmountPaidLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
-        [IsValidNumber(maxPrecision: 12)]
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
 

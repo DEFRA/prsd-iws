@@ -8,7 +8,7 @@
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var validationResult = new ValidationResult("Please enter a valid amount");
+            var validationResult = new ValidationResult("Please enter a number with a maximum of 2 decimal places");
 
             if (value.ToString().IsValidMoneyDecimal())
             {
