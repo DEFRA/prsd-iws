@@ -12,20 +12,23 @@
     using Address = Core.ImportNotification.Summary.Address;
     using Draft = Core.ImportNotification.Draft;
 
-    public class GetSummaryHandler : IRequestHandler<GetSummary, InProgressImportNotificationSummary>
+    internal class GetSummaryHandler : IRequestHandler<GetSummary, InProgressImportNotificationSummary>
     {
         private readonly IImportNotificationRepository importNotificationRepository;
         private readonly Domain.ICountryRepository countryRepository;
         private readonly IDraftImportNotificationRepository draftRepository;
+        private readonly TransportRouteSummary transportRouteSummary;
         private IList<Domain.Country> countries = new List<Domain.Country>();
 
         public GetSummaryHandler(IImportNotificationRepository importNotificationRepository,
             Domain.ICountryRepository countryRepository,
-            IDraftImportNotificationRepository draftRepository)
+            IDraftImportNotificationRepository draftRepository,
+            TransportRouteSummary transportRouteSummary)
         {
             this.importNotificationRepository = importNotificationRepository;
             this.countryRepository = countryRepository;
             this.draftRepository = draftRepository;
+            this.transportRouteSummary = transportRouteSummary;
         }
 
         public async Task<InProgressImportNotificationSummary> HandleAsync(GetSummary message)
@@ -33,6 +36,8 @@
             var notification = await importNotificationRepository.GetByImportNotificationId(message.Id);
 
             countries = (await countryRepository.GetAll()).ToArray();
+
+            var transportRoute = await transportRouteSummary.GetTransportRoute(message.Id, countries);
 
             var summary = new InProgressImportNotificationSummary
             {
@@ -42,9 +47,12 @@
                 Exporter = await GetExporter(message.Id),
                 Facilities = await GetFacilities(message.Id),
                 Importer = await GetImporter(message.Id),
-                Producer = await GetProducer(message.Id)
+                Producer = await GetProducer(message.Id),
+                StateOfExport = transportRoute.StateOfExport,
+                StateOfImport = transportRoute.StateOfImport,
+                TransitStates = transportRoute.TransitStates
             };
-
+            
             return summary;
         }
 
@@ -110,6 +118,11 @@
 
         private Address ConvertAddress(Draft.Address address)
         {
+            if (address == null)
+            {
+                return new Address();
+            }
+
             return new Address
             {
                 AddressLine1 = address.AddressLine1,

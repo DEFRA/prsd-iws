@@ -15,5 +15,7 @@
         Task<IEnumerable<EntryOrExitPoint>> GetAll();
 
         Task Add(EntryOrExitPoint entryOrExitPoint);
+
+        Task<IEnumerable<EntryOrExitPoint>> GetByIds(IEnumerable<Guid> ids);
     }
 }

@@ -11,5 +11,7 @@
         Task<IEnumerable<CompetentAuthority>> GetCompetentAuthorities(Guid countryId);
 
         Task<CompetentAuthority> GetById(Guid id);
+
+        Task<IEnumerable<CompetentAuthority>> GetByIds(IEnumerable<Guid> ids);
     }
 }

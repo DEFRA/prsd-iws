@@ -1,0 +1,35 @@
+﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+
+<details>
+    <summary class="block">
+        State of export @Html.ActionLink("Change", "Index", "StateOfExport", null, new { @class = "right-float" })
+    </summary>
+    <div class="expanded-details">
+        <div class="panel-indent">
+            @if (Model.StateOfExport != null && !Model.StateOfExport.IsEmpty())
+            {
+                <div class="grid-row">
+                    <div class="column-half">
+                        Exit point:
+                    </div>
+                    <div class="column-half">
+                        @Html.DisplayFor(m => m.StateOfExport.ExitPointName),
+                        @Html.DisplayFor(m => m.StateOfExport.CountryName)
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">
+                        Competent authority:
+                    </div>
+                    <div class="column-half">
+                        @Html.DisplayFor(m => m.StateOfExport.CompetentAuthorityCode) - @Html.DisplayFor(m => m.StateOfExport.CompetentAuthorityName)
+                    </div>
+                </div>
+            }
+            else
+            {
+                @ViewBag.SectionIncompleteText
+            }
+        </div>
+    </div>
+</details>

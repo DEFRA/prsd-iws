@@ -7,5 +7,17 @@
         public string CompetentAuthorityCode { get; set; }
 
         public string EntryPointName { get; set; }
+
+        public string CountryName
+        {
+            get { return "United Kingdom"; }
+        }
+
+        public bool IsEmpty()
+        {
+            return string.IsNullOrWhiteSpace(CompetentAuthorityCode) &&
+                   string.IsNullOrWhiteSpace(CompetentAuthorityName) &&
+                   string.IsNullOrWhiteSpace(EntryPointName);
+        }
     }
 }

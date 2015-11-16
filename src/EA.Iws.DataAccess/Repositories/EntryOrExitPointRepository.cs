@@ -51,5 +51,10 @@
 
             context.EntryOrExitPoints.Add(entryOrExitPoint);
         }
+
+        public async Task<IEnumerable<EntryOrExitPoint>> GetByIds(IEnumerable<Guid> ids)
+        {
+            return await context.EntryOrExitPoints.Where(eep => ids.Contains(eep.Id)).ToArrayAsync();
+        }
     }
 }

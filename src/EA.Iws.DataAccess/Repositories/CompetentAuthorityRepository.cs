@@ -38,5 +38,10 @@
         {
             return await context.CompetentAuthorities.SingleAsync(ca => ca.Id == id);
         }
+
+        public async Task<IEnumerable<CompetentAuthority>> GetByIds(IEnumerable<Guid> ids)
+        {
+            return await context.CompetentAuthorities.Where(ca => ids.Contains(ca.Id)).ToArrayAsync();
+        }
     }
 }

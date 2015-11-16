@@ -94,6 +94,7 @@
     <Compile Include="Admin\NotificationAssessment\SetDecisionHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
+    <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
     <Compile Include="Mappings\AddressMapTests.cs" />
     <Compile Include="Helpers\BusinessInfoDataEqualityComparer.cs" />
     <Compile Include="Mappings\BusinessInfoMapTests.cs" />

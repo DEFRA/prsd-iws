@@ -17,6 +17,11 @@
 
         public static Contact FromDraftContact(Draft.Contact contact)
         {
+            if (contact == null)
+            {
+                return new Contact();
+            }
+
             return new Contact
             {
                 Email = contact.Email,

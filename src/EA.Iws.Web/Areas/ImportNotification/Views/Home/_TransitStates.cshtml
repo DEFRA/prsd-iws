@@ -1,0 +1,70 @@
+﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+
+<details>
+    <summary class="block">
+        Transit states @Html.ActionLink("Change", "Index", "TransitState", null, new { @class = "right-float" })
+    </summary>
+    <div class="expanded-details">
+        <div class="panel-indent">
+            @if (Model.TransitStates != null && Model.TransitStates.Count > 0)
+            {
+                for (int i = 0; i < Model.TransitStates.Count; i++)
+                {
+                    <div class="grid-row">
+                        <div class="column-half">
+                            Entry point:
+                        </div>
+                        <div class="column-half">
+                            @if (string.IsNullOrWhiteSpace(Model.TransitStates[i].EntryPointName))
+                            {
+                                <text>Not selected</text>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(m => m.TransitStates[i].EntryPointName)<text>,</text>
+                                @Html.DisplayFor(m => m.TransitStates[i].CountryName)
+                            }
+                        </div>
+                    </div>
+                    <div class="grid-row">
+                        <div class="column-half">
+                            Exit point:
+                        </div>
+                        <div class="column-half">
+                            @if (string.IsNullOrWhiteSpace(Model.TransitStates[i].ExitPointName))
+                            {
+                                <text>Not selected</text>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(m => m.TransitStates[i].ExitPointName)<text>,</text>
+                                @Html.DisplayFor(m => m.TransitStates[i].CountryName)
+                            }
+                        </div>
+                    </div>
+                    <div class="grid-row">
+                        <div class="column-half">
+                            Competent authority:
+                        </div>
+                        <div class="column-half">
+                            @if (string.IsNullOrWhiteSpace(Model.TransitStates[i].CompetentAuthorityName))
+                            {
+                                <text>Not selected</text>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(m => m.TransitStates[i].CompetentAuthorityCode)
+                                <text>-</text> @Html.DisplayFor(m => m.TransitStates[i].CompetentAuthorityName)
+                            }
+                        </div>
+                    </div>
+                }
+
+            }
+            else
+            {
+                @ViewBag.SectionIncompleteText
+            }
+        </div>
+    </div>
+</details>

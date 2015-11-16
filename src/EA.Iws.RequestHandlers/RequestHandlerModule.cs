@@ -14,6 +14,7 @@
     using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
     using ImportNotification;
+    using ImportNotification.Summary;
     using Notification;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
@@ -67,6 +68,7 @@
             builder.RegisterType<DecisionRequiredBy>().AsSelf();
             builder.RegisterType<MovementNumberGenerator>().AsSelf();
             builder.RegisterType<NotificationTransactionCalculator>().AsSelf();
+            builder.RegisterType<TransportRouteSummary>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
