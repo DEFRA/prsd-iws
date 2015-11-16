@@ -46,6 +46,8 @@
                 hintText = ParametersResources.Milligrams;
             }
 
+            var idText = "WasteComposition_" + i + "_";
+
             <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
                 @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                 <div>
@@ -63,7 +65,7 @@
                                 var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType);
                             }
                             <div class="column-half">
-                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ParametersResources.Min + placeholderText, title = sectionTitle + ParametersResources.MinConcentration })
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ParametersResources.Min + placeholderText, title = sectionTitle + ParametersResources.MinConcentration, id = idText })
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
                             </div>
                             <div class="column-half">

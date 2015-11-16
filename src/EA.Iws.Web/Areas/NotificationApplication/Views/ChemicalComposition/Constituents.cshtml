@@ -23,8 +23,11 @@
 
     <div class="grid-row form-group">
         <div class="column-half">
+
             @for (var i = 0; i < Model.WasteComposition.Count; i++)
             {
+                var idText = "WasteComposition_" + i + "_";
+
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
                     @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                     <div class="grid-row">
@@ -37,7 +40,7 @@
                             var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].ChemicalCompositionCategory);
                         }
                         <div class="column-half">
-                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ConstituentsResources.Min, title = sectionTitle + ConstituentsResources.MinConcentration })
+                            @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ConstituentsResources.Min, title = sectionTitle + ConstituentsResources.MinConcentration, id = idText })
                             @Html.Gds().TextBoxFor(m => m.WasteComposition[i].ChemicalCompositionCategory, new { type = "hidden" })
                         </div>
                         <div class="column-half">
@@ -47,7 +50,7 @@
                     </div>
                 </div>
             }
-            
+
         </div>
     </div>
 
@@ -69,12 +72,14 @@
           
             @for (int i = 0; i < Model.OtherCodes.Count; i++)
             {
+                var idText = "OtherCodes_" + i + "_";
+
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCodes[i])">
                     @Html.Gds().ValidationMessageFor(m => m.OtherCodes[i])
                     
                     <div><label>Name</label></div>
                     <span>
-                        <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title=@ConstituentsResources.OtherConstituent />
+                        <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title=@ConstituentsResources.OtherConstituent id = @idText/>
                         &nbsp;&nbsp;
                     </span>
 
