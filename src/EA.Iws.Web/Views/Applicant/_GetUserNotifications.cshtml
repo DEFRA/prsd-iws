@@ -71,8 +71,7 @@ else
                     <td>
                         @Html.DisplayFor(m => m[i].NotificationNumber)
                     </td>
-                    <td>
-                        @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model[i].Status)
+                    <td>@DisplayStatus(Model[i].Status)
                     </td>
                     <td>
                         @Model[i].Exporter
