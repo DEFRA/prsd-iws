@@ -1,4 +1,4 @@
-﻿@using EA.Iws.Web.Areas.NotificationApplication.Views
+﻿@using EA.Iws.Web.Areas.AddressBook.Views
 @using EA.Iws.Web.Areas.NotificationApplication.Views.Producer
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.EditProducerViewModel
 @{
@@ -41,7 +41,7 @@
     <div class="form-group no-js-hidden">
         <label class="block-label" for="addressBook">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
-            @CommonResources.AddToAddressBook
+            @AddressBookResources.AddToAddressBook
         </label>
     </div>
 
