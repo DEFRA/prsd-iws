@@ -11,13 +11,21 @@
     {
         public IList<CarrierData> NotificationCarriers { get; set; }
 
-        public Dictionary<int, SelectList> CarrierSelectLists { get; private set; }
+        public SelectList CarrierSelectList
+        {
+            get
+            {
+                return new SelectList(NotificationCarriers, "Id", "Business.Name");
+            }
+        }
 
         public List<Guid?> SelectedItems { get; set; }
 
         public MeansOfTransportViewModel MeansOfTransportViewModel { get; set; }
 
         public int MovementNumber { get; set; }
+
+        public int NumberOfCarriers { get; set; }
 
         public CarrierViewModel()
         {
@@ -26,17 +34,16 @@
         public CarrierViewModel(IList<CarrierData> notificationCarriers, int numberOfCarriers, MeansOfTransportViewModel model, int movementNumber)
         {
             MovementNumber = movementNumber;
-            CarrierSelectLists = new Dictionary<int, SelectList>();
             SelectedItems = new List<Guid?>();
             MeansOfTransportViewModel = model;
-
+            NotificationCarriers = notificationCarriers;
+            NumberOfCarriers = numberOfCarriers;
             for (int i = 0; i < numberOfCarriers; i++)
             {
-                CarrierSelectLists.Add(i, new SelectList(notificationCarriers, "Id", "Business.Name"));
                 SelectedItems.Add(null);
             }
         }
-        
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!SelectedItems.First().HasValue)

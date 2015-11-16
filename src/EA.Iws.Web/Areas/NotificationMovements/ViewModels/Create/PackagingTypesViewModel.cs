@@ -1,13 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create
 {
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
     using Core.PackagingType;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
-    public class PackagingTypesViewModel
+    public class PackagingTypesViewModel : IValidatableObject
     {
         public CheckBoxCollectionViewModel PackagingTypes { get; set; }
         public int MovementNumber { get; set; }
@@ -19,7 +21,7 @@
                 return PackagingTypes
                     .PossibleValues
                     .Where(x => x.Selected)
-                    .Select(x => (PackagingType)System.Convert.ToInt32(x.Value))
+                    .Select(x => (PackagingType)Convert.ToInt32(x.Value))
                     .ToList();
             }
         }
@@ -54,6 +56,14 @@
             PackagingTypes = new CheckBoxCollectionViewModel();
             PackagingTypes.ShowEnumValue = true;
             PackagingTypes.PossibleValues = items;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!SelectedValues.Any())
+            {
+                yield return new ValidationResult("Please select at least one packaging type", new[] { "PackagingTypes" });
+            }
         }
     }
 }

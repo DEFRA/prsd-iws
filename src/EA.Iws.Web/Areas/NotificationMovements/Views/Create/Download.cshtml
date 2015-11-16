@@ -5,13 +5,18 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">Your prenotification is now almost complete</h1>
-    <h2 class="heading-small">Before we consider your prenotification you need to:</h2>
-    <h3>
-        Download the
-        @Html.ActionLink("IwsMovement.doc", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "Movement" }, new { })
-        (approx. 55kb), print, sign and upload it.
-    </h3>
+    <h1 class="heading-large">Download and print your prenotification</h1>
+    <h2 class="heading-small">Before we can consider your prenotification, you'll need to sign it:</h2>
 </header>
+<ol class="list-number">
+    <li>
+        Download the
+        @Html.ActionLink("IWS Movement", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "Movement" }, new { })
+        (.doc) file
+    </li>
+    <li>Print the file</li>
+    <li>Sign it</li>
+</ol>
+        
 
 @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", null, new { @class = "button" })

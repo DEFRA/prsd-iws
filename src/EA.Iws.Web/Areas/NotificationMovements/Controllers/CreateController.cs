@@ -45,13 +45,14 @@
         [ValidateAntiForgeryToken]
         public ActionResult ShipmentDate(Guid notificationId, ShipmentDateViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[ShipmentDateKey] = model.AsDateTime();
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                return View(model);
+            }
 
             return RedirectToAction("Quantity", "Create");
         }
@@ -78,14 +79,15 @@
         [ValidateAntiForgeryToken]
         public ActionResult Quantity(Guid notificationId, QuantityViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[QuantityKey] = model.Quantity;
             TempData[UnitKey] = model.Units;
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                return View(model);
+            }
 
             return RedirectToAction("PackagingTypes", "Create");
         }
@@ -112,13 +114,14 @@
         [ValidateAntiForgeryToken]
         public ActionResult PackagingTypes(Guid notificationId, PackagingTypesViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[PackagingTypesKey] = model.SelectedValues;
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                return View(model);
+            }
 
             return RedirectToAction("NumberOfPackages", "Create");
         }
@@ -144,13 +147,14 @@
         [ValidateAntiForgeryToken]
         public ActionResult NumberOfPackages(Guid notificationId, NumberOfPackagesViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[NumberOfPackagesKey] = model.Number;
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                return View(model);
+            }
 
             return RedirectToAction("NumberOfCarriers", "Create");
         }
@@ -178,13 +182,14 @@
         [ValidateAntiForgeryToken]
         public ActionResult NumberOfCarriers(Guid notificationId, NumberOfCarriersViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[NumberOfCarriersKey] = model.Number;
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                return View(model);
+            }
 
             return RedirectToAction("Carriers", "Create");
         }
@@ -219,6 +224,17 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Carriers(Guid notificationId, CarrierViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                model.MeansOfTransportViewModel = new MeansOfTransportViewModel
+                {
+                    NotificationMeansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId))
+                };
+                
+                return View(model);
+            }
+
             object shipmentDateResult;
             object quantityResult;
             object unitResult;
