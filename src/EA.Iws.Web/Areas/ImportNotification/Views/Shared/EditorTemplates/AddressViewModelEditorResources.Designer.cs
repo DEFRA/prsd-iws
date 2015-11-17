@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Correspondence address.
+        ///   Looks up a localized string similar to Their address.
         /// </summary>
         public static string Title {
             get {

@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tel no.
+        ///   Looks up a localized string similar to Telephone number.
         /// </summary>
         public static string Telephone {
             get {

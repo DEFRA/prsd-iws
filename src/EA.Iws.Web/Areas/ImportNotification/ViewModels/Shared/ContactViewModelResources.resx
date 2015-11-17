@@ -127,7 +127,7 @@
     <value>First and last name</value>
   </data>
   <data name="Telephone" xml:space="preserve">
-    <value>Tel no</value>
+    <value>Telephone number</value>
   </data>
   <data name="TelephoneInvalid" xml:space="preserve">
     <value>Please enter a valid telephone number</value>

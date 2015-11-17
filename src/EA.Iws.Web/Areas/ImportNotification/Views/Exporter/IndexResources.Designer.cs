@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporter - notifier.
+        ///   Looks up a localized string similar to The exporter - notifier.
         /// </summary>
         public static string Title {
             get {

@@ -124,6 +124,6 @@
     <value>Registration number</value>
   </data>
   <data name="Type" xml:space="preserve">
-    <value>Organisation entity type</value>
+    <value>Organisation type</value>
   </data>
 </root>

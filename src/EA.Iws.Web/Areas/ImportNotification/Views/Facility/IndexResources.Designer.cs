@@ -61,11 +61,29 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add {0} facility.
+        ///   Looks up a localized string similar to Add another {0} facility.
+        /// </summary>
+        public static string AddAnotherLink {
+            get {
+                return ResourceManager.GetString("AddAnotherLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a {0} facility.
         /// </summary>
         public static string AddMoreButton {
             get {
                 return ResourceManager.GetString("AddMoreButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a {0} facility.
+        /// </summary>
+        public static string AddPageTitle {
+            get {
+                return ResourceManager.GetString("AddPageTitle", resourceCulture);
             }
         }
         
@@ -79,7 +97,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} facilities.
+        ///   Looks up a localized string similar to Details of the {0} facilities.
         /// </summary>
         public static string Title {
             get {

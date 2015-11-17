@@ -31,7 +31,7 @@
             @Html.Gds().TextBoxFor(m => m.RegistrationNumber, new { @class = "form-control form-control-full" })
         </div>
         <div class="form-group">
-            Type
+            @Html.Gds().LabelFor(m => m.Type, showOptionalLabel:false)
             <fieldset>
                 <label class="block-label" for="@limitedCompanyId">
                     @Html.RadioButtonFor(m => m.Type, BusinessType.LimitedCompany, new { id = limitedCompanyId })

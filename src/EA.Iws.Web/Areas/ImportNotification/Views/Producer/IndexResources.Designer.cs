@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste generator - producer.
+        ///   Looks up a localized string similar to The waste generator - producer.
         /// </summary>
         public static string Title {
             get {

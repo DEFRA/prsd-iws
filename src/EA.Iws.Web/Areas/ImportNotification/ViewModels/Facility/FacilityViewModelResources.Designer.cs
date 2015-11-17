@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Organisation entity type.
+        ///   Looks up a localized string similar to Organisation type.
         /// </summary>
         public static string Type {
             get {

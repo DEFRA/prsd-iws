@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importer - consignee.
+        ///   Looks up a localized string similar to The importer - consignee.
         /// </summary>
         public static string Title {
             get {
