@@ -8,6 +8,16 @@
         public ImportNotificationMapping()
         {
             ToTable("ImportNotification", "Notification");
+
+            Property(x => x.NotificationNumber)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            Property(x => x.NotificationType)
+                .IsRequired();
+
+            Property(x => x.CompetentAuthority.Value)
+                .IsRequired();
         }
     }
 }
