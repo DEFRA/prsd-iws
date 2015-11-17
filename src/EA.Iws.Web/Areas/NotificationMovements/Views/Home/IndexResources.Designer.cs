@@ -115,6 +115,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit a prenotification.
+        /// </summary>
+        public static string EditPrenotification {
+            get {
+                return ResourceManager.GetString("EditPrenotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of shipments used:.
         /// </summary>
         public static string NumberUsed {
