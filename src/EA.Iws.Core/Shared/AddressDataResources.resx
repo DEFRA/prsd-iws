@@ -121,7 +121,7 @@
     <value>Address line 1</value>
   </data>
   <data name="Address1Required" xml:space="preserve">
-    <value>The Address line 1 field is required.</value>
+    <value>Please enter the first line of your address</value>
   </data>
   <data name="Address2" xml:space="preserve">
     <value>Address line 2</value>
@@ -130,7 +130,7 @@
     <value>Town or city</value>
   </data>
   <data name="CityRequired" xml:space="preserve">
-    <value>The Town or city field is required.</value>
+    <value>Please enter your town or city</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country</value>

@@ -9,25 +9,25 @@
     {
         public Guid Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(EditApplicantDetailsResources), ErrorMessageResourceName = "FirstNameRequired")]
         [Display(Name = "FirstName", ResourceType = typeof(EditApplicantDetailsResources))]
         [StringLength(50)]
         [DataType(DataType.Text)]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(EditApplicantDetailsResources), ErrorMessageResourceName = "LastNameRequired")]
         [StringLength(50)]
         [DataType(DataType.Text)]
         [Display(Name = "LastName", ResourceType = typeof(EditApplicantDetailsResources))]
         public string Surname { get; set; }
 
-        [Required]
-        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessageResourceType = typeof(EditApplicantDetailsResources), ErrorMessageResourceName = "TelephoneNumberRequired")]
+        [DataType(DataType.PhoneNumber, ErrorMessageResourceType = typeof(EditApplicantDetailsResources), ErrorMessageResourceName = "TelephoneFormatValidation")]
         [Display(Name = "TelephoneNumber", ResourceType = typeof(EditApplicantDetailsResources))]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessageResourceType = typeof(EditApplicantDetailsResources), ErrorMessageResourceName = "EmailRequired")]
+        [EmailAddress(ErrorMessageResourceType = typeof(EditApplicantDetailsResources), ErrorMessageResourceName = "EmailFormatValidation")]
         [Display(Name = "Email", ResourceType = typeof(EditApplicantDetailsResources))]
         public string Email { get; set; }
 

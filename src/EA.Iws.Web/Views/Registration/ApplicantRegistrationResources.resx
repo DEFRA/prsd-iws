@@ -123,6 +123,9 @@
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>Please retype your password</value>
+  </data>
   <data name="ConfirmTnCs" xml:space="preserve">
     <value>Please confirm that you've read and accepted the terms and conditions</value>
   </data>
@@ -132,8 +135,17 @@
   <data name="Email" xml:space="preserve">
     <value>Email address</value>
   </data>
+  <data name="EmailFormatValidation" xml:space="preserve">
+    <value>Please enter a valid email address</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Please enter your email address</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>Please enter your first name</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>About you and your organisation</value>
@@ -144,11 +156,20 @@
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
   </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Please enter your last name</value>
+  </data>
   <data name="OrganisationName" xml:space="preserve">
     <value>Organisation name</value>
   </data>
+  <data name="OrganisationNameRequired" xml:space="preserve">
+    <value>Please enter your organisation name</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordFormatValidation" xml:space="preserve">
+    <value>Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter and one number</value>
   </data>
   <data name="PasswordHint" xml:space="preserve">
     <value>Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter and one number</value>
@@ -156,11 +177,20 @@
   <data name="PasswordLength" xml:space="preserve">
     <value>Your password must be at least {2} characters long</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Please choose and enter a password</value>
+  </data>
   <data name="PasswordsDoNotMatch" xml:space="preserve">
     <value>Please make sure your passwords match</value>
   </data>
+  <data name="TelephoneFormatValidation" xml:space="preserve">
+    <value>Please enter a valid telephone number</value>
+  </data>
   <data name="TelephoneNumber" xml:space="preserve">
     <value>Telephone number</value>
+  </data>
+  <data name="TelephoneNumberRequired" xml:space="preserve">
+    <value>Please enter your telephone number</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Register for International Waste Shipping</value>

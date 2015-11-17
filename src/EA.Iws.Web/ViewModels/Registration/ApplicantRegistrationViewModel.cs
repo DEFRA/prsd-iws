@@ -12,41 +12,41 @@
             Address = new AddressData();
         }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "FirstNameRequired")]
         [Display(Name = "FirstName", ResourceType = typeof(ApplicantRegistrationResources))]
         [StringLength(50)]
         [DataType(DataType.Text)]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "LastNameRequired")]
         [StringLength(50)]
         [DataType(DataType.Text)]
         [Display(Name = "LastName", ResourceType = typeof(ApplicantRegistrationResources))]
         public string Surname { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "OrganisationNameRequired")]
         [StringLength(80)]
         [DataType(DataType.Text)]
         [Display(Name = "OrganisationName", ResourceType = typeof(ApplicantRegistrationResources))]
         public string OrganisationName { get; set; }
 
-        [Required]
-        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "TelephoneNumberRequired")]
+        [DataType(DataType.PhoneNumber, ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "TelephoneFormatValidation")]
         [Display(Name = "TelephoneNumber", ResourceType = typeof(ApplicantRegistrationResources))]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "EmailRequired")]
+        [EmailAddress(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "EmailFormatValidation")]
         [Display(Name = "Email", ResourceType = typeof(ApplicantRegistrationResources))]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "PasswordRequired")]
         [StringLength(100, ErrorMessageResourceName = "PasswordLength", ErrorMessageResourceType = typeof(ApplicantRegistrationResources), MinimumLength = 8)]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password, ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "PasswordFormatValidation")]
         [Display(Name = "Password", ResourceType = typeof(ApplicantRegistrationResources))]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "ConfirmPasswordRequired")]
         [DataType(DataType.Password)]
         [Display(Name = "ConfirmPassword", ResourceType = typeof(ApplicantRegistrationResources))]
         [Compare("Password", ErrorMessageResourceName = "PasswordsDoNotMatch", ErrorMessageResourceType = typeof(ApplicantRegistrationResources))]

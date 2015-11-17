@@ -5,13 +5,13 @@
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "EmailRequired")]
         [Display(Name = "Email", ResourceType = typeof(LoginResources))]
-        [EmailAddress]
+        [EmailAddress(ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "EmailFormatValidation")]
         public string Email { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "PasswordRequired")]
+        [DataType(DataType.Password, ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "PasswordFormatValidation")]
         [Display(Name = "Password", ResourceType = typeof(LoginResources))]
         public string Password { get; set; }
     }
