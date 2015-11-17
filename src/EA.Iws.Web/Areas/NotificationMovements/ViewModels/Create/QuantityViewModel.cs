@@ -41,6 +41,7 @@
         public IList<ShipmentQuantityUnits> AvailableUnits { get; set; }
 
         [Display(Name = "Actual quantity")]
+        [Required(ErrorMessage = "Please enter a number")]
         [IsValidNumber(maxPrecision: 18, ErrorMessage = "The actual quantity must be a valid number")]
         public string Quantity { get; set; }
 

@@ -17,12 +17,15 @@
         {
             ValidationResult validationResult = new ValidationResult("Please enter a valid number");
 
-            decimal number;
-            if (decimal.TryParse(value.ToString(), out number))
+            if (value != null)
             {
-                if (NumberIsValid(number))
+                decimal number;
+                if (decimal.TryParse(value.ToString(), out number))
                 {
-                    validationResult = ValidationResult.Success;
+                    if (NumberIsValid(number))
+                    {
+                        validationResult = ValidationResult.Success;
+                    }
                 }
             }
 
