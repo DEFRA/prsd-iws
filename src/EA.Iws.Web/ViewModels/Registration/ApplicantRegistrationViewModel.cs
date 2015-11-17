@@ -36,7 +36,7 @@
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "EmailRequired")]
-        [EmailAddress(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "EmailFormatValidation")]
+        [EmailAddress(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "EmailFormatValidation", ErrorMessage = null)]
         [Display(Name = "Email", ResourceType = typeof(ApplicantRegistrationResources))]
         public string Email { get; set; }
 
