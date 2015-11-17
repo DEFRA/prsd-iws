@@ -95,6 +95,7 @@
     <Compile Include="ImportNotification\Summary\StateOfExport.cs" />
     <Compile Include="ImportNotification\Summary\TransitState.cs" />
     <Compile Include="ImportNotification\Summary\WasteCode.cs" />
+    <Compile Include="ImportNotification\Summary\WasteCodeSelection.cs" />
     <Compile Include="ImportNotification\Summary\WasteOperation.cs" />
     <Compile Include="ImportNotification\Summary\WasteType.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />

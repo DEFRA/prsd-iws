@@ -69,6 +69,7 @@
             builder.RegisterType<MovementNumberGenerator>().AsSelf();
             builder.RegisterType<NotificationTransactionCalculator>().AsSelf();
             builder.RegisterType<TransportRouteSummary>().AsSelf();
+            builder.RegisterType<WasteTypeSummary>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();

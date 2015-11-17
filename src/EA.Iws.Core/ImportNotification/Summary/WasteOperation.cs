@@ -4,8 +4,6 @@
 
     public class WasteOperation
     {
-        public string DisposalOrRecoveryPrefix { get; set; }
-
         public IList<int> OperationCodes { get; set; }
 
         public string TechnologyEmployed { get; set; }

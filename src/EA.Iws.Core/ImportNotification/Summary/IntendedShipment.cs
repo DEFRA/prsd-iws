@@ -14,5 +14,14 @@
         public DateTime? Start { get; set; }
 
         public DateTime? End { get; set; }
+
+        public bool IsEmpty()
+        {
+            return !Units.HasValue &&
+                   !TotalShipments.HasValue &&
+                   !Quantity.HasValue &&
+                   !Start.HasValue &&
+                   !End.HasValue;
+        }
     }
 }

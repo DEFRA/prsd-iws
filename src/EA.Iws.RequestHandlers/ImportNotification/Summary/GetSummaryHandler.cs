@@ -18,17 +18,20 @@
         private readonly Domain.ICountryRepository countryRepository;
         private readonly IDraftImportNotificationRepository draftRepository;
         private readonly TransportRouteSummary transportRouteSummary;
+        private readonly WasteTypeSummary wasteTypeSummary;
         private IList<Domain.Country> countries = new List<Domain.Country>();
 
         public GetSummaryHandler(IImportNotificationRepository importNotificationRepository,
             Domain.ICountryRepository countryRepository,
             IDraftImportNotificationRepository draftRepository,
-            TransportRouteSummary transportRouteSummary)
+            TransportRouteSummary transportRouteSummary,
+            WasteTypeSummary wasteTypeSummary)
         {
             this.importNotificationRepository = importNotificationRepository;
             this.countryRepository = countryRepository;
             this.draftRepository = draftRepository;
             this.transportRouteSummary = transportRouteSummary;
+            this.wasteTypeSummary = wasteTypeSummary;
         }
 
         public async Task<InProgressImportNotificationSummary> HandleAsync(GetSummary message)
@@ -48,9 +51,12 @@
                 Facilities = await GetFacilities(message.Id),
                 Importer = await GetImporter(message.Id),
                 Producer = await GetProducer(message.Id),
+                IntendedShipment = await GetIntendedShipment(message.Id),
                 StateOfExport = transportRoute.StateOfExport,
                 StateOfImport = transportRoute.StateOfImport,
-                TransitStates = transportRoute.TransitStates
+                TransitStates = transportRoute.TransitStates,
+                WasteOperation = await GetWasteOperation(message.Id),
+                WasteType = await wasteTypeSummary.GetWasteType(message.Id)
             };
             
             return summary;
@@ -115,6 +121,31 @@
                 IsActualSite = f.IsActualSite
             }).ToArray();
         }
+
+        private async Task<IntendedShipment> GetIntendedShipment(Guid id)
+        {
+            var intendedShipment = await draftRepository.GetDraftData<Draft.Shipment>(id);
+
+            return new IntendedShipment
+            {
+                TotalShipments = intendedShipment.TotalShipments,
+                Start = intendedShipment.StartDate,
+                End = intendedShipment.EndDate,
+                Quantity = intendedShipment.Quantity,
+                Units = intendedShipment.Unit
+            };
+        }
+
+        private async Task<WasteOperation> GetWasteOperation(Guid id)
+        {
+            var wasteOperation = await draftRepository.GetDraftData<Draft.WasteOperation>(id);
+
+            return new WasteOperation
+            {
+                OperationCodes = wasteOperation.OperationCodes,
+                TechnologyEmployed = wasteOperation.TechnologyEmployed
+            };
+        } 
 
         private Address ConvertAddress(Draft.Address address)
         {

@@ -26,6 +26,8 @@
 
         public StateOfImport StateOfImport { get; set; }
 
+        public IntendedShipment IntendedShipment { get; set; }
+
         public WasteOperation WasteOperation { get; set; }
 
         public WasteType WasteType { get; set; }

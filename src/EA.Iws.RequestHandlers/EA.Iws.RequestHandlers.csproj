@@ -133,6 +133,7 @@
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainer.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteLookups.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteSummary.cs" />
+    <Compile Include="ImportNotification\Summary\WasteTypeSummary.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitStateHandler.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodesHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
