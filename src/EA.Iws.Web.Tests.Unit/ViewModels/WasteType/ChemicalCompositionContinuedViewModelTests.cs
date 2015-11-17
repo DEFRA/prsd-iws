@@ -281,7 +281,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a name for the 'Other' component"));
+            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a name for the constituent"));
         }
 
         [Theory]

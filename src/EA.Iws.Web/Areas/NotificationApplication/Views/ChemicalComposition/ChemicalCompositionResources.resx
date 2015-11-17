@@ -160,7 +160,7 @@
     <value>NA</value>
   </data>
   <data name="OtherNameRequired" xml:space="preserve">
-    <value>Please enter a name for the 'Other' component {0}</value>
+    <value>Please enter a name for the constituent</value>
   </data>
   <data name="Step1" xml:space="preserve">
     <value>Step 1 of 3</value>

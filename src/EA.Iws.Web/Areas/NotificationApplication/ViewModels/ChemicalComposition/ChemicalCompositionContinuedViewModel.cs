@@ -192,7 +192,7 @@
 
             foreach (var item in OtherCodes)
             {
-                if (!string.IsNullOrEmpty(item.Constituent))
+                if (!string.IsNullOrEmpty(item.Constituent) || !string.IsNullOrEmpty(item.MinConcentration) || !string.IsNullOrEmpty(item.MaxConcentration))
                 {
                     result = true;
                 }
