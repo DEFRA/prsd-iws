@@ -718,6 +718,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_TransitStates.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_StateOfImport.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Edit\Index.cshtml" />
+    <Content Include="Areas\Movement\Views\EditDate\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1124,11 +1125,18 @@
     </Compile>
     <Compile Include="Areas\Movement\Controllers\CompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
+    <Compile Include="Areas\Movement\Controllers\EditDateController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Movement\ViewModels\EditDate\EditDateViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SubmitViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Movement\Views\EditDate\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Movement\Views\Home\SummaryResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2078,6 +2086,10 @@
     <EmbeddedResource Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SubmitViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\Views\EditDate\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Movement\Views\Home\SummaryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

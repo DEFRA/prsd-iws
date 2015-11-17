@@ -26,5 +26,17 @@
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Guid notificationId, EditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "EditDate", new { area = "Movement", id = model.Shipments.SelectedValue });
+        }
     }
 }
