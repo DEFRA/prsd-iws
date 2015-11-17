@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This shipment is not new and cannot have a prenotification document uploaded.
+        ///   Looks up a localized string similar to Please enter a valid shipment number: it should not be the same as an existing number.
         /// </summary>
         public static string NotNew {
             get {
@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number provided was greater than the total number of shipments for this notification.
+        ///   Looks up a localized string similar to Please enter a valid shipment number: it should not be more than your total number of shipments.
         /// </summary>
         public static string OutOfRange {
             get {
