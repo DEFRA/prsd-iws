@@ -51,7 +51,7 @@
 
             await mediator.SendAsync(new SetDraftData<TransitStateCollection>(id, transitStateCollection));
 
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

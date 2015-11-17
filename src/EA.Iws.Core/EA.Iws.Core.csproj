@@ -73,6 +73,7 @@
     <Compile Include="ImportNotification\Draft\Facility.cs" />
     <Compile Include="ImportNotification\Draft\Importer.cs" />
     <Compile Include="ImportNotification\Draft\Exporter.cs" />
+    <Compile Include="ImportNotification\Draft\Preconsented.cs" />
     <Compile Include="ImportNotification\Draft\Producer.cs" />
     <Compile Include="ImportNotification\Draft\StateOfExport.cs" />
     <Compile Include="ImportNotification\Draft\StateOfImport.cs" />

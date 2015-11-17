@@ -73,7 +73,7 @@
 
             await mediator.SendAsync(new SetDraftData<FacilityCollection>(id, facilityCollection));
 
-            return RedirectToAction("Index", "WasteType");
+            return RedirectToAction("Index", "Shipment");
         }
 
         [HttpPost]
