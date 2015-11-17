@@ -24,12 +24,17 @@
                 <td>@IndexResources.OriginalDateHeading</td>
                 <td>@Html.Gds().DisplayDate(new DateTime(2015, 1, 1))</td>
             </tr>
+            <tr>
+                <td>@string.Format(IndexResources.PreviousDateHeading, 1)</td>
+                <td>@Html.Gds().DisplayDate(new DateTime(2015, 1, 4))</td>
+            </tr>
         </tbody>
     </table>
 </div>
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>
             <legend>
