@@ -537,7 +537,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     margin-top: 15px !important;
 }
 
-.hide-for-initial-load {
+.js-enabled .hide-for-initial-load {
     display: none;
 }
 
