@@ -133,6 +133,15 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid password.
+        /// </summary>
+        public static string PasswordFormatValidation {
+            get {
+                return ResourceManager.GetString("PasswordFormatValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter your password.
         /// </summary>
         public static string PasswordRequired {

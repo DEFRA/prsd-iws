@@ -141,6 +141,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordFormatValidation" xml:space="preserve">
+    <value>Please enter a valid password</value>
+  </data>
   <data name="PasswordRequired" xml:space="preserve">
     <value>Please enter your password</value>
   </data>

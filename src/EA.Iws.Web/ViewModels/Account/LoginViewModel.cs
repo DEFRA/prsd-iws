@@ -7,7 +7,7 @@
     {
         [Required(ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "EmailRequired")]
         [Display(Name = "Email", ResourceType = typeof(LoginResources))]
-        [EmailAddress(ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "EmailFormatValidation")]
+        [EmailAddress(ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "EmailFormatValidation", ErrorMessage = null)]
         public string Email { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(LoginResources), ErrorMessageResourceName = "PasswordRequired")]
