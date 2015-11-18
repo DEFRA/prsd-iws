@@ -82,6 +82,14 @@
                 };
             }
 
+            if (wasteCodes == null)
+            {
+                return new WasteCodeSelection
+                {
+                    WasteCodes = new List<WasteCode>()
+                };
+            }
+
             return new WasteCodeSelection
             {
                 WasteCodes = codeLookups.Where(c => wasteCodes.Contains(c.Id)).Select(wc => new WasteCode
