@@ -1,12 +1,13 @@
 ﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Views.NewNotification
 @model EA.Iws.Web.ViewModels.NewNotification.NotificationTypeViewModel
 
 @{
-    ViewBag.Title = "Choose your type of notification";
+    ViewBag.Title = NotificationTypeResources.Title;
 }
 
 <header class="hgroup text">
-    <h1 class="heading-large">What type of waste shipment notification are you applying for?</h1>
+    <h1 class="heading-large">@NotificationTypeResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -31,8 +32,7 @@
                 if (isDisposal)
                 {
                     <div class="panel-indent js-hidden" id="disposal-message">
-                        If you are shipping for disposal then we advise you to contact your relevant competent authority before completing your notification application.
-
+                        @NotificationTypeResources.DisposalMessage
                         <p>@Model.CompetentAuthorityContactInfo</p>
                     </div>
                 }

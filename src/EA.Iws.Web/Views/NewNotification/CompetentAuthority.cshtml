@@ -1,11 +1,12 @@
-﻿@model EA.Iws.Web.ViewModels.NewNotification.CompetentAuthorityChoiceViewModel
+﻿@using EA.Iws.Web.Views.NewNotification
+@model EA.Iws.Web.ViewModels.NewNotification.CompetentAuthorityChoiceViewModel
 @{
-    ViewBag.Title = "Choose your competent authority";
+    ViewBag.Title = CompetentAuthorityResources.Title;
 }
 
 <header class="hgroup text">
-    <h1 class="heading-large">Which competent authority are you applying to?</h1>
-    <p>Select the competent authority for the country you are exporting waste from:</p>
+    <h1 class="heading-large">@CompetentAuthorityResources.Header</h1>
+    <p>@CompetentAuthorityResources.HeaderDescription</p>
 </header>
 
 @using (Html.BeginForm())

@@ -1,15 +1,14 @@
-﻿@model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
+﻿@using EA.Iws.Web.Views.NewNotification
+@model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
 
 <p>
-    You will need a financial guarantee in place before any shipments can be made.
+    @SepaFinancialGuaranteeResources.NeedFG
 </p>
 <p>
-    Ensure you submit your original Financial Guarantee with your notification package.
+    @SepaFinancialGuaranteeResources.SubmitFG
 </p>
 <p>
-    If you intend to submit a bank or parent company guarantee, print either the 
-    @Html.ActionLink("Bank Guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
-    or
-    @Html.ActionLink("Parent Company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
-    and ask your bank or parent company to complete the guarantee.
+    @Html.Raw(string.Format(SepaFinancialGuaranteeResources.PrintMessage,
+        Html.ActionLink(SepaFinancialGuaranteeResources.BankGuaranteeTemplate, "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null),
+        Html.ActionLink(SepaFinancialGuaranteeResources.ParentCompanyTemplate, "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)))
 </p>

@@ -1,15 +1,16 @@
 ﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Web.Views.NewNotification
 @model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
 @{
-    ViewBag.Title = "Your notification number";
+    ViewBag.Title = CreatedResources.Title;
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <header class="hgroup">
-        <h1 class="heading-large">Your notification number</h1>
-        <p>Here is your notification number:</p>
+        <h1 class="heading-large">@CreatedResources.Header</h1>
+        <p>@CreatedResources.HeaderDescription</p>
     </header>
     <div class="panel-indent">
         <span class="heading-large">
@@ -18,16 +19,14 @@
     </div>
     @Html.HiddenFor(m => m.NotificationId)
     <div class="form-group">
-        <p>
-            Your unique notification number has been automatically saved.
-        </p>
+        <p>@CreatedResources.NotificationNumberSaved</p>
         @switch (Model.CompetentAuthority)
         {
             case CompetentAuthority.Scotland:
                 @Html.Partial("_SepaFinancialGuarantee")
                 break;
             default:
-            @Html.Partial("_GeneralFinancialGuarantee")
+                @Html.Partial("_GeneralFinancialGuarantee")
                 break;
         }
     </div>

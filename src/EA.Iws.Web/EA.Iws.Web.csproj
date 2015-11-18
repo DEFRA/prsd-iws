@@ -1838,6 +1838,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LandingPageResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewNotification\CompetentAuthorityResources.Designer.cs" />
+    <Compile Include="Views\NewNotification\CreatedResources.Designer.cs" />
+    <Compile Include="Views\NewNotification\GeneralFinancialGuaranteeResources.Designer.cs" />
+    <Compile Include="Views\NewNotification\NotificationTypeResources.Designer.cs" />
+    <Compile Include="Views\NewNotification\SepaFinancialGuaranteeResources.Designer.cs" />
     <Compile Include="Views\Registration\ApplicantRegistrationResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2440,6 +2445,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LandingPageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewNotification\CompetentAuthorityResources.resx" />
+    <EmbeddedResource Include="Views\NewNotification\CreatedResources.resx" />
+    <EmbeddedResource Include="Views\NewNotification\GeneralFinancialGuaranteeResources.resx" />
+    <EmbeddedResource Include="Views\NewNotification\NotificationTypeResources.resx" />
+    <EmbeddedResource Include="Views\NewNotification\SepaFinancialGuaranteeResources.resx" />
     <EmbeddedResource Include="Views\Registration\ApplicantRegistrationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicantRegistrationResources.Designer.cs</LastGenOutput>
