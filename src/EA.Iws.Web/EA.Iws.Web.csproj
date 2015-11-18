@@ -1152,6 +1152,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Movement\Views\Submit\SuccessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\YesNoEnum.cs" />
     <Compile Include="Areas\Movement\Views\Submit\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2112,6 +2117,10 @@
     <EmbeddedResource Include="Areas\Movement\Views\Submit\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\Views\Submit\SuccessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\ViewModels\WasteCodes\WasteCodesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

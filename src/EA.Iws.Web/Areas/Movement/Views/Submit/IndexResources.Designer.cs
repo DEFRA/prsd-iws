@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.Movement.Views.Submit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload your signed prenotification document.
+        ///   Looks up a localized string similar to Upload your signed prenotification.
         /// </summary>
         public static string Title {
             get {

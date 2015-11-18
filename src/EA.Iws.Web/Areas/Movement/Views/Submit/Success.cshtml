@@ -1,11 +1,13 @@
-﻿@model EA.Iws.Web.Areas.Movement.ViewModels.SuccessViewModel
+﻿@using Resource = EA.Iws.Web.Areas.Movement.Views.Submit.SuccessResources
+@model EA.Iws.Web.Areas.Movement.ViewModels.SuccessViewModel
 @{
-    ViewBag.Title = "Movement successful";
+    ViewBag.Title = Resource.Title;
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">You have successfully prenotified us of shipment @Model.MovementNumber</h1>
+    <h1 class="heading-large">@Resource.MainHeading @Model.MovementNumber</h1>
 </header>
+<p>@Resource.BodyText</p>
 
 @Html.HiddenFor(m => m.NotificationId)
 

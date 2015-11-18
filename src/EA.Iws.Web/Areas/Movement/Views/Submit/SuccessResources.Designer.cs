@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Movement.ViewModels.Submit {
+namespace EA.Iws.Web.Areas.Movement.Views.Submit {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.Submit {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SubmitViewModelResources {
+    public class SuccessResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SubmitViewModelResources() {
+        internal SuccessResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.Submit {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Movement.ViewModels.Submit.SubmitViewModelResources", typeof(SubmitViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Movement.Views.Submit.SuccessResources", typeof(SuccessResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.Submit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please make sure your prenotification is signed before you upload it.
+        ///   Looks up a localized string similar to Your prenotification is now complete.
         /// </summary>
-        public static string File {
+        public static string BodyText {
             get {
-                return ResourceManager.GetString("File", resourceCulture);
+                return ResourceManager.GetString("BodyText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please upload the signed copy of the prenotification document.
+        ///   Looks up a localized string similar to You&apos;ve successfully prenotified us of shipment .
         /// </summary>
-        public static string FileRequired {
+        public static string MainHeading {
             get {
-                return ResourceManager.GetString("FileRequired", resourceCulture);
+                return ResourceManager.GetString("MainHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prenotification successful.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }
