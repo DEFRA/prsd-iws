@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Domain.NotificationConsent;
 
-    public class NotificationConsentRepository : INotificationConsentRepository
+    internal class NotificationConsentRepository : INotificationConsentRepository
     {
         private readonly IwsContext context;
 

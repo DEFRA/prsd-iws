@@ -9,7 +9,7 @@
     using DataAccess;
     using Domain.AddressBook;
 
-    public class AddressBookRepository : IAddressBookRepository
+    internal class AddressBookRepository : IAddressBookRepository
     {
         private readonly IwsContext context;
 

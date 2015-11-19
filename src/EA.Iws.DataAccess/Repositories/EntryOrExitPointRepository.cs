@@ -8,7 +8,7 @@
     using Domain;
     using Domain.TransportRoute;
 
-    public class EntryOrExitPointRepository : IEntryOrExitPointRepository
+    internal class EntryOrExitPointRepository : IEntryOrExitPointRepository
     {
         private readonly IwsContext context;
 

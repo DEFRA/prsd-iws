@@ -8,7 +8,7 @@
     using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
 
-    public class NotificationTransactionRepository : INotificationTransactionRepository
+    internal class NotificationTransactionRepository : INotificationTransactionRepository
     {
         private readonly IwsContext context;
 

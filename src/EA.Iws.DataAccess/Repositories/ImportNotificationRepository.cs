@@ -5,16 +5,22 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Domain;
     using Domain.ImportNotification;
     using Prsd.Core;
+    using Prsd.Core.Domain;
 
-    public class ImportNotificationRepository : IImportNotificationRepository
+    internal class ImportNotificationRepository : IImportNotificationRepository
     {
         private readonly IwsContext context;
+        private readonly IUserContext userContext;
+        private readonly IInternalUserRepository internalUserRepository;
 
-        public ImportNotificationRepository(IwsContext context)
+        public ImportNotificationRepository(IwsContext context, IUserContext userContext, IInternalUserRepository internalUserRepository)
         {
             this.context = context;
+            this.userContext = userContext;
+            this.internalUserRepository = internalUserRepository;
         }
 
         public async Task<bool> NotificationNumberExists(string number)
@@ -44,8 +50,12 @@
 
         public async Task<IEnumerable<ImportNotification>> SearchByNumber(string number)
         {
+            var user = await internalUserRepository.GetByUserId(userContext.UserId);
+            var competentAuthority = user.CompetentAuthority.Value;
+
             var notifications =
-                await context.ImportNotifications.Where(n => n.NotificationNumber.Contains(number))
+                await context.ImportNotifications
+                .Where(n => n.CompetentAuthority.Value == competentAuthority && n.NotificationNumber.Contains(number))
                 .ToArrayAsync();
 
             return notifications;
