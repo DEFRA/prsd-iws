@@ -44,10 +44,6 @@
             {
                 await SetNotificationReceived(model);
             }
-            else if (model.Command == KeyDatesStatusEnum.PaymentReceived)
-            {
-                await SetPaymentReceived(model);
-            }
             else if (model.Command == KeyDatesStatusEnum.AssessmentCommenced)
             {
                 await SetAssessmentCommenced(model);
@@ -88,14 +84,6 @@
             await mediator.SendAsync(setNotificationComplete);
         }
 
-        private async Task SetPaymentReceived(DateInputViewModel model)
-        {
-            var setPaymentReceivedDate = new SetPaymentReceivedDate(model.NotificationId,
-                model.NewDate.AsDateTime().GetValueOrDefault());
-
-            await mediator.SendAsync(setPaymentReceivedDate);
-        }
-
         private async Task SetNotificationReceived(DateInputViewModel model)
         {
             var setNotificationReceivedDate = new SetNotificationReceivedDate(model.NotificationId,
@@ -128,10 +116,6 @@
             {
                 case KeyDatesStatusEnum.NotificationReceived:
                     model.NewDate = model.NotificationReceivedDate;
-                    break;
-
-                case KeyDatesStatusEnum.PaymentReceived:
-                    model.NewDate = model.PaymentReceivedDate;
                     break;
 
                 case KeyDatesStatusEnum.AssessmentCommenced:

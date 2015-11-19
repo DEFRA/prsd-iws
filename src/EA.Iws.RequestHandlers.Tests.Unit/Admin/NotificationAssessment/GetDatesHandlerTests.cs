@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Domain;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using FakeItEasy;
     using RequestHandlers.Admin.NotificationAssessment;
@@ -15,6 +15,8 @@
 
     public class GetDatesHandlerTests
     {
+        private readonly TestIwsContext context = new TestIwsContext();
+
         private readonly Guid notificationId1 = new Guid("91E55968-E01A-4015-891D-B613820B50AB");
         private readonly DateTime receivedDate = new DateTime(2015, 8, 1);
         private readonly Guid notificationId2 = new Guid("35D538A0-1FD9-4C4A-AB75-A9F81CE5E67A");
@@ -27,11 +29,12 @@
 
         public GetDatesHandlerTests()
         {
-            var context = new TestIwsContext();
-            
             var decisionRequiredBy = A.Fake<DecisionRequiredBy>();
             var notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
             var notificationAssessmentRepository = A.Fake<INotificationAssessmentRepository>();
+            var transactionRepository = A.Fake<INotificationTransactionRepository>();
+            var transactionCalculator = A.Fake<NotificationTransactionCalculator>();
+            var chargeCalculator = A.Fake<INotificationChargeCalculator>();
 
             var assessment1 = new NotificationAssessment(notificationId1);
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.NotificationReceivedDate, receivedDate, assessment1.Dates);
@@ -62,12 +65,18 @@
                 new NotificationDatesMap(), 
                 decisionRequiredBy, 
                 notificationAssessmentRepository, 
-                notificationApplicationRepository);
+                notificationApplicationRepository,
+                transactionRepository,
+                transactionCalculator,
+                chargeCalculator);
+            
+            A.CallTo(() => chargeCalculator.GetValue(A<PricingStructure[]>.Ignored, A<NotificationApplication>.Ignored, A<ShipmentInfo>.Ignored)).Returns(200.00m);
         }
 
         [Fact]
         public async Task SetsNotificationId()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId1 });
             var message = new GetDates(notificationId1);
 
             var result = await handler.HandleAsync(message);
@@ -78,6 +87,7 @@
         [Fact]
         public async Task HasReceivedDate_SetsReceivedDate()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId1 });
             var message = new GetDates(notificationId1);
 
             var result = await handler.HandleAsync(message);
@@ -88,6 +98,7 @@
         [Fact]
         public async Task HasNoReceivedDate_ReceivedDateIsNull()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId2 });
             var message = new GetDates(notificationId2);
 
             var result = await handler.HandleAsync(message);
@@ -96,18 +107,9 @@
         }
 
         [Fact]
-        public async Task HasPaymentDate_SetsPaymentDate()
-        {
-            var message = new GetDates(notificationId1);
-
-            var result = await handler.HandleAsync(message);
-
-            Assert.Equal(paymentDate, result.PaymentReceivedDate);
-        }
-
-        [Fact]
         public async Task HasNoPaymentDate_PaymentDateIsNull()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId2 });
             var message = new GetDates(notificationId2);
 
             var result = await handler.HandleAsync(message);
@@ -118,6 +120,7 @@
         [Fact]
         public async Task HasCommencementDate_SetsCommencementDate()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId1 });
             var message = new GetDates(notificationId1);
 
             var result = await handler.HandleAsync(message);
@@ -128,6 +131,7 @@
         [Fact]
         public async Task HasNoCommencementDate_CommencementDateIsNull()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId2 });
             var message = new GetDates(notificationId2);
 
             var result = await handler.HandleAsync(message);
@@ -138,6 +142,7 @@
         [Fact]
         public async Task HasCommencementDate_SetsNameOfOfficer()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId1 });
             var message = new GetDates(notificationId1);
 
             var result = await handler.HandleAsync(message);
@@ -148,6 +153,7 @@
         [Fact]
         public async Task HasNoCommencementDate_NameOfOfficerIsNull()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId2 });
             var message = new GetDates(notificationId2);
 
             var result = await handler.HandleAsync(message);
@@ -158,6 +164,7 @@
         [Fact]
         public async Task HasCompletedDate_SetsCompletedDate()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId1 });
             var message = new GetDates(notificationId1);
 
             var result = await handler.HandleAsync(message);
@@ -168,6 +175,7 @@
         [Fact]
         public async Task HasNoCompletedDate_CompletedDateIsNull()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId2 });
             var message = new GetDates(notificationId2);
 
             var result = await handler.HandleAsync(message);
@@ -178,6 +186,7 @@
         [Fact]
         public async Task HasTransmitDate_SetsTransmitDate()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId1 });
             var message = new GetDates(notificationId1);
 
             var result = await handler.HandleAsync(message);
@@ -188,6 +197,7 @@
         [Fact]
         public async Task HasNoTransmitDate_TransmitDateIsNull()
         {
+            context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = notificationId2 });
             var message = new GetDates(notificationId2);
 
             var result = await handler.HandleAsync(message);

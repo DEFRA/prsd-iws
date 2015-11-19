@@ -10,6 +10,8 @@
 
         public DateTime? PaymentReceivedDate { get; set; }
 
+        public bool PaymentIsComplete { get; set; }
+
         public DateTime? CommencementDate { get; set; }
 
         public string NameOfOfficer { get; set; }

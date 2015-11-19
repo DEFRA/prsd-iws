@@ -77,6 +77,7 @@
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<MovementNumberGenerator>().As<IMovementNumberGenerator>();
             builder.RegisterType<NextAvailableMovementNumberGenerator>().As<INextAvailableMovementNumberGenerator>();
+            builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<MovementNumberValidator>().As<IMovementNumberValidator>();
 
             if (HasAsposeLicense())

@@ -3,10 +3,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.Shared;
-    using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Shipment;
+    using Shipment;
 
-    public class NotificationChargeCalculator
+    public class NotificationChargeCalculator : INotificationChargeCalculator
     {
         public decimal GetValue(IEnumerable<PricingStructure> pricingStructures, NotificationApplication notification, ShipmentInfo shipmentInfo)
         {

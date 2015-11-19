@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\NotificationAssessment\AddNotificationTransactionHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandlerTests.cs" />

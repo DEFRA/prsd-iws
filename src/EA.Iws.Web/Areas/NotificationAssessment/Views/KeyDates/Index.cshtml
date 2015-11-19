@@ -38,23 +38,24 @@
         <tr>
             <td>Payment received</td>
             <td>
-                @if (Model.PaymentReceivedDate.IsCompleted)
+                @if (Model.PaymentReceivedDate.HasValue)
                 {
-                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.AsDateTime().GetValueOrDefault())
+                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
+
+                    var text = string.Empty;
+
+                    if(!Model.PaymentIsComplete)
+                    {
+                        text = " (partial payment)";
+                        @text
+                    }
                 }
                 else
                 {
                     @nullMarker
                 }
             </td>
-            <td>
-                @if (Model.NotificationReceivedDate.IsCompleted)
-                {
-                    @(Model.PaymentReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.PaymentReceived }, null)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.PaymentReceived }, null))
-                }
-            </td>
-
+            <td></td>
         </tr>
 
         <tr>
@@ -72,7 +73,7 @@
                 }
             </td>
             <td>
-                @if (Model.PaymentReceivedDate.IsCompleted)
+                @if (Model.PaymentIsComplete)
                 {
                     @(Model.CommencementDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null))
@@ -176,9 +177,6 @@
         @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
         @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
         @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
-        @Html.HiddenFor(m => m.PaymentReceivedDate.Day)
-        @Html.HiddenFor(m => m.PaymentReceivedDate.Month)
-        @Html.HiddenFor(m => m.PaymentReceivedDate.Year)
         @Html.HiddenFor(m => m.CommencementDate.Day)
         @Html.HiddenFor(m => m.CommencementDate.Month)
         @Html.HiddenFor(m => m.CommencementDate.Year)

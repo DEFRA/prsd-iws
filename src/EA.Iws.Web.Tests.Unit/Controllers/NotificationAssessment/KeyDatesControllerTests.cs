@@ -83,7 +83,7 @@
 
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
-            Assert.Equal(paymentReceivedDate, ((DateInputViewModel)result.Model).PaymentReceivedDate.AsDateTime());
+            Assert.Equal(paymentReceivedDate, ((DateInputViewModel)result.Model).PaymentReceivedDate);
         }
 
         [Fact]
@@ -151,20 +151,6 @@
         }
 
         [Fact]
-        public async Task PaymentReceived_ValidInput_NoValidationError()
-        {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(paymentReceivedDate);
-            model.Command = KeyDatesStatusEnum.PaymentReceived;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            Assert.True(controller.ModelState.IsValid);
-        }
-
-        [Fact]
         public async Task PaymentReceived_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
@@ -175,23 +161,6 @@
             await controller.Index(model);
 
             Assert.True(controller.ModelState.ContainsKey("NewDate"));
-        }
-
-        [Fact]
-        public async Task PaymentReceived_ValidInput_CallsClient()
-        {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(paymentReceivedDate);
-            model.Command = KeyDatesStatusEnum.PaymentReceived;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            A.CallTo(() => mediator.SendAsync(A<SetPaymentReceivedDate>
-                .That.Matches(p => p.NotificationId == model.NotificationId &&
-                                p.PaymentReceivedDate == model.NewDate.AsDateTime().Value)))
-                .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
