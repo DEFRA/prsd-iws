@@ -14,7 +14,7 @@
             @Html.Gds().ValidationSummary()
             @Html.AntiForgeryToken()
 
-            <h1 class="heading-large">@Resource.Title</h1>
+            <h1 class="heading-large">@Resource.MainHeading</h1>
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
                 @Html.Gds().LabelFor(m => m.SearchTerm)
@@ -28,14 +28,17 @@
 
         @if (Model != null && Model.ExportSearchResults != null && Model.ExportSearchResults.Count > 0)
         {
-            <h2 class="heading-medium">Your search returned @Model.ExportSearchResults.Count results</h2>
+            <h2 class="heading-medium">@Resource.Subheading</h2>
+
+            @Html.Raw(string.Format(Resource.ResultsCount, Model.ExportSearchResults.Count))
+
             <table title="Search results">
                 <thead>
                 <tr>
-                    <th>Notification number</th>
-                    <th>Status</th>
-                    <th>Company name</th>
-                    <th>Waste type</th>
+                    <th>@Resource.NotificationNumberTableHeading</th>
+                    <th>@Resource.StatusTableHeading</th>
+                    <th>@Resource.CompanyNameTableHeading</th>
+                    <th>@Resource.WasteTypeTableHeading</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -65,7 +68,7 @@
         }
         else if (Model != null && Model.HasSearched && Model.ImportSearchResults.Count == 0)
         {
-            <h2 class="heading-medium">No matching results found</h2>
+            <h2 class="heading-medium">@Resource.NoResultsMessage</h2>
         }
 
         @Html.Partial("_ImportResults", Model)
@@ -73,9 +76,9 @@
     </div>
 
     <div class="column-third" id="submit-side-bar">
-        <h2 class="heading-medium">Account services</h2>
-        <p>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration")</p>
-        <p>@Html.ActionLink("Create a new import notification", "Number", "ImportNotification")</p>
-        <p>@Html.ActionLink("System configuration", "Index", "Configuration")</p>
+        <h2 class="heading-medium">@Resource.NavigationLinksHeading</h2>
+        <p>@Html.ActionLink(@Resource.ManageNewUsersLink, "ManageNewUsers", "UserAdministration")</p>
+        <p>@Html.ActionLink(@Resource.ImportNotificationNumberLink, "Number", "ImportNotification")</p>
+        <p>@Html.ActionLink(@Resource.SystemConfigurationLink, "Index", "Configuration")</p>
     </div>
 </div>

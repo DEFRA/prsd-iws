@@ -61,6 +61,105 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company name.
+        /// </summary>
+        public static string CompanyNameTableHeading {
+            get {
+                return ResourceManager.GetString("CompanyNameTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new import notification.
+        /// </summary>
+        public static string ImportNotificationNumberLink {
+            get {
+                return ResourceManager.GetString("ImportNotificationNumberLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string MainHeading {
+            get {
+                return ResourceManager.GetString("MainHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage new users.
+        /// </summary>
+        public static string ManageNewUsersLink {
+            get {
+                return ResourceManager.GetString("ManageNewUsersLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account services.
+        /// </summary>
+        public static string NavigationLinksHeading {
+            get {
+                return ResourceManager.GetString("NavigationLinksHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No matching results were found.
+        /// </summary>
+        public static string NoResultsMessage {
+            get {
+                return ResourceManager.GetString("NoResultsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification number.
+        /// </summary>
+        public static string NotificationNumberTableHeading {
+            get {
+                return ResourceManager.GetString("NotificationNumberTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your search returned {0} export notifications.
+        /// </summary>
+        public static string ResultsCount {
+            get {
+                return ResourceManager.GetString("ResultsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string StatusTableHeading {
+            get {
+                return ResourceManager.GetString("StatusTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export notifications.
+        /// </summary>
+        public static string Subheading {
+            get {
+                return ResourceManager.GetString("Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System configuration.
+        /// </summary>
+        public static string SystemConfigurationLink {
+            get {
+                return ResourceManager.GetString("SystemConfigurationLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin Users - Basic Search.
         /// </summary>
         public static string TabTitle {
@@ -70,11 +169,11 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search.
+        ///   Looks up a localized string similar to Waste type.
         /// </summary>
-        public static string Title {
+        public static string WasteTypeTableHeading {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("WasteTypeTableHeading", resourceCulture);
             }
         }
     }

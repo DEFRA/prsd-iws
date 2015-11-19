@@ -120,10 +120,16 @@
   <data name="NoResults" xml:space="preserve">
     <value>No matching results found</value>
   </data>
+  <data name="NotificationNumberTableHeading" xml:space="preserve">
+    <value>Notification number</value>
+  </data>
+  <data name="NotificationTypeTableHeading" xml:space="preserve">
+    <value>Notification type</value>
+  </data>
   <data name="ResultsCount" xml:space="preserve">
     <value>Your search returned {0} import notifications</value>
   </data>
-  <data name="Title" xml:space="preserve">
+  <data name="Subheading" xml:space="preserve">
     <value>Import notifications</value>
   </data>
 </root>

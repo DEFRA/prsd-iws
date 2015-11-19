@@ -117,10 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CompanyNameTableHeading" xml:space="preserve">
+    <value>Company name</value>
+  </data>
+  <data name="ImportNotificationNumberLink" xml:space="preserve">
+    <value>Create a new import notification</value>
+  </data>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ManageNewUsersLink" xml:space="preserve">
+    <value>Manage new users</value>
+  </data>
+  <data name="NavigationLinksHeading" xml:space="preserve">
+    <value>Account services</value>
+  </data>
+  <data name="NoResultsMessage" xml:space="preserve">
+    <value>No matching results were found</value>
+  </data>
+  <data name="NotificationNumberTableHeading" xml:space="preserve">
+    <value>Notification number</value>
+  </data>
+  <data name="ResultsCount" xml:space="preserve">
+    <value>Your search returned {0} export notifications</value>
+  </data>
+  <data name="StatusTableHeading" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Subheading" xml:space="preserve">
+    <value>Export notifications</value>
+  </data>
+  <data name="SystemConfigurationLink" xml:space="preserve">
+    <value>System configuration</value>
+  </data>
   <data name="TabTitle" xml:space="preserve">
     <value>Admin Users - Basic Search</value>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>Search</value>
+  <data name="WasteTypeTableHeading" xml:space="preserve">
+    <value>Waste type</value>
   </data>
 </root>

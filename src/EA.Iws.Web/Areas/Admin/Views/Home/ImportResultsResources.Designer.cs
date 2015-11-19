@@ -70,6 +70,24 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification number.
+        /// </summary>
+        public static string NotificationNumberTableHeading {
+            get {
+                return ResourceManager.GetString("NotificationNumberTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification type.
+        /// </summary>
+        public static string NotificationTypeTableHeading {
+            get {
+                return ResourceManager.GetString("NotificationTypeTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your search returned {0} import notifications.
         /// </summary>
         public static string ResultsCount {
@@ -81,9 +99,9 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         /// <summary>
         ///   Looks up a localized string similar to Import notifications.
         /// </summary>
-        public static string Title {
+        public static string Subheading {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Subheading", resourceCulture);
             }
         }
     }
