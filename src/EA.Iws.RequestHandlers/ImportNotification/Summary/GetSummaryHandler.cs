@@ -55,13 +55,15 @@
                 StateOfExport = transportRoute.StateOfExport,
                 StateOfImport = transportRoute.StateOfImport,
                 TransitStates = transportRoute.TransitStates,
+                HasNoTransitStates = transportRoute.HasNoTransitStates,
                 WasteOperation = await GetWasteOperation(message.Id),
-                WasteType = await wasteTypeSummary.GetWasteType(message.Id)
+                WasteType = await wasteTypeSummary.GetWasteType(message.Id),
+                AreFacilitiesPreconsented = await GetFacilityPreconsent(message.Id)
             };
             
             return summary;
         }
-
+        
         private async Task<Producer> GetProducer(Guid id)
         {
             var producer = await draftRepository.GetDraftData<Draft.Producer>(id);
@@ -177,6 +179,13 @@
             }
 
             return string.Empty;
+        }
+
+        private async Task<bool?> GetFacilityPreconsent(Guid id)
+        {
+            var preconsent = await draftRepository.GetDraftData<Draft.Preconsented>(id);
+
+            return preconsent.PreconsentedFacilityExists;
         }
     }
 }

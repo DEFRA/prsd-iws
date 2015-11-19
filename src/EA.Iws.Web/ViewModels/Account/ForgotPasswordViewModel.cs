@@ -7,7 +7,7 @@
     {
         [Required]
         [Display(Name = "Email", ResourceType = typeof(ForgotPasswordResources))]
-        [EmailAddress(ErrorMessageResourceName = "EmailInvalid", ErrorMessageResourceType = typeof(ForgotPasswordResources))]
+        [EmailAddress(ErrorMessageResourceName = "EmailInvalid", ErrorMessageResourceType = typeof(ForgotPasswordResources), ErrorMessage = null)]
         public string Email { get; set; }
     }
 }

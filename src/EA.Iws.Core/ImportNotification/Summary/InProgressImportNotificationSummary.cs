@@ -20,9 +20,13 @@
 
         public IList<Facility> Facilities { get; set; }
 
+        public bool? AreFacilitiesPreconsented { get; set; }
+
         public StateOfExport StateOfExport { get; set; }
 
         public IList<TransitState> TransitStates { get; set; }
+
+        public bool HasNoTransitStates { get; set; }
 
         public StateOfImport StateOfImport { get; set; }
 

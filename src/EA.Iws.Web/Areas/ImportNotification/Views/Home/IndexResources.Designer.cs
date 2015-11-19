@@ -61,6 +61,87 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no transit states.
+        /// </summary>
+        public static string NoTransitStatesChoice {
+            get {
+                return ResourceManager.GetString("NoTransitStatesChoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organisations involved.
+        /// </summary>
+        public static string OrganisationsTitle {
+            get {
+                return ResourceManager.GetString("OrganisationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The facilities are not pre-consented.
+        /// </summary>
+        public static string PreconsentedFalse {
+            get {
+                return ResourceManager.GetString("PreconsentedFalse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pre-consented facilities.
+        /// </summary>
+        public static string PreconsentedTitle {
+            get {
+                return ResourceManager.GetString("PreconsentedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The facilities are pre-consented.
+        /// </summary>
+        public static string PreconsentedTrue {
+            get {
+                return ResourceManager.GetString("PreconsentedTrue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section incomplete.
+        /// </summary>
+        public static string SectionIncompleteText {
+            get {
+                return ResourceManager.GetString("SectionIncompleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amounts and dates.
+        /// </summary>
+        public static string ShipmentInfoTitle {
+            get {
+                return ResourceManager.GetString("ShipmentInfoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State of export.
+        /// </summary>
+        public static string StateOfExportTitle {
+            get {
+                return ResourceManager.GetString("StateOfExportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State of import.
+        /// </summary>
+        public static string StateOfImportTitle {
+            get {
+                return ResourceManager.GetString("StateOfImportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification overview.
         /// </summary>
         public static string TabTitle {
@@ -75,6 +156,42 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transit states.
+        /// </summary>
+        public static string TransitStatesTitle {
+            get {
+                return ResourceManager.GetString("TransitStatesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The journey.
+        /// </summary>
+        public static string TransportRouteTitle {
+            get {
+                return ResourceManager.GetString("TransportRouteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not selected.
+        /// </summary>
+        public static string UnansweredQuestionPlaceholder {
+            get {
+                return ResourceManager.GetString("UnansweredQuestionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste codes.
+        /// </summary>
+        public static string WasteCodeTitle {
+            get {
+                return ResourceManager.GetString("WasteCodeTitle", resourceCulture);
             }
         }
     }

@@ -1,65 +1,67 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
     <summary class="block">
-        Transit states @Html.ActionLink("Change", "Index", "TransitState", null, new { @class = "right-float" })
+        @Resource.TransitStatesTitle @Html.ActionLink("Change", "Index", "TransitState", null, new { @class = "right-float" })
     </summary>
     <div class="expanded-details">
         <div class="panel-indent">
+
             @if (Model.TransitStates != null && Model.TransitStates.Count > 0)
             {
                 for (int i = 0; i < Model.TransitStates.Count; i++)
                 {
-                    <div class="grid-row">
-                        <div class="column-half">
-                            Entry point:
-                        </div>
-                        <div class="column-half">
-                            @if (string.IsNullOrWhiteSpace(Model.TransitStates[i].EntryPointName))
-                            {
-                                <text>Not selected</text>
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(m => m.TransitStates[i].EntryPointName)<text>,</text>
-                                @Html.DisplayFor(m => m.TransitStates[i].CountryName)
-                            }
-                        </div>
-                    </div>
-                    <div class="grid-row">
-                        <div class="column-half">
-                            Exit point:
-                        </div>
-                        <div class="column-half">
-                            @if (string.IsNullOrWhiteSpace(Model.TransitStates[i].ExitPointName))
-                            {
-                                <text>Not selected</text>
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(m => m.TransitStates[i].ExitPointName)<text>,</text>
-                                @Html.DisplayFor(m => m.TransitStates[i].CountryName)
-                            }
-                        </div>
-                    </div>
-                    <div class="grid-row">
-                        <div class="column-half">
-                            Competent authority:
-                        </div>
-                        <div class="column-half">
-                            @if (string.IsNullOrWhiteSpace(Model.TransitStates[i].CompetentAuthorityName))
-                            {
-                                <text>Not selected</text>
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(m => m.TransitStates[i].CompetentAuthorityCode)
-                                <text>-</text> @Html.DisplayFor(m => m.TransitStates[i].CompetentAuthorityName)
-                            }
-                        </div>
-                    </div>
-                }
+                    <dl>
+                        <dt>Country:</dt>
+                        @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].CountryName))
+                        {
+                            <dd>@Model.TransitStates[i].CountryName</dd>
+                        }
+                        else
+                        {
+                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
+                        }
 
+                        <dt>Competent authority:</dt>
+                        @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].CompetentAuthorityName))
+                        {
+                            <dd>@Model.TransitStates[i].CompetentAuthorityCode - @Model.TransitStates[i].CompetentAuthorityName</dd>
+                        }
+                        else
+                        {
+                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
+                        }
+                        <dt>Entry point:</dt>
+                        @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].EntryPointName))
+                        {
+                            <dd>@Model.TransitStates[i].EntryPointName</dd>
+                        }
+                        else
+                        {
+                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
+                        }
+
+                        <dt>Exit point:</dt>
+                        @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].ExitPointName))
+                        {
+                            <dd>@Model.TransitStates[i].ExitPointName</dd>
+                        }
+                        else
+                        {
+                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
+                        }
+                    </dl>
+
+                    if (i < (Model.TransitStates.Count - 1))
+                    {
+                        <hr/>
+                    }
+                }
+            }
+            else if (Model.HasNoTransitStates)
+            {
+                <p>@Resource.NoTransitStatesChoice</p>
             }
             else
             {

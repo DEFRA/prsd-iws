@@ -1,8 +1,11 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
-@{ViewBag.SectionIncompleteText = "Section incomplete";}
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+
+@{ViewBag.SectionIncompleteText = Resource.SectionIncompleteText;}
 
 <div id="submit-overview-area">
-    <h2 class="heading-medium">Organisations involved</h2>
+    <h2 class="heading-medium">@Resource.OrganisationsTitle</h2>
+    @Html.Partial("_Preconsented")
     @Html.Partial("_Exporter")
     @Html.Partial("_Producer")
     @Html.Partial("_Importer")
@@ -12,19 +15,19 @@
     @Html.Partial("_OperationCodes")
     @Html.Partial("_TechnologyEmployed")
 
-    <h2 class="heading-medium">Amounts and dates</h2>
+    <h2 class="heading-medium">@Resource.ShipmentInfoTitle</h2>
     @Html.Partial("_IntendedShipment")
 
 
-    <h2 class="heading-medium">Waste codes</h2>
+    <h2 class="heading-medium">@Resource.WasteCodeTitle</h2>
     @Html.Partial("_BaselOecdCode")
     @Html.Partial("_EwcCodes")
     @Html.Partial("_YCodes")
     @Html.Partial("_HCodes")
     @Html.Partial("_UnClasses")
 
-    <h2 class="heading-medium">The journey</h2>
+    <h2 class="heading-medium">@Resource.TransportRouteTitle</h2>
     @Html.Partial("_StateOfExport")
-    @Html.Partial("_TransitStates")
     @Html.Partial("_StateOfImport")
+    @Html.Partial("_TransitStates")
 </div>

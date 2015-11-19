@@ -728,6 +728,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_HCodes.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_YCodes.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_UnClasses.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\Home\_Preconsented.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />

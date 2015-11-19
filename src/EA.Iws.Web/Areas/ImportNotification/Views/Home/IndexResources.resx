@@ -117,10 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="NoTransitStatesChoice" xml:space="preserve">
+    <value>There are no transit states</value>
+  </data>
+  <data name="OrganisationsTitle" xml:space="preserve">
+    <value>Organisations involved</value>
+  </data>
+  <data name="PreconsentedFalse" xml:space="preserve">
+    <value>The facilities are not pre-consented</value>
+  </data>
+  <data name="PreconsentedTitle" xml:space="preserve">
+    <value>Pre-consented facilities</value>
+  </data>
+  <data name="PreconsentedTrue" xml:space="preserve">
+    <value>The facilities are pre-consented</value>
+  </data>
+  <data name="SectionIncompleteText" xml:space="preserve">
+    <value>Section incomplete</value>
+  </data>
+  <data name="ShipmentInfoTitle" xml:space="preserve">
+    <value>Amounts and dates</value>
+  </data>
+  <data name="StateOfExportTitle" xml:space="preserve">
+    <value>State of export</value>
+  </data>
+  <data name="StateOfImportTitle" xml:space="preserve">
+    <value>State of import</value>
+  </data>
   <data name="TabTitle" xml:space="preserve">
     <value>Notification overview</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Notification overview</value>
+  </data>
+  <data name="TransitStatesTitle" xml:space="preserve">
+    <value>Transit states</value>
+  </data>
+  <data name="TransportRouteTitle" xml:space="preserve">
+    <value>The journey</value>
+  </data>
+  <data name="UnansweredQuestionPlaceholder" xml:space="preserve">
+    <value>Not selected</value>
+  </data>
+  <data name="WasteCodeTitle" xml:space="preserve">
+    <value>Waste codes</value>
   </data>
 </root>

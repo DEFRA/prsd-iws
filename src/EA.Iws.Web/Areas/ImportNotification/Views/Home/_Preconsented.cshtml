@@ -1,0 +1,28 @@
+﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+
+<details>
+    <summary class="block">
+        @Resource.PreconsentedTitle @Html.ActionLink("Change", "Index", "Preconsented", null, new { @class = "right-float" })
+    </summary>
+    <div class="expanded-details">
+        <div class="panel-indent">
+            @if (Model.AreFacilitiesPreconsented.HasValue)
+            {
+                if (Model.AreFacilitiesPreconsented.Value)
+                {
+                    <p>@Resource.PreconsentedTrue</p>
+                }
+                else
+                {
+                    <p>@Resource.PreconsentedFalse</p>
+                }
+            }
+            else
+            {
+                <p>@ViewBag.SectionIncompleteText</p>
+            }
+        </div>
+    </div>
+</details>
+

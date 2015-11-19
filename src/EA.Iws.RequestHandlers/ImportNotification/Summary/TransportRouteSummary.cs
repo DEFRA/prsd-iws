@@ -49,7 +49,8 @@
             // Use the loaded competent authorities and entry or exit points to retrieve names for summary data.
             return new TransportRouteData(GenerateTransitStates(transitStateCollection, lookups),
                 GenerateStateOfExport(stateOfExport, lookups),
-                GenerateStateOfImport(stateOfImport, lookups));
+                GenerateStateOfImport(stateOfImport, lookups),
+                transitStateCollection.HasNoTransitStates);
         }
 
         private void AddTransitStateIds(Draft.TransitStateCollection transitStateCollection,
