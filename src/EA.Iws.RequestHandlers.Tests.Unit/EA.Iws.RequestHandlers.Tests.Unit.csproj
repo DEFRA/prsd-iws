@@ -109,7 +109,6 @@
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
-    <Compile Include="Movement\SetActualDateOfMovementHandlerTests.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />

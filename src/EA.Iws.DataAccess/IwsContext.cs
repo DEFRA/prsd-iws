@@ -90,6 +90,8 @@
 
         public virtual DbSet<MovementDetails> MovementDetails { get; set; }
 
+        public virtual DbSet<MovementDateHistory> MovementDateHistories { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

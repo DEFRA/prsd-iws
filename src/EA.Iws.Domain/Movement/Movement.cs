@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Core.Movement;
     using Prsd.Core;
     using Prsd.Core.Domain;
@@ -86,6 +87,29 @@
             Guard.ArgumentNotNull(() => statusChange, statusChange);
 
             StatusChangeCollection.Add(statusChange);
+        }
+
+        public async Task UpdateDate(DateTime newDate, GetOriginalDate originalDateService)
+        {
+            if (Status != MovementStatus.Submitted)
+            {
+                throw new InvalidOperationException(string.Format("Cannot edit movement date when status is {0}", Status));
+            }
+
+            var originalDate = await originalDateService.Get(this);
+
+            if (newDate > originalDate.AddDays(10))
+            {
+                throw new InvalidOperationException(string.Format(
+                    "Cannot set movement date to {0} because it is more than 10 days after the original date of {1}.", 
+                    newDate, 
+                    originalDate));
+            }
+
+            var previousDate = Date;
+            Date = newDate;
+
+            RaiseEvent(new MovementDateChangeEvent(Id, previousDate));
         }
 
         private StateMachine<MovementStatus, Trigger> CreateStateMachine()

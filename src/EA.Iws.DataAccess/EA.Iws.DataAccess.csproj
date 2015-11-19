@@ -95,6 +95,7 @@
     <Compile Include="Mappings\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\DisposalCostMapping.cs" />
     <Compile Include="Mappings\ImportNotificationMapping.cs" />
+    <Compile Include="Mappings\MovementDateHistoryMapping.cs" />
     <Compile Include="Mappings\MovementDetailsMapping.cs" />
     <Compile Include="Mappings\MovementStatusChangeMapping.cs" />
     <Compile Include="Mappings\NotificationTransactionMapping.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Repositories\ExporterRepository.cs" />
     <Compile Include="Repositories\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\InternalUserRepository.cs" />
+    <Compile Include="Repositories\MovementDateHistoryRepository.cs" />
     <Compile Include="Repositories\MovementDetailsRepository.cs" />
     <Compile Include="Repositories\MovementRepository.cs" />
     <Compile Include="Repositories\NotificationConsentRepository.cs" />

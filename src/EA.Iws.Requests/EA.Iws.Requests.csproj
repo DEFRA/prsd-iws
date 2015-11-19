@@ -106,7 +106,6 @@
     <Compile Include="Movement\SetMovementAccepted.cs" />
     <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\SetMovementRejected.cs" />
-    <Compile Include="Movement\SetActualDateOfMovement.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValid.cs" />
     <Compile Include="NotificationMovements\Create\CreateMovementAndDetails.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumber.cs" />

@@ -82,7 +82,11 @@
     <Compile Include="InternalUser.cs" />
     <Compile Include="IWorkingDayCalculator.cs" />
     <Compile Include="LocalArea.cs" />
+    <Compile Include="Movement\GetOriginalDate.cs" />
+    <Compile Include="Movement\IMovementDateHistoryRepository.cs" />
     <Compile Include="Movement\IMovementDetailsRepository.cs" />
+    <Compile Include="Movement\MovementDateChangeEvent.cs" />
+    <Compile Include="Movement\MovementDateHistory.cs" />
     <Compile Include="Movement\MovementDetails.cs" />
     <Compile Include="Movement\MovementNumberGenerator.cs" />
     <Compile Include="Movement\IMovementRepository.cs" />
@@ -100,7 +104,6 @@
     <Compile Include="Movement\NotificationMovementsQuantity.cs" />
     <Compile Include="Movement\MovementStatusChange.cs" />
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
-    <Compile Include="Movement\SetActualDateOfShipment.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationOverviewRepository.cs" />

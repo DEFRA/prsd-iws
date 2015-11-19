@@ -182,7 +182,6 @@
     <Compile Include="Movement\SaveCertificateOfReceiptFileHandler.cs" />
     <Compile Include="Movement\SetMovementAcceptedHandler.cs" />
     <Compile Include="Movement\SetMovementFileIdHandler.cs" />
-    <Compile Include="Movement\SetActualDateOfMovementHandler.cs" />
     <Compile Include="Movement\SetMovementRejectedHandler.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTableHandler.cs" />
     <Compile Include="NotificationAssessment\AddNotificationTransactionHandler.cs" />
