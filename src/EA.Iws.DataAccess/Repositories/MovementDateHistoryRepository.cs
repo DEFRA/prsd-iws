@@ -22,26 +22,37 @@
 
         public async Task<IEnumerable<MovementDateHistory>> GetByMovementId(Guid movementId)
         {
-            var resultQuery = from movement
-                         in context.Movements
-                         where movement.Id == movementId
-                         from movementDateHistories
-                         in context.MovementDateHistories
-                            .Where(mdh => mdh.MovementId == movementId)
-                            .DefaultIfEmpty()
-                         select new
-                         {
-                             Movement = movement,
-                             MovementDateHistories = movementDateHistories
-                         };
+            var resultQuery = 
+                from movement
+                in context.Movements
+                where movement.Id == movementId
+                from movementDateHistories
+                in context.MovementDateHistories
+                   .Where(mdh => mdh.MovementId == movementId)
+                   .DefaultIfEmpty()
+                select new
+                {
+                    Movement = movement,
+                    MovementDateHistories = movementDateHistories
+                };
 
             var result = await resultQuery.ToArrayAsync();
 
-            var notificationId = result.Select(r => r.Movement).Single().NotificationId;
+            var notificationId = result
+                .Select(r => r.Movement)
+                .First()
+                .NotificationId;
 
             await authorization.EnsureAccessAsync(notificationId);
 
-            return result.Select(r => r.MovementDateHistories);
+            var dateHistories = result.Select(r => r.MovementDateHistories);
+
+            if (dateHistories.Count() == 1 && dateHistories.First() == null)
+            {
+                return new MovementDateHistory[0];
+            }
+
+            return dateHistories;
         }
     }
 }

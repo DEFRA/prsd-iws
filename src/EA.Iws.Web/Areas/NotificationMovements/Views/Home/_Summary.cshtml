@@ -11,12 +11,10 @@
     <li><span class="grey-text">@SummaryResources.CurrentActiveLoads</span> @Html.Raw(Model.CurrentActiveLoads)</li>
     <li>
         <span class="grey-text">@SummaryResources.QuantityReceived</span>
-        @Html.Raw(Model.QuantityReceived.ToString("G29"))
-        @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.DisplayUnit))
+        @Html.Raw(Model.QuantityReceived.ToString("G29"))&nbsp;@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.DisplayUnit))
     </li>
     <li>
         <span class="grey-text">@SummaryResources.QuantityRemaining</span>
-        @Html.Raw(Model.QuantityRemaining.ToString("G29"))
-        @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.DisplayUnit))
+        @Html.Raw(Model.QuantityRemaining.ToString("G29"))&nbsp;@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.DisplayUnit))
     </li>
 </ul>

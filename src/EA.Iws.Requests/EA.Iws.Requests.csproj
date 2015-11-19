@@ -91,6 +91,8 @@
     <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
     <Compile Include="ImportNotification\CreateImportNotification.cs" />
     <Compile Include="Movement\CancelMovements.cs" />
+    <Compile Include="Movement\Edit\GetMovementDateHistory.cs" />
+    <Compile Include="Movement\Edit\UpdateMovementDate.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />

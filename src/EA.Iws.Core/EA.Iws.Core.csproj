@@ -101,6 +101,7 @@
     <Compile Include="MeansOfTransport\MeansOfTransport.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
+    <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\MovementStatus.cs" />
     <Compile Include="Movement\NewMovementDetails.cs" />
     <Compile Include="Movement\ShipmentDates.cs" />

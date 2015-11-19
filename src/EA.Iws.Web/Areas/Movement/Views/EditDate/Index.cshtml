@@ -6,7 +6,7 @@
 
 <header><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
 
-<p class="lede">@IndexResources.GuidanceParagraph1</p>
+<p>@IndexResources.GuidanceParagraph1</p>
 
 <p>@IndexResources.GuidanceParagraph2</p>
 
@@ -22,12 +22,15 @@
         <tbody>
             <tr>
                 <td>@IndexResources.OriginalDateHeading</td>
-                <td>@Html.Gds().DisplayDate(new DateTime(2015, 1, 1))</td>
+                <td>@Html.Gds().DisplayDate(Model.DateEditHistory[0])</td>
             </tr>
-            <tr>
-                <td>@string.Format(IndexResources.PreviousDateHeading, 1)</td>
-                <td>@Html.Gds().DisplayDate(new DateTime(2015, 1, 4))</td>
-            </tr>
+            @for (int i = 1; i < Model.DateEditHistory.Count; i++)
+            {
+                <tr>
+                    <td>@string.Format(IndexResources.PreviousDateHeading, i)</td>
+                    <td>@Html.Gds().DisplayDate(Model.DateEditHistory[i])</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
@@ -35,6 +38,10 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    for (int i = 0; i < Model.DateEditHistory.Count; i++)
+    {
+        @Html.HiddenFor(m => m.DateEditHistory[i])
+    }
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>
             <legend>

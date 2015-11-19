@@ -141,12 +141,16 @@
     <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
+    <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
+    <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
+    <Compile Include="Movement\Mappings\MovementDateHistoryMap.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="NotificationAssessment\WithdrawConsentForNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\Capture\CreateMovementInternalHandler.cs" />
     <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandler.cs" />
     <Compile Include="NotificationMovements\Capture\GetNextAvailableMovementNumberForNotificationHandler.cs" />
+    <Compile Include="Movement\RecordMovementDateChange.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValidHandler.cs" />
     <Compile Include="NotificationMovements\Create\CreateMovementAndDetailsHandler.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumberHandler.cs" />

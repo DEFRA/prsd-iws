@@ -1,11 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.Movement.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using NotificationMovements.ViewModels.Edit;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.Movement.Edit;
+    using ViewModels.EditDate;
 
     [Authorize]
     public class EditDateController : Controller
@@ -18,16 +20,33 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            return View();
+            var dateHistories = await mediator.SendAsync(new GetMovementDateHistory(id));
+
+            var model = new EditDateViewModel
+            {
+                DateEditHistory = dateHistories
+                    .OrderBy(dh => dh.DateChanged)
+                    .Select(dh => dh.PreviousDate)
+                    .ToList()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, EditViewModel model)
+        public async Task<ActionResult> Index(Guid id, EditDateViewModel model)
         {
+            if (!ModelState.IsValid || !model.AsDateTime().HasValue)
+            {
+                return View(model);
+            }
+
             var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
+
+            await mediator.SendAsync(new UpdateMovementDate(id, model.AsDateTime().Value));
 
             return RedirectToAction("Index", "Home", new { area = "NotificationMovements", notificationId });
         }
