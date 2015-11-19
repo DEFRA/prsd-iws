@@ -33,5 +33,10 @@
             Unit = data.QuantityUnits;
             RecoveredOrDisposedOf = data.CompletedDate;
         }
+
+        public bool IsShipped()
+        {
+            return Status == MovementStatus.Submitted && ShipmentDate < DateTime.UtcNow;
+        }
     }
 }
