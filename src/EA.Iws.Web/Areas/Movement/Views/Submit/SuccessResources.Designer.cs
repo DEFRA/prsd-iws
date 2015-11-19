@@ -79,6 +79,15 @@ namespace EA.Iws.Web.Areas.Movement.Views.Submit {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload another signed prenotification.
+        /// </summary>
+        public static string NavigationLink {
+            get {
+                return ResourceManager.GetString("NavigationLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prenotification successful.
         /// </summary>
         public static string Title {

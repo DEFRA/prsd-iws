@@ -22,9 +22,9 @@
 
 
     <p>
-        @Html.ActionLink("Go to notification options",
-            "ApprovedNotification",
-            "Applicant",
-            new { area = string.Empty, id = Model.NotificationId },
+        @Html.ActionLink(Resource.NavigationLink,
+            "Index",
+            "UploadChoice",
+            new { area = "NotificationMovements", notificationId = Model.NotificationId },
             null)
     </p>
