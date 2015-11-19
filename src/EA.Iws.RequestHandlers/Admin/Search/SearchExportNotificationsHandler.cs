@@ -36,15 +36,16 @@
             var compAuthority = Enumeration.FromValue<UKCompetentAuthority>(userCompetentAuthority);
 
             var result = await context.NotificationApplications
-                .Join(context.Exporters, n => n.Id, e => e.NotificationId, (n, e) => new { Notification = n, Exporter = e })
-                .Where(p => p.Notification.CompetentAuthority.Value == compAuthority.Value &&
-                            (p.Notification.NotificationNumber.Contains(query.SearchTerm) ||
+                .Where(n => n.CompetentAuthority.Value == compAuthority.Value)
+                .Join(context.Exporters, n => n.Id, e => e.NotificationId,
+                    (n, e) => new { Notification = n, Exporter = e })
+                .Where(p => (p.Notification.NotificationNumber.Contains(query.SearchTerm) ||
                              p.Notification.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm)) ||
                             p.Exporter.Business.Name.Contains(query.SearchTerm))
                 .Join(context.NotificationAssessments
                     .Where(p => p.Status != NotificationStatus.NotSubmitted), x => x.Notification.Id,
-                        na => na.NotificationApplicationId, (n, na) => new { n.Notification, n.Exporter, Assessment = na })
-                .Select(s => 
+                    na => na.NotificationApplicationId, (n, na) => new { n.Notification, n.Exporter, Assessment = na })
+                .Select(s =>
                     new
                     {
                         s.Notification.Id,
@@ -55,7 +56,7 @@
                         s.Notification.CompetentAuthority
                     })
                 .ToListAsync();
-                
+
             return result.Select(s => ConvertToSearchResults(
                 s.Id,
                 s.NotificationNumber,

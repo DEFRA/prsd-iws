@@ -14,7 +14,6 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Helpers;
     using RequestHandlers.Admin.Search;
-    using Requests.Admin;
     using Requests.Admin.Search;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
@@ -73,7 +72,7 @@
                 CreateExporter(notification4, "Exporter RDF"),
                 CreateExporter(notification5, "not submitted"),
                 CreateExporter(notification6, "Exporter"),
-                CreateExporter(notification7, "WasteCo"),
+                CreateExporter(notification7, "Scottish Exporter"),
             };
         }
 
@@ -168,14 +167,6 @@
             var results = await ResultsWhenSearchingFor("GB0001000000");
 
             Assert.Equal(4, results.Count);
-        }
-
-        [Fact]
-        public async Task SearchBy_ExporterName()
-        {
-            var results = await ResultsWhenSearchingFor("Exporter");
-
-            Assert.Equal(3, results.Count);
         }
 
         [Fact]
