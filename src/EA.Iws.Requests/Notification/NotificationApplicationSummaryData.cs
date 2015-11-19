@@ -15,6 +15,8 @@
 
         public string Exporter { get; set; }
 
+        public string Producer { get; set; }
+
         public string Importer { get; set; }
     }
 }

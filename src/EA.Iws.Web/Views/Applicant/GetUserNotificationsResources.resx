@@ -129,6 +129,9 @@
   <data name="MessageNoNotification" xml:space="preserve">
     <value>You currently have no notifications.</value>
   </data>
+  <data name="ProducerTableHeader" xml:space="preserve">
+    <value>Producer (site&amp;nbsp;of&amp;nbsp;export)</value>
+  </data>
   <data name="TableCaption" xml:space="preserve">
     <value>Notifications</value>
   </data>

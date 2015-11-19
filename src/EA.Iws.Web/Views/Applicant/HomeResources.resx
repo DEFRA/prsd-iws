@@ -136,7 +136,7 @@
     <value>Account services</value>
   </data>
   <data name="HeaderManageYourNotifications" xml:space="preserve">
-    <value>Manage your notifications</value>
+    <value>Choose a notification</value>
   </data>
   <data name="HeaderStartNew" xml:space="preserve">
     <value>Would you like to start a notification?</value>

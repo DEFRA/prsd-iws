@@ -50,7 +50,8 @@
                                     .ChangeDate,
                         Status = n.Assessment.Status,
                         Exporter = n.Exporter == null ? null : n.Exporter.Business.Name,
-                        Importer = n.Notification.Importer == null ? null : n.Notification.Importer.Business.Name
+                        Importer = n.Notification.Importer == null ? null : n.Notification.Importer.Business.Name,
+                        Producer = n.Notification.Producers.Where(p => p.IsSiteOfExport).Select(p => p.Business.Name).SingleOrDefault() ?? string.Empty
                     }).ToList();
         }
     }

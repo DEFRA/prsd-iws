@@ -5,8 +5,8 @@
 
 @helper DisplayStatus(NotificationStatus status)
 {
-    string statusColour;
-    switch (status)
+string statusColour;
+switch (status)
     {
         case NotificationStatus.InAssessment:
         case NotificationStatus.ReadyToTransmit:
@@ -29,7 +29,8 @@
             statusColour = "s-blue";
             break;
     }
-    <span class="statusbox @statusColour">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(status).ToUpperInvariant()</span>
+    
+    <span class="statusbox @statusColour">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
 }
 
 @if (ViewBag.Errors != null && ((IEnumerable<string>)ViewBag.Errors).Any())
@@ -56,6 +57,9 @@ else
                     @GetUserNotificationsResources.ThExporter
                 </th>
                 <th>
+                    @Html.Raw(GetUserNotificationsResources.ProducerTableHeader)
+                </th>
+                <th>
                     @GetUserNotificationsResources.ThImporter
                 </th>
                 <th>
@@ -63,18 +67,22 @@ else
                 </th>
             </tr>
         </thead>
-
+       
         <tbody>
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(m => m[i].NotificationNumber)
+                        @Html.Raw(Model[i].NotificationNumber.Replace(" ", "&nbsp;"))
                     </td>
-                    <td>@DisplayStatus(Model[i].Status)
+                    <td>
+                        @(DisplayStatus(Model[i].Status))
                     </td>
                     <td>
                         @Model[i].Exporter
+                    </td>
+                    <td>
+                        @Model[i].Producer
                     </td>
                     <td>
                         @Model[i].Importer
