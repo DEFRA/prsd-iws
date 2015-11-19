@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using Areas.NotificationAssessment.ViewModels;
+    using Areas.NotificationAssessment.ViewModels.Decision;
     using Core.NotificationAssessment;
     using Prsd.Core.Mapper;
 

@@ -9,6 +9,7 @@
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
     using ViewModels;
+    using ViewModels.Decision;
 
     [Authorize(Roles = "internal")]
     public class DecisionController : Controller
@@ -55,11 +56,20 @@
                 case DecisionType.Object:
                     await PostObjection(model);
                     break;
+                    case DecisionType.ConsentWithdrawn:
+                    await PostConsentWithdrawn(model);
+                    break;
                 default:
                     break;
             }
 
             return RedirectToAction("Index", "Home", new { area = "NotificationAssessment" });
+        }
+
+        private async Task PostConsentWithdrawn(NotificationAssessmentDecisionViewModel model)
+        {
+            var request = new WithdrawConsentForNotificationApplication(model.NotificationId, model.ReasonsForConsentWithdrawal);
+            await mediator.SendAsync(request);
         }
 
         private async Task PostWithdrawn(NotificationAssessmentDecisionViewModel model)

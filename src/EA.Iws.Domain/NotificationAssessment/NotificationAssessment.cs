@@ -250,6 +250,10 @@
             stateMachine.Fire(acknowledgedTrigger, acknowledgedDate);
         }
 
+        public void WithdrawConsent(DateTime withdrawalDate, string reasonsForWithdrawal)
+        {
+        }
+
         public IEnumerable<DecisionType> GetAvailableDecisions()
         {
             var triggers = stateMachine.PermittedTriggers

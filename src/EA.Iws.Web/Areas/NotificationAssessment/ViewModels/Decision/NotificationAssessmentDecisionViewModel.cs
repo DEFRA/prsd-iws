@@ -1,12 +1,14 @@
-﻿namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels
+﻿namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.Decision
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
     using Core.Admin;
     using Core.NotificationAssessment;
     using Prsd.Core;
+    using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
     public class NotificationAssessmentDecisionViewModel : IValidatableObject
@@ -21,19 +23,24 @@
         {
             get
             {
-                return new SelectList(DecisionTypes);
+                var keyValues = DecisionTypes
+                    .Select(e => new KeyValuePair<string, DecisionType>(EnumHelper.GetDisplayName(e), e));
+                return new SelectList(keyValues, "Value", "Key");
             }
         }
 
-        public IList<DecisionType> DecisionTypes { get; set; }
-
         [Required]
-        [Display(Name = "Decision")]
+        [Display(Name = "DecisionLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
         public DecisionType? SelectedDecision { get; set; }
+
+        public IList<DecisionType> DecisionTypes { get; set; }
         
         public OptionalDateInputViewModel ConsentValidFromDate { get; set; }
 
         public OptionalDateInputViewModel ConsentValidToDate { get; set; }
+
+        [Display(Name = "ReasonConsentWithdrawalLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
+        public string ReasonsForConsentWithdrawal { get; set; }
 
         public string ConsentConditions { get; set; }
 
@@ -54,6 +61,11 @@
                 return ValidateConsent();
             }
 
+            if (SelectedDecision == DecisionType.ConsentWithdrawn)
+            {
+                return ValidateConsentWithdrawn();
+            }
+
             return new ValidationResult[0];
         }
 
@@ -61,28 +73,37 @@
         {
             if (!ConsentValidFromDate.IsCompleted)
             {
-                yield return new ValidationResult("The consent valid from date is required", 
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidFromRequired, 
                     new[] { "ConsentValidFromDate" });
             }
 
             if (!ConsentValidToDate.IsCompleted)
             {
-                yield return new ValidationResult("The consent valid to date is required", 
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidToRequired, 
                     new[] { "ConsentValidToDate" });
             }
 
             if (ConsentValidFromDate.IsCompleted && ConsentValidFromDate.IsCompleted 
                 && ConsentValidFromDate.AsDateTime() > ConsentValidToDate.AsDateTime())
             {
-                yield return new ValidationResult("The consent valid from date must be before the consent valid to date", 
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidFromBeforeValidTo, 
                     new[] { "ConsentValidFromDate" });
             }
 
             if (ConsentValidFromDate.IsCompleted 
                 && ConsentValidFromDate.AsDateTime().GetValueOrDefault().Date < SystemTime.UtcNow.Date)
             {
-                yield return new ValidationResult("The consent valid from date must not be in the past", 
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentDateNotPast, 
                     new[] { "ConsentValidFromDate" });
+            }
+        }
+
+        private IEnumerable<ValidationResult> ValidateConsentWithdrawn()
+        {
+            if (string.IsNullOrWhiteSpace(ReasonsForConsentWithdrawal))
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ReasonConsentWithdrawnRequired,
+                    new[] { "ReasonsForConsentWithdrawal" });
             }
         } 
     }

@@ -5,7 +5,7 @@
     var selectedDropdownSelector = dropdownId + " :selected";
     var preLoad = true;
     $(dropdownId).change(function () {
-        var selected = $(selectedDropdownSelector).text();
+        var selected = $(selectedDropdownSelector).val();
 
         $("." + panelClass).addClass("js-hidden");
 

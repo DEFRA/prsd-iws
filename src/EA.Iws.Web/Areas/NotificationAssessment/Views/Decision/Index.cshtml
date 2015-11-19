@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Core.Admin
-@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.NotificationAssessmentDecisionViewModel
+@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.Decision.NotificationAssessmentDecisionViewModel
 
 @{
     ViewBag.Title = "Assessment Decision";
@@ -48,6 +48,10 @@
 
         <div id="@Html.Raw("status" + DecisionType.Consent)" class="js-hidden assessment-decision">
             @Html.Partial("_Consent")
+        </div>
+
+        <div id="@Html.Raw("status" + DecisionType.ConsentWithdrawn)" class="js-hidden assessment-decision">
+            @Html.Partial("_ConsentWithdrawn")
         </div>
     }
 
