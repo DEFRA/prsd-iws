@@ -48,6 +48,7 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> withdrawTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> objectTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
 
@@ -98,6 +99,7 @@
             acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
             withdrawTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Withdraw);
             objectTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Object);
+            withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -148,7 +150,16 @@
             stateMachine.Configure(NotificationStatus.Consented)
                 .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn);
 
+            stateMachine.Configure(NotificationStatus.ConsentWithdrawn)
+                .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn);
+
             return stateMachine;
+        }
+
+        private void OnConsentWithdrawn(DateTime withdrawnDate, string reasons)
+        {
+            Dates.ConsentWithdrawnDate = withdrawnDate;
+            Dates.ConsentWithdrawnReasons = reasons;
         }
 
         private void OnWithdrawn(DateTime withdrawnDate)
@@ -252,6 +263,7 @@
 
         public void WithdrawConsent(DateTime withdrawalDate, string reasonsForWithdrawal)
         {
+            stateMachine.Fire(withdrawConsentTrigger, withdrawalDate, reasonsForWithdrawal);
         }
 
         public IEnumerable<DecisionType> GetAvailableDecisions()

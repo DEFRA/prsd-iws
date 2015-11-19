@@ -159,6 +159,7 @@
     <Content Include="scripts\Update\Sprint20\20151116-160200-update-registration-number-columns.sql" />
     <Content Include="scripts\Update\Sprint20\20151117-095400-add-ca-import-notification.sql" />
     <Content Include="scripts\Update\Sprint20\20151117-161600-add-movement-date-history-table.sql" />
+    <Content Include="scripts\Update\Sprint21\20151119-164000-add-consent-withdrawn-columns.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

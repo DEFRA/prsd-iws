@@ -6,7 +6,6 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
-    using Prsd.Core;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -23,6 +22,9 @@
         private DateTime transmittedDate = new DateTime(2015, 8, 22);
         private DateTime acknowledgedDate = new DateTime(2015, 8, 23);
         private DateTime decisionByDate = new DateTime(2015, 8, 24);
+        private DateTime consentedDate = new DateTime(2015, 9, 1);
+        private DateTime withdrawnDate = new DateTime(2015, 9, 10);
+        private readonly string AnyString = "Where is Wilfred hiding?";
 
         public NotificationAssessmentStatusTests()
         {
@@ -137,7 +139,8 @@
         [Fact]
         public void CanSetPaymentReceivedDateWhenReceived()
         {
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            SetNotificationStatus(NotificationStatus.NotificationReceived);
+
             notificationAssessment.PaymentReceived(paymentDate);
 
             Assert.Equal(paymentDate, notificationAssessment.Dates.PaymentReceivedDate);
@@ -154,7 +157,8 @@
         [Fact]
         public void CanSetCommencementDateWhenReceived()
         {
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            SetNotificationStatus(NotificationStatus.NotificationReceived);
+
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
 
             notificationAssessment.Commenced(commencementDate, nameOfOfficer);
@@ -165,7 +169,8 @@
         [Fact]
         public void CanSetCommencementDateWhenReceived_SetsNameOfOfficer()
         {
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+            SetNotificationStatus(NotificationStatus.NotificationReceived);
+
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, receivedDate, notificationAssessment.Dates);
 
             notificationAssessment.Commenced(commencementDate, nameOfOfficer);
@@ -176,7 +181,7 @@
         [Fact]
         public void CantSetCommencementDateWithoutPaymentDate()
         {
-            ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, notificationAssessment);
+
 
             Action setCommencementDate = () => notificationAssessment.Commenced(commencementDate, nameOfOfficer);
 
@@ -310,6 +315,46 @@
             notificationAssessment.Withdraw(date);
             
             Assert.Equal(date, notificationAssessment.Dates.WithdrawnDate);
+        }
+
+        [Fact]
+        public void ConsentWithdrawn_PossibleFromConsentedNotification()
+        {
+            SetNotificationStatus(NotificationStatus.Consented);
+
+            notificationAssessment.WithdrawConsent(withdrawnDate, AnyString);
+
+            Assert.Equal(NotificationStatus.ConsentWithdrawn, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void ConsentWithdrawn_SetsConsentWithdrawnDate()
+        {
+            SetNotificationStatus(NotificationStatus.Consented);
+
+            notificationAssessment.WithdrawConsent(withdrawnDate, AnyString);
+
+            Assert.Equal(withdrawnDate, notificationAssessment.Dates.WithdrawnDate);
+        }
+
+        [Fact]
+        public void ConsentWithdrawn_SetsConsentWithdrawnReasons()
+        {
+            SetNotificationStatus(NotificationStatus.Consented);
+
+            notificationAssessment.WithdrawConsent(withdrawnDate, AnyString);
+
+            Assert.Equal(AnyString, notificationAssessment.Dates.ConsentWithdrawnReasons);
+        }
+
+        [Fact]
+        public void ConsentWithdrawn_CannotWithdrawConsentFromObjectedNotification()
+        {
+            SetNotificationStatus(NotificationStatus.Objected);
+
+            Action withdrawConsent = () => notificationAssessment.WithdrawConsent(withdrawnDate, AnyString);
+
+            Assert.Throws<InvalidOperationException>(withdrawConsent);
         }
     }
 }

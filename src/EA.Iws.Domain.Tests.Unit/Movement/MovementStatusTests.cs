@@ -1,14 +1,9 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using Core.Movement;
-    using Core.Shared;
     using Domain.Movement;
-    using Domain.NotificationApplication;
-    using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
