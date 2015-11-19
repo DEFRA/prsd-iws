@@ -40,6 +40,8 @@ $path: "govuk_toolkit/images/";
 // Custom IWS and overrides
 // ==========================================================================
 
+$internal-colour: $department-for-environment-food-rural-affairs;
+
 @import "iws/helpers";
 
 @import "iws/display-elements";
@@ -75,3 +77,5 @@ $path: "govuk_toolkit/images/";
 @import "iws/facility-table";
 
 @import "iws/import-waste-codes";
+
+@import "iws/internal-menu";

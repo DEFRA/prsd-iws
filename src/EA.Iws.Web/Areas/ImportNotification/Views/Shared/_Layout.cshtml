@@ -3,11 +3,12 @@
 }
 
 <div class="grid-row">
-    <div class="column-two-thirds">
-        @RenderBody()
+    <div class="column-third">
+        @Html.Partial("_InternalMenu")
     </div>
 
-    <div class="column-third">
+    <div class="column-two-thirds">
+        @RenderBody()
     </div>
 </div>
 

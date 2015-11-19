@@ -161,4 +161,19 @@ $(document).ready(function () {
             });
         }
     });
+
+    // Menu
+    $("#accordion h3").click(function() {
+        if ($(this).hasClass("current")) {
+            $(".current").removeClass("current");
+            $("#accordion ul ul").slideUp();
+            return;
+        }
+        
+        $(".current").removeClass("current");
+        $(this).addClass('current');
+
+        $("#accordion ul ul").slideUp();
+        $(".current").siblings("ul").slideDown();
+    });
 });
