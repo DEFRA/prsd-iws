@@ -144,6 +144,9 @@
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="NotificationAssessment\WithdrawConsentForNotificationApplicationHandler.cs" />
+    <Compile Include="NotificationMovements\Capture\CreateMovementInternalHandler.cs" />
+    <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandler.cs" />
+    <Compile Include="NotificationMovements\Capture\GetNextAvailableMovementNumberForNotificationHandler.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValidHandler.cs" />
     <Compile Include="NotificationMovements\Create\CreateMovementAndDetailsHandler.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumberHandler.cs" />

@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement.CreateViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Number)
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.PrenotificationDate)">
+        @Html.Gds().LabelFor(m => m.PrenotificationDate)
+        @Html.Gds().ValidationMessageFor(m => m.PrenotificationDate)
+        @Html.EditorFor(m => m.PrenotificationDate)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualShipmentDate)">
+        @Html.Gds().LabelFor(m => m.ActualShipmentDate)
+        @Html.Gds().ValidationMessageFor(m => m.ActualShipmentDate)
+        @Html.EditorFor(m => m.ActualShipmentDate)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+    </div>
+}
+

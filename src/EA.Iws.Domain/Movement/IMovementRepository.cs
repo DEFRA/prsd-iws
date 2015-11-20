@@ -16,5 +16,7 @@
         Task<IEnumerable<Movement>> GetMovementsByStatus(Guid notificationId, MovementStatus status);
 
         Task<Movement> GetByNumberOrDefault(int movementNumber, Guid notificationId);
+
+        void Add(Movement movement);
     }
 }

@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using NotificationApplication.Shipment;
 
-    public class MovementNumberGenerator
+    public class MovementNumberGenerator : IMovementNumberGenerator
     {
         private readonly IShipmentInfoRepository shipmentRepository;
         private readonly IMovementRepository movementRepository;

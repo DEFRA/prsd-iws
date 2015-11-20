@@ -332,7 +332,7 @@
 
             notificationAssessment.WithdrawConsent(withdrawnDate, AnyString);
 
-            Assert.Equal(withdrawnDate, notificationAssessment.Dates.WithdrawnDate);
+            Assert.Equal(withdrawnDate, notificationAssessment.Dates.ConsentWithdrawnDate);
         }
 
         [Fact]

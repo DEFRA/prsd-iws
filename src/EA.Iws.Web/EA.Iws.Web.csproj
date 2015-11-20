@@ -731,6 +731,9 @@
     <Content Include="Areas\ImportNotification\Views\Home\_Preconsented.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Decision\_ConsentWithdrawn.cshtml" />
     <Content Include="Content\iws\_internal-menu.scss" />
+    <Content Include="Areas\NotificationMovements\Views\CaptureMovement\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\CaptureMovement\Create.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\CaptureMovement\_Prenotify.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1493,6 +1496,7 @@
     <Compile Include="Areas\NotificationMovements\Controllers\EditController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\ReceiveMovementController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\CaptureMovementController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\UploadChoiceController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\UploadChoiceControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1501,6 +1505,7 @@
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\CaptureMovement\CreateViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\DownloadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\MeansOfTransportViewModel.cs" />
@@ -1531,6 +1536,17 @@
     <Compile Include="Areas\NotificationMovements\ViewModels\Edit\EditViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Home\CreateSummaryViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\CaptureMovement\CreateViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\ViewModels\CaptureMovement\SearchViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\CaptureMovement\SearchViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1551,6 +1567,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\CaptureMovement\CreateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\CaptureMovement\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\UploadChoice\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2379,6 +2405,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\CaptureMovement\CreateViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\CaptureMovement\SearchViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UploadChoiceViewModelResources.Designer.cs</LastGenOutput>
@@ -2394,6 +2428,14 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Home\SummaryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\CaptureMovement\CreateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\CaptureMovement\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\UploadChoice\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

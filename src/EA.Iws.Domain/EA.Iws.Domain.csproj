@@ -85,9 +85,14 @@
     <Compile Include="Movement\GetOriginalDate.cs" />
     <Compile Include="Movement\IMovementDateHistoryRepository.cs" />
     <Compile Include="Movement\IMovementDetailsRepository.cs" />
+    <Compile Include="Movement\ICapturedMovementFactory.cs" />
+    <Compile Include="Movement\IMovementNumberGenerator.cs" />
+    <Compile Include="Movement\IMovementNumberValidator.cs" />
     <Compile Include="Movement\MovementDateChangeEvent.cs" />
     <Compile Include="Movement\MovementDateHistory.cs" />
     <Compile Include="Movement\MovementDetails.cs" />
+    <Compile Include="Movement\CapturedMovementFactory.cs" />
+    <Compile Include="Movement\MovementNumberException.cs" />
     <Compile Include="Movement\MovementNumberGenerator.cs" />
     <Compile Include="Movement\IMovementRepository.cs" />
     <Compile Include="Movement\CertificateFactory.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="Movement\INotificationMovementsSummaryRepository.cs" />
     <Compile Include="Movement\MovementFileNameGenerator.cs" />
     <Compile Include="Movement\MovementCompletedReceipt.cs" />
+    <Compile Include="Movement\MovementNumberValidator.cs" />
     <Compile Include="Movement\MovementReceipt.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />

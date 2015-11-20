@@ -11,6 +11,7 @@
         Received = 3,
         Completed = 4,
         Rejected = 5,
-        Cancelled = 6
+        Cancelled = 6,
+        Captured = 7
     }
 }

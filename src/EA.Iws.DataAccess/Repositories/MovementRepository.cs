@@ -39,6 +39,11 @@
             && m.Number == movementNumber).SingleOrDefaultAsync();
         }
 
+        public void Add(Movement movement)
+        {
+            context.Movements.Add(movement);
+        }
+
         public async Task<Movement> GetById(Guid movementId)
         {
             var movement = await context.Movements.SingleAsync(m => m.Id == movementId);

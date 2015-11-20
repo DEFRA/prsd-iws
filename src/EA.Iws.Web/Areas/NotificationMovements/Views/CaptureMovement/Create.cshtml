@@ -1,0 +1,11 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.CaptureMovement.CreateResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement.CreateViewModel
+@{
+    ViewBag.Title = Resource.PageTitle;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+<p>@string.Format(Resource.CurrentShipmentParagraph, Model.Number)</p>
+
+@Html.Partial("_Prenotify")

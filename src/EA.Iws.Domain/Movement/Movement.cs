@@ -30,6 +30,19 @@
         protected Movement()
         {
             stateMachine = CreateStateMachine();
+            StatusChangeCollection = new List<MovementStatusChange>();
+        }
+
+        public static Movement Capture(int movementNumber, Guid notificationId, DateTime actualDate,
+            DateTime? preNotificationDate)
+        {
+            return new Movement
+            {
+                NotificationId = notificationId,
+                Number = movementNumber,
+                Date = actualDate,
+                Status = MovementStatus.Captured
+            };
         }
 
         internal Movement(int movementNumber, Guid notificationId, DateTime date)
