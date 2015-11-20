@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
     using Core.Admin;
     using Core.FinancialGuarantee;
@@ -22,7 +23,19 @@
 
         public FinancialGuaranteeDecision? Decision { get; set; }
 
-        public SelectList PossibleDecisions { get; set; }
+        public SelectList PossibleDecisions
+        {
+            get
+            {
+                var values = Enum.GetValues(typeof(FinancialGuaranteeDecision))
+                    .Cast<FinancialGuaranteeDecision>()
+                    .Select(e => new KeyValuePair<string, FinancialGuaranteeDecision>(
+                        EnumHelper.GetDisplayName(e),
+                        e));
+
+                return new SelectList(values, "Value", "Key");
+            }
+        }
 
         public DateTime? ReceivedDate { get; set; }
 
@@ -48,7 +61,6 @@
 
         public FinancialGuaranteeDecisionViewModel()
         {
-            PossibleDecisions = new SelectList(EnumHelper.GetValues(typeof(FinancialGuaranteeDecision)), "key", "value");
             DecisionMadeDate = new OptionalDateInputViewModel();
             ApprovedFrom = new OptionalDateInputViewModel();
             ApprovedTo = new OptionalDateInputViewModel();

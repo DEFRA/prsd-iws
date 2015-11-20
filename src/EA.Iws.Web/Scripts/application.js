@@ -146,7 +146,7 @@ $(document).ready(function () {
     });
 
     // Select lists
-    $("select[data-select-box='true'").removeClass("form-control").select2({
+    $("select[data-select-box='true']").removeClass("form-control").select2({
         placeholder: "Please select...",
         sortResults: function (results, container, query) {
             return results.sort(function (a, b) {
