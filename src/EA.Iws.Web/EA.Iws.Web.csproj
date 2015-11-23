@@ -734,6 +734,9 @@
     <Content Include="Areas\NotificationMovements\Views\CaptureMovement\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\CaptureMovement\Create.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\CaptureMovement\_Prenotify.cshtml" />
+    <Content Include="Areas\Movement\Views\InternalCapture\Index.cshtml" />
+    <Content Include="Areas\Movement\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
+    <Content Include="Areas\Movement\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1143,7 +1146,27 @@
     <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\EditDateController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Movement\Controllers\InternalCaptureController.cs" />
     <Compile Include="Areas\Movement\ViewModels\EditDate\EditDateViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\InternalCapture\CaptureViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\InternalCapture\CaptureViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaptureViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Movement\ViewModels\InternalCapture\IComplete.cs" />
+    <Compile Include="Areas\Movement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\InternalCapture\RecoveryViewModelResources.Designer.cs">
+      <DependentUpon>RecoveryViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Movement\ViewModels\InternalCapture\ReceiptViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceiptViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Movement\ViewModels\InternalCapture\RecoveryViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1158,6 +1181,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Movement\Views\Shared\EditorTemplates\RecoveryResources.Designer.cs">
+      <DependentUpon>RecoveryResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Movement\Views\Shared\EditorTemplates\ReceiptResources.Designer.cs">
+      <DependentUpon>ReceiptResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Movement\Views\InternalCapture\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Movement\Views\Submit\SuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2156,6 +2194,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\ViewModels\InternalCapture\CaptureViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CaptureViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\ViewModels\InternalCapture\RecoveryViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\ViewModels\InternalCapture\ReceiptViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SubmitViewModelResources.Designer.cs</LastGenOutput>
@@ -2167,6 +2217,18 @@
     <EmbeddedResource Include="Areas\Movement\Views\Home\SummaryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\Views\Shared\EditorTemplates\RecoveryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\Views\Shared\EditorTemplates\ReceiptResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\Views\InternalCapture\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Movement\Views\Submit\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

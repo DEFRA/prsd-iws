@@ -96,6 +96,7 @@
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
+    <Compile Include="Movement\GetMovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\Summary\GetMovementSummary.cs" />
     <Compile Include="Movement\GetMovementUnitsByMovementId.cs" />
     <Compile Include="Movement\GetSubmittedMovementsByNotificationId.cs" />

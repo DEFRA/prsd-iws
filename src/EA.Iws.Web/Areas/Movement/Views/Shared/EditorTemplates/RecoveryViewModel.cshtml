@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture.RecoveryViewModel
+@using EA.Iws.Core.Shared
+@using Resource = EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates.RecoveryResources
+
+@{
+    var operationVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
+}
+
+<h2 class="heading-medium">@Html.Raw(string.Format(Resource.MainHeading, Model.NotificationType.ToString()))</h2>
+
+@Html.HiddenFor(m => m.NotificationType)
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate.Day) @Html.Gds().FormGroupClass(m => m.RecoveryDate.Month) @Html.Gds().FormGroupClass(m => m.RecoveryDate.Year)">
+    @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationVerb), new { @class = "heading-small" })
+    @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
+    @Html.EditorFor(m => m.RecoveryDate)
+</div>
