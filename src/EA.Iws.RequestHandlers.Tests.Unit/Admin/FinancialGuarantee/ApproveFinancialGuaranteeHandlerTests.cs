@@ -10,11 +10,12 @@
     public class ApproveFinancialGuaranteeHandlerTests : FinancialGuaranteeDecisionTests
     {
         private const int AnyInt = 7;
+        private const string BlanketBondReference = "ref 23";
         private readonly ApproveFinancialGuaranteeHandler handler;
         private readonly TestFinancialGuarantee financialGuarantee;
         private readonly ApproveFinancialGuarantee approveFinancialGuarantee =
             new ApproveFinancialGuarantee(ApplicationCompletedId, FirstDate, MiddleDate,
-                LastDate, AnyInt);
+                LastDate, BlanketBondReference, AnyInt);
 
         public ApproveFinancialGuaranteeHandlerTests()
         {
@@ -33,7 +34,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, AnyInt)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt)));
         }
 
         [Fact]
@@ -42,7 +43,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, AnyInt)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt)));
 
             Assert.False(financialGuarantee.ApproveCalled);
         }

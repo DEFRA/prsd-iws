@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System.Linq;
     using Core.Admin;
     using Core.FinancialGuarantee;
     using Domain;
@@ -37,7 +36,8 @@
                 ValidTo = source.ApprovedTo,
                 RefusalReason = source.RefusalReason,
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
-                Decision = GetDecision(source)
+                Decision = GetDecision(source),
+                BlanketBondReference = source.BlanketBondReference
             };
         }
 

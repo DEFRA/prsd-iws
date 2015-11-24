@@ -17,6 +17,7 @@
                         source.DecisionMadeDate.AsDateTime().Value, 
                         source.ApprovedFrom.AsDateTime().Value,
                         source.ApprovedTo.AsDateTime().Value,
+                        source.BlanketBondReference,
                         source.ActiveLoadsPermitted.Value);
                 case FinancialGuaranteeDecision.Refused:
                     return new RefuseFinancialGuarantee(id, 

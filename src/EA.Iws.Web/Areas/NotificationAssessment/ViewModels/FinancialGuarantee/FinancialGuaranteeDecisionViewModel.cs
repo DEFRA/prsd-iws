@@ -66,6 +66,23 @@
             ApprovedTo = new OptionalDateInputViewModel();
         }
 
+        public bool? IsApproved
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(BlanketBondReference))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+        
+        [Display(Name = "Blanket bond reference number")]
+        [MaxLength(70)]
+        public string BlanketBondReference { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!Decision.HasValue)
@@ -134,6 +151,11 @@
                 && ApprovedFrom.AsDateTime() > ApprovedTo.AsDateTime())
             {
                 yield return new ValidationResult("The Approved to date must not be before the Approved from date", new[] { "ApprovedTo.Day" });
+            }
+
+            if (IsApproved.GetValueOrDefault() && string.IsNullOrEmpty(BlanketBondReference))
+            {
+                yield return new ValidationResult("Please enter a reference number for the blanket bond", new[] { "BlanketBondReferenceNumber" });
             }
 
             if (!ActiveLoadsPermitted.HasValue)

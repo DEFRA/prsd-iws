@@ -70,6 +70,8 @@
 
         public string RefusalReason { get; protected set; }
 
+        public string BlanketBondReference { get; protected set; }
+
         public int? ActiveLoadsPermitted { get; protected set; }
 
         public void Received(DateTime date)
@@ -206,6 +208,7 @@
             ApprovedTo = approveDates.ApprovedTo;
             ApprovedFrom = approveDates.ApprovedFrom;
             ActiveLoadsPermitted = approveDates.ActiveLoadsPermitted;
+            BlanketBondReference = approveDates.BlanketBondReference;
         }
 
         public virtual void Refuse(DateTime decisionDate, string refusalReason)

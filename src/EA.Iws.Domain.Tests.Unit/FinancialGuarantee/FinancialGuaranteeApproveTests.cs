@@ -11,12 +11,14 @@
         private static readonly DateTime TwoDaysAfterCompletionDate = CompletedDate.AddDays(2);
         private static readonly DateTime YearAfterCompletionDate = CompletedDate.AddYears(1);
         private const int AnyInt = 7;
+        private const string BlanketBondReference = "ref 23";
 
         private readonly Action<FinancialGuarantee> setGuaranteeApproved =
             fg =>
                 fg.Approve(new ApproveDates(AfterCompletionDate, 
                     TwoDaysAfterCompletionDate, 
-                    YearAfterCompletionDate, 
+                    YearAfterCompletionDate,
+                    BlanketBondReference, 
                     AnyInt));
 
         [Fact]
@@ -31,7 +33,7 @@
             Assert.Throws<InvalidOperationException>(
                 () =>
                     CompletedFinancialGuarantee.Approve(new ApproveDates(BeforeCompletionDate, AfterCompletionDate,
-                        TwoDaysAfterCompletionDate, AnyInt)));
+                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt)));
         }
 
         [Fact]
@@ -40,7 +42,7 @@
             Assert.Throws<InvalidOperationException>(
                 () =>
                     CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate,
-                        TwoDaysAfterCompletionDate, AnyInt)));
+                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt)));
         }
 
         [Fact]
@@ -73,7 +75,7 @@
         {
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate, TwoDaysAfterCompletionDate, AnyInt)));
+                    CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate, TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt)));
 
             Assert.Equal(FinancialGuaranteeStatus.ApplicationComplete, CompletedFinancialGuarantee.Status);
             A.CallTo(() => Dispatcher.Dispatch(A<FinancialGuaranteeStatusChangeEvent>.Ignored)).MustNotHaveHappened();

@@ -21,7 +21,8 @@ namespace EA.Iws.Web.Mappings
                 ReasonForRefusal = source.RefusalReason,
                 Decision = source.Decision,
                 CompletedDate = source.CompletedDate,
-                ReceivedDate = source.ReceivedDate
+                ReceivedDate = source.ReceivedDate,
+                BlanketBondReference = source.BlanketBondReference
             };
         }
     }

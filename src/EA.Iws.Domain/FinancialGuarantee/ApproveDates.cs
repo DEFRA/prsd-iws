@@ -12,7 +12,9 @@
 
         public int ActiveLoadsPermitted { get; private set; }
 
-        public ApproveDates(DateTime decisionDate, DateTime approvedFrom, DateTime approvedTo, int activeLoadsPermitted)
+        public string BlanketBondReference { get; private set; }
+
+        public ApproveDates(DateTime decisionDate, DateTime approvedFrom, DateTime approvedTo, string blanketBondReference, int activeLoadsPermitted)
         {
             if (approvedFrom > approvedTo)
             {
@@ -23,6 +25,7 @@
             ApprovedFrom = approvedFrom;
             ApprovedTo = approvedTo;
             ActiveLoadsPermitted = activeLoadsPermitted;
+            BlanketBondReference = blanketBondReference;
         }
     }
 }

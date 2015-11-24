@@ -24,5 +24,7 @@ namespace EA.Iws.Core.Admin
         public int? ActiveLoadsPermitted { get; set; }
 
         public string RefusalReason { get; set; }
+
+        public string BlanketBondReference { get; set; }
     }
 }

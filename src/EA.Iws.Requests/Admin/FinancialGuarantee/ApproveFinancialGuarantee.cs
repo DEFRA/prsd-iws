@@ -11,10 +11,13 @@
 
         public int ActiveLoadsPermitted { get; set; }
 
+        public string BlanketBondReference { get; set; }
+
         public ApproveFinancialGuarantee(Guid notificationId, 
             DateTime decisionDate,
             DateTime approvedFrom,
             DateTime approvedTo,
+            string blanketBondReference,
             int activeLoadsPermitted)
         {
             if (approvedFrom > approvedTo)
@@ -29,6 +32,7 @@
             ApprovedFrom = approvedFrom;
             ApprovedTo = approvedTo;
             ActiveLoadsPermitted = activeLoadsPermitted;
+            BlanketBondReference = blanketBondReference;
         }
     }
 }
