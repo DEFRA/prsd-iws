@@ -180,7 +180,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NumberOfCarriers(Guid notificationId, NumberOfCarriersViewModel model)
+        public async Task<ActionResult> NumberOfCarriers(Guid notificationId, NumberOfCarriersViewModel model)
         {
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[NumberOfCarriersKey] = model.Number;
@@ -188,6 +188,9 @@
             if (!ModelState.IsValid)
             {
                 ViewBag.MovementNumber = model.MovementNumber;
+                var meansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId));
+                model.MeansOfTransportViewModel = new MeansOfTransportViewModel { NotificationMeansOfTransport = meansOfTransport };
+
                 return View(model);
             }
 
