@@ -18,50 +18,42 @@
         @Html.Gds().ValidationSummary()
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
-            <table title=@CopyFromNotificationResources.TableTitleForNotificationSummary>
+            <table title=@CopyFromNotificationResources.TableTitleForNotificationSummary class="odd-table">
                 <thead>
                     <tr>
-                        <th class="formatted-block-table-header">
+                        <th>
                             @CopyFromNotificationResources.ThNotificationNumber
                         </th>
-                        <th class="formatted-block-table-header">
+                        <th>
                             @CopyFromNotificationResources.ThExporter
                         </th>
-                        <th class="formatted-block-table-header">
+                        <th>
                             @CopyFromNotificationResources.ThImporter
                         </th>
-                        <th class="formatted-block-table-header">
+                        <th>
                             @CopyFromNotificationResources.ThWasteType
                         </th>
-                        <th class="formatted-block-table-header">
+                        <th>
                             @CopyFromNotificationResources.ThSelect
                         </th>
                     </tr>
                 </thead>
-                <tbody class="formatted-block-table-body">
+                <tbody>
                     @for (int i = 0; i < Model.Notifications.Count; i++)
                     {
                         var radioId = "radio" + i;
-                        <tr class="auto-width">
+                        <tr>
                             <td>
-                                <div class="formatted-block-table-cell">
-                                    @Html.DisplayFor(m => m.Notifications[i].Number)
-                                </div>
+                                @Html.DisplayFor(m => m.Notifications[i].Number)
                             </td>
                             <td>
-                                <div class="formatted-block-table-cell">
-                                    @Html.DisplayFor(m => m.Notifications[i].ExporterName)
-                                </div>
+                                @Html.DisplayFor(m => m.Notifications[i].ExporterName)
                             </td>
                             <td>
-                                <div class="formatted-block-table-cell">
-                                    @Html.DisplayFor(m => m.Notifications[i].ImporterName)
-                                </div>
+                                @Html.DisplayFor(m => m.Notifications[i].ImporterName)
                             </td>
                             <td>
-                                <div class="formatted-block-table-cell">
-                                    @Html.DisplayFor(m => m.Notifications[i].WasteName)
-                                </div>
+                                @Html.DisplayFor(m => m.Notifications[i].WasteName)
                             </td>
                             <td>
                                 @Html.RadioButtonFor(m => m.SelectedNotification, Model.Notifications[i].Id, new { id = radioId, title = Model.Notifications[i].Number })
