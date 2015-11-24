@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply for an International Waste Shipments Notification..
+        ///   Looks up a localized string similar to apply for an International Waste Shipments Notification.
         /// </summary>
         public static string ListItem1 {
             get {
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download the International Waste Shipments Notification application form and supporting documents..
+        ///   Looks up a localized string similar to download the International Waste Shipments Notification application form and supporting documents.
         /// </summary>
         public static string ListItem2 {
             get {

@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ListItem1" xml:space="preserve">
-    <value>Apply for an International Waste Shipments Notification.</value>
+    <value>apply for an International Waste Shipments Notification</value>
   </data>
   <data name="ListItem2" xml:space="preserve">
-    <value>Download the International Waste Shipments Notification application form and supporting documents.</value>
+    <value>download the International Waste Shipments Notification application form and supporting documents</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Use this service to:</value>
