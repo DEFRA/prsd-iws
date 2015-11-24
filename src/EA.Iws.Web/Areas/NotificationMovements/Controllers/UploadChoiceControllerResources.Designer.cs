@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid shipment number: it should not be the same as an existing number.
+        ///   Looks up a localized string similar to This shipment prenotification document has already been uploaded..
         /// </summary>
         public static string NotNew {
             get {

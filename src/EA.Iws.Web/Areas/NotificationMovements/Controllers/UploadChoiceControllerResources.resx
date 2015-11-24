@@ -121,7 +121,7 @@
     <value>The shipment for the number provided does not exist</value>
   </data>
   <data name="NotNew" xml:space="preserve">
-    <value>Please enter a valid shipment number: it should not be the same as an existing number</value>
+    <value>This shipment prenotification document has already been uploaded.</value>
   </data>
   <data name="OutOfRange" xml:space="preserve">
     <value>Please enter a valid shipment number: it should not be more than your total number of shipments</value>
