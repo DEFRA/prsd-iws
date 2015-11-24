@@ -71,7 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\NotificationAssessment\AddNotificationTransactionHandlerTests.cs" />
-    <Compile Include="Admin\NotificationAssessment\GetDatesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandlerTests.cs" />
@@ -142,7 +141,6 @@
     <Compile Include="Admin\SearchExportNotificationsHandlerTests.cs" />
     <Compile Include="MeansOfTransport\GetMeansOfTransportByNotificationIdHandlerTests.cs" />
     <Compile Include="MeansOfTransport\SetMeansOfTransportForNotificationHandler.cs" />
-    <Compile Include="Notification\GetNotificationChargeHandlerTests.cs" />
     <Compile Include="Organisations\FindMatchingCompaniesHandlerTests.cs" />
     <Compile Include="Producer\ProducerHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

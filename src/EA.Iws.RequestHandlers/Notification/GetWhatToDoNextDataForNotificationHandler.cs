@@ -5,7 +5,6 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -14,25 +13,20 @@
     {
         private readonly IwsContext context;
         private readonly IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextData> map;
-        private readonly NotificationChargeCalculator chargeCalculator;
-        private readonly IShipmentInfoRepository shipmentInfoRepository;
+        private readonly INotificationChargeCalculator chargeCalculator;
 
         public GetWhatToDoNextDataForNotificationHandler(IwsContext context, 
             IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextData> map,
-            NotificationChargeCalculator chargeCalculator,
-            IShipmentInfoRepository shipmentInfoRepository)
+            INotificationChargeCalculator chargeCalculator)
         {
             this.context = context;
             this.map = map;
             this.chargeCalculator = chargeCalculator;
-            this.shipmentInfoRepository = shipmentInfoRepository;
         }
 
         public async Task<WhatToDoNextData> HandleAsync(GetWhatToDoNextDataForNotification message)
         {
             var notification = await context.GetNotificationApplication(message.Id);
-            var pricingStructures = await context.PricingStructures.ToArrayAsync();
-            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(message.Id);
 
             var competentAuthority =
                 await
@@ -41,7 +35,7 @@
 
             var result = map.Map(notification, competentAuthority);
 
-            result.Charge = chargeCalculator.GetValue(pricingStructures, notification, shipmentInfo);
+            result.Charge = await chargeCalculator.GetValue(message.Id);
 
             return result;
         }

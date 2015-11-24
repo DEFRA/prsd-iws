@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
-    using System.Collections.Generic;
-    using Shipment;
+    using System;
+    using System.Threading.Tasks;
 
     public interface INotificationChargeCalculator
     {
-        decimal GetValue(IEnumerable<PricingStructure> pricingStructures, NotificationApplication notification, ShipmentInfo shipmentInfo);
+        Task<decimal> GetValue(Guid notificationId);
     }
 }

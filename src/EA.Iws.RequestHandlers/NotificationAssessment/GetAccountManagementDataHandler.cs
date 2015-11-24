@@ -17,14 +17,14 @@
     {
         private readonly INotificationTransactionRepository repository;
         private readonly IMap<IList<NotificationTransaction>, AccountManagementData> accountManagementMap;
-        private readonly NotificationChargeCalculator chargeCalculator;
-        private readonly NotificationTransactionCalculator transactionCalculator;
+        private readonly INotificationChargeCalculator chargeCalculator;
+        private readonly INotificationTransactionCalculator transactionCalculator;
         private readonly IwsContext context;
 
         public GetAccountManagementDataHandler(INotificationTransactionRepository repository,
             IMap<IList<NotificationTransaction>, AccountManagementData> accountManagementMap,
-            NotificationChargeCalculator chargeCalculator,
-            NotificationTransactionCalculator transactionCalculator,
+            INotificationChargeCalculator chargeCalculator,
+            INotificationTransactionCalculator transactionCalculator,
             IwsContext context)
         {
             this.repository = repository;
@@ -40,7 +40,7 @@
 
             var accountManagementData = accountManagementMap.Map(transactions);
 
-            var totalBillable = await GetTotalBillable(message.NotificationId);
+            var totalBillable = await chargeCalculator.GetValue(message.NotificationId);
             var credits = transactionCalculator.TotalCredits(transactions);
             var debits = transactionCalculator.TotalDebits(transactions);
 
@@ -48,15 +48,6 @@
             accountManagementData.Balance = credits - debits;
 
             return accountManagementData;
-        }
-
-        private async Task<decimal> GetTotalBillable(Guid id)
-        {
-            var notification = await context.NotificationApplications.Where(n => n.Id == id).SingleAsync();
-            var pricingStructures = await context.PricingStructures.ToArrayAsync();
-            var shipmentInfo = await context.ShipmentInfos.Where(s => s.NotificationId == id).FirstAsync();
-
-            return chargeCalculator.GetValue(pricingStructures, notification, shipmentInfo);
         }
     }
 }

@@ -1,18 +1,38 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using Core.Shared;
     using Shipment;
 
     public class NotificationChargeCalculator : INotificationChargeCalculator
     {
-        public decimal GetValue(IEnumerable<PricingStructure> pricingStructures, NotificationApplication notification, ShipmentInfo shipmentInfo)
+        private readonly IShipmentInfoRepository shipmentInfoRepository;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IPricingStructureRepository pricingStructureRepository;
+
+        public NotificationChargeCalculator(IShipmentInfoRepository shipmentInfoRepository, 
+            INotificationApplicationRepository notificationApplicationRepository,
+            IPricingStructureRepository pricingStructureRepository)
         {
+            this.shipmentInfoRepository = shipmentInfoRepository;
+            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.pricingStructureRepository = pricingStructureRepository;
+        }
+        
+        public async Task<decimal> GetValue(Guid notificationId)
+        {
+            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
+
             if (shipmentInfo == null)
             {
                 return 0;
             }
+
+            var notification = await notificationApplicationRepository.GetById(notificationId);
+
+            var pricingStructures = await pricingStructureRepository.Get();
 
             var pricingStructure = pricingStructures.Single(p =>
                 p.CompetentAuthority.Value == notification.CompetentAuthority.Value

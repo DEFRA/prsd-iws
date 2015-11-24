@@ -1,21 +1,22 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings.NotificationAssessment
 {
-    using System;
     using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
     using Prsd.Core.Mapper;
 
-    internal class NotificationDatesMap : IMapWithParameter<NotificationDates, Guid, NotificationDatesData>
+    internal class NotificationDatesMap : IMap<NotificationDatesSummary, NotificationDatesData>
     {
-        public NotificationDatesData Map(NotificationDates source, Guid parameter)
+        public NotificationDatesData Map(NotificationDatesSummary source)
         {
             return new NotificationDatesData
             {
-                NotificationId = parameter,
+                NotificationId = source.NotificationId,
                 NotificationReceivedDate = source.NotificationReceivedDate,
+                PaymentReceivedDate = source.PaymentReceivedDate,
+                PaymentIsComplete = source.PaymentIsComplete,
                 CommencementDate = source.CommencementDate,
                 NameOfOfficer = source.NameOfOfficer,
-                CompletedDate = source.CompleteDate,
+                CompletedDate = source.CompletedDate,
                 TransmittedDate = source.TransmittedDate,
                 AcknowledgedDate = source.AcknowledgedDate
             };

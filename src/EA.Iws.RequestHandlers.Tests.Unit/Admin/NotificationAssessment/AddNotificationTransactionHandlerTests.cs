@@ -30,7 +30,7 @@
         public AddNotificationTransactionHandlerTests()
         {
             var chargeCalculator = A.Fake<INotificationChargeCalculator>();
-            A.CallTo(() => chargeCalculator.GetValue(A<PricingStructure[]>.Ignored, A<NotificationApplication>.Ignored, A<ShipmentInfo>.Ignored)).Returns(200.00m);
+            A.CallTo(() => chargeCalculator.GetValue(A<Guid>.Ignored)).Returns(200.00m);
 
             var transactionsList = new List<NotificationTransaction>();
             transactionsList.Add(new NotificationTransaction(new NotificationTransactionData
@@ -44,7 +44,7 @@
             var repository = A.Fake<INotificationTransactionRepository>();
             A.CallTo(() => repository.GetTransactions(NotificationId)).Returns(transactionsList);
 
-            handler = new AddNotificationTransactionHandler(context, repository, chargeCalculator, new NotificationTransactionCalculator());
+            handler = new AddNotificationTransactionHandler(context, repository, new NotificationTransactionCalculator(repository, chargeCalculator));
 
             context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = NotificationId });
 

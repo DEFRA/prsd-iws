@@ -9,12 +9,12 @@
     internal class NotificationApplicationOverviewRepository : INotificationApplicationOverviewRepository
     {
         private readonly INotificationProgressService progressService;
-        private readonly NotificationChargeCalculator chargeCalculator;
+        private readonly INotificationChargeCalculator chargeCalculator;
         private readonly IwsContext db;
 
         public NotificationApplicationOverviewRepository(
             IwsContext db,
-            NotificationChargeCalculator chargeCalculator,
+            INotificationChargeCalculator chargeCalculator,
             INotificationProgressService progressService)
         {
             this.db = db;
@@ -61,16 +61,13 @@
 
             var data = await query.SingleAsync();
 
-            var pricingStructures = await db.PricingStructures.ToArrayAsync();
-
             return NotificationApplicationOverview.Load(
                 data.Notification,
                 data.NotificationAssessment,
                 data.WasteRecovery,
                 data.WasteDisposal,
                 data.Exporter,
-                decimal.ToInt32(
-                    chargeCalculator.GetValue(pricingStructures, data.Notification, data.ShipmentInfo)),
+                decimal.ToInt32(await chargeCalculator.GetValue(notificationId)), 
                 progressService.GetNotificationProgressInfo(notificationId));
         }
     }

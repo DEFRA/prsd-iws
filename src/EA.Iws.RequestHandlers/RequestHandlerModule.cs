@@ -6,6 +6,7 @@
     using Authorization;
     using Autofac;
     using Copy;
+    using DataAccess.Repositories;
     using Decorators;
     using Documents;
     using Domain;
@@ -79,6 +80,8 @@
             builder.RegisterType<NextAvailableMovementNumberGenerator>().As<INextAvailableMovementNumberGenerator>();
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<MovementNumberValidator>().As<IMovementNumberValidator>();
+            builder.RegisterType<NotificationTransactionCalculator>().As<INotificationTransactionCalculator>();
+            builder.RegisterType<NotificationAssessmentDatesSummaryRepository>().As<INotificationAssessmentDatesSummaryRepository>();
 
             if (HasAsposeLicense())
             {
