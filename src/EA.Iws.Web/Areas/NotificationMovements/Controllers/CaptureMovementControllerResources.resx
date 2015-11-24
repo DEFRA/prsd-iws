@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActualDateLabel" xml:space="preserve">
-    <value>Actual date of shipment</value>
+  <data name="MovementNumberNotUnique" xml:space="preserve">
+    <value>Please enter a unique movement number which has not already been pre-notified</value>
   </data>
-  <data name="ActualDateRequired" xml:space="preserve">
-    <value>Please enter the actual date of shipment</value>
-  </data>
-  <data name="PrenotificationDateLabel" xml:space="preserve">
-    <value>Prenotification date</value>
+  <data name="SaveUnsuccessful" xml:space="preserve">
+    <value>This movement could not be created please try recording the shipment again</value>
   </data>
 </root>

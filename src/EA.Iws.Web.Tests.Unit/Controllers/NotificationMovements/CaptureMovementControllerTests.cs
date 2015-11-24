@@ -98,16 +98,6 @@
         }
 
         [Fact]
-        public async Task Create_Post_Success_RedirectsToAction()
-        {
-            A.CallTo(() => mediator.SendAsync(A<CreateMovementInternal>.Ignored)).Returns(true);
-
-            var result = await controller.Create(NotificationId, Model) as RedirectToRouteResult;
-
-            RouteAssert.RoutesTo(result.RouteValues, "Edit", null);
-        }
-
-        [Fact]
         public async Task Create_Post_Fail_ReturnsView()
         {
             A.CallTo(() => mediator.SendAsync(A<CreateMovementInternal>.Ignored)).Returns(false);

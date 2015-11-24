@@ -1491,6 +1491,11 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Controllers\CancelMovementController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\CaptureMovementControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaptureMovementControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CreateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\EditController.cs" />
@@ -2411,6 +2416,10 @@
     <EmbeddedResource Include="Areas\NotificationAssessment\Views\AccountManagement\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Controllers\CaptureMovementControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CaptureMovementControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Controllers\UploadChoiceControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

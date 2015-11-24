@@ -72,6 +72,7 @@
             builder.RegisterType<GetOriginalDate>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
+            builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<MovementNumberGenerator>().As<IMovementNumberGenerator>();

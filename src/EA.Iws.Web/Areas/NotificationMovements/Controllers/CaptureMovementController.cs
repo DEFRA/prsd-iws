@@ -42,7 +42,7 @@
                 return RedirectToAction("Create");
             }
 
-            ModelState.AddModelError("Number", "Much numbers!");
+            ModelState.AddModelError("Number", CaptureMovementControllerResources.MovementNumberNotUnique);
 
             return View(model);
         }
@@ -78,10 +78,10 @@
 
             if (success)
             {
-                return RedirectToAction("Edit");
+                return RedirectToAction("Index", "Home", new { area = "NotificationAssessment", id = notificationId });
             }
 
-            ModelState.AddModelError("Number", "Much more numbers!");
+            ModelState.AddModelError("Number", CaptureMovementControllerResources.SaveUnsuccessful);
 
             return View(model);
         }

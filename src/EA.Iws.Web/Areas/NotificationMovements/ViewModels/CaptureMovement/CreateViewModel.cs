@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Web.ViewModels.Shared;
 
-    public class CreateViewModel
+    public class CreateViewModel : IValidatableObject
     {
         public int Number { get; set; }
 
@@ -17,6 +18,14 @@
         {
             PrenotificationDate = new OptionalDateInputViewModel();
             ActualShipmentDate = new OptionalDateInputViewModel();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!ActualShipmentDate.IsCompleted)
+            {
+                yield return new ValidationResult(CreateViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
+            }
         }
     }
 }
