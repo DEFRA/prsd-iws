@@ -152,6 +152,7 @@
     <Compile Include="ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
+    <Compile Include="Security\IMovementAuthorization.cs" />
     <Compile Include="Security\INotificationApplicationAuthorization.cs" />
     <Compile Include="ShipmentPeriod.cs" />
     <Compile Include="AddressBook\AddressBookRecord.cs" />

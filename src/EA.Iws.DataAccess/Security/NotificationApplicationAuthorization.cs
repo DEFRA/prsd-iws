@@ -29,12 +29,6 @@
             }
         }
 
-        public void EnsureAccess(Guid notificationId)
-        {
-            var notificationUserId = context.NotificationApplications.Where(n => n.Id == notificationId).Select(n => n.UserId).Single();
-            CheckUserId(notificationId, notificationUserId);
-        }
-
         private async Task<bool> IsInternal()
         {
             return await context.InternalUsers.AnyAsync(u => u.UserId == userContext.UserId.ToString());
