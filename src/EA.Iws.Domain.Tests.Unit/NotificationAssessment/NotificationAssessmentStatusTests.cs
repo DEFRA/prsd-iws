@@ -24,7 +24,7 @@
         private DateTime decisionByDate = new DateTime(2015, 8, 24);
         private DateTime consentedDate = new DateTime(2015, 9, 1);
         private DateTime withdrawnDate = new DateTime(2015, 9, 10);
-        private readonly string AnyString = "Where is Wilfred hiding?";
+        private static readonly string AnyString = "Where is Wilfred hiding?";
 
         public NotificationAssessmentStatusTests()
         {
@@ -181,8 +181,6 @@
         [Fact]
         public void CantSetCommencementDateWithoutPaymentDate()
         {
-
-
             Action setCommencementDate = () => notificationAssessment.Commenced(commencementDate, nameOfOfficer);
 
             Assert.Throws<InvalidOperationException>(setCommencementDate);
