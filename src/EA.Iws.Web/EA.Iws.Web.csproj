@@ -1857,6 +1857,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\CopyFromNotification\CopyFromNotificationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CopyFromNotificationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CopyFromNotification\ResultResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResultResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Feedback\FeedbackResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1882,6 +1892,11 @@
     <Compile Include="Views\NewNotification\GeneralFinancialGuaranteeResources.Designer.cs" />
     <Compile Include="Views\NewNotification\NotificationTypeResources.Designer.cs" />
     <Compile Include="Views\NewNotification\SepaFinancialGuaranteeResources.Designer.cs" />
+    <Compile Include="Views\NotificationSwitch\NotFoundResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotFoundResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Registration\ApplicantRegistrationResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2492,6 +2507,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\CopyFromNotification\CopyFromNotificationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CopyFromNotificationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CopyFromNotification\ResultResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResultResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Feedback\FeedbackResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FeedbackResources.Designer.cs</LastGenOutput>
@@ -2513,6 +2536,10 @@
     <EmbeddedResource Include="Views\NewNotification\GeneralFinancialGuaranteeResources.resx" />
     <EmbeddedResource Include="Views\NewNotification\NotificationTypeResources.resx" />
     <EmbeddedResource Include="Views\NewNotification\SepaFinancialGuaranteeResources.resx" />
+    <EmbeddedResource Include="Views\NotificationSwitch\NotFoundResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotFoundResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Registration\ApplicantRegistrationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicantRegistrationResources.Designer.cs</LastGenOutput>

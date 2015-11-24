@@ -1,17 +1,15 @@
-﻿@model EA.Iws.Web.ViewModels.CopyFromNotification.CopyFromNotificationViewModel
+﻿@using EA.Iws.Web.Views.CopyFromNotification
+@model EA.Iws.Web.ViewModels.CopyFromNotification.CopyFromNotificationViewModel
 
 @{
-    ViewBag.Title = "Copy from previous";
+    ViewBag.Title = CopyFromNotificationResources.Title;
 }
 
 @if (Model.Notifications.Any())
 {
     <header class="hgroup">
-        <h1 class="heading-large">Which previous notification would you like to use?</h1>
-        <p>
-            Select a notification from your previous notifications to copy the data from.
-            You will have to set intended shipments information for this copied notification.
-        </p>
+        <h1 class="heading-large">@CopyFromNotificationResources.Header</h1>
+        <p>@CopyFromNotificationResources.HeaderDescription</p>
     </header>
 
     using (Html.BeginForm())
@@ -20,23 +18,23 @@
         @Html.Gds().ValidationSummary()
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
-            <table title="Notification summary to copy from existing notification">
+            <table title=@CopyFromNotificationResources.TableTitleForNotificationSummary>
                 <thead>
                     <tr>
                         <th class="formatted-block-table-header">
-                            Notification number
+                            @CopyFromNotificationResources.ThNotificationNumber
                         </th>
                         <th class="formatted-block-table-header">
-                            Exporter
+                            @CopyFromNotificationResources.ThExporter
                         </th>
                         <th class="formatted-block-table-header">
-                            Importer
+                            @CopyFromNotificationResources.ThImporter
                         </th>
                         <th class="formatted-block-table-header">
-                            Waste type
+                            @CopyFromNotificationResources.ThWasteType
                         </th>
                         <th class="formatted-block-table-header">
-                            Select
+                            @CopyFromNotificationResources.ThSelect
                         </th>
                     </tr>
                 </thead>
@@ -47,9 +45,7 @@
                         <tr class="auto-width">
                             <td>
                                 <div class="formatted-block-table-cell">
-
                                     @Html.DisplayFor(m => m.Notifications[i].Number)
-
                                 </div>
                             </td>
                             <td>
@@ -92,9 +88,9 @@
 }
 else
 {
-    <h2 class="heading-large">No notifications available</h2>
+    <h2 class="heading-large">@CopyFromNotificationResources.NoNotificationsAvailable</h2>
     <p>
-        There are notifications available to copy from. Please continue with your application.
+        @CopyFromNotificationResources.NoNotificationsAvailableDescription
     </p>
 
     @Html.ActionLink(Constants.ContinueButtonText, "Index", "Exporter", new { area = "NotificationApplication" }, new { @class = "button" })
