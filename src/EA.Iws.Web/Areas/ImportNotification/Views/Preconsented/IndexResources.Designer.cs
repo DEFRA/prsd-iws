@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Preconsented {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is there a pre-consented recovery facility?.
+        ///   Looks up a localized string similar to Are all the recovery facilities pre-consented?.
         /// </summary>
         public static string MainHeading {
             get {
