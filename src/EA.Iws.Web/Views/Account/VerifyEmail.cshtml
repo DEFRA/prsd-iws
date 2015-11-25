@@ -3,13 +3,13 @@
     ViewBag.Title = VerifyEmailResources.Title;
 }
 
-<h2 class="heading-large">@VerifyEmailResources.Header</h2>
+<h1 class="heading-large">@VerifyEmailResources.Header</h1>
 
 <p>@VerifyEmailResources.HeaderDescription</p>
 
 @if (User.Identity.IsAuthenticated)
 {
-    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", null ,new {@class = "button"})
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", null, new { @class = "button" })
 }
 else
 {
