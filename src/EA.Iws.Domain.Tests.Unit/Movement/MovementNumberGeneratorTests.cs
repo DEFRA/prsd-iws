@@ -21,7 +21,7 @@
 
             movementRepository = A.Fake<IMovementRepository>();
             shipmentRepository = A.Fake<IShipmentInfoRepository>();
-            generator = new MovementNumberGenerator(movementRepository, shipmentRepository);
+            generator = new MovementNumberGenerator(new NextAvailableMovementNumberGenerator(movementRepository), movementRepository, shipmentRepository);
         }
 
         [Fact]

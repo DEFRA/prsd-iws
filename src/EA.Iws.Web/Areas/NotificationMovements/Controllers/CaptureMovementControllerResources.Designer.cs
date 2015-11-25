@@ -62,15 +62,6 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a unique movement number which has not already been pre-notified.
-        /// </summary>
-        public static string MovementNumberNotUnique {
-            get {
-                return ResourceManager.GetString("MovementNumberNotUnique", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This movement could not be created please try recording the shipment again.
         /// </summary>
         public static string SaveUnsuccessful {

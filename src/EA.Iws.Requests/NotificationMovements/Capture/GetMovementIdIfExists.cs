@@ -3,12 +3,13 @@
     using System;
     using Prsd.Core.Mediator;
 
-    public class EnsureMovementNumberAvailable : IRequest<bool>
+    public class GetMovementIdIfExists : IRequest<Guid?>
     {
         public Guid NotificationId { get; private set; }
+
         public int Number { get; private set; }
 
-        public EnsureMovementNumberAvailable(Guid notificationId, int number)
+        public GetMovementIdIfExists(Guid notificationId, int number)
         {
             NotificationId = notificationId;
             Number = number;

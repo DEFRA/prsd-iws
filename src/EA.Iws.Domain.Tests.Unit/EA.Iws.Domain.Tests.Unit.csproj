@@ -90,6 +90,7 @@
     <Compile Include="Movement\MovementQuantityTests.cs" />
     <Compile Include="Movement\MovementStatusTests.cs" />
     <Compile Include="Movement\MovementTests.cs" />
+    <Compile Include="Movement\NextAvailableMovementNumberGeneratorTests.cs" />
     <Compile Include="Movement\ShipmentQuantityUnitConverterTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
     <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />

@@ -76,6 +76,7 @@
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<MovementNumberGenerator>().As<IMovementNumberGenerator>();
+            builder.RegisterType<NextAvailableMovementNumberGenerator>().As<INextAvailableMovementNumberGenerator>();
             builder.RegisterType<MovementNumberValidator>().As<IMovementNumberValidator>();
 
             if (HasAsposeLicense())

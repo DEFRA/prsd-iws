@@ -17,8 +17,8 @@
 
             var request = new GetNextAvailableMovementNumberForNotification(notificationId);
 
-            var generator = A.Fake<IMovementNumberGenerator>();
-            A.CallTo(() => generator.Generate(notificationId)).Returns(7);
+            var generator = A.Fake<INextAvailableMovementNumberGenerator>();
+            A.CallTo(() => generator.GetNext(notificationId)).Returns(7);
             var requestHandler = new GetNextAvailableMovementNumberForNotificationHandler(generator);
 
             var result = await requestHandler.HandleAsync(request);

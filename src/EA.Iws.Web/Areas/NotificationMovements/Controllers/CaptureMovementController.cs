@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
+    using Requests.Movement;
     using Requests.NotificationMovements.Capture;
     using ViewModels.CaptureMovement;
 
@@ -33,18 +34,16 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid notificationId, SearchViewModel model)
         {
-            var isNumberValid =
-                await mediator.SendAsync(new EnsureMovementNumberAvailable(notificationId, model.Number));
+            var movementId =
+                await mediator.SendAsync(new GetMovementIdIfExists(notificationId, model.Number));
 
-            if (isNumberValid)
+            if (!movementId.HasValue)
             {
                 TempData[MovementNumberKey] = model.Number;
                 return RedirectToAction("Create");
             }
 
-            ModelState.AddModelError("Number", CaptureMovementControllerResources.MovementNumberNotUnique);
-
-            return View(model);
+            return RedirectToAction("Index", "InternalCapture", new { area = "Movement", id = movementId.Value });
         }
 
         [HttpGet]
@@ -78,7 +77,9 @@
 
             if (success)
             {
-                return RedirectToAction("Index", "Home", new { area = "NotificationAssessment", id = notificationId });
+                var movementId = await mediator.SendAsync(new GetMovementIdByNumber(notificationId, model.Number));
+
+                return RedirectToAction("Index", "InternalCapture", new { area = "Movement", id = movementId });
             }
 
             ModelState.AddModelError("Number", CaptureMovementControllerResources.SaveUnsuccessful);

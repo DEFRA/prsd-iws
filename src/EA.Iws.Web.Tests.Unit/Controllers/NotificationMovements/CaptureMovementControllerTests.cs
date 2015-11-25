@@ -48,14 +48,14 @@
         }
 
         [Fact]
-        public async Task Post_RedirectsToMovementCapturePage_OnSuccess()
+        public async Task Post_RedirectsToMovementCapturePage_OnMovementDoesnotExist()
         {
             var notificationId = new Guid("18264B29-00F8-46A1-9640-708CE4F0ADD6");
 
             A.CallTo(
                 () =>
                     mediator.SendAsync(
-                        A<EnsureMovementNumberAvailable>.That.Matches(r => r.NotificationId == notificationId))).Returns(true);
+                        A<GetMovementIdIfExists>.That.Matches(r => r.NotificationId == notificationId))).Returns<Guid?>(null);
 
             var result = await controller.Index(notificationId, model) as RedirectToRouteResult;
 
@@ -70,11 +70,11 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(
-                        A<EnsureMovementNumberAvailable>.That.Matches(r => r.NotificationId == notificationId))).Returns(false);
+                        A<GetMovementIdIfExists>.That.Matches(r => r.NotificationId == notificationId))).Returns(new Guid("BDE8DF37-4D4B-41C7-8692-357C30C647F6"));
 
-            await controller.Index(notificationId, model);
+            var result = await controller.Index(notificationId, model) as RedirectToRouteResult;
 
-            Assert.False(controller.ModelState.IsValid);
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "InternalCapture", "Movement");
         }
 
         [Fact]

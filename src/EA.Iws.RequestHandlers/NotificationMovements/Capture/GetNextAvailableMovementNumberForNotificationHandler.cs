@@ -7,16 +7,16 @@
 
     internal class GetNextAvailableMovementNumberForNotificationHandler : IRequestHandler<GetNextAvailableMovementNumberForNotification, int>
     {
-        private readonly IMovementNumberGenerator numberGenerator;
+        private readonly INextAvailableMovementNumberGenerator nextAvailableMovementNumberGenerator;
 
-        public GetNextAvailableMovementNumberForNotificationHandler(IMovementNumberGenerator numberGenerator)
+        public GetNextAvailableMovementNumberForNotificationHandler(INextAvailableMovementNumberGenerator nextAvailableMovementNumberGenerator)
         {
-            this.numberGenerator = numberGenerator;
+            this.nextAvailableMovementNumberGenerator = nextAvailableMovementNumberGenerator;
         }
 
         public async Task<int> HandleAsync(GetNextAvailableMovementNumberForNotification message)
         {
-            return await numberGenerator.Generate(message.Id);
+            return await nextAvailableMovementNumberGenerator.GetNext(message.Id);
         }
     }
 }
