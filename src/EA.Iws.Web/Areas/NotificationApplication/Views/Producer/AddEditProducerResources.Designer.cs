@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional registration number.
+        /// </summary>
+        public static string AdditionalRegistrationNumber {
+            get {
+                return ResourceManager.GetString("AdditionalRegistrationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
@@ -97,11 +106,83 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organisation name.
+        /// </summary>
+        public static string OrganisationName {
+            get {
+                return ResourceManager.GetString("OrganisationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the organisation&apos;s name.
+        /// </summary>
+        public static string OrganisationNameRequired {
+            get {
+                return ResourceManager.GetString("OrganisationNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organisation type.
+        /// </summary>
+        public static string OrganisationType {
+            get {
+                return ResourceManager.GetString("OrganisationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please choose the type of organisation.
+        /// </summary>
+        public static string OrganisationTypeRequired {
+            get {
+                return ResourceManager.GetString("OrganisationTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your organisation type.
+        /// </summary>
+        public static string OtherOrgType {
+            get {
+                return ResourceManager.GetString("OtherOrgType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please describe this type of organisation.
+        /// </summary>
+        public static string OtherOrgTypeDescriptionRequired {
+            get {
+                return ResourceManager.GetString("OtherOrgTypeDescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Producer details.
         /// </summary>
         public static string ProducerDetails {
             get {
                 return ResourceManager.GetString("ProducerDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration number.
+        /// </summary>
+        public static string RegistrationNumber {
+            get {
+                return ResourceManager.GetString("RegistrationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter registration number.
+        /// </summary>
+        public static string RegistrationNumberRequired {
+            get {
+                return ResourceManager.GetString("RegistrationNumberRequired", resourceCulture);
             }
         }
         

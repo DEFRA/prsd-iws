@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdditionalRegistrationNumber" xml:space="preserve">
+    <value>Additional registration number</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -129,8 +132,32 @@
   <data name="Header" xml:space="preserve">
     <value>Add waste generator - producer</value>
   </data>
+  <data name="OrganisationName" xml:space="preserve">
+    <value>Organisation name</value>
+  </data>
+  <data name="OrganisationNameRequired" xml:space="preserve">
+    <value>Please enter the organisation's name</value>
+  </data>
+  <data name="OrganisationType" xml:space="preserve">
+    <value>Organisation type</value>
+  </data>
+  <data name="OrganisationTypeRequired" xml:space="preserve">
+    <value>Please choose the type of organisation</value>
+  </data>
+  <data name="OtherOrgType" xml:space="preserve">
+    <value>Enter your organisation type</value>
+  </data>
+  <data name="OtherOrgTypeDescriptionRequired" xml:space="preserve">
+    <value>Please describe this type of organisation</value>
+  </data>
   <data name="ProducerDetails" xml:space="preserve">
     <value>Producer details</value>
+  </data>
+  <data name="RegistrationNumber" xml:space="preserve">
+    <value>Registration number</value>
+  </data>
+  <data name="RegistrationNumberRequired" xml:space="preserve">
+    <value>Please enter registration number</value>
   </data>
   <data name="TitleAdd" xml:space="preserve">
     <value>Add a waste generator-producer</value>

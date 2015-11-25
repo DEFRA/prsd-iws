@@ -3,29 +3,30 @@
     using System.ComponentModel.DataAnnotations;
     using Core.Shared;
     using Prsd.Core.Validation;
+    using Views.Producer;
     using Web.ViewModels.Shared;
 
     public class ProducerBusinessTypeViewModel
     {
-        [Required]
-        [Display(Name = "Organisation name")]
+        [Required(ErrorMessageResourceName = "OrganisationNameRequired", ErrorMessageResourceType = typeof(AddEditProducerResources))]
+        [Display(Name = "OrganisationName", ResourceType = typeof(AddEditProducerResources))]
         public string Name { get; set; }
 
-        [Required]
-        [Display(Name = "Organisation type")]
+        [Required(ErrorMessageResourceName = "OrganisationTypeRequired", ErrorMessageResourceType = typeof(AddEditProducerResources))]
+        [Display(Name = "OrganisationType", ResourceType = typeof(AddEditProducerResources))]
         public BusinessType? BusinessType { get; set; }
 
-        [RequiredIf("BusinessType", Core.Shared.BusinessType.LimitedCompany, ErrorMessage = "The Registration number field is required")]
-        [Display(Name = "Registration number")]
+        [RequiredIf("BusinessType", Core.Shared.BusinessType.LimitedCompany, ErrorMessageResourceName = "RegistrationNumberRequired", ErrorMessageResourceType = typeof(AddEditProducerResources))]
+        [Display(Name = "RegistrationNumber", ResourceType = typeof(AddEditProducerResources))]
         [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "RegistrationNumberMaxLength")]
         public string RegistrationNumber { get; set; }
 
-        [Display(Name = "Additional registration number")]
+        [Display(Name = "AdditionalRegistrationNumber", ResourceType = typeof(AddEditProducerResources))]
         [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "AdditionalRegistrationNumberMaxLength")]
         public string AdditionalRegistrationNumber { get; set; }
 
-        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessage = "Please enter your organisation type")]
-        [Display(Name = "Enter your organisation type")]
+        [RequiredIf("BusinessType", Core.Shared.BusinessType.Other, ErrorMessageResourceName = "OtherOrgTypeDescriptionRequired", ErrorMessageResourceType = typeof(AddEditProducerResources))]
+        [Display(Name = "OtherOrgType", ResourceType = typeof(AddEditProducerResources))]
         public string OtherDescription { get; set; }
 
         public bool DisplayAdditionalNumber { get; set; }
@@ -50,9 +51,9 @@
             return new BusinessInfoData
             {
                 AdditionalRegistrationNumber = AdditionalRegistrationNumber,
-                BusinessType = BusinessType.Value,
+                BusinessType = BusinessType.GetValueOrDefault(),
                 Name = Name,
-                OtherDescription = (BusinessType.Value == Core.Shared.BusinessType.Other) ? OtherDescription : null,
+                OtherDescription = (BusinessType.GetValueOrDefault() == Core.Shared.BusinessType.Other) ? OtherDescription : null,
                 RegistrationNumber = RegistrationNumber
             };
         }
