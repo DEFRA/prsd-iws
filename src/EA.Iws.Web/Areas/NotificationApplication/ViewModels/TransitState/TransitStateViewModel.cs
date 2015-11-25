@@ -12,7 +12,7 @@
     {
         public int? OrdinalPosition { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "TransitCountryRequired", ErrorMessageResourceType = typeof(TransitStateResources))]
         [Display(Name = "Country", ResourceType = typeof(TransitStateResources))]
         public Guid? CountryId { get; set; }
 

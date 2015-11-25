@@ -130,7 +130,7 @@
     <value>This description cannot be longer than 70 characters</value>
   </data>
   <data name="DetailsRequired" xml:space="preserve">
-    <value>Please enter a description of the technologies used</value>
+    <value>Please describe the technologies and processes used to treat the waste</value>
   </data>
   <data name="DetailsTitle" xml:space="preserve">
     <value>Details</value>

@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a description of the technologies used.
+        ///   Looks up a localized string similar to Please describe the technologies and processes used to treat the waste.
         /// </summary>
         public static string DetailsRequired {
             get {

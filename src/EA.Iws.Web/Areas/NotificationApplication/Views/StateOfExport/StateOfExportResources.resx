@@ -124,7 +124,7 @@
     <value>Exit point</value>
   </data>
   <data name="ExitPointRequired" xml:space="preserve">
-    <value>The exit point is required</value>
+    <value>Please select the exit point</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Where is the waste being exported from?</value>

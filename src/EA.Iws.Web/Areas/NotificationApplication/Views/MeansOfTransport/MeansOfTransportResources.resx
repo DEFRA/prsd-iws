@@ -127,16 +127,16 @@
     <value>Means of transport</value>
   </data>
   <data name="SelectedMeansErrorMessage" xml:space="preserve">
-    <value>Means of transport is not in a valid format. Please enter a value such as R-S-R</value>
+    <value>The means of transport you have entered is not in a valid format. Please enter a value such as R-S-R.</value>
   </data>
   <data name="SelectedMeansHint" xml:space="preserve">
     <value>If your journey is Road → Sea → Road enter R-S-R</value>
   </data>
   <data name="SelectedMeansRequired" xml:space="preserve">
-    <value>Please answer this question</value>
+    <value>Please enter the transport methods that will be used</value>
   </data>
   <data name="SelectedMeansValidationMessage" xml:space="preserve">
-    <value>Cannot have a means of transport which is the same as the previous means of transport</value>
+    <value>The means of transport in the journey cannot use the same method consecutively. Please enter a value such as R-S-R.</value>
   </data>
   <data name="TableTitle" xml:space="preserve">
     <value>Transport methods</value>

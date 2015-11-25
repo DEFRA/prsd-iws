@@ -165,16 +165,19 @@
   <data name="Title" xml:space="preserve">
     <value>Transit State</value>
   </data>
+  <data name="TransitCountryRequired" xml:space="preserve">
+    <value>Please select the country of transit</value>
+  </data>
   <data name="TransitHint" xml:space="preserve">
     <value>This is the country or state the waste travels through</value>
   </data>
   <data name="TransitNotSameAsAnotherTransit" xml:space="preserve">
-    <value>Transit country may not be the same as another transit country</value>
+    <value>You've already selected this transit country. Please select a different country.</value>
   </data>
   <data name="TransitNotSameAsExport" xml:space="preserve">
-    <value>Transit country may not be the same as export country</value>
+    <value>You've already selected this country as the country of export. Please select a different transit country.</value>
   </data>
   <data name="TransitNotSameAsImport" xml:space="preserve">
-    <value>Transit country may not be the same as import country</value>
+    <value>You've already selected this country as the country of import. Please select a different transit country.</value>
   </data>
 </root>

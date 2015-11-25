@@ -10,7 +10,7 @@
 
     public class StateOfImportViewModel : IValidatableObject
     {
-        [Required]
+        [Required(ErrorMessageResourceName = "CountryOfImportRequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         [Display(Name = "Country", ResourceType = typeof(StateOfImportResources))]
         public Guid? CountryId { get; set; }
 
@@ -23,7 +23,7 @@
         [Display(Name = "CA", ResourceType = typeof(StateOfImportResources))]
         [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "CARequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
-        
+
         public Guid? StateOfExportCountryId { get; set; }
 
         public IList<Guid> TransitStateCountryIds { get; set; }

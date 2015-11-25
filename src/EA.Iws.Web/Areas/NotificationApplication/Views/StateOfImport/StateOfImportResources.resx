@@ -124,7 +124,7 @@
     <value>Select the competent authority for the region of import</value>
   </data>
   <data name="CARequired" xml:space="preserve">
-    <value>The competent authority is required</value>
+    <value>Please choose the competent authority</value>
   </data>
   <data name="ChangeCountry" xml:space="preserve">
     <value>Change country</value>
@@ -138,6 +138,9 @@
   <data name="CountryList" xml:space="preserve">
     <value>Country list</value>
   </data>
+  <data name="CountryOfImportRequired" xml:space="preserve">
+    <value>Please select the country of import</value>
+  </data>
   <data name="EndJourneyHint" xml:space="preserve">
     <value>This is the country or state where the waste ends its journey</value>
   </data>
@@ -145,7 +148,7 @@
     <value>Entry point</value>
   </data>
   <data name="EntryPointRequired" xml:space="preserve">
-    <value>The entry point is required</value>
+    <value>Please select the entry point</value>
   </data>
   <data name="ExitCountry" xml:space="preserve">
     <value>Exit country</value>
@@ -154,10 +157,10 @@
     <value>Where is the waste being imported into?</value>
   </data>
   <data name="ImportExportCountryShouldNotSame" xml:space="preserve">
-    <value>State of import country may not be the same as the state of export</value>
+    <value>You've already selected this country as the country of export. Please select a different country of import.</value>
   </data>
   <data name="ImportTransitCountryShouldNotSame" xml:space="preserve">
-    <value>State of import country may not be the same as a transit state</value>
+    <value>You've already selected this country as the country of import. Please select a different transit country.</value>
   </data>
   <data name="PortHint" xml:space="preserve">
     <value>Enter the specific port or border crossing the waste will enter the country from</value>

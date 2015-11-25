@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Core.Shared.ContactData
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Core.Shared.ContactData
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.FirstName)">
     @Html.Gds().LabelFor(model => model.FirstName)
@@ -14,16 +15,16 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
     @Html.Gds().LabelFor(model => model.Telephone)
-    @Html.Gds().ValidationMessageFor(model => model.Telephone)
     @Html.Gds().ValidationMessageFor(model => model.TelephonePrefix)
-    @Html.Gds().HintParagraph("Enter the full telephone number including the international dialling code for example +44  1709389201")
+    @Html.Gds().ValidationMessageFor(model => model.Telephone)
+    @Html.Gds().HintParagraph(ContactDataResources.TelephoneHint)
     <fieldset>
         <div class="international-number">
             <div class="plus-label">
                 +
             </div>
             <div class="international-number-prefix">
-                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = "Enter only up to 3 digits in the telephone prefix field" })
+                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = ContactDataResources.TelephonePrefixTitle })
             </div>
             <div class="international-number-body">
                 @Html.Gds().TextBoxFor(m => m.Telephone, false)
@@ -34,16 +35,16 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Fax) @Html.Gds().FormGroupClass(m => m.FaxPrefix)">
     @Html.Gds().LabelFor(model => model.Fax)
-    @Html.Gds().ValidationMessageFor(model => model.Fax)
     @Html.Gds().ValidationMessageFor(model => model.FaxPrefix)
-    @Html.Gds().HintParagraph("Enter the full fax number including the international dialling code for example +44  1709389201")
+    @Html.Gds().ValidationMessageFor(model => model.Fax)
+    @Html.Gds().HintParagraph(ContactDataResources.FaxHint)
     <fieldset>
         <div class="international-number">
             <div class="plus-label">
                 +
             </div>
             <div class="international-number-prefix">
-                @Html.Gds().TextBoxFor(m => m.FaxPrefix, new { @title = "Fax Prefix" })
+                @Html.Gds().TextBoxFor(m => m.FaxPrefix, new { @title = ContactDataResources.FaxPrefixTitle })
             </div>
             <div class="international-number-body">
                 @Html.Gds().TextBoxFor(m => m.Fax, false)

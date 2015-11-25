@@ -2,11 +2,12 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Views.ReasonForExport;
 
     public class ReasonForExportViewModel
     {
-        [Required(ErrorMessage = "Please enter a reason for export")]
-        [StringLength(70, ErrorMessage = "Reason for export cannot be longer than 70 characters")]
+        [Required(ErrorMessageResourceName = "ReasonRequired", ErrorMessageResourceType = typeof(ReasonForExportResources))]
+        [StringLength(70, ErrorMessageResourceName = "ReasonLengthLimit", ErrorMessageResourceType = typeof(ReasonForExportResources))]
         public string ReasonForExport { get; set; }
 
         public Guid NotificationId { get; set; }

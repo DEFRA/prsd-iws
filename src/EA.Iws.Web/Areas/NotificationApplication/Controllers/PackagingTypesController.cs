@@ -11,6 +11,7 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.PackagingType;
     using ViewModels.PackagingTypes;
+    using Views.PackagingTypes;
     using Web.ViewModels.Shared;
 
     [Authorize]
@@ -80,7 +81,7 @@
 
                 if (!selectedPackagingTypes.Any())
                 {
-                    ModelState.AddModelError(string.Empty, "Please select at least one option");
+                    ModelState.AddModelError(string.Empty, PackagingTypesResources.ChoosePackagingType);
                     return View(model);
                 }
 

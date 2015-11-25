@@ -123,6 +123,12 @@
   <data name="Hint" xml:space="preserve">
     <value>Please limit your answer to 70 characters or less</value>
   </data>
+  <data name="ReasonLengthLimit" xml:space="preserve">
+    <value>Please limit your answer to 70 characters or less</value>
+  </data>
+  <data name="ReasonRequired" xml:space="preserve">
+    <value>Please enter a reason for export</value>
+  </data>
   <data name="TextboxTitle" xml:space="preserve">
     <value>Reason for export</value>
   </data>
