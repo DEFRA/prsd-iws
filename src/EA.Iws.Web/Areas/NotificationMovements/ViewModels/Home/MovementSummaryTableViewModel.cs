@@ -1,10 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home
 {
     using System;
-    using System.Linq;
     using Core.Movement;
     using Core.Shared;
-    using Prsd.Core.Helpers;
 
     public class MovementSummaryTableViewModel
     {
@@ -23,6 +21,11 @@
         public ShipmentQuantityUnits? Unit { get; set; }
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
+
+        public bool IsShipped()
+        {
+            return Status == MovementStatus.Submitted && ShipmentDate < DateTime.UtcNow;
+        }
 
         public MovementSummaryTableViewModel(MovementTableDataRow data)
         {
