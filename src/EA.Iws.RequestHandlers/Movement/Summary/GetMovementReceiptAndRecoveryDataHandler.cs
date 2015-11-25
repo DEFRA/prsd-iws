@@ -1,5 +1,6 @@
-﻿namespace EA.Iws.RequestHandlers.Movement
+﻿namespace EA.Iws.RequestHandlers.Movement.Summary
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
@@ -9,6 +10,7 @@
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.Movement.Summary;
 
     internal class GetMovementReceiptAndRecoveryDataHandler : IRequestHandler<GetMovementReceiptAndRecoveryData, MovementReceiptAndRecoveryData>
     {
@@ -40,7 +42,8 @@
                 Number = movement.Number,
                 PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(shipmentInfo.Units).ToArray(),
                 ActualDate = movement.Date,
-                NotificationType = notification.NotificationType
+                NotificationType = notification.NotificationType,
+                PrenotificationDate = (movement.PrenotificationDate.HasValue) ? movement.PrenotificationDate.Value.DateTime : (DateTime?)null
             };
 
             if (movement.Receipt != null)
@@ -48,11 +51,13 @@
                 data.ReceiptDate = movement.Receipt.Date;
                 data.ActualQuantity = movement.Receipt.QuantityReceived.Quantity;
                 data.ReceiptUnits = movement.Receipt.QuantityReceived.Units;
+                data.IsReceived = true;
             }
 
             if (movement.CompletedReceipt != null)
             {
                 data.OperationCompleteDate = movement.CompletedReceipt.Date;
+                data.IsOperationCompleted = true;
             }
 
             return data;

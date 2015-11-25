@@ -9,6 +9,8 @@
 
     public class CaptureViewModel : IValidatableObject
     {
+        public Guid NotificationId { get; set; }
+
         public DateTime ActualDate { get; set; }
 
         public DateTime? PrenotificationDate { get; set; }
@@ -16,6 +18,10 @@
         public ReceiptViewModel Receipt { get; set; }
 
         public RecoveryViewModel Recovery { get; set; }
+
+        public bool IsReceived { get; set; }
+
+        public bool IsOperationCompleted { get; set; }
 
         public NotificationType NotificationType { get; set; }
 
@@ -33,6 +39,9 @@
             ActualDate = data.ActualDate;
             PrenotificationDate = data.PrenotificationDate;
             NotificationType = data.NotificationType;
+            IsReceived = data.IsReceived;
+            IsOperationCompleted = data.IsOperationCompleted;
+            NotificationId = data.NotificationId;
             Receipt = new ReceiptViewModel
             {
                 ActualQuantity = data.ActualQuantity,

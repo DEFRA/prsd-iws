@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.Movement.Views.InternalCapture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Return to shipment summary.
+        /// </summary>
+        public static string ReturnToSummary {
+            get {
+                return ResourceManager.GetString("ReturnToSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string TableDateHeader {

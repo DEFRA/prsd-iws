@@ -54,7 +54,8 @@
             {
                 return View(new CreateViewModel
                 {
-                    Number = (int)result
+                    Number = (int)result,
+                    NotificationId = notificationId
                 });
             }
 

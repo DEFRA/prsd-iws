@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Movement
+﻿namespace EA.Iws.RequestHandlers.Movement.Receive
 {
     using System;
     using System.Threading.Tasks;
@@ -6,7 +6,7 @@
     using Domain.FileStore;
     using Domain.Movement;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
+    using Requests.Movement.Receive;
 
     internal class SaveCertificateOfReceiptFileHandler : IRequestHandler<SaveCertificateOfReceiptFile, Guid>
     {

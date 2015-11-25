@@ -85,6 +85,7 @@
     <Compile Include="Movement\MovementDetailsTests.cs" />
     <Compile Include="Movement\MovementFactoryTests.cs" />
     <Compile Include="Movement\CapturedMovementFactoryTests.cs" />
+    <Compile Include="Movement\MovementInternalStatusTests.cs" />
     <Compile Include="Movement\MovementNumberGeneratorTests.cs" />
     <Compile Include="Movement\MovementNumberValidatorTests.cs" />
     <Compile Include="Movement\MovementQuantityTests.cs" />

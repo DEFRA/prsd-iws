@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Movement
+﻿namespace EA.Iws.Requests.Movement.Summary
 {
     using System;
     using Core.Movement;

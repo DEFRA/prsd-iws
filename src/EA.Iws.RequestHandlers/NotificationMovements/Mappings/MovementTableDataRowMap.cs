@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.NotificationMovements.Mappings
 {
     using System;
-    using System.Linq;
     using Core.Movement;
     using Domain.Movement;
     using Prsd.Core.Mapper;
@@ -10,16 +9,14 @@
     {
         public MovementTableDataRow Map(Movement source)
         {
-            var data = new MovementTableDataRow();
-
-            data.Number = source.Number;
-            data.ShipmentDate = source.Date;
-            data.Status = source.Status;
-
-            data.SubmittedDate = source.StatusChanges
-                .Where(sc => sc.Status == MovementStatus.Submitted)
-                .Select(sc => (DateTime?)sc.ChangeDate)
-                .SingleOrDefault();
+            var data = new MovementTableDataRow
+            {
+                Number = source.Number,
+                ShipmentDate = source.Date,
+                Status = source.Status,
+                SubmittedDate =
+                    (source.PrenotificationDate.HasValue) ? source.PrenotificationDate.Value.DateTime : (DateTime?)null
+            };
 
             if (source.Receipt != null)
             {

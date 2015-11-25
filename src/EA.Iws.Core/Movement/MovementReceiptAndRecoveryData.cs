@@ -11,7 +11,7 @@
         public NotificationType NotificationType { get; set; }
 
         public Guid Id { get; set; }
-
+        
         public int Number { get; set; }
 
         public DateTime ActualDate { get; set; }
@@ -31,5 +31,9 @@
         public string RejectionReasonFurtherInformation { get; set; }
 
         public DateTime? OperationCompleteDate { get; set; }
+
+        public bool IsReceived { get; set; }
+
+        public bool IsOperationCompleted { get; set; }
     }
 }

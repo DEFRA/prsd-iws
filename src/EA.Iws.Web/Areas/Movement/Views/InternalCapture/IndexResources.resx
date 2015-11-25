@@ -132,6 +132,9 @@
   <data name="PrenotificationDateRow" xml:space="preserve">
     <value>Prenotification date</value>
   </data>
+  <data name="ReturnToSummary" xml:space="preserve">
+    <value>Return to shipment summary</value>
+  </data>
   <data name="TableDateHeader" xml:space="preserve">
     <value>Date</value>
   </data>

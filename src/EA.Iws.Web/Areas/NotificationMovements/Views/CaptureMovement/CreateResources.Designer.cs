@@ -86,5 +86,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.CaptureMovement {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to shipment summary.
+        /// </summary>
+        public static string ReturnToSummary {
+            get {
+                return ResourceManager.GetString("ReturnToSummary", resourceCulture);
+            }
+        }
     }
 }

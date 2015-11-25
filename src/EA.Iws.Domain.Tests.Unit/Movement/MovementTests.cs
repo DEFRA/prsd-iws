@@ -58,13 +58,5 @@
         {
             SystemTime.Unfreeze();
         }
-
-        private void FullyReceiveMovement()
-        {
-            ObjectInstantiator<Movement>.SetProperty(x => x.Date, BeforeFrozenTime, movement);
-
-            movement.Receive(Guid.NewGuid(), FrozenTime, new ShipmentQuantity(5.0m, ShipmentQuantityUnits.Kilograms));
-            movement.Receipt.Accept();
-        }
     }
 }

@@ -9,3 +9,5 @@
 <p>@string.Format(Resource.CurrentShipmentParagraph, Model.Number)</p>
 
 @Html.Partial("_Prenotify")
+
+@Html.ActionLink(Resource.ReturnToSummary, "Index", "ShipmentSummary", new { area = "NotificationAssessment", id = Model.NotificationId }, null)

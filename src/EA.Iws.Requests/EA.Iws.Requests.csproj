@@ -96,7 +96,7 @@
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
-    <Compile Include="Movement\GetMovementReceiptAndRecoveryData.cs" />
+    <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\Summary\GetMovementSummary.cs" />
     <Compile Include="Movement\GetMovementUnitsByMovementId.cs" />
     <Compile Include="Movement\GetSubmittedMovementsByNotificationId.cs" />
@@ -105,8 +105,8 @@
     <Compile Include="Movement\GetNotificationIdByMovementId.cs" />
     <Compile Include="Movement\MovementCarrierData.cs" />
     <Compile Include="Movement\MovementReceiptDateData.cs" />
-    <Compile Include="Movement\SaveCertificateOfReceiptFile.cs" />
-    <Compile Include="Movement\SetMovementAccepted.cs" />
+    <Compile Include="Movement\Receive\SaveCertificateOfReceiptFile.cs" />
+    <Compile Include="Movement\Receive\SetMovementAccepted.cs" />
     <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\SetMovementRejected.cs" />
     <Compile Include="NotificationAssessment\WithdrawConsentForNotificationApplication.cs" />
@@ -136,6 +136,7 @@
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationIdAndStatusByNumber.cs" />
+    <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />

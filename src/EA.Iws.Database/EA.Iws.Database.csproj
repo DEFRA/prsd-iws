@@ -162,6 +162,8 @@
     <Content Include="scripts\Update\Sprint21\20151119-164000-add-consent-withdrawn-columns.sql" />
     <Content Include="scripts\Update\Sprint21\20151120-173000-add-captured-shipment-status.sql" />
     <Content Include="scripts\Update\Sprint21\20151125-112500-fix-waste-code-spaces.sql" />
+    <Content Include="scripts\Update\Sprint21\20151125-141500-add-prenotification-date-column.sql" />
+    <Content Include="scripts\Update\Sprint21\20151125-160000-migrate-prenotification-date-data.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

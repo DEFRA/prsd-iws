@@ -22,7 +22,7 @@
         }
 
         [Fact]
-        public async Task Movement_SameNumberAlreadyExists_Throws()
+        public async Task SameNumberAlreadyExists_Throws()
         {
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(false);
@@ -31,14 +31,27 @@
         }
 
         [Fact]
-        public async Task Movement_PrenotifiedDateNotProvided_StatusCaptured()
+        public async Task PrenotifiedDateNotProvided_StatusCaptured()
         {
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(true);
 
-            var result = await factory.Create(NotificationId, 1, AnyDate, AnyDate);
+            var result = await factory.Create(NotificationId, 1, null, AnyDate);
 
             Assert.Equal(MovementStatus.Captured, result.Status);
+        }
+        
+        [Fact]
+        public async Task PrenotifiedDateProvided_StatusSubmitted()
+        {
+            A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
+                .Returns(true);
+
+            var result = await factory.Create(NotificationId, 1, AnyDate.AddDays(5), AnyDate);
+
+            Assert.Equal(MovementStatus.Submitted, result.Status);
+            Assert.Equal(AnyDate.AddDays(5), result.PrenotificationDate);
+            Assert.Equal(AnyDate, result.Date);
         }
     }
 }

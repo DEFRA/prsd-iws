@@ -4,7 +4,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
+    using Requests.Movement.Receive;
+    using Requests.Movement.Summary;
     using ViewModels.InternalCapture;
 
     [Authorize(Roles = "internal")]
@@ -29,11 +30,33 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Guid id, CaptureViewModel model)
+        public async Task<ActionResult> Index(Guid id, CaptureViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
+            }
+
+            if (model.Receipt.IsComplete() && !model.IsReceived)
+            {
+                if (!model.Receipt.WasShipmentAccepted)
+                {
+                    throw new NotImplementedException();
+                }
+                else
+                {
+                    await mediator.SendAsync(new RecordReceiptInternal(id, 
+                        model.Receipt.ReceivedDate.AsDateTime().Value,
+                        model.Receipt.ActualQuantity.Value,
+                        model.Receipt.Units.Value));
+                }
+            }
+
+            if (model.Recovery.IsComplete() 
+                && (model.Receipt.IsComplete() || model.IsReceived) 
+                && !model.IsOperationCompleted)
+            {
+                throw new InvalidOperationException();
             }
 
             throw new NotImplementedException();

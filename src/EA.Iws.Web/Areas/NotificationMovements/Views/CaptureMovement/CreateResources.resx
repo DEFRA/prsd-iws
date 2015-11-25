@@ -126,4 +126,7 @@
   <data name="PageTitle" xml:space="preserve">
     <value>Capture shipment</value>
   </data>
+  <data name="ReturnToSummary" xml:space="preserve">
+    <value>Return to shipment summary</value>
+  </data>
 </root>

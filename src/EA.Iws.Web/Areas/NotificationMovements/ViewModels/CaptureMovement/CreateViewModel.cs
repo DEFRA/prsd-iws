@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Web.ViewModels.Shared;
@@ -7,6 +8,8 @@
     public class CreateViewModel : IValidatableObject
     {
         public int Number { get; set; }
+
+        public Guid NotificationId { get; set; }
 
         [Display(Name = "PrenotificationDateLabel", ResourceType = typeof(CreateViewModelResources))]
         public OptionalDateInputViewModel PrenotificationDate { get; set; }
