@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I will provide these details in an annex when I submit my notification.
+        ///   Looks up a localized string similar to I&apos;ll provide my details in an annex when I submit my notification..
         /// </summary>
         public static string AnnexProvided {
             get {
@@ -116,11 +116,20 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you wish to provide further details, enter them below.
+        ///   Looks up a localized string similar to Providing more information.
         /// </summary>
         public static string FurtherDetails {
             get {
                 return ResourceManager.GetString("FurtherDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you&apos;d like to include images or other files in your description, you can upload your own annex when you submit your notification. Otherwise, you can go into more detail by entering text here..
+        /// </summary>
+        public static string FurtherDetailsDescription {
+            get {
+                return ResourceManager.GetString("FurtherDetailsDescription", resourceCulture);
             }
         }
         
@@ -152,7 +161,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Give a brief description of the technologies and processes used to treat the waste on site.
+        ///   Looks up a localized string similar to Give a brief description of the technologies and processes used to treat the waste on site..
         /// </summary>
         public static string TechnologyDescription {
             get {
