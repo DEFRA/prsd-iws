@@ -18,7 +18,7 @@
 @Html.Navigation().Link("FG decision", false, "Decision", "FinancialGuarantee", "NotificationAssessment")
 
 <span>Shipments</span>
-@Html.Navigation().Link("Shipment summary", false, "Index", "ShipmentSummary", new  RouteValueDictionary( new { status = Model.Status, area = "NotificationAssessment" }))
+@Html.Navigation().Link("Shipment summary", false, "Index", "Home", new  RouteValueDictionary( new { area = "AdminNotificationMovements" }))
 @Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { notificationId = Model.Id, area = "NotificationMovements" }))
 
 <span>Finance</span>

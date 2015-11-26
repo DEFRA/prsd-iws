@@ -2,11 +2,11 @@
 @using EA.Iws.Core.Shared
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 
-@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.ShipmentSummary.MovementSummaryViewModel
+@model EA.Iws.Web.Areas.AdminNotificationMovements.ViewModels.Home.MovementSummaryViewModel
 
 @{
     ViewBag.Title = "Shipment summary";
-    Layout = "~/Areas/NotificationAssessment/Views/Shared/_LayoutSummary.cshtml";
+    Layout = "~/Areas/AdminNotificationMovements/Views/Shared/_LayoutSummary.cshtml";
 
     var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
 }
@@ -78,6 +78,8 @@
             <h2 class="heading-small">Shipping options</h2>
             <nav>
                 @Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "NotificationMovements", notificationId = Model.NotificationId }, null)
+
+                @Html.ActionLink("Cancel a prenotification", "Index", "Cancel")
             </nav>
         </div>
     </div>

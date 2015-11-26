@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationAssessment.ViewModels.ShipmentSummary
+﻿namespace EA.Iws.Web.Areas.AdminNotificationMovements.ViewModels.Home
 {
     using System;
     using Core.Movement;

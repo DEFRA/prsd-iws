@@ -1,19 +1,21 @@
-﻿namespace EA.Iws.Web.Areas.NotificationAssessment.Controllers
+﻿namespace EA.Iws.Web.Areas.AdminNotificationMovements.Controllers
 {
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
     using Prsd.Core.Mediator;
+    using Requests.Notification;
     using Requests.NotificationMovements;
-    using ViewModels.ShipmentSummary;
+    using ViewModels.Home;
+    using Web.ViewModels.Shared;
 
-    [Authorize]
-    public class ShipmentSummaryController : Controller
+    [Authorize(Roles = "internal")]
+    public class HomeController : Controller
     {
         private readonly IMediator mediator;
 
-        public ShipmentSummaryController(IMediator mediator)
+        public HomeController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -36,6 +38,14 @@
         public ActionResult IndexPost(Guid id, int? selectedMovementStatus)
         {
             return RedirectToAction("Index", new { id, status = selectedMovementStatus });
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult NotificationSwitcher(Guid id)
+        {
+            var response = mediator.SendAsync(new GetNotificationNumber(id)).GetAwaiter().GetResult();
+
+            return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response));
         }
     }
 }
