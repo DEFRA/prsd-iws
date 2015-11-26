@@ -92,6 +92,8 @@
 
         public virtual DbSet<MovementDateHistory> MovementDateHistories { get; set; }
 
+        public virtual DbSet<MovementRejection> MovementRejections { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var assembly = typeof(IwsContext).Assembly;

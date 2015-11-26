@@ -88,7 +88,9 @@
     <Compile Include="Movement\ICapturedMovementFactory.cs" />
     <Compile Include="Movement\IMovementNumberGenerator.cs" />
     <Compile Include="Movement\IMovementNumberValidator.cs" />
+    <Compile Include="Movement\IMovementRejectionRepository.cs" />
     <Compile Include="Movement\INextAvailableMovementNumberGenerator.cs" />
+    <Compile Include="Movement\IRejectMovement.cs" />
     <Compile Include="Movement\MovementDateChangeEvent.cs" />
     <Compile Include="Movement\MovementDateHistory.cs" />
     <Compile Include="Movement\MovementDetails.cs" />
@@ -107,11 +109,13 @@
     <Compile Include="Movement\MovementReceipt.cs" />
     <Compile Include="Movement\MovementCarrier.cs" />
     <Compile Include="Movement\MovementFactory.cs" />
+    <Compile Include="Movement\MovementRejection.cs" />
     <Compile Include="Movement\NextAvailableMovementNumberGenerator.cs" />
     <Compile Include="Movement\NotificationMovementsSummary.cs" />
     <Compile Include="Movement\NotificationMovementsQuantity.cs" />
     <Compile Include="Movement\MovementStatusChange.cs" />
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
+    <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationOverviewRepository.cs" />

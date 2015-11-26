@@ -6,8 +6,8 @@
     using Domain.Movement;
     using FakeItEasy;
     using RequestHandlers.Mappings.Movement;
-    using RequestHandlers.Movement;
-    using Requests.Movement;
+    using RequestHandlers.Movement.Receive;
+    using Requests.Movement.Receive;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;

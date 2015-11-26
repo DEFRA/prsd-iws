@@ -8,6 +8,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.Movement.Receive;
     using ViewModels.CancelMovement;
 
     [Authorize]

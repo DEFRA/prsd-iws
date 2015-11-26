@@ -15,7 +15,6 @@
 
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid> submittedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, Guid> completedTrigger;
-        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, string> rejectedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, ShipmentQuantity> acceptedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, ShipmentQuantity> internallyAcceptedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime> internallySubmittedTrigger;
@@ -146,8 +145,6 @@
             internallySubmittedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.SubmitInternal);
             completedTrigger = stateMachine.SetTriggerParameters<DateTime, Guid>(Trigger.Complete);
 
-            rejectedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, string>(Trigger.Reject);
-
             acceptedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, ShipmentQuantity>(Trigger.Receive);
             internallyAcceptedTrigger = stateMachine.SetTriggerParameters<DateTime, ShipmentQuantity>(Trigger.ReceiveInternal);
             
@@ -171,12 +168,10 @@
 
             stateMachine.Configure(MovementStatus.Completed)
                 .OnEntryFrom(completedTrigger, OnCompleted);
-
-            stateMachine.Configure(MovementStatus.Rejected)
-                .OnEntryFrom(rejectedTrigger, OnRejected);
-
+            
             stateMachine.Configure(MovementStatus.Captured)
                 .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
+                .Permit(Trigger.Reject, MovementStatus.Rejected)
                 .Permit(Trigger.SubmitInternal, MovementStatus.Submitted);
 
             return stateMachine;
@@ -210,18 +205,18 @@
             PrenotificationDate = new DateTimeOffset(prenotificationDate);
         }
 
-        public void Reject(Guid fileId, DateTime dateReceived, string reason)
+        internal MovementRejection Reject(DateTimeOffset dateReceived, 
+            string reason,
+            string furtherDetails)
         {
-            Guard.ArgumentNotDefaultValue(() => fileId, fileId);
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            stateMachine.Fire(rejectedTrigger, fileId, dateReceived, reason);
-        }
+            var rejection = new MovementRejection(Id, dateReceived, reason, furtherDetails);
 
-        private void OnRejected(Guid fileId, DateTime dateReceived, string reason)
-        {
-            Receipt = new MovementReceipt(fileId, dateReceived, reason);
+            stateMachine.Fire(Trigger.Reject);
+
+            return rejection;
         }
 
         public void Receive(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)

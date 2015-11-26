@@ -145,6 +145,7 @@
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\Mappings\MovementDateHistoryMap.cs" />
+    <Compile Include="Movement\Reject\RecordRejectionInternalHandler.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryDataHandler.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternalHandler.cs" />
@@ -183,16 +184,16 @@
     <Compile Include="Movement\GetMovementDateByMovementIdHandler.cs" />
     <Compile Include="Movement\Summary\GetMovementSummaryHandler.cs" />
     <Compile Include="Movement\GetMovementUnitsByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetSubmittedMovementsByNotificationIdHandler.cs" />
+    <Compile Include="Movement\Receive\GetSubmittedMovementsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMovementNumberByMovementIdHandler.cs" />
-    <Compile Include="Movement\GetSubmittedMovementsHandler.cs" />
+    <Compile Include="Movement\Receive\GetSubmittedMovementsHandler.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandler.cs" />
     <Compile Include="Movement\Mappings\BasicMovementSummaryMap.cs" />
     <Compile Include="Movement\RecordMovementStatusChange.cs" />
     <Compile Include="Movement\Receive\SaveCertificateOfReceiptFileHandler.cs" />
     <Compile Include="Movement\Receive\SetMovementAcceptedHandler.cs" />
     <Compile Include="Movement\SetMovementFileIdHandler.cs" />
-    <Compile Include="Movement\SetMovementRejectedHandler.cs" />
+    <Compile Include="Movement\Reject\SetMovementRejectedHandler.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTableHandler.cs" />
     <Compile Include="NotificationAssessment\AddNotificationTransactionHandler.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplicationHandler.cs" />

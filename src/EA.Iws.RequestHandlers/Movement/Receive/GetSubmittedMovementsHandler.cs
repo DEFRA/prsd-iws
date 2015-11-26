@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Movement
+﻿namespace EA.Iws.RequestHandlers.Movement.Receive
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -7,7 +7,7 @@
     using Domain.Movement;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
+    using Requests.Movement.Receive;
 
     internal class GetSubmittedMovementsHandler :
         IRequestHandler<GetSubmittedMovements, List<SubmittedMovement>>

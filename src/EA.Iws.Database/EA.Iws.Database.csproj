@@ -165,6 +165,7 @@
     <Content Include="scripts\Update\Sprint21\20151125-141500-add-prenotification-date-column.sql" />
     <Content Include="scripts\Update\Sprint21\20151125-161047-add-blanket-bond-ref-column.sql" />
     <Content Include="scripts\Update\Sprint21\20151125-160000-migrate-prenotification-date-data.sql" />
+    <Content Include="scripts\Update\Sprint21\20151126-121500-add-movement-rejection-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

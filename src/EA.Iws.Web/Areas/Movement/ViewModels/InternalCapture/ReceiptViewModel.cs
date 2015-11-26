@@ -15,12 +15,10 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture
 
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public bool WasShipmentAccepted { get; set; }
-
-        [Required(ErrorMessageResourceName = "QuantityRequired", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]
+        
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public decimal? ActualQuantity { get; set; }
-
-        [Required(ErrorMessageResourceName = "UnitsRequired", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]
+        
         public ShipmentQuantityUnits? Units { get; set; }
 
         [Display(Name = "RejectionReasonLabel", ResourceType = typeof(ReceiptViewModelResources))]
@@ -71,16 +69,30 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture
 
         public bool IsComplete()
         {
-            var rejectionComplete = WasShipmentAccepted || !string.IsNullOrWhiteSpace(RejectionReason);
-
-            return ReceivedDate.IsCompleted
-                   && ActualQuantity.HasValue
-                   && Units.HasValue
-                   && rejectionComplete;
+            if (WasShipmentAccepted)
+            {
+                return ReceivedDate.IsCompleted
+                       && ActualQuantity.HasValue
+                       && Units.HasValue;
+            }
+            
+            return !string.IsNullOrWhiteSpace(RejectionReason) && ReceivedDate.IsCompleted;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (WasShipmentAccepted)
+            {
+                if (!ActualQuantity.HasValue)
+                {
+                    yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+                }
+                if (!Units.HasValue)
+                {
+                    yield return new ValidationResult(ReceiptViewModelResources.UnitsRequired, new[] { "Units" });
+                }
+            }
+
             if (!ReceivedDate.IsCompleted)
             {
                 yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate.Day" });

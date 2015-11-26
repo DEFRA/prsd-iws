@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Movement
+﻿namespace EA.Iws.Requests.Movement.Reject
 {
     using System;
     using Prsd.Core.Mediator;

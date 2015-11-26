@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Movement.Receive;
+    using Requests.Movement.Reject;
     using Requests.Movement.Summary;
     using ViewModels.InternalCapture;
 
@@ -41,7 +42,10 @@
             {
                 if (!model.Receipt.WasShipmentAccepted)
                 {
-                    throw new NotImplementedException();
+                    await mediator.SendAsync(new RecordRejectionInternal(id,
+                        model.Receipt.ReceivedDate.AsDateTime().Value,
+                        model.Receipt.RejectionReason,
+                        model.Receipt.RejectionFurtherInformation));
                 }
                 else
                 {
@@ -59,7 +63,7 @@
                 throw new InvalidOperationException();
             }
 
-            throw new NotImplementedException();
+            return RedirectToAction("Index", "ShipmentSummary", new { area = "NotificationAssessment", id = model.NotificationId });
         }
     }
 }

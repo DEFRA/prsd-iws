@@ -78,6 +78,7 @@
             builder.RegisterType<NotificationProgressService>().As<INotificationProgressService>();
             builder.RegisterType<MovementNumberGenerator>().As<IMovementNumberGenerator>();
             builder.RegisterType<NextAvailableMovementNumberGenerator>().As<INextAvailableMovementNumberGenerator>();
+            builder.RegisterType<RejectMovement>().As<IRejectMovement>();
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<MovementNumberValidator>().As<IMovementNumberValidator>();
             builder.RegisterType<NotificationTransactionCalculator>().As<INotificationTransactionCalculator>();
