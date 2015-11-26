@@ -37,15 +37,15 @@
             }
 
             return NotificationDatesSummary.Load(
-                assessment.Dates.NotificationReceivedDate.GetValueOrDefault(),
+                assessment.Dates.NotificationReceivedDate,
                 notificationId,
                 lastestPaymentDate,
                 await transactionCalculator.IsPaymentComplete(notificationId),
-                assessment.Dates.NotificationReceivedDate.GetValueOrDefault(),
+                assessment.Dates.CommencementDate,
                 assessment.Dates.NameOfOfficer,
-                assessment.Dates.CommencementDate.GetValueOrDefault(),
-                assessment.Dates.TransmittedDate.GetValueOrDefault(),
-                assessment.Dates.AcknowledgedDate.GetValueOrDefault(),
+                assessment.Dates.CompleteDate,
+                assessment.Dates.TransmittedDate,
+                assessment.Dates.AcknowledgedDate,
                 decisionRequiredBy.GetDecisionRequiredByDate(notification, assessment));
         }
     }

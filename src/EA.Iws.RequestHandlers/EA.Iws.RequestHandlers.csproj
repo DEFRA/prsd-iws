@@ -83,6 +83,7 @@
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
     <Compile Include="Admin\Mappings\ImportSearchResultMap.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\GetDecisionHistoryHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandler.cs" />

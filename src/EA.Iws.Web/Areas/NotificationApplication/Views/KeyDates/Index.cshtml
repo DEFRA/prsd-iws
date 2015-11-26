@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.KeyDates.KeyDatesViewModel
+﻿@using EA.Iws.Core.NotificationAssessment
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.KeyDates.KeyDatesViewModel
 @{
     ViewBag.Title = "Notification status history";
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
@@ -23,6 +24,7 @@
         <tr>
             <th>Activities</th>
             <th>Dates</th>
+            <th></th>
         </tr>
         <tr>
             <td>Notification received</td>
@@ -36,6 +38,7 @@
                     @nullMarker
                 }
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -50,6 +53,7 @@
                     @nullMarker
                 }
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -64,6 +68,7 @@
                     @nullMarker
                 }
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -78,6 +83,7 @@
                     @nullMarker
                 }
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -92,6 +98,7 @@
                     @nullMarker
                 }
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -106,6 +113,7 @@
                     @nullMarker
                 }
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -120,7 +128,27 @@
                     @nullMarker
                 }
             </td>
+            <td></td>
         </tr>
+
+        @for (int i = 0; i < Model.Decisions.Count; i++)
+        {
+            <tr>
+                <td>
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
+                </td>
+                <td>
+                    @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
+                </td>
+                <td>
+
+                    @if (Model.Decisions[i].Status == NotificationStatus.Consented)
+                    {
+                        @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
+                    }
+                </td>
+            </tr>
+        }
 
     </table>
 

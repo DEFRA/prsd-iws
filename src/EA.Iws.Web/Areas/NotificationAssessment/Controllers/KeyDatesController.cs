@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
+    using Requests.NotificationAssessment;
     using ViewModels;
 
     [Authorize(Roles = "internal")]
@@ -21,7 +22,10 @@
         public async Task<ActionResult> Index(Guid id, KeyDatesStatusEnum? command)
         {
             var dates = await mediator.SendAsync(new GetDates(id));
-            var model = new DateInputViewModel(dates);
+            var decisions = await mediator.SendAsync(new GetDecisionHistory(id));
+
+            var model = new DateInputViewModel(dates) { Decisions = decisions };
+
             if (command != null)
             {
                 model.Command = command.GetValueOrDefault();

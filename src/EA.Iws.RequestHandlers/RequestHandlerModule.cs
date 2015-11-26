@@ -83,6 +83,7 @@
             builder.RegisterType<MovementNumberValidator>().As<IMovementNumberValidator>();
             builder.RegisterType<NotificationTransactionCalculator>().As<INotificationTransactionCalculator>();
             builder.RegisterType<NotificationAssessmentDatesSummaryRepository>().As<INotificationAssessmentDatesSummaryRepository>();
+            builder.RegisterType<NotificationAssessmentDecisionRepository>().As<INotificationAssessmentDecisionRepository>();
 
             if (HasAsposeLicense())
             {

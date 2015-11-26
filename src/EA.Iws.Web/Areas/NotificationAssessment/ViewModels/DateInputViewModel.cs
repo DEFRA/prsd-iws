@@ -18,6 +18,7 @@
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
             DecisionDate = new OptionalDateInputViewModel(true);
             NewDate = new OptionalDateInputViewModel(true);
+            Decisions = new List<NotificationAssessmentDecision>();
         }
 
         public DateInputViewModel(NotificationDatesData dates)
@@ -33,6 +34,7 @@
             DecisionDate = new OptionalDateInputViewModel(dates.DecisionRequiredDate, true);
             NewDate = new OptionalDateInputViewModel(true);
             NameOfOfficer = dates.NameOfOfficer;
+            Decisions = new List<NotificationAssessmentDecision>();
         }
 
         public Guid NotificationId { get; set; }
@@ -71,6 +73,8 @@
         {
             get { return CommencementDate.AsDateTime() != null && !string.IsNullOrWhiteSpace(NameOfOfficer); }
         }
+
+        public IList<NotificationAssessmentDecision> Decisions { get; set; } 
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -27,6 +27,8 @@ namespace EA.Iws.Domain.NotificationAssessment
 
         public DateTime? ConsentWithdrawnDate { get; set; }
 
+        public DateTime? ConsentedDate { get; set; }
+
         public string ConsentWithdrawnReasons { get; set; }
 
         public DateTime? ObjectedDate { get; set; }

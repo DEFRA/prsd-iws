@@ -22,11 +22,12 @@
 
         public async Task Consent(Guid notificationId, 
             DateRange dateRange, 
-            string conditions)
+            string conditions,
+            DateTime consentedDate)
         {
             var assessment = await assessmentRepository.GetByNotificationId(notificationId);
 
-            var consent = assessment.Consent(dateRange, conditions, userContext.UserId);
+            var consent = assessment.Consent(dateRange, conditions, userContext.UserId, consentedDate);
 
             consentRepository.Add(consent);
         }

@@ -25,7 +25,7 @@
         public DateTime? DecisionRequiredDate { get; private set; }
 
         public static NotificationDatesSummary Load(
-            DateTime notificationReceivedDate,
+            DateTime? notificationReceivedDate,
             Guid notificationId,
             DateTime? paymentReceivedDate,
             bool paymentIsComplete,

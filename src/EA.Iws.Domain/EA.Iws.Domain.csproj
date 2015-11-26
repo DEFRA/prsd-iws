@@ -136,6 +136,7 @@
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentDatesSummaryRepository.cs" />
+    <Compile Include="NotificationAssessment\INotificationAssessmentDecisionRepository.cs" />
     <Compile Include="NotificationAssessment\INotificationTransactionCalculator.cs" />
     <Compile Include="NotificationAssessment\INotificationTransactionRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationDatesSummary.cs" />

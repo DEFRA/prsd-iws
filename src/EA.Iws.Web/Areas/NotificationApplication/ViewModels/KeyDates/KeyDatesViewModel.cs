@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.KeyDates
 {
     using System;
+    using System.Collections.Generic;
     using Core.NotificationAssessment;
 
     public class KeyDatesViewModel
@@ -14,6 +15,7 @@
             TransmittedDate = dates.TransmittedDate;
             AcknowledgedDate = dates.AcknowledgedDate;
             DecisionRequiredDate = dates.DecisionRequiredDate;
+            Decisions = new List<NotificationAssessmentDecision>();
         }
         public Guid NotificationId { get; set; }
 
@@ -30,5 +32,7 @@
         public DateTime? AcknowledgedDate { get; set; }
 
         public DateTime? DecisionRequiredDate { get; set; }
+
+        public IList<NotificationAssessmentDecision> Decisions { get; set; }
     }
 }

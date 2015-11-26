@@ -49,6 +49,7 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> withdrawTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> objectTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> consentedTrigger;  
 
         public Guid NotificationApplicationId { get; private set; }
 
@@ -100,6 +101,7 @@
             withdrawTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Withdraw);
             objectTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Object);
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
+            consentedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Consent);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -148,12 +150,18 @@
                 .OnEntryFrom(objectTrigger, OnObjected);
 
             stateMachine.Configure(NotificationStatus.Consented)
+                .OnEntryFrom(consentedTrigger, OnConsented)
                 .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn);
 
             stateMachine.Configure(NotificationStatus.ConsentWithdrawn)
                 .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn);
 
             return stateMachine;
+        }
+
+        private void OnConsented(DateTime consentedDate)
+        {
+            Dates.ConsentedDate = consentedDate;
         }
 
         private void OnConsentWithdrawn(DateTime withdrawnDate, string reasons)
@@ -275,9 +283,9 @@
             return triggers;
         }
 
-        internal Consent Consent(DateRange dateRange, string conditions, Guid userId)
+        internal Consent Consent(DateRange dateRange, string conditions, Guid userId, DateTime consentedDate)
         {
-            stateMachine.Fire(Trigger.Consent);
+            stateMachine.Fire(consentedTrigger, consentedDate);
 
             return new Consent(NotificationApplicationId, dateRange, conditions, userId);
         }

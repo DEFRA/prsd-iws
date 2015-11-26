@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Web.Areas.NotificationAssessment.ViewModels
+﻿@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Web.Areas.NotificationAssessment.ViewModels
 @model DateInputViewModel
 
 <h1 class="heading-large">Enter the key dates for this notification</h1>
@@ -30,8 +31,8 @@
                 }
             </td>
             <td>
-                @(Model.NotificationReceivedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null))
+                @(Model.NotificationReceivedDate.IsCompleted ? Html.Raw(string.Empty)
+                      : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null))
             </td>
         </tr>
 
@@ -75,7 +76,7 @@
             <td>
                 @if (Model.PaymentIsComplete)
                 {
-                    @(Model.CommencementDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
+                    @(Model.CommencementDate.IsCompleted ? Html.Raw(string.Empty)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null))
                 }
             </td>
@@ -97,7 +98,7 @@
             <td>
                 @if (Model.CommencementDate.IsCompleted)
                 {
-                    @(Model.NotificationCompleteDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
+                    @(Model.NotificationCompleteDate.IsCompleted ? Html.Raw(string.Empty)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null))
                 }
             </td>
@@ -119,7 +120,7 @@
             <td>
                 @if (Model.NotificationCompleteDate.IsCompleted)
                 {
-                    @(Model.NotificationTransmittedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
+                    @(Model.NotificationTransmittedDate.IsCompleted ? Html.Raw(string.Empty)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null))
                 }
             </td>
@@ -141,7 +142,7 @@
             <td>
                 @if (Model.NotificationTransmittedDate.IsCompleted)
                 {
-                    @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.ActionLink("Edit", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null)
+                    @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.Raw(string.Empty)
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null))
                 }
             </td>
@@ -163,6 +164,24 @@
             <td>
             </td>
         </tr>
+
+        @for (int i = 0; i < Model.Decisions.Count; i++)
+        {
+            <tr>
+                <td>
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
+                </td>
+                <td>
+                    @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
+                </td>
+                <td>
+                    @if (Model.Decisions[i].Status == NotificationStatus.Consented)
+                    {
+                        @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
+                    }
+                </td>
+            </tr>
+        }
 
     </table>
 </div>

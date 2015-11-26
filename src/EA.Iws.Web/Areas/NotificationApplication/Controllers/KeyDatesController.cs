@@ -21,8 +21,13 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var dates = await mediator.SendAsync(new GetDates(id));
-            var model = new KeyDatesViewModel(dates);
-            model.NotificationId = id;
+            var decisions = await mediator.SendAsync(new GetDecisionHistory(id));
+
+            var model = new KeyDatesViewModel(dates)
+            {
+                NotificationId = id,
+                Decisions = decisions
+            };
 
             return View(model);
         }
