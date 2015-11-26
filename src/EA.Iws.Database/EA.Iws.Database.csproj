@@ -57,6 +57,17 @@
     <Content Include="scripts\Everytime\Permissions\0001-Permissions-AppRole.sql" />
     <Content Include="scripts\Everytime\placeholder.txt" />
     <Content Include="scripts\Everytime\StoredProcedures\uspNotificationProgress.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-CodeTypes.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-ExportStats.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-Movements.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-OperationCodes.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-OperationCodesConcat.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-PhysicalCharacteristics.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-PhysicalCharacteristicsConcat.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-TransitStates.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-TransitStatesConcat.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-TransportRoute.sql" />
+    <Content Include="scripts\Everytime\Views\Reports-WasteType.sql" />
     <Content Include="scripts\TestData\20150907-145000-create-submitted-notification.sql" />
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
@@ -167,6 +178,8 @@
     <Content Include="scripts\Update\Sprint21\20151125-160000-migrate-prenotification-date-data.sql" />
     <Content Include="scripts\Update\Sprint21\20151126-121500-add-movement-rejection-table.sql" />
     <Content Include="scripts\Update\Sprint21\20151127-093307-add-consented-date-column.sql" />
+    <Content Include="scripts\Update\Sprint21\20151126-142800-create-report-schema.sql" />
+    <Content Include="scripts\Update\Sprint21\20151126-154000-create-operation-codes-lookup.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
