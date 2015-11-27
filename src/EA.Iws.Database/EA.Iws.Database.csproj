@@ -57,7 +57,7 @@
     <Content Include="scripts\Everytime\Permissions\0001-Permissions-AppRole.sql" />
     <Content Include="scripts\Everytime\placeholder.txt" />
     <Content Include="scripts\Everytime\StoredProcedures\uspNotificationProgress.sql" />
-    <Content Include="scripts\Everytime\Views\0001-Reports-CodeTypes.sql" />
+    <Content Include="scripts\Everytime\Views\0001-Reports-WasteCodes.sql" />
     <Content Include="scripts\Everytime\Views\0011-Reports-ExportStats.sql" />
     <Content Include="scripts\Everytime\Views\0002-Reports-Movements.sql" />
     <Content Include="scripts\Everytime\Views\0003-Reports-OperationCodes.sql" />
