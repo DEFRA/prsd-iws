@@ -88,9 +88,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation.
-        ///                        You can also get the number from your organisation&apos;s accountant or accounts department, or
-        ///                        &lt;a href=&quot;https://beta.companieshouse.gov.uk/&quot; target=&quot;_blank&quot;&gt;search the Companies House online services&lt;/a&gt;.
+        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation. You can also get the number from your organisation&apos;s accountant or accounts department, or &lt;a href=&quot;https://beta.companieshouse.gov.uk/&quot; target=&quot;_blank&quot;&gt;search the Companies House online services&lt;/a&gt;.
         /// </summary>
         public static string CompanyHouseDescription {
             get {
@@ -104,6 +102,15 @@ namespace EA.Iws.Web.ViewModels.Shared {
         public static string CompanyHouseRequired {
             get {
                 return ResourceManager.GetString("CompanyHouseRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If none of these options apply, please select &quot;Other&quot; and add details..
+        /// </summary>
+        public static string FormHint {
+            get {
+                return ResourceManager.GetString("FormHint", resourceCulture);
             }
         }
         
@@ -153,7 +160,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter your organisation type.
+        ///   Looks up a localized string similar to Please describe this type of organisation.
         /// </summary>
         public static string OtherOrgTypeRequired {
             get {
@@ -189,7 +196,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Registration number field is required..
+        ///   Looks up a localized string similar to Please enter the registration number.
         /// </summary>
         public static string RegNumberRequired {
             get {

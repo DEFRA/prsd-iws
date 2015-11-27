@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.TransitState {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The competent authority is required.
+        ///   Looks up a localized string similar to Please select the competent authority.
         /// </summary>
         public static string CARequired {
             get {
@@ -134,7 +134,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.TransitState {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The entry point is required.
+        ///   Looks up a localized string similar to Please select the entry point.
         /// </summary>
         public static string EntryPointRequired {
             get {
@@ -170,7 +170,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.TransitState {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The exit point is required.
+        ///   Looks up a localized string similar to Please select the exit point.
         /// </summary>
         public static string ExitPointRequired {
             get {
