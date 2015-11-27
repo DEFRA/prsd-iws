@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
-            @Html.Gds().LabelFor(m => m.Details, false)
+            @Html.LabelFor(m => m.Details, new { @class = "heading-medium" })
             @Html.Gds().ValidationMessageFor(m => m.Details)
             @Html.Gds().HintParagraph(TechnologyEmployedResources.TechnologyHint)
             @Html.TextBoxFor(m => m.Details, new { @class = "full-width", @MaxLength = 70, @title = TechnologyEmployedResources.DetailsTitle })
@@ -33,7 +33,7 @@
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherDetails)">
             @Html.Gds().LabelFor(m => m.FurtherDetails)
-            <p>@TechnologyEmployedResources.FurtherDetailsDescription</p>
+            @Html.Gds().HintParagraph(@TechnologyEmployedResources.FurtherDetailsDescription)
             @Html.Gds().ValidationMessageFor(m => m.FurtherDetails)
             @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px", @title = TechnologyEmployedResources.FurtherDetailsTitle })
         </div>
