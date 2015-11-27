@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationMovements
+﻿namespace EA.Iws.Web.Tests.Unit.Controllers.AdminNotificationMovements
 {
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Areas.NotificationMovements.Controllers;
-    using Areas.NotificationMovements.ViewModels.CaptureMovement;
+    using Areas.AdminNotificationMovements.Controllers;
+    using Areas.AdminNotificationMovements.ViewModels.CaptureMovement;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Capture;

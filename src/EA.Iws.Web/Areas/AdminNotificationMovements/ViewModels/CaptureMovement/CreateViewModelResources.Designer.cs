@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
+namespace EA.Iws.Web.Areas.AdminNotificationMovements.ViewModels.CaptureMovement {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CaptureMovementControllerResources {
+    public class CreateViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CaptureMovementControllerResources() {
+        internal CreateViewModelResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Controllers.CaptureMovementControllerResou" +
-                            "rces", typeof(CaptureMovementControllerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminNotificationMovements.ViewModels.CaptureMovement.CreateView" +
+                            "ModelResources", typeof(CreateViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,11 +62,29 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This movement could not be created please try recording the shipment again.
+        ///   Looks up a localized string similar to Actual date of shipment.
         /// </summary>
-        public static string SaveUnsuccessful {
+        public static string ActualDateLabel {
             get {
-                return ResourceManager.GetString("SaveUnsuccessful", resourceCulture);
+                return ResourceManager.GetString("ActualDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the actual date of shipment.
+        /// </summary>
+        public static string ActualDateRequired {
+            get {
+                return ResourceManager.GetString("ActualDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prenotification date.
+        /// </summary>
+        public static string PrenotificationDateLabel {
+            get {
+                return ResourceManager.GetString("PrenotificationDateLabel", resourceCulture);
             }
         }
     }

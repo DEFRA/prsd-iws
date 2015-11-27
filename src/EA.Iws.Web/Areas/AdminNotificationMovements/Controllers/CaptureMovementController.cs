@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
+﻿namespace EA.Iws.Web.Areas.AdminNotificationMovements.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -20,9 +20,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid notificationId)
+        public async Task<ActionResult> Index(Guid id)
         {
-            var nextNumber = await mediator.SendAsync(new GetNextAvailableMovementNumberForNotification(notificationId));
+            var nextNumber = await mediator.SendAsync(new GetNextAvailableMovementNumberForNotification(id));
 
             return View(new SearchViewModel
             {
@@ -32,10 +32,10 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid notificationId, SearchViewModel model)
+        public async Task<ActionResult> Index(Guid id, SearchViewModel model)
         {
             var movementId =
-                await mediator.SendAsync(new GetMovementIdIfExists(notificationId, model.Number));
+                await mediator.SendAsync(new GetMovementIdIfExists(id, model.Number));
 
             if (!movementId.HasValue)
             {
@@ -47,7 +47,7 @@
         }
 
         [HttpGet]
-        public ActionResult Create(Guid notificationId)
+        public ActionResult Create(Guid id)
         {
             object result;
             if (TempData.TryGetValue(MovementNumberKey, out result))
@@ -55,7 +55,7 @@
                 return View(new CreateViewModel
                 {
                     Number = (int)result,
-                    NotificationId = notificationId
+                    NotificationId = id
                 });
             }
 
@@ -64,21 +64,21 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Guid notificationId, CreateViewModel model)
+        public async Task<ActionResult> Create(Guid id, CreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var success = await mediator.SendAsync(new CreateMovementInternal(notificationId, 
+            var success = await mediator.SendAsync(new CreateMovementInternal(id, 
                 model.Number,
                 model.PrenotificationDate.AsDateTime(), 
                 model.ActualShipmentDate.AsDateTime().Value));
 
             if (success)
             {
-                var movementId = await mediator.SendAsync(new GetMovementIdByNumber(notificationId, model.Number));
+                var movementId = await mediator.SendAsync(new GetMovementIdByNumber(id, model.Number));
 
                 return RedirectToAction("Index", "InternalCapture", new { area = "Movement", id = movementId });
             }

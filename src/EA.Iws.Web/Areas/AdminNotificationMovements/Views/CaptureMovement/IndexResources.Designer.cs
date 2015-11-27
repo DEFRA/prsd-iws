@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationMovements.Views.CaptureMovement {
+namespace EA.Iws.Web.Areas.AdminNotificationMovements.Views.CaptureMovement {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.CaptureMovement {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.CaptureMovement.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminNotificationMovements.Views.CaptureMovement.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

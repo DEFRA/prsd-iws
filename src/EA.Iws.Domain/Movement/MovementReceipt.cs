@@ -10,13 +10,6 @@
         {
         }
 
-        internal MovementReceipt(Guid fileId, DateTime dateReceived, string rejectionReason)
-        {
-            FileId = fileId;
-            Date = dateReceived;
-            RejectReason = rejectionReason;
-        }
-
         internal MovementReceipt(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)
         {
             FileId = fileId;
@@ -33,8 +26,6 @@
         public DateTime Date { get; private set; }
 
         public Decision? Decision { get; private set; }
-
-        public string RejectReason { get; private set; }
 
         public ShipmentQuantity QuantityReceived { get; private set; }
 

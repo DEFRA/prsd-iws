@@ -68,5 +68,14 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
                 return ResourceManager.GetString("ReceiptMustBeCompletedFirst", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
+        /// </summary>
+        public static string RecoveryDateCannotBeEnteredForRejected {
+            get {
+                return ResourceManager.GetString("RecoveryDateCannotBeEnteredForRejected", resourceCulture);
+            }
+        }
     }
 }

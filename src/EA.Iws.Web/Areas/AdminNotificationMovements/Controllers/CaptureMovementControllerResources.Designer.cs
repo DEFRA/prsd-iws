@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement {
+namespace EA.Iws.Web.Areas.AdminNotificationMovements.Controllers {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SearchViewModelResources {
+    public class CaptureMovementControllerResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SearchViewModelResources() {
+        internal CaptureMovementControllerResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement.SearchViewModel" +
-                            "Resources", typeof(SearchViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminNotificationMovements.Controllers.CaptureMovementController" +
+                            "Resources", typeof(CaptureMovementControllerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,11 +62,11 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the shipment number, for example 5.
+        ///   Looks up a localized string similar to This movement could not be created please try recording the shipment again.
         /// </summary>
-        public static string Number {
+        public static string SaveUnsuccessful {
             get {
-                return ResourceManager.GetString("Number", resourceCulture);
+                return ResourceManager.GetString("SaveUnsuccessful", resourceCulture);
             }
         }
     }

@@ -31,11 +31,5 @@
             get { return base.Decision; }
             set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.Decision, value, this); }
         }
-
-        public new string RejectReason
-        {
-            get { return base.RejectReason; }
-            set { ObjectInstantiator<MovementReceipt>.SetProperty(x => x.RejectReason, value, this); }
-        }
     }
 }

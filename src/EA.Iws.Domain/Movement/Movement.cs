@@ -18,6 +18,7 @@
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, ShipmentQuantity> acceptedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, ShipmentQuantity> internallyAcceptedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime> internallySubmittedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime> internallyCompletedTrigger;
 
         private enum Trigger
         {
@@ -27,7 +28,8 @@
             Complete,
             Reject,
             Cancel,
-            ReceiveInternal
+            ReceiveInternal,
+            CompleteInternal
         }
 
         protected Movement()
@@ -144,6 +146,7 @@
             submittedTrigger = stateMachine.SetTriggerParameters<Guid>(Trigger.Submit);
             internallySubmittedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.SubmitInternal);
             completedTrigger = stateMachine.SetTriggerParameters<DateTime, Guid>(Trigger.Complete);
+            internallyCompletedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.CompleteInternal);
 
             acceptedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, ShipmentQuantity>(Trigger.Receive);
             internallyAcceptedTrigger = stateMachine.SetTriggerParameters<DateTime, ShipmentQuantity>(Trigger.ReceiveInternal);
@@ -164,10 +167,12 @@
             stateMachine.Configure(MovementStatus.Received)
                 .OnEntryFrom(acceptedTrigger, OnReceived)
                 .OnEntryFrom(internallyAcceptedTrigger, OnInternallyReceived)
-                .Permit(Trigger.Complete, MovementStatus.Completed);
+                .Permit(Trigger.Complete, MovementStatus.Completed)
+                .Permit(Trigger.CompleteInternal, MovementStatus.Completed);
 
             stateMachine.Configure(MovementStatus.Completed)
-                .OnEntryFrom(completedTrigger, OnCompleted);
+                .OnEntryFrom(completedTrigger, OnCompleted)
+                .OnEntryFrom(internallyCompletedTrigger, OnInternallyCompleted);
             
             stateMachine.Configure(MovementStatus.Captured)
                 .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
@@ -262,6 +267,16 @@
         private void OnCompleted(DateTime completedDate, Guid fileId)
         {
             CompletedReceipt = new MovementCompletedReceipt(completedDate, fileId);
+        }
+
+        public void CompleteInternally(DateTime completedDate)
+        {
+            stateMachine.Fire(internallyCompletedTrigger, completedDate);
+        }
+
+        private void OnInternallyCompleted(DateTime completedDate)
+        {
+            CompletedReceipt = new MovementCompletedReceipt(completedDate);
         }
     }
 }

@@ -77,7 +77,7 @@
         <div class="column-half nav-bloc">
             <h2 class="heading-small">Shipping options</h2>
             <nav>
-                @Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "NotificationMovements", notificationId = Model.NotificationId }, null)
+                @Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "AdminNotificationMovements" }, null)
 
                 @Html.ActionLink("Cancel a prenotification", "Index", "Cancel")
             </nav>

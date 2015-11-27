@@ -120,4 +120,7 @@
   <data name="ReceiptMustBeCompletedFirst" xml:space="preserve">
     <value>Please provide receipt information before providing date of {0}</value>
   </data>
+  <data name="RecoveryDateCannotBeEnteredForRejected" xml:space="preserve">
+    <value>Do not provide {0} date when the prenotification has been rejected</value>
+  </data>
 </root>

@@ -63,7 +63,14 @@
         {
             if (Recovery.IsComplete() && !Receipt.IsComplete())
             {
-                yield return new ValidationResult(string.Format(CaptureViewModelResources.ReceiptMustBeCompletedFirst, NotificationType), new[] { "Recovery.RecoveryDate.Day" });
+                yield return new ValidationResult(string.Format(CaptureViewModelResources.ReceiptMustBeCompletedFirst, NotificationType), 
+                    new[] { "Recovery.RecoveryDate.Day" });
+            }
+
+            if (Receipt.IsComplete() && !Receipt.WasShipmentAccepted && Recovery.IsComplete())
+            {
+                yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType), 
+                    new[] { "Recovery.RecoveryDate.Day" });
             }
         }
     }

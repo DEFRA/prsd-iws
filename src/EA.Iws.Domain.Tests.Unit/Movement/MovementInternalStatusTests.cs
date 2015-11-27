@@ -59,6 +59,33 @@
             Assert.Equal(Date.AddDays(5), movement.Receipt.Date);
         }
 
+        [Fact]
+        public void Received_ToComplete()
+        {
+            SetMovementStatus(MovementStatus.Received);
+
+            movement.CompleteInternally(Date);
+
+            Assert.Equal(MovementStatus.Completed, movement.Status);
+            Assert.Equal(Date, movement.CompletedReceipt.Date);
+        }
+
+        [Theory]
+        [InlineData(MovementStatus.Completed)]
+        [InlineData(MovementStatus.Cancelled)]
+        [InlineData(MovementStatus.Captured)]
+        [InlineData(MovementStatus.New)]
+        [InlineData(MovementStatus.Rejected)]
+        [InlineData(MovementStatus.Submitted)]
+        public void CanOnlyComplete_FromReceived(MovementStatus status)
+        {
+            SetMovementStatus(status);
+
+            Action complete = () => movement.CompleteInternally(Date);
+
+            Assert.Throws<InvalidOperationException>(complete);
+        }
+
         private void SetMovementStatus(MovementStatus status)
         {
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, status, movement);

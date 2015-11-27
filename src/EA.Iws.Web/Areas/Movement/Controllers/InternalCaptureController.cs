@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
+    using Requests.Movement.Complete;
     using Requests.Movement.Receive;
     using Requests.Movement.Reject;
     using Requests.Movement.Summary;
@@ -58,12 +59,14 @@
 
             if (model.Recovery.IsComplete() 
                 && (model.Receipt.IsComplete() || model.IsReceived) 
-                && !model.IsOperationCompleted)
+                && !model.IsOperationCompleted
+                && model.Receipt.WasShipmentAccepted)
             {
-                throw new InvalidOperationException();
+                await mediator.SendAsync(new RecordOperationCompleteInternal(id,
+                    model.Recovery.RecoveryDate.AsDateTime().Value));
             }
 
-            return RedirectToAction("Index", "ShipmentSummary", new { area = "NotificationAssessment", id = model.NotificationId });
+            return RedirectToAction("Index", "Home", new { area = "AdminNotificationMovements", id = model.NotificationId });
         }
     }
 }

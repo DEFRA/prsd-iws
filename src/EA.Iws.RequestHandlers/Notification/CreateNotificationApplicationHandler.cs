@@ -40,15 +40,15 @@
             return notification.Id;
         }
 
-        private static NotificationType GetNotificationType(Core.Shared.NotificationType notificationType)
+        private static NotificationType GetNotificationType(NotificationType notificationType)
         {
             NotificationType type;
             switch (notificationType)
             {
-                case Core.Shared.NotificationType.Recovery:
+                case NotificationType.Recovery:
                     type = NotificationType.Recovery;
                     break;
-                case Core.Shared.NotificationType.Disposal:
+                case NotificationType.Disposal:
                     type = NotificationType.Disposal;
                     break;
                 default:

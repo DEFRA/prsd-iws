@@ -15,6 +15,11 @@
             FileId = fileId;
         }
 
+        internal MovementCompletedReceipt(DateTime dateComplete)
+        {
+            Date = dateComplete;
+        }
+
         public DateTime Date { get; private set; }
 
         public Guid? FileId { get; private set; }

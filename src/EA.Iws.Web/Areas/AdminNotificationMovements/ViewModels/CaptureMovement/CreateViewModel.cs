@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.CaptureMovement
+﻿namespace EA.Iws.Web.Areas.AdminNotificationMovements.ViewModels.CaptureMovement
 {
     using System;
     using System.Collections.Generic;

@@ -142,6 +142,7 @@
     <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
+    <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
