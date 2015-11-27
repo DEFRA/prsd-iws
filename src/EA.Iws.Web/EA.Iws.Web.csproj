@@ -1830,6 +1830,11 @@
     <Compile Include="ViewModels\Shared\NotificationSwitcher.cs" />
     <Compile Include="ViewModels\Shared\OptionalDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />
+    <Compile Include="ViewModels\Shared\RadioButtonsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadioButtonsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Shared\StringIntRadioButtons.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\SpecialHandling\SpecialHandlingViewModel.cs" />
@@ -2542,6 +2547,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\RadioButtonsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RadioButtonsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Account\EmailVerificationRequiredResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

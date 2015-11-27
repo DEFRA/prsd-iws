@@ -8,7 +8,7 @@
 
     public sealed class RadioButtonStringCollectionViewModel : RadioButtonStringCollectionBaseViewModel
     {
-        [Required(ErrorMessage = "Please answer this question")]
+        [Required(ErrorMessageResourceName = "AnswerRequired", ErrorMessageResourceType = typeof(RadioButtonsResources))]
         public override string SelectedValue { get; set; }
 
         public override IList<string> PossibleValues { get; set; }
