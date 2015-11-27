@@ -11,8 +11,9 @@ CREATE TABLE [Notification].[MovementRejection]
 GO
 
 INSERT INTO [Notification].[MovementRejection]
-([MovementId], [Date], [Reason])
-SELECT	[MovementId],
+([Id], [MovementId], [Date], [Reason])
+SELECT	(select CAST(CAST(NEWID() AS BINARY(10)) + CAST(GETDATE() AS BINARY(6)) AS UNIQUEIDENTIFIER)) as [Id],
+		[MovementId],
 		[Date],
 		[RejectReason] 
 FROM	[Notification].[MovementReceipt]
