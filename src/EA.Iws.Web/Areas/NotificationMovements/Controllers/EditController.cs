@@ -4,8 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
-    using Requests.Movement.Receive;
+    using Requests.NotificationMovements.Edit;
     using ViewModels.Edit;
 
     [Authorize]
@@ -21,7 +20,7 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid notificationId)
         {
-            var submittedMovements = await mediator.SendAsync(new GetSubmittedMovementsByNotificationId(notificationId));
+            var submittedMovements = await mediator.SendAsync(new GetEditableMovements(notificationId));
 
             var model = new EditViewModel(submittedMovements);
 

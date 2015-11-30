@@ -1,0 +1,17 @@
+﻿namespace EA.Iws.Requests.NotificationMovements.Edit
+{
+    using System;
+    using System.Collections.Generic;
+    using Core.Movement;
+    using Prsd.Core.Mediator;
+
+    public class GetEditableMovements : IRequest<IList<MovementData>>
+    {
+        public Guid NotificationId { get; private set; }
+
+        public GetEditableMovements(Guid notificationId)
+        {
+            NotificationId = notificationId;
+        }
+    }
+}
