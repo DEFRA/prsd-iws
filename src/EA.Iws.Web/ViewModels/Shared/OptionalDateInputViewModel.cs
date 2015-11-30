@@ -56,6 +56,11 @@ namespace EA.Iws.Web.ViewModels.Shared
             return null;
         }
 
+        public bool IsStarted
+        {
+            get { return Day.HasValue || Month.HasValue || Year.HasValue; }
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Day.HasValue || Month.HasValue || Year.HasValue)

@@ -1,0 +1,43 @@
+﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
+{
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Prsd.Core.Mediator;
+    using Requests.Movement.Receive;
+    using ViewModels.Reject;
+
+    [Authorize]
+    public class RejectController : Controller
+    {
+        private readonly IMediator mediator;
+
+        public RejectController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Index(Guid notificationId)
+        {
+            var result = await mediator.SendAsync(new GetSubmittedMovementsByNotificationId(notificationId));
+
+            return View(new RejectViewModel
+            {
+                Movements = result
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(RejectViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Reject", new { area = "Movement", id = model.Selected.Value });
+        }
+    }
+}

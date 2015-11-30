@@ -117,58 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActiveLoadsPermitted" xml:space="preserve">
-    <value>Active loads permitted:</value>
+  <data name="DateName" xml:space="preserve">
+    <value>When was the shipment rejected?</value>
   </data>
-  <data name="CancelPrenotification" xml:space="preserve">
-    <value>Cancel a prenotification</value>
+  <data name="DateRequired" xml:space="preserve">
+    <value>Please enter the date the waste was rejected</value>
   </data>
-  <data name="CertificateOfReceipt" xml:space="preserve">
-    <value>Record a certificate of receipt</value>
+  <data name="FileName" xml:space="preserve">
+    <value>Please provide your signed prenotification document</value>
   </data>
-  <data name="CreatePrenotification" xml:space="preserve">
-    <value>Generate a prenotification</value>
+  <data name="FileRequired" xml:space="preserve">
+    <value>Please provide the prenotification document</value>
   </data>
-  <data name="CurrentActiveLoads" xml:space="preserve">
-    <value>Current active loads:</value>
+  <data name="RejectionReasonName" xml:space="preserve">
+    <value>Why was this waste rejected? (maximum 200 characters)</value>
   </data>
-  <data name="Dropdown" xml:space="preserve">
-    <value>Configure your results</value>
-  </data>
-  <data name="NumberUsed" xml:space="preserve">
-    <value>Number of shipments used:</value>
-  </data>
-  <data name="OptionsTitle" xml:space="preserve">
-    <value>Shipping options</value>
-  </data>
-  <data name="SummaryCaption" xml:space="preserve">
-    <value>Shipment summary</value>
-  </data>
-  <data name="TableTitle" xml:space="preserve">
-    <value>Information, dates and status</value>
-  </data>
-  <data name="TabTitle" xml:space="preserve">
-    <value>Shipment summary</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Shipment summary</value>
-  </data>
-  <data name="TotalNumber" xml:space="preserve">
-    <value>Total number of shipments:</value>
-  </data>
-  <data name="TotalQuantityReceived" xml:space="preserve">
-    <value>Total quantity received:</value>
-  </data>
-  <data name="TotalQuantityRemaining" xml:space="preserve">
-    <value>Total quantity remaining:</value>
-  </data>
-  <data name="UploadPrenotification" xml:space="preserve">
-    <value>Upload a signed prenotification</value>
-  </data>
-  <data name="EditPrenotification" xml:space="preserve">
-    <value>Edit a prenotification</value>
-  </data>
-  <data name="Reject" xml:space="preserve">
-    <value>Record a shipment rejection</value>
+  <data name="RejectionReasonRequired" xml:space="preserve">
+    <value>Please enter a reason the shipment was rejected</value>
   </data>
 </root>

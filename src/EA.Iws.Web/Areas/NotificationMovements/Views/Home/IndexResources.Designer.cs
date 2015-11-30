@@ -142,6 +142,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record a shipment rejection.
+        /// </summary>
+        public static string Reject {
+            get {
+                return ResourceManager.GetString("Reject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment summary.
         /// </summary>
         public static string SummaryCaption {

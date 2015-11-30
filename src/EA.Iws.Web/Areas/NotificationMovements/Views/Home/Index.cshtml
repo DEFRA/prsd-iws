@@ -91,6 +91,8 @@
 
                 @Html.ActionLink(Resource.CancelPrenotification, "Index", "CancelMovement")
 
+                @Html.ActionLink(Resource.Reject, "Index", "Reject")
+
                 @Html.ActionLink(Resource.CertificateOfReceipt, "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
 
                 @Html.ActionLink(certificateLinkText, "Index", "Complete")

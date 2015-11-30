@@ -1,0 +1,49 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Reject.RejectViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.Reject.IndexResources
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    if (Model.Movements == null || !Model.Movements.Any())
+    {
+        <p>@Resource.None</p>
+
+        <div class="form-group">
+            @Html.ActionLink("Continue",
+            "Index",
+            "Home")
+        </div>
+    }
+    else
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Selected)">
+            @Html.Gds().LabelFor(m => m.Selected)
+            @Html.Gds().ValidationMessageFor(m => m.Selected)
+            @for (int i = 0; i < Model.Movements.Count; i++)
+            {
+                @Html.HiddenFor(m => m.Movements[i].Id)
+                @Html.HiddenFor(m => m.Movements[i].Number)
+                <label class="block-label" for="movement-@i">
+                    @Html.RadioButtonFor(m => m.Selected, Model.Movements[i].Id, new { id = "movement-" + i })
+                    @Html.Raw(string.Format(Resource.ShipmentNumberDisplay, Model.Movements[i].Number))
+                </label>
+            }
+        </div>
+
+        <div class="form-group-compound">
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+    }
+
+    @Html.ActionLink(Resource.ReturnToSummary,
+            "Index",
+            "Home")
+}

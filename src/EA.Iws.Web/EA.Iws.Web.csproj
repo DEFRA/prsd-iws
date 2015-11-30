@@ -743,6 +743,8 @@
     <Content Include="Areas\AdminNotificationMovements\Views\web.config" />
     <Content Include="Areas\AdminNotificationMovements\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\AdminNotificationMovements\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Movement\Views\Reject\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Reject\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1154,6 +1156,7 @@
     <Compile Include="Areas\Movement\Controllers\EditDateController.cs" />
     <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
     <Compile Include="Areas\Movement\Controllers\InternalCaptureController.cs" />
+    <Compile Include="Areas\Movement\Controllers\RejectController.cs" />
     <Compile Include="Areas\Movement\ViewModels\EditDate\EditDateViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\InternalCapture\CaptureViewModel.cs" />
     <Compile Include="Areas\Movement\ViewModels\InternalCapture\CaptureViewModelResources.Designer.cs">
@@ -1174,6 +1177,12 @@
       <DependentUpon>ReceiptViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Movement\ViewModels\InternalCapture\RecoveryViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\Reject\RejectViewModel.cs" />
+    <Compile Include="Areas\Movement\ViewModels\Reject\RejectViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RejectViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1188,6 +1197,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Movement\Views\Reject\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Movement\Views\Shared\EditorTemplates\RecoveryResources.Designer.cs">
       <DependentUpon>RecoveryResources.resx</DependentUpon>
@@ -1548,6 +1562,7 @@
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\ReceiveMovementController.cs" />
     <Compile Include="Areas\AdminNotificationMovements\Controllers\CaptureMovementController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\RejectController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\UploadChoiceController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\UploadChoiceControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1601,6 +1616,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\ViewModels\Reject\RejectViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Reject\RejectViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RejectViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1628,6 +1649,11 @@
       <DependentUpon>CreateResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminNotificationMovements\Views\CaptureMovement\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Reject\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -2222,6 +2248,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceiptViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\ViewModels\Reject\RejectViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RejectViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SubmitViewModelResources.Designer.cs</LastGenOutput>
@@ -2233,6 +2263,10 @@
     <EmbeddedResource Include="Areas\Movement\Views\Home\SummaryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Movement\Views\Reject\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Movement\Views\Shared\EditorTemplates\RecoveryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -2515,6 +2549,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SearchViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\Reject\RejectViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RejectViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UploadChoiceViewModelResources.Designer.cs</LastGenOutput>
@@ -2536,6 +2574,10 @@
       <LastGenOutput>CreateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminNotificationMovements\Views\CaptureMovement\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Reject\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

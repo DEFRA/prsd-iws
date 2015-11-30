@@ -5,17 +5,24 @@
 
     public class SetMovementRejected : IRequest<Guid>
     {
-        public SetMovementRejected(Guid movementId, Guid fileId, DateTime dateReceived, string reason)
+        public SetMovementRejected(Guid movementId, DateTime dateReceived, string reason, byte[] fileBytes,
+            string fileType)
         {
+            FileBytes = fileBytes;
+            FileType = fileType;
             MovementId = movementId;
-            FileId = fileId;
             DateReceived = dateReceived;
             Reason = reason;
         }
 
+        public byte[] FileBytes { get; private set; }
+
+        public string FileType { get; private set; }
+
         public Guid MovementId { get; private set; }
-        public Guid FileId { get; private set; }
+
         public DateTime DateReceived { get; private set; }
+
         public string Reason { get; private set; }
     }
 }
