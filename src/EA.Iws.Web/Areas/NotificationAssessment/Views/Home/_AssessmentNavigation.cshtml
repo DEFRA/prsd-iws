@@ -19,7 +19,7 @@
 
 <span>Shipments</span>
 @Html.Navigation().Link("Shipment summary", false, "Index", "Home", new  RouteValueDictionary( new { area = "AdminNotificationMovements" }))
-@Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { notificationId = Model.Id, area = "NotificationMovements" }))
+@Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { notificationId = Model.Id, area = "AdminNotificationMovements" }))
 
 <span>Finance</span>
 @Html.Navigation().Link("Payment details", false, "Index", "PaymentDetails", "NotificationAssessment")

@@ -9,21 +9,23 @@
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
     using Requests.Movement.Summary;
 
     internal class GetMovementReceiptAndRecoveryDataHandler : IRequestHandler<GetMovementReceiptAndRecoveryData, MovementReceiptAndRecoveryData>
     {
         private readonly IMovementRepository movementRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IMovementRejectionRepository movementRejectionRepository;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
 
         public GetMovementReceiptAndRecoveryDataHandler(IMovementRepository movementRepository, 
             INotificationApplicationRepository notificationApplicationRepository,
+            IMovementRejectionRepository movementRejectionRepository,
             IShipmentInfoRepository shipmentInfoRepository)
         {
             this.movementRepository = movementRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
+            this.movementRejectionRepository = movementRejectionRepository;
             this.shipmentInfoRepository = shipmentInfoRepository;
         }
 
@@ -32,6 +34,8 @@
             var movement = await movementRepository.GetById(message.MovementId);
 
             var notification = await notificationApplicationRepository.GetById(movement.NotificationId);
+
+            var movementRejection = await movementRejectionRepository.GetByMovementIdOrDefault(movement.Id);
 
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notification.Id);
 
@@ -58,6 +62,13 @@
             {
                 data.OperationCompleteDate = movement.CompletedReceipt.Date;
                 data.IsOperationCompleted = true;
+            }
+
+            if (movementRejection != null)
+            {
+                data.RejectionReason = movementRejection.Reason;
+                data.RejectionReasonFurtherInformation = movementRejection.FurtherDetails;
+                data.ReceiptDate = movementRejection.Date.DateTime;
             }
 
             return data;

@@ -24,6 +24,11 @@
             return await context.MovementRejections.SingleAsync(r => r.Id == id);
         }
 
+        public async Task<MovementRejection> GetByMovementIdOrDefault(Guid movementId)
+        {
+            return await context.MovementRejections.SingleOrDefaultAsync(m => m.MovementId == movementId);
+        }
+
         public void Add(MovementRejection movementRejection)
         {
             context.MovementRejections.Add(movementRejection);

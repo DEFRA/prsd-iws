@@ -9,6 +9,8 @@
 
         Task<MovementRejection> Get(Guid id);
 
+        Task<MovementRejection> GetByMovementIdOrDefault(Guid movementId); 
+
         void Add(MovementRejection movementRejection);
     }
 }

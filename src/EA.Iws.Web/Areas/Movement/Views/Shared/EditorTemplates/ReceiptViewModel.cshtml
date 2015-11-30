@@ -18,7 +18,7 @@
     <label class="block-label" data-target="rejected" for="no">
         @Html.RadioButtonFor(m => m.WasShipmentAccepted, false, new { id = "no" }) No
     </label>
-    <div class="panel-indent hide-for-initial-load @(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
+    <div class="panel-indent @(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
             @Html.LabelFor(m => m.RejectionReason, new { @class = "heading-small" })

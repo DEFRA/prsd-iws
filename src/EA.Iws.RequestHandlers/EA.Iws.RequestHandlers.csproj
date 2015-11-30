@@ -154,7 +154,6 @@
     <Compile Include="NotificationAssessment\WithdrawConsentForNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\Capture\CreateMovementInternalHandler.cs" />
     <Compile Include="NotificationMovements\Capture\GetMovementIdIfExistsHandler.cs" />
-    <Compile Include="NotificationMovements\Capture\GetNextAvailableMovementNumberForNotificationHandler.cs" />
     <Compile Include="Movement\RecordMovementDateChange.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValidHandler.cs" />
     <Compile Include="NotificationMovements\Create\CreateMovementAndDetailsHandler.cs" />

@@ -16,6 +16,10 @@
 
         public Guid? FileId { get; private set; }
 
+        protected MovementRejection()
+        {
+        }
+
         public MovementRejection(Guid movementId,
             DateTimeOffset date, 
             string reason, 

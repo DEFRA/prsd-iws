@@ -69,5 +69,23 @@ namespace EA.Iws.Web.Areas.AdminNotificationMovements.ViewModels.CaptureMovement
                 return ResourceManager.GetString("Number", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number.
+        /// </summary>
+        public static string NumberIsInt {
+            get {
+                return ResourceManager.GetString("NumberIsInt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a shipment number.
+        /// </summary>
+        public static string NumberRequired {
+            get {
+                return ResourceManager.GetString("NumberRequired", resourceCulture);
+            }
+        }
     }
 }

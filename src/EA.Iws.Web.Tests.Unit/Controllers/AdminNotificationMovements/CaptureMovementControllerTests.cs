@@ -14,7 +14,10 @@
     public class CaptureMovementControllerTests
     {
         private readonly CaptureMovementController controller;
-        private readonly SearchViewModel model = new SearchViewModel();
+        private readonly SearchViewModel model = new SearchViewModel
+        {
+            Number = 5
+        };
         private readonly IMediator mediator;
         private static readonly Guid NotificationId = new Guid("70C125C6-3B69-4B96-84E9-CE84E78C1BB4");
         private static readonly CreateViewModel Model = new CreateViewModel
@@ -26,25 +29,6 @@
         {
             mediator = A.Fake<IMediator>();
             controller = new CaptureMovementController(mediator);
-        }
-
-        [Theory]
-        [InlineData("533AF00E-95D2-4D74-9A21-EB2752385B69", 7)]
-        [InlineData("49EF1E9E-ED8F-41AA-9E80-9D80C40D517C", 5)]
-        public async Task Get_PopulatesNextAvailableShipmentNumber(string id, int number)
-        {
-            var notificationId = new Guid(id);
-
-            A.CallTo(
-                () =>
-                    mediator.SendAsync(
-                        A<GetNextAvailableMovementNumberForNotification>.That.Matches(r => r.Id == notificationId))).Returns(number);
-
-            var result = await controller.Index(notificationId) as ViewResult;
-            
-            var viewModel = Assert.IsType<SearchViewModel>(result.Model);
-
-            Assert.Equal(number, viewModel.Number);
         }
 
         [Fact]

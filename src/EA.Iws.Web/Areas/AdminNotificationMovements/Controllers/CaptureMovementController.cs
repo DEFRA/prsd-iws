@@ -20,22 +20,22 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public ActionResult Index(Guid id)
         {
-            var nextNumber = await mediator.SendAsync(new GetNextAvailableMovementNumberForNotification(id));
-
-            return View(new SearchViewModel
-            {
-                Number = nextNumber
-            });
+            return View(new SearchViewModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, SearchViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             var movementId =
-                await mediator.SendAsync(new GetMovementIdIfExists(id, model.Number));
+                await mediator.SendAsync(new GetMovementIdIfExists(id, model.Number.Value));
 
             if (!movementId.HasValue)
             {

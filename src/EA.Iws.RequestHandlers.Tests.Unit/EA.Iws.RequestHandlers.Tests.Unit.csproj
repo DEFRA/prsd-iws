@@ -111,7 +111,6 @@
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="NotificationMovements\Capture\CreateMovementInternalHandlerTests.cs" />
     <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandlerTests.cs" />
-    <Compile Include="NotificationMovements\Capture\GetNextAvailableMovementNumberForNotificationHandlerTests.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityInformationHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
