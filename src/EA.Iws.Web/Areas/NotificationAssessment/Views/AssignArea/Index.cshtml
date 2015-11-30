@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.NotificationAssessment.ViewModels.AssignArea.AssignAreaViewModel
+
+@{
+    ViewBag.Title = "Assign EA area";
+}
+
+<h1 class="heading-large">Select the area for this notification</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
+        @Html.Gds().LabelFor(m => m.LocalAreaId)
+        @Html.Gds().ValidationMessageFor(m => m.LocalAreaId)
+        @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, new { data_select_box = "true" })
+    </div>
+
+    <div class="form-group">
+        <p> <button class="button" type="submit">@Constants.ContinueButtonText</button></p>
+    </div>
+
+}

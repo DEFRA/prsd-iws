@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Core.Notification
 @model NotificationAssessmentSummaryInformationData
 
 <div class="internal-side-nav">
@@ -29,3 +30,9 @@
 @Html.Navigation().Link("Payment details", false, "Index", "PaymentDetails", "NotificationAssessment")
 @Html.Navigation().Link("Refund details", false, "Index", "RefundDetails", "NotificationAssessment")
 @Html.Navigation().Link("Account management", false, "Index", "AccountManagement", "NotificationAssessment")
+
+@if (Model.CompetentAuthority == CompetentAuthority.England)
+{
+    <span> </span>
+    @Html.Navigation().Link("Assign EA area", false, "Index", "AssignArea", "NotificationAssessment")
+}

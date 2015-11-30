@@ -55,8 +55,10 @@
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDates.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDecisionHistory.cs" />
+    <Compile Include="Admin\NotificationAssessment\GetNotificationLocalAreaId.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDate.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationLocalAreaId.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDate.cs" />

@@ -181,6 +181,7 @@
     <Content Include="scripts\Update\Sprint21\20151127-133000-make-fileid-nullable-delete-rejection-reason-from-receipt.sql" />
     <Content Include="scripts\Update\Sprint21\20151126-142800-create-report-schema.sql" />
     <Content Include="scripts\Update\Sprint21\20151126-154000-create-operation-codes-lookup.sql" />
+    <Content Include="scripts\Update\Sprint21\20151130-120743-add-local-area-column-to-notification-assessment.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

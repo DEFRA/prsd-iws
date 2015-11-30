@@ -744,6 +744,7 @@
     <Content Include="Areas\AdminNotificationMovements\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\AdminNotificationMovements\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Movement\Views\Reject\Index.cshtml" />
+    <Content Include="Areas\NotificationAssessment\Views\AssignArea\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Reject\Index.cshtml" />
     <Content Include="Areas\Reports\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Reports\Views\web.config" />
@@ -1505,6 +1506,7 @@
       <DependentUpon>YCodeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationAssessment\Controllers\AccountManagementController.cs" />
+    <Compile Include="Areas\NotificationAssessment\Controllers\AssignAreaController.cs" />
     <Compile Include="Areas\NotificationAssessment\Controllers\MovementCertificateController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\ReceiptCompleteController.cs" />
@@ -1518,6 +1520,7 @@
     <Compile Include="Areas\NotificationAssessment\Controllers\RefundDetailsController.cs" />
     <Compile Include="Areas\AdminNotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
+    <Compile Include="Areas\NotificationAssessment\ViewModels\AssignArea\AssignAreaViewModel.cs" />
     <Compile Include="Areas\NotificationAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
