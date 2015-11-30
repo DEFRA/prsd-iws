@@ -8,30 +8,31 @@ AS
 SELECT
 	SUM(QuantityReceived) AS QuantityReceived,
 	[Year],
-	WasteType,
+	CASE 
+		WHEN YCode IS NULL AND BaselOecd IS NULL THEN 'BASEL WASTE, Y CODE UNASSIGNED'
+		WHEN YCode IS NULL AND BaselOecd LIKE 'A%' THEN 'Y CODE NOT APPLICABLE - NON HAZ WASTE'
+		ELSE YCode
+	END AS WasteCategory,
+	WasteStreams,
 	CountryOfImport,
 	TransitStates,
 	[BaselOecd],
-	[BaselOecdDescription],
 	[EWC],
-	[Ycode],
 	[Hcode],
 	[HcodeDescription],
 	[UN],
-	OperationCodes
+	[RCode],
+	[DCode]
 FROM (
 	SELECT
 		M.QuantityReceived,
 		YEAR(M.ReceivedDate) AS Year,
-		WT.Description AS WasteType,
+		WT.Description AS WasteStreams,
 		TR.ImportCountryCode AS [CountryOfImport],
 		TS.TransitStates,
 		(SELECT TOP 1 WC.Code
 			FROM [Reports].[WasteCodes] WC
 			WHERE WC.CodeType IN (1, 2) AND WC.NotificationId = M.NotificationId) AS [BaselOecd],
-		(SELECT TOP 1 WC.Description
-			FROM [Reports].[WasteCodes] WC
-			WHERE WC.CodeType IN (1, 2) AND WC.NotificationId = M.NotificationId) AS [BaselOecdDescription],
 		STUFF(( SELECT ', ' + WC.Code AS [text()]
 				   FROM [Reports].[WasteCodes] WC
 				   WHERE WC.NotificationId = M.NotificationId AND WC.CodeType = 3
@@ -62,9 +63,17 @@ FROM (
 				   order by 1
 				   FOR XML PATH('')
 				 ), 1, 1, '' ) AS [UN],
-		OCC.OperationCodes
+	CASE
+		WHEN N.NotificationType = 1 THEN OCC.OperationCodes
+		ELSE NULL
+	END AS [RCode],
+	CASE
+		WHEN N.NotificationType = 2 THEN OCC.OperationCodes
+		ELSE NULL
+	END AS [DCode]
 	FROM
 		[Reports].[Movements] M
+		INNER JOIN [Notification].[Notification] N on N.Id = M.NotificationId
 		INNER JOIN [Reports].[TransportRoute] TR ON TR.NotificationId = M.NotificationId
 		LEFT JOIN [Reports].[TransitStatesConcat] TS ON TS.NotificationId = M.NotificationId
 		INNER JOIN [Reports].[OperationCodesConcat] OCC ON OCC.NotificationId = M.NotificationId
@@ -74,16 +83,16 @@ FROM (
 ) DATA
 GROUP BY
 	[Year],
-	WasteType,
+	YCode,
+	WasteStreams,
 	CountryOfImport,
 	TransitStates,
 	[BaselOecd],
-	[BaselOecdDescription],
 	[EWC],
-	[Ycode],
 	[Hcode],
 	[HcodeDescription],
 	[UN],
-	OperationCodes
+	[RCode],
+	[DCode]
 
 GO

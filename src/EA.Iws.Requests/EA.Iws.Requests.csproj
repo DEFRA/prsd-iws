@@ -61,6 +61,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
+    <Compile Include="Admin\Reports\GetExportStatsReport.cs" />
     <Compile Include="Admin\Search\SearchImportNotifications.cs" />
     <Compile Include="Admin\SendTestEmail.cs" />
     <Compile Include="Admin\SmokeTest.cs" />

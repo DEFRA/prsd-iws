@@ -27,8 +27,6 @@
         {
             Guard.ArgumentNotNull(() => number, number);
 
-            var numberWithSpacesRemoved = number.Replace(" ", string.Empty);
-
             return await context.ImportNotifications.AnyAsync(n => n.NotificationNumber == number);
         }
 

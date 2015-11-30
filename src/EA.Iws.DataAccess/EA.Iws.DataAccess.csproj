@@ -175,6 +175,7 @@
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationTransactionRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
+    <Compile Include="Repositories\Reports\ExportStatsRepository.cs" />
     <Compile Include="Repositories\WasteCodeRepository.cs" />
     <Compile Include="Repositories\WasteDisposalRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />

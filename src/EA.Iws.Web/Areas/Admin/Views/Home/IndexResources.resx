@@ -138,6 +138,9 @@
   <data name="NotificationNumberTableHeading" xml:space="preserve">
     <value>Notification number</value>
   </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
   <data name="ResultsCount" xml:space="preserve">
     <value>Your search returned {0} export notifications</value>
   </data>
