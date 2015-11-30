@@ -44,6 +44,14 @@
                 return View(model);
             }
 
+            var maxDate = await mediator.SendAsync(new GetMaximumValidMovementDate(id));
+
+            if (model.AsDateTime().Value > maxDate)
+            {
+                ModelState.AddModelError("Day", string.Format("Please enter a date that is not greater than {0:dd MMM yyyy}", maxDate));
+                return View(model);
+            }
+
             var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
 
             await mediator.SendAsync(new UpdateMovementDate(id, model.AsDateTime().Value));

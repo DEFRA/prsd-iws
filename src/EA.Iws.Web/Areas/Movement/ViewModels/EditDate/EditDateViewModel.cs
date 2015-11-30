@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using Prsd.Core;
 
     public class EditDateViewModel : IValidatableObject
@@ -15,11 +14,6 @@
 
         [Required]
         public int? Month { get; set; }
-
-        public DateTime OriginalDate
-        {
-            get { return DateEditHistory.First(); }
-        }
 
         [Required]
         public int? Year { get; set; }
@@ -39,15 +33,13 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            DateTime shipmentDate;
-            bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out shipmentDate);
-            if (!isValidDate)
+            if (!AsDateTime().HasValue)
             {
                 yield return new ValidationResult("Please enter a valid date", new[] { "Day" });
             }
-            if (AsDateTime() > OriginalDate.AddDays(10))
+            else if (AsDateTime() < SystemTime.UtcNow)
             {
-                yield return new ValidationResult(string.Format("Please enter a date that is not 10 days greater than {0:dd MMM yyyy}", OriginalDate), new[] { "Day" });
+                yield return new ValidationResult(string.Format("Please enter a future date"), new[] { "Day" });
             }
         }
     }

@@ -27,5 +27,15 @@
             From = from;
             To = to;
         }
+
+        public bool Contains(DateTime date)
+        {
+            if (date > this.From && date < this.To)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

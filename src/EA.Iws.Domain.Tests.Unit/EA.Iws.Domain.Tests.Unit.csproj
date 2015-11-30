@@ -80,8 +80,10 @@
     <Compile Include="Movement\CertificateOfReceiptNameTests.cs" />
     <Compile Include="Movement\CertificateOfRecoveryNameTests.cs" />
     <Compile Include="Movement\GetOriginalDateTests.cs" />
+    <Compile Include="Movement\MaximumMovementDateTests.cs" />
     <Compile Include="Movement\MovementDateHistoryTests.cs" />
     <Compile Include="Movement\MovementDateTests.cs" />
+    <Compile Include="Movement\MovementDateValidatorTests.cs" />
     <Compile Include="Movement\MovementDetailsTests.cs" />
     <Compile Include="Movement\MovementFactoryTests.cs" />
     <Compile Include="Movement\CapturedMovementFactoryTests.cs" />

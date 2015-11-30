@@ -6,70 +6,59 @@
     using Core.Movement;
     using Domain.Movement;
     using FakeItEasy;
+    using Prsd.Core;
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class MovementDateTests
+    public class MovementDateTests : IDisposable
     {
-        private static readonly Guid AnyGuid = new Guid("5FE8E146-2584-43CF-A2A7-FD3911924502");
-        private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
-        private readonly GetOriginalDate originalDateService;
-        private readonly IMovementDateHistoryRepository historyRepository;
+        private static readonly Guid NotificationId = new Guid("5FE8E146-2584-43CF-A2A7-FD3911924502");
+        private static readonly DateTime Today = new DateTime(2015, 1, 1);
+        private readonly IMovementDateValidator validator;
 
         public MovementDateTests()
         {
-            historyRepository = A.Fake<IMovementDateHistoryRepository>();
-            originalDateService = new GetOriginalDate(historyRepository);
-        }
+            validator = A.Fake<IMovementDateValidator>();
 
-        [Theory]
-        [InlineData(MovementStatus.New)]
-        [InlineData(MovementStatus.Cancelled)]
-        [InlineData(MovementStatus.Completed)]
-        [InlineData(MovementStatus.Received)]
-        [InlineData(MovementStatus.Rejected)]
-        public async Task MovementStatusNotSubmitted_Throws(MovementStatus status)
-        {
-            var movement = new Movement(1, AnyGuid, AnyDate);
-
-            ObjectInstantiator<Movement>.SetProperty(x => x.Status, status, movement);
-
-            await Assert.ThrowsAsync<InvalidOperationException>(() => movement.UpdateDate(AnyDate.AddDays(1), originalDateService));
+            SystemTime.Freeze(Today);
         }
 
         [Fact]
         public async Task DateUpdates()
         {
-            var movement = new Movement(1, AnyGuid, AnyDate);
+            var movement = new Movement(1, NotificationId, Today);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
-            var newDate = AnyDate.AddDays(5);
+            var newDate = Today.AddDays(13);
 
-            await movement.UpdateDate(newDate, originalDateService);
+            await movement.UpdateDate(newDate, validator);
 
             Assert.Equal(newDate, movement.Date);
         }
 
         [Fact]
-        public async Task DateMoreThan10DaysLater_Throws()
+        public async Task DateNotValid_Throws()
         {
-            var movement = new Movement(1, AnyGuid, AnyDate);
+            var initialDate = Today;
+            var movement = new Movement(1, NotificationId, initialDate);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
-            var newDate = AnyDate.AddDays(11);
+            A.CallTo(() => validator.EnsureDateValid(movement, A<DateTime>.Ignored)).Throws<MovementDateException>();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => movement.UpdateDate(newDate, originalDateService));
+            var newDate = initialDate.AddDays(5);
+
+            await Assert.ThrowsAsync<MovementDateException>(() => movement.UpdateDate(newDate, validator));
         }
 
         [Fact]
         public async Task DateChangedRaisesEvent()
         {
-            var movement = new Movement(1, AnyGuid, AnyDate);
+            var movement = new Movement(1, NotificationId, Today);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
-            var newDate = AnyDate.AddDays(5);
+            var newDate = Today.AddDays(5);
 
-            await movement.UpdateDate(newDate, originalDateService);
+            await movement.UpdateDate(newDate, validator);
 
             Assert.NotNull(movement.Events.OfType<MovementDateChangeEvent>().SingleOrDefault());
         }
@@ -77,15 +66,20 @@
         [Fact]
         public async Task DateChangedEvent_ContainsOldDate()
         {
-            var initialDate = AnyDate;
-            var movement = new Movement(1, AnyGuid, initialDate);
+            var initialDate = Today;
+            var movement = new Movement(1, NotificationId, initialDate);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
             var newDate = initialDate.AddDays(5);
 
-            await movement.UpdateDate(newDate, originalDateService);
+            await movement.UpdateDate(newDate, validator);
 
             Assert.Equal(initialDate, movement.Events.OfType<MovementDateChangeEvent>().Single().PreviousDate);
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
     }
 }

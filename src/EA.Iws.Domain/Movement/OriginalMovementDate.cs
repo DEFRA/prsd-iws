@@ -4,11 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class GetOriginalDate
+    public class OriginalMovementDate
     {
         private readonly IMovementDateHistoryRepository historyRepository;
 
-        public GetOriginalDate(IMovementDateHistoryRepository historyRepository)
+        public OriginalMovementDate(IMovementDateHistoryRepository historyRepository)
         {
             this.historyRepository = historyRepository;
         }

@@ -23,7 +23,7 @@
         {
             var movementDate = new DateTime(2015, 1, 1);
             var movement = new Movement(1, AnyGuid, movementDate);
-            var dateService = new GetOriginalDate(historyRepository);
+            var dateService = new OriginalMovementDate(historyRepository);
 
             Assert.Equal(movementDate, await dateService.Get(movement));
         }
@@ -41,7 +41,7 @@
                     new MovementDateHistory(AnyGuid, previousDate)
                 });
 
-            var dateService = new GetOriginalDate(historyRepository);
+            var dateService = new OriginalMovementDate(historyRepository);
 
             Assert.Equal(previousDate, await dateService.Get(movement));
         }
@@ -64,7 +64,7 @@
                     otherDateHistory
                 });
 
-            var dateService = new GetOriginalDate(historyRepository);
+            var dateService = new OriginalMovementDate(historyRepository);
 
             Assert.Equal(oldestDateHistory.PreviousDate, await dateService.Get(movement));
         }

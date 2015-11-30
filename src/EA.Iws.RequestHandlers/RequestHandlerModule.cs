@@ -70,7 +70,8 @@
             builder.RegisterType<NotificationTransactionCalculator>().AsSelf();
             builder.RegisterType<TransportRouteSummary>().AsSelf();
             builder.RegisterType<WasteTypeSummary>().AsSelf();
-            builder.RegisterType<GetOriginalDate>().AsSelf();
+            builder.RegisterType<OriginalMovementDate>().AsSelf();
+            builder.RegisterType<ValidMovementDateCalculator>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();
@@ -84,6 +85,7 @@
             builder.RegisterType<NotificationTransactionCalculator>().As<INotificationTransactionCalculator>();
             builder.RegisterType<NotificationAssessmentDatesSummaryRepository>().As<INotificationAssessmentDatesSummaryRepository>();
             builder.RegisterType<NotificationAssessmentDecisionRepository>().As<INotificationAssessmentDecisionRepository>();
+            builder.RegisterType<MovementDateValidator>().As<IMovementDateValidator>();
 
             if (HasAsposeLicense())
             {

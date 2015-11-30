@@ -8,24 +8,24 @@
 
     internal class UpdateMovementDateHandler : IRequestHandler<UpdateMovementDate, bool>
     {
+        private readonly IMovementDateValidator validator;
         private readonly IwsContext context;
-        private readonly GetOriginalDate originalDateService;
         private readonly IMovementRepository repository;
 
         public UpdateMovementDateHandler(IMovementRepository repository,
-            GetOriginalDate originalDateService,
+            IMovementDateValidator validator,
             IwsContext context)
         {
             this.repository = repository;
-            this.originalDateService = originalDateService;
             this.context = context;
+            this.validator = validator;
         }
 
         public async Task<bool> HandleAsync(UpdateMovementDate message)
         {
             var movement = await repository.GetById(message.MovementId);
 
-            await movement.UpdateDate(message.NewDate, originalDateService);
+            await movement.UpdateDate(message.NewDate, validator);
 
             await context.SaveChangesAsync();
 

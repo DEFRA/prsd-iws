@@ -116,22 +116,9 @@
             StatusChangeCollection.Add(statusChange);
         }
 
-        public async Task UpdateDate(DateTime newDate, GetOriginalDate originalDateService)
+        public async Task UpdateDate(DateTime newDate, IMovementDateValidator validator)
         {
-            if (Status != MovementStatus.Submitted)
-            {
-                throw new InvalidOperationException(string.Format("Cannot edit movement date when status is {0}", Status));
-            }
-
-            var originalDate = await originalDateService.Get(this);
-
-            if (newDate > originalDate.AddDays(10))
-            {
-                throw new InvalidOperationException(string.Format(
-                    "Cannot set movement date to {0} because it is more than 10 days after the original date of {1}.", 
-                    newDate, 
-                    originalDate));
-            }
+            await validator.EnsureDateValid(this, newDate);
 
             var previousDate = Date;
             Date = newDate;
