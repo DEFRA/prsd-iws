@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Their address.
+        ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
             get {
@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Their contact person.
+        ///   Looks up a localized string similar to Contact person.
         /// </summary>
         public static string Contact {
             get {

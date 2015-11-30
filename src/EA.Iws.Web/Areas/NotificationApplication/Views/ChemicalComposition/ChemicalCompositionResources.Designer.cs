@@ -116,7 +116,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What type of waste it is?.
+        ///   Looks up a localized string similar to What type of waste is it?.
         /// </summary>
         public static string Header {
             get {

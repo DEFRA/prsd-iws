@@ -136,7 +136,7 @@
     <value>If you select that you are providing the details in a separate annex do not enter any details here</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>What type of waste it is?</value>
+    <value>What type of waste is it?</value>
   </data>
   <data name="HeaderDescription" xml:space="preserve">
     <value>This may be its commercial name</value>

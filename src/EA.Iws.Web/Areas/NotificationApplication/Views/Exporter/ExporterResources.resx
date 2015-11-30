@@ -121,7 +121,7 @@
     <value>This should be the correspondence address for the exporter - notifier.</value>
   </data>
   <data name="AddressHeader" xml:space="preserve">
-    <value>Their address</value>
+    <value>Address</value>
   </data>
   <data name="CompanyRegistrationNumber" xml:space="preserve">
     <value>This should be your Companies House number.</value>
@@ -130,7 +130,7 @@
     <value>This should be the contact person for the exporter - notifier.</value>
   </data>
   <data name="ContactHeader" xml:space="preserve">
-    <value>Their contact person</value>
+    <value>Contact person</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Who is the exporter - notifier?</value>
