@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Core.Movement;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using Prsd.Core.Helpers;
 
@@ -13,6 +14,8 @@
         public Guid NotificationId { get; set; }
 
         public string NotificationNumber { get; set; }
+
+        public NotificationStatus NotificationStatus { get; set; }
 
         public NotificationType NotificationType { get; set; }
 

@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Core.NotificationAssessment.NotificationAssessmentSummaryInformationData
+﻿@using EA.Iws.Core.NotificationAssessment
+@model NotificationAssessmentSummaryInformationData
 
 <div class="internal-side-nav">
     <p class="lede" style="font-weight: 700;">@Model.Number</p>
@@ -19,7 +20,10 @@
 
 <span>Shipments</span>
 @Html.Navigation().Link("Shipment summary", false, "Index", "Home", new  RouteValueDictionary( new { area = "AdminNotificationMovements" }))
-@Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { notificationId = Model.Id, area = "AdminNotificationMovements" }))
+@if (Model.Status == NotificationStatus.Consented)
+{
+    @Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { id = Model.Id, area = "AdminNotificationMovements" }))
+}
 
 <span>Finance</span>
 @Html.Navigation().Link("Payment details", false, "Index", "PaymentDetails", "NotificationAssessment")

@@ -152,6 +152,7 @@
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryDataHandler.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternalHandler.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationStatusHandler.cs" />
     <Compile Include="NotificationAssessment\WithdrawConsentForNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\Capture\CreateMovementInternalHandler.cs" />
     <Compile Include="NotificationMovements\Capture\GetMovementIdIfExistsHandler.cs" />

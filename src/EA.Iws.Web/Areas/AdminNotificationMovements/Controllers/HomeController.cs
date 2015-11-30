@@ -6,6 +6,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.NotificationAssessment;
     using Requests.NotificationMovements;
     using ViewModels.Home;
     using Web.ViewModels.Shared;
@@ -26,8 +27,11 @@
             var movementsSummary =
                 await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status));
 
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
+
             var model = new MovementSummaryViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;
+            model.NotificationStatus = notificationStatus;
 
             return View(model);
         }
