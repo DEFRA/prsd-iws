@@ -112,6 +112,7 @@
     <Compile Include="Movement\NotificationMovementsSummaryAndTable.cs" />
     <Compile Include="Movement\MovementTableDataRow.cs" />
     <Compile Include="Movement\MovementSummary.cs" />
+    <Compile Include="Movement\ValidMovementDates.cs" />
     <Compile Include="NotificationAssessment\AccountManagementData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />

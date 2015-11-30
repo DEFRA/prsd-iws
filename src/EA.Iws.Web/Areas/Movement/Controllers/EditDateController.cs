@@ -44,11 +44,20 @@
                 return View(model);
             }
 
-            var maxDate = await mediator.SendAsync(new GetMaximumValidMovementDate(id));
+            var validDates = await mediator.SendAsync(new GetMaximumValidMovementDate(id));
 
-            if (model.AsDateTime().Value > maxDate)
+            if (model.AsDateTime().Value > validDates.ConsentEnd)
             {
-                ModelState.AddModelError("Day", string.Format("Please enter a date that is not greater than {0:dd MMM yyyy}", maxDate));
+                ModelState.AddModelError("Day", string.Format(
+                    "Please enter a date that is within the consent range of {0:dd MMM yyyy} to {1:dd MMM yyyy}",
+                    validDates.ConsentStart,
+                    validDates.ConsentEnd));
+                return View(model);
+            }
+
+            if (model.AsDateTime().Value > validDates.MaxValidDate)
+            {
+                ModelState.AddModelError("Day", "Please enter a date that is within 10 working days of the original actual shipment date");
                 return View(model);
             }
 

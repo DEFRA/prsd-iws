@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.Movement.Views.EditDate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new date must be no more than 10 days from the original date of shipment..
+        ///   Looks up a localized string similar to The new date must be no more than 10 working days from the original date of shipment..
         /// </summary>
         public static string GuidanceParagraph1 {
             get {

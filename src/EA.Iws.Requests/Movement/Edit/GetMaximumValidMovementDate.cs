@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Requests.Movement.Edit
 {
     using System;
+    using Core.Movement;
     using Prsd.Core.Mediator;
 
-    public class GetMaximumValidMovementDate : IRequest<DateTime>
+    public class GetMaximumValidMovementDate : IRequest<ValidMovementDates>
     {
         public Guid MovementId { get; private set; }
 
