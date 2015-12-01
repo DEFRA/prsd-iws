@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
+namespace EA.Iws.Web.Areas.AdminMovement.Views.Shared.EditorTemplates {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CaptureViewModelResources {
+    public class ReceiptResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CaptureViewModelResources() {
+        internal ReceiptResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture.CaptureViewModelResources", typeof(CaptureViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminMovement.Views.Shared.EditorTemplates.ReceiptResources", typeof(ReceiptResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide receipt information before providing date of {0}.
+        ///   Looks up a localized string similar to Enter the actual quantity of waste received on the shipment.
         /// </summary>
-        public static string ReceiptMustBeCompletedFirst {
+        public static string ActualQuantityHint {
             get {
-                return ResourceManager.GetString("ReceiptMustBeCompletedFirst", resourceCulture);
+                return ResourceManager.GetString("ActualQuantityHint", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
+        ///   Looks up a localized string similar to How much waste was received?.
         /// </summary>
-        public static string RecoveryDateCannotBeEnteredForRejected {
+        public static string ActualQuantityQuestion {
             get {
-                return ResourceManager.GetString("RecoveryDateCannotBeEnteredForRejected", resourceCulture);
+                return ResourceManager.GetString("ActualQuantityQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received date.
+        /// </summary>
+        public static string MainHeading {
+            get {
+                return ResourceManager.GetString("MainHeading", resourceCulture);
             }
         }
     }

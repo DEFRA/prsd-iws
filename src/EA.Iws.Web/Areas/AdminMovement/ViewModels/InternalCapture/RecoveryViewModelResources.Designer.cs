@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
+namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ReceiptViewModelResources {
+    public class RecoveryViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ReceiptViewModelResources() {
+        internal RecoveryViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture.ReceiptViewModelResources", typeof(ReceiptViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture.RecoveryViewModelResour" +
+                            "ces", typeof(RecoveryViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,29 +71,11 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide the actual quantity.
-        /// </summary>
-        public static string QuantityRequired {
-            get {
-                return ResourceManager.GetString("QuantityRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to When was the waste received?.
         /// </summary>
         public static string ReceivedDateLabel {
             get {
                 return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide the received date.
-        /// </summary>
-        public static string ReceivedDateRequired {
-            get {
-                return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
             }
         }
         
@@ -111,24 +94,6 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture {
         public static string RejectionReasonLabel {
             get {
                 return ResourceManager.GetString("RejectionReasonLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide a reason for rejection.
-        /// </summary>
-        public static string RejectReasonRequired {
-            get {
-                return ResourceManager.GetString("RejectReasonRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please select the quantity units.
-        /// </summary>
-        public static string UnitsRequired {
-            get {
-                return ResourceManager.GetString("UnitsRequired", resourceCulture);
             }
         }
         

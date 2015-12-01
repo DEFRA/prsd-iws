@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
+namespace EA.Iws.Web.Areas.AdminMovement.Views.InternalCapture {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ReceiptResources {
+    public class IndexResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ReceiptResources() {
+        internal IndexResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates.ReceiptResources", typeof(ReceiptResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminMovement.Views.InternalCapture.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,74 @@ namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the actual quantity of waste received on the shipment.
+        ///   Looks up a localized string similar to Actual date.
         /// </summary>
-        public static string ActualQuantityHint {
+        public static string ActualDateRow {
             get {
-                return ResourceManager.GetString("ActualQuantityHint", resourceCulture);
+                return ResourceManager.GetString("ActualDateRow", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How much waste was received?.
+        ///   Looks up a localized string similar to Current displaying shipment {0}.
         /// </summary>
-        public static string ActualQuantityQuestion {
+        public static string CurrentlyDisplaying {
             get {
-                return ResourceManager.GetString("ActualQuantityQuestion", resourceCulture);
+                return ResourceManager.GetString("CurrentlyDisplaying", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Received date.
+        ///   Looks up a localized string similar to Shipment data.
         /// </summary>
         public static string MainHeading {
             get {
                 return ResourceManager.GetString("MainHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This shipment was not prenotified.
+        /// </summary>
+        public static string PrenotificationDateNotSet {
+            get {
+                return ResourceManager.GetString("PrenotificationDateNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prenotification date.
+        /// </summary>
+        public static string PrenotificationDateRow {
+            get {
+                return ResourceManager.GetString("PrenotificationDateRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to shipment summary.
+        /// </summary>
+        public static string ReturnToSummary {
+            get {
+                return ResourceManager.GetString("ReturnToSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string TableDateHeader {
+            get {
+                return ResourceManager.GetString("TableDateHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment data.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

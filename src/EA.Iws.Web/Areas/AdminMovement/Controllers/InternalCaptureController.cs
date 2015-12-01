@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.Controllers
+﻿namespace EA.Iws.Web.Areas.AdminMovement.Controllers
 {
     using System;
     using System.Threading.Tasks;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Movement.Views.InternalCapture {
+namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Movement.Views.InternalCapture {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class ReceiptViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal ReceiptViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.Movement.Views.InternalCapture {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Movement.Views.InternalCapture.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture.ReceiptViewModelResourc" +
+                            "es", typeof(ReceiptViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +62,83 @@ namespace EA.Iws.Web.Areas.Movement.Views.InternalCapture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual date.
+        ///   Looks up a localized string similar to Actual quantity.
         /// </summary>
-        public static string ActualDateRow {
+        public static string ActualQuantityLabel {
             get {
-                return ResourceManager.GetString("ActualDateRow", resourceCulture);
+                return ResourceManager.GetString("ActualQuantityLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current displaying shipment {0}.
+        ///   Looks up a localized string similar to Please provide the actual quantity.
         /// </summary>
-        public static string CurrentlyDisplaying {
+        public static string QuantityRequired {
             get {
-                return ResourceManager.GetString("CurrentlyDisplaying", resourceCulture);
+                return ResourceManager.GetString("QuantityRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment data.
+        ///   Looks up a localized string similar to When was the waste received?.
         /// </summary>
-        public static string MainHeading {
+        public static string ReceivedDateLabel {
             get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
+                return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This shipment was not prenotified.
+        ///   Looks up a localized string similar to Please provide the received date.
         /// </summary>
-        public static string PrenotificationDateNotSet {
+        public static string ReceivedDateRequired {
             get {
-                return ResourceManager.GetString("PrenotificationDateNotSet", resourceCulture);
+                return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prenotification date.
+        ///   Looks up a localized string similar to Further information on why the shipment was rejected.
         /// </summary>
-        public static string PrenotificationDateRow {
+        public static string RejectionFurtherInformationLabel {
             get {
-                return ResourceManager.GetString("PrenotificationDateRow", resourceCulture);
+                return ResourceManager.GetString("RejectionFurtherInformationLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to shipment summary.
+        ///   Looks up a localized string similar to Why was it rejected?.
         /// </summary>
-        public static string ReturnToSummary {
+        public static string RejectionReasonLabel {
             get {
-                return ResourceManager.GetString("ReturnToSummary", resourceCulture);
+                return ResourceManager.GetString("RejectionReasonLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date.
+        ///   Looks up a localized string similar to Please provide a reason for rejection.
         /// </summary>
-        public static string TableDateHeader {
+        public static string RejectReasonRequired {
             get {
-                return ResourceManager.GetString("TableDateHeader", resourceCulture);
+                return ResourceManager.GetString("RejectReasonRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment data.
+        ///   Looks up a localized string similar to Please select the quantity units.
         /// </summary>
-        public static string Title {
+        public static string UnitsRequired {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("UnitsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Was the shipment accepted?.
+        /// </summary>
+        public static string WasShipmentAcceptedLabel {
+            get {
+                return ResourceManager.GetString("WasShipmentAcceptedLabel", resourceCulture);
             }
         }
     }

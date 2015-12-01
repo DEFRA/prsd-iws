@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Movement.ViewModels.InternalCapture
+﻿namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture
 {
     public interface IComplete
     {

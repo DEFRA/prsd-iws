@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
+namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class RecoveryResources {
+    public class CaptureViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RecoveryResources() {
+        internal CaptureViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates.RecoveryResources", typeof(RecoveryResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture.CaptureViewModelResourc" +
+                            "es", typeof(CaptureViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +62,20 @@ namespace EA.Iws.Web.Areas.Movement.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} date.
+        ///   Looks up a localized string similar to Please provide receipt information before providing date of {0}.
         /// </summary>
-        public static string MainHeading {
+        public static string ReceiptMustBeCompletedFirst {
             get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
+                return ResourceManager.GetString("ReceiptMustBeCompletedFirst", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When was the waste {0}?.
+        ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
         /// </summary>
-        public static string RecoveryDate {
+        public static string RecoveryDateCannotBeEnteredForRejected {
             get {
-                return ResourceManager.GetString("RecoveryDate", resourceCulture);
+                return ResourceManager.GetString("RecoveryDateCannotBeEnteredForRejected", resourceCulture);
             }
         }
     }
