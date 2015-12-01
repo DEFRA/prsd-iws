@@ -121,7 +121,7 @@
     <value>Actual date</value>
   </data>
   <data name="CurrentlyDisplaying" xml:space="preserve">
-    <value>Current displaying shipment {0}</value>
+    <value>Currently displaying shipment {0}</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Shipment data</value>

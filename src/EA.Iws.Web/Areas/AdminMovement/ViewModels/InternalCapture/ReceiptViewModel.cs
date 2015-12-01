@@ -5,6 +5,7 @@ namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture
     using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
+    using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -17,6 +18,7 @@ namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture
         public bool WasShipmentAccepted { get; set; }
         
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]
         public decimal? ActualQuantity { get; set; }
         
         public ShipmentQuantityUnits? Units { get; set; }

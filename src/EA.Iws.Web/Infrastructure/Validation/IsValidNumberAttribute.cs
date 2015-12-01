@@ -15,7 +15,7 @@
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            ValidationResult validationResult = new ValidationResult("Please enter a valid number");
+            var validationResult = new ValidationResult(ErrorMessageString ?? "Please enter a valid number");
 
             if (value != null)
             {

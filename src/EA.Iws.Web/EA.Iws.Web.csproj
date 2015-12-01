@@ -752,6 +752,7 @@
     <Content Include="Areas\Reports\Views\Home\Index.cshtml" />
     <Content Include="Areas\Reports\Views\ExportStats\Index.cshtml" />
     <Content Include="Areas\AdminMovement\Views\web.config" />
+    <Content Include="Content\iws\_details.scss" />
     <Content Include="Areas\AdminMovement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminMovement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminMovement\Views\Home\_NotificationSwitcher.cshtml" />

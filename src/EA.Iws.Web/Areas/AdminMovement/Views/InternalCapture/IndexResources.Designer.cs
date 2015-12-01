@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.AdminMovement.Views.InternalCapture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current displaying shipment {0}.
+        ///   Looks up a localized string similar to Currently displaying shipment {0}.
         /// </summary>
         public static string CurrentlyDisplaying {
             get {

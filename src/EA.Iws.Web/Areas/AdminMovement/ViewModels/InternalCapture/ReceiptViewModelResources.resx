@@ -144,4 +144,7 @@
   <data name="WasShipmentAcceptedLabel" xml:space="preserve">
     <value>Was the shipment accepted?</value>
   </data>
+  <data name="MaximumActualQuantity" xml:space="preserve">
+    <value>Please enter a smaller number </value>
+  </data>
 </root>

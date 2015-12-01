@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a smaller number .
+        /// </summary>
+        public static string MaximumActualQuantity {
+            get {
+                return ResourceManager.GetString("MaximumActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide the actual quantity.
         /// </summary>
         public static string QuantityRequired {

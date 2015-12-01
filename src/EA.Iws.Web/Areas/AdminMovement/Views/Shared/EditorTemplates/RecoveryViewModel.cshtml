@@ -7,12 +7,17 @@
     var operationTitleVerb = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed";
 }
 
-<h2 class="heading-medium">@Html.Raw(string.Format(Resource.MainHeading, operationTitleVerb))</h2>
+<details class="compact-details">
+    <summary class="heading-medium">
+        @Html.Raw(string.Format(Resource.MainHeading, operationTitleVerb))
+    </summary>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate.Day) @Html.Gds().FormGroupClass(m => m.RecoveryDate.Month) @Html.Gds().FormGroupClass(m => m.RecoveryDate.Year)">
+        @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "heading-small" })
+        @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
+        @Html.EditorFor(m => m.RecoveryDate)
+    </div>
+</details>
+
 
 @Html.HiddenFor(m => m.NotificationType)
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate.Day) @Html.Gds().FormGroupClass(m => m.RecoveryDate.Month) @Html.Gds().FormGroupClass(m => m.RecoveryDate.Year)">
-    @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "heading-small" })
-    @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
-    @Html.EditorFor(m => m.RecoveryDate)
-</div>
