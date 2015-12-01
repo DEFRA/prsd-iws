@@ -26,6 +26,7 @@
             var query = from application in context.NotificationApplications
                 where application.UserId == userContext.UserId
                 from exporter in context.Exporters.Where(e => e.NotificationId == application.Id).DefaultIfEmpty()
+                from importer in context.Importers.Where(e => e.NotificationId == application.Id).DefaultIfEmpty()
                 from assessment in context.NotificationAssessments
                 where assessment.NotificationApplicationId == application.Id
                 orderby application.NotificationNumber
@@ -33,6 +34,7 @@
                 {
                     Notification = application,
                     Exporter = exporter,
+                    Importer = importer,
                     Assessment = assessment
                 };
 
@@ -50,7 +52,7 @@
                                     .ChangeDate,
                         Status = n.Assessment.Status,
                         Exporter = n.Exporter == null ? null : n.Exporter.Business.Name,
-                        Importer = n.Notification.Importer == null ? null : n.Notification.Importer.Business.Name,
+                        Importer = n.Importer == null ? null : n.Importer.Business.Name,
                         Producer = n.Notification.Producers.Where(p => p.IsSiteOfExport).Select(p => p.Business.Name).SingleOrDefault() ?? string.Empty
                     }).ToList();
         }

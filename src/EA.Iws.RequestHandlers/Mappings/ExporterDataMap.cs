@@ -36,6 +36,7 @@
                 Business = businessMap.Map(source.Business),
                 Contact = contactMap.Map(source.Contact),
                 Id = source.Id,
+                NotificationId = source.NotificationId,
                 HasExporter = true
             };
         }

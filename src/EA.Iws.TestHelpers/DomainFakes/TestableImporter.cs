@@ -2,6 +2,7 @@
 {
     using Domain;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Importer;
     using Helpers;
 
     public class TestableImporter : Importer

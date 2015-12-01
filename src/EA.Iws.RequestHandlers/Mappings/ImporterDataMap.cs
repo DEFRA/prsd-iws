@@ -1,15 +1,12 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using System;
     using Core.Importer;
     using Core.Shared;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Importer;
     using Prsd.Core.Mapper;
-    using Notification = Domain.NotificationApplication.NotificationApplication;
 
-    internal class ImporterDataMap : IMap<Notification, ImporterData>, 
-        IMapWithParentObjectId<Importer, ImporterData>
+    internal class ImporterDataMap : IMap<Importer, ImporterData>
     {
         private readonly IMap<Address, AddressData> addressMap;
         private readonly IMap<Business, BusinessInfoData> businessMap;
@@ -24,39 +21,20 @@
             this.contactMap = contactMap;
         }
 
-        public ImporterData Map(Notification source)
+        public ImporterData Map(Importer source)
         {
-            if (source.HasImporter)
+            if (source == null)
             {
-                return new ImporterData
-                {
-                    Address = addressMap.Map(source.Importer.Address),
-                    Business = businessMap.Map(source.Importer.Business),
-                    Contact = contactMap.Map(source.Importer.Contact),
-                    Id = source.Importer.Id,
-                    NotificationId = source.Id,
-                    HasImporter = true
-                };
+                return new ImporterData();
             }
-            else
-            {
-                return new ImporterData
-                {
-                    NotificationId = source.Id,
-                    HasImporter = true
-                };
-            }
-        }
 
-        public ImporterData Map(Importer source, Guid parentId)
-        {
             return new ImporterData
             {
                 Address = addressMap.Map(source.Address),
                 Business = businessMap.Map(source.Business),
                 Contact = contactMap.Map(source.Contact),
                 Id = source.Id,
-                NotificationId = parentId,
+                NotificationId = source.NotificationId,
                 HasImporter = true
             };
         }

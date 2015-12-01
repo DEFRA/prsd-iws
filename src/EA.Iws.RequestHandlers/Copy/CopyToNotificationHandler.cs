@@ -23,18 +23,21 @@
         private readonly ExporterToExporterCopy exporterCopier;
         private readonly TransportRouteToTransportRouteCopy transportRouteCopier;
         private readonly WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier;
+        private readonly ImporterToImporterCopy importerCopier;
 
         public CopyToNotificationHandler(IwsContext context,
             NotificationToNotificationCopy copier, 
             ExporterToExporterCopy exporterCopier,
             TransportRouteToTransportRouteCopy transportRouteCopier,
-            WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier)
+            WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier,
+            ImporterToImporterCopy importerCopier)
         {
             this.context = context;
             this.copier = copier;
             this.exporterCopier = exporterCopier;
             this.transportRouteCopier = transportRouteCopier;
             this.wasteRecoveryCopier = wasteRecoveryCopier;
+            this.importerCopier = importerCopier;
         }
 
         public async Task<Guid> HandleAsync(CopyToNotification message)
@@ -120,6 +123,7 @@
             await CloneTransportRoute(sourceId, clone.Id);
             await wasteRecoveryCopier.CopyAsync(context, sourceId, clone.Id);
             await exporterCopier.CopyAsync(context, sourceId, clone.Id);
+            await importerCopier.CopyAsync(context, sourceId, clone.Id);
 
             return clone;
         }
@@ -137,18 +141,17 @@
             // We have to force eager loading by including all navigation properties.
             //TODO: Filter by status
             var clone = await context.Set<NotificationApplication>()
-                        .AsNoTracking()
-                        .Include("ProducersCollection")
-                        .Include(n => n.Importer)
-                        .Include("FacilitiesCollection")
-                        .Include("OperationInfosCollection")
-                        .Include(n => n.TechnologyEmployed)
-                        .Include("CarriersCollection")
-                        .Include("PackagingInfosCollection")
-                        .Include("WasteType.WasteCompositionCollection")
-                        .Include("WasteType.WasteAdditionalInformationCollection")
-                        .Include("PhysicalCharacteristicsCollection")
-                        .SingleAsync(n => n.Id == id);
+                .AsNoTracking()
+                .Include("ProducersCollection")
+                .Include("FacilitiesCollection")
+                .Include("OperationInfosCollection")
+                .Include(n => n.TechnologyEmployed)
+                .Include("CarriersCollection")
+                .Include("PackagingInfosCollection")
+                .Include("WasteType.WasteCompositionCollection")
+                .Include("WasteType.WasteAdditionalInformationCollection")
+                .Include("PhysicalCharacteristicsCollection")
+                .SingleAsync(n => n.Id == id);
 
             return clone;
         }

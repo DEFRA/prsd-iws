@@ -162,6 +162,7 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
     <Compile Include="Repositories\ExporterRepository.cs" />
+    <Compile Include="Repositories\ImporterRepository.cs" />
     <Compile Include="Repositories\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\MovementDateHistoryRepository.cs" />

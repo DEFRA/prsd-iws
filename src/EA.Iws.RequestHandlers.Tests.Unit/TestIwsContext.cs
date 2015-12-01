@@ -8,6 +8,7 @@
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Exporter;
+    using Domain.NotificationApplication.Importer;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
@@ -55,6 +56,7 @@
             this.TransportRoutes = new TestDbSet<Domain.TransportRoute.TransportRoute>();
             this.ShipmentInfos = new TestDbSet<ShipmentInfo>();
             this.WasteRecoveries = new TestDbSet<Domain.NotificationApplication.WasteRecovery.WasteRecovery>();
+            this.Importers = new TestDbSet<Importer>();
         }
 
         public int SaveChangesCount { get; private set; }

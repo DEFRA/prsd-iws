@@ -3,21 +3,21 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Importer;
 
     internal class MovementImporterBlockFactory : IMovementBlockFactory
     {
-        private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IImporterRepository importerRepository;
 
-        public MovementImporterBlockFactory(INotificationApplicationRepository notificationApplicationRepository)
+        public MovementImporterBlockFactory(IImporterRepository importerRepository)
         {
-            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.importerRepository = importerRepository;
         }
 
         public async Task<IDocumentBlock> Create(Guid movementId, IList<MergeField> mergeFields)
         {
-            var notification = await notificationApplicationRepository.GetByMovementId(movementId);
-            return new MovementImporterBlock(mergeFields, notification);
+            var importer = await importerRepository.GetByMovementId(movementId);
+            return new MovementImporterBlock(mergeFields, importer);
         }
     }
 }

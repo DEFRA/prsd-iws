@@ -2,16 +2,12 @@
 {
     using System;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Importer;
 
     public class ImporterFactory
     {
-        public static Importer Create(Guid id, Business business = null, Address address = null, string name = "AnyName")
+        public static Importer Create(Guid notiificationId, Guid id, Business business = null, Address address = null, string name = "AnyName")
         {
-            var importer = ObjectInstantiator<Importer>.CreateNew();
-
-            EntityHelper.SetEntityId(importer, id);
-
             if (business == null)
             {
                 business = ComplexTypeFactory.Create<Business>();
@@ -23,9 +19,9 @@
                 address = ComplexTypeFactory.Create<Address>();
             }
 
-            ObjectInstantiator<Importer>.SetProperty(x => x.Business, business, importer);
-            ObjectInstantiator<Importer>.SetProperty(x => x.Address, address, importer);
-            ObjectInstantiator<Importer>.SetProperty(x => x.Contact, ComplexTypeFactory.Create<Contact>(), importer);
+            var importer = new Importer(notiificationId, address, business, ComplexTypeFactory.Create<Contact>());
+
+            EntityHelper.SetEntityId(importer, id);
 
             return importer;
         }

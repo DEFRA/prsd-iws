@@ -11,6 +11,7 @@
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Exporter;
+    using Domain.NotificationApplication.Importer;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationApplication.WasteRecovery;
     using Domain.NotificationAssessment;
@@ -47,7 +48,8 @@
                 new NotificationToNotificationCopy(new WasteCodeCopy()), 
                 new ExporterToExporterCopy(), 
                 new TransportRouteToTransportRouteCopy(),
-                new WasteRecoveryToWasteRecoveryCopy());
+                new WasteRecoveryToWasteRecoveryCopy(),
+                new ImporterToImporterCopy());
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
 
@@ -166,13 +168,14 @@
         {
             await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
 
-            var copiedNotification = GetCopied();
-            var sourceNotification = GetSource();
-            
-            Assert.Equal(sourceNotification.Importer.Business.Name, copiedNotification.Importer.Business.Name);
-            Assert.Equal(sourceNotification.Importer.Business.RegistrationNumber, copiedNotification.Importer.Business.RegistrationNumber);
-            Assert.Equal(sourceNotification.Importer.Contact.Email, copiedNotification.Importer.Contact.Email);
-            Assert.NotEqual(sourceNotification.Importer.Id, copiedNotification.Importer.Id);
+            var copiedImporter = GetCopiedImporter();
+            var sourceImporter = GetSourceImporter();
+
+            Assert.NotEqual(sourceImporter.Id, copiedImporter.Id);
+            Assert.NotEqual(sourceImporter.NotificationId, copiedImporter.NotificationId);
+            Assert.Equal(sourceImporter.Address, copiedImporter.Address, new AddressComparer());
+            Assert.Equal(sourceImporter.Business, copiedImporter.Business, new BusinessComparer());
+            Assert.Equal(sourceImporter.Contact, copiedImporter.Contact, new ContactComparer());
         }
 
         [Fact]
@@ -386,6 +389,17 @@
         {
             var copiedId = GetCopiedId();
             return context.Exporters.Single(e => e.NotificationId == copiedId);
+        }
+
+        private Importer GetSourceImporter()
+        {
+            return context.Importers.Single(e => e.NotificationId == source.Id);
+        }
+
+        private Importer GetCopiedImporter()
+        {
+            var copiedId = GetCopiedId();
+            return context.Importers.Single(e => e.NotificationId == copiedId);
         }
 
         public void Dispose()

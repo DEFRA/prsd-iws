@@ -12,6 +12,7 @@
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Exporter;
+    using Domain.NotificationApplication.Importer;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationApplication.WasteRecovery;
     using Domain.NotificationAssessment;
@@ -93,6 +94,8 @@
         public virtual DbSet<MovementDateHistory> MovementDateHistories { get; set; }
 
         public virtual DbSet<MovementRejection> MovementRejections { get; set; }
+
+        public virtual DbSet<Importer> Importers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

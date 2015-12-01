@@ -122,6 +122,7 @@
     <Compile Include="Movement\ValidMovementDateCalculator.cs" />
     <Compile Include="NotificationApplication\Activity.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
+    <Compile Include="NotificationApplication\Importer\IImporterRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationOverviewRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
@@ -198,12 +199,11 @@
     <Compile Include="NotificationApplication\Facility.cs" />
     <Compile Include="NotificationApplication\Carrier.cs" />
     <Compile Include="NotificationApplication\Exporter\Exporter.cs" />
-    <Compile Include="NotificationApplication\Importer.cs" />
+    <Compile Include="NotificationApplication\Importer\Importer.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Carriers.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Facilities.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.Importer.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.Producers.cs" />
     <Compile Include="NotificationApplication\PackagingInfo.cs" />
     <Compile Include="NotificationApplication\ChemicalComposition.cs" />

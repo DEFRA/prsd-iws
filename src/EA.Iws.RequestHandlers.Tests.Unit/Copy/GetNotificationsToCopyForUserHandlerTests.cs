@@ -38,13 +38,13 @@
             var notification1 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification1, Notification1Id);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Importer, ImporterFactory.Create(new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C")), notification1);
+            var importer1 = ImporterFactory.Create(Notification1Id, new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C"));
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification1);
 
             var notification2 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 2);
             EntityHelper.SetEntityId(notification2, Notification2Id);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Importer, ImporterFactory.Create(new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C")), notification2);
+            var importer2 = ImporterFactory.Create(Notification2Id, new Guid("CD8FE7F5-B0EF-47E4-A198-D1E531A6CCDF"));
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateRdfWasteType(new List<WasteAdditionalInformation>
             {
                 WasteAdditionalInformation.CreateWasteAdditionalInformation("toffee", 1, 10, WasteInformationType.AshContent)
@@ -53,7 +53,7 @@
             var notification3 = new NotificationApplication(UserWithNotificationsId, NotificationType.Disposal,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification3, Notification3Id);
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.Importer, ImporterFactory.Create(new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C")), notification3);
+            var importer3 = ImporterFactory.Create(Notification3Id, new Guid("AF7ADA0A-E81B-4A7F-9837-52591B219DD3"));
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification3);
 
             var destinationNotification = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
@@ -78,6 +78,13 @@
                 CreateExporter(Notification1Id),
                 CreateExporter(Notification2Id),
                 CreateExporter(Notification3Id)
+            });
+
+            context.Importers.AddRange(new[]
+            {
+                importer1,
+                importer2,
+                importer3
             });
 
             handler = new GetNotificationsToCopyForUserHandler(context, userContext);

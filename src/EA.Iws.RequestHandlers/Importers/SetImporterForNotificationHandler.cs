@@ -4,16 +4,19 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.NotificationApplication.Importer;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Importer;
 
     internal class SetImporterForNotificationHandler : IRequestHandler<SetImporterForNotification, Guid>
     {
+        private readonly IImporterRepository repository;
         private readonly IwsContext context;
 
-        public SetImporterForNotificationHandler(IwsContext context)
+        public SetImporterForNotificationHandler(IImporterRepository repository, IwsContext context)
         {
+            this.repository = repository;
             this.context = context;
         }
 
@@ -25,12 +28,21 @@
             var address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
             var contact = ValueObjectInitializer.CreateContact(message.Contact);
 
-            var notification = await context.GetNotificationApplication(message.NotificationId);
-            notification.SetImporter(business, address, contact);
+            var importer = await repository.GetImporterOrDefaultByNotificationId(message.NotificationId);
+
+            if (importer == null)
+            {
+                importer = new Importer(message.NotificationId, address, business, contact);
+                repository.Add(importer);
+            }
+            else
+            {
+                importer.Update(address, business, contact);
+            }
 
             await context.SaveChangesAsync();
 
-            return notification.Importer.Id;
+            return importer.Id;
         }
     }
 }

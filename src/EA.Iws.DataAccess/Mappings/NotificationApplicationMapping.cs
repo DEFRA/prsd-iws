@@ -40,10 +40,6 @@
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 
-            HasOptional(x => x.Importer)
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
             HasOptional(x => x.TechnologyEmployed)
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));

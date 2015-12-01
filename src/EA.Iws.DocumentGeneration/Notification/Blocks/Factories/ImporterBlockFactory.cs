@@ -3,21 +3,21 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Importer;
 
     internal class ImporterBlockFactory : INotificationBlockFactory
     {
-        private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IImporterRepository importerRepository;
 
-        public ImporterBlockFactory(INotificationApplicationRepository notificationApplicationRepository)
+        public ImporterBlockFactory(IImporterRepository importerRepository)
         {
-            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.importerRepository = importerRepository;
         }
 
         public async Task<IDocumentBlock> Create(Guid notificationId, IList<MergeField> mergeFields)
         {
-            var notification = await notificationApplicationRepository.GetById(notificationId);
-            return new ImporterBlock(mergeFields, notification);
+            var importer = await importerRepository.GetByNotificationId(notificationId);
+            return new ImporterBlock(mergeFields, importer);
         }
     }
 }

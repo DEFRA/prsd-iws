@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Importer;
 
     internal class ImporterViewModel
     {

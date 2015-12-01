@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.Notification.Blocks
 {
     using System.Collections.Generic;
-    using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Importer;
     using Mapper;
     using ViewModels;
 
@@ -9,11 +9,11 @@
     {
         private readonly ImporterViewModel data;
 
-        public ImporterBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public ImporterBlock(IList<MergeField> mergeFields, Importer importer)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, "Importer");
 
-            data = new ImporterViewModel(notification.Importer);
+            data = new ImporterViewModel(importer);
         }
 
         public string TypeName
