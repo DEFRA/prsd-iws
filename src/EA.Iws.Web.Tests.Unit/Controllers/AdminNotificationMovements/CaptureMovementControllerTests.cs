@@ -58,7 +58,7 @@
 
             var result = await controller.Index(notificationId, model) as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(result.RouteValues, "Index", "InternalCapture", "Movement");
+            RouteAssert.RoutesTo(result.RouteValues, "Index", "InternalCapture", "AdminMovement");
         }
 
         [Fact]
