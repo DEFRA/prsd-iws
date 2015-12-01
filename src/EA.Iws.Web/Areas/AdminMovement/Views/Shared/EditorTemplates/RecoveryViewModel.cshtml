@@ -7,7 +7,7 @@
     var operationTitleVerb = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed";
 }
 
-<details class="compact-details">
+<details>
     <summary class="heading-medium">
         @Html.Raw(string.Format(Resource.MainHeading, operationTitleVerb))
     </summary>
