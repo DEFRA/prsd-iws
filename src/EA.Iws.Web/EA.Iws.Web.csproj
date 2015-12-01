@@ -660,7 +660,7 @@
     <Content Include="Areas\Admin\Views\TestEmail\Index.cshtml" />
     <Content Include="Areas\AdminNotificationMovements\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TestEmail\Success.cshtml" />
-    <Content Include="Areas\AdminNotificationMovements\Views\Shared\_LayoutSummary.cshtml" />
+    <Content Include="Areas\AdminNotificationMovements\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\ImportNotification\Views\web.config" />
     <Content Include="Areas\ImportNotification\Views\_ViewStart.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteOperation\Index.cshtml" />
