@@ -3,8 +3,8 @@
 }
 
 <div class="grid-row">
-    <aside id="form-menu" class="column-third form-status">
-        @Html.Action("AssessmentNavigation", "Home")
+    <aside class="column-third">
+        @Html.Action("AssessmentNavigation", "Home", new { ViewBag.ActiveSection })
     </aside>
 
     <div class="column-two-thirds">

@@ -9,20 +9,6 @@
 
 <div id="accordion">
     <ul>
-        <li>
-            <h3>
-                <span></span>
-                Notification
-            </h3>
-            <ul>
-                <li>My notifications</li>
-                <li>Search</li>
-                <li>View / edit</li>
-                <li>Key dates</li>
-                <li>Assessment decision</li>
-            </ul>
-        </li>
-
         <li class="active">
             <h3 class="current">
                 <span></span>
@@ -40,69 +26,6 @@
                 <li>@Html.ActionLink("Transport route export", "Index", "StateOfExport", new { area = "ImportNotification", id }, null)</li>
                 <li>@Html.ActionLink("Transport route import", "Index", "StateOfImport", new { area = "ImportNotification", id }, null)</li>
                 <li>@Html.ActionLink("Transport route transits", "Index", "TransitState", new { area = "ImportNotification", id }, null)</li>
-            </ul>
-        </li>
-
-        <li>
-            <h3>
-                <span></span>
-                Shipments
-            </h3>
-            <ul>
-                <li>Shipment summary</li>
-                <li>Create a prenotification</li>
-                <li>Record shipment data</li>
-            </ul>
-        </li>
-
-        <li>
-            <h3>
-                <span></span>
-                Finance
-            </h3>
-            <ul>
-                <li>FG date</li>
-                <li>FG decision</li>
-                <li>Payments</li>
-                <li>Refunds</li>
-                <li>Account management</li>
-            </ul>
-        </li>
-
-        <li>
-            <h3>
-                <span></span>
-                Documents
-            </h3>
-            <ul>
-                <li>Add</li>
-                <li>View</li>
-                <li>Manage</li>
-            </ul>
-        </li>
-
-        <li>
-            <h3>
-                <span></span>
-                Reporting
-            </h3>
-            <ul>
-                <li>Generate a report</li>
-                <li>Report on this notification</li>
-            </ul>
-        </li>
-
-        <li>
-            <h3>
-                <span class="arrow"></span>
-                Account Services
-            </h3>
-            <ul>
-                <li>Manage new users</li>
-                <li>Assign notifications</li>
-                <li>Delete notifications</li>
-                <li>System configuration</li>
-                <li>Notification history</li>
             </ul>
         </li>
     </ul>

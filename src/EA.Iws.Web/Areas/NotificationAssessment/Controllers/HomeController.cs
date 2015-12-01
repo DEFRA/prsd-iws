@@ -23,14 +23,16 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var result = await mediator.SendAsync(new GetNotificationOverviewInternal(id));
+            ViewBag.ActiveSection = "Assessment";
             return View(new NotificationOverviewViewModel(result));
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult AssessmentNavigation(Guid id)
+        public ActionResult AssessmentNavigation(Guid id, string activeSection)
         {
-            var response = mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id)).GetAwaiter().GetResult();
-            return PartialView("_AssessmentNavigation", response);
+            var data = mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id)).GetAwaiter().GetResult();
+            data.ActiveSection = activeSection;
+            return PartialView("_InternalMenuExport", data);
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]

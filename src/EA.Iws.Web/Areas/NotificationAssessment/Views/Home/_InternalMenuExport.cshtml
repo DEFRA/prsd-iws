@@ -1,0 +1,54 @@
+﻿@model EA.Iws.Core.NotificationAssessment.NotificationAssessmentSummaryInformationData
+
+<div id="accordion">
+    <ul>
+        <li class="@(Model.ActiveSection == "Assessment" ? "active" : string.Empty)">
+            <h3 class="@(Model.ActiveSection == "Assessment" ? "current" : string.Empty)">
+                <span></span>
+                Notification assessment
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Notification overview", "Index", "Home", new { area = "NotificationAssessment", Model.Id } , null)</li>
+                <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "NotificationAssessment", Model.Id }, null)</li>
+                <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "NotificationAssessment", Model.Id }, null)</li>
+                <li>@Html.ActionLink("FG date", "Dates", "FinancialGuarantee", new { area = "NotificationAssessment", Model.Id }, null)</li>
+                <li>@Html.ActionLink("FG decision", "Decision", "FinancialGuarantee", new { area = "NotificationAssessment", Model.Id }, null)</li>
+                <li>@Html.ActionLink("Assign EA area", "Index", "AssignArea", new { area = "NotificationAssessment", Model.Id }, null)</li>
+            </ul>
+        </li>
+
+        <li>
+            <h3>
+                <span></span>
+                Shipments
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminNotificationMovements", Model.Id }, null)</li>
+                <li>@Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "AdminNotificationMovements", Model.Id }, null)</li>
+                <li>@Html.ActionLink("Cancel shipments", "Index", "Cancel", new { area = "AdminNotificationMovements", Model.Id }, null)</li>
+            </ul>
+        </li>
+
+        <li class="@(Model.ActiveSection == "Finance" ? "active" : string.Empty)">
+            <h3 class="@(Model.ActiveSection == "Finance" ? "current" : string.Empty)">
+                <span></span>
+                Finance
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Account management", "Index", "AccountManagement", new { area = "NotificationAssessment", Model.Id }, null)</li>
+                <li>@Html.ActionLink("Payment details", "Index", "PaymentDetails", new { area = "NotificationAssessment", Model.Id }, null)</li>
+                <li>@Html.ActionLink("Refund details", "Index", "RefundDetails", new { area = "NotificationAssessment", Model.Id }, null)</li>
+            </ul>
+        </li>
+
+        <li>
+            <h3>
+                <span></span>
+                Reporting
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Annual exports", "Index", "ExportStats", new { area = "Reports" }, null)</li>
+            </ul>
+        </li>
+    </ul>
+</div>
