@@ -38,7 +38,7 @@
                     assessment.Dates.WithdrawnDate.GetValueOrDefault(),
                     null,
                     null,
-                    NotificationStatus.ConsentWithdrawn));
+                    NotificationStatus.Withdrawn));
             }
 
             if (assessment.Dates.ObjectedDate != null)
