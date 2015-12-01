@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This shipment prenotification document has already been uploaded..
+        ///   Looks up a localized string similar to This shipment prenotification document has already been uploaded.
         /// </summary>
         public static string NotNew {
             get {
