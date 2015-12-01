@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.AdminMovement.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Received date.
+        ///   Looks up a localized string similar to Received.
         /// </summary>
         public static string MainHeading {
             get {

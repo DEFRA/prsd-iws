@@ -23,7 +23,10 @@
 
         public RejectViewModel()
         {
-            RejectionDate = new OptionalDateInputViewModel(true);
+            RejectionDate = new OptionalDateInputViewModel(true)
+            {
+                IsAutoTabEnabled = false
+            };
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

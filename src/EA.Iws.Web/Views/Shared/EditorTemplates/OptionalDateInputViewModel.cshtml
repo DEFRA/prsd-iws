@@ -1,13 +1,15 @@
 ﻿@model EA.Iws.Web.ViewModels.Shared.OptionalDateInputViewModel
 
 @{
-    var isDisabled = ViewData["IsInputDisabled"] == true.ToString().ToLower();
+    var isDisabled = (ViewData["IsInputDisabled"] ?? false).ToString() == true.ToString().ToLower();
 }
 
 <div class="form-date">
     @Html.Gds().ValidationMessageFor(m => m.Day)
     @Html.Gds().ValidationMessageFor(m => m.Month)
     @Html.Gds().ValidationMessageFor(m => m.Year)
+    @Html.HiddenFor(m => m.IsAutoTabEnabled)
+    @Html.HiddenFor(m => m.AllowPastDates)
     <div class="form-group form-group-day">
         @Html.Gds().LabelFor(m => m.Day, false)
         @if (isDisabled)
@@ -16,7 +18,7 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", data_type = "date" })
+            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty })
         }
     </div>
     <div class="form-group form-group-month">
@@ -27,7 +29,7 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", data_type = "date" })
+            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty })
         }
     </div>
     <div class="form-group form-group-year">
@@ -38,7 +40,7 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = Model.AllowPastDates ? "1" : "2015" })
+            @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = Model.AllowPastDates ? "1900" : "2015" })
         }
     </div>
 </div>

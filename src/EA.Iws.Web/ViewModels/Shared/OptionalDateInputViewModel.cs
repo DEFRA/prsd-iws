@@ -31,10 +31,12 @@ namespace EA.Iws.Web.ViewModels.Shared
         public OptionalDateInputViewModel(bool allowPastDates = false)
         {
             AllowPastDates = allowPastDates;
+            IsAutoTabEnabled = true;
         }
 
         public OptionalDateInputViewModel(DateTime? date, bool allowPastDates = false)
         {
+            IsAutoTabEnabled = true;
             if (date.HasValue)
             {
                 Day = date.Value.Day;
@@ -60,6 +62,8 @@ namespace EA.Iws.Web.ViewModels.Shared
         {
             get { return Day.HasValue || Month.HasValue || Year.HasValue; }
         }
+
+        public bool IsAutoTabEnabled { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
