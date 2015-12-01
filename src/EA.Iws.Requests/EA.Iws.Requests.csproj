@@ -102,6 +102,7 @@
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
+    <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternal.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\Summary\GetMovementSummary.cs" />

@@ -151,6 +151,7 @@
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
+    <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
     <Compile Include="Movement\Mappings\MovementDateHistoryMap.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternalHandler.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryDataHandler.cs" />
