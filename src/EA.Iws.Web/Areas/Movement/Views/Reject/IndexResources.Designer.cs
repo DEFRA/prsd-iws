@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Movement.Views.Reject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please limit your answer to 200 characters or less.
+        /// </summary>
+        public static string RejectionReasonHint {
+            get {
+                return ResourceManager.GetString("RejectionReasonHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reject shipment.
         /// </summary>
         public static string Title {

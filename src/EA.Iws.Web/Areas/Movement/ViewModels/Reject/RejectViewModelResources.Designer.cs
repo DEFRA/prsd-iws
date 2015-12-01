@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide your signed prenotification document.
+        ///   Looks up a localized string similar to Upload the signed copy of the receipt.
         /// </summary>
         public static string FileName {
             get {
@@ -97,20 +97,20 @@ namespace EA.Iws.Web.Areas.Movement.ViewModels.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Why was this waste rejected? (maximum 200 characters).
+        ///   Looks up a localized string similar to Why was this waste rejected?.
         /// </summary>
-        public static string RejectionReasonName {
+        public static string RejectionReasonTitle {
             get {
-                return ResourceManager.GetString("RejectionReasonName", resourceCulture);
+                return ResourceManager.GetString("RejectionReasonTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a reason the shipment was rejected.
+        ///   Looks up a localized string similar to Please enter the reason the shipment was rejected.
         /// </summary>
-        public static string RejectionReasonRequired {
+        public static string RejectionReasonValidationMessage {
             get {
-                return ResourceManager.GetString("RejectionReasonRequired", resourceCulture);
+                return ResourceManager.GetString("RejectionReasonValidationMessage", resourceCulture);
             }
         }
     }

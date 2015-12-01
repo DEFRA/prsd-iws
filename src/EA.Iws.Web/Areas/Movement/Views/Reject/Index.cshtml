@@ -20,6 +20,7 @@
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
         @Html.LabelFor(m => m.RejectionReason, new { @class = "heading-small" })
+        @Html.Gds().HintParagraph(Resource.RejectionReasonHint)
         @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
         @Html.TextAreaFor(m => m.RejectionReason, new { MaxLength = 200, style = "width: 100%; height: 110px", title = "Rejection reason" })
     </div>

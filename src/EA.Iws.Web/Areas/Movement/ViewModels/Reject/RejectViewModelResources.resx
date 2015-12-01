@@ -124,15 +124,15 @@
     <value>Please enter the date the waste was rejected</value>
   </data>
   <data name="FileName" xml:space="preserve">
-    <value>Please provide your signed prenotification document</value>
+    <value>Upload the signed copy of the receipt</value>
   </data>
   <data name="FileRequired" xml:space="preserve">
     <value>Please provide the prenotification document</value>
   </data>
-  <data name="RejectionReasonName" xml:space="preserve">
-    <value>Why was this waste rejected? (maximum 200 characters)</value>
+  <data name="RejectionReasonTitle" xml:space="preserve">
+    <value>Why was this waste rejected?</value>
   </data>
-  <data name="RejectionReasonRequired" xml:space="preserve">
-    <value>Please enter a reason the shipment was rejected</value>
+  <data name="RejectionReasonValidationMessage" xml:space="preserve">
+    <value>Please enter the reason the shipment was rejected</value>
   </data>
 </root>

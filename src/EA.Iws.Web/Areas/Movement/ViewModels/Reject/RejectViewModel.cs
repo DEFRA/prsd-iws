@@ -13,8 +13,8 @@
         [Display(Name = "DateName", ResourceType = typeof(RejectViewModelResources))]
         public OptionalDateInputViewModel RejectionDate { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(RejectViewModelResources), ErrorMessageResourceName = "RejectionReasonRequired")]
-        [Display(Name = "RejectionReasonName", ResourceType = typeof(RejectViewModelResources))]
+        [Required(ErrorMessageResourceType = typeof(RejectViewModelResources), ErrorMessageResourceName = "RejectionReasonValidationMessage")]
+        [Display(Name = "RejectionReasonTitle", ResourceType = typeof(RejectViewModelResources))]
         public string RejectionReason { get; set; }
 
         [Display(Name = "FileName", ResourceType = typeof(RejectViewModelResources))]
