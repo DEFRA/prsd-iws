@@ -23,6 +23,7 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.FacilityId)
+    @Html.HiddenFor(m => m.NotificationType)
 
     <header class="hgroup">
         <h1 class="heading-large">@string.Format(AddEditFacilityResources.Header, facilityType)</h1>
