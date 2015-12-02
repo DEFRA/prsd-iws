@@ -3,10 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property)]
     public sealed class IsValidNumberAttribute : ValidationAttribute
     {
         private readonly int precision;
+
+        public bool IsOptional { get; set; }
 
         public IsValidNumberAttribute(int maxPrecision)
         {
@@ -27,6 +29,10 @@
                         validationResult = ValidationResult.Success;
                     }
                 }
+            }
+            else if (IsOptional)
+            {
+                validationResult = ValidationResult.Success;
             }
 
             return validationResult;

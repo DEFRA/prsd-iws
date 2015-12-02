@@ -19,8 +19,8 @@
 
         public CreateViewModel()
         {
-            PrenotificationDate = new OptionalDateInputViewModel();
-            ActualShipmentDate = new OptionalDateInputViewModel();
+            PrenotificationDate = new OptionalDateInputViewModel(true);
+            ActualShipmentDate = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

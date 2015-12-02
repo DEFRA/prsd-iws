@@ -37,6 +37,7 @@ namespace EA.Iws.Web.ViewModels.Shared
         public OptionalDateInputViewModel(DateTime? date, bool allowPastDates = false)
         {
             IsAutoTabEnabled = true;
+            AllowPastDates = allowPastDates;
             if (date.HasValue)
             {
                 Day = date.Value.Day;

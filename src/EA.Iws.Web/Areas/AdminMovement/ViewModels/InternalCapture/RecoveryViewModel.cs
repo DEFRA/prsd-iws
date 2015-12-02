@@ -11,7 +11,7 @@
 
         public RecoveryViewModel()
         {
-            RecoveryDate = new OptionalDateInputViewModel();
+            RecoveryDate = new OptionalDateInputViewModel(true);
         }
 
         public bool IsComplete()

@@ -26,7 +26,7 @@
                 <div class="panel-indent @(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
 
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
-                        @Html.LabelFor(m => m.RejectionReason, new { @class = "heading-small" })
+                        @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
                         @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
                         @Html.Gds().DropDownListFor(m => m.RejectionReason, Model.RejectionReasonsSelectList, string.Empty)
                     </div>

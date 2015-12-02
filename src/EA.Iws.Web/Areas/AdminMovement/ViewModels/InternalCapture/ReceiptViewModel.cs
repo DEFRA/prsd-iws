@@ -18,7 +18,7 @@ namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture
         public bool WasShipmentAccepted { get; set; }
         
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
-        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]
+        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources), IsOptional = true)]
         public decimal? ActualQuantity { get; set; }
         
         public ShipmentQuantityUnits? Units { get; set; }
@@ -65,7 +65,7 @@ namespace EA.Iws.Web.Areas.AdminMovement.ViewModels.InternalCapture
         public ReceiptViewModel()
         {
             WasShipmentAccepted = true;
-            ReceivedDate = new OptionalDateInputViewModel();
+            ReceivedDate = new OptionalDateInputViewModel(true);
             PossibleUnits = new List<ShipmentQuantityUnits>();
         }
 
