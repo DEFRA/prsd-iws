@@ -7,6 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.Admin;
     using Requests.Admin.NotificationAssessment;
+    using Requests.NotificationAssessment;
     using ViewModels.AssignArea;
 
     [Authorize(Roles = "internal")]
@@ -52,7 +53,8 @@
 
         private async Task<SelectList> GetAreas()
         {
-            var areas = await mediator.SendAsync(new GetLocalAreas());
+            var areas = await mediator.SendAsync(new GetLocalAreasByUserCa());
+
             return new SelectList(areas.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }), "Value", "Text");
         }
     }

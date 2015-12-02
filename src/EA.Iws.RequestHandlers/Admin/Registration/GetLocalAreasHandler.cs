@@ -21,7 +21,7 @@
         public async Task<List<LocalAreaData>> HandleAsync(GetLocalAreas query)
         {
             return await context.LocalAreas.OrderBy(x => x.Name)
-                .Select(p => new LocalAreaData() { Id = p.Id, Name = p.Name })
+                .Select(p => new LocalAreaData() { Id = p.Id, Name = p.Name, CompetentAuthorityId = p.CompetentAuthorityId})
                 .ToListAsync();
         }
     }
