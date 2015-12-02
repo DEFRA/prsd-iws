@@ -15,7 +15,7 @@
         }
 
         [Required(ErrorMessage = "Please answer this question")]
-        public NotificationType SelectedNotificationType { get; set; }
+        public NotificationType? SelectedNotificationType { get; set; }
 
         public CompetentAuthority CompetentAuthority { get; set; }
 

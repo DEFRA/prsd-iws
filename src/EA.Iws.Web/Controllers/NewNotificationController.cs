@@ -80,7 +80,7 @@
                             new CreateNotificationApplication
                             {
                                 CompetentAuthority = model.CompetentAuthority,
-                                NotificationType = model.SelectedNotificationType
+                                NotificationType = model.SelectedNotificationType.Value
                             });
 
                 return RedirectToAction("Created",
