@@ -12,12 +12,6 @@
                             @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
                         </li>
                     }
-                    else
-                    {
-                        <li>
-                            @Html.ActionLink(linkText: "My account", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
-                        </li>
-                    }
                 </ul>
             }
         </nav>
