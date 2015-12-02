@@ -758,6 +758,11 @@
     <Content Include="Areas\AdminMovement\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\_InternalMenuImport.cshtml" />
     <Content Include="Areas\NotificationAssessment\Views\Home\_InternalMenuExport.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\web.config" />
+    <Content Include="Areas\AdminImportAssessment\Views\KeyDates\Index.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Shared\_InternalMenu.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -894,6 +899,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressBookResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\DateInputViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesStatusEnum.cs" />
     <Compile Include="Areas\AdminMovement\AdminMovementAreaRegistration.cs" />
     <Compile Include="Areas\AdminMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminNotificationMovements\AdminNotificationMovementsAreaRegistration.cs" />

@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
-    using Requests.NotificationAssessment;
     using ViewModels;
 
     [Authorize(Roles = "internal")]

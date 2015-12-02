@@ -1,0 +1,34 @@
+﻿@{
+    object routeId;
+    Guid? id = null;
+    if (ViewContext.RouteData.Values.TryGetValue("id", out routeId))
+    {
+        id = Guid.Parse(routeId.ToString());
+    }
+}
+
+<div id="accordion">
+    <ul>
+        <li class="active">
+            <h3 class="current">
+                <span></span>
+                Assessment
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminImportAssessment", id }, null)</li>
+
+            </ul>
+        </li>
+
+        <li class="">
+            <h3 class="">
+                <span></span>
+                Import Notification
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Overview", "Index", "Home", new { area = "ImportNotification", id }, null)</li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
