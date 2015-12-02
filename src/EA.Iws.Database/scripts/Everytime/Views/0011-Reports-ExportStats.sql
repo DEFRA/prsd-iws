@@ -8,6 +8,7 @@ AS
 SELECT
 	SUM(QuantityReceived) AS QuantityReceived,
 	[Year],
+	[CompetentAuthority],
 	CASE 
 		WHEN YCode IS NULL AND BaselOecd IS NULL THEN 'BASEL WASTE, Y CODE UNASSIGNED'
 		WHEN YCode IS NULL AND BaselOecd LIKE 'A%' THEN 'Y CODE NOT APPLICABLE - NON HAZ WASTE'
@@ -27,6 +28,7 @@ FROM (
 	SELECT
 		M.QuantityReceived,
 		YEAR(M.ReceivedDate) AS Year,
+		N.[CompetentAuthority],
 		WT.Description AS WasteStreams,
 		TR.ImportCountryCode AS [CountryOfImport],
 		TS.TransitStates,
@@ -83,6 +85,7 @@ FROM (
 ) DATA
 GROUP BY
 	[Year],
+	[CompetentAuthority],
 	YCode,
 	WasteStreams,
 	CountryOfImport,

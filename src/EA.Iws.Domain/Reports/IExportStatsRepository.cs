@@ -5,6 +5,6 @@
 
     public interface IExportStatsRepository
     {
-        Task<IEnumerable<ExportStats>> GetExportStats(int year);
+        Task<IEnumerable<ExportStats>> GetExportStats(int year, UKCompetentAuthority competentAuthority);
     }
 }

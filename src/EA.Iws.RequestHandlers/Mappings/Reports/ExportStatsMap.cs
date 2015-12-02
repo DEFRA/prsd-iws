@@ -12,9 +12,9 @@
             {
                 WasteCategory = source.WasteCategory,
                 WasteStreams = source.WasteStreams,
-                UNClass = source.UN,
-                HCode = source.HCode,
-                HCodeCharacteristics = source.HCodeDescription,
+                UNClass = GetValueOrDefault(source.UN),
+                HCode = GetValueOrDefault(source.HCode),
+                HCodeCharacteristics = GetValueOrDefault(source.HCodeDescription),
                 AmountExported = source.QuantityReceived,
                 CountriesOfTransit = source.TransitStates,
                 CountryOfImport = source.CountryOfImport,
@@ -22,6 +22,11 @@
                 RCode = source.RCode,
                 EwcCodes = source.Ewc
             };
+        }
+
+        private static string GetValueOrDefault(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? "NA" : value;
         }
     }
 }

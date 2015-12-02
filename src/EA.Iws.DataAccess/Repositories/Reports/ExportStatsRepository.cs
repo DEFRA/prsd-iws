@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
+    using Domain;
     using Domain.Reports;
 
     internal class ExportStatsRepository : IExportStatsRepository
@@ -14,7 +15,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<ExportStats>> GetExportStats(int year)
+        public async Task<IEnumerable<ExportStats>> GetExportStats(int year, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<ExportStats>(
                 @"SELECT 
@@ -31,8 +32,9 @@
                     [RCode],
                     [DCode]
                 FROM [Reports].[ExportStats]
-                WHERE [Year] = @year",
-                new SqlParameter("@year", year)).ToArrayAsync();
+                WHERE [Year] = @year AND [CompetentAuthority] = @ca",
+                new SqlParameter("@year", year),
+                new SqlParameter("@ca", competentAuthority.Value)).ToArrayAsync();
         }
     }
 }
