@@ -8,6 +8,7 @@
     using Domain;
     using Domain.AddressBook;
     using Domain.FinancialGuarantee;
+    using Domain.ImportMovement;
     using Domain.ImportNotification;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -96,6 +97,8 @@
         public virtual DbSet<MovementRejection> MovementRejections { get; set; }
 
         public virtual DbSet<Importer> Importers { get; set; }
+
+        public virtual DbSet<ImportMovement> ImportMovements { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
