@@ -985,6 +985,7 @@
     <Compile Include="Areas\ImportNotification\Controllers\StateOfExportController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\StateOfImportController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\TransitStateController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\ValidateController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteOperationController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ShipmentController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteTypeController.cs" />
@@ -1062,6 +1063,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TransitStateViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Validate\ValidateViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2073,6 +2075,7 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
+    <Folder Include="Areas\ImportNotification\Views\Validate\" />
     <Folder Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\" />
     <Folder Include="Areas\Reports\Models\" />
   </ItemGroup>

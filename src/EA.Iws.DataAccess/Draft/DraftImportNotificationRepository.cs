@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ImportNotification.Draft;
     using Newtonsoft.Json;
 
     internal class DraftImportNotificationRepository : IDraftImportNotificationRepository
@@ -54,6 +55,24 @@
             {
                 return (TData)Activator.CreateInstance(typeof(TData), true);
             }
+        }
+
+        public async Task<ImportNotification> Get(Guid importNotificationId)
+        {
+            return new ImportNotification
+            {
+                Exporter = await GetDraftData<Exporter>(importNotificationId),
+                Importer = await GetDraftData<Importer>(importNotificationId),
+                Facilities = await GetDraftData<FacilityCollection>(importNotificationId),
+                Preconsented = await GetDraftData<Preconsented>(importNotificationId),
+                Producer = await GetDraftData<Producer>(importNotificationId),
+                Shipment = await GetDraftData<Shipment>(importNotificationId),
+                StateOfExport = await GetDraftData<StateOfExport>(importNotificationId),
+                StateOfImport = await GetDraftData<StateOfImport>(importNotificationId),
+                TransitStates = await GetDraftData<TransitStateCollection>(importNotificationId),
+                WasteOperation = await GetDraftData<WasteOperation>(importNotificationId),
+                WasteType = await GetDraftData<WasteType>(importNotificationId)
+            };
         }
     }
 }

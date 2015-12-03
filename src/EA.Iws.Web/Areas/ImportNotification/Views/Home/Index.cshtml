@@ -7,10 +7,6 @@
 <h1 class="heading-large">@Resource.Title</h1>
 <hr/>
 
-@Html.Partial("_SummaryTableContainer")
+@Html.ActionLink("Complete notification", string.Empty, string.Empty, null, new { @class = "button" })
 
-<style>
-    .block {
-        display: block;
-    }
-</style>
+@Html.Partial("_SummaryTableContainer")

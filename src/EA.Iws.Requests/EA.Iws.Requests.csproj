@@ -90,6 +90,7 @@
     <Compile Include="ImportNotification\GetSummary.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />
+    <Compile Include="ImportNotification\Validate\ValidateImportNotification.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodes.cs" />
     <Compile Include="Movement\Complete\SaveMovementCompletedReceipt.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
