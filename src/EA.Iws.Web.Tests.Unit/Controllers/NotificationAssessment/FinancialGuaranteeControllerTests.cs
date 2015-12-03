@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Areas.NotificationAssessment.Controllers;
-    using Areas.NotificationAssessment.ViewModels.FinancialGuarantee;
+    using Areas.AdminExportAssessment.Controllers;
+    using Areas.AdminExportAssessment.ViewModels.FinancialGuarantee;
     using Core.Admin;
     using Core.FinancialGuarantee;
     using FakeItEasy;

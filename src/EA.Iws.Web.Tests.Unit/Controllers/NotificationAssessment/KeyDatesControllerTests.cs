@@ -6,8 +6,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Areas.NotificationAssessment.Controllers;
-    using Areas.NotificationAssessment.ViewModels;
+    using Areas.AdminExportAssessment.Controllers;
+    using Areas.AdminExportAssessment.ViewModels;
     using Core.NotificationAssessment;
     using FakeItEasy;
     using Prsd.Core.Mediator;

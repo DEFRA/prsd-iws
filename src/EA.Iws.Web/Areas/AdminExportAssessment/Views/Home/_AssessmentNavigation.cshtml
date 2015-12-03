@@ -1,0 +1,38 @@
+﻿@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Core.Notification
+@model NotificationAssessmentSummaryInformationData
+
+<div class="internal-side-nav">
+    <p class="lede" style="font-weight: 700;">@Model.Number</p>
+    <p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CompetentAuthority)</p>
+    <p class="heading-small">Status</p>
+    <p class="heading-xsmall">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</p>
+</div>
+
+<p>@Html.Navigation().Link("Overview", false, "Index", "Home", "AdminExportAssessment")</p>
+
+<span>Notification assessment</span>
+@Html.Navigation().Link("Key dates", false, "Index", "KeyDates", "AdminExportAssessment")
+@Html.Navigation().Link("Assessment decision", false, "Index", "Decision", "AdminExportAssessment")
+
+<span>Financial guarantee</span>
+@Html.Navigation().Link("FG dates", false, "Dates", "FinancialGuarantee", "AdminExportAssessment")
+@Html.Navigation().Link("FG decision", false, "Decision", "FinancialGuarantee", "AdminExportAssessment")
+
+<span>Shipments</span>
+@Html.Navigation().Link("Shipment summary", false, "Index", "Home", new  RouteValueDictionary( new { area = "AdminNotificationMovements" }))
+@if (Model.Status == NotificationStatus.Consented)
+{
+    @Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { id = Model.Id, area = "AdminNotificationMovements" }))
+}
+
+<span>Finance</span>
+@Html.Navigation().Link("Payment details", false, "Index", "PaymentDetails", "AdminExportAssessment")
+@Html.Navigation().Link("Refund details", false, "Index", "RefundDetails", "AdminExportAssessment")
+@Html.Navigation().Link("Account management", false, "Index", "AccountManagement", "AdminExportAssessment")
+
+@if (Model.CompetentAuthority == CompetentAuthority.England)
+{
+    <span> </span>
+    @Html.Navigation().Link("Assign EA area", false, "Index", "AssignArea", "AdminExportAssessment")
+}

@@ -443,7 +443,7 @@
     <Content Include="Areas\Admin\Views\Registration\AwaitApproval.cshtml" />
     <Content Include="Areas\Admin\Views\Registration\ApprovalRejected.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\SiteOfExport.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\KeyDates\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\SiteOfTreatment.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\Remove.cshtml" />
@@ -466,14 +466,14 @@
     <Content Include="Scripts\jquery.prevent-double-click.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\Dates.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\Dates.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalMethod.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\Decision.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Incomplete.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Complete.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Approve.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Refuse.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\FinancialGuarantee\_Release.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\Decision.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Incomplete.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Complete.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Approve.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Refuse.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Release.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\DisplayTemplates\AddressData.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_GeneralRemittanceEmail.cshtml" />
@@ -489,11 +489,11 @@
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_SepaBlock17Disclosure.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NieaBlock17Disclosure.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwBlock17Disclosure.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\web.config" />
-    <Content Include="Areas\NotificationAssessment\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\Index.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_AssessmentNavigation.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\web.config" />
+    <Content Include="Areas\AdminExportAssessment\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_AssessmentNavigation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\BaselOecdCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\YCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />
@@ -541,15 +541,15 @@
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_UnNumbers.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_OtherCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_RecoveryInformation.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_AmountsAndDates.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_ClassifyYourWaste.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_Journey.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_OrganisationsInvolved.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_RecoveryOperation.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_Transportation.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_WasteCodes.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_WasteRecovery.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_SummaryTableContainer.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_AmountsAndDates.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_ClassifyYourWaste.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_Journey.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_OrganisationsInvolved.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_RecoveryOperation.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_Transportation.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_WasteCodes.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_WasteRecovery.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_SummaryTableContainer.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\NumberOfCarriers.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\Carriers.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\_MeansOfTransport.cshtml" />
@@ -583,11 +583,11 @@
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalCost.cshtml" />
     <Content Include="Areas\AddressBook\Views\Delete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\Index.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\Index.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\_Withdrawn.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\_Object.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\_Consent.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\_History.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\_Withdrawn.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\_Object.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\_Consent.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\_History.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\EstimatedValue.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\RecoveryCost.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\CancelMovement\Index.cshtml" />
@@ -655,8 +655,8 @@
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_YCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_IntendedQuantity.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_IntendedDates.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_NotificationSwitcher.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\MovementCertificate\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_NotificationSwitcher.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\MovementCertificate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TestEmail\Index.cshtml" />
     <Content Include="Areas\AdminNotificationMovements\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TestEmail\Success.cshtml" />
@@ -680,12 +680,12 @@
     <Content Include="Content\iws\_facility-table.scss" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityAddressViewModel.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityContactViewModel.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\PaymentDetails\Index.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\RefundDetails\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\PaymentDetails\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\RefundDetails\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfImport\Index.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\AccountManagement\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\AccountManagement\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\_CompetentAuthoritiesAndExitPoints.cshtml" />
     <Content Include="Content\iws\_import-waste-codes.scss" />
     <Content Include="Areas\Movement\Views\Home\_Summary.cshtml" />
@@ -729,7 +729,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_YCodes.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_UnClasses.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Preconsented.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Decision\_ConsentWithdrawn.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\_ConsentWithdrawn.cshtml" />
     <Content Include="Content\iws\_internal-menu.scss" />
     <Content Include="Areas\AdminNotificationMovements\Views\CaptureMovement\Index.cshtml" />
     <Content Include="Areas\AdminNotificationMovements\Views\CaptureMovement\Create.cshtml" />
@@ -744,7 +744,7 @@
     <Content Include="Areas\AdminNotificationMovements\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\AdminNotificationMovements\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Movement\Views\Reject\Index.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\AssignArea\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\AssignArea\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Reject\Index.cshtml" />
     <Content Include="Areas\Reports\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Reports\Views\web.config" />
@@ -757,7 +757,7 @@
     <Content Include="Areas\AdminMovement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminMovement\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\_InternalMenuImport.cshtml" />
-    <Content Include="Areas\NotificationAssessment\Views\Home\_InternalMenuExport.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_InternalMenuExport.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\web.config" />
     <Content Include="Areas\AdminImportAssessment\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\_ViewStart.cshtml" />
@@ -1522,9 +1522,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>YCodeResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationAssessment\Controllers\AccountManagementController.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\AssignAreaController.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\MovementCertificateController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\AccountManagementController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\AssignAreaController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\MovementCertificateController.cs" />
     <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
     <Compile Include="Areas\Movement\Controllers\ReceiptCompleteController.cs" />
     <Compile Include="Areas\Movement\Controllers\SubmitController.cs" />
@@ -1533,43 +1533,43 @@
     <Compile Include="Areas\Movement\ViewModels\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\KeyDates\KeyDatesViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\PaymentDetailsController.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\RefundDetailsController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\PaymentDetailsController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\RefundDetailsController.cs" />
     <Compile Include="Areas\AdminNotificationMovements\Controllers\HomeController.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\AssignArea\AssignAreaViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\AssignArea\AssignAreaViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NotificationAssessmentDecisionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationAssessment\ViewModels\MovementSearchViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\MovementSearchViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PaymentDetailsViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentMethods.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\RefundDetails\RefundDetailsViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\PaymentDetails\PaymentMethods.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\RefundDetails\RefundDetailsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.Designer.cs">
       <DependentUpon>RefundDetailsViewModelResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminNotificationMovements\ViewModels\Home\MovementSummaryTableViewModel.cs" />
     <Compile Include="Areas\AdminNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\Views\PaymentDetails\IndexResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\Views\PaymentDetails\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationAssessment\Views\RefundDetails\IndexResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\Views\RefundDetails\IndexResources.Designer.cs">
       <DependentUpon>IndexResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Areas\NotificationAssessment\Views\AccountManagement\IndexResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\Views\AccountManagement\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -1613,8 +1613,8 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\EstimatedValueViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\RecoveryCostViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\WasteRecoveryViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\DecisionRecordViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\DecisionRecordViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\NotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Complete\CompleteMovementViewModel.cs" />
@@ -1733,17 +1733,17 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\UNNumber\UNNumberViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\BaseWasteCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\HCode\HCodeViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\DecisionController.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\KeyDatesController.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\FinancialGuaranteeController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Registration\AdminRegistrationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\BasicSearchViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\DateInputViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDatesViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDecisionViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDatesViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDecisionViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\NewUsersListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />
@@ -1769,9 +1769,9 @@
     <Compile Include="Areas\NotificationApplication\Views\Shared\WasteCodeViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteCodes\EnterWasteCodesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\YCode\YCodeViewModel.cs" />
-    <Compile Include="Areas\NotificationAssessment\Controllers\HomeController.cs" />
-    <Compile Include="Areas\NotificationAssessment\NotificationAssessmentAreaRegistration.cs" />
-    <Compile Include="Areas\NotificationAssessment\ViewModels\KeyDatesStatusEnum.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\AdminExportAssessmentAreaRegistration.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\KeyDatesStatusEnum.cs" />
     <Compile Include="Controllers\CopyFromNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomsOfficeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeController.cs" />
@@ -2535,27 +2535,27 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>YCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NotificationAssessmentDecisionViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PaymentDetailsViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RefundDetailsViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationAssessment\Views\PaymentDetails\IndexResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\PaymentDetails\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationAssessment\Views\RefundDetails\IndexResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\RefundDetails\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationAssessment\Views\AccountManagement\IndexResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\AccountManagement\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

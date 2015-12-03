@@ -34,7 +34,7 @@
 
             if (idAndStatus.Item1.HasValue && idAndStatus.Item2 != NotificationStatus.NotSubmitted)
             {
-                return RedirectToAction("Index", "Home", new { id = idAndStatus.Item1, area = "NotificationAssessment" });
+                return RedirectToAction("Index", "Home", new { id = idAndStatus.Item1, area = "AdminExportAssessment" });
             }
 
             return RedirectToAction("NotFound", new { number = model.Number });

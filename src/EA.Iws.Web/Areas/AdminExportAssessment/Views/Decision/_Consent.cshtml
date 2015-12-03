@@ -1,0 +1,30 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision.NotificationAssessmentDecisionViewModel
+
+<h2 class="heading-medium">Consent valid from</h2>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Year)">
+    <fieldset>
+        <div class="form-date">
+            @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromDate)
+            @Html.EditorFor(m => m.ConsentValidFromDate)
+        </div>
+    </fieldset>
+</div>
+
+<h2 class="heading-medium">Consent valid to</h2>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Year)">
+    <fieldset>
+        <div class="form-date">
+            @Html.Gds().ValidationMessageFor(m => m.ConsentValidToDate)
+            @Html.EditorFor(m => m.ConsentValidToDate)
+        </div>
+    </fieldset>
+</div>
+
+<h2 class="heading-medium">Conditions of consent (Optional)</h2>
+
+<div class="form-group @Html.Gds().FormGroupClass(m =>m.ConsentConditions)">
+    @Html.Gds().ValidationMessageFor(m => m.ConsentConditions)
+    @Html.TextAreaFor(m => m.ConsentConditions, new { @class = "text-area two-thirds" })
+</div>

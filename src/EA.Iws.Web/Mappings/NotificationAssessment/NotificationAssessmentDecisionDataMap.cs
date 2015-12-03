@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Web.Mappings.NotificationAssessment
 {
     using System.Linq;
-    using Areas.NotificationAssessment.ViewModels;
-    using Areas.NotificationAssessment.ViewModels.Decision;
+    using Areas.AdminExportAssessment.ViewModels;
+    using Areas.AdminExportAssessment.ViewModels.Decision;
     using Core.NotificationAssessment;
     using Prsd.Core.Mapper;
 

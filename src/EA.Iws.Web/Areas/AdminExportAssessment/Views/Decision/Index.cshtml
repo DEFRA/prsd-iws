@@ -1,0 +1,67 @@
+﻿@using EA.Iws.Core.Admin
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision.NotificationAssessmentDecisionViewModel
+
+@{
+    ViewBag.Title = "Assessment Decision";
+}
+
+<h1 class="heading-large">Notification assessment decision</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.AntiForgeryToken()
+
+    for (int i = 0; i < Model.DecisionTypes.Count; i++)
+    {
+        @Html.HiddenFor(m => m.DecisionTypes[i])
+    }
+
+    @Html.Partial("_History")
+
+    <h2 class="heading-medium">Decision</h2>
+
+    if (!Model.PossibleDecisions.Any())
+     {
+         <p>
+             This notification is in a status of @Model.Status<text>.</text>
+         </p>
+         <p>
+             No further decisions are possible.
+         </p>
+     }
+    else
+    {
+        <div class="form-group">
+            @Html.Gds().ValidationMessageFor(m => m.SelectedDecision)
+            @Html.Gds().DropDownListFor(m => m.SelectedDecision, Model.PossibleDecisions, string.Empty, new { id = "decision-select" })
+        </div>
+
+        <div id="@Html.Raw("status" + DecisionType.Withdrawn)" class="js-hidden assessment-decision">
+            @Html.Partial("_Withdrawn")
+        </div>
+
+        <div id="@Html.Raw("status" + DecisionType.Object)" class="js-hidden assessment-decision">
+            @Html.Partial("_Object")
+        </div>
+
+        <div id="@Html.Raw("status" + DecisionType.Consent)" class="js-hidden assessment-decision">
+            @Html.Partial("_Consent")
+        </div>
+
+        <div id="@Html.Raw("status" + DecisionType.ConsentWithdrawn)" class="js-hidden assessment-decision">
+            @Html.Partial("_ConsentWithdrawn")
+        </div>
+    }
+
+    <div class="form-group">
+        <input type="submit" class="button" value="@Constants.ContinueButtonText" />
+    </div>
+}
+
+@section scripts{
+    <script>
+        setDropdownRevealSections("decision-select", "assessment-decision")
+    </script>
+}
