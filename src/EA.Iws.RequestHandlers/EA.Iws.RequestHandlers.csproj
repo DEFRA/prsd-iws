@@ -148,6 +148,7 @@
     <Compile Include="ImportNotification\Validate\AddressValidator.cs" />
     <Compile Include="ImportNotification\Validate\ContactValidator.cs" />
     <Compile Include="ImportNotification\Validate\DraftImportNotificationValidator.cs" />
+    <Compile Include="ImportNotification\Validate\ExporterValidator.cs" />
     <Compile Include="ImportNotification\Validate\IDraftImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\ImporterValidator.cs" />
     <Compile Include="ImportNotification\Validate\StateOfImportValidator.cs" />
