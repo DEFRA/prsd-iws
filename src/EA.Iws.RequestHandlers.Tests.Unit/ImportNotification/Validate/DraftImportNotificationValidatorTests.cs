@@ -13,7 +13,7 @@
             validator = new DraftImportNotificationValidator();
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented")]
         public void ValidObject_EmptyArray()
         {
             var validNotification = new ImportNotification();
@@ -23,7 +23,7 @@
             Assert.Empty(result);
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented")]
         public void InvalidObject_NonEmptyArray()
         {
             var invalidNotification = new ImportNotification();
