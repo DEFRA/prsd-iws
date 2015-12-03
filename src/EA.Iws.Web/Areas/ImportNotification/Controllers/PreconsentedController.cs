@@ -32,7 +32,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, PreconsentedViewModel model)
         {
-            var preconsented = new Preconsented
+            var preconsented = new Preconsented(id)
             {
                 PreconsentedFacilityExists = model.SelectedValue
             };

@@ -104,6 +104,7 @@
     <Compile Include="ImportNotification\Validate\DraftImportNotificationValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\ExporterValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\ImporterValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\PreconsentedValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\StateOfImportValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\StateOfExportValidatorTests.cs" />

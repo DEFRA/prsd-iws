@@ -1,0 +1,30 @@
+﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
+{
+    using System.Threading.Tasks;
+    using Core.ImportNotification.Draft;
+    using Core.Shared;
+    using Domain.ImportNotification;
+    using FluentValidation;
+
+    internal class PreconsentedValidator : AbstractValidator<Preconsented>
+    {
+        private readonly IImportNotificationRepository importNotificationRepository;
+
+        public PreconsentedValidator(IImportNotificationRepository importNotificationRepository)
+        {
+            this.importNotificationRepository = importNotificationRepository;
+
+            RuleFor(x => x.PreconsentedFacilityExists).MustAsync(BeEnteredForRecoveryNotification);
+        }
+
+        private async Task<bool> BeEnteredForRecoveryNotification(Preconsented instance, bool? preconsentedFacilityExists)
+        {
+            var importNotification =
+                await importNotificationRepository.GetByImportNotificationId(instance.ImportNotificationId);
+
+            return importNotification.NotificationType == NotificationType.Recovery
+                ? preconsentedFacilityExists.HasValue
+                : !preconsentedFacilityExists.HasValue;
+        }
+    }
+}
