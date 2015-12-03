@@ -106,6 +106,7 @@
     <Compile Include="ImportNotification\Validate\ImporterValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\StateOfImportValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\StateOfExportValidatorTests.cs" />
     <Compile Include="Mappings\AddressMapTests.cs" />
     <Compile Include="Helpers\BusinessInfoDataEqualityComparer.cs" />
     <Compile Include="Mappings\BusinessInfoMapTests.cs" />
