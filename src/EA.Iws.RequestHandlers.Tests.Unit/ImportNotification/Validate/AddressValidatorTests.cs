@@ -3,6 +3,7 @@
     using System;
     using Domain;
     using FakeItEasy;
+    using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
     using Address = Core.ImportNotification.Draft.Address;
@@ -49,12 +50,7 @@
         [InlineData(" ")]
         public void AddressLine1Missing_ReturnsFailureResult(string address1)
         {
-            var invalidAddress = GetValidAddress();
-            invalidAddress.AddressLine1 = address1;
-
-            var result = validator.Validate(invalidAddress);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.AddressLine1, address1);
         }
 
         [Theory]
@@ -63,12 +59,7 @@
         [InlineData(" ")]
         public void AddressLine2Missing_ReturnsSuccessResult(string address2)
         {
-            var validAddress = GetValidAddress();
-            validAddress.AddressLine2 = address2;
-
-            var result = validator.Validate(validAddress);
-
-            Assert.True(result.IsValid);
+            validator.ShouldNotHaveValidationErrorFor(x => x.AddressLine2, address2);
         }
 
         [Theory]
@@ -77,12 +68,7 @@
         [InlineData(" ")]
         public void TownOrCityMissing_ReturnsFailureResult(string townOrCity)
         {
-            var invalidAddress = GetValidAddress();
-            invalidAddress.TownOrCity = townOrCity;
-
-            var result = validator.Validate(invalidAddress);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.TownOrCity, townOrCity);
         }
 
         [Theory]
@@ -95,9 +81,7 @@
             invalidAddress.CountryId = unitedKingdomCountryId;
             invalidAddress.PostalCode = postcode;
 
-            var result = validator.Validate(invalidAddress);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.PostalCode, invalidAddress);
         }
 
         [Theory]
@@ -106,23 +90,13 @@
         [InlineData(" ")]
         public void PostalCodeMissing_CountryNotUK_ReturnsSuccessResult(string postcode)
         {
-            var invalidAddress = GetValidAddress();
-            invalidAddress.PostalCode = postcode;
-
-            var result = validator.Validate(invalidAddress);
-
-            Assert.True(result.IsValid);
+            validator.ShouldNotHaveValidationErrorFor(x => x.PostalCode, postcode);
         }
 
         [Fact]
         public void CountryMissing_ReturnsFailureResult()
         {
-            var invalidAddress = GetValidAddress();
-            invalidAddress.CountryId = null;
-
-            var result = validator.Validate(invalidAddress);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.CountryId, null as Guid?);
         }
     }
 }

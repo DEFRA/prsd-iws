@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
     using Core.ImportNotification.Draft;
+    using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
 
@@ -29,12 +30,7 @@
         [InlineData(" ")]
         public void ContactNameMissing_ReturnsFailure(string contactName)
         {
-            var invalidContact = GetValidContact();
-            invalidContact.ContactName = contactName;
-
-            var result = validator.Validate(invalidContact);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.ContactName, contactName);
         }
 
         [Theory]
@@ -43,12 +39,7 @@
         [InlineData(" ")]
         public void EmailMissing_ReturnsFailure(string email)
         {
-            var invalidContact = GetValidContact();
-            invalidContact.Email = email;
-
-            var result = validator.Validate(invalidContact);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.Email, email);
         }
 
         [Theory]
@@ -56,12 +47,7 @@
         [InlineData("test@test")]
         public void EmailInvalid_ReturnsFailure(string email)
         {
-            var invalidContact = GetValidContact();
-            invalidContact.Email = email;
-
-            var result = validator.Validate(invalidContact);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.Email, email);
         }
 
         [Theory]
@@ -70,12 +56,7 @@
         [InlineData(" ")]
         public void TelephoneMissing_ReturnsFailure(string telephone)
         {
-            var invalidContact = GetValidContact();
-            invalidContact.Telephone = telephone;
-
-            var result = validator.Validate(invalidContact);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.Telephone, telephone);
         }
 
         private Contact GetValidContact()
