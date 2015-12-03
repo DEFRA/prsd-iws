@@ -2,6 +2,7 @@
 {
     using System;
     using Core.ImportNotification.Draft;
+    using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
 
@@ -26,14 +27,12 @@
         }
 
         [Fact]
-        public void HasDisposalAndRecoveryCodes_ResultIsInvalid()
+        public void HasDisposalAndRecoveryCodes_HasValidationError()
         {
             var wasteOperation = GetValidWasteOperation();
             wasteOperation.OperationCodes = new[] { 1, 2, 3, 14, 15, 16 };
 
-            var result = validator.Validate(wasteOperation);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
         }
 
         [Fact]
@@ -42,9 +41,7 @@
             var wasteOperation = GetValidWasteOperation();
             wasteOperation.OperationCodes = new int[] { };
 
-            var result = validator.Validate(wasteOperation);
-
-            Assert.False(result.IsValid);
+            validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
         }
 
         [Theory]
@@ -56,9 +53,7 @@
             var wasteOperation = GetValidWasteOperation();
             wasteOperation.TechnologyEmployed = input;
 
-            var result = validator.Validate(wasteOperation);
-
-            Assert.True(result.IsValid);
+            validator.ShouldNotHaveValidationErrorFor(x => x.TechnologyEmployed, wasteOperation);
         }
 
         private WasteOperation GetValidWasteOperation()
