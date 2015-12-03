@@ -6,36 +6,36 @@
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
 
-    public class ExporterValidatorTests
+    public class ProducerValidatorTests
     {
-        private readonly ExporterValidator validator;
+        private readonly ProducerValidator validator;
 
-        public ExporterValidatorTests()
+        public ProducerValidatorTests()
         {
             var countryRepository = A.Fake<Domain.ICountryRepository>();
             var addressValidator = new AddressValidator(countryRepository);
             var contactValidator = new ContactValidator();
-            validator = new ExporterValidator(addressValidator, contactValidator);
+            validator = new ProducerValidator(addressValidator, contactValidator);
         }
 
         [Fact]
-        public void ValidExporter_ReturnsSuccess()
+        public void ValidProducer_ReturnsSuccess()
         {
-            var exporter = GetValidExporter();
+            var producer = GetValidProducer();
 
-            var result = validator.Validate(exporter);
+            var result = validator.Validate(producer);
 
             Assert.True(result.IsValid);
         }
 
         [Fact]
-        public void ExporterAddress_IsValidated()
+        public void ProducerAddress_IsValidated()
         {
             validator.ShouldHaveChildValidator(x => x.Address, typeof(AddressValidator));
         }
 
         [Fact]
-        public void ExporterContact_IsValidated()
+        public void ProducerContact_IsValidated()
         {
             validator.ShouldHaveChildValidator(x => x.Contact, typeof(ContactValidator));
         }
@@ -49,13 +49,14 @@
             validator.ShouldHaveValidationErrorFor(x => x.BusinessName, businessName);
         }
 
-        private Exporter GetValidExporter()
+        private Producer GetValidProducer()
         {
-            return new Exporter
+            return new Producer
             {
                 Address = AddressTestData.ValidTestAddress,
                 Contact = ContactTestData.ValidTestContact,
-                BusinessName = "Mike and Eliot Bros."
+                BusinessName = "Mike and Eliot Bros.",
+                AreMultiple = false
             };
         }
     }

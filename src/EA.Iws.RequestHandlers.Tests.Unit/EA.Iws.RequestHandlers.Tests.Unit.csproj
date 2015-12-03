@@ -99,12 +99,15 @@
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
+    <Compile Include="ImportNotification\Validate\AddressTestData.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ContactTestData.cs" />
     <Compile Include="ImportNotification\Validate\ContactValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\DraftImportNotificationValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\ExporterValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\ImporterValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\PreconsentedValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ProducerValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\StateOfImportValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\TransitStateValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidatorTests.cs" />

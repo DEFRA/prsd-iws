@@ -12,7 +12,6 @@
     {
         private readonly AddressValidator validator;
         private readonly Guid unitedKingdomCountryId = new Guid("73973C74-5981-4895-8785-9FD72B29F528");
-        private readonly Guid anyCountryId = new Guid("8BB51831-AB8B-4951-8DEC-962E77E59CEC");
         private readonly ICountryRepository countryRepository;
 
         public AddressValidatorTests()
@@ -25,23 +24,11 @@
         [Fact]
         public void ValidAddress_ReturnsSuccessResult()
         {
-            var address = GetValidAddress();
+            var address = AddressTestData.ValidTestAddress;
 
             var result = validator.Validate(address);
 
             Assert.True(result.IsValid);
-        }
-
-        private Address GetValidAddress()
-        {
-            return new Address
-            {
-                AddressLine1 = "Eliot House",
-                AddressLine2 = "Eliot Lane",
-                CountryId = anyCountryId,
-                PostalCode = "EL10TJ",
-                TownOrCity = "Eliotsville"
-            };
         }
 
         [Theory]
@@ -77,7 +64,7 @@
         [InlineData(" ")]
         public void PostalCodeMissing_CountryUK_ReturnsFailureResult(string postcode)
         {
-            var invalidAddress = GetValidAddress();
+            var invalidAddress = AddressTestData.ValidTestAddress;
             invalidAddress.CountryId = unitedKingdomCountryId;
             invalidAddress.PostalCode = postcode;
 

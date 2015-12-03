@@ -60,20 +60,8 @@
         {
             return new Importer
             {
-                Address = new Address
-                {
-                    AddressLine1 = "Eliot House",
-                    AddressLine2 = "Eliot Lane",
-                    CountryId = new System.Guid("0A323947-78A0-40FE-BDDD-9A58803559BC"),
-                    PostalCode = "EL10TJ",
-                    TownOrCity = "Eliotsville"
-                },
-                Contact = new Contact
-                {
-                    ContactName = "Mike Merry",
-                    Email = "mike@merry.com",
-                    Telephone = "01234 567890"
-                },
+                Address = AddressTestData.ValidTestAddress,
+                Contact = ContactTestData.ValidTestContact,
                 BusinessName = "Mike and Eliot Bros.",
                 RegistrationNumber = "12987457",
                 Type = BusinessType.Other

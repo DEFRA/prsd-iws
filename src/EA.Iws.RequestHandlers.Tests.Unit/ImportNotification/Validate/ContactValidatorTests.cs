@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
-    using Core.ImportNotification.Draft;
     using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
@@ -17,7 +16,7 @@
         [Fact]
         public void ValidContact_ReturnsSuccess()
         {
-            var contact = GetValidContact();
+            var contact = ContactTestData.ValidTestContact;
 
             var result = validator.Validate(contact);
 
@@ -57,16 +56,6 @@
         public void TelephoneMissing_ReturnsFailure(string telephone)
         {
             validator.ShouldHaveValidationErrorFor(x => x.Telephone, telephone);
-        }
-
-        private Contact GetValidContact()
-        {
-            return new Contact
-            {
-                ContactName = "Mike Merry",
-                Email = "mike@merry.com",
-                Telephone = "01234 567890"
-            };
         }
     }
 }
