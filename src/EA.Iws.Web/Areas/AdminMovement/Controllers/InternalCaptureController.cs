@@ -66,7 +66,7 @@
                     model.Recovery.RecoveryDate.AsDateTime().Value));
             }
 
-            return RedirectToAction("Index", "Home", new { area = "AdminNotificationMovements", id = model.NotificationId });
+            return RedirectToAction("Index", "Home", new { area = "AdminExportNotificationMovements", id = model.NotificationId });
         }
     }
 }

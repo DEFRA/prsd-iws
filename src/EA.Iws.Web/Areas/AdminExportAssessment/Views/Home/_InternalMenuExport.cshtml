@@ -30,12 +30,12 @@
                     Shipments
                 </h3>
                 <ul>
-                    <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminNotificationMovements", Model.Id }, null)</li>
+                    <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminExportNotificationMovements", Model.Id }, null)</li>
                     @if (Model.Status == NotificationStatus.Consented)
                     {
-                        <li>@Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "AdminNotificationMovements", Model.Id }, null)</li>
+                        <li>@Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements", Model.Id }, null)</li>
                     }
-                    <li>@Html.ActionLink("Cancel shipments", "Index", "Cancel", new { area = "AdminNotificationMovements", Model.Id }, null)</li>
+                    <li>@Html.ActionLink("Cancel shipments", "Index", "Cancel", new { area = "AdminExportNotificationMovements", Model.Id }, null)</li>
                 </ul>
             </li>
         }

@@ -20,10 +20,10 @@
 @Html.Navigation().Link("FG decision", false, "Decision", "FinancialGuarantee", "AdminExportAssessment")
 
 <span>Shipments</span>
-@Html.Navigation().Link("Shipment summary", false, "Index", "Home", new  RouteValueDictionary( new { area = "AdminNotificationMovements" }))
+@Html.Navigation().Link("Shipment summary", false, "Index", "Home", new  RouteValueDictionary( new { area = "AdminExportNotificationMovements" }))
 @if (Model.Status == NotificationStatus.Consented)
 {
-    @Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { id = Model.Id, area = "AdminNotificationMovements" }))
+    @Html.Navigation().Link("Record shipment data", false, "Index", "CaptureMovement", new RouteValueDictionary(new { id = Model.Id, area = "AdminExportNotificationMovements" }))
 }
 
 <span>Finance</span>

@@ -1,0 +1,175 @@
+﻿@using EA.Iws.Core.Movement
+@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Core.Shared
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+
+@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Home.MovementSummaryViewModel
+
+@{
+    ViewBag.Title = "Shipment summary";
+
+    var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
+}
+
+@helper DisplayDate(DateTime? date, MovementStatus status)
+{
+    if (date.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    {
+        @date.Value.ToString("d MMM yyyy")
+    }
+    else if (status != MovementStatus.Cancelled)
+    {
+        @:- -
+    }
+}
+
+@helper DisplayQuantity(decimal? quantity, ShipmentQuantityUnits? unit, MovementStatus status)
+{
+    if (quantity.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    {
+        @(quantity.Value.ToString("G29") + " " + EnumHelper.GetShortName(unit.GetValueOrDefault()))
+    }
+    else if (status != MovementStatus.Cancelled)
+    {
+        @:- -
+    }
+}
+
+<div class="shipping-home">
+
+    <h1 class="heading-large">
+        Shipment summary
+    </h1>
+
+    <div class="grid-row">
+        <div class="column-half">
+            <table class="odd-table">
+                <caption class="visuallyhidden">Shipment summary</caption>
+                <tbody>
+                <tr>
+                    <td>Total intended number of shipments:</td>
+                    <td>@Model.IntendedShipments</td>
+                </tr>
+                <tr>
+                    <td>Number of shipments used:</td>
+                    <td>@Model.UsedShipments</td>
+                </tr>
+                <tr>
+                    <td>Active loads permitted:</td>
+                    <td>@Model.ActiveLoadsPermitted</td>
+                </tr>
+                <tr>
+                    <td>Current active loads:</td>
+                    <td>@Model.ActiveLoadsCurrent</td>
+                </tr>
+                <tr>
+                    <td>Total quantity received:</td>
+                    <td>@Model.QuantityReceivedTotal</td>
+                </tr>
+                <tr>
+                    <td>Total quantity remaining:</td>
+                    <td>@Model.QuantityRemainingTotal</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="column-half nav-bloc">
+            <h2 class="heading-small">Shipping options</h2>
+            <nav>
+                @if (Model.NotificationStatus == NotificationStatus.Consented)
+                {
+                    @Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
+
+                    @Html.ActionLink("Cancel a prenotification", "Index", "Cancel")
+                }
+            </nav>
+        </div>
+    </div>
+
+    <section class="ship-data">
+        <h3 class="heading-small">
+            Shipment details
+        </h3>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="grid-row form-group">
+                <div class="column-half">
+                    @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                    <button id="updateStatus" class="button" type="submit">Update</button>
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <table class="odd-table">
+                <caption class="visuallyhidden">Shipment summary</caption>
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Status</th>
+                    <th>Prenotified</th>
+                    <th>Shipment due</th>
+                    <th>Received</th>
+                    <th>Quantity</th>
+                    <th>@operationTitle</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @{
+                    for (int i = 0; i < Model.TableData.Count; i++)
+                    {
+                        var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
+                        if (Model.TableData[i].IsShipped())
+                        {
+                            statusText = statusText + " (Shipped)";
+                        }
+
+                        <tr>
+                            <td>@Model.TableData[i].Number</td>
+                            <td>@statusText</td>
+                            <td>
+                                @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
+                            </td>
+                            <td>
+                                @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
+                            </td>
+                            <td>
+                                @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
+                            </td>
+                            <td>
+                                @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
+                            </td>
+                            <td>
+                                @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div class="form-group">
+        @Html.ActionLink("Go to notification overview",
+            "Index",
+            "Home",
+            new { area = "AdminExportAssessment", id = Model.NotificationId },
+            new { @class = "button" })
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function() {
+            $("#updateStatus").hide();
+            $("#@Html.NameFor(m => m.SelectedMovementStatus)").change(function() {
+                $("#updateStatus").parents("form").submit();
+            });
+        });
+    </script>
+}

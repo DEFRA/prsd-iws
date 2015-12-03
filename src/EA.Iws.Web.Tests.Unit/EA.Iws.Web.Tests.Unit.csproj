@@ -185,7 +185,7 @@
     <Compile Include="Controllers\NotificationApplication\StateOfImportControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\TransitStateControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\WasteOperationsControllerTests.cs" />
-    <Compile Include="Controllers\AdminNotificationMovements\CaptureMovementControllerTests.cs" />
+    <Compile Include="Controllers\AdminExportNotificationMovements\CaptureMovementControllerTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
