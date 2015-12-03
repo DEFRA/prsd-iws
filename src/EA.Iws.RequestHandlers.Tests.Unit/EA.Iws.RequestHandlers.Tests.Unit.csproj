@@ -100,6 +100,7 @@
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ContactValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\DraftImportNotificationValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\ExporterValidatorTests.cs" />
     <Compile Include="Mappings\AddressMapTests.cs" />

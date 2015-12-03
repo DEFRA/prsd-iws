@@ -146,6 +146,7 @@
     <Compile Include="ImportNotification\Summary\WasteTypeSummary.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitStateHandler.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidator.cs" />
+    <Compile Include="ImportNotification\Validate\ContactValidator.cs" />
     <Compile Include="ImportNotification\Validate\DraftImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\IDraftImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\ValidateImportNotificationHandler.cs" />
