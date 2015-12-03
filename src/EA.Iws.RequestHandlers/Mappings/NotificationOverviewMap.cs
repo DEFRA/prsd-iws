@@ -51,7 +51,7 @@
                 NotificationId = source.Notification.Id,
                 NotificationType = source.Notification.NotificationType,
                 Exporter = mapper.Map<ExporterData>(source.Exporter),
-                Importer = mapper.Map<ImporterData>(source.Notification),
+                Importer = mapper.Map<ImporterData>(source.Importer),
                 Facilities = mapper.Map<IList<FacilityData>>(source.Notification).ToList(),
                 Producers = mapper.Map<IList<ProducerData>>(source.Notification).ToList()
             };
