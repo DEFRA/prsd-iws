@@ -9,6 +9,10 @@
             ImportNotificationId = importNotificationId;
         }
 
+        protected Preconsented()
+        {
+        }
+
         public Guid ImportNotificationId { get; private set; }
 
         public bool? PreconsentedFacilityExists { get; set; }
