@@ -149,6 +149,7 @@
     <Compile Include="ImportNotification\Validate\ContactValidator.cs" />
     <Compile Include="ImportNotification\Validate\DraftImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\ExporterValidator.cs" />
+    <Compile Include="ImportNotification\Validate\FacilityCollectionValidator.cs" />
     <Compile Include="ImportNotification\Validate\FacilityValidator.cs" />
     <Compile Include="ImportNotification\Validate\IDraftImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\ImporterValidator.cs" />
