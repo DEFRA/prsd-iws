@@ -35,7 +35,7 @@
         {
             var preconsented = new Preconsented(importRecoveryNotificationId);
 
-            validator.ShouldHaveValidationErrorFor(x => x.PreconsentedFacilityExists, preconsented);
+            validator.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
         }
 
         [Theory]
@@ -45,10 +45,10 @@
         {
             var preconsented = new Preconsented(importRecoveryNotificationId)
             {
-                PreconsentedFacilityExists = input
+                AllFacilitiesPreconsented = input
             };
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.PreconsentedFacilityExists, preconsented);
+            validator.ShouldNotHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
         }
 
         [Fact]
@@ -56,7 +56,7 @@
         {
             var preconsented = new Preconsented(importDisposalNotificationId);
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.PreconsentedFacilityExists, preconsented);
+            validator.ShouldNotHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
         }
 
         [Theory]
@@ -66,10 +66,10 @@
         {
             var preconsented = new Preconsented(importDisposalNotificationId)
             {
-                PreconsentedFacilityExists = input
+                AllFacilitiesPreconsented = input
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.PreconsentedFacilityExists, preconsented);
+            validator.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
         }
 
         private ImportNotification CreateImportNotification(NotificationType notificationType, Guid importNotificationId)

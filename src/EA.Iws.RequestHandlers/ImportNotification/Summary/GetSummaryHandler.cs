@@ -185,7 +185,7 @@
         {
             var preconsent = await draftRepository.GetDraftData<Draft.Preconsented>(id);
 
-            return preconsent.PreconsentedFacilityExists;
+            return preconsent.AllFacilitiesPreconsented;
         }
     }
 }

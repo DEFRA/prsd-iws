@@ -14,7 +14,7 @@
         {
             this.importNotificationRepository = importNotificationRepository;
 
-            RuleFor(x => x.PreconsentedFacilityExists).MustAsync(BeEnteredForRecoveryNotification);
+            RuleFor(x => x.AllFacilitiesPreconsented).MustAsync(BeEnteredForRecoveryNotification);
         }
 
         private async Task<bool> BeEnteredForRecoveryNotification(Preconsented instance, bool? preconsentedFacilityExists)

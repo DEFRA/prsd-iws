@@ -15,6 +15,6 @@
 
         public Guid ImportNotificationId { get; private set; }
 
-        public bool? PreconsentedFacilityExists { get; set; }
+        public bool? AllFacilitiesPreconsented { get; set; }
     }
 }

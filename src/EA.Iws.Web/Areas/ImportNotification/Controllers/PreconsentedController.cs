@@ -23,7 +23,7 @@
         {
             var preconsented = await mediator.SendAsync(new GetDraftData<Preconsented>(id));
 
-            var model = new PreconsentedViewModel(preconsented.PreconsentedFacilityExists);
+            var model = new PreconsentedViewModel(preconsented.AllFacilitiesPreconsented);
 
             return View(model);
         }
@@ -34,7 +34,7 @@
         {
             var preconsented = new Preconsented(id)
             {
-                PreconsentedFacilityExists = model.SelectedValue
+                AllFacilitiesPreconsented = model.SelectedValue
             };
 
             await mediator.SendAsync(new SetDraftData<Preconsented>(id, preconsented));
