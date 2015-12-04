@@ -154,6 +154,7 @@
     <Compile Include="ImportNotification\Validate\StateOfExportValidator.cs" />
     <Compile Include="ImportNotification\Validate\PreconsentedValidator.cs" />
     <Compile Include="ImportNotification\Validate\StateOfImportValidator.cs" />
+    <Compile Include="ImportNotification\Validate\TransitStateValidator.cs" />
     <Compile Include="ImportNotification\Validate\ValidateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidator.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodesHandler.cs" />
