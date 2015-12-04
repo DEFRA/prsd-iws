@@ -117,6 +117,7 @@
     <Compile Include="ImportNotification\Validate\TransitStateCollectionTests.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\StateOfExportValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\WasteTypeValidatorTests.cs" />
     <Compile Include="Mappings\AddressMapTests.cs" />
     <Compile Include="Helpers\BusinessInfoDataEqualityComparer.cs" />
     <Compile Include="Mappings\BusinessInfoMapTests.cs" />

@@ -162,6 +162,7 @@
     <Compile Include="ImportNotification\Validate\TransitStateCollectionValidator.cs" />
     <Compile Include="ImportNotification\Validate\ValidateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidator.cs" />
+    <Compile Include="ImportNotification\Validate\WasteTypeValidator.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodesHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
