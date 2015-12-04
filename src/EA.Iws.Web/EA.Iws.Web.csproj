@@ -767,6 +767,8 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\Index.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\Create.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_Prenotify.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -909,11 +911,22 @@
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesStatusEnum.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\AdminImportNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\SearchViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\SearchViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.Designer.cs">
+      <DependentUpon>CreateResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Capture\IndexResources.Designer.cs">
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -1724,6 +1737,7 @@
     <Compile Include="Infrastructure\Validation\IsValidNumberAttribute.cs" />
     <Compile Include="Infrastructure\NotificationReadOnlyFilter.cs" />
     <Compile Include="Infrastructure\StringExtensions.cs" />
+    <Compile Include="Infrastructure\Validation\RequiredDateInputAttribute.cs" />
     <Compile Include="Mappings\AddAddressBookEntryMap.cs" />
     <Compile Include="Mappings\ChemicalCompositionMap.cs" />
     <Compile Include="Mappings\ImportNotification\ShipmentMap.cs" />
@@ -2097,9 +2111,17 @@
     <Folder Include="Areas\Reports\Models\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\SearchViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SearchViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

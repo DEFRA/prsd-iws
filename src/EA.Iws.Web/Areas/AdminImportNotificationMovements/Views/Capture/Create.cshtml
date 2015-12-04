@@ -1,0 +1,18 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CreateResources
+@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.CreateViewModel
+
+@{
+    ViewBag.Title = Resource.PageTitle;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.MainHeading</h1>
+
+        <p>@string.Format(Resource.CurrentShipmentParagraph, Model.Number)</p>
+
+        @Html.Partial("_Prenotify")
+
+        @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
+    </div>
+</div>
