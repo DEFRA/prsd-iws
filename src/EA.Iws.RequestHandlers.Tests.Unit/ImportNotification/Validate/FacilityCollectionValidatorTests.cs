@@ -59,5 +59,13 @@
 
             validator.ShouldNotHaveValidationErrorFor(x => x.Facilities, facilityCollection);
         }
+
+        [Fact]
+        public void HasNoFacilities_HasValidationError()
+        {
+            var facilityCollection = new FacilityCollection();
+
+            validator.ShouldHaveValidationErrorFor(x => x.Facilities, facilityCollection);
+        }
     }
 }

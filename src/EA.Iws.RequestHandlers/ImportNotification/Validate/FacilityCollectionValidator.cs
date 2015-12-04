@@ -11,6 +11,7 @@
         {
             RuleFor(x => x.Facilities)
                 .SetCollectionValidator(facilityValidator)
+                .NotEmpty()
                 .Must(HaveSiteOfTreatment);
         }
 
