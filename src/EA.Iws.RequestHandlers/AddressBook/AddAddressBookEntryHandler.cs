@@ -6,6 +6,7 @@
     using DataAccess;
     using Domain;
     using Domain.AddressBook;
+    using Domain.NotificationApplication;
     using Mappings;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;

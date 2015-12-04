@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using Helpers;
     using Prsd.Core;

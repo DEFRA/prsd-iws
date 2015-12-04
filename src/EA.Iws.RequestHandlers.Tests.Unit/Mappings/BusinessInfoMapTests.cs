@@ -2,6 +2,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
 {
     using System.Collections.Generic;
     using Domain;
+    using Domain.NotificationApplication;
     using RequestHandlers.Mappings;
     using TestHelpers.DomainFakes;
     using Xunit;

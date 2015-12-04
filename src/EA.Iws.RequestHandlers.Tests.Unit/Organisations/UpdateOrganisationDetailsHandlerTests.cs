@@ -7,13 +7,14 @@
     using Core.Shared;
     using DataAccess;
     using Domain;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using RequestHandlers.Organisations;
     using Requests.Organisations;
     using TestHelpers.Helpers;
     using Xunit;
-    using BusinessType = Domain.BusinessType;
+    using BusinessType = Domain.NotificationApplication.BusinessType;
 
     public class UpdateOrganisationDetailsHandlerTests
     {

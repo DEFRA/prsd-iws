@@ -4,6 +4,7 @@
     using Core.Shared;
     using Domain;
     using Domain.AddressBook;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
     internal class AddressBookRecordMap : IMap<AddressBookRecord, AddressBookRecordData>

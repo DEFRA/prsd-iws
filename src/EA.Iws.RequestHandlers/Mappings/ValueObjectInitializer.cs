@@ -2,6 +2,7 @@
 {
     using Core.Shared;
     using Domain;
+    using Domain.NotificationApplication;
     using BusinessType = Core.Shared.BusinessType;
 
     internal class ValueObjectInitializer
@@ -14,7 +15,7 @@
                     business.AdditionalRegistrationNumber, business.OtherDescription);
             }
 
-            return Business.CreateBusiness(business.Name, Domain.BusinessType.FromBusinessType(business.BusinessType), 
+            return Business.CreateBusiness(business.Name, Domain.NotificationApplication.BusinessType.FromBusinessType(business.BusinessType), 
                 business.RegistrationNumber, business.AdditionalRegistrationNumber);
         }
 

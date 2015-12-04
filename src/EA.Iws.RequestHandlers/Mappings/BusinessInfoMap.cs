@@ -3,6 +3,7 @@
     using System;
     using Core.Shared;
     using Domain;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using BusinessType = Core.Shared.BusinessType;
 
@@ -22,22 +23,22 @@
 
         private BusinessType GetBusinessType(string type)
         {
-            if (type.Equals(Domain.BusinessType.LimitedCompany.DisplayName, StringComparison.OrdinalIgnoreCase))
+            if (type.Equals(Domain.NotificationApplication.BusinessType.LimitedCompany.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.LimitedCompany;
             }
 
-            if (type.Equals(Domain.BusinessType.SoleTrader.DisplayName, StringComparison.OrdinalIgnoreCase))
+            if (type.Equals(Domain.NotificationApplication.BusinessType.SoleTrader.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.SoleTrader;
             }
 
-            if (type.Equals(Domain.BusinessType.Partnership.DisplayName, StringComparison.OrdinalIgnoreCase))
+            if (type.Equals(Domain.NotificationApplication.BusinessType.Partnership.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.Partnership;
             }
 
-            if (type.Equals(Domain.BusinessType.Other.DisplayName, StringComparison.OrdinalIgnoreCase))
+            if (type.Equals(Domain.NotificationApplication.BusinessType.Other.DisplayName, StringComparison.OrdinalIgnoreCase))
             {
                 return BusinessType.Other;
             }

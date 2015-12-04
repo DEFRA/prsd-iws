@@ -3,6 +3,7 @@
     using Core.Importer;
     using Core.Shared;
     using Domain;
+    using Domain.NotificationApplication;
     using Domain.NotificationApplication.Importer;
     using Prsd.Core.Mapper;
 

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.AddressBook
 {
     using System.Collections.Generic;
+    using NotificationApplication;
 
     public class AddressBookRecordComparer : IEqualityComparer<AddressBookRecord>
     {

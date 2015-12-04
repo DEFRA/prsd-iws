@@ -12,7 +12,7 @@
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
     using Xunit;
-    using BusinessType = Domain.BusinessType;
+    using BusinessType = Domain.NotificationApplication.BusinessType;
 
     [Trait("Category", "Integration")]
     public class RelationshipDeletionIntegration

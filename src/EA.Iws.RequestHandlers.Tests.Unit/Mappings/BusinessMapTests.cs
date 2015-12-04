@@ -2,6 +2,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
 {
     using System.Collections.Generic;
     using Domain;
+    using Domain.NotificationApplication;
     using RequestHandlers.Mappings;
     using TestHelpers.DomainFakes;
     using Xunit;
@@ -38,7 +39,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
 
         [Theory]
         [MemberData("GetDataForBusinessMapTests")]
-        public void MapEntityType(Domain.BusinessType entityType)
+        public void MapEntityType(BusinessType entityType)
         {
             testBusiness.Type = entityType;
             var result = businessMap.Map(testBusiness);
@@ -71,10 +72,10 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
         {
             get
             {
-                yield return new object[] { Domain.BusinessType.LimitedCompany };
-                yield return new object[] { Domain.BusinessType.SoleTrader };
-                yield return new object[] { Domain.BusinessType.Partnership };
-                yield return new object[] { Domain.BusinessType.Other };
+                yield return new object[] { BusinessType.LimitedCompany };
+                yield return new object[] { BusinessType.SoleTrader };
+                yield return new object[] { BusinessType.Partnership };
+                yield return new object[] { BusinessType.Other };
             }
         }
     }

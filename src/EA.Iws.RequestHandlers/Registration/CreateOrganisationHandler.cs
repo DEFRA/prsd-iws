@@ -6,6 +6,7 @@
     using DataAccess;
     using DataAccess.Identity;
     using Domain;
+    using Domain.NotificationApplication;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;

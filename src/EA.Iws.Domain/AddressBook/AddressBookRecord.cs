@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.AddressBook
 {
+    using NotificationApplication;
     using Prsd.Core.Domain;
 
     public class AddressBookRecord : Entity

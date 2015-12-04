@@ -2,6 +2,7 @@
 {
     using Domain;
     using Domain.AddressBook;
+    using Domain.NotificationApplication;
     using Helpers;
 
     public class TestableAddressBookRecord : AddressBookRecord

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.TestHelpers.Helpers
 {
     using Domain;
+    using Domain.NotificationApplication;
 
     public class ComplexTypeFactory
     {

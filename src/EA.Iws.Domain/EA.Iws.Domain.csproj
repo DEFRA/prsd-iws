@@ -49,18 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
+    <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />
-    <Compile Include="ContactComparer.cs" />
-    <Compile Include="BusinessComparer.cs" />
-    <Compile Include="AddressComparer.cs" />
+    <Compile Include="NotificationApplication\ContactComparer.cs" />
+    <Compile Include="NotificationApplication\BusinessComparer.cs" />
+    <Compile Include="NotificationApplication\AddressComparer.cs" />
     <Compile Include="BankHoliday.cs" />
-    <Compile Include="Business.cs" />
-    <Compile Include="BusinessType.cs" />
+    <Compile Include="NotificationApplication\Business.cs" />
+    <Compile Include="NotificationApplication\BusinessType.cs" />
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="CompetentAuthorityBacsDetails.cs" />
-    <Compile Include="Contact.cs" />
+    <Compile Include="NotificationApplication\Contact.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="DateRange.cs" />
     <Compile Include="DisposalCost.cs" />
@@ -172,7 +172,7 @@
     <Compile Include="NotificationConsent\ConsentNotification.cs" />
     <Compile Include="NotificationConsent\INotificationConsentRepository.cs" />
     <Compile Include="Percentage.cs" />
-    <Compile Include="ProducerBusiness.cs" />
+    <Compile Include="NotificationApplication\ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
     <Compile Include="Reports\ExportStats.cs" />

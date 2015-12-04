@@ -3,6 +3,7 @@
     using System;
     using Core.Shared;
     using Domain;
+    using Domain.NotificationApplication;
     using Helpers;
     using Prsd.Core.Mapper;
     using BusinessType = Core.Shared.BusinessType;

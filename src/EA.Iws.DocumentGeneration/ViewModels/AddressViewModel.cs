@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Text;
     using Domain;
+    using Domain.NotificationApplication;
 
     internal class AddressViewModel
     {

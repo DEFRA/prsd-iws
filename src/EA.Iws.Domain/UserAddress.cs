@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain
 {
+    using NotificationApplication;
     using Prsd.Core.Domain;
 
     public class UserAddress : Entity

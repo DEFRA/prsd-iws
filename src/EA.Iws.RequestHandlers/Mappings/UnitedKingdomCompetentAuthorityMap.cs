@@ -2,6 +2,7 @@
 {
     using Core.Shared;
     using Domain;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
     internal class UnitedKingdomCompetentAuthorityMap : IMap<UnitedKingdomCompetentAuthority, UnitedKingdomCompetentAuthorityData>

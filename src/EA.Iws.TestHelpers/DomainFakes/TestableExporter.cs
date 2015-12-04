@@ -2,6 +2,7 @@
 {
     using System;
     using Domain;
+    using Domain.NotificationApplication;
     using Domain.NotificationApplication.Exporter;
     using Helpers;
 

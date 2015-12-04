@@ -2,6 +2,7 @@
 {
     using System.Data.Entity.ModelConfiguration;
     using Domain;
+    using Domain.NotificationApplication;
 
     internal class BusinessTypeMapping : ComplexTypeConfiguration<BusinessType>
     {

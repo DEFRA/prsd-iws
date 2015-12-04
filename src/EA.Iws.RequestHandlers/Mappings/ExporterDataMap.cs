@@ -4,6 +4,7 @@
     using Core.Exporters;
     using Core.Shared;
     using Domain;
+    using Domain.NotificationApplication;
     using Domain.NotificationApplication.Exporter;
     using Prsd.Core.Mapper;
 

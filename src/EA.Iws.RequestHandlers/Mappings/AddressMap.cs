@@ -5,6 +5,7 @@
     using Core.Shared;
     using DataAccess;
     using Domain;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
     public class AddressMap : IMap<Address, AddressData>

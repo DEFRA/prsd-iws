@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Core.Shared;
     using Domain;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mapper;

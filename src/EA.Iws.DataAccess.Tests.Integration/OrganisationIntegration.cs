@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Domain;
     using Xunit;
