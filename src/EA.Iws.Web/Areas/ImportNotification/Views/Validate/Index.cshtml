@@ -1,0 +1,15 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Validate.ValidateViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="heading-large">Your notification looks incomplete</h1>
+
+<p>Please address the following issues:</p>
+
+<ul class="list-bullet">
+    @foreach (var item in Model.Errors)
+    {
+        <li>@item</li>
+    }
+</ul>

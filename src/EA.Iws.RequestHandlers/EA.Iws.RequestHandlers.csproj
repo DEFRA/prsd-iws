@@ -151,12 +151,11 @@
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitStateHandler.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidator.cs" />
     <Compile Include="ImportNotification\Validate\ContactValidator.cs" />
-    <Compile Include="ImportNotification\Validate\DraftImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\ExporterValidator.cs" />
     <Compile Include="ImportNotification\Validate\FacilityCollectionValidator.cs" />
     <Compile Include="ImportNotification\Validate\FacilityValidator.cs" />
-    <Compile Include="ImportNotification\Validate\IDraftImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\ImporterValidator.cs" />
+    <Compile Include="ImportNotification\Validate\ImportNotificationValidator.cs" />
     <Compile Include="ImportNotification\Validate\ShipmentValidator.cs" />
     <Compile Include="ImportNotification\Validate\StateOfExportValidator.cs" />
     <Compile Include="ImportNotification\Validate\PreconsentedValidator.cs" />

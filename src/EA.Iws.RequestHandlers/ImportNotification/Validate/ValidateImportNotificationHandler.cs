@@ -2,17 +2,19 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ImportNotification.Draft;
     using DataAccess.Draft;
+    using FluentValidation;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification.Validate;
 
     internal class ValidateImportNotificationHandler : IRequestHandler<ValidateImportNotification, string[]>
     {
-        private readonly IDraftImportNotificationValidator validator;
+        private readonly IValidator<ImportNotification> validator;
         private readonly IDraftImportNotificationRepository repository;
 
         public ValidateImportNotificationHandler(IDraftImportNotificationRepository repository,
-            IDraftImportNotificationValidator validator)
+            IValidator<ImportNotification> validator)
         {
             this.repository = repository;
             this.validator = validator;
@@ -22,7 +24,9 @@
         {
             var notificationDraft = await repository.Get(message.DraftImportNotificationId);
 
-            return validator.Validate(notificationDraft).ToArray();
+            var result = await validator.ValidateAsync(notificationDraft);
+
+            return result.Errors.Select(e => e.ErrorMessage).ToArray();
         }
     }
 }

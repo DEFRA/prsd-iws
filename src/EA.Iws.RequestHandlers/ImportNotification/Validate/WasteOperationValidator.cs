@@ -15,6 +15,7 @@
 
         private static bool BeOfSameType(int[] operationCodes)
         {
+            //TODO: fix nulls
             var types = operationCodes.Select(x => Enumeration.FromValue<OperationCode>(x).NotificationType).ToArray();
 
             return types.All(p => p == types.First());

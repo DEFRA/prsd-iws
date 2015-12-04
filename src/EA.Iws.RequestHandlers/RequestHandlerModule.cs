@@ -15,6 +15,7 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
+    using FluentValidation;
     using ImportNotification;
     using ImportNotification.Summary;
     using Notification;
@@ -50,6 +51,10 @@
 
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AsClosedTypesOf(typeof(IEventHandler<>))
+                .AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .Where(t => t.IsAssignableTo<IValidator>())
                 .AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();

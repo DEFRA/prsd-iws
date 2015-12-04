@@ -1,5 +1,8 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
+    using System.ComponentModel;
+
+    [DisplayName("Silly exporter")]
     public class Exporter
     {
         public Address Address { get; set; }
