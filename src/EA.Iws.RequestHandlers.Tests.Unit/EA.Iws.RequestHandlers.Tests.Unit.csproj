@@ -98,6 +98,7 @@
     <Compile Include="Admin\NotificationAssessment\SetDecisionHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
+    <Compile Include="ImportNotification\Draft\TransitStateCollectionTests.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
     <Compile Include="ImportNotification\Validate\AddressTestData.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="ImportNotification\Validate\ShipmentValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\StateOfImportValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\TransitStateValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\TransitStateCollectionTests.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\StateOfExportValidatorTests.cs" />
     <Compile Include="Mappings\AddressMapTests.cs" />

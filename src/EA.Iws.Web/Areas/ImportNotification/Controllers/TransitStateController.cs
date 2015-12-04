@@ -29,7 +29,7 @@
             
             var model = new TransitStateCollectionViewModel
             {
-                TransitStates = (await mediator.SendAsync(new GetTransitStateDataForTransitStates(transitStateCollection.TransitStates))).ToList(),
+                TransitStates = (await mediator.SendAsync(new GetTransitStateDataForTransitStates(transitStateCollection.TransitStates.ToList()))).ToList(),
                 HasNoTransitStates = transitStateCollection.HasNoTransitStates
             };
 
@@ -57,9 +57,10 @@
         [HttpGet]
         public async Task<ActionResult> Add(Guid id)
         {
-            var model = new TransitStateViewModel();
-
-            model.Countries = await mediator.SendAsync(new GetCountries());
+            var model = new TransitStateViewModel
+            {
+                Countries = await mediator.SendAsync(new GetCountries())
+            };
 
             return View(model);
         }
@@ -75,9 +76,7 @@
             
             var transitStateCollection = await mediator.SendAsync(new GetDraftData<TransitStateCollection>(id));
             
-            model.OrdinalPosition = (transitStateCollection.TransitStates.Count > 0) ? transitStateCollection.TransitStates.Max(ts => ts.OrdinalPosition) + 1 : 1;
-
-            transitStateCollection.TransitStates.Add(model.AsTransitState());
+            transitStateCollection.Add(model.AsTransitState());
 
             await mediator.SendAsync(new SetDraftData<TransitStateCollection>(id, transitStateCollection));
 
@@ -105,7 +104,7 @@
         {
             var transitStateCollection = await mediator.SendAsync(new GetDraftData<TransitStateCollection>(id));
 
-            transitStateCollection.TransitStates.RemoveAll(ts => ts.Id == deleteId);
+            transitStateCollection.Delete(deleteId);
 
             await mediator.SendAsync(new SetDraftData<TransitStateCollection>(id, transitStateCollection));
 
