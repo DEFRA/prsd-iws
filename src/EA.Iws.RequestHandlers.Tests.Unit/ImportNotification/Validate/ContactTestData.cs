@@ -4,11 +4,14 @@
 
     internal class ContactTestData
     {
-        public static Contact ValidTestContact = new Contact
+        public static Contact GetValidTestContact()
         {
-            ContactName = "Mike Merry",
-            Email = "mike@merry.com",
-            Telephone = "01234 567890"
-        };
+            return new Contact
+            {
+                ContactName = "Mike Merry",
+                Email = "mike@merry.com",
+                Telephone = "01234 567890"
+            };
+        }
     }
 }

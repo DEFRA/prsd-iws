@@ -53,8 +53,8 @@
         {
             return new Producer
             {
-                Address = AddressTestData.ValidTestAddress,
-                Contact = ContactTestData.ValidTestContact,
+                Address = AddressTestData.GetValidTestAddress(),
+                Contact = ContactTestData.GetValidTestContact(),
                 BusinessName = "Mike and Eliot Bros.",
                 AreMultiple = false
             };

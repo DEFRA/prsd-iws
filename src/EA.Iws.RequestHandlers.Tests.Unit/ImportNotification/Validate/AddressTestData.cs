@@ -5,13 +5,16 @@
 
     internal class AddressTestData
     {
-        public static Address ValidTestAddress = new Address
+        public static Address GetValidTestAddress()
         {
-            AddressLine1 = "Eliot House",
-            AddressLine2 = "Eliot Lane",
-            CountryId = new Guid("0A323947-78A0-40FE-BDDD-9A58803559BC"),
-            PostalCode = "EL10TJ",
-            TownOrCity = "Eliotsville"
-        };
+            return new Address
+            {
+                AddressLine1 = "Eliot House",
+                AddressLine2 = "Eliot Lane",
+                CountryId = new Guid("0A323947-78A0-40FE-BDDD-9A58803559BC"),
+                PostalCode = "EL10TJ",
+                TownOrCity = "Eliotsville"
+            };
+        }
     }
 }

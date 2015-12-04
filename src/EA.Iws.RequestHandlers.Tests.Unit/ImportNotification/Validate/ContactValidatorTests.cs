@@ -16,7 +16,7 @@
         [Fact]
         public void ValidContact_ReturnsSuccess()
         {
-            var contact = ContactTestData.ValidTestContact;
+            var contact = ContactTestData.GetValidTestContact();
 
             var result = validator.Validate(contact);
 

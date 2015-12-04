@@ -6,7 +6,6 @@
     using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
-    using Address = Core.ImportNotification.Draft.Address;
 
     public class AddressValidatorTests
     {
@@ -24,7 +23,7 @@
         [Fact]
         public void ValidAddress_ReturnsSuccessResult()
         {
-            var address = AddressTestData.ValidTestAddress;
+            var address = AddressTestData.GetValidTestAddress();
 
             var result = validator.Validate(address);
 
@@ -64,7 +63,7 @@
         [InlineData(" ")]
         public void PostalCodeMissing_CountryUK_ReturnsFailureResult(string postcode)
         {
-            var invalidAddress = AddressTestData.ValidTestAddress;
+            var invalidAddress = AddressTestData.GetValidTestAddress();
             invalidAddress.CountryId = unitedKingdomCountryId;
             invalidAddress.PostalCode = postcode;
 
