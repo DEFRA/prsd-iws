@@ -87,6 +87,7 @@
     <Compile Include="ImportMovement\Capture\CreateImportMovement.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />
+    <Compile Include="ImportMovement\Edit\SetImportMovementDates.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />

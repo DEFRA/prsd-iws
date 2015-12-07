@@ -2,8 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Movement;
 
-    internal class ImportMovementFactory : IImportMovementFactory
+    public class ImportMovementFactory : IImportMovementFactory
     {
         private readonly IImportMovementNumberValidator numberValidator;
 
@@ -12,9 +13,14 @@
             this.numberValidator = numberValidator;
         }
 
-        public Task<ImportMovement> Create(Guid notificationId, int number, DateTimeOffset actualShipmentDate, DateTimeOffset? prenotificationDate)
+        public async Task<ImportMovement> Create(Guid notificationId, int number, DateTimeOffset actualShipmentDate)
         {
-            throw new NotImplementedException();
+            if (!await numberValidator.Validate(notificationId, number))
+            {
+                throw new MovementNumberException("Cannot create an import movement with a conflicting movement number (" + number + ") for import notification: " + notificationId);
+            }
+
+            return new ImportMovement(notificationId, number, actualShipmentDate);
         }
     }
 }

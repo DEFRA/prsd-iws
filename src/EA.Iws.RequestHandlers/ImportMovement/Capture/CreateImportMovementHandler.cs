@@ -9,19 +9,31 @@
 
     internal class CreateImportMovementHandler : IRequestHandler<CreateImportMovement, Guid>
     {
+        private readonly IImportMovementFactory importMovementFactory;
         private readonly IImportMovementRepository movementRepository;
         private readonly IwsContext context;
 
-        public CreateImportMovementHandler(IImportMovementRepository movementRepository, 
+        public CreateImportMovementHandler(IImportMovementFactory importMovementFactory,
+            IImportMovementRepository movementRepository, 
             IwsContext context)
         {
+            this.importMovementFactory = importMovementFactory;
             this.movementRepository = movementRepository;
             this.context = context;
         }
 
-        public Task<Guid> HandleAsync(CreateImportMovement message)
+        public async Task<Guid> HandleAsync(CreateImportMovement message)
         {
-            throw new NotImplementedException();
+            var movement =
+                await importMovementFactory.Create(message.NotificationId, 
+                message.Number, 
+                new DateTimeOffset(message.ActualShipmentDate, TimeSpan.Zero));
+
+            movementRepository.Add(movement);
+
+            await context.SaveChangesAsync();
+
+            return movement.Id;
         }
     }
 }

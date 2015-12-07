@@ -134,6 +134,7 @@
     <Compile Include="ImportMovement\Capture\CreateImportMovementHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExistsHandler.cs" />
+    <Compile Include="ImportMovement\Edit\SetImportMovementDatesHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />

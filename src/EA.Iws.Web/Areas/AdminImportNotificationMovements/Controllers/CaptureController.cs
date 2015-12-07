@@ -70,12 +70,12 @@
                 return View(model);
             }
 
-            await mediator.SendAsync(new CreateImportMovement(id,
+            var movementId = await mediator.SendAsync(new CreateImportMovement(id,
                 model.Number,
                 model.ActualShipmentDate.AsDateTime().Value,
                 model.PrenotificationDate.AsDateTime()));
 
-            throw new NotImplementedException();
+            return RedirectToAction("Index", "Dates", new { area = "AdminImportMovement", id = movementId });
         }
     }
 }

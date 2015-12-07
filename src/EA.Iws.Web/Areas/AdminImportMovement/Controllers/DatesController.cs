@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
+    using Requests.ImportMovement.Edit;
     using ViewModels.Dates;
 
     [Authorize(Roles = "internal")]
@@ -23,6 +24,22 @@
             var data = await mediator.SendAsync(new GetImportMovementDates(id));
 
             return View(new DatesViewModel(data));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(Guid id, DatesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await mediator.SendAsync(new SetImportMovementDates(id,
+                model.ActualShipmentDate.AsDateTime().Value,
+                model.PrenotificationDate.AsDateTime()));
+
+            return RedirectToAction("Index");
         } 
     }
 }

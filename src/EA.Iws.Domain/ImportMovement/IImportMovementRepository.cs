@@ -11,5 +11,7 @@
         Task<ImportMovement> GetByNumberOrDefault(Guid importNotificationId, int number);
 
         Task<IEnumerable<ImportMovement>> GetForNotification(Guid importNotificationId);
+
+        void Add(ImportMovement movement);
     }
 }

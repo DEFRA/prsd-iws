@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActualDate" xml:space="preserve">
-    <value>Jeff</value>
+  <data name="ActualShipmentDate" xml:space="preserve">
+    <value>Actual date of shipment</value>
   </data>
-  <data name="PreNotificationDate" xml:space="preserve">
-    <value>Jimmy</value>
+  <data name="ActualShipmentDateRequired" xml:space="preserve">
+    <value>Please enter the actual date of shipment</value>
+  </data>
+  <data name="PrenotificationDate" xml:space="preserve">
+    <value>Prenotification date</value>
   </data>
 </root>

@@ -22,6 +22,7 @@
             return new ImportMovementDates
             {
                 ActualDate = movement.ActualShipmentDate,
+                Number = movement.Number,
                 PreNotificationDate = movement.PrenotificationDate
             };
         }

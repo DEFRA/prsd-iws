@@ -31,5 +31,10 @@
         {
             return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).ToArrayAsync();
         }
+
+        public void Add(ImportMovement movement)
+        {
+            context.ImportMovements.Add(movement);
+        }
     }
 }

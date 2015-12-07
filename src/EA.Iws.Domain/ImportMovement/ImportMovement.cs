@@ -23,5 +23,15 @@
         private ImportMovement()
         {
         }
+
+        public void SetActualShipmentDate(DateTimeOffset actualShipmentDate)
+        {
+            ActualShipmentDate = actualShipmentDate;
+        }
+
+        public void SetPrenotificationDate(DateTimeOffset prenotificationDate)
+        {
+            PrenotificationDate = prenotificationDate;
+        }
     }
 }

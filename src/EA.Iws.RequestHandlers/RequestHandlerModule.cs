@@ -10,6 +10,7 @@
     using Decorators;
     using Documents;
     using Domain;
+    using Domain.ImportMovement;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
@@ -87,6 +88,8 @@
             builder.RegisterType<NotificationAssessmentDatesSummaryRepository>().As<INotificationAssessmentDatesSummaryRepository>();
             builder.RegisterType<NotificationAssessmentDecisionRepository>().As<INotificationAssessmentDecisionRepository>();
             builder.RegisterType<MovementDateValidator>().As<IMovementDateValidator>();
+            builder.RegisterType<ImportMovementFactory>().As<IImportMovementFactory>();
+            builder.RegisterType<ImportMovementNumberValidator>().As<IImportMovementNumberValidator>();
 
             if (HasAsposeLicense())
             {

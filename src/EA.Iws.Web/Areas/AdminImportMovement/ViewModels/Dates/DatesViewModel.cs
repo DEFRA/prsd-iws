@@ -3,11 +3,13 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Core.ImportMovement;
+    using Infrastructure.Validation;
     using Web.ViewModels.Shared;
 
     public class DatesViewModel
     {
-        [Display(Name = "ActualDate", ResourceType = typeof(DatesViewModelResources))]
+        [Display(Name = "ActualShipmentDate", ResourceType = typeof(DatesViewModelResources))]
+        [RequiredDateInput(ErrorMessageResourceName = "ActualShipmentDateRequired", ErrorMessageResourceType = typeof(DatesViewModelResources))]
         public OptionalDateInputViewModel ActualShipmentDate { get; set; }
 
         [Display(Name = "PrenotificationDate", ResourceType = typeof(DatesViewModelResources))]
@@ -29,6 +31,8 @@
                 ? dates.PreNotificationDate.Value.DateTime : (DateTime?)null;
 
             PrenotificationDate = new OptionalDateInputViewModel(prenotificationDate, true);
+
+            Number = dates.Number;
         }
     }
 }

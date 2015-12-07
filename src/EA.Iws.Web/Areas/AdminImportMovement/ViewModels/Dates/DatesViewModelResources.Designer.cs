@@ -61,20 +61,29 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Dates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Jeff.
+        ///   Looks up a localized string similar to Actual date of shipment.
         /// </summary>
-        public static string ActualDate {
+        public static string ActualShipmentDate {
             get {
-                return ResourceManager.GetString("ActualDate", resourceCulture);
+                return ResourceManager.GetString("ActualShipmentDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Jimmy.
+        ///   Looks up a localized string similar to Please enter the actual date of shipment.
         /// </summary>
-        public static string PreNotificationDate {
+        public static string ActualShipmentDateRequired {
             get {
-                return ResourceManager.GetString("PreNotificationDate", resourceCulture);
+                return ResourceManager.GetString("ActualShipmentDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prenotification date.
+        /// </summary>
+        public static string PrenotificationDate {
+            get {
+                return ResourceManager.GetString("PrenotificationDate", resourceCulture);
             }
         }
     }

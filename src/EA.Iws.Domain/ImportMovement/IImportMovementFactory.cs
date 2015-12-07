@@ -5,6 +5,6 @@
 
     public interface IImportMovementFactory
     {
-        Task<ImportMovement> Create(Guid notificationId, int number, DateTimeOffset actualShipmentDate, DateTimeOffset? prenotificationDate);
+        Task<ImportMovement> Create(Guid notificationId, int number, DateTimeOffset actualShipmentDate);
     }
 }

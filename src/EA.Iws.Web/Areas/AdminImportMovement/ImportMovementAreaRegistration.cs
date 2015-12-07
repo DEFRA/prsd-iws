@@ -4,21 +4,21 @@
     using Controllers;
     using Infrastructure;
 
-    public class ImportMovementAreaRegistration : AreaRegistration
+    public class AdminImportMovementAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "ImportMovement";
+                return "AdminImportMovement";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapLowercaseDashedRoute(
-                name: "ImportMovement_default",
-                url: "Import-Movement/{Id}/{controller}/{action}/{entityId}",
+                name: "AdminImportMovement_default",
+                url: "Admin-Import-Movement/{Id}/{controller}/{action}/{entityId}",
                 defaults: new { action = "Index", controller = "Home", entityId = UrlParameter.Optional },
                 namespaces: new[] { typeof(DatesController).Namespace });
         }
