@@ -10,6 +10,7 @@
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Address = Core.ImportNotification.Summary.Address;
+    using Contact = Core.ImportNotification.Summary.Contact;
     using Draft = Core.ImportNotification.Draft;
 
     internal class GetSummaryHandler : IRequestHandler<GetSummary, InProgressImportNotificationSummary>
