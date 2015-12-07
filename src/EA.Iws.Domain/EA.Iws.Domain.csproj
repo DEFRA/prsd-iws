@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailAddress.cs" />
     <Compile Include="ImportNotification\Address.cs" />
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
