@@ -68,6 +68,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatus.cs" />
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
+    <Compile Include="ImportMovement\ImportMovementDates.cs" />
     <Compile Include="ImportNotification\Draft\Address.cs" />
     <Compile Include="ImportNotification\Draft\Contact.cs" />
     <Compile Include="ImportNotification\Draft\FacilityCollection.cs" />

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.ImportMovement
+﻿namespace EA.Iws.RequestHandlers.ImportMovement.Capture
 {
     using System;
     using System.Threading.Tasks;

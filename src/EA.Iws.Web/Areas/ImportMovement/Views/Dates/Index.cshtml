@@ -1,0 +1,18 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportMovement.Views.Dates.IndexResources
+@model EA.Iws.Web.Areas.ImportMovement.ViewModels.Dates.DatesViewModel
+
+@{
+    ViewBag.Title = Resource.PageTitle;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.MainHeading</h1>
+
+        <p>@string.Format(Resource.CurrentShipmentParagraph, Model.Number)</p>
+
+        @Html.Partial("_Prenotify")
+
+        @Html.ActionLink(Resource.ReturnToIndex, "Index", "Home")
+    </div>
+</div>

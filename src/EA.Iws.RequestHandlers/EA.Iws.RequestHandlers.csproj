@@ -131,7 +131,8 @@
     <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />
     <Compile Include="Feedback\FeedbackInformation.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
-    <Compile Include="ImportMovement\GetImportMovementIdIfExistsHandler.cs" />
+    <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
+    <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExistsHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
