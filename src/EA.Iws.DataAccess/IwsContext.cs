@@ -96,7 +96,7 @@
 
         public virtual DbSet<MovementRejection> MovementRejections { get; set; }
 
-        public virtual DbSet<Importer> Importers { get; set; }
+        public virtual DbSet<Domain.NotificationApplication.Importer.Importer> Importers { get; set; }
 
         public virtual DbSet<ImportMovement> ImportMovements { get; set; }
 
