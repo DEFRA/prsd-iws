@@ -178,6 +178,7 @@
     <Compile Include="NotificationApplication\ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
+    <Compile Include="PhoneNumber.cs" />
     <Compile Include="Reports\ExportStats.cs" />
     <Compile Include="Reports\IExportStatsRepository.cs" />
     <Compile Include="Security\IMovementAuthorization.cs" />
