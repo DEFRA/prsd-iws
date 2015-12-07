@@ -77,9 +77,12 @@
     <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="IInternalUserRepository.cs" />
     <Compile Include="IMovementDocumentGenerator.cs" />
+    <Compile Include="ImportMovement\IImportMovementFactory.cs" />
+    <Compile Include="ImportMovement\IImportMovementNumberValidator.cs" />
     <Compile Include="ImportMovement\IImportMovementRepository.cs" />
     <Compile Include="ImportMovement\ImportMovement.cs" />
-    <Compile Include="ImportMovement\ImportMovementRepository.cs" />
+    <Compile Include="ImportMovement\ImportMovementFactory.cs" />
+    <Compile Include="ImportMovement\ImportMovementNumberValidator.cs" />
     <Compile Include="ImportNotification\IImportNotificationRepository.cs" />
     <Compile Include="ImportNotification\ImportNotification.cs" />
     <Compile Include="InternalUser.cs" />

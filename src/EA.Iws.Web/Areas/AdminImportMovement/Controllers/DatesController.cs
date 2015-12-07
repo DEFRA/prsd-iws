@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.ImportMovement.Controllers
+﻿namespace EA.Iws.Web.Areas.AdminImportMovement.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -7,6 +7,7 @@
     using Requests.ImportMovement.Capture;
     using ViewModels.Dates;
 
+    [Authorize(Roles = "internal")]
     public class DatesController : Controller
     {
         private readonly IMediator mediator;

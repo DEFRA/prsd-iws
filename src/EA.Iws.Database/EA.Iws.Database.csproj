@@ -182,6 +182,7 @@
     <Content Include="scripts\Update\Sprint21\20151126-142800-create-report-schema.sql" />
     <Content Include="scripts\Update\Sprint21\20151126-154000-create-operation-codes-lookup.sql" />
     <Content Include="scripts\Update\Sprint21\20151130-120743-add-local-area-column-to-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint22\20151207-111000-add-import-movement-dates.sql" />
     <Content Include="scripts\Update\Sprint22\20151203-140000-add-import-movement.sql" />
     <Content Include="scripts\Update\Sprint21\20151201-154438-add-competentAuthorityId-column-to-local-area-lookup-table.sql" />
   </ItemGroup>

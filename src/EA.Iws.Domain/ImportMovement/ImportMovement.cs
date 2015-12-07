@@ -9,8 +9,13 @@
 
         public int Number { get; private set; }
 
-        internal ImportMovement(Guid notificationId, int number)
+        public DateTimeOffset ActualShipmentDate { get; private set; }
+
+        public DateTimeOffset? PrenotificationDate { get; private set; }
+
+        internal ImportMovement(Guid notificationId, int number, DateTimeOffset actualDate)
         {
+            ActualShipmentDate = actualDate;
             NotificationId = notificationId;
             Number = number;
         }

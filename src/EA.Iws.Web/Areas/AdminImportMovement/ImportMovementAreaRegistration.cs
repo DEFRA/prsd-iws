@@ -1,6 +1,7 @@
-﻿namespace EA.Iws.Web.Areas.ImportMovement
+﻿namespace EA.Iws.Web.Areas.AdminImportMovement
 {
     using System.Web.Mvc;
+    using Controllers;
     using Infrastructure;
 
     public class ImportMovementAreaRegistration : AreaRegistration
@@ -19,7 +20,7 @@
                 name: "ImportMovement_default",
                 url: "Import-Movement/{Id}/{controller}/{action}/{entityId}",
                 defaults: new { action = "Index", controller = "Home", entityId = UrlParameter.Optional },
-                namespaces: new[] { typeof(?).Namespace });
+                namespaces: new[] { typeof(DatesController).Namespace });
         }
     }
 }

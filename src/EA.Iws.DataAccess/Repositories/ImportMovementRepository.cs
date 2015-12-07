@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain.ImportMovement;
 
@@ -23,6 +25,11 @@
         {
             return await context.ImportMovements.SingleOrDefaultAsync(m => m.NotificationId == importNotificationId
                                                                            && m.Number == number);
+        }
+
+        public async Task<IEnumerable<ImportMovement>> GetForNotification(Guid importNotificationId)
+        {
+            return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).ToArrayAsync();
         }
     }
 }

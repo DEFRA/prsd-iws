@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.ImportMovement.ViewModels.Dates
+﻿namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Dates
 {
     using System;
     using System.ComponentModel.DataAnnotations;

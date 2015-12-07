@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportMovement.Views.Dates {
+namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Dates {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportMovement.Views.Dates {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class DatesViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal DatesViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.ImportMovement.Views.Dates {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportMovement.Views.Dates.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Dates.DatesViewModelResources", typeof(DatesViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,20 @@ namespace EA.Iws.Web.Areas.ImportMovement.Views.Dates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currently displaying shipment {0}.
+        ///   Looks up a localized string similar to Jeff.
         /// </summary>
-        public static string CurrentShipmentParagraph {
+        public static string ActualDate {
             get {
-                return ResourceManager.GetString("CurrentShipmentParagraph", resourceCulture);
+                return ResourceManager.GetString("ActualDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment data.
+        ///   Looks up a localized string similar to Jimmy.
         /// </summary>
-        public static string MainHeading {
+        public static string PreNotificationDate {
             get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Capture shipment.
-        /// </summary>
-        public static string PageTitle {
-            get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Return to shipment overview.
-        /// </summary>
-        public static string ReturnToIndex {
-            get {
-                return ResourceManager.GetString("ReturnToIndex", resourceCulture);
+                return ResourceManager.GetString("PreNotificationDate", resourceCulture);
             }
         }
     }

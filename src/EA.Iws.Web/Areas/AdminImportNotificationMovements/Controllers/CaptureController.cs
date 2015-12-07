@@ -63,12 +63,17 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Guid id, CreateViewModel model)
+        public async Task<ActionResult> Create(Guid id, CreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+
+            await mediator.SendAsync(new CreateImportMovement(id,
+                model.Number,
+                model.ActualShipmentDate.AsDateTime().Value,
+                model.PrenotificationDate.AsDateTime()));
 
             throw new NotImplementedException();
         }

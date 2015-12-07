@@ -19,7 +19,11 @@
         {
             var movement = await movementRepository.Get(message.MovementId);
 
-            return new ImportMovementDates();
+            return new ImportMovementDates
+            {
+                ActualDate = movement.ActualShipmentDate,
+                PreNotificationDate = movement.PrenotificationDate
+            };
         }
     }
 }
