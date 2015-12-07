@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImportNotification\Address.cs" />
+    <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />

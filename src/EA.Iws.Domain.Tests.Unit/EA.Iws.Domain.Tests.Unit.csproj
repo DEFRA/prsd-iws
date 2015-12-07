@@ -75,6 +75,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeReleaseTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
+    <Compile Include="ImportNotification\AddressBuilderTests.cs" />
     <Compile Include="ImportNotification\ImportNotificationTests.cs" />
     <Compile Include="InternalUserTests.cs" />
     <Compile Include="Movement\CertificateOfReceiptNameTests.cs" />
