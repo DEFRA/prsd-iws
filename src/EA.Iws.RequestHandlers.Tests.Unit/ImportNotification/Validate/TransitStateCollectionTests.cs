@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
+    using System;
     using Core.ImportNotification.Draft;
     using FakeItEasy;
     using FluentValidation;
@@ -10,6 +11,7 @@
 
     public class TransitStateCollectionTests
     {
+        private static readonly Guid AnyGuid = new Guid("2B52905F-1BF5-453C-8CA6-0F5C2C23D9C3");
         private readonly TransitStateCollectionValidator validator;
         private readonly TransitStateCollection transitStateCollection = new TransitStateCollection();
 
@@ -33,7 +35,7 @@
         public void HasNoTransitStates_TransitStatesEntered_Fails()
         {
             transitStateCollection.HasNoTransitStates = true;
-            transitStateCollection.TransitStates.Add(new TransitState());
+            transitStateCollection.TransitStates.Add(new TransitState(AnyGuid));
 
             validator.ShouldHaveValidationErrorFor(x => x.HasNoTransitStates, transitStateCollection);
         }
@@ -47,7 +49,7 @@
         [Fact]
         public void OneTransitState_OrdinalPositionNotOne_Fails()
         {
-            transitStateCollection.TransitStates.Add(new TransitState
+            transitStateCollection.TransitStates.Add(new TransitState(AnyGuid)
             {
                 OrdinalPosition = 7
             });
@@ -58,7 +60,7 @@
         [Fact]
         public void OneTransitState_OrdinalPositionOne_Success()
         {
-            transitStateCollection.TransitStates.Add(new TransitState
+            transitStateCollection.TransitStates.Add(new TransitState(AnyGuid)
             {
                 OrdinalPosition = 1
             });
@@ -71,9 +73,9 @@
         {
             transitStateCollection.TransitStates.AddRange(new[]
             {
-                new TransitState { OrdinalPosition = 1 }, 
-                new TransitState { OrdinalPosition = 2 }, 
-                new TransitState { OrdinalPosition = 3 } 
+                new TransitState(AnyGuid) { OrdinalPosition = 1 }, 
+                new TransitState(AnyGuid) { OrdinalPosition = 2 }, 
+                new TransitState(AnyGuid) { OrdinalPosition = 3 } 
             });
 
             Assert.True(validator.Validate(transitStateCollection).IsValid);
@@ -84,9 +86,9 @@
         {
             transitStateCollection.TransitStates.AddRange(new[]
             {
-                new TransitState { OrdinalPosition = 2 },
-                new TransitState { OrdinalPosition = 1 },
-                new TransitState { OrdinalPosition = 5 }
+                new TransitState(AnyGuid) { OrdinalPosition = 2 },
+                new TransitState(AnyGuid) { OrdinalPosition = 1 },
+                new TransitState(AnyGuid) { OrdinalPosition = 5 }
             });
 
             validator.ShouldHaveValidationErrorFor(x => x.TransitStates, transitStateCollection);
@@ -97,9 +99,9 @@
         {
             transitStateCollection.TransitStates.AddRange(new[]
             {
-                new TransitState { OrdinalPosition = 3 },
-                new TransitState { OrdinalPosition = 1 },
-                new TransitState { OrdinalPosition = 2 }
+                new TransitState(AnyGuid) { OrdinalPosition = 3 },
+                new TransitState(AnyGuid) { OrdinalPosition = 1 },
+                new TransitState(AnyGuid) { OrdinalPosition = 2 }
             });
 
             Assert.True(validator.Validate(transitStateCollection).IsValid);

@@ -7,6 +7,7 @@
 
     public class TransitStateCollectionTests
     {
+        private static readonly Guid ImportNotificationId = new Guid("E117CB2A-8709-451C-9B9A-2569A1FEFBC5");
         private readonly TransitStateCollection collection = new TransitStateCollection();
 
         [Theory]
@@ -22,7 +23,7 @@
         {
             for (int i = 0; i < positions.Length; i++)
             {
-                collection.Add(new TransitState
+                collection.Add(new TransitState(ImportNotificationId)
                 {
                     Id = GetIdForTransitStateAtPosition(positions[i]),
                     OrdinalPosition = positions[i]
@@ -43,14 +44,14 @@
         {
             for (int i = 0; i < positions.Length; i++)
             {
-                collection.Add(new TransitState
+                collection.Add(new TransitState(ImportNotificationId)
                 {
                     Id = GetIdForTransitStateAtPosition(positions[i]),
                     OrdinalPosition = positions[i]
                 });
             }
 
-            collection.Add(new TransitState
+            collection.Add(new TransitState(ImportNotificationId)
             {
                 Id = new Guid("E653C2F9-A52D-45F0-B1BD-01A44FB9DC25")
             });

@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class WasteOperation
+    public class WasteOperation : IDraftEntity
     {
-        protected WasteOperation()
+        internal WasteOperation()
         {
         }
 

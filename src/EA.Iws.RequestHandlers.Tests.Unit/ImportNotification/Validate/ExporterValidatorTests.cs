@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
+    using System;
     using Core.ImportNotification.Draft;
     using FakeItEasy;
     using FluentValidation.TestHelper;
@@ -35,6 +36,24 @@
         }
 
         [Fact]
+        public void ExporterAddressMissing_ReturnsFailure()
+        {
+            var exporter = GetValidExporter();
+            exporter.Address = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Address, exporter);
+        }
+
+        [Fact]
+        public void ExporterContactMissing_ReturnsFailure()
+        {
+            var exporter = GetValidExporter();
+            exporter.Contact  = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Contact, exporter);
+        }
+
+        [Fact]
         public void ExporterContact_IsValidated()
         {
             validator.ShouldHaveChildValidator(x => x.Contact, typeof(ContactValidator));
@@ -46,12 +65,15 @@
         [InlineData(" ")]
         public void BusinessNameMissing_ReturnsFailure(string businessName)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, businessName);
+            var exporter = GetValidExporter();
+            exporter.BusinessName = businessName;
+
+            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, exporter);
         }
 
         private Exporter GetValidExporter()
         {
-            return new Exporter
+            return new Exporter(new Guid("7C898A2C-D940-4F2E-BB89-6301B99B69A3"))
             {
                 Address = AddressTestData.GetValidTestAddress(),
                 Contact = ContactTestData.GetValidTestContact(),

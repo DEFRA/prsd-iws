@@ -8,8 +8,8 @@
         public ProducerValidator(IValidator<Address> addressValidator,
             IValidator<Contact> contactValidator)
         {
-            RuleFor(x => x.Address).SetValidator(addressValidator);
-            RuleFor(x => x.Contact).SetValidator(contactValidator);
+            RuleFor(x => x.Address).NotNull().SetValidator(addressValidator);
+            RuleFor(x => x.Contact).NotNull().SetValidator(contactValidator);
             RuleFor(x => x.BusinessName).NotEmpty();
         }
     }

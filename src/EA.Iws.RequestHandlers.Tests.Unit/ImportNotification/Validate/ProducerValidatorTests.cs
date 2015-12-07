@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
+    using System;
     using Core.ImportNotification.Draft;
     using FakeItEasy;
     using FluentValidation.TestHelper;
@@ -40,18 +41,39 @@
             validator.ShouldHaveChildValidator(x => x.Contact, typeof(ContactValidator));
         }
 
+        [Fact]
+        public void ProducerAddressMissing_ReturnsFailure()
+        {
+            var producer = GetValidProducer();
+            producer.Address = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Address, producer);
+        }
+
+        [Fact]
+        public void ProducerContactMissing_ReturnsFailure()
+        {
+            var producer = GetValidProducer();
+            producer.Contact = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Contact, producer);
+        }
+
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
         public void BusinessNameMissing_ReturnsFailure(string businessName)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, businessName);
+            var producer = GetValidProducer();
+            producer.BusinessName = businessName;
+
+            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, producer);
         }
 
         private Producer GetValidProducer()
         {
-            return new Producer
+            return new Producer(new Guid("F69C8CF2-ADF7-4065-B008-B57871E85A96"))
             {
                 Address = AddressTestData.GetValidTestAddress(),
                 Contact = ContactTestData.GetValidTestContact(),

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
+    using System;
     using System.Collections.Generic;
     using Core.ImportNotification.Draft;
     using FakeItEasy;
@@ -10,6 +11,7 @@
 
     public class FacilityCollectionValidatorTests
     {
+        private static readonly Guid AnyGuid = new Guid("9E73A13F-9D3E-478C-88E5-615E00EA7FD9");
         private readonly FacilityCollectionValidator validator;
 
         public FacilityCollectionValidatorTests()
@@ -25,11 +27,11 @@
             {
                 Facilities = new List<Facility>()
                 {
-                    new Facility
+                    new Facility(AnyGuid)
                     {
                         IsActualSite = false
                     },
-                    new Facility
+                    new Facility(AnyGuid)
                     {
                         IsActualSite = false
                     }
@@ -46,11 +48,11 @@
             {
                 Facilities = new List<Facility>()
                 {
-                    new Facility
+                    new Facility(AnyGuid)
                     {
                         IsActualSite = true
                     },
-                    new Facility
+                    new Facility(AnyGuid)
                     {
                         IsActualSite = false
                     }

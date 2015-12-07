@@ -76,7 +76,7 @@
             
             var transitStateCollection = await mediator.SendAsync(new GetDraftData<TransitStateCollection>(id));
             
-            transitStateCollection.Add(model.AsTransitState());
+            transitStateCollection.Add(model.AsTransitState(id));
 
             await mediator.SendAsync(new SetDraftData<TransitStateCollection>(id, transitStateCollection));
 

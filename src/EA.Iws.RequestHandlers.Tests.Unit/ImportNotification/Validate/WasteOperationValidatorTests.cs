@@ -56,6 +56,15 @@
             validator.ShouldNotHaveValidationErrorFor(x => x.TechnologyEmployed, wasteOperation);
         }
 
+        [Fact]
+        public void OperationCodesNull_ResultIsInvalid()
+        {
+            var wasteOperation = GetValidWasteOperation();
+            wasteOperation.OperationCodes = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
+        }
+
         private WasteOperation GetValidWasteOperation()
         {
             return new WasteOperation(importNotificationId)

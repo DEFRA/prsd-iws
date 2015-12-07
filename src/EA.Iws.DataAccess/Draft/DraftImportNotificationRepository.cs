@@ -51,6 +51,10 @@
             {
                 return JsonConvert.DeserializeObject<TData>(data);
             }
+            else if (typeof(IDraftEntity).IsAssignableFrom(typeof(TData)))
+            {
+                return (TData)Activator.CreateInstance(typeof(TData), importNotificationId);
+            }
             else
             {
                 return (TData)Activator.CreateInstance(typeof(TData), true);

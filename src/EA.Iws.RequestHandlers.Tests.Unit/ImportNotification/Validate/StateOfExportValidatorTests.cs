@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
+    using System;
     using Domain;
     using Domain.TransportRoute;
     using FakeItEasy;
@@ -10,7 +11,7 @@
 
     public class StateOfExportValidatorTests
     {
-        private readonly Core.ImportNotification.Draft.StateOfExport stateOfExport = new Core.ImportNotification.Draft.StateOfExport
+        private readonly Core.ImportNotification.Draft.StateOfExport stateOfExport = new Core.ImportNotification.Draft.StateOfExport(AnyGuid)
         {
             CountryId = TestableCountry.France.Id,
             CompetentAuthorityId = TestableCompetentAuthority.FrenchAuthorityArdeche.Id,
@@ -20,6 +21,7 @@
         private readonly IEntryOrExitPointRepository entryOrExitPointRepository;
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
         private readonly StateOfExportValidator validator;
+        private static readonly Guid AnyGuid = new Guid("D8942E55-68D3-4C14-A526-5A53D42E7CBB");
 
         public StateOfExportValidatorTests()
         {

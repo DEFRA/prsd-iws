@@ -42,7 +42,7 @@
                 return View(model);
             }
 
-            var producer = new Producer
+            var producer = new Producer(id)
             {
                 Address = model.Address.AsAddress(),
                 AreMultiple = model.AreMultiple,

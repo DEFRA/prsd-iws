@@ -22,7 +22,7 @@
 
         public WasteType Map(WasteTypeViewModel source)
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(source.ImportNotificationId)
             {
                 Name = source.Name,
                 BaselCodeNotListed = source.BaselCodeNotListed,

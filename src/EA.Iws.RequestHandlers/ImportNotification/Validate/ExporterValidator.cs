@@ -8,8 +8,8 @@
         public ExporterValidator(IValidator<Address> addressValidator,
             IValidator<Contact> contactValidator)
         {
-            RuleFor(x => x.Address).SetValidator(addressValidator);
-            RuleFor(x => x.Contact).SetValidator(contactValidator);
+            RuleFor(x => x.Address).NotEmpty().SetValidator(addressValidator);
+            RuleFor(x => x.Contact).NotEmpty().SetValidator(contactValidator);
             RuleFor(x => x.BusinessName).NotEmpty();
         }
     }

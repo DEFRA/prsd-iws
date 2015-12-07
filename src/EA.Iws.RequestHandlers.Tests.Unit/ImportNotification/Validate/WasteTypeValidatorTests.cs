@@ -9,6 +9,7 @@
 
     public class WasteTypeValidatorTests
     {
+        private static readonly Guid AnyGuid = new Guid("DF341A3F-27BF-4453-A7B5-710059EF1165");
         private readonly WasteTypeValidator validator;
 
         public WasteTypeValidatorTests()
@@ -19,7 +20,7 @@
         [Fact]
         public void ValidWasteTypeWithCodes_HasNoValidationErrors()
         {
-            var validWasteType = new WasteType
+            var validWasteType = new WasteType(AnyGuid)
             {
                 Name = "Waste",
                 SelectedBaselCode = Guid.NewGuid(),
@@ -37,7 +38,7 @@
         [Fact]
         public void ValidWasteTypeWithoutCodes_HasNoValidationErrors()
         {
-            var validWasteType = new WasteType
+            var validWasteType = new WasteType(AnyGuid)
             {
                 Name = "Waste",
                 SelectedEwcCodes = new List<Guid> { Guid.NewGuid() },
@@ -58,13 +59,16 @@
         [InlineData(" ")]
         public void InvalidName_HasValidationError(string input)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.Name, input);
+            var wasteType = new WasteType(AnyGuid);
+            wasteType.Name = input;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Name, wasteType);
         }
 
         [Fact]
         public void InvalidSelectedBaselCode_HasValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 BaselCodeNotListed = false,
                 SelectedBaselCode = null
@@ -76,7 +80,7 @@
         [Fact]
         public void InvalidSelectedEwcCodes_HasValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 SelectedEwcCodes = new List<Guid>()
             };
@@ -87,7 +91,7 @@
         [Fact]
         public void InvalidSelectedHCodes_HasValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 HCodeNotApplicable = false,
                 SelectedHCodes = new List<Guid>()
@@ -99,7 +103,7 @@
         [Fact]
         public void InvalidSelectedUnClasses_HasValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 UnClassNotApplicable = false,
                 SelectedUnClasses = new List<Guid>()
@@ -111,7 +115,7 @@
         [Fact]
         public void InvalidSelectedYCodes_HasValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 YCodeNotApplicable = false,
                 SelectedYCodes = new List<Guid>()
@@ -123,7 +127,7 @@
         [Fact]
         public void BaselCodeNotListed_HasNoValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 BaselCodeNotListed = true,
                 SelectedBaselCode = null
@@ -135,7 +139,7 @@
         [Fact]
         public void HCodeNotApplicable_HasNoValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 HCodeNotApplicable = true,
                 SelectedHCodes = new List<Guid>()
@@ -147,7 +151,7 @@
         [Fact]
         public void UnClassesNotApplicable_HasNoValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 UnClassNotApplicable = true,
                 SelectedUnClasses = new List<Guid>()
@@ -159,7 +163,7 @@
         [Fact]
         public void YCodeNotApplicable_HasNoValidationError()
         {
-            var wasteType = new WasteType
+            var wasteType = new WasteType(AnyGuid)
             {
                 YCodeNotApplicable = true,
                 SelectedYCodes = new List<Guid>()

@@ -10,12 +10,14 @@
     {
         public WasteOperationValidator()
         {
-            RuleFor(x => x.OperationCodes).NotEmpty().Must(BeOfSameType);
+            RuleFor(x => x.OperationCodes)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotEmpty()
+                .Must(BeOfSameType);
         }
 
         private static bool BeOfSameType(int[] operationCodes)
         {
-            //TODO: fix nulls
             var types = operationCodes.Select(x => Enumeration.FromValue<OperationCode>(x).NotificationType).ToArray();
 
             return types.All(p => p == types.First());

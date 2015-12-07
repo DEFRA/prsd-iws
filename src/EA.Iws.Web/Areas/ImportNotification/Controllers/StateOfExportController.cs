@@ -52,7 +52,7 @@
                 return View(model);
             }
 
-            var stateOfExport = new StateOfExport
+            var stateOfExport = new StateOfExport(id)
             {
                 CompetentAuthorityId = model.CompetentAuthorityId,
                 CountryId = model.CountryId,

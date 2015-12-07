@@ -42,24 +42,48 @@
             validator.ShouldHaveChildValidator(x => x.Contact, typeof(ContactValidator));
         }
 
+        [Fact]
+        public void FacilityAddressMissing_ReturnsFailure()
+        {
+            var facility = GetValidFacility();
+            facility.Address = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Address, facility);
+        }
+
+        [Fact]
+        public void FacilityContactMissing_ReturnsFailure()
+        {
+            var facility = GetValidFacility();
+            facility.Contact = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Contact, facility);
+        }
+
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
         public void BusinessNameMissing_ReturnsFailure(string businessName)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, businessName);
+            var facility = GetValidFacility();
+            facility.BusinessName = businessName;
+
+            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, facility);
         }
 
         [Fact]
         public void BusinessTypeMissing_ReturnsFailure()
         {
-            validator.ShouldHaveValidationErrorFor(x => x.Type, null as BusinessType?);
+            var facility = GetValidFacility();
+            facility.Type = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.Type, facility);
         }
 
         private Facility GetValidFacility()
         {
-            return new Facility
+            return new Facility(new Guid("D39DA9E3-0E5F-4DA4-8560-3743029CE76F"))
             {
                 Address = AddressTestData.GetValidTestAddress(),
                 Contact = ContactTestData.GetValidTestContact(),

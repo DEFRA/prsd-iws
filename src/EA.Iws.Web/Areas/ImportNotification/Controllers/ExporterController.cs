@@ -42,7 +42,7 @@
                 return View(model);
             }
 
-            var exporter = new Exporter
+            var exporter = new Exporter(id)
             {
                 Address = model.Address.AsAddress(),
                 BusinessName = model.BusinessName,

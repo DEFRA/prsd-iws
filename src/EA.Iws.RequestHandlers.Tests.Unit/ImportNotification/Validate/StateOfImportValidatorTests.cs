@@ -60,30 +60,42 @@
         [Fact]
         public void CompetentAuthorityNull_HasValidationError()
         {
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, null as Guid?);
+            var stateOfImport = GetValidStateOfImport();
+            stateOfImport.CompetentAuthorityId = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, stateOfImport);
         }
 
         [Fact]
         public void EntryPointNull_HasValidationError()
         {
-            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, null as Guid?);
+            var stateOfImport = GetValidStateOfImport();
+            stateOfImport.EntryPointId = null;
+
+            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, stateOfImport);
         }
 
         [Fact]
         public void EntryPointNotInUK_HasValidationError()
         {
-            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, nonUkEntryPointId);
+            var stateOfImport = GetValidStateOfImport();
+            stateOfImport.EntryPointId = nonUkEntryPointId;
+
+            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, stateOfImport);
         }
 
         [Fact]
         public void CompetentAuthorityNotInUK_HasValidationError()
         {
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, nonUkCaId);
+            var stateOfImport = GetValidStateOfImport();
+            stateOfImport.CompetentAuthorityId = nonUkCaId;
+
+            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, stateOfImport);
         }
 
         private StateOfImport GetValidStateOfImport()
         {
-            return new StateOfImport
+            return new StateOfImport(new Guid("1F754CD5-7F9F-45B9-B8E5-B0BE85D9985B"))
             {
                 CompetentAuthorityId = ukCaId,
                 EntryPointId = ukEntryPointId

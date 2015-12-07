@@ -2,14 +2,14 @@
 {
     using System;
 
-    public class Preconsented
+    public class Preconsented : IDraftEntity
     {
         public Preconsented(Guid importNotificationId)
         {
             ImportNotificationId = importNotificationId;
         }
 
-        protected Preconsented()
+        internal Preconsented()
         {
         }
 

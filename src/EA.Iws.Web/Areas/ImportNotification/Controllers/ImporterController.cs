@@ -43,7 +43,7 @@
                 return View(model);
             }
 
-            var importer = new Importer
+            var importer = new Importer(id)
             {
                 Address = model.Address.AsAddress(),
                 BusinessName = model.BusinessName,

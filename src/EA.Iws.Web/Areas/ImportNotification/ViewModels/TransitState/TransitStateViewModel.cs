@@ -72,9 +72,9 @@
             get { return CountryId.HasValue; }
         }
 
-        public TransitState AsTransitState()
+        public TransitState AsTransitState(Guid importNotificationId)
         {
-            return new TransitState
+            return new TransitState(importNotificationId)
             {
                 Id = TransitStateId,
                 EntryPointId = EntryPointId,

@@ -71,7 +71,7 @@
 
             validator.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
         }
-
+        
         private ImportNotification CreateImportNotification(NotificationType notificationType, Guid importNotificationId)
         {
             var instance = ObjectInstantiator<ImportNotification>.CreateNew();

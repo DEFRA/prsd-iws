@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
 {
-    using System.ComponentModel;
     using Core.ImportNotification.Draft;
     using FluentValidation;
 
@@ -29,24 +28,6 @@
             RuleFor(x => x.TransitStates).SetValidator(transitStatesValidator);
             RuleFor(x => x.WasteOperation).SetValidator(wasteOperationValidator);
             RuleFor(x => x.WasteType).SetValidator(wasteTypeValidator);
-
-            ValidatorOptions.DisplayNameResolver = (type, member, arg) =>
-            {
-                if (member != null)
-                {
-                    var ched = type.GetCustomAttributes(typeof(DisplayNameAttribute), false);
-                    if (ched != null && ched.Length > 0)
-                    {
-                        var attr = ched[0] as DisplayNameAttribute;
-
-                        return attr.DisplayName + " " + member.Name;
-                    }
-
-                    return type.Name + " " + member.Name;
-                }
-
-                return null;
-            };
         }
     }
 }

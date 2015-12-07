@@ -3,7 +3,7 @@
     using System;
     using Shared;
 
-    public class Facility
+    public class Facility : IDraftEntity
     {
         public Guid Id { get; set; }
 
@@ -18,5 +18,16 @@
         public Contact Contact { get; set; }
 
         public bool IsActualSite { get; set; }
+
+        public Guid ImportNotificationId { get; private set; }
+
+        public Facility(Guid importNotificationId)
+        {
+            ImportNotificationId = importNotificationId;
+        }
+
+        internal Facility()
+        {
+        }
     }
 }

@@ -3,9 +3,9 @@
     using System;
     using Shared;
 
-    public class Shipment
+    public class Shipment : IDraftEntity
     {
-        protected Shipment()
+        internal Shipment()
         {
         }
 

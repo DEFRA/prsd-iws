@@ -49,7 +49,7 @@
                 return View(model);
             }
 
-            var stateOfImport = new StateOfImport
+            var stateOfImport = new StateOfImport(id)
             {
                 CompetentAuthorityId = model.CompetentAuthorityId,
                 EntryPointId = model.EntryPointId

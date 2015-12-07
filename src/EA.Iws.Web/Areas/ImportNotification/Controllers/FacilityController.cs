@@ -59,7 +59,7 @@
 
             var facilityCollection = new FacilityCollection
             {
-                Facilities = model.Select(f => new Facility
+                Facilities = model.Select(f => new Facility(id)
                 {
                     Address = f.Address.AsAddress(),
                     BusinessName = f.BusinessName,

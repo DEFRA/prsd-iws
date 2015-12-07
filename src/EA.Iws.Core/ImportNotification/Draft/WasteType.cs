@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class WasteType
+    public class WasteType : IDraftEntity
     {
         public string Name { get; set; }
 
@@ -24,5 +24,16 @@
         public List<Guid> SelectedHCodes { get; set; }
 
         public List<Guid> SelectedUnClasses { get; set; }
+
+        public Guid ImportNotificationId { get; private set; }
+
+        public WasteType(Guid importNotificationId)
+        {
+            ImportNotificationId = importNotificationId;
+        }
+
+        internal WasteType()
+        {
+        }
     }
 }

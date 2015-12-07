@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
+    using System;
     using Domain;
     using Domain.TransportRoute;
     using FakeItEasy;
@@ -10,7 +11,7 @@
 
     public class TransitStateValidatorTests
     {
-        private readonly Core.ImportNotification.Draft.TransitState transitState = new Core.ImportNotification.Draft.TransitState
+        private readonly Core.ImportNotification.Draft.TransitState transitState = new Core.ImportNotification.Draft.TransitState(AnyGuid)
         {
             CountryId = TestableCountry.France.Id,
             CompetentAuthorityId = TestableCompetentAuthority.FrenchAuthorityArdeche.Id,
@@ -21,6 +22,7 @@
         private readonly IEntryOrExitPointRepository entryOrExitPointRepository;
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
         private readonly TransitStateValidator validator;
+        private static readonly Guid AnyGuid = new Guid("38C5C07C-EDC2-4749-9B87-2FDC0330CAE6");
 
         public TransitStateValidatorTests()
         {
