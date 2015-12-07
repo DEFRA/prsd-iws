@@ -83,6 +83,8 @@
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserStore.cs" />
     <Compile Include="Identity\IwsIdentityContext.cs" />
+    <Compile Include="ContextBase.cs" />
+    <Compile Include="ImportNotificationContext.cs" />
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\ActivityMapping.cs" />
     <Compile Include="Mappings\AddressBookMapping.cs" />
@@ -164,8 +166,8 @@
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
     <Compile Include="Repositories\ExporterRepository.cs" />
     <Compile Include="Repositories\ImporterRepository.cs" />
-    <Compile Include="Repositories\ImportMovementRepository.cs" />
-    <Compile Include="Repositories\ImportNotificationRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\MovementDateHistoryRepository.cs" />
     <Compile Include="Repositories\MovementDetailsRepository.cs" />

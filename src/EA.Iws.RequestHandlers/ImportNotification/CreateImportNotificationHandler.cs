@@ -11,13 +11,13 @@
 
     internal class CreateImportNotificationHandler : IRequestHandler<CreateImportNotification, Guid>
     {
-        private readonly IwsContext context;
+        private readonly ImportNotificationContext context;
         private readonly IImportNotificationRepository importNotificationRepository;
         private readonly IInternalUserRepository internalUserRepository;
         private readonly IUserContext userContext;
 
         public CreateImportNotificationHandler(IImportNotificationRepository importNotificationRepository,
-            IwsContext context, IUserContext userContext, IInternalUserRepository internalUserRepository)
+            ImportNotificationContext context, IUserContext userContext, IInternalUserRepository internalUserRepository)
         {
             this.internalUserRepository = internalUserRepository;
             this.importNotificationRepository = importNotificationRepository;

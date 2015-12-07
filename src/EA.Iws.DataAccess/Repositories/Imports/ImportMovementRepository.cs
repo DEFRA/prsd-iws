@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.DataAccess.Repositories
+﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
     using System;
     using System.Collections.Generic;
@@ -9,9 +9,9 @@
 
     internal class ImportMovementRepository : IImportMovementRepository
     {
-        private readonly IwsContext context;
+        private readonly ImportNotificationContext context;
 
-        public ImportMovementRepository(IwsContext context)
+        public ImportMovementRepository(ImportNotificationContext context)
         {
             this.context = context;
         }

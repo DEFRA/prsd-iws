@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.DataAccess.Repositories
+﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
     using System;
     using System.Collections.Generic;
@@ -12,11 +12,11 @@
 
     internal class ImportNotificationRepository : IImportNotificationRepository
     {
-        private readonly IwsContext context;
+        private readonly ImportNotificationContext context;
         private readonly IUserContext userContext;
         private readonly IInternalUserRepository internalUserRepository;
 
-        public ImportNotificationRepository(IwsContext context, IUserContext userContext, IInternalUserRepository internalUserRepository)
+        public ImportNotificationRepository(ImportNotificationContext context, IUserContext userContext, IInternalUserRepository internalUserRepository)
         {
             this.context = context;
             this.userContext = userContext;
