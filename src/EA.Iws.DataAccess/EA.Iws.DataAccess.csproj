@@ -114,7 +114,7 @@
     <Compile Include="Mappings\Common\EstimatedValueMapping.cs" />
     <Compile Include="Mappings\Exports\FinancialGuaranteeStatusChangeMapping.cs" />
     <Compile Include="Mappings\Exports\FinancialGuaranteeMapping.cs" />
-    <Compile Include="Mappings\Common\InternalUserMapping.cs" />
+    <Compile Include="Mappings\Exports\InternalUserMapping.cs" />
     <Compile Include="Mappings\Common\LocalAreaMapping.cs" />
     <Compile Include="Mappings\Exports\MovementCarrierMapping.cs" />
     <Compile Include="Mappings\Exports\MovementMapping.cs" />
@@ -148,7 +148,7 @@
     <Compile Include="Mappings\Exports\FacilityMapping.cs" />
     <Compile Include="Mappings\Exports\ImporterMapping.cs" />
     <Compile Include="Mappings\Exports\NotificationApplicationMapping.cs" />
-    <Compile Include="Mappings\Common\OrganisationMapping.cs" />
+    <Compile Include="Mappings\Exports\OrganisationMapping.cs" />
     <Compile Include="Mappings\Exports\CarrierMapping.cs" />
     <Compile Include="Mappings\Exports\PackagingTypeMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerMapping.cs" />
@@ -158,9 +158,9 @@
     <Compile Include="Mappings\Exports\ChemicalCompositionTypeMapping.cs" />
     <Compile Include="Mappings\Exports\TransportRouteMapping.cs" />
     <Compile Include="Mappings\Common\UKCompetentAuthorityMapping.cs" />
-    <Compile Include="Mappings\Common\UnitedKingdomCompetentAuthorityMapping.cs" />
-    <Compile Include="Mappings\Common\UserAddressMapping.cs" />
-    <Compile Include="Mappings\Common\UserMapping.cs" />
+    <Compile Include="Mappings\Exports\UnitedKingdomCompetentAuthorityMapping.cs" />
+    <Compile Include="Mappings\Exports\UserAddressMapping.cs" />
+    <Compile Include="Mappings\Exports\UserMapping.cs" />
     <Compile Include="Mappings\Exports\WasteAdditionalInformationMapping.cs" />
     <Compile Include="Mappings\Common\WasteCodeMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCodeInfoMapping.cs" />

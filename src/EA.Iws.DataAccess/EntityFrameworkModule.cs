@@ -12,6 +12,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<IwsContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ImportNotificationContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<IwsFileStoreContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<DraftContext>().AsSelf().InstancePerRequest();
 

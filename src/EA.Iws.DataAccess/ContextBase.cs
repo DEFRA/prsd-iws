@@ -17,7 +17,6 @@
         {
             this.UserContext = userContext;
             this.Dispatcher = dispatcher;
-            Database.SetInitializer<IwsContext>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

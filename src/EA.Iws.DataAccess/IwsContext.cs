@@ -24,6 +24,7 @@
         public IwsContext(IUserContext userContext, IEventDispatcher dispatcher)
             : base(userContext, dispatcher)
         {
+            Database.SetInitializer<IwsContext>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

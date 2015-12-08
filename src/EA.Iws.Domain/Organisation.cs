@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Domain
 {
-    using System;
     using NotificationApplication;
     using Prsd.Core;
     using Prsd.Core.Domain;
@@ -34,10 +33,9 @@
 
         public string OtherDescription { get; private set; }
 
-        public void Update(string name, Address address, BusinessType type, string otherDescription = null)
+        public void Update(string name, BusinessType type, string otherDescription = null)
         {
             Guard.ArgumentNotNullOrEmpty(() => name, name);
-            Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNull(() => type, type);
             if (type == BusinessType.Other)
             {

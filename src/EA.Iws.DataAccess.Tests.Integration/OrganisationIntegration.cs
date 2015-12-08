@@ -1,10 +1,8 @@
 ﻿namespace EA.Iws.DataAccess.Tests.Integration
 {
     using System;
-    using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.NotificationApplication;
     using FakeItEasy;
@@ -78,14 +76,13 @@
         public void UpdateExistingOrganisation()
         {
             var country = context.Countries.Single(c => c.IsoAlpha2Code.Equals("gb"));
-            var address = TestAddress(country);
             var org = new Organisation("SFW Ltd", BusinessType.LimitedCompany);
 
             context.Organisations.Add(org);
             context.SaveChanges();
 
             var orgId = org.Id;
-            org.Update("Only Name Changed", address, BusinessType.LimitedCompany);
+            org.Update("Only Name Changed", BusinessType.LimitedCompany);
             context.SaveChanges();
             Assert.Equal(orgId, org.Id);
 

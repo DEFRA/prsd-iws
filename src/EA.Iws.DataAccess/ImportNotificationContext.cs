@@ -11,6 +11,7 @@
         public ImportNotificationContext(IUserContext userContext, IEventDispatcher dispatcher)
             : base(userContext, dispatcher)
         {
+            Database.SetInitializer<ImportNotificationContext>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
