@@ -76,7 +76,9 @@
 
         private async Task PostWithdrawn(NotificationAssessmentDecisionViewModel model)
         {
-            var request = new WithdrawNotificationApplication(model.NotificationId);
+            var date = new DateTime(model.WithdrawnDate.Year.GetValueOrDefault(), model.WithdrawnDate.Month.GetValueOrDefault(), model.WithdrawnDate.Day.GetValueOrDefault());
+
+            var request = new WithdrawNotificationApplication(model.NotificationId, date, model.ReasonForWithdrawal);
             await mediator.SendAsync(request);
         }
 
@@ -92,7 +94,9 @@
 
         private async Task PostObjection(NotificationAssessmentDecisionViewModel model)
         {
-            var request = new ObjectNotificationApplication(model.NotificationId);
+            var date = new DateTime(model.ObjectionDate.Year.GetValueOrDefault(), model.ObjectionDate.Month.GetValueOrDefault(), model.ObjectionDate.Day.GetValueOrDefault());
+
+            var request = new ObjectNotificationApplication(model.NotificationId, date, model.ReasonForObjection);
             await mediator.SendAsync(request);
         }
     }

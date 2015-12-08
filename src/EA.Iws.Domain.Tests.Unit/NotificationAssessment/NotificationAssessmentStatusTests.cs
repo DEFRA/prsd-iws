@@ -307,10 +307,11 @@
         public void WithdrawSetsDate()
         {
             var date = new DateTime(2017, 1, 1);
+            var reason = "reason";
             
             SetNotificationStatus(NotificationStatus.Submitted);
 
-            notificationAssessment.Withdraw(date);
+            notificationAssessment.Withdraw(date, reason);
             
             Assert.Equal(date, notificationAssessment.Dates.WithdrawnDate);
         }

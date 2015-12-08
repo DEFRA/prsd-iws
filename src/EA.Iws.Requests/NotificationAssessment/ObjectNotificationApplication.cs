@@ -7,9 +7,15 @@ namespace EA.Iws.Requests.NotificationAssessment
     {
         public Guid Id { get; private set; }
 
-        public ObjectNotificationApplication(Guid id)
+        public string Reason { get; private set; }
+
+        public DateTime Date { get; private set; }
+
+        public ObjectNotificationApplication(Guid id, DateTime date, string reason)
         {
             Id = id;
+            Date = date;
+            Reason = reason;
         }
     }
 }

@@ -3,7 +3,6 @@
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.NotificationAssessment;
-    using Prsd.Core;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
 
@@ -22,7 +21,7 @@
         {
             var assessment = await notificationAssessmentRepository.GetByNotificationId(message.Id);
 
-            assessment.Withdraw(SystemTime.UtcNow);
+            assessment.Withdraw(message.Date, message.Reason);
 
             await context.SaveChangesAsync();
 

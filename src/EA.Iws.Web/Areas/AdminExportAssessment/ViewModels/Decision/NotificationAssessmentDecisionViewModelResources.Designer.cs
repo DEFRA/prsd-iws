@@ -125,7 +125,25 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reasons for withdrawal.
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string ObjectedDateLabel {
+            get {
+                return ResourceManager.GetString("ObjectedDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the date the objection was made.
+        /// </summary>
+        public static string ObjectedDateRequired {
+            get {
+                return ResourceManager.GetString("ObjectedDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reasons for withdrawal of consent.
         /// </summary>
         public static string ReasonConsentWithdrawalLabel {
             get {
@@ -139,6 +157,60 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision {
         public static string ReasonConsentWithdrawnRequired {
             get {
                 return ResourceManager.GetString("ReasonConsentWithdrawnRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reasons for objection.
+        /// </summary>
+        public static string ReasonObjectedLabel {
+            get {
+                return ResourceManager.GetString("ReasonObjectedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reason for objection is required.
+        /// </summary>
+        public static string ReasonObjectedRequired {
+            get {
+                return ResourceManager.GetString("ReasonObjectedRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reasons for withdrawal.
+        /// </summary>
+        public static string ReasonWithdrawnLabel {
+            get {
+                return ResourceManager.GetString("ReasonWithdrawnLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reason the notification is being withdrawn is required.
+        /// </summary>
+        public static string ReasonWithdrawnRequired {
+            get {
+                return ResourceManager.GetString("ReasonWithdrawnRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string WithdrawnDateLabel {
+            get {
+                return ResourceManager.GetString("WithdrawnDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the date the notificaiton was withdrawn.
+        /// </summary>
+        public static string WithdrawnDateRequired {
+            get {
+                return ResourceManager.GetString("WithdrawnDateRequired", resourceCulture);
             }
         }
     }

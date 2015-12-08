@@ -44,7 +44,17 @@
 
         public string ConsentConditions { get; set; }
 
+        [Display(Name = "ObjectedDateLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
+        public OptionalDateInputViewModel ObjectionDate { get; set; }
+
+        [Display(Name = "ReasonObjectedLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
         public string ReasonForObjection { get; set; }
+
+        [Display(Name = "WithdrawnDateLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
+        public OptionalDateInputViewModel WithdrawnDate { get; set; }
+
+        [Display(Name = "ReasonWithdrawnLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
+        public string ReasonForWithdrawal { get; set; }
 
         public NotificationAssessmentDecisionViewModel()
         {
@@ -52,6 +62,8 @@
             ConsentValidToDate = new OptionalDateInputViewModel();
             PreviousDecisions = new List<DecisionRecordViewModel>();
             DecisionTypes = new List<DecisionType>();
+            ObjectionDate = new OptionalDateInputViewModel(true);
+            WithdrawnDate = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -64,6 +76,16 @@
             if (SelectedDecision == DecisionType.ConsentWithdrawn)
             {
                 return ValidateConsentWithdrawn();
+            }
+
+            if (SelectedDecision == DecisionType.Object)
+            {
+                return ValidateObject();
+            }
+
+            if (SelectedDecision == DecisionType.Withdrawn)
+            {
+                return ValidateWithdrawn();
             }
 
             return new ValidationResult[0];
@@ -105,6 +127,24 @@
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ReasonConsentWithdrawnRequired,
                     new[] { "ReasonsForConsentWithdrawal" });
             }
-        } 
+        }
+
+        private IEnumerable<ValidationResult> ValidateObject()
+        {
+            if (string.IsNullOrWhiteSpace(ReasonForObjection))
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ReasonObjectedRequired,
+                    new[] { "ReasonObjected" });
+            }
+        }
+
+        private IEnumerable<ValidationResult> ValidateWithdrawn()
+        {
+            if (string.IsNullOrWhiteSpace(ReasonForWithdrawal))
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ReasonWithdrawnRequired,
+                    new[] { "ReasonWithdrawal" });
+            }
+        }
     }
 }

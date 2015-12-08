@@ -46,8 +46,8 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> completeTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> transmitTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgedTrigger;
-        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> withdrawTrigger;
-        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> objectTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> objectTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> consentedTrigger;  
 
@@ -105,8 +105,8 @@
             completeTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.NotificationComplete);
             transmitTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Transmit);
             acknowledgedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledged);
-            withdrawTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Withdraw);
-            objectTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Object);
+            withdrawTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.Withdraw);
+            objectTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.Object);
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
             consentedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Consent);
 
@@ -177,9 +177,10 @@
             Dates.ConsentWithdrawnReasons = reasons;
         }
 
-        private void OnWithdrawn(DateTime withdrawnDate)
+        private void OnWithdrawn(DateTime withdrawnDate, string reason)
         {
             Dates.WithdrawnDate = withdrawnDate;
+            Dates.WithdrawnReason = reason;
         }
 
         private void OnSubmit()
@@ -208,9 +209,10 @@
             Dates.TransmittedDate = transmittedDate;
         }
 
-        private void OnObjected(DateTime objectionDate)
+        private void OnObjected(DateTime objectionDate, string reason)
         {
             Dates.ObjectedDate = objectionDate;
+            Dates.ObjectionReason = reason;
         }
 
         private void OnTransitionAction(StateMachine<NotificationStatus, Trigger>.Transition transition)
@@ -297,14 +299,14 @@
             return new Consent(NotificationApplicationId, dateRange, conditions, userId);
         }
 
-        public void Withdraw(DateTime withdrawnDate)
+        public void Withdraw(DateTime withdrawnDate, string reason)
         {
-            stateMachine.Fire(withdrawTrigger, withdrawnDate);
+            stateMachine.Fire(withdrawTrigger, withdrawnDate, reason);
         }
 
-        public void Object(DateTime objectionDate)
+        public void Object(DateTime objectionDate, string reason)
         {
-            stateMachine.Fire(objectTrigger, objectionDate);
+            stateMachine.Fire(objectTrigger, objectionDate, reason);
         }
     }
 }

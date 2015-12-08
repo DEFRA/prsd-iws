@@ -23,7 +23,7 @@
         {
             var assessment = await notificationAssessmentRepository.GetByNotificationId(message.Id);
 
-            assessment.Object(SystemTime.UtcNow);
+            assessment.Object(message.Date, message.Reason);
 
             await context.SaveChangesAsync();
 
