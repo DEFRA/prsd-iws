@@ -173,6 +173,7 @@
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
     <Compile Include="Repositories\ExporterRepository.cs" />
     <Compile Include="Repositories\ImporterRepository.cs" />
+    <Compile Include="Repositories\Imports\ExporterRepository.cs" />
     <Compile Include="Repositories\Imports\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />

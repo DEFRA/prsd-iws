@@ -25,5 +25,7 @@
         public virtual DbSet<ImportNotification> ImportNotifications { get; set; }
 
         public virtual DbSet<Importer> Importers { get; set; } 
+
+        public virtual DbSet<Exporter> Exporters { get; set; } 
     }
 }

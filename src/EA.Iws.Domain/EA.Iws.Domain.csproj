@@ -54,6 +54,7 @@
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />
     <Compile Include="ImportNotification\Exporter.cs" />
+    <Compile Include="ImportNotification\IExporterRepository.cs" />
     <Compile Include="ImportNotification\IImporterRepository.cs" />
     <Compile Include="ImportNotification\Importer.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
