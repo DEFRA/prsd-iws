@@ -3,6 +3,7 @@
     using System.Data.Entity;
     using System.Threading;
     using System.Threading.Tasks;
+    using Mappings.Common;
     using Prsd.Core.DataAccess.Extensions;
     using Prsd.Core.Domain;
 
@@ -25,10 +26,11 @@
             var coreAssembly = typeof(AuditorExtensions).Assembly;
 
             modelBuilder.Conventions.AddFromAssembly(assembly);
-            modelBuilder.Configurations.AddFromAssembly(assembly);
-
             modelBuilder.Conventions.AddFromAssembly(coreAssembly);
+
             modelBuilder.Configurations.AddFromAssembly(coreAssembly);
+
+            modelBuilder.Configurations.AddFromNamespace(typeof(EmailAddressMapping).Namespace);
         }
 
         public override int SaveChanges()

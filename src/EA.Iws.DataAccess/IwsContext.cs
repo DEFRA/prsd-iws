@@ -15,6 +15,7 @@
     using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
     using Domain.TransportRoute;
+    using Mappings.Exports;
     using Prsd.Core.Domain;
     using Prsd.Core.Domain.Auditing;
 
@@ -23,6 +24,13 @@
         public IwsContext(IUserContext userContext, IEventDispatcher dispatcher)
             : base(userContext, dispatcher)
         {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Configurations.AddFromNamespace(typeof(NotificationApplicationMapping).Namespace);
         }
 
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
