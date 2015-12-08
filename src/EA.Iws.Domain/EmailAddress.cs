@@ -5,26 +5,23 @@
 
     public class EmailAddress
     {
-        private static Regex emailAddressRegex = CreateRegex();
-        private readonly string emailAddress;
+        private static readonly Regex EmailAddressRegex = CreateRegex();
+
         public EmailAddress(string emailAddress)
         {
-            if (!emailAddressRegex.IsMatch(emailAddress))
+            if (!EmailAddressRegex.IsMatch(emailAddress))
             {
                 throw new ArgumentException("Email address was not valid", "emailAddress");
             }
 
-            this.emailAddress = emailAddress;
+            this.Value = emailAddress;
         }
 
-        public string Value
-        {
-            get { return emailAddress; }
-        }
+        public string Value { get; private set; }
 
         public override string ToString()
         {
-            return emailAddress;
+            return Value;
         }
 
         public static implicit operator string(EmailAddress rhs)
@@ -44,7 +41,7 @@
                 return true;
             }
 
-            return string.Equals(emailAddress, other.emailAddress);
+            return string.Equals(Value, other.Value);
         }
 
         public override bool Equals(object obj)
@@ -65,11 +62,6 @@
             }
 
             return Equals((EmailAddress)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return emailAddress.GetHashCode();
         }
 
         public static bool operator ==(EmailAddress left, EmailAddress right)

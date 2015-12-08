@@ -14,8 +14,6 @@
                     RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         }
 
-        private readonly string phoneNumber;
-
         public PhoneNumber(string phoneNumber)
         {
             if (!phoneNumberRegex.IsMatch(phoneNumber))
@@ -23,13 +21,10 @@
                 throw new ArgumentException("Phone number was not valid", "phoneNumber");
             }
 
-            this.phoneNumber = phoneNumber;
+            this.Value = phoneNumber;
         }
 
-        public string Value
-        {
-            get { return phoneNumber; }
-        }
+        public string Value { get; private set; }
 
         public override string ToString()
         {
@@ -53,7 +48,7 @@
                 return true;
             }
 
-            return string.Equals(phoneNumber, other.phoneNumber);
+            return string.Equals(Value, other.Value);
         }
 
         public override bool Equals(object obj)
@@ -74,11 +69,6 @@
             }
 
             return Equals((PhoneNumber)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Value.GetHashCode();
         }
 
         public static bool operator ==(PhoneNumber left, PhoneNumber right)
