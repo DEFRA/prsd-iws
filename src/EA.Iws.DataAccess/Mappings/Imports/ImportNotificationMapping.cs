@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.DataAccess.Mappings
+﻿namespace EA.Iws.DataAccess.Mappings.Imports
 {
     using System.Data.Entity.ModelConfiguration;
     using Domain.ImportNotification;
@@ -7,7 +7,7 @@
     {
         public ImportNotificationMapping()
         {
-            ToTable("ImportNotification", "Notification");
+            ToTable("Notification", "ImportNotification");
 
             Property(x => x.NotificationNumber)
                 .IsRequired()

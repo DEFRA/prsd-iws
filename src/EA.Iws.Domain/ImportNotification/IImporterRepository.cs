@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
-    internal interface IImporterRepository
+    public interface IImporterRepository
     {
         Task<Importer> GetByNotificationId(Guid notificationId);
 

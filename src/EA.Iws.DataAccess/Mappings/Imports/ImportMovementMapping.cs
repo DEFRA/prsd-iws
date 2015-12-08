@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.DataAccess.Mappings
+﻿namespace EA.Iws.DataAccess.Mappings.Imports
 {
     using System.Data.Entity.ModelConfiguration;
     using Domain.ImportMovement;
@@ -7,7 +7,7 @@
     {
         public ImportMovementMapping()
         {
-            ToTable("ImportMovement", "Notification");
+            ToTable("Movement", "ImportNotification");
         }
     }
 }

@@ -8,12 +8,14 @@
     public class ImportNotificationContext : ContextBase
     {
         public ImportNotificationContext(IUserContext userContext, IEventDispatcher dispatcher)
-            :base(userContext, dispatcher)
+            : base(userContext, dispatcher)
         {
         }
 
         public virtual DbSet<ImportMovement> ImportMovements { get; set; }
 
         public virtual DbSet<ImportNotification> ImportNotifications { get; set; }
+
+        public virtual DbSet<Importer> Importers { get; set; } 
     }
 }

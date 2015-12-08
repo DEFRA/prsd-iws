@@ -3,8 +3,9 @@
     using System;
     using Core.Shared;
     using Prsd.Core;
+    using Prsd.Core.Domain;
 
-    public class Importer
+    public class Importer : Entity
     {
         public Importer(Guid importNotificationId, string businessName, BusinessType businessType,
             string registrationNumber,
@@ -18,8 +19,8 @@
             Guard.ArgumentNotNull(() => contact, contact);
 
             ImportNotificationId = importNotificationId;
-            BusinessName = businessName;
-            BusinessType = businessType;
+            Name = businessName;
+            Type = businessType;
             RegistrationNumber = registrationNumber;
             Address = address;
             Contact = contact;
@@ -27,9 +28,9 @@
 
         public Guid ImportNotificationId { get; set; }
 
-        public string BusinessName { get; set; }
+        public string Name { get; set; }
 
-        public BusinessType BusinessType { get; set; }
+        public BusinessType Type { get; set; }
 
         public string RegistrationNumber { get; set; }
 
