@@ -8,10 +8,55 @@
         public ImporterValidator(IValidator<Address> addressValidator,
             IValidator<Contact> contactValidator)
         {
-            RuleFor(x => x.Address).NotEmpty().SetValidator(addressValidator);
-            RuleFor(x => x.Contact).NotEmpty().SetValidator(contactValidator);
-            RuleFor(x => x.BusinessName).NotEmpty();
-            RuleFor(x => x.Type).NotEmpty();
+            RuleFor(x => x.Address)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotNull()
+                .WithLocalizedMessage(() => ImporterValidatorResources.AddressNotEmpty)
+                .Must(BeNonEmptyAddress)
+                .WithLocalizedMessage(() => ImporterValidatorResources.AddressNotEmpty);
+
+            RuleFor(x => x.Address)
+                .SetValidator(addressValidator)
+                .When(ImporterAddressIsNotEmpty);
+
+            RuleFor(x => x.Contact)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotNull()
+                .WithLocalizedMessage(() => ImporterValidatorResources.ContactNotEmpty)
+                .Must(BeNonEmptyContact)
+                .WithLocalizedMessage(() => ImporterValidatorResources.ContactNotEmpty);
+
+            RuleFor(x => x.Contact)
+                .SetValidator(contactValidator)
+                .When(ImporterContactIsNotEmpty);
+
+            RuleFor(x => x.BusinessName)
+                .NotEmpty()
+                .WithLocalizedMessage(() => ImporterValidatorResources.BusinessNameNotEmpty);
+
+            RuleFor(x => x.Type)
+                .NotNull()
+                .WithLocalizedMessage(() => ImporterValidatorResources.BusinessTypeNotEmpty);
+        }
+
+        private bool ImporterContactIsNotEmpty(Importer importer)
+        {
+            return importer != null && BeNonEmptyContact(importer.Contact);
+        }
+
+        private bool BeNonEmptyContact(Contact contact)
+        {
+            return contact != null && !contact.IsEmpty;
+        }
+
+        private bool ImporterAddressIsNotEmpty(Importer importer)
+        {
+            return importer != null && BeNonEmptyAddress(importer.Address);
+        }
+
+        private bool BeNonEmptyAddress(Address address)
+        {
+            return address != null && !address.IsEmpty;
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
     using System;
+    using System.ComponentModel;
 
+    [DisplayName("Transport route import")]
     public class StateOfImport : IDraftEntity
     {
         public Guid? CompetentAuthorityId { get; set; }

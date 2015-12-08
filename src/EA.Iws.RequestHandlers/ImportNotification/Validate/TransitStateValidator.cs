@@ -18,10 +18,21 @@
             this.competentAuthorityRepository = competentAuthorityRepository;
             this.entryOrExitPointRepository = entryOrExitPointRepository;
 
-            RuleFor(x => x.CountryId).NotNull();
-            RuleFor(x => x.EntryPointId).MustAsync(BeEnteringSameCountry);
-            RuleFor(x => x.ExitPointId).MustAsync(BeExitingSameCountry);
-            RuleFor(x => x.CompetentAuthorityId).MustAsync(BeInSameCountry);
+            RuleFor(x => x.CountryId)
+                .NotNull()
+                .WithLocalizedMessage(() => TransitStateValidatorResources.CountryNotNull);
+
+            RuleFor(x => x.EntryPointId)
+                .MustAsync(BeEnteringSameCountry)
+                .WithLocalizedMessage(() => TransitStateValidatorResources.EntryPointMustBeSelectedCountry);
+
+            RuleFor(x => x.ExitPointId)
+                .MustAsync(BeExitingSameCountry)
+                .WithLocalizedMessage(() => TransitStateValidatorResources.ExitPointMustBeSelectedCountry);
+
+            RuleFor(x => x.CompetentAuthorityId)
+                .MustAsync(BeInSameCountry)
+                .WithLocalizedMessage(() => TransitStateValidatorResources.CompetentAuthorityMustBeSelectedCountry);
         }
 
         private async Task<bool> BeInSameCountry(TransitState transitState, Guid? competentAuthorityId)

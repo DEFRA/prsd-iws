@@ -13,7 +13,9 @@
             RuleFor(x => x.OperationCodes)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
-                .Must(BeOfSameType);
+                .WithLocalizedMessage(() => WasteOperationValidatorResources.OperationCodesNotEmpty)
+                .Must(BeOfSameType)
+                .WithLocalizedMessage(() => WasteOperationValidatorResources.OperationCodesOfSameType);
         }
 
         private static bool BeOfSameType(int[] operationCodes)

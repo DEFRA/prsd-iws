@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
     using System;
+    using System.ComponentModel;
     using Shared;
 
+    [DisplayName("Importer consignee")]
     public class Importer : IDraftEntity
     {
         public Address Address { get; set; }

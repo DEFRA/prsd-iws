@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Validate
 {
+    using System;
     using System.Collections.Generic;
+    using Requests.ImportNotification.Validate;
 
     public class ValidateViewModel
     {
@@ -8,11 +10,11 @@
         {
         }
 
-        public ValidateViewModel(IEnumerable<string> results)
+        public ValidateViewModel(IEnumerable<ValidationResults> results)
         {
-            Errors = results;
+            ValidationResults = results;
         }
 
-        public IEnumerable<string> Errors { get; set; }
+        public IEnumerable<ValidationResults> ValidationResults { get; set; }
     }
 }

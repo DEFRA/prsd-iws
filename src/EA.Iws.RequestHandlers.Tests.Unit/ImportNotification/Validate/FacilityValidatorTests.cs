@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
     using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Core.ImportNotification.Draft;
     using Core.Shared;
     using FakeItEasy;
@@ -31,15 +33,25 @@
         }
 
         [Fact]
-        public void FacilityAddress_IsValidated()
+        public async Task FacilityAddressNotEmpty_IsValidated()
         {
-            validator.ShouldHaveChildValidator(x => x.Address, typeof(AddressValidator));
+            var facility = GetValidFacility();
+            facility.Address.AddressLine1 = null;
+
+            var result = await validator.ValidateAsync(facility);
+
+            Assert.Equal("Address.AddressLine1", result.Errors.Single().PropertyName);
         }
 
         [Fact]
-        public void FacilityContact_IsValidated()
+        public async Task FacilityContactNotEmpty_IsValidated()
         {
-            validator.ShouldHaveChildValidator(x => x.Contact, typeof(ContactValidator));
+            var facility = GetValidFacility();
+            facility.Contact.ContactName = null;
+
+            var result = await validator.ValidateAsync(facility);
+
+            Assert.Equal("Contact.ContactName", result.Errors.Single().PropertyName);
         }
 
         [Fact]
@@ -52,12 +64,74 @@
         }
 
         [Fact]
+        public async Task FacilityAddressMising_OnlyValidatesOnce()
+        {
+            var facility = GetValidFacility();
+            facility.Address = null;
+
+            var result = await validator.ValidateAsync(facility);
+
+            Assert.Equal(1, result.Errors.Count(e => e.PropertyName == "Address"));
+        }
+
+        [Fact]
+        public void FacilityAddressEmpty_ReturnsFailure()
+        {
+            var facility = GetValidFacility();
+            facility.Address = new Address();
+
+            validator.ShouldHaveValidationErrorFor(x => x.Address, facility);
+        }
+
+        [Fact]
+        public async Task FacilityAddressEmpty_DoesNotValidateAddress()
+        {
+            var facility = GetValidFacility();
+            facility.Address = new Address();
+
+            var result = await validator.ValidateAsync(facility);
+
+            Assert.Empty(result.Errors.Where(e => e.PropertyName == "Address.AddressLine1"));
+        }
+
+        [Fact]
         public void FacilityContactMissing_ReturnsFailure()
         {
             var facility = GetValidFacility();
             facility.Contact = null;
 
             validator.ShouldHaveValidationErrorFor(x => x.Contact, facility);
+        }
+
+        [Fact]
+        public async Task FacilityContactMising_OnlyValidatesOnce()
+        {
+            var facility = GetValidFacility();
+            facility.Contact = null;
+
+            var result = await validator.ValidateAsync(facility);
+
+            Assert.Equal(1, result.Errors.Count(e => e.PropertyName == "Contact"));
+        }
+
+        [Fact]
+        public void FacilityContactEmpty_ReturnsFailure()
+        {
+            var facility = GetValidFacility();
+            facility.Contact = new Contact();
+
+            validator.ShouldHaveValidationErrorFor(x => x.Contact, facility);
+        }
+
+        [Fact]
+        public async Task FacilityContactEmpty_DoesNotValidateContact()
+        {
+            var facility = GetValidFacility();
+            facility.Contact = new Contact();
+
+            var result = await validator.ValidateAsync(facility);
+
+            Assert.Empty(result.Errors.Where(e => e.PropertyName == "Contact.ContactName"));
         }
 
         [Theory]

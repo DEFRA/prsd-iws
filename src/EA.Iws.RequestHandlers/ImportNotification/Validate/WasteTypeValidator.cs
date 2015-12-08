@@ -11,22 +11,28 @@
         public WasteTypeValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty();
+                .NotEmpty()
+                .WithLocalizedMessage(() => WasteTypeValidatorResources.WasteTypeNameNotEmpty);
 
             RuleFor(x => x.SelectedBaselCode)
-                .Must(HaveBaselCodeOrNotListed);
+                .Must(HaveBaselCodeOrNotListed)
+                .WithLocalizedMessage(() => WasteTypeValidatorResources.BaselCodeSelectedOrNotListed);
 
             RuleFor(x => x.SelectedEwcCodes)
-                .NotEmpty();
+                .NotEmpty()
+                .WithLocalizedMessage(() => WasteTypeValidatorResources.EwcCodeNotEmpty);
 
             RuleFor(x => x.SelectedHCodes)
-                .Must(HaveHCodesOrNotApplicable);
+                .Must(HaveHCodesOrNotApplicable)
+                .WithLocalizedMessage(() => WasteTypeValidatorResources.HCodeSelectedOrNotApplicable);
 
             RuleFor(x => x.SelectedUnClasses)
-                .Must(HaveUnClassesOrNotApplicable);
+                .Must(HaveUnClassesOrNotApplicable)
+                .WithLocalizedMessage(() => WasteTypeValidatorResources.UnClassSelectedOrNotApplicable);
 
             RuleFor(x => x.SelectedYCodes)
-                .Must(HaveYCodesOrNotApplicable);
+                .Must(HaveYCodesOrNotApplicable)
+                .WithLocalizedMessage(() => WasteTypeValidatorResources.YCodeSelectedOrNotApplicable);
         }
 
         private bool HaveYCodesOrNotApplicable(WasteType instance, List<Guid> selectedYCodes)

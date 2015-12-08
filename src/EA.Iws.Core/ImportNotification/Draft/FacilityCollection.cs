@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
 
+    [DisplayName("Facilities")]
     public class FacilityCollection
     {
         public List<Facility> Facilities { get; set; }

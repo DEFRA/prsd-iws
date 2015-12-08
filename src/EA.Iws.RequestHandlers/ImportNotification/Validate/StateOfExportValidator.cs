@@ -18,9 +18,17 @@
             this.entryOrExitPointRepository = entryOrExitPointRepository;
             this.competentAuthorityRepository = competentAuthorityRepository;
 
-            RuleFor(x => x.CountryId).NotNull();
-            RuleFor(x => x.ExitPointId).MustAsync(BeInSameCountry);
-            RuleFor(x => x.CompetentAuthorityId).MustAsync(BeInCountry);
+            RuleFor(x => x.CountryId)
+                .NotNull()
+                .WithLocalizedMessage(() => StateOfExportValidatorResources.StateOfExportCountryNotNull);
+
+            RuleFor(x => x.ExitPointId)
+                .MustAsync(BeInSameCountry)
+                .WithLocalizedMessage(() => StateOfExportValidatorResources.ExportExitPointMustBeInSameCountry);
+
+            RuleFor(x => x.CompetentAuthorityId)
+                .MustAsync(BeInCountry)
+                .WithLocalizedMessage(() => StateOfExportValidatorResources.CompetentAuthorityMustBeInSameCountry);
         }
 
         private async Task<bool> BeInCountry(StateOfExport stateOfExport, Guid? competentAuthorityId)

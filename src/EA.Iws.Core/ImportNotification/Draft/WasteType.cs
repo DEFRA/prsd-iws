@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
 
+    [DisplayName("Waste type")]
     public class WasteType : IDraftEntity
     {
         public string Name { get; set; }

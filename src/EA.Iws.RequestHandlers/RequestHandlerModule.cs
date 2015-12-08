@@ -15,7 +15,6 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
-    using FluentValidation;
     using ImportNotification;
     using ImportNotification.Summary;
     using Notification;
@@ -23,6 +22,7 @@
     using Prsd.Core.Decorators;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
+    using Validation;
 
     public class RequestHandlerModule : Module
     {
@@ -54,7 +54,7 @@
                 .AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(ThisAssembly)
-                .Where(t => t.IsAssignableTo<IValidator>())
+                .Where(t => t.IsAssignableTo<FluentValidation.IValidator>())
                 .AsImplementedInterfaces();
 
             builder.RegisterType<NotificationToNotificationCopy>().AsSelf();
@@ -95,6 +95,7 @@
             builder.RegisterType<MovementDateValidator>().As<IMovementDateValidator>();
             builder.RegisterType<ImportMovementFactory>().As<IImportMovementFactory>();
             builder.RegisterType<ImportMovementNumberValidator>().As<IImportMovementNumberValidator>();
+            builder.RegisterType<Validator>().As<IValidator>();
 
             if (HasAsposeLicense())
             {

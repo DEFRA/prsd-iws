@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Requests.ImportNotification.Validate
 {
     using System;
+    using System.Collections.Generic;
     using Prsd.Core.Mediator;
 
-    public class ValidateImportNotification : IRequest<string[]>
+    public class ValidateImportNotification : IRequest<IEnumerable<ValidationResults>>
     {
         public ValidateImportNotification(Guid draftImportNotificationId)
         {

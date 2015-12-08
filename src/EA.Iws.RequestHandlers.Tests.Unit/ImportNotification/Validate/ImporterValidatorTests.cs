@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
     using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Core.ImportNotification.Draft;
     using Core.Shared;
     using FakeItEasy;
@@ -31,15 +33,25 @@
         }
 
         [Fact]
-        public void ImporterAddressIsValidated()
+        public async Task ImporterAddressNotEmpty_IsValidated()
         {
-            validator.ShouldHaveChildValidator(x => x.Address, typeof(AddressValidator));
+            var importer = GetValidImporter();
+            importer.Address.AddressLine1 = null;
+
+            var result = await validator.ValidateAsync(importer);
+
+            Assert.Equal("Address.AddressLine1", result.Errors.Single().PropertyName);
         }
 
         [Fact]
-        public void ImporterContactIsValidated()
+        public async Task ImporterContactNotEmpty_IsValidated()
         {
-            validator.ShouldHaveChildValidator(x => x.Contact, typeof(ContactValidator));
+            var importer = GetValidImporter();
+            importer.Contact.ContactName = null;
+
+            var result = await validator.ValidateAsync(importer);
+
+            Assert.Equal("Contact.ContactName", result.Errors.Single().PropertyName);
         }
 
         [Fact]
@@ -52,12 +64,74 @@
         }
 
         [Fact]
+        public async Task ImporterAddressMising_OnlyValidatesOnce()
+        {
+            var importer = GetValidImporter();
+            importer.Address = null;
+
+            var result = await validator.ValidateAsync(importer);
+
+            Assert.Equal(1, result.Errors.Count(e => e.PropertyName == "Address"));
+        }
+
+        [Fact]
+        public void ImporterAddressEmpty_ReturnsFailure()
+        {
+            var importer = GetValidImporter();
+            importer.Address = new Address();
+
+            validator.ShouldHaveValidationErrorFor(x => x.Address, importer);
+        }
+
+        [Fact]
+        public async Task ImporterAddressEmpty_DoesNotValidateAddress()
+        {
+            var importer = GetValidImporter();
+            importer.Address = new Address();
+
+            var result = await validator.ValidateAsync(importer);
+
+            Assert.Empty(result.Errors.Where(e => e.PropertyName == "Address.AddressLine1"));
+        }
+
+        [Fact]
         public void ImporterContactMissing_ReturnsFailure()
         {
             var importer = GetValidImporter();
             importer.Contact = null;
 
             validator.ShouldHaveValidationErrorFor(x => x.Contact, importer);
+        }
+
+        [Fact]
+        public async Task ImporterContactMising_OnlyValidatesOnce()
+        {
+            var importer = GetValidImporter();
+            importer.Contact = null;
+
+            var result = await validator.ValidateAsync(importer);
+
+            Assert.Equal(1, result.Errors.Count(e => e.PropertyName == "Contact"));
+        }
+
+        [Fact]
+        public void ImporterContactEmpty_ReturnsFailure()
+        {
+            var importer = GetValidImporter();
+            importer.Contact = new Contact();
+
+            validator.ShouldHaveValidationErrorFor(x => x.Contact, importer);
+        }
+
+        [Fact]
+        public async Task ImporterContactEmpty_DoesNotValidateContact()
+        {
+            var importer = GetValidImporter();
+            importer.Contact = new Contact();
+
+            var result = await validator.ValidateAsync(importer);
+
+            Assert.Empty(result.Errors.Where(e => e.PropertyName == "Contact.ContactName"));
         }
 
         [Theory]

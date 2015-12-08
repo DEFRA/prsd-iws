@@ -7,5 +7,15 @@
         public string Telephone { get; set; }
 
         public string Email { get; set; }
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return string.IsNullOrEmpty(ContactName)
+                    && string.IsNullOrEmpty(Telephone)
+                    && string.IsNullOrEmpty(Email);
+            }
+        }
     }
 }

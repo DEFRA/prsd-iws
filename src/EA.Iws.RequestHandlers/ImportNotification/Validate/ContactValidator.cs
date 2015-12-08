@@ -7,9 +7,19 @@
     {
         public ContactValidator()
         {
-            RuleFor(x => x.ContactName).NotEmpty();
-            RuleFor(x => x.Email).NotEmpty().EmailAddress();
-            RuleFor(x => x.Telephone).NotEmpty();
+            RuleFor(x => x.ContactName)
+                .NotEmpty()
+                .WithLocalizedMessage(() => ContactValidatorResources.ContactNameNotEmpty);
+
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .WithLocalizedMessage(() => ContactValidatorResources.EmailNotEmpty)
+                .EmailAddress()
+                .WithLocalizedMessage(() => ContactValidatorResources.EmailNotValid);
+
+            RuleFor(x => x.Telephone)
+                .NotEmpty()
+                .WithLocalizedMessage(() => ContactValidatorResources.TelephoneNotEmpty);
         }
     }
 }

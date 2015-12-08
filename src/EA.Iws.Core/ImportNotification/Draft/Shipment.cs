@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
     using System;
+    using System.ComponentModel;
     using Shared;
 
+    [DisplayName("Intended shipments")]
     public class Shipment : IDraftEntity
     {
         internal Shipment()

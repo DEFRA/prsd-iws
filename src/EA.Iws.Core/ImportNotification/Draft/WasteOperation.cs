@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
     using System;
+    using System.ComponentModel;
 
+    [DisplayName("Waste operation")]
     public class WasteOperation : IDraftEntity
     {
         internal WasteOperation()

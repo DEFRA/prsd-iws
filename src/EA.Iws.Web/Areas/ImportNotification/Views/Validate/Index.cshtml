@@ -1,15 +1,23 @@
 ﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Validate.ValidateViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Validate import notification";
 }
 
 <h1 class="heading-large">Your notification looks incomplete</h1>
 
-<p>Please address the following issues:</p>
+<p>Missing data from each section of the notification is listed below.</p>
 
-<ul class="list-bullet">
-    @foreach (var item in Model.Errors)
+@foreach (var validationResult in Model.ValidationResults)
+{
+    if (validationResult.Errors.Any())
     {
-        <li>@item</li>
+        <h2 class="heading-medium">@validationResult.EntityName</h2>
+
+        <ul class="list-bullet">
+            @foreach (var errorText in validationResult.Errors)
+            {
+                <li>@errorText</li>
+            }
+        </ul>
     }
-</ul>
+}

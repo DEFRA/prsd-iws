@@ -10,9 +10,12 @@
         public TransitStateCollectionValidator(IValidator<TransitState> transitStateValidator)
         {
             RuleFor(x => x.HasNoTransitStates).Cascade(CascadeMode.StopOnFirstFailure)
-                .Must(BeTrueOrContainTransitStates);
-            RuleFor(x => x.TransitStates).Must(BeConsecutivelyOrdered);
-            RuleFor(x => x.TransitStates).SetCollectionValidator(transitStateValidator);
+                .Must(BeTrueOrContainTransitStates)
+                .WithLocalizedMessage(() => TransitStateCollectionValidatorResources.TransitStatesEmptyAndNotSelected);
+
+            RuleFor(x => x.TransitStates)
+                .Must(BeConsecutivelyOrdered)
+                .SetCollectionValidator(transitStateValidator);
         }
 
         private bool BeTrueOrContainTransitStates(TransitStateCollection transitStateCollection, bool hasNoTransitStates)

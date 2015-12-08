@@ -24,12 +24,16 @@
             RuleFor(x => x.CompetentAuthorityId)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .MustAsync(BeACompetentAuthorityInTheUK);
+                .WithLocalizedMessage(() => StateOfImportValidatorResources.StateOfImportCompetentAuthorityNotEmpty)
+                .MustAsync(BeACompetentAuthorityInTheUK)
+                .WithLocalizedMessage(() => StateOfImportValidatorResources.StateOfImportCompetentAuthorityInUK);
 
             RuleFor(x => x.EntryPointId)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .MustAsync(BeAnEntryPointInTheUK);
+                .WithLocalizedMessage(() => StateOfImportValidatorResources.ImportEntryPointNotEmpty)
+                .MustAsync(BeAnEntryPointInTheUK)
+                .WithLocalizedMessage(() => StateOfImportValidatorResources.ImportEntryPointInUK);
         }
 
         private async Task<bool> BeAnEntryPointInTheUK(Guid? entryPointId)

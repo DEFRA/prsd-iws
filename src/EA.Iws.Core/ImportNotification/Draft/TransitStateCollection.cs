@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
 
+    [DisplayName("Transport route transits")]
     public class TransitStateCollection
     {
         public List<TransitState> TransitStates { get; private set; }

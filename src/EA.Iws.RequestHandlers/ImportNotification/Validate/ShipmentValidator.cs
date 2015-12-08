@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using Core.ImportNotification.Draft;
-    using Core.Shared;
     using DataAccess.Draft;
     using FluentValidation;
 
@@ -17,23 +16,33 @@
 
             RuleFor(x => x.TotalShipments)
                 .NotNull()
-                .GreaterThan(0);
+                .WithLocalizedMessage(() => ShipmentValidatorResources.TotalShipmentsNotNull)
+                .GreaterThan(0)
+                .WithLocalizedMessage(() => ShipmentValidatorResources.TotalShipmentsPositive);
 
             RuleFor(x => x.Quantity)
                 .NotNull()
-                .GreaterThan(0);
+                .WithLocalizedMessage(() => ShipmentValidatorResources.QuantityNotNull)
+                .GreaterThan(0)
+                .WithLocalizedMessage(() => ShipmentValidatorResources.QuantityPositive);
 
             RuleFor(x => x.Unit)
-                .NotNull();
+                .NotNull()
+                .WithLocalizedMessage(() => ShipmentValidatorResources.UnitNotNull);
 
             RuleFor(x => x.StartDate)
                 .NotNull()
-                .LessThanOrEqualTo(s => s.EndDate);
+                .WithLocalizedMessage(() => ShipmentValidatorResources.StartDateNotNull)
+                .LessThanOrEqualTo(s => s.EndDate)
+                .WithLocalizedMessage(() => ShipmentValidatorResources.StartDateBeforeEndDate);
 
             RuleFor(x => x.EndDate)
                 .NotNull()
+                .WithLocalizedMessage(() => ShipmentValidatorResources.EndDateNotNull)
                 .GreaterThanOrEqualTo(s => s.StartDate)
-                .MustAsync(BeWithinConsentPeriod);
+                .WithLocalizedMessage(() => ShipmentValidatorResources.EndDateAfterStartDate)
+                .MustAsync(BeWithinConsentPeriod)
+                .WithLocalizedMessage(() => ShipmentValidatorResources.EndDateInConsentPeriod);
         }
 
         private async Task<bool> BeWithinConsentPeriod(Shipment instance, DateTime? endDate)

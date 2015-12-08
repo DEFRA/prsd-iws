@@ -12,7 +12,9 @@
             RuleFor(x => x.Facilities)
                 .SetCollectionValidator(facilityValidator)
                 .NotEmpty()
-                .Must(HaveSiteOfTreatment);
+                .WithLocalizedMessage(() => FacilityCollectionValidatorResources.FacilityNotEmpty)
+                .Must(HaveSiteOfTreatment)
+                .WithLocalizedMessage(() => FacilityCollectionValidatorResources.MustHaveSiteOfTreatment);
         }
 
         private static bool HaveSiteOfTreatment(IEnumerable<Facility> facilities)

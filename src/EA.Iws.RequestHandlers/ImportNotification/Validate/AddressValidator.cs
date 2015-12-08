@@ -13,12 +13,23 @@
         {
             this.repository = repository;
 
-            RuleFor(x => x.AddressLine1).NotEmpty();
-            RuleFor(x => x.TownOrCity).NotEmpty();
-            RuleFor(x => x.CountryId).NotEmpty();
-            RuleFor(x => x.PostalCode).MustAsync(BeNotEmptyWhenCountryIsUk);
+            RuleFor(x => x.AddressLine1)
+                .NotEmpty()
+                .WithLocalizedMessage(() => AddressValidatorResources.AddressLine1NotEmpty);
+
+            RuleFor(x => x.TownOrCity)
+                .NotEmpty()
+                .WithLocalizedMessage(() => AddressValidatorResources.TownAndCityNotEmpty);
+
+            RuleFor(x => x.CountryId)
+                .NotEmpty()
+                .WithLocalizedMessage(() => AddressValidatorResources.CountryNotEmpty);
+
+            RuleFor(x => x.PostalCode)
+                .MustAsync(BeNotEmptyWhenCountryIsUk)
+                .WithLocalizedMessage(() => AddressValidatorResources.PostcodeNotEmpty);
         }
-        
+
         private async Task<bool> BeNotEmptyWhenCountryIsUk(Address address, string postCode)
         {
             var unitedKingdomId = await repository.GetUnitedKingdomId();

@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
     using System;
+    using System.ComponentModel;
 
+    [DisplayName("Transport route export")]
     public class StateOfExport : IDraftEntity
     {
         public Guid? CountryId { get; set; }

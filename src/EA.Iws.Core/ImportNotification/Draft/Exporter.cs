@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
     using System;
+    using System.ComponentModel;
 
+    [DisplayName("Exporter notifier")]
     public class Exporter : IDraftEntity
     {
         public Address Address { get; set; }

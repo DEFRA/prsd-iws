@@ -1,7 +1,9 @@
-﻿using System;
-
-namespace EA.Iws.Core.ImportNotification.Draft
+﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
+    using System;
+    using System.ComponentModel;
+
+    [DisplayName("Waste generator producer")]
     public class Producer : IDraftEntity
     {
         public Address Address { get; set; }
