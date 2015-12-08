@@ -177,6 +177,7 @@
     <Compile Include="Repositories\Imports\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
+    <Compile Include="Repositories\Imports\ProducerRepository.cs" />
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\MovementDateHistoryRepository.cs" />
     <Compile Include="Repositories\MovementDetailsRepository.cs" />

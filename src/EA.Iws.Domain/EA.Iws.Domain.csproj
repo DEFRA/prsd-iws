@@ -57,6 +57,8 @@
     <Compile Include="ImportNotification\IExporterRepository.cs" />
     <Compile Include="ImportNotification\IImporterRepository.cs" />
     <Compile Include="ImportNotification\Importer.cs" />
+    <Compile Include="ImportNotification\IProducerRepository.cs" />
+    <Compile Include="ImportNotification\Producer.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />

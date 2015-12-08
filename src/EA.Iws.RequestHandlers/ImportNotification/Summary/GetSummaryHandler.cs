@@ -14,6 +14,7 @@
     using Draft = Core.ImportNotification.Draft;
     using Exporter = Core.ImportNotification.Summary.Exporter;
     using Importer = Core.ImportNotification.Summary.Importer;
+    using Producer = Core.ImportNotification.Summary.Producer;
 
     internal class GetSummaryHandler : IRequestHandler<GetSummary, InProgressImportNotificationSummary>
     {
