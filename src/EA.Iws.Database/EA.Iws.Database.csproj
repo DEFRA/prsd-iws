@@ -68,6 +68,7 @@
     <Content Include="scripts\Everytime\Views\0008-Reports-TransitStatesConcat.sql" />
     <Content Include="scripts\Everytime\Views\0009-Reports-TransportRoute.sql" />
     <Content Include="scripts\Everytime\Views\0010-Reports-WasteType.sql" />
+    <Content Include="scripts\Everytime\Views\0012-Reports-ExportNotificationOrganisations.sql" />
     <Content Include="scripts\TestData\20150907-145000-create-submitted-notification.sql" />
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />

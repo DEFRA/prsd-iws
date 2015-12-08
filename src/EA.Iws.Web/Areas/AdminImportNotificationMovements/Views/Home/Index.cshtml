@@ -6,12 +6,12 @@
 
 @helper DisplayDate(DateTime? date)
 {
-if (date.HasValue)
-{
+    if (date.HasValue)
+    {
         @date.Value.ToString("d MMM yyyy")
-}
-else
-{
+    }
+    else
+    {
         @:- -
     }
 }
