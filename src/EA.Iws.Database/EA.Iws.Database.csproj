@@ -188,6 +188,7 @@
     <Content Include="scripts\Update\Sprint21\20151201-154438-add-competentAuthorityId-column-to-local-area-lookup-table.sql" />
     <Content Include="scripts\Update\Sprint22\20151208-094700-create-import-notification-schema.sql" />
     <Content Include="scripts\Update\Sprint22\20151208-095700-create-import-importer-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151208-133800-create-import-exporter-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

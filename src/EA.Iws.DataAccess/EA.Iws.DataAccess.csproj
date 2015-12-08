@@ -99,6 +99,7 @@
     <Compile Include="Mappings\EmailAddressMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
     <Compile Include="Mappings\Imports\ContactMapping.cs" />
+    <Compile Include="Mappings\Imports\ExporterMapping.cs" />
     <Compile Include="Mappings\Imports\ImporterMapping.cs" />
     <Compile Include="Mappings\Imports\ImportMovementMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationMapping.cs" />
