@@ -43,7 +43,7 @@
                 return RedirectToAction("Create");
             }
 
-            return RedirectToAction("Index", "InternalCapture", new { area = "AdminMovement", id = movementId.Value });
+            return RedirectToAction("Index", "InternalCapture", new { area = "AdminExportMovement", id = movementId.Value });
         }
 
         [HttpGet]
@@ -80,7 +80,7 @@
             {
                 var movementId = await mediator.SendAsync(new GetMovementIdByNumber(id, model.Number));
 
-                return RedirectToAction("Index", "InternalCapture", new { area = "AdminMovement", id = movementId });
+                return RedirectToAction("Index", "InternalCapture", new { area = "AdminExportMovement", id = movementId });
             }
 
             ModelState.AddModelError("Number", CaptureMovementControllerResources.SaveUnsuccessful);

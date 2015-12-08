@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Areas.Movement.Controllers;
-    using Areas.Movement.ViewModels.Quantity;
+    using Areas.ExportMovement.Controllers;
+    using Areas.ExportMovement.ViewModels.Quantity;
     using Core.MovementReceipt;
     using Core.Shared;
     using FakeItEasy;

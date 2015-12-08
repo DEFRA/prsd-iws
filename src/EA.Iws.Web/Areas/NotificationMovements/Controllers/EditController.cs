@@ -36,7 +36,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Index", "EditDate", new { area = "Movement", id = model.Shipments.SelectedValue });
+            return RedirectToAction("Index", "EditDate", new { area = "ExportMovement", id = model.Shipments.SelectedValue });
         }
     }
 }

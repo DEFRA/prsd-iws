@@ -504,9 +504,9 @@
     <Content Include="Areas\NotificationApplication\Views\UnClass\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UnNumber\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
-    <Content Include="Areas\Movement\Views\web.config" />
-    <Content Include="Areas\Movement\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Movement\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\web.config" />
+    <Content Include="Areas\ExportMovement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\ShipmentDate.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_CodeDefinitionList.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\PackagingTypes.cshtml" />
@@ -554,8 +554,8 @@
     <Content Include="Areas\NotificationMovements\Views\Create\Carriers.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\_MeansOfTransport.cshtml" />
     <Content Include="Content\iws\_movement.scss" />
-    <Content Include="Areas\Movement\Views\DateReceived\Index.cshtml" />
-    <Content Include="Areas\Movement\Views\QuantityReceived\Index.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\DateReceived\Index.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\QuantityReceived\Index.cshtml" />
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_media-player.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_buttons.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
@@ -569,11 +569,11 @@
     <Content Include="Content\govuk_toolkit\stylesheets\_css3.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\_conditionals.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
-    <Content Include="Areas\Movement\Views\ReceiptComplete\Index.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\ReceiptComplete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOffice.cshtml" />
     <Content Include="Content\iws\_footer.scss" />
-    <Content Include="Areas\Movement\Views\Complete\Date.cshtml" />
-    <Content Include="Areas\Movement\Views\Complete\Upload.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Complete\Date.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Complete\Upload.cshtml" />
     <Content Include="Content\iws\_address-book.scss" />
     <Content Include="Areas\AddressBook\Views\web.config" />
     <Content Include="Areas\AddressBook\Views\_ViewStart.cshtml" />
@@ -615,10 +615,10 @@
     <Content Include="Content\iws\_buttons.scss" />
     <Content Include="Areas\Admin\Views\ImportNotification\Number.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\KeyDates\Index.cshtml" />
-    <Content Include="Areas\Movement\Views\Submit\Index.cshtml" />
-    <Content Include="Areas\Movement\Views\Submit\Success.cshtml" />
-    <Content Include="Areas\Movement\Views\ReceiptComplete\Success.cshtml" />
-    <Content Include="Areas\Movement\Views\Complete\Success.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Submit\Index.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Submit\Success.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\ReceiptComplete\Success.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Complete\Success.cshtml" />
     <Content Include="Areas\Admin\Views\ImportNotification\NotificationType.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Complete\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiveMovement\Index.cshtml" />
@@ -688,7 +688,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\AccountManagement\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\_CompetentAuthoritiesAndExitPoints.cshtml" />
     <Content Include="Content\iws\_import-waste-codes.scss" />
-    <Content Include="Areas\Movement\Views\Home\_Summary.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Home\_Summary.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Shared\_SummaryLayout.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Home\_Summary.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Shared\_CreateSummaryLayout.cshtml" />
@@ -719,7 +719,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_TransitStates.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_StateOfImport.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Edit\Index.cshtml" />
-    <Content Include="Areas\Movement\Views\EditDate\Index.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\EditDate\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_OperationCodes.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_TechnologyEmployed.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_BaselOecdCode.cshtml" />
@@ -734,16 +734,16 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Create.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_Prenotify.cshtml" />
-    <Content Include="Areas\AdminMovement\Views\InternalCapture\Index.cshtml" />
-    <Content Include="Areas\AdminMovement\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
-    <Content Include="Areas\AdminMovement\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
+    <Content Include="Areas\AdminExportMovement\Views\InternalCapture\Index.cshtml" />
+    <Content Include="Areas\AdminExportMovement\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
+    <Content Include="Areas\AdminExportMovement\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Cancel\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Cancel\Confirm.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Cancel\Success.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\web.config" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Movement\Views\Reject\Index.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Reject\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\AssignArea\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Reject\Index.cshtml" />
     <Content Include="Areas\Reports\Views\Shared\_Layout.cshtml" />
@@ -751,11 +751,11 @@
     <Content Include="Areas\Reports\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Reports\Views\Home\Index.cshtml" />
     <Content Include="Areas\Reports\Views\ExportStats\Index.cshtml" />
-    <Content Include="Areas\AdminMovement\Views\web.config" />
+    <Content Include="Areas\AdminExportMovement\Views\web.config" />
     <Content Include="Content\iws\_details.scss" />
-    <Content Include="Areas\AdminMovement\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\AdminMovement\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\AdminMovement\Views\Home\_NotificationSwitcher.cshtml" />
+    <Content Include="Areas\AdminExportMovement\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\AdminExportMovement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AdminExportMovement\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\_InternalMenuImport.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Home\_InternalMenuExport.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\web.config" />
@@ -938,8 +938,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Areas\AdminMovement\AdminMovementAreaRegistration.cs" />
-    <Compile Include="Areas\AdminMovement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminExportMovement\AdminMovementAreaRegistration.cs" />
+    <Compile Include="Areas\AdminExportMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\AdminNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigurationController.cs" />
@@ -1224,80 +1224,80 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Movement\Controllers\CompleteController.cs" />
-    <Compile Include="Areas\Movement\Controllers\DateReceivedController.cs" />
-    <Compile Include="Areas\Movement\Controllers\EditDateController.cs" />
-    <Compile Include="Areas\Movement\Controllers\HomeController.cs" />
-    <Compile Include="Areas\AdminMovement\Controllers\InternalCaptureController.cs" />
-    <Compile Include="Areas\Movement\Controllers\RejectController.cs" />
-    <Compile Include="Areas\Movement\ViewModels\EditDate\EditDateViewModel.cs" />
-    <Compile Include="Areas\AdminMovement\ViewModels\InternalCapture\CaptureViewModel.cs" />
-    <Compile Include="Areas\AdminMovement\ViewModels\InternalCapture\CaptureViewModelResources.Designer.cs">
+    <Compile Include="Areas\ExportMovement\Controllers\CompleteController.cs" />
+    <Compile Include="Areas\ExportMovement\Controllers\DateReceivedController.cs" />
+    <Compile Include="Areas\ExportMovement\Controllers\EditDateController.cs" />
+    <Compile Include="Areas\ExportMovement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminExportMovement\Controllers\InternalCaptureController.cs" />
+    <Compile Include="Areas\ExportMovement\Controllers\RejectController.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\EditDate\EditDateViewModel.cs" />
+    <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\CaptureViewModel.cs" />
+    <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\CaptureViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CaptureViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminMovement\ViewModels\InternalCapture\IComplete.cs" />
-    <Compile Include="Areas\AdminMovement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
-    <Compile Include="Areas\AdminMovement\ViewModels\InternalCapture\RecoveryViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\IComplete.cs" />
+    <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
+    <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\RecoveryViewModelResources.Designer.cs">
       <DependentUpon>RecoveryViewModelResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Areas\AdminMovement\ViewModels\InternalCapture\ReceiptViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceiptViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminMovement\ViewModels\InternalCapture\RecoveryViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Reject\RejectViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Reject\RejectViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\RecoveryViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Reject\RejectViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Reject\RejectViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RejectViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.Designer.cs">
+    <Compile Include="Areas\ExportMovement\ViewModels\Submit\SubmitViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SubmitViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Movement\Views\EditDate\IndexResources.Designer.cs">
+    <Compile Include="Areas\ExportMovement\Views\EditDate\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Movement\Views\Home\SummaryResources.Designer.cs">
+    <Compile Include="Areas\ExportMovement\Views\Home\SummaryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Movement\Views\Reject\IndexResources.Designer.cs">
+    <Compile Include="Areas\ExportMovement\Views\Reject\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminMovement\Views\Shared\EditorTemplates\RecoveryResources.Designer.cs">
+    <Compile Include="Areas\AdminExportMovement\Views\Shared\EditorTemplates\RecoveryResources.Designer.cs">
       <DependentUpon>RecoveryResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Areas\AdminMovement\Views\Shared\EditorTemplates\ReceiptResources.Designer.cs">
+    <Compile Include="Areas\AdminExportMovement\Views\Shared\EditorTemplates\ReceiptResources.Designer.cs">
       <DependentUpon>ReceiptResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Areas\AdminMovement\Views\InternalCapture\IndexResources.Designer.cs">
+    <Compile Include="Areas\AdminExportMovement\Views\InternalCapture\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Movement\Views\Submit\SuccessResources.Designer.cs">
+    <Compile Include="Areas\ExportMovement\Views\Submit\SuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\YesNoEnum.cs" />
-    <Compile Include="Areas\Movement\Views\Submit\IndexResources.Designer.cs">
+    <Compile Include="Areas\ExportMovement\Views\Submit\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -1575,12 +1575,12 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\AssignAreaController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MovementCertificateController.cs" />
-    <Compile Include="Areas\Movement\Controllers\QuantityReceivedController.cs" />
-    <Compile Include="Areas\Movement\Controllers\ReceiptCompleteController.cs" />
-    <Compile Include="Areas\Movement\Controllers\SubmitController.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Complete\SuccessViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Submit\SubmitViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\SuccessViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\Controllers\QuantityReceivedController.cs" />
+    <Compile Include="Areas\ExportMovement\Controllers\ReceiptCompleteController.cs" />
+    <Compile Include="Areas\ExportMovement\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Complete\SuccessViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Submit\SubmitViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\PaymentDetailsController.cs" />
@@ -1653,10 +1653,10 @@
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\DownloadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\MeansOfTransportViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Complete\DateViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\DateReceivedViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Complete\UploadViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\ReceiptCompleteViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Complete\DateViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\DateReceivedViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Complete\UploadViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Controllers\SearchController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReadOnlyController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalMethodViewModel.cs" />
@@ -1768,8 +1768,8 @@
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\NumberOfCarriersViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\NumberOfPackagesViewModel.cs" />
-    <Compile Include="Areas\Movement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
-    <Compile Include="Areas\Movement\MovementAreaRegistration.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\EwcCodeController.cs" />
@@ -2342,55 +2342,55 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminMovement\ViewModels\InternalCapture\CaptureViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportMovement\ViewModels\InternalCapture\CaptureViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CaptureViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminMovement\ViewModels\InternalCapture\RecoveryViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportMovement\ViewModels\InternalCapture\RecoveryViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminMovement\ViewModels\InternalCapture\ReceiptViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceiptViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Movement\ViewModels\Reject\RejectViewModelResources.resx">
+    <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Reject\RejectViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RejectViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Movement\ViewModels\Submit\SubmitViewModelResources.resx">
+    <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Submit\SubmitViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SubmitViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Movement\Views\EditDate\IndexResources.resx">
+    <EmbeddedResource Include="Areas\ExportMovement\Views\EditDate\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Movement\Views\Home\SummaryResources.resx">
+    <EmbeddedResource Include="Areas\ExportMovement\Views\Home\SummaryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Movement\Views\Reject\IndexResources.resx">
+    <EmbeddedResource Include="Areas\ExportMovement\Views\Reject\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminMovement\Views\Shared\EditorTemplates\RecoveryResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportMovement\Views\Shared\EditorTemplates\RecoveryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminMovement\Views\Shared\EditorTemplates\ReceiptResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportMovement\Views\Shared\EditorTemplates\ReceiptResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceiptResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminMovement\Views\InternalCapture\IndexResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportMovement\Views\InternalCapture\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Movement\Views\Submit\IndexResources.resx">
+    <EmbeddedResource Include="Areas\ExportMovement\Views\Submit\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Movement\Views\Submit\SuccessResources.resx">
+    <EmbeddedResource Include="Areas\ExportMovement\Views\Submit\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

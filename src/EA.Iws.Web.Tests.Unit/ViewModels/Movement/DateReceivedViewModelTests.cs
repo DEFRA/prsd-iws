@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.Movement
 {
-    using Areas.Movement.ViewModels;
     using System;
+    using Areas.ExportMovement.ViewModels;
     using TestHelpers;
     using Xunit;
 

@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Areas.Movement.Controllers;
-    using Areas.Movement.ViewModels;
+    using Areas.ExportMovement.Controllers;
+    using Areas.ExportMovement.ViewModels;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Movement;

@@ -12,7 +12,7 @@
         Completed = 4,
         Rejected = 5,
         Cancelled = 6,
-        [Display(Name = "Internally recorded")]
+        [Display(Name = "Pending")]
         Captured = 7
     }
 }

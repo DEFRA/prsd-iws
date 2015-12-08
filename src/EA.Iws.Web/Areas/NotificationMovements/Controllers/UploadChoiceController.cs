@@ -47,7 +47,7 @@
             {
                 var movementId = await mediator.SendAsync(new GetMovementIdByNumber(notificationId, model.Number.Value));
 
-                return RedirectToAction("Index", "Submit", new { id = movementId, area = "Movement" });
+                return RedirectToAction("Index", "Submit", new { id = movementId, area = "ExportMovement" });
             }
 
             ModelState.AddModelError("Number", ValidationMessages[status]);

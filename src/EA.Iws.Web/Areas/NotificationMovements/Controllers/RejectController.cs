@@ -37,7 +37,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Reject", new { area = "Movement", id = model.Selected.Value });
+            return RedirectToAction("Index", "Reject", new { area = "ExportMovement", id = model.Selected.Value });
         }
     }
 }

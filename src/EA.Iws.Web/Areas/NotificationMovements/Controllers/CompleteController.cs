@@ -40,7 +40,7 @@
                 new
                 {
                     id = model.RadioButtons.SelectedValue,
-                    area = "Movement"
+                    area = "ExportMovement"
                 });
         }
     }

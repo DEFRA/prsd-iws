@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.Movement
 {
     using System;
-    using Areas.Movement.ViewModels.Complete;
+    using Areas.ExportMovement.ViewModels.Complete;
     using Prsd.Core;
     using TestHelpers;
     using Xunit;
