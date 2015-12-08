@@ -774,6 +774,7 @@
     <Content Include="Areas\AdminImportMovement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminImportMovement\Views\Dates\Index.cshtml" />
     <Content Include="Areas\AdminImportMovement\Views\Dates\_PreNotify.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -916,6 +917,7 @@
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesStatusEnum.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\AdminImportNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -928,6 +930,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryTableRowViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.Designer.cs">
       <DependentUpon>CreateResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -941,6 +945,11 @@
     <Compile Include="Areas\AdminExportMovement\AdminMovementAreaRegistration.cs" />
     <Compile Include="Areas\AdminExportMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\AdminNotificationMovementsAreaRegistration.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointController.cs" />
@@ -2143,6 +2152,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.resx">

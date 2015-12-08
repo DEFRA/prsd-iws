@@ -30,14 +30,25 @@
             </ul>
         </li>
 
-        <li class="active">
-            <h3 class="current">
+        <li>
+            <h3>
                 <span></span>
                 Assessment
             </h3>
             <ul>
                 <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminImportAssessment", id }, null)</li>
-                
+
+            </ul>
+        </li>
+
+        <li>
+            <h3>
+                <span></span>
+                Shipments
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                <li>@Html.ActionLink("Record shipment data", "Index", "Capture", new { area = "AdminImportNotificationMovements", id }, null)</li>
             </ul>
         </li>
     </ul>
