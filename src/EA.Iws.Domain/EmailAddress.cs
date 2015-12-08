@@ -29,6 +29,11 @@
             return rhs.Value;
         }
 
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
         public bool Equals(EmailAddress other)
         {
             if (ReferenceEquals(null, other))

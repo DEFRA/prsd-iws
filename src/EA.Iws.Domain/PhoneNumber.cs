@@ -36,6 +36,11 @@
             return rhs.Value;
         }
 
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
         public bool Equals(PhoneNumber other)
         {
             if (ReferenceEquals(null, other))
