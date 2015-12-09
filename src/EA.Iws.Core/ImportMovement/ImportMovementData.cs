@@ -1,9 +1,14 @@
 ﻿namespace EA.Iws.Core.ImportMovement
 {
     using System;
+    using Shared;
 
-    public class ImportMovementDates
+    public class ImportMovementData
     {
+        public NotificationType NotificationType { get; set; }
+
+        public Guid NotificationId { get; set; }
+
         public int Number { get; set; }
 
         public DateTimeOffset ActualDate { get; set; }

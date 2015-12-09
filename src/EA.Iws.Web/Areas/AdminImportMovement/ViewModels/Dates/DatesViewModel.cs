@@ -17,22 +17,26 @@
 
         public int Number { get; set; }
 
+        public Guid NotificationId { get; set; }
+
         public DatesViewModel()
         {
             ActualShipmentDate = new OptionalDateInputViewModel(true);
             PrenotificationDate = new OptionalDateInputViewModel(true);
         }
 
-        public DatesViewModel(ImportMovementDates dates)
+        public DatesViewModel(ImportMovementData data)
         {
-            ActualShipmentDate = new OptionalDateInputViewModel(dates.ActualDate.DateTime, true);
+            NotificationId = data.NotificationId;
 
-            var prenotificationDate = dates.PreNotificationDate.HasValue
-                ? dates.PreNotificationDate.Value.DateTime : (DateTime?)null;
+            ActualShipmentDate = new OptionalDateInputViewModel(data.ActualDate.DateTime, true);
+
+            var prenotificationDate = data.PreNotificationDate.HasValue
+                ? data.PreNotificationDate.Value.DateTime : (DateTime?)null;
 
             PrenotificationDate = new OptionalDateInputViewModel(prenotificationDate, true);
 
-            Number = dates.Number;
+            Number = data.Number;
         }
     }
 }

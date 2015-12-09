@@ -69,7 +69,9 @@
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="ImportMovement\ImportMovement.cs" />
-    <Compile Include="ImportMovement\ImportMovementDates.cs" />
+    <Compile Include="ImportMovement\ImportMovementData.cs" />
+    <Compile Include="ImportMovement\ImportMovementRecovery.cs" />
+    <Compile Include="ImportMovement\ImportMovementReceipt.cs" />
     <Compile Include="ImportNotificationMovements\Summary.cs" />
     <Compile Include="ImportNotification\Draft\Address.cs" />
     <Compile Include="ImportNotification\Draft\Contact.cs" />

@@ -16,12 +16,12 @@
 
         public MovementSummaryTableRowViewModel(ImportMovement movement)
         {
-            Number = movement.Dates.Number;
-            if (movement.Dates.PreNotificationDate.HasValue)
+            Number = movement.Data.Number;
+            if (movement.Data.PreNotificationDate.HasValue)
             {
-                PrenotificationDate = movement.Dates.PreNotificationDate.Value.DateTime;
+                PrenotificationDate = movement.Data.PreNotificationDate.Value.DateTime;
             }
-            ShipmentDate = movement.Dates.ActualDate.DateTime;
+            ShipmentDate = movement.Data.ActualDate.DateTime;
         }
     }
 }

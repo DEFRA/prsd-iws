@@ -8,11 +8,10 @@
 <div class="grid-row">
     <div class="column-two-thirds">
         <h1 class="heading-large">@Resource.MainHeading</h1>
-
         <p>@string.Format(Resource.CurrentShipmentParagraph, Model.Number)</p>
 
         @Html.Partial("_Prenotify")
 
-        @Html.ActionLink(Resource.ReturnToIndex, "Index", "Home")
+        @Html.ActionLink(Resource.ReturnToIndex, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, null)
     </div>
 </div>

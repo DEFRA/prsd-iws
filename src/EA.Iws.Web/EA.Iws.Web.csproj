@@ -776,6 +776,9 @@
     <Content Include="Areas\AdminImportMovement\Views\Dates\_PreNotify.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Home\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Validate\Index.cshtml" />
+    <Content Include="Areas\AdminImportMovement\Views\Home\Index.cshtml" />
+    <Content Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
+    <Content Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -916,6 +919,35 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\DateInputViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesStatusEnum.cs" />
+    <Compile Include="Areas\AdminImportMovement\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\HomeViewModel.cs" />
+    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\ReceiptViewModel.cs" />
+    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\ReceiptViewModelResources.Designer.cs">
+      <DependentUpon>ReceiptViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\RecoveryViewModel.cs" />
+    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\RecoveryViewModelResources.Designer.cs">
+      <DependentUpon>RecoveryViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportMovement\Views\Home\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\ReceiptResources.Designer.cs">
+      <DependentUpon>ReceiptResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\RecoveryResources.Designer.cs">
+      <DependentUpon>RecoveryResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\AdminImportNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
@@ -2139,6 +2171,26 @@
     <Folder Include="Areas\Reports\Models\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\AdminImportMovement\ViewModels\Home\ReceiptViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportMovement\ViewModels\Home\RecoveryViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Home\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\ReceiptResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\RecoveryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateViewModelResources.Designer.cs</LastGenOutput>

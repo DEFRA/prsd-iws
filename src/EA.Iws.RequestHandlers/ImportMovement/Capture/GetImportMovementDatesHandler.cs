@@ -6,7 +6,7 @@
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
 
-    internal class GetImportMovementDatesHandler : IRequestHandler<GetImportMovementDates, ImportMovementDates>
+    internal class GetImportMovementDatesHandler : IRequestHandler<GetImportMovementDates, ImportMovementData>
     {
         private readonly IImportMovementRepository movementRepository;
 
@@ -15,12 +15,13 @@
             this.movementRepository = movementRepository;
         }
 
-        public async Task<ImportMovementDates> HandleAsync(GetImportMovementDates message)
+        public async Task<ImportMovementData> HandleAsync(GetImportMovementDates message)
         {
             var movement = await movementRepository.Get(message.MovementId);
 
-            return new ImportMovementDates
+            return new ImportMovementData
             {
+                NotificationId = movement.NotificationId,
                 ActualDate = movement.ActualShipmentDate,
                 Number = movement.Number,
                 PreNotificationDate = movement.PrenotificationDate

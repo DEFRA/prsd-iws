@@ -2,6 +2,10 @@
 {
     public class ImportMovement
     {
-        public ImportMovementDates Dates { get; set; }
+        public ImportMovementData Data { get; set; }
+
+        public ImportMovementReceipt Receipt { get; set; }
+
+        public ImportMovementRecovery Recovery { get; set; }
     }
 }

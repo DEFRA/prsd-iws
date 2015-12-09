@@ -40,8 +40,8 @@
                 TempData[NumberKey] = model.Number.Value;
                 return RedirectToAction("Create");
             }
-
-            throw new NotImplementedException();
+            
+            return RedirectToAction("Index", "Home", new { area = "AdminImportMovement", id = result.Value });
         }
 
         [HttpGet]

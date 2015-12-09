@@ -133,6 +133,7 @@
     <Compile Include="ImportMovement\Capture\CreateImportMovementHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExistsHandler.cs" />
+    <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryDataHandler.cs" />
     <Compile Include="ImportMovement\Edit\SetImportMovementDatesHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodesHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
+    <Compile Include="Mappings\ImportMovement\MovementDataMap.cs" />
     <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />

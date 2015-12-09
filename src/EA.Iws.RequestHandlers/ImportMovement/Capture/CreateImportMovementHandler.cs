@@ -11,11 +11,11 @@
     {
         private readonly IImportMovementFactory importMovementFactory;
         private readonly IImportMovementRepository movementRepository;
-        private readonly IwsContext context;
+        private readonly ImportNotificationContext context;
 
         public CreateImportMovementHandler(IImportMovementFactory importMovementFactory,
             IImportMovementRepository movementRepository, 
-            IwsContext context)
+            ImportNotificationContext context)
         {
             this.importMovementFactory = importMovementFactory;
             this.movementRepository = movementRepository;

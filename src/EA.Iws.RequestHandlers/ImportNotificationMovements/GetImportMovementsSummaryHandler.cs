@@ -36,7 +36,7 @@
                 NotificationNumber = notification.NotificationNumber,
                 Movements = new List<ImportMovement>(movements.Select(m => new ImportMovement
                 {
-                    Dates = new ImportMovementDates
+                    Data = new ImportMovementData
                     {
                         Number = m.Number,
                         ActualDate = m.ActualShipmentDate,

@@ -22,7 +22,7 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var data = await mediator.SendAsync(new GetImportMovementDates(id));
-
+            
             return View(new DatesViewModel(data));
         }
 
