@@ -1,15 +1,21 @@
-﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Options
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Core.Movement;
+    using Core.Notification;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using Prsd.Core.Helpers;
 
-    public class MovementSummaryViewModel
+    public class ShipmentSummaryViewModel
     {
+        public CompetentAuthority CompetentAuthority { get; set; }
+
+        public NotificationStatus NotificationStatus { get; set; }
+
         public Guid NotificationId { get; set; }
 
         public string NotificationNumber { get; set; }
@@ -28,7 +34,7 @@
 
         public int ActiveLoadsCurrent { get; set; }
 
-        public List<MovementSummaryTableViewModel> TableData { get; set; }
+        public List<ShipmentDatesTableViewModel> TableData { get; set; }
 
         public MovementStatus? SelectedMovementStatus { get; set; }
 
@@ -50,7 +56,7 @@
             }
         }
 
-        public MovementSummaryViewModel(Guid notificationId, NotificationMovementsSummaryAndTable data)
+        public ShipmentSummaryViewModel(Guid notificationId, NotificationMovementsSummaryAndTable data)
         {
             NotificationId = notificationId;
             NotificationNumber = data.SummaryData.NotificationNumber;
@@ -62,9 +68,9 @@
             ActiveLoadsPermitted = data.SummaryData.ActiveLoadsPermitted;
             ActiveLoadsCurrent = data.SummaryData.CurrentActiveLoads;
 
-            TableData = new List<MovementSummaryTableViewModel>(
+            TableData = new List<ShipmentDatesTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)
-                    .Select(p => new MovementSummaryTableViewModel(p)));
+                    .Select(p => new ShipmentDatesTableViewModel(p)));
         }
 
         private string GetMovementStatusText(MovementStatus status)

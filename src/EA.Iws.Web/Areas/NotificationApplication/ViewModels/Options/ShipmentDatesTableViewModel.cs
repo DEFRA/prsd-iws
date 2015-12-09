@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Home
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Options
 {
     using System;
     using Core.Movement;
     using Core.Shared;
 
-    public class MovementSummaryTableViewModel
+    public class ShipmentDatesTableViewModel
     {
         public int Number { get; set; }
 
@@ -27,7 +27,7 @@
             return Status == MovementStatus.Submitted && ShipmentDate < DateTime.UtcNow;
         }
 
-        public MovementSummaryTableViewModel(MovementTableDataRow data)
+        public ShipmentDatesTableViewModel(MovementTableDataRow data)
         {
             Number = data.Number;
             Status = data.Status;

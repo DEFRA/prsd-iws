@@ -88,8 +88,8 @@ else
                         @Model[i].Importer
                     </td>
                     <td>
-                        @Html.ActionLink(linkText: GetUserNotificationsResources.LinkChoose, actionName: "ApprovedNotification", controllerName: "Applicant",
-                        routeValues: new { id = Model[i].Id, area = string.Empty }, htmlAttributes: new { @title = Model[i].NotificationNumber })
+                        @Html.ActionLink(linkText: GetUserNotificationsResources.LinkChoose, actionName: "Index", controllerName: "Options",
+                        routeValues: new { id = Model[i].Id, area = "NotificationApplication" }, htmlAttributes: new { @title = Model[i].NotificationNumber })
                     </td>
                 </tr>
             }

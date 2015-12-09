@@ -9,13 +9,13 @@
 </header>
 
 <div class="form-group">
-    @Html.ActionLink("Continue", "Index", "Home", new { notificationId = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
 </div>
 
 <div class="form-group">
     @Html.ActionLink("Return to notification options", 
-        "ApprovedNotification", 
-        "Applicant", 
-        new { area = string.Empty, id = Model.NotificationId }, 
+        "Index", 
+        "Options", 
+        new { area = "NotificationApplication", id = Model.NotificationId }, 
         null)
 </div>

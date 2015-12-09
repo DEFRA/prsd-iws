@@ -28,9 +28,9 @@
 <div class="form-group">
     <p>
         @Html.ActionLink(Resource.ReturnToNotificationOptions,
-            "ApprovedNotification",
-            "Applicant",
-            new { area = string.Empty, id = Model.NotificationId },
+            "Index",
+            "Options",
+            new { area = "NotificationApplication", id = Model.NotificationId },
             null)
     </p>
 </div>

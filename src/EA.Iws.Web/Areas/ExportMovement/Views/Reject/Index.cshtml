@@ -37,7 +37,7 @@
 }
 
 <div class="form-group">
-    @Html.ActionLink("Go to shipment summary", "Index", "Home",
-        new { notificationId = Model.NotificationId, area = "NotificationMovements" },
+    @Html.ActionLink("Go to notification options", "Index", "Options",
+        new { id = Model.NotificationId, area = "NotificationApplication" },
         null)
 </div>

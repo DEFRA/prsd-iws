@@ -46,7 +46,7 @@
 
             var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
 
-            return RedirectToAction("Index", "Home", new { area = "NotificationMovements", notificationId });
+            return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = notificationId });
         }
     }
 }

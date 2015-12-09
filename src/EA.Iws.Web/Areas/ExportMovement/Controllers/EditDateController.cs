@@ -65,7 +65,7 @@
 
             await mediator.SendAsync(new UpdateMovementDate(id, model.AsDateTime().Value));
 
-            return RedirectToAction("Index", "Home", new { area = "NotificationMovements", notificationId });
+            return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = notificationId });
         }
     }
 }

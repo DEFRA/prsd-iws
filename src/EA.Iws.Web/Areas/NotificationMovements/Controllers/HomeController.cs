@@ -18,18 +18,6 @@
             this.mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Index(Guid notificationId, int? status)
-        {
-            var movementsSummary =
-                await mediator.SendAsync(new GetSummaryAndTable(notificationId, (MovementStatus?)status));
-
-            var model = new MovementSummaryViewModel(notificationId, movementsSummary);
-            model.SelectedMovementStatus = (MovementStatus?)status;
-
-            return View(model);
-        }
-
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Summary(Guid notificationId)
         {
@@ -56,14 +44,6 @@
             };
 
             return PartialView("_CreateSummary", model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ActionName("Index")]
-        public ActionResult IndexPost(Guid notificationId, int? selectedMovementStatus)
-        {
-            return RedirectToAction("Index", new { notificationId, status = selectedMovementStatus });
         }
     }
 }

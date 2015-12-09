@@ -16,8 +16,8 @@
         <p>Your shipment is recorded as received and @(isRecovery ? "recovered" : "disposed of").</p>
 
         <p>
-            @Html.ActionLink("Go to shipment summary", "Index", "Home",
-                new { notificationId = Model.NotificationId, area = "NotificationMovements" },
+            @Html.ActionLink("Go to notification options", "Index", "Options",
+                new { id = Model.NotificationId, area = "NotificationApplication" },
                 new { @class = "button" })
         </p>
     </section>
