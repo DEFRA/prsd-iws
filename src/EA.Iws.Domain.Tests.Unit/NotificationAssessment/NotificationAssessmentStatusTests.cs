@@ -137,24 +137,6 @@
         }
 
         [Fact]
-        public void CanSetPaymentReceivedDateWhenReceived()
-        {
-            SetNotificationStatus(NotificationStatus.NotificationReceived);
-
-            notificationAssessment.PaymentReceived(paymentDate);
-
-            Assert.Equal(paymentDate, notificationAssessment.Dates.PaymentReceivedDate);
-        }
-
-        [Fact]
-        public void CantSetPaymentReceivedWhenNotificationNotReceived()
-        {
-            Action setPayment = () => notificationAssessment.PaymentReceived(paymentDate);
-
-            Assert.Throws<InvalidOperationException>(setPayment);
-        }
-
-        [Fact]
         public void CanSetCommencementDateWhenReceived()
         {
             SetNotificationStatus(NotificationStatus.NotificationReceived);

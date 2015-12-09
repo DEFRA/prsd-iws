@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using Domain.NotificationApplication;
-    using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using FakeItEasy;
     using RequestHandlers.NotificationAssessment;
@@ -43,16 +42,20 @@
 
             var repository = A.Fake<INotificationTransactionRepository>();
             A.CallTo(() => repository.GetTransactions(NotificationId)).Returns(transactionsList);
-
-            handler = new AddNotificationTransactionHandler(context, repository, new NotificationTransactionCalculator(repository, chargeCalculator));
-
+            
             context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = NotificationId });
 
             assessment = new NotificationAssessment(NotificationId);
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, assessment);
+            
             context.NotificationAssessments.Add(assessment);
 
             context.NotificationApplications.Add(new TestableNotificationApplication { Id = NotificationId });
+            
+            var assessmentRepository = A.Fake<INotificationAssessmentRepository>();
+            A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId)).Returns(assessment);
+
+            handler = new AddNotificationTransactionHandler(context, new Transaction(assessmentRepository, repository, new NotificationTransactionCalculator(repository, chargeCalculator)));
         }
 
         [Fact]
@@ -72,7 +75,7 @@
         [Fact]
         public async Task PaymentComplete_PaymentReceivedDateSet_AddsDateToAssessment()
         {
-            assessment.PaymentReceived(existingDate);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
 
             var data = GetNotificationTransactionData(NewDate);
             data.Credit = 100.00m;
@@ -87,8 +90,8 @@
         [Fact]
         public async Task PaymentMadeButPaymentIncomplete_DoesNotAddDateToAssessment()
         {
-            assessment.PaymentReceived(existingDate);
-            
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
+
             var data = GetNotificationTransactionData(NewDate);
             data.Credit = 50.00m;
 
@@ -102,7 +105,7 @@
         [Fact]
         public async Task RefundMade_PaymentComplete_DoesNotAddDateToAssessment()
         {
-            assessment.PaymentReceived(existingDate);
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
 
             var creditData = GetNotificationTransactionData(existingDate);
             creditData.Debit = 500.00m;
@@ -118,12 +121,12 @@
 
             Assert.Equal(existingDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
-
+        
         [Fact]
         public async Task PaymentComplete_RefundMade_PaymentCompletedAgain_DoesNotAddDateToAssessment()
         {
-            assessment.PaymentReceived(existingDate);
-            
+            ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
+
             var paymentComplete = GetNotificationTransactionData(existingDate);
             paymentComplete.Credit = 200.00m;
 

@@ -61,7 +61,6 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationLocalAreaId.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReport.cs" />
     <Compile Include="Admin\Search\SearchImportNotifications.cs" />

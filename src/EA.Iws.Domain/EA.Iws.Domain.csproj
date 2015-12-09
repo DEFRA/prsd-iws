@@ -155,6 +155,7 @@
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
+    <Compile Include="NotificationAssessment\Transaction.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentDatesSummaryRepository.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentDecisionRepository.cs" />

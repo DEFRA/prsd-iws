@@ -95,7 +95,6 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandler.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetPaymentReceivedDateHandler.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReportHandler.cs" />
     <Compile Include="Admin\Search\SearchImportNotificationsHandler.cs" />
     <Compile Include="Admin\SendTestEmailHandler.cs" />
