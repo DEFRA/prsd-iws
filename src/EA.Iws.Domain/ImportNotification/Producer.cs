@@ -2,8 +2,9 @@
 {
     using System;
     using Prsd.Core;
+    using Prsd.Core.Domain;
 
-    public class Producer
+    public class Producer : Entity
     {
         public Producer(Guid importNotificationId, string businessName, Address address, Contact contact)
         {
