@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using Core.ImportNotification.Draft;
+    using Domain;
     using Domain.NotificationApplication;
     using FluentValidation;
     using Prsd.Core.Domain;

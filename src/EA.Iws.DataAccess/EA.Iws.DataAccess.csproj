@@ -100,6 +100,8 @@
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
     <Compile Include="Mappings\Imports\ContactMapping.cs" />
+    <Compile Include="Mappings\Imports\WasteOperationCodeMapping.cs" />
+    <Compile Include="Mappings\Imports\WasteOperationMapping.cs" />
     <Compile Include="Mappings\Imports\ProducerMapping.cs" />
     <Compile Include="Mappings\Imports\ExporterMapping.cs" />
     <Compile Include="Mappings\Imports\ImporterMapping.cs" />
@@ -154,7 +156,7 @@
     <Compile Include="Mappings\Exports\PackagingTypeMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerMapping.cs" />
     <Compile Include="Mappings\Exports\OperationCodesEntityMapping.cs" />
-    <Compile Include="Mappings\Exports\OperationCodesMapping.cs" />
+    <Compile Include="Mappings\Common\OperationCodesMapping.cs" />
     <Compile Include="Mappings\Exports\ShipmentInfoMapping.cs" />
     <Compile Include="Mappings\Exports\ChemicalCompositionTypeMapping.cs" />
     <Compile Include="Mappings\Exports\TransportRouteMapping.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="Repositories\Imports\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
+    <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
     <Compile Include="Repositories\Imports\ProducerRepository.cs" />
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\MovementDateHistoryRepository.cs" />

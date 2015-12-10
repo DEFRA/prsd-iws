@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
+    using Domain;
     using Domain.NotificationApplication;
     using TestHelpers.DomainFakes;
     using Xunit;

@@ -6,6 +6,10 @@
 
     public class Producer : Entity
     {
+        protected Producer()
+        {        
+        }
+    
         public Producer(Guid importNotificationId, string businessName, Address address, Contact contact)
         {
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);

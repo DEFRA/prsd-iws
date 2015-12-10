@@ -4,6 +4,10 @@
 
     public class Contact
     {
+        protected Contact()
+        {
+        }
+
         public Contact(string name, PhoneNumber phoneNumber, EmailAddress emailAddress)
         {
             Guard.ArgumentNotNullOrEmpty(() => name, name);

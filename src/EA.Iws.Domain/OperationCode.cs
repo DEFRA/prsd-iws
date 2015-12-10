@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Domain.NotificationApplication
+﻿namespace EA.Iws.Domain
 {
     using Core.Shared;
     using Prsd.Core.Domain;

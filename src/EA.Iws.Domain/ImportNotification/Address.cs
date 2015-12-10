@@ -4,6 +4,10 @@
 
     public class Address
     {
+        protected Address()
+        {
+        }
+
         internal Address(string addressLine1, string addressLine2, string townOrCity, string postalCode, Guid countryId)
         {
             Address1 = addressLine1;

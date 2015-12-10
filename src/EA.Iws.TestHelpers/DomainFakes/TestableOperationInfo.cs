@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.TestHelpers.DomainFakes
 {
+    using Domain;
     using Domain.NotificationApplication;
     using Helpers;
 

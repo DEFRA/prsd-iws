@@ -14,21 +14,23 @@
             Database.SetInitializer<ImportNotificationContext>(null);
         }
 
+        public virtual DbSet<ImportMovement> ImportMovements { get; set; }
+
+        public virtual DbSet<ImportNotification> ImportNotifications { get; set; }
+
+        public virtual DbSet<Importer> Importers { get; set; }
+
+        public virtual DbSet<Exporter> Exporters { get; set; }
+
+        public virtual DbSet<Producer> Producers { get; set; }
+
+        public virtual DbSet<WasteOperation> OperationCodes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.AddFromNamespace(typeof(ImportNotificationMapping).Namespace);
         }
-
-        public virtual DbSet<ImportMovement> ImportMovements { get; set; }
-
-        public virtual DbSet<ImportNotification> ImportNotifications { get; set; }
-
-        public virtual DbSet<Importer> Importers { get; set; } 
-
-        public virtual DbSet<Exporter> Exporters { get; set; } 
-
-        public virtual DbSet<Producer> Producers { get; set; } 
     }
 }

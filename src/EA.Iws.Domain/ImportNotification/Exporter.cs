@@ -6,13 +6,9 @@
 
     public class Exporter : Entity
     {
-        public Guid ImportNotificationId { get; private set; }
-
-        public string Name { get; private set; }
-
-        public Address Address { get; private set; }
-
-        public Contact Contact { get; private set; }
+        protected Exporter()
+        {
+        }
 
         public Exporter(Guid importNotificationId, string businessName, Address address, Contact contact)
         {
@@ -26,5 +22,13 @@
             Address = address;
             Contact = contact;
         }
+
+        public Guid ImportNotificationId { get; private set; }
+
+        public string Name { get; private set; }
+
+        public Address Address { get; private set; }
+
+        public Contact Contact { get; private set; }
     }
 }

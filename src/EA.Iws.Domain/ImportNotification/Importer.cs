@@ -7,6 +7,10 @@
 
     public class Importer : Entity
     {
+        protected Importer()
+        {    
+        }
+
         public Importer(Guid importNotificationId, string businessName, BusinessType businessType,
             string registrationNumber,
             Address address, Contact contact)

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.Tests.Unit.Formatters
 {
     using DocumentGeneration.Formatters;
+    using Domain;
     using Domain.NotificationApplication;
     using TestHelpers.DomainFakes;
     using Xunit;

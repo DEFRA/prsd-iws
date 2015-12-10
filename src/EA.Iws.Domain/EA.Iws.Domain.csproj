@@ -57,8 +57,12 @@
     <Compile Include="ImportNotification\IExporterRepository.cs" />
     <Compile Include="ImportNotification\IImporterRepository.cs" />
     <Compile Include="ImportNotification\Importer.cs" />
+    <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
     <Compile Include="ImportNotification\IProducerRepository.cs" />
+    <Compile Include="ImportNotification\WasteOperation.cs" />
+    <Compile Include="ImportNotification\OperationCodesList.cs" />
     <Compile Include="ImportNotification\Producer.cs" />
+    <Compile Include="ImportNotification\WasteOperationCode.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />
@@ -230,7 +234,7 @@
     <Compile Include="TransportRoute\IEntryPoint.cs" />
     <Compile Include="TransportRoute\IExitPoint.cs" />
     <Compile Include="NotificationApplication\OperationInfo.cs" />
-    <Compile Include="NotificationApplication\OperationCode.cs" />
+    <Compile Include="OperationCode.cs" />
     <Compile Include="TransportRoute\IState.cs" />
     <Compile Include="TransportRoute\ITransportRouteRepository.cs" />
     <Compile Include="TransportRoute\RequiredCustomsOffices.cs" />

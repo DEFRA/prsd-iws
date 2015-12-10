@@ -64,6 +64,7 @@
     <Compile Include="CustomsOffice\EntryCustomsOfficeAddData.cs" />
     <Compile Include="CustomsOffice\ExitCustomsOfficeAddData.cs" />
     <Compile Include="Exporters\ExporterData.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatus.cs" />
     <Compile Include="Importer\ImporterData.cs" />

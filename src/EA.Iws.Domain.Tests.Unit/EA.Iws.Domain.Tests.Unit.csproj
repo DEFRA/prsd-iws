@@ -78,6 +78,8 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
     <Compile Include="ImportNotification\AddressBuilderTests.cs" />
     <Compile Include="ImportNotification\ContactTests.cs" />
+    <Compile Include="ImportNotification\OperationCodesListTests.cs" />
+    <Compile Include="ImportNotification\WasteOperationTests.cs" />
     <Compile Include="ImportNotification\ProducerTests.cs" />
     <Compile Include="ImportNotification\ExporterTests.cs" />
     <Compile Include="ImportNotification\ImporterTests.cs" />
