@@ -19,18 +19,22 @@
 
         public RecoveryViewModel Recovery { get; set; }
 
-        public HomeViewModel(ImportMovement movement)
-        {
-            Id = movement.Data.NotificationId;
-            Number = movement.Data.Number;
-            NotificationId = movement.Data.NotificationId;
-            ActualShipmentDate = movement.Data.ActualDate.DateTime;
-            Receipt = new ReceiptViewModel(movement.Receipt);
-            Recovery = new RecoveryViewModel(movement.Recovery.OperationCompleteDate, movement.Data.NotificationType);
+        public bool IsReceived { get; set; }
 
-            if (movement.Data.PreNotificationDate.HasValue)
+        public bool IsOperationCompleted { get; set; }
+
+        public HomeViewModel(ImportMovementSummaryData movementSummaryData)
+        {
+            Id = movementSummaryData.Data.NotificationId;
+            Number = movementSummaryData.Data.Number;
+            NotificationId = movementSummaryData.Data.NotificationId;
+            ActualShipmentDate = movementSummaryData.Data.ActualDate.DateTime;
+            Receipt = new ReceiptViewModel(movementSummaryData.ReceiptData);
+            Recovery = new RecoveryViewModel(movementSummaryData.RecoveryData.OperationCompleteDate, movementSummaryData.Data.NotificationType);
+
+            if (movementSummaryData.Data.PreNotificationDate.HasValue)
             {
-                PrenotificationDate = movement.Data.PreNotificationDate.Value.DateTime;
+                PrenotificationDate = movementSummaryData.Data.PreNotificationDate.Value.DateTime;
             }
         }
     }

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ImportMovementRecovery
+    public class ImportMovementRecoveryData
     {
         public DateTimeOffset? OperationCompleteDate { get; set; }
 

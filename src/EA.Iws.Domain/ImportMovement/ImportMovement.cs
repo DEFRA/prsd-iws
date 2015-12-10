@@ -33,5 +33,10 @@
         {
             PrenotificationDate = prenotificationDate;
         }
+
+        public ImportMovementReceipt Receive(ShipmentQuantity quantity, DateTimeOffset date)
+        {
+            return new ImportMovementReceipt(Id, quantity, date);
+        }
     }
 }

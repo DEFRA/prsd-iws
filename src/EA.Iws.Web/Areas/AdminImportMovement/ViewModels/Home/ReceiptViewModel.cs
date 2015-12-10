@@ -6,12 +6,14 @@
     using System.Web.Mvc;
     using Core.ImportMovement;
     using Core.Shared;
+    using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
-    public class ReceiptViewModel
+    public class ReceiptViewModel : IComplete, IValidatableObject
     {
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        [RequiredDateInput(ErrorMessageResourceName = "ReceivedDateRequired", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]
         public OptionalDateInputViewModel ReceivedDate { get; set; }
         
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
@@ -58,22 +60,54 @@
             WasAccepted = true;
         }
 
-        public ReceiptViewModel(ImportMovementReceipt importMovementReceipt)
+        public ReceiptViewModel(ImportMovementReceiptData importMovementReceiptData)
         {
-            ActualQuantity = importMovementReceipt.ActualQuantity;
-            Units = importMovementReceipt.ReceiptUnits;
-            PossibleUnits = importMovementReceipt.PossibleUnits;
-            RejectionReason = importMovementReceipt.RejectionReason;
-            RejectionFurtherInformation = importMovementReceipt.RejectionReasonFurtherInformation;
+            ActualQuantity = importMovementReceiptData.ActualQuantity;
+            Units = importMovementReceiptData.ReceiptUnits;
+            PossibleUnits = importMovementReceiptData.PossibleUnits;
+            RejectionReason = importMovementReceiptData.RejectionReason;
+            RejectionFurtherInformation = importMovementReceiptData.RejectionReasonFurtherInformation;
             WasAccepted = string.IsNullOrWhiteSpace(RejectionReason);
 
-            if (importMovementReceipt.ReceiptDate.HasValue)
+            if (importMovementReceiptData.ReceiptDate.HasValue)
             {
-                ReceivedDate = new OptionalDateInputViewModel(importMovementReceipt.ReceiptDate.Value.DateTime, true);
+                ReceivedDate = new OptionalDateInputViewModel(importMovementReceiptData.ReceiptDate.Value.DateTime, true);
             }
             else
             {
                 ReceivedDate = new OptionalDateInputViewModel(true);
+            }
+        }
+
+        public bool IsComplete()
+        {
+            if (WasAccepted)
+            {
+                return ReceivedDate.IsCompleted
+                       && ActualQuantity.HasValue
+                       && Units.HasValue;
+            }
+
+            return !string.IsNullOrWhiteSpace(RejectionReason) && ReceivedDate.IsCompleted;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (WasAccepted)
+            {
+                if (!ActualQuantity.HasValue)
+                {
+                    yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+                }
+                if (!Units.HasValue)
+                {
+                    yield return new ValidationResult(ReceiptViewModelResources.UnitsRequired, new[] { "Units" });
+                }
+            }
+
+            if (!WasAccepted && string.IsNullOrWhiteSpace(RejectionReason))
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.RejectReasonRequired, new[] { "RejectionReason" });
             }
         }
     }

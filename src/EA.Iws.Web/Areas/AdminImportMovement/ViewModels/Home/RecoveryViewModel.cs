@@ -4,7 +4,7 @@
     using Core.Shared;
     using Web.ViewModels.Shared;
 
-    public class RecoveryViewModel
+    public class RecoveryViewModel : IComplete
     {
         public OptionalDateInputViewModel RecoveryDate { get; set; }
 
@@ -17,6 +17,7 @@
 
         public RecoveryViewModel(DateTimeOffset? recoveryDate, NotificationType notificationType)
         {
+            NotificationType = notificationType;
             if (recoveryDate.HasValue)
             {
                 RecoveryDate = new OptionalDateInputViewModel(recoveryDate.Value.DateTime, true);
@@ -25,6 +26,11 @@
             {
                 RecoveryDate = new OptionalDateInputViewModel(true);
             }
+        }
+
+        public bool IsComplete()
+        {
+            return RecoveryDate.IsCompleted;
         }
     }
 }

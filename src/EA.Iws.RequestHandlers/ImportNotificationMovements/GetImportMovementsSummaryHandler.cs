@@ -9,7 +9,6 @@
     using Domain.ImportNotification;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationMovements;
-    using ImportMovement = Core.ImportMovement.ImportMovement;
 
     internal class GetImportMovementsSummaryHandler : IRequestHandler<GetImportMovementsSummary, Summary>
     {
@@ -34,7 +33,7 @@
                 Id = message.ImportNotificationId,
                 NotificationType = notification.NotificationType,
                 NotificationNumber = notification.NotificationNumber,
-                Movements = new List<ImportMovement>(movements.Select(m => new ImportMovement
+                Movements = new List<ImportMovementSummaryData>(movements.Select(m => new ImportMovementSummaryData
                 {
                     Data = new ImportMovementData
                     {

@@ -106,6 +106,9 @@
     <Compile Include="Mappings\Imports\ExporterMapping.cs" />
     <Compile Include="Mappings\Imports\ImporterMapping.cs" />
     <Compile Include="Mappings\Imports\ImportMovementMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementCompletedReceiptMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementRejectionMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementReceiptMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationMapping.cs" />
     <Compile Include="Mappings\Exports\MovementDateHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\MovementDetailsMapping.cs" />
@@ -178,7 +181,11 @@
     <Compile Include="Repositories\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ExporterRepository.cs" />
     <Compile Include="Repositories\Imports\ImporterRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementCompletedReceiptRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementRejectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementSummaryRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
     <Compile Include="Repositories\Imports\ProducerRepository.cs" />

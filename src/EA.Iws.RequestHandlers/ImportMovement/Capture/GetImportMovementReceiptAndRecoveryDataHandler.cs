@@ -1,52 +1,28 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportMovement.Capture
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.ImportMovement;
-    using Core.Shared;
     using Domain.ImportMovement;
-    using Domain.ImportNotification;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
-    using ImportMovement = Core.ImportMovement.ImportMovement;
 
-    internal class GetImportMovementReceiptAndRecoveryDataHandler : IRequestHandler<GetImportMovementReceiptAndRecoveryData, ImportMovement>
+    internal class GetImportMovementReceiptAndRecoveryDataHandler : IRequestHandler<GetImportMovementReceiptAndRecoveryData, ImportMovementSummaryData>
     {
-        private readonly IImportMovementRepository movementRepository;
-        private readonly IImportNotificationRepository importNotificationRepository;
+        private readonly IImportMovementSummaryRepository summaryRepository;
         private readonly IMapper mapper;
 
-        public GetImportMovementReceiptAndRecoveryDataHandler(IImportMovementRepository movementRepository, 
-            IImportNotificationRepository importNotificationRepository,
-            IMapper mapper)
+        public GetImportMovementReceiptAndRecoveryDataHandler(IImportMovementSummaryRepository summaryRepository, IMapper mapper)
         {
-            this.movementRepository = movementRepository;
-            this.importNotificationRepository = importNotificationRepository;
+            this.summaryRepository = summaryRepository;
             this.mapper = mapper;
         }
 
-        public async Task<ImportMovement> HandleAsync(GetImportMovementReceiptAndRecoveryData message)
+        public async Task<ImportMovementSummaryData> HandleAsync(GetImportMovementReceiptAndRecoveryData message)
         {
-            var movement = await movementRepository.Get(message.ImportMovementId);
-            var notification = await importNotificationRepository.GetByImportNotificationId(movement.NotificationId);
+            var data = await summaryRepository.Get(message.ImportMovementId);
 
-            var movementData = mapper.Map<ImportMovementData>(movement);
-            movementData.NotificationType = notification.NotificationType;
-
-            return new ImportMovement
-            {
-                Data = movementData,
-                Receipt = new ImportMovementReceipt
-                {
-                    PossibleUnits = new List<ShipmentQuantityUnits>
-                    {
-                        ShipmentQuantityUnits.CubicMetres,
-                        ShipmentQuantityUnits.Kilograms
-                    }
-                },
-                Recovery = new ImportMovementRecovery()
-            };
+            return mapper.Map<ImportMovementSummaryData>(data);
         }
     }
 }

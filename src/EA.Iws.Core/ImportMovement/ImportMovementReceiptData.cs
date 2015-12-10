@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Shared;
 
-    public class ImportMovementReceipt
+    public class ImportMovementReceiptData
     {
         public DateTimeOffset? ReceiptDate { get; set; }
 

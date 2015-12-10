@@ -14,14 +14,14 @@
 
         public ShipmentQuantityUnits? Unit { get; set; }
 
-        public MovementSummaryTableRowViewModel(ImportMovement movement)
+        public MovementSummaryTableRowViewModel(ImportMovementSummaryData movementSummaryData)
         {
-            Number = movement.Data.Number;
-            if (movement.Data.PreNotificationDate.HasValue)
+            Number = movementSummaryData.Data.Number;
+            if (movementSummaryData.Data.PreNotificationDate.HasValue)
             {
-                PrenotificationDate = movement.Data.PreNotificationDate.Value.DateTime;
+                PrenotificationDate = movementSummaryData.Data.PreNotificationDate.Value.DateTime;
             }
-            ShipmentDate = movement.Data.ActualDate.DateTime;
+            ShipmentDate = movementSummaryData.Data.ActualDate.DateTime;
         }
     }
 }

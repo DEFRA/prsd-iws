@@ -18,6 +18,12 @@
 
         public virtual DbSet<ImportNotification> ImportNotifications { get; set; }
 
+        public virtual DbSet<ImportMovementReceipt> ImportMovementReceipts { get; set; }
+
+        public virtual DbSet<ImportMovementRejection> ImportMovementRejections { get; set; }
+
+        public virtual DbSet<ImportMovementCompletedReceipt> ImportMovementCompletedReceipts { get; set; }
+
         public virtual DbSet<Importer> Importers { get; set; }
 
         public virtual DbSet<Exporter> Exporters { get; set; }

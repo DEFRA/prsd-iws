@@ -13,6 +13,6 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public IList<ImportMovement> Movements { get; set; }
+        public IList<ImportMovementSummaryData> Movements { get; set; }
     }
 }

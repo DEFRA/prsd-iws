@@ -4,7 +4,7 @@
     using Core.ImportMovement;
     using Prsd.Core.Mediator;
 
-    public class GetImportMovementReceiptAndRecoveryData : IRequest<ImportMovement>
+    public class GetImportMovementReceiptAndRecoveryData : IRequest<ImportMovementSummaryData>
     {
         public Guid ImportMovementId { get; private set; }
 
