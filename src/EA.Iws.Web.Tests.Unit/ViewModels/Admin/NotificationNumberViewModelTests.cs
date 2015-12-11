@@ -33,8 +33,8 @@
         [Theory]
         [InlineData(null, null)]
         [InlineData("GB0001005000", "GB0001005000")]
-        [InlineData("GB 0001 005000", "GB0001005000")]
-        [InlineData("   GB 0001 005000  ", "GB0001005000")]
+        [InlineData("GB 0001 005000", "GB 0001 005000")]
+        [InlineData("   GB 0001 005000  ", "GB 0001 005000")]
         public void NotificationNumberWithOrWithoutSpace_ReturnsValueWithoutSpace(string notificationNumber, string expectedNotificationNumber)
         {
             model.NotificationNumber = notificationNumber;
