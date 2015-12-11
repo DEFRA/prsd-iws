@@ -5,32 +5,29 @@
     using Prsd.Core;
     using Prsd.Core.Domain;
 
-    public class Importer : Entity
+    public class Facility : Entity
     {
-        protected Importer()
+        protected Facility()
         {    
         }
 
-        public Importer(Guid importNotificationId, string businessName, BusinessType businessType,
+        public Facility(string businessName, BusinessType businessType,
             string registrationNumber,
-            Address address, Contact contact)
+            Address address, Contact contact, bool isActualSiteOfTreatment)
         {
-            Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
             Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
             Guard.ArgumentNotDefaultValue(() => businessType, businessType);
             Guard.ArgumentNotNullOrEmpty(() => registrationNumber, registrationNumber);
             Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNull(() => contact, contact);
 
-            ImportNotificationId = importNotificationId;
             Name = businessName;
             Type = businessType;
             RegistrationNumber = registrationNumber;
             Address = address;
             Contact = contact;
+            IsActualSiteOfTreatment = isActualSiteOfTreatment;
         }
-
-        public Guid ImportNotificationId { get; private set; }
 
         public string Name { get; private set; }
 
@@ -41,5 +38,7 @@
         public Address Address { get; private set; }
 
         public Contact Contact { get; private set; }
+
+        public bool IsActualSiteOfTreatment { get; private set; }
     }
 }

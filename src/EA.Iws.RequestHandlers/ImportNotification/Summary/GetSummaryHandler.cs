@@ -13,6 +13,7 @@
     using Contact = Core.ImportNotification.Summary.Contact;
     using Draft = Core.ImportNotification.Draft;
     using Exporter = Core.ImportNotification.Summary.Exporter;
+    using Facility = Core.ImportNotification.Summary.Facility;
     using Importer = Core.ImportNotification.Summary.Importer;
     using Producer = Core.ImportNotification.Summary.Producer;
     using WasteOperation = Core.ImportNotification.Summary.WasteOperation;

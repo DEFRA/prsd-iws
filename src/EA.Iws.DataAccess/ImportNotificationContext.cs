@@ -32,6 +32,8 @@
 
         public virtual DbSet<WasteOperation> OperationCodes { get; set; }
 
+        public virtual DbSet<FacilityCollection> Facilities { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

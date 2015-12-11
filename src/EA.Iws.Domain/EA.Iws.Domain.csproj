@@ -62,8 +62,12 @@
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />
     <Compile Include="ImportNotification\Exporter.cs" />
+    <Compile Include="ImportNotification\FacilityCollection.cs" />
+    <Compile Include="ImportNotification\FacilityList.cs" />
     <Compile Include="ImportNotification\IExporterRepository.cs" />
+    <Compile Include="ImportNotification\IFacilityRepository.cs" />
     <Compile Include="ImportNotification\IImporterRepository.cs" />
+    <Compile Include="ImportNotification\Facility.cs" />
     <Compile Include="ImportNotification\Importer.cs" />
     <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
     <Compile Include="ImportNotification\IProducerRepository.cs" />

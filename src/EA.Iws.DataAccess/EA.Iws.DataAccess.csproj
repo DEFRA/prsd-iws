@@ -100,6 +100,8 @@
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
     <Compile Include="Mappings\Imports\ContactMapping.cs" />
+    <Compile Include="Mappings\Imports\FacilityCollectionMapping.cs" />
+    <Compile Include="Mappings\Imports\FacilityMapping.cs" />
     <Compile Include="Mappings\Imports\WasteOperationCodeMapping.cs" />
     <Compile Include="Mappings\Imports\WasteOperationMapping.cs" />
     <Compile Include="Mappings\Imports\ProducerMapping.cs" />
@@ -180,6 +182,7 @@
     <Compile Include="Repositories\ExporterRepository.cs" />
     <Compile Include="Repositories\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ExporterRepository.cs" />
+    <Compile Include="Repositories\Imports\FacilityRepository.cs" />
     <Compile Include="Repositories\Imports\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementCompletedReceiptRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />
