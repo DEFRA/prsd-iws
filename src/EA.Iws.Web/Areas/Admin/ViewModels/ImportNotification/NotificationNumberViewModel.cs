@@ -7,7 +7,7 @@
         private string notificationNumber;
 
         [Required]
-        [StringLength(25, ErrorMessage = "Import notification number cannot be longer than 14 characters")]
+        [StringLength(25, ErrorMessage = "Import notification number cannot be longer than 25 characters")]
         [Display(Name = "Notification number")]
         public string NotificationNumber
         {
@@ -19,7 +19,7 @@
                     notificationNumber = null;
                     return;
                 }
-                notificationNumber = value.Trim().Replace(" ", string.Empty);
+                notificationNumber = value.Trim();
             }
         }
     }
