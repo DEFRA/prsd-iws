@@ -1,6 +1,6 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision.NotificationAssessmentDecisionViewModel
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ObjectionDate.Day) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Month) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Year)">
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ObjectionDate) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Day) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Month) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Year)">
     <label class="heading-medium">@Html.DisplayNameFor(m => m.ObjectionDate)</label>
     @Html.Gds().ValidationMessageFor(m => m.ObjectionDate)
     @Html.EditorFor(m => m.ObjectionDate)

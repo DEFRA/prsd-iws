@@ -134,7 +134,12 @@
             if (string.IsNullOrWhiteSpace(ReasonForObjection))
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ReasonObjectedRequired,
-                    new[] { "ReasonObjected" });
+                    new[] { "ReasonForObjection" });
+            }
+
+            if (!ObjectionDate.IsCompleted)
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ObjectedDateRequired, new[] { "ObjectionDate" });
             }
         }
 
@@ -143,7 +148,12 @@
             if (string.IsNullOrWhiteSpace(ReasonForWithdrawal))
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ReasonWithdrawnRequired,
-                    new[] { "ReasonWithdrawal" });
+                    new[] { "ReasonForWithdrawal" });
+            }
+
+            if (!WithdrawnDate.IsCompleted)
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.WithdrawnDateRequired, new[] { "WithdrawnDate" });
             }
         }
     }
