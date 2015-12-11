@@ -23,5 +23,13 @@
 
             return View(model);
         }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult _InternalMenuImport(Guid id)
+        {
+            var response = mediator.SendAsync(new GetNotificationDetails(id)).GetAwaiter().GetResult();
+
+            return PartialView(response);
+        }
     }
 }

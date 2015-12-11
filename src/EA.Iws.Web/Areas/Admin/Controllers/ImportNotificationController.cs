@@ -66,9 +66,15 @@
             {
                 return View(model);
             }
+
+            var notificationType = (NotificationType)model.NotificationTypeRadioButtons.SelectedValue;
             
-            var id = await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber,
-                (NotificationType)model.NotificationTypeRadioButtons.SelectedValue));
+            var id = await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber, notificationType));
+
+            if (notificationType == Core.Shared.NotificationType.Disposal)
+            {
+                return RedirectToAction("Index", "Exporter", new { area = "ImportNotification", id });
+            }
 
             return RedirectToAction("Index", "Preconsented", new { area = "ImportNotification", id });
         }

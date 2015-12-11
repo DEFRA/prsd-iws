@@ -1,11 +1,15 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@using EA.Iws.Core.Shared
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 @{ViewBag.SectionIncompleteText = Resource.SectionIncompleteText;}
 
 <div id="submit-overview-area">
     <h2 class="heading-medium">@Resource.OrganisationsTitle</h2>
-    @Html.Partial("_Preconsented")
+    @if (Model.Type != NotificationType.Disposal)
+    {
+        @Html.Partial("_Preconsented")
+    }
     @Html.Partial("_Exporter")
     @Html.Partial("_Producer")
     @Html.Partial("_Importer")

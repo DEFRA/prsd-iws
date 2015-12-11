@@ -1,4 +1,7 @@
-﻿@{
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Core.ImportNotification.NotificationDetails
+
+@{
     object routeId;
     Guid? id = null;
     if (ViewContext.RouteData.Values.TryGetValue("id", out routeId))
@@ -8,6 +11,7 @@
 }
 
 <div id="accordion">
+    <h2 class="heading-small">Import notification: @Html.Raw(Model.NotificatioNumber.Replace(" ", "&nbsp;"))</h2>
     <ul>
         <li class="active">
             <h3 class="current">
@@ -16,7 +20,10 @@
             </h3>
             <ul>
                 <li>@Html.ActionLink("Overview", "Index", "Home", new { area = "ImportNotification", id }, null)</li>
-                <li>@Html.ActionLink("Pre-consent", "Index", "Preconsented", new { area = "ImportNotification", id }, null)</li>
+                @if (Model.NotificationType != NotificationType.Disposal)
+                {
+                    <li>@Html.ActionLink("Pre-consent", "Index", "Preconsented", new { area = "ImportNotification", id }, null)</li>
+                }
                 <li>@Html.ActionLink("Exporter notifier", "Index", "Exporter", new { area = "ImportNotification", id }, null)</li>
                 <li>@Html.ActionLink("Importer consignee", "Index", "Importer", new { area = "ImportNotification", id }, null)</li>
                 <li>@Html.ActionLink("Waste generator producer", "Index", "Producer", new { area = "ImportNotification", id }, null)</li>
