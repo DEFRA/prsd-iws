@@ -194,6 +194,7 @@
     <Content Include="scripts\Update\Sprint22\20151208-133800-create-import-exporter-table.sql" />
     <Content Include="scripts\Update\Sprint22\20151208-163109-add-reason-column-for-objection-and-withdrawn.sql" />
     <Content Include="scripts\Update\Sprint22\20151210-152300-create-waste-operation-tables.sql" />
+    <Content Include="scripts\Update\Sprint22\20151211-135200-add-import-notification-shipment-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

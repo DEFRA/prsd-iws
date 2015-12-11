@@ -73,8 +73,10 @@
     <Compile Include="ImportNotification\IProducerRepository.cs" />
     <Compile Include="ImportNotification\WasteOperation.cs" />
     <Compile Include="ImportNotification\OperationCodesList.cs" />
+    <Compile Include="ImportNotification\IShipmentRepository.cs" />
     <Compile Include="ImportNotification\Producer.cs" />
     <Compile Include="ImportNotification\WasteOperationCode.cs" />
+    <Compile Include="ImportNotification\Shipment.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />
