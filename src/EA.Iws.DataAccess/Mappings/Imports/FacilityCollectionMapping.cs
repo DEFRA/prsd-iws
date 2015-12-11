@@ -13,7 +13,7 @@
 
             HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<FacilityCollection, ICollection<Facility>>(
-                    "FacilityCollection"))
+                    "FacilitiesCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("FacilityCollectionId"));
         }
