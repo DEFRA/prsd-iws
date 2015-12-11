@@ -3,6 +3,7 @@
 @using EA.Iws.Core.Notification;
 
 <div id="accordion">
+    <p class="bold-medium">&nbsp;@Model.Number</p>
     <ul>
         <li class="@(Model.ActiveSection == "Assessment" ? "active" : string.Empty)">
             <h3 class="@(Model.ActiveSection == "Assessment" ? "current" : string.Empty)">
@@ -10,7 +11,7 @@
                 Notification assessment
             </h3>
             <ul>
-                <li>@Html.ActionLink("Notification overview", "Index", "Home", new { area = "AdminExportAssessment", Model.Id } , null)</li>
+                <li>@Html.ActionLink("Notification overview", "Index", "Home", new { area = "AdminExportAssessment", Model.Id }, null)</li>
                 <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminExportAssessment", Model.Id }, null)</li>
                 <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminExportAssessment", Model.Id }, null)</li>
                 <li>@Html.ActionLink("FG date", "Dates", "FinancialGuarantee", new { area = "AdminExportAssessment", Model.Id }, null)</li>

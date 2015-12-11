@@ -1,4 +1,5 @@
-﻿@{
+﻿@model EA.Iws.Core.ImportNotification.NotificationDetails
+@{
     object routeId;
     Guid? id = null;
     if (ViewContext.RouteData.Values.TryGetValue("id", out routeId))
@@ -8,6 +9,7 @@
 }
 
 <div id="accordion">
+    <p class="bold-medium">&nbsp;@Model.NotificatioNumber</p>
     <ul>
         <li class="active">
             <h3 class="current">
