@@ -18,5 +18,10 @@
         {
             return await context.ImportMovementCompletedReceipts.SingleOrDefaultAsync(r => r.MovementId == movementId);
         }
+
+        public void Add(ImportMovementCompletedReceipt completedReceipt)
+        {
+            context.ImportMovementCompletedReceipts.Add(completedReceipt);
+        }
     }
 }

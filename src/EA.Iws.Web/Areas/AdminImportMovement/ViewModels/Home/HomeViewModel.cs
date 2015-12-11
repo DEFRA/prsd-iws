@@ -23,6 +23,10 @@
 
         public bool IsOperationCompleted { get; set; }
 
+        public HomeViewModel()
+        {
+        }
+
         public HomeViewModel(ImportMovementSummaryData movementSummaryData)
         {
             Id = movementSummaryData.Data.NotificationId;
@@ -31,6 +35,8 @@
             ActualShipmentDate = movementSummaryData.Data.ActualDate.DateTime;
             Receipt = new ReceiptViewModel(movementSummaryData.ReceiptData);
             Recovery = new RecoveryViewModel(movementSummaryData.RecoveryData.OperationCompleteDate, movementSummaryData.Data.NotificationType);
+            IsReceived = movementSummaryData.ReceiptData.IsReceived;
+            IsOperationCompleted = movementSummaryData.RecoveryData.IsOperationCompleted;
 
             if (movementSummaryData.Data.PreNotificationDate.HasValue)
             {

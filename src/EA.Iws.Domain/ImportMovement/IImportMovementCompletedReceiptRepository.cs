@@ -6,5 +6,7 @@
     public interface IImportMovementCompletedReceiptRepository
     {
         Task<ImportMovementCompletedReceipt> GetByMovementIdOrDefault(Guid movementId);
+
+        void Add(ImportMovementCompletedReceipt completedReceipt);
     }
 }

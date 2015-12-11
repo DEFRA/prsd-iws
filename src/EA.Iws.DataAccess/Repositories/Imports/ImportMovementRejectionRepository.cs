@@ -18,5 +18,10 @@
         {
             return await context.ImportMovementRejections.SingleOrDefaultAsync(r => r.MovementId == movementId);
         }
+
+        public void Add(ImportMovementRejection rejection)
+        {
+            context.ImportMovementRejections.Add(rejection);
+        }
     }
 }

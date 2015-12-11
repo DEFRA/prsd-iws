@@ -98,6 +98,10 @@
             builder.RegisterType<ImportMovementNumberValidator>().As<IImportMovementNumberValidator>();
             builder.RegisterType<Validator>().As<IValidator>();
 
+            builder.RegisterType<RejectImportMovement>().As<IRejectImportMovement>();
+            builder.RegisterType<ReceiveImportMovement>().As<IReceiveImportMovement>();
+            builder.RegisterType<CompleteImportMovement>().As<ICompleteImportMovement>();
+
             if (HasAsposeLicense())
             {
                 builder.RegisterType<AsposePdfGenerator>().As<IPdfGenerator>();

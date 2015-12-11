@@ -6,5 +6,7 @@
     public interface IImportMovementRejectionRepository
     {
         Task<ImportMovementRejection> GetByMovementIdOrDefault(Guid movementId);
+
+        void Add(ImportMovementRejection rejection);
     }
 }

@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailAddress.cs" />
+    <Compile Include="ImportMovement\CompleteImportMovement.cs" />
+    <Compile Include="ImportMovement\ICompleteImportMovement.cs" />
     <Compile Include="ImportMovement\IImportMovementCompletedReceiptRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementReceiptRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementRejectionRepository.cs" />
@@ -58,6 +60,10 @@
     <Compile Include="ImportMovement\ImportMovementRejection.cs" />
     <Compile Include="ImportMovement\ImportMovementCompletedReceipt.cs" />
     <Compile Include="ImportMovement\ImportMovementSummary.cs" />
+    <Compile Include="ImportMovement\IReceiveImportMovement.cs" />
+    <Compile Include="ImportMovement\IRejectImportMovement.cs" />
+    <Compile Include="ImportMovement\ReceiveImportMovement.cs" />
+    <Compile Include="ImportMovement\RejectImportMovement.cs" />
     <Compile Include="ImportNotification\Address.cs" />
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />

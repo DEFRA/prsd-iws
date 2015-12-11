@@ -19,8 +19,9 @@
         {
             var query = from movement in context.ImportMovements
                 where movement.Id == movementId
-                from notification in context.ImportNotifications
-                where notification.Id == movement.NotificationId
+                from notification 
+                    in context.ImportNotifications
+                        .Where(n => n.Id == movement.NotificationId)
                 from receipt
                     in context.ImportMovementReceipts
                         .Where(x => x.MovementId == movementId).DefaultIfEmpty()

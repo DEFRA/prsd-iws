@@ -38,5 +38,15 @@
         {
             return new ImportMovementReceipt(Id, quantity, date);
         }
+
+        public ImportMovementRejection Reject(DateTimeOffset date, string reason, string furtherDetails)
+        {
+            return new ImportMovementRejection(Id, date, reason, furtherDetails);
+        }
+
+        public ImportMovementCompletedReceipt Complete(DateTimeOffset date)
+        {
+            return new ImportMovementCompletedReceipt(Id, date);
+        }
     }
 }

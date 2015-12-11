@@ -13,7 +13,7 @@
         {
         }
 
-        internal ImportMovementCompletedReceipt(Guid movementId, DateTime dateComplete)
+        internal ImportMovementCompletedReceipt(Guid movementId, DateTimeOffset dateComplete)
         {
             Date = dateComplete;
             MovementId = movementId;

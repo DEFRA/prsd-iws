@@ -10,26 +10,19 @@
 
     internal class RecordReceiptHandler : IRequestHandler<RecordReceipt, bool>
     {
-        private readonly IImportMovementRepository movementRepository;
-        private readonly IImportMovementReceiptRepository receiptRepository;
+        private readonly IReceiveImportMovement receiveImportMovement;
         private readonly ImportNotificationContext context;
 
-        public RecordReceiptHandler(IImportMovementRepository movementRepository, 
-            IImportMovementReceiptRepository receiptRepository,
+        public RecordReceiptHandler(IReceiveImportMovement receiveImportMovement,
             ImportNotificationContext context)
         {
-            this.movementRepository = movementRepository;
-            this.receiptRepository = receiptRepository;
+            this.receiveImportMovement = receiveImportMovement;
             this.context = context;
         }
 
         public async Task<bool> HandleAsync(RecordReceipt message)
         {
-            var movement = await movementRepository.Get(message.ImportMovementId);
-
-            var receipt = movement.Receive(new ShipmentQuantity(message.Quantity, message.Unit), new DateTimeOffset(message.Date, TimeSpan.Zero));
-
-            receiptRepository.Add(receipt);
+            await receiveImportMovement.Receive(message.ImportMovementId, new ShipmentQuantity(message.Quantity, message.Unit), new DateTimeOffset(message.Date, TimeSpan.Zero));
 
             await context.SaveChangesAsync();
 
