@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Requests.ImportNotification.Validate;
 
     public class ValidateViewModel
@@ -16,5 +17,10 @@
         }
 
         public IEnumerable<ValidationResults> ValidationResults { get; set; }
+
+        public bool HasErrors
+        {
+            get { return ValidationResults.Any(p => p.Errors.Any()); }
+        }
     }
 }

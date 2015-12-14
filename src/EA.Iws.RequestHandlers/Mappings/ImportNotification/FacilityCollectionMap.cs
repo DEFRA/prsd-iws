@@ -21,7 +21,7 @@
         {
             return new Domain.ImportNotification.FacilityCollection(parameter.ImportNotificationId,
                 new FacilityList(source.Facilities.Select(f => mapper.Map<Facility>(f))),
-                parameter.AllFacilitiesPreconsented.Value);
+                parameter.AllFacilitiesPreconsented.GetValueOrDefault());
         }
     }
 }

@@ -38,6 +38,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ImportNotificationId)
 
         <div class="form-group large-bottom-margin @Html.Gds().FormGroupClass(m => m.Name)">
             @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)

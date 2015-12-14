@@ -3,21 +3,34 @@
     ViewBag.Title = "Validate import notification";
 }
 
-<h1 class="heading-large">Your notification looks incomplete</h1>
-
-<p>Missing data from each section of the notification is listed below.</p>
-
-@foreach (var validationResult in Model.ValidationResults)
+@if (Model.HasErrors)
 {
-    if (validationResult.Errors.Any())
-    {
-        <h2 class="heading-medium">@validationResult.EntityName</h2>
+    <h1 class="heading-large">Your notification looks incomplete</h1>
 
-        <ul class="list-bullet">
-            @foreach (var errorText in validationResult.Errors)
-            {
-                <li>@errorText</li>
-            }
-        </ul>
+    <p>Missing data from each section of the notification is listed below.</p>
+
+    foreach (var validationResult in Model.ValidationResults)
+    {
+        if (validationResult.Errors.Any())
+        {
+            <h2 class="heading-medium">@validationResult.EntityName</h2>
+
+            <ul class="list-bullet">
+                @foreach (var errorText in validationResult.Errors)
+                {
+                    <li>@errorText</li>
+                }
+            </ul>
+        }
+    }
+}
+else
+{
+    <h1 class="heading-large">Your notification is ready to complete</h1>
+
+    using (Html.BeginForm("Save", "Validate"))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="button">@Constants.ContinueButtonText</button>
     }
 }

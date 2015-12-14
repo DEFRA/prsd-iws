@@ -62,6 +62,7 @@
         public WasteTypeViewModel Map(WasteType source, List<WasteCodeData> parameter)
         {
             var model = new WasteTypeViewModel(source);
+            model.ImportNotificationId = source.ImportNotificationId;
 
             if (source.SelectedEwcCodes != null)
             {

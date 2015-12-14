@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
     using System;
+    using System.Threading.Tasks;
     using Prsd.Core;
 
     public class AddressBuilder
@@ -54,7 +55,8 @@
 
         public Address ToAddress()
         {
-            var country = countryRepository.GetById(countryId).Result;
+            var country = Task.Run(() => countryRepository.GetById(countryId)).Result;
+
             if (country.Name.Equals("United Kingdom", StringComparison.InvariantCultureIgnoreCase)
                 && string.IsNullOrWhiteSpace(postalCode))
             {

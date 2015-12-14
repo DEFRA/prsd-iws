@@ -50,6 +50,7 @@
             Guard.ArgumentNotNull(() => hCode, hCode);
             Guard.ArgumentNotNull(() => unClass, unClass);
 
+            ImportNotificationId = importNotificationId;
             Name = name;
 
             var wasteCodes = new List<WasteTypeWasteCode>();

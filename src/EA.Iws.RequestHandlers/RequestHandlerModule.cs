@@ -11,6 +11,7 @@
     using Documents;
     using Domain;
     using Domain.ImportMovement;
+    using Domain.ImportNotification;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
@@ -111,6 +112,8 @@
             builder.RegisterType<UserRoleService>().As<IUserRoleService>();
             builder.RegisterType<RequestAuthorizationAttributeCache>().AsSelf().SingleInstance();
             builder.RegisterType<InMemoryAuthorizationService>().As<IAuthorizationService>();
+
+            builder.RegisterType<AddressBuilder>().InstancePerDependency().AsSelf();
         }
 
         private static bool HasAsposeLicense()

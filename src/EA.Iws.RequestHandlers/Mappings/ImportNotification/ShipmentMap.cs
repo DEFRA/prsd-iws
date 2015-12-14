@@ -9,7 +9,7 @@
         public Domain.ImportNotification.Shipment Map(Shipment source, Preconsented parameter)
         {
             return new Domain.ImportNotification.Shipment(source.ImportNotificationId,
-                new ShipmentPeriod(source.StartDate.Value, source.EndDate.Value, parameter.AllFacilitiesPreconsented.Value),
+                new ShipmentPeriod(source.StartDate.Value, source.EndDate.Value, parameter.AllFacilitiesPreconsented.GetValueOrDefault()),
                 new ShipmentQuantity(source.Quantity.Value, source.Unit.Value),
                 source.TotalShipments.Value);
         }
