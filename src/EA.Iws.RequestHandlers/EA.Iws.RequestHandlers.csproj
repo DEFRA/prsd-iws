@@ -262,6 +262,7 @@
     <Compile Include="Mappings\ImportNotification\StateOfImportMap.cs" />
     <Compile Include="Mappings\ImportNotification\TransitStateMap.cs" />
     <Compile Include="Mappings\ImportNotification\WasteOperationMap.cs" />
+    <Compile Include="Mappings\ImportNotification\WasteTypeMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Mappings\Reports\MissingShipmentMap.cs" />
