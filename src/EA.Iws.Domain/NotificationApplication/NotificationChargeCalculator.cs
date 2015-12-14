@@ -29,9 +29,33 @@
             {
                 return 0;
             }
+            
+            var notification = await notificationApplicationRepository.GetById(notificationId);
+
+            if (notification.Charge != null)
+            {
+                return notification.Charge.GetValueOrDefault();
+            }
+
+            return await GetPrice(shipmentInfo, notification);
+        }
+
+        public async Task<decimal> GetCalculatedValue(Guid notificationId)
+        {
+            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
+
+            if (shipmentInfo == null)
+            {
+                return 0;
+            }
 
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
+            return await GetPrice(shipmentInfo, notification);
+        }
+
+        private async Task<decimal> GetPrice(ShipmentInfo shipmentInfo, NotificationApplication notification)
+        {
             var pricingStructures = await pricingStructureRepository.Get();
 
             var pricingStructure = pricingStructures.Single(p =>

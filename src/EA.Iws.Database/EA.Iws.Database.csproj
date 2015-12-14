@@ -206,6 +206,7 @@
     <Content Include="scripts\Update\Sprint22\20151214-120400-import-facility-actual-site.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-140400-import-producer-is-only-producer.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-160300-add-waste-type-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-144027-add-charge-column-to-notification.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-161100-add-waste-codes-table.sql" />
     <Content Include="scripts\Update\Sprint22\20151215-111000-remove-code-type-from-waste-codes.sql" />
     <Content Include="scripts\Update\Sprint22\20151215-141400-allow-registration-number-null.sql" />

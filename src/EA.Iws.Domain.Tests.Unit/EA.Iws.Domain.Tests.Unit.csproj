@@ -117,6 +117,7 @@
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
     <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationTests.cs" />
+    <Compile Include="NotificationApplication\NotificationChargeCalculatorTests.cs" />
     <Compile Include="NotificationApplication\NotificationCustomsOfficeTests.cs" />
     <Compile Include="NotificationApplication\NotificationCarrierTests.cs" />
     <Compile Include="NotificationApplication\NotificationFacilityTests.cs" />

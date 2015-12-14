@@ -207,6 +207,7 @@
         private void OnTransmitted(DateTime transmittedDate)
         {
             Dates.TransmittedDate = transmittedDate;
+            RaiseEvent(new NotificationTransmittedEvent(NotificationApplicationId));
         }
 
         private void OnObjected(DateTime objectionDate, string reason)

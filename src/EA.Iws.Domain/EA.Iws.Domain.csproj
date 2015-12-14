@@ -203,6 +203,7 @@
     <Compile Include="DaysRemainingCalculator.cs" />
     <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummary.cs" />
+    <Compile Include="NotificationAssessment\NotificationTransmittedEvent.cs" />
     <Compile Include="NotificationAssessment\Transaction.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentDatesSummaryRepository.cs" />
