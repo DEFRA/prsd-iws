@@ -103,7 +103,7 @@ else if (status != MovementStatus.Cancelled)
         </div>
 
         <div class="column-half">
-            @if (Model.NotificationStatus == NotificationStatus.Consented || Model.NotificationStatus == NotificationStatus.Withdrawn)
+            @if (Model.NotificationStatus == NotificationStatus.Consented || Model.NotificationStatus == NotificationStatus.ConsentWithdrawn)
             {
                 <h2 class="heading-medium">@Resource.ShipmentSummaryTitle</h2>
 
