@@ -4,7 +4,6 @@ GO
 
 ALTER VIEW [Reports].[WasteType]
 AS
-
 	SELECT
 		N.Id AS NotificationId,
 		N.NotificationNumber,
@@ -13,10 +12,22 @@ AS
 			WHEN WC.Code IS NOT NULL THEN WC.Code + ' ' + WC.Description
 			WHEN WT.ChemicalCompositionType = 3 THEN WT.WoodTypeDescription
 			WHEN WT.ChemicalCompositionType = 4 THEN WT.ChemicalCompositionName
-		END AS Description
-	FROM
-		[Notification].[Notification] N
-		INNER JOIN [Notification].[WasteType] WT ON WT.NotificationId = N.Id
-		INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON WT.ChemicalCompositionType = CCT.Id
-		INNER JOIN [Reports].[WasteCodes] WC ON N.Id = WC.NotificationId AND WC.CodeType IN (1, 2)
+		END AS Description,
+		CCT.Description AS ChemicalCompositionType,
+		WT.ChemicalCompositionDescription,
+		N.HasSpecialHandlingRequirements,
+		N.SpecialHandlingDetails,
+		'Export' AS [ImportOrExport]
+	
+	FROM		[Notification].[Notification] AS N
+
+	INNER JOIN	[Notification].[WasteType] AS WT 
+	ON			[WT].[NotificationId] = [N].[Id]
+	
+	INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
+	ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
+
+	INNER JOIN	[Reports].[WasteCodes] WC 
+	ON			[N].[Id] = [WC].[NotificationId] 
+	AND			[WC].[CodeType] IN (1, 2)
 GO

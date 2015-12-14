@@ -22,7 +22,7 @@ AS
 		M.QuantityReceived,
 		M.QuantityReceivedUnit,
 		M.QuantityReceivedUnitId,
-		'Unknown' AS [ChemicalComposition],
+		W.ChemicalCompositionType + ' - ' + W.ChemicalCompositionDescription AS [ChemicalComposition],
 		N.LocalArea
 
 	FROM		[Reports].[Notification] AS N
@@ -32,5 +32,8 @@ AS
 
 	INNER JOIN	[Reports].[NotificationOrganisations] AS O
 	ON			[O].[Id] = [N].[Id]
+
+	LEFT JOIN	[Reports].[WasteType] AS W
+	ON			[N].[Id] = [W].[NotificationId]
 
 GO
