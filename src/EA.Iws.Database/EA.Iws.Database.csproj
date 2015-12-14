@@ -68,7 +68,9 @@
     <Content Include="scripts\Everytime\Views\0008-Reports-TransitStatesConcat.sql" />
     <Content Include="scripts\Everytime\Views\0009-Reports-TransportRoute.sql" />
     <Content Include="scripts\Everytime\Views\0010-Reports-WasteType.sql" />
-    <Content Include="scripts\Everytime\Views\0012-Reports-ExportNotificationOrganisations.sql" />
+    <Content Include="scripts\Everytime\Views\0012-Reports-NotificationOrganisations.sql" />
+    <Content Include="scripts\Everytime\Views\0013-Reports-Notifications.sql" />
+    <Content Include="scripts\Everytime\Views\0014-Reports-NotificationShipmentDataMissingShipments.sql" />
     <Content Include="scripts\TestData\20150907-145000-create-submitted-notification.sql" />
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
@@ -197,6 +199,7 @@
     <Content Include="scripts\Update\Sprint22\20151211-135200-add-import-notification-shipment-table.sql" />
     <Content Include="scripts\Update\Sprint22\20151211-153400-add-unique-constraints-import-movements.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-115000-create-import-transport-route-tables.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-120000-drop-export-organisations-view.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-120400-import-facility-actual-site.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-140400-import-producer-is-only-producer.sql" />
   </ItemGroup>

@@ -219,6 +219,8 @@
     <Compile Include="PhoneNumber.cs" />
     <Compile Include="Reports\ExportStats.cs" />
     <Compile Include="Reports\IExportStatsRepository.cs" />
+    <Compile Include="Reports\IMissingShipmentsRepository.cs" />
+    <Compile Include="Reports\MissingShipment.cs" />
     <Compile Include="Security\IMovementAuthorization.cs" />
     <Compile Include="Security\INotificationApplicationAuthorization.cs" />
     <Compile Include="ShipmentPeriod.cs" />
