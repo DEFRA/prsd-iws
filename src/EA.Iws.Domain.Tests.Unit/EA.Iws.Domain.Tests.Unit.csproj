@@ -82,6 +82,11 @@
     <Compile Include="ImportNotification\FacilityListTests.cs" />
     <Compile Include="ImportNotification\FacilityTests.cs" />
     <Compile Include="ImportNotification\OperationCodesListTests.cs" />
+    <Compile Include="ImportNotification\StateOfExportTests.cs" />
+    <Compile Include="ImportNotification\StateOfImportTests.cs" />
+    <Compile Include="ImportNotification\TransitStateListTests.cs" />
+    <Compile Include="ImportNotification\TransitStateTests.cs" />
+    <Compile Include="ImportNotification\TransportRouteTests.cs" />
     <Compile Include="ImportNotification\WasteOperationTests.cs" />
     <Compile Include="ImportNotification\ProducerTests.cs" />
     <Compile Include="ImportNotification\ExporterTests.cs" />
@@ -163,7 +168,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="NotificationApplication\TransportRoute\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

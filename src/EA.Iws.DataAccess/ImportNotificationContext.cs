@@ -36,6 +36,8 @@
        
         public virtual DbSet<Shipment> Shipments { get; set; }
 
+        public virtual DbSet<TransportRoute> TransportRoutes { get; set; } 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

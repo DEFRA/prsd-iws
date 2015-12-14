@@ -17,5 +17,17 @@
 
             return values.All(item => set.Add(item));
         }
+
+        /// <summary>
+        /// Determines whether a sequence of integers is consecutive
+        /// 
+        /// http://stackoverflow.com/a/13359693
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static bool IsConsecutive(this IEnumerable<int> values)
+        {
+            return !values.Select((i, j) => i - j).Distinct().Skip(1).Any();
+        }
     }
 }
