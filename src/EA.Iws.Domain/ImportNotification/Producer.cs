@@ -10,7 +10,7 @@
         {        
         }
     
-        public Producer(Guid importNotificationId, string businessName, Address address, Contact contact)
+        public Producer(Guid importNotificationId, string businessName, Address address, Contact contact, bool isOnlyProducer)
         {
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
             Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
@@ -21,6 +21,7 @@
             Name = businessName;
             Address = address;
             Contact = contact;
+            IsOnlyProducer = isOnlyProducer;
         }
 
         public Guid ImportNotificationId { get; private set; }
@@ -30,5 +31,7 @@
         public Address Address { get; private set; }
 
         public Contact Contact { get; private set; }
+
+        public bool IsOnlyProducer { get; private set; }
     }
 }

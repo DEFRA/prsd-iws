@@ -20,7 +20,7 @@
         [Fact]
         public void CanCreateProducer()
         {
-            var producer = new Producer(importNotificationId, "business name", address, contact);
+            var producer = new Producer(importNotificationId, "business name", address, contact, true);
 
             Assert.IsType<Producer>(producer);
         }
@@ -28,7 +28,7 @@
         [Fact]
         public void BusinessNameCantBeNull()
         {
-            Action createProducer = () => new Producer(importNotificationId, null, address, contact);
+            Action createProducer = () => new Producer(importNotificationId, null, address, contact, true);
 
             Assert.Throws<ArgumentNullException>("businessName", createProducer);
         }
@@ -36,7 +36,7 @@
         [Fact]
         public void BusinessNameCantBeEmpty()
         {
-            Action createProducer = () => new Producer(importNotificationId, string.Empty, address, contact);
+            Action createProducer = () => new Producer(importNotificationId, string.Empty, address, contact, true);
 
             Assert.Throws<ArgumentException>("businessName", createProducer);
         }
@@ -44,7 +44,7 @@
         [Fact]
         public void ImportNotificationIdCantBeEmpty()
         {
-            Action createProducer = () => new Producer(Guid.Empty, "business name", address, contact);
+            Action createProducer = () => new Producer(Guid.Empty, "business name", address, contact, true);
 
             Assert.Throws<ArgumentException>("importNotificationId", createProducer);
         }
@@ -52,7 +52,7 @@
         [Fact]
         public void AddressCantBeNull()
         {
-            Action createProducer = () => new Producer(importNotificationId, "business name", null, contact);
+            Action createProducer = () => new Producer(importNotificationId, "business name", null, contact, true);
 
             Assert.Throws<ArgumentNullException>("address", createProducer);
         }
@@ -60,7 +60,7 @@
         [Fact]
         public void ContactCantBeNull()
         {
-            Action createProducer = () => new Producer(importNotificationId, "business name", address, null);
+            Action createProducer = () => new Producer(importNotificationId, "business name", address, null, true);
 
             Assert.Throws<ArgumentNullException>("contact", createProducer);
         }
