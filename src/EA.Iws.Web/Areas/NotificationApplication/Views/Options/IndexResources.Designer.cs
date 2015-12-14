@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current notificaiton:.
+        ///   Looks up a localized string similar to Current notification:.
         /// </summary>
         public static string CurrentNotificationTitle {
             get {
@@ -160,7 +160,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New notificaiton.
+        ///   Looks up a localized string similar to New notification.
         /// </summary>
         public static string NewNotificationTitle {
             get {

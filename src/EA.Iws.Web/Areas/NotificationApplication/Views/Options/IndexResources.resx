@@ -184,10 +184,10 @@
     <value>Costs and payment information</value>
   </data>
   <data name="CurrentNotificationTitle" xml:space="preserve">
-    <value>Current notificaiton:</value>
+    <value>Current notification:</value>
   </data>
   <data name="NewNotificationTitle" xml:space="preserve">
-    <value>New notificaiton</value>
+    <value>New notification</value>
   </data>
   <data name="PrintLabel" xml:space="preserve">
     <value>Print postage label</value>
