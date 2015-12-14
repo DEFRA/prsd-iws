@@ -7,7 +7,11 @@
         <dd>@Html.DisplayFor(m => m.StateOfImportData.Country.Name)</dd>
 
         <dt>Competent authority:</dt>
-        <dd>@Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)</dd>
+        <dd>
+            @Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Code)
+            - 
+            @Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)
+        </dd>
 
         <dt>Entry point:</dt>
         <dd>@Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name)</dd>

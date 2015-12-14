@@ -7,7 +7,11 @@
         <dd>@Html.DisplayFor(m => m.StateOfExportData.Country.Name)</dd>
 
         <dt>Competent authority:</dt>
-        <dd>@Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)</dd>
+        <dd>
+            @Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Code)
+            - 
+            @Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)
+        </dd>
 
         <dt>Exit point:</dt>
         <dd>@Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name)</dd>

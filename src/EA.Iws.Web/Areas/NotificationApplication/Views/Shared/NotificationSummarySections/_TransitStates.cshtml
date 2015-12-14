@@ -9,7 +9,11 @@
             <dd>@transitState.Country.Name</dd>
 
             <dt>Competent authority:</dt>
-            <dd>@transitState.CompetentAuthority.Name</dd>
+            <dd>
+                @transitState.CompetentAuthority.Code
+                - 
+                @transitState.CompetentAuthority.Name
+            </dd>
 
             <dt>Entry point:</dt>
             <dd>@transitState.EntryPoint.Name</dd>

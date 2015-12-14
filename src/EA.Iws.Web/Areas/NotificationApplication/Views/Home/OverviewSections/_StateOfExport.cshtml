@@ -15,9 +15,11 @@
             </div>
             <div class="grid-row">
                 <div class="column-half">
-                    Competent authortity:
+                    Competent authority:
                 </div>
                 <div class="column-half">
+                    @Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Code)
+                     - 
                     @Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)
                 </div>
             </div>
