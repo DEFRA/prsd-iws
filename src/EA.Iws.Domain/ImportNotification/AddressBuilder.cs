@@ -28,6 +28,9 @@
             this.townOrCity = townOrCity;
             this.countryId = countryId;
 
+            this.address2 = null;
+            this.postalCode = null;
+
             return this;
         }
 
