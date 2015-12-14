@@ -197,6 +197,7 @@
     <Content Include="scripts\Update\Sprint22\20151211-135200-add-import-notification-shipment-table.sql" />
     <Content Include="scripts\Update\Sprint22\20151211-153400-add-unique-constraints-import-movements.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-115000-create-import-transport-route-tables.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-120400-import-facility-actual-site.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
