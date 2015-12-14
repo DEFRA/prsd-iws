@@ -36,7 +36,7 @@
 
             var report = await mediator.SendAsync(new GetMissingShipmentsReport(model.Year.Value));
 
-            var fileName = string.Format("export-stats-{0}.csv", model.Year.Value);
+            var fileName = string.Format("missing-shipments-{0}.csv", model.Year.Value);
 
             return new CsvActionResult<MissingShipmentData>(report.ToList(), fileName);
         } 

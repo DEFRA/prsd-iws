@@ -35,7 +35,8 @@
                     [ChemicalComposition],
                     [LocalArea]
                 FROM [Reports].[NotificationShipmentDataMissingShipments]
-                WHERE [CompetentAuthorityId] = @ca",
+                WHERE [CompetentAuthorityId] = @ca
+                AND YEAR([ActualDateOfShipment]) = @year",
                 new SqlParameter("@year", year),
                 new SqlParameter("@ca", competentAuthority.Value)).ToArrayAsync();
         }
