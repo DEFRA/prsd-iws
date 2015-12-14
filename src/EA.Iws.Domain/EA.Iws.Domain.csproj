@@ -83,6 +83,14 @@
     <Compile Include="ImportNotification\TransitState.cs" />
     <Compile Include="ImportNotification\TransitStateList.cs" />
     <Compile Include="ImportNotification\TransportRoute.cs" />
+    <Compile Include="ImportNotification\IWasteTypeRepository.cs" />
+    <Compile Include="ImportNotification\WasteCodes\BaselOecdCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\EwcCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\HCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\UnClass.cs" />
+    <Compile Include="ImportNotification\WasteCodes\WasteCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\YCode.cs" />
+    <Compile Include="ImportNotification\WasteType.cs" />
     <Compile Include="ImportNotification\WasteOperation.cs" />
     <Compile Include="ImportNotification\OperationCodesList.cs" />
     <Compile Include="ImportNotification\IShipmentRepository.cs" />

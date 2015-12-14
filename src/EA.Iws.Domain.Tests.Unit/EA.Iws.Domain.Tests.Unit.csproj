@@ -93,6 +93,7 @@
     <Compile Include="ImportNotification\ImporterTests.cs" />
     <Compile Include="ImportNotification\ImportNotificationTests.cs" />
     <Compile Include="ImportNotification\ShipmentTests.cs" />
+    <Compile Include="ImportNotification\WasteTypeTests.cs" />
     <Compile Include="InternalUserTests.cs" />
     <Compile Include="Movement\CertificateOfReceiptNameTests.cs" />
     <Compile Include="Movement\CertificateOfRecoveryNameTests.cs" />

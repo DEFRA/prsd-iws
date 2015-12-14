@@ -38,6 +38,8 @@
 
         public virtual DbSet<TransportRoute> TransportRoutes { get; set; } 
 
+        public virtual DbSet<WasteType> WasteTypes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
