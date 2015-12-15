@@ -22,7 +22,10 @@ AS
 		M.QuantityReceived,
 		M.QuantityReceivedUnit,
 		M.QuantityReceivedUnitId,
-		W.ChemicalCompositionType + ' - ' + W.ChemicalCompositionDescription AS [ChemicalComposition],
+		CASE
+			WHEN W.ChemicalCompositionDescription IS NULL THEN W.ChemicalCompositionType
+			ELSE W.ChemicalCompositionType + ' - ' + W.ChemicalCompositionDescription
+		END AS [ChemicalComposition],
 		N.LocalArea
 
 	FROM		[Reports].[Notification] AS N
