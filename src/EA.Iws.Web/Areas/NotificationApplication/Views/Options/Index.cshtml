@@ -75,7 +75,7 @@ else if (status != MovementStatus.Cancelled)
             </div>
         </div>
     </div>
-    <hr/>
+    <hr />
     <div class="grid-row">
 
         <div class="column-half">
@@ -110,30 +110,30 @@ else if (status != MovementStatus.Cancelled)
                 <table class="odd-table">
                     <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
                     <tbody>
-                    <tr>
-                        <td>@Resource.TotalNumber</td>
-                        <td>@Model.IntendedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.NumberUsed</td>
-                        <td>@Model.UsedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.ActiveLoadsPermitted</td>
-                        <td>@Model.ActiveLoadsPermitted</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.CurrentActiveLoads</td>
-                        <td>@Model.ActiveLoadsCurrent</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.TotalQuantityReceived</td>
-                        <td>@Model.QuantityReceivedTotal</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.TotalQuantityRemaining</td>
-                        <td>@Model.QuantityRemainingTotal</td>
-                    </tr>
+                        <tr>
+                            <td>@Resource.TotalNumber</td>
+                            <td>@Model.IntendedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.NumberUsed</td>
+                            <td>@Model.UsedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.ActiveLoadsPermitted</td>
+                            <td>@Model.ActiveLoadsPermitted</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.CurrentActiveLoads</td>
+                            <td>@Model.ActiveLoadsCurrent</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityReceived</td>
+                            <td>@Model.QuantityReceivedTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityRemaining</td>
+                            <td>@Model.QuantityRemainingTotal</td>
+                        </tr>
                     </tbody>
                 </table>
             }
@@ -141,6 +141,8 @@ else if (status != MovementStatus.Cancelled)
 
     </div>
 
+    @if (Model.NotificationStatus == NotificationStatus.Consented || Model.NotificationStatus == NotificationStatus.ConsentWithdrawn)
+    {
         <section class="ship-data">
             <h2 class="heading-medium">
                 @Resource.TableTitle
@@ -209,14 +211,14 @@ else if (status != MovementStatus.Cancelled)
                 </table>
             </div>
         </section>
-    
+    }
 </div>
 
 @section scripts {
     <script>
-        $(function() {
+        $(function () {
             $("#updateStatus").hide();
-            $("#@Html.NameFor(m => m.SelectedMovementStatus)").change(function() {
+            $("#@Html.NameFor(m => m.SelectedMovementStatus)").change(function () {
                 $("#updateStatus").parents("form").submit();
             });
         });
