@@ -37,13 +37,13 @@
         }
 
         [Theory]
-        [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        public void RegistrationNumberCantBeNullOrEmpty(string input, Type expectedException)
+        [InlineData(null)]
+        [InlineData("")]
+        public void RegistrationNumberCanBeNullOrEmpty(string input)
         {
-            Action createFacility = () => new Facility("business name", BusinessType.LimitedCompany, input, address, contact, true);
+            var facility = new Facility("business name", BusinessType.LimitedCompany, input, address, contact, true);
 
-            Assert.Throws(expectedException, createFacility);
+            Assert.IsType<Facility>(facility);
         }
 
         [Fact]

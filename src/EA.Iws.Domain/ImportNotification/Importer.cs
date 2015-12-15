@@ -18,7 +18,6 @@
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
             Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
             Guard.ArgumentNotDefaultValue(() => businessType, businessType);
-            Guard.ArgumentNotNullOrEmpty(() => registrationNumber, registrationNumber);
             Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNull(() => contact, contact);
 

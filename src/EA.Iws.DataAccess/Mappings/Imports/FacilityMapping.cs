@@ -11,7 +11,7 @@
 
             Property(x => x.Name).HasColumnName("Name").IsRequired().HasMaxLength(3000);
             Property(x => x.Type).HasColumnName("Type").IsRequired();
-            Property(x => x.RegistrationNumber).HasColumnName("RegistrationNumber").IsRequired().HasMaxLength(100);
+            Property(x => x.RegistrationNumber).HasColumnName("RegistrationNumber").IsOptional().HasMaxLength(100);
         }
     }
 }

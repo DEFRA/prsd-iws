@@ -45,13 +45,13 @@
         }
 
         [Theory]
-        [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        public void RegistrationNumberCantBeNullOrEmpty(string input, Type expectedException)
+        [InlineData(null)]
+        [InlineData("")]
+        public void RegistrationNumberCanBeNullOrEmpty(string input)
         {
-            Action createImporter = () => new Importer(importNotificationId, "business name", BusinessType.LimitedCompany, input, address, contact);
+            var importer = new Importer(importNotificationId, "business name", BusinessType.LimitedCompany, input, address, contact);
 
-            Assert.Throws(expectedException, createImporter);
+            Assert.IsType<Importer>(importer);
         }
 
         [Fact]
