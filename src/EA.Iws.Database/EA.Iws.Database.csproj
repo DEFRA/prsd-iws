@@ -53,6 +53,7 @@
     <Content Include="Readme.txt" />
     <Content Include="scripts\AliaSQL.exe" />
     <Content Include="scripts\Create\placeholder.txt" />
+    <Content Include="scripts\Everytime\Functions\001-Reports-ConcatenateAddress.sql" />
     <Content Include="scripts\Everytime\Permissions\0002-Permissions-Grants.sql" />
     <Content Include="scripts\Everytime\Permissions\0001-Permissions-AppRole.sql" />
     <Content Include="scripts\Everytime\placeholder.txt" />
