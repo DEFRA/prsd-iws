@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
+    using Core.Shared;
     using Domain.Movement;
     using Domain.Security;
     using Prsd.Core;
@@ -29,11 +30,11 @@
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
             var summaryData = await context.NotificationApplications
-                .Join(
+                .GroupJoin(
                     context.ShipmentInfos,
                     notification => notification.Id,
                     shipment => shipment.NotificationId,
-                    (notification, shipment) => new { Notification = notification, Shipment = shipment })
+                    (notification, shipments) => new { Notification = notification, Shipment = shipments.FirstOrDefault() })
                 .Join(
                     context.FinancialGuarantees,
                     x => x.Notification.Id,
@@ -45,9 +46,9 @@
                     x.Notification.NotificationType,
                     x.Notification.NotificationNumber,
                     x.FinancialGuarantee.ActiveLoadsPermitted,
-                    x.Shipment.NumberOfShipments,
-                    x.Shipment.Quantity,
-                    x.Shipment.Units
+                    NumberOfShipments = x.Shipment == null ? 0 : x.Shipment.NumberOfShipments,
+                    Quantity = x.Shipment == null ? 0 : x.Shipment.Quantity,
+                    Units = x.Shipment == null ? ShipmentQuantityUnits.Tonnes : x.Shipment.Units
                 })
                 .SingleAsync(x => x.NotificationId == notificationId);
 
