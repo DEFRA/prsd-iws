@@ -8,6 +8,7 @@ AS
 		N.[Id] AS Id,
 		N.[NotificationNumber],
 		NT.[Description] AS [Type],
+		NT.Id AS [TypeId],
 		CA.[UnitedKingdomCountry] AS [CompetentAuthorityCountry],
 		CASE 
 			WHEN CA.UnitedKingdomCountry = 'England' THEN 'EA'
@@ -25,6 +26,7 @@ AS
 		U.[Description] AS [Units],
 		C.[From] AS [ConsentFrom],
 		C.[To] AS [ConsentTo],
+		N.IsPreconsentedRecoveryFacility AS [Preconsented],
 		'Export' AS [ImportOrExport]
 
 	FROM		[Notification].[Notification] AS N
@@ -59,6 +61,7 @@ AS
 		N.[Id] AS Id,
 		N.[NotificationNumber],
 		NT.[Description] AS [Type],
+		NT.[Id] AS [TypeId],
 		CA.[UnitedKingdomCountry] AS [CompetentAuthorityCountry],
 		CASE 
 			WHEN CA.UnitedKingdomCountry = 'England' THEN 'EA'
@@ -76,6 +79,7 @@ AS
 		U.[Description] AS [Units],
 		NULL AS [ConsentFrom],	-- TODO
 		NULL AS [ConsentTo],	-- TODO
+		0 AS [Preconsented],
 		'Import' AS [ImportOrExport]
 
 	FROM [ImportNotification].[Notification] AS N

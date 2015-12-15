@@ -98,6 +98,7 @@
             builder.RegisterType<ImportMovementFactory>().As<IImportMovementFactory>();
             builder.RegisterType<ImportMovementNumberValidator>().As<IImportMovementNumberValidator>();
             builder.RegisterType<Validator>().As<IValidator>();
+            builder.RegisterType<DecisionRequiredByCalculator>().As<IDecisionRequiredByCalculator>();
 
             builder.RegisterType<RejectImportMovement>().As<IRejectImportMovement>();
             builder.RegisterType<ReceiveImportMovement>().As<IReceiveImportMovement>();

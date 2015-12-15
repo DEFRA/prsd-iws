@@ -782,6 +782,7 @@
     <Content Include="Areas\NotificationMovements\Views\Home\_Summary.cshtml" />
     <Content Include="Areas\Reports\Views\MissingShipments\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Complete\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\ExportNotifications\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Complete\Error.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -1290,12 +1291,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\Controllers\ExportNotificationsController.cs" />
     <Compile Include="Areas\Reports\Controllers\MissingShipmentsController.cs" />
+    <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.Designer.cs">
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reports\Views\ExportNotifications\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\Reports\Views\MissingShipments\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2776,9 +2789,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\ExportNotifications\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\MissingShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

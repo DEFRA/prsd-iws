@@ -71,6 +71,8 @@
     <Content Include="scripts\Everytime\Views\0012-Reports-NotificationOrganisations.sql" />
     <Content Include="scripts\Everytime\Views\0013-Reports-Notifications.sql" />
     <Content Include="scripts\Everytime\Views\0014-Reports-NotificationShipmentDataMissingShipments.sql" />
+    <Content Include="scripts\Everytime\Views\0015-Reports-NotificationAssessment.sql" />
+    <Content Include="scripts\Everytime\Views\0016-Reports-DataExportNotifications.sql" />
     <Content Include="scripts\TestData\20150907-145000-create-submitted-notification.sql" />
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />

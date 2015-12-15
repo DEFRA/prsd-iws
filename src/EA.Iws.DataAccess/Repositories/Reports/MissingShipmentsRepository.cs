@@ -36,7 +36,7 @@
                     [LocalArea]
                 FROM [Reports].[NotificationShipmentDataMissingShipments]
                 WHERE [CompetentAuthorityId] = @ca
-                AND YEAR([ActualDateOfShipment]) = @year",
+                AND YEAR(COALESCE([PrenotificationDate], [ActualDateOfShipment])) = @year",
                 new SqlParameter("@year", year),
                 new SqlParameter("@ca", competentAuthority.Value)).ToArrayAsync();
         }

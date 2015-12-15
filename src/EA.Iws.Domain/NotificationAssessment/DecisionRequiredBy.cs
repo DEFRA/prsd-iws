@@ -6,11 +6,11 @@
 
     public class DecisionRequiredBy
     {
-        private readonly IWorkingDayCalculator workingDayCalculator;
+        private readonly IDecisionRequiredByCalculator decisionRequiredByCalculator;
 
-        public DecisionRequiredBy(IWorkingDayCalculator workingDayCalculator)
+        public DecisionRequiredBy(IDecisionRequiredByCalculator decisionRequiredByCalculator)
         {
-            this.workingDayCalculator = workingDayCalculator;
+            this.decisionRequiredByCalculator = decisionRequiredByCalculator;
         }
 
         public DateTime? GetDecisionRequiredByDate(NotificationApplication notificationApplication,
@@ -24,16 +24,11 @@
                 return null;
             }
 
-            if (notificationApplication.IsPreconsentedRecoveryFacility
-                .GetValueOrDefault())
-            {
-                return workingDayCalculator.AddWorkingDays(notificationAssessment.Dates.AcknowledgedDate.Value,
-                    7,
-                    false,
+            return
+                decisionRequiredByCalculator.Get(
+                    notificationApplication.IsPreconsentedRecoveryFacility.GetValueOrDefault(),
+                    notificationAssessment.Dates.AcknowledgedDate.Value,
                     notificationApplication.CompetentAuthority);
-            }
-
-            return notificationAssessment.Dates.AcknowledgedDate.Value.AddDays(30);
         }
     }
 }

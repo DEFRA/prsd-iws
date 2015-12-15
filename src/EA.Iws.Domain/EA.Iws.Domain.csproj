@@ -193,6 +193,8 @@
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
+    <Compile Include="NotificationAssessment\DecisionRequiredByCalculator.cs" />
+    <Compile Include="NotificationAssessment\IDecisionRequiredByCalculator.cs" />
     <Compile Include="NotificationAssessment\Transaction.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentDatesSummaryRepository.cs" />
@@ -225,7 +227,9 @@
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
     <Compile Include="PhoneNumber.cs" />
+    <Compile Include="Reports\DataExportNotification.cs" />
     <Compile Include="Reports\ExportStats.cs" />
+    <Compile Include="Reports\IExportNotificationsRepository.cs" />
     <Compile Include="Reports\IExportStatsRepository.cs" />
     <Compile Include="Reports\IMissingShipmentsRepository.cs" />
     <Compile Include="Reports\MissingShipment.cs" />
