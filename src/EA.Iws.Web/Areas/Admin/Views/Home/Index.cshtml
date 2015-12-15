@@ -73,6 +73,45 @@
 
         @Html.Partial("_ImportResults", Model)
 
+        <h2 class="heading-medium">@Resource.NotificationAttentionHeading</h2>
+
+        @if (Model.AttentionSummaryTable.Any())
+        {
+            <p>@Resource.NotificationAttentionText</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>@Resource.NotificationNumberAttentionTableHeading</th>
+                        <th>@Resource.OfficerAttentionTableHeading</th>
+                        <th>@Resource.AcknowledgedTableHeading</th>
+                        <th>@Resource.DecisionRequiredTableHeading</th>
+                        <th>@Resource.DaysRemainingTableHeading</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model.AttentionSummaryTable)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(linkText: row.NotificationNumber,
+                                    actionName: "Index",
+                                    controllerName: "Home",
+                                    routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },
+                                    htmlAttributes: null)</td>
+                            <td>@row.Officer</td>
+                            <td>@Html.Gds().DisplayShortDate(row.AcknowledgedDate)</td>
+                            <td>@Html.Gds().DisplayShortDate(row.DecisionRequiredDate)</td>
+                            <td>@row.DaysRemaining</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>@Resource.NotificationAttentionNoneText</p>
+        }
+
     </div>
 
     <div class="column-third" id="submit-side-bar">

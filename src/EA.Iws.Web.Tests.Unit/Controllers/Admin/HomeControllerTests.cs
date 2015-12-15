@@ -54,9 +54,9 @@
         }
 
         [Fact]
-        public void GetIndex_ReturnsNewViewModel()
+        public async Task GetIndex_ReturnsNewViewModel()
         {
-            var result = controller.Index() as ViewResult;
+            var result = await controller.Index() as ViewResult;
 
             Assert.IsType<BasicSearchViewModel>(result.Model);
 

@@ -209,6 +209,7 @@
     <Compile Include="Repositories\MovementRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentDatesSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentDecisionRepository.cs" />
+    <Compile Include="Repositories\NotificationAttentionSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationConsentRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationOverviewRepository.cs" />
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />

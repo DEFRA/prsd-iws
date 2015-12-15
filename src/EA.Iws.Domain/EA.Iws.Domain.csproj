@@ -195,6 +195,9 @@
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredByCalculator.cs" />
     <Compile Include="NotificationAssessment\IDecisionRequiredByCalculator.cs" />
+    <Compile Include="DaysRemainingCalculator.cs" />
+    <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />
+    <Compile Include="NotificationAssessment\NotificationAttentionSummary.cs" />
     <Compile Include="NotificationAssessment\Transaction.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentDatesSummaryRepository.cs" />

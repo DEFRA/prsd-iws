@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Admin.Search;
+    using Core.NotificationAssessment;
     using Requests.Admin.Search;
 
     public class BasicSearchViewModel : IValidatableObject
@@ -17,6 +18,8 @@
         public IList<BasicSearchResult> ExportSearchResults { get; set; }
 
         public IList<ImportSearchResult> ImportSearchResults { get; set; }
+
+        public IEnumerable<NotificationAttentionSummaryTableData> AttentionSummaryTable { get; set; }
 
         public bool HasSearched { get; set; }
 

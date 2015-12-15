@@ -127,6 +127,7 @@
     <Compile Include="NotificationAssessment\AccountManagementData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
+    <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
     <Compile Include="NotificationAssessment\PaymentHistoryTableData.cs" />
     <Compile Include="NotificationAssessment\TransactionType.cs" />

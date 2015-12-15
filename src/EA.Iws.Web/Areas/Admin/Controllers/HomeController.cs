@@ -1,11 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Admin.Search;
-    using ViewModels;
+    using Requests.NotificationAssessment;
     using ViewModels.Home;
 
     [Authorize(Roles = "internal")]
@@ -19,9 +18,13 @@
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(new BasicSearchViewModel());
+            var model = new BasicSearchViewModel();
+
+            model.AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary());
+
+            return View(model);
         }
 
         [HttpPost]
@@ -42,6 +45,8 @@
             }
 
             model.HasSearched = true;
+
+            model.AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary());
 
             return View(model);
         }

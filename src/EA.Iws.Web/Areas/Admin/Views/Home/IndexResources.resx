@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcknowledgedTableHeading" xml:space="preserve">
+    <value>Acknowledged</value>
+  </data>
   <data name="CompanyNameTableHeading" xml:space="preserve">
     <value>Company name</value>
+  </data>
+  <data name="DaysRemainingTableHeading" xml:space="preserve">
+    <value>Days remaining</value>
+  </data>
+  <data name="DecisionRequiredTableHeading" xml:space="preserve">
+    <value>Decision required</value>
   </data>
   <data name="ImportNotificationNumberLink" xml:space="preserve">
     <value>Create a new import notification</value>
@@ -135,8 +144,23 @@
   <data name="NoResultsMessage" xml:space="preserve">
     <value>No matching results were found</value>
   </data>
+  <data name="NotificationAttentionHeading" xml:space="preserve">
+    <value>Notifications requiring attention</value>
+  </data>
+  <data name="NotificationAttentionNoneText" xml:space="preserve">
+    <value>There are no notifications that require attention.</value>
+  </data>
+  <data name="NotificationAttentionText" xml:space="preserve">
+    <value>These notifications are approaching their decision required date.</value>
+  </data>
+  <data name="NotificationNumberAttentionTableHeading" xml:space="preserve">
+    <value>Notification number</value>
+  </data>
   <data name="NotificationNumberTableHeading" xml:space="preserve">
     <value>Notification number</value>
+  </data>
+  <data name="OfficerAttentionTableHeading" xml:space="preserve">
+    <value>Officer</value>
   </data>
   <data name="Reports" xml:space="preserve">
     <value>Reports</value>

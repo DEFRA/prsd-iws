@@ -129,6 +129,7 @@
     <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\Reject\SetMovementRejected.cs" />
     <Compile Include="NotificationAssessment\GetLocalAreasByUserCA.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationAttentionSummary.cs" />
     <Compile Include="NotificationAssessment\GetNotificationStatus.cs" />
     <Compile Include="NotificationAssessment\WithdrawConsentForNotificationApplication.cs" />
     <Compile Include="NotificationMovements\Capture\CreateMovementInternal.cs" />

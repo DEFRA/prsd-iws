@@ -61,11 +61,38 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Acknowledged.
+        /// </summary>
+        public static string AcknowledgedTableHeading {
+            get {
+                return ResourceManager.GetString("AcknowledgedTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name.
         /// </summary>
         public static string CompanyNameTableHeading {
             get {
                 return ResourceManager.GetString("CompanyNameTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days remaining.
+        /// </summary>
+        public static string DaysRemainingTableHeading {
+            get {
+                return ResourceManager.GetString("DaysRemainingTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decision required.
+        /// </summary>
+        public static string DecisionRequiredTableHeading {
+            get {
+                return ResourceManager.GetString("DecisionRequiredTableHeading", resourceCulture);
             }
         }
         
@@ -115,11 +142,56 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications requiring attention.
+        /// </summary>
+        public static string NotificationAttentionHeading {
+            get {
+                return ResourceManager.GetString("NotificationAttentionHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no notifications that require attention..
+        /// </summary>
+        public static string NotificationAttentionNoneText {
+            get {
+                return ResourceManager.GetString("NotificationAttentionNoneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These notifications are approaching their decision required date..
+        /// </summary>
+        public static string NotificationAttentionText {
+            get {
+                return ResourceManager.GetString("NotificationAttentionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification number.
+        /// </summary>
+        public static string NotificationNumberAttentionTableHeading {
+            get {
+                return ResourceManager.GetString("NotificationNumberAttentionTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification number.
         /// </summary>
         public static string NotificationNumberTableHeading {
             get {
                 return ResourceManager.GetString("NotificationNumberTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Officer.
+        /// </summary>
+        public static string OfficerAttentionTableHeading {
+            get {
+                return ResourceManager.GetString("OfficerAttentionTableHeading", resourceCulture);
             }
         }
         
