@@ -2,13 +2,14 @@
 {
     using System;
     using Core.WasteCodes;
+    using NotificationApplication;
     using Prsd.Core;
 
     public class BaselOecdCode
     {
         public bool NotListed { get; private set; }
 
-        public WasteCode Code { get; private set; }
+        public WasteTypeWasteCode Code { get; private set; }
 
         private BaselOecdCode()
         {
@@ -16,14 +17,14 @@
 
         public BaselOecdCode(WasteCode code)
         {
-            if (code.Type != CodeType.Basel && code.Type != CodeType.Oecd)
+            if (code.CodeType != CodeType.Basel && code.CodeType != CodeType.Oecd)
             {
                 throw new ArgumentException(string.Format(
                     "Supplied code type {0} is not basel or oecd",
-                    code.Type));
+                    code.CodeType));
             }
 
-            Code = code;
+            Code = new WasteTypeWasteCode(code.Id);
         }
 
         public static BaselOecdCode CreateNotListed()

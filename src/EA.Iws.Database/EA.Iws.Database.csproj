@@ -204,6 +204,7 @@
     <Content Include="scripts\Update\Sprint22\20151214-140400-import-producer-is-only-producer.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-160300-add-waste-type-table.sql" />
     <Content Include="scripts\Update\Sprint22\20151214-161100-add-waste-codes-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151215-111000-remove-code-type-from-waste-codes.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

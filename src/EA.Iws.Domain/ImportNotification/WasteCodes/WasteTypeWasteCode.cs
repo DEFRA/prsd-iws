@@ -3,15 +3,15 @@
     using System;
     using Prsd.Core.Domain;
 
-    public class WasteCode : Entity
+    public class WasteTypeWasteCode : Entity
     {
         public Guid WasteCodeId { get; private set; }
 
-        protected WasteCode()
+        protected WasteTypeWasteCode()
         {
         }
 
-        public WasteCode(Guid wasteCodeId)
+        public WasteTypeWasteCode(Guid wasteCodeId)
         {
             WasteCodeId = wasteCodeId;
         }

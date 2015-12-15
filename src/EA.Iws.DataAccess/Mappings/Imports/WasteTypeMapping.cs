@@ -15,7 +15,7 @@
             Property(x => x.Name).HasMaxLength(256);
 
             HasMany(
-                ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<WasteCode>>(
+                ExpressionHelper.GetPrivatePropertyExpression<WasteType, ICollection<WasteTypeWasteCode>>(
                         "WasteCodesCollection"))
                     .WithRequired()
                     .Map(m => m.MapKey("WasteTypeId"));

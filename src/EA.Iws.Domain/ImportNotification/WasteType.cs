@@ -15,7 +15,7 @@
 
         public string Name { get; private set; }
 
-        protected ICollection<WasteCode> WasteCodesCollection { get; private set; }
+        protected ICollection<WasteTypeWasteCode> WasteCodesCollection { get; private set; }
 
         public bool BaselOecdCodeNotListed { get; private set; }
 
@@ -25,7 +25,7 @@
 
         public bool UnClassNotApplicable { get; private set; }
 
-        public IEnumerable<WasteCode> WasteCodes
+        public IEnumerable<WasteTypeWasteCode> WasteCodes
         {
             get { return WasteCodesCollection.ToSafeIEnumerable(); }
         }
@@ -52,9 +52,9 @@
 
             Name = name;
 
-            var wasteCodes = new List<WasteCode>();
+            var wasteCodes = new List<WasteTypeWasteCode>();
 
-            WasteCodesCollection = new List<WasteCode>();
+            WasteCodesCollection = new List<WasteTypeWasteCode>();
             BaselOecdCodeNotListed = baselOecdCode.NotListed;
             YCodeNotApplicable = yCode.NotApplicable;
             HCodeNotApplicable = hCode.NotApplicable;

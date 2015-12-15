@@ -4,9 +4,11 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Core.WasteCodes;
-    using Domain.ImportNotification;
     using Domain.ImportNotification.WasteCodes;
+    using Domain.NotificationApplication;
+    using TestHelpers.Helpers;
     using Xunit;
+    using WasteType = Domain.ImportNotification.WasteType;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Variables relate to waste codes")]
     public class WasteTypeTests
@@ -233,8 +235,9 @@
         [Fact]
         public void BaselCodeIsSet()
         {
+            var baselCode = AnyWasteCode(CodeType.Basel);
             var baselCodeId = new Guid("72669DEE-1126-47B3-8C45-2395F54C82D8");
-            var baselCode = new WasteCode(baselCodeId, CodeType.Basel);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, baselCodeId, baselCode);
 
             var wasteType = new WasteType(ImportNotificationId,
                 "WasteTypeName",
@@ -244,14 +247,15 @@
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable());
 
-            Assert.Equal(baselCodeId, wasteType.WasteCodes.Single(wc => wc.Type == CodeType.Basel).WasteCodeId);
+            Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == baselCodeId));
         }
 
         [Fact]
         public void OecdCodeIsSet()
         {
+            var oecdCode = AnyWasteCode(CodeType.Oecd);
             var oecdCodeId = new Guid("A58E7CE8-FA46-4E35-A3ED-26E395678CA0");
-            var oecdCode = new WasteCode(oecdCodeId, CodeType.Oecd);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, oecdCodeId, oecdCode);
 
             var wasteType = new WasteType(ImportNotificationId,
                 "WasteTypeName",
@@ -261,7 +265,7 @@
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable());
 
-            Assert.Equal(oecdCodeId, wasteType.WasteCodes.Single(wc => wc.Type == CodeType.Oecd).WasteCodeId);
+            Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == oecdCodeId));
         }
 
         [Theory]
@@ -282,8 +286,9 @@
         [Fact]
         public void EwcCodesAreSet()
         {
+            var ewcCode = AnyWasteCode(CodeType.Ewc);
             var ewcCodeId = new Guid("A4DA3323-B6BD-4245-B144-B9E05661BEC6");
-            var ewcCode = new WasteCode(ewcCodeId, CodeType.Ewc);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, ewcCodeId, ewcCode);
 
             var wasteType = new WasteType(ImportNotificationId,
                 "WateTypeName",
@@ -293,7 +298,7 @@
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable());
 
-            Assert.Equal(ewcCodeId, wasteType.WasteCodes.Single(wc => wc.Type == CodeType.Ewc).WasteCodeId);
+            Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == ewcCodeId));
         }
 
         [Theory]
@@ -315,8 +320,9 @@
         [Fact]
         public void YCodesAreSet()
         {
-            var yCodeId = new Guid("5BACE9DF-5575-4AB9-BEF4-CE639AE1356B");
-            var yCode = new WasteCode(yCodeId, CodeType.Y);
+            var yCode = AnyWasteCode(CodeType.Y);
+            var yCodeId = new Guid("F416BD1D-56E9-45D8-9A4E-7476DF201AB2");
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, yCodeId, yCode);
 
             var wasteType = new WasteType(ImportNotificationId,
                 "WateTypeName",
@@ -326,7 +332,7 @@
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable());
 
-            Assert.Equal(yCodeId, wasteType.WasteCodes.Single(wc => wc.Type == CodeType.Y).WasteCodeId);
+            Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == yCodeId));
         }
 
         [Theory]
@@ -348,8 +354,9 @@
         [Fact]
         public void HCodesAreSet()
         {
-            var hCodeId = new Guid("A4DA3323-B6BD-4245-B144-B9E05661BEC6");
-            var hCode = new WasteCode(hCodeId, CodeType.H);
+            var hCode = AnyWasteCode(CodeType.H);
+            var hCodeId = new Guid("B21D8610-EBB0-436F-BD26-D2F40B42B866");
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, hCodeId, hCode);
 
             var wasteType = new WasteType(ImportNotificationId,
                 "WateTypeName",
@@ -359,7 +366,7 @@
                 HCode.CreateFor(new[] { hCode }),
                 UnClass.CreateNotApplicable());
 
-            Assert.Equal(hCodeId, wasteType.WasteCodes.Single(wc => wc.Type == CodeType.H).WasteCodeId);
+            Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == hCodeId));
         }
 
         [Theory]
@@ -381,8 +388,9 @@
         [Fact]
         public void UnClassesAreSet()
         {
+            var unCode = AnyWasteCode(CodeType.Un);
             var unCodeId = new Guid("4B50E7AA-0136-444A-9185-FE31BE6CF98E");
-            var unCode = new WasteCode(unCodeId, CodeType.Un);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, unCodeId, unCode);
 
             var wasteType = new WasteType(ImportNotificationId,
                 "WateTypeName",
@@ -392,7 +400,7 @@
                 HCode.CreateNotApplicable(),
                 UnClass.CreateFor(new[] { unCode }));
 
-            Assert.Equal(unCodeId, wasteType.WasteCodes.Single(wc => wc.Type == CodeType.Un).WasteCodeId);
+            Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == unCodeId));
         }
 
         [Theory]
@@ -413,7 +421,14 @@
 
         private WasteCode AnyWasteCode(CodeType codeType)
         {
-            return new WasteCode(new Guid("2454B555-F9CF-43D7-B2CF-3230620E4C04"), codeType);
+            var wasteCode = ObjectInstantiator<WasteCode>.CreateNew();
+
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Id, new Guid("0C4D98DA-91F3-4F5D-922B-C7A6BE8B5008"), wasteCode);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Code, "WasteCode", wasteCode);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.CodeType, codeType, wasteCode);
+            ObjectInstantiator<WasteCode>.SetProperty(x => x.Description, "Description", wasteCode);
+
+            return wasteCode;
         }
     }
 }
