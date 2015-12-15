@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
 
+    [Authorize(Roles = "internal")]
     public class CompleteController : Controller
     {
         [HttpGet]
