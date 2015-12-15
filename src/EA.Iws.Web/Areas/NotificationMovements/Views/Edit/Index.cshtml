@@ -10,7 +10,9 @@
 {
     <p>@IndexResources.NoShipmentsParagraph</p>
 
-    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", null, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Options", 
+        new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, 
+        new { @class = "button" })
 }
 else
 {
