@@ -54,7 +54,7 @@
 
             await mediator.SendAsync(new AddNotificationTransaction(paymentData));
 
-            return RedirectToAction("index", "Home", new { id = model.NotificationId });
+            return RedirectToAction("index", "AccountManagement", new { id = model.NotificationId });
         }
     }
 }

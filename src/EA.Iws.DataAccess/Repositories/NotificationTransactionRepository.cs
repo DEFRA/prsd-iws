@@ -22,9 +22,9 @@
             context.NotificationTransactions.Add(new NotificationTransaction(notificationTransactionData));
         }
 
-        public async Task<IList<NotificationTransaction>> GetTransactions(Guid id)
+        public async Task<IList<NotificationTransaction>> GetTransactions(Guid notificationId)
         {
-            return await context.NotificationTransactions.Where(n => n.NotificationId == id).ToListAsync();
+            return await context.NotificationTransactions.Where(n => n.NotificationId == notificationId).ToListAsync();
         }
     }
 }

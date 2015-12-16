@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.RefundDetails {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please do not exceed the refund limit of £{0}.
+        /// </summary>
+        public static string AmountCannotExceedLimit {
+            get {
+                return ResourceManager.GetString("AmountCannotExceedLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid number with a maximum of {0} decimal places.
         /// </summary>
         public static string AmountDecimalPlaceError {

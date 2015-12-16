@@ -284,6 +284,7 @@
     <Compile Include="NotificationAssessment\GetLocalAreasByUserCaHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAttentionSummaryHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationStatusHandler.cs" />
+    <Compile Include="NotificationAssessment\GetRefundLimitHandler.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummary.cs" />
     <Compile Include="NotificationAssessment\WithdrawConsentForNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\Capture\CreateMovementInternalHandler.cs" />

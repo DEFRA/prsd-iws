@@ -19,9 +19,15 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            var model = new RefundDetailsViewModel { NotificationId = id };
+            var limit = await mediator.SendAsync(new GetRefundLimit(id));
+
+            var model = new RefundDetailsViewModel
+            {
+                NotificationId = id,
+                Limit = limit
+            };
 
             ViewBag.ActiveSection = "Finance";
             return View(model);
@@ -48,7 +54,7 @@
 
             await mediator.SendAsync(new AddNotificationTransaction(refundData));
 
-            return RedirectToAction("index", "Home", new { id = model.NotificationId });
+            return RedirectToAction("index", "AccountManagement", new { id = model.NotificationId });
         }
     }
 }

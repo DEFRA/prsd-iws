@@ -8,10 +8,17 @@ namespace EA.Iws.Domain.NotificationAssessment
     public interface INotificationTransactionCalculator
     {
         decimal TotalCredits(IList<NotificationTransaction> transactions);
+
         decimal TotalDebits(IList<NotificationTransaction> transactions);
+
         Task<decimal> Balance(Guid notificationId);
+
         Task<bool> IsPaymentComplete(Guid notificationId);
-        Task<NotificationTransaction> LastestPayment(Guid notificationId);
+
+        Task<NotificationTransaction> LatestPayment(Guid notificationId);
+
         Task<bool> PaymentIsNowFullyReceived(NotificationTransactionData data);
+
+        Task<decimal> RefundLimit(Guid notificationId);
     }
 }

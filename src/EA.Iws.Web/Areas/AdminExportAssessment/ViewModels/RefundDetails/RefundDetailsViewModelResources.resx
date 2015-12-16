@@ -120,6 +120,9 @@
   <data name="AmountCannotBeNegative" xml:space="preserve">
     <value>The amount entered cannot be negative</value>
   </data>
+  <data name="AmountCannotExceedLimit" xml:space="preserve">
+    <value>Please do not exceed the refund limit of £{0}</value>
+  </data>
   <data name="AmountDecimalPlaceError" xml:space="preserve">
     <value>Please enter a valid number with a maximum of {0} decimal places</value>
   </data>

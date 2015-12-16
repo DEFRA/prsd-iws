@@ -13,6 +13,7 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.Limit)
 
     <div class="grid-row">
         <div class="column-two-thirds">

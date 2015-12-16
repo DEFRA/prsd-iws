@@ -9,6 +9,6 @@
     {
         void Add(NotificationTransactionData notificationTransactionData);
 
-        Task<IList<NotificationTransaction>> GetTransactions(Guid id);
+        Task<IList<NotificationTransaction>> GetTransactions(Guid notificationId);
     }
 }

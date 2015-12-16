@@ -14,6 +14,8 @@
 
         public Guid NotificationId { get; set; }
 
+        public decimal Limit { get; set; }
+
         [Required(ErrorMessageResourceName = "AmountRefundedError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
         [Display(Name = "AmountRefundedLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
         [IsValidMoneyDecimal]
@@ -57,6 +59,11 @@
             if (Amount.ToMoneyDecimal() < 0)
             {
                 results.Add(new ValidationResult(RefundDetailsViewModelResources.AmountCannotBeNegative, new[] { "Amount" }));
+            }
+
+            if (Amount.ToMoneyDecimal() > Limit)
+            {
+                results.Add(new ValidationResult(string.Format(RefundDetailsViewModelResources.AmountCannotExceedLimit, Limit), new[] { "Amount" }));
             }
 
             return results;

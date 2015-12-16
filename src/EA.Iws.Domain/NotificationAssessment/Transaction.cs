@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
+    using System;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
 
@@ -20,6 +21,11 @@
 
         public async Task Save(NotificationTransactionData data)
         {
+            if (data.Debit > await transactionCalculator.RefundLimit(data.NotificationId))
+            {
+                throw new InvalidOperationException("Transaction cannot refund more than has already been paid");
+            }
+
             transactionRepository.Add(data);
 
             if (data.Credit > 0 && await transactionCalculator.PaymentIsNowFullyReceived(data))

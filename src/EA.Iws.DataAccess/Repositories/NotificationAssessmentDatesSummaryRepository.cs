@@ -28,7 +28,7 @@
             var assessment = await notificationAssessmentRepository.GetByNotificationId(notificationId);
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            var latestPayment = await transactionCalculator.LastestPayment(notificationId);
+            var latestPayment = await transactionCalculator.LatestPayment(notificationId);
             DateTime? lastestPaymentDate = null;
 
             if (latestPayment != null)

@@ -45,7 +45,7 @@
             return await Balance(notificationId) <= 0;
         }
 
-        public async Task<NotificationTransaction> LastestPayment(Guid notificationId)
+        public async Task<NotificationTransaction> LatestPayment(Guid notificationId)
         {
             var transactions = await transactionRepository.GetTransactions(notificationId);
             return transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).FirstOrDefault();
@@ -58,6 +58,13 @@
                 + data.Debit.GetValueOrDefault();
 
             return newBalance <= 0;
+        }
+
+        public async Task<decimal> RefundLimit(Guid notificationId)
+        {
+            var transactions = await transactionRepository.GetTransactions(notificationId);
+
+            return TotalCredits(transactions) - TotalDebits(transactions);
         }
     }
 }

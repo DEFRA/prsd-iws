@@ -108,7 +108,7 @@
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
 
             var creditData = GetNotificationTransactionData(existingDate);
-            creditData.Debit = 500.00m;
+            creditData.Debit = 30.00m;
 
             var debitData = GetNotificationTransactionData(NewDate);
             debitData.Debit = 50.00m;
