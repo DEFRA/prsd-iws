@@ -64,6 +64,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
     <Compile Include="Admin\Reports\GetExportNotificationsReport.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReport.cs" />
+    <Compile Include="Admin\Reports\GetFinanceReport.cs" />
     <Compile Include="Admin\Reports\GetMissingShipmentsReport.cs" />
     <Compile Include="Admin\Search\SearchImportNotifications.cs" />
     <Compile Include="Admin\SendTestEmail.cs" />

@@ -56,6 +56,7 @@
     <Compile Include="Admin\LocalAreaData.cs" />
     <Compile Include="Admin\Reports\DataExportNotificationData.cs" />
     <Compile Include="Admin\Reports\ExportStatsData.cs" />
+    <Compile Include="Admin\Reports\FinanceReportData.cs" />
     <Compile Include="Admin\Reports\MissingShipmentData.cs" />
     <Compile Include="Admin\Search\ImportSearchResult.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttribute.cs" />

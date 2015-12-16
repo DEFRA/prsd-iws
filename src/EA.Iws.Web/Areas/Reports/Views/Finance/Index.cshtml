@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "Finance report";
+}
+
+<h1 class="heading-large">Finance report</h1>
+
+@Html.ActionLink("Download", "Download", new { endDate = DateTime.Now }, new { @class = "button" })

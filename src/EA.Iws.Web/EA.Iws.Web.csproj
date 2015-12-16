@@ -784,6 +784,7 @@
     <Content Include="Areas\Reports\Views\ExportNotifications\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Complete\Error.cshtml" />
     <Content Include="Areas\Admin\Views\ImportNotification\ReceivedDate.cshtml" />
+    <Content Include="Areas\Reports\Views\Finance\Index.cshtml" />
     <Content Include="Areas\Admin\Views\EntryOrExitPoint\Success.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -1310,6 +1311,7 @@
       <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\Controllers\ExportNotificationsController.cs" />
+    <Compile Include="Areas\Reports\Controllers\FinanceController.cs" />
     <Compile Include="Areas\Reports\Controllers\MissingShipmentsController.cs" />
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.Designer.cs">

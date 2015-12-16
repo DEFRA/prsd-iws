@@ -53,7 +53,8 @@
     <Content Include="Readme.txt" />
     <Content Include="scripts\AliaSQL.exe" />
     <Content Include="scripts\Create\placeholder.txt" />
-    <Content Include="scripts\Everytime\Functions\001-Reports-ConcatenateAddress.sql" />
+    <Content Include="scripts\Everytime\Functions\0002-Reports-PotentialRefund.sql" />
+    <Content Include="scripts\Everytime\Functions\0001-Reports-ConcatenateAddress.sql" />
     <Content Include="scripts\Everytime\Permissions\0002-Permissions-Grants.sql" />
     <Content Include="scripts\Everytime\Permissions\0001-Permissions-AppRole.sql" />
     <Content Include="scripts\Everytime\placeholder.txt" />
@@ -74,6 +75,8 @@
     <Content Include="scripts\Everytime\Views\0014-Reports-NotificationShipmentDataMissingShipments.sql" />
     <Content Include="scripts\Everytime\Views\0015-Reports-NotificationAssessment.sql" />
     <Content Include="scripts\Everytime\Views\0016-Reports-DataExportNotifications.sql" />
+    <Content Include="scripts\Everytime\Views\0017-Reports-Payments.sql" />
+    <Content Include="scripts\Everytime\Views\0018-Reports-Finance.sql" />
     <Content Include="scripts\TestData\20150907-145000-create-submitted-notification.sql" />
     <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
     <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
@@ -212,6 +215,7 @@
     <Content Include="scripts\Update\Sprint22\20151215-141400-allow-registration-number-null.sql" />
     <Content Include="scripts\Update\Sprint23\20151216-164000-add-import-notification-assessment.sql" />
     <Content Include="scripts\Update\Sprint23\20151217-170700-add-import-notification-notification-received-status.sql" />
+    <Content Include="scripts\Update\Sprint23\20151217-140600-add-refund-to-pricing-structure.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
