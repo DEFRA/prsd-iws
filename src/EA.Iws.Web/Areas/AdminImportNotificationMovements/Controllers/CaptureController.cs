@@ -75,7 +75,7 @@
                 model.ActualShipmentDate.AsDateTime().Value,
                 model.PrenotificationDate.AsDateTime()));
 
-            return RedirectToAction("Index", "Dates", new { area = "AdminImportMovement", id = movementId });
+            return RedirectToAction("Index", "Home", new { area = "AdminImportMovement", id = movementId });
         }
     }
 }

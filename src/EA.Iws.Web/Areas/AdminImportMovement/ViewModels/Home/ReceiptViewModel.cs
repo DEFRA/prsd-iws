@@ -45,11 +45,7 @@
         {
             get
             {
-                return
-                    new SelectList(
-                        PossibleUnits.Select(
-                            u => new KeyValuePair<string, ShipmentQuantityUnits>(EnumHelper.GetDisplayName(u), u)),
-                        "Value", "Key");
+                return new SelectList(new MovementRejectionReasons());
             }
         }
 

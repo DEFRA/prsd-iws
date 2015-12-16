@@ -4,6 +4,7 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
+    using Core.ImportMovement;
     using Core.Shared;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
@@ -33,19 +34,7 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture
         {
             get
             {
-                return new SelectList(new[]
-                {
-                    "Illegal shipment",
-                    "Unplanned shipment",
-                    "An accident",
-                    "Site inspection",
-                    "Rejected by consignee",
-                    "Refused entry by competent authority",
-                    "Unauthorised shipment",
-                    "Waste not as specified",
-                    "Abandoned waste",
-                    "Unrecovered waste"
-              });
+                return new SelectList(new MovementRejectionReasons());
             }
         }
 

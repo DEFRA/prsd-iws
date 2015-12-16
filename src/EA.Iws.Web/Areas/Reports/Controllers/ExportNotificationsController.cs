@@ -39,7 +39,7 @@
 
             var report = await mediator.SendAsync(new GetExportNotificationsReport(from, to));
 
-            var fileName = string.Format("missing-shipments-{0}-{1}.csv", from.ToShortDateString(), to.ToShortDateString());
+            var fileName = string.Format("BDU-export-notifications-{0}-{1}.csv", from.ToShortDateString(), to.ToShortDateString());
 
             return new CsvActionResult<DataExportNotificationData>(report.ToList(), fileName);
         }
