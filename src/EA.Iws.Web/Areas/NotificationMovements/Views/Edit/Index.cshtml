@@ -30,6 +30,7 @@ else
             <button class="button" type="submit">@Constants.ContinueButtonText</button>
         </div>
 
-        @Html.ActionLink(IndexResources.ShipmentSummaryLinkText, "Index", "Home")
+        @Html.ActionLink(IndexResources.ShipmentSummaryLinkText, "Index", "Options",
+            new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, null)
     }
 }

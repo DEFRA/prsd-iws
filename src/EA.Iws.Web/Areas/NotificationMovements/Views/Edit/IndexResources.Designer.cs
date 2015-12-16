@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Edit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go to shipment summary.
+        ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
         public static string ShipmentSummaryLinkText {
             get {

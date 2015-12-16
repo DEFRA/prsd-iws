@@ -127,6 +127,6 @@
     <value>Which shipment</value>
   </data>
   <data name="ShipmentSummaryLinkText" xml:space="preserve">
-    <value>Go to shipment summary</value>
+    <value>Go to notification options</value>
   </data>
 </root>
