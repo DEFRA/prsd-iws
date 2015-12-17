@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Core.Notification;
     using Core.NotificationAssessment;
     using Web.ViewModels.Shared;
 
@@ -75,6 +76,10 @@
         }
 
         public IList<NotificationAssessmentDecision> Decisions { get; set; } 
+
+        public bool IsAreaAssigned { get; set; }
+
+        public CompetentAuthority CompetentAuthority { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

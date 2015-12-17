@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
+    using Requests.Notification;
     using ViewModels;
 
     [Authorize(Roles = "internal")]
@@ -22,8 +23,15 @@
         {
             var dates = await mediator.SendAsync(new GetDates(id));
             var decisions = await mediator.SendAsync(new GetDecisionHistory(id));
+            var isAreaAssigned = await mediator.SendAsync(new GetNotificationLocalAreaId(id)) != default(Guid);
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
 
-            var model = new DateInputViewModel(dates) { Decisions = decisions };
+            var model = new DateInputViewModel(dates)
+            {
+                Decisions = decisions,
+                IsAreaAssigned = isAreaAssigned,
+                CompetentAuthority = competentAuthority
+            };
 
             if (command != null)
             {

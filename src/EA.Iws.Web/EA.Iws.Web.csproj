@@ -493,7 +493,6 @@
     <Content Include="Areas\AdminExportAssessment\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Home\Index.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_AssessmentNavigation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\BaselOecdCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\YCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />

@@ -48,7 +48,7 @@
 
             await mediator.SendAsync(new SetNotificationLocalAreaId(model.NotificationId, model.LocalAreaId.GetValueOrDefault()));
 
-            return RedirectToAction("Index", "Home", new { area = "AdminExportAssessment" });
+            return RedirectToAction("Index", "AssignArea", new { id = model.NotificationId, area = "AdminExportAssessment" });
         }
 
         private async Task<SelectList> GetAreas()
