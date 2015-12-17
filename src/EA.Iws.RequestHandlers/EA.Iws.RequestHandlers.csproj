@@ -286,6 +286,7 @@
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryDataHandler.cs" />
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternalHandler.cs" />
+    <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisionRequiredHandler.cs" />
     <Compile Include="NotificationAssessment\GetLocalAreasByUserCaHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAttentionSummaryHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationStatusHandler.cs" />

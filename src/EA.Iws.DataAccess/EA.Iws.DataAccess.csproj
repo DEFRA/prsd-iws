@@ -190,6 +190,7 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
     <Compile Include="Repositories\ExporterRepository.cs" />
+    <Compile Include="Repositories\FinancialGuaranteeRepository.cs" />
     <Compile Include="Repositories\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ExporterRepository.cs" />
     <Compile Include="Repositories\Imports\FacilityRepository.cs" />

@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using NotificationApplication.ViewModels.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationAssessment;
@@ -22,9 +21,16 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetNotificationOverviewInternal(id));
-            ViewBag.ActiveSection = "Assessment";
-            return View(new NotificationOverviewViewModel(result));
+            var financialGuaranteeDecisionRequired = await mediator.SendAsync(new GetFinancialGuaranteeDecisionRequired(id));
+
+            if (financialGuaranteeDecisionRequired)
+            {
+                return RedirectToAction("Dates", "FinancialGuarantee");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Overview");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]

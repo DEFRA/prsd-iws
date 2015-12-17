@@ -11,7 +11,7 @@
                 Notification assessment
             </h3>
             <ul>
-                <li>@Html.ActionLink("Notification overview", "Index", "Home", new { area = "AdminExportAssessment", Model.Id }, null)</li>
+                <li>@Html.ActionLink("Notification overview", "Index", "Overview", new { area = "AdminExportAssessment", Model.Id }, null)</li>
                 <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminExportAssessment", Model.Id }, null)</li>
                 <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminExportAssessment", Model.Id }, null)</li>
                 @if (Model.CompetentAuthority == CompetentAuthority.England)

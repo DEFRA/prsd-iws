@@ -493,6 +493,8 @@
     <Content Include="Areas\AdminExportAssessment\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Home\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Home\_AssessmentNavigation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\BaselOecdCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\YCode\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\AlreadySubmitted.cshtml" />
@@ -540,15 +542,15 @@
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_UnNumbers.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_OtherCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_RecoveryInformation.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_AmountsAndDates.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_ClassifyYourWaste.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_Journey.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_OrganisationsInvolved.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_RecoveryOperation.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_Transportation.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_WasteCodes.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_WasteRecovery.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_SummaryTableContainer.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_AmountsAndDates.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_ClassifyYourWaste.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_Journey.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_OrganisationsInvolved.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_RecoveryOperation.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_Transportation.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_WasteCodes.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_WasteRecovery.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\_SummaryTableContainer.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\NumberOfCarriers.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\Carriers.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\_MeansOfTransport.cshtml" />
@@ -922,6 +924,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressBookResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />

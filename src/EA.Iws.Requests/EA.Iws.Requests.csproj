@@ -130,6 +130,7 @@
     <Compile Include="Movement\Receive\SetMovementAccepted.cs" />
     <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\Reject\SetMovementRejected.cs" />
+    <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisionRequired.cs" />
     <Compile Include="NotificationAssessment\GetLocalAreasByUserCA.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAttentionSummary.cs" />
     <Compile Include="NotificationAssessment\GetNotificationStatus.cs" />

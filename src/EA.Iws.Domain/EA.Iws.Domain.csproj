@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailAddress.cs" />
+    <Compile Include="FinancialGuarantee\IFinancialGuaranteeRepository.cs" />
     <Compile Include="ImportMovement\CompleteImportMovement.cs" />
     <Compile Include="ImportMovement\ICompleteImportMovement.cs" />
     <Compile Include="ImportMovement\IImportMovementCompletedReceiptRepository.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredByCalculator.cs" />
+    <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequired.cs" />
     <Compile Include="NotificationAssessment\IDecisionRequiredByCalculator.cs" />
     <Compile Include="DaysRemainingCalculator.cs" />
     <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />

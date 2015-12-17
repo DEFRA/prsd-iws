@@ -82,6 +82,7 @@
             builder.RegisterType<ValidMovementDateCalculator>().AsSelf();
             builder.RegisterType<Transaction>().AsSelf();
             builder.RegisterType<DaysRemainingCalculator>().AsSelf();
+            builder.RegisterType<FinancialGuaranteeDecisionRequired>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();
