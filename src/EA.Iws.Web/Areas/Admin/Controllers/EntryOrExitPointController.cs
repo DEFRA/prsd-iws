@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
@@ -63,7 +64,21 @@
 
             await mediator.SendAsync(new AddEntryOrExitPoint(model.CountryId.Value, model.Name));
 
-            return RedirectToAction("Index");
+            var countryName = model.Countries.SingleOrDefault(c => c.Id == model.CountryId.Value).Name;
+
+            var successModel = new SuccessViewModel
+            {
+                PortName = model.Name,
+                CountryName = countryName
+            };
+
+            return View("Success", successModel);
+        }
+
+        [HttpGet]
+        public ActionResult Success(SuccessViewModel model)
+        {
+            return View(model);
         }
     }
 }
