@@ -27,6 +27,7 @@
             NotificationType = notificationType;
             CompetentAuthority = competentAuthority;
             NotificationNumber = notificationNumber;
+            RaiseEvent(new ImportNotificationCreatedEvent(this));
         }
     }
 }

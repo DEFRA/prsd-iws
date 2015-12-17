@@ -64,6 +64,9 @@
     <Compile Include="ImportMovement\IRejectImportMovement.cs" />
     <Compile Include="ImportMovement\ReceiveImportMovement.cs" />
     <Compile Include="ImportMovement\RejectImportMovement.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChange.cs" />
     <Compile Include="ImportNotification\Address.cs" />
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />
@@ -74,7 +77,9 @@
     <Compile Include="ImportNotification\IFacilityRepository.cs" />
     <Compile Include="ImportNotification\IImporterRepository.cs" />
     <Compile Include="ImportNotification\Facility.cs" />
+    <Compile Include="ImportNotification\IImportNotificationAssessmentRepository.cs" />
     <Compile Include="ImportNotification\Importer.cs" />
+    <Compile Include="ImportNotification\ImportNotificationCreatedEvent.cs" />
     <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
     <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
     <Compile Include="ImportNotification\IProducerRepository.cs" />

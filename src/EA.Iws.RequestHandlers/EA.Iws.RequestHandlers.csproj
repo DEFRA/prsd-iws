@@ -144,6 +144,7 @@
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
+    <Compile Include="ImportNotification\Events\CreateImportNotificationAssessment.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthorityHandler.cs" />
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
