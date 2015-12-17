@@ -11,11 +11,14 @@
         {
         }
 
-        public ImportNotificationStatusChange(ImportNotificationStatus oldStatus, ImportNotificationStatus newStatus)
+        public ImportNotificationStatusChange(ImportNotificationStatus oldStatus, 
+            ImportNotificationStatus newStatus,
+            Guid userId)
         {
             PreviousStatus = oldStatus;
             NewStatus = newStatus;
             ChangeDate = new DateTimeOffset(SystemTime.UtcNow, TimeSpan.Zero);
+            UserId = userId;
         }
 
         public ImportNotificationStatus PreviousStatus { get; private set; }
@@ -23,5 +26,7 @@
         public ImportNotificationStatus NewStatus { get; private set; }
         
         public DateTimeOffset ChangeDate { get; private set; }
+
+        public Guid UserId { get; private set; }
     }
 }

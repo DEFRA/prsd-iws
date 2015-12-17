@@ -1,10 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
+    using Requests.ImportNotificationAssessment;
     using ViewModels.ImportNotification;
 
     [Authorize]
@@ -12,6 +14,7 @@
     {
         private readonly IMediator mediator;
         private const string ImportNotificationNumber = "ImportNotificationNumber";
+        private const string ImportNotificationReceivedDate = "ReceivedDate";
 
         public ImportNotificationController(IMediator mediator)
         {
@@ -40,6 +43,36 @@
             }
 
             TempData[ImportNotificationNumber] = model.NotificationNumber;
+            return RedirectToAction("ReceivedDate");
+        }
+
+        [HttpGet]
+        public ActionResult ReceivedDate()
+        {
+            object number;
+            if (TempData.TryGetValue(ImportNotificationNumber, out number))
+            {
+                return View(new NotificationReceivedDateViewModel
+                {
+                    NotificationNumber = number.ToString()
+                });
+            }
+
+            return RedirectToAction("Number");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReceivedDate(NotificationReceivedDateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData[ImportNotificationNumber] = model.NotificationNumber;
+            TempData[ImportNotificationReceivedDate] = model.ReceivedDate.AsDateTime().Value;
+
             return RedirectToAction("NotificationType");
         }
 
@@ -47,15 +80,22 @@
         public ActionResult NotificationType()
         {
             object number;
-            if (TempData.TryGetValue(ImportNotificationNumber, out number))
+            object receivedDate;
+            if (!TempData.TryGetValue(ImportNotificationNumber, out number))
             {
-                return View(new NotificationTypeViewModel
-                {
-                    NotificationNumber = number.ToString()
-                });
+                return RedirectToAction("Number");
             }
 
-            return RedirectToAction("Number");
+            if (!TempData.TryGetValue(ImportNotificationReceivedDate, out receivedDate))
+            {
+                return RedirectToAction("ReceivedDate");
+            }
+
+            return View(new NotificationTypeViewModel
+            {
+                NotificationNumber = number.ToString(),
+                ReceivedDate = (DateTime)receivedDate
+            });
         }
 
         [HttpPost]
@@ -68,8 +108,10 @@
             }
 
             var notificationType = (NotificationType)model.NotificationTypeRadioButtons.SelectedValue;
-            
+
             var id = await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber, notificationType));
+
+            await mediator.SendAsync(new SetReceivedDate(id, model.ReceivedDate));
 
             if (notificationType == Core.Shared.NotificationType.Disposal)
             {

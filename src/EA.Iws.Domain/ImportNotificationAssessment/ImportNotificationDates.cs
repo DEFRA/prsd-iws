@@ -5,9 +5,9 @@
 
     public class ImportNotificationDates : Entity
     {
-        public DateTimeOffset? NotificationReceivedDate { get; private set; }
+        public DateTimeOffset? NotificationReceivedDate { get; internal set; }
 
-        public DateTimeOffset? PaymentReceivedDate { get; private set; }
+        public DateTimeOffset? PaymentReceivedDate { get; internal set; }
 
         internal ImportNotificationDates()
         {

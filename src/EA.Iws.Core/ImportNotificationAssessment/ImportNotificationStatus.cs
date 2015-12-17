@@ -2,6 +2,7 @@
 {
     public enum ImportNotificationStatus
     {
-        New = 1
+        New = 1,
+        NotificationReceived = 2
     }
 }

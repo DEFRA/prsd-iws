@@ -211,6 +211,7 @@
     <Content Include="scripts\Update\Sprint22\20151215-111000-remove-code-type-from-waste-codes.sql" />
     <Content Include="scripts\Update\Sprint22\20151215-141400-allow-registration-number-null.sql" />
     <Content Include="scripts\Update\Sprint23\20151216-164000-add-import-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint23\20151217-170700-add-import-notification-notification-received-status.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

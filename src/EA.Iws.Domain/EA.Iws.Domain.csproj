@@ -67,6 +67,7 @@
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChange.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChangeEvent.cs" />
     <Compile Include="ImportNotification\Address.cs" />
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />

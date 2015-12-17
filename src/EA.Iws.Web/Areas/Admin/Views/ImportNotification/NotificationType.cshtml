@@ -13,6 +13,7 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(m => m.NotificationNumber)
+    @Html.HiddenFor(m => m.ReceivedDate)
 
     <div class="form-group">@Html.EditorFor(m => m.NotificationTypeRadioButtons)</div>
 
