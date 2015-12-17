@@ -56,7 +56,12 @@
                     @nullMarker
                 }
             </td>
-            <td></td>
+            <td>
+                @if(Model.NotificationReceivedDate.IsCompleted && !Model.PaymentIsComplete)
+                {
+                    @Html.ActionLink("Go to payment details", "Index", "PaymentDetails");
+                }
+            </td>
         </tr>
 
         <tr>
