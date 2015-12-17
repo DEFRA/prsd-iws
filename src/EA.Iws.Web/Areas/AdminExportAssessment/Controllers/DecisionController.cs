@@ -40,7 +40,7 @@
             {
                 if (model.DecisionTypes.Count == 0)
                 {
-                    return RedirectToAction("Index", "Home", new { id, area = "AdminExportAssessment" });
+                    return RedirectToAction("Index", "KeyDates");
                 }
 
                 ViewBag.ActiveSection = "Assessment";
@@ -65,7 +65,7 @@
                     break;
             }
 
-            return RedirectToAction("Index", "Home", new { area = "AdminExportAssessment" });
+            return RedirectToAction("Index", "KeyDates");
         }
 
         private async Task PostConsentWithdrawn(NotificationAssessmentDecisionViewModel model)
