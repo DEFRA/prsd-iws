@@ -19,22 +19,22 @@ namespace EA.Iws.Domain.NotificationAssessment
 
         public DateTime? TransmittedDate { get; internal set; }
 
-        public DateTime? AcknowledgedDate { get; set; }
+        public DateTime? AcknowledgedDate { get; internal set; }
 
         public string NameOfOfficer { get; internal set; }
 
         public DateTime? WithdrawnDate { get; internal set; }
 
-        public DateTime? ConsentWithdrawnDate { get; set; }
+        public DateTime? ConsentWithdrawnDate { get; internal set; }
 
-        public DateTime? ConsentedDate { get; set; }
+        public DateTime? ConsentedDate { get; internal set; }
 
-        public string ConsentWithdrawnReasons { get; set; }
+        public string ConsentWithdrawnReasons { get; internal set; }
 
-        public DateTime? ObjectedDate { get; set; }
+        public DateTime? ObjectedDate { get; internal set; }
 
-        public string ObjectionReason { get; set; }
+        public string ObjectionReason { get; internal set; }
 
-        public string WithdrawnReason { get; set; }
+        public string WithdrawnReason { get; internal set; }
     }
 }

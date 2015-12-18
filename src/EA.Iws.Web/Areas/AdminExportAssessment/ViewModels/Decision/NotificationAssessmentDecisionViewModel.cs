@@ -111,13 +111,6 @@
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidFromBeforeValidTo, 
                     new[] { "ConsentValidFromDate" });
             }
-
-            if (ConsentValidFromDate.IsCompleted 
-                && ConsentValidFromDate.AsDateTime().GetValueOrDefault().Date < SystemTime.UtcNow.Date)
-            {
-                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentDateNotPast, 
-                    new[] { "ConsentValidFromDate" });
-            }
         }
 
         private IEnumerable<ValidationResult> ValidateConsentWithdrawn()
