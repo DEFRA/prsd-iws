@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailAddress.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
+    <Compile Include="FinancialGuarantee\IFinancialGuaranteeDecisionRepository.cs" />
     <Compile Include="FinancialGuarantee\IFinancialGuaranteeRepository.cs" />
     <Compile Include="ImportMovement\CompleteImportMovement.cs" />
     <Compile Include="ImportMovement\ICompleteImportMovement.cs" />

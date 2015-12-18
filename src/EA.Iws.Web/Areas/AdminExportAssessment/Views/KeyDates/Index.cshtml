@@ -181,26 +181,48 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationAcknowledgedDate.IsCompleted && !Model.Decisions.Any())
+                @if (Model.NotificationAcknowledgedDate.IsCompleted && !Model.AssessmentDecisions.Any())
                 {
                     @Html.ActionLink("Go to assessment decision", "Index", "Decision");
                 }
             </td>
         </tr>
 
-        @for (int i = 0; i < Model.Decisions.Count; i++)
+        @for (int i = 0; i < Model.AssessmentDecisions.Count; i++)
         {
             <tr>
                 <td>
-                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.AssessmentDecisions[i].Status)
                 </td>
                 <td>
-                    @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
+                    @Html.Gds().DisplayDateFor(m => m.AssessmentDecisions[i].Date)
                 </td>
                 <td>
-                    @if (Model.Decisions[i].Status == NotificationStatus.Consented)
+                    @if (Model.AssessmentDecisions[i].Status == NotificationStatus.Consented)
                     {
-                        @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
+                        @Html.Gds().DisplayShortDateRangeFor(
+                            m => m.AssessmentDecisions[i].ConsentedFrom.GetValueOrDefault(), 
+                            m => m.AssessmentDecisions[i].ConsentedTo.GetValueOrDefault())
+                    }
+                </td>
+            </tr>
+        }
+
+        @foreach (var decision in Model.FinancialGuaranteeDecisions)
+        {
+            <tr>
+                <td>
+                    @decision.Decision
+                </td>
+                <td>
+                    @Html.Gds().DisplayDate(decision.Date)
+                </td>
+                <td>
+                    @if (decision.ApprovedFrom.HasValue && decision.ApprovedTo.HasValue)
+                    {
+                        @Html.Gds().DisplayShortDateRange(
+                            decision.ApprovedFrom.Value, 
+                            decision.ApprovedTo.Value)
                     }
                 </td>
             </tr>

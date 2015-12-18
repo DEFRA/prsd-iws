@@ -19,7 +19,7 @@
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
             DecisionDate = new OptionalDateInputViewModel(true);
             NewDate = new OptionalDateInputViewModel(true);
-            Decisions = new List<NotificationAssessmentDecision>();
+            AssessmentDecisions = new List<NotificationAssessmentDecision>();
         }
 
         public DateInputViewModel(NotificationDatesData dates)
@@ -35,7 +35,7 @@
             DecisionDate = new OptionalDateInputViewModel(dates.DecisionRequiredDate, true);
             NewDate = new OptionalDateInputViewModel(true);
             NameOfOfficer = dates.NameOfOfficer;
-            Decisions = new List<NotificationAssessmentDecision>();
+            AssessmentDecisions = new List<NotificationAssessmentDecision>();
         }
 
         public Guid NotificationId { get; set; }
@@ -75,7 +75,9 @@
             get { return CommencementDate.AsDateTime() != null && !string.IsNullOrWhiteSpace(NameOfOfficer); }
         }
 
-        public IList<NotificationAssessmentDecision> Decisions { get; set; } 
+        public IList<NotificationAssessmentDecision> AssessmentDecisions { get; set; }
+
+        public IEnumerable<FinancialGuaranteeDecisionData> FinancialGuaranteeDecisions { get; set; }
 
         public bool IsAreaAssigned { get; set; }
 

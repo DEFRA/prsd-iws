@@ -136,6 +136,7 @@
     <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
+    <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionData.cs" />
     <Compile Include="Shared\AddressDataResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
