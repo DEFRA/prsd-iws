@@ -50,8 +50,8 @@
                     model.Completed.AsDateTime()));
 
             return (model.IsRequiredEntryComplete) ?
-                RedirectToAction("Index", "Home", new { id, area = "AdminExportAssessment" })
-                : RedirectToAction("Dates", "FinancialGuarantee", new { id });
+                RedirectToAction("Decision")
+                : RedirectToAction("Dates");
         }
 
         [HttpGet]
@@ -66,7 +66,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult ReturnToAssessment(Guid id)
         {
-            return RedirectToAction("Index", "Home", new { area = "AdminExportAssessment" });
+            return RedirectToAction("Index", "KeyDates");
         }
 
         [HttpPost]
@@ -81,12 +81,12 @@
 
             if (!model.IsApplicationCompleted)
             {
-                return RedirectToAction("Index", "Home", new { id, area = "AdminExportAssessment" });
+                return RedirectToAction("Index", "KeyDates", new { id, area = "AdminExportAssessment" });
             }
 
             await mediator.SendAsync(requestMap.Map(model, id));
 
-            return RedirectToAction("Index", "Home", new { id, area = "AdminExportAssessment" });
+            return RedirectToAction("Index", "KeyDates", new { id, area = "AdminExportAssessment" });
         }
     }
 }

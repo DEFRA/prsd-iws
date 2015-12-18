@@ -116,7 +116,7 @@
             model.IsRequiredEntryComplete = true;
             var result = await controller.Dates(AnyGuid, model) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Index", "Home");
+            result.AssertControllerReturn("Decision", "FinacialGuarantee");
         }
 
         [Fact]
