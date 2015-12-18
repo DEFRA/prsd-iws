@@ -6,6 +6,7 @@
     using Core.Shared;
     using Infrastructure;
     using Prsd.Core.Mediator;
+    using Requests.NotificationMovements.Create;
     using Requests.WasteRecovery;
     using ViewModels.WasteRecovery;
     
@@ -18,6 +19,7 @@
         private const string EstimatedValueAmountKey = "EstimatedValueAmount";
         private const string EstimatedValueUnitKey = "EstimatedValueUnit";
         private const string DisposalMethodKey = "DisposalMethod";
+        private const string ShipmentInfoUnitsKey = "ShipmentInfoUnits";
 
         public WasteRecoveryController(IMediator mediator)
         {
@@ -83,15 +85,17 @@
             {
                 var percentageRecoverable = Convert.ToDecimal(result);
                 var estimatedValue = await mediator.SendAsync(new GetEstimatedValue(id));
+                var shipmentInfoUnits = await GetShipmentInfoUnits(id);
 
-                var model = new EstimatedValueViewModel(percentageRecoverable, estimatedValue);
-
+                var model = estimatedValue == null ? new EstimatedValueViewModel(percentageRecoverable, shipmentInfoUnits) 
+                    : new EstimatedValueViewModel(percentageRecoverable, estimatedValue, shipmentInfoUnits);
+                
                 return View(model);
             }
 
             return RedirectToAction("Percentage", "WasteRecovery", new { backToOverview });
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EstimatedValue(Guid id, EstimatedValueViewModel model, bool? backToOverview = null)
@@ -104,6 +108,7 @@
             TempData.Add(PercentageKey, model.PercentageRecoverable);
             TempData.Add(EstimatedValueAmountKey, model.Amount.ToMoneyDecimal());
             TempData.Add(EstimatedValueUnitKey, model.SelectedUnits.Value);
+            TempData.Add(ShipmentInfoUnitsKey, model.ShipmentInfoUnits);
 
             return RedirectToAction("RecoveryCost", "WasteRecovery", new { backToOverview });
         }
@@ -114,20 +119,24 @@
             object percentageResult;
             object estimatedValueAmountResult;
             object estimatedValueUnitResult;
+            object shipmentInfoUnitsResult;
 
             if (TempData.TryGetValue(PercentageKey, out percentageResult) 
                 && TempData.TryGetValue(EstimatedValueAmountKey, out estimatedValueAmountResult)
-                && TempData.TryGetValue(EstimatedValueUnitKey, out estimatedValueUnitResult))
+                && TempData.TryGetValue(EstimatedValueUnitKey, out estimatedValueUnitResult)
+                && TempData.TryGetValue(ShipmentInfoUnitsKey, out shipmentInfoUnitsResult))
             {
                 var recoveryCost = await mediator.SendAsync(new GetRecoveryCost(id));
                 var estimatedValue = Convert.ToDecimal(estimatedValueAmountResult);
                 var unit = (ValuePerWeightUnits)estimatedValueUnitResult;
                 var percentage = Convert.ToDecimal(percentageResult);
+                var shipmentInfoUnits = (ValuePerWeightUnits)shipmentInfoUnitsResult;
 
                 var model = new RecoveryCostViewModel(
                     percentage,
                     new ValuePerWeightData(estimatedValue, unit),
-                    recoveryCost);
+                    recoveryCost,
+                    shipmentInfoUnits);
 
                 return View(model);
             }
@@ -207,7 +216,8 @@
                 }
                 else
                 {
-                    costModel.NotificationId = id;
+                    var shipmentInfoUnits = await GetShipmentInfoUnits(id);
+                    costModel = new DisposalCostViewModel(id, shipmentInfoUnits);
                 }
 
                 costModel.DisposalMethod = disposalMethodResult.ToString();
@@ -230,6 +240,19 @@
             await mediator.SendAsync(new SetWasteDisposal(model.NotificationId, model.DisposalMethod, model.Amount.ToMoneyDecimal(), model.Units));
 
             return RedirectToAction("Index", "Home", new { backToOverview });
+        }
+
+        private async Task<ValuePerWeightUnits> GetShipmentInfoUnits(Guid id)
+        {
+            var shipmentUnits = await mediator.SendAsync(new GetShipmentUnits(id));
+
+            var units = ValuePerWeightUnits.Kilogram;
+            if (shipmentUnits == ShipmentQuantityUnits.Tonnes)
+            {
+                units = ValuePerWeightUnits.Tonne;
+            }
+
+            return units;
         }
     }
 }

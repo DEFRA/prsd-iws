@@ -15,6 +15,8 @@
     {
         public decimal PercentageRecoverable { get; set; }
 
+        public ValuePerWeightUnits ShipmentInfoUnits { get; set; }
+
         public decimal EstimatedValueAmount { get; set; }
 
         public ValuePerWeightUnits EstimatedValueUnit { get; set; }
@@ -51,7 +53,8 @@
 
         public RecoveryCostViewModel(decimal percentage, 
             ValuePerWeightData estimatedValueData, 
-            ValuePerWeightData recoveryCostData)
+            ValuePerWeightData recoveryCostData,
+            ValuePerWeightUnits shipmentInfoUnits)
         {
             PercentageRecoverable = percentage;
             EstimatedValueAmount = estimatedValueData.Amount;
@@ -61,6 +64,10 @@
             {
                 Amount = recoveryCostData.Amount.ToString();
                 SelectedUnits = recoveryCostData.Unit;
+            }
+            else
+            {
+                SelectedUnits = shipmentInfoUnits;
             }
         }
         

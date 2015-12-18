@@ -8,6 +8,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.PercentageRecoverable)
+    @Html.HiddenFor(m => m.ShipmentInfoUnits)
 
     <header class="hgroup">
         <h1 class="heading-large">@EstimatedValueResources.Header</h1>

@@ -15,6 +15,8 @@
     {
         public decimal PercentageRecoverable { get; set; }
 
+        public ValuePerWeightUnits ShipmentInfoUnits { get; set; }
+
         [Display(Name = "Amount", ResourceType = typeof(EstimatedValueResources))]
         [Required(ErrorMessageResourceName = "AmountRequired", ErrorMessageResourceType = typeof(EstimatedValueResources))]
         [IsValidNumber(maxPrecision: 12)]
@@ -45,15 +47,25 @@
         {
         }
 
-        public EstimatedValueViewModel(decimal percentage, ValuePerWeightData estimatedValueData)
+        public EstimatedValueViewModel(decimal percentage, ValuePerWeightData estimatedValueData, ValuePerWeightUnits units)
         {
             PercentageRecoverable = percentage;
-
+            ShipmentInfoUnits = units;
+            
             if (estimatedValueData != null)
             {
                 Amount = estimatedValueData.Amount.ToString();
                 SelectedUnits = estimatedValueData.Unit;
             }
+        }
+
+        public EstimatedValueViewModel(decimal percentage, ValuePerWeightUnits units)
+        {
+            PercentageRecoverable = percentage;
+            ShipmentInfoUnits = units;
+
+            Amount = string.Empty;
+            SelectedUnits = units;
         }
                 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

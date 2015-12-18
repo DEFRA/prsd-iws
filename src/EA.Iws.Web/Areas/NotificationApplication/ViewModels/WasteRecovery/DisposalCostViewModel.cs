@@ -16,6 +16,8 @@
     {
         public Guid NotificationId { get; set; }
 
+        public ValuePerWeightUnits ShipmentInfoUnits { get; set; }
+
         [Display(Name = "Amount", ResourceType = typeof(DisposalCostResources))]
         [Required(ErrorMessageResourceName = "AmountRequired", ErrorMessageResourceType = typeof(DisposalCostResources))]
         [IsValidNumber(maxPrecision: 12)]
@@ -50,6 +52,13 @@
             NotificationId = id;
             Amount = data.Amount.ToString(CultureInfo.InvariantCulture);
             Units = data.Unit;
+        }
+
+        public DisposalCostViewModel(Guid id, ValuePerWeightUnits shipmentInfoUnits)
+        {
+            NotificationId = id;
+            ShipmentInfoUnits = shipmentInfoUnits;
+            Units = shipmentInfoUnits;
         }
         
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

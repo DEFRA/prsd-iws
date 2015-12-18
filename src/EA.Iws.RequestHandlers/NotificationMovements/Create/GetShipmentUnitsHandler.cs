@@ -19,7 +19,7 @@
         {
             var shipment = await repository.GetByNotificationId(message.NotificationId);
 
-            return shipment.Units;
+            return shipment == null ? default(ShipmentQuantityUnits) : shipment.Units;
         }
     }
 }
