@@ -7,6 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
+    [Authorize(Roles = "internal")]
     public class OverviewController : Controller
     {
         private readonly IMediator mediator;

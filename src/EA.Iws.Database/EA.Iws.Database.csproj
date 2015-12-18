@@ -216,6 +216,7 @@
     <Content Include="scripts\Update\Sprint23\20151216-164000-add-import-notification-assessment.sql" />
     <Content Include="scripts\Update\Sprint23\20151217-170700-add-import-notification-notification-received-status.sql" />
     <Content Include="scripts\Update\Sprint23\20151217-140600-add-refund-to-pricing-structure.sql" />
+    <Content Include="scripts\Update\Sprint23\20151218-154500-add-fg-release-date-column.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

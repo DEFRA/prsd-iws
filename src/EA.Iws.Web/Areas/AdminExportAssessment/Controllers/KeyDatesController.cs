@@ -31,7 +31,7 @@
             var model = new DateInputViewModel(dates)
             {
                 IsAreaAssigned = isAreaAssigned,
-                CompetentAuthority = competentAuthority
+                CompetentAuthority = competentAuthority,
                 AssessmentDecisions = assessmentDecisions,
                 FinancialGuaranteeDecisions = finacialGuaranteeDecisions
             };

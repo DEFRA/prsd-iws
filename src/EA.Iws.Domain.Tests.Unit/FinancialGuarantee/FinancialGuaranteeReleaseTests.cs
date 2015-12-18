@@ -23,11 +23,22 @@
         }
 
         [Fact]
-        public void SetsDecisionDate()
+        public void SetsReleasedDate()
         {
             CompletedFinancialGuarantee.Release(AfterCompletionDate);
 
-            Assert.Equal(AfterCompletionDate, CompletedFinancialGuarantee.DecisionDate);
+            Assert.Equal(AfterCompletionDate, CompletedFinancialGuarantee.ReleasedDate);
+        }
+
+        [Fact]
+        public void DoesNotOverrideDecisionDate()
+        {
+            var previousDecisionDate = ApprovedFinancialGuarantee.DecisionDate.Value;
+            var afterDecisionDate = previousDecisionDate.AddDays(1);
+
+            ApprovedFinancialGuarantee.Release(afterDecisionDate);
+
+            Assert.Equal(previousDecisionDate, ApprovedFinancialGuarantee.DecisionDate);
         }
 
         [Fact]

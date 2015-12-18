@@ -28,19 +28,27 @@
                     result.Add(new FinancialGuaranteeDecision
                     {
                         NotificationId = financialGuarantee.NotificationApplicationId,
-                        Date = statusChange.ChangeDate,
+                        Date = financialGuarantee.DecisionDate.Value,
                         Status = statusChange.Status,
                         ApprovedFrom = financialGuarantee.ApprovedFrom,
                         ApprovedTo = financialGuarantee.ApprovedTo
                     });
                 }
-                else if (statusChange.Status == FinancialGuaranteeStatus.Released 
-                    || statusChange.Status == FinancialGuaranteeStatus.Refused)
+                else if (statusChange.Status == FinancialGuaranteeStatus.Released)
                 {
                     result.Add(new FinancialGuaranteeDecision
                     {
                         NotificationId = financialGuarantee.NotificationApplicationId,
-                        Date = statusChange.ChangeDate,
+                        Date = financialGuarantee.ReleasedDate.Value,
+                        Status = statusChange.Status
+                    });
+                }
+                else if (statusChange.Status == FinancialGuaranteeStatus.Refused)
+                {
+                    result.Add(new FinancialGuaranteeDecision
+                    {
+                        NotificationId = financialGuarantee.NotificationApplicationId,
+                        Date = financialGuarantee.DecisionDate.Value,
                         Status = statusChange.Status
                     });
                 }

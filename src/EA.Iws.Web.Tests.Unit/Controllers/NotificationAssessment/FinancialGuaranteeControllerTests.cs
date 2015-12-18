@@ -111,12 +111,12 @@
         }
 
         [Fact]
-        public async Task PostDates_RedirectsToHome()
+        public async Task PostDates_RedirectsToDecision()
         {
             model.IsRequiredEntryComplete = true;
             var result = await controller.Dates(AnyGuid, model) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Decision", "FinacialGuarantee");
+            result.AssertControllerReturn("Decision", "FinancialGuarantee");
         }
 
         [Fact]

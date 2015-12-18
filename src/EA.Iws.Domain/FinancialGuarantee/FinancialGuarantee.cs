@@ -74,6 +74,8 @@
 
         public int? ActiveLoadsPermitted { get; protected set; }
 
+        public DateTime? ReleasedDate { get; private set; }
+
         public void Received(DateTime date)
         {
             stateMachine.Fire(receivedTrigger, date);
@@ -234,19 +236,19 @@
             RefusalReason = refusalReason;
         }
 
-        public virtual void Release(DateTime decisionDate)
+        public virtual void Release(DateTime releasedDate)
         {
-            stateMachine.Fire(releasedTrigger, decisionDate);
+            stateMachine.Fire(releasedTrigger, releasedDate);
         }
 
-        private void OnReleased(DateTime decisionDate)
+        private void OnReleased(DateTime releasedDate)
         {
-            if (decisionDate < CompletedDate)
+            if (releasedDate < CompletedDate)
             {
-                throw new InvalidOperationException("Cannot set the decision date to be before the completed date. Id: " + NotificationApplicationId);
+                throw new InvalidOperationException("Cannot set the released date to be before the completed date. Id: " + NotificationApplicationId);
             }
 
-            DecisionDate = decisionDate;
+            ReleasedDate = releasedDate;
         }
     }
 }
