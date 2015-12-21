@@ -7,6 +7,10 @@
     {
         private static readonly Regex EmailAddressRegex = CreateRegex();
 
+        protected EmailAddress()
+        {
+        }
+
         public EmailAddress(string emailAddress)
         {
             if (!EmailAddressRegex.IsMatch(emailAddress))

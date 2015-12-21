@@ -64,18 +64,18 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification {
         /// <summary>
         ///   Looks up a localized string similar to Date notification received.
         /// </summary>
-        public static string ReceivedDate {
+        public static string NotificationReceivedLabel {
             get {
-                return ResourceManager.GetString("ReceivedDate", resourceCulture);
+                return ResourceManager.GetString("NotificationReceivedLabel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Please enter the date the notification was received.
         /// </summary>
-        public static string ReceivedDateRequired {
+        public static string NotificationReceivedRequired {
             get {
-                return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
+                return ResourceManager.GetString("NotificationReceivedRequired", resourceCulture);
             }
         }
     }

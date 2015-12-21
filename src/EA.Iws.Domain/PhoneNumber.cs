@@ -14,6 +14,10 @@
                     RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         }
 
+        protected PhoneNumber()
+        {
+        }
+
         public PhoneNumber(string phoneNumber)
         {
             if (!phoneNumberRegex.IsMatch(phoneNumber))

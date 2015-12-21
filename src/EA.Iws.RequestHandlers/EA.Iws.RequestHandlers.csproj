@@ -263,6 +263,7 @@
     <Compile Include="Mappings\ImportNotification\ImporterMap.cs" />
     <Compile Include="Mappings\ImportNotification\NotificationDetailsMap.cs" />
     <Compile Include="Mappings\ImportNotification\ProducerMap.cs" />
+    <Compile Include="Mappings\ImportNotification\SearchResultMap.cs" />
     <Compile Include="Mappings\ImportNotification\ShipmentMap.cs" />
     <Compile Include="Mappings\ImportNotification\StateOfExportMap.cs" />
     <Compile Include="Mappings\ImportNotification\StateOfImportMap.cs" />

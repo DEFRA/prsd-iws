@@ -71,7 +71,7 @@
             }
 
             TempData[ImportNotificationNumber] = model.NotificationNumber;
-            TempData[ImportNotificationReceivedDate] = model.ReceivedDate.AsDateTime().Value;
+            TempData[ImportNotificationReceivedDate] = model.NotificationReceived.AsDateTime().Value;
 
             return RedirectToAction("NotificationType");
         }

@@ -11,20 +11,20 @@
 
     internal class SearchImportNotificationsHandler : IRequestHandler<SearchImportNotifications, IList<ImportSearchResult>>
     {
-        private readonly IImportNotificationRepository importNotificationRepository;
+        private readonly IImportNotificationSearchRepository importNotificationSearchRepository;
         private readonly IMapper mapper;
 
-        public SearchImportNotificationsHandler(IImportNotificationRepository importNotificationRepository, IMapper mapper)
+        public SearchImportNotificationsHandler(IImportNotificationSearchRepository importNotificationSearchRepository, IMapper mapper)
         {
-            this.importNotificationRepository = importNotificationRepository;
+            this.importNotificationSearchRepository = importNotificationSearchRepository;
             this.mapper = mapper;
         }
 
         public async Task<IList<ImportSearchResult>> HandleAsync(SearchImportNotifications message)
         {
-            var notifications = await importNotificationRepository.SearchByNumber(message.NotificationNumber);
+            var results = await importNotificationSearchRepository.SearchByNumber(message.NotificationNumber);
 
-            return notifications.Select(n => mapper.Map<ImportSearchResult>(n)).ToArray();
+            return results.Select(n => mapper.Map<ImportSearchResult>(n)).ToArray();
         }
     }
 }
