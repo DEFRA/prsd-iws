@@ -353,6 +353,7 @@
     <Compile Include="NotificationMovements\Mappings\PackagingDataMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
+    <Compile Include="Notification\GetAnnexesToBeProvidedHandler.cs" />
     <Compile Include="Notification\GetNotificationIdAndStatusByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />

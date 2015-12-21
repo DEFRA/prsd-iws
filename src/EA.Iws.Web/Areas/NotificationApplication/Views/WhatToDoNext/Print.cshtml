@@ -1,0 +1,54 @@
+﻿@using EA.Iws.Core.Notification
+@model EA.Iws.Requests.Notification.WhatToDoNextData
+
+@{
+    ViewBag.Title = "Download and print your notification";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">Download and print your notification</h1>
+</header>
+
+<div class="form-group">Please make sure you sign and date block 17 of the notification document</div>
+
+
+<div class="form-group">
+    @if (Model.CompetentAuthority == CompetentAuthority.England)
+            {
+        @Html.Partial("_EaBlock17Disclosure")
+    }
+
+    @if (Model.CompetentAuthority == CompetentAuthority.NorthernIreland)
+            {
+        @Html.Partial("_NieaBlock17Disclosure")
+    }
+
+    @if (Model.CompetentAuthority == CompetentAuthority.Scotland)
+    {
+        @Html.Partial("_SepaBlock17Disclosure")
+    }
+
+    @if (Model.CompetentAuthority == CompetentAuthority.Wales)
+    {
+        @Html.Partial("_NrwBlock17Disclosure")
+    }
+</div>
+
+
+
+
+
+
+
+<div class="form-group">
+    @Html.ActionLink("Download your notification", "GenerateNotificationDocument", "Home", new { id = Model.Id, area = "NotificationApplication" }, null)
+</div>
+
+<div class="form-group">
+    @Html.ActionLink("Continue", "PostageLabel", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+</div>
+
+<div>
+    @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
+</div>

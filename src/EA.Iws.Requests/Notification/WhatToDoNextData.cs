@@ -8,6 +8,8 @@
     {
         public decimal Charge { get; set; }
 
+        public decimal AmountPaid { get; set; }
+
         public string NotificationNumber { get; set; }
 
         public CompetentAuthority CompetentAuthority { get; set; }

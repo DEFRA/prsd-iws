@@ -36,6 +36,27 @@
     }
 }
 
+.noti-price{
+    background: $light-blue;
+        color: $white;
+        padding: 10px 10px 5px 10px;
+        font-weight: bold;
+        clear: right;
+        
+        .price{
+            font-size: 40px;
+            font-weight: bold;
+            float: right;
+        }
+        .text{
+            font-size: 19px;
+            line-height:normal;
+        }
+        span{
+            display: inline-block;
+        }
+}
+
 .noti-overview{
     .heading-medium{
         font-weight: normal;

@@ -1,0 +1,123 @@
+﻿@using System.Globalization
+@using EA.Iws.Core.Notification
+@model EA.Iws.Requests.Notification.WhatToDoNextData
+
+@{
+    ViewBag.Title = "Payment and charges information";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+@{
+    var due = Model.Charge - Model.AmountPaid;
+    NumberFormatInfo nfi = new CultureInfo("en-GB").NumberFormat;
+    nfi.CurrencyGroupSeparator = string.Empty;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        <header class="hgroup">
+            <h1 class="heading-large">Your notification charges and payment information</h1>
+        </header>
+
+        <div class="grid-row">
+            <div class="column-half">
+                <div class="noti-price">
+                    <span class="text">Notification<br />Charges</span>
+                    <span class="price">@Html.Raw(Model.Charge.ToString("C0", nfi))</span>
+                </div>
+            </div>
+
+            <div class="column-half">
+                <div class="noti-price">
+                    <span class="text">Amount<br />Paid</span>
+                    <span class="price">@Html.Raw(Model.AmountPaid.ToString("C0", nfi))</span>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+        <br/>
+        <p>You can pay us by bank transfer, post, or credit or debit card. All Payments must be made in sterling.</p>
+        <br/>
+        <h4 class="heading-small">Pay by bank transfers</h4>
+        <p>Please use the correct payment reference. An incorrect payment reference could delay the notification.</p>
+    </div>
+</div>
+
+<div>
+    <table class="table-pad-bottom" title="Bank details">
+        <tbody>
+            <tr>
+                <td>Payment Reference</td>
+                <td>@Html.DisplayFor(m => m.NotificationNumber)</td>
+            </tr>
+            <tr>
+                <td>Payment Due</td>
+                <td>@Html.Raw(due.ToString("C"))</td>
+            </tr>
+            <tr>
+                <td>Account Name</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountName)</td>
+            </tr>
+            <tr>
+                <td>Bank Name</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Bank)</td>
+            </tr>
+            <tr>
+                <td>Bank Address</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.BankAddress)</td>
+            </tr>
+            <tr>
+                <td>Sort Code</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SortCode)</td>
+            </tr>
+            <tr>
+                <td>Account Number</td>
+                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountNumber)</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <p>If you are paying from outside the United Kingdom, please include these international banking references.</p>
+    <table class="table-pad-bottom" title="International banking details">
+        <tr>
+            <td>IBAN</td>
+            <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Iban)</td>
+        </tr>
+        <tr>
+            <td>SWIFTBIC</td>
+            <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SwiftBic)</td>
+        </tr>
+    </table>
+</div>
+
+<div class="grid-row column-two-thirds">
+    @if (Model.CompetentAuthority == CompetentAuthority.Wales)
+{
+    @Html.Partial("_NrwRemittanceEmail")
+}
+else
+{
+    @Html.Partial("_GeneralRemittanceEmail")
+}
+
+<h4 class="heading-small">By post</h4>
+@Html.Partial("_GeneralPost")
+
+@Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
+
+
+
+
+<br/><br/>
+
+<div class="form-group">
+    @Html.ActionLink("Continue", "UploadAnnexes", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+</div>
+
+<div>
+    @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
+</div>
+</div>

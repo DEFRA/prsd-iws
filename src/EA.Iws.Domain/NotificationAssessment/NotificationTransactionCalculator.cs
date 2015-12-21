@@ -66,5 +66,11 @@
 
             return TotalCredits(transactions) - TotalDebits(transactions);
         }
+
+        public async Task<decimal> TotalPaid(Guid notificationId)
+        {
+            var transactions = await transactionRepository.GetTransactions(notificationId);
+            return TotalCredits(transactions) - TotalDebits(transactions);
+        }
     }
 }

@@ -20,18 +20,50 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public ActionResult Index(Guid id)
+        {
+            var model = new WhatToDoNextData { Id = id};
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Print(Guid id)
         {
             var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
 
             return View(response);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(Guid id, FormCollection model)
+        [HttpGet]
+        public async Task<ActionResult> PostageLabel(Guid id)
         {
-            return RedirectToAction("Home", "Applicant", new { area = string.Empty });
+            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
+
+            return View(response);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> FinancialGaurantee(Guid id)
+        {
+            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
+
+            return View(response);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Payment(Guid id)
+        {
+            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
+
+            return View(response);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> UploadAnnexes(Guid id)
+        {
+            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
+
+            return View(response);
         }
 
         [HttpGet]

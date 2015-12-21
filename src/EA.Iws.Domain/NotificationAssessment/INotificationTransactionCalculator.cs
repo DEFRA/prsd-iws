@@ -20,5 +20,7 @@ namespace EA.Iws.Domain.NotificationAssessment
         Task<bool> PaymentIsNowFullyReceived(NotificationTransactionData data);
 
         Task<decimal> RefundLimit(Guid notificationId);
+
+        Task<decimal> TotalPaid(Guid notificationId);
     }
 }

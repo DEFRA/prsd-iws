@@ -222,6 +222,7 @@
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationTransactionRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
+    <Compile Include="Repositories\ProvidedAnnexesRepository.cs" />
     <Compile Include="Repositories\Reports\ExportStatsRepository.cs" />
     <Compile Include="Repositories\Reports\ExportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\FinanceReportRepository.cs" />
