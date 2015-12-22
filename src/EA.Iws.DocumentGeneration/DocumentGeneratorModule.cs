@@ -15,6 +15,7 @@
             builder.RegisterType<NotificationDocumentGenerator>().As<INotificationDocumentGenerator>();
             builder.RegisterType<MovementDocumentGenerator>().As<IMovementDocumentGenerator>();
             builder.RegisterType<FinancialGuaranteeDocumentGenerator>().As<IFinancialGuaranteeDocumentGenerator>();
+            builder.RegisterType<PostageLabelGenerator>().As<IPostageLabelGenerator>();
 
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<INotificationBlockFactory>()

@@ -161,6 +161,7 @@
     <Compile Include="NotificationAssessment\WithdrawNotificationApplication.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
     <Compile Include="NotificationMovements\MovementNumberStatus.cs" />
+    <Compile Include="Notification\GeneratePostageLabel.cs" />
     <Compile Include="Notification\GetAnnexesToBeProvided.cs" />
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />

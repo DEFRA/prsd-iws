@@ -58,6 +58,7 @@
     <Compile Include="DocumentGenerator\FinancialGuaranteeDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\MovementDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\NotificationDocumentGenerator.cs" />
+    <Compile Include="DocumentGenerator\PostageLabelGenerator.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Formatters\DateTimeFormatter.cs" />
     <Compile Include="Formatters\MeansOfTransportFormatter.cs" />

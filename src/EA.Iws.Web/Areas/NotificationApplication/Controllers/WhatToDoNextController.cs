@@ -5,7 +5,10 @@
     using System.Web.Mvc;
     using Core.Notification;
     using Infrastructure;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
 
     [Authorize]
@@ -79,6 +82,28 @@
                     return PartialView("_NrwCard");
                 default:
                     return new EmptyResult();
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetPostageLabel(CompetentAuthority competentAuthority)
+        {
+            try
+            {
+                var response = await mediator.SendAsync(new GeneratePostageLabel(competentAuthority));
+
+                var downloadName = "CompetentAuthorityPostageLabel" + SystemTime.UtcNow + ".pdf";
+
+                return File(response, "application/pdf", downloadName);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+                return HttpNotFound();
             }
         }
     }
