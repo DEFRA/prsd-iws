@@ -42,5 +42,13 @@
         {
             return RedirectToAction("Index", new { id, status = selectedMovementStatus });
         }
+
+        [HttpGet]
+        public ActionResult Unavailable(Guid id)
+        {
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
+        }
     }
 }

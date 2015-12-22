@@ -795,6 +795,7 @@
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NieaAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\UploadAnnexes.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Options\Unavailable.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1315,6 +1316,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CaptureViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\ViewModels\Options\UnavailableViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Home\SummaryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

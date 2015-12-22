@@ -55,8 +55,23 @@ else if (status != MovementStatus.Cancelled)
             <h2 class="heading-medium">@Resource.CurrentNotificationTitle @Model.NotificationNumber</h2>
             <div class="nav-bloc">
                 <nav>
-                    @Html.ActionLink(@Resource.PrintNotification, "GenerateNotificationDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                    @Html.ActionLink(@Resource.CompleteFG, "GenerateFinancialGuaranteeDocument", "Home", new { competentAuthority = Model.CompetentAuthority, area = "FinancialGuarantee" }, null)
+                    @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
+                    {
+                        @Html.ActionLink(@Resource.PrintNotification, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.PrintLabel, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.CompleteFG, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.CostInfo, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.UploadAnnexes, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    }
+                    else
+                    {
+                        @Html.ActionLink(@Resource.PrintNotification, "Print", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.PrintLabel, "PostageLabel", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.CompleteFG, "FinancialGaurantee", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.UploadAnnexes, "UploadAnnexes", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    }
+                    
                     @Html.ActionLink(@Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     @Html.ActionLink(@Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                 </nav>
