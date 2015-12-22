@@ -165,6 +165,8 @@
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationIdAndStatusByNumber.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
+    <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
+    <Compile Include="Notification\WhatToDoNextData.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
@@ -175,10 +177,10 @@
     <Compile Include="Notification\GetNotificationProgressInfo.cs" />
     <Compile Include="Notification\GetNotificationBasicInformation.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationId.cs" />
-    <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
+    <Compile Include="Notification\GetWhatToDoNextPaymentDataForNotification.cs" />
     <Compile Include="Notification\NotificationBasicInformation.cs" />
     <Compile Include="Notification\SubmitNotification.cs" />
-    <Compile Include="Notification\WhatToDoNextData.cs" />
+    <Compile Include="Notification\WhatToDoNextPaymentData.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUser.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetails.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />

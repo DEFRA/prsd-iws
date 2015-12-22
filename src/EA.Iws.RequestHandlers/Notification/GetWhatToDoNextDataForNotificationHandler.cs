@@ -1,47 +1,30 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.Notification;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
-    using Domain.NotificationAssessment;
-    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
     internal class GetWhatToDoNextDataForNotificationHandler : IRequestHandler<GetWhatToDoNextDataForNotification, WhatToDoNextData>
     {
-        private readonly IwsContext context;
-        private readonly IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextData> map;
-        private readonly INotificationChargeCalculator chargeCalculator;
-        private readonly INotificationTransactionCalculator transactionCalculator;
+        private readonly INotificationApplicationRepository repository;
 
-        public GetWhatToDoNextDataForNotificationHandler(IwsContext context, 
-            IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextData> map,
-            INotificationChargeCalculator chargeCalculator,
-            INotificationTransactionCalculator transactionCalculator)
+        public GetWhatToDoNextDataForNotificationHandler(INotificationApplicationRepository repository)
         {
-            this.context = context;
-            this.map = map;
-            this.chargeCalculator = chargeCalculator;
-            this.transactionCalculator = transactionCalculator;
+            this.repository = repository;
         }
-
         public async Task<WhatToDoNextData> HandleAsync(GetWhatToDoNextDataForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.Id);
+            var notification = await repository.GetById(message.Id);
+            var data = new WhatToDoNextData
+            {
+                Id = message.Id,
+                CompetentAuthority = (CompetentAuthority)notification.CompetentAuthority.Value
+            };
 
-            var competentAuthority = await context.UnitedKingdomCompetentAuthorities.SingleAsync(
-                        n => n.Id == notification.CompetentAuthority.Value);
-
-            var result = map.Map(notification, competentAuthority);
-
-            result.Charge = await chargeCalculator.GetValue(message.Id);
-
-            result.AmountPaid = await transactionCalculator.TotalPaid(message.Id);
-
-            return result;
+            return data;
         }
     }
 }

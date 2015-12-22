@@ -323,7 +323,7 @@
     <Compile Include="Mappings\ValuePerWeightMap.cs" />
     <Compile Include="Mappings\WasteCodesOverviewMap.cs" />
     <Compile Include="Mappings\WasteDisposalMap.cs" />
-    <Compile Include="Mappings\WhatToDoNextMap.cs" />
+    <Compile Include="Mappings\WhatToDoNextPaymentMap.cs" />
     <Compile Include="Movement\Complete\SaveMovementCompletedReceiptHandler.cs" />
     <Compile Include="Movement\CancelMovementsHandler.cs" />
     <Compile Include="Movement\GenerateMovementDocumentHandler.cs" />
@@ -358,8 +358,9 @@
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
-    <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
+    <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
+    <Compile Include="Notification\GetWhatToDoNextPaymentDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="Notification\SetChargeHandler.cs" />

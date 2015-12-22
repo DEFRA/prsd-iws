@@ -6,18 +6,18 @@
     using Prsd.Core.Mapper;
     using Requests.Notification;
 
-    internal class WhatToDoNextMap : IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextData>
+    internal class WhatToDoNextPaymentMap : IMapWithParameter<NotificationApplication, UnitedKingdomCompetentAuthority, WhatToDoNextPaymentData>
     {
         private readonly IMap<UnitedKingdomCompetentAuthority, UnitedKingdomCompetentAuthorityData> competentAuthorityMap;
 
-        public WhatToDoNextMap(IMap<UnitedKingdomCompetentAuthority, UnitedKingdomCompetentAuthorityData> competentAuthorityMap)
+        public WhatToDoNextPaymentMap(IMap<UnitedKingdomCompetentAuthority, UnitedKingdomCompetentAuthorityData> competentAuthorityMap)
         {
             this.competentAuthorityMap = competentAuthorityMap;
         }
 
-        public WhatToDoNextData Map(NotificationApplication source, UnitedKingdomCompetentAuthority parameter)
+        public WhatToDoNextPaymentData Map(NotificationApplication source, UnitedKingdomCompetentAuthority parameter)
         {
-            return new WhatToDoNextData
+            return new WhatToDoNextPaymentData
             {
                 Id = source.Id,
                 NotificationNumber = source.NotificationNumber,

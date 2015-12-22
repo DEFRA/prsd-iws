@@ -22,7 +22,7 @@
         [HttpGet]
         public ActionResult Index(Guid id)
         {
-            var model = new WhatToDoNextData { Id = id};
+            var model = new WhatToDoNextData { Id = id };
             return View(model);
         }
 
@@ -53,7 +53,7 @@
         [HttpGet]
         public async Task<ActionResult> Payment(Guid id)
         {
-            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
+            var response = await mediator.SendAsync(new GetWhatToDoNextPaymentDataForNotification(id));
 
             return View(response);
         }
