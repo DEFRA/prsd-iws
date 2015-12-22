@@ -1,0 +1,8 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Annex.AnnexViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Annex.IndexResources
+
+<p>@Resource.NoAnnexesRequired</p>
+
+<div class="form-group">
+    @Html.ActionLink(@Resource.NoAnnexesButton, "Index", "Options", new { id = Model.NotificationId }, new { @class = "button" })
+</div>

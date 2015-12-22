@@ -14,6 +14,7 @@
     using Domain.ImportNotification;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Annexes;
     using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
     using ImportNotification;
@@ -71,6 +72,8 @@
             builder.RegisterType<CertificateFactory>().AsSelf();
             builder.RegisterType<CertificateOfReceiptNameGenerator>().AsSelf();
             builder.RegisterType<CertificateOfRecoveryNameGenerator>().AsSelf();
+            builder.RegisterType<AnnexFactory>().AsSelf();
+            builder.RegisterType<ProcessOfGenerationNameGenerator>().AsSelf();
             builder.RegisterType<ConsentNotification>().AsSelf();
             builder.RegisterType<MovementFileNameGenerator>().AsSelf();
             builder.RegisterType<DecisionRequiredBy>().AsSelf();
@@ -83,6 +86,7 @@
             builder.RegisterType<Transaction>().AsSelf();
             builder.RegisterType<DaysRemainingCalculator>().AsSelf();
             builder.RegisterType<FinancialGuaranteeDecisionRequired>().AsSelf();
+            builder.RegisterType<RequiredAnnexes>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();

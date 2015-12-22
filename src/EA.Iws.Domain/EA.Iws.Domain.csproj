@@ -112,6 +112,17 @@
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />
+    <Compile Include="NotificationApplication\Annexes\Annex.cs" />
+    <Compile Include="NotificationApplication\Annexes\AnnexCollection.cs" />
+    <Compile Include="NotificationApplication\Annexes\AnnexFactory.cs" />
+    <Compile Include="NotificationApplication\Annexes\AnnexRequirements.cs" />
+    <Compile Include="NotificationApplication\Annexes\IAnnexCollectionRepository.cs" />
+    <Compile Include="NotificationApplication\Annexes\IAnnexNameGenerator.cs" />
+    <Compile Include="NotificationApplication\Annexes\ProcessOfGenerationAnnex.cs" />
+    <Compile Include="NotificationApplication\Annexes\ProcessOfGenerationNameGenerator.cs" />
+    <Compile Include="NotificationApplication\Annexes\RequiredAnnexes.cs" />
+    <Compile Include="NotificationApplication\Annexes\TechnologyEmployedAnnex.cs" />
+    <Compile Include="NotificationApplication\Annexes\WasteCompositionAnnex.cs" />
     <Compile Include="NotificationApplication\ContactComparer.cs" />
     <Compile Include="NotificationApplication\BusinessComparer.cs" />
     <Compile Include="NotificationApplication\AddressComparer.cs" />
@@ -194,7 +205,6 @@
     <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\IPricingStructureRepository.cs" />
-    <Compile Include="NotificationApplication\IProvidedAnnexesRepository.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />

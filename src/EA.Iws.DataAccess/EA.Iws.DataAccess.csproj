@@ -93,11 +93,15 @@
     <Compile Include="Mappings\Common\DateRangeMapping.cs" />
     <Compile Include="Mappings\Exports\AddressMapping.cs" />
     <Compile Include="Mappings\Common\BankHolidayMapping.cs" />
+    <Compile Include="Mappings\Exports\AnnexCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\BusinessTypeMapping.cs" />
     <Compile Include="Mappings\Exports\ConsentMapping.cs" />
     <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
+    <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
+    <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
     <Compile Include="Mappings\Imports\ContactMapping.cs" />
     <Compile Include="Mappings\Imports\FacilityCollectionMapping.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="Mappings\Imports\WasteTypeWasteCodeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressBookRepository.cs" />
+    <Compile Include="Repositories\AnnexCollectionRepository.cs" />
     <Compile Include="Repositories\CompetentAuthorityRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
@@ -222,7 +227,6 @@
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationTransactionRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
-    <Compile Include="Repositories\ProvidedAnnexesRepository.cs" />
     <Compile Include="Repositories\Reports\ExportStatsRepository.cs" />
     <Compile Include="Repositories\Reports\ExportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\FinanceReportRepository.cs" />

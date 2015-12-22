@@ -218,6 +218,7 @@
     <Content Include="scripts\Update\Sprint23\20151217-140600-add-refund-to-pricing-structure.sql" />
     <Content Include="scripts\Update\Sprint23\20151218-154500-add-fg-release-date-column.sql" />
     <Content Include="scripts\Update\Sprint23\20152312-161712-add-amount-covered-column.sql" />
+    <Content Include="scripts\Update\Sprint23\20151222-162000-add-annex-collection-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

@@ -1,7 +1,7 @@
-﻿namespace EA.Iws.Requests.Notification
+﻿namespace EA.Iws.Requests.Annexes
 {
     using System;
-    using Core.Notification;
+    using Core.Annexes.ExportNotification;
     using Prsd.Core.Mediator;
 
     public class GetAnnexesToBeProvided : IRequest<ProvidedAnnexesData>

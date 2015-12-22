@@ -796,6 +796,9 @@
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\UploadAnnexes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\Unavailable.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Annex\Index.cshtml" />
+    <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
+    <None Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1317,6 +1320,18 @@
       <DependentUpon>CaptureViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\Options\UnavailableViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\AnnexController.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\Annex\AnnexViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\Annex\AnnexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnexViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Annex\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Home\SummaryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2536,9 +2551,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\ViewModels\Annex\AnnexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AnnexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\ViewModels\WasteCodes\WasteCodesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteCodesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Annex\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\BaselOecdCode\BaselOecdCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

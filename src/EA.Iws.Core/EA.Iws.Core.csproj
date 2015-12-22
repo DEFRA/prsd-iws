@@ -59,6 +59,8 @@
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
     <Compile Include="Admin\Reports\MissingShipmentData.cs" />
     <Compile Include="Admin\Search\ImportSearchResult.cs" />
+    <Compile Include="Annexes\AnnexStatus.cs" />
+    <Compile Include="Annexes\AnnexUpload.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttribute.cs" />
     <Compile Include="Authorization\RequestAuthorizationException.cs" />
     <Compile Include="Carriers\CarrierData.cs" />
@@ -138,7 +140,7 @@
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
     <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionData.cs" />
-    <Compile Include="Notification\ProvidedAnnexesData.cs" />
+    <Compile Include="Annexes\ExportNotification\ProvidedAnnexesData.cs" />
     <Compile Include="Shared\AddressDataResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

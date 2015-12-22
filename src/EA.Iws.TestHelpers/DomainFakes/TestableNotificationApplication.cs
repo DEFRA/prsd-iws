@@ -92,5 +92,17 @@
             get { return base.WasteRecoveryInformationProvidedByImporter; }
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteRecoveryInformationProvidedByImporter, value, this); }
         }
+
+        public new bool? IsWasteGenerationProcessAttached
+        {
+            get { return base.IsWasteGenerationProcessAttached; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.IsWasteGenerationProcessAttached, value, this); }
+        }
+
+        public new WasteType WasteType
+        {
+            get { return base.WasteType; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, value, this); }
+        }
     }
 }

@@ -1,0 +1,94 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Annex.AnnexViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Annex.IndexResources
+
+<p>@Resource.Paragraph1</p>
+<p>@Resource.Paragraph2</p>
+
+@using (Html.BeginForm("Index", "Annex", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.TechnologyEmployedStatus.IsRequired)
+    @Html.HiddenFor(m => m.TechnologyEmployedStatus.FileId)
+    @Html.HiddenFor(m => m.WasteCompositionStatus.IsRequired)
+    @Html.HiddenFor(m => m.WasteCompositionStatus.FileId)
+    @Html.HiddenFor(m => m.ProcessOfGenerationStatus.IsRequired)
+    @Html.HiddenFor(m => m.ProcessOfGenerationStatus.FileId)
+
+<table class="form-group">
+    <thead>
+        <tr>
+            <th>@Resource.AnnexNameColumnTitle</th>
+            <th>@Resource.AnnexColumnTitle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ProcessOfGenerationStatus.IsRequired)
+        {
+        <tr>
+            <td>@Html.LabelFor(m => m.ProcessOfGeneration, Resource.ProcessOfGeneration)</td>
+            @if (Model.ProcessOfGenerationStatus.FileId.HasValue)
+            {
+                <td>
+                    @Resource.AlreadyProvidedText
+                </td>
+            }
+            else
+            {
+            <td>
+                @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide" })
+            </td>
+            }
+        </tr>
+        }
+        @if (Model.TechnologyEmployedStatus.IsRequired)
+        {
+        <tr>
+            <td>@Html.LabelFor(m => m.TechnologyEmployed, Resource.TechnologyEmployed)</td>
+            @if (Model.TechnologyEmployedStatus.FileId.HasValue)
+            {
+                <td>
+                    @Resource.AlreadyProvidedText
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide" })
+                </td>
+            }
+        </tr>
+        }
+        @if (Model.WasteCompositionStatus.IsRequired)
+        {
+        <tr>
+            <td>@Html.LabelFor(m => m.Composition, Resource.CompositionOfWaste)</td>
+            @if (Model.WasteCompositionStatus.FileId.HasValue)
+            {
+                <td>
+                    @Resource.AlreadyProvidedText
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide" })
+                </td>
+            }
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+<div class="form-group">
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+</div>
+}
+
+
+
+
+

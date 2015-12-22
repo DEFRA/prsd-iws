@@ -9,6 +9,7 @@
     using Domain.FinancialGuarantee;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Annexes;
     using Domain.NotificationApplication.Exporter;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationApplication.WasteRecovery;
@@ -91,6 +92,8 @@
         public virtual DbSet<MovementDateHistory> MovementDateHistories { get; set; }
 
         public virtual DbSet<MovementRejection> MovementRejections { get; set; }
+
+        public virtual DbSet<AnnexCollection> AnnexCollections { get; set; }
 
         public virtual DbSet<Domain.NotificationApplication.Importer.Importer> Importers { get; set; }
 
