@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
+﻿@using EA.Iws.Core.WasteType
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
 
 <div class="overview-block">
     @if (Model.IsChemicalCompositionCompleted)
@@ -7,6 +8,7 @@
             <div class="column-third">Type:</div>
             <div class="column-two-thirds">@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</div>
         </div>
+
         if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionName))
         {
             <div class="overview-block-element grid-row">
@@ -14,48 +16,95 @@
                 <div class="column-two-thirds">@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionName)</div>
             </div>
         }
-        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription))
+
+        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription) && Model.ChemicalComposition.ChemicalCompositionType != ChemicalCompositionType.Wood)
         {
             <div class="overview-block-element grid-row">
                 <div class="column-third">Description:</div>
                 <div class="column-two-thirds">@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionDescription)</div>
             </div>
         }
-        if (Model.ChemicalComposition.ChemicalCompositionType != EA.Iws.Core.WasteType.ChemicalCompositionType.Other)
+
+        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.WoodTypeDescription) && Model.ChemicalComposition.ChemicalCompositionType == ChemicalCompositionType.Wood)
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Description:</div>
+                <div class="column-two-thirds">@Model.ChemicalComposition.WoodTypeDescription</div>
+            </div>
+        }
+
+        if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalCompositionType.Other)
         {
             <div class="overview-block-element">
                 Chemical composition minimum and maximum as a weight by weight percentage:
             </div>
 
             <div class="overview-block-element">
-                @for (int i = 0; i < Model.ChemicalComposition.WasteCompositionData.Count; i++)
-                {
-                    <div class="grid-row">
-                        <div class="column-third">@Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].Constituent)</div>
-                        <div class="column-two-thirds">
-                            @Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].MinConcentration)%
-                            - @Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].MaxConcentration)%
-                        </div>
-                    </div>
-                }
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Constituent</th>
+                        <th>Composition</th>
+                    </tr>
+                    </thead>
+
+                    @for (int i = 0; i < Model.ChemicalComposition.WasteCompositionData.Count; i++)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].Constituent)</td>
+                            <td>
+                                @Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].MinConcentration)%
+                                - @Html.DisplayFor(m => m.ChemicalComposition.WasteCompositionData[i].MaxConcentration)%
+                            </td>
+                        </tr>
+                    }
+
+                    @for (int i = 0; i < Model.ChemicalComposition.WasteAdditionalInformation.Count; i++)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => m.ChemicalComposition.WasteAdditionalInformation[i].Constituent)</td>
+                            <td>
+                                @Html.DisplayFor(m => m.ChemicalComposition.WasteAdditionalInformation[i].MinConcentration)%
+                                - @Html.DisplayFor(m => m.ChemicalComposition.WasteAdditionalInformation[i].MaxConcentration)%
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <br/>
+        }
+
+        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.OtherWasteTypeDescription))
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Description:</div>
+                <div class="column-two-thirds">@Model.ChemicalComposition.OtherWasteTypeDescription</div>
             </div>
         }
-        else
+
+        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.EnergyInformation))
         {
-            if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.OtherWasteTypeDescription))
-            {
-                <div class="overview-block-element grid-row">
-                    <div class="column-third">Description:</div>
-                    <div class="column-two-thirds">@Model.ChemicalComposition.OtherWasteTypeDescription</div>
-                </div>
-            }
-            if (Model.ChemicalComposition.HasAnnex)
-            {
-                <div class="overview-block-element grid-row">
-                    <div class="column-third">Further details:</div>
-                    <div class="column-two-thirds">To be provided in a separate annex.</div>
-                </div>
-            }
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Energy efficiency:</div>
+                <div class="column-two-thirds">@Model.ChemicalComposition.EnergyInformation</div>
+            </div>
+        }
+
+        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.FurtherInformation))
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Further details:</div>
+                <div class="column-two-thirds">@Model.ChemicalComposition.FurtherInformation</div>
+            </div>
+        }
+
+        if (Model.ChemicalComposition.HasAnnex)
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Further details:</div>
+                <div class="column-two-thirds">To be provided in a separate annex.</div>
+            </div>
         }
 
     }

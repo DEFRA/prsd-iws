@@ -46,10 +46,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> FinancialGaurantee(Guid id)
+        public async Task<ActionResult> FinancialGuarantee(Guid id)
         {
             var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
-
+            
             return View(response);
         }
 

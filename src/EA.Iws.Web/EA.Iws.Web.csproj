@@ -788,7 +788,7 @@
     <Content Include="Areas\Admin\Views\EntryOrExitPoint\Success.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\Print.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\PostageLabel.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\FinancialGaurantee.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\FinancialGuarantee.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\Payment.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_EaAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_SepaAddress.cshtml" />

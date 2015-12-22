@@ -67,7 +67,7 @@ else if (status != MovementStatus.Cancelled)
                     {
                         @Html.ActionLink(@Resource.PrintNotification, "Print", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.PrintLabel, "PostageLabel", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.CompleteFG, "FinancialGaurantee", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.CompleteFG, "FinancialGuarantee", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.UploadAnnexes, "UploadAnnexes", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
