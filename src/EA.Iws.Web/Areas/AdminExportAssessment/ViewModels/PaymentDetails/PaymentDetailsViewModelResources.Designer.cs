@@ -179,6 +179,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.PaymentDetails {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter the receipt number.
+        /// </summary>
+        public static string ReceiptRequiredError {
+            get {
+                return ResourceManager.GetString("ReceiptRequiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid number in the &apos;Year&apos; field.
         /// </summary>
         public static string YearError {

@@ -12,6 +12,7 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
+    using Requests.NotificationAssessment;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -33,14 +34,17 @@
             mediator = A.Fake<IMediator>();
 
             A.CallTo(
-                () => mediator.SendAsync(A<GetDates>.That.Matches(p => p.NotificationId == notificationId)))
-                .Returns(new NotificationDatesData()
+                () => mediator.SendAsync(A<GetKeyDatesSummaryInformation>.That.Matches(p => p.NotificationId == notificationId)))
+                .Returns(new KeyDatesSummaryData
                 {
-                    NotificationId = notificationId,
-                    NotificationReceivedDate = notificationReceivedDate,
-                    PaymentReceivedDate = paymentReceivedDate,
-                    AcknowledgedDate = acknowledgedDate,
-                    DecisionRequiredDate = decisionRequiredDate
+                    Dates = new NotificationDatesData
+                    {
+                        NotificationId = notificationId,
+                        NotificationReceivedDate = notificationReceivedDate,
+                        PaymentReceivedDate = paymentReceivedDate,
+                        AcknowledgedDate = acknowledgedDate,
+                        DecisionRequiredDate = decisionRequiredDate
+                    }
                 });
 
             controller = new KeyDatesController(mediator);
@@ -62,7 +66,7 @@
         {
             await controller.Index(notificationId, 0);
 
-            A.CallTo(() => mediator.SendAsync(A<GetDates>.That.Matches(dates => dates.NotificationId == notificationId)))
+            A.CallTo(() => mediator.SendAsync(A<GetKeyDatesSummaryInformation>.That.Matches(dates => dates.NotificationId == notificationId)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -134,23 +138,6 @@
         }
 
         [Fact]
-        public async Task NotificationReceived_ValidInput_CallsClient()
-        {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(notificationReceivedDate);
-            model.Command = KeyDatesStatusEnum.NotificationReceived;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            A.CallTo(() => mediator.SendAsync(A<SetNotificationReceivedDate>
-                    .That.Matches(p => p.NotificationId == model.NotificationId &&
-                                p.NotificationReceivedDate == model.NewDate.AsDateTime().Value)))
-                    .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
         public async Task PaymentReceived_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
@@ -207,25 +194,6 @@
         }
 
         [Fact]
-        public async Task AssessmentCommenced_ValidInput_CallsClient()
-        {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(commencementDate);
-            model.NameOfOfficer = "Officer";
-            model.Command = KeyDatesStatusEnum.AssessmentCommenced;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            A.CallTo(() => mediator.SendAsync(A<SetCommencedDate>
-                .That.Matches(p => p.NotificationId == model.NotificationId &&
-                                p.CommencementDate == model.NewDate.AsDateTime().Value &&
-                                p.NameOfOfficer == model.NameOfOfficer)))
-                .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
         public async Task NotificationComplete_ValidInput_NoValidationError()
         {
             var model = new DateInputViewModel();
@@ -250,23 +218,6 @@
             await controller.Index(model);
 
             Assert.True(controller.ModelState.ContainsKey("NewDate"));
-        }
-
-        [Fact]
-        public async Task NotificationComplete_ValidInput_CallsClient()
-        {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(completeDate);
-            model.Command = KeyDatesStatusEnum.NotificationComplete;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(model);
-
-            A.CallTo(() => mediator.SendAsync(A<SetNotificationCompleteDate>
-                .That.Matches(p => p.NotificationId == model.NotificationId &&
-                                p.NotificationCompleteDate == model.NewDate.AsDateTime().Value)))
-                .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]

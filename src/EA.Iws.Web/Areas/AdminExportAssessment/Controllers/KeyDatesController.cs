@@ -22,18 +22,14 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, KeyDatesStatusEnum? command)
         {
-            var dates = await mediator.SendAsync(new GetDates(id));
-            var isAreaAssigned = await mediator.SendAsync(new GetNotificationLocalAreaId(id)) != default(Guid);
-            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
-            var assessmentDecisions = await mediator.SendAsync(new GetDecisionHistory(id));
-            var finacialGuaranteeDecisions = await mediator.SendAsync(new GetFinancialGuaranteeDecisions(id));
+            var data = await mediator.SendAsync(new GetKeyDatesSummaryInformation(id));
 
-            var model = new DateInputViewModel(dates)
+            var model = new DateInputViewModel(data.Dates)
             {
-                IsAreaAssigned = isAreaAssigned,
-                CompetentAuthority = competentAuthority,
-                AssessmentDecisions = assessmentDecisions,
-                FinancialGuaranteeDecisions = finacialGuaranteeDecisions
+                IsAreaAssigned = data.IsLocalAreaSet,
+                CompetentAuthority = data.CompetentAuthority,
+                AssessmentDecisions = data.DecisionHistory,
+                FinancialGuaranteeDecisions = data.FinancialGuaranteeDecisions
             };
 
             if (command != null)

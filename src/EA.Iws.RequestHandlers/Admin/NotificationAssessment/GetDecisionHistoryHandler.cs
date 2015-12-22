@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
-    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
 

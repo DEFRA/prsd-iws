@@ -46,7 +46,7 @@
 
                     var text = string.Empty;
 
-                    if(!Model.PaymentIsComplete)
+                    if (!Model.PaymentIsComplete)
                     {
                         text = " (partial payment)";
                         @text
@@ -58,7 +58,7 @@
                 }
             </td>
             <td>
-                @if(Model.NotificationReceivedDate.IsCompleted && !Model.PaymentIsComplete)
+                @if (Model.NotificationReceivedDate.IsCompleted && !Model.PaymentIsComplete)
                 {
                     @Html.ActionLink("Go to payment details", "Index", "PaymentDetails");
                 }
@@ -201,7 +201,7 @@
                     @if (Model.AssessmentDecisions[i].Status == NotificationStatus.Consented)
                     {
                         @Html.Gds().DisplayShortDateRangeFor(
-                            m => m.AssessmentDecisions[i].ConsentedFrom.GetValueOrDefault(), 
+                            m => m.AssessmentDecisions[i].ConsentedFrom.GetValueOrDefault(),
                             m => m.AssessmentDecisions[i].ConsentedTo.GetValueOrDefault())
                     }
                 </td>
@@ -221,7 +221,7 @@
                     @if (decision.ApprovedFrom.HasValue && decision.ApprovedTo.HasValue)
                     {
                         @Html.Gds().DisplayShortDateRange(
-                            decision.ApprovedFrom.Value, 
+                            decision.ApprovedFrom.Value,
                             decision.ApprovedTo.Value)
                     }
                 </td>
@@ -257,6 +257,24 @@
         @Html.HiddenFor(m => m.DecisionDate.Month)
         @Html.HiddenFor(m => m.DecisionDate.Year)
 
+        for (int i = 0; i < Model.FinancialGuaranteeDecisions.Count(); i++)
+        {
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].NotificationId)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Date)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Decision)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedFrom)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedTo)
+        }
+
+        for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)
+        {
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].NotificationId)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].Date)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedFrom)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedTo)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].Status)
+        }
+
         @Html.AntiForgeryToken()
 
         <br /><br />
@@ -289,7 +307,6 @@
         <div class="form-group">
             <input type="submit" class="button" value="Submit date" />
         </div>
-
     }
 
     @section scripts{
@@ -309,7 +326,7 @@ else
 {
     @section scripts{
         <script>
-            $(function() {
+            $(function () {
                 var link = $("td a").filter(function (i) { return $(this).text() === "Add" });
 
                 if (link) {

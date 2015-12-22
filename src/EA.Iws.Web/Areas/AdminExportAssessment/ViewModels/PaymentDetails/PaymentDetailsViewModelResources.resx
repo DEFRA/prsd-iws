@@ -156,6 +156,9 @@
   <data name="ReceiptNumberLabel" xml:space="preserve">
     <value>Receipt number</value>
   </data>
+  <data name="ReceiptRequiredError" xml:space="preserve">
+    <value>Please enter the receipt number</value>
+  </data>
   <data name="YearError" xml:space="preserve">
     <value>Please enter a valid number in the 'Year' field</value>
   </data>

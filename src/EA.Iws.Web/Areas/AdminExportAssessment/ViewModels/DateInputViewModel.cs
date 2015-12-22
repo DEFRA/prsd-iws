@@ -20,6 +20,7 @@
             DecisionDate = new OptionalDateInputViewModel(true);
             NewDate = new OptionalDateInputViewModel(true);
             AssessmentDecisions = new List<NotificationAssessmentDecision>();
+            FinancialGuaranteeDecisions = new List<FinancialGuaranteeDecisionData>();
         }
 
         public DateInputViewModel(NotificationDatesData dates)
@@ -77,7 +78,7 @@
 
         public IList<NotificationAssessmentDecision> AssessmentDecisions { get; set; }
 
-        public IEnumerable<FinancialGuaranteeDecisionData> FinancialGuaranteeDecisions { get; set; }
+        public IList<FinancialGuaranteeDecisionData> FinancialGuaranteeDecisions { get; set; }
 
         public bool IsAreaAssigned { get; set; }
 

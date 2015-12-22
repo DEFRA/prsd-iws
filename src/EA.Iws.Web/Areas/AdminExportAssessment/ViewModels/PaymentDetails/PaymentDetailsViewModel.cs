@@ -68,6 +68,11 @@
             {
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.ReceiptLengthError, new[] { "Receipt" }));
             }
+
+            if (string.IsNullOrWhiteSpace(Receipt) && PaymentMethod == PaymentMethods.Cheque)
+            {
+                results.Add(new ValidationResult(PaymentDetailsViewModelResources.ReceiptRequiredError, new[] { "Receipt" }));
+            }
             
             if (Comments != null && Comments.Length > 500)
             {
