@@ -15,7 +15,7 @@
         private readonly TestFinancialGuarantee financialGuarantee;
         private readonly ApproveFinancialGuarantee approveFinancialGuarantee =
             new ApproveFinancialGuarantee(ApplicationCompletedId, FirstDate, MiddleDate,
-                LastDate, BlanketBondReference, AnyInt);
+                LastDate, BlanketBondReference, AnyInt, AnyInt);
 
         public ApproveFinancialGuaranteeHandlerTests()
         {
@@ -34,7 +34,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt, AnyInt)));
         }
 
         [Fact]
@@ -43,7 +43,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt, AnyInt)));
 
             Assert.False(financialGuarantee.ApproveCalled);
         }

@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.FinancialGuarantee;
+    using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -54,6 +55,10 @@
 
         [Display(Name = "Active loads permitted")]
         public int? ActiveLoadsPermitted { get; set; }
+
+        [Display(Name = "Amount of cover provided (£)")]
+        [IsValidMoneyDecimal]
+        public string AmountOfCoverProvided { get; set; }
 
         [MaxLength(2048)]
         [Display(Name = "Reason for refusal")]
@@ -166,6 +171,11 @@
             if (ActiveLoadsPermitted.HasValue && ActiveLoadsPermitted.Value <= 0)
             {
                 yield return new ValidationResult("The Active loads permitted must be greater than 0", new[] { "ActiveLoadsPermitted" });
+            }
+
+            if (string.IsNullOrWhiteSpace(AmountOfCoverProvided))
+            {
+                yield return new ValidationResult(RequiredValidationMessage("Please enter the amount of cover provided"), new[] {"AmountOfCoverProvided"});
             }
         }
 

@@ -23,6 +23,8 @@ namespace EA.Iws.Core.Admin
 
         public int? ActiveLoadsPermitted { get; set; }
 
+        public decimal? AmountOfCoverProvided { get; set; }
+
         public string RefusalReason { get; set; }
 
         public string BlanketBondReference { get; set; }

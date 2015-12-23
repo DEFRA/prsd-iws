@@ -74,6 +74,8 @@
 
         public int? ActiveLoadsPermitted { get; protected set; }
 
+        public decimal? AmountOfCoverProvided { get; protected set; }
+
         public DateTime? ReleasedDate { get; private set; }
 
         public void Received(DateTime date)
@@ -210,6 +212,7 @@
             ApprovedTo = approveDates.ApprovedTo;
             ApprovedFrom = approveDates.ApprovedFrom;
             ActiveLoadsPermitted = approveDates.ActiveLoadsPermitted;
+            AmountOfCoverProvided = approveDates.AmountOfCoverProvided;
             BlanketBondReference = approveDates.BlanketBondReference;
         }
 

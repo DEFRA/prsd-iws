@@ -36,6 +36,7 @@
                 ValidTo = source.ApprovedTo,
                 RefusalReason = source.RefusalReason,
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
+                AmountOfCoverProvided = source.AmountOfCoverProvided,
                 Decision = GetDecision(source),
                 BlanketBondReference = source.BlanketBondReference
             };

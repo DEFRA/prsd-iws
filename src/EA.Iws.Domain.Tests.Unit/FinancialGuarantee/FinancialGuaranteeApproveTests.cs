@@ -19,6 +19,7 @@
                     TwoDaysAfterCompletionDate, 
                     YearAfterCompletionDate,
                     BlanketBondReference, 
+                    AnyInt,
                     AnyInt));
 
         [Fact]
@@ -33,7 +34,7 @@
             Assert.Throws<InvalidOperationException>(
                 () =>
                     CompletedFinancialGuarantee.Approve(new ApproveDates(BeforeCompletionDate, AfterCompletionDate,
-                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt)));
+                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt, AnyInt)));
         }
 
         [Fact]
@@ -42,7 +43,7 @@
             Assert.Throws<InvalidOperationException>(
                 () =>
                     CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate,
-                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt)));
+                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt, AnyInt)));
         }
 
         [Fact]
@@ -75,7 +76,7 @@
         {
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate, TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt)));
+                    CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate, TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt, AnyInt)));
 
             Assert.Equal(FinancialGuaranteeStatus.ApplicationComplete, CompletedFinancialGuarantee.Status);
             A.CallTo(() => Dispatcher.Dispatch(A<FinancialGuaranteeStatusChangeEvent>.Ignored)).MustNotHaveHappened();

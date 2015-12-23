@@ -13,12 +13,13 @@
             switch (source.Decision)
             {
                 case FinancialGuaranteeDecision.Approved:
-                    return new ApproveFinancialGuarantee(id, 
-                        source.DecisionMadeDate.AsDateTime().Value, 
+                    return new ApproveFinancialGuarantee(id,
+                        source.DecisionMadeDate.AsDateTime().Value,
                         source.ApprovedFrom.AsDateTime().Value,
                         source.ApprovedTo.AsDateTime().Value,
                         source.BlanketBondReference,
-                        source.ActiveLoadsPermitted.Value);
+                        source.ActiveLoadsPermitted.Value,
+                        Convert.ToDecimal(source.AmountOfCoverProvided));
                 case FinancialGuaranteeDecision.Refused:
                     return new RefuseFinancialGuarantee(id, 
                         source.DecisionMadeDate.AsDateTime().Value, 

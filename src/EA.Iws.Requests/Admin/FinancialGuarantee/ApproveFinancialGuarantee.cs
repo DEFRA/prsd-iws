@@ -11,6 +11,8 @@
 
         public int ActiveLoadsPermitted { get; set; }
 
+        public decimal AmountOfCoverProvided { get; set; }
+
         public string BlanketBondReference { get; set; }
 
         public ApproveFinancialGuarantee(Guid notificationId, 
@@ -18,7 +20,8 @@
             DateTime approvedFrom,
             DateTime approvedTo,
             string blanketBondReference,
-            int activeLoadsPermitted)
+            int activeLoadsPermitted,
+            decimal amountOfCoverProvided)
         {
             if (approvedFrom > approvedTo)
             {
@@ -33,6 +36,7 @@
             ApprovedTo = approvedTo;
             ActiveLoadsPermitted = activeLoadsPermitted;
             BlanketBondReference = blanketBondReference;
+            AmountOfCoverProvided = amountOfCoverProvided;
         }
     }
 }
