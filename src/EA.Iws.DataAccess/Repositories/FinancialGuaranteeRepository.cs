@@ -3,6 +3,7 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.FinancialGuarantee;
     using Domain.FinancialGuarantee;
 
     internal class FinancialGuaranteeRepository : IFinancialGuaranteeRepository
@@ -17,6 +18,11 @@
         public async Task<FinancialGuarantee> GetByNotificationId(Guid notificationId)
         {
             return await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == notificationId);
+        }
+
+        public async Task<FinancialGuaranteeStatus> GetStatusByNotificationId(Guid notificationId)
+        {
+            return (await GetByNotificationId(notificationId)).Status;
         }
     }
 }

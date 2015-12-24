@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Core.FinancialGuarantee;
     using Core.Movement;
     using Core.Notification;
     using Core.NotificationAssessment;
@@ -33,6 +34,8 @@
         public int ActiveLoadsPermitted { get; set; }
 
         public int ActiveLoadsCurrent { get; set; }
+
+        public FinancialGuaranteeStatus FinancialGuaranteeStatus { get; set; }
 
         public List<ShipmentDatesTableViewModel> TableData { get; set; }
 

@@ -26,11 +26,13 @@
             var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status));
             var notificationBasicInformation = await mediator.SendAsync(new GetNotificationBasicInfo(id));
             var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
+            var financialGuaranteeStatus = await mediator.SendAsync(new GetFinancialGuaranteeStatus(id));
 
             var model = new ShipmentSummaryViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;
             model.CompetentAuthority = notificationBasicInformation.CompetentAuthority;
             model.NotificationStatus = notificationStatus;
+            model.FinancialGuaranteeStatus = financialGuaranteeStatus;
 
             return View(model);
         }
