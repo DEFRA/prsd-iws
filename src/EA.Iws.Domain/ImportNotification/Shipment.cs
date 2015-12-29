@@ -14,6 +14,10 @@
 
         public int NumberOfShipments { get; set; }
 
+        protected Shipment()
+        {
+        }
+
         public Shipment(Guid importNotificationId, ShipmentPeriod period, ShipmentQuantity quantity, int numberOfShipments)
         {
             ImportNotificationId = importNotificationId;

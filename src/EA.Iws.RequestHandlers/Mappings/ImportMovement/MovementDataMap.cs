@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings.ImportMovement
 {
     using System;
+    using System.Linq;
     using Core.ImportMovement;
     using Core.Shared;
     using Domain.ImportMovement;
     using Prsd.Core.Mapper;
-    using ImportMovement = Domain.ImportMovement.ImportMovement;
 
     internal class MovementSummaryMap : IMap<ImportMovementSummary, ImportMovementSummaryData>
     {
@@ -32,11 +32,7 @@
 
         private ImportMovementReceiptData GetReceiptData(ImportMovementSummary source)
         {
-            var possibleUnits = new[]
-            {
-                ShipmentQuantityUnits.CubicMetres,
-                ShipmentQuantityUnits.Kilograms
-            };
+            var possibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(source.Units).ToArray();
 
             if (source.Rejection != null)
             {

@@ -31,13 +31,17 @@
                 from completedReceipt
                     in context.ImportMovementCompletedReceipts
                         .Where(x => x.MovementId == movementId).DefaultIfEmpty()
+                from shipment
+                    in context.Shipments
+                    .Where(x => x.ImportNotificationId == notification.Id).DefaultIfEmpty()
                 select new
                 {
                     Notification = notification,
                     Movement = movement,
                     Receipt = receipt,
                     Rejection = rejection,
-                    CompletedReceipt = completedReceipt
+                    CompletedReceipt = completedReceipt,
+                    Shipment = shipment
                 };
 
             var data = await query.SingleAsync();
@@ -47,7 +51,8 @@
                 data.Rejection,
                 data.CompletedReceipt,
                 data.Notification.NotificationType,
-                data.Notification.NotificationNumber);
+                data.Notification.NotificationNumber,
+                data.Shipment.Quantity.Units);
         }
     }
 }

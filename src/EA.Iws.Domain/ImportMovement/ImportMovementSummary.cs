@@ -16,12 +16,15 @@
 
         public string NotificationNumber { get; private set; }
 
+        public ShipmentQuantityUnits Units { get; private set; }
+
         public ImportMovementSummary(ImportMovement movement, 
             ImportMovementReceipt receipt, 
             ImportMovementRejection rejection, 
             ImportMovementCompletedReceipt completedReceipt, 
             NotificationType notificationType, 
-            string notificationNumber)
+            string notificationNumber,
+            ShipmentQuantityUnits units)
         {
             Movement = movement;
             Receipt = receipt;
@@ -29,6 +32,7 @@
             CompletedReceipt = completedReceipt;
             NotificationType = notificationType;
             NotificationNumber = notificationNumber;
+            Units = units;
         }
     }
 }
