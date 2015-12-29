@@ -44,7 +44,7 @@
             
             var paymentData = new NotificationTransactionData
             {
-                Date = model.Date(),
+                Date = model.Date.AsDateTime().Value,
                 NotificationId = model.NotificationId,
                 Credit = Convert.ToDecimal(model.Amount),
                 PaymentMethod = (int)model.PaymentMethod,

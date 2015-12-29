@@ -116,38 +116,20 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.PaymentDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Day&apos; field.
+        ///   Looks up a localized string similar to Date received.
         /// </summary>
-        public static string DayError {
+        public static string DateLabel {
             get {
-                return ResourceManager.GetString("DayError", resourceCulture);
+                return ResourceManager.GetString("DateLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Day.
+        ///   Looks up a localized string similar to Please enter the date the payment was received.
         /// </summary>
-        public static string DayLabel {
+        public static string DateRequiredError {
             get {
-                return ResourceManager.GetString("DayLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Month&apos; field.
-        /// </summary>
-        public static string MonthError {
-            get {
-                return ResourceManager.GetString("MonthError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Month.
-        /// </summary>
-        public static string MonthLabel {
-            get {
-                return ResourceManager.GetString("MonthLabel", resourceCulture);
+                return ResourceManager.GetString("DateRequiredError", resourceCulture);
             }
         }
         
@@ -184,24 +166,6 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.PaymentDetails {
         public static string ReceiptRequiredError {
             get {
                 return ResourceManager.GetString("ReceiptRequiredError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Year&apos; field.
-        /// </summary>
-        public static string YearError {
-            get {
-                return ResourceManager.GetString("YearError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Year.
-        /// </summary>
-        public static string YearLabel {
-            get {
-                return ResourceManager.GetString("YearLabel", resourceCulture);
             }
         }
     }

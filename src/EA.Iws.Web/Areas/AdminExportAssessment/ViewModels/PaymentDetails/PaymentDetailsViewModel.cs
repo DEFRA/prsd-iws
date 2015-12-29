@@ -9,12 +9,14 @@
     using Infrastructure.Validation;
     using Prsd.Core;
     using Prsd.Core.Helpers;
+    using Web.ViewModels.Shared;
 
     public class PaymentDetailsViewModel : IValidatableObject
     {
         public PaymentDetailsViewModel() 
         {
             PaymentMethodsSelectList = new SelectList(EnumHelper.GetValues(typeof(PaymentMethods)), "Key", "Value");
+            Date = new OptionalDateInputViewModel(true);
         }
 
         private const NumberStyles Style = NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
@@ -34,32 +36,13 @@
         [Display(Name = "ReceiptNumberLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         public string Receipt { get; set; }
 
-        [Required(ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        [Display(Name = "DayLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
-        [Range(1, 31, ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        public int? Day { get; set; }
-
-        [Required(ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        [Display(Name = "MonthLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
-        [Range(1, 12, ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        public int? Month { get; set; }
-
-        [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        [Display(Name = "YearLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
-        [Range(2015, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        public int? Year { get; set; }
-
+        [Display(Name = "DateLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
+        [RequiredDateInput(ErrorMessageResourceName = "DateRequiredError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
+        public OptionalDateInputViewModel Date { get; set; }
+        
         [Display(Name = "CommentsLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         public string Comments { get; set; }
 
-        public DateTime Date()
-        {
-            DateTime date;
-            SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out date);
-
-            return date;
-        }
-        
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = new List<ValidationResult>();

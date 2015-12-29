@@ -135,17 +135,11 @@
   <data name="CommentsLengthError" xml:space="preserve">
     <value>The maximum length of the comments is 500 characters</value>
   </data>
-  <data name="DayError" xml:space="preserve">
-    <value>Please enter a valid number in the 'Day' field</value>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Date received</value>
   </data>
-  <data name="DayLabel" xml:space="preserve">
-    <value>Day</value>
-  </data>
-  <data name="MonthError" xml:space="preserve">
-    <value>Please enter a valid number in the 'Month' field</value>
-  </data>
-  <data name="MonthLabel" xml:space="preserve">
-    <value>Month</value>
+  <data name="DateRequiredError" xml:space="preserve">
+    <value>Please enter the date the payment was received</value>
   </data>
   <data name="PaymentMethodLabel" xml:space="preserve">
     <value>Payment method</value>
@@ -158,11 +152,5 @@
   </data>
   <data name="ReceiptRequiredError" xml:space="preserve">
     <value>Please enter the receipt number</value>
-  </data>
-  <data name="YearError" xml:space="preserve">
-    <value>Please enter a valid number in the 'Year' field</value>
-  </data>
-  <data name="YearLabel" xml:space="preserve">
-    <value>Year</value>
   </data>
 </root>

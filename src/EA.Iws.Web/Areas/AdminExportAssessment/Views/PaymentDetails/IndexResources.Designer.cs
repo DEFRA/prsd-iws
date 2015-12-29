@@ -61,24 +61,6 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.PaymentDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For example, 20 3 2015.
-        /// </summary>
-        public static string DateReceivedHint {
-            get {
-                return ResourceManager.GetString("DateReceivedHint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Date received.
-        /// </summary>
-        public static string DateReceivedLabel {
-            get {
-                return ResourceManager.GetString("DateReceivedLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Payment details.
         /// </summary>
         public static string MainHeading {
