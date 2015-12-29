@@ -18,7 +18,7 @@ namespace EA.Iws.Web.Mappings
                 ApprovedTo = new OptionalDateInputViewModel(source.ValidTo),
                 DecisionMadeDate = new OptionalDateInputViewModel(source.DecisionDate),
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
-                AmountOfCoverProvided = source.AmountOfCoverProvided.ToString(),
+                AmountOfCoverProvided = source.AmountOfCoverProvided,
                 ReasonForRefusal = source.RefusalReason,
                 Decision = source.Decision,
                 CompletedDate = source.CompletedDate,

@@ -57,8 +57,7 @@
         public int? ActiveLoadsPermitted { get; set; }
 
         [Display(Name = "Amount of cover provided (£)")]
-        [IsValidMoneyDecimal]
-        public string AmountOfCoverProvided { get; set; }
+        public decimal? AmountOfCoverProvided { get; set; }
 
         [MaxLength(2048)]
         [Display(Name = "Reason for refusal")]
@@ -173,7 +172,7 @@
                 yield return new ValidationResult("The Active loads permitted must be greater than 0", new[] { "ActiveLoadsPermitted" });
             }
 
-            if (string.IsNullOrWhiteSpace(AmountOfCoverProvided))
+            if (!AmountOfCoverProvided.HasValue || AmountOfCoverProvided == 0.00m)
             {
                 yield return new ValidationResult(RequiredValidationMessage("Please enter the amount of cover provided"), new[] {"AmountOfCoverProvided"});
             }

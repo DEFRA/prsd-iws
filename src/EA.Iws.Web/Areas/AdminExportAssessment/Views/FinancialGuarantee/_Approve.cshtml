@@ -44,5 +44,5 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.AmountOfCoverProvided)">
     @Html.Gds().ValidationMessageFor(m => m.AmountOfCoverProvided)
     @Html.Gds().LabelFor(m => m.AmountOfCoverProvided, false)
-    @Html.Gds().TextBoxFor(m => m.AmountOfCoverProvided)
+    @Html.Gds().TextBoxFor(m => m.AmountOfCoverProvided, new { type = "number", min = "0.01", step = "0.01", pattern = "[0-9]*" })
 </div>
