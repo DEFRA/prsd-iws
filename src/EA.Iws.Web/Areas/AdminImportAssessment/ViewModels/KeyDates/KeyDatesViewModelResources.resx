@@ -117,31 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AmountCannotBeNegative" xml:space="preserve">
-    <value>The amount entered cannot be negative</value>
-  </data>
-  <data name="AmountCannotExceedLimit" xml:space="preserve">
-    <value>Please do not exceed the refund limit of £{0}</value>
-  </data>
-  <data name="AmountDecimalPlaceError" xml:space="preserve">
-    <value>Please enter a valid number with a maximum of {0} decimal places</value>
-  </data>
-  <data name="AmountRefundedError" xml:space="preserve">
-    <value>Please enter the amount to refund</value>
-  </data>
-  <data name="AmountRefundedLabel" xml:space="preserve">
-    <value>Amount to refund (£)</value>
-  </data>
-  <data name="CommentsLabel" xml:space="preserve">
-    <value>Comments</value>
-  </data>
-  <data name="CommentsLengthError" xml:space="preserve">
-    <value>The maximum length of the comments is 500 characters</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date refunded</value>
+  <data name="CommencementDate" xml:space="preserve">
+    <value>Assessment Started</value>
   </data>
   <data name="DateRequiredError" xml:space="preserve">
-    <value>Please provide the date the refund was made</value>
+    <value>Please enter a valid date</value>
+  </data>
+  <data name="DecisionDate" xml:space="preserve">
+    <value>Decision required by</value>
+  </data>
+  <data name="NameOfOfficer" xml:space="preserve">
+    <value>Name of officer</value>
+  </data>
+  <data name="NameOfOfficerLengthError" xml:space="preserve">
+    <value>The name of the officer cannot be more than 256 characters in length</value>
+  </data>
+  <data name="NameOfOfficerRequiredError" xml:space="preserve">
+    <value>Please enter the name of the officer</value>
+  </data>
+  <data name="NotificationAcknowledgedDate" xml:space="preserve">
+    <value>Acknowledged on</value>
+  </data>
+  <data name="NotificationCompletedDate" xml:space="preserve">
+    <value>Date completed</value>
+  </data>
+  <data name="NotificationReceivedDate" xml:space="preserve">
+    <value>Notification received</value>
+  </data>
+  <data name="PaymentReceivedDate" xml:space="preserve">
+    <value>Payment received</value>
   </data>
 </root>

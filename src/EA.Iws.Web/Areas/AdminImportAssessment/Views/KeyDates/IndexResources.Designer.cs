@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
+namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,52 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refund details.
+        ///   Looks up a localized string similar to Dates.
+        /// </summary>
+        public static string DateColumnHeader {
+            get {
+                return ResourceManager.GetString("DateColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activites.
+        /// </summary>
+        public static string DateNameColumnHeader {
+            get {
+                return ResourceManager.GetString("DateNameColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These are the dates so far:.
+        /// </summary>
+        public static string FirstParagraph {
+            get {
+                return ResourceManager.GetString("FirstParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to overview.
+        /// </summary>
+        public static string HomeLink {
+            get {
+                return ResourceManager.GetString("HomeLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string LinkColumnHeader {
+            get {
+                return ResourceManager.GetString("LinkColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the key dates for this notification.
         /// </summary>
         public static string MainHeading {
             get {
@@ -70,11 +115,11 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to account management.
+        ///   Looks up a localized string similar to Key dates.
         /// </summary>
-        public static string ReturnToAccountManagement {
+        public static string Title {
             get {
-                return ResourceManager.GetString("ReturnToAccountManagement", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

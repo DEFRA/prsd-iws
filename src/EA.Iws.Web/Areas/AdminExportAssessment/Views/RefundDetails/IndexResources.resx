@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateReceivedHint" xml:space="preserve">
-    <value>For example, 20 3 2015</value>
-  </data>
-  <data name="DateReceivedLabel" xml:space="preserve">
-    <value>Date refunded</value>
-  </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Refund details</value>
+  </data>
+  <data name="ReturnToAccountManagement" xml:space="preserve">
+    <value>Return to account management</value>
   </data>
 </root>

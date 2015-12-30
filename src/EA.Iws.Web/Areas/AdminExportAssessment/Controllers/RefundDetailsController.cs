@@ -33,8 +33,8 @@
             return View(model);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(RefundDetailsViewModel model)
         {
             if (!ModelState.IsValid)
@@ -45,7 +45,7 @@
 
             var refundData = new NotificationTransactionData
             {
-                Date = model.Date(),
+                Date = model.Date.AsDateTime().Value,
                 NotificationId = model.NotificationId,
                 Debit = Convert.ToDecimal(model.Amount),
                 Comments = model.Comments,

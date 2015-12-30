@@ -1,15 +1,15 @@
-﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels
+﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
+    using Core.ImportNotificationAssessment;
     using Core.NotificationAssessment;
     using Web.ViewModels.Shared;
 
-    public class DateInputViewModel : IValidatableObject
+    public class KeyDatesViewModel : IValidatableObject
     {
-        public DateInputViewModel()
+        public KeyDatesViewModel()
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(true);
             CommencementDate = new OptionalDateInputViewModel(true);
@@ -20,18 +20,14 @@
             Decisions = new List<NotificationAssessmentDecision>();
         }
 
-        public DateInputViewModel(NotificationDatesData dates)
+        public KeyDatesViewModel(KeyDatesData keyDates)
         {
-            NotificationId = dates.NotificationId;
-            NotificationReceivedDate = new OptionalDateInputViewModel(dates.NotificationReceivedDate, true);
-            PaymentReceivedDate = dates.PaymentReceivedDate;
-            PaymentIsComplete = dates.PaymentIsComplete;
-            CommencementDate = new OptionalDateInputViewModel(dates.CommencementDate, true);
-            NotificationCompleteDate = new OptionalDateInputViewModel(dates.CompletedDate, true);
-            NotificationAcknowledgedDate = new OptionalDateInputViewModel(dates.AcknowledgedDate, true);
-            DecisionDate = new OptionalDateInputViewModel(dates.DecisionRequiredDate, true);
+            NotificationReceivedDate = new OptionalDateInputViewModel(keyDates.NotificationReceived, true);
+            CommencementDate = new OptionalDateInputViewModel(true);
+            NotificationCompleteDate = new OptionalDateInputViewModel(true);
+            NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
+            DecisionDate = new OptionalDateInputViewModel(true);
             NewDate = new OptionalDateInputViewModel(true);
-            NameOfOfficer = dates.NameOfOfficer;
             Decisions = new List<NotificationAssessmentDecision>();
         }
 
@@ -39,27 +35,27 @@
 
         public KeyDatesStatusEnum Command { get; set; }
 
-        [Display(Name = "Notification received")]
+        [Display(Name = "NotificationReceivedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
 
-        [Display(Name = "Payment received")]
+        [Display(Name = "PaymentReceivedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public DateTime? PaymentReceivedDate { get; set; }
 
         public bool PaymentIsComplete { get; set; }
 
-        [Display(Name = "Assessment started")]
+        [Display(Name = "CommencementDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel CommencementDate { get; set; }
 
-        [Display(Name = "Date completed")]
+        [Display(Name = "NotificationCompletedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel NotificationCompleteDate { get; set; }
 
-        [Display(Name = "Acknowledged on")]
+        [Display(Name = "NotificationAcknowledgedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel NotificationAcknowledgedDate { get; set; }
 
-        [Display(Name = "Decision required by")]
+        [Display(Name = "DecisionDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel DecisionDate { get; set; }
 
-        [Display(Name = "Name of officer")]
+        [Display(Name = "NameOfOfficer", ResourceType = typeof(KeyDatesViewModelResources))]
         public string NameOfOfficer { get; set; }
 
         public OptionalDateInputViewModel NewDate { get; set; }
@@ -75,20 +71,18 @@
         {
             if (!NewDate.IsCompleted)
             {
-                yield return new ValidationResult("Please enter a valid date", new[] {"NewDate"});
+                yield return new ValidationResult(KeyDatesViewModelResources.DateRequiredError, new[] {"NewDate"});
             }
 
             if (Command == KeyDatesStatusEnum.AssessmentCommenced)
             {
                 if (string.IsNullOrWhiteSpace(NameOfOfficer))
                 {
-                    yield return new ValidationResult("Please enter the name of the officer", new[] { "NameOfOfficer" });
+                    yield return new ValidationResult(KeyDatesViewModelResources.NameOfOfficerRequiredError, new[] { "NameOfOfficer" });
                 }
-                else if (NameOfOfficer.Count() > 256)
+                else if (NameOfOfficer.Length > 256)
                 {
-                    yield return
-                        new ValidationResult("The name of the officer cannot be more than 256 characters in length",
-                            new[] { "NameOfOfficer" });
+                    yield return new ValidationResult(KeyDatesViewModelResources.NameOfOfficerLengthError, new[] { "NameOfOfficer" });
                 }
             }
         }

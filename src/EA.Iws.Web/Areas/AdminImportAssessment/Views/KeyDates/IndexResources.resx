@@ -117,31 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AmountCannotBeNegative" xml:space="preserve">
-    <value>The amount entered cannot be negative</value>
+  <data name="DateColumnHeader" xml:space="preserve">
+    <value>Dates</value>
   </data>
-  <data name="AmountCannotExceedLimit" xml:space="preserve">
-    <value>Please do not exceed the refund limit of £{0}</value>
+  <data name="DateNameColumnHeader" xml:space="preserve">
+    <value>Activites</value>
   </data>
-  <data name="AmountDecimalPlaceError" xml:space="preserve">
-    <value>Please enter a valid number with a maximum of {0} decimal places</value>
+  <data name="FirstParagraph" xml:space="preserve">
+    <value>These are the dates so far:</value>
   </data>
-  <data name="AmountRefundedError" xml:space="preserve">
-    <value>Please enter the amount to refund</value>
+  <data name="HomeLink" xml:space="preserve">
+    <value>Return to overview</value>
   </data>
-  <data name="AmountRefundedLabel" xml:space="preserve">
-    <value>Amount to refund (£)</value>
+  <data name="LinkColumnHeader" xml:space="preserve">
+    <value>Action</value>
   </data>
-  <data name="CommentsLabel" xml:space="preserve">
-    <value>Comments</value>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Enter the key dates for this notification</value>
   </data>
-  <data name="CommentsLengthError" xml:space="preserve">
-    <value>The maximum length of the comments is 500 characters</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date refunded</value>
-  </data>
-  <data name="DateRequiredError" xml:space="preserve">
-    <value>Please provide the date the refund was made</value>
+  <data name="Title" xml:space="preserve">
+    <value>Key dates</value>
   </data>
 </root>

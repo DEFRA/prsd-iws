@@ -3,15 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Globalization;
     using Infrastructure;
     using Infrastructure.Validation;
-    using Prsd.Core;
+    using Web.ViewModels.Shared;
 
     public class RefundDetailsViewModel : IValidatableObject
     {
-        private const NumberStyles Style = NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
-
         public Guid NotificationId { get; set; }
 
         public decimal Limit { get; set; }
@@ -21,30 +18,16 @@
         [IsValidMoneyDecimal]
         public string Amount { get; set; }
 
-        [Required(ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
-        [Display(Name = "DayLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
-        [Range(1, 31, ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
-        public int? Day { get; set; }
-
-        [Required(ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
-        [Display(Name = "MonthLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
-        [Range(1, 12, ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
-        public int? Month { get; set; }
-
-        [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
-        [Display(Name = "YearLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
-        [Range(2015, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
-        public int? Year { get; set; }
+        [RequiredDateInput(ErrorMessageResourceName = "DateRequiredError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
+        [Display(Name = "Date", ResourceType = typeof(RefundDetailsViewModelResources))]
+        public OptionalDateInputViewModel Date { get; set; }
 
         [Display(Name = "CommentsLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
         public string Comments { get; set; }
 
-        public DateTime Date()
+        public RefundDetailsViewModel()
         {
-            DateTime date;
-            SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out date);
-
-            return date;
+            Date = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

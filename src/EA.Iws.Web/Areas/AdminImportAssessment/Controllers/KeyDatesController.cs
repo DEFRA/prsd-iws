@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
+    using Requests.ImportNotificationAssessment;
     using ViewModels;
+    using ViewModels.KeyDates;
 
     [Authorize(Roles = "internal")]
     public class KeyDatesController : Controller
@@ -16,9 +19,11 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            var model = new DateInputViewModel();
+            var data = await mediator.SendAsync(new GetKeyDates(id));
+
+            var model = new KeyDatesViewModel(data);
 
             return View(model);
         }

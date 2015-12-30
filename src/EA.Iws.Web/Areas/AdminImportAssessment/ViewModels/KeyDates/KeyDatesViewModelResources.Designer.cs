@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.RefundDetails {
+namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.RefundDetails {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class RefundDetailsViewModelResources {
+    public class KeyDatesViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RefundDetailsViewModelResources() {
+        internal KeyDatesViewModelResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.RefundDetails {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.RefundDetails.RefundDetailsView" +
-                            "ModelResources", typeof(RefundDetailsViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates.KeyDatesViewModelResou" +
+                            "rces", typeof(KeyDatesViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,83 +62,92 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.RefundDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount entered cannot be negative.
+        ///   Looks up a localized string similar to Assessment Started.
         /// </summary>
-        public static string AmountCannotBeNegative {
+        public static string CommencementDate {
             get {
-                return ResourceManager.GetString("AmountCannotBeNegative", resourceCulture);
+                return ResourceManager.GetString("CommencementDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please do not exceed the refund limit of £{0}.
-        /// </summary>
-        public static string AmountCannotExceedLimit {
-            get {
-                return ResourceManager.GetString("AmountCannotExceedLimit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number with a maximum of {0} decimal places.
-        /// </summary>
-        public static string AmountDecimalPlaceError {
-            get {
-                return ResourceManager.GetString("AmountDecimalPlaceError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter the amount to refund.
-        /// </summary>
-        public static string AmountRefundedError {
-            get {
-                return ResourceManager.GetString("AmountRefundedError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Amount to refund (£).
-        /// </summary>
-        public static string AmountRefundedLabel {
-            get {
-                return ResourceManager.GetString("AmountRefundedLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Comments.
-        /// </summary>
-        public static string CommentsLabel {
-            get {
-                return ResourceManager.GetString("CommentsLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The maximum length of the comments is 500 characters.
-        /// </summary>
-        public static string CommentsLengthError {
-            get {
-                return ResourceManager.GetString("CommentsLengthError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Date refunded.
-        /// </summary>
-        public static string Date {
-            get {
-                return ResourceManager.GetString("Date", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide the date the refund was made.
+        ///   Looks up a localized string similar to Please enter a valid date.
         /// </summary>
         public static string DateRequiredError {
             get {
                 return ResourceManager.GetString("DateRequiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decision required by.
+        /// </summary>
+        public static string DecisionDate {
+            get {
+                return ResourceManager.GetString("DecisionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name of officer.
+        /// </summary>
+        public static string NameOfOfficer {
+            get {
+                return ResourceManager.GetString("NameOfOfficer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name of the officer cannot be more than 256 characters in length.
+        /// </summary>
+        public static string NameOfOfficerLengthError {
+            get {
+                return ResourceManager.GetString("NameOfOfficerLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the name of the officer.
+        /// </summary>
+        public static string NameOfOfficerRequiredError {
+            get {
+                return ResourceManager.GetString("NameOfOfficerRequiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acknowledged on.
+        /// </summary>
+        public static string NotificationAcknowledgedDate {
+            get {
+                return ResourceManager.GetString("NotificationAcknowledgedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date completed.
+        /// </summary>
+        public static string NotificationCompletedDate {
+            get {
+                return ResourceManager.GetString("NotificationCompletedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification received.
+        /// </summary>
+        public static string NotificationReceivedDate {
+            get {
+                return ResourceManager.GetString("NotificationReceivedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment received.
+        /// </summary>
+        public static string PaymentReceivedDate {
+            get {
+                return ResourceManager.GetString("PaymentReceivedDate", resourceCulture);
             }
         }
     }

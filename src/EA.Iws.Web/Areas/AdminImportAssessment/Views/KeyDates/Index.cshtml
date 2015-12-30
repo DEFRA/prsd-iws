@@ -1,23 +1,25 @@
-﻿@using EA.Iws.Core.NotificationAssessment
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates.IndexResources
+@using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels
 @using EA.Prsd.Core.Web.Mvc.RazorHelpers
-@model DateInputViewModel
-
-<h1 class="heading-large">Enter the key dates for this notification</h1>
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates.KeyDatesViewModel
 
 @{
+    ViewBag.Title = Resource.Title;
     var nullMarker = "- -";
     var byText = " by ";
 }
 
-<div>
-    These are the dates so far:
+<h1 class="heading-large">@Resource.MainHeading</h1>
 
-    <table title="Assessment dates currently recorded">
+<div>
+    @Resource.FirstParagraph
+
+    <table title="Assessment dates currently recorded" class="form-group">
         <tr>
-            <th>Activities</th>
-            <th>Dates</th>
-            <th>Action</th>
+            <th>@Resource.DateNameColumnHeader</th>
+            <th>@Resource.DateColumnHeader</th>
+            <th>@Resource.LinkColumnHeader</th>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
@@ -253,4 +255,4 @@ else
     }
 }
 
-
+@Html.ActionLink(Resource.HomeLink, "Index", "Home", new { area = "ImportNotification" }, null)
