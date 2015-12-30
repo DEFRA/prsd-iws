@@ -1,7 +1,11 @@
 ﻿@using EA.Iws.Core.Notification
 @model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
 <p>
-    Write your company name and notification number on the reverse of your cheque or postal order, and send it with your notification package to the IWS team.
+    Write your company name and notification number on the reverse of your cheque or postal order, and send it with your notification package
+    @if (Model.CompetentAuthority == CompetentAuthority.England)
+    {
+        <text> to the IWS team</text>
+    }.
     Cheques and postal orders should be made payable to @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.CompetentAuthority.Name)
     @if (Model.CompetentAuthority == CompetentAuthority.NorthernIreland)
     {
