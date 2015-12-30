@@ -1,0 +1,32 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+    
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.IsStateOfImportCompleted)
+        {
+            <div class="grid-row">
+                <div class="column-half">
+                    Entry point:
+                </div>
+                <div class="column-half">
+                    @Html.DisplayFor(m => m.StateOfImportData.EntryPoint.Name),
+                    @Html.DisplayFor(m => m.StateOfImportData.Country.Name)
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="column-half">
+                    Competent authority:
+                </div>
+                <div class="column-half">
+                    @Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Code)
+                    -
+                    @Html.DisplayFor(m => m.StateOfImportData.CompetentAuthority.Name)
+                </div>
+            </div>
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

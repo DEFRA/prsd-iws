@@ -11,5 +11,7 @@
         public const string NotificationSummaryViewLocation = "~/Areas/NotificationApplication/Views/Shared/NotificationSummarySections/";
 
         public const string ExternalNotificationOverviewSectionsLocation = "~/Areas/NotificationApplication/Views/Home/OverviewSections/";
+
+        public const string InternalExportNotificationOverviewSectionsLocation = "~/Areas/AdminExportAssessment/Views/Overview/Sections/";
     }
 }

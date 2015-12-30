@@ -1,0 +1,18 @@
+﻿@model EA.Iws.Core.WasteCodes.WasteCodeData[]
+
+@foreach (var c in Model)
+{
+    <div class="overview-block-element">
+        <div class="grid-row">
+            <div class="column-third">Code:</div>
+            <div class="column-two-thirds">@c.Code</div>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(c.Description))
+        {
+            <div class="grid-row">
+                <div class="column-third">Description:</div>
+                <div class="column-two-thirds">@c.Description</div>
+            </div>
+        }
+    </div>
+}

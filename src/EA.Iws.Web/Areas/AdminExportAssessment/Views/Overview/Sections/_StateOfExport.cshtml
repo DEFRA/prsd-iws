@@ -1,0 +1,32 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.IsStateOfExportCompleted)
+        {
+            <div class="grid-row">
+                <div class="column-half">
+                    Exit point:
+                </div>
+                <div class="column-half">
+                    @Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name),
+                    @Html.DisplayFor(m => m.StateOfExportData.Country.Name)
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="column-half">
+                    Competent authority:
+                </div>
+                <div class="column-half">
+                    @Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Code)
+                    -
+                    @Html.DisplayFor(m => m.StateOfExportData.CompetentAuthority.Name)
+                </div>
+            </div>
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

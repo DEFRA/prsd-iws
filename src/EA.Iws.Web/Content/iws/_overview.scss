@@ -6,6 +6,10 @@
     margin-bottom: 30px;
 }
 
+.overview-block-element .non-breaking {
+    white-space: nowrap;
+}
+
 .overview-table {
     td {
         vertical-align: top;

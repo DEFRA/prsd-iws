@@ -1,53 +1,52 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
 @{
-    var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
 }
 
-<h2 class="heading-medium">The journey</h2>
-
-<div>
-    <details>
-        <summary>
-            Transport route - export
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">The journey</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Export route
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_StateOfExport.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Transport route - transits
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
-                @Html.Partial(viewLocation + "_TransitStates.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Transport route - import
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Import route
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_StateOfImport.cshtml")
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            Custom office
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Transits
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_TransitStates.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Customs office
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_CustomsOffice.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

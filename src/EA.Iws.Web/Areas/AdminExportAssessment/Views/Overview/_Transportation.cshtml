@@ -1,50 +1,54 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.TransportationViewModel
 @{
-    var id = Model.NotificationId;
-    var viewLocation = Constants.NotificationSummaryViewLocation;
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
 }
 
-<h2 class="heading-medium">The transportation</h2>
 
-<div>
-    <details>
-        <summary>
-            Intended carriers
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">Transportation</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Intended carriers
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_Carrier.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Means of transport
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Means of transport
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_MeansOfTransport.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Packaging types
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Packaging types
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_PackagingTypes.cshtml")
-            </div>
-        </div>
-    </details>
-    <details>
-        <summary>
-            Special handling
-        </summary>
-        <div class="expanded-details">
-            <div class="panel-indent">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Special handling requirements
+            </td>
+            <td>
                 @Html.Partial(viewLocation + "_SpecialHandling.cshtml")
-            </div>
-        </div>
-    </details>
-</div>
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

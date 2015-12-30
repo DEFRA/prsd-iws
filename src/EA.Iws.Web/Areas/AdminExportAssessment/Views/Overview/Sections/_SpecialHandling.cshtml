@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.TransportationViewModel
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.IsSpecialHandlingCompleted)
+        {
+            @Html.DisplayFor(m => m.SpecialHandlingDetails)
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>
