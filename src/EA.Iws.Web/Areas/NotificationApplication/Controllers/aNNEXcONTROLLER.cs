@@ -53,12 +53,18 @@
 
             if (model.TechnologyEmployed != null && model.TechnologyEmployedStatus.IsRequired)
             {
-                // TODO: Request and handler
+                await
+                    mediator.SendAsync(
+                        new SetTechnologyEmployedAnnex(new AnnexUpload(GetFileBytes(model.TechnologyEmployed),
+                            model.TechnologyEmployed.ContentType, id)));
             }
 
             if (model.Composition != null && model.WasteCompositionStatus.IsRequired)
             {
-                // TODO: Request and handler
+                await
+                    mediator.SendAsync(
+                        new SetWasteCompositionAnnex(new AnnexUpload(GetFileBytes(model.Composition),
+                            model.Composition.ContentType, id)));
             }
 
             return RedirectToAction("Index", "Options");

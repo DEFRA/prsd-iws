@@ -74,6 +74,8 @@
             builder.RegisterType<CertificateOfRecoveryNameGenerator>().AsSelf();
             builder.RegisterType<AnnexFactory>().AsSelf();
             builder.RegisterType<ProcessOfGenerationNameGenerator>().AsSelf();
+            builder.RegisterType<WasteCompositionNameGenerator>().AsSelf();
+            builder.RegisterType<TechnologyEmployedNameGenerator>().AsSelf();
             builder.RegisterType<ConsentNotification>().AsSelf();
             builder.RegisterType<MovementFileNameGenerator>().AsSelf();
             builder.RegisterType<DecisionRequiredBy>().AsSelf();

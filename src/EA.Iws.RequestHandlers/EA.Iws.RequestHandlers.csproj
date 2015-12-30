@@ -114,6 +114,8 @@
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
+    <Compile Include="Annexes\SetTechnologyEmployedAnnexHandler.cs" />
+    <Compile Include="Annexes\SetWasteCompositionAnnexHandler.cs" />
     <Compile Include="Annexes\SetProcessOfGenerationAnnexHandler.cs" />
     <Compile Include="Authorization\AuthorizationContext.cs" />
     <Compile Include="Authorization\AuthorizationManager.cs" />

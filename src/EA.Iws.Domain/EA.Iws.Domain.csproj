@@ -119,6 +119,8 @@
     <Compile Include="NotificationApplication\Annexes\IAnnexCollectionRepository.cs" />
     <Compile Include="NotificationApplication\Annexes\IAnnexNameGenerator.cs" />
     <Compile Include="NotificationApplication\Annexes\ProcessOfGenerationAnnex.cs" />
+    <Compile Include="NotificationApplication\Annexes\TechnologyEmployedNameGenerator.cs" />
+    <Compile Include="NotificationApplication\Annexes\WasteCompositionNameGenerator.cs" />
     <Compile Include="NotificationApplication\Annexes\ProcessOfGenerationNameGenerator.cs" />
     <Compile Include="NotificationApplication\Annexes\RequiredAnnexes.cs" />
     <Compile Include="NotificationApplication\Annexes\TechnologyEmployedAnnex.cs" />

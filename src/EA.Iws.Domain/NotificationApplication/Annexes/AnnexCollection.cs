@@ -29,5 +29,19 @@
 
             ProcessOfGeneration = processOfGenerationAnnex;
         }
+
+        public void SetWasteCompositionAnnex(WasteCompositionAnnex wasteCompositionAnnex)
+        {
+            Guard.ArgumentNotNull(() => wasteCompositionAnnex, wasteCompositionAnnex);
+
+            WasteComposition = wasteCompositionAnnex;
+        }
+
+        public void SetTechnologyEmployedAnnex(TechnologyEmployedAnnex technologyEmployedAnnex)
+        {
+            Guard.ArgumentNotNull(() => technologyEmployedAnnex, technologyEmployedAnnex);
+
+            TechnologyEmployed = technologyEmployedAnnex;
+        }
     }
 }
