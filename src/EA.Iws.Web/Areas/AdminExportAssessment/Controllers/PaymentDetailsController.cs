@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
     using ViewModels.PaymentDetails;
@@ -27,8 +28,8 @@
             return View(model);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(PaymentDetailsViewModel model)
         {
             if (!ModelState.IsValid)
@@ -37,7 +38,7 @@
                 return View(model);
             }
 
-            if (model.PaymentMethod != PaymentMethods.Cheque)
+            if (model.PaymentMethod != PaymentMethod.Cheque)
             {
                 model.Receipt = "NA";
             }
@@ -47,14 +48,14 @@
                 Date = model.Date.AsDateTime().Value,
                 NotificationId = model.NotificationId,
                 Credit = Convert.ToDecimal(model.Amount),
-                PaymentMethod = (int)model.PaymentMethod,
+                PaymentMethod = model.PaymentMethod,
                 ReceiptNumber = model.Receipt,
                 Comments = model.Comments
             };
 
             await mediator.SendAsync(new AddNotificationTransaction(paymentData));
 
-            return RedirectToAction("index", "AccountManagement", new { id = model.NotificationId });
+            return RedirectToAction("Index", "AccountManagement");
         }
     }
 }

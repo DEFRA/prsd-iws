@@ -23,7 +23,7 @@
                         Comments = item.Comments,
                         Receipt = item.ReceiptNumber,
                         Date = item.Date,
-                        Type = item.PaymentMethod.GetValueOrDefault(),
+                        Type = item.PaymentMethod,
                         Transaction = IsCredit(item) ? (int)TransactionType.Payment : (int)TransactionType.Refund,
                         Amount = IsCredit(item) ? item.Credit.GetValueOrDefault() : item.Debit.GetValueOrDefault()
                     };

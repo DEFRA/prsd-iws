@@ -148,6 +148,7 @@
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDateHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPaymentHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotificationHandler.cs" />

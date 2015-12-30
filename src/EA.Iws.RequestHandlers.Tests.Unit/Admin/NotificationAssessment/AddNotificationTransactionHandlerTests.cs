@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using FakeItEasy;
@@ -37,7 +38,7 @@
                 Date = NewDate,
                 NotificationId = NotificationId,
                 Credit = 100.00m,
-                PaymentMethod = 1
+                PaymentMethod = PaymentMethod.BacsChaps
             }));
 
             var repository = A.Fake<INotificationTransactionRepository>();
@@ -154,7 +155,7 @@
             {
                 Date = date,
                 NotificationId = NotificationId,
-                PaymentMethod = 1
+                PaymentMethod = PaymentMethod.BacsChaps
             };
         }
     }

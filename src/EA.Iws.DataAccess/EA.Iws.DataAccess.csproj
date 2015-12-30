@@ -109,6 +109,7 @@
     <Compile Include="Mappings\Imports\ImportNotificationAssessmentMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationDatesMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationStatusChangeMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportNotificationTransactionMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfExportMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfImportMapping.cs" />
     <Compile Include="Mappings\Imports\TransitStateMapping.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Repositories\Imports\ImportNotificationAssessmentRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationSearchRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationTransactionRepository.cs" />
     <Compile Include="Repositories\Imports\TransportRouteRepository.cs" />
     <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
     <Compile Include="Repositories\Imports\ProducerRepository.cs" />

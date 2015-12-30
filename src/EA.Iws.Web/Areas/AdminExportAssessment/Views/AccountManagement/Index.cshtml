@@ -1,5 +1,5 @@
 ﻿@using EA.Iws.Core.NotificationAssessment
-@using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.PaymentDetails
+@using EA.Iws.Core.Shared
 @using EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.AccountManagement.AccountManagementViewModel
@@ -53,7 +53,7 @@
                 }
                 else
                 {
-                    type = (PaymentMethods)Model.TableData[i].Type;
+                    type = (PaymentMethod)Model.TableData[i].Type;
                 }
 
                 var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "Yes";

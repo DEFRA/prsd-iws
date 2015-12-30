@@ -164,6 +164,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactDataResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Shared\PaymentMethod.cs" />
     <Compile Include="Shared\ProvidedBy.cs" />
     <Compile Include="Shared\ShipmentQuantityUnitsMetadata.cs" />
     <Compile Include="Shared\ValuePerWeightData.cs" />

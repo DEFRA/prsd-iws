@@ -4,6 +4,7 @@
     using Domain.ImportMovement;
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
+    using Domain.ImportNotificationAssessment.Transactions;
     using Mappings.Imports;
     using Prsd.Core.Domain;
 
@@ -42,6 +43,8 @@
         public virtual DbSet<WasteType> WasteTypes { get; set; }
 
         public virtual DbSet<ImportNotificationAssessment> ImportNotificationAssessments { get; set; }
+
+        public virtual DbSet<ImportNotificationTransaction> ImportNotificationTransactions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

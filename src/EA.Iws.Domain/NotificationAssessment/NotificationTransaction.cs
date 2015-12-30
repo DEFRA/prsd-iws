@@ -2,6 +2,7 @@
 {
     using System;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
 
@@ -56,7 +57,7 @@
 
         public decimal? Credit { get; private set; }
 
-        public int? PaymentMethod { get; private set; }
+        public PaymentMethod? PaymentMethod { get; private set; }
 
         public string ReceiptNumber { get; private set; }
 

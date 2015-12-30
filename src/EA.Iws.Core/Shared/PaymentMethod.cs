@@ -1,8 +1,8 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.PaymentDetails
+﻿namespace EA.Iws.Core.Shared
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum PaymentMethods
+    public enum PaymentMethod
     {
         [Display(Name = "Cheque")]
         Cheque = 0,

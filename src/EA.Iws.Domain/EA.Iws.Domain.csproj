@@ -71,6 +71,11 @@
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChange.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChangeEvent.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\IImportNotificationTransactionCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\IImportNotificationTransactionRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransaction.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportPaymentTransaction.cs" />
     <Compile Include="ImportNotification\Address.cs" />
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />

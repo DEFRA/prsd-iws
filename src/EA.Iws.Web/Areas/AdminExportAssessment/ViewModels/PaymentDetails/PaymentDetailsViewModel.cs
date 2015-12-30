@@ -3,11 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Globalization;
     using System.Web.Mvc;
+    using Core.Shared;
     using Infrastructure;
     using Infrastructure.Validation;
-    using Prsd.Core;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -15,11 +14,9 @@
     {
         public PaymentDetailsViewModel() 
         {
-            PaymentMethodsSelectList = new SelectList(EnumHelper.GetValues(typeof(PaymentMethods)), "Key", "Value");
+            PaymentMethodsSelectList = new SelectList(EnumHelper.GetValues(typeof(PaymentMethod)), "Key", "Value");
             Date = new OptionalDateInputViewModel(true);
         }
-
-        private const NumberStyles Style = NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
 
         public Guid NotificationId { get; set; }
 
@@ -29,7 +26,7 @@
         public string Amount { get; set; }
 
         [Display(Name = "PaymentMethodLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
-        public PaymentMethods PaymentMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
 
         public IEnumerable<SelectListItem> PaymentMethodsSelectList { get; set; }
 
@@ -52,7 +49,7 @@
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.ReceiptLengthError, new[] { "Receipt" }));
             }
 
-            if (string.IsNullOrWhiteSpace(Receipt) && PaymentMethod == PaymentMethods.Cheque)
+            if (string.IsNullOrWhiteSpace(Receipt) && PaymentMethod == PaymentMethod.Cheque)
             {
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.ReceiptRequiredError, new[] { "Receipt" }));
             }

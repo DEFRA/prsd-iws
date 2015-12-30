@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.NotificationAssessment
 {
     using System;
+    using Shared;
 
     public class PaymentHistoryTableData
     {
@@ -10,7 +11,7 @@
 
         public decimal Amount { get; set; }
 
-        public int Type { get; set; }
+        public PaymentMethod? Type { get; set; }
 
         public string Receipt { get; set; }
 

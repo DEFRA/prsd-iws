@@ -12,6 +12,7 @@
     using Domain;
     using Domain.ImportMovement;
     using Domain.ImportNotification;
+    using Domain.ImportNotificationAssessment.Transactions;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Annexes;
@@ -72,10 +73,7 @@
             builder.RegisterType<CertificateFactory>().AsSelf();
             builder.RegisterType<CertificateOfReceiptNameGenerator>().AsSelf();
             builder.RegisterType<CertificateOfRecoveryNameGenerator>().AsSelf();
-            builder.RegisterType<AnnexFactory>().AsSelf();
-            builder.RegisterType<ProcessOfGenerationNameGenerator>().AsSelf();
-            builder.RegisterType<WasteCompositionNameGenerator>().AsSelf();
-            builder.RegisterType<TechnologyEmployedNameGenerator>().AsSelf();
+            
             builder.RegisterType<ConsentNotification>().AsSelf();
             builder.RegisterType<MovementFileNameGenerator>().AsSelf();
             builder.RegisterType<DecisionRequiredBy>().AsSelf();
@@ -88,8 +86,7 @@
             builder.RegisterType<Transaction>().AsSelf();
             builder.RegisterType<DaysRemainingCalculator>().AsSelf();
             builder.RegisterType<FinancialGuaranteeDecisionRequired>().AsSelf();
-            builder.RegisterType<RequiredAnnexes>().AsSelf();
-
+            
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();
@@ -100,8 +97,7 @@
             builder.RegisterType<NotificationChargeCalculator>().As<INotificationChargeCalculator>();
             builder.RegisterType<MovementNumberValidator>().As<IMovementNumberValidator>();
             builder.RegisterType<NotificationTransactionCalculator>().As<INotificationTransactionCalculator>();
-            builder.RegisterType<NotificationAssessmentDatesSummaryRepository>().As<INotificationAssessmentDatesSummaryRepository>();
-            builder.RegisterType<NotificationAssessmentDecisionRepository>().As<INotificationAssessmentDecisionRepository>();
+
             builder.RegisterType<MovementDateValidator>().As<IMovementDateValidator>();
             builder.RegisterType<ImportMovementFactory>().As<IImportMovementFactory>();
             builder.RegisterType<ImportMovementNumberValidator>().As<IImportMovementNumberValidator>();
@@ -123,6 +119,9 @@
             builder.RegisterType<InMemoryAuthorizationService>().As<IAuthorizationService>();
 
             builder.RegisterType<AddressBuilder>().InstancePerDependency().AsSelf();
+
+            RegisterImportNotificationFinance(builder);
+            RegisterExportNotificationAnnexes(builder);
         }
 
         private static bool HasAsposeLicense()
@@ -140,6 +139,23 @@
             }
 
             return false;
+        }
+
+        private void RegisterImportNotificationFinance(ContainerBuilder builder)
+        {
+            builder.RegisterType<ImportPaymentTransaction>().AsSelf();
+
+            builder.RegisterType<ImportNotificationTransactionCalculator>()
+                .As<IImportNotificationTransactionCalculator>();
+        }
+
+        private void RegisterExportNotificationAnnexes(ContainerBuilder builder)
+        {
+            builder.RegisterType<AnnexFactory>().AsSelf();
+            builder.RegisterType<ProcessOfGenerationNameGenerator>().AsSelf();
+            builder.RegisterType<WasteCompositionNameGenerator>().AsSelf();
+            builder.RegisterType<TechnologyEmployedNameGenerator>().AsSelf();
+            builder.RegisterType<RequiredAnnexes>().AsSelf();
         }
     }
 }

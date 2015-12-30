@@ -799,6 +799,7 @@
     <Content Include="Areas\NotificationApplication\Views\Annex\Index.cshtml" />
     <Content Include="Areas\ExportMovement\Views\Reject\Success.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_BaselOecdCode.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\PaymentDetails\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_Carrier.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_ChemicalComposition.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_CodeDefinitionList.cshtml" />
@@ -974,6 +975,7 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesStatusEnum.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -981,6 +983,17 @@
       <DependentUpon>KeyDatesViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\KeyDates\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentDetailsViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\PaymentDetails\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -1782,7 +1795,6 @@
       <DependentUpon>PaymentDetailsViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModel.cs" />
-    <Compile Include="Areas\AdminExportAssessment\ViewModels\PaymentDetails\PaymentMethods.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\RefundDetails\RefundDetailsViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.Designer.cs">
       <DependentUpon>RefundDetailsViewModelResources.resx</DependentUpon>
@@ -2298,6 +2310,14 @@
     <Folder Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\" />
   </ItemGroup>
   <ItemGroup>
+  <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentDetailsViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\PaymentDetails\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>KeyDatesViewModelResources.Designer.cs</LastGenOutput>
