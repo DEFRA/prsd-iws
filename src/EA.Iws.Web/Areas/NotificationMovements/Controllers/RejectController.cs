@@ -24,7 +24,8 @@
 
             return View(new RejectViewModel
             {
-                Movements = result
+                Movements = result,
+                NotificationId = notificationId
             });
         }
 

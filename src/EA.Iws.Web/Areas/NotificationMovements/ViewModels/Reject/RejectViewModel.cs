@@ -7,6 +7,8 @@
 
     public class RejectViewModel
     {
+        public Guid NotificationId { get; set; }
+
         public IList<MovementData> Movements { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(RejectViewModelResources), ErrorMessageResourceName = "SelectedRequired")]

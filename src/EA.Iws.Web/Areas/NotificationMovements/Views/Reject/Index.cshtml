@@ -11,16 +11,13 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
 
     if (Model.Movements == null || !Model.Movements.Any())
     {
         <p>@Resource.None</p>
 
-        <div class="form-group">
-            @Html.ActionLink("Continue",
-            "Index",
-            "Home")
-        </div>
+        
     }
     else
     {
@@ -43,7 +40,9 @@
         </div>
     }
 
-    @Html.ActionLink(Resource.ReturnToSummary,
-            "Index",
-            "Home")
+    <div class="form-group">
+        @Html.ActionLink("Continue", "Index", "Options",
+        new { id = Model.NotificationId, area = "NotificationApplication" },
+        new { @class = "button"})
+    </div>
 }

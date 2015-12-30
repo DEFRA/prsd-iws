@@ -797,6 +797,7 @@
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\UploadAnnexes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\Unavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\Index.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\Reject\Success.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_BaselOecdCode.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_Carrier.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_ChemicalComposition.cshtml" />
@@ -1147,6 +1148,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ExportMovement\Views\Reject\SuccessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Controllers\CompleteController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ExporterController.cs" />
@@ -2412,6 +2418,10 @@
     <EmbeddedResource Include="Areas\AdminImportMovement\Views\Dates\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ExportMovement\Views\Reject\SuccessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Exporter\ExporterViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

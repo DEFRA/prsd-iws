@@ -7,6 +7,7 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Reject;
+    using ViewModels;
     using ViewModels.Reject;
 
     [Authorize]
@@ -44,9 +45,22 @@
                 uploadedFile,
                 fileExtension));
 
-            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
+            return RedirectToAction("Success");
+        }
 
-            return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = notificationId });
+        [HttpGet]
+        public async Task<ActionResult> Success(Guid id)
+        {
+            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
+            var movementNumber = await mediator.SendAsync(new GetMovementNumberByMovementId(id));
+
+            var model = new SuccessViewModel
+            {
+                NotificationId = notificationId,
+                MovementNumber = movementNumber
+            };
+
+            return View(model);
         }
     }
 }

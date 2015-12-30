@@ -1,0 +1,21 @@
+﻿@using Resource = EA.Iws.Web.Areas.ExportMovement.Views.Reject.SuccessResources
+@model EA.Iws.Web.Areas.ExportMovement.ViewModels.SuccessViewModel
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<h1 class="heading-large">@string.Format(Resource.MainHeading, Model.MovementNumber)</h1>
+
+
+<div class="form-group">
+    @Html.ActionLink(@Resource.LinkTextRejectAnother, "Index", "Reject",
+        new { notificationId = Model.NotificationId, area = "NotificationMovements" },
+        null)
+</div>
+
+<div class="form-group">
+    @Html.ActionLink(@Resource.LinkTextGoToNotificationOptions, "Index", "Options",
+        new { id = Model.NotificationId, area = "NotificationApplication" },
+        null)
+</div>
