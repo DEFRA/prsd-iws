@@ -4,16 +4,20 @@
     using System.Threading.Tasks;
     using Core.ImportNotificationAssessment;
     using Domain.ImportNotification;
+    using Domain.ImportNotificationAssessment.Transactions;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
 
     public class GetKeyDatesHandler : IRequestHandler<GetKeyDates, KeyDatesData>
     {
         private readonly IImportNotificationAssessmentRepository notificationAssessmentRepository;
+        private readonly IImportNotificationTransactionCalculator transactionCalculator;
 
-        public GetKeyDatesHandler(IImportNotificationAssessmentRepository notificationAssessmentRepository)
+        public GetKeyDatesHandler(IImportNotificationAssessmentRepository notificationAssessmentRepository,
+            IImportNotificationTransactionCalculator transactionCalculator)
         {
             this.notificationAssessmentRepository = notificationAssessmentRepository;
+            this.transactionCalculator = transactionCalculator;
         }
 
         public async Task<KeyDatesData> HandleAsync(GetKeyDates message)
@@ -22,11 +26,20 @@
 
             return new KeyDatesData
             {
-                NotificationReceived =
-                    assessment.Dates.NotificationReceivedDate.HasValue
-                        ? assessment.Dates.NotificationReceivedDate.Value.DateTime
-                        : (DateTime?)null
+                NotificationReceived = DateTimeOffsetAsDateTime(assessment.Dates.NotificationReceivedDate),
+                PaymentReceived = DateTimeOffsetAsDateTime(assessment.Dates.PaymentReceivedDate),
+                IsPaymentComplete = await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0)
             };
+        }
+
+        private DateTime? DateTimeOffsetAsDateTime(DateTimeOffset? dateTimeOffset)
+        {
+            if (dateTimeOffset.HasValue)
+            {
+                return dateTimeOffset.Value.DateTime;
+            }
+
+            return null;
         }
     }
 }

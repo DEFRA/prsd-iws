@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Mappings.Common
 {
     using System.Data.Entity.ModelConfiguration;
-    using Domain.NotificationApplication;
+    using Domain.Finance;
 
     internal class PricingStructureMapping : EntityTypeConfiguration<PricingStructure>
     {

@@ -8,7 +8,7 @@
     {
         Task<bool> NotificationNumberExists(string number);
 
-        Task<ImportNotification> GetByImportNotificationId(Guid id);
+        Task<ImportNotification> Get(Guid id);
 
         Task Add(ImportNotification notification);
 

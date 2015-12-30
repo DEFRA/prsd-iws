@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Core.NotificationAssessment;
+    using Core.Shared;
 
     public class AccountManagementViewModel
     {
@@ -16,6 +17,6 @@
 
         public decimal Balance { get; set; }
 
-        public IList<PaymentHistoryTableData> TableData { get; set; }
+        public IList<TransactionRecordData> TableData { get; set; }
     }
 }

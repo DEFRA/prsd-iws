@@ -22,7 +22,7 @@
         private async Task<bool> BeEnteredForRecoveryNotification(Preconsented instance, bool? preconsentedFacilityExists)
         {
             var importNotification =
-                await importNotificationRepository.GetByImportNotificationId(instance.ImportNotificationId);
+                await importNotificationRepository.Get(instance.ImportNotificationId);
 
             return importNotification.NotificationType == NotificationType.Recovery
                 ? preconsentedFacilityExists.HasValue

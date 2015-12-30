@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.NotificationAssessment
 {
     using System.Collections.Generic;
+    using Shared;
 
     public class AccountManagementData
     {
@@ -8,6 +9,6 @@
 
         public decimal Balance { get; set; }
 
-        public IList<PaymentHistoryTableData> PaymentHistory { get; set; } 
+        public IList<TransactionRecordData> PaymentHistory { get; set; } 
     }
 }

@@ -832,6 +832,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_YCodes.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedQuantity.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedDates.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\Index.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
@@ -972,6 +973,7 @@
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
@@ -981,6 +983,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>KeyDatesViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\AccountManagement\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\KeyDates\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2310,9 +2317,13 @@
     <Folder Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\" />
   </ItemGroup>
   <ItemGroup>
-  <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PaymentDetailsViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AccountManagement\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\PaymentDetails\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

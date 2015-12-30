@@ -12,6 +12,7 @@
     using Domain;
     using Domain.ImportMovement;
     using Domain.ImportNotification;
+    using Domain.ImportNotificationAssessment;
     using Domain.ImportNotificationAssessment.Transactions;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -147,6 +148,8 @@
 
             builder.RegisterType<ImportNotificationTransactionCalculator>()
                 .As<IImportNotificationTransactionCalculator>();
+
+            builder.RegisterType<ImportNotificationChargeCalculator>().As<IImportNotificationChargeCalculator>();
         }
 
         private void RegisterExportNotificationAnnexes(ContainerBuilder builder)

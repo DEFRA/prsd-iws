@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Domain.Finance;
     using Domain.NotificationApplication;
 
     public class PricingStructureRepository : IPricingStructureRepository

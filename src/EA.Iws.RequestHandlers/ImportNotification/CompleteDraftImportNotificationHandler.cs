@@ -65,7 +65,7 @@
             if (result.IsValid)
             {
                 var notification =
-                    await importNotificationRepository.GetByImportNotificationId(message.ImportNotificationId);
+                    await importNotificationRepository.Get(message.ImportNotificationId);
 
                 var exporter = mapper.Map<Exporter>(draft.Exporter);
                 var facilityCollection = mapper.Map<FacilityCollection>(draft.Facilities, draft.Preconsented);

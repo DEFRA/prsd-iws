@@ -24,7 +24,7 @@
 
         public async Task<Summary> HandleAsync(GetImportMovementsSummary message)
         {
-            var notification = await notificationRepository.GetByImportNotificationId(message.ImportNotificationId);
+            var notification = await notificationRepository.Get(message.ImportNotificationId);
 
             var movements = await movementRepository.GetForNotification(message.ImportNotificationId);
 

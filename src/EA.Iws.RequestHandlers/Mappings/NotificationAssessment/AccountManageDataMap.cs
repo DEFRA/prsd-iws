@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using Domain.NotificationAssessment;
     using Prsd.Core.Mapper;
 
@@ -11,20 +12,20 @@
         {
             AccountManagementData data = new AccountManagementData
             {
-                PaymentHistory = new List<PaymentHistoryTableData>()
+                PaymentHistory = new List<TransactionRecordData>()
             };
 
             if (source != null)
             {
                 foreach (var item in source)
                 {
-                    var d = new PaymentHistoryTableData
+                    var d = new TransactionRecordData
                     {
                         Comments = item.Comments,
-                        Receipt = item.ReceiptNumber,
+                        ReceiptNumber = item.ReceiptNumber,
                         Date = item.Date,
                         Type = item.PaymentMethod,
-                        Transaction = IsCredit(item) ? (int)TransactionType.Payment : (int)TransactionType.Refund,
+                        Transaction = IsCredit(item) ? TransactionType.Payment : TransactionType.Refund,
                         Amount = IsCredit(item) ? item.Credit.GetValueOrDefault() : item.Debit.GetValueOrDefault()
                     };
 

@@ -30,7 +30,7 @@
             return await context.ImportNotifications.AnyAsync(n => n.NotificationNumber == number);
         }
 
-        public async Task<ImportNotification> GetByImportNotificationId(Guid id)
+        public async Task<ImportNotification> Get(Guid id)
         {
             return await context.ImportNotifications.SingleAsync(n => n.Id == id);
         }

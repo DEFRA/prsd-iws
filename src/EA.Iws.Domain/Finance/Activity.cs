@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Domain.NotificationApplication
+﻿namespace EA.Iws.Domain.Finance
 {
     using System;
     using Core.Shared;

@@ -100,6 +100,7 @@
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverview.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummary.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />

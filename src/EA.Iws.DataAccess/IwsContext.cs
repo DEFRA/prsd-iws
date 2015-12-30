@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Domain;
     using Domain.AddressBook;
+    using Domain.Finance;
     using Domain.FinancialGuarantee;
     using Domain.Movement;
     using Domain.NotificationApplication;

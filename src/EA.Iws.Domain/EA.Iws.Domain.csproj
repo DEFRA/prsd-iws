@@ -67,6 +67,8 @@
     <Compile Include="ImportMovement\IRejectImportMovement.cs" />
     <Compile Include="ImportMovement\ReceiveImportMovement.cs" />
     <Compile Include="ImportMovement\RejectImportMovement.cs" />
+    <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChange.cs" />
@@ -204,7 +206,7 @@
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Movement\ValidMovementDateCalculator.cs" />
-    <Compile Include="NotificationApplication\Activity.cs" />
+    <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\Importer\IImporterRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationOverviewRepository.cs" />
@@ -250,8 +252,8 @@
     <Compile Include="NotificationApplication\NotificationApplication.PhysicalCharacteristics.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.WasteCodes.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.WasteGenerationProcess.cs" />
-    <Compile Include="NotificationApplication\PricingStructure.cs" />
-    <Compile Include="NotificationApplication\ShipmentQuantityRange.cs" />
+    <Compile Include="Finance\PricingStructure.cs" />
+    <Compile Include="Finance\ShipmentQuantityRange.cs" />
     <Compile Include="NotificationApplication\WasteAdditionalInformation.cs" />
     <Compile Include="NotificationAssessment\NotificationStatusChangeEvent.cs" />
     <Compile Include="NotificationAssessment\NotificationSubmittedEvent.cs" />

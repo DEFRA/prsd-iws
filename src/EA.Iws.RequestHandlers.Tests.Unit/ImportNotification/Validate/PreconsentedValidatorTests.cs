@@ -24,8 +24,8 @@
             var importRecoveryNotification = CreateImportNotification(NotificationType.Recovery, importRecoveryNotificationId);
             var importDisposalNotification = CreateImportNotification(NotificationType.Disposal, importRecoveryNotificationId);
 
-            A.CallTo(() => importNotificationRepo.GetByImportNotificationId(importRecoveryNotificationId)).Returns(importRecoveryNotification);
-            A.CallTo(() => importNotificationRepo.GetByImportNotificationId(importDisposalNotificationId)).Returns(importDisposalNotification);
+            A.CallTo(() => importNotificationRepo.Get(importRecoveryNotificationId)).Returns(importRecoveryNotification);
+            A.CallTo(() => importNotificationRepo.Get(importDisposalNotificationId)).Returns(importDisposalNotification);
 
             validator = new PreconsentedValidator(importNotificationRepo);
         }

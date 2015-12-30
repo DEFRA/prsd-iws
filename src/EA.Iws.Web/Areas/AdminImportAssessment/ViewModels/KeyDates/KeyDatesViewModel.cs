@@ -23,6 +23,9 @@
         public KeyDatesViewModel(KeyDatesData keyDates)
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(keyDates.NotificationReceived, true);
+            PaymentReceivedDate = keyDates.PaymentReceived;
+            PaymentIsComplete = keyDates.IsPaymentComplete;
+
             CommencementDate = new OptionalDateInputViewModel(true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);

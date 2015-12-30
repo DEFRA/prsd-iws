@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.Core.NotificationAssessment
+﻿namespace EA.Iws.Core.Shared
 {
     using System;
-    using Shared;
+    using NotificationAssessment;
 
-    public class PaymentHistoryTableData
+    public class TransactionRecordData
     {
-        public int Transaction { get; set; }
+        public TransactionType Transaction { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -13,7 +13,7 @@
 
         public PaymentMethod? Type { get; set; }
 
-        public string Receipt { get; set; }
+        public string ReceiptNumber { get; set; }
 
         public string Comments { get; set; }
     }

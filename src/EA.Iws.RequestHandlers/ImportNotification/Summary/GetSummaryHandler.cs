@@ -42,7 +42,7 @@
 
         public async Task<InProgressImportNotificationSummary> HandleAsync(GetSummary message)
         {
-            var notification = await importNotificationRepository.GetByImportNotificationId(message.Id);
+            var notification = await importNotificationRepository.Get(message.Id);
 
             countries = (await countryRepository.GetAll()).ToArray();
 

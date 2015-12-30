@@ -4,18 +4,17 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using ImportNotification;
 
     public class ImportNotificationTransactionCalculator : IImportNotificationTransactionCalculator
     {
-        private readonly IImportNotificationAssessmentRepository notificationAssessmentRepository;
         private readonly IImportNotificationTransactionRepository transactionRepository;
+        private readonly IImportNotificationChargeCalculator chargeCalculator;
 
-        public ImportNotificationTransactionCalculator(IImportNotificationAssessmentRepository notificationAssessmentRepository,
-            IImportNotificationTransactionRepository transactionRepository)
+        public ImportNotificationTransactionCalculator(IImportNotificationTransactionRepository transactionRepository,
+            IImportNotificationChargeCalculator chargeCalculator)
         {
-            this.notificationAssessmentRepository = notificationAssessmentRepository;
             this.transactionRepository = transactionRepository;
+            this.chargeCalculator = chargeCalculator;
         }
 
         public async Task<decimal> Balance(Guid importNotificationId)
@@ -37,9 +36,11 @@
 
         public async Task<bool> PaymentIsNowFullyReceived(Guid importNotificationId, decimal credit)
         {
+            var price = await chargeCalculator.GetValue(importNotificationId);
+
             var balance = await Balance(importNotificationId);
 
-            return false;
+            return price - balance <= 0;
         }
     }
 }

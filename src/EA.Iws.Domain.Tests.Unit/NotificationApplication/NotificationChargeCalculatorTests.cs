@@ -6,8 +6,8 @@
     using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
-    using Domain.NotificationAssessment;
     using FakeItEasy;
+    using Finance;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
@@ -20,7 +20,6 @@
         private const int MidRange = 10;
         private const int UpperRange = 15;
 
-        private readonly TestableNotificationAssessment notificationAssessment;
         private readonly Guid notificationId;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly INotificationChargeCalculator chargeCalculator;
@@ -32,7 +31,6 @@
         public NotificationChargeCalculatorTests()
         {
             notificationId = new Guid("C4C62654-048C-45A2-BF7F-9837EFCF328F");
-            notificationAssessment = new TestableNotificationAssessment();
 
             shipmentInfoRepository = A.Fake<IShipmentInfoRepository>();
             shipmentInfo = A.Fake<ShipmentInfo>();
@@ -42,8 +40,6 @@
             notificationApplication = new TestableNotificationApplication();
 
             chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository);
-
-            var activity = A.Fake<Activity>();
         }
 
         [Fact]
@@ -89,7 +85,7 @@
         private IEnumerable<PricingStructure> GetPricingStructures()
         {
             var pricingStructure = ObjectInstantiator<PricingStructure>.CreateNew();
-            
+
             ObjectInstantiator<PricingStructure>.SetProperty(x => x.CompetentAuthority, UKCompetentAuthority.England, pricingStructure);
 
             var activity = A.Fake<Activity>();

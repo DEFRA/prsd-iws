@@ -20,7 +20,7 @@
 
         public async Task<NotificationDetails> HandleAsync(GetNotificationDetails message)
         {
-            var notification = await repository.GetByImportNotificationId(message.ImportNotificationId);
+            var notification = await repository.Get(message.ImportNotificationId);
             return mapper.Map<NotificationDetails>(notification);
         }
     }

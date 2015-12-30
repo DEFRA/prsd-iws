@@ -81,6 +81,7 @@
     <Compile Include="ImportMovement\MovementRejectionReasons.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
     <Compile Include="ImportNotificationMovements\Summary.cs" />
     <Compile Include="ImportNotification\Draft\Address.cs" />
     <Compile Include="ImportNotification\Draft\Contact.cs" />
@@ -136,7 +137,7 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
-    <Compile Include="NotificationAssessment\PaymentHistoryTableData.cs" />
+    <Compile Include="Shared\TransactionRecordData.cs" />
     <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
