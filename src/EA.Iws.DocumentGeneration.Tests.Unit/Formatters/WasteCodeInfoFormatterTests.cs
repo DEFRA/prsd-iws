@@ -11,6 +11,8 @@
     {
         private const string AnyString = "Any string";
         private const string AnyCode = "AC0D3";
+        private const string Hcode = "H124";
+        private const string Hpcode = "HP124";
         private readonly WasteCodeInfoFormatter formatter;
 
         public WasteCodeInfoFormatterTests()
@@ -66,6 +68,30 @@
             });
 
             Assert.Equal(string.Format("{0}1, {0}2", AnyCode), result);
+        }
+
+        [Fact]
+        public void CodeListToString_TwoHCodes_ReturnsCodeList()
+        {
+            var result = formatter.CodeListToString(new[]
+            {
+                TestableWasteCodeInfo.Create(CodeType.H, Hcode + 1),
+                TestableWasteCodeInfo.Create(CodeType.H, Hcode + 2)
+            });
+
+            Assert.Equal(string.Format("{0}1, {0}2", Hcode), result);
+        }
+
+        [Fact]
+        public void CodeListToString_TwoHPCodes_ReturnsCodeListWithEUAdded()
+        {
+            var result = formatter.CodeListToString(new[]
+            {
+                TestableWasteCodeInfo.Create(CodeType.H, Hpcode + 1),
+                TestableWasteCodeInfo.Create(CodeType.H, Hpcode + 2)
+            });
+
+            Assert.Equal(string.Format("{0}1 EU, {0}2 EU", Hpcode), result);
         }
 
         [Fact]

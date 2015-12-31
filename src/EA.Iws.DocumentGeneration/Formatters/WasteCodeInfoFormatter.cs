@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Core.WasteCodes;
     using Domain.NotificationApplication;
 
     internal class WasteCodeInfoFormatter
@@ -27,8 +28,7 @@
                 return NotApplicable;
             }
 
-            return string.Join(", ", 
-                codesArray.Select(c => c.WasteCode.Code).OrderBy(c => c));
+            return string.Join(", ", codesArray.Select(c => CodeAsString(c.WasteCode)).OrderBy(c => c));
         }
 
         public string GetCustomCodeValue(WasteCodeInfo code)
@@ -45,6 +45,16 @@
 
             return (string.IsNullOrWhiteSpace(code.CustomCode))
                 ? string.Empty : code.CustomCode;
+        }
+
+        private string CodeAsString(WasteCode code)
+        {
+            if (code.CodeType != CodeType.H || !code.Code.StartsWith("HP"))
+            {
+                return code.Code;
+            }
+
+            return code.Code + " EU";
         }
     }
 }
