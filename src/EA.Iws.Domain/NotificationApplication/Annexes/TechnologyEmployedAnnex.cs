@@ -4,7 +4,7 @@
 
     public class TechnologyEmployedAnnex : Annex
     {
-        protected TechnologyEmployedAnnex()
+        internal TechnologyEmployedAnnex()
         {
         }
 

@@ -21,6 +21,9 @@
         public AnnexCollection(Guid notificationId)
         {
             NotificationId = notificationId;
+            ProcessOfGeneration = new ProcessOfGenerationAnnex();
+            WasteComposition = new WasteCompositionAnnex();
+            TechnologyEmployed = new TechnologyEmployedAnnex();
         }
 
         public void SetProcessOfGenerationAnnex(ProcessOfGenerationAnnex processOfGenerationAnnex)

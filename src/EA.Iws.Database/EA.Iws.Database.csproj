@@ -84,6 +84,7 @@
     <Content Include="scripts\TestData\20151023-084000-create-consented-notification-2503.sql" />
     <Content Include="scripts\TestData\20150921-145000-create-submitted-notification-2501.sql" />
     <Content Include="scripts\TestData\20150928-145000-create-submitted-notification-disposal-2502.sql" />
+    <Content Include="scripts\TestData\20151231-084100-create-test-data-annex-collections.sql" />
     <Content Include="scripts\TestData\20151026-180000-create-consented-notification-2504.sql" />
     <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\placeholder.txt" />

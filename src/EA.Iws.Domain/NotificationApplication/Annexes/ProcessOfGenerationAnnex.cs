@@ -4,7 +4,7 @@
 
     public class ProcessOfGenerationAnnex : Annex
     {
-        protected ProcessOfGenerationAnnex()
+        internal ProcessOfGenerationAnnex()
         {
         }
 

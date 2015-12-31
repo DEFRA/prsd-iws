@@ -4,7 +4,7 @@
 
     public class WasteCompositionAnnex : Annex
     {
-        protected WasteCompositionAnnex()
+        internal WasteCompositionAnnex()
         {
         }
 
