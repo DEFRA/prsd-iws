@@ -14,6 +14,11 @@
             this.context = context;
         }
 
+        public async Task<Shipment> GetByNotificationIdOrDefault(Guid notificationId)
+        {
+            return await context.Shipments.SingleOrDefaultAsync(s => s.ImportNotificationId == notificationId);
+        }
+
         public void Add(Shipment shipment)
         {
             context.Shipments.Add(shipment);

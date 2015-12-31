@@ -28,7 +28,12 @@
         public async Task<decimal> GetValue(Guid importNotificationId)
         {
             var notification = await notificationRepository.Get(importNotificationId);
-            var shipment = await shipmentRepository.GetByNotificationId(importNotificationId);
+            var shipment = await shipmentRepository.GetByNotificationIdOrDefault(importNotificationId);
+
+            if (shipment == null)
+            {
+                return 0;
+            }
 
             return await GetPrice(notification, shipment, await GetInterimStatus(importNotificationId));
         }

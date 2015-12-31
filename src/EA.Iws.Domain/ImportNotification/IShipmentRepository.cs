@@ -7,6 +7,8 @@
     {
         Task<Shipment> GetByNotificationId(Guid notificationId);
 
+        Task<Shipment> GetByNotificationIdOrDefault(Guid notificationId); 
+
         void Add(Shipment shipment);
     }
 }
