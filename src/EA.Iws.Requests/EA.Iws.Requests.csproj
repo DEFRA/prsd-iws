@@ -176,6 +176,7 @@
     <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />
+    <Compile Include="Response.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
