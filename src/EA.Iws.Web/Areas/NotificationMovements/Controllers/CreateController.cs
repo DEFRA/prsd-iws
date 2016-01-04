@@ -9,6 +9,7 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
     using ViewModels.Create;
 
@@ -32,6 +33,13 @@
         [HttpGet]
         public async Task<ActionResult> ShipmentDate(Guid notificationId)
         {
+            var hasReachedTotalMovements = await mediator.SendAsync(new HasReachedTotalMovements(notificationId));
+
+            if (hasReachedTotalMovements)
+            {
+                return RedirectToAction("TotalMovementsReached");
+            }
+
             var movementNumber = await mediator.SendAsync(new GenerateMovementNumber(notificationId));
             var shipmentDates = await mediator.SendAsync(new GetShipmentDates(notificationId));
 
@@ -290,6 +298,12 @@
             ViewBag.MovementNumber = await mediator.SendAsync(new GetMovementNumberByMovementId(id));
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult TotalMovementsReached(Guid notificationId)
+        {
+            return View();
         }
     }
 }

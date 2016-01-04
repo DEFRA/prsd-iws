@@ -6,7 +6,6 @@
     using Authorization;
     using Autofac;
     using Copy;
-    using DataAccess.Repositories;
     using Decorators;
     using Documents;
     using Domain;
@@ -87,6 +86,7 @@
             builder.RegisterType<Transaction>().AsSelf();
             builder.RegisterType<DaysRemainingCalculator>().AsSelf();
             builder.RegisterType<FinancialGuaranteeDecisionRequired>().AsSelf();
+            builder.RegisterType<NumberOfMovements>().AsSelf();
             
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();

@@ -115,6 +115,7 @@
     <Compile Include="Movement\MovementStatusTests.cs" />
     <Compile Include="Movement\MovementTests.cs" />
     <Compile Include="Movement\NextAvailableMovementNumberGeneratorTests.cs" />
+    <Compile Include="Movement\NumberOfMovementsTests.cs" />
     <Compile Include="Movement\ShipmentQuantityUnitConverterTests.cs" />
     <Compile Include="NotificationApplication\Annexes\RequiredAnnexesTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />

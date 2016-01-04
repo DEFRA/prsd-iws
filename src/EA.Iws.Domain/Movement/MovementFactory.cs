@@ -1,40 +1,34 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
-    using NotificationApplication.Shipment;
     using NotificationAssessment;
 
     public class MovementFactory
     {
         private readonly MovementNumberGenerator numberGenerator;
+        private readonly NumberOfMovements numberOfMovements;
         private readonly INotificationAssessmentRepository assessmentRepository;
-        private readonly IMovementRepository movementRepository;
-        private readonly IShipmentInfoRepository shipmentRepository;
 
-        public MovementFactory(IShipmentInfoRepository shipmentRepository,
-            IMovementRepository movementRepository,
+        public MovementFactory(NumberOfMovements numberOfMovements,
             INotificationAssessmentRepository assessmentRepository,
             MovementNumberGenerator numberGenerator)
         {
-            this.shipmentRepository = shipmentRepository;
-            this.movementRepository = movementRepository;
+            this.numberOfMovements = numberOfMovements;
             this.assessmentRepository = assessmentRepository;
             this.numberGenerator = numberGenerator;
         }
 
         public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
         {
-            var maxNumberOfShipments = (await shipmentRepository.GetByNotificationId(notificationId)).NumberOfShipments;
-            var currentNumberOfShipments = (await movementRepository.GetAllMovements(notificationId)).Count();
+            var hasMaximumMovements = await numberOfMovements.HasMaximum(notificationId);
 
-            if (maxNumberOfShipments == currentNumberOfShipments)
+            if (hasMaximumMovements)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot create new movement for notification {0} which has used {1} of {2} movements",
-                        notificationId, currentNumberOfShipments, maxNumberOfShipments));
+                    string.Format("Cannot create new movement for notification {0} which has used all available movements",
+                        notificationId));
             }
 
             var notificationStatus = (await assessmentRepository.GetByNotificationId(notificationId)).Status;
