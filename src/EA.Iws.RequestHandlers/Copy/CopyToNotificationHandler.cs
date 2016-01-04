@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
@@ -24,13 +25,17 @@
         private readonly TransportRouteToTransportRouteCopy transportRouteCopier;
         private readonly WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier;
         private readonly ImporterToImporterCopy importerCopier;
+        private readonly AnnexCollectionToAnnexCollectionCopy annexCollectionCopier;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
 
         public CopyToNotificationHandler(IwsContext context,
             NotificationToNotificationCopy copier, 
             ExporterToExporterCopy exporterCopier,
             TransportRouteToTransportRouteCopy transportRouteCopier,
             WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier,
-            ImporterToImporterCopy importerCopier)
+            ImporterToImporterCopy importerCopier,
+            AnnexCollectionToAnnexCollectionCopy annexCollectionCopier,
+            INotificationApplicationRepository notificationApplicationRepository)
         {
             this.context = context;
             this.copier = copier;
@@ -38,6 +43,8 @@
             this.transportRouteCopier = transportRouteCopier;
             this.wasteRecoveryCopier = wasteRecoveryCopier;
             this.importerCopier = importerCopier;
+            this.annexCollectionCopier = annexCollectionCopier;
+            this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
         public async Task<Guid> HandleAsync(CopyToNotification message)
@@ -89,8 +96,8 @@
         {
             var destination = await context.GetNotificationApplication(destinationId);
             var destinationAssessment = await context.NotificationAssessments.SingleAsync(p => p.NotificationApplicationId == destinationId);
-            var destinationFinancialGuarantee =
-                await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == destinationId);
+            var destinationFinancialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == destinationId);
+            var destinationAnnexCollection = await context.AnnexCollections.SingleAsync(p => p.NotificationId == destinationId);
 
             var clone = await GetCopyOfSourceNotification(sourceId);
             var clonedAssessment = await GetCopyOfNotificationAssessment(destinationId);
@@ -102,6 +109,7 @@
             // Remove the destination.
             context.DeleteOnCommit(destinationAssessment);
             context.DeleteOnCommit(destinationFinancialGuarantee);
+            context.DeleteOnCommit(destinationAnnexCollection);
             await context.SaveChangesAsync();
 
             context.DeleteOnCommit(destination);
@@ -120,10 +128,11 @@
             context.FinancialGuarantees.Add(FinancialGuarantee.Create(clone.Id));
 
             // Transport route
-            await CloneTransportRoute(sourceId, clone.Id);
+            await CloneTransportRoute(sourceId, clone.Id, destination.CompetentAuthority);
             await wasteRecoveryCopier.CopyAsync(context, sourceId, clone.Id);
             await exporterCopier.CopyAsync(context, sourceId, clone.Id);
             await importerCopier.CopyAsync(context, sourceId, clone.Id);
+            await annexCollectionCopier.CopyAsync(context, sourceId, clone.Id);
 
             return clone;
         }
@@ -200,14 +209,21 @@
             return context.Database.BeginTransaction(IsolationLevel.ReadCommitted);
         }
 
-        private async Task<TransportRoute> CloneTransportRoute(Guid sourceNotificationId, Guid destinationNotificationId)
+        private async Task<TransportRoute> CloneTransportRoute(Guid sourceNotificationId, Guid destinationNotificationId, UKCompetentAuthority destinationCompetentAuthority)
         {
-            var transportRoute =
-                await context.TransportRoutes.SingleAsync(p => p.NotificationId == sourceNotificationId);
+            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == sourceNotificationId);
+            var sourceCompetentAuthority = (await notificationApplicationRepository.GetById(sourceNotificationId)).CompetentAuthority;
 
             var destinationTransportRoute = new TransportRoute(destinationNotificationId);
 
-            transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute);
+            if (destinationCompetentAuthority == sourceCompetentAuthority)
+            {
+                transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute);
+            }
+            else
+            {
+                transportRouteCopier.CopyTransportRouteWithoutExport(transportRoute, destinationTransportRoute);
+            }
 
             context.TransportRoutes.Add(destinationTransportRoute);
 

@@ -91,8 +91,12 @@
         DELETE FROM [Notification].[FinancialGuarantee]
         WHERE NotificationApplicationId = @NotificationId;
 
+        DELETE FROM [Notification].[AnnexCollection] 
+        WHERE NotificationId = @NotificationId;
+
         DELETE FROM [Notification].[Notification] 
         WHERE Id = @NotificationId;
+
         ";
 
         public static void DeleteDataForNotification(Guid notificationId, IwsContext context)

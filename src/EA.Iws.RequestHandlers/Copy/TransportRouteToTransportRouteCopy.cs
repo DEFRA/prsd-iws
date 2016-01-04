@@ -13,6 +13,13 @@
             CopyCustomsOffices(source, destination);
         }
 
+        public virtual void CopyTransportRouteWithoutExport(TransportRoute source, TransportRoute destination)
+        {
+            CopyStateOfImport(source, destination);
+            CopyTransitStates(source, destination);
+            CopyCustomsOffices(source, destination);
+        }
+
         protected virtual void CopyStateOfExport(TransportRoute source, TransportRoute destination)
         {
             destination.SetStateOfExportForNotification(new StateOfExport(source.StateOfExport.Country,

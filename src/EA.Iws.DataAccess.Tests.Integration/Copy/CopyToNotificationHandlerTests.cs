@@ -7,9 +7,11 @@
     using System.Threading.Tasks;
     using Core.Shared;
     using DataAccess;
+    using DataAccess.Repositories;
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Annexes;
     using Domain.NotificationApplication.Exporter;
     using Domain.NotificationApplication.Importer;
     using Domain.NotificationApplication.Shipment;
@@ -21,6 +23,7 @@
     using Prsd.Core.Domain;
     using RequestHandlers.Copy;
     using Requests.Copy;
+    using Security;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
@@ -31,7 +34,7 @@
         private static readonly Guid UserId = new Guid("7A354C6D-BA5D-49F7-8870-73B2E74E2677");
         private const int SourceNumber = 99991;
         private const int DestinationNumber = 99992;
-        private static readonly UKCompetentAuthority DestinationCompetentAuthority = UKCompetentAuthority.Scotland;
+        private static readonly UKCompetentAuthority DestinationCompetentAuthority = UKCompetentAuthority.England;
         private static readonly NotificationType DestinationNotificationType = NotificationType.Disposal;
 
         private readonly NotificationApplication source;
@@ -42,6 +45,7 @@
 
         public CopyToNotificationHandlerTests()
         {
+            var applicationRepository = A.Fake<INotificationApplicationRepository>();
             SystemTime.Freeze(new DateTime(2015, 1, 1));
             context = new IwsContext(GetUserContext(), A.Fake<IEventDispatcher>());
             handler = new CopyToNotificationHandler(context, 
@@ -49,7 +53,9 @@
                 new ExporterToExporterCopy(), 
                 new TransportRouteToTransportRouteCopy(),
                 new WasteRecoveryToWasteRecoveryCopy(),
-                new ImporterToImporterCopy());
+                new ImporterToImporterCopy(),
+                new AnnexCollectionToAnnexCollectionCopy(),
+                new NotificationApplicationRepository(context, new NotificationApplicationAuthorization(context, GetUserContext())));
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
 
@@ -69,8 +75,11 @@
             context.SaveChanges();
 
             AddNotificationLinkedEntities(source.Id, destination.Id);
-            
+            context.AnnexCollections.Add(new AnnexCollection(destination.Id));
+
             context.SaveChanges();
+            
+            A.CallTo(() => applicationRepository.GetById(A<Guid>.Ignored)).Returns(source);
         }
 
         private IUserContext GetUserContext()
@@ -86,6 +95,7 @@
             AddTransportRoute(sourceId);
             AddWasteRecovery(sourceId);
             AddExporter(sourceId);
+            AddImporter(sourceId);
 
             AddNotificationAssessments(sourceId, destinationId);
             AddFinancialGuarantees(sourceId, destinationId);
@@ -122,6 +132,13 @@
             var exporter = new Exporter(id, TestableAddress.AddlestoneAddress, TestableBusiness.WasteSolutions, TestableContact.SinclairSimms);
 
             context.Exporters.Add(exporter);
+        }
+
+        private void AddImporter(Guid id)
+        {
+            var importer = new Importer(id, TestableAddress.AddlestoneAddress, TestableBusiness.WasteSolutions, TestableContact.SinclairSimms);
+
+            context.Importers.Add(importer);
         }
 
         private void AddNotificationAssessments(Guid sourceId, Guid destinationId)
