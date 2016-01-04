@@ -5,7 +5,12 @@
     public enum ImportNotificationStatus
     {
         New = 1,
+        [Display(Name = "Notification received")]
+        NotificationReceived = 2,
+        Submitted = 3,
         [Display(Name = "Awaiting payment")]
-        NotificationReceived = 2
+        AwaitingPayment = 4,
+        [Display(Name = "Awaiting assessment")]
+        AwaitingAssessment = 5
     }
 }

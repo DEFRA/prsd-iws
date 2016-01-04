@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Prsd.Core;
 
     public class ImportNotificationTransactionCalculator : IImportNotificationTransactionCalculator
     {
@@ -26,11 +27,15 @@
 
         public decimal TotalCredits(IEnumerable<ImportNotificationTransaction> transactions)
         {
+            Guard.ArgumentNotNull(() => transactions, transactions);
+
             return transactions.Sum(t => t.Credit.GetValueOrDefault(0));
         }
 
         public decimal TotalDebits(IEnumerable<ImportNotificationTransaction> transactions)
         {
+            Guard.ArgumentNotNull(() => transactions, transactions);
+
             return transactions.Sum(t => t.Debit.GetValueOrDefault(0));
         }
 
@@ -38,7 +43,7 @@
         {
             var price = await chargeCalculator.GetValue(importNotificationId);
 
-            var balance = await Balance(importNotificationId);
+            var balance = await Balance(importNotificationId) + credit;
 
             return price - balance <= 0;
         }

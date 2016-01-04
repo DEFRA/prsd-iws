@@ -18,12 +18,15 @@
 
         public NotificationType NotificationType { get; private set; }
 
+        public bool IsPaymentFullyReceived { get; private set; }
+
         public ImportNotificationSearchResult(Guid notificationId,
             string number, 
             ImportNotificationStatus status, 
             string exporter, 
             string importer,
-            NotificationType notificationType)
+            NotificationType notificationType,
+            bool isPaymentFullyReceived)
         {
             NotificationId = notificationId;
             NotificationType = notificationType;
@@ -31,6 +34,7 @@
             Status = status;
             Exporter = exporter;
             Importer = importer;
+            IsPaymentFullyReceived = isPaymentFullyReceived;
         }
     }
 }

@@ -20,10 +20,11 @@
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var model = new BasicSearchViewModel();
-
-            model.AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary());
-
+            var model = new BasicSearchViewModel
+            {
+                AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary())
+            };
+            
             return View(model);
         }
 

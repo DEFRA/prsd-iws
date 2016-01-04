@@ -18,7 +18,7 @@
             PreviousStatus = oldStatus;
             NewStatus = newStatus;
             ChangeDate = new DateTimeOffset(SystemTime.UtcNow, TimeSpan.Zero);
-            UserId = userId;
+            UserId = userId.ToString();
         }
 
         public ImportNotificationStatus PreviousStatus { get; private set; }
@@ -27,6 +27,6 @@
         
         public DateTimeOffset ChangeDate { get; private set; }
 
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
     }
 }

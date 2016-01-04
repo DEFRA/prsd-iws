@@ -29,7 +29,7 @@
             {
                 var assessment = await assessmentRepository.GetByNotification(notificationId);
 
-                assessment.Dates.PaymentReceivedDate = date;
+                assessment.PaymentComplete(new DateTimeOffset(date, TimeSpan.Zero));
             }
         }
     }

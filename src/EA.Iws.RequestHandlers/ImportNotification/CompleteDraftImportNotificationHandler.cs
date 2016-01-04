@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ImportNotificationAssessment;
     using DataAccess;
     using DataAccess.Draft;
     using Domain.ImportNotification;
@@ -19,6 +20,7 @@
         private readonly IFacilityRepository facilityRepository;
         private readonly IImporterRepository importerRepository;
         private readonly IImportNotificationRepository importNotificationRepository;
+        private readonly IImportNotificationAssessmentRepository importNotificationAssessmentRepository;
         private readonly IValidator<ImportNotification> importNotificationValidator;
         private readonly IMapper mapper;
         private readonly IProducerRepository producerRepository;
@@ -31,6 +33,7 @@
             IDraftImportNotificationRepository draftImportNotificationRepository,
             IMapper mapper,
             IImportNotificationRepository importNotificationRepository,
+            IImportNotificationAssessmentRepository importNotificationAssessmentRepository,
             IExporterRepository exporterRepository,
             IFacilityRepository facilityRepository,
             IImporterRepository importerRepository,
@@ -45,6 +48,7 @@
             this.draftImportNotificationRepository = draftImportNotificationRepository;
             this.mapper = mapper;
             this.importNotificationRepository = importNotificationRepository;
+            this.importNotificationAssessmentRepository = importNotificationAssessmentRepository;
             this.exporterRepository = exporterRepository;
             this.facilityRepository = facilityRepository;
             this.importerRepository = importerRepository;
@@ -59,10 +63,12 @@
         public async Task<bool> HandleAsync(CompleteDraftImportNotification message)
         {
             var draft = await draftImportNotificationRepository.Get(message.ImportNotificationId);
+            var assessment =
+                await importNotificationAssessmentRepository.GetByNotification(message.ImportNotificationId);
 
             var result = await importNotificationValidator.ValidateAsync(draft);
 
-            if (result.IsValid)
+            if (result.IsValid && assessment.Status == ImportNotificationStatus.NotificationReceived)
             {
                 var notification =
                     await importNotificationRepository.Get(message.ImportNotificationId);
@@ -94,6 +100,8 @@
                 transportRouteRepository.Add(transportRoute);
                 wasteOperationRepository.Add(wasteOperation);
                 wasteTypeRepository.Add(wasteType);
+
+                assessment.Submit();
 
                 await context.SaveChangesAsync();
             }

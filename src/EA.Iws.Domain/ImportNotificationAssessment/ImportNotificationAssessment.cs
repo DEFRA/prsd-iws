@@ -12,10 +12,13 @@
     {
         private enum Trigger
         {
-            Receive = 1
+            Receive = 1,
+            Submit = 2,
+            FullyPaid = 3
         }
 
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> receivedTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> fullyPaidTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
 
@@ -52,14 +55,29 @@
             stateMachine.OnTransitioned(OnTransition);
 
             receivedTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Receive);
+            fullyPaidTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.FullyPaid);
 
             stateMachine.Configure(ImportNotificationStatus.New)
                 .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived);
 
-            stateMachine.Configure(ImportNotificationStatus.NotificationReceived)
-                .OnEntryFrom(receivedTrigger, OnReceived);
+            stateMachine.Configure(ImportNotificationStatus.AwaitingAssessment)
+                .SubstateOf(ImportNotificationStatus.Submitted)
+                .OnEntryFrom(fullyPaidTrigger, OnFullyPaid);
 
+            stateMachine.Configure(ImportNotificationStatus.AwaitingPayment)
+                .SubstateOf(ImportNotificationStatus.Submitted)
+                .Permit(Trigger.FullyPaid, ImportNotificationStatus.AwaitingAssessment);
+
+            stateMachine.Configure(ImportNotificationStatus.NotificationReceived)
+                .OnEntryFrom(receivedTrigger, OnReceived)
+                .Permit(Trigger.Submit, ImportNotificationStatus.AwaitingPayment);
+            
             return stateMachine;
+        }
+
+        private void OnFullyPaid(DateTimeOffset paymentDate)
+        {
+            Dates.PaymentReceivedDate = paymentDate;
         }
 
         private void OnTransition(StateMachine<ImportNotificationStatus, Trigger>.Transition transition)
@@ -82,6 +100,16 @@
         private void OnReceived(DateTimeOffset receivedDate)
         {
             Dates.NotificationReceivedDate = receivedDate;
+        }
+
+        public void Submit()
+        {
+            stateMachine.Fire(Trigger.Submit);
+        }
+
+        public void PaymentComplete(DateTimeOffset date)
+        {
+            stateMachine.Fire(fullyPaidTrigger, date);
         }
     }
 }
