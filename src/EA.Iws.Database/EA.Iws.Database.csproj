@@ -222,6 +222,7 @@
     <Content Include="scripts\Update\Sprint23\20151222-162000-add-annex-collection-table.sql" />
     <Content Include="scripts\Update\Sprint24\20151230-120600-add-import-notification-transaction.sql" />
     <Content Include="scripts\Update\Sprint24\20151231-115800-add-import-submitted-status.sql" />
+    <Content Include="scripts\Update\Sprint24\20160104-145200-add-import-in-assessment-status.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

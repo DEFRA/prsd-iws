@@ -979,7 +979,7 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
-    <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesStatusEnum.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesCommand.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -8,6 +8,10 @@
 
         public DateTime? PaymentReceived { get; set; }
 
+        public DateTime? AssessmentStarted { get; set; }
+
+        public string NameOfOfficer { get; set; }
+
         public bool IsPaymentComplete { get; set; }
     }
 }

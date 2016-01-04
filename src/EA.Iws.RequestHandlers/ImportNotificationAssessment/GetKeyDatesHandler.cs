@@ -29,7 +29,9 @@
                 NotificationReceived = DateTimeOffsetAsDateTime(assessment.Dates.NotificationReceivedDate),
                 PaymentReceived = DateTimeOffsetAsDateTime(assessment.Dates.PaymentReceivedDate),
                 IsPaymentComplete = assessment.Dates.PaymentReceivedDate.HasValue &&
-                await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0)
+                await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0),
+                NameOfOfficer = assessment.Dates.NameOfOfficer,
+                AssessmentStarted = DateTimeOffsetAsDateTime(assessment.Dates.AssessmentStartedDate)
             };
         }
 

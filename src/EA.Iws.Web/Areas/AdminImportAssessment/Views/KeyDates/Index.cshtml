@@ -1,6 +1,7 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates.IndexResources
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels
+@using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates
 @using EA.Prsd.Core.Web.Mvc.RazorHelpers
 @model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates.KeyDatesViewModel
 
@@ -35,7 +36,7 @@
             </td>
             <td>
                 @(Model.NotificationReceivedDate.IsCompleted ? Html.Raw(string.Empty)
-                      : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null))
+                      : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationReceived }, null))
             </td>
         </tr>
 
@@ -65,9 +66,9 @@
         <tr>
             <td>Assessment started</td>
             <td>
-                @if (Model.CommencementDate.IsCompleted)
+                @if (Model.AssessmentStartedDate.IsCompleted)
                 {
-                    @Html.Gds().DisplayDateFor(m => m.CommencementDate.AsDateTime().GetValueOrDefault())
+                    @Html.Gds().DisplayDateFor(m => m.AssessmentStartedDate.AsDateTime().GetValueOrDefault())
                     @byText
                     @Html.DisplayFor(m => m.NameOfOfficer)
                 }
@@ -79,8 +80,8 @@
             <td>
                 @if (Model.PaymentIsComplete)
                 {
-                    @(Model.CommencementDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null))
+                    @(Model.AssessmentStartedDate.IsCompleted ? Html.Raw(string.Empty)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null))
                 }
             </td>
 
@@ -99,10 +100,10 @@
                 }
             </td>
             <td>
-                @if (Model.CommencementDate.IsCompleted)
+                @if (Model.AssessmentStartedDate.IsCompleted)
                 {
                     @(Model.NotificationCompleteDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null))
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationComplete }, null))
                 }
             </td>
 
@@ -126,7 +127,7 @@
                 @if (Model.NotificationCompleteDate.IsCompleted)
                 {
                     @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null))
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationAcknowledged }, null))
                 }
             </td>
 
@@ -179,9 +180,9 @@
         @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
         @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
         @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
-        @Html.HiddenFor(m => m.CommencementDate.Day)
-        @Html.HiddenFor(m => m.CommencementDate.Month)
-        @Html.HiddenFor(m => m.CommencementDate.Year)
+        @Html.HiddenFor(m => m.AssessmentStartedDate.Day)
+        @Html.HiddenFor(m => m.AssessmentStartedDate.Month)
+        @Html.HiddenFor(m => m.AssessmentStartedDate.Year)
         @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
         @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
         @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
@@ -204,7 +205,7 @@
             </div>
         </fieldset>
 
-        if (Model.Command == KeyDatesStatusEnum.AssessmentCommenced)
+        if (Model.Command == KeyDatesCommand.BeginAssessment)
         {
             <fieldset>
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">

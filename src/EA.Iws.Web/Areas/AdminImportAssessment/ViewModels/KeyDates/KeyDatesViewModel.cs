@@ -12,7 +12,7 @@
         public KeyDatesViewModel()
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(true);
-            CommencementDate = new OptionalDateInputViewModel(true);
+            AssessmentStartedDate = new OptionalDateInputViewModel(true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
             DecisionDate = new OptionalDateInputViewModel(true);
@@ -25,8 +25,9 @@
             NotificationReceivedDate = new OptionalDateInputViewModel(keyDates.NotificationReceived, true);
             PaymentReceivedDate = keyDates.PaymentReceived;
             PaymentIsComplete = keyDates.IsPaymentComplete;
+            AssessmentStartedDate = new OptionalDateInputViewModel(keyDates.AssessmentStarted, true);
+            NameOfOfficer = keyDates.NameOfOfficer;
 
-            CommencementDate = new OptionalDateInputViewModel(true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
             DecisionDate = new OptionalDateInputViewModel(true);
@@ -36,7 +37,7 @@
 
         public Guid NotificationId { get; set; }
 
-        public KeyDatesStatusEnum Command { get; set; }
+        public KeyDatesCommand Command { get; set; }
 
         [Display(Name = "NotificationReceivedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
@@ -47,7 +48,7 @@
         public bool PaymentIsComplete { get; set; }
 
         [Display(Name = "CommencementDate", ResourceType = typeof(KeyDatesViewModelResources))]
-        public OptionalDateInputViewModel CommencementDate { get; set; }
+        public OptionalDateInputViewModel AssessmentStartedDate { get; set; }
 
         [Display(Name = "NotificationCompletedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel NotificationCompleteDate { get; set; }
@@ -65,7 +66,7 @@
 
         public bool CommencementComplete
         {
-            get { return CommencementDate.AsDateTime() != null && !string.IsNullOrWhiteSpace(NameOfOfficer); }
+            get { return AssessmentStartedDate.AsDateTime() != null && !string.IsNullOrWhiteSpace(NameOfOfficer); }
         }
 
         public IList<NotificationAssessmentDecision> Decisions { get; set; } 
@@ -77,7 +78,7 @@
                 yield return new ValidationResult(KeyDatesViewModelResources.DateRequiredError, new[] {"NewDate"});
             }
 
-            if (Command == KeyDatesStatusEnum.AssessmentCommenced)
+            if (Command == KeyDatesCommand.BeginAssessment)
             {
                 if (string.IsNullOrWhiteSpace(NameOfOfficer))
                 {

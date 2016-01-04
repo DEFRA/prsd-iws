@@ -11,6 +11,8 @@
         [Display(Name = "Awaiting payment")]
         AwaitingPayment = 4,
         [Display(Name = "Awaiting assessment")]
-        AwaitingAssessment = 5
+        AwaitingAssessment = 5,
+        [Display(Name = "In assessment")]
+        InAssessment = 6
     }
 }

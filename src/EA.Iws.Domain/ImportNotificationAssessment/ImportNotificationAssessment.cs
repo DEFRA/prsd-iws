@@ -14,11 +14,13 @@
         {
             Receive = 1,
             Submit = 2,
-            FullyPaid = 3
+            FullyPaid = 3,
+            BeginAssessment = 4
         }
 
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> receivedTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> fullyPaidTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset, string> beginAssessmentTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
 
@@ -56,13 +58,15 @@
 
             receivedTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Receive);
             fullyPaidTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.FullyPaid);
+            beginAssessmentTrigger = stateMachine.SetTriggerParameters<DateTimeOffset, string>(Trigger.BeginAssessment);
 
             stateMachine.Configure(ImportNotificationStatus.New)
                 .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived);
 
             stateMachine.Configure(ImportNotificationStatus.AwaitingAssessment)
                 .SubstateOf(ImportNotificationStatus.Submitted)
-                .OnEntryFrom(fullyPaidTrigger, OnFullyPaid);
+                .OnEntryFrom(fullyPaidTrigger, OnFullyPaid)
+                .Permit(Trigger.BeginAssessment, ImportNotificationStatus.InAssessment);
 
             stateMachine.Configure(ImportNotificationStatus.AwaitingPayment)
                 .SubstateOf(ImportNotificationStatus.Submitted)
@@ -71,8 +75,17 @@
             stateMachine.Configure(ImportNotificationStatus.NotificationReceived)
                 .OnEntryFrom(receivedTrigger, OnReceived)
                 .Permit(Trigger.Submit, ImportNotificationStatus.AwaitingPayment);
-            
+
+            stateMachine.Configure(ImportNotificationStatus.InAssessment)
+                .OnEntryFrom(beginAssessmentTrigger, OnAssessmentStarted);
+
             return stateMachine;
+        }
+
+        private void OnAssessmentStarted(DateTimeOffset date, string officer)
+        {
+            Dates.AssessmentStartedDate = date;
+            Dates.NameOfOfficer = officer;
         }
 
         private void OnFullyPaid(DateTimeOffset paymentDate)
@@ -110,6 +123,11 @@
         public void PaymentComplete(DateTimeOffset date)
         {
             stateMachine.Fire(fullyPaidTrigger, date);
+        }
+
+        public void BeginAssessment(DateTimeOffset date, string officer)
+        {
+            stateMachine.Fire(beginAssessmentTrigger, date, officer);
         }
     }
 }

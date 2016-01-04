@@ -9,6 +9,10 @@
 
         public DateTimeOffset? PaymentReceivedDate { get; internal set; }
 
+        public DateTimeOffset? AssessmentStartedDate { get; internal set; }
+
+        public string NameOfOfficer { get; internal set; }
+        
         internal ImportNotificationDates()
         {
         }

@@ -11,6 +11,7 @@
         private readonly ImportNotificationAssessment assessment;
 
         private static readonly DateTimeOffset AnyDate = new DateTimeOffset(2016, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        private const string AnyString = "bill and ben the flowerpot men";
 
         public ImportNotificationAssessmentTests()
         {
@@ -85,6 +86,44 @@
             assessment.PaymentComplete(AnyDate);
 
             Assert.Equal(AnyDate, assessment.Dates.PaymentReceivedDate);
+        }
+
+        [Fact]
+        public void BeginAssessment_SetsStatus()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.AwaitingAssessment);
+
+            assessment.BeginAssessment(AnyDate, AnyString);
+
+            Assert.Equal(ImportNotificationStatus.InAssessment, assessment.Status);
+        }
+
+        [Fact]
+        public void BeginAssessment_SetsDate()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.AwaitingAssessment);
+
+            assessment.BeginAssessment(AnyDate, AnyString);
+
+            Assert.Equal(AnyDate, assessment.Dates.AssessmentStartedDate);
+        }
+
+        [Fact]
+        public void BeginAssessment_SetsNameOfOfficer()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.AwaitingAssessment);
+
+            assessment.BeginAssessment(AnyDate, AnyString);
+
+            Assert.Equal(AnyString, assessment.Dates.NameOfOfficer);
+        }
+
+        [Fact]
+        public void BeginAssessment_FromAwaitingPayment_Throws()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.AwaitingPayment);
+
+            Assert.Throws<InvalidOperationException>(() => assessment.BeginAssessment(AnyDate, AnyString));
         }
 
         private void SetNotificationAssessmentStatus(ImportNotificationStatus status)
