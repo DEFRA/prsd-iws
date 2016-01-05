@@ -20,6 +20,7 @@
 
     internal class GetSummaryHandler : IRequestHandler<GetSummary, InProgressImportNotificationSummary>
     {
+        private readonly IImportNotificationAssessmentRepository assessmentRepository;
         private readonly IImportNotificationRepository importNotificationRepository;
         private readonly Domain.ICountryRepository countryRepository;
         private readonly IDraftImportNotificationRepository draftRepository;
@@ -30,6 +31,7 @@
         public GetSummaryHandler(IImportNotificationRepository importNotificationRepository,
             Domain.ICountryRepository countryRepository,
             IDraftImportNotificationRepository draftRepository,
+            IImportNotificationAssessmentRepository assessmentRepository,
             TransportRouteSummary transportRouteSummary,
             WasteTypeSummary wasteTypeSummary)
         {
@@ -38,6 +40,7 @@
             this.draftRepository = draftRepository;
             this.transportRouteSummary = transportRouteSummary;
             this.wasteTypeSummary = wasteTypeSummary;
+            this.assessmentRepository = assessmentRepository;
         }
 
         public async Task<InProgressImportNotificationSummary> HandleAsync(GetSummary message)
@@ -53,6 +56,7 @@
                 Id = notification.Id,
                 Type = notification.NotificationType,
                 Number = notification.NotificationNumber,
+                Status = await assessmentRepository.GetStatusByNotification(message.Id),
                 Exporter = await GetExporter(message.Id),
                 Facilities = await GetFacilities(message.Id),
                 Importer = await GetImporter(message.Id),
@@ -66,10 +70,10 @@
                 WasteType = await wasteTypeSummary.GetWasteType(message.Id),
                 AreFacilitiesPreconsented = await GetFacilityPreconsent(message.Id)
             };
-            
+
             return summary;
         }
-        
+
         private async Task<Producer> GetProducer(Guid id)
         {
             var producer = await draftRepository.GetDraftData<Draft.Producer>(id);
@@ -118,7 +122,7 @@
                 return new Facility[0];
             }
 
-            return facilitiesCollection.Facilities.Select(f => 
+            return facilitiesCollection.Facilities.Select(f =>
             new Facility
             {
                 Address = ConvertAddress(f.Address),
@@ -153,7 +157,7 @@
                 OperationCodes = wasteOperation.OperationCodes,
                 TechnologyEmployed = wasteOperation.TechnologyEmployed
             };
-        } 
+        }
 
         private Address ConvertAddress(Draft.Address address)
         {

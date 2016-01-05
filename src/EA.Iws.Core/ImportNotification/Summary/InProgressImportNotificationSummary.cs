@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using ImportNotificationAssessment;
     using Shared;
 
     public class InProgressImportNotificationSummary
@@ -9,6 +10,8 @@
         public Guid Id { get; set; }
 
         public NotificationType Type { get; set; }
+
+        public ImportNotificationStatus Status { get; set; }
 
         public string Number { get; set; }
 

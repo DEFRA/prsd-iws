@@ -3,6 +3,7 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.ImportNotificationAssessment;
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
 
@@ -28,6 +29,11 @@
         public void Add(ImportNotificationAssessment assessment)
         {
             context.ImportNotificationAssessments.Add(assessment);
+        }
+
+        public async Task<ImportNotificationStatus> GetStatusByNotification(Guid notificationId)
+        {
+            return (await GetByNotification(notificationId)).Status;
         }
     }
 }
