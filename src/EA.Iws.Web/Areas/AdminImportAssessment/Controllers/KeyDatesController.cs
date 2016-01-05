@@ -49,6 +49,12 @@
                         mediator.SendAsync(new SetAssessmentStartedDate(id, model.NewDate.AsDateTime().Value,
                             model.NameOfOfficer));
                     break;
+                case KeyDatesCommand.NotificationComplete:
+                    await mediator.SendAsync(new SetNotificationCompletedDate(id, model.NewDate.AsDateTime().Value));
+                    break;
+                case KeyDatesCommand.NotificationAcknowledged:
+                    await mediator.SendAsync(new SetAcknowlegedDate(id, model.NewDate.AsDateTime().Value));
+                    break;
                 default:
                     break;
             }
@@ -62,10 +68,6 @@
 
             switch (command)
             {
-                case KeyDatesCommand.NotificationReceived:
-                    model.NewDate = model.NotificationReceivedDate;
-                    break;
-
                 case KeyDatesCommand.BeginAssessment:
                     model.NewDate = model.AssessmentStartedDate;
                     break;
@@ -76,6 +78,9 @@
 
                 case KeyDatesCommand.NotificationAcknowledged:
                     model.NewDate = model.NotificationAcknowledgedDate;
+                    break;
+
+                default:
                     break;
             }
         }

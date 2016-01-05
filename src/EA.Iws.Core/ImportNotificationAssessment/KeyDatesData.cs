@@ -13,5 +13,9 @@
         public string NameOfOfficer { get; set; }
 
         public bool IsPaymentComplete { get; set; }
+
+        public DateTime? NotificationCompletedDate { get; set; }
+
+        public DateTime? AcknowlegedDate { get; set; }
     }
 }

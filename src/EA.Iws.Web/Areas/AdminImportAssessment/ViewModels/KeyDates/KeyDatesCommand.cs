@@ -4,16 +4,13 @@
 
     public enum KeyDatesCommand
     {
-        [Display(Name = "Notification received")]
-        NotificationReceived = 1,
-
         [Display(Name = "Assessment started")]
-        BeginAssessment = 2,
+        BeginAssessment = 1,
 
         [Display(Name = "Date completed")]
-        NotificationComplete = 4,
+        NotificationComplete = 2,
 
         [Display(Name = "Acknowledged on")]
-        NotificationAcknowledged = 5
+        NotificationAcknowledged = 3
     }
 }

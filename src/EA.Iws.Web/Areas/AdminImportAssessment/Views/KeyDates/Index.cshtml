@@ -1,6 +1,5 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates.IndexResources
 @using EA.Iws.Core.NotificationAssessment
-@using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels
 @using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates
 @using EA.Prsd.Core.Web.Mvc.RazorHelpers
 @model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates.KeyDatesViewModel
@@ -35,8 +34,6 @@
                 }
             </td>
             <td>
-                @(Model.NotificationReceivedDate.IsCompleted ? Html.Raw(string.Empty)
-                      : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationReceived }, null))
             </td>
         </tr>
 

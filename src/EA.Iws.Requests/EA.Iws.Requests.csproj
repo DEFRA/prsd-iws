@@ -97,8 +97,10 @@
     <Compile Include="ImportMovement\Edit\SetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceipt.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejection.cs" />
+    <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
+    <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverview.cs" />

@@ -147,7 +147,9 @@
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetAcknowlegedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDateHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPaymentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverviewHandler.cs" />

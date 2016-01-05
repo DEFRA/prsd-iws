@@ -12,7 +12,11 @@
         public DateTimeOffset? AssessmentStartedDate { get; internal set; }
 
         public string NameOfOfficer { get; internal set; }
-        
+
+        public DateTimeOffset? NotificationCompletedDate { get; internal set; }
+
+        public DateTimeOffset? AcknowledgedDate { get; internal set; }
+
         internal ImportNotificationDates()
         {
         }

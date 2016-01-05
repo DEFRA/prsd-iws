@@ -126,6 +126,62 @@
             Assert.Throws<InvalidOperationException>(() => assessment.BeginAssessment(AnyDate, AnyString));
         }
 
+        [Fact]
+        public void NotificationComplete_SetsStatus()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.InAssessment);
+
+            assessment.CompleteNotification(AnyDate);
+
+            Assert.Equal(ImportNotificationStatus.ReadyToAcknowledge, assessment.Status);
+        }
+        
+        [Fact]
+        public void NotificationComplete_SetsDate()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.InAssessment);
+
+            assessment.CompleteNotification(AnyDate);
+
+            Assert.Equal(AnyDate, assessment.Dates.NotificationCompletedDate);
+        }
+
+        [Fact]
+        public void CannotCompleteNotificationNotInAssessment()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.NotificationReceived);
+
+            Assert.Throws<InvalidOperationException>(() => assessment.CompleteNotification(AnyDate));
+        }
+
+        [Fact]
+        public void Acknowledge_SetsStatus()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.ReadyToAcknowledge);
+
+            assessment.Acknowledge(AnyDate);
+
+            Assert.Equal(ImportNotificationStatus.DecisionRequiredBy, assessment.Status);
+        }
+
+        [Fact]
+        public void Acknowledge_SetsDate()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.ReadyToAcknowledge);
+
+            assessment.Acknowledge(AnyDate);
+
+            Assert.Equal(AnyDate, assessment.Dates.AcknowledgedDate);
+        }
+
+        [Fact]
+        public void CannotAcknowledgeWhenNotReadyForAssessment()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.InAssessment);
+
+            Assert.Throws<InvalidOperationException>(() => assessment.Acknowledge(AnyDate));
+        }
+
         private void SetNotificationAssessmentStatus(ImportNotificationStatus status)
         {
             ObjectInstantiator<ImportNotificationAssessment>.SetProperty(x => x.Status, status, assessment);

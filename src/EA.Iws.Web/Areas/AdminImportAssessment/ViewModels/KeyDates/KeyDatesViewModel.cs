@@ -27,9 +27,9 @@
             PaymentIsComplete = keyDates.IsPaymentComplete;
             AssessmentStartedDate = new OptionalDateInputViewModel(keyDates.AssessmentStarted, true);
             NameOfOfficer = keyDates.NameOfOfficer;
+            NotificationCompleteDate = new OptionalDateInputViewModel(keyDates.NotificationCompletedDate, true);
+            NotificationAcknowledgedDate = new OptionalDateInputViewModel(keyDates.AcknowlegedDate, true);
 
-            NotificationCompleteDate = new OptionalDateInputViewModel(true);
-            NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
             DecisionDate = new OptionalDateInputViewModel(true);
             NewDate = new OptionalDateInputViewModel(true);
             Decisions = new List<NotificationAssessmentDecision>();

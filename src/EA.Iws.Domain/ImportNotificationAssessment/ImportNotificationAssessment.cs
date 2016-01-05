@@ -15,12 +15,16 @@
             Receive = 1,
             Submit = 2,
             FullyPaid = 3,
-            BeginAssessment = 4
+            BeginAssessment = 4,
+            CompleteNotification = 5,
+            Acknowledge = 6
         }
 
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> receivedTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> fullyPaidTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset, string> beginAssessmentTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> completeNotificationTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> acknowledgeTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
 
@@ -59,6 +63,8 @@
             receivedTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Receive);
             fullyPaidTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.FullyPaid);
             beginAssessmentTrigger = stateMachine.SetTriggerParameters<DateTimeOffset, string>(Trigger.BeginAssessment);
+            completeNotificationTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.CompleteNotification);
+            acknowledgeTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Acknowledge);
 
             stateMachine.Configure(ImportNotificationStatus.New)
                 .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived);
@@ -77,9 +83,27 @@
                 .Permit(Trigger.Submit, ImportNotificationStatus.AwaitingPayment);
 
             stateMachine.Configure(ImportNotificationStatus.InAssessment)
-                .OnEntryFrom(beginAssessmentTrigger, OnAssessmentStarted);
+                .OnEntryFrom(beginAssessmentTrigger, OnAssessmentStarted)
+                .Permit(Trigger.CompleteNotification, ImportNotificationStatus.ReadyToAcknowledge);
+
+            stateMachine.Configure(ImportNotificationStatus.ReadyToAcknowledge)
+                .OnEntryFrom(completeNotificationTrigger, OnNotificationCompleted)
+                .Permit(Trigger.Acknowledge, ImportNotificationStatus.DecisionRequiredBy);
+
+            stateMachine.Configure(ImportNotificationStatus.DecisionRequiredBy)
+                .OnEntryFrom(acknowledgeTrigger, OnAcknowledged);
 
             return stateMachine;
+        }
+
+        private void OnAcknowledged(DateTimeOffset acknowledgedDate)
+        {
+            Dates.AcknowledgedDate = acknowledgedDate;
+        }
+
+        private void OnNotificationCompleted(DateTimeOffset completedDate)
+        {
+            Dates.NotificationCompletedDate = completedDate;
         }
 
         private void OnAssessmentStarted(DateTimeOffset date, string officer)
@@ -128,6 +152,16 @@
         public void BeginAssessment(DateTimeOffset date, string officer)
         {
             stateMachine.Fire(beginAssessmentTrigger, date, officer);
+        }
+
+        public void CompleteNotification(DateTimeOffset date)
+        {
+            stateMachine.Fire(completeNotificationTrigger, date);
+        }
+
+        public void Acknowledge(DateTimeOffset date)
+        {
+            stateMachine.Fire(acknowledgeTrigger, date);
         }
     }
 }

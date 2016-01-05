@@ -13,6 +13,10 @@
         [Display(Name = "Awaiting assessment")]
         AwaitingAssessment = 5,
         [Display(Name = "In assessment")]
-        InAssessment = 6
+        InAssessment = 6,
+        [Display(Name = "Ready to acknowledge")]
+        ReadyToAcknowledge = 7,
+        [Display(Name = "Decision required by")]
+        DecisionRequiredBy = 8
     }
 }
