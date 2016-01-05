@@ -9,13 +9,16 @@
     {
         private readonly MovementNumberGenerator numberGenerator;
         private readonly NumberOfMovements numberOfMovements;
+        private readonly NotificationMovementsQuantity movementsQuantity;
         private readonly INotificationAssessmentRepository assessmentRepository;
 
         public MovementFactory(NumberOfMovements numberOfMovements,
+            NotificationMovementsQuantity movementsQuantity,
             INotificationAssessmentRepository assessmentRepository,
             MovementNumberGenerator numberGenerator)
         {
             this.numberOfMovements = numberOfMovements;
+            this.movementsQuantity = movementsQuantity;
             this.assessmentRepository = assessmentRepository;
             this.numberGenerator = numberGenerator;
         }
@@ -28,6 +31,15 @@
             {
                 throw new InvalidOperationException(
                     string.Format("Cannot create new movement for notification {0} which has used all available movements",
+                        notificationId));
+            }
+
+            var quantityRemaining = await movementsQuantity.Remaining(notificationId);
+
+            if (quantityRemaining <= 0)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Cannot create new movement for notification {0} as the quantity has been reached or exceeded.", 
                         notificationId));
             }
 
