@@ -838,6 +838,7 @@
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityReached.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityExceeded.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -1416,6 +1417,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TotalActiveLoadsReachedResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityExceededResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2962,6 +2968,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UploadChoiceViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalActiveLoadsReachedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityExceededResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

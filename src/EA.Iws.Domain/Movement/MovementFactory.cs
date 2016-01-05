@@ -11,16 +11,19 @@
         private readonly NumberOfMovements numberOfMovements;
         private readonly NotificationMovementsQuantity movementsQuantity;
         private readonly INotificationAssessmentRepository assessmentRepository;
+        private readonly NumberOfActiveLoads numberOfActiveLoads;
 
         public MovementFactory(NumberOfMovements numberOfMovements,
             NotificationMovementsQuantity movementsQuantity,
             INotificationAssessmentRepository assessmentRepository,
-            MovementNumberGenerator numberGenerator)
+            MovementNumberGenerator numberGenerator,
+            NumberOfActiveLoads numberOfActiveLoads)
         {
             this.numberOfMovements = numberOfMovements;
             this.movementsQuantity = movementsQuantity;
             this.assessmentRepository = assessmentRepository;
             this.numberGenerator = numberGenerator;
+            this.numberOfActiveLoads = numberOfActiveLoads;
         }
 
         public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
@@ -31,6 +34,15 @@
             {
                 throw new InvalidOperationException(
                     string.Format("Cannot create new movement for notification {0} which has used all available movements",
+                        notificationId));
+            }
+            
+            var hasMaximumActiveLoads = await numberOfActiveLoads.HasMaximum(notificationId);
+
+            if (hasMaximumActiveLoads)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Cannot create new movement for notification {0} because permitted active loads would be exceeded",
                         notificationId));
             }
 

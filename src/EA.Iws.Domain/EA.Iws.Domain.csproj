@@ -123,6 +123,7 @@
     <Compile Include="ImportNotification\WasteOperationCode.cs" />
     <Compile Include="ImportNotification\Shipment.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
+    <Compile Include="Movement\NumberOfActiveLoads.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />

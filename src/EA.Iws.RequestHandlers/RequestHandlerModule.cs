@@ -90,7 +90,8 @@
             builder.RegisterType<DaysRemainingCalculator>().AsSelf();
             builder.RegisterType<FinancialGuaranteeDecisionRequired>().AsSelf();
             builder.RegisterType<NumberOfMovements>().AsSelf();
-            
+            builder.RegisterType<NumberOfActiveLoads>().AsSelf();
+
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();
             builder.RegisterType<WorkingDayCalculator>().As<IWorkingDayCalculator>();

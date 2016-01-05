@@ -1,15 +1,18 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.Movement;
     using Core.NotificationAssessment;
     using Core.Shared;
+    using Domain.FinancialGuarantee;
     using Domain.Movement;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using FakeItEasy;
     using TestHelpers.DomainFakes;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class MovementFactoryTests
@@ -20,17 +23,20 @@
         private readonly IMovementRepository movementRepository;
         private readonly IShipmentInfoRepository shipmentRepository;
         private readonly INotificationAssessmentRepository assessmentRepository;
+        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
 
         public MovementFactoryTests()
         {
             shipmentRepository = A.Fake<IShipmentInfoRepository>();
             movementRepository = A.Fake<IMovementRepository>();
             assessmentRepository = A.Fake<INotificationAssessmentRepository>();
+            financialGuaranteeRepository = A.Fake<IFinancialGuaranteeRepository>();
 
             var movementNumberGenerator = new MovementNumberGenerator(new NextAvailableMovementNumberGenerator(movementRepository), movementRepository, shipmentRepository);
             var numberOfMovements = new NumberOfMovements(movementRepository, shipmentRepository);
             var movementsQuatity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
-            factory = new MovementFactory(numberOfMovements, movementsQuatity, assessmentRepository, movementNumberGenerator);
+            var numberOfActiveLoads = new NumberOfActiveLoads(movementRepository, financialGuaranteeRepository);
+            factory = new MovementFactory(numberOfMovements, movementsQuatity, assessmentRepository, movementNumberGenerator, numberOfActiveLoads);
         }
 
         [Fact]
@@ -70,9 +76,29 @@
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
+            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+
             var movement = await factory.Create(NotificationId, AnyDate);
 
             Assert.NotNull(movement);
+        }
+
+        [Fact]
+        public async Task CurrentActiveLoadsEqualsPermitted_Throws()
+        {
+            CreateShipmentInfo(maxNumberOfShipments: 1);
+
+            A.CallTo(() => movementRepository.GetAllMovements(NotificationId))
+                .Returns(new Movement[0]);
+
+            A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
+                .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
+
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
+            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(2));
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, AnyDate));
         }
 
         [Fact]
@@ -95,6 +121,9 @@
         public async Task QuantityNotReached_DoesNotThrow()
         {
             SetupMovements(1000, 900);
+
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
+            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             await factory.Create(NotificationId, AnyDate);
         }
@@ -143,6 +172,26 @@
             };
 
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipment);
+        }
+
+        private static FinancialGuarantee GetFinancialGuarantee()
+        {
+            var fg = FinancialGuarantee.Create(new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD9"));
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(f => f.ActiveLoadsPermitted, 2, fg);
+
+            return fg;
+        }
+
+        private IEnumerable<Movement> GetMovementArray(int n)
+        {
+            var movements = new List<Movement>();
+
+            for (int i = 0; i < n; i++)
+            {
+                movements.Add(new Movement(i + 1, NotificationId, AnyDate));
+            }
+
+            return movements;
         }
     }
 }

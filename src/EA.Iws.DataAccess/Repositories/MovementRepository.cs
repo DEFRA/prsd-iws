@@ -8,6 +8,7 @@
     using Core.Movement;
     using Domain.Movement;
     using Domain.Security;
+    using Prsd.Core;
 
     internal class MovementRepository : IMovementRepository
     {
@@ -73,6 +74,20 @@
                 .ToArrayAsync();
 
             return movements;
+        }
+
+        public async Task<IEnumerable<Movement>> GetActiveMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentActiveLoads = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && (m.Status == MovementStatus.Submitted
+                        || m.Status == MovementStatus.Received)
+                    && m.Date < SystemTime.UtcNow).ToArrayAsync();
+
+            return currentActiveLoads;
         }
     }
 }

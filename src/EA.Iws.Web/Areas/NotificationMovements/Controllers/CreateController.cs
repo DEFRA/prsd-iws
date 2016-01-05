@@ -65,6 +65,10 @@
             {
                 return RedirectToAction("TotalIntendedQuantityExceeded");
             }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalActiveLoadsReached");
+            }
 
             throw new InvalidOperationException("Unknown rule view");
         }
@@ -325,7 +329,13 @@
         {
             return View();
         }
-
+        
+        [HttpGet]
+        public ActionResult TotalActiveLoadsReached(Guid notificationId)
+        {
+            return View();
+        }
+        
         [HttpGet]
         public ActionResult TotalIntendedQuantityReached(Guid notificationId)
         {
