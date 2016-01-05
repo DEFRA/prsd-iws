@@ -834,7 +834,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedDates.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\Index.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
-    <None Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
