@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Core.ImportNotificationAssessment;
     using Domain.ImportNotification;
+    using Domain.ImportNotificationAssessment.Decision;
     using Domain.ImportNotificationAssessment.Transactions;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
@@ -11,12 +12,15 @@
     public class GetKeyDatesHandler : IRequestHandler<GetKeyDates, KeyDatesData>
     {
         private readonly IImportNotificationAssessmentRepository notificationAssessmentRepository;
+        private readonly DecisionRequiredBy decisionRequiredBy;
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
 
         public GetKeyDatesHandler(IImportNotificationAssessmentRepository notificationAssessmentRepository,
+           DecisionRequiredBy decisionRequiredBy,
             IImportNotificationTransactionCalculator transactionCalculator)
         {
             this.notificationAssessmentRepository = notificationAssessmentRepository;
+            this.decisionRequiredBy = decisionRequiredBy;
             this.transactionCalculator = transactionCalculator;
         }
 
@@ -33,7 +37,8 @@
                 NameOfOfficer = assessment.Dates.NameOfOfficer,
                 AssessmentStarted = DateTimeOffsetAsDateTime(assessment.Dates.AssessmentStartedDate),
                 NotificationCompletedDate = DateTimeOffsetAsDateTime(assessment.Dates.NotificationCompletedDate),
-                AcknowlegedDate = DateTimeOffsetAsDateTime(assessment.Dates.AcknowledgedDate)
+                AcknowlegedDate = DateTimeOffsetAsDateTime(assessment.Dates.AcknowledgedDate),
+                DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment)
             };
         }
 

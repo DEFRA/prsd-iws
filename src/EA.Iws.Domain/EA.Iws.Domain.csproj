@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeOffsetRange.cs" />
     <Compile Include="EmailAddress.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="FinancialGuarantee\IFinancialGuaranteeDecisionRepository.cs" />
@@ -67,6 +68,12 @@
     <Compile Include="ImportMovement\IRejectImportMovement.cs" />
     <Compile Include="ImportMovement\ReceiveImportMovement.cs" />
     <Compile Include="ImportMovement\RejectImportMovement.cs" />
+    <Compile Include="ImportNotificationAssessment\Consent\ConsentImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\Consent\IImportConsentRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\Consent\ImportConsent.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\DecisionRequiredBy.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\DecisionRequiredByCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\IDecisionRequiredByCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />

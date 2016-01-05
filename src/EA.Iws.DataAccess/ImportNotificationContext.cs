@@ -4,6 +4,7 @@
     using Domain.ImportMovement;
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
+    using Domain.ImportNotificationAssessment.Consent;
     using Domain.ImportNotificationAssessment.Transactions;
     using Mappings.Imports;
     using Prsd.Core.Domain;
@@ -45,6 +46,8 @@
         public virtual DbSet<ImportNotificationAssessment> ImportNotificationAssessments { get; set; }
 
         public virtual DbSet<ImportNotificationTransaction> ImportNotificationTransactions { get; set; }
+
+        public virtual DbSet<ImportConsent> ImportConsents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

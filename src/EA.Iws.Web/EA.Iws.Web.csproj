@@ -833,6 +833,8 @@
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedQuantity.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedDates.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\Index.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Decision\Index.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Decision\_Consent.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
@@ -977,8 +979,15 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DecisionViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesCommand.cs" />
@@ -991,6 +1000,11 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\Decision\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\KeyDates\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2335,11 +2349,19 @@
     <Folder Include="Areas\NotificationApplication\ViewModels\RecoveryInfo\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecisionViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PaymentDetailsViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AccountManagement\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\Decision\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

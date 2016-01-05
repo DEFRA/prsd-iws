@@ -2,7 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using Consent;
+    using Core.Admin;
     using Core.ImportNotificationAssessment;
+    using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -17,13 +21,21 @@
             FullyPaid = 3,
             BeginAssessment = 4,
             CompleteNotification = 5,
-            Acknowledge = 6
+            Acknowledge = 6,
+            Consent = 7
         }
+
+        private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
+            = new BidirectionalDictionary<DecisionType, Trigger>(new Dictionary<DecisionType, Trigger>
+            {
+                { DecisionType.Consent, Trigger.Consent }
+            });
 
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> receivedTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> fullyPaidTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset, string> beginAssessmentTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> completeNotificationTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> consentedTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> acknowledgeTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
@@ -65,6 +77,7 @@
             beginAssessmentTrigger = stateMachine.SetTriggerParameters<DateTimeOffset, string>(Trigger.BeginAssessment);
             completeNotificationTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.CompleteNotification);
             acknowledgeTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Acknowledge);
+            consentedTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Consent);
 
             stateMachine.Configure(ImportNotificationStatus.New)
                 .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived);
@@ -91,9 +104,18 @@
                 .Permit(Trigger.Acknowledge, ImportNotificationStatus.DecisionRequiredBy);
 
             stateMachine.Configure(ImportNotificationStatus.DecisionRequiredBy)
-                .OnEntryFrom(acknowledgeTrigger, OnAcknowledged);
+                .OnEntryFrom(acknowledgeTrigger, OnAcknowledged)
+                .Permit(Trigger.Consent, ImportNotificationStatus.Consented);
+
+            stateMachine.Configure(ImportNotificationStatus.Consented)
+                .OnEntryFrom(consentedTrigger, OnConsented);
 
             return stateMachine;
+        }
+
+        private void OnConsented(DateTimeOffset consentDate)
+        {
+            Dates.ConsentedDate = consentDate;
         }
 
         private void OnAcknowledged(DateTimeOffset acknowledgedDate)
@@ -162,6 +184,25 @@
         public void Acknowledge(DateTimeOffset date)
         {
             stateMachine.Fire(acknowledgeTrigger, date);
+        }
+
+        public IEnumerable<DecisionType> GetAvailableDecisions()
+        {
+            var triggers = stateMachine.PermittedTriggers
+                .Where(t => DecisionTriggers.ContainsKey(t))
+                .Select(t => DecisionTriggers[t]);
+
+            return triggers;
+        }
+
+        internal ImportConsent Consent(DateTimeOffsetRange dateRange,
+            string conditions,
+            Guid userId,
+            DateTimeOffset consentedDate)
+        {
+            stateMachine.Fire(consentedTrigger, consentedDate);
+
+            return new ImportConsent(NotificationApplicationId, dateRange, conditions, userId);
         }
     }
 }

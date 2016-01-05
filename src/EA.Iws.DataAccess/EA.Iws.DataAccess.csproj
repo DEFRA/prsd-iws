@@ -88,6 +88,7 @@
     <Compile Include="ImportNotificationContext.cs" />
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\Common\ActivityMapping.cs" />
+    <Compile Include="Mappings\Common\DateTimeOffsetRangeMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookRecordMapping.cs" />
     <Compile Include="Mappings\Common\DateRangeMapping.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportConsentMapping.cs" />
     <Compile Include="Mappings\Imports\ContactMapping.cs" />
     <Compile Include="Mappings\Imports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Imports\FacilityMapping.cs" />
@@ -201,6 +203,7 @@
     <Compile Include="Repositories\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ExporterRepository.cs" />
     <Compile Include="Repositories\Imports\FacilityRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportConsentRepository.cs" />
     <Compile Include="Repositories\Imports\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementCompletedReceiptRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />

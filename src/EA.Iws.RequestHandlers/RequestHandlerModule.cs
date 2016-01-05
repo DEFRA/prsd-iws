@@ -13,6 +13,7 @@
     using Domain.ImportMovement;
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
+    using Domain.ImportNotificationAssessment.Consent;
     using Domain.ImportNotificationAssessment.Transactions;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -125,7 +126,8 @@
 
             RegisterImportNotificationFinance(builder);
             RegisterExportNotificationAnnexes(builder);
-
+            RegisterImportNotificationAssessment(builder);
+            
             // Rules
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IMovementRule>()
@@ -166,6 +168,13 @@
             builder.RegisterType<WasteCompositionNameGenerator>().AsSelf();
             builder.RegisterType<TechnologyEmployedNameGenerator>().AsSelf();
             builder.RegisterType<RequiredAnnexes>().AsSelf();
+        }
+
+        private void RegisterImportNotificationAssessment(ContainerBuilder builder)
+        {
+            builder.RegisterType<ConsentImportNotification>().AsSelf();
+            builder.RegisterType<Domain.ImportNotificationAssessment.Decision.DecisionRequiredBy>().AsSelf();
+            builder.RegisterType<Domain.ImportNotificationAssessment.Decision.DecisionRequiredByCalculator>().As<Domain.ImportNotificationAssessment.Decision.IDecisionRequiredByCalculator>();
         }
     }
 }

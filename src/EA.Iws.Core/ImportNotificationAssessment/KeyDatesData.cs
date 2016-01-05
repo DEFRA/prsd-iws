@@ -17,5 +17,7 @@
         public DateTime? NotificationCompletedDate { get; set; }
 
         public DateTime? AcknowlegedDate { get; set; }
+
+        public DateTime? DecisionRequiredByDate { get; set; }
     }
 }

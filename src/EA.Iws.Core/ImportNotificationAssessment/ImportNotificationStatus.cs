@@ -17,6 +17,8 @@
         [Display(Name = "Ready to acknowledge")]
         ReadyToAcknowledge = 7,
         [Display(Name = "Decision required by")]
-        DecisionRequiredBy = 8
+        DecisionRequiredBy = 8,
+        [Display(Name = "Consented")]
+        Consented = 9
     }
 }

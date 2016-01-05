@@ -79,6 +79,7 @@
     <Compile Include="ImportMovement\ImportMovementRecoveryData.cs" />
     <Compile Include="ImportMovement\ImportMovementReceiptData.cs" />
     <Compile Include="ImportMovement\MovementRejectionReasons.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />

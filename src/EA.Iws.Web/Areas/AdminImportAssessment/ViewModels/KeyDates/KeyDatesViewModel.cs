@@ -29,8 +29,7 @@
             NameOfOfficer = keyDates.NameOfOfficer;
             NotificationCompleteDate = new OptionalDateInputViewModel(keyDates.NotificationCompletedDate, true);
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(keyDates.AcknowlegedDate, true);
-
-            DecisionDate = new OptionalDateInputViewModel(true);
+            DecisionDate = new OptionalDateInputViewModel(keyDates.DecisionRequiredByDate, true);
             NewDate = new OptionalDateInputViewModel(true);
             Decisions = new List<NotificationAssessmentDecision>();
         }

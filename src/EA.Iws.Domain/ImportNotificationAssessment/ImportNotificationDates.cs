@@ -17,6 +17,8 @@
 
         public DateTimeOffset? AcknowledgedDate { get; internal set; }
 
+        public DateTimeOffset? ConsentedDate { get; internal set; }
+
         internal ImportNotificationDates()
         {
         }
