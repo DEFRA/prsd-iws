@@ -294,7 +294,7 @@
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
-    <Compile Include="NotificationMovements\HasReachedTotalMovementsHandler.cs" />
+    <Compile Include="NotificationMovements\GetMovementRulesSummaryHandler.cs" />
     <Compile Include="Movement\Mappings\MovementDateHistoryMap.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternalHandler.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryDataHandler.cs" />
@@ -365,6 +365,9 @@
     <Compile Include="NotificationMovements\GetReceivedMovementsHandler.cs" />
     <Compile Include="NotificationMovements\Mappings\PackagingDataMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
+    <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityExceeded.cs" />
+    <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityReached.cs" />
+    <Compile Include="NotificationMovements\Rules\TotalShipmentsReached.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesToBeProvidedHandler.cs" />

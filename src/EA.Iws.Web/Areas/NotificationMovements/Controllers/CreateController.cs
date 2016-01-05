@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
     using Core.PackagingType;
+    using Core.Rules;
     using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -33,11 +35,11 @@
         [HttpGet]
         public async Task<ActionResult> ShipmentDate(Guid notificationId)
         {
-            var hasReachedTotalMovements = await mediator.SendAsync(new HasReachedTotalMovements(notificationId));
+            var ruleSummary = await mediator.SendAsync(new GetMovementRulesSummary(notificationId));
 
-            if (hasReachedTotalMovements)
+            if (!ruleSummary.IsSuccess)
             {
-                return RedirectToAction("TotalMovementsReached");
+                return GetRuleErrorView(ruleSummary);
             }
 
             var movementNumber = await mediator.SendAsync(new GenerateMovementNumber(notificationId));
@@ -47,6 +49,24 @@
             var model = new ShipmentDateViewModel(shipmentDates, movementNumber);
 
             return View(model);
+        }
+
+        private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
+        {
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalShipmentsReached && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalMovementsReached");
+            }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityReached && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalIntendedQuantityReached");
+            }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityExceeded && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalIntendedQuantityExceeded");
+            }
+
+            throw new InvalidOperationException("Unknown rule view");
         }
 
         [HttpPost]
@@ -302,6 +322,18 @@
 
         [HttpGet]
         public ActionResult TotalMovementsReached(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult TotalIntendedQuantityReached(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult TotalIntendedQuantityExceeded(Guid notificationId)
         {
             return View();
         }

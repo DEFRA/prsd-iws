@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Requests.NotificationMovements
 {
     using System;
+    using Core.Movement;
     using Prsd.Core.Mediator;
 
-    public class HasReachedTotalMovements : IRequest<bool>
+    public class GetMovementRulesSummary : IRequest<MovementRulesSummary>
     {
-        public HasReachedTotalMovements(Guid notificationId)
+        public GetMovementRulesSummary(Guid notificationId)
         {
             NotificationId = notificationId;
         }

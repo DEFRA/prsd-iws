@@ -120,7 +120,10 @@
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\DateHistory.cs" />
+    <Compile Include="Movement\IMovementRule.cs" />
     <Compile Include="Movement\MovementReceiptAndRecoveryData.cs" />
+    <Compile Include="Movement\MovementRules.cs" />
+    <Compile Include="Movement\MovementRulesSummary.cs" />
     <Compile Include="Movement\MovementStatus.cs" />
     <Compile Include="Movement\NewMovementDetails.cs" />
     <Compile Include="Movement\ShipmentDates.cs" />
@@ -137,6 +140,8 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
+    <Compile Include="Rules\MessageLevel.cs" />
+    <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\TransactionRecordData.cs" />
     <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\CompetentAuthority.cs" />

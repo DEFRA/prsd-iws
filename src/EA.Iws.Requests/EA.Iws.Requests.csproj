@@ -127,7 +127,7 @@
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
-    <Compile Include="NotificationMovements\HasReachedTotalMovements.cs" />
+    <Compile Include="NotificationMovements\GetMovementRulesSummary.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternal.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\Summary\GetMovementSummary.cs" />
@@ -180,7 +180,6 @@
     <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />
-    <Compile Include="Response.cs" />
     <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />

@@ -6,6 +6,7 @@
     using Authorization;
     using Autofac;
     using Copy;
+    using Core.Movement;
     using Decorators;
     using Documents;
     using Domain;
@@ -124,6 +125,11 @@
 
             RegisterImportNotificationFinance(builder);
             RegisterExportNotificationAnnexes(builder);
+
+            // Rules
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AssignableTo<IMovementRule>()
+                .As<IMovementRule>();
         }
 
         private static bool HasAsposeLicense()
