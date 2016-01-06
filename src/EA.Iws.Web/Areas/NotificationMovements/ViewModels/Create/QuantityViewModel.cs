@@ -40,9 +40,9 @@
 
         public IList<ShipmentQuantityUnits> AvailableUnits { get; set; }
 
-        [Display(Name = "Actual quantity")]
-        [Required(ErrorMessage = "Please enter a number")]
-        [IsValidNumber(maxPrecision: 18, ErrorMessage = "The actual quantity must be a valid number")]
+        [Display(Name = "ActualQuantity", ResourceType = typeof(QuantityViewModelResources))]
+        [Required(ErrorMessageResourceName = "ActualQuantityRequired", ErrorMessageResourceType = typeof(QuantityViewModelResources))]
+        [IsValidNumber(maxPrecision: 18, ErrorMessageResourceName = "ActualQuantityIsValid", ErrorMessageResourceType = typeof(QuantityViewModelResources))]
         public string Quantity { get; set; }
 
         public ShipmentQuantityUnits? Units { get; set; }
@@ -60,14 +60,14 @@
 
             if (quantity <= 0)
             {
-                yield return new ValidationResult("The actual quantity must be a positive value", new[] { "Quantity" });
+                yield return new ValidationResult(QuantityViewModelResources.ActualQuantityPositive, new[] { "Quantity" });
             }
 
             if (Units.HasValue && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) != quantity)
             {
-                yield return new ValidationResult("Please enter a valid positive number with a maximum of "
-                    + ShipmentQuantityUnitsMetadata.Precision[Units.Value]
-                    + " decimal places",
+                yield return new ValidationResult(string.Format(
+                    QuantityViewModelResources.ActualQuantityPrecision,
+                    ShipmentQuantityUnitsMetadata.Precision[Units.Value]),
                     new[] { "Quantity" });
             }
         }

@@ -130,11 +130,19 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Quantity(Guid notificationId, QuantityViewModel model)
+        public async Task<ActionResult> Quantity(Guid notificationId, QuantityViewModel model)
         {
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[QuantityKey] = model.Quantity;
             TempData[UnitKey] = model.Units;
+
+            var hasExceededTotalQuantity =
+                await mediator.SendAsync(new HasExceededConsentedQuantity(notificationId, Convert.ToDecimal(model.Quantity), model.Units.Value));
+
+            if (hasExceededTotalQuantity)
+            {
+                ModelState.AddModelError("Quantity", QuantityViewModelResources.HasExceededTotalQuantity);
+            }
 
             if (!ModelState.IsValid)
             {

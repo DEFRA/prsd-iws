@@ -1437,6 +1437,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConsentWithdrawnResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\QuantityViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuantityViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2984,6 +2989,10 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\SearchViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SearchViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\Create\QuantityViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QuantityViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\Reject\RejectViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

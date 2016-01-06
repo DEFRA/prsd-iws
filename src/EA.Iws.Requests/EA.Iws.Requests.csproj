@@ -129,6 +129,7 @@
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="NotificationMovements\GetMovementRulesSummary.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternal.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryData.cs" />

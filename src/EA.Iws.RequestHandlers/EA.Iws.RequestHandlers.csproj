@@ -296,6 +296,7 @@
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
     <Compile Include="NotificationMovements\GetMovementRulesSummaryHandler.cs" />
     <Compile Include="Movement\Mappings\MovementDateHistoryMap.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternalHandler.cs" />
