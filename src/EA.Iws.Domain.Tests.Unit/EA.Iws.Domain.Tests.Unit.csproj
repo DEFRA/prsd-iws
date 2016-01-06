@@ -148,6 +148,7 @@
     <Compile Include="PhoneNumberTests.cs" />
     <Compile Include="ProducerBusinessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShipmentQuantityTests.cs" />
     <Compile Include="StateOfExportTests.cs" />
     <Compile Include="TransportRoute\RequiredCustomsOfficesTests.cs" />
     <Compile Include="UserTests.cs" />
