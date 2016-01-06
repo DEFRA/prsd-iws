@@ -86,6 +86,10 @@
             {
                 return RedirectToAction("ConsentExpiresInThreeOrLessWorkingDays");
             }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentWithdrawn && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentWithdrawn");
+            }
 
             throw new InvalidOperationException("Unknown rule view");
         }
@@ -387,6 +391,12 @@
         public async Task<ActionResult> RedirectToShipmentDate(Guid notificationId)
         {
             return await ReturnShipmentDateView(notificationId);
+        }
+
+        [HttpGet]
+        public ActionResult ConsentWithdrawn(Guid notificationId)
+        {
+            return View();
         }
     }
 }

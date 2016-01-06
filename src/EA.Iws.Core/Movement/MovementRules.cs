@@ -8,6 +8,7 @@
         ActiveLoadsReached = 4,
         ConsentPeriodExpired = 5,
         ConsentExpiresInFourWorkingDays = 6,
-        ConsentExpiresInThreeOrLessWorkingDays = 7
+        ConsentExpiresInThreeOrLessWorkingDays = 7,
+        ConsentWithdrawn = 8
     }
 }
