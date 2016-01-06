@@ -6,6 +6,8 @@
         TotalIntendedQuantityReached = 2,
         TotalIntendedQuantityExceeded = 3,
         ActiveLoadsReached = 4,
-        ConsentPeriodExpired = 5
+        ConsentPeriodExpired = 5,
+        ConsentExpiresInFourWorkingDays = 6,
+        ConsentExpiresInThreeOrLessWorkingDays = 7
     }
 }

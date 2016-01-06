@@ -8,6 +8,7 @@
     using Core.Shared;
     using Domain.FinancialGuarantee;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using FakeItEasy;
@@ -27,6 +28,8 @@
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
         private readonly INotificationConsentRepository consentRepository;
+        private readonly IWorkingDayCalculator workingDayCalculator;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
 
         public MovementFactoryTests()
         {
@@ -35,12 +38,15 @@
             assessmentRepository = A.Fake<INotificationAssessmentRepository>();
             financialGuaranteeRepository = A.Fake<IFinancialGuaranteeRepository>();
             consentRepository = A.Fake<INotificationConsentRepository>();
+            workingDayCalculator = A.Fake<IWorkingDayCalculator>();
+            notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
 
             var movementNumberGenerator = new MovementNumberGenerator(new NextAvailableMovementNumberGenerator(movementRepository), movementRepository, shipmentRepository);
             var numberOfMovements = new NumberOfMovements(movementRepository, shipmentRepository);
             var movementsQuatity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
             var numberOfActiveLoads = new NumberOfActiveLoads(movementRepository, financialGuaranteeRepository);
-            factory = new MovementFactory(numberOfMovements, movementsQuatity, assessmentRepository, movementNumberGenerator, numberOfActiveLoads, new ConsentPeriod(consentRepository));
+            var consentPeriod = new ConsentPeriod(consentRepository, workingDayCalculator, notificationApplicationRepository);
+            factory = new MovementFactory(numberOfMovements, movementsQuatity, assessmentRepository, movementNumberGenerator, numberOfActiveLoads, consentPeriod);
         }
 
         [Fact]

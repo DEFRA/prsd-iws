@@ -42,13 +42,18 @@
                 return GetRuleErrorView(ruleSummary);
             }
 
+            return await ReturnShipmentDateView(notificationId);
+        }
+
+        private async Task<ActionResult> ReturnShipmentDateView(Guid notificationId)
+        {
             var movementNumber = await mediator.SendAsync(new GenerateMovementNumber(notificationId));
             var shipmentDates = await mediator.SendAsync(new GetShipmentDates(notificationId));
 
             ViewBag.MovementNumber = movementNumber;
             var model = new ShipmentDateViewModel(shipmentDates, movementNumber);
 
-            return View(model);
+            return View("ShipmentDate", model);
         }
 
         private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
@@ -72,6 +77,14 @@
             else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentPeriodExpired && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("ConsentPeriodExpired");
+            }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInFourWorkingDays && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentExpiresInFourWorkingDays");
+            }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInThreeOrLessWorkingDays && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentExpiresInThreeOrLessWorkingDays");
             }
 
             throw new InvalidOperationException("Unknown rule view");
@@ -356,6 +369,24 @@
         public ActionResult ConsentPeriodExpired(Guid notificationId)
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult ConsentExpiresInFourWorkingDays(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ConsentExpiresInThreeOrLessWorkingDays(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> RedirectToShipmentDate(Guid notificationId)
+        {
+            return await ReturnShipmentDateView(notificationId);
         }
     }
 }
