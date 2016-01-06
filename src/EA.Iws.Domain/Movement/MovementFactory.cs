@@ -4,9 +4,10 @@
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using NotificationAssessment;
-
+    using Prsd.Core;
     public class MovementFactory
     {
+        private readonly IMovementDateValidator dateValidator;
         private readonly MovementNumberGenerator numberGenerator;
         private readonly NumberOfMovements numberOfMovements;
         private readonly NotificationMovementsQuantity movementsQuantity;
@@ -19,18 +20,20 @@
             INotificationAssessmentRepository assessmentRepository,
             MovementNumberGenerator numberGenerator,
             NumberOfActiveLoads numberOfActiveLoads,
-            ConsentPeriod consentPeriod)
+            IMovementDateValidator dateValidator)
         {
             this.numberOfMovements = numberOfMovements;
             this.movementsQuantity = movementsQuantity;
             this.assessmentRepository = assessmentRepository;
             this.numberGenerator = numberGenerator;
             this.numberOfActiveLoads = numberOfActiveLoads;
-            this.consentPeriod = consentPeriod;
+            this.dateValidator = dateValidator;
         }
 
         public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
         {
+            await dateValidator.EnsureDateValid(notificationId, actualMovementDate);
+
             var hasMaximumMovements = await numberOfMovements.HasMaximum(notificationId);
 
             if (hasMaximumMovements)

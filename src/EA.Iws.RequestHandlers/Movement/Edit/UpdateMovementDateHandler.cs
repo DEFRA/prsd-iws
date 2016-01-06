@@ -8,12 +8,12 @@
 
     internal class UpdateMovementDateHandler : IRequestHandler<UpdateMovementDate, bool>
     {
-        private readonly IMovementDateValidator validator;
+        private readonly IUpdatedMovementDateValidator validator;
         private readonly IwsContext context;
         private readonly IMovementRepository repository;
 
         public UpdateMovementDateHandler(IMovementRepository repository,
-            IMovementDateValidator validator,
+            IUpdatedMovementDateValidator validator,
             IwsContext context)
         {
             this.repository = repository;

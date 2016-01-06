@@ -116,7 +116,7 @@
             StatusChangeCollection.Add(statusChange);
         }
 
-        public async Task UpdateDate(DateTime newDate, IMovementDateValidator validator)
+        public async Task UpdateDate(DateTime newDate, IUpdatedMovementDateValidator validator)
         {
             await validator.EnsureDateValid(this, newDate);
 

@@ -106,6 +106,7 @@
             builder.RegisterType<NotificationTransactionCalculator>().As<INotificationTransactionCalculator>();
 
             builder.RegisterType<MovementDateValidator>().As<IMovementDateValidator>();
+            builder.RegisterType<UpdatedMovementDateValidator>().As<IUpdatedMovementDateValidator>();
             builder.RegisterType<ImportMovementFactory>().As<IImportMovementFactory>();
             builder.RegisterType<ImportMovementNumberValidator>().As<IImportMovementNumberValidator>();
             builder.RegisterType<Validator>().As<IValidator>();

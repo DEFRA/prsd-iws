@@ -14,11 +14,11 @@
     {
         private static readonly Guid NotificationId = new Guid("5FE8E146-2584-43CF-A2A7-FD3911924502");
         private static readonly DateTime Today = new DateTime(2015, 1, 1);
-        private readonly IMovementDateValidator validator;
+        private readonly IUpdatedMovementDateValidator validator;
 
         public MovementDateTests()
         {
-            validator = A.Fake<IMovementDateValidator>();
+            validator = A.Fake<IUpdatedMovementDateValidator>();
 
             SystemTime.Freeze(Today);
         }

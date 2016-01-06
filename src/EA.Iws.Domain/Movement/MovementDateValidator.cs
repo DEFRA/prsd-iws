@@ -2,64 +2,50 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Core.Movement;
     using NotificationApplication;
     using NotificationConsent;
     using Prsd.Core;
 
     public class MovementDateValidator : IMovementDateValidator
     {
-        private readonly INotificationApplicationRepository notificationRepository;
         private readonly IWorkingDayCalculator workingDayCalculator;
-        private readonly OriginalMovementDate originalMovementDate;
+        private readonly INotificationApplicationRepository notificationRepository;
         private readonly INotificationConsentRepository consentRepository;
 
         public MovementDateValidator(INotificationConsentRepository consentRepository,
-            OriginalMovementDate originalMovementDate,
-            IWorkingDayCalculator workingDayCalculator,
-            INotificationApplicationRepository notificationRepository)
+            INotificationApplicationRepository notificationRepository,
+            IWorkingDayCalculator workingDayCalculator)
         {
             this.consentRepository = consentRepository;
-            this.originalMovementDate = originalMovementDate;
-            this.workingDayCalculator = workingDayCalculator;
             this.notificationRepository = notificationRepository;
+            this.workingDayCalculator = workingDayCalculator;
         }
 
-        public async Task EnsureDateValid(Movement movement, DateTime newDate)
+        public async Task EnsureDateValid(Guid notificationId, DateTime date)
         {
-            if (movement.Status != MovementStatus.Submitted)
-            {
-                throw new MovementDateException(string.Format(
-                    "Can't set new movement date {0} because the movement is not in the submitted state (state: {1})",
-                    newDate,
-                    movement.Status));
-            }
+            var consent = await consentRepository.GetByNotificationId(notificationId);
 
-            if (newDate < SystemTime.UtcNow)
-            {
-                throw new MovementDateException(string.Format(
-                    "Can't set new movement date {0} since it is in the past",
-                    newDate));
-            }
-
-            var consent = await consentRepository.GetByNotificationId(movement.NotificationId);
-
-            if (!consent.ConsentRange.Contains(newDate))
+            if (!consent.ConsentRange.Contains(date))
             {
                 throw new MovementDateException(string.Format(
                     "Can't set new movement date {0} since it is outside the consent range for this notification",
-                    newDate));
+                    date));
             }
 
-            var originalDate = await originalMovementDate.Get(movement);
-            var notification = await notificationRepository.GetByMovementId(movement.Id);
-            var includeStartDate = false;
-            if (newDate > workingDayCalculator.AddWorkingDays(originalDate, 10, includeStartDate, notification.CompetentAuthority))
+            if (date < SystemTime.UtcNow)
             {
                 throw new MovementDateException(string.Format(
-                    "Can't set new movement date {0} since it is more than 10 working days after the original shipment date {1}",
-                    newDate,
-                    originalDate));
+                    "Can't set new movement date {0} since it is in the past",
+                    date));
+            }
+
+            var includeStartDay = false;
+            var notification = await notificationRepository.GetById(notificationId);
+            if (date > workingDayCalculator.AddWorkingDays(SystemTime.UtcNow, 30, includeStartDay, notification.CompetentAuthority))
+            {
+                throw new MovementDateException(string.Format(
+                    "Can't set new movement date {0} since it is more than 30 working days in the future",
+                    date));
             }
         }
     }

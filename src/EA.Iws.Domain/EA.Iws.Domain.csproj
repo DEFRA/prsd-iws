@@ -126,6 +126,8 @@
     <Compile Include="Movement\MovementDetailsFactory.cs" />
     <Compile Include="Movement\NumberOfActiveLoads.cs" />
     <Compile Include="Movement\ConsentPeriod.cs" />
+    <Compile Include="Movement\IMovementDateValidator.cs" />
+    <Compile Include="Movement\MovementDateValidator.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
@@ -181,9 +183,9 @@
     <Compile Include="LocalArea.cs" />
     <Compile Include="Movement\OriginalMovementDate.cs" />
     <Compile Include="Movement\IMovementDateHistoryRepository.cs" />
-    <Compile Include="Movement\IMovementDateValidator.cs" />
+    <Compile Include="Movement\IUpdatedMovementDateValidator.cs" />
     <Compile Include="Movement\MovementDateException.cs" />
-    <Compile Include="Movement\MovementDateValidator.cs" />
+    <Compile Include="Movement\UpdatedMovementDateValidator.cs" />
     <Compile Include="Movement\IMovementDetailsRepository.cs" />
     <Compile Include="Movement\ICapturedMovementFactory.cs" />
     <Compile Include="Movement\IMovementNumberGenerator.cs" />

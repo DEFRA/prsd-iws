@@ -14,14 +14,15 @@
     using FakeItEasy;
     using NotificationApplication;
     using NotificationConsent;
+    using Prsd.Core;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class MovementFactoryTests
+    public class MovementFactoryTests : IDisposable
     {
         private static readonly Guid NotificationId = new Guid("0E38E99F-A997-4014-8438-62B56E0398DF");
-        private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
+        private static readonly DateTime Today = new DateTime(2015, 1, 1);
         private readonly MovementFactory factory;
         private readonly IMovementRepository movementRepository;
         private readonly IShipmentInfoRepository shipmentRepository;
@@ -30,9 +31,12 @@
         private readonly INotificationConsentRepository consentRepository;
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IMovementDateValidator dateValidator;
 
         public MovementFactoryTests()
         {
+            SystemTime.Freeze(Today);
+
             shipmentRepository = A.Fake<IShipmentInfoRepository>();
             movementRepository = A.Fake<IMovementRepository>();
             assessmentRepository = A.Fake<INotificationAssessmentRepository>();
@@ -41,12 +45,21 @@
             workingDayCalculator = A.Fake<IWorkingDayCalculator>();
             notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
 
-            var movementNumberGenerator = new MovementNumberGenerator(new NextAvailableMovementNumberGenerator(movementRepository), movementRepository, shipmentRepository);
+            dateValidator = A.Fake<IMovementDateValidator>();
+
+            var movementNumberGenerator = new MovementNumberGenerator(new NextAvailableMovementNumberGenerator(movementRepository), 
+                movementRepository, 
+                shipmentRepository);
             var numberOfMovements = new NumberOfMovements(movementRepository, shipmentRepository);
             var movementsQuatity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
             var numberOfActiveLoads = new NumberOfActiveLoads(movementRepository, financialGuaranteeRepository);
-            var consentPeriod = new ConsentPeriod(consentRepository, workingDayCalculator, notificationApplicationRepository);
-            factory = new MovementFactory(numberOfMovements, movementsQuatity, assessmentRepository, movementNumberGenerator, numberOfActiveLoads, consentPeriod);
+
+            factory = new MovementFactory(numberOfMovements,
+                movementsQuatity,
+                assessmentRepository,
+                movementNumberGenerator,
+                numberOfActiveLoads,
+                dateValidator);
         }
 
         [Fact]
@@ -62,7 +75,7 @@
 
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new[] { existingMovement });
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, AnyDate));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
         }
 
         [Fact]
@@ -72,7 +85,24 @@
 
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new Movement[0]);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, AnyDate));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
+        }
+
+        [Fact]
+        public async Task DateIsValidated()
+        {
+            CreateShipmentInfo(maxNumberOfShipments: 1);
+
+            A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
+                .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
+
+            A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new Movement[0]);
+
+            var date = Today.AddDays(5);
+
+            await factory.Create(NotificationId, date);
+
+            A.CallTo(() => dateValidator.EnsureDateValid(NotificationId, date)).MustHaveHappened();
         }
 
         [Fact]
@@ -90,7 +120,7 @@
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
             A.CallTo(() => consentRepository.GetByNotificationId(NotificationId)).Returns(ValidConsent());
 
-            var movement = await factory.Create(NotificationId, AnyDate);
+            var movement = await factory.Create(NotificationId, Today);
 
             Assert.NotNull(movement);
         }
@@ -212,6 +242,11 @@
             var nowPlusOne = new DateTime(now.Year + 1, now.Month, now.Day);
 
             return new Consent(NotificationId, new DateRange(new DateTime(2015, 01, 01), nowPlusOne), string.Empty, new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD5"));
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
     }
 }

@@ -22,7 +22,8 @@
 
         private const string AnyString = "test";
 
-        private readonly MovementDateValidator validator;
+        private readonly UpdatedMovementDateValidator updatedDateValidator;
+        private readonly MovementDateValidator dateValidator;
         private readonly INotificationConsentRepository consentRepository;
         private readonly OriginalMovementDate originalMovementDate;
         private readonly IWorkingDayCalculator workingDayCalculator;
@@ -36,8 +37,11 @@
             historyRepository = A.Fake<IMovementDateHistoryRepository>();
             workingDayCalculator = A.Fake<IWorkingDayCalculator>();
 
+            dateValidator = new MovementDateValidator(consentRepository,
+                notificationRepository,
+                workingDayCalculator);
             originalMovementDate = new OriginalMovementDate(historyRepository);
-            validator = new MovementDateValidator(consentRepository,
+            updatedDateValidator = new UpdatedMovementDateValidator(dateValidator,
                 originalMovementDate,
                 workingDayCalculator,
                 notificationRepository);
@@ -60,6 +64,19 @@
 
             A.CallTo(() => historyRepository.GetByMovementId(A<Guid>.Ignored))
                 .Returns(new MovementDateHistory[0]);
+
+            A.CallTo(() => workingDayCalculator.AddWorkingDays(A<DateTime>.Ignored, 
+                A<int>.Ignored, 
+                A<bool>.Ignored, 
+                A<UKCompetentAuthority>.Ignored))
+                    .ReturnsLazily((DateTime inputDate,
+                        int inputDays,
+                        bool includeStartDay,
+                        UKCompetentAuthority ca) =>
+                            //A very simple working day formula that ignores bank holidays taken from http://stackoverflow.com/a/279370
+                            inputDate.AddDays(inputDays 
+                                + ((inputDays / 5) * 2) 
+                                + ((((int)inputDate.DayOfWeek + (inputDays % 5)) >= 5) ? 2 : 0)));
         }
 
         [Theory]
@@ -76,30 +93,46 @@
             var validDate = Today.AddDays(3);
 
             await Assert.ThrowsAsync<MovementDateException>(() =>
-                validator.EnsureDateValid(movement, validDate));
+                updatedDateValidator.EnsureDateValid(movement, validDate));
         }
 
         [Fact]
         public async Task DateInPast_Throws()
         {
-            var movement = new Movement(1, NotificationId, Today);
-            ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
-
             var pastDate = Today.AddDays(-1);
 
             await Assert.ThrowsAsync<MovementDateException>(() =>
-                validator.EnsureDateValid(movement, pastDate));
+                dateValidator.EnsureDateValid(NotificationId, pastDate));
         }
 
         [Fact]
         public async Task DateOutsideConsentRange_Throws()
         {
-            var movement = new Movement(1, NotificationId, ConsentEnd.AddDays(-1));
-            ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
             var dateOutsideConstentRange = ConsentEnd.AddDays(1);
 
             await Assert.ThrowsAsync<MovementDateException>(() =>
-                validator.EnsureDateValid(movement, dateOutsideConstentRange));
+                dateValidator.EnsureDateValid(NotificationId, dateOutsideConstentRange));
+        }
+
+        [Fact]
+        public async Task DateOver30WorkingDaysInFuture_Throws()
+        {
+            //30 working days after 1 Jan 2015 is 42 calendar days (only counting weekends)...
+            var date = Today.AddDays(43);
+
+            await Assert.ThrowsAsync<MovementDateException>(() =>
+                dateValidator.EnsureDateValid(NotificationId, date));
+        }
+
+        [Fact]
+        public async Task DateOf30WorkingDaysInFuture_DoesNotThrow()
+        {
+            //30 working days after 1 Jan 2015 is 42 calendar days (only counting weekends)...
+            var date = Today.AddDays(42);
+
+            await dateValidator.EnsureDateValid(NotificationId, date);
+
+            //No assert required
         }
 
         [Fact]
@@ -108,14 +141,11 @@
             var movement = new Movement(1, NotificationId, Today);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
+            //10 workings days after 1 Jan 2015 is 14 calendar days (only counting weekends)...
             var newDate = Today.AddDays(15);
 
-            // Adding 10 working days is equivalent to adding 14 calendar days (ignoring bank holidays etc.)
-            A.CallTo(() => workingDayCalculator.AddWorkingDays(Today, 10, true, A<UKCompetentAuthority>.Ignored))
-                .Returns(Today.AddDays(14));
-
             await Assert.ThrowsAsync<MovementDateException>(() =>
-                validator.EnsureDateValid(movement, newDate));
+                updatedDateValidator.EnsureDateValid(movement, newDate));
         }
 
         [Fact]
@@ -126,11 +156,7 @@
 
             var validDate = Today.AddDays(3);
 
-            // Adding 10 working days is equivalent to adding 14 calendar days (ignoring bank holidays etc.)
-            A.CallTo(() => workingDayCalculator.AddWorkingDays(Today, 10, false, A<UKCompetentAuthority>.Ignored))
-                .Returns(Today.AddDays(14));
-
-            await validator.EnsureDateValid(movement, validDate);
+            await updatedDateValidator.EnsureDateValid(movement, validDate);
 
             // No assert required
         }
