@@ -32,4 +32,5 @@ AS
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id
     LEFT JOIN [Reports].[Payments] P ON NO.Id = P.NotificationId
+    WHERE NA.[StatusId] <> 1
 GO
