@@ -3,8 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Movement;
+    using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.Movement.Receive;
     using ViewModels.Quantity;
 
     [Authorize]
@@ -14,6 +17,7 @@
         private const string DateReceivedKey = "DateReceived";
         private const string UnitKey = "Unit";
         private const string QuantityKey = "Quantity";
+        private const string ToleranceKey = "Tolerance";
 
         public QuantityReceivedController(IMediator mediator)
         {
@@ -41,7 +45,57 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Guid id, QuantityReceivedViewModel model)
+        public async Task<ActionResult> Index(Guid id, QuantityReceivedViewModel model)
+        {
+            if (!ModelState.IsValid || !model.Quantity.HasValue)
+            {
+                return View(model);
+            }
+
+            var tolerance =
+                await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(id, model.Quantity.Value, model.Unit));
+
+            TempData[DateReceivedKey] = model.DateReceived;
+            TempData[UnitKey] = model.Unit;
+            TempData[QuantityKey] = model.Quantity;
+
+            if (tolerance == QuantityReceivedTolerance.AboveTolerance 
+                || tolerance == QuantityReceivedTolerance.BelowTolerance)
+            {
+                TempData[ToleranceKey] = tolerance;
+                return RedirectToAction("QuantityAbnormal");
+            }
+
+            return RedirectToAction("Index", "ReceiptComplete", new { id });
+        }
+
+        [HttpGet]
+        public ActionResult QuantityAbnormal(Guid id)
+        {
+            object date;
+            object quantity;
+            object unit;
+            object tolerance;
+            if (TempData.TryGetValue(DateReceivedKey, out date)
+                && TempData.TryGetValue(QuantityKey, out quantity)
+                && TempData.TryGetValue(UnitKey, out unit)
+                && TempData.TryGetValue(ToleranceKey, out tolerance))
+            {
+                return View(new QuantityAbnormalViewModel
+                {
+                    Quantity = Convert.ToDecimal(quantity),
+                    Tolerance = (QuantityReceivedTolerance)tolerance,
+                    Unit = (ShipmentQuantityUnits)unit,
+                    DateReceived = Convert.ToDateTime(date)
+                });
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult QuantityAbnormal(Guid id, QuantityAbnormalViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +106,7 @@
             TempData[UnitKey] = model.Unit;
             TempData[QuantityKey] = model.Quantity;
 
-            return RedirectToAction("Index", "ReceiptComplete", new { id });
+            return RedirectToAction("Index", "ReceiptComplete");
         }
     }
 }

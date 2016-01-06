@@ -834,6 +834,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Consent.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormal.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
@@ -1189,6 +1190,22 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuantityAbnormalViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ExportMovement\Views\QuantityReceived\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormalResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuantityAbnormalResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ExportMovement\Views\Reject\SuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2523,6 +2540,18 @@
     <EmbeddedResource Include="Areas\AdminImportMovement\Views\Dates\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QuantityAbnormalViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ExportMovement\Views\QuantityReceived\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormalResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QuantityAbnormalResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\Views\Reject\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

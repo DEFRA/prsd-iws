@@ -1,0 +1,44 @@
+﻿@using EA.Iws.Core.Movement
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@using Resource = EA.Iws.Web.Areas.ExportMovement.Views.QuantityReceived.QuantityAbnormalResources
+@model EA.Iws.Web.Areas.ExportMovement.ViewModels.Quantity.QuantityAbnormalViewModel
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Resource.MainHeading</h1>
+    <p>@Html.Raw(string.Format(Resource.LeadParagraph, Model.Quantity, EnumHelper.GetDisplayName(Model.Unit).ToLower(), (Model.Tolerance == QuantityReceivedTolerance.AboveTolerance) ? "more" : "less"))</p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    
+    @Html.HiddenFor(m => m.Unit)
+    @Html.HiddenFor(m => m.DateReceived)
+    @Html.HiddenFor(m => m.Tolerance)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
+        @Html.LabelFor(m => m.IsCorrect, new { @class="form-label-bold" })
+        @Html.Gds().ValidationMessageFor(m => m.IsCorrect)
+        <fieldset>
+            <label class="block-label" for="yes">
+                @Html.RadioButtonFor(m => m.IsCorrect, true, new { id = "yes" })
+                @Resource.Confirm
+            </label>
+            <label class="block-label" for="no" data-target="change-quantity">
+                @Html.RadioButtonFor(m => m.IsCorrect, false, new { id = "no" })
+                @Resource.Reject
+            </label>
+            <div class="panel-indent @(Model.IsCorrect.GetValueOrDefault(true) ? "js-hidden" : "")" id="change-quantity">
+                @Html.LabelFor(m => m.Quantity, string.Format(Resource.QuantityLabel, EnumHelper.GetDisplayName(Model.Unit).ToLower()), new { @class="form-label" })
+                @Html.Gds().ValidationMessageFor(m => m.Quantity)
+                @Html.Gds().TextBoxFor(m => m.Quantity)
+            </div>
+        </fieldset>
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

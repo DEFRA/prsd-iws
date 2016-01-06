@@ -61,11 +61,11 @@
         }
 
         [Fact]
-        public void PostWithInvalidModel_ReturnsView()
+        public async Task PostWithInvalidModel_ReturnsView()
         {
             controller.ModelState.AddModelError("a", "b");
 
-            var result = controller.Index(AnyGuid, viewModel) as ViewResult;
+            var result = await controller.Index(AnyGuid, viewModel) as ViewResult;
 
             Assert.NotNull(result);
             var modelReturned = Assert.IsType<QuantityReceivedViewModel>(result.Model);
@@ -73,9 +73,9 @@
         }
 
         [Fact]
-        public void Post_RedirectsToCorrectAction()
+        public async Task Post_RedirectsToCorrectAction()
         {
-            var result = controller.Index(AnyGuid, viewModel) as RedirectToRouteResult;
+            var result = await controller.Index(AnyGuid, viewModel) as RedirectToRouteResult;
 
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal("ReceiptComplete", result.RouteValues["controller"]);
