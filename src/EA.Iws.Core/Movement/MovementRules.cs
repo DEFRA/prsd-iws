@@ -5,6 +5,7 @@
         TotalShipmentsReached = 1,
         TotalIntendedQuantityReached = 2,
         TotalIntendedQuantityExceeded = 3,
-        ActiveLoadsReached = 4
+        ActiveLoadsReached = 4,
+        ConsentPeriodExpired = 5
     }
 }

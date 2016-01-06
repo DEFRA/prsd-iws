@@ -12,18 +12,21 @@
         private readonly NotificationMovementsQuantity movementsQuantity;
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly NumberOfActiveLoads numberOfActiveLoads;
+        private readonly ConsentPeriod consentPeriod;
 
         public MovementFactory(NumberOfMovements numberOfMovements,
             NotificationMovementsQuantity movementsQuantity,
             INotificationAssessmentRepository assessmentRepository,
             MovementNumberGenerator numberGenerator,
-            NumberOfActiveLoads numberOfActiveLoads)
+            NumberOfActiveLoads numberOfActiveLoads,
+            ConsentPeriod consentPeriod)
         {
             this.numberOfMovements = numberOfMovements;
             this.movementsQuantity = movementsQuantity;
             this.assessmentRepository = assessmentRepository;
             this.numberGenerator = numberGenerator;
             this.numberOfActiveLoads = numberOfActiveLoads;
+            this.consentPeriod = consentPeriod;
         }
 
         public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
@@ -62,6 +65,15 @@
                 throw new InvalidOperationException(
                     string.Format("Cannot create a movement for notification {0} because it's status is {1}",
                         notificationId, notificationStatus));
+            }
+
+            var consentPeriodExpired = await consentPeriod.HasExpired(notificationId);
+
+            if (consentPeriodExpired)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Cannot create new movement for notification {0} because the consent period has passed",
+                        notificationId));
             }
 
             var newNumber = await numberGenerator.Generate(notificationId);

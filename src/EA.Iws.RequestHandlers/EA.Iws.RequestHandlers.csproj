@@ -371,6 +371,7 @@
     <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityExceeded.cs" />
     <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityReached.cs" />
     <Compile Include="NotificationMovements\Rules\TotalShipmentsReached.cs" />
+    <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesToBeProvidedHandler.cs" />

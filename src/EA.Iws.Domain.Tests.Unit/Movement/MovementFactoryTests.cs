@@ -11,6 +11,8 @@
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using FakeItEasy;
+    using NotificationApplication;
+    using NotificationConsent;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
@@ -24,6 +26,7 @@
         private readonly IShipmentInfoRepository shipmentRepository;
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
+        private readonly INotificationConsentRepository consentRepository;
 
         public MovementFactoryTests()
         {
@@ -31,12 +34,13 @@
             movementRepository = A.Fake<IMovementRepository>();
             assessmentRepository = A.Fake<INotificationAssessmentRepository>();
             financialGuaranteeRepository = A.Fake<IFinancialGuaranteeRepository>();
+            consentRepository = A.Fake<INotificationConsentRepository>();
 
             var movementNumberGenerator = new MovementNumberGenerator(new NextAvailableMovementNumberGenerator(movementRepository), movementRepository, shipmentRepository);
             var numberOfMovements = new NumberOfMovements(movementRepository, shipmentRepository);
             var movementsQuatity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
             var numberOfActiveLoads = new NumberOfActiveLoads(movementRepository, financialGuaranteeRepository);
-            factory = new MovementFactory(numberOfMovements, movementsQuatity, assessmentRepository, movementNumberGenerator, numberOfActiveLoads);
+            factory = new MovementFactory(numberOfMovements, movementsQuatity, assessmentRepository, movementNumberGenerator, numberOfActiveLoads, new ConsentPeriod(consentRepository));
         }
 
         [Fact]
@@ -78,6 +82,7 @@
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => consentRepository.GetByNotificationId(NotificationId)).Returns(ValidConsent());
 
             var movement = await factory.Create(NotificationId, AnyDate);
 
@@ -156,8 +161,8 @@
 
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipment);
             A.CallTo(() => movementRepository.GetMovementsByStatus(NotificationId, MovementStatus.Received)).Returns(new[] { existingMovement });
-            A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
-                .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
+            A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId)).Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
+            A.CallTo(() => consentRepository.GetByNotificationId(NotificationId)).Returns(ValidConsent());
         }
 
         private void CreateShipmentInfo(int maxNumberOfShipments)
@@ -192,6 +197,15 @@
             }
 
             return movements;
+        }
+
+        private Consent ValidConsent()
+        {
+            DateTime now = DateTime.UtcNow;
+
+            var nowPlusOne = new DateTime(now.Year + 1, now.Month, now.Day);
+
+            return new Consent(NotificationId, new DateRange(new DateTime(2015, 01, 01), nowPlusOne), string.Empty, new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD5"));
         }
     }
 }

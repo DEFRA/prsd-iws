@@ -69,6 +69,10 @@
             {
                 return RedirectToAction("TotalActiveLoadsReached");
             }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentPeriodExpired && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentPeriodExpired");
+            }
 
             throw new InvalidOperationException("Unknown rule view");
         }
@@ -344,6 +348,12 @@
 
         [HttpGet]
         public ActionResult TotalIntendedQuantityExceeded(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ConsentPeriodExpired(Guid notificationId)
         {
             return View();
         }
