@@ -48,7 +48,7 @@
                 await
                 mediator.SendAsync(
                     new SetProcessOfGenerationAnnex(new AnnexUpload(GetFileBytes(model.ProcessOfGeneration),
-                        model.ProcessOfGeneration.ContentType, id)));
+                        Path.GetExtension(model.ProcessOfGeneration.FileName), id)));
             }
 
             if (model.TechnologyEmployed != null && model.TechnologyEmployedStatus.IsRequired)
@@ -56,7 +56,7 @@
                 await
                     mediator.SendAsync(
                         new SetTechnologyEmployedAnnex(new AnnexUpload(GetFileBytes(model.TechnologyEmployed),
-                            model.TechnologyEmployed.ContentType, id)));
+                            Path.GetExtension(model.TechnologyEmployed.FileName), id)));
             }
 
             if (model.Composition != null && model.WasteCompositionStatus.IsRequired)
@@ -64,7 +64,7 @@
                 await
                     mediator.SendAsync(
                         new SetWasteCompositionAnnex(new AnnexUpload(GetFileBytes(model.Composition),
-                            model.Composition.ContentType, id)));
+                            Path.GetExtension(model.Composition.FileName), id)));
             }
 
             return RedirectToAction("Index", "Options");

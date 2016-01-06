@@ -794,7 +794,6 @@
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_SepaAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NieaAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwAddress.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\UploadAnnexes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\Unavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\Index.cshtml" />
     <Content Include="Areas\ExportMovement\Views\Reject\Success.cshtml" />

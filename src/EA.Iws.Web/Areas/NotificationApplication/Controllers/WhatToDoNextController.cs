@@ -62,14 +62,6 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> UploadAnnexes(Guid id)
-        {
-            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
-
-            return View(response);
-        }
-
-        [HttpGet]
         public ActionResult CardPaymentInformation(CompetentAuthority competentAuthority)
         {
             switch (competentAuthority)
