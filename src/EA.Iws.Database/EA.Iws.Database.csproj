@@ -223,6 +223,7 @@
     <Content Include="scripts\Update\Sprint24\20151230-120600-add-import-notification-transaction.sql" />
     <Content Include="scripts\Update\Sprint24\20151231-115800-add-import-submitted-status.sql" />
     <Content Include="scripts\Update\Sprint24\20160105-101000-add-import-ready-to-acknowledge-status.sql" />
+    <Content Include="scripts\Update\Sprint24\20160106-114900-set-import-number-of-shipments-where-missing.sql" />
     <Content Include="scripts\Update\Sprint24\20160105-122300-add-import-consent.sql" />
     <Content Include="scripts\Update\Sprint24\20160104-145200-add-import-in-assessment-status.sql" />
     <Content Include="scripts\Update\Sprint24\20160104-165500-delete-multiple-import-submissions.sql" />
