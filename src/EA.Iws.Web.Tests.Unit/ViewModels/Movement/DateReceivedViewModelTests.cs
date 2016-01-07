@@ -2,12 +2,24 @@
 {
     using System;
     using Areas.ExportMovement.ViewModels;
+    using Prsd.Core;
     using TestHelpers;
     using Xunit;
 
-    public class DateReceivedViewModelTests
+    public class DateReceivedViewModelTests : IDisposable
     {
         private static readonly DateTime MovementDate = new DateTime(2015, 9, 1);
+
+        public DateReceivedViewModelTests()
+        {
+            SystemTime.Freeze(new DateTime(2016, 3, 1));
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
+        }
+
         [Theory]
         [InlineData(1, 1, 2016)]
         [InlineData(29, 2, 2016)]

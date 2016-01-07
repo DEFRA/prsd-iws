@@ -54,9 +54,13 @@
             {
                 yield return new ValidationResult("Please enter a valid date", new[] { "Day" });
             }
+            else if (dateReceived.Date > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult("This date cannot be in the future. Please enter a different date.", new[] { "Day" });
+            }
             else if (dateReceived < MovementDate)
             {
-                yield return new ValidationResult("Cannot receive a shipment before the actual shipment date", new[] { "Day" });
+                yield return new ValidationResult("This date cannot be before the actual date of shipment. Please enter a different date.", new[] { "Day" });
             }
         }
 
