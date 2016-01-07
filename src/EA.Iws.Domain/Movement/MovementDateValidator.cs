@@ -8,17 +8,11 @@
 
     public class MovementDateValidator : IMovementDateValidator
     {
-        private readonly IWorkingDayCalculator workingDayCalculator;
-        private readonly INotificationApplicationRepository notificationRepository;
         private readonly INotificationConsentRepository consentRepository;
 
-        public MovementDateValidator(INotificationConsentRepository consentRepository,
-            INotificationApplicationRepository notificationRepository,
-            IWorkingDayCalculator workingDayCalculator)
+        public MovementDateValidator(INotificationConsentRepository consentRepository)
         {
             this.consentRepository = consentRepository;
-            this.notificationRepository = notificationRepository;
-            this.workingDayCalculator = workingDayCalculator;
         }
 
         public async Task EnsureDateValid(Guid notificationId, DateTime date)
@@ -27,7 +21,7 @@
 
             if (!consent.ConsentRange.Contains(date))
             {
-                throw new MovementDateException(string.Format(
+                throw new MovementDateOutsideConsentPeriodException(string.Format(
                     "Can't set new movement date {0} since it is outside the consent range for this notification",
                     date));
             }
@@ -39,12 +33,10 @@
                     date));
             }
 
-            var includeStartDay = false;
-            var notification = await notificationRepository.GetById(notificationId);
-            if (date > workingDayCalculator.AddWorkingDays(SystemTime.UtcNow, 30, includeStartDay, notification.CompetentAuthority))
+            if (date > SystemTime.UtcNow.AddDays(30))
             {
-                throw new MovementDateException(string.Format(
-                    "Can't set new movement date {0} since it is more than 30 working days in the future",
+                throw new MovementDateOutOfRangeException(string.Format(
+                    "Can't set new movement date {0} since it is more than 30 days in the future",
                     date));
             }
         }

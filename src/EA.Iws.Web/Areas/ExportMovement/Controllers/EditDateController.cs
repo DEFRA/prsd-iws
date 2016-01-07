@@ -44,20 +44,28 @@
                 return View(model);
             }
 
-            var validDates = await mediator.SendAsync(new GetMaximumValidMovementDate(id));
+            var proposedDate = await mediator.SendAsync(new IsProposedUpdatedMovementDateValid(id, model.AsDateTime().Value));
 
-            if (model.AsDateTime().Value > validDates.ConsentEnd)
+            if (proposedDate.IsOutsideConsentPeriod)
             {
-                ModelState.AddModelError("Day", string.Format(
-                    "Please enter a date that is within the consent range of {0:dd MMM yyyy} to {1:dd MMM yyyy}",
-                    validDates.ConsentStart,
-                    validDates.ConsentEnd));
-                return View(model);
+                ModelState.AddModelError("Day",
+                    "The actual date of shipment cannot be outside of the consent validity period. Please enter a different date.");
             }
 
-            if (model.AsDateTime().Value > validDates.MaxValidDate)
+            if (proposedDate.IsOutOfRange)
             {
-                ModelState.AddModelError("Day", "Please enter a date that is within 10 working days of the original actual shipment date");
+                ModelState.AddModelError("Day",
+                    "The actual date of shipment cannot be more than 30 calendar days in the future. Please enter a different date.");
+            }
+
+            if (proposedDate.IsOutOfRangeOfOriginalDate)
+            {
+                ModelState.AddModelError("Day",
+                    "The actual date of shipment cannot be more than 10 working days after the original date. Please enter a different date.");
+            }
+
+            if (!ModelState.IsValid)
+            {
                 return View(model);
             }
 

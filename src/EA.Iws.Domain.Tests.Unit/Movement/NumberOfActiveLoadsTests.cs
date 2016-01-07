@@ -7,11 +7,12 @@
     using Domain.FinancialGuarantee;
     using Domain.Movement;
     using FakeItEasy;
+    using Prsd.Core;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class NumberOfActiveLoadsTests
+    public class NumberOfActiveLoadsTests : IDisposable
     {
         private static readonly Guid NotificationId = new Guid("0E38E99F-A997-4014-8438-62B56E0398DF");
         private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
@@ -20,6 +21,8 @@
 
         public NumberOfActiveLoadsTests()
         {
+            SystemTime.Freeze(new DateTime(2015, 1, 1));
+
             movementRepository = A.Fake<IMovementRepository>();
             financialGuaranteeRepository = A.Fake<IFinancialGuaranteeRepository>();
 
@@ -85,10 +88,15 @@
 
             for (int i = 0; i < n; i++)
             {
-                movements.Add(new Movement(i + 1, NotificationId, DateTime.UtcNow));
+                movements.Add(new Movement(i + 1, NotificationId, SystemTime.UtcNow));
             }
 
             return movements;
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
     }
 }

@@ -107,13 +107,32 @@
                 return View(model);
             }
 
+            var proposedMovementDate = await mediator.SendAsync(new IsProposedMovementDateValid(notificationId, model.AsDateTime().Value));
+
+            if (proposedMovementDate.IsOutOfRange)
+            {
+                ModelState.AddModelError("Day", 
+                    "The actual date of shipment cannot be more than 30 calendar days in the future. Please enter a different date.");
+            }
+
+            if (proposedMovementDate.IsOutsideConsentPeriod)
+            {
+                ModelState.AddModelError("Day", 
+                    "The actual date of shipment cannot be outside of the consent validity period. Please enter a different date.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                return View(model);
+            }
+
             var workingDaysUntilShipment = await mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.AsDateTime().GetValueOrDefault()));
 
             if (workingDaysUntilShipment < 4)
             {
                 return RedirectToAction("ThreeWorkingDaysWarning", "Create");
             }
-
             return RedirectToAction("Quantity", "Create");
         }
 

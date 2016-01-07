@@ -53,12 +53,14 @@
             var numberOfMovements = new NumberOfMovements(movementRepository, shipmentRepository);
             var movementsQuatity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
             var numberOfActiveLoads = new NumberOfActiveLoads(movementRepository, financialGuaranteeRepository);
+            var consentPeriod = new ConsentPeriod(consentRepository, workingDayCalculator, notificationApplicationRepository);
 
             factory = new MovementFactory(numberOfMovements,
                 movementsQuatity,
                 assessmentRepository,
                 movementNumberGenerator,
                 numberOfActiveLoads,
+                consentPeriod,
                 dateValidator);
         }
 
@@ -91,12 +93,9 @@
         [Fact]
         public async Task DateIsValidated()
         {
-            CreateShipmentInfo(maxNumberOfShipments: 1);
-
-            A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
-                .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
-
-            A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new Movement[0]);
+            SetupMovements(500, 100);
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
+            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             var date = Today.AddDays(5);
 
@@ -139,7 +138,7 @@
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(2));
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, AnyDate));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
         }
 
         [Fact]
@@ -147,7 +146,7 @@
         {
             SetupMovements(1000, 1000);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, AnyDate));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
         }
 
         [Fact]
@@ -155,7 +154,7 @@
         {
             SetupMovements(1000, 1001);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, AnyDate));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
         }
 
         [Fact]
@@ -166,7 +165,7 @@
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
-            await factory.Create(NotificationId, AnyDate);
+            await factory.Create(NotificationId, Today);
         }
 
         private void SetupMovements(int intendedQuantity, int quantityReceived)
@@ -229,7 +228,7 @@
 
             for (int i = 0; i < n; i++)
             {
-                movements.Add(new Movement(i + 1, NotificationId, AnyDate));
+                movements.Add(new Movement(i + 1, NotificationId, Today));
             }
 
             return movements;
@@ -237,7 +236,7 @@
 
         private Consent ValidConsent()
         {
-            DateTime now = DateTime.UtcNow;
+            var now = SystemTime.UtcNow;
 
             var nowPlusOne = new DateTime(now.Year + 1, now.Month, now.Day);
 

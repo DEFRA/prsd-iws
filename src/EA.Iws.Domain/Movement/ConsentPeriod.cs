@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using NotificationApplication;
     using NotificationConsent;
+    using Prsd.Core;
 
     public class ConsentPeriod
     {
@@ -11,7 +12,7 @@
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
 
-        public ConsentPeriod(INotificationConsentRepository consentRepository, 
+        public ConsentPeriod(INotificationConsentRepository consentRepository,
             IWorkingDayCalculator workingDayCalculator,
             INotificationApplicationRepository notificationApplicationRepository)
         {
@@ -24,7 +25,7 @@
         {
             var consentEndDate = (await consentRepository.GetByNotificationId(notificationId)).ConsentRange.To;
 
-            return consentEndDate < DateTime.UtcNow;
+            return consentEndDate < SystemTime.UtcNow;
         }
 
         public async Task<bool> ExpiresInFourWorkingDays(Guid notificationId)
@@ -34,7 +35,7 @@
 
         public async Task<bool> ExpiresInThreeOrLessWorkingDays(Guid notificationId)
         {
-            return (await GetWorkingDaysToExpiry(notificationId)) < 4  && !(await HasExpired(notificationId));
+            return (await GetWorkingDaysToExpiry(notificationId)) < 4 && !(await HasExpired(notificationId));
         }
 
         private async Task<int> GetWorkingDaysToExpiry(Guid notificationId)
@@ -42,7 +43,7 @@
             var ca = (await notificationApplicationRepository.GetById(notificationId)).CompetentAuthority;
             var consentEndDate = (await consentRepository.GetByNotificationId(notificationId)).ConsentRange.To;
 
-            return workingDayCalculator.GetWorkingDays(DateTime.UtcNow, consentEndDate, true, ca);
+            return workingDayCalculator.GetWorkingDays(SystemTime.UtcNow, consentEndDate, true, ca);
         }
     }
 }

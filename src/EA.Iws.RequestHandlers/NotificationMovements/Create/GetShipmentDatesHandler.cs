@@ -10,18 +10,18 @@
     internal class GetShipmentDatesHandler : IRequestHandler<GetShipmentDates, ShipmentDates>
     {
         private readonly IMapper mapper;
-        private readonly INotificationConsentRepository repository;
+        private readonly INotificationConsentRepository consentRepository;
 
-        public GetShipmentDatesHandler(INotificationConsentRepository repository,
+        public GetShipmentDatesHandler(INotificationConsentRepository consentRepository,
             IMapper mapper)
         {
-            this.repository = repository;
+            this.consentRepository = consentRepository;
             this.mapper = mapper;
         }
 
         public async Task<ShipmentDates> HandleAsync(GetShipmentDates message)
         {
-            var consent = await repository.GetByNotificationId(message.NotificationId);
+            var consent = await consentRepository.GetByNotificationId(message.NotificationId);
 
             return mapper.Map<ShipmentDates>(consent.ConsentRange);
         }

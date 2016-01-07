@@ -4,7 +4,6 @@
     using Areas.NotificationMovements.ViewModels.Create;
     using Core.Movement;
     using Prsd.Core;
-    using TestHelpers;
     using Xunit;
 
     public class ShipmentDateViewModelTests : IDisposable
@@ -17,28 +16,6 @@
         public void Dispose()
         {
             SystemTime.Unfreeze();
-        }
-
-        [Fact]
-        public void DateCannotBeBeforeFirstDateTest()
-        {
-            var model = GetViewModel(new DateTime(2015, 1, 1));
-
-            var errors = ViewModelValidator.ValidateViewModel(model);
-
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("The date is not within the given range", errors[0].ErrorMessage);
-        }
-
-        [Fact]
-        public void DateCannotBeAfterLastDateTest()
-        {
-            var model = GetViewModel(new DateTime(2017, 1, 1));
-
-            var errors = ViewModelValidator.ValidateViewModel(model);
-
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("The date is not within the given range", errors[0].ErrorMessage);
         }
 
         [Fact]

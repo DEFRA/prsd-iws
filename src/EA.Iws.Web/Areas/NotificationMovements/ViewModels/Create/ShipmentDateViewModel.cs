@@ -37,6 +37,7 @@
         public int? Year { get; set; }
 
         public DateTime StartDate { get; set; }
+
         public DateTime EndDate { get; set; }
 
         public string DateHintText
@@ -67,14 +68,20 @@
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             DateTime shipmentDate;
-            bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out shipmentDate);
+            bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(),
+                Month.GetValueOrDefault(),
+                Day.GetValueOrDefault(),
+                out shipmentDate);
+
             if (!isValidDate)
             {
-                yield return new ValidationResult("Please enter a valid date", new[] { "Day" });
+                yield return new ValidationResult("Please enter a valid date",
+                    new[] { "Day" });
             }
-            else if (shipmentDate < StartDate || shipmentDate > EndDate)
+            else if (shipmentDate < SystemTime.UtcNow)
             {
-                yield return new ValidationResult("The date is not within the given range", new[] { "Day" });
+                yield return new ValidationResult("The actual date of shipment cannot be in the past. Please enter a different date.",
+                    new[] { "Day" });
             }
         }
     }

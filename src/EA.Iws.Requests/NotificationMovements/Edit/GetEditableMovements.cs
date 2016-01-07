@@ -5,7 +5,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    public class GetEditableMovements : IRequest<IList<MovementData>>
+    public class GetEditableMovements : IRequest<IEnumerable<MovementData>>
     {
         public Guid NotificationId { get; private set; }
 

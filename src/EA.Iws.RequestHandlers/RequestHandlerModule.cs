@@ -86,7 +86,6 @@
             builder.RegisterType<TransportRouteSummary>().AsSelf();
             builder.RegisterType<WasteTypeSummary>().AsSelf();
             builder.RegisterType<OriginalMovementDate>().AsSelf();
-            builder.RegisterType<ValidMovementDateCalculator>().AsSelf();
             builder.RegisterType<Transaction>().AsSelf();
             builder.RegisterType<DaysRemainingCalculator>().AsSelf();
             builder.RegisterType<FinancialGuaranteeDecisionRequired>().AsSelf();

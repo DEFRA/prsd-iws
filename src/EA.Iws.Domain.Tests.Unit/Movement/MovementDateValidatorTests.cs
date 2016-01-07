@@ -22,8 +22,8 @@
 
         private const string AnyString = "test";
 
-        private readonly UpdatedMovementDateValidator updatedDateValidator;
         private readonly MovementDateValidator dateValidator;
+        private readonly UpdatedMovementDateValidator updatedDateValidator;
         private readonly INotificationConsentRepository consentRepository;
         private readonly OriginalMovementDate originalMovementDate;
         private readonly IWorkingDayCalculator workingDayCalculator;
@@ -37,9 +37,7 @@
             historyRepository = A.Fake<IMovementDateHistoryRepository>();
             workingDayCalculator = A.Fake<IWorkingDayCalculator>();
 
-            dateValidator = new MovementDateValidator(consentRepository,
-                notificationRepository,
-                workingDayCalculator);
+            dateValidator = new MovementDateValidator(consentRepository);
             originalMovementDate = new OriginalMovementDate(historyRepository);
             updatedDateValidator = new UpdatedMovementDateValidator(dateValidator,
                 originalMovementDate,
@@ -110,25 +108,23 @@
         {
             var dateOutsideConstentRange = ConsentEnd.AddDays(1);
 
-            await Assert.ThrowsAsync<MovementDateException>(() =>
+            await Assert.ThrowsAsync<MovementDateOutsideConsentPeriodException>(() =>
                 dateValidator.EnsureDateValid(NotificationId, dateOutsideConstentRange));
         }
 
         [Fact]
-        public async Task DateOver30WorkingDaysInFuture_Throws()
+        public async Task DateOver30DaysInFuture_Throws()
         {
-            //30 working days after 1 Jan 2015 is 42 calendar days (only counting weekends)...
-            var date = Today.AddDays(43);
+            var date = Today.AddDays(31);
 
-            await Assert.ThrowsAsync<MovementDateException>(() =>
+            await Assert.ThrowsAsync<MovementDateOutOfRangeException>(() =>
                 dateValidator.EnsureDateValid(NotificationId, date));
         }
 
         [Fact]
-        public async Task DateOf30WorkingDaysInFuture_DoesNotThrow()
+        public async Task DateOf30DaysInFuture_DoesNotThrow()
         {
-            //30 working days after 1 Jan 2015 is 42 calendar days (only counting weekends)...
-            var date = Today.AddDays(42);
+            var date = Today.AddDays(30);
 
             await dateValidator.EnsureDateValid(NotificationId, date);
 
@@ -144,7 +140,7 @@
             //10 workings days after 1 Jan 2015 is 14 calendar days (only counting weekends)...
             var newDate = Today.AddDays(15);
 
-            await Assert.ThrowsAsync<MovementDateException>(() =>
+            await Assert.ThrowsAsync<MovementDateOutOfRangeOfOriginalDateException>(() =>
                 updatedDateValidator.EnsureDateValid(movement, newDate));
         }
 

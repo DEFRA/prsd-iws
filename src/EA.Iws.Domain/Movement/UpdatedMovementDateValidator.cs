@@ -40,7 +40,7 @@
             var includeStartDate = false;
             if (newDate > workingDayCalculator.AddWorkingDays(originalDate, 10, includeStartDate, notification.CompetentAuthority))
             {
-                throw new MovementDateException(string.Format(
+                throw new MovementDateOutOfRangeOfOriginalDateException(string.Format(
                     "Can't set new movement date {0} since it is more than 10 working days after the original shipment date {1}",
                     newDate,
                     originalDate));

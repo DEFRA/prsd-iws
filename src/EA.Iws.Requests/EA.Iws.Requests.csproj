@@ -121,8 +121,8 @@
     <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
     <Compile Include="ImportNotification\CreateImportNotification.cs" />
     <Compile Include="Movement\CancelMovements.cs" />
-    <Compile Include="Movement\Edit\GetMaximumValidMovementDate.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistory.cs" />
+    <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValid.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDate.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
@@ -133,6 +133,7 @@
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
     <Compile Include="NotificationMovements\GetWorkingDaysUntil.cs" />
     <Compile Include="NotificationMovements\GetMovementRulesSummary.cs" />
+    <Compile Include="NotificationMovements\Create\IsProposedMovementDateValid.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternal.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\Summary\GetMovementSummary.cs" />

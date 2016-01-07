@@ -128,6 +128,8 @@
     <Compile Include="Movement\MovementStatus.cs" />
     <Compile Include="Movement\NewMovementDetails.cs" />
     <Compile Include="Movement\QuantityReceivedTolerance.cs" />
+    <Compile Include="Movement\ProposedMovementDateResponse.cs" />
+    <Compile Include="Movement\ProposedUpdatedMovementDateResponse.cs" />
     <Compile Include="Movement\ShipmentDates.cs" />
     <Compile Include="Movement\SubmittedMovement.cs" />
     <Compile Include="Movement\MovementData.cs" />
@@ -135,7 +137,6 @@
     <Compile Include="Movement\NotificationMovementsSummaryAndTable.cs" />
     <Compile Include="Movement\MovementTableDataRow.cs" />
     <Compile Include="Movement\MovementSummary.cs" />
-    <Compile Include="Movement\ValidMovementDates.cs" />
     <Compile Include="NotificationAssessment\AccountManagementData.cs" />
     <Compile Include="NotificationAssessment\KeyDatesSummaryData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecision.cs" />

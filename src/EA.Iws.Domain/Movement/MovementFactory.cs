@@ -20,6 +20,7 @@
             INotificationAssessmentRepository assessmentRepository,
             MovementNumberGenerator numberGenerator,
             NumberOfActiveLoads numberOfActiveLoads,
+            ConsentPeriod consentPeriod,
             IMovementDateValidator dateValidator)
         {
             this.numberOfMovements = numberOfMovements;
@@ -27,6 +28,7 @@
             this.assessmentRepository = assessmentRepository;
             this.numberGenerator = numberGenerator;
             this.numberOfActiveLoads = numberOfActiveLoads;
+            this.consentPeriod = consentPeriod;
             this.dateValidator = dateValidator;
         }
 
@@ -66,7 +68,7 @@
             if (notificationStatus != NotificationStatus.Consented)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot create a movement for notification {0} because it's status is {1}",
+                    string.Format("Cannot create a movement for notification {0} because its status is {1}",
                         notificationId, notificationStatus));
             }
 

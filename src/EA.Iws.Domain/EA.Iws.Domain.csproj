@@ -127,6 +127,9 @@
     <Compile Include="Movement\NumberOfActiveLoads.cs" />
     <Compile Include="Movement\ConsentPeriod.cs" />
     <Compile Include="Movement\IMovementDateValidator.cs" />
+    <Compile Include="Movement\MovementDateOutOfRangeException.cs" />
+    <Compile Include="Movement\MovementDateOutOfRangeOfOriginalDateException.cs" />
+    <Compile Include="Movement\MovementDateOutsideConsentPeriodException.cs" />
     <Compile Include="Movement\MovementDateValidator.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
@@ -218,7 +221,6 @@
     <Compile Include="Movement\MovementStatusChange.cs" />
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\RejectMovement.cs" />
-    <Compile Include="Movement\ValidMovementDateCalculator.cs" />
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\Importer\IImporterRepository.cs" />

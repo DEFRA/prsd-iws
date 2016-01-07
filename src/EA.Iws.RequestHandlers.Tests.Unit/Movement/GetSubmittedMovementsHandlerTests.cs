@@ -5,6 +5,7 @@
     using Core.Movement;
     using Domain.Movement;
     using FakeItEasy;
+    using Prsd.Core;
     using RequestHandlers.Mappings.Movement;
     using RequestHandlers.Movement.Receive;
     using Requests.Movement.Receive;
@@ -12,13 +13,15 @@
     using TestHelpers.Helpers;
     using Xunit;
 
-    public class GetSubmittedMovementsHandlerTests : TestBase
+    public class GetSubmittedMovementsHandlerTests : TestBase, IDisposable
     {
         private readonly GetSubmittedMovementsHandler handler;
         private const int MovementCount = 5;
 
         public GetSubmittedMovementsHandlerTests()
         {
+            SystemTime.Freeze(new DateTime(2015, 1, 1));
+
             var repository = A.Fake<IMovementRepository>();
             var movements = new[]
             {
@@ -50,9 +53,14 @@
             TestableMovement movement = new TestableMovement();
             movement.Id = Guid.NewGuid();
             movement.NotificationId = NotificationId;
-            movement.Date = DateTime.Today.AddDays(-number);
+            movement.Date = SystemTime.UtcNow.Date.AddDays(-number);
             movement.Number = number;
             return movement;
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
     }
 }
