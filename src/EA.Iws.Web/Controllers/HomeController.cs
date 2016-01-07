@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
+    using Infrastructure;
     using ViewModels.Shared;
 
     public class HomeController : Controller
@@ -14,6 +15,11 @@
         {
             if (User.Identity.IsAuthenticated)
             {
+                if (User.IsInternalUser())
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+
                 return RedirectToAction(actionName: "Home", controllerName: "Applicant");
             }
 
