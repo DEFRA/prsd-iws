@@ -51,12 +51,17 @@
 
             if (!carriers.Any())
             {
-                throw new ArgumentException("Parameter carriers can not be empty.");
+                throw new ArgumentException("Carriers can not be empty.", "carriers");
             }
 
             if (!packagingInfos.Any())
             {
-                throw new ArgumentException("Parameter packagingInfos can not be empty.");
+                throw new ArgumentException("Packaging infos can not be empty.", "packagingInfos");
+            }
+
+            if (actualQuantity <= new ShipmentQuantity(0, actualQuantity.Units))
+            {
+                throw new ArgumentException("Actual quantity must be greater than zero", "actualQuantity");
             }
 
             MovementId = movementId;
