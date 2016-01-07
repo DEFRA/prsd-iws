@@ -96,7 +96,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ShipmentDate(Guid notificationId, ShipmentDateViewModel model)
+        public async Task<ActionResult> ShipmentDate(Guid notificationId, ShipmentDateViewModel model)
         {
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[ShipmentDateKey] = model.AsDateTime();
@@ -105,6 +105,57 @@
             {
                 ViewBag.MovementNumber = model.MovementNumber;
                 return View(model);
+            }
+
+            var workingDaysUntilShipment = await mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.AsDateTime().GetValueOrDefault()));
+
+            if (workingDaysUntilShipment < 4)
+            {
+                return RedirectToAction("ThreeWorkingDaysWarning", "Create");
+            }
+
+            return RedirectToAction("Quantity", "Create");
+        }
+
+        [HttpGet]
+        public ActionResult ThreeWorkingDaysWarning(Guid notificationId)
+        {
+            object result;
+            if (TempData.TryGetValue(MovementNumberKey, out result))
+            {
+                var movementNumber = (int)result;
+
+                ViewBag.MovementNumber = movementNumber;
+                var model = new ThreeWorkingDaysWarningViewModel(movementNumber);
+
+                return View("ThreeWorkingDays", model);
+            }
+
+            return RedirectToAction("ShipmentDate", "Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ThreeWorkingDaysWarning(Guid notificationId, ThreeWorkingDaysWarningViewModel model)
+        {
+            TempData[MovementNumberKey] = model.MovementNumber;
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MovementNumber = model.MovementNumber;
+                return View("ThreeWorkingDays", model);
+            }
+
+            if (model.Selection == ThreeWorkingDaysSelection.ChangeDate)
+            {
+                TempData[ShipmentDateKey] = model.DateInput.AsDateTime();
+
+                var workingDaysUntilShipment = await mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.DateInput.AsDateTime().GetValueOrDefault()));
+
+                if (workingDaysUntilShipment < 4)
+                {
+                    return RedirectToAction("ThreeWorkingDaysWarning", "Create");
+                }
             }
 
             return RedirectToAction("Quantity", "Create");

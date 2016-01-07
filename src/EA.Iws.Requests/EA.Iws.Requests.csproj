@@ -131,6 +131,7 @@
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
+    <Compile Include="NotificationMovements\GetWorkingDaysUntil.cs" />
     <Compile Include="NotificationMovements\GetMovementRulesSummary.cs" />
     <Compile Include="Movement\Reject\RecordRejectionInternal.cs" />
     <Compile Include="Movement\Summary\GetMovementReceiptAndRecoveryData.cs" />

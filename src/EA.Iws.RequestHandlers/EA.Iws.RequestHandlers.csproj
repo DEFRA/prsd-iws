@@ -327,6 +327,7 @@
     <Compile Include="NotificationMovements\Create\GetShipmentUnitsHandler.cs" />
     <Compile Include="NotificationMovements\Edit\GetEditableMovementsHandler.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummaryHandler.cs" />
+    <Compile Include="NotificationMovements\GetWorkingDaysUntilHandler.cs" />
     <Compile Include="NotificationMovements\Mappings\NotificationMovementsSummaryAndTableMap.cs" />
     <Compile Include="NotificationMovements\Mappings\MovementTableDataRowMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
