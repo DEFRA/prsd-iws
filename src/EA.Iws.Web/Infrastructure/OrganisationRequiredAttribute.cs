@@ -17,6 +17,12 @@
             }
 
             var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
+
+            if (!identity.IsAuthenticated)
+            {
+                return;
+            }
+
             var organisationRegistered = identity.HasClaim(c => c.Type.Equals(ClaimTypes.OrganisationId));
 
             bool hasRoleClaim = identity.HasClaim(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role));
