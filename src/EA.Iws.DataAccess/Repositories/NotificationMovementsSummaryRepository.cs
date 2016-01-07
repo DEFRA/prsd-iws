@@ -73,7 +73,7 @@
                 summaryData.ActiveLoadsPermitted.GetValueOrDefault(),
                 currentActiveLoads,
                 summaryData.Quantity,
-                await quantity.Received(notificationId),
+                (await quantity.Received(notificationId)).Quantity,
                 summaryData.Units);
         }
     }

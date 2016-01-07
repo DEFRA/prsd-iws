@@ -51,7 +51,7 @@
 
             var quantityRemaining = await movementsQuantity.Remaining(notificationId);
 
-            if (quantityRemaining <= 0)
+            if (quantityRemaining <= new ShipmentQuantity(0, quantityRemaining.Units))
             {
                 throw new InvalidOperationException(
                     string.Format("Cannot create new movement for notification {0} as the quantity has been reached or exceeded.", 

@@ -36,7 +36,7 @@
         {
         }
 
-        public MovementDetails(Guid movementId,
+        internal MovementDetails(Guid movementId,
             ShipmentQuantity actualQuantity,
             int numberOfPackages,
             IEnumerable<MovementCarrier> carriers,

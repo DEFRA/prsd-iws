@@ -18,7 +18,7 @@
             this.shipmentRepository = shipmentRepository;
         }
 
-        public async Task<decimal> Received(Guid notificationId)
+        public async Task<ShipmentQuantity> Received(Guid notificationId)
         {
             var receivedMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.Received);
             var completedMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.Completed);
@@ -28,7 +28,7 @@
 
             if (!HasSummableMovements(movements))
             {
-                return 0;
+                return new ShipmentQuantity(0, shipment.Units);
             }
 
             var totalReceived = movements.Sum(m =>
@@ -37,14 +37,16 @@
                     shipment.Units,
                     m.Receipt.QuantityReceived.Quantity));
 
-            return totalReceived;
+            return new ShipmentQuantity(totalReceived, shipment.Units);
         }
 
-        public async Task<decimal> Remaining(Guid notificationId)
+        public async Task<ShipmentQuantity> Remaining(Guid notificationId)
         {
             var shipment = await shipmentRepository.GetByNotificationId(notificationId);
 
-            return shipment.Quantity - await Received(notificationId);
+            var shipmentQuantity = new ShipmentQuantity(shipment.Quantity, shipment.Units);
+
+            return shipmentQuantity - await Received(notificationId);
         }
 
         private bool HasSummableMovements(IEnumerable<Movement> movements)

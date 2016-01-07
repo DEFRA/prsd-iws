@@ -2,7 +2,6 @@
 {
     using System;
     using Core.Shared;
-    using Prsd.Core;
 
     public class ShipmentQuantity
     {
@@ -15,8 +14,6 @@
 
         public ShipmentQuantity(decimal quantity, ShipmentQuantityUnits units)
         {
-            Guard.ArgumentNotZeroOrNegative(() => quantity, quantity);
-            
             Quantity = decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[units]);
             Units = units;
         }

@@ -112,6 +112,7 @@
     <Compile Include="Movement\MovementNumberGeneratorTests.cs" />
     <Compile Include="Movement\MovementNumberValidatorTests.cs" />
     <Compile Include="Movement\MovementQuantityTests.cs" />
+    <Compile Include="Movement\MovementsDetailsFactoryTests.cs" />
     <Compile Include="Movement\MovementStatusTests.cs" />
     <Compile Include="Movement\MovementTests.cs" />
     <Compile Include="Movement\NextAvailableMovementNumberGeneratorTests.cs" />

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Domain.Tests.Unit.MovementReceipt
+﻿namespace EA.Iws.Domain.Tests.Unit.Movement
 {
     using System;
     using System.Linq;
@@ -61,7 +61,7 @@
 
             var result = await movementQuantity.Received(NotificationId);
 
-            Assert.Equal(5, result);
+            Assert.Equal(new ShipmentQuantity(5, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -73,7 +73,7 @@
 
             var result = await movementQuantity.Remaining(NotificationId);
 
-            Assert.Equal(15, result);
+            Assert.Equal(new ShipmentQuantity(15, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -96,7 +96,7 @@
 
             var result = await movementQuantity.Received(NotificationId);
 
-            Assert.Equal(6, result);
+            Assert.Equal(new ShipmentQuantity(6, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -110,7 +110,7 @@
 
             var result = await movementQuantity.Remaining(NotificationId);
 
-            Assert.Equal(19.995m, result);
+            Assert.Equal(new ShipmentQuantity(19.995M, ShipmentQuantityUnits.Tonnes), result);
         }
 
         [Fact]
@@ -131,7 +131,7 @@
 
             var result = await movementQuantity.Received(NotificationId);
 
-            Assert.Equal(5, result);
+            Assert.Equal(new ShipmentQuantity(5, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -152,7 +152,7 @@
 
             var result = await movementQuantity.Remaining(NotificationId);
 
-            Assert.Equal(15, result);
+            Assert.Equal(new ShipmentQuantity(15, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -173,7 +173,7 @@
 
             var result = await movementQuantity.Received(NotificationId);
 
-            Assert.Equal(10, result);
+            Assert.Equal(new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -194,7 +194,7 @@
 
             var result = await movementQuantity.Remaining(NotificationId);
 
-            Assert.Equal(10, result);
+            Assert.Equal(new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -215,7 +215,7 @@
 
             var result = await movementQuantity.Received(NotificationId);
 
-            Assert.Equal(0, result);
+            Assert.Equal(new ShipmentQuantity(0, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -236,7 +236,7 @@
 
             var result = await movementQuantity.Remaining(NotificationId);
 
-            Assert.Equal(20, result);
+            Assert.Equal(new ShipmentQuantity(20, ShipmentQuantityUnits.Kilograms), result);
         }
 
         [Fact]
@@ -250,7 +250,7 @@
 
             var result = await movementQuantity.Remaining(NotificationId);
 
-            Assert.Equal(19.995m, result);
+            Assert.Equal(new ShipmentQuantity(19.995M, ShipmentQuantityUnits.Tonnes), result);
         }
     }
 }

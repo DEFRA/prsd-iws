@@ -71,6 +71,7 @@
 
             builder.RegisterType<WasteCodeCopy>().AsSelf();
             builder.RegisterType<MovementFactory>().AsSelf();
+            builder.RegisterType<MovementDetailsFactory>().AsSelf();
             builder.RegisterType<NotificationMovementsQuantity>().AsSelf();
             builder.RegisterType<NotificationChargeCalculator>().AsSelf();
             builder.RegisterType<CertificateFactory>().AsSelf();

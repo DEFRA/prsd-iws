@@ -16,20 +16,23 @@
     {
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IwsContext context;
-        private readonly MovementFactory factory;
+        private readonly MovementFactory movementFactory;
+        private readonly MovementDetailsFactory movementDetailsFactory;
 
-        public CreateMovementAndDetailsHandler(MovementFactory factory,
+        public CreateMovementAndDetailsHandler(MovementFactory movementFactory,
+            MovementDetailsFactory movementDetailsFactory,
             INotificationApplicationRepository notificationRepository,
             IwsContext context)
         {
-            this.factory = factory;
+            this.movementFactory = movementFactory;
+            this.movementDetailsFactory = movementDetailsFactory;
             this.context = context;
             this.notificationRepository = notificationRepository;
         }
 
         public async Task<Guid> HandleAsync(CreateMovementAndDetails message)
         {
-            var movement = await factory.Create(message.NotificationId, message.ActualMovementDate);
+            var movement = await movementFactory.Create(message.NotificationId, message.ActualMovementDate);
 
             context.Movements.Add(movement);
 
@@ -40,8 +43,8 @@
             var carriers = await GetCarriers(message.NotificationId, newMovementDetails.OrderedCarriers);
             var packagingInfos = await GetPackagingInfos(message.NotificationId, newMovementDetails.PackagingTypes);
 
-            var movementDetails = new MovementDetails(
-                movement.Id,
+            var movementDetails = await movementDetailsFactory.Create(
+                movement,
                 shipmentQuantity,
                 newMovementDetails.NumberOfPackages,
                 carriers,

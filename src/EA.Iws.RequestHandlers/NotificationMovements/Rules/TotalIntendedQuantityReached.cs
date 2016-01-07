@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Core.Movement;
     using Core.Rules;
+    using Domain;
     using Domain.Movement;
 
     internal class TotalIntendedQuantityReached : IMovementRule
@@ -17,7 +18,8 @@
 
         public async Task<RuleResult<MovementRules>> GetResult(Guid notificationId)
         {
-            var messageLevel = await movementsQuantity.Remaining(notificationId) == 0
+            var remaining = await movementsQuantity.Remaining(notificationId);
+            var messageLevel = remaining == new ShipmentQuantity(0, remaining.Units)
                 ? MessageLevel.Error
                 : MessageLevel.Success;
 
