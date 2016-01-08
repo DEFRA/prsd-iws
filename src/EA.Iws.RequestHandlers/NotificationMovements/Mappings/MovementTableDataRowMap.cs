@@ -13,9 +13,11 @@
             {
                 Number = source.Number,
                 ShipmentDate = source.Date,
+                HasShipped = source.HasShipped,
                 Status = source.Status,
-                SubmittedDate =
-                    (source.PrenotificationDate.HasValue) ? source.PrenotificationDate.Value.DateTime : (DateTime?)null
+                SubmittedDate = (source.PrenotificationDate.HasValue) 
+                    ? source.PrenotificationDate.Value.DateTime 
+                    : (DateTime?)null
             };
 
             if (source.Receipt != null)

@@ -14,6 +14,8 @@
 
         public DateTime? ShipmentDate { get; set; }
 
+        public bool HasShipped { get; set; }
+
         public DateTime? Received { get; set; }
 
         public decimal? Quantity { get; set; }
@@ -21,18 +23,14 @@
         public ShipmentQuantityUnits? Unit { get; set; }
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
-
-        public bool IsShipped()
-        {
-            return Status == MovementStatus.Submitted && ShipmentDate < DateTime.UtcNow;
-        }
-
+        
         public ShipmentDatesTableViewModel(MovementTableDataRow data)
         {
             Number = data.Number;
             Status = data.Status;
             PreNotification = data.SubmittedDate;
             ShipmentDate = data.ShipmentDate;
+            HasShipped = data.HasShipped;
             Received = data.ReceivedDate;
             Quantity = data.Quantity;
             Unit = data.QuantityUnits;

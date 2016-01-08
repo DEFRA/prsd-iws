@@ -13,6 +13,8 @@
 
         public DateTime? ShipmentDate { get; set; }
 
+        public bool HasShipped { get; set; }
+
         public DateTime? ReceivedDate { get; set; }
 
         public decimal? Quantity { get; set; }

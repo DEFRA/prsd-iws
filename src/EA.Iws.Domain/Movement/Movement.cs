@@ -81,24 +81,6 @@
             get { return StatusChangeCollection.ToSafeIEnumerable(); }
         }
 
-        public bool IsActive
-        {
-            get
-            {
-                return (Status == MovementStatus.Submitted
-                    || Status == MovementStatus.Received)
-                    && Date < SystemTime.UtcNow;
-            }
-        }
-
-        public bool HasShipped
-        {
-            get
-            {
-                return Status == MovementStatus.Received && Date < SystemTime.UtcNow;
-            }
-        }
-
         public virtual MovementReceipt Receipt { get; private set; }
 
         public virtual MovementCompletedReceipt CompletedReceipt { get; private set; }
@@ -108,6 +90,11 @@
         public Guid? FileId { get; private set; }
 
         public DateTimeOffset? PrenotificationDate { get; private set; }
+
+        public bool HasShipped
+        {
+            get { return Status == MovementStatus.Submitted && Date < SystemTime.UtcNow; }
+        }
 
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
         {
@@ -137,7 +124,7 @@
 
             acceptedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, ShipmentQuantity>(Trigger.Receive);
             internallyAcceptedTrigger = stateMachine.SetTriggerParameters<DateTime, ShipmentQuantity>(Trigger.ReceiveInternal);
-            
+
             stateMachine.OnTransitioned(OnTransitionAction);
 
             stateMachine.Configure(MovementStatus.New)
@@ -160,7 +147,7 @@
             stateMachine.Configure(MovementStatus.Completed)
                 .OnEntryFrom(completedTrigger, OnCompleted)
                 .OnEntryFrom(internallyCompletedTrigger, OnInternallyCompleted);
-            
+
             stateMachine.Configure(MovementStatus.Captured)
                 .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
                 .Permit(Trigger.Reject, MovementStatus.Rejected)
@@ -197,7 +184,7 @@
             PrenotificationDate = new DateTimeOffset(prenotificationDate);
         }
 
-        internal MovementRejection Reject(DateTimeOffset dateReceived, 
+        internal MovementRejection Reject(DateTimeOffset dateReceived,
             string reason,
             string furtherDetails)
         {

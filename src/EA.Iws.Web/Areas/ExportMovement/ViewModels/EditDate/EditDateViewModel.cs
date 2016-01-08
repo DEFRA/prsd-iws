@@ -39,7 +39,7 @@
             }
             else if (AsDateTime() < SystemTime.UtcNow)
             {
-                yield return new ValidationResult(string.Format("Please enter a future date"), new[] { "Day" });
+                yield return new ValidationResult(string.Format("The actual date of shipment cannot be in the past. Please enter a different date."), new[] { "Day" });
             }
         }
     }

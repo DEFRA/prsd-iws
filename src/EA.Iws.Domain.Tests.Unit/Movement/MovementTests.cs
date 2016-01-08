@@ -32,26 +32,35 @@
         }
 
         [Fact]
-        public void IsActive_ReturnsTrue_WhenDateInPast()
+        public void HasShipped_MovementSubmitted_ShipmentDateInPast_ReturnsTrue()
         {
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, BeforeFrozenTime, movement);
 
-            Assert.True(movement.IsActive);
+            Assert.True(movement.HasShipped);
         }
 
         [Fact]
-        public void IsActive_ReturnsFalse_IfNoDate()
+        public void HasShipped_MovementSubmitted_ShipmentDateInFuture_ReturnsFalse()
         {
-            Assert.False(movement.IsActive);
-        }
-        
-        [Fact]
-        public void IsActive_ReturnsFalse_WhenDateInFuture()
-        {
+            ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
             ObjectInstantiator<Movement>.SetProperty(x => x.Date, AfterFrozenTime, movement);
 
-            Assert.False(movement.IsActive);
+            Assert.False(movement.HasShipped);
+        }
+
+        [Theory]
+        [InlineData(MovementStatus.New)]
+        [InlineData(MovementStatus.Cancelled)]
+        [InlineData(MovementStatus.Captured)]
+        [InlineData(MovementStatus.Received)]
+        [InlineData(MovementStatus.Rejected)]
+        [InlineData(MovementStatus.Completed)]
+        public void HasShipped_MovementNotSubmitted_ReturnsFalse(MovementStatus status)
+        {
+            ObjectInstantiator<Movement>.SetProperty(x => x.Status, status, movement);
+
+            Assert.False(movement.HasShipped);
         }
 
         public void Dispose()
