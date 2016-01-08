@@ -24,14 +24,14 @@
         {
             Guard.ArgumentNotNull(() => notificationAssessment, notificationAssessment);
 
-            var notification = await notificationRepository.Get(notificationAssessment.NotificationApplicationId);
-            var facilityCollection =
-                await facilityRepository.GetByNotificationId(notificationAssessment.NotificationApplicationId);
-
             if (!notificationAssessment.Dates.AcknowledgedDate.HasValue)
             {
                 return null;
             }
+
+            var notification = await notificationRepository.Get(notificationAssessment.NotificationApplicationId);
+            var facilityCollection =
+                await facilityRepository.GetByNotificationId(notificationAssessment.NotificationApplicationId);
 
             return
                 decisionRequiredByCalculator.Get(
