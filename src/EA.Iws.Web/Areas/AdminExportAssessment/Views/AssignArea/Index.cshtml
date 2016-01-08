@@ -21,5 +21,8 @@
     <div class="form-group">
         <p> <button class="button" type="submit">Save</button></p>
     </div>
+}
 
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
 }

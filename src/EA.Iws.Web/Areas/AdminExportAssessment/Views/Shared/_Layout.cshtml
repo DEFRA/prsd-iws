@@ -4,7 +4,7 @@
 
 <div class="grid-row">
     <aside class="column-third">
-        @Html.Action("AssessmentNavigation", "Home", new { ViewBag.ActiveSection })
+        @RenderSection("menu", required: true)
     </aside>
 
     <div class="column-two-thirds">

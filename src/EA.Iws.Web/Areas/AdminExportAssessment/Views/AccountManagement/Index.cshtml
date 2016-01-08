@@ -98,3 +98,7 @@
         }
     }
 </div>
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Finance })
+}

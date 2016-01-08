@@ -32,15 +32,7 @@
                 return RedirectToAction("Index", "Overview");
             }
         }
-
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult AssessmentNavigation(Guid id, string activeSection)
-        {
-            var data = mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id)).GetAwaiter().GetResult();
-            data.ActiveSection = activeSection;
-            return PartialView("_InternalMenuExport", data);
-        }
-
+        
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult NotificationSwitcher(Guid id)
         {

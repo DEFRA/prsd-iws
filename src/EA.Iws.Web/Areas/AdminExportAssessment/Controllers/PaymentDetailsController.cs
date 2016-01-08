@@ -24,7 +24,6 @@
         {
             var model = new PaymentDetailsViewModel { NotificationId = id };
 
-            ViewBag.ActiveSection = "Finance";
             return View(model);
         }
 
@@ -34,7 +33,6 @@
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ActiveSection = "Finance";
                 return View(model);
             }
 

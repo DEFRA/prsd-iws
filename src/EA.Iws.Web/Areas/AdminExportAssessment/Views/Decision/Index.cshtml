@@ -60,6 +60,10 @@
     </div>
 }
 
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
+
 @section scripts{
     <script>
         setDropdownRevealSections("decision-select", "assessment-decision")

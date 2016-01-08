@@ -32,7 +32,6 @@
         public async Task<ActionResult> Dates(Guid id)
         {
             var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id));
-            ViewBag.ActiveSection = "Assessment";
             return View(dateMap.Map(result));
         }
 
@@ -42,7 +41,6 @@
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ActiveSection = "Assessment";
                 return View(model);
             }
 
@@ -58,7 +56,6 @@
         public async Task<ActionResult> Decision(Guid id)
         {
             var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id));
-            ViewBag.ActiveSection = "Assessment";
             return View(decisionMap.Map(result));
         }
 
@@ -75,7 +72,6 @@
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ActiveSection = "Assessment";
                 return View(model);
             }
 

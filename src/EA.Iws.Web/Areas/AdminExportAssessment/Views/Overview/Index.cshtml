@@ -5,3 +5,8 @@
 <div id="submit-overview-area">
     @Html.Partial("_SummaryTableContainer")
 </div>
+
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

@@ -30,7 +30,6 @@
                 LocalAreaId = await mediator.SendAsync(new GetNotificationLocalAreaId(id))
             };
 
-            ViewBag.ActiveSection = "Assessment";
             return View(model);
         }
 
@@ -42,7 +41,6 @@
             {
                 model.Areas = await GetAreas();
 
-                ViewBag.ActiveSection = "Assessment";
                 return View(model);
             }
 

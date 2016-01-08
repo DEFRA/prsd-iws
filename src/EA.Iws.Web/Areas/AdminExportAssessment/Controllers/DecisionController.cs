@@ -28,7 +28,6 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(id));
-            ViewBag.ActiveSection = "Assessment";
             return View(decisionMap.Map(data));
         }
 
@@ -43,7 +42,6 @@
                     return RedirectToAction("Index", "KeyDates");
                 }
 
-                ViewBag.ActiveSection = "Assessment";
                 return View(model);
             }
 

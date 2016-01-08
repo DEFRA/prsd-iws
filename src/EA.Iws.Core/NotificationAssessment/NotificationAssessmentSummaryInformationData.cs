@@ -9,8 +9,6 @@
 
         public string Number { get; set; }
 
-        public string ActiveSection { get; set; }
-
         public NotificationStatus Status { get; set; }
 
         public CompetentAuthority CompetentAuthority { get; set; }

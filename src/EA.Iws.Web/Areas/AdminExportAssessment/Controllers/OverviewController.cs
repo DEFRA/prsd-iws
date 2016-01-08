@@ -21,7 +21,6 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var result = await mediator.SendAsync(new GetNotificationOverviewInternal(id));
-            ViewBag.ActiveSection = "Assessment";
 
             return View(new NotificationOverviewViewModel(result));
         }

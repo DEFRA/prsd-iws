@@ -39,3 +39,7 @@
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

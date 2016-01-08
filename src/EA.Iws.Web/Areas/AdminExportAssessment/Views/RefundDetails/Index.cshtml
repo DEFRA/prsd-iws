@@ -15,40 +15,43 @@
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.Limit)
 
-<div class="grid-row">
-    <div class="column-two-thirds">
-        <div class="grid-row">
-            <div class="column-half">
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
-                    @Html.Gds().LabelFor(m => m.Amount)
-                    @Html.Gds().ValidationMessageFor(m => m.Amount)
-                    @Html.Gds().TextBoxFor(m => m.Amount, new { @class = "form-control form-control-wide", @title = RefundDetailsViewModelResources.AmountRefundedLabel })
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="grid-row">
+                <div class="column-half">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
+                        @Html.Gds().LabelFor(m => m.Amount)
+                        @Html.Gds().ValidationMessageFor(m => m.Amount)
+                        @Html.Gds().TextBoxFor(m => m.Amount, new { @class = "form-control form-control-wide", @title = RefundDetailsViewModelResources.AmountRefundedLabel })
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Date) @Html.Gds().FormGroupClass(m => m.Date.Day) @Html.Gds().FormGroupClass(m => m.Date.Month) @Html.Gds().FormGroupClass(m => m.Date.Year)">
-            @Html.LabelFor(m => m.Date, new { @class = "form-label-bold" })
-            @Html.Gds().ValidationMessageFor(m => m.Date)
-            @Html.EditorFor(m => m.Date)
-        </div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Date) @Html.Gds().FormGroupClass(m => m.Date.Day) @Html.Gds().FormGroupClass(m => m.Date.Month) @Html.Gds().FormGroupClass(m => m.Date.Year)">
+                @Html.LabelFor(m => m.Date, new { @class = "form-label-bold" })
+                @Html.Gds().ValidationMessageFor(m => m.Date)
+                @Html.EditorFor(m => m.Date)
+            </div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)">
-            @Html.Gds().LabelFor(m => m.Comments)
-            @Html.Gds().ValidationMessageFor(m => m.Comments)
-            @Html.TextAreaFor(m => m.Comments, new { @MaxLength = 500, @style = "width: 100%; height: 200px", @title = RefundDetailsViewModelResources.CommentsLabel })
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)">
+                @Html.Gds().LabelFor(m => m.Comments)
+                @Html.Gds().ValidationMessageFor(m => m.Comments)
+                @Html.TextAreaFor(m => m.Comments, new { @MaxLength = 500, @style = "width: 100%; height: 200px", @title = RefundDetailsViewModelResources.CommentsLabel })
+            </div>
         </div>
     </div>
-</div>
 
-<div class="form-group">
-    <p>
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
-    </p>
-</div>
+    <div class="form-group">
+        <p>
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </p>
+    </div>
 
     @Html.ActionLink(IndexResources.ReturnToAccountManagement, "Index", "AccountManagement")
+}
 
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Finance })
 }

@@ -23,7 +23,6 @@
             var data = await mediator.SendAsync(new GetAccountManagementData(id));
             var model = new AccountManagementViewModel(data);
 
-            ViewBag.ActiveSection = "Finance";
             return View(model);
         }
     }

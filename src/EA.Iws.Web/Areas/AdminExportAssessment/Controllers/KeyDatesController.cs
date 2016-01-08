@@ -38,7 +38,6 @@
                 AddRelevantDateToNewDate(model);
             }
 
-            ViewBag.ActiveSection = "Assessment";
             return View(model);
         }
 
@@ -48,7 +47,6 @@
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ActiveSection = "Assessment";
                 return View(model);
             }
 
