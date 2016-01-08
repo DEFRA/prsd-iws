@@ -141,8 +141,11 @@
   <data name="TableTitle" xml:space="preserve">
     <value>Transport methods</value>
   </data>
+  <data name="ThSymbol" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
   <data name="ThTransportMethods" xml:space="preserve">
-    <value>Transport methods</value>
+    <value>Transport method</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Means of Transport</value>

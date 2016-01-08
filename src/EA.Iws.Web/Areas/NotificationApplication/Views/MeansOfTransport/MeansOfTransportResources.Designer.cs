@@ -134,7 +134,16 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.MeansOfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transport methods.
+        ///   Looks up a localized string similar to Symbol.
+        /// </summary>
+        public static string ThSymbol {
+            get {
+                return ResourceManager.GetString("ThSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transport method.
         /// </summary>
         public static string ThTransportMethods {
             get {
