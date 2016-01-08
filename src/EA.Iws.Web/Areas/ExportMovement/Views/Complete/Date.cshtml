@@ -12,6 +12,9 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationType)
+    @Html.HiddenFor(m => m.MovementDate)
+    @Html.HiddenFor(m => m.ReceiptDate)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>

@@ -290,6 +290,7 @@
     <Compile Include="Mappings\Reports\FinanceMap.cs" />
     <Compile Include="Mappings\Reports\MissingShipmentMap.cs" />
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
+    <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValidHandler.cs" />

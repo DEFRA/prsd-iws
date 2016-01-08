@@ -24,9 +24,9 @@
         [HttpGet]
         public async Task<ActionResult> Date(Guid id)
         {
-            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
-            var data = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
-            var model = new DateViewModel(data.NotificationType);
+            var data = await mediator.SendAsync(new GetOperationCompleteData(id));
+
+            var model = new DateViewModel(data);
             return View(model);
         }
 

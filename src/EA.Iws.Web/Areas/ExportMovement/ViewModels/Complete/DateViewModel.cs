@@ -3,12 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Core.Movement;
     using Core.Shared;
     using Prsd.Core;
 
     public class DateViewModel : IValidatableObject
     {
         public NotificationType NotificationType { get; set; }
+
+        public DateTime MovementDate { get; set; }
+
+        public DateTime ReceiptDate { get; set; }
 
         [Required]
         public int? Day { get; set; }
@@ -21,9 +26,11 @@
         {
         }
 
-        public DateViewModel(NotificationType notificationType)
+        public DateViewModel(OperationCompleteData data)
         {
-            NotificationType = notificationType;
+            NotificationType = data.NotificationType;
+            MovementDate = data.MovementDate;
+            ReceiptDate = data.ReceiptDate;
         }
 
         public DateTime GetDateComplete()
@@ -50,6 +57,16 @@
             if (dateComplete > SystemTime.UtcNow)
             {
                 yield return new ValidationResult("Date completed cannot be in the future", new[] { "Day" });
+            }
+
+            if (dateComplete < ReceiptDate)
+            {
+                yield return new ValidationResult("This date cannot be before the date of receipt. Please enter a different date.", new[] { "Day" });
+            }
+
+            if (dateComplete < MovementDate)
+            {
+                yield return new ValidationResult("This date cannot be before the actual date of shipment. Please enter a different date.", new[] { "Day" });
             }
         }
 

@@ -127,6 +127,7 @@
     <Compile Include="Movement\MovementRulesSummary.cs" />
     <Compile Include="Movement\MovementStatus.cs" />
     <Compile Include="Movement\NewMovementDetails.cs" />
+    <Compile Include="Movement\OperationCompleteData.cs" />
     <Compile Include="Movement\QuantityReceivedTolerance.cs" />
     <Compile Include="Movement\ProposedMovementDateResponse.cs" />
     <Compile Include="Movement\ProposedUpdatedMovementDateResponse.cs" />
