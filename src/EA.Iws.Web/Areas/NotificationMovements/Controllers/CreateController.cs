@@ -54,7 +54,7 @@
             var model = new ShipmentDateViewModel(shipmentDates, movementNumber);
 
             return View("ShipmentDate", model);
-        }
+        } 
 
         private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
         {
@@ -155,7 +155,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ThreeWorkingDaysWarning(Guid notificationId, ThreeWorkingDaysWarningViewModel model)
+        public ActionResult ThreeWorkingDaysWarning(Guid notificationId, ThreeWorkingDaysWarningViewModel model)
         {
             TempData[MovementNumberKey] = model.MovementNumber;
 
@@ -167,14 +167,7 @@
 
             if (model.Selection == ThreeWorkingDaysSelection.ChangeDate)
             {
-                TempData[ShipmentDateKey] = model.DateInput.AsDateTime();
-
-                var workingDaysUntilShipment = await mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.DateInput.AsDateTime().GetValueOrDefault()));
-
-                if (workingDaysUntilShipment < 4)
-                {
-                    return RedirectToAction("ThreeWorkingDaysWarning", "Create");
-                }
+                return RedirectToAction("RedirectToShipmentDate", "Create");
             }
 
             return RedirectToAction("Quantity", "Create");
@@ -464,7 +457,7 @@
         {
             return View();
         }
-
+        
         [HttpGet]
         public async Task<ActionResult> RedirectToShipmentDate(Guid notificationId)
         {

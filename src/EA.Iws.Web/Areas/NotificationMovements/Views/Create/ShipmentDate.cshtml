@@ -10,7 +10,7 @@
     <h1 class="heading-large">What is the actual date of shipment?</h1>
 </header>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("ShipmentDate", "Create", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
     @Html.AntiForgeryToken()

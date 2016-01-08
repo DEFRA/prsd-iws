@@ -1,7 +1,9 @@
 ﻿@using EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create
 @using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.Create.ThreeWorkingDaysResources
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create.ThreeWorkingDaysWarningViewModel
+
 @{
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
     ViewBag.Title = Resource.Title;
 }
 
@@ -28,22 +30,6 @@
                 @Resource.ChangeDateOption
             </label>
         </fieldset>
-    </div>
-
-    <div class="panel-indent @(Model.Selection != ThreeWorkingDaysSelection.ChangeDate ? "js-hidden" : "")" id="change-date">
-
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.DateInput) 
-                           @Html.Gds().FormGroupClass(m => m.DateInput.Day) 
-                           @Html.Gds().FormGroupClass(m => m.DateInput.Month) 
-                           @Html.Gds().FormGroupClass(m => m.DateInput.Year)">
-
-            @Html.LabelFor(m => m.DateInput)
-            @Html.Gds().HintSpan(Model.DateHintText)
-            @Html.Gds().ValidationMessageFor(m => m.DateInput)
-            @Html.EditorFor(m => m.DateInput)
-
-        </div>
-
     </div>
 
     <div class="form-group">
