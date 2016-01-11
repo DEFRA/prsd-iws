@@ -132,12 +132,6 @@
   <data name="EnergyEfficiency" xml:space="preserve">
     <value>Energy Efficiency</value>
   </data>
-  <data name="EnergyEfficiencyInfo" xml:space="preserve">
-    <value>Enter the value of energy efficiency. You can obtain this information from the recovery facility. In some cases, this value might not be applicable, for example if the waste is going to a cement kiln. You can then enter "NA".</value>
-  </data>
-  <data name="EnrgyEfficiencyDescription" xml:space="preserve">
-    <value>The energy efficiency is calculated using a formula taken from the Directive 2008/98/EC on waste (Waste Framework Directive). The formula used to calculate this value of energy efficiency, "the R1 Energy Efficiency Formula" is:</value>
-  </data>
   <data name="FormulaTitle" xml:space="preserve">
     <value>Formula parameters description</value>
   </data>
@@ -146,6 +140,12 @@
   </data>
   <data name="GuidanceNotesTitle" xml:space="preserve">
     <value>Guidance notes for energy efficiency</value>
+  </data>
+  <data name="GuidanceTextFirstPara" xml:space="preserve">
+    <value>The energy efficiency is calculated using a formula taken from the Directive 2008/98/EC on waste (Waste Framework Directive).</value>
+  </data>
+  <data name="GuidanceTextSecondPara" xml:space="preserve">
+    <value>You can obtain this information from the recovery facility. In some cases, this value might not be applicable, for example if the waste is going to a cement kiln. You can then enter "NA".</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>What is the chemical composition of the waste?</value>
@@ -179,21 +179,6 @@
   </data>
   <data name="Step2" xml:space="preserve">
     <value>Step 2 of 3</value>
-  </data>
-  <data name="TdFormula1" xml:space="preserve">
-    <value>The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year)</value>
-  </data>
-  <data name="TdFormula2" xml:space="preserve">
-    <value>The annual energy input to the system from fuel contributions to the production of steam (GJ/year)</value>
-  </data>
-  <data name="TdFormula3" xml:space="preserve">
-    <value>The annual energy imported excluding E&lt;sub&gt;w&lt;/sub&gt; and E&lt;sub&gt;f&lt;/sub&gt; (GJ/year)</value>
-  </data>
-  <data name="TdFormula4" xml:space="preserve">
-    <value>The annual energy contained in the treated waste calculated using the net calorific value of the waste (GJ/year)</value>
-  </data>
-  <data name="TdFormula5" xml:space="preserve">
-    <value>The factor accounting for energy losses due to bottom ask and radiation</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Chemical composition of waste</value>

@@ -90,33 +90,9 @@
                         <h2 class="summary heading-xsmall">@ParametersResources.GuidanceNotes</h2>
                     </summary>
                     <div class="panel-indent">
-                        <p>@ParametersResources.EnrgyEfficiencyDescription</p>
-                        <table class="fraction" title=@ParametersResources.GuidanceNotesTitle>
-                            <tr>
-                                <td rowspan="2">
-                                    Energy Efficiency =
-                                </td>
-                                <td>
-                                    (E<sub>p</sub> - (E<sub>f</sub> + E<sub>i</sub>))
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="upper-line">
-                                    (0.97 x (E<sub>w</sub> + E<sub>f</sub>))
-                                </td>
-                            </tr>
-                        </table>
-                        @ParametersResources.InWhich
-                        <table title=@ParametersResources.FormulaTitle>
-                            <tr><td></td><td></td></tr>
-                            <tr><td>E<sub>p</sub></td><td>@ParametersResources.TdFormula1</td></tr>
-                            <tr><td>E<sub>f</sub></td><td>@ParametersResources.TdFormula2</td></tr>
-                            <tr><td>E<sub>i</sub></td><td>@Html.Raw(ParametersResources.TdFormula3)</td></tr>
-                            <tr><td>E<sub>w</sub></td><td>@ParametersResources.TdFormula4</td></tr>
-                            <tr><td>0.97</td><td>@ParametersResources.TdFormula5</td></tr>
-                        </table>
-                        <br/>
-                        <p>@ParametersResources.EnergyEfficiencyInfo</p>
+                        <p>@ParametersResources.GuidanceTextFirstPara</p>
+                        
+                        <p>@ParametersResources.GuidanceTextSecondPara</p>
                     </div>
                 </details>
                 @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds", @title = ParametersResources.Energy })

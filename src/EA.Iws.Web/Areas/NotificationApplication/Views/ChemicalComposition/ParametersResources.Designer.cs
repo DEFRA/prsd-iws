@@ -107,24 +107,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the value of energy efficiency. You can obtain this information from the recovery facility. In some cases, this value might not be applicable, for example if the waste is going to a cement kiln. You can then enter &quot;NA&quot;..
-        /// </summary>
-        public static string EnergyEfficiencyInfo {
-            get {
-                return ResourceManager.GetString("EnergyEfficiencyInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The energy efficiency is calculated using a formula taken from the Directive 2008/98/EC on waste (Waste Framework Directive). The formula used to calculate this value of energy efficiency, &quot;the R1 Energy Efficiency Formula&quot; is:.
-        /// </summary>
-        public static string EnrgyEfficiencyDescription {
-            get {
-                return ResourceManager.GetString("EnrgyEfficiencyDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Formula parameters description.
         /// </summary>
         public static string FormulaTitle {
@@ -148,6 +130,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         public static string GuidanceNotesTitle {
             get {
                 return ResourceManager.GetString("GuidanceNotesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The energy efficiency is calculated using a formula taken from the Directive 2008/98/EC on waste (Waste Framework Directive)..
+        /// </summary>
+        public static string GuidanceTextFirstPara {
+            get {
+                return ResourceManager.GetString("GuidanceTextFirstPara", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can obtain this information from the recovery facility. In some cases, this value might not be applicable, for example if the waste is going to a cement kiln. You can then enter &quot;NA&quot;..
+        /// </summary>
+        public static string GuidanceTextSecondPara {
+            get {
+                return ResourceManager.GetString("GuidanceTextSecondPara", resourceCulture);
             }
         }
         
@@ -247,51 +247,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         public static string Step2 {
             get {
                 return ResourceManager.GetString("Step2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The annual energy produced as heat or electricity. It is calculated with energy in the form of electricity being multiplied by 2.6 and heat produced for commercial use multiplied by 1.1 (GJ/year).
-        /// </summary>
-        public static string TdFormula1 {
-            get {
-                return ResourceManager.GetString("TdFormula1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The annual energy input to the system from fuel contributions to the production of steam (GJ/year).
-        /// </summary>
-        public static string TdFormula2 {
-            get {
-                return ResourceManager.GetString("TdFormula2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The annual energy imported excluding E&lt;sub&gt;w&lt;/sub&gt; and E&lt;sub&gt;f&lt;/sub&gt; (GJ/year).
-        /// </summary>
-        public static string TdFormula3 {
-            get {
-                return ResourceManager.GetString("TdFormula3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The annual energy contained in the treated waste calculated using the net calorific value of the waste (GJ/year).
-        /// </summary>
-        public static string TdFormula4 {
-            get {
-                return ResourceManager.GetString("TdFormula4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The factor accounting for energy losses due to bottom ask and radiation.
-        /// </summary>
-        public static string TdFormula5 {
-            get {
-                return ResourceManager.GetString("TdFormula5", resourceCulture);
             }
         }
         
