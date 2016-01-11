@@ -1,57 +1,48 @@
 ﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
-
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
-    <summary class="block">
-        Intended shipments @Html.ActionLink("Change", "Index", "Shipment", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-            @if (Model.IntendedShipment != null && !Model.IntendedShipment.IsEmpty())
-            {
+    <div class="overview-block">
+        @if (Model.IntendedShipment != null && !Model.IntendedShipment.IsEmpty())
+        {
+            <div class="overview-block-element">
                 <dl>
-                    <dt>Total intended number of shipments:</dt>
-                    <dd>
-                        @if (Model.IntendedShipment.TotalShipments.HasValue)
-                        {
-                            @Model.IntendedShipment.TotalShipments
-                        }
-                        else
-                        {
-                            <text>Not entered</text>
-                        }
-                    </dd>
+                    <dt>@Resource.ShipmentNumberTitle</dt>
+                    @if (Model.IntendedShipment.TotalShipments.HasValue)
+                    {
+                        <dd>@Model.IntendedShipment.TotalShipments</dd>
+                    }
+                    else
+                    {
+                        <dd>@Resource.ShipmentNotEnteredText</dd>
+                    }
 
-                    <dt>Total intended quantity:</dt>
-                    <dd>
-                        @if (Model.IntendedShipment.Quantity.HasValue && Model.IntendedShipment.Units.HasValue)
-                        {
-                            @Html.Raw(string.Format("{0:0.####} {1}", Model.IntendedShipment.Quantity, EnumHelper.GetShortName(Model.IntendedShipment.Units)))
-                        }
-                        else
-                        {
-                            <text>Not entered</text>
-                        }
-                    </dd>
+                    <dt>@Resource.ShipmentQuantityTitle</dt>
+                    @if (Model.IntendedShipment.Quantity.HasValue && Model.IntendedShipment.Units.HasValue)
+                    {
+                        <dd>@Html.Raw(string.Format("{0:0.####} {1}", Model.IntendedShipment.Quantity, EnumHelper.GetShortName(Model.IntendedShipment.Units)))</dd>
+                    }
+                    else
+                    {
+                        <dd>@Resource.ShipmentNotEnteredText</dd>
+                    }
 
-                    <dt>Intended dates of departure:</dt>
-                    <dd>
-                        @if (Model.IntendedShipment.Start.HasValue && Model.IntendedShipment.End.HasValue)
-                        {
-                            @Html.Gds().DisplayDateRangeFor(m => m.IntendedShipment.Start.Value, m => m.IntendedShipment.End.Value)
-                        }
-                        else
-                        {
-                            <text>Not entered</text>
-                        }
-                    </dd>
+                    <dt>@Resource.ShipmentDatesTitle</dt>
+                    @if (Model.IntendedShipment.Start.HasValue && Model.IntendedShipment.End.HasValue)
+                    {
+                        <dd>@Html.Gds().DisplayDateRangeFor(m => m.IntendedShipment.Start.Value, m => m.IntendedShipment.End.Value)</dd>
+                    }
+                    else
+                    {
+                        <dd>@Resource.ShipmentNotEnteredText</dd>
+                    }
                 </dl>
-            }
-            else
-            {
-                <p>@ViewBag.SectionIncompleteText</p>
-            }
-        </div>
+            </div>
+        }
+        else
+        {
+            <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+        }
     </div>
 </details>

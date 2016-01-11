@@ -2,17 +2,14 @@
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
-    <summary class="block">
-        @Resource.StateOfExportTitle @Html.ActionLink("Change", "Index", "StateOfExport", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
+    <div class="overview-block">
+        <div class="overview-block-element">
             @if (Model.StateOfExport != null && !Model.StateOfExport.IsEmpty())
             {
                 <dl>
-                    <dt>Country:</dt>
+                    <dt>@Resource.CountryText</dt>
                     @if (!string.IsNullOrWhiteSpace(Model.StateOfExport.CountryName))
-                    {
+                {
                         <dd>@Model.StateOfExport.CountryName</dd>
                     }
                     else
@@ -20,9 +17,9 @@
                         <dd>@Resource.UnansweredQuestionPlaceholder</dd>
                     }
 
-                    <dt>Competent authority:</dt>
+                    <dt>@Resource.CompetentAuthorityText</dt>
                     @if (!string.IsNullOrWhiteSpace(Model.StateOfExport.CompetentAuthorityName))
-                    {
+                {
                         <dd>@Model.StateOfExport.CompetentAuthorityCode - @Model.StateOfExport.CompetentAuthorityName</dd>
                     }
                     else
@@ -30,21 +27,22 @@
                         <dd>@Resource.UnansweredQuestionPlaceholder</dd>
                     }
 
-                    <dt>Exit point:</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.StateOfExport.ExitPointName))
-                    {
-                        <dd>@Model.StateOfExport.ExitPointName</dd>
-                    }
-                    else
-                    {
-                        <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                    }
-                </dl>
+                    <dt>@Resource.ExitPointText</dt>
+                @if (!string.IsNullOrWhiteSpace(Model.StateOfExport.ExitPointName))
+                {
+                    <dd>@Model.StateOfExport.ExitPointName</dd>
+                }
+                else
+                {
+                    <dd>@Resource.UnansweredQuestionPlaceholder</dd>
+                }
+            </dl>
             }
             else
             {
                 @ViewBag.SectionIncompleteText
             }
+
         </div>
     </div>
 </details>

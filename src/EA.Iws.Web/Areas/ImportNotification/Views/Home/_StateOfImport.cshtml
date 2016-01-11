@@ -2,17 +2,14 @@
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
-    <summary class="block">
-        @Resource.StateOfImportTitle @Html.ActionLink("Change", "Index", "StateOfImport", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
+    <div class="overview-block">
+        <div class="overview-block-element">
             @if (Model.StateOfImport != null && !Model.StateOfImport.IsEmpty())
             {
                 <dl>
-                    <dt>Country:</dt>
+                    <dt>@Resource.CountryText</dt>
                     @if (!string.IsNullOrWhiteSpace(Model.StateOfImport.CountryName))
-                    {
+                {
                         <dd>@Model.StateOfImport.CountryName</dd>
                     }
                     else
@@ -20,9 +17,9 @@
                         <dd>@Resource.UnansweredQuestionPlaceholder</dd>
                     }
 
-                    <dt>Competent authority:</dt>
+                    <dt>@Resource.CompetentAuthorityText</dt>
                     @if (!string.IsNullOrWhiteSpace(Model.StateOfImport.CompetentAuthorityName))
-                    {
+                {
                         <dd>@Model.StateOfImport.CompetentAuthorityCode - @Model.StateOfImport.CompetentAuthorityName</dd>
                     }
                     else
@@ -30,9 +27,9 @@
                         <dd>@Resource.UnansweredQuestionPlaceholder</dd>
                     }
 
-                    <dt>Entry point:</dt>
+                    <dt>@Resource.EntryPointText</dt>
                     @if (!string.IsNullOrWhiteSpace(Model.StateOfImport.EntryPointName))
-                    {
+                {
                         <dd>@Model.StateOfImport.EntryPointName</dd>
                     }
                     else
@@ -45,6 +42,7 @@
             {
                 @ViewBag.SectionIncompleteText
             }
+
         </div>
     </div>
 </details>

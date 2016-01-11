@@ -1,22 +1,14 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
 
-<details>
-    <summary class="block">
-        Technology employed @Html.ActionLink("Change", "Index", "WasteOperation", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-            @if (!string.IsNullOrWhiteSpace(Model.WasteOperation.TechnologyEmployed))
-            {
-                <dl>
-                    <dt>Description:</dt>
-                    <dd>@Html.DisplayFor(m => m.WasteOperation.TechnologyEmployed)</dd>
-                </dl>
-            }
-            else
-            {
-                <p>@ViewBag.SectionIncompleteText</p>
-            }
+<div class="overview-block">
+    @if (!string.IsNullOrWhiteSpace(Model.WasteOperation.TechnologyEmployed))
+    {
+        <div class="overview-block-element">
+            @Html.DisplayFor(m => m.WasteOperation.TechnologyEmployed)
         </div>
-    </div>
-</details>
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>

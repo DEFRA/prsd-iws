@@ -1,27 +1,21 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
-<details>
-    <summary class="block">
-        Y Codes @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-            @if (!Model.WasteType.YCodes.IsEmpty())
+<div class="overview-block">
+    @if (!Model.WasteType.YCodes.IsEmpty())
             {
                 if (Model.WasteType.YCodes.IsNotApplicable)
                 {
-                    <p>Not applicable</p>
-                }
-                else
-                {
-                    @Html.Partial("_CodeDefinitionList", Model.WasteType.YCodes.WasteCodes)
-                }
-            }
-            else
-            {
-                <p>@ViewBag.SectionIncompleteText</p>
-            }
-        </div>
-    </div>
-</details>
+            <div class="overview-block-element">@Resource.CodesNotApplicableText</div>
+        }
+        else
+        {
+            @Html.Partial("_CodeDefinitionList", Model.WasteType.YCodes.WasteCodes)
+        }
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>
 

@@ -2,19 +2,18 @@
 
 @foreach (var c in Model)
 {
-    <dl>
-        <dt>Code:</dt>
-        <dd>@c.Name</dd>
+    <details>
+        <div class="overview-block-element">
+            @c.Name<br/>
 
-        @if (!string.IsNullOrWhiteSpace(c.Description))
-        {
-            <dt>Description:</dt>
-            <dd>@c.Description</dd>
-        }
-    </dl>
-
-    if (c != Model.Last())
-    {
-        <hr />
-    }
+            @if (!string.IsNullOrWhiteSpace(c.Description))
+            {
+                @c.Description
+            }
+            @if (c != Model.Last())
+            {
+                <hr/>
+            }
+        </div>
+    </details>
 }

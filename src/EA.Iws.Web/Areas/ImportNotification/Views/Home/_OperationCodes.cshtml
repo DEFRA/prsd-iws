@@ -4,20 +4,17 @@
 @{
     var prefix = Model.Type == NotificationType.Disposal ? "D" : "R";
 }
-<details>
-    <summary class="block">
-        @Model.Type codes @Html.ActionLink("Change", "Index", "WasteOperation", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-            @if (Model.WasteOperation.OperationCodes != null && Model.WasteOperation.OperationCodes.Any())
-            {
-                <p>@string.Join(", ", Model.WasteOperation.OperationCodes.Select(c => prefix + c))</p>
-            }
-            else
-            {
-                <p>@ViewBag.SectionIncompleteText</p>
-            }
-        </div>
-    </div>
-</details>
+
+
+<div class="overview-block">
+        @if (Model.WasteOperation.OperationCodes != null && Model.WasteOperation.OperationCodes.Any())
+        {
+            <div class="overview-block-element">
+                @string.Join(", ", Model.WasteOperation.OperationCodes.Select(c => prefix + c))
+            </div>
+        }
+        else
+        {
+            <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+        }
+</div>

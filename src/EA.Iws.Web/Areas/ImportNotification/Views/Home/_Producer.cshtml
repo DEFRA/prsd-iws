@@ -1,46 +1,46 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
-<details>
-    <summary class="block">
-        Generator-producer @Html.ActionLink("Change", "Index", "Producer", null, new { @class="right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-            @if (Model.Producer != null && !Model.Producer.IsEmpty())
+<div class="overview-block">
+    @if (Model.Producer != null && !Model.Producer.IsEmpty())
+    {
+        <div class="overview-block-element">
+            @if (!string.IsNullOrWhiteSpace(Model.Producer.Name))
             {
-                <div class="grid-row">
-                    <div class="column-half">
-                        <dl>
-                            @if (!string.IsNullOrWhiteSpace(Model.Producer.Name))
-                            {
-                                <dt>Organisation name:</dt>
-                                <dd>@Html.DisplayFor(m => m.Producer.Name)</dd>
-                            }
+                @Html.DisplayFor(m => m.Producer.Name)<br />
+            }
 
-                            @if (!Model.Producer.Address.IsEmpty())
-                            {
-                                <dt>Address:</dt>
-                                <dd>@Html.DisplayFor(m => m.Producer.Address)</dd>
-                            }
-                        </dl>
-                    </div>
-                    <div class="column-half">
-                        <dl>
-                            @if (!Model.Producer.Contact.IsEmpty())
-                            {
-                                <dt>Contact:</dt>
-                                <dd>@Html.DisplayFor(m => m.Producer.Contact)</dd>
-                            }
-                            <dt>Are there multiple producers?</dt>
-                            <dd>@Html.DisplayFor(m => m.Producer.AreMultiple)</dd>
-                        </dl>
-                    </div>
-                </div>
+            @if (!Model.Producer.Address.IsEmpty())
+            {
+                @Html.DisplayFor(m => m.Producer.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Producer.Address.TownOrCity)<text> </text>
+                @Html.DisplayFor(m => m.Producer.Address.PostalCode)<text>, </text>
+                @Html.DisplayFor(m => m.Producer.Address.Country)
+            }
+
+        </div>
+
+        if (!Model.Producer.Contact.IsEmpty())
+        {
+            <div class="overview-block-element">
+                @Html.DisplayFor(m => m.Producer.Contact)
+            </div>
+        }
+
+        <div class="overview-block-element">
+            @Resource.MultipleProducersQuestion 
+            @if (Model.Producer.AreMultiple)
+            {
+                @Resource.True
             }
             else
             {
-                <p>@ViewBag.SectionIncompleteText</p>
+                @Resource.False
             }
         </div>
-    </div>
-</details>
+    }
+    else
+    {
+        <div class="overview-block-element"> @ViewBag.SectionIncompleteText</div>
+    }
+</div>

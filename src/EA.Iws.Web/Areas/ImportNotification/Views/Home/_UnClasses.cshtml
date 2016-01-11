@@ -1,27 +1,21 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
-<details>
-    <summary class="block">
-        UN Classes @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-            @if (!Model.WasteType.UnClasses.IsEmpty())
-            {
-                if (Model.WasteType.UnClasses.IsNotApplicable)
-                {
-                    <p>Not applicable</p>
-                }
-                else
-                {
-                    @Html.Partial("_CodeDefinitionList", Model.WasteType.UnClasses.WasteCodes)
-                }
-            }
-            else
-            {
-                <p>@ViewBag.SectionIncompleteText</p>
-            }
-        </div>
-    </div>
-</details>
+<div class="overview-block">
+    @if (!Model.WasteType.UnClasses.IsEmpty())
+    {
+        if (Model.WasteType.UnClasses.IsNotApplicable)
+        {
+            <div class="overview-block-element">@Resource.CodesNotApplicableText</div>
+        }
+        else
+        {
+            @Html.Partial("_CodeDefinitionList", Model.WasteType.UnClasses.WasteCodes)
+        }
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>
 

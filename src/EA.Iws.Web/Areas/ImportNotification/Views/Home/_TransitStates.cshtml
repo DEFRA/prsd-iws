@@ -2,18 +2,14 @@
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
-    <summary class="block">
-        @Resource.TransitStatesTitle @Html.ActionLink("Change", "Index", "TransitState", null, new { @class = "right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-
+    <div class="overview-block">
+        <div class="overview-block-element">
             @if (Model.TransitStates != null && Model.TransitStates.Count > 0)
             {
                 for (int i = 0; i < Model.TransitStates.Count; i++)
                 {
                     <dl>
-                        <dt>Country:</dt>
+                        <dt>@Resource.CountryText</dt>
                         @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].CountryName))
                         {
                             <dd>@Model.TransitStates[i].CountryName</dd>
@@ -23,7 +19,7 @@
                             <dd>@Resource.UnansweredQuestionPlaceholder</dd>
                         }
 
-                        <dt>Competent authority:</dt>
+                        <dt>@Resource.CompetentAuthorityText</dt>
                         @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].CompetentAuthorityName))
                         {
                             <dd>@Model.TransitStates[i].CompetentAuthorityCode - @Model.TransitStates[i].CompetentAuthorityName</dd>
@@ -32,7 +28,7 @@
                         {
                             <dd>@Resource.UnansweredQuestionPlaceholder</dd>
                         }
-                        <dt>Entry point:</dt>
+                        <dt>@Resource.EntryPointText</dt>
                         @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].EntryPointName))
                         {
                             <dd>@Model.TransitStates[i].EntryPointName</dd>
@@ -42,7 +38,7 @@
                             <dd>@Resource.UnansweredQuestionPlaceholder</dd>
                         }
 
-                        <dt>Exit point:</dt>
+                        <dt>@Resource.ExitPointText</dt>
                         @if (!string.IsNullOrWhiteSpace(Model.TransitStates[i].ExitPointName))
                         {
                             <dd>@Model.TransitStates[i].ExitPointName</dd>
@@ -55,7 +51,7 @@
 
                     if (i < (Model.TransitStates.Count - 1))
                     {
-                        <hr/>
+                        <hr />
                     }
                 }
             }

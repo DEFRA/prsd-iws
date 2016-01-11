@@ -5,33 +5,249 @@
 @{ViewBag.SectionIncompleteText = Resource.SectionIncompleteText;}
 
 <div id="submit-overview-area">
-    <h2 class="heading-medium">@Resource.OrganisationsTitle</h2>
-    @if (Model.Type != NotificationType.Disposal)
-    {
-        @Html.Partial("_Preconsented")
-    }
-    @Html.Partial("_Exporter")
-    @Html.Partial("_Producer")
-    @Html.Partial("_Importer")
-    @Html.Partial("_Facility")
+    
+    <table class="overview-table">
+        <thead>
+        <tr>
+            <th colspan="3">
+                <h2 class="heading-medium">@Resource.OrganisationsTitle</h2>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                @Resource.PreconsentedTitle
+            </td>
+            <td>
+                @Html.Partial("_Preconsented")
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Index", "Preconsented", null, new { @class = "right-float" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Resource.ExporterTitle
+            </td>
+            <td>
+                @Html.Partial("_Exporter")
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Resource.ProducerTitle
+            </td>
+            <td>
+                @Html.Partial("_Producer")
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Index", "Producer", null, new { @class = "right-float" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Resource.ImporterTitle
+            </td>
+            <td>
+                @Html.Partial("_Importer")
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Resource.FacilityTitle
+            </td>
+            <td>
+                @Html.Partial("_Facility")
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Index", "Facility", null, new { @class = "right-float" })
+            </td>
+        </tr>
 
-    <h2 class="heading-medium">@Html.Raw(Model.Type) operation</h2>
-    @Html.Partial("_OperationCodes")
-    @Html.Partial("_TechnologyEmployed")
-
-    <h2 class="heading-medium">@Resource.ShipmentInfoTitle</h2>
-    @Html.Partial("_IntendedShipment")
+        </tbody>
+    </table>
 
 
-    <h2 class="heading-medium">@Resource.WasteCodeTitle</h2>
-    @Html.Partial("_BaselOecdCode")
-    @Html.Partial("_EwcCodes")
-    @Html.Partial("_YCodes")
-    @Html.Partial("_HCodes")
-    @Html.Partial("_UnClasses")
+    <table class="overview-table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <h2 class="heading-medium">@Html.Raw(Model.Type) operation</h2>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Type @Resource.OperationCodesTitle
+                </td>
+                <td>
+                    @Html.Partial("_OperationCodes")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "WasteOperation", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.TechnologyTitle
+                </td>
+                <td>
+                    @Html.Partial("_TechnologyEmployed")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "WasteOperation", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
 
-    <h2 class="heading-medium">@Resource.TransportRouteTitle</h2>
-    @Html.Partial("_StateOfExport")
-    @Html.Partial("_StateOfImport")
-    @Html.Partial("_TransitStates")
+
+    <table class="overview-table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <h2 class="heading-medium">@Resource.ShipmentInfoTitle</h2>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Resource.ShipmentsTitle
+                </td>
+                <td>
+                    @Html.Partial("_IntendedShipment")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "Shipment", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+
+    <table class="overview-table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <h2 class="heading-medium">@Resource.WasteCodeTitle</h2>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Resource.BaselTitle
+                </td>
+                <td>
+                    @Html.Partial("_BaselOecdCode")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.EWCTitle
+                </td>
+                <td>
+                    @Html.Partial("_EwcCodes")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.YTitle
+                </td>
+                <td>
+                    @Html.Partial("_YCodes")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.HTitle
+                </td>
+                <td>
+                    @Html.Partial("_HCodes")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.UNTitle
+                </td>
+                <td>
+                    @Html.Partial("_UnClasses")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    <table class="overview-table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <h2 class="heading-medium">@Resource.TransportRouteTitle</h2>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Resource.StateOfExportTitle
+                </td>
+                <td>
+                    @Html.Partial("_StateOfExport")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "StateOfExport", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.StateOfImportTitle
+                </td>
+                <td>
+                    @Html.Partial("_StateOfImport")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "StateOfImport", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.TransitStatesTitle
+                </td>
+                <td>
+                    @Html.Partial("_TransitStates")
+                </td>
+                <td>
+                    @Html.ActionLink("Change", "Index", "TransitState", null, new { @class = "right-float" })
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
 </div>

@@ -1,44 +1,33 @@
 ﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
 
-<details>
-    <summary class="block">
-        Importer-consignee @Html.ActionLink("Change", "Index", "Exporter", null, new { @class="right-float" })
-    </summary>
-    <div class="expanded-details">
-        <div class="panel-indent">
-            @if (Model.Importer != null && !Model.Importer.IsEmpty())
+<div class="overview-block">
+    @if (Model.Importer != null && !Model.Importer.IsEmpty())
+    {
+        <div class="overview-block-element">
+            @if (!string.IsNullOrWhiteSpace(Model.Importer.Name))
             {
-                <div class="grid-row">
-                    <div class="column-half">
-                        <dl>
-                            @if (!string.IsNullOrWhiteSpace(Model.Importer.Name))
-                            {
-                                <dt>Organisation name:</dt>
-                                <dd>@Html.DisplayFor(m => m.Importer.Name)</dd>
-                            }
+                @Html.DisplayFor(m => m.Importer.Name)<br />
+            }
 
-                            @if (!Model.Importer.Address.IsEmpty())
-                            {
-                                <dt>Address:</dt>
-                                <dd>@Html.DisplayFor(m => m.Importer.Address)</dd>
-                            }
-                        </dl>
-                    </div>
-                    <div class="column-half">
-                        <dl>
-                            @if (!Model.Importer.Contact.IsEmpty())
-                            {
-                                <dt>Contact:</dt>
-                                <dd>@Html.DisplayFor(m => m.Importer.Contact)</dd>
-                            }
-                        </dl>
-                    </div>
-                </div>
-            }
-            else
+            @if (!Model.Exporter.Address.IsEmpty())
             {
-                <p>@ViewBag.SectionIncompleteText</p>
+                @Html.DisplayFor(m => m.Importer.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Importer.Address.TownOrCity)<text> </text>
+                @Html.DisplayFor(m => m.Importer.Address.PostalCode)<text>, </text>
+                @Html.DisplayFor(m => m.Importer.Address.Country)
             }
+
         </div>
-    </div>
-</details>
+
+        if (!Model.Importer.Contact.IsEmpty())
+        {
+            <div class="overview-block-element">
+                @Html.DisplayFor(m => m.Importer.Contact)
+            </div>
+        }
+    }
+    else
+    {
+        <div class="overview-block-element"> @ViewBag.SectionIncompleteText</div>
+    }
+</div>
