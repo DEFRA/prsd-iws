@@ -56,7 +56,7 @@
 
             if (dateComplete > SystemTime.UtcNow)
             {
-                yield return new ValidationResult("Date completed cannot be in the future", new[] { "Day" });
+                yield return new ValidationResult("This date cannot be in the future. Please enter a different date.", new[] { "Day" });
             }
 
             if (dateComplete < ReceiptDate)
