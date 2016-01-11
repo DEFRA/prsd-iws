@@ -40,6 +40,10 @@
                     x => x.Notification.Id,
                     fg => fg.NotificationApplicationId,
                     (x, fg) => new { x.Notification, x.Shipment, FinancialGuarantee = fg })
+                .Join(context.NotificationAssessments,
+                    x => x.Notification.Id,
+                    na => na.NotificationApplicationId,
+                    (x, na) => new { x.Notification, x.Shipment, x.FinancialGuarantee, NotificationAssessment = na })
                 .Select(x => new
                 {
                     NotificationId = x.Notification.Id,
@@ -48,7 +52,10 @@
                     x.FinancialGuarantee.ActiveLoadsPermitted,
                     NumberOfShipments = x.Shipment == null ? 0 : x.Shipment.NumberOfShipments,
                     Quantity = x.Shipment == null ? 0 : x.Shipment.Quantity,
-                    Units = x.Shipment == null ? ShipmentQuantityUnits.Tonnes : x.Shipment.Units
+                    Units = x.Shipment == null ? ShipmentQuantityUnits.Tonnes : x.Shipment.Units,
+                    FinancialGuaranteeStatus = x.FinancialGuarantee.Status,
+                    NotificationStatus = x.NotificationAssessment.Status,
+                    x.Notification.CompetentAuthority
                 })
                 .SingleAsync(x => x.NotificationId == notificationId);
 
@@ -74,7 +81,10 @@
                 currentActiveLoads,
                 summaryData.Quantity,
                 (await quantity.Received(notificationId)).Quantity,
-                summaryData.Units);
+                summaryData.Units,
+                summaryData.FinancialGuaranteeStatus,
+                summaryData.CompetentAuthority.AsCompetentAuthority(),
+                summaryData.NotificationStatus);
         }
     }
 }

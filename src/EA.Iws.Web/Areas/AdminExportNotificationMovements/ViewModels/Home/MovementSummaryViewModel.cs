@@ -64,6 +64,7 @@
             QuantityReceivedTotal = data.SummaryData.QuantityReceived.ToString("G29") + " " + EnumHelper.GetDisplayName(data.SummaryData.DisplayUnit);
             ActiveLoadsPermitted = data.SummaryData.ActiveLoadsPermitted;
             ActiveLoadsCurrent = data.SummaryData.CurrentActiveLoads;
+            NotificationStatus = data.SummaryData.NotificationStatus;
 
             TableData = new List<MovementSummaryTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)

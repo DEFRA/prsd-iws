@@ -5,7 +5,7 @@
 @using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Options.IndexResources
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 
-@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Options.ShipmentSummaryViewModel
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Options.NotificationOptionsViewModel
 
 @{
     ViewBag.Title = @Resource.TabTitle;
@@ -95,8 +95,7 @@ else if (status != MovementStatus.Cancelled)
     <div class="grid-row">
 
         <div class="column-half">
-            @if ((Model.NotificationStatus == NotificationStatus.Consented || Model.NotificationStatus == NotificationStatus.ConsentWithdrawn)
-                && (Model.FinancialGuaranteeStatus == FinancialGuaranteeStatus.Approved || Model.FinancialGuaranteeStatus == FinancialGuaranteeStatus.Released))
+            @if (Model.ShowShipmentOptions)
             {
                 <h2 class="heading-medium">@Resource.ShipmentOptionsTitle</h2>
                 <div class="nav-bloc">
@@ -120,8 +119,7 @@ else if (status != MovementStatus.Cancelled)
         </div>
 
         <div class="column-half">
-            @if ((Model.NotificationStatus == NotificationStatus.Consented || Model.NotificationStatus == NotificationStatus.ConsentWithdrawn) 
-                && (Model.FinancialGuaranteeStatus == FinancialGuaranteeStatus.Approved || Model.FinancialGuaranteeStatus == FinancialGuaranteeStatus.Released))
+            @if (Model.ShowShipmentOptions)
             {
                 <h2 class="heading-medium">@Resource.ShipmentSummaryTitle</h2>
 
@@ -159,7 +157,7 @@ else if (status != MovementStatus.Cancelled)
 
     </div>
 
-    @if (Model.NotificationStatus == NotificationStatus.Consented || Model.NotificationStatus == NotificationStatus.ConsentWithdrawn)
+    @if (Model.ShowShipmentKeyDates)
     {
         <section class="ship-data">
             <h2 class="heading-medium">

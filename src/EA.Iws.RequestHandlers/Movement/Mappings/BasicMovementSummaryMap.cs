@@ -17,7 +17,10 @@
                 QuantityRemaining = source.QuantityRemaining,
                 DisplayUnit = source.Units,
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
-                CurrentActiveLoads = source.CurrentActiveLoads
+                CurrentActiveLoads = source.CurrentActiveLoads,
+                CompetentAuthority = source.CompetentAuthority,
+                FinancialGuaranteeStatus = source.FinancialGuaranteeStatus,
+                NotificationStatus = source.NotificationStatus
             };
         }
     }

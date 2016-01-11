@@ -5,8 +5,6 @@
     using System.Web.Mvc;
     using Core.Movement;
     using Prsd.Core.Mediator;
-    using Requests.Notification;
-    using Requests.NotificationAssessment;
     using Requests.NotificationMovements;
     using ViewModels.Options;
 
@@ -24,15 +22,9 @@
         public async Task<ActionResult> Index(Guid id, int? status)
         {
             var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status));
-            var notificationBasicInformation = await mediator.SendAsync(new GetNotificationBasicInfo(id));
-            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
-            var financialGuaranteeStatus = await mediator.SendAsync(new GetFinancialGuaranteeStatus(id));
 
-            var model = new ShipmentSummaryViewModel(id, movementsSummary);
+            var model = new NotificationOptionsViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;
-            model.CompetentAuthority = notificationBasicInformation.CompetentAuthority;
-            model.NotificationStatus = notificationStatus;
-            model.FinancialGuaranteeStatus = financialGuaranteeStatus;
 
             return View(model);
         }

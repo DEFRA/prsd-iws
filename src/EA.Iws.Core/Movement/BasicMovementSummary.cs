@@ -1,6 +1,9 @@
 ﻿namespace EA.Iws.Core.Movement
 {
     using System;
+    using FinancialGuarantee;
+    using Notification;
+    using NotificationAssessment;
     using Shared;
 
     public class BasicMovementSummary
@@ -20,5 +23,11 @@
         public decimal QuantityRemaining { get; set; }
 
         public ShipmentQuantityUnits DisplayUnit { get; set; }
+
+        public FinancialGuaranteeStatus FinancialGuaranteeStatus { get; set; }
+
+        public CompetentAuthority CompetentAuthority { get; set; }
+
+        public NotificationStatus NotificationStatus { get; set; }
     }
 }

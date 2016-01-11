@@ -11,7 +11,7 @@
     using Core.Shared;
     using Prsd.Core.Helpers;
 
-    public class ShipmentSummaryViewModel
+    public class NotificationOptionsViewModel
     {
         public CompetentAuthority CompetentAuthority { get; set; }
 
@@ -59,7 +59,7 @@
             }
         }
 
-        public ShipmentSummaryViewModel(Guid notificationId, NotificationMovementsSummaryAndTable data)
+        public NotificationOptionsViewModel(Guid notificationId, NotificationMovementsSummaryAndTable data)
         {
             NotificationId = notificationId;
             NotificationNumber = data.SummaryData.NotificationNumber;
@@ -70,6 +70,10 @@
             QuantityReceivedTotal = data.SummaryData.QuantityReceived.ToString("G29") + " " + EnumHelper.GetDisplayName(data.SummaryData.DisplayUnit);
             ActiveLoadsPermitted = data.SummaryData.ActiveLoadsPermitted;
             ActiveLoadsCurrent = data.SummaryData.CurrentActiveLoads;
+
+            CompetentAuthority = data.SummaryData.CompetentAuthority;
+            NotificationStatus = data.SummaryData.NotificationStatus;
+            FinancialGuaranteeStatus = data.SummaryData.FinancialGuaranteeStatus;
 
             TableData = new List<ShipmentDatesTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)
@@ -84,6 +88,27 @@
             }
 
             return EnumHelper.GetDisplayName(status);
+        }
+
+        public bool ShowShipmentOptions
+        {
+            get
+            {
+                return (NotificationStatus == NotificationStatus.Consented ||
+                        NotificationStatus == NotificationStatus.ConsentWithdrawn)
+                       &&
+                       (FinancialGuaranteeStatus == FinancialGuaranteeStatus.Approved ||
+                        FinancialGuaranteeStatus == FinancialGuaranteeStatus.Released);
+            }
+        }
+
+        public bool ShowShipmentKeyDates
+        {
+            get
+            {
+                return NotificationStatus == NotificationStatus.Consented ||
+                       NotificationStatus == NotificationStatus.ConsentWithdrawn;
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
     using System;
+    using Core.FinancialGuarantee;
+    using Core.Notification;
+    using Core.NotificationAssessment;
     using Core.Shared;
 
     public class NotificationMovementsSummary
@@ -20,6 +23,12 @@
         }
         public ShipmentQuantityUnits Units { get; private set; }
 
+        public FinancialGuaranteeStatus FinancialGuaranteeStatus { get; private set; }
+
+        public CompetentAuthority CompetentAuthority { get; private set; }
+
+        public NotificationStatus NotificationStatus { get; private set; }
+
         public static NotificationMovementsSummary Load(Guid notificationId,
             string notificationNumber,
             NotificationType notificationType,
@@ -29,7 +38,10 @@
             int currentActiveLoads,
             decimal intendedQuantity,
             decimal quantityReceived,
-            ShipmentQuantityUnits units)
+            ShipmentQuantityUnits units,
+            FinancialGuaranteeStatus financialGuaranteeStatus,
+            CompetentAuthority competentAuthority,
+            NotificationStatus notificationStatus)
         {
             return new NotificationMovementsSummary
             {
@@ -42,7 +54,10 @@
                 CurrentActiveLoads = currentActiveLoads,
                 IntendedQuantity = intendedQuantity,
                 QuantityReceived = quantityReceived,
-                Units = units
+                Units = units,
+                FinancialGuaranteeStatus = financialGuaranteeStatus,
+                CompetentAuthority = competentAuthority,
+                NotificationStatus = notificationStatus
             };
         }
     }
