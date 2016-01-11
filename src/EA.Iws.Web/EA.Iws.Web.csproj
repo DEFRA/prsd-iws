@@ -835,6 +835,7 @@
     <Content Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormal.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_ExportNavigation.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_ImportNavigation.cshtml" />
+    <Content Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDays.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
@@ -1194,11 +1195,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysSelection.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysWarningViewModel.cs" />
+    <Compile Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysWarningViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThreeWorkingDaysWarningViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QuantityAbnormalViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDaysResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThreeWorkingDaysResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ExportMovement\Views\QuantityReceived\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2556,9 +2569,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysWarningViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThreeWorkingDaysWarningViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>QuantityAbnormalViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDaysResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThreeWorkingDaysResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\Views\QuantityReceived\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

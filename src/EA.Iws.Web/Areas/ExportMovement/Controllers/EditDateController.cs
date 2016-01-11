@@ -7,12 +7,14 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Edit;
+    using Requests.NotificationMovements;
     using ViewModels.EditDate;
 
     [Authorize]
     public class EditDateController : Controller
     {
         private readonly IMediator mediator;
+        private const string ShipmentDateKey = "ShipmentDateKey";
 
         public EditDateController(IMediator mediator)
         {
@@ -71,7 +73,50 @@
 
             var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
 
+            var workingDaysUntilShipment = await mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.AsDateTime().GetValueOrDefault()));
+
+            if (workingDaysUntilShipment < 4)
+            {
+                TempData[ShipmentDateKey] = model.AsDateTime();
+                return RedirectToAction("ThreeWorkingDaysWarning", "EditDate");
+            }
+
             await mediator.SendAsync(new UpdateMovementDate(id, model.AsDateTime().Value));
+
+            return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = notificationId });
+        }
+
+        [HttpGet]
+        public ActionResult ThreeWorkingDaysWarning(Guid id)
+        {
+            object result;
+            if (TempData.TryGetValue(ShipmentDateKey, out result))
+            {
+                var model = new ThreeWorkingDaysWarningViewModel((DateTime)result);
+
+                return View("ThreeWorkingDays", model);
+            }
+
+            return RedirectToAction("Index", "EditDate");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ThreeWorkingDaysWarning(Guid id, ThreeWorkingDaysWarningViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("ThreeWorkingDays", model);
+            }
+
+            if (model.Selection == ThreeWorkingDaysSelection.ChangeDate)
+            {
+                return RedirectToAction("Index", "EditDate");
+            }
+
+            await mediator.SendAsync(new UpdateMovementDate(id, model.ShipmentDate));
+
+            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
 
             return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = notificationId });
         }
