@@ -113,6 +113,9 @@
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
+    <Compile Include="Annexes\DeleteAnnex.cs" />
+    <Compile Include="Annexes\DeleteAnnexFileHandler.cs" />
+    <Compile Include="Annexes\GetAnnexFileHandler.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnexHandler.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnexHandler.cs" />
     <Compile Include="Annexes\SetProcessOfGenerationAnnexHandler.cs" />
@@ -382,7 +385,7 @@
     <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
-    <Compile Include="Annexes\GetAnnexesToBeProvidedHandler.cs" />
+    <Compile Include="Annexes\GetAnnexesHandler.cs" />
     <Compile Include="Notification\CreateAnnexCollection.cs" />
     <Compile Include="Notification\GetNotificationIdAndStatusByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />

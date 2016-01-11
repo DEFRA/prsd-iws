@@ -8,5 +8,7 @@
         Task<Guid> Store(File file);
 
         Task<File> Get(Guid id);
+
+        Task Remove(Guid id);
     }
 }

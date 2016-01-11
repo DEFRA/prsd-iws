@@ -139,6 +139,7 @@
     <Compile Include="NotificationApplication\Annexes\AnnexCollection.cs" />
     <Compile Include="NotificationApplication\Annexes\AnnexFactory.cs" />
     <Compile Include="NotificationApplication\Annexes\AnnexRequirements.cs" />
+    <Compile Include="NotificationApplication\Annexes\DeleteAnnexEvent.cs" />
     <Compile Include="NotificationApplication\Annexes\IAnnexCollectionRepository.cs" />
     <Compile Include="NotificationApplication\Annexes\IAnnexNameGenerator.cs" />
     <Compile Include="NotificationApplication\Annexes\ProcessOfGenerationAnnex.cs" />

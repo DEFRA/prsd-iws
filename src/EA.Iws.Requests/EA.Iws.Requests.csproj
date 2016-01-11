@@ -80,6 +80,8 @@
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDates.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsers.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
+    <Compile Include="Annexes\DeleteAnnexFile.cs" />
+    <Compile Include="Annexes\GetAnnexFile.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnex.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnex.cs" />
     <Compile Include="Annexes\SetProcessOfGenerationAnnex.cs" />
@@ -180,7 +182,7 @@
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
     <Compile Include="NotificationMovements\MovementNumberStatus.cs" />
     <Compile Include="Notification\GeneratePostageLabel.cs" />
-    <Compile Include="Annexes\GetAnnexesToBeProvided.cs" />
+    <Compile Include="Annexes\GetAnnexes.cs" />
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationIdAndStatusByNumber.cs" />

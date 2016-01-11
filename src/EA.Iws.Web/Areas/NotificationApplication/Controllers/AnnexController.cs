@@ -6,6 +6,7 @@
     using System.Web;
     using System.Web.Mvc;
     using Core.Annexes;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Annexes;
     using ViewModels.Annex;
@@ -23,7 +24,7 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetAnnexesToBeProvided(id));
+            var result = await mediator.SendAsync(new GetAnnexes(id));
 
             return View(new AnnexViewModel
             {
@@ -36,11 +37,18 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, AnnexViewModel model)
+        public async Task<ActionResult> Index(Guid id, AnnexViewModel model, Guid? delete)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
+            }
+
+            if (delete.HasValue)
+            {
+                await DeleteAnnex(id, delete.Value);
+
+                return RedirectToAction("Index");
             }
 
             if (model.ProcessOfGeneration != null && model.ProcessOfGenerationStatus.IsRequired)
@@ -69,6 +77,20 @@
 
             return RedirectToAction("Index", "Options");
         }
+
+        [HttpGet]
+        public async Task<ActionResult> ViewAnnex(Guid id, Guid fileId)
+        {
+            var result = await mediator.SendAsync(new GetAnnexFile(id, fileId));
+
+            return File(result.Content, MimeTypeHelper.GetMimeType(result.Type),
+                string.Format("{0}.{1}", result.Name, result.Type));
+        }
+        
+        private async Task DeleteAnnex(Guid id, Guid fileId)
+        {
+            await mediator.SendAsync(new DeleteAnnexFile(id, fileId));
+        } 
 
         private byte[] GetFileBytes(HttpPostedFileBase file)
         {

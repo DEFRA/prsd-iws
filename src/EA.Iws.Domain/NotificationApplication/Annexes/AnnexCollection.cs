@@ -46,5 +46,23 @@
 
             TechnologyEmployed = technologyEmployedAnnex;
         }
+
+        public void RemoveAnnex(Guid fileId)
+        {
+            if (ProcessOfGeneration.FileId == fileId)
+            {
+                ProcessOfGeneration = new ProcessOfGenerationAnnex();
+            }
+            else if (TechnologyEmployed.FileId == fileId)
+            {
+                TechnologyEmployed = new TechnologyEmployedAnnex();
+            }
+            else if (WasteComposition.FileId == fileId)
+            {
+                WasteComposition = new WasteCompositionAnnex();
+            }
+
+            RaiseEvent(new DeleteAnnexEvent(fileId));
+        }
     }
 }

@@ -17,75 +17,81 @@
     @Html.HiddenFor(m => m.ProcessOfGenerationStatus.IsRequired)
     @Html.HiddenFor(m => m.ProcessOfGenerationStatus.FileId)
 
-<table class="form-group">
-    <thead>
-        <tr>
-            <th>@Resource.AnnexNameColumnTitle</th>
-            <th>@Resource.AnnexColumnTitle</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.ProcessOfGenerationStatus.IsRequired)
-        {
-        <tr>
-            <td>@Html.LabelFor(m => m.ProcessOfGeneration, Resource.ProcessOfGeneration)</td>
-            @if (Model.ProcessOfGenerationStatus.FileId.HasValue)
+    <table class="form-group">
+        <thead>
+            <tr>
+                <th>@Resource.AnnexNameColumnTitle</th>
+                <th>@Resource.AnnexColumnTitle</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ProcessOfGenerationStatus.IsRequired)
             {
-                <td>
-                    @Resource.AlreadyProvidedText
-                </td>
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProcessOfGeneration, Resource.ProcessOfGeneration)</td>
+                    @if (Model.ProcessOfGenerationStatus.FileId.HasValue)
+                    {
+                        <td>
+                            @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.ProcessOfGenerationStatus.FileId.Value })
+                            |
+                            <button type="submit" name="delete" value="@Model.ProcessOfGenerationStatus.FileId.Value" class="link-submit">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide" })
+                        </td>
+                    }
+                </tr>
             }
-            else
+            @if (Model.TechnologyEmployedStatus.IsRequired)
             {
-            <td>
-                @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide" })
-            </td>
+                <tr>
+                    <td>@Html.LabelFor(m => m.TechnologyEmployed, Resource.TechnologyEmployed)</td>
+                    @if (Model.TechnologyEmployedStatus.FileId.HasValue)
+                    {
+                        <td>
+                            @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.TechnologyEmployedStatus.FileId.Value })
+                            |
+                            <button type="submit" name="delete" value="@Model.TechnologyEmployedStatus.FileId.Value" class="link-submit">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide" })
+                        </td>
+                    }
+                </tr>
             }
-        </tr>
-        }
-        @if (Model.TechnologyEmployedStatus.IsRequired)
-        {
-        <tr>
-            <td>@Html.LabelFor(m => m.TechnologyEmployed, Resource.TechnologyEmployed)</td>
-            @if (Model.TechnologyEmployedStatus.FileId.HasValue)
+            @if (Model.WasteCompositionStatus.IsRequired)
             {
-                <td>
-                    @Resource.AlreadyProvidedText
-                </td>
+                <tr>
+                    <td>@Html.LabelFor(m => m.Composition, Resource.CompositionOfWaste)</td>
+                    @if (Model.WasteCompositionStatus.FileId.HasValue)
+                    {
+                        <td>
+                            @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.WasteCompositionStatus.FileId.Value })
+                            |
+                            <button type="submit" name="delete" value="@Model.WasteCompositionStatus.FileId.Value" class="link-submit">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide" })
+                        </td>
+                    }
+                </tr>
             }
-            else
-            {
-                <td>
-                    @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide" })
-                </td>
-            }
-        </tr>
-        }
-        @if (Model.WasteCompositionStatus.IsRequired)
-        {
-        <tr>
-            <td>@Html.LabelFor(m => m.Composition, Resource.CompositionOfWaste)</td>
-            @if (Model.WasteCompositionStatus.FileId.HasValue)
-            {
-                <td>
-                    @Resource.AlreadyProvidedText
-                </td>
-            }
-            else
-            {
-                <td>
-                    @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide" })
-                </td>
-            }
-        </tr>
-        }
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
 
-<div class="form-group">
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
-</div>
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
 }
 
 

@@ -59,6 +59,7 @@
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
     <Compile Include="Admin\Reports\MissingShipmentData.cs" />
     <Compile Include="Admin\Search\ImportSearchResult.cs" />
+    <Compile Include="Annexes\AnnexFileData.cs" />
     <Compile Include="Annexes\AnnexStatus.cs" />
     <Compile Include="Annexes\AnnexUpload.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttribute.cs" />

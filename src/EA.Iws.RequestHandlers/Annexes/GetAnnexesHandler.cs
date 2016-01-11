@@ -7,19 +7,19 @@
     using Prsd.Core.Mediator;
     using Requests.Annexes;
 
-    internal class GetAnnexesToBeProvidedHandler : IRequestHandler<GetAnnexesToBeProvided, ProvidedAnnexesData>
+    internal class GetAnnexesHandler : IRequestHandler<GetAnnexes, ProvidedAnnexesData>
     {
         private readonly RequiredAnnexes requiredAnnexes;
         private readonly IAnnexCollectionRepository annexCollectionRepository;
 
-        public GetAnnexesToBeProvidedHandler(RequiredAnnexes requiredAnnexes, 
+        public GetAnnexesHandler(RequiredAnnexes requiredAnnexes, 
             IAnnexCollectionRepository annexCollectionRepository)
         {
             this.requiredAnnexes = requiredAnnexes;
             this.annexCollectionRepository = annexCollectionRepository;
         }
 
-        public async Task<ProvidedAnnexesData> HandleAsync(GetAnnexesToBeProvided message)
+        public async Task<ProvidedAnnexesData> HandleAsync(GetAnnexes message)
         {
             var annexRequirements = await requiredAnnexes.Get(message.NotificationId);
             var annexCollection = await annexCollectionRepository.GetByNotificationId(message.NotificationId);

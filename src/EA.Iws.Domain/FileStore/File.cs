@@ -21,6 +21,10 @@
             Content = content;
         }
 
+        protected File()
+        {
+        }
+
         public Guid Id { get; private set; }
 
         public string Name { get; private set; }

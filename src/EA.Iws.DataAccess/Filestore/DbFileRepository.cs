@@ -27,5 +27,12 @@
         {
             return await fileStoreContext.Files.SingleAsync(p => p.Id == id);
         }
+
+        public async Task Remove(Guid id)
+        {
+            var file = await fileStoreContext.Files.SingleAsync(f => f.Id == id);
+
+            fileStoreContext.Files.Remove(file);
+        }
     }
 }
