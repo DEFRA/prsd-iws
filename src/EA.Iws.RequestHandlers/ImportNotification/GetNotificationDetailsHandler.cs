@@ -9,19 +9,25 @@
 
     internal class GetNotificationDetailsHandler : IRequestHandler<GetNotificationDetails, NotificationDetails>
     {
+        private readonly IImportNotificationAssessmentRepository assessmentRepository;
         private readonly IMapper mapper;
         private readonly IImportNotificationRepository repository;
 
-        public GetNotificationDetailsHandler(IImportNotificationRepository repository, IMapper mapper)
+        public GetNotificationDetailsHandler(IImportNotificationRepository repository,
+            IImportNotificationAssessmentRepository assessmentRepository,
+            IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
+            this.assessmentRepository = assessmentRepository;
         }
 
         public async Task<NotificationDetails> HandleAsync(GetNotificationDetails message)
         {
             var notification = await repository.Get(message.ImportNotificationId);
-            return mapper.Map<NotificationDetails>(notification);
+            var status = await assessmentRepository.GetStatusByNotification(message.ImportNotificationId);
+
+            return mapper.Map<NotificationDetails>(notification, status);
         }
     }
 }

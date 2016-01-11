@@ -4,7 +4,7 @@
 
 <div class="grid-row">
     <div class="column-third">
-        @Html.Action("InternalMenu", "Home")
+        @RenderSection("menu", required: true)
     </div>
 
     <div class="column-two-thirds">

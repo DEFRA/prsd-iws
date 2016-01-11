@@ -54,3 +54,7 @@
         setDropdownRevealSections("decision-select", "assessment-decision")
     </script>
 }
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Assessment })
+}

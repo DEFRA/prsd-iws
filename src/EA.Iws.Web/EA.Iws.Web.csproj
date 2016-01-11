@@ -752,13 +752,11 @@
     <Content Include="Areas\AdminExportMovement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminExportMovement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminExportMovement\Views\Home\_NotificationSwitcher.cshtml" />
-    <Content Include="Areas\ImportNotification\Views\Home\_InternalMenuImport.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Home\_InternalMenuExport.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\web.config" />
     <Content Include="Areas\AdminImportAssessment\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\AdminImportAssessment\Views\Shared\_InternalMenu.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\web.config" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\Index.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Shared\_Layout.cshtml" />
@@ -836,6 +834,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Consent.cshtml" />
     <Content Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormal.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_ExportNavigation.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\_ImportNavigation.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
@@ -987,7 +986,6 @@
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
-    <Compile Include="Areas\AdminImportAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.Designer.cs">
@@ -1131,6 +1129,7 @@
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationTypeViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Menu\ExportNavigationViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Menu\ImportNavigationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModelResources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -2410,7 +2409,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
-    <Folder Include="Areas\AdminImportAssessment\Views\Home\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />

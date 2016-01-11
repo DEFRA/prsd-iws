@@ -103,10 +103,7 @@
                                   : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationComplete }, null))
                 }
             </td>
-
         </tr>
-
-        
 
         <tr>
             <td>Acknowledged on</td>
@@ -254,3 +251,7 @@ else
 }
 
 @Html.ActionLink(Resource.HomeLink, "Index", "Home", new { area = "ImportNotification" }, null)
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Assessment })
+}

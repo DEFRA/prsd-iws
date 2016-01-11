@@ -3,8 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.ImportNotificationAssessment;
     using Infrastructure;
     using Prsd.Core.Mediator;
+    using Requests.ImportNotification;
     using Requests.NotificationAssessment;
     using ViewModels.Menu;
 
@@ -21,7 +23,16 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult ImportNavigation(Guid id, ImportNavigationSection section)
         {
-            return View();
+            var details = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
+
+            var model = new ImportNavigationViewModel
+            {
+                Details = details,
+                ActiveSection = section,
+                ShowImportSections = details.Status == ImportNotificationStatus.NotificationReceived
+            };
+
+            return PartialView("_ImportNavigation", model);
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]

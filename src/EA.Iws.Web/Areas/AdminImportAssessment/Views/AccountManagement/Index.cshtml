@@ -98,3 +98,7 @@
         }
     }
 </div>
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })
+}

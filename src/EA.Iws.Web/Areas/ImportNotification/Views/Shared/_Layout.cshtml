@@ -4,7 +4,7 @@
 
 <div class="grid-row">
     <div class="column-third">
-        @Html.Action("_InternalMenuImport", "Home")
+        @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Notification })
     </div>
 
     <div class="column-two-thirds">
