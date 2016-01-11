@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
+    using Core.Shared;
     using NotificationApplication.Shipment;
 
     public class NotificationMovementsQuantity
@@ -28,7 +29,7 @@
 
             if (!HasSummableMovements(movements))
             {
-                return new ShipmentQuantity(0, shipment.Units);
+                return new ShipmentQuantity(0, shipment == null ? ShipmentQuantityUnits.Tonnes : shipment.Units);
             }
 
             var totalReceived = movements.Sum(m =>
