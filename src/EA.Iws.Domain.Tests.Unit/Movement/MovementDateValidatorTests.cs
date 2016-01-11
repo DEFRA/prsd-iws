@@ -44,7 +44,7 @@
                 workingDayCalculator,
                 notificationRepository);
 
-            SystemTime.Freeze(Today);
+            SystemTime.Freeze(Today.AddHours(5));
 
             A.CallTo(() => consentRepository.GetByNotificationId(NotificationId))
                 .Returns(new Consent(
@@ -63,17 +63,17 @@
             A.CallTo(() => historyRepository.GetByMovementId(A<Guid>.Ignored))
                 .Returns(new MovementDateHistory[0]);
 
-            A.CallTo(() => workingDayCalculator.AddWorkingDays(A<DateTime>.Ignored, 
-                A<int>.Ignored, 
-                A<bool>.Ignored, 
+            A.CallTo(() => workingDayCalculator.AddWorkingDays(A<DateTime>.Ignored,
+                A<int>.Ignored,
+                A<bool>.Ignored,
                 A<UKCompetentAuthority>.Ignored))
                     .ReturnsLazily((DateTime inputDate,
                         int inputDays,
                         bool includeStartDay,
                         UKCompetentAuthority ca) =>
                             //A very simple working day formula that ignores bank holidays taken from http://stackoverflow.com/a/279370
-                            inputDate.AddDays(inputDays 
-                                + ((inputDays / 5) * 2) 
+                            inputDate.AddDays(inputDays
+                                + ((inputDays / 5) * 2)
                                 + ((((int)inputDate.DayOfWeek + (inputDays % 5)) >= 5) ? 2 : 0)));
         }
 
@@ -125,6 +125,35 @@
         public async Task DateOf30DaysInFuture_DoesNotThrow()
         {
             var date = Today.AddDays(30);
+
+            await dateValidator.EnsureDateValid(NotificationId, date);
+
+            //No assert required
+        }
+
+        [Fact]
+        public async Task Today_DoesNotThrow()
+        {
+            var date = Today;
+
+            await dateValidator.EnsureDateValid(NotificationId, date);
+
+            //No assert required
+        }
+
+        [Fact]
+        public async Task DateIsStartOfConsentPeriod_DoesNotThrow()
+        {
+            var consentStart = Today.AddDays(4);
+
+            A.CallTo(() => consentRepository.GetByNotificationId(NotificationId))
+                .Returns(new Consent(
+                    NotificationId,
+                    new DateRange(consentStart, ConsentEnd),
+                    AnyString,
+                    AnyGuid));
+
+            var date = consentStart;
 
             await dateValidator.EnsureDateValid(NotificationId, date);
 

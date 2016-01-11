@@ -26,14 +26,14 @@
                     date));
             }
 
-            if (date < SystemTime.UtcNow)
+            if (date < SystemTime.UtcNow.Date)
             {
                 throw new MovementDateException(string.Format(
                     "Can't set new movement date {0} since it is in the past",
                     date));
             }
 
-            if (date > SystemTime.UtcNow.AddDays(30))
+            if (date > SystemTime.UtcNow.Date.AddDays(30))
             {
                 throw new MovementDateOutOfRangeException(string.Format(
                     "Can't set new movement date {0} since it is more than 30 days in the future",
