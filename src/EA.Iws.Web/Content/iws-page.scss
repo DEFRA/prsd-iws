@@ -468,14 +468,20 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     }
 
     text-decoration: underline;
+
+    &:hover {
+        color: #2E8ACA;
+    }
+}
+
+.link-submit-xsmall {
+    @extend .link-submit;
+
+    @include core-16;
 }
 
 #link-sign-out {
     @include core-16;
-}
-
-.link-submit:hover {
-    color: #2E8ACA;
 }
 
 .text-area {

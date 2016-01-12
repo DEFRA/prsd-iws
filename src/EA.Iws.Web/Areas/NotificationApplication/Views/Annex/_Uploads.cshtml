@@ -34,7 +34,7 @@
                         <td>
                             @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.ProcessOfGenerationStatus.FileId.Value })
                             |
-                            <button type="submit" name="delete" value="@Model.ProcessOfGenerationStatus.FileId.Value" class="link-submit">Delete</button>
+                            <button type="submit" name="delete" value="@Model.ProcessOfGenerationStatus.FileId.Value" class="link-submit-xsmall">Delete</button>
                         </td>
                     }
                     else
@@ -54,7 +54,7 @@
                         <td>
                             @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.TechnologyEmployedStatus.FileId.Value })
                             |
-                            <button type="submit" name="delete" value="@Model.TechnologyEmployedStatus.FileId.Value" class="link-submit">Delete</button>
+                            <button type="submit" name="delete" value="@Model.TechnologyEmployedStatus.FileId.Value" class="link-submit-xsmall">Delete</button>
                         </td>
                     }
                     else
@@ -74,7 +74,7 @@
                         <td>
                             @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.WasteCompositionStatus.FileId.Value })
                             |
-                            <button type="submit" name="delete" value="@Model.WasteCompositionStatus.FileId.Value" class="link-submit">Delete</button>
+                            <button type="submit" name="delete" value="@Model.WasteCompositionStatus.FileId.Value" class="link-submit-xsmall">Delete</button>
                         </td>
                     }
                     else
@@ -93,8 +93,3 @@
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }
-
-
-
-
-
