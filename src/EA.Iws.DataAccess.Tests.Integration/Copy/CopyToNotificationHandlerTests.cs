@@ -54,7 +54,6 @@
                 new TransportRouteToTransportRouteCopy(),
                 new WasteRecoveryToWasteRecoveryCopy(),
                 new ImporterToImporterCopy(),
-                new AnnexCollectionToAnnexCollectionCopy(),
                 new NotificationApplicationRepository(context, new NotificationApplicationAuthorization(context, GetUserContext())));
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();

@@ -25,7 +25,6 @@
         private readonly TransportRouteToTransportRouteCopy transportRouteCopier;
         private readonly WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier;
         private readonly ImporterToImporterCopy importerCopier;
-        private readonly AnnexCollectionToAnnexCollectionCopy annexCollectionCopier;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
 
         public CopyToNotificationHandler(IwsContext context,
@@ -34,7 +33,6 @@
             TransportRouteToTransportRouteCopy transportRouteCopier,
             WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier,
             ImporterToImporterCopy importerCopier,
-            AnnexCollectionToAnnexCollectionCopy annexCollectionCopier,
             INotificationApplicationRepository notificationApplicationRepository)
         {
             this.context = context;
@@ -43,7 +41,6 @@
             this.transportRouteCopier = transportRouteCopier;
             this.wasteRecoveryCopier = wasteRecoveryCopier;
             this.importerCopier = importerCopier;
-            this.annexCollectionCopier = annexCollectionCopier;
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
@@ -132,7 +129,6 @@
             await wasteRecoveryCopier.CopyAsync(context, sourceId, clone.Id);
             await exporterCopier.CopyAsync(context, sourceId, clone.Id);
             await importerCopier.CopyAsync(context, sourceId, clone.Id);
-            await annexCollectionCopier.CopyAsync(context, sourceId, clone.Id);
 
             return clone;
         }
