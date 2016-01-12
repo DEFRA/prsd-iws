@@ -1550,7 +1550,14 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
+    <Compile Include="Infrastructure\MimeTypes.cs" />
+    <Compile Include="Infrastructure\Validation\RestrictToAllowedUploadTypesAttribute.cs" />
     <Compile Include="Infrastructure\ImportNavigationSection.cs" />
+    <Compile Include="Infrastructure\Validation\RestrictToAllowedUploadTypesAttributeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RestrictToAllowedUploadTypesAttributeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Shared\IComplete.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\RecoveryViewModelResources.Designer.cs">
@@ -3167,6 +3174,10 @@
     <EmbeddedResource Include="Areas\Reports\Views\MissingShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infrastructure\Validation\RestrictToAllowedUploadTypesAttributeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RestrictToAllowedUploadTypesAttributeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\BusinessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

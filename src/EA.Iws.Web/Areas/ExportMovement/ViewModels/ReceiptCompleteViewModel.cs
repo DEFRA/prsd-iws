@@ -5,6 +5,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using Core.Shared;
+    using Infrastructure;
+    using Infrastructure.Validation;
 
     public class ReceiptCompleteViewModel : IValidatableObject
     {
@@ -17,6 +19,7 @@
         public decimal? Quantity { get; set; }
 
         [Display(Name = "Upload the signed copy of the certificate of receipt")]
+        [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

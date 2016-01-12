@@ -5,6 +5,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using Core.Shared;
+    using Infrastructure;
+    using Infrastructure.Validation;
 
     public class UploadViewModel : IValidatableObject
     {
@@ -13,6 +15,7 @@
         public NotificationType NotificationType { get; set; }
 
         [Display(Name = "Upload the signed copy")]
+        [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }
 
         public DateTime CompletedDate { get; set; }

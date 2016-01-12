@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
+    using Infrastructure;
+    using Infrastructure.Validation;
     using Web.ViewModels.Shared;
 
     public class RejectViewModel : IValidatableObject
@@ -19,6 +21,7 @@
 
         [Display(Name = "FileName", ResourceType = typeof(RejectViewModelResources))]
         [Required(ErrorMessageResourceType = typeof(RejectViewModelResources), ErrorMessageResourceName = "FileRequired")]
+        [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }
 
         public RejectViewModel()

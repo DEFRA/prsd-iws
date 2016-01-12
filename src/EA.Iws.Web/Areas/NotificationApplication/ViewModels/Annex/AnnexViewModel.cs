@@ -3,6 +3,8 @@
     using System;
     using System.Web;
     using Core.Annexes;
+    using Infrastructure;
+    using Infrastructure.Validation;
 
     public class AnnexViewModel
     {
@@ -14,10 +16,13 @@
 
         public AnnexStatus WasteCompositionStatus { get; set; }
 
+        [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase TechnologyEmployed { get; set; }
-        
+
+        [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase ProcessOfGeneration { get; set; }
 
+        [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase Composition { get; set; }
 
         public bool AreAnnexesRequired
