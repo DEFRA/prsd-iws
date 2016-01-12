@@ -127,7 +127,7 @@
     <value>The actual quantity must be a positive value</value>
   </data>
   <data name="ActualQuantityPrecision" xml:space="preserve">
-    <value>Please enter a valid positive number with a maximum of {0} decimal places</value>
+    <value>Please enter a value with less than {0} decimal places</value>
   </data>
   <data name="ActualQuantityRequired" xml:space="preserve">
     <value>Please enter a number</value>

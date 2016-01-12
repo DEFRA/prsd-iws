@@ -19,19 +19,18 @@
         {
             if (!Quantity.HasValue)
             {
-                yield return new ValidationResult("The Actual quantity field is required", new[] { "Quantity" });
+                yield return new ValidationResult(QuantityReceivedViewModelResources.QuantityReceivedRequired, new[] { "Quantity" });
             }
 
             if (Quantity <= 0)
             {
-                yield return new ValidationResult("The Actual quantity field must be a positive value", new[] { "Quantity" });
+                yield return new ValidationResult(QuantityReceivedViewModelResources.QuantityReceivedPositive, new[] { "Quantity" });
             }
 
             if (Quantity.HasValue && decimal.Round(Quantity.Value, ShipmentQuantityUnitsMetadata.Precision[Unit]) != Quantity.Value)
             {
-                yield return new ValidationResult("Please enter a valid positive number with a maximum of " 
-                    + ShipmentQuantityUnitsMetadata.Precision[Unit]
-                    + " decimal places",
+                yield return new ValidationResult(
+                    string.Format(QuantityReceivedViewModelResources.QuantityReceivedPrecision, ShipmentQuantityUnitsMetadata.Precision[Unit] + 1),
                     new[] { "Quantity" });
             }
         }

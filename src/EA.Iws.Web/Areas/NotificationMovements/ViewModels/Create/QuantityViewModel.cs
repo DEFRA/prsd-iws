@@ -67,7 +67,7 @@
             {
                 yield return new ValidationResult(string.Format(
                     QuantityViewModelResources.ActualQuantityPrecision,
-                    ShipmentQuantityUnitsMetadata.Precision[Units.Value]),
+                    ShipmentQuantityUnitsMetadata.Precision[Units.Value] + 1),
                     new[] { "Quantity" });
             }
         }

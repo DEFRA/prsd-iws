@@ -1208,6 +1208,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuantityAbnormalViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityReceivedViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuantityReceivedViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDaysResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2576,6 +2581,11 @@
     <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>QuantityAbnormalViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Quantity\QuantityReceivedViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QuantityReceivedViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
