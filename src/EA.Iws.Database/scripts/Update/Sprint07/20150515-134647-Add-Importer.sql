@@ -31,7 +31,7 @@ CREATE TABLE [Business].[Importer] (
     [Telephone]                    NVARCHAR (150)   NOT NULL,
     [Fax]                          NVARCHAR (150)   NULL,
     [Email]                        NVARCHAR (150)   NOT NULL,
-    [RowVersion]                   ROWVERSION       NULL,
+    [RowVersion]                   ROWVERSION       NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

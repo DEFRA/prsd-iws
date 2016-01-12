@@ -15,5 +15,5 @@
 	[ContactName] [nvarchar](1024) NOT NULL,
 	[Telephone] [nvarchar](150) NOT NULL,
 	[Email] [nvarchar](256) NOT NULL,
-	[RowVersion] [timestamp] NULL
+	[RowVersion] ROWVERSION NOT NULL
 )
