@@ -21,10 +21,7 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Summary(Guid notificationId)
         {
-            var result = mediator
-                .SendAsync(new GetBasicMovementSummary(notificationId))
-                .GetAwaiter()
-                .GetResult();
+            var result = Task.Run(() => mediator.SendAsync(new GetBasicMovementSummary(notificationId))).Result;
 
             return PartialView("_Summary", result);
         }
@@ -32,10 +29,7 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult CreateSummary(Guid notificationId, int movementNumber)
         {
-            var result = mediator
-                .SendAsync(new GetBasicMovementSummary(notificationId))
-                .GetAwaiter()
-                .GetResult();
+            var result = Task.Run(() => mediator.SendAsync(new GetBasicMovementSummary(notificationId))).Result;
 
             var model = new CreateSummaryViewModel
             {

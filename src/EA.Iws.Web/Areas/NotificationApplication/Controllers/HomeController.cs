@@ -62,8 +62,7 @@
                 return PartialView(new NotificationApplicationCompletionProgress());
             }
 
-            var response =
-                mediator.SendAsync(new GetNotificationProgressInfo(id)).GetAwaiter().GetResult();
+            var response = Task.Run(() => mediator.SendAsync(new GetNotificationProgressInfo(id))).Result;
 
             return PartialView(response);
         }

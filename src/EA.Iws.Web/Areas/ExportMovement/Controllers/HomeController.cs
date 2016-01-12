@@ -20,10 +20,7 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Summary(Guid id)
         {
-            var result = mediator
-                .SendAsync(new GetMovementSummary(id))
-                .GetAwaiter()
-                .GetResult();
+            var result = Task.Run(() => mediator.SendAsync(new GetMovementSummary(id))).Result;
 
             return PartialView("_Summary", result);
         }

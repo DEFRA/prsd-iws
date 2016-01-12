@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportMovement.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -19,7 +20,7 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult NotificationSwitcher(Guid id)
         {
-            var response = mediator.SendAsync(new GetNotificationNumberByMovementId(id)).GetAwaiter().GetResult();
+            var response = Task.Run(() => mediator.SendAsync(new GetNotificationNumberByMovementId(id))).Result;
 
             return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response));
         }

@@ -43,7 +43,7 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult NotificationSwitcher(Guid id)
         {
-            var response = mediator.SendAsync(new GetNotificationNumber(id)).GetAwaiter().GetResult();
+            var response = Task.Run(() => mediator.SendAsync(new GetNotificationNumber(id))).Result;
 
             return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response));
         }
