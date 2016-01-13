@@ -27,7 +27,6 @@
             var data = new OperationCompleteData
             {
                 NotificationType = notificationType,
-                MovementDate = movement.Date,
                 ReceiptDate = movement.Receipt.Date
             };
 
