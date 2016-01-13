@@ -11,6 +11,7 @@
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
+    using Domain.NotificationApplication.Annexes;
     using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using Prsd.Core;
@@ -129,6 +130,8 @@
             await wasteRecoveryCopier.CopyAsync(context, sourceId, clone.Id);
             await exporterCopier.CopyAsync(context, sourceId, clone.Id);
             await importerCopier.CopyAsync(context, sourceId, clone.Id);
+
+            context.AnnexCollections.Add(new AnnexCollection(clone.Id));
 
             return clone;
         }
