@@ -5,7 +5,7 @@
     using ImportNotificationAssessment;
     using Shared;
 
-    public class InProgressImportNotificationSummary
+    public class ImportNotificationSummary
     {
         public Guid Id { get; set; }
 

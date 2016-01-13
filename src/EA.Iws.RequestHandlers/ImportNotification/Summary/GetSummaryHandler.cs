@@ -5,8 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.ImportNotification.Summary;
+    using Core.ImportNotificationAssessment;
     using DataAccess.Draft;
     using Domain.ImportNotification;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Address = Core.ImportNotification.Summary.Address;
@@ -18,8 +20,10 @@
     using Producer = Core.ImportNotification.Summary.Producer;
     using WasteOperation = Core.ImportNotification.Summary.WasteOperation;
 
-    internal class GetSummaryHandler : IRequestHandler<GetSummary, InProgressImportNotificationSummary>
+    internal class GetSummaryHandler : IRequestHandler<GetSummary, ImportNotificationSummary>
     {
+        private readonly IMapper mapper;
+        private readonly IImportNotificationOverviewRepository summaryRepository;
         private readonly IImportNotificationAssessmentRepository assessmentRepository;
         private readonly IImportNotificationRepository importNotificationRepository;
         private readonly Domain.ICountryRepository countryRepository;
@@ -33,7 +37,9 @@
             IDraftImportNotificationRepository draftRepository,
             IImportNotificationAssessmentRepository assessmentRepository,
             TransportRouteSummary transportRouteSummary,
-            WasteTypeSummary wasteTypeSummary)
+            WasteTypeSummary wasteTypeSummary,
+            IImportNotificationOverviewRepository summaryRepository,
+            IMapper mapper)
         {
             this.importNotificationRepository = importNotificationRepository;
             this.countryRepository = countryRepository;
@@ -41,37 +47,48 @@
             this.transportRouteSummary = transportRouteSummary;
             this.wasteTypeSummary = wasteTypeSummary;
             this.assessmentRepository = assessmentRepository;
+            this.summaryRepository = summaryRepository;
+            this.mapper = mapper;
         }
 
-        public async Task<InProgressImportNotificationSummary> HandleAsync(GetSummary message)
+        public async Task<ImportNotificationSummary> HandleAsync(GetSummary message)
         {
-            var notification = await importNotificationRepository.Get(message.Id);
+            var status = await assessmentRepository.GetStatusByNotification(message.Id);
 
-            countries = (await countryRepository.GetAll()).ToArray();
-
-            var transportRoute = await transportRouteSummary.GetTransportRoute(message.Id, countries);
-
-            var summary = new InProgressImportNotificationSummary
+            if (status == ImportNotificationStatus.NotificationReceived)
             {
-                Id = notification.Id,
-                Type = notification.NotificationType,
-                Number = notification.NotificationNumber,
-                Status = await assessmentRepository.GetStatusByNotification(message.Id),
-                Exporter = await GetExporter(message.Id),
-                Facilities = await GetFacilities(message.Id),
-                Importer = await GetImporter(message.Id),
-                Producer = await GetProducer(message.Id),
-                IntendedShipment = await GetIntendedShipment(message.Id),
-                StateOfExport = transportRoute.StateOfExport,
-                StateOfImport = transportRoute.StateOfImport,
-                TransitStates = transportRoute.TransitStates,
-                HasNoTransitStates = transportRoute.HasNoTransitStates,
-                WasteOperation = await GetWasteOperation(message.Id),
-                WasteType = await wasteTypeSummary.GetWasteType(message.Id),
-                AreFacilitiesPreconsented = await GetFacilityPreconsent(message.Id)
-            };
+                //TODO: refactor this into the summaryRepository.GetFromDraft() method
 
-            return summary;
+                var notification = await importNotificationRepository.Get(message.Id);
+
+                countries = (await countryRepository.GetAll()).ToArray();
+
+                var transportRoute = await transportRouteSummary.GetTransportRoute(message.Id, countries);
+
+                return new ImportNotificationSummary
+                {
+                    Id = notification.Id,
+                    Type = notification.NotificationType,
+                    Number = notification.NotificationNumber,
+                    Status = status,
+                    Exporter = await GetExporter(message.Id),
+                    Facilities = await GetFacilities(message.Id),
+                    Importer = await GetImporter(message.Id),
+                    Producer = await GetProducer(message.Id),
+                    IntendedShipment = await GetIntendedShipment(message.Id),
+                    StateOfExport = transportRoute.StateOfExport,
+                    StateOfImport = transportRoute.StateOfImport,
+                    TransitStates = transportRoute.TransitStates,
+                    HasNoTransitStates = transportRoute.HasNoTransitStates,
+                    WasteOperation = await GetWasteOperation(message.Id),
+                    WasteType = await wasteTypeSummary.GetWasteType(message.Id),
+                    AreFacilitiesPreconsented = await GetFacilityPreconsent(message.Id)
+                };
+            }
+            else
+            {
+                return mapper.Map<ImportNotificationSummary>(await summaryRepository.Get(message.Id));
+            }
         }
 
         private async Task<Producer> GetProducer(Guid id)

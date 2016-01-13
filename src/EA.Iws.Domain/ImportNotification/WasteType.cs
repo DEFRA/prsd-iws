@@ -15,7 +15,7 @@
 
         public string Name { get; private set; }
 
-        protected ICollection<WasteTypeWasteCode> WasteCodesCollection { get; private set; }
+        protected virtual ICollection<WasteTypeWasteCode> WasteCodesCollection { get; set; }
 
         public bool BaselOecdCodeNotListed { get; private set; }
 

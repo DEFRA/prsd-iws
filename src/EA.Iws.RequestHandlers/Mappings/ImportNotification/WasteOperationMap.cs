@@ -13,9 +13,16 @@
     {
         public Domain.ImportNotification.WasteOperation Map(WasteOperation source, ImportNotification parameter)
         {
-            return new Domain.ImportNotification.WasteOperation(source.ImportNotificationId,
+            var wasteOperation = new Domain.ImportNotification.WasteOperation(source.ImportNotificationId,
                 OperationCodesList.CreateForNotification(parameter,
                     source.OperationCodes.Select(Enumeration.FromValue<OperationCode>)));
+
+            if (!string.IsNullOrWhiteSpace(source.TechnologyEmployed))
+            {
+                wasteOperation.SetTechnologyEmployed(source.TechnologyEmployed);
+            }
+
+            return wasteOperation;
         }
     }
 }

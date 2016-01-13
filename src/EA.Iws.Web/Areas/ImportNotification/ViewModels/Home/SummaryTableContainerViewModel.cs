@@ -4,7 +4,7 @@
 
     public class SummaryTableContainerViewModel
     {
-        public InProgressImportNotificationSummary Details { get; set; }
+        public ImportNotificationSummary Details { get; set; }
 
         public bool ShowChangeLinks { get; set; }
     }

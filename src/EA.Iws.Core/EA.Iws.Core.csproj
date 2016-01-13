@@ -108,7 +108,7 @@
     <Compile Include="ImportNotification\Summary\Exporter.cs" />
     <Compile Include="ImportNotification\Summary\Facility.cs" />
     <Compile Include="ImportNotification\Summary\Importer.cs" />
-    <Compile Include="ImportNotification\Summary\InProgressImportNotificationSummary.cs" />
+    <Compile Include="ImportNotification\Summary\ImportNotificationSummary.cs" />
     <Compile Include="ImportNotification\Summary\IntendedShipment.cs" />
     <Compile Include="ImportNotification\Summary\Producer.cs" />
     <Compile Include="ImportNotification\Summary\StateOfImport.cs" />

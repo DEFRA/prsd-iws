@@ -97,8 +97,10 @@
     <Compile Include="ImportNotification\Facility.cs" />
     <Compile Include="ImportNotification\IImportNotificationAssessmentRepository.cs" />
     <Compile Include="ImportNotification\IImportNotificationSearchRepository.cs" />
+    <Compile Include="ImportNotification\IImportNotificationOverviewRepository.cs" />
     <Compile Include="ImportNotification\Importer.cs" />
     <Compile Include="ImportNotification\ImportNotificationCreatedEvent.cs" />
+    <Compile Include="ImportNotification\ImportNotificationOverview.cs" />
     <Compile Include="ImportNotification\ImportNotificationSearchResult.cs" />
     <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
     <Compile Include="ImportNotification\IWasteOperationRepository.cs" />

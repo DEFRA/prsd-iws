@@ -213,6 +213,7 @@
     <Compile Include="Repositories\Imports\ImportNotificationAssessmentRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationSearchRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationOverviewRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationTransactionRepository.cs" />
     <Compile Include="Repositories\Imports\TransportRouteRepository.cs" />
     <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
