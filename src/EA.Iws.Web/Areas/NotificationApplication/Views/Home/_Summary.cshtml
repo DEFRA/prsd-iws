@@ -12,7 +12,7 @@
             {
                 @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "button" })
             }
-            else
+            else if(!Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
             {
                 <a href="#" class="button" disabled="disabled">Submit notification</a>
                 <div>You can submit this notification once you've completed all sections</div>
