@@ -21,9 +21,13 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            return View(new RejectViewModel());
+            var model = new RejectViewModel();
+            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
+            model.NotificationId = notificationId;
+
+            return View(model);
         }
 
         [HttpPost]
