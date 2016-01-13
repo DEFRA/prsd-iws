@@ -11,8 +11,6 @@
     {
         public NotificationType NotificationType { get; set; }
 
-        public DateTime MovementDate { get; set; }
-
         public DateTime ReceiptDate { get; set; }
 
         [Required]
@@ -29,7 +27,6 @@
         public DateViewModel(OperationCompleteData data)
         {
             NotificationType = data.NotificationType;
-            MovementDate = data.MovementDate;
             ReceiptDate = data.ReceiptDate;
         }
 
@@ -62,11 +59,6 @@
             if (dateComplete < ReceiptDate)
             {
                 yield return new ValidationResult("This date cannot be before the date of receipt. Please enter a different date.", new[] { "Day" });
-            }
-
-            if (dateComplete < MovementDate)
-            {
-                yield return new ValidationResult("This date cannot be before the actual date of shipment. Please enter a different date.", new[] { "Day" });
             }
         }
 
