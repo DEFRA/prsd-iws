@@ -1,17 +1,17 @@
 ﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
-@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
     <div class="overview-block">
-        @if (Model.IntendedShipment != null && !Model.IntendedShipment.IsEmpty())
+        @if (Model.Details.IntendedShipment != null && !Model.Details.IntendedShipment.IsEmpty())
         {
             <div class="overview-block-element">
                 <dl>
                     <dt>@Resource.ShipmentNumberTitle</dt>
-                    @if (Model.IntendedShipment.TotalShipments.HasValue)
+                    @if (Model.Details.IntendedShipment.TotalShipments.HasValue)
                     {
-                        <dd>@Model.IntendedShipment.TotalShipments</dd>
+                        <dd>@Model.Details.IntendedShipment.TotalShipments</dd>
                     }
                     else
                     {
@@ -19,9 +19,9 @@
                     }
 
                     <dt>@Resource.ShipmentQuantityTitle</dt>
-                    @if (Model.IntendedShipment.Quantity.HasValue && Model.IntendedShipment.Units.HasValue)
+                    @if (Model.Details.IntendedShipment.Quantity.HasValue && Model.Details.IntendedShipment.Units.HasValue)
                     {
-                        <dd>@Html.Raw(string.Format("{0:0.####} {1}", Model.IntendedShipment.Quantity, EnumHelper.GetShortName(Model.IntendedShipment.Units)))</dd>
+                        <dd>@Html.Raw(string.Format("{0:0.####} {1}", Model.Details.IntendedShipment.Quantity, EnumHelper.GetShortName(Model.Details.IntendedShipment.Units)))</dd>
                     }
                     else
                     {
@@ -29,9 +29,9 @@
                     }
 
                     <dt>@Resource.ShipmentDatesTitle</dt>
-                    @if (Model.IntendedShipment.Start.HasValue && Model.IntendedShipment.End.HasValue)
+                    @if (Model.Details.IntendedShipment.Start.HasValue && Model.Details.IntendedShipment.End.HasValue)
                     {
-                        <dd>@Html.Gds().DisplayDateRangeFor(m => m.IntendedShipment.Start.Value, m => m.IntendedShipment.End.Value)</dd>
+                        <dd>@Html.Gds().DisplayDateRangeFor(m => m.Details.IntendedShipment.Start.Value, m => m.Details.IntendedShipment.End.Value)</dd>
                     }
                     else
                     {

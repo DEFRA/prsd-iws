@@ -1,16 +1,17 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
     <div class="overview-block">
         <div class="overview-block-element">
-            @if (Model.StateOfImport != null && !Model.StateOfImport.IsEmpty())
+            @if (Model.Details.StateOfImport != null && !Model.Details.StateOfImport.IsEmpty())
             {
                 <dl>
                     <dt>@Resource.CountryText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.StateOfImport.CountryName))
+                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CountryName))
                 {
-                        <dd>@Model.StateOfImport.CountryName</dd>
+                        <dd>@Model.Details.StateOfImport.CountryName</dd>
                     }
                     else
                     {
@@ -18,9 +19,9 @@
                     }
 
                     <dt>@Resource.CompetentAuthorityText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.StateOfImport.CompetentAuthorityName))
+                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CompetentAuthorityName))
                 {
-                        <dd>@Model.StateOfImport.CompetentAuthorityCode - @Model.StateOfImport.CompetentAuthorityName</dd>
+                        <dd>@Model.Details.StateOfImport.CompetentAuthorityCode - @Model.Details.StateOfImport.CompetentAuthorityName</dd>
                     }
                     else
                     {
@@ -28,9 +29,9 @@
                     }
 
                     <dt>@Resource.EntryPointText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.StateOfImport.EntryPointName))
+                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.EntryPointName))
                 {
-                        <dd>@Model.StateOfImport.EntryPointName</dd>
+                        <dd>@Model.Details.StateOfImport.EntryPointName</dd>
                     }
                     else
                     {

@@ -1260,6 +1260,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FacilityViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Home\SummaryTableContainerViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Importer\ImporterViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>

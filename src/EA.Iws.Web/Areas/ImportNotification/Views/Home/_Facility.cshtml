@@ -1,41 +1,41 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
-    @if (Model.Facilities != null && Model.Facilities.Count > 0)
+    @if (Model.Details.Facilities != null && Model.Details.Facilities.Count > 0)
     {
-        for (int i = 0; i < Model.Facilities.Count; i++)
+        for (int i = 0; i < Model.Details.Facilities.Count; i++)
         {
             <div class="overview-block-element">
-                @if (!string.IsNullOrWhiteSpace(Model.Facilities[i].Name))
+                @if (!string.IsNullOrWhiteSpace(Model.Details.Facilities[i].Name))
                 {
-                    if (Model.Facilities[i].IsActualSite)
+                    if (Model.Details.Facilities[i].IsActualSite)
                     {
                         <text>Actual site of recovery</text>
                         <br/><br />
                     }
                     
-                    @Html.DisplayFor(m => m.Facilities[i].Name)
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Name)
                     <br />
                 }
 
-                @if (!Model.Facilities[i].Address.IsEmpty())
+                @if (!Model.Details.Facilities[i].Address.IsEmpty())
                 {
-                    @Html.DisplayFor(m => m.Facilities[i].Address.AddressLine1)<text>, </text>
-                    @Html.DisplayFor(m => m.Facilities[i].Address.TownOrCity)<text> </text>
-                    @Html.DisplayFor(m => m.Facilities[i].Address.PostalCode)<text>, </text>
-                    @Html.DisplayFor(m => m.Facilities[i].Address.Country)
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.AddressLine1)<text>, </text>
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.TownOrCity)<text> </text>
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.PostalCode)<text>, </text>
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.Country)
                 }
 
             </div>
 
-            if (!Model.Facilities[i].Contact.IsEmpty())
+            if (!Model.Details.Facilities[i].Contact.IsEmpty())
             {
                 <div class="overview-block-element">
-                    @Html.DisplayFor(m => m.Facilities[i].Contact)
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Contact)
                 </div>
             }
 
-            if (i < (Model.Facilities.Count - 1))
+            if (i < (Model.Details.Facilities.Count - 1))
             {
                 <hr />
             }

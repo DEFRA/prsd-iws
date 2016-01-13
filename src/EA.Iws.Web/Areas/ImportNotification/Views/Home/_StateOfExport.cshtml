@@ -1,16 +1,16 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <details>
     <div class="overview-block">
         <div class="overview-block-element">
-            @if (Model.StateOfExport != null && !Model.StateOfExport.IsEmpty())
+            @if (Model.Details.StateOfExport != null && !Model.Details.StateOfExport.IsEmpty())
             {
                 <dl>
                     <dt>@Resource.CountryText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.StateOfExport.CountryName))
+                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfExport.CountryName))
                 {
-                        <dd>@Model.StateOfExport.CountryName</dd>
+                        <dd>@Model.Details.StateOfExport.CountryName</dd>
                     }
                     else
                     {
@@ -18,9 +18,9 @@
                     }
 
                     <dt>@Resource.CompetentAuthorityText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.StateOfExport.CompetentAuthorityName))
+                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfExport.CompetentAuthorityName))
                 {
-                        <dd>@Model.StateOfExport.CompetentAuthorityCode - @Model.StateOfExport.CompetentAuthorityName</dd>
+                        <dd>@Model.Details.StateOfExport.CompetentAuthorityCode - @Model.Details.StateOfExport.CompetentAuthorityName</dd>
                     }
                     else
                     {
@@ -28,9 +28,9 @@
                     }
 
                     <dt>@Resource.ExitPointText</dt>
-                @if (!string.IsNullOrWhiteSpace(Model.StateOfExport.ExitPointName))
+                @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfExport.ExitPointName))
                 {
-                    <dd>@Model.StateOfExport.ExitPointName</dd>
+                    <dd>@Model.Details.StateOfExport.ExitPointName</dd>
                 }
                 else
                 {

@@ -1,28 +1,28 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
-    @if (Model.Importer != null && !Model.Importer.IsEmpty())
+    @if (Model.Details.Importer != null && !Model.Details.Importer.IsEmpty())
     {
         <div class="overview-block-element">
-            @if (!string.IsNullOrWhiteSpace(Model.Importer.Name))
+            @if (!string.IsNullOrWhiteSpace(Model.Details.Importer.Name))
             {
-                @Html.DisplayFor(m => m.Importer.Name)<br />
+                @Html.DisplayFor(m => m.Details.Importer.Name)<br />
             }
 
-            @if (!Model.Exporter.Address.IsEmpty())
+            @if (!Model.Details.Exporter.Address.IsEmpty())
             {
-                @Html.DisplayFor(m => m.Importer.Address.AddressLine1)<text>, </text>
-                @Html.DisplayFor(m => m.Importer.Address.TownOrCity)<text> </text>
-                @Html.DisplayFor(m => m.Importer.Address.PostalCode)<text>, </text>
-                @Html.DisplayFor(m => m.Importer.Address.Country)
+                @Html.DisplayFor(m => m.Details.Importer.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Importer.Address.TownOrCity)<text> </text>
+                @Html.DisplayFor(m => m.Details.Importer.Address.PostalCode)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Importer.Address.Country)
             }
 
         </div>
 
-        if (!Model.Importer.Contact.IsEmpty())
+        if (!Model.Details.Importer.Contact.IsEmpty())
         {
             <div class="overview-block-element">
-                @Html.DisplayFor(m => m.Importer.Contact)
+                @Html.DisplayFor(m => m.Details.Importer.Contact)
             </div>
         }
     }

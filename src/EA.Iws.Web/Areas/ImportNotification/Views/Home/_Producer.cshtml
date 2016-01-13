@@ -1,35 +1,35 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <div class="overview-block">
-    @if (Model.Producer != null && !Model.Producer.IsEmpty())
+    @if (Model.Details.Producer != null && !Model.Details.Producer.IsEmpty())
     {
         <div class="overview-block-element">
-            @if (!string.IsNullOrWhiteSpace(Model.Producer.Name))
+            @if (!string.IsNullOrWhiteSpace(Model.Details.Producer.Name))
             {
-                @Html.DisplayFor(m => m.Producer.Name)<br />
+                @Html.DisplayFor(m => m.Details.Producer.Name)<br />
             }
 
-            @if (!Model.Producer.Address.IsEmpty())
+            @if (!Model.Details.Producer.Address.IsEmpty())
             {
-                @Html.DisplayFor(m => m.Producer.Address.AddressLine1)<text>, </text>
-                @Html.DisplayFor(m => m.Producer.Address.TownOrCity)<text> </text>
-                @Html.DisplayFor(m => m.Producer.Address.PostalCode)<text>, </text>
-                @Html.DisplayFor(m => m.Producer.Address.Country)
+                @Html.DisplayFor(m => m.Details.Producer.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Producer.Address.TownOrCity)<text> </text>
+                @Html.DisplayFor(m => m.Details.Producer.Address.PostalCode)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Producer.Address.Country)
             }
 
         </div>
 
-        if (!Model.Producer.Contact.IsEmpty())
+        if (!Model.Details.Producer.Contact.IsEmpty())
         {
             <div class="overview-block-element">
-                @Html.DisplayFor(m => m.Producer.Contact)
+                @Html.DisplayFor(m => m.Details.Producer.Contact)
             </div>
         }
 
         <div class="overview-block-element">
             @Resource.MultipleProducersQuestion 
-            @if (Model.Producer.AreMultiple)
+            @if (Model.Details.Producer.AreMultiple)
             {
                 @Resource.True
             }

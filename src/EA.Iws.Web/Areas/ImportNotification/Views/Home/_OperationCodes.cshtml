@@ -1,16 +1,16 @@
 ﻿@using EA.Iws.Core.Shared
-@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 @{
-    var prefix = Model.Type == NotificationType.Disposal ? "D" : "R";
+    var prefix = Model.Details.Type == NotificationType.Disposal ? "D" : "R";
 }
 
 
 <div class="overview-block">
-        @if (Model.WasteOperation.OperationCodes != null && Model.WasteOperation.OperationCodes.Any())
+        @if (Model.Details.WasteOperation.OperationCodes != null && Model.Details.WasteOperation.OperationCodes.Any())
         {
             <div class="overview-block-element">
-                @string.Join(", ", Model.WasteOperation.OperationCodes.Select(c => prefix + c))
+                @string.Join(", ", Model.Details.WasteOperation.OperationCodes.Select(c => prefix + c))
             </div>
         }
         else

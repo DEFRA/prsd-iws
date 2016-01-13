@@ -1,16 +1,16 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <div class="overview-block">
-    @if (!Model.WasteType.YCodes.IsEmpty())
+    @if (!Model.Details.WasteType.YCodes.IsEmpty())
             {
-                if (Model.WasteType.YCodes.IsNotApplicable)
+                if (Model.Details.WasteType.YCodes.IsNotApplicable)
                 {
             <div class="overview-block-element">@Resource.CodesNotApplicableText</div>
         }
         else
         {
-            @Html.Partial("_CodeDefinitionList", Model.WasteType.YCodes.WasteCodes)
+            @Html.Partial("_CodeDefinitionList", Model.Details.WasteType.YCodes.WasteCodes)
         }
     }
     else

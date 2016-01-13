@@ -1,6 +1,7 @@
 ﻿@using EA.Iws.Core.ImportNotificationAssessment;
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
-@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+
 @{
     ViewBag.Title = Resource.TabTitle;
 }
@@ -8,7 +9,7 @@
 <h1 class="heading-large">@Resource.Title</h1>
 <hr/>
 
-@if (Model.Status == ImportNotificationStatus.NotificationReceived)
+@if (Model.Details.Status == ImportNotificationStatus.NotificationReceived)
 {
     @Html.ActionLink("Complete notification", "Index", "Validate", null, new { @class = "button" })
 }

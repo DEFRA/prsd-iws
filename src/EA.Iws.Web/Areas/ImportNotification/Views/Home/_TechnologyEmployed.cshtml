@@ -1,10 +1,10 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
-    @if (!string.IsNullOrWhiteSpace(Model.WasteOperation.TechnologyEmployed))
+    @if (!string.IsNullOrWhiteSpace(Model.Details.WasteOperation.TechnologyEmployed))
     {
         <div class="overview-block-element">
-            @Html.DisplayFor(m => m.WasteOperation.TechnologyEmployed)
+            @Html.DisplayFor(m => m.Details.WasteOperation.TechnologyEmployed)
         </div>
     }
     else

@@ -1,11 +1,11 @@
-﻿@model EA.Iws.Core.ImportNotification.Summary.InProgressImportNotificationSummary
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <div class="overview-block">
     <div class="overview-block-element">
-        @if (Model.AreFacilitiesPreconsented.HasValue)
+        @if (Model.Details.AreFacilitiesPreconsented.HasValue)
         {
-            if (Model.AreFacilitiesPreconsented.Value)
+            if (Model.Details.AreFacilitiesPreconsented.Value)
             {
                 @Resource.True
             }
