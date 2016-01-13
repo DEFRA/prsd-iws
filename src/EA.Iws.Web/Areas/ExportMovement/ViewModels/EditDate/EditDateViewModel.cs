@@ -37,7 +37,7 @@
             {
                 yield return new ValidationResult("Please enter a valid date", new[] { "Day" });
             }
-            else if (AsDateTime() < SystemTime.UtcNow)
+            else if (AsDateTime() < SystemTime.UtcNow.Date)
             {
                 yield return new ValidationResult(string.Format("The actual date of shipment cannot be in the past. Please enter a different date."), new[] { "Day" });
             }
