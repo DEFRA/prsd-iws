@@ -62,8 +62,16 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="top-content-box font-xsmall">
-            @RenderSection("top_content_box", false)
-            @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
+            <div id="homepage-link-container">
+                @if (!User.IsInternalUser())
+                {
+                    @Html.ActionLink("Go to my homepage", "Home", "Applicant", new { area = string.Empty }, null)
+                }
+            </div>
+            <div>
+                @RenderSection("top_content_box", false)
+                @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
+            </div>
         </div>
     }
     @RenderBody()

@@ -588,6 +588,11 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     }
 }
 
+#homepage-link-container {
+    float: left;
+    text-align: left;
+}
+
 .green-tick {
     color: $button-colour;
     padding-left: 10px;
