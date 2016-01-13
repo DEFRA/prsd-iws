@@ -26,7 +26,7 @@
         {
             var movements = await movementRepository.GetMovementsByStatus(message.Id, MovementStatus.Submitted);
 
-            return movements.Select(mapper.Map).ToArray();
+            return movements.Where(m => m.HasShipped).Select(mapper.Map).ToArray();
         }
     }
 }
