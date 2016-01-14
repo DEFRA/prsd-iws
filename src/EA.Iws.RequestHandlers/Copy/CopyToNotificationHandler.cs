@@ -27,6 +27,7 @@
         private readonly WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier;
         private readonly ImporterToImporterCopy importerCopier;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly FacilityCollectionCopy facilityCopier;
 
         public CopyToNotificationHandler(IwsContext context,
             NotificationToNotificationCopy copier, 
@@ -34,7 +35,8 @@
             TransportRouteToTransportRouteCopy transportRouteCopier,
             WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier,
             ImporterToImporterCopy importerCopier,
-            INotificationApplicationRepository notificationApplicationRepository)
+            INotificationApplicationRepository notificationApplicationRepository,
+            FacilityCollectionCopy facilityCopier)
         {
             this.context = context;
             this.copier = copier;
@@ -43,6 +45,7 @@
             this.wasteRecoveryCopier = wasteRecoveryCopier;
             this.importerCopier = importerCopier;
             this.notificationApplicationRepository = notificationApplicationRepository;
+            this.facilityCopier = facilityCopier;
         }
 
         public async Task<Guid> HandleAsync(CopyToNotification message)
@@ -96,6 +99,7 @@
             var destinationAssessment = await context.NotificationAssessments.SingleAsync(p => p.NotificationApplicationId == destinationId);
             var destinationFinancialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == destinationId);
             var destinationAnnexCollection = await context.AnnexCollections.SingleAsync(p => p.NotificationId == destinationId);
+            var destinationFacilities = await context.Facilities.SingleAsync(f => f.NotificationId == destinationId);
 
             var clone = await GetCopyOfSourceNotification(sourceId);
             var clonedAssessment = await GetCopyOfNotificationAssessment(destinationId);
@@ -108,6 +112,7 @@
             context.DeleteOnCommit(destinationAssessment);
             context.DeleteOnCommit(destinationFinancialGuarantee);
             context.DeleteOnCommit(destinationAnnexCollection);
+            context.DeleteOnCommit(destinationFacilities);
             await context.SaveChangesAsync();
 
             context.DeleteOnCommit(destination);
@@ -130,6 +135,7 @@
             await wasteRecoveryCopier.CopyAsync(context, sourceId, clone.Id);
             await exporterCopier.CopyAsync(context, sourceId, clone.Id);
             await importerCopier.CopyAsync(context, sourceId, clone.Id);
+            await facilityCopier.CopyAsync(context, sourceId, clone.Id);
 
             context.AnnexCollections.Add(new AnnexCollection(clone.Id));
 
@@ -151,7 +157,6 @@
             var clone = await context.Set<NotificationApplication>()
                 .AsNoTracking()
                 .Include("ProducersCollection")
-                .Include("FacilitiesCollection")
                 .Include("OperationInfosCollection")
                 .Include(n => n.TechnologyEmployed)
                 .Include("CarriersCollection")

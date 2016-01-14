@@ -10,8 +10,8 @@
     {
         private readonly PropertyInfo[] properties;
 
-        public MovementFacilityBlock(IList<MergeField> mergeFields, NotificationApplication notification)
-            : base(mergeFields, notification)
+        public MovementFacilityBlock(IList<MergeField> mergeFields, FacilityCollection facilityCollection)
+            : base(mergeFields, facilityCollection)
         {
             properties = PropertyHelper.GetPropertiesForViewModel(typeof(FacilityViewModel));
         }

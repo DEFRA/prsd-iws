@@ -31,7 +31,8 @@ BEGIN
         FROM 
             [Notification].[Notification] N
             INNER JOIN [Notification].[ShipmentInfo] S ON S.NotificationId = N.Id
-            INNER JOIN [Notification].[Facility] F ON F.NotificationId = N.Id
+			INNER JOIN [Notification].[FacilityCollection] FC ON FC.NotificationId = N.Id
+            INNER JOIN [Notification].[Facility] F ON F.FacilityCollectionId = FC.Id
         WHERE 
             N.Id = @notificationId
         GROUP BY 

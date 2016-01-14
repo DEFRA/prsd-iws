@@ -98,6 +98,8 @@
 
         public virtual DbSet<Domain.NotificationApplication.Importer.Importer> Importers { get; set; }
 
+        public virtual DbSet<FacilityCollection> Facilities { get; set; }
+
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {
             //TODO: Remove this method and replace usages with repositories

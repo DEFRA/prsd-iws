@@ -27,6 +27,7 @@
         private readonly IPricingStructureRepository pricingStructureRepository;
         private readonly ShipmentInfo shipmentInfo;
         private readonly TestableNotificationApplication notificationApplication;
+        private readonly IFacilityRepository facilityRepository;
 
         public NotificationChargeCalculatorTests()
         {
@@ -36,10 +37,11 @@
             shipmentInfo = A.Fake<ShipmentInfo>();
             notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
             pricingStructureRepository = A.Fake<IPricingStructureRepository>();
+            facilityRepository = A.Fake<IFacilityRepository>();
 
             notificationApplication = new TestableNotificationApplication();
 
-            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository);
+            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository, facilityRepository);
         }
 
         [Fact]
@@ -76,6 +78,7 @@
             A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationId)).Returns(shipmentInfo);
             A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notificationApplication);
             A.CallTo(() => pricingStructureRepository.Get()).Returns(GetPricingStructures());
+            A.CallTo(() => facilityRepository.GetByNotificationId(notificationId)).Returns(GetFacilityCollection());
 
             var result = await chargeCalculator.GetValue(notificationId);
 
@@ -91,7 +94,7 @@
             var activity = A.Fake<Activity>();
             ObjectInstantiator<Activity>.SetProperty(x => x.TradeDirection, TradeDirection.Export, activity);
             ObjectInstantiator<Activity>.SetProperty(x => x.NotificationType, NotificationType.Recovery, activity);
-            ObjectInstantiator<Activity>.SetProperty(x => x.IsInterim, true, activity);
+            ObjectInstantiator<Activity>.SetProperty(x => x.IsInterim, false, activity);
 
             ObjectInstantiator<PricingStructure>.SetProperty(x => x.Activity, activity, pricingStructure);
 
@@ -115,12 +118,14 @@
         {
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.CompetentAuthority, UKCompetentAuthority.England, notificationApplication);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.NotificationType, NotificationType.Recovery, notificationApplication);
+        }
 
-            notificationApplication.Facilities = new Facility[]
-            {
-                new TestableFacility(),
-                new TestableFacility()
-            };
+        private FacilityCollection GetFacilityCollection()
+        {
+            var facilityCollection = new FacilityCollection(notificationId);
+            facilityCollection.AddFacility(new TestableBusiness(), new TestableAddress(), new TestableContact());
+            facilityCollection.AddFacility(new TestableBusiness(), new TestableAddress(), new TestableContact());
+            return facilityCollection;
         }
     }
 }

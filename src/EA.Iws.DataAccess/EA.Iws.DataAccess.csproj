@@ -100,6 +100,7 @@
     <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
+    <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
     <Compile Include="Repositories\ExporterRepository.cs" />
+    <Compile Include="Repositories\FacilityRepository.cs" />
     <Compile Include="Repositories\FinancialGuaranteeDecisionRepository.cs" />
     <Compile Include="Repositories\FinancialGuaranteeRepository.cs" />
     <Compile Include="Repositories\ImporterRepository.cs" />

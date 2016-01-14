@@ -290,16 +290,25 @@
             var business = ObjectFactory.CreateEmptyBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            for (int i = 0; i < 5; i++)
-            {
-                notification.AddFacility(business, address, contact);
-            }
-
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
-            Assert.True(notification.Facilities.Count() == 5);
 
+            var facilityCollection = new FacilityCollection(notification.Id);
+            context.Facilities.Add(facilityCollection);
+            await context.SaveChangesAsync();
+
+            for (int i = 0; i < 5; i++)
+            {
+                facilityCollection.AddFacility(business, address, contact);
+            }
+
+            await context.SaveChangesAsync();
+
+            Assert.True(facilityCollection.Facilities.Count() == 5);
+
+            context.DeleteOnCommit(facilityCollection);
             context.DeleteOnCommit(notification);
+
             await context.SaveChangesAsync();
         }
 
@@ -312,17 +321,24 @@
             var business = ObjectFactory.CreateEmptyBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            var facility = notification.AddFacility(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Facilities.Any());
-
-            notification.RemoveFacility(facility.Id);
+            var facilityCollection = new FacilityCollection(notification.Id);
+            context.Facilities.Add(facilityCollection);
             await context.SaveChangesAsync();
 
-            Assert.False(notification.Facilities.Any());
+            var facility = facilityCollection.AddFacility(business, address, contact);
+            await context.SaveChangesAsync();
 
+            Assert.True(facilityCollection.Facilities.Any());
+
+            facilityCollection.RemoveFacility(facility.Id);
+            await context.SaveChangesAsync();
+
+            Assert.False(facilityCollection.Facilities.Any());
+
+            context.DeleteOnCommit(facilityCollection);
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
@@ -336,19 +352,27 @@
             var business = ObjectFactory.CreateEmptyBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            notification.AddFacility(business, address, contact);
-            var anotherFacility = notification.AddFacility(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Facilities.Count() == 2);
-
-            notification.SetFacilityAsSiteOfTreatment(anotherFacility.Id);
+            var facilityCollection = new FacilityCollection(notification.Id);
+            context.Facilities.Add(facilityCollection);
             await context.SaveChangesAsync();
 
-            Action removeFacility = () => notification.RemoveFacility(anotherFacility.Id);
+            facilityCollection.AddFacility(business, address, contact);
+            var anotherFacility = facilityCollection.AddFacility(business, address, contact);
+
+            await context.SaveChangesAsync();
+
+            Assert.True(facilityCollection.Facilities.Count() == 2);
+
+            facilityCollection.SetFacilityAsSiteOfTreatment(anotherFacility.Id);
+            await context.SaveChangesAsync();
+
+            Action removeFacility = () => facilityCollection.RemoveFacility(anotherFacility.Id);
             Assert.Throws<InvalidOperationException>(removeFacility);
 
+            context.DeleteOnCommit(facilityCollection);
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
@@ -362,21 +386,29 @@
             var business = ObjectFactory.CreateEmptyBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            var facility = notification.AddFacility(business, address, contact);
-            var anotherFacility = notification.AddFacility(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Facilities.Count() == 2);
-
-            notification.SetFacilityAsSiteOfTreatment(facility.Id);
+            var facilityCollection = new FacilityCollection(notification.Id);
+            context.Facilities.Add(facilityCollection);
             await context.SaveChangesAsync();
 
-            notification.RemoveFacility(anotherFacility.Id);
+            var facility = facilityCollection.AddFacility(business, address, contact);
+            var anotherFacility = facilityCollection.AddFacility(business, address, contact);
+
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Facilities.Count() == 1);
+            Assert.True(facilityCollection.Facilities.Count() == 2);
 
+            facilityCollection.SetFacilityAsSiteOfTreatment(facility.Id);
+            await context.SaveChangesAsync();
+
+            facilityCollection.RemoveFacility(anotherFacility.Id);
+            await context.SaveChangesAsync();
+
+            Assert.True(facilityCollection.Facilities.Count() == 1);
+
+            context.DeleteOnCommit(facilityCollection);
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }

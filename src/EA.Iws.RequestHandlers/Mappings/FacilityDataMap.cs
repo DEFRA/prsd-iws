@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Core.Facilities;
     using Core.Shared;
-    using Domain;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Notification = Domain.NotificationApplication.NotificationApplication;
@@ -17,14 +17,17 @@
         private readonly IMap<Address, AddressData> addressMap;
         private readonly IMap<Business, BusinessInfoData> businessMap;
         private readonly IMap<Contact, ContactData> contactMap;
+        private readonly IFacilityRepository facilityRepository;
 
         public FacilityDataMap(IMap<Address, AddressData> addressMap,
             IMap<Business, BusinessInfoData> businessMap,
-            IMap<Contact, ContactData> contactMap)
+            IMap<Contact, ContactData> contactMap,
+            IFacilityRepository facilityRepository)
         {
             this.addressMap = addressMap;
             this.businessMap = businessMap;
             this.contactMap = contactMap;
+            this.facilityRepository = facilityRepository;
         }
 
         public FacilityData Map(Facility source)
@@ -41,7 +44,9 @@
 
         public IList<FacilityData> Map(Notification source)
         {
-            return source.Facilities.Select(f => new FacilityData
+            var facilityCollection = Task.Run(() => facilityRepository.GetByNotificationId(source.Id)).Result;
+
+            return facilityCollection.Facilities.Select(f => new FacilityData
             {
                 Address = addressMap.Map(f.Address),
                 Business = businessMap.Map(f.Business),

@@ -22,12 +22,12 @@
             } 
         }
 
-        public FacilityBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public FacilityBlock(IList<MergeField> mergeFields, FacilityCollection facilityCollection)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
-            var numberOfFacilities = notification.Facilities.Count();
-            data = notification.Facilities.Select(p => new FacilityViewModel(p, numberOfFacilities)).ToList();
+            var numberOfFacilities = facilityCollection.Facilities.Count();
+            data = facilityCollection.Facilities.Select(p => new FacilityViewModel(p, numberOfFacilities)).ToList();
 
             //The facility annex contains a set of different merge fields for facility marked as Actual Site of Treatment.
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);

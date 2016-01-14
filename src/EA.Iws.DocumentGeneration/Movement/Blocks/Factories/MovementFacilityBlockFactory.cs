@@ -7,17 +7,17 @@
 
     internal class MovementFacilityBlockFactory : IMovementBlockFactory
     {
-        private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IFacilityRepository facilityRepository;
 
-        public MovementFacilityBlockFactory(INotificationApplicationRepository notificationApplicationRepository)
+        public MovementFacilityBlockFactory(IFacilityRepository facilityRepository)
         {
-            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.facilityRepository = facilityRepository;
         }
 
         public async Task<IDocumentBlock> Create(Guid movementId, IList<MergeField> mergeFields)
         {
-            var notification = await notificationApplicationRepository.GetByMovementId(movementId);
-            return new MovementFacilityBlock(mergeFields, notification);
+            var facilityCollection = await facilityRepository.GetByMovementId(movementId);
+            return new MovementFacilityBlock(mergeFields, facilityCollection);
         }
     }
 }

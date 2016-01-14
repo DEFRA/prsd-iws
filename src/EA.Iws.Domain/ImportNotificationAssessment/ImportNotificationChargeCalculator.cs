@@ -6,6 +6,7 @@
     using Core.Shared;
     using ImportNotification;
     using NotificationApplication;
+    using IFacilityRepository = ImportNotification.IFacilityRepository;
 
     public class ImportNotificationChargeCalculator : IImportNotificationChargeCalculator
     {

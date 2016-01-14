@@ -13,7 +13,7 @@ BEGIN
 		N.[NotificationType],
 		N.[CompetentAuthority],
 		N.[NotificationNumber],
-		N.[IsPreconsentedRecoveryFacility],
+		FC.[AllFacilitiesPreconsented] AS [IsPreconsentedRecoveryFacility],
 		N.[ReasonForExport],
 		N.[HasSpecialHandlingRequirements],
 		N.[MeansOfTransport],
@@ -83,6 +83,8 @@ BEGIN
 
 		LEFT JOIN (SELECT TOP (1) TR.NotificationId, TS.Id FROM [Notification].[TransitState] TS INNER JOIN [Notification].[TransportRoute] TR ON TR.[Id] = TS.[TransportRouteId] WHERE TR.NotificationId = @NotificationId) AS TS 
 		ON N.Id = TS.NotificationId
+
+		LEFT JOIN [Notification].[FacilityCollection] FC ON N.Id = FC.NotificationId
 	WHERE
 		N.Id = @NotificationId;
 
@@ -102,9 +104,12 @@ BEGIN
 		F.IsActualSiteOfTreatment
 	FROM
 		[Notification].[Notification] N
+		
+		INNER JOIN [Notification].[FacilityCollection] FC
+		ON FC.NotificationId = N.Id
 
 		LEFT JOIN [Notification].[Facility] F
-		ON N.Id = F.NotificationId
+		ON FC.Id = F.FacilityCollectionId
 	WHERE
 		N.Id = @NotificationId;
 

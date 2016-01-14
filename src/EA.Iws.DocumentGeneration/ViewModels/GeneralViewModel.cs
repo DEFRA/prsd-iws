@@ -10,6 +10,7 @@
     {
         public GeneralViewModel(NotificationApplication notification,
             ShipmentInfo shipmentInfo,
+            FacilityCollection facilityCollection,
             DateTimeFormatter dateTimeFormatter,
             QuantityFormatter quantityFormatter,
             PhysicalCharacteristicsFormatter physicalCharacteristicsFormatter)
@@ -18,7 +19,7 @@
             IsDisposal = notification.NotificationType.Equals(NotificationType.Disposal);
             IsRecovery = notification.NotificationType.Equals(NotificationType.Recovery);
 
-            var isPreconsented = notification.IsPreconsentedRecoveryFacility;
+            var isPreconsented = facilityCollection.AllFacilitiesPreconsented;
             if (!isPreconsented.HasValue)
             {
                 IsPreconsented = false;

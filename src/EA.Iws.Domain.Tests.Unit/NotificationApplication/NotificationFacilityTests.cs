@@ -10,6 +10,7 @@
     public class NotificationFacilityTests
     {
         private readonly NotificationApplication notification;
+        private readonly FacilityCollection facilityCollection;
         private readonly Facility facility1;
         private readonly Facility facility2;
         private static readonly Guid FacilityId = new Guid("F4F79CE8-2A52-4351-9A71-EC31A6C13D9D");
@@ -19,9 +20,11 @@
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
                            UKCompetentAuthority.England, 0);
 
-            facility1 = notification.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+            facilityCollection = new FacilityCollection(notification.Id);
+
+            facility1 = facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
                         ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
-            facility2 = notification.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+            facility2 = facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
                         ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
         }
 
@@ -29,8 +32,8 @@
         public void FacilitiesCanOnlyHaveOneSiteOfTreatment()
         {
             EntityHelper.SetEntityIds(facility1, facility2);
-            notification.SetFacilityAsSiteOfTreatment(facility1.Id);
-            var siteOfTreatmentCount = notification.Facilities.Count(p => p.IsActualSiteOfTreatment);
+            facilityCollection.SetFacilityAsSiteOfTreatment(facility1.Id);
+            var siteOfTreatmentCount = facilityCollection.Facilities.Count(p => p.IsActualSiteOfTreatment);
             Assert.Equal(1, siteOfTreatmentCount);
         }
 
@@ -39,28 +42,28 @@
         {
             EntityHelper.SetEntityId(facility1, FacilityId);
             var badId = new Guid("{5DF206F6-4116-4EEC-949A-0FC71FE609C1}");
-            Action setAsSiteOfTreatment = () => notification.SetFacilityAsSiteOfTreatment(badId);
+            Action setAsSiteOfTreatment = () => facilityCollection.SetFacilityAsSiteOfTreatment(badId);
             Assert.Throws<InvalidOperationException>(setAsSiteOfTreatment);
         }
 
         [Fact]
         public void CantRemoveNonExistentFacility()
         {
-            Action removeFacility = () => notification.RemoveFacility(FacilityId);
+            Action removeFacility = () => facilityCollection.RemoveFacility(FacilityId);
             Assert.Throws<InvalidOperationException>(removeFacility);
         }
 
         [Fact]
         public void RemoveExistingFacilityByFacilityId()
         {
-            Facility tempFacility = notification.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+            Facility tempFacility = facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
                                                              ObjectFactory.CreateDefaultAddress(),
                                                              ObjectFactory.CreateEmptyContact());
             EntityHelper.SetEntityId(tempFacility, FacilityId);
 
-            int beforeFacilitiesCount = notification.Facilities.Count();
-            notification.RemoveFacility(FacilityId);
-            int afterFacilitiesCount = notification.Facilities.Count();
+            int beforeFacilitiesCount = facilityCollection.Facilities.Count();
+            facilityCollection.RemoveFacility(FacilityId);
+            int afterFacilitiesCount = facilityCollection.Facilities.Count();
 
             Assert.True(afterFacilitiesCount == beforeFacilitiesCount - 1);
         }
@@ -68,32 +71,62 @@
         [Fact]
         public void CanRemoveFacilityOtherThanActualSiteOfTreatment()
         {
-            Facility tempFacility = notification.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+            Facility tempFacility = facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
                                                              ObjectFactory.CreateDefaultAddress(),
                                                              ObjectFactory.CreateEmptyContact());
             EntityHelper.SetEntityId(tempFacility, FacilityId);
 
-            int beforeFacilitiesCount = notification.Facilities.Count();
-            notification.RemoveFacility(FacilityId);
-            Assert.True(notification.Facilities.Count() == beforeFacilitiesCount - 1);
+            int beforeFacilitiesCount = facilityCollection.Facilities.Count();
+            facilityCollection.RemoveFacility(FacilityId);
+            Assert.True(facilityCollection.Facilities.Count() == beforeFacilitiesCount - 1);
         }
 
         [Fact]
         public void CannotRemoveExistingActualSiteOfTreatmentFacilityByFacilityIdForMoreThanOneFacilities()
         {
-            Facility tempFacility = notification.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+            Facility tempFacility = facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
                                                              ObjectFactory.CreateDefaultAddress(),
                                                              ObjectFactory.CreateEmptyContact());
             EntityHelper.SetEntityId(tempFacility, FacilityId);
-            notification.SetFacilityAsSiteOfTreatment(FacilityId);
-            notification.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+            facilityCollection.SetFacilityAsSiteOfTreatment(FacilityId);
+            facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
                                      ObjectFactory.CreateDefaultAddress(),
                                      ObjectFactory.CreateEmptyContact());
-            Assert.True(notification.Facilities.Count() == 4);
-            Assert.True(notification.Facilities.Count(x => x.IsActualSiteOfTreatment) == 1);
+            Assert.True(facilityCollection.Facilities.Count() == 4);
+            Assert.True(facilityCollection.Facilities.Count(x => x.IsActualSiteOfTreatment) == 1);
 
-            Action removeActualSiteOfTreatmentFacility = (() => notification.RemoveFacility(FacilityId));
+            Action removeActualSiteOfTreatmentFacility = (() => facilityCollection.RemoveFacility(FacilityId));
             Assert.Throws<InvalidOperationException>(removeActualSiteOfTreatmentFacility);
+        }
+
+        [Fact]
+        public void MultipleFacilitiesIsInterim()
+        {
+            facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
+                ObjectFactory.CreateEmptyContact());
+
+            facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
+                ObjectFactory.CreateEmptyContact());
+
+            Assert.True(facilityCollection.IsInterim);
+        }
+
+        [Fact]
+        public void SingleFacilityIsNotInterim()
+        {
+            var newFacilityCollection = new FacilityCollection(notification.Id);
+            newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
+                ObjectFactory.CreateEmptyContact());
+
+            Assert.False(newFacilityCollection.IsInterim);
+        }
+
+        [Fact]
+        public void IsInterimFalseByDefault()
+        {
+            var newFacilityCollection = new FacilityCollection(notification.Id);
+
+            Assert.False(newFacilityCollection.IsInterim);
         }
     }
 }

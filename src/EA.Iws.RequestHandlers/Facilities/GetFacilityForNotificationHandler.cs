@@ -1,30 +1,28 @@
 ﻿namespace EA.Iws.RequestHandlers.Facilities
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Facilities;
-    using DataAccess;
     using Domain.NotificationApplication;
-    using Mappings;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Facilities;
 
     internal class GetFacilityForNotificationHandler : IRequestHandler<GetFacilityForNotification, FacilityData>
     {
-        private readonly IwsContext context;
+        private readonly IFacilityRepository facilityRepository;
         private readonly IMapWithParentObjectId<Facility, FacilityData> mapper;
 
-        public GetFacilityForNotificationHandler(IwsContext context, IMapWithParentObjectId<Facility, FacilityData> mapper)
+        public GetFacilityForNotificationHandler(IMapWithParentObjectId<Facility, FacilityData> mapper,
+            IFacilityRepository facilityRepository)
         {
-            this.context = context;
             this.mapper = mapper;
+            this.facilityRepository = facilityRepository;
         }
 
         public async Task<FacilityData> HandleAsync(GetFacilityForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
-            var facility = notification.GetFacility(message.FacilityId);
+            var facilityCollection = await facilityRepository.GetByNotificationId(message.NotificationId);
+            var facility = facilityCollection.GetFacility(message.FacilityId);
 
             return mapper.Map(facility, message.NotificationId);
         }

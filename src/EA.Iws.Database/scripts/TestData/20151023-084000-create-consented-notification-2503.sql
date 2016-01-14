@@ -12,7 +12,6 @@ INSERT [Notification].[notification]
         [competentauthority],
         [notificationnumber],
         [createddate],
-        [ispreconsentedrecoveryfacility],
         [reasonforexport],
         [hasspecialhandlingrequirements],
         [specialhandlingdetails],
@@ -26,7 +25,6 @@ VALUES (@NotificationId,
         1,
         N'GB 0001 002503',
         Cast(N'2015-10-10 09:00:00.0000000' AS DATETIME2),
-        1,
         N'Use of advanced facilities',
         0,
         NULL,
@@ -34,6 +32,17 @@ VALUES (@NotificationId,
         1,
         NULL,
         1)
+
+INSERT [Notification].[FacilityCollection] (
+	[Id],
+	[NotificationId],
+	[AllFacilitiesPreconsented]
+)
+VALUES (
+	N'0315EF80-778F-48E0-A95C-6A53A3F3ABCB',
+	@NotificationId,
+	1
+)
 
 INSERT [Notification].[facility]
        ([id],
@@ -53,7 +62,7 @@ INSERT [Notification].[facility]
         [telephone],
         [fax],
         [email],
-        [notificationid],
+        [FacilityCollectionId],
         [otherdescription])
 VALUES (NEWID(),
         N'Waste Treatment Facility',
@@ -72,7 +81,7 @@ VALUES (NEWID(),
         N'53-2225557777',
         N'53-3336669999',
         N'test@importer.de',
-        @NotificationId,
+        N'0315EF80-778F-48E0-A95C-6A53A3F3ABCB',
         NULL)
 
 INSERT [Notification].[facility]
@@ -93,7 +102,7 @@ INSERT [Notification].[facility]
         [telephone],
         [fax],
         [email],
-        [notificationid],
+        [FacilityCollectionId],
         [otherdescription])
 VALUES (NEWID(),
         N'Scrap Waste Reclamation',
@@ -112,7 +121,7 @@ VALUES (NEWID(),
         N'53-2225557777',
         N'53-3336669999',
         N'test@importer.de',
-        @NotificationId,
+        N'0315EF80-778F-48E0-A95C-6A53A3F3ABCB',
         NULL)
 
 INSERT [Notification].[importer]

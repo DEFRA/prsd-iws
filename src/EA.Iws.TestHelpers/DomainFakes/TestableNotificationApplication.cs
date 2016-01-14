@@ -69,12 +69,6 @@
             set { CarriersCollection = value; }
         }
 
-        public new IList<Facility> Facilities
-        {
-            get { return base.Facilities.ToList(); }
-            set { FacilitiesCollection = value; }
-        }
-
         public new bool? HasSpecialHandlingRequirements
         {
             get { return base.HasSpecialHandlingRequirements; }

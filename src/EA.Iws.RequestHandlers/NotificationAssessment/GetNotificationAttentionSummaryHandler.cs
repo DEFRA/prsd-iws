@@ -60,7 +60,7 @@
             var assessment = await notificationAssessmentRepository.GetByNotificationId(summary.NotificationId);
             var notification = await notificationApplicationRepository.GetById(summary.NotificationId);
 
-            var decisionRequiredBy = decisionRequiredByCalculator.GetDecisionRequiredByDate(notification, assessment);
+            var decisionRequiredBy = await decisionRequiredByCalculator.GetDecisionRequiredByDate(notification, assessment);
             var daysRemaining = daysRemainingCalculator.Calculate(decisionRequiredBy.Value);
 
             return new NotificationAttentionSummaryTableData

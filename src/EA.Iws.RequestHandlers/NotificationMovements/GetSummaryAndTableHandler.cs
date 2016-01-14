@@ -12,18 +12,18 @@
 
     internal class GetSummaryAndTableHandler : IRequestHandler<GetSummaryAndTable, NotificationMovementsSummaryAndTable>
     {
-        private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly INotificationMovementsSummaryRepository summaryRepository;
+        private readonly IFacilityRepository facilityRepository;
         private readonly IMovementRepository movementRepository;
         private readonly IMapper mapper;
 
         public GetSummaryAndTableHandler(
-            INotificationApplicationRepository notificationApplicationRepository,
+            IFacilityRepository facilityRepository,
             INotificationMovementsSummaryRepository summaryRepository,
             IMovementRepository movementRepository,
             IMapper mapper)
         {
-            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.facilityRepository = facilityRepository;
             this.movementRepository = movementRepository;
             this.mapper = mapper;
             this.summaryRepository = summaryRepository;
@@ -31,7 +31,7 @@
 
         public async Task<NotificationMovementsSummaryAndTable> HandleAsync(GetSummaryAndTable message)
         {
-            var isInterimNotification = (await notificationApplicationRepository.GetById(message.Id)).IsInterim;
+            var isInterimNotification = (await facilityRepository.GetByNotificationId((message.Id))).IsInterim;
             var summaryData = await summaryRepository.GetById(message.Id);
             IEnumerable<Movement> notificationMovements;
 

@@ -26,7 +26,7 @@ AS
         U.[Description] AS [Units],
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
-        N.IsPreconsentedRecoveryFacility AS [Preconsented],
+        FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Export' AS [ImportOrExport],
         N.Charge
 
@@ -55,6 +55,9 @@ AS
 
     LEFT JOIN	[Notification].[Consent] AS C
     ON			[N].[Id] = [C].[NotificationApplicationId]
+
+	LEFT JOIN	[Notification].[FacilityCollection] FC
+	ON			N.[Id] = FC.[NotificationId]
 
     UNION
 

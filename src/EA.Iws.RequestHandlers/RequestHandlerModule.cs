@@ -67,8 +67,9 @@
             builder.RegisterType<WasteRecoveryToWasteRecoveryCopy>().AsSelf();
             builder.RegisterType<ExporterToExporterCopy>().AsSelf();
             builder.RegisterType<ImporterToImporterCopy>().AsSelf();
-
+            builder.RegisterType<FacilityCollectionCopy>().AsSelf();
             builder.RegisterType<WasteCodeCopy>().AsSelf();
+
             builder.RegisterType<MovementFactory>().AsSelf();
             builder.RegisterType<MovementDetailsFactory>().AsSelf();
             builder.RegisterType<NotificationMovementsQuantity>().AsSelf();

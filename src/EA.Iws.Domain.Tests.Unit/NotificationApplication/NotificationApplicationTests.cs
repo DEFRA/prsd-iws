@@ -66,32 +66,5 @@
 
             Assert.Throws<InvalidOperationException>(setReasonForExport);
         }
-
-        [Fact]
-        public void MultipleFacilitiesIsInterim()
-        {
-            notification.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
-                ObjectFactory.CreateEmptyContact());
-
-            notification.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
-                ObjectFactory.CreateEmptyContact());
-
-            Assert.True(notification.IsInterim);
-        }
-
-        [Fact]
-        public void SingleFacilityIsNotInterim()
-        {
-            notification.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
-                ObjectFactory.CreateEmptyContact());
-
-            Assert.False(notification.IsInterim);
-        }
-
-        [Fact]
-        public void IsInterimFalseByDefault()
-        {
-            Assert.False(notification.IsInterim);
-        }
     }
 }

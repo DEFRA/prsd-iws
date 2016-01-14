@@ -26,7 +26,6 @@
             NotificationNumber = CreateNotificationNumber(notificationNumber);
 
             ProducersCollection = new List<Producer>();
-            FacilitiesCollection = new List<Facility>();
             CarriersCollection = new List<Carrier>();
             OperationInfosCollection = new List<OperationInfo>();
             PackagingInfosCollection = new List<PackagingInfo>();
@@ -37,8 +36,6 @@
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }
-
-        protected virtual ICollection<Facility> FacilitiesCollection { get; set; }
 
         protected virtual ICollection<Carrier> CarriersCollection { get; set; }
 
@@ -103,11 +100,6 @@
             get { return ProducersCollection.ToSafeIEnumerable(); }
         }
 
-        public IEnumerable<Facility> Facilities
-        {
-            get { return FacilitiesCollection.ToSafeIEnumerable(); }
-        }
-
         public IEnumerable<Carrier> Carriers
         {
             get { return CarriersCollection.ToSafeIEnumerable(); }
@@ -153,11 +145,6 @@
                 }
                 reasonForExport = value;
             }
-        }
-
-        public bool IsInterim
-        {
-            get { return FacilitiesCollection != null && FacilitiesCollection.Skip(1).Any(); }
         }
     }
 }

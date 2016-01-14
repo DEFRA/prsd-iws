@@ -13,7 +13,7 @@
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
     using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
-    public class NotificationApplicationFactory
+    public static class NotificationApplicationFactory
     {
         public static readonly string ProducerBusinessName1 = "business1";
         public static readonly string ProducerBusinessName2 = "business2";
@@ -77,8 +77,6 @@
 
             notification.SetOperationCodes(new[] { OperationCode.R1, OperationCode.R7 });
             notification.ReasonForExport = "recovery";
-            
-            notification.SetPreconsentedRecoveryFacility(false);
 
             return notification;
         }
@@ -102,12 +100,6 @@
                 ComplexTypeFactory.Create<Address>(),
                 ComplexTypeFactory.Create<Contact>());
             notification.AddCarrier(ComplexTypeFactory.Create<Business>(CarrierBusinessName2),
-                ComplexTypeFactory.Create<Address>(),
-                ComplexTypeFactory.Create<Contact>());
-            notification.AddFacility(ComplexTypeFactory.Create<Business>(FacilityBusinessName1),
-                ComplexTypeFactory.Create<Address>(),
-                ComplexTypeFactory.Create<Contact>());
-            notification.AddFacility(ComplexTypeFactory.Create<Business>(FacilityBusinessName2),
                 ComplexTypeFactory.Create<Address>(),
                 ComplexTypeFactory.Create<Contact>());
         }

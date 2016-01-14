@@ -19,12 +19,6 @@
                 .Map(m => m.MapKey("NotificationId"));
 
             HasMany(
-                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<Facility>>(
-                    "FacilitiesCollection"))
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
-            HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<OperationInfo>>(
                     "OperationInfosCollection"))
                 .WithRequired()

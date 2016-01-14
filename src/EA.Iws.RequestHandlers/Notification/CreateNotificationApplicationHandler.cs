@@ -15,14 +15,16 @@
     {
         private readonly IwsContext context;
         private readonly INotificationNumberGenerator notificationNumberGenerator;
+        private readonly IFacilityRepository facilityRepository;
         private readonly IUserContext userContext;
 
         public CreateNotificationApplicationHandler(IwsContext context, IUserContext userContext,
-            INotificationNumberGenerator notificationNumberGenerator)
+            INotificationNumberGenerator notificationNumberGenerator, IFacilityRepository facilityRepository)
         {
             this.context = context;
             this.userContext = userContext;
             this.notificationNumberGenerator = notificationNumberGenerator;
+            this.facilityRepository = facilityRepository;
         }
 
         public async Task<Guid> HandleAsync(CreateNotificationApplication command)
@@ -35,6 +37,13 @@
                 notificationNumber);
 
             context.NotificationApplications.Add(notification);
+
+            await context.SaveChangesAsync();
+
+            var facilityCollection = new FacilityCollection(notification.Id);
+
+            facilityRepository.Add(facilityCollection);
+
             await context.SaveChangesAsync();
 
             return notification.Id;
