@@ -23,6 +23,8 @@
     @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.EntryPoints, string.Empty, new { title = StateOfImportResources.EntryPoint, data_select_box = "true" })
 </div>
 
+@Html.Partial("_PortNotListedDisclosure")
+
 <div class="form-group">
     <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
 </div>
