@@ -75,6 +75,14 @@
             Charge = charge;
         }
 
+        public void ChangeUser(Guid newUserId)
+        {
+            var currentUser = UserId;
+            UserId = newUserId;
+
+            RaiseEvent(new NotificationUserChangedEvent(Id, currentUser, newUserId));
+        }
+
         protected string MeansOfTransportInternal { get; set; }
 
         public IOrderedEnumerable<MeansOfTransport> MeansOfTransport

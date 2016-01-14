@@ -114,7 +114,10 @@
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />
     <Compile Include="Admin\Registration\GetLocalAreasHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
+    <Compile Include="Admin\UserAdministration\GetAllUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
+    <Compile Include="Admin\UserAdministration\GetUserByExportNotificationIdHandler.cs" />
+    <Compile Include="Admin\UserAdministration\GetUserByIdHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="Annexes\DeleteAnnex.cs" />
     <Compile Include="Annexes\DeleteAnnexFileHandler.cs" />
@@ -309,6 +312,8 @@
     <Compile Include="Mappings\Reports\FinanceMap.cs" />
     <Compile Include="Mappings\Reports\MissingShipmentMap.cs" />
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="Mappings\UsersMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
@@ -402,6 +407,7 @@
     <Compile Include="NotificationMovements\Rules\TotalShipmentsReached.cs" />
     <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
+    <Compile Include="Notification\ChangeUserHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />
@@ -415,7 +421,9 @@
     <Compile Include="Notification\GetWhatToDoNextPaymentDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
+    <Compile Include="Notification\NotificationUserService.cs" />
     <Compile Include="Notification\ResubmitNotificationHandler.cs" />
+    <Compile Include="Notification\RecordUserChange.cs" />
     <Compile Include="Notification\SetChargeHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />

@@ -1,0 +1,49 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ChangeNotificationOwner.ChangeNotificationOwnerViewModel
+@using Resource = EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner.IndexResources
+
+@{
+    ViewBag.Title = @Resource.Title;
+}
+
+<div class="grid-row">
+    <aside class="column-third">
+        @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.ChangeOwner })
+    </aside>
+
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.Title</h1>
+
+        <h2 class="heading-medium">@Resource.SubTitleCurrentOwner</h2>
+        @Model.CurrentUser.FullName <br />
+        @Model.CurrentUser.Email <br />
+        @Model.CurrentUser.OrganisationName <br />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.CurrentUser.UserId)
+            @Html.HiddenFor(m => m.CurrentUser.Email)
+            @Html.HiddenFor(m => m.CurrentUser.FirstName)
+            @Html.HiddenFor(m => m.CurrentUser.LastName)
+            @Html.HiddenFor(m => m.CurrentUser.OrganisationName)
+            @Html.HiddenFor(m => m.CurrentUser.PhoneNumber)
+            
+            <h2 class="heading-medium">@Resource.SubTitleNewOwner</h2>
+            
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedUser)">
+                @Html.Gds().LabelFor(m => m.SelectedUser)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedUser)
+                @Html.Gds().HintParagraph(@Resource.HintText)
+                @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.NewUserSelectList, string.Empty, new { title = Resource.SubTitleNewOwner, data_select_box = "true" })
+            </div>
+
+            <div class="form-group">
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+        }
+    </div>
+</div>
+
+

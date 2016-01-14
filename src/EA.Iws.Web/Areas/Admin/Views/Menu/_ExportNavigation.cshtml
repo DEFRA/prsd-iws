@@ -68,5 +68,16 @@
                 <li>@Html.ActionLink("Annual exports", "Index", "ExportStats", new { area = "Reports" }, null)</li>
             </ul>
         </li>
+
+        <li class="@GetClassForSection(ExportNavigationSection.ChangeOwner, "active")">
+            <h3 class="@GetClassForSection(ExportNavigationSection.ChangeOwner, "current")">
+                <span></span>
+                Change owner
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Change owner", "Index", "ChangeNotificationOwner", new { area = "Admin", Model.Data.Id }, null)</li>
+            </ul>
+        </li>
+
     </ul>
 </div>

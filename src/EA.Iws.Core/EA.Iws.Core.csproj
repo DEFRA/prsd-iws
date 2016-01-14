@@ -48,6 +48,7 @@
     <Compile Include="AddressBook\AddressBookRecordData.cs" />
     <Compile Include="AddressBook\AddressRecordType.cs" />
     <Compile Include="Admin\ApprovalAction.cs" />
+    <Compile Include="Admin\ChangeUserData.cs" />
     <Compile Include="Admin\FinancialGuaranteeData.cs" />
     <Compile Include="Admin\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />

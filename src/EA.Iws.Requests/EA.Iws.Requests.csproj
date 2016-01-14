@@ -81,7 +81,10 @@
     <Compile Include="Admin\NotificationAssessment\SetDecision.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationId.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDates.cs" />
+    <Compile Include="Admin\UserAdministration\GetAllUsers.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsers.cs" />
+    <Compile Include="Admin\UserAdministration\GetUserByExportNotificationId.cs" />
+    <Compile Include="Admin\UserAdministration\GetUserById.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
     <Compile Include="Annexes\DeleteAnnexFile.cs" />
     <Compile Include="Annexes\GetAnnexFile.cs" />
@@ -186,6 +189,7 @@
     <Compile Include="NotificationAssessment\WithdrawNotificationApplication.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
     <Compile Include="NotificationMovements\MovementNumberStatus.cs" />
+    <Compile Include="Notification\ChangeUser.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocument.cs" />
     <Compile Include="Notification\GeneratePostageLabel.cs" />
     <Compile Include="Annexes\GetAnnexes.cs" />

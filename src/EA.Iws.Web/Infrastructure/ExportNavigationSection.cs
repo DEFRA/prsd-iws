@@ -5,6 +5,7 @@
         Assessment,
         Shipments,
         Finance,
-        Reporting
+        Reporting,
+        ChangeOwner
     }
 }

@@ -125,6 +125,7 @@
     <Compile Include="ImportNotification\Producer.cs" />
     <Compile Include="ImportNotification\WasteOperationCode.cs" />
     <Compile Include="ImportNotification\Shipment.cs" />
+    <Compile Include="INotificationUserRepository.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
     <Compile Include="Movement\MovementDetailsFactory.cs" />
     <Compile Include="Movement\NumberOfActiveLoads.cs" />
@@ -233,10 +234,14 @@
     <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
     <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
+    <Compile Include="NotificationApplication\INotificationUserService.cs" />
     <Compile Include="NotificationApplication\IPricingStructureRepository.cs" />
+    <Compile Include="NotificationApplication\IUserHistoryRepository.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
+    <Compile Include="NotificationApplication\UserHistory.cs" />
+    <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\ProviderChangedEvent.cs" />
     <Compile Include="NotificationApplication\NotificationReadOnlyException.cs" />

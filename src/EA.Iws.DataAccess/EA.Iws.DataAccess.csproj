@@ -101,6 +101,7 @@
     <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\UserHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
@@ -234,11 +235,13 @@
     <Compile Include="Repositories\NotificationApplicationOverviewRepository.cs" />
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationTransactionRepository.cs" />
+    <Compile Include="Repositories\NotificationUserRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
     <Compile Include="Repositories\Reports\ExportStatsRepository.cs" />
     <Compile Include="Repositories\Reports\ExportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\FinanceReportRepository.cs" />
     <Compile Include="Repositories\Reports\MissingShipmentsRepository.cs" />
+    <Compile Include="Repositories\UserHistoryRepository.cs" />
     <Compile Include="Repositories\WasteCodeRepository.cs" />
     <Compile Include="Repositories\WasteDisposalRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationRepository.cs" />
