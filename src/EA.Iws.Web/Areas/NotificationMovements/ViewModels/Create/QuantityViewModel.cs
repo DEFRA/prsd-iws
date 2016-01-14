@@ -34,7 +34,7 @@
                     Value = (int)u
                 });
 
-                return new SelectList(units, "Value", "Key", Units);
+                return new SelectList(units, "Value", "Key", (int)NotificationUnits);
             }
         }
 
