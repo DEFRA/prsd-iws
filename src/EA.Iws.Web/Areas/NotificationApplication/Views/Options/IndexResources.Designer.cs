@@ -160,6 +160,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download an interim movement document.
+        /// </summary>
+        public static string GenerateInterimDoc {
+            get {
+                return ResourceManager.GetString("GenerateInterimDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New notification.
         /// </summary>
         public static string NewNotificationTitle {

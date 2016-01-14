@@ -41,6 +41,8 @@
 
         public MovementStatus? SelectedMovementStatus { get; set; }
 
+        public bool IsInterimNotification { get; set; }
+
         public SelectList MovementStatuses
         {
             get
@@ -74,6 +76,7 @@
             CompetentAuthority = data.SummaryData.CompetentAuthority;
             NotificationStatus = data.SummaryData.NotificationStatus;
             FinancialGuaranteeStatus = data.SummaryData.FinancialGuaranteeStatus;
+            IsInterimNotification = data.IsInterimNotification;
 
             TableData = new List<ShipmentDatesTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)
@@ -108,6 +111,16 @@
             {
                 return NotificationStatus == NotificationStatus.Consented ||
                        NotificationStatus == NotificationStatus.ConsentWithdrawn;
+            }
+        }
+
+        public bool ShowGenerateInterimDocumentLink
+        {
+            get
+            {
+                return (NotificationStatus == NotificationStatus.Consented &&
+                       FinancialGuaranteeStatus == FinancialGuaranteeStatus.Approved &&
+                       IsInterimNotification);
             }
         }
     }

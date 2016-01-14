@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="DocumentGeneratorModule.cs" />
     <Compile Include="DocumentGenerator\FinancialGuaranteeDocumentGenerator.cs" />
+    <Compile Include="DocumentGenerator\InterimMovementDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\MovementDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\NotificationDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\PostageLabelGenerator.cs" />

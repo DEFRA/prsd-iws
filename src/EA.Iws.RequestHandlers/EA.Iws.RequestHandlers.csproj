@@ -396,6 +396,7 @@
     <Compile Include="NotificationMovements\Rules\TotalShipmentsReached.cs" />
     <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
+    <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />
     <Compile Include="Notification\CreateAnnexCollection.cs" />

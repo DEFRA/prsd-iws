@@ -54,6 +54,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="FinancialGuarantee\IFinancialGuaranteeDecisionRepository.cs" />
     <Compile Include="FinancialGuarantee\IFinancialGuaranteeRepository.cs" />
+    <Compile Include="IInterimMovementDocumentGenerator.cs" />
     <Compile Include="ImportMovement\CompleteImportMovement.cs" />
     <Compile Include="ImportMovement\ICompleteImportMovement.cs" />
     <Compile Include="ImportMovement\IImportMovementCompletedReceiptRepository.cs" />

@@ -43,6 +43,27 @@
         }
 
         [HttpGet]
+        public async Task<ActionResult> GenerateInterimMovementDocument(Guid id)
+        {
+            try
+            {
+                var response = await mediator.SendAsync(new GenerateInterimMovementDocument(id));
+
+                return File(response.Content, MimeTypeHelper.GetMimeType(response.FileNameWithExtension),
+                    response.FileNameWithExtension);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+                return HttpNotFound();
+            }
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
             var response = await mediator.SendAsync(new GetNotificationOverview(id));

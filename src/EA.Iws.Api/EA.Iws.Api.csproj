@@ -272,6 +272,7 @@
     <Content Include="Documents\NieaAddress.pdf" />
     <Content Include="Documents\NrwAddress.pdf" />
     <Content Include="Documents\SepaAddress.pdf" />
+    <Content Include="Documents\InterimMovementMergeTemplate.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

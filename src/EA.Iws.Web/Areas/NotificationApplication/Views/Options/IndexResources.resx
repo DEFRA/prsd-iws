@@ -216,4 +216,7 @@
   <data name="ViewNotification" xml:space="preserve">
     <value>View notification</value>
   </data>
+  <data name="GenerateInterimDoc" xml:space="preserve">
+    <value>Download an interim movement document</value>
+  </data>
 </root>
