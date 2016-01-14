@@ -68,7 +68,7 @@
                     @Html.ActionLink("Go to my homepage", "Home", "Applicant", new { area = string.Empty }, null)
                 }
             </div>
-            <div>
+            <div id="top-content-box-container">
                 @RenderSection("top_content_box", false)
                 @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
             </div>
