@@ -129,6 +129,9 @@
   <data name="DecisionRequiredTableHeading" xml:space="preserve">
     <value>Decision required</value>
   </data>
+  <data name="ExportNotificationLink" xml:space="preserve">
+    <value>Create a new export notification</value>
+  </data>
   <data name="ImportNotificationNumberLink" xml:space="preserve">
     <value>Create a new import notification</value>
   </data>

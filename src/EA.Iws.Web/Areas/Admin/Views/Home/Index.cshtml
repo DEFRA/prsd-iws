@@ -118,6 +118,7 @@
         <h2 class="heading-medium">@Resource.NavigationLinksHeading</h2>
         <p>@Html.ActionLink(@Resource.ManageNewUsersLink, "ManageNewUsers", "UserAdministration")</p>
         <p>@Html.ActionLink(@Resource.ImportNotificationNumberLink, "Number", "ImportNotification")</p>
+        <p>@Html.ActionLink(@Resource.ExportNotificationLink, "CompetentAuthority", "NewNotification", new { area = "" }, null)</p>
         <p>@Html.ActionLink(@Resource.SystemConfigurationLink, "Index", "Configuration")</p>
         <p>@Html.ActionLink(@Resource.Reports, "Index", "Home", new { area = "Reports" }, null)</p>
     </div>

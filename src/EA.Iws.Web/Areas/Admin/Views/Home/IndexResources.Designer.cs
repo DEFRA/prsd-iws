@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a new export notification.
+        /// </summary>
+        public static string ExportNotificationLink {
+            get {
+                return ResourceManager.GetString("ExportNotificationLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a new import notification.
         /// </summary>
         public static string ImportNotificationNumberLink {
