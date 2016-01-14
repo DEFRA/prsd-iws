@@ -100,13 +100,20 @@
 
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {
+            //TODO: Remove this method and replace usages with repositories
+
             var notification = await NotificationApplications.SingleAsync(n => n.Id == notificationId);
-            if (notification.UserId != UserContext.UserId)
+            if (!(await IsInternal()) && notification.UserId != UserContext.UserId)
             {
                 throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
                     notificationId, UserContext.UserId));
             }
             return notification;
+        }
+
+        private async Task<bool> IsInternal()
+        {
+            return await InternalUsers.AnyAsync(u => u.UserId == UserContext.UserId.ToString());
         }
     }
 }

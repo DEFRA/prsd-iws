@@ -28,6 +28,7 @@
         [InlineData(NotificationStatus.Submitted)]
         [InlineData(NotificationStatus.NotificationReceived)]
         [InlineData(NotificationStatus.InAssessment)]
+        [InlineData(NotificationStatus.Unlocked)]
         public void CanEditNotification(NotificationStatus status)
         {
             SetNotificationStatus(status);

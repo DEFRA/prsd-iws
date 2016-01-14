@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
-    using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels;
 
@@ -76,6 +75,15 @@
             }
 
             return RedirectToAction("Index", new { id = model.NotificationId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UnlockNotification(Guid id)
+        {
+            await mediator.SendAsync(new UnlockNotification(id));
+
+            return RedirectToAction("Index");
         }
 
         private async Task SetNotificationTransmitted(DateInputViewModel model)

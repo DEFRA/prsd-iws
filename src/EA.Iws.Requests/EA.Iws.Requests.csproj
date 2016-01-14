@@ -62,6 +62,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
+    <Compile Include="Admin\NotificationAssessment\UnlockNotification.cs" />
     <Compile Include="Admin\Reports\GetExportNotificationsReport.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReport.cs" />
     <Compile Include="Admin\Reports\GetFinanceReport.cs" />

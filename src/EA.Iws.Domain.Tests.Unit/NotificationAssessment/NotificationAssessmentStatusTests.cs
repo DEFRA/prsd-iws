@@ -337,5 +337,23 @@
 
             Assert.Throws<InvalidOperationException>(withdrawConsent);
         }
+
+        [Fact]
+        public void CanUnlockWhenAcknowledged()
+        {
+            SetNotificationStatus(NotificationStatus.DecisionRequiredBy);
+
+            notificationAssessment.Unlock();
+
+            Assert.Equal(NotificationStatus.Unlocked, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantUnlockWhenNotAcknowledged()
+        {
+            Action unlock = () => notificationAssessment.Unlock();
+
+            Assert.Throws<InvalidOperationException>(unlock);
+        }
     }
 }

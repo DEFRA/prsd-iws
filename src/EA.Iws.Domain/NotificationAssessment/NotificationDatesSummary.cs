@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using Core.NotificationAssessment;
 
     public class NotificationDatesSummary
     {
+        public NotificationStatus CurrentStatus { get; private set; }
+
         public DateTime? NotificationReceivedDate { get; private set; }
 
         public Guid NotificationId { get; private set; }
@@ -25,6 +28,7 @@
         public DateTime? DecisionRequiredDate { get; private set; }
 
         public static NotificationDatesSummary Load(
+            NotificationStatus currentStatus,
             DateTime? notificationReceivedDate,
             Guid notificationId,
             DateTime? paymentReceivedDate,
@@ -38,6 +42,7 @@
         {
             return new NotificationDatesSummary
             {
+                CurrentStatus = currentStatus,
                 NotificationReceivedDate = notificationReceivedDate,
                 NotificationId = notificationId,
                 PaymentReceivedDate = paymentReceivedDate,
@@ -51,4 +56,4 @@
             };
         }
     }
-}           
+}

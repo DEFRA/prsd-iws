@@ -37,6 +37,7 @@
             }
 
             return NotificationDatesSummary.Load(
+                assessment.Status,
                 assessment.Dates.NotificationReceivedDate,
                 notificationId,
                 lastestPaymentDate,

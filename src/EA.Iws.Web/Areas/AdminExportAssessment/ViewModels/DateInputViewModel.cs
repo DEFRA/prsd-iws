@@ -25,6 +25,7 @@
 
         public DateInputViewModel(NotificationDatesData dates)
         {
+            CurrentStatus = dates.CurrentStatus;
             NotificationId = dates.NotificationId;
             NotificationReceivedDate = new OptionalDateInputViewModel(dates.NotificationReceivedDate, true);
             PaymentReceivedDate = dates.PaymentReceivedDate;
@@ -42,6 +43,8 @@
         public Guid NotificationId { get; set; }
 
         public KeyDatesStatusEnum Command { get; set; }
+
+        public NotificationStatus CurrentStatus { get; set; }
 
         [Display(Name = "Notification received")]
         public OptionalDateInputViewModel NotificationReceivedDate { get; set; }

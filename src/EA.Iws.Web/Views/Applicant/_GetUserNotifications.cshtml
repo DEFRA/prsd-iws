@@ -5,13 +5,14 @@
 
 @helper DisplayStatus(NotificationStatus status)
 {
-string statusColour;
-switch (status)
+    string statusColour;
+    switch (status)
     {
         case NotificationStatus.InAssessment:
         case NotificationStatus.ReadyToTransmit:
         case NotificationStatus.Transmitted:
         case NotificationStatus.DecisionRequiredBy:
+        case NotificationStatus.Unlocked:
             statusColour = "s-orange";
             break;
 
@@ -28,8 +29,8 @@ switch (status)
         default:
             statusColour = "s-blue";
             break;
-    }
-    
+}
+
     <span class="statusbox @statusColour">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
 }
 

@@ -3,6 +3,48 @@
 @using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.DateInputViewModel
 
+@helper GenerateHiddenFields() {
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.Command)
+    @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
+    @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
+    @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
+    @Html.HiddenFor(m => m.CommencementDate.Day)
+    @Html.HiddenFor(m => m.CommencementDate.Month)
+    @Html.HiddenFor(m => m.CommencementDate.Year)
+    @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
+    @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
+    @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
+    @Html.HiddenFor(m => m.NotificationTransmittedDate.Day)
+    @Html.HiddenFor(m => m.NotificationTransmittedDate.Month)
+    @Html.HiddenFor(m => m.NotificationTransmittedDate.Year)
+    @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Day)
+    @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Month)
+    @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Year)
+    @Html.HiddenFor(m => m.DecisionDate.Day)
+    @Html.HiddenFor(m => m.DecisionDate.Month)
+    @Html.HiddenFor(m => m.DecisionDate.Year)
+
+    for (int i = 0; i < Model.FinancialGuaranteeDecisions.Count(); i++)
+    {
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].NotificationId)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Date)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Decision)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedFrom)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedTo)
+    }
+
+    for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)
+    {
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].NotificationId)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].Date)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedFrom)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedTo)
+            @Html.HiddenFor(m => m.AssessmentDecisions[i].Status)
+    }
+}
+
 <h1 class="heading-large">Enter the key dates for this notification</h1>
 
 @{
@@ -235,45 +277,7 @@
 {
     using (Html.BeginForm("Index", "KeyDates", FormMethod.Post))
     {
-        @Html.Gds().ValidationSummary()
-        @Html.HiddenFor(m => m.NotificationId)
-        @Html.HiddenFor(m => m.Command)
-        @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
-        @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
-        @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
-        @Html.HiddenFor(m => m.CommencementDate.Day)
-        @Html.HiddenFor(m => m.CommencementDate.Month)
-        @Html.HiddenFor(m => m.CommencementDate.Year)
-        @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
-        @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
-        @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
-        @Html.HiddenFor(m => m.NotificationTransmittedDate.Day)
-        @Html.HiddenFor(m => m.NotificationTransmittedDate.Month)
-        @Html.HiddenFor(m => m.NotificationTransmittedDate.Year)
-        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Day)
-        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Month)
-        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Year)
-        @Html.HiddenFor(m => m.DecisionDate.Day)
-        @Html.HiddenFor(m => m.DecisionDate.Month)
-        @Html.HiddenFor(m => m.DecisionDate.Year)
-
-        for (int i = 0; i < Model.FinancialGuaranteeDecisions.Count(); i++)
-        {
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].NotificationId)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Date)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Decision)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedFrom)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedTo)
-        }
-
-        for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)
-        {
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].NotificationId)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].Date)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedFrom)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedTo)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].Status)
-        }
+        @GenerateHiddenFields()
 
         @Html.AntiForgeryToken()
 
@@ -309,6 +313,8 @@
         </div>
     }
 
+
+
     @section scripts{
         <script>
             $(function () {
@@ -334,6 +340,21 @@ else
                 }
             })
         </script>
+    }
+}
+
+@if (Model.CurrentStatus == NotificationStatus.DecisionRequiredBy)
+{
+    using (Html.BeginForm("UnlockNotification", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
+    {
+        @GenerateHiddenFields()
+
+        @Html.AntiForgeryToken()
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="button" value="Unlock notification for updates" />
+        </div>
     }
 }
 

@@ -4,6 +4,8 @@
 
     public class NotificationDatesData
     {
+        public NotificationStatus CurrentStatus { get; set; }
+
         public DateTime? NotificationReceivedDate { get; set; }
 
         public Guid NotificationId { get; set; }

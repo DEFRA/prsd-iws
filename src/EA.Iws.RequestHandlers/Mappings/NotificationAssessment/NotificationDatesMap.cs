@@ -10,6 +10,7 @@
         {
             return new NotificationDatesData
             {
+                CurrentStatus = source.CurrentStatus,
                 NotificationId = source.NotificationId,
                 NotificationReceivedDate = source.NotificationReceivedDate,
                 PaymentReceivedDate = source.PaymentReceivedDate,

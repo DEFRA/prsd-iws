@@ -27,7 +27,8 @@
             Withdraw,
             Object,
             Consent,
-            WithdrawConsent
+            WithdrawConsent,
+            Unlock
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
@@ -78,7 +79,8 @@
                 return stateMachine.IsInState(NotificationStatus.NotSubmitted)
                        || stateMachine.IsInState(NotificationStatus.Submitted)
                        || stateMachine.IsInState(NotificationStatus.NotificationReceived)
-                       || stateMachine.IsInState(NotificationStatus.InAssessment);
+                       || stateMachine.IsInState(NotificationStatus.InAssessment)
+                       || stateMachine.IsInState(NotificationStatus.Unlocked);
             }
         }
 
@@ -144,6 +146,7 @@
             stateMachine.Configure(NotificationStatus.DecisionRequiredBy)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
+                .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Consent, NotificationStatus.Consented)
                 .Permit(Trigger.Object, NotificationStatus.Objected);
 
@@ -162,6 +165,9 @@
 
             stateMachine.Configure(NotificationStatus.ConsentWithdrawn)
                 .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn);
+
+            stateMachine.Configure(NotificationStatus.Unlocked)
+                .SubstateOf(NotificationStatus.InDetermination);
 
             return stateMachine;
         }
@@ -298,6 +304,11 @@
         public void Object(DateTime objectionDate, string reason)
         {
             stateMachine.Fire(objectTrigger, objectionDate, reason);
+        }
+
+        public void Unlock()
+        {
+            stateMachine.Fire(Trigger.Unlock);
         }
     }
 }
