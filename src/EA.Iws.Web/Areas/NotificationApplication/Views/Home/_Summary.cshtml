@@ -2,37 +2,6 @@
 @using EA.Iws.Core.Notification;
 @using EA.Iws.Core.NotificationAssessment;
 
-@helper DisplayStatus(NotificationStatus status)
-{
-    string statusColour;
-    switch (status)
-    {
-        case NotificationStatus.InAssessment:
-        case NotificationStatus.ReadyToTransmit:
-        case NotificationStatus.Transmitted:
-        case NotificationStatus.DecisionRequiredBy:
-        case NotificationStatus.Unlocked:
-            statusColour = "s-orange";
-            break;
-
-        case NotificationStatus.Consented:
-            statusColour = "s-green";
-            break;
-
-        case NotificationStatus.Objected:
-        case NotificationStatus.Withdrawn:
-        case NotificationStatus.ConsentWithdrawn:
-            statusColour = "s-red";
-            break;
-
-        default:
-            statusColour = "s-blue";
-            break;
-    }
-
-    <span class="statusbox @statusColour">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(status)</span>
-}
-
 <section class="grid-row">
     <div class="noti-overview">
         <div class="column-half">
@@ -54,7 +23,7 @@
             
             <div class="status">
                 <span>Overall Status</span>
-                @DisplayStatus(Model.Status)
+                <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Status)">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</span>
             </div>
             
             @if (Model.Charge > 0)

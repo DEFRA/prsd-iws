@@ -1,38 +1,6 @@
-@using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Web.Views.Applicant
 
 @model IList<EA.Iws.Requests.Notification.NotificationApplicationSummaryData>
-
-@helper DisplayStatus(NotificationStatus status)
-{
-    string statusColour;
-    switch (status)
-    {
-        case NotificationStatus.InAssessment:
-        case NotificationStatus.ReadyToTransmit:
-        case NotificationStatus.Transmitted:
-        case NotificationStatus.DecisionRequiredBy:
-        case NotificationStatus.Unlocked:
-            statusColour = "s-orange";
-            break;
-
-        case NotificationStatus.Consented:
-            statusColour = "s-green";
-            break;
-
-        case NotificationStatus.Objected:
-        case NotificationStatus.Withdrawn:
-        case NotificationStatus.ConsentWithdrawn:
-            statusColour = "s-red";
-            break;
-
-        default:
-            statusColour = "s-blue";
-            break;
-}
-
-    <span class="statusbox @statusColour">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
-}
 
 @if (ViewBag.Errors != null && ((IEnumerable<string>)ViewBag.Errors).Any())
 {
@@ -77,7 +45,7 @@ else
                         @Html.Raw(Model[i].NotificationNumber.Replace(" ", "&nbsp;"))
                     </td>
                     <td>
-                        @(DisplayStatus(Model[i].Status))
+                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model[i].Status)">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
                     </td>
                     <td>
                         @Model[i].Exporter
