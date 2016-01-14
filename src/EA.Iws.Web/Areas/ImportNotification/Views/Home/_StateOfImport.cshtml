@@ -2,48 +2,47 @@
 
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
-<details>
-    <div class="overview-block">
-        <div class="overview-block-element">
-            @if (Model.Details.StateOfImport != null && !Model.Details.StateOfImport.IsEmpty())
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.Details.StateOfImport != null && !Model.Details.StateOfImport.IsEmpty())
+        {
+            
+            <div class="sub-title">@Resource.CountryText</div>
+            if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CountryName))
             {
-                <dl>
-                    <dt>@Resource.CountryText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CountryName))
-                {
-                        <dd>@Model.Details.StateOfImport.CountryName</dd>
-                    }
-                    else
-                    {
-                        <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                    }
-
-                    <dt>@Resource.CompetentAuthorityText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CompetentAuthorityName))
-                {
-                        <dd>@Model.Details.StateOfImport.CompetentAuthorityCode - @Model.Details.StateOfImport.CompetentAuthorityName</dd>
-                    }
-                    else
-                    {
-                        <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                    }
-
-                    <dt>@Resource.EntryPointText</dt>
-                    @if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.EntryPointName))
-                {
-                        <dd>@Model.Details.StateOfImport.EntryPointName</dd>
-                    }
-                    else
-                    {
-                        <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                    }
-                </dl>
+                <div class="sub-text">@Model.Details.StateOfImport.CountryName</div>
             }
             else
             {
-                @ViewBag.SectionIncompleteText
+                <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
             }
 
-        </div>
+            <div class="sub-title">@Resource.CompetentAuthorityText</div>
+            if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CompetentAuthorityName))
+            {
+                <div class="sub-text">@Model.Details.StateOfImport.CompetentAuthorityCode - @Model.Details.StateOfImport.CompetentAuthorityName</div>
+            }
+            else
+            {
+                <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+            }
+
+            <div class="sub-title">@Resource.EntryPointText</div>
+            if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.EntryPointName))
+            {
+                <div class="sub-text">@Model.Details.StateOfImport.EntryPointName</div>
+            }
+            else
+            {
+                <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+            }
+            
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+
     </div>
-</details>
+</div>

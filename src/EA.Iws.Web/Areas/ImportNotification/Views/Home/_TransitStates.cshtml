@@ -2,68 +2,66 @@
 
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
-<details>
-    <div class="overview-block">
-        <div class="overview-block-element">
-            @if (Model.Details.TransitStates != null && Model.Details.TransitStates.Count > 0)
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.Details.TransitStates != null && Model.Details.TransitStates.Count > 0)
+        {
+            for (int i = 0; i < Model.Details.TransitStates.Count; i++)
             {
-                for (int i = 0; i < Model.Details.TransitStates.Count; i++)
+                
+                <div class="sub-title">@Resource.CountryText</div>
+                if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].CountryName))
                 {
-                    <dl>
-                        <dt>@Resource.CountryText</dt>
-                        @if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].CountryName))
-                        {
-                            <dd>@Model.Details.TransitStates[i].CountryName</dd>
-                        }
-                        else
-                        {
-                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                        }
+                    <div class="sub-text">@Model.Details.TransitStates[i].CountryName</div>
+                }
+                else
+                {
+                    <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+                }
 
-                        <dt>@Resource.CompetentAuthorityText</dt>
-                        @if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].CompetentAuthorityName))
-                        {
-                            <dd>@Model.Details.TransitStates[i].CompetentAuthorityCode - @Model.Details.TransitStates[i].CompetentAuthorityName</dd>
-                        }
-                        else
-                        {
-                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                        }
-                        <dt>@Resource.EntryPointText</dt>
-                        @if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].EntryPointName))
-                        {
-                            <dd>@Model.Details.TransitStates[i].EntryPointName</dd>
-                        }
-                        else
-                        {
-                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                        }
+                <div class="sub-title">@Resource.CompetentAuthorityText</div>
+                if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].CompetentAuthorityName))
+                {
+                    <div class="sub-text">@Model.Details.TransitStates[i].CompetentAuthorityCode - @Model.Details.TransitStates[i].CompetentAuthorityName</div>
+                }
+                else
+                {
+                    <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+                }
+                <div class="sub-title">@Resource.EntryPointText</div>
+                if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].EntryPointName))
+                {
+                    <div class="sub-text">@Model.Details.TransitStates[i].EntryPointName</div>
+                }
+                else
+                {
+                    <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+                }
 
-                        <dt>@Resource.ExitPointText</dt>
-                        @if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].ExitPointName))
-                        {
-                            <dd>@Model.Details.TransitStates[i].ExitPointName</dd>
-                        }
-                        else
-                        {
-                            <dd>@Resource.UnansweredQuestionPlaceholder</dd>
-                        }
-                    </dl>
+                <div class="sub-title">@Resource.ExitPointText</div>
+                if (!string.IsNullOrWhiteSpace(Model.Details.TransitStates[i].ExitPointName))
+                {
+                    <div class="sub-text">@Model.Details.TransitStates[i].ExitPointName</div>
+                }
+                else
+                {
+                    <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+                }
+                
 
-                    if (i < (Model.Details.TransitStates.Count - 1))
-                    {
-                        <hr />
-                    }
+                if (i < (Model.Details.TransitStates.Count - 1))
+                {
+                    <hr />
                 }
             }
-            else if (Model.Details.HasNoTransitStates)
-            {
-                <p>@Resource.NoTransitStatesChoice</p>
-            }
-            else
-            {
-                @ViewBag.SectionIncompleteText
-            }
-        </div>
+        }
+        else if (Model.Details.HasNoTransitStates)
+        {
+            <p>@Resource.NoTransitStatesChoice</p>
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
     </div>
-</details>
+</div>

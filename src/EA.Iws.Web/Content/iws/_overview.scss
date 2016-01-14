@@ -10,6 +10,14 @@
     white-space: nowrap;
 }
 
+.overview-block-element .sub-title {
+    color: $secondary-text-colour;
+}
+
+.overview-block-element .sub-text {
+    margin-bottom: 0.5em;
+}
+
 .overview-table {
     td {
         vertical-align: top;

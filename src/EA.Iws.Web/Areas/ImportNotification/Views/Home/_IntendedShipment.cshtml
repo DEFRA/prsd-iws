@@ -2,47 +2,55 @@
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
-<details>
-    <div class="overview-block">
-        @if (Model.Details.IntendedShipment != null && !Model.Details.IntendedShipment.IsEmpty())
-        {
-            <div class="overview-block-element">
-                <dl>
-                    <dt>@Resource.ShipmentNumberTitle</dt>
-                    @if (Model.Details.IntendedShipment.TotalShipments.HasValue)
-                    {
-                        <dd>@Model.Details.IntendedShipment.TotalShipments</dd>
-                    }
-                    else
-                    {
-                        <dd>@Resource.ShipmentNotEnteredText</dd>
-                    }
+<div class="overview-block">
+    @if (Model.Details.IntendedShipment != null && !Model.Details.IntendedShipment.IsEmpty())
+    {
+        <div class="overview-block-element">
+            
+                <div class="sub-title">@Resource.ShipmentNumberTitle</div>
+                @if (Model.Details.IntendedShipment.TotalShipments.HasValue)
+                {
+                    <div class="sub-text">@Model.Details.IntendedShipment.TotalShipments</div>
+                }
+                else
+                {
+                    <div class="sub-text">
+                        @Resource.ShipmentNotEnteredText
+                    </div>
+                }
 
-                    <dt>@Resource.ShipmentQuantityTitle</dt>
-                    @if (Model.Details.IntendedShipment.Quantity.HasValue && Model.Details.IntendedShipment.Units.HasValue)
-                    {
-                        <dd>@Html.Raw(string.Format("{0:0.####} {1}", Model.Details.IntendedShipment.Quantity, EnumHelper.GetShortName(Model.Details.IntendedShipment.Units)))</dd>
-                    }
-                    else
-                    {
-                        <dd>@Resource.ShipmentNotEnteredText</dd>
-                    }
+                <div class="sub-title">@Resource.ShipmentQuantityTitle</div>
+                @if (Model.Details.IntendedShipment.Quantity.HasValue && Model.Details.IntendedShipment.Units.HasValue)
+                {
+                    <div class="sub-text">
+                        @Html.Raw(string.Format("{0:0.####} {1}", Model.Details.IntendedShipment.Quantity, EnumHelper.GetShortName(Model.Details.IntendedShipment.Units)))
+                    </div>
+                }
+                else
+                {
+                    <div class="sub-text">
+                        @Resource.ShipmentNotEnteredText
+                    </div>
+                }
 
-                    <dt>@Resource.ShipmentDatesTitle</dt>
-                    @if (Model.Details.IntendedShipment.Start.HasValue && Model.Details.IntendedShipment.End.HasValue)
-                    {
-                        <dd>@Html.Gds().DisplayDateRangeFor(m => m.Details.IntendedShipment.Start.Value, m => m.Details.IntendedShipment.End.Value)</dd>
-                    }
-                    else
-                    {
-                        <dd>@Resource.ShipmentNotEnteredText</dd>
-                    }
-                </dl>
-            </div>
-        }
-        else
-        {
-            <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
-        }
-    </div>
-</details>
+                <div class="sub-title">@Resource.ShipmentDatesTitle</div>
+                @if (Model.Details.IntendedShipment.Start.HasValue && Model.Details.IntendedShipment.End.HasValue)
+                {
+                    <div class="sub-text">
+                        @Html.Gds().DisplayDateRangeFor(m => m.Details.IntendedShipment.Start.Value, m => m.Details.IntendedShipment.End.Value)
+                    </div>
+                }
+                else
+                {
+                    <div class="sub-text">
+                        @Resource.ShipmentNotEnteredText
+                    </div>
+                }
+
+        </div>
+    }
+    else
+    {
+    <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>
