@@ -91,9 +91,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Resubmit(Guid id)
+        public async Task<ActionResult> Resubmit(Guid id)
         {
-            //TODO: send request to resubmit
+            await mediator.SendAsync(new ResubmitNotification(id));
 
             if (User.IsInternalUser())
             {

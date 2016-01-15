@@ -45,7 +45,7 @@ else
                         @Html.Raw(Model[i].NotificationNumber.Replace(" ", "&nbsp;"))
                     </td>
                     <td>
-                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model[i].Status)">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
+                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
                     </td>
                     <td>
                         @Model[i].Exporter

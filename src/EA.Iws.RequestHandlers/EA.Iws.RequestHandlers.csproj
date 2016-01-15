@@ -411,6 +411,7 @@
     <Compile Include="Notification\GetWhatToDoNextPaymentDataForNotificationHandler.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandler.cs" />
     <Compile Include="Notification\NotificationProgressService.cs" />
+    <Compile Include="Notification\ResubmitNotificationHandler.cs" />
     <Compile Include="Notification\SetChargeHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />
