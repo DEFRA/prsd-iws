@@ -354,6 +354,18 @@ else
     }
 }
 
+@if (Model.CurrentStatus == NotificationStatus.Unlocked)
+{
+    <br />
+    <p>To make changes to this notification you need to go to the external overview.</p>
+    
+    @Html.ActionLink("Go to external notification overview", 
+        "Index", 
+        "Home", 
+        new { area = "NotificationApplication", id = Model.NotificationId }, 
+        null)
+}
+
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
 }

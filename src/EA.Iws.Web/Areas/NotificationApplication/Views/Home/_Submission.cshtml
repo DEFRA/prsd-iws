@@ -1,6 +1,5 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.SubmitSideBarViewModel
 @using EA.Iws.Core.Notification;
-@using EA.Iws.Core.NotificationAssessment;
 
 <section class="grid-row">
     <div class="noti-overview">
@@ -8,14 +7,20 @@
             <h2 class="heading-medium">@Model.NotificationNumber</h2>
             <h1 class="heading-large">Notification overview</h1>
 
-            @if (Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
+            @if (Model.ShowSubmitButton)
             {
                 @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "button" })
             }
-            else if(!Model.IsNotificationComplete && Model.Status == NotificationStatus.NotSubmitted)
+
+            else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
             {
                 <a href="#" class="button" disabled="disabled">Submit notification</a>
                 <div>You can submit this notification once you've completed all sections</div>
+            }
+
+            else if (Model.ShowResubmitButton)
+            {
+                @Html.ActionLink("Resubmit notification", "Index", "Home", null, new { @class = "button" })
             }
         </div>
 

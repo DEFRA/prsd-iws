@@ -428,7 +428,7 @@
     <Content Include="Areas\NotificationApplication\Views\Producer\_BusinessType.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Submit\Disclaimer.cshtml" />
     <Content Include="Content\iws\_overview.scss" />
-    <Content Include="Areas\NotificationApplication\Views\Home\_Summary.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_Submission.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_Transportation.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_AmountsAndDates.cshtml" />

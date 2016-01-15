@@ -23,6 +23,30 @@
 
         public bool IsNotificationComplete { get; set; }
 
+        public bool ShowSubmitButton
+        {
+            get
+            {
+                return IsNotificationComplete && Status == NotificationStatus.NotSubmitted;
+            }
+        }
+
+        public bool ShowDisabledSubmitButtonAndGuidanceText
+        {
+            get
+            {
+                return !IsNotificationComplete && Status == NotificationStatus.NotSubmitted;
+            }
+        }
+
+        public bool ShowResubmitButton
+        {
+            get
+            {
+                return Status == NotificationStatus.Unlocked;
+            }
+        }
+
         public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, int notificationCharge, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = submitSummaryData.NotificationId;
