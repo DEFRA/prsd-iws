@@ -1,0 +1,9 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Home.ResubmissionSuccessViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    ViewBag.Title = "Notification resubmitted";
+}
+
+<h1 class="heading-large">Your notification has been resubmitted</h1>
+
+@Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId }, new { @class = "button" })

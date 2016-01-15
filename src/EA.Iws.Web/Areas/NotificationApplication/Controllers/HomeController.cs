@@ -9,6 +9,7 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
+    using ViewModels.Home;
     using ViewModels.NotificationApplication;
 
     [Authorize]
@@ -86,6 +87,28 @@
             var response = Task.Run(() => mediator.SendAsync(new GetNotificationProgressInfo(id))).Result;
 
             return PartialView(response);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Resubmit(Guid id)
+        {
+            //TODO: send request to resubmit
+
+            if (User.IsInternalUser())
+            {
+                return RedirectToAction("Index", "KeyDates", new { area = "AdminExportAssessment", id });
+            }
+
+            return RedirectToAction("ResubmissionSuccess");
+        }
+
+        [HttpGet]
+        public ActionResult ResubmissionSuccess(Guid id)
+        {
+            var model = new ResubmissionSuccessViewModel { NotificationId = id };
+
+            return View(model);
         }
     }
 }

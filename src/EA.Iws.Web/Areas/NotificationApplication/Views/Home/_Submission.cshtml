@@ -20,7 +20,12 @@
 
             else if (Model.ShowResubmitButton)
             {
-                @Html.ActionLink("Resubmit notification", "Index", "Home", null, new { @class = "button" })
+                using (Html.BeginForm("Resubmit","Home", FormMethod.Post, new { id = Model.NotificationId }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="submit" class="button" value="Resubmit notification"/>
+                }
             }
         </div>
 
