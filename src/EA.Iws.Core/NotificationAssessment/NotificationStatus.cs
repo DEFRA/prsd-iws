@@ -28,6 +28,8 @@
         ConsentWithdrawn = 11,
         [Display(Name = "Change required")]
         Unlocked = 12,
+        [Display(Name = "Reassessment")]
+        Reassessment = 13,
         [Display(Name = "In Determination")]
         InDetermination = 100
     }

@@ -28,7 +28,8 @@
             Object,
             Consent,
             WithdrawConsent,
-            Unlock
+            Unlock,
+            Resubmit
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
@@ -167,6 +168,10 @@
                 .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn);
 
             stateMachine.Configure(NotificationStatus.Unlocked)
+                .SubstateOf(NotificationStatus.InDetermination)
+                .Permit(Trigger.Resubmit, NotificationStatus.Reassessment);
+
+            stateMachine.Configure(NotificationStatus.Reassessment)
                 .SubstateOf(NotificationStatus.InDetermination);
 
             return stateMachine;
@@ -309,6 +314,11 @@
         public void Unlock()
         {
             stateMachine.Fire(Trigger.Unlock);
+        }
+
+        public void Resubmit()
+        {
+            stateMachine.Fire(Trigger.Resubmit);
         }
     }
 }

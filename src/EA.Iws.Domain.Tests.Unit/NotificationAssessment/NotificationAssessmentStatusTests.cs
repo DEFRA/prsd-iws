@@ -355,5 +355,23 @@
 
             Assert.Throws<InvalidOperationException>(unlock);
         }
+
+        [Fact]
+        public void CanResubmitWhenUnlocked()
+        {
+            SetNotificationStatus(NotificationStatus.Unlocked);
+
+            notificationAssessment.Resubmit();
+
+            Assert.Equal(NotificationStatus.Reassessment, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantResubmitWhenNotUnlocked()
+        {
+            Action resubmit = () => notificationAssessment.Resubmit();
+
+            Assert.Throws<InvalidOperationException>(resubmit);
+        }
     }
 }
