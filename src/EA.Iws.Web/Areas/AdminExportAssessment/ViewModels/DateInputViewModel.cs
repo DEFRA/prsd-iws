@@ -87,6 +87,8 @@
 
         public CompetentAuthority CompetentAuthority { get; set; }
 
+        public bool? IsInterim { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!NewDate.IsCompleted)

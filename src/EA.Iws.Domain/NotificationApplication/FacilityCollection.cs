@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using NotificationAssessment;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
 
@@ -30,7 +31,9 @@
             get { return FacilitiesCollection.ToSafeIEnumerable(); }
         }
 
-        public bool IsInterim
+        public bool? IsInterim { get; private set; }
+
+        public bool HasMultipleFacilities
         {
             get { return FacilitiesCollection != null && FacilitiesCollection.Skip(1).Any(); }
         }
@@ -78,6 +81,13 @@
             {
                 facility.IsActualSiteOfTreatment = facility.Id == facilityId;
             }
+        }
+
+        internal void SetIsInterim(bool isInterim)
+        {
+            IsInterim = isInterim;
+
+            RaiseEvent(new NotificationIsInterimSetEvent(NotificationId, isInterim));
         }
     }
 }

@@ -1,28 +1,25 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.NotificationAssessment
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
 
     internal class SetNotificationCompleteDateHandler : IRequestHandler<SetNotificationCompleteDate, bool>
     {
         private readonly IwsContext context;
+        private readonly CompleteNotification completeNotification;
 
-        public SetNotificationCompleteDateHandler(IwsContext context)
+        public SetNotificationCompleteDateHandler(IwsContext context, CompleteNotification completeNotification)
         {
             this.context = context;
+            this.completeNotification = completeNotification;
         }
 
         public async Task<bool> HandleAsync(SetNotificationCompleteDate message)
         {
-            var assessment =
-                await
-                    context.NotificationAssessments.SingleAsync(
-                        p => p.NotificationApplicationId == message.NotificationId);
-
-            assessment.Complete(message.NotificationCompleteDate);
+            await completeNotification.Complete(message.NotificationId, message.NotificationCompleteDate);
 
             await context.SaveChangesAsync();
 

@@ -31,7 +31,7 @@
 
         public async Task<NotificationMovementsSummaryAndTable> HandleAsync(GetSummaryAndTable message)
         {
-            var isInterimNotification = (await facilityRepository.GetByNotificationId((message.Id))).IsInterim;
+            var isInterimNotification = (await facilityRepository.GetByNotificationId((message.Id))).IsInterim.GetValueOrDefault();
             var summaryData = await summaryRepository.GetById(message.Id);
             IEnumerable<Movement> notificationMovements;
 

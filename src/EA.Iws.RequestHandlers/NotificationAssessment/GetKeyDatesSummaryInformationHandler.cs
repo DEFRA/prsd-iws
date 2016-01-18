@@ -17,6 +17,7 @@
         private readonly IFinancialGuaranteeDecisionRepository financialGuaranteeDecisionRepository;
         private readonly INotificationAssessmentDatesSummaryRepository datesSummaryRepository;
         private readonly INotificationAssessmentDecisionRepository decisionRepository;
+        private readonly IFacilityRepository facilityRepository;
         private readonly IMapper mapper;
 
         public GetKeyDatesSummaryInformationHandler(INotificationApplicationRepository notificationRepository, 
@@ -24,6 +25,7 @@
             IFinancialGuaranteeDecisionRepository financialGuaranteeDecisionRepository,
             INotificationAssessmentDatesSummaryRepository datesSummaryRepository,
             INotificationAssessmentDecisionRepository decisionRepository,
+            IFacilityRepository facilityRepository,
             IMapper mapper)
         {
             this.notificationRepository = notificationRepository;
@@ -31,6 +33,7 @@
             this.financialGuaranteeDecisionRepository = financialGuaranteeDecisionRepository;
             this.datesSummaryRepository = datesSummaryRepository;
             this.decisionRepository = decisionRepository;
+            this.facilityRepository = facilityRepository;
             this.mapper = mapper;
         }
 
@@ -46,6 +49,8 @@
 
             var decision = await decisionRepository.GetByNotificationId(message.NotificationId);
 
+            var facilityCollection = await facilityRepository.GetByNotificationId(message.NotificationId);
+
             return new KeyDatesSummaryData
             {
                 CompetentAuthority = notification.CompetentAuthority.AsCompetentAuthority(),
@@ -53,7 +58,8 @@
                 FinancialGuaranteeDecisions =
                     financialGuaranteeDecisions.Select(x => mapper.Map<FinancialGuaranteeDecisionData>(x)).ToArray(),
                 Dates = mapper.Map<NotificationDatesData>(dates),
-                DecisionHistory = decision
+                DecisionHistory = decision,
+                IsInterim = facilityCollection.IsInterim
             };
         }
     }

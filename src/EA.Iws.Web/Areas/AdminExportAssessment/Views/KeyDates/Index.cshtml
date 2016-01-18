@@ -114,6 +114,10 @@
                         {
                             @Html.ActionLink("Go to Assign an area", "Index", "AssignArea")
                         }
+                        else if (!Model.IsInterim.HasValue)
+                        {
+                            @Html.ActionLink("Mark notification as interim or non-interim", "Index", "MarkAsInterim")
+                        }
                         else
                         {
                             @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
@@ -367,13 +371,11 @@ else
 }
 
 @if (Model.CurrentStatus == NotificationStatus.Reassessment)
-{
     <br />
     <div class="form-group">
         @using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
         {
             @Html.HiddenFor(m => m.NotificationId)
-
             @Html.AntiForgeryToken()
 
             <input type="submit" class="button" value="Accept changes" />
@@ -388,8 +390,6 @@ else
             <input type="submit" class="button" value="Reject changes" />
         }
     </div>
-}
-
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
 }

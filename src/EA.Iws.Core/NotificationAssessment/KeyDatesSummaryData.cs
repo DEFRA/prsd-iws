@@ -14,5 +14,7 @@
         public bool IsLocalAreaSet { get; set; }
 
         public IList<NotificationAssessmentDecision> DecisionHistory { get; set; }
+
+        public bool? IsInterim { get; set; }
     }
 }

@@ -836,6 +836,7 @@
     <Content Include="Areas\Admin\Views\Menu\_ExportNavigation.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_ImportNavigation.cshtml" />
     <Content Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDays.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\Index.cshtml" />
     <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
@@ -985,7 +986,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressBookResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\MarkAsInterimViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />

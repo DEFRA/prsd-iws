@@ -316,6 +316,8 @@
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
+    <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedToleranceHandler.cs" />
     <Compile Include="NotificationMovements\Create\IsProposedMovementDateValidHandler.cs" />

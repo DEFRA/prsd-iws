@@ -1,12 +1,14 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
+    using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Prsd.Core.Domain;
 
-    public class SetChargeHandler : IEventHandler<NotificationSubmittedEvent>, IEventHandler<NotificationTransmittedEvent>
+    public class SetChargeHandler : IEventHandler<NotificationSubmittedEvent>, IEventHandler<NotificationTransmittedEvent>,
+        IEventHandler<NotificationIsInterimSetEvent>
     {
         private readonly IwsContext context;
         private readonly INotificationChargeCalculator chargeCalculator;
@@ -21,18 +23,23 @@
 
         public async Task HandleAsync(NotificationSubmittedEvent @event)
         {
-            var notification = await notificationRepository.GetById(@event.NotificationApplicationId);
-            var charge = await chargeCalculator.GetValue(@event.NotificationApplicationId);
-
-            notification.SetCharge(charge);
-
-            await context.SaveChangesAsync();
+            await UpdateCharge(@event.NotificationApplicationId);
         }
 
         public async Task HandleAsync(NotificationTransmittedEvent @event)
         {
-            var notification = await notificationRepository.GetById(@event.NotificationApplicationId);
-            var charge = await chargeCalculator.GetCalculatedValue(@event.NotificationApplicationId);
+            await UpdateCharge(@event.NotificationApplicationId);
+        }
+
+        public async Task HandleAsync(NotificationIsInterimSetEvent @event)
+        {
+            await UpdateCharge(@event.NotificationApplicationId);
+        }
+
+        private async Task UpdateCharge(Guid notificationApplicationId)
+        {
+            var notification = await notificationRepository.GetById(notificationApplicationId);
+            var charge = await chargeCalculator.GetValue(notificationApplicationId);
 
             notification.SetCharge(charge);
 

@@ -140,6 +140,7 @@
     <Compile Include="Movement\MovementTableDataRow.cs" />
     <Compile Include="Movement\MovementSummary.cs" />
     <Compile Include="NotificationAssessment\AccountManagementData.cs" />
+    <Compile Include="NotificationAssessment\InterimStatus.cs" />
     <Compile Include="NotificationAssessment\KeyDatesSummaryData.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />

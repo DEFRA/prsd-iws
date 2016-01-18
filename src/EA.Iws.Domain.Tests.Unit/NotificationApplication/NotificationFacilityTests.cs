@@ -100,7 +100,7 @@
         }
 
         [Fact]
-        public void MultipleFacilitiesIsInterim()
+        public void HasMultipleFacilities_MultipleFacilities_IsTrue()
         {
             facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
                 ObjectFactory.CreateEmptyContact());
@@ -108,25 +108,25 @@
             facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
                 ObjectFactory.CreateEmptyContact());
 
-            Assert.True(facilityCollection.IsInterim);
+            Assert.True(facilityCollection.HasMultipleFacilities);
         }
 
         [Fact]
-        public void SingleFacilityIsNotInterim()
+        public void HasMultipleFacilities_SingleFacility_IsFalse()
         {
             var newFacilityCollection = new FacilityCollection(notification.Id);
             newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(), ObjectFactory.CreateDefaultAddress(),
                 ObjectFactory.CreateEmptyContact());
 
-            Assert.False(newFacilityCollection.IsInterim);
+            Assert.False(newFacilityCollection.HasMultipleFacilities);
         }
 
         [Fact]
-        public void IsInterimFalseByDefault()
+        public void HasMultipleFacilitiesFalseByDefault()
         {
             var newFacilityCollection = new FacilityCollection(notification.Id);
 
-            Assert.False(newFacilityCollection.IsInterim);
+            Assert.False(newFacilityCollection.HasMultipleFacilities);
         }
     }
 }

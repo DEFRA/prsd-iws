@@ -28,7 +28,8 @@
                 IsAreaAssigned = data.IsLocalAreaSet,
                 CompetentAuthority = data.CompetentAuthority,
                 AssessmentDecisions = data.DecisionHistory,
-                FinancialGuaranteeDecisions = data.FinancialGuaranteeDecisions
+                FinancialGuaranteeDecisions = data.FinancialGuaranteeDecisions,
+                IsInterim = data.IsInterim
             };
 
             if (command != null)

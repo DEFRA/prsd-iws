@@ -212,7 +212,7 @@
         }
 
         [Fact]
-        public void SetNotificationReceivedChangesStatusToReadyToTransmit()
+        public void SetNotificationCompleteChangesStatusToReadyToTransmit()
         {
             SetNotificationStatus(NotificationStatus.InAssessment);
 

@@ -246,12 +246,15 @@
     <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
+    <Compile Include="NotificationAssessment\CompleteNotification.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredByCalculator.cs" />
     <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequired.cs" />
     <Compile Include="NotificationAssessment\IDecisionRequiredByCalculator.cs" />
     <Compile Include="DaysRemainingCalculator.cs" />
     <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummary.cs" />
+    <Compile Include="NotificationAssessment\NotificationInterim.cs" />
+    <Compile Include="NotificationAssessment\NotificationIsInterimSetEvent.cs" />
     <Compile Include="NotificationAssessment\NotificationTransmittedEvent.cs" />
     <Compile Include="NotificationAssessment\Transaction.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />

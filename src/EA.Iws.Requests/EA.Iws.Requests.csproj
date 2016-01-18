@@ -135,6 +135,8 @@
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
+    <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
     <Compile Include="NotificationMovements\GetWorkingDaysUntil.cs" />

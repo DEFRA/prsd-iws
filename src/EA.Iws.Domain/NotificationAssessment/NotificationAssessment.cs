@@ -269,7 +269,7 @@
             stateMachine.Fire(commencedTrigger, commencementDate, nameOfOfficer);
         }
 
-        public void Complete(DateTime completedDate)
+        internal void Complete(DateTime completedDate)
         {
             stateMachine.Fire(completeTrigger, completedDate);
         }

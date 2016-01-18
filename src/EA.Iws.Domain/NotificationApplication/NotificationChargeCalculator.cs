@@ -61,7 +61,8 @@
         {
             var pricingStructures = await pricingStructureRepository.Get();
 
-            bool isInterim = (await facilityRepository.GetByNotificationId(notification.Id)).IsInterim;
+            var facilityCollection = await facilityRepository.GetByNotificationId(notification.Id);
+            bool isInterim = facilityCollection.IsInterim.HasValue ? facilityCollection.IsInterim.Value : facilityCollection.HasMultipleFacilities;
 
             var pricingStructure = pricingStructures.Single(p =>
                 p.CompetentAuthority.Value == notification.CompetentAuthority.Value
