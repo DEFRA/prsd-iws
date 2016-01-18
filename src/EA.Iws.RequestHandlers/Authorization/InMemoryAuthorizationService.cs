@@ -9,7 +9,7 @@
         private readonly IDictionary<string, IList<UserRole>> authorizations = new Dictionary<string, IList<UserRole>>
         {
             { "Get Exporter For Export Notification", new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
-            { "Set Exporter For Export Notification", new[] { UserRole.External } },
+            { "Set Exporter For Export Notification", new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
             { "Create Import Notification", new[] { UserRole.Internal, UserRole.TeamLeader } },
             { "Create Export Notification", new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
             { "Add Entry Or Exit Point", new[] { UserRole.Internal, UserRole.TeamLeader } },
