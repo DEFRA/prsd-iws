@@ -4,10 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.Movement;
     using Core.Shared;
     using NotificationApplication.Shipment;
 
+    [AutoRegister]
     public class NotificationMovementsQuantity
     {
         private readonly IShipmentInfoRepository shipmentRepository;

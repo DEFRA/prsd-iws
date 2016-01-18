@@ -3,7 +3,9 @@ namespace EA.Iws.Domain.ImportMovement
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
 
+    [AutoRegister]
     public class ImportMovementNumberValidator : IImportMovementNumberValidator
     {
         private readonly IImportMovementRepository movementRepository;

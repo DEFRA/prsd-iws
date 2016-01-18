@@ -2,9 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.Movement;
     using NotificationApplication;
 
+    [AutoRegister]
     public class UpdatedMovementDateValidator : IUpdatedMovementDateValidator
     {
         private readonly IMovementDateValidator movementDateValidator;

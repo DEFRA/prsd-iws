@@ -1,17 +1,17 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
     using System.Data.SqlClient;
     using System.Linq;
+    using Core.ComponentRegistration;
     using Core.Notification;
     using DataAccess;
     using Domain.NotificationApplication;
     using CodeType = Core.WasteCodes.CodeType;
     using NotificationType = Core.Shared.NotificationType;
 
+    [AutoRegister]
     internal class NotificationProgressService : INotificationProgressService
     {
         private readonly IwsContext context;

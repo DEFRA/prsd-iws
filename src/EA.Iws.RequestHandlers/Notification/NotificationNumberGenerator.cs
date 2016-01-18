@@ -2,10 +2,12 @@
 {
     using System.Text;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
 
+    [AutoRegister]
     internal class NotificationNumberGenerator : INotificationNumberGenerator
     {
         private const string NotificationNumberSequenceFormat = "[Notification].[{0}NotificationNumber]";

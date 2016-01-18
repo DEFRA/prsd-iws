@@ -4,10 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.ImportNotification.Summary;
     using DataAccess.Draft;
     using Draft = Core.ImportNotification.Draft;
 
+    [AutoRegister]
     internal class TransportRouteSummary
     {
         private readonly Domain.ICompetentAuthorityRepository competentAuthorityRepository;

@@ -2,9 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.Shared;
     using ImportNotification;
 
+    [AutoRegister]
     public class ImportPaymentTransaction
     {
         private readonly IImportNotificationTransactionRepository transactionRepository;

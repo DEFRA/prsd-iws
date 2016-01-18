@@ -3,7 +3,9 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
 
+    [AutoRegister]
     public class MovementNumberValidator : IMovementNumberValidator
     {
         private readonly IMovementRepository repository;

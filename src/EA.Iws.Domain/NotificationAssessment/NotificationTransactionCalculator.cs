@@ -4,9 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.NotificationAssessment;
     using NotificationApplication;
 
+    [AutoRegister]
     public class NotificationTransactionCalculator : INotificationTransactionCalculator
     {
         private readonly INotificationTransactionRepository transactionRepository;

@@ -3,8 +3,10 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using NotificationApplication.Shipment;
 
+    [AutoRegister]
     public class NumberOfMovements
     {
         private readonly IMovementRepository movementRepository;

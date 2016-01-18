@@ -2,9 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using NotificationAssessment;
     using Prsd.Core.Domain;
 
+    [AutoRegister]
     public class ConsentNotification
     {
         private readonly INotificationConsentRepository consentRepository;

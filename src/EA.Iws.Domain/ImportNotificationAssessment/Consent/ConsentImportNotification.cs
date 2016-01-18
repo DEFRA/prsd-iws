@@ -2,9 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using ImportNotification;
     using Prsd.Core.Domain;
 
+    [AutoRegister]
     public class ConsentImportNotification
     {
         private readonly IImportConsentRepository consentRepository;

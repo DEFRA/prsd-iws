@@ -3,11 +3,13 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.Shared;
     using ImportNotification;
     using NotificationApplication;
     using IFacilityRepository = ImportNotification.IFacilityRepository;
 
+    [AutoRegister]
     public class ImportNotificationChargeCalculator : IImportNotificationChargeCalculator
     {
         private readonly IImportNotificationRepository notificationRepository;

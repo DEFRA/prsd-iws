@@ -2,10 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using NotificationApplication;
     using NotificationConsent;
     using Prsd.Core;
 
+    [AutoRegister]
     public class ConsentPeriod
     {
         private readonly INotificationConsentRepository consentRepository;

@@ -2,10 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
-    using NotificationApplication;
+    using Core.ComponentRegistration;
     using NotificationConsent;
     using Prsd.Core;
 
+    [AutoRegister]
     public class MovementDateValidator : IMovementDateValidator
     {
         private readonly INotificationConsentRepository consentRepository;

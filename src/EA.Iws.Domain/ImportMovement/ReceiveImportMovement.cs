@@ -2,7 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
 
+    [AutoRegister]
     public class ReceiveImportMovement : IReceiveImportMovement
     {
         private readonly IImportMovementRepository movementRepository;

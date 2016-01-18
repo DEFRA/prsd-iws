@@ -2,9 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using NotificationApplication;
     using Prsd.Core;
 
+    [AutoRegister]
     public class DecisionRequiredBy
     {
         private readonly IDecisionRequiredByCalculator decisionRequiredByCalculator;

@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.RequestHandlers.Copy
 {
     using System.Linq;
+    using Core.ComponentRegistration;
     using Domain.TransportRoute;
 
+    [AutoRegister]
     internal class TransportRouteToTransportRouteCopy
     {
         public virtual void CopyTransportRoute(TransportRoute source, TransportRoute destination)

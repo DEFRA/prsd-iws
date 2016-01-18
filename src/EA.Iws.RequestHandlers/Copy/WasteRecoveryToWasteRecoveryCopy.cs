@@ -3,10 +3,12 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using DataAccess;
     using Domain.NotificationApplication.WasteRecovery;
     using Prsd.Core.Domain;
 
+    [AutoRegister]
     public class WasteRecoveryToWasteRecoveryCopy
     {
         public async Task CopyAsync(IwsContext context, Guid sourceId, Guid destinationId)

@@ -1,9 +1,11 @@
 ﻿namespace EA.Iws.RequestHandlers.Copy
 {
     using System;
+    using Core.ComponentRegistration;
     using Domain.NotificationApplication;
     using Prsd.Core.Domain;
 
+    [AutoRegister]
     internal class NotificationToNotificationCopy
     {
         private readonly WasteCodeCopy wasteCodeCopy;

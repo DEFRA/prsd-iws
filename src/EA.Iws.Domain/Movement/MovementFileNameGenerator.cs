@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using NotificationApplication;
 
+    [AutoRegister]
     public class MovementFileNameGenerator : ICertificateNameGenerator
     {
         private readonly INotificationApplicationRepository notificationApplicationRepository;

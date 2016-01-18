@@ -2,10 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.FinancialGuarantee;
     using Core.NotificationAssessment;
     using FinancialGuarantee;
 
+    [AutoRegister]
     public class FinancialGuaranteeDecisionRequired
     {
         private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;

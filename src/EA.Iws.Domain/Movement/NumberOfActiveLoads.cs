@@ -3,8 +3,10 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using FinancialGuarantee;
 
+    [AutoRegister]
     public class NumberOfActiveLoads
     {
         private readonly IMovementRepository movementRepository;

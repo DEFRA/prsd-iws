@@ -2,8 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using NotificationApplication;
 
+    [AutoRegister]
     public class NotificationInterim
     {
         private readonly IFacilityRepository facilityRepository;

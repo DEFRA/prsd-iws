@@ -1,5 +1,8 @@
 namespace EA.Iws.Domain.NotificationApplication.Annexes
 {
+    using Core.ComponentRegistration;
+
+    [AutoRegister]
     public class WasteCompositionNameGenerator : IAnnexNameGenerator
     {
         public string GetValue(NotificationApplication notification)

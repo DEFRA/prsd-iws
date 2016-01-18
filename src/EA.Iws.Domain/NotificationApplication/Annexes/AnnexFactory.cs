@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication.Annexes
 {
+    using Core.ComponentRegistration;
     using FileStore;
 
+    [AutoRegister]
     public class AnnexFactory
     {
         public File CreateForNotification(IAnnexNameGenerator annexNameGenerator, NotificationApplication notification,

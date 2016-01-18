@@ -2,8 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.NotificationAssessment;
 
+    [AutoRegister]
     public class Transaction
     {
         private readonly INotificationAssessmentRepository notificationAssessmentRepository;

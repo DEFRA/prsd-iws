@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Domain
 {
     using System;
+    using Core.ComponentRegistration;
     using Prsd.Core;
 
+    [AutoRegister]
     public class DaysRemainingCalculator
     {
         public string Calculate(DateTime targetDate)

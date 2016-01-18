@@ -2,9 +2,11 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.NotificationAssessment;
     using NotificationAssessment;
-    using Prsd.Core;
+
+    [AutoRegister]
     public class MovementFactory
     {
         private readonly IMovementDateValidator dateValidator;

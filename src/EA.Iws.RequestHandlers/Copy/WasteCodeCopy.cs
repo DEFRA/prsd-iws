@@ -3,9 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.ComponentRegistration;
     using Domain.NotificationApplication;
     using Prsd.Core;
 
+    [AutoRegister]
     internal class WasteCodeCopy
     {
         public void CopyWasteCodes(NotificationApplication source, NotificationApplication destination)

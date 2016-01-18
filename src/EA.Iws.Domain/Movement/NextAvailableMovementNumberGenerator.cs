@@ -3,7 +3,9 @@ namespace EA.Iws.Domain.Movement
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
 
+    [AutoRegister]
     public class NextAvailableMovementNumberGenerator : INextAvailableMovementNumberGenerator
     {
         private readonly IMovementRepository movementRepository;

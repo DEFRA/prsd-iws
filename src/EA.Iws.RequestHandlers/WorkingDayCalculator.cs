@@ -3,12 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.ComponentRegistration;
     using DataAccess;
     using Domain;
 
     /// <summary>
     ///     Adaptation of: http://stackoverflow.com/a/1619375/1775471
     /// </summary>
+    [AutoRegister]
     internal class WorkingDayCalculator : IWorkingDayCalculator
     {
         private static readonly UKCompetentAuthority DefaultAuthority = UKCompetentAuthority.England;

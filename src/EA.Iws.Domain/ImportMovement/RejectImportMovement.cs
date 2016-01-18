@@ -2,7 +2,9 @@ namespace EA.Iws.Domain.ImportMovement
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
 
+    [AutoRegister]
     public class RejectImportMovement : IRejectImportMovement
     {
         private readonly IImportMovementRepository movementRepository;

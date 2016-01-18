@@ -1,7 +1,9 @@
 namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using Core.ComponentRegistration;
 
+    [AutoRegister]
     public class DecisionRequiredByCalculator : IDecisionRequiredByCalculator
     {
         private readonly IWorkingDayCalculator workingDayCalculator;

@@ -3,9 +3,11 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using DataAccess;
     using Domain.NotificationApplication;
 
+    [AutoRegister]
     public class FacilityCollectionCopy
     {
         public async Task CopyAsync(IwsContext context, Guid notificationSourceId, Guid notificationDestinationId)

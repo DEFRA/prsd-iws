@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using FileStore;
 
+    [AutoRegister]
     public class CertificateFactory
     {
         public async Task<File> CreateForMovement(ICertificateNameGenerator nameGenerator, 

@@ -4,8 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Autofac;
+    using Core.ComponentRegistration;
     using Requests.ImportNotification.Validate;
 
+    [AutoRegister]
     internal class Validator : IValidator
     {
         private readonly IComponentContext context;

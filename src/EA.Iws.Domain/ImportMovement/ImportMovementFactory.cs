@@ -2,8 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Movement;
 
+    [AutoRegister]
     public class ImportMovementFactory : IImportMovementFactory
     {
         private readonly IImportMovementNumberValidator numberValidator;

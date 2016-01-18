@@ -3,9 +3,11 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using Core.Shared;
     using Shipment;
 
+    [AutoRegister]
     public class NotificationChargeCalculator : INotificationChargeCalculator
     {
         private readonly IShipmentInfoRepository shipmentInfoRepository;

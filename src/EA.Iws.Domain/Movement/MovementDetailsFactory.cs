@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
     using NotificationApplication;
 
+    [AutoRegister]
     public class MovementDetailsFactory
     {
         private readonly NotificationMovementsQuantity movementsQuantity;
