@@ -8,6 +8,9 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.AddressBook;
+    using Prsd.Core.Mapper;
+    using Requests.AddressBook;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -18,7 +21,8 @@
 
         public ImporterControllerTests()
         {
-            importerController = new ImporterController(A.Fake<IMediator>());
+            importerController = new ImporterController(A.Fake<IMediator>(), 
+                A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>());
         }
 
         private ImporterViewModel CreateImporterViewModel()

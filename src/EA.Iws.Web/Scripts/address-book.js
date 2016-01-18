@@ -53,6 +53,12 @@ function selectAutocompleteData(event, ui) {
         // Do not put the html content in the box.
         $("#Business_Name").val(data.BusinessData.Name);
 
+        // Select2 changes the way we can access the values of the country.
+        var countryInput = $("#Address_CountryId");
+        if (countryInput.length !== 0) {
+            countryInput.select2().val(data.AddressData.CountryId).trigger("change");
+        }
+
         $.deserializeIntoNamedInputs("Address", data.AddressData);
         $.deserializeIntoNamedInputs("Business", data.BusinessData);
         $.deserializeIntoNamedInputs("Contact", data.ContactData);

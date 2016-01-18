@@ -3,10 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.AddressBook;
     using Infrastructure;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
+    using Requests.AddressBook;
     using Requests.Importer;
     using ViewModels.Importer;
 
@@ -15,10 +18,12 @@
     public class ImporterController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
 
-        public ImporterController(IMediator mediator)
+        public ImporterController(IMediator mediator, IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper)
         {
             this.mediator = mediator;
+            this.addressBookMapper = addressBookMapper;
         }
 
         [HttpGet]
@@ -53,6 +58,8 @@
             try
             {
                 await mediator.SendAsync(model.ToRequest());
+                await AddToProducerAddressBook(model);
+
                 if (backToOverview.GetValueOrDefault())
                 {
                     return RedirectToAction("Index", "Home", new { id = model.NotificationId });
@@ -73,6 +80,18 @@
             }
             await this.BindCountryList(mediator, false);
             return View(model);
+        }
+
+        private async Task AddToProducerAddressBook(ImporterViewModel model)
+        {
+            if (!model.IsAddedToAddressBook)
+            {
+                return;
+            }
+
+            var addressRecord = addressBookMapper.Map(model, AddressRecordType.Facility);
+
+            await mediator.SendAsync(addressRecord);
         }
     }
 }
