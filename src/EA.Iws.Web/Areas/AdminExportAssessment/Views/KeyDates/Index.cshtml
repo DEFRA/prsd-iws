@@ -366,6 +366,30 @@ else
         null)
 }
 
+@if (Model.CurrentStatus == NotificationStatus.Reassessment)
+{
+    <br />
+    <div class="form-group">
+        @using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
+        {
+            @Html.HiddenFor(m => m.NotificationId)
+
+            @Html.AntiForgeryToken()
+
+            <input type="submit" class="button" value="Accept changes" />
+        }
+
+        @using (Html.BeginForm("RejectChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
+        {
+            @Html.HiddenFor(m => m.NotificationId)
+
+            @Html.AntiForgeryToken()
+            
+            <input type="submit" class="button" value="Reject changes" />
+        }
+    </div>
+}
+
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
 }

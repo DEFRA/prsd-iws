@@ -86,6 +86,20 @@
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AcceptChanges(Guid id)
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RejectChanges(Guid id)
+        {
+            return RedirectToAction("Index");
+        }
+
         private async Task SetNotificationTransmitted(DateInputViewModel model)
         {
             var setNotificationTransmitted = new SetNotificationTransmittedDate(model.NotificationId,
