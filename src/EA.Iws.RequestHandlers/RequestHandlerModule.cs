@@ -92,6 +92,7 @@
             builder.RegisterType<NumberOfMovements>().AsSelf();
             builder.RegisterType<NumberOfActiveLoads>().AsSelf();
             builder.RegisterType<ConsentPeriod>().AsSelf();
+            builder.RegisterType<SetAllFacilitiesPreconsented>().AsSelf();
 
             builder.RegisterType<NotificationNumberGenerator>().As<INotificationNumberGenerator>();
             builder.RegisterType<CapturedMovementFactory>().As<ICapturedMovementFactory>();
