@@ -29,7 +29,9 @@
             Consent,
             WithdrawConsent,
             Unlock,
-            Resubmit
+            Resubmit,
+            AcceptChanges,
+            RejectChanges
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
@@ -172,7 +174,9 @@
                 .Permit(Trigger.Resubmit, NotificationStatus.Reassessment);
 
             stateMachine.Configure(NotificationStatus.Reassessment)
-                .SubstateOf(NotificationStatus.InDetermination);
+                .SubstateOf(NotificationStatus.InDetermination)
+                .Permit(Trigger.AcceptChanges, NotificationStatus.DecisionRequiredBy)
+                .Permit(Trigger.RejectChanges, NotificationStatus.Unlocked);
 
             return stateMachine;
         }
@@ -319,6 +323,16 @@
         public void Resubmit()
         {
             stateMachine.Fire(Trigger.Resubmit);
+        }
+
+        public void AcceptChanges()
+        {
+            stateMachine.Fire(Trigger.AcceptChanges);
+        }
+
+        public void RejectChanges()
+        {
+            stateMachine.Fire(Trigger.RejectChanges);
         }
     }
 }

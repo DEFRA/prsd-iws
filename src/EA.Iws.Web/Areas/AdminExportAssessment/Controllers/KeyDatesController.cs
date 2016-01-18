@@ -90,6 +90,8 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AcceptChanges(Guid id)
         {
+            await mediator.SendAsync(new AcceptChanges(id));
+
             return RedirectToAction("Index");
         }
 
@@ -97,6 +99,8 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RejectChanges(Guid id)
         {
+            await mediator.SendAsync(new RejectChanges(id));
+
             return RedirectToAction("Index");
         }
 

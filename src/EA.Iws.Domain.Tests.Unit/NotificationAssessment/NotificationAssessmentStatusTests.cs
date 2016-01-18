@@ -373,5 +373,41 @@
 
             Assert.Throws<InvalidOperationException>(resubmit);
         }
+
+        [Fact]
+        public void AcceptChanges_GoesToDecisionRequiredBy_FromReassessment()
+        {
+            SetNotificationStatus(NotificationStatus.Reassessment);
+
+            notificationAssessment.AcceptChanges();
+
+            Assert.Equal(NotificationStatus.DecisionRequiredBy, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void RejectChanges_GoesToUnlocked_FromReassessment()
+        {
+            SetNotificationStatus(NotificationStatus.Reassessment);
+
+            notificationAssessment.RejectChanges();
+
+            Assert.Equal(NotificationStatus.Unlocked, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantAcceptChanges_NotInReassessment()
+        {
+            Action acceptChanges = () => notificationAssessment.AcceptChanges();
+
+            Assert.Throws<InvalidOperationException>(acceptChanges);
+        }
+        
+        [Fact]
+        public void CantRejectChanges_NotInReassessment()
+        {
+            Action rejectChanges = () => notificationAssessment.RejectChanges();
+
+            Assert.Throws<InvalidOperationException>(rejectChanges);
+        }
     }
 }
