@@ -837,7 +837,7 @@
     <Content Include="Areas\Admin\Views\Menu\_ImportNavigation.cshtml" />
     <Content Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDays.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\Index.cshtml" />
-    <None Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityReached.cshtml" />
