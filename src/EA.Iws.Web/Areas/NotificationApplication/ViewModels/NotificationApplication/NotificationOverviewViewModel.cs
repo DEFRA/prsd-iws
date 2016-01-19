@@ -33,7 +33,7 @@
         public int NotificationCharge { get; set; }
 
         public bool CanEditNotification { get; set; }
-
+        
         public NotificationOverviewViewModel()
         {
         }

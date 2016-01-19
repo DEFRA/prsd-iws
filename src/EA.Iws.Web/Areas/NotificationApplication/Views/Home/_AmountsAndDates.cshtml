@@ -5,6 +5,10 @@
     var headerColspan = ViewBag.CanEditNotification ? 1 : 2;
 }
 
+@{
+    var shipmentsClass = Model.IsIntendedShipmentsCompleted ? string.Empty : "over-alert";
+}
+
 <table class="overview-table">
     <thead>
         <tr>
@@ -20,7 +24,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class = @shipmentsClass>
             <td>
                 Intended total shipments
             </td>
@@ -28,7 +32,7 @@
                 @Html.Partial(viewLocation + "_IntendedShipments.cshtml")
             </td>
         </tr>
-        <tr>
+        <tr class = @shipmentsClass>
             <td>
                 Intended total quantity
             </td>
@@ -36,7 +40,7 @@
                 @Html.Partial(viewLocation + "_IntendedQuantity.cshtml")
             </td>
         </tr>
-        <tr>
+        <tr class = @shipmentsClass>
             <td>
                 Intended dates of departure
             </td>

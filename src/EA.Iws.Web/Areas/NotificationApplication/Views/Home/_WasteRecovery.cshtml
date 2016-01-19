@@ -4,6 +4,10 @@
     var headerColspan = ViewBag.CanEditNotification ? 1 : 2;
 }
 
+@{
+    var codesClass = Model.IsWasteRecoveryInformationCompleted ? string.Empty : "over-alert";
+}
+
 <table class="overview-table">
     <thead>
         <tr>
@@ -19,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class = @codesClass>
             <td>
                 Details provided by importer
             </td>
@@ -40,7 +44,7 @@
         </tr>
         @if (!Model.IsProvidedByImporter)
         {
-            <tr>
+            <tr class = @codesClass>
                 <td>
                     Recoverable percentage
                 </td>
@@ -61,7 +65,7 @@
             </tr>
             if (Model.HasDisposalPortion)
             {
-                <tr>
+                <tr class = @codesClass>
                     <td>
                         Disposal method
                     </td>
@@ -81,7 +85,7 @@
                     </td>
                 </tr>
             }
-            <tr>
+            <tr class = @codesClass>
                 <td>
                     Estimated value of recoverable material
                     @(Model.IsWasteRecoveryInformationCompleted
@@ -103,7 +107,7 @@
                     </div>
                 </td>
             </tr>
-            <tr>
+            <tr class = @codesClass>
                 <td>
                     Recovery cost @(Model.IsWasteRecoveryInformationCompleted
                             ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CostUnit))
@@ -126,7 +130,7 @@
             </tr>
             if (Model.HasDisposalPortion)
             {
-                <tr>
+                <tr class = @codesClass>
                     <td>
                         Disposal cost @(Model.IsWasteRecoveryInformationCompleted
                             ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.DisposalUnit))

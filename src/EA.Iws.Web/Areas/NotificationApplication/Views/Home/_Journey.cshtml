@@ -6,6 +6,12 @@
 
 }
 
+@{
+    var exportClass = Model.IsStateOfExportCompleted ? string.Empty : "over-alert";
+    var importClass = Model.IsStateOfImportCompleted ? string.Empty : "over-alert";
+    var customsClass = Model.IsCustomsOfficeCompleted ? string.Empty : "over-alert";
+}
+
 <table class="overview-table">
     <thead>
         <tr>
@@ -15,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class = @exportClass>
             <td>
                 Export route
             </td>
@@ -29,7 +35,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @importClass>
             <td>
                 Import route
             </td>
@@ -55,7 +61,7 @@
                 <td class="change">@Html.ActionLink("Change", "Summary", "TransportRoute", new { id, backToOverview = true }, null)</td>
             }
         </tr>
-        <tr>
+        <tr class = @customsClass>
             <td>
                 Customs office
             </td>

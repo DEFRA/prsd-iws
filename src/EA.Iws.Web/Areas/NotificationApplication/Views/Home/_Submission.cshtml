@@ -30,17 +30,20 @@
         </div>
 
         <div class="column-half charge">
-            
+
             <div class="status">
                 <span>Overall Status</span>
                 <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Status)">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</span>
             </div>
-            
+
             @if (Model.Charge > 0)
             {
                 <div class="noti-charge">
                     <span>Notification<br />Charge</span>
                     <span class="price">&pound;@Model.Charge</span>
+                    <div class="vat-message">
+                        All charges for environmental<br/> permits and licences are outside<br/> the scope of VAT
+                    </div>
                 </div>
             }
 
@@ -48,19 +51,28 @@
                 @if (Model.CompetentAuthority == CompetentAuthority.Scotland)
                 {
                     @Html.ActionLink("Bank Guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
-                    <br />
+                    <br/>
                     @Html.ActionLink("Parent Company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
                 }
                 else
                 {
                     @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)
                 }
-                <br />
+                <br/>
                 @if (Model.IsNotificationComplete)
                 {
                     @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId }, null)
                 }
             </div>
         </div>
+
+        @if (!Model.IsNotificationComplete)
+        {
+            <div class="noti-alert">
+                <em>ALERT:</em>
+                You need to address the highlighted section(s)
+            </div>
+        }
+
     </div>
 </section>

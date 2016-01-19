@@ -102,6 +102,10 @@
             font-weight: bold;
             
         }
+        .vat-message{
+            font-weight: normal;
+            font-size: 0.75em;
+        }
     }
     .noti-links{
         float: right;
@@ -132,6 +136,26 @@
         height: 0;
         margin: 30px 15px 10px 15px;
      }
+}
+
+.noti-alert{ 
+    clear: both; 
+    border: 2px solid $error-colour; 
+    padding: 10px 10px 6px 10px; 
+    margin: 0px 15px 0px 15px; 
+    em{ 
+        color: $error-colour; 
+        display: inline-block; 
+        font-style: normal; 
+        padding-right: 5px; 
+        font-weight: bold; 
+    } 
+} 
+
+.over-alert{ 
+    border: 2px solid $error-colour; 
+    td{ padding-left: 10px; 
+    } 
 }
 
 /*** All Status ***/

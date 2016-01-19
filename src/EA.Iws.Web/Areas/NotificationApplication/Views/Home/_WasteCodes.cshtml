@@ -10,6 +10,15 @@
         EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
 }
 
+@{
+    var baselClass = Model.IsBaselOecdCodeCompleted ? string.Empty : "over-alert";
+    var ewcClass = Model.AreEwcCodesCompleted ? string.Empty : "over-alert";
+    var yClass = Model.AreYCodesCompleted ? string.Empty : "over-alert";
+    var hClass = Model.AreHCodesCompleted ? string.Empty : "over-alert";
+    var unClass = Model.AreUnClassesCompleted ? string.Empty : "over-alert";
+    var unNumberClass = Model.AreUnNumbersCompleted ? string.Empty : "over-alert";
+    var OtherClass = Model.AreOtherCodesCompleted ? string.Empty : "over-alert";
+}
 
 <table class="overview-table">
     <thead>
@@ -20,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class = @baselClass>
             <td>
                 @baselOrOecdType code
             </td>
@@ -34,7 +43,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @ewcClass>
             <td>
                 @(Model.AreEwcCodesCompleted ? (Model.EwcCodes.Length > 1 ? "EWC codes" : "EWC code") : "EWC code(s)")
             </td>
@@ -48,7 +57,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @yClass>
             <td>
                 @(Model.AreYCodesCompleted ? (Model.YCodes.Length > 1 ? "Y codes" : "Y code") : "Y code(s)")
             </td>
@@ -62,7 +71,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @hClass>
             <td>
                 @(Model.AreHCodesCompleted ? (Model.HCodes.Length > 1 ? "H or HP codes" : "H or HP code") : "H or HP code(s)")
             </td>
@@ -76,7 +85,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @unClass>
             <td>
                 @(Model.AreUnClassesCompleted ? (Model.UnClass.Length > 1 ? "UN classes" : "UN class") : "UN class(es)")
             </td>
@@ -90,7 +99,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @unNumberClass>
             <td>
                 @(Model.AreUnNumbersCompleted ? (Model.UnNumber.Length > 1 ? "UN numbers" : "UN number") : "UN number(s)")
             </td>
@@ -104,7 +113,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @OtherClass>
             <td>
                 Other codes
             </td>

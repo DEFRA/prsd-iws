@@ -6,6 +6,13 @@
     var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
+@{
+    var codesClass = Model.AreOperationCodesChosen ? string.Empty : "over-alert";
+    var facilityClass = Model.IsPreconsentStatusChosen ? string.Empty : "over-alert";
+    var technologyClass = Model.IsTechnologyEmployedCompleted ? string.Empty : "over-alert";
+    var exportClass = Model.IsReasonForExportCompleted ? string.Empty : "over-alert";
+}
+
 <table class="overview-table">
     <thead>
         <tr>
@@ -15,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class = @codesClass> 
             <td>
                 @(Model.NotificationType == NotificationType.Recovery ? "Recovery operation codes" : "Disposal operation codes")
             </td>
@@ -31,7 +38,7 @@
         </tr>
         @if (Model.NotificationType == NotificationType.Recovery)
         {
-            <tr>
+            <tr class = @facilityClass>
                 <td>
                     Pre-consented facility
                 </td>
@@ -46,7 +53,7 @@
                 }
             </tr>
         }
-        <tr>
+        <tr class = @technologyClass>
             <td>
                 @(Model.NotificationType == NotificationType.Recovery ? "Recovery technology" : "Disposal technology")
             </td>
@@ -60,7 +67,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @exportClass>
             <td>
                 Reason for export
             </td>

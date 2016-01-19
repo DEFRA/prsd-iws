@@ -5,6 +5,13 @@
     var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
+@{
+    var carriersClass = Model.IsCarrierCompleted ? string.Empty : "over-alert";
+    var meansClass = Model.IsMeansOfTransportCompleted ? string.Empty : "over-alert";
+    var packagingClass = Model.IsPackagingTypesCompleted ? string.Empty : "over-alert";
+    var handlingClass = Model.IsSpecialHandlingCompleted ? string.Empty : "over-alert";
+}
+
 <table class="overview-table">
     <thead>
         <tr>
@@ -14,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class = @carriersClass>
             <td>
                 Intended carriers
             </td>
@@ -28,7 +35,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @meansClass>
             <td>
                 Means of transport
             </td>
@@ -42,7 +49,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @packagingClass>
             <td>
                 Packaging types
             </td>
@@ -56,7 +63,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @handlingClass>
             <td>
                 Special handling requirements
             </td>

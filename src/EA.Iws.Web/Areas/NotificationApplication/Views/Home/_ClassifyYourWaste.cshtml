@@ -5,6 +5,12 @@
     var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
 }
 
+@{
+    var chemicalClass = Model.IsChemicalCompositionCompleted ? string.Empty : "over-alert";
+    var processClass = Model.IsProcessOfGenerationCompleted ? string.Empty : "over-alert";
+    var physicalClass = Model.ArePhysicalCharacteristicsCompleted ? string.Empty : "over-alert";
+}
+
 <table class="overview-table">
     <thead>
         <tr>
@@ -14,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class = @chemicalClass>
             <td>
                 Chemical composition
             </td>
@@ -28,7 +34,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @processClass>
             <td>
                 Process of generation
             </td>
@@ -42,7 +48,7 @@
                 </td>
             }
         </tr>
-        <tr>
+        <tr class = @physicalClass>
             <td>
                 Physical characteristics
             </td>
