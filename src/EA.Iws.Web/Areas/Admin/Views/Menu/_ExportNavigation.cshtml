@@ -59,14 +59,20 @@
             </ul>
         </li>
 
-        <li class="@GetClassForSection(ExportNavigationSection.Reporting, "active")">
-            <h3 class="@GetClassForSection(ExportNavigationSection.Reporting, "current")">
+        <li class="">
+            <h3 class="">
                 <span></span>
                 Reporting
             </h3>
-            <ul>
-                <li>@Html.ActionLink("Annual exports", "Index", "ExportStats", new { area = "Reports" }, null)</li>
-            </ul>
+            @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml")
+        </li>
+
+        <li class="">
+            <h3 class="">
+                <span></span>
+                Account services
+            </h3>
+            @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml")
         </li>
 
         <li class="@GetClassForSection(ExportNavigationSection.ChangeOwner, "active")">
