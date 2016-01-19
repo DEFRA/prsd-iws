@@ -9,17 +9,17 @@
     internal class ChangeUserHandler : IRequestHandler<ChangeUser, bool>
     {
         private readonly IwsContext context;
-        private readonly INotificationUserService service;
+        private readonly ChangeNotificationUser changeNotificationUser;
 
-        public ChangeUserHandler(INotificationUserService service, IwsContext context)
+        public ChangeUserHandler(ChangeNotificationUser changeNotificationUser, IwsContext context)
         {
-            this.service = service;
+            this.changeNotificationUser = changeNotificationUser;
             this.context = context;
         }
 
         public async Task<bool> HandleAsync(ChangeUser message)
         {
-            await service.ChangeNotificationUser(message.NotificationId, message.NewUserId);
+            await changeNotificationUser.Apply(message.NotificationId, message.NewUserId);
 
             await context.SaveChangesAsync();
 

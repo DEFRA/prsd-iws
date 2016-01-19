@@ -1,21 +1,20 @@
-﻿namespace EA.Iws.RequestHandlers.Notification
+﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
-    using Domain.NotificationApplication;
 
     [AutoRegister]
-    internal class NotificationUserService : INotificationUserService
+    public class ChangeNotificationUser
     {
         private readonly INotificationApplicationRepository repository;
 
-        public NotificationUserService(INotificationApplicationRepository repository)
+        public ChangeNotificationUser(INotificationApplicationRepository repository)
         {
             this.repository = repository;
         }
 
-        public async Task ChangeNotificationUser(Guid notificationId, Guid newUserId)
+        public async Task Apply(Guid notificationId, Guid newUserId)
         {
             var notification = await repository.GetById(notificationId);
             notification.ChangeUser(newUserId);
