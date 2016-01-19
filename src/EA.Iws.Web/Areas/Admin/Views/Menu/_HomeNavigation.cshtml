@@ -1,0 +1,39 @@
+﻿<div id="accordion">
+    <ul>
+        <li class="active">
+            <h3 class="current">
+                <span></span>
+                Notifications
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Create import notification", "Number", "ImportNotification", new { area = "Admin" }, null)</li>
+                <li>@Html.ActionLink("Create export notification", "CompetentAuthority", "NewNotification", new { area = "" }, null)</li>
+            </ul>
+        </li>
+
+        <li class="">
+            <h3 class="">
+                <span></span>
+                Reporting
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Export stats", "Index", "ExportStats", new { area = "Reports" }, null)</li>
+                <li>@Html.ActionLink("Missing shipments", "Index", "MissingShipments", new { area = "Reports" }, null)</li>
+                <li>@Html.ActionLink("Data Export Notifications", "Index", "ExportNotifications", new { area = "Reports" }, null)</li>
+                <li>@Html.ActionLink("Finance report", "Index", "Finance", new { area = "Reports" }, null)</li>
+            </ul>
+        </li>
+
+        <li class="">
+            <h3 class="">
+                <span></span>
+                Account services
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration", new { area = "Admin" }, null)</li>
+                <li>@Html.ActionLink("New ports or boder crossings", "Index", "EntryOrExitPoint", new { area = "Admin" }, null)</li>
+            </ul>
+        </li>
+
+    </ul>
+</div>

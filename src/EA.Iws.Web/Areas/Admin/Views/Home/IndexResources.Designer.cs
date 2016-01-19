@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search.
+        ///   Looks up a localized string similar to Your homepage.
         /// </summary>
         public static string MainHeading {
             get {
@@ -219,6 +219,24 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         public static string ResultsCount {
             get {
                 return ResourceManager.GetString("ResultsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for a notification.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter notification number or organisation name.
+        /// </summary>
+        public static string SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
             }
         }
         
