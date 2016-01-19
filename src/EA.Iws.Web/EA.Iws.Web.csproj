@@ -1587,6 +1587,7 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
+    <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\MimeTypes.cs" />
     <Compile Include="Infrastructure\ExportStatus.cs" />
     <Compile Include="Infrastructure\ExportStatusExtensions.cs" />

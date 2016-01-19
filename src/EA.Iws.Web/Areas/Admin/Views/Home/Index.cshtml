@@ -6,34 +6,8 @@
     ViewBag.Title = Resource.TabTitle;
 }
 
-@helper GetDate() {
-    var today = DateTime.Today;
-    string suffix;
-    switch (today.Day)
-    {
-        case 1:
-        case 21:
-        case 31:
-            suffix = "st";
-            break;
-        case 2:
-        case 22:
-            suffix = "nd";
-            break;
-        case 3:
-        case 23:
-            suffix = "rd";
-            break;
-        default:
-            suffix = "th";
-            break;
-    }
-
-    @Html.Raw(string.Format("{0:dddd dd}{1} {0:MMMM}", today, suffix));
-}
-
 <h1 class="heading-large">
-    <span class="heading-secondary">@GetDate()</span>
+    <span class="heading-secondary">@Html.DisplayTodaysDate()</span>
     @Resource.MainHeading
 </h1>
 
