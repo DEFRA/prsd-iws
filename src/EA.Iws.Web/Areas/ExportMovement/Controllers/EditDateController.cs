@@ -25,13 +25,15 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var dateHistories = await mediator.SendAsync(new GetMovementDateHistory(id));
+            var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
 
             var model = new EditDateViewModel
             {
                 DateEditHistory = dateHistories
                     .OrderBy(dh => dh.DateChanged)
                     .Select(dh => dh.PreviousDate)
-                    .ToList()
+                    .ToList(),
+                NotificationId = notificationId
             };
 
             return View(model);

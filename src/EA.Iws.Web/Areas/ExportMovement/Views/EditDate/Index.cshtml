@@ -73,4 +73,9 @@
     <div class="form-group">
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>
+
+    <div>
+        @Html.ActionLink("Go to notification options", "Index", "Options",
+                new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+    </div>
 }

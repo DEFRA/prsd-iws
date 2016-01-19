@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.UploadChoice
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class UploadChoiceViewModel : IValidatableObject
     {
+        public Guid NotificationId { get; set; }
+
         [Display(Name = "Number", ResourceType = typeof(UploadChoiceViewModelResources))]
         public int? Number { get; set; }
 

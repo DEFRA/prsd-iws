@@ -27,9 +27,9 @@
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(Guid notificationId)
         {
-            return View(new UploadChoiceViewModel());
+            return View(new UploadChoiceViewModel {NotificationId = notificationId});
         }
 
         [HttpPost]

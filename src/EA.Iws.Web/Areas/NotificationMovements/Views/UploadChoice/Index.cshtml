@@ -11,6 +11,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
         @Html.Gds().LabelFor(m => m.Number, false)
@@ -18,5 +19,12 @@
         @Html.Gds().TextBoxFor(m => m.Number, new { type = "number" })
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+
+    <div>
+        @Html.ActionLink("Go to notification option", "Index", "Options",
+                new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+    </div>
 }

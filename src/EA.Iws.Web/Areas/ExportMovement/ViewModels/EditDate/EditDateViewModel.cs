@@ -7,6 +7,8 @@
 
     public class EditDateViewModel : IValidatableObject
     {
+        public Guid NotificationId { get; set; }
+
         public IList<DateTime> DateEditHistory { get; set; }
 
         [Required]
