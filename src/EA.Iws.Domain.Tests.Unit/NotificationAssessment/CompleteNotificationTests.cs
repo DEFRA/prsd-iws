@@ -29,6 +29,7 @@
             A.CallTo(() => notificationAssessmentRepository.GetByNotificationId(notificationId))
                 .Returns(notificationAssessment);
         }
+
         private void SetupFacilityCollection(bool? isInterim)
         {
             var facilityCollection = new FacilityCollection(notificationId);
