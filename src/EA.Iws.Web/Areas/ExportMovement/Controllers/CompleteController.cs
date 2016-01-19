@@ -4,6 +4,7 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Complete;
@@ -14,11 +15,13 @@
     public class CompleteController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IFileReader fileReader;
         private const string DateKey = "Date";
 
-        public CompleteController(IMediator mediator)
+        public CompleteController(IMediator mediator, IFileReader fileReader)
         {
             this.mediator = mediator;
+            this.fileReader = fileReader;
         }
 
         [HttpGet]
@@ -77,8 +80,7 @@
             }
 
             var fileExtension = Path.GetExtension(model.File.FileName);
-            var uploadedFile = new byte[model.File.InputStream.Length];
-            model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+            var uploadedFile = await fileReader.GetFileBytes(model.File);
 
             await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.CompletedDate, uploadedFile, fileExtension));
 

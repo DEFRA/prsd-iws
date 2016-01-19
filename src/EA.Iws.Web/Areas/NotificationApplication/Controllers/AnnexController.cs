@@ -3,7 +3,6 @@
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using System.Web;
     using System.Web.Mvc;
     using Core.Annexes;
     using Infrastructure;
@@ -15,10 +14,12 @@
     public class AnnexController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IFileReader fileReader;
 
-        public AnnexController(IMediator mediator)
+        public AnnexController(IMediator mediator, IFileReader fileReader)
         {
             this.mediator = mediator;
+            this.fileReader = fileReader;
         }
 
         [HttpGet]
@@ -55,7 +56,7 @@
             {
                 await
                 mediator.SendAsync(
-                    new SetProcessOfGenerationAnnex(new AnnexUpload(GetFileBytes(model.ProcessOfGeneration),
+                    new SetProcessOfGenerationAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.ProcessOfGeneration),
                         Path.GetExtension(model.ProcessOfGeneration.FileName), id)));
             }
 
@@ -63,7 +64,7 @@
             {
                 await
                     mediator.SendAsync(
-                        new SetTechnologyEmployedAnnex(new AnnexUpload(GetFileBytes(model.TechnologyEmployed),
+                        new SetTechnologyEmployedAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.TechnologyEmployed),
                             Path.GetExtension(model.TechnologyEmployed.FileName), id)));
             }
 
@@ -71,7 +72,7 @@
             {
                 await
                     mediator.SendAsync(
-                        new SetWasteCompositionAnnex(new AnnexUpload(GetFileBytes(model.Composition),
+                        new SetWasteCompositionAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.Composition),
                             Path.GetExtension(model.Composition.FileName), id)));
             }
 
@@ -90,16 +91,6 @@
         private async Task DeleteAnnex(Guid id, Guid fileId)
         {
             await mediator.SendAsync(new DeleteAnnexFile(id, fileId));
-        } 
-
-        private byte[] GetFileBytes(HttpPostedFileBase file)
-        {
-            using (var memoryStream = new MemoryStream())
-            {
-                file.InputStream.CopyTo(memoryStream);
-
-                return memoryStream.ToArray();
-            }
         }
     }
 }

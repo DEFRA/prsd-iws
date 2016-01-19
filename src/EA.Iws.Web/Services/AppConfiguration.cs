@@ -21,5 +21,11 @@
         public string ApiSecret { get; set; }
 
         public string ApiClientId { get; set; }
+
+        [DefaultValue("~/App_Data/uploads")]
+        public string FileUploadTempPath { get; set; }
+
+        [DefaultValue(1000)]
+        public int FileSafeTimerMilliseconds { get; set; }
     }
 }

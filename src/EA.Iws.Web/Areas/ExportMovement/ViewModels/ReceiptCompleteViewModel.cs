@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using Core.Shared;
-    using Infrastructure;
     using Infrastructure.Validation;
 
     public class ReceiptCompleteViewModel : IValidatableObject

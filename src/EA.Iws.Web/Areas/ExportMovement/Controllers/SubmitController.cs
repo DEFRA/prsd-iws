@@ -4,6 +4,7 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels;
@@ -13,10 +14,12 @@
     public class SubmitController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IFileReader fileReader;
 
-        public SubmitController(IMediator mediator)
+        public SubmitController(IMediator mediator, IFileReader fileReader)
         {
             this.mediator = mediator;
+            this.fileReader = fileReader;
         }
 
         [HttpGet]
@@ -43,8 +46,7 @@
             }
 
             var fileExtension = Path.GetExtension(model.File.FileName);
-            var uploadedFile = new byte[model.File.InputStream.Length];
-            model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+            var uploadedFile = await fileReader.GetFileBytes(model.File);
 
             await mediator.SendAsync(new SetMovementFileId(id, uploadedFile, fileExtension));
 

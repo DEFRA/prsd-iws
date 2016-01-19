@@ -3,7 +3,6 @@
     using System;
     using System.Web;
     using Core.Annexes;
-    using Infrastructure;
     using Infrastructure.Validation;
 
     public class AnnexViewModel
