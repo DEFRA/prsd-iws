@@ -40,13 +40,23 @@
 
         [Display(Name = "ConsentConditions", ResourceType = typeof(DecisionViewModelResources))]
         public string ConsentConditions { get; set; }
-        
+
+        [Display(Name = "ReasonConsentWithdrawalLabel", ResourceType = typeof(DecisionViewModelResources))]
+        public string ReasonsForConsentWithdrawal { get; set; }
+
+        [Display(Name = "ObjectedDateLabel", ResourceType = typeof(DecisionViewModelResources))]
+        public OptionalDateInputViewModel ObjectionDate { get; set; }
+
+        [Display(Name = "ReasonObjectedLabel", ResourceType = typeof(DecisionViewModelResources))]
+        public string ReasonForObjection { get; set; }
+
         public DecisionViewModel()
         {
             ConsentValidFromDate = new OptionalDateInputViewModel(true);
             ConsentValidToDate = new OptionalDateInputViewModel(true);
             ConsentGivenDate = new OptionalDateInputViewModel(true);
             DecisionTypes = new List<DecisionType>();
+            ObjectionDate = new OptionalDateInputViewModel(true);
         }
 
         public DecisionViewModel(ImportNotificationAssessmentDecisionData data)
@@ -56,6 +66,7 @@
             ConsentValidFromDate = new OptionalDateInputViewModel(true);
             ConsentValidToDate = new OptionalDateInputViewModel(true);
             ConsentGivenDate = new OptionalDateInputViewModel(true);
+            ObjectionDate = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -64,6 +75,10 @@
             {
                 case DecisionType.Consent:
                     return ValidateConsent();
+                case DecisionType.ConsentWithdrawn:
+                    return ValidateConsentWithdrawn();
+                case DecisionType.Object:
+                    return ValidateObject();
                 default:
                     return new ValidationResult[0];
             }
@@ -94,6 +109,29 @@
             {
                 yield return new ValidationResult(DecisionViewModelResources.ConsentGivenRequired,
                     new[] { "ConsentGivenDate" });
+            }
+        }
+
+        private IEnumerable<ValidationResult> ValidateConsentWithdrawn()
+        {
+            if (string.IsNullOrWhiteSpace(ReasonsForConsentWithdrawal))
+            {
+                yield return new ValidationResult(DecisionViewModelResources.ReasonConsentWithdrawnRequired,
+                    new[] { "ReasonsForConsentWithdrawal" });
+            }
+        }
+
+        private IEnumerable<ValidationResult> ValidateObject()
+        {
+            if (string.IsNullOrWhiteSpace(ReasonForObjection))
+            {
+                yield return new ValidationResult(DecisionViewModelResources.ReasonObjectedRequired,
+                    new[] { "ReasonForObjection" });
+            }
+
+            if (!ObjectionDate.IsCompleted)
+            {
+                yield return new ValidationResult(DecisionViewModelResources.ObjectedDateRequired, new[] { "ObjectionDate" });
             }
         }
     }

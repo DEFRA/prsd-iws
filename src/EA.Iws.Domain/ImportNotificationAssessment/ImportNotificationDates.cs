@@ -19,6 +19,14 @@
 
         public DateTimeOffset? ConsentedDate { get; internal set; }
 
+        public DateTimeOffset? ConsentWithdrawnDate { get; internal set; }
+
+        public string ConsentWithdrawnReasons { get; internal set; }
+
+        public DateTimeOffset? ObjectedDate { get; internal set; }
+
+        public string ObjectedReason { get; internal set; }
+
         internal ImportNotificationDates()
         {
         }

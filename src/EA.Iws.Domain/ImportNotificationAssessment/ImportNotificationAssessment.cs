@@ -22,13 +22,17 @@
             BeginAssessment = 4,
             CompleteNotification = 5,
             Acknowledge = 6,
-            Consent = 7
+            Consent = 7,
+            WithdrawConsent = 8,
+            Object = 9
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
             = new BidirectionalDictionary<DecisionType, Trigger>(new Dictionary<DecisionType, Trigger>
             {
-                { DecisionType.Consent, Trigger.Consent }
+                { DecisionType.Consent, Trigger.Consent },
+                { DecisionType.Object, Trigger.Object },
+                { DecisionType.ConsentWithdrawn, Trigger.WithdrawConsent }
             });
 
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> receivedTrigger;
@@ -37,6 +41,8 @@
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> completeNotificationTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> consentedTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset> acknowledgeTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset, string> withdrawConsentTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTimeOffset, string> objectTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
 
@@ -78,6 +84,8 @@
             completeNotificationTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.CompleteNotification);
             acknowledgeTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Acknowledge);
             consentedTrigger = stateMachine.SetTriggerParameters<DateTimeOffset>(Trigger.Consent);
+            withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTimeOffset, string>(Trigger.WithdrawConsent);
+            objectTrigger = stateMachine.SetTriggerParameters<DateTimeOffset, string>(Trigger.Object);
 
             stateMachine.Configure(ImportNotificationStatus.New)
                 .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived);
@@ -97,7 +105,8 @@
 
             stateMachine.Configure(ImportNotificationStatus.InAssessment)
                 .OnEntryFrom(beginAssessmentTrigger, OnAssessmentStarted)
-                .Permit(Trigger.CompleteNotification, ImportNotificationStatus.ReadyToAcknowledge);
+                .Permit(Trigger.CompleteNotification, ImportNotificationStatus.ReadyToAcknowledge)
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
 
             stateMachine.Configure(ImportNotificationStatus.ReadyToAcknowledge)
                 .OnEntryFrom(completeNotificationTrigger, OnNotificationCompleted)
@@ -105,10 +114,18 @@
 
             stateMachine.Configure(ImportNotificationStatus.DecisionRequiredBy)
                 .OnEntryFrom(acknowledgeTrigger, OnAcknowledged)
-                .Permit(Trigger.Consent, ImportNotificationStatus.Consented);
+                .Permit(Trigger.Consent, ImportNotificationStatus.Consented)
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
 
             stateMachine.Configure(ImportNotificationStatus.Consented)
-                .OnEntryFrom(consentedTrigger, OnConsented);
+                .OnEntryFrom(consentedTrigger, OnConsented)
+                .Permit(Trigger.WithdrawConsent, ImportNotificationStatus.ConsentWithdrawn);
+
+            stateMachine.Configure(ImportNotificationStatus.ConsentWithdrawn)
+                .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn);
+
+            stateMachine.Configure(ImportNotificationStatus.Objected)
+                .OnEntryFrom(objectTrigger, OnObjected);
 
             return stateMachine;
         }
@@ -116,6 +133,12 @@
         private void OnConsented(DateTimeOffset consentDate)
         {
             Dates.ConsentedDate = consentDate;
+        }
+
+        private void OnConsentWithdrawn(DateTimeOffset withdrawnDate, string reasons)
+        {
+            Dates.ConsentWithdrawnDate = withdrawnDate;
+            Dates.ConsentWithdrawnReasons = reasons;
         }
 
         private void OnAcknowledged(DateTimeOffset acknowledgedDate)
@@ -142,6 +165,12 @@
         private void OnTransition(StateMachine<ImportNotificationStatus, Trigger>.Transition transition)
         {
             RaiseEvent(new ImportNotificationStatusChangeEvent(this, transition.Source, transition.Destination));
+        }
+
+        private void OnObjected(DateTimeOffset objectionDate, string reason)
+        {
+            Dates.ObjectedDate = objectionDate;
+            Dates.ObjectedReason = reason;
         }
 
         public void AddStatusChangeRecord(ImportNotificationStatusChange statusChange)
@@ -186,6 +215,11 @@
             stateMachine.Fire(acknowledgeTrigger, date);
         }
 
+        public void WithdrawConsent(DateTime withdrawalDate, string reasonsForWithdrawal)
+        {
+            stateMachine.Fire(withdrawConsentTrigger, withdrawalDate, reasonsForWithdrawal);
+        }
+
         public IEnumerable<DecisionType> GetAvailableDecisions()
         {
             var triggers = stateMachine.PermittedTriggers
@@ -203,6 +237,11 @@
             stateMachine.Fire(consentedTrigger, consentedDate);
 
             return new ImportConsent(NotificationApplicationId, dateRange, conditions, userId);
+        }
+
+        public void Object(DateTimeOffset objectedDate, string reason)
+        {
+            stateMachine.Fire(objectTrigger, objectedDate, reason);
         }
     }
 }

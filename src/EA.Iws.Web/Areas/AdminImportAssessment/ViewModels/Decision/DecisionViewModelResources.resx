@@ -147,4 +147,22 @@
   <data name="DecisionRequired" xml:space="preserve">
     <value>Please provide a notification decision</value>
   </data>
+  <data name="ObjectedDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ObjectedDateRequired" xml:space="preserve">
+    <value>Please enter the date the objection was made</value>
+  </data>
+  <data name="ReasonConsentWithdrawalLabel" xml:space="preserve">
+    <value>Reasons for withdrawal of consent</value>
+  </data>
+  <data name="ReasonConsentWithdrawnRequired" xml:space="preserve">
+    <value>The reason consent is being withdrawn is required</value>
+  </data>
+  <data name="ReasonObjectedLabel" xml:space="preserve">
+    <value>Reasons for objection</value>
+  </data>
+  <data name="ReasonObjectedRequired" xml:space="preserve">
+    <value>The reason for objection is required</value>
+  </data>
 </root>

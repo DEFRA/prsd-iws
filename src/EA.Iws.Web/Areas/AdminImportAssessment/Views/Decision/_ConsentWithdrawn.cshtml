@@ -1,0 +1,7 @@
+﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision.DecisionViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonsForConsentWithdrawal)">
+    <label class="heading-medium">@Html.DisplayNameFor(m => m.ReasonsForConsentWithdrawal)</label>
+    @Html.Gds().ValidationMessageFor(m => m.ReasonsForConsentWithdrawal)
+    @Html.TextAreaFor(m => m.ReasonsForConsentWithdrawal, new { @class = "text-area two-thirds", @MaxLength = "4000" })
+</div>

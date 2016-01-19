@@ -40,6 +40,12 @@
                 case DecisionType.Consent:
                     await PostConsent(id, model);
                     break;
+                case DecisionType.ConsentWithdrawn:
+                    await PostConsentWithdrawn(id, model);
+                    break;
+                case DecisionType.Object:
+                    await PostObjection(id, model);
+                    break;
                 default:
                     break;
             }
@@ -54,6 +60,19 @@
                 model.ConsentValidToDate.AsDateTime().Value,
                 model.ConsentConditions,
                 model.ConsentGivenDate.AsDateTime().Value));
+        }
+
+        private async Task PostConsentWithdrawn(Guid id, DecisionViewModel model)
+        {
+            await mediator.SendAsync(new WithdrawConsentForImportNotification(id, model.ReasonsForConsentWithdrawal));
+        }
+
+        private async Task PostObjection(Guid id, DecisionViewModel model)
+        {
+            var date = new DateTime(model.ObjectionDate.Year.GetValueOrDefault(), model.ObjectionDate.Month.GetValueOrDefault(), model.ObjectionDate.Day.GetValueOrDefault());
+
+            var request = new ObjectToImportNotification(id, model.ReasonForObjection, date);
+            await mediator.SendAsync(request);
         }
     }
 }

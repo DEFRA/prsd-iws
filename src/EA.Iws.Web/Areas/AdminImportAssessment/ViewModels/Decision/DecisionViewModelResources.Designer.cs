@@ -150,5 +150,59 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
                 return ResourceManager.GetString("DecisionRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string ObjectedDateLabel {
+            get {
+                return ResourceManager.GetString("ObjectedDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the date the objection was made.
+        /// </summary>
+        public static string ObjectedDateRequired {
+            get {
+                return ResourceManager.GetString("ObjectedDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reasons for withdrawal of consent.
+        /// </summary>
+        public static string ReasonConsentWithdrawalLabel {
+            get {
+                return ResourceManager.GetString("ReasonConsentWithdrawalLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reason consent is being withdrawn is required.
+        /// </summary>
+        public static string ReasonConsentWithdrawnRequired {
+            get {
+                return ResourceManager.GetString("ReasonConsentWithdrawnRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reasons for objection.
+        /// </summary>
+        public static string ReasonObjectedLabel {
+            get {
+                return ResourceManager.GetString("ReasonObjectedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reason for objection is required.
+        /// </summary>
+        public static string ReasonObjectedRequired {
+            get {
+                return ResourceManager.GetString("ReasonObjectedRequired", resourceCulture);
+            }
+        }
     }
 }
