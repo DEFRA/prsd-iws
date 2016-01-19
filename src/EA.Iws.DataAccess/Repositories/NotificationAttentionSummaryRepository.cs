@@ -20,7 +20,10 @@
         public async Task<IEnumerable<NotificationAttentionSummary>> GetByCompetentAuthority(UKCompetentAuthority competentAuthority)
         {
             var result = await context.NotificationAssessments
-                .Where(x => x.Status == NotificationStatus.DecisionRequiredBy)
+                .Where(x => 
+                    x.Status == NotificationStatus.DecisionRequiredBy
+                    || x.Status == NotificationStatus.Unlocked
+                    || x.Status == NotificationStatus.Reassessment)
                 .Join(context.NotificationApplications,
                     assessment => assessment.NotificationApplicationId,
                     notification => notification.Id,
