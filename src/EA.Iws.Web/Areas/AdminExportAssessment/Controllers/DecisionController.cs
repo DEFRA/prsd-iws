@@ -85,6 +85,7 @@
             var request = new ConsentNotificationApplication(model.NotificationId,
                 model.ConsentValidFromDate.AsDateTime().GetValueOrDefault(),
                 model.ConsentValidToDate.AsDateTime().GetValueOrDefault(),
+                model.ConsentedDate.AsDateTime().GetValueOrDefault(),
                 model.ConsentConditions);
 
             await mediator.SendAsync(request);

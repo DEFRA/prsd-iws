@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Requests.NotificationAssessment
 {
     using System;
-    using Prsd.Core;
     using Prsd.Core.Mediator;
 
     public class ConsentNotificationApplication : IRequest<bool>
@@ -14,11 +13,15 @@
 
         public string ConsentConditions { get; set; }
 
-        public ConsentNotificationApplication(Guid notificationId, 
+        public DateTime ConsentedDate { get; set; }
+
+        public ConsentNotificationApplication(Guid notificationId,
             DateTime consentFrom,
             DateTime consentTo,
+            DateTime consentedDate,
             string consentConditions)
         {
+            ConsentedDate = consentedDate;
             NotificationId = notificationId;
             ConsentFrom = consentFrom;
             ConsentTo = consentTo;

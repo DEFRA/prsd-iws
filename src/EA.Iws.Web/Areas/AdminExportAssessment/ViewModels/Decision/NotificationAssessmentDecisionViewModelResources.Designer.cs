@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The consented date is required.
+        /// </summary>
+        public static string ConsentedDateRequired {
+            get {
+                return ResourceManager.GetString("ConsentedDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The consent valid from date must be before the consent valid to date.
         /// </summary>
         public static string ConsentValidFromBeforeValidTo {

@@ -120,6 +120,9 @@
   <data name="ConsentDateNotPast" xml:space="preserve">
     <value>The consent valid from date must not be in the past</value>
   </data>
+  <data name="ConsentedDateRequired" xml:space="preserve">
+    <value>The consented date is required</value>
+  </data>
   <data name="ConsentValidFromBeforeValidTo" xml:space="preserve">
     <value>The consent valid from date must be before the consent valid to date</value>
   </data>

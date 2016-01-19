@@ -1,5 +1,16 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision.NotificationAssessmentDecisionViewModel
 
+<h2 class="heading-medium">Consented date</h2>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentedDate)  @Html.Gds().FormGroupClass(m => m.ConsentedDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentedDate.Year)">
+    <fieldset>
+        <div class="form-date">
+            @Html.Gds().ValidationMessageFor(m => m.ConsentedDate)
+            @Html.EditorFor(m => m.ConsentedDate)
+        </div>
+    </fieldset>
+</div>
+
 <h2 class="heading-medium">Consent valid from</h2>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Year)">

@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.NotificationAssessment
 {
-    using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
@@ -24,7 +23,7 @@
         {
             await
                 consentNotification.Consent(message.NotificationId, new DateRange(message.ConsentFrom, message.ConsentTo),
-                    message.ConsentConditions, DateTime.UtcNow);
+                    message.ConsentConditions, message.ConsentedDate);
 
             await context.SaveChangesAsync();
 

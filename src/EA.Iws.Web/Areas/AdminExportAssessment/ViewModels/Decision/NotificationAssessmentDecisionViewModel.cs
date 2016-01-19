@@ -7,7 +7,6 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.NotificationAssessment;
-    using Prsd.Core;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -34,10 +33,12 @@
         public DecisionType? SelectedDecision { get; set; }
 
         public IList<DecisionType> DecisionTypes { get; set; }
-        
+
         public OptionalDateInputViewModel ConsentValidFromDate { get; set; }
 
         public OptionalDateInputViewModel ConsentValidToDate { get; set; }
+
+        public OptionalDateInputViewModel ConsentedDate { get; set; }
 
         [Display(Name = "ReasonConsentWithdrawalLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
         public string ReasonsForConsentWithdrawal { get; set; }
@@ -60,6 +61,7 @@
         {
             ConsentValidFromDate = new OptionalDateInputViewModel();
             ConsentValidToDate = new OptionalDateInputViewModel();
+            ConsentedDate = new OptionalDateInputViewModel(true);
             PreviousDecisions = new List<DecisionRecordViewModel>();
             DecisionTypes = new List<DecisionType>();
             ObjectionDate = new OptionalDateInputViewModel(true);
@@ -95,20 +97,26 @@
         {
             if (!ConsentValidFromDate.IsCompleted)
             {
-                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidFromRequired, 
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidFromRequired,
                     new[] { "ConsentValidFromDate" });
             }
 
             if (!ConsentValidToDate.IsCompleted)
             {
-                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidToRequired, 
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidToRequired,
                     new[] { "ConsentValidToDate" });
             }
 
-            if (ConsentValidFromDate.IsCompleted && ConsentValidFromDate.IsCompleted 
+            if (!ConsentedDate.IsCompleted)
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentedDateRequired,
+                    new[] { "ConsentedDate" });
+            }
+
+            if (ConsentValidFromDate.IsCompleted && ConsentValidFromDate.IsCompleted
                 && ConsentValidFromDate.AsDateTime() > ConsentValidToDate.AsDateTime())
             {
-                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidFromBeforeValidTo, 
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentValidFromBeforeValidTo,
                     new[] { "ConsentValidFromDate" });
             }
         }
