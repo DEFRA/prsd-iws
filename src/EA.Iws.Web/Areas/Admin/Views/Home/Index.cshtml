@@ -18,11 +18,11 @@
 
     <h2 class="heading-medium">@Resource.Search</h2>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
-                @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
-                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @class = "form-control", @title = "Search term", placeholder = Resource.SearchPlaceholder })
-                &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go" />
-            </div>
+    <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+        @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+        @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
+        &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go" />
+    </div>
 }
 
 <hr class="section-bottom" />
@@ -31,41 +31,41 @@
 {
     <h2 class="heading-medium">@Resource.Subheading</h2>
 
-            @Html.Raw(string.Format(Resource.ResultsCount, Model.ExportSearchResults.Count))
+    @Html.Raw(string.Format(Resource.ResultsCount, Model.ExportSearchResults.Count))
 
-            <table title="Search results">
-                <thead>
-                    <tr>
-                        <th>@Resource.NotificationNumberTableHeading</th>
-                        <th>@Resource.StatusTableHeading</th>
-                        <th>@Resource.CompanyNameTableHeading</th>
-                        <th>@Resource.WasteTypeTableHeading</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.ExportSearchResults.Count; i++)
+    <table title="Search results">
+        <thead>
+            <tr>
+                <th>@Resource.NotificationNumberTableHeading</th>
+                <th>@Resource.StatusTableHeading</th>
+                <th>@Resource.CompanyNameTableHeading</th>
+                <th>@Resource.WasteTypeTableHeading</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.ExportSearchResults.Count; i++)
                 {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationNumber).ToString(),
+                <tr>
+                    <td>
+                        @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationNumber).ToString(),
                                 actionName: "Index",
                                 controllerName: "Home",
                                 routeValues: new { id = Model.ExportSearchResults[i].Id, area = "AdminExportAssessment" },
                                 htmlAttributes: null)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationStatus)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.ExportSearchResults[i].ExporterName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.ExportSearchResults[i].WasteType)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ExportSearchResults[i].ExporterName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ExportSearchResults[i].WasteType)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else if (Model != null && Model.HasSearched && Model.ImportSearchResults.Count == 0)
 {
@@ -80,35 +80,35 @@ else if (Model != null && Model.HasSearched && Model.ImportSearchResults.Count =
 {
     <p>@Resource.NotificationAttentionText</p>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>@Resource.NotificationNumberAttentionTableHeading</th>
-                        <th>@Resource.OfficerAttentionTableHeading</th>
-                        <th>@Resource.AcknowledgedTableHeading</th>
-                        <th>@Resource.DecisionRequiredTableHeading</th>
-                        <th>@Resource.DaysRemainingTableHeading</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var row in Model.AttentionSummaryTable)
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(linkText: row.NotificationNumber,
+    <table>
+        <thead>
+            <tr>
+                <th>@Resource.NotificationNumberAttentionTableHeading</th>
+                <th>@Resource.OfficerAttentionTableHeading</th>
+                <th>@Resource.AcknowledgedTableHeading</th>
+                <th>@Resource.DecisionRequiredTableHeading</th>
+                <th>@Resource.DaysRemainingTableHeading</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.AttentionSummaryTable)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(linkText: row.NotificationNumber,
                                     actionName: "Index",
                                     controllerName: "Home",
                                     routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },
                                     htmlAttributes: null)
-                        </td>
-                        <td>@row.Officer</td>
-                        <td>@Html.Gds().DisplayShortDate(row.AcknowledgedDate)</td>
-                        <td>@Html.Gds().DisplayShortDate(row.DecisionRequiredDate)</td>
-                        <td>@row.DaysRemaining</td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
+                    </td>
+                    <td>@row.Officer</td>
+                    <td>@Html.Gds().DisplayShortDate(row.AcknowledgedDate)</td>
+                    <td>@Html.Gds().DisplayShortDate(row.DecisionRequiredDate)</td>
+                    <td>@row.DaysRemaining</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

@@ -686,3 +686,12 @@ table.table-pad-bottom {
 .form-control-wide {
     width: 100%;
 }
+
+#search-container {
+    input[type=text] {
+        width: 75%;
+    }
+    input[type=submit], button {
+        width: 20%;
+    }
+}
