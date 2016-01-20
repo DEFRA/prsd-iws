@@ -10,6 +10,8 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using TestHelpers.Factories;
+    using Web.Infrastructure;
+    using Web.Infrastructure.VirusScanning;
     using Xunit;
 
     public class ReceiptCompleteControllerTests
@@ -23,8 +25,13 @@
         public ReceiptCompleteControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            var virusScanner = A.Fake<IVirusScanner>();
 
-            controller = new ReceiptCompleteController(mediator);
+            A.CallTo(() => virusScanner.ScanFileAsync(A<byte[]>.Ignored)).Returns(ScanResult.Clean);
+
+            var fileReader = new FileReader(virusScanner);
+
+            controller = new ReceiptCompleteController(mediator, fileReader);
         }
 
         [Fact]

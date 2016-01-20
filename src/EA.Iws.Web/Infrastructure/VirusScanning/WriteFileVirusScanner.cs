@@ -32,7 +32,7 @@
             {
                 fileAccess.WriteFile(fileName, fileData);
             }
-            catch (IOException ex)
+            catch (IOException)
             {
                 return ScanResult.Error;
             }
@@ -50,7 +50,7 @@
             {
                 await fileAccess.WriteFileAsync(fileName, fileData);
             }
-            catch (IOException ex)
+            catch (IOException)
             {
                 return ScanResult.Error;
             }
@@ -73,7 +73,7 @@
                 {
                     fileAccess.DeleteFile(fileName);
                 }
-                catch (IOException ex)
+                catch (IOException)
                 {
                     // If we can't delete the file just leave it
                 }
