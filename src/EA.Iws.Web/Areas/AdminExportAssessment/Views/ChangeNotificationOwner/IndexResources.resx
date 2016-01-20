@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="HintText" xml:space="preserve">
-    <value>This is the email address that the was used to register their account and that they enter when logging into the system</value>
+    <value>This is the email address that was used to register their account and that they enter when logging into the system</value>
   </data>
   <data name="SubTitleCurrentOwner" xml:space="preserve">
     <value>The current owner of this notification is:</value>

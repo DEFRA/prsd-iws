@@ -838,10 +838,10 @@
     <Content Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDays.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
-    <Content Include="Areas\Admin\Views\ChangeNotificationOwner\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_ConsentWithdrawn.cshtml" />
-    <Content Include="Areas\Admin\Views\ChangeNotificationOwner\Confirm.cshtml" />
-    <Content Include="Areas\Admin\Views\ChangeNotificationOwner\Success.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\Confirm.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\Success.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityReached.cshtml" />
@@ -1106,7 +1106,7 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ChangeNotificationOwnerController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\ChangeNotificationOwnerController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointController.cs" />
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.Designer.cs">
@@ -1123,14 +1123,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestEmailResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\ChangeNotificationOwner\ChangeNotificationOwnerViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\ChangeNotificationOwner\ChangeNotificationOwnerViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\ChangeNotificationOwner\ChangeNotificationOwnerViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\ChangeNotificationOwner\ChangeNotificationOwnerViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ChangeNotificationOwnerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\ViewModels\ChangeNotificationOwner\SuccessViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\ChangeNotificationOwner\SuccessViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1159,17 +1159,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TestEmailViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\Views\ChangeNotificationOwner\ConfirmResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ConfirmResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\Views\ChangeNotificationOwner\IndexResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\Views\ChangeNotificationOwner\SuccessResources.Designer.cs">
+    <Compile Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\SuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessResources.resx</DependentUpon>
@@ -2563,7 +2563,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TestEmailResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Admin\ViewModels\ChangeNotificationOwner\ChangeNotificationOwnerViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\ChangeNotificationOwner\ChangeNotificationOwnerViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangeNotificationOwnerViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -2584,15 +2584,15 @@
       <LastGenOutput>TestEmailViewModelResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Admin\Views\ChangeNotificationOwner\ConfirmResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Admin\Views\ChangeNotificationOwner\IndexResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Admin\Views\ChangeNotificationOwner\SuccessResources.resx">
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

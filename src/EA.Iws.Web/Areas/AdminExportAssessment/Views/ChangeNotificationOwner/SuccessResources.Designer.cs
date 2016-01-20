@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.ChangeNotificationOwner {
     using System;
     
     
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner.SuccessResources", typeof(SuccessResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.ChangeNotificationOwner.SuccessResou" +
+                            "rces", typeof(SuccessResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

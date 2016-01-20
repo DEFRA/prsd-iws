@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.ChangeNotificationOwner.SuccessViewModel
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.ChangeNotificationOwner.SuccessResources
+
+@{
+    ViewBag.Title = @Resource.TabTitle;
+}
+
+<div>
+    <div class="form-group">
+        <h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, Model.NotificationNumber.Replace(" ", "&nbsp;")))</h1>
+        <h2 class="heading-medium">
+            <p>@Resource.SecondPara</p>
+            <p>@Model.NewUserEmail</p>
+        </h2>
+    </div>
+
+    <div class="form-group">
+        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", new { area = "Admin" }, new { @class = "button" })
+    </div>
+
+</div>
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.ChangeOwner })
+}

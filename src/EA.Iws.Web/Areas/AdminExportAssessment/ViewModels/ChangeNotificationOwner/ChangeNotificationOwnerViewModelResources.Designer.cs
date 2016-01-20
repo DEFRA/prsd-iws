@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.ViewModels.ChangeNotificationOwner {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.ChangeNotificationOwner {
     using System;
     
     
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.ChangeNotificationOwner {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.ViewModels.ChangeNotificationOwner.ChangeNotificationOwner" +
-                            "ViewModelResources", typeof(ChangeNotificationOwnerViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.ChangeNotificationOwner.ChangeN" +
+                            "otificationOwnerViewModelResources", typeof(ChangeNotificationOwnerViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

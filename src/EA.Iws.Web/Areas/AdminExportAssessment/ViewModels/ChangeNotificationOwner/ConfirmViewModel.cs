@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.ChangeNotificationOwner
+﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.ChangeNotificationOwner
 {
     using System;
     using Core.Admin;

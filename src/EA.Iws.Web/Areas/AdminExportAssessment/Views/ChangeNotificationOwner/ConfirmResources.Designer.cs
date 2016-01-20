@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.ChangeNotificationOwner {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class ConfirmResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal ConfirmResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.ChangeNotificationOwner.ConfirmResou" +
+                            "rces", typeof(ConfirmResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,25 +62,16 @@ namespace EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is the email address that the was used to register their account and that they enter when logging into the system.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        public static string HintText {
+        public static string CancelButtonText {
             get {
-                return ResourceManager.GetString("HintText", resourceCulture);
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The current owner of this notification is:.
-        /// </summary>
-        public static string SubTitleCurrentOwner {
-            get {
-                return ResourceManager.GetString("SubTitleCurrentOwner", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the details of the new owner:.
+        ///   Looks up a localized string similar to The new owner of this notification will be:.
         /// </summary>
         public static string SubTitleNewOwner {
             get {
@@ -88,7 +80,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.ChangeNotificationOwner {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change the owner of an export notification.
+        ///   Looks up a localized string similar to Are you sure you want to change the owner of Notification {0}.
         /// </summary>
         public static string Title {
             get {
