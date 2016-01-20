@@ -9,15 +9,15 @@
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new RequireHttpsAttribute());
-            filters.Add(new HandleApiErrorAttribute());
-            filters.Add(new HandleErrorAttribute() { View = "~/Views/Errors/InternalError.cshtml" });
-            filters.Add(new OrganisationRequiredAttribute());
-            filters.Add(new EmailVerificationRequiredAttribute());
-            filters.Add(new AntiForgeryErrorFilter());
-            filters.Add(new VirusFoundFilter());
-            filters.Add(new AdminApprovalRequired());
-            filters.Add(new RequestAuthorizationErrorFilter());
+            filters.Add(new RequireHttpsAttribute(), order: 1);
+            filters.Add(new AntiForgeryErrorFilter(), order: 2);
+            filters.Add(new VirusFoundFilter(), order: 3);
+            filters.Add(new RequestAuthorizationErrorFilter(), order: 4);
+            filters.Add(new HandleApiErrorAttribute(), order: 5);
+            filters.Add(new EmailVerificationRequiredAttribute(), order: 6);
+            filters.Add(new OrganisationRequiredAttribute(), order: 7);
+            filters.Add(new AdminApprovalRequired(), order: 8);
+            filters.Add(new HandleErrorAttribute() { View = "~/Views/Errors/InternalError.cshtml" }, order: 9);
         }
     }
 }
