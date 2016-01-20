@@ -65,10 +65,12 @@
                                 var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType);
                             }
                             <div class="column-half">
+                                <label class="visuallyhidden">@(sectionTitle + ParametersResources.MinConcentration)</label>
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ParametersResources.Min + placeholderText, title = sectionTitle + ParametersResources.MinConcentration, id = idText })
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
                             </div>
                             <div class="column-half">
+                                <label class="visuallyhidden">@(sectionTitle + ParametersResources.MaxConcentration)</label>
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = ParametersResources.Max + placeholderText, title = sectionTitle + ParametersResources.MaxConcentration })
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
                             </div>

@@ -14,20 +14,21 @@
 
     <div class="form-group">
         <table title="Transport methods">
+            <caption class="visuallyhidden">Transport methods</caption>
             <thead>
-                <tr>
-                    <th>@MeansOfTransportResources.ThSymbol</th>
-                    <th>@MeansOfTransportResources.ThTransportMethods</th>
-                </tr>
+            <tr>
+                <th>@MeansOfTransportResources.ThSymbol</th>
+                <th>@MeansOfTransportResources.ThTransportMethods</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var means in Model.PossibleMeans)
-                {
-                    <tr>
-                        <td>@means.Symbol</td>
-                        <td>@means.DisplayName</td>
-                    </tr>
-                }
+            @foreach (var means in Model.PossibleMeans)
+            {
+                <tr>
+                    <td>@means.Symbol</td>
+                    <td>@means.DisplayName</td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>

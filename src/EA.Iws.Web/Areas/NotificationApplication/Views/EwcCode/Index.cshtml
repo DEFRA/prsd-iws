@@ -20,8 +20,8 @@
                 @Html.Gds().LabelFor(m => m.EnterWasteCodesViewModel.SelectedCode, false)
                 @Html.Gds().ValidationMessageFor(m => m.EnterWasteCodesViewModel.SelectedCode)
                 @Html.Gds().DropDownListFor(m => m.EnterWasteCodesViewModel.SelectedCode, Model.EnterWasteCodesViewModel.Codes,
-                    string.Empty, new { id = "code-list", title = EwcCodeResources.Title, data_select_box = "true" })
-                <button type="submit" name="command" value="addcode">@EwcCodeResources.AddCode</button>
+                    string.Empty, new { id = "code-list", title = EwcCodeResources.Title, data_select_box = "true", tabindex=1 })
+                <button type="submit" name="command" value="addcode" tabindex=2>@EwcCodeResources.AddCode</button>
             </div>
 
             <table title="Ewc codes">
