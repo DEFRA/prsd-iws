@@ -2,9 +2,10 @@
 {
     using Core.Admin.Reports;
     using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization("Get Export Stats Report")]
+    [RequestAuthorization(ReportingPermissions.CanViewExportStatsReport)]
     public class GetExportStatsReport : IRequest<ExportStatsData[]>
     {
         public GetExportStatsReport(int year)

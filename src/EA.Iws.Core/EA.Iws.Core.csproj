@@ -63,6 +63,10 @@
     <Compile Include="Annexes\AnnexFileData.cs" />
     <Compile Include="Annexes\AnnexStatus.cs" />
     <Compile Include="Annexes\AnnexUpload.cs" />
+    <Compile Include="Authorization\Permissions\ExportNotificationPermissions.cs" />
+    <Compile Include="Authorization\Permissions\ImportNotificationPermissions.cs" />
+    <Compile Include="Authorization\Permissions\ReportingPermissions.cs" />
+    <Compile Include="Authorization\Permissions\SystemConfigurationPermissions.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttribute.cs" />
     <Compile Include="Authorization\RequestAuthorizationException.cs" />
     <Compile Include="Carriers\CarrierData.cs" />

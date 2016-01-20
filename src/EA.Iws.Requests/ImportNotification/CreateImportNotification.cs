@@ -2,10 +2,11 @@
 {
     using System;
     using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.Shared;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization("Create Import Notification")]
+    [RequestAuthorization(ImportNotificationPermissions.CanCreateImportNotification)]
     public class CreateImportNotification : IRequest<Guid>
     {
         public string Number { get; private set; }

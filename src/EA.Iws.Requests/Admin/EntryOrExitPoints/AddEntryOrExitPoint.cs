@@ -2,10 +2,11 @@
 {
     using System;
     using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization("Add Entry Or Exit Point")]
+    [RequestAuthorization(SystemConfigurationPermissions.CanAddNewEntryOrExitPoint)]
     public class AddEntryOrExitPoint : IRequest<bool>
     {
         public Guid CountryId { get; private set; }

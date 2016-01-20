@@ -3,18 +3,24 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Authorization.Permissions;
 
     public class InMemoryAuthorizationService : IAuthorizationService
     {
-        private readonly IDictionary<string, IList<UserRole>> authorizations = new Dictionary<string, IList<UserRole>>
+        private static readonly IDictionary<string, IList<UserRole>> authorizations = new Dictionary<string, IList<UserRole>>
         {
-            { "Get Exporter For Export Notification", new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
-            { "Set Exporter For Export Notification", new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
-            { "Create Import Notification", new[] { UserRole.Internal, UserRole.TeamLeader } },
-            { "Create Export Notification", new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
-            { "Add Entry Or Exit Point", new[] { UserRole.Internal, UserRole.TeamLeader } },
-            { "Get Export Stats Report", new[] { UserRole.Internal, UserRole.TeamLeader } },
-        }; 
+            { SystemConfigurationPermissions.CanAddNewEntryOrExitPoint, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ReportingPermissions.CanViewExportStatsReport, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ReportingPermissions.CanViewExportNotificationsReport, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ReportingPermissions.CanViewFinanceReport, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ReportingPermissions.CanViewMissingShipmentsReport, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ExportNotificationPermissions.CanCreateExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
+            { ExportNotificationPermissions.CanEditExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
+            { ExportNotificationPermissions.CanReadExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.TeamLeader } },
+            { ImportNotificationPermissions.CanCreateImportNotification, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ImportNotificationPermissions.CanEditImportNotification, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ImportNotificationPermissions.CanReadImportNotification, new[] { UserRole.Internal, UserRole.TeamLeader } }
+        };
 
         public Task<bool> HasAccess(UserRole userRole, string name)
         {

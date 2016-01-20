@@ -2,12 +2,13 @@
 {
     using System;
     using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.Shared;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
-    [RequestAuthorization("Set Exporter For Export Notification")]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetExporterForNotification : IRequest<Guid>
     {
         public BusinessInfoData Business { get; set; }

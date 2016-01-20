@@ -2,10 +2,11 @@
 {
     using System;
     using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.Exporters;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization("Get Exporter For Export Notification")]
+    [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
     public class GetExporterByNotificationId : IRequest<ExporterData>
     {
         public Guid NotificationId { get; private set; }
