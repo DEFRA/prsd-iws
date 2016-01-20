@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using Infrastructure;
+    using Infrastructure.VirusScanning;
     using Prsd.Core.Web.Mvc.Filters;
 
     public class FilterConfig
@@ -14,6 +15,7 @@
             filters.Add(new OrganisationRequiredAttribute());
             filters.Add(new EmailVerificationRequiredAttribute());
             filters.Add(new AntiForgeryErrorFilter());
+            filters.Add(new VirusFoundFilter());
             filters.Add(new AdminApprovalRequired());
             filters.Add(new RequestAuthorizationErrorFilter());
         }

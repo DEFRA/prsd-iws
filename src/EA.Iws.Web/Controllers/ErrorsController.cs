@@ -28,5 +28,11 @@
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult VirusDetected()
+        {
+            return View();
+        }
     }
 }

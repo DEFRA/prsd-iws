@@ -968,6 +968,7 @@
     <Content Include="Views\Shared\EditorTemplates\NotificationSwitcherViewModel.cshtml" />
     <Content Include="Views\NotificationSwitch\NotFound.cshtml" />
     <Content Include="Views\Registration\_RegistrationTermsAndConditions.cshtml" />
+    <Content Include="Views\Errors\VirusDetected.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1606,6 +1607,7 @@
     <Compile Include="Infrastructure\VirusScanning\IVirusScanner.cs" />
     <Compile Include="Infrastructure\VirusScanning\ScanResult.cs" />
     <Compile Include="Infrastructure\VirusScanning\VirusFoundException.cs" />
+    <Compile Include="Infrastructure\VirusScanning\VirusFoundFilter.cs" />
     <Compile Include="Infrastructure\VirusScanning\WriteFileVirusScanner.cs" />
     <Compile Include="ViewModels\Shared\IComplete.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
