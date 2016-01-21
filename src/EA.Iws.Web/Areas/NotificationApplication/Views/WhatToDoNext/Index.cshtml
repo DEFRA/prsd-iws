@@ -1,33 +1,34 @@
-﻿@model EA.Iws.Requests.Notification.WhatToDoNextData
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext
+@model EA.Iws.Requests.Notification.WhatToDoNextData
 @{
     ViewBag.Title = "What to do next";
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">You've successfully submitted this notification</h1>
+    <h1 class="heading-large">@IndexResources.MainHeading</h1>
 </header>
 
-However, you need to complete a few more steps before we can consider it.
+<p>
+    @IndexResources.MainParagraph
+</p>
 
-<h3 class="heading-medium">What to do next:</h3>
+<h2 class="heading-medium">@IndexResources.WhatToDoNextHeading</h2>
 
-<ul class="list list-bullet">
-    <li>print and sign the notification</li>
-    <li>pay the charge</li>
-    <li>complete your financial guarantee</li>
-    <li>upload your annexes</li>
-    <li>print a postage label</li>
-    <li>post the notification</li>
+<ul class="list list-number">
+    <li>@IndexResources.WhatToDoNextListItem1</li>
+    <li>@IndexResources.WhatToDoNextListItem2</li>
+    <li>@IndexResources.WhatToDoNextListItem3</li>
+    <li>@IndexResources.WhatToDoNextListItem4</li>
+    <li>@IndexResources.WhatToDoNextListItem5</li>
+    <li>@IndexResources.WhatToDoNextListItem6</li>
 </ul>
 
 <div class="form-group">
-    You can complete all these steps from the&nbsp;
-    @Html.ActionLink("notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
-    &nbsp;page.
+    @Html.Raw(string.Format(IndexResources.NotificationOptionsLinkMessage,
+        Html.ActionLink("notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)))
 </div>
 
 <div>
-    @Html.ActionLink("Continue", "Print", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button"})
+    @Html.ActionLink(@Constants.ContinueOnlyButtonText, "Print", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
 </div>
-

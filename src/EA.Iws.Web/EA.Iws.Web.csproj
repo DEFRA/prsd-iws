@@ -1506,6 +1506,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_PortNotListedDisclosureResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysSelection.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModelResources.Designer.cs">
@@ -3101,6 +3106,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteRecovery\WasteRecoveryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteRecoveryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\YCode\YCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
