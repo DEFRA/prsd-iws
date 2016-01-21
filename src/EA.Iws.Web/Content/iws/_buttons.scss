@@ -1,4 +1,8 @@
-﻿.button-start,
+﻿.button {
+    margin: 0 $gutter-half $gutter-half 0; // This was removed from GOV.UK Elements...
+}
+
+.button-start,
 .button-get-started {
   background-image: file-url("icon-pointer.png");
 

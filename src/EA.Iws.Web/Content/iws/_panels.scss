@@ -1,0 +1,12 @@
+﻿// Old style names form panel-indent as they changed the names in GOV.UK Elements
+.panel-indent {
+  @extend .panel;
+}
+
+.panel-indent-info {
+  @extend .panel-border-wide;
+}
+
+.form-group .panel-indent {
+  padding-bottom: 0;
+}

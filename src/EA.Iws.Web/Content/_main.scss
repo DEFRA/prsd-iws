@@ -1,83 +1,60 @@
 $path: "govuk_toolkit/images/";
 
-// Helpers
-@import "govuk_elements/helpers";
-
-// Reset
-@import "govuk_elements/reset";
-
-// Typography
-@import "govuk_elements/elements-typography";
-
-// Layout
-@import "govuk_elements/layout";
-
-// Modules
+// GOV.UK
 // ==========================================================================
 
-// Forms
+@import "govuk_toolkit/stylesheets/colours";                                
+@import "govuk_toolkit/stylesheets/font_stack";                             
+@import "govuk_toolkit/stylesheets/measurements";                           
+@import "govuk_toolkit/stylesheets/conditionals";                           
+@import "govuk_toolkit/stylesheets/device-pixels";                          
+@import "govuk_toolkit/stylesheets/grid_layout";                            
+@import "govuk_toolkit/stylesheets/typography";                             
+@import "govuk_toolkit/stylesheets/shims";                                  
+@import "govuk_toolkit/stylesheets/design-patterns/alpha-beta";
+@import "govuk_toolkit/stylesheets/design-patterns/buttons";
+@import "govuk_toolkit/stylesheets/design-patterns/breadcrumbs";
+
+// GOV.UK Elements
+// ==========================================================================
+
+@import "govuk_elements/helpers";
+@import "govuk_elements/reset";
+@import "govuk_elements/elements-typography";
+@import "govuk_elements/layout";
 @import "govuk_elements/forms";
-
-// Tables
+@import "govuk_elements/forms/form-block-labels";
+@import "govuk_elements/forms/form-date"; 
+@import "govuk_elements/forms/form-validation"; 
 @import "govuk_elements/tables";
-
-// Buttons
 @import "govuk_elements/buttons";
-
-// Details
 @import "govuk_elements/details";
-
-// Lists
 @import "govuk_elements/lists";
-
-// Panels
 @import "govuk_elements/panels";
-
-// Icons
 @import "govuk_elements/icons";
-
 
 // Custom IWS and overrides
 // ==========================================================================
 
 $internal-colour: $pink;
-
 @import "iws/helpers";
-
 @import "iws/display-elements";
-
 @import "iws/layout";
-
 @import "iws/forms/form-validation";
-
 @import "iws/tables";
-
 @import "iws/buttons";
-
 @import "iws/dialog";
-
 @import "iws/navigation";
-
 @import "iws/overview";
-
 @import "iws/details";
-
 @import "iws/movement";
-
 @import "iws/movement-summary";
-
 @import "iws/notification-switcher";
-
 @import "iws/footer";
-
 @import "iws/address-book";
-
 @import "iws/entry-or-exit-point";
-
 @import "jquery-autocomplete";
-
 @import "iws/facility-table";
-
 @import "iws/import-waste-codes";
-
 @import "iws/internal-menu";
+@import "iws/panels";
