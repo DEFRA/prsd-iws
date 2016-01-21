@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Domain;
     using Domain.TransportRoute;
@@ -36,14 +37,14 @@
                 .WithLocalizedMessage(() => StateOfImportValidatorResources.ImportEntryPointInUK);
         }
 
-        private async Task<bool> BeAnEntryPointInTheUK(Guid? entryPointId)
+        private async Task<bool> BeAnEntryPointInTheUK(Guid? entryPointId, CancellationToken cancellationToken)
         {
             var entryPoint = await entryOrExitPointRepository.GetById(entryPointId.Value);
 
             return await IsCountryUnitedKingdom(entryPoint.Country);
         }
 
-        private async Task<bool> BeACompetentAuthorityInTheUK(Guid? competentAuthorityId)
+        private async Task<bool> BeACompetentAuthorityInTheUK(Guid? competentAuthorityId, CancellationToken cancellationToken)
         {
             var competentAuthority = await competentAuthorityRepository.GetById(competentAuthorityId.Value);
 

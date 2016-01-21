@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
 {
+    using System.Threading;
     using System.Threading.Tasks;
     using Core.ImportNotification.Draft;
     using Core.Shared;
@@ -19,7 +20,7 @@
                 .WithLocalizedMessage(() => PreconsentedValidatorResources.PreconsentMustBeEntered);
         }
 
-        private async Task<bool> BeEnteredForRecoveryNotification(Preconsented instance, bool? preconsentedFacilityExists)
+        private async Task<bool> BeEnteredForRecoveryNotification(Preconsented instance, bool? preconsentedFacilityExists, CancellationToken cancellationToken)
         {
             var importNotification =
                 await importNotificationRepository.Get(instance.ImportNotificationId);

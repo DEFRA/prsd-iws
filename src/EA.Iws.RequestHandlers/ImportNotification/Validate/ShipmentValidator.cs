@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Core.ImportNotification.Draft;
     using DataAccess.Draft;
@@ -45,7 +46,7 @@
                 .WithLocalizedMessage(() => ShipmentValidatorResources.EndDateInConsentPeriod);
         }
 
-        private async Task<bool> BeWithinConsentPeriod(Shipment instance, DateTime? endDate)
+        private async Task<bool> BeWithinConsentPeriod(Shipment instance, DateTime? endDate, CancellationToken cancellationToken)
         {
             var preconsented =
                 await draftImportNotificationRepository.GetDraftData<Preconsented>(instance.ImportNotificationId);

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Domain;
     using Domain.TransportRoute;
@@ -35,7 +36,7 @@
                 .WithLocalizedMessage(() => TransitStateValidatorResources.CompetentAuthorityMustBeSelectedCountry);
         }
 
-        private async Task<bool> BeInSameCountry(TransitState transitState, Guid? competentAuthorityId)
+        private async Task<bool> BeInSameCountry(TransitState transitState, Guid? competentAuthorityId, CancellationToken cancellationToken)
         {
             if (competentAuthorityId.HasValue && transitState.CountryId.HasValue)
             {
@@ -48,7 +49,7 @@
             return false;
         }
 
-        private async Task<bool> BeExitingSameCountry(TransitState transitState, Guid? exitPointId)
+        private async Task<bool> BeExitingSameCountry(TransitState transitState, Guid? exitPointId, CancellationToken cancellationToken)
         {
             if (exitPointId.HasValue && transitState.CountryId.HasValue)
             {
@@ -61,7 +62,7 @@
             return false;
         }
 
-        private async Task<bool> BeEnteringSameCountry(TransitState transitState, Guid? entryPointId)
+        private async Task<bool> BeEnteringSameCountry(TransitState transitState, Guid? entryPointId, CancellationToken cancellationToken)
         {
             if (entryPointId.HasValue && transitState.CountryId.HasValue)
             {

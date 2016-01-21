@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
 {
+    using System.Threading;
     using System.Threading.Tasks;
     using Domain;
     using FluentValidation;
@@ -30,7 +31,7 @@
                 .WithLocalizedMessage(() => AddressValidatorResources.PostcodeNotEmpty);
         }
 
-        private async Task<bool> BeNotEmptyWhenCountryIsUk(Address address, string postCode)
+        private async Task<bool> BeNotEmptyWhenCountryIsUk(Address address, string postCode, CancellationToken cancellationToken)
         {
             var unitedKingdomId = await repository.GetUnitedKingdomId();
 

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Validate
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Domain;
     using Domain.TransportRoute;
@@ -31,7 +32,7 @@
                 .WithLocalizedMessage(() => StateOfExportValidatorResources.CompetentAuthorityMustBeInSameCountry);
         }
 
-        private async Task<bool> BeInCountry(StateOfExport stateOfExport, Guid? competentAuthorityId)
+        private async Task<bool> BeInCountry(StateOfExport stateOfExport, Guid? competentAuthorityId, CancellationToken cancellationToken)
         {
             if (competentAuthorityId.HasValue && stateOfExport.CountryId.HasValue)
             {
@@ -43,7 +44,7 @@
             return false;
         }
 
-        private async Task<bool> BeInSameCountry(StateOfExport stateOfExport, Guid? exitPointId)
+        private async Task<bool> BeInSameCountry(StateOfExport stateOfExport, Guid? exitPointId, CancellationToken cancellationToken)
         {
             if (exitPointId.HasValue && stateOfExport.CountryId.HasValue)
             {
