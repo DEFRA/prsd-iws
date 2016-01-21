@@ -75,7 +75,7 @@
             {
                 case DecisionType.Consent:
                     return ValidateConsent();
-                case DecisionType.ConsentWithdrawn:
+                case DecisionType.ConsentWithdraw:
                     return ValidateConsentWithdrawn();
                 case DecisionType.Object:
                     return ValidateObject();

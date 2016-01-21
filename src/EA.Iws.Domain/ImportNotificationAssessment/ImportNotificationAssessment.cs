@@ -32,7 +32,7 @@
             {
                 { DecisionType.Consent, Trigger.Consent },
                 { DecisionType.Object, Trigger.Object },
-                { DecisionType.ConsentWithdrawn, Trigger.WithdrawConsent }
+                { DecisionType.ConsentWithdraw, Trigger.WithdrawConsent }
             });
 
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;

@@ -40,7 +40,7 @@
                 case DecisionType.Consent:
                     await PostConsent(id, model);
                     break;
-                case DecisionType.ConsentWithdrawn:
+                case DecisionType.ConsentWithdraw:
                     await PostConsentWithdrawn(id, model);
                     break;
                 case DecisionType.Object:

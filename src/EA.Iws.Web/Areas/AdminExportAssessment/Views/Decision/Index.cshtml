@@ -38,8 +38,8 @@
             @Html.Gds().DropDownListFor(m => m.SelectedDecision, Model.PossibleDecisions, string.Empty, new { id = "decision-select" })
         </div>
 
-        <div id="@Html.Raw("status" + DecisionType.Withdrawn)" class="js-hidden assessment-decision">
-            @Html.Partial("_Withdrawn")
+        <div id="@Html.Raw("status" + DecisionType.Withdraw)" class="js-hidden assessment-decision">
+            @Html.Partial("_Withdraw")
         </div>
 
         <div id="@Html.Raw("status" + DecisionType.Object)" class="js-hidden assessment-decision">
@@ -50,8 +50,8 @@
             @Html.Partial("_Consent")
         </div>
 
-        <div id="@Html.Raw("status" + DecisionType.ConsentWithdrawn)" class="js-hidden assessment-decision">
-            @Html.Partial("_ConsentWithdrawn")
+        <div id="@Html.Raw("status" + DecisionType.ConsentWithdraw)" class="js-hidden assessment-decision">
+            @Html.Partial("_ConsentWithdraw")
         </div>
     }
 

@@ -38,9 +38,9 @@
             = new BidirectionalDictionary<DecisionType, Trigger>(new Dictionary<DecisionType, Trigger>
                 {
                     { DecisionType.Consent, Trigger.Consent },
-                    { DecisionType.Withdrawn, Trigger.Withdraw },
+                    { DecisionType.Withdraw, Trigger.Withdraw },
                     { DecisionType.Object, Trigger.Object },
-                    { DecisionType.ConsentWithdrawn, Trigger.WithdrawConsent }
+                    { DecisionType.ConsentWithdraw, Trigger.WithdrawConsent }
                 });
 
         private readonly StateMachine<NotificationStatus, Trigger> stateMachine;

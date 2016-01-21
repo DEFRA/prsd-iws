@@ -50,13 +50,13 @@
                 case DecisionType.Consent:
                     await PostConsent(model);
                     break;
-                case DecisionType.Withdrawn:
+                case DecisionType.Withdraw:
                     await PostWithdrawn(model);
                     break;
                 case DecisionType.Object:
                     await PostObjection(model);
                     break;
-                    case DecisionType.ConsentWithdrawn:
+                    case DecisionType.ConsentWithdraw:
                     await PostConsentWithdrawn(model);
                     break;
                 default:

@@ -571,7 +571,7 @@
     <Content Include="Areas\AddressBook\Views\Delete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Decision\Index.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Decision\_Withdrawn.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\_Withdraw.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Decision\_Object.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Decision\_Consent.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Decision\_History.cshtml" />
@@ -698,7 +698,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_YCodes.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_UnClasses.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Preconsented.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Decision\_ConsentWithdrawn.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Decision\_ConsentWithdraw.cshtml" />
     <Content Include="Content\iws\_internal-menu.scss" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Create.cshtml" />
@@ -812,7 +812,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_NoAnnexesRequired.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\Index.cshtml" />
-    <Content Include="Areas\AdminImportAssessment\Views\Decision\_ConsentWithdrawn.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Decision\_ConsentWithdraw.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\Confirm.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\Success.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />

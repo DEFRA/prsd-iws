@@ -75,7 +75,7 @@
                 return ValidateConsent();
             }
 
-            if (SelectedDecision == DecisionType.ConsentWithdrawn)
+            if (SelectedDecision == DecisionType.ConsentWithdraw)
             {
                 return ValidateConsentWithdrawn();
             }
@@ -85,7 +85,7 @@
                 return ValidateObject();
             }
 
-            if (SelectedDecision == DecisionType.Withdrawn)
+            if (SelectedDecision == DecisionType.Withdraw)
             {
                 return ValidateWithdrawn();
             }
