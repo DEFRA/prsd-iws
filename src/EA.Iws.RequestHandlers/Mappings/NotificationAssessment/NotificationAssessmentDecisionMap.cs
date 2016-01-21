@@ -15,7 +15,7 @@
                 Status = source.Status,
                 StatusHistory = source.StatusChanges.Select(sc => new NotificationAssessmentDecisionRecord
                 {
-                    Date = sc.ChangeDate,
+                    Date = sc.ChangeDate.UtcDateTime,
                     Status = sc.Status
                 }).ToArray(),
                 AvailableDecisions = source.GetAvailableDecisions()

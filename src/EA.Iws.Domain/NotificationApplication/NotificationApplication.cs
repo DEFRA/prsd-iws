@@ -101,7 +101,7 @@
             }
         }
 
-        public DateTime CreatedDate { get; private set; }
+        public DateTimeOffset CreatedDate { get; private set; }
 
         public IEnumerable<Producer> Producers
         {

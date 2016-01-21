@@ -10,7 +10,7 @@
     {
         private readonly ImportNotificationAssessment assessment;
 
-        private static readonly DateTimeOffset AnyDate = new DateTimeOffset(2016, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        private static readonly DateTime AnyDate = new DateTime(2016, 1, 1, 0, 0, 0);
         private const string AnyString = "bill and ben the flowerpot men";
 
         public ImportNotificationAssessmentTests()

@@ -21,7 +21,7 @@
         public async Task<bool> HandleAsync(RecordRejectionInternal message)
         {
             await rejectMovement.Reject(message.MovementId,
-                new DateTimeOffset(message.RejectedDate, TimeSpan.Zero),
+                message.RejectedDate,
                 message.RejectionReason,
                 message.RejectionFurtherInformation);
 

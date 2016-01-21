@@ -22,7 +22,7 @@
         {
             var assessment = await repository.GetByNotification(message.Id);
 
-            assessment.Object(new DateTimeOffset(message.Date, TimeSpan.Zero), message.ReasonsForObjection);
+            assessment.Object(message.Date, message.ReasonsForObjection);
 
             await context.SaveChangesAsync();
 

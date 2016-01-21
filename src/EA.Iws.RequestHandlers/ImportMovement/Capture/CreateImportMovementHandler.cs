@@ -27,12 +27,11 @@
             var movement =
                 await importMovementFactory.Create(message.NotificationId, 
                 message.Number, 
-                new DateTimeOffset(message.ActualShipmentDate, TimeSpan.Zero));
+                message.ActualShipmentDate);
 
             if (message.PrenotificationDate.HasValue)
             {
-                movement.SetPrenotificationDate(new DateTimeOffset(message.PrenotificationDate.Value, 
-                    TimeSpan.Zero));
+                movement.SetPrenotificationDate(message.PrenotificationDate.Value);
             }
 
             movementRepository.Add(movement);

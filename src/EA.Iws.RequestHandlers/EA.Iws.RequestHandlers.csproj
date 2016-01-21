@@ -553,7 +553,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OperationCodes\AddRecoveryCodesHandler.cs" />
     <Compile Include="Registration\CreateOrganisationHandler.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetDecisionHandler.cs" />
     <Compile Include="Registration\UpdateOrganisationOfUserHandler.cs" />
     <Compile Include="Shared\GetCountriesHandler.cs" />
     <Compile Include="Registration\LinkUserToOrganisationHandler.cs" />

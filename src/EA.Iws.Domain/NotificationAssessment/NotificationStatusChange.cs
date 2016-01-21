@@ -17,13 +17,13 @@
 
             User = user;
             Status = status;
-            ChangeDate = SystemTime.UtcNow;
+            ChangeDate = new DateTimeOffset(SystemTime.UtcNow, TimeSpan.Zero);
         }
 
         public NotificationStatus Status { get; private set; }
 
         public User User { get; private set; }
 
-        public DateTime ChangeDate { get; private set; }
+        public DateTimeOffset ChangeDate { get; private set; }
     }
 }

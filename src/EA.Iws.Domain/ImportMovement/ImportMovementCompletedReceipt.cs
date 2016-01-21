@@ -5,7 +5,7 @@
 
     public class ImportMovementCompletedReceipt : Entity
     {
-        public DateTimeOffset Date { get; private set; }
+        public DateTime Date { get; private set; }
 
         public Guid MovementId { get; private set; }
 
@@ -13,7 +13,7 @@
         {
         }
 
-        internal ImportMovementCompletedReceipt(Guid movementId, DateTimeOffset dateComplete)
+        internal ImportMovementCompletedReceipt(Guid movementId, DateTime dateComplete)
         {
             Date = dateComplete;
             MovementId = movementId;

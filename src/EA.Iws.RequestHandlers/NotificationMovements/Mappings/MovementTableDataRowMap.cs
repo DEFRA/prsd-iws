@@ -16,7 +16,7 @@
                 HasShipped = source.HasShipped,
                 Status = source.Status,
                 SubmittedDate = (source.PrenotificationDate.HasValue) 
-                    ? source.PrenotificationDate.Value.DateTime 
+                    ? source.PrenotificationDate.Value 
                     : (DateTime?)null
             };
 

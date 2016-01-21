@@ -5,6 +5,6 @@
 
     public interface IReceiveImportMovement
     {
-        Task<ImportMovementReceipt> Receive(Guid movementId, ShipmentQuantity quantity, DateTimeOffset date);
+        Task<ImportMovementReceipt> Receive(Guid movementId, ShipmentQuantity quantity, DateTime date);
     }
 }

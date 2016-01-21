@@ -23,7 +23,7 @@
         {
             var assessment = await repository.GetByNotification(message.ImportNotificationId);
 
-            assessment.Acknowledge(new DateTimeOffset(message.Date, TimeSpan.Zero));
+            assessment.Acknowledge(message.Date);
 
             await context.SaveChangesAsync();
 

@@ -273,7 +273,6 @@
     <Compile Include="NotificationConsent\Consent.cs" />
     <Compile Include="NotificationAssessment\INotificationAssessmentRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationDates.cs" />
-    <Compile Include="NotificationAssessment\NotificationDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationStatusChange.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessment.cs" />
     <Compile Include="Events\RegistrationRejectedEvent.cs" />

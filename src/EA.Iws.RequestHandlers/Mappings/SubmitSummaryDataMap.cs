@@ -23,7 +23,7 @@
             {
                 NotificationId = notification.Id,
                 CompetentAuthority = notification.CompetentAuthority.AsCompetentAuthority(),
-                CreatedDate = notification.CreatedDate,
+                CreatedDate = notification.CreatedDate.Date,
                 NotificationNumber = notification.NotificationNumber,
                 Status = status,
             };

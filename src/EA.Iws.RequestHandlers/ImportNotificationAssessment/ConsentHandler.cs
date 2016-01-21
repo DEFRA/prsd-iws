@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotificationAssessment
 {
-    using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
@@ -23,10 +22,9 @@
         public async Task<bool> HandleAsync(Consent message)
         {
             await consentImportNotification.Consent(message.ImportNotificationId,
-                new DateTimeOffsetRange(new DateTimeOffset(message.From, TimeSpan.Zero),
-                    new DateTimeOffset(message.To, TimeSpan.Zero)),
+                new DateRange(message.From, message.To),
                 message.Conditions,
-                new DateTimeOffset(message.Date, TimeSpan.Zero));
+                message.Date);
 
             await context.SaveChangesAsync();
 

@@ -17,7 +17,7 @@ namespace EA.Iws.Domain.ImportMovement
             this.rejectionRepository = rejectionRepository;
         }
 
-        public async Task<ImportMovementRejection> Reject(Guid importMovementId, DateTimeOffset date, string reason, string furtherDetails)
+        public async Task<ImportMovementRejection> Reject(Guid importMovementId, DateTime date, string reason, string furtherDetails)
         {
             var movement = await movementRepository.Get(importMovementId);
 

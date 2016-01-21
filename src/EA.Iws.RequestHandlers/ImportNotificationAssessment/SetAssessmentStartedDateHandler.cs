@@ -22,7 +22,7 @@
         {
             var assessment = await assessmentRepository.GetByNotification(message.ImportNotificationId);
 
-            assessment.BeginAssessment(new DateTimeOffset(message.Date, TimeSpan.Zero), message.NameOfOfficer);
+            assessment.BeginAssessment(message.Date, message.NameOfOfficer);
 
             await context.SaveChangesAsync();
 

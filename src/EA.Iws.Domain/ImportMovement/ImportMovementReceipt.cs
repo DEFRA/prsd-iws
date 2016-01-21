@@ -8,7 +8,7 @@
     {
         public Guid MovementId { get; private set; }
 
-        public DateTimeOffset Date { get; private set; }
+        public DateTime Date { get; private set; }
 
         public decimal Quantity { get; private set; }
 
@@ -18,7 +18,7 @@
         {
         }
 
-        public ImportMovementReceipt(Guid movementId, ShipmentQuantity quantity, DateTimeOffset date)
+        public ImportMovementReceipt(Guid movementId, ShipmentQuantity quantity, DateTime date)
         {
             MovementId = movementId;
             Quantity = quantity.Quantity;

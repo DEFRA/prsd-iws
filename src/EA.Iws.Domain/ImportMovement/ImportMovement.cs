@@ -9,11 +9,11 @@
 
         public int Number { get; private set; }
 
-        public DateTimeOffset ActualShipmentDate { get; private set; }
+        public DateTime ActualShipmentDate { get; private set; }
 
-        public DateTimeOffset? PrenotificationDate { get; private set; }
+        public DateTime? PrenotificationDate { get; private set; }
 
-        internal ImportMovement(Guid notificationId, int number, DateTimeOffset actualDate)
+        internal ImportMovement(Guid notificationId, int number, DateTime actualDate)
         {
             ActualShipmentDate = actualDate;
             NotificationId = notificationId;
@@ -24,27 +24,27 @@
         {
         }
 
-        public void SetActualShipmentDate(DateTimeOffset actualShipmentDate)
+        public void SetActualShipmentDate(DateTime actualShipmentDate)
         {
             ActualShipmentDate = actualShipmentDate;
         }
 
-        public void SetPrenotificationDate(DateTimeOffset prenotificationDate)
+        public void SetPrenotificationDate(DateTime prenotificationDate)
         {
             PrenotificationDate = prenotificationDate;
         }
 
-        public ImportMovementReceipt Receive(ShipmentQuantity quantity, DateTimeOffset date)
+        public ImportMovementReceipt Receive(ShipmentQuantity quantity, DateTime date)
         {
             return new ImportMovementReceipt(Id, quantity, date);
         }
 
-        public ImportMovementRejection Reject(DateTimeOffset date, string reason, string furtherDetails)
+        public ImportMovementRejection Reject(DateTime date, string reason, string furtherDetails)
         {
             return new ImportMovementRejection(Id, date, reason, furtherDetails);
         }
 
-        public ImportMovementCompletedReceipt Complete(DateTimeOffset date)
+        public ImportMovementCompletedReceipt Complete(DateTime date)
         {
             return new ImportMovementCompletedReceipt(Id, date);
         }

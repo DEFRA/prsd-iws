@@ -5,25 +5,25 @@
 
     public class ImportNotificationDates : Entity
     {
-        public DateTimeOffset? NotificationReceivedDate { get; internal set; }
+        public DateTime? NotificationReceivedDate { get; internal set; }
 
-        public DateTimeOffset? PaymentReceivedDate { get; internal set; }
+        public DateTime? PaymentReceivedDate { get; internal set; }
 
-        public DateTimeOffset? AssessmentStartedDate { get; internal set; }
+        public DateTime? AssessmentStartedDate { get; internal set; }
 
         public string NameOfOfficer { get; internal set; }
 
-        public DateTimeOffset? NotificationCompletedDate { get; internal set; }
+        public DateTime? NotificationCompletedDate { get; internal set; }
 
-        public DateTimeOffset? AcknowledgedDate { get; internal set; }
+        public DateTime? AcknowledgedDate { get; internal set; }
 
-        public DateTimeOffset? ConsentedDate { get; internal set; }
+        public DateTime? ConsentedDate { get; internal set; }
 
-        public DateTimeOffset? ConsentWithdrawnDate { get; internal set; }
+        public DateTime? ConsentWithdrawnDate { get; internal set; }
 
         public string ConsentWithdrawnReasons { get; internal set; }
 
-        public DateTimeOffset? ObjectedDate { get; internal set; }
+        public DateTime? ObjectedDate { get; internal set; }
 
         public string ObjectedReason { get; internal set; }
 

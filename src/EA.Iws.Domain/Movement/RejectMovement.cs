@@ -18,7 +18,7 @@
         }
 
         public async Task<MovementRejection> Reject(Guid movementId,
-            DateTimeOffset rejectionDate,
+            DateTime rejectionDate,
             string reason,
             string furtherDetails = null)
         {

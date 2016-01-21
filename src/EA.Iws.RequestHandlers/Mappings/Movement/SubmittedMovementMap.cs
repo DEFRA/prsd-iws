@@ -17,7 +17,7 @@
                 ShipmentDate = source.Date,
                 SubmittedDate = source.StatusChanges
                     .Where(sc => sc.Status == MovementStatus.Submitted)
-                    .Select(sc => sc.ChangeDate)
+                    .Select(sc => sc.ChangeDate.UtcDateTime)
                     .SingleOrDefault()
             };
         }

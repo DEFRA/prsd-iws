@@ -31,7 +31,7 @@
             {
                 var assessment = await assessmentRepository.GetByNotification(notificationId);
 
-                assessment.PaymentComplete(new DateTimeOffset(date, TimeSpan.Zero));
+                assessment.PaymentComplete(date);
             }
         }
     }

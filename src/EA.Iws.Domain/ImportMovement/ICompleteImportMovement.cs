@@ -5,6 +5,6 @@
 
     public interface ICompleteImportMovement
     {
-        Task<ImportMovementCompletedReceipt> Complete(Guid movementId, DateTimeOffset date);
+        Task<ImportMovementCompletedReceipt> Complete(Guid movementId, DateTime date);
     }
 }

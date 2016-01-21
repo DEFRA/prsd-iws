@@ -23,9 +23,9 @@
         }
 
         public async Task Consent(Guid notificationId,
-            DateTimeOffsetRange dateRange,
+            DateRange dateRange,
             string conditions,
-            DateTimeOffset consentedDate)
+            DateTime consentedDate)
         {
             var assessment = await assessmentRepository.GetByNotification(notificationId);
 

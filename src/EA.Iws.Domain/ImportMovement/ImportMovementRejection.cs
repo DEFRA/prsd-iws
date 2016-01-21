@@ -8,7 +8,7 @@
     {
         public Guid MovementId { get; private set; }
 
-        public DateTimeOffset Date { get; private set; }
+        public DateTime Date { get; private set; }
 
         public string Reason { get; private set; }
 
@@ -19,7 +19,7 @@
         }
 
         public ImportMovementRejection(Guid movementId,
-            DateTimeOffset date, 
+            DateTime date, 
             string reason, 
             string furtherDetails)
         {

@@ -38,7 +38,7 @@
             return
                 decisionRequiredByCalculator.Get(
                     facilityCollection.AllFacilitiesPreconsented,
-                    notificationAssessment.Dates.AcknowledgedDate.Value.DateTime,
+                    notificationAssessment.Dates.AcknowledgedDate.Value,
                     notification.CompetentAuthority);
         }
     }

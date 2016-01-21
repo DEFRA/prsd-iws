@@ -22,7 +22,7 @@
 
         public async Task<bool> HandleAsync(RecordReceipt message)
         {
-            await receiveImportMovement.Receive(message.ImportMovementId, new ShipmentQuantity(message.Quantity, message.Unit), new DateTimeOffset(message.Date, TimeSpan.Zero));
+            await receiveImportMovement.Receive(message.ImportMovementId, new ShipmentQuantity(message.Quantity, message.Unit), message.Date);
 
             await context.SaveChangesAsync();
 

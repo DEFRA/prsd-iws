@@ -17,7 +17,7 @@
             this.completedReceiptRepository = completedReceiptRepository;
         }
 
-        public async Task<ImportMovementCompletedReceipt> Complete(Guid movementId, DateTimeOffset date)
+        public async Task<ImportMovementCompletedReceipt> Complete(Guid movementId, DateTime date)
         {
             var movement = await movementRepository.Get(movementId);
 

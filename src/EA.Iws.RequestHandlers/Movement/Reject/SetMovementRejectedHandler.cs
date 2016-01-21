@@ -40,7 +40,7 @@
             var fileId = await fileRepository.Store(file);
 
             var movementRejection = await rejectMovement.Reject(message.MovementId,
-                new DateTimeOffset(message.DateReceived, TimeSpan.Zero),
+                message.DateReceived,
                 message.Reason);
 
             movementRejection.SetFile(fileId);

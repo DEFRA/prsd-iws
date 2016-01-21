@@ -23,7 +23,7 @@
         {
             await
                 completeImportMovement.Complete(message.ImportMovementId,
-                    new DateTimeOffset(message.Date, TimeSpan.Zero));
+                message.Date);
 
             await context.SaveChangesAsync();
 

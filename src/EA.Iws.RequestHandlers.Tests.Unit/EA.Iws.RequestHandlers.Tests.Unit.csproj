@@ -93,7 +93,6 @@
     <Compile Include="Admin\UserAdministration\InternalUserCollection.cs" />
     <Compile Include="Carrier\CarrierHandlerTests.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetDecisionHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
     <Compile Include="ImportNotification\Draft\TransitStateCollectionTests.cs" />

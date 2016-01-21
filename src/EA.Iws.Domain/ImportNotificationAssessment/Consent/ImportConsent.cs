@@ -5,7 +5,7 @@
 
     public class ImportConsent : Entity
     {
-        public DateTimeOffsetRange ConsentRange { get; private set; }
+        public DateRange ConsentRange { get; private set; }
 
         public string Conditions { get; private set; }
 
@@ -17,7 +17,7 @@
         {
         }
 
-        public ImportConsent(Guid notificationId, DateTimeOffsetRange consentRange, string conditions, Guid userId)
+        public ImportConsent(Guid notificationId, DateRange consentRange, string conditions, Guid userId)
         {
             ConsentRange = consentRange;
             Conditions = conditions;

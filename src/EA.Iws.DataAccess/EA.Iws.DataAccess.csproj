@@ -146,7 +146,6 @@
     <Compile Include="Mappings\Exports\MovementReceiptMapping.cs" />
     <Compile Include="Mappings\Exports\NotificationAssessmentMapping.cs" />
     <Compile Include="Mappings\Exports\NotificationDatesMapping.cs" />
-    <Compile Include="Mappings\Exports\NotificationDecisionMapping.cs" />
     <Compile Include="Mappings\Exports\NotificationStatusChangeMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerBusinessMapping.cs" />
     <Compile Include="Mappings\Exports\BusinessMapping.cs" />

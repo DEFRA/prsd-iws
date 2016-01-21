@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
+    using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Movement;
@@ -16,7 +17,7 @@
 
         public async Task HandleAsync(MovementDateChangeEvent @event)
         {
-            var movementDateHistory = new MovementDateHistory(@event.MovementId, @event.PreviousDate);
+            var movementDateHistory = new MovementDateHistory(@event.MovementId, new DateTimeOffset(@event.PreviousDate, TimeSpan.Zero));
 
             context.MovementDateHistories.Add(movementDateHistory);
 

@@ -28,7 +28,7 @@
 
         protected FinancialGuarantee(Guid notificationApplicationId)
         {
-            CreatedDate = SystemTime.UtcNow;
+            CreatedDate = new DateTimeOffset(SystemTime.UtcNow, TimeSpan.Zero);
             NotificationApplicationId = notificationApplicationId;
             StatusChangeCollection = new List<FinancialGuaranteeStatusChange>();
             stateMachine = CreateStateMachine();
@@ -51,7 +51,7 @@
             return returnDate;
         }
 
-        public DateTime CreatedDate { get; private set; }
+        public DateTimeOffset CreatedDate { get; private set; }
 
         public FinancialGuaranteeStatus Status { get; protected set; }
 

@@ -20,8 +20,8 @@
 
         public async Task<bool> HandleAsync(RecordRejection message)
         {
-            var movement = await rejectImportMovement.Reject(message.ImportMovementId, 
-                new DateTimeOffset(message.Date, TimeSpan.Zero), 
+            await rejectImportMovement.Reject(message.ImportMovementId, 
+                message.Date,
                 message.Reason, 
                 message.FurtherDetails);
 

@@ -31,7 +31,7 @@
             return new SubmitSummaryData
             {
                 CompetentAuthority = competentAuthority,
-                CreatedDate = notification.CreatedDate,
+                CreatedDate = notification.CreatedDate.Date,
                 NotificationNumber = notification.NotificationNumber,
                 Status = assessment.Status
             };

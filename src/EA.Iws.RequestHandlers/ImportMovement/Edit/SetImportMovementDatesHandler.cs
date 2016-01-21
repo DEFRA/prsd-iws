@@ -23,11 +23,11 @@
         {
             var movement = await movementRepository.Get(message.MovementId);
 
-            movement.SetActualShipmentDate(new DateTimeOffset(message.ActualShipmentDate, TimeSpan.Zero));
+            movement.SetActualShipmentDate(message.ActualShipmentDate);
 
             if (message.PrenotificationDate.HasValue)
             {
-                movement.SetPrenotificationDate(new DateTimeOffset(message.PrenotificationDate.Value, TimeSpan.Zero));
+                movement.SetPrenotificationDate(message.PrenotificationDate.Value);
             }
 
             await context.SaveChangesAsync();

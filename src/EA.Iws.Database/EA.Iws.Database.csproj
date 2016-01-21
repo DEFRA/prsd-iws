@@ -233,6 +233,8 @@
     <Content Include="scripts\Update\Sprint25\20160115-110800-add-reassessment-status.sql" />
     <Content Include="scripts\Update\Sprint25\20160118-144356-add-export-notification-change-user-table.sql" />
     <Content Include="scripts\Update\Sprint25\20160119-092623-add-consent-withdrawn-columns-for-import-notification.sql" />
+    <Content Include="scripts\Update\Sprint25\20160120-170300-standardise-date-storage.sql" />
+    <Content Include="scripts\Update\Sprint25\20160120-172500-remove-notification-decision.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

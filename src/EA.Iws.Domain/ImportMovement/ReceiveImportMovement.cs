@@ -16,7 +16,7 @@
             this.receiptRepository = receiptRepository;
         }
 
-        public async Task<ImportMovementReceipt> Receive(Guid movementId, ShipmentQuantity quantity, DateTimeOffset date)
+        public async Task<ImportMovementReceipt> Receive(Guid movementId, ShipmentQuantity quantity, DateTime date)
         {
             var movement = await movementRepository.Get(movementId);
 

@@ -10,8 +10,8 @@
         {
             return new DateHistory
             {
-                DateChanged = source.DateChanged,
-                PreviousDate = source.PreviousDate
+                DateChanged = source.DateChanged.Date,
+                PreviousDate = source.PreviousDate.Date
             };
         }
     }

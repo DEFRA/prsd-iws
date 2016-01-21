@@ -89,7 +89,7 @@
 
         public Guid? FileId { get; private set; }
 
-        public DateTimeOffset? PrenotificationDate { get; private set; }
+        public DateTime? PrenotificationDate { get; private set; }
 
         public bool HasShipped
         {
@@ -181,10 +181,10 @@
 
         private void OnInternallySubmitted(DateTime prenotificationDate)
         {
-            PrenotificationDate = new DateTimeOffset(prenotificationDate);
+            PrenotificationDate = prenotificationDate;
         }
 
-        internal MovementRejection Reject(DateTimeOffset dateReceived,
+        internal MovementRejection Reject(DateTime dateReceived,
             string reason,
             string furtherDetails)
         {

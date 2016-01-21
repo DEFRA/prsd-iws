@@ -6,7 +6,7 @@
     public interface IRejectMovement
     {
         Task<MovementRejection> Reject(Guid movementId,
-            DateTimeOffset rejectionDate,
+            DateTime rejectionDate,
             string reason,
             string furtherDetails = null);
     }

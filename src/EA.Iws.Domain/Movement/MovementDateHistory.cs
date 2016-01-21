@@ -7,21 +7,21 @@
     public class MovementDateHistory : Entity
     {
         public Guid MovementId { get; private set; }
-        public DateTime PreviousDate { get; private set; }
-        public DateTime DateChanged { get; private set; }
+        public DateTimeOffset PreviousDate { get; private set; }
+        public DateTimeOffset DateChanged { get; private set; }
 
         protected MovementDateHistory()
         {
         }
 
-        public MovementDateHistory(Guid movementId, DateTime previousDate)
+        public MovementDateHistory(Guid movementId, DateTimeOffset previousDate)
         {
             Guard.ArgumentNotDefaultValue(() => movementId, movementId);
             Guard.ArgumentNotDefaultValue(() => previousDate, previousDate);
 
             MovementId = movementId;
             PreviousDate = previousDate;
-            DateChanged = SystemTime.UtcNow;
+            DateChanged = new DateTimeOffset(SystemTime.UtcNow, TimeSpan.Zero);
         }
     }
 }

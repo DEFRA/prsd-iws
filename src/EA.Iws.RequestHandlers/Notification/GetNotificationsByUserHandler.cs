@@ -46,10 +46,10 @@
                         NotificationNumber = n.Notification.NotificationNumber,
                         StatusDate =
                             n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault() == null
-                                ? n.Notification.CreatedDate
+                                ? n.Notification.CreatedDate.UtcDateTime
                                 : n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate)
                                     .FirstOrDefault()
-                                    .ChangeDate,
+                                    .ChangeDate.UtcDateTime,
                         Status = n.Assessment.Status,
                         Exporter = n.Exporter == null ? null : n.Exporter.Business.Name,
                         Importer = n.Importer == null ? null : n.Importer.Business.Name,

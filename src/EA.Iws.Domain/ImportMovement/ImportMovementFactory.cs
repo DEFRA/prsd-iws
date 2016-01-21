@@ -15,7 +15,7 @@
             this.numberValidator = numberValidator;
         }
 
-        public async Task<ImportMovement> Create(Guid notificationId, int number, DateTimeOffset actualShipmentDate)
+        public async Task<ImportMovement> Create(Guid notificationId, int number, DateTime actualShipmentDate)
         {
             if (!await numberValidator.Validate(notificationId, number))
             {

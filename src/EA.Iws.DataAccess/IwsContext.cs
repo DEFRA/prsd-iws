@@ -56,8 +56,6 @@
 
         public virtual DbSet<NotificationAssessment> NotificationAssessments { get; set; }
 
-        public virtual DbSet<NotificationDecision> NotificationDecisions { get; set; }
-
         public virtual DbSet<FinancialGuarantee> FinancialGuarantees { get; set; }
 
         public virtual DbSet<BankHoliday> BankHolidays { get; set; }

@@ -26,7 +26,7 @@
 
             return previousDates
                 .OrderBy(d => d.DateChanged)
-                .Select(d => d.PreviousDate)
+                .Select(d => d.PreviousDate.Date)
                 .First();
         }
     }
