@@ -39,7 +39,7 @@
         private async Task UpdateCharge(Guid notificationApplicationId)
         {
             var notification = await notificationRepository.GetById(notificationApplicationId);
-            var charge = await chargeCalculator.GetValue(notificationApplicationId);
+            var charge = await chargeCalculator.GetCalculatedValue(notificationApplicationId);
 
             notification.SetCharge(charge);
 
