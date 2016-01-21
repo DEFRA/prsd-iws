@@ -124,10 +124,10 @@
     <value>The percentage (%) must be between 0 and 100</value>
   </data>
   <data name="PercentageRecoverable" xml:space="preserve">
-    <value>Please enter the percentage (%) of recoverable material</value>
+    <value>Please enter this amount as a percentage</value>
   </data>
   <data name="PercentageRecoverableValid" xml:space="preserve">
-    <value>The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places.  Please enter a number only, % symbol is not required.</value>
+    <value>The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places. Please ensure your number doesn't include any special characters like %, &lt; or £.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Percentage Recoverable</value>
