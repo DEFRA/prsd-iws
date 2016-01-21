@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.Movement.Reject
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]
     public class SetMovementRejected : IRequest<Guid>
     {
         public SetMovementRejected(Guid movementId, DateTime dateReceived, string reason, byte[] fileBytes,

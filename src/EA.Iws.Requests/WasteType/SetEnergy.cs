@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.WasteType
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetEnergy : IRequest<Guid>
     {
         public SetEnergy(string energyInformation, Guid notificationId)

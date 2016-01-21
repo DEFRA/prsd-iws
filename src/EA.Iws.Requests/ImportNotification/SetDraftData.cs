@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.ImportNotification
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotification)]
     public class SetDraftData<TData> : IRequest<bool>
     {
         public SetDraftData(Guid importNotificationId, TData data)

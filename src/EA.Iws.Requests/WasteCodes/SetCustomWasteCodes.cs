@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.WasteCodes
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetCustomWasteCodes : IRequest<Guid>
     {
         public SetCustomWasteCodes(Guid notificationId,

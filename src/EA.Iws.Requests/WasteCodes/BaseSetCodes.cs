@@ -3,8 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public abstract class BaseSetCodes : IRequest<bool>
     {
         public Guid Id { get; private set; }

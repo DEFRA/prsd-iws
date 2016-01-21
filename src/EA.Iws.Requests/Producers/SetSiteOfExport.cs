@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.Producers
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetSiteOfExport : IRequest<Guid>
     {
         public SetSiteOfExport(Guid producerId, Guid notificationId)

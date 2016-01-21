@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.Admin.NotificationAssessment
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotificationAssessment)]
     public class SetNotificationCompleteDate : IRequest<bool>
     {
         public SetNotificationCompleteDate(Guid notificationId, DateTime notificationCompleteDate)

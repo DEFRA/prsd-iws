@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Requests.Movement.Receive
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.Shared;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovementsInternal)]
     public class RecordReceiptInternal : IRequest<bool>
     {
         public Guid MovementId { get; private set; }

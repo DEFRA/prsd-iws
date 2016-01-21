@@ -6,6 +6,16 @@
 
         public const string CanEditExportNotification = "Can Edit Export Notification";
 
+        public const string CanSubmitExportNotification = "Can Submit Export Notification";
+
+        public const string CanChangeExportNotificationOwner = "Can Change Export Notification Owner";
+
         public const string CanReadExportNotification = "Can Read Export Notification";
+
+        public const string CanReadExportNotificationInternal = "Can Read Export Notification Internal";
+
+        public const string CanReadExportNotificationAssessment = "Can Read Export Notification Assessment";
+
+        public const string CanEditExportNotificationAssessment = "Can Edit Export Notification Assessment";
     }
 }

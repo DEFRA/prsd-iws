@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.NotificationAssessment
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotificationAssessment)]
     public class ConsentNotificationApplication : IRequest<bool>
     {
         public Guid NotificationId { get; set; }

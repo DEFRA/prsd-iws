@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.TransitState
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetTransitStateForNotification : IRequest<Guid>
     {
         public Guid? TransitStateId { get; private set; }

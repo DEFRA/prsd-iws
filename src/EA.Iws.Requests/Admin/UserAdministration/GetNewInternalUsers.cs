@@ -2,9 +2,12 @@
 {
     using System.Collections.Generic;
     using Core.Admin;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    public class GetNewInternalUsers : IRequest<IList<InternalUserData>> 
+    [RequestAuthorization(UserAdministrationPermissions.CanReadInternalUserData)]
+    public class GetNewInternalUsers : IRequest<IList<InternalUserData>>
     {
     }
 }

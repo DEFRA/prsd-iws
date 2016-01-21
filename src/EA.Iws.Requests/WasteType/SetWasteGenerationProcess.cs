@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.WasteType
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetWasteGenerationProcess : IRequest<Guid>
     {
         public SetWasteGenerationProcess(string process, Guid notificationId, bool isDocumentAttached)

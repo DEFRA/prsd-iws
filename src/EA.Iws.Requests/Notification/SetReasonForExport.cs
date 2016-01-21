@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetReasonForExport : IRequest<string>
     {
         public SetReasonForExport(Guid notificationId, string reasonForExport)

@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Requests.Movement.Edit
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.Movement;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]
     public class IsProposedUpdatedMovementDateValid : IRequest<ProposedUpdatedMovementDateResponse>
     {
         public Guid MovementId { get; private set; }

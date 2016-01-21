@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.Movement.Receive
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]
     public class SaveCertificateOfReceiptFile : IRequest<Guid>
     {
         public SaveCertificateOfReceiptFile(Guid movementId, byte[] certificateBytes, string fileType)

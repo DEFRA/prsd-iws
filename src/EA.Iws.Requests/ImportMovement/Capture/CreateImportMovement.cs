@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.ImportMovement.Capture
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ImportMovementPermissions.CanCreateImportMovements)]
     public class CreateImportMovement : IRequest<Guid>
     {
         public Guid NotificationId { get; private set; }

@@ -2,11 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.PackagingType;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetPackagingInfoForNotification : IRequest<Guid>
     {
         public SetPackagingInfoForNotification(List<PackagingType> packagingTypes, Guid notificationId, string otherDescription)

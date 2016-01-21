@@ -12,20 +12,20 @@
 
     public class RequestAuthorizationAttributeTests
     {
-        [Fact(Skip = "Not yet tagged all requests")]
+        [Fact]
         public void AllRequestsRequireAuthorizationAttribute()
         {
             var unattributedRequests = typeof(CreateNotificationApplication)
                 .Assembly
                 .GetTypes()
-                .Where(TypeImplementsRequestInterface)
+                .Where(TypeImplementsIRequest)
                 .Where(t => t.GetCustomAttribute<RequestAuthorizationAttribute>() == null);
 
             var message = string.Empty;
 
             if (unattributedRequests.Any())
             {
-                message = unattributedRequests.Count() + " request" + 
+                message = unattributedRequests.Count() + " request" +
                     (unattributedRequests.Count() != 1 ? "s" : string.Empty) +
                     " without [RequestAuthorizationAttribute]:\n" +
                     unattributedRequests.Select(request => request.FullName)
@@ -66,16 +66,21 @@
             Assert.False(missingPermissions.Any(), message);
         }
 
-        private bool TypeImplementsRequestInterface(Type type)
+        private bool TypeImplementsIRequest(Type type)
         {
             foreach (var i in type.GetInterfaces())
             {
-                if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRequest<>))
+                if (TypeIsIRequest(i))
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private bool TypeIsIRequest(Type type)
+        {
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IRequest<>);
         }
     }
 }

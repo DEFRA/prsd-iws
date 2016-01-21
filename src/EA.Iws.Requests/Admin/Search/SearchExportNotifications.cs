@@ -2,8 +2,11 @@
 {
     using System.Collections.Generic;
     using Core.Admin.Search;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(GeneralPermissions.CanViewSearchResults)]
     public class SearchExportNotifications : IRequest<IList<BasicSearchResult>>
     {
         public string SearchTerm { get; set; }

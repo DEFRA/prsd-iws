@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.NotificationMovements
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovements)]
     public class GetWorkingDaysUntil : IRequest<int>
     {
         public DateTime Date { get; private set; }

@@ -2,11 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.WasteType;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class UpdateWasteType : IRequest<Guid>
     {
         public UpdateWasteType(Guid notificationId, ChemicalCompositionType chemicalCompositionType,

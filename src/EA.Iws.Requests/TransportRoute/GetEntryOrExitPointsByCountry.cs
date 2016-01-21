@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.TransportRoute;
     using Prsd.Core.Mediator;
-    using Prsd.Core.Security;
 
-    [AllowUnauthorizedUser]
+    [RequestAuthorization(GeneralPermissions.CanReadCountryData)]
     public class GetEntryOrExitPointsByCountry : IRequest<IList<EntryOrExitPointData>>
     {
         public Guid CountryId { get; private set; }

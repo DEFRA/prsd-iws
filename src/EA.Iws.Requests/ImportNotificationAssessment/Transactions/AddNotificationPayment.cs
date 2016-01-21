@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.ImportNotificationAssessment.Transactions
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotificationAssessment)]
     public class AddNotificationPayment : IRequest<bool>
     {
         public Guid ImportNotificationId { get; private set; }

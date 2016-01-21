@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Requests.Admin.UserAdministration
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.Notification;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(UserAdministrationPermissions.CanCreateInternalUser)]
     public class CreateInternalUser : IRequest<Guid>
     {
         public CreateInternalUser(string userId, string jobTitle, Guid localAreaId,

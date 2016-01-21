@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.CustomsOffice
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetEntryCustomsOfficeForNotificationById : IRequest<CustomsOfficeCompletionStatus>
     {
         public Guid Id { get; private set; }

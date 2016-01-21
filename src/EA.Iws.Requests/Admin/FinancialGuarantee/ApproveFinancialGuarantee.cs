@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.Admin.FinancialGuarantee
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core;
 
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotificationAssessment)]
     public class ApproveFinancialGuarantee : FinancialGuaranteeDecisionRequest
     {
         public DateTime ApprovedFrom { get; private set; }

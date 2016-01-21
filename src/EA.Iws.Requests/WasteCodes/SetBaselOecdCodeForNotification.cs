@@ -1,11 +1,14 @@
 ﻿namespace EA.Iws.Requests.WasteCodes
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.WasteCodes;
     using Prsd.Core.Mediator;
     using Security;
 
     [NotificationReadOnlyAuthorize]
+    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetBaselOecdCodeForNotification : IRequest<bool>
     {
         public Guid Id { get; private set; }

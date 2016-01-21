@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.ImportNotificationAssessment
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotificationAssessment)]
     public class ObjectToImportNotification : IRequest<bool>
     {
         public string ReasonsForObjection { get; private set; }

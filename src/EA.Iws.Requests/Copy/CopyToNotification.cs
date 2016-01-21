@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Requests.Copy
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
+    [RequestAuthorization(ExportNotificationPermissions.CanCreateExportNotification)]
     public class CopyToNotification : IRequest<Guid>
     {
         public Guid SourceId { get; private set; }
