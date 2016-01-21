@@ -219,4 +219,7 @@
   <data name="GenerateInterimDoc" xml:space="preserve">
     <value>Download an interim movement document</value>
   </data>
+  <data name="NoShipmentOptionsText" xml:space="preserve">
+    <value>You can start creating shipments once your notification has been consented and your financial guarantee is approved.</value>
+  </data>
 </root>

@@ -178,6 +178,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can start creating shipments once your notification has been consented and your financial guarantee is approved..
+        /// </summary>
+        public static string NoShipmentOptionsText {
+            get {
+                return ResourceManager.GetString("NoShipmentOptionsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of shipments used:.
         /// </summary>
         public static string NumberUsed {
