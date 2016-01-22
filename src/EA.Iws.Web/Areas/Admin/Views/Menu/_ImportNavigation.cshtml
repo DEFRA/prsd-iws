@@ -1,5 +1,8 @@
-﻿@using EA.Iws.Core.Shared
+﻿@using EA.Iws.Core.ImportNotificationAssessment
+@using EA.Iws.Core.Shared
+
 @model EA.Iws.Web.Areas.Admin.ViewModels.Menu.ImportNavigationViewModel
+
 @{
     var id = Model.Details.ImportNotificationId;
 }
@@ -61,16 +64,19 @@
             </ul>
         </li>
 
-        <li class="@GetClassForSection(ImportNavigationSection.Shipments, "active")">
-            <h3 class="@GetClassForSection(ImportNavigationSection.Shipments, "current")">
-                <span></span>
-                Shipments
-            </h3>
-            <ul>
-                <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
-                <li>@Html.ActionLink("Record shipment data", "Index", "Capture", new { area = "AdminImportNotificationMovements", id }, null)</li>
-            </ul>
-        </li>
+        @if (Model.Details.Status == ImportNotificationStatus.Consented || Model.Details.Status == ImportNotificationStatus.ConsentWithdrawn)
+        {
+            <li class="@GetClassForSection(ImportNavigationSection.Shipments, "active")">
+                <h3 class="@GetClassForSection(ImportNavigationSection.Shipments, "current")">
+                    <span></span>
+                    Shipments
+                </h3>
+                <ul>
+                    <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                    <li>@Html.ActionLink("Record shipment data", "Index", "Capture", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                </ul>
+            </li>
+        }
 
         <li class="">
             <h3 class="">
