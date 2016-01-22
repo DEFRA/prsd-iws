@@ -1,33 +1,45 @@
 ﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Facility.IndexResources
-@model IList<EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.FacilityViewModel>
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.MultipleFacilitiesViewModel
 
 @{
     ViewBag.Title = Resource.TabTitle;
+    var addLinkText = string.Empty;
 }
 
-<h1 class="heading-large">@string.Format(Resource.Title, ViewBag.Type.ToString())</h1>
+<h1 class="heading-large">@string.Format(Resource.Title, Model.NotificationType.ToString().ToLower())</h1>
 
-@using (Html.BeginForm("Index", "Facility", FormMethod.Post, new { @class = "form" }))
+@if (Model.Facilities.Any())
 {
-    <div class="ajax-target">
-        @Html.Partial("_FacilityTable", Model)
+    using (Html.BeginForm())
+    {
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.NotificationType)
+        
+        <div>
+            @Html.Partial("_FacilityTable", Model)
+        </div>
+
+        addLinkText = string.Format(Resource.AddAnotherLink, Model.NotificationType.ToString().ToLower());
+        <div class="form-group">
+            @Html.ActionLink(addLinkText, "Add", "Facility")
+        </div>
+
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    }
+}
+else
+{
+    <div class="form-group">
+        <h2 class="heading-small">@Resource.NoFacilitiesText</h2>
+    </div>
+
+    addLinkText = string.Format(Resource.AddMoreButton, Model.NotificationType.ToString().ToLower());
+    <div class="form-group">
+        @Html.ActionLink(addLinkText, "Add", "Facility")
     </div>
 
     <div class="form-group">
-        <button class="link-submit" onclick="addPost(event)">@string.Format(Resource.AddMoreButton, ViewBag.Type.ToString().ToLower())</button>
+        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Shipment", null, new { @class = "button" })
     </div>
-
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
-}
-
-@section scripts{
-    <script>
-        function addPost(event) {
-            postAjax('@Url.Action("Add")', event, ".form", onAdd);
-        }
-
-        function deletePost(event) {
-            postAjax('@Url.Action("Delete")' + "?deleteId=" + event.target.value, event, ".form", onSuccess);
-        }
-    </script>
 }

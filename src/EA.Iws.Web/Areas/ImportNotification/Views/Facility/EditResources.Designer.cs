@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class EditResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal EditResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.Facility.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.Facility.EditResources", typeof(EditResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,43 +61,34 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add another {0} facility.
+        ///   Looks up a localized string similar to Limited Company.
         /// </summary>
-        public static string AddAnotherLink {
+        public static string LimitedCompanyLabel {
             get {
-                return ResourceManager.GetString("AddAnotherLink", resourceCulture);
+                return ResourceManager.GetString("LimitedCompanyLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a {0} facility.
+        ///   Looks up a localized string similar to Organisation.
         /// </summary>
-        public static string AddMoreButton {
+        public static string OrganisationHeading {
             get {
-                return ResourceManager.GetString("AddMoreButton", resourceCulture);
+                return ResourceManager.GetString("OrganisationHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a {0} facility.
+        ///   Looks up a localized string similar to Other.
         /// </summary>
-        public static string AddPageTitle {
+        public static string OtherLabel {
             get {
-                return ResourceManager.GetString("AddPageTitle", resourceCulture);
+                return ResourceManager.GetString("OtherLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No facilities have been entered.
-        /// </summary>
-        public static string NoFacilitiesText {
-            get {
-                return ResourceManager.GetString("NoFacilitiesText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Facilities.
+        ///   Looks up a localized string similar to Edit a facility.
         /// </summary>
         public static string TabTitle {
             get {
@@ -106,7 +97,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Details of the {0} facilities.
+        ///   Looks up a localized string similar to Edit facility.
         /// </summary>
         public static string Title {
             get {

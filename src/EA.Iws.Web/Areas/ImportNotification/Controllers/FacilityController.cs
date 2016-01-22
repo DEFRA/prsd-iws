@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -25,137 +24,143 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
-
-            var countries = await mediator.SendAsync(new GetCountries());
             var details = await mediator.SendAsync(new GetNotificationDetails(id));
 
-            ViewBag.Type = details.NotificationType;
-
-            return View(facilityCollection.Facilities.Select(f =>
+            var model = new MultipleFacilitiesViewModel
             {
-                var model = new FacilityViewModel(f);
-                model.Address.Countries = countries;
-                model.NotificationType = details.NotificationType;
-                return model;
-            }).ToList());
+                NotificationId = details.ImportNotificationId,
+                NotificationType = details.NotificationType,
+                Facilities = facilityCollection.Facilities
+            };
+            
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, List<FacilityViewModel> model)
+        public async Task<ActionResult> Index(Guid id, MultipleFacilitiesViewModel model)
         {
-            if (model == null)
+            var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
+
+            foreach (var f in facilityCollection.Facilities)
             {
-                model = new List<FacilityViewModel>();
+                f.IsActualSite = f.Id == model.SelectedSiteOfTreatment;
             }
-
-            if (!ModelState.IsValid)
-            {
-                await BindCountries(model);
-                await BindNotificationType(id, model);
-
-                return View(model);
-            }
-
-            var facilityCollection = new FacilityCollection
-            {
-                Facilities = model.Select(f => new Facility(id)
-                {
-                    Address = f.Address.AsAddress(),
-                    BusinessName = f.BusinessName,
-                    Contact = f.Contact.AsContact(),
-                    RegistrationNumber = f.RegistrationNumber,
-                    Id = f.Id,
-                    Type = f.Type,
-                    IsActualSite = f.IsActualSite
-                }).ToList()
-            };
 
             await mediator.SendAsync(new SetDraftData<FacilityCollection>(id, facilityCollection));
 
             return RedirectToAction("Index", "Shipment");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(Guid id, List<FacilityViewModel> model)
+            
+        [HttpGet]
+        public async Task<ActionResult> Add(Guid id)
         {
-            ClearModelState();
-
-            if (model == null)
+            var model = new FacilityViewModel
             {
-                model = new List<FacilityViewModel>();
-            }
+                Address = { Countries = await mediator.SendAsync(new GetCountries()) }
+            };
 
-            model.Add(new FacilityViewModel());
+            model.DefaultUkIfUnselected(model.Address.Countries);
 
-            await BindCountries(model);
-
-            await BindNotificationType(id, model);
-
-            return PartialView("_FacilityTable", model);
-        }
-
-        private async Task BindNotificationType(Guid id, List<FacilityViewModel> model)
-        {
-            var details = await mediator.SendAsync(new GetNotificationDetails(id));
-
-            ViewBag.Type = details.NotificationType;
-
-            if (model == null)
-            {
-                return;
-            }
-
-            foreach (var facilityViewModel in model)
-            {
-                facilityViewModel.NotificationType = details.NotificationType;
-            }
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(Guid id, List<FacilityViewModel> model, Guid? deleteId)
+        public async Task<ActionResult> Add(Guid id, FacilityViewModel model)
         {
-            ClearModelState();
-
-            if (model == null)
+            if (!ModelState.IsValid)
             {
-                model = new List<FacilityViewModel>();
+                return View(model);
             }
 
-            var facility = model.SingleOrDefault(f => f.Id == deleteId.GetValueOrDefault());
+            var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
 
-            if (facility != null)
+            var newFacility = new Facility(id)
             {
-                model.Remove(facility);
-            }
+                Address = model.Address.AsAddress(),
+                BusinessName = model.BusinessName,
+                Contact = model.Contact.AsContact(),
+                RegistrationNumber = model.RegistrationNumber,
+                Type = model.Type,
+                Id = Guid.NewGuid(),
+                IsActualSite = model.IsActualSite
+            };
 
-            await BindCountries(model);
+            facilityCollection.Facilities.Add(newFacility);
 
-            await BindNotificationType(id, model);
+            await mediator.SendAsync(new SetDraftData<FacilityCollection>(id, facilityCollection));
 
-            return PartialView("_FacilityTable", model);
+            return RedirectToAction("Index");
         }
 
-        private async Task BindCountries(List<FacilityViewModel> models)
+        [HttpGet]
+        public async Task<ActionResult> Remove(Guid id, Guid? facilityId)
         {
-            var countries = await mediator.SendAsync(new GetCountries());
+            var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
+            var facilityToRemove = facilityCollection.Facilities.SingleOrDefault(f => f.Id == facilityId.GetValueOrDefault());
 
-            foreach (var model in models)
+            if (facilityToRemove != null)
             {
-                model.Address.Countries = countries;
-                model.DefaultUkIfUnselected(countries);
+                facilityCollection.Facilities.Remove(facilityToRemove);
             }
+
+            await mediator.SendAsync(new SetDraftData<FacilityCollection>(id, facilityCollection));
+
+            return RedirectToAction("Index");
         }
 
-        private void ClearModelState()
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id, Guid? facilityId)
         {
-            var keys = ModelState.Keys.ToArray();
-            foreach (var key in keys)
+            var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
+            var facilityToEdit = facilityCollection.Facilities.SingleOrDefault(f => f.Id == facilityId.GetValueOrDefault());
+            
+            if (facilityToEdit == null)
             {
-                ModelState.Remove(key);
+                return RedirectToAction("index");
             }
+
+            var model = new FacilityViewModel(facilityToEdit);
+            model.Address.Countries = await mediator.SendAsync(new GetCountries());
+            model.DefaultUkIfUnselected(model.Address.Countries);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(Guid id, FacilityViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
+            var facilityToEdit = facilityCollection.Facilities.SingleOrDefault(f => f.Id == model.FacilityId);
+
+            if (facilityToEdit != null)
+            {
+                facilityCollection.Facilities.Remove(facilityToEdit);
+
+                var newFacility = new Facility(id)
+                {
+                    Address = model.Address.AsAddress(),
+                    BusinessName = model.BusinessName,
+                    Contact = model.Contact.AsContact(),
+                    RegistrationNumber = model.RegistrationNumber,
+                    Type = model.Type,
+                    Id = model.FacilityId,
+                    IsActualSite = model.IsActualSite
+                };
+
+                facilityCollection.Facilities.Add(newFacility);
+
+                await mediator.SendAsync(new SetDraftData<FacilityCollection>(id, facilityCollection));
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

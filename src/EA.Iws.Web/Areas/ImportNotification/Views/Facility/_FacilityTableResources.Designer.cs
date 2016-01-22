@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class _FacilityTableResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal _FacilityTableResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.Facility.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.Facility._FacilityTableResources", typeof(_FacilityTableResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,52 +61,88 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add another {0} facility.
+        ///   Looks up a localized string similar to Add facility.
         /// </summary>
-        public static string AddAnotherLink {
+        public static string AddFacility {
             get {
-                return ResourceManager.GetString("AddAnotherLink", resourceCulture);
+                return ResourceManager.GetString("AddFacility", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a {0} facility.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
-        public static string AddMoreButton {
+        public static string Edit {
             get {
-                return ResourceManager.GetString("AddMoreButton", resourceCulture);
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a {0} facility.
+        ///   Looks up a localized string similar to {0} facilities.
         /// </summary>
-        public static string AddPageTitle {
+        public static string Header {
             get {
-                return ResourceManager.GetString("AddPageTitle", resourceCulture);
+                return ResourceManager.GetString("Header", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No facilities have been entered.
+        ///   Looks up a localized string similar to Add details of the {0} facilities..
         /// </summary>
-        public static string NoFacilitiesText {
+        public static string HeaderDescription {
             get {
-                return ResourceManager.GetString("NoFacilitiesText", resourceCulture);
+                return ResourceManager.GetString("HeaderDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Facilities.
+        ///   Looks up a localized string similar to Remove.
         /// </summary>
-        public static string TabTitle {
+        public static string Remove {
             get {
-                return ResourceManager.GetString("TabTitle", resourceCulture);
+                return ResourceManager.GetString("Remove", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Details of the {0} facilities.
+        ///   Looks up a localized string similar to List of facilities.
+        /// </summary>
+        public static string TableTitle {
+            get {
+                return ResourceManager.GetString("TableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual&lt;br/&gt;site of&lt;br/&gt;{0}.
+        /// </summary>
+        public static string ThActualSite {
+            get {
+                return ResourceManager.GetString("ThActualSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string ThAddress {
+            get {
+                return ResourceManager.GetString("ThAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organisation name.
+        /// </summary>
+        public static string ThOrgName {
+            get {
+                return ResourceManager.GetString("ThOrgName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List Facilities.
         /// </summary>
         public static string Title {
             get {

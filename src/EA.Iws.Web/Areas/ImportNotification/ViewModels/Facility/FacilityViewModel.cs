@@ -10,7 +10,7 @@
 
     public class FacilityViewModel
     {
-        public Guid Id { get; set; }
+        public Guid FacilityId { get; set; }
 
         public AddressViewModel Address { get; set; }
 
@@ -36,14 +36,14 @@
 
         public FacilityViewModel()
         {
-            Id = Guid.NewGuid();
+            FacilityId = Guid.NewGuid();
             Address = new AddressViewModel();
             Contact = new ContactViewModel();
         }
 
         public FacilityViewModel(Facility facility)
         {
-            Id = facility.Id;
+            FacilityId = facility.Id;
             Address = new AddressViewModel(facility.Address);
             BusinessName = facility.BusinessName;
             Contact = new ContactViewModel(facility.Contact);

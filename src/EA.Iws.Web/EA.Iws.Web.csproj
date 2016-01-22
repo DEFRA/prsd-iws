@@ -369,6 +369,8 @@
     <Content Include="Content\govuk_toolkit\images\separator.png" />
     <Content Include="Content\iws\_entry-or-exit-point.scss" />
     <Content Include="Content\iws\_notification-switcher.scss" />
+    <Content Include="Areas\ImportNotification\Views\Facility\Add.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\Facility\Edit.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1304,12 +1306,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExporterViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Facility\AddFacilityViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Facility\FacilityViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Facility\FacilityViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FacilityViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Home\SummaryTableContainerViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Importer\ImporterViewModelResources.Designer.cs">
@@ -1390,10 +1394,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Facility\AddResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Facility\EditResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ImportNotification\Views\Facility\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Facility\_FacilityTableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_FacilityTableResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\Home\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2760,9 +2779,21 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Facility\AddResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Facility\EditResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Facility\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Facility\_FacilityTableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_FacilityTableResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
