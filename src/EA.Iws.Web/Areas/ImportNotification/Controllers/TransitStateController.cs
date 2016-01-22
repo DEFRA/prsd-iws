@@ -87,7 +87,7 @@
         public async Task<ActionResult> GetCompetentAuthoritiesAndEntryOrExitPoints(Guid countryId)
         {
             var lookupData =
-                await mediator.SendAsync(new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(countryId));
+                await mediator.SendAsync(new GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(countryId));
 
             var model = new TransitStateViewModel
             {
@@ -128,7 +128,7 @@
                 var lookupData =
                     await
                         mediator.SendAsync(
-                            new GetCompetentAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+                            new GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
 
                 model.CompetentAuthorities = lookupData.CompetentAuthorities;
                 model.EntryOrExitPoints = lookupData.EntryOrExitPoints;
