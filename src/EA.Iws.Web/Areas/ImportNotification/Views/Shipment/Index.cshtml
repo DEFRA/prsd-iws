@@ -31,14 +31,16 @@
         </div>
     </div>
 
-    <h2 class="heading-small">@IndexResources.IntendedDatesHeading</h2>
+    <p>@IndexResources.IntendedDatesHeading</p>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDate)">
         <div class="grid-row">
             <div class="column-half">
+                <label>@Html.DisplayNameFor(m => m.StartDate)</label>
                 @Html.EditorFor(m => m.StartDate)
             </div>
             <div class="column-half">
+                <label>@Html.DisplayNameFor(m => m.EndDate)</label>
                 @Html.EditorFor(m => m.EndDate)
             </div>
         </div>

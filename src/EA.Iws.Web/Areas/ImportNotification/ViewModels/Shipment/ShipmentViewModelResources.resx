@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EndDateDisplay" xml:space="preserve">
+    <value>Last departure</value>
+  </data>
   <data name="NumberOfShipments" xml:space="preserve">
     <value>Number of shipments</value>
+  </data>
+  <data name="StartDateDisplay" xml:space="preserve">
+    <value>First departure</value>
   </data>
   <data name="TotalIntendedQuantity" xml:space="preserve">
     <value>Total intended quantity</value>

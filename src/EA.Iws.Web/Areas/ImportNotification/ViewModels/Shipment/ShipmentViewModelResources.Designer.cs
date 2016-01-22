@@ -62,11 +62,29 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shipment {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last departure.
+        /// </summary>
+        public static string EndDateDisplay {
+            get {
+                return ResourceManager.GetString("EndDateDisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of shipments.
         /// </summary>
         public static string NumberOfShipments {
             get {
                 return ResourceManager.GetString("NumberOfShipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First departure.
+        /// </summary>
+        public static string StartDateDisplay {
+            get {
+                return ResourceManager.GetString("StartDateDisplay", resourceCulture);
             }
         }
         
