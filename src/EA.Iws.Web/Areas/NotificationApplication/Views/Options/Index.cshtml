@@ -94,9 +94,9 @@ else if (status != MovementStatus.Cancelled)
     <hr />
     <div class="grid-row">
 
-        <div class="column-half">
-            @if (Model.ShowShipmentOptions)
-            {
+        @if (Model.ShowShipmentOptions)
+        {
+            <div class="column-half">
                 <h2 class="heading-medium">@Resource.ShipmentOptionsTitle</h2>
                 <div class="nav-bloc">
                     <nav>
@@ -120,49 +120,47 @@ else if (status != MovementStatus.Cancelled)
                         }
                     </nav>
                 </div>
-            }
-            else
-            {
-                <div class="heading-small">@Resource.NoShipmentOptionsText</div>
-            }
-        </div>
+            </div>
 
-        <div class="column-half">
-            @if (Model.ShowShipmentOptions)
-            {
+            <div class="column-half">
                 <h2 class="heading-medium">@Resource.ShipmentSummaryTitle</h2>
-
                 <table class="odd-table">
                     <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
                     <tbody>
-                        <tr>
-                            <td>@Resource.TotalNumber</td>
-                            <td>@Model.IntendedShipments</td>
-                        </tr>
-                        <tr>
-                            <td>@Resource.NumberUsed</td>
-                            <td>@Model.UsedShipments</td>
-                        </tr>
-                        <tr>
-                            <td>@Resource.ActiveLoadsPermitted</td>
-                            <td>@Model.ActiveLoadsPermitted</td>
-                        </tr>
-                        <tr>
-                            <td>@Resource.CurrentActiveLoads</td>
-                            <td>@Model.ActiveLoadsCurrent</td>
-                        </tr>
-                        <tr>
-                            <td>@Resource.TotalQuantityReceived</td>
-                            <td>@Model.QuantityReceivedTotal</td>
-                        </tr>
-                        <tr>
-                            <td>@Resource.TotalQuantityRemaining</td>
-                            <td>@Model.QuantityRemainingTotal</td>
-                        </tr>
+                    <tr>
+                        <td>@Resource.TotalNumber</td>
+                        <td>@Model.IntendedShipments</td>
+                    </tr>
+                    <tr>
+                        <td>@Resource.NumberUsed</td>
+                        <td>@Model.UsedShipments</td>
+                    </tr>
+                    <tr>
+                        <td>@Resource.ActiveLoadsPermitted</td>
+                        <td>@Model.ActiveLoadsPermitted</td>
+                    </tr>
+                    <tr>
+                        <td>@Resource.CurrentActiveLoads</td>
+                        <td>@Model.ActiveLoadsCurrent</td>
+                    </tr>
+                    <tr>
+                        <td>@Resource.TotalQuantityReceived</td>
+                        <td>@Model.QuantityReceivedTotal</td>
+                    </tr>
+                    <tr>
+                        <td>@Resource.TotalQuantityRemaining</td>
+                        <td>@Model.QuantityRemainingTotal</td>
+                    </tr>
                     </tbody>
                 </table>
-            }
-        </div>
+            </div>
+        }
+        else
+        {
+            <div class="column-two-thirds bold-small">
+                @Resource.NoShipmentOptionsText
+            </div>
+        }
 
     </div>
 
