@@ -15,14 +15,17 @@
         private readonly NotificationAssessment notificationAssessment;
         private readonly INotificationAssessmentRepository notificationAssessmentRepository;
         private readonly IFacilityRepository facilityRepository;
+        private readonly INotificationTransactionCalculator notificationTransactionCalculator;
         private readonly Guid notificationId = new Guid("7594E739-B64C-4E91-ABFB-513768BE358C");
 
         public CompleteNotificationTests()
         {
             notificationAssessmentRepository = A.Fake<INotificationAssessmentRepository>();
             facilityRepository = A.Fake<IFacilityRepository>();
+            notificationTransactionCalculator = A.Fake<INotificationTransactionCalculator>();
 
-            completeNotification = new CompleteNotification(notificationAssessmentRepository, facilityRepository);
+            completeNotification = new CompleteNotification(notificationAssessmentRepository, facilityRepository,
+                notificationTransactionCalculator);
 
             notificationAssessment = new NotificationAssessment(notificationId);
 
@@ -49,20 +52,38 @@
                 notificationAssessment);
         }
 
+        private void SetPaymentComplete(bool isComplete)
+        {
+            A.CallTo(() => notificationTransactionCalculator.IsPaymentComplete(notificationId))
+                .Returns(isComplete);
+        }
+
         [Fact]
         public async Task IsInterimNotSet_Throws()
         {
             SetupFacilityCollection(null);
             SetNotificationStatus(NotificationStatus.InAssessment);
+            SetPaymentComplete(true);
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => completeNotification.Complete(notificationId, new DateTime(2016, 1, 15)));
         }
 
         [Fact]
-        public async Task IsInterimSet_SetsCompleteDate()
+        public async Task PaymentNotComplete_Throws()
         {
             SetupFacilityCollection(true);
             SetNotificationStatus(NotificationStatus.InAssessment);
+            SetPaymentComplete(false);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => completeNotification.Complete(notificationId, new DateTime(2016, 1, 15)));
+        }
+
+        [Fact]
+        public async Task IsInterimSetAndPaymentComplete_SetsCompleteDate()
+        {
+            SetupFacilityCollection(true);
+            SetNotificationStatus(NotificationStatus.InAssessment);
+            SetPaymentComplete(true);
 
             var completedDate = new DateTime(2016, 1, 15);
 
@@ -75,6 +96,7 @@
         public async Task CanComplete_IsInterimNotSet_ReturnsFalse()
         {
             SetupFacilityCollection(null);
+            SetPaymentComplete(true);
 
             var result = await completeNotification.CanComplete(notificationId);
 
@@ -87,6 +109,7 @@
         public async Task CanComplete_IsInterimSet_ReturnsTrue(bool isInterim)
         {
             SetupFacilityCollection(isInterim);
+            SetPaymentComplete(true);
 
             var result = await completeNotification.CanComplete(notificationId);
 

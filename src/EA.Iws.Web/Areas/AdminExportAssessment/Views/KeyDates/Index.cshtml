@@ -60,7 +60,7 @@
             <td>
                 @if (Model.NotificationReceivedDate.IsCompleted && !Model.PaymentIsComplete)
                 {
-                    @Html.ActionLink("Go to payment details", "Index", "PaymentDetails");
+                    @Html.ActionLink("Go to payment details", "Index", "PaymentDetails")
                 }
             </td>
         </tr>
@@ -117,6 +117,10 @@
                         else if (!Model.IsInterim.HasValue)
                         {
                             @Html.ActionLink("Mark notification as interim or non-interim", "Index", "MarkAsInterim")
+                        }
+                        else if (!Model.PaymentIsComplete)
+                        {
+                            @Html.ActionLink("Go to payment details", "Index", "PaymentDetails")
                         }
                         else
                         {
