@@ -141,6 +141,12 @@
   <data name="ConsentValidToRequired" xml:space="preserve">
     <value>Please provide the date consent is valid until</value>
   </data>
+  <data name="ConsentWithdrawnDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ConsentWithdrawnDateRequired" xml:space="preserve">
+    <value>Please enter the date the consent was withdrawn</value>
+  </data>
   <data name="Decision" xml:space="preserve">
     <value>Decision</value>
   </data>

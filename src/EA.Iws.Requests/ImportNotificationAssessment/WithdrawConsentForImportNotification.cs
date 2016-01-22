@@ -12,10 +12,13 @@
 
         public Guid Id { get; private set; }
 
-        public WithdrawConsentForImportNotification(Guid id, string reasonsForConsentWithdrawal)
+        public DateTime Date { get; private set; }
+
+        public WithdrawConsentForImportNotification(Guid id, string reasonsForConsentWithdrawal, DateTime date)
         {
             ReasonsForConsentWithdrawal = reasonsForConsentWithdrawal;
             Id = id;
+            Date = date;
         }
     }
 }

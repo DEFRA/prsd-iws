@@ -64,7 +64,9 @@
 
         private async Task PostConsentWithdrawn(Guid id, DecisionViewModel model)
         {
-            await mediator.SendAsync(new WithdrawConsentForImportNotification(id, model.ReasonsForConsentWithdrawal));
+            var date = new DateTime(model.ConsentWithdrawnDate.Year.GetValueOrDefault(), model.ConsentWithdrawnDate.Month.GetValueOrDefault(), model.ConsentWithdrawnDate.Day.GetValueOrDefault());
+
+            await mediator.SendAsync(new WithdrawConsentForImportNotification(id, model.ReasonsForConsentWithdrawal, date));
         }
 
         private async Task PostObjection(Guid id, DecisionViewModel model)

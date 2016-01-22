@@ -22,7 +22,7 @@
         {
             var assessment = await repository.GetByNotification(message.Id);
 
-            assessment.WithdrawConsent(SystemTime.UtcNow, message.ReasonsForConsentWithdrawal);
+            assessment.WithdrawConsent(message.Date, message.ReasonsForConsentWithdrawal);
 
             await context.SaveChangesAsync();
 

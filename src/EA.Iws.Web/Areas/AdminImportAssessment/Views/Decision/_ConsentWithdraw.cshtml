@@ -1,5 +1,11 @@
 ﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision.DecisionViewModel
 
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate) @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate.Month) @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate.Year)">
+    <label class="heading-medium">@Html.DisplayNameFor(m => m.ConsentWithdrawnDate)</label>
+    @Html.Gds().ValidationMessageFor(m => m.ConsentWithdrawnDate)
+    @Html.EditorFor(m => m.ConsentWithdrawnDate)
+</div>
+
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonsForConsentWithdrawal)">
     <label class="heading-medium">@Html.DisplayNameFor(m => m.ReasonsForConsentWithdrawal)</label>
     @Html.Gds().ValidationMessageFor(m => m.ReasonsForConsentWithdrawal)

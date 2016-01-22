@@ -134,6 +134,24 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string ConsentWithdrawnDateLabel {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the date the consent was withdrawn.
+        /// </summary>
+        public static string ConsentWithdrawnDateRequired {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decision.
         /// </summary>
         public static string Decision {
