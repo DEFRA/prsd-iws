@@ -15,20 +15,23 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                @Resource.PreconsentedTitle
-            </td>
-            <td>
-                @Html.Partial("_Preconsented")
-            </td>
-            @if (Model.ShowChangeLinks)
-            {
+        @if (Model.ShowPreconsentedLinks)
+        {
+            <tr>
                 <td>
-                    @Html.ActionLink("Change", "Index", "Preconsented", null, new { @class = "right-float" })
+                    @Resource.PreconsentedTitle
                 </td>
-            }
-        </tr>
+                <td>
+                    @Html.Partial("_Preconsented")
+                </td>
+                @if (Model.ShowChangeLinks)
+                {
+                    <td>
+                        @Html.ActionLink("Change", "Index", "Preconsented", null, new { @class = "right-float" })
+                    </td>
+                }
+            </tr>
+        }
         <tr>
             <td>
                 @Resource.ExporterTitle
@@ -42,7 +45,7 @@
                     @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
                 </td>
             }
-            
+
         </tr>
         <tr>
             <td>
@@ -57,7 +60,7 @@
                     @Html.ActionLink("Change", "Index", "Producer", null, new { @class = "right-float" })
                 </td>
             }
-            
+
         </tr>
         <tr>
             <td>
@@ -72,7 +75,7 @@
                     @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
                 </td>
             }
-            
+
         </tr>
         <tr>
             <td>
@@ -87,7 +90,7 @@
                     @Html.ActionLink("Change", "Index", "Facility", null, new { @class = "right-float" })
                 </td>
             }
-            
+
         </tr>
 
         </tbody>
