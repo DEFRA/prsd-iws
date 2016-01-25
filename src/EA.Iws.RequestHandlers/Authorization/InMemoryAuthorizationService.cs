@@ -47,7 +47,7 @@
             { ImportMovementPermissions.CanCreateImportMovements, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { ImportMovementPermissions.CanEditImportMovements, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { ImportMovementPermissions.CanReadImportMovements, new[] { UserRole.Internal, UserRole.TeamLeader } },
-            { UserAdministrationPermissions.CanCreateInternalUser, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { UserAdministrationPermissions.CanCreateInternalUser, new[] { UserRole.External } },
             { UserAdministrationPermissions.CanReadInternalUserData, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { UserAdministrationPermissions.CanApproveNewInternalUser, new[] { UserRole.Internal, UserRole.TeamLeader } }
         };

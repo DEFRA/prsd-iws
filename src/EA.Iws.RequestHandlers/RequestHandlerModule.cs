@@ -36,7 +36,6 @@
             builder.RegisterGenericDecorators(ThisAssembly, typeof(IRequestHandler<,>), "request_handler",
                 typeof(EventDispatcherRequestHandlerDecorator<,>), // <-- inner most decorator
                 typeof(RequestAuthorizationDecorator<,>),
-                typeof(AuthenticationRequestHandlerDecorator<,>),
                 typeof(NotificationReadOnlyAuthorizeDecorator<,>)); // <-- outer most decorator
 
             // Register the map classes
