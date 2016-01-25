@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the actual quantity of waste received on the shipment.
+        ///   Looks up a localized string similar to Enter the quantity of waste received on the shipment.
         /// </summary>
         public static string ActualQuantityHint {
             get {

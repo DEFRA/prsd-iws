@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual quantity.
+        ///   Looks up a localized string similar to Quantity received.
         /// </summary>
         public static string ActualQuantityLabel {
             get {

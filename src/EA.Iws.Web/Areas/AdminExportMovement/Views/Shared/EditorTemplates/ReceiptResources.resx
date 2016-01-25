@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActualQuantityHint" xml:space="preserve">
-    <value>Enter the actual quantity of waste received on the shipment</value>
+    <value>Enter the quantity of waste received on the shipment</value>
   </data>
   <data name="ActualQuantityQuestion" xml:space="preserve">
     <value>How much waste was received?</value>
