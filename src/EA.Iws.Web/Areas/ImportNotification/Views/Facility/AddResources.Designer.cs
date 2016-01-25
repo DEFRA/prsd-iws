@@ -61,24 +61,6 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual site of {0}.
-        /// </summary>
-        public static string ActualSite {
-            get {
-                return ResourceManager.GetString("ActualSite", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unnamed facility.
-        /// </summary>
-        public static string BlankFacilityName {
-            get {
-                return ResourceManager.GetString("BlankFacilityName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Limited Company.
         /// </summary>
         public static string LimitedCompanyLabel {
@@ -124,7 +106,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a facility.
+        ///   Looks up a localized string similar to Add a {0} facility.
         /// </summary>
         public static string Title {
             get {

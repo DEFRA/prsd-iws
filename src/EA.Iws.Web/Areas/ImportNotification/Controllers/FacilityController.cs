@@ -62,6 +62,9 @@
 
             model.DefaultUkIfUnselected(model.Address.Countries);
 
+            var details = await mediator.SendAsync(new GetNotificationDetails(id));
+            model.NotificationType = details.NotificationType;
+            
             return View(model);
         }
 

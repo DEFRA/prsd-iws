@@ -11,7 +11,7 @@
     var otherId = "Other" + Model.FacilityId;
 }
 
-<h1 class="heading-large">@Resource.Title</h1>
+<h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, Model.NotificationType.ToString().ToLower()))</h1>
 
 @using (Html.BeginForm())
 {
