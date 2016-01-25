@@ -127,7 +127,7 @@
     <value>Added H or HP codes</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Waste type</value>
+    <value>Waste type and codes</value>
   </data>
   <data name="NoCodes" xml:space="preserve">
     <value>None</value>
