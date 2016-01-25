@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.ExportMovement.ViewModels.Complete.UploadViewModel
 @{
-    ViewBag.Title = "Recovery / disposal complete";
+    ViewBag.Title = (Model.NotificationType == NotificationType.Recovery ? "Recovery" : "Disposal") + " complete";
     string operation = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
 }
 

@@ -286,7 +286,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment summary.
+        ///   Looks up a localized string similar to Notification options.
         /// </summary>
         public static string TabTitle {
             get {

@@ -1,5 +1,4 @@
-﻿@using EA.Iws.Core.FinancialGuarantee
-@using EA.Iws.Core.Movement
+﻿@using EA.Iws.Core.Movement
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Core.Shared
 @using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Options.IndexResources
@@ -72,7 +71,7 @@ else if (status != MovementStatus.Cancelled)
                         @Html.ActionLink(@Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.UploadAnnexes, "Index", "Annex", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
-                    
+
                     @Html.ActionLink(@Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     @Html.ActionLink(@Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                 </nav>
@@ -127,30 +126,30 @@ else if (status != MovementStatus.Cancelled)
                 <table class="odd-table">
                     <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
                     <tbody>
-                    <tr>
-                        <td>@Resource.TotalNumber</td>
-                        <td>@Model.IntendedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.NumberUsed</td>
-                        <td>@Model.UsedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.ActiveLoadsPermitted</td>
-                        <td>@Model.ActiveLoadsPermitted</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.CurrentActiveLoads</td>
-                        <td>@Model.ActiveLoadsCurrent</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.TotalQuantityReceived</td>
-                        <td>@Model.QuantityReceivedTotal</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.TotalQuantityRemaining</td>
-                        <td>@Model.QuantityRemainingTotal</td>
-                    </tr>
+                        <tr>
+                            <td>@Resource.TotalNumber</td>
+                            <td>@Model.IntendedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.NumberUsed</td>
+                            <td>@Model.UsedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.ActiveLoadsPermitted</td>
+                            <td>@Model.ActiveLoadsPermitted</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.CurrentActiveLoads</td>
+                            <td>@Model.ActiveLoadsCurrent</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityReceived</td>
+                            <td>@Model.QuantityReceivedTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityRemaining</td>
+                            <td>@Model.QuantityRemainingTotal</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -161,7 +160,6 @@ else if (status != MovementStatus.Cancelled)
                 @Resource.NoShipmentOptionsText
             </div>
         }
-
     </div>
 
     @if (Model.ShowShipmentKeyDates)
@@ -189,52 +187,52 @@ else if (status != MovementStatus.Cancelled)
                 <table class="odd-table">
                     <caption class="visuallyhidden">Shipment summary</caption>
                     <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Status</th>
-                        <th>Prenotified</th>
-                        <th>Shipment due</th>
-                        <th>Received</th>
-                        <th>Quantity</th>
-                        <th>@operationTitle</th>
-                    </tr>
+                        <tr>
+                            <th>No.</th>
+                            <th>Status</th>
+                            <th>Prenotified</th>
+                            <th>Shipment due</th>
+                            <th>Received</th>
+                            <th>Quantity</th>
+                            <th>@operationTitle</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    @{
-                        for (int i = 0; i < Model.TableData.Count; i++)
-                        {
-                            var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
-                            if (Model.TableData[i].HasShipped)
+                        @{
+                            for (int i = 0; i < Model.TableData.Count; i++)
                             {
-                                statusText = statusText + " (Shipped)";
+                                var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
+                                if (Model.TableData[i].HasShipped)
+                                {
+                                    statusText = statusText + " (Shipped)";
+                                }
+                                <tr>
+                                    <td>@Model.TableData[i].Number</td>
+                                    <td>@statusText</td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                                    </td>
+                                </tr>
                             }
-                            <tr>
-                                <td>@Model.TableData[i].Number</td>
-                                <td>@statusText</td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
-                                </td>
-                            </tr>
                         }
-                    }
                     </tbody>
                 </table>
             </div>
         </section>
-    }
+                            }
 </div>
 
 @section scripts {

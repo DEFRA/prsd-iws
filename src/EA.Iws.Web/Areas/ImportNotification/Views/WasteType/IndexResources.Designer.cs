@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste type.
+        ///   Looks up a localized string similar to Waste type and codes.
         /// </summary>
         public static string Title {
             get {
