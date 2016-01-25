@@ -57,7 +57,7 @@
 
             var model = new PercentageViewModel
             {
-                PercentageRecoverable = percentageRecoverable
+                PercentageRecoverable = percentageRecoverable.ToString()
             };
 
             return View(model);
@@ -72,7 +72,7 @@
                 return View(model);
             }
 
-            TempData.Add(PercentageKey, model.PercentageRecoverable);
+            TempData.Add(PercentageKey, Convert.ToDecimal(model.PercentageRecoverable));
 
             return RedirectToAction("EstimatedValue", "WasteRecovery", new { backToOverview });
         }
