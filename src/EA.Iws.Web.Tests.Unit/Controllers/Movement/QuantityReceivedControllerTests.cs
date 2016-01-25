@@ -32,7 +32,7 @@
             viewModel = new QuantityReceivedViewModel
             {
                 Unit = ShipmentQuantityUnits.Kilograms,
-                Quantity = 250
+                Quantity = "250"
             };
         }
 
