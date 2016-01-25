@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
@@ -42,7 +43,7 @@
 
         [Display(Name = "ActualQuantity", ResourceType = typeof(QuantityViewModelResources))]
         [Required(ErrorMessageResourceName = "ActualQuantityRequired", ErrorMessageResourceType = typeof(QuantityViewModelResources))]
-        [IsValidNumber(maxPrecision: 18, ErrorMessageResourceName = "ActualQuantityIsValid", ErrorMessageResourceType = typeof(QuantityViewModelResources))]
+        [IsValidNumber(maxPrecision: 18, NumberStyle = NumberStyles.AllowDecimalPoint, ErrorMessageResourceName = "ActualQuantityIsValid", ErrorMessageResourceType = typeof(QuantityViewModelResources))]
         public string Quantity { get; set; }
 
         public ShipmentQuantityUnits? Units { get; set; }

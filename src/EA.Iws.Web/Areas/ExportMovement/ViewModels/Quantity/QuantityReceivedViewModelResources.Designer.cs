@@ -62,6 +62,24 @@ namespace EA.Iws.Web.Areas.ExportMovement.ViewModels.Quantity {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        public static string Quantity {
+            get {
+                return ResourceManager.GetString("Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t enter any symbols apart from a decimal full stop.
+        /// </summary>
+        public static string QuantityIsValid {
+            get {
+                return ResourceManager.GetString("QuantityIsValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The actual quantity field must be a positive value.
         /// </summary>
         public static string QuantityReceivedPositive {

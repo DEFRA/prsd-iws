@@ -121,7 +121,7 @@
     <value>Actual quantity</value>
   </data>
   <data name="ActualQuantityIsValid" xml:space="preserve">
-    <value>The actual quantity must be a valid number</value>
+    <value>You can't enter any symbols apart from a decimal full stop</value>
   </data>
   <data name="ActualQuantityPositive" xml:space="preserve">
     <value>The actual quantity must be a positive value</value>

@@ -47,13 +47,13 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, QuantityReceivedViewModel model)
         {
-            if (!ModelState.IsValid || !model.Quantity.HasValue)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
             var tolerance =
-                await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(id, model.Quantity.Value, model.Unit));
+                await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(id, Convert.ToDecimal(model.Quantity), model.Unit));
 
             TempData[DateReceivedKey] = model.DateReceived;
             TempData[UnitKey] = model.Unit;

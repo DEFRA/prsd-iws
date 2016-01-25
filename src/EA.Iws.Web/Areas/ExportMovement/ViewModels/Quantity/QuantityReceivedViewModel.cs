@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using Core.Shared;
+    using Infrastructure.Validation;
 
     public class QuantityReceivedViewModel : IValidatableObject
     {
@@ -11,23 +13,21 @@
 
         public DateTime DateReceived { get; set; }
 
-        [Required]
-        [Range(0, int.MaxValue)]
-        public decimal? Quantity { get; set; }
+        [Display(Name = "Quantity", ResourceType = typeof(QuantityReceivedViewModelResources))]
+        [Required(ErrorMessageResourceName = "QuantityReceivedRequired", ErrorMessageResourceType = typeof(QuantityReceivedViewModelResources))]
+        [IsValidNumber(maxPrecision: 18, NumberStyle = NumberStyles.AllowDecimalPoint, ErrorMessageResourceName = "QuantityIsValid", ErrorMessageResourceType = typeof(QuantityReceivedViewModelResources))]
+        public string Quantity { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!Quantity.HasValue)
-            {
-                yield return new ValidationResult(QuantityReceivedViewModelResources.QuantityReceivedRequired, new[] { "Quantity" });
-            }
+            decimal quantity = Convert.ToDecimal(Quantity);
 
-            if (Quantity <= 0)
+            if (quantity <= 0)
             {
                 yield return new ValidationResult(QuantityReceivedViewModelResources.QuantityReceivedPositive, new[] { "Quantity" });
             }
 
-            if (Quantity.HasValue && decimal.Round(Quantity.Value, ShipmentQuantityUnitsMetadata.Precision[Unit]) != Quantity.Value)
+            if (decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Unit]) != quantity)
             {
                 yield return new ValidationResult(
                     string.Format(QuantityReceivedViewModelResources.QuantityReceivedPrecision, ShipmentQuantityUnitsMetadata.Precision[Unit] + 1),

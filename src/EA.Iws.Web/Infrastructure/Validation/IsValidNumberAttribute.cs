@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
 
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class IsValidNumberAttribute : ValidationAttribute
@@ -10,9 +11,12 @@
 
         public bool IsOptional { get; set; }
 
+        public NumberStyles NumberStyle { get; set; }
+
         public IsValidNumberAttribute(int maxPrecision)
         {
             this.precision = maxPrecision;
+            NumberStyle = NumberStyles.Number;
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -22,7 +26,7 @@
             if (value != null)
             {
                 decimal number;
-                if (decimal.TryParse(value.ToString(), out number))
+                if (decimal.TryParse(value.ToString(), NumberStyle, new NumberFormatInfo(), out number))
                 {
                     if (NumberIsValid(number))
                     {

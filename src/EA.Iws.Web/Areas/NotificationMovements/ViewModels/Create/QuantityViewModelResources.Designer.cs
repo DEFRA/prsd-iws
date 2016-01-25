@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The actual quantity must be a valid number.
+        ///   Looks up a localized string similar to You can&apos;t enter any symbols apart from a decimal full stop.
         /// </summary>
         public static string ActualQuantityIsValid {
             get {
