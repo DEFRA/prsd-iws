@@ -10,7 +10,7 @@
         Object = 2,
         [Display(Name = "Withdraw")]
         Withdraw = 3,
-        [Display(Name = "Consent Withdraw")]
+        [Display(Name = "Consent withdraw")]
         ConsentWithdraw = 4
     }
 }
