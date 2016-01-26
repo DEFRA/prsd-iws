@@ -28,15 +28,17 @@
         private readonly ImporterToImporterCopy importerCopier;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly FacilityCollectionCopy facilityCopier;
+        private readonly CarrierCollectionCopy carrierCopier;
 
         public CopyToNotificationHandler(IwsContext context,
-            NotificationToNotificationCopy copier, 
+            NotificationToNotificationCopy copier,
             ExporterToExporterCopy exporterCopier,
             TransportRouteToTransportRouteCopy transportRouteCopier,
             WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier,
             ImporterToImporterCopy importerCopier,
             INotificationApplicationRepository notificationApplicationRepository,
-            FacilityCollectionCopy facilityCopier)
+            FacilityCollectionCopy facilityCopier,
+            CarrierCollectionCopy carrierCopier)
         {
             this.context = context;
             this.copier = copier;
@@ -46,6 +48,7 @@
             this.importerCopier = importerCopier;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.facilityCopier = facilityCopier;
+            this.carrierCopier = carrierCopier;
         }
 
         public async Task<Guid> HandleAsync(CopyToNotification message)
@@ -100,10 +103,11 @@
             var destinationFinancialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == destinationId);
             var destinationAnnexCollection = await context.AnnexCollections.SingleAsync(p => p.NotificationId == destinationId);
             var destinationFacilities = await context.Facilities.SingleAsync(f => f.NotificationId == destinationId);
+            var destinationCarriers = await context.Carriers.SingleAsync(c => c.NotificationId == destinationId);
 
             var clone = await GetCopyOfSourceNotification(sourceId);
             var clonedAssessment = await GetCopyOfNotificationAssessment(destinationId);
-            
+
             copier.CopyNotificationProperties(clone, destination);
 
             context.NotificationApplications.Add(clone);
@@ -113,6 +117,7 @@
             context.DeleteOnCommit(destinationFinancialGuarantee);
             context.DeleteOnCommit(destinationAnnexCollection);
             context.DeleteOnCommit(destinationFacilities);
+            context.DeleteOnCommit(destinationCarriers);
             await context.SaveChangesAsync();
 
             context.DeleteOnCommit(destination);
@@ -136,6 +141,7 @@
             await exporterCopier.CopyAsync(context, sourceId, clone.Id);
             await importerCopier.CopyAsync(context, sourceId, clone.Id);
             await facilityCopier.CopyAsync(context, sourceId, clone.Id);
+            await carrierCopier.CopyAsync(context, sourceId, clone.Id);
 
             context.AnnexCollections.Add(new AnnexCollection(clone.Id));
 
@@ -159,7 +165,6 @@
                 .Include("ProducersCollection")
                 .Include("OperationInfosCollection")
                 .Include(n => n.TechnologyEmployed)
-                .Include("CarriersCollection")
                 .Include("PackagingInfosCollection")
                 .Include("WasteType.WasteCompositionCollection")
                 .Include("WasteType.WasteAdditionalInformationCollection")

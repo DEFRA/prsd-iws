@@ -422,16 +422,25 @@
             var business = ObjectFactory.CreateEmptyProducerBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            for (int i = 0; i < 5; i++)
-            {
-                notification.AddCarrier(business, address, contact);
-            }
-
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
-            Assert.Equal(notification.Carriers.Count(), 5);
+
+            var carrierCollection = new CarrierCollection(notification.Id);
+            context.Carriers.Add(carrierCollection);
+            await context.SaveChangesAsync();
+
+            for (int i = 0; i < 5; i++)
+            {
+                carrierCollection.AddCarrier(business, address, contact);
+            }
+
+            await context.SaveChangesAsync();
+
+            Assert.Equal(carrierCollection.Carriers.Count(), 5);
 
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(carrierCollection);
+
             await context.SaveChangesAsync();
         }
 
@@ -444,18 +453,27 @@
             var business = ObjectFactory.CreateEmptyProducerBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            var carrier = notification.AddCarrier(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Carriers.Any());
-
-            notification.RemoveCarrier(carrier.Id);
+            var carrierCollection = new CarrierCollection(notification.Id);
+            context.Carriers.Add(carrierCollection);
             await context.SaveChangesAsync();
 
-            Assert.False(notification.Carriers.Any());
+            var carrier = carrierCollection.AddCarrier(business, address, contact);
+            context.NotificationApplications.Add(notification);
+            await context.SaveChangesAsync();
+
+            Assert.True(carrierCollection.Carriers.Any());
+
+            carrierCollection.RemoveCarrier(carrier.Id);
+            await context.SaveChangesAsync();
+
+            Assert.False(carrierCollection.Carriers.Any());
 
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(carrierCollection);
+
             await context.SaveChangesAsync();
         }
     }

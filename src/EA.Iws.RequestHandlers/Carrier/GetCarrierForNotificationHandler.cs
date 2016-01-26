@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using Core.Carriers;
-    using DataAccess;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -10,19 +9,21 @@
 
     internal class GetCarrierForNotificationHandler : IRequestHandler<GetCarrierForNotification, CarrierData>
     {
-        private readonly IwsContext context;
+        private readonly ICarrierRepository repository;
         private readonly IMapWithParentObjectId<Carrier, CarrierData> mapper;
 
-        public GetCarrierForNotificationHandler(IwsContext context, IMapWithParentObjectId<Carrier, CarrierData> mapper)
+        public GetCarrierForNotificationHandler(ICarrierRepository repository,
+            IMapWithParentObjectId<Carrier, CarrierData> mapper)
         {
-            this.context = context;
             this.mapper = mapper;
+            this.repository = repository;
         }
 
         public async Task<CarrierData> HandleAsync(GetCarrierForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
-            var carrier = notification.GetCarrier(message.CarrierId);
+            var carriers = await repository.GetByNotificationId(message.NotificationId);
+
+            var carrier = carriers.GetCarrier(message.CarrierId);
 
             return mapper.Map(carrier, message.NotificationId);
         }

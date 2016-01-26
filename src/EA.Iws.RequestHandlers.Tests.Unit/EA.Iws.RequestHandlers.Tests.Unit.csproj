@@ -91,7 +91,6 @@
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\InternalUserCollection.cs" />
-    <Compile Include="Carrier\CarrierHandlerTests.cs" />
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />

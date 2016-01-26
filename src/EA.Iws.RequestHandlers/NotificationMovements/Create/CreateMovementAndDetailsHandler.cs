@@ -14,6 +14,7 @@
 
     internal class CreateMovementAndDetailsHandler : IRequestHandler<CreateMovementAndDetails, Guid>
     {
+        private readonly ICarrierRepository carrierRepository;
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IwsContext context;
         private readonly MovementFactory movementFactory;
@@ -22,12 +23,14 @@
         public CreateMovementAndDetailsHandler(MovementFactory movementFactory,
             MovementDetailsFactory movementDetailsFactory,
             INotificationApplicationRepository notificationRepository,
+            ICarrierRepository carrierRepository,
             IwsContext context)
         {
             this.movementFactory = movementFactory;
             this.movementDetailsFactory = movementDetailsFactory;
             this.context = context;
             this.notificationRepository = notificationRepository;
+            this.carrierRepository = carrierRepository;
         }
 
         public async Task<Guid> HandleAsync(CreateMovementAndDetails message)
@@ -62,7 +65,7 @@
             var notification = await notificationRepository.GetById(notificationId);
 
             return notification.PackagingInfos
-                .Where(p => 
+                .Where(p =>
                     packagingTypes
                         .Select(x => (int)x)
                         .Contains(p.PackagingType.Value));
@@ -70,12 +73,12 @@
 
         private async Task<IEnumerable<MovementCarrier>> GetCarriers(Guid notificationId, Dictionary<int, Guid> orderedCarriers)
         {
-            var notification = await notificationRepository.GetById(notificationId);
+            var carrierCollection = await carrierRepository.GetByNotificationId(notificationId);
 
-            return notification.Carriers.Join(orderedCarriers,
+            return carrierCollection.Carriers.Join(orderedCarriers,
                 notificationCarrier => notificationCarrier.Id,
                 orderedCarrier => orderedCarrier.Value,
-                (notificationCarrier, orderedCarrier) => 
+                (notificationCarrier, orderedCarrier) =>
                     new MovementCarrier(orderedCarrier.Key, notificationCarrier));
         }
     }

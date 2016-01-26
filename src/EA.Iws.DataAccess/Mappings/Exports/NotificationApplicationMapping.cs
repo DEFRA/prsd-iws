@@ -38,12 +38,6 @@
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 
-            HasMany(
-                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<Carrier>>(
-                    "CarriersCollection"))
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
             Property(x => x.CompetentAuthority.Value)
                 .IsRequired();
 

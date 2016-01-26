@@ -1,10 +1,33 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using EA.Prsd.Core.Domain;
+    using Prsd.Core.Extensions;
 
-    public partial class NotificationApplication
+    public class CarrierCollection : Entity
     {
+        protected CarrierCollection()
+        {
+        }
+
+        public CarrierCollection(Guid notificationId)
+        {
+            NotificationId = notificationId;
+
+            CarriersCollection = new List<Carrier>();
+        }
+
+        public Guid NotificationId { get; private set; }
+
+        protected virtual ICollection<Carrier> CarriersCollection { get; set; }
+
+        public IEnumerable<Carrier> Carriers
+        {
+            get { return CarriersCollection.ToSafeIEnumerable(); }
+        }
+
         public Carrier AddCarrier(Business business, Address address, Contact contact)
         {
             var carrier = new Carrier(business, address, contact);

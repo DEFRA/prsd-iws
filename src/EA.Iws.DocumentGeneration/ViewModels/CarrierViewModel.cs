@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Domain;
     using Domain.NotificationApplication;
     using Formatters;
 
@@ -24,18 +23,20 @@
 
         public static IList<CarrierViewModel> CreateCarrierViewModelsForNotification(
             NotificationApplication notification,
+            CarrierCollection carrierCollection,
             MeansOfTransportFormatter meansOfTransportFormatter)
         {
             if (notification == null
-                || notification.Carriers == null
-                || !notification.Carriers.Any())
+                || carrierCollection == null
+                || carrierCollection.Carriers == null
+                || !carrierCollection.Carriers.Any())
             {
                 return new CarrierViewModel[0];
             }
 
             var meansOfTransport = meansOfTransportFormatter.MeansOfTransportAsString(notification.MeansOfTransport);
 
-            return notification.Carriers.Select(c => new CarrierViewModel(c, meansOfTransport))
+            return carrierCollection.Carriers.Select(c => new CarrierViewModel(c, meansOfTransport))
                 .ToArray();
         }
 

@@ -153,6 +153,7 @@
     <Compile Include="NotificationApplication\Annexes\RequiredAnnexes.cs" />
     <Compile Include="NotificationApplication\Annexes\TechnologyEmployedAnnex.cs" />
     <Compile Include="NotificationApplication\Annexes\WasteCompositionAnnex.cs" />
+    <Compile Include="NotificationApplication\CarrierCollection.cs" />
     <Compile Include="NotificationApplication\ContactComparer.cs" />
     <Compile Include="NotificationApplication\BusinessComparer.cs" />
     <Compile Include="NotificationApplication\AddressComparer.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
+    <Compile Include="NotificationApplication\ICarrierRepository.cs" />
     <Compile Include="NotificationApplication\IFacilityRepository.cs" />
     <Compile Include="NotificationApplication\Importer\IImporterRepository.cs" />
     <Compile Include="NotificationApplication\INotificationApplicationOverviewRepository.cs" />
@@ -324,7 +326,6 @@
     <Compile Include="NotificationApplication\Carrier.cs" />
     <Compile Include="NotificationApplication\Exporter\Exporter.cs" />
     <Compile Include="NotificationApplication\Importer\Importer.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.Carriers.cs" />
     <Compile Include="NotificationApplication\FacilityCollection.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />

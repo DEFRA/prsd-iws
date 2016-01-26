@@ -55,7 +55,8 @@
                 new WasteRecoveryToWasteRecoveryCopy(),
                 new ImporterToImporterCopy(),
                 new NotificationApplicationRepository(context, new NotificationApplicationAuthorization(context, GetUserContext())),
-                new FacilityCollectionCopy());
+                new FacilityCollectionCopy(),
+                new CarrierCollectionCopy());
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
 
@@ -295,20 +296,6 @@
                 copiedNotification.Producers.Count());
             Assert.Equal(sourceNotification.Producers.Select(p => p.Business.Name).OrderBy(s => s),
                 copiedNotification.Producers.Select(p => p.Business.Name).OrderBy(s => s));
-        }
-
-        [Fact]
-        public async Task CarriersCopied()
-        {
-            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
-
-            var copiedNotification = GetCopied();
-            var sourceNotification = GetSource();
-
-            Assert.Equal(sourceNotification.Carriers.Count(),
-                copiedNotification.Carriers.Count());
-            Assert.Equal(sourceNotification.Carriers.Select(c => c.Business.Name).OrderBy(s => s),
-                copiedNotification.Carriers.Select(c => c.Business.Name).OrderBy(s => s));
         }
 
         [Fact]

@@ -96,6 +96,7 @@
     <Compile Include="Mappings\Common\BankHolidayMapping.cs" />
     <Compile Include="Mappings\Exports\AnnexCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\BusinessTypeMapping.cs" />
+    <Compile Include="Mappings\Exports\CarrierCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\ConsentMapping.cs" />
     <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressBookRepository.cs" />
     <Compile Include="Repositories\AnnexCollectionRepository.cs" />
+    <Compile Include="Repositories\CarrierRepository.cs" />
     <Compile Include="Repositories\CompetentAuthorityRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />

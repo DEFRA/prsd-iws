@@ -42,7 +42,7 @@
             var notification = Create(id, number);
 
             OI.SetProperty(x => x.UserId, userId, notification);
-            
+
             SetBusinesses(notification);
 
             notification.SetMeansOfTransport(new List<MeansOfTransport>
@@ -94,12 +94,6 @@
                 ComplexTypeFactory.Create<Address>(),
                 ComplexTypeFactory.Create<Contact>());
             notification.AddProducer(ComplexTypeFactory.Create<ProducerBusiness>(ProducerBusinessName2),
-                ComplexTypeFactory.Create<Address>(),
-                ComplexTypeFactory.Create<Contact>());
-            notification.AddCarrier(ComplexTypeFactory.Create<Business>(CarrierBusinessName1),
-                ComplexTypeFactory.Create<Address>(),
-                ComplexTypeFactory.Create<Contact>());
-            notification.AddCarrier(ComplexTypeFactory.Create<Business>(CarrierBusinessName2),
                 ComplexTypeFactory.Create<Address>(),
                 ComplexTypeFactory.Create<Contact>());
         }

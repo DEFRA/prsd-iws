@@ -133,6 +133,7 @@
     <Compile Include="Authorization\IUserRoleService.cs" />
     <Compile Include="Authorization\UserRole.cs" />
     <Compile Include="Authorization\UserRoleService.cs" />
+    <Compile Include="Copy\CarrierCollectionCopy.cs" />
     <Compile Include="Copy\FacilityCollectionCopy.cs" />
     <Compile Include="Copy\ImporterToImporterCopy.cs" />
     <Compile Include="Copy\ExporterToExporterCopy.cs" />

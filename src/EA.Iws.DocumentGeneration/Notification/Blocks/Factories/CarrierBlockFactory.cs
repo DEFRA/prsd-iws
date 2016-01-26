@@ -7,17 +7,21 @@
 
     internal class CarrierBlockFactory : INotificationBlockFactory
     {
-        private readonly INotificationApplicationRepository repository;
+        private readonly ICarrierRepository carrierRepository;
+        private readonly INotificationApplicationRepository notificationRepository;
 
-        public CarrierBlockFactory(INotificationApplicationRepository repository)
+        public CarrierBlockFactory(INotificationApplicationRepository notificationRepository,
+            ICarrierRepository carrierRepository)
         {
-            this.repository = repository;
+            this.notificationRepository = notificationRepository;
+            this.carrierRepository = carrierRepository;
         }
 
         public async Task<IDocumentBlock> Create(Guid notificationId, IList<MergeField> mergeFields)
         {
-            var notification = await repository.GetById(notificationId);
-            return new CarrierBlock(mergeFields, notification);
+            var notification = await notificationRepository.GetById(notificationId);
+            var carrierCollection = await carrierRepository.GetByNotificationId(notificationId);
+            return new CarrierBlock(mergeFields, notification, carrierCollection);
         }
     }
 }

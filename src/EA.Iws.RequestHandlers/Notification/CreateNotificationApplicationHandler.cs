@@ -13,18 +13,23 @@
 
     internal class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
     {
+        private readonly ICarrierRepository carrierRepository;
         private readonly IwsContext context;
         private readonly INotificationNumberGenerator notificationNumberGenerator;
         private readonly IFacilityRepository facilityRepository;
         private readonly IUserContext userContext;
 
-        public CreateNotificationApplicationHandler(IwsContext context, IUserContext userContext,
-            INotificationNumberGenerator notificationNumberGenerator, IFacilityRepository facilityRepository)
+        public CreateNotificationApplicationHandler(IwsContext context,
+            IUserContext userContext,
+            INotificationNumberGenerator notificationNumberGenerator,
+            IFacilityRepository facilityRepository,
+            ICarrierRepository carrierRepository)
         {
             this.context = context;
             this.userContext = userContext;
             this.notificationNumberGenerator = notificationNumberGenerator;
             this.facilityRepository = facilityRepository;
+            this.carrierRepository = carrierRepository;
         }
 
         public async Task<Guid> HandleAsync(CreateNotificationApplication command)
@@ -41,8 +46,10 @@
             await context.SaveChangesAsync();
 
             var facilityCollection = new FacilityCollection(notification.Id);
+            var carrierCollection = new CarrierCollection(notification.Id);
 
             facilityRepository.Add(facilityCollection);
+            carrierRepository.Add(carrierCollection);
 
             await context.SaveChangesAsync();
 

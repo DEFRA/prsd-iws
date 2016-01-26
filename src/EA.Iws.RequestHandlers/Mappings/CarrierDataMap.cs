@@ -3,30 +3,31 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Core.Carriers;
     using Core.Shared;
-    using Domain;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
-    using Requests.Carriers;
-    using Requests.Shared;
     using Notification = Domain.NotificationApplication.NotificationApplication;
 
     internal class CarrierDataMap : IMap<Notification, IList<CarrierData>>,
         IMap<Carrier, CarrierData>,
         IMapWithParentObjectId<Carrier, CarrierData>
     {
+        private readonly ICarrierRepository repository;
         private readonly IMap<Address, AddressData> addressMap;
         private readonly IMap<Business, BusinessInfoData> businessMap;
         private readonly IMap<Contact, ContactData> contactMap;
 
         public CarrierDataMap(IMap<Address, AddressData> addressMap,
             IMap<Business, BusinessInfoData> businessMap,
-            IMap<Contact, ContactData> contactMap)
+            IMap<Contact, ContactData> contactMap,
+            ICarrierRepository repository)
         {
             this.addressMap = addressMap;
             this.businessMap = businessMap;
             this.contactMap = contactMap;
+            this.repository = repository;
         }
 
         public CarrierData Map(Carrier source)
@@ -42,7 +43,9 @@
 
         public IList<CarrierData> Map(Notification source)
         {
-            return source.Carriers.Select(c => new CarrierData
+            var carrierCollection = Task.Run(() => repository.GetByNotificationId(source.Id)).Result;
+
+            return carrierCollection.Carriers.Select(c => new CarrierData
             {
                 Address = addressMap.Map(c.Address),
                 Business = businessMap.Map(c.Business),

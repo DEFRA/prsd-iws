@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.Tests.Unit.ViewModels
 {
-    using System.Collections.Generic;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
-    using Domain.NotificationApplication;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -13,9 +11,9 @@
 
         private readonly MeansOfTransportFormatter formatter = new MeansOfTransportFormatter();
         private readonly TestableNotificationApplication notificiation;
+        private readonly TestableCarrierCollection carrierCollection;
         private readonly TestableCarrier firstCarrier;
         private readonly TestableCarrier secondCarrier;
-        private readonly List<Carrier> carriers = new List<Carrier>();
 
         public CarrierViewModelTests()
         {
@@ -33,16 +31,15 @@
                 Contact = TestableContact.MikeMerry
             };
 
-            notificiation = new TestableNotificationApplication
-            {
-                Carriers = carriers
-            };
+            notificiation = new TestableNotificationApplication();
+
+            carrierCollection = new TestableCarrierCollection(notificiation.Id);
         }
 
         [Fact]
-        public void NotificationIsNull_ReturnsEmptyList()
+        public void NotificationIsNull_CarrierCollectionIsNull_ReturnsEmptyList()
         {
-            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(null, formatter);
+            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(null, null, formatter);
 
             Assert.Empty(result);
         }
@@ -50,7 +47,7 @@
         [Fact]
         public void NotificationHasNoCarriers_ReturnsEmptyList()
         {
-            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(notificiation, formatter);
+            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(notificiation, carrierCollection, formatter);
 
             Assert.Empty(result);
         }
@@ -58,9 +55,9 @@
         [Fact]
         public void NotificationHasOneCarrier_ReturnsListWithOneItem()
         {
-            carriers.Add(firstCarrier);
+            carrierCollection.AddCarrier(firstCarrier.Business, firstCarrier.Address, firstCarrier.Contact);
 
-            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(notificiation, formatter);
+            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(notificiation, carrierCollection, formatter);
 
             Assert.Equal(1, result.Count);
         }

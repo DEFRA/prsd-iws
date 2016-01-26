@@ -12,17 +12,17 @@
 
     public class MovementDocumentGenerator : IMovementDocumentGenerator
     {
+        private readonly ICarrierRepository carrierRepository;
         private readonly IMovementDetailsRepository movementDetailsRepository;
-        private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly MovementBlocksFactory blocksFactory;
 
-        public MovementDocumentGenerator(INotificationApplicationRepository notificationApplicationRepository,
+        public MovementDocumentGenerator(ICarrierRepository carrierRepository,
             IMovementDetailsRepository movementDetailsRepository,
             MovementBlocksFactory blocksFactory)
         {
-            this.notificationApplicationRepository = notificationApplicationRepository;
             this.blocksFactory = blocksFactory;
             this.movementDetailsRepository = movementDetailsRepository;
+            this.carrierRepository = carrierRepository;
         }
 
         public async Task<byte[]> Generate(Guid movementId)
@@ -32,8 +32,8 @@
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
                     var movementDetails = await movementDetailsRepository.GetByMovementId(movementId);
-                    var notification = await notificationApplicationRepository.GetByMovementId(movementId);
-                    bool hasCarrierAnnex = notification.Carriers.Count() > 1;
+                    var carrierCollection = await carrierRepository.GetByMovementId(movementId);
+                    bool hasCarrierAnnex = carrierCollection.Carriers.Count() > 1;
 
                     var fields = MergeFieldLocator.GetMergeRuns(document);
                     var blocks = await blocksFactory.GetBlocks(movementId, fields);

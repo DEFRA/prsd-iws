@@ -22,7 +22,7 @@ BEGIN
 		N.[WasteGenerationProcess],
 		E.[Id] AS [ExporterId],
 		I.[Id] AS [ImporterId],
-		C.[Id] AS [CarrierId],
+		CC.[Id] AS [CarrierId],
 		OC.[Id] AS [OperationCodesId],
 		T.[Id] AS [TechnologyEmployedId],
 		PI.[Id] AS [PackagingInfoId],
@@ -44,9 +44,6 @@ BEGIN
 
 		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[Importer] WHERE NotificationId = @NotificationId) AS I
 		ON N.Id = I.NotificationId
-
-		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[Carrier] WHERE NotificationId = @NotificationId) AS C 
-		ON N.Id = C.NotificationId
 
 		LEFT JOIN (SELECT TOP (1) NotificationId, Id FROM [Notification].[OperationCodes] WHERE NotificationId = @NotificationId) AS OC 
 		ON N.Id = OC.NotificationId
@@ -85,6 +82,9 @@ BEGIN
 		ON N.Id = TS.NotificationId
 
 		LEFT JOIN [Notification].[FacilityCollection] FC ON N.Id = FC.NotificationId
+
+		LEFT JOIN (SELECT TOP(1) CC.NotificationId, C.Id FROM [Notification].[CarrierCollection] CC INNER JOIN [Notification].[Carrier] C ON CC.[Id] = C.[CarrierCollectionId] WHERE CC.NotificationId = @NotificationId) AS CC
+		ON N.Id = CC.NotificationId
 	WHERE
 		N.Id = @NotificationId;
 

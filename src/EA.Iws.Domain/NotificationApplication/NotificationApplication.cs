@@ -26,7 +26,6 @@
             NotificationNumber = CreateNotificationNumber(notificationNumber);
 
             ProducersCollection = new List<Producer>();
-            CarriersCollection = new List<Carrier>();
             OperationInfosCollection = new List<OperationInfo>();
             PackagingInfosCollection = new List<PackagingInfo>();
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
@@ -36,8 +35,6 @@
         }
 
         protected virtual ICollection<Producer> ProducersCollection { get; set; }
-
-        protected virtual ICollection<Carrier> CarriersCollection { get; set; }
 
         protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
 
@@ -107,12 +104,7 @@
         {
             get { return ProducersCollection.ToSafeIEnumerable(); }
         }
-
-        public IEnumerable<Carrier> Carriers
-        {
-            get { return CarriersCollection.ToSafeIEnumerable(); }
-        }
-
+        
         public IEnumerable<OperationInfo> OperationInfos
         {
             get { return OperationInfosCollection.ToSafeIEnumerable(); }

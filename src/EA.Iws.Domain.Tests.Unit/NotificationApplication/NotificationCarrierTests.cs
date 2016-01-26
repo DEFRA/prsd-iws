@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Core.Shared;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
@@ -11,16 +10,17 @@
     public class NotificationCarrierTests
     {
         private readonly Guid carrierId = Guid.NewGuid();
-        private readonly NotificationApplication notification;
+        private readonly CarrierCollection carrierCollection;
+        private static readonly Guid NotificationId = new Guid("0F458A12-2DD6-48A6-8ABF-D000D178D4C8");
 
         private int CarriersCount
         {
-            get { return notification.Carriers.Count(); }
+            get { return carrierCollection.Carriers.Count(); }
         }
 
         public NotificationCarrierTests()
         {
-            notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            carrierCollection = new CarrierCollection(NotificationId);
         }
 
         private void AddCarrier()
@@ -29,7 +29,7 @@
             var business = ObjectFactory.CreateEmptyBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            notification.AddCarrier(business, address, contact);
+            carrierCollection.AddCarrier(business, address, contact);
         }
 
         [Fact]
@@ -54,9 +54,9 @@
         public void CanRemoveCarrier()
         {
             AddCarrier();
-            EntityHelper.SetEntityId(notification.Carriers.First(), carrierId);
+            EntityHelper.SetEntityId(carrierCollection.Carriers.First(), carrierId);
 
-            notification.RemoveCarrier(carrierId);
+            carrierCollection.RemoveCarrier(carrierId);
             Assert.Equal(CarriersCount, 0);
         }
 
@@ -71,7 +71,7 @@
             }
 
             int j = 0;
-            foreach (var carrier in notification.Carriers)
+            foreach (var carrier in carrierCollection.Carriers)
             {
                 EntityHelper.SetEntityId(carrier, carrierIds[j]);
                 j++;
@@ -80,7 +80,7 @@
 
             for (int k = 0; k < 5; k++)
             {
-                notification.RemoveCarrier(carrierIds[k]);
+                carrierCollection.RemoveCarrier(carrierIds[k]);
             }
             Assert.Equal(CarriersCount, 0);
         }
