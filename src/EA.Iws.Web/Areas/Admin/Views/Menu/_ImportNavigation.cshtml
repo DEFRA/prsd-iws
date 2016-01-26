@@ -12,7 +12,7 @@
     @(Model.ActiveSection == section ? className : string.Empty)
 }
 
-<div id="accordion">
+<div id="accordion" class="accordion-import">
     <p class="bold-medium">&nbsp;@Model.Details.NotificationNumber</p>
     <ul>
         <li class="@GetClassForSection(ImportNavigationSection.Notification, "active")">

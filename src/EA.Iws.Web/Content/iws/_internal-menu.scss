@@ -1,8 +1,8 @@
-﻿#accordion {
+﻿@mixin accordion($menu-colour) {
     /*heading styles*/
     margin-top: 2.7em;
-    border-top: 10px solid $internal-colour;
-    border-bottom: 10px solid $internal-colour;
+    border-top: 10px solid $menu-colour;
+    border-bottom: 10px solid $menu-colour;
     background: $grey-4;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -19,7 +19,7 @@
         }
 
         &:hover {
-            background: $internal-colour;
+            background: $menu-colour;
             color: $white;
 
             span {
@@ -46,7 +46,7 @@
     }
 
     .current {
-        background: $internal-colour;
+        background: $menu-colour;
         color: $white;
 
         span {
@@ -72,7 +72,7 @@
             &:after {
                 content: '';
                 display: block;
-                border-bottom: 5px solid $internal-colour;
+                border-bottom: 5px solid $menu-colour;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 height: 0px;
@@ -132,4 +132,16 @@
     li.active ul {
         display: block;
     }
+}
+
+.accordion-import {
+    @include accordion($internal-import-colour);
+}
+
+.accordion-export {
+    @include accordion($internal-export-colour);
+}
+
+.accordion-general {
+    @include accordion($internal-colour);
 }

@@ -37,6 +37,8 @@ $path: "govuk_toolkit/images/";
 // ==========================================================================
 
 $internal-colour: $pink;
+$internal-import-colour: $orange;
+$internal-export-colour: $light-blue;
 @import "iws/helpers";
 @import "iws/display-elements";
 @import "iws/layout";

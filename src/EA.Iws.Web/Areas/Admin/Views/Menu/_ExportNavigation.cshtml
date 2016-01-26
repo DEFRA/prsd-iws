@@ -7,7 +7,7 @@
     @(Model.ActiveSection == section ? className : string.Empty)
 }
 
-<div id="accordion">
+<div id="accordion" class="accordion-export">
     <p class="bold-medium">&nbsp;@Model.Data.Number</p>
     <ul>
         <li class="@GetClassForSection(ExportNavigationSection.Assessment, "active")">
