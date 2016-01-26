@@ -34,13 +34,12 @@
 
             var transactions = await transactionRepository.GetTransactions(message.ImportNotificationId);
 
-            var credits = transactionCalculator.TotalCredits(transactions);
-            var debits = transactionCalculator.TotalDebits(transactions);
+            var totalPaid = await transactionCalculator.TotalPaid(message.ImportNotificationId);
 
             return new AccountOverviewData
             {
                 TotalCharge = charge,
-                TotalPaid = credits - debits,
+                TotalPaid = totalPaid,
                 Transactions = transactions.Select(t => mapper.Map<TransactionRecordData>(t)).ToArray()
             };
         }

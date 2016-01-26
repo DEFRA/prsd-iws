@@ -120,4 +120,7 @@
   <data name="MainHeading" xml:space="preserve">
     <value>Payment details</value>
   </data>
+  <data name="PaymentDue" xml:space="preserve">
+    <value>Payment due</value>
+  </data>
 </root>

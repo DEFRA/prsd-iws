@@ -8,6 +8,13 @@
 
 <h1 class="heading-large">@IndexResources.MainHeading</h1>
 
+<dl>
+    <dd class="bold-small">@IndexResources.PaymentDue</dd>
+    <dt>@Model.ChargeDue.ToString("C")</dt>
+</dl>
+
+<hr/>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

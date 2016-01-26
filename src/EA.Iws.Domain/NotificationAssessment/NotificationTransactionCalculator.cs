@@ -22,22 +22,21 @@
             this.chargeCalculator = chargeCalculator;
         }
 
-        public decimal TotalCredits(IList<NotificationTransaction> transactions)
+        private static decimal TotalCredits(IList<NotificationTransaction> transactions)
         {
             return transactions.Sum(t => t.Credit).GetValueOrDefault();
         }
 
-        public decimal TotalDebits(IList<NotificationTransaction> transactions)
+        private static decimal TotalDebits(IList<NotificationTransaction> transactions)
         {
             return transactions.Sum(t => t.Debit).GetValueOrDefault();
         }
 
         public async Task<decimal> Balance(Guid notificationId)
         {
-            var transactions = await transactionRepository.GetTransactions(notificationId);
             var totalBillable = await chargeCalculator.GetValue(notificationId);
 
-            var totalPaid = TotalCredits(transactions) - TotalDebits(transactions);
+            var totalPaid = await TotalPaid(notificationId);
 
             return totalBillable - totalPaid;
         }

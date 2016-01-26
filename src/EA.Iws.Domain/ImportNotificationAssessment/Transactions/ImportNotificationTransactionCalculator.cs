@@ -20,21 +20,21 @@
             this.chargeCalculator = chargeCalculator;
         }
 
-        public async Task<decimal> Balance(Guid importNotificationId)
+        public async Task<decimal> TotalPaid(Guid importNotificationId)
         {
             var transactions = (await transactionRepository.GetTransactions(importNotificationId)).ToArray();
 
             return TotalCredits(transactions) - TotalDebits(transactions);
         }
 
-        public decimal TotalCredits(IEnumerable<ImportNotificationTransaction> transactions)
+        private static decimal TotalCredits(IEnumerable<ImportNotificationTransaction> transactions)
         {
             Guard.ArgumentNotNull(() => transactions, transactions);
 
             return transactions.Sum(t => t.Credit.GetValueOrDefault(0));
         }
 
-        public decimal TotalDebits(IEnumerable<ImportNotificationTransaction> transactions)
+        private static decimal TotalDebits(IEnumerable<ImportNotificationTransaction> transactions)
         {
             Guard.ArgumentNotNull(() => transactions, transactions);
 
@@ -45,9 +45,17 @@
         {
             var price = await chargeCalculator.GetValue(importNotificationId);
 
-            var balance = await Balance(importNotificationId) + credit;
+            var balance = await TotalPaid(importNotificationId) + credit;
 
             return price - balance <= 0;
+        }
+
+        public async Task<decimal> Balance(Guid importNotificationId)
+        {
+            var totalBillable = await chargeCalculator.GetValue(importNotificationId);
+            var totalPaid = await TotalPaid(importNotificationId);
+
+            return totalBillable - totalPaid;
         }
     }
 }

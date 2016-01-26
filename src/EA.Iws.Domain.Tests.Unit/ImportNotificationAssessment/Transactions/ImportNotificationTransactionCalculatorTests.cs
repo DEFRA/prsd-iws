@@ -36,33 +36,9 @@
         }
 
         [Fact]
-        public void TotalCredits_ReturnsCorrectValue()
+        public async Task TotalPaid_ReturnsCorrectValue()
         {
-            Assert.Equal(TotalCredits, transactionCalculator.TotalCredits(transactions));
-        }
-
-        [Fact]
-        public void TotalCredits_NullEnumerable_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => transactionCalculator.TotalCredits(null));
-        }
-
-        [Fact]
-        public void TotalDebits_ReturnsCorrectValue()
-        {
-            Assert.Equal(TotalDebits, transactionCalculator.TotalDebits(transactions));
-        }
-
-        [Fact]
-        public void TotalDebits_NullEnumerable_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => transactionCalculator.TotalDebits(null));
-        }
-
-        [Fact]
-        public async Task Balance_ReturnsCorrectValue()
-        {
-            Assert.Equal(TotalCredits - TotalDebits, await transactionCalculator.Balance(Guid.Empty));
+            Assert.Equal(TotalCredits - TotalDebits, await transactionCalculator.TotalPaid(Guid.Empty));
         }
 
         [Fact]

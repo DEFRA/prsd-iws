@@ -35,6 +35,8 @@
             }
         }
 
+        public decimal ChargeDue { get; set; }
+
         public PaymentDetailsViewModel()
         {
             Date = new OptionalDateInputViewModel(true);

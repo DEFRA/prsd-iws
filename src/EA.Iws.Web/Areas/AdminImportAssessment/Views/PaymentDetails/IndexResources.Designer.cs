@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.PaymentDetails {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment due.
+        /// </summary>
+        public static string PaymentDue {
+            get {
+                return ResourceManager.GetString("PaymentDue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment details.
         /// </summary>
         public static string Title {

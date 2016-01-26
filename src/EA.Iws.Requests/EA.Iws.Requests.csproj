@@ -113,6 +113,7 @@
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\GetChargeDue.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverview.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotification.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummary.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\GetChargeDue.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />

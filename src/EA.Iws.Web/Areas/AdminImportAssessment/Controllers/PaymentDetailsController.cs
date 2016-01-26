@@ -18,9 +18,16 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            return View(new PaymentDetailsViewModel());
+            var chargeDue = await mediator.SendAsync(new GetChargeDue(id));
+
+            var model = new PaymentDetailsViewModel
+            {
+                ChargeDue = chargeDue
+            };
+
+            return View(model);
         }
 
         [HttpPost]

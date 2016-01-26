@@ -68,5 +68,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.PaymentDetails {
                 return ResourceManager.GetString("MainHeading", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment due.
+        /// </summary>
+        public static string PaymentDue {
+            get {
+                return ResourceManager.GetString("PaymentDue", resourceCulture);
+            }
+        }
     }
 }
