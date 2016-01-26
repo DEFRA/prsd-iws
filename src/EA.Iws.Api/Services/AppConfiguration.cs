@@ -19,5 +19,9 @@
         public string VerificationEmailTestDomains { get; set; }
 
         public string FeedbackEmailTo { get; set; }
+
+        public string ApiSecret { get; set; }
+
+        public string ApiClientId { get; set; }
     }
 }

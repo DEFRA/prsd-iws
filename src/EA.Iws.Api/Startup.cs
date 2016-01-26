@@ -49,7 +49,7 @@ namespace EA.Iws.Api
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver { IgnoreSerializableAttribute = true };
 
-            app.UseIdentityServer(GetIdentityServerOptions(app));
+            app.UseIdentityServer(GetIdentityServerOptions(app, configurationService.CurrentConfiguration));
 
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
@@ -62,9 +62,9 @@ namespace EA.Iws.Api
             app.UseWebApi(config);
         }
 
-        private static IdentityServerOptions GetIdentityServerOptions(IAppBuilder app)
+        private static IdentityServerOptions GetIdentityServerOptions(IAppBuilder app, AppConfiguration config)
         {
-            var factory = Factory.Configure();
+            var factory = Factory.Configure(config);
             factory.ConfigureUserService(app);
 
             return new IdentityServerOptions
