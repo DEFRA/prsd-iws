@@ -29,5 +29,5 @@ if($xunit -is [system.array])
     $testConsole = $xunit[0]
 }
 
-$iexTest = "& '$testConsole' '$testDllString' -noappdomain -nunit '$testOutDir'"
+$iexTest = "& '$testConsole' '$testDllString' -parallel assemblies -noappdomain -nunit '$testOutDir'"
 &iex $iexTest
