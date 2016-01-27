@@ -44,7 +44,7 @@
 
                 model.DateReceived = DateTime.Parse(dateReceivedResult.ToString());
                 model.Unit = (ShipmentQuantityUnits)unitResult;
-                model.Quantity = (decimal)quantityResult;
+                model.Quantity = decimal.Parse(quantityResult.ToString());
             }
 
             if (allDataPresent)
