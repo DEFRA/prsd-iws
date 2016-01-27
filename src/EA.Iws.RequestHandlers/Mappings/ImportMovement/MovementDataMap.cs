@@ -60,7 +60,8 @@
             return new ImportMovementReceiptData
             {
                 IsReceived = false,
-                PossibleUnits = possibleUnits
+                PossibleUnits = possibleUnits,
+                NotificationUnit = source.Units
             };
         }
     }

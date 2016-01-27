@@ -22,6 +22,8 @@
 
         public decimal? ActualQuantity { get; set; }
 
+        public ShipmentQuantityUnits NotificationUnits { get; set; }
+
         public ShipmentQuantityUnits? ReceiptUnits { get; set; }
 
         public IList<ShipmentQuantityUnits> PossibleUnits { get; set; }

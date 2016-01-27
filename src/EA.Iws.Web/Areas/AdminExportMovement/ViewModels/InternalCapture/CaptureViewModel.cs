@@ -46,7 +46,7 @@
             {
                 ActualQuantity = data.ActualQuantity,
                 ReceivedDate = new OptionalDateInputViewModel(data.ReceiptDate, true),
-                Units = data.ReceiptUnits,
+                Units = data.ReceiptUnits ?? data.NotificationUnits,
                 WasShipmentAccepted = string.IsNullOrWhiteSpace(data.RejectionReason),
                 RejectionReason = data.RejectionReason,
                 RejectionFurtherInformation = data.RejectionReasonFurtherInformation,

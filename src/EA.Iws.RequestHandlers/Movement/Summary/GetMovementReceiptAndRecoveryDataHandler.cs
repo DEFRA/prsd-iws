@@ -47,7 +47,8 @@
                 PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(shipmentInfo.Units).ToArray(),
                 ActualDate = movement.Date,
                 NotificationType = notification.NotificationType,
-                PrenotificationDate = movement.PrenotificationDate
+                PrenotificationDate = movement.PrenotificationDate,
+                NotificationUnits = shipmentInfo.Units
             };
 
             if (movement.Receipt != null)

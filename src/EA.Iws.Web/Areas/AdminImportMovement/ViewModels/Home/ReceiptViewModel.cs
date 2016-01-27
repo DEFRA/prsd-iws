@@ -59,7 +59,7 @@
         public ReceiptViewModel(ImportMovementReceiptData importMovementReceiptData)
         {
             ActualQuantity = importMovementReceiptData.ActualQuantity;
-            Units = importMovementReceiptData.ReceiptUnits;
+            Units = importMovementReceiptData.ReceiptUnits ?? importMovementReceiptData.NotificationUnit;
             PossibleUnits = importMovementReceiptData.PossibleUnits;
             RejectionReason = importMovementReceiptData.RejectionReason;
             RejectionFurtherInformation = importMovementReceiptData.RejectionReasonFurtherInformation;
