@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web
 {
     using System;
+    using System.Net;
     using Infrastructure;
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
@@ -21,9 +22,22 @@
                 ExpireTimeSpan = TimeSpan.FromHours(2),
                 Provider = new CookieAuthenticationProvider
                 {
-                    OnValidateIdentity = context => IdentityValidationHelper.OnValidateIdentity(context)
+                    OnValidateIdentity = context => IdentityValidationHelper.OnValidateIdentity(context),
+                    OnApplyRedirect = context => OnApplyRedirect(context)
                 }
             });
+        }
+
+        private static void OnApplyRedirect(CookieApplyRedirectContext context)
+        {
+            if (context.Request.User.Identity.IsAuthenticated)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+            }
+            else
+            {
+                context.Response.Redirect(context.RedirectUri);
+            }
         }
     }
 }
