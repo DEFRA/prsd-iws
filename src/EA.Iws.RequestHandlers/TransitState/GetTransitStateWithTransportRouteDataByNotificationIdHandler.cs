@@ -18,39 +18,29 @@
     internal class GetTransitStateWithTransportRouteDataByNotificationIdHandler : IRequestHandler<GetTransitStateWithTransportRouteDataByNotificationId, TransitStateWithTransportRouteData>
     {
         private readonly IwsContext context;
-        private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
-        private readonly IMap<Country, CountryData> countryMapper;
-        private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper;
-        private readonly IMap<StateOfImport, StateOfImportData> stateOfImportMapper;
-        private readonly IMap<StateOfExport, StateOfExportData> stateOfExportMapper;
-        private readonly IMap<TransitState, TransitStateData> transitStateMapper;
+        private readonly IMapper mapper;
         private readonly ITransportRouteRepository transportRouteRepository;
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
+        private readonly ICountryRepository countryRepository;
 
         public GetTransitStateWithTransportRouteDataByNotificationIdHandler(IwsContext context,
-            IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper,
-            IMap<Country, CountryData> countryMapper,
-            IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
-            IMap<StateOfImport, StateOfImportData> stateOfImportMapper,
-            IMap<StateOfExport, StateOfExportData> stateOfExportMapper,
-            IMap<TransitState, TransitStateData> transitStateMapper,
+            IMapper mapper,
             ITransportRouteRepository transportRouteRepository,
-            ICompetentAuthorityRepository competentAuthorityRepository)
+            ICompetentAuthorityRepository competentAuthorityRepository,
+            ICountryRepository countryRepository)
         {
             this.context = context;
-            this.competentAuthorityMapper = competentAuthorityMapper;
-            this.countryMapper = countryMapper;
-            this.entryOrExitPointMapper = entryOrExitPointMapper;
-            this.stateOfImportMapper = stateOfImportMapper;
-            this.stateOfExportMapper = stateOfExportMapper;
-            this.transitStateMapper = transitStateMapper;
+            this.mapper = mapper;
             this.transportRouteRepository = transportRouteRepository;
             this.competentAuthorityRepository = competentAuthorityRepository;
+            this.countryRepository = countryRepository;
         }
 
         public async Task<TransitStateWithTransportRouteData> HandleAsync(GetTransitStateWithTransportRouteDataByNotificationId message)
         {
-            var countries = await context.Countries.ToArrayAsync();
+            var countries = (await countryRepository.GetAllHavingCompetentAuthorities())
+                .Select(c => mapper.Map<CountryData>(c))
+                .ToArray();
 
             var transportRoute = await transportRouteRepository.GetByNotificationId(message.Id);
 
@@ -58,16 +48,16 @@
             {
                 return new TransitStateWithTransportRouteData
                 {
-                    Countries = countries.Select(countryMapper.Map).ToArray()
+                    Countries = countries
                 };
             }
 
             var data = new TransitStateWithTransportRouteData
             {
-                Countries = countries.Select(countryMapper.Map).ToArray(),
-                StateOfExport = stateOfExportMapper.Map(transportRoute.StateOfExport),
-                StateOfImport = stateOfImportMapper.Map(transportRoute.StateOfImport),
-                TransitStates = transportRoute.TransitStates.Select(transitStateMapper.Map).ToArray()
+                Countries = countries,
+                StateOfExport = mapper.Map<StateOfExportData>(transportRoute.StateOfExport),
+                StateOfImport = mapper.Map<StateOfImportData>(transportRoute.StateOfImport),
+                TransitStates = transportRoute.TransitStates.Select(t => mapper.Map<TransitStateData>(t)).ToArray()
             };
 
             var thisTransitState = transportRoute.TransitStates.SingleOrDefault(ts => ts.Id == message.TransitStateId);
@@ -77,10 +67,10 @@
                     await competentAuthorityRepository.GetTransitAuthorities(thisTransitState.Country.Id);
                 var entryPoints = await context.EntryOrExitPoints.Where(ep => ep.Country.Id == thisTransitState.Country.Id).ToArrayAsync();
 
-                data.CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray();
-                data.EntryOrExitPoints = entryPoints.Select(entryOrExitPointMapper.Map).ToArray();
+                data.CompetentAuthorities = competentAuthorities.Select(ca => mapper.Map<CompetentAuthorityData>(ca)).ToArray();
+                data.EntryOrExitPoints = entryPoints.Select(e => mapper.Map<EntryOrExitPointData>(e)).ToArray();
                 data.TransitStates = data.TransitStates.Where(ts => ts.Id != thisTransitState.Id).ToArray();
-                data.TransitState = transitStateMapper.Map(thisTransitState);
+                data.TransitState = mapper.Map<TransitStateData>(thisTransitState);
             }
 
             return data;

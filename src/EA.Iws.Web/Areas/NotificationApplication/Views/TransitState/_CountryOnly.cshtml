@@ -11,7 +11,8 @@
     else
     {
         @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = TransitStateResources.ExitCountry, data_select_box = "true" })
-    }
+    } 
 </div>
+@Html.Partial("_CountryNotListed")
 
 <button class="button" type="submit" value="country" name="submit">@Constants.ContinueButtonText</button>

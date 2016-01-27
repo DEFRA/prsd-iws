@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.StateOfImport
+@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.StateOfImport.StateOfImportResources
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
@@ -13,5 +14,6 @@
         @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = StateOfImportResources.ExitCountry, data_select_box = "true" })
     }
 </div>
+@Html.Partial("_CountryNotListed")
 
 <button class="button" type="submit" value="country" name="submit">@Constants.ContinueButtonText</button>

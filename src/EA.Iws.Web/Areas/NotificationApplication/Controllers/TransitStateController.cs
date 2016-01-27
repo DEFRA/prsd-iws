@@ -5,12 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
-    using Requests.Shared;
     using Requests.TransitState;
     using Requests.TransportRoute;
     using ViewModels.TransitState;
@@ -142,7 +140,7 @@
 
         private async Task<SelectList> GetCountrySelectListForModel(TransitStateViewModel model)
         {
-            var countries = await mediator.SendAsync(new GetCountries());
+            var countries = await mediator.SendAsync(new GetAllCountriesHavingCompetentAuthorities());
 
             return (model.CountryId.HasValue)
                 ? new SelectList(countries, "Id", "Name", model.CountryId.Value)

@@ -40,5 +40,11 @@
         {
             return await context.Countries.Where(c => c.IsoAlpha2Code == "GB").Select(c => c.Id).SingleAsync();
         }
+
+        public async Task<IEnumerable<Country>> GetAllHavingCompetentAuthorities()
+        {
+            return
+                await context.CompetentAuthorities.Select(c => c.Country).Distinct().ToArrayAsync();
+        }
     }
 }

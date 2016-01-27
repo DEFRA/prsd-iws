@@ -97,7 +97,7 @@
 
         private async Task<SelectList> GetCountrySelectListForModel(StateOfImportViewModel model)
         {
-            var countries = await mediator.SendAsync(new GetCountries());
+            var countries = await mediator.SendAsync(new GetAllCountriesHavingCompetentAuthorities());
 
             return (model.CountryId.HasValue)
                 ? new SelectList(countries, "Id", "Name", model.CountryId.Value)

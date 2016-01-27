@@ -13,5 +13,7 @@
         Task<Country> GetByName(string name);
 
         Task<Guid> GetUnitedKingdomId();
+
+        Task<IEnumerable<Country>> GetAllHavingCompetentAuthorities();
     }
 }
