@@ -371,6 +371,7 @@
     <Content Include="Content\iws\_notification-switcher.scss" />
     <Content Include="Areas\ImportNotification\Views\Facility\Add.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Facility\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ExportNotifications\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\_CountryNotListed.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\_PortNotListedDisclosure.cshtml" />
     <Content Include="Areas\Admin\Views\ImportNotification\Interim.cshtml" />
@@ -1157,6 +1158,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntryOrExitPointControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Controllers\ExportNotificationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\SmokeTestController.cs" />
@@ -1181,6 +1183,7 @@
       <DependentUpon>AddEntryOrExitPointViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\SuccessViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExportNotifications\ExportNotificationsViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\BasicSearchViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1242,6 +1245,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Success.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ExportNotifications\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\Home\ImportResultsResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2691,10 +2699,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BasicSearchViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModelResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>NotificationInterimViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NotificationReceivedDateViewModelResources.Designer.cs</LastGenOutput>
@@ -2731,6 +2735,10 @@
     <EmbeddedResource Include="Areas\Admin\Views\EntryOrExitPoint\Success.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Success.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ExportNotifications\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\Home\ImportResultsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
