@@ -3,6 +3,7 @@
     using System;
     using Infrastructure;
     using Microsoft.Owin;
+    using Microsoft.Owin.Security.Cookies;
     using Owin;
     using Prsd.Core.Web.Mvc.Owin;
     using Services;
@@ -11,13 +12,18 @@
     {
         public void ConfigureAuth(IAppBuilder app, AppConfiguration config)
         {
-            app.UseCookieAuthentication(new PrsdCookieAuthenticationOptions(
-                authenticationType: Constants.IwsAuthType)
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = Constants.IwsAuthType,
+                CookieName = Prsd.Core.Web.Constants.CookiePrefix + Constants.IwsAuthType,
+                LoginPath = new PathString("/Account/Login"),
+                SlidingExpiration = true,
+                ExpireTimeSpan = TimeSpan.FromHours(2),
+                Provider = new CookieAuthenticationProvider
                 {
-                    LoginPath = new PathString("/Account/Login"),
-                    SlidingExpiration = true,
-                    ExpireTimeSpan = TimeSpan.FromHours(2)
-                });
+                    OnValidateIdentity = context => IdentityValidationHelper.OnValidateIdentity(context)
+                }
+            });
         }
     }
 }
