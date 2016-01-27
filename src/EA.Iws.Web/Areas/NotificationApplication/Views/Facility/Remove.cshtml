@@ -15,7 +15,7 @@
         @Html.HiddenFor(m => m.NotificationId)
         @Html.HiddenFor(m => m.FacilityId)
 
-        <p>@RemoveFacilityResources.RemoveMessage</p>
+        <p>@Html.Raw(string.Format(RemoveFacilityResources.RemoveMessage, Model.FacilityName))</p>
 
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     }
