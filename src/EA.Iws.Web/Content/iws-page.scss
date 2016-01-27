@@ -463,8 +463,7 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     @include core-19;
 
     &.in-table {
-        font-weight: bold;
-        @include bold-16();
+        @include core-16();
     }
 
     text-decoration: underline;
