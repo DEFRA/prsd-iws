@@ -26,6 +26,10 @@
 
         public DateTime? DecisionDate { get; protected set; }
 
+        public DateTime? Consented { get; protected set; }
+
+        public string Officer { get; set; }
+
         public bool Preconsented { get; protected set; }
     }
 }

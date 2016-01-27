@@ -28,7 +28,10 @@
 		                    [ApplicationCompleted],
 		                    [Transmitted],
 		                    [Acknowledged],
-		                    [DecisionDate]
+		                    [DecisionDate],
+                            [Consented],
+                            [Officer]
+
                     FROM	[Reports].[DataExportNotifications]
 
                     WHERE	[CompetentAuthorityId] = @ca",

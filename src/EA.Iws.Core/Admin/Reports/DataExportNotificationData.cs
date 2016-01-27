@@ -12,6 +12,8 @@
 
         public NotificationStatus Status { get; set; }
 
+        public DateTime? ConsentDate { get; set; }
+
         public DateTime? NotificationReceived { get; set; }
 
         public DateTime? PaymentReceived { get; set; }
@@ -31,5 +33,7 @@
         public int? AssessmentStartedElapsedWorkingDays { get; set; }
 
         public int? TransmittedElapsedWorkingDays { get; set; }
+
+        public string Officer { get; set; }
     }
 }

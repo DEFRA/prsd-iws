@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.ExportNotifications {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BDU - Data Export notifications.
+        ///   Looks up a localized string similar to Data Export notifications.
         /// </summary>
         public static string MainHeading {
             get {
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.ExportNotifications {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BDU - Data Export notifications.
+        ///   Looks up a localized string similar to Data Export notifications.
         /// </summary>
         public static string Title {
             get {

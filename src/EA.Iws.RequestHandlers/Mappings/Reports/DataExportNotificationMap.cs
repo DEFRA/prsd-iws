@@ -34,7 +34,9 @@
                 Transmitted = source.Transmitted,
                 AssessmentStartedElapsedWorkingDays = GetAssessmentStartedElapsedWorkingDays(source, parameter),
                 TransmittedElapsedWorkingDays = GetTransmittedElapsedWorkingDays(source, parameter),
-                DecisionRequiredDate = GetDecisionRequiredByDate(source, parameter)
+                DecisionRequiredDate = GetDecisionRequiredByDate(source, parameter),
+                ConsentDate = source.Consented,
+                Officer = source.Officer
             };
         }
 

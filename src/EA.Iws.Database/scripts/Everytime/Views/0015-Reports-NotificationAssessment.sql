@@ -12,6 +12,7 @@ AS
 		CAST(D.[PaymentReceivedDate] AS DATE) AS [PaymentReceivedDate],
 		CAST(D.[AcknowledgedDate] AS DATE) AS [AcknowlegedDate],
 		CAST(D.[CommencementDate] AS DATE) AS [CommencementDate],
+		D.NameOfOfficer AS [Officer],
 		CAST(D.[CompleteDate] AS DATE) AS [CompleteDate],
 		CAST(D.[NotificationReceivedDate] AS DATE) AS [ReceivedDate],
 		CAST(D.[TransmittedDate] AS DATE) AS [TransmittedDate],
