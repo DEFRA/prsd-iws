@@ -300,10 +300,16 @@ VALUES (NEWID(),
         Cast(N'2015-09-01' AS DATE),
         Cast(N'2016-08-27' AS DATE))
 
+INSERT [Notification].[CarrierCollection]
+	   ([Id],
+	    [NotificationId])
+VALUES (N'50524C3E-9110-4D9C-B049-53F01DD16A75',
+		@NotificationId)
+
 INSERT [Notification].[carrier]
        ([id],
         [name],
-        [notificationid],
+        [carriercollectionid],
         [type],
         [registrationnumber],
         [additionalregistrationnumber],
@@ -321,7 +327,7 @@ INSERT [Notification].[carrier]
         [otherdescription])
 VALUES (NEWID(),
         N'Carrier',
-        @NotificationId,
+        N'50524C3E-9110-4D9C-B049-53F01DD16A75',
         1,
         N'CARRIER12345',
         NULL,
@@ -341,7 +347,7 @@ VALUES (NEWID(),
 INSERT [Notification].[carrier]
        ([id],
         [name],
-        [notificationid],
+        [carriercollectionid],
         [type],
         [registrationnumber],
         [additionalregistrationnumber],
@@ -359,7 +365,7 @@ INSERT [Notification].[carrier]
         [otherdescription])
 VALUES (NEWID(),
         N'Carrier Two',
-        @NotificationId,
+        N'50524C3E-9110-4D9C-B049-53F01DD16A75',
         2,
         N'CAR98765',
         NULL,
