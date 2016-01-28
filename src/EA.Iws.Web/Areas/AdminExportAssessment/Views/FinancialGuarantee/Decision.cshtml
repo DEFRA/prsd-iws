@@ -52,6 +52,16 @@ else
             if (currentlySelected !== "") {
                 $(dropdownId).trigger("change");
             }
+
+            $("#rdoYes").change(function() {
+                $("#referenceNumber").addClass("js-hidden");
+                $("#blanketBondReference").removeClass("js-hidden");
+            });
+
+            $("#rdoNo").change(function () {
+                $("#referenceNumber").removeClass("js-hidden");
+                $("#blanketBondReference").addClass("js-hidden");
+            });
         });
     </script>
 }

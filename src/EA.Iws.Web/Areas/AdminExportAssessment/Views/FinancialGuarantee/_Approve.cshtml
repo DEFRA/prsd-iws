@@ -1,37 +1,39 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuarantee.FinancialGuaranteeDecisionViewModel
 
-
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ApprovedFrom.Day)  @Html.Gds().FormGroupClass(m => m.ApprovedFrom.Month)  @Html.Gds().FormGroupClass(m => m.ApprovedFrom.Year)">
-    @Html.Gds().ValidationMessageFor(m => m.ApprovedFrom)
-    @Html.Gds().LabelFor(m => m.ApprovedFrom, false)
-    @Html.EditorFor(m => m.ApprovedFrom)
-</div>
-
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ApprovedTo.Day) @Html.Gds().FormGroupClass(m => m.ApprovedTo.Month) @Html.Gds().FormGroupClass(m => m.ApprovedTo.Year)">
-    @Html.Gds().ValidationMessageFor(m => m.ApprovedTo)
-    @Html.Gds().LabelFor(m => m.ApprovedTo, false)
-    @Html.EditorFor(m => m.ApprovedTo)
-</div>
-
 <div class="form-group">
     <div>Is this a blanket bond?</div>
 
     <div class="form-group">
-        <label class="block-label" for="rdoNo">
-            @Html.RadioButtonFor(m => m.IsApproved, false, new { @class = "", @id = "rdoNo" })No
+        <label class="block-label" data-target="validToDate" for="rdoNo">
+            @Html.RadioButtonFor(m => m.IsBlanketBond, false, new { @class = "", @id = "rdoNo" })No
         </label>
 
-        <label class="block-label" data-target="blanketbondreference" for="rdoYes">
-            @Html.RadioButtonFor(m => m.IsApproved, true, new { @class = "", @id = "rdoYes" })Yes
+        <label class="block-label" for="rdoYes">
+            @Html.RadioButtonFor(m => m.IsBlanketBond, true, new { @class = "", @id = "rdoYes" })Yes
         </label>
     </div>
+</div>
 
-    <div class="@(Model.IsApproved.GetValueOrDefault() ? string.Empty : "js-hidden")" id="blanketbondreference">
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.BlanketBondReference)">
-            @Html.Gds().ValidationMessageFor(m => m.BlanketBondReference)
-            @Html.Gds().LabelFor(m => m.BlanketBondReference, showOptionalLabel: false)
-            @Html.Gds().TextBoxFor(m => m.BlanketBondReference, new { @MaxLength = "70" })
-        </div>
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ValidFrom.Day)  @Html.Gds().FormGroupClass(m => m.ValidFrom.Month)  @Html.Gds().FormGroupClass(m => m.ValidFrom.Year)">
+    @Html.Gds().ValidationMessageFor(m => m.ValidFrom)
+    @Html.Gds().LabelFor(m => m.ValidFrom, false)
+    @Html.EditorFor(m => m.ValidFrom)
+</div>
+
+<div class="@(Model.IsBlanketBond.GetValueOrDefault() ? "js-hidden" : string.Empty)" id="validToDate">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ValidTo.Day) @Html.Gds().FormGroupClass(m => m.ValidTo.Month) @Html.Gds().FormGroupClass(m => m.ValidTo.Year)">
+        @Html.Gds().ValidationMessageFor(m => m.ValidTo)
+        @Html.Gds().LabelFor(m => m.ValidTo, false)
+        @Html.EditorFor(m => m.ValidTo)
+    </div>
+</div>
+
+<div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReferenceNumber)">
+        @Html.Gds().ValidationMessageFor(m => m.ReferenceNumber)
+        <div class="@(Model.IsBlanketBond.GetValueOrDefault() ? "js-hidden" : string.Empty)" id="referenceNumber">Reference number</div>
+        <div class="@(Model.IsBlanketBond.GetValueOrDefault() ?  string.Empty : "js-hidden")" id="blanketBondReference">Blanket bond reference number</div>
+        @Html.Gds().TextBoxFor(m => m.ReferenceNumber, new { @MaxLength = "70" })
     </div>
 </div>
 
@@ -39,10 +41,4 @@
     @Html.Gds().ValidationMessageFor(m => m.ActiveLoadsPermitted)
     @Html.Gds().LabelFor(m => m.ActiveLoadsPermitted, false)
     @Html.Gds().TextBoxFor(m => m.ActiveLoadsPermitted, new { type = "number", min = "1", step = "1", pattern = "[0-9]*" })
-</div>
-
-<div class="form-group @Html.Gds().FormGroupClass(m => m.AmountOfCoverProvided)">
-    @Html.Gds().ValidationMessageFor(m => m.AmountOfCoverProvided)
-    @Html.Gds().LabelFor(m => m.AmountOfCoverProvided, false)
-    @Html.Gds().TextBoxFor(m => m.AmountOfCoverProvided, new { type = "number", min = "0.01", step = "0.01", pattern = "[0-9]*" })
 </div>

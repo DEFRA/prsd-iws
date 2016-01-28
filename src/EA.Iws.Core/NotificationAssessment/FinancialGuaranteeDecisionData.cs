@@ -10,8 +10,8 @@
 
         public string Decision { get; set; }
 
-        public DateTime? ApprovedFrom { get; set; }
+        public DateTime? ValidFrom { get; set; }
 
-        public DateTime? ApprovedTo { get; set; }
+        public DateTime? ValidTo { get; set; }
     }
 }

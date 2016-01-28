@@ -226,11 +226,11 @@
                     @Html.Gds().DisplayDate(decision.Date)
                 </td>
                 <td>
-                    @if (decision.ApprovedFrom.HasValue && decision.ApprovedTo.HasValue)
+                    @if (decision.ValidFrom.HasValue && decision.ValidTo.HasValue)
                     {
                         @Html.Gds().DisplayShortDateRange(
-                            decision.ApprovedFrom.Value,
-                            decision.ApprovedTo.Value)
+                            decision.ValidFrom.Value,
+                            decision.ValidTo.Value)
                     }
                 </td>
             </tr>
@@ -270,8 +270,8 @@
             @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].NotificationId)
             @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Date)
             @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Decision)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedFrom)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ApprovedTo)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ValidFrom)
+            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].ValidTo)
         }
 
         for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)

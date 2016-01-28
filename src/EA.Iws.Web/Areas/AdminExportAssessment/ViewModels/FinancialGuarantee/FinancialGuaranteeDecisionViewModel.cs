@@ -47,17 +47,14 @@
         [Display(Name = "Date decision made")]
         public OptionalDateInputViewModel DecisionMadeDate { get; set; }
 
-        [Display(Name = "Approved from")]
-        public OptionalDateInputViewModel ApprovedFrom { get; set; }
+        [Display(Name = "Valid from")]
+        public OptionalDateInputViewModel ValidFrom { get; set; }
 
-        [Display(Name = "Approved to")]
-        public OptionalDateInputViewModel ApprovedTo { get; set; }
+        [Display(Name = "Valid to")]
+        public OptionalDateInputViewModel ValidTo { get; set; }
 
         [Display(Name = "Active loads permitted")]
         public int? ActiveLoadsPermitted { get; set; }
-
-        [Display(Name = "Amount of cover provided (£)")]
-        public decimal? AmountOfCoverProvided { get; set; }
 
         [MaxLength(2048)]
         [Display(Name = "Reason for refusal")]
@@ -66,26 +63,14 @@
         public FinancialGuaranteeDecisionViewModel()
         {
             DecisionMadeDate = new OptionalDateInputViewModel();
-            ApprovedFrom = new OptionalDateInputViewModel();
-            ApprovedTo = new OptionalDateInputViewModel();
+            ValidFrom = new OptionalDateInputViewModel();
+            ValidTo = new OptionalDateInputViewModel();
         }
 
-        public bool? IsApproved
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(BlanketBondReference))
-                {
-                    return false;
-                }
-
-                return true;
-            }
-        }
+        public bool? IsBlanketBond { get; set; }
         
-        [Display(Name = "Blanket bond reference number")]
         [MaxLength(70)]
-        public string BlanketBondReference { get; set; }
+        public string ReferenceNumber { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -140,26 +125,31 @@
                 yield return DecisionMadeDateValidation();
             }
 
-            if (!ApprovedFrom.IsCompleted)
+            if (!ValidFrom.IsCompleted)
             {
-                yield return new ValidationResult(RequiredValidationMessage("Approved from"), new[] { "ApprovedFrom.Day" });
+                yield return new ValidationResult(RequiredValidationMessage("Valid from"), new[] { "ValidFrom.Day" });
             }
 
-            if (!ApprovedTo.IsCompleted)
+            if (!ValidTo.IsCompleted && !IsBlanketBond.GetValueOrDefault())
             {
-                yield return new ValidationResult(RequiredValidationMessage("Approved to"), new[] { "ApprovedTo.Day" });
+                yield return new ValidationResult(RequiredValidationMessage("Valid to"), new[] { "ValidTo.Day" });
             }
 
-            if (ApprovedFrom.IsCompleted 
-                && ApprovedTo.IsCompleted 
-                && ApprovedFrom.AsDateTime() > ApprovedTo.AsDateTime())
+            if (ValidFrom.IsCompleted 
+                && ValidTo.IsCompleted 
+                && ValidFrom.AsDateTime() > ValidTo.AsDateTime())
             {
-                yield return new ValidationResult("The Approved to date must not be before the Approved from date", new[] { "ApprovedTo.Day" });
+                yield return new ValidationResult("The valid to date must not be before the valid from date", new[] { "ValidTo.Day" });
             }
 
-            if (IsApproved.GetValueOrDefault() && string.IsNullOrEmpty(BlanketBondReference))
+            if (IsBlanketBond.GetValueOrDefault() && string.IsNullOrEmpty(ReferenceNumber))
             {
-                yield return new ValidationResult("Please enter a reference number for the blanket bond", new[] { "BlanketBondReferenceNumber" });
+                yield return new ValidationResult("Please enter a reference number for the blanket bond", new[] { "ReferenceNumber" });
+            }
+
+            if (!IsBlanketBond.GetValueOrDefault() && string.IsNullOrEmpty(ReferenceNumber))
+            {
+                yield return new ValidationResult("Please enter a reference number for the financial guarantee", new[] { "ReferenceNumber" });
             }
 
             if (!ActiveLoadsPermitted.HasValue)
@@ -170,11 +160,6 @@
             if (ActiveLoadsPermitted.HasValue && ActiveLoadsPermitted.Value <= 0)
             {
                 yield return new ValidationResult("The Active loads permitted must be greater than 0", new[] { "ActiveLoadsPermitted" });
-            }
-
-            if (!AmountOfCoverProvided.HasValue || AmountOfCoverProvided == 0.00m)
-            {
-                yield return new ValidationResult(RequiredValidationMessage("Please enter the amount of cover provided"), new[] {"AmountOfCoverProvided"});
             }
         }
 

@@ -6,29 +6,29 @@
     {
         public DateTime DecisionDate { get; private set; }
 
-        public DateTime ApprovedFrom { get; private set; }
+        public DateTime ValidFrom { get; private set; }
 
-        public DateTime ApprovedTo { get; private set; }
+        public DateTime ValidTo { get; private set; }
 
         public int ActiveLoadsPermitted { get; private set; }
 
-        public decimal AmountOfCoverProvided { get; private set; }
+        public string ReferenceNumber { get; private set; }
 
-        public string BlanketBondReference { get; private set; }
+        public bool IsBlanketBond { get; private set; }
 
-        public ApproveDates(DateTime decisionDate, DateTime approvedFrom, DateTime approvedTo, string blanketBondReference, int activeLoadsPermitted, decimal amountOfCoverProvided)
+        public ApproveDates(DateTime decisionDate, DateTime validFrom, DateTime validTo, string referenceNumber, int activeLoadsPermitted, bool isBlanketBond)
         {
-            if (approvedFrom > approvedTo)
+            if (!isBlanketBond && validFrom > validTo)
             {
-                throw new InvalidOperationException("Approved from cannot be after approved to.");
+                throw new InvalidOperationException("Valid from cannot be after valid to.");
             }
 
             DecisionDate = decisionDate;
-            ApprovedFrom = approvedFrom;
-            ApprovedTo = approvedTo;
+            ValidFrom = validFrom;
+            ValidTo = validTo;
             ActiveLoadsPermitted = activeLoadsPermitted;
-            AmountOfCoverProvided = amountOfCoverProvided;
-            BlanketBondReference = blanketBondReference;
+            ReferenceNumber = referenceNumber;
+            IsBlanketBond = isBlanketBond;
         }
     }
 }

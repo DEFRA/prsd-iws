@@ -15,11 +15,11 @@
                 case FinancialGuaranteeDecision.Approved:
                     return new ApproveFinancialGuarantee(id,
                         source.DecisionMadeDate.AsDateTime().Value,
-                        source.ApprovedFrom.AsDateTime().Value,
-                        source.ApprovedTo.AsDateTime().Value,
-                        source.BlanketBondReference,
+                        source.ValidFrom.AsDateTime().Value,
+                        source.ValidTo.AsDateTime().GetValueOrDefault(),
+                        source.ReferenceNumber,
                         source.ActiveLoadsPermitted.Value,
-                        Convert.ToDecimal(source.AmountOfCoverProvided));
+                        source.IsBlanketBond.GetValueOrDefault());
                 case FinancialGuaranteeDecision.Refused:
                     return new RefuseFinancialGuarantee(id, 
                         source.DecisionMadeDate.AsDateTime().Value, 

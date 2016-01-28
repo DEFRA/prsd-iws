@@ -25,16 +25,16 @@
             set { base.DecisionDate = value; }
         }
 
-        public new DateTime? ApprovedFrom
+        public new DateTime? ValidFrom
         {
-            get { return base.ApprovedFrom; }
-            set { base.ApprovedFrom = value; }
+            get { return base.ValidFrom; }
+            set { base.ValidFrom = value; }
         }
 
-        public new DateTime? ApprovedTo
+        public new DateTime? ValidTo
         {
-            get { return base.ApprovedTo; }
-            set { base.ApprovedTo = value; }
+            get { return base.ValidTo; }
+            set { base.ValidTo = value; }
         }
 
         public new string RefusalReason

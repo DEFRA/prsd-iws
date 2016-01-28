@@ -32,13 +32,13 @@
                 DecisionRequiredDate = source.GetDecisionRequiredDate(workingDayCalculator, parameter),
                 ReceivedDate = source.ReceivedDate,
                 DecisionDate = source.DecisionDate,
-                ValidFrom = source.ApprovedFrom,
-                ValidTo = source.ApprovedTo,
+                ValidFrom = source.ValidFrom,
+                ValidTo = source.ValidTo,
                 RefusalReason = source.RefusalReason,
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
-                AmountOfCoverProvided = source.AmountOfCoverProvided,
                 Decision = GetDecision(source),
-                BlanketBondReference = source.BlanketBondReference
+                ReferenceNumber = source.ReferenceNumber,
+                IsBlanketBond = source.IsBlanketBond.GetValueOrDefault()
             };
         }
 

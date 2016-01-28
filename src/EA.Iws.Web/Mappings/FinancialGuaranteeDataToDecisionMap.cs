@@ -14,16 +14,16 @@ namespace EA.Iws.Web.Mappings
                 DecisionRequiredDate = source.DecisionRequiredDate,
                 Status = source.Status,
                 IsApplicationCompleted = source.CompletedDate.HasValue,
-                ApprovedFrom = new OptionalDateInputViewModel(source.ValidFrom),
-                ApprovedTo = new OptionalDateInputViewModel(source.ValidTo),
+                ValidFrom = new OptionalDateInputViewModel(source.ValidFrom),
+                ValidTo = new OptionalDateInputViewModel(source.ValidTo),
                 DecisionMadeDate = new OptionalDateInputViewModel(source.DecisionDate),
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
-                AmountOfCoverProvided = source.AmountOfCoverProvided,
                 ReasonForRefusal = source.RefusalReason,
                 Decision = source.Decision,
                 CompletedDate = source.CompletedDate,
                 ReceivedDate = source.ReceivedDate,
-                BlanketBondReference = source.BlanketBondReference
+                ReferenceNumber = source.ReferenceNumber,
+                IsBlanketBond = source.IsBlanketBond
             };
         }
     }

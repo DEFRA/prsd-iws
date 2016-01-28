@@ -8,38 +8,38 @@
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotificationAssessment)]
     public class ApproveFinancialGuarantee : FinancialGuaranteeDecisionRequest
     {
-        public DateTime ApprovedFrom { get; private set; }
+        public DateTime ValidFrom { get; private set; }
 
-        public DateTime ApprovedTo { get; private set; }
+        public DateTime ValidTo { get; private set; }
 
         public int ActiveLoadsPermitted { get; set; }
 
-        public decimal AmountOfCoverProvided { get; set; }
+        public string ReferenceNumber { get; set; }
 
-        public string BlanketBondReference { get; set; }
+        public bool IsBlanketbond { get; set; }
 
         public ApproveFinancialGuarantee(Guid notificationId, 
             DateTime decisionDate,
-            DateTime approvedFrom,
-            DateTime approvedTo,
+            DateTime validFrom,
+            DateTime validTo,
             string blanketBondReference,
             int activeLoadsPermitted,
-            decimal amountOfCoverProvided)
+            bool isBlanketBond)
         {
-            if (approvedFrom > approvedTo)
+            if (!isBlanketBond && validFrom > validTo)
             {
-                throw new ArgumentException("Approved from date must be before approved to date.");
+                throw new ArgumentException("Valid from date must be before valid to date.");
             }
 
             Guard.ArgumentNotZeroOrNegative(() => activeLoadsPermitted, activeLoadsPermitted);
 
             NotificationId = notificationId;
             DecisionDate = decisionDate;
-            ApprovedFrom = approvedFrom;
-            ApprovedTo = approvedTo;
+            ValidFrom = validFrom;
+            ValidTo = validTo;
             ActiveLoadsPermitted = activeLoadsPermitted;
-            BlanketBondReference = blanketBondReference;
-            AmountOfCoverProvided = amountOfCoverProvided;
+            ReferenceNumber = blanketBondReference;
+            IsBlanketbond = isBlanketBond;
         }
     }
 }

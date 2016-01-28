@@ -15,8 +15,8 @@
                 NotificationId = source.NotificationId,
                 Date = source.Date,
                 Decision = string.Format("Financial guarantee {0}", EnumHelper.GetDisplayName(source.Status).ToLowerInvariant()),
-                ApprovedFrom = source.ApprovedFrom,
-                ApprovedTo = source.ApprovedTo
+                ValidFrom = source.ValidFrom,
+                ValidTo = source.ValidTo
             };
         }
     }

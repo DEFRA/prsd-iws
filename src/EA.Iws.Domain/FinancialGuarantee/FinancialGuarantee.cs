@@ -64,19 +64,19 @@
 
         public DateTime? DecisionDate { get; protected set; }
 
-        public DateTime? ApprovedFrom { get; protected set; }
+        public DateTime? ValidFrom { get; protected set; }
 
-        public DateTime? ApprovedTo { get; protected set; }
+        public DateTime? ValidTo { get; protected set; }
 
         public string RefusalReason { get; protected set; }
 
-        public string BlanketBondReference { get; protected set; }
+        public string ReferenceNumber { get; protected set; }
 
         public int? ActiveLoadsPermitted { get; protected set; }
 
-        public decimal? AmountOfCoverProvided { get; protected set; }
-
         public DateTime? ReleasedDate { get; private set; }
+
+        public bool? IsBlanketBond { get; private set; }
 
         public void Received(DateTime date)
         {
@@ -209,11 +209,19 @@
         private void OnApproved(ApproveDates approveDates)
         {
             DecisionDate = approveDates.DecisionDate;
-            ApprovedTo = approveDates.ApprovedTo;
-            ApprovedFrom = approveDates.ApprovedFrom;
+            ValidFrom = approveDates.ValidFrom;
             ActiveLoadsPermitted = approveDates.ActiveLoadsPermitted;
-            AmountOfCoverProvided = approveDates.AmountOfCoverProvided;
-            BlanketBondReference = approveDates.BlanketBondReference;
+            ReferenceNumber = approveDates.ReferenceNumber;
+            IsBlanketBond = approveDates.IsBlanketBond;
+
+            if (approveDates.IsBlanketBond)
+            {
+                ValidTo = null;
+            }
+            else
+            {
+                ValidTo = approveDates.ValidTo;
+            }
         }
 
         public virtual void Refuse(DateTime decisionDate, string refusalReason)
@@ -222,7 +230,7 @@
 
             if (string.IsNullOrWhiteSpace(refusalReason))
             {
-                throw new ArgumentException("Refusal reason cannot be whitespace. Id: " + NotificationApplicationId);
+                throw new ArgumentException("Refusal reason cannot be white space. Id: " + NotificationApplicationId);
             }
 
             if (decisionDate < CompletedDate)
