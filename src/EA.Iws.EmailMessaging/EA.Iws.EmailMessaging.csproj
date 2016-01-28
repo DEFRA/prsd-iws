@@ -77,6 +77,8 @@
     <Compile Include="EmailMessagingModule.cs" />
     <Compile Include="IEmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorEngineSetup.cs" />
+    <Compile Include="ResourceTemplateManager.cs" />
     <Compile Include="SiteInformation.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +100,8 @@
     <EmbeddedResource Include="Templates\PasswordResetRequest.txt" />
     <EmbeddedResource Include="Templates\Feedback.cshtml" />
     <EmbeddedResource Include="Templates\Feedback.txt" />
+    <EmbeddedResource Include="Templates\_GovUkBanner.cshtml" />
+    <EmbeddedResource Include="Templates\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\Test.txt" />

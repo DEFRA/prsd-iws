@@ -5,6 +5,7 @@
     using Prsd.Core.Domain;
     using Prsd.Email;
     using Prsd.Email.Rules;
+    using RazorEngine.Templating;
 
     public class EmailMessagingModule : Module
     {
@@ -24,6 +25,9 @@
             builder.RegisterType<Sender>().As<ISender>();
             builder.RegisterType<SmtpClientProxy>().As<ISmtpClient>();
             builder.RegisterType<EmailService>().As<IEmailService>();
+            builder.RegisterType<ResourceTemplateManager>().As<ITemplateManager>();
+
+            builder.RegisterType<RazorEngineSetup>().As<IStartable>().SingleInstance();
         }
     }
 }
