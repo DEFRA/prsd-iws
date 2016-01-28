@@ -12,14 +12,17 @@
     public class GetKeyDatesHandler : IRequestHandler<GetKeyDates, KeyDatesData>
     {
         private readonly IImportNotificationAssessmentRepository notificationAssessmentRepository;
+        private readonly IInterimStatusRepository interimStatusRepository;
         private readonly DecisionRequiredBy decisionRequiredBy;
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
 
         public GetKeyDatesHandler(IImportNotificationAssessmentRepository notificationAssessmentRepository,
+            IInterimStatusRepository interimStatusRepository,
            DecisionRequiredBy decisionRequiredBy,
             IImportNotificationTransactionCalculator transactionCalculator)
         {
             this.notificationAssessmentRepository = notificationAssessmentRepository;
+            this.interimStatusRepository = interimStatusRepository;
             this.decisionRequiredBy = decisionRequiredBy;
             this.transactionCalculator = transactionCalculator;
         }
@@ -27,6 +30,7 @@
         public async Task<KeyDatesData> HandleAsync(GetKeyDates message)
         {
             var assessment = await notificationAssessmentRepository.GetByNotification(message.ImportNotificationId);
+            var interimStatus = await interimStatusRepository.GetByNotificationId(message.ImportNotificationId);
 
             return new KeyDatesData
             {
@@ -38,7 +42,8 @@
                 AssessmentStarted = DateTimeOffsetAsDateTime(assessment.Dates.AssessmentStartedDate),
                 NotificationCompletedDate = DateTimeOffsetAsDateTime(assessment.Dates.NotificationCompletedDate),
                 AcknowlegedDate = DateTimeOffsetAsDateTime(assessment.Dates.AcknowledgedDate),
-                DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment)
+                DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment),
+                IsInterim = interimStatus.IsInterim
             };
         }
 

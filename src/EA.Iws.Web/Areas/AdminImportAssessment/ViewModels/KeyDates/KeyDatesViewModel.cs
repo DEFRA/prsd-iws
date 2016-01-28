@@ -32,6 +32,7 @@
             DecisionDate = new OptionalDateInputViewModel(keyDates.DecisionRequiredByDate, true);
             NewDate = new OptionalDateInputViewModel(true);
             Decisions = new List<NotificationAssessmentDecision>();
+            IsInterim = keyDates.IsInterim;
         }
 
         public Guid NotificationId { get; set; }
@@ -62,6 +63,8 @@
         public string NameOfOfficer { get; set; }
 
         public OptionalDateInputViewModel NewDate { get; set; }
+
+        public bool IsInterim { get; set; }
 
         public bool CommencementComplete
         {

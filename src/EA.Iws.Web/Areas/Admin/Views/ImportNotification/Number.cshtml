@@ -1,7 +1,8 @@
-﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationNumberViewModel
+﻿@using Resources = EA.Iws.Web.Areas.Admin.Views.ImportNotification.NumberResources
+@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationNumberViewModel
 
 @{
-    ViewBag.Title = "Enter import notification number";
+    ViewBag.Title = Resources.Title;
 }
 
 @using (Html.BeginForm())
@@ -9,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     <header class="hgroup">
-        <h1 class="heading-large">Enter import notification number</h1>
+        <h1 class="heading-large">@Resources.MainHeading</h1>
     </header>
 
     @Html.Gds().ValidationSummary()

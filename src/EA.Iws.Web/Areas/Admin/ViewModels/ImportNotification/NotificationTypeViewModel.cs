@@ -22,5 +22,7 @@
         public string NotificationNumber { get; set; }
 
         public DateTime ReceivedDate { get; set; }
+
+        public bool IsInterim { get; set; }
     }
 }

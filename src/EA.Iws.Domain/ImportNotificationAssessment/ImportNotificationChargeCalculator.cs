@@ -7,7 +7,6 @@
     using Core.Shared;
     using ImportNotification;
     using NotificationApplication;
-    using IFacilityRepository = ImportNotification.IFacilityRepository;
 
     [AutoRegister]
     public class ImportNotificationChargeCalculator : IImportNotificationChargeCalculator
@@ -15,17 +14,17 @@
         private readonly IImportNotificationRepository notificationRepository;
         private readonly IShipmentRepository shipmentRepository;
         private readonly IPricingStructureRepository pricingStructureRepository;
-        private readonly IFacilityRepository facilityRepository;
+        private readonly IInterimStatusRepository interimStatusRepository;
 
         public ImportNotificationChargeCalculator(IImportNotificationRepository notificationRepository, 
             IShipmentRepository shipmentRepository,
             IPricingStructureRepository pricingStructureRepository,
-            IFacilityRepository facilityRepository)
+            IInterimStatusRepository interimStatusRepository)
         {
             this.notificationRepository = notificationRepository;
             this.shipmentRepository = shipmentRepository;
             this.pricingStructureRepository = pricingStructureRepository;
-            this.facilityRepository = facilityRepository;
+            this.interimStatusRepository = interimStatusRepository;
         }
 
         public async Task<decimal> GetValue(Guid importNotificationId)
@@ -43,10 +42,9 @@
 
         private async Task<bool> GetInterimStatus(Guid notificationId)
         {
-            var facilityCollection = await facilityRepository.GetByNotificationId(notificationId);
+            var interimStatus = await interimStatusRepository.GetByNotificationId(notificationId);
 
-            return facilityCollection != null && facilityCollection.Facilities != null &&
-                            facilityCollection.Facilities.Skip(1).Any();
+            return interimStatus.IsInterim;
         }
 
         private async Task<decimal> GetPrice(ImportNotification notification, Shipment shipment, bool isInterim)

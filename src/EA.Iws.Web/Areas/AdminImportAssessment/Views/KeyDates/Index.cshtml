@@ -2,7 +2,7 @@
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates
 @using EA.Prsd.Core.Web.Mvc.RazorHelpers
-@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates.KeyDatesViewModel
+@model KeyDatesViewModel
 
 @{
     ViewBag.Title = Resource.Title;
@@ -35,6 +35,23 @@
             </td>
             <td>
             </td>
+        </tr>
+
+        <tr>
+            <td>
+                Interim or non-interim
+            </td>
+            <td>
+                @if (Model.IsInterim)
+                {
+                    <text>Interim</text>
+                }
+                else
+                {
+                    <text>Non-interim</text>
+                }
+            </td>
+            <td></td>
         </tr>
 
         <tr>

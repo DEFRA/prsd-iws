@@ -1,0 +1,38 @@
+﻿@using Resources = EA.Iws.Web.Areas.Admin.Views.ImportNotification.InterimResources
+@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationInterimViewModel
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.MainHeading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    
+    @Html.HiddenFor(m => m.NotificationNumber)
+    @Html.HiddenFor(m => m.NotificationReceivedDate)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
+        @Html.Gds().LabelFor(m => m.IsInterim, new { @class = "visually-hidden" })
+        @Html.Gds().ValidationMessageFor(m => m.IsInterim)
+        <fieldset>
+            <label class="block-label" for="Interim">
+                @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "Interim" })
+                @Resources.Interim
+            </label>
+
+            <label class="block-label" for="NonInterim">
+                @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "NonInterim" })
+                @Resources.NonInterim
+            </label>
+        </fieldset>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}
+

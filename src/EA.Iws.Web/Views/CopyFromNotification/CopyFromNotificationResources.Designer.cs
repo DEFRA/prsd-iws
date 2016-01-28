@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Views.CopyFromNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a notification from your previous notifications to copy the data from. You will have to set intended shipments information for this copied notification..
+        ///   Looks up a localized string similar to Choose a previous notification to copy information from. Please note that you&apos;ll still have to enter detail about your intended shipments..
         /// </summary>
         public static string HeaderDescription {
             get {

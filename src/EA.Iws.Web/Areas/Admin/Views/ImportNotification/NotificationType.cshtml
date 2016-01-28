@@ -1,10 +1,11 @@
-﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationTypeViewModel
+﻿@using Resources = EA.Iws.Web.Areas.Admin.Views.ImportNotification.NotificationTypeResources
+@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationTypeViewModel
 @{
-    ViewBag.Title = "Enter import notification type";
+    ViewBag.Title = Resources.Title;
 }
 
 <header class="hgroup text">
-    <h1 class="heading-large">What type of notification are you recording?</h1>
+    <h1 class="heading-large">@Resources.MainHeading</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -14,6 +15,7 @@
 
     @Html.HiddenFor(m => m.NotificationNumber)
     @Html.HiddenFor(m => m.ReceivedDate)
+    @Html.HiddenFor(m => m.IsInterim)
 
     <div class="form-group">@Html.EditorFor(m => m.NotificationTypeRadioButtons)</div>
 

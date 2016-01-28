@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotificationAssessment
 {
-    using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.ImportNotification;

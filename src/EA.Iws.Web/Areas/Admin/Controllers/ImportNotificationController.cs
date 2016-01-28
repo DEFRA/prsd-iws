@@ -15,6 +15,7 @@
         private readonly IMediator mediator;
         private const string ImportNotificationNumber = "ImportNotificationNumber";
         private const string ImportNotificationReceivedDate = "ReceivedDate";
+        private const string ImportNotificationInterim = "IsInterim";
 
         public ImportNotificationController(IMediator mediator)
         {
@@ -77,10 +78,45 @@
         }
 
         [HttpGet]
+        public ActionResult Interim()
+        {
+            object number;
+            object receivedDate;
+            if (TempData.TryGetValue(ImportNotificationNumber, out number)
+                && TempData.TryGetValue(ImportNotificationReceivedDate, out receivedDate))
+            {
+                return View(new NotificationInterimViewModel
+                {
+                    NotificationNumber = number.ToString(),
+                    NotificationReceivedDate = (DateTime)receivedDate
+                });
+            }
+
+            return RedirectToAction("Number");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Interim(NotificationInterimViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            TempData[ImportNotificationNumber] = model.NotificationNumber;
+            TempData[ImportNotificationReceivedDate] = model.NotificationReceivedDate;
+            TempData[ImportNotificationInterim] = model.IsInterim;
+
+            return RedirectToAction("NotificationType");
+        }
+
+        [HttpGet]
         public ActionResult NotificationType()
         {
             object number;
             object receivedDate;
+            object isInterim;
             if (!TempData.TryGetValue(ImportNotificationNumber, out number))
             {
                 return RedirectToAction("Number");
@@ -91,10 +127,16 @@
                 return RedirectToAction("ReceivedDate");
             }
 
+            if (!TempData.TryGetValue(ImportNotificationInterim, out isInterim))
+            {
+                return RedirectToAction("Interim");
+            }
+
             return View(new NotificationTypeViewModel
             {
                 NotificationNumber = number.ToString(),
-                ReceivedDate = (DateTime)receivedDate
+                ReceivedDate = (DateTime)receivedDate,
+                IsInterim = (bool)isInterim
             });
         }
 
@@ -109,9 +151,7 @@
 
             var notificationType = (NotificationType)model.NotificationTypeRadioButtons.SelectedValue;
 
-            var id = await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber, notificationType));
-
-            await mediator.SendAsync(new SetReceivedDate(id, model.ReceivedDate));
+            var id = await mediator.SendAsync(new CreateImportNotification(model.NotificationNumber, notificationType, model.ReceivedDate, model.IsInterim));
 
             if (notificationType == Core.Shared.NotificationType.Disposal)
             {

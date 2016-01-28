@@ -19,5 +19,7 @@
         public DateTime? AcknowlegedDate { get; set; }
 
         public DateTime? DecisionRequiredByDate { get; set; }
+
+        public bool IsInterim { get; set; }
     }
 }

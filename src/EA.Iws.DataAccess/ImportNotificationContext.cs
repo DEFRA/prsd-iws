@@ -49,6 +49,8 @@
 
         public virtual DbSet<ImportConsent> ImportConsents { get; set; }
 
+        public virtual DbSet<InterimStatus> InterimStatuses { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

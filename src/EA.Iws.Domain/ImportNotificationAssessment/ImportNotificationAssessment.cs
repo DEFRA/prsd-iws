@@ -177,6 +177,11 @@
         {
             Guard.ArgumentNotNull(() => statusChange, statusChange);
 
+            if (StatusChangeCollection == null)
+            {
+                StatusChangeCollection = new List<ImportNotificationStatusChange>();
+            }
+
             StatusChangeCollection.Add(statusChange);
         }
 

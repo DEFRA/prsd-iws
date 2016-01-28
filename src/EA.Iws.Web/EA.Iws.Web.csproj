@@ -373,6 +373,7 @@
     <Content Include="Areas\ImportNotification\Views\Facility\Edit.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\_CountryNotListed.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\_PortNotListedDisclosure.cshtml" />
+    <Content Include="Areas\Admin\Views\ImportNotification\Interim.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1159,6 +1160,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BasicSearchViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationInterimViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationNumberViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1219,6 +1226,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ImportNotification\InterimResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InterimResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ImportNotification\NotificationTypeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationTypeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ImportNotification\NumberResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NumberResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\ImportNotification\ReceivedDateResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2627,6 +2649,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BasicSearchViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationInterimViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NotificationReceivedDateViewModelResources.Designer.cs</LastGenOutput>
@@ -2671,6 +2697,18 @@
     <EmbeddedResource Include="Areas\Admin\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ImportNotification\InterimResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InterimResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ImportNotification\NotificationTypeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationTypeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ImportNotification\NumberResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NumberResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\ImportNotification\ReceivedDateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

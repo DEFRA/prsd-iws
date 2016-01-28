@@ -236,6 +236,7 @@
     <Content Include="scripts\Update\Sprint25\20160120-170300-standardise-date-storage.sql" />
     <Content Include="scripts\Update\Sprint25\20160120-172500-remove-notification-decision.sql" />
     <Content Include="scripts\Update\Sprint26\20160126-115800-export-carrier-collection.sql" />
+    <Content Include="scripts\Update\Sprint26\20160128-104600-add-import-notification-interim-status-table.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
