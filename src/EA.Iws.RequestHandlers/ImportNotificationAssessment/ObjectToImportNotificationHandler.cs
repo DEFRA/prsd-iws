@@ -1,28 +1,25 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotificationAssessment
 {
-    using System;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain.ImportNotification;
+    using Domain.ImportNotificationAssessment.Decision;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
 
     internal class ObjectToImportNotificationHandler : IRequestHandler<ObjectToImportNotification, bool>
     {
-        private readonly IImportNotificationAssessmentRepository repository;
+        private readonly ObjectImportNotification objectImportNotification;
         private readonly ImportNotificationContext context;
 
-        public ObjectToImportNotificationHandler(IImportNotificationAssessmentRepository repository, ImportNotificationContext context)
+        public ObjectToImportNotificationHandler(ObjectImportNotification objectImportNotification, ImportNotificationContext context)
         {
-            this.repository = repository;
+            this.objectImportNotification = objectImportNotification;
             this.context = context;
         }
 
         public async Task<bool> HandleAsync(ObjectToImportNotification message)
         {
-            var assessment = await repository.GetByNotification(message.Id);
-
-            assessment.Object(message.Date, message.ReasonsForObjection);
+            await objectImportNotification.Object(message.Id, message.Date, message.ReasonsForObjection);
 
             await context.SaveChangesAsync();
 

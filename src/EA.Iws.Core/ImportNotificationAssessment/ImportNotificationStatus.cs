@@ -23,6 +23,8 @@
         [Display(Name = "Consent withdrawn")]
         ConsentWithdrawn = 10,
         [Display(Name = "Objected")]
-        Objected = 11
+        Objected = 11,
+        [Display(Name = "Withdrawn")]
+        Withdrawn = 12
     }
 }

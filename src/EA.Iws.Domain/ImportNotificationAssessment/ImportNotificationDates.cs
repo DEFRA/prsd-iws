@@ -23,10 +23,6 @@
 
         public string ConsentWithdrawnReasons { get; internal set; }
 
-        public DateTime? ObjectedDate { get; internal set; }
-
-        public string ObjectedReason { get; internal set; }
-
         internal ImportNotificationDates()
         {
         }
