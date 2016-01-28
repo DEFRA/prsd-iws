@@ -43,8 +43,6 @@
 
             OI.SetProperty(x => x.UserId, userId, notification);
 
-            SetBusinesses(notification);
-
             notification.SetMeansOfTransport(new List<MeansOfTransport>
             {
                 MeansOfTransport.Air,
@@ -86,16 +84,6 @@
             var prop = typeof(T).GetProperty(name,
                 BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
             prop.SetValue(target, value, null);
-        }
-
-        private static void SetBusinesses(NotificationApplication notification)
-        {
-            notification.AddProducer(ComplexTypeFactory.Create<ProducerBusiness>(ProducerBusinessName1),
-                ComplexTypeFactory.Create<Address>(),
-                ComplexTypeFactory.Create<Contact>());
-            notification.AddProducer(ComplexTypeFactory.Create<ProducerBusiness>(ProducerBusinessName2),
-                ComplexTypeFactory.Create<Address>(),
-                ComplexTypeFactory.Create<Contact>());
         }
 
         private static void SetWasteCodes(NotificationApplication notification, IList<WasteCode> wasteCodes)

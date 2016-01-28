@@ -162,6 +162,13 @@ VALUES (NEWID(),
         @NotificationId,
         NULL)
 
+INSERT [Notification].[ProducerCollection]
+	   ([Id],
+	    [NotificationId])
+VALUES (N'2661B295-AC6B-4680-AE62-0E5AD556C696',
+		@NotificationId)
+
+
 INSERT [Notification].[producer]
        ([id],
         [name],
@@ -181,7 +188,7 @@ INSERT [Notification].[producer]
         [telephone],
         [fax],
         [email],
-        [notificationid],
+        [producercollectionid],
         [otherdescription])
 VALUES (NEWID(),
         N'Metal Products Ltd',
@@ -201,7 +208,7 @@ VALUES (NEWID(),
         N'44-7778889999',
         N'44-1112223333',
         N'test@exporter.com',
-        @NotificationId,
+        N'2661B295-AC6B-4680-AE62-0E5AD556C696',
         NULL)
 
 INSERT [Notification].[producer]
@@ -223,7 +230,7 @@ INSERT [Notification].[producer]
         [telephone],
         [fax],
         [email],
-        [notificationid],
+        [producercollectionid],
         [otherdescription])
 VALUES (NEWID(),
         N'New Producer',
@@ -243,7 +250,7 @@ VALUES (NEWID(),
         N'44-7778889999',
         N'44-1112223333',
         N'test@producer.com',
-        @NotificationId,
+        N'2661B295-AC6B-4680-AE62-0E5AD556C696',
         NULL)
 
 INSERT [Notification].[exporter]

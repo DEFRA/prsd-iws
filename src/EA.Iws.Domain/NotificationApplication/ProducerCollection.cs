@@ -1,10 +1,32 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using Prsd.Core.Domain;
+    using Prsd.Core.Extensions;
 
-    public partial class NotificationApplication
+    public class ProducerCollection : Entity
     {
+        protected ProducerCollection()
+        {
+        }
+
+        public ProducerCollection(Guid notificationId)
+        {
+            NotificationId = notificationId;
+            ProducersCollection = new List<Producer>();
+        }
+
+        public Guid NotificationId { get; private set; }
+
+        protected virtual ICollection<Producer> ProducersCollection { get; set; }
+
+        public IEnumerable<Producer> Producers
+        {
+            get { return ProducersCollection.ToSafeIEnumerable(); }
+        }
+
         public Producer AddProducer(ProducerBusiness business, Address address, Contact contact)
         {
             var producer = new Producer(business, address, contact);

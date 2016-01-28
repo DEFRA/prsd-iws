@@ -25,7 +25,6 @@
             CompetentAuthority = competentAuthority;
             NotificationNumber = CreateNotificationNumber(notificationNumber);
 
-            ProducersCollection = new List<Producer>();
             OperationInfosCollection = new List<OperationInfo>();
             PackagingInfosCollection = new List<PackagingInfo>();
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
@@ -33,9 +32,7 @@
 
             RaiseEvent(new NotificationCreatedEvent(this));
         }
-
-        protected virtual ICollection<Producer> ProducersCollection { get; set; }
-
+        
         protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
 
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
@@ -99,12 +96,7 @@
         }
 
         public DateTimeOffset CreatedDate { get; private set; }
-
-        public IEnumerable<Producer> Producers
-        {
-            get { return ProducersCollection.ToSafeIEnumerable(); }
-        }
-        
+                
         public IEnumerable<OperationInfo> OperationInfos
         {
             get { return OperationInfosCollection.ToSafeIEnumerable(); }

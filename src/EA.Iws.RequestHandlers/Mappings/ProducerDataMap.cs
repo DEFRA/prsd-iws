@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Core.Producers;
     using Core.Shared;
     using Domain;
@@ -10,21 +11,24 @@
     using Prsd.Core.Mapper;
     using Notification = Domain.NotificationApplication.NotificationApplication;
 
-    internal class ProducerDataMap : IMap<Notification, IList<ProducerData>>, 
+    internal class ProducerDataMap : IMap<Notification, IList<ProducerData>>,
         IMap<Producer, ProducerData>,
         IMapWithParentObjectId<Producer, ProducerData>
     {
+        private readonly IProducerRepository producerRepository;
         private readonly IMap<Address, AddressData> addressMap;
         private readonly IMap<Business, BusinessInfoData> businessMap;
         private readonly IMap<Contact, ContactData> contactMap;
 
         public ProducerDataMap(IMap<Address, AddressData> addressMap,
             IMap<Business, BusinessInfoData> businessMap,
-            IMap<Contact, ContactData> contactMap)
+            IMap<Contact, ContactData> contactMap,
+            IProducerRepository producerRepository)
         {
             this.addressMap = addressMap;
             this.businessMap = businessMap;
             this.contactMap = contactMap;
+            this.producerRepository = producerRepository;
         }
 
         public ProducerData Map(Producer source)
@@ -41,7 +45,8 @@
 
         public IList<ProducerData> Map(Notification source)
         {
-            return source.Producers.Select(p => new ProducerData
+            var producerCollection = Task.Run(() => producerRepository.GetByNotificationId(source.Id)).Result;
+            return producerCollection.Producers.Select(p => new ProducerData
             {
                 Address = addressMap.Map(p.Address),
                 Business = businessMap.Map(p.Business),

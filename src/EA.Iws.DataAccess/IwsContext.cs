@@ -102,6 +102,8 @@
 
         public virtual DbSet<CarrierCollection> Carriers { get; set; }
 
+        public virtual DbSet<ProducerCollection> Producers { get; set; }
+
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {
             //TODO: Remove this method and replace usages with repositories

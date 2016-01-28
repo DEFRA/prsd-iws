@@ -94,8 +94,11 @@ BEGIN
 	FROM
 		[Notification].[Notification] N
 
+		INNER JOIN [Notification].[ProducerCollection] PC
+		ON N.Id = PC.NotificationId
+
 		LEFT JOIN [Notification].[Producer] P
-		ON N.Id = P.NotificationId
+		ON PC.Id = P.ProducerCollectionId
 	WHERE
 		N.Id = @NotificationId;
 

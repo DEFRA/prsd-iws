@@ -10,8 +10,8 @@
     {
         private readonly PropertyInfo[] properties;
 
-        public MovementProducerBlock(IList<MergeField> mergeFields, NotificationApplication notification) 
-            : base(mergeFields, notification)
+        public MovementProducerBlock(IList<MergeField> mergeFields, NotificationApplication notification, ProducerCollection producerCollection) 
+            : base(mergeFields, notification, producerCollection)
         {
             properties = PropertyHelper.GetPropertiesForViewModel(typeof(ProducerViewModel));
         }

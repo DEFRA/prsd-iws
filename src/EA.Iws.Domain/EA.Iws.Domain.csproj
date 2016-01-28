@@ -245,10 +245,12 @@
     <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
     <Compile Include="NotificationApplication\INotificationProgressService.cs" />
     <Compile Include="NotificationApplication\IPricingStructureRepository.cs" />
+    <Compile Include="NotificationApplication\IProducerRepository.cs" />
     <Compile Include="NotificationApplication\IUserHistoryRepository.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
+    <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
     <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />
@@ -337,7 +339,6 @@
     <Compile Include="NotificationApplication\FacilityCollection.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.Producers.cs" />
     <Compile Include="NotificationApplication\PackagingInfo.cs" />
     <Compile Include="NotificationApplication\ChemicalComposition.cs" />
     <Compile Include="NotificationApplication\PackagingType.cs" />

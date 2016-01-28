@@ -13,12 +13,6 @@
             ToTable("Notification", "Notification");
 
             HasMany(
-                ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<Producer>>(
-                    "ProducersCollection"))
-                .WithRequired()
-                .Map(m => m.MapKey("NotificationId"));
-
-            HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<OperationInfo>>(
                     "OperationInfosCollection"))
                 .WithRequired()

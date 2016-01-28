@@ -5,8 +5,6 @@
 
     public class Producer : Entity
     {
-        public static readonly string NotApplicable = "Not applicable";
-
         private ProducerBusiness business;
         private Address address;
         private Contact contact;

@@ -285,20 +285,6 @@
         }
 
         [Fact]
-        public async Task ProducersCopied()
-        {
-            await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));
-
-            var copiedNotification = GetCopied();
-            var sourceNotification = GetSource();
-
-            Assert.Equal(sourceNotification.Producers.Count(), 
-                copiedNotification.Producers.Count());
-            Assert.Equal(sourceNotification.Producers.Select(p => p.Business.Name).OrderBy(s => s),
-                copiedNotification.Producers.Select(p => p.Business.Name).OrderBy(s => s));
-        }
-
-        [Fact]
         public async Task AdditionalWasteInfosCopied()
         {
             await handler.HandleAsync(new CopyToNotification(source.Id, destination.Id));

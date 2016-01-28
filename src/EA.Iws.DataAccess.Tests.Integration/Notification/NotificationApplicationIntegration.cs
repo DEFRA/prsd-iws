@@ -38,16 +38,20 @@
             var business = ObjectFactory.CreateEmptyProducerBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            for (int i = 0; i < 5; i++)
-            {
-                notification.AddProducer(business, address, contact);
-            }
-
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
-            Assert.True(notification.Producers.Count() == 5);
+
+            var producerCollection = new ProducerCollection(notification.Id);
+
+            for (int i = 0; i < 5; i++)
+            {
+                producerCollection.AddProducer(business, address, contact);
+            }
+
+            Assert.True(producerCollection.Producers.Count() == 5);
 
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(producerCollection);
             await context.SaveChangesAsync();
         }
 
@@ -58,17 +62,20 @@
                 UKCompetentAuthority.England, 0);
 
             var address = new Address("address1", string.Empty, "town", string.Empty, string.Empty, "country");
-
             var business = ObjectFactory.CreateEmptyProducerBusiness();
-
             var contact = new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
-
-            var producer = notification.AddProducer(business, address, contact);
 
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            var updateProducer = notification.Producers.Single(p => p.Id == producer.Id);
+            var producerCollection = new ProducerCollection(notification.Id);
+
+            var producer = producerCollection.AddProducer(business, address, contact);
+
+            context.Producers.Add(producerCollection);
+            await context.SaveChangesAsync();
+
+            var updateProducer = producerCollection.GetProducer(producer.Id);
             var newAddress = new Address("address1", string.Empty, "town", string.Empty, string.Empty, "country");
 
             updateProducer.Address = newAddress;
@@ -82,6 +89,7 @@
             Assert.Equal("address1", newAddress1);
 
             context.DeleteOnCommit(producer);
+            context.DeleteOnCommit(producerCollection);
             context.DeleteOnCommit(notification);
 
             await context.SaveChangesAsync();
@@ -209,18 +217,22 @@
             var business = ObjectFactory.CreateEmptyProducerBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            var producer = notification.AddProducer(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Producers.Any());
+            var producerCollection = new ProducerCollection(notification.Id);
 
-            notification.RemoveProducer(producer.Id);
+            var producer = producerCollection.AddProducer(business, address, contact);
+
+            Assert.True(producerCollection.Producers.Any());
+
+            producerCollection.RemoveProducer(producer.Id);
             await context.SaveChangesAsync();
 
-            Assert.False(notification.Producers.Any());
+            Assert.False(producerCollection.Producers.Any());
 
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(producerCollection);
             await context.SaveChangesAsync();
         }
 
@@ -234,20 +246,24 @@
             var business = ObjectFactory.CreateEmptyProducerBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            notification.AddProducer(business, address, contact);
-            var anotherProducer = notification.AddProducer(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Producers.Count() == 2);
+            var producerCollection = new ProducerCollection(notification.Id);
 
-            notification.SetProducerAsSiteOfExport(anotherProducer.Id);
+            producerCollection.AddProducer(business, address, contact);
+            var anotherProducer = producerCollection.AddProducer(business, address, contact);
+
+            Assert.True(producerCollection.Producers.Count() == 2);
+
+            producerCollection.SetProducerAsSiteOfExport(anotherProducer.Id);
             await context.SaveChangesAsync();
 
-            Action removeProducer = () => notification.RemoveProducer(anotherProducer.Id);
+            Action removeProducer = () => producerCollection.RemoveProducer(anotherProducer.Id);
             Assert.Throws<InvalidOperationException>(removeProducer);
 
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(producerCollection);
             await context.SaveChangesAsync();
         }
 
@@ -261,22 +277,28 @@
             var business = ObjectFactory.CreateEmptyProducerBusiness();
             var contact = ObjectFactory.CreateEmptyContact();
 
-            var producer = notification.AddProducer(business, address, contact);
-            var anotherProducer = notification.AddProducer(business, address, contact);
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Producers.Count() == 2);
+            var producerCollection = new ProducerCollection(notification.Id);
 
-            notification.SetProducerAsSiteOfExport(producer.Id);
+            var producer = producerCollection.AddProducer(business, address, contact);
+            var anotherProducer = producerCollection.AddProducer(business, address, contact);
+            context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
 
-            notification.RemoveProducer(anotherProducer.Id);
+            Assert.True(producerCollection.Producers.Count() == 2);
+
+            producerCollection.SetProducerAsSiteOfExport(producer.Id);
             await context.SaveChangesAsync();
 
-            Assert.True(notification.Producers.Count() == 1);
+            producerCollection.RemoveProducer(anotherProducer.Id);
+            await context.SaveChangesAsync();
+
+            Assert.True(producerCollection.Producers.Count() == 1);
 
             context.DeleteOnCommit(notification);
+            context.DeleteOnCommit(producerCollection);
             await context.SaveChangesAsync();
         }
 

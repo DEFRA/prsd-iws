@@ -23,15 +23,15 @@
             }
         }
 
-        public ProducerBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public ProducerBlock(IList<MergeField> mergeFields, NotificationApplication notification, ProducerCollection producerCollection)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
-            var numberOfProducers = notification.Producers.Count();
+            var numberOfProducers = producerCollection.Producers.Count();
             var processText = notification.WasteGenerationProcess;
             var isProcessAnnexAttached = notification.IsWasteGenerationProcessAttached;
 
-            data = notification.Producers.Select(p => new ProducerViewModel(p, numberOfProducers, processText, isProcessAnnexAttached)).ToList();
+            data = producerCollection.Producers.Select(p => new ProducerViewModel(p, numberOfProducers, processText, isProcessAnnexAttached)).ToList();
 
             // The producers annex contains a set of different merge fields for producer marked as Site of Export.
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
