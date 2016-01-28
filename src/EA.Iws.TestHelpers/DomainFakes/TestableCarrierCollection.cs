@@ -9,7 +9,6 @@
     {
         public TestableCarrierCollection(Guid notificationId) : base(notificationId)
         {
-            //Carriers = new List<Carrier>();
         }
 
         public new IEnumerable<Carrier> Carriers
