@@ -16,7 +16,9 @@ function Compile-Project($project, $configuration, $platform, $outdir) {
     $outdir="""$($outdir)\""" #read comment from Johannes Rudolph here: http://www.markhneedham.com/blog/2008/08/14/msbuild-use-outputpath-instead-of-outdir/
   }
 
-  Remove-Item $outDir -Recurse -Force
+  If (Test-Path $outDir){
+    Remove-Item $outDir -Recurse -Force
+  }
 
   &$toolsDir\NuGet\nuget.exe restore $project -Verbosity quiet
 
