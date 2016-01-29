@@ -66,6 +66,7 @@
     <Compile Include="Authorization\Permissions\ExportMovementPermissions.cs" />
     <Compile Include="Authorization\Permissions\ExportNotificationPermissions.cs" />
     <Compile Include="Authorization\Permissions\GeneralPermissions.cs" />
+    <Compile Include="Authorization\Permissions\ImportFinancialGuaranteePermissions.cs" />
     <Compile Include="Authorization\Permissions\ImportMovementPermissions.cs" />
     <Compile Include="Authorization\Permissions\ImportNotificationPermissions.cs" />
     <Compile Include="Authorization\Permissions\ReportingPermissions.cs" />

@@ -6,6 +6,7 @@
     using Domain.ImportNotificationAssessment;
     using Domain.ImportNotificationAssessment.Consent;
     using Domain.ImportNotificationAssessment.Decision;
+    using Domain.ImportNotificationAssessment.FinancialGuarantee;
     using Domain.ImportNotificationAssessment.Transactions;
     using Mappings.Imports;
     using Prsd.Core.Domain;
@@ -55,6 +56,8 @@
         public virtual DbSet<ImportObjection> ImportObjections { get; set; }
 
         public virtual DbSet<InterimStatus> InterimStatuses { get; set; }
+
+        public virtual DbSet<ImportFinancialGuarantee> ImportFinancialGuarantees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

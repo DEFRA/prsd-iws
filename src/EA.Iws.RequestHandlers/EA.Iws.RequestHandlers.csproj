@@ -158,6 +158,7 @@
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ConsentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionDataHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotificationHandler.cs" />

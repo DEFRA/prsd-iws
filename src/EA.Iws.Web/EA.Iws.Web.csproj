@@ -375,6 +375,7 @@
     <Content Include="Areas\NotificationApplication\Views\Shared\_PortNotListedDisclosure.cshtml" />
     <Content Include="Areas\Admin\Views\ImportNotification\Interim.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Withdraw.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDate.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1025,6 +1026,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceivedDateViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
@@ -2566,6 +2573,10 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceivedDateViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

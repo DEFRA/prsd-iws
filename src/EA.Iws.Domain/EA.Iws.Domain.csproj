@@ -81,6 +81,8 @@
     <Compile Include="ImportNotificationAssessment\Decision\ImportWithdrawn.cs" />
     <Compile Include="ImportNotificationAssessment\Decision\ObjectImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\Decision\WithdrawImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />

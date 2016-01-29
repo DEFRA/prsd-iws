@@ -49,7 +49,8 @@
             { ImportMovementPermissions.CanReadImportMovements, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { UserAdministrationPermissions.CanCreateInternalUser, new[] { UserRole.External } },
             { UserAdministrationPermissions.CanReadInternalUserData, new[] { UserRole.Internal, UserRole.TeamLeader } },
-            { UserAdministrationPermissions.CanApproveNewInternalUser, new[] { UserRole.Internal, UserRole.TeamLeader } }
+            { UserAdministrationPermissions.CanApproveNewInternalUser, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.TeamLeader } }
         };
 
         public Task<bool> HasAccess(UserRole userRole, string name)
