@@ -19,13 +19,16 @@
         @Html.ActionLink("Add", "Add")
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoTransitStates)">
-        @Html.Gds().ValidationMessageFor(m => m.HasNoTransitStates)
-        <label for="HasNoTransitStates" class="block-label">
-            @Html.CheckBoxFor(m => m.HasNoTransitStates)
-            @Resource.Checkbox
-        </label>
-    </div>
+    if (Model.TransitStates.Count == 0)
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoTransitStates)">
+            @Html.Gds().ValidationMessageFor(m => m.HasNoTransitStates)
+            <label for="HasNoTransitStates" class="block-label">
+                @Html.CheckBoxFor(m => m.HasNoTransitStates)
+                @Resource.Checkbox
+            </label>
+        </div>
+    }
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }
@@ -34,7 +37,7 @@
     <script>
         function deletePost(event) {
             var id = $(event.target).attr("value");
-            postAjax('@Url.Action("Delete")' + '?deleteId=' + id, event, "#form", function(data) {
+            postAjax('@Url.Action("Delete")' + '?deleteId=' + id, event, "#form", function (data) {
                 $("#ajax-table").html(data);
             });
         }
