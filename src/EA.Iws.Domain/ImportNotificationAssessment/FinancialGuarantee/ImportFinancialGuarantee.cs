@@ -25,6 +25,7 @@
             ImportNotificationId = importNotificationId;
             ReceivedDate = receivedDate;
             CreatedDate = DateTimeOffset.UtcNow;
+            Status = FinancialGuaranteeStatus.ApplicationReceived;
         }
     }
 }

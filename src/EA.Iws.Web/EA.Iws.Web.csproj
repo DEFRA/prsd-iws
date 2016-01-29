@@ -376,6 +376,7 @@
     <Content Include="Areas\Admin\Views\ImportNotification\Interim.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Withdraw.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDate.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDate.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1027,7 +1028,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedAndCompletedDateViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedAndCompletedDateViewModelResources.Designer.cs">
+      <DependentUpon>ReceivedAndCompletedDateViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1050,6 +1057,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceivedAndCompletedDateResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceivedDateResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\KeyDates\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2574,6 +2591,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedAndCompletedDateViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceivedAndCompletedDateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedDateViewModelResources.Designer.cs</LastGenOutput>
@@ -2589,6 +2610,14 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\Decision\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceivedAndCompletedDateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceivedDateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\PaymentDetails\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

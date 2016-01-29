@@ -5,7 +5,9 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment.FinancialGuarantee;
+    using ViewModels.FinancialGuarantee;
 
+    [Authorize(Roles = "internal")]
     public class FinancialGuaranteeController : Controller
     {
         private readonly IMediator mediator;
@@ -15,21 +17,43 @@
             this.mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<ActionResult> ReceivedDate(Guid id)
         {
             var receivedDate = await mediator.SendAsync(new GetReceivedDate(id));
 
-            if (receivedDate.HasValue)
+            if (!receivedDate.HasValue)
             {
-                return View();
+                return View(new ReceivedDateViewModel());
             }
 
-            return RedirectToAction("CompletedDate");
+            return RedirectToAction("ReceivedAndCompletedDate");
         }
 
-        public Task<ActionResult> CompletedDate(Guid id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ReceivedDate(Guid id, ReceivedDateViewModel model)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await mediator.SendAsync(new CreateFinancialGuarantee(id, model.ReceivedDate.AsDateTime().Value));
+
+            return RedirectToAction("ReceivedAndCompletedDate");
+        } 
+
+        public async Task<ActionResult> ReceivedAndCompletedDate(Guid id)
+        {
+            var dates = await mediator.SendAsync(new GetReceivedAndCompletedDate(id));
+
+            if (!dates.ReceivedDate.HasValue)
+            {
+                return RedirectToAction("ReceivedDate");
+            }
+
+            return View(new ReceivedAndCompletedDateViewModel(dates));
         } 
     }
 }
