@@ -844,8 +844,8 @@ INSERT INTO [Notification].[FinancialGuarantee]
 	[CreatedDate],
 	[NotificationApplicationId],
 	[DecisionDate],
-	[ApprovedFrom],
-	[ApprovedTo],
+	[ValidFrom],
+	[ValidTo],
 	[ActiveLoadsPermitted]
 )
 VALUES
