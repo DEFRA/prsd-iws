@@ -56,7 +56,8 @@
                 new ImporterToImporterCopy(),
                 new NotificationApplicationRepository(context, new NotificationApplicationAuthorization(context, GetUserContext())),
                 new FacilityCollectionCopy(),
-                new CarrierCollectionCopy());
+                new CarrierCollectionCopy(),
+                new ProducerCollectionCopy());
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
 
