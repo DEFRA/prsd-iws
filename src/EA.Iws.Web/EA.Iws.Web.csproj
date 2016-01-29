@@ -1018,6 +1018,7 @@
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.Designer.cs">
