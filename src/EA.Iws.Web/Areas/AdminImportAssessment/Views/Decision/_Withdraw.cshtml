@@ -1,0 +1,13 @@
+﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision.DecisionViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.WithdrawnDate) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Day) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Month) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Year)">
+    <label class="heading-medium">@Html.DisplayNameFor(m => m.WithdrawnDate)</label>
+    @Html.Gds().ValidationMessageFor(m => m.WithdrawnDate)
+    @Html.EditorFor(m => m.WithdrawnDate)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForWithdrawal)">
+    <label class="heading-medium">@Html.DisplayNameFor(m => m.ReasonForWithdrawal)</label>
+    @Html.Gds().ValidationMessageFor(m => m.ReasonForWithdrawal)
+    @Html.TextAreaFor(m => m.ReasonForWithdrawal, new { @class = "text-area two-thirds", @MaxLength = "4000" })
+</div>

@@ -168,6 +168,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\GetChargeDueHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverviewHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotificationHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\WithdrawImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotificationHandler.cs" />

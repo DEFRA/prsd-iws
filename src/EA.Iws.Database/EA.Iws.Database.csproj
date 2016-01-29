@@ -239,6 +239,7 @@
     <Content Include="scripts\Update\Sprint26\20160128-104600-add-import-notification-interim-status-table.sql" />
     <Content Include="scripts\Update\Sprint26\20160128-135000-add-import-withdrawn-table.sql" />
     <Content Include="scripts\Update\Sprint26\20160128-081837-changes-fg-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160129-110000-add-import-withdrawn-status.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

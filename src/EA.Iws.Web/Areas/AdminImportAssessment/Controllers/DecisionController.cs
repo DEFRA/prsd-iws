@@ -46,6 +46,9 @@
                 case DecisionType.Object:
                     await PostObjection(id, model);
                     break;
+                case DecisionType.Withdraw:
+                    await Postwithdrawn(id, model);
+                    break;
                 default:
                     break;
             }
@@ -64,17 +67,23 @@
 
         private async Task PostConsentWithdrawn(Guid id, DecisionViewModel model)
         {
-            var date = new DateTime(model.ConsentWithdrawnDate.Year.GetValueOrDefault(), model.ConsentWithdrawnDate.Month.GetValueOrDefault(), model.ConsentWithdrawnDate.Day.GetValueOrDefault());
-
-            await mediator.SendAsync(new WithdrawConsentForImportNotification(id, model.ReasonsForConsentWithdrawal, date));
+            await mediator.SendAsync(new WithdrawConsentForImportNotification(id, 
+                model.ReasonsForConsentWithdrawal, 
+                model.ConsentWithdrawnDate.AsDateTime().Value));
         }
 
         private async Task PostObjection(Guid id, DecisionViewModel model)
         {
-            var date = new DateTime(model.ObjectionDate.Year.GetValueOrDefault(), model.ObjectionDate.Month.GetValueOrDefault(), model.ObjectionDate.Day.GetValueOrDefault());
+            await mediator.SendAsync(new ObjectToImportNotification(id, 
+                model.ReasonForObjection, 
+                model.ObjectionDate.AsDateTime().Value));
+        }
 
-            var request = new ObjectToImportNotification(id, model.ReasonForObjection, date);
-            await mediator.SendAsync(request);
+        private async Task Postwithdrawn(Guid id, DecisionViewModel model)
+        {
+            await mediator.SendAsync(new WithdrawImportNotification(id,
+                model.ReasonForWithdrawal, 
+                model.WithdrawnDate.AsDateTime().Value));
         }
     }
 }

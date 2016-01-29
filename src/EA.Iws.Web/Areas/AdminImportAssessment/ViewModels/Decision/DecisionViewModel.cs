@@ -53,6 +53,12 @@
         [Display(Name = "ReasonObjectedLabel", ResourceType = typeof(DecisionViewModelResources))]
         public string ReasonForObjection { get; set; }
 
+        [Display(Name = "WithdrawnDateLabel", ResourceType = typeof(DecisionViewModelResources))]
+        public OptionalDateInputViewModel WithdrawnDate { get; set; }
+
+        [Display(Name = "ReasonWithdrawnLabel", ResourceType = typeof(DecisionViewModelResources))]
+        public string ReasonForWithdrawal { get; set; }
+
         public DecisionViewModel()
         {
             ConsentValidFromDate = new OptionalDateInputViewModel(true);
@@ -61,17 +67,13 @@
             DecisionTypes = new List<DecisionType>();
             ObjectionDate = new OptionalDateInputViewModel(true);
             ConsentWithdrawnDate = new OptionalDateInputViewModel(true);
+            WithdrawnDate = new OptionalDateInputViewModel(true);
         }
 
-        public DecisionViewModel(ImportNotificationAssessmentDecisionData data)
+        public DecisionViewModel(ImportNotificationAssessmentDecisionData data) : this()
         {
             DecisionTypes = data.AvailableDecisions;
             Status = data.Status;
-            ConsentValidFromDate = new OptionalDateInputViewModel(true);
-            ConsentValidToDate = new OptionalDateInputViewModel(true);
-            ConsentGivenDate = new OptionalDateInputViewModel(true);
-            ObjectionDate = new OptionalDateInputViewModel(true);
-            ConsentWithdrawnDate = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -84,6 +86,8 @@
                     return ValidateConsentWithdrawn();
                 case DecisionType.Object:
                     return ValidateObject();
+                case DecisionType.Withdraw:
+                    return ValidateWithdrawn();
                 default:
                     return new ValidationResult[0];
             }
@@ -144,5 +148,18 @@
                 yield return new ValidationResult(DecisionViewModelResources.ObjectedDateRequired, new[] { "ObjectionDate" });
             }
         }
+
+        private IEnumerable<ValidationResult> ValidateWithdrawn()
+        {
+            if (string.IsNullOrWhiteSpace(ReasonForWithdrawal))
+            {
+                yield return new ValidationResult(DecisionViewModelResources.ReasonWithdrawnRequired, new[] { "ReasonForWithdrawal" });
+            }
+
+            if (!WithdrawnDate.IsCompleted)
+            {
+                yield return new ValidationResult(DecisionViewModelResources.WithdrawnDateRequired, new[] { "WithdrawnDate" });
+            }
+        } 
     }
 }

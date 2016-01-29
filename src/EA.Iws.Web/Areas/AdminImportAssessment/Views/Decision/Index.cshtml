@@ -50,6 +50,10 @@
         <div id="@Html.Raw("status" + DecisionType.Object)" class="js-hidden assessment-decision">
             @Html.Partial("_Object")
         </div>
+
+        <div id="@Html.Raw("status" + DecisionType.Withdraw)" class="js-hidden assessment-decision">
+            @Html.Partial("_Withdraw")
+        </div>
     }
 
     <div class="form-group">

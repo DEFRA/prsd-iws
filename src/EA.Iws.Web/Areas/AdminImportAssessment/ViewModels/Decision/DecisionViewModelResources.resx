@@ -171,4 +171,16 @@
   <data name="ReasonObjectedRequired" xml:space="preserve">
     <value>The reason for objection is required</value>
   </data>
+  <data name="ReasonWithdrawnLabel" xml:space="preserve">
+    <value>Reasons for withdrawal</value>
+  </data>
+  <data name="ReasonWithdrawnRequired" xml:space="preserve">
+    <value>The reason for withdrawal is required</value>
+  </data>
+  <data name="WithdrawnDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="WithdrawnDateRequired" xml:space="preserve">
+    <value>Please provide the date withdrawn</value>
+  </data>
 </root>

@@ -222,5 +222,41 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
                 return ResourceManager.GetString("ReasonObjectedRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reasons for withdrawal.
+        /// </summary>
+        public static string ReasonWithdrawnLabel {
+            get {
+                return ResourceManager.GetString("ReasonWithdrawnLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reason for withdrawal is required.
+        /// </summary>
+        public static string ReasonWithdrawnRequired {
+            get {
+                return ResourceManager.GetString("ReasonWithdrawnRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string WithdrawnDateLabel {
+            get {
+                return ResourceManager.GetString("WithdrawnDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the date withdrawn.
+        /// </summary>
+        public static string WithdrawnDateRequired {
+            get {
+                return ResourceManager.GetString("WithdrawnDateRequired", resourceCulture);
+            }
+        }
     }
 }
