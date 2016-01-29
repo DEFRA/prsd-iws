@@ -378,6 +378,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Withdraw.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDate.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDate.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Shipments\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1117,6 +1118,7 @@
     <Compile Include="Areas\AdminImportNotificationMovements\AdminImportNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\ShipmentsController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1131,6 +1133,8 @@
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryTableRowViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Shipments\ShipmentsTableViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Shipments\TableDataViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.Designer.cs">
       <DependentUpon>CreateResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1145,6 +1149,11 @@
     <Compile Include="Areas\AdminExportMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\AdminNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Shipments\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -2681,7 +2690,11 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Shipments\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.resx">

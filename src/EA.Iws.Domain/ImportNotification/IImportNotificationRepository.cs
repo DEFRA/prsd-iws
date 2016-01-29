@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.Shared;
 
     public interface IImportNotificationRepository
     {
@@ -13,5 +14,7 @@
         Task Add(ImportNotification notification);
 
         Task<IEnumerable<ImportNotification>> SearchByNumber(string number);
+
+        Task<NotificationType> GetTypeById(Guid id);
     }
 }

@@ -1,10 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Home
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Core.ImportNotificationMovements;
     using Core.Shared;
+    using Prsd.Core.Helpers;
 
     public class MovementSummaryViewModel
     {
@@ -14,19 +13,36 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public IList<MovementSummaryTableRowViewModel> Movements { get; set; }
+        public int IntendedShipments { get; set; }
+
+        public int UsedShipments { get; set; }
+
+        public string QuantityRemainingTotal { get; set; }
+
+        public string QuantityReceivedTotal { get; set; }
+
+        public int ActiveLoadsPermitted { get; set; }
+
+        public int ActiveLoadsCurrent { get; set; }
 
         public MovementSummaryViewModel()
         {
-            Movements = new List<MovementSummaryTableRowViewModel>();
         }
 
         public MovementSummaryViewModel(Summary data)
         {
-            Movements = new List<MovementSummaryTableRowViewModel>(data.Movements.Select(m => new MovementSummaryTableRowViewModel(m)));
             NotificationId = data.Id;
             NotificationNumber = data.NotificationNumber;
             NotificationType = data.NotificationType;
+            IntendedShipments = data.IntendedShipments;
+            UsedShipments = data.UsedShipments;
+            QuantityReceivedTotal = data.QuantityReceivedTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
+            QuantityRemainingTotal = data.QuantityRemainingTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
+        }
+
+        public bool ShowShipmentOptions()
+        {
+            return true;
         }
     }
 }

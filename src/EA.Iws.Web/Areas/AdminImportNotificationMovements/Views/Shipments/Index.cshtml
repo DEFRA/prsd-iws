@@ -1,0 +1,120 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Shipments.ShipmentsTableViewModel
+@using EA.Iws.Core.ImportMovement
+@using EA.Iws.Core.Shared
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Shipments.IndexResources
+
+@{
+    ViewBag.Title = @Resource.TabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+
+    var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
+}
+
+@helper DisplayDate(DateTime? date, ImportMovementStatus status)
+{
+if (date.HasValue && status != ImportMovementStatus.Cancelled)
+{
+        @date.Value.ToString("d MMM yyyy")
+}
+else if (status != ImportMovementStatus.Cancelled)
+{
+        @:- -
+    }
+}
+
+@helper DisplayQuantity(decimal? quantity, ShipmentQuantityUnits? unit, ImportMovementStatus status)
+{
+if (quantity.HasValue && status != ImportMovementStatus.Cancelled)
+{
+        @(quantity.Value.ToString("G29") + " " + EnumHelper.GetShortName(unit.GetValueOrDefault()))
+}
+else if (status != ImportMovementStatus.Cancelled)
+{
+        @:- -
+    }
+}
+
+
+<h1 class="heading-large">
+    @Resource.Title
+</h1>
+
+<div class="form-group">
+        
+    @if (Model.ShowShipments())
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="grid-row form-group">
+                <div class="column-third">@Resource.Dropdown</div>
+
+                <div class="column-half">
+                    @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                    <button id="updateStatus" class="button" type="submit">Update</button>
+                </div>
+            </div>
+        }
+
+        <table class="odd-table">
+            <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
+
+            <thead>
+            <tr>
+                <th>@Resource.thNumber</th>
+                <th>@Resource.thStatus</th>
+                <th>@Resource.thPrenotified</th>
+                <th>@Resource.thShipmentDue</th>
+                <th>@Resource.thReceived</th>
+                <th>@Resource.thQuantity</th>
+                <th>@operationTitle</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    for (int i = 0; i < Model.TableData.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model.TableData[i].Number</td>
+                            <td>@Model.TableData[i].Status</td>
+                            <td>@DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)</td>
+                            <td>@DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)</td>
+                            <td>@DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)</td>
+                            <td>@DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)</td>
+                            <td>@DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <div class="bold-small">
+            @Resource.NoShipmentDataText
+        </div>
+    }
+</div>
+
+
+<div class="form-group">
+    @Html.ActionLink("Record a shipment", "Index", "Capture")
+</div>
+<div class="form-group">
+    @Html.ActionLink("Return to shipment summary", "Index", "Home")
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#updateStatus").hide();
+            $("#@Html.NameFor(m => m.SelectedMovementStatus)").change(function () {
+                $("#updateStatus").parents("form").submit();
+            });
+        });
+    </script>
+}

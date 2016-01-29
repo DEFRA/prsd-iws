@@ -1,74 +1,62 @@
 ﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Home.MovementSummaryViewModel
+@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources
 
 @{
-    ViewBag.Title = "Shipment summary";
+    ViewBag.Title = @Resource.TabTitle;
 }
 
-@helper DisplayDate(DateTime? date)
-{
-    if (date.HasValue)
-    {
-        @date.Value.ToString("d MMM yyyy")
-    }
-    else
-    {
-        @:- -
-    }
-}
 
 <div class="shipping-home">
 
     <h1 class="heading-large">
-        Shipment summary
+        @Resource.ShipmentSummaryTitle
     </h1>
 
-    <div class="nav-bloc">
-        <h2 class="heading-small">Shipping options</h2>
-        <nav>
-            @Html.ActionLink("Record shipment data", "Index", "Capture", new { area = "AdminImportNotificationMovements" }, null)
-        </nav>
+    <div class="form-group">
+        <div class="grid-row">
+
+            <div class="column-two-thirds">
+                @if (Model.ShowShipmentOptions())
+                {
+                    <div>
+
+                        <table class="odd-table">
+                            <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
+                            <tbody>
+                                <tr>
+                                    <td>@Resource.TotalNumber</td>
+                                    <td>@Model.IntendedShipments</td>
+                                </tr>
+                                <tr>
+                                    <td>@Resource.NumberUsed</td>
+                                    <td>@Model.UsedShipments</td>
+                                </tr>
+                                <tr>
+                                    <td>@Resource.TotalQuantityReceived</td>
+                                    <td>@Model.QuantityReceivedTotal</td>
+                                </tr>
+                                <tr>
+                                    <td>@Resource.TotalQuantityRemaining</td>
+                                    <td>@Model.QuantityRemainingTotal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="column-two-thirds bold-small">
+                        @Resource.NoShipmentDataText
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 
-    <section class="ship-data">
-        <h3 class="heading-small">
-            Shipment details
-        </h3>
-
-        <div class="form-group">
-            <table class="odd-table">
-                <caption class="visuallyhidden">Shipment summary</caption>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Prenotified</th>
-                        <th>Shipment due</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @{
-                        for (int i = 0; i < Model.Movements.Count; i++)
-                        {
-                            <tr>
-                                <td>@Model.Movements[i].Number</td>
-                                <td>
-                                    @DisplayDate(Model.Movements[i].PrenotificationDate)
-                                </td>
-                                <td>
-                                    @DisplayDate(Model.Movements[i].ShipmentDate)
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </section>
+    
     <div class="form-group">
-        @Html.ActionLink("Go to notification overview",
-            "Index",
-            "Home",
-            new { area = "ImportNotification", id = Model.NotificationId },
+        @Html.ActionLink("View shipments table", "Index", "Shipments",
+            null,
             new { @class = "button" })
     </div>
 </div>

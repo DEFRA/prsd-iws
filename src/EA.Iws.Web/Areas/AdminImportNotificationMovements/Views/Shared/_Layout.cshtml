@@ -3,6 +3,10 @@
 }
 
 <div class="grid-row">
+    <div class="column-third">
+        @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
+    </div>
+
     <div class="column-two-thirds">
         @RenderBody()
     </div>

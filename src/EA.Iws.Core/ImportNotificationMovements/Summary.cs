@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.Core.ImportNotificationMovements
 {
     using System;
-    using System.Collections.Generic;
-    using ImportMovement;
     using Shared;
 
     public class Summary
@@ -13,6 +11,14 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public IList<ImportMovementSummaryData> Movements { get; set; }
+        public int IntendedShipments { get; set; }
+
+        public int UsedShipments { get; set; }
+
+        public decimal QuantityRemainingTotal { get; set; }
+
+        public decimal QuantityReceivedTotal { get; set; }
+
+        public ShipmentQuantityUnits DisplayUnit { get; set; }
     }
 }
