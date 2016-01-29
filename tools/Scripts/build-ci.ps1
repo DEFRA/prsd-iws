@@ -8,21 +8,13 @@ param
 )
 
 function Compile-Project($project, $configuration, $platform, $outdir) {
-  if (-not ($outdir.EndsWith("\"))) {
-    $outdir += '\' #MSBuild requires OutDir end with a trailing slash #awesome
-  }
- 
-  if ($outdir.Contains(" ")) {
-    $outdir="""$($outdir)\""" #read comment from Johannes Rudolph here: http://www.markhneedham.com/blog/2008/08/14/msbuild-use-outputpath-instead-of-outdir/
-  }
-
-  If (Test-Path $outDir){
+  If (Test-Path $outDir) {
     Remove-Item $outDir -Recurse -Force
   }
 
   &$toolsDir\NuGet\nuget.exe restore $project -Verbosity quiet
-
-  $iexBuild = "& '$msBuildPath' '$project' /m /verbosity:m /p:Configuration='$configuration' /p:Platform='$platform' /p:OutDir='$outdir'"
+  
+  $iexBuild = "& `"$msBuildPath`" `"$project`" /m /verbosity:m /p:Configuration=`"$configuration`" /p:Platform=`"$platform`" /p:OutDir=`"$outdir\\`""
   &iex "$iexBuild" 2>$msbuildErrOutput
   if ($lastExitCode -ne 0) {
     write-error "Error while running MSBuild. Details:`n$msbuildErrorOutput"
