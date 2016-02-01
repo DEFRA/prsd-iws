@@ -109,6 +109,8 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\CreateFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedAndCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedDate.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDate.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionData.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />

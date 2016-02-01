@@ -109,6 +109,7 @@
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeStatusChange.cs" />
     <Compile Include="Mappings\Imports\ImportObjectionMapping.cs" />
     <Compile Include="Mappings\Imports\ImportWithdrawnMapping.cs" />
     <Compile Include="Mappings\Imports\ImportConsentMapping.cs" />
