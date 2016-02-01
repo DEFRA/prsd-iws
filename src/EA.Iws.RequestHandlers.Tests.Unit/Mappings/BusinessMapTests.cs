@@ -1,8 +1,7 @@
 namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
 {
     using System.Collections.Generic;
-    using Domain;
-    using Domain.NotificationApplication;
+    using Core.Shared;
     using RequestHandlers.Mappings;
     using TestHelpers.DomainFakes;
     using Xunit;
@@ -13,6 +12,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
         private const string TestString = "micro pig";
 
         private readonly BusinessMap businessMap;
+
         private readonly TestableBusiness testBusiness = new TestableBusiness
         {
             Name = AnyString,
@@ -39,11 +39,11 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
 
         [Theory]
         [MemberData("GetDataForBusinessMapTests")]
-        public void MapEntityType(BusinessType entityType)
+        public void MapEntityType(BusinessType entityType, string expected)
         {
             testBusiness.Type = entityType;
             var result = businessMap.Map(testBusiness);
-            Assert.Equal(entityType.DisplayName, result.EntityType);
+            Assert.Equal(expected, result.EntityType);
         }
 
         [Theory]
@@ -72,10 +72,10 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
         {
             get
             {
-                yield return new object[] { BusinessType.LimitedCompany };
-                yield return new object[] { BusinessType.SoleTrader };
-                yield return new object[] { BusinessType.Partnership };
-                yield return new object[] { BusinessType.Other };
+                yield return new object[] { BusinessType.LimitedCompany, "Limited company" };
+                yield return new object[] { BusinessType.SoleTrader, "Sole trader" };
+                yield return new object[] { BusinessType.Partnership, "Partnership" };
+                yield return new object[] { BusinessType.Other, "Other" };
             }
         }
     }

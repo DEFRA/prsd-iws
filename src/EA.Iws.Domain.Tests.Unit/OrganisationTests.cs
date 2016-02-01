@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit
 {
     using System;
-    using Domain.NotificationApplication;
+    using Core.Shared;
     using Xunit;
 
     public class OrganisationTests

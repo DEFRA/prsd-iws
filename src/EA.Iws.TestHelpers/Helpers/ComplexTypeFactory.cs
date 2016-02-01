@@ -1,12 +1,13 @@
 ﻿namespace EA.Iws.TestHelpers.Helpers
 {
-    using Domain;
+    using Core.Shared;
     using Domain.NotificationApplication;
 
     public class ComplexTypeFactory
     {
         private const string AnyString = "test";
-        public static TComplexType Create<TComplexType>(string name = AnyString) where TComplexType : class 
+
+        public static TComplexType Create<TComplexType>(string name = AnyString) where TComplexType : class
         {
             var argumentType = typeof(TComplexType);
 
@@ -17,7 +18,7 @@
 
             if (argumentType == typeof(Business))
             {
-                return Business.CreateBusiness(name, BusinessType.SoleTrader, AnyString, null) as TComplexType; 
+                return Business.CreateBusiness(name, BusinessType.SoleTrader, AnyString, null) as TComplexType;
             }
 
             if (argumentType == typeof(Contact))

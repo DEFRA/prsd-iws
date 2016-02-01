@@ -1,12 +1,10 @@
 ﻿namespace EA.Iws.RequestHandlers.Registration
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using DataAccess.Identity;
     using Domain;
-    using Domain.NotificationApplication;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
@@ -27,12 +25,12 @@
 
         public async Task<Guid> HandleAsync(CreateOrganisation command)
         {
-            var organisation = new Organisation(command.Organisation.Name, BusinessType.FromBusinessType(command.Organisation.BusinessType), command.Organisation.OtherDescription);
+            var organisation = new Organisation(command.Organisation.Name, command.Organisation.BusinessType, command.Organisation.OtherDescription);
 
             db.Organisations.Add(organisation);
 
             await db.SaveChangesAsync();
-            
+
             return organisation.Id;
         }
     }

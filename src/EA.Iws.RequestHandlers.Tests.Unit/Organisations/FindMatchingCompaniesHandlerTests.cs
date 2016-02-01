@@ -4,11 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using DataAccess;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
-    using FakeItEasy;
-    using Helpers;
     using Prsd.Core;
     using RequestHandlers.Organisations;
     using Requests.Organisations;

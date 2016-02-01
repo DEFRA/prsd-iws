@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.TestHelpers.Helpers
 {
-    using Domain;
+    using Core.Shared;
     using Domain.NotificationApplication;
 
     public static class ObjectFactory

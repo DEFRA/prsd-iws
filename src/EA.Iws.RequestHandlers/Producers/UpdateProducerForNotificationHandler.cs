@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Producers
 {
     using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
@@ -31,7 +30,7 @@
             var producers = await repository.GetByNotificationId(message.NotificationId);
 
             var business = ProducerBusiness.CreateProducerBusiness(message.Business.Name,
-                BusinessType.FromBusinessType(message.Business.BusinessType),
+                message.Business.BusinessType,
                 message.Business.RegistrationNumber,
                 message.Business.OtherDescription);
             var address = ValueObjectInitializer.CreateAddress(message.Address, country.Name);
