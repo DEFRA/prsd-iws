@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit
 {
     using System;
-    using Core.Admin;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;

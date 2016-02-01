@@ -95,7 +95,6 @@
     <Compile Include="Mappings\Exports\AddressMapping.cs" />
     <Compile Include="Mappings\Common\BankHolidayMapping.cs" />
     <Compile Include="Mappings\Exports\AnnexCollectionMapping.cs" />
-    <Compile Include="Mappings\Exports\BusinessTypeMapping.cs" />
     <Compile Include="Mappings\Exports\CarrierCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\ConsentMapping.cs" />
     <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />

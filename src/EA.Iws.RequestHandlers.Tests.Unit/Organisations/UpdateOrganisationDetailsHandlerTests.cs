@@ -14,7 +14,6 @@
     using Requests.Organisations;
     using TestHelpers.Helpers;
     using Xunit;
-    using BusinessType = Domain.NotificationApplication.BusinessType;
 
     public class UpdateOrganisationDetailsHandlerTests
     {
@@ -49,7 +48,6 @@
 
             context.Users.Add(GetUser());
 
-            new UpdateOrganisationDetails(GetOrganisationRegistrationData("my"));
             handler = new UpdateOrganisationDetailsHandler(context, userContext);
         }
 

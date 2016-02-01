@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using Core.Shared;
-    using Domain;
     using Domain.NotificationApplication;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
 
     internal class BusinessMap : IMap<Business, BusinessData>
@@ -12,7 +12,7 @@
             return new BusinessData
             {
                 Name = source.Name,
-                EntityType = source.Type.DisplayName,
+                EntityType = EnumHelper.GetDisplayName(source.Type),
                 AdditionalRegistrationNumber = source.AdditionalRegistrationNumber,
                 RegistrationNumber = source.RegistrationNumber
             };

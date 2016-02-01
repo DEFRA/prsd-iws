@@ -30,7 +30,7 @@
 
             var address = ValueObjectInitializer.CreateAddress(command.Address, country.Name);
             var contact = ValueObjectInitializer.CreateContact(command.Contact);
-            var business = ProducerBusiness.CreateProducerBusiness(command.Business.Name, BusinessType.FromBusinessType(command.Business.BusinessType),
+            var business = ProducerBusiness.CreateProducerBusiness(command.Business.Name, command.Business.BusinessType,
                 command.Business.RegistrationNumber, command.Business.OtherDescription);
 
             var producers = await repository.GetByNotificationId(command.NotificationId);

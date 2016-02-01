@@ -171,7 +171,6 @@
     <Compile Include="NotificationApplication\AddressComparer.cs" />
     <Compile Include="BankHoliday.cs" />
     <Compile Include="NotificationApplication\Business.cs" />
-    <Compile Include="NotificationApplication\BusinessType.cs" />
     <Compile Include="CompetentAuthority.cs" />
     <Compile Include="CompetentAuthorityBacsDetails.cs" />
     <Compile Include="NotificationApplication\Contact.cs" />

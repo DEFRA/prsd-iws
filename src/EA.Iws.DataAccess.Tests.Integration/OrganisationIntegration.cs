@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
     using FakeItEasy;

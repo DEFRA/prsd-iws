@@ -36,7 +36,7 @@
                 hashCode = (hashCode * 397) ^ (obj.Name != null ? obj.Name.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.OtherDescription != null ? obj.OtherDescription.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.RegistrationNumber != null ? obj.RegistrationNumber.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (obj.Type != null ? obj.Type.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ obj.Type.GetHashCode();
                 return hashCode;
             }
         }

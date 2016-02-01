@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Shared;
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
@@ -75,7 +76,7 @@
                         && result.Address.TownOrCity == town
                         && result.Address.PostalCode == postcode
                         && result.Address.Address2 == address2
-                        && result.BusinessType == Core.Shared.BusinessType.Other && result.OtherDescription == otherDescription);
+                        && result.BusinessType == BusinessType.Other && result.OtherDescription == otherDescription);
         }
     }
 }

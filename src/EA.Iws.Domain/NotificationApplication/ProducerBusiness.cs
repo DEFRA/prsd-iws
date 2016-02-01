@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
+    using Core.Shared;
     using Prsd.Core;
 
     public class ProducerBusiness : Business

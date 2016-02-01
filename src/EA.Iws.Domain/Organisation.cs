@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Domain
 {
-    using NotificationApplication;
+    using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
 
@@ -9,7 +9,7 @@
         public Organisation(string name, BusinessType type, string otherDescription = null)
         {
             Guard.ArgumentNotNullOrEmpty(() => name, name);
-            Guard.ArgumentNotNull(() => type, type);
+            Guard.ArgumentNotDefaultValue(() => type, type);
 
             if (type == BusinessType.Other)
             {
@@ -36,7 +36,7 @@
         public void Update(string name, BusinessType type, string otherDescription = null)
         {
             Guard.ArgumentNotNullOrEmpty(() => name, name);
-            Guard.ArgumentNotNull(() => type, type);
+            Guard.ArgumentNotDefaultValue(() => type, type);
             if (type == BusinessType.Other)
             {
                 Guard.ArgumentNotNullOrEmpty(() => otherDescription, otherDescription);

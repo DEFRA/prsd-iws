@@ -15,7 +15,7 @@
                     business.AdditionalRegistrationNumber, business.OtherDescription);
             }
 
-            return Business.CreateBusiness(business.Name, Domain.NotificationApplication.BusinessType.FromBusinessType(business.BusinessType), 
+            return Business.CreateBusiness(business.Name, business.BusinessType, 
                 business.RegistrationNumber, business.AdditionalRegistrationNumber);
         }
 
