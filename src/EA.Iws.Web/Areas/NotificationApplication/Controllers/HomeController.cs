@@ -104,9 +104,11 @@
         }
 
         [HttpGet]
-        public ActionResult ResubmissionSuccess(Guid id)
+        public async Task<ActionResult> ResubmissionSuccess(Guid id)
         {
-            var model = new ResubmissionSuccessViewModel { NotificationId = id };
+            var details = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+
+            var model = new ResubmissionSuccessViewModel(details);
 
             return View(model);
         }

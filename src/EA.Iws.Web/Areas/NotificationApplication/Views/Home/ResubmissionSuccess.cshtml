@@ -1,9 +1,38 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Home.ResubmissionSuccessViewModel
+﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Home
+
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Home.ResubmissionSuccessViewModel
+
 @{
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
     ViewBag.Title = "Notification resubmitted";
 }
 
-<h1 class="heading-large">Your notification has been resubmitted</h1>
+@helper GetAssessmentText(CompetentAuthority competentAuthority)
+{
+    switch (competentAuthority)
+    {
+        case CompetentAuthority.England:
+            @ResubmissionSuccessResources.EaAssessment;
+            break;
+        case CompetentAuthority.Scotland:
+            @ResubmissionSuccessResources.SepaAssessment;
+            break;
+        case CompetentAuthority.NorthernIreland:
+            @ResubmissionSuccessResources.NieaAssessment;
+            break;
+        case CompetentAuthority.Wales:
+            @ResubmissionSuccessResources.NrwAssessment;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("competentAuthority", competentAuthority, null);
+    }
+}
+
+<h1 class="heading-large text">@Html.Raw(string.Format(ResubmissionSuccessResources.Title, Model.NotificationNumber.Replace(" ", "&nbsp;")))</h1>
+
+<p class="text">
+    @GetAssessmentText(Model.CompetentAuthority)
+</p>
 
 @Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId }, new { @class = "button" })
