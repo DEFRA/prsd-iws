@@ -44,6 +44,7 @@
             return RedirectToAction("ReceivedAndCompletedDate");
         } 
 
+        [HttpGet]
         public async Task<ActionResult> ReceivedAndCompletedDate(Guid id)
         {
             var dates = await mediator.SendAsync(new GetReceivedAndCompletedDate(id));
@@ -54,6 +55,29 @@
             }
 
             return View(new ReceivedAndCompletedDateViewModel(dates));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ReceivedAndCompletedDate(Guid id, ReceivedAndCompletedDateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.IsReceivedDateChanged)
+            {
+               await mediator.SendAsync(new SetReceivedAndCompletedDate(id, 
+                   model.CompletedDate.AsDateTime().Value, 
+                   model.ReceivedDate.AsDateTime().Value));
+            }
+            else
+            {
+                await mediator.SendAsync(new SetCompletedDate(id, model.CompletedDate.AsDateTime().Value));
+            }
+
+            return RedirectToAction("Index", "KeyDates");
         } 
     }
 }
