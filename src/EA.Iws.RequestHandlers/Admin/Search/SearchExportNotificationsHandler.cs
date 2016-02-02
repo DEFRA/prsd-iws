@@ -51,7 +51,7 @@
                         s.Notification.Id,
                         s.Notification.NotificationNumber,
                         ExporterName = s.Exporter.Business.Name,
-                        WasteType = (int?)s.Notification.WasteType.ChemicalCompositionType.Value,
+                        WasteType = s.Notification.WasteType.ChemicalCompositionType,
                         s.Assessment.Status,
                         s.Notification.CompetentAuthority
                     })
@@ -66,17 +66,15 @@
         }
 
         private static BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber,
-            string exporterName, int? wasteTypeValue, NotificationStatus status)
+            string exporterName, ChemicalComposition wasteTypeValue, NotificationStatus status)
         {
             var searchResult = new BasicSearchResult
             {
                 Id = notificationId,
                 NotificationNumber = notificationNumber,
                 ExporterName = exporterName,
-                WasteType =
-                    wasteTypeValue != null
-                        ? Enum.GetName(typeof(ChemicalCompositionType), wasteTypeValue)
-                        : string.Empty,
+                WasteType = wasteTypeValue != default(ChemicalComposition) 
+                    ? EnumHelper.GetShortName(wasteTypeValue) : string.Empty,
                 NotificationStatus = EnumHelper.GetDisplayName(status)
             };
 

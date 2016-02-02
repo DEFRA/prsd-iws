@@ -46,16 +46,16 @@
             WasteType wasteType;
             switch (source.ChemicalCompositionType)
             {
-                case ChemicalCompositionType.RDF:
+                case ChemicalComposition.RDF:
                     wasteType = WasteType.CreateRdfWasteType(compositionContinuedMapper.Map(source.WasteCompositions));
                     break;
-                case ChemicalCompositionType.SRF:
+                case ChemicalComposition.SRF:
                     wasteType = WasteType.CreateSrfWasteType(compositionContinuedMapper.Map(source.WasteCompositions));
                     break;
-                case ChemicalCompositionType.Wood:
+                case ChemicalComposition.Wood:
                     wasteType = WasteType.CreateWoodWasteType(source.ChemicalCompositionDescription, compositionContinuedMapper.Map(source.WasteCompositions));
                     break;
-                case ChemicalCompositionType.Other:
+                case ChemicalComposition.Other:
                     wasteType = WasteType.CreateOtherWasteType(source.WasteCompositionName);
                     break;
                 default:
@@ -64,14 +64,16 @@
             return wasteType;
         }
 
-        private static ChemicalCompositionType GetChemicalCompositionType(ChemicalComposition chemicalComposition)
+        private static ChemicalComposition GetChemicalCompositionType(ChemicalComposition chemicalComposition)
         {
-            ChemicalCompositionType type;
-            if (Enum.TryParse(chemicalComposition.Value.ToString(), out type))
+            ChemicalComposition type;
+
+            if (Enum.TryParse(chemicalComposition.ToString(), out type))
             {
                 return type;
             }
-            throw new ArgumentException(string.Format("Unknown Chemical Composition {0}", chemicalComposition.Value), "chemicalCompositionType");
+
+            throw new ArgumentException(string.Format("Unknown Chemical Composition {0}", chemicalComposition), "chemicalComposition");
         }
     }
 }

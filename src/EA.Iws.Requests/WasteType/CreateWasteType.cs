@@ -14,7 +14,7 @@
     {
         public Guid NotificationId { get; set; }
 
-        public ChemicalCompositionType ChemicalCompositionType { get; set; }
+        public ChemicalComposition ChemicalCompositionType { get; set; }
 
         public string ChemicalCompositionDescription { get; set; }
 

@@ -4,9 +4,11 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.WasteType;
     using DataAccess;
     using Domain.NotificationApplication;
     using Prsd.Core.Domain;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Copy;
 
@@ -48,7 +50,7 @@
                 ExporterName = n.exporter,
                 ImporterName = n.importer,
                 WasteName = n.waste.ChemicalCompositionType == ChemicalComposition.Other ?
-                n.waste.ChemicalCompositionName : n.waste.ChemicalCompositionType.DisplayName
+                n.waste.ChemicalCompositionName : EnumHelper.GetShortName(n.waste.ChemicalCompositionType)
             }).ToArray();
         }
     }

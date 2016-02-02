@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Core.WasteType;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain.NotificationApplication;
     using Formatters;

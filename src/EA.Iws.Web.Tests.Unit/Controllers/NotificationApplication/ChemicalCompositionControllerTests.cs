@@ -32,7 +32,7 @@
         [InlineData(null)]
         public void ChemicalComposition_Post_BackToOverview_MaintainsRouteValue(bool? backToOverview)
         {
-            var chemicalCompositionType = RadioButtonStringCollectionViewModel.CreateFromEnum<ChemicalCompositionType>();
+            var chemicalCompositionType = RadioButtonStringCollectionViewModel.CreateFromEnum<ChemicalComposition>();
             chemicalCompositionType.SelectedValue = "Wood";
             var model = new ChemicalCompositionTypeViewModel()
             {
@@ -84,7 +84,7 @@
             var wasteComposition = new List<WoodInformationData>();
             var model = new ChemicalCompositionViewModel()
             {
-                ChemicalCompositionType = ChemicalCompositionType.Wood,
+                ChemicalCompositionType = ChemicalComposition.Wood,
                 WasteComposition = wasteComposition,
                 NotificationId = notificationId
             };
@@ -102,7 +102,7 @@
             var model = new ChemicalCompositionContinuedViewModel() 
             {
                 NotificationId = notificationId,
-                ChemicalCompositionType = ChemicalCompositionType.Wood,
+                ChemicalCompositionType = ChemicalComposition.Wood,
                 WasteComposition = wasteComposition,
                 OtherCodes = wasteComposition,
                 Command = "continue"
@@ -118,7 +118,7 @@
             var model = new ChemicalCompositionContinuedViewModel()
             {
                 NotificationId = notificationId,
-                ChemicalCompositionType = ChemicalCompositionType.Wood,
+                ChemicalCompositionType = ChemicalComposition.Wood,
                 WasteComposition = wasteComposition,
                 OtherCodes = wasteComposition,
                 Command = "continue"
@@ -136,7 +136,7 @@
             var wasteComposition = new List<WoodInformationData>();
             var model = new ChemicalCompositionViewModel()
             {
-                ChemicalCompositionType = ChemicalCompositionType.RDF,
+                ChemicalCompositionType = ChemicalComposition.RDF,
                 WasteComposition = wasteComposition,
                 NotificationId = notificationId
             };
@@ -154,7 +154,7 @@
             var model = new ChemicalCompositionContinuedViewModel
             {
                 NotificationId = notificationId,
-                ChemicalCompositionType = ChemicalCompositionType.RDF,
+                ChemicalCompositionType = ChemicalComposition.RDF,
                 WasteComposition = wasteComposition,
                 OtherCodes = wasteComposition,
                 Command = "continue"
@@ -170,7 +170,7 @@
             var model = new ChemicalCompositionContinuedViewModel()
             {
                 NotificationId = notificationId,
-                ChemicalCompositionType = ChemicalCompositionType.RDF,
+                ChemicalCompositionType = ChemicalComposition.RDF,
                 WasteComposition = wasteComposition,
                 OtherCodes = wasteComposition,
                 Command = "continue"

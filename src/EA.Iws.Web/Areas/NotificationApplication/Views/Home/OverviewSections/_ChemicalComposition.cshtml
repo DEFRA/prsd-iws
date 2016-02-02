@@ -17,7 +17,7 @@
             </div>
         }
 
-        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription) && Model.ChemicalComposition.ChemicalCompositionType != ChemicalCompositionType.Wood)
+        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription) && Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Wood)
         {
             <div class="overview-block-element grid-row">
                 <div class="column-third">Description:</div>
@@ -25,7 +25,7 @@
             </div>
         }
 
-        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.WoodTypeDescription) && Model.ChemicalComposition.ChemicalCompositionType == ChemicalCompositionType.Wood)
+        if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.WoodTypeDescription) && Model.ChemicalComposition.ChemicalCompositionType == ChemicalComposition.Wood)
         {
             <div class="overview-block-element grid-row">
                 <div class="column-third">Description:</div>
@@ -33,7 +33,7 @@
             </div>
         }
 
-        if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalCompositionType.Other)
+        if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Other)
         {
             <div class="overview-block-element">
                 Chemical composition minimum and maximum as a weight by weight percentage:

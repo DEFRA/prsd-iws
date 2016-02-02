@@ -9,6 +9,9 @@
     [RequestAuthorization(ExportMovementPermissions.CanCreateExportMovements)]
     public class GetShipmentUnits : IRequest<ShipmentQuantityUnits>
     {
+        //TODO: This request is being used in places other than "Create Movements", 
+        // so should move to a different namespace and have a different permission?
+
         public Guid NotificationId { get; private set; }
 
         public GetShipmentUnits(Guid notificationId)
