@@ -423,6 +423,7 @@
     <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\ChangeUserHandler.cs" />
+    <Compile Include="Notification\CreateLegacyNotificationApplicationHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />

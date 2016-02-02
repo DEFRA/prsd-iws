@@ -12,5 +12,7 @@
         Task<string> GetNumber(Guid id);
 
         Task<Guid?> GetIdOrDefault(string number);
+
+        void Add(NotificationApplication notification);
     }
 }

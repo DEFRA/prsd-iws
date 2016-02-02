@@ -33,6 +33,7 @@
             { ExportNotificationPermissions.CanReadExportNotificationAssessment, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { ExportNotificationPermissions.CanEditExportNotificationAssessment, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { ExportNotificationPermissions.CanChangeExportNotificationOwner, new[] { UserRole.Internal, UserRole.TeamLeader } },
+            { ExportNotificationPermissions.CanCreateLegacyExportNotification, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { ExportMovementPermissions.CanCreateExportMovements, new[] { UserRole.External, UserRole.Internal } },
             { ExportMovementPermissions.CanReadExportMovements, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { ExportMovementPermissions.CanEditExportMovements, new[] { UserRole.External, UserRole.Internal } },

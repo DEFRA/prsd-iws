@@ -50,5 +50,10 @@
                 .Select(n => (Guid?)n.Id)
                 .SingleOrDefaultAsync();
         }
+
+        public void Add(NotificationApplication notification)
+        {
+            context.NotificationApplications.Add(notification);
+        }
     }
 }

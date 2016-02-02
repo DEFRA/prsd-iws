@@ -200,6 +200,7 @@
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
     <Compile Include="NotificationMovements\MovementNumberStatus.cs" />
     <Compile Include="Notification\ChangeUser.cs" />
+    <Compile Include="Notification\CreateLegacyNotificationApplication.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocument.cs" />
     <Compile Include="Notification\GeneratePostageLabel.cs" />
     <Compile Include="Annexes\GetAnnexes.cs" />
