@@ -25,7 +25,7 @@
             var notification = await repository.GetById(message.NotificationId);
 
             return mapper.Map<PackagingData>(notification.PackagingInfos
-                .OrderBy(pi => pi.PackagingType.Value)
+                .OrderBy(pi => pi.PackagingType)
                 .ToList());
         }
     }

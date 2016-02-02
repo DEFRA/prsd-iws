@@ -7,7 +7,6 @@
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Requests.PackagingType;
-    using PackagingType = Core.PackagingType.PackagingType;
 
     internal class PackagingInfoMap : IMap<SetPackagingInfoForNotification, IEnumerable<PackagingInfo>>,
         IMap<NotificationApplication, PackagingData>
@@ -21,31 +20,14 @@
                 switch (selectedPackagingType)
                 {
                     case PackagingType.Drum:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Drum));
-                        break;
                     case PackagingType.WoodenBarrel:
-                        packagingInfos.Add(
-                            PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.WoodenBarrel));
-                        break;
                     case PackagingType.Jerrican:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Jerrican));
-                        break;
                     case PackagingType.Box:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Box));
-                        break;
                     case PackagingType.Bag:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Bag));
-                        break;
                     case PackagingType.CompositePackaging:
-                        packagingInfos.Add(
-                            PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.CompositePackaging));
-                        break;
                     case PackagingType.PressureReceptacle:
-                        packagingInfos.Add(
-                            PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.PressureReceptacle));
-                        break;
                     case PackagingType.Bulk:
-                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(Domain.NotificationApplication.PackagingType.Bulk));
+                        packagingInfos.Add(PackagingInfo.CreatePackagingInfo(selectedPackagingType));
                         break;
                     case PackagingType.Other:
                         packagingInfos.Add(PackagingInfo.CreateOtherPackagingInfo(source.OtherDescription));
@@ -63,27 +45,16 @@
 
             foreach (var packagingInfo in source.PackagingInfos)
             {
-                packagingData.PackagingTypes.Add(GetPackagingType(packagingInfo.PackagingType));
+                packagingData.PackagingTypes.Add(packagingInfo.PackagingType);
             }
 
-            var otherPackaging =
-                source.PackagingInfos.FirstOrDefault(p => p.PackagingType == Domain.NotificationApplication.PackagingType.Other);
+            var otherPackaging = source.PackagingInfos.FirstOrDefault(p => p.PackagingType == PackagingType.Other);
             if (otherPackaging != null)
             {
                 packagingData.OtherDescription = otherPackaging.OtherDescription;
             }
 
             return packagingData;
-        }
-
-        private static PackagingType GetPackagingType(Domain.NotificationApplication.PackagingType packagingType)
-        {
-            PackagingType type;
-            if (Enum.TryParse(packagingType.Value.ToString(), out type))
-            {
-                return type;
-            }
-            throw new ArgumentException(string.Format("Unknown PackagingType {0}", packagingType.Value), "packagingType");
         }
     }
 }
