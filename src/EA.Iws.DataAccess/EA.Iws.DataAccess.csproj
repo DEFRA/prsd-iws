@@ -184,7 +184,6 @@
     <Compile Include="Mappings\Exports\OperationCodesEntityMapping.cs" />
     <Compile Include="Mappings\Common\OperationCodesMapping.cs" />
     <Compile Include="Mappings\Exports\ShipmentInfoMapping.cs" />
-    <Compile Include="Mappings\Exports\ChemicalCompositionTypeMapping.cs" />
     <Compile Include="Mappings\Exports\TransportRouteMapping.cs" />
     <Compile Include="Mappings\Common\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\Exports\UnitedKingdomCompetentAuthorityMapping.cs" />

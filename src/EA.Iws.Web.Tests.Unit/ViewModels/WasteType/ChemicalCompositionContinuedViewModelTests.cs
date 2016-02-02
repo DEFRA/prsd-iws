@@ -310,7 +310,7 @@
             var vm = new ChemicalCompositionContinuedViewModel();
             vm.WasteComposition = new List<WasteTypeCompositionData>();
             vm.OtherCodes = new List<WasteTypeCompositionData>();
-            vm.ChemicalCompositionType = ChemicalCompositionType.Wood;
+            vm.ChemicalCompositionType = ChemicalComposition.Wood;
             vm.Command = "continue";
 
             return vm;

@@ -12,7 +12,7 @@
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class UpdateWasteType : IRequest<Guid>
     {
-        public UpdateWasteType(Guid notificationId, ChemicalCompositionType chemicalCompositionType,
+        public UpdateWasteType(Guid notificationId, ChemicalComposition chemicalCompositionType,
             string furtherInformation, List<WasteTypeCompositionData> wasteCompositions)
         {
             NotificationId = notificationId;
@@ -24,7 +24,7 @@
 
         public Guid NotificationId { get; private set; }
 
-        public ChemicalCompositionType ChemicalCompositionType { get; private set; }
+        public ChemicalComposition ChemicalCompositionType { get; private set; }
 
         public string ChemicalCompositionDescription { get; private set; }
 
