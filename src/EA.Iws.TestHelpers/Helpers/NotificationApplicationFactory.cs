@@ -11,7 +11,6 @@
     using Domain;
     using Domain.NotificationApplication;
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
-    using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
     public static class NotificationApplicationFactory
     {

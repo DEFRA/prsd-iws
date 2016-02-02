@@ -159,7 +159,6 @@
     <Compile Include="Mappings\Exports\ExitCustomsOfficeMapping.cs" />
     <Compile Include="Mappings\Exports\EntryCustomsOfficeMapping.cs" />
     <Compile Include="Mappings\Exports\PhysicalCharacteristicsInfoMapping.cs" />
-    <Compile Include="Mappings\Exports\PhysicalCharacteristicTypeMapping.cs" />
     <Compile Include="Mappings\Common\PricingStructureMapping.cs" />
     <Compile Include="Mappings\Common\RecoveryCostMapping.cs" />
     <Compile Include="Mappings\Exports\WasteRecoveryMapping.cs" />

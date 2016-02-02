@@ -10,6 +10,7 @@
             ToTable("PhysicalCharacteristicsInfo", "Notification");
 
             Property(x => x.OtherDescription).HasColumnName("OtherDescription").HasMaxLength(120);
+            Property(x => x.PhysicalCharacteristic).HasColumnName("PhysicalCharacteristicType").IsRequired();
         }
     }
 }
