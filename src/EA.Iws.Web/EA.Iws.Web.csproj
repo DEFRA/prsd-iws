@@ -1189,12 +1189,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BasicSearchViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NotificationInterimViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationNumberViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2703,6 +2703,10 @@
     <EmbeddedResource Include="Areas\Admin\ViewModels\Home\BasicSearchViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BasicSearchViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\ViewModels\ImportNotification\NotificationInterimViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationInterimViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
