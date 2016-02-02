@@ -1,19 +1,19 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment.FinancialGuarantee
 {
-    using Core.FinancialGuarantee;
+    using Core.ImportNotificationAssessment.FinancialGuarantee;
     using Prsd.Core.Domain;
 
     public class ImportFinancialGuaranteeStatusChangeEvent : IEvent
     {
-        public FinancialGuaranteeStatus Source { get; private set; }
+        public ImportFinancialGuaranteeStatus Source { get; private set; }
 
         public ImportFinancialGuarantee Guarantee { get; private set; }
 
-        public FinancialGuaranteeStatus Destination { get; set; }
+        public ImportFinancialGuaranteeStatus Destination { get; set; }
 
-        public ImportFinancialGuaranteeStatusChangeEvent(ImportFinancialGuarantee importFinancialGuarantee, 
-            FinancialGuaranteeStatus source, 
-            FinancialGuaranteeStatus destination)
+        public ImportFinancialGuaranteeStatusChangeEvent(ImportFinancialGuarantee importFinancialGuarantee,
+            ImportFinancialGuaranteeStatus source,
+            ImportFinancialGuaranteeStatus destination)
         {
             Source = source;
             Guarantee = importFinancialGuarantee;
