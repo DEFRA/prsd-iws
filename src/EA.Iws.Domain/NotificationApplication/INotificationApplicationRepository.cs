@@ -14,5 +14,7 @@
         Task<Guid?> GetIdOrDefault(string number);
 
         void Add(NotificationApplication notification);
+
+        Task<bool> NotificationNumberExists(int number, UKCompetentAuthority competentAuthority);
     }
 }

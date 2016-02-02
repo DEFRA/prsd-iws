@@ -378,6 +378,10 @@
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Withdraw.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDate.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDate.cshtml" />
+    <Content Include="Areas\Admin\Views\ExportNotification\CompetentAuthority.cshtml" />
+    <Content Include="Areas\Admin\Views\ExportNotification\NotificationType.cshtml" />
+    <Content Include="Areas\Admin\Views\ExportNotification\NewOrExistingNotification.cshtml" />
+    <Content Include="Areas\Admin\Views\ExportNotification\EnterNumber.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1158,6 +1162,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntryOrExitPointControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Controllers\ExportNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExportNotificationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
@@ -1184,6 +1189,10 @@
     </Compile>
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\SuccessViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ExportNotifications\ExportNotificationsViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExportNotification\CompetentAuthorityChoiceViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExportNotification\EnterNumberViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExportNotification\NewOrExistingNotificationViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExportNotification\NotificationTypeViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\BasicSearchViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1250,6 +1259,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ExportNotification\CompetentAuthorityResources.Designer.cs">
+      <DependentUpon>CompetentAuthorityResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ExportNotification\EnterNumberResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnterNumberResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ExportNotification\NewOrExistingNotificationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewOrExistingNotificationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ExportNotification\NotificationTypeResources.Designer.cs">
+      <DependentUpon>NotificationTypeResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\Admin\Views\Home\ImportResultsResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2521,11 +2550,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LandingPageResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewNotification\CompetentAuthorityResources.Designer.cs" />
-    <Compile Include="Views\NewNotification\CreatedResources.Designer.cs" />
-    <Compile Include="Views\NewNotification\GeneralFinancialGuaranteeResources.Designer.cs" />
-    <Compile Include="Views\NewNotification\NotificationTypeResources.Designer.cs" />
-    <Compile Include="Views\NewNotification\SepaFinancialGuaranteeResources.Designer.cs" />
+    <Compile Include="Views\NewNotification\CompetentAuthorityResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompetentAuthorityResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewNotification\CreatedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreatedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewNotification\GeneralFinancialGuaranteeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralFinancialGuaranteeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewNotification\NotificationTypeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationTypeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewNotification\SepaFinancialGuaranteeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SepaFinancialGuaranteeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\NotificationSwitch\NotFoundResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2748,6 +2797,22 @@
     <EmbeddedResource Include="Areas\Admin\Views\ExportNotifications\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ExportNotification\CompetentAuthorityResources.resx">
+      <LastGenOutput>CompetentAuthorityResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ExportNotification\EnterNumberResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EnterNumberResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ExportNotification\NewOrExistingNotificationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NewOrExistingNotificationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ExportNotification\NotificationTypeResources.resx">
+      <LastGenOutput>NotificationTypeResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\Home\ImportResultsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

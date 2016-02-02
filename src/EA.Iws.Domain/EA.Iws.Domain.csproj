@@ -256,6 +256,7 @@
     <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
+    <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
