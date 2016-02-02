@@ -29,16 +29,16 @@
         [StringLength(70, ErrorMessageResourceName = "DescriptionLength", ErrorMessageResourceType = typeof(ChemicalCompositionResources))]
         public string Description { get; set; }
 
-        public ChemicalCompositionType ChemicalCompositionType { get; set; }
+        public ChemicalComposition ChemicalCompositionType { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(Energy) && ChemicalCompositionType != ChemicalCompositionType.Wood)
+            if (string.IsNullOrEmpty(Energy) && ChemicalCompositionType != ChemicalComposition.Wood)
             {
                 yield return new ValidationResult(ChemicalCompositionResources.EnergyRequired, new[] { "Energy" });
             }
 
-            if (ChemicalCompositionType == ChemicalCompositionType.Wood && string.IsNullOrEmpty(Description))
+            if (ChemicalCompositionType == ChemicalComposition.Wood && string.IsNullOrEmpty(Description))
             {
                 yield return new ValidationResult(ChemicalCompositionResources.DescriptionRequired, new[] { "Description" });
             }

@@ -32,7 +32,7 @@
 
         public string Command { get; set; }
 
-        public ChemicalCompositionType ChemicalCompositionType { get; set; }
+        public ChemicalComposition ChemicalCompositionType { get; set; }
         
         public YesNoEnum Choices
         {

@@ -13,20 +13,20 @@
             <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionName)</dd>
         }
 
-        @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription) && Model.ChemicalComposition.ChemicalCompositionType != ChemicalCompositionType.Wood)
+        @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription) && Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Wood)
         {
             <dt>Description:</dt>
             <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionDescription)</dd>
         }
 
-        @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.WoodTypeDescription) && Model.ChemicalComposition.ChemicalCompositionType == ChemicalCompositionType.Wood)
+        @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.WoodTypeDescription) && Model.ChemicalComposition.ChemicalCompositionType == ChemicalComposition.Wood)
         {
             <dt>Description:</dt>
             <dd>@Html.DisplayFor(m => m.ChemicalComposition.WoodTypeDescription)</dd>
         }
     </dl>
 
-    if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalCompositionType.Other)
+    if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Other)
     {
         <dl>
             <dt>Chemical composition minimum and maximum as a weight by weight percentage:</dt>

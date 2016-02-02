@@ -48,8 +48,8 @@
                     model.Completed.AsDateTime()));
 
             return (model.IsRequiredEntryComplete) ?
-                RedirectToAction("Decision", "FinancialGuarantee")
-                : RedirectToAction("Dates", "FinancialGuarantee");
+                RedirectToAction("Decision")
+                : RedirectToAction("Dates");
         }
 
         [HttpGet]

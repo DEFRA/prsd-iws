@@ -179,12 +179,10 @@
     <Compile Include="Mappings\Exports\NotificationApplicationMapping.cs" />
     <Compile Include="Mappings\Exports\OrganisationMapping.cs" />
     <Compile Include="Mappings\Exports\CarrierMapping.cs" />
-    <Compile Include="Mappings\Exports\PackagingTypeMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerMapping.cs" />
     <Compile Include="Mappings\Exports\OperationCodesEntityMapping.cs" />
     <Compile Include="Mappings\Common\OperationCodesMapping.cs" />
     <Compile Include="Mappings\Exports\ShipmentInfoMapping.cs" />
-    <Compile Include="Mappings\Exports\ChemicalCompositionTypeMapping.cs" />
     <Compile Include="Mappings\Exports\TransportRouteMapping.cs" />
     <Compile Include="Mappings\Common\UKCompetentAuthorityMapping.cs" />
     <Compile Include="Mappings\Exports\UnitedKingdomCompetentAuthorityMapping.cs" />

@@ -86,9 +86,9 @@
         }
 
         [Theory]
-        [InlineData(null, 1, 10, ChemicalCompositionType.SRF)]
-        [InlineData("toast", 1, 10, ChemicalCompositionType.SRF)]
-        [InlineData("A Chemical Thing", 1.3, 10, ChemicalCompositionType.Other)]
+        [InlineData(null, 1, 10, ChemicalComposition.SRF)]
+        [InlineData("toast", 1, 10, ChemicalComposition.SRF)]
+        [InlineData("A Chemical Thing", 1.3, 10, ChemicalComposition.Other)]
         public void GetWasteCompositionPercentages_ListWithOneItem_ReturnsExpectedResult(string constituent,
             decimal min,
             decimal max,
@@ -165,18 +165,18 @@
         }
 
         [Theory]
-        [InlineData(ChemicalCompositionType.RDF, "Refuse Derived Fuel (RDF)")]
-        [InlineData(ChemicalCompositionType.SRF, "Solid Recovered Fuel (SRF)")]
-        [InlineData(ChemicalCompositionType.Wood, "Wood")]
-        public void GetWasteName(ChemicalCompositionType type, string expected)
+        [InlineData(ChemicalComposition.RDF, "Refuse Derived Fuel (RDF)")]
+        [InlineData(ChemicalComposition.SRF, "Solid Recovered Fuel (SRF)")]
+        [InlineData(ChemicalComposition.Wood, "Wood")]
+        public void GetWasteName(ChemicalComposition type, string expected)
         {
             var chemicalComposition = ChemicalComposition.RDF;
 
-            if (type == ChemicalCompositionType.SRF)
+            if (type == ChemicalComposition.SRF)
             {
                 chemicalComposition = ChemicalComposition.SRF;
             }
-            else if (type == ChemicalCompositionType.Wood)
+            else if (type == ChemicalComposition.Wood)
             {
                 chemicalComposition = ChemicalComposition.Wood;
             }

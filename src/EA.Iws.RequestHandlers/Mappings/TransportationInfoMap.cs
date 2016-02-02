@@ -4,7 +4,9 @@
     using System.Linq;
     using Core.Carriers;
     using Core.Notification.Overview;
+    using Core.PackagingType;
     using Domain.NotificationApplication;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
 
     internal class TransportationInfoMap : IMap<NotificationApplication, Transportation>
@@ -19,7 +21,7 @@
 
         public Transportation Map(NotificationApplication notification)
         {
-            return new Transportation 
+            return new Transportation
             {
                 NotificationId = notification.Id,
                 Carriers = carrierMap.Map(notification).ToList(),
@@ -35,14 +37,14 @@
             foreach (var packagingInfo in notification.PackagingInfos)
             {
                 packagingData.Add(packagingInfo.PackagingType != PackagingType.Other
-                    ? packagingInfo.PackagingType.Value + " - " + packagingInfo.PackagingType.DisplayName
+                    ? (int)packagingInfo.PackagingType + " - " + EnumHelper.GetDisplayName(packagingInfo.PackagingType)
                     : packagingInfo.OtherDescription);
             }
             packagingData.Sort();
 
             return packagingData;
         }
-        
+
         private static string GetSpecialHandling(NotificationApplication notification)
         {
             var specialHandlingAnswer = string.Empty;

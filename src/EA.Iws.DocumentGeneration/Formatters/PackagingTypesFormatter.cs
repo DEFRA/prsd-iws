@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Core.PackagingType;
     using Domain.NotificationApplication;
 
     public class PackagingTypesFormatter
@@ -14,10 +15,10 @@
             }
 
             var packagingStrings = packagingTypes
-                .OrderBy(c => c.PackagingType.Value)
+                .OrderBy(c => c.PackagingType)
                 .Select(pt => pt.PackagingType != PackagingType.Other
-                    ? pt.PackagingType.Value.ToString()
-                    : pt.PackagingType.Value + "(" + pt.OtherDescription + ")");
+                    ? pt.PackagingType.ToString()
+                    : pt.PackagingType + "(" + pt.OtherDescription + ")");
 
             return string.Join(", ", packagingStrings);
         }

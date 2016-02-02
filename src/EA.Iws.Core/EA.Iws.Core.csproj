@@ -92,6 +92,8 @@
     <Compile Include="ImportMovement\ImportMovementRecoveryData.cs" />
     <Compile Include="ImportMovement\ImportMovementReceiptData.cs" />
     <Compile Include="ImportMovement\MovementRejectionReasons.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\AvailableDecisionsData.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
@@ -237,7 +239,7 @@
     <Compile Include="TransportRoute\TransportRouteData.cs" />
     <Compile Include="WasteType\ChemicalCompositionCategory.cs" />
     <Compile Include="WasteType\ChemicalCompositionData.cs" />
-    <Compile Include="WasteType\ChemicalCompositionType.cs" />
+    <Compile Include="WasteType\ChemicalComposition.cs" />
     <Compile Include="WasteCodes\CodeType.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicsData.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicType.cs" />

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using System.Linq;
+    using Core.PackagingType;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
@@ -69,13 +70,13 @@
         private static string GetPackagingInfo(NotificationApplication notification)
         {
             var pistring = string.Empty;
-            var packagingTypeList = notification.PackagingInfos.OrderBy(c => c.PackagingType.Value).ToList();
+            var packagingTypeList = notification.PackagingInfos.OrderBy(c => c.PackagingType).ToList();
 
             for (int i = 0; i < packagingTypeList.Count(); i++)
             {
                 pistring = pistring + (packagingTypeList[i].PackagingType != PackagingType.Other
-                    ? packagingTypeList[i].PackagingType.Value.ToString()
-                    : packagingTypeList[i].PackagingType.Value + "(" + packagingTypeList[i].OtherDescription + ")");
+                    ? packagingTypeList[i].PackagingType.ToString()
+                    : packagingTypeList[i].PackagingType + "(" + packagingTypeList[i].OtherDescription + ")");
 
                 if (i < (packagingTypeList.Count() - 1))
                 {

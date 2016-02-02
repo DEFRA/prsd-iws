@@ -161,6 +161,7 @@
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\AuditStatusChange.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\CreateFinancialGuaranteeHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetAvailableFinancialGuaranteeDecisionsHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedAndCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDateHandler.cs" />

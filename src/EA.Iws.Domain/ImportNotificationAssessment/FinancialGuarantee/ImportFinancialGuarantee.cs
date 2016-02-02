@@ -2,20 +2,31 @@
 {
     using System;
     using System.Collections.Generic;
-    using Core.FinancialGuarantee;
+    using System.Linq;
+    using Core.Admin;
+    using Core.ImportNotificationAssessment.FinancialGuarantee;
+    using Core.Shared;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
 
     public class ImportFinancialGuarantee : Entity
     {
-        private readonly StateMachine<FinancialGuaranteeStatus, Trigger> stateMachine;
+        private static readonly BidirectionalDictionary<Trigger, FinancialGuaranteeDecision> DecisionDictionary = new BidirectionalDictionary<Trigger, FinancialGuaranteeDecision>(
+            new Dictionary<Trigger, FinancialGuaranteeDecision>
+            {
+                { Trigger.Approve, FinancialGuaranteeDecision.Approved },
+                { Trigger.Refuse, FinancialGuaranteeDecision.Refused },
+                { Trigger.Release, FinancialGuaranteeDecision.Released }
+            }); 
 
-        private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> completeTrigger;  
+        private readonly StateMachine<ImportFinancialGuaranteeStatus, Trigger> stateMachine;
+
+        private StateMachine<ImportFinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> completeTrigger;  
 
         public Guid ImportNotificationId { get; private set; }
 
-        public FinancialGuaranteeStatus Status { get; private set; }
+        public ImportFinancialGuaranteeStatus Status { get; private set; }
 
         public DateTime ReceivedDate { get; private set; }
 
@@ -41,27 +52,28 @@
             ImportNotificationId = importNotificationId;
             ReceivedDate = receivedDate;
             CreatedDate = DateTimeOffset.UtcNow;
-            Status = FinancialGuaranteeStatus.ApplicationReceived;
+            Status = ImportFinancialGuaranteeStatus.ApplicationReceived;
         }
 
-        private StateMachine<FinancialGuaranteeStatus, Trigger> CreateStateMachine()
+        private StateMachine<ImportFinancialGuaranteeStatus, Trigger> CreateStateMachine()
         {
-            var stateMachine = new StateMachine<FinancialGuaranteeStatus, Trigger>(() => Status, s => Status = s);
+            var stateMachine = new StateMachine<ImportFinancialGuaranteeStatus, Trigger>(() => Status, s => Status = s);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
             completeTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Complete);
 
-            stateMachine.Configure(FinancialGuaranteeStatus.ApplicationReceived)
-                .Permit(Trigger.Complete, FinancialGuaranteeStatus.ApplicationComplete);
+            stateMachine.Configure(ImportFinancialGuaranteeStatus.ApplicationReceived)
+                .Permit(Trigger.Complete, ImportFinancialGuaranteeStatus.ApplicationComplete);
 
-            stateMachine.Configure(FinancialGuaranteeStatus.ApplicationComplete)
-                .OnEntryFrom(completeTrigger, OnComplete);
+            stateMachine.Configure(ImportFinancialGuaranteeStatus.ApplicationComplete)
+                .OnEntryFrom(completeTrigger, OnComplete)
+                .Permit(Trigger.Approve, ImportFinancialGuaranteeStatus.Approved);
 
             return stateMachine;
         }
 
-        private void OnTransitionAction(StateMachine<FinancialGuaranteeStatus, Trigger>.Transition transition)
+        private void OnTransitionAction(StateMachine<ImportFinancialGuaranteeStatus, Trigger>.Transition transition)
         {
             RaiseEvent(new ImportFinancialGuaranteeStatusChangeEvent(this, transition.Source, transition.Destination));
         }
@@ -91,6 +103,13 @@
         public void AddStatusChangeRecord(ImportFinancialGuaranteeStatusChange statusChange)
         {
             StatusChangeCollection.Add(statusChange);
+        }
+
+        public IEnumerable<FinancialGuaranteeDecision> GetAvailableDecisions()
+        {
+            return stateMachine.PermittedTriggers
+                .Where(t => DecisionDictionary.ContainsKey(t))
+                .Select(t => DecisionDictionary[t]);
         }
 
         private enum Trigger
