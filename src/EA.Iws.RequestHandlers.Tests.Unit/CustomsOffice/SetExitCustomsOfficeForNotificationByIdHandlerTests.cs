@@ -13,6 +13,7 @@
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class SetExitCustomsOfficeForNotificationByIdHandlerTests
     {
@@ -34,7 +35,7 @@
             this.context = new TestIwsContext();
             var repository = A.Fake<ITransportRouteRepository>();
            
-            anyNotification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            anyNotification = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(anyNotification, notificationId);
 
             transport = new TransportRoute(notificationId);

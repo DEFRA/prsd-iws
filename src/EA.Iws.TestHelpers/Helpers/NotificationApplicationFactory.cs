@@ -25,10 +25,39 @@
 
         public static NotificationApplication Create(Guid id, int number = 250)
         {
-            var notificationApplication = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
-                UKCompetentAuthority.England, number);
+            var notificationApplication = Activator.CreateInstance(
+                type: typeof(NotificationApplication),
+                bindingAttr: BindingFlags.NonPublic | BindingFlags.Instance,
+                culture: null,
+                binder: null,
+                args: new object[] 
+                {
+                    Guid.Empty,
+                    NotificationType.Recovery,
+                    UKCompetentAuthority.England,
+                    number
+                }) as NotificationApplication;
 
             EntityHelper.SetEntityId(notificationApplication, id);
+
+            return notificationApplication;
+        }
+
+        public static NotificationApplication Create(Guid userId, NotificationType notificationType,
+            UKCompetentAuthority competentAuthority, int number)
+        {
+            var notificationApplication = Activator.CreateInstance(
+                type: typeof(NotificationApplication),
+                bindingAttr: BindingFlags.NonPublic | BindingFlags.Instance,
+                culture: null,
+                binder: null,
+                args: new object[]
+                {
+                    userId,
+                    notificationType,
+                    competentAuthority,
+                    number
+                }) as NotificationApplication;
 
             return notificationApplication;
         }

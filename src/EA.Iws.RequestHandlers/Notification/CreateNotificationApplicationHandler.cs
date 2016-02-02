@@ -6,7 +6,6 @@
     using DataAccess;
     using Domain;
     using Domain.NotificationApplication;
-    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using CompetentAuthority = Core.Notification.CompetentAuthority;
@@ -15,21 +14,19 @@
     {
         private readonly IProducerRepository producerRepository;
         private readonly ICarrierRepository carrierRepository;
+        private readonly NotificationApplicationFactory notificationApplicationFactory;
         private readonly IwsContext context;
-        private readonly INotificationNumberGenerator notificationNumberGenerator;
         private readonly IFacilityRepository facilityRepository;
-        private readonly IUserContext userContext;
 
-        public CreateNotificationApplicationHandler(IwsContext context,
-            IUserContext userContext,
-            INotificationNumberGenerator notificationNumberGenerator,
+        public CreateNotificationApplicationHandler(
+            NotificationApplicationFactory notificationApplicationFactory,
+            IwsContext context,
             IFacilityRepository facilityRepository,
             ICarrierRepository carrierRepository,
             IProducerRepository producerRepository)
         {
+            this.notificationApplicationFactory = notificationApplicationFactory;
             this.context = context;
-            this.userContext = userContext;
-            this.notificationNumberGenerator = notificationNumberGenerator;
             this.facilityRepository = facilityRepository;
             this.carrierRepository = carrierRepository;
             this.producerRepository = producerRepository;
@@ -40,9 +37,7 @@
             var authority = GetUkCompetentAuthority(command.CompetentAuthority);
             var notificationType = GetNotificationType(command.NotificationType);
 
-            var notificationNumber = await notificationNumberGenerator.GetNextNotificationNumber(authority);
-            var notification = new NotificationApplication(userContext.UserId, notificationType, authority,
-                notificationNumber);
+            var notification = await notificationApplicationFactory.CreateNew(notificationType, authority);
 
             context.NotificationApplications.Add(notification);
 

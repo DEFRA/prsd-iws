@@ -12,6 +12,7 @@
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests
     {
@@ -22,7 +23,7 @@
 
         public GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests()
         {
-            notification1 = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 500);
+            notification1 = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 500);
             notificationId = new Guid("295B0511-D0EB-43B4-9D17-938E1A34F0D3");
 
             EntityHelper.SetEntityId(notification1, notificationId);

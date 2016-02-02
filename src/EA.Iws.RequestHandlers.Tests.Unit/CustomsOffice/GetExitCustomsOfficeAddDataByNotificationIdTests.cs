@@ -13,6 +13,7 @@
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class GetExitCustomsOfficeAddDataByNotificationIdTests
     {
@@ -32,7 +33,7 @@
             country = CountryFactory.Create(new Guid("05C21C57-2F39-4A15-A09A-5F38CF139C05"));
             exitCustomsOffice = new ExitCustomsOffice("any name", "any address", country);
 
-            notification = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
+            notification = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 500);
 
             transport = new TransportRoute(NotificationId);

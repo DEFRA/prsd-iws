@@ -11,6 +11,7 @@
     using FakeItEasy;
     using Prsd.Core.Domain;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
     public class TransportRouteIntegration
@@ -29,7 +30,7 @@
         [Fact]
         public async Task CanAddStateOfExport()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal, UKCompetentAuthority.England, 450);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Disposal, UKCompetentAuthority.England, 450);
 
             context.NotificationApplications.Add(notification);
 
@@ -65,7 +66,7 @@
         [Fact]
         public async Task CanUpdateStateOfExport()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal, UKCompetentAuthority.England, 450);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Disposal, UKCompetentAuthority.England, 450);
 
             context.NotificationApplications.Add(notification);
 

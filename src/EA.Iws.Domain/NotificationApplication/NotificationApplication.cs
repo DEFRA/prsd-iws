@@ -17,7 +17,7 @@
         {
         }
 
-        public NotificationApplication(Guid userId, NotificationType notificationType,
+        internal NotificationApplication(Guid userId, NotificationType notificationType,
             UKCompetentAuthority competentAuthority, int notificationNumber)
         {
             UserId = userId;

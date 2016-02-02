@@ -12,6 +12,7 @@
     using Requests.MeansOfTransport;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class GetMeansOfTransportByNotificationIdHandlerTests
     {
@@ -27,11 +28,11 @@
         public GetMeansOfTransportByNotificationIdHandlerTests()
         {
             context = new TestIwsContext();
-            var notificationNoMeans = new NotificationApplication(TestIwsContext.UserId, NotificationType.Disposal,
+            var notificationNoMeans = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Disposal,
                 UKCompetentAuthority.England, 500);
-            var notificationMeans = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
+            var notificationMeans = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
-            var anotherNotificationWithMeans = new NotificationApplication(TestIwsContext.UserId, NotificationType.Recovery,
+            var anotherNotificationWithMeans = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 250);
 
             EntityHelper.SetEntityId(notificationMeans, notificationWithMeansOfTransportId);

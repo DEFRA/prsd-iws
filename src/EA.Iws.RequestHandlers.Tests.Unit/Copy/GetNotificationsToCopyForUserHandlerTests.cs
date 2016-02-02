@@ -14,6 +14,7 @@
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class GetNotificationsToCopyForUserHandlerTests
     {
@@ -35,13 +36,13 @@
 
             context = new TestIwsContext(userContext);
 
-            var notification1 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
+            var notification1 = NotificationApplicationFactory.Create(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification1, Notification1Id);
             var importer1 = ImporterFactory.Create(Notification1Id, new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C"));
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification1);
 
-            var notification2 = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
+            var notification2 = NotificationApplicationFactory.Create(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 2);
             EntityHelper.SetEntityId(notification2, Notification2Id);
             var importer2 = ImporterFactory.Create(Notification2Id, new Guid("CD8FE7F5-B0EF-47E4-A198-D1E531A6CCDF"));
@@ -50,17 +51,17 @@
                 WasteAdditionalInformation.CreateWasteAdditionalInformation("toffee", 1, 10, WasteInformationType.AshContent)
             }), notification2);
 
-            var notification3 = new NotificationApplication(UserWithNotificationsId, NotificationType.Disposal,
+            var notification3 = NotificationApplicationFactory.Create(UserWithNotificationsId, NotificationType.Disposal,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification3, Notification3Id);
             var importer3 = ImporterFactory.Create(Notification3Id, new Guid("AF7ADA0A-E81B-4A7F-9837-52591B219DD3"));
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification3);
 
-            var destinationNotification = new NotificationApplication(UserWithNotificationsId, NotificationType.Recovery,
+            var destinationNotification = NotificationApplicationFactory.Create(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(destinationNotification, DestinationNotificationId);
 
-            var destinationNotification2 = new NotificationApplication(UserWithoutNotificationsId, NotificationType.Recovery,
+            var destinationNotification2 = NotificationApplicationFactory.Create(UserWithoutNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(destinationNotification2, DestinationNotificationId2);
 
