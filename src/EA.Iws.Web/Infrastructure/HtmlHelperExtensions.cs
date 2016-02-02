@@ -36,7 +36,7 @@
                     break;
             }
 
-            return new MvcHtmlString(string.Format("{0:dddd dd}{1} {0:MMMM}", today, suffix));
+            return new MvcHtmlString(string.Format("{0:dddd d}{1} {0:MMMM}", today, suffix));
         }
     }
 }
