@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.WasteType;
     using Domain.NotificationApplication;
     using Formatters;
 

@@ -38,7 +38,7 @@
         public void WoodWithoutDescription_ValidationError()
         {
             var viewModel = GetValidViewModel();
-            viewModel.ChemicalCompositionType = ChemicalCompositionType.Wood;
+            viewModel.ChemicalCompositionType = ChemicalComposition.Wood;
 
             var result = ValidateViewModel(viewModel);
 
@@ -50,7 +50,7 @@
         public void WoodAndNoEnergy_InValid()
         {
             var vm = GetValidViewModel();
-            vm.ChemicalCompositionType = ChemicalCompositionType.RDF;
+            vm.ChemicalCompositionType = ChemicalComposition.RDF;
 
             var result = ValidateViewModel(vm);
 
@@ -62,7 +62,7 @@
         public void WoodWithDescription_Validates()
         {
             var viewModel = GetValidViewModel();
-            viewModel.ChemicalCompositionType = ChemicalCompositionType.Wood;
+            viewModel.ChemicalCompositionType = ChemicalComposition.Wood;
             viewModel.Description = "description";
 
             var wasteType = new WoodInformationData();
