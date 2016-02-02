@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee {
+namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDates {
     using System;
     
     
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee.ReceivedDate" +
-                            "ViewModelResources", typeof(ReceivedDateViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDates.Receive" +
+                            "dDateViewModelResources", typeof(ReceivedDateViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

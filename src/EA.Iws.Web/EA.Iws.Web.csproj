@@ -376,8 +376,13 @@
     <Content Include="Areas\NotificationApplication\Views\Shared\_PortNotListedDisclosure.cshtml" />
     <Content Include="Areas\Admin\Views\ImportNotification\Interim.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Withdraw.cshtml" />
-    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDate.cshtml" />
-    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDate.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedDate.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedAndCompletedDate.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\Index.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NotReceived.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NotCompleted.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Choose.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NoDecisions.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1021,7 +1026,8 @@
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
-    <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDatesController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.Designer.cs">
@@ -1029,18 +1035,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedAndCompletedDateViewModel.cs" />
-    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModel.cs" />
-    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedAndCompletedDateViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedAndCompletedDateViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedDateViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedAndCompletedDateViewModelResources.Designer.cs">
       <DependentUpon>ReceivedAndCompletedDateViewModelResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModelResources.Designer.cs">
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedDateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceivedDateViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesCommand.cs" />
@@ -1059,15 +1066,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDateResources.Designer.cs">
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedAndCompletedDateResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceivedAndCompletedDateResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDateResources.Designer.cs">
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedDateResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceivedDateResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\NoDecisions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoDecisions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\NotCompletedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotCompletedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\NotReceivedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotReceivedResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\KeyDates\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2604,11 +2631,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedAndCompletedDateViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedAndCompletedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedAndCompletedDateViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuarantee\ReceivedDateViewModelResources.resx">
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedDateViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -2624,13 +2651,29 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedAndCompletedDateResources.resx">
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedAndCompletedDateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedAndCompletedDateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuarantee\ReceivedDateResources.resx">
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedDateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedDateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\NoDecisions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NoDecisions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\NotCompletedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotCompletedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\NotReceivedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotReceivedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\PaymentDetails\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

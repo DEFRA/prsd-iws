@@ -5,14 +5,14 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment.FinancialGuarantee;
-    using ViewModels.FinancialGuarantee;
+    using ViewModels.FinancialGuaranteeDates;
 
     [Authorize(Roles = "internal")]
-    public class FinancialGuaranteeController : Controller
+    public class FinancialGuaranteeDatesController : Controller
     {
         private readonly IMediator mediator;
 
-        public FinancialGuaranteeController(IMediator mediator)
+        public FinancialGuaranteeDatesController(IMediator mediator)
         {
             this.mediator = mediator;
         }

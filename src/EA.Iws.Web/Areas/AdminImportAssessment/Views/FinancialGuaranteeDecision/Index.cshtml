@@ -1,0 +1,28 @@
+﻿@using Resources = EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuaranteeDecision.IndexResources
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDecision.FinancialGuaranteeDecisionViewModel
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.MainHeading</h1>
+
+@if (!Model.IsReceived)
+{
+    @Html.Partial("_NotReceived")
+}
+else if (!Model.IsCompleted)
+{
+    @Html.Partial("_NotCompleted")
+}
+else if (Model.AvailableDecisions.Count == 0)
+{
+    @Html.Partial("_NoDecisions")
+}
+else
+{
+    @Html.Partial("_Choose")
+}
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Assessment })
+}
