@@ -346,7 +346,6 @@
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
     <Compile Include="NotificationApplication\PackagingInfo.cs" />
     <Compile Include="NotificationApplication\ChemicalComposition.cs" />
-    <Compile Include="NotificationApplication\PackagingType.cs" />
     <Compile Include="NotificationApplication\OperationInfo.cs" />
     <Compile Include="OperationCode.cs" />
     <Compile Include="Organisation.cs" />
