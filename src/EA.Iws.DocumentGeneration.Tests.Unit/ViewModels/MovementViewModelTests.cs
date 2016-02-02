@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Shared;
+    using Core.WasteType;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
     using Domain;

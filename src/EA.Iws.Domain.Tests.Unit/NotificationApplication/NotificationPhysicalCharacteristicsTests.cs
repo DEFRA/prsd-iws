@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.Shared;
+    using Core.WasteType;
     using Domain.NotificationApplication;
     using Xunit;
 

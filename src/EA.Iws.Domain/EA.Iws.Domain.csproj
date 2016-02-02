@@ -329,7 +329,6 @@
     <Compile Include="NotificationApplication\NotificationApplication.TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />
-    <Compile Include="NotificationApplication\PhysicalCharacteristicType.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\WasteRecovery.cs" />
     <Compile Include="NotificationApplication\TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\WasteCode.cs" />
