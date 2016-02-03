@@ -44,27 +44,12 @@ else if (status != ImportMovementStatus.Cancelled)
         
     @if (Model.ShowShipments())
     {
-        using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="grid-row form-group">
-                <div class="column-third">@Resource.Dropdown</div>
-
-                <div class="column-half">
-                    @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
-                    <button id="updateStatus" class="button" type="submit">Update</button>
-                </div>
-            </div>
-        }
-
         <table class="odd-table">
             <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
 
             <thead>
             <tr>
                 <th>@Resource.thNumber</th>
-                <th>@Resource.thStatus</th>
                 <th>@Resource.thPrenotified</th>
                 <th>@Resource.thShipmentDue</th>
                 <th>@Resource.thReceived</th>
@@ -79,7 +64,6 @@ else if (status != ImportMovementStatus.Cancelled)
                     {
                         <tr>
                             <td>@Model.TableData[i].Number</td>
-                            <td>@Model.TableData[i].Status</td>
                             <td>@DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)</td>
                             <td>@DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)</td>
                             <td>@DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)</td>
@@ -107,14 +91,3 @@ else if (status != ImportMovementStatus.Cancelled)
 <div class="form-group">
     @Html.ActionLink("Return to shipment summary", "Index", "Home")
 </div>
-
-@section scripts {
-    <script>
-        $(function () {
-            $("#updateStatus").hide();
-            $("#@Html.NameFor(m => m.SelectedMovementStatus)").change(function () {
-                $("#updateStatus").parents("form").submit();
-            });
-        });
-    </script>
-}

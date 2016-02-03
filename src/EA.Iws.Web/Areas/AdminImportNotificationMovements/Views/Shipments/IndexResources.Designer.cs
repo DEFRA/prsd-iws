@@ -160,7 +160,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Shipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment key dates - based on status.
+        ///   Looks up a localized string similar to Shipment key dates.
         /// </summary>
         public static string Title {
             get {

@@ -22,35 +22,7 @@
 
         public DateTime? RecoveredOrDisposedOf { get; private set; }
 
-        public ImportMovementStatus Status
-        {
-            get
-            {
-                var status = ImportMovementStatus.New;
-
-                if (PreNotification != null)
-                {
-                    status = ImportMovementStatus.Submitted;
-                }
-
-                if (Received != null)
-                {
-                    status = ImportMovementStatus.Received;
-                }
-
-                if (RecoveredOrDisposedOf != null)
-                {
-                    status = ImportMovementStatus.Complete;
-                }
-
-                if (Rejected != null)
-                {
-                    status = ImportMovementStatus.Rejected;
-                }
-
-                return status;
-            }
-        }
+        public ImportMovementStatus Status { get; private set; }
 
         public static MovementTableData Load(ImportMovement movement,
             ImportMovementReceipt movementReceipt,
