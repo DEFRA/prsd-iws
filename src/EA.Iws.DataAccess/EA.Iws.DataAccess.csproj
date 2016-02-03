@@ -107,7 +107,10 @@
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeApprovalMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeRefusalMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeReleaseMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeStatusChange.cs" />
     <Compile Include="Mappings\Imports\ImportObjectionMapping.cs" />
     <Compile Include="Mappings\Imports\ImportWithdrawnMapping.cs" />
@@ -214,6 +217,9 @@
     <Compile Include="Repositories\Imports\FacilityRepository.cs" />
     <Compile Include="Repositories\Imports\ImportConsentRepository.cs" />
     <Compile Include="Repositories\Imports\ImporterRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportFinancialGuaranteeApprovalRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportFinancialGuaranteeRefusalRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportFinancialGuaranteeReleaseRepository.cs" />
     <Compile Include="Repositories\Imports\ImportFinancialGuaranteeRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementCompletedReceiptRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />
