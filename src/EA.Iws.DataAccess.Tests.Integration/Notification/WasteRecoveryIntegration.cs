@@ -10,6 +10,7 @@
     using FakeItEasy;
     using Prsd.Core.Domain;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
     public class WasteRecoveryIntegration
@@ -32,7 +33,7 @@
 
         private async Task<NotificationApplication> CreateNotification()
         {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();

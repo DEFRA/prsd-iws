@@ -11,6 +11,7 @@
     using RequestHandlers.Notification;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class NotificationCreatedEventHandlerTests
     {
@@ -23,7 +24,7 @@
         {
             context = new TestIwsContext();
 
-            var notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
+            var notification = NotificationApplicationFactory.Create(Guid.Empty, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(notification, notificationId);
 

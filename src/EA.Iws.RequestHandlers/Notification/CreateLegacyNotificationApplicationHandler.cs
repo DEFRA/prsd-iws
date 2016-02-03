@@ -8,36 +8,39 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    internal class CreateNotificationApplicationHandler : IRequestHandler<CreateNotificationApplication, Guid>
+    internal class CreateLegacyNotificationApplicationHandler :
+        IRequestHandler<CreateLegacyNotificationApplication, Guid>
     {
-        private readonly IProducerRepository producerRepository;
-        private readonly ICarrierRepository carrierRepository;
-        private readonly NotificationApplicationFactory notificationApplicationFactory;
         private readonly IwsContext context;
+        private readonly NotificationApplicationFactory notificationApplicationFactory;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IFacilityRepository facilityRepository;
+        private readonly ICarrierRepository carrierRepository;
+        private readonly IProducerRepository producerRepository;
 
-        public CreateNotificationApplicationHandler(
-            NotificationApplicationFactory notificationApplicationFactory,
-            IwsContext context,
+        public CreateLegacyNotificationApplicationHandler(IwsContext context,
             INotificationApplicationRepository notificationApplicationRepository,
             IFacilityRepository facilityRepository,
             ICarrierRepository carrierRepository,
-            IProducerRepository producerRepository)
+            IProducerRepository producerRepository,
+            NotificationApplicationFactory notificationApplicationFactory)
         {
-            this.notificationApplicationFactory = notificationApplicationFactory;
             this.context = context;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.facilityRepository = facilityRepository;
             this.carrierRepository = carrierRepository;
             this.producerRepository = producerRepository;
+            this.notificationApplicationFactory = notificationApplicationFactory;
         }
 
-        public async Task<Guid> HandleAsync(CreateNotificationApplication command)
+        public async Task<Guid> HandleAsync(CreateLegacyNotificationApplication message)
         {
-            var authority = UKCompetentAuthority.FromCompetentAuthority(command.CompetentAuthority);
-
-            var notification = await notificationApplicationFactory.CreateNew(command.NotificationType, authority);
+            var notification =
+                await
+                    notificationApplicationFactory.CreateLegacy(
+                        message.NotificationType,
+                        UKCompetentAuthority.FromCompetentAuthority(message.CompetentAuthority), 
+                        message.Number);
 
             notificationApplicationRepository.Add(notification);
 

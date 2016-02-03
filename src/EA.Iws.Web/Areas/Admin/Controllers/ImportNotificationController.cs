@@ -6,10 +6,9 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
-    using Requests.ImportNotificationAssessment;
     using ViewModels.ImportNotification;
 
-    [Authorize]
+    [Authorize(Roles = "internal")]
     public class ImportNotificationController : Controller
     {
         private readonly IMediator mediator;
