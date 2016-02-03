@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Continue with this notification.
+        /// </summary>
+        public static string ContinueWithButtonText {
+            get {
+                return ResourceManager.GetString("ContinueWithButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a new notification based on a previous one.
         /// </summary>
         public static string CopyFromPrevious {
@@ -169,6 +178,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This notification can not be submitted yet, as it is incomplete. You can submit it for approval once you complete it..
+        /// </summary>
+        public static string ImcompleteMessage {
+            get {
+                return ResourceManager.GetString("ImcompleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New notification.
         /// </summary>
         public static string NewNotificationTitle {
@@ -205,7 +223,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print notification.
+        ///   Looks up a localized string similar to Downlaod notification.
         /// </summary>
         public static string PrintNotification {
             get {
