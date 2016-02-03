@@ -65,3 +65,18 @@
     </table>
 }
 
+<div class="form-group">
+    @Html.ActionLink("Add", "Add")
+</div>
+
+@if (Model.TransitStates.Count == 0)
+{
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoTransitStates)">
+    @Html.Gds().ValidationMessageFor(m => m.HasNoTransitStates)
+        <label for="HasNoTransitStates" class="block-label">
+            @Html.CheckBoxFor(m => m.HasNoTransitStates)
+            @Resource.Checkbox
+        </label>
+    </div>
+}
+
