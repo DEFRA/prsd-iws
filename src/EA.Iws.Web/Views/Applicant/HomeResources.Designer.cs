@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to create a new notification based on a previous one.
+        ///   Looks up a localized string similar to create a new notification based on a previous one..
         /// </summary>
         public static string CopyNotification {
             get {
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  first.
+        ///   Looks up a localized string similar to  first..
         /// </summary>
         public static string First {
             get {
@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your notifications.
+        ///   Looks up a localized string similar to Your homepage.
         /// </summary>
         public static string Header {
             get {
@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a notification.
+        ///   Looks up a localized string similar to Your notifications.
         /// </summary>
         public static string HeaderManageYourNotifications {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Or you can.
+        ///   Looks up a localized string similar to You could also.
         /// </summary>
         public static string OrYouCan {
             get {

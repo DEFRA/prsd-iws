@@ -193,7 +193,9 @@
 
 #submit-side-bar {
     h3:first-of-type {
-        border-bottom: 10px solid $link-colour;
+        border-top: 10px solid $link-colour;
+        padding-top: 0.4em;
+        margin-bottom: 0.5em;
     }
 
     a {
