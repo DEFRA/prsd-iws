@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If your country is not listed, we recommend that you contact us to discuss your intended route for this notification..
+        ///   Looks up a localized string similar to If your country is not listed, we recommend that you contact your competent authority to discuss your intended route for this notification..
         /// </summary>
         public static string Text {
             get {
