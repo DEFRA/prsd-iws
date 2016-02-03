@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Core.WasteType;
     using Domain.NotificationApplication;
 
     public class PhysicalCharacteristicsFormatter
@@ -13,11 +14,11 @@
                 return string.Empty;
             }
 
-            var orderedPhysicalCharacteristics = physicalCharacteristics.OrderBy(c => c.PhysicalCharacteristic.Value).ToList();
+            var orderedPhysicalCharacteristics = physicalCharacteristics.OrderBy(c => c.PhysicalCharacteristic).ToList();
 
             return string.Join(", ", orderedPhysicalCharacteristics.Select(pc => pc.PhysicalCharacteristic == PhysicalCharacteristicType.Other
                 ? pc.OtherDescription
-                : pc.PhysicalCharacteristic.Value.ToString()));
+                : ((int)pc.PhysicalCharacteristic).ToString()));
         }
     }
 }

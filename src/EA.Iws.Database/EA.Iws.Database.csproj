@@ -238,6 +238,7 @@
     <Content Include="scripts\Update\Sprint25\20160120-172500-remove-notification-decision.sql" />
     <Content Include="scripts\Update\Sprint26\20160126-115800-export-carrier-collection.sql" />
     <Content Include="scripts\Update\Sprint26\20160128-104600-add-import-notification-interim-status-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160202-115500-change-import-financial-guarantee-status-type.sql" />
     <Content Include="scripts\Update\Sprint26\20160201-110400-add-import-financial-guarantee-status-change-table.sql" />
     <Content Include="scripts\Update\Sprint26\20160128-135000-add-import-financial-guarantee-table.sql" />
     <Content Include="scripts\Update\Sprint26\20160128-135000-add-import-withdrawn-table.sql" />

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
+    using Core.WasteType;
     using Prsd.Core;
     using Prsd.Core.Domain;
 

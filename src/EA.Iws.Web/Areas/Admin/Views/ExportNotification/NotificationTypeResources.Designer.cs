@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee {
+namespace EA.Iws.Web.Areas.Admin.Views.ExportNotification {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ReceivedDateViewModelResources {
+    public class NotificationTypeResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ReceivedDateViewModelResources() {
+        internal NotificationTypeResources() {
         }
         
         /// <summary>
@@ -39,8 +39,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee.ReceivedDate" +
-                            "ViewModelResources", typeof(ReceivedDateViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.ExportNotification.NotificationTypeResources", typeof(NotificationTypeResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,20 +61,29 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Received date.
+        ///   Looks up a localized string similar to If you are shipping for disposal then we advise you to contact your relevant competent authority before completing your notification application..
         /// </summary>
-        public static string ReceivedDateLabel {
+        public static string DisposalMessage {
             get {
-                return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
+                return ResourceManager.GetString("DisposalMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a received date.
+        ///   Looks up a localized string similar to What type of waste shipment notification are you applying for?.
         /// </summary>
-        public static string ReceivedDateRequired {
+        public static string Header {
             get {
-                return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
+                return ResourceManager.GetString("Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose your type of notification.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

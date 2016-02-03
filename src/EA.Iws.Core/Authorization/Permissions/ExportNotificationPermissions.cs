@@ -17,5 +17,7 @@
         public const string CanReadExportNotificationAssessment = "Can Read Export Notification Assessment";
 
         public const string CanEditExportNotificationAssessment = "Can Edit Export Notification Assessment";
+
+        public const string CanCreateLegacyExportNotification = "Can Create Legacy Export Notification";
     }
 }

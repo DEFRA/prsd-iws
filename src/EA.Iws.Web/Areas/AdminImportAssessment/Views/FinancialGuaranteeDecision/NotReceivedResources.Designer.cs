@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuarantee {
+namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuaranteeDecision {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuarantee {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ReceivedDateResources {
+    public class NotReceivedResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ReceivedDateResources() {
+        internal NotReceivedResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuarantee {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuarantee.ReceivedDateResou" +
-                            "rces", typeof(ReceivedDateResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuaranteeDecision.NotReceiv" +
+                            "edResources", typeof(NotReceivedResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,20 +62,29 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuarantee {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Financial guarantee received date.
+        ///   Looks up a localized string similar to No received date has been entered for this financial guarantee. Please provide the received date and completed date before recording a decision..
         /// </summary>
-        public static string MainHeading {
+        public static string Explanation {
             get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
+                return ResourceManager.GetString("Explanation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Financial guarantee received date.
+        ///   Looks up a localized string similar to Enter a received date.
         /// </summary>
-        public static string Title {
+        public static string GoToReceivedDate {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("GoToReceivedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to key dates.
+        /// </summary>
+        public static string ReturnToKeyDates {
+            get {
+                return ResourceManager.GetString("ReturnToKeyDates", resourceCulture);
             }
         }
     }

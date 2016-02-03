@@ -121,6 +121,7 @@
     <Compile Include="NotificationApplication\Annexes\RequiredAnnexesTests.cs" />
     <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
     <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />
+    <Compile Include="NotificationApplication\NotificationApplicationFactoryTests.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationTests.cs" />
     <Compile Include="NotificationApplication\NotificationChargeCalculatorTests.cs" />
     <Compile Include="NotificationApplication\NotificationCustomsOfficeTests.cs" />

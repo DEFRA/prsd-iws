@@ -1,14 +1,14 @@
 namespace EA.Iws.Domain.ImportNotificationAssessment.FinancialGuarantee
 {
     using System;
-    using Core.FinancialGuarantee;
+    using Core.ImportNotificationAssessment.FinancialGuarantee;
     using Prsd.Core.Domain;
 
     public class ImportFinancialGuaranteeStatusChange : Entity
     {
-        public FinancialGuaranteeStatus Source { get; private set; }
+        public ImportFinancialGuaranteeStatus Source { get; private set; }
 
-        public FinancialGuaranteeStatus Destination { get; private set; }
+        public ImportFinancialGuaranteeStatus Destination { get; private set; }
 
         public Guid UserId { get; private set; }
 
@@ -18,8 +18,8 @@ namespace EA.Iws.Domain.ImportNotificationAssessment.FinancialGuarantee
         {
         }
 
-        public ImportFinancialGuaranteeStatusChange(FinancialGuaranteeStatus source, 
-            FinancialGuaranteeStatus destination, 
+        public ImportFinancialGuaranteeStatusChange(ImportFinancialGuaranteeStatus source,
+            ImportFinancialGuaranteeStatus destination, 
             Guid userId, 
             DateTimeOffset date)
         {

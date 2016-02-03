@@ -11,19 +11,17 @@
 
     public partial class NotificationApplication : Entity
     {
-        private const string NotificationNumberFormat = "GB 000{0} {1}";
-
         protected NotificationApplication()
         {
         }
 
-        public NotificationApplication(Guid userId, NotificationType notificationType,
+        internal NotificationApplication(Guid userId, NotificationType notificationType,
             UKCompetentAuthority competentAuthority, int notificationNumber)
         {
             UserId = userId;
             NotificationType = notificationType;
             CompetentAuthority = competentAuthority;
-            NotificationNumber = CreateNotificationNumber(notificationNumber);
+            NotificationNumber = NotificationNumberFormatter.GetNumber(notificationNumber, competentAuthority);
 
             OperationInfosCollection = new List<OperationInfo>();
             PackagingInfosCollection = new List<PackagingInfo>();
@@ -115,11 +113,6 @@
         public IEnumerable<WasteCodeInfo> WasteCodes
         {
             get { return WasteCodeInfoCollection.ToSafeIEnumerable(); }
-        }
-
-        private string CreateNotificationNumber(int notificationNumber)
-        {
-            return string.Format(NotificationNumberFormat, CompetentAuthority.Value, notificationNumber.ToString("D6"));
         }
 
         private string reasonForExport;

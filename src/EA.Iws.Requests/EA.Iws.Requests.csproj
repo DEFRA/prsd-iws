@@ -107,6 +107,7 @@
     <Compile Include="ImportMovement\Reject\RecordRejection.cs" />
     <Compile Include="ImportNotificationAssessment\Consent.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\CreateFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetAvailableFinancialGuaranteeDecisions.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedAndCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedDate.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDate.cs" />
@@ -201,6 +202,8 @@
     <Compile Include="NotificationMovements\GetReceivedMovements.cs" />
     <Compile Include="NotificationMovements\MovementNumberStatus.cs" />
     <Compile Include="Notification\ChangeUser.cs" />
+    <Compile Include="Notification\CheckNotificationNumberUnique.cs" />
+    <Compile Include="Notification\CreateLegacyNotificationApplication.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocument.cs" />
     <Compile Include="Notification\GeneratePostageLabel.cs" />
     <Compile Include="Annexes\GetAnnexes.cs" />

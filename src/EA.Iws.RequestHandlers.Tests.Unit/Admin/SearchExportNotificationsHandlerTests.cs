@@ -18,6 +18,7 @@
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class SearchExportNotificationsHandlerTests
     {
@@ -128,7 +129,7 @@
 
         private NotificationApplication CreateNotificationApplication(Guid id, UKCompetentAuthority competentAuthority, WasteType wasteType)
         {
-            var notificationApplication = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery, competentAuthority, 0);
+            var notificationApplication = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, competentAuthority, 0);
 
             EntityHelper.SetEntityId(notificationApplication, id);
             

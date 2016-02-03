@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Domain;
     using Domain.NotificationApplication;
     using Domain.Security;
 
@@ -49,6 +50,18 @@
                 .Where(n => number == n.NotificationNumber)
                 .Select(n => (Guid?)n.Id)
                 .SingleOrDefaultAsync();
+        }
+
+        public void Add(NotificationApplication notification)
+        {
+            context.NotificationApplications.Add(notification);
+        }
+
+        public async Task<bool> NotificationNumberExists(int number, UKCompetentAuthority competentAuthority)
+        {
+            var formattedNumber = NotificationNumberFormatter.GetNumber(number, competentAuthority);
+
+            return await context.NotificationApplications.AnyAsync(n => n.NotificationNumber == formattedNumber);
         }
     }
 }

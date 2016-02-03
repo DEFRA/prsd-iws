@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuarantee
+﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDates
 {
     using System;
     using System.ComponentModel.DataAnnotations;

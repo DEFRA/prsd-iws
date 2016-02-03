@@ -3,19 +3,16 @@
     using Core.FinancialGuarantee;
     using DataAccess;
     using Domain.FinancialGuarantee;
-    using FakeItEasy;
-    using Helpers;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
     using Domain;
-    using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class SetFinancialGuaranteeDatesHandlerTests
     {
@@ -36,9 +33,9 @@
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate,
                 receivedFinancialGuarantee);
 
-            var pendingNotification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            var pendingNotification = NotificationApplicationFactory.Create(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(pendingNotification, PendingNotificationId);
-            var receivedNotification = new NotificationApplication(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            var receivedNotification = NotificationApplicationFactory.Create(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(receivedNotification, ReceivedNotificationId);
             
             var financialGuarantees = new[]
