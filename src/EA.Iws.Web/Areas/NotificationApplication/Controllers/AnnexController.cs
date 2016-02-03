@@ -76,7 +76,15 @@
                             Path.GetExtension(model.Composition.FileName), id)));
             }
 
-            return RedirectToAction("Index", "Options");
+            return RedirectToAction("Success");
+        }
+
+        [HttpGet]
+        public ActionResult Success(Guid id)
+        {
+            var model = new SuccessViewModel{ NotificationId = id };
+
+            return View(model);
         }
 
         [HttpGet]
