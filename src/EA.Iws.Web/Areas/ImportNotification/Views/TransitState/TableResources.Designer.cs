@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.TransitState {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no transit states.
+        /// </summary>
+        public static string Checkbox {
+            get {
+                return ResourceManager.GetString("Checkbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Competent authority.
         /// </summary>
         public static string CompetentAuthority {

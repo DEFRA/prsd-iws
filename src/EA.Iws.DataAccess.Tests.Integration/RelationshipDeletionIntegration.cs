@@ -5,6 +5,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.PackagingType;
     using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;
@@ -12,6 +13,7 @@
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
     public class RelationshipDeletionIntegration
@@ -28,7 +30,7 @@
             userContext = A.Fake<IUserContext>();
             A.CallTo(() => userContext.UserId).Returns(userId);
             context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
-            notification = new NotificationApplication(userId, NotificationType.Recovery,
+            notification = NotificationApplicationFactory.Create(userId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 0);
         }
 

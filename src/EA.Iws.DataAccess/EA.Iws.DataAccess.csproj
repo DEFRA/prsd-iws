@@ -162,7 +162,6 @@
     <Compile Include="Mappings\Exports\ExitCustomsOfficeMapping.cs" />
     <Compile Include="Mappings\Exports\EntryCustomsOfficeMapping.cs" />
     <Compile Include="Mappings\Exports\PhysicalCharacteristicsInfoMapping.cs" />
-    <Compile Include="Mappings\Exports\PhysicalCharacteristicTypeMapping.cs" />
     <Compile Include="Mappings\Common\PricingStructureMapping.cs" />
     <Compile Include="Mappings\Common\RecoveryCostMapping.cs" />
     <Compile Include="Mappings\Exports\WasteRecoveryMapping.cs" />
@@ -182,7 +181,6 @@
     <Compile Include="Mappings\Exports\NotificationApplicationMapping.cs" />
     <Compile Include="Mappings\Exports\OrganisationMapping.cs" />
     <Compile Include="Mappings\Exports\CarrierMapping.cs" />
-    <Compile Include="Mappings\Exports\PackagingTypeMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerMapping.cs" />
     <Compile Include="Mappings\Exports\OperationCodesEntityMapping.cs" />
     <Compile Include="Mappings\Common\OperationCodesMapping.cs" />
@@ -225,7 +223,9 @@
     <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRejectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementSummaryRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementTableDataRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationAssessmentRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationSearchRepository.cs" />

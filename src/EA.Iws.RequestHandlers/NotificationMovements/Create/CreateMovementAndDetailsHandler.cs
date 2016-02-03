@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.PackagingType;
     using DataAccess;
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Create;
-    using PackagingTypeEnum = Core.PackagingType.PackagingType;
 
     internal class CreateMovementAndDetailsHandler : IRequestHandler<CreateMovementAndDetails, Guid>
     {
@@ -60,15 +60,12 @@
             return movement.Id;
         }
 
-        private async Task<IEnumerable<PackagingInfo>> GetPackagingInfos(Guid notificationId, IList<PackagingTypeEnum> packagingTypes)
+        private async Task<IEnumerable<PackagingInfo>> GetPackagingInfos(Guid notificationId, IList<PackagingType> packagingTypes)
         {
             var notification = await notificationRepository.GetById(notificationId);
 
             return notification.PackagingInfos
-                .Where(p =>
-                    packagingTypes
-                        .Select(x => (int)x)
-                        .Contains(p.PackagingType.Value));
+                .Where(p => packagingTypes.Contains(p.PackagingType));
         }
 
         private async Task<IEnumerable<MovementCarrier>> GetCarriers(Guid notificationId, Dictionary<int, Guid> orderedCarriers)

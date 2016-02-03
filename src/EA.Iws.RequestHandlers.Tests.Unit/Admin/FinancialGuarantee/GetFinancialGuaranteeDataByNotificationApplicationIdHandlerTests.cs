@@ -11,6 +11,7 @@
     using Requests.Admin.FinancialGuarantee;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class GetFinancialGuaranteeDataByNotificationApplicationIdHandlerTests
     {

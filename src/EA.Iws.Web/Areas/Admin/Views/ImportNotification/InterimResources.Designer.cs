@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.ImportNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non-Interim.
+        ///   Looks up a localized string similar to Non-interim.
         /// </summary>
         public static string NonInterim {
             get {

@@ -60,13 +60,16 @@
     <Compile Include="ImportMovement\IImportMovementCompletedReceiptRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementReceiptRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementRejectionRepository.cs" />
+    <Compile Include="ImportMovement\IImportMovementsSummaryRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementSummaryRepository.cs" />
+    <Compile Include="ImportMovement\IImportMovementTableDataRepository.cs" />
     <Compile Include="ImportMovement\ImportMovementReceipt.cs" />
     <Compile Include="ImportMovement\ImportMovementRejection.cs" />
     <Compile Include="ImportMovement\ImportMovementCompletedReceipt.cs" />
     <Compile Include="ImportMovement\ImportMovementSummary.cs" />
     <Compile Include="ImportMovement\IReceiveImportMovement.cs" />
     <Compile Include="ImportMovement\IRejectImportMovement.cs" />
+    <Compile Include="ImportMovement\MovementTableData.cs" />
     <Compile Include="ImportMovement\ReceiveImportMovement.cs" />
     <Compile Include="ImportMovement\RejectImportMovement.cs" />
     <Compile Include="ImportNotificationAssessment\Consent\ConsentImportNotification.cs" />
@@ -249,6 +252,7 @@
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
+    <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\ICarrierRepository.cs" />
     <Compile Include="NotificationApplication\ExportNotificationOwnerDisplay.cs" />
@@ -265,6 +269,7 @@
     <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
+    <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
@@ -339,7 +344,6 @@
     <Compile Include="NotificationApplication\NotificationApplication.TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />
-    <Compile Include="NotificationApplication\PhysicalCharacteristicType.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\WasteRecovery.cs" />
     <Compile Include="NotificationApplication\TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\WasteCode.cs" />
@@ -355,7 +359,6 @@
     <Compile Include="NotificationApplication\NotificationApplication.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
     <Compile Include="NotificationApplication\PackagingInfo.cs" />
-    <Compile Include="NotificationApplication\PackagingType.cs" />
     <Compile Include="NotificationApplication\OperationInfo.cs" />
     <Compile Include="OperationCode.cs" />
     <Compile Include="Organisation.cs" />

@@ -44,3 +44,44 @@ ul, ol {
 ul li {
 	padding: 0 0 5px 0;
 }
+
+.column-two-thirds {
+    padding: 0 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+@media(min-width: 641px) {
+    .column-two-thirds {
+        float:left;
+        width: 66.66667%
+    }
+}
+
+.grid-row {
+    margin: 0 -15px
+}
+
+.grid-row:after,.notice:after,#content:after,fieldset:after,.form-group:after,.form-block:after,.panel:after,.panel-indent:after,.example:after {
+    content: "";
+    display: block;
+    clear: both
+}
+
+#content,#global-header-bar {
+    max-width: 960px;
+    margin: 0 15px
+}
+
+@media(min-width: 641px) {
+    #content,#global-header-bar {
+        margin:0 30px
+    }
+}
+
+@media(min-width: 1020px) {
+    #content,#global-header-bar {
+        margin:0 auto
+    }
+}

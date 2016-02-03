@@ -5,8 +5,8 @@
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain.NotificationApplication;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
-    using PhysicalCharacteristicType = Domain.NotificationApplication.PhysicalCharacteristicType;
 
     internal class ClassifyYourWasteInfoMap : IMap<NotificationApplication, WasteClassificationOverview>
     {
@@ -48,7 +48,7 @@
             foreach (var c in notification.PhysicalCharacteristics)
             {
                 physicalCharacteristicsData.Add(c.PhysicalCharacteristic != PhysicalCharacteristicType.Other
-                    ? c.PhysicalCharacteristic.DisplayName
+                    ? EnumHelper.GetDisplayName(c.PhysicalCharacteristic)
                     : c.OtherDescription);
             }
             return physicalCharacteristicsData;

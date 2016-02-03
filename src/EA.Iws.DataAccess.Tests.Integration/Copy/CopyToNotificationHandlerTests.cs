@@ -27,6 +27,7 @@
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
+    using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
     public class CopyToNotificationHandlerTests : IDisposable
@@ -67,7 +68,7 @@
                 context.WasteCodes.ToArray(),
                 SourceNumber);
 
-            destination = new NotificationApplication(UserId, DestinationNotificationType, DestinationCompetentAuthority, DestinationNumber);
+            destination = NotificationApplicationFactory.Create(UserId, DestinationNotificationType, DestinationCompetentAuthority, DestinationNumber);
             EntityHelper.SetEntityId(destination, new Guid("63581B29-EFB9-47F0-BCC3-E67382F4EAFA"));
             
             context.NotificationApplications.Add(source);

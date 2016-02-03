@@ -14,9 +14,9 @@
 
             foreach (var item in source)
             {
-                data.PackagingTypes.Add((PackagingTypeEnum)item.PackagingType.Value);
+                data.PackagingTypes.Add(item.PackagingType);
 
-                if (item.PackagingType.Value == (int)PackagingTypeEnum.Other)
+                if (item.PackagingType == PackagingTypeEnum.Other)
                 {
                     data.OtherDescription = item.OtherDescription;
                 }

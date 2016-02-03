@@ -22,7 +22,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class IndexResources {
+    public class IndexResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources", typeof(IndexResources).Assembly);
@@ -51,12 +51,102 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active loads permitted:.
+        /// </summary>
+        public static string ActiveLoadsPermitted {
+            get {
+                return ResourceManager.GetString("ActiveLoadsPermitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current active loads:.
+        /// </summary>
+        public static string CurrentActiveLoads {
+            get {
+                return ResourceManager.GetString("CurrentActiveLoads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no shipment data for this notification.
+        /// </summary>
+        public static string NoShipmentDataText {
+            get {
+                return ResourceManager.GetString("NoShipmentDataText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of shipments used:.
+        /// </summary>
+        public static string NumberUsed {
+            get {
+                return ResourceManager.GetString("NumberUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment summary.
+        /// </summary>
+        public static string ShipmentSummaryTitle {
+            get {
+                return ResourceManager.GetString("ShipmentSummaryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment summary.
+        /// </summary>
+        public static string SummaryCaption {
+            get {
+                return ResourceManager.GetString("SummaryCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment summary.
+        /// </summary>
+        public static string TabTitle {
+            get {
+                return ResourceManager.GetString("TabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total number of shipments:.
+        /// </summary>
+        public static string TotalNumber {
+            get {
+                return ResourceManager.GetString("TotalNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total quantity received:.
+        /// </summary>
+        public static string TotalQuantityReceived {
+            get {
+                return ResourceManager.GetString("TotalQuantityReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total quantity remaining:.
+        /// </summary>
+        public static string TotalQuantityRemaining {
+            get {
+                return ResourceManager.GetString("TotalQuantityRemaining", resourceCulture);
             }
         }
     }
