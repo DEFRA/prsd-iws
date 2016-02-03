@@ -120,6 +120,9 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="Checkbox" xml:space="preserve">
+    <value>There are no transit states</value>
+  </data>
   <data name="CompetentAuthority" xml:space="preserve">
     <value>Competent authority</value>
   </data>
