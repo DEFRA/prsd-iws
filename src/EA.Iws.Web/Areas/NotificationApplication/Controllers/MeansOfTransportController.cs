@@ -51,7 +51,9 @@
 
             try
             {
-                var meansList = model.SelectedMeans.Split('-').Select(GetFromToken).ToList();
+                var meansList = model.SelectedMeans.Split('-')
+                    .Select(MeansOfTransportHelper.GetTransportMethodFromToken)
+                    .ToList();
 
                 await mediator.SendAsync(new SetMeansOfTransportForNotification(id, meansList));
             }
@@ -71,25 +73,6 @@
             }
 
             return RedirectToAction("Index", "PackagingTypes", new { id });
-        }
-
-        private TransportMethod GetFromToken(string token)
-        {
-            switch (token.ToUpperInvariant())
-            {
-                case "R":
-                    return TransportMethod.Road;
-                case "T":
-                    return TransportMethod.Train;
-                case "S":
-                    return TransportMethod.Sea;
-                case "A":
-                    return TransportMethod.Air;
-                case "W":
-                    return TransportMethod.InlandWaterways;
-                default:
-                    throw new ArgumentException(string.Format("Invalid token supplied: {0}", token), "token");
-            }
         }
     }
 }

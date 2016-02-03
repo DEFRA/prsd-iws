@@ -38,7 +38,7 @@
                 //OrderBy with a key of 0 returns the elements in their original order.
                 return MeansOfTransportInternal
                     .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(GetFromToken)
+                    .Select(MeansOfTransportHelper.GetTransportMethodFromToken)
                     .OrderBy(transport => 0);
 
                 throw new NotImplementedException();
@@ -79,25 +79,6 @@
             }
 
             this.MeansOfTransportInternal = builder.ToString();
-        }
-
-        private static TransportMethod GetFromToken(string token)
-        {
-            switch (token)
-            {
-                case "R":
-                    return TransportMethod.Road;
-                case "T":
-                    return TransportMethod.Train;
-                case "S":
-                    return TransportMethod.Sea;
-                case "A":
-                    return TransportMethod.Air;
-                case "W":
-                    return TransportMethod.InlandWaterways;
-                default:
-                    throw new ArgumentException(string.Format("Invalid token supplied: {0}", token), "token");
-            }
-        }
+        }        
     }
 }
