@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Annex.SuccessViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Annex.SuccessResources
+
+@{
+    ViewBag.Title = Resource.Title;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row form-group">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.Thankyou <br/> @Resource.MainHeading</h1>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class="button"})
+</div>

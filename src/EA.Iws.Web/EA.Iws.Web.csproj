@@ -388,6 +388,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NotCompleted.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Choose.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NoDecisions.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Annex\Success.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1639,6 +1640,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CaptureViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Home\ResubmissionSuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Options\UnavailableViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\AnnexController.cs" />
@@ -1652,6 +1654,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Annex\SuccessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Home\ResubmissionSuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3155,6 +3162,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Annex\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Annex\SuccessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\BaselOecdCode\BaselOecdCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
