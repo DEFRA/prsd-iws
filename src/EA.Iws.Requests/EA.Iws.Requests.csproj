@@ -125,6 +125,7 @@
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotification.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummary.cs" />
+    <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTable.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />

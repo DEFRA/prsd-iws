@@ -5,6 +5,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Shared;
     using Domain;
     using Domain.ImportNotification;
     using Prsd.Core;
@@ -57,6 +58,11 @@
                 .ToArrayAsync();
 
             return notifications;
+        }
+
+        public async Task<NotificationType> GetTypeById(Guid id)
+        {
+            return (await context.ImportNotifications.SingleAsync(n => n.Id == id)).NotificationType;
         }
     }
 }

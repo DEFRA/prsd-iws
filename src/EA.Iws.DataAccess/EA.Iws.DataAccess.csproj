@@ -217,7 +217,9 @@
     <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRejectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementSummaryRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementTableDataRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationAssessmentRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationSearchRepository.cs" />
