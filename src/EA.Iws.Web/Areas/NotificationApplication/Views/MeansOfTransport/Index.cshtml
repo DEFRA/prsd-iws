@@ -25,8 +25,8 @@
             @foreach (var means in Model.PossibleMeans)
             {
                 <tr>
-                    <td>@means.Symbol</td>
-                    <td>@means.DisplayName</td>
+                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetShortName(means)</td>
+                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(means)</td>
                 </tr>
             }
             </tbody>
