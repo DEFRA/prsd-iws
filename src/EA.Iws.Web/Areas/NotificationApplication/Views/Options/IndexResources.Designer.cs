@@ -180,9 +180,9 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         /// <summary>
         ///   Looks up a localized string similar to This notification can not be submitted yet, as it is incomplete. You can submit it for approval once you complete it..
         /// </summary>
-        public static string ImcompleteMessage {
+        public static string IncompleteMessage {
             get {
-                return ResourceManager.GetString("ImcompleteMessage", resourceCulture);
+                return ResourceManager.GetString("IncompleteMessage", resourceCulture);
             }
         }
         
@@ -223,7 +223,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downlaod notification.
+        ///   Looks up a localized string similar to Download notification.
         /// </summary>
         public static string PrintNotification {
             get {

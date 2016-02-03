@@ -52,7 +52,7 @@ else if (status != MovementStatus.Cancelled)
 
             @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
             {
-                <div class="form-group">@Resource.ImcompleteMessage</div>
+                <div class="form-group">@Resource.IncompleteMessage</div>
 
                 @Html.ActionLink(@Resource.ContinueWithButtonText, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
             }

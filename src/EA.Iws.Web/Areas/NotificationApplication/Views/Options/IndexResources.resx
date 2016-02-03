@@ -193,7 +193,7 @@
     <value>Print postage label</value>
   </data>
   <data name="PrintNotification" xml:space="preserve">
-    <value>Downlaod notification</value>
+    <value>Download notification</value>
   </data>
   <data name="StartNewNotification" xml:space="preserve">
     <value>Start a new notification</value>
@@ -225,7 +225,7 @@
   <data name="ContinueWithButtonText" xml:space="preserve">
     <value>Continue with this notification</value>
   </data>
-  <data name="ImcompleteMessage" xml:space="preserve">
+  <data name="IncompleteMessage" xml:space="preserve">
     <value>This notification can not be submitted yet, as it is incomplete. You can submit it for approval once you complete it.</value>
   </data>
 </root>
