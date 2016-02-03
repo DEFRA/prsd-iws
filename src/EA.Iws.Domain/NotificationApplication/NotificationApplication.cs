@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using Core.MeansOfTransport;
     using Core.Shared;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -30,7 +28,7 @@
 
             RaiseEvent(new NotificationCreatedEvent(this));
         }
-        
+
         protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
 
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
@@ -75,26 +73,8 @@
             RaiseEvent(new NotificationUserChangedEvent(Id, currentUser, newUserId));
         }
 
-        protected string MeansOfTransportInternal { get; set; }
-
-        public IOrderedEnumerable<MeansOfTransport> MeansOfTransport
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(MeansOfTransportInternal))
-                {
-                    return new MeansOfTransport[] { }.OrderBy(m => m);
-                }
-
-                // OrderBy with a key of 0 returns the elements in their original order.
-                return MeansOfTransportInternal
-                    .Split(new[] { Core.MeansOfTransport.MeansOfTransport.Separator }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(Core.MeansOfTransport.MeansOfTransport.GetFromToken).OrderBy(transport => 0);
-            }
-        }
-
         public DateTimeOffset CreatedDate { get; private set; }
-                
+
         public IEnumerable<OperationInfo> OperationInfos
         {
             get { return OperationInfosCollection.ToSafeIEnumerable(); }
@@ -116,6 +96,7 @@
         }
 
         private string reasonForExport;
+
         public string ReasonForExport
         {
             get

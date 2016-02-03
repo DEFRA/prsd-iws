@@ -17,7 +17,7 @@
         public bool IsPackagingTypesCompleted { get; set; }
         public bool IsSpecialHandlingCompleted { get; set; }
         public List<CarrierData> Carriers { get; set; }
-        public List<MeansOfTransport> MeanOfTransport { get; set; }
+        public List<TransportMethod> MeanOfTransport { get; set; }
         public List<string> PackagingData { get; set; }
         public string SpecialHandlingDetails { get; set; }
 

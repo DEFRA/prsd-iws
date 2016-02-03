@@ -14,9 +14,9 @@
     {
         public Guid Id { get; private set; }
 
-        public IList<MeansOfTransport> MeansOfTransport { get; private set; }
+        public IList<TransportMethod> MeansOfTransport { get; private set; }
 
-        public SetMeansOfTransportForNotification(Guid id, IList<MeansOfTransport> meansOfTransport)
+        public SetMeansOfTransportForNotification(Guid id, IList<TransportMethod> meansOfTransport)
         {
             Id = id;
             MeansOfTransport = meansOfTransport;

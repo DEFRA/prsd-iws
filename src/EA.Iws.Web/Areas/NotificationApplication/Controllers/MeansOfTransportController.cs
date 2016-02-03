@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Core.MeansOfTransport;
     using Infrastructure;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
@@ -33,7 +34,7 @@
 
             if (currentMeans.Count != 0)
             {
-                model.SelectedMeans = string.Join("-", currentMeans.Select(p => p.Symbol));
+                model.SelectedMeans = string.Join("-", currentMeans.Select(EnumHelper.GetShortName));
             }
 
             return View(model);
@@ -50,7 +51,7 @@
 
             try
             {
-                var meansList = model.SelectedMeans.Split('-').Select(MeansOfTransport.GetFromToken).ToArray();
+                var meansList = model.SelectedMeans.Split('-').Select(GetFromToken).ToList();
 
                 await mediator.SendAsync(new SetMeansOfTransportForNotification(id, meansList));
             }
@@ -70,6 +71,25 @@
             }
 
             return RedirectToAction("Index", "PackagingTypes", new { id });
+        }
+
+        private TransportMethod GetFromToken(string token)
+        {
+            switch (token.ToUpperInvariant())
+            {
+                case "R":
+                    return TransportMethod.Road;
+                case "T":
+                    return TransportMethod.Train;
+                case "S":
+                    return TransportMethod.Sea;
+                case "A":
+                    return TransportMethod.Air;
+                case "W":
+                    return TransportMethod.InlandWaterways;
+                default:
+                    throw new ArgumentException(string.Format("Invalid token supplied: {0}", token), "token");
+            }
         }
     }
 }

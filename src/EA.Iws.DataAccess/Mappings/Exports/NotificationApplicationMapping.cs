@@ -51,15 +51,9 @@
             Property(x => x.CreatedDate).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
 
             Property(x => x.SpecialHandlingDetails).HasMaxLength(2048);
-
-            Ignore(x => x.MeansOfTransport);
             
             Property(x => x.WasteRecoveryInformationProvidedByImporter).HasColumnName("IsRecoveryPercentageDataProvidedByImporter");
-
-            Property(ExpressionHelper
-                .GetPrivatePropertyExpression<NotificationApplication, string>("MeansOfTransportInternal"))
-                .HasColumnName("MeansOfTransport");
-
+            
             HasMany(
                 ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<PhysicalCharacteristicsInfo>>(
                     "PhysicalCharacteristicsCollection"))

@@ -15,7 +15,6 @@ INSERT [Notification].[notification]
         [reasonforexport],
         [hasspecialhandlingrequirements],
         [specialhandlingdetails],
-        [meansoftransport],
         [isrecoverypercentagedataprovidedbyimporter],
         [wastegenerationprocess],
         [iswastegenerationprocessattached])
@@ -28,10 +27,17 @@ VALUES (@NotificationId,
         N'Recycling at advanced facility',
         0,
         NULL,
-        N'R;S;R;A;R',
         NULL,
         NULL,
         1)
+
+INSERT [Notification].[MeansOfTransport]
+	   ([Id],
+	    [NotificationId],
+		[MeansOfTransport])
+VALUES (N'273377FA-95A2-408C-A002-645FB05089BC',
+		@NotificationId,
+		N'R;S;R;A;R');
 
 INSERT [Notification].[FacilityCollection] (
 	[Id],
