@@ -22,11 +22,11 @@
         }
 
         public static IList<CarrierViewModel> CreateCarrierViewModelsForNotification(
-            NotificationApplication notification,
+            MeansOfTransport meansOfTransport,
             CarrierCollection carrierCollection,
             MeansOfTransportFormatter meansOfTransportFormatter)
         {
-            if (notification == null
+            if (meansOfTransport == null
                 || carrierCollection == null
                 || carrierCollection.Carriers == null
                 || !carrierCollection.Carriers.Any())
@@ -34,9 +34,9 @@
                 return new CarrierViewModel[0];
             }
 
-            var meansOfTransport = meansOfTransportFormatter.MeansOfTransportAsString(notification.MeansOfTransport);
+            var meansOfTransportDisplay = meansOfTransportFormatter.MeansOfTransportAsString(meansOfTransport.Route);
 
-            return carrierCollection.Carriers.Select(c => new CarrierViewModel(c, meansOfTransport))
+            return carrierCollection.Carriers.Select(c => new CarrierViewModel(c, meansOfTransportDisplay))
                 .ToArray();
         }
 

@@ -7,21 +7,21 @@
 
     internal class CarrierBlockFactory : INotificationBlockFactory
     {
+        private readonly IMeansOfTransportRepository meansOfTransportRepository;
         private readonly ICarrierRepository carrierRepository;
-        private readonly INotificationApplicationRepository notificationRepository;
 
-        public CarrierBlockFactory(INotificationApplicationRepository notificationRepository,
+        public CarrierBlockFactory(IMeansOfTransportRepository meansOfTransportRepository,
             ICarrierRepository carrierRepository)
         {
-            this.notificationRepository = notificationRepository;
             this.carrierRepository = carrierRepository;
+            this.meansOfTransportRepository = meansOfTransportRepository;
         }
 
         public async Task<IDocumentBlock> Create(Guid notificationId, IList<MergeField> mergeFields)
         {
-            var notification = await notificationRepository.GetById(notificationId);
+            var meansOfTransport = await meansOfTransportRepository.GetByNotificationId(notificationId);
             var carrierCollection = await carrierRepository.GetByNotificationId(notificationId);
-            return new CarrierBlock(mergeFields, notification, carrierCollection);
+            return new CarrierBlock(mergeFields, meansOfTransport, carrierCollection);
         }
     }
 }

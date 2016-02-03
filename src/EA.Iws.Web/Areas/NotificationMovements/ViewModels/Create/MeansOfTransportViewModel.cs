@@ -5,6 +5,6 @@
 
     public class MeansOfTransportViewModel
     {
-        public IList<MeansOfTransport> NotificationMeansOfTransport { get; set; }
+        public IList<TransportMethod> NotificationMeansOfTransport { get; set; }
     }
 }

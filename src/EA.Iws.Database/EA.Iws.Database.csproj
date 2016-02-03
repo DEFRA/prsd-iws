@@ -245,6 +245,7 @@
     <Content Include="scripts\Update\Sprint26\20160128-081837-changes-fg-table.sql" />
     <Content Include="scripts\Update\Sprint26\20160129-110000-add-import-withdrawn-status.sql" />
     <Content Include="scripts\Update\Sprint26\20160128-141516-export-producer-collection.sql" />
+    <Content Include="scripts\Update\Sprint26\20160203-133700-create-means-of-transport.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

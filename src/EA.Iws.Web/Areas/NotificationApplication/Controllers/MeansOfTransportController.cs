@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Core.MeansOfTransport;
     using Infrastructure;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
@@ -33,7 +34,7 @@
 
             if (currentMeans.Count != 0)
             {
-                model.SelectedMeans = string.Join("-", currentMeans.Select(p => p.Symbol));
+                model.SelectedMeans = string.Join("-", currentMeans.Select(EnumHelper.GetShortName));
             }
 
             return View(model);
@@ -50,7 +51,9 @@
 
             try
             {
-                var meansList = model.SelectedMeans.Split('-').Select(MeansOfTransport.GetFromToken).ToArray();
+                var meansList = model.SelectedMeans.Split('-')
+                    .Select(MeansOfTransportHelper.GetTransportMethodFromToken)
+                    .ToList();
 
                 await mediator.SendAsync(new SetMeansOfTransportForNotification(id, meansList));
             }

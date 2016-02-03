@@ -16,7 +16,7 @@ BEGIN
 		FC.[AllFacilitiesPreconsented] AS [IsPreconsentedRecoveryFacility],
 		N.[ReasonForExport],
 		N.[HasSpecialHandlingRequirements],
-		N.[MeansOfTransport],
+		MOT.[MeansOfTransport],
 		N.[IsRecoveryPercentageDataProvidedByImporter],
 		N.[IsWasteGenerationProcessAttached],
 		N.[WasteGenerationProcess],
@@ -85,6 +85,8 @@ BEGIN
 
 		LEFT JOIN (SELECT TOP(1) CC.NotificationId, C.Id FROM [Notification].[CarrierCollection] CC INNER JOIN [Notification].[Carrier] C ON CC.[Id] = C.[CarrierCollectionId] WHERE CC.NotificationId = @NotificationId) AS CC
 		ON N.Id = CC.NotificationId
+
+		LEFT JOIN [Notification].[MeansOfTransport] MOT ON N.Id = MOT.NotificationId
 	WHERE
 		N.Id = @NotificationId;
 
