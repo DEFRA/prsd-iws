@@ -4,6 +4,7 @@
     using System.Security.Claims;
     using Microsoft.Owin.Security;
     using Prsd.Core.Domain;
+    using ClaimTypes = System.IdentityModel.Claims.ClaimTypes;
 
     public class UserContext : IUserContext
     {
@@ -26,13 +27,10 @@
                     {
                         if (identity.AuthenticationType.Equals("BEARER", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            var idClaim = identity.FindFirst("sub");
-
-                            if (idClaim != null)
-                            {
-                                return Guid.Parse(idClaim.Value);
-                            }
+                            return GetUserId(identity, "sub");
                         }
+
+                        return GetUserId(identity, ClaimTypes.NameIdentifier);
                     }
                 }
 
@@ -43,6 +41,18 @@
         public ClaimsPrincipal Principal
         {
             get { return authentication.User; }
+        }
+
+        private static Guid GetUserId(ClaimsIdentity identity, string claimType)
+        {
+            var idClaim = identity.FindFirst(claimType);
+
+            if (idClaim != null)
+            {
+                return Guid.Parse(idClaim.Value);
+            }
+
+            return Guid.Empty;
         }
     }
 }
