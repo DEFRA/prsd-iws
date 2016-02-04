@@ -1765,6 +1765,7 @@
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FileAccess.cs" />
     <Compile Include="Infrastructure\FileReader.cs" />
+    <Compile Include="Infrastructure\HandleApiErrorFilter.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\IFileAccess.cs" />
     <Compile Include="Infrastructure\IFileReader.cs" />
@@ -2292,7 +2293,6 @@
     <Compile Include="Infrastructure\CsvActionResult.cs" />
     <Compile Include="Infrastructure\MimeTypeHelper.cs" />
     <Compile Include="Infrastructure\RequestAuthorizationChecker.cs" />
-    <Compile Include="Infrastructure\RequestAuthorizationErrorFilter.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidMoneyDecimalAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidNumberAttribute.cs" />

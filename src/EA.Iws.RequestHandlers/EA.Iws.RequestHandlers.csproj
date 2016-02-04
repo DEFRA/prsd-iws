@@ -127,13 +127,10 @@
     <Compile Include="Annexes\SetWasteCompositionAnnexHandler.cs" />
     <Compile Include="Annexes\SetProcessOfGenerationAnnexHandler.cs" />
     <Compile Include="Authorization\AuthorizationContext.cs" />
-    <Compile Include="Authorization\AuthorizationManager.cs" />
+    <Compile Include="Authorization\ClaimsRepository.cs" />
+    <Compile Include="Authorization\IClaimsRepository.cs" />
+    <Compile Include="Authorization\InMemoryAuthorizationManager.cs" />
     <Compile Include="Authorization\IAuthorizationManager.cs" />
-    <Compile Include="Authorization\IAuthorizationService.cs" />
-    <Compile Include="Authorization\InMemoryAuthorizationService.cs" />
-    <Compile Include="Authorization\IUserRoleService.cs" />
-    <Compile Include="Authorization\UserRole.cs" />
-    <Compile Include="Authorization\UserRoleService.cs" />
     <Compile Include="Copy\CarrierCollectionCopy.cs" />
     <Compile Include="Copy\FacilityCollectionCopy.cs" />
     <Compile Include="Copy\ImporterToImporterCopy.cs" />

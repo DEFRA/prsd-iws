@@ -1,10 +1,12 @@
 ﻿namespace EA.Iws.Api.Controllers
 {
     using System;
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Http;
     using Client.Entities;
+    using Core.Authorization;
     using DataAccess.Identity;
     using EmailMessaging;
     using Identity;
@@ -52,6 +54,14 @@
                 return GetErrorResult(result);
             }
 
+            result = await userManager.AddClaimAsync(user.Id,
+                new Claim(ClaimTypes.Role, UserRole.External.ToString().ToLowerInvariant()));
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
             return Ok(user.Id);
         }
 
@@ -73,6 +83,14 @@
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            result = await userManager.AddClaimAsync(user.Id,
+                new Claim(ClaimTypes.Role, UserRole.Internal.ToString().ToLowerInvariant()));
 
             if (!result.Succeeded)
             {

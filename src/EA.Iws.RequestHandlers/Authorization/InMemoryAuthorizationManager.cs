@@ -1,15 +1,18 @@
 ﻿namespace EA.Iws.RequestHandlers.Authorization
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
+    using Core.Authorization;
     using Core.Authorization.Permissions;
 
-    public class InMemoryAuthorizationService : IAuthorizationService
+    public class InMemoryAuthorizationManager : IAuthorizationManager
     {
         private static readonly IDictionary<string, IList<UserRole>> authorizations = new Dictionary<string, IList<UserRole>>
         {
-            { GeneralPermissions.CanReadCountryData, new[] { UserRole.Unauthenticated, UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
+            { GeneralPermissions.CanReadCountryData, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanReadUserData, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanEditUserData, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanReadOrganisationData, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
@@ -17,10 +20,8 @@
             { GeneralPermissions.CanReadAddressBook, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanEditAddressBook, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanViewSearchResults, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
-            { GeneralPermissions.CanSendFeedbackData, new[] { UserRole.Unauthenticated, UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { SystemConfigurationPermissions.CanAddNewEntryOrExitPoint, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { SystemConfigurationPermissions.CanSendTestEmail, new[] { UserRole.Internal, UserRole.TeamLeader } },
-            { SystemConfigurationPermissions.CanViewSmokeTest, new[] { UserRole.Unauthenticated, UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { ReportingPermissions.CanViewExportStatsReport, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { ReportingPermissions.CanViewExportNotificationsReport, new[] { UserRole.Internal, UserRole.TeamLeader } },
             { ReportingPermissions.CanViewFinanceReport, new[] { UserRole.Internal, UserRole.TeamLeader } },
@@ -54,22 +55,33 @@
             { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.TeamLeader } }
         };
 
-        public Task<bool> HasAccess(UserRole userRole, string name)
+        public Task<bool> CheckAccessAsync(AuthorizationContext context)
         {
-            var hasAccess = false;
+            var userRoles = GetUserRoles(context.Principal);
 
+            var hasAccess = false;
             IList<UserRole> roles;
-            if (authorizations.TryGetValue(name, out roles))
+
+            if (authorizations.TryGetValue(context.Name, out roles))
             {
-                hasAccess = roles.Contains(userRole);
+                hasAccess = roles.Intersect(userRoles).Any();
             }
 
             return Task.FromResult(hasAccess);
         }
 
-        public Task<IEnumerable<string>> AuthorizedRequests(UserRole userRole)
+        private static IEnumerable<UserRole> GetUserRoles(ClaimsPrincipal principal)
         {
-            return Task.FromResult(authorizations.Where(a => a.Value.Contains(userRole)).Select(a => a.Key));
-        }
+            var roleClaims = principal.FindAll(ClaimTypes.Role);
+
+            foreach (var claim in roleClaims)
+            {
+                UserRole role;
+                if (Enum.TryParse(claim.Value, true, out role))
+                {
+                    yield return role;
+                }
+            }
+        } 
     }
 }
