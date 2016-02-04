@@ -7,7 +7,7 @@
     using Domain.NotificationAssessment;
     using Prsd.Core.Domain;
 
-    public class SetChargeHandler : IEventHandler<NotificationTransmittedEvent>, IEventHandler<NotificationIsInterimSetEvent>
+    public class SetChargeHandler : IEventHandler<NotificationTransmittedEvent>
     {
         private readonly IwsContext context;
         private readonly INotificationChargeCalculator chargeCalculator;
@@ -21,11 +21,6 @@
         }
 
         public async Task HandleAsync(NotificationTransmittedEvent @event)
-        {
-            await UpdateCharge(@event.NotificationApplicationId);
-        }
-
-        public async Task HandleAsync(NotificationIsInterimSetEvent @event)
         {
             await UpdateCharge(@event.NotificationApplicationId);
         }
