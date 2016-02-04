@@ -76,7 +76,12 @@
                             Path.GetExtension(model.Composition.FileName), id)));
             }
 
-            return RedirectToAction("Success");
+            if (model.Composition != null || model.TechnologyEmployed != null || model.ProcessOfGeneration != null)
+            {
+                return RedirectToAction("Success");
+            }
+
+            return RedirectToAction("Index", "Options");
         }
 
         [HttpGet]
