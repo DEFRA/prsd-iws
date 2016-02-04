@@ -138,6 +138,7 @@
     <Compile Include="Copy\FacilityCollectionCopy.cs" />
     <Compile Include="Copy\ImporterToImporterCopy.cs" />
     <Compile Include="Copy\ExporterToExporterCopy.cs" />
+    <Compile Include="Copy\MeansOfTransportToMeansOfTransportCopy.cs" />
     <Compile Include="Copy\ProducerCollectionCopy.cs" />
     <Compile Include="Copy\TransportRouteToTransportRouteCopy.cs" />
     <Compile Include="Copy\WasteCodeCopy.cs" />
