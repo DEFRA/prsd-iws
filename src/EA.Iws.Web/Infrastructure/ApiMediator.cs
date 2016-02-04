@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
     using System.Web;
     using Api.Client;
-    using Core.Authorization;
     using Prsd.Core.Mediator;
     using Prsd.Core.Security;
 
@@ -36,11 +35,6 @@
             {
                 throw new SecurityException("Unauthenticated user");
             }
-
-            //if (!RequestAuthorizationChecker.CheckAccess(request, httpContext))
-            //{
-            //    throw RequestAuthorizationException.CreateForRequest(request);
-            //}
 
             var accessToken = httpContext.User.GetAccessToken();
             return await client.SendAsync(accessToken, request).ConfigureAwait(false);

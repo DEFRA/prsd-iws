@@ -2301,7 +2301,6 @@
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Infrastructure\CsvActionResult.cs" />
     <Compile Include="Infrastructure\MimeTypeHelper.cs" />
-    <Compile Include="Infrastructure\RequestAuthorizationChecker.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidMoneyDecimalAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidNumberAttribute.cs" />
