@@ -159,11 +159,15 @@
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ConsentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveBlanketBondFinancialGuaranteeHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveFinancialGuaranteeHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\AuditStatusChange.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\CreateFinancialGuaranteeHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetAvailableFinancialGuaranteeDecisionsHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedAndCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\GetReceivedDateHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\RefuseFinancialGuaranteeHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReleaseFinancialGuaranteeHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionDataHandler.cs" />
