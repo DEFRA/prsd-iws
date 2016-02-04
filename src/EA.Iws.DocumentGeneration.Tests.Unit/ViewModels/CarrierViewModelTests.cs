@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DocumentGeneration.Tests.Unit.ViewModels
 {
+    using System;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
+    using Domain.NotificationApplication;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -10,7 +12,7 @@
         private const string AnyString = "test";
 
         private readonly MeansOfTransportFormatter formatter = new MeansOfTransportFormatter();
-        private readonly TestableNotificationApplication notificiation;
+        private readonly MeansOfTransport meansOfTransport;
         private readonly TestableCarrierCollection carrierCollection;
         private readonly TestableCarrier firstCarrier;
         private readonly TestableCarrier secondCarrier;
@@ -31,9 +33,10 @@
                 Contact = TestableContact.MikeMerry
             };
 
-            notificiation = new TestableNotificationApplication();
+            var notificationId = new Guid("1EB00552-0589-4AB2-804E-16CF9B8286BA");
 
-            carrierCollection = new TestableCarrierCollection(notificiation.Id);
+            carrierCollection = new TestableCarrierCollection(notificationId);
+            meansOfTransport = new MeansOfTransport(notificationId);
         }
 
         [Fact]
@@ -47,7 +50,7 @@
         [Fact]
         public void NotificationHasNoCarriers_ReturnsEmptyList()
         {
-            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(notificiation, carrierCollection, formatter);
+            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(meansOfTransport, carrierCollection, formatter);
 
             Assert.Empty(result);
         }
@@ -57,7 +60,7 @@
         {
             carrierCollection.AddCarrier(firstCarrier.Business, firstCarrier.Address, firstCarrier.Contact);
 
-            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(notificiation, carrierCollection, formatter);
+            var result = CarrierViewModel.CreateCarrierViewModelsForNotification(meansOfTransport, carrierCollection, formatter);
 
             Assert.Equal(1, result.Count);
         }

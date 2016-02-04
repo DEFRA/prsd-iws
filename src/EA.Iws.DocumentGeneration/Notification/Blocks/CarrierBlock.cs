@@ -16,11 +16,11 @@
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
 
-        public CarrierBlock(IList<MergeField> mergeFields, NotificationApplication notification, CarrierCollection carrierCollection)
+        public CarrierBlock(IList<MergeField> mergeFields, MeansOfTransport meansOfTransport, CarrierCollection carrierCollection)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
-            data = CarrierViewModel.CreateCarrierViewModelsForNotification(notification, carrierCollection, new MeansOfTransportFormatter());
+            data = CarrierViewModel.CreateCarrierViewModelsForNotification(meansOfTransport, carrierCollection, new MeansOfTransportFormatter());
 
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }

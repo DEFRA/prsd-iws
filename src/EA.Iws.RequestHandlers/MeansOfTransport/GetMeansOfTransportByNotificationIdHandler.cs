@@ -1,28 +1,27 @@
 ﻿namespace EA.Iws.RequestHandlers.MeansOfTransport
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.MeansOfTransport;
-    using DataAccess;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.MeansOfTransport;
 
-    internal class GetMeansOfTransportByNotificationIdHandler : IRequestHandler<GetMeansOfTransportByNotificationId, IList<MeansOfTransport>>
+    internal class GetMeansOfTransportByNotificationIdHandler : IRequestHandler<GetMeansOfTransportByNotificationId, IList<TransportMethod>>
     {
-        private readonly IwsContext context;
+        private readonly IMeansOfTransportRepository repository;
 
-        public GetMeansOfTransportByNotificationIdHandler(IwsContext context)
+        public GetMeansOfTransportByNotificationIdHandler(IMeansOfTransportRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
-        public async Task<IList<MeansOfTransport>> HandleAsync(GetMeansOfTransportByNotificationId message)
+        public async Task<IList<TransportMethod>> HandleAsync(GetMeansOfTransportByNotificationId message)
         {
-            var notification = await context.GetNotificationApplication(message.Id);
+            var meansOfTransport = await repository.GetByNotificationId(message.Id);
 
-            return notification.MeansOfTransport.ToArray();
+            return meansOfTransport != null ? meansOfTransport.Route.ToList() : new List<TransportMethod>();
         }
     }
 }

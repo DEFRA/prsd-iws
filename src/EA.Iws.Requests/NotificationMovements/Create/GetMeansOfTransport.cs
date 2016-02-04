@@ -8,7 +8,7 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanCreateExportMovements)]
-    public class GetMeansOfTransport : IRequest<IList<MeansOfTransport>>
+    public class GetMeansOfTransport : IRequest<IList<TransportMethod>>
     {
         public Guid NotificationId { get; private set; }
 

@@ -47,14 +47,32 @@ else if (status != MovementStatus.Cancelled)
     </section>
 
     <div class="grid-row">
-        <h1 class="heading-large column-two-thirds">@Resource.Title</h1>
+        <div class="column-two-thirds">
+            <h1 class="heading-large">@Resource.Title</h1>
+
+            @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
+            {
+                <div class="form-group">@Resource.IncompleteMessage</div>
+
+                @Html.ActionLink(@Resource.ContinueWithButtonText, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
+            }
+        </div>
+
     </div>
+
+    @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
+    {
+        <hr />
+    }
+
 
     <div class="grid-row">
         <div class="column-half">
             <h2 class="heading-medium">@Resource.CurrentNotificationTitle @Model.NotificationNumber</h2>
             <div class="nav-bloc">
                 <nav>
+                    @Html.ActionLink(@Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+
                     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
                     {
                         @Html.ActionLink(@Resource.PrintNotification, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
@@ -72,7 +90,6 @@ else if (status != MovementStatus.Cancelled)
                         @Html.ActionLink(@Resource.UploadAnnexes, "Index", "Annex", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
 
-                    @Html.ActionLink(@Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     @Html.ActionLink(@Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                 </nav>
             </div>

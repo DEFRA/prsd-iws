@@ -84,10 +84,20 @@
     <Compile Include="ImportNotificationAssessment\Decision\ImportWithdrawn.cs" />
     <Compile Include="ImportNotificationAssessment\Decision\ObjectImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\Decision\WithdrawImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveImportFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\Decision.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeRefusalRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeApprovalRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeReleaseRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeRelease.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeRefusal.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeApproval.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeRepository.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatusChange.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatusChangeEvent.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\RefuseImportFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReleaseImportFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
@@ -242,6 +252,8 @@
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
+    <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\MeansOfTransport.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\ICarrierRepository.cs" />
@@ -329,7 +341,6 @@
     <Compile Include="RecoveryCost.cs" />
     <Compile Include="ShipmentQuantity.cs" />
     <Compile Include="ShipmentQuantityUnitConverter.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.MeansOfTransport.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.PackagingInfo.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />

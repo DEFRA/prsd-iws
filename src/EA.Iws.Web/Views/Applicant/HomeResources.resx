@@ -124,19 +124,19 @@
     <value>Address book</value>
   </data>
   <data name="CopyNotification" xml:space="preserve">
-    <value>create a new notification based on a previous one</value>
+    <value>create a new notification based on a previous one.</value>
   </data>
   <data name="First" xml:space="preserve">
-    <value> first</value>
+    <value> first.</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Your notifications</value>
+    <value>Your homepage</value>
   </data>
   <data name="HeaderAccountServices" xml:space="preserve">
     <value>Account services</value>
   </data>
   <data name="HeaderManageYourNotifications" xml:space="preserve">
-    <value>Choose a notification</value>
+    <value>Your notifications</value>
   </data>
   <data name="HeaderStartNew" xml:space="preserve">
     <value>Would you like to start a notification?</value>
@@ -145,7 +145,7 @@
     <value>This link opens in a new browser tab</value>
   </data>
   <data name="OrYouCan" xml:space="preserve">
-    <value>Or you can</value>
+    <value>You could also</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start a new notification now or read the </value>

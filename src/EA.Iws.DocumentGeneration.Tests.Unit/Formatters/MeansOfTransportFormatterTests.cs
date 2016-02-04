@@ -3,6 +3,7 @@
     using System.Linq;
     using Core.MeansOfTransport;
     using DocumentGeneration.Formatters;
+    using Prsd.Core.Helpers;
     using Xunit;
 
     public class MeansOfTransportFormatterTests
@@ -20,7 +21,7 @@
         [Fact]
         public void EmptyInputReturnsEmptyString()
         {
-            var result = formatter.MeansOfTransportAsString(new MeansOfTransport[0].OrderBy(m => m));
+            var result = formatter.MeansOfTransportAsString(new TransportMethod[0].OrderBy(m => m));
 
             Assert.Equal(string.Empty, result);
         }
@@ -30,7 +31,7 @@
         {
             var result = formatter.MeansOfTransportAsString(new[]
             {
-                MeansOfTransport.Air
+                TransportMethod.Air
             }.OrderBy(m => m));
 
             Assert.Equal("A", result);
@@ -41,9 +42,9 @@
         {
             var result = formatter.MeansOfTransportAsString(new[]
             {
-                MeansOfTransport.Road,
-                MeansOfTransport.Air
-            }.OrderBy(m => m.Symbol));
+                TransportMethod.Road,
+                TransportMethod.Air
+            }.OrderBy(m => EnumHelper.GetShortName(m)));
 
             Assert.Equal("A-R", result);
         }
@@ -53,10 +54,10 @@
         {
             var result = formatter.MeansOfTransportAsString(new[]
             {
-                MeansOfTransport.Road,
-                MeansOfTransport.Air,
-                MeansOfTransport.Sea
-            }.OrderBy(m => m.Symbol));
+                TransportMethod.Road,
+                TransportMethod.Air,
+                TransportMethod.Sea
+            }.OrderBy(m => EnumHelper.GetShortName(m)));
 
             Assert.Equal("A-R-S", result);
         }

@@ -70,14 +70,7 @@
             var notification = Create(id, number);
 
             OI.SetProperty(x => x.UserId, userId, notification);
-
-            notification.SetMeansOfTransport(new List<MeansOfTransport>
-            {
-                MeansOfTransport.Air,
-                MeansOfTransport.Road,
-                MeansOfTransport.Train
-            });
-
+            
             notification.SetPhysicalCharacteristics(new List<PhysicalCharacteristicsInfo>
             {
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)

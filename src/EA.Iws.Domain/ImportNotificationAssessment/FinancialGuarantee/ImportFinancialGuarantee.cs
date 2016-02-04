@@ -68,8 +68,12 @@
 
             stateMachine.Configure(ImportFinancialGuaranteeStatus.ApplicationComplete)
                 .OnEntryFrom(completeTrigger, OnComplete)
-                .Permit(Trigger.Approve, ImportFinancialGuaranteeStatus.Approved);
+                .Permit(Trigger.Approve, ImportFinancialGuaranteeStatus.Approved)
+                .Permit(Trigger.Refuse, ImportFinancialGuaranteeStatus.Refused);
 
+            stateMachine.Configure(ImportFinancialGuaranteeStatus.Approved)
+                .Permit(Trigger.Release, ImportFinancialGuaranteeStatus.Released);
+                
             return stateMachine;
         }
 
@@ -118,6 +122,34 @@
             Approve,
             Refuse,
             Release
+        }
+
+        internal ImportFinancialGuaranteeApproval Approve(DateTime date, DateRange validDates, int activeLoads, string reference)
+        {
+            stateMachine.Fire(Trigger.Approve);
+
+            return ImportFinancialGuaranteeApproval.CreateApproval(ImportNotificationId, date, validDates, activeLoads, reference);
+        }
+
+        internal ImportFinancialGuaranteeApproval ApproveBlanketBond(DateTime date, DateTime validFrom, int activeLoads, string bondReference)
+        {
+            stateMachine.Fire(Trigger.Approve);
+
+            return ImportFinancialGuaranteeApproval.CreateBlanketBondApproval(ImportNotificationId, date, validFrom, activeLoads, bondReference);
+        }
+
+        public ImportFinancialGuaranteeRelease Release(DateTime date)
+        {
+            stateMachine.Fire(Trigger.Release);
+
+            return new ImportFinancialGuaranteeRelease(ImportNotificationId, date);
+        }
+
+        public ImportFinancialGuaranteeRefusal Refuse(DateTime date, string reason)
+        {
+            stateMachine.Fire(Trigger.Refuse);
+
+            return new ImportFinancialGuaranteeRefusal(ImportNotificationId, date, reason);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.SubmitSideBarViewModel
 @using EA.Iws.Core.Notification;
+@using EA.Iws.Core.NotificationAssessment
 
 <section class="grid-row">
     <div class="noti-overview">
@@ -59,7 +60,7 @@
                     @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)
                 }
                 <br/>
-                @if (Model.IsNotificationComplete)
+                @if (Model.Status != NotificationStatus.NotSubmitted)
                 {
                     @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId }, null)
                 }

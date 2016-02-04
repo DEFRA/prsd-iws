@@ -388,7 +388,10 @@
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NotCompleted.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Choose.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NoDecisions.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Approve.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\Success.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Refuse.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Release.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1054,6 +1057,11 @@
       <DependentUpon>ReceivedDateViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDecisionViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesCommand.cs" />
@@ -1784,6 +1792,7 @@
     <Compile Include="Infrastructure\VirusScanning\VirusFoundException.cs" />
     <Compile Include="Infrastructure\VirusScanning\VirusFoundFilter.cs" />
     <Compile Include="Infrastructure\VirusScanning\WriteFileVirusScanner.cs" />
+    <Compile Include="Mappings\ImportNotificationAssessment\FinancialGuarantee\FinancialGuaranteeDecisionViewModelMap.cs" />
     <Compile Include="ViewModels\Shared\IComplete.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\RecoveryViewModelResources.Designer.cs">
@@ -2703,6 +2712,10 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedDateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDecisionViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
