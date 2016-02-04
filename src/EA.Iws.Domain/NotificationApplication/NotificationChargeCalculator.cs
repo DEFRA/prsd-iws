@@ -28,21 +28,14 @@
         
         public async Task<decimal> GetValue(Guid notificationId)
         {
-            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
-
-            if (shipmentInfo == null)
-            {
-                return 0;
-            }
-            
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
             if (notification.Charge != null)
             {
                 return notification.Charge.GetValueOrDefault();
             }
-
-            return await GetPrice(shipmentInfo, notification);
+            
+            return await GetCalculatedValue(notificationId);
         }
 
         public async Task<decimal> GetCalculatedValue(Guid notificationId)
