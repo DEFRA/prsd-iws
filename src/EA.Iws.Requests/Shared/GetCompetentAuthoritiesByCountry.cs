@@ -6,7 +6,6 @@
     using Core.Authorization.Permissions;
     using Core.Shared;
     using Prsd.Core.Mediator;
-    using Prsd.Core.Security;
 
     [RequestAuthorization(GeneralPermissions.CanReadCountryData)]
     public class GetCompetentAuthoritiesByCountry : IRequest<ICollection<CompetentAuthorityData>>

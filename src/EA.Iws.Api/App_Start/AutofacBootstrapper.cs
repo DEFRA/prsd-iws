@@ -39,7 +39,6 @@
             builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().As<UserManager<ApplicationUser>>().InstancePerRequest();
-            builder.RegisterType<RequestAuthorizationClaimsProvider>().AsSelf();
 
             return builder.Build();
         }

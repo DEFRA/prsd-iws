@@ -2,11 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
-    using DataAccess;
     using DataAccess.Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -17,20 +15,17 @@
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+        private readonly IClaimsRepository claimsRepository;
         private readonly ConfigurationService configurationService;
-        private readonly Func<IwsContext> iwsContext;
-        private readonly RequestAuthorizationClaimsProvider requestAuthorizationClaimsProvider;
 
         public ApplicationUserManager(IUserStore<ApplicationUser> store,
             IDataProtectionProvider dataProtectionProvider,
-            ConfigurationService configurationService,
-            Func<IwsContext> iwsContext,
-            RequestAuthorizationClaimsProvider requestAuthorizationClaimsProvider)
+            IClaimsRepository claimsRepository,
+            ConfigurationService configurationService)
             : base(store)
         {
+            this.claimsRepository = claimsRepository;
             this.configurationService = configurationService;
-            this.iwsContext = iwsContext;
-            this.requestAuthorizationClaimsProvider = requestAuthorizationClaimsProvider;
 
             UserValidator = new UserValidator<ApplicationUser>(this)
             {
@@ -52,22 +47,6 @@
             UserLockoutEnabledByDefault = true;
             DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             MaxFailedAccessAttemptsBeforeLockout = 5;
-
-            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
-            // You can write your own provider and plug it in here.
-            RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "Your security code is {0}"
-            });
-
-            RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
-            });
-
-            EmailService = new EmailService();
-            SmsService = new SmsService();
 
             UserTokenProvider =
                 new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
@@ -129,22 +108,9 @@
             claims.Add(new Claim(System.Security.Claims.ClaimTypes.Name, string.Format("{0} {1}", user.FirstName, user.Surname)));
             claims.Add(new Claim(System.Security.Claims.ClaimTypes.Email, user.Email));
 
-            var context = iwsContext();
-            var internalUser = await context.InternalUsers.SingleOrDefaultAsync(p => p.UserId == userId);
+            var userClaims = await claimsRepository.GetUserClaims(userId);
 
-            if (internalUser != null)
-            {
-                claims.Add(new Claim(ClaimTypes.InternalUserStatus, internalUser.Status.ToString()));
-                claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "internal"));
-            }
-            else
-            {
-                claims.Add(new Claim(System.Security.Claims.ClaimTypes.Role, "external"));
-            }
-
-            var requestClaims = await requestAuthorizationClaimsProvider.GetClaims(userId);
-
-            foreach (var claim in requestClaims)
+            foreach (var claim in userClaims)
             {
                 claims.Add(claim);
             }

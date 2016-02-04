@@ -28,9 +28,7 @@
             factory.Register(new Registration<IUserContext, UserContext>() { Mode = RegistrationMode.InstancePerHttpRequest });
             factory.Register(new Registration<IAuthenticationManager>(resolver => HttpContext.Current.GetOwinContext().Authentication) { Mode = RegistrationMode.InstancePerHttpRequest });
             factory.Register(new Registration<IEventDispatcher, NullEventDispatcher>() { Mode = RegistrationMode.Singleton });
-            factory.Register(new Registration<IAuthorizationService, InMemoryAuthorizationService>());
-            factory.Register(new Registration<IUserRoleService, UserRoleService>());
-            factory.Register(new Registration<RequestAuthorizationClaimsProvider>());
+            factory.Register(new Registration<IClaimsRepository, ClaimsRepository>() { Mode = RegistrationMode.InstancePerHttpRequest });
         }
     }
 }

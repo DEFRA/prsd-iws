@@ -1,10 +1,9 @@
 ﻿namespace EA.Iws.Requests.Admin
 {
-    using Core.Authorization;
-    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Security;
 
-    [RequestAuthorization(SystemConfigurationPermissions.CanViewSmokeTest)]
+    [AllowUnauthorizedUser]
     public class SmokeTest : IRequest<bool>
     {
     }
