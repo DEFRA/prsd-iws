@@ -2,15 +2,15 @@
 {
     using Core.Admin;
     using Core.FinancialGuarantee;
-    using Domain;
+    using Core.Notification;
     using Domain.FinancialGuarantee;
     using Prsd.Core.Mapper;
 
     public class FinancialGuaranteeMap : IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData>
     {
-        private readonly IWorkingDayCalculator workingDayCalculator;
+        private readonly Domain.IWorkingDayCalculator workingDayCalculator;
 
-        public FinancialGuaranteeMap(IWorkingDayCalculator workingDayCalculator)
+        public FinancialGuaranteeMap(Domain.IWorkingDayCalculator workingDayCalculator)
         {
             this.workingDayCalculator = workingDayCalculator;
         }

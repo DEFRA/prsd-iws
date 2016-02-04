@@ -62,15 +62,15 @@
         }
 
         [HttpGet]
-        public ActionResult CardPaymentInformation(CompetentAuthority competentAuthority)
+        public ActionResult CardPaymentInformation(UKCompetentAuthority competentAuthority)
         {
             switch (competentAuthority)
             {
-                case CompetentAuthority.England:
+                case UKCompetentAuthority.England:
                     return PartialView("_EaCard");
-                case CompetentAuthority.Scotland:
+                case UKCompetentAuthority.Scotland:
                     return PartialView("_SepaCard");
-                case CompetentAuthority.Wales:
+                case UKCompetentAuthority.Wales:
                     return PartialView("_NrwCard");
                 default:
                     return new EmptyResult();
@@ -78,7 +78,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetPostageLabel(CompetentAuthority competentAuthority)
+        public async Task<ActionResult> GetPostageLabel(UKCompetentAuthority competentAuthority)
         {
             try
             {

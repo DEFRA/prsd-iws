@@ -11,7 +11,7 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public bool HasExporter { get; set; }
         public bool HasProducer { get; set; }

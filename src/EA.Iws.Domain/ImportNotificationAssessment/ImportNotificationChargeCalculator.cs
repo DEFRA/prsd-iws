@@ -52,7 +52,7 @@
              var pricingStructures = await pricingStructureRepository.Get();
 
             var correspondingPricingStructure =
-                pricingStructures.Single(p => p.CompetentAuthority.Value == notification.CompetentAuthority.Value
+                pricingStructures.Single(p => p.CompetentAuthority == notification.CompetentAuthority
                                               && p.Activity.TradeDirection == TradeDirection.Import
                                               && p.Activity.NotificationType == notification.NotificationType
                                               && p.Activity.IsInterim == isInterim

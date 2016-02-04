@@ -30,7 +30,7 @@
                 context.TransportRoutes.Add(transportRoute);
             }
 
-            var ukcompAuth = await context.UnitedKingdomCompetentAuthorities.SingleAsync(ca => ca.Id == notification.CompetentAuthority.Value);
+            var ukcompAuth = await context.UnitedKingdomCompetentAuthorities.SingleAsync(ca => ca.Id == (int)notification.CompetentAuthority);
 
             var country = await context.Countries.SingleAsync(c => c.Name == ukcompAuth.CountryName);
 

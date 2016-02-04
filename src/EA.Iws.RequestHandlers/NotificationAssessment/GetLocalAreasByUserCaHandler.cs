@@ -30,7 +30,7 @@
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
 
-            return await iwsContext.LocalAreas.OrderBy(x => x.Name).Where(x => x.CompetentAuthorityId == user.CompetentAuthority.Value)
+            return await iwsContext.LocalAreas.OrderBy(x => x.Name).Where(x => x.CompetentAuthorityId == (int)user.CompetentAuthority)
                 .Select(p => new LocalAreaData() { Id = p.Id, Name = p.Name, CompetentAuthorityId = p.CompetentAuthorityId })
                 .ToListAsync();
         }

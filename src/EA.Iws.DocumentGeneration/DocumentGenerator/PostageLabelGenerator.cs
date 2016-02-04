@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
     using Domain;
-    using CompetentAuthority = Core.Notification.CompetentAuthority;
+    using UKCompetentAuthority = Core.Notification.UKCompetentAuthority;
 
     public class PostageLabelGenerator : IPostageLabelGenerator
     {
-        public byte[] GeneratePostageLabel(CompetentAuthority competentAuthority)
+        public byte[] GeneratePostageLabel(UKCompetentAuthority competentAuthority)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared(GetFileName(competentAuthority)))
             {
@@ -13,26 +13,26 @@
             }
         }
 
-        private string GetFileName(CompetentAuthority competentAuthority)
+        private string GetFileName(UKCompetentAuthority competentAuthority)
         {
             string filename = string.Empty;
 
-            if (competentAuthority == CompetentAuthority.England)
+            if (competentAuthority == UKCompetentAuthority.England)
             {
                 filename = "EaAddress.pdf";
             }
 
-            if (competentAuthority == CompetentAuthority.NorthernIreland)
+            if (competentAuthority == UKCompetentAuthority.NorthernIreland)
             {
                 filename = "NieaAddress.pdf";
             }
 
-            if (competentAuthority == CompetentAuthority.Scotland)
+            if (competentAuthority == UKCompetentAuthority.Scotland)
             {
                 filename = "SepaAddress.pdf";
             }
 
-            if (competentAuthority == CompetentAuthority.Wales)
+            if (competentAuthority == UKCompetentAuthority.Wales)
             {
                 filename = "NrwAddress.pdf";
             }

@@ -19,22 +19,22 @@
 <div class="form-group">If you don't want to download a label, post your notification package to:</div>
 
 <p>
-    @if (Model.CompetentAuthority == CompetentAuthority.England)
+    @if (Model.CompetentAuthority == UKCompetentAuthority.England)
     {
         @Html.Partial("_EaAddress")
     }
 
-    @if (Model.CompetentAuthority == CompetentAuthority.NorthernIreland)
+    @if (Model.CompetentAuthority == UKCompetentAuthority.NorthernIreland)
     {
         @Html.Partial("_NieaAddress")
     }
 
-    @if(Model.CompetentAuthority == CompetentAuthority.Scotland)
+    @if(Model.CompetentAuthority == UKCompetentAuthority.Scotland)
     {
         @Html.Partial("_SepaAddress")
     }
 
-    @if(Model.CompetentAuthority == CompetentAuthority.Wales)
+    @if(Model.CompetentAuthority == UKCompetentAuthority.Wales)
     {
         @Html.Partial("_NrwAddress")
     }

@@ -5,6 +5,7 @@
     using Events;
     using Prsd.Core;
     using Prsd.Core.Domain;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class InternalUser : Entity
     {
@@ -12,7 +13,7 @@
         {
         }
 
-        public InternalUser(string userId, string jobTitle, UKCompetentAuthority competentAuthority, Guid localAreaId)
+        public InternalUser(string userId, string jobTitle, CompetentAuthorityEnum competentAuthority, Guid localAreaId)
         {
             Guard.ArgumentNotNullOrEmpty(() => userId, userId);
             Guard.ArgumentNotNullOrEmpty(() => jobTitle, jobTitle);
@@ -31,7 +32,7 @@
 
         public string JobTitle { get; private set; }
 
-        public UKCompetentAuthority CompetentAuthority { get; private set; }
+        public CompetentAuthorityEnum CompetentAuthority { get; private set; }
 
         public Guid LocalAreaId { get; private set; }
 

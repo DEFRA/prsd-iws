@@ -4,6 +4,7 @@
     using Core.Shared;
     using Domain.ImportNotification;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class OperationCodesListTests
     {
@@ -12,9 +13,9 @@
 
         public OperationCodesListTests()
         {
-            recoveryImportNotification = new ImportNotification(NotificationType.Recovery, UKCompetentAuthority.England,
+            recoveryImportNotification = new ImportNotification(NotificationType.Recovery, CompetentAuthorityEnum.England,
                 "FR0001");
-            disposalImportNotification = new ImportNotification(NotificationType.Disposal, UKCompetentAuthority.England,
+            disposalImportNotification = new ImportNotification(NotificationType.Disposal, CompetentAuthorityEnum.England,
                 "FR0001");
         }
 

@@ -25,7 +25,7 @@
 
         public FinancialGuaranteeStatus FinancialGuaranteeStatus { get; private set; }
 
-        public CompetentAuthority CompetentAuthority { get; private set; }
+        public UKCompetentAuthority CompetentAuthority { get; private set; }
 
         public NotificationStatus NotificationStatus { get; private set; }
 
@@ -40,7 +40,7 @@
             decimal quantityReceived,
             ShipmentQuantityUnits units,
             FinancialGuaranteeStatus financialGuaranteeStatus,
-            CompetentAuthority competentAuthority,
+            UKCompetentAuthority competentAuthority,
             NotificationStatus notificationStatus)
         {
             return new NotificationMovementsSummary

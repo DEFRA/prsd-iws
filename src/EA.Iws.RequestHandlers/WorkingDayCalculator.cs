@@ -6,6 +6,7 @@
     using Core.ComponentRegistration;
     using DataAccess;
     using Domain;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     /// <summary>
     ///     Adaptation of: http://stackoverflow.com/a/1619375/1775471
@@ -13,7 +14,6 @@
     [AutoRegister]
     internal class WorkingDayCalculator : IWorkingDayCalculator
     {
-        private static readonly UKCompetentAuthority DefaultAuthority = UKCompetentAuthority.England;
         private readonly IList<BankHoliday> bankHolidays;
 
         public WorkingDayCalculator(IwsContext context)
@@ -22,13 +22,12 @@
         }
 
         public int GetWorkingDays(DateTime start, DateTime end, bool includeStartDay,
-            UKCompetentAuthority competentAuthority = null)
+            CompetentAuthorityEnum competentAuthority = CompetentAuthorityEnum.England)
         {
             start = start.Date;
             end = end.Date;
 
             var negativeTimeSpan = start > end;
-            competentAuthority = competentAuthority ?? DefaultAuthority;
 
             var workingDays = negativeTimeSpan
                 ? GetWorkingDaysLogic(end, start, competentAuthority)
@@ -43,14 +42,12 @@
         }
 
         public DateTime AddWorkingDays(DateTime start, int days, bool includeStartDay,
-            UKCompetentAuthority competentAuthority = null)
+            CompetentAuthorityEnum competentAuthority = CompetentAuthorityEnum.England)
         {
             if (days == 0)
             {
                 return start;
             }
-
-            competentAuthority = competentAuthority ?? DefaultAuthority;
 
             var negativeDays = days < 0;
 
@@ -81,7 +78,7 @@
             return iteratedDate;
         }
 
-        private int GetWorkingDaysLogic(DateTime start, DateTime end, UKCompetentAuthority competentAuthority)
+        private int GetWorkingDaysLogic(DateTime start, DateTime end, CompetentAuthorityEnum competentAuthority)
         {
             var dateSpan = (end - start);
             var workingDays = 1 + dateSpan.Days;
@@ -137,7 +134,7 @@
         }
 
         private int AdjustForStartDate(int dayDifference, DateTime start, DateTime end,
-            UKCompetentAuthority competentAuthority)
+            CompetentAuthorityEnum competentAuthority)
         {
             if (IsAWeekend(start) || IsBankHoliday(start, competentAuthority))
             {
@@ -160,13 +157,13 @@
             return dayDifference;
         }
 
-        private bool IsBankHoliday(DateTime date, UKCompetentAuthority competentAuthority)
+        private bool IsBankHoliday(DateTime date, CompetentAuthorityEnum competentAuthority)
         {
             return bankHolidays.Where(bh => bh.CompetentAuthority == competentAuthority).Select(bh => bh.Date.Date).Contains(date, new CustomDateComparer());
         }
 
         private int RemoveBankHolidays(DateTime start, DateTime end, int workingDays,
-            UKCompetentAuthority competentAuthority)
+            CompetentAuthorityEnum competentAuthority)
         {
             foreach (var bankHoliday in bankHolidays.Where(bh => bh.CompetentAuthority == competentAuthority).Select(bh => bh.Date))
             {

@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -39,7 +38,7 @@
                 await
                     notificationApplicationFactory.CreateLegacy(
                         message.NotificationType,
-                        UKCompetentAuthority.FromCompetentAuthority(message.CompetentAuthority), 
+                        message.CompetentAuthority,
                         message.Number);
 
             notificationApplicationRepository.Add(notification);

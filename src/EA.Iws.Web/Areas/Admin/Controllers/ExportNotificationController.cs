@@ -39,7 +39,7 @@
                 return View(model);
             }
 
-            TempData[SelectedCompetentAuthority] = model.CompetentAuthorities.SelectedValue.GetValueFromDisplayName<CompetentAuthority>();
+            TempData[SelectedCompetentAuthority] = model.CompetentAuthorities.SelectedValue.GetValueFromDisplayName<UKCompetentAuthority>();
 
             return RedirectToAction("NotificationType");
         }
@@ -52,7 +52,7 @@
             {
                 return View(new NotificationTypeViewModel
                 {
-                    CompetentAuthority = (CompetentAuthority)competentAuthority
+                    CompetentAuthority = (UKCompetentAuthority)competentAuthority
                 });
             }
 
@@ -85,7 +85,7 @@
             {
                 return View(new NewOrExistingNotificationViewModel
                 {
-                    CompetentAuthority = (CompetentAuthority)competentAuthority,
+                    CompetentAuthority = (UKCompetentAuthority)competentAuthority,
                     NotificationType = (NotificationType)notificationType
                 });
             }
@@ -136,7 +136,7 @@
             {
                 return View(new EnterNumberViewModel
                 {
-                    CompetentAuthority = (CompetentAuthority)competentAuthority,
+                    CompetentAuthority = (UKCompetentAuthority)competentAuthority,
                     NotificationType = (NotificationType)notificationType
                 });
             }

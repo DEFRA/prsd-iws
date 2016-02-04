@@ -12,7 +12,6 @@
     using Domain;
     using Domain.TransportRoute;
     using Prsd.Core.Mapper;
-    using Requests.StateOfExport;
 
     internal class TransportRouteMap : IMapWithParameter<TransportRoute, Guid, StateOfExportWithTransportRouteData>
     {
@@ -61,7 +60,7 @@
             {
                 data.StateOfExport = new StateOfExportData();
 
-                var ukcompAuth = context.UnitedKingdomCompetentAuthorities.Single(ca => ca.Id == notification.CompetentAuthority.Value);
+                var ukcompAuth = context.UnitedKingdomCompetentAuthorities.Single(ca => ca.Id == (int)notification.CompetentAuthority);
 
                 data.StateOfExport.Country = countryMapper.Map(countries.Single(c => c.Name == ukcompAuth.CountryName));
 
@@ -70,7 +69,7 @@
 
             var entryPoints = context.EntryOrExitPoints.Where(ep => ep.Country.Id == data.StateOfExport.Country.Id).ToArray();
             data.ExitPoints = entryPoints.Select(entryOrExitPointMapper.Map).ToArray();
-            
+
             return data;
         }
     }

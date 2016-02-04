@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
     using Core.Shared;
     using DataAccess;
-    using DataAccess.Repositories;
     using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
@@ -21,12 +20,14 @@
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Domain;
+    using Repositories;
     using RequestHandlers.Copy;
     using Requests.Copy;
     using Security;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
@@ -35,7 +36,7 @@
         private static readonly Guid UserId = new Guid("7A354C6D-BA5D-49F7-8870-73B2E74E2677");
         private const int SourceNumber = 99991;
         private const int DestinationNumber = 99992;
-        private static readonly UKCompetentAuthority DestinationCompetentAuthority = UKCompetentAuthority.England;
+        private static readonly CompetentAuthorityEnum DestinationCompetentAuthority = CompetentAuthorityEnum.England;
         private static readonly NotificationType DestinationNotificationType = NotificationType.Disposal;
 
         private readonly NotificationApplication source;
@@ -49,9 +50,9 @@
             var applicationRepository = A.Fake<INotificationApplicationRepository>();
             SystemTime.Freeze(new DateTime(2015, 1, 1));
             context = new IwsContext(GetUserContext(), A.Fake<IEventDispatcher>());
-            handler = new CopyToNotificationHandler(context, 
-                new NotificationToNotificationCopy(new WasteCodeCopy()), 
-                new ExporterToExporterCopy(), 
+            handler = new CopyToNotificationHandler(context,
+                new NotificationToNotificationCopy(new WasteCodeCopy()),
+                new ExporterToExporterCopy(),
                 new TransportRouteToTransportRouteCopy(),
                 new WasteRecoveryToWasteRecoveryCopy(),
                 new ImporterToImporterCopy(),
@@ -70,7 +71,7 @@
 
             destination = NotificationApplicationFactory.Create(UserId, DestinationNotificationType, DestinationCompetentAuthority, DestinationNumber);
             EntityHelper.SetEntityId(destination, new Guid("63581B29-EFB9-47F0-BCC3-E67382F4EAFA"));
-            
+
             context.NotificationApplications.Add(source);
             context.NotificationApplications.Add(destination);
 
@@ -81,7 +82,7 @@
             context.AnnexCollections.Add(new AnnexCollection(destination.Id));
 
             context.SaveChanges();
-            
+
             A.CallTo(() => applicationRepository.GetById(A<Guid>.Ignored)).Returns(source);
         }
 
@@ -122,11 +123,11 @@
 
         private void AddWasteRecovery(Guid id)
         {
-            var wasteRecovery = new WasteRecovery(id, 
-                new Percentage(100), 
-                new EstimatedValue(ValuePerWeightUnits.Kilogram, 10), 
+            var wasteRecovery = new WasteRecovery(id,
+                new Percentage(100),
+                new EstimatedValue(ValuePerWeightUnits.Kilogram, 10),
                 new RecoveryCost(ValuePerWeightUnits.Kilogram, 5));
-            
+
             context.WasteRecoveries.Add(wasteRecovery);
         }
 
@@ -294,7 +295,7 @@
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
 
-            Assert.Equal(sourceNotification.WasteType.WasteAdditionalInformation.Count(), 
+            Assert.Equal(sourceNotification.WasteType.WasteAdditionalInformation.Count(),
                 copiedNotification.WasteType.WasteAdditionalInformation.Count());
             Assert.True(sourceNotification.WasteType.WasteAdditionalInformation.Any());
         }

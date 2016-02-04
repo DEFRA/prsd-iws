@@ -26,7 +26,7 @@
 
         public FinancialGuaranteeStatus FinancialGuaranteeStatus { get; set; }
 
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public NotificationStatus NotificationStatus { get; set; }
     }

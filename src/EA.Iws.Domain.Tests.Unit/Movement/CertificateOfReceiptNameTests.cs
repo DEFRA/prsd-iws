@@ -8,6 +8,7 @@
     using Domain.NotificationApplication;
     using FakeItEasy;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class CertificateOfReceiptNameTests
     {
@@ -26,7 +27,7 @@
 
         [Theory]
         [MemberData("TestData")]
-        public async Task ReturnsCorrectFormat(UKCompetentAuthority competentAuthority, int notificationNumber, int movementNumber, string expected)
+        public async Task ReturnsCorrectFormat(CompetentAuthorityEnum competentAuthority, int notificationNumber, int movementNumber, string expected)
         {
             var notification = new NotificationApplication(notificationId, NotificationType.Recovery, competentAuthority, notificationNumber);
             A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notification);
@@ -41,10 +42,10 @@
         {
             return new[]
             {
-                new object[] { UKCompetentAuthority.England, 9999, 1, "GB0001009999-shipment-1-receipt" },
-                new object[] { UKCompetentAuthority.Scotland, 444, 2, "GB0002000444-shipment-2-receipt" },
-                new object[] { UKCompetentAuthority.NorthernIreland, 5, 6, "GB0003000005-shipment-6-receipt" },
-                new object[] { UKCompetentAuthority.Wales, 222222, 4, "GB0004222222-shipment-4-receipt" }
+                new object[] { CompetentAuthorityEnum.England, 9999, 1, "GB0001009999-shipment-1-receipt" },
+                new object[] { CompetentAuthorityEnum.Scotland, 444, 2, "GB0002000444-shipment-2-receipt" },
+                new object[] { CompetentAuthorityEnum.NorthernIreland, 5, 6, "GB0003000005-shipment-6-receipt" },
+                new object[] { CompetentAuthorityEnum.Wales, 222222, 4, "GB0004222222-shipment-4-receipt" }
             };
         } 
     }

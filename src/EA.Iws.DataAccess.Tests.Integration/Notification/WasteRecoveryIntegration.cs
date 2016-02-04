@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Tests.Integration.Notification
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
     using Domain;
@@ -10,6 +9,7 @@
     using FakeItEasy;
     using Prsd.Core.Domain;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
@@ -33,7 +33,7 @@
 
         private async Task<NotificationApplication> CreateNotification()
         {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, CompetentAuthorityEnum.England, 0);
 
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();

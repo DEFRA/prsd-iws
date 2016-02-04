@@ -53,7 +53,7 @@
 
             return new KeyDatesSummaryData
             {
-                CompetentAuthority = notification.CompetentAuthority.AsCompetentAuthority(),
+                CompetentAuthority = notification.CompetentAuthority,
                 IsLocalAreaSet = assessment.LocalAreaId.HasValue,
                 FinancialGuaranteeDecisions =
                     financialGuaranteeDecisions.Select(x => mapper.Map<FinancialGuaranteeDecisionData>(x)).ToArray(),

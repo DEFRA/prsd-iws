@@ -9,6 +9,7 @@
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation",
         Justification = "Variables relate to Y/H/UN-Codes")]
@@ -19,7 +20,7 @@
         public NotificationWasteCodeTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
         }
 
         [Fact]
@@ -675,7 +676,7 @@
         public void CanSetCustomsCode()
         {
             var customsCode = WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"), CodeType.CustomsCode));
-           
+
             notification.SetCustomsCode(customsCode);
 
             Assert.NotNull(notification.CustomsCode);

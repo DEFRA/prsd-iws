@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
     using Domain;
-    using CompetentAuthority = Core.Notification.CompetentAuthority;
+    using UKCompetentAuthority = Core.Notification.UKCompetentAuthority;
 
     public class FinancialGuaranteeDocumentGenerator : IFinancialGuaranteeDocumentGenerator
     {
-        public byte[] GenerateFinancialGuaranteeDocument(CompetentAuthority competentAuthority)
+        public byte[] GenerateFinancialGuaranteeDocument(UKCompetentAuthority competentAuthority)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared(GetFinancialGuaranteeDocumentName(competentAuthority)))
             {
@@ -29,16 +29,16 @@
             }
         }
 
-        private string GetFinancialGuaranteeDocumentName(CompetentAuthority competentAuthority)
+        private string GetFinancialGuaranteeDocumentName(UKCompetentAuthority competentAuthority)
         {
             string filename;
 
             switch (competentAuthority)
             {
-                case CompetentAuthority.NorthernIreland:
+                case UKCompetentAuthority.NorthernIreland:
                     filename = "NIEAFinancialGuaranteeForm.pdf";
                     break;
-                case CompetentAuthority.Wales:
+                case UKCompetentAuthority.Wales:
                     filename = "NRWFinancialGuaranteeForm.pdf";
                     break;
                 default:

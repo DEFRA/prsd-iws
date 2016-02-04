@@ -7,6 +7,7 @@
     using Core.WasteType;
     using Domain.NotificationApplication;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationPhysicalCharacteristicsTests
     {
@@ -15,7 +16,7 @@
         public NotificationPhysicalCharacteristicsTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
         }
 
         [Fact]

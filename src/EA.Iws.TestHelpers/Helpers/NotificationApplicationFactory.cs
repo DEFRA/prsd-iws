@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Core.MeansOfTransport;
     using Core.Shared;
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
 
     public static class NotificationApplicationFactory
@@ -29,11 +29,11 @@
                 bindingAttr: BindingFlags.NonPublic | BindingFlags.Instance,
                 culture: null,
                 binder: null,
-                args: new object[] 
+                args: new object[]
                 {
                     Guid.Empty,
                     NotificationType.Recovery,
-                    UKCompetentAuthority.England,
+                    CompetentAuthorityEnum.England,
                     number
                 }) as NotificationApplication;
 
@@ -43,7 +43,7 @@
         }
 
         public static NotificationApplication Create(Guid userId, NotificationType notificationType,
-            UKCompetentAuthority competentAuthority, int number)
+            CompetentAuthorityEnum competentAuthority, int number)
         {
             var notificationApplication = Activator.CreateInstance(
                 type: typeof(NotificationApplication),
@@ -70,7 +70,7 @@
             var notification = Create(id, number);
 
             OI.SetProperty(x => x.UserId, userId, notification);
-            
+
             notification.SetPhysicalCharacteristics(new List<PhysicalCharacteristicsInfo>
             {
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)

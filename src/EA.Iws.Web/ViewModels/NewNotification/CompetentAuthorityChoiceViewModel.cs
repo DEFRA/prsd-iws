@@ -8,7 +8,7 @@
         public CompetentAuthorityChoiceViewModel()
         {
             CompetentAuthorities =
-                RadioButtonStringCollectionViewModel.CreateFromEnum<CompetentAuthority>();
+                RadioButtonStringCollectionViewModel.CreateFromEnum<UKCompetentAuthority>();
         }
 
         public RadioButtonStringCollectionViewModel CompetentAuthorities { get; set; }

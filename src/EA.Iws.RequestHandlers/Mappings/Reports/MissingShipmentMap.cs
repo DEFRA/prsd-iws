@@ -5,8 +5,9 @@
     using Domain;
     using Domain.Reports;
     using Prsd.Core.Mapper;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
-    internal class MissingShipmentMap : IMapWithParameter<MissingShipment, UKCompetentAuthority, MissingShipmentData>
+    internal class MissingShipmentMap : IMapWithParameter<MissingShipment, CompetentAuthorityEnum, MissingShipmentData>
     {
         private readonly IWorkingDayCalculator workingDayCalculator;
 
@@ -15,7 +16,7 @@
             this.workingDayCalculator = workingDayCalculator;
         }
 
-        public MissingShipmentData Map(MissingShipment source, UKCompetentAuthority parameter)
+        public MissingShipmentData Map(MissingShipment source, CompetentAuthorityEnum parameter)
         {
             return new MissingShipmentData
             {
@@ -68,7 +69,7 @@
                 false);
         }
 
-        private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(MissingShipment source, UKCompetentAuthority competentAuthority)
+        private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(MissingShipment source, CompetentAuthorityEnum competentAuthority)
         {
             if (!source.PrenotificationDate.HasValue 
                 || !source.ActualDateOfShipment.HasValue)

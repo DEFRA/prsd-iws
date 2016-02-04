@@ -18,7 +18,7 @@
                 Id = source.Id,
                 UserId = source.UserId,
                 Email = source.User.Email,
-                CompetentAuthority = source.CompetentAuthority.AsCompetentAuthority(),
+                CompetentAuthority = source.CompetentAuthority,
                 FirstName = source.User.FirstName,
                 Surname = source.User.Surname,
                 Status = source.Status,

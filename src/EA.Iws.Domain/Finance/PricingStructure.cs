@@ -1,16 +1,17 @@
 ﻿namespace EA.Iws.Domain.Finance
 {
     using System;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class PricingStructure
     {
         protected PricingStructure()
         {
         }    
-
+        
         public Guid Id { get; protected set; }
 
-        public UKCompetentAuthority CompetentAuthority { get; protected set; }
+        public CompetentAuthorityEnum CompetentAuthority { get; protected set; }
 
         public virtual ShipmentQuantityRange ShipmentQuantityRange { get; protected set; }
 

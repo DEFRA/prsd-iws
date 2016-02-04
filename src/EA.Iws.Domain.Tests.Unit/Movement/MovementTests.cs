@@ -8,6 +8,7 @@
     using Prsd.Core;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class MovementTests : IDisposable
     {
@@ -23,7 +24,7 @@
             var notification = new NotificationApplication(
                 Guid.NewGuid(), 
                 NotificationType.Recovery, 
-                UKCompetentAuthority.England, 
+                CompetentAuthorityEnum.England, 
                 0);
 
             movement = new Movement(1, notification.Id, AnyDate);

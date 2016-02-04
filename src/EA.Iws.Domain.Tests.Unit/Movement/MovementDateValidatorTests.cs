@@ -11,6 +11,7 @@
     using Prsd.Core;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class MovementDateValidatorTests : IDisposable
     {
@@ -57,7 +58,7 @@
                 .Returns(new NotificationApplication(
                     AnyGuid,
                     NotificationType.Recovery,
-                    UKCompetentAuthority.England,
+                    CompetentAuthorityEnum.England,
                     10));
 
             A.CallTo(() => historyRepository.GetByMovementId(A<Guid>.Ignored))
@@ -66,11 +67,11 @@
             A.CallTo(() => workingDayCalculator.AddWorkingDays(A<DateTime>.Ignored,
                 A<int>.Ignored,
                 A<bool>.Ignored,
-                A<UKCompetentAuthority>.Ignored))
+                A<CompetentAuthorityEnum>.Ignored))
                     .ReturnsLazily((DateTime inputDate,
                         int inputDays,
                         bool includeStartDay,
-                        UKCompetentAuthority ca) =>
+                        CompetentAuthorityEnum ca) =>
                             //A very simple working day formula that ignores bank holidays taken from http://stackoverflow.com/a/279370
                             inputDate.AddDays(inputDays
                                 + ((inputDays / 5) * 2)

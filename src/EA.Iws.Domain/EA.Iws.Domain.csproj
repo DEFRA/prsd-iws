@@ -372,7 +372,6 @@
     <Compile Include="TransportRoute\StateOfImport.cs" />
     <Compile Include="TransportRoute\TransitState.cs" />
     <Compile Include="TransportRoute\TransportRoute.cs" />
-    <Compile Include="UKCompetentAuthority.cs" />
     <Compile Include="UnitedKingdomCompetentAuthority.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserAddress.cs" />

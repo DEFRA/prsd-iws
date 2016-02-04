@@ -6,6 +6,7 @@
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class CreateNotificationTests
     {
@@ -15,7 +16,7 @@
         public void CreateNotificationRaisesDomainEvent()
         {
             var notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
 
             EntityHelper.SetEntityId(notification, notificationId);
 

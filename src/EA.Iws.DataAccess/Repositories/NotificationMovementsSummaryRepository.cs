@@ -83,7 +83,7 @@
                 (await quantity.Received(notificationId)).Quantity,
                 summaryData.Units,
                 summaryData.FinancialGuaranteeStatus,
-                summaryData.CompetentAuthority.AsCompetentAuthority(),
+                summaryData.CompetentAuthority,
                 summaryData.NotificationStatus);
         }
     }

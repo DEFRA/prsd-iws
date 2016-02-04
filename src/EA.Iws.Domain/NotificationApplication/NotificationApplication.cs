@@ -6,6 +6,7 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using WasteRecovery;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public partial class NotificationApplication : Entity
     {
@@ -14,7 +15,7 @@
         }
 
         internal NotificationApplication(Guid userId, NotificationType notificationType,
-            UKCompetentAuthority competentAuthority, int notificationNumber)
+            CompetentAuthorityEnum competentAuthority, int notificationNumber)
         {
             UserId = userId;
             NotificationType = notificationType;
@@ -41,7 +42,7 @@
 
         public NotificationType NotificationType { get; private set; }
 
-        public UKCompetentAuthority CompetentAuthority { get; private set; }
+        public CompetentAuthorityEnum CompetentAuthority { get; private set; }
 
         public string NotificationNumber { get; private set; }
 

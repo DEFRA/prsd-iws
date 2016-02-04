@@ -13,6 +13,7 @@
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
@@ -31,7 +32,7 @@
             A.CallTo(() => userContext.UserId).Returns(userId);
             context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
             notification = NotificationApplicationFactory.Create(userId, NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
         }
 
         [Fact]

@@ -7,6 +7,7 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class FinancialGuarantee : Entity
     {
@@ -39,13 +40,13 @@
 
         public DateTime? CompletedDate { get; private set; }
 
-        public DateTime? GetDecisionRequiredDate(IWorkingDayCalculator workingDayCalculator, UKCompetentAuthority competentAuthority)
+        public DateTime? GetDecisionRequiredDate(IWorkingDayCalculator workingDayCalculator, CompetentAuthorityEnum competentAuthority)
         {
             DateTime? returnDate = null;
 
             if (CompletedDate.HasValue)
             {
-                returnDate = workingDayCalculator.AddWorkingDays(CompletedDate.Value, WorkingDaysUntilDecisionRequired, false);
+                returnDate = workingDayCalculator.AddWorkingDays(CompletedDate.Value, WorkingDaysUntilDecisionRequired, false, competentAuthority);
             }
 
             return returnDate;

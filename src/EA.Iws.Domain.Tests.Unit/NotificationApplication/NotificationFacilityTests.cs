@@ -6,6 +6,7 @@
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationFacilityTests
     {
@@ -18,7 +19,7 @@
         public NotificationFacilityTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                           UKCompetentAuthority.England, 0);
+                           CompetentAuthorityEnum.England, 0);
 
             facilityCollection = new FacilityCollection(notification.Id);
 

@@ -8,6 +8,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
     using Domain;
     using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class WorkingDayCalculatorTests
     {
@@ -45,12 +46,12 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
             context = new TestIwsContext();
 
             var bankHoliday = ObjectInstantiator<BankHoliday>.CreateNew();
-            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, UKCompetentAuthority.England,
+            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, CompetentAuthorityEnum.England,
                 bankHoliday);
             ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.Date, Tuesday14thJuly2015BankHoliday, bankHoliday);
 
             var secondBankHoliday = ObjectInstantiator<BankHoliday>.CreateNew();
-            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, UKCompetentAuthority.England, 
+            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, CompetentAuthorityEnum.England, 
                 secondBankHoliday);
             ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.Date, Friday24thJuly2015BankHoliday, secondBankHoliday);
 

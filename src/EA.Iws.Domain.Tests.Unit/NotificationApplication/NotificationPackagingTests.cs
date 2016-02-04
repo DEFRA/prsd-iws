@@ -7,6 +7,7 @@
     using Core.Shared;
     using Domain.NotificationApplication;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationPackagingTests
     {
@@ -41,7 +42,7 @@
         public void CanAddPackagingInfo()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
 
             notification.SetPackagingInfo(new[] { PackagingInfo.CreateOtherPackagingInfo("package description") });
 
@@ -52,7 +53,7 @@
         public void UpdatePackagingInfoReplacesItems()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
 
             var packagingInfos = new List<PackagingInfo>
             {

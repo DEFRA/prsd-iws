@@ -9,7 +9,6 @@
     using Core.NotificationAssessment;
     using Core.WasteType;
     using DataAccess;
-    using Domain;
     using Prsd.Core.Domain;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
@@ -28,15 +27,15 @@
 
         public async Task<IList<BasicSearchResult>> HandleAsync(SearchExportNotifications query)
         {
+            //TODO: Move this to a repository!
+
             var userCompetentAuthority = await context.InternalUsers
                 .Where(u => u.UserId == userContext.UserId.ToString())
-                .Select(u => u.CompetentAuthority.Value)
+                .Select(u => u.CompetentAuthority)
                 .SingleAsync();
 
-            var compAuthority = Enumeration.FromValue<UKCompetentAuthority>(userCompetentAuthority);
-
             var result = await context.NotificationApplications
-                .Where(n => n.CompetentAuthority.Value == compAuthority.Value)
+                .Where(n => n.CompetentAuthority == userCompetentAuthority)
                 .Join(context.Exporters, n => n.Id, e => e.NotificationId,
                     (n, e) => new { Notification = n, Exporter = e })
                 .Where(p => (p.Notification.NotificationNumber.Contains(query.SearchTerm) ||
@@ -73,7 +72,7 @@
                 Id = notificationId,
                 NotificationNumber = notificationNumber,
                 ExporterName = exporterName,
-                WasteType = wasteTypeValue != default(ChemicalComposition) 
+                WasteType = wasteTypeValue != default(ChemicalComposition)
                     ? EnumHelper.GetShortName(wasteTypeValue) : string.Empty,
                 NotificationStatus = EnumHelper.GetDisplayName(status)
             };

@@ -1,15 +1,15 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Core.FinancialGuarantee;
+    using Core.Notification;
+    using Core.Shared;
     using DataAccess;
     using Domain.FinancialGuarantee;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Core.Shared;
-    using Domain;
     using TestHelpers.Helpers;
     using Xunit;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
@@ -37,7 +37,7 @@
             EntityHelper.SetEntityId(pendingNotification, PendingNotificationId);
             var receivedNotification = NotificationApplicationFactory.Create(Guid.Empty, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(receivedNotification, ReceivedNotificationId);
-            
+
             var financialGuarantees = new[]
             {
                 FinancialGuarantee.Create(PendingNotificationId),

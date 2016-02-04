@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using Domain;
+    using Core.Notification;
     using Domain.Reports;
 
     internal class MissingShipmentsRepository : IMissingShipmentsRepository
@@ -38,7 +38,7 @@
                 WHERE [CompetentAuthorityId] = @ca
                 AND YEAR(COALESCE([PrenotificationDate], [ActualDateOfShipment])) = @year",
                 new SqlParameter("@year", year),
-                new SqlParameter("@ca", competentAuthority.Value)).ToArrayAsync();
+                new SqlParameter("@ca", (int)competentAuthority)).ToArrayAsync();
         }
     }
 }

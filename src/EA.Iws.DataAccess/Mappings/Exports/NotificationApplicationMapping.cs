@@ -32,7 +32,7 @@
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
 
-            Property(x => x.CompetentAuthority.Value)
+            Property(x => x.CompetentAuthority)
                 .IsRequired();
 
             Property(x => x.NotificationType)

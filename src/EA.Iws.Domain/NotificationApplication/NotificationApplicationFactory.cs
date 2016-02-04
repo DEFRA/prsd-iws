@@ -6,6 +6,7 @@
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     [AutoRegister]
     public class NotificationApplicationFactory
@@ -25,7 +26,7 @@
         }
 
         public Task<NotificationApplication> CreateLegacy(NotificationType notificationType,
-            UKCompetentAuthority competentAuthority, int number)
+            CompetentAuthorityEnum competentAuthority, int number)
         {
             Guard.ArgumentNotZeroOrNegative(() => number, number);
 
@@ -41,7 +42,7 @@
         }
 
         public async Task<NotificationApplication> CreateNew(NotificationType notificationType,
-            UKCompetentAuthority competentAuthority)
+            CompetentAuthorityEnum competentAuthority)
         {
             var nextNotificationNumber = await numberGenerator.GetNextNotificationNumber(competentAuthority);
             var notification = new NotificationApplication(userContext.UserId, notificationType, competentAuthority,
@@ -49,12 +50,12 @@
             return notification;
         }
 
-        private static bool IsNumberValid(UKCompetentAuthority competentAuthority, int number)
+        private static bool IsNumberValid(CompetentAuthorityEnum competentAuthority, int number)
         {
-            return (competentAuthority == UKCompetentAuthority.England && number < EaNumberSystemStart)
-                || (competentAuthority == UKCompetentAuthority.Scotland && number < SepaNumberSystemStart)
-                || (competentAuthority == UKCompetentAuthority.NorthernIreland && number < NieaNumberSystemStart)
-                || (competentAuthority == UKCompetentAuthority.Wales && number < NrwNumberSystemStart);
+            return (competentAuthority == CompetentAuthorityEnum.England && number < EaNumberSystemStart)
+                || (competentAuthority == CompetentAuthorityEnum.Scotland && number < SepaNumberSystemStart)
+                || (competentAuthority == CompetentAuthorityEnum.NorthernIreland && number < NieaNumberSystemStart)
+                || (competentAuthority == CompetentAuthorityEnum.Wales && number < NrwNumberSystemStart);
         }
     }
 }

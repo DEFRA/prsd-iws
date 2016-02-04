@@ -9,9 +9,9 @@
     [RequestAuthorization(GeneralPermissions.CanReadCountryData)]
     public class GetUnitedKingdomCompetentAuthorityInformation : IRequest<UnitedKingdomCompetentAuthorityData>
     {
-        public CompetentAuthority CompetentAuthority { get; private set; }
+        public UKCompetentAuthority CompetentAuthority { get; private set; }
 
-        public GetUnitedKingdomCompetentAuthorityInformation(CompetentAuthority competentAuthority)
+        public GetUnitedKingdomCompetentAuthorityInformation(UKCompetentAuthority competentAuthority)
         {
             CompetentAuthority = competentAuthority;
         }

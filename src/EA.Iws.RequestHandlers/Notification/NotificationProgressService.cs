@@ -239,7 +239,7 @@
         {
             public Guid Id { get; set; }
             public NotificationType NotificationType { get; set; }
-            public CompetentAuthority CompetentAuthority { get; set; }
+            public UKCompetentAuthority CompetentAuthority { get; set; }
             public string NotificationNumber { get; set; }
             public bool? IsPreconsentedRecoveryFacility { get; set; }
             public string ReasonForExport { get; set; }

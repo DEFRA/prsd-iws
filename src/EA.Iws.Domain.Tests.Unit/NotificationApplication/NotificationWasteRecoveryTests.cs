@@ -6,6 +6,7 @@
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.WasteRecovery;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationWasteRecoveryTests
     {
@@ -54,7 +55,7 @@
         public void SetProvider_RaisesEvent()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
 
             notification.SetWasteRecoveryInformationProvider(ProvidedBy.Importer);
 

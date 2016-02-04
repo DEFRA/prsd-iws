@@ -3,10 +3,10 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.NotificationAssessment;
     using Core.Shared;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
     using RequestHandlers.Notification;
     using TestHelpers.Helpers;

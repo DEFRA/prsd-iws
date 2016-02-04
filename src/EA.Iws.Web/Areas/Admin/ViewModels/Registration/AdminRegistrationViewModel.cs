@@ -22,7 +22,7 @@
 
         [Required]
         [Display(Name = "Competent authority")]
-        public CompetentAuthority? CompetentAuthority { get; set; }
+        public UKCompetentAuthority? CompetentAuthority { get; set; }
 
         [Required]
         [Display(Name = "Local area covered")]

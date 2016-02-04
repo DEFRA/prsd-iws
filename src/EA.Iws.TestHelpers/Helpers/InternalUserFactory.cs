@@ -2,6 +2,7 @@
 {
     using System;
     using Domain;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public static class InternalUserFactory
     {
@@ -13,7 +14,7 @@
             ObjectInstantiator<InternalUser>.SetProperty(x => x.User, user, internalUser);
             ObjectInstantiator<InternalUser>.SetProperty(x => x.UserId, user.Id, internalUser);
 
-            ObjectInstantiator<InternalUser>.SetProperty(x => x.CompetentAuthority, UKCompetentAuthority.England, internalUser);
+            ObjectInstantiator<InternalUser>.SetProperty(x => x.CompetentAuthority, CompetentAuthorityEnum.England, internalUser);
 
             return internalUser;
         }

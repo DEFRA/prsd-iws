@@ -4,6 +4,7 @@
     using Core.Shared;
     using Domain.NotificationApplication;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationWasteGenerationProcessTests
     {
@@ -12,7 +13,7 @@
         public NotificationWasteGenerationProcessTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
         }
 
         [Fact]

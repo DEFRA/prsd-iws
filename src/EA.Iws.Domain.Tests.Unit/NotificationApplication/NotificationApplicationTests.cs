@@ -3,8 +3,8 @@
     using System;
     using Core.Shared;
     using Domain.NotificationApplication;
-    using TestHelpers.Helpers;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationApplicationTests
     {
@@ -17,7 +17,7 @@
         public NotificationApplicationTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
         }
 
         [Theory]
@@ -36,23 +36,23 @@
             Assert.Equal(expected, notificationApplication.NotificationNumber);
         }
 
-        private static UKCompetentAuthority GetCompetentAuthority(string country)
+        private static CompetentAuthorityEnum GetCompetentAuthority(string country)
         {
             if (country == England)
             {
-                return UKCompetentAuthority.England;
+                return CompetentAuthorityEnum.England;
             }
             if (country == Scotland)
             {
-                return UKCompetentAuthority.Scotland;
+                return CompetentAuthorityEnum.Scotland;
             }
             if (country == NorthernIreland)
             {
-                return UKCompetentAuthority.NorthernIreland;
+                return CompetentAuthorityEnum.NorthernIreland;
             }
             if (country == Wales)
             {
-                return UKCompetentAuthority.Wales;
+                return CompetentAuthorityEnum.Wales;
             }
             throw new ArgumentException("Unknown competent authority", "country");
         }

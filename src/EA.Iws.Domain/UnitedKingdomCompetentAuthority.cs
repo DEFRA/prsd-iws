@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Domain
 {
     using NotificationApplication;
-    using CompetentAuthorityEnum = Core.Notification.CompetentAuthority;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class UnitedKingdomCompetentAuthority
     {

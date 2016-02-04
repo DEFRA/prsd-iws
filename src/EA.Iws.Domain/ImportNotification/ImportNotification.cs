@@ -3,6 +3,7 @@
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class ImportNotification : Entity
     {
@@ -10,18 +11,18 @@
 
         public NotificationType NotificationType { get; private set; }
 
-        public UKCompetentAuthority CompetentAuthority { get; private set; }
+        public CompetentAuthorityEnum CompetentAuthority { get; private set; }
 
         protected ImportNotification()
         {
         }
 
         public ImportNotification(NotificationType notificationType,
-            UKCompetentAuthority competentAuthority, 
+            CompetentAuthorityEnum competentAuthority, 
             string notificationNumber)
         {
             Guard.ArgumentNotNullOrEmpty(() => notificationNumber, notificationNumber);
-            Guard.ArgumentNotNull(() => competentAuthority, competentAuthority);
+            Guard.ArgumentNotDefaultValue(() => competentAuthority, competentAuthority);
             Guard.ArgumentNotDefaultValue(() => notificationType, notificationType);
 
             NotificationType = notificationType;

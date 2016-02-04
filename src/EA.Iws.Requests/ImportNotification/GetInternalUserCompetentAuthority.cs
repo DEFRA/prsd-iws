@@ -8,7 +8,7 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ImportNotificationPermissions.CanReadImportNotification)]
-    public class GetInternalUserCompetentAuthority : IRequest<Tuple<CompetentAuthority, CompetentAuthorityData>>
+    public class GetInternalUserCompetentAuthority : IRequest<Tuple<UKCompetentAuthority, CompetentAuthorityData>>
     {
     }
 }

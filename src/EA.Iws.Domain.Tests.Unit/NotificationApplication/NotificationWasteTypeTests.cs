@@ -7,6 +7,7 @@
     using Core.WasteType;
     using Domain.NotificationApplication;
     using Xunit;
+    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationWasteTypeTests
     {
@@ -15,7 +16,7 @@
         public NotificationWasteTypeTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                UKCompetentAuthority.England, 0);
+                CompetentAuthorityEnum.England, 0);
         }
 
         [Fact]
@@ -61,7 +62,7 @@
 
             Assert.Equal(ChemicalComposition.SRF, notification.WasteType.ChemicalCompositionType);
         }
-        
+
         [Fact]
         public void CanChangeChemicalCompositionTypeMultipleTimes()
         {

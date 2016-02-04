@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -35,7 +34,7 @@
 
         public async Task<Guid> HandleAsync(CreateNotificationApplication command)
         {
-            var authority = UKCompetentAuthority.FromCompetentAuthority(command.CompetentAuthority);
+            var authority = command.CompetentAuthority;
 
             var notification = await notificationApplicationFactory.CreateNew(command.NotificationType, authority);
 

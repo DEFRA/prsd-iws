@@ -13,7 +13,7 @@
 
         public DateTime CreatedDate { get; set; }
 
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public string NotificationNumber { get; set; }
 

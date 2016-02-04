@@ -6,7 +6,7 @@
 
     public class NewOrExistingNotificationViewModel
     {
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public NotificationType NotificationType { get; set; }
 

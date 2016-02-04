@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System.Threading.Tasks;
-    using Core.Notification;
-    using DataAccess;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -15,13 +13,14 @@
         {
             this.repository = repository;
         }
+
         public async Task<WhatToDoNextData> HandleAsync(GetWhatToDoNextDataForNotification message)
         {
             var notification = await repository.GetById(message.Id);
             var data = new WhatToDoNextData
             {
                 Id = message.Id,
-                CompetentAuthority = (CompetentAuthority)notification.CompetentAuthority.Value
+                CompetentAuthority = notification.CompetentAuthority
             };
 
             return data;

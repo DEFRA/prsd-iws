@@ -22,7 +22,7 @@
         <p>@CreatedResources.NotificationNumberSaved</p>
         @switch (Model.CompetentAuthority)
         {
-            case CompetentAuthority.Scotland:
+            case UKCompetentAuthority.Scotland:
                 @Html.Partial("_SepaFinancialGuarantee")
                 break;
             default:

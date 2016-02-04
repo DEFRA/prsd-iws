@@ -30,13 +30,13 @@
                 var competentAuthorityPropertyValue = type.GetProperty(competentAuthorityProperty)
                     .GetValue(instance, null);
 
-                if (!typeof(CompetentAuthority).IsAssignableFrom(competentAuthorityPropertyValue.GetType()))
+                if (!typeof(UKCompetentAuthority).IsAssignableFrom(competentAuthorityPropertyValue.GetType()))
                 {
                     throw new InvalidOperationException("The competentAuthorityProperty must be of type " +
-                                                        typeof(CompetentAuthority).FullName);
+                                                        typeof(UKCompetentAuthority).FullName);
                 }
 
-                var competentAuthority = (CompetentAuthority)competentAuthorityPropertyValue;
+                var competentAuthority = (UKCompetentAuthority)competentAuthorityPropertyValue;
 
                 var validEmailAddressDomains =
                     CompetentAuthorityMetadata.GetValidEmailAddressDomains(competentAuthority).ToArray();

@@ -85,7 +85,7 @@
 
         public bool IsAreaAssigned { get; set; }
 
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public bool? IsInterim { get; set; }
 

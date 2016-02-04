@@ -4,9 +4,8 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
-    using Domain;
-    using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Domain;
