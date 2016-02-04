@@ -3,10 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationOperationCodesTests
     {
@@ -14,7 +14,7 @@
         public void CanAddRecoveryCodesToRecoveryNotification()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var codes = new List<OperationCode>
             {
@@ -33,7 +33,7 @@
         public void CanAddDisposalCodesToDisposalNotification()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var codes = new List<OperationCode>
             {
@@ -52,7 +52,7 @@
         public void CantAddDisposalCodesToRecoveryNotification()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var codes = new List<OperationCode>
             {
@@ -69,7 +69,7 @@
         public void CantAddRecoveryCodesToDisposalNotification()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var codes = new List<OperationCode>
             {
@@ -86,7 +86,7 @@
         public void UpdateCodesReplacesItems()
         {
             var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var codes = new List<OperationCode>
             {

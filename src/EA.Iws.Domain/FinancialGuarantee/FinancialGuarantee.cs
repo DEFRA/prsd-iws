@@ -3,16 +3,16 @@
     using System;
     using System.Collections.Generic;
     using Core.FinancialGuarantee;
+    using Core.Notification;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class FinancialGuarantee : Entity
     {
         private const int WorkingDaysUntilDecisionRequired = 20;
-        
+
         public Guid NotificationApplicationId { get; protected set; }
 
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
@@ -40,7 +40,7 @@
 
         public DateTime? CompletedDate { get; private set; }
 
-        public DateTime? GetDecisionRequiredDate(IWorkingDayCalculator workingDayCalculator, CompetentAuthorityEnum competentAuthority)
+        public DateTime? GetDecisionRequiredDate(IWorkingDayCalculator workingDayCalculator, UKCompetentAuthority competentAuthority)
         {
             DateTime? returnDate = null;
 

@@ -2,7 +2,7 @@ namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
     using Core.ComponentRegistration;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
 
     [AutoRegister]
     public class DecisionRequiredByCalculator : IDecisionRequiredByCalculator
@@ -14,7 +14,7 @@ namespace EA.Iws.Domain.NotificationAssessment
             this.workingDayCalculator = workingDayCalculator;
         }
 
-        public DateTime Get(bool areFacilitiesPreconsented, DateTime acknowledgedDate, CompetentAuthorityEnum competentAuthority)
+        public DateTime Get(bool areFacilitiesPreconsented, DateTime acknowledgedDate, UKCompetentAuthority competentAuthority)
         {
             if (areFacilitiesPreconsented)
             {

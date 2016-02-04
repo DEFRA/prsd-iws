@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System.Threading.Tasks;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
 
     public interface INotificationNumberGenerator
     {
-        Task<int> GetNextNotificationNumber(CompetentAuthorityEnum competentAuthority);
+        Task<int> GetNextNotificationNumber(UKCompetentAuthority competentAuthority);
     }
 }

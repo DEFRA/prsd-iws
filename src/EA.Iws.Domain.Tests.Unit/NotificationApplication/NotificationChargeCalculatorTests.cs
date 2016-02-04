@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
@@ -11,7 +12,6 @@
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationChargeCalculatorTests
     {
@@ -90,7 +90,7 @@
         {
             var pricingStructure = ObjectInstantiator<PricingStructure>.CreateNew();
 
-            ObjectInstantiator<PricingStructure>.SetProperty(x => x.CompetentAuthority, CompetentAuthorityEnum.England, pricingStructure);
+            ObjectInstantiator<PricingStructure>.SetProperty(x => x.CompetentAuthority, UKCompetentAuthority.England, pricingStructure);
 
             var activity = A.Fake<Activity>();
             ObjectInstantiator<Activity>.SetProperty(x => x.TradeDirection, TradeDirection.Export, activity);
@@ -117,7 +117,7 @@
 
         private void SetupNotification()
         {
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.CompetentAuthority, CompetentAuthorityEnum.England, notificationApplication);
+            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.CompetentAuthority, UKCompetentAuthority.England, notificationApplication);
             ObjectInstantiator<NotificationApplication>.SetProperty(x => x.NotificationType, NotificationType.Recovery, notificationApplication);
         }
 

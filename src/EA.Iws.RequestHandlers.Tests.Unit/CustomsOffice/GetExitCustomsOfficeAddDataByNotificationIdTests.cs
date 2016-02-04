@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using DataAccess;
     using Domain;
@@ -13,7 +14,6 @@
     using Requests.CustomsOffice;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class GetExitCustomsOfficeAddDataByNotificationIdTests
@@ -35,7 +35,7 @@
             exitCustomsOffice = new ExitCustomsOffice("any name", "any address", country);
 
             notification = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 500);
+                UKCompetentAuthority.England, 500);
 
             transport = new TransportRoute(NotificationId);
 

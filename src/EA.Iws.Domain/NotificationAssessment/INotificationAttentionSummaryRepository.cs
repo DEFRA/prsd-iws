@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
 
     public interface INotificationAttentionSummaryRepository
     {
-        Task<IEnumerable<NotificationAttentionSummary>> GetByCompetentAuthority(CompetentAuthorityEnum competentAuthority);
+        Task<IEnumerable<NotificationAttentionSummary>> GetByCompetentAuthority(UKCompetentAuthority competentAuthority);
     }
 }

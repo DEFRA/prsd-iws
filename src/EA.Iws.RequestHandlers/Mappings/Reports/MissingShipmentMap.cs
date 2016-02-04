@@ -1,13 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings.Reports
 {
     using Core.Admin.Reports;
+    using Core.Notification;
     using Core.Shared;
     using Domain;
     using Domain.Reports;
     using Prsd.Core.Mapper;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
-    internal class MissingShipmentMap : IMapWithParameter<MissingShipment, CompetentAuthorityEnum, MissingShipmentData>
+    internal class MissingShipmentMap : IMapWithParameter<MissingShipment, UKCompetentAuthority, MissingShipmentData>
     {
         private readonly IWorkingDayCalculator workingDayCalculator;
 
@@ -16,7 +16,7 @@
             this.workingDayCalculator = workingDayCalculator;
         }
 
-        public MissingShipmentData Map(MissingShipment source, CompetentAuthorityEnum parameter)
+        public MissingShipmentData Map(MissingShipment source, UKCompetentAuthority parameter)
         {
             return new MissingShipmentData
             {
@@ -41,14 +41,14 @@
 
         private decimal? GetTonnes(MissingShipment source)
         {
-            if (!source.Units.HasValue 
-                || !source.QuantityReceived.HasValue 
+            if (!source.Units.HasValue
+                || !source.QuantityReceived.HasValue
                 || ShipmentQuantityUnitsMetadata.IsVolumeUnit(source.Units.Value))
             {
                 return null;
             }
 
-            return ShipmentQuantityUnitConverter.ConvertToTarget(source.Units.Value, 
+            return ShipmentQuantityUnitConverter.ConvertToTarget(source.Units.Value,
                 ShipmentQuantityUnits.Tonnes,
                 source.QuantityReceived.Value,
                 false);
@@ -69,9 +69,9 @@
                 false);
         }
 
-        private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(MissingShipment source, CompetentAuthorityEnum competentAuthority)
+        private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(MissingShipment source, UKCompetentAuthority competentAuthority)
         {
-            if (!source.PrenotificationDate.HasValue 
+            if (!source.PrenotificationDate.HasValue
                 || !source.ActualDateOfShipment.HasValue)
             {
                 return false;

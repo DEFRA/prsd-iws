@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Core.WasteCodes;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation",
         Justification = "Variables relate to Y/H/UN-Codes")]
@@ -20,7 +20,7 @@
         public NotificationWasteCodeTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
         }
 
         [Fact]

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
+    using Core.Notification;
     using Core.NotificationAssessment;
     using Core.Shared;
     using Domain;
@@ -18,7 +19,6 @@
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     public class SearchExportNotificationsHandlerTests
@@ -54,13 +54,13 @@
         {
             return new[]
             {
-                CreateNotificationApplication(notification1, CompetentAuthorityEnum.England, WasteType.CreateRdfWasteType(null)),
-                CreateNotificationApplication(notification2, CompetentAuthorityEnum.England, WasteType.CreateRdfWasteType(null)),
-                CreateNotificationApplication(notification3, CompetentAuthorityEnum.England, WasteType.CreateSrfWasteType(null)),
-                CreateNotificationApplication(notification4, CompetentAuthorityEnum.England, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification5, CompetentAuthorityEnum.England, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification6, CompetentAuthorityEnum.England, WasteType.CreateWoodWasteType(null, null)),
-                CreateNotificationApplication(notification7, CompetentAuthorityEnum.Scotland, WasteType.CreateWoodWasteType(null, null))
+                CreateNotificationApplication(notification1, UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
+                CreateNotificationApplication(notification2, UKCompetentAuthority.England, WasteType.CreateRdfWasteType(null)),
+                CreateNotificationApplication(notification3, UKCompetentAuthority.England, WasteType.CreateSrfWasteType(null)),
+                CreateNotificationApplication(notification4, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification5, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification6, UKCompetentAuthority.England, WasteType.CreateWoodWasteType(null, null)),
+                CreateNotificationApplication(notification7, UKCompetentAuthority.Scotland, WasteType.CreateWoodWasteType(null, null))
             };
         }
 
@@ -99,7 +99,7 @@
             var user = UserFactory.Create(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"), "Name", "Surname", "123456", "test@test.com");
 
             var internalUser = InternalUserFactory.Create(new Guid("9C67BFF3-6991-4188-9D8B-C989ADCE6E32"), user);
-            ObjectInstantiator<InternalUser>.SetProperty(u => u.CompetentAuthority, CompetentAuthorityEnum.England, internalUser);
+            ObjectInstantiator<InternalUser>.SetProperty(u => u.CompetentAuthority, UKCompetentAuthority.England, internalUser);
 
             var users = new[]
             {
@@ -128,7 +128,7 @@
             return assessment;
         }
 
-        private NotificationApplication CreateNotificationApplication(Guid id, CompetentAuthorityEnum competentAuthority, WasteType wasteType)
+        private NotificationApplication CreateNotificationApplication(Guid id, UKCompetentAuthority competentAuthority, WasteType wasteType)
         {
             var notificationApplication = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, competentAuthority, 0);
 

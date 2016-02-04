@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.ImportNotification
 {
     using System;
+    using Core.Notification;
     using Core.Shared;
     using Domain.ImportNotification;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class OperationCodesListTests
     {
@@ -13,9 +13,9 @@
 
         public OperationCodesListTests()
         {
-            recoveryImportNotification = new ImportNotification(NotificationType.Recovery, CompetentAuthorityEnum.England,
+            recoveryImportNotification = new ImportNotification(NotificationType.Recovery, UKCompetentAuthority.England,
                 "FR0001");
-            disposalImportNotification = new ImportNotification(NotificationType.Disposal, CompetentAuthorityEnum.England,
+            disposalImportNotification = new ImportNotification(NotificationType.Disposal, UKCompetentAuthority.England,
                 "FR0001");
         }
 

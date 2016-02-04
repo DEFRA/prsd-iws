@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
+    using Core.Notification;
     using Domain;
-    using UKCompetentAuthority = Core.Notification.UKCompetentAuthority;
 
     public class PostageLabelGenerator : IPostageLabelGenerator
     {

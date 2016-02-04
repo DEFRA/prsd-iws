@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.ImportNotification
 {
     using System;
+    using Core.Notification;
     using Core.Shared;
     using Domain.ImportNotification;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class WasteOperationTests
     {
@@ -14,7 +14,7 @@
 
         public WasteOperationTests()
         {
-            var recoveryImportNotification = new ImportNotification(NotificationType.Recovery, CompetentAuthorityEnum.England, "FR0001");
+            var recoveryImportNotification = new ImportNotification(NotificationType.Recovery, UKCompetentAuthority.England, "FR0001");
             EntityHelper.SetEntityId(recoveryImportNotification, importNotificationId);
 
             validRCodesList = OperationCodesList.CreateForNotification(recoveryImportNotification, new[] { OperationCode.R1, OperationCode.R2 });
@@ -66,7 +66,7 @@
 
         [Fact]
         public void TechnologyEmployedCantBeEmpty()
-        { 
+        {
             var operationCodes = new WasteOperation(importNotificationId, validRCodesList);
 
             Action setTechnologyEmployed = () => operationCodes.SetTechnologyEmployed(string.Empty);

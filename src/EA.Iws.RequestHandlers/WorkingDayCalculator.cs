@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.ComponentRegistration;
+    using Core.Notification;
     using DataAccess;
     using Domain;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     /// <summary>
     ///     Adaptation of: http://stackoverflow.com/a/1619375/1775471
@@ -22,7 +22,7 @@
         }
 
         public int GetWorkingDays(DateTime start, DateTime end, bool includeStartDay,
-            CompetentAuthorityEnum competentAuthority = CompetentAuthorityEnum.England)
+            UKCompetentAuthority competentAuthority = UKCompetentAuthority.England)
         {
             start = start.Date;
             end = end.Date;
@@ -42,7 +42,7 @@
         }
 
         public DateTime AddWorkingDays(DateTime start, int days, bool includeStartDay,
-            CompetentAuthorityEnum competentAuthority = CompetentAuthorityEnum.England)
+            UKCompetentAuthority competentAuthority = UKCompetentAuthority.England)
         {
             if (days == 0)
             {
@@ -78,7 +78,7 @@
             return iteratedDate;
         }
 
-        private int GetWorkingDaysLogic(DateTime start, DateTime end, CompetentAuthorityEnum competentAuthority)
+        private int GetWorkingDaysLogic(DateTime start, DateTime end, UKCompetentAuthority competentAuthority)
         {
             var dateSpan = (end - start);
             var workingDays = 1 + dateSpan.Days;
@@ -134,7 +134,7 @@
         }
 
         private int AdjustForStartDate(int dayDifference, DateTime start, DateTime end,
-            CompetentAuthorityEnum competentAuthority)
+            UKCompetentAuthority competentAuthority)
         {
             if (IsAWeekend(start) || IsBankHoliday(start, competentAuthority))
             {
@@ -157,13 +157,13 @@
             return dayDifference;
         }
 
-        private bool IsBankHoliday(DateTime date, CompetentAuthorityEnum competentAuthority)
+        private bool IsBankHoliday(DateTime date, UKCompetentAuthority competentAuthority)
         {
             return bankHolidays.Where(bh => bh.CompetentAuthority == competentAuthority).Select(bh => bh.Date.Date).Contains(date, new CustomDateComparer());
         }
 
         private int RemoveBankHolidays(DateTime start, DateTime end, int workingDays,
-            CompetentAuthorityEnum competentAuthority)
+            UKCompetentAuthority competentAuthority)
         {
             foreach (var bankHoliday in bankHolidays.Where(bh => bh.CompetentAuthority == competentAuthority).Select(bh => bh.Date))
             {

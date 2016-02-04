@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Domain;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
-    using UKCompetentAuthority = Core.Notification.UKCompetentAuthority;
 
     internal class GetInternalUserCompetentAuthorityHandler : IRequestHandler<GetInternalUserCompetentAuthority, Tuple<UKCompetentAuthority, CompetentAuthorityData>>
     {
@@ -26,9 +26,9 @@
             { UKCompetentAuthority.Scotland, "GB02" },
             { UKCompetentAuthority.NorthernIreland, "GB03" },
             { UKCompetentAuthority.Wales, "GB04" }
-        }; 
+        };
 
-        public GetInternalUserCompetentAuthorityHandler(IInternalUserRepository internalUserRepository, 
+        public GetInternalUserCompetentAuthorityHandler(IInternalUserRepository internalUserRepository,
             ICountryRepository countryRepository,
             ICompetentAuthorityRepository competentAuthorityRepository,
             IMapper mapper,

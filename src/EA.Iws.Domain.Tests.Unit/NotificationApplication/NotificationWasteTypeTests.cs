@@ -3,11 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Core.WasteType;
     using Domain.NotificationApplication;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationWasteTypeTests
     {
@@ -16,7 +16,7 @@
         public NotificationWasteTypeTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
         }
 
         [Fact]

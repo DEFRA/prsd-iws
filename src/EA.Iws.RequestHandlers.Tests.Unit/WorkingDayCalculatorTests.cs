@@ -4,11 +4,11 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
 {
     using System;
     using System.Collections.Generic;
+    using Core.Notification;
     using DataAccess;
     using Domain;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class WorkingDayCalculatorTests
     {
@@ -46,12 +46,12 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
             context = new TestIwsContext();
 
             var bankHoliday = ObjectInstantiator<BankHoliday>.CreateNew();
-            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, CompetentAuthorityEnum.England,
+            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, UKCompetentAuthority.England,
                 bankHoliday);
             ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.Date, Tuesday14thJuly2015BankHoliday, bankHoliday);
 
             var secondBankHoliday = ObjectInstantiator<BankHoliday>.CreateNew();
-            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, CompetentAuthorityEnum.England, 
+            ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.CompetentAuthority, UKCompetentAuthority.England,
                 secondBankHoliday);
             ObjectInstantiator<BankHoliday>.SetProperty(bh => bh.Date, Friday24thJuly2015BankHoliday, secondBankHoliday);
 
@@ -141,33 +141,33 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
                     new object[] { Sunday12thJuly2015, Saturday4thJuly, true, -5 },
 
                     // Timespan including bank holiday.
-                    new object[] { Monday13thJuly2015, Wednesday15thJuly2015, false, 1 }, 
-                    new object[] { Monday13thJuly2015, Wednesday15thJuly2015, true, 2 }, 
-                    new object[] { Monday13thJuly2015, Thursday16thJuly2015, false, 2 }, 
+                    new object[] { Monday13thJuly2015, Wednesday15thJuly2015, false, 1 },
+                    new object[] { Monday13thJuly2015, Wednesday15thJuly2015, true, 2 },
+                    new object[] { Monday13thJuly2015, Thursday16thJuly2015, false, 2 },
                     new object[] { Monday13thJuly2015, Thursday16thJuly2015, true, 3 },
- 
+
                     // Timespan including bank holiday but negative.
-                    new object[] { Wednesday15thJuly2015, Monday13thJuly2015, false, -1 }, 
-                    new object[] { Wednesday15thJuly2015, Monday13thJuly2015, true, -2 }, 
-                    new object[] { Thursday16thJuly2015, Monday13thJuly2015, false, -2 }, 
+                    new object[] { Wednesday15thJuly2015, Monday13thJuly2015, false, -1 },
+                    new object[] { Wednesday15thJuly2015, Monday13thJuly2015, true, -2 },
+                    new object[] { Thursday16thJuly2015, Monday13thJuly2015, false, -2 },
                     new object[] { Thursday16thJuly2015, Monday13thJuly2015, true, -3 },
 
                     // Timespan starts on bank holiday.
-                    new object[] { Tuesday14thJuly2015BankHoliday, Wednesday15thJuly2015, false, 1 }, 
-                    new object[] { Tuesday14thJuly2015BankHoliday, Wednesday15thJuly2015, true, 1 }, 
-                    new object[] { Tuesday14thJuly2015BankHoliday, Thursday16thJuly2015, false, 2 }, 
+                    new object[] { Tuesday14thJuly2015BankHoliday, Wednesday15thJuly2015, false, 1 },
+                    new object[] { Tuesday14thJuly2015BankHoliday, Wednesday15thJuly2015, true, 1 },
+                    new object[] { Tuesday14thJuly2015BankHoliday, Thursday16thJuly2015, false, 2 },
                     new object[] { Tuesday14thJuly2015BankHoliday, Thursday16thJuly2015, true, 2 },
 
                     // Timespan starts on bank holiday but negative.
-                    new object[] { Tuesday14thJuly2015BankHoliday, Monday13thJuly2015, false, -1 }, 
-                    new object[] { Tuesday14thJuly2015BankHoliday, Monday13thJuly2015, true, -1 }, 
-                    new object[] { Tuesday14thJuly2015BankHoliday, Friday10thJuly2015, false, -2 }, 
+                    new object[] { Tuesday14thJuly2015BankHoliday, Monday13thJuly2015, false, -1 },
+                    new object[] { Tuesday14thJuly2015BankHoliday, Monday13thJuly2015, true, -1 },
+                    new object[] { Tuesday14thJuly2015BankHoliday, Friday10thJuly2015, false, -2 },
                     new object[] { Tuesday14thJuly2015BankHoliday, Friday10thJuly2015, true, -2 },
 
                     // Longer time-spans.
-                    new object[] { Wednesday8thJuly2015, Tuesday21stJuly2015, false, 8 }, 
-                    new object[] { Wednesday8thJuly2015, Tuesday21stJuly2015, true, 9 }, 
-                    new object[] { Thursday9thJuly2015, Monday20thJuly2015, false, 6 }, 
+                    new object[] { Wednesday8thJuly2015, Tuesday21stJuly2015, false, 8 },
+                    new object[] { Wednesday8thJuly2015, Tuesday21stJuly2015, true, 9 },
+                    new object[] { Thursday9thJuly2015, Monday20thJuly2015, false, 6 },
                     new object[] { Friday17thJuly2015, Monday13thJuly2015, true, -4 },
                     new object[] { Saturday18thJuly2015, Wednesday1stJuly2015, false, -12 },
                     new object[] { Sunday19thJuly2015, Saturday4thJuly, true, -9 },
@@ -211,24 +211,24 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
                     new object[] { Tuesday14thJuly2015BankHoliday, 3, true, Friday17thJuly2015 },
 
                     // Test negative days.
-                    new object[] { Friday3rdJuly2015, -1, false, Thursday2ndJuly2015 }, 
-                    new object[] { Friday3rdJuly2015, -1, true, Friday3rdJuly2015 }, 
-                    new object[] { Friday3rdJuly2015, -2, false, Wednesday1stJuly2015 }, 
-                    new object[] { Friday3rdJuly2015, -2, true, Thursday2ndJuly2015 }, 
+                    new object[] { Friday3rdJuly2015, -1, false, Thursday2ndJuly2015 },
+                    new object[] { Friday3rdJuly2015, -1, true, Friday3rdJuly2015 },
+                    new object[] { Friday3rdJuly2015, -2, false, Wednesday1stJuly2015 },
+                    new object[] { Friday3rdJuly2015, -2, true, Thursday2ndJuly2015 },
 
                     // Test includes bank holiday.
-                    new object[] { Monday13thJuly2015, 1, false, Wednesday15thJuly2015 }, 
-                    new object[] { Monday13thJuly2015, 1, true, Monday13thJuly2015 }, 
-                    new object[] { Monday13thJuly2015, 2, false, Thursday16thJuly2015 }, 
-                    new object[] { Sunday12thJuly2015, 2, false, Wednesday15thJuly2015 }, 
-                
+                    new object[] { Monday13thJuly2015, 1, false, Wednesday15thJuly2015 },
+                    new object[] { Monday13thJuly2015, 1, true, Monday13thJuly2015 },
+                    new object[] { Monday13thJuly2015, 2, false, Thursday16thJuly2015 },
+                    new object[] { Sunday12thJuly2015, 2, false, Wednesday15thJuly2015 },
+
                     // Test negative bank holiday.
-                    new object[] { Wednesday15thJuly2015, -1, false, Monday13thJuly2015 }, 
-                    new object[] { Wednesday15thJuly2015, -2, false, Friday10thJuly2015 }, 
+                    new object[] { Wednesday15thJuly2015, -1, false, Monday13thJuly2015 },
+                    new object[] { Wednesday15thJuly2015, -2, false, Friday10thJuly2015 },
 
                     // Test with bank holiday adjacent to weekend.
-                    new object[] { Thursday23rdJuly2015, 1, false, Monday27thJuly2015 }, 
-                    new object[] { Friday24thJuly2015BankHoliday, 1, true, Monday27thJuly2015 }, 
+                    new object[] { Thursday23rdJuly2015, 1, false, Monday27thJuly2015 },
+                    new object[] { Friday24thJuly2015BankHoliday, 1, true, Monday27thJuly2015 },
                 };
             }
         }

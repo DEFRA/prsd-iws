@@ -5,6 +5,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.PackagingType;
     using Core.Shared;
     using Core.WasteType;
@@ -14,7 +15,6 @@
     using Prsd.Core.Domain;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
@@ -35,7 +35,7 @@
         public async Task CanAddMultipleProducers()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyProducerBusiness();
@@ -62,7 +62,7 @@
         public async Task CanModifyProducer()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var address = new Address("address1", string.Empty, "town", string.Empty, string.Empty, "country");
             var business = ObjectFactory.CreateEmptyProducerBusiness();
@@ -102,7 +102,7 @@
         public async Task CanAddPackagingInfo()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
 
@@ -117,7 +117,7 @@
         public async Task CanUpdateOperationCodes()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var codes = new List<OperationCode>
             {
@@ -154,7 +154,7 @@
         public async Task CanAddWasteType()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
             await context.SaveChangesAsync();
@@ -178,7 +178,7 @@
         [Fact]
         public async Task CanAddTechnologyEmployed()
         {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, CompetentAuthorityEnum.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
 
@@ -196,7 +196,7 @@
         public async Task CanAddSpecialHandlingDetails()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-            CompetentAuthorityEnum.England, 0);
+            UKCompetentAuthority.England, 0);
 
             notification.SetSpecialHandlingRequirements("keep upright");
 
@@ -214,7 +214,7 @@
         public async Task CanRemoveProducer()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyProducerBusiness();
@@ -243,7 +243,7 @@
         public async Task CanNotRemoveSiteOfExportProducerForMoreThanOneProducers()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyProducerBusiness();
@@ -274,7 +274,7 @@
         public async Task CanRemoveProducerOtherThanSiteOfExporter()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyProducerBusiness();
@@ -309,7 +309,7 @@
         public async Task CanAddMultipleFacilities()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
-                                CompetentAuthorityEnum.England, 0);
+                                UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyBusiness();
@@ -340,7 +340,7 @@
         [Fact]
         public async Task CanRemoveFacility()
         {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, CompetentAuthorityEnum.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyBusiness();
@@ -371,7 +371,7 @@
         [Fact]
         public async Task CanNotRemoveActualSiteOfTreatmentFacilityForMoreThanOneFacilities()
         {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, CompetentAuthorityEnum.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyBusiness();
@@ -405,7 +405,7 @@
         [Fact]
         public async Task CanRemoveFacilityOtherThanActualSiteOfTreatment()
         {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, CompetentAuthorityEnum.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyBusiness();
@@ -441,7 +441,7 @@
         [Fact]
         public async Task CanAddMultipleCarriers()
         {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, CompetentAuthorityEnum.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyProducerBusiness();
@@ -472,7 +472,7 @@
         [Fact]
         public async Task CanRemoveCarrier()
         {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, CompetentAuthorityEnum.England, 0);
+            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
 
             var address = ObjectFactory.CreateDefaultAddress();
             var business = ObjectFactory.CreateEmptyProducerBusiness();

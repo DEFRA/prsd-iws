@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
 
     public interface IExportNotificationOwnerDisplayRepository
     {
-        Task<IEnumerable<ExportNotificationOwnerDisplay>> GetInternalUnsubmittedByCompetentAuthority(CompetentAuthorityEnum competentAuthority);
+        Task<IEnumerable<ExportNotificationOwnerDisplay>> GetInternalUnsubmittedByCompetentAuthority(UKCompetentAuthority competentAuthority);
     }
 }

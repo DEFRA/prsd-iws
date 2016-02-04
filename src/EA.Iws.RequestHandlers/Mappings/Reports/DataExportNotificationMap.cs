@@ -2,13 +2,13 @@
 {
     using System;
     using Core.Admin.Reports;
+    using Core.Notification;
     using Domain;
     using Domain.NotificationAssessment;
     using Domain.Reports;
     using Prsd.Core.Mapper;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
-    internal class DataExportNotificationMap : IMapWithParameter<DataExportNotification, CompetentAuthorityEnum, DataExportNotificationData>
+    internal class DataExportNotificationMap : IMapWithParameter<DataExportNotification, UKCompetentAuthority, DataExportNotificationData>
     {
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly IDecisionRequiredByCalculator decisionRequiredByCalculator;
@@ -19,7 +19,7 @@
             this.decisionRequiredByCalculator = decisionRequiredByCalculator;
         }
 
-        public DataExportNotificationData Map(DataExportNotification source, CompetentAuthorityEnum parameter)
+        public DataExportNotificationData Map(DataExportNotification source, UKCompetentAuthority parameter)
         {
             return new DataExportNotificationData
             {
@@ -41,7 +41,7 @@
             };
         }
 
-        private int? GetAssessmentStartedElapsedWorkingDays(DataExportNotification source, CompetentAuthorityEnum parameter)
+        private int? GetAssessmentStartedElapsedWorkingDays(DataExportNotification source, UKCompetentAuthority parameter)
         {
             if (!source.PaymentReceived.HasValue || !source.AssessmentStarted.HasValue)
             {
@@ -52,7 +52,7 @@
                 false, parameter);
         }
 
-        private int? GetTransmittedElapsedWorkingDays(DataExportNotification source, CompetentAuthorityEnum parameter)
+        private int? GetTransmittedElapsedWorkingDays(DataExportNotification source, UKCompetentAuthority parameter)
         {
             if (!source.ApplicationCompleted.HasValue || !source.Transmitted.HasValue)
             {
@@ -63,7 +63,7 @@
                 false, parameter);
         }
 
-        private DateTime? GetDecisionRequiredByDate(DataExportNotification source, CompetentAuthorityEnum parameter)
+        private DateTime? GetDecisionRequiredByDate(DataExportNotification source, UKCompetentAuthority parameter)
         {
             if (!source.Acknowledged.HasValue)
             {

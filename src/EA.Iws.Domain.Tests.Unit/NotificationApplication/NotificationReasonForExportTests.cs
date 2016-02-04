@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationReasonForExportTests
     {
@@ -13,7 +13,7 @@
         public NotificationReasonForExportTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
         }
 
         [Fact]

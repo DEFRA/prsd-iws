@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
 
     public interface INotificationApplicationRepository
     {
@@ -16,6 +16,6 @@
 
         void Add(NotificationApplication notification);
 
-        Task<bool> NotificationNumberExists(int number, CompetentAuthorityEnum competentAuthority);
+        Task<bool> NotificationNumberExists(int number, UKCompetentAuthority competentAuthority);
     }
 }

@@ -2,11 +2,11 @@
 {
     using System;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class CreateNotificationTests
     {
@@ -16,7 +16,7 @@
         public void CreateNotificationRaisesDomainEvent()
         {
             var notification = new NotificationApplication(Guid.Empty, NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
 
             EntityHelper.SetEntityId(notification, notificationId);
 

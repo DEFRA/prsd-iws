@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Domain
 {
     using System;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
     
     public class BankHoliday
     {
@@ -9,7 +9,7 @@
 
         public DateTime Date { get; private set; }
 
-        public CompetentAuthorityEnum CompetentAuthority { get; private set; }
+        public UKCompetentAuthority CompetentAuthority { get; private set; }
 
         protected BankHoliday()
         {

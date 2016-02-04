@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
 
     public interface IDecisionRequiredByCalculator
     {
-        DateTime Get(bool areFacilitiesPreconsented, DateTime acknowledgedDate, CompetentAuthorityEnum competentAuthority);
+        DateTime Get(bool areFacilitiesPreconsented, DateTime acknowledgedDate, UKCompetentAuthority competentAuthority);
     }
 }

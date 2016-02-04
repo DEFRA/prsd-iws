@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Core.Notification;
     using Core.Shared;
     using Core.WasteCodes;
     using Core.WasteType;
     using Domain;
     using Domain.NotificationApplication;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
 
     public static class NotificationApplicationFactory
@@ -33,7 +33,7 @@
                 {
                     Guid.Empty,
                     NotificationType.Recovery,
-                    CompetentAuthorityEnum.England,
+                    UKCompetentAuthority.England,
                     number
                 }) as NotificationApplication;
 
@@ -43,7 +43,7 @@
         }
 
         public static NotificationApplication Create(Guid userId, NotificationType notificationType,
-            CompetentAuthorityEnum competentAuthority, int number)
+            UKCompetentAuthority competentAuthority, int number)
         {
             var notificationApplication = Activator.CreateInstance(
                 type: typeof(NotificationApplication),

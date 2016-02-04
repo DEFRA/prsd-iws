@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
+    using Core.Notification;
 
     public interface IMissingShipmentsRepository
     {
-        Task<IEnumerable<MissingShipment>> Get(int year, CompetentAuthorityEnum competentAuthority);
+        Task<IEnumerable<MissingShipment>> Get(int year, UKCompetentAuthority competentAuthority);
     }
 }

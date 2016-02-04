@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationApplicationTests
     {
@@ -17,7 +17,7 @@
         public NotificationApplicationTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                CompetentAuthorityEnum.England, 0);
+                UKCompetentAuthority.England, 0);
         }
 
         [Theory]
@@ -36,23 +36,23 @@
             Assert.Equal(expected, notificationApplication.NotificationNumber);
         }
 
-        private static CompetentAuthorityEnum GetCompetentAuthority(string country)
+        private static UKCompetentAuthority GetCompetentAuthority(string country)
         {
             if (country == England)
             {
-                return CompetentAuthorityEnum.England;
+                return UKCompetentAuthority.England;
             }
             if (country == Scotland)
             {
-                return CompetentAuthorityEnum.Scotland;
+                return UKCompetentAuthority.Scotland;
             }
             if (country == NorthernIreland)
             {
-                return CompetentAuthorityEnum.NorthernIreland;
+                return UKCompetentAuthority.NorthernIreland;
             }
             if (country == Wales)
             {
-                return CompetentAuthorityEnum.Wales;
+                return UKCompetentAuthority.Wales;
             }
             throw new ArgumentException("Unknown competent authority", "country");
         }

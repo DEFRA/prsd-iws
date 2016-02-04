@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
+    using Core.Notification;
     using Domain;
-    using UKCompetentAuthority = Core.Notification.UKCompetentAuthority;
 
     public class FinancialGuaranteeDocumentGenerator : IFinancialGuaranteeDocumentGenerator
     {
@@ -38,9 +38,11 @@
                 case UKCompetentAuthority.NorthernIreland:
                     filename = "NIEAFinancialGuaranteeForm.pdf";
                     break;
+
                 case UKCompetentAuthority.Wales:
                     filename = "NRWFinancialGuaranteeForm.pdf";
                     break;
+
                 default:
                     filename = "EAFinancialGuaranteeForm.pdf";
                     break;

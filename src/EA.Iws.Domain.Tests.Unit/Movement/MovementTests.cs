@@ -2,13 +2,13 @@
 {
     using System;
     using Core.Movement;
+    using Core.Notification;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Prsd.Core;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class MovementTests : IDisposable
     {
@@ -22,9 +22,9 @@
         public MovementTests()
         {
             var notification = new NotificationApplication(
-                Guid.NewGuid(), 
-                NotificationType.Recovery, 
-                CompetentAuthorityEnum.England, 
+                Guid.NewGuid(),
+                NotificationType.Recovery,
+                UKCompetentAuthority.England,
                 0);
 
             movement = new Movement(1, notification.Id, AnyDate);

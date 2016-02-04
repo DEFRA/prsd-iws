@@ -5,6 +5,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using DataAccess;
     using Domain;
@@ -27,7 +28,6 @@
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
@@ -36,7 +36,7 @@
         private static readonly Guid UserId = new Guid("7A354C6D-BA5D-49F7-8870-73B2E74E2677");
         private const int SourceNumber = 99991;
         private const int DestinationNumber = 99992;
-        private static readonly CompetentAuthorityEnum DestinationCompetentAuthority = CompetentAuthorityEnum.England;
+        private static readonly UKCompetentAuthority DestinationCompetentAuthority = UKCompetentAuthority.England;
         private static readonly NotificationType DestinationNotificationType = NotificationType.Disposal;
 
         private readonly NotificationApplication source;

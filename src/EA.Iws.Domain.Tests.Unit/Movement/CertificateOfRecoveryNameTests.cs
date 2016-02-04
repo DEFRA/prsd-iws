@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using FakeItEasy;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class CertificateOfRecoveryNameTests
     {
@@ -26,7 +26,7 @@
 
         [Theory]
         [MemberData("TestData")]
-        public async Task ReturnsCorrectFormat(string expected, CompetentAuthorityEnum competentAuthority, int notificationNumber, NotificationType notificationType, int movementNumber)
+        public async Task ReturnsCorrectFormat(string expected, UKCompetentAuthority competentAuthority, int notificationNumber, NotificationType notificationType, int movementNumber)
         {
             var notification = new NotificationApplication(Guid.NewGuid(), notificationType, competentAuthority, notificationNumber);
             A.CallTo(() => notificationRepository.GetById(notificationId)).Returns(notification);
@@ -40,10 +40,10 @@
         {
             return new[]
             {
-                new object[] { "GB0001000123-shipment-1-recovery-receipt", CompetentAuthorityEnum.England, 123, NotificationType.Recovery, 1 },
-                new object[] { "GB0002005555-shipment-7-disposal-receipt", CompetentAuthorityEnum.Scotland, 5555, NotificationType.Disposal, 7 },
-                new object[] { "GB0003999999-shipment-600-recovery-receipt", CompetentAuthorityEnum.NorthernIreland, 999999, NotificationType.Recovery, 600 },
-                new object[] { "GB0004000003-shipment-9000-disposal-receipt", CompetentAuthorityEnum.Wales, 3, NotificationType.Disposal, 9000 }
+                new object[] { "GB0001000123-shipment-1-recovery-receipt", UKCompetentAuthority.England, 123, NotificationType.Recovery, 1 },
+                new object[] { "GB0002005555-shipment-7-disposal-receipt", UKCompetentAuthority.Scotland, 5555, NotificationType.Disposal, 7 },
+                new object[] { "GB0003999999-shipment-600-recovery-receipt", UKCompetentAuthority.NorthernIreland, 999999, NotificationType.Recovery, 600 },
+                new object[] { "GB0004000003-shipment-9000-disposal-receipt", UKCompetentAuthority.Wales, 3, NotificationType.Disposal, 9000 }
             };
         }
     }

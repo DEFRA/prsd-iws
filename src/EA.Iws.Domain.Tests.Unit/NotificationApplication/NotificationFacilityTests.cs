@@ -2,11 +2,11 @@
 {
     using System;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
     using Xunit;
-    using CompetentAuthorityEnum = Core.Notification.UKCompetentAuthority;
 
     public class NotificationFacilityTests
     {
@@ -19,7 +19,7 @@
         public NotificationFacilityTests()
         {
             notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Recovery,
-                           CompetentAuthorityEnum.England, 0);
+                           UKCompetentAuthority.England, 0);
 
             facilityCollection = new FacilityCollection(notification.Id);
 
