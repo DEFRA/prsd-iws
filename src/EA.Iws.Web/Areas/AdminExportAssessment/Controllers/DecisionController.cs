@@ -8,7 +8,6 @@
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
-    using ViewModels;
     using ViewModels.Decision;
 
     [Authorize(Roles = "internal")]
