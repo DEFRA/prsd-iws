@@ -165,6 +165,13 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
+    <Compile Include="OperationCodes\OperationCode.cs" />
+    <Compile Include="OperationCodes\OperationCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperationCodeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\TransactionRecordData.cs" />
@@ -258,6 +265,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="OperationCodes\OperationCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OperationCodeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Shared\AddressDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressDataResources.Designer.cs</LastGenOutput>

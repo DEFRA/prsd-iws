@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="D1" xml:space="preserve">
+    <value>D1</value>
+  </data>
+  <data name="D10" xml:space="preserve">
+    <value>D10</value>
+  </data>
+  <data name="D10Description" xml:space="preserve">
+    <value>Incineration on land</value>
+  </data>
+  <data name="D11" xml:space="preserve">
+    <value>D11</value>
+  </data>
+  <data name="D11Description" xml:space="preserve">
+    <value>Incineration at sea</value>
+  </data>
+  <data name="D12" xml:space="preserve">
+    <value>D12</value>
+  </data>
+  <data name="D12Description" xml:space="preserve">
+    <value>Permanent storage (e.g., emplacement of containers in a mine, etc.)</value>
+  </data>
+  <data name="D13" xml:space="preserve">
+    <value>D13</value>
+  </data>
+  <data name="D13Description" xml:space="preserve">
+    <value>Blending or mixing prior to submission to any of the operations in this list</value>
+  </data>
+  <data name="D14" xml:space="preserve">
+    <value>D14</value>
+  </data>
+  <data name="D14Description" xml:space="preserve">
+    <value>Repackaging prior to submission to any of the operations in this list</value>
+  </data>
+  <data name="D15" xml:space="preserve">
+    <value>D15</value>
+  </data>
+  <data name="D15Description" xml:space="preserve">
+    <value>Storage pending any of the operations numbered in this list</value>
+  </data>
+  <data name="D1Description" xml:space="preserve">
+    <value>Deposit into or onto land (e.g., landfill, etc.)</value>
+  </data>
+  <data name="D2" xml:space="preserve">
+    <value>D2</value>
+  </data>
+  <data name="D2Description" xml:space="preserve">
+    <value>Land treatment, (e.g., biodegradation of liquid or sludgy discards in soils, etc.)</value>
+  </data>
+  <data name="D3" xml:space="preserve">
+    <value>D3</value>
+  </data>
+  <data name="D3Description" xml:space="preserve">
+    <value>Deep injection, (e.g., injection of pumpable discards into wells, salt domes or naturally occurring repositories, etc.)</value>
+  </data>
+  <data name="D4" xml:space="preserve">
+    <value>D4</value>
+  </data>
+  <data name="D4Description" xml:space="preserve">
+    <value>Surface impoundment, (e.g., placement of liquid or sludge discards into pits, ponds or lagoons, etc.)</value>
+  </data>
+  <data name="D5" xml:space="preserve">
+    <value>D5</value>
+  </data>
+  <data name="D5Description" xml:space="preserve">
+    <value>Specially engineered landfill, (e.g., placement into lined discrete cells which are capped and isolated from one another and the environment, etc.)</value>
+  </data>
+  <data name="D6" xml:space="preserve">
+    <value>D6</value>
+  </data>
+  <data name="D6Description" xml:space="preserve">
+    <value>Release into water body except seas / oceans</value>
+  </data>
+  <data name="D7" xml:space="preserve">
+    <value>D7</value>
+  </data>
+  <data name="D7Description" xml:space="preserve">
+    <value>Release into seas/oceans including sea-bed insertion</value>
+  </data>
+  <data name="D8" xml:space="preserve">
+    <value>D8</value>
+  </data>
+  <data name="D8Description" xml:space="preserve">
+    <value>Biological treatment not specified elsewhere in this list which results in final compounds or mixtures which are discarded by means of any of the operations in this list</value>
+  </data>
+  <data name="D9" xml:space="preserve">
+    <value>D9</value>
+  </data>
+  <data name="D9Description" xml:space="preserve">
+    <value>Physico-chemical treatment not specified elsewhere in this list which results in final compounds or mixtures which are discarded by means of any of the operations in this list (e.g., evaporation, drying, calcination, etc.,)</value>
+  </data>
+  <data name="R1" xml:space="preserve">
+    <value>R1</value>
+  </data>
+  <data name="R10" xml:space="preserve">
+    <value>R10</value>
+  </data>
+  <data name="R10Description" xml:space="preserve">
+    <value>Land treatment resulting in benefit to agriculture or ecological improvement</value>
+  </data>
+  <data name="R11" xml:space="preserve">
+    <value>R11</value>
+  </data>
+  <data name="R11Description" xml:space="preserve">
+    <value>Uses of residual materials obtained from any of the operations numbered R1-R10</value>
+  </data>
+  <data name="R12" xml:space="preserve">
+    <value>R12</value>
+  </data>
+  <data name="R12Description" xml:space="preserve">
+    <value>Exchange of wastes for submission to any of the operations numbered R1-R11</value>
+  </data>
+  <data name="R13" xml:space="preserve">
+    <value>R13</value>
+  </data>
+  <data name="R13Description" xml:space="preserve">
+    <value>Accumulation of material intended for any operation in this list</value>
+  </data>
+  <data name="R1Description" xml:space="preserve">
+    <value>Use as a fuel (other than in a direct incineration) or other means to generate energy (Basel/OECD) – Use principally as a fuel or other means to generate nergy (EU)</value>
+  </data>
+  <data name="R2" xml:space="preserve">
+    <value>R2</value>
+  </data>
+  <data name="R2Description" xml:space="preserve">
+    <value>Solvent reclamation/regeneration</value>
+  </data>
+  <data name="R3" xml:space="preserve">
+    <value>R3</value>
+  </data>
+  <data name="R3Description" xml:space="preserve">
+    <value>Recycling/reclamation of organic substances which are not used as solvents</value>
+  </data>
+  <data name="R4" xml:space="preserve">
+    <value>R4</value>
+  </data>
+  <data name="R4Description" xml:space="preserve">
+    <value>Recycling/reclamation of metals and metal compounds</value>
+  </data>
+  <data name="R5" xml:space="preserve">
+    <value>R5</value>
+  </data>
+  <data name="R5Description" xml:space="preserve">
+    <value>Recycling/reclamation of other inorganic materials</value>
+  </data>
+  <data name="R6" xml:space="preserve">
+    <value>R6</value>
+  </data>
+  <data name="R6Description" xml:space="preserve">
+    <value>Regeneration of acids or bases</value>
+  </data>
+  <data name="R7" xml:space="preserve">
+    <value>R7</value>
+  </data>
+  <data name="R7Description" xml:space="preserve">
+    <value>Recovery of components used for pollution abatement</value>
+  </data>
+  <data name="R8" xml:space="preserve">
+    <value>R8</value>
+  </data>
+  <data name="R8Description" xml:space="preserve">
+    <value>Recovery of components from catalysts</value>
+  </data>
+  <data name="R9" xml:space="preserve">
+    <value>R9</value>
+  </data>
+  <data name="R9Description" xml:space="preserve">
+    <value>Used oil re-refining or other reuses of previously used oil</value>
+  </data>
+</root>
