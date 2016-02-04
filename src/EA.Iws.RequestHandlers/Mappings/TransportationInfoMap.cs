@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Carriers;
+    using Core.MeansOfTransport;
     using Core.Notification.Overview;
     using Core.PackagingType;
     using Domain.NotificationApplication;
@@ -25,12 +26,12 @@
         public Transportation Map(NotificationApplication notification)
         {
             var meansOfTransport = Task.Run(() => repository.GetByNotificationId(notification.Id)).Result;
-
+                        
             return new Transportation
             {
                 NotificationId = notification.Id,
                 Carriers = carrierMap.Map(notification).ToList(),
-                MeanOfTransport = meansOfTransport.Route.ToList(),
+                MeanOfTransport = meansOfTransport != null ? meansOfTransport.Route.ToList() : new List<TransportMethod>(),
                 PackagingData = GetPackagingData(notification),
                 SpecialHandlingDetails = GetSpecialHandling(notification)
             };
