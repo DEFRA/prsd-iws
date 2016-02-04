@@ -9,7 +9,7 @@
     using ClaimTypes = Core.Shared.ClaimTypes;
 
     [AutoRegister]
-    internal class ClaimsRepository : IClaimsRepository
+    public class ClaimsRepository : IClaimsRepository
     {
         private readonly IwsContext context;
 
