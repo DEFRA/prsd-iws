@@ -5,16 +5,16 @@
 
     public class AuthorizationContext
     {
-        public string Name { get; private set; }
+        public string Activity { get; private set; }
 
         public ClaimsPrincipal Principal { get; private set; }
 
-        public AuthorizationContext(ClaimsPrincipal principal, string name)
+        public AuthorizationContext(ClaimsPrincipal principal, string activity)
         {
-            Guard.ArgumentNotNull(() => name, name);
+            Guard.ArgumentNotNull(() => activity, activity);
             Guard.ArgumentNotNull(() => principal, principal);
 
-            Name = name;
+            Activity = activity;
             Principal = principal;
         }
     }

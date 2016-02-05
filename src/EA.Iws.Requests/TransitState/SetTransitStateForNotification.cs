@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Requests.TransitState
 {
     using System;
+    using Authorization;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
-    using Security;
 
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
@@ -24,10 +24,10 @@
 
         public int? OrdinalPosition { get; set; }
 
-        public SetTransitStateForNotification(Guid notificationId, 
-            Guid countryId, 
-            Guid entryPointId, 
-            Guid exitPointId, 
+        public SetTransitStateForNotification(Guid notificationId,
+            Guid countryId,
+            Guid entryPointId,
+            Guid exitPointId,
             Guid competentAuthorityId,
             Guid? transitStateId,
             int? ordinalPosition)

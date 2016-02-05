@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Requests.WasteType
 {
     using System;
+    using Authorization;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
-    using Security;
 
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]

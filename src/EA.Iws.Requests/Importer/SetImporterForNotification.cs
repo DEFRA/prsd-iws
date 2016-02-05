@@ -1,11 +1,11 @@
 ﻿namespace EA.Iws.Requests.Importer
 {
     using System;
+    using Authorization;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Core.Shared;
     using Prsd.Core.Mediator;
-    using Security;
 
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]

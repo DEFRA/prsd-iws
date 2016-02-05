@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Requests.CustomsOffice
 {
     using System;
+    using Authorization;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
-    using Security;
 
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
@@ -14,7 +14,7 @@
         public Guid CountryId { get; private set; }
         public string Name { get; private set; }
         public string Address { get; private set; }
-        
+
         public SetExitCustomsOfficeForNotificationById(Guid id, string name, string address, Guid countryId)
         {
             Id = id;

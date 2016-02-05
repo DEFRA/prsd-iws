@@ -220,7 +220,8 @@
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
     <Compile Include="Notification\ResubmitNotification.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />
-    <Compile Include="Security\NotificationReadOnlyAuthorizeAttribute.cs" />
+    <Compile Include="Authorization\AuthorizeActivity.cs" />
+    <Compile Include="Authorization\NotificationReadOnlyAuthorizeAttribute.cs" />
     <Compile Include="Notification\CanEditNotification.cs" />
     <Compile Include="Notification\GetNotificationCharge.cs" />
     <Compile Include="Copy\CopyToNotification.cs" />

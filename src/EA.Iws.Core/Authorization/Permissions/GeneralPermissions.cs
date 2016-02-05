@@ -2,6 +2,8 @@
 {
     public static class GeneralPermissions
     {
+        public const string CanAuthorizeActivity = "Can Authorize Activity";
+
         public const string CanReadCountryData = "Can Read Country Data";
 
         public const string CanReadUserData = "Can Read User Data";
