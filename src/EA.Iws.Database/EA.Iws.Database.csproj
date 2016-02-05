@@ -87,6 +87,7 @@
     <Content Include="scripts\TestData\20151231-084100-create-test-data-annex-collections.sql" />
     <Content Include="scripts\TestData\20151026-180000-create-consented-notification-2504.sql" />
     <Content Include="scripts\TestData\2016-01-29-102149-create-consented-import-notification.sql" />
+    <Content Include="scripts\TestData\20160205-114600-test-user-claims.sql" />
     <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\Sprint10\20150625-103000-add-us-competent-authority.sql" />
