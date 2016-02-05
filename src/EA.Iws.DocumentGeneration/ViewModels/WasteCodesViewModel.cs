@@ -12,6 +12,7 @@
     {
         private readonly WasteCodeInfoFormatter wasteCodeInfoFormatter;
         private const string NotApplicable = "Not applicable";
+        private const string NotListed = "Not listed";
 
         public string Basel { get; private set; }
         public string Oecd { get; private set; }
@@ -163,7 +164,7 @@
                 return;
             }
 
-            var value = (notification.BaselOecdCode.IsNotApplicable) ? NotApplicable : notification.BaselOecdCode.WasteCode.Code;
+            var value = (notification.BaselOecdCode.IsNotApplicable) ? NotListed : notification.BaselOecdCode.WasteCode.Code;
 
             if (notification.BaselOecdCode.CodeType == CodeType.Basel)
             {
