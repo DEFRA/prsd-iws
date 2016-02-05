@@ -130,7 +130,7 @@
     <value>Similar organisations</value>
   </data>
   <data name="HeaderDescription" xml:space="preserve">
-    <value>SelectOrganisationResources</value>
+    <value>Select an organisation from the options below or add a organisation.</value>
   </data>
   <data name="Organisation" xml:space="preserve">
     <value>Organisation</value>
