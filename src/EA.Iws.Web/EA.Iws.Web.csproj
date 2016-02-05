@@ -1017,6 +1017,7 @@
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Modules\AuthorizationModule.cs" />
     <Compile Include="App_Start\Modules\MappingModule.cs" />
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\Modules\FileAccessModule.cs" />
@@ -1786,6 +1787,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AuthorizationService.cs" />
+    <Compile Include="Infrastructure\AuthorizeActivityAttribute.cs" />
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FileAccess.cs" />
     <Compile Include="Infrastructure\FileReader.cs" />

@@ -12,6 +12,7 @@
     {
         private static readonly IDictionary<string, IList<UserRole>> authorizations = new Dictionary<string, IList<UserRole>>
         {
+            { GeneralPermissions.CanAuthorizeActivity, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanReadCountryData, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanReadUserData, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
             { GeneralPermissions.CanEditUserData, new[] { UserRole.Internal, UserRole.External, UserRole.TeamLeader } },
@@ -62,7 +63,7 @@
             var hasAccess = false;
             IList<UserRole> roles;
 
-            if (authorizations.TryGetValue(context.Name, out roles))
+            if (authorizations.TryGetValue(context.Activity, out roles))
             {
                 hasAccess = roles.Intersect(userRoles).Any();
             }
@@ -82,6 +83,6 @@
                     yield return role;
                 }
             }
-        } 
+        }
     }
 }
