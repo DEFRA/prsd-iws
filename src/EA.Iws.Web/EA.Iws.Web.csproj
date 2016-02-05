@@ -1694,6 +1694,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysSelection.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModelResources.Designer.cs">
@@ -3418,6 +3423,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrintResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\YCode\YCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
