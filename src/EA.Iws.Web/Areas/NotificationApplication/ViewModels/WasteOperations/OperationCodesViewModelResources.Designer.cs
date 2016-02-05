@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Views.Registration {
+namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Views.Registration {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SelectOrganisationResources {
+    public class OperationCodesViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SelectOrganisationResources() {
+        internal OperationCodesViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Views.Registration {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Views.Registration.SelectOrganisationResources", typeof(SelectOrganisationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.OperationCode" +
+                            "sViewModelResources", typeof(OperationCodesViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +62,11 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new.
+        ///   Looks up a localized string similar to Please select at least one {0} code.
         /// </summary>
-        public static string AddNew {
+        public static string SelectionRequired {
             get {
-                return ResourceManager.GetString("AddNew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new organisation.
-        /// </summary>
-        public static string AddNewOrg {
-            get {
-                return ResourceManager.GetString("AddNewOrg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use this organisation.
-        /// </summary>
-        public static string ButtonText {
-            get {
-                return ResourceManager.GetString("ButtonText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Similar organisations.
-        /// </summary>
-        public static string Header {
-            get {
-                return ResourceManager.GetString("Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select an organisation from the options below or add a organisation..
-        /// </summary>
-        public static string HeaderDescription {
-            get {
-                return ResourceManager.GetString("HeaderDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Organisation.
-        /// </summary>
-        public static string Organisation {
-            get {
-                return ResourceManager.GetString("Organisation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Similar organisations.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("SelectionRequired", resourceCulture);
             }
         }
     }

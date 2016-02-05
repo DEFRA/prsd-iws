@@ -1,21 +1,18 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.OperationCodesViewModel
 
 <div>
-    <div class="form-group">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.PossibleCodes)">
+        @Html.Gds().ValidationMessageFor(m => m.PossibleCodes)
         <fieldset>
-
-            @for (int i = 0; i < Model.Codes.PossibleValues.Count; i++)
+            @for (int i = 0; i < Model.PossibleCodes.Count; i++)
             {
-                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.Codes.PossibleValues[i]);
+                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleCodes[i].Key);
+                @Html.HiddenFor(m => m.PossibleCodes[i].Key)
 
                 <div>
                     <label for="@idForThisCheckBox" class="block-label grid-view">
-                        @Html.CheckBoxFor(m => m.Codes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
-                        @Html.HiddenFor(m => m.Codes.PossibleValues[i].Text)
-                        @Html.HiddenFor(m => m.Codes.PossibleValues[i].Value)
-                        @Html.DisplayFor(m => m.Codes.PossibleValues[i].Text)
-                        &nbsp;-&nbsp;
-                        @Model.CodeInformation[Model.Codes.PossibleValues[i].Text]
+                        @Html.CheckBoxFor(m => m.PossibleCodes[i].Value, new { id = idForThisCheckBox })
+                        @Html.Raw(Model.DisplayValues[i])
                     </label>
                 </div>
             }

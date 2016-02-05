@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Notification;
+    using Core.OperationCodes;
     using Core.Shared;
     using Domain.ImportNotification;
     using TestHelpers.Helpers;
@@ -66,7 +67,7 @@
 
         [Fact]
         public void TechnologyEmployedCantBeEmpty()
-        {
+        { 
             var operationCodes = new WasteOperation(importNotificationId, validRCodesList);
 
             Action setTechnologyEmployed = () => operationCodes.SetTechnologyEmployed(string.Empty);

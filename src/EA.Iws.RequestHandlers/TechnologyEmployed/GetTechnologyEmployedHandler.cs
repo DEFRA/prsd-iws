@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.TechnologyEmployed
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.TechnologyEmployed;
-    using DataAccess;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -11,19 +9,19 @@
 
     internal class GetTechnologyEmployedHandler : IRequestHandler<GetTechnologyEmployed, TechnologyEmployedData>
     {
-        private readonly IwsContext context;
+        private readonly INotificationApplicationRepository notificationRepository;
         private readonly IMap<NotificationApplication, TechnologyEmployedData> mapper;
 
-        public GetTechnologyEmployedHandler(IwsContext context,
+        public GetTechnologyEmployedHandler(INotificationApplicationRepository notificationRepository,
             IMap<NotificationApplication, TechnologyEmployedData> mapper)
         {
-            this.context = context;
+            this.notificationRepository = notificationRepository;
             this.mapper = mapper;
         }
 
         public async Task<TechnologyEmployedData> HandleAsync(GetTechnologyEmployed message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            var notification = await notificationRepository.GetById(message.NotificationId);
 
             return mapper.Map(notification);
         }

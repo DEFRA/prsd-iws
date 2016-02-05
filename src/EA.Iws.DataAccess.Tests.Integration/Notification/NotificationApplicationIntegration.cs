@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Notification;
+    using Core.OperationCodes;
     using Core.PackagingType;
     using Core.Shared;
     using Core.WasteType;
@@ -209,7 +210,7 @@
             context.DeleteOnCommit(notification);
             await context.SaveChangesAsync();
         }
-
+        
         [Fact]
         public async Task CanRemoveProducer()
         {

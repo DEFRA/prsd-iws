@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Core.MeansOfTransport;
     using Core.Notification;
+    using Core.OperationCodes;
     using Core.Shared;
     using Core.WasteCodes;
     using Core.WasteType;
@@ -29,7 +31,7 @@
                 bindingAttr: BindingFlags.NonPublic | BindingFlags.Instance,
                 culture: null,
                 binder: null,
-                args: new object[]
+                args: new object[] 
                 {
                     Guid.Empty,
                     NotificationType.Recovery,
@@ -70,7 +72,7 @@
             var notification = Create(id, number);
 
             OI.SetProperty(x => x.UserId, userId, notification);
-
+            
             notification.SetPhysicalCharacteristics(new List<PhysicalCharacteristicsInfo>
             {
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)

@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using OperationCodes;
 
     [DisplayName("Waste operation")]
     public class WasteOperation : IDraftEntity
@@ -17,7 +18,7 @@
 
         public Guid ImportNotificationId { get; set; }
 
-        public int[] OperationCodes { get; set; }
+        public OperationCode[] OperationCodes { get; set; }
 
         public string TechnologyEmployed { get; set; }
     }

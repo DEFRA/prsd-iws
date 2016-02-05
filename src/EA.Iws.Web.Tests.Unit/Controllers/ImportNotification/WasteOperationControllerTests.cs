@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.ImportNotification
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Areas.ImportNotification.Controllers;
@@ -31,22 +32,25 @@
         {
             var model = new WasteOperationViewModel()
             {
-                Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>(),
+                Codes = new List<KeyValuePairViewModel<OperationCode, bool>>
+                {
+                    new KeyValuePairViewModel<OperationCode, bool>(OperationCode.R1, true),
+                    new KeyValuePairViewModel<OperationCode, bool>(OperationCode.R2, true),
+                    new KeyValuePairViewModel<OperationCode, bool>(OperationCode.R3, false)
+                },
                 ImportNotificationId = importNotificationId,
                 NotificationType = NotificationType.Recovery,
                 TechnologyEmployed = "test"
             };
-
-            model.Codes.SetSelectedValues(new[] { RecoveryCode.R1, RecoveryCode.R2 });
-
+            
             await controller.Index(importNotificationId, model);
 
             A.CallTo(() => mediator.SendAsync(A<SetDraftData<WasteOperation>>.That.Matches(p => 
                 p.ImportNotificationId == importNotificationId &&
                 p.Data.ImportNotificationId == importNotificationId &&
                 p.Data.TechnologyEmployed == "test" &&
-                p.Data.OperationCodes.Contains(1) &&
-                p.Data.OperationCodes.Contains(2))))
+                p.Data.OperationCodes.Contains(OperationCode.R1) &&
+                p.Data.OperationCodes.Contains(OperationCode.R2))))
                 .MustHaveHappened();
         }
     }

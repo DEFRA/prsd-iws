@@ -8,7 +8,7 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
-    public class GetOperationCodesByNotificationId : IRequest<IList<OperationCodeData>>
+    public class GetOperationCodesByNotificationId : IRequest<IList<OperationCode>>
     {
         public Guid NotificationId { get; set; }
 

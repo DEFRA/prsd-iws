@@ -2,10 +2,8 @@
 {
     using System.Linq;
     using Core.ImportNotification.Draft;
-    using Domain;
-    using Domain.NotificationApplication;
+    using Core.OperationCodes;
     using FluentValidation;
-    using Prsd.Core.Domain;
 
     internal class WasteOperationValidator : AbstractValidator<WasteOperation>
     {
@@ -19,11 +17,11 @@
                 .WithLocalizedMessage(() => WasteOperationValidatorResources.OperationCodesOfSameType);
         }
 
-        private static bool BeOfSameType(int[] operationCodes)
+        private static bool BeOfSameType(OperationCode[] operationCodes)
         {
-            var types = operationCodes.Select(x => Enumeration.FromValue<OperationCode>(x).NotificationType).ToArray();
+            var types = operationCodes.Select(x => x).ToList();
 
-            return types.All(p => p == types.First());
+            return types.Skip(1).All(p => OperationCodeMetadata.GetCodeType(p) == OperationCodeMetadata.GetCodeType(types.First()));
         }
     }
 }

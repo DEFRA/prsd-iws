@@ -12,13 +12,13 @@
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class AddDisposalCodes : IRequest<Guid>
     {
-        public AddDisposalCodes(List<DisposalCode> disposalCodes, Guid notificationId)
+        public AddDisposalCodes(Guid notificationId, IList<OperationCode> disposalCodes)
         {
             DisposalCodes = disposalCodes;
             NotificationId = notificationId;
         }
 
-        public List<DisposalCode> DisposalCodes { get; private set; }
+        public IList<OperationCode> DisposalCodes { get; private set; }
 
         public Guid NotificationId { get; private set; }
     }

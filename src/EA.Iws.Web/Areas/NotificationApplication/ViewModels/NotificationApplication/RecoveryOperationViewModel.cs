@@ -7,6 +7,7 @@
     using Core.Notification.Overview;
     using Core.Shared;
     using Core.TechnologyEmployed;
+    using Prsd.Core.Helpers;
 
     public class RecoveryOperationViewModel
     {
@@ -34,7 +35,7 @@
             IsTechnologyEmployedCompleted = progress.HasTechnologyEmployed;
             IsReasonForExportCompleted = progress.HasReasonForExport;
             PreconstedAnswer = recoveryOperationInfo.PreconstedAnswer;
-            OperationCodes = recoveryOperationInfo.OperationCodes.OrderBy(c => c.Value).Select(c => c.Code).ToList();
+            OperationCodes = recoveryOperationInfo.OperationCodes.OrderBy(c => c).Select(EnumHelper.GetDisplayName).ToList();
             TechnologyEmployed = recoveryOperationInfo.TechnologyEmployed;
             ReasonForExport = recoveryOperationInfo.ReasonForExport;
         }

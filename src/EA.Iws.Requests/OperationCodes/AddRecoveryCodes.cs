@@ -12,13 +12,13 @@
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
     public class AddRecoveryCodes : IRequest<Guid>
     {
-        public AddRecoveryCodes(List<RecoveryCode> recoveryCodes, Guid notificationId)
+        public AddRecoveryCodes(Guid notificationId, IList<OperationCode> recoveryCodes)
         {
             RecoveryCodes = recoveryCodes;
             NotificationId = notificationId;
         }
 
-        public List<RecoveryCode> RecoveryCodes { get; private set; }
+        public IList<OperationCode> RecoveryCodes { get; private set; }
 
         public Guid NotificationId { get; private set; }
     }
