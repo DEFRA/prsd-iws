@@ -6,6 +6,7 @@
     using System.Security.Authentication;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using Core.Authorization;
     using Elmah;
     using Infrastructure;
     using Newtonsoft.Json;
@@ -47,6 +48,11 @@
                 return this.StatusCode(HttpStatusCode.Unauthorized, new HttpError(ex, includeErrorDetail: true));
             }
             catch (SecurityException ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                return this.StatusCode(HttpStatusCode.Forbidden, new HttpError(ex, includeErrorDetail: true));
+            }
+            catch (RequestAuthorizationException ex)
             {
                 ErrorSignal.FromCurrentContext().Raise(ex);
                 return this.StatusCode(HttpStatusCode.Forbidden, new HttpError(ex, includeErrorDetail: true));

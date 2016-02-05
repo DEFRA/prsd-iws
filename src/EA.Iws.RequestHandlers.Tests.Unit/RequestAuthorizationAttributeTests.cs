@@ -7,6 +7,7 @@
     using Authorization;
     using Core.Authorization;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Security;
     using Requests.Notification;
     using Xunit;
 
@@ -19,7 +20,8 @@
                 .Assembly
                 .GetTypes()
                 .Where(TypeImplementsIRequest)
-                .Where(t => t.GetCustomAttribute<RequestAuthorizationAttribute>() == null);
+                .Where(t => t.GetCustomAttribute<RequestAuthorizationAttribute>() == null
+                    && t.GetCustomAttribute<AllowUnauthorizedUserAttribute>() == null);
 
             var message = string.Empty;
 
@@ -27,7 +29,7 @@
             {
                 message = unattributedRequests.Count() + " request" +
                     (unattributedRequests.Count() != 1 ? "s" : string.Empty) +
-                    " without [RequestAuthorizationAttribute]:\n" +
+                    " without [RequestAuthorizationAttribute] or [AllowUnauthorizedUserAttribute]:\n" +
                     unattributedRequests.Select(request => request.FullName)
                         .Aggregate((a, b) => a + ",\n" + b);
             }
@@ -45,7 +47,7 @@
                 .Where(a => a != null)
                 .Select(a => a.Name);
 
-            var dictionary = typeof(InMemoryAuthorizationService)
+            var dictionary = typeof(InMemoryAuthorizationManager)
                 .GetField("authorizations", BindingFlags.NonPublic | BindingFlags.Static)
                 .GetValue(null);
 
@@ -59,7 +61,7 @@
             {
                 message = missingPermissions.Count() + " permission" +
                     (missingPermissions.Count() != 1 ? "s" : string.Empty) +
-                    " not assigned to any roles in [InMemoryAuthorizationService]:\n" +
+                    " not assigned to any roles in [InMemoryAuthorizationManager]:\n" +
                     missingPermissions.Aggregate((a, b) => a + ",\n" + b);
             }
 

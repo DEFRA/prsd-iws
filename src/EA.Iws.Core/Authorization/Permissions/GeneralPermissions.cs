@@ -16,8 +16,6 @@
 
         public const string CanEditAddressBook = "Can Edit Address Book";
 
-        public const string CanSendFeedbackData = "Can Send Feedback Data";
-
         public const string CanViewSearchResults = "Can View Search Results";
     }
 }

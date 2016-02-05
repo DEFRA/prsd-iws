@@ -59,7 +59,8 @@
                 new NotificationApplicationRepository(context, new NotificationApplicationAuthorization(context, GetUserContext())),
                 new FacilityCollectionCopy(),
                 new CarrierCollectionCopy(),
-                new ProducerCollectionCopy());
+                new ProducerCollectionCopy(),
+                new MeansOfTransportToMeansOfTransportCopy());
 
             preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
 

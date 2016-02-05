@@ -62,10 +62,8 @@
                 builder.RegisterType<AsposePdfGenerator>().As<IPdfGenerator>();
             }
 
-            builder.RegisterType<AuthorizationManager>().As<IAuthorizationManager>();
-            builder.RegisterType<UserRoleService>().As<IUserRoleService>();
+            builder.RegisterType<InMemoryAuthorizationManager>().As<IAuthorizationManager>();
             builder.RegisterType<RequestAuthorizationAttributeCache>().AsSelf().SingleInstance();
-            builder.RegisterType<InMemoryAuthorizationService>().As<IAuthorizationService>();
 
             builder.RegisterType<AddressBuilder>().InstancePerDependency().AsSelf();
             

@@ -59,6 +59,12 @@
 
         public virtual DbSet<ImportFinancialGuarantee> ImportFinancialGuarantees { get; set; }
 
+        public virtual DbSet<ImportFinancialGuaranteeApproval> ImportFinancialGuaranteeApprovals { get; set; }
+
+        public virtual DbSet<ImportFinancialGuaranteeRefusal> ImportFinancialGuaranteeRefusals { get; set; }
+
+        public virtual DbSet<ImportFinancialGuaranteeRelease> ImportFinancialGuaranteeReleases { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

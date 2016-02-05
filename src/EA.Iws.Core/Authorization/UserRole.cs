@@ -1,8 +1,7 @@
-﻿namespace EA.Iws.RequestHandlers.Authorization
+﻿namespace EA.Iws.Core.Authorization
 {
     public enum UserRole
     {
-        Unauthenticated,
         External,
         Internal,
         TeamLeader
