@@ -10,15 +10,17 @@
 
 <p>Before we can consider your prenotification, you'll need to:</p>
 
-<ol class="list-number">
-    <li>
-        download the
-        @Html.ActionLink("IWS Movement", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "ExportMovement" }, new { })
-        (.pdf) file
-    </li>
-    <li>print the file</li>
-    <li>sign it</li>
-</ol>
+<div class="form-group">
+    <ol class="list-number">
+        <li>
+            download the
+            @Html.ActionLink("IWS Movement", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "ExportMovement" }, new { })
+            (.pdf) file
+        </li>
+        <li>print the file</li>
+        <li>sign it</li>
+    </ol>
+</div>
 
 @Html.ActionLink(Constants.ContinueButtonText, "Index", "Options",
         new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] },

@@ -61,6 +61,24 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All your prenotification have been uploaded.
+        /// </summary>
+        public static string NoMovementText {
+            get {
+                return ResourceManager.GetString("NoMovementText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to notification options.
+        /// </summary>
+        public static string NotificationOptionsLinkText {
+            get {
+                return ResourceManager.GetString("NotificationOptionsLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a prenotification.
         /// </summary>
         public static string TabTitle {

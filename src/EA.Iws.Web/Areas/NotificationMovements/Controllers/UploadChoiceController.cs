@@ -27,32 +27,23 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid notificationId)
+        public async Task<ActionResult> Index(Guid notificationId)
         {
-            return View(new UploadChoiceViewModel {NotificationId = notificationId});
+            var result = await mediator.SendAsync(new GetNewMovementIdsByNotificationId(notificationId));
+
+            return View(new UploadChoiceViewModel(notificationId, result));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid notificationId, UploadChoiceViewModel model)
+        public ActionResult Index(Guid notificationId, UploadChoiceViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var status = await mediator.SendAsync(new CheckMovementNumberValid(notificationId, model.Number.Value));
-
-            if (status == MovementNumberStatus.Valid)
-            {
-                var movementId = await mediator.SendAsync(new GetMovementIdByNumber(notificationId, model.Number.Value));
-
-                return RedirectToAction("Index", "Submit", new { id = movementId, area = "ExportMovement" });
-            }
-
-            ModelState.AddModelError("Number", ValidationMessages[status]);
-
-            return View(model);
+            return RedirectToAction("Index", "Submit", new { id = model.RadioButtons.SelectedValue, area = "ExportMovement" });
         }
     }
 }

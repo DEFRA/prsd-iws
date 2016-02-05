@@ -339,6 +339,7 @@
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValidHandler.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
+    <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
