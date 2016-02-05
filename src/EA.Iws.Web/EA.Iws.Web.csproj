@@ -392,6 +392,7 @@
     <Content Include="Areas\NotificationApplication\Views\Annex\Success.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Refuse.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Release.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Options\DownloadUnavailable.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1672,6 +1673,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResubmissionSuccessResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Options\DownloadUnavailableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DownloadUnavailableResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Shared\CountryNotListedDisclosureResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3279,6 +3285,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\MeansOfTransport\MeansOfTransportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MeansOfTransportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\DownloadUnavailableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DownloadUnavailableResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

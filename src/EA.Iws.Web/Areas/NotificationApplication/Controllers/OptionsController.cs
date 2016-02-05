@@ -44,5 +44,13 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult DownloadUnavailable(Guid id)
+        {
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
+        }
     }
 }
