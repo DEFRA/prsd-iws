@@ -268,8 +268,8 @@
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
 
-            Assert.Equal(sourceNotification.OperationInfos.Select(oi => oi.OperationCode).OrderBy(oc => oc.Value),
-                copiedNotification.OperationInfos.Select(oi => oi.OperationCode).OrderBy(oc => oc.Value));
+            Assert.Equal(sourceNotification.OperationInfos.Select(oi => oi.OperationCode).OrderBy(oc => oc),
+                copiedNotification.OperationInfos.Select(oi => oi.OperationCode).OrderBy(oc => oc));
             Assert.Equal(sourceNotification.TechnologyEmployed.Details, copiedNotification.TechnologyEmployed.Details);
             Assert.Equal(sourceNotification.ReasonForExport, copiedNotification.ReasonForExport);
         }

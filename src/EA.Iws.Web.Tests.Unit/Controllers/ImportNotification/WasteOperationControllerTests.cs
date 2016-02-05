@@ -31,13 +31,13 @@
         {
             var model = new WasteOperationViewModel()
             {
-                Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>(),
+                Codes = CheckBoxCollectionViewModel.CreateFromEnum<OperationCode>(),
                 ImportNotificationId = importNotificationId,
                 NotificationType = NotificationType.Recovery,
                 TechnologyEmployed = "test"
             };
 
-            model.Codes.SetSelectedValues(new[] { RecoveryCode.R1, RecoveryCode.R2 });
+            model.Codes.SetSelectedValues(new[] { OperationCode.R1, OperationCode.R2 });
 
             await controller.Index(importNotificationId, model);
 
@@ -45,8 +45,8 @@
                 p.ImportNotificationId == importNotificationId &&
                 p.Data.ImportNotificationId == importNotificationId &&
                 p.Data.TechnologyEmployed == "test" &&
-                p.Data.OperationCodes.Contains(1) &&
-                p.Data.OperationCodes.Contains(2))))
+                p.Data.OperationCodes.Contains(OperationCode.R1) &&
+                p.Data.OperationCodes.Contains(OperationCode.R2))))
                 .MustHaveHappened();
         }
     }

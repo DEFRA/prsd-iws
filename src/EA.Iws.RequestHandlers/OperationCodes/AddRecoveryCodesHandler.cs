@@ -1,34 +1,28 @@
 ﻿namespace EA.Iws.RequestHandlers.OperationCodes
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.OperationCodes;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
-    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.OperationCodes;
 
     internal class AddRecoveryCodesHandler : IRequestHandler<AddRecoveryCodes, Guid>
     {
         private readonly IwsContext context;
-        private readonly IMap<IList<RecoveryCode>, IList<OperationCode>> mapper;
+        private readonly INotificationApplicationRepository notificationRepository;
 
-        public AddRecoveryCodesHandler(IwsContext context, IMap<IList<RecoveryCode>, IList<OperationCode>> mapper)
+        public AddRecoveryCodesHandler(IwsContext context, INotificationApplicationRepository notificationRepository)
         {
             this.context = context;
-            this.mapper = mapper;
+            this.notificationRepository = notificationRepository;
         }
 
         public async Task<Guid> HandleAsync(AddRecoveryCodes command)
         {
-            var recoveryCodes = mapper.Map(command.RecoveryCodes);
+            var notification = await notificationRepository.GetById(command.NotificationId);
 
-            var notification = await context.GetNotificationApplication(command.NotificationId);
-
-            notification.SetOperationCodes(recoveryCodes);
+            notification.SetOperationCodes(command.RecoveryCodes);
 
             await context.SaveChangesAsync();
 

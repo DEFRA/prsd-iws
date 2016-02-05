@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.16027.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.16027-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16036.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.16036.1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -165,12 +165,8 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
-    <Compile Include="OperationCodes\OperationCode.cs" />
-    <Compile Include="OperationCodes\OperationCodeResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OperationCodeResources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="OperationCodes\OperationCodeFred.cs" />
+    <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
@@ -212,9 +208,6 @@
     <Compile Include="NotificationAssessment\NotificationStatus.cs" />
     <Compile Include="Notification\NotificationApplicationCompletionProgress.cs" />
     <Compile Include="Notification\SpecialHandlingData.cs" />
-    <Compile Include="OperationCodes\DisposalCode.cs" />
-    <Compile Include="OperationCodes\OperationCodeData.cs" />
-    <Compile Include="OperationCodes\RecoveryCode.cs" />
     <Compile Include="Organisations\OrganisationData.cs" />
     <Compile Include="PackagingType\PackagingData.cs" />
     <Compile Include="PackagingType\PackagingType.cs" />
@@ -265,10 +258,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OperationCodes\OperationCodeResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>OperationCodeResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Shared\AddressDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressDataResources.Designer.cs</LastGenOutput>

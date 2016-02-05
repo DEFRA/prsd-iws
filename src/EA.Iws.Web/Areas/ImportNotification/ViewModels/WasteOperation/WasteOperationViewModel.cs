@@ -22,11 +22,11 @@
 
             if (details.NotificationType == NotificationType.Recovery)
             {
-                Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>();
+                //Codes = CheckBoxCollectionViewModel.CreateFromEnum<RecoveryCode>();
             }
             else
             {
-                Codes = CheckBoxCollectionViewModel.CreateFromEnum<DisposalCode>();
+                //Codes = CheckBoxCollectionViewModel.CreateFromEnum<DisposalCode>();
             }
 
             if (data.OperationCodes != null)
@@ -46,9 +46,9 @@
         [Display(Name = "TechnologyEmployed", ResourceType = typeof(WasteOperationViewModelResources))]
         public string TechnologyEmployed { get; set; }
 
-        public int[] SelectedCodes
+        public OperationCode[] SelectedCodes
         {
-            get { return Codes.PossibleValues.Where(p => p.Selected).Select(p => int.Parse(p.Value)).ToArray(); }
+            get { return Codes.PossibleValues.Where(p => p.Selected).Select(p => (OperationCode)Enum.Parse(typeof(OperationCode), p.Value)).ToArray(); }
         }
     }
 }

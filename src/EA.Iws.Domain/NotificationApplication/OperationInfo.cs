@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
+    using Core.OperationCodes;
     using Prsd.Core.Domain;
 
     public class OperationInfo : Entity

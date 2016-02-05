@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Core.Notification.Overview;
     using Core.OperationCodes;
     using Core.Shared;
@@ -27,8 +28,8 @@
             {
                 NotificationId = notification.Id,
                 NotificationType = notification.NotificationType == NotificationType.Disposal
-                        ? Core.Shared.NotificationType.Disposal
-                        : Core.Shared.NotificationType.Recovery,
+                        ? NotificationType.Disposal
+                        : NotificationType.Recovery,
                 PreconstedAnswer = preconsentedAnswerMap.Map(notification),
                 TechnologyEmployed = technologyEmployedMap.Map(notification),
                 ReasonForExport = notification.ReasonForExport ?? string.Empty,
@@ -36,19 +37,9 @@
             };
         }
 
-        private static List<OperationCodeData> GetOperationCodes(NotificationApplication notification)
+        private static List<OperationCode> GetOperationCodes(NotificationApplication notification)
         {
-            var operationCodes = new List<OperationCodeData>();
-            foreach (var operationInfo in notification.OperationInfos)
-            {
-                var ocd = new OperationCodeData
-                {
-                    Code = operationInfo.OperationCode.DisplayName,
-                    Value = operationInfo.OperationCode.Value
-                };
-                operationCodes.Add(ocd);
-            }
-            return operationCodes;
+            return notification.OperationInfos.Select(o => o.OperationCode).ToList();
         }
     }
 }

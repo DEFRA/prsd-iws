@@ -1,9 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings.ImportNotification
 {
     using System.Linq;
-    using Domain;
+    using Core.OperationCodes;
     using Domain.ImportNotification;
-    using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using ImportNotification = Domain.ImportNotification.ImportNotification;
     using WasteOperation = Core.ImportNotification.Draft.WasteOperation;
@@ -15,7 +14,7 @@
         {
             var wasteOperation = new Domain.ImportNotification.WasteOperation(source.ImportNotificationId,
                 OperationCodesList.CreateForNotification(parameter,
-                    source.OperationCodes.Select(Enumeration.FromValue<OperationCode>)));
+                    source.OperationCodes.Select(o => (OperationCode)o)));
 
             if (!string.IsNullOrWhiteSpace(source.TechnologyEmployed))
             {

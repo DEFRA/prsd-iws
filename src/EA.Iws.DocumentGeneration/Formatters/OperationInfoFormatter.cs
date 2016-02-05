@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.NotificationApplication;
+    using Prsd.Core.Helpers;
 
     internal class OperationInfoFormatter
     {
@@ -15,8 +16,8 @@
             }
 
             return string.Join(", ", operationInfos
-                .OrderBy(c => c.OperationCode.Value)
-                .Select(v => v.OperationCode.DisplayName));
+                .OrderBy(c => c.OperationCode)
+                .Select(v => EnumHelper.GetDisplayName(v.OperationCode)));
         }
     }
 }
