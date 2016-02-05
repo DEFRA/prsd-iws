@@ -117,25 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddNew" xml:space="preserve">
-    <value>Add new</value>
+  <data name="Tab" xml:space="preserve">
+    <value>Download unavailable</value>
   </data>
-  <data name="AddNewOrg" xml:space="preserve">
-    <value>Add a new organisation</value>
-  </data>
-  <data name="ButtonText" xml:space="preserve">
-    <value>Use this organisation</value>
-  </data>
-  <data name="Header" xml:space="preserve">
-    <value>Similar organisations</value>
-  </data>
-  <data name="HeaderDescription" xml:space="preserve">
-    <value>Select an organisation from the options below or add a organisation.</value>
-  </data>
-  <data name="Organisation" xml:space="preserve">
-    <value>Organisation</value>
+  <data name="Text" xml:space="preserve">
+    <value>While this notification is incomplete, you won't be able to download or print it. Once you have completed and submitted it online, you can download, print, sign and post it to us.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Similar organisations</value>
+    <value>You can't download or print your notification yet</value>
   </data>
 </root>

@@ -117,25 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddNew" xml:space="preserve">
-    <value>Add new</value>
+  <data name="AfterDownloadLinkText" xml:space="preserve">
+    <value> and print it out. Please make sure you sign and date  block 17 of the document.</value>
   </data>
-  <data name="AddNewOrg" xml:space="preserve">
-    <value>Add a new organisation</value>
+  <data name="DownloadLinkText" xml:space="preserve">
+    <value>Download you notification</value>
   </data>
-  <data name="ButtonText" xml:space="preserve">
-    <value>Use this organisation</value>
+  <data name="NotificationOptionLinkText" xml:space="preserve">
+    <value>Go to notification options</value>
   </data>
-  <data name="Header" xml:space="preserve">
-    <value>Similar organisations</value>
+  <data name="ReferenceAnnexesDisclosureText" xml:space="preserve">
+    <value>If the notifier and original producer aren't the same person, then both the original and new producers need to sign. However, this may not be practicable when there are several producers. Definitions around this practicability can be found in national legislation.</value>
   </data>
-  <data name="HeaderDescription" xml:space="preserve">
-    <value>Select an organisation from the options below or add a organisation.</value>
+  <data name="ReferenceAnnexesDisclosureTitle" xml:space="preserve">
+    <value>How to reference your annexes</value>
   </data>
-  <data name="Organisation" xml:space="preserve">
-    <value>Organisation</value>
+  <data name="ReferenceAnnexesTitle" xml:space="preserve">
+    <value>You can also start to reference your annexes.</value>
+  </data>
+  <data name="TabTitle" xml:space="preserve">
+    <value>Download notification</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Similar organisations</value>
+    <value>Print and sign your notification</value>
   </data>
 </root>

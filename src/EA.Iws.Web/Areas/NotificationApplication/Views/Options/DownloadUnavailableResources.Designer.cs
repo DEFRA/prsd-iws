@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Views.Registration {
+namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Views.Registration {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SelectOrganisationResources {
+    public class DownloadUnavailableResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SelectOrganisationResources() {
+        internal DownloadUnavailableResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Views.Registration {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Views.Registration.SelectOrganisationResources", typeof(SelectOrganisationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Options.DownloadUnavailableResourc" +
+                            "es", typeof(DownloadUnavailableResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,61 +62,25 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new.
+        ///   Looks up a localized string similar to Download unavailable.
         /// </summary>
-        public static string AddNew {
+        public static string Tab {
             get {
-                return ResourceManager.GetString("AddNew", resourceCulture);
+                return ResourceManager.GetString("Tab", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new organisation.
+        ///   Looks up a localized string similar to While this notification is incomplete, you won&apos;t be able to download or print it. Once you have completed and submitted it online, you can download, print, sign and post it to us..
         /// </summary>
-        public static string AddNewOrg {
+        public static string Text {
             get {
-                return ResourceManager.GetString("AddNewOrg", resourceCulture);
+                return ResourceManager.GetString("Text", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this organisation.
-        /// </summary>
-        public static string ButtonText {
-            get {
-                return ResourceManager.GetString("ButtonText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Similar organisations.
-        /// </summary>
-        public static string Header {
-            get {
-                return ResourceManager.GetString("Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select an organisation from the options below or add a organisation..
-        /// </summary>
-        public static string HeaderDescription {
-            get {
-                return ResourceManager.GetString("HeaderDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Organisation.
-        /// </summary>
-        public static string Organisation {
-            get {
-                return ResourceManager.GetString("Organisation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Similar organisations.
+        ///   Looks up a localized string similar to You can&apos;t download or print your notification yet.
         /// </summary>
         public static string Title {
             get {

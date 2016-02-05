@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Views.Registration {
+namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Views.Registration {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SelectOrganisationResources {
+    public class PrintResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SelectOrganisationResources() {
+        internal PrintResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Views.Registration {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Views.Registration.SelectOrganisationResources", typeof(SelectOrganisationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.PrintResources", typeof(PrintResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,61 +61,70 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new.
+        ///   Looks up a localized string similar to  and print it out. Please make sure you sign and date  block 17 of the document..
         /// </summary>
-        public static string AddNew {
+        public static string AfterDownloadLinkText {
             get {
-                return ResourceManager.GetString("AddNew", resourceCulture);
+                return ResourceManager.GetString("AfterDownloadLinkText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new organisation.
+        ///   Looks up a localized string similar to Download you notification.
         /// </summary>
-        public static string AddNewOrg {
+        public static string DownloadLinkText {
             get {
-                return ResourceManager.GetString("AddNewOrg", resourceCulture);
+                return ResourceManager.GetString("DownloadLinkText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this organisation.
+        ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
-        public static string ButtonText {
+        public static string NotificationOptionLinkText {
             get {
-                return ResourceManager.GetString("ButtonText", resourceCulture);
+                return ResourceManager.GetString("NotificationOptionLinkText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Similar organisations.
+        ///   Looks up a localized string similar to If the notifier and original producer aren&apos;t the same person, then both the original and new producers need to sign. However, this may not be practicable when there are several producers. Definitions around this practicability can be found in national legislation..
         /// </summary>
-        public static string Header {
+        public static string ReferenceAnnexesDisclosureText {
             get {
-                return ResourceManager.GetString("Header", resourceCulture);
+                return ResourceManager.GetString("ReferenceAnnexesDisclosureText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an organisation from the options below or add a organisation..
+        ///   Looks up a localized string similar to How to reference your annexes.
         /// </summary>
-        public static string HeaderDescription {
+        public static string ReferenceAnnexesDisclosureTitle {
             get {
-                return ResourceManager.GetString("HeaderDescription", resourceCulture);
+                return ResourceManager.GetString("ReferenceAnnexesDisclosureTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Organisation.
+        ///   Looks up a localized string similar to You can also start to reference your annexes..
         /// </summary>
-        public static string Organisation {
+        public static string ReferenceAnnexesTitle {
             get {
-                return ResourceManager.GetString("Organisation", resourceCulture);
+                return ResourceManager.GetString("ReferenceAnnexesTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Similar organisations.
+        ///   Looks up a localized string similar to Download notification.
+        /// </summary>
+        public static string TabTitle {
+            get {
+                return ResourceManager.GetString("TabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print and sign your notification.
         /// </summary>
         public static string Title {
             get {
