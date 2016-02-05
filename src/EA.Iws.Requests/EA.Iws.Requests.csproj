@@ -153,6 +153,7 @@
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
+    <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />

@@ -13,18 +13,28 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
-        @Html.Gds().LabelFor(m => m.Number, false)
-        @Html.Gds().ValidationMessageFor(m => m.Number)
-        @Html.Gds().TextBoxFor(m => m.Number, new { type = "number" })
-    </div>
+    if (Model.NoMovementsToList)
+    {
+        <p>@Resource.NoMovementText</p>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
-    </div>
+        @Html.ActionLink(Resource.NotificationOptionsLinkText, "Index", "Options",
+                new { id = Model.NotificationId, area = "NotificationApplication" },
+                new { @class = "button" })
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.Gds().ValidationMessageFor(m => m.RadioButtons.SelectedValue)
+            @Html.EditorFor(m => m.RadioButtons)
+        </div>
 
-    <div>
-        @Html.ActionLink("Go to notification options", "Index", "Options",
+        <div class="form-group">
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+
+        <div>
+            @Html.ActionLink(Resource.NotificationOptionsLinkText, "Index", "Options",
                 new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-    </div>
+        </div>
+    }
 }
