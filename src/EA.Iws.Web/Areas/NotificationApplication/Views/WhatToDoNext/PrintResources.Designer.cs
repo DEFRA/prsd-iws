@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download you notification.
+        ///   Looks up a localized string similar to Download your notification.
         /// </summary>
         public static string DownloadLinkText {
             get {
