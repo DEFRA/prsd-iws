@@ -166,7 +166,7 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
-    <Compile Include="OperationCodes\OperationCodeFred.cs" />
+    <Compile Include="OperationCodes\OperationCode.cs" />
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Rules\MessageLevel.cs" />

@@ -1,12 +1,16 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.WasteOperations;
+    using Core.OperationCodes;
+    using Core.TechnologyEmployed;
     using FakeItEasy;
     using Prsd.Core.Mediator;
+    using Requests.TechnologyEmployed;
     using Xunit;
 
     public class WasteOperationsControllerTests
@@ -16,7 +20,17 @@
 
         public WasteOperationsControllerTests()
         {
-            wasteOperationsController = new WasteOperationsController(A.Fake<IMediator>());
+            var mediator = A.Fake<IMediator>();
+            wasteOperationsController = new WasteOperationsController(mediator);
+
+            A.CallTo(() => mediator.SendAsync(A<GetTechnologyEmployed>.Ignored))
+                .Returns(new TechnologyEmployedData
+                {
+                    OperationCodes = new List<OperationCode>()
+                });
+
+            A.CallTo(() => mediator.SendAsync(A<SetTechnologyEmployed>.Ignored))
+                .Returns(Guid.Empty);
         }
 
         [Fact]
@@ -25,24 +39,6 @@
             var result = await wasteOperationsController.TechnologyEmployed(notificationId) as ViewResult;
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result.ViewName);
-        }
-
-        [Fact]
-        public async Task Valid_TechnologyEmployed_RedirectsTo_ReasonForExport()
-        {
-            var model = new TechnologyEmployedViewModel()
-            {
-                NotificationId = notificationId,
-                Details = "any valid value",
-                FurtherDetails = "any value",
-                AnnexProvided = false
-            };
-
-            var result = await wasteOperationsController.TechnologyEmployed(model) as RedirectToRouteResult;
-            Assert.NotNull(result);
-            Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("ReasonForExport", result.RouteValues["controller"]);
-            Assert.Equal(notificationId, result.RouteValues["id"]);
         }
 
         [Fact]
