@@ -13,12 +13,9 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group">
-        @Html.HiddenFor(m => m.NotificationId)
-    </div>
 
     @Html.Partial("_OperationCodes", Model)
-
+    
     <div class="form-group">
         <input type="submit" class="button" value="@Constants.ContinueButtonText">
     </div>

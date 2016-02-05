@@ -37,8 +37,8 @@
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core, Version=1.0.16027.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.DataAccess.1.0.16027-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16036.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.16036.1\lib\net452\EA.Prsd.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EA.Prsd.Core.DataAccess, Version=1.0.16027.2, Culture=neutral, processorArchitecture=MSIL">
@@ -184,7 +184,6 @@
     <Compile Include="Mappings\Exports\CarrierMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerMapping.cs" />
     <Compile Include="Mappings\Exports\OperationCodesEntityMapping.cs" />
-    <Compile Include="Mappings\Common\OperationCodesMapping.cs" />
     <Compile Include="Mappings\Exports\ShipmentInfoMapping.cs" />
     <Compile Include="Mappings\Exports\TransportRouteMapping.cs" />
     <Compile Include="Mappings\Common\UKCompetentAuthorityMapping.cs" />

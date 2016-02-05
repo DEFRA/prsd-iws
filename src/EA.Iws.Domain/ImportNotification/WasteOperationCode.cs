@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
+    using Core.OperationCodes;
     using Prsd.Core.Domain;
 
     public class WasteOperationCode : Entity

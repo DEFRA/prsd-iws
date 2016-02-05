@@ -12,7 +12,7 @@
             return new Core.WasteOperation
             {
                 TechnologyEmployed = source.TechnologyEmployed,
-                OperationCodes = source.Codes.Select(x => x.OperationCode.Value).ToArray()
+                OperationCodes = source.Codes.Select(x => x.OperationCode).ToList()
             };
         }
     }

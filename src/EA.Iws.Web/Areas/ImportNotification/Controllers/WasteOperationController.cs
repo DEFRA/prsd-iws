@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
@@ -35,7 +36,7 @@
         {
             var wasteOperation = new WasteOperation(id)
             {
-                OperationCodes = model.SelectedCodes,
+                OperationCodes = model.SelectedCodes.ToArray(),
                 TechnologyEmployed = model.TechnologyEmployed
             };
 

@@ -11,7 +11,7 @@
         public Guid NotificationId { get; set; }
         public NotificationType NotificationType { get; set; }
         public string PreconstedAnswer { get; set; }
-        public List<OperationCodeData> OperationCodes { get; set; }
+        public List<OperationCode> OperationCodes { get; set; }
         public TechnologyEmployedData TechnologyEmployed { get; set; }
         public string ReasonForExport { get; set; }
     }

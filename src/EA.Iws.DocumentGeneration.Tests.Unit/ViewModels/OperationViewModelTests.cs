@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.DocumentGeneration.Tests.Unit.ViewModels
 {
     using System.Collections.Generic;
+    using Core.OperationCodes;
     using DocumentGeneration.Formatters;
     using DocumentGeneration.ViewModels;
-    using Domain;
     using Domain.NotificationApplication;
     using TestHelpers.DomainFakes;
     using Xunit;

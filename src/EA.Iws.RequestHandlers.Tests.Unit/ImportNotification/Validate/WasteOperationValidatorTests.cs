@@ -2,6 +2,7 @@
 {
     using System;
     using Core.ImportNotification.Draft;
+    using Core.OperationCodes;
     using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
@@ -30,7 +31,7 @@
         public void HasDisposalAndRecoveryCodes_HasValidationError()
         {
             var wasteOperation = GetValidWasteOperation();
-            wasteOperation.OperationCodes = new[] { 1, 2, 3, 14, 15, 16 };
+            wasteOperation.OperationCodes = new[] { OperationCode.D1, OperationCode.D2, OperationCode.D3, OperationCode.R1, OperationCode.R2, OperationCode.R3 };
 
             validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
         }
@@ -39,7 +40,7 @@
         public void HasNoOperationCodes_ResultIsInvalid()
         {
             var wasteOperation = GetValidWasteOperation();
-            wasteOperation.OperationCodes = new int[] { };
+            wasteOperation.OperationCodes = new OperationCode[] { };
 
             validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
         }
@@ -69,7 +70,7 @@
         {
             return new WasteOperation(importNotificationId)
             {
-                OperationCodes = new[] { 1, 2, 3 },
+                OperationCodes = new[] { OperationCode.D1, OperationCode.D2, OperationCode.D3 },
                 TechnologyEmployed = "technology employed"
             };
         }

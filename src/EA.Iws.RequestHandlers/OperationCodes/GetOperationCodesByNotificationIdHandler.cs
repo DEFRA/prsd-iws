@@ -1,38 +1,27 @@
 ﻿namespace EA.Iws.RequestHandlers.OperationCodes
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.OperationCodes;
-    using DataAccess;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.OperationCodes;
 
-    internal class GetOperationCodesByNotificationIdHandler : IRequestHandler<GetOperationCodesByNotificationId, IList<OperationCodeData>>
+    internal class GetOperationCodesByNotificationIdHandler : IRequestHandler<GetOperationCodesByNotificationId, IList<OperationCode>>
     {
-        private readonly IwsContext context;
+        private readonly INotificationApplicationRepository notificationRepository;
 
-        public GetOperationCodesByNotificationIdHandler(IwsContext context)
+        public GetOperationCodesByNotificationIdHandler(INotificationApplicationRepository notificationRepository)
         {
-            this.context = context;
+            this.notificationRepository = notificationRepository;
         }
 
-        public async Task<IList<OperationCodeData>> HandleAsync(GetOperationCodesByNotificationId query)
+        public async Task<IList<OperationCode>> HandleAsync(GetOperationCodesByNotificationId query)
         {
-            var notification = await context.GetNotificationApplication(query.NotificationId);
-            var codesList = new List<OperationCodeData>();
+            var notification = await notificationRepository.GetById(query.NotificationId);
 
-            foreach (var operationInfo in notification.OperationInfos)
-            {
-                var ocd = new OperationCodeData
-                {
-                    Code = operationInfo.OperationCode.DisplayName, 
-                    Value = operationInfo.OperationCode.Value
-                };
-                codesList.Add(ocd);
-            }
-
-            return codesList;
+            return notification.OperationInfos.Select(o => o.OperationCode).ToList();
         }
     }
 }

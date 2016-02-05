@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.TechnologyEmployedViewModel
 @{
     ViewBag.Title = TechnologyEmployedResources.Title;
@@ -18,9 +19,10 @@
         <div class="form-group">
             <p>@TechnologyEmployedResources.ChosenCodes</p>
 
-            @foreach (string code in Model.OperationCodes)
+            @for (int i = 0; i < Model.OperationCodes.Count; i++)
             {
-                <span class="operation-code-list">@code</span>
+                <span class="operation-code-list">@EnumHelper.GetDisplayName(Model.OperationCodes[i])</span>
+                @Html.HiddenFor(m => m.OperationCodes[i])
             }
         </div>
 

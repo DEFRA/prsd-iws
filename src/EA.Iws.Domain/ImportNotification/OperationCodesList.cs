@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.Extensions;
+    using Core.OperationCodes;
 
     public class OperationCodesList : IEnumerable<WasteOperationCode>
     {
@@ -30,7 +31,7 @@
                 throw new ArgumentException("Operation codes must be unique", "operationCodes");
             }
 
-            if (codes.Any(p => p.NotificationType != notification.NotificationType))
+            if (codes.Any(p => !OperationCodeMetadata.IsCodeOfOperationType(p, notification.NotificationType)))
             {
                 throw new ArgumentException(
                     string.Format("This notification {0} can only have {1} operation codes.",
