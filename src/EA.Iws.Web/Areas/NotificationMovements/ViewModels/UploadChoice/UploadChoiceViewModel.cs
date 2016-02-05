@@ -26,7 +26,7 @@
 
         public bool NoMovementsToList
         {
-            get { return RadioButtons == null || RadioButtons.PossibleValues.Any(); }
+            get { return RadioButtons == null || RadioButtons.PossibleValues.Count == 0; }
         }
     }
 }
