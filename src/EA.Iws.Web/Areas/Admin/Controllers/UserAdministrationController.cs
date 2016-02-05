@@ -6,11 +6,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin;
+    using Core.Authorization.Permissions;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Admin.UserAdministration;
     using ViewModels.UserAdministration;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(UserAdministrationPermissions.CanApproveNewInternalUser)]
     public class UserAdministrationController : Controller
     {
         private readonly IMediator mediator;
