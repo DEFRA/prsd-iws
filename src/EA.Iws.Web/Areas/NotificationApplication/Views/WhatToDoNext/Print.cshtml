@@ -18,28 +18,27 @@
             @Resource.AfterDownloadLinkText
         </div>
 
-
-	<div class="form-group">
-	    @if (Model.CompetentAuthority == UKCompetentAuthority.England)
+	    <div class="form-group">
+	        @if (Model.CompetentAuthority == UKCompetentAuthority.England)
 		    {
-		@Html.Partial("_EaBlock17Disclosure")
-	    }
+		        @Html.Partial("_EaBlock17Disclosure")
+	        }
 
-	    @if (Model.CompetentAuthority == UKCompetentAuthority.NorthernIreland)
+	        @if (Model.CompetentAuthority == UKCompetentAuthority.NorthernIreland)
 		    {
-		@Html.Partial("_NieaBlock17Disclosure")
-	    }
+		        @Html.Partial("_NieaBlock17Disclosure")
+	        }
 
-	    @if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
-	    {
-		@Html.Partial("_SepaBlock17Disclosure")
-	    }
+	        @if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
+	        {
+		        @Html.Partial("_SepaBlock17Disclosure")
+	        }
 
-	    @if (Model.CompetentAuthority == UKCompetentAuthority.Wales)
-	    {
-		@Html.Partial("_NrwBlock17Disclosure")
-	    }
-	</div>
+	        @if (Model.CompetentAuthority == UKCompetentAuthority.Wales)
+	        {
+		        @Html.Partial("_NrwBlock17Disclosure")
+	        }
+	    </div>
 
         <div>@Resource.ReferenceAnnexesTitle</div>
 
