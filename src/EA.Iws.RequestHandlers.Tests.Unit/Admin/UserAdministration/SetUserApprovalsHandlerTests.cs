@@ -1,40 +1,46 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.UserAdministration
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Security;
     using System.Threading.Tasks;
     using Core.Admin;
+    using Core.Admin.UserAdministration;
+    using Core.Authorization;
     using DataAccess;
+    using DataAccess.Identity;
+    using FakeItEasy;
+    using Microsoft.AspNet.Identity;
     using RequestHandlers.Admin.UserAdministration;
     using Requests.Admin.UserAdministration;
     using Xunit;
 
     public class SetUserApprovalsHandlerTests
     {
-        private readonly SetUserApprovalsHandler handler;
-        private readonly IwsContext context;
-        private readonly TestUserContext userContext;
         private readonly SetUserApprovals approvePendingAdminMessage;
+        private readonly IwsContext context;
         private readonly Func<Guid, IwsContext, InternalUserStatus?> getUserStatusFromContext;
+        private readonly SetUserApprovalsHandler handler;
+        private readonly TestUserContext userContext;
 
         public SetUserApprovalsHandlerTests()
         {
-            this.userContext = new TestUserContext(Guid.Empty);
-            this.context = new TestIwsContext(userContext);
+            userContext = new TestUserContext(Guid.Empty);
+            context = new TestIwsContext(userContext);
 
             context.InternalUsers.AddRange(new InternalUserCollection().Users);
+            var userManager = A.Fake<UserManager<ApplicationUser>>();
 
-            handler = new SetUserApprovalsHandler(context, userContext);
+            handler = new SetUserApprovalsHandler(context, userContext, userManager);
 
             approvePendingAdminMessage = new SetUserApprovals(new[]
             {
-                new KeyValuePair<Guid, ApprovalAction>(InternalUserCollection.AdminPendingId,
-                    ApprovalAction.Approve)
+                new UserApproval(InternalUserCollection.AdminPendingId,
+                    ApprovalAction.Approve, UserRole.Administrator)
             });
 
-            getUserStatusFromContext = (id, ctxt) => { return ctxt.InternalUsers.Single(u => u.UserId == id.ToString()).Status; };
+            getUserStatusFromContext =
+                (id, ctxt) => { return ctxt.InternalUsers.Single(u => u.UserId == id.ToString()).Status; };
         }
 
         [Fact]
@@ -61,7 +67,8 @@
             var result = await handler.HandleAsync(approvePendingAdminMessage);
 
             Assert.True(result);
-            Assert.Equal(InternalUserStatus.Approved, getUserStatusFromContext(InternalUserCollection.AdminPendingUserId, context));
+            Assert.Equal(InternalUserStatus.Approved,
+                getUserStatusFromContext(InternalUserCollection.AdminPendingUserId, context));
         }
 
         [Fact]
@@ -71,11 +78,12 @@
 
             var result = await handler.HandleAsync(new SetUserApprovals(new[]
             {
-                new KeyValuePair<Guid, ApprovalAction>(InternalUserCollection.AdminPendingId, ApprovalAction.Reject) 
+                new UserApproval(InternalUserCollection.AdminPendingId, ApprovalAction.Reject, null)
             }));
 
             Assert.True(result);
-            Assert.Equal(InternalUserStatus.Rejected, getUserStatusFromContext(InternalUserCollection.AdminPendingUserId, context));
+            Assert.Equal(InternalUserStatus.Rejected,
+                getUserStatusFromContext(InternalUserCollection.AdminPendingUserId, context));
         }
 
         [Fact]
@@ -85,15 +93,16 @@
 
             var message = new SetUserApprovals(new[]
             {
-                new KeyValuePair<Guid, ApprovalAction>(Guid.Empty, ApprovalAction.Approve),
-                new KeyValuePair<Guid, ApprovalAction>(InternalUserCollection.AdminPendingId,
-                    ApprovalAction.Approve)
+                new UserApproval(Guid.Empty, ApprovalAction.Approve, UserRole.Administrator),
+                new UserApproval(InternalUserCollection.AdminPendingId,
+                    ApprovalAction.Approve, UserRole.Administrator)
             });
 
             var result = await handler.HandleAsync(message);
 
             Assert.False(result);
-            Assert.Equal(InternalUserStatus.Pending, getUserStatusFromContext(InternalUserCollection.AdminPendingUserId, context));
+            Assert.Equal(InternalUserStatus.Pending,
+                getUserStatusFromContext(InternalUserCollection.AdminPendingUserId, context));
         }
     }
 }
