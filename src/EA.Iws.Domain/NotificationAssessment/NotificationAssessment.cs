@@ -128,7 +128,8 @@
             stateMachine.Configure(NotificationStatus.NotificationReceived)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(receivedTrigger, OnReceived)
-                .PermitIf(Trigger.AssessmentCommenced, NotificationStatus.InAssessment, () => Dates.PaymentReceivedDate.HasValue);
+                .PermitIf(Trigger.AssessmentCommenced, NotificationStatus.InAssessment, () => Dates.PaymentReceivedDate.HasValue)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.InAssessment)
                 .SubstateOf(NotificationStatus.InDetermination)
@@ -139,15 +140,16 @@
             stateMachine.Configure(NotificationStatus.ReadyToTransmit)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(completeTrigger, OnCompleted)
-                .Permit(Trigger.Transmit, NotificationStatus.Transmitted);
+                .Permit(Trigger.Transmit, NotificationStatus.Transmitted)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.Transmitted)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(transmitTrigger, OnTransmitted)
-                .Permit(Trigger.Acknowledged, NotificationStatus.DecisionRequiredBy);
+                .Permit(Trigger.Acknowledged, NotificationStatus.DecisionRequiredBy)
+                .Permit(Trigger.Object, NotificationStatus.Objected);
 
             stateMachine.Configure(NotificationStatus.DecisionRequiredBy)
-                .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
                 .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Consent, NotificationStatus.Consented)

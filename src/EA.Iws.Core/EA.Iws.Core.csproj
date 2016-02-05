@@ -75,6 +75,7 @@
     <Compile Include="Authorization\Permissions\UserAdministrationPermissions.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttribute.cs" />
     <Compile Include="Authorization\RequestAuthorizationException.cs" />
+    <Compile Include="Authorization\UserRole.cs" />
     <Compile Include="Carriers\CarrierData.cs" />
     <Compile Include="ComponentRegistration\AutoRegisterAttribute.cs" />
     <Compile Include="CustomsOffice\CustomsOfficeData.cs" />

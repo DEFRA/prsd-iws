@@ -59,6 +59,9 @@ namespace EA.Iws.Api
 
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
+
+            app.UseClaimsTransformation(ClaimsTransformationOptionsFactory.Create());
+
             app.UseWebApi(config);
         }
 

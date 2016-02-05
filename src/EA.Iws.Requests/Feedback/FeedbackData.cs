@@ -1,10 +1,9 @@
 ﻿namespace EA.Iws.Requests.Feedback
 {
-    using Core.Authorization;
-    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Security;
 
-    [RequestAuthorization(GeneralPermissions.CanSendFeedbackData)]
+    [AllowUnauthorizedUser]
     public class FeedbackData : IRequest<bool>
     {
         public string Option { get; set; }

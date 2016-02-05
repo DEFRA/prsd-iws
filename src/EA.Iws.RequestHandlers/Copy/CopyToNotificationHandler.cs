@@ -30,6 +30,7 @@
         private readonly FacilityCollectionCopy facilityCopier;
         private readonly CarrierCollectionCopy carrierCopier;
         private readonly ProducerCollectionCopy producerCopier;
+        private readonly MeansOfTransportToMeansOfTransportCopy meansOfTransportCopier;
 
         public CopyToNotificationHandler(IwsContext context,
             NotificationToNotificationCopy copier,
@@ -40,7 +41,8 @@
             INotificationApplicationRepository notificationApplicationRepository,
             FacilityCollectionCopy facilityCopier,
             CarrierCollectionCopy carrierCopier,
-            ProducerCollectionCopy producerCopier)
+            ProducerCollectionCopy producerCopier,
+            MeansOfTransportToMeansOfTransportCopy meansOfTransportCopier)
         {
             this.context = context;
             this.copier = copier;
@@ -52,6 +54,7 @@
             this.facilityCopier = facilityCopier;
             this.carrierCopier = carrierCopier;
             this.producerCopier = producerCopier;
+            this.meansOfTransportCopier = meansOfTransportCopier;
         }
 
         public async Task<Guid> HandleAsync(CopyToNotification message)
@@ -148,6 +151,7 @@
             await facilityCopier.CopyAsync(context, sourceId, clone.Id);
             await carrierCopier.CopyAsync(context, sourceId, clone.Id);
             await producerCopier.CopyAsync(context, sourceId, clone.Id);
+            await meansOfTransportCopier.CopyAsync(context, sourceId, clone.Id);
 
             context.AnnexCollections.Add(new AnnexCollection(clone.Id));
 

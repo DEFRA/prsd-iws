@@ -388,7 +388,11 @@
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NotCompleted.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Choose.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_NoDecisions.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Approve.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\Success.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Refuse.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Release.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Options\DownloadUnavailable.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1054,6 +1058,11 @@
       <DependentUpon>ReceivedDateViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDecisionViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesCommand.cs" />
@@ -1670,6 +1679,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResubmissionSuccessResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Options\DownloadUnavailableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DownloadUnavailableResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Shared\CountryNotListedDisclosureResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1684,6 +1698,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysSelection.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModel.cs" />
@@ -1770,6 +1789,7 @@
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FileAccess.cs" />
     <Compile Include="Infrastructure\FileReader.cs" />
+    <Compile Include="Infrastructure\HandleApiErrorFilter.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\IFileAccess.cs" />
     <Compile Include="Infrastructure\IFileReader.cs" />
@@ -1788,6 +1808,7 @@
     <Compile Include="Infrastructure\VirusScanning\VirusFoundException.cs" />
     <Compile Include="Infrastructure\VirusScanning\VirusFoundFilter.cs" />
     <Compile Include="Infrastructure\VirusScanning\WriteFileVirusScanner.cs" />
+    <Compile Include="Mappings\ImportNotificationAssessment\FinancialGuarantee\FinancialGuaranteeDecisionViewModelMap.cs" />
     <Compile Include="ViewModels\Shared\IComplete.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\RecoveryViewModelResources.Designer.cs">
@@ -2296,8 +2317,6 @@
     <Compile Include="Infrastructure\ApiMediator.cs" />
     <Compile Include="Infrastructure\CsvActionResult.cs" />
     <Compile Include="Infrastructure\MimeTypeHelper.cs" />
-    <Compile Include="Infrastructure\RequestAuthorizationChecker.cs" />
-    <Compile Include="Infrastructure\RequestAuthorizationErrorFilter.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidMoneyDecimalAttribute.cs" />
     <Compile Include="Infrastructure\Validation\IsValidNumberAttribute.cs" />
@@ -2708,6 +2727,10 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedDateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedDateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDecisionViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3276,6 +3299,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MeansOfTransportResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\DownloadUnavailableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DownloadUnavailableResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
@@ -3404,6 +3431,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrintResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\YCode\YCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

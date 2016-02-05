@@ -1,0 +1,7 @@
+﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDecision.FinancialGuaranteeDecisionViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.RefusalReason)">
+    @Html.Gds().ValidationMessageFor(m => m.RefusalReason)
+    @Html.Gds().LabelFor(m => m.RefusalReason, false)
+    @Html.Gds().TextBoxFor(m => m.RefusalReason)
+</div>

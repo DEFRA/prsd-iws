@@ -21,7 +21,7 @@
         {
             var meansOfTransport = await repository.GetByNotificationId(message.Id);
 
-            return meansOfTransport.Route.ToList();
+            return meansOfTransport != null ? meansOfTransport.Route.ToList() : new List<TransportMethod>();
         }
     }
 }

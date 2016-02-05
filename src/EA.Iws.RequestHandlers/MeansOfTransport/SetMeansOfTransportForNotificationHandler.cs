@@ -26,6 +26,8 @@
             if (meansOfTransport == null)
             {
                 meansOfTransport = new MeansOfTransport(message.Id);
+
+                repository.Add(meansOfTransport);
             }
 
             meansOfTransport.SetRoute(message.MeansOfTransport);
